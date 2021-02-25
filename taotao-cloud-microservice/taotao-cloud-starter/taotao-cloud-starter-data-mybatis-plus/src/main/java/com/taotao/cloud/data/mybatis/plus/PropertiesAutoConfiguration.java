@@ -27,6 +27,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class,
-        TenantProperties.class})
+	TenantProperties.class})
 public class PropertiesAutoConfiguration {
+
 }

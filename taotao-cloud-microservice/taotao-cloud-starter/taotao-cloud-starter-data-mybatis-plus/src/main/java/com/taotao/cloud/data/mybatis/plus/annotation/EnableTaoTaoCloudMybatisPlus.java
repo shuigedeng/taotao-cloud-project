@@ -16,19 +16,18 @@
 package com.taotao.cloud.data.mybatis.plus.annotation;
 
 import com.taotao.cloud.data.mybatis.plus.component.MybatisPlusComponent;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
  * 开启mybatis plus
  *
  * @author dengtao
- * @since 2020/5/3 07:47
  * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

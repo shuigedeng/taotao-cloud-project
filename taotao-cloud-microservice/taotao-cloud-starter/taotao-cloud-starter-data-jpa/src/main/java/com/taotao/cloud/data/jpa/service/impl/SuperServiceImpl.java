@@ -17,7 +17,6 @@ package com.taotao.cloud.data.jpa.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.data.jpa.repository.BaseJpaRepository;
@@ -28,8 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * service实现父类
  *
  * @author dengtao
- * @since 2020/4/30 10:27
  * @version 1.0.0
+ * @since 2020/4/30 10:27
  */
 public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implements ISuperService<T> {
 
@@ -37,17 +36,12 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	protected M jpaRepository;
 
 	/**
-	 * 幂等性新增记录
-	 * 例子如下：
+	 * 幂等性新增记录 例子如下：
 	 * <p>
 	 * String username = sysUser.getUsername();
 	 * <p>
-	 * boolean result = super.saveIdempotency(
-	 * sysUser
-	 * , lock
-	 * , LOCK_KEY_USERNAME+username
-	 * , new QueryWrapper<SysUser>().eq("username", username)
-	 * );
+	 * boolean result = super.saveIdempotency( sysUser , lock , LOCK_KEY_USERNAME+username , new
+	 * QueryWrapper<SysUser>().eq("username", username) );
 	 *
 	 * @param entity    实体对象
 	 * @param lock      锁实例
@@ -56,7 +50,8 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	 * @param msg       对象已存在提示信息
 	 */
 	@Override
-	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate, String msg) {
+	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate, String msg) {
 		if (lock == null) {
 			throw new LockException("分布式锁为空");
 		}
@@ -92,17 +87,15 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	 * @param predicate 判断是否存在的条件
 	 */
 	@Override
-	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate) {
+	public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate) {
 		return saveIdempotency(entity, lock, lockKey, predicate, null);
 	}
 
 	/**
-	 * 幂等性新增或更新记录
-	 * 例子如下：
-	 * String username = sysUser.getUsername();
-	 * boolean result = super.saveOrUpdateIdempotency(sysUser, lock
-	 * , LOCK_KEY_USERNAME+username
-	 * , new QueryWrapper<SysUser>().eq("username", username));
+	 * 幂等性新增或更新记录 例子如下： String username = sysUser.getUsername(); boolean result =
+	 * super.saveOrUpdateIdempotency(sysUser, lock , LOCK_KEY_USERNAME+username , new
+	 * QueryWrapper<SysUser>().eq("username", username));
 	 *
 	 * @param entity    实体对象
 	 * @param lock      锁实例
@@ -111,7 +104,8 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	 * @param msg       对象已存在提示信息
 	 */
 	@Override
-	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate, String msg) {
+	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate, String msg) {
 		// if (null != entity) {
 		// 	Class<?> cls = entity.getClass();
 		// 	TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
@@ -130,12 +124,9 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	}
 
 	/**
-	 * 幂等性新增或更新记录
-	 * 例子如下：
-	 * String username = sysUser.getUsername();
-	 * boolean result = super.saveOrUpdateIdempotency(sysUser, lock
-	 * , LOCK_KEY_USERNAME+username
-	 * , new QueryWrapper<SysUser>().eq("username", username));
+	 * 幂等性新增或更新记录 例子如下： String username = sysUser.getUsername(); boolean result =
+	 * super.saveOrUpdateIdempotency(sysUser, lock , LOCK_KEY_USERNAME+username , new
+	 * QueryWrapper<SysUser>().eq("username", username));
 	 *
 	 * @param entity    实体对象
 	 * @param lock      锁实例
@@ -143,7 +134,8 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 	 * @param predicate 判断是否存在的条件
 	 */
 	@Override
-	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate) {
+	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate) {
 		return this.saveOrUpdateIdempotency(entity, lock, lockKey, predicate, null);
 	}
 }

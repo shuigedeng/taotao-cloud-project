@@ -16,29 +16,29 @@
 package com.taotao.cloud.data.jpa.bean;
 
 import com.taotao.cloud.core.model.SecurityUser;
+import java.util.Optional;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.util.Optional;
 
 /**
  * 获取当前审计用户 主要用于CreatedBy LastModifiedBy
  *
  * @author dengtao
- * @since 2020/9/28 16:43
- * @see BaseEntity
  * @version 1.0.0
+ * @since 2020/9/28 16:43
  */
 public class AuditorBean implements AuditorAware<Long> {
-    @Override
-    public Optional<Long> getCurrentAuditor() {
-        SecurityUser user;
-        try {
-            user = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return Optional.ofNullable(user.getUserId());
-        } catch (Exception e) {
-            return Optional.empty();
-        }
 
-    }
+	@Override
+	public Optional<Long> getCurrentAuditor() {
+		SecurityUser user;
+		try {
+			user = (SecurityUser) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+			return Optional.ofNullable(user.getUserId());
+		} catch (Exception e) {
+			return Optional.empty();
+		}
+
+	}
 }

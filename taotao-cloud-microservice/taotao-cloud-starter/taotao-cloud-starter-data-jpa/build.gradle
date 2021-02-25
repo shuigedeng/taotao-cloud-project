@@ -12,7 +12,7 @@ dependencies {
     implementation 'com.querydsl:querydsl-apt'
     implementation 'com.querydsl:querydsl-jpa'
     implementation 'p6spy:p6spy'
-
+    implementation 'cn.hutool:hutool-all'
     implementation "mysql:mysql-connector-java"
 
     implementation 'org.springframework.security:spring-security-core'

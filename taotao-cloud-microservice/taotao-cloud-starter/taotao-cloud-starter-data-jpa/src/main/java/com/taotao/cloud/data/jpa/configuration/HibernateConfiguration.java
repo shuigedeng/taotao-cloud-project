@@ -15,6 +15,14 @@
  */
 package com.taotao.cloud.data.jpa.configuration;
 
+import static org.hibernate.cfg.AvailableSettings.DIALECT;
+import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
+import static org.hibernate.cfg.AvailableSettings.JDBC_TIME_ZONE;
+import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -28,21 +36,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.hibernate.cfg.AvailableSettings.DIALECT;
-import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
-import static org.hibernate.cfg.AvailableSettings.JDBC_TIME_ZONE;
-import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
-
 /**
  * Hibernate 自动配置
  *
  * @author dengtao
- * @since 2020/9/28 17:31
  * @version 1.0.0
+ * @since 2020/9/28 17:31
  */
 @EnableJpaAuditing
 public class HibernateConfiguration {
@@ -88,7 +87,8 @@ public class HibernateConfiguration {
 		entityManagerFactoryBean.setDataSource(dataSource);
 		entityManagerFactoryBean.setJpaPropertyMap(newJpaProperties);
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-		entityManagerFactoryBean.setPackagesToScan("com.taotao.cloud.*.biz.entity", "com.taotao.cloud.*.entity");
+		entityManagerFactoryBean
+			.setPackagesToScan("com.taotao.cloud.*.biz.entity", "com.taotao.cloud.*.entity");
 		entityManagerFactoryBean.setPersistenceUnitName("default");
 		return entityManagerFactoryBean;
 	}

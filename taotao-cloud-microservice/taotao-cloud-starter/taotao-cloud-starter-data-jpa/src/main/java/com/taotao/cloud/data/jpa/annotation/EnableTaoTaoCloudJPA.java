@@ -16,20 +16,19 @@
 package com.taotao.cloud.data.jpa.annotation;
 
 import com.taotao.cloud.data.jpa.configuration.HibernateConfiguration;
-import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * 开启jpa
+ * 开启自定义jpa配置
  *
  * @author dengtao
- * @since 2020/5/3 07:47
  * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

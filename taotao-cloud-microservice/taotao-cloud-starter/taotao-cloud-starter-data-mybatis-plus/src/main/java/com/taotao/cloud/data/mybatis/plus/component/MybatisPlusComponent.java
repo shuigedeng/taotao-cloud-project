@@ -37,50 +37,51 @@ import org.springframework.context.annotation.Bean;
  * mybatis plus 组件
  *
  * @author dengtao
- * @since 2020/5/2 11:20
  * @version 1.0.0
+ * @since 2020/5/2 11:20
  */
 @Slf4j
 @AllArgsConstructor
 public class MybatisPlusComponent implements InitializingBean {
 
-    private final TenantProperties tenantProperties;
-    private final MybatisPlusAutoFillProperties autoFillProperties;
+	private final TenantProperties tenantProperties;
+	private final MybatisPlusAutoFillProperties autoFillProperties;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_MYBATIS_PLUS_STARTER + "]" + "mybatis-plus模式已开启");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_MYBATIS_PLUS_STARTER + "]"
+			+ "mybatis-plus模式已开启");
+	}
 
-    @Bean
-    public PaginationInnerInterceptor paginationInterceptor() {
-        return new PaginationInnerInterceptor();
-    }
+	@Bean
+	public PaginationInnerInterceptor paginationInterceptor() {
+		return new PaginationInnerInterceptor();
+	}
 
-    @Bean
-    public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
-        TenantLineInnerInterceptor tenantLineInnerInterceptor = new TenantLineInnerInterceptor();
-        boolean enableTenant = tenantProperties.getEnabled();
+	@Bean
+	public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
+		TenantLineInnerInterceptor tenantLineInnerInterceptor = new TenantLineInnerInterceptor();
+		boolean enableTenant = tenantProperties.getEnabled();
 
-        TenantLineHandler tenantHandler = BeanUtil.getBean(TenantLineHandler.class, false);
-        ISqlParserFilter sqlParserFilter = BeanUtil.getBean(ISqlParserFilter.class, false);
+		TenantLineHandler tenantHandler = BeanUtil.getBean(TenantLineHandler.class, false);
+		ISqlParserFilter sqlParserFilter = BeanUtil.getBean(ISqlParserFilter.class, false);
 
-        if (enableTenant && tenantHandler != null && sqlParserFilter != null) {
-            tenantLineInnerInterceptor.setTenantLineHandler(tenantHandler);
-        }
+		if (enableTenant && tenantHandler != null && sqlParserFilter != null) {
+			tenantLineInnerInterceptor.setTenantLineHandler(tenantHandler);
+		}
 
-        return tenantLineInnerInterceptor;
-    }
+		return tenantLineInnerInterceptor;
+	}
 
-    @Bean
-    public OptimisticLockerInnerInterceptor optimisticLockerInterceptor() {
-        return new OptimisticLockerInnerInterceptor();
-    }
+	@Bean
+	public OptimisticLockerInnerInterceptor optimisticLockerInterceptor() {
+		return new OptimisticLockerInnerInterceptor();
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "taotao.cloud.data.mybatis-plus.auto-fill", name = "enabled", havingValue = "true")
-    public MetaObjectHandler metaObjectHandler() {
-        return new DateMetaObjectHandler(autoFillProperties);
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = "taotao.cloud.data.mybatis-plus.auto-fill", name = "enabled", havingValue = "true")
+	public MetaObjectHandler metaObjectHandler() {
+		return new DateMetaObjectHandler(autoFillProperties);
+	}
 }

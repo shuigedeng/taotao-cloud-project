@@ -23,6 +23,8 @@ import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
@@ -32,17 +34,15 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.querydsl.SimpleEntityPathResolver;
 import org.springframework.data.repository.support.PageableExecutionUtils;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
 /**
  * 基础jpa Repository
  *
  * @author dengtao
- * @since 2020/9/28 16:00
  * @version 1.0.0
+ * @since 2020/9/28 16:00
  */
 public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> {
+
 	protected final JPAQueryFactory jpaQueryFactory;
 	protected final QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor;
 	protected final EntityManager em;
@@ -52,7 +52,8 @@ public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID
 	public BaseJpaRepository(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
 		this.em = em;
-		this.jpaPredicateExecutor = new QuerydslJpaPredicateExecutor<>(JpaEntityInformationSupport.getEntityInformation(domainClass, em), em,
+		this.jpaPredicateExecutor = new QuerydslJpaPredicateExecutor<>(
+			JpaEntityInformationSupport.getEntityInformation(domainClass, em), em,
 			SimpleEntityPathResolver.INSTANCE, getRepositoryMethodMetadata());
 		this.jpaQueryFactory = new JPAQueryFactory(em);
 		this.path = SimpleEntityPathResolver.INSTANCE.createPath(domainClass);

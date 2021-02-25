@@ -15,7 +15,6 @@
  */
 package org.hibernate.cfg;
 
-
 import org.hibernate.AnnotationException;
 import org.hibernate.MappingException;
 import org.hibernate.annotations.ManyToAny;
@@ -48,8 +47,8 @@ import java.util.Map;
  * 修改jpa自动生成表乱序的问题
  *
  * @author dengtao
- * @since 2020/9/30 16:36
  * @version 1.0.0
+ * @since 2020/9/30 16:36
  */
 class PropertyContainer {
 //
@@ -57,7 +56,8 @@ class PropertyContainer {
 //        System.setProperty("jboss.i18n.generate-proxies", "true");
 //    }
 
-	private static final CoreMessageLogger LOG = Logger.getMessageLogger(CoreMessageLogger.class, PropertyContainer.class.getName());
+	private static final CoreMessageLogger LOG = Logger
+		.getMessageLogger(CoreMessageLogger.class, PropertyContainer.class.getName());
 
 	/**
 	 * The class for which this container is created.
@@ -66,8 +66,8 @@ class PropertyContainer {
 	private final XClass entityAtStake;
 
 	/**
-	 * Holds the AccessType indicated for use at the class/container-level for cases where persistent attribute
-	 * did not specify.
+	 * Holds the AccessType indicated for use at the class/container-level for cases where
+	 * persistent attribute did not specify.
 	 */
 	private final AccessType classLevelAccessType;
 
@@ -89,7 +89,8 @@ class PropertyContainer {
 		this.classLevelAccessType = localClassLevelAccessType != AccessType.DEFAULT
 			? localClassLevelAccessType
 			: defaultClassLevelAccessType;
-		assert classLevelAccessType == AccessType.FIELD || classLevelAccessType == AccessType.PROPERTY;
+		assert
+			classLevelAccessType == AccessType.FIELD || classLevelAccessType == AccessType.PROPERTY;
 
 		this.persistentAttributeMap = new LinkedHashMap<String, XProperty>();
 
@@ -244,9 +245,11 @@ class PropertyContainer {
 	private void assertTypesAreResolvable() {
 		for (XProperty xProperty : persistentAttributeMap.values()) {
 			if (!xProperty.isTypeResolved() && !discoverTypeWithoutReflection(xProperty)) {
-				String msg = "Property " + StringHelper.qualify(xClass.getName(), xProperty.getName()) +
-					" has an unbound type and no explicit target entity. Resolve this Generic usage issue" +
-					" or set an explicit target attribute (eg @OneToMany(target=) or use an explicit @Type";
+				String msg =
+					"Property " + StringHelper.qualify(xClass.getName(), xProperty.getName()) +
+						" has an unbound type and no explicit target entity. Resolve this Generic usage issue"
+						+
+						" or set an explicit target attribute (eg @OneToMany(target=) or use an explicit @Type";
 				throw new AnnotationException(msg);
 			}
 		}
@@ -335,7 +338,8 @@ class PropertyContainer {
 		AccessType hibernateDefinedAccessType = AccessType.DEFAULT;
 		AccessType jpaDefinedAccessType = AccessType.DEFAULT;
 
-		org.hibernate.annotations.AccessType accessType = xClass.getAnnotation(org.hibernate.annotations.AccessType.class);
+		org.hibernate.annotations.AccessType accessType = xClass
+			.getAnnotation(org.hibernate.annotations.AccessType.class);
 		if (accessType != null) {
 			hibernateDefinedAccessType = AccessType.getAccessStrategy(accessType.value());
 		}
@@ -382,7 +386,8 @@ class PropertyContainer {
 			return true;
 		} else if (p.isAnnotationPresent(ManyToAny.class)) {
 			if (!p.isCollection() && !p.isArray()) {
-				throw new AnnotationException("@ManyToAny used on a non collection non array property: " + p.getName());
+				throw new AnnotationException(
+					"@ManyToAny used on a non collection non array property: " + p.getName());
 			}
 			return true;
 		} else if (p.isAnnotationPresent(Type.class)) {
@@ -396,7 +401,9 @@ class PropertyContainer {
 	private static boolean mustBeSkipped(XProperty property) {
 		//TODO make those hardcoded tests more portable (through the bytecode provider?)
 		return property.isAnnotationPresent(Transient.class)
-			|| "net.sf.cglib.transform.impl.InterceptFieldCallback".equals(property.getType().getName())
-			|| "org.hibernate.bytecode.internal.javassist.FieldHandler".equals(property.getType().getName());
+			|| "net.sf.cglib.transform.impl.InterceptFieldCallback"
+			.equals(property.getType().getName())
+			|| "org.hibernate.bytecode.internal.javassist.FieldHandler"
+			.equals(property.getType().getName());
 	}
 }

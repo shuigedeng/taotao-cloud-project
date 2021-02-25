@@ -19,8 +19,8 @@ package com.taotao.cloud.data.jpa;
  * jpa 属性自动注入配置
  *
  * @author dengtao
- * @since 2020/7/29 14:18
  * @version 1.0.0
+ * @since 2020/7/29 14:18
  */
 public class PropertiesAutoConfiguration {
 

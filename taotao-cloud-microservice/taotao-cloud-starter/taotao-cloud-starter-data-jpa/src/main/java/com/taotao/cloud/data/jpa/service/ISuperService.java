@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.jpa.service;
 
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.core.lock.DistributedLock;
 
@@ -23,51 +22,65 @@ import com.taotao.cloud.core.lock.DistributedLock;
  * service接口父类
  *
  * @author dengtao
- * @since 2020/4/30 10:27
  * @version 1.0.0
+ * @since 2020/4/30 10:27
  */
 public interface ISuperService<T> {
-	/**
-	 * 幂等性新增记录
-	 *
-	 * @param entity       实体对象
-	 * @param lock         锁实例
-	 * @param lockKey      锁的key
-	 * @param countWrapper 判断是否存在的条件
-	 * @param msg          对象已存在提示信息
-	 */
-	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate, String msg);
 
 	/**
 	 * 幂等性新增记录
 	 *
-	 * @param entity       实体对象
-	 * @param lock         锁实例
-	 * @param lockKey      锁的key
-	 * @param countWrapper 判断是否存在的条件
+	 * @param entity    实体对象
+	 * @param lock      锁实例
+	 * @param lockKey   锁的key
+	 * @param predicate 判断是否存在的条件
+	 * @param msg       对象已存在提示信息
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 17:18
+	 */
+	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
+		String msg);
+
+	/**
+	 * 幂等性新增记录
+	 *
+	 * @param entity    实体对象
+	 * @param lock      锁实例
+	 * @param lockKey   锁的key
+	 * @param predicate 判断是否存在的条件
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 17:18
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
 
 	/**
 	 * 幂等性新增或更新记录
 	 *
-	 * @param entity       实体对象
-	 * @param lock         锁实例
-	 * @param lockKey      锁的key
-	 * @param countWrapper 判断是否存在的条件
-	 * @param msg          对象已存在提示信息
-	 * @return
+	 * @param entity    实体对象
+	 * @param lock      锁实例
+	 * @param lockKey   锁的key
+	 * @param predicate 判断是否存在的条件
+	 * @param msg       对象已存在提示信息
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 17:18
 	 */
-	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate, String msg);
+	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate, String msg);
 
 	/**
 	 * 幂等性新增或更新记录
 	 *
-	 * @param entity       实体对象
-	 * @param lock         锁实例
-	 * @param lockKey      锁的keyø
-	 * @param countWrapper 判断是否存在的条件
-	 * @return
+	 * @param entity    实体对象
+	 * @param lock      锁实例
+	 * @param lockKey   锁的keyø
+	 * @param predicate 判断是否存在的条件
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 17:18
 	 */
-	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
+	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
+		Predicate predicate);
 }
