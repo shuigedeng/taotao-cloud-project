@@ -35,8 +35,8 @@ import java.util.concurrent.TimeoutException;
  * 消息生产者
  *
  * @author dengtao
- * @date 2020/5/28 17:18
- * @since v1.0
+ * @since 2020/5/28 17:18
+ * @version 1.0.0
  */
 @Slf4j
 public class FastBuildRabbitMqProducer {

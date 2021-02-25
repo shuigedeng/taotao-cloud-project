@@ -33,8 +33,8 @@ import java.time.LocalDateTime;
  * 实体父类
  *
  * @author dengtao
- * @date 2020/5/2 11:20
- * @since v1.0
+ * @since 2020/5/2 11:20
+ * @version 1.0.0
  */
 @Data
 @Accessors(chain = true)

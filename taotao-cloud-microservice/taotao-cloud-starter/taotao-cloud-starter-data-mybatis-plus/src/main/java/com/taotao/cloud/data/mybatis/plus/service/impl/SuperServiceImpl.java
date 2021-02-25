@@ -38,8 +38,8 @@ import java.util.concurrent.TimeUnit;
  * service实现父类
  *
  * @author dengtao
- * @date 2020/4/30 10:27
- * @since v1.0
+ * @since 2020/4/30 10:27
+ * @version 1.0.0
  */
 public class SuperServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements ISuperService<T> {
 	@Override

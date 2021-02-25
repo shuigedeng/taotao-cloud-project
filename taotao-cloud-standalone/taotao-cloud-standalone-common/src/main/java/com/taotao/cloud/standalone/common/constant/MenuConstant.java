@@ -4,7 +4,7 @@ package com.taotao.cloud.standalone.common.constant;
  * @Classname MenuConstant
  * @Description 菜单常量
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-04-29 19:49
+ * @since 2019-04-29 19:49
  * @Version 1.0
  */
 public class MenuConstant {

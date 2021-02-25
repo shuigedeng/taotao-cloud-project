@@ -39,7 +39,7 @@ public class RpcProxy {
 	 * @param interfaceClass interfaceClass
 	 * @return T
 	 * @author dengtao
-	 * @date 2020/2/27 15:09
+	 * @since 2020/2/27 15:09
 	 */
 	public <T> T create(Class<?> interfaceClass) {
 		return (T) Proxy.newProxyInstance(

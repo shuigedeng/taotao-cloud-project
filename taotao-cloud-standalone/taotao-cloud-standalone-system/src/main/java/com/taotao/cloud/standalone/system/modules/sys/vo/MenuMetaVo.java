@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Classname MenuMetaVo
  * @Description
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-05-05 16:39
+ * @since 2019-05-05 16:39
  * @Version 1.0
  */
 @Data

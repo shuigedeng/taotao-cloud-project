@@ -19,67 +19,71 @@ package com.taotao.cloud.common.constant;
  * starter 名称常量
  *
  * @author dengtao
- * @date 2020/4/30 10:24
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:24
  */
-public interface StarterNameConstant {
-    /**
-     * 认证模块
-     */
-    String TAOTAO_CLOUD_AUTH_STARTER = "taotao-cloud-starter-security";
+public class StarterNameConstant {
 
-    /**
-     * swagger模块
-     */
-    String TAOTAO_CLOUD_SWAGGER_STARTER = "taotao-cloud-starter-swagger";
+	private StarterNameConstant() {
+	}
 
-    /**
-     * swagger模块
-     */
-    String TAOTAO_CLOUD_LOG_STARTER = "taotao-cloud-starter-log";
+	/**
+	 * 认证模块
+	 */
+	public static final String TAOTAO_CLOUD_AUTH_STARTER = "taotao-cloud-starter-security";
 
-    /**
-     * swagger模块
-     */
-    String TAOTAO_CLOUD_MESSAGE_STARTER = "taotao-cloud-message-starter";
+	/**
+	 * swagger模块
+	 */
+	public static final String TAOTAO_CLOUD_SWAGGER_STARTER = "taotao-cloud-starter-swagger";
 
-    /**
-     * redis模块
-     */
-    String TAOTAO_CLOUD_REDIS_STARTER = "taotao-cloud-starter-redis";
+	/**
+	 * swagger模块
+	 */
+	public static final String TAOTAO_CLOUD_LOG_STARTER = "taotao-cloud-starter-log";
 
-    /**
-     * ribbon模块
-     */
-    String TAOTAO_CLOUD_RIBBON_STARTER = "taotao-cloud-starter-loadbalancer";
+	/**
+	 * swagger模块
+	 */
+	public static final String TAOTAO_CLOUD_MESSAGE_STARTER = "taotao-cloud-message-starter";
 
-    /**
-     * feign模块
-     */
-    String TAOTAO_CLOUD_FEIGN_STARTER = "taotao-cloud-feign-starter";
+	/**
+	 * redis模块
+	 */
+	public static final String TAOTAO_CLOUD_REDIS_STARTER = "taotao-cloud-starter-redis";
 
-    /**
-     * feign模块
-     */
-    String TAOTAO_CLOUD_ELK_STARTER = "taotao-cloud-starter-elk";
+	/**
+	 * ribbon模块
+	 */
+	public static final String TAOTAO_CLOUD_RIBBON_STARTER = "taotao-cloud-starter-loadbalancer";
 
-    /**
-     * tenant模块
-     */
-    String TAOTAO_CLOUD_TENANT_STARTER = "taotao-cloud-tenant-starter";
+	/**
+	 * feign模块
+	 */
+	public static final String TAOTAO_CLOUD_FEIGN_STARTER = "taotao-cloud-feign-starter";
 
-    /**
-     * 数据访问模块
-     */
-    String TAOTAO_CLOUD_MYBATIS_PLUS_STARTER = "taotao-cloud-starter-data-mybatis-plus";
+	/**
+	 * feign模块
+	 */
+	public static final String TAOTAO_CLOUD_ELK_STARTER = "taotao-cloud-starter-elk";
 
-    /**
-     * elasticsearch模块
-     */
-    String TAOTAO_CLOUD_ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
+	/**
+	 * tenant模块
+	 */
+	public static final String TAOTAO_CLOUD_TENANT_STARTER = "taotao-cloud-tenant-starter";
 
-    /**
-     * job模块
-     */
-    String TAOTAO_CLOUD_JOB_STARTER = "taotao-cloud-starter-job";
+	/**
+	 * 数据访问模块
+	 */
+	public static final String TAOTAO_CLOUD_MYBATIS_PLUS_STARTER = "taotao-cloud-starter-data-mybatis-plus";
+
+	/**
+	 * elasticsearch模块
+	 */
+	public static final String TAOTAO_CLOUD_ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
+
+	/**
+	 * job模块
+	 */
+	public static final String TAOTAO_CLOUD_JOB_STARTER = "taotao-cloud-starter-job";
 }

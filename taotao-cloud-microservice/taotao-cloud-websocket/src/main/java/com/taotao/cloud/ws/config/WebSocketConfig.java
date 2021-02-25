@@ -33,8 +33,8 @@ import java.util.List;
  * WebSocketConfig
  *
  * @author dengtao
- * @date 2020/12/18 下午2:52
- * @since v1.0
+ * @since 2020/12/18 下午2:52
+ * @version 1.0.0
  */
 @Configuration
 @EnableScheduling

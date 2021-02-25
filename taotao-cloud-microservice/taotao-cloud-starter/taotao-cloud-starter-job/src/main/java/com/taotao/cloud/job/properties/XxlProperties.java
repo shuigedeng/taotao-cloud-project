@@ -24,8 +24,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * XxlProperties
  *
  * @author dengtao
- * @date 2020/6/16 11:36
- * @since v1.0
+ * @since 2020/6/16 11:36
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

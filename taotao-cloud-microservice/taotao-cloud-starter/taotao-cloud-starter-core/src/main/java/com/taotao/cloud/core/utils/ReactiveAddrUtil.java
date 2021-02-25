@@ -28,72 +28,76 @@ import java.util.Map;
  * ReactiveAddrUtil
  *
  * @author dengtao
- * @date 2020/4/29 22:14
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 22:14
  */
 @UtilityClass
 public class ReactiveAddrUtil {
-    private final String UNKNOWN_STR = "unknown";
 
-    /**
-     * 获取客户端IP地址
-     *
-     * @param request request
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:46
-     * @since v1.0
-     */
-    public String getRemoteAddr(ServerHttpRequest request) {
-        Map<String, String> headers = request.getHeaders().toSingleValueMap();
-        String ip = headers.get("X-Forwarded-For");
-        if (isEmptyIp(ip)) {
-            ip = headers.get("Proxy-Client-IP");
-            if (isEmptyIp(ip)) {
-                ip = headers.get("WL-Proxy-Client-IP");
-                if (isEmptyIp(ip)) {
-                    ip = headers.get("HTTP_CLIENT_IP");
-                    if (isEmptyIp(ip)) {
-                        ip = headers.get("HTTP_X_FORWARDED_FOR");
-                        if (isEmptyIp(ip)) {
-                            ip = request.getRemoteAddress().getAddress().getHostAddress();
-                            if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
-                                // 根据网卡取本机配置的IP
-                                ip = getLocalAddr();
-                            }
-                        }
-                    }
-                }
-            }
-        } else if (ip.length() > 15) {
-            String[] ips = ip.split(",");
-            for (int index = 0; index < ips.length; index++) {
-                String strIp = ips[index];
-                if (!isEmptyIp(ip)) {
-                    ip = strIp;
-                    break;
-                }
-            }
-        }
-        return ip;
-    }
+	private final String UNKNOWN_STR = "unknown";
 
-    private boolean isEmptyIp(String ip) {
-        if (StrUtil.isEmpty(ip) || UNKNOWN_STR.equalsIgnoreCase(ip)) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * 获取客户端IP地址
+	 *
+	 * @param request request
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2020/10/15 15:46
+	 */
+	public String getRemoteAddr(ServerHttpRequest request) {
+		Map<String, String> headers = request.getHeaders().toSingleValueMap();
+		String ip = headers.get("X-Forwarded-For");
+		if (isEmptyIp(ip)) {
+			ip = headers.get("Proxy-Client-IP");
+			if (isEmptyIp(ip)) {
+				ip = headers.get("WL-Proxy-Client-IP");
+				if (isEmptyIp(ip)) {
+					ip = headers.get("HTTP_CLIENT_IP");
+					if (isEmptyIp(ip)) {
+						ip = headers.get("HTTP_X_FORWARDED_FOR");
+						if (isEmptyIp(ip)) {
+							ip = request.getRemoteAddress().getAddress().getHostAddress();
+							if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
+								// 根据网卡取本机配置的IP
+								ip = getLocalAddr();
+							}
+						}
+					}
+				}
+			}
+		} else if (ip.length() > 15) {
+			String[] ips = ip.split(",");
+			for (int index = 0; index < ips.length; index++) {
+				String strIp = ips[index];
+				if (!isEmptyIp(ip)) {
+					ip = strIp;
+					break;
+				}
+			}
+		}
+		return ip;
+	}
 
-    /**
-     * 获取本机的IP地址
-     */
-    public String getLocalAddr() {
-        try {
-            return InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            LogUtil.error("InetAddress.getLocalHost()-error", e);
-        }
-        return "";
-    }
+	private boolean isEmptyIp(String ip) {
+		if (StrUtil.isEmpty(ip) || UNKNOWN_STR.equalsIgnoreCase(ip)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 获取本机的IP地址
+	 *
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 17:04
+	 */
+	public String getLocalAddr() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			LogUtil.error("InetAddress.getLocalHost()-error", e);
+		}
+		return "";
+	}
 }

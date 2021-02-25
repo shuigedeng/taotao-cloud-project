@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * 后台管理用户表
  *
  * @author dengtao
- * @date 2020/6/15 11:00
+ * @since 2020/6/15 11:00
  */
 @Data
 @SuperBuilder

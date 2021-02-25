@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  * 字典管理API
  *
  * @author dengtao
- * @date 2020/4/30 11:13
+ * @since 2020/4/30 11:13
  */
 @Validated
 @RestController

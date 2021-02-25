@@ -33,8 +33,8 @@ import javax.servlet.http.HttpServletRequest;
  * 限流、熔断统一处理类
  *
  * @author dengtao
- * @date 2020/5/13 17:32
- * @since v1.0
+ * @since 2020/5/13 17:32
+ * @version 1.0.0
  */
 public class SentinelAutoConfigure {
     @Bean

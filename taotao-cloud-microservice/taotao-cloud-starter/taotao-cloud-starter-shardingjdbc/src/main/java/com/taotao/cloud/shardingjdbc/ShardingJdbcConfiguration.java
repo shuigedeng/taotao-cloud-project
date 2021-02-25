@@ -33,8 +33,8 @@ import java.beans.ConstructorProperties;
  * ShardingJdbcConfiguration
  *
  * @author dengtao
- * @date 2020/6/22 17:30
- * @since v1.0
+ * @since 2020/6/22 17:30
+ * @version 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties({ShardingJdbcProperties.class, SpringBootShardingRuleConfigurationProperties.class, SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class, SpringBootPropertiesConfigurationProperties.class})

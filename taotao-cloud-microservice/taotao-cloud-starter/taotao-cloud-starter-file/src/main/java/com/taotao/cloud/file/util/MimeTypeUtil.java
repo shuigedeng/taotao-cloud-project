@@ -4,8 +4,8 @@ package com.taotao.cloud.file.util;
  * 媒体类型工具类
  *
  * @author dengtao
- * @date 2020/10/26 10:45
- * @since v1.0
+ * @since 2020/10/26 10:45
+ * @version 1.0.0
  */
 public class MimeTypeUtil {
 	public static final String IMAGE_PNG = "image/png";

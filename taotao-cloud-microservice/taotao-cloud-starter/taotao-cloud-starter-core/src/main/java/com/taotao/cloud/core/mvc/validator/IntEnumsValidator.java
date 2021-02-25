@@ -17,47 +17,37 @@ package com.taotao.cloud.core.mvc.validator;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.taotao.cloud.core.mvc.constraints.IntEnums;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.Objects;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 /**
  * IntEnumsValidator
  *
  * @author dengtao
- * @date 2020/10/14 13:56
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/10/14 13:56
  */
 public class IntEnumsValidator implements ConstraintValidator<IntEnums, Integer> {
+
 	private int[] enumList;
 	private IntEnums constraintAnnotation;
 
-	/**
-	 * 做初始化工作
-	 *
-	 * @param constraintAnnotation 自己定义的注解
-	 */
 	@Override
 	public void initialize(IntEnums constraintAnnotation) {
 		this.enumList = constraintAnnotation.enumList();
 		this.constraintAnnotation = constraintAnnotation;
 	}
 
-	/**
-	 * 做校验
-	 *
-	 * @param value                      待校验的值
-	 * @param constraintValidatorContext 上下文
-	 */
 	@Override
 	public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
 		if (Objects.isNull(value) || ArrayUtil.contains(enumList, value)) {
 			return true;
 		} else {
 			constraintValidatorContext.disableDefaultConstraintViolation();
-			constraintValidatorContext.buildConstraintViolationWithTemplate(String.format("当前值: [%s] 不在字段范围内,字段范围为[%s]", value, Arrays.toString(enumList)))
+			constraintValidatorContext.buildConstraintViolationWithTemplate(
+				String.format("当前值: [%s] 不在字段范围内,字段范围为[%s]", value, Arrays.toString(enumList)))
 				.addConstraintViolation();
 			return false;
 		}

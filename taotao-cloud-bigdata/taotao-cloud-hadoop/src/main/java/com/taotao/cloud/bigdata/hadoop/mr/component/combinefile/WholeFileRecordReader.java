@@ -35,8 +35,8 @@ import java.io.IOException;
  * 通过getCurrentKey 和 getCurrentValue来返回上面构造好的key和value
  *
  * @author dengtao
- * @date 2020/11/26 下午8:14
- * @since v1.0
+ * @since 2020/11/26 下午8:14
+ * @version 1.0.0
  */
 class WholeFileRecordReader extends RecordReader<NullWritable, BytesWritable> {
 	private FileSplit fileSplit;

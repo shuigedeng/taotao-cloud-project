@@ -13,7 +13,7 @@ import java.util.Map;
  * git hub api operation
  *
  * @author huan.fu
- * @date 2018/11/26 - 18:12
+ * @since 2018/11/26 - 18:12
  */
 @Slf4j
 public class GiteeImpl extends AbstractOAuth2ApiBinding implements Gitee {

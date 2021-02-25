@@ -24,8 +24,8 @@ import springfox.documentation.annotations.ApiIgnore;
  * 主页控制器<br>
  *
  * @author dengtao
- * @date 2020/7/24 16:52
- * @since v1.0
+ * @since 2020/7/24 16:52
+ * @version 1.0.0
  */
 @ApiIgnore
 @Controller

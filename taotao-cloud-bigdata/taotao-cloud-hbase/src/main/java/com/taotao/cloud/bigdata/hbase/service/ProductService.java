@@ -19,8 +19,8 @@ package com.taotao.cloud.bigdata.hbase.service;
  * ProductService
  *
  * @author dengtao
- * @date 2020/10/30 11:13
- * @since v1.0
+ * @since 2020/10/30 11:13
+ * @version 1.0.0
  */
 public interface ProductService {
 }

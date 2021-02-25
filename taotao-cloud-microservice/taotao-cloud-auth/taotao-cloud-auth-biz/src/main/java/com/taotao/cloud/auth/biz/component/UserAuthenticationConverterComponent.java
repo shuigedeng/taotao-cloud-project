@@ -26,8 +26,8 @@ import java.util.Map;
  * UserAuthenticationConverterComponent<br>
  *
  * @author dengtao
- * @date 2020/6/12 09:15
- * @since v1.0
+ * @since 2020/6/12 09:15
+ * @version 1.0.0
  */
 public class UserAuthenticationConverterComponent extends DefaultUserAuthenticationConverter {
     @Override

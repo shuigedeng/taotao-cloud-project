@@ -18,7 +18,7 @@
 //  * 系统日志 服务实现类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:36
+//  * @since 2020/4/30 11:36
 //  */
 // @Service
 // public class SysLogServiceImpl extends SuperServiceImpl<SysLogMapper, SysLog> implements ISysLogService {

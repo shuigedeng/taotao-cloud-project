@@ -30,8 +30,8 @@ import java.io.Serializable;
  * 添加字典实体对象
  *
  * @author dengtao
- * @date 2020/9/30 08:49
- * @since v1.0
+ * @since 2020/9/30 08:49
+ * @version 1.0.0
  */
 @Data
 @Builder

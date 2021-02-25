@@ -27,8 +27,8 @@
 //  * jpa 多租户连接提供者
 //  *
 //  * @author dengtao
-//  * @date 2020/9/28 17:30
-//  * @since v1.0
+//  * @since 2020/9/28 17:30
+//  * @version 1.0.0
 //  */
 // public class TenantConnectionProvider implements MultiTenantConnectionProvider {
 //

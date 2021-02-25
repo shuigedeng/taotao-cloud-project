@@ -10,8 +10,8 @@ import java.io.File;
 /**
  * 文件上传抽象类
  *
- * @date 2020/10/26 10:49
- * @since v1.0
+ * @since 2020/10/26 10:49
+ * @version 1.0.0
  */
 public abstract class AbstractFileUpload implements FileUpload {
 

@@ -27,8 +27,8 @@ import javax.sql.DataSource;
 
 /**
  * @author dengtao
- * @date 2020/10/22 14:48
- * @since v1.0
+ * @since 2020/10/22 14:48
+ * @version 1.0.0
  */
 public class DataSourceConfiguration {
 

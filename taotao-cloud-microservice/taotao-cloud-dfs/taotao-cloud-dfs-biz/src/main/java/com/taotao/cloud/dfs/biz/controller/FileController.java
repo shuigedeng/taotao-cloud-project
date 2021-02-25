@@ -30,8 +30,8 @@ import java.util.stream.Collectors;
  * 文件管理API
  *
  * @author dengtao
- * @date 2020/11/12 17:42
- * @since v1.0
+ * @since 2020/11/12 17:42
+ * @version 1.0.0
  */
 @Validated
 @RestController

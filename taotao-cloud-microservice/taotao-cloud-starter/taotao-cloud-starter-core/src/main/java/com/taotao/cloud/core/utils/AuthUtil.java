@@ -34,143 +34,137 @@ import java.util.Objects;
  * 认证授权相关工具类
  *
  * @author dengtao
- * @date 2020/4/29 16:44
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 16:44
  */
 @UtilityClass
 public class AuthUtil {
 
-    private final String BASIC_ = "Basic ";
+	private final String BASIC_ = "Basic ";
 
-    /**
-     * 获取request(header/param)中的token
-     *
-     * @param request request
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:43
-     * @since v1.0
-     */
-    public String extractToken(HttpServletRequest request) {
-        String token = extractHeaderToken(request);
-        if (token == null) {
-            token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
-            if (token == null) {
-                LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
-            }
-        }
-        return token;
-    }
+	/**
+	 * 获取request(header/param)中的token
+	 *
+	 * @param request request
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:58
+	 */
+	public String extractToken(HttpServletRequest request) {
+		String token = extractHeaderToken(request);
+		if (token == null) {
+			token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
+			if (token == null) {
+				LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
+			}
+		}
+		return token;
+	}
 
-    /**
-     * 验证密码
-     *
-     * @param newPass                密码
-     * @param passwordEncoderOldPass 加密后的密码
-     * @return boolean
-     * @author dengtao
-     * @date 2020/10/15 15:43
-     * @since v1.0
-     */
-    public boolean validatePass(String newPass, String passwordEncoderOldPass) {
-        return getPasswordEncoder().matches(newPass, passwordEncoderOldPass);
-    }
+	/**
+	 * 验证密码
+	 *
+	 * @param newPass                密码
+	 * @param passwordEncoderOldPass 加密后的密码
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 16:58
+	 */
+	public boolean validatePass(String newPass, String passwordEncoderOldPass) {
+		return getPasswordEncoder().matches(newPass, passwordEncoderOldPass);
+	}
 
-    /**
-     * 获取密码加密工具
-     *
-     * @return org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-     * @author dengtao
-     * @date 2020/10/15 15:43
-     * @since v1.0
-     */
-    public BCryptPasswordEncoder getPasswordEncoder() {
-        BCryptPasswordEncoder passwordEncoder = BeanUtil.getBean(BCryptPasswordEncoder.class, true);
-        if (Objects.isNull(passwordEncoder)) {
-            passwordEncoder = new BCryptPasswordEncoder();
-        }
-        return passwordEncoder;
-    }
+	/**
+	 * 获取密码加密工具
+	 *
+	 * @return org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+	 * @author dengtao
+	 * @since 2021/2/25 16:59
+	 */
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		BCryptPasswordEncoder passwordEncoder = BeanUtil.getBean(BCryptPasswordEncoder.class, true);
+		if (Objects.isNull(passwordEncoder)) {
+			passwordEncoder = new BCryptPasswordEncoder();
+		}
+		return passwordEncoder;
+	}
 
-    /**
-     * 解析head中的token
-     *
-     * @param request request
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:43
-     * @since v1.0
-     */
-    private String extractHeaderToken(HttpServletRequest request) {
-        Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
-        while (headers.hasMoreElements()) {
-            String value = headers.nextElement();
-            if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
-                String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length()).trim();
-                int commaIndex = authHeaderValue.indexOf(',');
-                if (commaIndex > 0) {
-                    authHeaderValue = authHeaderValue.substring(0, commaIndex);
-                }
-                return authHeaderValue;
-            }
-        }
-        return null;
-    }
+	/**
+	 * 解析head中的token
+	 *
+	 * @param request request
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:59
+	 */
+	private String extractHeaderToken(HttpServletRequest request) {
+		Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
+		while (headers.hasMoreElements()) {
+			String value = headers.nextElement();
+			if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
+				String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length())
+					.trim();
+				int commaIndex = authHeaderValue.indexOf(',');
+				if (commaIndex > 0) {
+					authHeaderValue = authHeaderValue.substring(0, commaIndex);
+				}
+				return authHeaderValue;
+			}
+		}
+		return null;
+	}
 
-    /**
-     * 从header 请求中的clientId:clientSecret
-     *
-     * @param request request
-     * @return java.lang.String[]
-     * @author dengtao
-     * @date 2020/10/15 15:43
-     * @since v1.0
-     */
-    public String[] extractClient(HttpServletRequest request) {
-        String header = request.getHeader("BasicAuthorization");
-        if (header == null || !header.startsWith(BASIC_)) {
-            throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
-        }
-        return extractHeaderClient(header);
-    }
+	/**
+	 * 从header 请求中的clientId:clientSecret
+	 *
+	 * @param request request
+	 * @return java.lang.String[]
+	 * @author dengtao
+	 * @since 2021/2/25 16:59
+	 */
+	public String[] extractClient(HttpServletRequest request) {
+		String header = request.getHeader("BasicAuthorization");
+		if (header == null || !header.startsWith(BASIC_)) {
+			throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
+		}
+		return extractHeaderClient(header);
+	}
 
-    /**
-     * 从header 请求中的clientId:clientSecret
-     *
-     * @param header header中的参数
-     * @return java.lang.String[]
-     * @author dengtao
-     * @date 2020/10/15 15:44
-     * @since v1.0
-     */
-    public String[] extractHeaderClient(String header) {
-        byte[] base64Client = header.substring(BASIC_.length()).getBytes(StandardCharsets.UTF_8);
-        byte[] decoded = Base64.getDecoder().decode(base64Client);
-        String clientStr = new String(decoded, StandardCharsets.UTF_8);
-        String[] clientArr = clientStr.split(":");
-        if (clientArr.length != 2) {
-            throw new RuntimeException("Invalid basic authentication token");
-        }
-        return clientArr;
-    }
+	/**
+	 * 从header 请求中的clientId:clientSecret
+	 *
+	 * @param header header中的参数
+	 * @return java.lang.String[]
+	 * @author dengtao
+	 * @since 2021/2/25 16:59
+	 */
+	public String[] extractHeaderClient(String header) {
+		byte[] base64Client = header.substring(BASIC_.length()).getBytes(StandardCharsets.UTF_8);
+		byte[] decoded = Base64.getDecoder().decode(base64Client);
+		String clientStr = new String(decoded, StandardCharsets.UTF_8);
+		String[] clientArr = clientStr.split(":");
+		if (clientArr.length != 2) {
+			throw new RuntimeException("Invalid basic authentication token");
+		}
+		return clientArr;
+	}
 
-    /**
-     * 获取登陆的用户名
-     *
-     * @param authentication 认证信息
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:44
-     * @since v1.0
-     */
-    public String getUsername(Authentication authentication) {
-        Object principal = authentication.getPrincipal();
-        String username = null;
-        if (principal instanceof SecurityUser) {
-            username = ((SecurityUser) principal).getUsername();
-        } else if (principal instanceof String) {
-            username = (String) principal;
-        }
-        return username;
-    }
+	/**
+	 * 获取登陆的用户名
+	 *
+	 * @param authentication 认证信息
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:59
+	 */
+	public String getUsername(Authentication authentication) {
+		Object principal = authentication.getPrincipal();
+		String username = null;
+		if (principal instanceof SecurityUser) {
+			username = ((SecurityUser) principal).getUsername();
+		} else if (principal instanceof String) {
+			username = (String) principal;
+		}
+		return username;
+	}
 }

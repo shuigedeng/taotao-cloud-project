@@ -24,8 +24,8 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author dengtao
- * @date 2020/11/11 14:42
- * @since v1.0
+ * @since 2020/11/11 14:42
+ * @version 1.0.0
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -40,8 +40,8 @@ public interface FileMapper {
 	 * @param file file
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author dengtao
-	 * @date 2020/11/11 14:47
-	 * @since v1.0
+	 * @since 2020/11/11 14:47
+	 * @version 1.0.0
 	 */
 	FileVO fileToFileVO(File file);
 
@@ -51,8 +51,8 @@ public interface FileMapper {
 	//  * @param sysUser sysUser
 	//  * @return com.taotao.cloud.uc.api.vo.user.AddUserVO
 	//  * @author dengtao
-	//  * @date 2020/11/11 16:59
-	//  * @since v1.0
+	//  * @since 2020/11/11 16:59
+	//  * @version 1.0.0
 	//  */
 	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
 	//
@@ -62,8 +62,8 @@ public interface FileMapper {
 	//  * @param userList userList
 	//  * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
 	//  * @author dengtao
-	//  * @date 2020/11/11 15:00
-	//  * @since v1.0
+	//  * @since 2020/11/11 15:00
+	//  * @version 1.0.0
 	//  */
 	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
 	//
@@ -73,8 +73,8 @@ public interface FileMapper {
 	//  * @param userDTO userDTO
 	//  * @return com.taotao.cloud.uc.biz.entity.SysUser
 	//  * @author dengtao
-	//  * @date 2020/11/11 14:52
-	//  * @since v1.0
+	//  * @since 2020/11/11 14:52
+	//  * @version 1.0.0
 	//  */
 	// SysUser userDtoToSysUser(UserDTO userDTO);
 	//
@@ -85,8 +85,8 @@ public interface FileMapper {
 	//  * @param user    user
 	//  * @return void
 	//  * @author dengtao
-	//  * @date 2020/11/11 16:59
-	//  * @since v1.0
+	//  * @since 2020/11/11 16:59
+	//  * @version 1.0.0
 	//  */
 	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

@@ -25,8 +25,8 @@ import java.util.Map;
  * HdfsService
  *
  * @author dengtao
- * @date 2020/10/29 15:17
- * @since v1.0
+ * @since 2020/10/29 15:17
+ * @version 1.0.0
  */
 public interface HdfsService {
     boolean mkdir(String path) throws Exception;

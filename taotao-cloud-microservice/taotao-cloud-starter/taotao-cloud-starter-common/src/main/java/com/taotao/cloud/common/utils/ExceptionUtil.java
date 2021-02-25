@@ -15,61 +15,58 @@
  */
 package com.taotao.cloud.common.utils;
 
-
 import com.taotao.cloud.common.exception.BaseException;
-import lombok.experimental.UtilityClass;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import lombok.experimental.UtilityClass;
 
 /**
  * ExceptionUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:35
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:35
  **/
 @UtilityClass
 public class ExceptionUtil {
-    /**
-     * trace2String
-     *
-     * @param t t
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 14:59
-     * @since v1.0
-     */
-    public static String trace2String(Throwable t) {
-        if (t == null) {
-            return "";
-        }
-        try {
-            try (StringWriter sw = new StringWriter()) {
-                try (PrintWriter pw = new PrintWriter(sw, true)) {
-                    t.printStackTrace(pw);
-                    return sw.getBuffer().toString();
-                }
-            }
-        } catch (Exception exp) {
-            throw new BaseException(exp.getMessage());
-        }
-    }
 
-    /**
-     * trace2String
-     *
-     * @param stackTraceElements stackTraceElements
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:00
-     * @since v1.0
-     */
-    public static String trace2String(StackTraceElement[] stackTraceElements) {
-        StringBuilder sb = new StringBuilder();
-        for (StackTraceElement stackTraceElemen : stackTraceElements) {
-            sb.append(stackTraceElemen.toString()).append("\n");
-        }
-        return sb.toString();
-    }
+	/**
+	 * trace2String
+	 *
+	 * @param t throwable
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:13
+	 */
+	public static String trace2String(Throwable t) {
+		if (t == null) {
+			return "";
+		}
+		try {
+			try (StringWriter sw = new StringWriter()) {
+				try (PrintWriter pw = new PrintWriter(sw, true)) {
+					t.printStackTrace(pw);
+					return sw.getBuffer().toString();
+				}
+			}
+		} catch (Exception exp) {
+			throw new BaseException(exp.getMessage());
+		}
+	}
+
+	/**
+	 * trace2String
+	 *
+	 * @param stackTraceElements stackTraceElements
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:14
+	 */
+	public static String trace2String(StackTraceElement[] stackTraceElements) {
+		StringBuilder sb = new StringBuilder();
+		for (StackTraceElement stackTraceElement : stackTraceElements) {
+			sb.append(stackTraceElement.toString()).append("\n");
+		}
+		return sb.toString();
+	}
 }

@@ -36,8 +36,8 @@ import javax.servlet.http.HttpServletRequest;
  * <br>
  *
  * @author dengtao
- * @date 2020/5/18 11:28
- * @since v1.0
+ * @since 2020/5/18 11:28
+ * @version 1.0.0
  */
 @Controller
 public class TaotaoCloudSwagger2Controller implements InitializingBean {

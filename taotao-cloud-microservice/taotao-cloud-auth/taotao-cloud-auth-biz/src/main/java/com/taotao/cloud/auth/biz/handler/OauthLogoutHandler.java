@@ -34,8 +34,8 @@ import javax.servlet.http.HttpServletResponse;
  * OauthLogoutHandler
  *
  * @author dengtao
- * @date 2020/4/29 21:21
- * @since v1.0
+ * @since 2020/4/29 21:21
+ * @version 1.0.0
  */
 @Component
 public class OauthLogoutHandler implements LogoutHandler {

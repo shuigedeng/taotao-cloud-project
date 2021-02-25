@@ -20,8 +20,8 @@ import io.trino.spi.function.AccumulatorState;
 
 /**
  * @author dengtao
- * @date 2020/10/29 17:59
- * @since v1.0
+ * @since 2020/10/29 17:59
+ * @version 1.0.0
  */
 public interface LongAndDoubleState extends AccumulatorState {
 	long getLong();

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 /**
- * @date 2019/9/14
+ * @since 2019/9/14
  */
 public class DataSourceProxyConfig {
 	@Bean

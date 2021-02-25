@@ -15,7 +15,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 用户表 Mapper 接口
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 13:24
+//  * @since 2020/4/30 13:24
 //  */
 // @Repository
 // public interface SysUserMapper extends SuperMapper<SysUser> {

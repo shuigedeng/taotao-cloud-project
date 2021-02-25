@@ -23,8 +23,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * token配置
  *
  * @author dengtao
- * @date 2020/4/30 08:52
- * @since v1.0
+ * @since 2020/4/30 08:52
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

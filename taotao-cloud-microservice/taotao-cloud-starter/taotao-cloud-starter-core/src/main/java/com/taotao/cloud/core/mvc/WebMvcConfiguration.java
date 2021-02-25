@@ -18,33 +18,32 @@ package com.taotao.cloud.core.mvc;
 import com.taotao.cloud.core.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.core.mvc.converter.Oauth2HttpMessageConverter;
 import com.taotao.cloud.core.mvc.converter.StringToEnumConverterFactory;
+import java.util.List;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.List;
 
 /**
  * 自定义mvc配置
  *
  * @author dengtao
- * @date 2020/9/29 14:30
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/9/29 14:30
  */
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-    /**
-     * 枚举类的转换器工厂 addConverterFactory
-     */
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        registry.addConverterFactory(new IntegerToEnumConverterFactory());
-        registry.addConverterFactory(new StringToEnumConverterFactory());
-    }
+	/**
+	 * 枚举类的转换器工厂 addConverterFactory
+	 */
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverterFactory(new IntegerToEnumConverterFactory());
+		registry.addConverterFactory(new StringToEnumConverterFactory());
+	}
 
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        Oauth2HttpMessageConverter oauth2HttpMessageConverter = new Oauth2HttpMessageConverter();
-        converters.add(0, oauth2HttpMessageConverter);
-    }
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		Oauth2HttpMessageConverter oauth2HttpMessageConverter = new Oauth2HttpMessageConverter();
+		converters.add(0, oauth2HttpMessageConverter);
+	}
 }

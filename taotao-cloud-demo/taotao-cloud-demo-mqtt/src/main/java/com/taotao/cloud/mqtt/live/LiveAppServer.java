@@ -28,7 +28,7 @@ import com.taotao.cloud.mqtt.demo.TokenApiDemo;
 
 /**
  * @author
- * @date 2020/5/10
+ * @since 2020/5/10
  */
 public class LiveAppServer {
     private Charset utf8Charset = Charset.forName("utf-8");

@@ -17,35 +17,34 @@ package com.taotao.cloud.core.mvc.converter;
 
 import cn.hutool.core.map.MapUtil;
 import com.taotao.cloud.common.enums.BaseEnum;
+import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
-
-import java.util.Map;
 
 /**
  * string枚举转化器工厂类
  *
  * @author dengtao
- * @date 2020/9/29 14:22
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/9/29 14:22
  */
 public class StringToEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 
-    private static final Map<Class, Converter> CONVERTERS = MapUtil.newHashMap();
+	private static final Map<Class, Converter> CONVERTERS = MapUtil.newHashMap();
 
-    /**
-     * 获取一个从 Integer 转化为 T 的转换器，T 是一个泛型，有多个实现
-     *
-     * @param targetType 转换后的类型
-     * @return 返回一个转化器
-     */
-    @Override
-    public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
-        Converter<String, T> converter = CONVERTERS.get(targetType);
-        if (converter == null) {
-            converter = new StringToEnumConverter<>(targetType);
-            CONVERTERS.put(targetType, converter);
-        }
-        return converter;
-    }
+	/**
+	 * 获取一个从 Integer 转化为 T 的转换器，T 是一个泛型，有多个实现
+	 *
+	 * @param targetType 转换后的类型
+	 * @return 返回一个转化器
+	 */
+	@Override
+	public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
+		Converter<String, T> converter = CONVERTERS.get(targetType);
+		if (converter == null) {
+			converter = new StringToEnumConverter<>(targetType);
+			CONVERTERS.put(targetType, converter);
+		}
+		return converter;
+	}
 }

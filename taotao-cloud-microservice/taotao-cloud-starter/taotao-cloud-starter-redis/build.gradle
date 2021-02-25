@@ -12,8 +12,7 @@ dependencies {
     }
     compile "io.lettuce:lettuce-core"
 
-    // https://mvnrepository.com/artifact/org.redisson/redisson
-    compile group: 'org.redisson', name: 'redisson', version: '3.14.1'
+    compile 'org.redisson:redisson'
 
     implementation "commons-io:commons-io"
     implementation "org.apache.commons:commons-pool2"

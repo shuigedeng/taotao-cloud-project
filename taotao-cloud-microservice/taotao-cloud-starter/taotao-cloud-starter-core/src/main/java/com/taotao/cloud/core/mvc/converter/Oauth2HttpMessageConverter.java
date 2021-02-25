@@ -30,33 +30,37 @@ import java.io.IOException;
  * Oauth2HttpMessageConverter
  *
  * @author dengtao
- * @date 2020/10/20 11:01
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/10/20 11:01
  */
-public class Oauth2HttpMessageConverter extends AbstractHttpMessageConverter<DefaultOAuth2AccessToken> {
+public class Oauth2HttpMessageConverter extends
+	AbstractHttpMessageConverter<DefaultOAuth2AccessToken> {
 
-    private final MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+	private final MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
 
-    public Oauth2HttpMessageConverter() {
-        super(MediaType.APPLICATION_JSON_UTF8);
-    }
+	public Oauth2HttpMessageConverter() {
+		super(MediaType.APPLICATION_JSON_UTF8);
+	}
 
-    @Override
-    protected boolean supports(Class<?> clazz) {
-        return clazz.equals(DefaultOAuth2AccessToken.class);
-    }
+	@Override
+	protected boolean supports(Class<?> clazz) {
+		return clazz.equals(DefaultOAuth2AccessToken.class);
+	}
 
-    @Override
-    protected DefaultOAuth2AccessToken readInternal(Class<? extends DefaultOAuth2AccessToken> clazz, HttpInputMessage inputMessage)
-            throws IOException, HttpMessageNotReadableException {
-        throw new UnsupportedOperationException(
-                "This converter is only used for converting DefaultOAuth2AccessToken to json.");
-    }
+	@Override
+	protected DefaultOAuth2AccessToken readInternal(Class<? extends DefaultOAuth2AccessToken> clazz,
+		HttpInputMessage inputMessage)
+		throws IOException, HttpMessageNotReadableException {
+		throw new UnsupportedOperationException(
+			"This converter is only used for converting DefaultOAuth2AccessToken to json.");
+	}
 
-    @Override
-    protected void writeInternal(DefaultOAuth2AccessToken accessToken, HttpOutputMessage outputMessage) throws IOException,
-            HttpMessageNotWritableException {
-        mappingJackson2HttpMessageConverter.write(accessToken, MediaType.APPLICATION_JSON_UTF8, outputMessage);
-    }
+	@Override
+	protected void writeInternal(DefaultOAuth2AccessToken accessToken,
+		HttpOutputMessage outputMessage) throws IOException,
+		HttpMessageNotWritableException {
+		mappingJackson2HttpMessageConverter
+			.write(accessToken, MediaType.APPLICATION_JSON_UTF8, outputMessage);
+	}
 }
 

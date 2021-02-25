@@ -39,8 +39,8 @@ import java.util.Objects;
  * 全局配置
  *
  * @author dengtao
- * @date 2020/4/29 22:13
- * @since v1.0
+ * @since 2020/4/29 22:13
+ * @version 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties({

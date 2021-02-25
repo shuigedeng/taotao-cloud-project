@@ -37,8 +37,8 @@ import java.io.File;
 
 /**
  * @author dengtao
- * @date 2020/10/26 10:28
- * @since v1.0
+ * @since 2020/10/26 10:28
+ * @version 1.0.0
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_FASTDFS)
 public class FdfsDfsAutoConfiguration {

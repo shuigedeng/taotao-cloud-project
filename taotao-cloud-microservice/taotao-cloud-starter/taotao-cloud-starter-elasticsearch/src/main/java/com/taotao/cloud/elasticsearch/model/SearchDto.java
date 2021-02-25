@@ -24,8 +24,8 @@ import java.io.Serializable;
  * SearchDto
  *
  * @author dengtao
- * @date 2020/5/3 07:49
- * @since v1.0
+ * @since 2020/5/3 07:49
+ * @version 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

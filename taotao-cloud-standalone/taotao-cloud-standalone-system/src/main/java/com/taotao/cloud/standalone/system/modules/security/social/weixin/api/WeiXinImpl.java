@@ -15,7 +15,7 @@ import java.util.List;
  * @Classname WeiXinImpl
  * @Description 微信API调用接口
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-23 16:50
+ * @since 2019-08-23 16:50
  * @Version 1.0
  */
 public class WeiXinImpl extends AbstractOAuth2ApiBinding implements Weixin {

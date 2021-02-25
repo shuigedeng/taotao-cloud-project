@@ -43,8 +43,8 @@ import java.util.Set;
  * Oauth2UserServiceComponent
  *
  * @author dengtao
- * @date 2020/10/15 14:21
- * @since v1.0
+ * @since 2020/10/15 14:21
+ * @version 1.0.0
  */
 @Slf4j
 public class Oauth2UserServiceComponent extends DefaultOAuth2UserService {

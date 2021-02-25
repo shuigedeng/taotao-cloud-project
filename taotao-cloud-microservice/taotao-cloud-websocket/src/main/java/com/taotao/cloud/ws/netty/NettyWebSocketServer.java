@@ -34,8 +34,8 @@ import org.springframework.stereotype.Component;
  * NettyWebSocketServer
  *
  * @author dengtao
- * @date 2020/12/30 下午4:39
- * @since v1.0
+ * @since 2020/12/30 下午4:39
+ * @version 1.0.0
  */
 @ServerEndpoint(value = "/ws/taotao-cloud")
 @Component

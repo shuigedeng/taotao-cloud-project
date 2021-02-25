@@ -30,8 +30,8 @@ import java.io.IOException;
  * VLAUEOUT是总次数
  *
  * @author dengtao
- * @date 2020/11/26 下午8:08
- * @since v1.0
+ * @since 2020/11/26 下午8:08
+ * @version 1.0.0
  */
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 	/**

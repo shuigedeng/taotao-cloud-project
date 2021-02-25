@@ -21,22 +21,25 @@ import com.alibaba.ttl.TransmittableThreadLocal;
  * 负载均衡规则Holder
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
 public class LbIsolationContextHolder {
 
-    private static final ThreadLocal<String> VERSION_CONTEXT = new TransmittableThreadLocal<>();
+	private LbIsolationContextHolder() {
+	}
 
-    public static void setVersion(String version) {
-        VERSION_CONTEXT.set(version);
-    }
+	private static final ThreadLocal<String> VERSION_CONTEXT = new TransmittableThreadLocal<>();
 
-    public static String getVersion() {
-        return VERSION_CONTEXT.get();
-    }
+	public static void setVersion(String version) {
+		VERSION_CONTEXT.set(version);
+	}
 
-    public static void clear() {
-        VERSION_CONTEXT.remove();
-    }
+	public static String getVersion() {
+		return VERSION_CONTEXT.get();
+	}
+
+	public static void clear() {
+		VERSION_CONTEXT.remove();
+	}
 }

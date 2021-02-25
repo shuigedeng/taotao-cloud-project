@@ -59,8 +59,8 @@ import java.util.Map;
  * RedisTokensServiceImpl
  *
  * @author dengtao
- * @date 2020/4/29 16:03
- * @since v1.0
+ * @since 2020/4/29 16:03
+ * @version 1.0.0
  */
 @Service
 public class RedisTokensServiceImpl implements ITokensService {
@@ -178,7 +178,7 @@ public class RedisTokensServiceImpl implements ITokensService {
 	 * @param clientId clientId
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/4/29 16:03
+	 * @since 2020/4/29 16:03
 	 */
 	private String getRedisKey(Map<String, Object> params, String clientId) {
 		String result;

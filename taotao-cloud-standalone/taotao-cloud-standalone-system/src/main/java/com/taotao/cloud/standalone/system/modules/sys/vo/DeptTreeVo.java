@@ -11,7 +11,7 @@ import java.util.List;
  * @Classname DeptTreeVo
  * @Description 构建部门树vo
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-06-09 15:15
+ * @since 2019-06-09 15:15
  * @Version 1.0
  */
 @Setter

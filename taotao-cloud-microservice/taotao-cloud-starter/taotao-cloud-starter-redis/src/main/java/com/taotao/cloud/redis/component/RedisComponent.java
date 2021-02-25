@@ -42,8 +42,8 @@ import java.util.Map;
  * redis 配置类
  *
  * @author dengtao
- * @date 2020/4/30 10:13
- * @since v1.0
+ * @since 2020/4/30 10:13
+ * @version 1.0.0
  */
 @Slf4j
 @EnableCaching

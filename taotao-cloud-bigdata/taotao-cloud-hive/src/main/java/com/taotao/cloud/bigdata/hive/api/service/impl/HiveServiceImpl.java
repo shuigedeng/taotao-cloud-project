@@ -28,8 +28,8 @@ import java.util.Map;
 
 /**
  * @author dengtao
- * @date 2020/10/30 10:12
- * @since v1.0
+ * @since 2020/10/30 10:12
+ * @version 1.0.0
  */
 @Service
 public class HiveServiceImpl implements HiveService {

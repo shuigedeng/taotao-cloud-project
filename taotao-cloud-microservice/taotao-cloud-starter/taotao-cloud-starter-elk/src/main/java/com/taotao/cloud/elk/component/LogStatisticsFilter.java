@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * 错误日志统计拦截器
  *
  * @author dengtao
- * @date 2020/6/15 11:28
- * @since v1.0
+ * @since 2020/6/15 11:28
+ * @version 1.0.0
  */
 public class LogStatisticsFilter extends AbstractMatcherFilter<ILoggingEvent> {
 

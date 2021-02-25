@@ -12,8 +12,8 @@ import java.util.List;
  * Fastdfs文件服务Properties
  *
  * @author dengtao
- * @date 2020/10/26 09:40
- * @since v1.0
+ * @since 2020/10/26 09:40
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

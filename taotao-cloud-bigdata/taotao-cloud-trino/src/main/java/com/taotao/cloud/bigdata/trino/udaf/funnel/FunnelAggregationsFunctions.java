@@ -38,8 +38,8 @@ import java.util.Map;
  * taotao_cloud_funnel(ctime, 86400*1000*3, event, 'SingUp,AppPageView,AppClick,NewsAction')
  *
  * @author dengtao
- * @date 2021/1/25 下午3:52
- * @since v1.0
+ * @since 2021/1/25 下午3:52
+ * @version 1.0.0
  */
 @AggregationFunction("taotao_cloud_funnel")
 public class FunnelAggregationsFunctions extends FunnelBase {

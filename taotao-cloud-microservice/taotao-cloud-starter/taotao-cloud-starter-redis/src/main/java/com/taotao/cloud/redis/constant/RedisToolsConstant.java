@@ -19,8 +19,8 @@ package com.taotao.cloud.redis.constant;
  * redis 工具常量
  *
  * @author dengtao
- * @date 2020/4/30 10:17
- * @since v1.0
+ * @since 2020/4/30 10:17
+ * @version 1.0.0
  */
 public interface RedisToolsConstant {
 

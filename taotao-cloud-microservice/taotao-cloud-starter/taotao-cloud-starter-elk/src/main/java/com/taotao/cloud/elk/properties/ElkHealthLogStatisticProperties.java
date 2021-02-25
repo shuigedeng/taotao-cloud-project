@@ -24,7 +24,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  *
  * @author dengtao
  * @version v1.0.0
- * @since v1.0
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

@@ -27,8 +27,8 @@ import org.springframework.stereotype.Component;
  * 在验证过程中成功会触发此类事件
  *
  * @author dengtao
- * @date 2020/4/29 21:23
- * @since v1.0
+ * @since 2020/4/29 21:23
+ * @version 1.0.0
  */
 @Component
 public class AuthenticationSuccessEventHandler implements ApplicationListener<AuthenticationSuccessEvent> {

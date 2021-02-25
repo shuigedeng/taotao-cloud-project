@@ -29,8 +29,8 @@ import java.io.Serializable;
  * 客户端对象DTO
  *
  * @author dengtao
- * @date 2020/5/14 17:05
- * @since v1.0
+ * @since 2020/5/14 17:05
+ * @version 1.0.0
  */
 @Data
 @Builder

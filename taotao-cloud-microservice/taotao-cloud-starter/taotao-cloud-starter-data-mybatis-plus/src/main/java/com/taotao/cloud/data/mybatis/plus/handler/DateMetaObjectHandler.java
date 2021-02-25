@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
  * 自定义填充公共字段
  *
  * @author dengtao
- * @date 2020/5/2 11:22
- * @since v1.0
+ * @since 2020/5/2 11:22
+ * @version 1.0.0
  */
 public class DateMetaObjectHandler implements MetaObjectHandler {
 

@@ -63,8 +63,8 @@ import java.util.Objects;
  * </p>
  *
  * @author dengtao
- * @date 2020/6/3 11:47
- * @since v1.0
+ * @since 2020/6/3 11:47
+ * @version 1.0.0
  */
 @Slf4j
 @Aspect

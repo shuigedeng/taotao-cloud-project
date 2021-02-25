@@ -27,8 +27,8 @@ import java.util.List;
  * TreeUtil
  *
  * @author dengtao
- * @date 2020/10/21 11:20
- * @since v1.0
+ * @since 2020/10/21 11:20
+ * @version 1.0.0
  */
 @UtilityClass
 public class TreeUtil {
@@ -40,8 +40,8 @@ public class TreeUtil {
      * @param parentId  父节点
      * @return java.util.List<T>
      * @author dengtao
-     * @date 2020/10/21 11:21
-     * @since v1.0
+     * @since 2020/10/21 11:21
+     * @version 1.0.0
      */
     public <T extends TreeNode> List<T> build(List<T> treeNodes, Long parentId) {
         List<T> trees = new ArrayList<>();
@@ -69,8 +69,8 @@ public class TreeUtil {
      * @param parentId  父节点
      * @return java.util.List<T>
      * @author dengtao
-     * @date 2020/10/21 11:22
-     * @since v1.0
+     * @since 2020/10/21 11:22
+     * @version 1.0.0
      */
     public <T extends TreeNode> List<T> recursiveBuild(List<T> treeNodes, Long parentId) {
         List<T> trees = new ArrayList<T>();
@@ -89,8 +89,8 @@ public class TreeUtil {
      * @param treeNodes 子节点列表
      * @return T
      * @author dengtao
-     * @date 2020/10/21 11:23
-     * @since v1.0
+     * @since 2020/10/21 11:23
+     * @version 1.0.0
      */
     public <T extends TreeNode> T findChildren(T treeNode, List<T> treeNodes) {
         for (T it : treeNodes) {
@@ -111,8 +111,8 @@ public class TreeUtil {
      * @param parentId  父id
      * @return java.util.List<ResourceTree>
      * @author dengtao
-     * @date 2020/10/21 11:23
-     * @since v1.0
+     * @since 2020/10/21 11:23
+     * @version 1.0.0
      */
     public List<ResourceTree> buildTree(List<SysResource> resources, Long parentId) {
         List<ResourceTree> trees = new ArrayList<>();

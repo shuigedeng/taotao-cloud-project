@@ -21,8 +21,8 @@ import com.taotao.cloud.log.model.RequestLog;
  * 日志接口
  *
  * @author dengtao
- * @date 2020/5/2 11:18
- * @since v1.0
+ * @since 2020/5/2 11:18
+ * @version 1.0.0
  */
 public interface IRequestLogService {
 
@@ -31,7 +31,7 @@ public interface IRequestLogService {
      *
      * @param requestLog sysLog
      * @author dengtao
-     * @date 2020/4/27 16:52
+     * @since 2020/4/27 16:52
      */
     void save(RequestLog requestLog);
 }

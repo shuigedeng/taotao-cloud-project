@@ -2,7 +2,7 @@ package com.taotao.cloud.standalone.system.modules.security.social.github.api;
 
 /**
  * @author huan.fu
- * @date 2018/11/26 - 18:12
+ * @since 2018/11/26 - 18:12
  */
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.Map;
  * git hub api operation
  *
  * @author huan.fu
- * @date 2018/11/26 - 18:12
+ * @since 2018/11/26 - 18:12
  */
 @Slf4j
 public class GitHubImpl extends AbstractOAuth2ApiBinding implements GitHub {

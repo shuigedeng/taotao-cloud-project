@@ -43,8 +43,8 @@ import java.io.IOException;
 
 /**
  * @author dengtao
- * @date 2020/10/26 10:28
- * @since v1.0
+ * @since 2020/10/26 10:28
+ * @version 1.0.0
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_QINIU)
 public class QiniuAutoConfiguration {
@@ -91,8 +91,8 @@ public class QiniuAutoConfiguration {
 	 * 构建一个七牛上传工具实例
 	 *
 	 * @author dengtao
-	 * @date 2020/10/26 11:36
-	 * @since v1.0
+	 * @since 2020/10/26 11:36
+	 * @version 1.0.0
 	 */
 	@Bean
 	public UploadManager uploadManager(@Autowired com.qiniu.storage.Configuration config) {
@@ -103,8 +103,8 @@ public class QiniuAutoConfiguration {
 	 * 认证信息实例
 	 *
 	 * @author dengtao
-	 * @date 2020/10/26 11:36
-	 * @since v1.0
+	 * @since 2020/10/26 11:36
+	 * @version 1.0.0
 	 */
 	@Bean
 	public Auth auth() {
@@ -115,8 +115,8 @@ public class QiniuAutoConfiguration {
 	 * 构建七牛空间管理实例
 	 *
 	 * @author dengtao
-	 * @date 2020/10/26 11:36
-	 * @since v1.0
+	 * @since 2020/10/26 11:36
+	 * @version 1.0.0
 	 */
 	@Bean
 	public BucketManager bucketManager(@Autowired com.qiniu.storage.Configuration config,

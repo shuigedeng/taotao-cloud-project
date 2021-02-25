@@ -38,8 +38,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * TaotaoCloudAuthApplication
  *
  * @author dengtao
- * @date 2020/4/29 15:13
- * @since v1.0
+ * @since 2020/4/29 15:13
+ * @version 1.0.0
  */
 @EnableTaoTaoCloudOAuth2RedisTokenStore
 @EnableTaoTaoCloudOauth2ResourceServer

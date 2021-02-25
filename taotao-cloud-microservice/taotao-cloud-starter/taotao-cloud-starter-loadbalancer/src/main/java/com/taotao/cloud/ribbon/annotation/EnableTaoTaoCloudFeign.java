@@ -30,8 +30,8 @@ import java.lang.annotation.Target;
  * 开启feign拦截器传递数据给下游服务，包含基础数据和http的相关数据
  *
  * @author dengtao
- * @date 2020/4/5 13:40
- * @since v1.0
+ * @since 2020/4/5 13:40
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

@@ -48,8 +48,8 @@ import java.util.Map;
  * 修改jpa自动生成表乱序的问题
  *
  * @author dengtao
- * @date 2020/9/30 16:36
- * @since v1.0
+ * @since 2020/9/30 16:36
+ * @version 1.0.0
  */
 class PropertyContainer {
 //

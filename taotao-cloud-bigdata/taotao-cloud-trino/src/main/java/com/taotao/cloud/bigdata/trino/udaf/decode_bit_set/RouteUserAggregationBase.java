@@ -20,8 +20,8 @@ import io.trino.spi.function.AccumulatorState;
 
 /**
  * @author dengtao
- * @date 2020/10/29 18:14
- * @since v1.0
+ * @since 2020/10/29 18:14
+ * @version 1.0.0
  */
 public class RouteUserAggregationBase {
     /**

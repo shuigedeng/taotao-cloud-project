@@ -27,8 +27,8 @@ import java.io.IOException;
  * OrderBean
  *
  * @author dengtao
- * @date 2020/11/26 下午8:34
- * @since v1.0
+ * @since 2020/11/26 下午8:34
+ * @version 1.0.0
  */
 public class OrderBean implements WritableComparable<OrderBean> {
 	private Text itemid;

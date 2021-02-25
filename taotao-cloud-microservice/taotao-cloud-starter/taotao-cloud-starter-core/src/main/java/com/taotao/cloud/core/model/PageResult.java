@@ -19,21 +19,19 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Data;
-import org.slf4j.MDC;
-import org.springframework.data.domain.Page;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
+import org.slf4j.MDC;
+import org.springframework.data.domain.Page;
 
 /**
  * 返回分页实体类
  *
  * @author dengtao
- * @date 2020/4/29 15:40
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 15:40
  */
 @Data
 @ApiModel(value = "PageResult", description = "返回结果通用对象")

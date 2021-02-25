@@ -19,8 +19,8 @@ package com.taotao.cloud.rabbitmq.common;
  * 静态常量
  *
  * @author dengtao
- * @date 2020/5/28 17:19
- * @since v1.0
+ * @since 2020/5/28 17:19
+ * @version 1.0.0
  */
 public class Constants {
     /**

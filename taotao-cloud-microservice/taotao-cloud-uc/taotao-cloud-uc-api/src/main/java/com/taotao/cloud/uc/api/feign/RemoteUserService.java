@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 远程调用后台用户模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteUserService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteUserFallbackImpl.class)
 public interface RemoteUserService {
@@ -25,8 +25,8 @@ public interface RemoteUserService {
      * @param username 用户名称
      * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.uc.api.vo.user.UserVO>
      * @author dengtao
-     * @date 2020/10/21 15:06
-     * @since v1.0
+     * @since 2020/10/21 15:06
+     * @version 1.0.0
      */
     @GetMapping(value = "/user/info/username")
     Result<UserVO> findUserInfoByUsername(@RequestParam(value = "username") String username);
@@ -38,7 +38,7 @@ public interface RemoteUserService {
      * @param providerUserId providerUserId
      * @return com.taotao.cloud.common.model.Result<com.taotao.cloud.uc.api.dto.UserDetailsInfo>
      * @author dengtao
-     * @date 2020/4/29 17:47
+     * @since 2020/4/29 17:47
      */
     @GetMapping(value = "/user/info/social/{social}", headers = {"from=in"})
     Result<SecurityUser> getUserInfoBySocial(@RequestParam("providerId") String providerId,

@@ -29,8 +29,8 @@ import org.springframework.scheduling.annotation.Async;
  * 注解形式的监听 异步监听日志事件
  *
  * @author dengtao
- * @date 2020/6/3 13:33
- * @since v1.0
+ * @since 2020/6/3 13:33
+ * @version 1.0.0
  */
 @Slf4j
 public class RequestLogListener {

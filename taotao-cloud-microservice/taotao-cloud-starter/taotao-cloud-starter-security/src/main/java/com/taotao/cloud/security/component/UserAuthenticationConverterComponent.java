@@ -30,8 +30,8 @@ import java.util.Map;
  * 根据checktoken 的结果转化用户信息
  *
  * @author dengtao
- * @date 2020/5/3 07:47
- * @since v1.0
+ * @since 2020/5/3 07:47
+ * @version 1.0.0
  */
 public class UserAuthenticationConverterComponent implements UserAuthenticationConverter {
     private static final String N_A = "N/A";

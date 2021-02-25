@@ -32,8 +32,8 @@ import java.util.List;
  * ZkApi
  *
  * @author dengtao
- * @date 2020/12/3 下午6:25
- * @since v1.0
+ * @since 2020/12/3 下午6:25
+ * @version 1.0.0
  */
 @Component
 public class ZkApi {

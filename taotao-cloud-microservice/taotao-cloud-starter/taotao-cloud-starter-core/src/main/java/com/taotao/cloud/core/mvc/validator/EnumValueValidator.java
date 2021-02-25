@@ -16,31 +16,22 @@
 package com.taotao.cloud.core.mvc.validator;
 
 import com.taotao.cloud.core.mvc.constraints.EnumValue;
-
+import java.lang.reflect.Method;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Method;
 
 /**
  * EnumValueValidator
  *
  * @author dengtao
- * @date 2020/10/14 13:40
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/10/14 13:40
  */
 public class EnumValueValidator implements ConstraintValidator<EnumValue, Integer> {
+
 	private Class<? extends Enum> enumClass;
 	private static final String METHOD_NAME = "toEnum";
 
-	/**
-	 * 初始化校验
-	 *
-	 * @param constraintAnnotation constraintAnnotation
-	 * @return void
-	 * @author dengtao
-	 * @date 2020/11/20 上午9:13
-	 * @since v1.0
-	 */
 	@Override
 	public void initialize(EnumValue constraintAnnotation) {
 		enumClass = constraintAnnotation.value();
@@ -52,17 +43,6 @@ public class EnumValueValidator implements ConstraintValidator<EnumValue, Intege
 		}
 	}
 
-
-	/**
-	 * 具体的校验逻辑：校验数字是否属于指定枚举类型的范围
-	 *
-	 * @param value                      value
-	 * @param constraintValidatorContext constraintValidatorContext
-	 * @return boolean
-	 * @author dengtao
-	 * @date 2020/11/20 上午9:14
-	 * @since v1.0
-	 */
 	@Override
 	public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
 		Method declareMethod;

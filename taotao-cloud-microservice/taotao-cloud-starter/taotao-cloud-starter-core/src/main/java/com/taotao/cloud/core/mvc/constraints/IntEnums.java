@@ -25,19 +25,21 @@ import java.lang.annotation.*;
  * IntEnums
  *
  * @author dengtao
- * @date 2020/10/14 13:39
- * @since v1.0 RequireDigital
+ * @version 1.0.0
+ * @since 2020/10/14 13:39
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
+	ElementType.CONSTRUCTOR, ElementType.PARAMETER})
 @Constraint(validatedBy = IntEnumsValidator.class)
 public @interface IntEnums {
-    int[] enumList() default {};
 
-    String message() default "当前值不在字段范围内";
+	int[] enumList() default {};
 
-    Class<?>[] groups() default {};
+	String message() default "当前值不在字段范围内";
 
-    Class<? extends Payload>[] payload() default {};
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }

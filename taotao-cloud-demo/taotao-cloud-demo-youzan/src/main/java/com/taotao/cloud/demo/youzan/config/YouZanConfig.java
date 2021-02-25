@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author dengtao
  * @version v1.0
- * @date 2020/4/16 11:25
+ * @since 2020/4/16 11:25
  */
 @Component
 public class YouZanConfig {

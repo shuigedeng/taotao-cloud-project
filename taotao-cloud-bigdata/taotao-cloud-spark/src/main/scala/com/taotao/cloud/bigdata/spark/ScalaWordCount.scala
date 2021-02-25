@@ -24,8 +24,8 @@ import org.apache.spark.{SparkConf, SparkContext}
  * <p>
  *
  * @author dengtao
- * @date 2020/11/26 上午9:35
- * @since v1.0
+ * @since 2020/11/26 上午9:35
+ * @version 1.0.0
  */
 object ScalaWordCount {
 

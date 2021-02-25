@@ -15,31 +15,30 @@
  */
 package com.taotao.cloud.common.utils;
 
-import lombok.experimental.UtilityClass;
-
 import java.math.BigDecimal;
+import lombok.experimental.UtilityClass;
 
 /**
  * NumberUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:39
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:39
  */
 @UtilityClass
 public class NumberUtil {
-    /**
-     * 数字转double
-     *
-     * @param number number
-     * @param scale  scale
-     * @return double
-     * @author dengtao
-     * @date 2020/10/15 15:27
-     * @since v1.0
-     */
-    public double scale(Number number, int scale) {
-        BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
-        return bg.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
-    }
+
+	/**
+	 * 数字转double
+	 *
+	 * @param number number
+	 * @param scale  scale
+	 * @return double
+	 * @author dengtao
+	 * @since 2021/2/25 16:34
+	 */
+	public double scale(Number number, int scale) {
+		BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
+		return bg.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
 }

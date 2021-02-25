@@ -23,8 +23,8 @@
 //  * jpa 多租户识别解析器
 //  *
 //  * @author dengtao
-//  * @date 2020/9/28 17:29
-//  * @since v1.0.0
+//  * @since 2020/9/28 17:29
+//  * @version 1.0.0.0
 //  */
 // public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver {
 //     private final DatabaseManager databaseManager;

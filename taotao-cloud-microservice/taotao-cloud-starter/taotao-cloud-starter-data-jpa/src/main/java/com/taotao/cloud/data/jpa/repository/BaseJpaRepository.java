@@ -39,8 +39,8 @@ import java.util.List;
  * 基础jpa Repository
  *
  * @author dengtao
- * @date 2020/9/28 16:00
- * @since v1.0
+ * @since 2020/9/28 16:00
+ * @version 1.0.0
  */
 public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> {
 	protected final JPAQueryFactory jpaQueryFactory;

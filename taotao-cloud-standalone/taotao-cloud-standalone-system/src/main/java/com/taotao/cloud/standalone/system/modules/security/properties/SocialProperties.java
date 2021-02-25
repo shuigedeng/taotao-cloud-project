@@ -4,7 +4,7 @@ package com.taotao.cloud.standalone.system.modules.security.properties;
  * @Classname SocialProperties
  * @Description TODO
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-06 14:50
+ * @since 2019-08-06 14:50
  * @Version 1.0
  */
 public abstract class SocialProperties {

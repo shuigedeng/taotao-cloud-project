@@ -40,8 +40,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * TaotaoKafkaAppender
  *
  * @author dengtao
- * @date 2020/6/12 16:28
- * @since v1.0
+ * @since 2020/6/12 16:28
+ * @version 1.0.0
  */
 public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	/**

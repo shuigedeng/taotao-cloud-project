@@ -5,38 +5,62 @@ buildscript {
         springCloudAlibabaVersion = '2.2.5.RELEASE'
         springSecurityOauth2Version = "2.5.0.RELEASE"
 
-        swaggerVersion = '2.9.2'
-        swaggerUiVersion = '1.8.7'
-        swaggerMgUiVersion = '1.0.6'
-        swaggerButlerVersion = '2.0.1'
-        swaggerModelsVersion = '1.5.21'
-        swaggerBootstrapUiVersion = '1.9.6'
+        springVersion = '5.3.3'
+        springSecurityVersion = '5.4.3'
+        springSecurityOauth2Version = "2.5.0.RELEASE"
+        springDataCommonsVersion = '2.4.3'
+        springKafkaVersion = '2.6.5'
 
+        fasterxmlVersion= '2.12.0'
+        transmittableVersion = '2.11.4'
+        slf4jVersion = '1.7.30'
+        easypoiVersion = '4.3.0'
+        aspectjweaverVersion = '1.9.6'
+        reactorVersion = '3.4.2'
+        servletApiVersion = '4.0.1'
+        bannerVersion = "1.0.2"
+        lombokVersion = '1.18.12'
+        javassistVersion = '3.24.1-GA'
+        easyCaptchaVersion = '1.6.2'
+        hutoolVersion = '5.1.4'
+        validationApiVersion = '2.0.1.Final'
+        querydslVersion = '4.4.0'
+        p6spyVersion = '3.9.1'
+        mysqlVersion = '8.0.20'
+        mybatisPlusStarterVersion = '3.4.2'
+        upyunJavaSdkVersion = '4.2.1'
+        aliyunSdkOssVersion = '3.11.2'
+        qiniuJavaSdkVersion = '7.3.0'
+        gsonVersion = '2.8.6'
+        guavaVersion = '29.0-jre'
+        okhttpVersion = '4.9.0'
+        okioVersion = '2.10.0'
+        fastdfsClientVersion = '1.27.2'
+        commonsNetVersion = '3.7.2'
+        feignOkhttpVersion = '11.0'
+        httpcomponentsVersion = '4.5.12'
+        logbackKafkaAppenderVersion = '0.2.0-RC2'
+        logstashLogbackEncoderVersion = '6.6'
+        commonsVersion = '3.11'
         commonsIoVersion = '2.6'
         commonsCollectionsVersion = '3.2.2'
         commonsCollections4Version = '4.4'
+        lettuceVersion = '6.0.2.RELEASE'
+        redissonVersion = "3.15.0"
+        seataVersion = "1.14.1"
+        shardingsphereVersion = "4.1.1"
 
-        mysqlVersion = '8.0.20'
-        mybatisPlusStarterVersion = '3.4.0'
+        swaggerVersion = '3.0.0'
+        swaggerUiVersion = '1.8.7'
+        swaggerModelsVersion = '1.6.2'
+        swaggerButlerVersion = '2.0.1'
+        swaggerBootstrapUiVersion = '1.9.6'
+        knife4jVersion = '3.0.2'
 
-        knife4jVersion = '2.0.2'
-        lombokVersion = '1.18.12'
-        hutoolVersion = '5.1.4'
-        servletApiVersion = '4.0.1'
-        easyCaptchaVersion = '1.6.2'
-        transmittableVersion = '2.11.4'
-        qiniuJavaSdkVersion = '7.2.28'
-        fastdfsClientVersion = '1.26.7'
-        aliyunSdkOssVersion = '3.8.1'
-        logstashLogbackEncoderVersion = '4.11'
-        javassistVersion = '3.24.1-GA'
         qcloudsmsVersion = '1.0.6'
-        okhttpVersion = '3.14.8'
         userAgentUtilsVersion = '1.21'
         xxlJobVersion = '2.2.0'
         mapstructVersion = "1.4.1.Final"
-        bannerVersion = "1.0.2"
-        redissonVersion = "3.11.5"
     }
 
     repositories {

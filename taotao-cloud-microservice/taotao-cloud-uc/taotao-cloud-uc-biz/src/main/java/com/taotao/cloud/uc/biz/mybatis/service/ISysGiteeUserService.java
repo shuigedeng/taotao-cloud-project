@@ -9,7 +9,7 @@
 //  * gitee用户表
 //  *
 //  * @author taotao
-//  * @date 2020-05-14 14:36:39
+//  * @since 2020-05-14 14:36:39
 //  */
 // public interface ISysGiteeUserService {
 //     /**
@@ -25,7 +25,7 @@
 //      * @param sysGiteeUser
 //      * @return java.lang.Boolean
 //      * @author dengtao
-//      * @date 2020/5/22 13:10
+//      * @since 2020/5/22 13:10
 //     */
 //     Boolean add(SysGiteeUser sysGiteeUser);
 //

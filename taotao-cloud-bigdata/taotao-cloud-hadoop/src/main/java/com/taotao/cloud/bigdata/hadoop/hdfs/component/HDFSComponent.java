@@ -26,8 +26,8 @@ import org.springframework.stereotype.Component;
  * HDFSComponent
  *
  * @author dengtao
- * @date 2020/10/29 15:19
- * @since v1.0
+ * @since 2020/10/29 15:19
+ * @version 1.0.0
  */
 @Component
 public class HDFSComponent {
@@ -47,8 +47,8 @@ public class HDFSComponent {
 	 *
 	 * @return org.apache.hadoop.conf.Configuration
 	 * @author dengtao
-	 * @date 2020/10/29 15:22
-	 * @since v1.0
+	 * @since 2020/10/29 15:22
+	 * @version 1.0.0
 	 */
 	private Configuration getConfiguration() {
 		Configuration configuration = new Configuration();

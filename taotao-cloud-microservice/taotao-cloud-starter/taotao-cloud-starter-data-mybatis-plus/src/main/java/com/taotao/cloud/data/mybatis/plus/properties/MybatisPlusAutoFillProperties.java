@@ -23,8 +23,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * mybatis-plus 自动填充Properties
  *
  * @author dengtao
- * @date 2020/5/2 11:19
- * @since v1.0
+ * @since 2020/5/2 11:19
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

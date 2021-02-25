@@ -24,8 +24,8 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * ServerErrorException
  *
  * @author dengtao
- * @date 2020/6/15 11:21
- * @since v1.0
+ * @since 2020/6/15 11:21
+ * @version 1.0.0
 */
 @JsonSerialize(using = OauthExceptionSerializer.class)
 public class ServerErrorException extends OAuth2Exception {

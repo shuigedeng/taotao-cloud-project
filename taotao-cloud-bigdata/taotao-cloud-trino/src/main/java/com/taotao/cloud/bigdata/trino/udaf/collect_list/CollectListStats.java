@@ -27,8 +27,8 @@ import java.util.Map;
 
 /**
  * @author dengtao
- * @date 2020/10/29 18:09
- * @since v1.0
+ * @since 2020/10/29 18:09
+ * @version 1.0.0
  */
 public class CollectListStats {
 	private static final int INSTANCE_SIZE = (int) ClassLayout.parseClass(CollectListStats.class).instanceSize();

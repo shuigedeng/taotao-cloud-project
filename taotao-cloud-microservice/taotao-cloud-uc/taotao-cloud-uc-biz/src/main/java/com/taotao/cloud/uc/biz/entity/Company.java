@@ -15,8 +15,8 @@ import javax.validation.constraints.Pattern;
  * 公司表
  *
  * @author dengtao
- * @date 2020/10/16 13:43
- * @since v1.0
+ * @since 2020/10/16 13:43
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

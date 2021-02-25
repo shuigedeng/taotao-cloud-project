@@ -30,8 +30,8 @@
 //  * 手机认证安全配置
 //  *
 //  * @author dengtao
-//  * @date 2020/4/29 20:26
-//  * @since v1.0
+//  * @since 2020/4/29 20:26
+//  * @version 1.0.0
 //  */
 // @Component
 // public class MobileAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

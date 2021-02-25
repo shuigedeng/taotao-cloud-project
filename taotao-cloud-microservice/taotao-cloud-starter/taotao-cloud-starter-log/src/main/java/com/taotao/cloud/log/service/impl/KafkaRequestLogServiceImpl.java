@@ -31,8 +31,8 @@ import java.util.Base64;
  * 审计日志实现类-Kafka
  *
  * @author dengtao
- * @date 2020/5/2 11:18
- * @since v1.0
+ * @since 2020/5/2 11:18
+ * @version 1.0.0
  */
 @Slf4j
 public class KafkaRequestLogServiceImpl implements IRequestLogService {

@@ -26,8 +26,8 @@ import java.io.Serializable;
 
 /**
  * @author dengtao
- * @date 2020/11/12 17:10
- * @since v1.0
+ * @since 2020/11/12 17:10
+ * @version 1.0.0
  */
 @Data
 @Builder

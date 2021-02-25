@@ -18,35 +18,35 @@ package com.taotao.cloud.core.mvc.filter;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.LbIsolationContextHolder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.filter.OncePerRequestFilter;
-
+import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Objects;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * 负载均衡隔离规则过滤器
  *
  * @author dengtao
- * @date 2019/9/15
- * @since v1.0
+ * @version 1.0.0
+ * @since 2019/9/15
  */
 @ConditionalOnClass(Filter.class)
 public class LbIsolationFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
-									HttpServletResponse response,
-									FilterChain filterChain) throws IOException, ServletException {
+		HttpServletResponse response,
+		FilterChain filterChain) throws IOException, ServletException {
 		try {
-			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
+				.requireNonNull(RequestContextHolder.getRequestAttributes());
 			RequestContextHolder.setRequestAttributes(attributes, true);
 			String version = request.getHeader(CommonConstant.T_VERSION);
 			if (StrUtil.isNotEmpty(version)) {

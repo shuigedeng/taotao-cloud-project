@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * sentinel 请求头解析判断
  *
  * @author lengleng
- * @date 2020-06-11
+ * @since 2020-06-11
  */
 public class HeaderRequestOriginParser implements RequestOriginParser {
 

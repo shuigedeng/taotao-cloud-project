@@ -37,8 +37,8 @@ import org.springframework.context.annotation.Bean;
  * mybatis plus 组件
  *
  * @author dengtao
- * @date 2020/5/2 11:20
- * @since v1.0
+ * @since 2020/5/2 11:20
+ * @version 1.0.0
  */
 @Slf4j
 @AllArgsConstructor

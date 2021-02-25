@@ -8,7 +8,7 @@ import com.taotao.cloud.product.biz.entity.Product;
  * 订单管理service
  *
  * @author dengtao
- * @date 2020/4/30 11:03
+ * @since 2020/4/30 11:03
  */
 public interface IProductService {
 
@@ -18,8 +18,8 @@ public interface IProductService {
      * @param id
      * @return com.taotao.cloud.product.biz.entity.ProductInfo
      * @author dengtao
-     * @date 2020/10/23 09:10
-     * @since v1.0
+     * @since 2020/10/23 09:10
+     * @version 1.0.0
      */
     Product findProductById(Long id);
 
@@ -29,8 +29,8 @@ public interface IProductService {
      * @param productDTO
      * @return com.taotao.cloud.product.biz.entity.ProductInfo
      * @author dengtao
-     * @date 2020/10/23 09:23
-     * @since v1.0
+     * @since 2020/10/23 09:23
+     * @version 1.0.0
      */
     Product saveProduct(ProductDTO productDTO);
 }

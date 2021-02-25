@@ -9,14 +9,14 @@ dependencies {
 
     implementation 'org.springframework:spring-web'
 
-    implementation 'com.upyun:java-sdk:3.13'
-    implementation 'com.qiniu:qiniu-java-sdk:7.2.0'
-    implementation 'com.aliyun.oss:aliyun-sdk-oss:3.9.1'
-    implementation 'com.google.guava:guava:27.0.1-jre'
-    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
-    implementation 'com.squareup.okio:okio:1.13.0'
-    implementation 'com.luhuiguo:fastdfs-client:0.4.0'
-    implementation 'commons-net:commons-net:3.6'
+    implementation 'com.upyun:java-sdk'
+    implementation 'com.qiniu:qiniu-java-sdk'
+    implementation 'com.aliyun.oss:aliyun-sdk-oss'
+    implementation 'com.google.guava:guava'
+    implementation 'com.squareup.okhttp3:okhttp'
+    implementation 'com.squareup.okio:okio'
+    implementation 'com.luhuiguo:fastdfs-client'
+    implementation 'commons-net:commons-net'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

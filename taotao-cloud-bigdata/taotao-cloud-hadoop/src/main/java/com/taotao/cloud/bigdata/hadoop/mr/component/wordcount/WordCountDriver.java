@@ -30,8 +30,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 最后提交给yarn
  *
  * @author dengtao
- * @date 2020/11/26 下午8:04
- * @since v1.0
+ * @since 2020/11/26 下午8:04
+ * @version 1.0.0
  */
 public class WordCountDriver {
 	public static void main(String[] args) throws Exception {

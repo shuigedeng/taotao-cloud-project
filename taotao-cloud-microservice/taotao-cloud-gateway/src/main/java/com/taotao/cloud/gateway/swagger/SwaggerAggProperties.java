@@ -26,8 +26,8 @@ import java.util.Set;
  * swagger聚合配置
  *
  * @author dengtao
- * @date 2020/4/29 22:14
- * @since v1.0
+ * @since 2020/4/29 22:14
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

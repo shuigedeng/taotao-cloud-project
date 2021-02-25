@@ -22,8 +22,8 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * CustomOauthException
  *
  * @author dengtao
- * @date 2020/6/2 15:34
- * @since v1.0
+ * @since 2020/6/2 15:34
+ * @version 1.0.0
  */
 public class CustomOauthException extends OAuth2Exception {
 

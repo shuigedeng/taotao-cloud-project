@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
  * 支付流水管理API
  *
  * @author dengtao
- * @date 2020/11/13 09:58
- * @since v1.0
+ * @since 2020/11/13 09:58
+ * @version 1.0.0
  */
 @Validated
 @RestController

@@ -28,8 +28,8 @@ import java.io.IOException;
  * 搜索服务实现
  *
  * @author dengtao
- * @date 2020/5/3 07:48
- * @since v1.0
+ * @since 2020/5/3 07:48
+ * @version 1.0.0
  */
 public class SearchServiceImpl implements ISearchService {
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;

@@ -11,7 +11,7 @@ dependencies {
         exclude group: 'io.seata', module: 'seata-all'
     }
 
-    implementation "io.seata:seata-all:1.2.0"
+    implementation "io.seata:seata-all"
     implementation "com.zaxxer:HikariCP"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
 

@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * 订单信息表
  *
  * @author dengtao
- * @date 2020/4/30 15:37
+ * @since 2020/4/30 15:37
  */
 @Data
 @SuperBuilder

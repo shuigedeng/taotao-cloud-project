@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 字典项表
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @Data
 @SuperBuilder

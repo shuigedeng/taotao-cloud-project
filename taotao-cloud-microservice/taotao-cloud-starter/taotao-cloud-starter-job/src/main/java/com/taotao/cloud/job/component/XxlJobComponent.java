@@ -29,8 +29,8 @@ import org.springframework.context.annotation.Bean;
  * XxlJob配置类
  *
  * @author dengtao
- * @date 2020/6/16 11:36
- * @since v1.0
+ * @since 2020/6/16 11:36
+ * @version 1.0.0
  */
 @Slf4j
 @ConditionalOnProperty(name = "taotao.cloud.xxl.job.enabled", havingValue = "true")

@@ -38,8 +38,8 @@
 //  * 自定义隔离随机规则
 //  *
 //  * @author dengtao
-//  * @date 2020/6/15 11:31
-//  * @since v1.0
+//  * @since 2020/6/15 11:31
+//  * @version 1.0.0
 //  */
 // public class CustomIsolationRule extends RoundRobinLoadBalancer {
 //

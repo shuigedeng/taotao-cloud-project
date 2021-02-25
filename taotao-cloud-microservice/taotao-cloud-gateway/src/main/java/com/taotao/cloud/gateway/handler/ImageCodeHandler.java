@@ -36,8 +36,8 @@ import reactor.core.publisher.Mono;
  * 图形验证码处理器
  *
  * @author dengtao
- * @date 2020/4/29 22:11
- * @since v1.0
+ * @since 2020/4/29 22:11
+ * @version 1.0.0
  */
 @Component
 @AllArgsConstructor

@@ -23,9 +23,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * PropertiesAutoConfiguration
  *
  * @author dengtao
- * @version v1.0.0
- * @date 2020/7/29 14:18
+ * @version 1.0.0
+ * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({AsyncTaskProperties.class, TenantProperties.class})
 public class PropertiesAutoConfiguration {
+
 }

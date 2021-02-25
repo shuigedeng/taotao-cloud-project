@@ -38,8 +38,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * es配置类
  *
  * @author dengtao
- * @date 2020/5/3 06:47
- * @since v1.0
+ * @since 2020/5/3 06:47
+ * @version 1.0.0
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "taotao.cloud.elasticsearch", name = "enabled", havingValue = "true")

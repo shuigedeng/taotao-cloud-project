@@ -59,8 +59,8 @@ import java.util.Objects;
  * HBaseClient
  *
  * @author dengtao
- * @date 2020/10/30 11:32
- * @since v1.0
+ * @since 2020/10/30 11:32
+ * @version 1.0.0
  */
 @Slf4j
 @Component

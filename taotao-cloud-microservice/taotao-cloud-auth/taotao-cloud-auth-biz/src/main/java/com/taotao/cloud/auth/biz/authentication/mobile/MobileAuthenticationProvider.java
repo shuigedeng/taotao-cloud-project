@@ -28,8 +28,8 @@
 //  * 手机认证过滤器提供者
 //  *
 //  * @author dengtao
-//  * @date 2020/4/29 20:26
-//  * @since v1.0
+//  * @since 2020/4/29 20:26
+//  * @version 1.0.0
 //  */
 // public class MobileAuthenticationProvider implements AuthenticationProvider {
 //
@@ -55,7 +55,7 @@
 //      * @param aClass class
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/5/14 21:30
+//      * @since 2020/5/14 21:30
 //      */
 //     @Override
 //     public boolean supports(Class<?> aClass) {

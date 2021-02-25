@@ -8,7 +8,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
  * @Classname GitHubServiceProvider
  * @Description github 社交登录的自动配置
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-07-08 22:04
+ * @since 2019-07-08 22:04
  * @Version 1.0
  */
 public class GitHubServiceProvider extends AbstractOAuth2ServiceProvider<GitHub> {

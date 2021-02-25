@@ -32,8 +32,8 @@
   * TaotaoCloudAuthentication认证安全配置
   *
   * @author dengtao
-  * @date 2020/5/2 11:16
-  * @since v1.0
+  * @since 2020/5/2 11:16
+  * @version 1.0.0
   */
  @Component
  public class TaotaoCloudAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

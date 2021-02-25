@@ -28,8 +28,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * service实现父类
  *
  * @author dengtao
- * @date 2020/4/30 10:27
- * @since v1.0
+ * @since 2020/4/30 10:27
+ * @version 1.0.0
  */
 public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implements ISuperService<T> {
 

@@ -27,8 +27,8 @@ import java.math.BigDecimal;
 
 /**
  * @author dengtao
- * @date 2020/10/22 12:29
- * @since v1.0
+ * @since 2020/10/22 12:29
+ * @version 1.0.0
  */
 @Data
 @Builder

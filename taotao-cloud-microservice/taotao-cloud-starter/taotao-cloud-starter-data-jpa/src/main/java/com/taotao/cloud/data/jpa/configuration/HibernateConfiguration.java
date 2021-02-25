@@ -41,8 +41,8 @@ import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
  * Hibernate 自动配置
  *
  * @author dengtao
- * @date 2020/9/28 17:31
- * @since v1.0
+ * @since 2020/9/28 17:31
+ * @version 1.0.0
  */
 @EnableJpaAuditing
 public class HibernateConfiguration {

@@ -28,8 +28,8 @@ import java.time.LocalDateTime;
 
 /**
  * @author dengtao
- * @date 2020/11/20 上午9:42
- * @since v1.0
+ * @since 2020/11/20 上午9:42
+ * @version 1.0.0
  */
 @Data
 @Builder

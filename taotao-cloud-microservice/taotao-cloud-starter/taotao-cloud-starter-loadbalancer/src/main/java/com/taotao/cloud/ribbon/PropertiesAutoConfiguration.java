@@ -23,8 +23,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * <br>
  *
  * @author dengtao
- * @date 2020/7/29 14:18
- * @since v1.0
+ * @since 2020/7/29 14:18
+ * @version 1.0.0
  */
 @EnableConfigurationProperties({RestTemplateProperties.class, LbIsolationProperties.class})
 public class PropertiesAutoConfiguration {

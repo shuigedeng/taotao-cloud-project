@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author dengtao
- * @date 2020/6/15 11:13
+ * @since 2020/6/15 11:13
  */
 public class TableEntity {
     /**

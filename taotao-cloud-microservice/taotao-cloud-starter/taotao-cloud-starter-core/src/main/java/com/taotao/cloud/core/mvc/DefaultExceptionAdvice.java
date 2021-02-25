@@ -25,6 +25,16 @@ import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Result;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,23 +56,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 /**
  * 异常通用处理
  *
  * @author dengtao
- * @date 2020/5/2 09:12
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 09:12
  */
 @RestControllerAdvice
 @ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
@@ -104,7 +103,8 @@ public class DefaultExceptionAdvice {
 	}
 
 	@ExceptionHandler({IllegalArgumentException.class})
-	public Result<String> illegalArgumentException(NativeWebRequest req, IllegalArgumentException e) {
+	public Result<String> illegalArgumentException(NativeWebRequest req,
+		IllegalArgumentException e) {
 		LogUtil.error("【全局异常拦截】IllegalArgumentException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		return Result.failed(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
@@ -125,22 +125,28 @@ public class DefaultExceptionAdvice {
 	}
 
 	@ExceptionHandler({UsernameNotFoundException.class})
-	public Result<String> badUsernameNotFoundException(NativeWebRequest req, UsernameNotFoundException e) {
+	public Result<String> badUsernameNotFoundException(NativeWebRequest req,
+		UsernameNotFoundException e) {
 		LogUtil.error("【全局异常拦截】UsernameNotFoundException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		return Result.failed(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req, HttpRequestMethodNotSupportedException e) {
-		LogUtil.error("【全局异常拦截】HttpRequestMethodNotSupportedException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
+	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req,
+		HttpRequestMethodNotSupportedException e) {
+		LogUtil.error(
+			"【全局异常拦截】HttpRequestMethodNotSupportedException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		return Result.failed(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
-	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req, HttpMediaTypeNotSupportedException e) {
-		LogUtil.error("【全局异常拦截】HttpMediaTypeNotSupportedException: 请求路径: {0}, 请求参数: {1}, ContentType: {2} 异常信息 {3} ", e,
+	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req,
+		HttpMediaTypeNotSupportedException e) {
+		LogUtil.error(
+			"【全局异常拦截】HttpMediaTypeNotSupportedException: 请求路径: {0}, 请求参数: {1}, ContentType: {2} 异常信息 {3} ",
+			e,
 			uri(req), query(req), e.getContentType(), e.getMessage());
 		return Result.failed(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
 	}
@@ -154,7 +160,7 @@ public class DefaultExceptionAdvice {
 
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
-																DataIntegrityViolationException e) {
+		DataIntegrityViolationException e) {
 		LogUtil.error("【全局异常拦截】DataIntegrityViolationException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		return Result.failed(ResultEnum.SQL_ERROR);
@@ -177,7 +183,8 @@ public class DefaultExceptionAdvice {
 	 * @RequestBody上validate失败后抛出的异常是MethodArgumentNotValidException异常
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Result<ErrorMsg> handleMethodArgumentNotValidException(NativeWebRequest req, MethodArgumentNotValidException e) {
+	public Result<ErrorMsg> handleMethodArgumentNotValidException(NativeWebRequest req,
+		MethodArgumentNotValidException e) {
 		LogUtil.error("【全局异常拦截】MethodArgumentNotValidException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		BindingResult bindingResult = e.getBindingResult();
@@ -187,21 +194,27 @@ public class DefaultExceptionAdvice {
 	}
 
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
-	public Result<String> requestTypeMismatch(NativeWebRequest req, MethodArgumentTypeMismatchException e) {
-		LogUtil.error("【全局异常拦截】MethodArgumentTypeMismatchException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getMessage(), ResultEnum.METHOD_ARGUMETN_TYPE_MISMATCH);
+	public Result<String> requestTypeMismatch(NativeWebRequest req,
+		MethodArgumentTypeMismatchException e) {
+		LogUtil
+			.error("【全局异常拦截】MethodArgumentTypeMismatchException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ",
+				e,
+				uri(req), query(req), e.getMessage());
+		return Result.failed(e.getMessage(), ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
 	}
 
 	@ExceptionHandler({MissingServletRequestParameterException.class})
-	public Result<String> requestMissingServletRequest(NativeWebRequest req, MissingServletRequestParameterException e) {
-		LogUtil.error("【全局异常拦截】MissingServletRequestParameterException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
+	public Result<String> requestMissingServletRequest(NativeWebRequest req,
+		MissingServletRequestParameterException e) {
+		LogUtil.error(
+			"【全局异常拦截】MissingServletRequestParameterException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getMessage(), ResultEnum.MISSING_SERVLET_REQUESET_PARAMETER);
+		return Result.failed(e.getMessage(), ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
 	}
 
 	@ExceptionHandler({HttpMessageNotReadableException.class})
-	public Result<String> httpMessageNotReadableException(NativeWebRequest req, HttpMessageNotReadableException e) {
+	public Result<String> httpMessageNotReadableException(NativeWebRequest req,
+		HttpMessageNotReadableException e) {
 		LogUtil.error("【全局异常拦截】HttpMessageNotReadableException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
 			uri(req), query(req), e.getMessage());
 		Throwable throwable = e.getRootCause();
@@ -239,9 +252,9 @@ public class DefaultExceptionAdvice {
 	 * 获取请求路径
 	 *
 	 * @param request request
+	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/9/29 13:41
-	 * @since v1.0
+	 * @since 2021/2/25 16:53
 	 */
 	private String uri(NativeWebRequest request) {
 		HttpServletRequest nativeRequest = request.getNativeRequest(HttpServletRequest.class);
@@ -256,9 +269,9 @@ public class DefaultExceptionAdvice {
 	 * 获取请求参数
 	 *
 	 * @param request request
+	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/9/29 13:41
-	 * @since v1.0
+	 * @since 2021/2/25 16:53
 	 */
 	private String query(NativeWebRequest request) {
 		HttpServletRequest nativeRequest = request.getNativeRequest(HttpServletRequest.class);
@@ -271,6 +284,14 @@ public class DefaultExceptionAdvice {
 		return "--";
 	}
 
+	/**
+	 * getErrors
+	 *
+	 * @param result result
+	 * @return java.util.Map<java.lang.String, java.lang.String>
+	 * @author dengtao
+	 * @since 2021/2/25 16:53
+	 */
 	private Map<String, String> getErrors(BindingResult result) {
 		Map<String, String> map = new HashMap<>();
 		List<FieldError> list = result.getFieldErrors();
@@ -280,6 +301,14 @@ public class DefaultExceptionAdvice {
 		return map;
 	}
 
+	/**
+	 * getErrors
+	 *
+	 * @param e exception
+	 * @return java.util.Map<java.lang.String, java.lang.String>
+	 * @author dengtao
+	 * @since 2021/2/25 16:54
+	 */
 	private Map<String, String> getErrors(ConstraintViolationException e) {
 		Map<String, String> map = new HashMap<>();
 		Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
@@ -296,6 +325,7 @@ public class DefaultExceptionAdvice {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class ErrorMsg {
+
 		private Map<String, String> error;
 	}
 }

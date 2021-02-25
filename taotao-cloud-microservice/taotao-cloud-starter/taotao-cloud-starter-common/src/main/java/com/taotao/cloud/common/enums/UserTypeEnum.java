@@ -19,40 +19,32 @@ package com.taotao.cloud.common.enums;
  * 系统用户类型
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
 public enum UserTypeEnum {
-    /**
-     * 前端(会员)app用户
-     */
-    MEMBER("member", "会员用户"),
-    /**
-     * 后台管理用户
-     */
-    BACKEND("backend", "后台管理用户");
+	/**
+	 * 前端(会员)app用户
+	 */
+	MEMBER("member", "会员用户"),
+	/**
+	 * 后台管理用户
+	 */
+	BACKEND("backend", "后台管理用户");
 
-    private String value;
-    private String description;
+	private final String value;
+	private final String description;
 
-    UserTypeEnum(String value, String description) {
-        this.value = value;
-        this.description = description;
-    }
+	UserTypeEnum(String value, String description) {
+		this.value = value;
+		this.description = description;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 }

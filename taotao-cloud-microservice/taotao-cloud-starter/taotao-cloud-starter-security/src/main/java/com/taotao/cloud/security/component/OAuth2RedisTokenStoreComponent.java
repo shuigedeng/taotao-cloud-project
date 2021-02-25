@@ -30,8 +30,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * 认证服务器使用Redis存取令牌
  *
  * @author dengtao
- * @date 2020/4/30 09:07
- * @since v1.0
+ * @since 2020/4/30 09:07
+ * @version 1.0.0
  */
 @AllArgsConstructor
 @ConditionalOnProperty(prefix = "taotao.cloud.oauth2.token.store", name = "type", havingValue = "redis")

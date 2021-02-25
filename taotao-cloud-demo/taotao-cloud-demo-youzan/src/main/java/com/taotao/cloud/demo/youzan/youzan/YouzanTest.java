@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  *
  * @author dengtao
  * @version v1.0.0
- * @date 2020/4/29 10:27
+ * @since 2020/4/29 10:27
  */
 @Component
 public class YouzanTest {

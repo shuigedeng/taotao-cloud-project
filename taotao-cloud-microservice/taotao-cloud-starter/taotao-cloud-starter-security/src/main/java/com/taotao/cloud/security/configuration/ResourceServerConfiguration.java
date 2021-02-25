@@ -44,8 +44,8 @@ import javax.annotation.Resource;
  * oauth2资源服务器
  *
  * @author dengtao
- * @date 2020/4/30 09:04
- * @since v1.0
+ * @since 2020/4/30 09:04
+ * @version 1.0.0
  */
 @Order(6)
 @EnableResourceServer

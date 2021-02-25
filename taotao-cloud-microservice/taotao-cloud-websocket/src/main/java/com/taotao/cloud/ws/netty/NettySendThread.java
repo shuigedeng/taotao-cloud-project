@@ -25,8 +25,8 @@ import java.util.Objects;
  * NettySendThread
  *
  * @author dengtao
- * @date 2020/12/30 下午4:46
- * @since v1.0
+ * @since 2020/12/30 下午4:46
+ * @version 1.0.0
  */
 @Slf4j
 public class NettySendThread implements Runnable {

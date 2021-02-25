@@ -7,8 +7,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    runtime "mysql:mysql-connector-java"
-    compile 'com.baomidou:mybatis-plus-extension'
+    implementation "mysql:mysql-connector-java"
+    implementation 'com.baomidou:mybatis-plus-extension'
     implementation 'org.springframework.security:spring-security-core'
 
     compileOnly 'org.projectlombok:lombok'

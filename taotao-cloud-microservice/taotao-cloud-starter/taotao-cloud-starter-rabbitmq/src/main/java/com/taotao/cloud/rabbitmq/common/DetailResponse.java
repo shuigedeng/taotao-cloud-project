@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
  * DetailResponse
  *
  * @author dengtao
- * @date 2020/5/28 17:28
- * @since v1.0
+ * @since 2020/5/28 17:28
+ * @version 1.0.0
  */
 @Data
 @AllArgsConstructor

@@ -28,8 +28,8 @@ import java.util.Set;
  * 重构{@link LogbackMDCAdapter}类，搭配TransmittableThreadLocal实现父子线程之间的数据传递
  *
  * @author dengtao
- * @date 2020/4/30 10:20
- * @since v1.0
+ * @since 2020/4/30 10:20
+ * @version 1.0.0
  */
 public class TtlMDCAdapter implements MDCAdapter {
     private final ThreadLocal<Map<String, String>> copyOnInheritThreadLocal = new TransmittableThreadLocal<>();

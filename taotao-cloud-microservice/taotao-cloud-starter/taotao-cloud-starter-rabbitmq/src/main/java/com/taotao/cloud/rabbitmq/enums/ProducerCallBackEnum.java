@@ -19,8 +19,8 @@ package com.taotao.cloud.rabbitmq.enums;
  * ProducerCallBackEnum
  *
  * @author dengtao
- * @date 2020/9/29 15:56
- * @since v1.0
+ * @since 2020/9/29 15:56
+ * @version 1.0.0
  */
 public enum ProducerCallBackEnum {
 

@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @ClassName MyBatisPlusConfig
  * @Author lihaodong
- * @Date 2019/1/10 18:02
+ * @since 2019/1/10 18:02
  * @Mail lihaodongmail@163.com
  * @Description Mybatis-Plus配置
  * @Version 1.0

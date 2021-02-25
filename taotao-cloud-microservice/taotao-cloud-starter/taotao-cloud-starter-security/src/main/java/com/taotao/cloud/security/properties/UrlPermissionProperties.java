@@ -25,8 +25,8 @@ import java.util.List;
  * url权限配置
  *
  * @author dengtao
- * @date 2020/5/2 11:21
- * @since v1.0
+ * @since 2020/5/2 11:21
+ * @version 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "taotao.cloud.oauth2.security.auth.url-permission")

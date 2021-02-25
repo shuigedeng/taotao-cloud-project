@@ -30,8 +30,8 @@ import java.io.IOException;
 
 /**
  * @author dengtao
- * @date 2020/10/30 17:43
- * @since v1.0
+ * @since 2020/10/30 17:43
+ * @version 1.0.0
  */
 @Component
 public class ReduceJobsUtils {
@@ -46,8 +46,8 @@ public class ReduceJobsUtils {
 	 *
 	 * @return org.apache.hadoop.conf.Configuration
 	 * @author dengtao
-	 * @date 2020/11/26 下午8:11
-	 * @since v1.0
+	 * @since 2020/11/26 下午8:11
+	 * @version 1.0.0
 	 */
 	public static Configuration getConfiguration() {
 		Configuration configuration = new Configuration();

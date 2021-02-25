@@ -4,15 +4,13 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    compile 'com.alibaba:transmittable-thread-local'
-    compile 'com.fasterxml.jackson.core:jackson-databind'
-    compile 'org.slf4j:slf4j-api'
-    compile 'org.javassist:javassist'
-    compile 'com.github.whvcse:easy-captcha'
-
-    compile 'cn.hutool:hutool-all'
+    implementation 'com.alibaba:transmittable-thread-local'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.javassist:javassist'
+    implementation 'com.github.whvcse:easy-captcha'
+    implementation 'cn.hutool:hutool-all'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
-

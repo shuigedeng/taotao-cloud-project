@@ -33,8 +33,8 @@ import org.springframework.core.annotation.Order;
  * RestTemplateAutoConfiguration
  *
  * @author dengtao
- * @date 2020/6/15 11:31
- * @since v1.0
+ * @since 2020/6/15 11:31
+ * @version 1.0.0
  */
 public class HttpClientComponent {
 

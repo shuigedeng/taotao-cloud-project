@@ -27,8 +27,8 @@ import java.lang.annotation.Target;
  * 开启RedisTokenStore
  *
  * @author dengtao
- * @date 2020/5/3 07:47
- * @since v1.0
+ * @since 2020/5/3 07:47
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

@@ -9,10 +9,10 @@ dependencies {
 
     implementation 'org.springframework.security.oauth:spring-security-oauth2'
 
-    compile "org.springframework.cloud:spring-cloud-starter-openfeign"
-    compile "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    compile "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    compile "io.github.openfeign:feign-okhttp"
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+    implementation "io.github.openfeign:feign-okhttp"
 
     implementation "org.springframework.security:spring-security-core"
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"

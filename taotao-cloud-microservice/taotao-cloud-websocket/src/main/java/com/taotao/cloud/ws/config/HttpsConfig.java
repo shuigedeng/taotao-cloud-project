@@ -29,8 +29,8 @@ import org.springframework.context.annotation.Configuration;
  * HttpsConfig
  *
  * @author dengtao
- * @date 2021/2/1 下午1:53
- * @since v1.0
+ * @since 2021/2/1 下午1:53
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnProperty(name = "server.ssl.enabled", havingValue = "true", matchIfMissing = false)

@@ -36,8 +36,8 @@ import java.util.Map;
  * HDFSController
  *
  * @author dengtao
- * @date 2020/10/29 15:40
- * @since v1.0
+ * @since 2020/10/29 15:40
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/hadoop/hdfs")

@@ -19,61 +19,51 @@ package com.taotao.cloud.common.enums;
  * 目录类型
  *
  * @author dengtao
- * @date 2020/6/2 15:37
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 15:37
  */
 public enum ResourceTypeEnum implements BaseEnum {
-    /**
-     * 一级(左侧)菜单
-     */
-    LEFT_MENU((byte) 1, "一级(左侧)菜单"),
-    /**
-     * 二级(顶部)菜单
-     */
-    TOP_MENU((byte) 2, "二级(顶部)菜单"),
-    /**
-     * 按钮
-     */
-    BUTTON((byte) 3, "按钮");
+	/**
+	 * 一级(左侧)菜单
+	 */
+	LEFT_MENU((byte) 1, "一级(左侧)菜单"),
+	/**
+	 * 二级(顶部)菜单
+	 */
+	TOP_MENU((byte) 2, "二级(顶部)菜单"),
+	/**
+	 * 按钮
+	 */
+	BUTTON((byte) 3, "按钮");
 
-    private Byte value;
-    private String description;
+	private final Byte value;
+	private final String description;
 
-    ResourceTypeEnum(Byte value, String description) {
-        this.value = value;
-        this.description = description;
-    }
+	ResourceTypeEnum(Byte value, String description) {
+		this.value = value;
+		this.description = description;
+	}
 
-    public Byte getValue() {
-        return value;
-    }
+	public Byte getValue() {
+		return value;
+	}
 
-    public void setValue(Byte value) {
-        this.value = value;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getNameByCode(int code) {
+		for (ResourceTypeEnum result : ResourceTypeEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getNameByCode(int code) {
-        for (ResourceTypeEnum result : ResourceTypeEnum.values()) {
-            if (result.getCode() == code) {
-                return result.name().toLowerCase();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Integer getCode() {
-        return (int) value;
-    }
-
-
+	@Override
+	public Integer getCode() {
+		return (int) value;
+	}
 }

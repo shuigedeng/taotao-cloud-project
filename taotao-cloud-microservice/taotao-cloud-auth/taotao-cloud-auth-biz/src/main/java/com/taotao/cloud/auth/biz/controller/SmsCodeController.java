@@ -32,8 +32,8 @@ import javax.validation.constraints.Pattern;
  * 手机验证码管理API
  *
  * @author dengtao
- * @date 2020/4/29 16:07
- * @since v1.0
+ * @since 2020/4/29 16:07
+ * @version 1.0.0
  */
 @Validated
 @RestController

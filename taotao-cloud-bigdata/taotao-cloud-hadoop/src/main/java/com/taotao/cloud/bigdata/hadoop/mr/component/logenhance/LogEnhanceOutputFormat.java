@@ -31,8 +31,8 @@ import java.io.IOException;
  * 然后再调用RecordWriter的write(k,v)方法将数据写出
  *
  * @author dengtao
- * @date 2020/11/26 下午8:25
- * @since v1.0
+ * @since 2020/11/26 下午8:25
+ * @version 1.0.0
  */
 public class LogEnhanceOutputFormat extends FileOutputFormat<Text, NullWritable> {
 	@Override

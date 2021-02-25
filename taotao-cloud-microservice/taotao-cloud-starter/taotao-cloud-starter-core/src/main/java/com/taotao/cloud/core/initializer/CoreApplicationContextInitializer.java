@@ -23,30 +23,31 @@ import org.springframework.context.ConfigurableApplicationContext;
  * 应用上下文初始化器
  *
  * @author dengtao
- * @date 2020/5/15 10:45
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/15 10:45
  */
-public class CoreApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class CoreApplicationContextInitializer implements
+	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    @Override
-    public void initialize(ConfigurableApplicationContext context) {
-        if (ContextUtil.mainClass == null) {
-            ContextUtil.mainClass = deduceMainApplicationClass();
-        }
-        ContextUtil.setApplicationContext(context);
-    }
+	@Override
+	public void initialize(ConfigurableApplicationContext context) {
+		if (ContextUtil.mainClass == null) {
+			ContextUtil.mainClass = deduceMainApplicationClass();
+		}
+		ContextUtil.setApplicationContext(context);
+	}
 
-    private Class<?> deduceMainApplicationClass() {
-        try {
-            StackTraceElement[] stackTrace = new RuntimeException().getStackTrace();
-            for (StackTraceElement stackTraceElement : stackTrace) {
-                if ("main".equals(stackTraceElement.getMethodName())) {
-                    return Class.forName(stackTraceElement.getClassName());
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            // Swallow and continue
-        }
-        return null;
-    }
+	private Class<?> deduceMainApplicationClass() {
+		try {
+			StackTraceElement[] stackTrace = new RuntimeException().getStackTrace();
+			for (StackTraceElement stackTraceElement : stackTrace) {
+				if ("main".equals(stackTraceElement.getMethodName())) {
+					return Class.forName(stackTraceElement.getClassName());
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			// Swallow and continue
+		}
+		return null;
+	}
 }

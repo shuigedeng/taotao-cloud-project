@@ -20,8 +20,8 @@ import com.taotao.cloud.news.biz.entity.Withdraw;
 
 /**
  * @author dengtao
- * @date 2020/11/13 09:59
- * @since v1.0
+ * @since 2020/11/13 09:59
+ * @version 1.0.0
  */
 public interface IWithdrawService {
 	/**
@@ -30,8 +30,8 @@ public interface IWithdrawService {
 	 * @param id id
 	 * @return com.taotao.cloud.aftersale.biz.entity.Withdraw
 	 * @author dengtao
-	 * @date 2020/11/20 上午9:46
-	 * @since v1.0
+	 * @since 2020/11/20 上午9:46
+	 * @version 1.0.0
 	 */
     Withdraw findWithdrawById(Long id);
 }

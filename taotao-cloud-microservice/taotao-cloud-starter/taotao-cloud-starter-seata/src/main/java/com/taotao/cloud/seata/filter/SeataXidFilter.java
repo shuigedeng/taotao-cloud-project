@@ -28,8 +28,8 @@ import java.io.IOException;
 
 /**
  * @author dengtao
- * @date 2020/10/22 17:01
- * @since v1.0
+ * @since 2020/10/22 17:01
+ * @version 1.0.0
  */
 public class SeataXidFilter extends OncePerRequestFilter {
     @Override

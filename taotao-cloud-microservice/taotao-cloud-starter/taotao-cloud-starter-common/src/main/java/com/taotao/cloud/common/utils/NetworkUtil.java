@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
  * NetworkUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:37
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:37
  */
 @UtilityClass
 public class NetworkUtil {
@@ -38,8 +38,7 @@ public class NetworkUtil {
 	 *
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:24
-	 * @since v1.0
+	 * @since 2021/2/25 16:33
 	 */
 	public String getIpAddress() {
 		String ipExclude = "";
@@ -62,16 +61,17 @@ public class NetworkUtil {
 	 *
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:24
-	 * @since v1.0
+	 * @since 2021/2/25 16:33
 	 */
 	public String getIpAddress0() {
 		try {
-			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
 			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
 				NetworkInterface netInterface = allNetInterfaces.nextElement();
-				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp() || netInterface.isPointToPoint()) {
+				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()
+					|| netInterface.isPointToPoint()) {
 					continue;
 				} else {
 					Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
@@ -94,15 +94,15 @@ public class NetworkUtil {
 	 * @param regex 10.0.18 网址前两个或前三个地址段
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:25
-	 * @since v1.0
+	 * @since 2021/2/25 16:33
 	 */
 	public static String getIpAddressMatched(String regex) {
 		try {
-			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
-			InetAddress ip = null;
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
+			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
-				NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+				NetworkInterface netInterface = allNetInterfaces.nextElement();
 				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()) {
 					continue;
 				} else {
@@ -130,12 +130,12 @@ public class NetworkUtil {
 	 * @param regex 10.0.18 排除地址段，两个或前三个地址段
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:25
-	 * @since v1.0
+	 * @since 2021/2/25 16:34
 	 */
 	public static String getIpAddressExMatched(String regex) {
 		try {
-			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
 			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
 				NetworkInterface netInterface = allNetInterfaces.nextElement();
@@ -166,8 +166,7 @@ public class NetworkUtil {
 	 * @param source source
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:25
-	 * @since v1.0
+	 * @since 2021/2/25 16:34
 	 */
 	private static String buildRegex(String source) {
 		StringBuilder sb = new StringBuilder();

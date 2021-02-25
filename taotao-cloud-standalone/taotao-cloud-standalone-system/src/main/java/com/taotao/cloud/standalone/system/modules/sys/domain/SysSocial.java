@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @Classname SysSocial
  * @Description 社交实体类
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-07-17 15:57
+ * @since 2019-07-17 15:57
  * @Version 1.0
  */
 @Data

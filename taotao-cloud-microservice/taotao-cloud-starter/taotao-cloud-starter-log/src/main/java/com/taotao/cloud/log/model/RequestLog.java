@@ -25,8 +25,8 @@ import java.io.Serializable;
  * 日志
  *
  * @author dengtao
- * @date 2020/6/15 11:00
- * @since v1.0
+ * @since 2020/6/15 11:00
+ * @version 1.0.0
  */
 @Data
 public class RequestLog implements Serializable {

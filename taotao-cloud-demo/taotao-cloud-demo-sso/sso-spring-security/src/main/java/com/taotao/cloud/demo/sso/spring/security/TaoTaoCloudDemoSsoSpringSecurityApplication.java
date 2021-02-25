@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @date 2020/2/22
+ * @since 2020/2/22
  */
 @SpringBootApplication
 public class TaoTaoCloudDemoSsoSpringSecurityApplication  {

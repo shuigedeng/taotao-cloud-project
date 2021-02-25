@@ -19,40 +19,32 @@ package com.taotao.cloud.common.enums;
  * 会员用户类型
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
 public enum MemberTypeEnum {
-    /**
-     * 个人用户
-     */
-    PERSONAL("personal", "个人用户"),
-    /**
-     * 企业用户
-     */
-    ENTERPRISE("enterprise", "企业用户");
+	/**
+	 * 个人用户
+	 */
+	PERSONAL("personal", "个人用户"),
+	/**
+	 * 企业用户
+	 */
+	ENTERPRISE("enterprise", "企业用户");
 
-    private String value;
-    private String description;
+	private final String value;
+	private final String description;
 
-    MemberTypeEnum(String value, String description) {
-        this.value = value;
-        this.description = description;
-    }
+	MemberTypeEnum(String value, String description) {
+		this.value = value;
+		this.description = description;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 }

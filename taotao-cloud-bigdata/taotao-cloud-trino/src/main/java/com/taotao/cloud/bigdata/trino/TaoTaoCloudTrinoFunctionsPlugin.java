@@ -38,8 +38,8 @@ import java.util.Set;
  * ${TRINO_HOME}/bin/launcher restart
  *
  * @author dengtao
- * @date 2020/10/29 17:37
- * @since v1.0
+ * @since 2020/10/29 17:37
+ * @version 1.0.0
  */
 public class TaoTaoCloudTrinoFunctionsPlugin implements Plugin {
 	@Override

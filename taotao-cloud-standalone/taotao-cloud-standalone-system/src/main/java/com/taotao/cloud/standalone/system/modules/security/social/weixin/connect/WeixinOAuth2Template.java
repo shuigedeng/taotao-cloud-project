@@ -19,7 +19,7 @@ import java.util.Map;
  * @Classname WeixinOAuth2Template
  * @Description 完成微信的OAuth2认证流程的模板类,国内厂商实现的OAuth2每个都不同, spring默认提供的OAuth2Template适应不了，只能针对每个厂商自己微调
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-23 16:50
+ * @since 2019-08-23 16:50
  * @Version 1.0
  */
 @Slf4j

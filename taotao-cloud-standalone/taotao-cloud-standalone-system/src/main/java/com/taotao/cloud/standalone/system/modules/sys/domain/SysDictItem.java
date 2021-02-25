@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @Classname SysDictItem
  * @Description TODO
  * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
- * @Date 2019-09-02 18:03
+ * @since 2019-09-02 18:03
  * @Version 1.0
  */
 

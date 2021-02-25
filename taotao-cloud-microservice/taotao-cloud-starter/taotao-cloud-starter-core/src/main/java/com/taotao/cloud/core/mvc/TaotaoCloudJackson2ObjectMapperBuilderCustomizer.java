@@ -18,18 +18,17 @@ package com.taotao.cloud.core.mvc;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.taotao.cloud.common.constant.CommonConstant;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.context.annotation.Bean;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 自定义LocalDateTime -> jackson
  *
  * @author dengtao
- * @date 2020/9/29 11:18
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/9/29 11:18
  */
 public class TaotaoCloudJackson2ObjectMapperBuilderCustomizer {
 

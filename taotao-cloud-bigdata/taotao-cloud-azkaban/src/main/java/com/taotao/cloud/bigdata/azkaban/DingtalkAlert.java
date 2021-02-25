@@ -29,8 +29,8 @@ import java.util.Properties;
  * DingtalkAlert
  *
  * @author dengtao
- * @date 2021/1/21 下午2:10
- * @since v1.0
+ * @since 2021/1/21 下午2:10
+ * @version 1.0.0
  */
 public class DingtalkAlert implements Alerter {
 	private final Properties properties;

@@ -22,8 +22,8 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
  * 消息处理者
  *
  * @author dengtao
- * @date 2020/9/29 15:55
- * @since v1.0
+ * @since 2020/9/29 15:55
+ * @version 1.0.0
  */
 public interface MessageProcess<T> {
     /**
@@ -31,8 +31,8 @@ public interface MessageProcess<T> {
      *
      * @param message message
      * @author dengtao
-     * @date 2020/9/29 15:56
-     * @since v1.0
+     * @since 2020/9/29 15:56
+     * @version 1.0.0
      */
     DetailResponse process(T message);
 }

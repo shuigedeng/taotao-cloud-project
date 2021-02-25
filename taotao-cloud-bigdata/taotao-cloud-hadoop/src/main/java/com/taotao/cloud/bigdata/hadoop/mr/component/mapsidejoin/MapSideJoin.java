@@ -38,8 +38,8 @@ import java.util.Map;
  * MapSideJoin
  *
  * @author dengtao
- * @date 2020/11/26 下午8:28
- * @since v1.0
+ * @since 2020/11/26 下午8:28
+ * @version 1.0.0
  */
 public class MapSideJoin {
 	public static class MapSideJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {

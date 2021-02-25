@@ -27,8 +27,8 @@ import java.util.Optional;
 
 /**
  * @author dengtao
- * @date 2020/11/13 10:00
- * @since v1.0
+ * @since 2020/11/13 10:00
+ * @version 1.0.0
  */
 @Service
 @AllArgsConstructor
@@ -39,6 +39,6 @@ public class EmailServiceImpl implements IEmailService {
 	@Override
 	public Email findEmailById(Long id) {
 		Optional<Email> optionalExpressCompany = emailRepository.findById(id);
-		return optionalExpressCompany.orElseThrow(() -> new BusinessException(ResultEnum.EMIAL_NOT_EXIST));
+		return optionalExpressCompany.orElseThrow(() -> new BusinessException(ResultEnum.EMAIL_NOT_EXIST));
 	}
 }

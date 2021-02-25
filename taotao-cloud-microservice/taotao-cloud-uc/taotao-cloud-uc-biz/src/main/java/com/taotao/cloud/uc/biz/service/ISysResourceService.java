@@ -15,7 +15,7 @@ import java.util.Set;
  * 资源表服务接口
  *
  * @author dengtao
- * @date 2020-10-16 16:23:05
+ * @since 2020-10-16 16:23:05
  * @since 1.0
  */
 public interface ISysResourceService {
@@ -26,8 +26,8 @@ public interface ISysResourceService {
 	 * @param resourceDTO
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/10/21 10:11
-	 * @since v1.0
+	 * @since 2020/10/21 10:11
+	 * @version 1.0.0
 	 */
 	SysResource saveResource(SysResource resource);
 
@@ -37,8 +37,8 @@ public interface ISysResourceService {
 	 * @param id
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/10/21 10:13
-	 * @since v1.0
+	 * @since 2020/10/21 10:13
+	 * @version 1.0.0
 	 */
 	Boolean deleteResource(Long id);
 
@@ -49,8 +49,8 @@ public interface ISysResourceService {
 	 * @param resourceDTO
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/10/21 10:15
-	 * @since v1.0
+	 * @since 2020/10/21 10:15
+	 * @version 1.0.0
 	 */
 	SysResource updateResource(SysResource sysResource);
 
@@ -60,8 +60,8 @@ public interface ISysResourceService {
 	 * @param id
 	 * @return com.taotao.cloud.uc.biz.entity.SysResource
 	 * @author dengtao
-	 * @date 2020/10/21 10:16
-	 * @since v1.0
+	 * @since 2020/10/21 10:16
+	 * @version 1.0.0
 	 */
 	SysResource findResourceById(Long id);
 
@@ -72,8 +72,8 @@ public interface ISysResourceService {
 	 * @param resourceQuery
 	 * @return org.springframework.data.domain.Page<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/10/21 10:19
-	 * @since v1.0
+	 * @since 2020/10/21 10:19
+	 * @version 1.0.0
 	 */
 	Page<SysResource> findResourcePage(Pageable pageable, ResourcePageQuery resourceQuery);
 
@@ -83,8 +83,8 @@ public interface ISysResourceService {
 	 * @param
 	 * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/10/21 10:21
-	 * @since v1.0
+	 * @since 2020/10/21 10:21
+	 * @version 1.0.0
 	 */
 	List<SysResource> findAllResources();
 
@@ -94,8 +94,8 @@ public interface ISysResourceService {
 	 * @param roleIds
 	 * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/10/21 10:24
-	 * @since v1.0
+	 * @since 2020/10/21 10:24
+	 * @version 1.0.0
 	 */
 	List<SysResource> findResourceByRoleIds(Set<Long> roleIds);
 
@@ -105,8 +105,8 @@ public interface ISysResourceService {
 	 * @param codes
 	 * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/10/21 10:29
-	 * @since v1.0
+	 * @since 2020/10/21 10:29
+	 * @version 1.0.0
 	 */
 	List<SysResource> findResourceByCodes(Set<String> codes);
 
@@ -116,8 +116,8 @@ public interface ISysResourceService {
 	 * @param parentId
 	 * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/10/21 10:41
-	 * @since v1.0
+	 * @since 2020/10/21 10:41
+	 * @version 1.0.0
 	 */
 	List<SysResource> findResourceByParentId(Long parentId);
 
@@ -129,8 +129,8 @@ public interface ISysResourceService {
 	 * @param parentId
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.resource.ResourceTree>
 	 * @author dengtao
-	 * @date 2020/10/21 11:14
-	 * @since v1.0
+	 * @since 2020/10/21 11:14
+	 * @version 1.0.0
 	 */
 	List<ResourceTree> findResourceTree(boolean lazy, Long parentId);
 
@@ -141,8 +141,8 @@ public interface ISysResourceService {
 	 * @param parentId
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.resource.ResourceTree>
 	 * @author dengtao
-	 * @date 2020/10/21 11:35
-	 * @since v1.0
+	 * @since 2020/10/21 11:35
+	 * @version 1.0.0
 	 */
 	List<ResourceTree> findCurrentUserResourceTree(List<ResourceVO> resourceVOList, Long parentId);
 
@@ -152,8 +152,8 @@ public interface ISysResourceService {
 	 * @param idList id列表
 	 * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysResource>
 	 * @author dengtao
-	 * @date 2020/11/11 16:54
-	 * @since v1.0
+	 * @since 2020/11/11 16:54
+	 * @version 1.0.0
 	 */
 	List<SysResource> findResourceByIdList(List<Long> idList);
 
@@ -165,8 +165,8 @@ public interface ISysResourceService {
 	 * @param name 名称
 	 * @return com.taotao.cloud.uc.biz.entity.SysResource
 	 * @author dengtao
-	 * @date 2020/11/11 17:06
-	 * @since v1.0
+	 * @since 2020/11/11 17:06
+	 * @version 1.0.0
 	 */
 	SysResource findResourceByName(String name);
 
@@ -176,8 +176,8 @@ public interface ISysResourceService {
 	 * @param id id
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/11/11 17:18
-	 * @since v1.0
+	 * @since 2020/11/11 17:18
+	 * @version 1.0.0
 	 */
 	Boolean existsById(Long id);
 
@@ -187,8 +187,8 @@ public interface ISysResourceService {
 	 * @param name 名称
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/11/11 17:19
-	 * @since v1.0
+	 * @since 2020/11/11 17:19
+	 * @version 1.0.0
 	 */
 	Boolean existsByName(String name);
 }

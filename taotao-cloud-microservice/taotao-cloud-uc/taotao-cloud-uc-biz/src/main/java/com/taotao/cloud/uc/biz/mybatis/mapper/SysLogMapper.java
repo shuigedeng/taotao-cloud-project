@@ -8,7 +8,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 系统日志 Mapper 接口
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:37
+//  * @since 2020/4/30 11:37
 //  */
 // public interface SysLogMapper extends SuperMapper<SysLog> {
 //

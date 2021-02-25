@@ -25,9 +25,9 @@ import java.util.Optional;
  * 获取当前审计用户 主要用于CreatedBy LastModifiedBy
  *
  * @author dengtao
- * @date 2020/9/28 16:43
+ * @since 2020/9/28 16:43
  * @see BaseEntity
- * @since v1.0
+ * @version 1.0.0
  */
 public class AuditorBean implements AuditorAware<Long> {
     @Override

@@ -34,8 +34,8 @@ import java.math.BigDecimal;
  * 提现申请表
  *
  * @author dengtao
- * @date 2020/11/13 09:46
- * @since v1.0
+ * @since 2020/11/13 09:46
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

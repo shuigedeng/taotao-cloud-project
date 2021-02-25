@@ -36,7 +36,7 @@ public class ServiceRegistry {
      *
      * @return org.apache.zookeeper.ZooKeeper
      * @author dengtao
-     * @date 2020/2/27 13:47
+     * @since 2020/2/27 13:47
      */
     private ZooKeeper connectZookeeper() {
         ZooKeeper zk = null;
@@ -62,7 +62,7 @@ public class ServiceRegistry {
      * @param data data
      * @return void
      * @author dengtao
-     * @date 2020/2/27 13:47
+     * @since 2020/2/27 13:47
      */
     private void createNode(ZooKeeper zk, String data) {
         try {
@@ -85,7 +85,7 @@ public class ServiceRegistry {
      * @param data data
      * @return void
      * @author dengtao
-     * @date 2020/2/27 13:47
+     * @since 2020/2/27 13:47
      */
     public void registry(String data) {
         if (null != data) {

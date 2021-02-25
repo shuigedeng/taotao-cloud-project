@@ -41,8 +41,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 阿里云oss自动配置
  *
  * @author dengtao
- * @date 2020/10/26 10:49
- * @since v1.0
+ * @since 2020/10/26 10:49
+ * @version 1.0.0
  */
 @ConditionalOnProperty(prefix = "taotao.cloud.file", name = "type", havingValue = FileConstant.DFS_ALIYUN)
 public class AliyunOssAutoConfiguration {
@@ -285,7 +285,7 @@ public class AliyunOssAutoConfiguration {
 		 *
 		 * @param uploadFile uploadFile
 		 * @author dengtao
-		 * @date 2020/9/9 11:44
+		 * @since 2020/9/9 11:44
 		 */
 		public int calPartCount(MultipartFile uploadFile) {
 			int part = (int) (uploadFile.getSize() / PART_SIZE);

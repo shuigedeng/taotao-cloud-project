@@ -22,8 +22,8 @@ import org.springframework.context.ApplicationEvent;
  * 系统日志事件
  *
  * @author dengtao
- * @date 2020/6/3 13:33
- * @since v1.0
+ * @since 2020/6/3 13:33
+ * @version 1.0.0
  */
 public class RequestLogEvent extends ApplicationEvent {
 

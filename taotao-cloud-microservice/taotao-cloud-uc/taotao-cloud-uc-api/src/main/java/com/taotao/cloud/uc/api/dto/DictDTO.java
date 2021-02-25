@@ -7,7 +7,7 @@ import lombok.*;
  * 字典dto
  *
  * @author dengtao
- * @date 2020/4/30 11:20
+ * @since 2020/4/30 11:20
  */
 @Data
 @Builder

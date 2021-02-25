@@ -30,8 +30,8 @@ import java.io.File;
  * TaotaoCloudGatewayApplication
  *
  * @author dengtao
- * @date 2020/10/10 09:06
- * @since v1.0
+ * @since 2020/10/10 09:06
+ * @version 1.0.0
  */
 @EnableTaoTaoCloudRequestLog
 @EnableTaoTaoCloudRedis
@@ -48,7 +48,7 @@ public class TaotaoCloudGatewayApplication {
 		 * 设置nacos客户端日志和快照目录
 		 *
 		 * @see LocalConfigInfoProcessor
-		 * @date 2021/2/2 上午10:48
+		 * @since 2021/2/2 上午10:48
 		 */
 		// System.setProperty("JM.LOG.PATH", "");
 		// System.setProperty("JM.SNAPSHOT.PATH", "");

@@ -10,8 +10,8 @@ import javax.persistence.EntityManager;
  * 第三方登录信息Repository
  *
  * @author dengtao
- * @date 2020/9/29 18:02
- * @since v1.0
+ * @since 2020/9/29 18:02
+ * @version 1.0.0
  */
 @Repository
 public class MemberPlatformRepository extends BaseJpaRepository<MemberPlatform, Long> {

@@ -22,20 +22,19 @@ import com.taotao.cloud.core.mvc.WebMvcConfiguration;
 import com.taotao.cloud.core.mvc.filter.LbIsolationFilter;
 import com.taotao.cloud.core.mvc.filter.TenantFilter;
 import com.taotao.cloud.core.mvc.filter.TraceFilter;
-import org.springframework.context.annotation.Import;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 开启mvc
+ * 开启mvc自定义配置
  *
  * @author dengtao
- * @date 2020/5/3 07:47
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

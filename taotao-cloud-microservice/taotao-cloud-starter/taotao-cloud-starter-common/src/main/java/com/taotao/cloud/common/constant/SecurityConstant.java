@@ -19,133 +19,136 @@ package com.taotao.cloud.common.constant;
  * Security 公共常量
  *
  * @author dengtao
- * @date 2020/4/29 20:23
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 20:23
  */
-public interface SecurityConstant {
+public class SecurityConstant {
 
-    String OAUTH_TOKEN_URL = "/oauth/token/user";
+	private SecurityConstant() {
+	}
 
-    String AUTHORIZED = "Authorized";
+	public static final String OAUTH_TOKEN_URL = "/oauth/token/user";
 
-    String BASE_AUTHORIZED = "BaseAuthorized";
+	public static final String AUTHORIZED = "Authorized";
 
-    String PHONE_KEY = "phone";
+	public static final String BASE_AUTHORIZED = "BaseAuthorized";
 
-    String SMS_CODE = "smsCode";
+	public static final String PHONE_KEY = "phone";
 
-    /**
-     * sys_oauth_client_details 表的字段 {scrypt}
-     */
-    String CLIENT_FIELDS = "client_id, client_secret, resource_ids, scope, "
-            + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
-            + "refresh_token_validity, additional_information, autoapprove";
+	public static final String SMS_CODE = "smsCode";
 
-    /**
-     * JdbcClientDetailsService 查询语句
-     */
-    String BASE_FIND = "select " + CLIENT_FIELDS + " from oauth_client_details";
+	/**
+	 * sys_oauth_client_details 表的字段 {scrypt}
+	 */
+	public static final String CLIENT_FIELDS = "client_id, client_secret, resource_ids, scope, "
+		+ "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
+		+ "refresh_token_validity, additional_information, autoapprove";
 
-    /**
-     * 默认的查询语句
-     */
-    String DEFAULT_FIND = BASE_FIND + " order by client_id";
+	/**
+	 * JdbcClientDetailsService 查询语句
+	 */
+	public static final String BASE_FIND = "select " + CLIENT_FIELDS + " from oauth_client_details";
 
-    /**
-     * 按条件client_id 查询
-     */
-    String DEFAULT_SELECT = BASE_FIND + " where client_id = ?";
+	/**
+	 * 默认的查询语句
+	 */
+	public static final String DEFAULT_FIND = BASE_FIND + " order by client_id";
 
-    String NORMAL = "normal";
-    String SMS = "sms";
-    String LOGIN_QQ = "qq";
-    String LOGIN_WEIXIN = "weixin";
-    String LOGIN_GITEE = "gitee";
-    String LOGIN_GITHUB = "github";
+	/**
+	 * 按条件client_id 查询
+	 */
+	public static final String DEFAULT_SELECT = BASE_FIND + " where client_id = ?";
 
-    /**
-     * 基础角色
-     */
-    String BASE_ROLE = "ROLE_USER";
+	public static final String NORMAL = "normal";
+	public static final String SMS = "sms";
+	public static final String LOGIN_QQ = "qq";
+	public static final String LOGIN_WEIXIN = "weixin";
+	public static final String LOGIN_GITEE = "gitee";
+	public static final String LOGIN_GITHUB = "github";
 
-    /**
-     * 授权码模式
-     */
-    String AUTHORIZATION_CODE = "authorization_code";
+	/**
+	 * 基础角色
+	 */
+	public static final String BASE_ROLE = "ROLE_USER";
 
-    /**
-     * 密码模式
-     */
-    String PASSWORD = "password";
+	/**
+	 * 授权码模式
+	 */
+	public static final String AUTHORIZATION_CODE = "authorization_code";
 
-    /**
-     * 默认生成图形验证码宽度
-     */
-    String DEFAULT_IMAGE_WIDTH = "100";
+	/**
+	 * 密码模式
+	 */
+	public static final String PASSWORD = "password";
 
-    /**
-     * 默认生成图像验证码高度
-     */
-    String DEFAULT_IMAGE_HEIGHT = "35";
+	/**
+	 * 默认生成图形验证码宽度
+	 */
+	public static final String DEFAULT_IMAGE_WIDTH = "100";
 
-    /**
-     * 默认生成图形验证码长度
-     */
-    String DEFAULT_IMAGE_LENGTH = "4";
+	/**
+	 * 默认生成图像验证码高度
+	 */
+	public static final String DEFAULT_IMAGE_HEIGHT = "35";
 
-    /**
-     * 默认生成图形验证码过期时间
-     */
-    int DEFAULT_IMAGE_EXPIRE = 12000000;
+	/**
+	 * 默认生成图形验证码长度
+	 */
+	public static final String DEFAULT_IMAGE_LENGTH = "4";
 
-    /**
-     * 边框颜色，合法值： r,g,b (and optional alpha) 或者 white,black,blue.
-     */
-    String DEFAULT_COLOR_FONT = "blue";
+	/**
+	 * 默认生成图形验证码过期时间
+	 */
+	public static final int DEFAULT_IMAGE_EXPIRE = 12000000;
 
-    /**
-     * 图片边框
-     */
-    String DEFAULT_IMAGE_BORDER = "no";
+	/**
+	 * 边框颜色，合法值： r,g,b (and optional alpha) 或者 white,black,blue.
+	 */
+	public static final String DEFAULT_COLOR_FONT = "blue";
 
-    /**
-     * 默认图片间隔
-     */
-    String DEFAULT_CHAR_SPACE = "5";
+	/**
+	 * 图片边框
+	 */
+	public static final String DEFAULT_IMAGE_BORDER = "no";
 
-    /**
-     * 默认保存手机验证码code的前缀
-     */
-    String DEFAULT_SMS_CODE_KEY = "default_sms_code_key";
+	/**
+	 * 默认图片间隔
+	 */
+	public static final String DEFAULT_CHAR_SPACE = "5";
 
-    /**
-     * 验证码文字大小
-     */
-    String DEFAULT_IMAGE_FONT_SIZE = "30";
+	/**
+	 * 默认保存手机验证码code的前缀
+	 */
+	public static final String DEFAULT_SMS_CODE_KEY = "default_sms_code_key";
 
-    /**
-     * 缓存client的redis key，这里是hash结构存储
-     */
-    String CACHE_CLIENT_KEY = "oauth_client_details";
+	/**
+	 * 验证码文字大小
+	 */
+	public static final String DEFAULT_IMAGE_FONT_SIZE = "30";
 
-    /**
-     * 默认token过期时间(1小时)
-     */
-    Integer ACCESS_TOKEN_VALIDITY_SECONDS = 60 * 60 * 60;
+	/**
+	 * 缓存client的redis key，这里是hash结构存储
+	 */
+	public static final String CACHE_CLIENT_KEY = "oauth_client_details";
 
-    /**
-     * redis中授权token对应的key
-     */
-    String REDIS_TOKEN_AUTH = "auth:";
+	/**
+	 * 默认token过期时间(1小时)
+	 */
+	public static final Integer ACCESS_TOKEN_VALIDITY_SECONDS = 60 * 60 * 60;
 
-    /**
-     * redis中应用对应的token集合的key
-     */
-    String REDIS_CLIENT_ID_TO_ACCESS = "client_id_to_access:";
+	/**
+	 * redis中授权token对应的key
+	 */
+	public static final String REDIS_TOKEN_AUTH = "auth:";
 
-    /**
-     * redis中用户名对应的token集合的key
-     */
-    String REDIS_UNAME_TO_ACCESS = "uname_to_access:";
+	/**
+	 * redis中应用对应的token集合的key
+	 */
+	public static final String REDIS_CLIENT_ID_TO_ACCESS = "client_id_to_access:";
+
+	/**
+	 * redis中用户名对应的token集合的key
+	 */
+	public static final String REDIS_UNAME_TO_ACCESS = "uname_to_access:";
 
 }

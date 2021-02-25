@@ -34,7 +34,7 @@ import java.util.Objects;
  * @Classname SysLogAspect
  * @Description 系统日志切面
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-04-22 23:52
+ * @since 2019-04-22 23:52
  * @Version 1.0
  * ①切面注解得到请求数据 -> ②发布监听事件 -> ③异步监听日志入库
  */

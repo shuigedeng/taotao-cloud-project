@@ -14,7 +14,7 @@ import java.util.Set;
  * 角色表服务接口
  *
  * @author dengtao
- * @date 2020-10-16 16:23:05
+ * @since 2020-10-16 16:23:05
  * @since 1.0
  */
 public interface ISysRoleService {
@@ -25,8 +25,8 @@ public interface ISysRoleService {
      * @param id 角色id
      * @return com.taotao.cloud.uc.biz.entity.SysRole
      * @author dengtao
-     * @date 2020/10/20 15:59
-     * @since v1.0
+     * @since 2020/10/20 15:59
+     * @version 1.0.0
      */
     SysRole findRoleById(Long id);
 
@@ -36,8 +36,8 @@ public interface ISysRoleService {
      * @param userIds 用户id列表
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysRole>
      * @author dengtao
-     * @date 2020/10/20 16:46
-     * @since v1.0
+     * @since 2020/10/20 16:46
+     * @version 1.0.0
      */
     List<SysRole> findRoleByUserIds(Set<Long> userIds);
 
@@ -47,8 +47,8 @@ public interface ISysRoleService {
      * @param code code
      * @return com.taotao.cloud.uc.biz.entity.SysRole
      * @author dengtao
-     * @date 2020/10/20 17:33
-     * @since v1.0
+     * @since 2020/10/20 17:33
+     * @version 1.0.0
      */
     Boolean existRoleByCode(String code);
 
@@ -58,8 +58,8 @@ public interface ISysRoleService {
      * @param code code
      * @return com.taotao.cloud.uc.biz.entity.SysRole
      * @author dengtao
-     * @date 2020/10/20 17:33
-     * @since v1.0
+     * @since 2020/10/20 17:33
+     * @version 1.0.0
      */
     SysRole findRoleByCode(String code);
 
@@ -69,8 +69,8 @@ public interface ISysRoleService {
      * @param roleDTO roleDTO
      * @return java.lang.Boolean
      * @author dengtao
-     * @date 2020/10/20 17:45
-     * @since v1.0
+     * @since 2020/10/20 17:45
+     * @version 1.0.0
      */
     Boolean saveRole(RoleDTO roleDTO);
 
@@ -81,8 +81,8 @@ public interface ISysRoleService {
      * @param roleDTO
      * @return java.lang.Boolean
      * @author dengtao
-     * @date 2020/10/21 09:06
-     * @since v1.0
+     * @since 2020/10/21 09:06
+     * @version 1.0.0
      */
     Boolean updateRole(Long id, RoleDTO roleDTO);
 
@@ -92,8 +92,8 @@ public interface ISysRoleService {
      * @param id
      * @return java.lang.Boolean
      * @author dengtao
-     * @date 2020/10/21 09:07
-     * @since v1.0
+     * @since 2020/10/21 09:07
+     * @version 1.0.0
      */
     Boolean deleteRole(Long id);
 
@@ -104,8 +104,8 @@ public interface ISysRoleService {
      * @param roleQuery
      * @return org.springframework.data.domain.Page<com.taotao.cloud.uc.biz.entity.SysRole>
      * @author dengtao
-     * @date 2020/10/21 09:09
-     * @since v1.0
+     * @since 2020/10/21 09:09
+     * @version 1.0.0
      */
     Page<SysRole> findRolePage(Pageable pageable, RolePageQuery roleQuery);
 
@@ -114,8 +114,8 @@ public interface ISysRoleService {
      *
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysRole>
      * @author dengtao
-     * @date 2020/10/21 09:12
-     * @since v1.0
+     * @since 2020/10/21 09:12
+     * @version 1.0.0
      */
     List<SysRole> findAllRoles();
 
@@ -125,8 +125,8 @@ public interface ISysRoleService {
      * @param roleResourceDTO
      * @return java.lang.Boolean
      * @author dengtao
-     * @date 2020/10/21 09:45
-     * @since v1.0
+     * @since 2020/10/21 09:45
+     * @version 1.0.0
      */
     Boolean saveRoleResources(RoleResourceDTO roleResourceDTO);
 
@@ -136,8 +136,8 @@ public interface ISysRoleService {
      * @param codes
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysRole>
      * @author dengtao
-     * @date 2020/10/21 10:36
-     * @since v1.0
+     * @since 2020/10/21 10:36
+     * @version 1.0.0
      */
     List<SysRole> findRoleByCodes(Set<String> codes);
 }

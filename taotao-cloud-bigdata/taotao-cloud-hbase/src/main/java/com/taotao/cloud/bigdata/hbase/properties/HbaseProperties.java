@@ -22,8 +22,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * HbaseProperties
  *
  * @author dengtao
- * @date 2020/10/30 11:09
- * @since v1.0
+ * @since 2020/10/30 11:09
+ * @version 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "spring.hbase")

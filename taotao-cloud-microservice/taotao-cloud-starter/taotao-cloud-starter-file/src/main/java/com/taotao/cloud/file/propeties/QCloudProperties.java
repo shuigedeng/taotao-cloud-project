@@ -8,8 +8,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 腾讯云服务Properties
  *
  * @author dengtao
- * @date 2020/10/26 09:39
- * @since v1.0
+ * @since 2020/10/26 09:39
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

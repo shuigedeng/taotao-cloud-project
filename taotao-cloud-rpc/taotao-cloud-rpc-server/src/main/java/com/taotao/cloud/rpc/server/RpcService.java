@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * @author dengtao
  * @version v1.0.0
  * @create 2020/2/27 14:03
- * @since v1.0.0
+ * @version 1.0.0.0
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

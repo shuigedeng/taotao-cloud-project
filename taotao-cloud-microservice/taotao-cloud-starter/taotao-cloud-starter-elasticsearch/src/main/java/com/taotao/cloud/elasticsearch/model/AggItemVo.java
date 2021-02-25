@@ -21,8 +21,8 @@ import lombok.Data;
  * 聚合VO
  *
  * @author dengtao
- * @date 2020/5/3 07:48
- * @since v1.0
+ * @since 2020/5/3 07:48
+ * @version 1.0.0
  */
 @Data
 public class AggItemVo {

@@ -29,8 +29,8 @@ import io.trino.spi.type.VarcharType;
 
 /**
  * @author dengtao
- * @date 2020/10/29 17:52
- * @since v1.0
+ * @since 2020/10/29 17:52
+ * @version 1.0.0
  */
 public class CollectListAggregationFunctions {
 	@AccumulatorStateMetadata(

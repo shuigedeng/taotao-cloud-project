@@ -25,8 +25,8 @@ import java.io.Serializable;
  * HDFS配置类
  *
  * @author dengtao
- * @date 2020/10/29 15:11
- * @since v1.0
+ * @since 2020/10/29 15:11
+ * @version 1.0.0
  */
 @Data
 @Configuration

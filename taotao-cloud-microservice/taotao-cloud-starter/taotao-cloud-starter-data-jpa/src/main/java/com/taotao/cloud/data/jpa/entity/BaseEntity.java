@@ -41,8 +41,8 @@ import java.time.LocalDateTime;
  * 基础实体类
  *
  * @author dengtao
- * @date 2020/9/28 16:28
- * @since v1.0
+ * @since 2020/9/28 16:28
+ * @version 1.0.0
  */
 @Data
 @Accessors(chain = true)

@@ -11,8 +11,8 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * RemoteMemberFallbackImpl
  *
  * @author dengtao
- * @date 2020/11/20 下午4:10
- * @since v1.0
+ * @since 2020/11/20 下午4:10
+ * @version 1.0.0
  */
 public class RemoteMemberFallbackImpl implements FallbackFactory<RemoteMemberService> {
 	@Override

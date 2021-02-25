@@ -22,8 +22,8 @@ import java.lang.annotation.*;
  * 系统操作记录
  *
  * @author dengtao
- * @date 2020/6/3 13:32
- * @since v1.0
+ * @since 2020/6/3 13:32
+ * @version 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

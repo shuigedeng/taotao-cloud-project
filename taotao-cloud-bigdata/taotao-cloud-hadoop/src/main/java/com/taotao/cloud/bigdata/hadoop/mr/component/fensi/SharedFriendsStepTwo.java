@@ -32,8 +32,8 @@ import java.util.Arrays;
  * SharedFriendsStepTwo
  *
  * @author dengtao
- * @date 2020/11/26 下午8:18
- * @since v1.0
+ * @since 2020/11/26 下午8:18
+ * @version 1.0.0
  */
 public class SharedFriendsStepTwo {
 	static class SharedFriendsStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {

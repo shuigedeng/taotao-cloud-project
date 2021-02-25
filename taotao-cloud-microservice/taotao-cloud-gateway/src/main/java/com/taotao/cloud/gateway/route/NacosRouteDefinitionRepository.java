@@ -38,8 +38,8 @@ import java.util.concurrent.Executor;
  * nacos路由数据源
  *
  * @author dengtao
- * @date 2020/5/2 19:26
- * @since v1.0
+ * @since 2020/5/2 19:26
+ * @version 1.0.0
  */
 public class NacosRouteDefinitionRepository implements RouteDefinitionRepository {
 	private static final String TAOTAO_CLOUD_DATA_ID = "taotao-cloud-routes";

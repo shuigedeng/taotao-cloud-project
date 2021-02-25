@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @Classname AuthController
  * @Description TODO
  * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
- * @Date 2019/12/15 4:04 下午
+ * @since 2019/12/15 4:04 下午
  * @Version 1.0
  */
 @RequestMapping("/auth")

@@ -35,8 +35,8 @@ import java.util.UUID;
  * LoginController
  *
  * @author dengtao
- * @date 2021/1/18 下午4:56
- * @since v1.0
+ * @since 2021/1/18 下午4:56
+ * @version 1.0.0
  */
 @Controller
 public class LoginController {

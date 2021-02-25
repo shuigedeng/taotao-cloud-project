@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Classname PreTenantHandler
  * @Description 租户处理器 -主要实现mybatis-plus https://mp.baomidou.com/guide/tenant.html
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-09 23:34
+ * @since 2019-08-09 23:34
  * @Version 1.0
  */
 @Slf4j

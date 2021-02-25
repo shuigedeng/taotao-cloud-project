@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
  * 资源表服务实现类
  *
  * @author dengtao
- * @date 2020-10-16 16:23:05
+ * @since 2020-10-16 16:23:05
  * @since 1.0
  */
 @Service
@@ -161,8 +161,8 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	 * @param sumList 保存的全部ID
 	 * @return java.util.List<java.lang.Long>
 	 * @author dengtao
-	 * @date 2020/11/11 16:48
-	 * @since v1.0
+	 * @since 2020/11/11 16:48
+	 * @version 1.0.0
 	 */
 	public List<Long> recursion(List<Long> pidList, List<Long> sumList) {
 		List<Long> sonIdList = sysResourceRepository.selectIdList(pidList);

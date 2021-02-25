@@ -10,8 +10,8 @@ import javax.persistence.EntityManager;
  * 角色-资源第三方表Repository
  *
  * @author dengtao
- * @date 2020/9/29 18:02
- * @since v1.0
+ * @since 2020/9/29 18:02
+ * @version 1.0.0
  */
 @Repository
 public class SysRoleResourceRepository extends BaseJpaRepository<SysRoleResource, Long> {

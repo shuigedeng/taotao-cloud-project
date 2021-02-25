@@ -14,7 +14,7 @@ import java.util.List;
  * ISysDictItemService
  *
  * @author dengtao
- * @date 2020/4/30 11:25
+ * @since 2020/4/30 11:25
  */
 public interface ISysDictItemService {
 
@@ -23,8 +23,8 @@ public interface ISysDictItemService {
      *
      * @param dictId dictId
      * @author dengtao
-     * @date 2020/9/30 11:29
-     * @since v1.0
+     * @since 2020/9/30 11:29
+     * @version 1.0.0
      */
     void deleteByDictId(Long dictId);
 
@@ -33,8 +33,8 @@ public interface ISysDictItemService {
      *
      * @param dictItemDTO dictItemDTO
      * @author dengtao
-     * @date 2020/9/30 12:37
-     * @since v1.0
+     * @since 2020/9/30 12:37
+     * @version 1.0.0
      */
     SysDictItem save(DictItemDTO dictItemDTO);
 
@@ -44,8 +44,8 @@ public interface ISysDictItemService {
      * @param id          id
      * @param dictItemDTO dictItemDTO
      * @author dengtao
-     * @date 2020/9/30 12:40
-     * @since v1.0
+     * @since 2020/9/30 12:40
+     * @version 1.0.0
      */
     SysDictItem updateById(Long id, DictItemDTO dictItemDTO);
 
@@ -54,8 +54,8 @@ public interface ISysDictItemService {
      *
      * @param id id
      * @author dengtao
-     * @date 2020/9/30 12:44
-     * @since v1.0
+     * @since 2020/9/30 12:44
+     * @version 1.0.0
      */
     Boolean deleteById(Long id);
 
@@ -64,8 +64,8 @@ public interface ISysDictItemService {
      *
      * @param dictItemPageQuery dictItemQuery
      * @author dengtao
-     * @date 2020/9/30 12:48
-     * @since v1.0
+     * @since 2020/9/30 12:48
+     * @version 1.0.0
      */
     Page<SysDictItem> getPage(Pageable page, DictItemPageQuery dictItemPageQuery);
 
@@ -75,8 +75,8 @@ public interface ISysDictItemService {
      * @param dictItemQuery dictItemQuery
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysDictItem>
      * @author dengtao
-     * @date 2020/10/15 11:02
-     * @since v1.0
+     * @since 2020/10/15 11:02
+     * @version 1.0.0
      */
     List<SysDictItem> getInfo(DictItemQuery dictItemQuery);
 }

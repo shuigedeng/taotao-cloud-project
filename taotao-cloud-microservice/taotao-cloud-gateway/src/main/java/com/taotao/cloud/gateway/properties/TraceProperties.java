@@ -23,8 +23,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 日志链路追踪配置
  *
  * @author dengtao
- * @date 2020/5/2 11:15
- * @since v1.0
+ * @since 2020/5/2 11:15
+ * @version 1.0.0
 */
 @Data
 @RefreshScope

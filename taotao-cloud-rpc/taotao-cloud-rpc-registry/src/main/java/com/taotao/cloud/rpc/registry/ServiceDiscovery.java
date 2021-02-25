@@ -42,7 +42,7 @@ public class ServiceDiscovery {
      *
      * @return org.apache.zookeeper.ZooKeeper
      * @author dengtao
-     * @date 2020/2/27 14:01
+     * @since 2020/2/27 14:01
      */
     private ZooKeeper connectZooKeeper() {
         ZooKeeper zk = null;
@@ -65,7 +65,7 @@ public class ServiceDiscovery {
      * @param zk zk
      * @return void
      * @author dengtao
-     * @date 2020/2/27 14:01
+     * @since 2020/2/27 14:01
      */
     private void watchNode(final ZooKeeper zk) {
         try {
@@ -93,7 +93,7 @@ public class ServiceDiscovery {
      *
      * @return java.lang.String
      * @author dengtao
-     * @date 2020/2/27 14:02
+     * @since 2020/2/27 14:02
      */
     public String discover() {
         String data = null;

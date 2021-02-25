@@ -25,8 +25,8 @@ import java.util.Map;
  * DBLoader
  *
  * @author dengtao
- * @date 2020/11/26 下午8:27
- * @since v1.0
+ * @since 2020/11/26 下午8:27
+ * @version 1.0.0
  */
 public class DBLoader {
 	/**
@@ -35,8 +35,8 @@ public class DBLoader {
 	 * @param ruleMap ruleMap
 	 * @return void
 	 * @author dengtao
-	 * @date 2020/11/26 下午8:27
-	 * @since v1.0
+	 * @since 2020/11/26 下午8:27
+	 * @version 1.0.0
 	 */
 	public static void dbLoader(Map<String, String> ruleMap) throws Exception {
 		Connection conn = null;

@@ -31,8 +31,8 @@ import org.springframework.context.annotation.Configuration;
  * RabbitMQ配置类
  *
  * @author dengtao
- * @date 2020/5/28 17:17
- * @since v1.0
+ * @since 2020/5/28 17:17
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnClass(FastBuildRabbitMqProducer.class)

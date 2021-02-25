@@ -16,81 +16,78 @@
 package com.taotao.cloud.core.utils;
 
 import com.taotao.cloud.common.exception.BaseException;
-import lombok.experimental.UtilityClass;
-import org.springframework.boot.convert.ApplicationConversionService;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import lombok.experimental.UtilityClass;
+import org.springframework.boot.convert.ApplicationConversionService;
 
 /**
  * ConvertUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:34
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:34
  */
 @UtilityClass
 public class ConvertUtil {
 
-    /**
-     * 类型转换
-     *
-     * @param value 值
-     * @param type  类型
-     * @return T
-     * @author dengtao
-     * @date 2020/10/15 15:45
-     * @since v1.0
-     */
-    public <T> T convert(Object value, Class<T> type) {
-        if (value == null) {
-            return null;
-        }
-        return (T) ApplicationConversionService.getSharedInstance().convert(value, type);
-    }
+	/**
+	 * 类型转换
+	 *
+	 * @param value 值
+	 * @param type  类型
+	 * @return T
+	 * @author dengtao
+	 * @since 2020/10/15 15:45
+	 */
+	public <T> T convert(Object value, Class<T> type) {
+		if (value == null) {
+			return null;
+		}
+		return (T) ApplicationConversionService.getSharedInstance().convert(value, type);
+	}
 
-    /**
-     * 类型转换
-     *
-     * @param value 值
-     * @param type  类型
-     * @return T
-     * @author dengtao
-     * @date 2020/10/15 15:45
-     * @since v1.0
-     */
-    public <T> T tryConvert(Object value, Class<T> type) {
-        try {
-            return convert(value, type);
-        } catch (Exception e) {
-            return null;
-        }
-    }
+	/**
+	 * 类型转换
+	 *
+	 * @param value 值
+	 * @param type  类型
+	 * @return T
+	 * @author dengtao
+	 * @since 2020/10/15 15:45
+	 */
+	public <T> T tryConvert(Object value, Class<T> type) {
+		try {
+			return convert(value, type);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-    /**
-     * 深度克隆
-     *
-     * @param obj 对象
-     * @return T
-     * @author dengtao
-     * @date 2020/10/15 15:46
-     * @since v1.0
-     */
-    public <T> T deepClone(T obj) {
-        try {
-            try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream()) {
-                try (ObjectOutputStream out = new ObjectOutputStream(byteOut)) {
-                    out.writeObject(obj);
-                    try (ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray())) {
-                        ObjectInputStream in = new ObjectInputStream(byteIn);
-                        return (T) in.readObject();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new BaseException(e.getMessage());
-        }
-    }
+	/**
+	 * 深度克隆
+	 *
+	 * @param obj 对象
+	 * @return T
+	 * @author dengtao
+	 * @since 2020/10/15 15:46
+	 */
+	public <T> T deepClone(T obj) {
+		try {
+			try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream()) {
+				try (ObjectOutputStream out = new ObjectOutputStream(byteOut)) {
+					out.writeObject(obj);
+					try (ByteArrayInputStream byteIn = new ByteArrayInputStream(
+						byteOut.toByteArray())) {
+						ObjectInputStream in = new ObjectInputStream(byteIn);
+						return (T) in.readObject();
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new BaseException(e.getMessage());
+		}
+	}
 }

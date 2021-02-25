@@ -31,7 +31,7 @@
 //  * 部门管理 服务实现类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:11
+//  * @since 2020/4/30 11:11
 //  */
 // @Service
 // public class SysDeptServiceImpl extends SuperServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
@@ -184,7 +184,7 @@
 //      * @param idList
 //      * @return void
 //      * @author dengtao
-//      * @date 2020/4/30 11:12
+//      * @since 2020/4/30 11:12
 //      */
 //     private void checkChildrenExists(int id, List<Integer> idList) {
 //         List<SysDept> deptList = this.list(Wrappers.<SysDept>query().lambda().eq(SysDept::getParentId, id));

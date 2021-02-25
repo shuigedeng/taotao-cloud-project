@@ -25,8 +25,8 @@ import java.lang.annotation.*;
  * StringEnums
  *
  * @author dengtao
- * @date 2020/10/14 13:39
- * @since v1.0
+ * @since 2020/10/14 13:39
+ * @version 1.0.0
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

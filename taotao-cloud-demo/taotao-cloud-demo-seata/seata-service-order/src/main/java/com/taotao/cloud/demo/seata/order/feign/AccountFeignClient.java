@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @date 2019/9/14
+ * @since 2019/9/14
  */
 @FeignClient(name = "account-service")
 public interface AccountFeignClient {

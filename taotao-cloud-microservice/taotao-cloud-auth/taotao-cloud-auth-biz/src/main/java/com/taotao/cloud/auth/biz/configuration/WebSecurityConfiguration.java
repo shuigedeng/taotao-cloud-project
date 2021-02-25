@@ -76,8 +76,8 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VAL
  * web安全配置类
  *
  * @author dengtao
- * @date 2020/4/29 20:14
- * @since v1.0
+ * @since 2020/4/29 20:14
+ * @version 1.0.0
  */
 @Order(2)
 @EnableWebSecurity
@@ -157,7 +157,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      * 这个方法是去数据库查询用户的密码，做权限验证
      *
      * @author dengtao
-     * @date 2020/4/29 20:15
+     * @since 2020/4/29 20:15
      */
     @Autowired
     public void config(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

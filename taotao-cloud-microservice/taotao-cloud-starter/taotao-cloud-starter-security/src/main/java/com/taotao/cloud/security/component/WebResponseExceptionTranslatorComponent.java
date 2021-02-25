@@ -42,8 +42,8 @@ import java.time.format.DateTimeFormatter;
  * 添加CustomWebResponseExceptionTranslator，登录发生异常时指定exceptionTranslator
  *
  * @author dengtao
- * @date 2020/4/30 09:09
- * @since v1.0
+ * @since 2020/4/30 09:09
+ * @version 1.0.0
  */
 public class WebResponseExceptionTranslatorComponent extends DefaultWebResponseExceptionTranslator {
 	public static final String BAD_MSG = "坏的凭证";

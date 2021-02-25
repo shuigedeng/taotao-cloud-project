@@ -8,7 +8,7 @@ import com.taotao.cloud.member.biz.entity.Member;
  * 会员(c端用户)表服务接口
  *
  * @author dengtao
- * @date 2020-10-16 16:23:49
+ * @since 2020-10-16 16:23:49
  * @since 1.0
  */
 public interface IMemberService {
@@ -19,8 +19,8 @@ public interface IMemberService {
 	 * @param memberQuery memberQuery
 	 * @return com.taotao.cloud.uc.biz.entity.MemberUser
 	 * @author dengtao
-	 * @date 2020/10/16 17:58
-	 * @since v1.0
+	 * @since 2020/10/16 17:58
+	 * @version 1.0.0
 	 */
 	Boolean existMember(MemberQuery memberQuery);
 
@@ -30,8 +30,8 @@ public interface IMemberService {
 	 * @param memberDTO memberDTO
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/10/19 09:01
-	 * @since v1.0
+	 * @since 2020/10/19 09:01
+	 * @version 1.0.0
 	 */
 	Member registerUser(MemberDTO memberDTO);
 
@@ -41,8 +41,8 @@ public interface IMemberService {
 	 * @param nicknameOrUserNameOrPhoneOrEmail nicknameOrUserNameOrPhoneOrEmail
 	 * @return com.taotao.cloud.uc.biz.entity.MemberUser
 	 * @author dengtao
-	 * @date 2020/10/19 09:15
-	 * @since v1.0
+	 * @since 2020/10/19 09:15
+	 * @version 1.0.0
 	 */
 	Member findMember(String nicknameOrUserNameOrPhoneOrEmail);
 
@@ -52,8 +52,8 @@ public interface IMemberService {
 	 * @param id id
 	 * @return com.taotao.cloud.member.biz.entity.Member
 	 * @author dengtao
-	 * @date 2020/11/20 下午4:17
-	 * @since v1.0
+	 * @since 2020/11/20 下午4:17
+	 * @version 1.0.0
 	 */
 	Member findMemberById(Long id);
 }

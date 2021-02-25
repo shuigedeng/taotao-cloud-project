@@ -26,8 +26,8 @@ import java.util.List;
  * 数据权限查询参数
  *
  * @author dengtao
- * @date 2020/5/2 16:40
- * @since v1.0
+ * @since 2020/5/2 16:40
+ * @version 1.0.0
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

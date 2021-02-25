@@ -18,41 +18,38 @@ package com.taotao.cloud.common.utils;
 import lombok.experimental.UtilityClass;
 
 /**
- * 高效分布式ID生成算法(sequence),基于Snowflake算法优化实现64位自增ID算法。
- * 其中解决时间回拨问题的优化方案如下：
- * 1. 如果发现当前时间少于上次生成id的时间(时间回拨)，着计算回拨的时间差
- * 2. 如果时间差(offset)小于等于5ms，着等待 offset * 2 的时间再生成
- * 3. 如果offset大于5，则直接抛出异常
+ * 高效分布式ID生成算法(sequence),基于Snowflake算法优化实现64位自增ID算法。 其中解决时间回拨问题的优化方案如下： 1.
+ * 如果发现当前时间少于上次生成id的时间(时间回拨)，着计算回拨的时间差 2. 如果时间差(offset)小于等于5ms，着等待 offset * 2 的时间再生成 3.
+ * 如果offset大于5，则直接抛出异常
  *
  * @author dengtao
- * @date 2019/3/5
- * @since v1.0
+ * @version 1.0.0
+ * @since 2019/3/5
  */
 @UtilityClass
 public class IdGeneratorUtil {
-    private final SequenceUtil WORKER = new SequenceUtil();
 
-    /**
-     * 获取id
-     *
-     * @return long
-     * @author dengtao
-     * @date 2020/10/15 15:14
-     * @since v1.0
-     */
-    public long getId() {
-        return WORKER.nextId();
-    }
+	private final SequenceUtil WORKER = new SequenceUtil();
 
-    /**
-     * 获取id 字符串
-     *
-     * @return java.lang.String
-     * @author dengtao
-     * @date 2020/10/15 15:15
-     * @since v1.0
-     */
-    public String getIdStr() {
-        return String.valueOf(WORKER.nextId());
-    }
+	/**
+	 * 获取id
+	 *
+	 * @return long
+	 * @author dengtao
+	 * @since 2021/2/25 16:18
+	 */
+	public long getId() {
+		return WORKER.nextId();
+	}
+
+	/**
+	 * 获取id 字符串
+	 *
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:19
+	 */
+	public String getIdStr() {
+		return String.valueOf(WORKER.nextId());
+	}
 }

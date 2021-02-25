@@ -27,8 +27,8 @@ import static io.trino.spi.type.VarbinaryType.VARBINARY;
 
 /**
  * @author dengtao
- * @date 2020/10/29 18:04
- * @since v1.0
+ * @since 2020/10/29 18:04
+ * @version 1.0.0
  */
 public class CollectListStatsSerializer implements AccumulatorStateSerializer<CollectListAggregationFunctions.CollectState> {
     @Override

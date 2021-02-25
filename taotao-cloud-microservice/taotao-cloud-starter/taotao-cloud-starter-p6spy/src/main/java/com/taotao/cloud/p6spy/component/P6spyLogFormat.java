@@ -24,8 +24,8 @@ import java.time.format.DateTimeFormatter;
  * P6spy SQL 日志格式化
  *
  * @author dengtao
- * @date 2020/10/14 09:37
- * @since v1.0
+ * @since 2020/10/14 09:37
+ * @version 1.0.0
  */
 public class P6spyLogFormat implements MessageFormattingStrategy {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

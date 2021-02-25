@@ -11,7 +11,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 角色菜单表 Mapper 接口
 //  *
 //  * @author taotao
-//  * @date 2020-05-14 14:36:39
+//  * @since 2020-05-14 14:36:39
 //  */
 // public interface SysRoleMenuMapper extends SuperMapper<SysRoleMenu> {
 //
@@ -21,7 +21,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //      * @param userId
 //      * @return java.util.List<java.lang.Integer>
 //      * @author dengtao
-//      * @date 2020/6/15 11:33
+//      * @since 2020/6/15 11:33
 //     */
 //     @Select("SELECT rm.menu_id " +
 //             "FROM sys_role_menu rm,sys_user_role ur,sys_user u " +

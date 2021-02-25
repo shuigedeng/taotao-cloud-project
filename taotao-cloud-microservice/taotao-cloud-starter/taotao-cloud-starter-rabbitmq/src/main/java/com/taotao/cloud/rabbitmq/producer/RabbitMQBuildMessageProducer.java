@@ -33,8 +33,8 @@ import java.util.concurrent.TimeoutException;
  * RabbitMQBuildMessageProducer
  *
  * @author dengtao
- * @date 2020/5/28 17:34
- * @since v1.0
+ * @since 2020/5/28 17:34
+ * @version 1.0.0
  */
 @Slf4j
 @Component

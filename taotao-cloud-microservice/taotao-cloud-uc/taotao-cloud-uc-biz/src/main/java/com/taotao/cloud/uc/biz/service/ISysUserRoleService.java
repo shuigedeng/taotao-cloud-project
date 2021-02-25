@@ -6,7 +6,7 @@ import java.util.Set;
  * 用户-角色服务类
  *
  * @author dengtao
- * @date 2020/4/30 13:20
+ * @since 2020/4/30 13:20
  */
 public interface ISysUserRoleService {
     /**
@@ -16,8 +16,8 @@ public interface ISysUserRoleService {
      * @param roleIds
      * @return java.lang.Boolean
      * @author dengtao
-     * @date 2020/10/21 09:20
-     * @since v1.0
+     * @since 2020/10/21 09:20
+     * @version 1.0.0
      */
     public Boolean saveUserRoles(Long userId, Set<Long> roleIds);
 }

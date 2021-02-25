@@ -21,8 +21,8 @@ import io.trino.spi.function.GroupedAccumulatorState;
 
 /**
  * @author dengtao
- * @date 2020/10/29 18:06
- * @since v1.0
+ * @since 2020/10/29 18:06
+ * @version 1.0.0
  */
 public class CollectListStatsFactory implements AccumulatorStateFactory<CollectListAggregationFunctions.CollectState> {
 	@Override

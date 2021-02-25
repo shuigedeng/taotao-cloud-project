@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Classname SysSocialController
  * @Description 社交登录
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-07-17 16:51
+ * @since 2019-07-17 16:51
  * @Version 1.0
  */
 @RestController

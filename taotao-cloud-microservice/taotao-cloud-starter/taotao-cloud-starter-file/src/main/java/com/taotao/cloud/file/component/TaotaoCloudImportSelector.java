@@ -30,8 +30,8 @@ import java.util.function.Predicate;
 
 /**
  * @author dengtao
- * @date 2020/10/26 12:59
- * @since v1.0
+ * @since 2020/10/26 12:59
+ * @version 1.0.0
  */
 public class TaotaoCloudImportSelector implements ImportSelector {
 

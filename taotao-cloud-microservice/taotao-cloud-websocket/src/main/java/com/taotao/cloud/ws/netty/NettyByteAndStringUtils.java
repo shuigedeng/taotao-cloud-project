@@ -21,8 +21,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * NettyByteAndStringUtils
  *
  * @author dengtao
- * @date 2020/12/30 下午4:43
- * @since v1.0
+ * @since 2020/12/30 下午4:43
+ * @version 1.0.0
  */
 public class NettyByteAndStringUtils {
 

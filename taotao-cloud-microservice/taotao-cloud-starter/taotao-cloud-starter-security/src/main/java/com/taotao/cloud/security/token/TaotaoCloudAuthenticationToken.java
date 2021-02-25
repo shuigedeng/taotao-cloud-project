@@ -25,8 +25,8 @@ import java.util.Collection;
  * 手机认证token
  *
  * @author dengtao
- * @date 2020/4/29 20:26
- * @since v1.0
+ * @since 2020/4/29 20:26
+ * @version 1.0.0
  */
 public class TaotaoCloudAuthenticationToken extends AbstractAuthenticationToken {
 

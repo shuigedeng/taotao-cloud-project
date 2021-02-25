@@ -8,7 +8,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 岗位管理 Mapper 接口
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:33
+//  * @since 2020/4/30 11:33
 //  */
 // public interface SysJobMapper extends SuperMapper<SysJob> {
 //

@@ -24,8 +24,8 @@ import org.springframework.util.StringUtils;
  * P6spy日志实现
  *
  * @author dengtao
- * @date 2020/10/14 09:38
- * @since v1.0
+ * @since 2020/10/14 09:38
+ * @version 1.0.0
  */
 public class P6spyLogger extends FormattedLogger {
     private Exception e;

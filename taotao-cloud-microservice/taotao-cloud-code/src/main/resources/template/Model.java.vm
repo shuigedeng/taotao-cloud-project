@@ -14,7 +14,7 @@ import java.util.Date;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Getter
 @Setter

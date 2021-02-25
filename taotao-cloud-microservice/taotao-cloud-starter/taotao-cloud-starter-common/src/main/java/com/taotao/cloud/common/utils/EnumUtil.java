@@ -21,28 +21,27 @@ import lombok.experimental.UtilityClass;
  * EnumUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:35
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:35
  */
 @UtilityClass
 public class EnumUtil {
 
-    /**
-     * 通过属性获取枚举
-     *
-     * @param enumType enumType
-     * @param name     name
-     * @return T
-     * @author dengtao
-     * @date 2020/10/15 14:57
-     * @since v1.0
-     */
-    public <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
-        for (T t : enumType.getEnumConstants()) {
-            if (t.name().equalsIgnoreCase(name)) {
-                return t;
-            }
-        }
-        return null;
-    }
+	/**
+	 * 通过属性获取枚举
+	 *
+	 * @param enumType enumType
+	 * @param name     name
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:13
+	 */
+	public <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
+		for (T t : enumType.getEnumConstants()) {
+			if (t.name().equalsIgnoreCase(name)) {
+				return t;
+			}
+		}
+		return null;
+	}
 }

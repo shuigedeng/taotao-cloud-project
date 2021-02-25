@@ -7,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
  * FileService
  *
  * @author dengtao
- * @date 2020/11/12 21:26
- * @since v1.0
+ * @since 2020/11/12 21:26
+ * @version 1.0.0
  */
 public interface FileService {
 	/**
@@ -17,8 +17,8 @@ public interface FileService {
 	 * @param uploadFile 文件内容
 	 * @return com.taotao.cloud.dfs.biz.entity.File
 	 * @author dengtao
-	 * @date 2020/11/20 上午11:00
-	 * @since v1.0
+	 * @since 2020/11/20 上午11:00
+	 * @version 1.0.0
 	 */
 	File upload(MultipartFile uploadFile);
 
@@ -28,8 +28,8 @@ public interface FileService {
 	 * @param id id
 	 * @return com.taotao.cloud.dfs.biz.entity.File
 	 * @author dengtao
-	 * @date 2020/11/20 上午11:14
-	 * @since v1.0
+	 * @since 2020/11/20 上午11:14
+	 * @version 1.0.0
 	 */
 	File findFileById(Long id);
 
@@ -38,7 +38,7 @@ public interface FileService {
 	//  *
 	//  * @param objectName
 	//  * @author dengtao
-	//  * @date 2020/9/9 11:17
+	//  * @since 2020/9/9 11:17
 	//  */
 	// Boolean delete(String objectName);
 	//
@@ -47,7 +47,7 @@ public interface FileService {
 	//  *
 	//  * @param
 	//  * @author dengtao
-	//  * @date 2020/9/9 11:20
+	//  * @since 2020/9/9 11:20
 	//  */
 	// List<OSSObjectSummary> list();
 	//
@@ -57,7 +57,7 @@ public interface FileService {
 	//  * @param outputStream
 	//  * @param objectName
 	//  * @author dengtao
-	//  * @date 2020/9/9 11:23
+	//  * @since 2020/9/9 11:23
 	//  */
 	// void exportOssFile(ServletOutputStream outputStream, String objectName);
 }

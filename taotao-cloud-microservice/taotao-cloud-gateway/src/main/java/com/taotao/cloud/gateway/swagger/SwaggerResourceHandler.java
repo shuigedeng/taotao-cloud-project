@@ -30,8 +30,8 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
  * <br>
  *
  * @author dengtao
- * @date 2020/4/29 22:10
- * @since v1.0
+ * @since 2020/4/29 22:10
+ * @version 1.0.0
  */
 @Component
 @AllArgsConstructor

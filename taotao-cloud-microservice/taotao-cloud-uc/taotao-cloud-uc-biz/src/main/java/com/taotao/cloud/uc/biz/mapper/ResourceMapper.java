@@ -28,8 +28,8 @@ import java.util.List;
 
 /**
  * @author dengtao
- * @date 2020/11/11 16:58
- * @since v1.0
+ * @since 2020/11/11 16:58
+ * @version 1.0.0
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -44,8 +44,8 @@ public interface ResourceMapper {
 	 * @param resourceDTO resourceDTO
 	 * @return com.taotao.cloud.uc.biz.entity.SysResource
 	 * @author dengtao
-	 * @date 2020/11/11 17:21
-	 * @since v1.0
+	 * @since 2020/11/11 17:21
+	 * @version 1.0.0
 	 */
 	SysResource resourceDtoToSysResource(ResourceDTO resourceDTO);
 
@@ -55,8 +55,8 @@ public interface ResourceMapper {
 	 * @param sysResource sysResource
 	 * @return com.taotao.cloud.uc.api.vo.resource.ResourceVO
 	 * @author dengtao
-	 * @date 2020/11/11 17:25
-	 * @since v1.0
+	 * @since 2020/11/11 17:25
+	 * @version 1.0.0
 	 */
 	ResourceVO sysResourceDtoResourceVo(SysResource sysResource);
 
@@ -66,8 +66,8 @@ public interface ResourceMapper {
 	 * @param resourceList userList
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
 	 * @author dengtao
-	 * @date 2020/11/11 15:00
-	 * @since v1.0
+	 * @since 2020/11/11 15:00
+	 * @version 1.0.0
 	 */
 	List<ResourceVO> sysResourceToResourceVo(List<SysResource> resourceList);
 
@@ -78,8 +78,8 @@ public interface ResourceMapper {
 	 * @param sysResource sysResource
 	 * @return void
 	 * @author dengtao
-	 * @date 2020/11/11 16:59
-	 * @since v1.0
+	 * @since 2020/11/11 16:59
+	 * @version 1.0.0
 	 */
 	void copyResourceDtoToSysResource(ResourceDTO resourceDTO, @MappingTarget SysResource sysResource);
 

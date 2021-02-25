@@ -25,8 +25,8 @@ import java.io.IOException;
  * InfoBean
  *
  * @author dengtao
- * @date 2020/11/26 下午8:32
- * @since v1.0
+ * @since 2020/11/26 下午8:32
+ * @version 1.0.0
  */
 public class InfoBean implements Writable {
 

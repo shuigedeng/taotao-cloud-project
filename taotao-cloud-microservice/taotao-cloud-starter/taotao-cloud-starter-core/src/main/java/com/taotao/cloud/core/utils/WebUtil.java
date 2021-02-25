@@ -42,8 +42,8 @@ import java.util.Map;
  * WebUtil
  *
  * @author dengtao
- * @date 2020/6/2 16:43
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:43
  */
 public class WebUtil {
 
@@ -72,6 +72,7 @@ public class WebUtil {
 	}
 
 	public static class WebContext {
+
 		private final HttpServletRequest request;
 		private final HttpServletResponse response;
 
@@ -136,9 +137,11 @@ public class WebUtil {
 	 * @return 请求体
 	 */
 	public static String getBodyString(ServerHttpRequest serverHttpRequest) {
-		HttpMessageReader<byte[]> httpMessageReader = new DecoderHttpMessageReader(new ByteArrayDecoder());
+		HttpMessageReader<byte[]> httpMessageReader = new DecoderHttpMessageReader(
+			new ByteArrayDecoder());
 		ResolvableType resolvableType = ResolvableType.forClass(byte[].class);
-		Mono<byte[]> mono = httpMessageReader.readMono(resolvableType, serverHttpRequest, Collections.emptyMap());
+		Mono<byte[]> mono = httpMessageReader
+			.readMono(resolvableType, serverHttpRequest, Collections.emptyMap());
 		return mono.map(String::new).block();
 	}
 

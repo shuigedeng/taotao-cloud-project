@@ -38,8 +38,8 @@ import java.nio.charset.Charset;
  * 自定义返回util
  *
  * @author dengtao
- * @date 2020/5/2 11:22
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 11:22
  */
 @UtilityClass
 public class ResponseUtil {
@@ -50,14 +50,12 @@ public class ResponseUtil {
 	 * @param response   response
 	 * @param msg        返回信息
 	 * @param httpStatus 返回状态码
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:47
-	 * @since v1.0
+	 * @since 2020/10/15 15:47
 	 */
 	public void writeResponse(HttpServletResponse response,
-							  String msg,
-							  int httpStatus) throws IOException {
+		String msg,
+		int httpStatus) throws IOException {
 		Result<String> result = Result.failed(null, httpStatus, msg);
 		writeResponse(response, result);
 	}
@@ -67,10 +65,8 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param obj      数据对象
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:47
-	 * @since v1.0
+	 * @since 2020/10/15 15:47
 	 */
 	public void success(HttpServletResponse response, @NonNull Object obj) throws IOException {
 		Result<?> result = Result.succeed(obj);
@@ -82,10 +78,8 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据对象
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:47
-	 * @since v1.0
+	 * @since 2020/10/15 15:47
 	 */
 	public void success(HttpServletResponse response, Result<?> result) throws IOException {
 		writeResponse(response, result);
@@ -96,10 +90,8 @@ public class ResponseUtil {
 	 *
 	 * @param response   response
 	 * @param resultEnum 数据对象
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:48
-	 * @since v1.0
+	 * @since 2020/10/15 15:48
 	 */
 	public void success(HttpServletResponse response, ResultEnum resultEnum) throws IOException {
 		Result<String> result = Result.succeed(resultEnum);
@@ -111,10 +103,8 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param msg      数据
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:49
-	 * @since v1.0
+	 * @since 2020/10/15 15:49
 	 */
 	public void failed(HttpServletResponse response, String msg) throws IOException {
 		Result<String> result = Result.failed(msg);
@@ -128,10 +118,10 @@ public class ResponseUtil {
 	 * @param httpStatus 状态码
 	 * @param msg        数据
 	 * @author dengtao
-	 * @date 2020/10/15 15:51
-	 * @since v1.0
+	 * @since 2020/10/15 15:51
 	 */
-	public void failed(HttpServletResponse exchange, int httpStatus, String msg) throws IOException {
+	public void failed(HttpServletResponse exchange, int httpStatus, String msg)
+		throws IOException {
 		Result<String> result = Result.failed(httpStatus, msg);
 		writeResponse(exchange, result);
 	}
@@ -141,10 +131,8 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:49
-	 * @since v1.0
+	 * @since 2020/10/15 15:49
 	 */
 	public void failed(HttpServletResponse response, Result<?> result) throws IOException {
 		writeResponse(response, result);
@@ -155,12 +143,11 @@ public class ResponseUtil {
 	 *
 	 * @param response   response
 	 * @param resultEnum 数据
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:49
-	 * @since v1.0
+	 * @since 2020/10/15 15:49
 	 */
-	public static void failed(HttpServletResponse response, ResultEnum resultEnum) throws IOException {
+	public static void failed(HttpServletResponse response, ResultEnum resultEnum)
+		throws IOException {
 		Result<String> result = Result.failed(resultEnum);
 		writeResponse(response, result);
 	}
@@ -170,10 +157,8 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:50
-	 * @since v1.0
+	 * @since 2020/10/15 15:50
 	 */
 	private void writeResponse(HttpServletResponse response, Result<?> result) throws IOException {
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
@@ -193,8 +178,7 @@ public class ResponseUtil {
 	 * @param msg        数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:50
-	 * @since v1.0
+	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> writeResponse(ServerWebExchange exchange, int httpStatus, String msg) {
 		Result<String> result = Result.failed(msg, httpStatus);
@@ -208,8 +192,7 @@ public class ResponseUtil {
 	 * @param msg      数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:50
-	 * @since v1.0
+	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> failed(ServerWebExchange exchange, String msg) {
 		Result<String> result = Result.failed(msg);
@@ -223,8 +206,7 @@ public class ResponseUtil {
 	 * @param result   数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:50
-	 * @since v1.0
+	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> failed(ServerWebExchange exchange, Result<?> result) {
 		return writeResponse(exchange, result);
@@ -238,8 +220,7 @@ public class ResponseUtil {
 	 * @param msg        数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:51
-	 * @since v1.0
+	 * @since 2020/10/15 15:51
 	 */
 	public Mono<Void> failed(ServerWebExchange exchange, int httpStatus, String msg) {
 		Result<String> result = Result.failed(httpStatus, msg);
@@ -253,8 +234,7 @@ public class ResponseUtil {
 	 * @param resultEnum 状态码
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:51
-	 * @since v1.0
+	 * @since 2020/10/15 15:51
 	 */
 	public Mono<Void> failed(ServerWebExchange exchange, ResultEnum resultEnum) {
 		Result<String> result = Result.failed(resultEnum);
@@ -268,8 +248,7 @@ public class ResponseUtil {
 	 * @param result   数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author dengtao
-	 * @date 2020/10/15 15:52
-	 * @since v1.0
+	 * @since 2020/10/15 15:52
 	 */
 	public Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {
 		ServerHttpResponse response = exchange.getResponse();
@@ -278,7 +257,9 @@ public class ResponseUtil {
 		response.setStatusCode(HttpStatus.OK);
 		response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 		DataBufferFactory dataBufferFactory = response.bufferFactory();
-		DataBuffer buffer = dataBufferFactory.wrap(JsonUtil.toJSONString(result).getBytes(Charset.defaultCharset()));
-		return response.writeWith(Mono.just(buffer)).doOnSuccess((error) -> DataBufferUtils.release(buffer));
+		DataBuffer buffer = dataBufferFactory
+			.wrap(JsonUtil.toJSONString(result).getBytes(Charset.defaultCharset()));
+		return response.writeWith(Mono.just(buffer))
+			.doOnSuccess((error) -> DataBufferUtils.release(buffer));
 	}
 }

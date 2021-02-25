@@ -30,8 +30,8 @@ import java.util.Objects;
  * 请求时间过滤
  *
  * @author dengtao
- * @date 2020/4/29 22:13
- * @since v1.0
+ * @since 2020/4/29 22:13
+ * @version 1.0.0
  */
 @Component
 public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactory<RequestTimeGatewayFilterFactory.Config> {

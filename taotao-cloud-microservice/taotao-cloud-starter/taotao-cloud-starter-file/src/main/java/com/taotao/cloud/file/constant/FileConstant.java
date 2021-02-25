@@ -4,8 +4,8 @@ package com.taotao.cloud.file.constant;
  * 分布式文件存储常量
  *
  * @author dengtao
- * @date 2020/10/26 09:36
- * @since v1.0
+ * @since 2020/10/26 09:36
+ * @version 1.0.0
  */
 public interface FileConstant {
 	/**

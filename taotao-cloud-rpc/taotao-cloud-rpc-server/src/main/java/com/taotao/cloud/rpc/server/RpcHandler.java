@@ -39,7 +39,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 * @param request request
 	 * @return void
 	 * @author dengtao
-	 * @date 2020/2/27 14:42
+	 * @since 2020/2/27 14:42
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, RpcRequest request) throws Exception {
@@ -62,7 +62,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 * @param request request
 	 * @return java.lang.Object
 	 * @author dengtao
-	 * @date 2020/2/27 14:46
+	 * @since 2020/2/27 14:46
 	 */
 	private Object doRequestHandle(RpcRequest request) throws Throwable {
 		String className = request.getClassName();

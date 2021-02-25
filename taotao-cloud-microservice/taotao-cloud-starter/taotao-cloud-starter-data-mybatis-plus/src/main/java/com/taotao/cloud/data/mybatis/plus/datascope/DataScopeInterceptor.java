@@ -46,8 +46,8 @@ import java.util.stream.Collectors;
  * Mybatis 拦截器 主要用于数据权限拦截
  *
  * @author dengtao
- * @date 2020/5/2 16:40
- * @since v1.0
+ * @since 2020/5/2 16:40
+ * @version 1.0.0
  */
 @Slf4j
 @AllArgsConstructor

@@ -20,7 +20,7 @@ import java.io.IOException;
  * 3.封装成自己的Authenticaiton的实现类SmsCodeAuthenticationToken（未认证）
  * 4.调用 AuthenticationManager 的 authenticate 方法进行验证（即SmsCodeAuthenticationProvider）
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-07-08 11:46
+ * @since 2019-07-08 11:46
  * @Version 1.0
  */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {

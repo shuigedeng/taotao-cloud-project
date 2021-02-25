@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * 远程调用订单模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteOrderService", value = ServiceNameConstant.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderFallbackImpl.class)
 public interface RemoteOrderService {

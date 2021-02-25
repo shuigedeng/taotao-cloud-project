@@ -25,8 +25,8 @@ import java.util.ArrayList;
 
 /**
  * @author dengtao
- * @date 2020/11/25 下午5:42
- * @since v1.0
+ * @since 2020/11/25 下午5:42
+ * @version 1.0.0
  */
 public class MetaUtils {
 	public static JSONObject getLogMetaJson() {

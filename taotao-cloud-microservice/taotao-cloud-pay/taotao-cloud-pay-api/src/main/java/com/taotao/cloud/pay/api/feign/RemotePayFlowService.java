@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * 远程调用快递公司模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "RemotePayFlowService", value = ServiceNameConstant.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemotePayFlowFallbackImpl.class)
 public interface RemotePayFlowService {
@@ -23,8 +23,8 @@ public interface RemotePayFlowService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<ChatbotVO>
 	 * @author dengtao
-	 * @date 2020/11/20 上午10:45
-	 * @since v1.0
+	 * @since 2020/11/20 上午10:45
+	 * @version 1.0.0
 	 */
 	@GetMapping("/pay/flow/info/id/{id:[0-9]*}")
 	Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id);

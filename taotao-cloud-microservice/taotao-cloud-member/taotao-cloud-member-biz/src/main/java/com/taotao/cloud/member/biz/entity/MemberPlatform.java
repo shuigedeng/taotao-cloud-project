@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * 第三方登录信息
  *
  * @author dengtao
- * @date 2020/6/15 11:00
+ * @since 2020/6/15 11:00
  */
 @Data
 @SuperBuilder

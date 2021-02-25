@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * 远程调用快递公司模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteEmailService", value = ServiceNameConstant.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemoteEmailFallbackImpl.class)
 public interface RemoteEmailService {
@@ -23,8 +23,8 @@ public interface RemoteEmailService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<ChatbotVO>
 	 * @author dengtao
-	 * @date 2020/11/20 上午10:45
-	 * @since v1.0
+	 * @since 2020/11/20 上午10:45
+	 * @version 1.0.0
 	 */
 	@GetMapping("/email/info/id/{id:[0-9]*}")
 	public Result<EmailVO> findEmailById(@PathVariable(value = "id") Long id);

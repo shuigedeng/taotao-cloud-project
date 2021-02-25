@@ -34,7 +34,7 @@ public class SerializationUtil {
      * @param clazz 类型
      * @return com.dyuproject.protostuff.Schema<T>
      * @author dengtao
-     * @date 2020/2/27 11:03
+     * @since 2020/2/27 11:03
      */
     public static <T> Schema<T> getSchema(Class<T> clazz) {
         Schema<T> schema = (Schema<T>) cachedMap.get(clazz);
@@ -51,7 +51,7 @@ public class SerializationUtil {
      * @param obj 类型
      * @return byte[]
      * @author dengtao
-     * @date 2020/2/27 11:02
+     * @since 2020/2/27 11:02
      */
     public static <T> byte[] serialize(T obj) throws IllegalStateException {
         Class<T> clazz = (Class<T>) obj.getClass();
@@ -73,7 +73,7 @@ public class SerializationUtil {
      * @param clazz 类型
      * @return T 类
      * @author dengtao
-     * @date 2020/2/27 11:03
+     * @since 2020/2/27 11:03
      */
     public static <T> T deserialize(byte[] data, Class<T> clazz) throws IllegalStateException {
         try {

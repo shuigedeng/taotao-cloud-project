@@ -15,80 +15,71 @@
  */
 package com.taotao.cloud.common.enums;
 
-
 import com.taotao.cloud.common.constant.SecurityConstant;
 
 /**
  * 用户登录类型
  *
  * @author dengtao
- * @date 2020/4/29 18:11
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 18:11
  */
 public enum LoginTypeEnum implements BaseEnum {
-    /**
-     * 用户密码登录
-     */
-    normal(1, SecurityConstant.NORMAL, "用户密码登录"),
-    /**
-     * 短信密码登录
-     */
-    sms(2, SecurityConstant.SMS, "短信密码登录"),
-    /**
-     * qq登录
-     */
-    qq(3, SecurityConstant.LOGIN_QQ, "qq登录"),
-    /**
-     * 微信登录
-     */
-    weixin(4, SecurityConstant.LOGIN_WEIXIN, "微信登录"),
-    /**
-     * gitee登录
-     */
-    gitee(5, SecurityConstant.LOGIN_GITEE, "gitee登录"),
-    /**
-     * github登录
-     */
-    github(6, SecurityConstant.LOGIN_GITHUB, "github登录");
+	/**
+	 * 用户密码登录
+	 */
+	NORMAL(1, SecurityConstant.NORMAL, "用户密码登录"),
+	/**
+	 * 短信密码登录
+	 */
+	SMS(2, SecurityConstant.SMS, "短信密码登录"),
+	/**
+	 * qq登录
+	 */
+	LOGIN_QQ(3, SecurityConstant.LOGIN_QQ, "qq登录"),
+	/**
+	 * 微信登录
+	 */
+	LOGIN_WEIXIN(4, SecurityConstant.LOGIN_WEIXIN, "微信登录"),
+	/**
+	 * gitee登录
+	 */
+	LOGIN_GITEE(5, SecurityConstant.LOGIN_GITEE, "gitee登录"),
+	/**
+	 * github登录
+	 */
+	LOGIN_GITHUB(6, SecurityConstant.LOGIN_GITHUB, "github登录");
 
-    private final Integer value;
-    private String type;
-    private String description;
+	private final Integer value;
+	private final String type;
+	private final String description;
 
-    LoginTypeEnum(Integer value, String type, String description) {
-        this.value = value;
-        this.type = type;
-        this.description = description;
-    }
+	LoginTypeEnum(Integer value, String type, String description) {
+		this.value = value;
+		this.type = type;
+		this.description = description;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getNameByCode(int code) {
+		for (LoginTypeEnum result : LoginTypeEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getNameByCode(int code) {
-        for (LoginTypeEnum result : LoginTypeEnum.values()) {
-            if (result.getCode() == code) {
-                return result.name().toLowerCase();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Integer getCode() {
-        return this.value;
-    }
+	@Override
+	public Integer getCode() {
+		return this.value;
+	}
 }

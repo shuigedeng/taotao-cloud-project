@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * TaoTaoCloudUcApplication
  *
  * @author dengtao
- * @date 2020/11/30 下午3:33
- * @since v1.0
+ * @since 2020/11/30 下午3:33
+ * @version 1.0.0
  */
 @EnableTaoTaoCloudSwagger2
 @EnableTaoTaoCloudOauth2ResourceServer

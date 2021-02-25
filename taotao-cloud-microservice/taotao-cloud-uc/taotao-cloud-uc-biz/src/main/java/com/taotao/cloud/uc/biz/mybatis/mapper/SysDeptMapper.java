@@ -8,7 +8,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 部门管理 Mapper 接口
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:12
+//  * @since 2020/4/30 11:12
 //  */
 // public interface SysDeptMapper extends SuperMapper<SysDept> {
 //

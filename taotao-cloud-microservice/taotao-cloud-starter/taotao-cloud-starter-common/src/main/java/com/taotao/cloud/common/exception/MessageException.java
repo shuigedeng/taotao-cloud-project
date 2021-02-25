@@ -21,31 +21,32 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * 消息异常
  *
  * @author dengtao
- * @date 2020/5/13 09:53
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/13 09:53
  */
 public class MessageException extends BaseException {
-    public MessageException(String message) {
-        super(message);
-    }
 
-    public MessageException(Integer code, String message) {
-        super(code, message);
-    }
+	public MessageException(String message) {
+		super(message);
+	}
 
-    public MessageException(String message, Throwable e) {
-        super(message, e);
-    }
+	public MessageException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public MessageException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public MessageException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public MessageException(ResultEnum result) {
-        super(result);
-    }
+	public MessageException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public MessageException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public MessageException(ResultEnum result) {
+		super(result);
+	}
+
+	public MessageException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

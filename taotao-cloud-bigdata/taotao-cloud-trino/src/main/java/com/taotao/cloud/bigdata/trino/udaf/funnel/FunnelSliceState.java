@@ -24,8 +24,8 @@ import io.trino.spi.type.Type;
  * FunnelSliceState
  *
  * @author dengtao
- * @date 2021/1/25 下午3:57
- * @since v1.0
+ * @since 2021/1/25 下午3:57
+ * @version 1.0.0
  */
 public interface FunnelSliceState extends AccumulatorState {
 	Slice getSlice();

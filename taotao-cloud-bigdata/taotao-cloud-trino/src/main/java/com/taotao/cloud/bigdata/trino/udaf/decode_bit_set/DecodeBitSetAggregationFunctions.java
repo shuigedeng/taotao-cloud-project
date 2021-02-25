@@ -28,8 +28,8 @@ import io.trino.spi.type.StandardTypes;
 
 /**
  * @author dengtao
- * @date 2020/10/29 17:47
- * @since v1.0
+ * @since 2020/10/29 17:47
+ * @version 1.0.0
  */
 @AggregationFunction("tapdb_bitset_decode")
 public class DecodeBitSetAggregationFunctions {

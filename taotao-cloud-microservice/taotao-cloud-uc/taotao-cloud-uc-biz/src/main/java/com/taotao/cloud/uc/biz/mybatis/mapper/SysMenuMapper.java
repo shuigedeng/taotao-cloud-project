@@ -11,7 +11,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 菜单权限表 Mapper 接口
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:43
+//  * @since 2020/4/30 11:43
 //  */
 // public interface SysMenuMapper extends SuperMapper<SysMenu> {
 //

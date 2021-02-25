@@ -29,8 +29,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * ElkWebConfiguration
  *
  * @author: dengtao
- * @date : 2019-05-27 14:30
- * @since v1.0
+ * @since : 2019-05-27 14:30
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnWebApplication

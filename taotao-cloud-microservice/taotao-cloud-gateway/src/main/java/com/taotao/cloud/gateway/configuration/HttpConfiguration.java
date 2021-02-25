@@ -34,8 +34,8 @@ import javax.annotation.PreDestroy;
  * 配置http服务，使其即支持http又支持https服务（https通过配置文件配置）
  *
  * @author dengtao
- * @date 2020/4/29 22:11
- * @since v1.0
+ * @since 2020/4/29 22:11
+ * @version 1.0.0
  */
 @Configuration
 public class HttpConfiguration {

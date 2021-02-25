@@ -28,7 +28,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
  * @Classname WebSecurityConfig
  * @Description Security配置类
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-05-07 09:10
+ * @since 2019-05-07 09:10
  * @Version 1.0
  */
 @Slf4j

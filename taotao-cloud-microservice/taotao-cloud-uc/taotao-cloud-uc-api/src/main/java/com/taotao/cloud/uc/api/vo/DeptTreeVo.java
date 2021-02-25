@@ -12,7 +12,7 @@ import java.util.List;
  * 构建部门树vo
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @Data
 @Builder

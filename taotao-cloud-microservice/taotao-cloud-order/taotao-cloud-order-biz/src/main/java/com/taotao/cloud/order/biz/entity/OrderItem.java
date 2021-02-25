@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * 订单明细表
  *
  * @author dengtao
- * @date 2020/4/30 15:42
+ * @since 2020/4/30 15:42
  */
 @Data
 @SuperBuilder

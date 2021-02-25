@@ -6,7 +6,7 @@ import lombok.Data;
  * @Classname WeixinUserInfo
  * @Description 微信返回的用户信息
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-23 16:50
+ * @since 2019-08-23 16:50
  * @Version 1.0
  */
 @Data

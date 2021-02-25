@@ -36,8 +36,8 @@ import java.util.Map;
  * 自定义异常处理
  *
  * @author dengtao
- * @date 2020/4/29 22:12
- * @since v1.0
+ * @since 2020/4/29 22:12
+ * @version 1.0.0
  */
 public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandler {
     public JsonErrorWebExceptionHandler(ErrorAttributes errorAttributes,

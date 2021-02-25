@@ -38,8 +38,8 @@ import org.springframework.kafka.core.KafkaTemplate;
  * 当web项目引入此依赖时，自动配置对应的内容 初始化log的事件监听与切面配置
  *
  * @author dengtao
- * @date 2020/4/30 10:21
- * @since v1.0
+ * @since 2020/4/30 10:21
+ * @version 1.0.0
  */
 @Slf4j
 @EnableTaoTaoCloudAsync

@@ -19,8 +19,8 @@ import lombok.Data;
 
 /**
  * @author dengtao
- * @date 2020/11/9 09:54
- * @since v1.0
+ * @since 2020/11/9 09:54
+ * @version 1.0.0
  */
 @Data
 public class AddUserInput {

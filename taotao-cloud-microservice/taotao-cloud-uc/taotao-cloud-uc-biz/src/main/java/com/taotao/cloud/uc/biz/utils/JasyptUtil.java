@@ -21,8 +21,8 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
  * @author dengtao
- * @date 2020/11/13 09:25
- * @since v1.0
+ * @since 2020/11/13 09:25
+ * @version 1.0.0
  */
 public class JasyptUtil {
 

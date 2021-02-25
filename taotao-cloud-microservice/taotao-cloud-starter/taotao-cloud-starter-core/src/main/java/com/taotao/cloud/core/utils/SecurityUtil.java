@@ -19,24 +19,23 @@ import cn.hutool.core.util.CharsetUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.model.SecurityUser;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Objects;
+import javax.servlet.http.HttpServletResponse;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Objects;
-
 /**
  * 安全服务工具类
  *
  * @author dengtao
- * @date 2020/4/30 10:39
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:39
  */
 @UtilityClass
 public class SecurityUtil {
@@ -46,10 +45,8 @@ public class SecurityUtil {
 	 *
 	 * @param result   result
 	 * @param response response
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:54
-	 * @since v1.0
+	 * @since 2020/10/15 15:54
 	 */
 	public void writeResponse(Result<?> result, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding(CharsetUtil.UTF_8);
@@ -64,8 +61,7 @@ public class SecurityUtil {
 	 *
 	 * @return org.springframework.security.core.Authentication
 	 * @author dengtao
-	 * @date 2020/10/15 15:54
-	 * @since v1.0
+	 * @since 2020/10/15 15:54
 	 */
 	public Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
@@ -77,8 +73,7 @@ public class SecurityUtil {
 	 * @param authentication 认证信息
 	 * @return com.taotao.cloud.core.model.SecurityUser
 	 * @author dengtao
-	 * @date 2020/10/15 15:54
-	 * @since v1.0
+	 * @since 2020/10/15 15:54
 	 */
 	public SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
@@ -98,8 +93,7 @@ public class SecurityUtil {
 	 *
 	 * @return com.taotao.cloud.core.model.SecurityUser
 	 * @author dengtao
-	 * @date 2020/10/15 15:55
-	 * @since v1.0
+	 * @since 2020/10/15 15:55
 	 */
 	public SecurityUser getUser() {
 		Authentication authentication = getAuthentication();
@@ -111,8 +105,7 @@ public class SecurityUtil {
 	 *
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:55
-	 * @since v1.0
+	 * @since 2020/10/15 15:55
 	 */
 	public String getUsername() {
 		SecurityUser user = getUser();
@@ -124,8 +117,7 @@ public class SecurityUtil {
 	 *
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:55
-	 * @since v1.0
+	 * @since 2020/10/15 15:55
 	 */
 	public Long getUserId() {
 		SecurityUser user = getUser();
@@ -137,8 +129,7 @@ public class SecurityUtil {
 	 *
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:55
-	 * @since v1.0
+	 * @since 2020/10/15 15:55
 	 */
 	public String getClientId() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

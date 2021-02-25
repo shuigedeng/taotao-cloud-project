@@ -16,40 +16,48 @@
 package com.taotao.cloud.core.mvc.constraints;
 
 import com.taotao.cloud.core.mvc.validator.EnumValueValidator;
-
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
 
 /**
  * EnumValue
  *
  * @author dengtao
- * @date 2020/10/14 13:39
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/10/14 13:39
  */
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
+	ElementType.CONSTRUCTOR, ElementType.PARAMETER})
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {EnumValueValidator.class})
 @Repeatable(EnumValue.List.class)
 public @interface EnumValue {
-    // 默认错误消息
-    String message() default "the integer is not one of the enum values";
 
-    // 约束注解在验证时所属的组别
-    Class<?>[] groups() default {};
+	// 默认错误消息
+	String message() default "the integer is not one of the enum values";
 
-    // 约束注解的有效负载
-    Class<? extends Payload>[] payload() default {};
+	// 约束注解在验证时所属的组别
+	Class<?>[] groups() default {};
 
-    Class<? extends Enum> value();
+	// 约束注解的有效负载
+	Class<? extends Payload>[] payload() default {};
 
-    // 同时指定多个时使用
-    @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
-    @Documented
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface List {
-        EnumValue[] value();
-    }
+	Class<? extends Enum> value();
+
+	// 同时指定多个时使用
+	@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
+		ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+	@Documented
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface List {
+
+		EnumValue[] value();
+	}
 }

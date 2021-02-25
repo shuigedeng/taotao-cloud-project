@@ -26,8 +26,8 @@
 //  * OpenId认证提供者
 //  *
 //  * @author dengtao
-//  * @date 2020/4/29 21:24
-//  * @since v1.0
+//  * @since 2020/4/29 21:24
+//  * @version 1.0.0
 //  */
 // public class OpenIdAuthenticationProvider implements AuthenticationProvider {
 //

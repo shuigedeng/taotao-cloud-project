@@ -25,8 +25,8 @@ import org.springframework.context.annotation.Bean;
  * HbaseAutoConfiguration
  *
  * @author dengtao
- * @date 2020/10/30 11:10
- * @since v1.0
+ * @since 2020/10/30 11:10
+ * @version 1.0.0
  */
 @org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(HbaseProperties.class)

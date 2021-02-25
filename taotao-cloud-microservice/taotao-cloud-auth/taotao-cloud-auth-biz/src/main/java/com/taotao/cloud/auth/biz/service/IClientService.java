@@ -26,8 +26,8 @@ import java.util.List;
  * IClientService
  *
  * @author dengtao
- * @date 2020/4/29 15:13
- * @since v1.0
+ * @since 2020/4/29 15:13
+ * @version 1.0.0
  */
 public interface IClientService {
 
@@ -36,7 +36,7 @@ public interface IClientService {
      *
      * @param clientPageQuery clientQuery
      * @author dengtao
-     * @date 2020/4/29 15:23
+     * @since 2020/4/29 15:23
      */
     Page<Client> listClient(ClientPageQuery clientPageQuery);
 
@@ -46,7 +46,7 @@ public interface IClientService {
      * @param clientDto clientDto
      * @return com.taotao.cloud.common.model.Result
      * @author dengtao
-     * @date 2020/4/29 15:14
+     * @since 2020/4/29 15:14
      */
     Boolean saveClient(ClientDTO clientDto);
 
@@ -56,7 +56,7 @@ public interface IClientService {
      * @param clientId clientId
      * @return com.taotao.cloud.common.model.Result<java.lang.String>
      * @author dengtao
-     * @date 2020/4/29 15:24
+     * @since 2020/4/29 15:24
      */
     Boolean delByClientId(String clientId);
 
@@ -65,7 +65,7 @@ public interface IClientService {
      *
      * @param clientId clientId
      * @author dengtao
-     * @date 2020/8/6 09:51
+     * @since 2020/8/6 09:51
      */
     Client getByClientId(String clientId);
 
@@ -73,8 +73,8 @@ public interface IClientService {
      * 获取所有应用
      *
      * @author dengtao
-     * @date 2020/10/9 14:48
-     * @since v1.0
+     * @since 2020/10/9 14:48
+     * @version 1.0.0
      */
     List<Client> getAllClient();
 
@@ -84,8 +84,8 @@ public interface IClientService {
      * @param clientId  clientId
      * @param clientDto clientDto
      * @author dengtao
-     * @date 2020/10/9 14:56
-     * @since v1.0
+     * @since 2020/10/9 14:56
+     * @version 1.0.0
      */
     Boolean updateClient(String clientId, ClientDTO clientDto);
 }

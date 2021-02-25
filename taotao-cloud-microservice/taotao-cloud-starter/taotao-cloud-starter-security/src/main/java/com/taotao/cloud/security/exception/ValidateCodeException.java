@@ -21,8 +21,8 @@ import org.springframework.security.core.AuthenticationException;
  * ValidateCodeException
  *
  * @author dengtao
- * @date 2020/6/15 11:21
- * @since v1.0
+ * @since 2020/6/15 11:21
+ * @version 1.0.0
 */
 public class ValidateCodeException extends AuthenticationException {
 

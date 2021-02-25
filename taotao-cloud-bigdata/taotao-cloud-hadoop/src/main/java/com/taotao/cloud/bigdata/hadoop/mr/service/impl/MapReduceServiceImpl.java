@@ -25,8 +25,8 @@ import java.io.IOException;
  * MapReduceServiceImpl
  *
  * @author dengtao
- * @date 2020/10/30 17:40
- * @since v1.0
+ * @since 2020/10/30 17:40
+ * @version 1.0.0
  */
 public class MapReduceServiceImpl implements MapReduceService {
 	// 默认reduce输出目录

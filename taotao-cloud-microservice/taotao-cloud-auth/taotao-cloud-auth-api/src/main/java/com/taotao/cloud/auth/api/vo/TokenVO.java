@@ -29,8 +29,8 @@ import java.util.Date;
  * TokenVO
  *
  * @author dengtao
- * @date 2020/4/29 16:56
- * @since v1.0
+ * @since 2020/4/29 16:56
+ * @version 1.0.0
  */
 @Data
 @Builder

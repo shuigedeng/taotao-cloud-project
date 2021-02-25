@@ -21,8 +21,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author dengtao
- * @date 2020/11/9 09:53
- * @since v1.0
+ * @since 2020/11/9 09:53
+ * @version 1.0.0
  */
 @Data
 @AllArgsConstructor

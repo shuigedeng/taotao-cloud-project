@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author dengtao
  * @version v1.0.0
- * @date 2020/9/22 13:30
+ * @since 2020/9/22 13:30
  */
 public class AccessLogInterceptor implements Interceptor {
 	private static final Logger logger = LoggerFactory.getLogger(AccessLogInterceptor.class);

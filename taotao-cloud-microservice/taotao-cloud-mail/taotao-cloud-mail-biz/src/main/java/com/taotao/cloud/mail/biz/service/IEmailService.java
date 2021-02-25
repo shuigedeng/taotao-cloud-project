@@ -19,8 +19,8 @@ import com.taotao.cloud.mail.biz.entity.Email;
 
 /**
  * @author dengtao
- * @date 2020/11/13 09:59
- * @since v1.0
+ * @since 2020/11/13 09:59
+ * @version 1.0.0
  */
 public interface IEmailService {
 
@@ -30,8 +30,8 @@ public interface IEmailService {
 	 * @param id id
 	 * @return com.taotao.cloud.log.biz.entity.MemberLogin
 	 * @author dengtao
-	 * @date 2020/11/20 下午1:08
-	 * @since v1.0
+	 * @since 2020/11/20 下午1:08
+	 * @version 1.0.0
 	 */
 	Email findEmailById(Long id);
 }

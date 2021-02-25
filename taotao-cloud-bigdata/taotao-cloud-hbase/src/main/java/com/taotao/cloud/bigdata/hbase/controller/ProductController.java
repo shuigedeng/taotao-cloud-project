@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
  * ProductController
  *
  * @author dengtao
- * @date 2020/10/30 11:10
- * @since v1.0
+ * @since 2020/10/30 11:10
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/product")

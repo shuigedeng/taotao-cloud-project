@@ -12,8 +12,8 @@ import org.slf4j.{Logger, LoggerFactory}
  * -e dev -b 106.13.201.31:9092 -t taotao-cloud-sys-log -m 0
  *
  * @author dengtao
- * @date 2020/11/27 下午3:06
- * @since v1.0
+ * @since 2020/11/27 下午3:06
+ * @version 1.0.0
  */
 object AccessLogConsole {
   val logger: Logger = LoggerFactory.getLogger("TaoTaoCloudLogConsole")

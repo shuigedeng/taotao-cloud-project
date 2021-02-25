@@ -38,8 +38,8 @@ import javax.annotation.Resource;
  * ElkConfiguration
  *
  * @author dengtao
- * @date 2020/6/3 10:43
- * @since v1.0
+ * @since 2020/6/3 10:43
+ * @version 1.0.0
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "taotao.cloud.elk", name = "enabled", havingValue = "true")

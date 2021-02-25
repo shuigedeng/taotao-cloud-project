@@ -21,33 +21,34 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * 业务异常
  *
  * @author dengtao
- * @date 2020/5/2 11:21
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 11:21
  */
 public class BusinessException extends BaseException {
-    private static final long serialVersionUID = 6610083281801529147L;
 
-    public BusinessException(String message) {
-        super(message);
-    }
+	private static final long serialVersionUID = 6610083281801529147L;
 
-    public BusinessException(Integer code, String message) {
-        super(code, message);
-    }
+	public BusinessException(String message) {
+		super(message);
+	}
 
-    public BusinessException(String message, Throwable e) {
-        super(message, e);
-    }
+	public BusinessException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public BusinessException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public BusinessException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public BusinessException(ResultEnum result) {
-        super(result);
-    }
+	public BusinessException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public BusinessException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public BusinessException(ResultEnum result) {
+		super(result);
+	}
+
+	public BusinessException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

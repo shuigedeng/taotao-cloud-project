@@ -29,8 +29,8 @@ import java.util.Map;
  * HdfsServiceImpl
  *
  * @author dengtao
- * @date 2020/10/29 15:18
- * @since v1.0
+ * @since 2020/10/29 15:18
+ * @version 1.0.0
  */
 @Service
 public class HdfsServiceImpl implements HdfsService {

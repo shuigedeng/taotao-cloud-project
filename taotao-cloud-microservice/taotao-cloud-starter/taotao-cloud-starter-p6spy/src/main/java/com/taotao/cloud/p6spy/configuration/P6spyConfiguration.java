@@ -34,8 +34,8 @@ import java.util.Map;
  * P6spyAutoConfiguration
  *
  * @author dengtao
- * @date 2020/10/14 09:18
- * @since v1.0
+ * @since 2020/10/14 09:18
+ * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)

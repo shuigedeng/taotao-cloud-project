@@ -15,27 +15,26 @@
  */
 package com.taotao.cloud.core.model;
 
-
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 用户实体绑定spring security
  *
  * @author dengtao
- * @date 2020/4/30 10:27
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:27
  */
 @Data
 public class SecurityMenu implements Serializable {
-    private static final long serialVersionUID = -749360940290141180L;
 
-    private String url;
-    private String path;
-    private Integer sort;
-    private Integer type;
-    private Boolean hidden;
-    private String pathMethod;
+	private static final long serialVersionUID = -749360940290141180L;
+
+	private String url;
+	private String path;
+	private Integer sort;
+	private Integer type;
+	private Boolean hidden;
+	private String pathMethod;
 
 }

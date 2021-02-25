@@ -15,7 +15,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //  * 系统角色表 Mapper 接口
 //  *
 //  * @author taotao
-//  * @date 2020-05-14 14:36:39
+//  * @since 2020-05-14 14:36:39
 //  */
 // @Repository
 // public interface SysRoleMapper extends SuperMapper<SysRole> {

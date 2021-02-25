@@ -36,8 +36,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * TaoTaoCloudOperationApplication
  *
  * @author dengtao
- * @date 2020/11/26 下午7:55
- * @since v1.0
+ * @since 2020/11/26 下午7:55
+ * @version 1.0.0
  */
 @EnableTaoTaoCloudSwagger2
 @EnableTaoTaoCloudOauth2ResourceServer

@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
  *
  * @author dengtao
  * @version v1.0
- * @date 2020/4/27 16:16
+ * @since 2020/4/27 16:16
  */
 @UtilityClass
 public class LoggerUtil {
@@ -36,7 +36,7 @@ public class LoggerUtil {
      * @param point point
      * @return java.lang.String
      * @author dengtao
-     * @date 2020/4/30 10:21
+     * @since 2020/4/30 10:21
      */
     public String getControllerMethodDescription(JoinPoint point) throws Exception {
         // 获取连接点目标类名

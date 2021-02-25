@@ -44,8 +44,8 @@ import java.util.ArrayList;
  * P0003	锤子	1002	4
  *
  * @author dengtao
- * @date 2020/11/26 下午8:30
- * @since v1.0
+ * @since 2020/11/26 下午8:30
+ * @version 1.0.0
  */
 public class RJoin {
 	static class RJoinMapper extends Mapper<LongWritable, Text, Text, InfoBean> {

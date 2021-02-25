@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * @Classname DataScopeInterceptor
  * @Description Mybatis 拦截器 主要用于数据权限拦截
  * @Author Created by LiHaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-06-08 10:29
+ * @since 2019-06-08 10:29
  * @Version 1.0
  */
 @Order(90)

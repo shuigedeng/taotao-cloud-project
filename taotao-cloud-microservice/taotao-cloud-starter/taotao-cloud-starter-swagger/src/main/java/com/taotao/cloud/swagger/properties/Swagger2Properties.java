@@ -29,8 +29,8 @@ import java.util.Map;
  * swagger2 属性配置
  *
  * @author dengtao
- * @date 2020/4/30 10:11
- * @since v1.0
+ * @since 2020/4/30 10:11
+ * @version 1.0.0
  */
 @Data
 @ConfigurationProperties("taotao.cloud.swagger")

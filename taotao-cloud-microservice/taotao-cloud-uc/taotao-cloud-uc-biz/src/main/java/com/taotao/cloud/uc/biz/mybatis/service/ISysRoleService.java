@@ -11,7 +11,7 @@
 //  * 系统角色表 服务类
 //  *
 //  * @author taotao
-//  * @date 2020-05-14 14:36:39
+//  * @since 2020-05-14 14:36:39
 //  */
 // public interface ISysRoleService {
 //
@@ -21,7 +21,7 @@
 //      * @param roleDto
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:47
+//      * @since 2020/4/30 11:47
 //      */
 //     boolean saveRole(RoleDTO roleDto);
 //
@@ -31,7 +31,7 @@
 //      * @param roleDto
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:47
+//      * @since 2020/4/30 11:47
 //      */
 //     boolean updateRole(RoleDTO roleDto);
 //
@@ -41,7 +41,7 @@
 //      * @param roleName
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysRole>
 //      * @author dengtao
-//      * @date 2020/4/30 11:48
+//      * @since 2020/4/30 11:48
 //      */
 //     List<SysRole> selectRoleList(String roleName);
 //
@@ -51,7 +51,7 @@
 //      * @param userId
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysRole>
 //      * @author dengtao
-//      * @date 2020/4/30 11:48
+//      * @since 2020/4/30 11:48
 //      */
 //     List<SysRole> findRolesByUserId(Integer userId);
 //
@@ -62,7 +62,7 @@
 //      * @param ids
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:48
+//      * @since 2020/4/30 11:48
 //      */
 //     boolean batchDeleteRoleByIds(List<Integer> ids);
 //
@@ -72,7 +72,7 @@
 //      * @param roleDto
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:48
+//      * @since 2020/4/30 11:48
 //      */
 //     boolean updateRolePermission(RoleDTO roleDto);
 // }

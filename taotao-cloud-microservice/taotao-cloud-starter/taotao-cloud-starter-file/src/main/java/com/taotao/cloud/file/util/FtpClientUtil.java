@@ -20,8 +20,8 @@ import java.io.UnsupportedEncodingException;
  * ftp客户端工具类
  *
  * @author dengtao
- * @date 2020/11/12 16:36
- * @since v1.0
+ * @since 2020/11/12 16:36
+ * @version 1.0.0
  */
 public class FtpClientUtil {
 

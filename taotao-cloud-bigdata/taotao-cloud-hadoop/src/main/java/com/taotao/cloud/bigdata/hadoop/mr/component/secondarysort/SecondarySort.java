@@ -34,8 +34,8 @@ import java.io.IOException;
  * SecondarySort
  *
  * @author dengtao
- * @date 2020/11/26 下午8:34
- * @since v1.0
+ * @since 2020/11/26 下午8:34
+ * @version 1.0.0
  */
 public class SecondarySort {
 	static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {

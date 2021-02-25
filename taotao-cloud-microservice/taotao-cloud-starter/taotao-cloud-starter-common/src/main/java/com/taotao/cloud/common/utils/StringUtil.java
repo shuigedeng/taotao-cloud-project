@@ -21,11 +21,12 @@ import lombok.experimental.UtilityClass;
  * StringUtil
  *
  * @author dengtao
- * @date 2020/6/2 16:42
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:42
  */
 @UtilityClass
 public class StringUtil {
+
 	public String nullToEmpty(Object str) {
 		return str != null ? str.toString() : "";
 	}
@@ -41,8 +42,7 @@ public class StringUtil {
 	 * @param maxlen 最大长度
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:37
-	 * @since v1.0
+	 * @since 2021/2/25 16:41
 	 */
 	public static String subString2(String str, int maxlen) {
 		if (StringUtil.isEmpty(str)) {
@@ -61,8 +61,7 @@ public class StringUtil {
 	 * @param maxlen maxlen
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:38
-	 * @since v1.0
+	 * @since 2021/2/25 16:41
 	 */
 	public static String subString3(String str, int maxlen) {
 		if (StringUtil.isEmpty(str)) {
@@ -89,8 +88,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * Check that the given {@code CharSequence} is neither {@code null} nor
-	 * of length 0.
+	 * Check that the given {@code CharSequence} is neither {@code null} nor of length 0.
 	 * <p>Note: this method returns {@code true} for a {@code CharSequence}
 	 * that purely consists of whitespace.
 	 * <p><pre class="code">
@@ -105,15 +103,15 @@ public class StringUtil {
 	 * @see #hasLength(String)
 	 * @see #hasText(CharSequence)
 	 */
-	public static boolean hasLength( CharSequence str) {
+	public static boolean hasLength(CharSequence str) {
 		return (str != null && str.length() > 0);
 	}
 
 	/**
 	 * Check whether the given {@code CharSequence} contains actual <em>text</em>.
 	 * <p>More specifically, this method returns {@code true} if the
-	 * {@code CharSequence} is not {@code null}, its length is greater than
-	 * 0, and it contains at least one non-whitespace character.
+	 * {@code CharSequence} is not {@code null}, its length is greater than 0, and it contains at
+	 * least one non-whitespace character.
 	 * <p><pre class="code">
 	 * StringUtils.hasText(null) = false
 	 * StringUtils.hasText("") = false
@@ -123,8 +121,8 @@ public class StringUtil {
 	 * </pre>
 	 *
 	 * @param str the {@code CharSequence} to check (may be {@code null})
-	 * @return {@code true} if the {@code CharSequence} is not {@code null},
-	 * its length is greater than 0, and it does not contain whitespace only
+	 * @return {@code true} if the {@code CharSequence} is not {@code null}, its length is greater
+	 * than 0, and it does not contain whitespace only
 	 * @see Character#isWhitespace
 	 */
 	public static boolean hasText(CharSequence str) {
@@ -143,12 +141,12 @@ public class StringUtil {
 	/**
 	 * Check whether the given {@code String} contains actual <em>text</em>.
 	 * <p>More specifically, this method returns {@code true} if the
-	 * {@code String} is not {@code null}, its length is greater than 0,
-	 * and it contains at least one non-whitespace character.
+	 * {@code String} is not {@code null}, its length is greater than 0, and it contains at least
+	 * one non-whitespace character.
 	 *
 	 * @param str the {@code String} to check (may be {@code null})
-	 * @return {@code true} if the {@code String} is not {@code null}, its
-	 * length is greater than 0, and it does not contain whitespace only
+	 * @return {@code true} if the {@code String} is not {@code null}, its length is greater than 0,
+	 * and it does not contain whitespace only
 	 * @see #hasText(CharSequence)
 	 */
 	public static boolean hasText(String str) {

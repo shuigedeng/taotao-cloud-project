@@ -29,8 +29,8 @@ import java.util.Objects;
  * 文件工具类
  *
  * @author dengtao
- * @date 2020/10/26 11:10
- * @since v1.0
+ * @since 2020/10/26 11:10
+ * @version 1.0.0
  */
 public class FileUtil {
 
@@ -46,8 +46,8 @@ public class FileUtil {
 	 * @param multipartFile 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/10/26 10:43
-	 * @since v1.0
+	 * @since 2020/10/26 10:43
+	 * @version 1.0.0
 	 */
 	public static FileInfo getMultipartFileInfo(MultipartFile multipartFile) {
 		try {
@@ -81,8 +81,8 @@ public class FileUtil {
 	 * @param file 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/10/26 10:43
-	 * @since v1.0
+	 * @since 2020/10/26 10:43
+	 * @version 1.0.0
 	 */
 	public static FileInfo getFileInfo(File file) {
 		try {
@@ -107,8 +107,8 @@ public class FileUtil {
 	 * @param inputStream inputStream
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:43
-	 * @since v1.0
+	 * @since 2020/10/26 10:43
+	 * @version 1.0.0
 	 */
 	public static String fileMd5(InputStream inputStream) {
 		return DigestUtil.md5Hex(inputStream);
@@ -121,8 +121,8 @@ public class FileUtil {
 	 * @param path 保存路径
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:43
-	 * @since v1.0
+	 * @since 2020/10/26 10:43
+	 * @version 1.0.0
 	 */
 	public static String saveFile(MultipartFile file, String path) {
 		try {
@@ -147,8 +147,8 @@ public class FileUtil {
 	 * @param path 文件路径
 	 * @return boolean
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	public static boolean deleteFile(String path) {
 		File file = new File(path);
@@ -172,8 +172,8 @@ public class FileUtil {
 	 * @param acceptTypes 接受类型
 	 * @return com.taotao.cloud.file.pojo.ResultBody
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	public static Boolean validType(MultipartFile file, String[] acceptTypes) {
 		if (ArrayUtil.isEmpty(acceptTypes)) {
@@ -201,8 +201,8 @@ public class FileUtil {
 	 * @param file 文件对象
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	public static String extractFilename(MultipartFile file) {
 		String fileName = file.getOriginalFilename();
@@ -217,8 +217,8 @@ public class FileUtil {
 	 * @param extension 扩展名称
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	public static String extractFilename(String fileName, String extension) {
 		return DateUtil.format(new Date(), "yyyy/MM/dd/HH/mm") + "/" + encodingFilename(fileName) + "." + extension;
@@ -230,8 +230,8 @@ public class FileUtil {
 	 * @param fileName
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	private static String encodingFilename(String fileName) {
 		fileName = fileName.replace("_", " ");
@@ -245,8 +245,8 @@ public class FileUtil {
 	 * @param file
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/26 10:44
-	 * @since v1.0
+	 * @since 2020/10/26 10:44
+	 * @version 1.0.0
 	 */
 	public static String getExtension(MultipartFile file) {
 		String extension = cn.hutool.core.io.FileUtil.extName(file.getOriginalFilename());
@@ -262,8 +262,8 @@ public class FileUtil {
 	 * @param file
 	 * @return boolean
 	 * @author dengtao
-	 * @date 2020/10/26 10:45
-	 * @since v1.0
+	 * @since 2020/10/26 10:45
+	 * @version 1.0.0
 	 */
 	public static boolean isImage(File file) {
 		if (!file.exists()) {
@@ -285,8 +285,8 @@ public class FileUtil {
 	 * @param file
 	 * @return boolean
 	 * @author dengtao
-	 * @date 2020/10/26 10:45
-	 * @since v1.0
+	 * @since 2020/10/26 10:45
+	 * @version 1.0.0
 	 */
 	public static boolean isImage(MultipartFile file) {
 		if (file == null) {

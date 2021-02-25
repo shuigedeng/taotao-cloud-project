@@ -21,32 +21,32 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * 检查异常
  *
  * @author dengtao
- * @date 2020/5/2 16:40
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 16:40
  */
 public class CheckedException extends BaseException {
 
-    public CheckedException(String message) {
-        super(message);
-    }
+	public CheckedException(String message) {
+		super(message);
+	}
 
-    public CheckedException(Integer code, String message) {
-        super(code, message);
-    }
+	public CheckedException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public CheckedException(String message, Throwable e) {
-        super(message, e);
-    }
+	public CheckedException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public CheckedException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public CheckedException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public CheckedException(ResultEnum result) {
-        super(result);
-    }
+	public CheckedException(ResultEnum result) {
+		super(result);
+	}
 
-    public CheckedException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public CheckedException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

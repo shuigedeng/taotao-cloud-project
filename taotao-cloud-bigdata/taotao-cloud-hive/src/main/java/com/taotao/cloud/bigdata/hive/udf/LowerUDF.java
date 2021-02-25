@@ -34,8 +34,8 @@ import org.apache.hadoop.io.Text;
  * create function hive.zodiac as 'mastercom.hive.udf.ZodiacUDF' using jar 'hdfs://192.168.1.101:8020/script/HiveUDF.jar';
  *
  * @author dengtao
- * @date 2020/10/29 17:16
- * @since v1.0
+ * @since 2020/10/29 17:16
+ * @version 1.0.0
  */
 public class LowerUDF extends UDF {
     public Text evaluate(Text str) {

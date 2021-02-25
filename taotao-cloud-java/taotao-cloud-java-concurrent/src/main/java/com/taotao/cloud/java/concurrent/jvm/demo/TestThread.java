@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
  * TestThread
  *
  * @author dengtao
- * @date 2020/12/3 下午6:49
- * @since v1.0
+ * @since 2020/12/3 下午6:49
+ * @version 1.0.0
  */
 public class TestThread {
 	/**

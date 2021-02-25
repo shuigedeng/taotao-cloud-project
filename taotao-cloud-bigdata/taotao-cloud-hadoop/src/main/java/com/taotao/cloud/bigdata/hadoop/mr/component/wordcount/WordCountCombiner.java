@@ -25,8 +25,8 @@ import java.io.IOException;
  * 输入为map的输出
  *
  * @author dengtao
- * @date 2020/11/26 下午8:06
- * @since v1.0
+ * @since 2020/11/26 下午8:06
+ * @version 1.0.0
  */
 public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {
 	@Override

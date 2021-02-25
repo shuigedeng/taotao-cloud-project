@@ -22,8 +22,8 @@
 //  * RuleConfigure
 //  *
 //  * @author dengtao
-//  * @date 2019/9/3
-//  * @since v1.0
+//  * @since 2019/9/3
+//  * @version 1.0.0
 //  */
 // public class RuleConfigure {
 //

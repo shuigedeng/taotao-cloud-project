@@ -6,8 +6,8 @@ import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironm
  * SBatchWordCount
  *
  * @author dengtao
- * @date 2020/11/3 09:05
- * @since v1.0
+ * @since 2020/11/3 09:05
+ * @version 1.0.0
  */
 object SBatchWordCount {
   def main(args: Array[String]): Unit = {

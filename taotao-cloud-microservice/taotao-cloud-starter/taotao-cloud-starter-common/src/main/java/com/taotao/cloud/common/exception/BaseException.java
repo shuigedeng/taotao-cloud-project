@@ -16,73 +16,72 @@
 package com.taotao.cloud.common.exception;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-
 import java.io.Serializable;
 
 /**
  * 基础异常
  *
  * @author dengtao
- * @date 2020/5/13 10:56
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/13 10:56
  */
 public class BaseException extends RuntimeException implements Serializable {
 
-    private static final long serialVersionUID = 6610083281801529147L;
+	private static final long serialVersionUID = 6610083281801529147L;
 
-    /**
-     * 异常码
-     */
-    private final Integer code;
+	/**
+	 * 异常码
+	 */
+	private final Integer code;
 
-    /**
-     * 返回信息
-     */
-    private final String message;
+	/**
+	 * 返回信息
+	 */
+	private final String message;
 
-    public BaseException(String message) {
-        super(message);
-        this.code = ResultEnum.ERROR.getCode();
-        this.message = message;
-    }
+	public BaseException(String message) {
+		super(message);
+		this.code = ResultEnum.ERROR.getCode();
+		this.message = message;
+	}
 
-    public BaseException(Integer code, String message) {
-        super(message);
-        this.code = code;
-        this.message = message;
-    }
+	public BaseException(Integer code, String message) {
+		super(message);
+		this.code = code;
+		this.message = message;
+	}
 
-    public BaseException(String message, Throwable e) {
-        super(message, e);
-        this.code = ResultEnum.ERROR.getCode();
-        this.message = message;
-    }
+	public BaseException(String message, Throwable e) {
+		super(message, e);
+		this.code = ResultEnum.ERROR.getCode();
+		this.message = message;
+	}
 
-    public BaseException(Integer code, String message, Throwable e) {
-        super(message, e);
-        this.code = code;
-        this.message = message;
-    }
+	public BaseException(Integer code, String message, Throwable e) {
+		super(message, e);
+		this.code = code;
+		this.message = message;
+	}
 
-    public BaseException(ResultEnum result) {
-        super(result.getMessage());
-        this.message = result.getMessage();
-        this.code = result.getCode();
-    }
+	public BaseException(ResultEnum result) {
+		super(result.getMessage());
+		this.message = result.getMessage();
+		this.code = result.getCode();
+	}
 
-    public BaseException(ResultEnum result, Throwable e) {
-        super(result.getMessage(), e);
-        this.message = result.getMessage();
-        this.code = result.getCode();
-    }
+	public BaseException(ResultEnum result, Throwable e) {
+		super(result.getMessage(), e);
+		this.message = result.getMessage();
+		this.code = result.getCode();
+	}
 
-    public Integer getCode() {
-        return code;
-    }
+	public Integer getCode() {
+		return code;
+	}
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+	@Override
+	public String getMessage() {
+		return message;
+	}
 
 }

@@ -19,7 +19,7 @@ import ${package}.${moduleName}.service.I${className}Service;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Slf4j
 @Service

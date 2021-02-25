@@ -41,8 +41,8 @@ import java.util.Map;
  * HDFSUtil
  *
  * @author dengtao
- * @date 2020/10/29 15:27
- * @since v1.0
+ * @since 2020/10/29 15:27
+ * @version 1.0.0
  */
 public class HDFSUtil {
 

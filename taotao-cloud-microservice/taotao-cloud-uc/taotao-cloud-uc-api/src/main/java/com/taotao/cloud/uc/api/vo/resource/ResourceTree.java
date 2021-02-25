@@ -28,8 +28,8 @@ import java.io.Serializable;
  * 树形菜单列表
  *
  * @author dengtao
- * @date 2020/10/21 11:09
- * @since v1.0
+ * @since 2020/10/21 11:09
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

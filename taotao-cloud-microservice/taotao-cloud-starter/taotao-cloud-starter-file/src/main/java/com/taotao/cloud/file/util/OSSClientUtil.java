@@ -34,8 +34,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * oss 客户端工具类
  *
  * @author dengtao
- * @date 2020/11/12 16:36
- * @since v1.0
+ * @since 2020/11/12 16:36
+ * @version 1.0.0
  */
 public class OSSClientUtil {
 	/**
@@ -213,7 +213,7 @@ public class OSSClientUtil {
 	 *
 	 * @param uploadFile uploadFile
 	 * @author dengtao
-	 * @date 2020/9/9 11:44
+	 * @since 2020/9/9 11:44
 	 */
 	public static int calPartCount(MultipartFile uploadFile) {
 		int part = (int) (uploadFile.getSize() / PART_SIZE);

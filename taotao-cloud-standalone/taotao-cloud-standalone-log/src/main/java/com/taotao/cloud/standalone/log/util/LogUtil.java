@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  * @Classname LogUtil
  * @Description 日志工具类
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-04-28 11:30
+ * @since 2019-04-28 11:30
  * @Version 1.0
  */
 public class LogUtil {

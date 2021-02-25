@@ -23,8 +23,8 @@ import javax.persistence.EntityManager;
 
 /**
  * @author dengtao
- * @date 2020/10/22 12:46
- * @since v1.0
+ * @since 2020/10/22 12:46
+ * @version 1.0.0
  */
 @Repository
 public class OrderInfoRepository extends BaseJpaRepository<Order, Long> {

@@ -19,7 +19,7 @@ import com.central.common.model.Result;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Slf4j
 @RestController

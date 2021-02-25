@@ -31,8 +31,8 @@ import java.io.IOException;
  * 认证失败处理器
  *
  * @author dengtao
- * @date 2020/5/13 16:08
- * @since v1.0
+ * @since 2020/5/13 16:08
+ * @version 1.0.0
  */
 @Component
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {

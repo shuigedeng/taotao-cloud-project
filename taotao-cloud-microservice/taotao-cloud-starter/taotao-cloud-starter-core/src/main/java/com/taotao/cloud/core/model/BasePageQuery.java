@@ -16,21 +16,24 @@
 package com.taotao.cloud.core.model;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import java.io.Serializable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 基础分页查询
  *
  * @author dengtao
- * @date 2020/5/2 16:40
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 16:40
  */
 @Data
 @Accessors(chain = true)
@@ -40,19 +43,19 @@ import java.io.Serializable;
 @SuperBuilder
 public class BasePageQuery implements Serializable {
 
-    private static final long serialVersionUID = -2483306509077581330L;
+	private static final long serialVersionUID = -2483306509077581330L;
 
-    @ApiModelProperty(value = "当前第几页，默认1", example = "0")
-    @NotNull(message = "当前页显示数量不能为空")
-    @Builder.Default
-    @Min(value = 0)
-    @Max(value = Integer.MAX_VALUE)
-    private Integer currentPage = 0;
+	@ApiModelProperty(value = "当前第几页，默认1", example = "0")
+	@NotNull(message = "当前页显示数量不能为空")
+	@Builder.Default
+	@Min(value = 0)
+	@Max(value = Integer.MAX_VALUE)
+	private Integer currentPage = 0;
 
-    @ApiModelProperty(value = "每页显示条数，默认10", example = "10")
-    @NotNull(message = "每页数据显示数量不能为空")
-    @Builder.Default
-    @Min(value = 5)
-    @Max(value = 100)
-    private Integer pageSize = 10;
+	@ApiModelProperty(value = "每页显示条数，默认10", example = "10")
+	@NotNull(message = "每页数据显示数量不能为空")
+	@Builder.Default
+	@Min(value = 5)
+	@Max(value = 100)
+	private Integer pageSize = 10;
 }

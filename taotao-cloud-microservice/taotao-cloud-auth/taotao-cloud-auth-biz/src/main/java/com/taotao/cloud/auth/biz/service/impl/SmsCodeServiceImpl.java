@@ -32,8 +32,8 @@ import javax.annotation.Resource;
  * SmsCodeServiceImpl
  *
  * @author dengtao
- * @date 2020/4/29 16:12
- * @since v1.0
+ * @since 2020/4/29 16:12
+ * @version 1.0.0
  */
 @Service
 public class SmsCodeServiceImpl implements ISmsCodeService {

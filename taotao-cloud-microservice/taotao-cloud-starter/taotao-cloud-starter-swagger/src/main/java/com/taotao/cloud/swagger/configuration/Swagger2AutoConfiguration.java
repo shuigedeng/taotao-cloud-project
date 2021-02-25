@@ -47,8 +47,8 @@ import java.util.stream.Collectors;
  * SwaggerAutoConfiguration
  *
  * @author dengtao
- * @date 2020/4/30 10:10
- * @since v1.0
+ * @since 2020/4/30 10:10
+ * @version 1.0.0
  */
 @Slf4j
 @Import({Swagger2Configuration.class})
@@ -248,7 +248,7 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
      * @param docketOperationParameters docketOperationParameters
      * @return java.util.List<springfox.documentation.service.Parameter>
      * @author dengtao
-     * @date 2020/4/30 10:10
+     * @since 2020/4/30 10:10
      */
     private List<Parameter> assemblyGlobalOperationParameters(
             List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters,

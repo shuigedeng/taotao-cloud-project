@@ -21,32 +21,32 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * 分布式锁异常
  *
  * @author dengtao
- * @date 2020/5/2 11:22
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 11:22
  */
 public class LockException extends BaseException {
 
-    public LockException(String message) {
-        super(message);
-    }
+	public LockException(String message) {
+		super(message);
+	}
 
-    public LockException(Integer code, String message) {
-        super(code, message);
-    }
+	public LockException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public LockException(String message, Throwable e) {
-        super(message, e);
-    }
+	public LockException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public LockException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public LockException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public LockException(ResultEnum result) {
-        super(result);
-    }
+	public LockException(ResultEnum result) {
+		super(result);
+	}
 
-    public LockException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public LockException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

@@ -36,8 +36,8 @@ import java.util.*;
  * Redis Repository redis 基本操作 可扩展,基本够用了
  *
  * @author dengtao
- * @date 2020/4/30 10:15
- * @since v1.0
+ * @since 2020/4/30 10:15
+ * @version 1.0.0
  */
 @Slf4j
 public class RedisRepository {

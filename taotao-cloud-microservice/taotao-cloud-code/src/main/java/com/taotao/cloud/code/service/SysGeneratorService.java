@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @author dengtao
- * @date 2020/6/15 11:13
+ * @since 2020/6/15 11:13
  */
 public interface SysGeneratorService extends IService {
     PageResult queryList(Map<String, Object> map);

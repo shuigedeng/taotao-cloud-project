@@ -9,7 +9,7 @@
 //  * 字典表 服务类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:18
+//  * @since 2020/4/30 11:18
 //  */
 // public interface ISysDictService {
 //
@@ -19,7 +19,7 @@
 //      * @param entity
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:19
+//      * @since 2020/4/30 11:19
 //      */
 //     boolean save(SysDict entity);
 //
@@ -29,7 +29,7 @@
 //      * @param dictDto
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:19
+//      * @since 2020/4/30 11:19
 //      */
 //     boolean updateDict(DictDTO dictDto);
 //
@@ -39,7 +39,7 @@
 //      * @param id
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:19
+//      * @since 2020/4/30 11:19
 //      */
 //     boolean removeById(Serializable id);
 // }

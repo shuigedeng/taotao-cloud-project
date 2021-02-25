@@ -19,7 +19,7 @@
 //  * 系统用户工具类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:06
+//  * @since 2020/4/30 11:06
 //  */
 // @UtilityClass
 // public class UcUtil {
@@ -32,7 +32,7 @@
 //      * @param menuType
 //      * @return void
 //      * @author dengtao
-//      * @date 2020/4/30 11:06
+//      * @since 2020/4/30 11:06
 //      */
 //     public void findChildren(List<SysMenu> menuList, List<SysMenu> menus, int menuType) {
 //         for (SysMenu sysMenu : menuList) {
@@ -96,7 +96,7 @@
 //      * @param depts
 //      * @return void
 //      * @author dengtao
-//      * @date 2020/4/30 11:06
+//      * @since 2020/4/30 11:06
 //      */
 //     public void findChildren(List<SysDept> sysDepts, List<SysDept> depts) {
 //
@@ -159,7 +159,7 @@
 //      * @param sysMenu
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:06
+//      * @since 2020/4/30 11:06
 //      */
 //     public boolean exists(List<SysMenu> sysMenus, SysMenu sysMenu) {
 //         boolean exist = false;
@@ -181,7 +181,7 @@
 //      * @param parentJson
 //      * @return void
 //      * @author dengtao
-//      * @date 2020/4/30 11:07
+//      * @since 2020/4/30 11:07
 //      */
 //     public void getPermissionJsonArray(JSONArray jsonArray, List<SysMenu> metaList, JSONObject parentJson) {
 //         for (SysMenu permission : metaList) {
@@ -283,7 +283,7 @@
 //      * @param url
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:07
+//      * @since 2020/4/30 11:07
 //      */
 //     private boolean isUrl(String url) {
 //         return url != null && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("{{"));
@@ -295,7 +295,7 @@
 //      * @param url
 //      * @return java.lang.String
 //      * @author dengtao
-//      * @date 2020/4/30 11:07
+//      * @since 2020/4/30 11:07
 //      */
 //     private String urlToRouteName(String url) {
 //         if (StrUtil.isNotEmpty(url)) {

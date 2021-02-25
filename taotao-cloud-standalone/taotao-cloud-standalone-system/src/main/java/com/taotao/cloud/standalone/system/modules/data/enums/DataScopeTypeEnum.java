@@ -7,7 +7,7 @@ import lombok.Getter;
  * @Classname DataScopeTypeEnum
  * @Description 数据权限枚举
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-06-08 16:02
+ * @since 2019-06-08 16:02
  * @Version 1.0
  */
 @Getter

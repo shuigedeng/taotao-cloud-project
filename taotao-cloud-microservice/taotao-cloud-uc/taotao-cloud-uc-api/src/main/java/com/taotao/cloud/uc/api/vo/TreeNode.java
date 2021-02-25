@@ -35,8 +35,8 @@ import java.util.List;
  * TreeNode
  *
  * @author dengtao
- * @date 2020/10/21 11:02
- * @since v1.0
+ * @since 2020/10/21 11:02
+ * @version 1.0.0
  */
 @Data
 @Accessors(chain = true)

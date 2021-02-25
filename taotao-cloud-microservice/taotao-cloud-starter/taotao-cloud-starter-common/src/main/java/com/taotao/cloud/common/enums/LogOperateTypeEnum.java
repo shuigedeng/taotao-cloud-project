@@ -19,56 +19,48 @@ package com.taotao.cloud.common.enums;
  * 日志操作类型
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
-public enum LogOperateTypeEnum implements BaseEnum{
-    /**
-     * 操作记录
-     */
-    OPERATE_RECORD(1, "操作记录"),
+public enum LogOperateTypeEnum implements BaseEnum {
+	/**
+	 * 操作记录
+	 */
+	OPERATE_RECORD(1, "操作记录"),
 
-    /**
-     * 异常记录
-     */
-    EXCEPTION_RECORD(2, "异常记录");
+	/**
+	 * 异常记录
+	 */
+	EXCEPTION_RECORD(2, "异常记录");
 
-    private Integer value;
-    private String description;
+	private final Integer value;
+	private final String description;
 
-    LogOperateTypeEnum(Integer value, String description) {
-        this.value = value;
-        this.description = description;
-    }
+	LogOperateTypeEnum(Integer value, String description) {
+		this.value = value;
+		this.description = description;
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getValue() {
+		return value;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getNameByCode(int code) {
+		for (LogOperateTypeEnum result : LogOperateTypeEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getNameByCode(int code) {
-        for (LogOperateTypeEnum result : LogOperateTypeEnum.values()) {
-            if (result.getCode() == code) {
-                return result.name().toLowerCase();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Integer getCode() {
-        return value;
-    }
+	@Override
+	public Integer getCode() {
+		return value;
+	}
 }

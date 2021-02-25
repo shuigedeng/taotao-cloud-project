@@ -36,8 +36,8 @@ import java.util.Objects;
  * feign拦截器，只包含http相关数据
  *
  * @author dengtao
- * @date 2020/4/5 13:33
- * @since v1.0
+ * @since 2020/4/5 13:33
+ * @version 1.0.0
  */
 public class FeignHttpInterceptorConfig {
 

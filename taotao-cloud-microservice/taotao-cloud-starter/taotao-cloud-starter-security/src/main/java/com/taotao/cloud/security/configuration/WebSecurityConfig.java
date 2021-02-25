@@ -27,8 +27,8 @@ import javax.annotation.Resource;
  * 安全配置
  *
  * @author dengtao
- * @date 2020/10/13 15:18
- * @since v1.0
+ * @since 2020/10/13 15:18
+ * @version 1.0.0
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

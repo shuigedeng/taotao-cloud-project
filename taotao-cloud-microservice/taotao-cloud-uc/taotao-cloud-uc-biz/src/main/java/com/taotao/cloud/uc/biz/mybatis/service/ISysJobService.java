@@ -11,7 +11,7 @@
 //  * 岗位管理 服务类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:32
+//  * @since 2020/4/30 11:32
 //  */
 // public interface ISysJobService {
 //
@@ -21,7 +21,7 @@
 //      * @param id
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:32
+//      * @since 2020/4/30 11:32
 //      */
 //     boolean removeById(Serializable id);
 //
@@ -31,7 +31,7 @@
 //      * @param entity
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:33
+//      * @since 2020/4/30 11:33
 //      */
 //     boolean updateById(SysJob entity);
 //
@@ -43,7 +43,7 @@
 //      * @param jobName
 //      * @return com.baomidou.mybatisplus.core.metadata.IPage<com.taotao.cloud.uc.api.entity.SysJob>
 //      * @author dengtao
-//      * @date 2020/4/30 11:33
+//      * @since 2020/4/30 11:33
 //      */
 //     IPage<SysJob> selectJobList(int page, int pageSize, String jobName);
 //
@@ -54,7 +54,7 @@
 //      * @param deptId
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysJob>
 //      * @author dengtao
-//      * @date 2020/4/30 11:33
+//      * @since 2020/4/30 11:33
 //      */
 //     List<SysJob> selectJobListByDeptId(Integer deptId);
 //
@@ -64,7 +64,7 @@
 //      * @param jobId
 //      * @return java.lang.String
 //      * @author dengtao
-//      * @date 2020/4/30 11:33
+//      * @since 2020/4/30 11:33
 //      */
 //     String selectJobNameByJobId(Integer jobId);
 //
@@ -74,7 +74,7 @@
 //      * @param ids
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:33
+//      * @since 2020/4/30 11:33
 //      */
 //     boolean batchDeleteJobByIds(List<Integer> ids);
 //

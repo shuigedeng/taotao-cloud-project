@@ -21,31 +21,32 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * 幂等性异常
  *
  * @author dengtao
- * @date 2020/5/2 11:22
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 11:22
  */
 public class IdempotencyException extends BaseException {
-    public IdempotencyException(String message) {
-        super(message);
-    }
 
-    public IdempotencyException(Integer code, String message) {
-        super(code, message);
-    }
+	public IdempotencyException(String message) {
+		super(message);
+	}
 
-    public IdempotencyException(String message, Throwable e) {
-        super(message, e);
-    }
+	public IdempotencyException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public IdempotencyException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public IdempotencyException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public IdempotencyException(ResultEnum result) {
-        super(result);
-    }
+	public IdempotencyException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public IdempotencyException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public IdempotencyException(ResultEnum result) {
+		super(result);
+	}
+
+	public IdempotencyException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

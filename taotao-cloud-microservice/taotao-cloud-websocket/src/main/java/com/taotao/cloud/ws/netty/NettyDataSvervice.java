@@ -24,8 +24,8 @@ import lombok.extern.slf4j.Slf4j;
  * NettyDataSvervice
  *
  * @author dengtao
- * @date 2020/12/30 下午4:37
- * @since v1.0
+ * @since 2020/12/30 下午4:37
+ * @version 1.0.0
  */
 @Slf4j
 public class NettyDataSvervice {

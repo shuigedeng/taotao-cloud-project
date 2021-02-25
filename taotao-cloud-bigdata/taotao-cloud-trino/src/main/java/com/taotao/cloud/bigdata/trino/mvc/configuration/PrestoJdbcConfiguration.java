@@ -27,8 +27,8 @@ import javax.sql.DataSource;
 
 /**
  * @author dengtao
- * @date 2020/10/30 10:09
- * @since v1.0
+ * @since 2020/10/30 10:09
+ * @version 1.0.0
  */
 public class PrestoJdbcConfiguration {
 

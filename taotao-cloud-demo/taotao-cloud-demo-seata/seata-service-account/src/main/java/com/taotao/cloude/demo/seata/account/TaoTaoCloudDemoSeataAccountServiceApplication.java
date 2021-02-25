@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * 账号
  *
- * @date 2019/9/14
+ * @since 2019/9/14
  */
 @EnableDiscoveryClient
 @MapperScan({"com.taotao.cloude.demo.seata.account.mapper"})

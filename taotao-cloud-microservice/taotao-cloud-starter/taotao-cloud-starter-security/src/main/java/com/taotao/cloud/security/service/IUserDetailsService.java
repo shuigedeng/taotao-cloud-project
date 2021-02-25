@@ -22,7 +22,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * IUserDetailsService
  *
  * @author dengtao
- * @date 2020/4/29 17:33
+ * @since 2020/4/29 17:33
  */
 public interface IUserDetailsService extends UserDetailsService {
 
@@ -34,8 +34,8 @@ public interface IUserDetailsService extends UserDetailsService {
      * @param loginType 登录类型
      * @return com.taotao.cloud.core.model.SecurityUser
      * @author dengtao
-     * @date 2020/10/19 14:06
-     * @since v1.0
+     * @since 2020/10/19 14:06
+     * @version 1.0.0
      */
     SecurityUser loadUserSecurityUser(String username, String userType, String loginType);
 }

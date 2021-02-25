@@ -24,7 +24,7 @@ import java.util.Set;
  * @Classname JwtUtil
  * @Description JWT工具类
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-05-07 09:23
+ * @since 2019-05-07 09:23
  * @Version 1.0
  */
 @Log4j2

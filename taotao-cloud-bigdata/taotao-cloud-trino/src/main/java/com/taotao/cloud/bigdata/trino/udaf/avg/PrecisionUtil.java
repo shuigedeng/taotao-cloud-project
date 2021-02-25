@@ -19,8 +19,8 @@ import java.text.DecimalFormat;
 
 /**
  * @author dengtao
- * @date 2020/10/29 17:59
- * @since v1.0
+ * @since 2020/10/29 17:59
+ * @version 1.0.0
  */
 public class PrecisionUtil {
 	public static double getPrecision(double value) {

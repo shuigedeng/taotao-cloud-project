@@ -44,8 +44,8 @@ import java.util.Map;
  * 认证成功处理器
  *
  * @author dengtao
- * @date 2020/5/13 16:15
- * @since v1.0
+ * @since 2020/5/13 16:15
+ * @version 1.0.0
  */
 @Component
 public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {

@@ -38,8 +38,8 @@ import java.util.List;
  * 应用管理API
  *
  * @author dengtao
- * @date 2020/4/29 15:10
- * @since v1.0
+ * @since 2020/4/29 15:10
+ * @version 1.0.0
  */
 @Api(value = "应用管理API", tags = {"应用管理API"})
 @Validated

@@ -35,8 +35,8 @@
 //  * 4.调用 AuthenticationManager 的 authenticate 方法进行验证（即MobileAuthenticationProvider
 //  *
 //  * @author dengtao
-//  * @date 2020/4/29 20:23
-//  * @since v1.0
+//  * @since 2020/4/29 20:23
+//  * @version 1.0.0
 //  */
 // public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 //     /**

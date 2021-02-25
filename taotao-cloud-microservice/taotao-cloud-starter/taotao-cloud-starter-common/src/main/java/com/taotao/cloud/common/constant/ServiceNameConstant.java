@@ -19,58 +19,61 @@ package com.taotao.cloud.common.constant;
  * 微服务名称常量
  *
  * @author dengtao
- * @date 2020/4/30 10:24
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:24
  */
-public interface ServiceNameConstant {
+public class ServiceNameConstant {
+
+	private ServiceNameConstant() {
+	}
 
 	/**
 	 * 认证中心服务
 	 */
-	String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth-center";
+	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth-center";
 
 	/**
 	 * 用户服务
 	 */
-	String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-center";
+	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-center";
 
 	/**
 	 * 文件服务
 	 */
-	String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file-center";
+	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file-center";
 
 	/**
 	 * 订单服务
 	 */
-	String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-center";
+	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-center";
 
 	/**
 	 * 商品服务
 	 */
-	String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-center";
+	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-center";
 
 	/**
 	 * 售后服务
 	 */
-	String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale-center";
+	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale-center";
 
 	/**
 	 * 客服服务
 	 */
-	String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-center";
+	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-center";
 
 	/**
 	 * 物流服务
 	 */
-	String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics-center";
+	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics-center";
 
 	/**
 	 * 邮件服务
 	 */
-	String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail-center";
+	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail-center";
 
 	/**
 	 * 支付服务
 	 */
-	String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay-center";
+	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay-center";
 }

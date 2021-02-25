@@ -16,7 +16,7 @@ import java.util.List;
  * 用户表 服务类
  *
  * @author dengtao
- * @date 2020/4/30 13:20
+ * @since 2020/4/30 13:20
  */
 public interface ISysUserService {
 	/**
@@ -25,8 +25,8 @@ public interface ISysUserService {
 	 * @param sysUser sysUser
 	 * @return com.taotao.cloud.uc.biz.entity.SysUser
 	 * @author dengtao
-	 * @date 2020/11/11 15:27
-	 * @since v1.0
+	 * @since 2020/11/11 15:27
+	 * @version 1.0.0
 	 */
 	SysUser saveUser(SysUser sysUser);
 
@@ -36,8 +36,8 @@ public interface ISysUserService {
 	 * @param id      id
 	 * @param userDTO userDTO
 	 * @author dengtao
-	 * @date 2020/9/30 14:01
-	 * @since v1.0
+	 * @since 2020/9/30 14:01
+	 * @version 1.0.0
 	 */
 	SysUser updateUser(SysUser sysUser);
 
@@ -46,8 +46,8 @@ public interface ISysUserService {
 	 *
 	 * @param id id
 	 * @author dengtao
-	 * @date 2020/9/30 14:07
-	 * @since v1.0
+	 * @since 2020/9/30 14:07
+	 * @version 1.0.0
 	 */
 	Boolean removeUser(Long id);
 
@@ -56,8 +56,8 @@ public interface ISysUserService {
 	 *
 	 * @param userQuery userListQuery
 	 * @author dengtao
-	 * @date 2020/9/30 14:10
-	 * @since v1.0
+	 * @since 2020/9/30 14:10
+	 * @version 1.0.0
 	 */
 	Page<SysUser> findUserPage(Pageable page, UserPageQuery userQuery);
 
@@ -66,8 +66,8 @@ public interface ISysUserService {
 	 *
 	 * @param restPasswordDTO restPasswordDTO
 	 * @author dengtao
-	 * @date 2020/9/30 14:22
-	 * @since v1.0
+	 * @since 2020/9/30 14:22
+	 * @version 1.0.0
 	 */
 	Boolean restPass(Long id, RestPasswordUserDTO restPasswordDTO);
 
@@ -76,8 +76,8 @@ public interface ISysUserService {
 	 *
 	 * @param userId userId
 	 * @author dengtao
-	 * @date 2020/9/30 14:36
-	 * @since v1.0
+	 * @since 2020/9/30 14:36
+	 * @version 1.0.0
 	 */
 	SysUser findUserInfoById(Long userId);
 
@@ -87,8 +87,8 @@ public interface ISysUserService {
 	 * @param userQuery userQuery
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.SysUserVO>
 	 * @author dengtao
-	 * @date 2020/10/14 21:40
-	 * @since v1.0
+	 * @since 2020/10/14 21:40
+	 * @version 1.0.0
 	 */
 	List<SysUser> findUserList(UserQuery userQuery);
 
@@ -98,8 +98,8 @@ public interface ISysUserService {
 	 * @param userRoleDTO
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/10/21 09:24
-	 * @since v1.0
+	 * @since 2020/10/21 09:24
+	 * @version 1.0.0
 	 */
 	Boolean updateUserRoles(UserRoleDTO userRoleDTO);
 
@@ -109,8 +109,8 @@ public interface ISysUserService {
 	 * @param username
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author dengtao
-	 * @date 2020/10/21 15:03
-	 * @since v1.0
+	 * @since 2020/10/21 15:03
+	 * @version 1.0.0
 	 */
 	SysUser findUserInfoByUsername(String username);
 
@@ -120,8 +120,8 @@ public interface ISysUserService {
 	 * @param phone 手机
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/11/11 15:22
-	 * @since v1.0
+	 * @since 2020/11/11 15:22
+	 * @version 1.0.0
 	 */
 	Boolean existsByPhone(String phone);
 
@@ -131,8 +131,8 @@ public interface ISysUserService {
 	 * @param id 用户id
 	 * @return java.lang.Boolean
 	 * @author dengtao
-	 * @date 2020/11/11 15:40
-	 * @since v1.0
+	 * @since 2020/11/11 15:40
+	 * @version 1.0.0
 	 */
 	Boolean existsById(Long id);
 }

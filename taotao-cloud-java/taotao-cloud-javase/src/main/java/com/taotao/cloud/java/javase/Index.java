@@ -19,8 +19,8 @@ package com.taotao.cloud.java.javase;
  * Index
  *
  * @author dengtao
- * @date 2021/1/28 下午3:38
- * @since v1.0
+ * @since 2021/1/28 下午3:38
+ * @version 1.0.0
  */
 public class Index {
 

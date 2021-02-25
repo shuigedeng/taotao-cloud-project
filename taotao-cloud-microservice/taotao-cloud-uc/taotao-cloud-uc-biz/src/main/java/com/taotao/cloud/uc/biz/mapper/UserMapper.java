@@ -29,8 +29,8 @@ import java.util.List;
 
 /**
  * @author dengtao
- * @date 2020/11/11 14:42
- * @since v1.0
+ * @since 2020/11/11 14:42
+ * @version 1.0.0
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -45,8 +45,8 @@ public interface UserMapper {
 	 * @param sysUser sysUser
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author dengtao
-	 * @date 2020/11/11 14:47
-	 * @since v1.0
+	 * @since 2020/11/11 14:47
+	 * @version 1.0.0
 	 */
 	UserVO sysUserToUserVO(SysUser sysUser);
 
@@ -56,8 +56,8 @@ public interface UserMapper {
 	 * @param sysUser sysUser
 	 * @return com.taotao.cloud.uc.api.vo.user.AddUserVO
 	 * @author dengtao
-	 * @date 2020/11/11 16:59
-	 * @since v1.0
+	 * @since 2020/11/11 16:59
+	 * @version 1.0.0
 	 */
 	AddUserVO sysUserToAddUserVO(SysUser sysUser);
 
@@ -67,8 +67,8 @@ public interface UserMapper {
 	 * @param userList userList
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
 	 * @author dengtao
-	 * @date 2020/11/11 15:00
-	 * @since v1.0
+	 * @since 2020/11/11 15:00
+	 * @version 1.0.0
 	 */
 	List<UserVO> sysUserToUserVO(List<SysUser> userList);
 
@@ -78,8 +78,8 @@ public interface UserMapper {
 	 * @param userDTO userDTO
 	 * @return com.taotao.cloud.uc.biz.entity.SysUser
 	 * @author dengtao
-	 * @date 2020/11/11 14:52
-	 * @since v1.0
+	 * @since 2020/11/11 14:52
+	 * @version 1.0.0
 	 */
 	SysUser userDtoToSysUser(UserDTO userDTO);
 
@@ -90,8 +90,8 @@ public interface UserMapper {
 	 * @param user    user
 	 * @return void
 	 * @author dengtao
-	 * @date 2020/11/11 16:59
-	 * @since v1.0
+	 * @since 2020/11/11 16:59
+	 * @version 1.0.0
 	 */
 	void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
 }

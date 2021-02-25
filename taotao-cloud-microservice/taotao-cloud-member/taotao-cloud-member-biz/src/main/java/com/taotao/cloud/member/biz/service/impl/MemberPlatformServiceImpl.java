@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * 第三方登录信息服务实现类
  *
  * @author dengtao
- * @date 2020-10-16 16:23:49
+ * @since 2020-10-16 16:23:49
  * @since 1.0
  */
 @Service

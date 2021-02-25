@@ -21,8 +21,8 @@ import com.taotao.cloud.uc.biz.entity.SysRole;
 
 /**
  * @author dengtao
- * @date 2020/10/20 16:16
- * @since v1.0
+ * @since 2020/10/20 16:16
+ * @version 1.0.0
  */
 public class SysRoleUtil {
     public static RoleVO copy(SysRole role) {

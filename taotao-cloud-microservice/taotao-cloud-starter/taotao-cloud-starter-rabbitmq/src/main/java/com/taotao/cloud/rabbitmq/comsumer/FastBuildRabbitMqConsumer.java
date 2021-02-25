@@ -38,7 +38,7 @@ import java.util.concurrent.TimeoutException;
  * FastBuildRabbitMqConsumer
  *
  * @author dengtao
- * @date 2020/5/28 17:26
+ * @since 2020/5/28 17:26
  */
 @Slf4j
 @SuppressWarnings("all")

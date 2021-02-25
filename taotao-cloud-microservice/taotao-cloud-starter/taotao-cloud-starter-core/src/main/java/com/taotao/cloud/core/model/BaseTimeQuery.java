@@ -18,11 +18,7 @@ package com.taotao.cloud.core.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -34,8 +30,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 基础时间查询
  *
  * @author dengtao
- * @date 2020/5/2 16:40
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 16:40
  */
 @Data
 @Accessors(chain = true)
@@ -45,7 +41,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @SuperBuilder
 public class BaseTimeQuery implements Serializable {
 
-    private static final long serialVersionUID = -2483306509077581330L;
+	private static final long serialVersionUID = -2483306509077581330L;
 
 	@ApiModelProperty(value = "开始时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

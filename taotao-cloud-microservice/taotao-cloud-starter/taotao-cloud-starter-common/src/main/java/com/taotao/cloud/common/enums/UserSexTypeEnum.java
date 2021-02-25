@@ -19,55 +19,47 @@ package com.taotao.cloud.common.enums;
  * 用户性别类型
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
 public enum UserSexTypeEnum implements BaseEnum {
-    /**
-     * 未知
-     */
-    UNKNOWN((byte) 0, "未知"),
-    /**
-     * 男
-     */
-    MALE((byte) 1, "男"),
-    /**
-     * 女
-     */
-    FEMALE((byte) 2, "女");
+	/**
+	 * 未知
+	 */
+	UNKNOWN((byte) 0, "未知"),
+	/**
+	 * 男
+	 */
+	MALE((byte) 1, "男"),
+	/**
+	 * 女
+	 */
+	FEMALE((byte) 2, "女");
 
-    private byte code;
-    private String description;
+	private final byte code;
+	private final String description;
 
-    UserSexTypeEnum(byte code, String description) {
-        this.code = code;
-        this.description = description;
-    }
+	UserSexTypeEnum(byte code, String description) {
+		this.code = code;
+		this.description = description;
+	}
 
-    public void setCode(Byte code) {
-        this.code = code;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getNameByCode(int code) {
+		for (UserSexTypeEnum result : UserSexTypeEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getNameByCode(int code) {
-        for (UserSexTypeEnum result : UserSexTypeEnum.values()) {
-            if (result.getCode() == code) {
-                return result.name().toLowerCase();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Integer getCode() {
-        return (int) code;
-    }
+	@Override
+	public Integer getCode() {
+		return (int) code;
+	}
 }

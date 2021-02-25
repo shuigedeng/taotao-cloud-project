@@ -44,8 +44,8 @@ import java.util.Set;
  * SecurityHandlerComponent
  *
  * @author dengtao
- * @date 2020/4/30 09:05
- * @since v1.0
+ * @since 2020/4/30 09:05
+ * @version 1.0.0
  */
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SecurityHandlerComponent {
@@ -54,8 +54,8 @@ public class SecurityHandlerComponent {
      * AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常
      *
      * @author dengtao
-     * @date 2020/10/9 11:12
-     * @since v1.0
+     * @since 2020/10/9 11:12
+     * @version 1.0.0
      */
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
@@ -66,8 +66,8 @@ public class SecurityHandlerComponent {
      * OAuth2AccessDeniedHandler 用来解决认证过的用户访问无权限资源时的异常
      *
      * @author dengtao
-     * @date 2020/10/9 11:13
-     * @since v1.0
+     * @since 2020/10/9 11:13
+     * @version 1.0.0
      */
     @Bean
     public OAuth2AccessDeniedHandler oAuth2AccessDeniedHandler() {

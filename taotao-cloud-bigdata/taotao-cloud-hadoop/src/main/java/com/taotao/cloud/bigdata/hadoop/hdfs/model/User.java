@@ -28,8 +28,8 @@ import java.io.IOException;
  * User
  *
  * @author dengtao
- * @date 2020/10/29 15:28
- * @since v1.0
+ * @since 2020/10/29 15:28
+ * @version 1.0.0
  */
 @Data
 @AllArgsConstructor

@@ -32,8 +32,8 @@ import java.util.List;
  * Resolver中的方法，入参及返回值类型，必须和graphqls文件中定义的一致，否则启动报错
  *
  * @author dengtao
- * @date 2020/11/9 09:54
- * @since v1.0
+ * @since 2020/11/9 09:54
+ * @version 1.0.0
  */
 @Component
 public class QueryResolver implements GraphQLQueryResolver {

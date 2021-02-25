@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * RemoteLogFallbackImpl
  *
  * @author dengtao
- * @date 2020/4/29 21:43
+ * @since 2020/4/29 21:43
  */
 public class RemoteOrderFallbackImpl implements FallbackFactory<RemoteOrderService> {
     @Override

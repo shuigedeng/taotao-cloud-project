@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Classname BaseException
  * @Description 自定义异常
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-03-29 13:21
+ * @since 2019-03-29 13:21
  * @Version 1.0
  */
 public class PreBaseException extends RuntimeException implements Serializable {

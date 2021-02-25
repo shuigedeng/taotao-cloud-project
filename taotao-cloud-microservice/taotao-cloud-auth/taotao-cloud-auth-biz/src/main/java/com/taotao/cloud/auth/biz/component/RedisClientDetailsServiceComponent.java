@@ -35,8 +35,8 @@ import java.util.List;
  * 注意对oauth_client_details清除redis db部分数据的清空
  *
  * @author dengtao
- * @date 2020/4/29 17:40
- * @since v1.0
+ * @since 2020/4/29 17:40
+ * @version 1.0.0
  */
 @Component
 public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService {
@@ -64,7 +64,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      * @param clientId clientId
      * @return org.springframework.security.oauth2.provider.ClientDetails
      * @author dengtao
-     * @date 2020/4/29 17:42
+     * @since 2020/4/29 17:42
      */
     private ClientDetails cacheAndGetClient(String clientId) {
         ClientDetails clientDetails = null;
@@ -106,7 +106,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      * @param clientId clientId
      * @return void
      * @author dengtao
-     * @date 2020/4/29 17:44
+     * @since 2020/4/29 17:44
      */
     private void removeRedisCache(String clientId) {
         redisRepository.del(clientRedisKey(clientId));
@@ -117,7 +117,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      *
      * @return void
      * @author dengtao
-     * @date 2020/4/29 17:45
+     * @since 2020/4/29 17:45
      */
     public void loadAllClientToCache() {
         List<ClientDetails> list = super.listClientDetails();

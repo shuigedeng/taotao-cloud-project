@@ -28,8 +28,8 @@ import reactor.core.publisher.Mono;
  * 自定义认证管理器
  *
  * @author dengtao
- * @date 2020/4/29 22:09
- * @since v1.0
+ * @since 2020/4/29 22:09
+ * @version 1.0.0
  */
 public class AuthenticationManagerComponent implements ReactiveAuthenticationManager {
     private static final String FAILURE = "token已失效";

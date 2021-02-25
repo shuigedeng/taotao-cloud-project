@@ -31,8 +31,8 @@
 //  * OpenId认证过滤
 //  *
 //  * @author dengtao
-//  * @date 2020/4/29 19:58
-//  * @since v1.0
+//  * @since 2020/4/29 19:58
+//  * @version 1.0.0
 //  */
 // public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 //

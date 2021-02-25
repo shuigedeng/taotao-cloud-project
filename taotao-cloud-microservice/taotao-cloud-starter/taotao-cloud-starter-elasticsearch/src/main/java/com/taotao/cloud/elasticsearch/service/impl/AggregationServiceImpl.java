@@ -50,8 +50,8 @@ import java.util.Map;
  * 聚合服务实现
  *
  * @author dengtao
- * @date 2020/6/15 11:27
- * @since v1.0
+ * @since 2020/6/15 11:27
+ * @version 1.0.0
  */
 public class AggregationServiceImpl implements IAggregationService {
 

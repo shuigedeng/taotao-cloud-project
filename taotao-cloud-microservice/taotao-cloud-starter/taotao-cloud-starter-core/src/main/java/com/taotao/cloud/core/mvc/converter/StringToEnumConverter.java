@@ -23,32 +23,30 @@ import org.springframework.core.convert.converter.Converter;
 import java.util.Map;
 
 /**
- * <p>
  * String枚举转化器
- * </p>
  *
  * @author dengtao
- * @date 2020/9/29 14:20
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/9/29 14:20
  */
 public class StringToEnumConverter<T extends BaseEnum> implements Converter<String, T> {
 
-    private final Map<String, T> enumMap = MapUtil.newHashMap();
+	private final Map<String, T> enumMap = MapUtil.newHashMap();
 
-    public StringToEnumConverter(Class<T> enumType) {
-        T[] enums = enumType.getEnumConstants();
-        for (T e : enums) {
-            Integer code = e.getCode();
-            enumMap.put(e.getNameByCode(code), e);
-        }
-    }
+	public StringToEnumConverter(Class<T> enumType) {
+		T[] enums = enumType.getEnumConstants();
+		for (T e : enums) {
+			Integer code = e.getCode();
+			enumMap.put(e.getNameByCode(code), e);
+		}
+	}
 
-    @Override
-    public T convert(String source) {
-        T t = enumMap.get(source);
-        if (ObjectUtil.isNull(t)) {
-            throw new IllegalArgumentException("无法匹配对应的枚举类型");
-        }
-        return t;
-    }
+	@Override
+	public T convert(String source) {
+		T t = enumMap.get(source);
+		if (ObjectUtil.isNull(t)) {
+			throw new IllegalArgumentException("无法匹配对应的枚举类型");
+		}
+		return t;
+	}
 }

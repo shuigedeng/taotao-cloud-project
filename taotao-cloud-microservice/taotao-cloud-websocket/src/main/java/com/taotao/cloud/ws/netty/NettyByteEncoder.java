@@ -26,8 +26,8 @@ import org.springframework.stereotype.Component;
  * NettyByteEncoder
  *
  * @author dengtao
- * @date 2020/12/30 下午4:44
- * @since v1.0
+ * @since 2020/12/30 下午4:44
+ * @version 1.0.0
  */
 @Slf4j
 @Component

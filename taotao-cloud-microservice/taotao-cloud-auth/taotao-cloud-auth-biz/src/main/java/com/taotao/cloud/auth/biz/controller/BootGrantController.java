@@ -29,8 +29,8 @@ import java.util.Map;
  * 授权控制器<br>
  *
  * @author dengtao
- * @date 2020/7/24 17:05
- * @since v1.0
+ * @since 2020/7/24 17:05
+ * @version 1.0.0
  */
 @ApiIgnore
 @Controller

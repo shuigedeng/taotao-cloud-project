@@ -15,7 +15,7 @@ import java.util.Set;
  * 远程调用后台资源模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteResourceService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteUserFallbackImpl.class)
 public interface RemoteResourceService {
@@ -25,8 +25,8 @@ public interface RemoteResourceService {
      * @param codes
      * @return com.taotao.cloud.core.model.Result<java.util.List < com.taotao.cloud.uc.api.vo.resource.ResourceVO>>
      * @author dengtao
-     * @date 2020/10/21 15:24
-     * @since v1.0
+     * @since 2020/10/21 15:24
+     * @version 1.0.0
      */
     @GetMapping("/resource/info/codes")
     Result<List<ResourceVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);

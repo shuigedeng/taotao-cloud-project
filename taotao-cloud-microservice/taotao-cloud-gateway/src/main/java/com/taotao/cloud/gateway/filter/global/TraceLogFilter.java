@@ -31,8 +31,8 @@ import reactor.core.publisher.Mono;
  * 生成日志链路追踪id
  *
  * @author dengtao
- * @date 2020/4/29 22:13
- * @since v1.0
+ * @since 2020/4/29 22:13
+ * @version 1.0.0
  */
 @Component
 public class TraceLogFilter implements GlobalFilter, Ordered {

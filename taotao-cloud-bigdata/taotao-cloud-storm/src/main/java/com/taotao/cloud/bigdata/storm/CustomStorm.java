@@ -22,7 +22,7 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
  * @version v1.0.0
  * @create 2019-07-01 14:03
  * @see
- * @since v1.0.0
+ * @version 1.0.0.0
  */
 public class CustomStorm {
 	private final Random random = new Random();
@@ -39,7 +39,7 @@ public class CustomStorm {
 	 * @return void
 	 * @throws
 	 * @author dengtao
-	 * @date 2019-07-01 14:06
+	 * @since 2019-07-01 14:06
 	 * @link
 	 * @version v1.0.0
 	 */
@@ -67,7 +67,7 @@ public class CustomStorm {
 	 * @return void
 	 * @throws
 	 * @author dengtao
-	 * @date 2019-07-01 14:06
+	 * @since 2019-07-01 14:06
 	 * @link
 	 * @version v1.0.0
 	 */
@@ -93,7 +93,7 @@ public class CustomStorm {
 	 * @return void
 	 * @throws
 	 * @author dengtao
-	 * @date 2019-07-01 14:07
+	 * @since 2019-07-01 14:07
 	 * @link
 	 * @version v1.0.0
 	 */

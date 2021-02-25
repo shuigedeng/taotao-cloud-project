@@ -13,7 +13,7 @@ import java.util.Map;
  * ${comments}
  *
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 @Mapper
 public interface ${className}Mapper extends SuperMapper<${className}> {

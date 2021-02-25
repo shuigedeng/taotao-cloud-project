@@ -19,8 +19,8 @@ package com.taotao.cloud.rabbitmq.enums;
  * ConsumerResultEnum
  *
  * @author dengtao
- * @date 2020/9/29 15:57
- * @since v1.0
+ * @since 2020/9/29 15:57
+ * @version 1.0.0
  */
 public enum ConsumerResultEnum {
 

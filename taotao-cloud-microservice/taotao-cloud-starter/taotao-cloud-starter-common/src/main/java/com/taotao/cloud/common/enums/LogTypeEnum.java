@@ -19,61 +19,53 @@ package com.taotao.cloud.common.enums;
  * 日志类型
  *
  * @author dengtao
- * @date 2020/4/30 10:25
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  */
-public enum LogTypeEnum implements BaseEnum{
-    /**
-     * redis
-     */
-    LOGGER(1, "logger", "logger"),
-    /**
-     * redis
-     */
-    REDIS(2, "redis", "redis"),
-    /**
-     * kafka
-     */
-    KAFKA(3, "kafka", "kafka");
+public enum LogTypeEnum implements BaseEnum {
+	/**
+	 * redis
+	 */
+	LOGGER(1, "logger", "logger"),
+	/**
+	 * redis
+	 */
+	REDIS(2, "redis", "redis"),
+	/**
+	 * kafka
+	 */
+	KAFKA(3, "kafka", "kafka");
 
-    private Integer value;
-    private String name;
-    private String description;
+	private final Integer value;
+	private final String name;
+	private final String description;
 
-    LogTypeEnum(Integer value, String name, String description) {
-        this.value = value;
-        this.name = name;
-        this.description = description;
-    }
+	LogTypeEnum(Integer value, String name, String description) {
+		this.value = value;
+		this.name = name;
+		this.description = description;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getNameByCode(int code) {
+		for (LogTypeEnum result : LogTypeEnum.values()) {
+			if (result.getCode() == code) {
+				return result.name().toLowerCase();
+			}
+		}
+		return null;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getNameByCode(int code) {
-        for (LogTypeEnum result : LogTypeEnum.values()) {
-            if (result.getCode() == code) {
-                return result.name().toLowerCase();
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Integer getCode() {
-        return value;
-    }
+	@Override
+	public Integer getCode() {
+		return value;
+	}
 }

@@ -23,8 +23,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * RabbitMQProperties
  *
  * @author dengtao
- * @date 2020/5/28 17:35
- * @since v1.0
+ * @since 2020/5/28 17:35
+ * @version 1.0.0
  */
 @Data
 @RefreshScope

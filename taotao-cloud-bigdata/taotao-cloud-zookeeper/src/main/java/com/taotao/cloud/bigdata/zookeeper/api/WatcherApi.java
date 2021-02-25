@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author dengtao
- * @date 2020/12/3 下午6:26
- * @since v1.0
+ * @since 2020/12/3 下午6:26
+ * @version 1.0.0
  */
 public class WatcherApi implements Watcher {
 

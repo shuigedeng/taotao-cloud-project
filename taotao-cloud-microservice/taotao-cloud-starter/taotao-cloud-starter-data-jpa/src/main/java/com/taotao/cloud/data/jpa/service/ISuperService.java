@@ -23,8 +23,8 @@ import com.taotao.cloud.core.lock.DistributedLock;
  * service接口父类
  *
  * @author dengtao
- * @date 2020/4/30 10:27
- * @since v1.0
+ * @since 2020/4/30 10:27
+ * @version 1.0.0
  */
 public interface ISuperService<T> {
 	/**

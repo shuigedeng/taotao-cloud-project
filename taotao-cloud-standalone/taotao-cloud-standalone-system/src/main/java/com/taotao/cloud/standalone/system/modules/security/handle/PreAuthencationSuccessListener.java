@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @Classname PreAuthencationSuccessListener
  * @Description 用户登录成功监听器事件
  * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
- * @Date 2019/12/19 5:28 下午
+ * @since 2019/12/19 5:28 下午
  * @Version 1.0
  */
 @Slf4j

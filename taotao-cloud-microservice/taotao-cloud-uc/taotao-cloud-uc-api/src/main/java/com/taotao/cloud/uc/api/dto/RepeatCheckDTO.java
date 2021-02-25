@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * 重复校验DTO
  *
  * @author dengtao
- * @date 2020/5/2 16:40
+ * @since 2020/5/2 16:40
 */
 @Data
 @Builder

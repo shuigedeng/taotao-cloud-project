@@ -16,11 +16,10 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter"
     implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.springframework.kafka:spring-kafka:2.3.1.RELEASE"
+    implementation "org.springframework.kafka:spring-kafka"
 
-    implementation "com.github.danielwegener:logback-kafka-appender:0.2.0-RC1"
-    implementation "net.logstash.logback:logstash-logback-encoder:5.1"
-    implementation 'com.alibaba:fastjson:1.2.70'
+    implementation "com.github.danielwegener:logback-kafka-appender"
+    implementation "net.logstash.logback:logstash-logback-encoder"
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

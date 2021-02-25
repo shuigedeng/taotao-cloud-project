@@ -22,8 +22,8 @@
 //  * Ribbon扩展配置类
 //  *
 //  * @author dengtao
-//  * @date 2020/6/15 11:31
-//  * @since v1.0
+//  * @since 2020/6/15 11:31
+//  * @version 1.0.0
 //  */
 // @ConditionalOnProperty(value = "taotao.cloud.ribbon.isolation.enabled", havingValue = "true")
 // @LoadBalancerClient(configuration = {RuleConfigure.class})

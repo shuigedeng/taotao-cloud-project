@@ -27,8 +27,8 @@ import java.io.IOException;
  * CustomOauthExceptionSerializer
  *
  * @author dengtao
- * @date 2020/4/30 09:12
- * @since v1.0
+ * @since 2020/4/30 09:12
+ * @version 1.0.0
  */
 public class OauthExceptionSerializer extends StdSerializer<CustomOauthException> {
 

@@ -12,7 +12,7 @@ import java.util.Collection;
  * @Classname PreSocialUser
  * @Description 用户社交登录 身份权限认证类 登陆身份认证
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-07-08 23:13
+ * @since 2019-07-08 23:13
  * @Version 1.0
  */
 @Setter

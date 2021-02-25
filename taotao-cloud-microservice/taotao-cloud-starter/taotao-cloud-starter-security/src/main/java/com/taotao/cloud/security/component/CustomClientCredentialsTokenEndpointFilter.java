@@ -32,8 +32,8 @@
 //  * Details: 为了使用自定义的 {@link AuthenticationEntryPoint}, 从而自定义发生异常时的响应格式
 //  *
 //  * @author dengtao
-//  * @date 2020/9/29 16:08
-//  * @since v1.0
+//  * @since 2020/9/29 16:08
+//  * @version 1.0.0
 //  */
 // @Slf4j
 // public class CustomClientCredentialsTokenEndpointFilter extends ClientCredentialsTokenEndpointFilter {

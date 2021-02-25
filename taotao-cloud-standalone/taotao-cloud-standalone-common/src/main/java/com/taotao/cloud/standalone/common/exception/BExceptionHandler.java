@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @Classname BExceptionHandler
  * @Description 自定义异常处理
  * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-03-29 13:23
+ * @since 2019-03-29 13:23
  * @Version 1.0
  */
 @Slf4j

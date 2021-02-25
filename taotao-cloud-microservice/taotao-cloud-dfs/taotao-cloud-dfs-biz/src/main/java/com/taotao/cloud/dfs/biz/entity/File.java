@@ -18,8 +18,8 @@ import javax.persistence.Table;
  * 文件表
  *
  * @author dengtao
- * @date 2020/11/12 15:33
- * @since v1.0
+ * @since 2020/11/12 15:33
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

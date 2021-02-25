@@ -17,8 +17,8 @@ package com.taotao.cloud.bigdata.hive.api.service;
 
 /**
  * @author dengtao
- * @date 2020/10/30 10:12
- * @since v1.0
+ * @since 2020/10/30 10:12
+ * @version 1.0.0
  */
 public interface HiveService {
 	public String insert();

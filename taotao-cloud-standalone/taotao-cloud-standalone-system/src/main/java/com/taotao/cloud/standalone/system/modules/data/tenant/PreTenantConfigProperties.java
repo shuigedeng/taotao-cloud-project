@@ -11,7 +11,7 @@ import java.util.List;
  * @Classname PreTenantConfigProperties
  * @Description 多租户动态配置
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-09 23:36
+ * @since 2019-08-09 23:36
  * @Version 1.0
  */
 @Data

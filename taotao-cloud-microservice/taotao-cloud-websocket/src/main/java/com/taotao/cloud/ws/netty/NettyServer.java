@@ -30,8 +30,8 @@ import org.springframework.stereotype.Component;
  * NettyServer
  *
  * @author dengtao
- * @date 2020/12/30 下午4:35
- * @since v1.0
+ * @since 2020/12/30 下午4:35
+ * @version 1.0.0
  */
 @Slf4j
 @Component

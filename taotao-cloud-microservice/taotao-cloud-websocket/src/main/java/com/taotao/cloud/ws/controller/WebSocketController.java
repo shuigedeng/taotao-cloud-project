@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author dengtao
- * @date 2020/12/18 下午3:20
- * @since v1.0
+ * @since 2020/12/18 下午3:20
+ * @version 1.0.0
  */
 @Controller
 public class WebSocketController {

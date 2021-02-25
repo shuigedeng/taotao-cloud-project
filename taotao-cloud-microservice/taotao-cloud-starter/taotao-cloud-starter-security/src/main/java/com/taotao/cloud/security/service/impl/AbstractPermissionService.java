@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
  * 请求权限判断service
  *
  * @author dengtao
- * @date 2020/5/1 08:02
+ * @since 2020/5/1 08:02
  */
 @Slf4j
 public abstract class AbstractPermissionService implements PermissionService {

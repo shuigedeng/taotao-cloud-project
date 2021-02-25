@@ -35,8 +35,8 @@ import java.util.Map;
  * LogEnhance
  *
  * @author dengtao
- * @date 2020/11/26 下午8:26
- * @since v1.0
+ * @since 2020/11/26 下午8:26
+ * @version 1.0.0
  */
 public class LogEnhance {
 	static class LogEnhanceMapper extends Mapper<LongWritable, Text, Text, NullWritable> {

@@ -28,8 +28,8 @@ import java.io.IOException;
  * OauthLogoutSuccessHandler
  *
  * @author dengtao
- * @date 2020/4/29 21:22
- * @since v1.0
+ * @since 2020/4/29 21:22
+ * @version 1.0.0
  */
 @Component
 public class OauthLogoutSuccessHandler implements LogoutSuccessHandler {

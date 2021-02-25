@@ -23,8 +23,8 @@ import org.junit.Test;
  * TrinoTest
  *
  * @author dengtao
- * @date 2021/1/22 下午3:05
- * @since v1.0
+ * @since 2021/1/22 下午3:05
+ * @version 1.0.0
  */
 public class TrinoTest {
 	@Test

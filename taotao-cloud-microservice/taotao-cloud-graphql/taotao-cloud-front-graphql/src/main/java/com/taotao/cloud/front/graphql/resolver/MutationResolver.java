@@ -29,8 +29,8 @@ import org.springframework.stereotype.Component;
  * Resolver中的方法，入参及返回值类型，必须和graphqls文件中定义的一致，否则启动报错
  *
  * @author dengtao
- * @date 2020/11/9 09:55
- * @since v1.0
+ * @since 2020/11/9 09:55
+ * @version 1.0.0
  */
 @Component
 public class MutationResolver implements GraphQLQueryResolver, GraphQLMutationResolver {

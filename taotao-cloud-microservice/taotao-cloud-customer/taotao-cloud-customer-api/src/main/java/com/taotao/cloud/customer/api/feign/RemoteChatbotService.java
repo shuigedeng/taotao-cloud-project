@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * 远程调用售后模块
  *
  * @author dengtao
- * @date 2020/5/2 16:42
+ * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteChatbotService", value = ServiceNameConstant.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteChatbotFallbackImpl.class)
 public interface RemoteChatbotService {
@@ -23,8 +23,8 @@ public interface RemoteChatbotService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<ChatbotVO>
 	 * @author dengtao
-	 * @date 2020/11/20 上午10:45
-	 * @since v1.0
+	 * @since 2020/11/20 上午10:45
+	 * @version 1.0.0
 	 */
 	@GetMapping("/chatbot/info/id/{id:[0-9]*}")
 	Result<ChatbotVO> findChatbotById(@PathVariable(value = "id") Long id);

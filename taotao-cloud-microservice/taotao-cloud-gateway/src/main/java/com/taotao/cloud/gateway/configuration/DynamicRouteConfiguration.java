@@ -27,8 +27,8 @@ import org.springframework.context.annotation.Configuration;
  * 动态路由配置
  *
  * @author dengtao
- * @date 2020/5/2 19:33
- * @since v1.0
+ * @since 2020/5/2 19:33
+ * @version 1.0.0
  */
 @Configuration
 @ConditionalOnProperty(prefix = "taotao.cloud.gateway.dynamic.route", name = "enabled", havingValue = "false")

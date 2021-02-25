@@ -13,18 +13,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.taotao.cloud.common.constant.CommonConstant;
-
+import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+import lombok.experimental.UtilityClass;
 
 /**
  * 基于 Jackson 的 json 工具类
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2019/3/5
  */
+@UtilityClass
 public class JsonUtil {
-	private final static ObjectMapper MAPPER = new ObjectMapper();
+
+	public final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {
 		// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
@@ -54,6 +62,9 @@ public class JsonUtil {
 	 * 对象转换为json字符串
 	 *
 	 * @param o 要转换的对象
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:21
 	 */
 	public static String toJSONString(Object o) {
 		return toJSONString(o, false);
@@ -64,6 +75,9 @@ public class JsonUtil {
 	 *
 	 * @param o      要转换的对象
 	 * @param format 是否格式化json
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:21
 	 */
 	public static String toJSONString(Object o, boolean format) {
 		try {
@@ -81,7 +95,7 @@ public class JsonUtil {
 			}
 			return MAPPER.writeValueAsString(o);
 		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e.getMessage());
 		}
 	}
 
@@ -90,6 +104,9 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @param cls  目标对象
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, Class<T> cls) {
 		if (StrUtil.isBlank(json) || cls == null) {
@@ -103,19 +120,22 @@ public class JsonUtil {
 	}
 
 	/**
-	 * 字符串转换为指定对象，并增加泛型转义
-	 * 例如：List<Integer> test = toObject(jsonStr, List.class, Integer.class);
+	 * 字符串转换为指定对象，并增加泛型转义 例如：List<Integer> test = toObject(jsonStr, List.class, Integer.class);
 	 *
 	 * @param json             json字符串
 	 * @param parametrized     目标对象
 	 * @param parameterClasses 泛型对象
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, Class<?> parametrized, Class<?>... parameterClasses) {
 		if (StrUtil.isBlank(json) || parametrized == null) {
 			return null;
 		}
 		try {
-			JavaType javaType = MAPPER.getTypeFactory().constructParametricType(parametrized, parameterClasses);
+			JavaType javaType = MAPPER.getTypeFactory()
+				.constructParametricType(parametrized, parameterClasses);
 			return MAPPER.readValue(json, javaType);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -127,6 +147,9 @@ public class JsonUtil {
 	 *
 	 * @param json          json字符串
 	 * @param typeReference 目标对象类型
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, TypeReference<T> typeReference) {
 		if (StrUtil.isBlank(json) || typeReference == null) {
@@ -143,6 +166,9 @@ public class JsonUtil {
 	 * 字符串转换为JsonNode对象
 	 *
 	 * @param json json字符串
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static JsonNode parse(String json) {
 		if (StrUtil.isBlank(json)) {
@@ -159,6 +185,9 @@ public class JsonUtil {
 	 * 对象转换为map对象
 	 *
 	 * @param o 要转换的对象
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <K, V> Map<K, V> toMap(Object o) {
 		if (o == null) {
@@ -174,16 +203,19 @@ public class JsonUtil {
 	 * json字符串转换为list对象
 	 *
 	 * @param json json字符串
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <T> List<T> toList(String json) {
-		if (StrUtil.isBlank(json)) {
-			return null;
+		if (StrUtil.isNotBlank(json)) {
+			try {
+				return MAPPER.readValue(json, List.class);
+			} catch (JsonProcessingException e) {
+				throw new BaseException(e.getMessage());
+			}
 		}
-		try {
-			return MAPPER.readValue(json, List.class);
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
+		return new ArrayList<>();
 	}
 
 	/**
@@ -191,16 +223,19 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @param cls  list的元素类型
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/2/25 16:22
 	 */
 	public static <T> List<T> toList(String json, Class<T> cls) {
 		if (StrUtil.isBlank(json)) {
-			return null;
+			return new ArrayList<>();
 		}
 		try {
 			JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, cls);
 			return MAPPER.readValue(json, javaType);
 		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e.getMessage());
 		}
 	}
 }

@@ -42,8 +42,8 @@ import java.util.Set;
  * GrayLoadBalancer<br>
  *
  * @author dengtao
- * @date 2020/4/27 13:59
- * @since v1.0
+ * @since 2020/4/27 13:59
+ * @version 1.0.0
  */
 public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 	private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;

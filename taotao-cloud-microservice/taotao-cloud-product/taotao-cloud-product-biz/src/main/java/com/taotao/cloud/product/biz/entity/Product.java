@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * 商品信息表
  *
  * @author dengtao
- * @date 2020/4/30 16:03
+ * @since 2020/4/30 16:03
  */
 @Data
 @SuperBuilder

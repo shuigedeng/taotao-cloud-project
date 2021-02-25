@@ -34,8 +34,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  * JStreamWordCount
  *
  * @author dengtao
- * @date 2020/11/3 09:07
- * @since v1.0
+ * @since 2020/11/3 09:07
+ * @version 1.0.0
  */
 public class JStreamLambdaWordCount {
 	public static void main(String[] args) throws Exception {

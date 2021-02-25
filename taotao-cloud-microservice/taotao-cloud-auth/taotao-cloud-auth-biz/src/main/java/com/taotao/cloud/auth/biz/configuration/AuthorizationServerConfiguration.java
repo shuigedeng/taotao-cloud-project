@@ -54,8 +54,8 @@ import java.util.Objects;
  * 授权服务器 主要是配置客户端信息和认证信息
  *
  * @author dengtao
- * @date 2020/4/29 20:01
- * @since v1.0
+ * @since 2020/4/29 20:01
+ * @version 1.0.0
  */
 @Configuration
 @AllArgsConstructor
@@ -76,7 +76,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 *
 	 * @param clients clients
 	 * @author dengtao
-	 * @date 2020/4/29 20:01
+	 * @since 2020/4/29 20:01
 	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -88,7 +88,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 *
 	 * @param endpoints endpoints
 	 * @author dengtao
-	 * @date 2020/4/29 20:08
+	 * @since 2020/4/29 20:08
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -163,7 +163,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 *
 	 * @param securityConfigurer securityConfigurer
 	 * @author dengtao
-	 * @date 2020/4/29 20:12
+	 * @since 2020/4/29 20:12
 	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer securityConfigurer) throws Exception {

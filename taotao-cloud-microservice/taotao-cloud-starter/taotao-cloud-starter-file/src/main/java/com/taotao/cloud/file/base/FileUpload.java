@@ -10,8 +10,8 @@ import java.io.File;
  * 文件上传接口
  *
  * @author dengtao
- * @date 2020/10/26 10:42
- * @since v1.0
+ * @since 2020/10/26 10:42
+ * @version 1.0.0
  */
 public interface FileUpload {
 
@@ -21,8 +21,8 @@ public interface FileUpload {
 	 * @param file 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/11/12 16:01
-	 * @since v1.0
+	 * @since 2020/11/12 16:01
+	 * @version 1.0.0
 	 */
 	FileInfo upload(File file) throws FileUploadException;
 
@@ -33,8 +33,8 @@ public interface FileUpload {
 	 * @param fileKey
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/11/12 17:03
-	 * @since v1.0
+	 * @since 2020/11/12 17:03
+	 * @version 1.0.0
 	 */
 	FileInfo upload(File file, String fileKey) throws FileUploadException;
 
@@ -44,8 +44,8 @@ public interface FileUpload {
 	 * @param file
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/11/12 17:47
-	 * @since v1.0
+	 * @since 2020/11/12 17:47
+	 * @version 1.0.0
 	 */
 	FileInfo upload(MultipartFile file) throws FileUploadException;
 
@@ -56,8 +56,8 @@ public interface FileUpload {
 	 * @param fileKey
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/11/12 17:47
-	 * @since v1.0
+	 * @since 2020/11/12 17:47
+	 * @version 1.0.0
 	 */
 	FileInfo upload(MultipartFile file, String fileKey) throws FileUploadException;
 
@@ -67,8 +67,8 @@ public interface FileUpload {
 	 * @param fileInfo
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
-	 * @date 2020/11/12 17:47
-	 * @since v1.0
+	 * @since 2020/11/12 17:47
+	 * @version 1.0.0
 	 */
 	FileInfo delete(FileInfo fileInfo) throws FileUploadException;
 }

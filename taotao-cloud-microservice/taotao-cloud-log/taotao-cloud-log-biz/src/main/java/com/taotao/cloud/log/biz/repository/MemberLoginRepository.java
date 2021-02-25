@@ -23,8 +23,8 @@ import javax.persistence.EntityManager;
 
 /**
  * @author dengtao
- * @date 2020/11/13 10:01
- * @since v1.0
+ * @since 2020/11/13 10:01
+ * @version 1.0.0
  */
 @Repository
 public class MemberLoginRepository extends BaseJpaRepository<MemberLogin, Long> {

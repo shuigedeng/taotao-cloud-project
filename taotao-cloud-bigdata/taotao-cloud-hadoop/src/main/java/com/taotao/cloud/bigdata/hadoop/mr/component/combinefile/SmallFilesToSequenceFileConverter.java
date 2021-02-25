@@ -39,8 +39,8 @@ import java.io.IOException;
  * SmallFilesToSequenceFileConverter
  *
  * @author dengtao
- * @date 2020/11/26 下午8:15
- * @since v1.0
+ * @since 2020/11/26 下午8:15
+ * @version 1.0.0
  */
 public class SmallFilesToSequenceFileConverter extends Configured implements Tool {
 	static class SequenceFileMapper extends Mapper<NullWritable, BytesWritable, Text, BytesWritable> {

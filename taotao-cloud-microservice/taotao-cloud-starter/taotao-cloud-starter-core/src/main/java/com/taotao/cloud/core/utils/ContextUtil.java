@@ -22,19 +22,20 @@ import org.springframework.context.ConfigurableApplicationContext;
  * 获取上下文
  *
  * @author dengtao
- * @date 2020/6/2 16:33
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:33
  */
 @UtilityClass
 public class ContextUtil {
-    public Class<?> mainClass;
-    private ConfigurableApplicationContext applicationContext;
 
-    public void setApplicationContext(ConfigurableApplicationContext applicationContext) {
-        ContextUtil.applicationContext = applicationContext;
-    }
+	public Class<?> mainClass;
+	private ConfigurableApplicationContext applicationContext;
 
-    public ConfigurableApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
+	public void setApplicationContext(ConfigurableApplicationContext applicationContext) {
+		ContextUtil.applicationContext = applicationContext;
+	}
+
+	public ConfigurableApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
 }

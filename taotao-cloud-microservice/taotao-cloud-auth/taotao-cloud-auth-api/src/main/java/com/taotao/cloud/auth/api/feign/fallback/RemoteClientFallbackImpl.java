@@ -24,8 +24,8 @@ import org.springframework.stereotype.Component;
  * RemoteClientFallbackImpl
  *
  * @author dengtao
- * @date 2020/4/29 21:43
- * @since v1.0
+ * @since 2020/4/29 21:43
+ * @version 1.0.0
  */
 @AllArgsConstructor
 @Component

@@ -14,7 +14,7 @@ import org.springframework.social.oauth2.OAuth2ServiceProvider;
  * @Classname WeixinConnectionFactory
  * @Description 微信连接工厂
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-08-23 16:50
+ * @since 2019-08-23 16:50
  * @Version 1.0
  */
 public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {

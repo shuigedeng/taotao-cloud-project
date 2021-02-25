@@ -33,8 +33,8 @@ import java.util.List;
  * 权限认证管理器
  *
  * @author dengtao
- * @date 2020/4/29 22:10
- * @since v1.0
+ * @since 2020/4/29 22:10
+ * @version 1.0.0
  */
 @Component
 public class PermissionAuthManager extends AbstractPermissionService implements ReactiveAuthorizationManager<AuthorizationContext> {

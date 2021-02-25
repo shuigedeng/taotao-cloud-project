@@ -33,8 +33,8 @@ import org.apache.flink.util.Collector;
  * JStreamWordCount
  *
  * @author dengtao
- * @date 2020/11/3 09:07
- * @since v1.0
+ * @since 2020/11/3 09:07
+ * @version 1.0.0
  */
 public class JStreamWordCount {
 	public static void main(String[] args) throws Exception {

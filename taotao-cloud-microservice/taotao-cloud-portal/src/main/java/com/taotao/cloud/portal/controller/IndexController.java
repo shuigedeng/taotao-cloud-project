@@ -31,8 +31,8 @@ import java.util.LinkedHashMap;
  * IndexController
  *
  * @author dengtao
- * @date 2021/1/18 下午4:55
- * @since v1.0
+ * @since 2021/1/18 下午4:55
+ * @version 1.0.0
  */
 @Controller
 public class IndexController {

@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 角色-部门第三方表
  *
  * @author dengtao
- * @date 2020/6/15 11:00
+ * @since 2020/6/15 11:00
  */
 @Data
 @Builder

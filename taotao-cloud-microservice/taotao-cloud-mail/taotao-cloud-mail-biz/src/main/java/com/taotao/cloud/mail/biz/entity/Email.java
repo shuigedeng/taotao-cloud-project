@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * 邮件信息表
  *
  * @author dengtao
- * @date 2020/11/13 09:46
- * @since v1.0
+ * @since 2020/11/13 09:46
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

@@ -32,8 +32,8 @@ import org.apache.flink.util.Collector;
  * JBatchWordCount
  *
  * @author dengtao
- * @date 2020/11/3 09:05
- * @since v1.0
+ * @since 2020/11/3 09:05
+ * @version 1.0.0
  */
 public class JBatchWordCount {
 	public static void main(String[] args) throws Exception {

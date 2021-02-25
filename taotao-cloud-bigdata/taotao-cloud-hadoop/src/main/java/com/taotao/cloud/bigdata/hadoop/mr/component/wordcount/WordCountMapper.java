@@ -34,8 +34,8 @@ import java.io.IOException;
  * VALUEOUT：是用户自定义逻辑处理完成之后输出数据中的value，在此处是单词次数，Integer，同上，用IntWritable
  *
  * @author dengtao
- * @date 2020/11/26 下午8:07
- * @since v1.0
+ * @since 2020/11/26 下午8:07
+ * @version 1.0.0
  */
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 	/**

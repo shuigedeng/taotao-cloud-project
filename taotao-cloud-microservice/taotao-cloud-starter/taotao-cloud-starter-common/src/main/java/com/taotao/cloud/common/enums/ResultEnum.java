@@ -19,8 +19,8 @@ package com.taotao.cloud.common.enums;
  * 返回结果枚举 code规则 500 + 自增三位数
  *
  * @author dengtao
- * @date 2020/4/29 15:36
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/4/29 15:36
  */
 public enum ResultEnum implements BaseEnum {
 	/**
@@ -186,7 +186,7 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 邮件信息不存在
 	 */
-	EMIAL_NOT_EXIST(500032, "邮件信息不存在"),
+	EMAIL_NOT_EXIST(500032, "邮件信息不存在"),
 	/**
 	 * 支付信息不存在
 	 */
@@ -198,11 +198,11 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 参数类型不匹配
 	 */
-	 METHOD_ARGUMETN_TYPE_MISMATCH(500035, "参数类型不匹配,传入参数格式不正确或参数解析异常"),
+	METHOD_ARGUMENTS_TYPE_MISMATCH(500035, "参数类型不匹配,传入参数格式不正确或参数解析异常"),
 	/**
 	 * 缺少参数
 	 */
-	 MISSING_SERVLET_REQUESET_PARAMETER(500036, "缺少参数"),
+	MISSING_SERVLET_REQUEST_PARAMETER(500036, "缺少参数"),
 	/**
 	 * 请求method不匹配
 	 */
@@ -231,8 +231,9 @@ public enum ResultEnum implements BaseEnum {
 	 * 根据返回码得到描述信息
 	 *
 	 * @param code code
+	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/4/29 15:35
+	 * @since 2021/2/25 15:48
 	 */
 	public static String getMessageByCode(int code) {
 		for (ResultEnum result : ResultEnum.values()) {

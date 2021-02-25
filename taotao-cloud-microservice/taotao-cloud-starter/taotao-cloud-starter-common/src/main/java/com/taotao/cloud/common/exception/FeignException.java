@@ -21,33 +21,34 @@ import com.taotao.cloud.common.enums.ResultEnum;
  * FeignException异常
  *
  * @author dengtao
- * @date 2020/5/2 11:21
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/5/2 11:21
  */
 public class FeignException extends BaseException {
-    private static final long serialVersionUID = 6610083281801529147L;
 
-    public FeignException(String message) {
-        super(message);
-    }
+	private static final long serialVersionUID = 6610083281801529147L;
 
-    public FeignException(Integer code, String message) {
-        super(code, message);
-    }
+	public FeignException(String message) {
+		super(message);
+	}
 
-    public FeignException(String message, Throwable e) {
-        super(message, e);
-    }
+	public FeignException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public FeignException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public FeignException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public FeignException(ResultEnum result) {
-        super(result);
-    }
+	public FeignException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public FeignException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public FeignException(ResultEnum result) {
+		super(result);
+	}
+
+	public FeignException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

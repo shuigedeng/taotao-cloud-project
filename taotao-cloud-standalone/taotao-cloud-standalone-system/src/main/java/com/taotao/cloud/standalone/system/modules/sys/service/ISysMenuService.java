@@ -41,7 +41,7 @@ public interface ISysMenuService extends IService<SysMenu> {
     /**
      * @Author 李号东
      * @Description 根据父id查询菜单
-     * @Date 18:43 2019-05-12
+     * @since 18:43 2019-05-12
      **/
     SysMenu getMenuById(Integer parentId);
 

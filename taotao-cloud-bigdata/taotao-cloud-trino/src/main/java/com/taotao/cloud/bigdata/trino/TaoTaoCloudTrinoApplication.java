@@ -24,8 +24,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 之后如果有需要可以添加到toatoa cloud中 作为一个资源服务器( 添加依赖 添加注解 添加配置)
  *
  * @author dengtao
- * @date 2020/10/30 16:06
- * @since v1.0
+ * @since 2020/10/30 16:06
+ * @version 1.0.0
  */
 @SpringBootApplication
 public class TaoTaoCloudTrinoApplication {

@@ -26,8 +26,8 @@ import lombok.experimental.SuperBuilder;
  * 客户端分页查询Query
  *
  * @author dengtao
- * @date 2020/5/14 17:05
- * @since v1.0
+ * @since 2020/5/14 17:05
+ * @version 1.0.0
  */
 @Data
 @SuperBuilder

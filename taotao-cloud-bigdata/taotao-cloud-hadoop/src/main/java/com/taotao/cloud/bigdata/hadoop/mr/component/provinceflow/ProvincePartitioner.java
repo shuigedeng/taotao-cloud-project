@@ -24,8 +24,8 @@ import java.util.HashMap;
  * K2  V2  对应的是map输出kv的类型
  *
  * @author dengtao
- * @date 2020/11/26 下午8:29
- * @since v1.0
+ * @since 2020/11/26 下午8:29
+ * @version 1.0.0
  */
 public class ProvincePartitioner extends Partitioner<Text, FlowBean> {
 	public static HashMap<String, Integer> provinceDict = new HashMap<>();

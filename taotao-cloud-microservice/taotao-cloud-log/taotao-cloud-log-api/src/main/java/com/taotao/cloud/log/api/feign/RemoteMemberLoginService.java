@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * RemoteMemberLoginService
  *
  * @author dengtao
- * @date 2020/11/27 下午3:06
- * @since v1.0
+ * @since 2020/11/27 下午3:06
+ * @version 1.0.0
  */
 @FeignClient(contextId = "remoteMemberLoginService", value = ServiceNameConstant.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteMemberLoginFallbackImpl.class)
 public interface RemoteMemberLoginService {
@@ -24,8 +24,8 @@ public interface RemoteMemberLoginService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<ChatbotVO>
 	 * @author dengtao
-	 * @date 2020/11/20 上午10:45
-	 * @since v1.0
+	 * @since 2020/11/20 上午10:45
+	 * @version 1.0.0
 	 */
 	@GetMapping("/member/login/info/id/{id:[0-9]*}")
 	public Result<MemberLoginVO> findMemberLoginById(@PathVariable(value = "id") Long id);

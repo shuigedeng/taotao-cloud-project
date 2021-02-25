@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.lock;
 
 import cn.hutool.core.util.StrUtil;
@@ -18,6 +33,10 @@ import java.util.Objects;
 
 /**
  * 分布式锁切面
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/5/2 09:12
  */
 @Slf4j
 @Aspect
@@ -60,7 +79,8 @@ public class LockAspect {
 		try {
 			//加锁
 			if (lock.waitTime() > 0) {
-				lockObj = locker.tryLock(lockKey, lock.waitTime(), lock.leaseTime(), lock.unit(), lock.isFair());
+				lockObj = locker.tryLock(lockKey, lock.waitTime(), lock.leaseTime(), lock.unit(),
+					lock.isFair());
 			} else {
 				lockObj = locker.lock(lockKey, lock.leaseTime(), lock.unit(), lock.isFair());
 			}
@@ -77,6 +97,13 @@ public class LockAspect {
 
 	/**
 	 * 解析spEL表达式
+	 *
+	 * @param spEL            spEL
+	 * @param methodSignature 方法签名
+	 * @param args            参数
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:49
 	 */
 	private String getValBySpEL(String spEL, MethodSignature methodSignature, Object[] args) {
 		//获取方法形参名数组

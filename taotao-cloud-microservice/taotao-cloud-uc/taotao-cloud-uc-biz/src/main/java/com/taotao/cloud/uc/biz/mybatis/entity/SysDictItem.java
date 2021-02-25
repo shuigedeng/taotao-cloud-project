@@ -10,7 +10,7 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 //  * 字典项表
 //  *
 //  * @author dengtao
-//  * @date 2020/5/2 16:42
+//  * @since 2020/5/2 16:42
 //  */
 // @Data
 // @SuperBuilder

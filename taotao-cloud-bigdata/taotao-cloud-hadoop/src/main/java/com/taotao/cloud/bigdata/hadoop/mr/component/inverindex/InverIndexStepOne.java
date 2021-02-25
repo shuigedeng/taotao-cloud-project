@@ -33,8 +33,8 @@ import java.io.IOException;
  * InverIndexStepOne
  *
  * @author dengtao
- * @date 2020/11/26 下午8:24
- * @since v1.0
+ * @since 2020/11/26 下午8:24
+ * @version 1.0.0
  */
 public class InverIndexStepOne {
 	static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {

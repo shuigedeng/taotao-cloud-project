@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
  * UserServiceDetail
  *
  * @author dengtao
- * @date 2020/4/29 17:46
+ * @since 2020/4/29 17:46
  */
 public class UserDetailsServiceImpl implements IUserDetailsService {
 
@@ -62,7 +62,7 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 	 * @param username 用户名
 	 * @return org.springframework.security.core.userdetails.UserDetails
 	 * @author dengtao
-	 * @date 2020/4/29 17:46
+	 * @since 2020/4/29 17:46
 	 */
 	@Override
 	public SecurityUser loadUserByUsername(String username) throws UsernameNotFoundException {

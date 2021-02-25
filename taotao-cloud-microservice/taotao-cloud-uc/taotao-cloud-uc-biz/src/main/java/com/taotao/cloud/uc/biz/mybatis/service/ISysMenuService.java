@@ -11,7 +11,7 @@
 //  * 菜单权限表 服务类
 //  *
 //  * @author dengtao
-//  * @date 2020/4/30 11:41
+//  * @since 2020/4/30 11:41
 //  */
 // public interface ISysMenuService {
 //
@@ -21,7 +21,7 @@
 //      * @param entity
 //      * @return boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:41
+//      * @since 2020/4/30 11:41
 //      */
 //     boolean updateMenuById(MenuDTO entity);
 //
@@ -31,7 +31,7 @@
 //      * @param id
 //      * @return java.lang.Boolean
 //      * @author dengtao
-//      * @date 2020/4/30 11:41
+//      * @since 2020/4/30 11:41
 //      */
 //     Boolean removeMenuById(Serializable id);
 //
@@ -41,7 +41,7 @@
 //      * @param uid
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysMenu>
 //      * @author dengtao
-//      * @date 2020/4/30 11:41
+//      * @since 2020/4/30 11:41
 //      */
 //     List<SysMenu> selectMenuTree(Integer uid);
 //
@@ -51,7 +51,7 @@
 //      * @param parentId
 //      * @return com.taotao.cloud.uc.api.entity.SysMenu
 //      * @author dengtao
-//      * @date 2020/4/30 11:41
+//      * @since 2020/4/30 11:41
 //      */
 //     SysMenu getMenuById(Integer parentId);
 //
@@ -61,7 +61,7 @@
 //      * @param userId
 //      * @return java.util.List<java.lang.String>
 //      * @author dengtao
-//      * @date 2020/4/30 11:42
+//      * @since 2020/4/30 11:42
 //      */
 //     List<String> findPermsByUserId(Long userId);
 //
@@ -71,7 +71,7 @@
 //      * @param
 //      * @return java.util.List<com.taotao.cloud.uc.api.vo.MenuTreeVo>
 //      * @author dengtao
-//      * @date 2020/4/30 11:42
+//      * @since 2020/4/30 11:42
 //      */
 //     List<MenuTreeVo> menuTree();
 // }

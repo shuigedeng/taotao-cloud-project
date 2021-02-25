@@ -23,8 +23,8 @@ import scala.collection.mutable
  * /opt/spark-3.0.0-bin-hadoop3.2/bin/spark-submit  taotao-cloud-hudi-1.0.jar -e dev -b taotao-cloud:9092 -t taotao-cloud-access-log -m 0 -i 10 -c /checkpoint/spark/taotao/cloud/access/log/hudi -g /taotao/cloud/access/log/cow/parquet -s taotao-cloud-acccess-log -y cow -r jdbc:hive2://192.168.1.5:10000 -n root
  *
  * @author dengtao
- * @date 2020/11/27 下午3:06
- * @since v1.0
+ * @since 2020/11/27 下午3:06
+ * @version 1.0.0
  */
 object AccessLogHudiCopy {
   val LOGGER: Logger = LoggerFactory.getLogger("AccessLogHudi")

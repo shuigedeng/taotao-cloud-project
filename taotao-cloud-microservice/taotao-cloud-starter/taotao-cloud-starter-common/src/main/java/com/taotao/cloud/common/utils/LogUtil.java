@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import java.io.BufferedReader;
 import lombok.experimental.UtilityClass;
 import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
@@ -29,10 +30,11 @@ import java.text.MessageFormat;
  *
  * @author dengtao
  * @version v1.0.0
- * @date 2020/4/27 16:16
+ * @since 2020/4/27 16:16
  */
 @UtilityClass
 public class LogUtil {
+
 	/**
 	 * 空数组
 	 */
@@ -47,8 +49,7 @@ public class LogUtil {
 	 *
 	 * @return org.slf4j.spi.LocationAwareLogger
 	 * @author dengtao
-	 * @date 2020/10/15 15:19
-	 * @since v1.0
+	 * @since 2021/2/25 16:26
 	 */
 	public LocationAwareLogger getLocationAwareLogger() {
 		StackTraceElement[] stackTraceElement = Thread.currentThread().getStackTrace();
@@ -65,14 +66,14 @@ public class LogUtil {
 	 * @param msg       msg
 	 * @param arguments 参数
 	 * @author dengtao
-	 * @date 2020/10/15 15:20
-	 * @since v1.0
+	 * @since 2021/2/25 16:26
 	 */
 	public void debug(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.DEBUG_INT, msg, EMPTY_ARRAY, null);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.DEBUG_INT, msg, EMPTY_ARRAY, null);
 	}
 
 	/**
@@ -81,14 +82,14 @@ public class LogUtil {
 	 * @param msg       msg
 	 * @param arguments 参数
 	 * @author dengtao
-	 * @date 2020/10/15 15:20
-	 * @since v1.0
+	 * @since 2021/2/25 16:27
 	 */
 	public void info(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.INFO_INT, msg, EMPTY_ARRAY, null);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.INFO_INT, msg, EMPTY_ARRAY, null);
 	}
 
 	/**
@@ -97,14 +98,14 @@ public class LogUtil {
 	 * @param msg       msg
 	 * @param arguments 参数
 	 * @author dengtao
-	 * @date 2020/10/15 15:20
-	 * @since v1.0
+	 * @since 2021/2/25 16:27
 	 */
 	public void warn(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.WARN_INT, msg, EMPTY_ARRAY, null);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.WARN_INT, msg, EMPTY_ARRAY, null);
 	}
 
 	/**
@@ -114,14 +115,14 @@ public class LogUtil {
 	 * @param error     error
 	 * @param arguments 参数
 	 * @author dengtao
-	 * @date 2020/10/15 15:20
-	 * @since v1.0
+	 * @since 2021/2/25 16:27
 	 */
 	public void error(String msg, Throwable error, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, error);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, error);
 	}
 
 	/**
@@ -129,11 +130,11 @@ public class LogUtil {
 	 *
 	 * @param error error
 	 * @author dengtao
-	 * @date 2020/10/15 15:22
-	 * @since v1.0
+	 * @since 2021/2/25 16:28
 	 */
 	public void error(Throwable error) {
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.ERROR_INT, null, EMPTY_ARRAY, error);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.ERROR_INT, null, EMPTY_ARRAY, error);
 	}
 
 	/**
@@ -141,16 +142,15 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @return void
 	 * @author dengtao
-	 * @date 2020/10/15 15:23
-	 * @since v1.0
+	 * @since 2021/2/25 16:28
 	 */
 	public void error(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
-		getLocationAwareLogger().log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, null);
+		getLocationAwareLogger()
+			.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, null);
 	}
 
 	public boolean isErrorEnabled() {
@@ -172,33 +172,21 @@ public class LogUtil {
 	/**
 	 * 异常堆栈转字符串
 	 *
-	 * @param e e
+	 * @param e exception
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:23
-	 * @since v1.0
+	 * @since 2021/2/25 16:28
 	 */
 	public String exceptionToString(Exception e) {
-		StringWriter sw = null;
-		PrintWriter pw = null;
-		try {
-			if (e == null) {
-				return "无具体异常信息";
-			}
-			sw = new StringWriter();
-			pw = new PrintWriter(sw);
+		if (e == null) {
+			return "无具体异常信息";
+		}
+		try (StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);) {
 			e.printStackTrace(pw);
 			return sw.toString();
 		} catch (Exception ex) {
 			return "";
-		} finally {
-			if (sw != null) {
-				sw.flush();
-			}
-			if (pw != null) {
-				pw.flush();
-			}
-			pw.close();
 		}
 	}
 
@@ -208,8 +196,7 @@ public class LogUtil {
 	 * @param throwable throwable
 	 * @return java.lang.String
 	 * @author dengtao
-	 * @date 2020/10/15 15:23
-	 * @since v1.0
+	 * @since 2021/2/25 16:29
 	 */
 	public String getStackTrace(Throwable throwable) {
 		StringWriter sw = new StringWriter();
@@ -225,8 +212,7 @@ public class LogUtil {
 	 * @param methodName 方法名称
 	 * @return int
 	 * @author dengtao
-	 * @date 2020/10/15 15:23
-	 * @since v1.0
+	 * @since 2021/2/25 16:29
 	 */
 	public int getOperateType(String methodName) {
 		if (methodName.startsWith("get")) {

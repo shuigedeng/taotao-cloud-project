@@ -22,8 +22,8 @@ import io.seata.core.context.RootContext;
 
 /**
  * @author dengtao
- * @date 2020/10/22 17:00
- * @since v1.0
+ * @since 2020/10/22 17:00
+ * @version 1.0.0
  */
 public class SeataInterceptor implements RequestInterceptor {
     // 这里在feign请求的header中加入xid

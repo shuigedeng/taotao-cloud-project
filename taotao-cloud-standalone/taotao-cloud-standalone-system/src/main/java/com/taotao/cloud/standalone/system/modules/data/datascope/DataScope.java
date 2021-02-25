@@ -11,7 +11,7 @@ import java.util.List;
  * @Classname DataScope
  * @Description 数据权限查询参数
  * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
- * @Date 2019-06-13 13:17
+ * @since 2019-06-13 13:17
  * @Version 1.0
  */
 @Data

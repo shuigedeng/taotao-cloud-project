@@ -46,8 +46,8 @@ import java.util.*;
  * 3. 自动续签token（可配置是否开启）
  *
  * @author dengtao
- * @date 2020/4/30 09:07
- * @since v1.0
+ * @since 2020/4/30 09:07
+ * @version 1.0.0
  */
 public class RedisTokenStoreComponent implements TokenStore {
     private static final String ACCESS = "access:";

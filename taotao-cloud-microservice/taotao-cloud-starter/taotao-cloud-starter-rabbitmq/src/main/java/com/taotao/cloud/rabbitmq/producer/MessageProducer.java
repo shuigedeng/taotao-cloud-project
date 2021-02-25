@@ -22,8 +22,8 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
  * 消息生产者
  *
  * @author dengtao
- * @date 2020/9/29 15:54
- * @since v1.0
+ * @since 2020/9/29 15:54
+ * @version 1.0.0
  */
 public interface MessageProducer {
 
@@ -32,8 +32,8 @@ public interface MessageProducer {
      *
      * @param message message
      * @author dengtao
-     * @date 2020/9/29 15:56
-     * @since v1.0
+     * @since 2020/9/29 15:56
+     * @version 1.0.0
      */
     DetailResponse send(Object message);
 

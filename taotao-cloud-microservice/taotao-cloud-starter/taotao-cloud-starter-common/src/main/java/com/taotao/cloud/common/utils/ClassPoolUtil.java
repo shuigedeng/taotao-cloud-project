@@ -23,31 +23,32 @@ import lombok.experimental.UtilityClass;
  * ClassPoolUtils
  *
  * @author dengtao
- * @date 2020/6/2 16:33
- * @since v1.0
+ * @version 1.0.0
+ * @since 2020/6/2 16:33
  */
 @UtilityClass
 public class ClassPoolUtil {
 
-    private static volatile ClassPool instance;
+	public static volatile ClassPool instance;
 
-    /**
-     * 获取对象池
-     *
-     * @return javassist.ClassPool
-     * @author dengtao
-     * @date 2020/10/15 14:49
-     * @since v1.0
-     */
-    public ClassPool getInstance() {
-        if (instance == null) {
-            synchronized (ClassPoolUtil.class) {
-                if (instance == null) {
-                    instance = ClassPool.getDefault();
-                    instance.appendClassPath(new LoaderClassPath(Thread.currentThread().getContextClassLoader()));
-                }
-            }
-        }
-        return instance;
-    }
+	/**
+	 * 获取对象池
+	 *
+	 * @return javassist.ClassPool
+	 * @author dengtao
+	 * @since 2021/2/25 16:12
+	 */
+	public ClassPool getInstance() {
+		if (instance == null) {
+			synchronized (ClassPoolUtil.class) {
+				if (instance == null) {
+					ClassPool aDefault = ClassPool.getDefault();
+					aDefault.appendClassPath(
+						new LoaderClassPath(Thread.currentThread().getContextClassLoader()));
+					instance = aDefault;
+				}
+			}
+		}
+		return instance;
+	}
 }

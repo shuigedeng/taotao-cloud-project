@@ -23,8 +23,8 @@ import org.bytedeco.javacv.FrameRecorder;
 
 /**
  * @author dengtao
- * @date 2020/11/19 上午10:30
- * @since v1.0
+ * @since 2020/11/19 上午10:30
+ * @version 1.0.0
  */
 public class OpenCvMain {
 	public static void main(String[] args) throws FrameGrabber.Exception, FrameRecorder.Exception, InterruptedException {
