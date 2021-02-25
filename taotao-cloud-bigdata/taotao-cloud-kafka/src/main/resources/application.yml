@@ -1,0 +1,27 @@
+spring:
+  kafka:
+    bootstrap-servers:
+      - 106.13.201.31:9092
+
+    producer:
+      retries: 0
+      batch-size: 1073741824
+      buffer-memory: 1073741824
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 2
+
+    consumer:
+      # 消费组
+      group-id: myGroup
+      # 消费者是否自动提交偏移量，默认为true
+      enable-auto-commit: false
+      # 消费者在读取一个没有偏移量或者偏移量无效的情况下，从起始位置读取partition的记录，默认是latest
+      auto-offset-reset: earliest
+      # 单次调用poll方法能够返回的消息数量
+      max-poll-records: 50
+
+logging:
+  level:
+    root: debug

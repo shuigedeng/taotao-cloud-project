@@ -1,0 +1,13 @@
+server:
+  port: 9093
+
+spring:
+  application:
+    name: account-service
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      server-addr: 192.168.28.130:8848
+      username: nacos
+      password: nacos

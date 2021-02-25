@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  standalone-redis:
+    image: redis
+    container_name: standalone-redis
+    hostname: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/standalone/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis/standalone/data:/data:rw
+    command:
+      redis-server /etc/redis/redis.conf --appendonly yes

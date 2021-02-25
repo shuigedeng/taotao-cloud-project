@@ -1,0 +1,432 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.18.0.0/16 bigdata-network #创建子网段为172.18.0.0/16 的IP网络
+
+version: '3.7'
+services:
+  bigdata-openresty:
+    hostname: bigdata-openresty
+    build:
+      context: openresty
+    container_name: bigdata-openresty
+    ports:
+      - "9999:9999"
+    environment:
+      KAFKA_SERVERS: 172.18.0.7:9092,172.18.0.8:9092,172.18.0.9:9092
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.2
+
+  bigdata-flume:
+    hostname: bigdata-flume
+    build:
+      context: flume
+    container_name: bigdata-flume
+    depends_on:
+      - bigdata-hadoop-master
+      - bigdata-kafka-broker1
+      - bigdata-kafka-broker2
+      - bigdata-kafka-broker3
+    links:
+      - bigdata-hadoop-master
+      - bigdata-kafka-broker1
+      - bigdata-kafka-broker2
+      - bigdata-kafka-broker3
+    external_links:
+      - bigdata-hadoop-master
+      - bigdata-kafka-broker1
+      - bigdata-kafka-broker2
+      - bigdata-kafka-broker3
+#    environment:
+#      - FLUME_AGENT_NAME=agent
+#      - FLUME_CONF_DIR=conf
+#      - FLUME_CONF=conf/kafka_flume_hadoop.conf
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.3
+
+  bigdata-hadoop-master:
+    hostname: bigdata-hadoop-master
+    build:
+      context: hadoop
+    image: hadoop
+    container_name: bigdata-hadoop-master
+    depends_on:
+      - bigdata-database-mysql
+      - bigdata-hadoop-datanode
+    environment:
+      - nodeType=nameNone
+    volumes:
+      - ./hadoop/bigdata/namenode:/opt/hadoop/data/nameNode
+    ports:
+      - "9870:9870"   # hadoop
+      - "8088:8088"   # hadoop cluster
+      - "9000:9000"   # hdfs
+      - "10000:10000" # hive server2
+      - "14000:14000" # webhdfs
+    #restart: always
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.20
+
+  bigdata-hadoop-datanode:
+    hostname: bigdata-hadoop-datanode
+    image: hadoop
+    deploy:
+      mode: replicated
+      replicas: 2
+    container_name: bigdata-hadoop-datanode
+    environment:
+      - nodeType=dataNone
+      #ports:
+      #- "8001:8042"
+    volumes:
+      - ./hadoop/bigdata/datanode:/opt/hadoop/data/dataNode
+    #restart: always
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.21
+
+  bigdata-database-mysql:
+    image: mysql:8.0.17
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: bigdata-database-mysql
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --max_connections=1000
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost","-u","root","-psecret"]
+      interval: 30s
+      timeout: 1s
+      retries: 20
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./mysql/bigdata/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: hue
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    #restart: always
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.22
+
+  bigdata-hbase-master:
+    build:
+      context: hbase
+    container_name: bigdata-hbase-master
+    hostname: bigdata-hbase-master
+    env_file:
+      - ./hbase.env
+    depends_on:
+      - bigdata-hadoop-master
+      - bigdata-hadoop-datanode
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    external_links:
+      - bigdata-hadoop-master
+      - bigdata-hadoop-datanode
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    environment:
+      SERVICE_PRECONDITION: "bigdata-hadoop-master:9870 bigdata-hadoop-datanode:9864 bigdata-zookeeper-zoo1:2181"
+      HBASE_START_TYPE: master
+    ports:
+      - 16010:16010
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.31
+
+  bigdata-hbase-region:
+    build:
+      context: hbase
+    container_name: bigdata-hbase-region
+    hostname: bigdata-hbase-region
+    depends_on:
+      - bigdata-hadoop-master
+      - bigdata-hadoop-datanode
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+      - bigdata-hbase-master
+    external_links:
+      - bigdata-hadoop-master
+      - bigdata-hadoop-datanode
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+      - bigdata-hbase-master
+    env_file:
+      - ./hbase.env
+    environment:
+      SERVICE_PRECONDITION: "bigdata-hadoop-master:9870 bigdata-hadoop-datanode:9864 bigdata-zookeeper-zoo1:2181"
+      HBASE_START_TYPE: regionserver
+    ports:
+      - 16030:16030
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.32
+
+  bigdata-hue:
+    image: gethue/hue:latest
+    deploy:
+      mode: replicated
+      replicas: 1
+    container_name: bigdata-hue
+    dns: 8.8.8.8
+    command: /bin/bash startup.sh
+    depends_on:
+      - bigdata-database-mysql
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./hue/z-hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/startup.sh:/usr/share/hue/startup.sh
+    environment:
+      DB_HOST: bigdata-database-mysql
+      DB_PORT: 3306
+      DB_NAME: hue
+      DB_USER: user
+      DB_PASSWORD: secret
+    #restart: always
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.23
+
+  bigdata-spark-master:
+    hostname: bigdata-spark-master
+    build:
+      context: spark
+    image: spark
+    container_name: bigdata-spark-master
+    environment:
+      - nodeType=master
+    ports:
+      - "4040:4040" # spark ui
+      - "4080:8080"
+      - "8998:8998" # livy rest
+      - "8899:8899" # jupyter
+    volumes:
+      - ./jupyter/bigdata/data:/opt/notebook/data
+      - ./jupyter/bigdata/scripts:/opt/notebook/scripts
+    #restart: always
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.24
+
+  bigdata-spark-slave:
+    build:
+      context: spark
+    image: spark
+    deploy:
+      mode: replicated
+      replicas: 2
+    container_name: bigdata-spark-slave
+    #restart: always
+    environment:
+      - nodeType=slave
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.25
+
+  bigdata-zookeeper-zoo1:
+    image: zookeeper:3.4
+    #restart: always # 当发生错误时自动重启
+    hostname: bigdata-zookeeper-zoo1
+    container_name: bigdata-zookeeper-zoo1
+    privileged: true
+    ports:
+      - 2181:2181
+    volumes:
+      - ./zookeeper/volumes/bigdata-zoo1/data:/data
+      - ./zookeeper/volumes/bigdata-zoo1/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=bigdata-zookeeper-zoo1:2888:3888 server.2=bigdata-zookeeper-zoo2:2888:3888 server.3=bigdata-zookeeper-zoo3:2888:3888
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.4
+
+  bigdata-zookeeper-zoo2:
+    image: zookeeper:3.4
+    #restart: always
+    hostname: bigdata-zookeeper-zoo2
+    container_name: bigdata-zookeeper-zoo2
+    privileged: true
+    ports:
+      - 2182:2181
+    volumes:
+      - ./zookeeper/volumes/zoo2/data:/data
+      - ./zookeeper/volumes/zoo2/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 2
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=bigdata-zookeeper-zoo1:2888:3888 server.2=bigdata-zookeeper-zoo2:2888:3888 server.3=bigdata-zookeeper-zoo3:2888:3888
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.5
+
+  bigdata-zookeeper-zoo3:
+    image: zookeeper:3.4
+    #restart: always
+    hostname: bigdata-zookeeper-zoo3
+    container_name: bigdata-zookeeper-zoo3
+    privileged: true
+    ports:
+      - 2183:2181
+    volumes:
+      - ./zookeeper/volumes/zoo3/data:/data
+      - ./zookeeper/volumes/zoo3/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 3
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=bigdata-zookeeper-zoo1:2888:3888 server.2=bigdata-zookeeper-zoo2:2888:3888 server.3=bigdata-zookeeper-zoo3:2888:3888
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.6
+
+  bigdata-kafka-broker1:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: bigdata-kafka-broker1
+    container_name: bigdata-kafka-broker1
+    privileged: true
+    depends_on:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9092
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: bigdata-zookeeper-zoo1:2181,bigdata-zookeeper-zoo2:2181,bigdata-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/volumes/bigdata-broker1:/kafka/kafka\-logs\-broker1
+    external_links:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.7
+
+  bigdata-kafka-broker2:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: bigdata-kafka-broker2
+    container_name: bigdata-kafka-broker2
+    privileged: true
+    depends_on:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    ports:
+      - "9093:9092"
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9093
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ZOOKEEPER_CONNECT: bigdata-zookeeper-zoo1:2181,bigdata-zookeeper-zoo2:2181,bigdata-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/volumes/bigdata-broker2:/kafka/kafka\-logs\-broker2
+    external_links:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.8
+
+  bigdata-kafka-broker3:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: bigdata-kafka-broker3
+    container_name: bigdata-kafka-broker3
+    privileged: true
+    depends_on:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    ports:
+      - "9094:9092"
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9094
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9094
+      KAFKA_ZOOKEEPER_CONNECT: bigdata-zookeeper-zoo1:2181,bigdata-zookeeper-zoo2:2181,bigdata-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/volumes/bigdata-broker3:/kafka/kafka\-logs\-broker3
+    external_links:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.9
+
+  bigdata-kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    #restart: always
+    container_name: bigdata-kafka-manager
+    hostname: bigdata-kafka-manager
+    ports:
+      - "9095:9000"
+    depends_on:
+      - bigdata-kafka-broker1
+      - bigdata-kafka-broker2
+      - bigdata-kafka-broker3
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    links:
+      - bigdata-kafka-broker1
+      - bigdata-kafka-broker2
+      - bigdata-kafka-broker3
+    external_links:
+      - bigdata-zookeeper-zoo1
+      - bigdata-zookeeper-zoo2
+      - bigdata-zookeeper-zoo3
+    environment:
+      ZK_HOSTS: bigdata-zookeeper-zoo1:2181,bigdata-zookeeper-zoo2:2181,bigdata-zookeeper-zoo3:2181
+      KAFKA_BROKERS: bigdata-kafka-broker1:9091,bigdata-kafka-broker2:9092,bigdata-kafka-broker3:9093
+      APPLICATION_SECRET: bigdata123
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+    networks:
+      bigdata-network:
+        ipv4_address: 172.18.0.10
+
+networks:
+  bigdata-network:
+    external:
+      name: bigdata-network
+
+volumes:
+  bigdata-database-mysql:

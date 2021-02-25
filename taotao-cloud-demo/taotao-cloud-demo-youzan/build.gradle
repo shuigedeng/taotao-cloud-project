@@ -1,0 +1,17 @@
+archivesBaseName = 'taotao-cloud-demo-youzan'
+
+jar.enabled = true
+bootJar.enabled = false
+
+repositories {
+    maven { url "http://maven.youzanyun.com/repository/maven-public" }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
+    implementation "com.youzan:cloud-api:1.0.7-RELEASE"
+    implementation "com.youzan.cloud:open-sdk-gen:1.0.7.202004281407-RELEASE"
+}

@@ -1,0 +1,29 @@
+server:
+  http:
+    port: 8500
+  port: 8443
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+    threads:
+      worker: 20
+      io: 2
+  ssl:
+    enabled: true
+    key-store: classpath:cert/SHA256withRSA_api.taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234
+
+spring:
+  application:
+    name: taotao-cloud-portal
+  # 引擎模板配置
+  thymeleaf:
+    mode: HTML5 # 去除htm5严格校验
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8 # 指定字符集编码
+    cache: false
+    enabled: true

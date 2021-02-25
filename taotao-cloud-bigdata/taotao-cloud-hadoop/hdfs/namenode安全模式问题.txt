@@ -1,0 +1,10 @@
+当namenode发现集群中的block丢失数量达到一个阀值时，namenode就进入安全模式状态，不再接受客户端的数据更新请求
+
+在正常情况下，namenode也有可能进入安全模式：
+	集群启动时（namenode启动时）必定会进入安全模式，然后过一段时间会自动退出安全模式（原因是datanode汇报的过程有一段持续时间）
+
+也确实有异常情况下导致的安全模式
+	原因：block确实有缺失
+	措施：可以手动让namenode退出安全模式，bin/hdfs dfsadmin -safemode leave
+		  或者：调整safemode门限值：  dfs.safemode.threshold.pct=0.999f
+	

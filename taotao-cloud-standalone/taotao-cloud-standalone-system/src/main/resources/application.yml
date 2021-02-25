@@ -1,0 +1,8 @@
+server:
+  port: 8081
+# dev 开发环境 prod 线上环境
+spring:
+  application:
+    name: pre
+  profiles:
+    active: dev

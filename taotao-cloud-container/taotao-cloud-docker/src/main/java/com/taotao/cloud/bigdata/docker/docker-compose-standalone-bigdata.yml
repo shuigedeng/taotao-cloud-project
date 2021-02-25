@@ -1,0 +1,253 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.19.0.0/16 standalone-network #创建子网段为172.18.0.0/16 的IP网络
+
+version: '3.7'
+services:
+#  openresty:
+#    hostname: openresty
+#    build:
+#      context: openresty
+#    container_name: openresty
+#    ports:
+#      - "9999:9999"
+#    environment:
+#      KAFKA_SERVERS: 172.19.0.7:9092
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.2
+
+#  flume:
+#    hostname: flume
+#    build:
+#      context: flume
+#    container_name: flume
+#    depends_on:
+#      - hadoop-master
+#      - standalone-kafka
+#    external_links:
+#      - hadoop-master
+#      - standalone-kafka
+#    environment:
+#      - FLUME_AGENT_NAME=agent
+#      - FLUME_CONF_DIR=conf
+#      - FLUME_CONF=conf/kafka_flume_hadoop.conf
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.3
+
+#  hadoop-master:
+#    hostname: hadoop-master
+#    build:
+#      context: hadoop
+#    image: hadoop
+#    container_name: hadoop-master
+#    depends_on:
+#      - database-mysql
+#      - hadoop-datanode
+#    environment:
+#      - nodeType=nameNone
+#      #volumes:
+#      #- hadoop-namenode:/opt/hadoop/data/nameNode
+#    ports:
+#      - "9870:9870"   # hadoop
+#      - "8088:8088"   # hadoop cluster
+#      - "9000:9000"   # hdfs
+#      - "10000:10000" # hive server2
+#      - "14000:14000" # webhdfs
+#    #restart: always
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.20
+
+#  hadoop-datanode:
+#    hostname: hadoop-datanode
+#    image: hadoop
+#    deploy:
+#      mode: replicated
+#      replicas: 2
+#    container_name: hadoop-datanode
+#    environment:
+#      - nodeType=dataNone
+#    ports:
+#      - "8001:8042"
+#    volumes:
+#      - hadoop-datanode:/opt/hadoop/data/dataNode
+#    #restart: always
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.21
+#
+#  database-mysql:
+#    image: mysql:8.0.17
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      resources:
+#        limits:
+#          memory: 256M
+#        reservations:
+#          memory: 128M
+#    container_name: database-mysql
+#    command:
+#      --default-authentication-plugin=mysql_native_password
+#      --character-set-server=utf8mb4
+#      --collation-server=utf8mb4_general_ci
+#      --max_connections=1000
+#    healthcheck:
+#      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost","-u","root","-psecret"]
+#      interval: 30s
+#      timeout: 1s
+#      retries: 20
+#    security_opt:
+#      - seccomp:unconfined
+#    ports:
+#      - "13306:3306"
+#      #volumes:
+#      #- database-mysql:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_USER: root
+#      MYSQL_ROOT_PASSWORD: secret
+#      MYSQL_DATABASE: hue
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: secret
+#    #restart: always
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.22
+
+  standalone-zookeeper:
+    image: zookeeper:3.4
+    #restart: always # 当发生错误时自动重启
+    hostname: standalone-zookeeper
+    container_name: standalone-zookeeper
+    privileged: true
+    ports:
+      - 2181:2181
+      #volumes:
+      #- ./zookeeper/volumes/zoo1/data:/data
+      #- ./zookeeper/volumes/zoo1/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=standalone-zookeeper:2888:3888
+    networks:
+      standalone-network:
+        ipv4_address: 172.19.0.4
+
+  standalone-kafka:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: standalone-kafka
+    container_name: standalone-kafka
+    privileged: true
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.42:9092
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.42
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: standalone-zookeeper:2181
+    volumes:
+    #- /var/run/docker.sock:/var/run/docker.sock
+    #- ./kafka/volumes/broker1:/kafka/kafka\-logs\-broker1
+    external_links:
+      - standalone-zookeeper
+    networks:
+      standalone-network:
+        ipv4_address: 172.19.0.7
+
+#  standalone-kafka-manager:
+#    image: sheepkiller/kafka-manager:latest
+#    #restart: always
+#    container_name: standalone-kafka-manager
+#    hostname: standalone-kafka-manager
+#    ports:
+#      - "9095:9000"
+#    links:
+#      - standalone-kafka
+#    external_links:
+#      - standalone-zookeeper
+#    environment:
+#      ZK_HOSTS: standalone-zookeeper:2181
+#      KAFKA_BROKERS: standalone-kafka:9091
+#      APPLICATION_SECRET: bigdata123
+#      KM_ARGS: -Djava.net.preferIPv4Stack=true
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.10
+
+#  hue:
+#    image: gethue/hue:latest
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#    container_name: hue
+#    dns: 8.8.8.8
+#    command: /bin/bash startup.sh
+#    depends_on:
+#      - database-mysql
+#    ports:
+#      - "8888:8888"
+#    volumes:
+#      - ./hue/z-hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+#      - ./hue/startup.sh:/usr/share/hue/startup.sh
+#    environment:
+#      DB_HOST: database-mysql
+#      DB_PORT: 3306
+#      DB_NAME: hue
+#      DB_USER: user
+#      DB_PASSWORD: secret
+#    #restart: always
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.23
+
+#  spark-master:
+#    hostname: spark-master
+#    build:
+#      context: spark
+#    image: spark
+#    container_name: spark-master
+#    environment:
+#      - nodeType=master
+#    ports:
+#      - "4040:4040" # spark ui
+#      - "4080:8080"
+#      - "8998:8998" # livy rest
+#      - "8899:8899" # jupyter
+#    #volumes:
+#      #- jupyter-data:/opt/notebook/data
+#      #- jupyter-scripts:/opt/notebook/scripts
+#    #restart: always
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.24
+
+#  spark-slave:
+#    build:
+#      context: spark
+#    image: spark
+#    deploy:
+#      mode: replicated
+#      replicas: 2
+#    container_name: spark-slave
+#    #restart: always
+#    environment:
+#      - nodeType=slave
+#    networks:
+#      standalone-network:
+#        ipv4_address: 172.19.0.25
+networks:
+  standalone-network:
+    external:
+      name: standalone-network
+
+volumes:
+  jupyter-scripts:
+  jupyter-data:
+  hadoop-namenode:
+  hadoop-datanode:
+  database-mysql:

@@ -1,0 +1,13 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: storage-service
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      server-addr: 192.168.28.130:8848
+      username: nacos
+      password: nacos

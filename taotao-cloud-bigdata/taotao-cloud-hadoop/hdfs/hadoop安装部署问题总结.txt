@@ -1,0 +1,27 @@
+hadoop的日志目录（/home/hadoop/app/hadoop-2.6.4/logs）
+
+1、hadoop启动不正常
+用浏览器访问namenode的50070端口，不正常，需要诊断问题出在哪里：
+
+a、在服务器的终端命令行使用jps查看相关进程
+（namenode1个节点   datanode3个节点   secondary namenode1个节点）
+
+b、如果已经知道了启动失败的服务进程，进入到相关进程的日志目录下，查看日志，分析异常的原因
+1）配置文件出错，saxparser  exception； ——找到错误提示中所指出的配置文件检查修改即可
+
+2）unknown host——主机名不认识，配置/etc/hosts文件即可，或者是配置文件中所用主机名跟实际不一致
+   （注：在配置文件中，统一使用主机名，而不要用ip地址）
+
+3）directory 访问异常—— 检查namenode的工作目录，看权限是否正常
+
+
+start-dfs.sh启动后，发现有datanode启动不正常
+a）查看datanode的日志，看是否有异常，如果没有异常，手动将datanode启动起来
+sbin/hadoop-daemon.sh start datanode
+
+b）很有可能是slaves文件中就没有列出需要启动的datanode
+
+c）排除上述两种情况后，基本上，能在日志中看到异常信息：
+   1、配置文件
+   2、ssh免密登陆没有配置好
+   3、datanode的身份标识跟namenode的集群身份标识不一致（删掉datanode的工作目录）

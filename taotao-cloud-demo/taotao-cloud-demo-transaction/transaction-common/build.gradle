@@ -1,0 +1,25 @@
+archivesBaseName = 'transaction-common'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile "com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE"
+    compile "com.codingapi.txlcn:txlcn-tm:5.0.2.RELEASE"
+    compile "com.codingapi.txlcn:txlcn-txmsg-netty:5.0.2.RELEASE"
+
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
+
+    compile "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    compile 'mysql:mysql-connector-java'
+
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

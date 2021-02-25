@@ -1,0 +1,17 @@
+archivesBaseName = 'taotao-cloud-demo-sharding-jdbc'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
+
+// https://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter
+    implementation group: 'org.apache.shardingsphere', name: 'sharding-jdbc-spring-boot-starter', version: '4.1.1'
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "mysql:mysql-connector-java"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

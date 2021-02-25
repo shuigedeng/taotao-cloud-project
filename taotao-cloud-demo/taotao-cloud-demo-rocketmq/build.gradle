@@ -1,0 +1,16 @@
+archivesBaseName = 'taotao-cloud-demo-rocketmq'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "com.alibaba.cloud:spring-cloud-starter-stream-rocketmq"
+
+    implementation 'cn.hutool:hutool-all'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

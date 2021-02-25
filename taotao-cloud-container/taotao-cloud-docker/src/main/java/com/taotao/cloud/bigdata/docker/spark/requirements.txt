@@ -1,0 +1,6 @@
+jupyter==1.0.0
+pyspark==2.4.4
+numpy==1.18.4
+matplotlib==3.2.1
+seaborn==0.10.1
+tensorflow-gpu==2.1.0

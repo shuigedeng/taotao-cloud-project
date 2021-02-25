@@ -1,0 +1,49 @@
+server:
+  port: 8011
+spring:
+  application:
+    name: order-dubbo
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.13.201.31:8848
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.13.201.31:3306/dubbo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    # Hikari 连接池配置
+    # 最小空闲连接数量
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+dubbo:
+  application:
+    id: order-dubbo
+  protocol:
+    name: dubbo
+    port: 20881
+  scan:
+    base-packages: com.taotao.cloud.dubbo.order.api
+  registry:
+    address: spring-cloud://localhost
+    check: false
+  consumer:
+    check: false
+  cloud:
+    subscribed-services:
+      - account-dubbo

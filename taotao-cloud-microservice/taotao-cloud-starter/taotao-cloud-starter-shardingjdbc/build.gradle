@@ -1,0 +1,21 @@
+archivesBaseName = 'taotao-cloud-starter-shardingjdbc'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    implementation "org.apache.shardingsphere:sharding-jdbc-spring-namespace:4.0.1"
+    implementation "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:4.0.1"
+    implementation "org.aspectj:aspectjweaver"
+
+    implementation 'org.springframework.boot:spring-boot'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

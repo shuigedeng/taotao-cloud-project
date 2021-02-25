@@ -1,0 +1,16 @@
+archivesBaseName = 'taotao-cloud-report-api'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-swagger')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+
+    compile "org.springframework.boot:spring-boot-starter-validation"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

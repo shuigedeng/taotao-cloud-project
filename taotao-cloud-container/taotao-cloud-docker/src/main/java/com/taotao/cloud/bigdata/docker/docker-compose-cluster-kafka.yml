@@ -1,0 +1,170 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.23.0.0/16 kafka-cluster-network #创建子网段为172.23.0.0/16 的IP网络
+
+version: '3.7'
+services:
+  cluster-kafka-zookeeper-zoo1:
+    image: zookeeper:3.4
+    #restart: always # 当发生错误时自动重启
+    hostname: cluster-kafka-zookeeper-zoo1
+    container_name: cluster-kafka-zookeeper-zoo1
+    privileged: true
+    ports:
+      - 2181:2181
+    volumes:
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo1/data:/data
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo1/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-kafka-zookeeper-zoo1:2888:3888 server.2=cluster-kafka-zookeeper-zoo2:2888:3888 server.3=cluster-kafka-zookeeper-zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.4
+
+  cluster-kafka-zookeeper-zoo2:
+    image: zookeeper:3.4
+    #restart: always
+    hostname: cluster-kafka-zookeeper-zoo2
+    container_name: cluster-kafka-zookeeper-zoo2
+    privileged: true
+    ports:
+      - 2182:2181
+    volumes:
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo2/data:/data
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo2/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 2
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-kafka-zookeeper-zoo1:2888:3888 server.2=cluster-kafka-zookeeper-zoo2:2888:3888 server.3=cluster-kafka-zookeeper-zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.5
+
+  cluster-kafka-zookeeper-zoo3:
+    image: zookeeper:3.4
+    #restart: always
+    hostname: cluster-kafka-zookeeper-zoo3
+    container_name: cluster-kafka-zookeeper-zoo3
+    privileged: true
+    ports:
+      - 2183:2181
+    volumes:
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo3/data:/data
+      - ./kafka/cluster/cluster-kafka-zookeeper-zoo3/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 3
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-kafka-zookeeper-zoo1:2888:3888 server.2=cluster-kafka-zookeeper-zoo2:2888:3888 server.3=cluster-kafka-zookeeper-zoo3:2888:3888
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.6
+
+  cluster-kafka-broker1:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: cluster-kafka-broker1
+    container_name: cluster-kafka-broker1
+    privileged: true
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9092
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: cluster-kafka-zookeeper-zoo1:2181,cluster-kafka-zookeeper-zoo2:2181,cluster-kafka-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/cluster/cluster-kafka-broker1:/kafka/kafka\-logs\-broker1
+    external_links:
+      - cluster-kafka-zookeeper-zoo1
+      - cluster-kafka-zookeeper-zoo2
+      - cluster-kafka-zookeeper-zoo3
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.7
+
+  cluster-kafka-broker2:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: cluster-kafka-broker2
+    container_name: cluster-kafka-broker2
+    privileged: true
+    ports:
+      - "9093:9092"
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9093
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ZOOKEEPER_CONNECT: cluster-kafka-zookeeper-zoo1:2181,cluster-kafka-zookeeper-zoo2:2181,cluster-kafka-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/cluster/cluster-kafka-broker2:/kafka/kafka\-logs\-broker2
+    external_links:
+      - cluster-kafka-zookeeper-zoo1
+      - cluster-kafka-zookeeper-zoo2
+      - cluster-kafka-zookeeper-zoo3
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.8
+
+  cluster-kafka-broker3:
+    image: wurstmeister/kafka
+    #restart: always
+    hostname: cluster-kafka-broker3
+    container_name: cluster-kafka-broker3
+    privileged: true
+    ports:
+      - "9094:9092"
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.146:9094
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.146
+      KAFKA_ADVERTISED_PORT: 9094
+      KAFKA_ZOOKEEPER_CONNECT: cluster-kafka-zookeeper-zoo1:2181,cluster-kafka-zookeeper-zoo2:2181,cluster-kafka-zookeeper-zoo3:2181
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka/cluster/cluster-kafka-broker3:/kafka/kafka\-logs\-broker3
+    external_links:
+      - cluster-kafka-zookeeper-zoo1
+      - cluster-kafka-zookeeper-zoo2
+      - cluster-kafka-zookeeper-zoo3
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.9
+
+  cluster-kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    #restart: always
+    container_name: cluster-kafka-manager
+    hostname: cluster-kafka-manager
+    ports:
+      - "9095:9000"
+    links:
+      - cluster-kafka-broker1
+      - cluster-kafka-broker2
+      - cluster-kafka-broker3
+    external_links:
+      - cluster-kafka-zookeeper-zoo1
+      - cluster-kafka-zookeeper-zoo2
+      - cluster-kafka-zookeeper-zoo3
+    environment:
+      ZK_HOSTS: cluster-kafka-zookeeper-zoo1:2181,cluster-kafka-zookeeper-zoo2:2181,cluster-kafka-zookeeper-zoo3:2181
+      KAFKA_BROKERS: cluster-kafka-broker1:9091,cluster-kafka-broker2:9092,cluster-kafka-broker3:9093
+      APPLICATION_SECRET: cluster-kafka
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+    networks:
+      kafka-cluster-network:
+        ipv4_address: 172.23.0.10
+
+networks:
+  kafka-cluster-network:
+    external:
+      name: kafka-cluster-network
+

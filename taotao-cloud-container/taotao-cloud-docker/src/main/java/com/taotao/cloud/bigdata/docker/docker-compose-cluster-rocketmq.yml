@@ -1,0 +1,93 @@
+# 新建网络#
+# docker network ls #查看当前网络
+# docker network create --subnet=172.26.0.0/16 cluster-rocketmq-network #创建子网段为172.18.0.0/16 的IP网络
+
+version: '3.7'
+services:
+  cluster-rmqnamesrv-a:
+    image: rocketmqinc/rocketmq:4.3.0
+    container_name: cluster-rmqnamesrv-a
+    ports:
+      - 9876:9876
+    volumes:
+      - ./rocketmq/broker-a/logs:/opt/logs
+      - ./rocketmq/broker-a/store:/opt/store
+    command: sh mqnamesrv
+    networks:
+      cluster-rocketmq-network:
+        ipv4_address: 172.26.0.16
+
+  cluster-rmqnamesrv-b:
+    image: rocketmqinc/rocketmq:4.3.0
+    container_name: cluster-rmqnamesrv-b
+    ports:
+      - 9877:9876
+    volumes:
+      - ./rocketmq/broker-b/logs:/opt/logs
+      - ./rocketmq/broker-b/store:/opt/store
+    command: sh mqnamesrv
+    networks:
+      cluster-rocketmq-network:
+        ipv4_address: 172.26.0.15
+
+  cluster-rmqbroker-a:
+    image: rocketmqinc/rocketmq:4.3.0
+    container_name: cluster-rmqbroker-a
+    ports:
+      - 11909:10909
+      - 11911:10911
+    volumes:
+      - ./rocketmq/broker-a/logs:/opt/logs
+      - ./rocketmq/broker-a/store:/opt/store
+      - ./rocketmq/broker-a/broker-a.conf:/opt/rocketmq-4.3.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "cluster-rmqnamesrv-a:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms256m -Xmx256m -Xmn256m"
+    command: sh mqbroker -c /opt/rocketmq-4.3.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - cluster-rmqnamesrv-a:cluster-rmqnamesrv-a
+      - cluster-rmqnamesrv-b:cluster-rmqnamesrv-b
+    networks:
+      cluster-rocketmq-network:
+        ipv4_address: 172.26.0.14
+
+  cluster-rmqbroker-b:
+    image: rocketmqinc/rocketmq:4.3.0
+    container_name: cluster-rmqbroker-b
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./rocketmq/broker-b/logs:/opt/logs
+      - ./rocketmq/broker-b/store:/opt/store
+      - ./rocketmq/broker-b/broker-b.conf:/opt/rocketmq-4.3.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "cluster-rmqnamesrv-b:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms256m -Xmx256m -Xmn256m"
+    command: sh mqbroker -c /opt/rocketmq-4.3.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - cluster-rmqnamesrv-a:cluster-rmqnamesrv-a
+      - cluster-rmqnamesrv-b:cluster-rmqnamesrv-b
+    networks:
+      cluster-rocketmq-network:
+        ipv4_address: 172.26.0.13
+
+  cluster-rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: cluster-rmqconsole
+    ports:
+      - 9001:8080
+    environment:
+      JAVA_OPTS: -Drocketmq.namesrv.addr=cluster-rmqnamesrv-a:9876;cluster-rmqnamesrv-b:9877 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    networks:
+      cluster-rocketmq-network:
+        ipv4_address: 172.26.0.12
+
+networks:
+  cluster-rocketmq-network:
+    external:
+      name: cluster-rocketmq-network

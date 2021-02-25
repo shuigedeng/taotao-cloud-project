@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>支付宝验证</title>
+    <link rel="icon" href="./img/favicon.ico">
+
+
+    <link rel="stylesheet" type="text/css" href="./css/all.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pages-payconfirm.css" />
+</head>
+
+<body>
+
+    <div class="payconfirm ">
+        <!--logoArea-->
+        <div class="logoArea">
+            <div class="py-container ">
+                <div class="logo"><img src="./img/Logo.png" alt=""></div>
+                <div class="text">登录</div>
+            </div>
+        </div>
+
+        <!--主内容-->
+        <div class="py-container main-box">
+            <div class="success"><img src="./img/_/right.png" width="16" height="16"> 安全设置监测成功</div>
+            <div class="tips">为确保你的账户资金安全，需要验证你的手机短信验证码。</div>
+            <div class="form-box">
+                <form>
+                    <div class="module-box">
+                        <label>手机号：</label>
+                        <div class="input-area">
+                            <input class="input-phone" type="text" name="phone" id="phone" maxlength="11" placeholder="请输入你的手机号码">
+                            <span class="phonenum"></span>
+                            <span class="btn-code">发送验证码</span>
+                        </div>
+                        <div class="empty-phone">请输入你的手机号码</div>
+                    </div>
+                    <div class="module-box">
+                        <label>校验码：</label>
+                        <div class="input-area">
+                            <input type="text" id="code" placeholder="请勿泄漏">
+                            <span class="empty"><a href="#">没有收到验证码？</a></span>
+                        </div>
+                        <div class="timeout"><img src="./img/_/right.png" width="16" height="16"> 检验码已发送，30分钟内输入有效，请勿泄露</div>
+
+                    </div>
+                    <div class="module-box">
+                        <button class="btn-next">下一步</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- 底部栏位 -->
+    <div class="py-container copyright">
+        <ul>
+            <li>关于我们</li>
+            <li>联系我们</li>
+            <li>联系客服</li>
+            <li>商家入驻</li>
+            <li>营销中心</li>
+            <li>手机品优购</li>
+            <li>销售联盟</li>
+            <li>品优购社区</li>
+        </ul>
+        <div class="address">地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</div>
+        <div class="beian">京ICP备08001421号京公网安备110108007702
+        </div>
+    </div>
+    <!-- <link rel="import" href="../../components/ui-modules/nav/nav-portal-bottom.html?__inline"> -->
+    
+
+
+</body>
+
+</html>

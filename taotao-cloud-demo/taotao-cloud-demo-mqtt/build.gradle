@@ -1,0 +1,17 @@
+archivesBaseName = 'taotao-cloud-demo-mqtt'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
+    implementation "commons-codec:commons-codec:1.10"
+    implementation "org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.2"
+    implementation "org.apache.httpcomponents:httpclient:4.5.2"
+    implementation "com.alibaba:fastjson:1.2.48"
+    implementation "com.aliyun.openservices:ons-client:1.7.9.Final"
+    implementation "com.aliyun:aliyun-java-sdk-onsmqtt:1.0.3"
+    implementation "com.aliyun:aliyun-java-sdk-core:4.5.0"
+}

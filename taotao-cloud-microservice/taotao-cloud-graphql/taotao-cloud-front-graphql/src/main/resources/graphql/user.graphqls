@@ -1,0 +1,19 @@
+type User {
+    # id
+    id: String!
+    # 邮箱
+    mail: String!
+    # 昵称
+    nickname: String!
+    # 密码
+    password: String!
+    # 描述
+    description: String
+}
+
+input AddUserInput {
+    mail: String!
+    nickname: String!
+    password: String!
+    description: String
+}

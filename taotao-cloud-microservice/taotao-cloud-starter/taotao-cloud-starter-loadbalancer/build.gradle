@@ -1,0 +1,31 @@
+archivesBaseName = 'taotao-cloud-starter-loadbalancer'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    implementation 'org.springframework.security.oauth:spring-security-oauth2'
+
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign"
+    compile "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+    compile "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+    compile "io.github.openfeign:feign-okhttp"
+
+    implementation "org.springframework.security:spring-security-core"
+    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+
+    implementation "javax.servlet:javax.servlet-api"
+    implementation "org.apache.httpcomponents:httpclient"
+    implementation "org.apache.httpcomponents:httpmime"
+    implementation "com.squareup.okhttp3:okhttp"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

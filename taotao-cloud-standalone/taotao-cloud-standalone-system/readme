@@ -1,0 +1,6 @@
+Docker 打包部署步骤
+1. mvn clean package
+2. 把target下的pre-alpine文件夹下的jar包以及Dockerfile 传输到服务器的某一路径
+3. cd到路径
+4. 构建镜像 docker build -t pre:1.4 .
+5. 运行命令 docker run --name pre -p 8081:8081 -d -v /Users/lihaodong/Desktop/log:/Users/lihaodong/Desktop/log pre:1.4

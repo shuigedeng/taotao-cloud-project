@@ -1,0 +1,95 @@
+archivesBaseName = 'taotao-cloud-pay-biz'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-swagger')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+
+    implementation project(':taotao-cloud-microservice:taotao-cloud-pay:taotao-cloud-pay-api')
+
+    // QueryDSL
+    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+
+    // mapstruct
+    implementation "org.mapstruct:mapstruct"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
+
+    // jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
+
+    // spring boot
+    //developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtime 'org.springframework.boot:spring-boot-starter-undertow'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    // spring cloud
+    implementation 'org.springframework.cloud:spring-cloud-context'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2'
+
+    // spring cloud alibaba
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    implementation('com.alibaba.cloud:spring-cloud-alibaba-seata:2.2.0.RELEASE') {
+        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
+    }
+    implementation 'io.seata:seata-spring-boot-starter:1.3.0'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    // runtime 'io.micrometer:micrometer-registry-prometheus'
+
+    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingjdbc')
+    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
+    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk')
+}
+
+shadowJar {
+    zip64 true
+    mergeServiceFiles()
+    classifier = null
+    version = 1.0
+    manifest {
+        attributes(
+                'Main-Class': "com.taotao.cloud.logistics.biz.TaoTaoCloudLogisticsApplication"
+        )
+    }
+
+    dependencies {
+        // exclude(dependency('xml-apis:xml-apis:.*'))
+        // exclude(dependency('xerces:xercesImpl:.*'))
+        // exclude(dependency { it.moduleGroup == 'xml-apis' })
+        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
+        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+    }
+
+    //append 'META-INF/spring.handlers'
+    //append 'META-INF/spring.schemas'
+    //append 'META-INF/spring.tooling'
+    //transform(PropertiesFileTransformer) {
+    //    paths = ['META-INF/spring.factories' ]
+    //    mergeStrategy = "append"
+    //}
+}

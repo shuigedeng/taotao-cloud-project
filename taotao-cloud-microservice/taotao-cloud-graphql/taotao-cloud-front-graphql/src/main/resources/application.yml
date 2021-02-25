@@ -1,0 +1,74 @@
+server:
+  port: 9000
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      location: /tmp
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-manager-center
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        metadata:
+          version: 6
+      config:
+        enabled: false
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
+        file-extension: yml
+
+graphql:
+  servlet:
+    actuator-metrics: true
+    tracing-enabled: true
+    mapping: /graphql
+    enabled: true
+    corsEnabled: false
+    cors:
+      allowed-origins: http://some.domain.com
+    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+    exception-handlers-enabled: true
+    contextSetting: PER_REQUEST_WITH_INSTRUMENTATION
+  tools:
+    schema-location-pattern: "**/*.graphqls"
+    # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
+    # specification and expectations of most clients, so use this option with caution
+    introspection-enabled: false
+
+graphiql:
+  mapping: /graphiql
+  endpoint:
+    graphql: http://localhost:9900/api/v1.0/manager/graphql
+    subscriptions: /subscriptions
+  subscriptions:
+    timeout: 30
+    reconnect: false
+  static:
+    basePath: /
+  enabled: true
+  pageTitle: GraphiQL
+  cdn:
+    enabled: false
+    version: 0.13.0
+  props:
+    resources:
+      query: /graphql/schema.graphqls
+      variables: /graphql/schema.graphqls
+    variables:
+      editorTheme: "solarized light"
+  headers:
+    Authorization: "Bearer <your-token>"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}

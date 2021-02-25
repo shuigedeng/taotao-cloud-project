@@ -1,0 +1,9 @@
+archivesBaseName = 'taotao-cloud-rpc-client'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
+    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
+}

@@ -1,0 +1,386 @@
+# 马哥Linux2016全新学习第42天（mysql备份与恢复，mysql主从复制架构及实现）
+
+回顾：MySQL Logs, Backup adn Recovery
+
+	日志的种类：查询日志、慢查询日志、错误日志、二进制日志、中继日志、事务日志；
+		服务器变量
+
+	mysql> SHOW BINARY|MASTER LOGS;
+	mysql> SHOW MASTER STATUS;
+	mysql> SHOW BINLOG EVENTS IN '' FROM pos;
+
+	mysqlbinlog
+		--start-position
+		--stop-position
+
+		--start-datetime
+		--stop-datetime
+
+		客户端程序：-u, -h, -p
+
+	备份：
+		完全备份、增量备份、差异备份
+		物理备份、逻辑备份
+		完全备份、部分备份
+		热备、温备、冷备
+
+	备份工具：
+		mysqldump
+		cp，tar
+		lvm2
+		xtrabackup
+
+备份和恢复：
+	
+	逻辑备份工具：mysqldump，mydumper，phpMyAdmin
+
+		Schema和数据存储在一起、巨大的SQL语句、单个巨大的备份文件；
+
+		mysqldump：客户端命令，通过msql协议连接至mysql服务器；
+			mysqldump [options] [db_name [tbl_name ...]]
+
+			命令语法格式：
+	            shell> mysqldump [options] db_name [tbl_name ...]：备份单个库，或库指定的一个或多个表
+	            shell> mysqldump [options] --databases db_name ...：备份一个或多个库
+	            	# mysqldump -uroot --databases hellodb > hellodb1.sql
+	            shell> mysqldump [options] --all-databases：备份所有库
+
+	        MyIAM：支持温备；锁定备份库，而后启动备份操作；
+	        	锁定方法：
+	        		--lock-all-tables, -x：锁定所有库的所有表
+	        		--lock-tables, -l：对每个单独的数据库，在启动备份之前锁定其所有表；
+
+	        	对InnoDB表一样生效，实现温备；
+
+	        InnoDB：支持热备：
+	        	--single-transaction：启动一个大的单一事务实现备份
+
+	        其它选项：
+	        	-E，--events：备份自定数据库相关的所有event scheduler；
+	        	-R，--routines：备份指定数据库相关的所有存储过程和存储函数；
+	        	--triggers：备份表相关的触发器；
+
+	        --master-data[=#]
+	        	1：记录为CHANGE MASTER TO语句，此语句不被注释；
+	        	2：记录为注释的CHANGE MASTER TO语句;
+
+	        --flush-logs：
+	        	锁定表完成后，执行flush logs命令；实现日志滚动；
+
+	    注意：二进制日志文件不应该与数据文件放在同一磁盘；
+
+	    练习：有一100MB级别的数据库：
+	    	（1）备份脚本；
+	    	（2）制作备份策略；
+
+	基于lvm2的备份：
+		（1）请求锁定所有表：
+			mysql> FLUSH TABLES WITH READ LOCK;
+
+		（2）记录二进制日志文件及事件位置；
+			mysql> FLUSH LOGS;
+			mysql> SHOW MASTER STATUS;
+
+			# mysql -e 'SHOW MASTER STATUS' > /PATH/TO/SIMEFILE
+				# mysql -e 'SHOW MASTER STATUS;' > /mysql_backup/binlog-`date +%F`
+
+		（3）创建快照：
+			lvcreate -L # -s -p r -n NAME /DEV/VG_NAME/LV_NAME
+
+		（4）释放锁
+			mysql> UNLOCK TABLES;
+
+		（5）挂载快照卷，执行数据备份；
+			# cd /mydata/data
+			# cp -a * /mysql_backup/
+
+		（6）备份完成后，删除快照卷；
+			# umount /mnt
+			# lvremove /dev/myvg/mydata-snapshot 
+
+		（7）制定好策略，通过原卷备份二进制日志；
+			# cat /mysql_backup/binlog-2017-07-03 
+			File	Position	Binlog_Do_DB	Binlog_Ignore_DB
+			mysql-bin.000007	245	
+			# mysqlbinlog --start-position=245 /mydata/data/mysql-bin.000007 > /mysql_backup/binlog-`date +%F`.sql
+
+	两种备份和恢复方式：
+		mysqldump, lvm2+cp(tar)
+
+	xtrabackup：
+		percona，www.percona.com
+
+		percona-server
+
+		InnoDB --> XtraDB
+			Xtrabackup：
+
+		1、下载
+			wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.4.7/binary/redhat/7/x86_64/percona-xtrabackup-24-2.4.7-1.el7.x86_64.rpm
+
+		2、安装 
+			# yum localinstall percona-xtrabackup-24-2.4.7-1.el7.x86_64.rpm 
+
+	完整备份策略：完整备份 + 增量备份 + 二进制日志
+
+	注意：
+		1、将数据和二进制文件放置于不同的设备；二进制日志也应该周期性地备份；
+		2、将数据和备份分开存放，建议不在同一设备、同一主机、同一机房、同一地域；
+		3、每次灾难恢复后都应该立即做一次完全备份；
+		4、备份后的数据应该周期行地做还原测试；
+
+	从备份中恢复应该遵循的步骤：
+		1、停止MySQL服务器；
+		2、记录服务器配置和文件权限；
+		3、将备份恢复到MySQL数据目录；此步骤依赖具体的备份工具；
+		4、改变配置和文件权限；
+		5、以限制方式启动MySQL服务器；比如禁止通过网络访问；
+			[mysqld]
+			skip-networking 
+			socket=/tmp/mysql-recovery.sock
+		6、载入额外的逻辑备份；检查和重放二进制日志；
+		7、检查已经还原的数据；
+		8、以完全访问模式重启服务器；
+
+	其它的备份工具：
+		SELECT ... INTO OUTFILE ''
+		LOAD FILE
+
+		mylvmbackup
+
+回顾：备份和恢复
+	
+	备份和恢复：
+		mysqldump, binary logs
+		lvm2+cp, binary logs
+		xtrabackup：
+			MyISAM：不能热备，不能增量；
+			InnoDB：LSN热备，增量；
+
+	备份策略：
+		10G
+
+MySQL复制：
+	
+	扩展方式：
+		Scale Up
+		Scale Out
+
+	MySQL的扩展：
+		复制：每个节点都有相同的数据集；
+			向外扩展；
+			二进制日志；
+			单向；
+	复制的功用：
+		数据分布；
+		负载均衡读操作；
+		备份；
+		高可用和故障切换；
+		MySQL升级测试；
+
+	主从复制：
+		从节点：
+			I/O Thread：从Master请求二进制日志事件，并保存于中继日志中；
+			SQL Thread：从中继日志中读取日志事件，在本地完成重放；
+
+		主节点：
+			dump Thread：为每个Slave的I/O Thread启动一个dump线程，用于向其发送binary log events；
+
+		特点：
+			1、异步复制;
+			2、主从数据不一致比较常见；
+
+		复制架构：
+			M/S，M/M，环状复制；
+
+			-主多从；
+			从服务器还可以再有从服务器；
+			一丛多主
+
+		二进制日志事件记录格式：
+			STATEMENT
+			ROW
+			MIXED
+
+
+	演示的模型：
+		主从、主主、半同步复制、复制过滤器
+
+		主从配置过程：
+			主节点：
+				（1）启动二进制日志；
+					# vim /etc/my.cnf
+					[mysqld]
+					log-bing=master-bin
+				（2）为当前节点设置一个全局唯一的ID号；
+					[mysqld]
+					server-id=#
+				（3）创建有复制权限的用户帐号；
+					REPLICATION SLAVE, REPLICATION CLIENT
+					mysql > GRANT REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'repluser'@'172.16.%.%' IDENTIFIED BY 'replpass';
+
+
+			从节点：
+				（1）启动中继日志；
+					# vim /etc/mysql/my.cnf
+					[mysqld]
+					relay-log=relay-log
+					reloy-log-index=relay-log.index
+					servicer-id=7
+				（2）为当前节点设置一个全局唯一的ID号；
+					[mysqld]
+					servicer-id=#
+				（3）使用有复制权限的用户帐号连接至主服务器，并启动线程。
+					CHANGE MASTER TO option [, option] ...
+						option:
+						    MASTER_BIND = 'interface_name'
+						  | MASTER_HOST = 'host_name'
+						  | MASTER_USER = 'user_name'
+						  | MASTER_PASSWORD = 'password'
+						  | MASTER_PORT = port_num
+						  | MASTER_CONNECT_RETRY = interval
+						  | MASTER_HEARTBEAT_PERIOD = interval
+						  | MASTER_LOG_FILE = 'master_log_name'
+						  | MASTER_LOG_POS = master_log_pos
+						  | RELAY_LOG_FILE = 'relay_log_name'
+						  | RELAY_LOG_POS = relay_log_pos
+						  | MASTER_SSL = {0|1}
+						  | MASTER_SSL_CA = 'ca_file_name'
+						  | MASTER_SSL_CAPATH = 'ca_directory_name'
+						  | MASTER_SSL_CERT = 'cert_file_name'
+						  | MASTER_SSL_KEY = 'key_file_name'
+						  | MASTER_SSL_CIPHER = 'cipher_list'
+						  | MASTER_SSL_VERIFY_SERVER_CERT = {0|1}
+						  | IGNORE_SERVER_IDS = (server_id_list)
+
+					MariaDB [(none)]> CHANGE MASTER TO MASTER_HOST='192.168.10.99', MASTER_USER='repluser', MASTER_PASSWORD='replpass',MASTER_LOG_FILE='master-bin.000001',MASTER_LOG_POS=245;
+
+					启动线程：
+						MariaDB [(none)]> START SLAVE;
+
+					查看slve状态：
+						MariaDB [mysql]> SHOW SLAVE STATUS\G
+
+				思考：如果主节点已经运行了一段时间，且有大量数据时，如何配置并启动slave节点？
+					通过备份恢复数据至从服务器；
+					复制起始位置为备份时，二进制日志文件及其POS；
+
+
+		复制架构中应该注意的问题：
+			1、限制从服务器为只读
+				在从服务器上设置read_only=ON; 此限制对拥有SUPER权限的用户均无效；
+
+				阻止所有用户：
+					mysql> FLUSH TABLES WITH READ LOCK;
+
+			2、如何保证主从复制时事务安全？
+				在master节点启用参数：
+					sync_binlog=ON：遇到事务提交时，将binlog内存缓存区的事件立即同步至磁盘；
+
+					如果用到的为InnoDB为存储引擎：
+						innodb_flush_logs_at_trx_commit=ON：事务提交时，立即将事务缓冲区的事务日志同步至磁盘事务日志中；
+						innodb_supoort_xa=ON：是否让innodb支持分布式；
+
+				在slave节点：
+					skip_slave_start=ON
+
+				master节点：
+					sync_master_info
+
+				slave节点：
+					sync_relay_log
+					sync_relay_log_info
+
+	主主复制：
+		互为主从：
+			1、数据不一致，因此，慎用；
+			2、自动增长id；
+				配置一个节点使用奇数id
+					auto_increment_offset=1
+					auto_increment_increment=2
+				另一个节点使用偶数id
+					auto_increment_offset=2
+					auto_increment_increment=2
+
+		配置步骤：
+			（1）各节点使用一个唯一server_id；
+			（2）都启用binary log和relay log；
+			（3）创建拥有复制权限的用户帐号；
+			（4）定义自动增长id字段的数值范围为奇偶；
+			（5）均把对方指定为主节点，并启动复制线程；
+
+		半同步复制：
+			master:
+				mysql> INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so';
+				mysql> SET GLOBAL VARIABLES rpl_semi_sync_master_enabled=1;
+
+				mysql> SHOW GLOBAL VARIABLS LIKE '%semi%';
+				mysql> SHOW GLOBAL STATUS LIKE '%semi%';
+
+			slave:
+				mysql> INSTALL PLUGIN rpl_semi_sync_slave SONAME 'semisync_slave.so';
+				mysql> SET GLOBAL VARIABLES rpl_semi_sync_slave_enabled=1;
+
+		复制过滤器：
+			让从节点仅复制指定的数据库，或指定数据库的指定表；
+
+			有两种实现方式：
+				（1）主服务器仅向二进制日志中记录与特定数据库（特定表）相关的事件；
+					问题：时间点还原无法实现；不建议使用；
+
+					binlog_do_db=				# 数据库白名单列表
+					binlog_ignore_db=            # 数据库黑名单列表
+
+				（2）从服务器SQL_THREAD在replay中继日志中的事件时，仅读取与特定数据库（特定表）相关的事件并应用于本地；
+					问题：会造成网络及磁盘IO浪费；
+
+					replicate_do_db=           #复制的数据库白名单
+					replicate_ignore_db			# 不复制的数据，黑名单；
+					replicate_do_table=
+					replicate_ignore_table=
+					replicate_wild_do_talbe=
+					replicate_wild_ignore_table=
+
+		基于SSL复制:
+			前提：支持SSL
+
+			(1) master配置整数和私钥；并且创建一个要求必须使用ssl连接的复制帐号；
+			(2) slave端使用CHANGER MASTER TO 命令时指明ssl相关选项；
+
+		跟复制功能相关的文件：
+			master.info：用于保存slave连接至master时相关信息，例如帐号、密码、服务器地址等等；
+			relay-log.info：保存在当前slave节点上已经复制的当前二进制日志和本地replay log日志的对应关系；
+
+		复制的监控和维护：
+			（1）清理日志：
+				PURGE
+				PURGE { BINARY | MASTER } LOGS
+					    { TO 'log_name' | BEFORE datetime_expr }
+
+				PURGE BINARY LOGS TO 'mysql-bin.010';
+				PURGE BINARY LOGS BEFORE '2008-04-02 22:46:26';
+
+			（2）复制监控：
+				SHOW MASTER STATUS
+				SHOW BINLOG EVENTS
+				SHOW BINARY LOGS;
+
+				SHOW SLAVE STATUS
+				
+				SHOW PROCESSLIST;
+
+			（3）从服务器是否落后于主服务器；
+				SHOW SLAVE STATUS\G
+				Seconds_Behind_Master: 0
+
+			（4）如何确定主从节点数据是否一致；
+				percona-tools
+
+			（5）数据不一致如何修复？
+				重新复制
+
+	博客作业：以上所有内容；
+
+
+
+

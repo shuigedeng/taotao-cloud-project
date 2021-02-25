@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<breakpoints>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="2070" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAdvisorAutoProxyCreator.class[AbstractAdvisorAutoProxyCreator~setBeanFactory~Lorg.springframework.beans.factory.BeanFactory;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="2084"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Method breakpoint:AbstractAdvisorAutoProxyCreator [entry] - setBeanFactory(BeanFactory)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="2070"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Lorg/springframework/beans/factory/BeanFactory;)V"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="setBeanFactory"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAdvisorAutoProxyCreator.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="11491" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class[AbstractAutoProxyCreator~postProcessAfterInitialization~Ljava.lang.Object;~Ljava.lang.String;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="11521"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Method breakpoint:AbstractAutoProxyCreator [entry] - postProcessAfterInitialization(Object, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="11491"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="postProcessAfterInitialization"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="9810" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class[AbstractAutoProxyCreator~postProcessBeforeInstantiation~Ljava.lang.Class\&lt;*&gt;;~Ljava.lang.String;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="9840"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Method breakpoint:AbstractAutoProxyCreator [entry] - postProcessBeforeInstantiation(Class&lt;?&gt;, String)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="9810"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="postProcessBeforeInstantiation"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="8783" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class[AbstractAutoProxyCreator~setBeanFactory~Lorg.springframework.beans.factory.BeanFactory;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="8797"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Method breakpoint:AbstractAutoProxyCreator [entry] - setBeanFactory(BeanFactory)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="8783"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Lorg/springframework/beans/factory/BeanFactory;)V"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="setBeanFactory"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.autoproxy(AbstractAutoProxyCreator.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="2861" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.aspectj.annotation(AnnotationAwareAspectJAutoProxyCreator.class[AnnotationAwareAspectJAutoProxyCreator~initBeanFactory~Lorg.springframework.beans.factory.config.ConfigurableListableBeanFactory;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="2876"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="message" value="Method breakpoint:AnnotationAwareAspectJAutoProxyCreator [entry] - initBeanFactory(ConfigurableListableBeanFactory)"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="2861"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Lorg/springframework/beans/factory/config/ConfigurableListableBeanFactory;)V"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="initBeanFactory"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.aspectj.annotation(AnnotationAwareAspectJAutoProxyCreator.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+<breakpoint enabled="true" persistant="true" registered="true">
+<resource path="/" type="8"/>
+<marker charStart="2577" lineNumber="-1" type="org.eclipse.jdt.debug.javaMethodBreakpointMarker">
+<attrib name="org.eclipse.jdt.debug.core.suspendPolicy" value="2"/>
+<attrib name="org.eclipse.jdt.debug.ui.JAVA_ELEMENT_HANDLE_ID" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.adapter(DefaultAdvisorAdapterRegistry.class[DefaultAdvisorAdapterRegistry~getInterceptors~Lorg.springframework.aop.Advisor;"/>
+<attrib name="org.eclipse.jdt.debug.core.native" value="false"/>
+<attrib name="charEnd" value="2592"/>
+<attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.installCount" value="0"/>
+<attrib name="message" value="Method breakpoint:DefaultAdvisorAdapterRegistry [entry] - getInterceptors(Advisor)"/>
+<attrib name="org.eclipse.debug.core.id" value="org.eclipse.jdt.debug"/>
+<attrib name="charStart" value="2577"/>
+<attrib name="org.eclipse.jdt.debug.core.entry" value="true"/>
+<attrib name="org.eclipse.jdt.debug.core.methodSignature" value="(Lorg/springframework/aop/Advisor;)[Lorg/aopalliance/intercept/MethodInterceptor;"/>
+<attrib name="org.eclipse.jdt.debug.core.methodName" value="getInterceptors"/>
+<attrib name="org.eclipse.jdt.debug.core.typeName" value="org.springframework.aop.framework.adapter.DefaultAdvisorAdapterRegistry"/>
+<attrib name="org.eclipse.jdt.debug.core.exit" value="false"/>
+<attrib name="org.eclipse.jdt.internal.core.JavaModelManager.handleId" value="=spring-annotation/D:\/devsoft\/apache-maven-3.3.9\/repository\/org\/springframework\/spring-aop\/4.3.12.RELEASE\/spring-aop-4.3.12.RELEASE.jar&lt;org.springframework.aop.framework.adapter(DefaultAdvisorAdapterRegistry.class"/>
+<attrib name="workingset_name" value=""/>
+<attrib name="workingset_id" value="org.eclipse.debug.ui.breakpointWorkingSet"/>
+</marker>
+</breakpoint>
+</breakpoints>

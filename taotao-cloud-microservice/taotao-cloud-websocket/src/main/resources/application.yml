@@ -1,0 +1,9 @@
+server:
+  port: 7443
+  http2:
+    enabled: true
+  ssl:
+    enabled: true
+    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234

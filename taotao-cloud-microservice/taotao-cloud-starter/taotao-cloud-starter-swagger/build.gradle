@@ -1,0 +1,20 @@
+archivesBaseName = 'taotao-cloud-starter-swagger'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework:spring-web"
+    compile "io.springfox:springfox-swagger2"
+    implementation 'javax.servlet:javax.servlet-api'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

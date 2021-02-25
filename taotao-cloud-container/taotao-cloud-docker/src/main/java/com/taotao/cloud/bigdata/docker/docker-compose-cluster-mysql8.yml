@@ -1,0 +1,148 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.20.0.0/16 cluster-mysql-network #创建子网段为172.18.0.0/16 的IP网络
+
+version: "3.7"
+services:
+  mysql-master0: &mysql-master0
+    image: mysql:${TAG}
+    container_name: mysql-master0
+    security_opt:
+      - seccomp:unconfined
+    restart: unless-stopped
+    env_file:
+      - ./myql.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MASTER_MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    ports:
+      - "36005:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./mysql/cluster/mysql-master0-data:/var/lib/mysql
+      - ./mysql/cluster/mall.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./mysql/cluster/init-master.sh:/docker-entrypoint-initdb.d/2-init-master.sh
+    command: [
+      "--log-bin=mysql-bin",
+      "--server-id=${MASTER0_SERVER_ID}",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+      "--innodb_flush_log_at_trx_commit=1",
+      "--sync_binlog=1"
+    ]
+    networks:
+      cluster-mysql-network:
+        ipv4_address: 172.20.0.10
+
+  mysql-master0-node1: &mysql-master0-node1
+    <<: *mysql-master0
+    container_name: mysql-mall-master0-node1
+    environment:
+      - MYSQL_ROOT_PASSWORD=${NODE_MYSQL_ROOT_PASSWORD}
+      - MASTER_MYSQL_ROOT_PASSWORD=${MASTER_MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "36006:3306"
+    depends_on:
+      - mysql-master0
+    volumes:
+      - ./mysql/cluster/mysql-master0-node-1-data:/var/lib/mysql
+      - ./mysql/cluster/mall.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./mysql/cluster/init-master0-node.sh:/docker-entrypoint-initdb.d/2-init-node.sh
+    command: [
+      "--server-id=${MASTER0_NODE_1_SERVER_ID}",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+    ]
+    networks:
+      cluster-mysql-network:
+        ipv4_address: 172.20.0.10
+
+  mysql-master0-node2:
+    <<: *mysql-master0-node1
+    container_name: mysql-master0-node2
+    environment:
+      - MYSQL_ROOT_PASSWORD=${NODE_MYSQL_ROOT_PASSWORD}
+      - MASTER_MYSQL_ROOT_PASSWORD=${MASTER_MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "36007:3306"
+    volumes:
+      - ./mysql/cluster/mysql-master0-node-2-data:/var/lib/mysql
+      - ./mysql/cluster/mall.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./mysql/cluster/init-master0-node.sh:/docker-entrypoint-initdb.d/2-init-node.sh
+    command: [
+      "--server-id=${MASTER0_NODE_2_SERVER_ID}",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+    ]
+    networks:
+      cluster-mysql-network:
+        ipv4_address: 172.20.0.10
+
+  mysql-master1: &mysql-master1
+    image: mysql:${TAG}
+    container_name: mysql-master1
+    restart: unless-stopped
+    env_file:
+      - ./mysql.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MASTER_MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "36008:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./mysql/cluster/mysql-master1-data:/var/lib/mysql
+      - ./mysql/cluster/mall.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./mysql/cluster/init-master.sh:/docker-entrypoint-initdb.d/2-init-master.sh
+    command: [
+      "--log-bin=mysql-bin",
+      "--server-id=${MASTER1_SERVER_ID}",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+      "--innodb_flush_log_at_trx_commit=1",
+      "--sync_binlog=1"
+    ]
+    networks:
+      cluster-mysql-network:
+        ipv4_address: 172.20.0.10
+
+  mysql-master1-node1:
+    <<: *mysql-master1
+    container_name: mysql-master1-node1
+    environment:
+      - MYSQL_ROOT_PASSWORD=${NODE_MYSQL_ROOT_PASSWORD}
+      - MASTER_MYSQL_ROOT_PASSWORD=${MASTER_MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "36009:3306"
+    depends_on:
+      - mysql-master1
+    volumes:
+      - ./mysql/cluster/mysql-master1-node-1-data:/var/lib/mysql
+      - ./mysql/cluster/mall.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./mysql/cluster/init-master1-node.sh:/docker-entrypoint-initdb.d/2-init-node.sh
+    command: [
+      "--server-id=${MASTER1_NODE_1_SERVER_ID}",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+    ]
+    networks:
+      cluster-mysql-network:
+        ipv4_address: 172.20.0.10
+
+networks:
+  cluster-mysql-network:
+    external:
+      name: cluster-mysql-network

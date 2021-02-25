@@ -1,0 +1,18 @@
+server:
+  port: 9800
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-auth-center

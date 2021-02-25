@@ -1,0 +1,28 @@
+archivesBaseName = 'taotao-cloud-starter-redis'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+
+    compile("org.springframework.boot:spring-boot-starter-data-redis") {
+        exclude group: 'io.lettuce', module: 'lettuce-core'
+    }
+    compile "io.lettuce:lettuce-core"
+
+    // https://mvnrepository.com/artifact/org.redisson/redisson
+    compile group: 'org.redisson', name: 'redisson', version: '3.14.1'
+
+    implementation "commons-io:commons-io"
+    implementation "org.apache.commons:commons-pool2"
+    implementation "org.apache.commons:commons-collections4"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

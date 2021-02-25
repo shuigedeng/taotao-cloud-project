@@ -1,0 +1,9 @@
+archivesBaseName = 'taotao-cloud-kudu'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

@@ -1,0 +1,25 @@
+type Query {
+    # 根据昵称获取用户
+    user(nickname: String!): User
+    # 获取用户列表
+    users: [User]
+    article(title: String!): Article
+}
+
+type Mutation {
+    # 创建用户
+    addUser(mail: String!, nickname: String!, password: String!, description: String): Result
+    # 删除用户
+    deleteUser(id: String!): Result
+    # 更新用户
+    updateUser(id: String!, mail: String!, nickname: String!, description: String): User
+    # 创建用户（入参类型为对象）
+    addUserByInput(input: AddUserInput): User
+    registerUser(mail: String!, nickname: String!, password: String!): User
+    addArticle(title: String!, content: String!, authorId: String!): Article
+}
+
+type Result {
+    respCode: Int!
+    msg: String
+}

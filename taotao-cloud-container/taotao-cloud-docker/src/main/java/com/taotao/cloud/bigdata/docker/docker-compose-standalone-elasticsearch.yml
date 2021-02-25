@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  standalone-elasticsearch:
+    image: elasticsearch:7.7.0
+    container_name: standalone-elasticsearch
+    hostname: standalone-elasticsearch
+    volumes:
+      - ./elasticsearch/standalone/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/standalone/plugins:/usr/share/elasticsearch/plugins
+    environment:
+      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
+      - "discovery.type=single-node" #以单一节点模式启动
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" #设置使用jvm内存大小
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  standalone-elastichd:
+    image: containerize/elastichd:latest
+    container_name: standalone-elastichd
+    ports:
+      - "9800:9800"
+    depends_on:
+      - standalone-elasticsearch
+    links:
+      - standalone-elasticsearch:demo

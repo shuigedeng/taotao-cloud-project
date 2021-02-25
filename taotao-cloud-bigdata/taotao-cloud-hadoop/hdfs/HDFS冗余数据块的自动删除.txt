@@ -1,0 +1,17 @@
+HDFS冗余数据块的自动删除
+
+在日常维护hadoop集群的过程中发现这样一种情况：
+	某个节点由于网络故障或者DataNode进程死亡，被NameNode判定为死亡，HDFS马上自动开始数据块的容错拷贝；当该节点重新添加到集群中时，
+	由于该节点上的数据其实并没有损坏，所以造成了HDFS上某些block的备份数超过了设定的备份数。通过观察发现，这些多余的数据块经过很长的一段时间才会被完全删除掉，
+	那么这个时间取决于什么呢？
+	该时间的长短跟数据块报告的间隔时间有关。Datanode会定期将当前该结点上所有的BLOCK信息报告给Namenode，参数dfs.blockreport.intervalMsec就是控制这个报告间隔的参数。
+	hdfs-site.xml文件中有一个参数：
+
+<property>
+	<name>dfs.blockreport.intervalMsec</name>
+	<value>3600000</value>
+	<description>Determines block reporting interval in milliseconds.</description>
+</property>
+
+	其中3600000为默认设置，3600000毫秒，即1个小时，也就是说，块报告的时间间隔为1个小时，所以经过了很长时间这些多余的块才被删除掉。
+	通过实际测试发现，当把该参数调整的稍小一点的时候（60秒），多余的数据块确实很快就被删除了。

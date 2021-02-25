@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Student1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id="video" style="margin:10px;height:40%"></div>
+<div id="content" style="margin:10px;height:40%"></div>
+<div id="action" style="margin:10px">
+    <button id="btn" style="margin-right:10px;width:5%">发言</button>
+    <input type="text" id="msg" style="width:50%"/>
+</div>
+
+<script type="">
+  function httpGet (theUrl) {
+    var xmlHttp = new XMLHttpRequest()
+    xmlHttp.open('GET', theUrl, false)
+    xmlHttp.send(null)
+    return xmlHttp.responseText
+  }
+</script>
+<script type="text/javascript">
+  instanceId = 'xxx'//实例 ID，购买后从控制台获取
+  appHost = 'xxx'
+  appPort = xx
+  mqttHost = 'xx'// 设置当前用户的接入点域名，接入点获取方法请参考接入准备章节文档，先在控制台创建实例
+  mqttPort = 80//WebSocket 协议服务端口，如果是走 HTTPS，设置443端口
+  subTopic = 'xx'// 订阅topic, 需要控制台创建
+  pubTopic = '' // 发送topic，需要控制台创建
+  useTLS = false//是否走加密 HTTPS，如果走 HTTPS，设置为 true
+  accessKey = 'xxx'//账号的 AccessKey，在阿里云控制台查看
+  secretKey = 'xxx'//账号的的 SecretKey，在阿里云控制台查看
+  cleansession = true
+  groupId = 'GID_student'//MQTT GroupID,创建实例后从 MQTT 控制台创建
+  clientId = groupId + '@@@001'//GroupId@@@DeviceId，由控制台创建的 Group ID 和自己指定的 Device ID 组合构成
+  var roomId = 123456
+  var mqtt
+  var reconnectTimeout = 3000
+  var username = 'Token|' + accessKey + '|' + instanceId
+  var token = httpGet('http://' + appHost + ':' + appPort + '/login')
+  var password = 'RW|' + token
+
+  function MQTTconnect () {
+    mqtt = new Paho.MQTT.Client(
+      mqttHost,//MQTT 域名
+      mqttPort,//WebSocket 端口，如果使用 HTTPS 加密则配置为443,否则配置80
+      clientId//客户端 ClientId
+    )
+    var options = {
+      timeout: 3,
+      onSuccess: onConnect,
+      mqttVersion: 4,
+      cleanSession: cleansession,
+      onFailure: function (message) {
+        setTimeout(MQTTconnect, reconnectTimeout)
+      }
+    }
+    mqtt.onConnectionLost = onConnectionLost
+    mqtt.onMessageArrived = onMessageArrived
+    console.log('pwd:' + password)
+    if (username != null) {
+      options.userName = username
+      options.password = password
+      options.useSSL = useTLS//如果使用 HTTPS 加密则配置为 true
+    }
+    mqtt.connect(options)
+  }
+
+  function onConnect () {
+    mqtt.subscribe(subTopic + '/message/' + roomId, { qos: 0 })
+    mqtt.subscribe(subTopic + '/status', { qos: 0 })
+    mqtt.subscribe(subTopic + '/system', { qos: 0 })
+  }
+
+  function onConnectionLost (response) {
+    setTimeout(MQTTconnect, reconnectTimeout)
+  }
+
+  function onMessageArrived (message) {
+    var topic = message.destinationName
+    var payload = message.payloadString
+    var h = document.createElement('h5')//创建需要增加的元素节点
+    h.innerHTML = topic + ', ' + payload
+
+    var content = document.getElementById('content')
+    var h5list = content.querySelectorAll('h5')
+    if (h5list && h5list.length >= 8) {
+      content.removeChild(h5list[0])
+    }
+    content.appendChild(h)
+  }
+
+  MQTTconnect()
+
+  document.getElementById('btn').addEventListener('click', function () {
+    msg = document.getElementById('msg').value
+    message = new Paho.MQTT.Message(JSON.stringify({ 'peer': clientId, 'roomId': '123456', 'msg': msg }))//set body
+    message.destinationName = pubTopic + '/message'
+    mqtt.send(message)
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+archivesBaseName = 'taotao-cloud-kubernetes'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+}

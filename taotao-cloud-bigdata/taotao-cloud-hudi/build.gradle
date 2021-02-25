@@ -1,0 +1,97 @@
+archivesBaseName = 'taotao-cloud-hudi'
+
+jar.enabled = true
+bootJar.enabled = false
+
+apply plugin: 'scala'
+
+dependencies {
+    implementation "com.alibaba:fastjson:1.2.3"
+
+    implementation("org.apache.spark:spark-sql_2.12:3.1.0")
+    implementation("org.apache.spark:spark-streaming_2.12:3.1.0")
+    implementation("org.apache.spark:spark-hive_2.12:3.1.0")
+    implementation("org.apache.spark:spark-avro_2.12:3.1.0")
+    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.0")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0")
+
+    implementation("org.apache.hudi:hudi-common:0.7.0")
+    implementation("org.apache.hudi:hudi-client:0.7.0")
+    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.7.0")
+    implementation("org.apache.hudi:hudi-spark-bundle_2.12:0.7.0")
+
+    implementation('org.apache.hadoop:hadoop-common:3.3.0')
+    implementation('org.apache.hadoop:hadoop-client:3.3.0')
+    implementation('org.apache.hadoop:hadoop-hdfs:3.3.0')
+
+    implementation('org.apache.hive:hive-jdbc:3.1.2'){
+        exclude group: 'org.eclipse.jetty.aggregate', module: '*'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+
+    implementation("mysql:mysql-connector-java")
+    implementation("commons-codec:commons-codec:1.6")
+    implementation('org.codehaus.janino:janino:3.0.11')
+
+    implementation('com.github.scopt:scopt_2.12:4.0.0-RC2') {
+        exclude group: 'org.scala-lang', module: 'scala-library'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+
+    implementation('com.google.guava:guava:27.0-jre') {
+        force = true
+    }
+}
+
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+
+        resolutionStrategy {
+            force "org.apache.avro:avro:1.8.2"
+            force 'com.google.guava:guava:27.0-jre'
+        }
+    }
+
+    compile.exclude group: "xml-apis", module: "xml-apis"
+    compile.exclude group: "xerces", module: "xercesImpl"
+
+}
+
+//shadowJar {
+//    mergeServiceFiles()
+//    classifier=null
+//    version = 1.0
+//    manifest {
+//        attributes(
+//                'Main-Class': "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
+//        )
+//    }
+//    zip64 true
+//    dependencies {
+//        exclude(dependency('xml-apis:xml-apis:.*'))
+//        exclude(dependency('xerces:xercesImpl:.*'))
+//        exclude(dependency { it.moduleGroup == 'xml-apis' })
+////        exclude(dependency { it.moduleGroup == 'org.apache.spark' })
+////        exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+//    }
+//}
+
+shadowJar {
+    mergeServiceFiles()
+    classifier = null
+    version = 1.0
+    manifest {
+        attributes(
+                'Main-Class': "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
+        )
+    }
+    zip64 true
+    dependencies {
+        exclude(dependency('xml-apis:xml-apis:.*'))
+        exclude(dependency('xerces:xercesImpl:.*'))
+        exclude(dependency('org.apache.avro:avro:1.7.*'))
+        exclude(dependency{ it.moduleGroup == 'xml-apis' })
+    }
+}

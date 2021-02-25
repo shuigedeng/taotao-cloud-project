@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  standalone-standalone-rmqnamesrv:
+    image: foxiswho/rocketmq:server
+    container_name: standalone-standalone-rmqnamesrv
+    ports:
+      - 9876:9876
+    volumes:
+      - ./rocketmq/standalone/data:/opt/logs
+      - ./rocketmq/standalone/store:/opt/store
+
+  rmqbroker:
+    image: foxiswho/rocketmq:broker
+    container_name: rmqbroker
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./rocketmq/standalone/logs:/opt/logs
+      - ./rocketmq/standalone/store:/opt/store
+      - ./rocketmq/standalone/brokerconf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      NAMESRV_ADDR: "standalone-standalone-rmqnamesrv:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: mqbroker -c /etc/rocketmq/broker.conf
+    depends_on:
+      - standalone-standalone-rmqnamesrv
+
+  rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rmqconsole
+    ports:
+      - 8080:8080
+    environment:
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=standalone-standalone-rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    depends_on:
+      - standalone-standalone-rmqnamesrv

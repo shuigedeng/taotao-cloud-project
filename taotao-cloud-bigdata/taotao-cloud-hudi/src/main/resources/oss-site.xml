@@ -1,0 +1,30 @@
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>oss://bucketname/</value>
+	</property>
+
+	<property>
+		<name>fs.oss.endpoint</name>
+		<value>oss-endpoint-address</value>
+		<description>Aliyun OSS endpoint to connect to.</description>
+	</property>
+
+	<property>
+		<name>fs.oss.accessKeyId</name>
+		<value>oss_key</value>
+		<description>Aliyun access key ID</description>
+	</property>
+
+	<property>
+		<name>fs.oss.accessKeySecret</name>
+		<value>oss-secret</value>
+		<description>Aliyun access key secret</description>
+	</property>
+
+	<property>
+		<name>fs.oss.impl</name>
+		<value>org.apache.hadoop.fs.aliyun.oss.AliyunOSSFileSystem</value>
+	</property>
+
+</configuration>

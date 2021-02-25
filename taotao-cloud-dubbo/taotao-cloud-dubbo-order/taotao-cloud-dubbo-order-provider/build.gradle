@@ -1,0 +1,27 @@
+archivesBaseName = 'taotao-cloud-dubbo-order-provider'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-dubbo:taotao-cloud-dubbo-account:taotao-cloud-dubbo-account-api')
+    implementation project(':taotao-cloud-dubbo:taotao-cloud-dubbo-order:taotao-cloud-dubbo-order-api')
+
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-dubbo'
+
+    implementation 'mysql:mysql-connector-java'
+    implementation 'com.baomidou:mybatis-plus-boot-starter'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+

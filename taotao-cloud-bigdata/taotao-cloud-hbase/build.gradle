@@ -1,0 +1,28 @@
+archivesBaseName = 'taotao-cloud-hbase'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.cloud:spring-cloud-context'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compile 'org.apache.hbase:hbase-client:2.4.0'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
+configurations {
+    compile.exclude group:"org.springframework.security.oauth", module: "spring-security-oauth2"
+    compile.exclude group:"org.slf4j", module: "slf4j-log4j12"
+    compile.exclude group:"org.springframework.security", module: "spring-security-core"
+}

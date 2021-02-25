@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xd.pre.modules.sys.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xd.pre.modules.sys.domain.SysUser">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="deptName" property="deptName"/>
+        <result column="job_id" property="jobId"/>
+        <result column="jobName" property="jobName"/>
+        <result column="phone" property="phone"/>
+        <result column="avatar" property="avatar"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="lock_flag" property="lockFlag"/>
+        <result column="del_flag" property="delFlag"/>
+        <collection property="roleList" ofType="com.xd.pre.modules.sys.domain.SysRole"
+                    select="com.xd.pre.modules.sys.mapper.SysRoleMapper.listRolesByUserId" column="user_id">
+        </collection>
+    </resultMap>
+
+
+    <select id="getUserVosPage" resultMap="BaseResultMap">
+        SELECT
+        `user`.user_id,
+        `user`.username,
+        `user`.phone,
+        `user`.email,
+        `user`.avatar,
+        `user`.dept_id AS deptId,
+        `user`.create_time,
+        `user`.update_time,
+        `user`.del_flag,
+        `user`.lock_flag,
+        d.name AS deptName
+        FROM
+        sys_user AS `user`
+        LEFT JOIN sys_dept AS d ON d.dept_id = `user`.dept_id
+        <where>
+            <if test="query.username != null and query.username != ''">
+                and `user`.username LIKE CONCAT('%',#{query.username},'%')
+            </if>
+            <if test="query.deptId != null and query.deptId != ''">
+                and `user`.dept_id in
+                <foreach item="item" collection="query.deptList" separator="," open="(" close=")" index="">
+                    #{item, jdbcType=INTEGER}
+                </foreach>
+            </if>
+
+        and `user`.del_flag = '0'
+        </where>
+        ORDER BY `user`.create_time DESC
+    </select>
+
+</mapper>

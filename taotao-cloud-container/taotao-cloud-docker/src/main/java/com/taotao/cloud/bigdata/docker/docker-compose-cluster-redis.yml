@@ -1,0 +1,100 @@
+# cd ./redis/cluster 目录下 redis.conf
+# cluster-announce-ip改为自己的主机ip
+
+# 新建网络#
+# docker network ls #查看当前网络
+# docker network create --subnet=172.21.0.0/16 cluster-redis-network #创建子网段为172.18.0.0/16 的IP网络
+
+# 进入容器
+#  docker-compose exec cluster-redis-6371(随便一个都可以) bash
+#  # 切换至指定目录
+# cd /usr/local/bin/
+#
+# redis-cli -a 123456 --cluster create 主机ip:6371 192.168.10.10:6372 192.168.10.10:6373 192.168.10.11:6374 192.168.10.11:6375 192.168.10.11:6376 --cluster-replicas 1
+
+version: '3.7'
+services:
+  cluster-redis-6371:
+    image: redis
+    container_name: cluster-redis-6371
+    restart: always
+    ports:
+      - 6371:6371
+    volumes:
+      - ./redis/cluster/6371/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6371/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.71
+
+  cluster-redis-6372:
+    image: redis
+    container_name: cluster-redis-6372
+    ports:
+      - 6372:6372
+    volumes:
+      - ./redis/cluster/6372/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6372/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.72
+
+  cluster-redis-6373:
+    image: redis
+    container_name: cluster-redis-6373
+    ports:
+      - 6373:6373
+    volumes:
+      - ./redis/cluster/6373/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6373/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.73
+
+  cluster-redis-6374:
+    image: redis
+    container_name: cluster-redis-6374
+    restart: always
+    ports:
+      - 6374:6374
+    volumes:
+      - ./redis/cluster/6374/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6374/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.74
+
+  cluster-redis-6375:
+    image: redis
+    container_name: cluster-redis-6375
+    ports:
+      - 6375:6375
+    volumes:
+      - ./redis/cluster/6375/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6375/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.75
+
+  cluster-redis-6376:
+    image: redis
+    container_name: cluster-redis-6376
+    ports:
+      - 6376:6376
+    volumes:
+      - ./redis/cluster/6376/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/cluster/6376/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      cluster-redis-network:
+        ipv4_address: 172.21.0.76
+
+networks:
+  cluster-redis-network:
+    external:
+      name: cluster-redis-network    

@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    presto:
+      name: presto
+      type: org.apache.tomcat.jdbc.pool.DataSource
+      driver-class-name: com.facebook.presto.jdbc.PrestoDriver
+      jdbc-url: jdbc:presto://127.0.0.1:8889/hive/test
+      username: root
+    commonConfig: #连接池统一配置，应用到所有的数据源
+      initialSize: 1
+      minIdle: 1
+      maxIdle: 5
+      maxActive: 50
+      maxWait: 10000
+      timeBetweenEvictionRunsMillis: 10000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      filters: stat

@@ -1,0 +1,11 @@
+archivesBaseName = 'seata-common'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
+    compile 'mysql:mysql-connector-java'
+    compile 'com.alibaba.cloud:spring-cloud-starter-alibaba-seata'
+}

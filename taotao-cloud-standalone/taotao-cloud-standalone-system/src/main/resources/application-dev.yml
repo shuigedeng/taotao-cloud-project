@@ -1,0 +1,95 @@
+jasypt:
+  encryptor:
+    password: EbfYkitulv73I2p0mXI50JMXoaxZTKJ1
+jwt:
+  header: Authorization
+  tokenHead: 'Bearer '
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: com.xd.pre.domain
+pre:
+  security:
+    social:
+      gitee:
+        app-id: 663221d0507f284b2265b7b8d95a9c1293bdd5adc7b4a35c9748fd3875746e67
+        app-secret: 411f5eeabb0365664fc2e82ed735ec688152127838ad145159f19c90170ebde1
+        provider-id: gitee
+      github:
+        app-id: 0e4b224d9c629ce3f3ea
+        app-secret: 31fc9751b005f5e40113fc3f07b5beae0a7dad25
+        provider-id: github
+      qq:
+        app-id: 101715108
+        app-secret: 453e1be400a9cf207fea273f0d2c6248
+        provider-id: qq
+      weixin:
+        app-id: wx27e0de97cfa87385
+        app-secret: 1f8958cc2cb233d7a4f8b7d364bcb72c
+        provider-id: weixin
+  tenant:
+    ignoreTenantTables:
+      - sys_tenant
+      - sys_menu
+      - sys_user_role
+      - sys_role_menu
+      - sys_role_dept
+      - sys_user_role
+      - sys_dict_item
+      - TABLES
+      - COLUMNS
+      - sys_job
+    tenantIdColumn: tenant_id
+  url:
+    address: http://localhost:9528
+server:
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 20
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      max-lifetime: 30000
+      maximum-pool-size: 10
+      minimum-idle: 3
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/pre?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+  mail:
+    host: smtp.qq.com
+    password: ENC(b1a/IYyqK7WL70rlA7JZxmqqoLDY2rtLvX9cNp5YWP0=)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    username: ENC(F+SSuP2w34EywET9mD9eOzfKk2/w0AUaj1w+TVNmyj8=)
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    database: 1
+    host: localhost
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 30000ms
+        min-idle: 1
+    password: ''
+    port: 6379
+    timeout: 6000ms
+
+uploadFileServerPathPrefix: /Users/lihaodong/Desktop/files

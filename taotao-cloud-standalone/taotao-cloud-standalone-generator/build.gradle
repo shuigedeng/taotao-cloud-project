@@ -1,0 +1,11 @@
+archivesBaseName = 'taotao-cloud-standalone-generator'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

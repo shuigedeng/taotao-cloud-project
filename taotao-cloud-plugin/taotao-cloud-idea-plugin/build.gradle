@@ -1,0 +1,41 @@
+archivesBaseName = 'taotao-cloud-idea-plugin'
+
+jar.enabled = true
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.7.0"
+    }
+}
+
+apply plugin: "org.jetbrains.intellij"
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile  group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
+}
+
+// https://github.com/JetBrains/gradle-intellij-plugin
+intellij {
+    version '2019.1'
+//    type 'IU'
+//    plugins = ['coverage', 'org.intellij.plugins.markdown:8.5.0.20160208']
+    pluginName 'TaotaoCloudIdeaPlugin'
+    intellij.updateSinceUntilBuild false
+}
+
+patchPluginXml {
+    changeNotes """
+      TaotaoCloudIdeaPlugin-1.0.1"""
+}
+
+publishPlugin {
+    token 'ssdfhasdfASDaq23jhnasdkjh'
+    channels 'nightly'
+}
+

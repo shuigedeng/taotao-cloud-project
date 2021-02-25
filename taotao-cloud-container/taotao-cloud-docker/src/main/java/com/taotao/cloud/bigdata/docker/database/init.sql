@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS hue;
+
+CREATE DATABASE IF NOT EXISTS metastore_db;
+
+
+-- CREATE USER 'user'@'localhost' IDENTIFIED BY 'secret';
+-- GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
+
+-- CREATE USER 'user'@'%' IDENTIFIED BY 'secret';
+-- GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+
+-- FLUSH PRIVILEGES;

@@ -1,0 +1,15 @@
+archivesBaseName = 'sso-web'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    implementation "cn.hutool:hutool-all"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.cloud:spring-cloud-context"
+
+    implementation 'cn.hutool:hutool-all'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

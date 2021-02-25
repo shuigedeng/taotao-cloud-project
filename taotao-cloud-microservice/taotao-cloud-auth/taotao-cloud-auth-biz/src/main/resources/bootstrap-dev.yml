@@ -1,0 +1,358 @@
+seata:
+  enabled: true
+  service:
+    grouplist:
+      default: 106.13.201.31:8091
+    vgroup-mapping:
+      my_test_tx_group: default
+  application-id: taotao-cloud-auth-center
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      namespace: default
+      server-addr: 106.13.201.31:8848
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 106.13.201.31:8848
+      group: default
+      namespace: public
+      username: nacos
+      password: nacos
+      cluster: default
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    servlet:
+      load-on-startup: 1
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false
+  cache:
+    type: none
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:106.13.201.31}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-auth-center?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
+    password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      connection-test-query: SELECT 1
+      max-lifetime: 120000
+      maximum-pool-size: 15
+      minimum-idle: 3
+      connection-timeout: 30000
+      idle-timeout: 30000
+      auto-commit: true
+      pool-name: DatebookHikariCP
+  jpa:
+    database: mysql
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  redis:
+    host: ${TAOTAO-CLOUD-REDIS-HOST:106.13.201.31}
+    port: ${TAOTAO-CLOUD-REDIS-PORT:6379}
+    database: 0
+    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  security:
+    oauth2:
+      client:
+        provider:
+          qq:
+            authorizationUri: https://graph.qq.com/oauth2.0/authorize
+            tokenUri: https://graph.qq.com/oauth2.0/token
+            userInfoUri: https://graph.qq.com/user/get_user_info
+            userNameAttribute: nickname
+          gitee:
+            authorizationUri: https://gitee.com/oauth/authorize
+            tokenUri: https://gitee.com/oauth/token
+            userInfoUri: https://gitee.com/api/v5/user
+            userNameAttribute: name
+          weibo:
+            authorizationUri: https://api.weibo.com/oauth2/authorize
+            tokenUri: https://api.weibo.com/oauth2/access_token
+            userInfoUri: https://api.weibo.com/2/users/show.json
+          weixin:
+            authorizationUri: https://open.weixin.qq.com/connect/oauth2/authorize
+            tokenUri: https://api.weixin.qq.com/sns/oauth2/access_token
+            userInfoUri: https://api.weixin.qq.com/sns/userinfo
+          dingding:
+            authorizationUri: https://oapi.dingtalk.com/connect/oauth2/sns_authorize
+            tokenUri: https://oapi.dingtalk.com/gettoken
+            userInfoUri: https://oapi.dingtalk.com/user/get
+        #            userInfoUri: https://oapi.dingtalk.com/user/getUseridByUnionid
+        registration:
+          github:
+            clientId: Iv1.f4c52616ef60f7be
+            clientSecret: 639f4adac570de58f73de87e9846d02d14de59b5
+            redirectUri: http://localhost:9800/api/login/oauth2/code/github
+          qq:
+            clientId: Iv1.f4c52616ef60f7be
+            clientSecret: 639f4adac570de58f73de87e9846d02d14de59b5
+            redirectUri: http://localhost:9800/api/login/oauth2/code/qq
+            authorizationGrantType: authorization_code
+            # 授权码模式需要传递code、state、client_id、client_secret等参数，OAuth2AuthorizationCodeGrantRequestEntityConverter
+            # 会根据当前的认证方式传递不同的参数
+            clientAuthenticationMethod: post
+          gitee:
+            clientId: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            clientSecret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            redirectUri: http://b086e8ba3be2.ngrok.io/api/login/oauth2/code/gitee
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: post
+          weibo:
+            clientId: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            clientSecret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            redirectUri: http://b086e8ba3be2.ngrok.io/api/login/oauth2/code/gitee
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: post
+          weixin:
+            clientId: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            clientSecret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            redirectUri: http://b086e8ba3be2.ngrok.io/api/login/oauth2/code/weixin
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: post
+          dingding:
+            clientId: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            clientSecret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            redirectUri: http://b086e8ba3be2.ngrok.io/api/login/oauth2/code/weixin
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: post
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:106.13.201.31}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        metadata:
+          version: 7
+      config:
+        enabled: false
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:106.13.201.31}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
+        file-extension: yml
+    sentinel:
+      enabled: true
+      eager: true
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 106.13.201.31:8848
+            dataId: taotao-cloud-product-sentinel
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+      transport:
+        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:106.13.201.31}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8849}
+        port: ${TAOTAO-CLOUD-SENTINEL-PORT:8711}
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+  kafka:
+    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST:106.13.201.31}:${TAOTAO-CLOUD-KAFKA-PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500
+    consumer:
+      auto-commit-interval: 1S
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
+#  sleuth:
+#    web:
+#      client:
+#        enabled: true
+#    sampler:
+#      probability: 1.0
+#  zipkin:
+#    enabled: true
+#    sender:
+#      type: kafka
+
+#mybatis-plus:
+#  typeAliasesPackage: com.taotao.cloud.auth.model
+#  global-config:
+#    db-config:
+#      id-type: auto
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    cache-enabled: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+security:
+  oauth2:
+    client:
+      clientId: taotao-cloud-uc-center
+      clientSecret: taotao-cloud-uc-center
+      userAuthorizationUri: http://taotao-cloud-uc-center/oauth/authorize
+      access-token-uri: http://taotao-cloud-uc-center/oauth/token
+    resource:
+      id: taotao-cloud-uc-center
+      prefer-token-info: false
+      token-info-uri: http://taotao-cloud-uc-center/oauth/check_token
+      user-info-uri: http://taotao-cloud-uc-center/oauth/user
+    authorization:
+      check-token-access: http://taotao-cloud-uc-center/oauth/check_token
+
+taotao:
+  cloud:
+    oauth2:
+      token:
+        store:
+          type: redis
+      security:
+        enabled: true
+        ignore:
+          # 忽略认证的地址
+          http-urls: >
+            /api-docs,
+            /sms/code,
+            /client,
+            /oauth/token,
+            /oauth/check_token,
+            /user/login
+    # swagger模块
+    swagger:
+      enabled: true
+      title: 认证中心
+      description: 认证中心接口文档
+      version: 1.0
+      license: Apache
+      license-url: https://opensource.org/licenses/Apache-2.0Url
+      base-package: com.taotao.cloud.auth.biz.controller
+      contact:
+        name: dengtao
+        url: http://dtbox.top/
+        email: 981376577@qq.com
+      host: ${spring.cloud.client.ip-address}:${server.port}
+    # ribbon模块
+    ribbon:
+      isolation:
+        enabled: true
+      rest-template:
+        max-total: 200
+        max-per-route: 50
+        read-timeout: 35000
+        connect-timeout: 10000
+    # redis缓存模块
+    redis:
+      cache:
+        manager:
+          configs:
+            - key: menu
+              second: 300
+    # 消息模块
+    #    message:
+    #      sms:
+    #        enabled: true
+    #        aliyun:
+    #          enabled: true
+    #          access-key-id: 1400337314
+    #          access-key-secret: fadf8790b472f031c34f3debcfea3820
+    #          configs:
+    #            - type: login
+    #              code: 560871
+    #            - type: register
+    #              code: sldj234osfu
+    #        miaodiyun:
+    #          enabled: true
+    #          # 平台里的ACOUNT_SID
+    #          access-key-id: 2be56dd4aa6e4564b9690abb2d0a3f89
+    #          # 平台里的AUTH_TOKEN
+    #          access-key-secret: cc8f4a3bf3664665ade85818fa3b2516
+    # 日志模块
+    log:
+      types:
+        - logger
+      enabled: true
+    p6spy:
+      enabled: true
+      dateformat: yyyy-MM-dd HH:mm:ss
+      driverlist: com.mysql.cj.jdbc.Driver
+      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+      appender: com.taotao.cloud.p6spy.component.P6spyLogger
+      log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
+      # 使用日志系统记录sql
+      #appender: com.p6spy.engine.spy.appender.Slf4JLogger
+    # elk模块
+#    elk:
+#      enabled: true
+#      app-name: taotao-cloud-uc-center
+#      spring-app-name: taotao-cloud-uc-center
+#      destinations: >
+#        127.0.0.1:4560
+#      log:
+#        statistic:
+#          enabled: true
+#    data:
+#      mybatis-plus:
+#        auto-fill:
+#          enabled: false
+#      tenant:
+#        enabled: true
+
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 10000
+    max-connections-per-route: 1000
+  client:
+    config:
+      feign-name:
+        connectTimeout: 300000
+        readTimeout: 300000
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}

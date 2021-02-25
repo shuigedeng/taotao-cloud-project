@@ -1,0 +1,37 @@
+archivesBaseName = 'taotao-cloud-hive'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.cloud:spring-cloud-context'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.apache.hadoop:hadoop-common:3.3.0'
+    implementation 'org.apache.hadoop:hadoop-mapreduce-client-core:3.3.0'
+    implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:3.3.0'
+    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.0'
+
+    implementation 'org.apache.hive:hive-exec:3.1.2'
+    implementation 'org.apache.hive:hive-service:3.1.2'
+    implementation('org.apache.hive:hive-jdbc:3.1.2'){
+        exclude group: 'org.eclipse.jetty.aggregate', module: '*'
+    }
+
+    implementation group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.2.1'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

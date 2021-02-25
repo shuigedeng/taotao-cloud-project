@@ -1,0 +1,116 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.24.0.0/16 rabbitmq-cluster-network #创建子网段为172.24.0.0/16 的IP网络
+
+# docker-compose -f docker-compose-dev.yml up -d
+
+# docker exec -it cluster-rabbitmq-node1 bash
+# rabbitmq-plugins enable rabbitmq_management
+# exit
+
+# docker exec -it cluster-rabbitmq-node2 bash
+# rabbitmq-plugins enable rabbitmq_management
+# rabbitmqctl reset
+# rabbitmqctl stop_app
+# exit
+
+# docker exec -it cluster-rabbitmq-node3 bash
+# rabbitmq-plugins enable rabbitmq_management
+# rabbitmqctl reset
+# rabbitmqctl stop_app
+# exit
+
+version: '3.7'
+services:
+  cluster-rabbitmq-node1:
+    image: rabbitmq:3.8.3-management
+    container_name: cluster-rabbitmq-node1
+    hostname: cluster-rabbitmq-node1
+    restart: always
+    ports:
+      – 4369:4369
+      – 5672:5672
+      – 15672:15672
+      – 15674:15674
+      – 25672:25672
+      – 35197:35197
+    volumes:
+      - ./rabbitmq/cluster/cluster-rabbitmq-node1:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      #- RABBITMQ_NODENAME=rabbit1
+      - RABBITMQ_ERLANG_COOKIE=rabbitcookie
+    networks:
+      rabbitmq-cluster-network:
+        ipv4_address: 172.24.0.10
+
+  cluster-rabbitmq-node2:
+    image: rabbitmq:3.8.3-management
+    container_name: cluster-rabbitmq-node2
+    hostname: cluster-rabbitmq-node2
+    depends_on:
+      - cluster-rabbitmq-node1
+    restart: always
+    ports:
+      – 4370:4369
+      – 5673:5672
+      – 15673:15672
+      – 15675:15674
+      – 25673:25672
+      – 35198:35197
+    volumes:
+      - ./rabbitmq/cluster/cluster-rabbitmq-node2:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - CLUSTERED=true
+      - CLUSTER_WITH=cluster-rabbitmq-node1
+      #- RABBITMQ_NODENAME=rabbit2
+      - RABBITMQ_ERLANG_COOKIE=rabbitcookie
+    links:
+      - cluster-rabbitmq-node1
+    networks:
+      rabbitmq-cluster-network:
+        ipv4_address: 172.24.0.10
+
+
+  cluster-rabbitmq-node3:
+    image: rabbitmq:3.8.3-management
+    container_name: cluster-rabbitmq-node3
+    hostname: cluster-rabbitmq-node3
+    restart: always
+    depends_on:
+      - cluster-rabbitmq-node1
+      - cluster-rabbitmq-node2
+    ports:
+      – 4371:4369
+      – 5674:5672
+      – 15674:15672
+      – 15676:15674
+      – 25674:25672
+      – 35199:35197
+    volumes:
+      - ./rabbitmq/cluster/cluster-rabbitmq-node3:/var/lib/rabbitmq
+    links:
+      - cluster-rabbitmq-node1
+      - cluster-rabbitmq-node2
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - RAM_NODE=true
+      - CLUSTERED=true
+      - CLUSTER_WITH=cluster-rabbitmq-node1
+      #- RABBITMQ_NODENAME=rabbit3
+      - RABBITMQ_ERLANG_COOKIE=rabbitcookie
+    networks:
+      rabbitmq-cluster-network:
+        ipv4_address: 172.24.0.10
+
+networks:
+  rabbitmq-cluster-network:
+    external:
+      name: rabbitmq-cluster-network        

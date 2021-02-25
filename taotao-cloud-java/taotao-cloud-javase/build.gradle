@@ -1,0 +1,8 @@
+archivesBaseName = 'taotao-cloud-javase'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+
+}

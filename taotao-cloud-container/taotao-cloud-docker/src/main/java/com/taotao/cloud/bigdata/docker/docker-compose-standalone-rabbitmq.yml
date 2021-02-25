@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  standalone-rabbitmq:
+    image: rabbitmq:3.8.3-management
+    container_name: rabbitmq
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - ./rabbitmq/standalone/data:/var/lib/rabbitmq
+      - ./rabbitmq/standalone/log:/var/log/rabbitmq/log
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"

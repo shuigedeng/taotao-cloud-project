@@ -1,0 +1,80 @@
+server:
+  port: 11004
+
+spring:
+  application:
+    name: rocketmq-produce
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.28.130:9876
+        bindings:
+          output3:
+            producer:
+              group: produce-group
+          output2:
+            producer:
+              group: test-group2
+          input2:
+            consumer:
+              #增加tag过滤
+              tags: tagObj
+          output:
+            producer:
+              group: order-tx-produce-group
+              #开启事务消息
+              transactional: true
+          input:
+            consumer:
+              #重试失败直接进入死信队列
+              delayLevelWhenNextConsume: -1
+      bindings:
+        output:
+          destination: test-topic
+          content-type: application/json
+        input:
+          destination: test-topic
+          content-type: text/plain
+          group: consume-group1
+          consumer:
+            #并发消费线程数
+            concurrency: 20
+        input2:
+          destination: test-topic
+          content-type: application/json
+          group: consume-group2
+          consumer:
+            #并发消费线程数
+            concurrency: 20
+        input3:
+          destination: test-topic
+          content-type: text/plain
+          group: consume-group3
+          consumer:
+            #并发消费线程数
+            concurrency: 20
+        # 消费者
+        inputWithTx:
+          destination: TransactionTopic
+          content-type: application/json
+          group: order-tx-consume-group
+          consumer:
+            #多线程
+            concurrency: 20
+            #重试1次
+            maxAttempts: 2
+        inputDlq:
+          destination: '%DLQ%${spring.cloud.stream.bindings.input.group}'
+          content-type: application/json
+          group: order-dlq-group
+          consumer:
+            concurrency: 20
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          stream:
+            binder:
+              rocketmq: DEBUG

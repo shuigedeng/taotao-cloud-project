@@ -1,0 +1,8 @@
+archivesBaseName = 'taotao-cloud-dubbo-account-api'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+}
+

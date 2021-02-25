@@ -1,0 +1,8 @@
+archivesBaseName = 'taotao-cloud-elasticsearch'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+
+}

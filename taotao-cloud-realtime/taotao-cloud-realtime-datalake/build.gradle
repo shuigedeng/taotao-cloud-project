@@ -1,0 +1,7 @@
+archivesBaseName = 'taotao-cloud-realtime-datalake'
+
+jar.enabled = false
+
+dependencies {
+
+}

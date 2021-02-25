@@ -1,0 +1,232 @@
+buildscript {
+    ext {
+        springBootVersion = '2.4.2'
+        springCloudVersion = '2020.0.1'
+        springCloudAlibabaVersion = '2.2.5.RELEASE'
+        springSecurityOauth2Version = "2.5.0.RELEASE"
+
+        swaggerVersion = '2.9.2'
+        swaggerUiVersion = '1.8.7'
+        swaggerMgUiVersion = '1.0.6'
+        swaggerButlerVersion = '2.0.1'
+        swaggerModelsVersion = '1.5.21'
+        swaggerBootstrapUiVersion = '1.9.6'
+
+        commonsIoVersion = '2.6'
+        commonsCollectionsVersion = '3.2.2'
+        commonsCollections4Version = '4.4'
+
+        mysqlVersion = '8.0.20'
+        mybatisPlusStarterVersion = '3.4.0'
+
+        knife4jVersion = '2.0.2'
+        lombokVersion = '1.18.12'
+        hutoolVersion = '5.1.4'
+        servletApiVersion = '4.0.1'
+        easyCaptchaVersion = '1.6.2'
+        transmittableVersion = '2.11.4'
+        qiniuJavaSdkVersion = '7.2.28'
+        fastdfsClientVersion = '1.26.7'
+        aliyunSdkOssVersion = '3.8.1'
+        logstashLogbackEncoderVersion = '4.11'
+        javassistVersion = '3.24.1-GA'
+        qcloudsmsVersion = '1.0.6'
+        okhttpVersion = '3.14.8'
+        userAgentUtilsVersion = '1.21'
+        xxlJobVersion = '2.2.0'
+        mapstructVersion = "1.4.1.Final"
+        bannerVersion = "1.0.2"
+        redissonVersion = "3.11.5"
+    }
+
+    repositories {
+        google()
+        jcenter()
+
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
+        mavenCentral()
+
+        maven {
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
+        classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:2.8.0"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+    id "com.google.cloud.tools.jib" version "2.8.0"
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "org.jetbrains.intellij" version "0.6.5"
+}
+
+allprojects {
+    group 'com.taotao.cloud'
+    version '1.0.0'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        mavenLocal()
+
+        maven { url 'https://maven.aliyun.com/repository/public' }
+
+        maven {
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+        }
+
+        maven {
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+            url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
+        }
+
+        jcenter()
+        mavenCentral()
+    }
+}
+
+configure(subprojects.findAll { !it.name.equals("taotao-cloud-dependencies") }) { project ->
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'checkstyle'
+    apply plugin: 'maven-publish'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "com.google.cloud.tools.jib"
+
+    apply plugin: "com.taotao.cloud.plugin"
+
+    dependencies {
+        implementation platform('com.taotao.cloud:taotao-cloud-dependencies:1.0.0')
+    }
+
+    checkstyle {
+        project.ext.checkstyleVersion = '8.14'
+        // The version of the code quality tool to be used.
+        // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
+        toolVersion = "8.14"
+        configFile = file("${rootDir}/checkstyle/google_checks.xml")
+//        configFile = rootProject.file('quality/google_checks.xml')
+
+        // The source sets to be analyzed as part of the check and build tasks.
+        // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
+        // sourceSets = [project.sourceSets.main, project.sourceSets.test]
+
+        // Whether or not to allow the build to continue if there are warnings.
+        ignoreFailures = false
+
+        // Whether or not rule violations are to be displayed on the console.
+        showViolations = true
+    }
+
+    publishing {
+        repositories {
+            maven {
+                credentials {
+                    username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                    password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                }
+                url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+            }
+
+            maven {
+                credentials {
+                    username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                    password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                }
+                url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
+            }
+        }
+
+        publications {
+            mavenJava(MavenPublication) {
+                //artifact bootJar
+                groupId rootProject.group
+                artifactId project.name
+                version rootProject.version
+
+                //打包类型 war: components.web jar: components.java
+                from components.java
+
+                pom {
+                    name = 'taotao cloud library'
+                    description = 'a concise description of taotao cloud library'
+                    url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+//                    properties = [
+//                            "taotao": "anotherValue",
+//                            "prop.with.dots": "anotherValue",
+//                    ]
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'tiga'
+                            name = 'tiga'
+                            email = '981376577@qq.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
+                        developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
+                        url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                    }
+                }
+            }
+        }
+    }
+
+    jib {
+        from {
+            image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:openjdk8-jdk-alpine'
+            auth {
+                username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+                password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            }
+        }
+        to {
+            image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud'
+            tags = ["${project.name}".toString(),"${project.version}".toString() ]
+            auth {
+                username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+                password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            }
+        }
+        container {
+            creationTime = 'USE_CURRENT_TIMESTAMP'
+            jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Dspring.profiles.active=dev', '-Dfile.encoding=utf-8', '-Duser.timezone=Asia/Shanghai']
+            mainClass = 'com.taotao.cloud.dubbo.account.provider.AccountServiceApplication'
+            args = ['some', 'args']
+            ports = ['8010']
+            labels = [key1:'value1', key2:'value2']
+        }
+    }
+}

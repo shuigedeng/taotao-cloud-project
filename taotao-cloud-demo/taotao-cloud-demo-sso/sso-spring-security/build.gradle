@@ -1,0 +1,18 @@
+archivesBaseName = 'sso-spring-security'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    implementation "cn.hutool:hutool-all"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'org.springframework.security.oauth:spring-security-oauth2'
+    implementation "com.baomidou:mybatis-plus-extension"
+
+    implementation 'cn.hutool:hutool-all'
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

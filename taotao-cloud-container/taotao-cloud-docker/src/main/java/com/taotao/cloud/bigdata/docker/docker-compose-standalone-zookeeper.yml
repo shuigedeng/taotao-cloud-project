@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  standalone-zookeeper:
+    image: zookeeper:3.4
+    restart: always
+    hostname: standalone-zookeeper
+    container_name: standalone-zookeeper
+    privileged: true
+    ports:
+      - 2181:2181
+    volumes:
+      - ./zookeeper/standalone/data:/data
+      - ./zookeeper/standalone/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181

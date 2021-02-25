@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package com.shengsiyuan.proto;
+
+option java_package = "com.shengsiyuan.proto";
+option java_outer_classname = "StudentProto";
+option java_multiple_files = true;
+
+service StudentService {
+
+    rpc GetRealNameByUsername(MyRequest) returns (MyResponse) {}
+
+    rpc GetStudentsByAge(StudentRequest) returns (stream StudentResponse) {}
+
+    rpc GetStudentsWrapperByAges(stream StudentRequest) returns (StudentResponseList) {}
+
+    rpc BiTalk(stream StreamRequest) returns (stream StreamResponse) {}
+
+}
+
+message MyRequest {
+    string username = 1;
+}
+
+message MyResponse {
+    string realname = 2;
+}
+
+message StudentRequest {
+    int32 age = 1;
+}
+
+message StudentResponse {
+    string name = 1;
+    int32 age = 2;
+    string city = 3;
+}
+
+message StudentResponseList {
+    repeated StudentResponse studentResponse = 1;
+}
+
+message StreamRequest {
+    string request_info = 1;
+}
+
+message StreamResponse {
+    string response_info = 1;
+}
+

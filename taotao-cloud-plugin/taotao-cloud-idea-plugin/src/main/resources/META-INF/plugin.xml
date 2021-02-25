@@ -1,0 +1,39 @@
+<idea-plugin>
+    <id>com.taotao.cloud.idea.plugin</id>
+    <name>TaotaoCloudIdeaPlugin</name>
+    <vendor
+		email="981376577@qq.com"
+		url="https://taotaocloud.top">
+		taotao cloud
+	</vendor>
+
+    <description><![CDATA[
+    <h3>程序员常用的工具集</h3>
+    <ul>
+        <li>SQL 转换成 ElasticSearch 查询语句</li>
+        <li>日期时间戳互转</li>
+        <li>JSON格式化</li>
+        <li>Base64编码/解码</li>
+        <li>URL编码/解码</li>
+    </ul>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- secondary:true表示设置在tool window bar最下方 -->
+        <toolWindow
+			id="TaotaoCloudIdeaPlugin"
+			anchor="right"
+			factoryClass="com.taotao.cloud.idea.plugin.ProgrammerToolsetWindowFactory"
+			secondary="true"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>

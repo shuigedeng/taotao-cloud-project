@@ -1,0 +1,17 @@
+hadoop datanode节点超时时间设置
+
+datanode进程死亡或者网络故障造成datanode无法与namenode通信，namenode不会立即把该节点判定为死亡，要经过一段时间，这段时间暂称作超时时长。HDFS默认的超时时长为10分钟+30秒。如果定义超时时间为timeout，则超时时长的计算公式为：
+	timeout  = 2 * heartbeat.recheck.interval + 10 * dfs.heartbeat.interval。
+	而默认的heartbeat.recheck.interval 大小为5分钟，dfs.heartbeat.interval默认为3秒。
+	需要注意的是hdfs-site.xml 配置文件中的heartbeat.recheck.interval的单位为毫秒，dfs.heartbeat.interval的单位为秒。所以，举个例子，如果heartbeat.recheck.interval设置为5000（毫秒），dfs.heartbeat.interval设置为3（秒，默认），则总的超时时间为40秒。
+	hdfs-site.xml中的参数设置格式：
+
+<property>
+        <name>heartbeat.recheck.interval</name>
+        <value>2000</value>
+</property>
+
+<property>
+        <name>dfs.heartbeat.interval</name>
+        <value>1</value>
+</property>

@@ -1,0 +1,7 @@
+archivesBaseName = 'taotao-cloud-realtime-travel'
+
+jar.enabled = true
+
+dependencies {
+
+}

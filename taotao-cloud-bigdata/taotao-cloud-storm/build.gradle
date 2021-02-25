@@ -1,0 +1,11 @@
+archivesBaseName = 'taotao-cloud-storm'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}

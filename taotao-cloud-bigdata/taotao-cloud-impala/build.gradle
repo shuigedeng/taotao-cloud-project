@@ -1,0 +1,8 @@
+archivesBaseName = 'taotao-cloud-impala'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+
+}

@@ -1,0 +1,86 @@
+第一种方式：同步到网络时间服务器
+
+ # ntpdate time.windows.com
+将硬件时间设置为当前系统时间。 
+#hwclock –w 
+加入crontab：    
+30 8 * * * root /usr/sbin/ntpdate 192.168.0.1; /sbin/hwclock -w 每天的8:30将进行一次时间同步。
+重启crond服务：
+service crond restart
+
+
+第二种方式：同步到局域网内部的一台时间同步服务器
+一、搭建时间同步服务器
+1、编译安装ntp server
+rpm -qa | grep ntp
+若没有找到，则说明没有安装ntp包，从光盘上找到ntp包，使用
+rpm -Uvh ntp***.rpm
+进行安装
+2、修改ntp.conf配置文件
+vi /etc/ntp.conf
+①、第一种配置：允许任何IP的客户机都可以进行时间同步
+将“restrict default nomodify notrap noquery”这行修改成：
+restrict default nomodify notrap
+配置文件示例：/etc/ntp.conf
+②、第二种配置：只允许192.168.211.***网段的客户机进行时间同步
+在restrict default nomodify notrap noquery（表示默认拒绝所有IP的时间同步）之后增加一行：
+restrict 192.168.211.0 mask 255.255.255.0 nomodify notrap
+3、启动ntp服务
+service ntpd start
+开机启动服务
+chkconfig ntpd on
+4、ntpd启动后，客户机要等几分钟再与其进行时间同步，否则会提示“no server suitable for synchronization found”错误。
+
+二、配置时间同步客户机
+手工执行 ntpdate <ntp server> 来同步
+或者利用crontab来执行
+crontab -e
+0 21 * * * ntpdate 192.168.211.22 >> /root/ntpdate.log 2>&1
+每天晚上9点进行同步
+附：
+当用ntpdate -d 来查询时会发现导致 no server suitable for synchronization found 的错误的信息有以下2个：
+错误1.Server dropped: Strata too high
+在ntp客户端运行ntpdate serverIP，出现no server suitable for synchronization found的错误。
+在ntp客户端用ntpdate –d serverIP查看，发现有“Server dropped: strata too high”的错误，并且显示“stratum 16”。而正常情况下stratum这个值得范围是“0~15”。
+这是因为NTP server还没有和其自身或者它的server同步上。
+以下的定义是让NTP Server和其自身保持同步，如果在/ntp.conf中定义的server都不可用时，将使用local时间作为ntp服务提供给ntp客户端。
+server 127.127.1.0
+fudge 127.127.1.0 stratum 8
+
+在ntp server上重新启动ntp服务后，ntp server自身或者与其server的同步的需要一个时间段，这个过程可能是5分钟，在这个时间之内在客户端运行ntpdate命令时会产生no server suitable for synchronization found的错误。
+那么如何知道何时ntp server完成了和自身同步的过程呢？
+在ntp server上使用命令：
+# watch ntpq -p
+出现画面：
+Every 2.0s: ntpq -p                                                                                                             Thu Jul 10 02:28:32 2008
+     remote           refid      st t when poll reach   delay   offset jitter
+==============================================================================
+192.168.30.22   LOCAL(0)         8 u   22   64    1    2.113 179133.   0.001
+LOCAL(0)        LOCAL(0)        10 l   21   64    1    0.000   0.000  0.001
+注意LOCAL的这个就是与自身同步的ntp server。
+注意reach这个值，在启动ntp server服务后，这个值就从0开始不断增加，当增加到17的时候，从0到17是5次的变更，每一次是poll的值的秒数，是64秒*5=320秒的时间。
+如果之后从ntp客户端同步ntp server还失败的话，用ntpdate –d来查询详细错误信息，再做判断。
+错误2.Server dropped: no data
+从客户端执行netdate –d时有错误信息如下：
+transmit(192.168.30.22) transmit(192.168.30.22)
+transmit(192.168.30.22)
+transmit(192.168.30.22)
+transmit(192.168.30.22)
+192.168.30.22: Server dropped: no data
+server 192.168.30.22, port 123
+.....
+28 Jul 17:42:24 ntpdate[14148]: no server suitable for synchronization found出现这个问题的原因可能有2：
+1。检查ntp的版本，如果你使用的是ntp4.2（包括4.2）之后的版本，在restrict的定义中使用了notrust的话，会导致以上错误。
+使用以下命令检查ntp的版本：
+# ntpq -c version
+下面是来自ntp官方网站的说明：
+The behavior of notrust changed between versions 4.1 and 4.2.
+In 4.1 (and earlier) notrust meant "Don't trust this host/subnet for time".
+In 4.2 (and later) notrust means "Ignore all NTP packets that are not cryptographically authenticated." This forces remote time servers to authenticate themselves to your (client) ntpd
+解决：
+把notrust去掉。
+2。检查ntp server的防火墙。可能是server的防火墙屏蔽了upd 123端口。
+可以用命令
+#service iptables stop
+
+来关掉iptables服务后再尝试从ntp客户端的同步，如果成功，证明是防火墙的问题，需要更改iptables的设置。

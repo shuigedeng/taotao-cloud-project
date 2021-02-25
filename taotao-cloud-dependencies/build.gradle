@@ -1,0 +1,95 @@
+plugins {
+    id 'maven-publish'
+    id 'java-platform'
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    api platform("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}")
+
+    constraints {
+//        api 'com.google.guava:guava:27.0.1-jre'
+//        api 'org.apache.commons:commons-collections4:4.4'
+//
+//        api 'ch.vorburger.mariaDB4j:mariaDB4j-springboot:2.4.0'
+//        api 'org.mariadb.jdbc:mariadb-java-client:2.2.5'
+//
+//        api 'org.mockito:mockito-core:2.22.0'
+//        api 'org.mockito:mockito-junit-jupiter:2.22.0'
+//        api 'org.assertj:assertj-core:3.11.1'
+//        api "org.projectlombok:lombok:1.18.12"
+
+        api "org.springframework.security.oauth:spring-security-oauth2:${springSecurityOauth2Version}"
+
+        api "org.apache.commons:commons-collections4:${commonsCollections4Version}"
+        api "commons-collections:commons-collections:${commonsCollectionsVersion}"
+        api "commons-io:commons-io:${commonsIoVersion}"
+        api "commons-lang:commons-lang:${commonsIoVersion}"
+
+        api "com.google.code.gson:gson:2.8.5"
+        api "com.google.guava:guava:29.0-jre"
+
+        api "io.springfox:springfox-swagger2:${swaggerVersion}"
+        api "io.springfox:springfox-bean-validators:${swaggerVersion}"
+        api "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+        api "com.zyplayer:swagger-mg-ui:${swaggerMgUiVersion}"
+        api "io.swagger:swagger-models:${swaggerModelsVersion}"
+        api "com.github.xiaoymin:knife4j-spring-ui:${knife4jVersion}"
+        api "com.github.xiaoymin:swagger-bootstrap-ui:${swaggerBootstrapUiVersion}"
+
+        api "mysql:mysql-connector-java:${mysqlVersion}"
+        api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusStarterVersion}"
+        api "com.baomidou:mybatis-plus-extension:${mybatisPlusStarterVersion}"
+
+        api "com.qiniu:qiniu-java-sdk:${qiniuJavaSdkVersion}"
+        api "com.aliyun.oss:aliyun-sdk-oss:${aliyunSdkOssVersion}"
+        api "com.github.tobato:fastdfs-client:${fastdfsClientVersion}"
+        api "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
+
+        api "org.projectlombok:lombok:${lombokVersion}"
+        api "cn.hutool:hutool-all:${hutoolVersion}"
+        api "com.github.whvcse:easy-captcha:${easyCaptchaVersion}"
+        api "javax.servlet:javax.servlet-api:${servletApiVersion}"
+        api "com.alibaba:transmittable-thread-local:${transmittableVersion}"
+
+        api "org.javassist:javassist:${javassistVersion}"
+        api "com.github.qcloudsms:qcloudsms:${qcloudsmsVersion}"
+        api "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+        api "eu.bitwalker:UserAgentUtils:${userAgentUtilsVersion}"
+        api "com.xuxueli:xxl-job-core:${xxlJobVersion}"
+        api "org.mapstruct:mapstruct:${mapstructVersion}"
+        api "com.nepxion:banner:${bannerVersion}"
+        api "org.redisson:redisson-spring-boot-starter:${redissonVersion}"
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+        }
+
+        maven {
+            url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
+        }
+    }
+
+    publications {
+        versionPlatform(MavenPublication) {
+            from components.javaPlatform
+        }
+    }
+}

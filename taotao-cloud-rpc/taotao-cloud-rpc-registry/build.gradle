@@ -1,0 +1,8 @@
+archivesBaseName = 'taotao-cloud-rpc-registry'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile "org.apache.zookeeper:zookeeper:3.4.5"
+}

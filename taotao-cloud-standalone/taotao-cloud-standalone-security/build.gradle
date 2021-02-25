@@ -1,0 +1,12 @@
+archivesBaseName = 'taotao-cloud-standalone-security'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
+    compile 'org.springframework.boot:spring-boot-starter-security:2.4.1'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

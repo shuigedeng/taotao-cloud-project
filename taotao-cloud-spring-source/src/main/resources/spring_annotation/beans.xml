@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <context:property-placeholder location="classpath:person.properties"/>
+    <!-- 包扫描、只要标注了@Controller、@Service、@Repository，@Component -->
+    <!-- <context:component-scan base-package="com.atguigu" use-default-filters="false"></context:component-scan> -->
+    <bean id="person" class="com.atguigu.bean.Person" scope="prototype">
+        <property name="age" value="${}"></property>
+        <property name="name" value="zhangsan"></property>
+    </bean>
+
+    <!-- 开启基于注解版的切面功能 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    <!-- <tx:annotation-driven/> -->
+
+</beans>

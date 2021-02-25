@@ -1,0 +1,45 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url "https://plugins.gradle.org/m2/"}
+        maven { url 'https://jetbrains.bintray.com/intellij-plugin-service'}
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url 'https://repo.spring.io/plugins-release' }
+    }
+}
+
+rootProject.name = 'taotao-cloud-project'
+
+def oneLayerProjects = ['dependencies', 'linux', 'netty', 'opencv', 'scala', 'spring-source', 'config']
+for ( project in oneLayerProjects ) {
+    include "taotao-cloud-${project}"
+}
+
+def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'realtime', 'plugin']
+for ( project in twoLayerProjects ) {
+    def dir = "taotao-cloud-${project}"
+    file("${rootDir}/${dir}").eachDir { directory ->
+        directory.eachDir {
+            if (it.name != "build") {
+                include "${dir}:${directory.name}"
+            }
+        }
+    }
+}
+
+def threeLayerProjects = ['microservice', 'demo', 'dubbo']
+for ( project in threeLayerProjects ) {
+    def dir = "taotao-cloud-${project}"
+    file("${rootDir}/${dir}").eachDir { directory ->
+        if (directory.name != "build") {
+            include "${dir}:${directory.name}"
+            directory.eachDir {
+                if (it.name != "build" && it.name != "src") {
+                    include "${dir}:${directory.name}:${it.name}"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+server:
+  http:
+    port: 9900
+  port: 9443
+  shutdown: graceful
+  http2:
+    enabled: true
+#  ssl:
+#    enabled: true
+#    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+#    key-store-type: JKS
+#    key-store-password: 1234
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  application:
+    name: taotao-cloud-gateway-center
+  kafka:
+    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST:106.13.201.31}:${TAOTAO-CLOUD-KAFKA-PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500

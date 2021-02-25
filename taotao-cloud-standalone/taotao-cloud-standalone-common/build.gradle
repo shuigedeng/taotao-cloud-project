@@ -1,0 +1,50 @@
+archivesBaseName = 'taotao-cloud-standalone-common'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    compile 'org.lionsoul:ip2region:1.7.2'
+    compile 'org.springframework.security:spring-security-core:5.4.2'
+
+    compile 'org.springframework:spring-test:5.1.9.RELEASE'
+    compile 'commons-collections:commons-collections:3.2.1'
+    compile 'com.aliyun:aliyun-java-sdk-core:4.1.0'
+
+    compile 'com.github.binarywang:weixin-java-mp:3.6.0'
+
+    compile 'org.springframework.social:spring-social-security:1.1.6.RELEASE'
+    compile 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
+    compile 'org.springframework.social:spring-social-config:1.1.6.RELEASE'
+    compile 'org.springframework.social:spring-social-web:1.1.6.RELEASE'
+
+    compile('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-undertow'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.0'
+    compile 'com.google.guava:guava:19.0'
+    compile 'com.github.whvcse:easy-captcha:1.6.2'
+    compile 'commons-io:commons-io:2.2'
+
+    compile "mysql:mysql-connector-java"
+
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.3.0'
+    compile 'com.baomidou:mybatis-plus-generator:3.3.0'
+
+    compile 'org.apache.velocity:velocity-engine-core:2.1'
+
+    compile 'cn.hutool:hutool-all:4.5.6'
+    compile 'com.alibaba:fastjson:1.2.58'
+
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
+    compile 'joda-time:joda-time:2.10.1'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}

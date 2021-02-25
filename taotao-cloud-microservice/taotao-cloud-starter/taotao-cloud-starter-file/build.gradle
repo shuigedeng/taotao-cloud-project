@@ -1,0 +1,27 @@
+archivesBaseName = 'taotao-cloud-starter-file'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    implementation 'org.springframework:spring-web'
+
+    implementation 'com.upyun:java-sdk:3.13'
+    implementation 'com.qiniu:qiniu-java-sdk:7.2.0'
+    implementation 'com.aliyun.oss:aliyun-sdk-oss:3.9.1'
+    implementation 'com.google.guava:guava:27.0.1-jre'
+    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
+    implementation 'com.squareup.okio:okio:1.13.0'
+    implementation 'com.luhuiguo:fastdfs-client:0.4.0'
+    implementation 'commons-net:commons-net:3.6'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

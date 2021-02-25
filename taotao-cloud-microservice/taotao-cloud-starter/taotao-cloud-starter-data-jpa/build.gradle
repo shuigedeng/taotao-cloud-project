@@ -1,0 +1,28 @@
+archivesBaseName = 'taotao-cloud-starter-data-jpa'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile group: 'com.querydsl', name: 'querydsl-apt', version: '4.4.0'
+    compile group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
+    implementation group: 'p6spy', name: 'p6spy', version: '3.9.1'
+
+    runtime "mysql:mysql-connector-java"
+
+    implementation 'org.springframework.security:spring-security-core'
+    implementation "org.springframework.cloud:spring-cloud-context"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+}

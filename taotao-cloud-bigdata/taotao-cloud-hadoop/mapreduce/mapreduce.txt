@@ -1,0 +1,31 @@
+1、mapreduce框架的设计思想
+
+2、mapreduce框架中的程序实体角色：maptask   reducetask   mrappmaster
+
+3、mapreduce程序运行的整体流程
+
+4、mapreduce程序中maptask任务切片规划的机制（掌握整体逻辑流程，看day03_word文档中的“maptask并行度”）
+
+5、mapreduce程序提交的整体流程（看图：一坨  "客户端提交mr程序job的流程"）
+
+6、编码：
+    wordcount
+	流量汇总统计（hadoop的序列化实现）
+	流量汇总统计并按省份区分
+
+
+1/mr的combiner
+
+2/mr的排序
+
+3/mr的shuffle
+
+4/mr与yarn
+
+5/mr运行模式
+
+6/mr实现join
+
+7/mr全局图
+
+8/mr的压缩

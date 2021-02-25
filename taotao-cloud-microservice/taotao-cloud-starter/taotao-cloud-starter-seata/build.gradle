@@ -1,0 +1,24 @@
+archivesBaseName = 'taotao-cloud-starter-seata'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
+    implementation("io.seata:seata-spring-boot-starter"){
+        exclude group: 'io.seata', module: 'seata-all'
+    }
+
+    implementation "io.seata:seata-all:1.2.0"
+    implementation "com.zaxxer:HikariCP"
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.cloud:spring-cloud-context"
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

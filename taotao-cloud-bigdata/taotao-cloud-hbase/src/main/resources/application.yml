@@ -1,0 +1,9 @@
+server:
+  port: 8088
+
+spring:
+  hbase:
+    quorum: localhost
+    port: 2181
+    znode: /hbase
+    maxsize: 1572864000

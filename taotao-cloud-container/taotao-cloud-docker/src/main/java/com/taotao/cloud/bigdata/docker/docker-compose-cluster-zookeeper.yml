@@ -1,0 +1,71 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.22.0.0/16 cluster-zookeeper-network #创建子网段为172.22.0.0/16 的IP网络
+
+version: '3.7'
+services:
+  cluster-zookeeper-zoo1:
+    image: zookeeper:3.4
+    restart: always # 当发生错误时自动重启
+    hostname: cluster-zookeeper-zoo1
+    container_name: cluster-zookeeper-zoo1
+    privileged: true
+    ports:
+      - 2181:2181
+    volumes:
+      - ./zookeeper/cluster/cluster-zookeeper-zoo1/data:/data
+      - ./zookeeper/cluster/cluster-zookeeper-zoo1/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-zookeeper-zoo1:2888:3888 server.2=cluster-zookeeper-zoo2:2888:3888 server.3=cluster-zookeeper-zoo3:2888:3888
+    networks:
+      cluster-zookeeper-network:
+        ipv4_address: 172.22.0.4
+
+  cluster-zookeeper-zoo2:
+    image: zookeeper:3.4
+    restart: always
+    hostname: cluster-zookeeper-zoo2
+    container_name: cluster-zookeeper-zoo2
+    privileged: true
+    ports:
+      - 2182:2181
+    volumes:
+      - ./zookeeper/cluster/cluster-zookeeper-zoo2/data:/data
+      - ./zookeeper/cluster/cluster-zookeeper-zoo2/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 2
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-zookeeper-zoo1:2888:3888 server.2=cluster-zookeeper-zoo2:2888:3888 server.3=cluster-zookeeper-zoo3:2888:3888
+    networks:
+      cluster-zookeeper-network:
+        ipv4_address: 172.22.0.5
+
+  cluster-zookeeper-zoo3:
+    image: zookeeper:3.4
+    restart: always
+    hostname: cluster-zookeeper-zoo3
+    container_name: cluster-zookeeper-zoo3
+    privileged: true
+    ports:
+      - 2183:2181
+    volumes:
+      - ./zookeeper/cluster/cluster-zookeeper-zoo3/data:/data
+      - ./zookeeper/cluster/cluster-zookeeper-zoo3/datalog:/datalog
+    environment:
+      TZ: Asia/Shanghai
+      ZOO_MY_ID: 3
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=cluster-zookeeper-zoo1:2888:3888 server.2=cluster-zookeeper-zoo2:2888:3888 server.3=cluster-zookeeper-zoo3:2888:3888
+    networks:
+      cluster-zookeeper-network:
+        ipv4_address: 172.22.0.6
+
+networks:
+  cluster-zookeeper-network:
+    external:
+      name: cluster-zookeeper-network
+

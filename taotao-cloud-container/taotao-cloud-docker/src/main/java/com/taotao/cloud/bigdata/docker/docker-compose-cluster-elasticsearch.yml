@@ -1,0 +1,110 @@
+# 新建网络
+# docker network ls #查看当前网络
+# docker network create --subnet=172.26.0.0/16 cluster-elasticsearch-network #创建子网段为172.26.0.0/16 的IP网络
+
+version: '3.7'
+services:
+  cluster-elasticsearch-node1:
+    image: elasticsearch:7.6.0
+    container_name: cluster-elasticsearch-node1
+    environment:
+      - node.name=cluster-elasticsearch-node1
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=cluster-elasticsearch-node2,cluster-elasticsearch-node3
+      - cluster.initial_master_nodes=cluster-elasticsearch-node1,cluster-elasticsearch-node2,cluster-elasticsearch-node3
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch/cluster/cluster-elasticsearch-node1/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/cluster/cluster-elasticsearch-node1/logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch/cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+    networks:
+      cluster-elasticsearch-network:
+        ipv4_address: 172.26.0.4
+
+  cluster-elasticsearch-node2:
+    image: elasticsearch:7.6.0
+    container_name: cluster-elasticsearch-node2
+    environment:
+      - node.name=cluster-elasticsearch-node2
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=cluster-elasticsearch-node1,cluster-elasticsearch-node3
+      - cluster.initial_master_nodes=cluster-elasticsearch-node1,cluster-elasticsearch-node2,cluster-elasticsearch-node3
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch/cluster/cluster-elasticsearch-node2/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/cluster/cluster-elasticsearch-node2/logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch/cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9201:9200
+    networks:
+      cluster-elasticsearch-network:
+        ipv4_address: 172.26.0.5
+
+  cluster-elasticsearch-node3:
+    image: elasticsearch:7.6.0
+    container_name: cluster-elasticsearch-node3
+    environment:
+      - node.name=cluster-elasticsearch-node3
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=cluster-elasticsearch-node1,cluster-elasticsearch-node2
+      - cluster.initial_master_nodes=cluster-elasticsearch-node1,cluster-elasticsearch-node2,cluster-elasticsearch-node3
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearch/cluster/cluster-elasticsearch-node3/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/cluster/cluster-elasticsearch-node3/logs:/usr/share/elasticsearch/logs
+      - ./elasticsearch/cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9202:9200
+    networks:
+      cluster-elasticsearch-network:
+        ipv4_address: 172.26.0.6
+
+  kibana:
+    image: kibana:7.6.0
+    container_name: kibana
+    environment:
+      - I18N_LOCALE=zh-CN
+    ports:
+      - "5601:5601"
+    links:
+      - cluster-elasticsearch-node1:elasticsearch
+    depends_on:
+      - cluster-elasticsearch-node1
+      - cluster-elasticsearch-node2
+      - cluster-elasticsearch-node3
+    networks:
+      cluster-elasticsearch-network:
+        ipv4_address: 172.26.0.7
+
+  cerebro:
+    image: lmenezes/cerebro:0.8.3
+    container_name: cerebro
+    ports:
+      - "9000:9000"
+    command:
+      - -Dhosts.0.host=http://elasticsearch:9200
+    networks:
+      cluster-elasticsearch-network:
+        ipv4_address: 172.26.0.8
+
+networks:
+  cluster-elasticsearch-network:
+    external:
+      name: cluster-elasticsearch-network

@@ -1,0 +1,17 @@
+archivesBaseName = 'taotao-cloud-spring-source'
+
+jar.enabled = false
+bootJar.enabled = false
+
+dependencies {
+    compile 'org.springframework:spring-context:4.3.12.RELEASE'
+    compile 'org.springframework:spring-aspects:4.3.12.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.3.12.RELEASE'
+    compile 'junit:junit:4.12'
+    compile 'javax.inject:javax.inject:1'
+    compile 'c3p0:c3p0:0.9.1.2'
+    compile 'mysql:mysql-connector-java:5.1.44'
+
+    compile 'org.springframework:spring-webmvc:4.3.11.RELEASE'
+    compile 'javax.servlet:javax.servlet-api:4.0.1'
+}

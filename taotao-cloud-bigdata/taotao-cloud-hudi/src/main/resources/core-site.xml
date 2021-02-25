@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/ClusterSetup.html -->
+<configuration>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://106.13.201.31:9000</value>
+	</property>
+
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/opt/hadoop/tmp</value>
+	</property>
+
+	<property>
+		<name>fs.hdfs.impl</name>
+		<value>org.apache.hadoop.hdfs.DistributedFileSystem</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hue.groups</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hue.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.root.groups</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.root.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.httpfs.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.httpfs.groups</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>io.compression.codecs</name>
+		<value>
+			org.apache.hadoop.io.compress.GzipCodec,
+			org.apache.hadoop.io.compress.DefaultCodec,
+			org.apache.hadoop.io.compress.BZip2Codec,
+			org.apache.hadoop.io.compress.SnappyCodec,
+			com.hadoop.compression.lzo.LzoCodec,
+			com.hadoop.compression.lzo.LzopCodec
+		</value>
+	</property>
+
+	<property>
+		<name>io.compression.codec.lzo.class</name>
+		<value>com.hadoop.compression.lzo.LzoCodec</value>
+	</property>
+</configuration>

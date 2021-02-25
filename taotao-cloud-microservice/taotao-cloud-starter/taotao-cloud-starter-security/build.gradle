@@ -1,0 +1,27 @@
+archivesBaseName = 'taotao-cloud-starter-security'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+
+	implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
+
+	implementation 'org.springframework.security:spring-security-core'
+	implementation 'org.springframework.security.oauth:spring-security-oauth2'
+
+	implementation 'org.apache.commons:commons-collections4'
+	implementation 'org.apache.commons:commons-lang3'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	implementation "org.springframework.cloud:spring-cloud-context"
+	implementation 'org.springframework.boot:spring-boot-autoconfigure'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+}
