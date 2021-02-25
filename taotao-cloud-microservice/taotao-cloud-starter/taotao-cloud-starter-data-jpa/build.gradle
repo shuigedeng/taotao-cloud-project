@@ -14,6 +14,7 @@ dependencies {
     implementation 'p6spy:p6spy'
     implementation 'cn.hutool:hutool-all'
     implementation "mysql:mysql-connector-java"
+    implementation 'org.slf4j:slf4j-api'
 
     implementation 'org.springframework.security:spring-security-core'
     implementation "org.springframework.cloud:spring-cloud-context"

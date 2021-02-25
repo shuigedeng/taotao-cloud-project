@@ -8,6 +8,7 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     implementation 'cn.hutool:hutool-all'
+    implementation 'org.slf4j:slf4j-api'
     implementation "mysql:mysql-connector-java"
     implementation 'com.baomidou:mybatis-plus-extension'
     implementation 'org.springframework.security:spring-security-core'

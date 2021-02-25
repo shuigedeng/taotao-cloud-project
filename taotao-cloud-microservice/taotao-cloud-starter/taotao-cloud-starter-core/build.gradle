@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.aspectj:aspectjweaver'
     implementation 'com.nepxion:banner'
     implementation 'cn.hutool:hutool-all'
+    implementation 'org.slf4j:slf4j-api'
 
     implementation 'javax.servlet:javax.servlet-api'
     implementation 'io.projectreactor:reactor-core'
