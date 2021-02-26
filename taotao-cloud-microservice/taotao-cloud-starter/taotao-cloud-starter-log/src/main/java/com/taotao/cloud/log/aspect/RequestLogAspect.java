@@ -17,20 +17,28 @@ package com.taotao.cloud.log.aspect;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.URLUtil;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
-import com.taotao.cloud.core.utils.AddrUtil;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.utils.AddrUtil;
 import com.taotao.cloud.core.utils.SecurityUtil;
 import com.taotao.cloud.core.utils.WebUtil;
 import com.taotao.cloud.log.event.RequestLogEvent;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.properties.RequestLogProperties;
 import com.taotao.cloud.log.utils.LoggerUtil;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.Objects;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -46,15 +54,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.Objects;
-
 
 /**
  * 日志切面
@@ -63,8 +62,8 @@ import java.util.Objects;
  * </p>
  *
  * @author dengtao
- * @since 2020/6/3 11:47
  * @version 1.0.0
+ * @since 2020/6/3 11:47
  */
 @Slf4j
 @Aspect
@@ -74,7 +73,7 @@ public class RequestLogAspect {
 	@Value("${spring.application.name}")
 	private String applicationName;
 
-	private static final String DEFAULT_SOURCE  = "taotao_cloud_request_log";
+	private static final String DEFAULT_SOURCE = "taotao_cloud_request_log";
 
 	@Resource
 	private RequestLogProperties requestLogProperties;
@@ -111,7 +110,8 @@ public class RequestLogAspect {
 	public void recordLog(JoinPoint joinPoint) throws Throwable {
 		if (requestLogProperties.getEnabled()) {
 			RequestLog requestLog = new RequestLog();
-			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
+				.requireNonNull(RequestContextHolder.getRequestAttributes());
 			RequestContextHolder.setRequestAttributes(attributes, true);
 			HttpServletRequest request = attributes.getRequest();
 			requestLog.setApplicationName(applicationName);
@@ -129,12 +129,14 @@ public class RequestLogAspect {
 			requestLog.setClasspath(joinPoint.getTarget().getClass().getName());
 			String name = joinPoint.getSignature().getName();
 			requestLog.setRequestMethodName(name);
-			requestLog.setRequestParams(JSON.toJSONString(WebUtil.getAllRequestParam(request)));
-			requestLog.setRequestHeaders(JSON.toJSONString(WebUtil.getAllRequestHeaders(request)));
+			requestLog.setRequestParams(JsonUtil.toJSONString(WebUtil.getAllRequestParam(request)));
+			requestLog
+				.setRequestHeaders(JsonUtil.toJSONString(WebUtil.getAllRequestHeaders(request)));
 			requestLog.setRequestType(LogUtil.getOperateType(name));
 			requestLog.setDescription(LoggerUtil.getControllerMethodDescription(joinPoint));
 			requestLog.setSource(DEFAULT_SOURCE);
-			requestLog.setCtime(String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
+			requestLog.setCtime(
+				String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 			SYS_LOG_THREAD_LOCAL.set(requestLog);
 		}
 	}

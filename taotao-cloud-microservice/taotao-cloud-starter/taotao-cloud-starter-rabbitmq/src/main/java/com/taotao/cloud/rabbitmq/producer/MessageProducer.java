@@ -15,26 +15,24 @@
  */
 package com.taotao.cloud.rabbitmq.producer;
 
-
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 
 /**
  * 消息生产者
  *
  * @author dengtao
- * @since 2020/9/29 15:54
  * @version 1.0.0
+ * @since 2020/9/29 15:54
  */
 public interface MessageProducer {
 
-    /**
-     * 生产数据
-     *
-     * @param message message
-     * @author dengtao
-     * @since 2020/9/29 15:56
-     * @version 1.0.0
-     */
-    DetailResponse send(Object message);
+	/**
+	 * 生产数据
+	 *
+	 * @param message message
+	 * @author dengtao
+	 * @since 2020/9/29 15:56
+	 */
+	DetailResponse send(Object message);
 
 }

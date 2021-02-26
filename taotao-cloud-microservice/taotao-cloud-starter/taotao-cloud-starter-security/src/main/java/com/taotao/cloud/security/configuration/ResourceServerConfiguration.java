@@ -44,97 +44,102 @@ import javax.annotation.Resource;
  * oauth2资源服务器
  *
  * @author dengtao
- * @since 2020/4/30 09:04
  * @version 1.0.0
+ * @since 2020/4/30 09:04
  */
 @Order(6)
 @EnableResourceServer
 @ConditionalOnProperty(prefix = "taotao.cloud.oauth2.security", name = "enabled", havingValue = "true")
-public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter implements InitializingBean {
-    @Resource
-    private AuthenticationEntryPoint authenticationEntryPoint;
-    @Resource
-    private OAuth2WebSecurityExpressionHandler expressionHandler;
-    @Resource
-    private OAuth2AccessDeniedHandler oAuth2AccessDeniedHandler;
-    @Resource
-    private SecurityProperties securityProperties;
-    // @Resource
-    // private AuthorizationServerProperties authorizationServerProperties;
-    // @Autowired
-    // private OAuth2ClientProperties oAuth2ClientProperties;
+public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter implements
+	InitializingBean {
 
-    @Override
-    public void afterPropertiesSet() {
-        LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_AUTH_STARTER + "]" + "资源服务器已启动");
-    }
+	@Resource
+	private AuthenticationEntryPoint authenticationEntryPoint;
+	@Resource
+	private OAuth2WebSecurityExpressionHandler expressionHandler;
+	@Resource
+	private OAuth2AccessDeniedHandler oAuth2AccessDeniedHandler;
+	@Resource
+	private SecurityProperties securityProperties;
+	// @Resource
+	// private AuthorizationServerProperties authorizationServerProperties;
+	// @Autowired
+	// private OAuth2ClientProperties oAuth2ClientProperties;
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl authorizedUrl = setHttp(http)
-                .authorizeRequests()
-                // .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .antMatchers(securityProperties.getIgnore().getUrls()).permitAll()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .anyRequest();
+	@Override
+	public void afterPropertiesSet() {
+		LogUtil.info(
+			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_AUTH_STARTER + "]" + "资源服务器已启动");
+	}
 
-        setAuthenticate(authorizedUrl);
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl authorizedUrl = setHttp(
+			http)
+			.authorizeRequests()
+			// .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+			.antMatchers(securityProperties.getIgnore().getUrls()).permitAll()
+			.antMatchers(HttpMethod.OPTIONS).permitAll()
+			.anyRequest();
 
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .httpBasic().disable()
-                .headers()
-                .frameOptions().disable()
-                .and()
-                .csrf().disable();
-    }
+		setAuthenticate(authorizedUrl);
 
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("taotao-cloud-uc-center")
-                .tokenServices(remoteTokenServices())
-                .stateless(true)
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .expressionHandler(expressionHandler)
-                .accessDeniedHandler(oAuth2AccessDeniedHandler);
-    }
+		http.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+			.httpBasic().disable()
+			.headers()
+			.frameOptions().disable()
+			.and()
+			.csrf().disable();
+	}
 
-    public RemoteTokenServices remoteTokenServices() {
-        DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
-        UserAuthenticationConverter userTokenConverter = new UserAuthenticationConverterComponent();
-        accessTokenConverter.setUserTokenConverter(userTokenConverter);
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		resources.resourceId("taotao-cloud-uc-center")
+			.tokenServices(remoteTokenServices())
+			.stateless(true)
+			.authenticationEntryPoint(authenticationEntryPoint)
+			.expressionHandler(expressionHandler)
+			.accessDeniedHandler(oAuth2AccessDeniedHandler);
+	}
 
-        final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
-        remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:9800/oauth/check_token");
-        remoteTokenServices.setClientId("taotao-cloud-uc-center");
-        remoteTokenServices.setClientSecret("taotao-cloud-uc-center");
-        // remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
-        remoteTokenServices.setRestTemplate(new RestTemplate());
+	public RemoteTokenServices remoteTokenServices() {
+		DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
+		UserAuthenticationConverter userTokenConverter = new UserAuthenticationConverterComponent();
+		accessTokenConverter.setUserTokenConverter(userTokenConverter);
 
-        // RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
-        // remoteTokenServices.setCheckTokenEndpointUrl(authorizationServerProperties.getCheckTokenAccess());
-        // remoteTokenServices.setClientId(oAuth2ClientProperties.g());
-        // remoteTokenServices.setClientSecret(oAuth2ClientProperties.getClientSecret());
-        // remoteTokenServices.setAccessTokenConverter(accessTokenConverter());
-        return remoteTokenServices;
-    }
+		final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
+		remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:9800/oauth/check_token");
+		remoteTokenServices.setClientId("taotao-cloud-uc-center");
+		remoteTokenServices.setClientSecret("taotao-cloud-uc-center");
+		// remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
+		remoteTokenServices.setRestTemplate(new RestTemplate());
 
-    /**
-     * 留给子类重写扩展功能
-     *
-     * @param http http
-     */
-    public HttpSecurity setHttp(HttpSecurity http) {
-        return http;
-    }
+		// RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
+		// remoteTokenServices.setCheckTokenEndpointUrl(authorizationServerProperties.getCheckTokenAccess());
+		// remoteTokenServices.setClientId(oAuth2ClientProperties.g());
+		// remoteTokenServices.setClientSecret(oAuth2ClientProperties.getClientSecret());
+		// remoteTokenServices.setAccessTokenConverter(accessTokenConverter());
+		return remoteTokenServices;
+	}
 
-    /**
-     * url权限控制，默认是认证就通过，可以重写实现个性化
-     *
-     * @param authorizedUrl authorizedUrl
-     */
-    public HttpSecurity setAuthenticate(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl authorizedUrl) {
-        return authorizedUrl.authenticated().and();
-    }
+	/**
+	 * 留给子类重写扩展功能
+	 *
+	 * @param http http
+	 */
+	public HttpSecurity setHttp(HttpSecurity http) {
+		return http;
+	}
+
+	/**
+	 * url权限控制，默认是认证就通过，可以重写实现个性化
+	 *
+	 * @param authorizedUrl authorizedUrl
+	 */
+	public HttpSecurity setAuthenticate(
+		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl authorizedUrl) {
+		return authorizedUrl.authenticated().and();
+	}
 }

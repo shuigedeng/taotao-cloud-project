@@ -25,25 +25,26 @@ import java.util.List;
  * CacheManagerProperties
  *
  * @author dengtao
- * @since 2020/4/30 10:16
  * @version 1.0.0
+ * @since 2020/4/30 10:16
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.redis.cache.manager")
 public class CacheManagerProperties {
 
-    private List<CacheConfig> configs;
+	private List<CacheConfig> configs;
 
-    @Data
-    public static class CacheConfig {
-        /**
-         * cache key
-         */
-        private String key;
-        /**
-         * 过期时间，sec
-         */
-        private long second = 60;
-    }
+	@Data
+	public static class CacheConfig {
+
+		/**
+		 * cache key
+		 */
+		private String key;
+		/**
+		 * 过期时间，sec
+		 */
+		private long second = 60;
+	}
 }

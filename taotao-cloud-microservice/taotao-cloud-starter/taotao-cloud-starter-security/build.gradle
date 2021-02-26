@@ -13,7 +13,15 @@ dependencies {
 
 	implementation 'org.springframework.security:spring-security-core'
 	implementation 'org.springframework.security.oauth:spring-security-oauth2'
-
+	implementation("org.springframework.boot:spring-boot-starter-data-redis") {
+		exclude group: 'io.lettuce', module: 'lettuce-core'
+	}
+	implementation "io.lettuce:lettuce-core"
+	
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'javax.servlet:javax.servlet-api'
+	implementation 'org.slf4j:slf4j-api'
+	implementation 'cn.hutool:hutool-all'
 	implementation 'org.apache.commons:commons-collections4'
 	implementation 'org.apache.commons:commons-lang3'
 

@@ -22,8 +22,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * PropertiesAutoConfiguration
  *
  * @author dengtao
- * @since 2020/6/16 11:36
  * @version 1.0.0
+ * @since 2020/6/16 11:36
  */
 @EnableConfigurationProperties(XxlProperties.class)
 public class PropertiesAutoConfiguration {

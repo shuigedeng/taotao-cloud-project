@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.file.configuration;
 
-
 import cn.hutool.json.JSONUtil;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
@@ -30,21 +29,19 @@ import com.taotao.cloud.file.constant.FileConstant;
 import com.taotao.cloud.file.exception.FileUploadException;
 import com.taotao.cloud.file.pojo.FileInfo;
 import com.taotao.cloud.file.propeties.QiniuProperties;
+import java.io.File;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
  * @author dengtao
- * @since 2020/10/26 10:28
  * @version 1.0.0
+ * @since 2020/10/26 10:28
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_QINIU)
 public class QiniuAutoConfiguration {
@@ -91,8 +88,8 @@ public class QiniuAutoConfiguration {
 	 * 构建一个七牛上传工具实例
 	 *
 	 * @author dengtao
-	 * @since 2020/10/26 11:36
 	 * @version 1.0.0
+	 * @since 2020/10/26 11:36
 	 */
 	@Bean
 	public UploadManager uploadManager(@Autowired com.qiniu.storage.Configuration config) {
@@ -103,8 +100,8 @@ public class QiniuAutoConfiguration {
 	 * 认证信息实例
 	 *
 	 * @author dengtao
-	 * @since 2020/10/26 11:36
 	 * @version 1.0.0
+	 * @since 2020/10/26 11:36
 	 */
 	@Bean
 	public Auth auth() {
@@ -115,17 +112,18 @@ public class QiniuAutoConfiguration {
 	 * 构建七牛空间管理实例
 	 *
 	 * @author dengtao
-	 * @since 2020/10/26 11:36
 	 * @version 1.0.0
+	 * @since 2020/10/26 11:36
 	 */
 	@Bean
 	public BucketManager bucketManager(@Autowired com.qiniu.storage.Configuration config,
-									   @Autowired Auth auth) {
+		@Autowired Auth auth) {
 		return new BucketManager(auth, config);
 	}
 
 	@Bean
-	public QiniuFileUpload fileUpload(UploadManager uploadManager, BucketManager bucketManager, Auth auth){
+	public QiniuFileUpload fileUpload(UploadManager uploadManager, BucketManager bucketManager,
+		Auth auth) {
 		return new QiniuFileUpload(uploadManager, bucketManager, auth);
 	}
 
@@ -135,7 +133,8 @@ public class QiniuAutoConfiguration {
 		private final BucketManager bucketManager;
 		private final Auth auth;
 
-		public QiniuFileUpload(UploadManager uploadManager, BucketManager bucketManager, Auth auth) {
+		public QiniuFileUpload(UploadManager uploadManager, BucketManager bucketManager,
+			Auth auth) {
 			this.uploadManager = uploadManager;
 			this.bucketManager = bucketManager;
 			this.auth = auth;
@@ -144,7 +143,8 @@ public class QiniuAutoConfiguration {
 		@Override
 		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
 			try {
-				Response response = uploadManager.put(file.getBytes(), fileInfo.getName(), auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
+				Response response = uploadManager.put(file.getBytes(), fileInfo.getName(),
+					auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
 				DefaultPutRet putRet = JSONUtil.toBean(response.bodyString(), DefaultPutRet.class);
 				fileInfo.setUrl(properties.getDomain() + "/" + fileInfo.getName());
 				return fileInfo;
@@ -157,7 +157,8 @@ public class QiniuAutoConfiguration {
 		@Override
 		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
 			try {
-			Response response = uploadManager.put(file, fileInfo.getName(), auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
+				Response response = uploadManager.put(file, fileInfo.getName(),
+					auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
 				DefaultPutRet putRet = JSONUtil.toBean(response.bodyString(), DefaultPutRet.class);
 				fileInfo.setUrl(properties.getDomain() + "/" + fileInfo.getName());
 				return fileInfo;

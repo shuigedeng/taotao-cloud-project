@@ -16,33 +16,32 @@
 package com.taotao.cloud.security.configuration;
 
 import com.taotao.cloud.security.properties.SecurityProperties;
-import org.springframework.context.annotation.Primary;
+import javax.annotation.Resource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-import javax.annotation.Resource;
 
 /**
  * 安全配置
  *
  * @author dengtao
- * @since 2020/10/13 15:18
  * @version 1.0.0
+ * @since 2020/10/13 15:18
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Resource
-    private SecurityProperties securityProperties;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
-                .antMatchers(securityProperties.getIgnore().getUrls()).permitAll()
-                //所有/r/**的请求必须认证通
-                .antMatchers("/**").authenticated()
-                //除了/r/**，其它的请求可以访问
-                .anyRequest().permitAll();
-    }
+	@Resource
+	private SecurityProperties securityProperties;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests()
+			.antMatchers(securityProperties.getIgnore().getUrls()).permitAll()
+			//所有/r/**的请求必须认证通
+			.antMatchers("/**").authenticated()
+			//除了/r/**，其它的请求可以访问
+			.anyRequest().permitAll();
+	}
 
 }

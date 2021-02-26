@@ -15,32 +15,32 @@
  */
 package com.taotao.cloud.file.configuration;
 
+import com.UpYun;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.file.base.AbstractFileUpload;
 import com.taotao.cloud.file.constant.FileConstant;
 import com.taotao.cloud.file.exception.FileUploadException;
 import com.taotao.cloud.file.pojo.FileInfo;
 import com.taotao.cloud.file.propeties.UpYunProperties;
-import main.java.com.UpYun;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author dengtao
- * @since 2020/10/26 10:28
  * @version 1.0.0
+ * @since 2020/10/26 10:28
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_UPYUN)
 public class UpYunAutoConfiguration {
+
 	private final UpYunProperties properties;
 
 	public UpYunAutoConfiguration(UpYunProperties properties) {
@@ -53,7 +53,8 @@ public class UpYunAutoConfiguration {
 	@ConditionalOnMissingBean
 	public UpYun upYun() {
 		// 创建实例
-		UpYun upyun = new UpYun(properties.getBucketName(), properties.getUserName(), properties.getPassword());
+		UpYun upyun = new UpYun(properties.getBucketName(), properties.getUserName(),
+			properties.getPassword());
 		// 可选属性1，是否开启 debug 模式，默认不开启
 		upyun.setDebug(false);
 		// 可选属性2，超时时间，默认 30s
@@ -62,11 +63,12 @@ public class UpYunAutoConfiguration {
 	}
 
 	@Bean
-	public UpYunFileUpload fileUpload(UpYun upyun){
+	public UpYunFileUpload fileUpload(UpYun upyun) {
 		return new UpYunFileUpload(upyun);
 	}
 
 	public class UpYunFileUpload extends AbstractFileUpload {
+
 		private final UpYun upyun;
 
 		public UpYunFileUpload(UpYun upyun) {
@@ -75,12 +77,14 @@ public class UpYunAutoConfiguration {
 		}
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo)  {
+		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
 			boolean bFlag;
 			try {
 				InputStream inputStream = file.getInputStream();
 				String fileName = fileInfo.getName();
-				String filePath = properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun.md5(fileName);
+				String filePath =
+					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
+						.md5(fileName);
 				byte[] buffer;
 
 				ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
@@ -111,7 +115,9 @@ public class UpYunAutoConfiguration {
 			try {
 				InputStream inputStream = new FileInputStream(file);
 				String fileName = fileInfo.getName();
-				String filePath = properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun.md5(fileName);
+				String filePath =
+					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
+						.md5(fileName);
 				byte[] buffer;
 
 				ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
@@ -140,7 +146,7 @@ public class UpYunAutoConfiguration {
 		@Override
 		public FileInfo delete(FileInfo fileInfo) {
 			try {
-				upyun.deleteFile(fileInfo.getUrl());
+				upyun.deleteFile(fileInfo.getUrl(), new HashMap<>());
 			} catch (Exception e) {
 				LogUtil.error("[UpYun]文件删除失败:", e);
 				throw new FileUploadException("[UpYun]文件删除失败");

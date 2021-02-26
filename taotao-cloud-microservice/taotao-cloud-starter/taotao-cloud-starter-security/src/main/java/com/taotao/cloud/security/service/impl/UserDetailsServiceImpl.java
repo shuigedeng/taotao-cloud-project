@@ -81,16 +81,19 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 			throw new UsernameNotFoundException("会员用户 userId:[" + userId + "]角色查询失败");
 		}
 		List<RoleVO> roles = roleResult.getData();
-		Set<String> roleCodes = roles.stream().filter(Objects::nonNull).map(RoleVO::getCode).collect(Collectors.toSet());
+		Set<String> roleCodes = roles.stream().filter(Objects::nonNull).map(RoleVO::getCode)
+			.collect(Collectors.toSet());
 		//查询资源信息
-		Result<List<ResourceVO>> resourceResult = remoteResourceService.findResourceByCodes(roleCodes);
+		Result<List<ResourceVO>> resourceResult = remoteResourceService
+			.findResourceByCodes(roleCodes);
 		if (ObjectUtil.isNull(roleResult) || Objects.isNull(roleResult.getData())) {
 			LogUtil.error("后台用户 userId:[" + userId + "]资源查询失败");
 			throw new UsernameNotFoundException("会员用户 userId:[" + userId + "]资源查询失败");
 		}
 		List<ResourceVO> resources = resourceResult.getData();
 		Set<String> perms = resources.stream().filter(Objects::nonNull)
-			.filter(resource -> StrUtil.isNotBlank(resource.getPerms())).map(ResourceVO::getPerms).collect(Collectors.toSet());
+			.filter(resource -> StrUtil.isNotBlank(resource.getPerms())).map(ResourceVO::getPerms)
+			.collect(Collectors.toSet());
 
 		SecurityUser user = new SecurityUser();
 		BeanUtil.copyIncludeNull(userVO, user);
@@ -115,8 +118,10 @@ public class UserDetailsServiceImpl implements IUserDetailsService {
 				// 扫码登陆根据key从redis查询用户
 				return null;
 			} else {
-				Result<SecurityUser> memberSecurityUser = remoteMemberService.getMemberSecurityUser(username);
-				if (ObjectUtil.isNull(memberSecurityUser) || memberSecurityUser.getCode() == HttpStatus.NOT_FOUND.value()) {
+				Result<SecurityUser> memberSecurityUser = remoteMemberService
+					.getMemberSecurityUser(username);
+				if (ObjectUtil.isNull(memberSecurityUser)
+					|| memberSecurityUser.getCode() == HttpStatus.NOT_FOUND.value()) {
 					LogUtil.error("会员用户：[" + username + "]不存在");
 					throw new UsernameNotFoundException("会员用户：[" + username + "]不存在");
 				}

@@ -20,27 +20,28 @@ import com.taotao.cloud.elasticsearch.service.impl.AggregationServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.IndexServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.QueryServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.SearchServiceImpl;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
  * 自定义开启es客户端
  *
  * @author dengtao
- * @since 2020/5/3 07:47
  * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({ElasticsearchComponent.class,
-        QueryServiceImpl.class,
-        SearchServiceImpl.class,
-        AggregationServiceImpl.class,
-        IndexServiceImpl.class})
+@Import({
+	ElasticsearchComponent.class,
+	QueryServiceImpl.class,
+	SearchServiceImpl.class,
+	AggregationServiceImpl.class,
+	IndexServiceImpl.class
+})
 public @interface EnableTaoTaoCloudElasticsearch {
 
 }

@@ -24,24 +24,24 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * ForbiddenException
  *
  * @author dengtao
- * @since 2020/6/2 15:35
  * @version 1.0.0
+ * @since 2020/6/2 15:35
  */
 @JsonSerialize(using = OauthExceptionSerializer.class)
 public class ForbiddenException extends OAuth2Exception {
 
-    public ForbiddenException(String msg, Throwable t) {
-        super(msg);
-    }
+	public ForbiddenException(String msg, Throwable t) {
+		super(msg);
+	}
 
-    @Override
-    public String getOAuth2ErrorCode() {
-        return "access_denied";
-    }
+	@Override
+	public String getOAuth2ErrorCode() {
+		return "access_denied";
+	}
 
-    @Override
-    public int getHttpErrorCode() {
-        return HttpStatus.FORBIDDEN.value();
-    }
+	@Override
+	public int getHttpErrorCode() {
+		return HttpStatus.FORBIDDEN.value();
+	}
 
 }

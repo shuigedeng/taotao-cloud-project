@@ -15,21 +15,22 @@
  */
 package com.taotao.cloud.shardingjdbc;
 
+import java.util.Collection;
 import org.apache.shardingsphere.api.sharding.hint.HintShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.hint.HintShardingValue;
-
-import java.util.Collection;
 
 /**
  * 数据库分源算法
  *
  * @author dengtao
- * @since 2020/6/22 17:30
  * @version 1.0.0
+ * @since 2020/6/22 17:30
  */
 public class DataSourceShardingAlgorithm implements HintShardingAlgorithm {
-    @Override
-    public Collection<String> doSharding(Collection collection, HintShardingValue hintShardingValue) {
-        return hintShardingValue.getValues();
-    }
+
+	@Override
+	public Collection<String> doSharding(Collection collection,
+		HintShardingValue hintShardingValue) {
+		return hintShardingValue.getValues();
+	}
 }

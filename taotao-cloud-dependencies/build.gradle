@@ -71,6 +71,7 @@ dependencies {
         api "commons-lang:commons-lang:${commonsIoVersion}"
         api "io.lettuce:lettuce-core:${lettuceVersion}"
         api "org.redisson:redisson-spring-boot-starter:${redissonVersion}"
+        api "org.redisson:redisson:${redissonVersion}"
         api "io.seata:seata-all:${seataVersion}"
         api "org.apache.shardingsphere:sharding-jdbc-spring-namespace:${shardingsphereVersion}"
         api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter:${shardingsphereVersion}"

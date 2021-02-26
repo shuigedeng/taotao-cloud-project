@@ -23,13 +23,13 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * ElkHealthLogStatisticProperties
  *
  * @author dengtao
- * @version v1.0.0
  * @version 1.0.0
+ * @since 2020/6/3 10:43
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.elk.log.statistic")
 public class ElkHealthLogStatisticProperties {
 
-    private boolean enabled = false;
+	private boolean enabled = false;
 }

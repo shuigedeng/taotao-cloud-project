@@ -26,40 +26,39 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
 /**
  * RabbitMQ配置类
  *
  * @author dengtao
- * @since 2020/5/28 17:17
  * @version 1.0.0
+ * @since 2020/5/28 17:17
  */
 @Configuration
 @ConditionalOnClass(FastBuildRabbitMqProducer.class)
 @ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", name = "enabled", havingValue = "true")
 public class RabbitMqComponent {
 
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        return new RabbitTemplate(connectionFactory);
-    }
+	@Bean
+	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+		return new RabbitTemplate(connectionFactory);
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public ConnectionFactory connectionFactory(RabbitMQProperties rabbitMqProperties) {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setAddresses(rabbitMqProperties.getAddresses());
-        connectionFactory.setUsername(rabbitMqProperties.getUsername());
-        connectionFactory.setPassword(rabbitMqProperties.getPassword());
-        connectionFactory.setVirtualHost(rabbitMqProperties.getVirtualHost());
-        connectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
-        return connectionFactory;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public ConnectionFactory connectionFactory(RabbitMQProperties rabbitMqProperties) {
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setAddresses(rabbitMqProperties.getAddresses());
+		connectionFactory.setUsername(rabbitMqProperties.getUsername());
+		connectionFactory.setPassword(rabbitMqProperties.getPassword());
+		connectionFactory.setVirtualHost(rabbitMqProperties.getVirtualHost());
+		connectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
+		return connectionFactory;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", value = "enabled", havingValue = "true")
-    public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
-        return new FastBuildRabbitMqProducer(connectionFactory);
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", value = "enabled", havingValue = "true")
+	public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
+		return new FastBuildRabbitMqProducer(connectionFactory);
+	}
 }

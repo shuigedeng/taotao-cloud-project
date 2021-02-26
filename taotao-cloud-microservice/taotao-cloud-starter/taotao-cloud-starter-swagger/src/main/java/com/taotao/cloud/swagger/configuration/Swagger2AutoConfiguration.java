@@ -15,12 +15,18 @@
  */
 package com.taotao.cloud.swagger.configuration;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.swagger.properties.Swagger2Properties;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -35,244 +41,264 @@ import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.*;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.Parameter;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * SwaggerAutoConfiguration
  *
  * @author dengtao
- * @since 2020/4/30 10:10
  * @version 1.0.0
+ * @since 2020/4/30 10:10
  */
 @Slf4j
 @Import({Swagger2Configuration.class})
 public class Swagger2AutoConfiguration implements BeanFactoryAware, InitializingBean {
-    private static final String AUTH_KEY = "Authorization";
 
-    private BeanFactory beanFactory;
+	private static final String AUTH_KEY = "Authorization";
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_SWAGGER_STARTER + "]" + "swagger模块已启动");
-    }
+	private BeanFactory beanFactory;
 
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(name = "taotao.cloud.swagger.enabled", matchIfMissing = true)
-    public List<Docket> createRestApi(Swagger2Properties swagger2Properties) {
-        ConfigurableBeanFactory configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
-        List<Docket> docketList = new LinkedList<>();
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_SWAGGER_STARTER + "]"
+			+ "swagger模块已启动");
+	}
 
-        // 没有分组
-        if (swagger2Properties.getDocket().size() == 0) {
-            final Docket docket = createDocket(swagger2Properties);
-            configurableBeanFactory.registerSingleton("defaultDocket", docket);
-            docketList.add(docket);
-            return docketList;
-        }
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(name = "taotao.cloud.swagger.enabled", matchIfMissing = true)
+	public List<Docket> createRestApi(Swagger2Properties swagger2Properties) {
+		ConfigurableBeanFactory configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
+		List<Docket> docketList = new LinkedList<>();
 
-        // 分组创建
-        for (String groupName : swagger2Properties.getDocket().keySet()) {
-            Swagger2Properties.DocketInfo docketInfo = swagger2Properties.getDocket().get(groupName);
+		// 没有分组
+		if (swagger2Properties.getDocket().size() == 0) {
+			final Docket docket = createDocket(swagger2Properties);
+			configurableBeanFactory.registerSingleton("defaultDocket", docket);
+			docketList.add(docket);
+			return docketList;
+		}
 
-            ApiInfo apiInfo = new ApiInfoBuilder()
-                    .title(docketInfo.getTitle().isEmpty() ? swagger2Properties.getTitle() : docketInfo.getTitle())
-                    .description(docketInfo.getDescription().isEmpty() ? swagger2Properties.getDescription() : docketInfo.getDescription())
-                    .version(docketInfo.getVersion().isEmpty() ? swagger2Properties.getVersion() : docketInfo.getVersion())
-                    .license(docketInfo.getLicense().isEmpty() ? swagger2Properties.getLicense() : docketInfo.getLicense())
-                    .licenseUrl(docketInfo.getLicenseUrl().isEmpty() ? swagger2Properties.getLicenseUrl() : docketInfo.getLicenseUrl())
-                    .contact(
-                            new Contact(
-                                    docketInfo.getContact().getName().isEmpty() ? swagger2Properties.getContact().getName() : docketInfo.getContact().getName(),
-                                    docketInfo.getContact().getUrl().isEmpty() ? swagger2Properties.getContact().getUrl() : docketInfo.getContact().getUrl(),
-                                    docketInfo.getContact().getEmail().isEmpty() ? swagger2Properties.getContact().getEmail() : docketInfo.getContact().getEmail()
-                            )
-                    )
-                    .termsOfServiceUrl(docketInfo.getTermsOfServiceUrl().isEmpty() ? swagger2Properties.getTermsOfServiceUrl() : docketInfo.getTermsOfServiceUrl())
-                    .build();
+		// 分组创建
+		for (String groupName : swagger2Properties.getDocket().keySet()) {
+			Swagger2Properties.DocketInfo docketInfo = swagger2Properties.getDocket()
+				.get(groupName);
 
-            // base-path处理
-            // 当没有配置任何path的时候，解析/**
-            if (docketInfo.getBasePath().isEmpty()) {
-                docketInfo.getBasePath().add("/**");
-            }
+			ApiInfo apiInfo = new ApiInfoBuilder()
+				.title(docketInfo.getTitle().isEmpty() ? swagger2Properties.getTitle()
+					: docketInfo.getTitle())
+				.description(
+					docketInfo.getDescription().isEmpty() ? swagger2Properties.getDescription()
+						: docketInfo.getDescription())
+				.version(docketInfo.getVersion().isEmpty() ? swagger2Properties.getVersion()
+					: docketInfo.getVersion())
+				.license(docketInfo.getLicense().isEmpty() ? swagger2Properties.getLicense()
+					: docketInfo.getLicense())
+				.licenseUrl(
+					docketInfo.getLicenseUrl().isEmpty() ? swagger2Properties.getLicenseUrl()
+						: docketInfo.getLicenseUrl())
+				.contact(
+					new Contact(
+						docketInfo.getContact().getName().isEmpty() ? swagger2Properties
+							.getContact().getName() : docketInfo.getContact().getName(),
+						docketInfo.getContact().getUrl().isEmpty() ? swagger2Properties.getContact()
+							.getUrl() : docketInfo.getContact().getUrl(),
+						docketInfo.getContact().getEmail().isEmpty() ? swagger2Properties
+							.getContact().getEmail() : docketInfo.getContact().getEmail()
+					)
+				)
+				.termsOfServiceUrl(docketInfo.getTermsOfServiceUrl().isEmpty() ? swagger2Properties
+					.getTermsOfServiceUrl() : docketInfo.getTermsOfServiceUrl())
+				.build();
 
-            List<Predicate<String>> basePath = new ArrayList<>(docketInfo.getBasePath().size());
-            for (String path : docketInfo.getBasePath()) {
-                basePath.add(PathSelectors.ant(path));
-            }
+			// base-path处理
+			// 当没有配置任何path的时候，解析/**
+			if (docketInfo.getBasePath().isEmpty()) {
+				docketInfo.getBasePath().add("/**");
+			}
 
-            // exclude-path处理
-            List<Predicate<String>> excludePath = new ArrayList<>(docketInfo.getExcludePath().size());
-            for (String path : docketInfo.getExcludePath()) {
-                excludePath.add(PathSelectors.ant(path));
-            }
+			List<Predicate<String>> basePath = new ArrayList<>(docketInfo.getBasePath().size());
+			for (String path : docketInfo.getBasePath()) {
+				basePath.add(PathSelectors.ant(path));
+			}
 
-            Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                    .host(swagger2Properties.getHost())
-                    .apiInfo(apiInfo)
-                    .globalOperationParameters(assemblyGlobalOperationParameters(swagger2Properties.getGlobalOperationParameters(),
-                            docketInfo.getGlobalOperationParameters()))
-                    .groupName(groupName)
-                    .select()
-                    .apis(RequestHandlerSelectors.basePackage(docketInfo.getBasePackage()))
-                    .paths(
-                            Predicates.and(
-                                    Predicates.not(Predicates.or(excludePath)),
-                                    Predicates.or(basePath)
-                            )
-                    )
-                    .build()
-                    .securitySchemes(securitySchemes())
-                    .securityContexts(securityContexts());
+			// exclude-path处理
+			List<Predicate<String>> excludePath = new ArrayList<>(
+				docketInfo.getExcludePath().size());
+			for (String path : docketInfo.getExcludePath()) {
+				excludePath.add(PathSelectors.ant(path));
+			}
 
-            configurableBeanFactory.registerSingleton(groupName, docket);
-            docketList.add(docket);
-        }
-        return docketList;
-    }
+			Docket docket = new Docket(DocumentationType.SWAGGER_2)
+				.host(swagger2Properties.getHost())
+				.apiInfo(apiInfo)
+				.globalOperationParameters(assemblyGlobalOperationParameters(
+					swagger2Properties.getGlobalOperationParameters(),
+					docketInfo.getGlobalOperationParameters()))
+				.groupName(groupName)
+				.select()
+				.apis(RequestHandlerSelectors.basePackage(docketInfo.getBasePackage()))
+				.paths(
+					Predicates.and(
+						Predicates.not(Predicates.or(excludePath)),
+						Predicates.or(basePath)
+					)
+				)
+				.build()
+				.securitySchemes(securitySchemes())
+				.securityContexts(securityContexts());
 
-    /**
-     * 创建 Docket对象
-     *
-     * @param swagger2Properties swagger配置
-     * @return Docket
-     */
-    private Docket createDocket(final Swagger2Properties swagger2Properties) {
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title(swagger2Properties.getTitle())
-                .description(swagger2Properties.getDescription())
-                .version(swagger2Properties.getVersion())
-                .license(swagger2Properties.getLicense())
-                .licenseUrl(swagger2Properties.getLicenseUrl())
-                .contact(new Contact(swagger2Properties.getContact().getName(),
-                        swagger2Properties.getContact().getUrl(),
-                        swagger2Properties.getContact().getEmail()))
-                .termsOfServiceUrl(swagger2Properties.getTermsOfServiceUrl())
-                .build();
+			configurableBeanFactory.registerSingleton(groupName, docket);
+			docketList.add(docket);
+		}
+		return docketList;
+	}
 
-        // base-path处理
-        // 当没有配置任何path的时候，解析/**
-        if (swagger2Properties.getBasePath().isEmpty()) {
-            swagger2Properties.getBasePath().add("/**");
-        }
-        List<Predicate<String>> basePath = new ArrayList<>();
-        for (String path : swagger2Properties.getBasePath()) {
-            basePath.add(PathSelectors.ant(path));
-        }
+	/**
+	 * 创建 Docket对象
+	 *
+	 * @param swagger2Properties swagger配置
+	 * @return Docket
+	 */
+	private Docket createDocket(final Swagger2Properties swagger2Properties) {
+		ApiInfo apiInfo = new ApiInfoBuilder()
+			.title(swagger2Properties.getTitle())
+			.description(swagger2Properties.getDescription())
+			.version(swagger2Properties.getVersion())
+			.license(swagger2Properties.getLicense())
+			.licenseUrl(swagger2Properties.getLicenseUrl())
+			.contact(new Contact(swagger2Properties.getContact().getName(),
+				swagger2Properties.getContact().getUrl(),
+				swagger2Properties.getContact().getEmail()))
+			.termsOfServiceUrl(swagger2Properties.getTermsOfServiceUrl())
+			.build();
 
-        // exclude-path处理
-        List<Predicate<String>> excludePath = new ArrayList<>();
-        for (String path : swagger2Properties.getExcludePath()) {
-            excludePath.add(PathSelectors.ant(path));
-        }
+		// base-path处理
+		// 当没有配置任何path的时候，解析/**
+		if (swagger2Properties.getBasePath().isEmpty()) {
+			swagger2Properties.getBasePath().add("/**");
+		}
+		List<Predicate<String>> basePath = new ArrayList<>();
+		for (String path : swagger2Properties.getBasePath()) {
+			basePath.add(PathSelectors.ant(path));
+		}
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .host(swagger2Properties.getHost())
-                .apiInfo(apiInfo)
-                .globalOperationParameters(buildGlobalOperationParametersFromSwaggerProperties(
-                        swagger2Properties.getGlobalOperationParameters()))
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(swagger2Properties.getBasePackage()))
-                .paths(
-                        Predicates.and(
-                                Predicates.not(Predicates.or(excludePath)),
-                                Predicates.or(basePath)
-                        )
-                )
-                .build()
-                .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts());
-    }
+		// exclude-path处理
+		List<Predicate<String>> excludePath = new ArrayList<>();
+		for (String path : swagger2Properties.getExcludePath()) {
+			excludePath.add(PathSelectors.ant(path));
+		}
 
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+		return new Docket(DocumentationType.SWAGGER_2)
+			.host(swagger2Properties.getHost())
+			.apiInfo(apiInfo)
+			.globalOperationParameters(buildGlobalOperationParametersFromSwaggerProperties(
+				swagger2Properties.getGlobalOperationParameters()))
+			.select()
+			.apis(RequestHandlerSelectors.basePackage(swagger2Properties.getBasePackage()))
+			.paths(
+				Predicates.and(
+					Predicates.not(Predicates.or(excludePath)),
+					Predicates.or(basePath)
+				)
+			)
+			.build()
+			.securitySchemes(securitySchemes())
+			.securityContexts(securityContexts());
+	}
 
-    private List<SecurityContext> securityContexts() {
-        List<SecurityContext> contexts = new ArrayList<>(1);
-        SecurityContext securityContext = SecurityContext.builder()
-                .securityReferences(defaultAuth())
-                //.forPaths(PathSelectors.regex("^(?!auth).*$"))
-                .build();
-        contexts.add(securityContext);
-        return contexts;
-    }
+	@Override
+	public void setBeanFactory(BeanFactory beanFactory) {
+		this.beanFactory = beanFactory;
+	}
 
-    private List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        List<SecurityReference> references = new ArrayList<>(1);
-        references.add(new SecurityReference(AUTH_KEY, authorizationScopes));
-        return references;
-    }
+	private List<SecurityContext> securityContexts() {
+		List<SecurityContext> contexts = new ArrayList<>(1);
+		SecurityContext securityContext = SecurityContext.builder()
+			.securityReferences(defaultAuth())
+			//.forPaths(PathSelectors.regex("^(?!auth).*$"))
+			.build();
+		contexts.add(securityContext);
+		return contexts;
+	}
 
-    private List<ApiKey> securitySchemes() {
-        List<ApiKey> apiKeys = new ArrayList<>(1);
-        ApiKey apiKey = new ApiKey(AUTH_KEY, AUTH_KEY, "header");
-        apiKeys.add(apiKey);
-        return apiKeys;
-    }
+	private List<SecurityReference> defaultAuth() {
+		AuthorizationScope authorizationScope = new AuthorizationScope("global",
+			"accessEverything");
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		authorizationScopes[0] = authorizationScope;
+		List<SecurityReference> references = new ArrayList<>(1);
+		references.add(new SecurityReference(AUTH_KEY, authorizationScopes));
+		return references;
+	}
 
-    private List<Parameter> buildGlobalOperationParametersFromSwaggerProperties(
-            List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters) {
-        List<Parameter> parameters = Lists.newArrayList();
+	private List<ApiKey> securitySchemes() {
+		List<ApiKey> apiKeys = new ArrayList<>(1);
+		ApiKey apiKey = new ApiKey(AUTH_KEY, AUTH_KEY, "header");
+		apiKeys.add(apiKey);
+		return apiKeys;
+	}
 
-        if (Objects.isNull(globalOperationParameters)) {
-            return parameters;
-        }
-        for (Swagger2Properties.GlobalOperationParameter globalOperationParameter : globalOperationParameters) {
-            parameters.add(new ParameterBuilder()
-                    .name(globalOperationParameter.getName())
-                    .description(globalOperationParameter.getDescription())
-                    .modelRef(new ModelRef(globalOperationParameter.getModelRef()))
-                    .parameterType(globalOperationParameter.getParameterType())
-                    .required(Boolean.parseBoolean(globalOperationParameter.getRequired()))
-                    .build());
-        }
-        return parameters;
-    }
+	private List<Parameter> buildGlobalOperationParametersFromSwaggerProperties(
+		List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters) {
+		List<Parameter> parameters = Lists.newArrayList();
 
-    /**
-     * 按照name覆盖局部参数
-     *
-     * @param globalOperationParameters globalOperationParameters
-     * @param docketOperationParameters docketOperationParameters
-     * @return java.util.List<springfox.documentation.service.Parameter>
-     * @author dengtao
-     * @since 2020/4/30 10:10
-     */
-    private List<Parameter> assemblyGlobalOperationParameters(
-            List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters,
-            List<Swagger2Properties.GlobalOperationParameter> docketOperationParameters) {
+		if (Objects.isNull(globalOperationParameters)) {
+			return parameters;
+		}
+		for (Swagger2Properties.GlobalOperationParameter globalOperationParameter : globalOperationParameters) {
+			parameters.add(new ParameterBuilder()
+				.name(globalOperationParameter.getName())
+				.description(globalOperationParameter.getDescription())
+				.modelRef(new ModelRef(globalOperationParameter.getModelRef()))
+				.parameterType(globalOperationParameter.getParameterType())
+				.required(Boolean.parseBoolean(globalOperationParameter.getRequired()))
+				.build());
+		}
+		return parameters;
+	}
 
-        if (Objects.isNull(docketOperationParameters) || docketOperationParameters.isEmpty()) {
-            return buildGlobalOperationParametersFromSwaggerProperties(globalOperationParameters);
-        }
+	/**
+	 * 按照name覆盖局部参数
+	 *
+	 * @param globalOperationParameters globalOperationParameters
+	 * @param docketOperationParameters docketOperationParameters
+	 * @return java.util.List<springfox.documentation.service.Parameter>
+	 * @author dengtao
+	 * @since 2020/4/30 10:10
+	 */
+	private List<Parameter> assemblyGlobalOperationParameters(
+		List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters,
+		List<Swagger2Properties.GlobalOperationParameter> docketOperationParameters) {
 
-        Set<String> docketNames = docketOperationParameters.stream()
-                .map(Swagger2Properties.GlobalOperationParameter::getName)
-                .collect(Collectors.toSet());
+		if (Objects.isNull(docketOperationParameters) || docketOperationParameters.isEmpty()) {
+			return buildGlobalOperationParametersFromSwaggerProperties(globalOperationParameters);
+		}
 
-        List<Swagger2Properties.GlobalOperationParameter> resultOperationParameters = Lists.newArrayList();
+		Set<String> docketNames = docketOperationParameters.stream()
+			.map(Swagger2Properties.GlobalOperationParameter::getName)
+			.collect(Collectors.toSet());
 
-        if (Objects.nonNull(globalOperationParameters)) {
-            for (Swagger2Properties.GlobalOperationParameter parameter : globalOperationParameters) {
-                if (!docketNames.contains(parameter.getName())) {
-                    resultOperationParameters.add(parameter);
-                }
-            }
-        }
+		List<Swagger2Properties.GlobalOperationParameter> resultOperationParameters = Lists
+			.newArrayList();
 
-        resultOperationParameters.addAll(docketOperationParameters);
-        return buildGlobalOperationParametersFromSwaggerProperties(resultOperationParameters);
-    }
+		if (Objects.nonNull(globalOperationParameters)) {
+			for (Swagger2Properties.GlobalOperationParameter parameter : globalOperationParameters) {
+				if (!docketNames.contains(parameter.getName())) {
+					resultOperationParameters.add(parameter);
+				}
+			}
+		}
+
+		resultOperationParameters.addAll(docketOperationParameters);
+		return buildGlobalOperationParametersFromSwaggerProperties(resultOperationParameters);
+	}
 }

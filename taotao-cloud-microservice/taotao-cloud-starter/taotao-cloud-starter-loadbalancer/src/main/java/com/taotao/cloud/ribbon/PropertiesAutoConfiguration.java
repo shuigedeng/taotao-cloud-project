@@ -15,17 +15,18 @@
  */
 package com.taotao.cloud.ribbon;
 
-import com.taotao.cloud.ribbon.properties.RestTemplateProperties;
 import com.taotao.cloud.ribbon.properties.LbIsolationProperties;
+import com.taotao.cloud.ribbon.properties.RestTemplateProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * <br>
+ * PropertiesAutoConfiguration
  *
  * @author dengtao
- * @since 2020/7/29 14:18
  * @version 1.0.0
+ * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({RestTemplateProperties.class, LbIsolationProperties.class})
 public class PropertiesAutoConfiguration {
+
 }

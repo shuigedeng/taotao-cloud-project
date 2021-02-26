@@ -1,24 +1,40 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.redis.lock;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.core.lock.ZLock;
+import java.util.concurrent.TimeUnit;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * redisson分布式锁实现，基本锁功能的抽象实现
- * 本接口能满足绝大部分的需求，高级的锁功能，请自行扩展或直接使用原生api
- * https://gitbook.cn/gitchat/activity/5f02746f34b17609e14c7d5a
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @ConditionalOnClass(RedissonClient.class)
-@ConditionalOnProperty(prefix = "zlt.lock", name = "lockerType", havingValue = "REDIS", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "taotao.cloud.lock", name = "lockerType", havingValue = "REDIS", matchIfMissing = true)
 public class RedissonDistributedLock implements DistributedLock {
 
 	@Autowired
@@ -43,7 +59,8 @@ public class RedissonDistributedLock implements DistributedLock {
 	}
 
 	@Override
-	public ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair) throws InterruptedException {
+	public ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair)
+		throws InterruptedException {
 		ZLock zLock = getLock(key, isFair);
 		RLock lock = (RLock) zLock.getLock();
 		if (lock.tryLock(waitTime, leaseTime, unit)) {

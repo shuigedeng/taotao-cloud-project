@@ -15,23 +15,22 @@
  */
 package com.taotao.cloud.log.annotation;
 
-
 import java.lang.annotation.*;
 
 /**
  * 系统操作记录
  *
  * @author dengtao
- * @since 2020/6/3 13:32
  * @version 1.0.0
+ * @since 2020/6/3 13:32
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
 public @interface RequestOperateLog {
 
-    /**
-     * 功能描述
-     */
-    String description() default "";
+	/**
+	 * 功能描述
+	 */
+	String description() default "";
 }

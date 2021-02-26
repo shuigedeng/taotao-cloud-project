@@ -19,25 +19,24 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import feign.RequestInterceptor;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Objects;
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
-
 /**
  * feign拦截器，只包含http相关数据
  *
  * @author dengtao
- * @since 2020/4/5 13:33
  * @version 1.0.0
+ * @since 2020/4/5 13:33
  */
 public class FeignHttpInterceptorConfig {
 
@@ -59,7 +58,8 @@ public class FeignHttpInterceptorConfig {
 		return template -> {
 			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 			if (requestAttributes != null) {
-				ServletRequestAttributes attributes = (ServletRequestAttributes) Objects.requireNonNull(requestAttributes);
+				ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
+					.requireNonNull(requestAttributes);
 				RequestContextHolder.setRequestAttributes(attributes, true);
 				HttpServletRequest request = attributes.getRequest();
 				Enumeration<String> headerNames = request.getHeaderNames();
@@ -93,7 +93,8 @@ public class FeignHttpInterceptorConfig {
 					token = request.getParameter(CommonConstant.ACCESS_TOKEN);
 				}
 				if (StrUtil.isNotEmpty(token)) {
-					template.header(CommonConstant.TOKEN_HEADER, CommonConstant.BEARER_TYPE + " " + token);
+					template.header(CommonConstant.TOKEN_HEADER,
+						CommonConstant.BEARER_TYPE + " " + token);
 				}
 			}
 		};
@@ -109,7 +110,8 @@ public class FeignHttpInterceptorConfig {
 		while (headers.hasMoreElements()) {
 			String value = headers.nextElement();
 			if (value.startsWith(CommonConstant.BEARER_TYPE)) {
-				String authHeaderValue = value.substring(CommonConstant.BEARER_TYPE.length()).trim();
+				String authHeaderValue = value.substring(CommonConstant.BEARER_TYPE.length())
+					.trim();
 				int commaIndex = authHeaderValue.indexOf(',');
 				if (commaIndex > 0) {
 					authHeaderValue = authHeaderValue.substring(0, commaIndex);

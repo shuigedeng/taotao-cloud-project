@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.file.util;
 
 import com.taotao.cloud.common.utils.LogUtil;
@@ -20,8 +35,8 @@ import java.io.UnsupportedEncodingException;
  * ftp客户端工具类
  *
  * @author dengtao
- * @since 2020/11/12 16:36
  * @version 1.0.0
+ * @since 2020/11/12 16:36
  */
 public class FtpClientUtil {
 
@@ -37,7 +52,8 @@ public class FtpClientUtil {
 	private String ftpHome = null;
 	private String controlEncoding = null;
 
-	public FtpClientUtil(String host, String port, String username, String passwd, String remoteDir) {
+	public FtpClientUtil(String host, String port, String username, String passwd,
+		String remoteDir) {
 		this.host = host;
 		this.port = port;
 		this.username = username;
@@ -422,7 +438,8 @@ public class FtpClientUtil {
 	}
 
 	private String ConvertEncoding(String str) {
-		if (str == null || "".equals(str.trim()) || controlEncoding == null || "".equals(controlEncoding.trim())) {
+		if (str == null || "".equals(str.trim()) || controlEncoding == null || ""
+			.equals(controlEncoding.trim())) {
 			return str;
 		}
 		try {

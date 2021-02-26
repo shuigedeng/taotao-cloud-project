@@ -18,27 +18,28 @@ package com.taotao.cloud.seata.filter;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import io.seata.core.context.RootContext;
-import org.springframework.web.filter.OncePerRequestFilter;
-
+import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * @author dengtao
- * @since 2020/10/22 17:01
  * @version 1.0.0
+ * @since 2020/10/22 17:01
  */
 public class SeataXidFilter extends OncePerRequestFilter {
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String restXid = request.getHeader("xid");
-        if (StrUtil.isNotBlank(restXid)) {
-            RootContext.bind(restXid);
-            LogUtil.info("bind[" + restXid + "] to RootContext");
-        }
-        filterChain.doFilter(request, response);
-    }
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+		FilterChain filterChain) throws ServletException, IOException {
+		String restXid = request.getHeader("xid");
+		if (StrUtil.isNotBlank(restXid)) {
+			RootContext.bind(restXid);
+			LogUtil.info("bind[" + restXid + "] to RootContext");
+		}
+		filterChain.doFilter(request, response);
+	}
 }

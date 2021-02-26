@@ -4,40 +4,41 @@ package com.taotao.cloud.file.constant;
  * 分布式文件存储常量
  *
  * @author dengtao
- * @since 2020/10/26 09:36
  * @version 1.0.0
+ * @since 2020/10/26 09:36
  */
-public interface FileConstant {
+public class FileConstant {
+
 	/**
 	 * 阿里云存储
 	 */
-	String DFS_ALIYUN = "aliyun";
+	public static final String DFS_ALIYUN = "aliyun";
 	/**
 	 * 腾讯云存储
 	 */
-	String DFS_QCLOUD = "qcloud";
+	public static final String DFS_QCLOUD = "qcloud";
 	/**
 	 * 七牛云存储
 	 */
-	String DFS_QINIU = "qiniu";
+	public static final String DFS_QINIU = "qiniu";
 	/**
 	 * fastdfs存储
 	 */
-	String DFS_FASTDFS = "fastdfs";
+	public static final String DFS_FASTDFS = "fastdfs";
 	/**
 	 * nginx存储
 	 */
-	String DFS_NGINX = "nginx";
+	public static final String DFS_NGINX = "nginx";
 	/**
 	 * 本地存储
 	 */
-	String DFS_LOCAL = "local";
+	public static final String DFS_LOCAL = "local";
 	/**
 	 * ftp存储
 	 */
-	String DFS_FTP = "ftp";
+	public static final String DFS_FTP = "ftp";
 	/**
 	 * 又拍云存储
 	 */
-	String DFS_UPYUN = "upyun";
+	public static final String DFS_UPYUN = "upyun";
 }

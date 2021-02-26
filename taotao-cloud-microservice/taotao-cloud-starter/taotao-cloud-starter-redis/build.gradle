@@ -7,12 +7,14 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    compile("org.springframework.boot:spring-boot-starter-data-redis") {
+    implementation("org.springframework.boot:spring-boot-starter-data-redis") {
         exclude group: 'io.lettuce', module: 'lettuce-core'
     }
-    compile "io.lettuce:lettuce-core"
+    implementation "io.lettuce:lettuce-core"
 
-    compile 'org.redisson:redisson'
+    implementation 'org.redisson:redisson'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
 
     implementation "commons-io:commons-io"
     implementation "org.apache.commons:commons-pool2"

@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2020 taotao cloud Authors. All Rights Reserved.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.ribbon.fegin;
 
 import com.alibaba.cloud.sentinel.feign.SentinelContractHolder;
@@ -37,8 +36,9 @@ import java.util.Map;
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelFeign}
  *
- * @author lengleng
- * @since 2020/6/9
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/6/15 11:31
  */
 public final class SentinelFeign {
 
@@ -59,7 +59,8 @@ public final class SentinelFeign {
 		private FeignContext feignContext;
 
 		@Override
-		public Feign.Builder invocationHandlerFactory(InvocationHandlerFactory invocationHandlerFactory) {
+		public Feign.Builder invocationHandlerFactory(
+			InvocationHandlerFactory invocationHandlerFactory) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -73,7 +74,8 @@ public final class SentinelFeign {
 		public Feign build() {
 			super.invocationHandlerFactory(new InvocationHandlerFactory() {
 				@Override
-				public InvocationHandler create(Target target, Map<Method, MethodHandler> dispatch) {
+				public InvocationHandler create(Target target,
+					Map<Method, MethodHandler> dispatch) {
 					// using reflect get fallback and fallbackFactory properties from
 					// FeignClientFactoryBean because FeignClientFactoryBean is a package
 					// level class, we can not use it in our package
@@ -81,7 +83,8 @@ public final class SentinelFeign {
 						.getBean("&" + target.type().getName());
 
 					Class fallback = (Class) getFieldValue(feignClientFactoryBean, "fallback");
-					Class fallbackFactory = (Class) getFieldValue(feignClientFactoryBean, "fallbackFactory");
+					Class fallbackFactory = (Class) getFieldValue(feignClientFactoryBean,
+						"fallbackFactory");
 					String beanName = (String) getFieldValue(feignClientFactoryBean, "contextId");
 					if (!StringUtils.hasText(beanName)) {
 						beanName = (String) getFieldValue(feignClientFactoryBean, "name");
@@ -91,22 +94,28 @@ public final class SentinelFeign {
 					FallbackFactory fallbackFactoryInstance;
 					// check fallback and fallbackFactory properties
 					if (void.class != fallback) {
-						fallbackInstance = getFromContext(beanName, "fallback", fallback, target.type());
-						return new SentinelInvocationHandler(target, dispatch, new FallbackFactory.Default(fallbackInstance));
+						fallbackInstance = getFromContext(beanName, "fallback", fallback,
+							target.type());
+						return new SentinelInvocationHandler(target, dispatch,
+							new FallbackFactory.Default(fallbackInstance));
 					}
 					if (void.class != fallbackFactory) {
-						fallbackFactoryInstance = (FallbackFactory) getFromContext(beanName, "fallbackFactory",
+						fallbackFactoryInstance = (FallbackFactory) getFromContext(beanName,
+							"fallbackFactory",
 							fallbackFactory, FallbackFactory.class);
-						return new SentinelInvocationHandler(target, dispatch, fallbackFactoryInstance);
+						return new SentinelInvocationHandler(target, dispatch,
+							fallbackFactoryInstance);
 					}
 					return new SentinelInvocationHandler(target, dispatch);
 				}
 
-				private Object getFromContext(String name, String type, Class fallbackType, Class targetType) {
+				private Object getFromContext(String name, String type, Class fallbackType,
+					Class targetType) {
 					Object fallbackInstance = feignContext.getInstance(name, fallbackType);
 					if (fallbackInstance == null) {
 						throw new IllegalStateException(String.format(
-							"No %s instance of type %s found for feign client %s", type, fallbackType, name));
+							"No %s instance of type %s found for feign client %s", type,
+							fallbackType, name));
 					}
 
 					if (!targetType.isAssignableFrom(fallbackType)) {
@@ -134,7 +143,8 @@ public final class SentinelFeign {
 		}
 
 		@Override
-		public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
 			this.applicationContext = applicationContext;
 			feignContext = this.applicationContext.getBean(FeignContext.class);
 		}

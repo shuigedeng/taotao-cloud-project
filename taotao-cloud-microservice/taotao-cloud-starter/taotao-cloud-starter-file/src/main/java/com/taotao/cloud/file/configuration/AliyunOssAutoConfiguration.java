@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.file.configuration;
 
 import com.aliyun.oss.ClientException;
@@ -18,15 +33,6 @@ import com.taotao.cloud.file.constant.FileConstant;
 import com.taotao.cloud.file.exception.FileUploadException;
 import com.taotao.cloud.file.pojo.FileInfo;
 import com.taotao.cloud.file.propeties.AliyunOssProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -36,13 +42,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 阿里云oss自动配置
  *
  * @author dengtao
- * @since 2020/10/26 10:49
  * @version 1.0.0
+ * @since 2020/10/26 10:49
  */
 @ConditionalOnProperty(prefix = "taotao.cloud.file", name = "type", havingValue = FileConstant.DFS_ALIYUN)
 public class AliyunOssAutoConfiguration {
@@ -64,11 +75,12 @@ public class AliyunOssAutoConfiguration {
 	}
 
 	@Bean
-	public AliossFileUpload fileUpload(OSS oss){
+	public AliossFileUpload fileUpload(OSS oss) {
 		return new AliossFileUpload(oss);
 	}
 
 	public class AliossFileUpload extends AbstractFileUpload {
+
 		/**
 		 * 每个part大小 最小为1M
 		 */
@@ -89,8 +101,10 @@ public class AliyunOssAutoConfiguration {
 			}
 
 			try {
-				oss.setBucketAcl(new SetBucketAclRequest(properties.getBucketName()).withCannedACL(CannedAccessControlList.PublicRead));
-				oss.putObject(properties.getBucketName(), fileInfo.getName(), new ByteArrayInputStream(file.getBytes()));
+				oss.setBucketAcl(new SetBucketAclRequest(properties.getBucketName())
+					.withCannedACL(CannedAccessControlList.PublicRead));
+				oss.putObject(properties.getBucketName(), fileInfo.getName(),
+					new ByteArrayInputStream(file.getBytes()));
 				fileInfo.setUrl(properties.getUrlPrefix() + "/" + fileInfo.getName());
 				return fileInfo;
 			} catch (Exception e) {
@@ -130,7 +144,7 @@ public class AliyunOssAutoConfiguration {
 
 
 		public FileInfo uploadBigFile(FileInfo fileInfo,
-									  MultipartFile file) {
+			MultipartFile file) {
 			int part = calPartCount(file);
 			String uploadId = initMultipartFileUpload(fileInfo);
 
@@ -167,7 +181,8 @@ public class AliyunOssAutoConfiguration {
 			}
 
 			CompleteMultipartUploadRequest completeMultipartUploadRequest =
-				new CompleteMultipartUploadRequest(properties.getBucketName(), fileInfo.getName(), uploadId, eTags);
+				new CompleteMultipartUploadRequest(properties.getBucketName(), fileInfo.getName(),
+					uploadId, eTags);
 			completeMultipartUploadRequest.setObjectACL(CannedAccessControlList.PublicRead);
 
 			try {
@@ -184,6 +199,7 @@ public class AliyunOssAutoConfiguration {
 		}
 
 		public class UploadPartRunnable implements Runnable {
+
 			private final CountDownLatch latch;
 			private final OSS ossClient;
 			private final String bucketName;
@@ -196,13 +212,13 @@ public class AliyunOssAutoConfiguration {
 			private final List<PartETag> eTags;
 
 			public UploadPartRunnable(CountDownLatch latch,
-									  FileInfo fileInfo,
-									  MultipartFile file,
-									  String uploadId,
-									  int partNumber,
-									  long start,
-									  long partSize,
-									  List<PartETag> eTags) {
+				FileInfo fileInfo,
+				MultipartFile file,
+				String uploadId,
+				int partNumber,
+				long start,
+				long partSize,
+				List<PartETag> eTags) {
 				this.latch = latch;
 				this.ossClient = oss;
 				this.bucketName = properties.getBucketName();
@@ -250,7 +266,8 @@ public class AliyunOssAutoConfiguration {
 		public String initMultipartFileUpload(FileInfo fileInfo) {
 			InitiateMultipartUploadRequest multipartUploadRequest = new InitiateMultipartUploadRequest(
 				properties.getBucketName(), fileInfo.getName());
-			InitiateMultipartUploadResult initiateMultipartUploadResult = oss.initiateMultipartUpload(multipartUploadRequest);
+			InitiateMultipartUploadResult initiateMultipartUploadResult = oss
+				.initiateMultipartUpload(multipartUploadRequest);
 			return initiateMultipartUploadResult.getUploadId();
 		}
 

@@ -17,25 +17,24 @@ package com.taotao.cloud.elasticsearch.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 逻辑删除条件对象
  *
  * @author dengtao
- * @since 2020/5/3 07:49
  * @version 1.0.0
-*/
+ * @since 2020/5/3 07:49
+ */
 @Data
 @AllArgsConstructor
 public class LogicDelDto {
-    /**
-     * 逻辑删除字段名
-     */
-    private String logicDelField;
-    /**
-     * 逻辑删除字段未删除的值
-     */
-    private String logicNotDelValue;
+
+	/**
+	 * 逻辑删除字段名
+	 */
+	private String logicDelField;
+	/**
+	 * 逻辑删除字段未删除的值
+	 */
+	private String logicNotDelValue;
 }

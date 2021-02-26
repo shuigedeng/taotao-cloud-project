@@ -23,23 +23,23 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * OAuth2Exception
  *
  * @author dengtao
- * @since 2020/6/2 15:34
  * @version 1.0.0
+ * @since 2020/6/2 15:34
  */
 @JsonSerialize(using = OauthExceptionSerializer.class)
 public class InvalidException extends OAuth2Exception {
 
-    public InvalidException(String msg) {
-        super(msg);
-    }
+	public InvalidException(String msg) {
+		super(msg);
+	}
 
-    @Override
-    public String getOAuth2ErrorCode() {
-        return "invalid_exception";
-    }
+	@Override
+	public String getOAuth2ErrorCode() {
+		return "invalid_exception";
+	}
 
-    @Override
-    public int getHttpErrorCode() {
-        return 422;
-    }
+	@Override
+	public int getHttpErrorCode() {
+		return 422;
+	}
 }

@@ -23,16 +23,16 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * RibbonProperties 配置
  *
  * @author dengtao
- * @since 2017/11/17
  * @version 1.0.0
+ * @since 2017/11/17
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.ribbon.isolation")
 public class LbIsolationProperties {
 
-    /**
-     * 是否开启ribbon自定义隔离规则
-     */
-    private boolean enabled = true;
+	/**
+	 * 是否开启ribbon自定义隔离规则
+	 */
+	private boolean enabled = true;
 }

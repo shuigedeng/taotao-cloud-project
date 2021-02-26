@@ -15,10 +15,12 @@
  */
 package com.taotao.cloud.shardingjdbc;
 
+import java.beans.ConstructorProperties;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.common.SpringBootPropertiesConfigurationProperties;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.encrypt.SpringBootEncryptRuleConfigurationProperties;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBootMasterSlaveRuleConfigurationProperties;
+import org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,33 +29,47 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.beans.ConstructorProperties;
-
 /**
  * ShardingJdbcConfiguration
  *
  * @author dengtao
- * @since 2020/6/22 17:30
  * @version 1.0.0
+ * @since 2020/6/22 17:30
  */
 @Configuration
-@EnableConfigurationProperties({ShardingJdbcProperties.class, SpringBootShardingRuleConfigurationProperties.class, SpringBootMasterSlaveRuleConfigurationProperties.class, SpringBootEncryptRuleConfigurationProperties.class, SpringBootPropertiesConfigurationProperties.class})
+@EnableConfigurationProperties({ShardingJdbcProperties.class,
+	SpringBootShardingRuleConfigurationProperties.class,
+	SpringBootMasterSlaveRuleConfigurationProperties.class,
+	SpringBootEncryptRuleConfigurationProperties.class,
+	SpringBootPropertiesConfigurationProperties.class})
 //@ConditionalOnProperty(name = "taotao.cloud.shardingsphere.enabled", havingValue = "true")
-public class ShardingJdbcConfiguration extends SpringBootConfiguration implements ApplicationContextAware {
+public class ShardingJdbcConfiguration extends SpringBootConfiguration implements
+	ApplicationContextAware {
 
-    @Override
-    public void setApplicationContext(ApplicationContext context) throws BeansException {
-        super.setEnvironment(context.getEnvironment());
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		super.setEnvironment(context.getEnvironment());
+	}
 
-    @ConstructorProperties({"shardingProperties", "masterSlaveProperties", "encryptProperties", "propMapProperties"})
-    public ShardingJdbcConfiguration(SpringBootShardingRuleConfigurationProperties shardingProperties, SpringBootMasterSlaveRuleConfigurationProperties masterSlaveProperties, SpringBootEncryptRuleConfigurationProperties encryptProperties, SpringBootPropertiesConfigurationProperties propMapProperties) {
-        super(shardingProperties, masterSlaveProperties, encryptProperties, propMapProperties);
-    }
+	@ConstructorProperties({
+		"shardingRule",
+		"masterSlaveRule",
+		"encryptRule",
+		"shadowRule",
+		"props"
+	})
+	public ShardingJdbcConfiguration(
+		SpringBootShardingRuleConfigurationProperties shardingRule,
+		SpringBootMasterSlaveRuleConfigurationProperties masterSlaveRule,
+		SpringBootEncryptRuleConfigurationProperties encryptRule,
+		SpringBootShadowRuleConfigurationProperties shadowRule,
+		SpringBootPropertiesConfigurationProperties props) {
+		super(shardingRule, masterSlaveRule, encryptRule, shadowRule, props);
+	}
 
-    @Bean
-    public DataSourceShardingAlgorithm dataSourceShardingAlgorithm() {
-        return new DataSourceShardingAlgorithm();
-    }
+	@Bean
+	public DataSourceShardingAlgorithm dataSourceShardingAlgorithm() {
+		return new DataSourceShardingAlgorithm();
+	}
 
 }

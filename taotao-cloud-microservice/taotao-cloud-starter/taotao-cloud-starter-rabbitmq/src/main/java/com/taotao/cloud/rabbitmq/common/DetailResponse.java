@@ -23,17 +23,17 @@ import lombok.NoArgsConstructor;
  * DetailResponse
  *
  * @author dengtao
- * @since 2020/5/28 17:28
  * @version 1.0.0
+ * @since 2020/5/28 17:28
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetailResponse {
 
-    private boolean ifSuccess;
+	private boolean ifSuccess;
 
-    private String errorCode;
+	private String errorCode;
 
-    private String errMsg;
+	private String errMsg;
 }

@@ -28,30 +28,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * ElkWebConfiguration
  *
- * @author: dengtao
- * @since : 2019-05-27 14:30
+ * @author dengtao
  * @version 1.0.0
+ * @since 2020/6/3 10:43
  */
 @Configuration
 @ConditionalOnWebApplication
 @ConditionalOnProperty(prefix = "taotao.cloud.elk.web", name = "enabled", havingValue = "true")
 public class ElkWebConfiguration implements WebMvcConfigurer {
 
-    @Bean
-    public ElkWebInterceptor elkWebInterceptor() {
-        return new ElkWebInterceptor();
-    }
+	@Bean
+	public ElkWebInterceptor elkWebInterceptor() {
+		return new ElkWebInterceptor();
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(elkWebInterceptor());
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(elkWebInterceptor());
+	}
 
-    @Bean
-    @ConditionalOnClass(name = "org.aspectj.lang.annotation.Aspect")
-    @ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
-    public WebControllerAspect webControllerAspect() {
-        return new WebControllerAspect();
-    }
+	@Bean
+	@ConditionalOnClass(name = "org.aspectj.lang.annotation.Aspect")
+	@ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
+	public WebControllerAspect webControllerAspect() {
+		return new WebControllerAspect();
+	}
 
 }

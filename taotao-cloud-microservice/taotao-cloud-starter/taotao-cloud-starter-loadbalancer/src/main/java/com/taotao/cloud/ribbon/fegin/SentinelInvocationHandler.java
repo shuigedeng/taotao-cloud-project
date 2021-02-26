@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2020 taotao cloud Authors. All Rights Reserved.
+ * Copyright 2002-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.ribbon.fegin;
 
 import com.alibaba.cloud.sentinel.feign.SentinelContractHolder;
@@ -42,6 +41,10 @@ import static feign.Util.checkNotNull;
 
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler}
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/6/15 11:31
  */
 @Slf4j
 public class SentinelInvocationHandler implements InvocationHandler {
@@ -60,24 +63,28 @@ public class SentinelInvocationHandler implements InvocationHandler {
 
 	private Map<Method, Method> fallbackMethodMap;
 
-	SentinelInvocationHandler(Target<?> target, Map<Method, InvocationHandlerFactory.MethodHandler> dispatch,
-							  FallbackFactory fallbackFactory) {
+	SentinelInvocationHandler(Target<?> target,
+		Map<Method, InvocationHandlerFactory.MethodHandler> dispatch,
+		FallbackFactory fallbackFactory) {
 		this.target = checkNotNull(target, "target");
 		this.dispatch = checkNotNull(dispatch, "dispatch");
 		this.fallbackFactory = fallbackFactory;
 		this.fallbackMethodMap = toFallbackMethod(dispatch);
 	}
 
-	SentinelInvocationHandler(Target<?> target, Map<Method, InvocationHandlerFactory.MethodHandler> dispatch) {
+	SentinelInvocationHandler(Target<?> target,
+		Map<Method, InvocationHandlerFactory.MethodHandler> dispatch) {
 		this.target = checkNotNull(target, "target");
 		this.dispatch = checkNotNull(dispatch, "dispatch");
 	}
 
 	@Override
-	public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+	public Object invoke(final Object proxy, final Method method, final Object[] args)
+		throws Throwable {
 		if (EQUALS.equals(method.getName())) {
 			try {
-				Object otherHandler = args.length > 0 && args[0] != null ? Proxy.getInvocationHandler(args[0]) : null;
+				Object otherHandler =
+					args.length > 0 && args[0] != null ? Proxy.getInvocationHandler(args[0]) : null;
 				return equals(otherHandler);
 			} catch (IllegalArgumentException e) {
 				return false;
@@ -94,13 +101,15 @@ public class SentinelInvocationHandler implements InvocationHandler {
 		if (target instanceof Target.HardCodedTarget) {
 			Target.HardCodedTarget hardCodedTarget = (Target.HardCodedTarget) target;
 			MethodMetadata methodMetadata = SentinelContractHolder.METADATA_MAP
-				.get(hardCodedTarget.type().getName() + Feign.configKey(hardCodedTarget.type(), method));
+				.get(hardCodedTarget.type().getName() + Feign
+					.configKey(hardCodedTarget.type(), method));
 			// resource default is HttpMethod:protocol://url
 			if (methodMetadata == null) {
 				result = methodHandler.invoke(args);
 			} else {
-				String resourceName = methodMetadata.template().method().toUpperCase() + ":" + hardCodedTarget.url()
-					+ methodMetadata.template().path();
+				String resourceName =
+					methodMetadata.template().method().toUpperCase() + ":" + hardCodedTarget.url()
+						+ methodMetadata.template().path();
 				Entry entry = null;
 				try {
 					ContextUtil.enter(resourceName);
@@ -113,8 +122,9 @@ public class SentinelInvocationHandler implements InvocationHandler {
 					}
 					if (fallbackFactory != null) {
 						try {
-							Object fallbackResult = fallbackMethodMap.get(method).invoke(fallbackFactory.create(ex),
-								args);
+							Object fallbackResult = fallbackMethodMap.get(method)
+								.invoke(fallbackFactory.create(ex),
+									args);
 							return fallbackResult;
 						} catch (IllegalAccessException e) {
 							// shouldn't happen as method is public due to being an
@@ -166,7 +176,8 @@ public class SentinelInvocationHandler implements InvocationHandler {
 		return target.toString();
 	}
 
-	static Map<Method, Method> toFallbackMethod(Map<Method, InvocationHandlerFactory.MethodHandler> dispatch) {
+	static Map<Method, Method> toFallbackMethod(
+		Map<Method, InvocationHandlerFactory.MethodHandler> dispatch) {
 		Map<Method, Method> result = new LinkedHashMap<>();
 		for (Method method : dispatch.keySet()) {
 			method.setAccessible(true);

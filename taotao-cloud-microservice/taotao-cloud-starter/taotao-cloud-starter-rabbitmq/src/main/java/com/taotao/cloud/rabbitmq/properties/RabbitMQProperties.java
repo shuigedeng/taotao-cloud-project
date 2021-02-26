@@ -23,23 +23,23 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * RabbitMQProperties
  *
  * @author dengtao
- * @since 2020/5/28 17:35
  * @version 1.0.0
+ * @since 2020/5/28 17:35
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.rabbitmq")
 public class RabbitMQProperties {
 
-    private boolean enabled;
+	private boolean enabled;
 
-    private String addresses;
+	private String addresses;
 
-    private String username;
+	private String username;
 
-    private String password;
+	private String password;
 
-    private String virtualHost;
+	private String virtualHost;
 
-    private boolean publisherConfirms = true;
+	private boolean publisherConfirms = true;
 }

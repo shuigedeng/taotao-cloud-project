@@ -18,10 +18,16 @@ package com.taotao.cloud.log.appender;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.spi.AppenderAttachableImpl;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -29,24 +35,18 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 /**
  * TaotaoKafkaAppender
  *
  * @author dengtao
- * @since 2020/6/12 16:28
  * @version 1.0.0
+ * @since 2020/6/12 16:28
  */
 public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
+
 	/**
-	 * Kafka clients uses this prefix for its slf4j logging.
-	 * This appender defers appends of any Kafka logs since it could cause harmful infinite recursion/self feeding effects.
+	 * Kafka clients uses this prefix for its slf4j logging. This appender defers appends of any
+	 * Kafka logs since it could cause harmful infinite recursion/self feeding effects.
 	 */
 	private static final String KAFKA_LOGGER_PREFIX = "org.apache.kafka.clients";
 
@@ -62,14 +62,17 @@ public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	public TaotaoKafkaAppender() {
 		// setting these as config values sidesteps an unnecessary warning (minor bug in KafkaProducer)
-		addProducerConfigValue(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class.getName());
-		addProducerConfigValue(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class.getName());
+		addProducerConfigValue(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+			ByteArraySerializer.class.getName());
+		addProducerConfigValue(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+			ByteArraySerializer.class.getName());
 	}
 
 	@Override
 	public void doAppend(E e) {
 		ensureDeferredAppends();
-		if (e instanceof ILoggingEvent && ((ILoggingEvent) e).getLoggerName().startsWith(KAFKA_LOGGER_PREFIX)) {
+		if (e instanceof ILoggingEvent && ((ILoggingEvent) e).getLoggerName()
+			.startsWith(KAFKA_LOGGER_PREFIX)) {
 			deferAppend(e);
 		} else {
 			super.doAppend(e);
@@ -144,14 +147,16 @@ public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	protected void append(E e) {
 		final byte[] payload = encoder.encode(e);
 		String s = new String(payload);
-		JSONObject jsonObject = JSON.parseObject(s);
-		jsonObject.put("ctime", String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
+		JSONObject jsonObject = JSONUtil.parseObj(s);
+		jsonObject.put("ctime",
+			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 		final byte[] key = keyingStrategy.createKey(e);
 
 		final Long timestamp = isAppendTimestamp() ? getTimestamp(e) : null;
 
-		final ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, partition, timestamp, key,
-			Base64.getEncoder().encode(jsonObject.toJSONString().getBytes()));
+		final ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, partition,
+			timestamp, key,
+			Base64.getEncoder().encode(jsonObject.toString().getBytes()));
 
 		final Producer<byte[], byte[]> producer = lazyProducer.get();
 		if (producer != null) {

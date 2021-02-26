@@ -33,91 +33,93 @@ import java.util.concurrent.TimeoutException;
  * RabbitMQBuildMessageProducer
  *
  * @author dengtao
- * @since 2020/5/28 17:34
  * @version 1.0.0
+ * @since 2020/5/28 17:34
  */
 @Slf4j
 @Component
 public class RabbitMQBuildMessageProducer {
 
-    @Autowired
-    private ConnectionFactory connectionFactory;
+	@Autowired
+	private ConnectionFactory connectionFactory;
 
 
-    public MessageProducer buildMessageSender(final String exchange, final String routingKey, final String queue) throws IOException {
-        return buildMessageSender(exchange, routingKey, queue, Constants.DIRECT_TYPE);
-    }
+	public MessageProducer buildMessageSender(final String exchange, final String routingKey,
+		final String queue) throws IOException {
+		return buildMessageSender(exchange, routingKey, queue, Constants.DIRECT_TYPE);
+	}
 
-    public MessageProducer buildTopicMessageSender(final String exchange, final String routingKey) throws IOException {
-        return buildMessageSender(exchange, routingKey, null, Constants.TOPIC_TYPE);
-    }
+	public MessageProducer buildTopicMessageSender(final String exchange, final String routingKey)
+		throws IOException {
+		return buildMessageSender(exchange, routingKey, null, Constants.TOPIC_TYPE);
+	}
 
-    public MessageProducer buildMessageSender(final String exchange, final String routingKey,
-                                              final String queue, final String type) throws IOException {
+	public MessageProducer buildMessageSender(final String exchange, final String routingKey,
+		final String queue, final String type) throws IOException {
 
-        final Connection connection = connectionFactory.createConnection();
-        if (type.equals(Constants.DIRECT_TYPE)) {
-            buildQueue(exchange, routingKey, queue, connection, Constants.DIRECT_TYPE);
-        } else if (type.equals(Constants.TOPIC_TYPE)) {
-            buildTopic(exchange, connection);
-        }
+		final Connection connection = connectionFactory.createConnection();
+		if (type.equals(Constants.DIRECT_TYPE)) {
+			buildQueue(exchange, routingKey, queue, connection, Constants.DIRECT_TYPE);
+		} else if (type.equals(Constants.TOPIC_TYPE)) {
+			buildTopic(exchange, connection);
+		}
 
-        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+		final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 
-        rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setExchange(exchange);
-        rabbitTemplate.setRoutingKey(routingKey);
-        //设置message序列化方法
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+		rabbitTemplate.setMandatory(true);
+		rabbitTemplate.setExchange(exchange);
+		rabbitTemplate.setRoutingKey(routingKey);
+		//设置message序列化方法
+		rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
 
-        //回调函数: confirm确认 设置发送确认
-        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
-            if (!ack) {
-                //可以进行日志记录、异常处理、补偿处理等
-                log.info("send message failed: " + cause + correlationData.toString());
-            } else {
-                //TODO 更新数据库，可靠性投递机制
-            }
-        });
+		//回调函数: confirm确认 设置发送确认
+		rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
+			if (!ack) {
+				//可以进行日志记录、异常处理、补偿处理等
+				log.info("send message failed: " + cause + correlationData.toString());
+			} else {
+				//TODO 更新数据库，可靠性投递机制
+			}
+		});
 
-        //回调函数: return返回
-        rabbitTemplate.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
-            log.info("send message failed: " + replyCode + " " + replyText);
-            rabbitTemplate.send(message);
-        });
+		//回调函数: return返回
+		rabbitTemplate
+			.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
+				log.info("send message failed: " + replyCode + " " + replyText);
+				rabbitTemplate.send(message);
+			});
+
+		return new MessageProducer() {
+			@Override
+			public DetailResponse send(Object message) {
+				return send(message);
+			}
+		};
+	}
 
 
-        return new MessageProducer() {
-            @Override
-            public DetailResponse send(Object message) {
-                return send(message);
-            }
-        };
-    }
+	private void buildQueue(String exchange, String routingKey,
+		final String queue, Connection connection, String type) throws IOException {
+		Channel channel = connection.createChannel(false);
 
+		if (type.equals(Constants.DIRECT_TYPE)) {
+			channel.exchangeDeclare(exchange, Constants.DIRECT_TYPE, true, false, null);
+		} else if (type.equals(Constants.TOPIC_TYPE)) {
+			channel.exchangeDeclare(exchange, Constants.TOPIC_TYPE, true, false, null);
+		}
 
-    private void buildQueue(String exchange, String routingKey,
-                            final String queue, Connection connection, String type) throws IOException {
-        Channel channel = connection.createChannel(false);
+		channel.queueDeclare(queue, true, false, false, null);
+		channel.queueBind(queue, exchange, routingKey);
 
-        if (type.equals(Constants.DIRECT_TYPE)) {
-            channel.exchangeDeclare(exchange, Constants.DIRECT_TYPE, true, false, null);
-        } else if (type.equals(Constants.TOPIC_TYPE)) {
-            channel.exchangeDeclare(exchange, Constants.TOPIC_TYPE, true, false, null);
-        }
+		try {
+			channel.close();
+		} catch (TimeoutException e) {
+			log.info("close channel time out ", e);
+		}
+	}
 
-        channel.queueDeclare(queue, true, false, false, null);
-        channel.queueBind(queue, exchange, routingKey);
-
-        try {
-            channel.close();
-        } catch (TimeoutException e) {
-            log.info("close channel time out ", e);
-        }
-    }
-
-    private void buildTopic(String exchange, Connection connection) throws IOException {
-        Channel channel = connection.createChannel(false);
-        channel.exchangeDeclare(exchange, Constants.TOPIC_TYPE, true, false, null);
-    }
+	private void buildTopic(String exchange, Connection connection) throws IOException {
+		Channel channel = connection.createChannel(false);
+		channel.exchangeDeclare(exchange, Constants.TOPIC_TYPE, true, false, null);
+	}
 }

@@ -9,13 +9,15 @@ dependencies {
 
     implementation 'org.springframework:spring-web'
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation 'com.upyun:java-sdk'
     implementation 'com.qiniu:qiniu-java-sdk'
     implementation 'com.aliyun.oss:aliyun-sdk-oss'
     implementation 'com.google.guava:guava'
     implementation 'com.squareup.okhttp3:okhttp'
     implementation 'com.squareup.okio:okio'
-    implementation 'com.luhuiguo:fastdfs-client'
+    implementation 'com.github.tobato:fastdfs-client'
     implementation 'commons-net:commons-net'
 
     compileOnly 'org.projectlombok:lombok'

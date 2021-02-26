@@ -7,6 +7,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation "org.apache.commons:commons-lang3"
 
     implementation "org.springframework.boot:spring-boot-starter-amqp"

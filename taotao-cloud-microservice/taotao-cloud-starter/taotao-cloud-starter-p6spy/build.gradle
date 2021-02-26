@@ -8,6 +8,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     implementation 'p6spy:p6spy'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

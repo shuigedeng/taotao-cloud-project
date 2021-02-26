@@ -47,7 +47,7 @@ buildscript {
         commonsCollections4Version = '4.4'
         lettuceVersion = '6.0.2.RELEASE'
         redissonVersion = "3.15.0"
-        seataVersion = "1.14.1"
+        seataVersion = "1.4.1"
         shardingsphereVersion = "4.1.1"
 
         swaggerVersion = '3.0.0'
@@ -134,7 +134,7 @@ allprojects {
     }
 }
 
-configure(subprojects.findAll { !it.name.equals("taotao-cloud-dependencies") }) { project ->
+configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'checkstyle'

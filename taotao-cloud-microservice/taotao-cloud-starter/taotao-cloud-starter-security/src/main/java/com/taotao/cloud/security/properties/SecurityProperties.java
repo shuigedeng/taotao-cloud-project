@@ -23,21 +23,22 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * SecurityProperties
  *
  * @author dengtao
- * @since 2020/5/2 11:21
  * @version 1.0.0
+ * @since 2020/5/2 11:21
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.oauth2.security")
 public class SecurityProperties {
-    /**
-     * 是否开启权限认证 总开关
-     */
-    private boolean enabled = false;
 
-    private AuthProperties auth = new AuthProperties();
+	/**
+	 * 是否开启权限认证 总开关
+	 */
+	private boolean enabled = false;
 
-    private PermitProperties ignore = new PermitProperties();
+	private AuthProperties auth = new AuthProperties();
 
-    private SmsCodeProperties code = new SmsCodeProperties();
+	private PermitProperties ignore = new PermitProperties();
+
+	private SmsCodeProperties code = new SmsCodeProperties();
 }

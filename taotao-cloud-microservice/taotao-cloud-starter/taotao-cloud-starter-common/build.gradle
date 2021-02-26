@@ -7,9 +7,9 @@ dependencies {
     implementation 'com.alibaba:transmittable-thread-local'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation 'org.javassist:javassist'
     implementation 'com.github.whvcse:easy-captcha'
-    implementation 'cn.hutool:hutool-all'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

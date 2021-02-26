@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.log.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSON;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +32,8 @@ import java.util.Base64;
  * 审计日志实现类-Kafka
  *
  * @author dengtao
- * @since 2020/5/2 11:18
  * @version 1.0.0
+ * @since 2020/5/2 11:18
  */
 @Slf4j
 public class KafkaRequestLogServiceImpl implements IRequestLogService {
@@ -44,7 +45,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
 	@Override
 	public void save(RequestLog requestLog) {
-		String request = JSON.toJSONString(requestLog);
+		String request = JsonUtil.toJSONString(requestLog);
 
 		ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(REQUEST_LOG_TOPIC,
 			Base64.getEncoder().encode(request.getBytes()));

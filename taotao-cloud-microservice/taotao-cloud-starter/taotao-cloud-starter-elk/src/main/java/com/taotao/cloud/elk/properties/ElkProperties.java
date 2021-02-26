@@ -23,19 +23,19 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * ElkProperties
  *
  * @author dengtao
- * @since 2020/5/3 16:18
  * @version 1.0.0
+ * @since 2020/5/3 16:18
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "toaotao.cloud.elk")
+@ConfigurationProperties(prefix = "taotao.cloud.elk")
 public class ElkProperties {
 
-    private boolean enabled = false;
+	private boolean enabled = false;
 
-    private String appName = "";
+	private String appName = "";
 
-    private String springAppName = "";
+	private String springAppName = "";
 
-    private String[] destinations = {"127.0.0.1:4560"};
+	private String[] destinations = {"127.0.0.1:4560"};
 }

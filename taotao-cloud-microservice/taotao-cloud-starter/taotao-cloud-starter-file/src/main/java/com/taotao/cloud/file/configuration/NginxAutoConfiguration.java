@@ -21,20 +21,18 @@ import com.taotao.cloud.file.constant.FileConstant;
 import com.taotao.cloud.file.exception.FileUploadException;
 import com.taotao.cloud.file.pojo.FileInfo;
 import com.taotao.cloud.file.propeties.NginxProperties;
+import java.io.File;
+import java.io.FileInputStream;
 import org.apache.commons.io.FileUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 /**
  * @author dengtao
- * @since 2020/10/26 10:28
  * @version 1.0.0
+ * @since 2020/10/26 10:28
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_NGINX)
 public class NginxAutoConfiguration {
@@ -48,11 +46,12 @@ public class NginxAutoConfiguration {
 	}
 
 	@Bean
-	public NginxUpload fileUpload(){
+	public NginxUpload fileUpload() {
 		return new NginxUpload();
 	}
 
 	public class NginxUpload extends AbstractFileUpload {
+
 		@Override
 		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
 			try {
@@ -79,7 +78,7 @@ public class NginxAutoConfiguration {
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo)  {
+		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
 			try {
 				String f = properties.getUploadPath() + "/" + fileInfo.getName();
 				f = f.substring(0, f.lastIndexOf("/"));
@@ -106,7 +105,8 @@ public class NginxAutoConfiguration {
 		@Override
 		public FileInfo delete(FileInfo fileInfo) {
 			try {
-				FileUtils.forceDelete(new File(properties.getUploadPath() + "/" + fileInfo.getName()));
+				FileUtils
+					.forceDelete(new File(properties.getUploadPath() + "/" + fileInfo.getName()));
 			} catch (Exception e) {
 				LogUtil.error("[nginx]文件删除失败:", e);
 				throw new FileUploadException("[nginx]文件删除失败");

@@ -17,25 +17,25 @@ package com.taotao.cloud.elk.annotation;
 
 import com.taotao.cloud.elk.configuration.ElkConfiguration;
 import com.taotao.cloud.elk.configuration.ElkWebConfiguration;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
  * ELK自动配置
  *
  * @author dengtao
- * @since 2020/5/3 07:47
  * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Import({
-        ElkConfiguration.class,
-        ElkWebConfiguration.class})
+	ElkConfiguration.class,
+	ElkWebConfiguration.class
+})
 public @interface EnableTaoTaoCloudELK {
 
 }

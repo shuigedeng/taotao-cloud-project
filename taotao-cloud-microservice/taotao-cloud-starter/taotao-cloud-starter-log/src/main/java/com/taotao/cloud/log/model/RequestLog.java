@@ -15,18 +15,16 @@
  */
 package com.taotao.cloud.log.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import lombok.Data;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * 日志
  *
  * @author dengtao
- * @since 2020/6/15 11:00
  * @version 1.0.0
+ * @since 2020/6/15 11:00
  */
 @Data
 public class RequestLog implements Serializable {
@@ -36,150 +34,150 @@ public class RequestLog implements Serializable {
 	/**
 	 * 请求日志id
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "trace_id")
+	@JsonProperty(value = "trace_id")
 	private String traceId;
 
 	/**
 	 * 服务名称
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "application_name")
+	@JsonProperty(value = "application_name")
 	private String applicationName;
 
 	/**
 	 * 操作人ID
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "username")
+	@JsonProperty(value = "username")
 	private String username;
 
 	/**
 	 * 操作人ID
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "user_id")
+	@JsonProperty(value = "user_id")
 	private Long userId;
 
 	/**
 	 * 客户端ID
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "client_id")
+	@JsonProperty(value = "client_id")
 	private String clientId;
 
 	/**
 	 * 操作描述
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "description")
+	@JsonProperty(value = "description")
 	private String description;
 
 	/**
 	 * 操作IP
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_ip")
+	@JsonProperty(value = "request_ip")
 	private String requestIp;
 
 	/**
 	 * 操作类型 1 操作记录 2异常记录
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "operate_type")
+	@JsonProperty(value = "operate_type")
 	private Integer operateType;
 
 	/**
 	 * 请求类型（1查询/获取，2添加，3修改，4删除）
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_type")
+	@JsonProperty(value = "request_type")
 	private Integer requestType;
 
 	/**
 	 * 请求方法名称
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_method_name")
+	@JsonProperty(value = "request_method_name")
 	private String requestMethodName;
 
 	/**
 	 * 请求方式
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_method")
+	@JsonProperty(value = "request_method")
 	private String requestMethod;
 
 	/**
 	 * 请求url
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_url")
+	@JsonProperty(value = "request_url")
 	private String requestUrl;
 
 	/**
 	 * 方法参数
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_args")
+	@JsonProperty(value = "request_args")
 	private String requestArgs;
 
 	/**
 	 * 请求参数
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_params")
+	@JsonProperty(value = "request_params")
 	private String requestParams;
 
 	/**
 	 * 请求头
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_headers")
+	@JsonProperty(value = "request_headers")
 	private String requestHeaders;
 
 	/**
 	 * 浏览器
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_ua")
+	@JsonProperty(value = "request_ua")
 	private String requestUa;
 
 	/**
 	 * 类路径
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "classpath")
+	@JsonProperty(value = "classpath")
 	private String classpath;
 
 	/**
 	 * 开始时间
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_start_time")
+	@JsonProperty(value = "request_start_time")
 	private Long requestStartTime;
 
 	/**
 	 * 完成时间
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_end_time")
+	@JsonProperty(value = "request_end_time")
 	private Long requestEndTime;
 
 	/**
 	 * 消耗时间
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "request_consuming_time")
+	@JsonProperty(value = "request_consuming_time")
 	private Long requestConsumingTime;
 
 	/**
 	 * 异常详情信息 堆栈信息
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "ex_detail")
+	@JsonProperty(value = "ex_detail")
 	private String exDetail;
 
 	/**
 	 * 异常描述 e.getMessage
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "ex_desc")
+	@JsonProperty(value = "ex_desc")
 	private String exDesc;
 
 	/**
 	 * 租户id
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "tenant_id")
+	@JsonProperty(value = "tenant_id")
 	private String tenantId;
 
 	/**
 	 * 来源
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "source")
+	@JsonProperty(value = "source")
 	private String source;
 
 	/**
 	 * 记录时间
 	 */
-	@JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue, name = "ctime")
+	@JsonProperty(value = "ctime")
 	private String ctime;
 }

@@ -1,5 +1,19 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.file.util;
-
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileTypeUtil;
@@ -29,8 +43,8 @@ import java.util.Objects;
  * 文件工具类
  *
  * @author dengtao
- * @since 2020/10/26 11:10
  * @version 1.0.0
+ * @since 2020/10/26 11:10
  */
 public class FileUtil {
 
@@ -47,7 +61,6 @@ public class FileUtil {
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
-	 * @version 1.0.0
 	 */
 	public static FileInfo getMultipartFileInfo(MultipartFile multipartFile) {
 		try {
@@ -82,7 +95,6 @@ public class FileUtil {
 	 * @return com.taotao.cloud.file.pojo.FileInfo
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
-	 * @version 1.0.0
 	 */
 	public static FileInfo getFileInfo(File file) {
 		try {
@@ -108,7 +120,6 @@ public class FileUtil {
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
-	 * @version 1.0.0
 	 */
 	public static String fileMd5(InputStream inputStream) {
 		return DigestUtil.md5Hex(inputStream);
@@ -122,7 +133,6 @@ public class FileUtil {
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
-	 * @version 1.0.0
 	 */
 	public static String saveFile(MultipartFile file, String path) {
 		try {
@@ -148,7 +158,6 @@ public class FileUtil {
 	 * @return boolean
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	public static boolean deleteFile(String path) {
 		File file = new File(path);
@@ -173,7 +182,6 @@ public class FileUtil {
 	 * @return com.taotao.cloud.file.pojo.ResultBody
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	public static Boolean validType(MultipartFile file, String[] acceptTypes) {
 		if (ArrayUtil.isEmpty(acceptTypes)) {
@@ -202,7 +210,6 @@ public class FileUtil {
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	public static String extractFilename(MultipartFile file) {
 		String fileName = file.getOriginalFilename();
@@ -218,20 +225,19 @@ public class FileUtil {
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	public static String extractFilename(String fileName, String extension) {
-		return DateUtil.format(new Date(), "yyyy/MM/dd/HH/mm") + "/" + encodingFilename(fileName) + "." + extension;
+		return DateUtil.format(new Date(), "yyyy/MM/dd/HH/mm") + "/" + encodingFilename(fileName)
+			+ "." + extension;
 	}
 
 	/**
 	 * 编码文件名
 	 *
-	 * @param fileName
+	 * @param fileName fileName
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	private static String encodingFilename(String fileName) {
 		fileName = fileName.replace("_", " ");
@@ -242,11 +248,10 @@ public class FileUtil {
 	/**
 	 * 获取文件名的后缀
 	 *
-	 * @param file
+	 * @param file file
 	 * @return java.lang.String
 	 * @author dengtao
 	 * @since 2020/10/26 10:44
-	 * @version 1.0.0
 	 */
 	public static String getExtension(MultipartFile file) {
 		String extension = cn.hutool.core.io.FileUtil.extName(file.getOriginalFilename());
@@ -259,11 +264,10 @@ public class FileUtil {
 	/**
 	 * 判断文件是否是图片
 	 *
-	 * @param file
+	 * @param file file
 	 * @return boolean
 	 * @author dengtao
 	 * @since 2020/10/26 10:45
-	 * @version 1.0.0
 	 */
 	public static boolean isImage(File file) {
 		if (!file.exists()) {
@@ -282,11 +286,10 @@ public class FileUtil {
 	/**
 	 * 判断文件是否是图片
 	 *
-	 * @param file
+	 * @param file file
 	 * @return boolean
 	 * @author dengtao
 	 * @since 2020/10/26 10:45
-	 * @version 1.0.0
 	 */
 	public static boolean isImage(MultipartFile file) {
 		if (file == null) {
@@ -327,5 +330,4 @@ public class FileUtil {
 		}
 		return buffer;
 	}
-
 }

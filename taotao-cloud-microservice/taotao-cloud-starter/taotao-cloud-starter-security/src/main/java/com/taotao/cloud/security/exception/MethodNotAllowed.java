@@ -25,24 +25,24 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * MethodNotAllowed
  *
  * @author dengtao
- * @since 2020/6/2 15:34
  * @version 1.0.0
+ * @since 2020/6/2 15:34
  */
 @JsonSerialize(using = OauthExceptionSerializer.class)
 public class MethodNotAllowed extends OAuth2Exception {
 
-    public MethodNotAllowed(String msg, Throwable t) {
-        super(msg);
-    }
+	public MethodNotAllowed(String msg, Throwable t) {
+		super(msg);
+	}
 
-    @Override
-    public String getOAuth2ErrorCode() {
-        return "method_not_allowed";
-    }
+	@Override
+	public String getOAuth2ErrorCode() {
+		return "method_not_allowed";
+	}
 
-    @Override
-    public int getHttpErrorCode() {
-        return HttpStatus.METHOD_NOT_ALLOWED.value();
-    }
+	@Override
+	public int getHttpErrorCode() {
+		return HttpStatus.METHOD_NOT_ALLOWED.value();
+	}
 
 }

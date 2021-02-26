@@ -33,71 +33,85 @@ import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
-
 /**
  * es配置类
  *
  * @author dengtao
- * @since 2020/5/3 06:47
  * @version 1.0.0
+ * @since 2020/5/3 06:47
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "taotao.cloud.elasticsearch", name = "enabled", havingValue = "true")
 public class ElasticsearchComponent implements InitializingBean {
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELASTICSEARCH_STARTER + "]" + "elasticsearch模块已启动");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELASTICSEARCH_STARTER + "]"
+			+ "elasticsearch模块已启动");
+	}
 
-    @Bean
-    public RestClientBuilderCustomizer restClientBuilderCustomizer(RestClientPoolProperties poolProperties,
-                                                                   ElasticsearchRestClientProperties restProperties) {
-        return (builder) -> {
-            setRequestConfig(builder, poolProperties);
-            setHttpClientConfig(builder, poolProperties, restProperties);
-        };
-    }
+	@Bean
+	public RestClientBuilderCustomizer restClientBuilderCustomizer(
+		RestClientPoolProperties poolProperties,
+		ElasticsearchRestClientProperties restProperties) {
+		return (builder) -> {
+			setRequestConfig(builder, poolProperties);
+			setHttpClientConfig(builder, poolProperties, restProperties);
+		};
+	}
 
-    /**
-     * 异步httpclient连接延时配置
-     */
-    private void setRequestConfig(RestClientBuilder builder,
-                                  RestClientPoolProperties poolProperties) {
-        builder.setRequestConfigCallback(requestConfigBuilder -> {
-            requestConfigBuilder
-                    .setConnectTimeout(poolProperties.getConnectTimeOut())
-                    .setSocketTimeout(poolProperties.getSocketTimeOut())
-                    .setConnectionRequestTimeout(poolProperties.getConnectionRequestTimeOut());
-            return requestConfigBuilder;
-        });
-    }
 
-    /**
-     * 异步httpclient连接数配置
-     */
-    private void setHttpClientConfig(RestClientBuilder builder,
-                                     RestClientPoolProperties poolProperties,
-                                     ElasticsearchRestClientProperties restProperties) {
-        builder.setHttpClientConfigCallback(httpClientBuilder -> {
-            httpClientBuilder
-                    .setMaxConnTotal(poolProperties.getMaxConnectNum())
-                    .setMaxConnPerRoute(poolProperties.getMaxConnectPerRoute());
+	/**
+	 * 异步httpclient连接延时配置
+	 *
+	 * @param builder        builder
+	 * @param poolProperties poolProperties
+	 * @author dengtao
+	 * @since 2021/2/26 08:53
+	 */
+	private void setRequestConfig(RestClientBuilder builder,
+		RestClientPoolProperties poolProperties) {
+		builder.setRequestConfigCallback(requestConfigBuilder -> {
+			requestConfigBuilder
+				.setConnectTimeout(poolProperties.getConnectTimeOut())
+				.setSocketTimeout(poolProperties.getSocketTimeOut())
+				.setConnectionRequestTimeout(poolProperties.getConnectionRequestTimeOut());
+			return requestConfigBuilder;
+		});
+	}
 
-            PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
-            map.from(restProperties::getUsername).to(username -> {
-                CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-                credentialsProvider
-                        .setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, restProperties.getPassword()));
-                httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-            });
-            return httpClientBuilder;
-        });
-    }
+	/**
+	 * 异步httpclient连接延时配置
+	 *
+	 * @param builder        builder
+	 * @param poolProperties poolProperties
+	 * @author dengtao
+	 * @since 2021/2/26 08:53
+	 */
+	private void setHttpClientConfig(RestClientBuilder builder,
+		RestClientPoolProperties poolProperties,
+		ElasticsearchRestClientProperties restProperties) {
+		builder.setHttpClientConfigCallback(httpClientBuilder -> {
+			httpClientBuilder
+				.setMaxConnTotal(poolProperties.getMaxConnectNum())
+				.setMaxConnPerRoute(poolProperties.getMaxConnectPerRoute());
 
-    @Bean
-    @ConditionalOnMissingBean
-    public ElasticsearchRestTemplate elasticsearchRestTemplate(RestHighLevelClient restHighLevelClient) {
-        return new ElasticsearchRestTemplate(restHighLevelClient);
-    }
+			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
+			map.from(restProperties::getUsername).to(username -> {
+				CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+				credentialsProvider
+					.setCredentials(AuthScope.ANY,
+						new UsernamePasswordCredentials(username, restProperties.getPassword()));
+				httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+			});
+			return httpClientBuilder;
+		});
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public ElasticsearchRestTemplate elasticsearchRestTemplate(
+		RestHighLevelClient restHighLevelClient) {
+		return new ElasticsearchRestTemplate(restHighLevelClient);
+	}
 }

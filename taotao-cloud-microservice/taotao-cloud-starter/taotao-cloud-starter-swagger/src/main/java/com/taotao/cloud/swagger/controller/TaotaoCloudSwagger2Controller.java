@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.swagger.controller;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -27,42 +29,42 @@ import springfox.documentation.spring.web.DocumentationCache;
 import springfox.documentation.spring.web.json.Json;
 import springfox.documentation.spring.web.json.JsonSerializer;
 import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
-import springfox.documentation.swagger2.web.Swagger2Controller;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import springfox.documentation.swagger2.web.Swagger2ControllerWebMvc;
 
 /**
  * <br>
  *
  * @author dengtao
- * @since 2020/5/18 11:28
  * @version 1.0.0
+ * @since 2020/5/18 11:28
  */
 @Controller
 public class TaotaoCloudSwagger2Controller implements InitializingBean {
-    @Resource
-    private Environment environment;
-    @Resource
-    private DocumentationCache documentationCache;
-    @Resource
-    private ServiceModelToSwagger2Mapper mapper;
-    @Resource
-    private JsonSerializer jsonSerializer;
 
-    private Swagger2Controller swagger2Controller;
+	@Resource
+	private Environment environment;
+	@Resource
+	private DocumentationCache documentationCache;
+	@Resource
+	private ServiceModelToSwagger2Mapper mapper;
+	@Resource
+	private JsonSerializer jsonSerializer;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        swagger2Controller = new Swagger2Controller(environment, documentationCache, mapper, jsonSerializer);
-    }
+	private Swagger2ControllerWebMvc swagger2Controller;
 
-    @RequestMapping(value = "/api-docs", method = RequestMethod.GET, produces = {"application/json", "application/hal+json"})
-    @ResponseBody
-    public ResponseEntity<Json> getDocumentation(
-            @RequestParam(value = "group", required = false) String swaggerGroup,
-            HttpServletRequest servletRequest) {
-        return swagger2Controller.getDocumentation(swaggerGroup, servletRequest);
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		swagger2Controller = new Swagger2ControllerWebMvc(environment, documentationCache, mapper,
+			jsonSerializer);
+	}
+
+	@RequestMapping(value = "/api-docs", method = RequestMethod.GET, produces = {"application/json",
+		"application/hal+json"})
+	@ResponseBody
+	public ResponseEntity<Json> getDocumentation(
+		@RequestParam(value = "group", required = false) String swaggerGroup,
+		HttpServletRequest servletRequest) {
+		return swagger2Controller.getDocumentation(swaggerGroup, servletRequest);
+	}
 
 }

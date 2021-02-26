@@ -30,35 +30,36 @@ import java.lang.reflect.Method;
  */
 @UtilityClass
 public class LoggerUtil {
-    /**
-     * 获取操作信息
-     *
-     * @param point point
-     * @return java.lang.String
-     * @author dengtao
-     * @since 2020/4/30 10:21
-     */
-    public String getControllerMethodDescription(JoinPoint point) throws Exception {
-        // 获取连接点目标类名
-        String targetName = point.getTarget().getClass().getName();
-        // 获取连接点签名的方法名
-        String methodName = point.getSignature().getName();
-        //获取连接点参数
-        Object[] args = point.getArgs();
-        //根据连接点类的名字获取指定类
-        Class<?> targetClass = Class.forName(targetName);
-        //获取类里面的方法
-        Method[] methods = targetClass.getMethods();
-        String description = "";
-        for (Method method : methods) {
-            if (method.getName().equals(methodName)) {
-                Class<?>[] clazzs = method.getParameterTypes();
-                if (clazzs.length == args.length) {
-                    description = method.getAnnotation(RequestOperateLog.class).description();
-                    break;
-                }
-            }
-        }
-        return description;
-    }
+
+	/**
+	 * 获取操作信息
+	 *
+	 * @param point point
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2020/4/30 10:21
+	 */
+	public String getControllerMethodDescription(JoinPoint point) throws Exception {
+		// 获取连接点目标类名
+		String targetName = point.getTarget().getClass().getName();
+		// 获取连接点签名的方法名
+		String methodName = point.getSignature().getName();
+		//获取连接点参数
+		Object[] args = point.getArgs();
+		//根据连接点类的名字获取指定类
+		Class<?> targetClass = Class.forName(targetName);
+		//获取类里面的方法
+		Method[] methods = targetClass.getMethods();
+		String description = "";
+		for (Method method : methods) {
+			if (method.getName().equals(methodName)) {
+				Class<?>[] clazzs = method.getParameterTypes();
+				if (clazzs.length == args.length) {
+					description = method.getAnnotation(RequestOperateLog.class).description();
+					break;
+				}
+			}
+		}
+		return description;
+	}
 }

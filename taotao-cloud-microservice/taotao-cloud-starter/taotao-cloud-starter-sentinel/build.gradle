@@ -11,6 +11,8 @@ dependencies {
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
     }
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework:spring-web'

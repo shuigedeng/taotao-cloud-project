@@ -19,7 +19,6 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.security.properties.SecurityProperties;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -30,23 +29,24 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * 认证服务器使用Redis存取令牌
  *
  * @author dengtao
- * @since 2020/4/30 09:07
  * @version 1.0.0
+ * @since 2020/4/30 09:07
  */
 @AllArgsConstructor
 @ConditionalOnProperty(prefix = "taotao.cloud.oauth2.token.store", name = "type", havingValue = "redis")
 public class OAuth2RedisTokenStoreComponent implements InitializingBean {
 
-    private final RedisConnectionFactory connectionFactory;
-    private final SecurityProperties securityProperties;
+	private final RedisConnectionFactory connectionFactory;
+	private final SecurityProperties securityProperties;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_AUTH_STARTER + "]" + "redis认证token已启动, Security配置已启动");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_AUTH_STARTER + "]"
+			+ "redis认证token已启动, Security配置已启动");
+	}
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new RedisTokenStoreComponent(connectionFactory, securityProperties);
-    }
+	@Bean
+	public TokenStore tokenStore() {
+		return new RedisTokenStoreComponent(connectionFactory, securityProperties);
+	}
 }

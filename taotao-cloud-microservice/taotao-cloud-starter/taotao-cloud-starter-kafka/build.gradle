@@ -10,6 +10,9 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-stream-kafka"
     compile "org.springframework.cloud:spring-cloud-stream-binder-kafka"
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 

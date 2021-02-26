@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.swagger.configuration;
 
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Import;
 import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
@@ -24,8 +23,8 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
  * Swagger2Configuration
  *
  * @author dengtao
- * @since 2020/4/30 10:09
  * @version 1.0.0
+ * @since 2020/4/30 10:09
  */
 @ConditionalOnProperty(name = "taotao.cloud.swagger.enabled")
 @Import({Swagger2DocumentationConfiguration.class})

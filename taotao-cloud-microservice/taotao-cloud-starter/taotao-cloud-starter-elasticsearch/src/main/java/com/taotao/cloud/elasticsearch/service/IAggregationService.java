@@ -22,14 +22,19 @@ import java.util.Map;
  * 聚合服务
  *
  * @author dengtao
- * @since 2020/5/3 08:01
  * @version 1.0.0
-*/
+ * @since 2020/5/3 08:01
+ */
 public interface IAggregationService {
-    /**
-     * 访问统计聚合查询
-     * @param indexName 索引名
-     * @param routing es的路由
-     */
-    Map<String, Object> requestStatAgg(String indexName, String routing) throws IOException;
+
+	/**
+	 * 访问统计聚合查询
+	 *
+	 * @param indexName 索引名
+	 * @param routing   es的路由
+	 * @return java.util.Map<java.lang.String, java.lang.Object>
+	 * @author dengtao
+	 * @since 2021/2/26 08:56
+	 */
+	Map<String, Object> requestStatAgg(String indexName, String routing) throws IOException;
 }

@@ -33,8 +33,8 @@ import org.springframework.core.annotation.Order;
  * RestTemplateAutoConfiguration
  *
  * @author dengtao
- * @since 2020/6/15 11:31
  * @version 1.0.0
+ * @since 2020/6/15 11:31
  */
 public class HttpClientComponent {
 
@@ -49,7 +49,8 @@ public class HttpClientComponent {
 			.register("https", SSLConnectionSocketFactory.getSocketFactory())
 			.build();
 
-		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
+		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
+			registry);
 		// 最大链接数
 		connectionManager.setMaxTotal(restTemplateProperties.getMaxTotal());
 		// 同路由并发数20

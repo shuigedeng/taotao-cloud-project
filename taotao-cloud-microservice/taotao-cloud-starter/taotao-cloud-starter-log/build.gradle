@@ -9,6 +9,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation 'javax.servlet:javax.servlet-api'
     implementation 'org.springframework:spring-context'
     implementation 'org.springframework:spring-web'

@@ -22,20 +22,20 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * CustomOauthException
  *
  * @author dengtao
- * @since 2020/6/2 15:34
  * @version 1.0.0
+ * @since 2020/6/2 15:34
  */
 public class CustomOauthException extends OAuth2Exception {
 
-    @Getter
-    private String errorCode;
+	@Getter
+	private String errorCode;
 
-    public CustomOauthException(String msg) {
-        super(msg);
-    }
+	public CustomOauthException(String msg) {
+		super(msg);
+	}
 
-    public CustomOauthException(String msg, String errorCode) {
-        super(msg);
-        this.errorCode = errorCode;
-    }
+	public CustomOauthException(String msg, String errorCode) {
+		super(msg);
+		this.errorCode = errorCode;
+	}
 }

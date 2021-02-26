@@ -33,28 +33,29 @@ import javax.servlet.http.HttpServletRequest;
  * 限流、熔断统一处理类
  *
  * @author dengtao
- * @since 2020/5/13 17:32
  * @version 1.0.0
+ * @since 2020/5/13 17:32
  */
 public class SentinelAutoConfigure {
-    @Bean
-    @ConditionalOnClass(HttpServletRequest.class)
-    public BlockExceptionHandler blockExceptionHandler() {
-        return (request, response, e) -> {
-            LogUtil.error("WebmvcHandler Sentinel调用失败: {0}", e);
-            Result<String> result = Result.failed(e.getMessage());
-            ResponseUtil.failed(response, result);
-        };
-    }
 
-    @Bean
-    @ConditionalOnClass(ServerResponse.class)
-    public BlockRequestHandler blockRequestHandler() {
-        return (exchange, e) -> {
-            LogUtil.error("WebfluxHandler Sentinel调用失败: {0}", e);
-            return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(BodyInserters.fromValue(Result.failed(e.getMessage())));
-        };
-    }
+	@Bean
+	@ConditionalOnClass(HttpServletRequest.class)
+	public BlockExceptionHandler blockExceptionHandler() {
+		return (request, response, e) -> {
+			LogUtil.error("WebmvcHandler Sentinel调用失败: {0}", e);
+			Result<String> result = Result.failed(e.getMessage());
+			ResponseUtil.failed(response, result);
+		};
+	}
+
+	@Bean
+	@ConditionalOnClass(ServerResponse.class)
+	public BlockRequestHandler blockRequestHandler() {
+		return (exchange, e) -> {
+			LogUtil.error("WebfluxHandler Sentinel调用失败: {0}", e);
+			return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(BodyInserters.fromValue(Result.failed(e.getMessage())));
+		};
+	}
 }

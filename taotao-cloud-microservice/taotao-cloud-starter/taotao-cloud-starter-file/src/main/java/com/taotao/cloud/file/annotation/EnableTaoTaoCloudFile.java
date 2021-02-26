@@ -15,23 +15,20 @@
  */
 package com.taotao.cloud.file.annotation;
 
-import com.taotao.cloud.file.base.FileUpload;
 import com.taotao.cloud.file.component.TaotaoCloudImportSelector;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Import;
 
 /**
  * 开启
  *
  * @author dengtao
- * @since 2020/5/3 07:47
  * @version 1.0.0
+ * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

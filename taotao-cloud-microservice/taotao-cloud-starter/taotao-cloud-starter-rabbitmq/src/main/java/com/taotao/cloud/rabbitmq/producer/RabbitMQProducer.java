@@ -19,8 +19,8 @@ package com.taotao.cloud.rabbitmq.producer;
  * 消息生产者
  *
  * @author dengtao
- * @since 2020/5/28 17:34
  * @version 1.0.0
+ * @since 2020/5/28 17:34
  */
 public class RabbitMQProducer {
 

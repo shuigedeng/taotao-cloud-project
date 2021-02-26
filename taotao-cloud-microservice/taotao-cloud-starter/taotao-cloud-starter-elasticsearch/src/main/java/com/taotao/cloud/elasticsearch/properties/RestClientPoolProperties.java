@@ -23,31 +23,32 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * es httpClient连接池配置
  *
  * @author dengtao
- * @since 2020/5/3 06:47
  * @version 1.0.0
+ * @since 2020/5/3 06:47
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.elasticsearch.rest-pool")
 public class RestClientPoolProperties {
-    /**
-     * 链接建立超时时间
-     */
-    private Integer connectTimeOut = 1000;
-    /**
-     * 等待数据超时时间
-     */
-    private Integer socketTimeOut = 30000;
-    /**
-     * 连接池获取连接的超时时间
-     */
-    private Integer connectionRequestTimeOut = 500;
-    /**
-     * 最大连接数
-     */
-    private Integer maxConnectNum = 30;
-    /**
-     * 最大路由连接数
-     */
-    private Integer maxConnectPerRoute = 10;
+
+	/**
+	 * 链接建立超时时间
+	 */
+	private Integer connectTimeOut = 1000;
+	/**
+	 * 等待数据超时时间
+	 */
+	private Integer socketTimeOut = 30000;
+	/**
+	 * 连接池获取连接的超时时间
+	 */
+	private Integer connectionRequestTimeOut = 500;
+	/**
+	 * 最大连接数
+	 */
+	private Integer maxConnectNum = 30;
+	/**
+	 * 最大路由连接数
+	 */
+	private Integer maxConnectPerRoute = 10;
 }

@@ -7,10 +7,9 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    implementation("io.seata:seata-spring-boot-starter"){
-        exclude group: 'io.seata', module: 'seata-all'
-    }
-
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'javax.servlet:javax.servlet-api'
+    implementation 'cn.hutool:hutool-all'
     implementation "io.seata:seata-all"
     implementation "com.zaxxer:HikariCP"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"

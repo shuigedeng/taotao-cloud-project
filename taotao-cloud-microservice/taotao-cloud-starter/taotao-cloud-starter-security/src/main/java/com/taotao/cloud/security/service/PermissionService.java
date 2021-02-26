@@ -17,7 +17,6 @@ package com.taotao.cloud.security.service;
 
 
 import com.taotao.cloud.core.model.SecurityMenu;
-
 import java.util.List;
 
 /**
@@ -27,13 +26,14 @@ import java.util.List;
  * @since 2020/6/2 15:47
  */
 public interface PermissionService {
-    /**
-     * 查询当前用户拥有的资源权限
-     *
-     * @param roleCodes 角色code列表，多个以','隔开
-     * @return java.util.List<com.taotao.cloud.auth.model.SecurityUserMenu>
-     * @author dengtao
-     * @since 2020/5/12 20:38
-     */
-    List<SecurityMenu> findMenuByRoleCodes(String roleCodes);
+
+	/**
+	 * 查询当前用户拥有的资源权限
+	 *
+	 * @param roleCodes 角色code列表，多个以','隔开
+	 * @return java.util.List<com.taotao.cloud.auth.model.SecurityUserMenu>
+	 * @author dengtao
+	 * @since 2020/5/12 20:38
+	 */
+	List<SecurityMenu> findMenuByRoleCodes(String roleCodes);
 }

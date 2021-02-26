@@ -19,45 +19,46 @@ package com.taotao.cloud.rabbitmq.common;
  * 静态常量
  *
  * @author dengtao
- * @since 2020/5/28 17:19
  * @version 1.0.0
+ * @since 2020/5/28 17:19
  */
 public class Constants {
-    /**
-     * 线程数
-     */
-    public final static int THREAD_COUNT = 5;
 
-    /**
-     * 处理间隔时间
-     */
-    public final static int INTERVAL_MILS = 0;
+	/**
+	 * 线程数
+	 */
+	public final static int THREAD_COUNT = 5;
 
-    /**
-     * consumer失败后等待时间(mils)
-     */
-    public static final int ONE_SECOND = 1 * 1000;
+	/**
+	 * 处理间隔时间
+	 */
+	public final static int INTERVAL_MILS = 0;
 
-    /**
-     * 异常sleep时间(mils)
-     */
-    public static final int ONE_MINUTE = 1 * 60 * 1000;
-    /**
-     * MQ消息retry时间
-     */
-    public static final int RETRY_TIME_INTERVAL = ONE_MINUTE;
-    /**
-     * MQ消息有效时间
-     */
-    public static final int VALID_TIME = ONE_MINUTE;
+	/**
+	 * consumer失败后等待时间(mils)
+	 */
+	public static final int ONE_SECOND = 1 * 1000;
 
-    /**
-     * 主题模式
-     */
-    public static final String TOPIC_TYPE = "topic";
+	/**
+	 * 异常sleep时间(mils)
+	 */
+	public static final int ONE_MINUTE = 1 * 60 * 1000;
+	/**
+	 * MQ消息retry时间
+	 */
+	public static final int RETRY_TIME_INTERVAL = ONE_MINUTE;
+	/**
+	 * MQ消息有效时间
+	 */
+	public static final int VALID_TIME = ONE_MINUTE;
 
-    /**
-     *
-     */
-    public static final String DIRECT_TYPE = "direct";
+	/**
+	 * 主题模式
+	 */
+	public static final String TOPIC_TYPE = "topic";
+
+	/**
+	 *
+	 */
+	public static final String DIRECT_TYPE = "direct";
 }

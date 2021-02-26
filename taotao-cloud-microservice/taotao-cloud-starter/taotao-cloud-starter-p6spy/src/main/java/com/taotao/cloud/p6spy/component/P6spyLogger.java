@@ -24,52 +24,54 @@ import org.springframework.util.StringUtils;
  * P6spy日志实现
  *
  * @author dengtao
- * @since 2020/10/14 09:38
  * @version 1.0.0
+ * @since 2020/10/14 09:38
  */
 public class P6spyLogger extends FormattedLogger {
-    private Exception e;
 
-    @Override
-    public void logException(Exception e) {
-        this.e = e;
-        LogUtil.error("数据库日志错误", e);
-    }
+	private Exception e;
 
-    @Override
-    public void logText(String text) {
-        LogUtil.info(text);
-    }
+	@Override
+	public void logException(Exception e) {
+		this.e = e;
+		LogUtil.error("数据库日志错误", e);
+	}
 
-    @Override
-    public void logSQL(int connectionId, String now, long elapsed, Category category, String prepared, String sql, String url) {
-        final String msg = strategy.formatMessage(connectionId, now, elapsed,
-                category.toString(), prepared, sql, url);
+	@Override
+	public void logText(String text) {
+		LogUtil.info(text);
+	}
 
-        if (StringUtils.isEmpty(msg)) {
-            return;
-        }
-        if (Category.ERROR.equals(category)) {
-            LogUtil.error(msg, e);
-        } else if (Category.WARN.equals(category)) {
-            LogUtil.warn(msg);
-        } else if (Category.DEBUG.equals(category)) {
-            LogUtil.debug(msg);
-        } else {
-            LogUtil.info(msg);
-        }
-    }
+	@Override
+	public void logSQL(int connectionId, String now, long elapsed, Category category,
+		String prepared, String sql, String url) {
+		final String msg = strategy.formatMessage(connectionId, now, elapsed,
+			category.toString(), prepared, sql, url);
 
-    @Override
-    public boolean isCategoryEnabled(Category category) {
-        if (Category.ERROR.equals(category)) {
-            return LogUtil.isErrorEnabled();
-        } else if (Category.WARN.equals(category)) {
-            return LogUtil.isWarnEnabled();
-        } else if (Category.DEBUG.equals(category)) {
-            return LogUtil.isDebugEnabled();
-        } else {
-            return LogUtil.isInfoEnabled();
-        }
-    }
+		if (StringUtils.isEmpty(msg)) {
+			return;
+		}
+		if (Category.ERROR.equals(category)) {
+			LogUtil.error(msg, e);
+		} else if (Category.WARN.equals(category)) {
+			LogUtil.warn(msg);
+		} else if (Category.DEBUG.equals(category)) {
+			LogUtil.debug(msg);
+		} else {
+			LogUtil.info(msg);
+		}
+	}
+
+	@Override
+	public boolean isCategoryEnabled(Category category) {
+		if (Category.ERROR.equals(category)) {
+			return LogUtil.isErrorEnabled();
+		} else if (Category.WARN.equals(category)) {
+			return LogUtil.isWarnEnabled();
+		} else if (Category.DEBUG.equals(category)) {
+			return LogUtil.isDebugEnabled();
+		} else {
+			return LogUtil.isInfoEnabled();
+		}
+	}
 }

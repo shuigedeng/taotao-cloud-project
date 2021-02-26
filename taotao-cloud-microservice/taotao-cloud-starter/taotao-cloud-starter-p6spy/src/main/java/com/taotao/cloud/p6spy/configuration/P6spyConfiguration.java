@@ -18,8 +18,9 @@ package com.taotao.cloud.p6spy.configuration;
 import com.p6spy.engine.spy.P6ModuleManager;
 import com.p6spy.engine.spy.P6SpyDriver;
 import com.p6spy.engine.spy.P6SpyOptions;
-import com.p6spy.engine.spy.option.SystemProperties;
 import com.taotao.cloud.p6spy.properties.P6spyProperties;
+import java.lang.reflect.Field;
+import java.util.Map;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -27,43 +28,42 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-
 /**
  * P6spyAutoConfiguration
  *
  * @author dengtao
- * @since 2020/10/14 09:18
  * @version 1.0.0
+ * @since 2020/10/14 09:18
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)
 @ConditionalOnProperty(prefix = "taotao.cloud.p6spy", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class P6spyConfiguration implements ApplicationRunner {
-    private final Environment environment;
 
-    public P6spyConfiguration(Environment environment) {
-        this.environment = environment;
-    }
+	private final Environment environment;
 
-    @Override
-    public void run(ApplicationArguments args) {
-        P6spyConfiguration.p6spyReload(environment);
-    }
+	public P6spyConfiguration(Environment environment) {
+		this.environment = environment;
+	}
 
-    public static void p6spyReload(Environment p6spyProperties) {
-        Map<String, String> defaults = P6SpyOptions.getActiveInstance().getDefaults();
-        Field[] fields = P6spyProperties.class.getDeclaredFields();
-        for (Field field : fields) {
-            String fieldName = field.getName();
-            String propertiesName = "taotao.cloud.p6spy.".concat(fieldName);
-            if (p6spyProperties.containsProperty(propertiesName)) {
-                String systemPropertyValue = p6spyProperties.getProperty(propertiesName, defaults.get(fieldName));
-                defaults.put(fieldName, systemPropertyValue);
-            }
-        }
-        P6SpyOptions.getActiveInstance().load(defaults);
-        P6ModuleManager.getInstance().reload();
-    }
+	@Override
+	public void run(ApplicationArguments args) {
+		P6spyConfiguration.p6spyReload(environment);
+	}
+
+	public static void p6spyReload(Environment p6spyProperties) {
+		Map<String, String> defaults = P6SpyOptions.getActiveInstance().getDefaults();
+		Field[] fields = P6spyProperties.class.getDeclaredFields();
+		for (Field field : fields) {
+			String fieldName = field.getName();
+			String propertiesName = "taotao.cloud.p6spy.".concat(fieldName);
+			if (p6spyProperties.containsProperty(propertiesName)) {
+				String systemPropertyValue = p6spyProperties
+					.getProperty(propertiesName, defaults.get(fieldName));
+				defaults.put(fieldName, systemPropertyValue);
+			}
+		}
+		P6SpyOptions.getActiveInstance().load(defaults);
+		P6ModuleManager.getInstance().reload();
+	}
 }

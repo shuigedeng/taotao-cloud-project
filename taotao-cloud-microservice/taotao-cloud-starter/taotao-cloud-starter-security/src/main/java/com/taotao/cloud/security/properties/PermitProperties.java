@@ -15,58 +15,58 @@
  */
 package com.taotao.cloud.security.properties;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 配置需要放权的url白名单
  *
  * @author dengtao
- * @since 2020/5/2 11:21
  * @version 1.0.0
+ * @since 2020/5/2 11:21
  */
 @Data
 @ConfigurationProperties(prefix = "taotao.cloud.oauth2.security.ignore")
 public class PermitProperties {
-    /**
-     * 监控中心和swagger需要访问的url
-     */
-    private static final String[] ENDPOINTS = {
-            "/actuator/**",
-            "/fallback",
-            "/favicon.ico",
-            "/swagger-resources/**",
-            "/webjars/**",
-            "/druid/**",
-            "/*/*.html",
-            "/*/*.css",
-            "/*/*.js",
-            "/*.js",
-            "/*.css",
-            "/*.html",
-            "/*/favicon.ico",
-            "/*/api-docs",
-            "/css/**",
-            "/js/**",
-            "/images/**"
-    };
 
-    /**
-     * 设置不用认证的url
-     */
-    private String[] httpUrls = {};
+	/**
+	 * 监控中心和swagger需要访问的url
+	 */
+	private static final String[] ENDPOINTS = {
+		"/actuator/**",
+		"/fallback",
+		"/favicon.ico",
+		"/swagger-resources/**",
+		"/webjars/**",
+		"/druid/**",
+		"/*/*.html",
+		"/*/*.css",
+		"/*/*.js",
+		"/*.js",
+		"/*.css",
+		"/*.html",
+		"/*/favicon.ico",
+		"/*/api-docs",
+		"/css/**",
+		"/js/**",
+		"/images/**"
+	};
 
-    public String[] getUrls() {
-        if (httpUrls == null || httpUrls.length == 0) {
-            return ENDPOINTS;
-        }
-        List<String> list = new ArrayList<>();
-        list.addAll(Arrays.asList(ENDPOINTS));
-        list.addAll(Arrays.asList(httpUrls));
-        return list.toArray(new String[list.size()]);
-    }
+	/**
+	 * 设置不用认证的url
+	 */
+	private String[] httpUrls = {};
+
+	public String[] getUrls() {
+		if (httpUrls == null || httpUrls.length == 0) {
+			return ENDPOINTS;
+		}
+		List<String> list = new ArrayList<>();
+		list.addAll(Arrays.asList(ENDPOINTS));
+		list.addAll(Arrays.asList(httpUrls));
+		return list.toArray(new String[list.size()]);
+	}
 }

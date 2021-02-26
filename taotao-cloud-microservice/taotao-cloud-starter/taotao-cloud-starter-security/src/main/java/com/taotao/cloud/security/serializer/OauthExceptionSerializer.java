@@ -27,25 +27,26 @@ import java.io.IOException;
  * CustomOauthExceptionSerializer
  *
  * @author dengtao
- * @since 2020/4/30 09:12
  * @version 1.0.0
+ * @since 2020/4/30 09:12
  */
 public class OauthExceptionSerializer extends StdSerializer<CustomOauthException> {
 
-    public OauthExceptionSerializer() {
-        super(CustomOauthException.class);
-    }
+	public OauthExceptionSerializer() {
+		super(CustomOauthException.class);
+	}
 
-    @Override
-    public void serialize(CustomOauthException value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        gen.writeStartObject();
-        gen.writeObjectField("code", value.getHttpErrorCode());
-        String errorMessage = value.getErrorCode();
-        if (errorMessage != null) {
-            errorMessage = HtmlUtils.htmlEscape(errorMessage);
-        }
-        gen.writeStringField("message", errorMessage);
-        gen.writeStringField("data", null);
-        gen.writeEndObject();
-    }
+	@Override
+	public void serialize(CustomOauthException value, JsonGenerator gen,
+		SerializerProvider provider) throws IOException {
+		gen.writeStartObject();
+		gen.writeObjectField("code", value.getHttpErrorCode());
+		String errorMessage = value.getErrorCode();
+		if (errorMessage != null) {
+			errorMessage = HtmlUtils.htmlEscape(errorMessage);
+		}
+		gen.writeStringField("message", errorMessage);
+		gen.writeStringField("data", null);
+		gen.writeEndObject();
+	}
 }

@@ -22,19 +22,16 @@ import com.taotao.cloud.file.exception.FileUploadException;
 import com.taotao.cloud.file.pojo.FileInfo;
 import com.taotao.cloud.file.propeties.LocalProperties;
 import com.taotao.cloud.file.util.FileUtil;
-import com.taotao.cloud.file.util.FtpClientUtil;
+import java.io.File;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-
 /**
  * @author dengtao
- * @since 2020/10/26 10:28
  * @version 1.0.0
+ * @since 2020/10/26 10:28
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_LOCAL)
 public class LocalAutoConfiguration {
@@ -48,7 +45,7 @@ public class LocalAutoConfiguration {
 	}
 
 	@Bean
-	public LocalFileUpload fileUpload(){
+	public LocalFileUpload fileUpload() {
 		return new LocalFileUpload();
 	}
 
@@ -71,7 +68,7 @@ public class LocalAutoConfiguration {
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo)  {
+		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
 			try {
 				String filePath = properties.getFilePath() + "/" + fileInfo.getName();
 				File newFile = cn.hutool.core.io.FileUtil.newFile(filePath);

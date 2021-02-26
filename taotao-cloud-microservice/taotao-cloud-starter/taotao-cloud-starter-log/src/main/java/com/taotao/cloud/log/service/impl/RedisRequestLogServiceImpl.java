@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -30,25 +30,26 @@ import java.time.format.DateTimeFormatter;
  * 审计日志实现类-redis
  *
  * @author dengtao
- * @since 2020/5/2 11:18
  * @version 1.0.0
+ * @since 2020/5/2 11:18
  */
 @Slf4j
 public class RedisRequestLogServiceImpl implements IRequestLogService {
 
-    private final static String SYS_LOG = "sys:log:request:";
+	private static final String SYS_LOG = "sys:log:request:";
 
-    @Resource
-    private RedisRepository redisRepository;
+	@Resource
+	private RedisRepository redisRepository;
 
-    @Override
-    public void save(RequestLog requestLog) {
-        String date = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault()).format(Instant.now());
-        Long index = redisRepository.leftPush(SYS_LOG + date, JSON.toJSONString(requestLog));
-        if (index > 0) {
-            log.info("redis远程日志记录成功：{}", requestLog);
-        } else {
-            log.error("redis远程日志记录失败：{}", requestLog);
-        }
-    }
+	@Override
+	public void save(RequestLog requestLog) {
+		String date = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
+			.format(Instant.now());
+		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(requestLog));
+		if (index > 0) {
+			log.info("redis远程日志记录成功：{}", requestLog);
+		} else {
+			log.error("redis远程日志记录失败：{}", requestLog);
+		}
+	}
 }

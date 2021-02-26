@@ -19,60 +19,61 @@ package com.taotao.cloud.rabbitmq.common;
  * FastOcpRabbitMqConstants
  *
  * @author dengtao
- * @since 2020/5/28 17:28
  * @version 1.0.0
+ * @since 2020/5/28 17:28
  */
 public class FastOcpRabbitMqConstants {
-    /**
-     * 线程数
-     */
-    public final static int THREAD_COUNT = 5;
 
-    /**
-     * 处理间隔时间
-     */
-    public final static int INTERVAL_MILS = 0;
+	/**
+	 * 线程数
+	 */
+	public final static int THREAD_COUNT = 5;
 
-    /**
-     * consumer失败后等待时间(mils)
-     */
-    public static final int ONE_SECOND = 1 * 1000;
+	/**
+	 * 处理间隔时间
+	 */
+	public final static int INTERVAL_MILS = 0;
 
-    /**
-     * 异常sleep时间(mils)
-     */
-    public static final int ONE_MINUTE = 1 * 60 * 1000;
-    /**
-     * MQ消息retry时间
-     */
-    public static final int RETRY_TIME_INTERVAL = ONE_MINUTE;
+	/**
+	 * consumer失败后等待时间(mils)
+	 */
+	public static final int ONE_SECOND = 1 * 1000;
 
-    /**
-     * MQ消息有效时间
-     */
-    public static final int VALID_TIME = ONE_MINUTE;
+	/**
+	 * 异常sleep时间(mils)
+	 */
+	public static final int ONE_MINUTE = 1 * 60 * 1000;
+	/**
+	 * MQ消息retry时间
+	 */
+	public static final int RETRY_TIME_INTERVAL = ONE_MINUTE;
 
-    /**
-     * 主题模式
-     */
-    public static final String TOPIC_TYPE = "topic";
+	/**
+	 * MQ消息有效时间
+	 */
+	public static final int VALID_TIME = ONE_MINUTE;
 
-    /**
-     *
-     */
-    public static final String DIRECT_TYPE = "direct";
+	/**
+	 * 主题模式
+	 */
+	public static final String TOPIC_TYPE = "topic";
 
-
-    /**
-     * 发送消息服务名称
-     */
-    public final static String SERVER_NAME = "server_name";
+	/**
+	 *
+	 */
+	public static final String DIRECT_TYPE = "direct";
 
 
-    /**
-     * 发送消息业务名称
-     */
-    public final static String MESSAGE_NAME = "message_name";
+	/**
+	 * 发送消息服务名称
+	 */
+	public final static String SERVER_NAME = "server_name";
+
+
+	/**
+	 * 发送消息业务名称
+	 */
+	public final static String MESSAGE_NAME = "message_name";
 
 
 }

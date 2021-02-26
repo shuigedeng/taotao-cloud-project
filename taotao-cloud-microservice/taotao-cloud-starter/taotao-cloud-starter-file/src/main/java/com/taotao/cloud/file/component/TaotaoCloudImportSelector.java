@@ -22,16 +22,16 @@ import com.taotao.cloud.file.configuration.NginxAutoConfiguration;
 import com.taotao.cloud.file.configuration.QCloudAutoConfiguration;
 import com.taotao.cloud.file.configuration.QiniuAutoConfiguration;
 import com.taotao.cloud.file.configuration.UpYunAutoConfiguration;
+import java.util.function.Predicate;
 import org.springframework.context.annotation.ImportSelector;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.type.AnnotationMetadata;
 
-import java.util.function.Predicate;
-
 /**
+ * TaotaoCloudImportSelector
+ *
  * @author dengtao
- * @since 2020/10/26 12:59
  * @version 1.0.0
+ * @since 2020/10/26 12:59
  */
 public class TaotaoCloudImportSelector implements ImportSelector {
 
@@ -45,7 +45,6 @@ public class TaotaoCloudImportSelector implements ImportSelector {
 		QiniuAutoConfiguration.class.getName(),
 		UpYunAutoConfiguration.class.getName()
 	};
-
 
 	@Override
 	public String[] selectImports(AnnotationMetadata annotationMetadata) {

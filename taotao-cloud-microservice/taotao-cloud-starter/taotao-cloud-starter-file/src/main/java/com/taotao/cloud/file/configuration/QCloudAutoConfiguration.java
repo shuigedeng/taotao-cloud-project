@@ -22,8 +22,8 @@ import org.springframework.util.Assert;
 
 /**
  * @author dengtao
- * @since 2020/10/26 10:28
  * @version 1.0.0
+ * @since 2020/10/26 10:28
  */
 @ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_QCLOUD)
 public class QCloudAutoConfiguration {
@@ -35,7 +35,4 @@ public class QCloudAutoConfiguration {
 		Assert.notNull(properties, "QCloudProperties为null");
 		this.properties = properties;
 	}
-
-
-
 }

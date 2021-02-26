@@ -19,44 +19,43 @@ package com.taotao.cloud.rabbitmq.enums;
  * ConsumerResultEnum
  *
  * @author dengtao
- * @since 2020/9/29 15:57
  * @version 1.0.0
+ * @since 2020/9/29 15:57
  */
 public enum ConsumerResultEnum {
+	/**
+	 * 收到消息,未确认
+	 */
+	SEND(0, "收到消息,未确认"),
+	/**
+	 * 收到消息,确认消费成功
+	 */
+	SUCCESS(1, "收到消息，确认消费成功"),
+	/**
+	 * 收到消息,确认消费失败
+	 */
+	FAIL(2, "收到消息，确认消费失败");
 
-    /**
-     * 收到消息,未确认
-     */
-    SEND(0, "收到消息,未确认"),
-    /**
-     * 收到消息,确认消费成功
-     */
-    SUCCESS(1, "收到消息，确认消费成功"),
-    /**
-     * 收到消息,确认消费失败
-     */
-    FAIL(2, "收到消息，确认消费失败");
+	private Integer code;
+	private String desc;
 
-    private Integer code;
-    private String desc;
+	ConsumerResultEnum(Integer code, String desc) {
 
-    ConsumerResultEnum(Integer code, String desc) {
+	}
 
-    }
+	public Integer getCode() {
+		return code;
+	}
 
-    public Integer getCode() {
-        return code;
-    }
+	public void setCode(Integer code) {
+		this.code = code;
+	}
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 }

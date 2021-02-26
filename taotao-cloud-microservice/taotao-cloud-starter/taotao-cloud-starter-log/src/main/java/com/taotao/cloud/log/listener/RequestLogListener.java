@@ -29,8 +29,8 @@ import org.springframework.scheduling.annotation.Async;
  * 注解形式的监听 异步监听日志事件
  *
  * @author dengtao
- * @since 2020/6/3 13:33
  * @version 1.0.0
+ * @since 2020/6/3 13:33
  */
 @Slf4j
 public class RequestLogListener {
@@ -39,17 +39,20 @@ public class RequestLogListener {
 	@EventListener(RequestLogEvent.class)
 	public void saveRequestLog(RequestLogEvent event) {
 		RequestLog requestLog = (RequestLog) event.getSource();
-		KafkaRequestLogServiceImpl kafkaRequestLogService = BeanUtil.getBean(KafkaRequestLogServiceImpl.class, true);
+		KafkaRequestLogServiceImpl kafkaRequestLogService = BeanUtil
+			.getBean(KafkaRequestLogServiceImpl.class, true);
 		if (null != kafkaRequestLogService) {
 			kafkaRequestLogService.save(requestLog);
 		}
 
-		LoggerRequestLogServiceImpl loggerRequestLogService = BeanUtil.getBean(LoggerRequestLogServiceImpl.class, true);
+		LoggerRequestLogServiceImpl loggerRequestLogService = BeanUtil
+			.getBean(LoggerRequestLogServiceImpl.class, true);
 		if (null != loggerRequestLogService) {
 			loggerRequestLogService.save(requestLog);
 		}
 
-		RedisRequestLogServiceImpl redisRequestLogService = BeanUtil.getBean(RedisRequestLogServiceImpl.class, true);
+		RedisRequestLogServiceImpl redisRequestLogService = BeanUtil
+			.getBean(RedisRequestLogServiceImpl.class, true);
 		if (null != redisRequestLogService) {
 			redisRequestLogService.save(requestLog);
 		}

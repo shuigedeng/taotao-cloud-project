@@ -21,18 +21,21 @@ import feign.RequestTemplate;
 import io.seata.core.context.RootContext;
 
 /**
+ * SeataInterceptor
+ *
  * @author dengtao
- * @since 2020/10/22 17:00
  * @version 1.0.0
+ * @since 2020/10/22 17:00
  */
 public class SeataInterceptor implements RequestInterceptor {
-    // 这里在feign请求的header中加入xid
-    // 注意：这里一定要将feign.hystrix.enabled设为false，因为为true时feign是通过线程池调用，而XID并不是一个InheritablThreadLocal变量。
-    @Override
-    public void apply(RequestTemplate template) {
-        String xid = RootContext.getXID();
-        if (StrUtil.isNotBlank(xid)) {
-            template.header("xid", xid);
-        }
-    }
+
+	// 这里在feign请求的header中加入xid
+	// 注意：这里一定要将feign.hystrix.enabled设为false，因为为true时feign是通过线程池调用，而XID并不是一个InheritablThreadLocal变量。
+	@Override
+	public void apply(RequestTemplate template) {
+		String xid = RootContext.getXID();
+		if (StrUtil.isNotBlank(xid)) {
+			template.header("xid", xid);
+		}
+	}
 }

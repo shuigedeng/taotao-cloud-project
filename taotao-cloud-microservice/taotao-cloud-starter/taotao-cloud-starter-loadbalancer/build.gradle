@@ -17,6 +17,8 @@ dependencies {
     implementation "org.springframework.security:spring-security-core"
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
     implementation "javax.servlet:javax.servlet-api"
     implementation "org.apache.httpcomponents:httpclient"
     implementation "org.apache.httpcomponents:httpmime"

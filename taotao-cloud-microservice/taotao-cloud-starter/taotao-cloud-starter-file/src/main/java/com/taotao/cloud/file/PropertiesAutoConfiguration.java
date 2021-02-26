@@ -15,26 +15,35 @@
  */
 package com.taotao.cloud.file;
 
-import com.taotao.cloud.file.propeties.*;
+import com.taotao.cloud.file.propeties.AliyunOssProperties;
+import com.taotao.cloud.file.propeties.FastdfsProperties;
+import com.taotao.cloud.file.propeties.FileProperties;
+import com.taotao.cloud.file.propeties.FtpProperties;
+import com.taotao.cloud.file.propeties.LocalProperties;
+import com.taotao.cloud.file.propeties.NginxProperties;
+import com.taotao.cloud.file.propeties.QCloudProperties;
+import com.taotao.cloud.file.propeties.QiniuProperties;
+import com.taotao.cloud.file.propeties.UpYunProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * PropertiesAutoConfiguration
  *
  * @author dengtao
- * @since 2020/7/29 14:18
  * @version 1.0.0
+ * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({
-        FileProperties.class,
-        AliyunOssProperties.class,
-        FastdfsProperties.class,
-        LocalProperties.class,
-        NginxProperties.class,
-        QCloudProperties.class,
-        QiniuProperties.class,
-        FtpProperties.class,
-        UpYunProperties.class})
+	FileProperties.class,
+	AliyunOssProperties.class,
+	FastdfsProperties.class,
+	LocalProperties.class,
+	NginxProperties.class,
+	QCloudProperties.class,
+	QiniuProperties.class,
+	FtpProperties.class,
+	UpYunProperties.class
+})
 public class PropertiesAutoConfiguration {
 
 }

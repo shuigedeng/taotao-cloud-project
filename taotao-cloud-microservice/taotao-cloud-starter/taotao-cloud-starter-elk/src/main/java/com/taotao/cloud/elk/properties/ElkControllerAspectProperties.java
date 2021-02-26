@@ -23,13 +23,13 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * ElkControllerAspectProperties
  *
  * @author dengtao
- * @since 2020/6/3 10:43
  * @version 1.0.0
+ * @since 2020/6/3 10:43
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "toaotao.cloud.elk.web.aspect")
+@ConfigurationProperties(prefix = "taotao.cloud.elk.web.aspect")
 public class ElkControllerAspectProperties {
 
-    private boolean enabled = false;
+	private boolean enabled = false;
 }

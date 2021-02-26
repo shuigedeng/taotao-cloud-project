@@ -38,71 +38,73 @@ import javax.annotation.Resource;
  * ElkConfiguration
  *
  * @author dengtao
- * @since 2020/6/3 10:43
  * @version 1.0.0
+ * @since 2020/6/3 10:43
  */
 @Slf4j
 @ConditionalOnProperty(prefix = "taotao.cloud.elk", name = "enabled", havingValue = "true")
 public class ElkConfiguration implements InitializingBean {
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELK_STARTER + "]" + "elk模块已启动");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		log.info(
+			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELK_STARTER + "]" + "elk模块已启动");
+	}
 
-    @Resource
-    private ElkProperties elkProperties;
+	@Resource
+	private ElkProperties elkProperties;
 
-    @Resource
-    private LogStatisticsFilter logStatisticsFilter;
+	@Resource
+	private LogStatisticsFilter logStatisticsFilter;
 
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    public LogstashTcpSocketAppender logstashTcpSocketAppender() {
-        LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
-        String[] destinations = elkProperties.getDestinations();
-        if (elkProperties.getDestinations() == null || elkProperties.getDestinations().length == 0) {
-            throw new BaseException("未设置elk地址");
-        }
+	@Bean(initMethod = "start", destroyMethod = "stop")
+	public LogstashTcpSocketAppender logstashTcpSocketAppender() {
+		LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
+		String[] destinations = elkProperties.getDestinations();
+		if (elkProperties.getDestinations() == null
+			|| elkProperties.getDestinations().length == 0) {
+			throw new BaseException("未设置elk地址");
+		}
 
-        for (String destination : destinations) {
-            appender.addDestination(destination);
-        }
-        appender.setEncoder(createEncoder());
+		for (String destination : destinations) {
+			appender.addDestination(destination);
+		}
+		appender.setEncoder(createEncoder());
 
-        ILoggerFactory factory = LoggerFactory.getILoggerFactory();
-        if (factory instanceof LoggerContext) {
-            LoggerContext context = ((LoggerContext) factory);
-            appender.setContext(context);
-            context.getLogger("ROOT").addAppender(appender);
-        }
+		ILoggerFactory factory = LoggerFactory.getILoggerFactory();
+		if (factory instanceof LoggerContext) {
+			LoggerContext context = ((LoggerContext) factory);
+			appender.setContext(context);
+			context.getLogger("ROOT").addAppender(appender);
+		}
 
-        if (logStatisticsFilter != null) {
-            //增加错误日志统计拦截
-            appender.addFilter(logStatisticsFilter);
-        }
+		if (logStatisticsFilter != null) {
+			//增加错误日志统计拦截
+			appender.addFilter(logStatisticsFilter);
+		}
 
-        return appender;
-    }
+		return appender;
+	}
 
-    @Bean
-    @ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
-    LogStatisticsFilter getLogStatisticsFilter() {
-        return new LogStatisticsFilter();
-    }
+	@Bean
+	@ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
+	LogStatisticsFilter getLogStatisticsFilter() {
+		return new LogStatisticsFilter();
+	}
 
-    private Encoder<ILoggingEvent> createEncoder() {
-        LogstashEncoder encoder = new LogstashEncoder();
-        String appName = elkProperties.getAppName();
-        if (StrUtil.isBlank(appName)) {
-            appName = elkProperties.getSpringAppName();
-        }
+	private Encoder<ILoggingEvent> createEncoder() {
+		LogstashEncoder encoder = new LogstashEncoder();
+		String appName = elkProperties.getAppName();
+		if (StrUtil.isBlank(appName)) {
+			appName = elkProperties.getSpringAppName();
+		}
 
-        if (StrUtil.isBlank(appName)) {
-            throw new BaseException("缺少appName配置");
-        }
-        encoder.setCustomFields("{\"appname\":\"" + appName + "\",\"appindex\":\"applog\"}");
-        encoder.setEncoding("UTF-8");
+		if (StrUtil.isBlank(appName)) {
+			throw new BaseException("缺少appName配置");
+		}
+		encoder.setCustomFields("{\"appname\":\"" + appName + "\",\"appindex\":\"applog\"}");
+		encoder.setEncoding("UTF-8");
 
-        return encoder;
-    }
+		return encoder;
+	}
 }

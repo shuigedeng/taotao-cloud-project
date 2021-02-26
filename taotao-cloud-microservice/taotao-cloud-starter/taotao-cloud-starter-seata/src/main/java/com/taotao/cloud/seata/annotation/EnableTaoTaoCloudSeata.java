@@ -18,19 +18,18 @@ package com.taotao.cloud.seata.annotation;
 import com.taotao.cloud.seata.configuration.DataSourceConfiguration;
 import com.taotao.cloud.seata.filter.SeataXidFilter;
 import com.taotao.cloud.seata.interceptor.SeataInterceptor;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
  * 开启feign拦截器传递数据给下游服务，包含基础数据和http的相关数据
  *
  * @author dengtao
- * @since 2020/4/5 13:40
  * @version 1.0.0
+ * @since 2020/4/5 13:40
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

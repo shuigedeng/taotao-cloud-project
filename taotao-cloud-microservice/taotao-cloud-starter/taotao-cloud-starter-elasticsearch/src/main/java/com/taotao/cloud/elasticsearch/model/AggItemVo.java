@@ -21,11 +21,12 @@ import lombok.Data;
  * 聚合VO
  *
  * @author dengtao
- * @since 2020/5/3 07:48
  * @version 1.0.0
+ * @since 2020/5/3 07:48
  */
 @Data
 public class AggItemVo {
-    private String name;
-    private Long value;
+
+	private String name;
+	private Long value;
 }

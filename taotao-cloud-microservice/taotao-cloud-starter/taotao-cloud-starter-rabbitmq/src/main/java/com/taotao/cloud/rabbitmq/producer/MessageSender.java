@@ -21,28 +21,26 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
  * 消息发送者
  *
  * @author dengtao
- * @since 2020/9/29 15:54
  * @version 1.0.0
+ * @since 2020/9/29 15:54
  */
 public interface MessageSender {
 
-    /**
-     * 发送数据
-     *
-     * @param message message
-     * @author dengtao
-     * @since 2020/9/29 15:55
-     * @version 1.0.0
-     */
-    DetailResponse send(Object message);
+	/**
+	 * 发送数据
+	 *
+	 * @param message message
+	 * @author dengtao
+	 * @since 2020/9/29 15:55
+	 */
+	DetailResponse send(Object message);
 
-    /**
-     * 发送数据
-     *
-     * @param messageWithTime messageWithTime
-     * @author dengtao
-     * @since 2020/9/29 15:55
-     * @version 1.0.0
-     */
-    DetailResponse send(MessageWithTime messageWithTime);
+	/**
+	 * 发送数据
+	 *
+	 * @param messageWithTime messageWithTime
+	 * @author dengtao
+	 * @since 2020/9/29 15:55
+	 */
+	DetailResponse send(MessageWithTime messageWithTime);
 }

@@ -22,33 +22,34 @@ import com.taotao.cloud.common.exception.BaseException;
  * 业务异常
  *
  * @author dengtao
- * @since 2020/5/2 11:21
  * @version 1.0.0
+ * @since 2020/5/2 11:21
  */
 public class FileUploadException extends BaseException {
-    private static final long serialVersionUID = 6610083281801529147L;
 
-    public FileUploadException(String message) {
-        super(message);
-    }
+	private static final long serialVersionUID = 6610083281801529147L;
 
-    public FileUploadException(Integer code, String message) {
-        super(code, message);
-    }
+	public FileUploadException(String message) {
+		super(message);
+	}
 
-    public FileUploadException(String message, Throwable e) {
-        super(message, e);
-    }
+	public FileUploadException(Integer code, String message) {
+		super(code, message);
+	}
 
-    public FileUploadException(Integer code, String message, Throwable e) {
-        super(code, message, e);
-    }
+	public FileUploadException(String message, Throwable e) {
+		super(message, e);
+	}
 
-    public FileUploadException(ResultEnum result) {
-        super(result);
-    }
+	public FileUploadException(Integer code, String message, Throwable e) {
+		super(code, message, e);
+	}
 
-    public FileUploadException(ResultEnum result, Throwable e) {
-        super(result, e);
-    }
+	public FileUploadException(ResultEnum result) {
+		super(result);
+	}
+
+	public FileUploadException(ResultEnum result, Throwable e) {
+		super(result, e);
+	}
 }

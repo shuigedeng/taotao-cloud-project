@@ -24,12 +24,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * PropertiesAutoConfiguration
  *
  * @author dengtao
- * @since 2020/7/29 14:18
  * @version 1.0.0
+ * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({
-        ElkProperties.class,
-        ElkControllerAspectProperties.class,
-        ElkHealthLogStatisticProperties.class})
+	ElkProperties.class,
+	ElkControllerAspectProperties.class,
+	ElkHealthLogStatisticProperties.class
+})
 public class PropertiesAutoConfiguration {
+
 }

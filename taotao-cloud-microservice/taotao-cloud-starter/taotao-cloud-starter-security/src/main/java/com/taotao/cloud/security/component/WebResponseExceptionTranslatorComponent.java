@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,19 +35,16 @@ import org.springframework.security.oauth2.common.exceptions.RedirectMismatchExc
 import org.springframework.security.oauth2.common.exceptions.UnsupportedResponseTypeException;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 
 /**
  * 添加CustomWebResponseExceptionTranslator，登录发生异常时指定exceptionTranslator
  *
  * @author dengtao
- * @since 2020/4/30 09:09
  * @version 1.0.0
+ * @since 2020/4/30 09:09
  */
 public class WebResponseExceptionTranslatorComponent extends DefaultWebResponseExceptionTranslator {
+
 	public static final String BAD_MSG = "坏的凭证";
 
 	@Override
@@ -66,13 +65,15 @@ public class WebResponseExceptionTranslatorComponent extends DefaultWebResponseE
 		OAuth2Exception auth2Exception = response.getBody();
 
 		assert auth2Exception != null;
-		BootOAuth2Exception exception = new BootOAuth2Exception(auth2Exception.getMessage(), auth2Exception);
+		BootOAuth2Exception exception = new BootOAuth2Exception(auth2Exception.getMessage(),
+			auth2Exception);
 
 		return new ResponseEntity<>(exception, response.getHeaders(), HttpStatus.OK);
 	}
 
 	@JsonSerialize(using = BootOAuthExceptionJacksonSerializer.class)
 	public static class BootOAuth2Exception extends OAuth2Exception {
+
 		public BootOAuth2Exception(String msg, Throwable t) {
 			super(msg, t);
 		}
@@ -82,20 +83,26 @@ public class WebResponseExceptionTranslatorComponent extends DefaultWebResponseE
 		}
 	}
 
-	public static class BootOAuthExceptionJacksonSerializer extends StdSerializer<BootOAuth2Exception> {
+	public static class BootOAuthExceptionJacksonSerializer extends
+		StdSerializer<BootOAuth2Exception> {
+
 		protected BootOAuthExceptionJacksonSerializer() {
 			super(BootOAuth2Exception.class);
 		}
 
 		@Override
-		public void serialize(BootOAuth2Exception value, JsonGenerator json, SerializerProvider serializerProvider) throws IOException {
+		public void serialize(BootOAuth2Exception value, JsonGenerator json,
+			SerializerProvider serializerProvider) throws IOException {
 			json.writeStartObject();
 			json.writeObjectField("code", value.getHttpErrorCode());
 			json.writeObjectField("message", value.getMessage());
 			json.writeObjectField("data", null);
 			json.writeObjectField("type", CommonConstant.ERROR);
-			json.writeObjectField("requestId", StrUtil.isNotBlank(MDC.get(CommonConstant.TRACE_ID)) ? MDC.get(CommonConstant.TRACE_ID) : IdGeneratorUtil.getIdStr());
-			json.writeObjectField("timestamp", CommonConstant.DATETIME_FORMATTER.format(LocalDateTime.now()));
+			json.writeObjectField("requestId",
+				StrUtil.isNotBlank(MDC.get(CommonConstant.TRACE_ID)) ? MDC
+					.get(CommonConstant.TRACE_ID) : IdGeneratorUtil.getIdStr());
+			json.writeObjectField("timestamp",
+				CommonConstant.DATETIME_FORMATTER.format(LocalDateTime.now()));
 			json.writeEndObject();
 		}
 	}

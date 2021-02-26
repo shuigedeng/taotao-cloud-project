@@ -22,14 +22,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 验证码配置
  *
  * @author dengtao
- * @since 2020/5/2 11:20
  * @version 1.0.0
+ * @since 2020/5/2 11:20
  */
 @Data
 @ConfigurationProperties(prefix = "taotao.cloud.oauth2.security.code")
 public class SmsCodeProperties {
-    /**
-     * 设置认证通时不需要验证码的clientId
-     */
-    private String[] ignoreClientCode = {};
+
+	/**
+	 * 设置认证通时不需要验证码的clientId
+	 */
+	private String[] ignoreClientCode = {};
 }

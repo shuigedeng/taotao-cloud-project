@@ -22,6 +22,10 @@ import com.taotao.cloud.core.model.PageResult;
 import com.taotao.cloud.core.utils.BeanUtil;
 import com.taotao.cloud.elasticsearch.model.IndexDto;
 import com.taotao.cloud.elasticsearch.service.IIndexService;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
@@ -36,19 +40,15 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * 索引服务实现
  *
  * @author dengtao
- * @since 2020/6/15 11:27
  * @version 1.0.0
+ * @since 2020/6/15 11:27
  */
 public class IndexServiceImpl implements IIndexService {
+
 	@Autowired
 	private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
@@ -63,7 +63,8 @@ public class IndexServiceImpl implements IIndexService {
 			.put("index.number_of_shards", indexDto.getNumberOfShards())
 			.put("index.number_of_replicas", indexDto.getNumberOfReplicas())
 		);
-		if (StrUtil.isNotEmpty(indexDto.getType()) && StrUtil.isNotEmpty(indexDto.getMappingsSource())) {
+		if (StrUtil.isNotEmpty(indexDto.getType()) && StrUtil
+			.isNotEmpty(indexDto.getMappingsSource())) {
 			//mappings
 			request.mapping(indexDto.getType(), indexDto.getMappingsSource(), XContentType.JSON);
 		}
@@ -82,11 +83,13 @@ public class IndexServiceImpl implements IIndexService {
 	}
 
 	@Override
-	public PageResult<HashMap<String, String>> list(String queryStr, String indices) throws IOException {
+	public PageResult<HashMap<String, String>> list(String queryStr, String indices)
+		throws IOException {
 		Response response = client.getLowLevelClient()
 			.performRequest(new Request(
 				"GET",
-				"/_cat/indices?h=health,status,index,docsCount,docsDeleted,storeSize&s=cds:desc&format=json&index=" + StrUtil.nullToEmpty(indices)
+				"/_cat/indices?h=health,status,index,docsCount,docsDeleted,storeSize&s=cds:desc&format=json&index="
+					+ StrUtil.nullToEmpty(indices)
 			));
 
 		List<HashMap<String, String>> listOfIndicesFromEs = null;
@@ -96,7 +99,7 @@ public class IndexServiceImpl implements IIndexService {
 			};
 			listOfIndicesFromEs = mapper.readValue(rawBody, typeRef);
 		}
-		return PageResult.<HashMap<String, String>>builder().data(listOfIndicesFromEs).code(0).build();
+		return PageResult.succeed(100, 1, 10, listOfIndicesFromEs);
 	}
 
 	/**

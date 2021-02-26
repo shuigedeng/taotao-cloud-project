@@ -1,5 +1,17 @@
-/**
+/*
+ * Copyright 2002-2021 the original author or authors.
  *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.taotao.cloud.file.util;
 
@@ -13,11 +25,6 @@ import com.aliyun.oss.model.InitiateMultipartUploadResult;
 import com.aliyun.oss.model.PartETag;
 import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,15 +36,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * oss 客户端工具类
  *
  * @author dengtao
- * @since 2020/11/12 16:36
  * @version 1.0.0
+ * @since 2020/11/12 16:36
  */
 public class OSSClientUtil {
+
 	/**
 	 * 允许上传的文件格式
 	 */
@@ -51,12 +63,13 @@ public class OSSClientUtil {
 
 
 	public static String upload(MultipartFile uploadFile,
-								OSS ossClient,
-								String bucketName,
-								String urlPrefix) {
+		OSS ossClient,
+		String bucketName,
+		String urlPrefix) {
 		String fileName = uploadFile.getOriginalFilename();
 		// 校验图片格式
-		boolean isLegal = Arrays.stream(FILE_TYPE).anyMatch(type -> StringUtils.endsWithIgnoreCase(fileName, type));
+		boolean isLegal = Arrays.stream(FILE_TYPE)
+			.anyMatch(type -> StringUtils.endsWithIgnoreCase(fileName, type));
 		if (!isLegal) {
 			throw new RuntimeException("不允许上传的文件格式");
 		}
@@ -89,10 +102,10 @@ public class OSSClientUtil {
 
 
 	public static String uploadBigFile(String filePath,
-									   MultipartFile uploadFile,
-									   OSS ossClient,
-									   String bucketName,
-									   String urlPrefix) {
+		MultipartFile uploadFile,
+		OSS ossClient,
+		String bucketName,
+		String urlPrefix) {
 		int part = calPartCount(uploadFile);
 		String uploadId = initMultipartFileUpload(filePath, bucketName, ossClient);
 
@@ -143,11 +156,12 @@ public class OSSClientUtil {
 	}
 
 	public static String initMultipartFileUpload(String filePath,
-												 String bucketName,
-												 OSS ossClient) {
+		String bucketName,
+		OSS ossClient) {
 		InitiateMultipartUploadRequest multipartUploadRequest = new InitiateMultipartUploadRequest(
 			bucketName, filePath);
-		InitiateMultipartUploadResult initiateMultipartUploadResult = ossClient.initiateMultipartUpload(multipartUploadRequest);
+		InitiateMultipartUploadResult initiateMultipartUploadResult = ossClient
+			.initiateMultipartUpload(multipartUploadRequest);
 		return initiateMultipartUploadResult.getUploadId();
 	}
 
@@ -224,6 +238,7 @@ public class OSSClientUtil {
 	}
 
 	public static class UploadPartRunnable implements Runnable {
+
 		private final CountDownLatch latch;
 		private final OSS ossClient;
 		private final String bucketName;
@@ -236,15 +251,15 @@ public class OSSClientUtil {
 		private final List<PartETag> eTags;
 
 		public UploadPartRunnable(CountDownLatch latch,
-								  OSS ossClient,
-								  String bucketName,
-								  String filePath,
-								  MultipartFile uploadFile,
-								  String uploadId,
-								  int partNumber,
-								  long start,
-								  long partSize,
-								  List<PartETag> eTags) {
+			OSS ossClient,
+			String bucketName,
+			String filePath,
+			MultipartFile uploadFile,
+			String uploadId,
+			int partNumber,
+			long start,
+			long partSize,
+			List<PartETag> eTags) {
 			this.latch = latch;
 			this.ossClient = ossClient;
 			this.bucketName = bucketName;

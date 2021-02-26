@@ -29,41 +29,42 @@ import org.springframework.context.annotation.Bean;
  * XxlJob配置类
  *
  * @author dengtao
- * @since 2020/6/16 11:36
  * @version 1.0.0
+ * @since 2020/6/16 11:36
  */
 @Slf4j
 @ConditionalOnProperty(name = "taotao.cloud.xxl.job.enabled", havingValue = "true")
 public class XxlJobComponent {
 
-    @Bean
-    public XxlJobSpringExecutor xxlJobExecutor(XxlProperties xxlProperties) {
-        String appName = xxlProperties.getAppName().length() == 0 ? xxlProperties.getSpringAppName()
-                : xxlProperties.getAppName();
-        if (appName.length() == 0) {
-            throw new BaseException("缺少参数：taotao.cloud.xxl.job.executor.appName");
-        }
-        String adminAddresses = xxlProperties.getAdminAddresses();
-        if (StrUtil.isBlank(adminAddresses)) {
-            throw new BaseException("缺少参数：taotao.cloud.xxl.job.executor.adminAddresses");
-        }
+	@Bean
+	public XxlJobSpringExecutor xxlJobExecutor(XxlProperties xxlProperties) {
+		String appName = xxlProperties.getAppName().length() == 0 ? xxlProperties.getSpringAppName()
+			: xxlProperties.getAppName();
+		if (appName.length() == 0) {
+			throw new BaseException("缺少参数：taotao.cloud.xxl.job.executor.appName");
+		}
+		String adminAddresses = xxlProperties.getAdminAddresses();
+		if (StrUtil.isBlank(adminAddresses)) {
+			throw new BaseException("缺少参数：taotao.cloud.xxl.job.executor.adminAddresses");
+		}
 
-        XxlJobSpringExecutor executor = new XxlJobSpringExecutor();
-        executor.setAdminAddresses(adminAddresses);
-        executor.setAppname(appName);
-        executor.setAddress(xxlProperties.getAddress());
-        executor.setIp(xxlProperties.getIp());
+		XxlJobSpringExecutor executor = new XxlJobSpringExecutor();
+		executor.setAdminAddresses(adminAddresses);
+		executor.setAppname(appName);
+		executor.setAddress(xxlProperties.getAddress());
+		executor.setIp(xxlProperties.getIp());
 
-        if (StrUtil.isEmpty(xxlProperties.getIp())) {
-            executor.setIp(AddrUtil.getLocalAddr());
-        }
-        executor.setPort(xxlProperties.getPort());
-        executor.setLogPath(xxlProperties.getLogPath());
-        executor.setAccessToken(xxlProperties.getAccessToken());
-        executor.setLogPath(xxlProperties.getLogPath());
-        executor.setLogRetentionDays(xxlProperties.getLogRetentionDays());
-        log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_JOB_STARTER + "]" + "job模块已启动");
-        return executor;
-    }
+		if (StrUtil.isEmpty(xxlProperties.getIp())) {
+			executor.setIp(AddrUtil.getLocalAddr());
+		}
+		executor.setPort(xxlProperties.getPort());
+		executor.setLogPath(xxlProperties.getLogPath());
+		executor.setAccessToken(xxlProperties.getAccessToken());
+		executor.setLogPath(xxlProperties.getLogPath());
+		executor.setLogRetentionDays(xxlProperties.getLogRetentionDays());
+		log.info(
+			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_JOB_STARTER + "]" + "job模块已启动");
+		return executor;
+	}
 
 }

@@ -29,61 +29,65 @@ import java.util.concurrent.atomic.AtomicLong;
  * retryCache的容器
  *
  * @author dengtao
- * @since 2020/5/28 17:32
  * @version 1.0.0
+ * @since 2020/5/28 17:32
  */
 @Slf4j
 public class RetryCache {
-    private MessageSender sender;
-    private boolean stop = false;
-    private final Map<Long, MessageWithTime> map = new ConcurrentSkipListMap<>();
-    private final AtomicLong id = new AtomicLong();
 
-    public void setSender(MessageSender sender) {
-        this.sender = sender;
-        startRetry();
-    }
+	private MessageSender sender;
+	private boolean stop = false;
+	private final Map<Long, MessageWithTime> map = new ConcurrentSkipListMap<>();
+	private final AtomicLong id = new AtomicLong();
 
-    public long generateId() {
-        return id.incrementAndGet();
-    }
+	public void setSender(MessageSender sender) {
+		this.sender = sender;
+		startRetry();
+	}
 
-    public void add(MessageWithTime messageWithTime) {
-        map.putIfAbsent(messageWithTime.getId(), messageWithTime);
-    }
+	public long generateId() {
+		return id.incrementAndGet();
+	}
 
-    public void del(long id) {
-        map.remove(id);
-    }
+	public void add(MessageWithTime messageWithTime) {
+		map.putIfAbsent(messageWithTime.getId(), messageWithTime);
+	}
 
-    private void startRetry() {
-        new Thread(() -> {
-            while (!stop) {
-                try {
-                    Thread.sleep(FastOcpRabbitMqConstants.RETRY_TIME_INTERVAL);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+	public void del(long id) {
+		map.remove(id);
+	}
 
-                long now = System.currentTimeMillis();
+	private void startRetry() {
+		new Thread(() -> {
+			while (!stop) {
+				try {
+					Thread.sleep(FastOcpRabbitMqConstants.RETRY_TIME_INTERVAL);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 
-                for (Map.Entry<Long, MessageWithTime> entry : map.entrySet()) {
-                    MessageWithTime messageWithTime = entry.getValue();
+				long now = System.currentTimeMillis();
 
-                    if (null != messageWithTime) {
-                        if (messageWithTime.getTime() + 3 * FastOcpRabbitMqConstants.VALID_TIME < now) {
-                            log.info("send message {} failed after 3 min ", messageWithTime);
-                            RetryCache.this.del(entry.getKey());
-                        } else if (messageWithTime.getTime() + FastOcpRabbitMqConstants.VALID_TIME < now) {
-                            DetailResponse res = sender.send(messageWithTime);
+				for (Map.Entry<Long, MessageWithTime> entry : map.entrySet()) {
+					MessageWithTime messageWithTime = entry.getValue();
 
-                            if (!res.isIfSuccess()) {
-                                log.info("retry send message failed {} errMsg {}", messageWithTime, res.getErrMsg());
-                            }
-                        }
-                    }
-                }
-            }
-        }).start();
-    }
+					if (null != messageWithTime) {
+						if (messageWithTime.getTime() + 3 * FastOcpRabbitMqConstants.VALID_TIME
+							< now) {
+							log.info("send message {} failed after 3 min ", messageWithTime);
+							RetryCache.this.del(entry.getKey());
+						} else if (messageWithTime.getTime() + FastOcpRabbitMqConstants.VALID_TIME
+							< now) {
+							DetailResponse res = sender.send(messageWithTime);
+
+							if (!res.isIfSuccess()) {
+								log.info("retry send message failed {} errMsg {}", messageWithTime,
+									res.getErrMsg());
+							}
+						}
+					}
+				}
+			}
+		}).start();
+	}
 }

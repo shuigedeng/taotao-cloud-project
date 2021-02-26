@@ -26,16 +26,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface IUserDetailsService extends UserDetailsService {
 
-    /**
-     * 获取SecurityUser
-     *
-     * @param username  用户标识
-     * @param userType  用户类型
-     * @param loginType 登录类型
-     * @return com.taotao.cloud.core.model.SecurityUser
-     * @author dengtao
-     * @since 2020/10/19 14:06
-     * @version 1.0.0
-     */
-    SecurityUser loadUserSecurityUser(String username, String userType, String loginType);
+	/**
+	 * 获取SecurityUser
+	 *
+	 * @param username  用户标识
+	 * @param userType  用户类型
+	 * @param loginType 登录类型
+	 * @return com.taotao.cloud.core.model.SecurityUser
+	 * @author dengtao
+	 * @since 2020/10/19 14:06
+	 */
+	SecurityUser loadUserSecurityUser(String username, String userType, String loginType);
 }

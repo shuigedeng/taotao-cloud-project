@@ -15,42 +15,39 @@
  */
 package com.taotao.cloud.security.properties;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * url权限配置
  *
  * @author dengtao
+ * @version 1.0.0ø
  * @since 2020/5/2 11:21
- * @version 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "taotao.cloud.oauth2.security.auth.url-permission")
 public class UrlPermissionProperties {
-    /**
-     * 是否开启url级别权限
-     */
-    private Boolean enable = false;
 
-    /**
-     * 白名单，配置需要url权限认证的应用id（与黑名单互斥，只能配置其中一个），不配置默认所有应用都生效
-     * 配置enable为true时才生效
-     */
-    private List<String> includeClientIds = new ArrayList<>();
+	/**
+	 * 是否开启url级别权限
+	 */
+	private Boolean enable = false;
 
-    /**
-     * 黑名单，配置不需要url权限认证的应用id（与白名单互斥，只能配置其中一个）
-     * 配置enable为true时才生效
-     */
-    private List<String> exclusiveClientIds = new ArrayList<>();
+	/**
+	 * 白名单，配置需要url权限认证的应用id（与黑名单互斥，只能配置其中一个），不配置默认所有应用都生效 配置enable为true时才生效
+	 */
+	private List<String> includeClientIds = new ArrayList<>();
 
-    /**
-     * 配置只进行登录认证，不进行url权限认证的api
-     * 所有已登录的人都能访问的api
-     */
-    private String[] ignoreUrls = {};
+	/**
+	 * 黑名单，配置不需要url权限认证的应用id（与白名单互斥，只能配置其中一个） 配置enable为true时才生效
+	 */
+	private List<String> exclusiveClientIds = new ArrayList<>();
+
+	/**
+	 * 配置只进行登录认证，不进行url权限认证的api 所有已登录的人都能访问的api
+	 */
+	private String[] ignoreUrls = {};
 }

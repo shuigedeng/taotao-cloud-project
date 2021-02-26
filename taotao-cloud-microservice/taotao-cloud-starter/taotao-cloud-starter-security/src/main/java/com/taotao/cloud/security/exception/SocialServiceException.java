@@ -23,23 +23,23 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
  * SocialServiceException
  *
  * @author dengtao
- * @since 2020/6/15 11:21
  * @version 1.0.0
-*/
+ * @since 2020/6/15 11:21
+ */
 @JsonSerialize(using = OauthExceptionSerializer.class)
 public class SocialServiceException extends OAuth2Exception {
 
-    public SocialServiceException(String msg, Throwable t) {
-        super(msg);
-    }
+	public SocialServiceException(String msg, Throwable t) {
+		super(msg);
+	}
 
-    @Override
-    public String getOAuth2ErrorCode() {
-        return "social_exception";
-    }
+	@Override
+	public String getOAuth2ErrorCode() {
+		return "social_exception";
+	}
 
-    @Override
-    public int getHttpErrorCode() {
-        return 423;
-    }
+	@Override
+	public int getHttpErrorCode() {
+		return 423;
+	}
 }

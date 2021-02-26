@@ -17,21 +17,23 @@ package com.taotao.cloud.p6spy.component;
 
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * P6spy SQL 日志格式化
  *
  * @author dengtao
- * @since 2020/10/14 09:37
  * @version 1.0.0
+ * @since 2020/10/14 09:37
  */
 public class P6spyLogFormat implements MessageFormattingStrategy {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    @Override
-    public String formatMessage(final int connectionId, final String now, final long elapsed, final String category, final String prepared, final String sql, final String url) {
-        return !"".equals(sql.trim()) ? LocalDateTime.now().format(formatter) + " | took " + elapsed + "ms | " + category + " | connection " + connectionId + "\n " + sql + ";" : "";
-    }
+	@Override
+	public String formatMessage(final int connectionId, final String now, final long elapsed,
+		final String category, final String prepared, final String sql, final String url) {
+		return !"".equals(sql.trim()) ?
+			LocalDateTime.now().format(CommonConstant.DATETIME_FORMATTER) + " | took " + elapsed
+				+ "ms | " + category + " | connection " + connectionId + "\n " + sql + ";" : "";
+	}
 }

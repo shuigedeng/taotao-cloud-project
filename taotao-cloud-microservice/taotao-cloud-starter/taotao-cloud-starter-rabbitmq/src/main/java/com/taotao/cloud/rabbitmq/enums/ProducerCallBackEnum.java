@@ -19,35 +19,35 @@ package com.taotao.cloud.rabbitmq.enums;
  * ProducerCallBackEnum
  *
  * @author dengtao
- * @since 2020/9/29 15:56
  * @version 1.0.0
+ * @since 2020/9/29 15:56
  */
 public enum ProducerCallBackEnum {
 
-    SEND(0, "消息发送,无反馈"),
-    SUCCESS(1, "消息发送到broker成功"),
-    FAIL(2, "消息发送到broker失败");
+	SEND(0, "消息发送,无反馈"),
+	SUCCESS(1, "消息发送到broker成功"),
+	FAIL(2, "消息发送到broker失败");
 
-    private Integer code;
-    private String desc;
+	private Integer code;
+	private String desc;
 
-    ProducerCallBackEnum(Integer code, String desc) {
+	ProducerCallBackEnum(Integer code, String desc) {
 
-    }
+	}
 
-    public Integer getCode() {
-        return code;
-    }
+	public Integer getCode() {
+		return code;
+	}
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
+	public void setCode(Integer code) {
+		this.code = code;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 }

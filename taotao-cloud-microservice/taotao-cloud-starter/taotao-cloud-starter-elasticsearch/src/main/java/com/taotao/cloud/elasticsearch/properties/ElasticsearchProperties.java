@@ -23,16 +23,16 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * 索引配置
  *
  * @author dengtao
- * @since 2020/5/3 08:00
  * @version 1.0.0
+ * @since 2020/5/3 08:00
  */
 @Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.elasticsearch")
 public class ElasticsearchProperties {
 
-    /**
-     * Elasticsearch 总开关
-     */
-    private boolean enabled = false;
+	/**
+	 * Elasticsearch 总开关
+	 */
+	private boolean enabled = false;
 }

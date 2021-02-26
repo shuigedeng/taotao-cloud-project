@@ -19,31 +19,31 @@ import com.taotao.cloud.core.model.PageResult;
 import com.taotao.cloud.elasticsearch.builder.SearchBuilder;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import com.taotao.cloud.elasticsearch.service.ISearchService;
+import java.io.IOException;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-
-import java.io.IOException;
 
 /**
  * 搜索服务实现
  *
  * @author dengtao
- * @since 2020/5/3 07:48
  * @version 1.0.0
+ * @since 2020/5/3 07:48
  */
 public class SearchServiceImpl implements ISearchService {
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
-    public SearchServiceImpl(ElasticsearchRestTemplate elasticsearchRestTemplate) {
-        this.elasticsearchRestTemplate = elasticsearchRestTemplate;
-    }
+	private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
-    @Override
-    public PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
-        return SearchBuilder.builder(elasticsearchRestTemplate, indexName)
-                .setStringQuery(searchDto.getQueryStr())
-                .addSort(searchDto.getSortCol(), SortOrder.DESC)
-                .setIsHighlight(searchDto.getIsHighlighter())
-                .getPage(searchDto.getPage(), searchDto.getLimit());
-    }
+	public SearchServiceImpl(ElasticsearchRestTemplate elasticsearchRestTemplate) {
+		this.elasticsearchRestTemplate = elasticsearchRestTemplate;
+	}
+
+	@Override
+	public PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
+		return SearchBuilder.builder(elasticsearchRestTemplate, indexName)
+			.setStringQuery(searchDto.getQueryStr())
+			.addSort(searchDto.getSortCol(), SortOrder.DESC)
+			.setIsHighlight(searchDto.getIsHighlighter())
+			.getPage(searchDto.getPage(), searchDto.getLimit());
+	}
 }

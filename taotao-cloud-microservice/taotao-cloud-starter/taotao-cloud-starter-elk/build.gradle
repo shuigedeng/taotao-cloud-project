@@ -15,6 +15,9 @@ dependencies {
     implementation 'org.springframework:spring-webmvc'
     implementation 'org.aspectj:aspectjweaver'
 
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'cn.hutool:hutool-all'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 

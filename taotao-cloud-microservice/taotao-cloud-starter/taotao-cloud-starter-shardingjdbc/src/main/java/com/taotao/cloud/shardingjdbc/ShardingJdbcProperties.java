@@ -22,11 +22,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * ShardingJdbcProperties
  *
  * @author dengtao
- * @since 2020/6/22 17:30
  * @version 1.0.0
+ * @since 2020/6/22 17:30
  */
 @ConfigurationProperties(value = "taotao.cloud.shardingsphere")
 public class ShardingJdbcProperties {
 
-    private boolean enabled = false;
+	private boolean enabled = false;
 }

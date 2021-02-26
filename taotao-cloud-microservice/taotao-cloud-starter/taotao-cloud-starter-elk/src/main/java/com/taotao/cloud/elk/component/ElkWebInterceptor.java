@@ -33,58 +33,63 @@ import java.util.Map;
  * ElkWebInterceptor
  *
  * @author dengtao
- * @since 2020/6/3 10:49
  * @version 1.0.0
+ * @since 2020/6/3 10:49
  */
 public class ElkWebInterceptor implements HandlerInterceptor {
 
-    private final ThreadLocal<Long> local = new ThreadLocal<>();
+	private final ThreadLocal<Long> local = new ThreadLocal<>();
 
-    @Autowired(required = false)
-    private LogstashTcpSocketAppender logstashTcpSocketAppender;
+	@Autowired(required = false)
+	private LogstashTcpSocketAppender logstashTcpSocketAppender;
 
-    @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
-        if (logstashTcpSocketAppender != null && handler instanceof HandlerMethod) {
-            local.set(System.currentTimeMillis());
-        }
-        return true;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, Object handler) throws Exception {
+		if (logstashTcpSocketAppender != null && handler instanceof HandlerMethod) {
+			local.set(System.currentTimeMillis());
+		}
+		return true;
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-    }
+	@Override
+	public void postHandle(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView)
+		throws Exception {
+	}
 
-    @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        Long startTime = local.get();
-        if (startTime == null) {
-            return;
-        }
-        local.remove();
-        long costTime = System.currentTimeMillis() - startTime;
-        String path = httpServletRequest.getRequestURI();
-        HandlerMethod handler = (HandlerMethod) o;
-        Map<String, Object> values = new HashMap<>();
-        values.put("logger_type", "api");
-        values.put("service", handler.getBeanType().getName());
-        values.put("method", handler.getBeanType().getName() + "." + handler.getMethod().getName());
-        values.put("path", httpServletRequest.getRequestURI());
-        values.put("cost_time", costTime);
-        values.put("result", e == null);
-        values.put("result_message", e == null ? "success" : e.getClass().getName() + ": " + e.getMessage());
-        logstashTcpSocketAppender.doAppend(createLoggerEvent(values, path + ": " + costTime));
-    }
+	@Override
+	public void afterCompletion(HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+		Long startTime = local.get();
+		if (startTime == null) {
+			return;
+		}
+		local.remove();
+		long costTime = System.currentTimeMillis() - startTime;
+		String path = httpServletRequest.getRequestURI();
+		HandlerMethod handler = (HandlerMethod) o;
+		Map<String, Object> values = new HashMap<>();
+		values.put("logger_type", "api");
+		values.put("service", handler.getBeanType().getName());
+		values.put("method", handler.getBeanType().getName() + "." + handler.getMethod().getName());
+		values.put("path", httpServletRequest.getRequestURI());
+		values.put("cost_time", costTime);
+		values.put("result", e == null);
+		values.put("result_message",
+			e == null ? "success" : e.getClass().getName() + ": " + e.getMessage());
+		logstashTcpSocketAppender.doAppend(createLoggerEvent(values, path + ": " + costTime));
+	}
 
-    private LoggingEvent createLoggerEvent(Map<String, Object> values, String message) {
-        LoggingEvent loggingEvent = new LoggingEvent();
-        loggingEvent.setTimeStamp(System.currentTimeMillis());
-        loggingEvent.setLevel(Level.INFO);
-        loggingEvent.setLoggerName("ElkLogger");
-        loggingEvent.setMarker(new MapEntriesAppendingMarker(values));
-        loggingEvent.setMessage(message);
-        loggingEvent.setArgumentArray(new String[0]);
-        loggingEvent.setThreadName(Thread.currentThread().getName());
-        return loggingEvent;
-    }
+	private LoggingEvent createLoggerEvent(Map<String, Object> values, String message) {
+		LoggingEvent loggingEvent = new LoggingEvent();
+		loggingEvent.setTimeStamp(System.currentTimeMillis());
+		loggingEvent.setLevel(Level.INFO);
+		loggingEvent.setLoggerName("ElkLogger");
+		loggingEvent.setMarker(new MapEntriesAppendingMarker(values));
+		loggingEvent.setMessage(message);
+		loggingEvent.setArgumentArray(new String[0]);
+		loggingEvent.setThreadName(Thread.currentThread().getName());
+		return loggingEvent;
+	}
 }
