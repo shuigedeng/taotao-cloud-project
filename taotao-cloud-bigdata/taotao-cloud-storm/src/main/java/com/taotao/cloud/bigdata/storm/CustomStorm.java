@@ -1,10 +1,21 @@
-/**
- * Project Name: custom-storm
- * Package Name: com.dtbox.storm
- * Date: 2019-07-01 14:03
- * Author: dengtao
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.taotao.cloud.bigdata.storm;
+
+import static java.util.concurrent.Executors.newFixedThreadPool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +24,15 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 
-import static java.util.concurrent.Executors.newFixedThreadPool;
-
 /**
- * 〈description〉<br>
+ * CustomStorm
  *
  * @author dengtao
  * @version v1.0.0
- * @create 2019-07-01 14:03
- * @see
- * @version 1.0.0.0
+ * @date 2019-07-01 14:03
  */
 public class CustomStorm {
+
 	private final Random random = new Random();
 
 	private BlockingQueue<String> sentenceQueue = new ArrayBlockingQueue(50000);
@@ -39,9 +47,9 @@ public class CustomStorm {
 	 * @return void
 	 * @throws
 	 * @author dengtao
-	 * @since 2019-07-01 14:06
 	 * @link
 	 * @version v1.0.0
+	 * @since 2019-07-01 14:06
 	 */
 	public void nextTuple() {
 		String[] sentences = new String[]{
@@ -64,12 +72,8 @@ public class CustomStorm {
 	 * 用来切割句子
 	 *
 	 * @param sentence 句子
-	 * @return void
-	 * @throws
 	 * @author dengtao
 	 * @since 2019-07-01 14:06
-	 * @link
-	 * @version v1.0.0
 	 */
 	public void split(String sentence) {
 		System.out.println("resv sentence" + sentence);
@@ -93,9 +97,9 @@ public class CustomStorm {
 	 * @return void
 	 * @throws
 	 * @author dengtao
-	 * @since 2019-07-01 14:07
 	 * @link
 	 * @version v1.0.0
+	 * @since 2019-07-01 14:07
 	 */
 	public void wordcounter(String word) {
 		if (!counters.containsKey(word)) {

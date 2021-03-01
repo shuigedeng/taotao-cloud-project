@@ -22,10 +22,11 @@ import org.apache.hadoop.mapreduce.Partitioner;
  * ItemIdPartitioner
  *
  * @author dengtao
- * @since 2020/11/26 下午8:33
  * @version 1.0.0
+ * @since 2020/11/26 下午8:33
  */
 public class ItemIdPartitioner extends Partitioner<OrderBean, NullWritable> {
+
 	@Override
 	public int getPartition(OrderBean bean, NullWritable value, int numReduceTasks) {
 		//相同id的订单bean，会发往相同的partition

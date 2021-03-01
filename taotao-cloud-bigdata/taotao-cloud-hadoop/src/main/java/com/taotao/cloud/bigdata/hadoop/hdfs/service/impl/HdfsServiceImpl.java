@@ -17,23 +17,23 @@ package com.taotao.cloud.bigdata.hadoop.hdfs.service.impl;
 
 import com.taotao.cloud.bigdata.hadoop.hdfs.service.HdfsService;
 import com.taotao.cloud.bigdata.hadoop.hdfs.utils.HDFSUtil;
+import java.util.List;
+import java.util.Map;
 import org.apache.hadoop.fs.BlockLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * HdfsServiceImpl
  *
  * @author dengtao
- * @since 2020/10/29 15:18
  * @version 1.0.0
+ * @since 2020/10/29 15:18
  */
 @Service
 public class HdfsServiceImpl implements HdfsService {
+
 	@Autowired
 	private HDFSUtil hdfsUtil;
 

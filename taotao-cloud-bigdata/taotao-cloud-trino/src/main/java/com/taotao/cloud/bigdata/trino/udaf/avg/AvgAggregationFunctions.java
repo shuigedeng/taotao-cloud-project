@@ -31,36 +31,37 @@ import static io.trino.spi.type.DoubleType.DOUBLE;
  * TaoTaoCloudAvgAggregationFunctions
  *
  * @author dengtao
- * @since 2021/1/25 下午3:35
  * @version 1.0.0
+ * @since 2021/1/25 下午3:35
  */
 @AggregationFunction("my_avg")
 @Description("聚合求平均值函数")
 public class AvgAggregationFunctions {
+
 	@InputFunction
 	public static void input(@AggregationState LongAndDoubleState state,
-							 @SqlType(StandardTypes.BIGINT) long value) {
+		@SqlType(StandardTypes.BIGINT) long value) {
 		state.setLong(state.getLong() + 1);
 		state.setDouble(state.getDouble() + value);
 	}
 
 	@InputFunction
 	public static void input(@AggregationState LongAndDoubleState state,
-							 @SqlType(StandardTypes.DOUBLE) double value) {
+		@SqlType(StandardTypes.DOUBLE) double value) {
 		state.setLong(state.getLong() + 1);
 		state.setDouble(state.getDouble() + value);
 	}
 
 	@CombineFunction
 	public static void combine(@AggregationState LongAndDoubleState state,
-							   @AggregationState LongAndDoubleState otherState) {
+		@AggregationState LongAndDoubleState otherState) {
 		state.setLong(state.getLong() + otherState.getLong());
 		state.setDouble(state.getDouble() + otherState.getDouble());
 	}
 
 	@OutputFunction(StandardTypes.DOUBLE)
 	public static void output(@AggregationState LongAndDoubleState state,
-							  BlockBuilder out) {
+		BlockBuilder out) {
 		long count = state.getLong();
 		if (count == 0) {
 			out.appendNull();

@@ -47,15 +47,15 @@ import org.apache.hadoop.io.LongWritable;
  * GenericUDAFResolver和GenericUDAFResolver2接口的区别是:  后面的允许evaluator实现利用GenericUDAFParameterInfo可以访问更多的信息，例如DISTINCT限定符，通配符(*)。
  *
  * @author dengtao
- * @since 2020/10/29 17:19
  * @version 1.0.0
+ * @since 2020/10/29 17:19
  */
 public class CountUDAF extends AbstractGenericUDAFResolver {
+
 	/**
 	 * 构建方法，传入的是函数指定的列
 	 *
 	 * @param params
-	 * @return
 	 * @throws SemanticException
 	 */
 	@Override
@@ -74,7 +74,8 @@ public class CountUDAF extends AbstractGenericUDAFResolver {
 	 * @throws SemanticException
 	 */
 	@Override
-	public GenericUDAFEvaluator getEvaluator(GenericUDAFParameterInfo info) throws SemanticException {
+	public GenericUDAFEvaluator getEvaluator(GenericUDAFParameterInfo info)
+		throws SemanticException {
 
 		ObjectInspector[] parameters = info.getParameterObjectInspectors();
 		boolean isAllColumns = false;
@@ -96,21 +97,13 @@ public class CountUDAF extends AbstractGenericUDAFResolver {
 	/**
 	 * GenericUDAFEvaluator类实现UDAF的逻辑
 	 * <p>
-	 * enum Mode运行阶段枚举类
-	 * PARTIAL1；
-	 * 这个是mapreduce的map阶段：从原始数据到部分数据聚合
-	 * 将会调用iterate()和terminatePartial()
+	 * enum Mode运行阶段枚举类 PARTIAL1； 这个是mapreduce的map阶段：从原始数据到部分数据聚合 将会调用iterate()和terminatePartial()
 	 * <p>
-	 * PARTIAL2:
-	 * 这个是mapreduce的map端的Combiner阶段，负责在map端合并map的数据：部分数据聚合
-	 * 将会调用merge()和terminatePartial()
+	 * PARTIAL2: 这个是mapreduce的map端的Combiner阶段，负责在map端合并map的数据：部分数据聚合 将会调用merge()和terminatePartial()
 	 * <p>
-	 * FINAL:
-	 * mapreduce的reduce阶段：从部分数据的聚合到完全聚合
-	 * 将会调用merge()和terminate()
+	 * FINAL: mapreduce的reduce阶段：从部分数据的聚合到完全聚合 将会调用merge()和terminate()
 	 * <p>
-	 * COMPLETE:
-	 * 如果出现了这个阶段，表示mapreduce只有map，没有reduce，所以map端就直接出结果了；从原始数据直接到完全聚合
+	 * COMPLETE: 如果出现了这个阶段，表示mapreduce只有map，没有reduce，所以map端就直接出结果了；从原始数据直接到完全聚合
 	 * 将会调用iterate()和terminate()
 	 */
 	public static class CountUDAFEvaluator extends GenericUDAFEvaluator {
@@ -135,10 +128,8 @@ public class CountUDAF extends AbstractGenericUDAFResolver {
 		 * 负责初始化计算函数并设置它的内部状态，result是存放最终结果的
 		 *
 		 * @param m          代表此时在map-reduce哪个阶段，因为不同的阶段可能在不同的机器上执行，需要重新创建对象partial1，partial2，final，complete
-		 * @param parameters partial1或complete阶段传入的parameters类型是原始输入数据的类型
-		 *                   partial2和final阶段（执行合并）的parameters类型是partial-aggregations（既合并返回结果的类型），此时parameters长度肯定只有1了
-		 * @return ObjectInspector
-		 * 在partial1和partial2阶段返回局部合并结果的类型，既terminatePartial的类型
+		 * @param parameters partial1或complete阶段传入的parameters类型是原始输入数据的类型 partial2和final阶段（执行合并）的parameters类型是partial-aggregations（既合并返回结果的类型），此时parameters长度肯定只有1了
+		 * @return ObjectInspector 在partial1和partial2阶段返回局部合并结果的类型，既terminatePartial的类型
 		 * 在complete或final阶段返回总结果的类型，既terminate的类型
 		 * @throws HiveException
 		 */
@@ -161,6 +152,7 @@ public class CountUDAF extends AbstractGenericUDAFResolver {
 		 * 定义一个AbstractAggregationBuffer类来缓存合并值
 		 */
 		static class CountAgg extends AbstractAggregationBuffer {
+
 			long value;
 
 			/**
@@ -232,7 +224,6 @@ public class CountUDAF extends AbstractGenericUDAFResolver {
 		 * 返回buffer中部分聚合结果，map结束和combiner结束执行
 		 *
 		 * @param agg
-		 * @return
 		 * @throws HiveException
 		 */
 		@Override

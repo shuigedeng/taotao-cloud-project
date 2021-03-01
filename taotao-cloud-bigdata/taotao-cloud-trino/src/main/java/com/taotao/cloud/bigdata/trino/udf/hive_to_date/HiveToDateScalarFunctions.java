@@ -28,10 +28,11 @@ import java.util.Date;
 
 /**
  * @author dengtao
- * @since 2020/10/29 17:36
  * @version 1.0.0
+ * @since 2020/10/29 17:36
  */
 public class HiveToDateScalarFunctions {
+
 	public static final String DATE_FORMAT = "yyyy-MM-dd";
 
 	@ScalarFunction("hive_to_date")

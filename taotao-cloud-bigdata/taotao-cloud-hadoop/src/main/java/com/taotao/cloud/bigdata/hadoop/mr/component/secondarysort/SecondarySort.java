@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.secondarysort;
 
-import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
@@ -34,27 +34,33 @@ import java.io.IOException;
  * SecondarySort
  *
  * @author dengtao
- * @since 2020/11/26 下午8:34
  * @version 1.0.0
+ * @since 2020/11/26 下午8:34
  */
 public class SecondarySort {
+
 	static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
+
 		OrderBean bean = new OrderBean();
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
-			String[] fields = StrUtil.split(line, ",");
+			String[] fields = StringUtils.split(line, ",");
 
 			bean.set(new Text(fields[0]), new DoubleWritable(Double.parseDouble(fields[2])));
 			context.write(bean, NullWritable.get());
 		}
 	}
 
-	static class SecondarySortReducer extends Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
+	static class SecondarySortReducer extends
+		Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
+
 		//到达reduce时，相同id的所有bean已经被看成一组，且金额最大的那个一排在第一位
 		@Override
-		protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
+		protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context)
+			throws IOException, InterruptedException {
 			context.write(key, NullWritable.get());
 		}
 	}

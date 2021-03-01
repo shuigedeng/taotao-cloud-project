@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.combinefile;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -32,18 +33,18 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import java.io.IOException;
-
-
 /**
  * SmallFilesToSequenceFileConverter
  *
  * @author dengtao
- * @since 2020/11/26 下午8:15
  * @version 1.0.0
+ * @since 2020/11/26 下午8:15
  */
 public class SmallFilesToSequenceFileConverter extends Configured implements Tool {
-	static class SequenceFileMapper extends Mapper<NullWritable, BytesWritable, Text, BytesWritable> {
+
+	static class SequenceFileMapper extends
+		Mapper<NullWritable, BytesWritable, Text, BytesWritable> {
+
 		private Text filenameKey;
 
 		@Override
@@ -55,7 +56,7 @@ public class SmallFilesToSequenceFileConverter extends Configured implements Too
 
 		@Override
 		protected void map(NullWritable key, BytesWritable value,
-						   Context context) throws IOException, InterruptedException {
+			Context context) throws IOException, InterruptedException {
 			context.write(filenameKey, value);
 		}
 	}

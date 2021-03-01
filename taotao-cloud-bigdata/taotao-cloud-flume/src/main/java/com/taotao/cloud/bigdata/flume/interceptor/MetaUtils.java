@@ -25,15 +25,17 @@ import java.util.ArrayList;
 
 /**
  * @author dengtao
- * @since 2020/11/25 下午5:42
  * @version 1.0.0
+ * @since 2020/11/25 下午5:42
  */
 public class MetaUtils {
+
 	public static JSONObject getLogMetaJson() {
 		try {
 			Connection conn = JDBCUtils.getConn();
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery("select field, field_type from `taotao-cloud-log-meta` where meta_type = 0");
+			ResultSet resultSet = statement.executeQuery(
+				"select field, field_type from `taotao-cloud-log-meta` where meta_type = 0");
 
 			JSONObject jsonMeta = new JSONObject();
 			while (resultSet.next()) {

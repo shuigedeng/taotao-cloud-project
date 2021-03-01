@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.logenhance;
 
+import java.io.IOException;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -24,19 +25,19 @@ import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 /**
  * maptask或者reducetask在最终输出时，先调用OutputFormat的getRecordWriter方法拿到一个RecordWriter
  * 然后再调用RecordWriter的write(k,v)方法将数据写出
  *
  * @author dengtao
- * @since 2020/11/26 下午8:25
  * @version 1.0.0
+ * @since 2020/11/26 下午8:25
  */
 public class LogEnhanceOutputFormat extends FileOutputFormat<Text, NullWritable> {
+
 	@Override
-	public RecordWriter<Text, NullWritable> getRecordWriter(TaskAttemptContext context) throws IOException, InterruptedException {
+	public RecordWriter<Text, NullWritable> getRecordWriter(TaskAttemptContext context)
+		throws IOException, InterruptedException {
 		FileSystem fs = FileSystem.get(context.getConfiguration());
 
 		Path enhancePath = new Path("D:/temp/en/log.dat");
@@ -49,6 +50,7 @@ public class LogEnhanceOutputFormat extends FileOutputFormat<Text, NullWritable>
 	}
 
 	static class EnhanceRecordWriter extends RecordWriter<Text, NullWritable> {
+
 		FSDataOutputStream enhancedOs;
 		FSDataOutputStream tocrawlOs;
 

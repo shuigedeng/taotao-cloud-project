@@ -32,16 +32,19 @@ import java.util.Arrays;
  * SharedFriendsStepTwo
  *
  * @author dengtao
- * @since 2020/11/26 下午8:18
  * @version 1.0.0
+ * @since 2020/11/26 下午8:18
  */
 public class SharedFriendsStepTwo {
+
 	static class SharedFriendsStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {
+
 		// 拿到的数据是上一个步骤的输出结果
 		// A I,K,C,B,G,F,H,O,D,
 		// 友 人，人，人
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
 			String[] friendPersons = line.split("\t");
 
@@ -60,8 +63,10 @@ public class SharedFriendsStepTwo {
 	}
 
 	static class SharedFriendsStepTwoReducer extends Reducer<Text, Text, Text, Text> {
+
 		@Override
-		protected void reduce(Text person_person, Iterable<Text> friends, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text person_person, Iterable<Text> friends, Context context)
+			throws IOException, InterruptedException {
 			StringBuilder sb = new StringBuilder();
 
 			for (Text friend : friends) {

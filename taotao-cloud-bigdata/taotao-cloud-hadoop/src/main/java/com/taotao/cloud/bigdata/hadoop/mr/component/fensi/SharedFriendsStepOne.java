@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.fensi;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -25,19 +26,20 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 /**
  * SharedFriendsStepOne
  *
  * @author dengtao
- * @since 2020/11/26 下午8:17
  * @version 1.0.0
+ * @since 2020/11/26 下午8:17
  */
 public class SharedFriendsStepOne {
+
 	static class SharedFriendsStepOneMapper extends Mapper<LongWritable, Text, Text, Text> {
+
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			// A:B,C,D,F,E,O
 			String line = value.toString();
 			String[] personFriends = line.split(":");
@@ -52,8 +54,10 @@ public class SharedFriendsStepOne {
 	}
 
 	static class SharedFriendsStepOneReducer extends Reducer<Text, Text, Text, Text> {
+
 		@Override
-		protected void reduce(Text friend, Iterable<Text> persons, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text friend, Iterable<Text> persons, Context context)
+			throws IOException, InterruptedException {
 			StringBuilder sb = new StringBuilder();
 			for (Text person : persons) {
 				sb.append(person).append(",");

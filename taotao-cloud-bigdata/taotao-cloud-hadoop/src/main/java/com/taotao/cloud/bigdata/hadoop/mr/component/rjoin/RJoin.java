@@ -32,28 +32,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * 订单表和商品表合到一起
- * order.txt(订单id, 日期, 商品编号, 数量)
- * 1001	20150710	P0001	2
- * 1002	20150710	P0001	3
- * 1002	20150710	P0002	3
- * 1003	20150710	P0003	3
- * product.txt(商品编号, 商品名字, 价格, 数量)
- * P0001	小米5	1001	2
- * P0002	锤子T1	1000	3
- * P0003	锤子	1002	4
+ * 订单表和商品表合到一起 order.txt(订单id, 日期, 商品编号, 数量) 1001	20150710	P0001	2 1002	20150710	P0001	3
+ * 1002	20150710	P0002	3 1003	20150710	P0003	3 product.txt(商品编号, 商品名字, 价格, 数量) P0001	小米5	1001	2
+ * P0002	锤子T1	1000	3 P0003	锤子	1002	4
  *
  * @author dengtao
- * @since 2020/11/26 下午8:30
  * @version 1.0.0
+ * @since 2020/11/26 下午8:30
  */
 public class RJoin {
+
 	static class RJoinMapper extends Mapper<LongWritable, Text, Text, InfoBean> {
+
 		InfoBean bean = new InfoBean();
 		Text k = new Text();
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
 
 			FileSplit inputSplit = (FileSplit) context.getInputSplit();
@@ -65,12 +61,14 @@ public class RJoin {
 				String[] fields = line.split("\t");
 				// id date pid amount
 				pid = fields[2];
-				bean.set(Integer.parseInt(fields[0]), fields[1], pid, Integer.parseInt(fields[3]), "", 0, 0, "0");
+				bean.set(Integer.parseInt(fields[0]), fields[1], pid, Integer.parseInt(fields[3]),
+					"", 0, 0, "0");
 			} else {
 				String[] fields = line.split("\t");
 				// id pname category_id price
 				pid = fields[0];
-				bean.set(0, "", pid, 0, fields[1], Integer.parseInt(fields[2]), Float.parseFloat(fields[3]), "1");
+				bean.set(0, "", pid, 0, fields[1], Integer.parseInt(fields[2]),
+					Float.parseFloat(fields[3]), "1");
 
 			}
 			k.set(pid);
@@ -79,8 +77,10 @@ public class RJoin {
 	}
 
 	static class RJoinReducer extends Reducer<Text, InfoBean, InfoBean, NullWritable> {
+
 		@Override
-		protected void reduce(Text pid, Iterable<InfoBean> beans, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text pid, Iterable<InfoBean> beans, Context context)
+			throws IOException, InterruptedException {
 			InfoBean pdBean = new InfoBean();
 			ArrayList<InfoBean> orderBeans = new ArrayList<>();
 

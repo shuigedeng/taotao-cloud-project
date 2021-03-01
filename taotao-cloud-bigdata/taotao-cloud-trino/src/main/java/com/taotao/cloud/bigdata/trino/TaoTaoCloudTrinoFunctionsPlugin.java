@@ -26,22 +26,21 @@ import com.taotao.cloud.bigdata.trino.udaf.sum_double.SumDoubleAggregationsFunct
 import com.taotao.cloud.bigdata.trino.udf.hive_to_date.HiveToDateScalarFunctions;
 import com.taotao.cloud.bigdata.trino.udf.str_upper.StrUpperScalarFunctions;
 import io.trino.spi.Plugin;
-
 import java.util.Set;
 
 /**
- * 开发完成后打成jar包上传到trino服务器
- * mkdir ${TRINO_HOME}/plugin/udf
+ * 开发完成后打成jar包上传到trino服务器 mkdir ${TRINO_HOME}/plugin/udf
  * <p>
  * cp taotao-cloud-trino-all.jar ${TRINO_HOME}/plugin/udf
  * <p>
  * ${TRINO_HOME}/bin/launcher restart
  *
  * @author dengtao
- * @since 2020/10/29 17:37
  * @version 1.0.0
+ * @since 2020/10/29 17:37
  */
 public class TaoTaoCloudTrinoFunctionsPlugin implements Plugin {
+
 	@Override
 	public Set<Class<?>> getFunctions() {
 		return ImmutableSet.<Class<?>>builder()

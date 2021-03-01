@@ -15,22 +15,22 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.secondarysort;
 
-import org.apache.hadoop.io.DoubleWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.WritableComparable;
-
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.WritableComparable;
 
 /**
  * OrderBean
  *
  * @author dengtao
- * @since 2020/11/26 下午8:34
  * @version 1.0.0
+ * @since 2020/11/26 下午8:34
  */
 public class OrderBean implements WritableComparable<OrderBean> {
+
 	private Text itemid;
 	private DoubleWritable amount;
 

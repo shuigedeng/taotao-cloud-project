@@ -26,10 +26,11 @@ import java.util.Properties;
 
 /**
  * @author dengtao
- * @since 2020/11/25 下午4:59
  * @version 1.0.0
+ * @since 2020/11/25 下午4:59
  */
 public class JDBCUtils {
+
 	private static final Logger logger = LoggerFactory.getLogger(JDBCUtils.class);
 
 	private static DataSource ds;

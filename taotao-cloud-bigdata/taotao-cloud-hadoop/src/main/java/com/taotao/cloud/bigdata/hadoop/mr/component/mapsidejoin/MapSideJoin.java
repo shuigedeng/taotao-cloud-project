@@ -15,7 +15,14 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.mapsidejoin;
 
-import cn.hutool.core.util.StrUtil;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -26,23 +33,17 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * MapSideJoin
  *
  * @author dengtao
- * @since 2020/11/26 下午8:28
  * @version 1.0.0
+ * @since 2020/11/26 下午8:28
  */
 public class MapSideJoin {
+
 	public static class MapSideJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
+
 		// 用一个hashmap来加载保存产品信息表
 		Map<String, String> pdInfoMap = new HashMap<>();
 		Text k = new Text();
@@ -52,9 +53,10 @@ public class MapSideJoin {
 		 */
 		@Override
 		protected void setup(Context context) throws IOException, InterruptedException {
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("pdts.txt")));
+			BufferedReader br = new BufferedReader(
+				new InputStreamReader(new FileInputStream("pdts.txt")));
 			String line;
-			while (StrUtil.isNotEmpty(line = br.readLine())) {
+			while (StringUtils.isNotEmpty(line = br.readLine())) {
 				String[] fields = line.split(",");
 				pdInfoMap.put(fields[0], fields[1]);
 			}
@@ -63,7 +65,8 @@ public class MapSideJoin {
 
 		// 由于已经持有完整的产品信息表，所以在map方法中就能实现join逻辑了
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String orderLine = value.toString();
 			String[] fields = orderLine.split("\t");
 			String pdName = pdInfoMap.get(fields[1]);

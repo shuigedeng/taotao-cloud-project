@@ -27,12 +27,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * HiveServiceImpl
+ *
  * @author dengtao
- * @since 2020/10/30 10:12
  * @version 1.0.0
+ * @since 2020/10/30 10:12
  */
 @Service
 public class HiveServiceImpl implements HiveService {
+
 	public static final Logger logger = LoggerFactory.getLogger(HiveServiceImpl.class);
 
 	@Autowired
@@ -70,7 +73,8 @@ public class HiveServiceImpl implements HiveService {
 		sql.append("HIVE_TEST");
 		sql.append("(KEY INT, VALUE STRING)");
 		sql.append("PARTITIONED BY (CTIME DATE)"); // 分区存储
-		sql.append("ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' "); // 定义分隔符
+		sql.append(
+			"ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n' "); // 定义分隔符
 		sql.append("STORED AS TEXTFILE"); // 作为文本存储
 
 		logger.info(sql.toString());

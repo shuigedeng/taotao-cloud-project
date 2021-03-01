@@ -25,18 +25,19 @@ import java.util.Map;
  * DBLoader
  *
  * @author dengtao
- * @since 2020/11/26 下午8:27
  * @version 1.0.0
+ * @since 2020/11/26 下午8:27
  */
 public class DBLoader {
+
 	/**
 	 * 加载数据库规则
 	 *
 	 * @param ruleMap ruleMap
 	 * @return void
 	 * @author dengtao
-	 * @since 2020/11/26 下午8:27
 	 * @version 1.0.0
+	 * @since 2020/11/26 下午8:27
 	 */
 	public static void dbLoader(Map<String, String> ruleMap) throws Exception {
 		Connection conn = null;

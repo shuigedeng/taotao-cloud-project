@@ -31,13 +31,16 @@ import java.io.IOException;
  * FlowCount
  *
  * @author dengtao
- * @since 2020/11/26 下午8:29
  * @version 1.0.0
+ * @since 2020/11/26 下午8:29
  */
 public class FlowCount {
+
 	static class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
+
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			//将一行内容转成string
 			String line = value.toString();
 			//切分字段
@@ -54,9 +57,11 @@ public class FlowCount {
 
 
 	static class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
+
 		//<183323,bean1><183323,bean2><183323,bean3><183323,bean4>.......
 		@Override
-		protected void reduce(Text key, Iterable<FlowBean> values, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text key, Iterable<FlowBean> values, Context context)
+			throws IOException, InterruptedException {
 			long sum_upFlow = 0;
 			long sum_dFlow = 0;
 

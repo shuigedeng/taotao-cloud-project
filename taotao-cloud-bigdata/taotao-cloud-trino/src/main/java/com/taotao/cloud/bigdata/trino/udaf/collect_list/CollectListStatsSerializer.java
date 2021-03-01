@@ -15,38 +15,40 @@
  */
 package com.taotao.cloud.bigdata.trino.udaf.collect_list;
 
-import com.taotao.cloud.bigdata.trino.udaf.collect_list.CollectListAggregationFunctions;
-import com.taotao.cloud.bigdata.trino.udaf.collect_list.CollectListStats;
+import static io.trino.spi.type.VarbinaryType.VARBINARY;
+
 import io.trino.spi.block.Block;
 import io.trino.spi.block.BlockBuilder;
 import io.trino.spi.function.AccumulatorStateSerializer;
 import io.trino.spi.type.Type;
 
-import static io.trino.spi.type.VarbinaryType.VARBINARY;
-
-
 /**
+ * CollectListStatsSerializer
+ *
  * @author dengtao
- * @since 2020/10/29 18:04
  * @version 1.0.0
+ * @since 2020/10/29 18:04
  */
-public class CollectListStatsSerializer implements AccumulatorStateSerializer<CollectListAggregationFunctions.CollectState> {
-    @Override
-    public Type getSerializedType() {
-        return VARBINARY;
-    }
+public class CollectListStatsSerializer implements
+	AccumulatorStateSerializer<CollectListAggregationFunctions.CollectState> {
 
-    @Override
-    public void serialize(CollectListAggregationFunctions.CollectState state, BlockBuilder out) {
-        if (state.get() == null) {
-            out.appendNull();
-        } else {
-            VARBINARY.writeSlice(out, state.get().serialize());
-        }
-    }
+	@Override
+	public Type getSerializedType() {
+		return VARBINARY;
+	}
 
-    @Override
-    public void deserialize(Block block, int index, CollectListAggregationFunctions.CollectState state) {
-        state.set(new CollectListStats(VARBINARY.getSlice(block, index)));
-    }
+	@Override
+	public void serialize(CollectListAggregationFunctions.CollectState state, BlockBuilder out) {
+		if (state.get() == null) {
+			out.appendNull();
+		} else {
+			VARBINARY.writeSlice(out, state.get().serialize());
+		}
+	}
+
+	@Override
+	public void deserialize(Block block, int index,
+		CollectListAggregationFunctions.CollectState state) {
+		state.set(new CollectListStats(VARBINARY.getSlice(block, index)));
+	}
 }

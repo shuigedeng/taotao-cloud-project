@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.mr.component.inverindex;
+package com.taotao.cloud.bigdata.hadoop.mr.component.invertindex;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -28,16 +28,19 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.IOException;
 
 /**
- * InverIndexStepTwo
+ * InvertIndexStepTwo
  *
  * @author dengtao
- * @since 2020/11/26 下午8:24
  * @version 1.0.0
+ * @since 2020/11/26 下午8:24
  */
-public class InverIndexStepTwo {
+public class InvertIndexStepTwo {
+
 	public static class IndexStepTwoMapper extends Mapper<LongWritable, Text, Text, Text> {
+
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
 			String[] files = line.split("--");
 			context.write(new Text(files[0]), new Text(files[1]));
@@ -45,8 +48,10 @@ public class InverIndexStepTwo {
 	}
 
 	public static class IndexStepTwoReducer extends Reducer<Text, Text, Text, Text> {
+
 		@Override
-		protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text key, Iterable<Text> values, Context context)
+			throws IOException, InterruptedException {
 			StringBuilder sb = new StringBuilder();
 			for (Text text : values) {
 				sb.append(text.toString().replace("\t", "-->")).append("\t");

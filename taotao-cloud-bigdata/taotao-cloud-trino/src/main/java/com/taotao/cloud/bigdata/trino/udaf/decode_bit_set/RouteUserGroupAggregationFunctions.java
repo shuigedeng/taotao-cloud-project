@@ -32,9 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * RouteUserGroupAggregationFunctions
+ *
  * @author dengtao
- * @since 2020/10/29 18:15
  * @version 1.0.0
+ * @since 2020/10/29 18:15
  */
 @AggregationFunction("函数名")
 public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase {
@@ -60,21 +62,23 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
 
 	@InputFunction
 	public static void input(SliceState state,
-							 //目标事件
-							 @SqlType(StandardTypes.VARCHAR) Slice targetEvent,
-							 //目标事件类型
-							 @SqlType(StandardTypes.BIGINT) long targetType,
-							 //事件间隔
-							 @SqlType(StandardTypes.BIGINT) long eventInterval,
-							 //当前事件名
-							 @SqlType(StandardTypes.VARCHAR) Slice currEvent,
-							 //当前事件时间
-							 @SqlType(StandardTypes.BIGINT) long eventTime) {
+		//目标事件
+		@SqlType(StandardTypes.VARCHAR) Slice targetEvent,
+		//目标事件类型
+		@SqlType(StandardTypes.BIGINT) long targetType,
+		//事件间隔
+		@SqlType(StandardTypes.BIGINT) long eventInterval,
+		//当前事件名
+		@SqlType(StandardTypes.VARCHAR) Slice currEvent,
+		//当前事件时间
+		@SqlType(StandardTypes.BIGINT) long eventTime) {
 
-		handleInput(state, targetEvent, (int) targetType, (int) eventInterval, currEvent, (int) eventTime, null, null);
+		handleInput(state, targetEvent, (int) targetType, (int) eventInterval, currEvent,
+			(int) eventTime, null, null);
 	}
 
-	private static void handleInput(SliceState state, Slice targetEvent, int targetType, int eventInterval, Slice currEvent, int eventTime, Slice groupByEvent, Slice groupByProp) {
+	private static void handleInput(SliceState state, Slice targetEvent, int targetType,
+		int eventInterval, Slice currEvent, int eventTime, Slice groupByEvent, Slice groupByProp) {
 		// 获取缓存的数据
 		Slice storedData = state.getSlice();
 
@@ -168,19 +172,24 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
 			int otherBodyByteSize = otherStoredData.getInt(VALUES_OFFSET_BODY_BYTE_SIZE);
 			int otherBodyByteUsed = otherStoredData.getInt(VALUES_OFFSET_BODY_BYTE_USED);
 			byte containTargetEvent = 0;
-			if (storedData.getByte(VALUES_OFFSET_CONTAIN_TARGET_EVENT) == 1 || otherStoredData.getByte(VALUES_OFFSET_CONTAIN_TARGET_EVENT) == 1) {
+			if (storedData.getByte(VALUES_OFFSET_CONTAIN_TARGET_EVENT) == 1
+				|| otherStoredData.getByte(VALUES_OFFSET_CONTAIN_TARGET_EVENT) == 1) {
 				containTargetEvent = 1;
 			}
 			Slice finalStoredData;
 			int finalBodyByteUsed = bodyByteUsed + otherBodyByteUsed;
 			if (bodyByteSize >= finalBodyByteUsed) {
 				// 左容量足够  这里只copy header之外的数据，就是当前事件和time
-				storedData.setBytes(headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen, otherBodyByteUsed);
+				storedData
+					.setBytes(headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen,
+						otherBodyByteUsed);
 				storedData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
 				finalStoredData = storedData;
 			} else if (otherBodyByteSize >= finalBodyByteUsed) {
 				// 右容量足够
-				otherStoredData.setBytes(otherHeaderByteLen + otherBodyByteUsed, storedData, headerByteLen, bodyByteUsed);
+				otherStoredData
+					.setBytes(otherHeaderByteLen + otherBodyByteUsed, storedData, headerByteLen,
+						bodyByteUsed);
 				otherStoredData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
 				finalStoredData = otherStoredData;
 			} else {
@@ -194,7 +203,9 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
 				newStoredData.setInt(VALUES_OFFSET_BODY_BYTE_SIZE, newBodyByteSize);
 				storedData = newStoredData;
 
-				storedData.setBytes(headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen, otherBodyByteUsed);
+				storedData
+					.setBytes(headerByteLen + bodyByteUsed, otherStoredData, otherHeaderByteLen,
+						otherBodyByteUsed);
 				storedData.setInt(VALUES_OFFSET_BODY_BYTE_USED, finalBodyByteUsed);
 				finalStoredData = storedData;
 			}
@@ -228,7 +239,8 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
 		int interval = storedData.getInt(VALUES_OFFSET_ROUTE_INTERVAL);
 		int targetType = storedData.getInt(VALUES_OFFSET_TARGET_EVENT_TYPE);
 		int targetLength = storedData.getInt(VALUES_OFFSET_TARGET_EVENT_LEN);
-		String targetEvent = new String(storedData.getBytes(VALUES_OFFSET_TARGET_EVENT_BYTES, targetLength));
+		String targetEvent = new String(
+			storedData.getBytes(VALUES_OFFSET_TARGET_EVENT_BYTES, targetLength));
 		List<Slice> timeEventSeries = new ArrayList<>();
 		int headerByteLen = storedData.getInt(VALUES_OFFSET_HEADER_BYTE_LEN);
 		int bodyByteUsed = storedData.getInt(VALUES_OFFSET_BODY_BYTE_USED);
@@ -237,7 +249,8 @@ public class RouteUserGroupAggregationFunctions extends RouteUserAggregationBase
 		while (idx < bound) {
 			//获取每个事件数据 time，事件名
 			int entryByteLen = storedData.getInt(idx);
-			Slice entry = storedData.slice(idx + SizeOf.SIZE_OF_INT, entryByteLen - SizeOf.SIZE_OF_INT);
+			Slice entry = storedData
+				.slice(idx + SizeOf.SIZE_OF_INT, entryByteLen - SizeOf.SIZE_OF_INT);
 			idx += entryByteLen;
 			timeEventSeries.add(entry);
 		}

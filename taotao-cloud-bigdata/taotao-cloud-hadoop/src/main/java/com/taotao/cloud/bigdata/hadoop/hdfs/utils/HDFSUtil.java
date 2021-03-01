@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.hdfs.utils;
 
-import cn.hutool.json.JSONObject;
+import com.taotao.cloud.common.utils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.BlockLocation;
@@ -41,8 +41,8 @@ import java.util.Map;
  * HDFSUtil
  *
  * @author dengtao
- * @since 2020/10/29 15:27
  * @version 1.0.0
+ * @since 2020/10/29 15:27
  */
 public class HDFSUtil {
 
@@ -160,7 +160,8 @@ public class HDFSUtil {
 		}
 		// 目标路径
 		Path srcPath = new Path(path);
-		try (FileSystem fileSystem = getFileSystem(); FSDataInputStream inputStream = fileSystem.open(srcPath)) {
+		try (FileSystem fileSystem = getFileSystem(); FSDataInputStream inputStream = fileSystem
+			.open(srcPath)) {
 			// 防止中文乱码
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 			String lineTxt = "";
@@ -327,7 +328,7 @@ public class HDFSUtil {
 			return null;
 		}
 		String jsonStr = readFile(path);
-		return new JSONObject().toBean(clazz);
+		return JsonUtil.toObject(jsonStr, clazz);
 	}
 
 	/**

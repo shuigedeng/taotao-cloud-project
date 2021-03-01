@@ -19,10 +19,11 @@ import java.text.DecimalFormat;
 
 /**
  * @author dengtao
- * @since 2020/10/29 17:59
  * @version 1.0.0
+ * @since 2020/10/29 17:59
  */
 public class PrecisionUtil {
+
 	public static double getPrecision(double value) {
 		DecimalFormat df = new DecimalFormat("####0.0000");
 		return Double.parseDouble(df.format(value));

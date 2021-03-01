@@ -20,20 +20,24 @@ import com.taotao.cloud.bigdata.hadoop.mr.service.MapReduceService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import org.springframework.stereotype.Service;
 
 /**
  * MapReduceServiceImpl
  *
  * @author dengtao
- * @since 2020/10/30 17:40
  * @version 1.0.0
+ * @since 2020/10/30 17:40
  */
+@Service
 public class MapReduceServiceImpl implements MapReduceService {
+
 	// 默认reduce输出目录
 	private static final String OUTPUT_PATH = "/output";
 
 	@Override
-	public void groupSort(String jobName, String inputPath) throws InterruptedException, IOException, ClassNotFoundException {
+	public void groupSort(String jobName, String inputPath)
+		throws InterruptedException, IOException, ClassNotFoundException {
 		if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
 			return;
 		}

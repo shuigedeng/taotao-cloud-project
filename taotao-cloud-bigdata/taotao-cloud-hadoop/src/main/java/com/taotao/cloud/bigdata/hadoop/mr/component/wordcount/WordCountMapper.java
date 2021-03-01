@@ -24,8 +24,7 @@ import java.io.IOException;
 
 
 /**
- * KEYIN: 默认情况下，是mr框架所读到的一行文本的起始偏移量，Long,
- * 但是在hadoop中有自己的更精简的序列化接口，所以不直接用Long，而用LongWritable
+ * KEYIN: 默认情况下，是mr框架所读到的一行文本的起始偏移量，Long, 但是在hadoop中有自己的更精简的序列化接口，所以不直接用Long，而用LongWritable
  * <p>
  * VALUEIN:默认情况下，是mr框架所读到的一行文本的内容，String，同上，用Text
  * <p>
@@ -34,16 +33,17 @@ import java.io.IOException;
  * VALUEOUT：是用户自定义逻辑处理完成之后输出数据中的value，在此处是单词次数，Integer，同上，用IntWritable
  *
  * @author dengtao
- * @since 2020/11/26 下午8:07
  * @version 1.0.0
+ * @since 2020/11/26 下午8:07
  */
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
 	/**
-	 * map阶段的业务逻辑就写在自定义的map()方法中
-	 * maptask会对每一行输入数据调用一次我们自定义的map()方法
+	 * map阶段的业务逻辑就写在自定义的map()方法中 maptask会对每一行输入数据调用一次我们自定义的map()方法
 	 */
 	@Override
-	protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+	protected void map(LongWritable key, Text value, Context context)
+		throws IOException, InterruptedException {
 		//将maptask传给我们的文本内容先转换成String
 		String line = value.toString();
 		//根据空格将这一行切分成单词

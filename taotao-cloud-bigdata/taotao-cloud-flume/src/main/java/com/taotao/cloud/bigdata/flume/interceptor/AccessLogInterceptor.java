@@ -1,8 +1,17 @@
-/**
- * Project Name: projects
- * Package Name: com.taotao.cloud.flume.interceptor
- * Date: 2020/9/22 13:30
- * Author: dengtao
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.taotao.cloud.bigdata.flume.interceptor;
 
@@ -22,13 +31,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <br>
+ * AccessLogInterceptor
  *
  * @author dengtao
  * @version v1.0.0
  * @since 2020/9/22 13:30
  */
 public class AccessLogInterceptor implements Interceptor {
+
 	private static final Logger logger = LoggerFactory.getLogger(AccessLogInterceptor.class);
 
 	private static final List<String> PREFIX = Arrays.asList("%", "_", "$");
@@ -85,11 +95,12 @@ public class AccessLogInterceptor implements Interceptor {
 					result.putAll(metaJson);
 				}
 
-				String logday = new SimpleDateFormat("yyyy-MM-dd").format(Double.parseDouble(metaJson.getString("ctime")));
+				String logday = new SimpleDateFormat("yyyy-MM-dd")
+					.format(Double.parseDouble(metaJson.getString("ctime")));
 				event.getHeaders().put("logday", logday);
 				event.getHeaders().put("source", metaJson.getString("source"));
 
-				logger.info("********************>"+result.toJSONString());
+				logger.info("********************>" + result.toJSONString());
 				event.setBody(result.toJSONString().getBytes());
 				return event;
 			}
@@ -97,11 +108,12 @@ public class AccessLogInterceptor implements Interceptor {
 			try {
 				String bodyData = new String(Base64.getDecoder().decode(bodyStr));
 				JSONObject bodyJson = JSONObject.parseObject(bodyData);
-				String logday = new SimpleDateFormat("yyyy-MM-dd").format(Double.parseDouble(bodyJson.getString("ctime")));
+				String logday = new SimpleDateFormat("yyyy-MM-dd")
+					.format(Double.parseDouble(bodyJson.getString("ctime")));
 				event.getHeaders().put("logday", logday);
 				event.getHeaders().put("source", bodyJson.getString("source"));
 
-				logger.info("====================>"+bodyJson.toJSONString());
+				logger.info("====================>" + bodyJson.toJSONString());
 				event.setBody(bodyJson.toJSONString().getBytes());
 				return event;
 			} catch (Exception error) {

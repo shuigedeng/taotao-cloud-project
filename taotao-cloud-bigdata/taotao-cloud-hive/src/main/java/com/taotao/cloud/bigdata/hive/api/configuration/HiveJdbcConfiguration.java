@@ -28,10 +28,11 @@ import java.sql.SQLException;
 
 /**
  * @author dengtao
- * @since 2020/10/30 10:09
  * @version 1.0.0
+ * @since 2020/10/30 10:09
  */
 public class HiveJdbcConfiguration {
+
 	private static final Logger logger = LoggerFactory.getLogger(HiveJdbcConfiguration.class);
 
 	@Value("${spring.datasource.hive.url}")

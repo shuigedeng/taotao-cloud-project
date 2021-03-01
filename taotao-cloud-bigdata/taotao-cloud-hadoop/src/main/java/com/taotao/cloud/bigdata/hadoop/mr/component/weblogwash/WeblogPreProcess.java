@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.weblogwash;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -25,22 +26,23 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 /**
  * WeblogPreProcess
  *
  * @author dengtao
- * @since 2020/11/26 下午8:35
  * @version 1.0.0
+ * @since 2020/11/26 下午8:35
  */
 public class WeblogPreProcess {
+
 	static class WeblogPreProcessMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
+
 		Text k = new Text();
 		NullWritable v = NullWritable.get();
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
 			WebLogBean webLogBean = WebLogParser.parser(line);
 			//可以插入一个静态资源过滤（.....）

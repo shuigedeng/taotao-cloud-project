@@ -18,13 +18,12 @@ package com.taotao.cloud.bigdata.hadoop.mr.component.weblogwash;
 /**
  * WebLogBean
  *
- * @param null
  * @author dengtao
- * @return
- * @since 2020/11/26 下午8:36
  * @version 1.0.0
+ * @since 2020/11/26 下午8:36
  */
 public class WebLogBean {
+
 	private String remote_addr;// 记录客户端的ip地址
 	private String remote_user;// 记录客户端用户名称,忽略属性"-"
 	private String time_local;// 记录访问时间与时区

@@ -59,8 +59,8 @@ import java.util.Objects;
  * HBaseClient
  *
  * @author dengtao
- * @since 2020/10/30 11:32
  * @version 1.0.0
+ * @since 2020/10/30 11:32
  */
 @Slf4j
 @Component
@@ -90,8 +90,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 创建表
-	 * experssion : create 'tableName','[Column Family 1]','[Column Family 2]'
+	 * 创建表 experssion : create 'tableName','[Column Family 1]','[Column Family 2]'
 	 *
 	 * @param tableName      表名
 	 * @param columnFamilies 列族名
@@ -120,8 +119,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 插入或更新
-	 * experssion : put <tableName>,<rowKey>,<family:column>,<value>,<timestamp>
+	 * 插入或更新 experssion : put <tableName>,<rowKey>,<family:column>,<value>,<timestamp>
 	 *
 	 * @param tableName    表名
 	 * @param rowKey       行id
@@ -130,14 +128,15 @@ public class HBaseClient {
 	 * @param value        值
 	 * @throws IOException
 	 */
-	public void insertOrUpdate(String tableName, String rowKey, String columnFamily, String column, String value)
+	public void insertOrUpdate(String tableName, String rowKey, String columnFamily, String column,
+		String value)
 		throws IOException {
-		this.insertOrUpdate(tableName, rowKey, columnFamily, new String[]{column}, new String[]{value});
+		this.insertOrUpdate(tableName, rowKey, columnFamily, new String[]{column},
+			new String[]{value});
 	}
 
 	/**
-	 * 插入或更新多个字段
-	 * experssion : put <tableName>,<rowKey>,<family:column>,<value>,<timestamp>
+	 * 插入或更新多个字段 experssion : put <tableName>,<rowKey>,<family:column>,<value>,<timestamp>
 	 *
 	 * @param tableName    表名
 	 * @param rowKey       行id
@@ -146,14 +145,16 @@ public class HBaseClient {
 	 * @param values       值
 	 * @throws IOException
 	 */
-	public void insertOrUpdate(String tableName, String rowKey, String columnFamily, String[] columns, String[] values)
+	public void insertOrUpdate(String tableName, String rowKey, String columnFamily,
+		String[] columns, String[] values)
 		throws IOException {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 
 		Put put = new Put(Bytes.toBytes(rowKey));
 
 		for (int i = 0; i < columns.length; i++) {
-			put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(columns[i]), Bytes.toBytes(values[i]));
+			put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(columns[i]),
+				Bytes.toBytes(values[i]));
 			table.put(put);
 		}
 	}
@@ -181,7 +182,8 @@ public class HBaseClient {
 	 * @param columnFamily 列族名
 	 * @throws IOException
 	 */
-	public void deleteColumnFamily(String tableName, String rowKey, String columnFamily) throws IOException {
+	public void deleteColumnFamily(String tableName, String rowKey, String columnFamily)
+		throws IOException {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 
 		Delete delete = new Delete(rowKey.getBytes());
@@ -191,8 +193,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 删除列
-	 * experssion : delete 'tableName','rowKey','columnFamily:column'
+	 * 删除列 experssion : delete 'tableName','rowKey','columnFamily:column'
 	 *
 	 * @param tableName    表名
 	 * @param rowKey       行id
@@ -200,7 +201,8 @@ public class HBaseClient {
 	 * @param column       列名
 	 * @throws IOException
 	 */
-	public void deleteColumn(String tableName, String rowKey, String columnFamily, String column) throws IOException {
+	public void deleteColumn(String tableName, String rowKey, String columnFamily, String column)
+		throws IOException {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 
 		Delete delete = new Delete(rowKey.getBytes());
@@ -210,8 +212,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 删除表
-	 * experssion : disable 'tableName' 之后 drop 'tableName'
+	 * 删除表 experssion : disable 'tableName' 之后 drop 'tableName'
 	 *
 	 * @param tableName 表名
 	 * @throws IOException
@@ -229,8 +230,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 获取值
-	 * experssion : get 'tableName','rowkey','family:column'
+	 * 获取值 experssion : get 'tableName','rowkey','family:column'
 	 *
 	 * @param tableName 表名
 	 * @param rowkey    行id
@@ -242,7 +242,8 @@ public class HBaseClient {
 		Table table = null;
 		String value = "";
 
-		if (StringUtils.isBlank(tableName) || StringUtils.isBlank(family) || StringUtils.isBlank(rowkey) || StringUtils
+		if (StringUtils.isBlank(tableName) || StringUtils.isBlank(family) || StringUtils
+			.isBlank(rowkey) || StringUtils
 			.isBlank(column)) {
 			return null;
 		}
@@ -255,7 +256,8 @@ public class HBaseClient {
 			List<Cell> ceList = result.listCells();
 			if (ceList != null && ceList.size() > 0) {
 				for (Cell cell : ceList) {
-					value = Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength());
+					value = Bytes.toString(cell.getValueArray(), cell.getValueOffset(),
+						cell.getValueLength());
 				}
 			}
 		} catch (IOException e) {
@@ -272,8 +274,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 查询指定行
-	 * experssion : get 'tableName','rowKey'
+	 * 查询指定行 experssion : get 'tableName','rowKey'
 	 *
 	 * @param tableName 表名
 	 * @param rowKey    行id
@@ -284,7 +285,8 @@ public class HBaseClient {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 		Get get = new Get(rowKey.getBytes());
 		Result result = table.get(get);
-		NavigableMap<byte[], NavigableMap<byte[], NavigableMap<Long, byte[]>>> map = result.getMap();
+		NavigableMap<byte[], NavigableMap<byte[], NavigableMap<Long, byte[]>>> map = result
+			.getMap();
 
 		for (Cell cell : result.rawCells()) {
 			String row = Bytes.toString(cell.getRowArray());
@@ -314,7 +316,8 @@ public class HBaseClient {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("finally")
-	public Map<String, String> scanBatchOfTable(String tableName, String family, String[] column, String[] value, Long startMillis, Long endMillis) throws IOException {
+	public Map<String, String> scanBatchOfTable(String tableName, String family, String[] column,
+		String[] value, Long startMillis, Long endMillis) throws IOException {
 
 		if (Objects.isNull(column) || Objects.isNull(column) || column.length != value.length) {
 			return null;
@@ -323,7 +326,8 @@ public class HBaseClient {
 		FilterList filterList = new FilterList();
 
 		for (int i = 0; i < column.length; i++) {
-			SingleColumnValueFilter filter = new SingleColumnValueFilter(Bytes.toBytes(family), Bytes.toBytes(column[i]), CompareOperator.EQUAL, Bytes.toBytes(value[i]));
+			SingleColumnValueFilter filter = new SingleColumnValueFilter(Bytes.toBytes(family),
+				Bytes.toBytes(column[i]), CompareOperator.EQUAL, Bytes.toBytes(value[i]));
 			filterList.addFilter(filter);
 		}
 
@@ -357,8 +361,7 @@ public class HBaseClient {
 	}
 
 	/**
-	 * 根据条件取出点位最近时间的一条记录
-	 * experssion : scan 't1',{FILTER=>"PrefixFilter('2015')"}
+	 * 根据条件取出点位最近时间的一条记录 experssion : scan 't1',{FILTER=>"PrefixFilter('2015')"}
 	 *
 	 * @param tableName   表名("OPC_TEST")
 	 * @param family      列簇名("OPC_COLUMNS")
@@ -370,7 +373,8 @@ public class HBaseClient {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("finally")
-	public Map<String, String> scanOneOfTable(String tableName, String family, String column, String value, Long startMillis, Long endMillis) throws IOException {
+	public Map<String, String> scanOneOfTable(String tableName, String family, String column,
+		String value, Long startMillis, Long endMillis) throws IOException {
 		Table table = connection.getTable(TableName.valueOf(tableName));
 
 		Scan scan = new Scan();
@@ -384,7 +388,8 @@ public class HBaseClient {
 		}
 
 		if (StringUtils.isNotBlank(column)) {
-			SingleColumnValueFilter filter = new SingleColumnValueFilter(Bytes.toBytes(family), Bytes.toBytes(column), CompareOperator.EQUAL, Bytes.toBytes(value));
+			SingleColumnValueFilter filter = new SingleColumnValueFilter(Bytes.toBytes(family),
+				Bytes.toBytes(column), CompareOperator.EQUAL, Bytes.toBytes(value));
 			scan.setFilter(filter);
 		}
 
@@ -440,7 +445,8 @@ public class HBaseClient {
 	 * @param values    写入HBase表的值value
 	 * @param flag      提交标识符号。需要立即提交时，传递，值为 “end”
 	 */
-	public void bulkput(String tableName, String rowkey, String columnFamily, String[] columns, String[] values, String flag) {
+	public void bulkput(String tableName, String rowkey, String columnFamily, String[] columns,
+		String[] values, String flag) {
 		try {
 			List<Put> list = threadLocal.get();
 			if (list == null) {
@@ -450,7 +456,8 @@ public class HBaseClient {
 			Put put = new Put(Bytes.toBytes(rowkey));
 
 			for (int i = 0; i < columns.length; i++) {
-				put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(columns[i]), Bytes.toBytes(values[i]));
+				put.addColumn(Bytes.toBytes(columnFamily), Bytes.toBytes(columns[i]),
+					Bytes.toBytes(values[i]));
 				list.add(put);
 			}
 

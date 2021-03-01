@@ -1,6 +1,22 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.bigdata.hadoop.mr.secondarysort;
 
-import cn.hutool.core.util.StrUtil;
+import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
@@ -13,56 +29,59 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 /**
  * @author duanhaitao@itcast.cn
  */
 public class SecondarySort {
 
-    static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
-        OrderBean bean = new OrderBean();
+	static class SecondarySortMapper extends Mapper<LongWritable, Text, OrderBean, NullWritable> {
 
-        @Override
-        protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-            String line = value.toString();
-            String[] fields = StrUtil.split(line, ",");
-            bean.set(new Text(fields[0]), new DoubleWritable(Double.parseDouble(fields[2])));
-            context.write(bean, NullWritable.get());
-        }
-    }
+		OrderBean bean = new OrderBean();
 
-    static class SecondarySortReducer extends Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
-        //到达reduce时，相同id的所有bean已经被看成一组，且金额最大的那个一排在第一位
-        @Override
-        protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
-            context.write(key, NullWritable.get());
-        }
-    }
+		@Override
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
+			String line = value.toString();
+			String[] fields = StringUtils.split(line, ",");
+			bean.set(new Text(fields[0]), new DoubleWritable(Double.parseDouble(fields[2])));
+			context.write(bean, NullWritable.get());
+		}
+	}
 
-    public static void main(String[] args) throws Exception {
-        Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf);
+	static class SecondarySortReducer extends
+		Reducer<OrderBean, NullWritable, OrderBean, NullWritable> {
 
-        job.setJarByClass(SecondarySort.class);
+		//到达reduce时，相同id的所有bean已经被看成一组，且金额最大的那个一排在第一位
+		@Override
+		protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context)
+			throws IOException, InterruptedException {
+			context.write(key, NullWritable.get());
+		}
+	}
 
-        job.setMapperClass(SecondarySortMapper.class);
-        job.setReducerClass(SecondarySortReducer.class);
+	public static void main(String[] args) throws Exception {
+		Configuration conf = new Configuration();
+		Job job = Job.getInstance(conf);
 
-        job.setOutputKeyClass(OrderBean.class);
-        job.setOutputValueClass(NullWritable.class);
+		job.setJarByClass(SecondarySort.class);
 
-        FileInputFormat.setInputPaths(job, new Path("c:/wordcount/gpinput"));
-        FileOutputFormat.setOutputPath(job, new Path("c:/wordcount/gpoutput"));
+		job.setMapperClass(SecondarySortMapper.class);
+		job.setReducerClass(SecondarySortReducer.class);
 
-        //在此设置自定义的Groupingcomparator类
-        job.setGroupingComparatorClass(ItemidGroupingComparator.class);
+		job.setOutputKeyClass(OrderBean.class);
+		job.setOutputValueClass(NullWritable.class);
 
-        //在此设置自定义的partitioner类
-        job.setPartitionerClass(ItemIdPartitioner.class);
+		FileInputFormat.setInputPaths(job, new Path("c:/wordcount/gpinput"));
+		FileOutputFormat.setOutputPath(job, new Path("c:/wordcount/gpoutput"));
 
-        job.setNumReduceTasks(2);
+		//在此设置自定义的Groupingcomparator类
+		job.setGroupingComparatorClass(ItemidGroupingComparator.class);
 
-        job.waitForCompletion(true);
-    }
+		//在此设置自定义的partitioner类
+		job.setPartitionerClass(ItemIdPartitioner.class);
+
+		job.setNumReduceTasks(2);
+
+		job.waitForCompletion(true);
+	}
 }

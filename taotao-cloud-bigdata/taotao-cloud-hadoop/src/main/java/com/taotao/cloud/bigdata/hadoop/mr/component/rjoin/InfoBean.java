@@ -25,8 +25,8 @@ import java.io.IOException;
  * InfoBean
  *
  * @author dengtao
- * @since 2020/11/26 下午8:32
  * @version 1.0.0
+ * @since 2020/11/26 下午8:32
  */
 public class InfoBean implements Writable {
 
@@ -45,7 +45,8 @@ public class InfoBean implements Writable {
 	public InfoBean() {
 	}
 
-	public void set(int order_id, String dateString, String p_id, int amount, String pname, int category_id, float price, String flag) {
+	public void set(int order_id, String dateString, String p_id, int amount, String pname,
+		int category_id, float price, String flag) {
 		this.order_id = order_id;
 		this.dateString = dateString;
 		this.p_id = p_id;
@@ -121,9 +122,8 @@ public class InfoBean implements Writable {
 	}
 
 	/**
-	 * private int order_id; private String dateString; private int p_id;
-	 * private int amount; private String pname; private int category_id;
-	 * private float price;
+	 * private int order_id; private String dateString; private int p_id; private int amount;
+	 * private String pname; private int category_id; private float price;
 	 */
 	@Override
 	public void write(DataOutput out) throws IOException {
@@ -153,7 +153,9 @@ public class InfoBean implements Writable {
 
 	@Override
 	public String toString() {
-		return "order_id=" + order_id + ", dateString=" + dateString + ", p_id=" + p_id + ", amount=" + amount + ", pname=" + pname + ", category_id=" + category_id + ", price=" + price + ", flag=" + flag;
+		return "order_id=" + order_id + ", dateString=" + dateString + ", p_id=" + p_id
+			+ ", amount=" + amount + ", pname=" + pname + ", category_id=" + category_id
+			+ ", price=" + price + ", flag=" + flag;
 	}
 
 

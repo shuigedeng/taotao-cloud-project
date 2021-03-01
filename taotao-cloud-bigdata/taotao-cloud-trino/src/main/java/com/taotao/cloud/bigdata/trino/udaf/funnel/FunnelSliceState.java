@@ -28,6 +28,7 @@ import io.trino.spi.type.Type;
  * @version 1.0.0
  */
 public interface FunnelSliceState extends AccumulatorState {
+
 	Slice getSlice();
 
 	void setSlice(Slice value);

@@ -19,9 +19,8 @@ import com.taotao.cloud.bigdata.hadoop.mr.service.MapReduceService;
 import com.taotao.cloud.core.model.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,26 +28,22 @@ import org.springframework.web.bind.annotation.RestController;
  * MapReduceController
  *
  * @author dengtao
- * @since 2020/10/30 17:39
  * @version 1.0.0
+ * @since 2020/10/30 17:39
  */
 @RestController
 @RequestMapping("/hadoop/reduce")
 public class MapReduceController {
+
 	@Autowired
-    MapReduceService mapReduceService;
+	MapReduceService mapReduceService;
 
 	/**
 	 * 分组统计、排序
-	 *
-	 * @param jobName
-	 * @param inputPath
-	 * @return
-	 * @throws Exception
 	 */
-	@RequestMapping(value = "groupSort", method = RequestMethod.POST)
+	@PostMapping(value = "groupSort")
 	@ResponseBody
-	public Result<String> groupSort(@RequestParam("jobName") String jobName, @RequestParam("inputPath") String inputPath)
+	public Result<String> groupSort(String jobName, String inputPath)
 		throws Exception {
 		if (StringUtils.isEmpty(jobName) || StringUtils.isEmpty(inputPath)) {
 			return Result.failed("请求参数为空");

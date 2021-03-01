@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.bigdata.hudi.common;
 
 import org.apache.spark.api.java.JavaSparkContext;
@@ -37,23 +52,29 @@ public class CustomDataGenerator {
 		return df;
 	}
 
-	public static Dataset<Row> getCustomDataset(int num, OpType opType, int age, String location, SparkSession spark) {
+	public static Dataset<Row> getCustomDataset(int num, OpType opType, int age, String location,
+		SparkSession spark) {
 		List<String> datas = new ArrayList<>();
 		for (int i = 0; i < num; i++) {
 			if (opType == OpType.INSERT) {
 				datas.add("{ \"name\": \"le" + (i + 1) + "\""
-					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"beijing\", \"sex\":\"male\", \"date\":\"2020/08/16\"}");
+					+ ", \"ts\": 1574297893837, \"age\": " + age
+					+ ", \"location\": \"beijing\", \"sex\":\"male\", \"date\":\"2020/08/16\"}");
 				datas.add("{ \"name\": \"le" + (i + 1) + "\""
-					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"shanghai\", \"sex\":\"male\", \"date\":\"2020/08/15\"}");
+					+ ", \"ts\": 1574297893837, \"age\": " + age
+					+ ", \"location\": \"shanghai\", \"sex\":\"male\", \"date\":\"2020/08/15\"}");
 			} else if (opType == OpType.UPDATE) {
 				datas.add("{ \"name\": \"le" + (i + 1) + "\""
-					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"" + location + "\", \"sex\":\"male\", \"date\":\"2020/08/16\"}");
+					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"" + location
+					+ "\", \"sex\":\"male\", \"date\":\"2020/08/16\"}");
 			} else if (opType == OpType.APPEND) {
 				datas.add("{ \"name\": \"lee" + (i + 1) + "\""
-					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"shanghai\", \"sex\":\"male\"}");
+					+ ", \"ts\": 1574297893837, \"age\": " + age
+					+ ", \"location\": \"shanghai\", \"sex\":\"male\"}");
 			} else if (opType == OpType.DELETE) {
 				datas.add("{ \"name\": \"le" + (i + 1) + "\""
-					+ ", \"ts\": 1574297893837, \"age\": " + age + ", \"location\": \"beijing\", \"sex\":\"male\"}");
+					+ ", \"ts\": 1574297893837, \"age\": " + age
+					+ ", \"location\": \"beijing\", \"sex\":\"male\"}");
 			}
 		}
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());

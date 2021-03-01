@@ -24,10 +24,11 @@ import java.util.Locale;
  * WebLogParser
  *
  * @author dengtao
- * @since 2020/11/26 下午8:35
  * @version 1.0.0
+ * @since 2020/11/26 下午8:35
  */
 public class WebLogParser {
+
 	static SimpleDateFormat sd1 = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss", Locale.US);
 	static SimpleDateFormat sd2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -48,7 +49,8 @@ public class WebLogParser {
 			} else {
 				webLogBean.setHttp_user_agent(arr[11]);
 			}
-			if (Integer.parseInt(webLogBean.getStatus()) >= 400) {// 大于400，HTTP错误
+			// 大于400，HTTP错误
+			if (Integer.parseInt(webLogBean.getStatus()) >= 400) {
 				webLogBean.setValid(false);
 			}
 		} else {

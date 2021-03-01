@@ -21,9 +21,11 @@ import java.io.IOException;
  * MapReduceServiceo
  *
  * @author dengtao
- * @since 2020/10/30 17:40
  * @version 1.0.0
+ * @since 2020/10/30 17:40
  */
 public interface MapReduceService {
-	void groupSort(String jobName, String inputPath) throws InterruptedException, IOException, ClassNotFoundException;
+
+	void groupSort(String jobName, String inputPath)
+		throws InterruptedException, IOException, ClassNotFoundException;
 }

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.mr.component.inverindex;
+package com.taotao.cloud.bigdata.hadoop.mr.component.invertindex;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -27,22 +28,23 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 /**
- * InverIndexStepOne
+ * InvertIndexStepOne
  *
  * @author dengtao
- * @since 2020/11/26 下午8:24
  * @version 1.0.0
+ * @since 2020/11/26 下午8:24
  */
-public class InverIndexStepOne {
+public class InvertIndexStepOne {
+
 	static class InverIndexStepOneMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
 		Text k = new Text();
 		IntWritable v = new IntWritable(1);
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			String line = value.toString();
 			String[] words = line.split(" ");
 			FileSplit inputSplit = (FileSplit) context.getInputSplit();
@@ -55,8 +57,10 @@ public class InverIndexStepOne {
 	}
 
 	static class InverIndexStepOneReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+
 		@Override
-		protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+		protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+			throws IOException, InterruptedException {
 			int count = 0;
 			for (IntWritable value : values) {
 				count += value.get();
@@ -69,7 +73,7 @@ public class InverIndexStepOne {
 		Configuration conf = new Configuration();
 
 		Job job = Job.getInstance(conf);
-		job.setJarByClass(InverIndexStepOne.class);
+		job.setJarByClass(InvertIndexStepOne.class);
 
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);

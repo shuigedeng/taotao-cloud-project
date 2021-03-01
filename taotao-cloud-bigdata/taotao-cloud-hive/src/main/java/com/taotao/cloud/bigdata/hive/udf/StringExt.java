@@ -27,11 +27,12 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  * 自定义函数不失效，则需要将导出的Jar包放到HIVE_HOME/lib目录
  *
  * @author dengtao
- * @since 2020/10/29 16:58
  * @version 1.0.0
+ * @since 2020/10/29 16:58
  */
 public final class StringExt extends UDF {
-    public String evaluate(String pnb){
-        return "Hello " + pnb;
-    }
+
+	public String evaluate(String pnb) {
+		return "Hello " + pnb;
+	}
 }

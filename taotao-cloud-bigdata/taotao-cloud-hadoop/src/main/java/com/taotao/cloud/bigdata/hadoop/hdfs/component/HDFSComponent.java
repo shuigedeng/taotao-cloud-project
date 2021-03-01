@@ -26,8 +26,8 @@ import org.springframework.stereotype.Component;
  * HDFSComponent
  *
  * @author dengtao
- * @since 2020/10/29 15:19
  * @version 1.0.0
+ * @since 2020/10/29 15:19
  */
 @Component
 public class HDFSComponent {
@@ -38,7 +38,8 @@ public class HDFSComponent {
 	@Bean
 	public HDFSUtil hdfsUtil() {
 		//System.setProperty("hadoop.home.dir", "D:\\software\\hadoop-dev\\hadoop-2.7.7");
-		HDFSUtil hdfsUtil = new HDFSUtil(getConfiguration(), hdfsConfiguration.getPath(), hdfsConfiguration.getUsername());
+		HDFSUtil hdfsUtil = new HDFSUtil(getConfiguration(), hdfsConfiguration.getPath(),
+			hdfsConfiguration.getUsername());
 		return hdfsUtil;
 	}
 
@@ -48,17 +49,14 @@ public class HDFSComponent {
 	 * @return org.apache.hadoop.conf.Configuration
 	 * @author dengtao
 	 * @since 2020/10/29 15:22
-	 * @version 1.0.0
 	 */
 	private Configuration getConfiguration() {
 		Configuration configuration = new Configuration();
 		configuration.set("fs.defaultFS", hdfsConfiguration.getPath());
-		/**
-		 * 参数优先级： 1、客户端代码中设置的值 2、classpath下的用户自定义配置文件 3、然后是服务器的默认配置
-		 */
+
+		//参数优先级： 1、客户端代码中设置的值 2、classpath下的用户自定义配置文件 3、然后是服务器的默认配置
 		configuration.set("dfs.replication", "1");
 		configuration.set("dfs.block.size", "64m");
 		return configuration;
 	}
-
 }

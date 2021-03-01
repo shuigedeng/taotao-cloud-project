@@ -15,22 +15,23 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.wordcount;
 
+import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-
-import java.io.IOException;
 
 /**
  * 输入为map的输出
  *
  * @author dengtao
- * @since 2020/11/26 下午8:06
  * @version 1.0.0
+ * @since 2020/11/26 下午8:06
  */
 public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {
+
 	@Override
-	protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+	protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+		throws IOException, InterruptedException {
 		int count = 0;
 		for (IntWritable v : values) {
 			count += v.get();

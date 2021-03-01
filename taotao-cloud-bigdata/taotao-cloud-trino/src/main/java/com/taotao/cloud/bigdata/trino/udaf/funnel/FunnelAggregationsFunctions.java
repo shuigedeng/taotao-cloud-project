@@ -38,11 +38,12 @@ import java.util.Map;
  * taotao_cloud_funnel(ctime, 86400*1000*3, event, 'SingUp,AppPageView,AppClick,NewsAction')
  *
  * @author dengtao
- * @since 2021/1/25 下午3:52
  * @version 1.0.0
+ * @since 2021/1/25 下午3:52
  */
 @AggregationFunction("taotao_cloud_funnel")
 public class FunnelAggregationsFunctions extends FunnelBase {
+
 	// 表示放2个int
 	private static final int COUNT_FLAG_LENGTH = 8;
 
@@ -99,7 +100,8 @@ public class FunnelAggregationsFunctions extends FunnelBase {
 			int length2 = slice2.length();
 			Slice slice = Slices.allocate(length1 + length2 - COUNT_FLAG_LENGTH);
 			slice.setBytes(0, slice1.getBytes());
-			slice.setBytes(length1, slice2.getBytes(), COUNT_FLAG_LENGTH, length2 - COUNT_FLAG_LENGTH);
+			slice.setBytes(length1, slice2.getBytes(), COUNT_FLAG_LENGTH,
+				length2 - COUNT_FLAG_LENGTH);
 			state1.setSlice(slice);
 		}
 	}
@@ -156,7 +158,7 @@ public class FunnelAggregationsFunctions extends FunnelBase {
 
 					if ((timestamp - flags[0]) >= windows) {
 						break;
-					} else if(event == (flags[1] + 1)) {
+					} else if (event == (flags[1] + 1)) {
 						flags[1] = event;
 						if (maxEventIndex < event) {
 							maxEventIndex = event;

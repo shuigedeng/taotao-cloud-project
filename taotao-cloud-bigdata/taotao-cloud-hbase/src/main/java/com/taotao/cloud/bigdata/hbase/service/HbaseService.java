@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hbase.service.impl;
-
-import com.taotao.cloud.bigdata.hbase.service.ProductService;
-import org.springframework.stereotype.Service;
+package com.taotao.cloud.bigdata.hbase.service;
 
 /**
- * ProductServiceImpl
+ * HbaseService
  *
  * @author dengtao
- * @since 2020/10/30 11:13
  * @version 1.0.0
+ * @since 2020/10/30 11:13
  */
-@Service
-public class ProductServiceImpl implements ProductService {
+public interface HbaseService {
+
 }

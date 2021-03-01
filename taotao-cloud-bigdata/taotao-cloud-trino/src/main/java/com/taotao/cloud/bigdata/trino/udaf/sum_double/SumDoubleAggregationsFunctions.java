@@ -31,8 +31,8 @@ import io.trino.spi.type.StandardTypes;
  * 开发聚合函数 TaoTaoCloudSumDoubleAggregationsFunctions
  *
  * @author dengtao
- * @since 2021/1/25 下午3:19
  * @version 1.0.0
+ * @since 2021/1/25 下午3:19
  */
 @AggregationFunction("my_sum_double")
 @Description("这是一个聚合函数")
@@ -58,7 +58,7 @@ public class SumDoubleAggregationsFunctions {
 		//表示每次进来的状态数据
 		@AggregationState NullableDoubleState state2) {
 
-		if(state1.isNull()){
+		if (state1.isNull()) {
 			state1.setNull(false);
 			state1.setDouble(state2.getDouble());
 			return;

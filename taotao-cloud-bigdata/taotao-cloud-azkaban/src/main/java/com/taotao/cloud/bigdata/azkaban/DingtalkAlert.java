@@ -20,7 +20,6 @@ import azkaban.executor.ExecutableFlow;
 import azkaban.sla.SlaOption;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.request.OapiRobotSendRequest;
-
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Properties;
@@ -29,13 +28,14 @@ import java.util.Properties;
  * DingtalkAlert
  *
  * @author dengtao
- * @since 2021/1/21 下午2:10
  * @version 1.0.0
+ * @since 2021/1/21 下午2:10
  */
 public class DingtalkAlert implements Alerter {
+
 	private final Properties properties;
 
-	public String dingtalkServerUrl = "https://oapi.dingtalk.com/robot/send?access_token=";
+	public static final String DINGTALK_SERVER_URL = "https://oapi.dingtalk.com/robot/send?access_token=";
 
 	public DingtalkAlert(Properties properties) {
 		this.properties = properties;
@@ -57,11 +57,12 @@ public class DingtalkAlert implements Alerter {
 	private void send(ExecutableFlow executableFlow, String title, String content) {
 		String token = getPropertyKey(executableFlow, "ding.token");
 		String azkabanHost = getPropertyKey(executableFlow, "ding.link.azkaban.host");
-		String linkAddress = azkabanHost + "/executor?execid=" + executableFlow.getExecutionId() + "#joblist";
+		String linkAddress =
+			azkabanHost + "/executor?execid=" + executableFlow.getExecutionId() + "#joblist";
 
 		String authWord = getPropertyKey(executableFlow, "ding.auth.word");
 
-		DefaultDingTalkClient talkClient = new DefaultDingTalkClient(dingtalkServerUrl + token);
+		DefaultDingTalkClient talkClient = new DefaultDingTalkClient(DINGTALK_SERVER_URL + token);
 		OapiRobotSendRequest request = new OapiRobotSendRequest();
 		request.setMsgtype("link");
 
@@ -83,15 +84,18 @@ public class DingtalkAlert implements Alerter {
 	@Override
 	public void alertOnSuccess(ExecutableFlow executableFlow) throws Exception {
 		if (isActivated(executableFlow, "success")) {
-			String title = "taotao cloud weblog flow "  + executableFlow.getFlowId() + "has successed:\n";
+			String title =
+				"taotao cloud weblog flow " + executableFlow.getFlowId() + "has successed:\n";
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("\t-start:")
-			.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getStartTime()))
-			.append("\n");
+				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.format(executableFlow.getStartTime()))
+				.append("\n");
 
 			sb.append("\t-end:")
-				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
+				.append(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
 				.append("\n");
 
 			sb.append("\t-duration:")
@@ -105,15 +109,18 @@ public class DingtalkAlert implements Alerter {
 	@Override
 	public void alertOnError(ExecutableFlow executableFlow, String... strings) throws Exception {
 		if (isActivated(executableFlow, "error")) {
-			String title = "taotao cloud weblog flow "  + executableFlow.getFlowId() + "has failed:\n";
+			String title =
+				"taotao cloud weblog flow " + executableFlow.getFlowId() + "has failed:\n";
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("\t-start:")
-				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getStartTime()))
+				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.format(executableFlow.getStartTime()))
 				.append("\n");
 
 			sb.append("\t-end:")
-				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
+				.append(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
 				.append("\n");
 
 			sb.append("\t-duration:")
@@ -127,15 +134,18 @@ public class DingtalkAlert implements Alerter {
 	@Override
 	public void alertOnFirstError(ExecutableFlow executableFlow) throws Exception {
 		if (isActivated(executableFlow, "first error")) {
-			String title = "taotao cloud weblog flow "  + executableFlow.getFlowId() + "has first failed:\n";
+			String title =
+				"taotao cloud weblog flow " + executableFlow.getFlowId() + "has first failed:\n";
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("\t-start:")
-				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getStartTime()))
+				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+					.format(executableFlow.getStartTime()))
 				.append("\n");
 
 			sb.append("\t-end:")
-				.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
+				.append(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(executableFlow.getEndTime()))
 				.append("\n");
 
 			sb.append("\t-duration:")

@@ -17,8 +17,8 @@ package com.taotao.cloud.bigdata.hive.api.controller;
 
 /**
  * @author dengtao
- * @since 2020/10/30 10:20
  * @version 1.0.0
+ * @since 2020/10/30 10:20
  */
 public class HiveController {
 

@@ -31,16 +31,19 @@ import java.io.IOException;
  * 13480253104 180 180 360 13502468823 7335 110349 117684 13560436666 1116 954 2070
  *
  * @author dengtao
- * @since 2020/11/26 下午8:22
  * @version 1.0.0
+ * @since 2020/11/26 下午8:22
  */
 public class FlowCountSort {
+
 	static class FlowCountSortMapper extends Mapper<LongWritable, Text, FlowBean, Text> {
+
 		FlowBean bean = new FlowBean();
 		Text v = new Text();
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			// 拿到的是上一个统计程序的输出结果，已经是各手机号的总流量信息
 			String line = value.toString();
 			String[] fields = line.split("\t");
@@ -60,13 +63,15 @@ public class FlowCountSort {
 	 * 根据key来掉, 传过来的是对象, 每个对象都是不一样的, 所以每个对象都调用一次reduce方法
 	 *
 	 * @author dengtao
-	 * @since 2020/11/26 下午8:22
 	 * @version 1.0.0
+	 * @since 2020/11/26 下午8:22
 	 */
 	static class FlowCountSortReducer extends Reducer<FlowBean, Text, Text, FlowBean> {
+
 		// <bean(),phonenbr>
 		@Override
-		protected void reduce(FlowBean bean, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+		protected void reduce(FlowBean bean, Iterable<Text> values, Context context)
+			throws IOException, InterruptedException {
 			context.write(values.iterator().next(), bean);
 		}
 	}

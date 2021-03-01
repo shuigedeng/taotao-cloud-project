@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component;
 
+import java.io.IOException;
+import javax.annotation.PostConstruct;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -25,13 +27,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-
 /**
  * @author dengtao
- * @since 2020/10/30 17:43
  * @version 1.0.0
+ * @since 2020/10/30 17:43
  */
 @Component
 public class ReduceJobsUtils {
@@ -47,7 +46,6 @@ public class ReduceJobsUtils {
 	 * @return org.apache.hadoop.conf.Configuration
 	 * @author dengtao
 	 * @since 2020/11/26 下午8:11
-	 * @version 1.0.0
 	 */
 	public static Configuration getConfiguration() {
 		Configuration configuration = new Configuration();

@@ -34,21 +34,17 @@ import java.util.Arrays;
  * <p>
  * 3.上传jar包提交集群运行
  * <p>
- * ./spark-submit \
- * --master spark://127.0.0.1:7077 \
- * --class com.taotao.cloud.spark.JavaWordCount \
- * --executor-memory 512m \
- * --total-executor-cores 2 \
- * /root/spark/jar/taotao-cloud-spark-1.0-all.jar \
- * hdfs://127.0.0.1/spark/wordcount/input \
- * hdfs://127.0.0.1/spark/wordcount/output
+ * ./spark-submit \ --master spark://127.0.0.1:7077 \ --class com.taotao.cloud.spark.JavaWordCount \
+ * --executor-memory 512m \ --total-executor-cores 2 \ /root/spark/jar/taotao-cloud-spark-1.0-all.jar
+ * \ hdfs://127.0.0.1/spark/wordcount/input \ hdfs://127.0.0.1/spark/wordcount/output
  * <p>
  *
  * @author dengtao
- * @since 2020/11/26 上午9:35
  * @version 1.0.0
+ * @since 2020/11/26 上午9:35
  */
 public class JavaWordCount {
+
 	public static void main(String[] args) throws InterruptedException {
 		SparkConf javaWordCount = new SparkConf()
 			.setAppName("JavaWordCount")
@@ -69,7 +65,8 @@ public class JavaWordCount {
 		JavaPairRDD<String, Integer> sorts = counts
 			.mapToPair(new PairFunction<Tuple2<String, Integer>, String, Integer>() {
 				@Override
-				public Tuple2<String, Integer> call(Tuple2<String, Integer> tuple2) throws Exception {
+				public Tuple2<String, Integer> call(Tuple2<String, Integer> tuple2)
+					throws Exception {
 					return Tuple2.apply(tuple2._1(), tuple2._2());
 
 				}

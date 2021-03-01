@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.combinefile;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -27,25 +28,24 @@ import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
-import java.io.IOException;
-
 /**
- * RecordReader的核心工作逻辑：
- * 通过nextKeyValue()方法去读取数据构造将返回的key   value
- * 通过getCurrentKey 和 getCurrentValue来返回上面构造好的key和value
+ * RecordReader的核心工作逻辑： 通过nextKeyValue()方法去读取数据构造将返回的key   value 通过getCurrentKey 和
+ * getCurrentValue来返回上面构造好的key和value
  *
  * @author dengtao
- * @since 2020/11/26 下午8:14
  * @version 1.0.0
+ * @since 2020/11/26 下午8:14
  */
 class WholeFileRecordReader extends RecordReader<NullWritable, BytesWritable> {
+
 	private FileSplit fileSplit;
 	private Configuration conf;
 	private final BytesWritable value = new BytesWritable();
 	private boolean processed = false;
 
 	@Override
-	public void initialize(InputSplit split, TaskAttemptContext context) throws IOException, InterruptedException {
+	public void initialize(InputSplit split, TaskAttemptContext context)
+		throws IOException, InterruptedException {
 		this.fileSplit = (FileSplit) split;
 		this.conf = context.getConfiguration();
 	}

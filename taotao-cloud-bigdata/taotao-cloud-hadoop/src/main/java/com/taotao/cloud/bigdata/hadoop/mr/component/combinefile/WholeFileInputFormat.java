@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.combinefile;
 
+import java.io.IOException;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -24,14 +25,12 @@ import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 
-import java.io.IOException;
-
 /**
  * WholeFileInputFormat
  *
  * @author dengtao
- * @since 2020/11/26 下午8:15
  * @version 1.0.0
+ * @since 2020/11/26 下午8:15
  */
 public class WholeFileInputFormat extends FileInputFormat<NullWritable, BytesWritable> {
 

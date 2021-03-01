@@ -36,8 +36,8 @@ import java.util.Map;
  * HDFSController
  *
  * @author dengtao
- * @since 2020/10/29 15:40
  * @version 1.0.0
+ * @since 2020/10/29 15:40
  */
 @RestController
 @RequestMapping("/hadoop/hdfs")
@@ -68,7 +68,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "读取HDFS目录信息")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping(value = "readPathInfo")
-	public Result<List<Map<String, Object>>> readPathInfo(@RequestParam("path") String path) throws Exception {
+	public Result<List<Map<String, Object>>> readPathInfo(@RequestParam("path") String path)
+		throws Exception {
 		List<Map<String, Object>> list = HdfsService.readPathInfo(path);
 		return Result.succeed(list);
 	}
@@ -77,7 +78,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "获取HDFS文件在集群中的位置")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/getFileBlockLocations")
-	public Result<BlockLocation[]> getFileBlockLocations(@RequestParam("path") String path) throws Exception {
+	public Result<BlockLocation[]> getFileBlockLocations(@RequestParam("path") String path)
+		throws Exception {
 		BlockLocation[] blockLocations = HdfsService.getFileBlockLocations(path);
 		return Result.succeed(blockLocations);
 	}
@@ -86,7 +88,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "创建文件")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/createFile")
-	public Result<String> createFile(@RequestParam("path") String path, @RequestParam("file") MultipartFile file)
+	public Result<String> createFile(@RequestParam("path") String path,
+		@RequestParam("file") MultipartFile file)
 		throws Exception {
 		if (StringUtils.isEmpty(path) || file.isEmpty()) {
 			return Result.failed("请求参数为空");
@@ -126,7 +129,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "读取文件列表")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/listFile")
-	public Result<List<Map<String, String>>> listFile(@RequestParam("path") String path) throws Exception {
+	public Result<List<Map<String, String>>> listFile(@RequestParam("path") String path)
+		throws Exception {
 		List<Map<String, String>> returnList = HdfsService.listFile(path);
 		return Result.succeed(returnList);
 	}
@@ -135,7 +139,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "重命名文件")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/renameFile")
-	public Result<String> renameFile(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName)
+	public Result<String> renameFile(@RequestParam("oldName") String oldName,
+		@RequestParam("newName") String newName)
 		throws Exception {
 		if (StringUtils.isEmpty(oldName) || StringUtils.isEmpty(newName)) {
 			return Result.failed("请求参数为空");
@@ -165,7 +170,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "删除文件")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/uploadFile")
-	public Result<Boolean> uploadFile(@RequestParam("path") String path, @RequestParam("uploadPath") String uploadPath)
+	public Result<Boolean> uploadFile(@RequestParam("path") String path,
+		@RequestParam("uploadPath") String uploadPath)
 		throws Exception {
 		HdfsService.uploadFile(path, uploadPath);
 		return Result.succeed(true);
@@ -175,7 +181,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "下载文件")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/downloadFile")
-	public Result<Boolean> downloadFile(@RequestParam("path") String path, @RequestParam("downloadPath") String downloadPath)
+	public Result<Boolean> downloadFile(@RequestParam("path") String path,
+		@RequestParam("downloadPath") String downloadPath)
 		throws Exception {
 		HdfsService.downloadFile(path, downloadPath);
 		return Result.succeed(true);
@@ -185,7 +192,8 @@ public class HDFSController {
 	// @SysOperateLog(description = "HDFS文件复制")
 	// @PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping("/copyFile")
-	public Result<Boolean> copyFile(@RequestParam("sourcePath") String sourcePath, @RequestParam("targetPath") String targetPath)
+	public Result<Boolean> copyFile(@RequestParam("sourcePath") String sourcePath,
+		@RequestParam("targetPath") String targetPath)
 		throws Exception {
 		HdfsService.copyFile(sourcePath, targetPath);
 		return Result.succeed(true);

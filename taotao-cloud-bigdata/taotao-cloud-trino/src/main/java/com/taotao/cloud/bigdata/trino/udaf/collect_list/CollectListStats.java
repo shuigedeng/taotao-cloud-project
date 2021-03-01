@@ -27,11 +27,13 @@ import java.util.Map;
 
 /**
  * @author dengtao
- * @since 2020/10/29 18:09
  * @version 1.0.0
+ * @since 2020/10/29 18:09
  */
 public class CollectListStats {
-	private static final int INSTANCE_SIZE = (int) ClassLayout.parseClass(CollectListStats.class).instanceSize();
+
+	private static final int INSTANCE_SIZE = (int) ClassLayout.parseClass(CollectListStats.class)
+		.instanceSize();
 	//<id,<key,value>>
 	private final Map<Integer, Map<String, Integer>> collectContainer = new HashMap<>();
 	private long contentEstimatedSize = 0;
@@ -151,7 +153,9 @@ public class CollectListStats {
 			}
 			return builder.getUnderlyingSlice();
 		} catch (Exception e) {
-			throw new RuntimeException(e + " ---- serialize err  requiredBytes = " + requiredBytes + " keyByteLen= " + keyByteLen + " keyListLen = " + keyListLen);
+			throw new RuntimeException(
+				e + " ---- serialize err  requiredBytes = " + requiredBytes + " keyByteLen= "
+					+ keyByteLen + " keyListLen = " + keyListLen);
 		}
 	}
 

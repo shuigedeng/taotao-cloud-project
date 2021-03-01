@@ -25,18 +25,18 @@ import java.io.Serializable;
  * HDFS配置类
  *
  * @author dengtao
- * @since 2020/10/29 15:11
  * @version 1.0.0
+ * @since 2020/10/29 15:11
  */
 @Data
 @Configuration
 public class HdfsConfiguration implements Serializable {
 
-    private static final long serialVersionUID = -3927708731917979149L;
+	private static final long serialVersionUID = -3927708731917979149L;
 
-    @Value("${hdfs.path:hdfs://106.13.201.31:9000}")
-    private String path;
+	@Value("${hdfs.path:hdfs://106.13.201.31:9000}")
+	private String path;
 
-    @Value("${hdfs.username:root}")
-    private String username;
+	@Value("${hdfs.username:root}")
+	private String username;
 }

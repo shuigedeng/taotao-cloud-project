@@ -19,18 +19,21 @@ import io.airlift.slice.Slice;
 import io.trino.spi.function.AccumulatorState;
 
 /**
+ * RouteUserAggregationBase
+ *
  * @author dengtao
- * @since 2020/10/29 18:14
  * @version 1.0.0
+ * @since 2020/10/29 18:14
  */
 public class RouteUserAggregationBase {
-    /**
-     * Slice State
-     * 中间数据 Buffer
-     */
-    public interface SliceState extends AccumulatorState {
-        Slice getSlice();
 
-        void setSlice(Slice slice);
-    }
+	/**
+	 * Slice State 中间数据 Buffer
+	 */
+	public interface SliceState extends AccumulatorState {
+
+		Slice getSlice();
+
+		void setSlice(Slice slice);
+	}
 }

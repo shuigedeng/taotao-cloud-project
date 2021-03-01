@@ -15,7 +15,10 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.logenhance;
 
-import cn.hutool.core.util.StrUtil;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -27,19 +30,17 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * LogEnhance
  *
  * @author dengtao
- * @since 2020/11/26 下午8:26
  * @version 1.0.0
+ * @since 2020/11/26 下午8:26
  */
 public class LogEnhance {
+
 	static class LogEnhanceMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
+
 		Map<String, String> ruleMap = new HashMap<>();
 		Text k = new Text();
 		NullWritable v = NullWritable.get();
@@ -55,20 +56,21 @@ public class LogEnhance {
 		}
 
 		@Override
-		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+		protected void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException {
 			// 获取一个计数器用来记录不合法的日志行数, 组名, 计数器名称
 			Counter counter = context.getCounter("malformed", "malformedline");
 			String line = value.toString();
-			String[] fields = StrUtil.split(line, "\t");
+			String[] fields = StringUtils.split(line, '\t');
 			try {
 				String url = fields[26];
-				String content_tag = ruleMap.get(url);
+				String contentTag = ruleMap.get(url);
 				// 判断内容标签是否为空，如果为空，则只输出url到待爬清单；如果有值，则输出到增强日志
-				if (content_tag == null) {
+				if (contentTag == null) {
 					k.set(url + "\t" + "tocrawl" + "\n");
 					context.write(k, v);
 				} else {
-					k.set(line + "\t" + content_tag + "\n");
+					k.set(line + "\t" + contentTag + "\n");
 					context.write(k, v);
 				}
 
@@ -76,7 +78,6 @@ public class LogEnhance {
 				counter.increment(1);
 			}
 		}
-
 	}
 
 	public static void main(String[] args) throws Exception {

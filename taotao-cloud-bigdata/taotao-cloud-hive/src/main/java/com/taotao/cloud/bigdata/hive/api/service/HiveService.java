@@ -17,12 +17,16 @@ package com.taotao.cloud.bigdata.hive.api.service;
 
 /**
  * @author dengtao
- * @since 2020/10/30 10:12
  * @version 1.0.0
+ * @since 2020/10/30 10:12
  */
 public interface HiveService {
+
 	public String insert();
+
 	public String select();
+
 	public String delete();
+
 	public String create();
 }

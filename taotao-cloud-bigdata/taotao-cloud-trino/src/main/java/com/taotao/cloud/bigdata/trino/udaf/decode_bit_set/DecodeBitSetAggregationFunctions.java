@@ -27,17 +27,19 @@ import io.trino.spi.function.SqlType;
 import io.trino.spi.type.StandardTypes;
 
 /**
+ * DecodeBitSetAggregationFunctions
+ *
  * @author dengtao
- * @since 2020/10/29 17:47
  * @version 1.0.0
+ * @since 2020/10/29 17:47
  */
 @AggregationFunction("tapdb_bitset_decode")
 public class DecodeBitSetAggregationFunctions {
 
 	@InputFunction
 	public static void input(@AggregationState RouteUserAggregationBase.SliceState state,
-							 @SqlType(StandardTypes.BIGINT) long mask,
-							 @SqlType(StandardTypes.BIGINT) long value) {
+		@SqlType(StandardTypes.BIGINT) long mask,
+		@SqlType(StandardTypes.BIGINT) long value) {
 		if (state.getSlice() == null) {
 			long capacity = 30 * Long.BYTES;
 			Slice slice = Slices.allocate((int) capacity);
@@ -58,7 +60,7 @@ public class DecodeBitSetAggregationFunctions {
 
 	@CombineFunction
 	public static void combine(@AggregationState RouteUserAggregationBase.SliceState state,
-							   @AggregationState RouteUserAggregationBase.SliceState otherState) {
+		@AggregationState RouteUserAggregationBase.SliceState otherState) {
 		Slice otherSlice = otherState.getSlice();
 		Slice slice = state.getSlice();
 
@@ -79,7 +81,7 @@ public class DecodeBitSetAggregationFunctions {
 
 	@OutputFunction("array(bigint)")
 	public static void output(@AggregationState RouteUserAggregationBase.SliceState state,
-							  BlockBuilder out) {
+		BlockBuilder out) {
 		Slice slice = state.getSlice();
 		if (slice == null) {
 			out.appendNull();

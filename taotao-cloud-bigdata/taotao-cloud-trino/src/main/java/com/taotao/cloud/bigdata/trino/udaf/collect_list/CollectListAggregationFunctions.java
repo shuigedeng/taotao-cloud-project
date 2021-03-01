@@ -29,71 +29,73 @@ import io.trino.spi.type.VarcharType;
 
 /**
  * @author dengtao
- * @since 2020/10/29 17:52
  * @version 1.0.0
+ * @since 2020/10/29 17:52
  */
 public class CollectListAggregationFunctions {
+
 	@AccumulatorStateMetadata(
 		stateSerializerClass = CollectListStatsSerializer.class,
 		stateFactoryClass = CollectListStatsFactory.class
 	)
-    public interface CollectState extends AccumulatorState {
-        CollectListStats get();
+	public interface CollectState extends AccumulatorState {
 
-        void set(CollectListStats value);
-    }
+		CollectListStats get();
+
+		void set(CollectListStats value);
+	}
 
 
-    @InputFunction
-    public static void input(@AggregationState CollectState state,
-                             @SqlType(StandardTypes.VARCHAR) Slice id,
-                             @SqlType(StandardTypes.VARCHAR) Slice key) {
-        try {
-            CollectListStats stats = state.get();
-            if (stats == null) {
-                stats = new CollectListStats();
-                state.set(stats);
-            }
-            int inputId = Integer.parseInt(id.toStringUtf8());
-            String inputKey = key.toStringUtf8();
-            stats.addCollectList(inputId, inputKey, 1);
-        } catch (Exception e) {
-            throw new RuntimeException(e + " ---------  input err");
-        }
-    }
+	@InputFunction
+	public static void input(@AggregationState CollectState state,
+		@SqlType(StandardTypes.VARCHAR) Slice id,
+		@SqlType(StandardTypes.VARCHAR) Slice key) {
+		try {
+			CollectListStats stats = state.get();
+			if (stats == null) {
+				stats = new CollectListStats();
+				state.set(stats);
+			}
+			int inputId = Integer.parseInt(id.toStringUtf8());
+			String inputKey = key.toStringUtf8();
+			stats.addCollectList(inputId, inputKey, 1);
+		} catch (Exception e) {
+			throw new RuntimeException(e + " ---------  input err");
+		}
+	}
 
-    @CombineFunction
-    public static void combine(@AggregationState CollectState state, CollectState otherState) {
-        try {
-            CollectListStats collectListStats = state.get();
-            CollectListStats oCollectListStats = otherState.get();
-            if (collectListStats == null) {
-                state.set(oCollectListStats);
-            } else {
-                collectListStats.mergeWith(oCollectListStats);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e + " --------- combine err");
-        }
-    }
+	@CombineFunction
+	public static void combine(@AggregationState CollectState state, CollectState otherState) {
+		try {
+			CollectListStats collectListStats = state.get();
+			CollectListStats oCollectListStats = otherState.get();
+			if (collectListStats == null) {
+				state.set(oCollectListStats);
+			} else {
+				collectListStats.mergeWith(oCollectListStats);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e + " --------- combine err");
+		}
+	}
 
-    @OutputFunction(StandardTypes.VARCHAR)
-    public static void output(@AggregationState CollectState state, BlockBuilder out) {
-        try {
-            CollectListStats stats = state.get();
-            if (stats == null) {
-                out.appendNull();
-                return;
-            }
-            // 统计
-            Slice result = stats.getCollectResult();
-            if (result == null) {
-                out.appendNull();
-            } else {
-                VarcharType.VARCHAR.writeSlice(out, result);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e + " -------- output err");
-        }
-    }
+	@OutputFunction(StandardTypes.VARCHAR)
+	public static void output(@AggregationState CollectState state, BlockBuilder out) {
+		try {
+			CollectListStats stats = state.get();
+			if (stats == null) {
+				out.appendNull();
+				return;
+			}
+			// 统计
+			Slice result = stats.getCollectResult();
+			if (result == null) {
+				out.appendNull();
+			} else {
+				VarcharType.VARCHAR.writeSlice(out, result);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e + " -------- output err");
+		}
+	}
 }

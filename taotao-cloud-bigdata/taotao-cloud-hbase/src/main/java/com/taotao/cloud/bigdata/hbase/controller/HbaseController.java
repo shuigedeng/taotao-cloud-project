@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.bigdata.hbase.controller;
 
-import com.taotao.cloud.bigdata.hbase.service.ProductService;
+import com.taotao.cloud.bigdata.hbase.service.HbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,18 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
  * ProductController
  *
  * @author dengtao
- * @since 2020/10/30 11:10
  * @version 1.0.0
+ * @since 2020/10/30 11:10
  */
 @RestController
 @RequestMapping("/product")
-public class ProductController {
+public class HbaseController {
 
-	private ProductService productService;
+	private HbaseService hbaseService;
 
 	@Autowired
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
+	public void setProductService(HbaseService hbaseService) {
+		this.hbaseService = hbaseService;
 	}
 
 	@RequestMapping("queryByRowKey")
