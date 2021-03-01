@@ -10,7 +10,4 @@ dependencies {
     implementation "com.alibaba.cloud:spring-cloud-starter-stream-rocketmq"
 
     implementation 'cn.hutool:hutool-all'
-
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }

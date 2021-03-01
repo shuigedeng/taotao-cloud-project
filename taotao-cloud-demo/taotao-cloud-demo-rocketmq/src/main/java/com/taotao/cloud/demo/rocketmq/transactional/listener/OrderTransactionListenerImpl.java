@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.demo.rocketmq.transactional.listener;
 
 import com.taotao.cloud.common.utils.JsonUtil;
@@ -10,10 +25,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 
 /**
- * @author zlt
+ * OrderTransactionListenerImpl
  */
 @RocketMQTransactionListener(txProducerGroup = "order-tx-produce-group", corePoolSize = 5, maximumPoolSize = 10)
 public class OrderTransactionListenerImpl implements RocketMQLocalTransactionListener {
+
 	@Autowired
 	private IOrderService orderService;
 
@@ -41,9 +57,7 @@ public class OrderTransactionListenerImpl implements RocketMQLocalTransactionLis
 	/**
 	 * 事务回查接口
 	 * <p>
-	 * 如果事务消息一直没提交，则定时判断订单数据是否已经插入
-	 * 是：提交事务消息
-	 * 否：回滚事务消息
+	 * 如果事务消息一直没提交，则定时判断订单数据是否已经插入 是：提交事务消息 否：回滚事务消息
 	 */
 	@Override
 	public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
@@ -53,6 +67,7 @@ public class OrderTransactionListenerImpl implements RocketMQLocalTransactionLis
 		int count = 1;
 		//select count(1) from t_order where order_id = ${orderId}
 		System.out.println("============事务回查-订单已生成-提交事务消息");
-		return count > 0 ? RocketMQLocalTransactionState.COMMIT : RocketMQLocalTransactionState.ROLLBACK;
+		return count > 0 ? RocketMQLocalTransactionState.COMMIT
+			: RocketMQLocalTransactionState.ROLLBACK;
 	}
 }
