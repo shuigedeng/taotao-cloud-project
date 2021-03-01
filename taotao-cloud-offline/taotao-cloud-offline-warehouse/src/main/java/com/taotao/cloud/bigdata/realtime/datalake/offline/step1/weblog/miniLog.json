@@ -1,0 +1,81 @@
+//# 原始base64
+//# @see actionLog.json
+//eyJkaXN0aW5jdF9pZCI6IjE2MTE2MzA1MzcyODAtNDg2NDQyNy0wMzE3YjZmOWVmZmI0My02MTQ0MDEzOSIsImxpYiI6eyIkbGliIjoiTWluaVByb2dyYW0iLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjE0LjUifSwicHJvcGVydGllcyI6eyIkbGliIjoiTWluaVByb2dyYW0iLCIkbGliX3ZlcnNpb24iOiIxLjE0LjUiLCIkbmV0d29ya190eXBlIjoid2lmaSIsIiRtYW51ZmFjdHVyZXIiOiJIVUFXRUkiLCIkbW9kZWwiOiJTVEstQUwwMCIsIiRzY3JlZW5fd2lkdGgiOjM2MCwiJHNjcmVlbl9oZWlnaHQiOjc4MCwiJG9zIjoiQW5kcm9pZCIsIiRvc192ZXJzaW9uIjoiMTAiLCIkdGltZXpvbmVfb2Zmc2V0IjotNDgwLCIkYXBwX2lkIjoid3gyMTdhZDEzNGZjODU5MGZiIiwiJGxhdGVzdF9zY2VuZSI6Ind4LTEwMDEiLCJ3aWR0aCI6MzYwLCJyaWdodCI6MzYwLCJ0b3AiOjAsImxlZnQiOjAsImJvdHRvbSI6NzgwLCJoZWlnaHQiOjc4MCwic2NyZWVuV2lkdGgiOjM2MCwid2luZG93SGVpZ2h0Ijo2NjUsImJsdWV0b290aEVuYWJsZWQiOmZhbHNlLCJlcnJNc2ciOiJnZXRMb2NhdGlvbjpvayIsImxhbmd1YWdlIjoiemhfQ04iLCJtaWNyb3Bob25lQXV0aG9yaXplZCI6dHJ1ZSwibG9jYXRpb25BdXRob3JpemVkIjp0cnVlLCJub3RpZmljYXRpb25BdXRob3JpemVkIjp0cnVlLCJtb2RlbCI6IlNUSy1BTDAwIiwic3RhdHVzQmFySGVpZ2h0IjoyNCwiYnJhbmQiOiJIVUFXRUkiLCJ3aW5kb3dXaWR0aCI6MzYwLCJsb2NhdGlvbkVuYWJsZWQiOnRydWUsImJlbmNobWFya0xldmVsIjoxOCwic2NyZWVuSGVpZ2h0Ijo3ODAsImFiaSI6ImFybTY0LXY4YSIsInZlcnNpb24iOjY1NDMxNzExNSwiY2FtZXJhQXV0aG9yaXplZCI6dHJ1ZSwic3lzdGVtIjoiQW5kcm9pZCAxMCIsImZvbnRTaXplU2V0dGluZyI6MTYsInBpeGVsUmF0aW8iOjMsImRldmljZU9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJ3aWZpRW5hYmxlZCI6dHJ1ZSwic2NyZWVuVG9wIjo2NywicGxhdGZvcm0iOiJhbmRyb2lkIiwiU0RLVmVyc2lvbiI6IjIuMTQuNCIsImRldmljZVBpeGVsUmF0aW8iOjMsImVudiI6IldlQ2hhdCIsInZlcnRpY2FsQWNjdXJhY3kiOjAsImluZG9vckxvY2F0aW9uVHlwZSI6LTEsInByb3ZpZGVyIjoibmV0d29yayIsImxhdGl0dWRlIjoyOS42Mjg4OTQsImFjY3VyYWN5IjoxNSwiaG9yaXpvbnRhbEFjY3VyYWN5IjoxNSwidHlwZSI6Indnczg0Iiwic3RlcHMiOjAsInNwZWVkIjowLCJsb25naXR1ZGUiOjEwNi40ODYxOTEsImRpcmVjdGlvbiI6MCwiJHVybF9wYXRoIjoicGFnZXMvaG9tZS9pbmRleCIsImV2ZW50X2R1cmF0aW9uIjozMC43MTYsIiRpc19maXJzdF9kYXkiOnRydWV9LCJhbm9ueW1vdXNfaWQiOiIxNjExNjMwNTM3MjgwLTQ4NjQ0MjctMDMxN2I2ZjllZmZiNDMtNjE0NDAxMzkiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRNUEhpZGUifQ==
+//
+//# base64 解析
+//echo eyJkaXN0aW5jdF9pZCI6IjE2MTE2MzA1MzcyODAtNDg2NDQyNy0wMzE3YjZmOWVmZmI0My02MTQ0MDEzOSIsImxpYiI6eyIkbGliIjoiTWluaVByb2dyYW0iLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjE0LjUifSwicHJvcGVydGllcyI6eyIkbGliIjoiTWluaVByb2dyYW0iLCIkbGliX3ZlcnNpb24iOiIxLjE0LjUiLCIkbmV0d29ya190eXBlIjoid2lmaSIsIiRtYW51ZmFjdHVyZXIiOiJIVUFXRUkiLCIkbW9kZWwiOiJTVEstQUwwMCIsIiRzY3JlZW5fd2lkdGgiOjM2MCwiJHNjcmVlbl9oZWlnaHQiOjc4MCwiJG9zIjoiQW5kcm9pZCIsIiRvc192ZXJzaW9uIjoiMTAiLCIkdGltZXpvbmVfb2Zmc2V0IjotNDgwLCIkYXBwX2lkIjoid3gyMTdhZDEzNGZjODU5MGZiIiwiJGxhdGVzdF9zY2VuZSI6Ind4LTEwMDEiLCJ3aWR0aCI6MzYwLCJyaWdodCI6MzYwLCJ0b3AiOjAsImxlZnQiOjAsImJvdHRvbSI6NzgwLCJoZWlnaHQiOjc4MCwic2NyZWVuV2lkdGgiOjM2MCwid2luZG93SGVpZ2h0Ijo2NjUsImJsdWV0b290aEVuYWJsZWQiOmZhbHNlLCJlcnJNc2ciOiJnZXRMb2NhdGlvbjpvayIsImxhbmd1YWdlIjoiemhfQ04iLCJtaWNyb3Bob25lQXV0aG9yaXplZCI6dHJ1ZSwibG9jYXRpb25BdXRob3JpemVkIjp0cnVlLCJub3RpZmljYXRpb25BdXRob3JpemVkIjp0cnVlLCJtb2RlbCI6IlNUSy1BTDAwIiwic3RhdHVzQmFySGVpZ2h0IjoyNCwiYnJhbmQiOiJIVUFXRUkiLCJ3aW5kb3dXaWR0aCI6MzYwLCJsb2NhdGlvbkVuYWJsZWQiOnRydWUsImJlbmNobWFya0xldmVsIjoxOCwic2NyZWVuSGVpZ2h0Ijo3ODAsImFiaSI6ImFybTY0LXY4YSIsInZlcnNpb24iOjY1NDMxNzExNSwiY2FtZXJhQXV0aG9yaXplZCI6dHJ1ZSwic3lzdGVtIjoiQW5kcm9pZCAxMCIsImZvbnRTaXplU2V0dGluZyI6MTYsInBpeGVsUmF0aW8iOjMsImRldmljZU9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJ3aWZpRW5hYmxlZCI6dHJ1ZSwic2NyZWVuVG9wIjo2NywicGxhdGZvcm0iOiJhbmRyb2lkIiwiU0RLVmVyc2lvbiI6IjIuMTQuNCIsImRldmljZVBpeGVsUmF0aW8iOjMsImVudiI6IldlQ2hhdCIsInZlcnRpY2FsQWNjdXJhY3kiOjAsImluZG9vckxvY2F0aW9uVHlwZSI6LTEsInByb3ZpZGVyIjoibmV0d29yayIsImxhdGl0dWRlIjoyOS42Mjg4OTQsImFjY3VyYWN5IjoxNSwiaG9yaXpvbnRhbEFjY3VyYWN5IjoxNSwidHlwZSI6Indnczg0Iiwic3RlcHMiOjAsInNwZWVkIjowLCJsb25naXR1ZGUiOjEwNi40ODYxOTEsImRpcmVjdGlvbiI6MCwiJHVybF9wYXRoIjoicGFnZXMvaG9tZS9pbmRleCIsImV2ZW50X2R1cmF0aW9uIjozMC43MTYsIiRpc19maXJzdF9kYXkiOnRydWV9LCJhbm9ueW1vdXNfaWQiOiIxNjExNjMwNTM3MjgwLTQ4NjQ0MjctMDMxN2I2ZjllZmZiNDMtNjE0NDAxMzkiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRNUEhpZGUifQ== | base64 -d
+
+
+{
+  "distinct_id": "1611630537280-4864427-0317b6f9effb43-61440139",
+  "lib": {
+    "$lib": "MiniProgram",
+    "$lib_method": "code",
+    "$lib_version": "1.14.5"
+  },
+  "anonymous_id": "1611630537280-4864427-0317b6f9effb43-61440139",
+  "type": "track",
+  "event": "$MPClick",
+  "properties": {
+    "$lib": "MiniProgram",
+    "$lib_version": "1.14.5",
+    "$network_type": "wifi",
+    "$manufacturer": "HUAWEI",
+    "$model": "STK-AL00",
+    "$screen_width": 360,
+    "$screen_height": 780,
+    "$os": "Android",
+    "$os_version": "10",
+    "$timezone_offset": -480,
+    "$app_id": "wx217ad134fc8590fb",
+    "$latest_scene": "wx-1001",
+    "width": 360,
+    "right": 360,
+    "top": 0,
+    "left": 0,
+    "bottom": 780,
+    "height": 780,
+    "screenWidth": 360,
+    "windowHeight": 665,
+    "bluetoothEnabled": false,
+    "errMsg": "getLocation:ok",
+    "language": "zh_CN",
+    "microphoneAuthorized": true,
+    "locationAuthorized": true,
+    "notificationAuthorized": true,
+    "model": "STK-AL00",
+    "statusBarHeight": 24,
+    "brand": "HUAWEI",
+    "windowWidth": 360,
+    "locationEnabled": true,
+    "benchmarkLevel": 18,
+    "screenHeight": 780,
+    "abi": "arm64-v8a",
+    "version": 654317115,
+    "cameraAuthorized": true,
+    "system": "Android 10",
+    "fontSizeSetting": 16,
+    "pixelRatio": 3,
+    "deviceOrientation": "portrait",
+    "wifiEnabled": true,
+    "screenTop": 67,
+    "platform": "android",
+    "SDKVersion": "2.14.4",
+    "devicePixelRatio": 3,
+    "env": "WeChat",
+    "verticalAccuracy": 0,
+    "indoorLocationType": -1,
+    "provider": "network",
+    "latitude": 29.628894,
+    "accuracy": 15,
+    "horizontalAccuracy": 15,
+    "type": "wgs84",
+    "steps": 0,
+    "speed": 0,
+    "longitude": 106.486191,
+    "direction": 0,
+    "$element_id": "_n_8",
+    "$url_path": "pages/home/index",
+    "$is_first_day": true
+  }
+}

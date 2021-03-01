@@ -32,7 +32,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class JsonUtil {
 
-	public final ObjectMapper MAPPER = new ObjectMapper();
+	public static final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {
 		// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况

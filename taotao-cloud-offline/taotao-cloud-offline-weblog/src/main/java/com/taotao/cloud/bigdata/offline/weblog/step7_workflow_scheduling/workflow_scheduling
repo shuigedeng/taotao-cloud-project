@@ -1,0 +1,141 @@
+
+注：将整个项目的数据处理过程，从数据采集到数据分析，再到结果数据的导出，一系列的任务分割成若干个oozie的工作流，并用coordinator进行协调
+
+工作流定义示例
+
+Ooize配置片段示例
+
+1、日志预处理mr程序工作流定义
+<workflow-app name="weblogpreprocess" xmlns="uri:oozie:workflow:0.4">
+<start to="firstjob"/>
+<action name="firstjob">
+<map-reduce>
+<job-tracker>${jobTracker}</job-tracker>
+<name-node>${nameNode}</name-node>
+<prepare>
+<delete path="${nameNode}/${outpath}"/>
+</prepare>
+<configuration>
+<property>
+<name>mapreduce.job.map.class</name>
+<value>cn.itcast.bigdata.hive.mr.WeblogPreProcess$WeblogPreProcessMapper</value>
+</property>
+
+<property>
+<name>mapreduce.job.output.key.class</name>
+<value>org.apache.hadoop.io.Text</value>
+</property>
+<property>
+<name>mapreduce.job.output.value.class</name>
+<value>org.apache.hadoop.io.NullWritable</value>
+</property>
+
+<property>
+<name>mapreduce.input.fileinputformat.inputdir</name>
+<value>${inpath}</value>
+</property>
+<property>
+<name>mapreduce.output.fileoutputformat.outputdir</name>
+<value>${outpath}</value>
+</property>
+<property>
+<name>mapred.mapper.new-api</name>
+<value>true</value>
+</property>
+<property>
+<name>mapred.reducer.new-api</name>
+<value>true</value>
+</property>
+
+</configuration>
+</map-reduce>
+<ok to="end"/>
+<error to="kill"/>
+
+
+2、数据加载etl工作流定义：
+<workflow-app xmlns="uri:oozie:workflow:0.5" name="hive2-wf">
+<start to="hive2-node"/>
+
+<action name="hive2-node">
+<hive2 xmlns="uri:oozie:hive2-action:0.1">
+<job-tracker>${jobTracker}</job-tracker>
+<name-node>${nameNode}</name-node>
+<configuration>
+<property>
+<name>mapred.job.queue.name</name>
+<value>${queueName}</value>
+</property>
+</configuration>
+<jdbc-url>jdbc:hive2://hdp-node-01:10000</jdbc-url>
+<script>script.q</script>
+<param>input=/weblog/outpre2</param>
+</hive2>
+<ok to="end"/>
+<error to="fail"/>
+</action>
+
+<kill name="fail">
+<message>Hive2 (Beeline) action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+</kill>
+<end name="end"/>
+</workflow-app>
+
+3、数据加载工作流所用hive脚本：
+create database if not exists dw_weblog;
+use dw_weblog;
+drop table if exists t_orgin_weblog;
+create table t_orgin_weblog(valid string,remote_addr string,
+remote_user string,
+time_local string,
+request string,
+status string,
+body_bytes_sent string,
+http_referer string,
+http_user_agent string)
+row format delimited
+fields terminated by '\001';
+load data inpath '/weblog/preout' overwrite into table t_orgin_weblog;
+
+drop table if exists t_ods_detail_tmp_referurl;
+create table t_ods_detail_tmp_referurl as
+SELECT a.*,b.*
+FROM t_orgin_weblog a
+LATERAL VIEW parse_url_tuple(regexp_replace(http_referer, "\"", ""), 'HOST', 'PATH','QUERY', 'QUERY:id') b as host, path, query, query_id;
+
+drop table if exists t_ods_detail;
+create table t_ods_detail as
+select b.*,substring(time_local,0,11) as daystr,
+substring(time_local,13) as tmstr,
+substring(time_local,4,3) as month,
+substring(time_local,0,2) as day,
+substring(time_local,13,2) as hour
+from t_ods_detail_tmp_referurl b;
+
+drop table t_ods_detail_prt;
+create table t_ods_detail_prt(
+valid                  string,
+remote_addr            string,
+remote_user            string,
+time_local             string,
+request                string,
+status                 string,
+body_bytes_sent        string,
+http_referer           string,
+http_user_agent        string,
+host                   string,
+path                   string,
+query                  string,
+query_id               string,
+daystr                 string,
+tmstr                  string,
+month                  string,
+day                    string,
+hour                   string)
+partitioned by (mm string,dd string);
+
+
+insert into table t_ods_detail_prt partition(mm='Sep',dd='18')
+select * from t_ods_detail where daystr='18/Sep/2013';
+insert into table t_ods_detail_prt partition(mm='Sep',dd='19')
+select * from t_ods_detail where daystr='19/Sep/2013';

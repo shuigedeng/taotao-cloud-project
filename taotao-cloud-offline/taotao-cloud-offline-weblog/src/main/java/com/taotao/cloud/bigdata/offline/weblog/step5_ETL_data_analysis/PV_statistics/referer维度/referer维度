@@ -1,0 +1,28 @@
+需求：按照来源及时间维度统计PVS，并按照PV大小倒序排序
+
+-- 按照小时粒度统计，查询结果存入：( "dw_pvs_referer_h" )
+
+drop table dw_pvs_referer_h;
+create table dw_pvs_referer_h(referer_url string,referer_host string,month string,day string,hour string,pv_referer_cnt bigint) partitioned by(datestr string);
+
+insert into table dw_pvs_referer_h partition(datestr='2016-03-18')
+select http_referer,ref_host,month,day,hour,count(1) as pv_referer_cnt
+from ods_weblog_detail
+group by http_referer,ref_host,month,day,hour
+having ref_host is not null
+order by hour asc,day asc,month asc,pv_referer_cnt desc;
+
+
+按小时粒度统计各来访域名的产生的pv数并排序
+drop table dw_ref_host_visit_cnts_h;
+create table dw_ref_host_visit_cnts_h(ref_host string,month string,day string,hour string,ref_host_cnts bigint) partitioned by(datestr string);
+
+insert into table dw_ref_host_visit_cnts_h partition(datestr='2016-03-18')
+select ref_host,month,day,hour,count(1) as ref_host_cnts
+from ods_weblog_detail
+group by ref_host,month,day,hour
+having ref_host is not null
+order by hour asc,day asc,month asc,ref_host_cnts desc;
+
+
+注：还可以按来源地域维度、访客终端维度等计算

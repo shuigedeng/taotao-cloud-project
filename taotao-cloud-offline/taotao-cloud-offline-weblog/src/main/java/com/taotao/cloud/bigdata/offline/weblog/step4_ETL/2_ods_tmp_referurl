@@ -1,0 +1,7 @@
+抽取refer_url到中间表  "t_ods_tmp_referurl"
+--将来访url分离出host  path  query  query id
+
+drop table if exists t_ods_tmp_referurl;
+create table t_ ods _tmp_referurl as
+SELECT a.*,b.*
+FROM ods_origin_weblog a LATERAL VIEW parse_url_tuple(regexp_replace(http_referer, "\"", ""), 'HOST', 'PATH','QUERY', 'QUERY:id') b as host, path, query, query_id;

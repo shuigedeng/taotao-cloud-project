@@ -1,0 +1,11 @@
+--总访问次数/去重总人数，从访客次数汇总表中查询
+
+select avg(user_times.counts) as user_access_freq
+from
+(select remote_addr,counts from t_display_htip
+union all
+select remote_addr,counts from t_display_access_dcip) user_times;
+
+--或直接从 访问信息表 t_display_access_info 中查询
+select avg(a.acc_cts) from
+(select remote_addr,count(*) as acc_cts from dw_access_info group by remote_addr) a;

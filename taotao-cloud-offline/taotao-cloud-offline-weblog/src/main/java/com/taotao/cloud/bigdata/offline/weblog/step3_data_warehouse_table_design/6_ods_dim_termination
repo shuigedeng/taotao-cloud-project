@@ -1,0 +1,16 @@
+# 终端类型维度表
+
+drop table dim_termination if exists ods_click_pageviews;
+create table dim_termination(
+code string,
+name string)
+row format delimited fields terminated by ',
+
+load data local inpath '/home/hadoop/v_termination.txt' into table v_time;
+
+# uc
+# firefox
+# chrome
+# safari
+# ios
+# android

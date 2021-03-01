@@ -1,0 +1,18 @@
+{
+  "application_name": "${APP_NAME:-}",
+  "trace_id": "%X{t-traceId:-}",
+  "server_ip": "${SERVER_IP:-}",
+  "server_port": "${SERVER_PORT:-}",
+  "ctime": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+  "logday": "%d{yyyy-MM-dd}",
+  "thread": "%thread",
+  "pid": "${PID:-}",
+  "parent_span_id" : "%X{X-B3-ParentSpanId:-}",
+  "span_id": "%X{X-B3-SpanId:-}",
+  "exportable": "%X{X-Span-Export:-}",
+  "logger": "%logger{36}",
+  "level": "%p",
+  "message": "%msg",
+  "host": "${SERVER_IP:-}",
+  "stack_trace": "%ex"
+}

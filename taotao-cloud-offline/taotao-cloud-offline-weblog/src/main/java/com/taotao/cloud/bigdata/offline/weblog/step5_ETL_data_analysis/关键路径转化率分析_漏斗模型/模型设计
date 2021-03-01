@@ -1,0 +1,5 @@
+定义好业务流程中的页面标识，下例中的步骤为：
+Step1、  /item%
+Step2、  /category
+Step3、  /index
+Step4、  /order

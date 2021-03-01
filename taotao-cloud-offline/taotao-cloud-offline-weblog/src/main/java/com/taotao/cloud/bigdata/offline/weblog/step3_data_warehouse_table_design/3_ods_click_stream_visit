@@ -1,0 +1,17 @@
+# 点击流visit模型表
+
+drop table if exist shizhan.click_stream_visit;
+create table shizhan.click_stream_visit(
+session     string,
+remote_addr string,
+inTime      string,
+outTime     string,
+inPage      string,
+outPage     string,
+referal     string,
+pageVisits  int)
+partitioned by (datestr string);
+row format delimited fields terminated by ',';
+
+# 导入点击流模型visit数据到click_stream_visit表
+Load data local inpath '/weblog/clickstream/visits' overwrite into table click_stream_visit partition(datestr='2013-09-18');

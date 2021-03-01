@@ -2,8 +2,8 @@ package com.taotao.cloud.bigdata.hudi
 
 import com.taotao.cloud.bigdata.hudi.config.AccessLogConf
 import com.taotao.cloud.bigdata.hudi.util.SparkHelper
-import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming.{OutputMode, Trigger}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.slf4j.{Logger, LoggerFactory}
 
 /**

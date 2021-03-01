@@ -5,10 +5,9 @@ import com.taotao.cloud.bigdata.hudi.util.{HudiUtil, SparkHelper}
 import org.apache.hudi.DataSourceWriteOptions
 import org.apache.hudi.config.{HoodieIndexConfig, HoodieWriteConfig}
 import org.apache.hudi.index.HoodieIndex
-import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.spark.sql.streaming.StreamingQueryListener.{QueryProgressEvent, QueryStartedEvent, QueryTerminatedEvent}
 import org.apache.spark.sql.streaming.{DataStreamReader, StreamingQueryListener, Trigger}
-import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
+import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.mutable

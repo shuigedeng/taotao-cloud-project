@@ -1,0 +1,47 @@
+//# 原始base64
+//# @see actionLog.json
+//eyJkaXN0aW5jdF9pZCI6IjBiYzczNTIxLTY0MTAtNDZlMC1hNzUyLWIyNDc5OGU2MGRmZiIsImxpYiI6eyIkbGliIjoianMiLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjE2LjMifSwicHJvcGVydGllcyI6eyIkdGltZXpvbmVfb2Zmc2V0IjotNDgwLCIkc2NyZWVuX2hlaWdodCI6OTAwLCIkc2NyZWVuX3dpZHRoIjoxNDQwLCIkbGliIjoianMiLCIkbGliX3ZlcnNpb24iOiIxLjE2LjMiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino+aekOWksei0pSIsIiRsYXRlc3RfcmVmZXJyZXJfaG9zdCI6IuWPluWAvOW8guW4uCIsIiRsYXRlc3RfbGFuZGluZ19wYWdlIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGRldmljZV9pZCI6IjE3NjIxMDA4YzJlNzg1LTBmNTMxNmRjMmE5ZGY2LTYyMTEyYzcyLTEyOTYwMDAtMTc2MjEwMDhjMzAyYTQiLCJwcm9qZWN0IjoidGFvdGFvLWNsb3VkLWJhY2tlbmQiLCJjdXJyZW50X3VybCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMC9sb2dpbiIsIiRlbGVtZW50X3R5cGUiOiJpbnB1dCIsIiRlbGVtZW50X2NsYXNzX25hbWUiOiJhbnQtaW5wdXQgYW50LWlucHV0LWxnIiwiJGVsZW1lbnRfY29udGVudCI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiR2aWV3cG9ydF93aWR0aCI6NzE5LCIkZWxlbWVudF9zZWxlY3RvciI6ImJvZHkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMikgPiBmb3JtOm50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDMpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDQpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gaW5wdXQ6bnRoLW9mLXR5cGUoMSkiLCIkZWxlbWVudF9wYXRoIjoiYm9keSA+IGRpdiA+IGRpdiA+IGRpdiA+IGRpdiA+IGZvcm0gPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBpbnB1dCIsIiRpc19maXJzdF9kYXkiOmZhbHNlfSwibG9naW5faWQiOiIwYmM3MzUyMS02NDEwLTQ2ZTAtYTc1Mi1iMjQ3OThlNjBkZmYiLCJhbm9ueW1vdXNfaWQiOiIxNzYyMTAwOGMyZTc4NS0wZjUzMTZkYzJhOWRmNi02MjExMmM3Mi0xMjk2MDAwLTE3NjIxMDA4YzMwMmE0IiwidHlwZSI6InRyYWNrIiwiZXZlbnQiOiIkV2ViQ2xpY2siLCJfdHJhY2tfaWQiOjEyNjAxMTY3NX0=
+//
+//# base64 解析
+//echo eyJkaXN0aW5jdF9pZCI6IjBiYzczNTIxLTY0MTAtNDZlMC1hNzUyLWIyNDc5OGU2MGRmZiIsImxpYiI6eyIkbGliIjoianMiLCIkbGliX21ldGhvZCI6ImNvZGUiLCIkbGliX3ZlcnNpb24iOiIxLjE2LjMifSwicHJvcGVydGllcyI6eyIkdGltZXpvbmVfb2Zmc2V0IjotNDgwLCIkc2NyZWVuX2hlaWdodCI6OTAwLCIkc2NyZWVuX3dpZHRoIjoxNDQwLCIkbGliIjoianMiLCIkbGliX3ZlcnNpb24iOiIxLjE2LjMiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino+aekOWksei0pSIsIiRsYXRlc3RfcmVmZXJyZXJfaG9zdCI6IuWPluWAvOW8guW4uCIsIiRsYXRlc3RfbGFuZGluZ19wYWdlIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGRldmljZV9pZCI6IjE3NjIxMDA4YzJlNzg1LTBmNTMxNmRjMmE5ZGY2LTYyMTEyYzcyLTEyOTYwMDAtMTc2MjEwMDhjMzAyYTQiLCJwcm9qZWN0IjoidGFvdGFvLWNsb3VkLWJhY2tlbmQiLCJjdXJyZW50X3VybCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMC9sb2dpbiIsIiRlbGVtZW50X3R5cGUiOiJpbnB1dCIsIiRlbGVtZW50X2NsYXNzX25hbWUiOiJhbnQtaW5wdXQgYW50LWlucHV0LWxnIiwiJGVsZW1lbnRfY29udGVudCI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiR2aWV3cG9ydF93aWR0aCI6NzE5LCIkZWxlbWVudF9zZWxlY3RvciI6ImJvZHkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMSkgPiBkaXY6bnRoLW9mLXR5cGUoMikgPiBmb3JtOm50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDMpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDQpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gZGl2Om50aC1vZi10eXBlKDEpID4gaW5wdXQ6bnRoLW9mLXR5cGUoMSkiLCIkZWxlbWVudF9wYXRoIjoiYm9keSA+IGRpdiA+IGRpdiA+IGRpdiA+IGRpdiA+IGZvcm0gPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBkaXYgPiBpbnB1dCIsIiRpc19maXJzdF9kYXkiOmZhbHNlfSwibG9naW5faWQiOiIwYmM3MzUyMS02NDEwLTQ2ZTAtYTc1Mi1iMjQ3OThlNjBkZmYiLCJhbm9ueW1vdXNfaWQiOiIxNzYyMTAwOGMyZTc4NS0wZjUzMTZkYzJhOWRmNi02MjExMmM3Mi0xMjk2MDAwLTE3NjIxMDA4YzMwMmE0IiwidHlwZSI6InRyYWNrIiwiZXZlbnQiOiIkV2ViQ2xpY2siLCJfdHJhY2tfaWQiOjEyNjAxMTY3NX0= | base64 -d
+
+
+{
+  "distinct_id": "0bc73521-6410-46e0-a752-b24798e60dff",
+  "login_id": "0bc73521-6410-46e0-a752-b24798e60dff",
+  "anonymous_id": "17621008c2e785-0f5316dc2a9df6-62112c72-1296000-17621008c302a4",
+  "type": "track",
+  "event": "$WebClick",
+  "_track_id": 500615373,
+  "lib": {
+    "$lib": "js",
+    "$lib_method": "code",
+    "$lib_version": "1.16.3"
+  },
+  "properties": {
+    "$timezone_offset": -480,
+    "$screen_height": 900,
+    "$screen_width": 1440,
+    "$lib": "js",
+    "$lib_version": "1.16.3",
+    "$latest_traffic_source_type": "url的domain解析失败",
+    "$latest_search_keyword": "url的domain解析失败",
+    "$latest_referrer": "url的domain解析失败",
+    "$latest_referrer_host": "取值异常",
+    "$latest_landing_page": "url的domain解析失败",
+    "$device_id": "17621008c2e785-0f5316dc2a9df6-62112c72-1296000-17621008c302a4",
+    "project": "taotao-cloud-backend",
+    "current_url": "http://localhost:3000/login",
+    "$element_type": "input",
+    "$element_id": "username",
+    "$element_class_name": "ant-input ant-input-lg",
+    "$element_content": "",
+    "$url": "http://localhost:3000/login",
+    "$url_path": "/login",
+    "$title": "React Index",
+    "$viewport_width": 719,
+    "$element_selector": "body > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > input:nth-of-type(1)",
+    "$element_path": "body > div > div > div > div > form > div > div > div > div > div > div > div > div > div > input",
+    "$is_first_day": false
+  }
+}

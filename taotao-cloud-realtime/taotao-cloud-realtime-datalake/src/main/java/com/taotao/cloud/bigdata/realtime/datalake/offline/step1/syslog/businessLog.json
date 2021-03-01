@@ -1,0 +1,25 @@
+// 用户登录日志
+{
+  "serialVersionUID": 0,
+  "memberId": 0,
+  "loginTime": "LocalDateTime",
+  "loginIp": "str",
+  "loginStatus": 0
+}
+
+// 用户信息更新日志
+
+// 用户退出日志
+
+// 商品添加日志
+
+// 商品修改日志
+
+// 用户订单日志
+
+// 用户支付日志
+
+// 用户订单修改订单日志
+
+// 用户订单申请退货日志
+

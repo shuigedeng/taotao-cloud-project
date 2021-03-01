@@ -1,0 +1,42 @@
+1. 时间维度
+
+
+1.1 维度:小时
+
+--计算指定的某个小时pvs
+select count(*),month,day,hour from dw_click.ods_weblog_detail group by month,day,hour;
+
+
+--计算该处理批次（一天）中的各小时pvs
+drop table dw_pvs_hour;
+create table dw_pvs_hour(month string,day string,hour string,pvs bigint) partitioned by(datestr string);
+
+
+insert into table dw_pvs_hour partition(datestr='2016-03-18')
+select a.month as month,a.day as day,a.hour as hour,count(1) as pvs from ods_weblog_detail a
+where  a.datestr='2016-03-18'  group by a.month,a.day,a.hour;
+或者用时间维表关联
+
+
+1.2 维度：日
+
+drop table dw_pvs_day;
+create table dw_pvs_day(pvs bigint,month string,day string);
+
+insert into table dw_pvs_day
+select count(1) as pvs,a.month as month,a.day as day  from dim_time a
+join ods_weblog_detail b
+on b.dd='18/Sep/2013' and a.month=b.month and a.day=b.day
+group by a.month,a.day;
+
+--或者，从之前算好的小时结果中统计
+Insert into table dw_pvs_day
+Select sum(pvs) as pvs,month,day from dw_pvs_hour group by month,day having day='18';
+
+1.2 维度：月
+
+drop table t_display_pv_month;
+create table t_display_pv_month (pvs bigint,month string);
+insert into table t_display_pv_month
+select count(*) as pvs,a.month from t_dim_time a
+join t_ods_detail_prt b on a.month=b.month group by a.month;

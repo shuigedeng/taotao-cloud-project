@@ -1,0 +1,28 @@
+1、工作流定义配置上传
+[hadoop@hdp-node-01 wf-oozie]$ hadoop fs -put hive2-etl /user/hadoop/oozie/myapps/
+[hadoop@hdp-node-01 wf-oozie]$ hadoop fs -put hive2-dw /user/hadoop/oozie/myapps/
+[hadoop@hdp-node-01 wf-oozie]$ ll
+total 12
+drwxrwxr-x. 2 hadoop hadoop 4096 Nov 23 16:32 hive2-dw
+drwxrwxr-x. 2 hadoop hadoop 4096 Nov 23 16:32 hive2-etl
+drwxrwxr-x. 3 hadoop hadoop 4096 Nov 23 11:24 weblog
+[hadoop@hdp-node-01 wf-oozie]$ export OOZIE_URL=http://localhost:11000/oozie
+
+2、工作流单元提交启动
+oozie job -D inpath=/weblog/input -D outpath=/weblog/outpre -config weblog/job.properties  -run
+
+启动etl的hive工作流
+oozie job -config hive2-etl/job.properties  -run
+启动pvs统计的hive工作流
+oozie job -config hive2-dw/job.properties  -run
+
+3、工作流coordinator配置（片段）
+多个工作流job用coordinator组织协调：
+[hadoop@hdp-node-01 hive2-etl]$ ll
+total 28
+-rw-rw-r--. 1 hadoop hadoop  265 Nov 13 16:39 config-default.xml
+-rw-rw-r--. 1 hadoop hadoop  512 Nov 26 16:43 coordinator.xml
+-rw-rw-r--. 1 hadoop hadoop  382 Nov 26 16:49 job.properties
+drwxrwxr-x. 2 hadoop hadoop 4096 Nov 27 11:26 lib
+-rw-rw-r--. 1 hadoop hadoop 1910 Nov 23 17:49 script.q
+-rw-rw-r--. 1 hadoop hadoop  687 Nov 23 16:32 workflow.xml

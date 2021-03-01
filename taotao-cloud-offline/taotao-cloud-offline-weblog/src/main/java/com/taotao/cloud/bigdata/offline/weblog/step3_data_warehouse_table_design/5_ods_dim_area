@@ -1,0 +1,18 @@
+# 地域维表创建 以省为基本单位
+
+drop table dim_area if exists ods_click_pageviews;
+create table dim_area(
+code string,
+name string,
+longitude string,
+latitude string)
+row format delimited fields terminated by ',';
+
+load data local inpath '/home/hadoop/v_area.txt' into table v_time;
+
+# 北京
+# 上海
+# 广州
+# 深圳
+# 河北
+# 河南
