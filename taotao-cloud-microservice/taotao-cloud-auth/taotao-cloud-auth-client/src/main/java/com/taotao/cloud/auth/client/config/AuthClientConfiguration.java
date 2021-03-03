@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
@@ -56,6 +58,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Slf4j
 @EnableWebSecurity
+@AutoConfigureAfter(SecurityAutoConfiguration.class)
 @Configuration
 public class AuthClientConfiguration extends WebSecurityConfigurerAdapter {
 

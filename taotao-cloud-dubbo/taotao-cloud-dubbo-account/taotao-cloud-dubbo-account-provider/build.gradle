@@ -28,7 +28,7 @@ dependencies {
 bootJar {
     zip64 true
     // jar包名称，默认是settings.gradle下的工程名 rootProject.name = 'alog-server'
-    baseName = 'taotao-cloud-dubbo-account-provider'
+//    baseName = 'taotao-cloud-dubbo-account-provider'
     classifier = null
 
     mainClass = 'com.taotao.cloud.dubbo.account.provider.AccountServiceApplication'

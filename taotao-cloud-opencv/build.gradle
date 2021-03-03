@@ -6,23 +6,23 @@ bootJar.enabled = false
 dependencies {
 //    implementation project(':taotao-cloud-starter:taotao-cloud-starter-common')
 
-//    compile group: 'org.bytedeco', name: 'javacv', version: '1.5.4'
-//    compile group: 'org.bytedeco', name: 'opencv-platform', version: '4.4.0-1.5.4'
-//    compile group: 'org.bytedeco', name: 'ffmpeg-platform', version: '4.3.1-1.5.4'
+//    implementation group: 'org.bytedeco', name: 'javacv', version: '1.5.4'
+//    implementation group: 'org.bytedeco', name: 'opencv-platform', version: '4.4.0-1.5.4'
+//    implementation group: 'org.bytedeco', name: 'ffmpeg-platform', version: '4.3.1-1.5.4'
 
     //JavaCV最小依赖 还需要支持其他平台，比如Mac OS或ARM，把 classifier 修改成对应平台就可以
-    compile group: 'org.bytedeco', name: 'javacv', version: '1.5.2'
-    compile group: 'org.bytedeco', name: 'javacpp', version: '1.5.2'
+    implementation group: 'org.bytedeco', name: 'javacv', version: '1.5.2'
+    implementation group: 'org.bytedeco', name: 'javacpp', version: '1.5.2'
 
-//    compile group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'windows-x86_64'
-//    compile group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'linux-x86_64'
-//    compile group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'macosx-x86_64'
+//    implementation group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'windows-x86_64'
+//    implementation group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'linux-x86_64'
+//    implementation group: 'org.bytedeco', name: 'opencv', version: '4.2.1-1.5.2', classifier: 'macosx-x86_64'
 
-    compile group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'windows-x86_64'
-    compile group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'linux-x86_64'
-    compile group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'macosx-x86_64'
+    implementation group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'windows-x86_64'
+    implementation group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'linux-x86_64'
+    implementation group: 'org.bytedeco', name: 'openblas', version: '0.3.7-1.5.2', classifier: 'macosx-x86_64'
 
-    compile 'org.bytedeco:ffmpeg:4.2.1-1.5.2:windows-x86_64'
-    compile 'org.bytedeco:ffmpeg:4.2.1-1.5.2:linux-x86_64'
-    compile 'org.bytedeco:ffmpeg:4.2.1-1.5.2:macosx-x86_64'
+    implementation 'org.bytedeco:ffmpeg:4.2.1-1.5.2:windows-x86_64'
+    implementation 'org.bytedeco:ffmpeg:4.2.1-1.5.2:linux-x86_64'
+    implementation 'org.bytedeco:ffmpeg:4.2.1-1.5.2:macosx-x86_64'
 }

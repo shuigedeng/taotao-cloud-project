@@ -63,7 +63,6 @@ dependencies {
         api "com.github.danielwegener:logback-kafka-appender:${logbackKafkaAppenderVersion}"
         api "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
         api "org.apache.commons:commons-lang3:${commonsVersion}"
-        api "org.apache.commons:commons-lang3:${commonsVersion}"
         api "org.apache.commons:commons-collections4:${commonsCollections4Version}"
         api "commons-collections:commons-collections:${commonsCollectionsVersion}"
         api "commons-io:commons-io:${commonsIoVersion}"

@@ -6,16 +6,16 @@ bootJar.enabled = false
 apply plugin: 'scala'
 
 dependencies {
-    compile "org.apache.spark:spark-core_2.12:3.0.1"
-    compile "org.apache.spark:spark-sql_2.12:3.0.1"
-    compile "org.apache.spark:spark-hive_2.12:3.0.1"
-    compile "org.apache.spark:spark-streaming_2.12:3.0.1"
-    compile "org.apache.spark:spark-avro_2.12:3.0.1"
-    compile "org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1"
+    implementation "org.apache.spark:spark-core_2.12:3.0.1"
+    implementation "org.apache.spark:spark-sql_2.12:3.0.1"
+    implementation "org.apache.spark:spark-hive_2.12:3.0.1"
+    implementation "org.apache.spark:spark-streaming_2.12:3.0.1"
+    implementation "org.apache.spark:spark-avro_2.12:3.0.1"
+    implementation "org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1"
 
-    compile "org.apache.hudi:hudi-spark-bundle_2.12:0.6.0"
+    implementation "org.apache.hudi:hudi-spark-bundle_2.12:0.6.0"
 
-    compile('net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0') {
+    implementation('net.heartsavior.spark:spark-sql-kafka-offset-committer_2.12:0.4.0-spark-3.0') {
         exclude group: 'org.scala-lang', module: 'scala-library'
     }
 
@@ -24,10 +24,10 @@ dependencies {
     implementation 'org.apache.hadoop:hadoop-mapreduce-client-common:3.3.0'
     implementation 'org.apache.hadoop:hadoop-hdfs:3.3.0'
 
-    compile "org.scala-lang:scala-library:2.12.8"
-    compile "org.scala-lang:scala-reflect:2.12.8"
+    implementation "org.scala-lang:scala-library:2.12.8"
+    implementation "org.scala-lang:scala-reflect:2.12.8"
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     implementation "org.slf4j:slf4j-api:1.7.25"

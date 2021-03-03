@@ -16,8 +16,8 @@ buildscript {
 apply plugin: "org.jetbrains.intellij"
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile  group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
+    implementation group: 'junit', name: 'junit', version: '4.12'
+    implementation  group: 'cn.hutool', name: 'hutool-http', version: '5.5.7'
 }
 
 // https://github.com/JetBrains/gradle-intellij-plugin

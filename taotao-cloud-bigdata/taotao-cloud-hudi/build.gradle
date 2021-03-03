@@ -38,9 +38,7 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
 
-    implementation('com.google.guava:guava:27.0-jre') {
-        force = true
-    }
+    implementation('com.google.guava:guava')
 }
 
 configurations {
@@ -81,7 +79,7 @@ configurations {
 shadowJar {
     mergeServiceFiles()
     classifier = null
-    version = 1.0
+//    version = 1.0
     manifest {
         attributes(
                 'Main-Class': "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"

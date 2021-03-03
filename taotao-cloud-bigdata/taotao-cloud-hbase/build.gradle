@@ -15,7 +15,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    compile 'org.apache.hbase:hbase-client:2.4.0'
+    implementation 'org.apache.hbase:hbase-client:2.4.0'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

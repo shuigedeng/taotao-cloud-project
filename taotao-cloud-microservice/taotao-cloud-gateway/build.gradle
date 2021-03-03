@@ -78,7 +78,7 @@ springBoot {
 bootJar {
 //    zip64 true
     // jar包名称，默认是settings.gradle下的工程名 rootProject.name = 'alog-server'
-    baseName = 'taotao-cloud-gateway'
+//    baseName = 'taotao-cloud-gateway'
     classifier = null
     // jar包版本号
 //    version =  '0.0.1'
@@ -106,7 +106,7 @@ bootJar {
 shadowJar {
     zip64 true
     classifier = null
-    version = 1.0
+//    version = 1.0
     manifest {
         attributes(
                 'Main-Class': "com.taotao.cloud.gateway.TaotaoCloudGatewayApplication"

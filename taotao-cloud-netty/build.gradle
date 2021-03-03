@@ -6,7 +6,7 @@ bootJar.enabled = false
 apply plugin: 'com.google.protobuf'
 
 dependencies {
-    compile(
+    implementation(
             "io.netty:netty-all:4.1.15.Final",
             "com.google.protobuf:protobuf-java:3.3.1",
             "com.google.protobuf:protobuf-java-util:3.3.1",
