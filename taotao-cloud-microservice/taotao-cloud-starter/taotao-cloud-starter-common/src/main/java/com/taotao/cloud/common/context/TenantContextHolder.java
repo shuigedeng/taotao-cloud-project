@@ -29,10 +29,6 @@ public class TenantContextHolder {
 	private TenantContextHolder() {
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 	private static final ThreadLocal<String> CONTEXT = new TransmittableThreadLocal<>();
 
 	public static void setTenant(String tenant) {

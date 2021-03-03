@@ -16,7 +16,6 @@
 package com.taotao.cloud.core;
 
 import com.taotao.cloud.core.async.AsyncTaskProperties;
-import com.taotao.cloud.core.tenant.TenantProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -26,7 +25,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({AsyncTaskProperties.class, TenantProperties.class})
+@EnableConfigurationProperties({AsyncTaskProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

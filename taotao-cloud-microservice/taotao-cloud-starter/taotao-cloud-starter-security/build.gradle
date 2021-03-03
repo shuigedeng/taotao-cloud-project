@@ -12,7 +12,9 @@ dependencies {
 	implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
 
 	implementation 'org.springframework.security:spring-security-core'
-	implementation 'org.springframework.security.oauth:spring-security-oauth2'
+	implementation 'org.springframework.security:spring-security-web'
+	implementation 'org.springframework.security:spring-security-config'
+	implementation 'org.springframework.security:spring-security-oauth2-core'
 	implementation("org.springframework.boot:spring-boot-starter-data-redis") {
 		exclude group: 'io.lettuce', module: 'lettuce-core'
 	}
@@ -31,5 +33,4 @@ dependencies {
 	implementation "org.springframework.cloud:spring-cloud-context"
 	implementation 'org.springframework.boot:spring-boot-autoconfigure'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.config;
+package com.taotao.cloud.auth.client.controller;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 默认密码工具类
- *
- * @author dengtao
- * @version 1.0.0
- * @since 2020/5/2 09:12
+ * @author Joe Grandja
+ * @since 0.0.1
  */
-public class DefaultPasswordConfig {
+@RestController
+public class MessagesController {
 
-	/**
-	 * 装配BCryptPasswordEncoder用户密码的匹配
-	 */
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	@GetMapping("/messages")
+	public String[] getMessages() {
+		return new String[] {"Message 1", "Message 2", "Message 3"};
 	}
 }

@@ -55,5 +55,4 @@ public class TaotaoCloudGatewayApplication {
 
 		SpringApplication.run(TaotaoCloudGatewayApplication.class, args);
 	}
-
 }
