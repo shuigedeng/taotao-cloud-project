@@ -77,9 +77,8 @@ dependencies {
         api "io.springfox:springfox-swagger2:${swaggerVersion}"
         api "io.springfox:springfox-swagger-ui:${swaggerVersion}"
         api "io.springfox:springfox-bean-validators:${swaggerVersion}"
-        api "io.swagger:swagger-models:${swaggerModelsVersion}"
+        api "io.swagger.core.v3:swagger-models:2.1.7"
         api "com.github.xiaoymin:knife4j-spring-ui:${knife4jVersion}"
-        api "com.github.xiaoymin:swagger-bootstrap-ui:${swaggerBootstrapUiVersion}"
 
         api "com.github.qcloudsms:qcloudsms:${qcloudsmsVersion}"
         api "eu.bitwalker:UserAgentUtils:${userAgentUtilsVersion}"

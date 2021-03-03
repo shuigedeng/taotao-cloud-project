@@ -1,0 +1,23 @@
+archivesBaseName = 'taotao-cloud-reactive-order'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+//    implementation project(':taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation 'org.projectlombok:lombok:1.18.12'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'dev.miku:r2dbc-mysql:0.8.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-actuator'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'mysql:mysql-connector-java'
+
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
+    implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.2'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webflux-ui
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.5.5'
+}

@@ -1,0 +1,16 @@
+archivesBaseName = 'taotao-cloud-reactive-gateway'
+
+jar.enabled = true
+bootJar.enabled = true
+
+dependencies {
+//    implementation project(':taotao-cloud-starter:taotao-cloud-starter-common')
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.springframework.cloud:spring-cloud-starter-gateway'
+    compile 'org.springframework.security:spring-security-config'
+    compile 'org.springframework.security:spring-security-oauth2-resource-server'
+    compile 'org.springframework.security:spring-security-oauth2-client'
+    compile 'org.springframework.security:spring-security-oauth2-jose'
+    compile 'com.nimbusds:nimbus-jose-jwt:8.16'
+    compile 'cn.hutool:hutool-all:5.1.4'
+}
