@@ -1,13 +1,11 @@
 buildscript {
     ext {
+        springVersion = '5.3.3'
         springBootVersion = '2.4.2'
         springCloudVersion = '2020.0.1'
         springCloudAlibabaVersion = '2.2.5.RELEASE'
-        springSecurityOauth2Version = "2.5.0.RELEASE"
 
-        springVersion = '5.3.3'
         springSecurityVersion = '5.4.3'
-        springSecurityOauth2Version = "2.5.0.RELEASE"
         springDataCommonsVersion = '2.4.3'
         springKafkaVersion = '2.6.5'
 

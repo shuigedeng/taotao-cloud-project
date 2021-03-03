@@ -45,7 +45,6 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
 
     implementation 'org.springframework.cloud:spring-cloud-context'
-    implementation 'org.springframework.security.oauth:spring-security-oauth2'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
     compileOnly 'org.projectlombok:lombok'

@@ -39,7 +39,6 @@ dependencies {
         api "org.springframework:spring-tx:${springVersion}"
         api "org.springframework:spring-context:${springVersion}"
         api "org.springframework.security:spring-security-core:${springSecurityVersion}"
-        api "org.springframework.security.oauth:spring-security-oauth2:${springSecurityOauth2Version}"
         api "javax.validation:validation-api:${validationApiVersion}"
         api "com.querydsl:querydsl-apt:${querydslVersion}"
         api "com.querydsl:querydsl-jpa:${querydslVersion}"

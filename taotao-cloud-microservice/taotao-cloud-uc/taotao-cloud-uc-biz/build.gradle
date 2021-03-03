@@ -41,7 +41,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
 
     // security
-    implementation 'org.springframework.security.oauth:spring-security-oauth2'
 
     // spring cloud
     implementation 'org.springframework.cloud:spring-cloud-context'

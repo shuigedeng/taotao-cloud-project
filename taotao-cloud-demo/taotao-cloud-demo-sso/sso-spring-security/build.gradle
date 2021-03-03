@@ -7,7 +7,6 @@ dependencies {
     implementation "cn.hutool:hutool-all"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-    implementation 'org.springframework.security.oauth:spring-security-oauth2'
     implementation "com.baomidou:mybatis-plus-extension"
 
     implementation 'cn.hutool:hutool-all'
