@@ -35,7 +35,7 @@ public class StarterNameConstant {
 	/**
 	 * swagger模块
 	 */
-	public static final String TAOTAO_CLOUD_SWAGGER_STARTER = "taotao-cloud-starter-swagger";
+	public static final String TAOTAO_CLOUD_SPRINGDOC_STARTER = "taotao-cloud-starter-springdoc";
 
 	/**
 	 * swagger模块

@@ -43,8 +43,8 @@ vim registry.conf
 # }
 
 cd conf
-cp /root/github/seata/script/config-center/config.txt .
-cp -r /root/github/seata/script/config-center/nacos .
+cp /root/github/seata/script/config-service/config.txt .
+cp -r /root/github/seata/script/config-service/nacos .
 
 vim config.txt
 # transport.type=TCP

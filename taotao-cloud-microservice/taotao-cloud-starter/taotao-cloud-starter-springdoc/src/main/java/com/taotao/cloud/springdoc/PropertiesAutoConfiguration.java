@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.swagger.configuration;
+package com.taotao.cloud.springdoc;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Import;
-import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
+import com.taotao.cloud.springdoc.properties.SpringdocProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * Swagger2Configuration
+ * PropertiesAutoConfiguration
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/4/30 10:09
+ * @since 2020/7/29 14:18
  */
-@ConditionalOnProperty(name = "taotao.cloud.swagger.enabled")
-@Import({Swagger2DocumentationConfiguration.class})
-public class Swagger2Configuration {
+@EnableConfigurationProperties({SpringdocProperties.class})
+public class PropertiesAutoConfiguration {
 
 }

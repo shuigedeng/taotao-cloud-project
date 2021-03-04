@@ -13,13 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.swagger.configuration;
+package com.taotao.cloud.springdoc.configuration;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.swagger.properties.Swagger2Properties;
+import com.taotao.cloud.springdoc.properties.SpringdocProperties;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.callbacks.Callback;
+import io.swagger.v3.oas.models.headers.Header;
+import io.swagger.v3.oas.models.parameters.HeaderParameter;
+import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.media.StringSchema;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +41,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
@@ -35,21 +50,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
-import springfox.documentation.service.SecurityReference;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * SwaggerAutoConfiguration
@@ -59,8 +59,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @since 2020/4/30 10:10
  */
 @Slf4j
-@Import({Swagger2Configuration.class})
-public class Swagger2AutoConfiguration implements BeanFactoryAware, InitializingBean {
+public class SpringdocAutoConfiguration implements BeanFactoryAware, InitializingBean {
 
 	private static final String AUTH_KEY = "Authorization";
 
@@ -68,54 +67,130 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_SWAGGER_STARTER + "]"
-			+ "swagger模块已启动");
+		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_SPRINGDOC_STARTER + "]"
+			+ "springdoc模块已启动");
 	}
 
 	@Bean
+	public GroupedOpenApi groupedOpenApi() {
+		return GroupedOpenApi
+			.builder()
+			.group("springshop-public")
+			.pathsToMatch("/public/**")
+			.build();
+	}
+
+	@Bean
+	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
+		return openApi -> openApi.getPaths().values().stream().flatMap(pathItem -> pathItem.readOperations().stream())
+			.forEach(operation -> operation.addParametersItem(new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
+	}
+
+	@Bean
+	public OpenAPI openApi() {
+		Components components = new Components();
+
+		// 添加auth认证header
+		components.addSecuritySchemes("exampleAuth",
+			new SecurityScheme()
+				.description("exampleAuth")
+				.type(SecurityScheme.Type.APIKEY)
+				.name("auth")
+				.in(In.HEADER)
+				.scheme("basic")
+		);
+		components.addSecuritySchemes("bearer-key",
+			new SecurityScheme()
+				.type(SecurityScheme.Type.HTTP)
+				.scheme("bearer")
+				.bearerFormat("JWT")
+		);
+
+		// 添加全局header
+		components.addParameters("exampleParameter",
+			new Parameter()
+				.description("exampleParameter")
+				.in(In.HEADER.toString())
+				.schema(
+					new StringSchema()
+				)
+				.name("exampleParameter")
+		);
+
+		components.addHeaders("exampleHeader",
+			new Header()
+				.description("myHeader2 header")
+				.schema(new StringSchema())
+		);
+
+		components.addCallbacks("exampleCallback", new Callback().addPathItem("exampleCallback", new PathItem().de))
+
+		return new OpenAPI()
+			.components(components)
+			.info(
+				new Info()
+					.title("SpringShop API")
+					.description("Spring shop sample application")
+					.version("v0.0.1")
+					.license(
+						new License()
+							.name("Apache 2.0")
+							.url("http://springdoc.org")
+					)
+			)
+			.externalDocs(
+				new ExternalDocumentation()
+					.description("SpringShop Wiki Documentation")
+					.url("https://springshop.wiki.github.org/docs")
+			);
+	}
+
+
+	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(name = "taotao.cloud.swagger.enabled", matchIfMissing = true)
-	public List<Docket> createRestApi(Swagger2Properties swagger2Properties) {
+	@ConditionalOnProperty(name = "taotao.cloud.springdoc.enabled", matchIfMissing = true)
+	public List<Docket> createRestApi(SpringdocProperties springdocProperties) {
 		ConfigurableBeanFactory configurableBeanFactory = (ConfigurableBeanFactory) beanFactory;
 		List<Docket> docketList = new LinkedList<>();
 
 		// 没有分组
-		if (swagger2Properties.getDocket().size() == 0) {
-			final Docket docket = createDocket(swagger2Properties);
+		if (springdocProperties.getDocket().size() == 0) {
+			final Docket docket = createDocket(springdocProperties);
 			configurableBeanFactory.registerSingleton("defaultDocket", docket);
 			docketList.add(docket);
 			return docketList;
 		}
 
 		// 分组创建
-		for (String groupName : swagger2Properties.getDocket().keySet()) {
-			Swagger2Properties.DocketInfo docketInfo = swagger2Properties.getDocket()
+		for (String groupName : springdocProperties.getDocket().keySet()) {
+			SpringdocProperties.DocketInfo docketInfo = springdocProperties.getDocket()
 				.get(groupName);
 
 			ApiInfo apiInfo = new ApiInfoBuilder()
-				.title(docketInfo.getTitle().isEmpty() ? swagger2Properties.getTitle()
+				.title(docketInfo.getTitle().isEmpty() ? springdocProperties.getTitle()
 					: docketInfo.getTitle())
 				.description(
-					docketInfo.getDescription().isEmpty() ? swagger2Properties.getDescription()
+					docketInfo.getDescription().isEmpty() ? springdocProperties.getDescription()
 						: docketInfo.getDescription())
-				.version(docketInfo.getVersion().isEmpty() ? swagger2Properties.getVersion()
+				.version(docketInfo.getVersion().isEmpty() ? springdocProperties.getVersion()
 					: docketInfo.getVersion())
-				.license(docketInfo.getLicense().isEmpty() ? swagger2Properties.getLicense()
+				.license(docketInfo.getLicense().isEmpty() ? springdocProperties.getLicense()
 					: docketInfo.getLicense())
 				.licenseUrl(
-					docketInfo.getLicenseUrl().isEmpty() ? swagger2Properties.getLicenseUrl()
+					docketInfo.getLicenseUrl().isEmpty() ? springdocProperties.getLicenseUrl()
 						: docketInfo.getLicenseUrl())
 				.contact(
 					new Contact(
-						docketInfo.getContact().getName().isEmpty() ? swagger2Properties
+						docketInfo.getContact().getName().isEmpty() ? springdocProperties
 							.getContact().getName() : docketInfo.getContact().getName(),
-						docketInfo.getContact().getUrl().isEmpty() ? swagger2Properties.getContact()
+						docketInfo.getContact().getUrl().isEmpty() ? springdocProperties
+							.getContact()
 							.getUrl() : docketInfo.getContact().getUrl(),
-						docketInfo.getContact().getEmail().isEmpty() ? swagger2Properties
+						docketInfo.getContact().getEmail().isEmpty() ? springdocProperties
 							.getContact().getEmail() : docketInfo.getContact().getEmail()
 					)
 				)
-				.termsOfServiceUrl(docketInfo.getTermsOfServiceUrl().isEmpty() ? swagger2Properties
+				.termsOfServiceUrl(docketInfo.getTermsOfServiceUrl().isEmpty() ? springdocProperties
 					.getTermsOfServiceUrl() : docketInfo.getTermsOfServiceUrl())
 				.build();
 
@@ -138,10 +213,10 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
 			}
 
 			Docket docket = new Docket(DocumentationType.SWAGGER_2)
-				.host(swagger2Properties.getHost())
+				.host(springdocProperties.getHost())
 				.apiInfo(apiInfo)
 				.globalOperationParameters(assemblyGlobalOperationParameters(
-					swagger2Properties.getGlobalOperationParameters(),
+					springdocProperties.getGlobalOperationParameters(),
 					docketInfo.getGlobalOperationParameters()))
 				.groupName(groupName)
 				.select()
@@ -165,45 +240,45 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
 	/**
 	 * 创建 Docket对象
 	 *
-	 * @param swagger2Properties swagger配置
+	 * @param springdocProperties swagger配置
 	 * @return Docket
 	 */
-	private Docket createDocket(final Swagger2Properties swagger2Properties) {
+	private Docket createDocket(final SpringdocProperties springdocProperties) {
 		ApiInfo apiInfo = new ApiInfoBuilder()
-			.title(swagger2Properties.getTitle())
-			.description(swagger2Properties.getDescription())
-			.version(swagger2Properties.getVersion())
-			.license(swagger2Properties.getLicense())
-			.licenseUrl(swagger2Properties.getLicenseUrl())
-			.contact(new Contact(swagger2Properties.getContact().getName(),
-				swagger2Properties.getContact().getUrl(),
-				swagger2Properties.getContact().getEmail()))
-			.termsOfServiceUrl(swagger2Properties.getTermsOfServiceUrl())
+			.title(springdocProperties.getTitle())
+			.description(springdocProperties.getDescription())
+			.version(springdocProperties.getVersion())
+			.license(springdocProperties.getLicense())
+			.licenseUrl(springdocProperties.getLicenseUrl())
+			.contact(new Contact(springdocProperties.getContact().getName(),
+				springdocProperties.getContact().getUrl(),
+				springdocProperties.getContact().getEmail()))
+			.termsOfServiceUrl(springdocProperties.getTermsOfServiceUrl())
 			.build();
 
 		// base-path处理
 		// 当没有配置任何path的时候，解析/**
-		if (swagger2Properties.getBasePath().isEmpty()) {
-			swagger2Properties.getBasePath().add("/**");
+		if (springdocProperties.getBasePath().isEmpty()) {
+			springdocProperties.getBasePath().add("/**");
 		}
 		List<Predicate<String>> basePath = new ArrayList<>();
-		for (String path : swagger2Properties.getBasePath()) {
+		for (String path : springdocProperties.getBasePath()) {
 			basePath.add(PathSelectors.ant(path));
 		}
 
 		// exclude-path处理
 		List<Predicate<String>> excludePath = new ArrayList<>();
-		for (String path : swagger2Properties.getExcludePath()) {
+		for (String path : springdocProperties.getExcludePath()) {
 			excludePath.add(PathSelectors.ant(path));
 		}
 
 		return new Docket(DocumentationType.SWAGGER_2)
-			.host(swagger2Properties.getHost())
+			.host(springdocProperties.getHost())
 			.apiInfo(apiInfo)
 			.globalOperationParameters(buildGlobalOperationParametersFromSwaggerProperties(
-				swagger2Properties.getGlobalOperationParameters()))
+				springdocProperties.getGlobalOperationParameters()))
 			.select()
-			.apis(RequestHandlerSelectors.basePackage(swagger2Properties.getBasePackage()))
+			.apis(RequestHandlerSelectors.basePackage(springdocProperties.getBasePackage()))
 			.paths(
 				Predicates.and(
 					Predicates.not(Predicates.or(excludePath)),
@@ -248,13 +323,13 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
 	}
 
 	private List<Parameter> buildGlobalOperationParametersFromSwaggerProperties(
-		List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters) {
+		List<SpringdocProperties.GlobalOperationParameter> globalOperationParameters) {
 		List<Parameter> parameters = Lists.newArrayList();
 
 		if (Objects.isNull(globalOperationParameters)) {
 			return parameters;
 		}
-		for (Swagger2Properties.GlobalOperationParameter globalOperationParameter : globalOperationParameters) {
+		for (SpringdocProperties.GlobalOperationParameter globalOperationParameter : globalOperationParameters) {
 			parameters.add(new ParameterBuilder()
 				.name(globalOperationParameter.getName())
 				.description(globalOperationParameter.getDescription())
@@ -276,22 +351,22 @@ public class Swagger2AutoConfiguration implements BeanFactoryAware, Initializing
 	 * @since 2020/4/30 10:10
 	 */
 	private List<Parameter> assemblyGlobalOperationParameters(
-		List<Swagger2Properties.GlobalOperationParameter> globalOperationParameters,
-		List<Swagger2Properties.GlobalOperationParameter> docketOperationParameters) {
+		List<SpringdocProperties.GlobalOperationParameter> globalOperationParameters,
+		List<SpringdocProperties.GlobalOperationParameter> docketOperationParameters) {
 
 		if (Objects.isNull(docketOperationParameters) || docketOperationParameters.isEmpty()) {
 			return buildGlobalOperationParametersFromSwaggerProperties(globalOperationParameters);
 		}
 
 		Set<String> docketNames = docketOperationParameters.stream()
-			.map(Swagger2Properties.GlobalOperationParameter::getName)
+			.map(SpringdocProperties.GlobalOperationParameter::getName)
 			.collect(Collectors.toSet());
 
-		List<Swagger2Properties.GlobalOperationParameter> resultOperationParameters = Lists
+		List<SpringdocProperties.GlobalOperationParameter> resultOperationParameters = Lists
 			.newArrayList();
 
 		if (Objects.nonNull(globalOperationParameters)) {
-			for (Swagger2Properties.GlobalOperationParameter parameter : globalOperationParameters) {
+			for (SpringdocProperties.GlobalOperationParameter parameter : globalOperationParameters) {
 				if (!docketNames.contains(parameter.getName())) {
 					resultOperationParameters.add(parameter);
 				}

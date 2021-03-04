@@ -5,4 +5,4 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-logistics-center
+    name: taotao-cloud-logistics-service

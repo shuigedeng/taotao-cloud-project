@@ -13,10 +13,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-actuator'
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'mysql:mysql-connector-java'
+    implementation 'javax.servlet:javax.servlet-api'
 
-    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
+//    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
+//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.2'
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+//    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webflux-ui
     implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.5.5'

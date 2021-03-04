@@ -18,7 +18,7 @@ spring:
     allow-bean-definition-overriding: true
     web-application-type: reactive
   application:
-    name: taotao-cloud-gateway-center
+    name: taotao-cloud-gateway-service
   redis:
     client-name: taotao-cloud-gateway-redis-client
     host: ${TAOTAO-CLOUD-REDIS-HOST:106.13.201.31}
@@ -79,7 +79,7 @@ spring:
           enabled: true
       routes:
         - id: auth-user-password-token
-          uri: lb://taotao-cloud-auth-center
+          uri: lb://taotao-cloud-auth-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/auth/oauth/token/user
           filters:
@@ -88,7 +88,7 @@ spring:
             - ImageCode
             - PreserveHostHeader
         - id: auth-login-third-token
-          uri: lb://taotao-cloud-auth-center
+          uri: lb://taotao-cloud-auth-service
           predicates:
             - Path=http://${taotao.cloud.gateway.base-uri}/auth/oauth/token/third
           filters:
@@ -97,7 +97,7 @@ spring:
             - PreserveHostHeader
         # 发送短信接口要做接口限制
         - id: auth-sms-code
-          uri: lb://taotao-cloud-auth-center
+          uri: lb://taotao-cloud-auth-service
           predicates:
             - Path=http://${taotao.cloud.gateway.base-uri}/auth/sms/code
           filters:
@@ -106,18 +106,25 @@ spring:
             - PreserveHostHeader
         # 数据重复校验要做接口限制
         - id: uc-repeact-check
-          uri: lb://taotao-cloud-uc-center
+          uri: lb://taotao-cloud-uc-service
           predicates:
             - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
           filters:
             - StripPrefix=3
             - RequestTime=true
             - PreserveHostHeader
-        - id: taotao-cloud-uc-center
-          uri: lb://taotao-cloud-uc-center
+        - id: openapi
+          uri: http://localhost:${server.port}
           predicates:
-            - Path=http://${taotao.cloud.gateway.base-uri}/uc/**
+            - Path=/v3/api-docs/**
           filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        - id: taotao-cloud-uc-service
+          uri: lb://taotao-cloud-uc-service
+          predicates:
+            - Path=${taotao.cloud.gateway.base-uri}/user/**
+          filters:
+            - RewritePath=/user/(?<path>.*), /$\{path}
             - StripPrefix=3
             - PreserveHostHeader
             - name: RequestRateLimiter
@@ -125,8 +132,8 @@ spring:
                 key-resolver: '#{@remoteAddrKeyResolver}'
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
-        - id: taotao-cloud-auth-center
-          uri: lb://taotao-cloud-auth-center
+        - id: taotao-cloud-auth-service
+          uri: lb://taotao-cloud-auth-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/auth/**
           filters:
@@ -137,8 +144,8 @@ spring:
                 key-resolver: '#{@remoteAddrKeyResolver}'
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
-        - id: taotao-cloud-order-center
-          uri: lb://taotao-cloud-order-center
+        - id: taotao-cloud-order-service
+          uri: lb://taotao-cloud-order-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/order/**
           filters:
@@ -148,8 +155,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-aftersale-center
-          uri: lb://taotao-cloud-aftersale-center
+        - id: taotao-cloud-aftersale-service
+          uri: lb://taotao-cloud-aftersale-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/aftersale/**
           filters:
@@ -159,8 +166,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-customer-center
-          uri: lb://taotao-cloud-customer-center
+        - id: taotao-cloud-customer-service
+          uri: lb://taotao-cloud-customer-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/customer/**
           filters:
@@ -170,8 +177,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-dfs-center
-          uri: lb://taotao-cloud-dfs-center
+        - id: taotao-cloud-dfs-service
+          uri: lb://taotao-cloud-dfs-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/dfs/**
           filters:
@@ -181,8 +188,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-pay-center
-          uri: lb://taotao-cloud-pay-center
+        - id: taotao-cloud-pay-service
+          uri: lb://taotao-cloud-pay-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/pay/**
           filters:
@@ -192,8 +199,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-log-center
-          uri: lb://taotao-cloud-log-center
+        - id: taotao-cloud-log-service
+          uri: lb://taotao-cloud-log-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/log/**
           filters:
@@ -203,8 +210,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-member-center
-          uri: lb://taotao-cloud-member-center
+        - id: taotao-cloud-member-service
+          uri: lb://taotao-cloud-member-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/member/**
           filters:
@@ -214,8 +221,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-mail-center
-          uri: lb://taotao-cloud-mail-center
+        - id: taotao-cloud-mail-service
+          uri: lb://taotao-cloud-mail-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/mail/**
           filters:
@@ -225,8 +232,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-logistics-center
-          uri: lb://taotao-cloud-logistics-center
+        - id: taotao-cloud-logistics-service
+          uri: lb://taotao-cloud-logistics-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/logistics/**
           filters:
@@ -236,8 +243,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-manager-center
-          uri: lb://taotao-cloud-manager-center
+        - id: taotao-cloud-manager-service
+          uri: lb://taotao-cloud-manager-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/manager/**
           filters:
@@ -247,8 +254,8 @@ spring:
                 key-resolver: "#{@remoteAddrKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        - id: taotao-cloud-product-center
-          uri: lb://taotao-cloud-product-center
+        - id: taotao-cloud-product-service
+          uri: lb://taotao-cloud-product-service
           predicates:
             - Path=${taotao.cloud.gateway.base-uri}/product/**
           filters:
@@ -292,18 +299,18 @@ taotao:
         api-docs-path: /api-docs
         swagger-version: 2.0
         generate-routes:
-          - taotao-cloud-uc-center
-          - taotao-cloud-auth-center
-          - taotao-cloud-order-center
-          - taotao-cloud-product-center
-          - taotao-cloud-aftersale-center
-          - taotao-cloud-customer-center
-          - taotao-cloud-dfs-center
-          - taotao-cloud-log-center
-          - taotao-cloud-logistics-center
-          - taotao-cloud-mail-center
-          - taotao-cloud-member-center
-          - taotao-cloud-pay-center
+          - taotao-cloud-uc-service
+          - taotao-cloud-auth-service
+          - taotao-cloud-order-service
+          - taotao-cloud-product-service
+          - taotao-cloud-aftersale-service
+          - taotao-cloud-customer-service
+          - taotao-cloud-dfs-service
+          - taotao-cloud-log-service
+          - taotao-cloud-logistics-service
+          - taotao-cloud-mail-service
+          - taotao-cloud-member-service
+          - taotao-cloud-pay-service
     oauth2:
       token:
         store:

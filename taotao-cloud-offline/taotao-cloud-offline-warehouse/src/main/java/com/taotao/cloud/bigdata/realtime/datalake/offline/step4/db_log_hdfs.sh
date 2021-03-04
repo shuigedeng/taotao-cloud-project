@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MYSQL_CONN=jdbc:mysql://127.0.0.1:3306/taotao-cloud-log-center
+MYSQL_CONN=jdbc:mysql://127.0.0.1:3306/taotao-cloud-log-service
 MYSQL_USERNAME=root
 MYSQL_PASSWORD=123456
 

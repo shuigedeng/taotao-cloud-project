@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.swagger.controller;
+package com.taotao.cloud.springdoc.controller;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import io.swagger.v3.core.util.Json;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.springdoc.webmvc.core.SpringDocWebMvcConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import springfox.documentation.spring.web.DocumentationCache;
-import springfox.documentation.spring.web.json.Json;
-import springfox.documentation.spring.web.json.JsonSerializer;
-import springfox.documentation.swagger2.mappers.ServiceModelToSwagger2Mapper;
-import springfox.documentation.swagger2.web.Swagger2ControllerWebMvc;
 
 /**
  * <br>
@@ -39,7 +37,7 @@ import springfox.documentation.swagger2.web.Swagger2ControllerWebMvc;
  * @since 2020/5/18 11:28
  */
 @Controller
-public class TaotaoCloudSwagger2Controller implements InitializingBean {
+public class SpringdocController implements InitializingBean {
 
 	@Resource
 	private Environment environment;

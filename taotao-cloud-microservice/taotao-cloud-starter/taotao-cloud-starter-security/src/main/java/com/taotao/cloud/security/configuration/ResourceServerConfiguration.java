@@ -96,7 +96,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.resourceId("taotao-cloud-uc-center")
+		resources.resourceId("taotao-cloud-uc-service")
 			.tokenServices(remoteTokenServices())
 			.stateless(true)
 			.authenticationEntryPoint(authenticationEntryPoint)
@@ -111,8 +111,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 		final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
 		remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:9800/oauth/check_token");
-		remoteTokenServices.setClientId("taotao-cloud-uc-center");
-		remoteTokenServices.setClientSecret("taotao-cloud-uc-center");
+		remoteTokenServices.setClientId("taotao-cloud-uc-service");
+		remoteTokenServices.setClientSecret("taotao-cloud-uc-service");
 		// remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
 		remoteTokenServices.setRestTemplate(new RestTemplate());
 

@@ -21,7 +21,7 @@ seata:
       default: 127.0.0.1:8091
     vgroup-mapping:
       my_test_tx_group: default
-  application-id: taotao-cloud-aftersale-center
+  application-id: taotao-cloud-aftersale-service
   tx-service-group: my_test_tx_group
   enable-auto-data-source-proxy: true
   config:
@@ -47,7 +47,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-aftersale-center
+    name: taotao-cloud-aftersale-service
   cloud:
     nacos:
       discovery:
@@ -75,7 +75,7 @@ spring:
         port: ${TAOTAO-CLOUD-SENTINEL-PORT:8717}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-aftersale-center?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-aftersale-service?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO-CLOUD-MYSQL-USERNAME:ENC(RGAhmAvQZI2/69eo8rl5bSwPXjXkMTk8M0QuL5vlVM/epApayMBFzdlLpomy8kDk)}
     password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:ENC(y9HJzgk9hlfH3n3kh/UMI1n+V4E5R3pb2K4JyKT58qBg7CLq1xvGALRi7X1tL21F)}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -175,7 +175,7 @@ spring:
 #      names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
 #      mysql-master-1:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc-center?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -190,7 +190,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-slave-1:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-uc-center?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -205,7 +205,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-master-2:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-uc-center?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -220,7 +220,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-slave-2:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-uc-center?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -263,17 +263,17 @@ spring:
 security:
   oauth2:
     client:
-      clientId: taotao-cloud-uc-center
-      clientSecret: taotao-cloud-uc-center
-      userAuthorizationUri: http://taotao-cloud-uc-center/oauth/authorize
-      access-token-uri: http://taotao-cloud-uc-center/oauth/token
+      clientId: taotao-cloud-uc-service
+      clientSecret: taotao-cloud-uc-service
+      userAuthorizationUri: http://taotao-cloud-uc-service/oauth/authorize
+      access-token-uri: http://taotao-cloud-uc-service/oauth/token
     resource:
-      id: taotao-cloud-uc-center
+      id: taotao-cloud-uc-service
       prefer-token-info: false
-      token-info-uri: http://taotao-cloud-uc-center/oauth/check_token
-      user-info-uri: http://taotao-cloud-uc-center/oauth/user
+      token-info-uri: http://taotao-cloud-uc-service/oauth/check_token
+      user-info-uri: http://taotao-cloud-uc-service/oauth/user
     authorization:
-      check-token-access: http://taotao-cloud-uc-center/oauth/check_token
+      check-token-access: http://taotao-cloud-uc-service/oauth/check_token
 
 
 #mybatis-plus:

@@ -12,4 +12,4 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-auth-center
+    name: taotao-cloud-auth-service

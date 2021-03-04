@@ -5,4 +5,4 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-coupon-center
+    name: taotao-cloud-coupon-service

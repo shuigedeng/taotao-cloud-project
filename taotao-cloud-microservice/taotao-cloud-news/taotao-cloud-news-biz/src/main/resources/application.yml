@@ -5,4 +5,4 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-news-center
+    name: taotao-cloud-news-service

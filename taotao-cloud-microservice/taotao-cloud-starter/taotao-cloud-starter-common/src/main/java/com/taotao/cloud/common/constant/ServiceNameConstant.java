@@ -30,50 +30,50 @@ public class ServiceNameConstant {
 	/**
 	 * 认证中心服务
 	 */
-	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth-center";
+	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth-service";
 
 	/**
 	 * 用户服务
 	 */
-	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-center";
+	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-service";
 
 	/**
 	 * 文件服务
 	 */
-	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file-center";
+	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file-service";
 
 	/**
 	 * 订单服务
 	 */
-	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-center";
+	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-service";
 
 	/**
 	 * 商品服务
 	 */
-	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-center";
+	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-service";
 
 	/**
 	 * 售后服务
 	 */
-	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale-center";
+	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale-service";
 
 	/**
 	 * 客服服务
 	 */
-	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-center";
+	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-service";
 
 	/**
 	 * 物流服务
 	 */
-	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics-center";
+	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics-service";
 
 	/**
 	 * 邮件服务
 	 */
-	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail-center";
+	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail-service";
 
 	/**
 	 * 支付服务
 	 */
-	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay-center";
+	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay-service";
 }

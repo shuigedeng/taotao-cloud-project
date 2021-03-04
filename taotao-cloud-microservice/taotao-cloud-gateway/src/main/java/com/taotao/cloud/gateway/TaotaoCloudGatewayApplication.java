@@ -20,6 +20,7 @@ import com.taotao.cloud.redis.annotation.EnableTaoTaoCloudRedis;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOAuth2RedisTokenStore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.commons.security.ResourceServerTokenRelayAutoConfiguration;
@@ -36,8 +37,8 @@ import java.io.File;
 @EnableTaoTaoCloudRequestLog
 @EnableTaoTaoCloudRedis
 @EnableTaoTaoCloudOAuth2RedisTokenStore
-@EnableAutoConfiguration(exclude = {ResourceServerTokenRelayAutoConfiguration.class})
-@SpringCloudApplication
+//@EnableAutoConfiguration(exclude = {ResourceServerTokenRelayAutoConfiguration.class})
+@SpringBootApplication
 // @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
 // 	classes = {ResourceServerTokenRelayAutoConfiguration.class})})
 @EnableDiscoveryClient

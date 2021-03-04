@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.swagger.properties;
+package com.taotao.cloud.springdoc.properties;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,68 +25,81 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * swagger2 属性配置
+ * SpringdocProperties
  *
  * @author dengtao
  * @version 1.0.0
  * @since 2020/4/30 10:11
  */
 @Data
-@ConfigurationProperties("taotao.cloud.swagger")
-public class Swagger2Properties {
+@ConfigurationProperties("taotao.cloud.springdoc")
+public class SpringdocProperties {
 
 	/**
-	 * 是否开启swagger
+	 * 是否开启springdoc
 	 **/
 	private Boolean enabled;
+
 	/**
 	 * 标题
 	 **/
 	private String title = "";
+
 	/**
 	 * 描述
 	 **/
 	private String description = "";
+
 	/**
 	 * 版本
 	 **/
 	private String version = "";
+
 	/**
 	 * 许可证
 	 **/
 	private String license = "";
+
 	/**
 	 * 许可证URL
 	 **/
 	private String licenseUrl = "";
+
 	/**
 	 * 服务条款URL
 	 **/
 	private String termsOfServiceUrl = "";
+
 	/**
 	 * 联系人
 	 **/
 	private Contact contact = new Contact();
+
 	/**
 	 * swagger会解析的包路径
 	 **/
 	private String basePackage = "";
+
 	/**
 	 * swagger会解析的url规则
 	 **/
 	private List<String> basePath = new ArrayList<>();
+
 	/**
 	 * 在basePath基础上需要排除的url规则
 	 **/
 	private List<String> excludePath = new ArrayList<>();
+
 	/**
 	 * 分组文档
 	 **/
 	private Map<String, DocketInfo> docket = new LinkedHashMap<>();
+
 	/**
 	 * host信息
 	 **/
 	private String host = "";
+
 	/**
 	 * 全局参数配置
 	 **/
@@ -129,22 +142,27 @@ public class Swagger2Properties {
 		 * 标题
 		 **/
 		private String title = "";
+
 		/**
 		 * 描述
 		 **/
 		private String description = "";
+
 		/**
 		 * 版本
 		 **/
 		private String version = "";
+
 		/**
 		 * 许可证
 		 **/
 		private String license = "";
+
 		/**
 		 * 许可证URL
 		 **/
 		private String licenseUrl = "";
+
 		/**
 		 * 服务条款URL
 		 **/
@@ -171,7 +189,6 @@ public class Swagger2Properties {
 
 	@Data
 	public static class Contact {
-
 		/**
 		 * 联系人
 		 **/

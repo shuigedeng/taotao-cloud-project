@@ -9,7 +9,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-manager-center
+    name: taotao-cloud-manager-service
   cloud:
     nacos:
       discovery:

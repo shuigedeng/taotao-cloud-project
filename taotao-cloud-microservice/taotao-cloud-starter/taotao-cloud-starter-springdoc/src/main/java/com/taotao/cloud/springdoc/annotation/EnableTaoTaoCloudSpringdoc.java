@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.swagger.annotation;
+package com.taotao.cloud.springdoc.annotation;
 
-import com.taotao.cloud.swagger.configuration.Swagger2AutoConfiguration;
-import com.taotao.cloud.swagger.controller.TaotaoCloudSwagger2Controller;
+import com.taotao.cloud.springdoc.configuration.SpringdocAutoConfiguration;
+import com.taotao.cloud.springdoc.controller.SpringdocController;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启swagger2
+ * EnableTaoTaoCloudSpringdoc
  *
  * @author dengtao
  * @version 1.0.0
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({Swagger2AutoConfiguration.class, TaotaoCloudSwagger2Controller.class})
-public @interface EnableTaoTaoCloudSwagger2 {
+@Import({SpringdocAutoConfiguration.class, SpringdocController.class})
+public @interface EnableTaoTaoCloudSpringdoc {
 
 }
