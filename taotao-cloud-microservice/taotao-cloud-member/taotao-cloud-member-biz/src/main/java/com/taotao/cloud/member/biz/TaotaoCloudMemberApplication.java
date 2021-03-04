@@ -10,7 +10,7 @@ import com.taotao.cloud.ribbon.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2ResourceServer;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
-import com.taotao.cloud.springdoc.annotation.EnableTaoTaoCloudSpringdoc;
+import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @since 2020/11/20 下午3:47
  * @version 1.0.0
  */
-@EnableTaoTaoCloudSpringdoc
+@EnableTaoTaoCloudOpenapi
 @EnableTaoTaoCloudOauth2ResourceServer
 @EnableTaoTaoCloudJPA
 @EnableTaoTaoCloudP6spy

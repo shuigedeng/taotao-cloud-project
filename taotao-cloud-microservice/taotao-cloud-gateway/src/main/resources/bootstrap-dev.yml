@@ -284,9 +284,8 @@ spring:
 taotao:
   cloud:
     gateway:
-      prefix: /api/
-      version: v1.0
-      base-uri: ${taotao.cloud.gateway.prefix}${taotao.cloud.gateway.version}
+      prefix: /api
+      version: /v1.0
       dynamic:
         route:
           enabled: false

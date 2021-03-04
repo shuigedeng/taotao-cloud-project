@@ -13,19 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.springdoc;
+package com.taotao.cloud.openapi.annotation;
 
-import com.taotao.cloud.springdoc.properties.SpringdocProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import com.taotao.cloud.openapi.configuration.OpenapiAutoConfiguration;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
- * PropertiesAutoConfiguration
+ * EnableTaoTaoCloudSpringdoc
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/7/29 14:18
+ * @since 2020/5/3 07:47
  */
-@EnableConfigurationProperties({SpringdocProperties.class})
-public class PropertiesAutoConfiguration {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Import({OpenapiAutoConfiguration.class})
+public @interface EnableTaoTaoCloudOpenapi {
 
 }

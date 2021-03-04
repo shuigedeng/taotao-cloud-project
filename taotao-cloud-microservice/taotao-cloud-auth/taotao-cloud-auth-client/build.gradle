@@ -6,7 +6,7 @@ bootJar.enabled = false
 dependencies {
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc')
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
 
     implementation 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.0'

@@ -11,14 +11,14 @@ import com.taotao.cloud.ribbon.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2ResourceServer;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
-import com.taotao.cloud.springdoc.annotation.EnableTaoTaoCloudSpringdoc;
+import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTaoTaoCloudFile
-@EnableTaoTaoCloudSpringdoc
+@EnableTaoTaoCloudOpenapi
 @EnableTaoTaoCloudOauth2ResourceServer
 @EnableTaoTaoCloudJPA
 @EnableTaoTaoCloudP6spy

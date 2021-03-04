@@ -6,7 +6,7 @@ bootJar.enabled = false
 dependencies {
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-springdoc')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
 
 	compile "org.springframework.boot:spring-boot-starter-validation"

@@ -38,13 +38,6 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.5'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.2'
 
-    // swagger2
-//    implementation("io.springfox:springfox-swagger2") {
-//        exclude group: "io.swagger", module: "swagger-models"
-//    }
-//    implementation "io.swagger:swagger-models:1.6.1"
-//    implementation "com.github.xiaoymin:knife4j-spring-ui"
-
     // commons
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"

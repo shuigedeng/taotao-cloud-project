@@ -1,4 +1,4 @@
-archivesBaseName = 'taotao-cloud-starter-springdoc'
+archivesBaseName = 'taotao-cloud-starter-openapi'
 
 jar.enabled = true
 bootJar.enabled = false
