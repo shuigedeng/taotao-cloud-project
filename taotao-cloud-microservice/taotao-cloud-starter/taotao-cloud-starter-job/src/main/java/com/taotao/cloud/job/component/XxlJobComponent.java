@@ -19,6 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.core.utils.AddrUtil;
+import com.taotao.cloud.job.constant.XxlJobConstant;
 import com.taotao.cloud.job.properties.XxlProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,8 @@ import org.springframework.context.annotation.Bean;
  * @since 2020/6/16 11:36
  */
 @Slf4j
-@ConditionalOnProperty(name = "taotao.cloud.xxl.job.enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = XxlJobConstant.BASE_XXL_JOB_PREFIX,
+	name = XxlJobConstant.ENABLED, havingValue = XxlJobConstant.TRUE)
 public class XxlJobComponent {
 
 	@Bean

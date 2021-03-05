@@ -24,10 +24,10 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractFileUpload;
-import com.taotao.cloud.file.constant.FileConstant;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
+import com.taotao.cloud.file.base.AbstractUploadFile;
+import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
 import com.taotao.cloud.file.propeties.QiniuProperties;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +43,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_QINIU)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_QINIU
+)
 public class QiniuAutoConfiguration {
 
 	private final QiniuProperties properties;
@@ -122,18 +126,18 @@ public class QiniuAutoConfiguration {
 	}
 
 	@Bean
-	public QiniuFileUpload fileUpload(UploadManager uploadManager, BucketManager bucketManager,
+	public QiniuUploadFile fileUpload(UploadManager uploadManager, BucketManager bucketManager,
 		Auth auth) {
-		return new QiniuFileUpload(uploadManager, bucketManager, auth);
+		return new QiniuUploadFile(uploadManager, bucketManager, auth);
 	}
 
-	public class QiniuFileUpload extends AbstractFileUpload {
+	public class QiniuUploadFile extends AbstractUploadFile {
 
 		private final UploadManager uploadManager;
 		private final BucketManager bucketManager;
 		private final Auth auth;
 
-		public QiniuFileUpload(UploadManager uploadManager, BucketManager bucketManager,
+		public QiniuUploadFile(UploadManager uploadManager, BucketManager bucketManager,
 			Auth auth) {
 			this.uploadManager = uploadManager;
 			this.bucketManager = bucketManager;
@@ -141,42 +145,42 @@ public class QiniuAutoConfiguration {
 		}
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
 			try {
-				Response response = uploadManager.put(file.getBytes(), fileInfo.getName(),
-					auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
+				Response response = uploadManager.put(file.getBytes(), uploadFileInfo.getName(),
+					auth.uploadToken(properties.getBucketName(), uploadFileInfo.getName()));
 				DefaultPutRet putRet = JSONUtil.toBean(response.bodyString(), DefaultPutRet.class);
-				fileInfo.setUrl(properties.getDomain() + "/" + fileInfo.getName());
-				return fileInfo;
+				uploadFileInfo.setUrl(properties.getDomain() + "/" + uploadFileInfo.getName());
+				return uploadFileInfo;
 			} catch (IOException e) {
 				LogUtil.error("[qiniu]文件上传失败:", e);
-				throw new FileUploadException("[qiniu]文件上传失败");
+				throw new UploadFileException("[qiniu]文件上传失败");
 			}
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
 			try {
-				Response response = uploadManager.put(file, fileInfo.getName(),
-					auth.uploadToken(properties.getBucketName(), fileInfo.getName()));
+				Response response = uploadManager.put(file, uploadFileInfo.getName(),
+					auth.uploadToken(properties.getBucketName(), uploadFileInfo.getName()));
 				DefaultPutRet putRet = JSONUtil.toBean(response.bodyString(), DefaultPutRet.class);
-				fileInfo.setUrl(properties.getDomain() + "/" + fileInfo.getName());
-				return fileInfo;
+				uploadFileInfo.setUrl(properties.getDomain() + "/" + uploadFileInfo.getName());
+				return uploadFileInfo;
 			} catch (QiniuException e) {
 				LogUtil.error("[qiniu]文件上传失败:", e);
-				throw new FileUploadException("[qiniu]文件上传失败");
+				throw new UploadFileException("[qiniu]文件上传失败");
 			}
 		}
 
 		@Override
-		public FileInfo delete(FileInfo fileInfo) {
+		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
 			try {
-				bucketManager.delete(properties.getBucketName(), fileInfo.getUrl());
+				bucketManager.delete(properties.getBucketName(), uploadFileInfo.getUrl());
 			} catch (QiniuException e) {
 				LogUtil.error("[qiniu]文件删除失败:", e);
-				throw new FileUploadException("[qiniu]文件删除失败");
+				throw new UploadFileException("[qiniu]文件删除失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 	}
 

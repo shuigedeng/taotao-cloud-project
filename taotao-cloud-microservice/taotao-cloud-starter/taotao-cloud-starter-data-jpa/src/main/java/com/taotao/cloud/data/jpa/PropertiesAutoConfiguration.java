@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.data.jpa;
 
+import org.springframework.context.annotation.Configuration;
+
 /**
  * jpa 属性自动注入配置
  *
@@ -22,6 +24,7 @@ package com.taotao.cloud.data.jpa;
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
+@Configuration
 public class PropertiesAutoConfiguration {
 
 }

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.data.mybatis.plus.properties;
 
+import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -31,8 +32,9 @@ import java.util.List;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.data.tenant")
+@ConfigurationProperties(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_TENANT_PREFIX)
 public class TenantProperties {
+
     /**
      * 是否开启多租户
      */

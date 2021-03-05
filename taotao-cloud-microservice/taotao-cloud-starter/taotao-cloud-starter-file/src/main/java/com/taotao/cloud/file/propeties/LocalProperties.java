@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.file.propeties;
 
+import com.taotao.cloud.file.constant.UploadFileConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,7 +29,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.file.local")
+@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
+	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_LOCAL)
 public class LocalProperties {
 
 	public static String sysPath = System.getProperty("user.dir");

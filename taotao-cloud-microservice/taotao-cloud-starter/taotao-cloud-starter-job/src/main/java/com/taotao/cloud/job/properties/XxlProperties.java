@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.job.properties;
 
+import com.taotao.cloud.job.constant.XxlJobConstant;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,7 +30,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.xxl.job")
+@ConfigurationProperties(prefix = XxlJobConstant.BASE_XXL_JOB_PREFIX)
 public class XxlProperties {
 
 	/**

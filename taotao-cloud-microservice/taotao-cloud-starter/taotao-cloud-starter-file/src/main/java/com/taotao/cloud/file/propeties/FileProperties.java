@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.file.propeties;
 
-import com.taotao.cloud.file.constant.FileConstant;
+import com.taotao.cloud.file.constant.UploadFileConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.file")
+@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX)
 public class FileProperties {
 
 	/**
@@ -40,6 +40,6 @@ public class FileProperties {
 	/**
 	 * 类型
 	 */
-	private String type = FileConstant.DFS_ALIYUN;
+	private String type = UploadFileConstant.DFS_ALIYUN;
 
 }

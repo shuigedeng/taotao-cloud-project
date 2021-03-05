@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.file.configuration;
 
-import com.taotao.cloud.file.constant.FileConstant;
+import com.taotao.cloud.file.constant.UploadFileConstant;
 import com.taotao.cloud.file.propeties.QCloudProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
@@ -25,7 +25,11 @@ import org.springframework.util.Assert;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_QCLOUD)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_QCLOUD
+)
 public class QCloudAutoConfiguration {
 
 	private final QCloudProperties properties;

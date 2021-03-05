@@ -16,10 +16,10 @@
 package com.taotao.cloud.file.configuration;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractFileUpload;
-import com.taotao.cloud.file.constant.FileConstant;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
+import com.taotao.cloud.file.base.AbstractUploadFile;
+import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
 import com.taotao.cloud.file.propeties.NginxProperties;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_NGINX)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_NGINX
+)
 public class NginxAutoConfiguration {
 
 	private final NginxProperties properties;
@@ -46,16 +50,16 @@ public class NginxAutoConfiguration {
 	}
 
 	@Bean
-	public NginxUpload fileUpload() {
-		return new NginxUpload();
+	public NginxUploadFile fileUpload() {
+		return new NginxUploadFile();
 	}
 
-	public class NginxUpload extends AbstractFileUpload {
+	public class NginxUploadFile extends AbstractUploadFile {
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
 			try {
-				String f = properties.getUploadPath() + "/" + fileInfo.getName();
+				String f = properties.getUploadPath() + "/" + uploadFileInfo.getName();
 				f = f.substring(0, f.lastIndexOf("/"));
 				File localFile = new File(f);
 				try {
@@ -66,21 +70,21 @@ public class NginxAutoConfiguration {
 					// file.transferTo(new File(config.getNginxUploadPath() + path));
 				} catch (Exception e) {
 					LogUtil.error("[nginx]文件上传错误:", e);
-					throw new FileUploadException("[nginx]文件上传错误");
+					throw new UploadFileException("[nginx]文件上传错误");
 				}
-				String s = properties.getDownPath() + "/" + fileInfo.getName();
-				fileInfo.setUrl(s);
-				return fileInfo;
+				String s = properties.getDownPath() + "/" + uploadFileInfo.getName();
+				uploadFileInfo.setUrl(s);
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[nginx]文件上传失败:", e);
-				throw new FileUploadException("[nginx]文件上传失败");
+				throw new UploadFileException("[nginx]文件上传失败");
 			}
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
 			try {
-				String f = properties.getUploadPath() + "/" + fileInfo.getName();
+				String f = properties.getUploadPath() + "/" + uploadFileInfo.getName();
 				f = f.substring(0, f.lastIndexOf("/"));
 				File localFile = new File(f);
 				try {
@@ -91,27 +95,27 @@ public class NginxAutoConfiguration {
 					// file.transferTo(new File(config.getNginxUploadPath() + path));
 				} catch (Exception e) {
 					LogUtil.error("[nginx]文件上传错误:", e);
-					throw new FileUploadException("[nginx]文件上传错误");
+					throw new UploadFileException("[nginx]文件上传错误");
 				}
-				String s = properties.getDownPath() + "/" + fileInfo.getName();
-				fileInfo.setUrl(s);
-				return fileInfo;
+				String s = properties.getDownPath() + "/" + uploadFileInfo.getName();
+				uploadFileInfo.setUrl(s);
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[nginx]文件上传失败:", e);
-				throw new FileUploadException("[nginx]文件上传失败");
+				throw new UploadFileException("[nginx]文件上传失败");
 			}
 		}
 
 		@Override
-		public FileInfo delete(FileInfo fileInfo) {
+		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
 			try {
 				FileUtils
-					.forceDelete(new File(properties.getUploadPath() + "/" + fileInfo.getName()));
+					.forceDelete(new File(properties.getUploadPath() + "/" + uploadFileInfo.getName()));
 			} catch (Exception e) {
 				LogUtil.error("[nginx]文件删除失败:", e);
-				throw new FileUploadException("[nginx]文件删除失败");
+				throw new UploadFileException("[nginx]文件删除失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 	}
 

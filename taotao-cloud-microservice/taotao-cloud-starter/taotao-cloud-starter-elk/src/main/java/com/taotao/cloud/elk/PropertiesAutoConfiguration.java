@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.elk;
 
-import com.taotao.cloud.elk.properties.ElkControllerAspectProperties;
+import com.taotao.cloud.elk.properties.ElkWebAspectProperties;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import com.taotao.cloud.elk.properties.ElkProperties;
+import com.taotao.cloud.elk.properties.ElkWebProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -29,8 +30,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @EnableConfigurationProperties({
 	ElkProperties.class,
-	ElkControllerAspectProperties.class,
-	ElkHealthLogStatisticProperties.class
+	ElkWebAspectProperties.class,
+	ElkHealthLogStatisticProperties.class,
+	ElkWebProperties.class
 })
 public class PropertiesAutoConfiguration {
 

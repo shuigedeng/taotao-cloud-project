@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.file.configuration;
 
-import com.taotao.cloud.file.constant.FileConstant;
+import com.taotao.cloud.file.constant.UploadFileConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
@@ -23,7 +23,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_FASTDFS)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_FASTDFS
+)
 public class FdfsDfsAutoConfiguration {
 
 //	private final FastdfsProperties properties;

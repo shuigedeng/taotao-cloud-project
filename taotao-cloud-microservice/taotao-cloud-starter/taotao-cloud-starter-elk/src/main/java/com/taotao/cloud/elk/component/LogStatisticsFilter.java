@@ -30,20 +30,21 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class LogStatisticsFilter extends AbstractMatcherFilter<ILoggingEvent> {
 
-	private static long lastCollectTime = System.currentTimeMillis() / 60000;
-	private static volatile AtomicLong errorCount = new AtomicLong(0);
-	private static volatile AtomicLong logCount = new AtomicLong(0);
+	public static final int DEFAULT_TIME = 60000;
+	private long lastCollectTime = System.currentTimeMillis() / DEFAULT_TIME;
+	private static final AtomicLong ERROR_COUNT = new AtomicLong(0);
+	private static final AtomicLong LOG_COUNT = new AtomicLong(0);
 
 	@Override
 	public FilterReply decide(ILoggingEvent event) {
-		logCount.incrementAndGet();
+		LOG_COUNT.incrementAndGet();
 		if (event.getLevel().equals(Level.ERROR)) {
-			errorCount.incrementAndGet();
+			ERROR_COUNT.incrementAndGet();
 		}
-		if (System.currentTimeMillis() / 60000 > lastCollectTime) {
-			lastCollectTime = System.currentTimeMillis() / 60000;
-			logCount.set(0);
-			errorCount.set(0);
+		if (System.currentTimeMillis() / DEFAULT_TIME > lastCollectTime) {
+			lastCollectTime = System.currentTimeMillis() / DEFAULT_TIME;
+			LOG_COUNT.set(0);
+			ERROR_COUNT.set(0);
 		}
 
 		return FilterReply.NEUTRAL;

@@ -16,6 +16,7 @@
 package com.taotao.cloud.file.util;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -40,15 +41,18 @@ import java.io.UnsupportedEncodingException;
  */
 public class FtpClientUtil {
 
-	private static final Logger logger = LoggerFactory.getLogger("FtpClient");
-	private String host;
-	private String port;
-	private String username;
-	private String passwd;
+	public static final String FTP_CLIENT_CONNECTION_ERROR_MESSAGE = "FTPClient连接失败";
+	public static final String FTP_CLIENT_INIT_ERROR_MESSAGE = "FTP初始化异常: ";
+	public static final String FTP_CLIENT_DESTORY_ERROR_MESSAGE = "FTP注销异常: ";
+
+	private final String host;
+	private final String port;
+	private final String username;
+	private final String passwd;
 	private FTPClient client = null;
 	private boolean isLogin = false;
 	private InputStream input = null;
-	private String remoteDir = null;
+	private String remoteDir;
 	private String ftpHome = null;
 	private String controlEncoding = null;
 
@@ -81,7 +85,7 @@ public class FtpClientUtil {
 			if (!FTPReply.isPositiveCompletion(reply)) {
 				this.isLogin = false;
 				destroy();
-				LogUtil.info("FTPClient连接失败！");
+				LogUtil.error(FTP_CLIENT_CONNECTION_ERROR_MESSAGE);
 			} else {
 				this.client.setFileType(FTPClient.BINARY_FILE_TYPE);
 				this.ftpHome = this.client.printWorkingDirectory();
@@ -90,7 +94,7 @@ public class FtpClientUtil {
 
 			}
 		} catch (Exception e) {
-			LogUtil.info("FTP初始化异常：" + e.getMessage(), e);
+			LogUtil.error(FTP_CLIENT_INIT_ERROR_MESSAGE + e.getMessage(), e);
 		}
 	}
 
@@ -104,14 +108,14 @@ public class FtpClientUtil {
 		try {
 			this.client.logout();
 		} catch (IOException e) {
-			LogUtil.info("FTP注销异常：" + e.getMessage(), e);
+			LogUtil.error(FTP_CLIENT_DESTORY_ERROR_MESSAGE + e.getMessage(), e);
 		} finally {
 			try {
 				if (this.client.isConnected()) {
 					this.client.disconnect();
 				}
 			} catch (IOException e) {
-				LogUtil.info(e + "");
+				LogUtil.error(e.getMessage());
 			} finally {
 				this.client = null;
 			}
@@ -124,7 +128,6 @@ public class FtpClientUtil {
 	 * @param remoteDir
 	 * @param rName
 	 * @param lFile
-	 * @return
 	 */
 	public boolean upload(String remoteDir, String rName, File lFile) {
 		String sremoteDir = this.ConvertEncoding(remoteDir);
@@ -133,7 +136,7 @@ public class FtpClientUtil {
 		boolean result = false;
 		if (!this.isLogin) {
 			reInit();
-			LogUtil.info("FTP未登录，重新初始化。。。");
+			LogUtil.warn("FTP未登录，重新初始化。。。");
 		}
 		if (this.isLogin) {
 			try {
@@ -148,13 +151,13 @@ public class FtpClientUtil {
 				LogUtil.info("文件[" + lFile.getPath() + "]上传结果：" + result);
 			} catch (Exception e) {
 				result = false;
-				LogUtil.info(e + "");
+				LogUtil.error(e.getMessage());
 			} finally {
 				try {
 					this.input.close();
 					this.input = null;
 				} catch (IOException e) {
-					LogUtil.info(e + "");
+					LogUtil.error(e.getMessage());
 				}
 			}
 		}
@@ -196,8 +199,7 @@ public class FtpClientUtil {
 				}
 				out.flush();
 			} catch (Exception e) {
-				result = false;
-				LogUtil.info(e + "");
+				LogUtil.error(e.getMessage());
 			} finally {
 				try {
 					inputRAF.close();
@@ -209,7 +211,7 @@ public class FtpClientUtil {
 					result = this.client.completePendingCommand();
 					LogUtil.info("文件[" + lFile.getPath() + "]上传结果：" + result);
 				} catch (IOException ex) {
-					LogUtil.info("" + ex);
+					LogUtil.error(ex.getMessage());
 				}
 			}
 		}

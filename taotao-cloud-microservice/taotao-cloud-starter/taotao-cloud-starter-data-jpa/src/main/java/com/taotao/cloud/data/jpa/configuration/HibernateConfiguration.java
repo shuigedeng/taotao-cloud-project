@@ -56,8 +56,10 @@ public class HibernateConfiguration {
 	JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
-		hibernateJpaVendorAdapter.setGenerateDdl(true); //Auto creating scheme when true
-		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);//Database type
+		//Auto creating scheme when true
+		hibernateJpaVendorAdapter.setGenerateDdl(true);
+		//Database type
+		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
 		return hibernateJpaVendorAdapter;
 	}
 

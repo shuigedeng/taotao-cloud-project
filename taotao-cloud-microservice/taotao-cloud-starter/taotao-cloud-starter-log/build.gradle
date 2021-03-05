@@ -4,29 +4,17 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
 
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation 'javax.servlet:javax.servlet-api'
-    implementation 'org.springframework:spring-context'
-    implementation 'org.springframework:spring-web'
-    implementation 'com.baomidou:mybatis-plus-extension'
+    api "org.springframework.boot:spring-boot-starter"
+    api "org.springframework.boot:spring-boot-starter-aop"
+    api "org.springframework.kafka:spring-kafka"
 
-    implementation "org.springframework.boot:spring-boot-starter"
-    implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.springframework.kafka:spring-kafka"
+    api "com.github.danielwegener:logback-kafka-appender"
+    api "net.logstash.logback:logstash-logback-encoder"
 
-    implementation "com.github.danielwegener:logback-kafka-appender"
-    implementation "net.logstash.logback:logstash-logback-encoder"
-
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

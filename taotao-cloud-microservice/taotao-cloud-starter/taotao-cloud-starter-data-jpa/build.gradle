@@ -4,27 +4,17 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    implementation 'com.querydsl:querydsl-apt'
-    implementation 'com.querydsl:querydsl-jpa'
-    implementation 'p6spy:p6spy'
-    implementation 'cn.hutool:hutool-all'
-    implementation "mysql:mysql-connector-java"
-    implementation 'org.slf4j:slf4j-api'
+    api 'com.querydsl:querydsl-apt'
+    api 'com.querydsl:querydsl-jpa'
+    api 'p6spy:p6spy'
+    api "mysql:mysql-connector-java"
 
-    implementation 'org.springframework.security:spring-security-core'
-    implementation "org.springframework.cloud:spring-cloud-context"
-
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
     annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

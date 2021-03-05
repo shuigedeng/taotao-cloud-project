@@ -21,11 +21,10 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.taotao.cloud.file.exception.FileTypeException;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.taotao.cloud.file.exception.UploadFileTypeException;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,12 +45,16 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2020/10/26 11:10
  */
+@Slf4j
 public class FileUtil {
 
-	private final static Logger log = LoggerFactory.getLogger(File.class);
+	public static final String UPLOAD_FILE_PARSE_ERROR_MESSAGE = "解析文件失败";
+	public static final String UPLOAD_FILE_SAVE_ERROR_MESSAGE = "保存文件失败";
+	public static final String UPLOAD_FILE_FORMAT_ERROR_MESSAGE = "文件格式错误";
+	public static final String UPLOAD_FILE_DATA_FORMAT = "yyyy/MM/dd/HH/mm";
+	public static final String UPLOAD_FILE_TOO_BIG = "文件过大";
 
 	private FileUtil() {
-		throw new IllegalStateException("Utility class");
 	}
 
 	/**
@@ -62,29 +65,29 @@ public class FileUtil {
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
 	 */
-	public static FileInfo getMultipartFileInfo(MultipartFile multipartFile) {
+	public static UploadFileInfo getMultipartFileInfo(MultipartFile multipartFile) {
 		try {
-			FileInfo fileInfo = new FileInfo();
+			UploadFileInfo uploadFileInfo = new UploadFileInfo();
 
 			String md5 = fileMd5(multipartFile.getInputStream());
-			fileInfo.setFileMd5(md5);
+			uploadFileInfo.setFileMd5(md5);
 
 			String originalFilename = multipartFile.getOriginalFilename();
-			fileInfo.setOriginalFileName(originalFilename);
+			uploadFileInfo.setOriginalFileName(originalFilename);
 
 			assert originalFilename != null;
 			File file = new File(originalFilename);
 			cn.hutool.core.io.FileUtil.writeFromStream(multipartFile.getInputStream(), file);
 
 			String extName = cn.hutool.core.io.FileUtil.extName(file);
-			fileInfo.setName(extractFilename(originalFilename, extName));
-			fileInfo.setContentType(multipartFile.getContentType());
-			fileInfo.setIsImg(isImage(file));
-			fileInfo.setSize(multipartFile.getSize());
-			fileInfo.setFileType(FileTypeUtil.getType(multipartFile.getInputStream()));
-			return fileInfo;
+			uploadFileInfo.setName(extractFilename(originalFilename, extName));
+			uploadFileInfo.setContentType(multipartFile.getContentType());
+			uploadFileInfo.setIsImg(isImage(file));
+			uploadFileInfo.setSize(multipartFile.getSize());
+			uploadFileInfo.setFileType(FileTypeUtil.getType(multipartFile.getInputStream()));
+			return uploadFileInfo;
 		} catch (IOException e) {
-			throw new FileUploadException("文件解析失败");
+			throw new UploadFileException(UPLOAD_FILE_PARSE_ERROR_MESSAGE);
 		}
 	}
 
@@ -96,20 +99,20 @@ public class FileUtil {
 	 * @author dengtao
 	 * @since 2020/10/26 10:43
 	 */
-	public static FileInfo getFileInfo(File file) {
+	public static UploadFileInfo getFileInfo(File file) {
 		try {
-			FileInfo fileInfo = new FileInfo();
+			UploadFileInfo uploadFileInfo = new UploadFileInfo();
 			String md5 = fileMd5(new FileInputStream(file));
-			fileInfo.setOriginalFileName(file.getName());
-			fileInfo.setName(file.getName());
-			fileInfo.setFileMd5(md5);
-			fileInfo.setContentType(new MimetypesFileTypeMap().getContentType(file));
-			fileInfo.setIsImg(isImage(file));
-			fileInfo.setSize(cn.hutool.core.io.FileUtil.size(file));
-			fileInfo.setFileType(cn.hutool.core.io.FileUtil.getType(file));
-			return fileInfo;
+			uploadFileInfo.setOriginalFileName(file.getName());
+			uploadFileInfo.setName(file.getName());
+			uploadFileInfo.setFileMd5(md5);
+			uploadFileInfo.setContentType(new MimetypesFileTypeMap().getContentType(file));
+			uploadFileInfo.setIsImg(isImage(file));
+			uploadFileInfo.setSize(cn.hutool.core.io.FileUtil.size(file));
+			uploadFileInfo.setFileType(cn.hutool.core.io.FileUtil.getType(file));
+			return uploadFileInfo;
 		} catch (Exception e) {
-			throw new FileUploadException("文件解析失败");
+			throw new UploadFileException(UPLOAD_FILE_PARSE_ERROR_MESSAGE);
 		}
 	}
 
@@ -146,7 +149,7 @@ public class FileUtil {
 			file.transferTo(targetFile);
 			return path;
 		} catch (Exception e) {
-			log.error("saveFile-error", e);
+			log.error(UPLOAD_FILE_SAVE_ERROR_MESSAGE, e);
 			return null;
 		}
 	}
@@ -196,10 +199,10 @@ public class FileUtil {
 			if (ArrayUtil.contains(acceptTypes, type)) {
 				return Boolean.TRUE;
 			}
-			throw new FileTypeException("文件格式错误");
+			throw new UploadFileTypeException(UPLOAD_FILE_FORMAT_ERROR_MESSAGE);
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new FileTypeException("文件格式错误");
+			throw new UploadFileTypeException(UPLOAD_FILE_FORMAT_ERROR_MESSAGE);
 		}
 	}
 
@@ -227,7 +230,7 @@ public class FileUtil {
 	 * @since 2020/10/26 10:44
 	 */
 	public static String extractFilename(String fileName, String extension) {
-		return DateUtil.format(new Date(), "yyyy/MM/dd/HH/mm") + "/" + encodingFilename(fileName)
+		return DateUtil.format(new Date(), UPLOAD_FILE_DATA_FORMAT) + "/" + encodingFilename(fileName)
 			+ "." + extension;
 	}
 
@@ -273,7 +276,7 @@ public class FileUtil {
 		if (!file.exists()) {
 			return false;
 		}
-		BufferedImage image = null;
+		BufferedImage image;
 		try {
 			image = ImageIO.read(file);
 			return image != null && image.getWidth() > 0 && image.getHeight() > 0;
@@ -295,7 +298,7 @@ public class FileUtil {
 		if (file == null) {
 			return false;
 		}
-		BufferedImage image = null;
+		BufferedImage image;
 		try {
 			image = ImageIO.read(file.getInputStream());
 			return image != null && image.getWidth() > 0 && image.getHeight() > 0;
@@ -308,7 +311,7 @@ public class FileUtil {
 	public static byte[] getFileByteArray(File file) {
 		long fileSize = file.length();
 		if (fileSize > Integer.MAX_VALUE) {
-			System.out.println("file too big...");
+			log.error(UPLOAD_FILE_TOO_BIG);
 			return null;
 		}
 		byte[] buffer = null;

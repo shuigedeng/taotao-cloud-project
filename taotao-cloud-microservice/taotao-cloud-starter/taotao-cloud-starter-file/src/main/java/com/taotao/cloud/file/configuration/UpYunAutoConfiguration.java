@@ -17,10 +17,10 @@ package com.taotao.cloud.file.configuration;
 
 import com.UpYun;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractFileUpload;
-import com.taotao.cloud.file.constant.FileConstant;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
+import com.taotao.cloud.file.base.AbstractUploadFile;
+import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
 import com.taotao.cloud.file.propeties.UpYunProperties;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,7 +38,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_UPYUN)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_UPYUN
+)
 public class UpYunAutoConfiguration {
 
 	private final UpYunProperties properties;
@@ -63,25 +67,25 @@ public class UpYunAutoConfiguration {
 	}
 
 	@Bean
-	public UpYunFileUpload fileUpload(UpYun upyun) {
-		return new UpYunFileUpload(upyun);
+	public UpYunUploadFile fileUpload(UpYun upyun) {
+		return new UpYunUploadFile(upyun);
 	}
 
-	public class UpYunFileUpload extends AbstractFileUpload {
+	public class UpYunUploadFile extends AbstractUploadFile {
 
 		private final UpYun upyun;
 
-		public UpYunFileUpload(UpYun upyun) {
+		public UpYunUploadFile(UpYun upyun) {
 			super();
 			this.upyun = upyun;
 		}
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
 			boolean bFlag;
 			try {
 				InputStream inputStream = file.getInputStream();
-				String fileName = fileInfo.getName();
+				String fileName = uploadFileInfo.getName();
 				String filePath =
 					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
 						.md5(fileName);
@@ -98,23 +102,23 @@ public class UpYunAutoConfiguration {
 				buffer = bos.toByteArray();
 
 				bFlag = upyun.writeFile(filePath, buffer);
-				fileInfo.setUrl(filePath);
+				uploadFileInfo.setUrl(filePath);
 			} catch (Exception e) {
 				LogUtil.error("[UpYun]文件上传失败:", e);
-				throw new FileUploadException("[UpYun]文件上传失败");
+				throw new UploadFileException("[UpYun]文件上传失败");
 			}
 			if (!bFlag) {
-				throw new FileUploadException("[UpYun]文件上传失败");
+				throw new UploadFileException("[UpYun]文件上传失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
 			boolean bFlag;
 			try {
 				InputStream inputStream = new FileInputStream(file);
-				String fileName = fileInfo.getName();
+				String fileName = uploadFileInfo.getName();
 				String filePath =
 					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
 						.md5(fileName);
@@ -131,27 +135,27 @@ public class UpYunAutoConfiguration {
 				buffer = bos.toByteArray();
 
 				bFlag = upyun.writeFile(filePath, buffer);
-				fileInfo.setUrl(filePath);
+				uploadFileInfo.setUrl(filePath);
 			} catch (Exception e) {
 				LogUtil.error("[UpYun]文件上传失败:", e);
-				throw new FileUploadException("[UpYun]文件上传失败");
+				throw new UploadFileException("[UpYun]文件上传失败");
 			}
 
 			if (!bFlag) {
-				throw new FileUploadException("[UpYun]文件上传失败");
+				throw new UploadFileException("[UpYun]文件上传失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 
 		@Override
-		public FileInfo delete(FileInfo fileInfo) {
+		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
 			try {
-				upyun.deleteFile(fileInfo.getUrl(), new HashMap<>());
+				upyun.deleteFile(uploadFileInfo.getUrl(), new HashMap<>());
 			} catch (Exception e) {
 				LogUtil.error("[UpYun]文件删除失败:", e);
-				throw new FileUploadException("[UpYun]文件删除失败");
+				throw new UploadFileException("[UpYun]文件删除失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 	}
 }

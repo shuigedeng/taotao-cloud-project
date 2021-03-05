@@ -28,10 +28,10 @@ import com.aliyun.oss.model.SetBucketAclRequest;
 import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractFileUpload;
-import com.taotao.cloud.file.constant.FileConstant;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
+import com.taotao.cloud.file.base.AbstractUploadFile;
+import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
 import com.taotao.cloud.file.propeties.AliyunOssProperties;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -55,7 +55,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0.0
  * @since 2020/10/26 10:49
  */
-@ConditionalOnProperty(prefix = "taotao.cloud.file", name = "type", havingValue = FileConstant.DFS_ALIYUN)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_ALIYUN
+)
 public class AliyunOssAutoConfiguration {
 
 	private final AliyunOssProperties properties;
@@ -75,11 +79,11 @@ public class AliyunOssAutoConfiguration {
 	}
 
 	@Bean
-	public AliossFileUpload fileUpload(OSS oss) {
-		return new AliossFileUpload(oss);
+	public AliossUploadFile fileUpload(OSS oss) {
+		return new AliossUploadFile(oss);
 	}
 
-	public class AliossFileUpload extends AbstractFileUpload {
+	public class AliossUploadFile extends AbstractUploadFile {
 
 		/**
 		 * 每个part大小 最小为1M
@@ -88,65 +92,66 @@ public class AliyunOssAutoConfiguration {
 
 		private final OSS oss;
 
-		public AliossFileUpload(OSS oss) {
+		public AliossUploadFile(OSS oss) {
 			super();
 			this.oss = oss;
 		}
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
-			if (checkFileSize(fileInfo.getSize(), 10, "M")) {
+		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
+			if (checkFileSize(uploadFileInfo.getSize(), 10, "M")) {
 				// 超过10M 大文件上传
-				return uploadBigFile(fileInfo, file);
+				return uploadBigFile(uploadFileInfo, file);
 			}
 
 			try {
 				oss.setBucketAcl(new SetBucketAclRequest(properties.getBucketName())
 					.withCannedACL(CannedAccessControlList.PublicRead));
-				oss.putObject(properties.getBucketName(), fileInfo.getName(),
+				oss.putObject(properties.getBucketName(), uploadFileInfo.getName(),
 					new ByteArrayInputStream(file.getBytes()));
-				fileInfo.setUrl(properties.getUrlPrefix() + "/" + fileInfo.getName());
-				return fileInfo;
+				uploadFileInfo.setUrl(properties.getUrlPrefix() + "/" + uploadFileInfo.getName());
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[aliyun]文件上传失败:", e);
-				throw new FileUploadException("[aliyun]文件上传失败");
+				throw new UploadFileException("[aliyun]文件上传失败");
 			} finally {
 				oss.shutdown();
 			}
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo) throws FileUploadException {
+		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo)
+			throws UploadFileException {
 			try {
-				oss.putObject(properties.getBucketName(), fileInfo.getName(), file);
-				fileInfo.setUrl(properties.getUrlPrefix() + "/" + fileInfo.getName());
-				return fileInfo;
+				oss.putObject(properties.getBucketName(), uploadFileInfo.getName(), file);
+				uploadFileInfo.setUrl(properties.getUrlPrefix() + "/" + uploadFileInfo.getName());
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[aliyun]文件上传失败:", e);
-				throw new FileUploadException("[aliyun]文件上传失败");
+				throw new UploadFileException("[aliyun]文件上传失败");
 			} finally {
 				oss.shutdown();
 			}
 		}
 
 		@Override
-		public FileInfo delete(FileInfo fileInfo) {
+		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
 			try {
-				oss.deleteObject(properties.getBucketName(), fileInfo.getName());
+				oss.deleteObject(properties.getBucketName(), uploadFileInfo.getName());
 			} catch (Exception e) {
 				LogUtil.error("[aliyun]文件删除失败:", e);
-				throw new FileUploadException("[aliyun]文件删除失败");
+				throw new UploadFileException("[aliyun]文件删除失败");
 			} finally {
 				oss.shutdown();
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 
 
-		public FileInfo uploadBigFile(FileInfo fileInfo,
+		public UploadFileInfo uploadBigFile(UploadFileInfo uploadFileInfo,
 			MultipartFile file) {
 			int part = calPartCount(file);
-			String uploadId = initMultipartFileUpload(fileInfo);
+			String uploadId = initMultipartFileUpload(uploadFileInfo);
 
 			ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 			executor.setCorePoolSize(128);
@@ -162,9 +167,9 @@ public class AliyunOssAutoConfiguration {
 			final CountDownLatch latch = new CountDownLatch(part);
 			for (int i = 0; i < part; i++) {
 				long start = PART_SIZE * i;
-				long curPartSize = Math.min(PART_SIZE, (fileInfo.getSize() - start));
+				long curPartSize = Math.min(PART_SIZE, (uploadFileInfo.getSize() - start));
 
-				executor.execute(new UploadPartRunnable(latch, fileInfo, file,
+				executor.execute(new UploadPartRunnable(latch, uploadFileInfo, file,
 					uploadId, i + 1, PART_SIZE * i,
 					curPartSize, eTags));
 			}
@@ -181,7 +186,8 @@ public class AliyunOssAutoConfiguration {
 			}
 
 			CompleteMultipartUploadRequest completeMultipartUploadRequest =
-				new CompleteMultipartUploadRequest(properties.getBucketName(), fileInfo.getName(),
+				new CompleteMultipartUploadRequest(properties.getBucketName(),
+					uploadFileInfo.getName(),
 					uploadId, eTags);
 			completeMultipartUploadRequest.setObjectACL(CannedAccessControlList.PublicRead);
 
@@ -194,8 +200,8 @@ public class AliyunOssAutoConfiguration {
 				oss.shutdown();
 			}
 
-			fileInfo.setUrl(properties.getUrlPrefix() + "/" + fileInfo.getName());
-			return fileInfo;
+			uploadFileInfo.setUrl(properties.getUrlPrefix() + "/" + uploadFileInfo.getName());
+			return uploadFileInfo;
 		}
 
 		public class UploadPartRunnable implements Runnable {
@@ -212,7 +218,7 @@ public class AliyunOssAutoConfiguration {
 			private final List<PartETag> eTags;
 
 			public UploadPartRunnable(CountDownLatch latch,
-				FileInfo fileInfo,
+				UploadFileInfo uploadFileInfo,
 				MultipartFile file,
 				String uploadId,
 				int partNumber,
@@ -222,7 +228,7 @@ public class AliyunOssAutoConfiguration {
 				this.latch = latch;
 				this.ossClient = oss;
 				this.bucketName = properties.getBucketName();
-				this.filePath = fileInfo.getName();
+				this.filePath = uploadFileInfo.getName();
 				this.uploadFile = file;
 				this.uploadId = uploadId;
 				this.start = start;
@@ -263,9 +269,9 @@ public class AliyunOssAutoConfiguration {
 			}
 		}
 
-		public String initMultipartFileUpload(FileInfo fileInfo) {
+		public String initMultipartFileUpload(UploadFileInfo uploadFileInfo) {
 			InitiateMultipartUploadRequest multipartUploadRequest = new InitiateMultipartUploadRequest(
-				properties.getBucketName(), fileInfo.getName());
+				properties.getBucketName(), uploadFileInfo.getName());
 			InitiateMultipartUploadResult initiateMultipartUploadResult = oss
 				.initiateMultipartUpload(multipartUploadRequest);
 			return initiateMultipartUploadResult.getUploadId();

@@ -4,19 +4,11 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    compile "org.springframework.cloud:spring-cloud-starter-stream-kafka"
-    compile "org.springframework.cloud:spring-cloud-stream-binder-kafka"
+    api "org.springframework.cloud:spring-cloud-starter-stream-kafka"
+    api "org.springframework.cloud:spring-cloud-stream-binder-kafka"
 
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

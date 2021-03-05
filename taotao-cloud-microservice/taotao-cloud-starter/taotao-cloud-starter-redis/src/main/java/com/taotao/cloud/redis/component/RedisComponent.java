@@ -16,6 +16,7 @@
 package com.taotao.cloud.redis.component;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
@@ -45,13 +46,12 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */
-@Slf4j
 @EnableCaching
 public class RedisComponent implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_REDIS_STARTER + "]"
+		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_REDIS_STARTER + "]"
 			+ "redis模块已启动");
 	}
 

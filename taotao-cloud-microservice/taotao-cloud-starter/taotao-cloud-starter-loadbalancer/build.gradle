@@ -4,29 +4,18 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
+    api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+    api "io.github.openfeign:feign-okhttp"
+    api group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '3.0.1'
+    api group: 'com.alibaba.csp', name: 'sentinel-spring-webmvc-adapter', version: '1.8.1'
 
-    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
-    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
-    implementation "io.github.openfeign:feign-okhttp"
+    api "org.apache.httpcomponents:httpclient"
+    api "org.apache.httpcomponents:httpmime"
+    api "com.squareup.okhttp3:okhttp"
 
-    implementation "org.springframework.security:spring-security-core"
-    implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation "javax.servlet:javax.servlet-api"
-    implementation "org.apache.httpcomponents:httpclient"
-    implementation "org.apache.httpcomponents:httpmime"
-    implementation "com.squareup.okhttp3:okhttp"
-
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

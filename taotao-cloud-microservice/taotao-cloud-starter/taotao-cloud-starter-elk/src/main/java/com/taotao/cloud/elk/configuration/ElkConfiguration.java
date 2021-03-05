@@ -22,7 +22,9 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.elk.component.LogStatisticsFilter;
+import com.taotao.cloud.elk.constant.ElkConstant;
 import com.taotao.cloud.elk.properties.ElkProperties;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
@@ -32,8 +34,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
-import javax.annotation.Resource;
-
 /**
  * ElkConfiguration
  *
@@ -42,7 +42,11 @@ import javax.annotation.Resource;
  * @since 2020/6/3 10:43
  */
 @Slf4j
-@ConditionalOnProperty(prefix = "taotao.cloud.elk", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(
+	prefix = ElkConstant.BASE_ELK_PREFIX,
+	name = ElkConstant.ENABLED,
+	havingValue = ElkConstant.TRUE
+)
 public class ElkConfiguration implements InitializingBean {
 
 	@Override
@@ -87,7 +91,11 @@ public class ElkConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
+	@ConditionalOnProperty(
+		prefix = ElkConstant.BASE_ELK_LOG_STATISTIC_PREFIX,
+		name = ElkConstant.ENABLED,
+		havingValue = ElkConstant.TRUE
+	)
 	LogStatisticsFilter getLogStatisticsFilter() {
 		return new LogStatisticsFilter();
 	}

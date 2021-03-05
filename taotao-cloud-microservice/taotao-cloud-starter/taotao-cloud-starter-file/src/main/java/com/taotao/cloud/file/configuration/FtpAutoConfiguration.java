@@ -16,10 +16,10 @@
 package com.taotao.cloud.file.configuration;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractFileUpload;
-import com.taotao.cloud.file.constant.FileConstant;
-import com.taotao.cloud.file.exception.FileUploadException;
-import com.taotao.cloud.file.pojo.FileInfo;
+import com.taotao.cloud.file.base.AbstractUploadFile;
+import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.exception.UploadFileException;
+import com.taotao.cloud.file.pojo.UploadFileInfo;
 import com.taotao.cloud.file.propeties.FtpProperties;
 import com.taotao.cloud.file.util.FtpClientUtil;
 import java.io.File;
@@ -35,7 +35,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(name = "taotao.cloud.file.type", havingValue = FileConstant.DFS_FTP)
+@ConditionalOnProperty(
+	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
+	name = UploadFileConstant.TYPE,
+	havingValue = UploadFileConstant.DFS_FTP
+)
 public class FtpAutoConfiguration {
 
 	private final FtpProperties properties;
@@ -57,61 +61,61 @@ public class FtpAutoConfiguration {
 	}
 
 	@Bean
-	public FtpUpload fileUpload(FtpClientUtil ftpClientUtil) {
-		return new FtpUpload(ftpClientUtil);
+	public FtpUploadFile fileUpload(FtpClientUtil ftpClientUtil) {
+		return new FtpUploadFile(ftpClientUtil);
 	}
 
-	public class FtpUpload extends AbstractFileUpload {
+	public class FtpUploadFile extends AbstractUploadFile {
 
 		private final FtpClientUtil ftpClientUtil;
 
-		public FtpUpload(FtpClientUtil ftpClientUtil) {
+		public FtpUploadFile(FtpClientUtil ftpClientUtil) {
 			super();
 			this.ftpClientUtil = ftpClientUtil;
 		}
 
 		@Override
-		protected FileInfo uploadFile(MultipartFile file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
 			try {
 				boolean upload = ftpClientUtil.upload(file.getName(), file.getInputStream());
 				if (!upload) {
-					throw new FileUploadException("[Ftp]文件上传失败");
+					throw new UploadFileException("[Ftp]文件上传失败");
 				}
 				// todo 此处需要修改
-				fileInfo.setUrl("");
-				return fileInfo;
+				uploadFileInfo.setUrl("");
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[Ftp]文件上传失败:", e);
-				throw new FileUploadException("[Ftp]文件上传失败");
+				throw new UploadFileException("[Ftp]文件上传失败");
 			}
 		}
 
 		@Override
-		protected FileInfo uploadFile(File file, FileInfo fileInfo) {
+		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
 			try {
 				boolean upload = ftpClientUtil
-					.upload(fileInfo.getName(), new FileInputStream(file));
+					.upload(uploadFileInfo.getName(), new FileInputStream(file));
 				if (!upload) {
-					throw new FileUploadException("[Ftp]文件上传失败");
+					throw new UploadFileException("[Ftp]文件上传失败");
 				}
 				// todo 此处需要修改
-				fileInfo.setUrl("");
-				return fileInfo;
+				uploadFileInfo.setUrl("");
+				return uploadFileInfo;
 			} catch (Exception e) {
 				LogUtil.error("[Ftp]文件上传失败", e);
-				throw new FileUploadException("[Ftp]文件上传失败");
+				throw new UploadFileException("[Ftp]文件上传失败");
 			}
 		}
 
 		@Override
-		public FileInfo delete(FileInfo fileInfo) {
+		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
 			try {
-				ftpClientUtil.remove(fileInfo.getUrl());
+				ftpClientUtil.remove(uploadFileInfo.getUrl());
 			} catch (Exception e) {
 				LogUtil.error("[Ftp]文件删除失败:", e);
-				throw new FileUploadException("[Ftp]文件删除失败");
+				throw new UploadFileException("[Ftp]文件删除失败");
 			}
-			return fileInfo;
+			return uploadFileInfo;
 		}
 	}
 }

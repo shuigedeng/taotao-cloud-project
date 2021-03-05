@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.properties;
 
+import com.taotao.cloud.elasticsearch.constant.ElasticsearchConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.elasticsearch")
+@ConfigurationProperties(prefix = ElasticsearchConstant.BASE_ELASTICSEARCH_PREFIX)
 public class ElasticsearchProperties {
 
 	/**

@@ -4,13 +4,15 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation 'com.alibaba:transmittable-thread-local'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation 'org.javassist:javassist'
-    implementation 'com.github.whvcse:easy-captcha'
+    api 'com.alibaba:transmittable-thread-local'
+    api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'org.slf4j:slf4j-api'
+    api 'cn.hutool:hutool-all'
+    api 'org.javassist:javassist'
+    api 'com.github.whvcse:easy-captcha'
+    api "org.springframework.cloud:spring-cloud-context"
+    api 'org.springframework.boot:spring-boot-autoconfigure'
+    api 'org.projectlombok:lombok'
 
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

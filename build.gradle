@@ -91,6 +91,7 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'java-library'
     id 'idea'
     id 'maven-publish'
     id "com.google.cloud.tools.jib" version "2.8.0"
@@ -136,6 +137,7 @@ allprojects {
 
 configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
     apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'idea'
     apply plugin: 'checkstyle'
     apply plugin: 'maven-publish'

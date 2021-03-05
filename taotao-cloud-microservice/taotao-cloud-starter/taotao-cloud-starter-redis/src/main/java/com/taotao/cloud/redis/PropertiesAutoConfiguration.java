@@ -16,6 +16,7 @@
 package com.taotao.cloud.redis;
 
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
+import com.taotao.cloud.redis.properties.RedisLockProperties;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -26,7 +27,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class, RedisLockProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

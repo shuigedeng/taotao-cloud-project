@@ -19,6 +19,8 @@ import com.baomidou.mybatisplus.core.parser.ISqlParserFilter;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,14 +39,14 @@ import org.springframework.context.annotation.Bean;
  * @since 2020/5/2 11:20
  * @version 1.0.0
  */
-@Slf4j
 @AllArgsConstructor
-@ConditionalOnProperty(prefix = "taotao.cloud.data.tenant", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_TENANT_PREFIX,
+	name = MybatisPlusConstant.ENABLED, havingValue = MybatisPlusConstant.TRUE)
 public class TenantConfig implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_TENANT_STARTER + "]" + "tenant模式已开启");
+        LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_TENANT_STARTER + "]" + "tenant模式已开启");
     }
 
     private final TenantProperties tenantProperties;

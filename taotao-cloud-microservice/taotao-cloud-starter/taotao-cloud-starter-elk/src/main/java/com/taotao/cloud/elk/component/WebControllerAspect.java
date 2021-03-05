@@ -18,6 +18,7 @@ package com.taotao.cloud.elk.component;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -38,15 +39,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 切面获取入参和出参
  *
+ * @author dengtao
  * @version 1.0.0
- * @author: dengtao
- * @since: 2019-08-21 14:49
+ * @since 2020/6/15 11:28
  */
-@Slf4j
 @Aspect
 public class WebControllerAspect {
 
-	private static final String[] tokenKeys = {SecurityConstant.BASE_AUTHORIZED,
+	private static final String[] TOKEN_KEYS = {SecurityConstant.BASE_AUTHORIZED,
 		SecurityConstant.AUTHORIZED};
 
 	@Pointcut("@within(org.springframework.stereotype.Controller) " +
@@ -80,7 +80,7 @@ public class WebControllerAspect {
 					String inPutParam = preHandle(joinPoint, request);
 					String outPutParam = postHandle(result);
 					String ip = getRemoteHost(request);
-					log.info("【远程ip】{},【url】{},【输入】{},【输出】{},【异常】{},【耗时】{}ms", ip, uri, inPutParam,
+					LogUtil.info("【远程ip】{},【url】{},【输入】{},【输出】{},【异常】{},【耗时】{}ms", ip, uri, inPutParam,
 						outPutParam,
 						exception == null ? "无" : StrUtil.nullToEmpty(exception.getMessage()),
 						timeSpan);
@@ -98,7 +98,7 @@ public class WebControllerAspect {
 		Annotation[] annotations = targetMethod.getAnnotations();
 		StringBuilder sb = new StringBuilder();
 
-		for (val tokenKey : tokenKeys) {
+		for (String tokenKey : TOKEN_KEYS) {
 			String token = request.getHeader(tokenKey);
 			if (StringUtils.isNotBlank(token)) {
 				sb.append("token:").append(token).append(",");
@@ -116,11 +116,6 @@ public class WebControllerAspect {
 		return sb.toString();
 	}
 
-	/**
-	 * 返回数据
-	 *
-	 * @param retVal retVal
-	 */
 	private String postHandle(Object retVal) {
 		if (null == retVal) {
 			return "";

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.file.propeties;
 
+import com.taotao.cloud.file.constant.UploadFileConstant;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -30,7 +31,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.file.fastdfs")
+@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
+	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_FASTDFS)
 public class FastdfsProperties {
 
 	/**

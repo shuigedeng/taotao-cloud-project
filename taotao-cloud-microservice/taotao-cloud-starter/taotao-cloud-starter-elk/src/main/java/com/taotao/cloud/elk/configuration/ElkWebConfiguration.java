@@ -17,6 +17,7 @@ package com.taotao.cloud.elk.configuration;
 
 import com.taotao.cloud.elk.component.ElkWebInterceptor;
 import com.taotao.cloud.elk.component.WebControllerAspect;
+import com.taotao.cloud.elk.constant.ElkConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -34,7 +35,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @ConditionalOnWebApplication
-@ConditionalOnProperty(prefix = "taotao.cloud.elk.web", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(
+	prefix = ElkConstant.BASE_ELK_WEB_PREFIX,
+	name = ElkConstant.ENABLED,
+	havingValue = ElkConstant.TRUE
+)
 public class ElkWebConfiguration implements WebMvcConfigurer {
 
 	@Bean
@@ -42,16 +47,21 @@ public class ElkWebConfiguration implements WebMvcConfigurer {
 		return new ElkWebInterceptor();
 	}
 
+	@Bean
+	@ConditionalOnClass(name = "org.aspectj.lang.annotation.Aspect")
+	@ConditionalOnProperty(
+		prefix = ElkConstant.BASE_ELK_WEB_ASPECT_PREFIX,
+		name = ElkConstant.ENABLED,
+		havingValue = ElkConstant.TRUE
+	)
+	public WebControllerAspect webControllerAspect() {
+		return new WebControllerAspect();
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(elkWebInterceptor());
 	}
 
-	@Bean
-	@ConditionalOnClass(name = "org.aspectj.lang.annotation.Aspect")
-	@ConditionalOnProperty(prefix = "taotao.cloud.elk.log.statistic", name = "enabled", havingValue = "true")
-	public WebControllerAspect webControllerAspect() {
-		return new WebControllerAspect();
-	}
 
 }

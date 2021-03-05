@@ -22,12 +22,13 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import com.taotao.cloud.data.mybatis.plus.handler.DateMetaObjectHandler;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,7 +41,6 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/5/2 11:20
  */
-@Slf4j
 @AllArgsConstructor
 public class MybatisPlusComponent implements InitializingBean {
 
@@ -49,13 +49,26 @@ public class MybatisPlusComponent implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		log.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_MYBATIS_PLUS_STARTER + "]"
+		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_MYBATIS_PLUS_STARTER + "]"
 			+ "mybatis-plus模式已开启");
 	}
 
 	@Bean
 	public PaginationInnerInterceptor paginationInterceptor() {
 		return new PaginationInnerInterceptor();
+	}
+
+	@Bean
+	public OptimisticLockerInnerInterceptor optimisticLockerInterceptor() {
+		return new OptimisticLockerInnerInterceptor();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_AUTO_FILL_PREFIX,
+		name = MybatisPlusConstant.ENABLED, havingValue = MybatisPlusConstant.TRUE)
+	public MetaObjectHandler metaObjectHandler() {
+		return new DateMetaObjectHandler(autoFillProperties);
 	}
 
 	@Bean
@@ -73,15 +86,4 @@ public class MybatisPlusComponent implements InitializingBean {
 		return tenantLineInnerInterceptor;
 	}
 
-	@Bean
-	public OptimisticLockerInnerInterceptor optimisticLockerInterceptor() {
-		return new OptimisticLockerInnerInterceptor();
-	}
-
-	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = "taotao.cloud.data.mybatis-plus.auto-fill", name = "enabled", havingValue = "true")
-	public MetaObjectHandler metaObjectHandler() {
-		return new DateMetaObjectHandler(autoFillProperties);
-	}
 }
