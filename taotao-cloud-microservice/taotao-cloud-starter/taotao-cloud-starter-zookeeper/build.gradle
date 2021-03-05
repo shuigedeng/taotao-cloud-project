@@ -6,12 +6,6 @@ bootJar.enabled = false
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

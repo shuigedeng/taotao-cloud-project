@@ -4,20 +4,12 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'javax.servlet:javax.servlet-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation "io.seata:seata-all"
-    implementation "com.zaxxer:HikariCP"
-    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+    api "io.seata:seata-all"
+    api "com.zaxxer:HikariCP"
+    api "org.springframework.cloud:spring-cloud-starter-openfeign"
 
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

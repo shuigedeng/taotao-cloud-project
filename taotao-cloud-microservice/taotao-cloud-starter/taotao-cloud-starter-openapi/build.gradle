@@ -4,22 +4,13 @@ jar.enabled = true
 bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    implementation "org.springframework.boot:spring-boot-starter"
-
-    implementation "org.springframework:spring-web"
     implementation group: 'org.springdoc', name: 'springdoc-openapi-webmvc-core', version: '1.5.5'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-common', version: '1.5.5'
-    implementation 'javax.servlet:javax.servlet-api'
 
     implementation 'com.google.guava:guava'
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

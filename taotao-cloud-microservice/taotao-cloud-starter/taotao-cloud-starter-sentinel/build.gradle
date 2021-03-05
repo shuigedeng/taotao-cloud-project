@@ -11,20 +11,11 @@ dependencies {
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
     }
 
-    implementation 'org.slf4j:slf4j-api'
-    implementation 'cn.hutool:hutool-all'
-    implementation "com.alibaba.csp:sentinel-datasource-nacos"
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework:spring-web'
-    implementation 'org.springframework:spring-webflux'
+    api "com.alibaba.csp:sentinel-datasource-nacos"
+    api 'org.springframework.boot:spring-boot-starter'
+    api 'org.springframework:spring-web'
+    api 'org.springframework:spring-webflux'
 
-    implementation 'javax.servlet:javax.servlet-api'
-    implementation 'org.aspectj:aspectjweaver'
-
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springframework.cloud:spring-cloud-context"
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

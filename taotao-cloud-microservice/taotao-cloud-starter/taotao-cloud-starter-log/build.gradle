@@ -8,6 +8,8 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
 
+    api 'com.fasterxml.jackson.core:jackson-databind'
+//    api 'com.fasterxml.jackson.core:jackson-annotations:2.11.3'
     api "org.springframework.boot:spring-boot-starter"
     api "org.springframework.boot:spring-boot-starter-aop"
     api "org.springframework.kafka:spring-kafka"
