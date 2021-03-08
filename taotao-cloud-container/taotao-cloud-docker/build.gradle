@@ -4,5 +4,7 @@ jar.enabled = false
 bootJar.enabled = false
 
 dependencies {
-
+    implementation 'com.github.docker-java:docker-java-core:3.2.7'
+    implementation 'com.github.docker-java:docker-java-transport-okhttp:3.2.7'
+    implementation 'com.github.docker-java:docker-java-transport-netty:3.2.7'
 }
