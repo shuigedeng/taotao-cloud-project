@@ -6,6 +6,6 @@ bootJar.enabled = false
 dependencies {
     compile project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 }

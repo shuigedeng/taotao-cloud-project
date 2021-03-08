@@ -56,7 +56,7 @@ dependencies {
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 //    runtime 'io.micrometer:micrometer-registry-prometheus'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     implementation 'org.springframework.boot:spring-boot-autoconfigure'

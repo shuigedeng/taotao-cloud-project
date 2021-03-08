@@ -17,6 +17,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.2.3'
 //    implementation 'org.openjdk.jol:jol-core:0.11'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

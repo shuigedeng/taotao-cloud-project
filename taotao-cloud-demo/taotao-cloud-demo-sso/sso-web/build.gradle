@@ -10,6 +10,6 @@ dependencies {
 
     implementation 'cn.hutool:hutool-all'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 }

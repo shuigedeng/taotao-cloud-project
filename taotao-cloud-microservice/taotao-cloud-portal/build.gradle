@@ -25,7 +25,7 @@ dependencies {
     implementation 'cn.hutool:hutool-all'
     implementation 'io.netty:netty-all:4.1.51.Final'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 

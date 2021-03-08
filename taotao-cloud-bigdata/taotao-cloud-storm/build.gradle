@@ -6,6 +6,6 @@ bootJar.enabled = false
 dependencies {
     implementation group: 'junit', name: 'junit', version: '4.12'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

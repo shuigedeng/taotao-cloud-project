@@ -32,6 +32,6 @@ dependencies {
     implementation group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.2.1'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

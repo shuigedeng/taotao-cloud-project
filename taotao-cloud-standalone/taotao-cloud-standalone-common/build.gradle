@@ -45,6 +45,6 @@ dependencies {
     compile 'io.jsonwebtoken:jjwt:0.9.1'
     compile 'joda-time:joda-time:2.10.1'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 }

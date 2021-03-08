@@ -22,7 +22,7 @@ dependencies {
 //    runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
 //    implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.5.1"
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 

@@ -18,7 +18,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java'
     implementation 'com.baomidou:mybatis-plus-boot-starter'
 
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
 }
