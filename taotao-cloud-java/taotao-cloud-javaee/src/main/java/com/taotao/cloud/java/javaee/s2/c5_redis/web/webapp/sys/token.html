@@ -1,0 +1,172 @@
+<form action="#" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>token:</label>
+            <div class="layui-inline">
+                <input type="text" name="accessToken" autocomplete="off" placeholder="请输入token"
+                       class="layui-input">
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="token-table">搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="token-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除</button>
+    </div>
+</script>
+<script type="text/html" id="token-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-token">编辑</a>
+</script>
+<table class="layui-table" lay-filter="token-table" id="token-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+        form.render();
+        table.render({
+            id: "token-table",
+            elem: '#token-table'
+            , toolbar: '#token-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/token/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', sort: true,width:80}
+                , {field: 'cusId', title: '用户id',width:80}
+                , {field: 'accessToken', title: 'token'}
+                , {field: 'expireTime', title: '过期时间'}
+                , {field: 'startTime', title: '开始时间'}
+                , {fixed: 'right', title: '操作', toolbar: '#token-bar', width: 180}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(token-table)', function (obj) {
+            console.error("事件"+obj);
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('token-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/token/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('token-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+        });
+        //监听行工具事件
+        table.on('tool(token-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit-token': {
+                    openEditWindow(data);
+                    break;
+                }
+
+            }
+        });
+
+        function openEditWindow(data) {
+            layer.open({
+                type: 1,
+                content: $('#token-edit-layer').html(),
+                title: '编辑'
+                , area: ['550px', '500px'],
+                btn: ['提交', '取消'] //可以无限个按钮
+                , yes: function (index, layero) {
+                    layer.load()
+                    $.ajax({
+                        url: '/sys/token/' + (data == null ? 'add' : 'update'),
+                        data: $("#token-edit-form").serialize(),
+                        method: 'post',
+                        success: function (result) {
+                            if (result.status) {
+                                table.reload('token-table', {});
+                                layer.close(index);
+                            } else {
+                                alert(result.message)
+                            }
+                            layer.closeAll('loading');
+                        }
+                    })
+                }, success: function (layero, index) {
+                    form.render()
+                    if (data != null) {
+                        form.val("token-edit-form", data);
+                    }
+                }
+            });
+        }
+
+        form.on('submit(token-table)', function (data) {
+            table.reload('token-table', {
+                where: data.field
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+    })
+    ;
+
+</script>
+
+<script type="text/html" id="token-edit-layer">
+    <form id="token-edit-form" style="width: 80%" class="layui-form" lay-filter="token-edit-form">
+        <input type="hidden" name="id">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">userId</label>
+            <div class="layui-input-block">
+                <input type="text" name="cusId" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">token</label>
+            <div class="layui-input-block">
+                <input type="text" name="accessToken" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">过期时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="expireTime" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="startTime" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+</script>

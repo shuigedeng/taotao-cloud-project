@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///lcn?serverTimezone=UTC
+    username: root
+    password: root
+  redis:
+    host: 192.168.199.109
+    port: 6379
+    # 协调的端口号
+tx-lcn:
+  manager:
+    port: 8070
+
+

@@ -1,0 +1,191 @@
+<table id="menu-table" lay-filter="menu-table"></table>
+
+<script type="text/html" id="menu-head-bar">
+    <button class="layui-btn layui-btn-sm" lay-event="add"><i class="layui-icon">&#xe654;</i>添加</button>
+    <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+    </button>
+</script>
+<script type="text/html" id="menu-row-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-menu">编辑</a>
+</script>
+<script type="text/javascript" >
+    layui.use(['table', 'form', 'layer'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var layer = layui.layer;
+        table.render({
+            id: "menu-table",//转换之后的table对象在layui中的唯一标识
+            elem: '#menu-table'//jQuery 选择器，把把页面中哪个dom给转换成layui的table
+            , toolbar: '#menu-head-bar'//表格的头部工具栏，jQuery选择器, 上面添加和删除按钮所在的容器
+            , cellMinWidth: 80  //单元格最小宽度，layui会自动分配单元格宽度，自适应内容
+            , url: 'sys/menu/list' //数据接口
+            , cols: [[
+                {checkbox: true},//第一列是复选框，用于批量删除
+                {
+                    field: 'name', title: '菜单名称', templet: function (d) {
+                    var left = 40 * d.type;
+                    return '<span style="margin-left:' + left + 'px">' + d.name + '</span>';
+                }
+                },
+                {field: 'url', title: '菜单地址'},
+                {
+                    field: 'type', title: '类型', templet: function (d) {
+                    if (d.type === 0) {
+                        return '<span class="layui-badge layui-bg-orange">目录</span>';
+                    }
+                    if (d.type === 1) {
+                        return '<span class="layui-badge layui-bg-green">菜单</span>';
+                    }
+                    if (d.type === 2) {
+                        return '<span class="layui-badge layui-bg-blue">按钮</span>';
+                    }
+                }
+                },
+                {field: 'sort', title: '排序'},
+              //  {field: 'perms', title: '权限'},
+                {fixed: 'right', title: '操作', toolbar: '#menu-row-bar'}
+            ]]
+        })
+        //头部工具栏
+        table.on('toolbar(menu-table)', function (obj) {
+            switch (obj.event) {
+                case 'add'://点击添加
+                    openEditWindow(null)
+                    break;
+                case 'delete'://点击删除
+                    //先拿到被选中的行
+                    var data = table.checkStatus('menu-table').data;
+                    if (data.length > 0) {
+                        var ids = new Array();
+                        $.each(data, function (i, obj) {
+                            ids.push(obj.id);
+                        })
+                        layer.confirm('真的删除行么', function (index) {
+                            $.ajax({
+                                url: "/sys/menu/delete",
+                                method: "post",
+                                data: "ids=" + ids,
+                                success: function (json) {
+                                    if (json.status) {
+                                        table.reload('menu-table', {});//重新加载表格
+                                    } else {
+                                        alert(json.message);
+                                    }
+                                    layer.close(index);
+                                }
+                            });
+                        })
+                    }
+                    break;
+
+            }
+        })
+        table.on('tool(menu-table)', function (obj) {
+            switch (obj.event) {
+                case 'edit-menu':
+                    openEditWindow(obj.data);
+                    break;
+            }
+        })
+
+        function openEditWindow(data) {
+            layer.open({
+                type: 1,
+                area: ['500px', '500px'],
+                zIndex: 2000,
+                content: $("#menu-edit-window").html(),
+                btn: ['提交', '取消'] //可以无限个按钮
+                , yes: function (index, layero) {
+                    $.ajax({
+                        url: "/sys/menu/" + (data == null ? 'add' : 'update'),
+                        method: "post",
+                        data: $("#menu-edit-form").serialize(),
+                        success: function (json) {
+                            if (json.status) {
+                                table.reload('menu-table', {});//重新加载表格
+                            } else {
+                                alert(json.message);
+                            }
+                            layer.close(index);
+                        }
+                    });
+                }, btn2: function (index, layero) {//第二个按钮
+                    layer.close(index)
+                }, success: function (layero, index) {
+                    form.render();
+                    if (data != null) {
+                        $.ajax({
+                            url: "/sys/menu/info",
+                            data: "id=" + data.id,
+                            method: "post",
+                            success: function (json) {
+                                form.val("menu-edit-form", json);
+                                form.val("menu-edit-form", {
+                                    "type": json.type + ''
+                                })
+                            }
+                        })
+                    }
+                    $("#parentId").combotree({
+                        url: "/sys/menu/tree",
+                        formatter: function (node) {//因为json数据中没有text,树默认要text属性当节点名，需要自己转换
+                            return node.name;
+                        }, valueField: 'id',//传给后台的 select 的value
+                        textField: 'name',//页面上看见的
+                    });
+                }
+            })
+        }
+    })
+</script>
+
+<script type="text/html" id="menu-edit-window">
+    <form id="menu-edit-form" style="width: 90%;padding-top:20px" lay-filter="menu-edit-form" class="layui-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <input type="radio" name="type" value="0" title="目录" lay-filter="menu-type">
+                <input type="radio" name="type" value="1" title="菜单" lay-filter="menu-type">
+                <input type="radio" name="type" value="2" title="按钮" lay-filter="menu-type">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入菜单名" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">父节点</label>
+            <div class="layui-input-block">
+                <input class="easyui-combotree" name="parentId" id="parentId"
+                       style="width:220px;">
+                <button onclick="$('#parentId').combotree('clear')" type="button" class="layui-btn layui-btn-sm">清空
+                </button>
+            </div>
+        </div>
+        <div class="layui-form-item" id="url-div">
+            <label class="layui-form-label">URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" placeholder="请输入url" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" id="menu-sort">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input type="text" name="sort" placeholder="请输入整数" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">权限</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input type="text" name="perms" lay-verify="required" placeholder="请输入权限" autocomplete="off"-->
+<!--                       class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
+    </form>
+</script>

@@ -1,0 +1,220 @@
+<div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" id="search-role-name" autocomplete="off" placeholder="请输入名称"
+                   class="layui-input">
+        </div>
+        <button class="layui-btn" id="search-role-btn">搜索</button>
+    </div>
+</div>
+<script type="text/html" id="role-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+    </div>
+</script>
+<script type="text/html" id="role-role-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-role">编辑</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="assign-menu">授权</a>
+</script>
+<script type="text/html" id="role-status">
+    <input type="checkbox" id="status" name="status" value="{{d.id}}" lay-skin="switch" lay-text="有效|无效"
+           lay-filter="status-filter" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+<table class="layui-table" lay-filter="role-table" id="role-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+        form.on('switch(status-filter)', function (obj) {
+            var status = obj.elem.checked;
+            $.ajax({
+                url: '/sys/role/update',
+                data: "id=" + this.value + "&status=" + (status ? 1 : 0),
+                method: 'post',
+                success: function (result) {
+                    if (result.status) {
+                        layer.tips("修改成功", obj.othis);
+                    } else {
+                        layer.tips(result.message, obj.othis)
+                    }
+                }, error: function () {
+                    layer.tips("修改失败", obj.othis);
+                }
+            })
+            return;
+        });
+        table.render({
+            id: "role-table",
+            elem: '#role-table'
+            , toolbar: '#role-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/role/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {field: 'id', title: 'ID', sort: true, fixed: 'left'}
+                , {field: 'name', title: '角色名'}
+                , {field: 'remark', title: '备注'}
+                , {
+                    field: 'status', title: '状态', templet: '#role-status'
+                }, {fixed: 'right', title: '操作', toolbar: '#role-role-bar', width: 180}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(role-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+            }
+            ;
+        });
+        //监听行工具事件
+        table.on('tool(role-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit-role': {
+                    openEditWindow(data);
+                    break;
+                }
+                case 'assign-menu': {
+                    layer.open({
+                        type: 1,
+                        content: $('#menu-tree-layer').html(),
+                        title: '角色授权'
+                        , area: ['400px', '600px'],
+                        btn: ['提交', '取消'] //可以无限个按钮
+                        , yes: function (index, layero) {
+                            //树中全选和半选的都要
+                            var nodes = $("#menu-tree").tree('getChecked', ['checked', 'indeterminate']);
+                            var ids = new Array();
+                            $.each(nodes, function (i, obj) {
+                                ids.push(obj.id);
+                            })
+                            $.ajax({
+                                url: "/sys/role/assign_menu",
+                                method: "post",
+                                data: "roleId=" + data.id + "&menuIds=" + ids,
+                                success: function (json) {
+                                    if (json.status) {
+                                        layer.close(index)
+                                    } else {
+                                        layer.message(json.message)
+                                    }
+                                }
+                            })
+                        }
+                        , success: function (layero, index) {
+                            $.ajax({
+                                url: "/sys/role/role_menu",
+                                method: "post",
+                                data: "roleId=" + data.id,
+                                success: function (json) {
+                                    //勾选已经拥有的菜单
+                                    $("#menu-tree").tree({
+                                        url: "/sys/role/menu_tree",
+                                        checkbox: true,
+                                        formatter: function (node) {
+                                            return node.name;
+                                        }, onLoadSuccess: function (node, data) {//树加载成功之后
+                                            var tree= $("#menu-tree");
+                                            for(var i=0;i<json.length;i++){
+                                                var node = tree.tree('find', json[i]);
+                                                if(node!=null && tree.tree("isLeaf",node.target)){
+                                                    tree.tree("check",node.target);
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                        }
+                    });
+
+                    break;
+                }
+            }
+        });
+
+        function openEditWindow(data) {
+            layer.open({
+                type: 1,
+                content: $('#role-edit-layer').html(),
+                title: '编辑角色'
+                , area: ['500px', '300px'],
+                btn: ['提交', '取消'] //可以无限个按钮
+                , yes: function (index, layero) {
+                    layer.load()
+                    $.ajax({
+                        url: 'sys/role.html/update',
+                        data: $("#role-edit-form").serialize(),
+                        method: 'post',
+                        success: function (result) {
+                            if (result.status) {
+                                table.reload('role-table', {});
+                                layer.close(index);
+                            } else {
+                                alert(result.message)
+                            }
+                            layer.closeAll('loading');
+                        }
+                    })
+                }, success: function (layero, index) {
+                    form.render()
+                    if (data != null) {
+                        form.val("role-edit-form", {
+                            "id": data.id,
+                            "name": data.name // "name": "value"
+                            , "remark": data.remark,
+                            "status": data.status + ""
+                        });
+                    }
+                }
+            });
+        }
+
+        $("#search-role-btn").click(function () {
+            table.reload('role-table', {
+                where: {
+                    "name": $("#search-role-name").val()
+                } //设定异步数据接口的额外参数
+            });
+        })
+
+    });
+
+</script>
+
+<script type="text/html" id="role-edit-layer">
+    <form id="role-edit-form" style="width: 80%" class="layui-form" lay-filter="role-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入角色名" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="remark" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" title="有效" value="1" checked/>
+                <input type="radio" name="status" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/html" id="menu-tree-layer">
+    <ul id="menu-tree">
+    </ul>
+</script>

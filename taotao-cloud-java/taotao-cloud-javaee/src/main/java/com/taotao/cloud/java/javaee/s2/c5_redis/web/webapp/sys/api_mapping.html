@@ -1,0 +1,224 @@
+<form action="#" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>名称:</label>
+            <div class="layui-inline">
+                <input type="text" name="gatewayApiName" autocomplete="off" placeholder="请输入名称"
+                       class="layui-input">
+            </div>
+            状态:
+            <div class="layui-inline">
+                <select name="state">
+                    <option value="">请选择</option>
+                    <option value="0">无效</option>
+                    <option value="1">有效</option>
+                </select>
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="gateway-table">搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="gateway-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="gateway-gateway-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-gateway">编辑</a>
+</script>
+<table class="layui-table" lay-filter="gateway-table" id="gateway-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+        form.render();
+        table.render({
+            id: "gateway-table",
+            elem: '#gateway-table'
+            , toolbar: '#gateway-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/api_mapping/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', sort: true}
+                , {field: 'gatewayApiName', title: '名称'}
+                , {field: 'insideApiUrl', title: 'URL'}
+                , {field: 'serviceId', title: 'serviceId'}
+                , {field: 'description', title: '描述'}
+                , {
+                    field: 'state', title: '状态', templet: function (data) {
+                        return (data.state == 1) ? '<span class="layui-badge layui-bg-green">有效</span>' : '<span class="layui-badge layui-bg-red" >无效</span>'
+                    }
+                },
+                {
+                    field: 'idempotents', title: '幂等性', templet: function (data) {
+                        return (data.idempotents == 1) ? '<span class="layui-badge layui-bg-green">幂等</span>' : '<span class="layui-badge layui-bg-red" >非幂等</span>'
+                    }
+                },
+                {
+                    field: 'needfee', title: '是否收费', templet: function (data) {
+                        return (data.needfee == 1) ? '<span class="layui-badge layui-bg-green">收费</span>' : '<span class="layui-badge layui-bg-red" >免费</span>'
+                    }
+                }
+                , {fixed: 'right', title: '操作', toolbar: '#gateway-gateway-bar', width: 180}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(gateway-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('gateway-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/api_mapping/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('gateway-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+            ;
+        ;
+    });
+    //监听行工具事件
+    table.on('tool(gateway-table)', function (obj) {
+        var data = obj.data;
+        switch (obj.event) {
+            case 'edit-gateway': {
+                openEditWindow(data);
+                break;
+            }
+
+        }
+    });
+
+    function openEditWindow(data) {
+        layer.open({
+            type: 1,
+            content: $('#gateway-edit-layer').html(),
+            title: '编辑'
+            , area: ['500px', '400px'],
+            btn: ['提交', '取消'] //可以无限个按钮
+            , yes: function (index, layero) {
+                layer.load()
+                $.ajax({
+                    url: 'sys/api_mapping/update',
+                    data: $("#gateway-edit-form").serialize(),
+                    method: 'post',
+                    success: function (result) {
+                        if (result.status) {
+                            table.reload('gateway-table', {});
+                            layer.close(index);
+                        } else {
+                            alert(result.message)
+                        }
+                        layer.closeAll('loading');
+                    }
+                })
+            }, success: function (layero, index) {
+                form.render()
+                if (data != null) {
+                    form.val("gateway-edit-form", data);
+                    form.val("gateway-edit-form", {
+                        "state": data.state + ""
+                    });
+                }
+            }
+        });
+    }
+
+    form.on('submit(gateway-table)', function (data) {
+        table.reload('gateway-table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where: data.field
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+
+    })
+    ;
+
+</script>
+
+<script type="text/html" id="gateway-edit-layer">
+    <form id="gateway-edit-form" style="width: 80%" class="layui-form" lay-filter="gateway-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="gatewayApiName" required lay-verify="required" placeholder="请输入角色名"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="insideApiUrl" required lay-verify="required" placeholder="请输入备注"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">serviceId</label>
+            <div class="layui-input-block">
+                <input type="text" name="serviceId" required lay-verify="required" placeholder="请输入备注"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="description" required lay-verify="required" placeholder="请输入备注"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" title="有效" value="1" checked/>
+                <input type="radio" name="state" title="无效" value="0"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否幂等</label>
+            <div class="layui-input-block">
+                <input type="radio" name="idempotents" title="幂等" value="1" checked/>
+                <input type="radio" name="idempotents" title="非幂等" value="0"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否收费</label>
+            <div class="layui-input-block">
+                <input type="radio" name="needfee" title="收费" value="1" checked/>
+                <input type="radio" name="needfee" title="免费" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>

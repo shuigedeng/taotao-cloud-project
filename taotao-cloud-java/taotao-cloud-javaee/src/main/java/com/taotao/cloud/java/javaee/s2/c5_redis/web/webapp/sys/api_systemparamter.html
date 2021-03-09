@@ -1,0 +1,184 @@
+<form action="#" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>名称:</label>
+            <div class="layui-inline">
+                <input type="text" name="name" autocomplete="off" placeholder="请输入名称"
+                       class="layui-input">
+            </div>
+            状态:
+            <div class="layui-inline">
+                <select name="state">
+                    <option value="">请选择</option>
+                    <option value="0">无效</option>
+                    <option value="1">有效</option>
+                </select>
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="systemparamter-table">搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="systemparamter-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="systemparamter-systemparamter-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-systemparamter">编辑</a>
+</script>
+<table class="layui-table" lay-filter="systemparamter-table" id="systemparamter-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+        form.render();
+        table.render({
+            id: "systemparamter-table",
+            elem: '#systemparamter-table'
+            , toolbar: '#systemparamter-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/systemparaters/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', sort: true}
+                , {field: 'name', title: '名称'}
+                , {field: 'description', title: '描述'}
+                , {
+                    field: 'state', title: '状态', templet: function (data) {
+                        return (data.state == 1) ? '<span class="layui-badge layui-bg-green">有效</span>' : '<span class="layui-badge layui-bg-red" >无效</span>'
+                    }
+                }
+                , {fixed: 'right', title: '操作', toolbar: '#systemparamter-systemparamter-bar', width: 180}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(systemparamter-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('systemparamter-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/systemparaters/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('systemparamter-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+            ;
+        ;
+    });
+    //监听行工具事件
+    table.on('tool(systemparamter-table)', function (obj) {
+        var data = obj.data;
+        switch (obj.event) {
+            case 'edit-systemparamter': {
+                openEditWindow(data);
+                break;
+            }
+
+        }
+    });
+
+    function openEditWindow(data) {
+        layer.open({
+            type: 1,
+            content: $('#systemparamter-edit-layer').html(),
+            title: '编辑'
+            , area: ['500px', '400px'],
+            btn: ['提交', '取消'] //可以无限个按钮
+            , yes: function (index, layero) {
+                layer.load()
+                $.ajax({
+                    url: "/sys/systemparaters/" + (data == null ? 'add' : 'update'),
+                  //  url: '/sys/systemparaters/update',
+                    data: $("#systemparamter-edit-form").serialize(),
+                    method: 'post',
+                    success: function (result) {
+                        if (result.status) {
+                            table.reload('systemparamter-table', {});
+                            layer.close(index);
+                        } else {
+                            alert(result.message)
+                        }
+                        layer.closeAll('loading');
+                    }
+                })
+            }, success: function (layero, index) {
+                form.render()
+                if (data != null) {
+                    form.val("systemparamter-edit-form", data);
+                    form.val("systemparamter-edit-form", {
+                        "state": data.state + ""
+                    });
+                }
+            }
+        });
+    }
+
+    form.on('submit(systemparamter-table)', function (data) {
+        table.reload('systemparamter-table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where: data.field
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+
+    })
+    ;
+
+</script>
+
+<script type="text/html" id="systemparamter-edit-layer">
+    <form id="systemparamter-edit-form" style="width: 80%" class="layui-form" lay-filter="systemparamter-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请请输入参数名"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="description" required lay-verify="required" placeholder="请输入备注"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" title="有效" value="1" checked/>
+                <input type="radio" name="state" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>

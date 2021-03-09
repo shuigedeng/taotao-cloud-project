@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.openapi.web.master.mapper.CustomerMapper">
+
+
+    <insert id="insertCustomer"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `customer`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="username!=null">
+                        `username`,
+                    </if>
+                    <if test="password!=null">
+                        `password`,
+                    </if>
+                    <if test="nickname!=null">
+                        `nickname`,
+                    </if>
+                    <if test="money!=null">
+                        `money`,
+                    </if>
+                    <if test="address!=null">
+                        `address`,
+                    </if>
+                    <if test="state!=null">
+                        `state`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="username!=null">
+                    #{username},
+                </if>
+                <if test="password!=null">
+                    #{password},
+                </if>
+                <if test="nickname!=null">
+                    #{nickname},
+                </if>
+                <if test="money!=null">
+                    #{money},
+                </if>
+                <if test="address!=null">
+                    #{address},
+                </if>
+                <if test="state!=null">
+                    #{state},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateCustomer">
+        UPDATE `customer`
+        SET
+        <trim suffixOverrides=",">
+            <if test="username != null and username!=''">
+                `username` = #{username},
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password},
+            </if>
+            <if test="nickname != null and nickname!=''">
+                `nickname` = #{nickname},
+            </if>
+            <if test="money != null">
+                `money` = #{money},
+            </if>
+            <if test="address != null and address!=''">
+                `address` = #{address},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `customer`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.username != null and set.username!=''">
+            `username` = #{set.username},
+        </if>
+        <if test="set.password != null and set.password!=''">
+            `password` = #{set.password},
+        </if>
+        <if test="set.nickname != null and set.nickname!=''">
+            `nickname` = #{set.nickname},
+        </if>
+        <if test="set.money != null">
+            `money` = #{set.money},
+        </if>
+        <if test="set.address != null and set.address!=''">
+            `address` = #{set.address},
+        </if>
+        <if test="set.state != null">
+            `state` = #{set.state},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.usernameList != null">
+                    `username` in
+                    <foreach collection="where.usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyUsername!=null and where.fuzzyUsername.size()>0">
+                (
+                <foreach collection="where.fuzzyUsername"  separator="or" item="item">
+                    `Username` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyUsername!=null and where.rightFuzzyUsername.size()>0">
+                (
+                <foreach collection="where.rightFuzzyUsername"  separator="or" item="item">
+                    `Username` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.passwordList != null">
+                    `password` in
+                    <foreach collection="where.passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyPassword!=null and where.fuzzyPassword.size()>0">
+                (
+                <foreach collection="where.fuzzyPassword"  separator="or" item="item">
+                    `Password` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyPassword!=null and where.rightFuzzyPassword.size()>0">
+                (
+                <foreach collection="where.rightFuzzyPassword"  separator="or" item="item">
+                    `Password` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.nicknameList != null">
+                    `nickname` in
+                    <foreach collection="where.nicknameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyNickname!=null and where.fuzzyNickname.size()>0">
+                (
+                <foreach collection="where.fuzzyNickname"  separator="or" item="item">
+                    `Nickname` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyNickname!=null and where.rightFuzzyNickname.size()>0">
+                (
+                <foreach collection="where.rightFuzzyNickname"  separator="or" item="item">
+                    `Nickname` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.moneyList != null">
+                    `money` in
+                    <foreach collection="where.moneyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.moneySt !=null">
+                `money` >= #{where.moneySt} and
+            </if>
+            <if test="where.moneyEd!=null">
+                `money` &lt;= #{where.moneyEd} and
+            </if>
+                <if test="where.addressList != null">
+                    `address` in
+                    <foreach collection="where.addressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyAddress!=null and where.fuzzyAddress.size()>0">
+                (
+                <foreach collection="where.fuzzyAddress"  separator="or" item="item">
+                    `Address` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyAddress!=null and where.rightFuzzyAddress.size()>0">
+                (
+                <foreach collection="where.rightFuzzyAddress"  separator="or" item="item">
+                    `Address` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.stateList != null">
+                    `state` in
+                    <foreach collection="where.stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.stateSt !=null">
+                `state` >= #{where.stateSt} and
+            </if>
+            <if test="where.stateEd!=null">
+                `state` &lt;= #{where.stateEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.qianfeng.openapi.web.master.pojo.Customer" id="CustomerMap">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="nickname" column="nickname"/>
+        <result property="money" column="money"/>
+        <result property="address" column="address"/>
+        <result property="state" column="state"/>
+    </resultMap>
+    <select id="getCustomerById" parameterType="int" resultMap="CustomerMap">
+        select
+        <include refid="baseResult"></include>
+        from  `Customer`
+
+        where id = #{id}
+
+    </select>
+
+    <select id="getAllCustomer" resultMap="CustomerMap">
+        select
+        <include refid="baseResult"></include>
+        from  `Customer`
+
+    </select>
+
+    <select id="queryCustomer" resultMap="CustomerMap">
+        select
+        <include refid="baseResult"></include>
+        from  `customer`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test="nickname != null and nickname!=''">
+                `nickname` = #{nickname} and
+            </if>
+            <if test="money != null">
+                `money` = #{money} and
+            </if>
+            <if test="address != null and address!=''">
+                `address` = #{address} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Customer$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="usernameList != null">
+                    `username` in
+                    <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="passwordList != null">
+                    `password` in
+                    <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="nicknameList != null">
+                    `nickname` in
+                    <foreach collection="nicknameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyNickname!=null and fuzzyNickname.size()>0">
+                    (
+                    <foreach collection="fuzzyNickname"  separator="or" item="item">
+                        `Nickname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNickname!=null and rightFuzzyNickname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNickname"  separator="or" item="item">
+                        `Nickname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="moneyList != null">
+                    `money` in
+                    <foreach collection="moneyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="moneySt !=null">
+                    `money` >= #{moneySt} and
+                </if>
+                <if test="moneyEd!=null">
+                    `money` &lt;= #{moneyEd} and
+                </if>
+                <if test="addressList != null">
+                    `address` in
+                    <foreach collection="addressList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyAddress!=null and fuzzyAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyAddress"  separator="or" item="item">
+                        `Address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddress!=null and rightFuzzyAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddress"  separator="or" item="item">
+                        `Address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="stateList != null">
+                    `state` in
+                    <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryCustomerLimit1" resultMap="CustomerMap">
+        select
+        <include refid="baseResult"></include>
+        from  `customer`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+            <if test="password != null and password!=''">
+                `password` = #{password} and
+            </if>
+            <if test="nickname != null and nickname!=''">
+                `nickname` = #{nickname} and
+            </if>
+            <if test="money != null">
+                `money` = #{money} and
+            </if>
+            <if test="address != null and address!=''">
+                `address` = #{address} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Customer$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="usernameList != null">
+                        `username` in
+                        <foreach collection="usernameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyUsername!=null and fuzzyUsername.size()>0">
+                    (
+                    <foreach collection="fuzzyUsername"  separator="or" item="item">
+                        `Username` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyUsername!=null and rightFuzzyUsername.size()>0">
+                    (
+                    <foreach collection="rightFuzzyUsername"  separator="or" item="item">
+                        `Username` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="passwordList != null">
+                        `password` in
+                        <foreach collection="passwordList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyPassword!=null and fuzzyPassword.size()>0">
+                    (
+                    <foreach collection="fuzzyPassword"  separator="or" item="item">
+                        `Password` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyPassword!=null and rightFuzzyPassword.size()>0">
+                    (
+                    <foreach collection="rightFuzzyPassword"  separator="or" item="item">
+                        `Password` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="nicknameList != null">
+                        `nickname` in
+                        <foreach collection="nicknameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyNickname!=null and fuzzyNickname.size()>0">
+                    (
+                    <foreach collection="fuzzyNickname"  separator="or" item="item">
+                        `Nickname` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyNickname!=null and rightFuzzyNickname.size()>0">
+                    (
+                    <foreach collection="rightFuzzyNickname"  separator="or" item="item">
+                        `Nickname` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="moneyList != null">
+                        `money` in
+                        <foreach collection="moneyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="moneySt !=null">
+                    `money` >= #{moneySt} and
+                </if>
+                <if test="moneyEd!=null">
+                    `money` &lt;= #{moneyEd} and
+                </if>
+                    <if test="addressList != null">
+                        `address` in
+                        <foreach collection="addressList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyAddress!=null and fuzzyAddress.size()>0">
+                    (
+                    <foreach collection="fuzzyAddress"  separator="or" item="item">
+                        `Address` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyAddress!=null and rightFuzzyAddress.size()>0">
+                    (
+                    <foreach collection="rightFuzzyAddress"  separator="or" item="item">
+                        `Address` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="stateList != null">
+                        `state` in
+                        <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `username`,
+        `password`,
+        `nickname`,
+        `money`,
+        `address`,
+        `state`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Customer$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.username==true">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.fetchFields.password==true">
+                        `password`,
+                    </if>
+                    <if test="fetchFields.fetchFields.nickname==true">
+                        `nickname`,
+                    </if>
+                    <if test="fetchFields.fetchFields.money==true">
+                        `money`,
+                    </if>
+                    <if test="fetchFields.fetchFields.address==true">
+                        `address`,
+                    </if>
+                    <if test="fetchFields.fetchFields.state==true">
+                        `state`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.username==null">
+                        `username`,
+                    </if>
+                    <if test="fetchFields.excludeFields.password==null">
+                        `password`,
+                    </if>
+                    <if test="fetchFields.excludeFields.nickname==null">
+                        `nickname`,
+                    </if>
+                    <if test="fetchFields.excludeFields.money==null">
+                        `money`,
+                    </if>
+                    <if test="fetchFields.excludeFields.address==null">
+                        `address`,
+                    </if>
+                    <if test="fetchFields.excludeFields.state==null">
+                        `state`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Customer$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

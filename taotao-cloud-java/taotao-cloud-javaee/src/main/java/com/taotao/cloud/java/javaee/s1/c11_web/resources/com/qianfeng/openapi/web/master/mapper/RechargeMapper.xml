@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.openapi.web.master.mapper.RechargeMapper">
+
+    <select id="getRechargeMapById" parameterType="int" resultMap="RechargeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `recharge`
+
+        where id = #{id}
+
+    </select>
+
+    <select id="getAllRecharges" resultMap="RechargeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `recharge`
+
+    </select>
+    <insert id="insertRecharge"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `recharge`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="cusId!=null">
+                        `cusId`,
+                    </if>
+                    <if test="orderId!=null">
+                        `orderId`,
+                    </if>
+                    <if test="createtime!=null">
+                        `createtime`,
+                    </if>
+                    <if test="updatetime!=null">
+                        `updatetime`,
+                    </if>
+                    <if test="money!=null">
+                        `money`,
+                    </if>
+                    <if test="state!=null">
+                        `state`,
+                    </if>
+                    <if test="paymenttype!=null">
+                        `paymenttype`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="cusId!=null">
+                    #{cusId},
+                </if>
+                <if test="orderId!=null">
+                    #{orderId},
+                </if>
+                <if test="createtime!=null">
+                    #{createtime},
+                </if>
+                <if test="updatetime!=null">
+                    #{updatetime},
+                </if>
+                <if test="money!=null">
+                    #{money},
+                </if>
+                <if test="state!=null">
+                    #{state},
+                </if>
+                <if test="paymenttype!=null">
+                    #{paymenttype},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateRecharge">
+        UPDATE `recharge`
+        SET
+        <trim suffixOverrides=",">
+            <if test="cusId != null">
+                `cusId` = #{cusId},
+            </if>
+            <if test="orderId != null">
+                `orderId` = #{orderId},
+            </if>
+            <if test="createtime != null">
+                `createtime` = #{createtime},
+            </if>
+            <if test="updatetime != null">
+                `updatetime` = #{updatetime},
+            </if>
+            <if test="money != null">
+                `money` = #{money},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+            <if test="paymenttype != null">
+                `paymenttype` = #{paymenttype},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `recharge`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.cusId != null">
+            `cusId` = #{set.cusId},
+        </if>
+        <if test="set.orderId != null">
+            `orderId` = #{set.orderId},
+        </if>
+        <if test="set.createtime != null">
+            `createtime` = #{set.createtime},
+        </if>
+        <if test="set.updatetime != null">
+            `updatetime` = #{set.updatetime},
+        </if>
+        <if test="set.money != null">
+            `money` = #{set.money},
+        </if>
+        <if test="set.state != null">
+            `state` = #{set.state},
+        </if>
+        <if test="set.paymenttype != null">
+            `paymenttype` = #{set.paymenttype},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.cusIdList != null">
+                    `cusId` in
+                    <foreach collection="where.cusIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.cusIdSt !=null">
+                `cusId` >= #{where.cusIdSt} and
+            </if>
+            <if test="where.cusIdEd!=null">
+                `cusId` &lt;= #{where.cusIdEd} and
+            </if>
+                <if test="where.orderIdList != null">
+                    `orderId` in
+                    <foreach collection="where.orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.orderIdSt !=null">
+                `orderId` >= #{where.orderIdSt} and
+            </if>
+            <if test="where.orderIdEd!=null">
+                `orderId` &lt;= #{where.orderIdEd} and
+            </if>
+                <if test="where.createtimeList != null">
+                    `createtime` in
+                    <foreach collection="where.createtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.createtimeSt !=null">
+                `createtime` >= #{where.createtimeSt} and
+            </if>
+            <if test="where.createtimeEd!=null">
+                `createtime` &lt;= #{where.createtimeEd} and
+            </if>
+                <if test="where.updatetimeList != null">
+                    `updatetime` in
+                    <foreach collection="where.updatetimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.updatetimeSt !=null">
+                `updatetime` >= #{where.updatetimeSt} and
+            </if>
+            <if test="where.updatetimeEd!=null">
+                `updatetime` &lt;= #{where.updatetimeEd} and
+            </if>
+                <if test="where.moneyList != null">
+                    `money` in
+                    <foreach collection="where.moneyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.moneySt !=null">
+                `money` >= #{where.moneySt} and
+            </if>
+            <if test="where.moneyEd!=null">
+                `money` &lt;= #{where.moneyEd} and
+            </if>
+                <if test="where.stateList != null">
+                    `state` in
+                    <foreach collection="where.stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.stateSt !=null">
+                `state` >= #{where.stateSt} and
+            </if>
+            <if test="where.stateEd!=null">
+                `state` &lt;= #{where.stateEd} and
+            </if>
+                <if test="where.paymenttypeList != null">
+                    `paymenttype` in
+                    <foreach collection="where.paymenttypeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.paymenttypeSt !=null">
+                `paymenttype` >= #{where.paymenttypeSt} and
+            </if>
+            <if test="where.paymenttypeEd!=null">
+                `paymenttype` &lt;= #{where.paymenttypeEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.qianfeng.openapi.web.master.pojo.Recharge" id="RechargeMap">
+        <result property="id" column="id"/>
+        <result property="cusId" column="cusId"/>
+        <result property="orderId" column="orderId"/>
+        <result property="createtime" column="createtime"/>
+        <result property="updatetime" column="updatetime"/>
+        <result property="money" column="money"/>
+        <result property="state" column="state"/>
+        <result property="paymenttype" column="paymenttype"/>
+    </resultMap>
+
+
+    <select id="queryRecharge" resultMap="RechargeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `recharge`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="cusId != null">
+                `cusId` = #{cusId} and
+            </if>
+            <if test="orderId != null">
+                `orderId` = #{orderId} and
+            </if>
+            <if test="createtime != null">
+                `createtime` = #{createtime} and
+            </if>
+            <if test="updatetime != null">
+                `updatetime` = #{updatetime} and
+            </if>
+            <if test="money != null">
+                `money` = #{money} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test="paymenttype != null">
+                `paymenttype` = #{paymenttype} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Recharge$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="cusIdList != null">
+                    `cusId` in
+                    <foreach collection="cusIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="cusIdSt !=null">
+                    `cusId` >= #{cusIdSt} and
+                </if>
+                <if test="cusIdEd!=null">
+                    `cusId` &lt;= #{cusIdEd} and
+                </if>
+                <if test="orderIdList != null">
+                    `orderId` in
+                    <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="orderIdSt !=null">
+                    `orderId` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `orderId` &lt;= #{orderIdEd} and
+                </if>
+                <if test="createtimeList != null">
+                    `createtime` in
+                    <foreach collection="createtimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="createtimeSt !=null">
+                    `createtime` >= #{createtimeSt} and
+                </if>
+                <if test="createtimeEd!=null">
+                    `createtime` &lt;= #{createtimeEd} and
+                </if>
+                <if test="updatetimeList != null">
+                    `updatetime` in
+                    <foreach collection="updatetimeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="updatetimeSt !=null">
+                    `updatetime` >= #{updatetimeSt} and
+                </if>
+                <if test="updatetimeEd!=null">
+                    `updatetime` &lt;= #{updatetimeEd} and
+                </if>
+                <if test="moneyList != null">
+                    `money` in
+                    <foreach collection="moneyList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="moneySt !=null">
+                    `money` >= #{moneySt} and
+                </if>
+                <if test="moneyEd!=null">
+                    `money` &lt;= #{moneyEd} and
+                </if>
+                <if test="stateList != null">
+                    `state` in
+                    <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+                <if test="paymenttypeList != null">
+                    `paymenttype` in
+                    <foreach collection="paymenttypeList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="paymenttypeSt !=null">
+                    `paymenttype` >= #{paymenttypeSt} and
+                </if>
+                <if test="paymenttypeEd!=null">
+                    `paymenttype` &lt;= #{paymenttypeEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryRechargeLimit1" resultMap="RechargeMap">
+        select
+        <include refid="baseResult"></include>
+        from  `recharge`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="cusId != null">
+                `cusId` = #{cusId} and
+            </if>
+            <if test="orderId != null">
+                `orderId` = #{orderId} and
+            </if>
+            <if test="createtime != null">
+                `createtime` = #{createtime} and
+            </if>
+            <if test="updatetime != null">
+                `updatetime` = #{updatetime} and
+            </if>
+            <if test="money != null">
+                `money` = #{money} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test="paymenttype != null">
+                `paymenttype` = #{paymenttype} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Recharge$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="cusIdList != null">
+                        `cusId` in
+                        <foreach collection="cusIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="cusIdSt !=null">
+                    `cusId` >= #{cusIdSt} and
+                </if>
+                <if test="cusIdEd!=null">
+                    `cusId` &lt;= #{cusIdEd} and
+                </if>
+                    <if test="orderIdList != null">
+                        `orderId` in
+                        <foreach collection="orderIdList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="orderIdSt !=null">
+                    `orderId` >= #{orderIdSt} and
+                </if>
+                <if test="orderIdEd!=null">
+                    `orderId` &lt;= #{orderIdEd} and
+                </if>
+                    <if test="createtimeList != null">
+                        `createtime` in
+                        <foreach collection="createtimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="createtimeSt !=null">
+                    `createtime` >= #{createtimeSt} and
+                </if>
+                <if test="createtimeEd!=null">
+                    `createtime` &lt;= #{createtimeEd} and
+                </if>
+                    <if test="updatetimeList != null">
+                        `updatetime` in
+                        <foreach collection="updatetimeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="updatetimeSt !=null">
+                    `updatetime` >= #{updatetimeSt} and
+                </if>
+                <if test="updatetimeEd!=null">
+                    `updatetime` &lt;= #{updatetimeEd} and
+                </if>
+                    <if test="moneyList != null">
+                        `money` in
+                        <foreach collection="moneyList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="moneySt !=null">
+                    `money` >= #{moneySt} and
+                </if>
+                <if test="moneyEd!=null">
+                    `money` &lt;= #{moneyEd} and
+                </if>
+                    <if test="stateList != null">
+                        `state` in
+                        <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+                    <if test="paymenttypeList != null">
+                        `paymenttype` in
+                        <foreach collection="paymenttypeList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="paymenttypeSt !=null">
+                    `paymenttype` >= #{paymenttypeSt} and
+                </if>
+                <if test="paymenttypeEd!=null">
+                    `paymenttype` &lt;= #{paymenttypeEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `cusId`,
+        `orderId`,
+        `createtime`,
+        `updatetime`,
+        `money`,
+        `state`,
+        `paymenttype`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Recharge$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.cusId==true">
+                        `cusId`,
+                    </if>
+                    <if test="fetchFields.fetchFields.orderId==true">
+                        `orderId`,
+                    </if>
+                    <if test="fetchFields.fetchFields.createtime==true">
+                        `createtime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.updatetime==true">
+                        `updatetime`,
+                    </if>
+                    <if test="fetchFields.fetchFields.money==true">
+                        `money`,
+                    </if>
+                    <if test="fetchFields.fetchFields.state==true">
+                        `state`,
+                    </if>
+                    <if test="fetchFields.fetchFields.paymenttype==true">
+                        `paymenttype`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.cusId==null">
+                        `cusId`,
+                    </if>
+                    <if test="fetchFields.excludeFields.orderId==null">
+                        `orderId`,
+                    </if>
+                    <if test="fetchFields.excludeFields.createtime==null">
+                        `createtime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.updatetime==null">
+                        `updatetime`,
+                    </if>
+                    <if test="fetchFields.excludeFields.money==null">
+                        `money`,
+                    </if>
+                    <if test="fetchFields.excludeFields.state==null">
+                        `state`,
+                    </if>
+                    <if test="fetchFields.excludeFields.paymenttype==null">
+                        `paymenttype`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.qianfeng.openapi.web.master.pojo.Recharge$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

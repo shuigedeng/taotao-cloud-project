@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.openapi.web.master.mapper.ApiSystemparamMapper">
+
+
+    <insert id="insertApiSystemparam"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `api_systemparam`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="name!=null">
+                        `name`,
+                    </if>
+                    <if test="description!=null">
+                        `description`,
+                    </if>
+                    <if test="state!=null">
+                        `state`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="name!=null">
+                    #{name},
+                </if>
+                <if test="description!=null">
+                    #{description},
+                </if>
+                <if test="state!=null">
+                    #{state},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateApiSystemparam">
+        UPDATE `api_systemparam`
+        SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name!=''">
+                `name` = #{name},
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description},
+            </if>
+            <if test="state != null">
+                `state` = #{state},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+    <update id="update">
+        UPDATE `api_systemparam`
+        SET
+        <trim suffixOverrides=",">
+        <if test="set.name != null and set.name!=''">
+            `name` = #{set.name},
+        </if>
+        <if test="set.description != null and set.description!=''">
+            `description` = #{set.description},
+        </if>
+        <if test="set.state != null">
+            `state` = #{set.state},
+        </if>
+        </trim>
+        <trim prefix="where" suffixOverrides="and | or">
+                <if test="where.idList != null">
+                    `id` in
+                    <foreach collection="where.idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.idSt !=null">
+                `id` >= #{where.idSt} and
+            </if>
+            <if test="where.idEd!=null">
+                `id` &lt;= #{where.idEd} and
+            </if>
+                <if test="where.nameList != null">
+                    `name` in
+                    <foreach collection="where.nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyName!=null and where.fuzzyName.size()>0">
+                (
+                <foreach collection="where.fuzzyName"  separator="or" item="item">
+                    `Name` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyName!=null and where.rightFuzzyName.size()>0">
+                (
+                <foreach collection="where.rightFuzzyName"  separator="or" item="item">
+                    `Name` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.descriptionList != null">
+                    `description` in
+                    <foreach collection="where.descriptionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test ="where.fuzzyDescription!=null and where.fuzzyDescription.size()>0">
+                (
+                <foreach collection="where.fuzzyDescription"  separator="or" item="item">
+                    `Description` like concat('%',#{item},'%')
+                </foreach>
+                ) and
+            </if>
+            <if test ="where.rightFuzzyDescription!=null and where.rightFuzzyDescription.size()>0">
+                (
+                <foreach collection="where.rightFuzzyDescription"  separator="or" item="item">
+                    `Description` like concat(#{item},'%')
+                </foreach>
+                ) and
+            </if>
+                <if test="where.stateList != null">
+                    `state` in
+                    <foreach collection="where.stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+            <if test="where.stateSt !=null">
+                `state` >= #{where.stateSt} and
+            </if>
+            <if test="where.stateEd!=null">
+                `state` &lt;= #{where.stateEd} and
+            </if>
+        </trim>
+    </update>
+
+
+    <resultMap type="com.qianfeng.openapi.web.master.pojo.ApiSystemparam" id="ApiSystemparamMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="state" column="state"/>
+    </resultMap>
+
+<select id="getMappingById" parameterType="int" resultMap="ApiSystemparamMap">
+    select
+    <include refid="baseResult"></include>
+    from  `api_systemparam`
+    where id =#{id}
+</select>
+
+
+    <select id="queryApiSystemparam" resultMap="ApiSystemparamMap">
+        select
+        <include refid="baseResult"></include>
+        from  `api_systemparam`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.ApiSystemparam$QueryBuilder) == true">
+                <if test="idList != null">
+                    `id` in
+                    <foreach collection="idList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                <if test="nameList != null">
+                    `name` in
+                    <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="descriptionList != null">
+                    `description` in
+                    <foreach collection="descriptionList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test ="fuzzyDescription!=null and fuzzyDescription.size()>0">
+                    (
+                    <foreach collection="fuzzyDescription"  separator="or" item="item">
+                        `Description` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDescription!=null and rightFuzzyDescription.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDescription"  separator="or" item="item">
+                        `Description` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test="stateList != null">
+                    `state` in
+                    <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                        #{item}
+                    </foreach> and
+                </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryApiSystemparamLimit1" resultMap="ApiSystemparamMap">
+        select
+        <include refid="baseResult"></include>
+        from  `api_systemparam`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="id != null">
+                `id` = #{id} and
+            </if>
+            <if test="name != null and name!=''">
+                `name` = #{name} and
+            </if>
+            <if test="description != null and description!=''">
+                `description` = #{description} and
+            </if>
+            <if test="state != null">
+                `state` = #{state} and
+            </if>
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.ApiSystemparam$QueryBuilder) == true">
+                    <if test="idList != null">
+                        `id` in
+                        <foreach collection="idList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="idSt !=null">
+                    `id` >= #{idSt} and
+                </if>
+                <if test="idEd!=null">
+                    `id` &lt;= #{idEd} and
+                </if>
+                    <if test="nameList != null">
+                        `name` in
+                        <foreach collection="nameList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyName!=null and fuzzyName.size()>0">
+                    (
+                    <foreach collection="fuzzyName"  separator="or" item="item">
+                        `Name` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyName!=null and rightFuzzyName.size()>0">
+                    (
+                    <foreach collection="rightFuzzyName"  separator="or" item="item">
+                        `Name` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="descriptionList != null">
+                        `description` in
+                        <foreach collection="descriptionList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test ="fuzzyDescription!=null and fuzzyDescription.size()>0">
+                    (
+                    <foreach collection="fuzzyDescription"  separator="or" item="item">
+                        `Description` like concat('%',#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                <if test ="rightFuzzyDescription!=null and rightFuzzyDescription.size()>0">
+                    (
+                    <foreach collection="rightFuzzyDescription"  separator="or" item="item">
+                        `Description` like concat(#{item},'%')
+                    </foreach>
+                    ) and
+                </if>
+                    <if test="stateList != null">
+                        `state` in
+                        <foreach collection="stateList" close=")" open="(" separator="," item="item">
+                            #{item}
+                        </foreach> and
+                    </if>
+                <if test="stateSt !=null">
+                    `state` >= #{stateSt} and
+                </if>
+                <if test="stateEd!=null">
+                    `state` &lt;= #{stateEd} and
+                </if>
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `name`,
+        `description`,
+        `state`,
+        </trim>
+    </sql>
+
+
+
+    <sql id="baseResult">
+        <trim suffixOverrides=",">
+            <if test = "(_parameter instanceof com.qianfeng.openapi.web.master.pojo.ApiSystemparam$QueryBuilder) == true">
+
+                <if test="fetchFields==null">
+                    <include refid="allResult"></include>
+                </if>
+                <if test="fetchFields!=null">
+                    <if test="fetchFields.AllFields !=null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields ==null and fetchFields.fetchFields==null and fetchFields.excludeFields==null and fetchFields.otherFields==null">
+                        <include refid="allResult"></include>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.fetchFields!=null">
+                    <if test="fetchFields.fetchFields.id==true">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.fetchFields.name==true">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.fetchFields.description==true">
+                        `description`,
+                    </if>
+                    <if test="fetchFields.fetchFields.state==true">
+                        `state`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.AllFields==null and fetchFields.excludeFields!=null">
+                    <if test="fetchFields.excludeFields.id==null">
+                        `id`,
+                    </if>
+                    <if test="fetchFields.excludeFields.name==null">
+                        `name`,
+                    </if>
+                    <if test="fetchFields.excludeFields.description==null">
+                        `description`,
+                    </if>
+                    <if test="fetchFields.excludeFields.state==null">
+                        `state`,
+                    </if>
+                    </if>
+                    <if test="fetchFields.otherFields!=null and fetchFields.otherFields.size>0">
+                        <foreach collection="fetchFields.otherFields" index="index" item="item" separator=",">
+                        `#{item}`
+                        </foreach>
+                    </if>
+                </if>
+            </if>
+            <if test="(_parameter instanceof com.qianfeng.openapi.web.master.pojo.ApiSystemparam$QueryBuilder) == false" >
+                <include refid="allResult"></include>
+            </if>
+
+        </trim>
+    </sql>
+
+
+</mapper>

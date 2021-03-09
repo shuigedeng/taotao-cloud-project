@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.openapi.web.master.mapper.ApiMappingMapper">
+
+    <insert id="addApiMapping" parameterType="ApiMapping" useGeneratedKeys="true" keyProperty="id">
+       insert into api_mapping(gatewayApiName,insideApiUrl,state,description,serviceId,needfee,idempotents)
+               VALUES (#{gatewayApiName},#{insideApiUrl},#{state},#{description},#{serviceId},#{needfee},#{idempotents})
+    </insert>
+
+    <update id="updateApiMapping" parameterType="ApiMapping">
+      update api_mapping
+      <set>
+          <if test="gatewayApiName!=null and gatewayApiName!=''">gatewayApiName=#{gatewayApiName},</if>
+          <if test="insideApiUrl!=null and insideApiUrl!=''">insideApiUrl=#{insideApiUrl},</if>
+          <if test="description!=null and description!=''">description=#{description},</if>
+          <if test="serviceId!=null and serviceId!=''">serviceId=#{serviceId},</if>
+          <if test="state!=null">state=#{state},</if>
+          <if test="idempotents!=null">idempotents=#{idempotents},</if>
+          <if test="needfee!=null">needfee=#{needfee},</if>
+      </set>
+      WHERE ID=#{id}
+    </update>
+
+    <select id="getMappingById" parameterType="int" resultType="ApiMapping">
+      select ID,gatewayApiName,insideApiUrl,state,description,serviceId,idempotents,needfee
+        from api_mapping
+        WHERE ID=#{id}
+    </select>
+    <select id="getMappingList" parameterType="ApiMapping" resultType="ApiMapping">
+      select ID,gatewayApiName,insideApiUrl,state,description,serviceId,idempotents,needfee
+        from api_mapping
+      <where>
+          <if test="gatewayApiName!=null and gatewayApiName!=''">gatewayApiName=#{gatewayApiName}</if>
+          <if test="state!=null"> and state=#{state}</if>
+      </where>
+    </select>
+</mapper>
+    

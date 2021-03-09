@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <context:component-scan base-package="com.qianfeng.openapi.**.controller"/>
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        &lt;!&ndash; <property name="prefix" value="/"></property> &ndash;&gt;-->
+<!--        <property name="suffix" value=".jsp"></property>-->
+<!--    </bean>-->
+    <!-- 需要将转换器设置给注解驱动 -->
+    <mvc:annotation-driven ></mvc:annotation-driven>
+
+    <!--设置转换器 ,将自定义的转换器装配进来 -->
+<!--    <bean id="conversionServiceFactoryBean"-->
+<!--          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+<!--        <property name="converters">-->
+<!--            <set>-->
+<!--                <bean class="com.qianfeng.p2p.web.MyDateConvert"></bean>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <!-- 配置resource标签,此标签内部的地址不会被拦截 -->
+    <mvc:resources location="/easyui/" mapping="/easyui/**"></mvc:resources>
+    <mvc:resources location="/layui/" mapping="/layui/**"></mvc:resources>
+    <mvc:resources location="/sys/" mapping="/sys/**"></mvc:resources>
+    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+
+<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+<!--        <property name="defaultEncoding" value="utf-8"></property>-->
+<!--        <property name="maxUploadSize" value="5120000"></property>-->
+<!--    </bean>-->
+</beans>

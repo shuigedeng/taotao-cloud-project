@@ -1,0 +1,37 @@
+# 指定Eureka服务地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:8761/eureka,http://root:root@localhost:8762/eureka
+
+#指定服务的名称
+spring:
+  application:
+    name: ZUUL
+
+# zuul的配置
+zuul:
+  # 基于服务名忽略服务，无法查看
+  # ignored-services: "*"
+  # 监控界面依然可以查看，在访问的时候，404
+  ignored-patterns: /**/search/**
+  # 指定自定义服务(方式一 ， key（服务名）：value（路径）)
+#  routes:
+#    search: /ss/**
+#    customer: /cc/**
+  # 指定自定义服务(方式二)
+  routes:
+    kehu:   # 自定义名称
+      path: /ccc/**     # 映射的路径
+      serviceId: customer   # 服务名称
+
+server:
+  port: 80
+
+# 查看zuul的监控界面（开发时，配置为*，上线，不要配置）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

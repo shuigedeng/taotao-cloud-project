@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body class="layui-container"  >
+
+<div class="layui-row" style="margin-top:10%">
+    <div class="layui-col-xs6 layui-col-md-offset2">
+        <form class="layui-form" action="dologin" method="post" layui-filter="login">
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" lay-verify="text" autocomplete="off" placeholder="请输入账号"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="login" lay-filter="login">登陆</button>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="layui/jquery-1.10.2.min.js"></script>
+<script src="layui/layui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //JavaScript代码区域
+    layui.use('form', function () {
+        var form = layui.form;
+        //自定义验证规则
+        form.verify({
+            password: [/(.+){6,12}$/, '密码必须6到12位']
+        });
+        form.on('submit(login)', function(data){
+            console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+            console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+            console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+            $.ajax({
+                url:"/dologin",
+                method:"post",
+                data:data.field,
+                success:function(json){
+                    if(json.status){
+                        window.location.href="index.html"
+                    }else{
+                        $("#msg").html("登陆失败")
+                    }
+                }
+            })
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+server:
+  # 项目端口
+  port: 8080
+  servlet:
+  # 项目路径
+    context-path: /
+
+# 连接数据库的信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///air?serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    # 视图的前缀和后缀
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.qf.firstspringboot.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 查看sql语句
+logging:
+  level:
+    com.qf.firstspringboot.mapper: DEBUG
+
+
+picPath: D:\xxx\yyy\
+
+aliyun:
+  xxxx: xxxxxxxxxx
+  yyyy: yyyyyyyy
+  zzzz: zzzzzzzzz
+  aaaa: aaaaaaaaa
+  bbbb: bbbbbbbbb
+
+
+
+

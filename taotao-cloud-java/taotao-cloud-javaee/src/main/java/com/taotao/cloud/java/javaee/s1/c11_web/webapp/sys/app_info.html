@@ -1,0 +1,246 @@
+<form action="#" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>公司:</label>
+            <div class="layui-inline">
+                <input type="text" name="corpName" autocomplete="off" placeholder="请输入名称"
+                       class="layui-input">
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="appinfo-table">搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="appinfo-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="appinfo-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-appinfo">编辑</a>
+</script>
+<table class="layui-table" lay-filter="appinfo-table" id="appinfo-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+
+        form.render();
+        table.render({
+            id: "appinfo-table",
+            elem: '#appinfo-table'
+            , cellMinWidth: 80
+            , toolbar: '#appinfo-head-bar'
+            , url: '/sys/app_info/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', sort: true,width:80}
+                , {field: 'corpName', title: '公司'}
+                , {field: 'appName', title: '应用名称'}
+                , {field: 'appKey', title: 'appKey'}
+                , {field: 'appSecret', title: '秘钥'}
+                , {field: 'redirectUrl', title: '回调地址'}
+                , {field: 'limit', title: '日调用量限制'}
+                , {field: 'description', title: '描述'}
+                , {
+                    field: 'state', title: '状态', templet: function (data) {
+                        return (data.state == 1) ? '<span class="layui-badge layui-bg-green">有效</span>' : '<span class="layui-badge layui-bg-red" >无效</span>'
+                    }
+                }
+
+
+                , {fixed: 'right', title: '操作', toolbar: '#appinfo-bar', width: 180}
+            ]]
+        }); //头工具栏事件
+        table.on('toolbar(appinfo-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('appinfo-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/app_info/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('app_info-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+            ;
+            ;
+        });
+        //头工具栏事件
+        table.on('toolbar(appinfo-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+            }
+        });
+        //监听行工具事件
+        table.on('tool(appinfo-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit-appinfo': {
+                    openEditWindow(data);
+                    break;
+                }
+
+            }
+        });
+
+        function openEditWindow(data) {
+            layer.open({
+                type: 1,
+                content: $('#appinfo-edit-layer').html(),
+                title: '编辑'
+                , area: ['550px', '580px'],
+                btn: ['提交', '取消'] //可以无限个按钮
+                , yes: function (index, layero) {
+                    layer.load()
+                    $.ajax({
+                        url: "/sys/app_info/" + (data == null ? 'add' : 'update'),
+                       // url: '/sys/app_info/update',
+                        data: $("#appinfo-edit-form").serialize(),
+                        method: 'post',
+                        success: function (result) {
+                            if (result.status) {
+                                table.reload('appinfo-table', {});
+                                layer.close(index);
+                            } else {
+                                alert(result.message)
+                            }
+                            layer.closeAll('loading');
+                        }
+                    })
+                }, success: function (layero, index) {
+                    form.render()
+                    if (data != null) {
+                        form.val("appinfo-edit-form", data);
+                    }
+                    $.ajax({
+                        url: "sys/customer/tree",
+                        method: "post",
+                        success: function (res) {
+
+                            for (var i = 0; i < res.length; i++) {
+                                if (data&&data.cusId&&data.cusId == res[i].id) {
+                                    $("#customerId").append('<option selected value="' + res[i].id + '">' + res[i].nickname + '</option>');
+                                }else{
+                                    $("#customerId").append('<option value="' + res[i].id + '">' + res[i].nickname + '</option>');
+
+                                }
+                            }
+                            form.render();//后追加到页面的元素，layui不渲染，必须render
+                        }
+                    })
+                }
+            });
+        }
+
+        form.on('submit(appinfo-table)', function (data) {
+            table.reload('appinfo-table', {
+                where: data.field
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+
+    });
+
+</script>
+
+<script type="text/html" id="appinfo-edit-layer">
+    <form id="appinfo-edit-form" style="width: 80%" class="layui-form" lay-filter="appinfo-edit-form">
+        <input type="hidden" name="id">
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">公司名称</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input type="text" name="corpName" required lay-verify="required" placeholder="请输入角色名"-->
+<!--                       autocomplete="off"-->
+<!--                       class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">应用名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="appName" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择所属客户</label>
+            <div class="layui-input-inline">
+                <select name="cusId" id="customerId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">appKey</label>
+            <div class="layui-input-block">
+                <input type="text" name="appKey" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">秘钥</label>
+            <div class="layui-input-block">
+                <input type="text" name="appSecret" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">回调地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="redirectUrl" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">日调用量限制</label>
+            <div class="layui-input-block">
+                <input type="text" name="limit" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="description" required lay-verify="required"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" title="有效" value="1" checked/>
+                <input type="radio" name="state" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>

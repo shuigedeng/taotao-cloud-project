@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.openapi.web.master.mapper.AdminUserMapper">
+
+    <resultMap id="userMap" type="AdminUser">
+        <id property="id" column="ID"/>
+        <result property="status" column="STATUS"/>
+        <result property="realName" column="REAL_NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+    </resultMap>
+
+    <select id="getUserList" parameterType="AdminUser" resultMap="userMap">
+        SELECT
+        ID,
+        EMAIL,
+        REAL_NAME,
+        STATUS
+        FROM ADMIN_USER
+        <where>
+            <if test="email!=null and email!=''">EMAIL=#{email}</if>
+            <if test="realName!=null and realName!=''">and REAL_NAME=#{realName}</if>
+            <if test="status!=null">and STATUS=#{status}</if>
+        </where>
+    </select>
+
+    <select id="getUserByEmail" parameterType="String" resultMap="userMap">
+        SELECT
+            ID,
+            PASSWORD,
+            EMAIL,
+            REAL_NAME,
+            STATUS
+        FROM ADMIN_USER
+        WHERE EMAIL = #{email}
+    </select>
+
+
+    <insert id="addUserRole">
+        INSERT INTO USER_ROLE (ROLE_ID, USER_ID) VALUES (#{roleId}, #{userId})
+    </insert>
+
+    <delete id="deleteUserRole" parameterType="int">
+        DELETE FROM USER_ROLE
+        WHERE USER_ID = #{userId}
+    </delete>
+
+    <select id="getUserRoleIds" parameterType="int" resultType="int">
+        SELECT ROLE_ID
+        FROM USER_ROLE
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="getUserPerms" parameterType="int" resultType="string">
+        SELECT DISTINCT m.perms
+        FROM menu m
+            INNER JOIN role_menu rm ON rm.MENU_ID = m.ID
+            INNER JOIN user_role ur ON rm.ROLE_ID = ur.ROLE_ID
+        WHERE ur.USER_ID = #{userId} AND m.perms IS NOT NULL
+    </select>
+
+    <insert id="addUser" parameterType="AdminUser" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO ADMIN_USER (PASSWORD, EMAIL,REAL_NAME,STATUS)
+            VALUES (#{password},#{email},#{realName},#{status})
+    </insert>
+
+    <update id="updateUser" parameterType="AdminUser">
+        update ADMIN_USER
+        <set>
+            <if test="realName!=null and realName!=''"> REAL_NAME=#{realName},</if>
+            <if test="password!=null and password!=''"> PASSWORD=#{password},</if>
+            <if test="status!=null"> STATUS=#{status},</if>
+        </set>
+        where ID=#{id}
+    </update>
+
+    <select id="getUserById" parameterType="int" resultMap="userMap">
+        SELECT
+            ID,
+            EMAIL,
+            REAL_NAME,
+            STATUS
+        FROM ADMIN_USER
+        WHERE ID = #{id}
+    </select>
+</mapper>
+    

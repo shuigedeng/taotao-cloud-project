@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qianfeng.ssmobject.mapper.UserMapper">
+
+<select id="getAllUsers" resultType="com.qianfeng.ssmobject.pojo.User">
+
+    SELECT * FROM t_user
+
+</select>
+
+    <delete id="delteUserByIds" >
+
+        DELETE FROM t_user
+        <where>
+
+            id in
+
+            <foreach collection="array" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+
+        </where>
+
+
+    </delete>
+</mapper>

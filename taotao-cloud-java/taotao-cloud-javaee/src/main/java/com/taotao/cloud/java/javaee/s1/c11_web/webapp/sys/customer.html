@@ -1,0 +1,260 @@
+<form action="#" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>名称:</label>
+            <div class="layui-inline">
+                <input type="text" name="name" autocomplete="off" placeholder="请输入名称"
+                       class="layui-input">
+            </div>
+            状态:
+            <div class="layui-inline">
+                <select name="state">
+                    <option value="">请选择</option>
+                    <option value="0">无效</option>
+                    <option value="1">有效</option>
+                </select>
+            </div>
+            <button class="layui-btn" lay-submit lay-filter="customer-table">搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/html" id="customer-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="customer-customer-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-customer">编辑</a>
+</script>
+<table class="layui-table" lay-filter="customer-table" id="customer-table">
+</table>
+<script type="text/javascript" >
+    layui.use(['table', 'layer', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var form = layui.form;
+        form.render();
+        table.render({
+            id: "customer-table",
+            elem: '#customer-table'
+            , toolbar: '#customer-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/customer/table' //数据接口
+            , page: true //开启分页
+            , cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', sort: true}
+                , {field: 'username', title: '账号'}
+                , {field: 'nickname', title: '公司名称'}
+                , {field: 'money', title: '账户金额'}
+                , {field: 'address', title: '公司地址'}
+                , {
+                    field: 'state', title: '状态', templet: function (data) {
+                        return (data.state == 1) ? '<span class="layui-badge layui-bg-green">有效</span>' : '<span class="layui-badge layui-bg-red" >无效</span>'
+                    }
+                }
+                , {fixed: 'right', title: '操作', toolbar: '#customer-customer-bar', width: 180}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(customer-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('customer-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/customer/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('customer-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+            ;
+        ;
+    });
+    //监听行工具事件
+    table.on('tool(customer-table)', function (obj) {
+        var data = obj.data;
+        switch (obj.event) {
+            case 'edit-customer': {
+                openEditWindow(data);
+                break;
+            }
+
+        }
+    });
+
+    function openEditWindow(data) {
+        layer.open({
+            type: 1,
+            content: data == null ? $('#customer-add-layer').html():$('#customer-edit-layer').html(),
+            title: '编辑'
+            , area: ['500px', '400px'],
+            btn: ['提交', '取消'] //可以无限个按钮
+            , yes: function (index, layero) {
+                layer.load()
+                $.ajax({
+                    url: "/sys/customer/" + (data == null ? 'add' : 'update'),
+                  //  url: '/sys/customer/update',
+                    data: data == null ?$("#customer-add-form").serialize():$("#customer-edit-form").serialize(),
+                    method: 'post',
+                    success: function (result) {
+                        if (result.status) {
+                            table.reload('customer-table', {});
+                            layer.close(index);
+                        } else {
+                            alert(result.message)
+                        }
+                        layer.closeAll('loading');
+                    }
+                })
+            }, success: function (layero, index) {
+                form.render()
+                if (data != null) {
+                    form.val("customer-edit-form", data);
+                    form.val("customer-edit-form", {
+                        "state": data.state + ""
+                    });
+                }
+
+            }
+        });
+    }
+
+    form.on('submit(customer-table)', function (data) {
+        table.reload('customer-table', {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where: data.field
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+
+    })
+    ;
+
+</script>
+
+<script type="text/html" id="customer-edit-layer">
+    <form id="customer-edit-form" style="width: 80%" class="layui-form" lay-filter="customer-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" required lay-verify="required" placeholder="请输入公司名称"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="address" required lay-verify="required" placeholder="请输入地址"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">账户金额(元)</label>
+            <div class="layui-input-block">
+                <input type="number" name="money" required lay-verify="required" placeholder="请输入账号金额"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" title="有效" value="1" checked/>
+                <input type="radio" name="state" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>
+
+
+
+<script type="text/html" id="customer-add-layer">
+    <form id="customer-add-form" style="width: 80%" class="layui-form" lay-filter="customer-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" required lay-verify="required" placeholder="请输入公司名称"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="address" required lay-verify="required" placeholder="请输入地址"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">账户金额(元)</label>
+            <div class="layui-input-block">
+                <input type="number" name="money" required lay-verify="required" placeholder="请输入账号金额"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="state" title="有效" value="1" checked/>
+                <input type="radio" name="state" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>

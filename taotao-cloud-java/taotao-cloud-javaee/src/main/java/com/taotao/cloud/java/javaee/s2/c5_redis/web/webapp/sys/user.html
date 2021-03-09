@@ -1,0 +1,254 @@
+<form action="#" id="user-search-form" class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label>名称:</label>
+            <div class="layui-inline">
+                <input type="text" name="realName" autocomplete="off" placeholder="请输入名称" class="layui-input">
+            </div>
+            邮箱:
+            <div class="layui-inline">
+                <input type="text" name="email" autocomplete="off" placeholder="请输入email" class="layui-input">
+            </div>
+            状态:
+            <div class="layui-inline">
+                <select name="status">
+                    <option value="">请选择</option>
+                    <option value="0">无效</option>
+                    <option value="1">有效</option>
+                </select>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit lay-filter="search-admin">搜索</button>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="layui-table" lay-filter="adminuser-table" id="adminuser-table">
+</table>
+<script type="text/html" id="user-head-bar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="goEdit"><i class="layui-icon">&#xe654;</i>添加</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="user-row-bar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit-adminuser">编辑</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="assign-role">授权</a>
+</script>
+<script type="text/javascript" >
+    layui.use(['table', 'form', 'layer'], function () {
+        var form = layui.form;
+        form.render();
+        var table = layui.table;
+        var layer = layui.layer;
+        table.render({
+            id: "adminuser-table",
+            elem: '#adminuser-table'
+            , toolbar: '#user-head-bar'
+            , cellMinWidth: 80
+            , url: '/sys/user/table' //数据接口
+            , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'count', 'skip', 'limit'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                , groups: 5 //只显示 1 个连续页码
+                , first: false //不显示首页
+                , last: false //不显示尾页,
+                , limits: [5, 10, 15, 20, 25, 30]
+                , limit: 5
+            }
+            , cols: [[ //表头
+                {checkbox: true},
+                {field: 'id', title: 'ID', width: 80}
+                , {field: 'email', title: '邮箱'}
+                , {field: 'realName', title: '姓名'}
+                , {
+                    field: 'status', title: '状态', templet: function (data) {
+                        return (data.status == 1) ? '<span class="layui-badge layui-bg-green">有效</span>' : '<span class="layui-badge layui-bg-red" >无效</span>'
+                    }
+                }, {fixed: 'right', title: '操作', toolbar: '#user-row-bar'}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(adminuser-table)', function (obj) {
+            switch (obj.event) {
+                case 'goEdit':
+                    openEditWindow(null);
+                    break;
+                case 'delete':
+                    var data = table.checkStatus('adminuser-table').data;
+                    if (data.length > 0) {
+                        layer.confirm('真的删除行么', function (index) {
+                            var param = ""
+                            $.each(data, function (i, obj) {
+                                param += "&ids=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/user/del',
+                                data: param,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        table.reload('adminuser-table', {});
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                    layer.close(index);
+                                }
+                            })
+                        });
+                    }
+                    break;
+            }
+            ;
+        });
+        //监听行工具事件
+        table.on('tool(adminuser-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit-adminuser': {
+                    var data = obj.data;
+                    openEditWindow(data)
+                    break;
+                }
+                case 'assign-role': {
+
+                    layer.open({
+                        type: 1,
+                        content: $('#role-tree-layer').html(),
+                        title: '用户授权'
+                        ,area: ['400px', '600px'],
+                        btn: ['提交', '取消'] //可以无限个按钮
+                        , yes: function (index, layero) {
+                            var userId = data.id;
+                            var nodes = $('#role-tree').tree('getChecked', ['checked']);
+                            var roleIds = ""
+                            $.each(nodes, function (i, obj) {
+                                roleIds += "&roleIds=" + obj.id
+                            })
+                            $.ajax({
+                                url: '/sys/user/assign_role',
+                                data: "userId=" + userId + "&" + roleIds,
+                                method: 'post',
+                                success: function (result) {
+                                    if (result.status) {
+                                        layer.close(index);
+                                    } else {
+                                        alert(result.message)
+                                    }
+                                }
+                            })
+                        }, success: function (layero, index) {
+                            $.ajax({
+                                url: '/sys/user/user_role',
+                                data: "userId=" + data.id,
+                                method: 'post',
+                                success: function (result) {
+                                    $("#role-tree").tree({
+                                        url: "/sys/user/role_tree",
+                                        checkbox: true,
+                                        formatter: function (node) {
+                                            return node.name;
+                                        },
+                                        onLoadSuccess: function (node, data) {
+                                            $.each(result, function (i, obj) {
+                                                var node = $('#role-tree').tree('find', obj);
+                                                $('#role-tree').tree('check', node.target);
+                                            })
+                                        }
+                                    });
+                                }
+                            })
+                        }
+                    });
+
+                    break;
+                }
+            }
+        })
+        ;
+
+        function openEditWindow(data) {
+            layer.open({
+                type: 1,
+                content: $('#user-edit-layer').html(),
+                title: '编辑用户',
+                area: ['400px', '350px'],
+                btn: ['提交', '取消'] //可以无限个按钮
+                , yes: function (index, layero) {
+                    $.ajax({
+                        url: 'sys/user.html?act=' + (data == null ? 'add' : 'update'),
+                        data: $("#user-edit-form").serialize(),
+                        method: 'post',
+                        success: function (result) {
+                            if (result.status) {
+                                table.reload('adminuser-table', {});
+                                layer.close(index);
+                            } else {
+                                alert(result.message)
+                            }
+
+                        }
+                    })
+                }, success: function (layero, index) {
+                    form.render()
+                    if (data != null) {
+                        form.val("user-edit-form", {
+                            "id": data.id,
+                            "email": data.email, // "name": "value"
+                            "realName": data.realName,
+                            "status": data.status + ""
+                        });
+                    }
+                }
+            });
+        }
+
+        form.on('submit(search-admin)', function (data) {
+            table.reload('adminuser-table', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                },
+                where: data.field
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+    })
+</script>
+<script type="text/html" id="user-edit-layer">
+    <form id="user-edit-form" style="width: 80%" class="layui-form" lay-filter="user-edit-form">
+        <input type="hidden" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" placeholder="密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="realName" placeholder="真实姓名" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" title="有效" value="1" checked/>
+                <input type="radio" name="status" title="无效" value="0"/>
+            </div>
+        </div>
+    </form>
+</script>
+<script type="text/html" id="role-tree-layer">
+    <ul id="role-tree">
+    </ul>
+</script>

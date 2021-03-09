@@ -1,0 +1,34 @@
+# 指定Eureka服务地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:8761/eureka,http://root:root@localhost:8762/eureka
+
+#指定服务的名称
+spring:
+  application:
+    name: CONFIG
+  cloud:
+    config:
+      server:
+        git:
+          basedir: D:\basedir    # 本地仓库的地址
+          username: zjw_2301211@126.com    #  远程仓库用户名
+          password: z123123   #   远程仓库密码
+          uri: https://gitee.com/zhengdaxian/config-resp.git       # 远程仓库地址
+  rabbitmq:
+    host: 192.168.199.109
+    port: 5672
+    username: test
+    password: test
+    virtual-host: /test
+
+
+server:
+  port: 10000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

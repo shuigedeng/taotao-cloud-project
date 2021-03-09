@@ -1,0 +1,21 @@
+# tomcat信息
+server:
+  port: 80
+
+# 连接数据库信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///openapi-admin?serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# mybatis的配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.qf.openapi.customer.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+

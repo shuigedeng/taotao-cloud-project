@@ -1,0 +1,46 @@
+version: "3.1"
+services:
+  nginx_master:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:80
+    volumes:
+      - ./index-master.html:/usr/share/nginx/html/index.html
+      - ./favicon.ico:/usr/share/nginx/html/favicon.ico
+      - ./keepalived-master.conf:/etc/keepalived/keepalived.conf
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.2
+    cap_add: 
+      - NET_ADMIN
+  nginx_slave:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 8082:80
+    volumes:
+      - ./index-slave.html:/usr/share/nginx/html/index.html
+      - ./favicon.ico:/usr/share/nginx/html/favicon.ico
+      - ./keepalived-slave.conf:/etc/keepalived/keepalived.conf
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.3
+    cap_add: 
+        - NET_ADMIN
+  proxy:
+    image: haproxy:1.7-alpine
+    ports:
+      - 80:6301
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - static-network
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
