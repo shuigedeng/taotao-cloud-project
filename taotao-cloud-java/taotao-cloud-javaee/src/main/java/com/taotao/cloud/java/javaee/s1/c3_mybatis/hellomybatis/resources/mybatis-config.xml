@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!-- 导入外部的参数 -->
+    <properties resource="jdbc.properties"></properties>
+
+    <!-- 实体类别名 -->
+    <typeAliases>
+        <!--<typeAlias type="com.qf.entity.User" alias="user_shine"/>-->
+        <!-- 定义实体类所在的package，每个实体类都会自动注册一个别名=类名 -->
+        <package name="com.qf.entity"/>
+    </typeAliases>
+    <!--  核心配置信息 -->
+    <environments default="shine_config">
+        <!-- 数据库相关配置 -->
+        <environment id="shine_config">
+            <!-- 事务控制类型 -->
+            <transactionManager type="jdbc"></transactionManager>
+            <!-- 数据连接参数  -->
+            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">
+                <property name="driver" value="${jdbc.driver}"/>
+                <!-- &转义&amp; -->
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 注册mapper文件 -->
+    <mappers>
+        <!--<mapper resource="UserDAOMapper.xml"/>-->
+        <!--<mapper resource="com/qf/dao/UserDAOMapper.xml"/>
+        <mapper resource="com/qf/dao/StudentDAOMapper.xml"/>
+        <mapper resource="com/qf/dao/PassengerDAOMapper.xml"/>
+        <mapper resource="com/qf/dao/PassportDAOMapper.xml"/>
+        <mapper resource="com/qf/dao/DepartmentDAOMapper.xml"/>
+        <mapper resource="com/qf/dao/EmployeeDAOMapper.xml"/>-->
+        <mapper resource="com/qf/dao/SubjectDAOMapper.xml"/>
+    </mappers>
+</configuration>

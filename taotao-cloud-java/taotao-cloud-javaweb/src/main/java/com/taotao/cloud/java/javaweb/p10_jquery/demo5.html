@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#append,#prepend,#after,#before{background-color: #ff0;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#append").append("<p style='background-color:#f00;'>测试append</p>");
+				
+				$("#prepend").prepend("<p style='background-color:#f00;'>测试prepend</p>");
+				
+				$("#after").after("<p style='background-color:#f00;'>测试after</p>");
+				
+				$("#before").before("<p style='background-color:#f00;'>测试before</p>");
+				
+				$("#btn").click(function(){
+					$("p").remove("#append");
+				});
+				$("#btn2").click(function(){
+					$("#prepend").empty();
+				});
+			})
+		</script>
+		<p id="append">段落append</p>
+		
+		<p id="prepend">段落prepend</p>
+		
+		<p id="after">段落after</p>
+		
+		<p id="before">段落before</p>
+		
+		<hr>
+		
+		<button id="btn">删除</button>
+		<button id="btn2">删除2</button>
+		
+		
+	</body>
+</html>

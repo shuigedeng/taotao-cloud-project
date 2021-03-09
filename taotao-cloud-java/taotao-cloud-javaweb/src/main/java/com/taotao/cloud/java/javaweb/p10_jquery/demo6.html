@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<link style="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn1").click(function(){
+					$("#res").addClass("btn btn-success");
+				});
+				
+				$("#btn2").click(function(){
+					$("#res").addClass("btn btn-danger");
+				});
+				
+				$("#btn3").click(function(){
+					$("#res").toggleClass("btn btn-success");
+				});
+				
+				$("#btn4").click(function(){
+					$("#res").removeClass("btn btn-success");
+				});
+				
+				$("#div").css("border","solid 5px #f00").css("width","300px")
+				.css("height","100px");
+				
+				alert($("#div").css("width"));
+			})
+		</script>
+		<button id="btn1">成功</button><button id="btn2">失败</button>
+		<button id="btn3">成功/失败</button><button id="btn4">删除</button>
+		<hr>
+		<button id="res">结果</button>
+		<hr>
+		
+		<div id="div">样式添加结果</div>
+	</body>
+</html>

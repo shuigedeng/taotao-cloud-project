@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.UserDAO">
+
+    <resultMap id="user_resultMap" type="User">
+        <!-- 定义更复杂的  映射规则 -->
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="gender" property="gender"></result>
+        <result column="regist_time" property="registTime"></result>
+    </resultMap>
+
+    <!-- 描述方法 -->
+    <!--<select id="queryUserById" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where id=#{arg0}
+    </select>-->
+
+    <select id="queryUserById" resultMap="user_resultMap">
+        select id,username,password,gender,regist_time
+        from t_user
+        where id=#{arg0}
+    </select>
+
+    <select id="queryUserByIdAndUsername" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where id=#{param1} and username=#{param2}
+    </select>
+
+    <select id="queryUserByIdAndPassword" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where id=#{id} and password = #{password}
+    </select>
+
+    <select id="queryUserByIdAndPassword2" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where id=#{id} and password = #{password}
+    </select>
+
+    <select id="queryUserByIdAndPassword3" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where id=#{id} and password = #{password}
+    </select>
+
+    <select id="queryUserByUsername" resultType="User">
+        select id,username,password,gender,regist_time as registTime
+        from t_user
+        where username like concat('%',#{username},'%')
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from t_user
+        where id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update t_user
+        set username=#{username},password=#{password},gender=#{gender},regist_time=#{registTime}
+        where id=#{id}
+    </update>
+
+    <insert id="insertUser" parameterType="User">
+            <!-- 主键回填，将新数据的ID，存入java对象的和主键对应的属性中 -->
+            <selectKey order="AFTER" resultType="int" keyProperty="id">
+                select last_insert_id()
+            </selectKey>
+        insert into t_user values(#{id},#{username},#{password},#{gender},#{registTime})
+    </insert>
+
+</mapper>

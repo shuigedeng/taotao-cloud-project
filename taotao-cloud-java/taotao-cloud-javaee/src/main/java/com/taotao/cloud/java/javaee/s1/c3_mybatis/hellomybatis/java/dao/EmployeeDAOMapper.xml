@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.EmployeeDAO">
+
+    <resultMap id="emp_dept" type="Employee">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="salary" property="salary"></result>
+
+        <association property="department" javaType="Department">
+            <id column="deptId" property="id"></id>
+            <result column="deptName" property="name"></result>
+            <result column="location" property="location"></result>
+        </association>
+    </resultMap>
+
+    <select id="queryEmployeeById" resultMap="emp_dept">
+        select t_employees.id,t_employees.name,t_employees.salary,
+               t_departments.id deptId ,t_departments.name deptName,t_departments.location
+
+        from t_employees join t_departments
+        on t_departments.id = t_employees.dept_id
+        where t_employees.id=#{id}
+    </select>
+
+</mapper>

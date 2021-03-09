@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.PassengerDAO">
+
+    <resultMap id="passenger_passport" type="Passenger">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="birthday" property="birthday"></result>
+
+        <!-- 描述 passId nationality expire 和  passport 映射规则 -->
+        <association property="passport" javaType="Passport">
+            <id column="passId" property="id"></id>
+            <result column="nationality" property="nationality"></result>
+            <result column="expire" property="expire"/>
+        </association>
+    </resultMap>
+
+    <!-- 查询 旅客及其护照 -->
+    <select id="queryPassengerById" resultMap="passenger_passport">
+        select t_passengers.id,t_passengers.name,t_passengers.sex,t_passengers.birthday,
+               t_passports.id passId,t_passports.nationality,t_passports.expire
+        from t_passengers join t_passports
+        on t_passengers.id = t_passports.passenger_id
+        where t_passengers.id=#{id}
+    </select>
+
+</mapper>

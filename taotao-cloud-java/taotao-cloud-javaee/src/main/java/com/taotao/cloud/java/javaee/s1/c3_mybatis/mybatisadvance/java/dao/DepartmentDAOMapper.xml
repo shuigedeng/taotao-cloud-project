@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.DepartmentDAO">
+
+
+    <resultMap id="dept_emp" type="Department">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="location" property="location"></result>
+
+        <!-- emp_id  emp_name  salary    employees -->
+        <!--<collection property="employees" ofType="Employee">
+            <id column="emp_id" property="id"></id>
+            <result column="emp_name" property="name"></result>
+            <result column="salary" property="salary"></result>
+        </collection>-->
+
+        <collection property="employees" ofType="Employee"
+                    select="com.qf.dao.EmployeeDAO.queryEmployeeByDeptId"
+                    column="id"/>
+
+    </resultMap>
+    <select id="queryDepartmentById" resultMap="dept_emp">
+        select id ,name,location
+        from t_departments
+        where id=#{id}
+    </select>
+
+</mapper>

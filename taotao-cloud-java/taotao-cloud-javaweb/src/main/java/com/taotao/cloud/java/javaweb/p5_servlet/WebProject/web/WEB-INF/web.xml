@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    
+    <servlet>
+        <servlet-name>bs</servlet-name>
+        <servlet-class>com.qf.servlet2.BasicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bs</servlet-name>
+        <url-pattern>/bs2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>my</servlet-name>
+        <servlet-class>com.qf.servlet.MyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>my</servlet-name>
+        <url-pattern>/myservlet</url-pattern>
+
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>gs</servlet-name>
+        <servlet-class>com.qf.servlet.GenServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gs</servlet-name>
+        <url-pattern>/gs</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>hs</servlet-name>
+        <servlet-class>com.qf.servlet.HttpsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hs</servlet-name>
+        <url-pattern>/hs</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>xml</filter-name>
+        <filter-class>com.qf.filter.XmlFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>xml</filter-name>
+        <url-pattern>/test</url-pattern>
+    </filter-mapping>
+</web-app>

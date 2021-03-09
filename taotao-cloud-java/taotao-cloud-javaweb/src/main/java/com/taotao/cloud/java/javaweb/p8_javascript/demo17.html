@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#d1{ width:200px; height: 100px; background-color: #ccf;}
+			#d2{ width:200px; height: 100px; background-color: #Fcf;}
+		</style>
+	</head>
+	<body>
+		<div id="d1"></div>
+		<div id="d2"></div>
+		<script type="text/javascript">
+			//添加事件监听
+			var d1=document.getElementById("d1");
+			d1.addEventListener("mouseover",ff);
+			function ff(){
+				alert(this+"----事件监听机制^_^");
+			}
+			//同一元素绑定多个相同事件
+			d1.addEventListener("mouseover",function (){
+				alert("事件监听机制^_^^_^");
+			})
+			//同一元素绑定多个不同事件
+			d1.addEventListener("mousemove",function(){
+				alert("事件监听机制^_^move");
+			})
+			var d2=document.getElementById("d2");
+			d2.addEventListener("mouseover",ff);
+		</script>
+		
+	</body>
+</html>

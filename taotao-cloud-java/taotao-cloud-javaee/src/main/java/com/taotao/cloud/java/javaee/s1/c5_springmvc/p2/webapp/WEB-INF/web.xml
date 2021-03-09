@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- SpringMVC前端(核心)控制器 
+         1. 前端，接收所有请求
+         2. 启动SpringMVC工厂  mvc.xml
+         3. springMVC流程调度
+    -->
+    <servlet>
+        <servlet-name>mvc_shine</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:mvc.xml</param-value>
+        </init-param>
+        <!-- 懒 饿  可选-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc_shine</servlet-name>
+        <!--<url-pattern>*.action</url-pattern>-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 此过滤器会进行：request.setCharactorEncoding("utf-8"); -->
+    <filter>
+        <filter-name>encoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 验证码Servlet -->
+    <servlet>
+        <servlet-name>cap</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <init-param>
+            <param-name>kaptcha.border</param-name>
+            <param-value>no</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.char.length</param-name>
+            <param-value>4</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.char.string</param-name>
+            <param-value>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.background.clear.to</param-name>
+            <param-value>211,229,237</param-value>
+        </init-param>
+        <init-param>
+            <!-- session.setAttribute("captcha","验证码") -->
+            <param-name>kaptcha.session.key</param-name>
+            <param-value>captcha</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cap</servlet-name>
+        <url-pattern>/captcha</url-pattern>
+    </servlet-mapping>
+</web-app>

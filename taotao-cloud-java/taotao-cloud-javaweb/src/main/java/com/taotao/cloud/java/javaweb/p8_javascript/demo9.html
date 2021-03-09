@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//for
+			for(var k=1;k<=10;k+=2){
+				document.write(k+"<br>");
+			}
+			document.write("<hr>");
+			//while
+			k=1;
+			while(k<=10){
+				document.write(k+"<br>");
+				k++;
+			}
+			document.write("<hr>");
+			//do-while
+			k=100;
+			do{
+				document.write(k+"<br>");
+				k--;
+			}while(k>=90);
+			document.write("<hr>");
+			//for-while相互转换
+			//初始值
+			//条件
+			//循环体
+			//迭代变量
+			k=1;
+			while(k<=10){
+				document.write(k+"<br>");
+				k+=2;
+			}
+			document.write("<hr>");
+			k=101;
+			while(k>=91){
+				k--;
+				if(k==95)
+					break;
+					//continue;
+				document.write(k+"<br>");
+				
+			}
+		</script>
+	</body>
+</html>

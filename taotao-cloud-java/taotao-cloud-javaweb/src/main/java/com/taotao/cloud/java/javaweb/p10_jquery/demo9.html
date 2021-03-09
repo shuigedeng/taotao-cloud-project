@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#d{width: 500px; height: 500px; border: 5px solid #f00;}
+			#d1{width:500px; height:100px; background-color: #ff0;}
+			#d2{width:500px; height:100px; background-color: #0f0;}
+			#d3{width:500px; height:100px; background-color: #00f;}
+			#d4{width:500px; height:100px; background-color: #0ff;}
+			#d5{width:500px; height:100px; background-color: #ccc;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				//$("#d2").siblings().html("siblings");
+				//$("#d2").next().html("next");
+				//$("#d2").nextAll().html("nextAll");
+				//$("#d2").nextUntil("#d5").html("nextUntil");
+				//$("#d2").prev().html("prev");
+				//$("#d5").prevAll().html("prevAll");
+				//$("#d5").prevUntil("#d3").html("preUntil");
+				//$("#d").children().first().html("first");
+				//$("#d").children().last().html("last");
+				//$("#d").children().eq(1).html("second");
+				//$("#d").children().filter("#d3").html("d3");
+				$("#d").children().not("#d3").html("not d3");
+			})
+		</script>
+		<div id="d">
+			<div id="d1"></div>
+			<div id="d2"></div>
+			<div id="d3"></div>
+			<div id="d4"></div>
+			<div id="d5"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.UserDAO">
+
+    <select id="queryUsers" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from t_user
+        where id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update t_user
+        set username=#{username},password=#{password},gender=#{gender},regist_time=#{registTime}
+        where id=#{id}
+    </update>
+
+    <insert id="insertUser" parameterType="User">
+        <!-- 主键回填，将新数据的ID，存入java对象的和主键对应的属性中 -->
+        <selectKey order="AFTER" resultType="int" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+        insert into t_user values(#{id},#{username},#{password},#{gender},#{registTime})
+    </insert>
+</mapper>

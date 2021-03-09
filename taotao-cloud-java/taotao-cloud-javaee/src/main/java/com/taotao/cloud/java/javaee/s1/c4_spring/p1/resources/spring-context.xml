@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    schema： 规范
+    xxx.xsd
+    xml schema definition
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <!-- 单例：单实例 -->
+    <!-- 要工厂生产的对象 -->
+    <bean id="userDAO" class="com.qf.dao.UserDAOImpl"></bean>
+    <!--<bean id="userDAO2" class="com.qf.dao.MyUserDAO"></bean>-->
+    <bean id="userService" class="com.qf.service.UserServiceImpl" autowire="byType">
+        <!-- userDAO属性赋值， 值是id为useDAO的一个bean
+             注入：属性值  依赖关系
+             依赖注入
+        -->
+        <!--<property name="userDAO" ref="userDAO2"/>-->
+    </bean>
+
+    <bean id="addr" class="com.qf.entity.Address">
+        <property name="id" value="1"/>
+        <property name="city" value="bj"/>
+    </bean>
+
+    <!-- Set注入 -->
+    <bean id="user" class="com.qf.entity.User">
+
+        <!-- 简单：jdk8种基本数据类型  String  Date -->
+        <property name="id" value="10"/>
+        <property name="password" value="123abc"/>
+        <property name="sex" value="male"/>
+        <property name="age" value="19"/>
+        <property name="bornDate" value="2020/12/12 12:20:30"/>
+
+        <!-- 数组 -->
+        <property name="hobbys">
+            <array>
+                <value>football</value>
+                <value>basketball</value>
+            </array>
+        </property>
+
+        <!-- 集合 -->
+        <property name="names">
+            <list>
+                <value>tom</value>
+                <value>jack</value>
+            </list>
+        </property>
+        <property name="phones">
+            <set>
+                <value>131111111</value>
+                <value>131222222</value>
+            </set>
+        </property>
+        <property name="countries">
+            <map>
+                <entry key="zh" value="china"></entry>
+                <entry key="en" value="english"></entry>
+            </map>
+        </property>
+        <property name="files">
+            <props>
+                <prop key="url">jdbc:mysql:xxx</prop>
+                <prop key="username">root</prop>
+            </props>
+        </property>
+
+        <!-- 自建类型 -->
+        <property name="address" ref="addr"></property>
+     </bean>
+
+
+    <!-- 构造注入 -->
+    <bean id="student" class="com.qf.entity.Student">
+        <constructor-arg name="id" value="1"/>
+        <constructor-arg name="name" value="shine"/>
+        <constructor-arg name="sex" value="male"/>
+        <constructor-arg name="age" value="19"/>
+    </bean >
+
+    <!-- Connection
+
+         SqlSessionFactory
+         复杂对象
+         FactoryBean
+
+         当从工厂中索要一个bean时，如果是Factorybean,
+         实际返回的是工厂Bean的getObject方法的返回值
+     -->
+    <bean id="conn" class="com.qf.factorybean.MyConnectionFactoryBean"></bean>
+
+</beans>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#div1,#div2,#div3{width:200px;height:100px;border:1px solid #f00;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn1").click(function(){
+					$("#div1").hide();
+				});
+				$("#btn2").click(function(){
+					$("#div1").show();
+				});
+				$("#btn3").click(function(){
+					$("#div1").toggle("slow",function(){
+						alert("finish");
+					});
+				});
+			
+			
+				$("#btn4").click(function(){
+					$("#div2").fadeOut(1000);
+				});
+				$("#btn5").click(function(){
+					$("#div2").fadeIn(1000);
+					$("#div2").fadeTo("slow",0.15);
+				});
+				$("#btn6").click(function(){
+					$("#div2").fadeToggle(1000);
+				});
+				
+				$("#btn7").click(function(){
+					$("#div3").slideUp();
+				});
+				$("#btn8").click(function(){
+					$("#div3").slideDown();
+				});
+				$("#btn9").click(function(){
+					$("#div3").slideToggle();
+				});
+			})
+		</script>
+		
+		<button id="btn1">隐藏</button><button id="btn2">显示</button><button id="btn3">显示/隐藏</button>
+		<div id="div1"></div>
+		
+		<button id="btn4">淡出</button><button id="btn5">淡入</button><button id="btn6">淡出/淡入</button>
+		<div id="div2"></div>
+		
+		<button id="btn7">up</button><button id="btn8">down</button><button id="btn9">up/down</button>
+		<div id="div3"></div>
+	</body>
+</html>

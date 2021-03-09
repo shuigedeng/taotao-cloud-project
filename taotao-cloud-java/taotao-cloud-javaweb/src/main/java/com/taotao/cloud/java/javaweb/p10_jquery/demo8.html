@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#d1{width:300px; height: 300px; border: solid 10px #f00;}
+			#d21{width:300px; height: 100px; background-color: #ff0;}
+			#d22{width:300px; height: 100px; background-color: #00f;}
+			#d23{width:300px; height: 100px; background-color: #0f0;}
+			#d3{width:100px; height: 100px; background-color: #999; margin-left: 100px;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				//$("#d3").parent().css("backgroundColor","#111");
+				//$("#d3").parents("#d1").css("border","dotted 3px #f00");
+				//$("#d3").parentsUntil("#d1").css("border","dotted 3px #f00");
+				//$("#d1").children().css("border","solid 5px #ccc");;
+				//$("#d1").find("*").css("border","solid 5px #ccc");;
+				$("#d1").find("#d22").css("border","solid 5px #ccc");;
+			})
+		</script>
+		<div id="d1">
+			<div id="d21">
+				<div id="d3"></div>
+			</div>
+			<div id="d22"></div>
+			<div id="d23"></div>
+		</div>
+	</body>
+</html>

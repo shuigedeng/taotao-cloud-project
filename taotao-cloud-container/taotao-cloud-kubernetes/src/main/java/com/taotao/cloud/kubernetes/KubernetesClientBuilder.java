@@ -229,6 +229,8 @@ public class KubernetesClientBuilder {
 			.withClientKeyData("apiserver-kubelet-client.key内容")
 			.build();
 
+		System.out.println(config);
+
 		//2.通过配置文件访问
 //		Config config = Config.fromKubeconfig("admin.conf内容");
 

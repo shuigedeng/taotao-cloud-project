@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			.error{color:#f00; font-size: 12px;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="validate.min.js"></script>
+		<script type="text/javascript" src="messages_zh.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#frm").validate({
+					rules:{
+						usrname:{
+							required:true,
+							maxlength:10
+						}
+					},
+					messages:{
+						usrname:"必填且长度不超过10个字符"
+					}
+				});
+			});
+		</script>
+		<form id="frm" action="test.html">
+			username:<input type="text" name="usrname"><br>
+			userpass:<input type="password" name="usrpass"  required="required"><br>
+			<input type="submit" value="登录">
+		</form>
+	</body>
+</html>

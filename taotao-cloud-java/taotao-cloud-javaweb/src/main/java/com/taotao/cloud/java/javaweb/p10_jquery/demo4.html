@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").click(function(){
+					var s1=$("#s1").text();
+					var d1=$("#d1").html();
+					var ip1=$("#ip1").val();
+					alert(s1+"==="+d1+"==="+ip1);
+					
+					$("#s1").text("new span");
+					$("#d1").html("new div");
+					$("#ip1").val("content");
+				});
+				
+				$("#btn1").click(function(){
+					var url=$("a").attr("href");
+					window.location.href=url;
+				});
+				
+				$("#btn2").click(function(){
+					$("a").attr("href","text.html");
+				});
+			})
+		</script>
+		
+		<!--获得元素内容-->
+		<span id="s1">span inner</span>
+		<div id="d1">div inner</div>
+		<input id="ip1" value="input val">
+		<button id="btn">获得元素内容</button>
+		<hr>
+		<a href="http://www.baidu.com">百度</a>
+		<button id="btn1">跳转</button>
+		<button id="btn2">更改地址</button>
+	</body>
+</html>

@@ -1,0 +1,117 @@
+@charset "utf-8";
+/* CSS Document */
+	
+	body{ margin:0; padding:0}
+	a{ text-decoration:none; outline:none}
+	#top{ 
+		height:40px; 
+		background-color:#333333; 
+		
+	}
+	#topdiv{ width:1230px; margin:0 auto;}
+	#a_top{
+		color:#b0b0b0b0;
+		line-height:40px; 
+		font-size:12px;
+		float:left
+	}
+	span li{ list-style:none; float:left; line-height:40px; color:#b0b0b0b0; font-size:12px; margin:0px 5px;}
+	#shorpcar{
+		font-size:14px;
+		height:40px; 
+		width:120px;
+		float:right;
+		line-height:40px;
+		background-color:#F00; 
+		color:#FFF;
+		margin-left:30px;
+		text-align:center
+	}
+	#shorpcar:hover{ background:#666666}
+	#a_top:hover{ color:#FFF}	
+	#second{ 
+		height:100px; 
+		width:1230px; 
+		margin:0 auto;
+	}
+	#seimg{ float:left;}
+	#seimg:nth-child(1){ margin-top:23px;}
+	#second img:nth-child(2){ margin-top:17px;}
+	#product{ float:left; margin:0;}
+	p  a{ 
+		line-height:100px; 
+		font-size:18px; 
+		color:#000; 
+		font-family:"微软雅黑"; 
+		float:left; 
+		margin-left:15px;
+		font-size:18px
+		}
+	p  a:hover{ color:#F00}
+	input{
+			height:52px; 
+			margin:24px 0px; 
+			float:right;
+	}
+	input:nth-chlid(1){ width:254px}
+	input:nth-chlid(1){ width:50px; float:right}
+	#txt{ 
+		width:252px; 
+		height:52px; 
+		float:right; 
+		border:#cccccc 1px solid; 
+		color:#757575; 
+		line-height:52px; 
+		margin-top:24px; 
+		position:relative;
+	}
+	#txt:hover{ border:#ff6700 1px solid; z-index:9}
+	#thred{ width:1230px; height:460px; margin:0 auto;}
+	#forth{ width:1230px; height:170px; margin:0 auto; padding-top:17px}
+	#forth span{ width:234px; height:170px; float:left;}
+	#a_left{ margin-left:16px}
+	#forth a{ float:left; opacity:0.7}
+	#forth a:hover{ opacity:1}
+	#fifth{ width:1230px; margin:0 auto; height:80px;}
+	#fif_text{ font-family:"黑体"; font-size:24px; height:30px; line-height:80px; float:left; margin-bottom:0px;}
+	#fif_a{ float:right; width:400px; height:80px; position:relative; left:270px;}
+	#fif_a li{ line-height:80px}
+	#m6{ float:left; line-height:80px; color:#000}
+	#m6:hover{ color:#ff6700}
+	
+	
+	#sixth{ width:1230px; height:341px; margin:0 auto; text-align:center}
+	#sixth span{ width:220px; height:301px; background-color:#fafafa; float:left; margin-left:30px;}
+	#siximg{ opacity:0.7}
+	#siximg:hover{ opacity:1}
+	#na{ font-size:18px; color:#000; font-family:"宋体"; margin-top:20px}
+	#chip{ font-size:12px; color:#b0b0b0}
+	#pri{ color:#ff6709}
+	#seventh{ height:130px; background-color:#fafafa; margin-top:20px; padding-top:45px; text-align:center}
+	#sevep{  line-height:20px; font-size:10px;}
+	
+	#liebiaobox{border:#FFF 1px solid; padding-top:40px}
+	#liebiaobox:hover{ border:#F00 1px solid}
+	
+	#body_big_a{ float:left; width:280px; height:60px; border:#bbbbbb 1px solid; text-align:center;}
+	#body_big_a:hover{ color:#ff6700; border:#ff6700 1px solid;}
+	#body_big_btn{ width:200px; height:50px; background:#ff6700; border:#ff6700 2px solid; float:left; margin-top:10px; text-align:center; color:#FFF; font-weight:bold}
+	#body_big_btn:hover{ border:#f8f8f8 2px solid;}
+	#body_big_pric{ font-size:14px}
+	
+	#dingdanxiangqing_body{ width:100%; height:520px; background:#f5f5f5; padding-top:20px}
+	#dingdanxiangqing_body_big{ width:1230px; height:500px; margin:0px auto;}
+	#big_left{ height:500px; width:195px; background:#FFF; float:left; padding-left:40px}
+	#big_left_a{ line-height:45px; font-size:16px}
+	#big_right{ width:1000px; height:500px; background:#FFF; float:left;margin-left: 10px}
+	#big_right_p{ float:right; width:132px; height:61px; border-left:#aaaaaa 1px solid; line-height:61px; text-align:center; font-size:12px; margin-top:21px}
+	
+	#big_right_txt{ width:902px; height:47px; margin-top:12px; border:#aaaaaa 1px solid; border-radius:5px; background-color:#fdfdfd;}
+	#big_right_txt_box{ float:left; height:47px; margin-left:20px; width:65px}
+	#big_right_txt_p{ line-height:15px; color:#757575}
+	
+	
+	#gouwuche_top{ height:101px; border-bottom:#ff6700 2px solid; background-color:#FFF}
+	#gouwuche_body{ width:1230px; height:102px; margin:0 auto; border-bottom:#cccccc 1px solid; background-color:#FFF}
+	#phone_sum{height:40px; width:40px; line-height:40px; text-align:center; background-color:#FFF}
+	#phone_sum:hover{ background-color:#e0e0e0;}

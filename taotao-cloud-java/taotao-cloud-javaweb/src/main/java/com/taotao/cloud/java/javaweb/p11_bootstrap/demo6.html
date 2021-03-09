@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			$(function(){
+				$("ul li").each(function(){
+					$(this).click(function(){
+						$(this).attr("class","active");
+						$("ul li:not(this)").removeAttr("class");
+					});
+				})
+			})
+		</script>
+		<img src="logo.jpg" class="img-responsive img-circle">
+
+		<li role="presentation" class="active">
+			<a href="#" data-toggle="tab">系别</a>
+		</li>
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active">
+				<a href="#" data-toggle="tab">分类</a>
+			</li>
+			<li role="presentation">
+				<a href="#" data-toggle="tab">图片</a>
+			</li>
+			<li role="presentation">
+				<a href="#" data-toggle="tab">视频</a>
+			</li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" id="h5">
+				<p>中文系<br>考古系<br>数学系</p>
+			</div>
+			<div class="tab-pane fade" id="java">
+				<p>java是高级语言，是最好的语言</p>
+			</div>
+			<div class="tab-pane fade" id="android">
+				<p>android是最受大众欢迎的智能机品牌</p>
+			</div>
+		</div>
+	</body>
+
+</html>

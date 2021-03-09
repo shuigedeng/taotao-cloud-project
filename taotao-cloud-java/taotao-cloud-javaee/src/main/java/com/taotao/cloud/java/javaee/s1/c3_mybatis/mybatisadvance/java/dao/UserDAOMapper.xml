@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.UserDAO">
+
+    <!-- 取值表达式 ${}  #{} -->
+    <select id="queryUsers" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+        order by id ${rule}
+    </select>
+
+    <select id="queryUserById" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+        where id=#{id}
+    </select>
+
+    <select id="queryUserById2" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+        where id=${id}
+    </select>
+
+    <select id="queryUserByUsername" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+        where username='${username}'
+    </select>
+
+    <!--
+        String username = "shine";
+        String sql = "select xxx from t_user where username='"+username+"'";
+     -->
+    <select id="queryUserByUsernameorId" resultType="User">
+        select id,username,password,gender,regist_time
+        from t_user
+        where username='${username}' or id=${id}
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#div{width:200px; height: 200px; background-color: #ccc;}
+			#p{width:100px; height: 100px; background-color: #ff0;}
+		</style>
+	</head>
+	<body>
+		<div id="div">
+			<p id="p"></p>
+		</div>
+		<script type="text/javascript">
+			//获得对象
+			var div=document.getElementById("div");
+			var p=document.getElementById("p");
+			//添加监听
+			div.addEventListener("mouseover",function(){
+				alert("div event listener");
+			});
+			p.addEventListener("mouseover",function(){
+				alert("p event listener");
+			})
+		</script>
+	</body>
+</html>

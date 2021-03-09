@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #time, #res {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #f00;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var time = new Date();
+        $("#time").html(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+        $("#btn").click(function () {
+            $.ajax(
+                {
+                    url: "post",
+                    data: {name: 'lisi', age: '30'},
+                    type: "post",
+                    success: function (data) {
+                        $("#res").html(data.res);
+                    },
+                    dataType:"json"
+                }
+            )
+        });
+    })
+</script>
+<button id="btn">ajax方法</button>
+<div id="time"></div>
+<div id="res"></div>
+</body>
+</html>

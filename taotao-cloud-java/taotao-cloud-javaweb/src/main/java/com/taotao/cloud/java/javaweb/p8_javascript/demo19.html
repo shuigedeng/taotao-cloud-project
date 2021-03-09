@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+
+	<body>
+		<table id="tab" border="1" cellspacing="0" width="400">
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th>内容</th>
+				<th>日期</th>
+				<th>备注</th>
+			</tr>
+		</table>
+		<button id="btn">留言</button>
+		<button id="btn2">删除留言</button>
+		<script type="text/javascript">
+			var btn = document.getElementById("btn");
+			//获得对象
+			var tab = document.getElementById("tab");
+			btn.addEventListener("click", function() {
+				//创建对象
+				var tr = document.createElement("tr");
+				var th1 = document.createElement("th");
+				th1.innerHTML = "1";
+				tr.appendChild(th1);
+				var th2 = document.createElement("th");
+				th2.innerHTML = "张三";
+				tr.appendChild(th2);
+				var th3 = document.createElement("th");
+				th3.innerHTML = "一个懒家伙";
+				tr.appendChild(th3);
+				var th4 = document.createElement("th");
+				th4.innerHTML = new Date();
+				tr.appendChild(th4);
+				var th5 = document.createElement("th");
+				th5.innerHTML = "..";
+				tr.appendChild(th5);
+				//将创建的对象添加到所获得的对象内部
+				tab.appendChild(tr);
+			});
+			
+			var btn2=document.getElementById("btn2");
+			btn2.addEventListener("click",function(){
+				tab.removeChild(tab.children[1]);
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    schema： 规范
+    xxx.xsd
+    xml schema definition
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- 目标：原始业务-->
+    <bean id="userService" class="com.qf.service.UserServiceImpl"></bean>
+
+    <!-- 通知：额外功能 -->
+    <bean id="before" class="com.qf.advice.MyBeforeAdvice"></bean>
+    <bean id="after" class="com.qf.advice.MyAfterAdvice"></bean>
+    <bean id="throws" class="com.qf.advice.MyThrowsAdvice"></bean>
+    <bean id="mi" class="com.qf.advice.MyMethodInterceptor"></bean>
+
+    <!-- 编织 -->
+    <aop:config>
+       <!-- &lt;!&ndash; 切入点  【修饰符  返回值  包.类  方法名  参数表 】&ndash;&gt;
+        <aop:pointcut id="pc_shine" expression="execution(* queryUsers())"/>
+        <aop:pointcut id="pc_shine2" expression="execution(* deleteUser())"/>
+        <aop:pointcut id="pc_shine3" expression="execution(* updateUser())"/>
+        <aop:pointcut id="pc_shine4" expression="execution(* saveUser())"/>
+        &lt;!&ndash; 组装 &ndash;&gt;
+        <aop:advisor advice-ref="before" pointcut-ref="pc_shine"/>
+        <aop:advisor advice-ref="after" pointcut-ref="pc_shine2"/>
+        <aop:advisor advice-ref="throws" pointcut-ref="pc_shine3"/>
+        <aop:advisor advice-ref="mi" pointcut-ref="pc_shine4"/>-->
+        <aop:pointcut id="pc01" expression="execution(* *(com.qf.entity.User))"/>
+        <aop:pointcut id="pc02" expression="execution(* *())"/>
+        <aop:pointcut id="pc03" expression="execution(* saveUser(..))"/>
+        <aop:pointcut id="pc04" expression="execution(java.lang.Integer *(..))"/>
+        <aop:pointcut id="pc05" expression="execution(* com.qf.service.UserServiceImpl.*(..))"/>
+        <aop:pointcut id="pc06" expression="execution(* com.qf.service.*.*(..))"/>
+        <aop:pointcut id="pc07" expression="execution(* com..*.*(..))"/>
+        <aop:advisor advice-ref="before" pointcut-ref="pc07"/>
+    </aop:config>
+
+
+    <!--<bean id="user" class="com.qf.entity.User" init-method="initUser">
+        <property name="id" value="1"></property>
+    </bean>
+
+    &lt;!&ndash; 后处理器 &ndash;&gt;
+    <bean class="com.qf.processor.MyBeanPostProcessor"></bean>-->
+</beans>

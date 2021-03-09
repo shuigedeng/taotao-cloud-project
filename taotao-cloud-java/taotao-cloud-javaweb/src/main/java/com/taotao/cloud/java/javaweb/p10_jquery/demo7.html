@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#d1{width:200px; height: 200px; border:solid 10px #f00;
+			 padding-left: 100px; padding-top: 100px; margin-left: 100px; margin-top: 100px;}
+			#d2{width:100px; height: 100px;  background-color: #f00;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript">
+			//width innerWidth  outerWidth 
+			$(function(){
+				var w=$("#d1").width();
+				var iw=$("#d1").innerWidth();
+				var ow=$("#d1").outerWidth();
+				var ow2=$("#d1").outerWidth(true);
+				$("#res").html("width:"+w+"===innerWidth:"+iw+"===outerWidth:"+ow+"===outerWidth2:"+ow2);
+				//alert(ow2);
+			});
+		</script>
+		<div id="d1">
+			
+			<div id="d2"></div>
+			
+		</div>
+		<div id="res"></div>
+	</body>
+</html>

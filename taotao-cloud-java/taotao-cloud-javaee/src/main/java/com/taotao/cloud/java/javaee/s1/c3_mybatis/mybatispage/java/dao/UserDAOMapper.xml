@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.UserDAO">
+    <!-- 抽取重复sql片段 -->
+    <sql id="user_field">
+        select id,username,password,gender,regist_time registTime
+        from t_user
+    </sql>
+
+    <select id="queryUsers" resultType="User">
+        <!-- 引用sql片段 -->
+        <include refid="user_field"/>
+    </select>
+</mapper>

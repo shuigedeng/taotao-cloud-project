@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.SubjectDAO">
+
+    <resultMap id="subject_student" type="Subject">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="grade" property="grade"></result>
+
+        <collection property="students" ofType="Student2">
+            <id column="stu_id" property="id"></id>
+            <result column="stu_name" property="name"></result>
+            <result column="sex" property="sex"></result>
+        </collection>
+    </resultMap>
+
+    <select id="querySubjectById" resultMap="subject_student">
+        select t_subjects.id,t_subjects.name,t_subjects.grade,
+               t_students.id stu_id,t_students.name stu_name,t_students.sex
+        from t_subjects join t_stu_sub
+        on t_subjects.id = t_stu_sub.subject_id
+        join t_students
+        on t_stu_sub.student_id = t_students.id
+        where t_subjects.id=#{id}
+    </select>
+
+
+</mapper>

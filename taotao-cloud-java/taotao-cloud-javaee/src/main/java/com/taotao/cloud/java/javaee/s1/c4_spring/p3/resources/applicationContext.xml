@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  dtd: xxx.dtd     document type definition
+  xsd: xxx.xsd     xml  schema definition
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--基本配置-->
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.init}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+
+        <!-- 配置获取连接等待超时的时间 ms-->
+        <property name="maxWait" value="60000"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+    </bean>
+
+    <!-- 生产：SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入连接池 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 注入dao-mapper文件信息 ,如果映射文件和dao接口 同包且同名，则此配置可省略-->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/qf/dao/*.xml</value>
+            </list>
+        </property>
+        <!-- 为 dao-mapper文件中的实体 定义缺省包路径
+            如：<select id="queryAll" resultType="User"> 中 User类可以不定义包
+        -->
+        <property name="typeAliasesPackage" value="com.qf.entity"></property>
+    </bean>
+
+    <!-- mapperScannerConfigurer   userDAO-->
+    <bean id="mapperScannerConfigurer9" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- dao接口所在的包  如果有多个包，可以用逗号或分号分隔
+           <property name="basePackage" value="com.a.dao,com.b.dao"></property>
+        -->
+        <property name="basePackage" value="com.qf.dao"></property>
+        <!-- 如果工厂中只有一个SqlSessionFactory的bean，此配置可省略 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- Service -->
+   <!-- <bean id="userService" class="com.qf.service.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>-->
+
+    <!-- 1. 引入一个事务管理器，其中依赖DataSource,借以获得连接，进而控制事务逻辑 -->
+    <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+
+    <!-- 事务通知 -->
+    <!--<tx:aspect id="txManager" transaction-manager="tx">
+        &lt;!&ndash; 事务属性 &ndash;&gt;
+        <tx:attributes>
+            &lt;!&ndash;<tx:method name="queryUser" isolation="DEFAULT" propagation="SUPPORTS" read-only="true" timeout="-1" rollback-for="Exception"/>&ndash;&gt;
+            <tx:method name="queryUsers"  propagation="SUPPORTS"/>
+            &lt;!&ndash; 以User结尾的方法，切入此方法时，采用对应事务实行 &ndash;&gt;
+            <tx:method name="*User"/>
+            &lt;!&ndash; 剩余所有方法 &ndash;&gt;
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:aspect>-->
+
+    <!-- 编织 声明式事务控制 -->
+    <!--<aop:config>
+        <aop:pointcut id="pc_tx" expression="execution(* com.qf.service.UserServiceImpl.*(..))"/>
+        <aop:advisor aspect-ref="txManager" pointcut-ref="pc_tx"/>
+    </aop:config>-->
+
+    <!-- 告知spring注解位置 -->
+    <context:component-scan base-package="com.qf"></context:component-scan>
+
+    <!-- @Transactional -->
+    <tx:annotation-driven transaction-manager="tx"/>
+
+
+    <!-- 添加如下配置,启用aop注解 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+</beans>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#focus{width: 200px; height: 200px; background-color: red;}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function ff(){
+				//通过该函数设置div层的属性
+				//1.获得层
+				var fc=document.getElementById("focus");
+				//2.设置属性
+				var x,y,z;
+				x=Math.ceil((Math.random()*255));//
+				y=Math.ceil((Math.random()*255));//
+				z=Math.ceil((Math.random()*255));//
+				fc.style.backgroundColor="rgb("+x+","+y+","+z+")";//rgb(100,123,255)
+			}
+		</script>
+		
+		<div id="focus"></div>
+		<div>
+			<button onclick="ff()">change focus</button>
+		</div>
+	</body>
+</html>

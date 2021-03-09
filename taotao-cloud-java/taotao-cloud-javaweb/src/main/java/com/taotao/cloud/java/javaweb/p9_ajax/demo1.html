@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//json对象
+			var obj={name:"zhangsan",age:20,class:1};
+			//浏览器将对象转换为字符串的方法
+			var res=JSON.stringify(obj);
+			//alert(typeof(res));
+			//浏览器将字符串转为对象
+			res=JSON.parse(res);
+			//alert(typeof res);
+			document.write(res.name);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style type="text/css">
+			#dd{width:200px; height: 200px; background-color: yellow;}
+		</style>
+	</head>
+	<body>
+		<div id="dd" class="dd"></div>
+		<script type="text/javascript">
+			//获得对象
+			var dds=document.getElementsByClassName("dd");//数组
+			//修改CSS属性
+			dds[0].style.width="400px";
+			dds[0].style.backgroundColor="blue";
+			dds[0].style.height=250+"px";
+		</script>
+	</body>
+</html>

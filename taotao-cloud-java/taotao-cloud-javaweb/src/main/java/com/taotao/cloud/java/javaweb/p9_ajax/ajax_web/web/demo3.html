@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #res{width:600px; height:200px; font-size: 50px; font-weight: bold; line-height: 200px;}
+    </style>
+</head>
+<body>
+<button id="btn">填充数据</button>
+<div id="res"></div>
+<script type="text/javascript">
+    var btn = document.getElementById("btn");
+    var res = document.getElementById("res");
+    btn.addEventListener("click", function () {
+        //创建XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", "data");
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send("name=zss&age=20");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               res.innerHTML=xhr.responseText;
+            }
+        }
+    });
+</script>
+</body>
+</html>
