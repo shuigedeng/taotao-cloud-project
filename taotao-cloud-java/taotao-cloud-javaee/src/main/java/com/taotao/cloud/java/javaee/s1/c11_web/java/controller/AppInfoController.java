@@ -1,10 +1,10 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.AppInfo;
-import com.qianfeng.openapi.web.master.bean.TableData;
-import com.qianfeng.openapi.web.master.service.AppInfoService;
-import com.qianfeng.openapi.web.master.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.bean.TableData;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.AppInfo;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.AppInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

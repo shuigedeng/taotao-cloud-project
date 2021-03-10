@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao;
 
-import com.itqf.entity.User;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
 import java.sql.SQLException;
 
 /**
@@ -14,7 +14,7 @@ public interface UserDao {
      * @param username 查询的条件
      * @return 返回对应的用户数据
      */
-    User  selectUserByUname(String username) throws SQLException;
+    User selectUserByUname(String username) throws SQLException;
 
     int   insertUser(User user) throws SQLException;
 

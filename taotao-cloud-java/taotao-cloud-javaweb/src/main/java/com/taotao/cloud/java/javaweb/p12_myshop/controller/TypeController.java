@@ -1,10 +1,10 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
 import com.google.gson.Gson;
-import com.itqf.entity.Type;
-import com.itqf.service.TypeService;
-import com.itqf.service.impl.TypeServiceImpl;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Type;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.TypeService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.TypeServiceImpl;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

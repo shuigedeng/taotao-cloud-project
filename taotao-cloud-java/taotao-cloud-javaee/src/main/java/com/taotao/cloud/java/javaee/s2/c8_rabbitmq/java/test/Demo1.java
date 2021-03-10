@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.test;
 
-import com.qf.config.RabbitMQClient;
 import com.rabbitmq.client.Connection;
+import com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.config.RabbitMQClient;
 import org.junit.Test;
 
 import java.io.IOException;

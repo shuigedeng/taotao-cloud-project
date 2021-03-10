@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java;
 
 
-import com.qf.stream.StreamClient;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.stream.StreamClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;

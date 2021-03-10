@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.servlet;
 
-import com.qf.utils.DownLoadUtils;
 
+import com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.utils.DownLoadUtils;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 @WebServlet(name = "FileListController",value = "/fileList")
 public class FileListController extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
@@ -26,6 +27,7 @@ public class FileListController extends HttpServlet {
         request.getRequestDispatcher("/list.jsp").forward(request,response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

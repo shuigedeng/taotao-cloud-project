@@ -2,10 +2,10 @@ package com.taotao.cloud.java.javaee.s1.c10_ssm.java.contrroler;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.ssmobject.bean.BaseResultBean;
-import com.qianfeng.ssmobject.bean.TableData;
-import com.qianfeng.ssmobject.pojo.User;
-import com.qianfeng.ssmobject.service.UserService;
+import com.taotao.cloud.java.javaee.s1.c10_ssm.java.bean.BaseResultBean;
+import com.taotao.cloud.java.javaee.s1.c10_ssm.java.bean.TableData;
+import com.taotao.cloud.java.javaee.s1.c10_ssm.java.pojo.User;
+import com.taotao.cloud.java.javaee.s1.c10_ssm.java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

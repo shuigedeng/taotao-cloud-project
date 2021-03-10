@@ -1,9 +1,9 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.service.impl;
 
-import com.qf.openapi.customer.entity.Customer;
-import com.qf.openapi.customer.mapper.CustomerMapper;
-import com.qf.openapi.customer.service.CustomerService;
-import com.qf.openapi.customer.utils.JSON;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.mapper.CustomerMapper;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.utils.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

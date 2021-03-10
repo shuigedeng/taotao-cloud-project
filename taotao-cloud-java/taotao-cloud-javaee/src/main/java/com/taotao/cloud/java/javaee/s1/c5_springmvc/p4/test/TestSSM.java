@@ -1,9 +1,9 @@
 package com.taotao.cloud.java.javaee.s1.c5_springmvc.p4.test;
 
-import com.qf.dao.UserDAO;
-import com.qf.entity.Page;
-import com.qf.entity.User;
-import com.qf.service.UserService;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p4.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p4.java.entity.Page;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p4.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p4.java.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.resolver;
 
-import com.qf.ex.MyException1;
-import com.qf.ex.MyException2;
-import com.qf.ex.MyException3;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.ex.MyException1;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.ex.MyException2;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.ex.MyException3;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;

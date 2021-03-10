@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
-import com.itqf.utils.Constants;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

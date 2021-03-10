@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao;
 
-import com.itqf.entity.Cart;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Cart;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.SQLException;

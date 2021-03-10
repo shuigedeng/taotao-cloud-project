@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.service;
 
-import com.qf.dao.UserDAO;
-import com.qf.entity.User;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<User> queryUsers() {
         System.out.println("queryUser in service");

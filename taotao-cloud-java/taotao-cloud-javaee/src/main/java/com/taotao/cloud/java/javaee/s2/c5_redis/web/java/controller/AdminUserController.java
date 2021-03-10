@@ -1,12 +1,12 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
-import com.qianfeng.openapi.web.master.pojo.Role;
-import com.qianfeng.openapi.web.master.bean.TableData;
-import com.qianfeng.openapi.web.master.service.AdminUserService;
-import com.qianfeng.openapi.web.master.service.RoleService;
-import com.qianfeng.openapi.web.master.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.bean.TableData;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.AdminUser;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Role;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.AdminUserService;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

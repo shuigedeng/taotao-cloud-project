@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.servlet;
 
-import com.qf.utils.UploadUtils;
 
+import com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.utils.UploadUtils;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +16,7 @@ import java.util.Collection;
 @WebServlet(name = "MoreUploadController",value = "/moreUpload")
 @MultipartConfig(maxFileSize = 1024*1024*100,maxRequestSize = 1024*1024*200)
 public class MoreUploadController extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -46,6 +47,7 @@ public class MoreUploadController extends HttpServlet {
         }
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

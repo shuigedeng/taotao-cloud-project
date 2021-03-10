@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service;
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.UserToken;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.UserToken;
 
 public interface UserTokenService {
     PageInfo<UserToken> getTokenList(UserToken criteria, int page, int pageSize);

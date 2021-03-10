@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.test;
 
-import com.qf.utils.ESClient;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.utils.ESClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.Test;
 

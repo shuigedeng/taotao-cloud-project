@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao.impl;
 
-import com.itqf.dao.TypeDao;
-import com.itqf.entity.Type;
-import com.itqf.utils.C3P0Utils;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.TypeDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Type;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 

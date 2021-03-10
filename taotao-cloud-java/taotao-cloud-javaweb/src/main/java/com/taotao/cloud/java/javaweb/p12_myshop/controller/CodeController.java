@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
 
-import cn.dsna.util.images.ValidateCode;
+
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -18,12 +18,13 @@ public class CodeController extends BaseServlet {
     public void createCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //1.生成验证码对象
         //int width, int height, int codeCount, int lineCount
-        ValidateCode validateCode = new ValidateCode(100,35,5,20);
+	    // import cn.dsna.util.images.ValidateCode;
+        //ValidateCode validateCode = new ValidateCode(100,35,5,20);
         //2.将验证码放入到session
-        String code = validateCode.getCode();
-        request.getSession().setAttribute("code",code);
+        //String code = validateCode.getCode();
+        request.getSession().setAttribute("code","123");
         //3.向页面写回验证码
         ServletOutputStream outputStream = response.getOutputStream();
-        validateCode.write(outputStream);
+        //validateCode.write(outputStream);
     }
 }

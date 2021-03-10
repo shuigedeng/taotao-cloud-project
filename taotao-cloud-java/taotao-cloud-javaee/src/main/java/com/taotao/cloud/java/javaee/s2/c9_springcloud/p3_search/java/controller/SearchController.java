@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p3_search.java.controller;
 
 
-import com.qf.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p3_search.java.entity.Customer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,10 +1,10 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service.impl;
 
-import com.itqf.dao.AddressDao;
-import com.itqf.dao.impl.AddressDaoImpl;
-import com.itqf.entity.Address;
-import com.itqf.service.AddressService;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.AddressDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.impl.AddressDaoImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Address;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.AddressService;
 import java.sql.SQLException;
 import java.util.List;
 

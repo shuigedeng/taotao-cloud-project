@@ -2,8 +2,8 @@ package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qf.entity.Person;
-import com.qf.utils.ESClient;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.entity.Person;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.utils.ESClient;
 import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;

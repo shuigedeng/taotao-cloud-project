@@ -1,6 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.customer.test.mapper;
 
-import com.qf.openapi.customer.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.mapper.CustomerMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

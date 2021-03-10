@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c11_distributed.order.java.controller;
 
-import com.qf.order.service.OrderServer;
+import com.taotao.cloud.java.javaee.s2.c11_distributed.order.java.service.OrderServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

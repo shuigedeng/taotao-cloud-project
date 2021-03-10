@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.controller;
 
-import com.qf.entity.Customer;
-import com.qf.stream.StreamClient;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.stream.StreamClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;

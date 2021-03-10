@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c11_distributed.second_kill.java.controller;
 
-import com.qf.secondkill.util.RedisLockUtil;
+import com.taotao.cloud.java.javaee.s2.c11_distributed.second_kill.java.util.RedisLockUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.springframework.beans.factory.annotation.Autowired;

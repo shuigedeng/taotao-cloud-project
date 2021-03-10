@@ -1,15 +1,15 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service.impl;
 
-import com.itqf.dao.CartDao;
-import com.itqf.dao.OrdersDao;
-import com.itqf.dao.impl.CartDaoImpl;
-import com.itqf.dao.impl.OrdersDaoImpl;
-import com.itqf.entity.Cart;
-import com.itqf.entity.Item;
-import com.itqf.entity.Orders;
-import com.itqf.service.OrdersService;
-import com.itqf.utils.RandomUtils;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.CartDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.OrdersDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.impl.CartDaoImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.impl.OrdersDaoImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Cart;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Item;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Orders;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.OrdersService;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.RandomUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.SQLException;

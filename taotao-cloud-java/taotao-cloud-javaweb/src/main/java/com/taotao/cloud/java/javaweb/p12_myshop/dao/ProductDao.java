@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao;
 
-import com.itqf.entity.Product;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Product;
 import java.sql.SQLException;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.fallback;
 
-import com.qf.client.SearchClient;
-import com.qf.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.client.SearchClient;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.entity.Customer;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -2,9 +2,9 @@ package com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qf.dao.UserDAO;
-import com.qf.entity.User;
-import com.qf.util.MyBatisUtil;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.java.util.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;

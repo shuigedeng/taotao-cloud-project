@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service;
 
-import com.itqf.entity.PageBean;
-import com.itqf.entity.Product;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.PageBean;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Product;
 import java.sql.SQLException;
 
 public interface ProductService {

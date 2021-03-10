@@ -1,8 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.client;
 
-import com.qf.entity.Customer;
-import com.qf.factory.SearchClientFallBackFactory;
-import com.qf.fallback.SearchClientFallBack;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.factory.SearchClientFallBackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

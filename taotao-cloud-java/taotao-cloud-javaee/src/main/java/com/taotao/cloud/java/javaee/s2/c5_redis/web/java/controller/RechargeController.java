@@ -34,11 +34,11 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.controller;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.Recharge;
-import com.qianfeng.openapi.web.master.bean.TableData;
-import com.qianfeng.openapi.web.master.service.CustomerService;
-import com.qianfeng.openapi.web.master.service.RechargeService;
-import com.qianfeng.openapi.web.master.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.bean.TableData;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Recharge;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.RechargeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

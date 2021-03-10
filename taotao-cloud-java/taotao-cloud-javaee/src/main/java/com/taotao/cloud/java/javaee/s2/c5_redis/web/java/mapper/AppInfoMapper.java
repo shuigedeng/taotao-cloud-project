@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper;
 
-import com.qianfeng.openapi.web.master.pojo.AppInfo;
 
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.AppInfo;
 import java.util.List;
 
 public interface AppInfoMapper {

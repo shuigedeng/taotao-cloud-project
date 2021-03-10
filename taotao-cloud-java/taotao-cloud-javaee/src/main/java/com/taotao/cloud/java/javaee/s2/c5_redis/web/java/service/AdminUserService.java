@@ -3,8 +3,8 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
 
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.AdminUser;
 import java.util.List;
 
 public interface AdminUserService {

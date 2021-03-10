@@ -2,8 +2,8 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.qianfeng.openapi.web.master.pojo.Menu;
 
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Menu;
 import java.util.List;
 
 public interface MenuService {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.mapper;
 
-import com.qianfeng.openapi.web.master.pojo.ApiSystemparam;
 
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.ApiSystemparam;
 import java.util.List;
 /**
 *  @author author

@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c10_zookeeper.java.test;
 
-import com.qf.ZkUtil;
+import com.taotao.cloud.java.javaee.s2.c10_zookeeper.java.ZkUtil;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;

@@ -1,11 +1,11 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.controller;
 
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
-import com.qianfeng.openapi.web.master.pojo.Menu;
-import com.qianfeng.openapi.web.master.service.AdminUserService;
-import com.qianfeng.openapi.web.master.service.MenuService;
-import com.qianfeng.openapi.web.master.util.AdminConstants;
-import com.qianfeng.openapi.web.master.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.bean.AjaxMessage;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.AdminUser;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Menu;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.AdminUserService;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.MenuService;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.util.AdminConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

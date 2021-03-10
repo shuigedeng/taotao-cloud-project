@@ -1,11 +1,10 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.service.impl;
 
-import com.qf.openapi.search.entity.Customer;
-import com.qf.openapi.search.service.CustomerService;
-import com.qf.openapi.search.utils.JSON;
-import com.qf.openapi.search.vo.LayUITableVO;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.utils.JSON;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.vo.LayUITableVO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.beanutils.BeanUtils;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -16,6 +15,7 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -66,12 +66,12 @@ public class CustomerServiceImpl implements CustomerService {
 
         //4. 封装数据
         LayUITableVO<Customer> vo = new LayUITableVO<>();
-        vo.setCount(resp.getHits().getTotalHits());
+//        vo.setCount(resp.getHits().getTotalHits());
         List<Customer> data = new ArrayList<>();
         for (SearchHit hit : resp.getHits().getHits()) {
             Customer customer = new Customer();
             try {
-                BeanUtils.populate(customer,hit.getSourceAsMap());
+                BeanUtils.copyProperties(customer,hit.getSourceAsMap());
             } catch (Exception e) {
                 e.printStackTrace();
             }

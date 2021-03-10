@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qf.entity.SmsLogs;
-import com.qf.utils.ESClient;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.entity.SmsLogs;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.utils.ESClient;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.index.IndexRequest;

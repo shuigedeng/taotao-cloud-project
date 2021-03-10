@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.service;
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.AppInfo;
 
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.AppInfo;
 import java.util.List;
 
 public interface AppInfoService {

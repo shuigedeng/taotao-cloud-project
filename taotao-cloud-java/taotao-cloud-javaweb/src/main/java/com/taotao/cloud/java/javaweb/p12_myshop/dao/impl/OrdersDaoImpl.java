@@ -1,11 +1,11 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao.impl;
 
-import com.itqf.dao.OrdersDao;
-import com.itqf.entity.Address;
-import com.itqf.entity.Item;
-import com.itqf.entity.Orders;
-import com.itqf.entity.Product;
-import com.itqf.utils.C3P0Utils;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.OrdersDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Address;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Item;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Orders;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Product;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.C3P0Utils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapHandler;

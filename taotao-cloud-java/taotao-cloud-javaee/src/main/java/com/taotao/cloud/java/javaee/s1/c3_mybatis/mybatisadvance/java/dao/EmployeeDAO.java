@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.dao;
 
-import com.qf.entity.Employee;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.entity.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

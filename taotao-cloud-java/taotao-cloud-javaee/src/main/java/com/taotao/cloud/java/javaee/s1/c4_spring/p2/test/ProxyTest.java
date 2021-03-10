@@ -1,6 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p2.test;
 
-import com.qf.fangdong.FangDongProxy;
+
+import com.taotao.cloud.java.javaee.s1.c4_spring.p2.java.fangdong.FangDongProxy;
 
 public class ProxyTest {
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p2.test;
-import com.qf.fangdong.FangDongService;
-import com.qf.fangdong.FangDongServiceImpl;
-import com.qf.service.UserService;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p2.java.fangdong.FangDongService;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p2.java.fangdong.FangDongServiceImpl;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p2.java.service.UserService;
 import org.junit.Test;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;

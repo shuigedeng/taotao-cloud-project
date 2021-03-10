@@ -32,7 +32,7 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.Recharge;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Recharge;
 
 /**
  * Created by jackiechan on 2020-04-06 03:15

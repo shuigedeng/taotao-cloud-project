@@ -1,10 +1,10 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.service.impl;
 
-import com.qianfeng.openapi.web.master.mapper.MenuMapper;
-import com.qianfeng.openapi.web.master.mapper.RoleMapper;
-import com.qianfeng.openapi.web.master.pojo.Menu;
-import com.qianfeng.openapi.web.master.service.MenuService;
-import com.qianfeng.openapi.web.master.util.AdminConstants;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.mapper.MenuMapper;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.mapper.RoleMapper;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Menu;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.MenuService;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.util.AdminConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.utils;
 
-import com.itqf.entity.User;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;

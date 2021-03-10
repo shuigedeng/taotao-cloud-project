@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service;
 
-import com.itqf.entity.Orders;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Orders;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;

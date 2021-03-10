@@ -2,9 +2,9 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.mapper.ApiMappingMapper;
-import com.qianfeng.openapi.web.master.pojo.ApiMapping;
-import com.qianfeng.openapi.web.master.service.ApiMappingService;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.mapper.ApiMappingMapper;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.ApiMapping;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.ApiMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c11_distributed.item.java.controller;
 
-import com.qf.item.service.ItemService;
+import com.taotao.cloud.java.javaee.s2.c11_distributed.item.java.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

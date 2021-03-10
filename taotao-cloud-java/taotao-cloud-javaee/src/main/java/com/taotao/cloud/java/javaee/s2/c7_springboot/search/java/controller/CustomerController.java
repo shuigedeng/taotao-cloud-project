@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.controller;
 
 
-import com.qf.openapi.search.entity.Customer;
-import com.qf.openapi.search.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.service.CustomerService;
 import org.elasticsearch.cluster.ClusterState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

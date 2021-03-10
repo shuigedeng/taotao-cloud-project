@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.search.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qf.openapi.search.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.entity.Customer;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequest;

@@ -32,7 +32,7 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.ApiSystemparam;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.ApiSystemparam;
 
 /**
  * Created by jackiechan on 2020-04-05 02:32

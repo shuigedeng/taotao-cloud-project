@@ -1,11 +1,11 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service.impl;
 
-import com.itqf.dao.ProductDao;
-import com.itqf.dao.impl.ProductDaoImpl;
-import com.itqf.entity.PageBean;
-import com.itqf.entity.Product;
-import com.itqf.service.ProductService;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.ProductDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.impl.ProductDaoImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.PageBean;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Product;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.ProductService;
 import java.sql.SQLException;
 import java.util.List;
 

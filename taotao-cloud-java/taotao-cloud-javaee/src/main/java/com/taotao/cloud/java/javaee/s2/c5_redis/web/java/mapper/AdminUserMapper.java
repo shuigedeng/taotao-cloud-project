@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper;
 
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.AdminUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

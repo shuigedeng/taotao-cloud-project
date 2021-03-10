@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.dao;
 
-import com.qf.entity.Department;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.entity.Department;
 import org.apache.ibatis.annotations.Param;
 
 public interface DepartmentDAO {

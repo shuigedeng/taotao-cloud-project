@@ -3,10 +3,10 @@ package com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.controll
 import com.netflix.discovery.EurekaClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.qf.client.OtherServiceClient;
-import com.qf.client.SearchClient;
-import com.qf.entity.Customer;
-import com.qf.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.client.OtherServiceClient;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.client.SearchClient;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p2_customer.java.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

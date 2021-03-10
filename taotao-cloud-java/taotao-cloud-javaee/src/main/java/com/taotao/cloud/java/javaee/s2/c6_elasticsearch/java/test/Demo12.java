@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qf.utils.ESClient;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.utils.ESClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -9,8 +9,9 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.range.Range;
-import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
-import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats;
+//import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
+//import org.elasticsearch.search.aggregations.metrics.stats.extended.ExtendedStats;
+import org.elasticsearch.search.aggregations.metrics.Cardinality;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Test;
 
@@ -39,10 +40,10 @@ public class Demo12 {
         SearchResponse resp = client.search(request, RequestOptions.DEFAULT);
 
         //4. 获取返回结果
-        ExtendedStats agg = resp.getAggregations().get("agg");
-        double max = agg.getMax();
-        double min = agg.getMin();
-        System.out.println("fee的最大值为：" + max + "，最小值为：" + min);
+//        ExtendedStats agg = resp.getAggregations().get("agg");
+//        double max = agg.getMax();
+//        double min = agg.getMin();
+//        System.out.println("fee的最大值为：" + max + "，最小值为：" + min);
     }
 
     @Test

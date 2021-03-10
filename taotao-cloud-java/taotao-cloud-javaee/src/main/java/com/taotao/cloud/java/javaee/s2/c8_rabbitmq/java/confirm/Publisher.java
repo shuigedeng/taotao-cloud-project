@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.confirm;
 
-import com.qf.config.RabbitMQClient;
 import com.rabbitmq.client.*;
 import com.rabbitmq.client.impl.AMQBasicProperties;
+import com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.config.RabbitMQClient;
 import org.junit.Test;
 
 import java.io.IOException;

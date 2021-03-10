@@ -2,12 +2,12 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qianfeng.openapi.web.master.mapper.MenuMapper;
-import com.qianfeng.openapi.web.master.mapper.RoleMapper;
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
-import com.qianfeng.openapi.web.master.pojo.Menu;
-import com.qianfeng.openapi.web.master.service.MenuService;
-import com.qianfeng.openapi.web.master.util.AdminConstants;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper.MenuMapper;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper.RoleMapper;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.AdminUser;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Menu;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.MenuService;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.util.AdminConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

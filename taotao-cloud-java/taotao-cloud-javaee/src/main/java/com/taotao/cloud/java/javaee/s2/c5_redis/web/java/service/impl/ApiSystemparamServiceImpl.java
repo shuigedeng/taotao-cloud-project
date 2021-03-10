@@ -35,9 +35,9 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.mapper.ApiSystemparamMapper;
-import com.qianfeng.openapi.web.master.pojo.ApiSystemparam;
-import com.qianfeng.openapi.web.master.service.ApiSystemparamService;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper.ApiSystemparamMapper;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.ApiSystemparam;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.service.ApiSystemparamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

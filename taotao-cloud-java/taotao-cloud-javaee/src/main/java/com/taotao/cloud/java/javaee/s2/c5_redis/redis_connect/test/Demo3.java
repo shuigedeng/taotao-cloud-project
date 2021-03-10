@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.redis_connect.test;
 
 import com.alibaba.fastjson.JSON;
-import com.qf.entity.User;
+import com.taotao.cloud.java.javaee.s2.c5_redis.redis_connect.entity.User;
 import org.junit.Test;
 import org.springframework.util.SerializationUtils;
 import redis.clients.jedis.Jedis;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis.java.dao;
 
-import com.qf.entity.Employee;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis.java.entity.Employee;
 import org.apache.ibatis.annotations.Param;
 
 public interface EmployeeDAO {

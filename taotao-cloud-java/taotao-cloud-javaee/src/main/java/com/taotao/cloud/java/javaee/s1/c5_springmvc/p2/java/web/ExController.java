@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.web;
 
-import com.qf.ex.MyException1;
-import com.qf.ex.MyException2;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.ex.MyException1;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.ex.MyException2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

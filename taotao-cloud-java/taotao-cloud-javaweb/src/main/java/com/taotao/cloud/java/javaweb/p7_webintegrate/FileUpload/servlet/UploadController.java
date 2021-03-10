@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.servlet;
 
-import com.qf.utils.UploadUtils;
 
+import com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.utils.UploadUtils;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "UploadController",value = "/upload")
 @MultipartConfig(maxFileSize = 1024*1024*100,maxRequestSize = 1024*1024*200)
 public class UploadController extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //实现文件上传
 
@@ -62,6 +63,7 @@ public class UploadController extends HttpServlet {
         response.getWriter().println(part.getSubmittedFileName()+"上传成功！");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

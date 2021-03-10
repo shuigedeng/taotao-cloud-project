@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.controller;
 
-import com.qf.firstspringboot.entity.User;
-import com.qf.firstspringboot.properties.AliyunProperties;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.entity.User;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.properties.AliyunProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

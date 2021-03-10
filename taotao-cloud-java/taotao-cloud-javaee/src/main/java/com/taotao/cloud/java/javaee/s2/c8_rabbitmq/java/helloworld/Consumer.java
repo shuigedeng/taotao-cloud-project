@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.helloworld;
 
-import com.qf.config.RabbitMQClient;
 import com.rabbitmq.client.*;
+import com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.config.RabbitMQClient;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
 
@@ -31,7 +31,7 @@ public class Consumer {
                 Jedis jedis = new Jedis("192.168.199.109",6379);
                 String messageId = properties.getMessageId();
                 //1. setnx到Redis中，默认指定value-0
-                String result = jedis.set(messageId, "0", "NX", "EX", 10);
+                String result = jedis.set(messageId, "0");
                 if(result != null && result.equalsIgnoreCase("OK")) {
                     System.out.println("接收到消息：" + new String(body, "UTF-8"));
                     //2. 消费成功，set messageId 1

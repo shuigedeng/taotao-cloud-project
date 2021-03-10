@@ -1,13 +1,13 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service.impl;
 
-import com.itqf.dao.UserDao;
-import com.itqf.dao.impl.UserDaoImpl;
-import com.itqf.entity.User;
-import com.itqf.service.UserService;
-import com.itqf.utils.Constants;
-import com.itqf.utils.EmailUtils;
-import com.itqf.utils.MD5Utils;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.UserDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.impl.UserDaoImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.UserService;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.EmailUtils;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.MD5Utils;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {

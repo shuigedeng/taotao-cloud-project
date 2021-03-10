@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.servlet;
 
-import com.qf.utils.UploadUtils;
 
+import com.taotao.cloud.java.javaweb.p7_webintegrate.FileUpload.utils.UploadUtils;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 
 @WebServlet(name = "DownLoadController",value = "/downLoad")
 public class DownLoadController extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -40,6 +41,7 @@ public class DownLoadController extends HttpServlet {
 
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.mapper;
 
-import com.qianfeng.openapi.web.master.pojo.UserToken;
 
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.UserToken;
 import java.util.List;
 
 public interface UserTokenMapper {

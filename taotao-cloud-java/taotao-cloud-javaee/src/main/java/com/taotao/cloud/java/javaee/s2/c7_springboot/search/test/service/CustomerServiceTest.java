@@ -1,6 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.search.test.service;
 
-import com.qf.openapi.search.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

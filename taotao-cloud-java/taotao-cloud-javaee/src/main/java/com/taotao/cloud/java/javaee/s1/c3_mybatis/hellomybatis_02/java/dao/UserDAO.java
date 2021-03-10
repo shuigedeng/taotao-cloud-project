@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.java.dao;
 
-import com.qf.entity.User;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.hellomybatis_02.java.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

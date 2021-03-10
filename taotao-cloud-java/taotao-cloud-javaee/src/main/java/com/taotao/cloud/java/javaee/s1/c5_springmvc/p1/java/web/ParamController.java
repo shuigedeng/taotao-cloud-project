@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c5_springmvc.p1.java.web;
 
-import com.qf.entity.User;
-import com.qf.entity.UserList;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p1.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p1.java.entity.UserList;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

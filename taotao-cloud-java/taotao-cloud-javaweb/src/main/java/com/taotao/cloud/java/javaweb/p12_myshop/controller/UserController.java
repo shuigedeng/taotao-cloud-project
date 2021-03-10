@@ -1,12 +1,12 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
-import com.itqf.entity.User;
-import com.itqf.service.UserService;
-import com.itqf.service.impl.UserServiceImpl;
-import com.itqf.utils.Base64Utils;
-import com.itqf.utils.Constants;
-import com.itqf.utils.MD5Utils;
-import com.itqf.utils.RandomUtils;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.UserService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.UserServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Base64Utils;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.MD5Utils;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.RandomUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;

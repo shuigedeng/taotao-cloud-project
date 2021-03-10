@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c10_ssm.java.mapper;
 
-import com.qianfeng.ssmobject.pojo.User;
 
+import com.taotao.cloud.java.javaee.s1.c10_ssm.java.pojo.User;
 import java.util.List;
 
 public interface UserMapper {

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.qf.serialize.MySerializer;
 
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.serialize.MySerializer;
 import java.util.Date;
 import java.util.List;
 

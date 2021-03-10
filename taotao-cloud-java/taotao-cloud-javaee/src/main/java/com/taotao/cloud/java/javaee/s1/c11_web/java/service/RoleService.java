@@ -2,8 +2,8 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.Role;
 
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Role;
 import java.util.List;
 
 public interface RoleService {

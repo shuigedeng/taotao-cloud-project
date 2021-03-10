@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c9_springcloud.p3_search.java.listener;
 
-import com.qf.stream.StreamClient;
 import com.rabbitmq.client.Channel;
+import com.taotao.cloud.java.javaee.s2.c9_springcloud.p3_search.java.stream.StreamClient;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.test;
 
-import com.qf.dao.UserDAO;
-import com.qf.entity.User;
-import com.qf.util.MyBatisUtil;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.util.MyBatisUtil;
 import org.junit.Test;
 import java.sql.*;
 import java.util.Date;

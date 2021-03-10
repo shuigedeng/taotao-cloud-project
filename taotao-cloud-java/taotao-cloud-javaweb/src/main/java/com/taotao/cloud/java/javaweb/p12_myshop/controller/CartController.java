@@ -1,11 +1,11 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
-import com.itqf.entity.Cart;
-import com.itqf.entity.User;
-import com.itqf.service.CartService;
-import com.itqf.service.impl.CartServiceImpl;
-import com.itqf.utils.Constants;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Cart;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.CartService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.CartServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

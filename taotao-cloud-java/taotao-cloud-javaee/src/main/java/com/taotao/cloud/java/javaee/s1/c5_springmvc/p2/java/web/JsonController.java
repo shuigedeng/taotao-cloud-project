@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.web;
 
-import com.qf.entity.User;
-import com.qf.entity.User2;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.entity.User2;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 

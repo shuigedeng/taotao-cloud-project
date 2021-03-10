@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.filter;
 
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
-import com.qianfeng.openapi.web.master.pojo.Menu;
-import com.qianfeng.openapi.web.master.util.AdminConstants;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.AdminUser;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Menu;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.util.AdminConstants;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
@@ -21,6 +21,7 @@ public class SecurityFilter implements Filter {
 
     private static final String[] freeUrlList = {"/index.html","/side"};
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
@@ -30,6 +31,7 @@ public class SecurityFilter implements Filter {
     public void destroy() {
     }
 
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;

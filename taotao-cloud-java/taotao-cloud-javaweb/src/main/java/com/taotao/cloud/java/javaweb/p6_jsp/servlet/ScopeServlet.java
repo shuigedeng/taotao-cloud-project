@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ScopeServlet",value = "/scope")
 public class ScopeServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("requestScope","bbb");
 //        转发
@@ -19,6 +20,7 @@ public class ScopeServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath()+"/inner/innerObj.jsp");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

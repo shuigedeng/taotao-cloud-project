@@ -1,6 +1,6 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.mapper;
 
-import com.qf.firstspringboot.entity.District;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.entity.District;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

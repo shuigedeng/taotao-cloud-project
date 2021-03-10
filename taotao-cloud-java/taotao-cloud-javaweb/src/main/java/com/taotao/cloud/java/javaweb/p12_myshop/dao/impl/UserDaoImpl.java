@@ -1,9 +1,9 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.dao.impl;
 
-import com.itqf.dao.UserDao;
-import com.itqf.entity.User;
-import com.itqf.utils.C3P0Utils;
-import com.itqf.utils.Constants;
+import com.taotao.cloud.java.javaweb.p12_myshop.dao.UserDao;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.C3P0Utils;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 

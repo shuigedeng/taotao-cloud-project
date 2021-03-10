@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.service;
 
-import com.itqf.entity.User;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
 import java.sql.SQLException;
 
 /**

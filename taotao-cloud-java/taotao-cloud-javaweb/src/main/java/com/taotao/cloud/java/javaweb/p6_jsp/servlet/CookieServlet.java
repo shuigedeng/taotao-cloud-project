@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CookieServlet",value = "/cookie")
 public class CookieServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie cookie = new Cookie("username","tom");
         Cookie cookie1 = new Cookie("password","123456");
@@ -18,6 +19,7 @@ public class CookieServlet extends HttpServlet {
         response.addCookie(cookie1);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }

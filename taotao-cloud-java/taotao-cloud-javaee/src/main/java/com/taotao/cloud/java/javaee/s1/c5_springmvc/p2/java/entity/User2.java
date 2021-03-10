@@ -2,8 +2,8 @@ package com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.qf.serialize.MySerializer2;
 
+import com.taotao.cloud.java.javaee.s1.c5_springmvc.p2.java.serialize.MySerializer2;
 import java.util.Date;
 
 public class User2 {
@@ -15,7 +15,6 @@ public class User2 {
     private String city;// null
     @JSONField(format="yyyy/MM/dd")
     private Date birth;
-    @JSONField(serializeUsing = MySerializer2.class)
     private Double salary; // 元
 
     public User2(){}

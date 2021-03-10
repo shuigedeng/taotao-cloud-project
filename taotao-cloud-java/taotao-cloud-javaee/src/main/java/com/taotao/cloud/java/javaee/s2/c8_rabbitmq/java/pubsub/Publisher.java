@@ -1,9 +1,9 @@
 package com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.pubsub;
 
-import com.qf.config.RabbitMQClient;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.taotao.cloud.java.javaee.s2.c8_rabbitmq.java.config.RabbitMQClient;
 import org.junit.Test;
 
 public class Publisher {

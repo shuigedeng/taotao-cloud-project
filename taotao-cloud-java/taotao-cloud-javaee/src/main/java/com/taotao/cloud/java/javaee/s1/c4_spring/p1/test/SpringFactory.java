@@ -1,9 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p1.test;
 
-import com.qf.entity.Student;
-import com.qf.entity.User;
-import com.qf.factorybean.MyConnectionFactoryBean;
-import com.qf.service.UserService;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.entity.Student;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.factorybean.MyConnectionFactoryBean;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

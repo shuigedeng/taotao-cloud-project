@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.mapper;
 
-import com.qianfeng.openapi.web.master.pojo.Recharge;
 
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Recharge;
 import java.util.List;
 /**
 *  @author author

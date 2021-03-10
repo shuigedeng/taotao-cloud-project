@@ -6,11 +6,23 @@ bootJar.enabled = false
 dependencies {
     implementation "mysql:mysql-connector-java:8.0.23"
     implementation "commons-dbutils:commons-dbutils:1.7"
+    implementation "commons-beanutils:commons-beanutils:1.8.0"
 
     implementation group: 'com.mchange', name: 'c3p0', version: '0.9.5.5'
-
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.8.0'
-
     implementation group: 'com.alibaba', name: 'druid', version: '1.2.4'
 
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'org.springframework:spring-tx'
+    implementation 'org.springframework:spring-context'
+
+    implementation "com.google.code.gson:gson"
+    implementation 'javax.mail:mail:1.4.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'javax.servlet:javax.servlet-api'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.projectlombok:lombok'
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

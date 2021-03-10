@@ -2,10 +2,10 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.mapper.AdminUserMapper;
-import com.qianfeng.openapi.web.master.mapper.RoleMapper;
-import com.qianfeng.openapi.web.master.pojo.Role;
-import com.qianfeng.openapi.web.master.service.RoleService;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.mapper.AdminUserMapper;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.mapper.RoleMapper;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Role;
+import com.taotao.cloud.java.javaee.s1.c11_web.java.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

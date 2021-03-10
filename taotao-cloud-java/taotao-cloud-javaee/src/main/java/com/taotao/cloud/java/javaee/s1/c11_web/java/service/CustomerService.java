@@ -32,8 +32,8 @@ package com.taotao.cloud.java.javaee.s1.c11_web.java.service;
 
 
 import com.github.pagehelper.PageInfo;
-import com.qianfeng.openapi.web.master.pojo.Customer;
 
+import com.taotao.cloud.java.javaee.s1.c11_web.java.pojo.Customer;
 import java.util.List;
 
 /**

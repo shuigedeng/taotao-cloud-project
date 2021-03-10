@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.controller;
 
-import com.qf.openapi.customer.entity.Customer;
-import com.qf.openapi.customer.service.CustomerService;
-import com.qf.openapi.customer.vo.ResultVO;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.entity.Customer;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.service.CustomerService;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

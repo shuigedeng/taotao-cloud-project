@@ -1,11 +1,11 @@
 package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
 
-import com.itqf.entity.Address;
-import com.itqf.entity.User;
-import com.itqf.service.AddressService;
-import com.itqf.service.impl.AddressServiceImpl;
-import com.itqf.utils.Constants;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Address;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.AddressService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.AddressServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;

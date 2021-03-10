@@ -2,15 +2,19 @@ package com.taotao.cloud.java.javaweb.p12_myshop.controller;
 
 
 import com.google.gson.Gson;
-import com.itqf.entity.*;
-import com.itqf.service.AddressService;
-import com.itqf.service.CartService;
-import com.itqf.service.OrdersService;
-import com.itqf.service.impl.AddressServiceImpl;
-import com.itqf.service.impl.CartServiceImpl;
-import com.itqf.service.impl.OrdersServiceImpl;
-import com.itqf.utils.Constants;
 
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Address;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Cart;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.Orders;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.User;
+import com.taotao.cloud.java.javaweb.p12_myshop.entity.WeiXin;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.AddressService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.CartService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.OrdersService;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.AddressServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.CartServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.service.impl.OrdersServiceImpl;
+import com.taotao.cloud.java.javaweb.p12_myshop.utils.Constants;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

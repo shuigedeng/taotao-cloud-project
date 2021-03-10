@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c11_distributed.order.java.service.impl;
 
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
-import com.qf.order.mapper.OrderMapper;
-import com.qf.order.service.OrderServer;
+import com.taotao.cloud.java.javaee.s2.c11_distributed.order.java.mapper.OrderMapper;
+import com.taotao.cloud.java.javaee.s2.c11_distributed.order.java.service.OrderServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

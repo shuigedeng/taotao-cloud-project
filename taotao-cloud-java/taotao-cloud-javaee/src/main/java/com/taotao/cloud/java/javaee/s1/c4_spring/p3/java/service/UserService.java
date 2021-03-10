@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.service;
 
-import com.qf.entity.User;
 
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.entity.User;
 import java.sql.SQLException;
 import java.util.List;
 

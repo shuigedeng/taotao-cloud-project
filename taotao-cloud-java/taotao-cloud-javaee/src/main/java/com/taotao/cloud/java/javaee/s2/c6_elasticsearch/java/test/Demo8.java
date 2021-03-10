@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qf.utils.ESClient;
+import com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.utils.ESClient;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;

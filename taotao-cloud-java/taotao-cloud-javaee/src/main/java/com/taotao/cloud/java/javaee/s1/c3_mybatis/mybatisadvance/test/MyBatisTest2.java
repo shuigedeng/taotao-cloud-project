@@ -1,10 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.test;
 
-import com.qf.dao.EmployeeDAO;
-import com.qf.entity.Department;
-import com.qf.entity.Employee;
-import com.qf.entity.User;
-import com.qf.util.MyBatisUtil;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.dao.EmployeeDAO;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.entity.Employee;
+import com.taotao.cloud.java.javaee.s1.c3_mybatis.mybatisadvance.java.util.MyBatisUtil;
 import org.junit.Test;
 
 public class MyBatisTest2 {

@@ -2,9 +2,8 @@ package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.filter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qianfeng.openapi.web.master.pojo.AdminUser;
-import com.qianfeng.openapi.web.master.pojo.Menu;
-import com.qianfeng.openapi.web.master.util.AdminConstants;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo.Menu;
+import com.taotao.cloud.java.javaee.s2.c5_redis.web.java.util.AdminConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -30,6 +29,7 @@ public class SecurityFilter implements Filter {
 
     private JedisPool pool;
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         ServletContext servletContext = filterConfig.getServletContext();
         WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -42,6 +42,7 @@ public class SecurityFilter implements Filter {
     public void destroy() {
     }
 
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p3.test;
 
-import com.qf.dao.UserDAO;
-import com.qf.entity.User;
-import com.qf.service.UserService;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.entity.User;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p3.java.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;

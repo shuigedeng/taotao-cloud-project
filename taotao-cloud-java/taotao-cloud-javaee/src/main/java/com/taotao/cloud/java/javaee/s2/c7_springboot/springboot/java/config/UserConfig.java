@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.config;
 
 
-import com.qf.firstspringboot.entity.User;
+import com.taotao.cloud.java.javaee.s2.c7_springboot.springboot.java.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

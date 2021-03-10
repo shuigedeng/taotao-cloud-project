@@ -1,9 +1,9 @@
 package com.taotao.cloud.java.javaee.s1.c4_spring.p1.test;
 
-import com.qf.dao.UserDAO;
-import com.qf.factory.MyFactory;
-import com.qf.service.UserService;
 
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.dao.UserDAO;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.factory.MyFactory;
+import com.taotao.cloud.java.javaee.s1.c4_spring.p1.java.service.UserService;
 import java.io.IOException;
 
 public class FactoryTest {
