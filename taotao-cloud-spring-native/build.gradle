@@ -1,0 +1,7 @@
+archivesBaseName = 'taotao-cloud-spring-native'
+
+jar.enabled = true
+bootJar.enabled = false
+
+dependencies {
+}

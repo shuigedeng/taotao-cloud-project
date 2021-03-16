@@ -2,9 +2,9 @@ pluginManagement {
     repositories {
         mavenLocal()
         gradlePluginPortal()
-        maven { url "https://plugins.gradle.org/m2/"}
-        maven { url 'https://jetbrains.bintray.com/intellij-plugin-service'}
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/'}
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://jetbrains.bintray.com/intellij-plugin-service' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url 'https://repo.spring.io/plugins-release' }
     }
@@ -12,13 +12,13 @@ pluginManagement {
 
 rootProject.name = 'taotao-cloud-project'
 
-def oneLayerProjects = ['dependencies', 'linux', 'netty', 'opencv', 'scala', 'spring-source', 'config']
-for ( project in oneLayerProjects ) {
+def oneLayerProjects = ['dependencies', 'linux', 'netty', 'opencv', 'scala', 'spring-source', 'spring-native', 'config', 'processor']
+for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
 def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'realtime', 'plugin', 'reactive']
-for ( project in twoLayerProjects ) {
+for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
         directory.eachDir {
@@ -30,7 +30,7 @@ for ( project in twoLayerProjects ) {
 }
 
 def threeLayerProjects = ['microservice', 'demo', 'dubbo']
-for ( project in threeLayerProjects ) {
+for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
         if (directory.name != "build" && directory.name != "out") {

@@ -1,0 +1,7 @@
+archivesBaseName = 'taotao-cloud-processor'
+
+jar.enabled = false
+
+dependencies {
+
+}

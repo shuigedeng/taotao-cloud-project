@@ -1,6 +1,10 @@
 package com.taotao.cloud.uc.biz.entity;// package com.taotao.cloud.uc.biz.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import java.time.LocalDateTime;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -8,6 +12,8 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * 字典表
@@ -25,7 +31,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_sys_dict")
 @org.hibernate.annotations.Table(appliesTo = "tt_sys_dict", comment = "字典表")
-public class SysDict extends BaseEntity {
+public class SysDict {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "bigint not null comment 'id'")
+	private Long id;
 
     /**
      * 字典名称
@@ -57,4 +68,13 @@ public class SysDict extends BaseEntity {
      */
     @Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
     private String remark;
+
+
+	@CreatedDate
+	@Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
+	private LocalDateTime createTime;
+
+	@LastModifiedDate
+	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP comment '最后修改时间'")
+	private LocalDateTime lastModifiedTime;
 }
