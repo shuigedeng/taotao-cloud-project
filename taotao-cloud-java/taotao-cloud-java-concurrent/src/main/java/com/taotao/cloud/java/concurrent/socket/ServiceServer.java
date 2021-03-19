@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.socket;
+package com.taotao.cloud.java.concurrent.socket;
 
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;

@@ -1,7 +1,6 @@
 archivesBaseName = 'taotao-cloud-flink'
 
-jar.enabled = false
-bootJar.enabled = false
+jar.enabled = true
 
 apply plugin: 'scala'
 

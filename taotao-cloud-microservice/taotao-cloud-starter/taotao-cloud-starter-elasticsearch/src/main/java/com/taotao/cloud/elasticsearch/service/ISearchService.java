@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service;
 
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import java.io.IOException;
 
@@ -36,5 +36,5 @@ public interface ISearchService {
 	 * @author dengtao
 	 * @since 2020/9/29 15:37
 	 */
-	PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException;
+	PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException;
 }

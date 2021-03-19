@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.futures;
+package com.taotao.cloud.java.concurrent.futures;
 
 import static java.util.concurrent.Executors.newCachedThreadPool;
 

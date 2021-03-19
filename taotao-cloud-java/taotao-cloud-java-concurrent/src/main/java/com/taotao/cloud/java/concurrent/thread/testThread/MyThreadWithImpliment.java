@@ -1,5 +1,4 @@
-package com.taotao.cloud.java.thread.testThread;
-
+package com.taotao.cloud.java.concurrent.thread.testThread;
 
 public class MyThreadWithImpliment implements Runnable {
     int x;

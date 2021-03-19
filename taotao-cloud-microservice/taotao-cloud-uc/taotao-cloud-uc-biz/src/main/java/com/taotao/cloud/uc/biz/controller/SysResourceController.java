@@ -3,7 +3,7 @@ package com.taotao.cloud.uc.biz.controller;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.utils.SecurityUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -17,7 +17,6 @@ import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -136,12 +135,12 @@ public class SysResourceController {
 	@RequestOperateLog(description = "分页查询资源集合")
 	@PreAuthorize("hasAuthority('sys:resource:view:page')")
 	@GetMapping(value = "/page")
-	public PageResult<ResourceVO> findResourcePage(@Validated @NotNull ResourcePageQuery resourceQuery) {
+	public PageModel<ResourceVO> findResourcePage(@Validated @NotNull ResourcePageQuery resourceQuery) {
 		Pageable pageable = PageRequest.of(resourceQuery.getCurrentPage(), resourceQuery.getPageSize());
-		Page<SysResource> page = resourceService.findResourcePage(pageable, resourceQuery);
+		org.springframework.data.domain.Page page = resourceService.findResourcePage(pageable, resourceQuery);
 		List<ResourceVO> resources = ResourceMapper.INSTANCE.sysResourceToResourceVo(page.getContent());
-		Page<ResourceVO> result = new PageImpl<>(resources, pageable, page.getTotalElements());
-		return PageResult.succeed(result);
+		org.springframework.data.domain.Page result = new PageImpl<>(resources, pageable, page.getTotalElements());
+		return PageModel.succeed(result);
 	}
 
 	@ApiOperation("查询所有资源列表")

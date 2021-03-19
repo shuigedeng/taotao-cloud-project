@@ -1,7 +1,6 @@
 archivesBaseName = 'taotao-cloud-datax'
 
 jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
 

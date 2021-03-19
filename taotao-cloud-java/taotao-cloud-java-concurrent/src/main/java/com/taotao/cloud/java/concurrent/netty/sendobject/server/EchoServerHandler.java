@@ -1,6 +1,6 @@
-package com.taotao.cloud.java.netty.sendobject.server;
+package com.taotao.cloud.java.concurrent.netty.sendobject.server;
 
-import com.taotao.cloud.java.netty.sendobject.bean.Person;
+import com.taotao.cloud.java.concurrent.netty.sendobject.bean.Person;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

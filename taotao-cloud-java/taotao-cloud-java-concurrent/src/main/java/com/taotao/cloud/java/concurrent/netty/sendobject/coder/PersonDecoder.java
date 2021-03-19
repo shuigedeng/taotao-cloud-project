@@ -1,7 +1,7 @@
-package com.taotao.cloud.java.netty.sendobject.coder;
+package com.taotao.cloud.java.concurrent.netty.sendobject.coder;
 
-import com.taotao.cloud.java.netty.sendobject.utils.ByteBufToBytes;
-import com.taotao.cloud.java.netty.sendobject.utils.ByteObjConverter;
+import com.taotao.cloud.java.concurrent.netty.sendobject.utils.ByteBufToBytes;
+import com.taotao.cloud.java.concurrent.netty.sendobject.utils.ByteObjConverter;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;

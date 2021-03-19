@@ -1,7 +1,6 @@
 archivesBaseName = 'taotao-cloud-flume'
 
-jar.enabled = false
-bootJar.enabled = false
+jar.enabled = true
 
 dependencies {
     implementation 'org.apache.flume:flume-ng-core:1.9.0'

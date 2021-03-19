@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.springannotation.springrunorder;
+package com.taotao.cloud.java.concurrent.springannotation.springrunorder;
 
 public class Two {
     public volatile String aString;

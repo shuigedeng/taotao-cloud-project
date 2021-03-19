@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service;
 
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.IndexDto;
 import java.io.IOException;
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public interface IIndexService {
 	 * @author dengtao
 	 * @since 2021/2/26 08:58
 	 */
-	PageResult<HashMap<String, String>> list(String queryStr, String indices) throws IOException;
+	PageModel<HashMap<String, String>> list(String queryStr, String indices) throws IOException;
 
 
 	/**

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.thread.volatiletest;
+package com.taotao.cloud.java.concurrent.thread.volatiletest;
 
 public class TestVolatile {
 

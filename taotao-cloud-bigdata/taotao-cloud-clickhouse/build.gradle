@@ -1,8 +1,13 @@
-archivesBaseName = 'taotao-cloud-clickhouse'
-
-jar.enabled = false
-bootJar.enabled = false
+jar.enabled = true
 
 dependencies {
 
+    implementation 'ru.yandex.clickhouse:clickhouse-jdbc:0.1.53'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    implementation 'com.alibaba:druid-spring-boot-starter:1.1.13'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:2.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
 }

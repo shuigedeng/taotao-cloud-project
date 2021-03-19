@@ -1,6 +1,5 @@
 package com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.service.impl;
 
-
 import com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.annotation.RpcService;
 import com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.service.HelloService;
 

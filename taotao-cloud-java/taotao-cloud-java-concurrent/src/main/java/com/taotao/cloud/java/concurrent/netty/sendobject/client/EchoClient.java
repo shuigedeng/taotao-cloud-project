@@ -1,6 +1,6 @@
-package com.taotao.cloud.java.netty.sendobject.client;
+package com.taotao.cloud.java.concurrent.netty.sendobject.client;
 
-import com.taotao.cloud.java.netty.sendobject.coder.PersonEncoder;
+import com.taotao.cloud.java.concurrent.netty.sendobject.coder.PersonEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

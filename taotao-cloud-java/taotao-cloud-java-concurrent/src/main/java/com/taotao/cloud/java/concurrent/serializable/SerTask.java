@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.serializable;
+package com.taotao.cloud.java.concurrent.serializable;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;

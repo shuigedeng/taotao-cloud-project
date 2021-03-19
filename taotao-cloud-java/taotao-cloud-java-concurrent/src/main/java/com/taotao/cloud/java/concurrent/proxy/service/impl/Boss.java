@@ -1,6 +1,6 @@
-package com.taotao.cloud.java.proxy.service.impl;
+package com.taotao.cloud.java.concurrent.proxy.service.impl;
 
-import com.taotao.cloud.java.proxy.service.IBoss;
+import com.taotao.cloud.java.concurrent.proxy.service.IBoss;
 
 /**
  * 实现了卖衣服的接口

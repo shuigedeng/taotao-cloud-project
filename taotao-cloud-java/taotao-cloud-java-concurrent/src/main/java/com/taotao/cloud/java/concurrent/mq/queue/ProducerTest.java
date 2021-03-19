@@ -1,5 +1,4 @@
-package com.taotao.cloud.java.mq.queue;
-
+package com.taotao.cloud.java.concurrent.mq.queue;
 import javax.jms.JMSException;
 
 public class ProducerTest {

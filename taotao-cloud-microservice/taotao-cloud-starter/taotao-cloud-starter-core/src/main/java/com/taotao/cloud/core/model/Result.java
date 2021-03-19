@@ -20,8 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import org.slf4j.MDC;
@@ -38,28 +37,28 @@ import java.time.LocalDateTime;
  */
 @Data
 @Builder
-@ApiModel(value = "Result", description = "返回结果对象")
+@Schema(name = "Result", description = "返回结果对象")
 public class Result<T> implements Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;
 
-	@ApiModelProperty(value = "状态码")
+	@Schema(description = "状态码", required = true)
 	private int code;
 
-	@ApiModelProperty(value = "返回数据")
+	@Schema(description = "返回数据")
 	private T data;
 
-	@ApiModelProperty(value = "消息类型 success error")
+	@Schema(description = "消息类型 success error")
 	private String type;
 
-	@ApiModelProperty(value = "消息体")
+	@Schema(description = "消息体")
 	private String message;
 
-	@ApiModelProperty(value = "请求id")
+	@Schema(description = "请求id")
 	private String requestId;
 
+	@Schema(description = "请求结束时间")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@ApiModelProperty(value = "请求结束时间")
 	private LocalDateTime timestamp;
 
 	public Result() {

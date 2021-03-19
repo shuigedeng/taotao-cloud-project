@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.mq.topic;
+package com.taotao.cloud.java.concurrent.mq.topic;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;

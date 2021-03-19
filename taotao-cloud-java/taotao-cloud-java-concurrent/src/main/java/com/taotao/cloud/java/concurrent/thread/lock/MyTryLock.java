@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.thread.lock;
+package com.taotao.cloud.java.concurrent.thread.lock;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;

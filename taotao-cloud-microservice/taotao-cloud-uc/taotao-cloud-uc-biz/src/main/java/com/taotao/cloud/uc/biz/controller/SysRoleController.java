@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.role.RoleDTO;
@@ -13,7 +13,6 @@ import com.taotao.cloud.uc.biz.utils.SysRoleUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -127,13 +126,13 @@ public class SysRoleController {
     @RequestOperateLog(description = "分页查询角色集合")
     @PreAuthorize("hasAuthority('sys:role:view:page')")
     @GetMapping(value = "/page")
-    public PageResult<RoleVO> findRolePage(@Validated @NotNull RolePageQuery roleQuery) {
+    public PageModel<RoleVO> findRolePage(@Validated @NotNull RolePageQuery roleQuery) {
         Pageable pageable = PageRequest.of(roleQuery.getCurrentPage(), roleQuery.getPageSize());
-        Page<SysRole> page = sysRoleService.findRolePage(pageable, roleQuery);
+        org.springframework.data.domain.Page page = sysRoleService.findRolePage(pageable, roleQuery);
         List<RoleVO> collect = page.stream().filter(Objects::nonNull)
                 .map(SysRoleUtil::copy).collect(Collectors.toList());
-        Page<RoleVO> result = new PageImpl<>(collect, pageable, page.getTotalElements());
-        return PageResult.succeed(result);
+        org.springframework.data.domain.Page result = new PageImpl<>(collect, pageable, page.getTotalElements());
+        return PageModel.succeed(result);
     }
 
     @ApiOperation("查询所有角色列表")

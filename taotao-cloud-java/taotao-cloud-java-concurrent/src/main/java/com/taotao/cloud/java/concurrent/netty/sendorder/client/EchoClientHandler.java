@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendorder.client;
+package com.taotao.cloud.java.concurrent.netty.sendorder.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

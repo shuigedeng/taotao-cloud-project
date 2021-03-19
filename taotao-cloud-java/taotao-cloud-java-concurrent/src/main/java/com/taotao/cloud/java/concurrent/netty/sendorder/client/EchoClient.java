@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendorder.client;
+package com.taotao.cloud.java.concurrent.netty.sendorder.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

@@ -2,7 +2,7 @@ package com.taotao.cloud.uc.biz.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.dictItem.DictItemDTO;
@@ -14,7 +14,6 @@ import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -72,17 +71,17 @@ public class SysDictItemController {
     @ApiOperation("分页查询字典详情")
     @RequestOperateLog(description = "分页查询字典详情")
     @GetMapping("/page")
-    public PageResult<DictItemVO> getPage(@Validated DictItemPageQuery dictItemPageQuery) {
+    public PageModel<DictItemVO> getPage(@Validated DictItemPageQuery dictItemPageQuery) {
         Pageable pageable = PageRequest.of(dictItemPageQuery.getCurrentPage(), dictItemPageQuery.getPageSize());
-        Page<SysDictItem> page = dictItemService.getPage(pageable, dictItemPageQuery);
+        org.springframework.data.domain.Page page = dictItemService.getPage(pageable, dictItemPageQuery);
         List<DictItemVO> collect = page.stream().filter(Objects::nonNull)
                 .map(tuple -> {
                     DictItemVO vo = DictItemVO.builder().build();
                     BeanUtil.copyProperties(tuple, vo, CopyOptions.create().ignoreNullValue().ignoreError());
                     return vo;
                 }).collect(Collectors.toList());
-        Page<DictItemVO> result = new PageImpl<>(collect, pageable, page.getTotalElements());
-        return PageResult.succeed(result);
+        org.springframework.data.domain.Page result = new PageImpl<>(collect, pageable, page.getTotalElements());
+        return PageModel.succeed(result);
     }
 
     @ApiOperation("查询字典详情")

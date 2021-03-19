@@ -1,6 +1,6 @@
-package com.taotao.cloud.java.netty.sendobject.server;
+package com.taotao.cloud.java.concurrent.netty.sendobject.server;
 
-import com.taotao.cloud.java.netty.sendobject.coder.PersonDecoder;
+import com.taotao.cloud.java.concurrent.netty.sendobject.coder.PersonDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -42,7 +42,7 @@ public class EchoServer {
                             //注册解码的handler
                             ch.pipeline().addLast(new PersonDecoder());  //IN1  反序列化
                             //添加一个入站的handler到ChannelPipeline
-                            ch.pipeline().addLast(new EchoServerHandler());   //IN2
+                            ch.pipeline().addLast(new com.taotao.cloud.java.netty.sendstring.server.EchoServerHandler());   //IN2
                         }
                     });
             // 最后绑定服务器等待直到绑定完成，调用sync()方法会阻塞直到服务器完成绑定,然后服务器等待通道关闭，因为使用sync()，所以关闭操作也会被阻塞。

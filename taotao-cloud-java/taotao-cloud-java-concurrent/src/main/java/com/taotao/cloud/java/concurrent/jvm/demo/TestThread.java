@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.jvm.demo;
+package com.taotao.cloud.java.concurrent.jvm.demo;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

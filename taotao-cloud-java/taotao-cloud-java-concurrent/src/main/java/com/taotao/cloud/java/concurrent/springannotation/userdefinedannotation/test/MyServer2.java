@@ -1,7 +1,7 @@
-package com.taotao.cloud.java.springannotation.userdefinedannotation.test;
+package com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.test;
 
-import com.taotao.cloud.java.springannotation.userdefinedannotation.annotation.RpcService;
-import com.taotao.cloud.java.springannotation.userdefinedannotation.service.HelloService;
+import com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.annotation.RpcService;
+import com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.service.HelloService;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

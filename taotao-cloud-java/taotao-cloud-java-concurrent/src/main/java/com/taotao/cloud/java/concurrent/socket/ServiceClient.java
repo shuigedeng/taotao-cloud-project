@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.socket;
+package com.taotao.cloud.java.concurrent.socket;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

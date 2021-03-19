@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.api.vo.dict;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,32 +19,25 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "字典VO", description = "字典VO")
+@Schema(name = "DictVO", description = "字典VO")
 public class DictVO implements Serializable {
 
-    private static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "id")
-    private Long id;
-
-    @ApiModelProperty(value = "字典名称")
-    private String dictName;
-
-    @ApiModelProperty(value = "字典编码")
-    private String dictCode;
-
-    @ApiModelProperty(value = "描述")
-    private String description;
-
-    @ApiModelProperty(value = "排序值")
-    private Integer dictSort;
-
-    @ApiModelProperty(value = "备注信息")
-    private String remark;
-
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "最后修改时间")
-    private LocalDateTime lastModifiedTime;
+	@Schema(description = "id")
+	private Long id;
+	@Schema(description = "字典名称")
+	private String dictName;
+	@Schema(description = "字典编码")
+	private String dictCode;
+	@Schema(description = "描述")
+	private String description;
+	@Schema(description = "排序值")
+	private Integer dictSort;
+	@Schema(description = "备注信息")
+	private String remark;
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 }

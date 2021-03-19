@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendstring.client;
+package com.taotao.cloud.java.concurrent.netty.sendstring.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

@@ -1,8 +1,8 @@
-package com.taotao.cloud.java.proxy.action;
+package com.taotao.cloud.java.concurrent.proxy.action;
 
-import com.taotao.cloud.java.proxy.proxyclass.ProxyBoss;
-import com.taotao.cloud.java.proxy.service.IBoss;
-import com.taotao.cloud.java.proxy.service.impl.Boss;
+import com.taotao.cloud.java.concurrent.proxy.proxyclass.ProxyBoss;
+import com.taotao.cloud.java.concurrent.proxy.service.IBoss;
+import com.taotao.cloud.java.concurrent.proxy.service.impl.Boss;
 
 /**
  * 什么是动态代理？ 简单的写一个模板接口，剩下的个性化工作，好给动态代理来完成！

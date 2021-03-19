@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -41,18 +41,19 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Schema(name = "BasePageQuery", description = "基础分页查询对象")
 public class BasePageQuery implements Serializable {
 
 	private static final long serialVersionUID = -2483306509077581330L;
 
-	@ApiModelProperty(value = "当前第几页，默认1", example = "0")
+	@Schema(description = "当前第几页，默认1", example = "1", required = true)
 	@NotNull(message = "当前页显示数量不能为空")
 	@Builder.Default
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
 	private Integer currentPage = 0;
 
-	@ApiModelProperty(value = "每页显示条数，默认10", example = "10")
+	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")
 	@Builder.Default
 	@Min(value = 5)

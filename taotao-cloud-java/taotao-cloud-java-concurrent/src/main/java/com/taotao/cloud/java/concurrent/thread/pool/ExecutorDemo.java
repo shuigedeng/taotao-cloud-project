@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.thread.pool;
+package com.taotao.cloud.java.concurrent.thread.pool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;

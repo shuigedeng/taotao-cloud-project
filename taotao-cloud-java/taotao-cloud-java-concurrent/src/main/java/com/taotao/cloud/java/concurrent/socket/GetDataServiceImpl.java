@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.socket;
+package com.taotao.cloud.java.concurrent.socket;
 
 public class GetDataServiceImpl {
 

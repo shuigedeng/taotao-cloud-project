@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.queue.main;
+package com.taotao.cloud.java.concurrent.queue.main;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

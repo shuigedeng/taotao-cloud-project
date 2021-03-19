@@ -1,5 +1,4 @@
-package com.taotao.cloud.java.mq.queue;
-
+package com.taotao.cloud.java.concurrent.mq.queue;
 
 public class ConsumerTest implements Runnable {
 	static Thread t1 = null;

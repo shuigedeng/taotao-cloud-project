@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.model;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -39,15 +39,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class BaseTimeQuery implements Serializable {
+@Schema(name = "BaseDateTimeQuery", description = "基础时间查询对象")
+public class BaseDateTimeQuery implements Serializable {
 
 	private static final long serialVersionUID = -2483306509077581330L;
 
-	@ApiModelProperty(value = "开始时间 时间格式:yyyy-MM-dd HH:mm:ss")
+	@Schema(description = "开始时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime startTime;
 
-	@ApiModelProperty(value = "结束时间 时间格式:yyyy-MM-dd HH:mm:ss")
+	@Schema(description = "结束时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime endTime;
 }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendorder.server;
+package com.taotao.cloud.java.concurrent.netty.sendorder.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;

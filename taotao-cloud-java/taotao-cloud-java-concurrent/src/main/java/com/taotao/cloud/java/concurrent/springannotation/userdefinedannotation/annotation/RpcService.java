@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.springannotation.userdefinedannotation.annotation;
+package com.taotao.cloud.java.concurrent.springannotation.userdefinedannotation.annotation;
 
 import org.springframework.stereotype.Component;
 

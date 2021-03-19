@@ -1,6 +1,6 @@
-package com.taotao.cloud.java.hadooprpc.client;
+package com.taotao.cloud.java.concurrent.hadooprpc.client;
 
-import com.taotao.cloud.java.hadooprpc.protocol.SomeService;
+import com.taotao.cloud.java.concurrent.hadooprpc.protocol.SomeService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 

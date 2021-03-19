@@ -1,8 +1,7 @@
-package com.taotao.cloud.java.proxy.action;
+package com.taotao.cloud.java.concurrent.proxy.action;
 
-
-import com.taotao.cloud.java.proxy.service.IBoss;
-import com.taotao.cloud.java.proxy.service.impl.Boss;
+import com.taotao.cloud.java.concurrent.proxy.service.IBoss;
+import com.taotao.cloud.java.concurrent.proxy.service.impl.Boss;
 
 public class SaleAction {
     /**

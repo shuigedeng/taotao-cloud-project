@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.proxy.proxyclass;
+package com.taotao.cloud.java.concurrent.proxy.proxyclass;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

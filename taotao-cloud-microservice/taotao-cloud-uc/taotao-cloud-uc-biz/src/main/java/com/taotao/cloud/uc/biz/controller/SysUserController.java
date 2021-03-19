@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.core.utils.SecurityUtil;
@@ -19,7 +19,6 @@ import com.taotao.cloud.uc.biz.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -112,12 +111,12 @@ public class SysUserController {
 	@RequestOperateLog(description = "分页查询用户集合")
 	@PreAuthorize("hasAuthority('sys:user:view:page')")
 	@GetMapping(value = "/page")
-	public PageResult<UserVO> findUserPage(@Validated UserPageQuery userQuery) {
+	public PageModel<UserVO> findUserPage(@Validated UserPageQuery userQuery) {
 		Pageable pageable = PageRequest.of(userQuery.getCurrentPage(), userQuery.getPageSize());
-		Page<SysUser> page = sysUserService.findUserPage(pageable, userQuery);
+		org.springframework.data.domain.Page page = sysUserService.findUserPage(pageable, userQuery);
 		List<UserVO> users = UserMapper.INSTANCE.sysUserToUserVO(page.getContent());
-		Page<UserVO> result = new PageImpl<>(users, pageable, page.getTotalElements());
-		return PageResult.succeed(result);
+		org.springframework.data.domain.Page result = new PageImpl<>(users, pageable, page.getTotalElements());
+		return PageModel.succeed(result);
 	}
 
 	@ApiOperation("重置密码")

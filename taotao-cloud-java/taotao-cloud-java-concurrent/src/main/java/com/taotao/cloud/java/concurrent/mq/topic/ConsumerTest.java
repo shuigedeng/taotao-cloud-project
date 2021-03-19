@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.mq.topic;
+package com.taotao.cloud.java.concurrent.mq.topic;
 
 import javax.jms.JMSException;
 

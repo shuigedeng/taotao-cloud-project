@@ -1,8 +1,7 @@
-package com.taotao.cloud.java.queue.main;
+package com.taotao.cloud.java.concurrent.queue.main;
 
-import com.taotao.cloud.java.queue.consumer.Consumer;
-import com.taotao.cloud.java.queue.producer.Producer;
-
+import com.taotao.cloud.java.concurrent.queue.consumer.Consumer;
+import com.taotao.cloud.java.concurrent.queue.producer.Producer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 

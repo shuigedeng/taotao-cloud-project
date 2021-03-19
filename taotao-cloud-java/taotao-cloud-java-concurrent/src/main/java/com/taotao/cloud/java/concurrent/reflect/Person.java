@@ -1,5 +1,6 @@
-package com.taotao.cloud.java.reflect;
+package com.taotao.cloud.java.concurrent.reflect;
 
+import com.taotao.cloud.java.concurrent.reflect.TestInterface;
 import java.io.Serializable;
 
 public class Person implements Serializable, TestInterface {

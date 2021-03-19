@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.queue.producer;
+package com.taotao.cloud.java.concurrent.queue.producer;
 
 import java.util.concurrent.BlockingQueue;
 

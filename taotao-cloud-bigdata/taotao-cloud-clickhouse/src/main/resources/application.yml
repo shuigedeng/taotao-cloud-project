@@ -1,0 +1,17 @@
+spring:
+  datasource:
+  type: com.alibaba.druid.pool.DruidDataSource
+clickhouse:
+  driverClassName: ru.yandex.clickhouse.ClickHouseDriver
+  url: jdbc:clickhouse://106.55.55.249:8123/default
+  password: ck的密码
+  initialSize: 10
+  maxActive: 100
+  minIdle: 10
+  maxWait: 6000
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.wyu.tt16clickhouse.entity
+
+server:
+  port: 8090

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.springannotation.springrunorder;
+package com.taotao.cloud.java.concurrent.springannotation.springrunorder;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendobject.bean;
+package com.taotao.cloud.java.concurrent.netty.sendobject.bean;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.netty.sendobject.utils;
+package com.taotao.cloud.java.concurrent.netty.sendobject.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

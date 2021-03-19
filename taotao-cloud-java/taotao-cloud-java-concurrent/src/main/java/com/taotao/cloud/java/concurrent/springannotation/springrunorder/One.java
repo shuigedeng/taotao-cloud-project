@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.springannotation.springrunorder;
+package com.taotao.cloud.java.concurrent.springannotation.springrunorder;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.proxy.service;
+package com.taotao.cloud.java.concurrent.proxy.service;
 
 /**
  * 这是一个业务的接口，这个接口中的业务就是返回衣服的价格

@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.jvm.outofmemory;
+package com.taotao.cloud.java.concurrent.jvm.outofmemory;
 
 /**
  * 线程导致内存溢出异常

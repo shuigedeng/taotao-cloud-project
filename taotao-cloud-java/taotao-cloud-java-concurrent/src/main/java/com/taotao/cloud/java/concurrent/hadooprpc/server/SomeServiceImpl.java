@@ -1,7 +1,6 @@
-package com.taotao.cloud.java.hadooprpc.server;
+package com.taotao.cloud.java.concurrent.hadooprpc.server;
 
-
-import com.taotao.cloud.java.hadooprpc.protocol.SomeService;
+import com.taotao.cloud.java.concurrent.hadooprpc.protocol.SomeService;
 
 public class SomeServiceImpl implements SomeService {
 

@@ -1,10 +1,11 @@
-package com.taotao.cloud.java.thread.lock;
+package com.taotao.cloud.java.concurrent.thread.lock;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MyLockTest {
+
 	private static ArrayList<Integer> arrayList = new ArrayList<Integer>();
 	static Lock lock = new ReentrantLock(); // 注意这个地方
 
@@ -23,8 +24,8 @@ public class MyLockTest {
 				} catch (Exception e) {
 					// TODO: handle exception
 				} finally {
-					System.out.println(thread.getName() + "释放了锁");
 					lock.unlock();
+					System.out.println(thread.getName() + "释放了锁");
 				}
 
 			}
@@ -45,8 +46,8 @@ public class MyLockTest {
 				} catch (Exception e) {
 					// TODO: handle exception
 				} finally {
-					System.out.println(thread.getName() + "释放了锁");
 					lock.unlock();
+					System.out.println(thread.getName() + "释放了锁");
 				}
 
 			}

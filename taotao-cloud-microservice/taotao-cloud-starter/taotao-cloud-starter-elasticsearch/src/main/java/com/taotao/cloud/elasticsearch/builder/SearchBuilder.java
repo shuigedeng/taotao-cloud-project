@@ -19,7 +19,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.utils.BeanUtil;
 import lombok.Data;
 import org.apache.lucene.search.TotalHits;
@@ -255,7 +255,7 @@ public class SearchBuilder {
 	 * @author dengtao
 	 * @since 2021/2/26 08:54
 	 */
-	public PageResult<String> getPage() throws IOException {
+	public PageModel<String> getPage() throws IOException {
 		return this.getPage(null, null);
 	}
 
@@ -268,13 +268,13 @@ public class SearchBuilder {
 	 * @author dengtao
 	 * @since 2021/2/26 08:54
 	 */
-	public PageResult<String> getPage(Integer page, Integer limit) throws IOException {
+	public PageModel<String> getPage(Integer page, Integer limit) throws IOException {
 		this.setPage(page, limit);
 		SearchResponse response = this.get();
 		SearchHits searchHits = response.getHits();
 		TotalHits totalCnt = searchHits.getTotalHits();
 		List<String> list = getList(searchHits);
-		return PageResult.succeed(totalCnt.value, 1, 10, list);
+		return PageModel.succeed(totalCnt.value, 1, 10, list);
 	}
 
 	/**

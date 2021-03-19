@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.jvm.outofmemory;
+package com.taotao.cloud.java.concurrent.jvm.outofmemory;
 
 /**
  * 虚拟机栈和本地方法栈OOM测试

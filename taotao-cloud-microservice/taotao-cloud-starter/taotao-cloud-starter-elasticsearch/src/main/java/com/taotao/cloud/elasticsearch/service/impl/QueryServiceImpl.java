@@ -16,7 +16,7 @@
 package com.taotao.cloud.elasticsearch.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.core.model.PageResult;
+import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.LogicDelDto;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
@@ -43,12 +43,12 @@ public class QueryServiceImpl implements IQueryService {
 	private IAggregationService aggregationService;
 
 	@Override
-	public PageResult<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
+	public PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
 		return strQuery(indexName, searchDto, null);
 	}
 
 	@Override
-	public PageResult<String> strQuery(String indexName, SearchDto searchDto,
+	public PageModel<String> strQuery(String indexName, SearchDto searchDto,
 		LogicDelDto logicDelDto) throws IOException {
 		setLogicDelQueryStr(searchDto, logicDelDto);
 		return searchService.strQuery(indexName, searchDto);

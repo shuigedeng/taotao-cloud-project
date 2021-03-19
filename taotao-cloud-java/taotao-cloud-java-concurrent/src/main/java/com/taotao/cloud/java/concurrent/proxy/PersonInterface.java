@@ -1,4 +1,4 @@
-package com.taotao.cloud.java.proxy;
+package com.taotao.cloud.java.concurrent.proxy;
 
 public interface PersonInterface {
 

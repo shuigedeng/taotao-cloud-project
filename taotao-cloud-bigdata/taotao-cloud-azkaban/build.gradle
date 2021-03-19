@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-azkaban'
-
-jar.enabled = false
-bootJar.enabled = false
+jar.enabled = true
 
 dependencies {
 //    ```

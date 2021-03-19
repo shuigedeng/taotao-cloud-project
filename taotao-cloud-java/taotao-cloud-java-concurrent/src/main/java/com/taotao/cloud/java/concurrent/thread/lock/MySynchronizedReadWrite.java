@@ -1,5 +1,4 @@
-package com.taotao.cloud.java.thread.lock;
-
+package com.taotao.cloud.java.concurrent.thread.lock;
 
 /**
  * 一个线程又要读又要写，用synchronize来实现的话，读写操作都只能锁住后一个线程一个线程地进行
