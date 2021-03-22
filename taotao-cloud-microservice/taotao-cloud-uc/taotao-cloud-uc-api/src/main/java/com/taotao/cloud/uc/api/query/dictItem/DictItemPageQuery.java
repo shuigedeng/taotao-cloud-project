@@ -16,8 +16,7 @@
 package com.taotao.cloud.uc.api.query.dictItem;
 
 import com.taotao.cloud.core.model.BasePageQuery;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,31 +27,27 @@ import lombok.experimental.SuperBuilder;
  * 字典项分页查询query
  *
  * @author dengtao
- * @since 2020/9/30 08:49
  * @version 1.0.0
+ * @since 2020/9/30 08:49
  */
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "字典项分页查询query")
+@Schema(name = "DictItemPageQuery", description = "字典项分页查询query")
 public class DictItemPageQuery extends BasePageQuery {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
-    @ApiModelProperty(value = "字典id")
-    private Long dictId;
-
-    @ApiModelProperty(value = "字典项文本")
-    private String itemText;
-
-    @ApiModelProperty(value = "字典项值")
-    private String itemValue;
-
-    @ApiModelProperty(value = "描述")
-    private String description;
-
-    @ApiModelProperty(value = "状态（1不启用 2启用 ）")
-    private Boolean status;
+	@Schema(description = "字典id")
+	private Long dictId;
+	@Schema(description = "字典项文本")
+	private String itemText;
+	@Schema(description = "字典项值")
+	private String itemValue;
+	@Schema(description = "描述")
+	private String description;
+	@Schema(description = "状态(1不启用 2启用)")
+	private Boolean status;
 }

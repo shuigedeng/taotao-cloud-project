@@ -16,8 +16,6 @@ import com.taotao.cloud.uc.api.vo.user.UserVO;
 import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.biz.mapper.UserMapper;
 import com.taotao.cloud.uc.biz.service.ISysUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;

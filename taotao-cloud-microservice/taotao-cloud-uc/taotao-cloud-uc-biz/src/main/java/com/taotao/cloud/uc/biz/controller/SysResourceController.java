@@ -3,6 +3,7 @@ package com.taotao.cloud.uc.biz.controller;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.core.model.PageModel;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.utils.SecurityUtil;
@@ -14,14 +15,25 @@ import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.uc.biz.mapper.ResourceMapper;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,14 +46,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * 资源管理API
  *
@@ -53,36 +57,46 @@ import java.util.Set;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/resource")
-@Api(value = "资源管理API", tags = {"资源管理API"})
+@Tag(name = "SysResourceController", description = "资源管理API")
 public class SysResourceController {
 
 	private final ISysResourceService resourceService;
 
-	@ApiOperation("添加资源")
+	@Operation(summary = "添加资源", description = "添加资源", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加资源")
 	@PreAuthorize("hasAuthority('sys:resource:save')")
 	@PostMapping
-	public Result<ResourceVO> saveResource(@Valid @RequestBody ResourceDTO resourceDTO) {
+	public Result<ResourceVO> saveResource(
+		@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "添加资源对象DTO", required = true)
+		@Validated @RequestBody ResourceDTO resourceDTO) {
 		SysResource resource = ResourceMapper.INSTANCE.resourceDtoToSysResource(resourceDTO);
 		SysResource sysResource = resourceService.saveResource(resource);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(sysResource);
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据id删除资源")
+	@Operation(summary = "根据id删除资源", description = "根据id删除资源", method = CommonConstant.DELETE,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id删除资源")
 	@PreAuthorize("hasAuthority('sys:resource:delete')")
 	@DeleteMapping("/{id:[0-9]*}")
-	public Result<Boolean> deleteResource(@PathVariable(value = "id") Long id) {
+	public Result<Boolean> deleteResource(
+		@Parameter(name = "id", description = "资源id", required = true, in = ParameterIn.PATH)
+		@PathVariable(value = "id") Long id) {
 		Boolean result = resourceService.deleteResource(id);
 		return Result.success(result);
 	}
 
-	@ApiOperation("修改资源")
+	@Operation(summary = "修改资源", description = "修改资源", method = "POST",
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "修改资源")
 	@PreAuthorize("hasAuthority('sys:resource:update')")
 	@PutMapping("/{id:[0-9]*}")
-	public Result<Boolean> updateResource(@PathVariable(value = "id") Long id,
+	public Result<Boolean> updateResource(
+		@Parameter(name = "id", description = "资源id", required = true, in = ParameterIn.PATH)
+		@NotNull(message = "资源id不能为空")
+		@PathVariable(value = "id") Long id,
+		@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "修改资源对象DTO", required = true)
 		@Validated @RequestBody ResourceDTO resourceDTO) {
 		SysResource resource = resourceService.findResourceById(id);
 		ResourceMapper.INSTANCE.copyResourceDtoToSysResource(resourceDTO, resource);
@@ -91,53 +105,62 @@ public class SysResourceController {
 		return Result.success(Objects.nonNull(result));
 	}
 
-	@ApiOperation("根据id查询资源是否存在")
+	@Operation(summary = "根据id查询资源是否存在", description = "根据id查询资源是否存在", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id查询资源是否存在")
 	@PreAuthorize("hasAuthority('sys:resource:exists:phone')")
 	@GetMapping("/exists/id")
-	public Result<Boolean> existsByPhone(@NotNull(message = "资源id不能为空")
-	@RequestParam(value = "id") Long id) {
+	public Result<Boolean> existsByPhone(
+		@Parameter(name = "id", description = "资源id", required = true, in = ParameterIn.QUERY)
+		@NotNull(message = "资源id不能为空")
+		@RequestParam(value = "id") Long id) {
 		Boolean result = resourceService.existsById(id);
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据名称查询资源是否存在")
+	@Operation(summary = "根据名称查询资源是否存在", description = "根据名称查询资源是否存在", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据名称查询资源是否存在")
 	@PreAuthorize("hasAuthority('sys:resource:exists:phone')")
 	@GetMapping("/exists/name")
-	public Result<Boolean> existsByName(@NotBlank(message = "资源名称不能为空")
-	@RequestParam(value = "name") String name) {
+	public Result<Boolean> existsByName(
+		@Parameter(name = "name", description = "资源名称", required = true, in = ParameterIn.QUERY)
+		@NotBlank(message = "资源名称不能为空")
+		@RequestParam(value = "name") String name) {
 		Boolean result = resourceService.existsByName(name);
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据id获取资源信息")
+	@Operation(summary = "根据id获取资源信息", description = "根据id获取资源信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id获取资源信息")
 	@PreAuthorize("hasAuthority('sys:resource:info:id')")
 	@GetMapping("/info/id")
-	public Result<ResourceVO> findResourceById(@NotNull(message = "资源id不能为空")
-	@RequestParam(value = "id") Long id) {
+	public Result<ResourceVO> findResourceById(
+		@Parameter(name = "id", description = "资源id", required = true, in = ParameterIn.QUERY)
+		@NotNull(message = "资源id不能为空")
+		@RequestParam(value = "id") Long id) {
 		SysResource resource = resourceService.findResourceById(id);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(resource);
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据名称获取资源信息")
+	@Operation(summary = "根据名称获取资源信息", description = "根据名称获取资源信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据名称获取资源信息")
 	@PreAuthorize("hasAuthority('sys:resource:info:name')")
 	@GetMapping("/info/name")
-	public Result<ResourceVO> findResourceByName(@NotBlank(message = "资源名称不能为空")
-	@RequestParam(value = "name") String name) {
+	public Result<ResourceVO> findResourceByName(
+		@Parameter(name = "name", description = "资源名称", required = true, in = ParameterIn.QUERY)
+		@NotBlank(message = "资源名称不能为空")
+		@RequestParam(value = "name") String name) {
 		SysResource resource = resourceService.findResourceByName(name);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(resource);
 		return Result.success(result);
 	}
 
-	@ApiOperation("分页查询资源集合")
+	@Operation(summary = "分页查询资源集合", description = "分页查询资源集合", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "分页查询资源集合")
 	@PreAuthorize("hasAuthority('sys:resource:view:page')")
 	@GetMapping(value = "/page")
 	public Result<PageModel<ResourceVO>> findResourcePage(
+		@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "分页查询资源集合对象DTO", required = true)
 		@Validated @NotNull ResourcePageQuery resourceQuery) {
 		Pageable pageable = PageRequest
 			.of(resourceQuery.getCurrentPage(), resourceQuery.getPageSize());
@@ -150,7 +173,7 @@ public class SysResourceController {
 		return Result.success(PageModel.convertJpaPage(result));
 	}
 
-	@ApiOperation("查询所有资源列表")
+	@Operation(summary = "查询所有资源列表", description = "查询所有资源列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "查询所有资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:list')")
 	@GetMapping
@@ -160,13 +183,15 @@ public class SysResourceController {
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据角色id获取资源列表")
+	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据角色id获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/info/roleId")
-	public Result<List<ResourceVO>> findResourceByRoleId(@NotNull(message = "角色id不能为空")
-	@RequestParam(value = "roleId") Long roleId) {
+	public Result<List<ResourceVO>> findResourceByRoleId(
+		@Parameter(name = "roleId", description = "角色id", required = true, in = ParameterIn.QUERY)
+		@NotNull(message = "角色id不能为空")
+		@RequestParam(value = "roleId") Long roleId) {
 		Set<Long> roleIds = new HashSet<>();
 		roleIds.add(roleId);
 		List<SysResource> resources = resourceService.findResourceByRoleIds(roleIds);
@@ -174,23 +199,27 @@ public class SysResourceController {
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据角色id列表获取角色列表")
+	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据角色id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/info/roleIds")
-	public Result<List<ResourceVO>> findResourceByRoleIds(@NotNull(message = "用户id列表不能为空")
-	@RequestParam(value = "roleIds") Set<Long> roleIds) {
+	public Result<List<ResourceVO>> findResourceByRoleIds(
+		@Parameter(name = "roleIds", description = "用户id列表", required = true, schema = @Schema(implementation = Set.class), in = ParameterIn.QUERY)
+		@NotNull(message = "用户id列表不能为空")
+		@RequestParam(value = "roleIds") Set<Long> roleIds) {
 		List<SysResource> resources = resourceService.findResourceByRoleIds(roleIds);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据角色code获取资源列表")
+	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据角色code获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/info/code")
-	public Result<List<ResourceVO>> findResourceByCode(@NotNull(message = "角色code不能为空")
-	@RequestParam(value = "code") String code) {
+	public Result<List<ResourceVO>> findResourceByCode(
+		@Parameter(name = "code", description = "角色code", required = true, in = ParameterIn.QUERY)
+		@NotNull(message = "角色code不能为空")
+		@RequestParam(value = "code") String code) {
 		Set<String> codes = new HashSet<>();
 		codes.add(code);
 		List<SysResource> resources = resourceService.findResourceByCodes(codes);
@@ -198,12 +227,14 @@ public class SysResourceController {
 		return Result.success(result);
 	}
 
-	@ApiOperation("根据角色code列表获取角色列表")
+	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据角色cde列表获取角色列表")
 	//@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/info/codes")
-	public Result<List<ResourceVO>> findResourceByCodes(@NotNull(message = "角色cde列表不能为空")
-	@RequestParam(value = "codes") Set<String> codes) {
+	public Result<List<ResourceVO>> findResourceByCodes(
+		@Parameter(name = "codes", description = "角色cde列表", required = true, schema = @Schema(implementation = Set.class), in = ParameterIn.QUERY)
+		@NotNull(message = "角色cde列表不能为空")
+		@RequestParam(value = "codes") Set<String> codes) {
 		List<SysResource> resources = resourceService.findResourceByCodes(codes);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
 		return Result.success(result);
@@ -221,7 +252,7 @@ public class SysResourceController {
 	// 	return Result.succeed(collect);
 	// }
 
-	@ApiOperation("获取当前用户菜单列表")
+	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "获取当前用户菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/info/current/user")
@@ -233,11 +264,12 @@ public class SysResourceController {
 		return findResourceByCodes(roleCodes);
 	}
 
-	@ApiOperation("获取当前用户树形菜单列表")
+	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/info/current/user/tree")
 	public Result<List<ResourceTree>> findCurrentUserResourceTree(
+		@Parameter(name = "parentId", description = "父id", required = true, in = ParameterIn.QUERY)
 		@RequestParam(value = "parentId") Long parentId) {
 		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
@@ -250,19 +282,24 @@ public class SysResourceController {
 		return Result.success(trees);
 	}
 
-	@ApiOperation("获取树形菜单集合 1.false-非懒加载，查询全部 " +
-		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
+	@Operation(summary = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
+		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0",
+		description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
+			"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0", method = "POST", security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "获取树形菜单集合")
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/info/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
-	public Result<List<ResourceTree>> findResourceTree(@RequestParam(value = "lazy") boolean lazy,
+	public Result<List<ResourceTree>> findResourceTree(
+		@Parameter(name = "lazy", description = "是否是延迟查询", required = false, in = ParameterIn.QUERY)
+		@RequestParam(value = "lazy") boolean lazy,
+		@Parameter(name = "parentId", description = "父id", required = false, in = ParameterIn.QUERY)
 		@RequestParam(value = "parentId") Long parentId) {
 		List<ResourceTree> trees = resourceService.findResourceTree(lazy, parentId);
 		return Result.success(trees);
 	}
 
-	@ApiOperation("测试分布式事务")
+	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/seata")
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
@@ -275,6 +312,5 @@ public class SysResourceController {
 		e.printStackTrace();
 		return "该接口已经被限流啦!";
 	}
-
 
 }

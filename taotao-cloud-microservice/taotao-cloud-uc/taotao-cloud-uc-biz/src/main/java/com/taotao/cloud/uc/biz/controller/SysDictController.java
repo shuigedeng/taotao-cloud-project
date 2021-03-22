@@ -9,6 +9,7 @@ import com.taotao.cloud.uc.api.dto.dict.DictDTO;
 import com.taotao.cloud.uc.api.query.dict.DictPageQuery;
 import com.taotao.cloud.uc.api.vo.dict.DictVO;
 import com.taotao.cloud.uc.biz.entity.SysDict;
+import com.taotao.cloud.uc.biz.mapper.DictMapper;
 import com.taotao.cloud.uc.biz.service.ISysDictService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -61,9 +62,7 @@ public class SysDictController {
 		@RequestBody(description = "添加字典对象DTO", required = true,
 			content = @Content(schema = @Schema(implementation = DictDTO.class)))
 		@Validated @org.springframework.web.bind.annotation.RequestBody DictDTO dictDTO) {
-		SysDict dict = new SysDict();
-		BeanUtil
-			.copyProperties(dictDTO, dict, CopyOptions.create().ignoreNullValue().ignoreError());
+		SysDict dict = DictMapper.INSTANCE.dictDTOToSysDict(dictDTO);
 		SysDict sysDict = dictService.save(dict);
 		return Result.success(Objects.nonNull(sysDict));
 	}
@@ -79,9 +78,7 @@ public class SysDictController {
 		@RequestBody(description = "更新字典对象DTO", required = true,
 			content = @Content(schema = @Schema(implementation = DictDTO.class)))
 		@Validated @org.springframework.web.bind.annotation.RequestBody DictDTO dictDTO) {
-		SysDict dict = dictService.findById(id);
-		BeanUtil
-			.copyProperties(dictDTO, dict, CopyOptions.create().ignoreNullValue().ignoreError());
+		SysDict dict = DictMapper.INSTANCE.dictDTOToSysDict(dictDTO);
 		SysDict sysDict = dictService.update(dict);
 		return Result.success(Objects.nonNull(sysDict));
 	}
@@ -111,14 +108,8 @@ public class SysDictController {
 	@GetMapping
 	public Result<List<DictVO>> getAll() {
 		List<SysDict> sysDicts = dictService.getAll();
-		List<DictVO> dictList = sysDicts.stream().filter(Objects::nonNull)
-			.map(tuple -> {
-				DictVO vo = DictVO.builder().build();
-				BeanUtil.copyProperties(tuple, vo,
-					CopyOptions.create().ignoreNullValue().ignoreError());
-				return vo;
-			}).collect(Collectors.toList());
-		return Result.success(dictList);
+		List<DictVO> result = DictMapper.INSTANCE.sysDictToDictVO(sysDicts);
+		return Result.success(result);
 	}
 
 	@Operation(summary = "分页查询字典集合", description = "分页查询字典集合", method = "PUT",

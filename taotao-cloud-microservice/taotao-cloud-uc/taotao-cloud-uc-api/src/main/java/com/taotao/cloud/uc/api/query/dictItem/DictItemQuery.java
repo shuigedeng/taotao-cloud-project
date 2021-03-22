@@ -15,19 +15,22 @@
  */
 package com.taotao.cloud.uc.api.query.dictItem;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * 字典查询query
  *
  * @author dengtao
- * @since 2020/9/30 08:49
  * @version 1.0.0
+ * @since 2020/9/30 08:49
  */
 @Data
 @Builder
@@ -36,23 +39,18 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "字典查询query")
+@Schema(name = "DictItemQuery", description = "字典查询query")
 public class DictItemQuery implements Serializable {
 
-    private static final long serialVersionUID = -7605952923416404638L;
-
-    @ApiModelProperty(value = "字典id")
-    private Long dictId;
-
-    @ApiModelProperty(value = "字典项文本")
-    private String itemText;
-
-    @ApiModelProperty(value = "字典项值")
-    private String itemValue;
-
-    @ApiModelProperty(value = "描述")
-    private String description;
-
-    @ApiModelProperty(value = "状态（1不启用 2启用 ）")
-    private Boolean status;
+	private static final long serialVersionUID = -7605952923416404638L;
+	@Schema(description = "字典id")
+	private Long dictId;
+	@Schema(description = "字典项文本")
+	private String itemText;
+	@Schema(description = "字典项值")
+	private String itemValue;
+	@Schema(description = "描述")
+	private String description;
+	@Schema(description = "状态(1不启用 2启用)")
+	private Boolean status;
 }
