@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.api.vo.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,54 +20,54 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户VO", description = "用户VO")
+@Schema(name = "UserVO", description = "用户VO")
 public class UserVO implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "id")
+	@Schema(description = "id")
     private Long id;
 
-    @ApiModelProperty(value = "昵称")
+	@Schema(description = "昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "真实用户名")
+	@Schema(description = "真实用户名")
     private String username;
 
-    @ApiModelProperty(value = "手机号")
+	@Schema(description = "手机号")
     private String phone;
 
-    @ApiModelProperty(value = "用户类型 1前端用户 2商户用户 3后台管理用户")
+	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户")
     private Integer type;
 
-    @ApiModelProperty(value = "性别 1男 2女 0未知")
+	@Schema(description = "性别 1男 2女 0未知")
     private Integer sex;
 
-    @ApiModelProperty(value = "邮箱")
+	@Schema(description = "邮箱")
     private String email;
 
-    @ApiModelProperty(value = "部门ID")
+	@Schema(description = "部门ID")
     private Long deptId;
 
-    @ApiModelProperty(value = "岗位ID")
+	@Schema(description = "岗位ID")
     private Long jobId;
 
-    @ApiModelProperty(value = "头像")
+	@Schema(description = "头像")
     private String avatar;
 
-    @ApiModelProperty(value = "是否锁定 1-正常，2-锁定")
+	@Schema(description = "是否锁定 1-正常，2-锁定")
     private Integer lockFlag;
 
-	@ApiModelProperty(value = "角色")
+	@Schema(description = "角色列表")
 	private Set<String> roles;
 
-	@ApiModelProperty(value = "权限")
+	@Schema(description = "权限列表")
 	private Set<String> permissions;
 
-    @ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
     private LocalDateTime lastModifiedTime;
 
 }

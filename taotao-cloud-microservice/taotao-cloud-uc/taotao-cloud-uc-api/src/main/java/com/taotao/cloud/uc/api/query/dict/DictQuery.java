@@ -15,21 +15,22 @@
  */
 package com.taotao.cloud.uc.api.query.dict;
 
-import com.taotao.cloud.core.model.BasePageQuery;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * 字典查询query
  *
  * @author dengtao
- * @since 2020/9/30 08:49
  * @version 1.0.0
+ * @since 2020/9/30 08:49
  */
 @Data
 @Builder
@@ -38,20 +39,20 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "字典查询query")
+@Schema(name = "DictQuery", description = "字典查询query")
 public class DictQuery implements Serializable {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
-    @ApiModelProperty(value = "字典名称")
-    private String dictName;
+	@Schema(description = "字典名称")
+	private String dictName;
 
-    @ApiModelProperty(value = "字典编码")
-    private String dictCode;
+	@Schema(description = "字典编码")
+	private String dictCode;
 
-    @ApiModelProperty(value = "描述")
-    private String description;
+	@Schema(description = "描述")
+	private String description;
 
-    @ApiModelProperty(value = "备注信息")
-    private String remark;
+	@Schema(description = "备注信息")
+	private String remark;
 }

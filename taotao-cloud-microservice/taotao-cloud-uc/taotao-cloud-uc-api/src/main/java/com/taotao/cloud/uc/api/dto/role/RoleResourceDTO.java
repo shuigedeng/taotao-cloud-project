@@ -1,16 +1,16 @@
 package com.taotao.cloud.uc.api.dto.role;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
-import java.util.Set;
 
 /**
  * 角色-资源DTO
@@ -22,16 +22,16 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "角色-资源DTO")
+@Schema(name = "RoleResourceDTO", description = "角色-资源DTO")
 public class RoleResourceDTO implements Serializable {
 
-    private static final long serialVersionUID = -1972549738577159538L;
+	private static final long serialVersionUID = -1972549738577159538L;
 
-    @NotBlank(message = "角色id不能为空")
-    @ApiModelProperty(value = "角色id")
-    private Long roleId;
+	@Schema(description = "角色id", required = true)
+	@NotBlank(message = "角色id不能为空")
+	private Long roleId;
 
-    @Length(max = 20, message = "资源id不能为空")
-    @ApiModelProperty(value = "资源id")
-    private Set<Long> resourceIds;
+	@Schema(description = "资源id列表", required = true)
+	@NotEmpty(message = "资源id列表不能为空")
+	private Set<Long> resourceIds;
 }

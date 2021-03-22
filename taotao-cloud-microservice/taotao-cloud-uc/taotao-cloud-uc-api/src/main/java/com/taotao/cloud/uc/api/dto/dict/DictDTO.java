@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.uc.api.dto.dict;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,34 +29,34 @@ import java.io.Serializable;
  * 添加字典实体对象
  *
  * @author dengtao
- * @since 2020/9/30 08:49
  * @version 1.0.0
+ * @since 2020/9/30 08:49
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "添加字典对象DTO")
+@Schema(name = "DictDTO", description = "添加字典对象DTO")
 public class DictDTO implements Serializable {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
-    @ApiModelProperty(value = "字典名称", required = true)
-    @NotBlank(message = "字典名称不能为空")
-    @Size(max = 10, message = "字典名称不能超过10个字符")
-    private String dictName;
+	@Schema(description = "字典名称", required = true)
+	@NotBlank(message = "字典名称不能为空")
+	@Size(max = 10, message = "字典名称不能超过10个字符")
+	private String dictName;
 
-    @ApiModelProperty(value = "字典编码", required = true)
-    @NotBlank(message = "字典编码不能为空")
-    @Size(max = 10, message = "字典编码不能超过10个字符")
-    private String dictCode;
+	@Schema(description = "字典编码", required = true)
+	@NotBlank(message = "字典编码不能为空")
+	@Size(max = 10, message = "字典编码不能超过10个字符")
+	private String dictCode;
 
-    @ApiModelProperty(value = "描述")
-    private String description;
+	@Schema(description = "描述")
+	private String description;
 
-    @ApiModelProperty(value = "排序值")
-    private Integer dictSort;
+	@Schema(description = "排序值")
+	private Integer dictSort;
 
-    @ApiModelProperty(value = "备注信息")
-    private String remark;
+	@Schema(description = "备注信息")
+	private String remark;
 }

@@ -15,49 +15,51 @@
  */
 package com.taotao.cloud.uc.api.dto.dictItem;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.core.mvc.constraints.IntEnums;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-
 /**
  * 添加字典实体对象
  *
  * @author dengtao
- * @since 2020/9/30 08:49
  * @version 1.0.0
+ * @since 2020/9/30 08:49
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "字典项对象")
+@Schema(name = "DictItemDTO", description = "添加字典项对象DTO")
 public class DictItemDTO implements Serializable {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
-    @ApiModelProperty(value = "字典id", required = true)
-    @NotBlank(message = "字典id不能为空")
-    private Long dictId;
+	@Schema(description = "字典id", required = true)
+	@NotNull(message = "字典id不能为空")
+	private Long dictId;
 
-    @ApiModelProperty(value = "字典项文本", required = true)
-    @NotBlank(message = "字典项文本不能为空")
-    @Size(max = 1000, message = "字典项文本不能超过1000个字符")
-    private String itemText;
+	@Schema(description = "字典项文本", required = true)
+	@NotBlank(message = "字典项文本不能为空")
+	@Size(max = 1000, message = "字典项文本不能超过1000个字符")
+	private String itemText;
 
-    @ApiModelProperty(value = "字典项值", required = true)
-    @NotBlank(message = "字典项值不能为空")
-    private String itemValue;
+	@Schema(description = "字典项值", required = true)
+	@NotBlank(message = "字典项值不能为空")
+	private String itemValue;
 
-    @ApiModelProperty(value = "描述")
-    private String description;
+	@Schema(description = "描述")
+	private String description;
 
-    @ApiModelProperty(value = "状态 1不启用 2启用")
-    private Integer status;
+	@Schema(description = "状态 1不启用 2启用", required = true)
+	@NotBlank(message = "字典状态不能为空")
+	@IntEnums(value = {1, 2})
+	private Integer status;
 }

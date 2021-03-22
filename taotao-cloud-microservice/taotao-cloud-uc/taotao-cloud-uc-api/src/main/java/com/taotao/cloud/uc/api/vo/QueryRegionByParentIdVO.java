@@ -15,10 +15,12 @@
  */
 package com.taotao.cloud.uc.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * ApplicationDTO
@@ -28,18 +30,21 @@ import lombok.Data;
  * @since 2021/03/12 16:31
  */
 @Data
-@ApiModel(value = "查询应用列表数据")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Schema(name = "QueryRegionByParentIdVO", description = "查询应用列表数据VO")
 public class QueryRegionByParentIdVO {
 
-	@ApiModelProperty(value = "主键ID")
+	@Schema(description = "主键ID")
 	private String id;
 
-	@ApiModelProperty(value = "名称")
+	@Schema(description = "名称")
 	private String label;
 
-	@ApiModelProperty(value = "应用名称")
+	@Schema(description = "应用名称")
 	private String value;
 
-	@ApiModelProperty(value = "子数据")
+	@Schema(description = "子数据")
 	private List<QueryRegionByParentIdVO> children;
 }

@@ -22,21 +22,23 @@
 
 package com.taotao.cloud.uc.api.vo;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TreeNode
  *
  * @author dengtao
- * @since 2020/10/21 11:02
  * @version 1.0.0
+ * @since 2020/10/21 11:02
  */
 @Data
 @Accessors(chain = true)
@@ -44,25 +46,26 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Schema(name = "TreeNode", description = "树节点")
 public class TreeNode implements Serializable {
 
-    private static final long serialVersionUID = -4546704465269983480L;
+	private static final long serialVersionUID = -4546704465269983480L;
 
-    @ApiModelProperty(value = "id")
-    protected Long id;
+	@Schema(description = "id")
+	protected Long id;
 
-    @ApiModelProperty(value = "parentId")
-    protected Long parentId;
+	@Schema(description = "parentId")
+	protected Long parentId;
 
-    @ApiModelProperty(value = "children")
-    protected List<TreeNode> children;
+	@Schema(description = "children")
+	protected List<TreeNode> children;
 
-    @ApiModelProperty(value = "是否包含子节点")
-    @Builder.Default
-    private Boolean hasChildren = false;
+	@Schema(description = "是否包含子节点")
+	@Builder.Default
+	private Boolean hasChildren = false;
 
-    public void add(TreeNode node) {
-        children.add(node);
-    }
+	public void add(TreeNode node) {
+		children.add(node);
+	}
 
 }

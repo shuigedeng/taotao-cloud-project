@@ -36,7 +36,7 @@ public class IntEnumsValidator implements ConstraintValidator<IntEnums, Integer>
 
 	@Override
 	public void initialize(IntEnums constraintAnnotation) {
-		this.enumList = constraintAnnotation.enumList();
+		this.enumList = constraintAnnotation.value();
 		this.constraintAnnotation = constraintAnnotation;
 	}
 

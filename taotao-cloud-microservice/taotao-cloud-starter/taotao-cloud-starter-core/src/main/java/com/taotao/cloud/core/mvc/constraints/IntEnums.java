@@ -35,7 +35,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = IntEnumsValidator.class)
 public @interface IntEnums {
 
-	int[] enumList() default {};
+	int[] value() default {};
 
 	String message() default "当前值不在字段范围内";
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.vo;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,60 +19,41 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户注册VO")
+@Schema(name = "MenuTreeVo", description = "菜单树VO")
 public class MenuTreeVo {
 
-    /**
-     * 对应SysDepart中的id字段,前端数据树中的key
-     */
-    private Long key;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 对应SysDepart中的id字段,前端数据树中的value
-     */
-    private String value;
+	@Schema(description = "对应SysDepart中的id字段,前端数据树中的key")
+	private Long key;
 
-    /**
-     * 对应depart_name字段,前端数据树中的title
-     */
-    private String title;
+	@Schema(description = "对应SysDepart中的id字段,前端数据树中的value")
+	private String value;
 
-    private static final long serialVersionUID = 1L;
+	@Schema(description = "对应depart_name字段,前端数据树中的title")
+	private String title;
 
-    /**
-     * 菜单ID
-     */
-    private Integer menuId;
+	@Schema(description = "菜单ID")
+	private Integer menuId;
 
-    /**
-     * 菜单名称
-     */
-    private String name;
+	@Schema(description = "菜单名称")
+	private String name;
 
-    /**
-     * 父菜单ID
-     */
-    private Integer parentMenuId;
+	@Schema(description = "父菜单ID")
+	private Integer parentMenuId;
 
-    /**
-     * 菜单类型 （类型   0：目录   1：菜单   2：按钮）
-     */
-    private Integer type;
+	@Schema(description = " 菜单类型 （类型   0：目录   1：菜单   2：按钮）")
+	private Integer type;
 
-    /**
-     * 排序
-     */
-    private Integer sort;
+	@Schema(description = "排序")
+	private Integer sort;
 
-    /**
-     * 父菜单名称
-     */
-    private String parentName;
+	@Schema(description = "父菜单名称")
+	private String parentName;
 
-    /**
-     * 菜单等级
-     */
-    private Integer level;
+	@Schema(description = "菜单等级")
+	private Integer level;
 
-    private List<MenuTreeVo> children;
+	@Schema(description = "children")
+	private List<MenuTreeVo> children;
 }

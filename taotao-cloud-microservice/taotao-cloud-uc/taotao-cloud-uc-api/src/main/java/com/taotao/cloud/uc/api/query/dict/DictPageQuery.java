@@ -35,7 +35,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "DictPageQuery", title = "字典分页查询query", description = "字典分页查询query")
+@Schema(name = "DictPageQuery", description = "字典分页查询query")
 public class DictPageQuery extends BasePageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;

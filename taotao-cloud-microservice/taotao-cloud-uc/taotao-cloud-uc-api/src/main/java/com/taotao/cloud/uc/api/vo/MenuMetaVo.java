@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.vo;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +16,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户注册VO")
+@Schema(name = "MenuMetaVo", description = "菜单元数据VO")
 public class MenuMetaVo {
 
-    private String title;
-    private String icon;
+	@Schema(description = "名称")
+	private String title;
+
+	@Schema(description = "icon")
+	private String icon;
 }

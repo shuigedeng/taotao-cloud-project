@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.api.dto.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,16 +21,16 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户-角色DTO")
+@Schema(name = "UserRoleDTO", description = "用户-角色DTO")
 public class UserRoleDTO implements Serializable {
 
 	private static final long serialVersionUID = -1972549738577159538L;
 
+	@Schema(description = "用户id", required = true)
 	@NotNull(message = "用户id不能为空")
-	@ApiModelProperty(value = "用户id")
 	private Long userId;
 
+	@Schema(description = "角色id列表", required = true)
 	@NotEmpty(message = "角色id列表不能为空")
-	@ApiModelProperty(value = "角色id列表")
 	private Set<Long> roleIds;
 }

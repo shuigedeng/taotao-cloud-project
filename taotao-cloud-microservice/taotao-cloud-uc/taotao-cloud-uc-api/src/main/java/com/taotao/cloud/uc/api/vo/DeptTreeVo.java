@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.vo;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,22 +18,19 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户注册VO")
+@Schema(name = "DeptTreeVo", description = "部门树VO")
 public class DeptTreeVo {
 
-    /**
-     * 对应SysDepart中的id字段,前端数据树中的key
-     */
-    private Long key;
-    /**
-     * 对应SysDepart中的id字段,前端数据树中的value
-     */
-    private String value;
-    /**
-     * 对应depart_name字段,前端数据树中的title
-     */
-    private String title;
+	@Schema(description = "对应SysDepart中的id字段,前端数据树中的key")
+	private Long key;
 
-    private List<DeptTreeVo> children;
+	@Schema(description = "对应SysDepart中的id字段,前端数据树中的value")
+	private String value;
+
+	@Schema(description = "对应depart_name字段,前端数据树中的title")
+	private String title;
+
+	@Schema(description = "部门树children")
+	private List<DeptTreeVo> children;
 
 }

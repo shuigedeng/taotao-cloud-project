@@ -1,13 +1,11 @@
 package com.taotao.cloud.uc.api.vo.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * 用户注册VO
@@ -19,17 +17,17 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户注册VO")
+@Schema(name = "AddUserVO", description = "用户注册VO")
 public class AddUserVO implements Serializable {
 
-    private static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "真实用户名")
-    private String username;
+	@Schema(description = "真实用户名")
+	private String username;
 
-    @ApiModelProperty(value = "手机号")
-    private String phone;
+	@Schema(description = "手机号")
+	private String phone;
 
-    @ApiModelProperty(value = "密码")
-    private String password;
+	@Schema(description = "密码")
+	private String password;
 }

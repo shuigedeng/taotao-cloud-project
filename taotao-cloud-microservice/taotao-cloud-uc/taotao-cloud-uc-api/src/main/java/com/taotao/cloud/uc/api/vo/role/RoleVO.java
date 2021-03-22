@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.api.vo.role;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,26 +19,26 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "角色VO", description = "角色VO")
+@Schema(name = "RoleVO", description = "角色VO")
 public class RoleVO implements Serializable {
 
-    private static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "id")
-    private Long id;
+	@Schema(description = "id")
+	private Long id;
 
-    @ApiModelProperty(value = "角色名称")
-    private String name;
+	@Schema(description = "角色名称")
+	private String name;
 
-    @ApiModelProperty(value = "角色code")
-    private String code;
+	@Schema(description = "角色code")
+	private String code;
 
-    @ApiModelProperty(value = "备注")
-    private String remark;
+	@Schema(description = "备注")
+	private String remark;
 
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "最后修改时间")
-    private LocalDateTime lastModifiedTime;
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 }

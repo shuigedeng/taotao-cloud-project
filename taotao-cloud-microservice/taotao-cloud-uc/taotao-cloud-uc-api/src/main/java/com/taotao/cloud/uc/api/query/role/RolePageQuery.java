@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.api.query.role;
 
 import com.taotao.cloud.core.model.BasePageQuery;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -18,9 +18,9 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "角色分页查询query")
+@Schema(name = "RolePageQuery", description = "角色查询query")
 public class RolePageQuery extends BasePageQuery {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
 }

@@ -1,6 +1,7 @@
 package com.taotao.cloud.uc.api.dto;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import lombok.*;
 
 /**
@@ -8,37 +9,30 @@ import lombok.*;
  *
  * @author dengtao
  * @since 2020/6/15 11:00
-*/
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "用户注册VO")
-public class DeptDTO {
+@Schema(name = "DeptDTO", description = "用户注册DTO")
+public class DeptDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Integer deptId;
+	@Schema(description = "部门id", required = true)
+	private Integer deptId;
 
-    /**
-     * 部门名称
-     */
-    private String name;
+	@Schema(description = "部门名称")
+	private String name;
 
-    /**
-     * 上级部门
-     */
-    private Integer parentId;
+	@Schema(description = "上级部门id")
+	private Integer parentId;
 
-    /**
-     * 排序
-     */
-    private Integer sort;
+	@Schema(description = "排序")
+	private Integer sort;
 
-    /**
-     * 备注
-     */
-    private String remark;
+	@Schema(description = "备注")
+	private String remark;
 
 
 }

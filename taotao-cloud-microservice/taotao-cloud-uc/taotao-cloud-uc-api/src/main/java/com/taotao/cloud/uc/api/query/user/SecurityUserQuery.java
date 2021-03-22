@@ -1,13 +1,16 @@
 package com.taotao.cloud.uc.api.query.user;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * SecurityUserQuery
@@ -22,22 +25,22 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "Security查询query")
+@Schema(name = "SecurityUserQuery", description = "用户查询query")
 public class SecurityUserQuery implements Serializable {
 
-    private static final long serialVersionUID = -6200931899296559445L;
+	private static final long serialVersionUID = -6200931899296559445L;
 
-    @ApiModelProperty(value = "用户昵称")
-    private String nickname;
+	@Schema(description = "用户昵称")
+	private String nickname;
 
-    @ApiModelProperty(value = "用户真实姓名")
-    private String username;
+	@Schema(description = "用户真实姓名")
+	private String username;
 
-    @ApiModelProperty(value = "电话")
-    @Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
-    private String phone;
+	@Schema(description = "电话")
+	@Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
+	private String phone;
 
-    @ApiModelProperty(value = "email")
-    @Email(message = "邮箱格式错误")
-    private String email;
+	@Schema(description = "email")
+	@Email(message = "邮箱格式错误")
+	private String email;
 }

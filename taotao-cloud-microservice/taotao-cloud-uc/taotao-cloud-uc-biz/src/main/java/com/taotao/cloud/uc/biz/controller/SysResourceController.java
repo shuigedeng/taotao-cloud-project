@@ -87,8 +87,7 @@ public class SysResourceController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "修改资源", description = "修改资源", method = "POST",
-		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	@Operation(summary = "修改资源", description = "修改资源", method = "POST", security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "修改资源")
 	@PreAuthorize("hasAuthority('sys:resource:update')")
 	@PutMapping("/{id:[0-9]*}")

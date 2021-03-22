@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.api.dto.role;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,24 +21,24 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "角色DTO")
+@Schema(name = "RoleDTO", description = "添加角色对象DTO")
 public class RoleDTO implements Serializable {
 
-    private static final long serialVersionUID = -1972549738577159538L;
+	private static final long serialVersionUID = -1972549738577159538L;
 
-    @NotBlank(message = "角色名称不能超过为空")
-    @Length(max = 20, message = "角色名称不能超过20个字符")
-    @ApiModelProperty(value = "角色名称")
-    private String name;
+	@Schema(description = "角色名称", required = true)
+	@NotBlank(message = "角色名称不能超过为空")
+	@Length(max = 20, message = "角色名称不能超过20个字符")
+	private String name;
 
-    @NotBlank(message = "角色标识不能超过为空")
-    @Length(max = 20, message = "角色标识不能超过20个字符")
-    @ApiModelProperty(value = "角色标识")
-    @Pattern(regexp = "^[0-9a-zA-Z_]+$", message = "角色标识格式错误：最多20字符，只能包含字母或者下划线")
-    private String code;
+	@Schema(description = "角色标识", required = true)
+	@NotBlank(message = "角色标识不能超过为空")
+	@Length(max = 20, message = "角色标识不能超过20个字符")
+	@Pattern(regexp = "^[0-9a-zA-Z_]+$", message = "角色标识格式错误：最多20字符，只能包含字母或者下划线")
+	private String code;
 
-    @ApiModelProperty(value = "备注")
-    private String remark;
+	@Schema(description = "备注")
+	private String remark;
 
 
 }
