@@ -51,7 +51,7 @@ public class BasePageQuery implements Serializable {
 	@Builder.Default
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
-	private Integer currentPage = 0;
+	private Integer currentPage = 1;
 
 	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")

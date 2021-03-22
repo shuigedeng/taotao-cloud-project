@@ -35,10 +35,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -69,183 +65,149 @@ public class DefaultExceptionAdvice {
 
 	@ExceptionHandler({BaseException.class})
 	public Result<String> baseException(NativeWebRequest req, BaseException e) {
-		LogUtil.error("【全局异常拦截】BaseException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getCode(), e.getMessage());
+		printLog(req, e);
+		return Result.fail(e.getMessage(), e.getCode());
 	}
 
 	@ExceptionHandler({FeignException.class})
-	public Result<String> feignException(NativeWebRequest req, BaseException e) {
-		LogUtil.error("【全局异常拦截】FeignException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getCode(), e.getMessage());
+	public Result<String> feignException(NativeWebRequest req, FeignException e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	@ExceptionHandler({LockException.class})
 	public Result<String> lockException(NativeWebRequest req, LockException e) {
-		LogUtil.error("【全局异常拦截】LockException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getCode(), e.getMessage());
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	@ExceptionHandler({IdempotencyException.class})
 	public Result<String> idempotencyException(NativeWebRequest req, IdempotencyException e) {
-		LogUtil.error("【全局异常拦截】IdempotencyException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getCode(), e.getMessage());
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	@ExceptionHandler({BusinessException.class})
 	public Result<String> businessException(NativeWebRequest req, BusinessException e) {
-		LogUtil.error("【全局异常拦截】BusinessException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getCode(), e.getMessage());
+		printLog(req, e);
+		return Result.fail(e.getMessage(), e.getCode());
 	}
 
 	@ExceptionHandler({IllegalArgumentException.class})
 	public Result<String> illegalArgumentException(NativeWebRequest req,
 		IllegalArgumentException e) {
-		LogUtil.error("【全局异常拦截】IllegalArgumentException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
 	}
 
 	@ExceptionHandler({AccessDeniedException.class})
 	public Result<String> badMethodExpressException(NativeWebRequest req, AccessDeniedException e) {
-		LogUtil.error("【全局异常拦截】AccessDeniedException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.FORBIDDEN);
+		printLog(req, e);
+		return Result.fail(ResultEnum.FORBIDDEN);
 	}
 
 	@ExceptionHandler({MessageException.class})
 	public Result<String> badMessageException(NativeWebRequest req, MessageException e) {
-		LogUtil.error("【全局异常拦截】MessageException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.MESSAGE_SEND_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.MESSAGE_SEND_ERROR);
 	}
 
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public Result<String> badUsernameNotFoundException(NativeWebRequest req,
 		UsernameNotFoundException e) {
-		LogUtil.error("【全局异常拦截】UsernameNotFoundException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req,
 		HttpRequestMethodNotSupportedException e) {
-		LogUtil.error(
-			"【全局异常拦截】HttpRequestMethodNotSupportedException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
 	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req,
 		HttpMediaTypeNotSupportedException e) {
-		LogUtil.error(
-			"【全局异常拦截】HttpMediaTypeNotSupportedException: 请求路径: {0}, 请求参数: {1}, ContentType: {2} 异常信息 {3} ",
-			e,
-			uri(req), query(req), e.getContentType(), e.getMessage());
-		return Result.failed(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({SQLException.class})
 	public Result<String> handleSqlException(NativeWebRequest req, SQLException e) {
-		LogUtil.error("【全局异常拦截】SQLException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.SQL_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
 		DataIntegrityViolationException e) {
-		LogUtil.error("【全局异常拦截】DataIntegrityViolationException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.SQL_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	/**
 	 * 处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常
 	 */
 	@ExceptionHandler(value = BindException.class)
-	public Result<ErrorMsg> handleBindException(NativeWebRequest req, BindException e) {
-		LogUtil.error("【全局异常拦截】BindException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
+	public Result<Map<String, String>> handleBindException(NativeWebRequest req, BindException e) {
+		printLog(req, e);
 		BindingResult bindingResult = e.getBindingResult();
-		ErrorMsg errorMsg = new ErrorMsg();
-		errorMsg.setError(getErrors(bindingResult));
-		return Result.failed(errorMsg, ResultEnum.VERIFY_ARGUMENT_ERROR);
+		return Result.fail(getErrors(bindingResult));
 	}
 
 	/**
 	 * @RequestBody上validate失败后抛出的异常是MethodArgumentNotValidException异常
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Result<ErrorMsg> handleMethodArgumentNotValidException(NativeWebRequest req,
+	public Result<Map<String, String>> handleMethodArgumentNotValidException(NativeWebRequest req,
 		MethodArgumentNotValidException e) {
-		LogUtil.error("【全局异常拦截】MethodArgumentNotValidException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
+		printLog(req, e);
 		BindingResult bindingResult = e.getBindingResult();
-		ErrorMsg errorMsg = new ErrorMsg();
-		errorMsg.setError(getErrors(bindingResult));
-		return Result.failed(errorMsg, ResultEnum.VERIFY_ARGUMENT_ERROR);
+		return Result.fail(getErrors(bindingResult));
 	}
 
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
 	public Result<String> requestTypeMismatch(NativeWebRequest req,
 		MethodArgumentTypeMismatchException e) {
-		LogUtil
-			.error("【全局异常拦截】MethodArgumentTypeMismatchException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ",
-				e,
-				uri(req), query(req), e.getMessage());
-		return Result.failed(e.getMessage(), ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
+		printLog(req, e);
+		return Result.fail(ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
 	}
 
 	@ExceptionHandler({MissingServletRequestParameterException.class})
 	public Result<String> requestMissingServletRequest(NativeWebRequest req,
 		MissingServletRequestParameterException e) {
-		LogUtil.error(
-			"【全局异常拦截】MissingServletRequestParameterException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getMessage(), ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
+		printLog(req, e);
+		return Result.fail(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
 	}
 
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	public Result<String> httpMessageNotReadableException(NativeWebRequest req,
 		HttpMessageNotReadableException e) {
-		LogUtil.error("【全局异常拦截】HttpMessageNotReadableException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		Throwable throwable = e.getRootCause();
-		assert throwable != null;
-		return Result.failed(throwable.getMessage(), ResultEnum.HTTP_MESSAGE_NOT_READABLE);
+		printLog(req, e);
+		return Result.fail(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
 	}
 
 	@ExceptionHandler(ValidationException.class)
 	public Result<String> handleException(NativeWebRequest req, ValidationException e) {
-		LogUtil.error("【全局异常拦截】ValidationException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(e.getMessage(), ResultEnum.VERIFY_ARGUMENT_ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.VERIFY_ARGUMENT_ERROR);
 	}
 
 	/**
 	 * @RequestParam上validate失败后抛出的异常是javax.validation.ConstraintViolationException
 	 */
 	@ExceptionHandler(ConstraintViolationException.class)
-	public Result<ErrorMsg> handleException(NativeWebRequest req, ConstraintViolationException e) {
-		LogUtil.error("【全局异常拦截】ConstraintViolationException: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		ErrorMsg errorMsg = new ErrorMsg();
-		errorMsg.setError(getErrors(e));
-		return Result.failed(errorMsg, ResultEnum.VERIFY_ARGUMENT_ERROR);
+	public Result<Map<String, String>> handleException(NativeWebRequest req,
+		ConstraintViolationException e) {
+		printLog(req, e);
+		return Result.fail(getErrors(e));
 	}
 
 	@ExceptionHandler(Exception.class)
 	public Result<String> handleException(NativeWebRequest req, Exception e) {
-		LogUtil.error("【全局异常拦截】Exception: 请求路径: {0}, 请求参数: {1}, 异常信息 {2} ", e,
-			uri(req), query(req), e.getMessage());
-		return Result.failed(ResultEnum.ERROR);
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
 	}
 
 	/**
@@ -320,12 +282,9 @@ public class DefaultExceptionAdvice {
 		return map;
 	}
 
-	@Data
-	@Builder
-	@AllArgsConstructor
-	@NoArgsConstructor
-	public static class ErrorMsg {
-
-		private Map<String, String> error;
+	private void printLog(NativeWebRequest req, Exception e) {
+		LogUtil.error("【全局异常拦截】{0}: 请求路径: {1}, 请求参数: {2}, 异常信息 {3} ", e,
+			e.getClass().getName(), uri(req), query(req), e.getMessage());
+		e.printStackTrace();
 	}
 }

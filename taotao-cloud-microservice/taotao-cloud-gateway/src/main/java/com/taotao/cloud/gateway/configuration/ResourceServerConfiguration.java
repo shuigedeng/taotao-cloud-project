@@ -17,7 +17,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.ResponseUtil;
+import com.taotao.cloud.core.utils.WebfluxResponseUtil;
 import com.taotao.cloud.gateway.component.AuthenticationManagerComponent;
 import com.taotao.cloud.gateway.component.Oauth2AuthSuccessHandler;
 import com.taotao.cloud.gateway.component.PermissionAuthManager;
@@ -95,7 +95,7 @@ public class ResourceServerConfiguration {
 			//处理未授权
 			.accessDeniedHandler((exchange, e) -> {
 				LogUtil.error(e);
-				return ResponseUtil.failed(exchange, ResultEnum.FORBIDDEN);
+				return WebfluxResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
 			})
 			//处理未认证
 			.authenticationEntryPoint(entryPoint)
@@ -110,7 +110,7 @@ public class ResourceServerConfiguration {
 		@Override
 		public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException e) {
 			LogUtil.error("认证失败", e);
-			return ResponseUtil.failed(exchange, ResultEnum.UNAUTHORIZED);
+			return WebfluxResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
 		}
 	}
 

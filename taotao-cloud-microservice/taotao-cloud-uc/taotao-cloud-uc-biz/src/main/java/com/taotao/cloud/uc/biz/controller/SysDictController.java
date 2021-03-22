@@ -1,6 +1,5 @@
 package com.taotao.cloud.uc.biz.controller;
 
-
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.core.model.PageModel;
@@ -23,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -65,7 +65,7 @@ public class SysDictController {
 		BeanUtil
 			.copyProperties(dictDTO, dict, CopyOptions.create().ignoreNullValue().ignoreError());
 		SysDict sysDict = dictService.save(dict);
-		return Result.succeed(Objects.nonNull(sysDict));
+		return Result.success(Objects.nonNull(sysDict));
 	}
 
 	@Operation(summary = "根据id更新字典信息", description = "根据id更新字典信息", method = "PUT",
@@ -83,7 +83,7 @@ public class SysDictController {
 		BeanUtil
 			.copyProperties(dictDTO, dict, CopyOptions.create().ignoreNullValue().ignoreError());
 		SysDict sysDict = dictService.update(dict);
-		return Result.succeed(Objects.nonNull(sysDict));
+		return Result.success(Objects.nonNull(sysDict));
 	}
 
 	@Operation(summary = "根据code更新字典信息", description = "根据code更新字典信息", method = "PUT",
@@ -101,7 +101,7 @@ public class SysDictController {
 		BeanUtil
 			.copyProperties(dictDTO, dict, CopyOptions.create().ignoreNullValue().ignoreError());
 		SysDict sysDict = dictService.update(dict);
-		return Result.succeed(Objects.nonNull(sysDict));
+		return Result.success(Objects.nonNull(sysDict));
 	}
 
 	@Operation(summary = "查询所有字典集合", description = "查询所有字典集合", method = "PUT",
@@ -118,7 +118,7 @@ public class SysDictController {
 					CopyOptions.create().ignoreNullValue().ignoreError());
 				return vo;
 			}).collect(Collectors.toList());
-		return Result.succeed(dictList);
+		return Result.success(dictList);
 	}
 
 	@Operation(summary = "分页查询字典集合", description = "分页查询字典集合", method = "PUT",
@@ -126,10 +126,11 @@ public class SysDictController {
 	@RequestOperateLog(description = "分页查询字典集合")
 	@PreAuthorize("hasAuthority('sys:dict:view')")
 	@GetMapping("/page")
-	public PageModel<DictVO> getPage(@Validated DictPageQuery dictPageQuery) {
+	public Result<PageModel<DictVO>> getPage(@Validated DictPageQuery dictPageQuery) {
 		Pageable pageable = PageRequest
 			.of(dictPageQuery.getCurrentPage(), dictPageQuery.getPageSize());
-		org.springframework.data.domain.Page page = dictService.getPage(pageable, dictPageQuery);
+		Page<SysDict> page = dictService.getPage(pageable, dictPageQuery);
+
 		List<DictVO> collect = page.stream().filter(Objects::nonNull)
 			.map(tuple -> {
 				DictVO vo = DictVO.builder().build();
@@ -137,8 +138,12 @@ public class SysDictController {
 					CopyOptions.create().ignoreNullValue().ignoreError());
 				return vo;
 			}).collect(Collectors.toList());
-		org.springframework.data.domain.Page result = new PageImpl<>(collect, pageable, page.getTotalElements());
-		return PageModel.succeed(result);
+
+		Page<DictVO> pageResult = new PageImpl<>(collect, pageable,
+			page.getTotalElements());
+
+		PageModel<DictVO> result = PageModel.convertJpaPage(pageResult);
+		return Result.success(result);
 	}
 
 	@Operation(summary = "根据id删除字典", description = "根据id删除字典", method = "DELETE",
@@ -150,7 +155,7 @@ public class SysDictController {
 		@Parameter(name = "id", description = "字典id", required = true,
 			schema = @Schema(implementation = Long.class), in = ParameterIn.PATH) @PathVariable(value = "id") Long id) {
 		Boolean result = dictService.removeById(id);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@Operation(summary = "根据code删除字典", description = "根据code删除字典", method = "DELETE",
@@ -162,7 +167,7 @@ public class SysDictController {
 		@Parameter(name = "code", description = "字典code", required = true,
 			schema = @Schema(implementation = String.class), in = ParameterIn.PATH) @PathVariable(value = "code") String code) {
 		Boolean result = dictService.deleteByCode(code);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 }
 

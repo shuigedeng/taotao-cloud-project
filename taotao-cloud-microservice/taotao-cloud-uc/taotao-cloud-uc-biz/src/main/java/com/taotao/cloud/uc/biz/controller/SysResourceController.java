@@ -16,7 +16,9 @@ import com.taotao.cloud.uc.biz.mapper.ResourceMapper;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -64,7 +66,7 @@ public class SysResourceController {
 		SysResource resource = ResourceMapper.INSTANCE.resourceDtoToSysResource(resourceDTO);
 		SysResource sysResource = resourceService.saveResource(resource);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(sysResource);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据id删除资源")
@@ -73,20 +75,20 @@ public class SysResourceController {
 	@DeleteMapping("/{id:[0-9]*}")
 	public Result<Boolean> deleteResource(@PathVariable(value = "id") Long id) {
 		Boolean result = resourceService.deleteResource(id);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("修改资源")
 	@RequestOperateLog(description = "修改资源")
 	@PreAuthorize("hasAuthority('sys:resource:update')")
 	@PutMapping("/{id:[0-9]*}")
-	public Result<ResourceVO> updateResource(@PathVariable(value = "id") Long id,
-											 @Validated @RequestBody ResourceDTO resourceDTO) {
+	public Result<Boolean> updateResource(@PathVariable(value = "id") Long id,
+		@Validated @RequestBody ResourceDTO resourceDTO) {
 		SysResource resource = resourceService.findResourceById(id);
 		ResourceMapper.INSTANCE.copyResourceDtoToSysResource(resourceDTO, resource);
 		SysResource updateResource = resourceService.updateResource(resource);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(updateResource);
-		return Result.succeed(result);
+		return Result.success(Objects.nonNull(result));
 	}
 
 	@ApiOperation("根据id查询资源是否存在")
@@ -94,9 +96,9 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:exists:phone')")
 	@GetMapping("/exists/id")
 	public Result<Boolean> existsByPhone(@NotNull(message = "资源id不能为空")
-										 @RequestParam(value = "id") Long id) {
+	@RequestParam(value = "id") Long id) {
 		Boolean result = resourceService.existsById(id);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据名称查询资源是否存在")
@@ -104,9 +106,9 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:exists:phone')")
 	@GetMapping("/exists/name")
 	public Result<Boolean> existsByName(@NotBlank(message = "资源名称不能为空")
-										@RequestParam(value = "name") String name) {
+	@RequestParam(value = "name") String name) {
 		Boolean result = resourceService.existsByName(name);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据id获取资源信息")
@@ -114,10 +116,10 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:info:id')")
 	@GetMapping("/info/id")
 	public Result<ResourceVO> findResourceById(@NotNull(message = "资源id不能为空")
-											   @RequestParam(value = "id") Long id) {
+	@RequestParam(value = "id") Long id) {
 		SysResource resource = resourceService.findResourceById(id);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(resource);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据名称获取资源信息")
@@ -125,22 +127,27 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:info:name')")
 	@GetMapping("/info/name")
 	public Result<ResourceVO> findResourceByName(@NotBlank(message = "资源名称不能为空")
-												 @RequestParam(value = "name") String name) {
+	@RequestParam(value = "name") String name) {
 		SysResource resource = resourceService.findResourceByName(name);
 		ResourceVO result = ResourceMapper.INSTANCE.sysResourceDtoResourceVo(resource);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("分页查询资源集合")
 	@RequestOperateLog(description = "分页查询资源集合")
 	@PreAuthorize("hasAuthority('sys:resource:view:page')")
 	@GetMapping(value = "/page")
-	public PageModel<ResourceVO> findResourcePage(@Validated @NotNull ResourcePageQuery resourceQuery) {
-		Pageable pageable = PageRequest.of(resourceQuery.getCurrentPage(), resourceQuery.getPageSize());
-		org.springframework.data.domain.Page page = resourceService.findResourcePage(pageable, resourceQuery);
-		List<ResourceVO> resources = ResourceMapper.INSTANCE.sysResourceToResourceVo(page.getContent());
-		org.springframework.data.domain.Page result = new PageImpl<>(resources, pageable, page.getTotalElements());
-		return PageModel.succeed(result);
+	public Result<PageModel<ResourceVO>> findResourcePage(
+		@Validated @NotNull ResourcePageQuery resourceQuery) {
+		Pageable pageable = PageRequest
+			.of(resourceQuery.getCurrentPage(), resourceQuery.getPageSize());
+		Page<SysResource> page = resourceService
+			.findResourcePage(pageable, resourceQuery);
+		List<ResourceVO> resources = ResourceMapper.INSTANCE
+			.sysResourceToResourceVo(page.getContent());
+		Page<ResourceVO> result = new PageImpl<>(resources, pageable,
+			page.getTotalElements());
+		return Result.success(PageModel.convertJpaPage(result));
 	}
 
 	@ApiOperation("查询所有资源列表")
@@ -150,7 +157,7 @@ public class SysResourceController {
 	public Result<List<ResourceVO>> findAllResources() {
 		List<SysResource> resources = resourceService.findAllResources();
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据角色id获取资源列表")
@@ -159,12 +166,12 @@ public class SysResourceController {
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/info/roleId")
 	public Result<List<ResourceVO>> findResourceByRoleId(@NotNull(message = "角色id不能为空")
-														 @RequestParam(value = "roleId") Long roleId) {
+	@RequestParam(value = "roleId") Long roleId) {
 		Set<Long> roleIds = new HashSet<>();
 		roleIds.add(roleId);
 		List<SysResource> resources = resourceService.findResourceByRoleIds(roleIds);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据角色id列表获取角色列表")
@@ -172,10 +179,10 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/info/roleIds")
 	public Result<List<ResourceVO>> findResourceByRoleIds(@NotNull(message = "用户id列表不能为空")
-														  @RequestParam(value = "roleIds") Set<Long> roleIds) {
+	@RequestParam(value = "roleIds") Set<Long> roleIds) {
 		List<SysResource> resources = resourceService.findResourceByRoleIds(roleIds);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据角色code获取资源列表")
@@ -183,12 +190,12 @@ public class SysResourceController {
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/info/code")
 	public Result<List<ResourceVO>> findResourceByCode(@NotNull(message = "角色code不能为空")
-													   @RequestParam(value = "code") String code) {
+	@RequestParam(value = "code") String code) {
 		Set<String> codes = new HashSet<>();
 		codes.add(code);
 		List<SysResource> resources = resourceService.findResourceByCodes(codes);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据角色code列表获取角色列表")
@@ -196,10 +203,10 @@ public class SysResourceController {
 	//@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/info/codes")
 	public Result<List<ResourceVO>> findResourceByCodes(@NotNull(message = "角色cde列表不能为空")
-														@RequestParam(value = "codes") Set<String> codes) {
+	@RequestParam(value = "codes") Set<String> codes) {
 		List<SysResource> resources = resourceService.findResourceByCodes(codes);
 		List<ResourceVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	// @ApiOperation("根据parentId获取角色列表")
@@ -221,7 +228,7 @@ public class SysResourceController {
 	public Result<List<ResourceVO>> findCurrentUserResource() {
 		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
-			return Result.succeed(Collections.emptyList());
+			return Result.success(Collections.emptyList());
 		}
 		return findResourceByCodes(roleCodes);
 	}
@@ -230,15 +237,17 @@ public class SysResourceController {
 	@RequestOperateLog(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/info/current/user/tree")
-	public Result<List<ResourceTree>> findCurrentUserResourceTree(@RequestParam(value = "parentId") Long parentId) {
+	public Result<List<ResourceTree>> findCurrentUserResourceTree(
+		@RequestParam(value = "parentId") Long parentId) {
 		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
-			return Result.succeed(Collections.emptyList());
+			return Result.success(Collections.emptyList());
 		}
 		Result<List<ResourceVO>> result = findResourceByCodes(roleCodes);
 		List<ResourceVO> resourceVOList = result.getData();
-		List<ResourceTree> trees = resourceService.findCurrentUserResourceTree(resourceVOList, parentId);
-		return Result.succeed(trees);
+		List<ResourceTree> trees = resourceService
+			.findCurrentUserResourceTree(resourceVOList, parentId);
+		return Result.success(trees);
 	}
 
 	@ApiOperation("获取树形菜单集合 1.false-非懒加载，查询全部 " +
@@ -248,9 +257,9 @@ public class SysResourceController {
 	@GetMapping("/info/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
 	public Result<List<ResourceTree>> findResourceTree(@RequestParam(value = "lazy") boolean lazy,
-													   @RequestParam(value = "parentId") Long parentId) {
+		@RequestParam(value = "parentId") Long parentId) {
 		List<ResourceTree> trees = resourceService.findResourceTree(lazy, parentId);
-		return Result.succeed(trees);
+		return Result.success(trees);
 	}
 
 	@ApiOperation("测试分布式事务")
@@ -259,7 +268,7 @@ public class SysResourceController {
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
 	public Result<Boolean> testSeata() {
 		Boolean result = resourceService.testSeata();
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	public String testSeataException(BlockException e) {

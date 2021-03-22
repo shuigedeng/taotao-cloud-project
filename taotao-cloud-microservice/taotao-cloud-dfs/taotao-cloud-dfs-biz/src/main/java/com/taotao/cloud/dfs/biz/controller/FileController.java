@@ -52,7 +52,7 @@ public class FileController {
 		}
 		File upload = fileService.upload(file);
 		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build();
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("上传多个文件")
@@ -70,7 +70,7 @@ public class FileController {
 
 		if (!CollectionUtils.isEmpty(uploads)) {
 			List<UploadFileVO> result = uploads.stream().map(upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build()).collect(Collectors.toList());
-			return Result.succeed(result);
+			return Result.success(result);
 		}
 
 		throw new BusinessException("文件上传失败");
@@ -83,7 +83,7 @@ public class FileController {
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
 		File file = fileService.findFileById(id);
 		FileVO vo = FileMapper.INSTANCE.fileToFileVO(file);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 	//

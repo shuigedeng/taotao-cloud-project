@@ -42,24 +42,24 @@ public class AuthUtil {
 
 	private final String BASIC_ = "Basic ";
 
-	/**
-	 * 获取request(header/param)中的token
-	 *
-	 * @param request request
-	 * @return java.lang.String
-	 * @author dengtao
-	 * @since 2021/2/25 16:58
-	 */
-	public String extractToken(HttpServletRequest request) {
-		String token = extractHeaderToken(request);
-		if (token == null) {
-			token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
-			if (token == null) {
-				LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
-			}
-		}
-		return token;
-	}
+//	/**
+//	 * 获取request(header/param)中的token
+//	 *
+//	 * @param request request
+//	 * @return java.lang.String
+//	 * @author dengtao
+//	 * @since 2021/2/25 16:58
+//	 */
+//	public String extractToken(HttpServletRequest request) {
+//		String token = extractHeaderToken(request);
+//		if (token == null) {
+//			token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
+//			if (token == null) {
+//				LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
+//			}
+//		}
+//		return token;
+//	}
 
 	/**
 	 * 验证密码

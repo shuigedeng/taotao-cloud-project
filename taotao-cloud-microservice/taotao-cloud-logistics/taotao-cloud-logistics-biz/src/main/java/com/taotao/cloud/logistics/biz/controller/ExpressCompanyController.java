@@ -54,7 +54,7 @@ public class ExpressCompanyController {
 	public Result<ExpressCompanyVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {
 		ExpressCompany expressCompany = expressCompanyService.findExpressCompanyById(id);
 		ExpressCompanyVO vo = ExpressCompanyMapper.INSTANCE.expressCompanyToExpressCompanyVO(expressCompany);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

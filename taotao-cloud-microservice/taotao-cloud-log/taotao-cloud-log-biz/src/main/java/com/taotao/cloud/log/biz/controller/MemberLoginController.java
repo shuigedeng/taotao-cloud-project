@@ -54,7 +54,7 @@ public class MemberLoginController {
 	public Result<MemberLoginVO> findMemberLoginById(@PathVariable(value = "id") Long id) {
 		MemberLogin memberLogin = memberLoginService.findMemberLoginById(id);
 		MemberLoginVO vo = MemberLoginMapper.INSTANCE.memberLoginToMemberLoginVO(memberLogin);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

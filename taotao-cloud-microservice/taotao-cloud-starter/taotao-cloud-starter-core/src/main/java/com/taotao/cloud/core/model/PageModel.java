@@ -54,9 +54,9 @@ public class PageModel<T> implements Serializable {
 	public static <T> PageModel<T> convertJpaPage(Page<T> page) {
 		return of(
 			page.getTotalElements(),
-			page.getNumberOfElements(),
-			page.getSize(),
+			page.getTotalPages(),
 			page.getNumber(),
+			page.getSize(),
 			page.getContent()
 		);
 	}

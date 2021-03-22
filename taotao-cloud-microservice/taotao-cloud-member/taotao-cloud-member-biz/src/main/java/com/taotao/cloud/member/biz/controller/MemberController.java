@@ -49,7 +49,7 @@ public class MemberController {
 	public Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id) {
 		Member member = memberService.findMemberById(id);
 		MemberVO vo = MemberMapper.INSTANCE.memberToMemberVO(member);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 	@ApiOperation("查询会员是否已(注册)存在")
@@ -57,7 +57,7 @@ public class MemberController {
 	@GetMapping("/exist")
 	public Result<Boolean> existMember(@Validated @NotNull(message = "查询条件不能为空") MemberQuery memberQuery) {
 		Boolean result = memberService.existMember(memberQuery);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("注册新会员用户")
@@ -65,7 +65,7 @@ public class MemberController {
 	@PostMapping
 	public Result<Boolean> registerUser(@Validated @RequestBody MemberDTO memberDTO) {
 		Member result = memberService.registerUser(memberDTO);
-		return Result.succeed(Objects.nonNull(result));
+		return Result.success(Objects.nonNull(result));
 	}
 
 	// **********************内部微服务接口*****************************
@@ -77,6 +77,6 @@ public class MemberController {
 	public Result<Member> findMember(@Validated @NotBlank(message = "查询条件不能为空")
 									 @RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {
 		Member result = memberService.findMember(nicknameOrUserNameOrPhoneOrEmail);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 }

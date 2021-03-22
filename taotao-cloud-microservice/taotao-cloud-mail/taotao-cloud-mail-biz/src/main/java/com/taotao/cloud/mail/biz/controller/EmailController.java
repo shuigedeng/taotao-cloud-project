@@ -54,7 +54,7 @@ public class EmailController {
 	public Result<EmailVO> findEmailById(@PathVariable(value = "id") Long id) {
 		Email expressCompany = emailService.findEmailById(id);
 		EmailVO vo = EmailMapper.INSTANCE.emailToEmailVO(expressCompany);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

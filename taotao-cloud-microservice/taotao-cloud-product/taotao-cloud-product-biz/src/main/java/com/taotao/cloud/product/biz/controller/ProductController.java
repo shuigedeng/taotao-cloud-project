@@ -41,7 +41,7 @@ public class ProductController {
 	Result<ProductVO> findProductInfoById(@PathVariable("id") Long id) {
 		Product product = productInfoService.findProductById(id);
 		ProductVO vo = ProductMapper.INSTANCE.productToProductVO(product);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 	@ApiOperation("添加商品信息")
@@ -51,7 +51,7 @@ public class ProductController {
 	Result<ProductVO> saveProduct(@Validated @RequestBody ProductDTO productDTO) {
 		Product product = productInfoService.saveProduct(productDTO);
 		ProductVO vo = ProductMapper.INSTANCE.productToProductVO(product);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

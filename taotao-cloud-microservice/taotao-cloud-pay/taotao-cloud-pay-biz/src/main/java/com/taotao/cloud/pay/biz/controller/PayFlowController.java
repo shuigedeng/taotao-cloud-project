@@ -54,7 +54,7 @@ public class PayFlowController {
 	public Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id) {
 		PayFlow payFlow = payFlowService.findPayFlowById(id);
 		PayFlowVO vo = PayFlowMapper.INSTANCE.payFlowToPayFlowVO(payFlow);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

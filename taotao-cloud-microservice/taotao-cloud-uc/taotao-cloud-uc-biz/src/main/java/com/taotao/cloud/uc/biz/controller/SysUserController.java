@@ -18,7 +18,12 @@ import com.taotao.cloud.uc.biz.mapper.UserMapper;
 import com.taotao.cloud.uc.biz.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,11 +38,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * 后台用户管理API
@@ -62,7 +62,7 @@ public class SysUserController {
 		SysUser sysUser = UserMapper.INSTANCE.userDtoToSysUser(userDTO);
 		SysUser result = sysUserService.saveUser(sysUser);
 		AddUserVO addUserVO = UserMapper.INSTANCE.sysUserToAddUserVO(result);
-		return Result.succeed(addUserVO);
+		return Result.success(addUserVO);
 	}
 
 	@ApiOperation("更新用户")
@@ -70,12 +70,12 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:update')")
 	@PutMapping("/{id:[0-9]*}")
 	public Result<UserVO> updateUser(@PathVariable(value = "id") Long id,
-									 @Validated @RequestBody UserDTO userDTO) {
+		@Validated @RequestBody UserDTO userDTO) {
 		SysUser user = sysUserService.findUserInfoById(id);
 		UserMapper.INSTANCE.copyUserDtoToSysUser(userDTO, user);
 		SysUser updateUser = sysUserService.updateUser(user);
 		UserVO result = UserMapper.INSTANCE.sysUserToUserVO(updateUser);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据手机号码查询用户是否存在")
@@ -83,9 +83,9 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone")
 	public Result<Boolean> existsByPhone(@NotBlank(message = "手机号码不能为空")
-										 @RequestParam(value = "phone") String phone) {
+	@RequestParam(value = "phone") String phone) {
 		Boolean result = sysUserService.existsByPhone(phone);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据用户id查询用户是否存在")
@@ -93,9 +93,9 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
 	@GetMapping("/exists/id")
 	public Result<Boolean> existsByPhone(@NotNull(message = "用户id不能为空")
-										 @RequestParam(value = "id") Long id) {
+	@RequestParam(value = "id") Long id) {
 		Boolean result = sysUserService.existsById(id);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据用户id删除用户")
@@ -104,19 +104,23 @@ public class SysUserController {
 	@DeleteMapping("/{id:[0-9]*}")
 	public Result<Boolean> deleteUser(@PathVariable(value = "id") Long id) {
 		Boolean result = sysUserService.removeUser(id);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("分页查询用户集合")
 	@RequestOperateLog(description = "分页查询用户集合")
 	@PreAuthorize("hasAuthority('sys:user:view:page')")
 	@GetMapping(value = "/page")
-	public PageModel<UserVO> findUserPage(@Validated UserPageQuery userQuery) {
+	public Result<PageModel<UserVO>> findUserPage(@Validated UserPageQuery userQuery) {
 		Pageable pageable = PageRequest.of(userQuery.getCurrentPage(), userQuery.getPageSize());
-		org.springframework.data.domain.Page page = sysUserService.findUserPage(pageable, userQuery);
-		List<UserVO> users = UserMapper.INSTANCE.sysUserToUserVO(page.getContent());
-		org.springframework.data.domain.Page result = new PageImpl<>(users, pageable, page.getTotalElements());
-		return PageModel.succeed(result);
+		Page<SysUser> page = sysUserService.findUserPage(pageable, userQuery);
+		return Result.success(PageModel
+			.convertJpaPage(new PageImpl<>(
+				UserMapper.INSTANCE.sysUserToUserVO(page.getContent()),
+				pageable,
+				page.getTotalElements())
+			)
+		);
 	}
 
 	@ApiOperation("重置密码")
@@ -124,9 +128,9 @@ public class SysUserController {
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PutMapping("/rest/password/{id:[0-9]*}")
 	public Result<Boolean> restPass(@PathVariable(value = "id") Long id,
-									@Validated @RequestBody RestPasswordUserDTO restPasswordDTO) {
+		@Validated @RequestBody RestPasswordUserDTO restPasswordDTO) {
 		Boolean result = sysUserService.restPass(id, restPasswordDTO);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("获取当前登录人信息")
@@ -141,7 +145,7 @@ public class SysUserController {
 		Long userId = securityUser.getUserId();
 		SysUser user = sysUserService.findUserInfoById(userId);
 		UserVO result = UserMapper.INSTANCE.sysUserToUserVO(user);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据id获取用户信息")
@@ -151,7 +155,7 @@ public class SysUserController {
 	public Result<UserVO> findUserInfoById(@PathVariable(value = "id") Long id) {
 		SysUser user = sysUserService.findUserInfoById(id);
 		UserVO result = UserMapper.INSTANCE.sysUserToUserVO(user);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据username获取用户信息")
@@ -159,10 +163,10 @@ public class SysUserController {
 	//@PreAuthorize("hasAuthority('sys:user:info:username')")
 	@GetMapping("/info/username")
 	public Result<UserVO> findUserInfoByUsername(@NotBlank(message = "用户名称不能为空")
-												 @RequestParam(value = "username") String username) {
+	@RequestParam(value = "username") String username) {
 		SysUser user = sysUserService.findUserInfoByUsername(username);
 		UserVO result = UserMapper.INSTANCE.sysUserToUserVO(user);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("查询用户集合")
@@ -172,7 +176,7 @@ public class SysUserController {
 	public Result<List<UserVO>> findUserList(@Validated UserQuery userQuery) {
 		List<SysUser> userList = sysUserService.findUserList(userQuery);
 		List<UserVO> result = UserMapper.INSTANCE.sysUserToUserVO(userList);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation("根据用户id更新角色信息(用户分配角色)")
@@ -181,7 +185,7 @@ public class SysUserController {
 	@PutMapping("/role")
 	public Result<Boolean> updateUserRoles(@Validated @RequestBody UserRoleDTO userRoleDTO) {
 		Boolean result = sysUserService.updateUserRoles(userRoleDTO);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	// **********************内部微服务接口*****************************

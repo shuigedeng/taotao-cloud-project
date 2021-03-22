@@ -28,6 +28,10 @@ public enum ResultEnum implements BaseEnum {
 	 */
 	SUCCESS(200, "请求成功"),
 	/**
+	 * 系统错误
+	 */
+	ERROR(500, "系统内部错误"),
+	/**
 	 * 登录成功
 	 */
 	LOGIN_SUCCESS(200, "登录成功"),
@@ -51,10 +55,6 @@ public enum ResultEnum implements BaseEnum {
 	 * 请求不存在
 	 */
 	REQUEST_NOT_FOUND(404, "请求不存在"),
-	/**
-	 * 系统错误
-	 */
-	ERROR(500, "系统错误"),
 	/**
 	 * 用户名或密码错误
 	 */
@@ -210,7 +210,7 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * RequestBody类型参数数据类型转换异常  HttpMessageNotReadable
 	 */
-	HTTP_MESSAGE_NOT_READABLE(500038, "RequestBody类型参数数据类型转换异常");
+	HTTP_MESSAGE_NOT_READABLE(500038, "类型参数数据类型转换异常");
 
 	/**
 	 * 返回码
@@ -220,11 +220,11 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 描述
 	 */
-	private final String message;
+	private final String data;
 
-	ResultEnum(Integer code, String message) {
+	ResultEnum(Integer code, String data) {
 		this.code = code;
-		this.message = message;
+		this.data = data;
 	}
 
 	/**
@@ -238,7 +238,7 @@ public enum ResultEnum implements BaseEnum {
 	public static String getMessageByCode(int code) {
 		for (ResultEnum result : ResultEnum.values()) {
 			if (result.getCode() == code) {
-				return result.getMessage();
+				return result.getData();
 			}
 		}
 		return null;
@@ -259,8 +259,8 @@ public enum ResultEnum implements BaseEnum {
 		return code;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getData() {
+		return data;
 	}
 
 }

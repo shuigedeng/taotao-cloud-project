@@ -49,7 +49,7 @@ public class MapReduceController {
 			return Result.failed("请求参数为空");
 		}
 		mapReduceService.groupSort(jobName, inputPath);
-		return Result.succeed("分组统计、排序成功");
+		return Result.success("分组统计、排序成功");
 	}
 
 }

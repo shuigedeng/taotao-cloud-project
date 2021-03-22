@@ -73,7 +73,7 @@ public class SecurityHandlerComponent {
 			public void handle(HttpServletRequest request, HttpServletResponse response,
 				AccessDeniedException authException) throws IOException, ServletException {
 				LogUtil.error("权限不足", authException);
-				ResponseUtil.failed(response, ResultEnum.FORBIDDEN);
+				ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
 			}
 		};
 	}
@@ -113,7 +113,7 @@ public class SecurityHandlerComponent {
 				return;
 			}
 
-			ResponseUtil.failed(response, ResultEnum.UNAUTHORIZED);
+			ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
 		}
 
 		private class AuthorizationCodeGrantRequestMatcher implements RequestMatcher {

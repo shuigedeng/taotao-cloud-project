@@ -48,10 +48,7 @@ public class Result<T> implements Serializable {
 	@Schema(description = "返回数据")
 	private T data;
 
-	@Schema(description = "消息类型 success error")
-	private String type;
-
-	@Schema(description = "消息体")
+	@Schema(description = "消息体 error success")
 	private String message;
 
 	@Schema(description = "请求id")
@@ -64,21 +61,19 @@ public class Result<T> implements Serializable {
 	public Result() {
 	}
 
-	public Result(int code, T data, String type, String message, String requestId,
+	public Result(int code, T data, String message, String requestId,
 		LocalDateTime timestamp) {
 		this.code = code;
 		this.data = data;
-		this.type = type;
 		this.message = message;
 		this.requestId = requestId;
 		this.timestamp = timestamp;
 	}
 
-	public static <T> Result<T> of(int code, T data, String type, String msg) {
+	public static <T> Result<T> of(int code, T data, String msg) {
 		return Result.<T>builder()
 			.code(code)
 			.data(data)
-			.type(type)
 			.message(msg)
 			.timestamp(LocalDateTime.now())
 			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TRACE_ID)) ? MDC
@@ -86,54 +81,31 @@ public class Result<T> implements Serializable {
 			.build();
 	}
 
-	public static <T> Result<T> succeed(T data) {
-		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS,
-			ResultEnum.SUCCESS.getMessage());
+	public static <T> Result<T> success(T data) {
+		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS);
 	}
 
-	public static <T> Result<T> succeed(T data, String msg) {
-		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS, msg);
+	public static <T> Result<T> success(T data, int code) {
+		return of(code, data, CommonConstant.SUCCESS);
 	}
 
-	public static <T> Result<T> succeed(T data, int code, String msg) {
-		return of(code, data, CommonConstant.SUCCESS, msg);
+	public static Result<String> success(String data, ResultEnum resultEnum) {
+		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.SUCCESS);
 	}
 
-	public static <T> Result<T> succeed(T data, ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), data, CommonConstant.SUCCESS, resultEnum.getMessage());
+	public static Result<String> fail() {
+		return of(ResultEnum.ERROR.getCode(), ResultEnum.ERROR.getData(), CommonConstant.ERROR);
 	}
 
-	public static <T> Result<T> succeed(ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), null, CommonConstant.SUCCESS, resultEnum.getMessage());
+	public static <T> Result<T> fail(T data) {
+		return of(ResultEnum.ERROR.getCode(), data, CommonConstant.ERROR);
 	}
 
-	public static Result<String> failed() {
-		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR,
-			ResultEnum.ERROR.getMessage());
+	public static <T> Result<T> fail(T data, int code) {
+		return of(code, data, CommonConstant.ERROR);
 	}
 
-	public static <T> Result<T> failed(T data) {
-		return of(ResultEnum.ERROR.getCode(), data, CommonConstant.ERROR,
-			ResultEnum.ERROR.getMessage());
-	}
-
-	public static <T> Result<T> failed(T data, int code) {
-		return of(code, data, CommonConstant.ERROR, ResultEnum.ERROR.getMessage());
-	}
-
-	public static <T> Result<T> failed(int code, String msg) {
-		return of(code, null, CommonConstant.ERROR, msg);
-	}
-
-	public static <T> Result<T> failed(T data, int code, String msg) {
-		return of(code, data, CommonConstant.ERROR, msg);
-	}
-
-	public static Result<String> failed(ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getMessage());
-	}
-
-	public static <T> Result<T> failed(T data, ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), data, CommonConstant.ERROR, resultEnum.getMessage());
+	public static Result<String> fail(ResultEnum resultEnum) {
+		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.ERROR);
 	}
 }

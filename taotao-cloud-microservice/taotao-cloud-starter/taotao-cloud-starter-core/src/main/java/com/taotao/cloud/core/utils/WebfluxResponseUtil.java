@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.core.utils;
 
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.core.model.Result;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -39,23 +41,72 @@ import java.nio.charset.Charset;
 @UtilityClass
 public class WebfluxResponseUtil {
 
-	public static <T> Mono<Void> responseWriter(ServerWebExchange exchange, Integer code, T data,
-		String type, String msg) {
-		Result<T> result = Result.of(code, data, type, msg);
-		return responseWrite(exchange, result);
+
+	/**
+	 * webflux成功返回数据
+	 *
+	 * @param exchange exchange
+	 * @param data     数据
+	 * @return reactor.core.publisher.Mono<java.lang.Void>
+	 * @author dengtao
+	 * @since 2020/10/15 15:50
+	 */
+	public Mono<Void> success(ServerWebExchange exchange, Object data) {
+		Result<Object> result = Result.success(data);
+		return writeResponse(exchange, result);
 	}
 
-	public static Mono<Void> responseFailed(ServerWebExchange exchange, String msg) {
-		Result<String> result = Result.failed(msg);
-		return responseWrite(exchange, result);
+	/**
+	 * webflux失败返回数据
+	 *
+	 * @param exchange exchange
+	 * @param data     数据
+	 * @return reactor.core.publisher.Mono<java.lang.Void>
+	 * @author dengtao
+	 * @since 2020/10/15 15:50
+	 */
+	public Mono<Void> fail(ServerWebExchange exchange, Object data) {
+		Result<Object> result = Result.fail(data);
+		return writeResponse(exchange, result);
 	}
 
-	public static <T> Mono<Void> responseSuccess(ServerWebExchange exchange, String msg) {
-		Result<String> result = Result.failed(msg);
-		return responseWrite(exchange, result);
+	/**
+	 * 失败返回数据
+	 *
+	 * @param exchange exchange
+	 * @param result   数据
+	 * @return reactor.core.publisher.Mono<java.lang.Void>
+	 * @author dengtao
+	 * @since 2020/10/15 15:50
+	 */
+	public Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
+		return writeResponse(exchange, result);
 	}
 
-	public static <T> Mono<Void> responseWrite(ServerWebExchange exchange, Result<T> result) {
+	/**
+	 * 失败返回数据
+	 *
+	 * @param exchange   exchange
+	 * @param resultEnum 状态码
+	 * @return reactor.core.publisher.Mono<java.lang.Void>
+	 * @author dengtao
+	 * @since 2020/10/15 15:51
+	 */
+	public Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
+		Result<String> result = Result.fail(resultEnum);
+		return writeResponse(exchange, result);
+	}
+
+	/**
+	 * 通过流返回数据
+	 *
+	 * @param exchange exchange
+	 * @param result   数据
+	 * @return reactor.core.publisher.Mono<java.lang.Void>
+	 * @author dengtao
+	 * @since 2020/10/15 15:52
+	 */
+	public Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {
 		ServerHttpResponse response = exchange.getResponse();
 		response.getHeaders().setAccessControlAllowCredentials(true);
 		response.getHeaders().setAccessControlAllowOrigin("*");
@@ -64,8 +115,7 @@ public class WebfluxResponseUtil {
 		DataBufferFactory dataBufferFactory = response.bufferFactory();
 		DataBuffer buffer = dataBufferFactory
 			.wrap(JsonUtil.toJSONString(result).getBytes(Charset.defaultCharset()));
-		return response.writeWith(Mono.just(buffer)).doOnError((error) -> {
-			DataBufferUtils.release(buffer);
-		});
+		return response.writeWith(Mono.just(buffer))
+			.doOnSuccess((error) -> DataBufferUtils.release(buffer));
 	}
 }

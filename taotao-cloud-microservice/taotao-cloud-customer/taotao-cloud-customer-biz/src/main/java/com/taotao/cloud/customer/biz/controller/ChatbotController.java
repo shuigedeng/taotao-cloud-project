@@ -54,7 +54,7 @@ public class ChatbotController {
 	public Result<ChatbotVO> findChatbotById(@PathVariable(value = "id") Long id) {
 		Chatbot chatbot = chatbotService.findChatbotById(id);
 		ChatbotVO vo = ChatbotMapper.INSTANCE.chatbotToChatbotVO(chatbot);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

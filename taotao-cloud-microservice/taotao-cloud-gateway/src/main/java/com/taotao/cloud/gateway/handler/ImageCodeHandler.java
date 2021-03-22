@@ -58,7 +58,7 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 			return ServerResponse
 				.status(HttpStatus.HTTP_OK)
 				.contentType(MediaType.APPLICATION_JSON)
-				.bodyValue(Result.succeed(captcha.toBase64()));
+				.bodyValue(Result.success(captcha.toBase64()));
 		} catch (Exception e) {
 			return ServerResponse
 				.status(HttpStatus.HTTP_OK)

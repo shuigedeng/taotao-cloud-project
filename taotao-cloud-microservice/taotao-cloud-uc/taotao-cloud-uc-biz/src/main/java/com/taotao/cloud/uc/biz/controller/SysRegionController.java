@@ -24,9 +24,9 @@ public class SysRegionController {
 	@ApiOperationSupport(author = "dengtao")
 	@GetMapping("/parentId")
 	public Result<List<QueryRegionByParentIdVO>> queryRegionByParentId(
-			@RequestParam(value = "parentId", defaultValue = "1") Long parentId) {
+		@RequestParam(value = "parentId", defaultValue = "1") Long parentId) {
 		List<QueryRegionByParentIdVO> result = sysRegionService.queryRegionByParentId(parentId);
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 
 	@ApiOperation(value = "树形结构查询")
@@ -34,6 +34,6 @@ public class SysRegionController {
 	@RequestMapping(value = "/tree", method = {RequestMethod.POST, RequestMethod.GET})
 	public Result<List<QueryRegionByParentIdVO>> tree() {
 		List<QueryRegionByParentIdVO> result = sysRegionService.tree();
-		return Result.succeed(result);
+		return Result.success(result);
 	}
 }

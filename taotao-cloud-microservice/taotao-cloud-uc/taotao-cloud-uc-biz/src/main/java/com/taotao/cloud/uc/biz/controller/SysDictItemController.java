@@ -13,17 +13,24 @@ import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 字典项管理API
@@ -38,63 +45,66 @@ import java.util.stream.Collectors;
 @Api(value = "字典项管理API", tags = {"字典项管理API"})
 public class SysDictItemController {
 
-    private final ISysDictItemService dictItemService;
+	private final ISysDictItemService dictItemService;
 
-    @ApiOperation("添加字典项详情")
-    @RequestOperateLog(description = "添加字典项详情")
-    @PreAuthorize("hasAuthority('sys:dictItem:add')")
-    @PostMapping
-    public Result<Boolean> save(@Validated @RequestBody DictItemDTO dictItemDTO) {
-        SysDictItem item = dictItemService.save(dictItemDTO);
-        return Result.succeed(Objects.nonNull(item));
-    }
+	@ApiOperation("添加字典项详情")
+	@RequestOperateLog(description = "添加字典项详情")
+	@PreAuthorize("hasAuthority('sys:dictItem:add')")
+	@PostMapping
+	public Result<Boolean> save(@Validated @RequestBody DictItemDTO dictItemDTO) {
+		SysDictItem item = dictItemService.save(dictItemDTO);
+		return Result.success(Objects.nonNull(item));
+	}
 
-    @ApiOperation("更新字典项详情")
-    @RequestOperateLog(description = "更新字典项详情")
-    @PreAuthorize("hasAuthority('sys:dictItem:edit')")
-    @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable(value = "id") Long id,
-                                      @Validated @RequestBody DictItemDTO dictItemDTO) {
-        SysDictItem item = dictItemService.updateById(id, dictItemDTO);
-        return Result.succeed(Objects.nonNull(item));
-    }
+	@ApiOperation("更新字典项详情")
+	@RequestOperateLog(description = "更新字典项详情")
+	@PreAuthorize("hasAuthority('sys:dictItem:edit')")
+	@PutMapping("/{id}")
+	public Result<Boolean> updateById(@PathVariable(value = "id") Long id,
+		@Validated @RequestBody DictItemDTO dictItemDTO) {
+		SysDictItem item = dictItemService.updateById(id, dictItemDTO);
+		return Result.success(Objects.nonNull(item));
+	}
 
-    @ApiOperation("根据id删除字典项详情")
-    @RequestOperateLog(description = "根据id删除字典项详情")
-    @PreAuthorize("hasAuthority('sys:dictItem:del')")
-    @DeleteMapping("/{id:[0-9]*}")
-    public Result<Boolean> deleteById(@PathVariable("id") Long id) {
-        Boolean result = dictItemService.deleteById(id);
-        return Result.succeed(result);
-    }
+	@ApiOperation("根据id删除字典项详情")
+	@RequestOperateLog(description = "根据id删除字典项详情")
+	@PreAuthorize("hasAuthority('sys:dictItem:del')")
+	@DeleteMapping("/{id:[0-9]*}")
+	public Result<Boolean> deleteById(@PathVariable("id") Long id) {
+		Boolean result = dictItemService.deleteById(id);
+		return Result.success(result);
+	}
 
-    @ApiOperation("分页查询字典详情")
-    @RequestOperateLog(description = "分页查询字典详情")
-    @GetMapping("/page")
-    public PageModel<DictItemVO> getPage(@Validated DictItemPageQuery dictItemPageQuery) {
-        Pageable pageable = PageRequest.of(dictItemPageQuery.getCurrentPage(), dictItemPageQuery.getPageSize());
-        org.springframework.data.domain.Page page = dictItemService.getPage(pageable, dictItemPageQuery);
-        List<DictItemVO> collect = page.stream().filter(Objects::nonNull)
-                .map(tuple -> {
-                    DictItemVO vo = DictItemVO.builder().build();
-                    BeanUtil.copyProperties(tuple, vo, CopyOptions.create().ignoreNullValue().ignoreError());
-                    return vo;
-                }).collect(Collectors.toList());
-        org.springframework.data.domain.Page result = new PageImpl<>(collect, pageable, page.getTotalElements());
-        return PageModel.succeed(result);
-    }
+	@ApiOperation("分页查询字典详情")
+	@RequestOperateLog(description = "分页查询字典详情")
+	@GetMapping("/page")
+	public Result<PageModel<DictItemVO>> getPage(@Validated DictItemPageQuery dictItemPageQuery) {
+		Pageable pageable = PageRequest
+			.of(dictItemPageQuery.getCurrentPage(), dictItemPageQuery.getPageSize());
+		Page<SysDictItem> page = dictItemService.getPage(pageable, dictItemPageQuery);
+		List<DictItemVO> collect = page.stream().filter(Objects::nonNull)
+			.map(tuple -> {
+				DictItemVO vo = DictItemVO.builder().build();
+				BeanUtil.copyProperties(tuple, vo,
+					CopyOptions.create().ignoreNullValue().ignoreError());
+				return vo;
+			}).collect(Collectors.toList());
+		Page<DictItemVO> result = new PageImpl<>(collect, pageable, page.getTotalElements());
+		return Result.success(PageModel.convertJpaPage(result));
+	}
 
-    @ApiOperation("查询字典详情")
-    @RequestOperateLog(description = "查询字典详情")
-    @GetMapping("/info")
-    public Result<List<DictItemVO>> getInfo(@Validated DictItemQuery dictItemQuery) {
-        List<SysDictItem> itmes = dictItemService.getInfo(dictItemQuery);
-        List<DictItemVO> collect = itmes.stream().filter(Objects::nonNull)
-                .map(tuple -> {
-                    DictItemVO vo = DictItemVO.builder().build();
-                    BeanUtil.copyProperties(tuple, vo, CopyOptions.create().ignoreNullValue().ignoreError());
-                    return vo;
-                }).collect(Collectors.toList());
-        return Result.succeed(collect);
-    }
+	@ApiOperation("查询字典详情")
+	@RequestOperateLog(description = "查询字典详情")
+	@GetMapping("/info")
+	public Result<List<DictItemVO>> getInfo(@Validated DictItemQuery dictItemQuery) {
+		List<SysDictItem> itmes = dictItemService.getInfo(dictItemQuery);
+		List<DictItemVO> collect = itmes.stream().filter(Objects::nonNull)
+			.map(tuple -> {
+				DictItemVO vo = DictItemVO.builder().build();
+				BeanUtil.copyProperties(tuple, vo,
+					CopyOptions.create().ignoreNullValue().ignoreError());
+				return vo;
+			}).collect(Collectors.toList());
+		return Result.success(collect);
+	}
 }

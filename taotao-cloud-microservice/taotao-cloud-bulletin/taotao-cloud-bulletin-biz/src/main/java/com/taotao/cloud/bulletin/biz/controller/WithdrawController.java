@@ -54,7 +54,7 @@ public class WithdrawController {
 	public Result<WithdrawVO> findWithdrawById(@PathVariable(value = "id") Long id) {
 		Withdraw withdraw = withdrawService.findWithdrawById(id);
 		WithdrawVO vo = WithdrawMapper.INSTANCE.withdrawToWithdrawVO(withdraw);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

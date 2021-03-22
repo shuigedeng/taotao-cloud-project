@@ -58,7 +58,7 @@ public class HDFSController {
 		// 创建空文件夹
 		boolean isOk = HdfsService.mkdir(path);
 		if (isOk) {
-			return Result.succeed("文件夹创建成功");
+			return Result.success("文件夹创建成功");
 		} else {
 			return Result.failed("文件夹创建失败");
 		}
@@ -71,7 +71,7 @@ public class HDFSController {
 	public Result<List<Map<String, Object>>> readPathInfo(@RequestParam("path") String path)
 		throws Exception {
 		List<Map<String, Object>> list = HdfsService.readPathInfo(path);
-		return Result.succeed(list);
+		return Result.success(list);
 	}
 
 	// @ApiOperation("获取HDFS文件在集群中的位置")
@@ -81,7 +81,7 @@ public class HDFSController {
 	public Result<BlockLocation[]> getFileBlockLocations(@RequestParam("path") String path)
 		throws Exception {
 		BlockLocation[] blockLocations = HdfsService.getFileBlockLocations(path);
-		return Result.succeed(blockLocations);
+		return Result.success(blockLocations);
 	}
 
 	// @ApiOperation("创建文件")
@@ -95,7 +95,7 @@ public class HDFSController {
 			return Result.failed("请求参数为空");
 		}
 		HdfsService.createFile(path, file);
-		return Result.succeed("创建文件成功");
+		return Result.success("创建文件成功");
 	}
 
 	// @ApiOperation("读取HDFS文件内容")
@@ -104,7 +104,7 @@ public class HDFSController {
 	@PostMapping("/readFile")
 	public Result<String> readFile(@RequestParam("path") String path) throws Exception {
 		String targetPath = HdfsService.readFile(path);
-		return Result.succeed(targetPath);
+		return Result.success(targetPath);
 	}
 
 	// @ApiOperation("读取HDFS文件转换成Byte类型")
@@ -113,7 +113,7 @@ public class HDFSController {
 	@PostMapping("/openFileToBytes")
 	public Result<String> openFileToBytes(@RequestParam("path") String path) throws Exception {
 		byte[] files = HdfsService.openFileToBytes(path);
-		return Result.succeed(new String(files));
+		return Result.success(new String(files));
 	}
 
 	// @ApiOperation("读取HDFS文件装换成User对象")
@@ -122,7 +122,7 @@ public class HDFSController {
 	@PostMapping("/openFileToUser")
 	public Result<User> openFileToUser(@RequestParam("path") String path) throws Exception {
 		User user = HdfsService.openFileToObject(path, User.class);
-		return Result.succeed(user);
+		return Result.success(user);
 	}
 
 	// @ApiOperation("读取文件列表")
@@ -132,7 +132,7 @@ public class HDFSController {
 	public Result<List<Map<String, String>>> listFile(@RequestParam("path") String path)
 		throws Exception {
 		List<Map<String, String>> returnList = HdfsService.listFile(path);
-		return Result.succeed(returnList);
+		return Result.success(returnList);
 	}
 
 	// @ApiOperation("重命名文件")
@@ -147,7 +147,7 @@ public class HDFSController {
 		}
 		boolean isOk = HdfsService.renameFile(oldName, newName);
 		if (isOk) {
-			return Result.succeed("文件重命名成功");
+			return Result.success("文件重命名成功");
 		} else {
 			return Result.failed("文件重命名失败");
 		}
@@ -160,7 +160,7 @@ public class HDFSController {
 	public Result<String> deleteFile(@RequestParam("path") String path) throws Exception {
 		boolean isOk = HdfsService.deleteFile(path);
 		if (isOk) {
-			return Result.succeed("文件删除成功");
+			return Result.success("文件删除成功");
 		} else {
 			return Result.failed("文件删除失败");
 		}
@@ -174,7 +174,7 @@ public class HDFSController {
 		@RequestParam("uploadPath") String uploadPath)
 		throws Exception {
 		HdfsService.uploadFile(path, uploadPath);
-		return Result.succeed(true);
+		return Result.success(true);
 	}
 
 	// @ApiOperation("下载文件")
@@ -185,7 +185,7 @@ public class HDFSController {
 		@RequestParam("downloadPath") String downloadPath)
 		throws Exception {
 		HdfsService.downloadFile(path, downloadPath);
-		return Result.succeed(true);
+		return Result.success(true);
 	}
 
 	// @ApiOperation("HDFS文件复制")
@@ -196,7 +196,7 @@ public class HDFSController {
 		@RequestParam("targetPath") String targetPath)
 		throws Exception {
 		HdfsService.copyFile(sourcePath, targetPath);
-		return Result.succeed(true);
+		return Result.success(true);
 	}
 
 	// @ApiOperation("查看文件是否已存在")
@@ -205,7 +205,7 @@ public class HDFSController {
 	@PostMapping("/existFile")
 	public Result<Boolean> existFile(@RequestParam("path") String path) throws Exception {
 		boolean isExist = HdfsService.existFile(path);
-		return Result.succeed(isExist);
+		return Result.success(isExist);
 	}
 
 }

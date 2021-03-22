@@ -41,7 +41,7 @@ public class OrderInfoController {
 	public Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code) {
 		Order order = orderInfoService.findOrderInfoByCode(code);
 		OrderVO vo = OrderMapper.INSTANCE.orderToOrderVO(order);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 	@ApiOperation("添加订单信息")
@@ -50,7 +50,7 @@ public class OrderInfoController {
 	Result<OrderVO> saveOrder(@Validated @RequestBody OrderDTO orderDTO) {
 		Order order = orderInfoService.saveOrder(orderDTO);
 		OrderVO vo = OrderMapper.INSTANCE.orderToOrderVO(order);
-		return Result.succeed(vo);
+		return Result.success(vo);
 	}
 
 }

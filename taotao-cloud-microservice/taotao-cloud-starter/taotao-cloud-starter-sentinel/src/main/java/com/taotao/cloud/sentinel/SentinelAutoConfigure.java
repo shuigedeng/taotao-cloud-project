@@ -20,14 +20,13 @@ import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHan
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.utils.ResponseUtil;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 限流、熔断统一处理类
@@ -43,8 +42,8 @@ public class SentinelAutoConfigure {
 	public BlockExceptionHandler blockExceptionHandler() {
 		return (request, response, e) -> {
 			LogUtil.error("WebmvcHandler Sentinel调用失败: {0}", e);
-			Result<String> result = Result.failed(e.getMessage());
-			ResponseUtil.failed(response, result);
+			Result<String> result = Result.fail(e.getMessage());
+			ResponseUtil.fail(response, result);
 		};
 	}
 
@@ -55,7 +54,7 @@ public class SentinelAutoConfigure {
 			LogUtil.error("WebfluxHandler Sentinel调用失败: {0}", e);
 			return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(Result.failed(e.getMessage())));
+				.body(BodyInserters.fromValue(Result.fail(e.getMessage())));
 		};
 	}
 }
