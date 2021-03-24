@@ -16,12 +16,12 @@ usage(){
 
 default(){
   echo "use default"
-  echo "log_file=/opt/openresty/data/taotao-cloud.access.log"
-  echo "data_dir=/opt/openresty/data/logs/"
+  echo "log_file=/opt/openresty/weblog/taotao-cloud.access.log"
+  echo "data_dir=/opt/openresty/weblog/data/"
   echo "pid_file=/opt/openresty/pid/nginx.pid"
 
-  log_file="/opt/openresty/taotao-bigdata/logs/taotao-cloud.access.log"
-  data_dir="/opt/openresty/taotao-bigdata/logs/data/"
+  log_file="/opt/openresty/weblog/taotao-cloud.access.log"
+  data_dir="/opt/openresty/weblog/data/"
   pid_file="/opt/openresty/pid/nginx.pid"
 }
 
