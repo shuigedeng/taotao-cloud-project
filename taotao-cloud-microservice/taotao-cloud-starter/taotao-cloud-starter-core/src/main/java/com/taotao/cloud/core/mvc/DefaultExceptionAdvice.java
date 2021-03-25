@@ -285,6 +285,6 @@ public class DefaultExceptionAdvice {
 	private void printLog(NativeWebRequest req, Exception e) {
 		LogUtil.error("【全局异常拦截】{0}: 请求路径: {1}, 请求参数: {2}, 异常信息 {3} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
-		e.printStackTrace();
+//		LogUtil.error(e.getMessage(), e);
 	}
 }

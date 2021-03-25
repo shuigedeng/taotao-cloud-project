@@ -8,7 +8,7 @@ server:
 
 jasypt:
   encryptor:
-    password: taotao-cloud
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD}
     algorithm: PBEWITHHMACSHA512ANDAES_256
 #    property:
 #      prefix: "ENC@["
@@ -18,7 +18,7 @@ seata:
   enabled: true
   service:
     grouplist:
-      default: 127.0.0.1:8091
+      default: ${TAOTAO_CLOUD_SEATA_HOST}:${TAOTAO_CLOUD_SEATA_PORT}
     vgroup-mapping:
       my_test_tx_group: default
   application-id: taotao-cloud-uc-service
@@ -28,19 +28,19 @@ seata:
     type: nacos
     nacos:
       namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
-      server-addr: 127.0.0.1:8848
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT}
       group: SEATA_GROUP
-      username: nacos
-      password: nacos
+      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME}
+      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD}
   registry:
     type: nacos
     nacos:
       application: seata-server
-      server-addr: 127.0.0.1:8848
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT}
       group: SEATA_GROUP
       namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
-      username: nacos
-      password: nacos
+      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME}
+      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD}
       cluster: default
 
 spring:
@@ -54,12 +54,12 @@ spring:
         enabled: false
     nacos:
       discovery:
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
         metadata:
           version: 5
       config:
         enabled: false
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
     sentinel:
@@ -68,19 +68,19 @@ spring:
       datasource:
         ds1:
           nacos:
-            server-addr: 127.0.0.1:8848
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
             dataId: taotao-cloud-uc-sentinel
             groupId: DEFAULT_GROUP
             data-type: json
             rule-type: flow
       transport:
-        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:127.0.0.1}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8858}
-        port: ${TAOTAO-CLOUD-SENTINEL-PORT:8717}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
-    password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO_CLOUD_MYSQL_USERNAME}
+    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     hikari:
       auto-commit: true
@@ -107,8 +107,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO-CLOUD-REDIS-HOST:127.0.0.1}
-    port: ${TAOTAO-CLOUD-REDIS-PORT:6379}
+    host: ${TAOTAO_CLOUD_REDIS_HOST}
+    port: ${TAOTAO_CLOUD_REDIS_PORT}
     database: 1
     #password: ${TAOTAO-CLOUD-REDIS-PASSWORD:123456}
     lettuce:
@@ -125,12 +125,12 @@ spring:
       client:
         reactive:
           endpoints:
-            - ${TAOTAO-CLOUD-ELASTICSEARCH-HOST:192.168.99.230}:${TAOTAO-CLOUD-ELASTICSEARCH-PORT:9200}
+            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT}
           connection-timeout: 5
-          username: ${TAOTAO-CLOUD-ELASTICSEARCH-USERNAME:elastic}
-          password: ${TAOTAO-CLOUD-ELASTICSEARCH-PASSWORD:elastic}
+          username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME}
+          password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD}
   kafka:
-    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST:106.13.201.31}:${TAOTAO-CLOUD-KAFKA-PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST}:${TAOTAO_CLOUD_KAFKA_PORT}
     producer:
       retries: 0
       batch-size: 16384

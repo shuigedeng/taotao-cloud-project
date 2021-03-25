@@ -127,7 +127,7 @@ spring:
 #          username: ${TAOTAO-CLOUD-ELASTICSEARCH-USERNAME:elastic}
 #          password: ${TAOTAO-CLOUD-ELASTICSEARCH-PASSWORD:elastic}
 #  kafka:
-#    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST:192.168.99.230}:${TAOTAO-CLOUD-KAFKA-PORT:9092}
+#    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST}:${TAOTAO-CLOUD-KAFKA-PORT}
 #    producer:
 #      retries: 0
 #      batch-size: 16384
