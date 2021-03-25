@@ -14,5 +14,5 @@ server:
     direct-buffers: true
 
 hdfs:
-  path: hdfs://106.13.201.31:9000
+  path: hdfs://host:9000
   name: root

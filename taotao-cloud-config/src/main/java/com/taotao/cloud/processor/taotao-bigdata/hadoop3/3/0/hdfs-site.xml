@@ -18,17 +18,17 @@
 <configuration>
 	<property>
 		<name>dfs.namenode.name.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/data/nameNode</value>
+		<value>/opt/taotao-bigdata/hadoop3.3.0/data/nameNode</value>
 	</property>
 
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/data/dataNode</value>
+		<value>/opt/taotao-bigdata/hadoop3.3.0/data/dataNode</value>
 	</property>
 
 	<property>
 		<name>dfs.namenode.http.address</name>
-		<value>taotao-cloud:9870</value>
+		<value>192.168.1.10:9870</value>
 	</property>
 
 	<property>

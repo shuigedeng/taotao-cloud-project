@@ -20,7 +20,7 @@ scrape_configs:
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s
     static_configs:
-    - targets: ['106.13.201.31:9527']
+    - targets: ['host:9527']
 
 /root/taotao-common/prometheus2.23.0/prometheus \
 --storage.tsdb.path="/root/taotao-common/prometheus2.23.0/data" \

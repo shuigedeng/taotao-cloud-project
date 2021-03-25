@@ -8,13 +8,15 @@ mv spark-3.0.0-bin-hadoop3.2 spark3.0.0
 cp spark-env.sh.template spark-env.sh
 
 vim spark-env.sh
-# export HADOOP_HOME="/root/taotao-bigdata/hadoop3.3.0"
-# export JAVA_HOME="/root/taotao-common/jdk1.8.0_211"
-# export SCALA_HOME="/root/taotao-common/scala2.12.11"
+# export JAVA_HOME="/opt/taotao-common/jdk1.8.0_211"
+# export SCALA_HOME="/opt/taotao-common/scala2.12.11"
+# export HADOOP_HOME="/opt/taotao-bigdata/hadoop3.3.0"
 # export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 # export YARN_CONF_DIR="$HADOOP_HOME/etc/hadoop"
-# export SPARK_MASTER_HOST=taotao-cloud
-# export SPARK_HOME="/root/taotao-bigdata/spark3.0.0"
+# export SPARK_MASTER_HOST=192.168.1.10
+# export SPARK_HOME="/opt/taotao-bigdata/spark3.0.0"
+# export SPARK_LOG_DIR="/opt/taotao-bigdata/spark3.0.0/log"
+# export SPARK_PID_DIR="/opt/taotao-bigdata/spark3.0.0/pid"
 
 cp slaves.template slaves && vim slaves && taotao-cloud
 
@@ -58,3 +60,13 @@ case $1 in
     echo 'Usage: '$(basename $0)' start|stop'
     ;;
 esac
+
+./bin/spark-submit --class org.apache.spark.examples.SparkPi \
+    --master yarn \
+    --deploy-mode cluster \
+    --driver-memory 4g \
+    --executor-memory 2g \
+    --executor-cores 1 \
+    --queue default \
+    examples/jars/spark-examples*.jar \
+    10

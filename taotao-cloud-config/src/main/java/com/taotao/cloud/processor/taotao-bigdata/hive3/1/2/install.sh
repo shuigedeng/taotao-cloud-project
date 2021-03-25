@@ -47,12 +47,12 @@ cp hive-exec-log4j2.properties.template hive-exec-log4j2.properties
 
 schematool -dbType mysql -initSchema
 
-nohup hive --service metastore >/root/taotao-bigdata/hive3.1.2/logs/metastore.log  2>&1 &
-nohup hive --service hiveserver2 >/root/taotao-bigdata/hive3.1.2/logs/hiveserver2.log  2>&1 &
+nohup hive --service metastore >/opt/taotao-bigdata/hive3.1.2/logs/metastore.log  2>&1 &
+nohup hive --service hiveserver2 >/opt/taotao-bigdata/hive3.1.2/logs/hiveserver2.log  2>&1 &
 
 hive --hiveconf hive.root.logger=DEBUG,console
 
-beeline -i ~/.hiverc -u jdbc:hive2://127.0.0.1:10000 -n root
+beeline -i ~/.hiverc -u jdbc:hive2://192.168.1.10:10000 -n root
 
 
 ###########################################

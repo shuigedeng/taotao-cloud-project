@@ -1,6 +1,6 @@
 spring:
   r2dbc:
-    url: r2dbc:mysql://106.13.201.31:3306/taotao-cloud-reactive-order?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    url: r2dbc:mysql://host:3306/taotao-cloud-reactive-order?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: root
     password: 123456
     name: r2dbc

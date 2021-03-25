@@ -22,6 +22,19 @@ cp $HADOOP_HOME/share/hadoop/hdfs/*.jar $FLUME_HOME/lib
 cp $HADOOP_HOME/share/hadoop/common/lib/*.jar $FLUME_HOME/lib
 cp $HADOOP_HOME/share/hadoop/hdfs/lib/*.jar $FLUME_HOME/lib
 
+
+nohup ${FLUME_HOME}/bin/flume-ng agent -n taotao-cloud-offline-access-log -c $FLUME_HOME/conf \
+-f ${FLUME_HOME}/conf/offline-access-log.conf -Dflume.root.logger=INFO,console &
+
+nohup ${FLUME_HOME}/bin/flume-ng agent -n taotao-cloud-realtime-access-log -c $FLUME_HOME/conf \
+-f ${FLUME_HOME}/conf/realtime-access-log.conf -Dflume.root.logger=INFO,console &
+
+
+
+
+
+
+
 nohup ${FLUME_HOME}/bin/flume-ng agent -n taotao-cloud-access-log -c $FLUME_HOME/conf \
 -f ${FLUME_HOME}/conf/taotao-cloud-access-log-dir-agent.conf -Dflume.root.logger=INFO,console &
 

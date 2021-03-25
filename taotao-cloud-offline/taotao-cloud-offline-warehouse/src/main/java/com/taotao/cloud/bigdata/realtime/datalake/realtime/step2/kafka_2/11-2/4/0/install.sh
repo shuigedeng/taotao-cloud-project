@@ -9,7 +9,7 @@ cd kafka2.13-2.6.0/conf
 
 vim server.properties
 # listeners=PLAINTEXT://192.168.1.5:9092
-# advertised.listeners=PLAINTEXT://106.13.201.31:9092
+# advertised.listeners=PLAINTEXT://host:9092
 # log.dirs=/root/taotao-bigdata/kafka2.13-2.6.0/logs
 # zookeeper.connect=192.168.1.5:2181/kafka
 # 这个是删除topic时才用得到的，如果不想删除topic，可以不加

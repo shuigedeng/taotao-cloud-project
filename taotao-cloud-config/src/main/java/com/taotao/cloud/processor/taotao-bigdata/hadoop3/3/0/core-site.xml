@@ -18,13 +18,13 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://taotao-cloud:9000</value>
+		<value>hdfs://192.168.1.10:9000</value>
 		<description>hdfs内部通讯访问地址</description>
 	</property>
 
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/tmp</value>
+		<value>/opt/taotao-bigdata/hadoop3.3.0/tmp</value>
 		<description>hadoop数据存放</description>
 	</property>
 

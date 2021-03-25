@@ -6,11 +6,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 106.13.201.31:8848
+        server-addr: host:8848
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://106.13.201.31:3306/dubbo?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://host:3306/dubbo?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
     # Hikari 连接池配置

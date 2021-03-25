@@ -28,12 +28,12 @@
 
 	<property>
 		<name>hive.metastore.uris</name>
-		<value>thrift://106.13.201.31:9083</value>
+		<value>thrift://host:9083</value>
 	</property>
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
-		<value>106.13.201.31/</value>
+		<value>host/</value>
 	</property>
 
 	<property>
@@ -53,7 +53,7 @@
 
 	<property>
 		<name>javax.jdo.option.ConnectionURL</name>
-		<value>jdbc:mysql://106.13.201.31:3306/hive?createDatabaseIfNotExist=TRUE</value>
+		<value>jdbc:mysql://host:3306/hive?createDatabaseIfNotExist=TRUE</value>
 	</property>
 
 	<property>

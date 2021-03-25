@@ -5,7 +5,7 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://106.13.201.31:9000</value>
+		<value>hdfs://host:9000</value>
 	</property>
 
 	<property>

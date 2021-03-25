@@ -34,7 +34,7 @@ public class HdfsConfiguration implements Serializable {
 
 	private static final long serialVersionUID = -3927708731917979149L;
 
-	@Value("${hdfs.path:hdfs://106.13.201.31:9000}")
+	@Value("${hdfs.path:hdfs://host:9000}")
 	private String path;
 
 	@Value("${hdfs.username:root}")

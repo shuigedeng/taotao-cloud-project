@@ -1,7 +1,7 @@
 spring:
   kafka:
     bootstrap-servers:
-      - 106.13.201.31:9092
+      - host:9092
 
     producer:
       retries: 0

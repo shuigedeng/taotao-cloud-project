@@ -45,7 +45,7 @@ object MysqlUtil {
 
   val mysqlConfig: mutable.Map[String, String] = collection.mutable.Map(
     "driver" -> "com.mysql.cj.jdbc.Driver",
-    "url" -> "jdbc:mysql://106.13.201.31:3306/taotao-cloud?autoReconnect=true",
+    "url" -> "jdbc:mysql://host:3306/taotao-cloud?autoReconnect=true",
     "username" -> "root",
     "password" -> "n3nbhbn3ymb!"
   )

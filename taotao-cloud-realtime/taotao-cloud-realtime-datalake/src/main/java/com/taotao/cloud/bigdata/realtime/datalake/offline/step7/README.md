@@ -106,7 +106,7 @@ scrape_configs:
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s
     static_configs:
-    - targets: ['106.13.201.31:9527']
+    - targets: ['host:9527']
 
 ```
 
@@ -145,7 +145,7 @@ scrape_configs:
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s
     static_configs:
-    - targets: ['106.13.201.31:9527']
+    - targets: ['host:9527']
 
   - job_name: 'flume-exporter'
     scrape_interval: 30s

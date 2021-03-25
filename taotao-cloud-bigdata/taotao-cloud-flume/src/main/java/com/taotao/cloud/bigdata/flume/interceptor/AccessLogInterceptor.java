@@ -100,7 +100,6 @@ public class AccessLogInterceptor implements Interceptor {
 				event.getHeaders().put("logday", logday);
 				event.getHeaders().put("source", metaJson.getString("source"));
 
-				logger.info("********************>" + result.toJSONString());
 				event.setBody(result.toJSONString().getBytes());
 				return event;
 			}
@@ -113,7 +112,6 @@ public class AccessLogInterceptor implements Interceptor {
 				event.getHeaders().put("logday", logday);
 				event.getHeaders().put("source", bodyJson.getString("source"));
 
-				logger.info("====================>" + bodyJson.toJSONString());
 				event.setBody(bodyJson.toJSONString().getBytes());
 				return event;
 			} catch (Exception error) {
