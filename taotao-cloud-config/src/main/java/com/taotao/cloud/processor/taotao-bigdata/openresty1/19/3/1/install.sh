@@ -32,10 +32,10 @@ mv /usr/local/openresty/lualib/resty/nginx-lua-prometheus  /usr/local/openresty/
 
 cd /opt/openresty
 
-openresty -p /root/openresty -c conf/nginx.conf -t
-openresty -p /root/openresty -c conf/nginx.conf
+openresty -p /opt/openresty -c conf/nginx.conf -t
+openresty -p /opt/openresty -c conf/nginx.conf
 openresty -p /root/openresty -c conf/nginx.conf -s stop
-openresty -p /root/openresty -c conf/nginx.conf -s reload
+openresty -p /opt/openresty -c conf/nginx.conf -s reload
 
 openresty -p /opt/openresty -c conf/nginx.conf -t
 openresty -p /opt/openresty -c conf/nginx.conf
