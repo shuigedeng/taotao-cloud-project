@@ -61,9 +61,4 @@ public class TaotaoCloudAuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(TaotaoCloudAuthApplication.class, args);
     }
-
-//    @Bean
-//    public IUserDetailsService userDetailsService() {
-//        return new UserDetailsServiceImpl();
-//    }
 }

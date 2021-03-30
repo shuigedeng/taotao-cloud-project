@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.oauth2.biz.controller;
+package com.taotao.cloud.oauth2.api.server.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * 主页控制器<br>
  *
  * @author dengtao
- * @version 1.0.0
  * @since 2020/7/24 16:52
+ * @version 1.0.0
  */
+@ApiIgnore
 @Controller
 public class BaseMainController {
 
-	@GetMapping("/auth/login")
-	public String loginPage(Model model) {
-		model.addAttribute("loginProcessUrl", "/auth/authorize");
-		return "base-login";
-	}
+    @GetMapping("/auth/login")
+    public String loginPage(Model model) {
+        model.addAttribute("loginProcessUrl", "/auth/authorize");
+        return "base-login";
+    }
 }

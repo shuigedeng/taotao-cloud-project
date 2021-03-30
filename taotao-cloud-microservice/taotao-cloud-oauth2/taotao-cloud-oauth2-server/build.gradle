@@ -24,7 +24,7 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
@@ -32,14 +32,14 @@ dependencies {
     implementation 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.0'
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // spring cloud
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-
-    // alibaba
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+//
+//    // alibaba
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 //    implementation('com.alibaba.cloud:spring-cloud-alibaba-seata:2.2.0.RELEASE') {
 //        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
 //    }
@@ -54,6 +54,6 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     // jpa
-    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
-    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+//    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+//    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 }
