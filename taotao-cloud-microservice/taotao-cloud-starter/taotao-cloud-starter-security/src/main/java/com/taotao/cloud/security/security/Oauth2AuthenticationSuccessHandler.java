@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.oauth2.client.security;
+package com.taotao.cloud.security.security;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.IOException;

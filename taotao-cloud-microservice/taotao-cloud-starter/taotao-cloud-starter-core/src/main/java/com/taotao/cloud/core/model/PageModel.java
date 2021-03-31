@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,7 @@ import org.springframework.data.domain.Page;
  */
 @Data
 @Builder
+@AllArgsConstructor
 @Schema(name = "PageResult", description = "分页结果对象")
 public class PageModel<T> implements Serializable {
 

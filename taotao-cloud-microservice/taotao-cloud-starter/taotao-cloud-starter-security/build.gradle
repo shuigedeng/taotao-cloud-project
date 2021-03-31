@@ -5,10 +5,9 @@ bootJar.enabled = false
 
 dependencies {
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
-	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+//	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
-	implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
-	implementation project(':taotao-cloud-microservice:taotao-cloud-member:taotao-cloud-member-api')
+	api 'javax.servlet:javax.servlet-api'
 
 	api  'org.springframework.security:spring-security-core'
 	api  'org.springframework.security:spring-security-web'

@@ -28,7 +28,6 @@ import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 /**
  * 安全服务工具类
@@ -131,12 +130,12 @@ public class SecurityUtil {
 	 * @author dengtao
 	 * @since 2020/10/15 15:55
 	 */
-	public String getClientId() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication instanceof OAuth2Authentication) {
-			OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
-			return auth2Authentication.getOAuth2Request().getClientId();
-		}
-		return null;
-	}
+//	public String getClientId() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		if (authentication instanceof OAuth2Authentication) {
+//			OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+//			return auth2Authentication.getOAuth2Request().getClientId();
+//		}
+//		return null;
+//	}
 }

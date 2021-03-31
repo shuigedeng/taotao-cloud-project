@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class JsonUtil {
 	public static final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {
+		MAPPER.findAndRegisterModules();
 		// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
 		MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		// 忽略空Bean转json的错误
@@ -56,6 +59,9 @@ public class JsonUtil {
 		// 所有日期格式都统一为固定格式
 		MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT));
 		MAPPER.setTimeZone(TimeZone.getTimeZone(CommonConstant.TIME_ZONE_GMT8));
+		MAPPER
+			.registerModule(new Jdk8Module())
+			.registerModule(new JavaTimeModule());
 	}
 
 	/**

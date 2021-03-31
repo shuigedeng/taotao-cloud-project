@@ -19,14 +19,16 @@ spring:
   security:
     oauth2:
       resourceserver:
-#        jwt:
-#          public-key-location: classpath:key.public
-#          jws-algorithm: RS512
-#          issuer-uri: http://127.0.0.1:9000
-        opaquetoken:
-          introspection-uri: http://localhost:9000/oauth/check_token
-          client-id: abc
-          client-secret: abc
+##        jwt:
+##          public-key-location: classpath:key.public
+##          jws-algorithm: RS512
+##          issuer-uri: http://127.0.0.1:9000
+##        opaquetoken:
+##          introspection-uri: http://localhost:9000/oauth/check_token
+##          client-id: abc
+##          client-secret: abc
+        jwt:
+          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
 
 logging:
   level:

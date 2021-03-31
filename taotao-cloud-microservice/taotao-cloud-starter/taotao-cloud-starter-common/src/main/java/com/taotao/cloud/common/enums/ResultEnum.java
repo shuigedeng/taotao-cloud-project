@@ -50,7 +50,7 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 权限不足
 	 */
-	FORBIDDEN(403, "权限不足"),
+	FORBIDDEN(403, "用户权限不足"),
 	/**
 	 * 请求不存在
 	 */

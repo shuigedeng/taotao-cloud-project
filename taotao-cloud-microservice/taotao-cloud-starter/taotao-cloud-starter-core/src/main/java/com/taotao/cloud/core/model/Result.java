@@ -61,8 +61,7 @@ public class Result<T> implements Serializable {
 	public Result() {
 	}
 
-	public Result(int code, T data, String message, String requestId,
-		LocalDateTime timestamp) {
+	public Result(int code, T data, String message, String requestId, LocalDateTime timestamp) {
 		this.code = code;
 		this.data = data;
 		this.message = message;

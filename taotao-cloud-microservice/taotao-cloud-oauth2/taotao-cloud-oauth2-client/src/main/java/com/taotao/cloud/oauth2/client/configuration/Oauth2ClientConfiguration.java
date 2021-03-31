@@ -102,6 +102,7 @@ public class Oauth2ClientConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests(authorizeRequests -> authorizeRequests
 				.mvcMatchers("/messages/**").access("hasAuthority('SCOPE_message.read')")
+				.antMatchers("/api/login/oauth2/code/*").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin(formLogin -> {
@@ -144,7 +145,7 @@ public class Oauth2ClientConfiguration extends WebSecurityConfigurerAdapter {
 			)
 			.oauth2ResourceServer()
 //			.authenticationManagerResolver(customAuthenticationManager())
-			.opaqueToken();
+			.jwt();
 	}
 
 	/**

@@ -16,7 +16,6 @@
 package com.taotao.cloud.core.mvc;
 
 import com.taotao.cloud.core.mvc.converter.IntegerToEnumConverterFactory;
-import com.taotao.cloud.core.mvc.converter.Oauth2HttpMessageConverter;
 import com.taotao.cloud.core.mvc.converter.StringToEnumConverterFactory;
 import java.util.List;
 import org.springframework.format.FormatterRegistry;
@@ -41,9 +40,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		registry.addConverterFactory(new StringToEnumConverterFactory());
 	}
 
-	@Override
-	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-		Oauth2HttpMessageConverter oauth2HttpMessageConverter = new Oauth2HttpMessageConverter();
-		converters.add(0, oauth2HttpMessageConverter);
-	}
+//	@Override
+//	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		Oauth2HttpMessageConverter oauth2HttpMessageConverter = new Oauth2HttpMessageConverter();
+//		converters.add(0, oauth2HttpMessageConverter);
+//	}
 }

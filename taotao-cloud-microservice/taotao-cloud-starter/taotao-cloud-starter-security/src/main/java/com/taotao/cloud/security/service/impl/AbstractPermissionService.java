@@ -18,18 +18,14 @@ package com.taotao.cloud.security.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.core.utils.AuthUtil;
-import com.taotao.cloud.security.properties.SecurityProperties;
 import com.taotao.cloud.security.service.PermissionService;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.core.model.SecurityMenu;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.List;
@@ -44,8 +40,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public abstract class AbstractPermissionService implements PermissionService {
 
-	@Autowired
-	private SecurityProperties securityProperties;
+//	@Autowired
+//	private SecurityProperties securityProperties;
 
 	private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -58,10 +54,10 @@ public abstract class AbstractPermissionService implements PermissionService {
 
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			//判断是否开启url权限验证
-			Boolean enable = securityProperties.getAuth().getUrlPermission().getEnable();
-			if (!enable) {
-				return true;
-			}
+//			Boolean enable = securityProperties.getAuth().getUrlPermission().getEnable();
+//			if (!enable) {
+//				return true;
+//			}
 
 			//超级管理员admin不需认证
 			String username = AuthUtil.getUsername(authentication);
@@ -70,18 +66,18 @@ public abstract class AbstractPermissionService implements PermissionService {
 				return true;
 			}
 
-			OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
-			//判断应用黑白名单
-			if (!isNeedAuth(auth2Authentication.getOAuth2Request().getClientId())) {
-				return true;
-			}
-
-			//判断不进行url权限认证的api，所有已登录用户都能访问的url
-			for (String path : securityProperties.getAuth().getUrlPermission().getIgnoreUrls()) {
-				if (antPathMatcher.match(path, requestURI)) {
-					return true;
-				}
-			}
+//			OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+//			//判断应用黑白名单
+//			if (!isNeedAuth(auth2Authentication.getOAuth2Request().getClientId())) {
+//				return true;
+//			}
+//
+//			//判断不进行url权限认证的api，所有已登录用户都能访问的url
+//			for (String path : securityProperties.getAuth().getUrlPermission().getIgnoreUrls()) {
+//				if (antPathMatcher.match(path, requestURI)) {
+//					return true;
+//				}
+//			}
 
 			List<SimpleGrantedAuthority> grantedAuthorityList = (List<SimpleGrantedAuthority>) authentication
 				.getAuthorities();
@@ -91,8 +87,8 @@ public abstract class AbstractPermissionService implements PermissionService {
 			}
 
 			//保存租户信息
-			String clientId = auth2Authentication.getOAuth2Request().getClientId();
-			TenantContextHolder.setTenant(clientId);
+//			String clientId = auth2Authentication.getOAuth2Request().getClientId();
+//			TenantContextHolder.setTenant(clientId);
 
 			String roleCodes = grantedAuthorityList.stream()
 				.map(SimpleGrantedAuthority::getAuthority).collect(Collectors.joining(", "));
@@ -120,17 +116,17 @@ public abstract class AbstractPermissionService implements PermissionService {
 	 */
 	private boolean isNeedAuth(String clientId) {
 		boolean result = true;
-		//白名单
-		List<String> includeClientIds = securityProperties.getAuth().getUrlPermission()
-			.getIncludeClientIds();
-		//黑名单
-		List<String> exclusiveClientIds = securityProperties.getAuth().getUrlPermission()
-			.getExclusiveClientIds();
-		if (includeClientIds.size() > 0) {
-			result = includeClientIds.contains(clientId);
-		} else if (exclusiveClientIds.size() > 0) {
-			result = !exclusiveClientIds.contains(clientId);
-		}
+//		//白名单
+//		List<String> includeClientIds = securityProperties.getAuth().getUrlPermission()
+//			.getIncludeClientIds();
+//		//黑名单
+//		List<String> exclusiveClientIds = securityProperties.getAuth().getUrlPermission()
+//			.getExclusiveClientIds();
+//		if (includeClientIds.size() > 0) {
+//			result = includeClientIds.contains(clientId);
+//		} else if (exclusiveClientIds.size() > 0) {
+//			result = !exclusiveClientIds.contains(clientId);
+//		}
 		return result;
 	}
 }

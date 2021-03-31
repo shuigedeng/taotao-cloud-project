@@ -17,6 +17,8 @@ package com.taotao.cloud.oauth2.biz.configuration;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import com.taotao.cloud.oauth2.biz.security.CustomizedAccessDeniedHandler;
+import com.taotao.cloud.oauth2.biz.security.CustomizedAuthenticationEntryPoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,6 +36,7 @@ import org.springframework.security.authentication.AuthenticationManagerResolver
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
@@ -48,7 +51,10 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtBea
 import org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.introspection.NimbusOpaqueTokenIntrospector;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
@@ -65,17 +71,35 @@ public class Oauth2ResourceServerConfiguration {
 	@Autowired
 	private OAuth2ClientProperties oAuth2ClientProperties;
 
+//	@Bean
+//	WebSecurityCustomizer webSecurityCustomizer() {
+//		return (web) -> web.ignoring().antMatchers("/webjars/**", "/login");
+//	}
+
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests(authorizeRequests -> authorizeRequests
-					.mvcMatchers("/messages/**").access("hasAuthority('SCOPE_message.read')")
+//				.mvcMatchers("/messages/**").access("hasAuthority('SCOPE_message.read')")
 					.anyRequest().authenticated()
 			)
-			.formLogin(withDefaults())
-			.oauth2ResourceServer()
-//			.authenticationManagerResolver(customAuthenticationManager())
-			.opaqueToken();
+			.formLogin(formLogin -> {
+
+			})
+//			.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
+//				.authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
+//				.accessDeniedHandler(new CustomizedAccessDeniedHandler())
+//			)
+			.csrf().disable()
+			.anonymous()
+			.and()
+			.oauth2ResourceServer((oauth2ResourceServer) -> oauth2ResourceServer
+					.accessDeniedHandler(new CustomizedAccessDeniedHandler())
+					.authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
+//					.authenticationManagerResolver(customAuthenticationManager())
+					.jwt()
+			);
+
 		return http.build();
 	}
 

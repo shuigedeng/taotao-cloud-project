@@ -21,14 +21,13 @@ import com.taotao.cloud.core.model.SecurityUser;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Objects;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 
 /**
  * 认证授权相关工具类
@@ -97,22 +96,22 @@ public class AuthUtil {
 	 * @author dengtao
 	 * @since 2021/2/25 16:59
 	 */
-	private String extractHeaderToken(HttpServletRequest request) {
-		Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
-		while (headers.hasMoreElements()) {
-			String value = headers.nextElement();
-			if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
-				String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length())
-					.trim();
-				int commaIndex = authHeaderValue.indexOf(',');
-				if (commaIndex > 0) {
-					authHeaderValue = authHeaderValue.substring(0, commaIndex);
-				}
-				return authHeaderValue;
-			}
-		}
-		return null;
-	}
+//	private String extractHeaderToken(HttpServletRequest request) {
+//		Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
+//		while (headers.hasMoreElements()) {
+//			String value = headers.nextElement();
+//			if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
+//				String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length())
+//					.trim();
+//				int commaIndex = authHeaderValue.indexOf(',');
+//				if (commaIndex > 0) {
+//					authHeaderValue = authHeaderValue.substring(0, commaIndex);
+//				}
+//				return authHeaderValue;
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
 	 * 从header 请求中的clientId:clientSecret
@@ -122,13 +121,13 @@ public class AuthUtil {
 	 * @author dengtao
 	 * @since 2021/2/25 16:59
 	 */
-	public String[] extractClient(HttpServletRequest request) {
-		String header = request.getHeader("BasicAuthorization");
-		if (header == null || !header.startsWith(BASIC_)) {
-			throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
-		}
-		return extractHeaderClient(header);
-	}
+//	public String[] extractClient(HttpServletRequest request) {
+//		String header = request.getHeader("BasicAuthorization");
+//		if (header == null || !header.startsWith(BASIC_)) {
+//			throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
+//		}
+//		return extractHeaderClient(header);
+//	}
 
 	/**
 	 * 从header 请求中的clientId:clientSecret

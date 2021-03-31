@@ -34,10 +34,12 @@ spring:
 #        jwt:
 #          public-key-location: classpath:key.public
 #          jws-algorithm: RS512
-        opaquetoken:
-          introspection-uri: http://localhost:9000/oauth/check_token
-          client-id: abc
-          client-secret: abc
+#        opaquetoken:
+#          introspection-uri: http://localhost:9000/oauth/check_token
+#          client-id: abc
+#          client-secret: abc
+        jwt:
+          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
 
 logging:
   level:

@@ -15,10 +15,15 @@
  */
 package com.taotao.cloud.oauth2.biz.configuration;
 
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.ACCESS_TOKEN_TIME_TO_LIVE;
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REFRESH_TOKEN_TIME_TO_LIVE;
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REUSE_REFRESH_TOKENS;
+
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import java.time.Duration;
 import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +38,6 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryR
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
-import org.springframework.security.oauth2.server.authorization.config.Settings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
@@ -58,7 +62,14 @@ public class Oauth2ServerConfiguration {
 			.scope("message.read")
 			.scope("message.write")
 			.clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
-			.tokenSettings(Settings::settings)
+			.tokenSettings(tokenSettings -> {
+				tokenSettings
+					.settings(settings -> {
+						settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(1000));
+						settings.put(REUSE_REFRESH_TOKENS, true);
+						settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(6000));
+					});
+			})
 			.build();
 
 		return new InMemoryRegisteredClientRepository(registeredClient);
@@ -67,8 +78,8 @@ public class Oauth2ServerConfiguration {
 	@Bean
 	UserDetailsService users() {
 		UserDetails user = User.withDefaultPasswordEncoder()
-			.username("user1")
-			.password("password")
+			.username("admin")
+			.password("123456")
 			.roles("USER")
 			.build();
 		return new InMemoryUserDetailsManager(user);
@@ -83,6 +94,6 @@ public class Oauth2ServerConfiguration {
 
 	@Bean
 	public ProviderSettings providerSettings() {
-		return new ProviderSettings().issuer("http://auth-server:9000");
+		return new ProviderSettings().issuer("http://127.0.0.1:9000");
 	}
 }

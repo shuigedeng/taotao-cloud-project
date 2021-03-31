@@ -6,6 +6,7 @@ bootJar.enabled = false
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
+    compile 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api 'com.fasterxml.jackson.core:jackson-annotations'
 
@@ -20,9 +21,7 @@ dependencies {
     api 'io.projectreactor:reactor-core'
 
     api 'org.springframework:spring-web'
-    api('org.springframework:spring-webmvc'){
-        exclude group: "com.fasterxml.jackson.core", module: "jackson-annotations"
-    }
+    api 'org.springframework:spring-webmvc'
     api 'org.springframework:spring-tx'
     api 'org.springframework:spring-context'
 

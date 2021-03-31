@@ -1,4 +1,4 @@
-package com.taotao.cloud.oauth2.client.security;
+package com.taotao.cloud.oauth2.biz.security;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;

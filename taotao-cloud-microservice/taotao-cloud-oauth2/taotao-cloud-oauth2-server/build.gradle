@@ -4,7 +4,7 @@ jar.enabled = true
 bootJar.enabled = true
 
 dependencies {
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
