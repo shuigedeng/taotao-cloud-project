@@ -1,4 +1,4 @@
-package com.taotao.cloud.oauth2.biz.security;
+package com.taotao.cloud.oauth2.client.security;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.ExceptionTranslationFilter;
 
 
 /**

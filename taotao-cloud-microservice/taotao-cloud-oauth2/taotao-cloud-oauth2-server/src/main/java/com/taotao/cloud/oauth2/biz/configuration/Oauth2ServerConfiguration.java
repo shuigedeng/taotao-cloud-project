@@ -24,6 +24,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -31,6 +34,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.config.Settings;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * @author Joe Grandja
@@ -39,6 +43,7 @@ import org.springframework.security.oauth2.server.authorization.config.Settings;
 @Configuration(proxyBeanMethods = false)
 @Import(OAuth2AuthorizationServerConfiguration.class)
 public class Oauth2ServerConfiguration {
+
 	@Bean
 	public RegisteredClientRepository registeredClientRepository() {
 		RegisteredClient registeredClient = RegisteredClient
@@ -57,6 +62,16 @@ public class Oauth2ServerConfiguration {
 			.build();
 
 		return new InMemoryRegisteredClientRepository(registeredClient);
+	}
+
+	@Bean
+	UserDetailsService users() {
+		UserDetails user = User.withDefaultPasswordEncoder()
+			.username("user1")
+			.password("password")
+			.roles("USER")
+			.build();
+		return new InMemoryUserDetailsManager(user);
 	}
 
 	@Bean

@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.oauth2.biz.security;
+package com.taotao.cloud.oauth2.client.security;
 
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author zyc
  */
-public class Oauth2AuthenticationFailureHandler implements AuthenticationFailureHandler {
-
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        response.setContentType("text/plain");
-        response.getWriter().write("认证失败");
-    }
+public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+		Authentication authentication) throws IOException {
+		response.sendRedirect("/index.html");
+	}
 }

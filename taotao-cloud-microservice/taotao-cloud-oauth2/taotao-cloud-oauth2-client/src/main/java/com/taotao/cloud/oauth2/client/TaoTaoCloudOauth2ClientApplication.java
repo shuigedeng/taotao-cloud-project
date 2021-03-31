@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author zyc
  */
 @SpringBootApplication
-public class SpringSecurityOauth2ClientApplication {
+public class TaoTaoCloudOauth2ClientApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityOauth2ClientApplication.class, args);
+        SpringApplication.run(TaoTaoCloudOauth2ClientApplication.class, args);
     }
 }

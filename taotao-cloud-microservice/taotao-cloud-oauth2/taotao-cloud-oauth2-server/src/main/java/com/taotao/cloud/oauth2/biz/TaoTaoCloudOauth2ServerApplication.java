@@ -30,6 +30,8 @@ package com.taotao.cloud.oauth2.biz;
 //import com.taotao.cloud.swagger.annotation.EnableTaoTaoCloudSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
+import org.springframework.context.annotation.Bean;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.cloud.client.SpringCloudApplication;
 //import org.springframework.context.annotation.Bean;
@@ -56,9 +58,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableTransactionManagement(proxyTargetClass = true)
 //@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
 @SpringBootApplication
-public class TaotaoCloudAuthApplication {
+public class TaoTaoCloudOauth2ServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaotaoCloudAuthApplication.class, args);
+        SpringApplication.run(TaoTaoCloudOauth2ServerApplication.class, args);
     }
+
+	@Bean
+	OAuth2ClientProperties oAuth2ClientProperties() {
+		return new OAuth2ClientProperties();
+	}
 }
