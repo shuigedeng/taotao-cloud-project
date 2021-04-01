@@ -59,9 +59,8 @@ public class JsonUtil {
 		// 所有日期格式都统一为固定格式
 		MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT));
 		MAPPER.setTimeZone(TimeZone.getTimeZone(CommonConstant.TIME_ZONE_GMT8));
-		MAPPER
-			.registerModule(new Jdk8Module())
-			.registerModule(new JavaTimeModule());
+		MAPPER.registerModule(new Jdk8Module());
+		MAPPER.registerModule(new JavaTimeModule());
 	}
 
 	/**
