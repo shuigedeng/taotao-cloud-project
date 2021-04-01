@@ -4,6 +4,7 @@ dependencies {
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.8'
     api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'com.fasterxml.jackson.core:jackson-core'
     api 'com.fasterxml.jackson.core:jackson-annotations'
 
     api 'javax.servlet:javax.servlet-api'

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.mvc;
+package com.taotao.cloud.web.exception;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
@@ -60,7 +60,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * @since 2020/5/2 09:12
  */
 @RestControllerAdvice
-@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
+//@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
 public class DefaultExceptionAdvice {
 
 	@ExceptionHandler({BaseException.class})

@@ -19,7 +19,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
-import com.taotao.cloud.redis.constant.RedisConstant;
+import com.taotao.cloud.redis.properties.RedisLockProperties;
 import java.util.concurrent.TimeUnit;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -35,7 +35,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  * @since 2020/5/3 07:47
  */
 @ConditionalOnClass(RedissonClient.class)
-@ConditionalOnProperty(prefix = RedisConstant.BASE_REDIS_LOCK_PREFIX, name = RedisConstant.ENABLED, havingValue = RedisConstant.TRUE)
+@ConditionalOnProperty(prefix = RedisLockProperties.BASE_REDIS_LOCK_PREFIX,
+	name = RedisLockProperties.ENABLED,
+	havingValue = RedisLockProperties.TRUE)
 public class RedissonDistributedLock implements DistributedLock {
 
 	@Autowired

@@ -16,7 +16,7 @@
 package com.taotao.cloud.web.mvc.validator;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.taotao.cloud.core.mvc.constraints.IntEnums;
+import com.taotao.cloud.web.mvc.constraints.IntEnums;
 import java.util.Arrays;
 import java.util.Objects;
 import javax.validation.ConstraintValidator;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.mvc.constraints;
 
-import com.taotao.cloud.core.mvc.validator.StringEnumsValidator;
+import com.taotao.cloud.web.mvc.validator.StringEnumsValidator;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

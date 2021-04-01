@@ -270,4 +270,17 @@ public class CommonConstant {
 	public static final String OPTIONS = "OPTIONS";
 	public static final String TRACE = "TRACE";
 
+
+	/**
+	 * 服务资源
+	 */
+	public static final String TAOTAO_CLOUD_SERVICE_RESOURCE = "taotao-cloud-service-resource";
+
+	public static final Long TAOTAO_CLOUD_RESOURCE_EXPIRE = 18000L;
+
+	/**
+	 * API资源
+	 */
+	public static final String TAOTAO_CLOUD_API_RESOURCE = "taotao-cloud-api-resource";
+
 }

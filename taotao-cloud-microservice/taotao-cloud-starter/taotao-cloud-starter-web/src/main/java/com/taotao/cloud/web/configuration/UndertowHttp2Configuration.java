@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.config;
+package com.taotao.cloud.web.configuration;
 
 import static io.undertow.UndertowOptions.ENABLE_HTTP2;
 

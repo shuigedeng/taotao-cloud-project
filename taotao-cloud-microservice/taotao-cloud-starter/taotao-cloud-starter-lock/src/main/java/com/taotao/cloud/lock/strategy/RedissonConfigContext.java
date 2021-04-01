@@ -1,4 +1,4 @@
-package com.taotao.cloud.lock.config.strategy;
+package com.taotao.cloud.lock.strategy;
 
 import com.taotao.cloud.lock.props.RedissonProperties;
 import lombok.AllArgsConstructor;

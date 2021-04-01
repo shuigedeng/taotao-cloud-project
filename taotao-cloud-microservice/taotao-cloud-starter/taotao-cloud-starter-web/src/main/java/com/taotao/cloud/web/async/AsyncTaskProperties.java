@@ -28,8 +28,13 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.core.async.task")
+@ConfigurationProperties(prefix = AsyncTaskProperties.BASE_ASYNC_TASK_PREFIX)
 public class AsyncTaskProperties {
+
+	public static final String ENABLED = "enabled";
+	public static final String TRUE = "true";
+
+	public static final String BASE_ASYNC_TASK_PREFIX = "taotao.cloud.web.async.task";
 
 	/**
 	 * 线程池维护线程的最小数量

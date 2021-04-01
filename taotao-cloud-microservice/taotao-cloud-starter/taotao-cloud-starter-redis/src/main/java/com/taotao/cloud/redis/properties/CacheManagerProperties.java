@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.redis.properties;
 
-import com.taotao.cloud.redis.constant.RedisConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -31,8 +30,10 @@ import java.util.List;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = RedisConstant.BASE_REDIS_CACHE_MANAGER_PREFIX)
+@ConfigurationProperties(prefix = CacheManagerProperties.BASE_REDIS_CACHE_MANAGER_PREFIX)
 public class CacheManagerProperties {
+
+	public static final String BASE_REDIS_CACHE_MANAGER_PREFIX = "taotao.cloud.redis.cache.manager";
 
 	private List<CacheConfig> configs;
 

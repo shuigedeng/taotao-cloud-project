@@ -1,11 +1,6 @@
 package com.taotao.cloud.lock;
 
 import com.google.common.base.Preconditions;
-import com.taotao.cloud.lock.config.strategy.ClusterRedissonConfigStrategyImpl;
-import com.taotao.cloud.lock.config.strategy.MasterslaveRedissonConfigStrategyImpl;
-import com.taotao.cloud.lock.config.strategy.RedissonConfigContext;
-import com.taotao.cloud.lock.config.strategy.SentinelRedissonConfigStrategyImpl;
-import com.taotao.cloud.lock.config.strategy.StandaloneRedissonConfigStrategyImpl;
 import com.taotao.cloud.lock.constant.RedisConnectionType;
 import com.taotao.cloud.lock.props.RedissonProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +30,7 @@ public class RedissonManager {
 		} catch (Exception e) {
 			log.error("Redisson init error", e);
 			throw new IllegalArgumentException("please input correct configurations," +
-					"connectionType must in standalone/sentinel/cluster/masterslave");
+				"connectionType must in standalone/sentinel/cluster/masterslave");
 		}
 	}
 
@@ -44,8 +39,7 @@ public class RedissonManager {
 	}
 
 	/**
-	 * Redisson连接方式配置工厂
-	 * 双重检查锁
+	 * Redisson连接方式配置工厂 双重检查锁
 	 */
 	static class RedissonConfigFactory {
 
@@ -75,20 +69,28 @@ public class RedissonManager {
 		 */
 		Config createConfig(RedissonProperties redissonProperties) {
 			Preconditions.checkNotNull(redissonProperties);
-			Preconditions.checkNotNull(redissonProperties.getAddress(), "redisson.lock.server.address cannot be NULL!");
-			Preconditions.checkNotNull(redissonProperties.getType(), "redisson.lock.server.password cannot be NULL");
-			Preconditions.checkNotNull(redissonProperties.getDatabase(), "redisson.lock.server.database cannot be NULL");
+			Preconditions.checkNotNull(redissonProperties.getAddress(),
+				"redisson.lock.server.address cannot be NULL!");
+			Preconditions.checkNotNull(redissonProperties.getType(),
+				"redisson.lock.server.password cannot be NULL");
+			Preconditions.checkNotNull(redissonProperties.getDatabase(),
+				"redisson.lock.server.database cannot be NULL");
 			String connectionType = redissonProperties.getType();
 			// 声明配置上下文
 			RedissonConfigContext redissonConfigContext = null;
 			if (connectionType.equals(RedisConnectionType.STANDALONE.getConnection_type())) {
-				redissonConfigContext = new RedissonConfigContext(new StandaloneRedissonConfigStrategyImpl());
+				redissonConfigContext = new RedissonConfigContext(
+					new StandaloneRedissonConfigStrategyImpl());
 			} else if (connectionType.equals(RedisConnectionType.SENTINEL.getConnection_type())) {
-				redissonConfigContext = new RedissonConfigContext(new SentinelRedissonConfigStrategyImpl());
+				redissonConfigContext = new RedissonConfigContext(
+					new SentinelRedissonConfigStrategyImpl());
 			} else if (connectionType.equals(RedisConnectionType.CLUSTER.getConnection_type())) {
-				redissonConfigContext = new RedissonConfigContext(new ClusterRedissonConfigStrategyImpl());
-			} else if (connectionType.equals(RedisConnectionType.MASTERSLAVE.getConnection_type())) {
-				redissonConfigContext = new RedissonConfigContext(new MasterslaveRedissonConfigStrategyImpl());
+				redissonConfigContext = new RedissonConfigContext(
+					new ClusterRedissonConfigStrategyImpl());
+			} else if (connectionType
+				.equals(RedisConnectionType.MASTERSLAVE.getConnection_type())) {
+				redissonConfigContext = new RedissonConfigContext(
+					new MasterslaveRedissonConfigStrategyImpl());
 			} else {
 				throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
 			}

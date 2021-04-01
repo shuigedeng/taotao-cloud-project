@@ -1,8 +1,17 @@
 package com.taotao.cloud.web.listener;
 
+import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.redis.repository.RedisRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -19,32 +28,20 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import springfox.documentation.annotations.ApiIgnore;
-import vip.mate.core.auth.annotation.PreAuth;
-import vip.mate.core.common.constant.MateConstant;
-import vip.mate.core.common.util.StringUtil;
-import vip.mate.core.redis.core.RedisService;
-
-import java.util.*;
 
 /**
  * 请求资源扫描监听器
  *
  * @author pangu
  */
-@Slf4j
 public class RequestMappingScanListener implements ApplicationListener<ApplicationReadyEvent> {
-	private static final AntPathMatcher pathMatch = new AntPathMatcher();
-	private final Set<String> ignoreApi = new HashSet<String>();
-	private final RedisService redisService;
 
-	/**
-	 * 构造方法
-	 *
-	 * @param redisService 注入redis
-	 */
-	public RequestMappingScanListener(RedisService redisService) {
-		this.redisService = redisService;
+	private static final AntPathMatcher PATH_MATCH = new AntPathMatcher();
+	private final Set<String> ignoreApi = new HashSet<>();
+	private final RedisRepository redisRepository;
+
+	public RequestMappingScanListener(RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
 		this.ignoreApi.add("/error");
 		this.ignoreApi.add("/swagger-resources/**");
 		this.ignoreApi.add("/v2/api-docs-ext/**");
@@ -57,35 +54,45 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 	 */
 	@Override
 	public void onApplicationEvent(@NotNull ApplicationReadyEvent event) {
-
 		try {
 			ConfigurableApplicationContext applicationContext = event.getApplicationContext();
 			Environment env = applicationContext.getEnvironment();
 			// 获取微服务模块名称
 			String microService = env.getProperty("spring.application.name", "application");
-			if (redisService == null || applicationContext.containsBean("resourceServerConfiguration")) {
-				log.warn("[{}]忽略接口资源扫描", microService);
+			if (redisRepository == null || applicationContext
+				.containsBean("resourceServerConfiguration")) {
+				LogUtil.warn("[{}]忽略接口资源扫描", microService);
 				return;
 			}
 
 			// 所有接口映射
-			RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+			RequestMappingHandlerMapping mapping = applicationContext
+				.getBean(RequestMappingHandlerMapping.class);
 			// 获取url与类和方法的对应信息
 			Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
-			List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+			List<Map<String, String>> list = new ArrayList<>();
 			for (Map.Entry<RequestMappingInfo, HandlerMethod> m : map.entrySet()) {
 				RequestMappingInfo info = m.getKey();
 				HandlerMethod method = m.getValue();
-				if (method.getMethodAnnotation(ApiIgnore.class) != null) {
-					// 忽略的接口不扫描
-					continue;
+
+				Operation methodAnnotation = method.getMethodAnnotation(Operation.class);
+				if (methodAnnotation != null) {
+					if (methodAnnotation.hidden()) {
+						// 忽略的接口不扫描
+						continue;
+					}
 				}
+
 				// 请求路径
 				PatternsRequestCondition p = info.getPatternsCondition();
-				String urls = getUrls(p.getPatterns());
-				if (isIgnore(urls)) {
-					continue;
+				String urls = "";
+				if (Objects.nonNull(p)) {
+					urls = getUrls(p.getPatterns());
+					if (isIgnore(urls)) {
+						continue;
+					}
 				}
+
 				Set<MediaType> mediaTypeSet = info.getProducesCondition().getProducibleMediaTypes();
 				for (MethodParameter params : method.getMethodParameters()) {
 					if (params.hasParameterAnnotation(RequestBody.class)) {
@@ -93,6 +100,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 						break;
 					}
 				}
+
 				String mediaTypes = getMediaTypes(mediaTypeSet);
 				// 请求类型
 				RequestMethodsRequestCondition methodsCondition = info.getMethodsCondition();
@@ -105,23 +113,24 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 				String fullName = className + "." + methodName;
 				// md5码
 				String md5 = DigestUtils.md5DigestAsHex((microService + urls).getBytes());
-				String name = "";
-				String notes = "";
+				String summary = "";
+				String description = "";
 				String auth = "0";
 
-				ApiOperation apiOperation = method.getMethodAnnotation(ApiOperation.class);
-				if (apiOperation != null) {
-					name = apiOperation.value();
-					notes = apiOperation.notes();
+				if (methodAnnotation != null) {
+					summary = methodAnnotation.summary();
+					description = methodAnnotation.description();
 				}
+
 				// 判断是否需要权限校验
-				PreAuth preAuth = method.getMethodAnnotation(PreAuth.class);
-				if (preAuth != null) {
-					auth = "1";
-				}
-				name = StringUtil.isBlank(name) ? methodName : name;
-				api.put("name", name);
-				api.put("notes", notes);
+//				PreAuth preAuth = method.getMethodAnnotation(PreAuth.class);
+//				if (preAuth != null) {
+//					auth = "1";
+//				}
+
+				summary = StrUtil.isBlank(summary) ? methodName : summary;
+				api.put("summary", summary);
+				api.put("description", description);
 				api.put("path", urls);
 				api.put("code", md5);
 				api.put("className", className);
@@ -131,21 +140,30 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 				api.put("contentType", mediaTypes);
 				api.put("auth", auth);
 				list.add(api);
-				// log.info("api scan: {}", api);
 			}
+
 			// 放入redis缓存
-			Map<String,Object> res = Maps.newHashMap();
-			res.put("serviceId",microService);
-			res.put("size",list.size());
-			res.put("list",list);
-			redisService.hset(MateConstant.MATE_API_RESOURCE, microService, res, 18000L);
-			redisService.sSetAndTime(MateConstant.MATE_SERVICE_RESOURCE, 18000L, microService);
-			log.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]", microService,  list.size(), MateConstant.MATE_API_RESOURCE);
+			Map<String, Object> res = Maps.newHashMap();
+			res.put("serviceId", microService);
+			res.put("size", list.size());
+			res.put("list", list);
+
+			redisRepository.setExpire(
+				CommonConstant.TAOTAO_CLOUD_API_RESOURCE,
+				res,
+				CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+			redisRepository.setExpire(
+				CommonConstant.TAOTAO_CLOUD_SERVICE_RESOURCE,
+				microService,
+				CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+
+			LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]",
+				microService,
+				list.size(),
+				CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
 		} catch (Exception e) {
-			log.error("error: {}", e.getMessage());
+			LogUtil.error("error: {}", e.getMessage());
 		}
-
-
 	}
 
 	private String getUrls(Set<String> urls) {
@@ -167,7 +185,7 @@ public class RequestMappingScanListener implements ApplicationListener<Applicati
 	 */
 	private boolean isIgnore(String requestPath) {
 		for (String path : ignoreApi) {
-			if (pathMatch.match(path, requestPath)) {
+			if (PATH_MATCH.match(path, requestPath)) {
 				return true;
 			}
 		}

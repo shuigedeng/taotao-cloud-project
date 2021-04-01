@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  vip.mate.core.web.config.ExceptionConfiguration,\
-  vip.mate.core.web.config.DateConverterConfiguration,\
-  vip.mate.core.web.config.SwaggerConfiguration,\
-  vip.mate.core.web.config.WebConfiguration,\
-  vip.mate.core.web.config.UndertowHttp2Configuration
+com.taotao.cloud.web.configuration.AsyncTaskConfiguration,\
+com.taotao.cloud.web.configuration.DateConverterConfiguration,\
+com.taotao.cloud.web.configuration.PropertiesAutoConfiguration,\
+com.taotao.cloud.web.configuration.UndertowHttp2Configuration,\
+com.taotao.cloud.web.configuration.WebMvcConfiguration

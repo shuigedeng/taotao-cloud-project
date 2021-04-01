@@ -13,31 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.redis.component;
+package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * redis 配置类
@@ -46,8 +48,9 @@ import java.util.Map;
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */
+@Configuration
 @EnableCaching
-public class RedisComponent implements InitializingBean {
+public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -56,19 +59,36 @@ public class RedisComponent implements InitializingBean {
 	}
 
 	@Bean
+	public RedisSerializer<String> redisKeySerializer() {
+		return RedisSerializer.string();
+	}
+
+	@Bean
+	public RedisSerializer<Object> redisValueSerializer() {
+		return RedisSerializer.json();
+	}
+
+	@Bean
+	@ConditionalOnClass(RedisOperations.class)
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-		redisTemplate.setConnectionFactory(factory);
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		template.setConnectionFactory(factory);
 
-		RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-		RedisSerializer<Object> redisObjectSerializer = new RedisObjectSerializer();
+		Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(
+			Object.class);
+		jackson2JsonRedisSerializer.setObjectMapper(JsonUtil.MAPPER);
 
-		redisTemplate.setKeySerializer(stringSerializer);
-		redisTemplate.setHashKeySerializer(stringSerializer);
-		redisTemplate.setValueSerializer(redisObjectSerializer);
-		redisTemplate.afterPropertiesSet();
-
-		return redisTemplate;
+		StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+		// key采用String的序列化方式
+		template.setKeySerializer(stringRedisSerializer);
+		// hash的key也采用String的序列化方式
+		template.setHashKeySerializer(stringRedisSerializer);
+		// value序列化方式采用jackson
+		template.setValueSerializer(jackson2JsonRedisSerializer);
+		// hash的value序列化方式采用jackson
+		template.setHashValueSerializer(jackson2JsonRedisSerializer);
+		template.afterPropertiesSet();
+		return template;
 	}
 
 	@Bean
@@ -118,9 +138,9 @@ public class RedisComponent implements InitializingBean {
 			.disableCachingNullValues()
 			.computePrefixWith(cacheName -> "cache".concat(":").concat(cacheName).concat(":"))
 			.serializeKeysWith(RedisSerializationContext.SerializationPair
-				.fromSerializer(new StringRedisSerializer()))
+				.fromSerializer(RedisSerializer.string()))
 			.serializeValuesWith(RedisSerializationContext.SerializationPair
-				.fromSerializer(new RedisObjectSerializer()));
+				.fromSerializer(RedisSerializer.json()));
 	}
 
 }

@@ -16,8 +16,8 @@
 package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.CharsetUtil;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.model.SecurityUser;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;

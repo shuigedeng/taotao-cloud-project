@@ -13,33 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.redis.constant;
+package com.taotao.cloud.redis.configuration;
+
+import com.taotao.cloud.redis.properties.CacheManagerProperties;
+import com.taotao.cloud.redis.properties.RedisLockProperties;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * redis 工具常量
+ * PropertiesAutoConfiguration
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/4/30 10:17
+ * @since 2020/7/29 14:18
  */
-public class RedisConstant {
+@EnableConfigurationProperties({RedisProperties.class, CacheManagerProperties.class, RedisLockProperties.class})
+public class PropertiesAutoConfiguration {
 
-
-	private RedisConstant() {
-	}
-
-	public static final String BASE_REDIS_LOCK_PREFIX = "taotao.cloud.redis.lock";
-	public static final String BASE_REDIS_CACHE_MANAGER_PREFIX = "taotao.cloud.redis.cache.manager";
-	public static final String ENABLED = "enabled";
-	public static final String TRUE = "true";
-
-	/**
-	 * single Redis
-	 */
-	public static final int SINGLE = 1;
-
-	/**
-	 * Redis cluster
-	 */
-	public static final int CLUSTER = 2;
 }

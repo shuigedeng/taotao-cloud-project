@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.async;
+package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.web.async.AsyncTaskProperties;
+import com.taotao.cloud.web.async.AsyncThreadPoolTaskExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
@@ -30,7 +32,7 @@ import org.springframework.web.context.request.RequestContextListener;
  * @since 2020/5/2 09:12
  */
 @EnableAsync(proxyTargetClass = true)
-public class AsyncTaskComponent {
+public class AsyncTaskConfiguration {
 
 	@Bean
 	public RequestContextListener requestContextListener() {

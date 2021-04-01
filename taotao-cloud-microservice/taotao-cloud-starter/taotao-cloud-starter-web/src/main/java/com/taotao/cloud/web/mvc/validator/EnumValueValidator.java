@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.mvc.validator;
 
-import com.taotao.cloud.core.mvc.constraints.EnumValue;
+import com.taotao.cloud.web.mvc.constraints.EnumValue;
 import java.lang.reflect.Method;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

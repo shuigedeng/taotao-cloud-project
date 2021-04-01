@@ -361,7 +361,7 @@ public class RedisRepository {
 	 * @param key the key
 	 * @return the boolean
 	 */
-	public boolean exists(final String key) {
+	public Boolean exists(final String key) {
 		return redisTemplate.execute((RedisCallback<Boolean>) connection -> connection
 			.exists(key.getBytes(DEFAULT_CHARSET)));
 	}
@@ -373,9 +373,9 @@ public class RedisRepository {
 	 * @param keys the keys
 	 * @return the long
 	 */
-	public long del(final String... keys) {
+	public Long del(final String... keys) {
 		return redisTemplate.execute((RedisCallback<Long>) connection -> {
-			long result = 0;
+			Long result = 0L;
 			for (String key : keys) {
 				result = connection.del(key.getBytes(DEFAULT_CHARSET));
 			}

@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.annotation;
+package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.web.async.AsyncTaskComponent;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Import;
+import com.taotao.cloud.web.async.AsyncTaskProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * 开启异步
+ * PropertiesAutoConfiguration
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @since 2020/7/29 14:18
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Import({AsyncTaskComponent.class})
-public @interface EnableTaoTaoCloudAsync {
+@EnableConfigurationProperties({AsyncTaskProperties.class})
+public class PropertiesAutoConfiguration {
 
 }
