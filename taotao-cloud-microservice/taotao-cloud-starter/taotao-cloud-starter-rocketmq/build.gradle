@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
 

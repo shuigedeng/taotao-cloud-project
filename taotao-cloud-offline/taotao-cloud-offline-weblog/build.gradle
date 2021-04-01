@@ -1,6 +1,3 @@
-archivesBaseName = 'taotao-cloud-offline-weblog'
-
-jar.enabled = false
 
 dependencies {
 

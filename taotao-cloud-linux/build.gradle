@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-linux'
 
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
 }

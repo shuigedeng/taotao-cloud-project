@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-elk'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api "net.logstash.logback:logstash-logback-encoder"
     api 'org.aspectj:aspectjweaver'

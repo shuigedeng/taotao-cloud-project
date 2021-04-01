@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-elasticsearch'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 

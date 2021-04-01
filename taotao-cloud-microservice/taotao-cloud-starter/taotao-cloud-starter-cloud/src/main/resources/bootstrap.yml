@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: @spring.active@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@
+        group: @config.group@
+        file-extension: yaml
+        prefix: mate
+#        shared-configs:
+#          - @artifactId@-@spring.active@.${spring.cloud.nacos.config.file-extension}
+#            refresh-enabled: true
+#        shared-configs[0]:
+#          data-id: @artifactId@.yaml
+#          group: DEFAULT_GROUP
+#          refresh: true
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@
+        watch:
+          enabled: false
+    sentinel:
+      # 是否开启sentinel
+      enabled: true
+      filter:
+        enabled: true
+      # 取消Sentinel控制台懒加载
+      eager: true
+      transport:
+        #port: @sentinel.port@
+        dashboard: @sentinel.dashboard@
+feign:
+  sentinel:
+    enabled: true

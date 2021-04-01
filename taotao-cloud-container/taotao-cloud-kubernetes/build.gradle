@@ -1,6 +1,3 @@
-archivesBaseName = 'taotao-cloud-kubernetes'
-
-jar.enabled = true
 
 dependencies {
     implementation 'io.fabric8:kubernetes-client:5.1.1'

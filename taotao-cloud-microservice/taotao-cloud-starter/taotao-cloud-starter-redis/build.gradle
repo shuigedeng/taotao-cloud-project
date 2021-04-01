@@ -1,10 +1,5 @@
-archivesBaseName = 'taotao-cloud-starter-redis'
-
-jar.enabled = true
-bootJar.enabled = false
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api("org.springframework.boot:spring-boot-starter-data-redis") {
         exclude group: 'io.lettuce', module: 'lettuce-core'

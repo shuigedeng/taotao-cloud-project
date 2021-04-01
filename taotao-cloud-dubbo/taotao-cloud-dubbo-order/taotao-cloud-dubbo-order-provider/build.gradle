@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-dubbo-order-provider'
-
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
     implementation project(':taotao-cloud-dubbo:taotao-cloud-dubbo-account:taotao-cloud-dubbo-account-api')

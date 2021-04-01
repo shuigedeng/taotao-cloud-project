@@ -1,7 +1,4 @@
-archivesBaseName = 'sso-spring-security'
 
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
     implementation "cn.hutool:hutool-all"

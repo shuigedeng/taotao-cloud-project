@@ -1,5 +1,0 @@
-org.springframework.context.ApplicationContextInitializer=\
-com.taotao.cloud.core.initializer.CoreApplicationContextInitializer, \
-com.taotao.cloud.core.banner.BannerInitializer
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.core.PropertiesAutoConfiguration

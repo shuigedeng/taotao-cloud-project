@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-p6spy'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     implementation 'p6spy:p6spy'
 

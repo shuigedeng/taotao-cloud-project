@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-loadbalancer'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"

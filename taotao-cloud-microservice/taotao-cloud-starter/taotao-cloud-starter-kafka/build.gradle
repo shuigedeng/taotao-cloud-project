@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-kafka'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api "org.springframework.cloud:spring-cloud-starter-stream-kafka"
     api "org.springframework.cloud:spring-cloud-stream-binder-kafka"

@@ -1,11 +1,7 @@
-archivesBaseName = 'taotao-cloud-dfs-biz'
-
-jar.enabled = true
-bootJar.enabled = true
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')

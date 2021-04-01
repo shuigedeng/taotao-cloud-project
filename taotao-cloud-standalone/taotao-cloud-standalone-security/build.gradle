@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-standalone-security'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     compile project(":taotao-cloud-standalone:taotao-cloud-standalone-common")

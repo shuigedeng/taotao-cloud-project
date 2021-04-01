@@ -2,10 +2,10 @@ package com.taotao.cloud.idempotent.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.taotao.cloud.common.aspect.BaseAspect;
 import com.taotao.cloud.idempotent.annotation.Ide;
 import com.taotao.cloud.idempotent.enums.IdeTypeEnum;
 import com.taotao.cloud.idempotent.exception.IdeException;
-import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

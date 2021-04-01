@@ -1,6 +1,5 @@
-archivesBaseName = 'taotao-cloud-offline-warehouse'
 
-jar.enabled = false
+
 
 dependencies {
 

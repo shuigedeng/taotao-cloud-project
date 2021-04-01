@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-netty'
 
-jar.enabled = true
-bootJar.enabled = false
 
 apply plugin: 'com.google.protobuf'
 

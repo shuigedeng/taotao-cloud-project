@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-docker'
-
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
     implementation 'com.github.docker-java:docker-java-core:3.2.7'

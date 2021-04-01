@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-gradle-plugin'
-
-jar.enabled = true
-
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'maven'

@@ -1,14 +1,29 @@
-archivesBaseName = 'taotao-cloud-starter-j2cache'
-
-jar.enabled = true
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
 
-    api 'net.oschina.j2cache:j2cache-core:2.8.2-release'
-    api 'org.ehcache:ehcache:3.4.0'
+    api "org.mapstruct:mapstruct"
 
-    implementation 'org.projectlombok:lombok'
+    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
+
+    api('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    api 'org.springframework.boot:spring-boot-starter-actuator'
+    api 'org.springframework.boot:spring-boot-starter-undertow'
+
+    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

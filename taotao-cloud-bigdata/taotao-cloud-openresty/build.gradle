@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-openresty'
-
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
     implementation 'org.projectlombok:lombok'

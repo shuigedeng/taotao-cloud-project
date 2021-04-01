@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-openapi'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api group: 'org.springdoc', name: 'springdoc-openapi-webmvc-core', version: '1.5.5'
     api group: 'org.springdoc', name: 'springdoc-openapi-common', version: '1.5.5'

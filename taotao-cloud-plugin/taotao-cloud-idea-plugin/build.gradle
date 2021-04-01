@@ -1,6 +1,3 @@
-archivesBaseName = 'taotao-cloud-idea-plugin'
-
-jar.enabled = true
 
 buildscript {
     repositories {

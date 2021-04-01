@@ -1,7 +1,3 @@
-archivesBaseName = 'transaction-common'
-
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     compile "com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE"

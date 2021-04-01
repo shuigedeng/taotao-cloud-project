@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-java-concurrent'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     implementation 'org.apache.activemq:activemq-all:5.11.2'

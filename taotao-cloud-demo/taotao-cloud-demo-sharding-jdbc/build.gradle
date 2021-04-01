@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-demo-sharding-jdbc'
-
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')

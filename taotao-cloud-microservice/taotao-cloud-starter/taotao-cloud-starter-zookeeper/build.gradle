@@ -1,7 +1,3 @@
-archivesBaseName = 'taotao-cloud-starter-zookeeper'
-
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')

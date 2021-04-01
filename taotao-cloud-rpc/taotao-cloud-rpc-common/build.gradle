@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-rpc-common'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     implementation 'com.dyuproject.protostuff:protostuff-core:1.0.8'

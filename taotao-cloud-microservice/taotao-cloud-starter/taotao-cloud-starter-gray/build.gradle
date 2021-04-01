@@ -1,11 +1,8 @@
-archivesBaseName = 'taotao-cloud-starter-gray'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     compile 'com.google.guava:guava'
     compile 'org.apache.commons:commons-lang3'

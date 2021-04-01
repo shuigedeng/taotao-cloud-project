@@ -1,11 +1,8 @@
-archivesBaseName = 'taotao-cloud-starter-sentinel'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     compile ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'

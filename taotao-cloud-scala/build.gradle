@@ -1,8 +1,3 @@
-archivesBaseName = 'taotao-cloud-scala'
-
-jar.enabled = true
-bootJar.enabled = false
-
 apply plugin: 'scala'
 
 dependencies {

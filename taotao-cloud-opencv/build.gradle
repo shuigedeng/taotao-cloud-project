@@ -1,7 +1,4 @@
-archivesBaseName = 'taotao-cloud-opencv'
 
-jar.enabled = false
-bootJar.enabled = false
 
 dependencies {
 //    implementation project(':taotao-cloud-starter:taotao-cloud-starter-common')

@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-j2cache'
-
-jar.enabled = true
 
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api 'net.oschina.j2cache:j2cache-core:2.8.2-release'
     api 'org.ehcache:ehcache:3.4.0'

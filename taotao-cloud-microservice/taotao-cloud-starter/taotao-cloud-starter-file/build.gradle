@@ -1,10 +1,7 @@
-archivesBaseName = 'taotao-cloud-starter-file'
 
-jar.enabled = true
-bootJar.enabled = false
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
+
 
     api 'com.upyun:java-sdk'
     api 'com.qiniu:qiniu-java-sdk'
