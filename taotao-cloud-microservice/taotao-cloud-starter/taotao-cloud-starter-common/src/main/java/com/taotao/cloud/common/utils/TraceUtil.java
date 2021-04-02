@@ -24,6 +24,10 @@ public class TraceUtil {
 		return traceId;
 	}
 
+	public static String getTraceId() {
+		return MDC.get(CommonConstant.TRACE_ID);
+	}
+
 	/**
 	 * 传递traceId至MDC
 	 *

@@ -16,8 +16,6 @@
 package com.taotao.cloud.gateway.loadBalancer;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.gateway.utils.WeightMeta;
-import com.taotao.cloud.gateway.utils.WeightRandomUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;

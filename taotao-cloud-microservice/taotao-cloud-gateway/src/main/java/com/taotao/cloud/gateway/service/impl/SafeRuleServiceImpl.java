@@ -1,7 +1,12 @@
 package com.taotao.cloud.gateway.service.impl;
 
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
+import com.sun.deploy.util.BlackList;
+import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.gateway.service.SafeRuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -14,15 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import vip.mate.core.common.api.Result;
-import vip.mate.core.common.util.DateUtil;
-import vip.mate.core.common.util.RequestHolder;
-import vip.mate.core.common.util.ResponseUtil;
-import vip.mate.core.common.util.StringUtil;
-import vip.mate.core.rule.constant.RuleConstant;
-import vip.mate.core.rule.entity.BlackList;
-import vip.mate.core.rule.service.IRuleCacheService;
-import vip.mate.gateway.service.SafeRuleService;
 
 import java.net.URI;
 import java.util.Set;
@@ -33,7 +29,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author pangu
  */
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SafeRuleServiceImpl implements SafeRuleService {
@@ -48,6 +43,7 @@ public class SafeRuleServiceImpl implements SafeRuleService {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		ServerHttpRequest request = exchange.getRequest();
 		ServerHttpResponse response = exchange.getResponse();
+
 		try {
 			URI originUri = getOriginRequestUri(exchange);
 			String requestIp = RequestHolder.getServerHttpRequestIpAddress(request);
@@ -95,7 +91,8 @@ public class SafeRuleServiceImpl implements SafeRuleService {
 				if (RuleConstant.ALL.equalsIgnoreCase(blackList.getRequestMethod())
 						|| StringUtils.equalsIgnoreCase(requestMethod, blackList.getRequestMethod())) {
 					if (StringUtil.isNotBlank(blackList.getStartTime()) && StringUtil.isNotBlank(blackList.getEndTime())) {
-						if (DateUtil.between(DateUtil.parseLocalTime(blackList.getStartTime(), DateUtil.DATETIME_FORMATTER),
+						if (DateUtil.between(
+							DateUtil.parseLocalTime(blackList.getStartTime(), DateUtil.DATETIME_FORMATTER),
 								DateUtil.parseLocalTime(blackList.getEndTime(), DateUtil.DATETIME_FORMATTER))) {
 							forbid.set(Boolean.TRUE);
 						}

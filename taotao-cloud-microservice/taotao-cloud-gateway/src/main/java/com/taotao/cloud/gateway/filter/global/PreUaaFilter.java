@@ -1,5 +1,7 @@
 package com.taotao.cloud.gateway.filter.global;
 
+import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +13,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import vip.mate.core.cloud.props.MateApiProperties;
-import vip.mate.core.common.constant.MateConstant;
-import vip.mate.core.common.constant.Oauth2Constant;
-import vip.mate.core.common.util.ResponseUtil;
-import vip.mate.core.common.util.SecurityUtil;
-import vip.mate.core.common.util.StringPool;
-import vip.mate.core.common.util.TokenUtil;
-import vip.mate.core.redis.core.RedisService;
 
 /**
  * 网关统一的token验证
@@ -105,7 +99,8 @@ public class PreUaaFilter implements GlobalFilter, Ordered {
 	}
 
 	private Mono<Void> unauthorized(ServerHttpResponse resp, String msg) {
-		return ResponseUtil.webFluxResponseWriter(resp, MateConstant.JSON_UTF8, HttpStatus.UNAUTHORIZED, msg); }
+		return ResponseUtil
+			.webFluxResponseWriter(resp, MateConstant.JSON_UTF8, HttpStatus.UNAUTHORIZED, msg); }
 
 	@Override
 	public int getOrder() {

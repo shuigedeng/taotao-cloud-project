@@ -17,6 +17,7 @@ package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.TraceUtil;
 import com.taotao.cloud.gateway.properties.TraceProperties;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -35,11 +36,11 @@ import reactor.core.publisher.Mono;
  * @version 1.0.0
  */
 @Component
-public class TraceLogFilter implements GlobalFilter, Ordered {
+public class TraceFilter implements GlobalFilter, Ordered {
 
 	private final TraceProperties traceProperties;
 
-	public TraceLogFilter(TraceProperties traceProperties) {
+	public TraceFilter(TraceProperties traceProperties) {
 		this.traceProperties = traceProperties;
 	}
 
@@ -47,7 +48,7 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		if (traceProperties.getEnabled()) {
 			String traceId = IdGeneratorUtil.getIdStr();
-			MDC.put(CommonConstant.TRACE_ID, traceId);
+			TraceUtil.mdcTraceId(traceId);
 			ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
 				.headers(h -> h.add(CommonConstant.TRACE_HEADER, traceId))
 				.build();
@@ -60,7 +61,7 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
 
 	@Override
 	public int getOrder() {
-		return Ordered.LOWEST_PRECEDENCE;
+		return Ordered.HIGHEST_PRECEDENCE;
 	}
 }
 
