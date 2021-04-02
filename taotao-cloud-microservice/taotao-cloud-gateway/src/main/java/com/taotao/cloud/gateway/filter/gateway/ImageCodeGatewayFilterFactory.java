@@ -19,7 +19,6 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.security.exception.ValidateCodeException;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

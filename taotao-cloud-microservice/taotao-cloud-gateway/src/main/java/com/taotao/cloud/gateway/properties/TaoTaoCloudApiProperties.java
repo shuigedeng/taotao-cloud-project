@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.props;
+package com.taotao.cloud.gateway.properties;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,13 +11,14 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 验证权限配置
  *
- * @author pangu
  * @date 2020-10-28
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "mate.uaa")
-public class MateApiProperties {
+@ConfigurationProperties(prefix = TaoTaoCloudApiProperties.BASE_AUTHENTICATION_PREFIX)
+public class TaoTaoCloudApiProperties {
+
+	public static final String BASE_AUTHENTICATION_PREFIX = "taotao.cloud.authentication";
 
 	/**
 	 * 监控中心和swagger需要访问的url
@@ -47,7 +48,7 @@ public class MateApiProperties {
 	/**
 	 * 是否启用网关鉴权模式
 	 */
-	private Boolean enable = false;
+	private Boolean enable = true;
 
 	/**
 	 * 首次加载合并ENDPOINTS

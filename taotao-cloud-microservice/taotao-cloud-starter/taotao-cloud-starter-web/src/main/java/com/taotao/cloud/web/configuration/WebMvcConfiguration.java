@@ -21,12 +21,13 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.exception.DefaultExceptionAdvice;
+import com.taotao.cloud.web.filter.LbIsolationFilter;
+import com.taotao.cloud.web.filter.TenantFilter;
+import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
-import com.taotao.cloud.web.mvc.filter.LbIsolationFilter;
-import com.taotao.cloud.web.mvc.filter.TenantFilter;
-import com.taotao.cloud.web.mvc.filter.TraceFilter;
+import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.support.LoginUserArgumentResolver;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +35,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.format.FormatterRegistry;
@@ -47,9 +49,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 1.0.0
  * @since 2020/9/29 14:30
  */
-@Import({DefaultExceptionAdvice.class, LbIsolationFilter.class, TenantFilter.class,
-	TraceFilter.class})
 @AllArgsConstructor
+@Import({
+	DefaultExceptionAdvice.class,
+	LbIsolationFilter.class,
+	TenantFilter.class,
+	TraceFilter.class
+})
+@EnableConfigurationProperties({FilterProperties.class})
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	private final RedisRepository redisRepository;

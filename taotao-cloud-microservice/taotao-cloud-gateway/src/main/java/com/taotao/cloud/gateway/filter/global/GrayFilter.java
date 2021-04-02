@@ -47,13 +47,13 @@ import java.net.URI;
  * @version 1.0.0
  */
 @Component
-public class GrayReactiveLoadBalancerClientFilter implements GlobalFilter, Ordered {
+public class GrayFilter implements GlobalFilter, Ordered {
 
 	private static final int LOAD_BALANCER_CLIENT_FILTER_ORDER = 10150;
 	private final LoadBalancerClientFactory clientFactory;
 	private final LoadBalancerProperties properties;
 
-	public GrayReactiveLoadBalancerClientFilter(LoadBalancerClientFactory clientFactory,
+	public GrayFilter(LoadBalancerClientFactory clientFactory,
 												LoadBalancerProperties properties) {
 		this.clientFactory = clientFactory;
 		this.properties = properties;

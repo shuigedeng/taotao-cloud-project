@@ -17,8 +17,8 @@ package com.taotao.cloud.gateway.error;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
@@ -36,51 +36,55 @@ import java.util.Map;
  * 自定义异常处理
  *
  * @author dengtao
- * @since 2020/4/29 22:12
  * @version 1.0.0
+ * @since 2020/4/29 22:12
  */
 public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandler {
-    public JsonErrorWebExceptionHandler(ErrorAttributes errorAttributes,
-                                        ResourceProperties resourceProperties,
-                                        ErrorProperties errorProperties,
-                                        ApplicationContext applicationContext) {
-        super(errorAttributes, resourceProperties, errorProperties, applicationContext);
-    }
 
-    @Override
-    protected Map<String, Object> getErrorAttributes(ServerRequest request, boolean includeStackTrace) {
-        Throwable error = super.getError(request);
-        LogUtil.error(error.getMessage(), error);
-        return responseError(error.getMessage());
-    }
+	public JsonErrorWebExceptionHandler(ErrorAttributes errorAttributes,
+		ResourceProperties resourceProperties,
+		ErrorProperties errorProperties,
+		ApplicationContext applicationContext) {
+		super(errorAttributes, resourceProperties, errorProperties, applicationContext);
+	}
 
-    @Override
-    protected Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
-        Throwable error = super.getError(request);
-        LogUtil.error(error.getMessage(), error);
-        return responseError(error.getMessage());
-    }
+	@Override
+	protected Map<String, Object> getErrorAttributes(ServerRequest request,
+		boolean includeStackTrace) {
+		Throwable error = super.getError(request);
+		LogUtil.error(error.getMessage(), error);
+		return responseError(error.getMessage());
+	}
 
-    @Override
-    protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
-        return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
-    }
+	@Override
+	protected Map<String, Object> getErrorAttributes(ServerRequest request,
+		ErrorAttributeOptions options) {
+		Throwable error = super.getError(request);
+		LogUtil.error(error.getMessage(), error);
+		return responseError(error.getMessage());
+	}
 
-    @Override
-    protected int getHttpStatus(Map<String, Object> errorAttributes) {
-        return HttpStatus.OK.value();
-    }
+	@Override
+	protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
+		return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
+	}
 
-    /**
-     * 构建返回的JSON数据格式
-     *
-     * @param errorMessage 异常信息
-     */
-    public static Map<String, Object> responseError(String errorMessage) {
-        Result<Object> result = Result.failed(ResultEnum.ERROR.getCode(), errorMessage);
-        Map<String, Object> map = BeanUtil.beanToMap(result);
-        LocalDateTime timestamp = (LocalDateTime) map.getOrDefault("timestamp", LocalDateTime.now());
-        map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        return map;
-    }
+	@Override
+	protected int getHttpStatus(Map<String, Object> errorAttributes) {
+		return HttpStatus.OK.value();
+	}
+
+	/**
+	 * 构建返回的JSON数据格式
+	 *
+	 * @param errorMessage 异常信息
+	 */
+	public static Map<String, Object> responseError(String errorMessage) {
+		Result<Object> result = Result.fail(errorMessage);
+		Map<String, Object> map = BeanUtil.beanToMap(result);
+		LocalDateTime timestamp = (LocalDateTime) map
+			.getOrDefault("timestamp", LocalDateTime.now());
+		map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		return map;
+	}
 }

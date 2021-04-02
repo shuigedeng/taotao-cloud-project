@@ -13,19 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.configuration;
+package com.taotao.cloud.core.endpoint;
 
-import com.taotao.cloud.web.async.AsyncTaskProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import com.taotao.cloud.core.indicator.CustomHealthIndicator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;
+import org.springframework.boot.actuate.health.Health;
 
 /**
- * PropertiesAutoConfiguration
+ * CustomEndPoint
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/7/29 14:18
+ * @since 2021/04/02 10:24
  */
-@EnableConfigurationProperties({AsyncTaskProperties.class})
-public class PropertiesAutoConfiguration {
+@WebEndpoint(id = "myHealth")
+public class CustomEndPoint {
 
+	@Autowired
+	private CustomHealthIndicator customHealthIndicator;
+
+	@ReadOperation
+	public Health health() {
+		return customHealthIndicator.getHealth(true);
+	}
 }

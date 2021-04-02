@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.core.config.RequestConfiguration
+com.taotao.cloud.core.configuration.EndPointConfiguration

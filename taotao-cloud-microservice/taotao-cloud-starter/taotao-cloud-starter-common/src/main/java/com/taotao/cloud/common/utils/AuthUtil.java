@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.core.model.SecurityUser;
+import com.taotao.cloud.common.model.SecurityUser;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Objects;

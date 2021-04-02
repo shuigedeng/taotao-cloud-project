@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.properties;
+package com.taotao.cloud.web.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 日志链路追踪配置
+ * 网关配置
  *
  * @author dengtao
  * @version 1.0.0
@@ -28,11 +28,23 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.filter.trace.log")
-public class TraceProperties {
+@ConfigurationProperties(prefix = FilterProperties.BASE_WEB_FILTER_PREFIX)
+public class FilterProperties {
+
+	public static final String BASE_WEB_FILTER_PREFIX = "taotao.cloud.web.filter";
 
 	/**
-	 * 是否开启日志链路追踪
+	 * 开启负载均衡隔离规则
 	 */
-	private Boolean enabled = false;
+	private Boolean lbIsolation = true;
+
+	/**
+	 * 开启租户过滤器
+	 */
+	private Boolean tenant = true;
+
+	/**
+	 * 开启日志链路追踪过滤器
+	 */
+	private Boolean trace = true;
 }

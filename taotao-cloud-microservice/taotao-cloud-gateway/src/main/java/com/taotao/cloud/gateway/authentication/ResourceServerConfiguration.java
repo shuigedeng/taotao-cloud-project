@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.configuration;
+package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.utils.WebfluxResponseUtil;
-import com.taotao.cloud.gateway.component.AuthenticationManagerComponent;
-import com.taotao.cloud.gateway.component.Oauth2AuthSuccessHandler;
-import com.taotao.cloud.gateway.component.PermissionAuthManager;
+import com.taotao.cloud.gateway.authentication.AuthenticationManagerComponent;
+import com.taotao.cloud.gateway.authentication.Oauth2AuthSuccessHandler;
+import com.taotao.cloud.gateway.authentication.PermissionAuthManager;
 import com.taotao.cloud.gateway.properties.CustomGatewayProperties;
 import com.taotao.cloud.security.properties.PermitProperties;
 import com.taotao.cloud.security.properties.SecurityProperties;

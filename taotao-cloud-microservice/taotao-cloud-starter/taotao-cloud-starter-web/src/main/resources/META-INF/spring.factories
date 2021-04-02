@@ -1,6 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.taotao.cloud.web.configuration.AsyncTaskConfiguration,\
 com.taotao.cloud.web.configuration.DateConverterConfiguration,\
-com.taotao.cloud.web.configuration.PropertiesAutoConfiguration,\
 com.taotao.cloud.web.configuration.UndertowHttp2Configuration,\
 com.taotao.cloud.web.configuration.WebMvcConfiguration

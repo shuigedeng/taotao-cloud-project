@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import java.io.IOException;
 import java.io.Writer;
 import javax.servlet.http.HttpServletResponse;

@@ -33,6 +33,13 @@ spring:
       transport:
         #port: @sentinel.port@
         dashboard: @sentinel.dashboard@
+
 feign:
   sentinel:
     enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

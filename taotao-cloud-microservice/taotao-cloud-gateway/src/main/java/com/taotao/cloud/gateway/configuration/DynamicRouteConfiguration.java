@@ -31,14 +31,14 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  */
 @Configuration
-@ConditionalOnProperty(prefix = "taotao.cloud.gateway.dynamic.route", name = "enabled", havingValue = "false")
+@ConditionalOnProperty(prefix = "taotao.cloud.nacos.dynamic.route", name = "enabled", havingValue = "false")
 public class DynamicRouteConfiguration {
 
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
 	@Configuration
-	@ConditionalOnProperty(prefix = "taotao.cloud.gateway.dynamic.route", name = "type", havingValue = "nacos", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = "taotao.cloud.nacos.dynamic.route", name = "type", havingValue = "nacos", matchIfMissing = true)
 	public class NacosDynamicRoute {
 		// @Autowired
 		// private NacosConfigProperties nacosConfigProperties;

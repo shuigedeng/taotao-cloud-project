@@ -5,8 +5,15 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-actuator'
     api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
+
+    api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    api "de.codecentric:spring-boot-admin-starter-client:2.4.0"
+
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+
+    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
+
     api 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

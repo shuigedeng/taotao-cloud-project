@@ -13,26 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.properties;
+package com.taotao.cloud.core.configuration;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import com.taotao.cloud.core.endpoint.CustomEndPoint;
+import com.taotao.cloud.core.indicator.CustomHealthIndicator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * 日志链路追踪配置
+ * EndPoindConfiguration
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/2 11:15
+ * @since 2021/04/02 10:25
  */
-@Data
-@RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.filter.trace.log")
-public class TraceProperties {
+@Configuration
+public class EndPointConfiguration {
 
-	/**
-	 * 是否开启日志链路追踪
-	 */
-	private Boolean enabled = false;
+	@Bean
+	public CustomHealthIndicator customHealthIndicator() {
+		return new CustomHealthIndicator();
+	}
+
+	@Bean
+	public CustomEndPoint myEndPoint() {
+		return new CustomEndPoint();
+	}
 }

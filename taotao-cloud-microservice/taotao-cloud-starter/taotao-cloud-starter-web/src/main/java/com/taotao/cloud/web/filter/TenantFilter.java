@@ -1,3 +1,4 @@
+package com.taotao.cloud.web.filter;
 /*
  * Copyright 2002-2021 the original author or authors.
  *
@@ -13,18 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.mvc.filter;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -34,12 +36,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2020/6/15 11:30
  */
-@ConditionalOnClass(Filter.class)
 public class TenantFilter extends OncePerRequestFilter {
+	@Autowired
+	private FilterProperties filterProperties;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request,
-		HttpServletResponse response,
+	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		return !filterProperties.getTenant();
+	}
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {
 		try {
 			//优先获取请求参数中的tenantId值
@@ -49,8 +56,13 @@ public class TenantFilter extends OncePerRequestFilter {
 			}
 
 			//保存租户id
-			if (StrUtil.isNotEmpty(tenantId)) {
+			LogUtil.info("获取到的租户ID为:{}", tenantId);
+			if (StringUtil.isNotBlank(tenantId)) {
 				TenantContextHolder.setTenant(tenantId);
+			} else {
+				if (StringUtil.isBlank(TenantContextHolder.getTenant())) {
+					TenantContextHolder.setTenant(CommonConstant.TENANT_ID_DEFAULT);
+				}
 			}
 
 			filterChain.doFilter(request, response);

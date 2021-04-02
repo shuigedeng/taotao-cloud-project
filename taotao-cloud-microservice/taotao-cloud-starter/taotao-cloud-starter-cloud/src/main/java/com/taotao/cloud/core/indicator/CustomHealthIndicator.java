@@ -13,26 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.properties;
+package com.taotao.cloud.core.indicator;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.ManagementFactory;
+import java.util.List;
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 
 /**
- * 日志链路追踪配置
+ * CustomHealthIndicator
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/2 11:15
+ * @since 2021/04/02 10:23
  */
-@Data
-@RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.filter.trace.log")
-public class TraceProperties {
+public class CustomHealthIndicator implements HealthIndicator {
 
-	/**
-	 * 是否开启日志链路追踪
-	 */
-	private Boolean enabled = false;
+	@Override
+	public Health health() {
+		List<GarbageCollectorMXBean> gge = ManagementFactory.getGarbageCollectorMXBeans();
+		Health.Builder builder = new Health.Builder();
+		builder.status("run");
+		builder.withDetail("garbage", gge);
+		return builder.build();
+	}
+
 }

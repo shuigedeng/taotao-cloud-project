@@ -120,6 +120,8 @@ public class CommonConstant {
 	 */
 	public static final String TENANT_ID = "t-tenantId";
 
+	public static final String TENANT_ID_DEFAULT = "1";
+
 	/**
 	 * 租户信息头
 	 */
