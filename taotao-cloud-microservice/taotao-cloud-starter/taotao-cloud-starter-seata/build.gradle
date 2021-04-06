@@ -1,6 +1,5 @@
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api "io.seata:seata-all"
     api "com.zaxxer:HikariCP"

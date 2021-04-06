@@ -1,10 +1,7 @@
-
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-
-    compile ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
+    api ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
     }
 

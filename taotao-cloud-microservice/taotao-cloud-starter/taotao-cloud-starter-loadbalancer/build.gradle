@@ -1,7 +1,5 @@
-
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"

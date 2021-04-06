@@ -1,4 +1,5 @@
 dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api "com.xuxueli:xxl-job-core"
 

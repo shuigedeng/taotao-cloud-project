@@ -1,7 +1,5 @@
-
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     implementation 'p6spy:p6spy'
 

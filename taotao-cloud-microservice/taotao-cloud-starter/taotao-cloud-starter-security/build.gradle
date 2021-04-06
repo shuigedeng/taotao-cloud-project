@@ -1,8 +1,6 @@
-
-
 dependencies {
-
 //	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
 	api 'javax.servlet:javax.servlet-api'
 
@@ -11,8 +9,8 @@ dependencies {
 	api  'org.springframework.security:spring-security-config'
 	api  'org.springframework.security:spring-security-oauth2-core'
 
-	implementation 'org.apache.commons:commons-collections4'
-	implementation 'org.apache.commons:commons-lang3'
+	api 'org.apache.commons:commons-collections4'
+	api 'org.apache.commons:commons-lang3'
 
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

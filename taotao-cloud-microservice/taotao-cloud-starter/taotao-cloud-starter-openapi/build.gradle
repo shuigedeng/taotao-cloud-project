@@ -1,11 +1,8 @@
-
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api group: 'org.springdoc', name: 'springdoc-openapi-webmvc-core', version: '1.5.5'
     api group: 'org.springdoc', name: 'springdoc-openapi-common', version: '1.5.5'
-
     api 'com.google.guava:guava'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
