@@ -29,6 +29,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * 安全服务工具类
@@ -182,7 +183,7 @@ public class SecurityUtil {
 	 * @since 2021/2/25 16:59
 	 */
 	public BCryptPasswordEncoder getPasswordEncoder() {
-		BCryptPasswordEncoder passwordEncoder = BeanUtil.getBean(BCryptPasswordEncoder.class, true);
+		BCryptPasswordEncoder passwordEncoder = ContextUtil.getBean(BCryptPasswordEncoder.class, true);
 		if (Objects.isNull(passwordEncoder)) {
 			passwordEncoder = new BCryptPasswordEncoder();
 		}
