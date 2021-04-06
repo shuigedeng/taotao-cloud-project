@@ -1,5 +1,6 @@
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -17,17 +18,6 @@ import java.util.regex.Pattern;
  */
 public class DateUtil {
 
-    /**
-     * 自定义格式化
-     */
-    public static final String YEAR_MONTH_FORMATTER = "yyyy-MM";
-    public static final String DATE_FORMATTER = "yyyy-MM-dd";
-    public static final String DATETIME_FORMATTER = "yyyy-MM-dd HH:mm:ss";
-    public static final String TIME_FORMATTER = "HH:mm:ss";
-    public static final String YEAR_MONTH_FORMATTER_SHORT = "yyyyMM";
-    public static final String DATE_FORMATTER_SHORT = "yyyyMMdd";
-    public static final String DATETIME_FORMATTER_SHORT = "yyyyMMddHHmmss";
-    public static final String TIME_FORMATTER_SHORT = "HHmmss";
     /**
      * 24小时时间正则表达式
      */
@@ -66,7 +56,7 @@ public class DateUtil {
      * @return yyyy-MM
      */
     public static String getCurrentYearMonth() {
-        return getCurrentDate(YEAR_MONTH_FORMATTER);
+        return getCurrentDate(CommonConstant.YEAR_MONTH_FORMATTER);
     }
 
     /**
@@ -75,7 +65,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String getCurrentDate() {
-        return getCurrentDate(DATE_FORMATTER);
+        return getCurrentDate(CommonConstant.DATE_FORMATTER);
     }
 
     /**
@@ -84,7 +74,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String getNextDate() {
-        return getNextDate(DATE_FORMATTER);
+        return getNextDate(CommonConstant.DATE_FORMATTER);
     }
 
     /**
@@ -93,7 +83,7 @@ public class DateUtil {
      * @return HHmmss
      */
     public static String getCurrentTime() {
-        return getCurrentTime(TIME_FORMATTER);
+        return getCurrentTime(CommonConstant.TIME_FORMATTER);
     }
 
     /**
@@ -102,7 +92,7 @@ public class DateUtil {
      * @return yyyy-MM-dd HH:mm:ss
      */
     public static String getCurrentDateTime() {
-        return getCurrentDateTime(DATETIME_FORMATTER);
+        return getCurrentDateTime(CommonConstant.DATETIME_FORMAT);
     }
 
     /**
@@ -111,7 +101,7 @@ public class DateUtil {
      * @return yyyyMM
      */
     public static String getCurrentYearMonthShort() {
-        return getCurrentDate(YEAR_MONTH_FORMATTER_SHORT);
+        return getCurrentDate(CommonConstant.YEAR_MONTH_FORMATTER_SHORT);
     }
 
     /**
@@ -120,7 +110,7 @@ public class DateUtil {
      * @return yyyyMMdd
      */
     public static String getCurrentDateShort() {
-        return getCurrentDate(DATE_FORMATTER_SHORT);
+        return getCurrentDate(CommonConstant.DATE_FORMATTER_SHORT);
     }
 
     /**
@@ -129,7 +119,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String getNextDateShort() {
-        return getNextDate(DATE_FORMATTER_SHORT);
+        return getNextDate(CommonConstant.DATE_FORMATTER_SHORT);
     }
 
     /**
@@ -138,7 +128,7 @@ public class DateUtil {
      * @return HHmmss
      */
     public static String getCurrentTimeShort() {
-        return getCurrentTime(TIME_FORMATTER_SHORT);
+        return getCurrentTime(CommonConstant.TIME_FORMATTER_SHORT);
     }
 
     /**
@@ -147,7 +137,7 @@ public class DateUtil {
      * @return yyyyMMddHHmmss
      */
     public static String getCurrentDateTimeShort() {
-        return getCurrentDateTime(DATETIME_FORMATTER_SHORT);
+        return getCurrentDateTime(CommonConstant.DATETIME_FORMATTER_SHORT);
     }
 
     /**
@@ -212,7 +202,7 @@ public class DateUtil {
      * @return yyyy-MM-dd HH:mm:ss
      */
     public static String formatTimestamp(long timestamp) {
-        return formatTimestamp(timestamp, DATETIME_FORMATTER);
+        return formatTimestamp(timestamp, CommonConstant.DATETIME_FORMAT);
     }
 
     /**
@@ -222,7 +212,7 @@ public class DateUtil {
      * @return yyyyMMddHHmmss
      */
     public static String formatTimestampShort(long timestamp) {
-        return formatTimestamp(timestamp, DATETIME_FORMATTER_SHORT);
+        return formatTimestamp(timestamp, CommonConstant.DATETIME_FORMATTER_SHORT);
     }
 
     /**
@@ -244,7 +234,7 @@ public class DateUtil {
      * @return yyyy-MM-dd
      */
     public static String formatLocalDate(LocalDate localDate) {
-        return formatLocalDate(localDate, DATE_FORMATTER);
+        return formatLocalDate(localDate, CommonConstant.DATE_FORMATTER);
     }
 
     /**
@@ -254,7 +244,7 @@ public class DateUtil {
      * @return yyyyMMdd
      */
     public static String formatLocalDateShort(LocalDate localDate) {
-        return formatLocalDate(localDate, DATE_FORMATTER_SHORT);
+        return formatLocalDate(localDate, CommonConstant.DATE_FORMATTER_SHORT);
     }
 
     /**
@@ -264,7 +254,7 @@ public class DateUtil {
      * @return HH:mm:ss
      */
     public static String formatLocalTime(LocalTime localTime) {
-        return formatLocalTime(localTime, TIME_FORMATTER);
+        return formatLocalTime(localTime, CommonConstant.TIME_FORMATTER);
     }
 
     /**
@@ -274,7 +264,7 @@ public class DateUtil {
      * @return HHmmss
      */
     public static String formatLocalTimeShort(LocalTime localTime) {
-        return formatLocalTime(localTime, TIME_FORMATTER_SHORT);
+        return formatLocalTime(localTime, CommonConstant.TIME_FORMATTER_SHORT);
     }
 
     /**
@@ -284,7 +274,7 @@ public class DateUtil {
      * @return yyyy-MM-dd HH:mm:ss
      */
     public static String formatLocalDateTime(LocalDateTime localDateTime) {
-        return formatLocalDateTime(localDateTime, DATETIME_FORMATTER);
+        return formatLocalDateTime(localDateTime, CommonConstant.DATETIME_FORMAT);
     }
 
     /**
@@ -294,7 +284,7 @@ public class DateUtil {
      * @return yyyyMMddHHmmss
      */
     public static String formatLocalDateTimeShort(LocalDateTime localDateTime) {
-        return formatLocalDateTime(localDateTime, DATETIME_FORMATTER_SHORT);
+        return formatLocalDateTime(localDateTime, CommonConstant.DATETIME_FORMATTER_SHORT);
     }
 
     /**
@@ -562,7 +552,7 @@ public class DateUtil {
     public static String getDateAfterDays(int days) {
         Calendar date = Calendar.getInstance();// today
         date.add(Calendar.DATE, days);
-        SimpleDateFormat simpleDate = new SimpleDateFormat(DATE_FORMATTER);
+        SimpleDateFormat simpleDate = new SimpleDateFormat(CommonConstant.DATE_FORMATTER);
         return simpleDate.format(date.getTime());
     }
 
@@ -575,11 +565,11 @@ public class DateUtil {
      * @throws ParseException
      */
     public static String addDays(String source, int days) {
-        Date date = localDateToDate(parseLocalDate(source, DATE_FORMATTER));
+        Date date = localDateToDate(parseLocalDate(source, CommonConstant.DATE_FORMATTER));
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMATTER);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(CommonConstant.DATE_FORMATTER);
         return dateFormat.format(calendar.getTime());
     }
 

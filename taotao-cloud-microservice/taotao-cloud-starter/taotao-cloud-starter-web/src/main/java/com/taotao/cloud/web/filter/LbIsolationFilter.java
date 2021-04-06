@@ -6,13 +6,11 @@ import com.taotao.cloud.common.context.LbIsolationContextHolder;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import java.util.Objects;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -41,7 +39,7 @@ public class LbIsolationFilter extends OncePerRequestFilter {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
 				.requireNonNull(RequestContextHolder.getRequestAttributes());
 			RequestContextHolder.setRequestAttributes(attributes, true);
-			String version = request.getHeader(CommonConstant.T_VERSION);
+			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_VERSION);
 			if (StrUtil.isNotEmpty(version)) {
 				LbIsolationContextHolder.setVersion(version);
 			}

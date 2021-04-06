@@ -16,6 +16,7 @@
 package com.taotao.cloud.redis.lock;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
@@ -46,9 +47,9 @@ public class RedissonDistributedLock implements DistributedLock {
 	private ZLock getLock(String key, boolean isFair) {
 		RLock lock;
 		if (isFair) {
-			lock = redisson.getFairLock(CommonConstant.LOCK_KEY_PREFIX + key);
+			lock = redisson.getFairLock(RedisConstant.LOCK_KEY_PREFIX + key);
 		} else {
-			lock = redisson.getLock(CommonConstant.LOCK_KEY_PREFIX + key);
+			lock = redisson.getLock(RedisConstant.LOCK_KEY_PREFIX + key);
 		}
 		return new ZLock(lock, this);
 	}

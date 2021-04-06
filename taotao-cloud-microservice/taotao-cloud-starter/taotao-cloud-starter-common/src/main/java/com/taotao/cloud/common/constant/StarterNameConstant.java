@@ -27,63 +27,27 @@ public class StarterNameConstant {
 	private StarterNameConstant() {
 	}
 
-	/**
-	 * 认证模块
-	 */
 	public static final String TAOTAO_CLOUD_AUTH_STARTER = "taotao-cloud-starter-security";
 
-	/**
-	 * swagger模块
-	 */
 	public static final String TAOTAO_CLOUD_SPRINGDOC_STARTER = "taotao-cloud-starter-springdoc";
 
-	/**
-	 * swagger模块
-	 */
 	public static final String TAOTAO_CLOUD_LOG_STARTER = "taotao-cloud-starter-log";
 
-	/**
-	 * swagger模块
-	 */
 	public static final String TAOTAO_CLOUD_MESSAGE_STARTER = "taotao-cloud-message-starter";
 
-	/**
-	 * redis模块
-	 */
 	public static final String TAOTAO_CLOUD_REDIS_STARTER = "taotao-cloud-starter-redis";
 
-	/**
-	 * ribbon模块
-	 */
 	public static final String TAOTAO_CLOUD_RIBBON_STARTER = "taotao-cloud-starter-loadbalancer";
 
-	/**
-	 * feign模块
-	 */
 	public static final String TAOTAO_CLOUD_FEIGN_STARTER = "taotao-cloud-feign-starter";
 
-	/**
-	 * feign模块
-	 */
 	public static final String TAOTAO_CLOUD_ELK_STARTER = "taotao-cloud-starter-elk";
 
-	/**
-	 * tenant模块
-	 */
 	public static final String TAOTAO_CLOUD_TENANT_STARTER = "taotao-cloud-tenant-starter";
 
-	/**
-	 * 数据访问模块
-	 */
 	public static final String TAOTAO_CLOUD_MYBATIS_PLUS_STARTER = "taotao-cloud-starter-data-mybatis-plus";
 
-	/**
-	 * elasticsearch模块
-	 */
 	public static final String TAOTAO_CLOUD_ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
 
-	/**
-	 * job模块
-	 */
 	public static final String TAOTAO_CLOUD_JOB_STARTER = "taotao-cloud-starter-job";
 }

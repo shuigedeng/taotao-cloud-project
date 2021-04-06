@@ -17,7 +17,6 @@ package com.taotao.cloud.log.component;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.annotation.EnableTaoTaoCloudAsync;
 import com.taotao.cloud.log.aspect.RequestLogAspect;
 import com.taotao.cloud.log.listener.RequestLogListener;
 import com.taotao.cloud.log.properties.RequestLogProperties;
@@ -42,7 +41,6 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @since 2020/4/30 10:21
  */
 @Slf4j
-@EnableTaoTaoCloudAsync
 public class RequestLogComponent implements InitializingBean {
 
 	@Autowired

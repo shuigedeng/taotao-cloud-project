@@ -17,11 +17,11 @@ package com.taotao.cloud.gateway.filter.gateway;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -68,7 +68,7 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
         if (StrUtil.isBlank(code)) {
             throw new ValidateCodeException(NOT_CODE_NULL);
         }
-        String key = CommonConstant.TAOTAO_CAPTCHA_KEY + t;
+        String key = RedisConstant.TAOTAO_CLOUD_CAPTCHA_KEY + t;
         if (!redisRepository.exists(key)) {
             throw new ValidateCodeException(NOT_LEGAL);
         }

@@ -15,11 +15,19 @@
  */
 package com.taotao.cloud.core.nacos;
 
+import com.alibaba.cloud.nacos.NacosConfigManager;
+import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
+import com.alibaba.nacos.api.config.listener.Listener;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Properties;
-import org.springframework.stereotype.Component;
+import java.util.concurrent.Executor;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * ConfigService
@@ -28,7 +36,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * @since 2021/04/06 11:20
  */
-@Component
+@Configuration
 public class ConfigService {
 
 	@NacosConfigListener(dataId = "taotao-cloud", type = ConfigType.YAML)
@@ -37,4 +45,37 @@ public class ConfigService {
 	}
 
 
+	@RefreshScope
+	@Configuration
+	public static class NacosListener implements InitializingBean {
+
+		@Value("${spring.application.name}")
+		private String appName;
+		@Autowired
+		private NacosConfigManager nacosConfigManager;
+		@Autowired
+		private NacosConfigProperties configProperties;
+
+//    @NacosConfigListener(dataId = "${spring.application.name}.yaml")
+//    public void onMessage(String config) {
+//        System.out.println();
+//    }
+
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			nacosConfigManager.getConfigService()
+				.addListener(appName + ".yaml", configProperties.getGroup(),
+					new Listener() {
+						@Override
+						public Executor getExecutor() {
+							return null;
+						}
+
+						@Override
+						public void receiveConfigInfo(String configInfo) {
+							LogUtil.info(configInfo);
+						}
+					});
+		}
+	}
 }

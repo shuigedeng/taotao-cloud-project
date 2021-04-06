@@ -42,13 +42,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TaotaoCloudAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     TaotaoCloudAuthenticationFilter() {
-        super(new AntPathRequestMatcher(CommonConstant.CUSTOM_OAUTH_LOGIN, HttpMethod.POST.toString()));
+//        super(new AntPathRequestMatcher(CommonConstant.CUSTOM_OAUTH_LOGIN, HttpMethod.POST.toString()));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String grantType = obtainParameter(request, CommonConstant.GRANT_TYPE);
-        String userType = obtainParameter(request, CommonConstant.USER_TYPE);
+        String grantType = obtainParameter(request, CommonConstant.TAOTAO_CLOUD_GRANT_TYPE);
+        String userType = obtainParameter(request, CommonConstant.TAOTAO_CLOUD_USER_TYPE);
 
         TaotaoCloudAuthenticationToken token;
         String principal;

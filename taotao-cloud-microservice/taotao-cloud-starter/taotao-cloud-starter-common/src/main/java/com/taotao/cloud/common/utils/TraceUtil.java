@@ -17,15 +17,15 @@ public class TraceUtil {
 	 * @return traceId
 	 */
 	public static String getTraceId(HttpServletRequest request) {
-		String traceId = request.getParameter(CommonConstant.TRACE_ID);
+		String traceId = request.getParameter(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
 		if (StrUtil.isBlank(traceId)) {
-			traceId = request.getHeader(CommonConstant.TRACE_HEADER);
+			traceId = request.getHeader(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 		}
 		return traceId;
 	}
 
 	public static String getTraceId() {
-		return MDC.get(CommonConstant.TRACE_ID);
+		return MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class TraceUtil {
 	 */
 	public static void mdcTraceId(String traceId) {
 		if (StrUtil.isNotBlank(traceId)) {
-			MDC.put(CommonConstant.TRACE_ID, traceId);
+			MDC.put(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId);
 		}
 	}
 }

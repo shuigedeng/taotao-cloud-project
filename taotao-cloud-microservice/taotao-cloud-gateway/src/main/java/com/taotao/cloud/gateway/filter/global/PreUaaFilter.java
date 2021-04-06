@@ -1,5 +1,6 @@
 package com.taotao.cloud.gateway.filter.global;
 
+import com.taotao.cloud.common.constant.StringPoolConstant;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import io.jsonwebtoken.Claims;
@@ -93,7 +94,7 @@ public class PreUaaFilter implements GlobalFilter, Ordered {
 	 */
 	private String replacePrefix(String path) {
 		if (path.startsWith(PATH_PREFIX)) {
-			return path.substring(path.indexOf(StringPool.SLASH, FROM_INDEX));
+			return path.substring(path.indexOf(StringPoolConstant.SLASH, FROM_INDEX));
 		}
 		return path;
 	}

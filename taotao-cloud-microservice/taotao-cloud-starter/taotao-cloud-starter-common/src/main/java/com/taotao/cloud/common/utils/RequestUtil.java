@@ -15,16 +15,23 @@
  */
 package com.taotao.cloud.common.utils;
 
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.constant.StringPoolConstant;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.val;
@@ -36,6 +43,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.codec.DecoderHttpMessageReader;
 import org.springframework.http.codec.HttpMessageReader;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import reactor.core.publisher.Mono;
@@ -47,7 +55,9 @@ import reactor.core.publisher.Mono;
  * @version 1.0.0
  * @since 2020/6/2 16:43
  */
-public class WebUtil {
+public class RequestUtil {
+
+	private final static String UNKNOWN_STR = "unknown";
 
 	private static final ThreadLocal<WebContext> THREAD_CONTEXT = new ThreadLocal<>();
 
@@ -92,7 +102,7 @@ public class WebUtil {
 		if (webServer == null) {
 			return "";
 		}
-		return "http://" + NetworkUtil.getIpAddress() + ":" + webServer.getPort();
+		return "http://" + getIpAddress() + ":" + webServer.getPort();
 	}
 
 	public static Map<String, String> getAllRequestParam(HttpServletRequest request) {
@@ -181,13 +191,11 @@ public class WebUtil {
 
 	private static final String UNKNOWN = "unknown";
 
-	/**
-	 * 获取HttpServletRequest请求
-	 *
-	 * @return HttpServletRequest
-	 */
+
 	public static HttpServletRequest getHttpServletRequest() {
-		return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		return (requestAttributes == null) ? null
+			: ((ServletRequestAttributes) requestAttributes).getRequest();
 	}
 
 	/**
@@ -221,8 +229,8 @@ public class WebUtil {
 		HttpHeaders headers = request.getHeaders();
 		String ip = headers.getFirst("x-forwarded-for");
 		if (ip != null && ip.length() != 0 && !UNKNOWN.equalsIgnoreCase(ip)) {
-			if (ip.contains(StringPool.COMMA)) {
-				ip = ip.split(StringPool.COMMA)[0];
+			if (ip.contains(StringPoolConstant.COMMA)) {
+				ip = ip.split(StringPoolConstant.COMMA)[0];
 			}
 		}
 		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
@@ -247,4 +255,263 @@ public class WebUtil {
 	}
 
 
+	/**
+	 * 获取客户端IP地址
+	 *
+	 * @param request request
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:58
+	 */
+	public String getRemoteAddr(HttpServletRequest request) {
+		String ip = request.getHeader("X-Forwarded-For");
+		if (isEmptyIp(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+			if (isEmptyIp(ip)) {
+				ip = request.getHeader("WL-Proxy-Client-IP");
+				if (isEmptyIp(ip)) {
+					ip = request.getHeader("HTTP_CLIENT_IP");
+					if (isEmptyIp(ip)) {
+						ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+						if (isEmptyIp(ip)) {
+							ip = request.getRemoteAddr();
+							if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
+								// 根据网卡取本机配置的IP
+								ip = getLocalAddr();
+							}
+						}
+					}
+				}
+			}
+		} else if (ip.length() > 15) {
+			String[] ips = ip.split(",");
+			for (String strIp : ips) {
+				if (!isEmptyIp(ip)) {
+					ip = strIp;
+					break;
+				}
+			}
+		}
+		return ip;
+	}
+
+	/**
+	 * 判断ip地址是否为空
+	 *
+	 * @param ip ip地址
+	 * @return boolean
+	 * @author dengtao
+	 * @since 2021/2/25 16:58
+	 */
+	public static boolean isEmptyIp(String ip) {
+		return StrUtil.isEmpty(ip) || UNKNOWN_STR.equalsIgnoreCase(ip);
+	}
+
+	/**
+	 * 获取本机的IP地址
+	 *
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:58
+	 */
+	public static String getLocalAddr() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			LogUtil.error("InetAddress.getLocalHost()-error", e);
+		}
+		return "";
+	}
+
+
+	/**
+	 * 获取ip地址
+	 *
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:33
+	 */
+	public static String getIpAddress() {
+		String ipExclude = "";
+		if (StringUtil.hasText(ipExclude)) {
+			String regex = buildRegex(ipExclude);
+			return getIpAddressExMatched(regex);
+		}
+
+		String ipInclude = "";
+		if (StringUtil.hasText(ipInclude)) {
+			String regex = buildRegex(ipInclude);
+			return getIpAddressMatched(regex);
+		}
+
+		return getIpAddress0();
+	}
+
+	/**
+	 * 获取ip地址
+	 *
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:33
+	 */
+	public static String getIpAddress0() {
+		try {
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
+			InetAddress ip;
+			while (allNetInterfaces.hasMoreElements()) {
+				NetworkInterface netInterface = allNetInterfaces.nextElement();
+				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()
+					|| netInterface.isPointToPoint()) {
+					continue;
+				} else {
+					Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
+					while (addresses.hasMoreElements()) {
+						ip = addresses.nextElement();
+						if (ip instanceof Inet4Address) {
+							return ip.getHostAddress();
+						}
+					}
+				}
+			}
+		} catch (Exception ignored) {
+		}
+		return "";
+	}
+
+	/**
+	 * 获取指定网段地址
+	 *
+	 * @param regex 10.0.18 网址前两个或前三个地址段
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:33
+	 */
+	public static String getIpAddressMatched(String regex) {
+		try {
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
+			InetAddress ip;
+			while (allNetInterfaces.hasMoreElements()) {
+				NetworkInterface netInterface = allNetInterfaces.nextElement();
+				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()) {
+					continue;
+				} else {
+					Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
+					while (addresses.hasMoreElements()) {
+						ip = addresses.nextElement();
+						if (ip instanceof Inet4Address) {
+							String strIp = ip.getHostAddress();
+							//如果匹配网段则返回
+							if (Pattern.matches(regex, strIp)) {
+								return strIp;
+							}
+						}
+					}
+				}
+			}
+		} catch (Exception ignored) {
+		}
+		return "";
+	}
+
+	/**
+	 * 获取指定网段地址
+	 *
+	 * @param regex 10.0.18 排除地址段，两个或前三个地址段
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:34
+	 */
+	public static String getIpAddressExMatched(String regex) {
+		try {
+			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
+				.getNetworkInterfaces();
+			InetAddress ip;
+			while (allNetInterfaces.hasMoreElements()) {
+				NetworkInterface netInterface = allNetInterfaces.nextElement();
+				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()) {
+					continue;
+				} else {
+					Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
+					while (addresses.hasMoreElements()) {
+						ip = addresses.nextElement();
+						if (ip instanceof Inet4Address) {
+							String strIp = ip.getHostAddress();
+							//如果不匹配匹配网段则返回;
+							if (!Pattern.matches(regex, strIp)) {
+								return strIp;
+							}
+						}
+					}
+				}
+			}
+		} catch (Exception ignored) {
+		}
+		return "";
+	}
+
+	/**
+	 * 构建正则表达式
+	 *
+	 * @param source source
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2021/2/25 16:34
+	 */
+	private static String buildRegex(String source) {
+		StringBuilder sb = new StringBuilder();
+		String[] strSource = source.split(",");
+		for (String s : strSource) {
+			sb.append("|(^").append(s).append(".*)");
+		}
+		String regex = sb.toString();
+		if (!StringUtil.isEmpty(regex)) {
+			//去掉开头|号
+			return regex.substring(1);
+		}
+		return "";
+	}
+
+	/**
+	 * 获取客户端IP地址
+	 *
+	 * @param request request
+	 * @return java.lang.String
+	 * @author dengtao
+	 * @since 2020/10/15 15:46
+	 */
+	public static String getRemoteAddr(ServerHttpRequest request) {
+		Map<String, String> headers = request.getHeaders().toSingleValueMap();
+		String ip = headers.get("X-Forwarded-For");
+		if (isEmptyIp(ip)) {
+			ip = headers.get("Proxy-Client-IP");
+			if (isEmptyIp(ip)) {
+				ip = headers.get("WL-Proxy-Client-IP");
+				if (isEmptyIp(ip)) {
+					ip = headers.get("HTTP_CLIENT_IP");
+					if (isEmptyIp(ip)) {
+						ip = headers.get("HTTP_X_FORWARDED_FOR");
+						if (isEmptyIp(ip)) {
+							ip = request.getRemoteAddress().getAddress().getHostAddress();
+							if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
+								// 根据网卡取本机配置的IP
+								ip = getLocalAddr();
+							}
+						}
+					}
+				}
+			}
+		} else if (ip.length() > 15) {
+			String[] ips = ip.split(",");
+			for (int index = 0; index < ips.length; index++) {
+				String strIp = ips[index];
+				if (!isEmptyIp(ip)) {
+					ip = strIp;
+					break;
+				}
+			}
+		}
+		return ip;
+	}
 }

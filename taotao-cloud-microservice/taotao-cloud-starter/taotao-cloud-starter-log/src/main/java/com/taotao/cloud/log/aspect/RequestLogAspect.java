@@ -116,7 +116,7 @@ public class RequestLogAspect {
 			HttpServletRequest request = attributes.getRequest();
 			requestLog.setApplicationName(applicationName);
 			requestLog.setRequestStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
-			requestLog.setTraceId(MDC.get(CommonConstant.TRACE_ID));
+			requestLog.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
 			requestLog.setRequestIp(AddrUtil.getRemoteAddr(request));
 			requestLog.setClientId(SecurityUtil.getClientId());
 			requestLog.setUserId(SecurityUtil.getUserId());

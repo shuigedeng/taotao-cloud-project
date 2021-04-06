@@ -35,9 +35,9 @@ public class TenantFilter extends OncePerRequestFilter {
 		FilterChain filterChain) throws IOException, ServletException {
 		try {
 			//优先获取请求参数中的tenantId值
-			String tenantId = request.getParameter(CommonConstant.TENANT_ID);
+			String tenantId = request.getParameter(CommonConstant.TAOTAO_CLOUD_TENANT_ID);
 			if (StrUtil.isEmpty(tenantId)) {
-				tenantId = request.getHeader(CommonConstant.TENANT_HEADER);
+				tenantId = request.getHeader(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER);
 			}
 
 			//保存租户id
@@ -46,7 +46,7 @@ public class TenantFilter extends OncePerRequestFilter {
 				TenantContextHolder.setTenant(tenantId);
 			} else {
 				if (StringUtil.isBlank(TenantContextHolder.getTenant())) {
-					TenantContextHolder.setTenant(CommonConstant.TENANT_ID_DEFAULT);
+					TenantContextHolder.setTenant(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
 				}
 			}
 

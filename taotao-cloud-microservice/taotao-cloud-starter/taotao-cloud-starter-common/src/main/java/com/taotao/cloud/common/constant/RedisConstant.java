@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.log.initializer;
-
-import org.slf4j.TtlMDCAdapter;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
+package com.taotao.cloud.common.constant;
 
 /**
- * 初始化TtlMDCAdapter实例，并替换MDC中的adapter对象
+ * RedisConstant
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/2 11:19
+ * @since 2021/04/06 14:11
  */
-public class TtlMDCAdapterInitializer implements
-	ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class RedisConstant {
 
-	@Override
-	public void initialize(ConfigurableApplicationContext applicationContext) {
-		TtlMDCAdapter.getInstance();
-	}
+	/********图形验证码***********/
+	public static final String TAOTAO_CLOUD_CAPTCHA_KEY = "taotao_cloud_captcha_key:";
+
+	/********短信验证码***********/
+	public static final String TAOTAO_CLOUD_SMS_KEY = "taotao_cloud_sms_key:";
+
+	/********分布式锁key***********/
+	public static final String LOCK_KEY_PREFIX = "LOCK_KEY:";
 }

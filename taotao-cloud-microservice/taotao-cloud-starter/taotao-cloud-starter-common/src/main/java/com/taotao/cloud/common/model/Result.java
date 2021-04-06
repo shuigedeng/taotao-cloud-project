@@ -74,8 +74,8 @@ public class Result<T> implements Serializable {
 			.data(data)
 			.message(msg)
 			.timestamp(LocalDateTime.now())
-			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TRACE_ID)) ? MDC
-				.get(CommonConstant.TRACE_ID) : IdGeneratorUtil.getIdStr())
+			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC
+				.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr())
 			.build();
 	}
 

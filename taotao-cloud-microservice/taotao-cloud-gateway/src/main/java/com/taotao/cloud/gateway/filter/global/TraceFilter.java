@@ -19,7 +19,6 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.TraceUtil;
 import com.taotao.cloud.gateway.properties.TraceProperties;
-import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -50,7 +49,7 @@ public class TraceFilter implements GlobalFilter, Ordered {
 			String traceId = IdGeneratorUtil.getIdStr();
 			TraceUtil.mdcTraceId(traceId);
 			ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-				.headers(h -> h.add(CommonConstant.TRACE_HEADER, traceId))
+				.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
 				.build();
 
 			ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();

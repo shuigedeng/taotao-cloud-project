@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.listener;
 
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.log.event.RequestLogEvent;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;

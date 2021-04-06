@@ -17,6 +17,7 @@ package com.taotao.cloud.oauth2.api.server.service.impl;
 
 import com.taotao.cloud.auth.api.dto.ClientDTO;
 import com.taotao.cloud.auth.api.query.ClientPageQuery;
+import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.oauth2.api.server.entity.Client;
 import com.taotao.cloud.oauth2.api.server.repository.ClientRepository;
 import com.taotao.cloud.oauth2.api.server.service.IClientService;
@@ -44,7 +45,7 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements IClientService {
 
-    private final static String LOCK_KEY_CLIENT_ID = CommonConstant.LOCK_KEY_PREFIX + "clientId:";
+    private final static String LOCK_KEY_CLIENT_ID = RedisConstant.LOCK_KEY_PREFIX + "clientId:";
 
     @Autowired
     private RedisRepository redisRepository;

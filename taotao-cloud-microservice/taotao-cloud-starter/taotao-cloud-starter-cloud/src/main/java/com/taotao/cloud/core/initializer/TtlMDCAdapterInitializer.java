@@ -13,15 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.filter;
+package com.taotao.cloud.core.initializer;
+
+import org.slf4j.TtlMDCAdapter;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * A
+ * 初始化TtlMDCAdapter实例，并替换MDC中的adapter对象
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2021/04/02 10:59
+ * @since 2020/5/2 11:19
  */
-public class A {
+public class TtlMDCAdapterInitializer implements
+	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
+	@Override
+	public void initialize(ConfigurableApplicationContext applicationContext) {
+		TtlMDCAdapter.getInstance();
+	}
 }

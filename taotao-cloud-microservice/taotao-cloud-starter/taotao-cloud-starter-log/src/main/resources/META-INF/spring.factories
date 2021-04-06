@@ -1,4 +1,2 @@
-org.springframework.context.ApplicationContextInitializer=\
-com.taotao.cloud.log.initializer.TtlMDCAdapterInitializer
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.taotao.cloud.log.PropertiesAutoConfiguration

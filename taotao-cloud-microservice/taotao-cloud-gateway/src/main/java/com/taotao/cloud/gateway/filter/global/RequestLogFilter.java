@@ -32,7 +32,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		String requestUrl = exchange.getRequest().getURI().getRawPath();
-		String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TRACE_HEADER);
+		String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 		if (StringUtils.isBlank(traceId)) {
 			traceId = TraceUtil.getTraceId();
 		}
@@ -65,7 +65,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 				executeTime = (System.currentTimeMillis() - startTime);
 			}
 			String id = exchange.getRequest().getHeaders()
-				.getFirst(CommonConstant.TRACE_HEADER);
+				.getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 
 			StringBuilder responseLog = new StringBuilder();
 			List<Object> responseArgs = new ArrayList<>();

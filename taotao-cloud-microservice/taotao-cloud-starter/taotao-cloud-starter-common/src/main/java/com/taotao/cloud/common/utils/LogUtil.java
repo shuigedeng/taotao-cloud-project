@@ -16,7 +16,6 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import java.io.BufferedReader;
 import lombok.experimental.UtilityClass;
 import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
@@ -216,29 +215,29 @@ public class LogUtil {
 	 */
 	public int getOperateType(String methodName) {
 		if (methodName.startsWith("get")) {
-			return CommonConstant.OPERATE_TYPE_1;
+			return CommonConstant.OPERATE_TYPE_GET;
 		}
 		if (methodName.startsWith("query")) {
-			return CommonConstant.OPERATE_TYPE_1;
+			return CommonConstant.OPERATE_TYPE_GET;
 		}
 		if (methodName.startsWith("find")) {
-			return CommonConstant.OPERATE_TYPE_1;
+			return CommonConstant.OPERATE_TYPE_GET;
 		}
 		if (methodName.startsWith("select")) {
-			return CommonConstant.OPERATE_TYPE_1;
+			return CommonConstant.OPERATE_TYPE_GET;
 		}
 		if (methodName.startsWith("add")) {
-			return CommonConstant.OPERATE_TYPE_2;
+			return CommonConstant.OPERATE_TYPE_SAVE;
 		}
 		if (methodName.startsWith("save")) {
-			return CommonConstant.OPERATE_TYPE_2;
+			return CommonConstant.OPERATE_TYPE_SAVE;
 		}
 		if (methodName.startsWith("update")) {
-			return CommonConstant.OPERATE_TYPE_3;
+			return CommonConstant.OPERATE_TYPE_UPDATE;
 		}
 		if (methodName.startsWith("delete")) {
-			return CommonConstant.OPERATE_TYPE_4;
+			return CommonConstant.OPERATE_TYPE_DELETE;
 		}
-		return CommonConstant.OPERATE_TYPE_1;
+		return CommonConstant.OPERATE_TYPE_GET;
 	}
 }

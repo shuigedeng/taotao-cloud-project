@@ -44,10 +44,10 @@ public class FeignHttpInterceptorConfig {
 
 	@PostConstruct
 	public void initialize() {
-		requestHeaders.add(CommonConstant.USER_ID_HEADER);
-		requestHeaders.add(CommonConstant.USER_NAME_HEADER);
-		requestHeaders.add(CommonConstant.ROLE_HEADER);
-		requestHeaders.add(CommonConstant.T_VERSION);
+		requestHeaders.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER);
+		requestHeaders.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER);
+		requestHeaders.add(CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER);
+		requestHeaders.add(CommonConstant.TAOTAO_CLOUD_VERSION);
 	}
 
 	/**
@@ -80,20 +80,20 @@ public class FeignHttpInterceptorConfig {
 				//传递access_token，无网络隔离时需要传递
 				String tenant = TenantContextHolder.getTenant();
 				if (StrUtil.isNotEmpty(tenant)) {
-					template.header(CommonConstant.TENANT_HEADER, tenant);
+					template.header(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, tenant);
 				}
 
 				//传递日志traceId
-				String traceId = MDC.get(CommonConstant.TRACE_ID);
+				String traceId = MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
 				if (StrUtil.isNotEmpty(traceId)) {
-					template.header(CommonConstant.TRACE_HEADER, traceId);
+					template.header(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId);
 				}
 				String token = extractHeaderToken(request);
 				if (StrUtil.isEmpty(token)) {
-					token = request.getParameter(CommonConstant.ACCESS_TOKEN);
+					token = request.getParameter(CommonConstant.TAOTAO_CLOUD_ACCESS_TOKEN);
 				}
 				if (StrUtil.isNotEmpty(token)) {
-					template.header(CommonConstant.TOKEN_HEADER,
+					template.header(CommonConstant.TAOTAO_CLOUD_TOKEN_HEADER,
 						CommonConstant.BEARER_TYPE + " " + token);
 				}
 			}
@@ -106,7 +106,7 @@ public class FeignHttpInterceptorConfig {
 	 * @param request request
 	 */
 	private String extractHeaderToken(HttpServletRequest request) {
-		Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
+		Enumeration<String> headers = request.getHeaders(CommonConstant.TAOTAO_CLOUD_TOKEN_HEADER);
 		while (headers.hasMoreElements()) {
 			String value = headers.nextElement();
 			if (value.startsWith(CommonConstant.BEARER_TYPE)) {

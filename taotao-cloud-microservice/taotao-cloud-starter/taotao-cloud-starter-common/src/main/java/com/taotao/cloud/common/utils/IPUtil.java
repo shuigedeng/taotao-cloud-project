@@ -1,6 +1,7 @@
 package com.taotao.cloud.common.utils;
 
-import cn.hutool.http.HttpUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -11,13 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IPUtil {
 
-	private final static boolean ipLocal = false;
+	private final static boolean IP_LOCAL = false;
 
 	/**
 	 * 根据ip获取详细地址
 	 */
 	public static String getCityInfo(String ip) {
-		if (ipLocal) {
+		if (IP_LOCAL) {
 			//待开发
 			return null;
 		} else {
@@ -26,13 +27,16 @@ public class IPUtil {
 	}
 
 	/**
-	 * 根据ip获取详细地址
-	 * 临时使用，待调整
+	 * 根据ip获取详细地址 临时使用，待调整
 	 */
 	public static String getHttpCityInfo(String ip) {
 		String api = String.format("http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true", ip);
-//		JSONObject object = JSON.parseObject((String) HttpUtil.getRequest(api, "gbk"));
-//		return object.getString("addr");
+		JsonNode node = JsonUtil.parse((String) HttpUtil.getRequest(api, "gbk"));
+		if (Objects.nonNull(node)) {
+			LogUtil.info(node.toString());
+			return node.get("addr").toString();
+		}
+
 		return null;
 	}
 

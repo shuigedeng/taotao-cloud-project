@@ -1,5 +1,6 @@
 package com.taotao.cloud.web.controller;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.DateUtil;
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class BaseController {
 		binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) {
-				setValue(DateUtil.parseLocalDateTime(text, DateUtil.DATETIME_FORMATTER));
+				setValue(DateUtil.parseLocalDateTime(text, CommonConstant.DATETIME_FORMAT));
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
 import com.sun.deploy.util.BlackList;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.gateway.service.SafeRuleService;
@@ -91,11 +92,11 @@ public class SafeRuleServiceImpl implements SafeRuleService {
 				if (RuleConstant.ALL.equalsIgnoreCase(blackList.getRequestMethod())
 						|| StringUtils.equalsIgnoreCase(requestMethod, blackList.getRequestMethod())) {
 					if (StringUtil.isNotBlank(blackList.getStartTime()) && StringUtil.isNotBlank(blackList.getEndTime())) {
-						if (DateUtil.between(
-							DateUtil.parseLocalTime(blackList.getStartTime(), DateUtil.DATETIME_FORMATTER),
-								DateUtil.parseLocalTime(blackList.getEndTime(), DateUtil.DATETIME_FORMATTER))) {
-							forbid.set(Boolean.TRUE);
-						}
+//						if (DateUtil.between(
+//							DateUtil.parseLocalTime(blackList.getStartTime(), CommonConstant.DATETIME_FORMAT),
+//								DateUtil.parseLocalTime(blackList.getEndTime(), CommonConstant.DATETIME_FORMAT))) {
+//							forbid.set(Boolean.TRUE);
+//						}
 					} else {
 						forbid.set(Boolean.TRUE);
 					}

@@ -180,7 +180,7 @@ public class TokenGranterComponent implements TokenGranter {
             jsonGenerator.writeObjectField("message", ResultEnum.SUCCESS.getMessage());
             jsonGenerator.writeObjectField("timestamp", CommonConstant.DATETIME_FORMATTER.format(LocalDateTime.now()));
 			jsonGenerator.writeObjectField("type", CommonConstant.ERROR);
-			jsonGenerator.writeObjectField("requestId", StrUtil.isNotBlank(MDC.get(CommonConstant.TRACE_ID)) ? MDC.get(CommonConstant.TRACE_ID) : IdGeneratorUtil.getIdStr());
+			jsonGenerator.writeObjectField("requestId", StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr());
             jsonGenerator.writeObjectField("data", oAuth2AccessToken.tokenSerialize());
             jsonGenerator.writeEndObject();
         }
