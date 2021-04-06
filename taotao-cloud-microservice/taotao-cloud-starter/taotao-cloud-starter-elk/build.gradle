@@ -1,11 +1,9 @@
-
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api "net.logstash.logback:logstash-logback-encoder"
     api 'org.aspectj:aspectjweaver'
-    api group: 'ch.qos.logback', name: 'logback-classic', version: '1.3.0-alpha5'
+    api 'ch.qos.logback:logback-classic:1.3.0-alpha5'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

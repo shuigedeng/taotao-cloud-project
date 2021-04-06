@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.banner;
+package com.taotao.cloud.core.initializer;
 
 import com.nepxion.banner.BannerConstant;
 import com.nepxion.banner.Description;

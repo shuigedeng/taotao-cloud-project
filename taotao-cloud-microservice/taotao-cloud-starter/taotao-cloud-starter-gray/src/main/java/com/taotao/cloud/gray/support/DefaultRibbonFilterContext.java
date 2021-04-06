@@ -1,8 +1,7 @@
 package com.taotao.cloud.gray.support;
 
+import com.taotao.cloud.gray.api.RibbonFilterContext;
 import org.apache.commons.lang3.StringUtils;
-import vip.mate.core.common.constant.MateConstant;
-import vip.mate.core.gray.api.RibbonFilterContext;
 
 import java.util.Collections;
 import java.util.HashMap;

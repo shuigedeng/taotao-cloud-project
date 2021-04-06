@@ -1,3 +1,0 @@
-org.springframework.context.ApplicationContextInitializer=\
-com.taotao.cloud.common.initializer.CoreApplicationContextInitializer, \
-com.taotao.cloud.common.banner.BannerInitializer

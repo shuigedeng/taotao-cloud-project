@@ -1,6 +1,7 @@
 package com.taotao.cloud.gray.support;
 
-import vip.mate.core.gray.api.RibbonFilterContext;
+
+import com.taotao.cloud.gray.api.RibbonFilterContext;
 
 /**
  * 灰度负载过滤上下文持有类

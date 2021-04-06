@@ -1,13 +1,10 @@
-
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
+    api 'com.google.guava:guava'
+    api 'org.apache.commons:commons-lang3'
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-    compile 'com.google.guava:guava'
-    compile 'org.apache.commons:commons-lang3'
-    compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
-
-    implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

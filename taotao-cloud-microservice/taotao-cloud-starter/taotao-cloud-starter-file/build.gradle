@@ -1,7 +1,5 @@
-
-
 dependencies {
-
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api 'com.upyun:java-sdk'
     api 'com.qiniu:qiniu-java-sdk'

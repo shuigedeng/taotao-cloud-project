@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.initializer;
+package com.taotao.cloud.core.initializer;
 
 import com.taotao.cloud.common.utils.ContextUtil;
 import org.springframework.context.ApplicationContextInitializer;

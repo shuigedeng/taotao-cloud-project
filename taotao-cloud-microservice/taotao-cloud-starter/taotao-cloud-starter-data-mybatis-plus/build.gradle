@@ -1,8 +1,4 @@
-
-
 dependencies {
-
-
     api "mysql:mysql-connector-java"
     api 'com.baomidou:mybatis-plus-extension'
 

@@ -1,5 +1,6 @@
 package com.taotao.cloud.gray.interceptor;
 
+import com.taotao.cloud.gray.support.RibbonFilterContextHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -7,8 +8,6 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import vip.mate.core.common.constant.MateConstant;
-import vip.mate.core.gray.support.RibbonFilterContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

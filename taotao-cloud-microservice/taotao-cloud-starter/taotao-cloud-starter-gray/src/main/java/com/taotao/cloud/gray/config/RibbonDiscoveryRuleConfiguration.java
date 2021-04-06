@@ -1,5 +1,7 @@
 package com.taotao.cloud.gray.config;
 
+import com.taotao.cloud.gray.rule.DiscoveryEnabledRule;
+import com.taotao.cloud.gray.rule.MetadataAwareRule;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -8,8 +10,6 @@ import org.springframework.cloud.netflix.ribbon.RibbonClientConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import vip.mate.core.gray.rule.DiscoveryEnabledRule;
-import vip.mate.core.gray.rule.MetadataAwareRule;
 
 /**
  * 灰度服务发现负载规则配置

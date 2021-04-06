@@ -1,9 +1,9 @@
 package com.taotao.cloud.gray.predicate;
 
 import com.alibaba.cloud.nacos.ribbon.NacosServer;
-import vip.mate.core.gray.api.RibbonFilterContext;
-import vip.mate.core.gray.support.RibbonFilterContextHolder;
 
+import com.taotao.cloud.gray.api.RibbonFilterContext;
+import com.taotao.cloud.gray.support.RibbonFilterContextHolder;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;

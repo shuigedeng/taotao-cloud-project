@@ -1,7 +1,4 @@
-
-
 dependencies {
-
 
     api "com.xuxueli:xxl-job-core"
 

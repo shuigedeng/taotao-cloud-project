@@ -13,25 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.j2cache.annotation;
+package com.taotao.cloud.core.nacos;
 
-import com.taotao.cloud.j2cache.configuration.J2cacheConfiguration;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Import;
+import com.alibaba.nacos.api.config.ConfigType;
+import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
+import com.taotao.cloud.common.utils.LogUtil;
+import java.util.Properties;
+import org.springframework.stereotype.Component;
 
 /**
- * 开启Dozer配置
+ * ConfigService
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @since 2021/04/06 11:20
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Import({J2cacheConfiguration.class})
-public @interface EnableTaoTaoJ2cache {
+@Component
+public class ConfigService {
+
+	@NacosConfigListener(dataId = "taotao-cloud", type = ConfigType.YAML)
+	public void onReceived(Properties value) {
+		LogUtil.info("onReceived(Properties) : {}", value);
+	}
+
 
 }

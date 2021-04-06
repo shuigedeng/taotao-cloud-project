@@ -4,8 +4,8 @@ import com.netflix.loadbalancer.AbstractServerPredicate;
 import com.netflix.loadbalancer.AvailabilityPredicate;
 import com.netflix.loadbalancer.CompositePredicate;
 import com.netflix.loadbalancer.PredicateBasedRule;
+import com.taotao.cloud.gray.predicate.DiscoveryEnabledPredicate;
 import org.springframework.util.Assert;
-import vip.mate.core.gray.predicate.DiscoveryEnabledPredicate;
 
 /**
  * 灰度发现启用规则抽象类

@@ -1,7 +1,8 @@
 package com.taotao.cloud.gray.rule;
 
-import vip.mate.core.gray.predicate.DiscoveryEnabledPredicate;
-import vip.mate.core.gray.predicate.MetadataAwarePredicate;
+
+import com.taotao.cloud.gray.predicate.DiscoveryEnabledPredicate;
+import com.taotao.cloud.gray.predicate.MetadataAwarePredicate;
 
 /**
  * 灰度元数据适配规则类
