@@ -1,0 +1,24 @@
+{
+  "appid": "21553821",
+  "appInfo": {},
+  "appkey": "",
+  "condition": {
+      "swan": {
+          "current": 0,
+          "list": [
+              {
+                  "name": "",
+                  "path": "",
+                  "query": "",
+                  "id": 0
+              }
+          ]
+      }
+  },
+  "setting": {
+      "urlCheck": true
+  },
+  "libVersion": "",
+  "projectname": "智慧树家长端",
+  "host": "baiduboxapp"
+}

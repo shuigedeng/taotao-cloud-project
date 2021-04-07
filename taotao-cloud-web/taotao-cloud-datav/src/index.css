@@ -1,0 +1,255 @@
+@charset "utf-8";
+
+/********** Global **********/
+/*
+ *常用背景色： #0b0f34 (6,64,102) (29,45,57) (7,33,58) (8,13,28) (15,43,36)
+ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+    min-height: 635px;
+    font-family: "microsoft yahei", arial, sans-serif;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    background-image: url("./assets/images/bg.png");
+}
+
+table {
+    height: 100%;
+    overflow-y: auto;
+    display: block;
+}
+
+tr {
+    padding: 8px;
+}
+
+td {
+    color: #c9ccd4;
+    padding: 8px;
+}
+
+.content_title {
+    width: 200px;
+    text-align: center;
+    color: #01c4f7;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.databg {
+    background: url("./assets/images/databg.png") 0 0 no-repeat;
+    background-size: 22px 30px;
+    height: 30px;
+    width: 22px;
+    color: #fff;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+@keyframes bganomation {
+    0% {
+        width: 50%;
+    }
+    50% {
+        width: 0%;
+    }
+    100% {
+        width: 50%;
+    }
+}
+
+@keyframes rotate1 {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes retate2 {
+    100% {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+.map_bg {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    width: 45.8vh;
+    height: 45.8vh;
+    min-width: 280px;
+    min-height: 280px;
+    transform: translate(-50%, -50%);
+    background: url("./assets/images/map.png") center no-repeat;
+    background-size: 45.8vh 45.8vh;
+    opacity: 0.5;
+}
+
+.circle_allow {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    width: 50vh;
+    height: 50vh;
+    min-width: 280px;
+    min-height: 280px;
+    transform: translate(-50%, -50%);
+    background: url("./assets/images/jt.png") center no-repeat;
+    background-size: 50vh 50vh;
+    animation: retate2 10s linear infinite;
+}
+
+.circle_bg {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    width: 52vh;
+    height: 52vh;
+    transform: translate(-50%, -50%);
+    background: url("./assets/images/lbx.png") center no-repeat;
+    background-size: 52vh 52vh;
+    animation: rotate1 10s linear infinite;
+    opacity: 0.4;
+}
+
+.left_bg {
+    width: 62%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    background: url("./assets/images/left_header.png") 0 10px no-repeat;
+}
+
+.right_bg {
+    width: 53%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("./assets/images/right_header.png") 0 10px no-repeat;
+}
+
+.header_main {
+    margin: 0 auto;
+    width: 100%;
+    height: 65px;
+    max-width: 1920px;
+    /* // background:url("./assets/images/header.png") center no-repeat; */
+    position: relative;
+}
+
+.header_main h3 {
+    margin: 0 auto;
+    padding-top: 14px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+}
+
+.wrapper {
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 555px;
+}
+
+.container-fluid {
+    height: 100%;
+    min-height: 100%;
+}
+
+.row {
+    margin-left: -7px;
+    margin-right: -8px;
+}
+
+.row > div {
+    padding-left: 7px;
+    padding-right: 8px;
+}
+
+.xpanel-wrapper {
+    padding-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.xpanel-wrapper-1 {
+    height: 100%;
+}
+
+.xpanel-wrapper-2 {
+    height: 50%;
+}
+
+.xpanel-wrapper-3 {
+    height: 33.33333%;
+}
+
+.xpanel-wrapper-4 {
+    height: 40%;
+}
+
+.xpanel-wrapper-5 {
+    height: 60%;
+}
+
+.xpanel-wrapper-6 {
+    height: 30%;
+}
+
+.xpanel {
+    padding: 15px;
+    height: 100%;
+    min-height: 170px;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+}
+
+/* tool */
+.fill-h {
+    height: 100%;
+    min-height: 100%;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}

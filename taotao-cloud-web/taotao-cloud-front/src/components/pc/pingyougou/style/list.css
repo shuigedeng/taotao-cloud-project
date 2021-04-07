@@ -1,0 +1,142 @@
+/*列表页面的css*/
+.sk {
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	height: 32px;
+	border-left: 1px solid  #b1191a;
+	padding: 5px 0 0 15px;
+}
+.sk_list li {
+	float: left;
+	line-height: 45px;
+	margin: 0 30px;
+}
+.sk_list li a {
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+
+}
+.sk_list li a:hover {
+	color: #c81523;
+}
+.sk_con li {
+	float: left;
+	line-height: 45px;
+	margin: 0 20px;
+}
+.sk_con li a {
+	font-size: 14px;
+	font-weight: 700;
+	font-family: 'icomoon';
+}
+/*列表页内容区域?*/
+.sk_bd {
+	margin-top: 25px;
+}
+.sk_bd ul {
+	width: 1212px;
+}
+.sk_goods {
+	position: relative;
+	float: left;
+	width: 288px;
+	height: 458px;
+	border: 1px solid transparent;
+	margin: 0  12px 15px 0;
+}
+.sk_goods:hover {
+	border: 1px solid #e12228;
+}
+.sk_goods_title {
+	font-size: 14px;
+	color: #666;
+	font-weight: normal;
+	padding: 10px;
+}
+.sk_goods_price {
+	padding: 0 10px;
+}
+.sk_goods_price em {
+	font-size: 22px;
+	color: #e60012;
+}
+.sk_goods_price del {
+	font-size: 14px;
+	font-weight: 700;
+	color: #a4a4a4;
+}
+.sk_goods_progress {
+	padding: 0 10px;
+}
+.bar {
+	display: inline-block;
+	width: 130px;
+	height: 10px;
+	border: 1px solid #b1191a;
+	vertical-align: middle;
+	margin: 0 5px;
+	border-radius: 5px;
+}
+.bar_in {
+	width: 87%;
+	height: 10px;
+	background-color: #f24349;
+}
+.sk_goods_progress em,
+.sk_goods_progress i {
+	color: #f24349;
+}
+.sk_goods_buy {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #b1191a;
+	color: #fff;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+}
+.page {
+	margin: 40px 0;
+	/*里面的文字内容  行内块 行内元素 都可以水平居中对齐*/
+	text-align: center;
+}
+.page_num a {
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	border: 1px solid #ccc;
+	background-color: #f7f7f7;
+}
+.page_num .pn_prev,
+.page_num .pn_next {
+	width: 83px;
+}
+.page_num .dotted ,
+.page_num .current {
+	border: 1px solid transparent;
+	background-color: transparent;
+}
+.page_skip input {
+	width: 46px;
+	height: 36px;
+	border: 1px solid #ccc;
+	text-align: center;
+	/*过渡写在本身上 谁做动画，给谁加*/
+	transition: all 0.3s;
+}
+/*表单获得焦点后 */
+.page_skip input:focus {
+	width: 88px;
+	border: 1px solid skyblue;
+}
+.page_skip button {
+	width: 54px;
+	height: 36px;
+	border: 1px solid #ccc;
+	background-color: #f7f7f7;
+}

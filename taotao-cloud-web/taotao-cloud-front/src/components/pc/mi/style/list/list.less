@@ -1,0 +1,64 @@
+.container {
+  width: 1226px;
+  margin: 0 auto;
+}
+
+.listTitle {
+  color: #757575 !important;
+  font-size: 12px;
+}
+
+.listTitle:hover {
+  color: #333 !important;
+}
+
+.list-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.list-item {
+  width: 230px;
+  height: 161px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+}
+
+.list-good-name {
+  font-size: 14px;
+}
+
+.list-good-name:hover {
+  color: #ff6700;
+  cursor: pointer;
+}
+
+.ant-collapse {
+  border: 0;
+}
+
+.ant-collapse > .ant-collapse-item {
+  border: 0;
+}
+
+.ant-collapse-header .arrow::before {
+  content: "\E60E" !important;
+  font-size: 18px;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  color: #ff6700;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header[aria-expanded="true"] .arrow {
+  transform: rotate(180deg);
+  color: #b0b0b0;
+}
+
+.ant-collapse-content > .ant-collapse-content-box {
+  padding-top: 0;
+}

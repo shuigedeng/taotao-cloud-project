@@ -1,0 +1,31 @@
+.app-banner {
+  background: red;
+  width: 100%;
+  height: 416px;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  margin-bottom: 55px;
+  transition: all 0.3s;
+
+  .app-banner-swiper {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 350px;
+    bottom: -35px;
+
+    .banner-item {
+      height: 100%;
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 0 20px;
+
+      .banner-item-img {
+        box-shadow: 1px 7px 7px #00000075;
+      }
+    }
+  }
+}

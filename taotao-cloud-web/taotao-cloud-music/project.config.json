@@ -1,0 +1,25 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "taotao-cloud-music-react",
+	"description": "taotao-cloud-music-react",
+	"appid": "wx217ad134fc8590fb",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"preloadBackgroundData": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false,
+		"coverView": true,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": true,
+		"useCompilerModule": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.0",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {}
+}

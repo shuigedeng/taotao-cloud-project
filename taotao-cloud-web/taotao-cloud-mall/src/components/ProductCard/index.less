@@ -1,0 +1,41 @@
+.product-card {
+  width: 100%;
+  overflow: hidden;
+
+  .img {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 30px;
+    white-space: nowrap;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price {
+    color: red;
+    display: inline-block;
+    line-height: 20px;
+    font-size: 25px;
+
+    &::before {
+      content: '￥';
+    }
+  }
+
+  .originalPrice {
+    flex: 0 0 auto;
+    color: #999;
+    line-height: 20px;
+    font-size: 20px;
+    padding-left: 20px;
+    display: inline-block;
+    text-decoration: line-through;
+
+    &::before {
+      content: '￥';
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/components/*": ["./src/components/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/package": ["./package.json"],
+      "@/project": ["./project.config.json"]
+    },
+    "target": "es2017",
+    "module": "commonjs",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strictNullChecks": false,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types", "global.d.ts"]
+  },
+  "exclude": ["node_modules", "dist"],
+  "compileOnSave": false
+}

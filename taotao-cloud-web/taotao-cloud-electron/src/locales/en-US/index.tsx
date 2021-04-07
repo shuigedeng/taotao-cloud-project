@@ -1,0 +1,31 @@
+const EN_US = {
+  'app.login.title': 'TaoTaoCloud Management system',
+  'app.login.desc': 'TaoTaoCloud Microservice development platform',
+  'app.login.loading': 'logging in ...',
+  'app.login.account.login': 'Account login',
+  'app.login.mobile.login': 'Mobile login',
+  'app.login.require.username': 'please enter account name or email address',
+  'app.login.require.password': 'please enter password',
+  'app.login.require.mobile': 'please enter mobile',
+  'app.login.require.smsCode': 'please enter sms verification code',
+  'app.login.get.smsCode': 'verification code',
+  'app.login.resend.smsCode': ' s second resend',
+  'app.login.require.imgCode': 'please enter verification code',
+  'app.login.imgCode.error': 'failed to load verification code',
+  'app.login.auto': 'auto login',
+  'app.login.forget.password': 'forget password',
+  'app.login.submit': 'submit',
+  'app.login.other.login': 'other login',
+  'app.login.register': 'register',
+  'app.login.help': 'help',
+  'app.login.privacy': 'privacy',
+  'app.login.terms': 'terms',
+  'app.login.copyright': 'Copyright &copy; 2020 taotao cloud technical team',
+  'App.datePicker.title': 'Date selection',
+  'InjectExample.alert': 'i am alert',
+  'InjectExample_.button': 'alert',
+  'InjectExample.description': 'i am description',
+  'dashboard.graphics.display': 'Graphics full screen display'
+}
+
+export default EN_US

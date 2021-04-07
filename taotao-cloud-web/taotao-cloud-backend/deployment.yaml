@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taotao-cloud-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: taotao-cloud-backend
+  template:
+    metadata:
+      labels:
+        app: taotao-cloud-backend
+    spec:
+      containers:
+        - image: taotao-cloud/taotao-cloud-backend:${CICD_EXECUTION_SEQUENCE}
+          name: taotao-cloud-backend
+            imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: TAOTAO_CLOUD_HOST_ADDRESS
+              value: http://taotaocloud.top
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taotao-cloud-backend-service
+spec:
+  type: NodePort
+  selector:
+    app: taotao-cloud-backend
+  ports:
+    - name: taotao-backend-ui-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30001

@@ -1,0 +1,125 @@
+{
+  "name": "vite-reactts-electron-starter",
+  "version": "0.5.0",
+  "license": "MIT",
+  "main": "main/index.js",
+  "author": {
+    "name": "Maximilian Stümpfl"
+  },
+  "description": "Starter using Vite 2+ React +Typescript + Electron for fast prototyping.",
+  "keywords": [
+    "vite",
+    "react",
+    "electron",
+    "typescript"
+  ],
+  "repository": {
+    "url": "https://github.com/lTimeless/vite-reactts-electron-starter"
+  },
+  "productName": "vite-reactts-electron-starter",
+  "scripts": {
+    "dev": "concurrently 'SET BROWSER=none & yarn dev:vite & yarn dev:electron' ",
+    "dev:vite": "vite",
+    "dev:electron": "npm run build:electron && electron .",
+    "build": "npm run build:vite && npm run build:electron",
+    "build:vite": "vite build",
+    "build:electron": "tsc -p electron",
+    "dist": "npm run build && electron-builder",
+    "pack": "npm run build && electron-builder --dir",
+    "clean": "rimraf dist main src/out",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.2.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.1.0",
+    "concurrently": "^5.3.0",
+    "electron": "^11.2.0",
+    "electron-builder": "^22.9.1",
+    "typescript": "^4.1.2",
+    "vite": "^2.0.0-beta.45",
+    "autoprefixer": "^10.2.3",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^2.0.2"
+  },
+  "build": {
+    "appId": "com.taotao.electron",
+    "productName": "taotao-cloud-electron",
+    "copyright": "Copyright © 2020 ${author}",
+    "compression": "store",
+    "extends": null,
+    "asar": false,
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "build/**/*",
+      "assets/**/*",
+      "electron/**/*"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "publish": null,
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/icons/icon.ico",
+      "uninstallerIcon": "assets/icons/icon.ico",
+      "installerHeaderIcon": "assets/icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "electron-builder-start",
+      "include": "electron/script/installer.nsh"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg"
+        },
+        {
+          "target": "zip"
+        }
+      ],
+      "icon": "assets/icons/icon.icns"
+    },
+    "win": {
+      "icon": "assets/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "assets/icons"
+    }
+  }
+
+}

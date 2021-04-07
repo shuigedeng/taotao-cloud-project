@@ -1,0 +1,81 @@
+[
+  {
+    "id": "1",
+    "boderColor": "#ffac13",
+    "imgSrc": "http://i1.mifile.cn/a4/xmad_1496643954435_EcHtv.png",
+    "title": "小米Max 2",
+    "desc": "大屏大电量，轻薄全金属",
+    "price": "1399元起"
+  },
+  {
+    "id": "2",
+    "boderColor": "#83c44e",
+    "imgSrc": "http://i1.mifile.cn/a4/xmad_1501854682644_cSqHx.png",
+    "title": "小米5X",
+    "desc": "光学变焦双摄，拍人更美",
+    "price": "1499元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#2196f3",
+    "imgSrc": "http://i1.mifile.cn/a4/xmad_15125569508853_uWAIK.png",
+    "title": "红米5A",
+    "desc": "8天超长待机，137g轻巧机身",
+    "price": "599元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#e53935",
+    "imgSrc": "http://i1.mifile.cn/a4/848def18-47d9-4ca0-8822-c2ac61b83779",
+    "title": "米家扫地机器人",
+    "desc": "爱干净，高效完成清扫任务",
+    "price": "1699元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#00c0a5",
+    "imgSrc": "http://i1.mifile.cn/a4/de35852a-1be5-4ef5-846f-dcdd2efcfea6",
+    "title": "小米路由器3",
+    "desc": "更快更强，不止四天线",
+    "price": "149元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#ffac13",
+    "imgSrc": "http://i1.mifile.cn/a1/pms_1503909150.67293503!220x220.png",
+    "title": "小米电视4A 43英寸 标准版",
+    "desc": "全高清HDR 四核高性能处理器 ",
+    "price": "1999元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#83c44e",
+    "imgSrc": "http://i1.mifile.cn/a4/725a37e3-78b7-4298-8098-c40097bf179d",
+    "title": "小米笔记本",
+    "desc": "更轻更薄，像杂志一样随身携带",
+    "price": "3599元起"
+  },
+  {
+    "id": "1",
+    "boderColor": "#2196f3",
+    "imgSrc": "http://i1.mifile.cn/a4/6ef55907-bbed-49be-a2bb-be0821b5f7b8",
+    "title": "小米手环 2",
+    "desc": "OLED 显示屏幕，升级计步算法",
+    "price": "149元"
+  },
+  {
+    "boderColor": "#e53935",
+    "imgSrc": "http://i1.mifile.cn/a4/302f2608-655a-489c-a0c5-a3b9172defd1",
+    "title": "小米圈铁耳机Pro",
+    "desc": "独创双动圈+动铁，三单元发声",
+    "price": "149元"
+  },
+  {
+    "id": "1",
+    "boderColor": "#00c0a5",
+    "imgSrc": "http://i1.mifile.cn/a4/T1KvdjBX_v1RXrhCrK.jpg",
+    "title": "小米净水器 厨下式",
+    "desc": "直出纯净水，隐藏式安装",
+    "price": "1999元"
+  }
+]
