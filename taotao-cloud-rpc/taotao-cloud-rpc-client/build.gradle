@@ -1,5 +1,3 @@
-
-
 dependencies {
     compile project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
     compile project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")

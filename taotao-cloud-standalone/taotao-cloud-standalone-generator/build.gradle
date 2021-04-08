@@ -1,5 +1,3 @@
-
-
 dependencies {
     compile project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
 

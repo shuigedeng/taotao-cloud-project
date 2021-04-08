@@ -16,7 +16,11 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.core.endpoint.CustomEndPoint;
+import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
+import com.taotao.cloud.core.endpoint.MBeanDemo;
+import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
 import com.taotao.cloud.core.indicator.CustomHealthIndicator;
+import javax.management.MalformedObjectNameException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,5 +42,20 @@ public class EndPointConfiguration {
 	@Bean
 	public CustomEndPoint myEndPoint() {
 		return new CustomEndPoint();
+	}
+
+	@Bean
+	public TaoTaoCloudEndPoint taoTaoCloudEndPoint(){
+		return new TaoTaoCloudEndPoint();
+	}
+
+	@Bean
+	public MBeanDemo mBeanDemo(){
+		return new MBeanDemo();
+	}
+
+	@Bean
+	public CustomMbeanRegistrar customMbeanRegistrar() throws MalformedObjectNameException {
+		return new CustomMbeanRegistrar();
 	}
 }

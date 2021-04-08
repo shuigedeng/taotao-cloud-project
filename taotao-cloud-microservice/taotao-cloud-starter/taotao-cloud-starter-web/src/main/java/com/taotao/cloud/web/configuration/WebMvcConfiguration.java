@@ -24,6 +24,7 @@ import com.taotao.cloud.web.exception.DefaultExceptionAdvice;
 import com.taotao.cloud.web.filter.LbIsolationFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
+import com.taotao.cloud.web.interceptor.MyInterceptor;
 import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
@@ -40,6 +41,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -50,30 +54,44 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2020/9/29 14:30
  */
 @AllArgsConstructor
-@Import({
-	DefaultExceptionAdvice.class,
-	LbIsolationFilter.class,
-	TenantFilter.class,
-	TraceFilter.class
-})
-@EnableConfigurationProperties({FilterProperties.class})
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	private final RedisRepository redisRepository;
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		//注入用户信息
 		argumentResolvers.add(new LoginUserArgumentResolver());
 	}
 
-	@Bean
-	@ConditionalOnMissingBean(RequestMappingScanListener.class)
-	public RequestMappingScanListener resourceAnnotationScan() {
-		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
-		LogUtil.info("资源扫描类.[{}]", scan);
-		return scan;
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
 	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverterFactory(new IntegerToEnumConverterFactory());
+		registry.addConverterFactory(new StringToEnumConverterFactory());
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/images/**").
+			addResourceLocations("classpath:/imgs/",
+				"classpath:/mystatic/",
+				"classpath:/static/",
+				"classpath:/public/",
+				"classpath:/META-INF/resources",
+				"classpath:/resources");
+	}
+
+//	@Bean
+//	@ConditionalOnMissingBean(RequestMappingScanListener.class)
+//	public RequestMappingScanListener resourceAnnotationScan() {
+//		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
+//		LogUtil.info("资源扫描类.[{}]", scan);
+//		return scan;
+//	}
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
@@ -83,15 +101,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 			customizer.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(
 				DateTimeFormatter.ofPattern(CommonConstant.DATETIME_FORMAT)));
 		};
-	}
-
-	/**
-	 * 枚举类的转换器工厂 addConverterFactory
-	 */
-	@Override
-	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverterFactory(new IntegerToEnumConverterFactory());
-		registry.addConverterFactory(new StringToEnumConverterFactory());
 	}
 
 //	@Override

@@ -1,6 +1,7 @@
 package com.taotao.cloud.scala.p6.actor
 
-import scala.actors.Actor
+import akka.actor.Actor
+
 
 /*
 	scala的actor通信

@@ -1,6 +1,7 @@
 package com.taotao.cloud.scala.p6.actor
 
-import scala.actors.Actor
+import akka.actor.Actor
+
 
 /*
 	使用case class样例类来完成scala actor的通信
@@ -22,7 +23,7 @@ case class Greeting(name:String, greet:String)
 case class WorkContent(content:String)
 
 class MorningMeeting extends Actor {
-	override def act(): Unit = {
+	 def act(): Unit = {
 		while (true) {
 			receive {
 				case Greeting(name, greet) => {
@@ -34,4 +35,6 @@ class MorningMeeting extends Actor {
 			}
 		}
 	}
+
+  override def receive: Receive = ???
 }

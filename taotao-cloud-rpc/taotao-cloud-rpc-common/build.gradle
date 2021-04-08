@@ -1,5 +1,3 @@
-
-
 dependencies {
     implementation 'com.dyuproject.protostuff:protostuff-core:1.0.8'
     implementation 'com.dyuproject.protostuff:protostuff-runtime:1.0.8'

@@ -1,4 +1,4 @@
-Cloud Taotao
+TaoTao Cloud
 Copyright 2006 and onwards The Apache Software Foundation.
 
 This product includes software developed at
