@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>个人信息</h1>
+    <div>
+        <img src="https://wx.qq.com{{ data.User.HeadImgUrl }}">
+    </div>
+    <div>
+        {{ data.User.NickName }} - {{ data.User.UserName }}
+    </div>
+
+    <h1>联系人列表</h1>
+    <ul>
+    {% for row in data.ContactList%}
+        <li>{{ row.UserName }} - {{ row.NickName }}</li>
+    {% endfor %}
+    <li><a href="/contact_list/">获取更多联系人</a></li>
+    </ul>
+
+    <h1>公众号</h1>
+    {% for row in data.MPSubscribeMsgList%}
+        <div style="font-weight: bolder">{{ row.NickName }}</div>
+        {% for i in row.MPArticleList %}
+            <div>
+                <div><a href="{{ i.Url }}">{{ i.Title }}</a></div>
+                <div style="color: #dddddd">{{ i.Digest }}</div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+</body>
+</html>

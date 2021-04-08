@@ -1,0 +1,273 @@
+                                     
+Adapter #0
+
+Enclosure Device ID: 32
+Slot Number: 0
+Drive's postion: DiskGroup: 0, Span: 0, Arm: 0
+Enclosure position: 0
+Device Id: 0
+WWN: 5000C5007272C288
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 0
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SAS
+Raw Size: 279.396 GB [0x22ecb25c Sectors]
+Non Coerced Size: 278.896 GB [0x22dcb25c Sectors]
+Coerced Size: 278.875 GB [0x22dc0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: LS08
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x5000c5007272c289
+SAS Address(1): 0x0
+Connected Port Number: 0(path0) 
+Inquiry Data: SEAGATE ST300MM0006     LS08S0K2B5NV            
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Hard Disk Device
+Drive Temperature :29C (84.20 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Port-1 :
+Port status: Active
+Port's Linkspeed: Unknown 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+Enclosure Device ID: 32
+Slot Number: 1
+Drive's postion: DiskGroup: 0, Span: 0, Arm: 1
+Enclosure position: 0
+Device Id: 1
+WWN: 5000C5007272DE74
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 0
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SAS
+Raw Size: 279.396 GB [0x22ecb25c Sectors]
+Non Coerced Size: 278.896 GB [0x22dcb25c Sectors]
+Coerced Size: 278.875 GB [0x22dc0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: LS08
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x5000c5007272de75
+SAS Address(1): 0x0
+Connected Port Number: 0(path0) 
+Inquiry Data: SEAGATE ST300MM0006     LS08S0K2B5AH            
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Hard Disk Device
+Drive Temperature :29C (84.20 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Port-1 :
+Port status: Active
+Port's Linkspeed: Unknown 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+Enclosure Device ID: 32
+Slot Number: 2
+Drive's postion: DiskGroup: 1, Span: 0, Arm: 0
+Enclosure position: 0
+Device Id: 2
+WWN: 50025388A075B731
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 1158
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SATA
+Raw Size: 476.939 GB [0x3b9e12b0 Sectors]
+Non Coerced Size: 476.439 GB [0x3b8e12b0 Sectors]
+Coerced Size: 476.375 GB [0x3b8c0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: 1B6Q
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x500056b37789abee
+Connected Port Number: 0(path0) 
+Inquiry Data: S1SZNSAFA01085L     Samsung SSD 850 PRO 512GB               EXM01B6Q
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Solid State Device
+Drive:  Not Certified
+Drive Temperature :25C (77.00 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Drive's NCQ setting : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+Enclosure Device ID: 32
+Slot Number: 3
+Drive's postion: DiskGroup: 1, Span: 0, Arm: 1
+Enclosure position: 0
+Device Id: 3
+WWN: 50025385A02A074F
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 0
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SATA
+Raw Size: 476.939 GB [0x3b9e12b0 Sectors]
+Non Coerced Size: 476.439 GB [0x3b8e12b0 Sectors]
+Coerced Size: 476.375 GB [0x3b8c0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: 6B0Q
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x500056b37789abef
+Connected Port Number: 0(path0) 
+Inquiry Data: S1AXNSAF912433K     Samsung SSD 840 PRO Series              DXM06B0Q
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Solid State Device
+Drive:  Not Certified
+Drive Temperature :28C (82.40 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Drive's NCQ setting : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+Enclosure Device ID: 32
+Slot Number: 4
+Drive's postion: DiskGroup: 1, Span: 1, Arm: 0
+Enclosure position: 0
+Device Id: 4
+WWN: 50025385A01FD838
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 0
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SATA
+Raw Size: 476.939 GB [0x3b9e12b0 Sectors]
+Non Coerced Size: 476.439 GB [0x3b8e12b0 Sectors]
+Coerced Size: 476.375 GB [0x3b8c0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: 5B0Q
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x500056b37789abf0
+Connected Port Number: 0(path0) 
+Inquiry Data: S1AXNSAF303909M     Samsung SSD 840 PRO Series              DXM05B0Q
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Solid State Device
+Drive:  Not Certified
+Drive Temperature :27C (80.60 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Drive's NCQ setting : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+Enclosure Device ID: 32
+Slot Number: 5
+Drive's postion: DiskGroup: 1, Span: 1, Arm: 1
+Enclosure position: 0
+Device Id: 5
+WWN: 50025385A02AB5C9
+Sequence Number: 2
+Media Error Count: 0
+Other Error Count: 0
+Predictive Failure Count: 0
+Last Predictive Failure Event Seq Number: 0
+PD Type: SATA
+Raw Size: 476.939 GB [0x3b9e12b0 Sectors]
+Non Coerced Size: 476.439 GB [0x3b8e12b0 Sectors]
+Coerced Size: 476.375 GB [0x3b8c0000 Sectors]
+Firmware state: Online, Spun Up
+Device Firmware Level: 6B0Q
+Shield Counter: 0
+Successful diagnostics completion on :  N/A
+SAS Address(0): 0x500056b37789abf1
+Connected Port Number: 0(path0) 
+Inquiry Data: S1AXNSAFB00549A     Samsung SSD 840 PRO Series              DXM06B0Q
+FDE Enable: Disable
+Secured: Unsecured
+Locked: Unlocked
+Needs EKM Attention: No
+Foreign State: None 
+Device Speed: 6.0Gb/s 
+Link Speed: 6.0Gb/s 
+Media Type: Solid State Device
+Drive:  Not Certified
+Drive Temperature :28C (82.40 F)
+PI Eligibility:  No 
+Drive is formatted for PI information:  No
+PI: No PI
+Drive's write cache : Disabled
+Drive's NCQ setting : Disabled
+Port-0 :
+Port status: Active
+Port's Linkspeed: 6.0Gb/s 
+Drive has flagged a S.M.A.R.T alert : No
+
+
+
+
+Exit Code: 0x00

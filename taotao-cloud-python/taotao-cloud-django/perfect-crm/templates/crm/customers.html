@@ -1,0 +1,142 @@
+{% extends 'index.html' %}
+{% load custom_tags %}
+
+{#{% block "left-side-menu"  %}#}
+{#<ul id="mainnav-menu" class="list-group">#}
+{#    <!--Category name-->#}
+{#    <li class="list-header"></li>#}
+{#    <!--Menu list item-->#}
+{#    <li >#}
+{#        <a href="{% url 'crm_dashboard' %}">#}
+{#            <i class="fa fa-database"></i>#}
+{#            <span class="menu-title">客户信息库</span>#}
+{#        </a>#}
+{#    </li>#}
+{##}
+{#    <!--Menu list item-->#}
+{#    <li>#}
+{#        <a href="{% url 'my_customers' %}">#}
+{#            <i class="fa fa-connectdevelop"></i>#}
+{#            <span class="menu-title">#}
+{#                <strong>我的客户</strong>#}
+{#            </span>#}
+{#        </a>#}
+{#    </li>#}
+{#    <!--Menu list item-->#}
+{#    <li>#}
+{#        <a href="{% url 'sales_report' %}">#}
+{#            <i class="fa fa-jpy"></i>#}
+{#            <span class="menu-title">#}
+{#                <strong>销售报表</strong>#}
+{#            </span>#}
+{#        </a>#}
+{#    </li>#}
+{##}
+{#</ul>#}
+{#{% endblock %}#}
+
+{% block "page-title" %}
+  <h1 class="page-header text-overflow">客户信息库</h1>
+
+{% endblock %}
+
+{% block "page-content" %}
+    <div class="row">
+        <div class="col-md-12 ">
+            <!--Basic Panel-->
+            <!--===================================================-->
+            <div class="panel">
+                <div class="panel-body">
+                    <form class="form-control">
+
+                        <div class="row">
+                            {% for filter_column in customer_table.list_filter %}
+                                <div class="col-md-3" style="margin-bottom: 15px">
+                                    {{ filter_column.verbose_name }}
+                                    <select name="{{ filter_column.column_name }}" class="form-control" >
+                                        {% for choice in filter_column.choices %}
+                                            {% if filter_column.selected == choice.0|to_string  %}
+                                                <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                            {% else %}
+                                                <option value="{{ choice.0 }}" >{{ choice.1 }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endfor %}
+                            <div class="col-md-3">
+                                <input type="submit" class="btn btn-success" value="开始过滤">
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover toggle-circle default footable-loaded footable">
+                            <thead>
+                                <tr >
+                                    {% for column_name in customer_table.list_display %}
+                                    <th class="column-sorted">
+                                        <a href="?page={{ customer_table.model_objs.number }}&orderby={% if customer_table.orderby_col_index == forloop.counter0 %}{{ customer_table.orderby_field}}{% else %}{{ column_name }}{% endif %}" >
+                                            {{ column_name }}
+                                            {% display_orderby_arrow customer_table forloop.counter0 %}
+                                        </a>
+                                    </th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row_obj in customer_table.model_objs %}
+                                <tr>
+                                    {% build_table_row  row_obj customer_table %}
+{#                                    <td><a href="#fakelink" class="btn-link">Order #53451</a></td>#}
+
+                                </tr>
+                                {% endfor %}
+
+
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="12" class="footable-visible">
+                                        <div class="pagination">
+
+                                            <nav>
+                                                <p>共{{ paginator.count }}条数据</p>
+                                                <ul class="pagination">
+                                                    {% if customer_table.model_objs.has_previous %}
+                                                    <li class="disabled">
+                                                        <a href="{{ request.get_full_path }}?page={{ customer_table.model_objs.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                                                    </li>
+                                                    {% endif %}
+                                                    {% for p_num in paginator.page_range %}
+                                                        {% render_page_num request customer_table.model_objs p_num %}
+                                                    {% endfor %}
+                                                    {% if customer_list.has_next %}
+                                                    <li>
+                                                      <a href="{{ request.get_full_path }}?page={{ customer_table.model_objs.next_page_number }}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                      </a>
+                                                    </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </nav>
+
+                                        </div>    <!--end pagination-->
+
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div> <!--end panel-->
+            </div>
+            <!--===================================================-->
+            <!--End Basic Panel-->
+        </div>
+    </div>
+
+{% endblock %}

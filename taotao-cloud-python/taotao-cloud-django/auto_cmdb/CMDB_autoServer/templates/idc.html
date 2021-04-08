@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+	{% include 'nb-tpl.html' %}
+{% endblock %}
+
+{% block js %}
+	<script>
+	$.init_asset('/backend/idc.html/');
+	</script>
+{% endblock %}

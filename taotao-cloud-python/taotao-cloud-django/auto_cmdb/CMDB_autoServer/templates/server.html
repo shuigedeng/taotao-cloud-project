@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'nb-search.html' %}
+{% include 'nb-tpl.html' %}
+{% endblock %}
+
+{% block js %}
+	<script>
+	$.init_asset('/backend/server.html/');
+	</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AutoCMDB</title>
+	<link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+	<link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/css/font-awesome.css">
+	<style>
+		* {
+			padding: 0;
+		}
+
+		.top-nav a {
+			color: white;
+			line-height: 50px;
+			padding-left: 15px;
+		}
+
+		.top-nav .col-lg-7 span {
+			padding-right: 5px;
+		}
+
+		.left-nav li {
+			border-bottom: solid 1px grey;
+			background-color: #f5f5f5;
+		}
+
+		.left-nav span {
+			padding-left: 10px;
+		}
+
+		.no-radius {
+			border-radius: 0 !important;
+		}
+	</style>
+	{% block css %}{% endblock %}
+</head>
+
+<body>
+    <div class="row top-nav" style="border: solid 1px red; background-color: #2b669a; height: 50px">
+        <div class="col-lg-2 text-center" style="color: white;font-weight: 700">
+            <span style="font-size: 35px;line-height: 50px">AutoCMDB</span>
+        </div>
+        <div class="col-lg-2 text-left menu-line-height">
+            <a href="">平台首页</a>
+            <a href="">资产首页</a>
+        </div>
+        <div class="col-lg-7 text-right">
+            <a href=""><span>任务</span><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+            <a href=""><span>通知</span><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            <a href=""><span>消息</span><i class="fa fa-commenting-o" aria-hidden="true"></i></a>
+            <a href="">头像</a>
+        </div>
+    </div>
+    <div class="row left-nav" style="float: none; border: solid 1px black">
+        <div class="col-lg-2">
+            <ul class="nav nav-pills nav-stacked text-justify">
+                <li><a href="/backend/show_server.html/#"><i class="fa fa-cubes" aria-hidden="true"></i><span>资产管理</span></a></li>
+                <li><a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span>用户管理</span></a></li>
+                <li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i><span>业务管理</span></a></li>
+                <li><a href="/backend/show_idc.html"><i class="fa fa-server" aria-hidden="true"></i><span>IDC管理</span></a></li>
+                <li><a href="#"><i class="fa fa-tags" aria-hidden="true"></i><span>标签管理</span></a></li>
+                <li><a href="#"><i class="fa fa-file" aria-hidden="true"></i><span>日志管理</span></a></li>
+            </ul>
+        </div>
+        <div class="col-lg-9" style="border: solid 1px red; padding-left: 0;padding-right: 0">
+                <ol class="breadcrumb no-radius">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">资产列表</a></li>
+                    <li class="active">资产详细</li>
+                </ol>
+                {% block content %}{% endblock %}
+        </div>
+    </div>
+
+
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/nb-list.js"></script>
+    {% block js %}{% endblock %}
+</body>
+</html>
