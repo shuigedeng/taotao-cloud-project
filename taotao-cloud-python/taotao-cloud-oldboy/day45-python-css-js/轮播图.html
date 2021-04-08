@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+
+
+    <style>
+            .outer{
+                width: 790px;
+                height: 340px;
+                margin: 80px auto;
+                position: relative;
+            }
+
+            .img li{
+                 position: absolute;
+                 list-style: none;
+                 top: 0;
+                 left: 0;
+            }
+
+           .num{
+               position: absolute;
+               bottom: 18px;
+               left: 270px;
+               list-style: none;
+
+
+           }
+
+           .num li{
+               display: inline-block;
+               width: 18px;
+               height: 18px;
+               background-color: white;
+               border-radius: 50%;
+               text-align: center;
+               line-height: 18px;
+               margin-left: 4px;
+           }
+
+           .btn{
+               position: absolute;
+               top:50%;
+               width: 30px;
+               height: 60px;
+               background-color: lightgrey;
+               color: white;
+
+               text-align: center;
+               line-height: 60px;
+               font-size: 30px;
+               opacity: 0.7;
+               margin-top: -30px;
+
+               display: none;
+
+           }
+
+           .left{
+               left: 0;
+           }
+
+           .right{
+               right: 0;
+           }
+
+          .outer:hover .btn{
+              display: block;
+          }
+
+        .num .active{
+            background-color: red;
+        }
+    </style>
+
+</head>
+<body>
+
+
+      <div class="outer">
+          <ul class="img">
+              <li><a href=""><img src="img/1.jpg" alt=""></a></li>
+              <li><a href=""><img src="img/2.jpg" alt=""></a></li>
+              <li><a href=""><img src="img/3.jpg" alt=""></a></li>
+              <li><a href=""><img src="img/4.jpg" alt=""></a></li>
+              <li><a href=""><img src="img/5.jpg" alt=""></a></li>
+              <li><a href=""><img src="img/6.jpg" alt=""></a></li>
+          </ul>
+
+          <ul class="num">
+              <!--<li class="active"></li>-->
+              <!--<li></li>-->
+              <!--<li></li>-->
+              <!--<li></li>-->
+              <!--<li></li>-->
+              <!--<li></li>-->
+          </ul>
+
+          <div class="left  btn"> < </div>
+          <div class="right btn"> > </div>
+
+      </div>
+
+<script>
+    var i=0;
+//  通过jquery自动创建按钮标签
+
+    var img_num=$(".img li").length;
+
+    for(var j=0;j<img_num;j++){
+        $(".num").append("<li></li>")
+    }
+
+    $(".num li").eq(0).addClass("active");
+
+
+// 手动轮播
+    $(".num li").mouseover(function () {
+        i=$(this).index();
+        $(this).addClass("active").siblings().removeClass("active");
+
+        $(".img li").eq(i).stop().fadeIn(200).siblings().stop().fadeOut(200)
+
+    });
+
+
+// 自动轮播
+    var c=setInterval(GO_R,1500);
+
+
+    function GO_R() {
+
+        if(i==img_num-1){
+            i=-1
+        }
+         i++;
+         $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+         $(".img li").eq(i).stop().fadeIn(1000).siblings().stop().fadeOut(1000)
+
+    }
+
+
+    function GO_L() {
+        if(i==0){
+            i=img_num
+        }
+         i--;
+         $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+         $(".img li").eq(i).stop().fadeIn(1000).siblings().stop().fadeOut(1000)
+
+
+    }
+    $(".outer").hover(function () {
+        clearInterval(c)
+    },function () {
+        c=setInterval(GO_R,1500)
+    });
+    
+// button 加定播 
+    $(".right").click(GO_R);
+    $(".left").click(GO_L)
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'kingadmin/index.html' %}
+{% load kingadmin_tags %}
+
+{% block  right-content-container %}
+    <ol class="breadcrumb">
+      <li><a href="/kingadmin/">Home</a></li>
+      <li><a href="/kingadmin/{{ app_name }}">{{ app_name }}</a></li>
+        <li ><a href="/kingadmin/{{ app_name }}/{{ model_name }}/">{% get_model_verbose_name admin_class %}</a></li>
+      <li class="active">{{ form_obj.instance }}</li>
+    </ol>
+
+
+<h4 class="page-header">修改{{ form_obj.instance }}</h4>
+
+<div>
+change
+
+{% include 'kingadmin/table_obj_change_component.html' %}
+
+</div>
+
+{% endblock %}

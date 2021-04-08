@@ -1,0 +1,454 @@
+一、瀑布流作业
+    - 布局
+    - 文档，窗口，滚动
+    - 面向对象的封装： this,that
+    
+二、报障系统
+    需求分析
+        - 报障
+            用户：
+                提交报账单
+                自己报障记录
+            处理着：
+                查看所有人报障单
+                处理报账单
+                
+        - 知识库（博客）
+            主页：
+                展示最新文章
+                展示最热文章
+                展示评论最多文章
+                分类查看
+            个人博客：
+                个人博客主页
+                个人博客文章详细：赞，踩，评论
+                个人博客分类：标签、分类、时间
+                个人博客主题定制：后台修改
+            后台管理：
+                个人信息管理
+                个人标签
+                个人分类
+                个人文章
+            
+    数据库设计：
+        
+        用户表： uid,username,pwd,email,img,
+        博客表： bid,surfix,theme,title,summary, FK(用户表,unique)=OneToOne(用户表)
+        互粉表： id  明星ID（用户表）   粉丝ID（用户表）
+                          2                   1
+                          1                   2
+                          1                   3
+                          5                   3
+        
+        
+        报障单：UUID   title   detail   user（用户表）   processor（用户表 null）  status(待处理，处理中，已处理)  创建时间  处理事件
+        
+        
+        分类表：caption  Fk(博客bid)
+        
+        标签表：caption  Fk(博客bid)
+        
+        
+        文章：id,title,summary,ctime,FK(个人分类表),主站分类（choices）
+        
+        文章详细：detail  OneToOne(文章)
+        
+        文章标签关系：  文章ID   标签ID
+        
+        
+        赞踩文章关系： 文章ID    用户ID   赞或踩（True，False）  联合唯一索引：（文章ID    用户ID ）
+        
+        评论表：id,content,FK(文章),FK(user),ctime,parent_comment_id
+        
+        
+        
+三、程序目录结构
+
+    project
+        - APP(repository) - 数据仓库（操作数据Model）
+        - APP(backend)    - 后台管理
+        - APP(web)        - 首页，个人博客
+        - utils           - 工具包（公共模块）
+        
+
+        
+        
+工作安排：
+    1. 需求分析
+    2. 数据库设计思路
+    3. 实现数据库设计（Admin添加数据）
+    4. 主站：分类(主站)查看+分页
+        - 标题菜单：母版
+        - 登录成功： session['username'] = 'root'
+        - 主页html：
+                判断是否有用户：显示用户名
+                否则          ： 登录，注册
+                <div class="pg-header">
+                    {% if request.session.username %}
+                        <a>{{ request.session.username }}</a>
+                    {% else %}
+                        <a>登录</a><a>注册</a>
+                    {% endif %}
+                </div>
+                    
+        - 博文内容布局：
+                div   div  -> float   => 图片下方空白
+                <a></a>asdflkjasdfkj  => 文字环绕
+        - URL分类筛选：
+            url(r'^all/(?P<article_type_id>\d+).html$', home.index, name='index'),
+            url(r'^', home.index),
+        
+            index根据kwargs判断是否分类查询？
+            a. 生成分类菜单
+            b. 考虑是否选中
+            c. 根据条件model.xxx.objects.filter(**kwargs)
+            
+        - URL:
+            from django.urls import reverse
+            
+            url(r'^all/(?<article_type_id>\d+).html$', home.index, name='index'),
+                在HTML中：{% url "index" article_type_id=1 %}             => all/1.html
+                在views中：reverse('index',kwargs={"article_type_id":1})  =>all/1.html
+            
+            url(r'^all/(\d+).html$', home.index, name='index'),
+                在HTML中：{% url "index" 1 %}          =>all/1.html
+                在views中：reverse('index',args=(1,))  =>all/1.html
+        
+        - 利用reverse+分页组件完成：分类查看+分页 
+        
+    5. 登录，注册
+        - 密码：数字，字母，特殊字符
+        - 密码两次输入一致
+        
+        提交：
+            v = MyForm(request.GET) # 6个字段
+            if v.is_valid():
+                pass
+        
+        密码示例：RegexField自定义密码验证规则
+        
+            password = forms.RegexField(
+                '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$\%\^\&\*\(\)])[0-9a-zA-Z!@#$\%\^\&\*\(\)]{8,32}$',
+                min_length=12,
+                max_length=32,
+                error_messages={'required': '密码不能为空.',
+                                'invalid': '密码必须包含数字，字母、特殊字符',
+                                'min_length': "密码长度不能小于8个字符",
+                                'max_length': "密码长度不能大于32个字符"}
+            )
+              
+
+
+            class RegisterForm(BaseForm, django_forms.Form):
+                username = django_fields.CharField()
+                password = django_fields.CharField()
+                confirm_pwd = django_fields.CharField()
+
+                def clean(self):
+                    v1 = self.cleaned_data['password']
+                    v2 = self.cleaned_data['confirm_pwd']
+                    if v1 == v2:
+                        pass
+                    else:
+                        from django.core.exceptions import ValidationError
+                        raise ValidationError('密码输入不一致')
+        
+            
+            def register(request):
+                v = RegisterForm(request.POST)
+                if v.is_valid():
+                    pass
+                else:
+                    v.errors['username']
+                    v.errors['__all__']
+                    v.errors[NON_FIELD_ERRORS]
+                    {
+                        __all__: [],
+                        username: [],
+                        password: []
+                        confirm_pwd: []
+                    }
+                
+                return render(request, 'register.html', {'v':v})
+                
+                
+            register.html
+            
+                {{v.errors.username.0}}
+                
+                {{v.non_field_errors}}
+        
+        
+        补充： 验证码
+            
+            1.点击更换验证码
+            2.验证码到底是否有必要是图片？有
+            3.
+                服务端：
+                    a. session中保存随机验证码，如：87fs
+                    b. 在页面中显示图片
+                客户端：
+                    a. 显示图片
+                    b. 在cookie中保存sessionid
+                    
+                    
+                验证码图片
+                验证码字符串:87fs
+                sessionid='asdfasdfasdfasdfasdfasdf09'
+                {
+                    "asdfasdfasdfasdfasdfasdf09": {'ck': 87fs}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                    "ffsdfsdfsdfsdfsqq243234234": {'ck': 98fd}
+                }
+            
+            
+                ffsdfsdfsdfsdfsqq243234234 : 9999
+                
+                使用：
+                    check_code.py
+                    Monaco.ttf
+                    
+                    <img src="/shizhengwen.html" onclick="changeImg(this);">
+            
+                    <script>
+                        function changeImg(ths) {
+                            ths.src = ths.src + "?";
+                        }
+                    </script>
+            
+            
+            
+                    def xiaoyun(request):
+                        if request.method == "GET":
+                            return render(request,'xiaoyun.html')
+                        else:
+                            input_code = request.POST.get('code')
+                            check_cd = request.session['check_code']
+                            print(input_code,check_cd)
+                            return HttpResponse('...')
+
+                    def shizhengwen(request):
+                        """生成验证码图片"""
+                        # f = open('static/imgs/avatar/20130809170025.png','rb')
+                        # data = f.read()
+                        # f.close()
+                        f = BytesIO()
+                        img, code = create_validate_code()
+                        request.session['check_code'] = code
+                        img.save(f, 'PNG')
+                        # request.session['CheckCode'] = code
+                        return HttpResponse(f.getvalue())
+                                
+            
+        补充： 一个月免登陆
+            request.session.set_expiry(60 * 60 * 24 * 30)
+            SESSION_COOKIE_AGE = 1209600 
+            
+            
+            
+    6. 个人博客 
+
+            个人主页：http://127.0.0.1:8000/wupeiqi.html
+                /(\w+).html   ->    func(site) # wupeiqi
+                
+                # 个人信息
+                # 博客信息
+                    - 数据库字段+CSS文件名（warm，default）
+
+            文章最终：http://127.0.0.1:8000/wupeiqi/5.html
+                # 根据当前  wupeiqi + 5 
+                    obj = article.objects.filter(nid=5,blog=blog).first()
+                    冗余
+                    
+                # 富文本编辑框
+                    CKEditor
+                    UEEditor
+                    TinyEditor
+                    KindEditor
+                    
+                    # 下载插件
+                    # 基本使用KindEditor
+                    
+            个人筛选：
+                      http://127.0.0.1:8000/wupeiqi/tag/2.html
+                      http://127.0.0.1:8000/wupeiqi/category/3.html
+                      http://127.0.0.1:8000/wupeiqi/date/2017-02.html
+                # 公告
+                # 分类
+                # 标签
+                # 时间
+                
+                # 过滤
+                    url(r'^(?P<site>\w+)/(?P<condition>((tag)|(date)|(category)))/(?P<val>\w+-*\w*).html$', home.filter),
+                    
+                    # 当前博客id、
+                    # 数据库内置时间格式化函数
+                
+                
+            注意：个人主题定制
+            
+    7. 后台管理
+        用户： 
+            - 普通用户（知识库+提交报障单+个人信息）
+            - 管理员  （知识库+提交报障单+个人信息+处理报障单）
+            - 超级管理员  
+                - （知识库+提交报障单+个人信息+处理报障单+报障统计信息）
+                -  权限管理
+        菜单：
+            - 知识库管理
+                文章
+                    还债：KindEditor,XSS攻击
+                分类
+                标签
+                
+            - 报障管理
+                个人保障
+                处理报障单
+                报障统计信息
+                    画图
+                    
+            - 权限管理
+                菜单
+                权限
+                角色
+        
+        ========》后台管理页面《=======
+        依赖：
+            bootstrap
+            fontawsome
+        
+        作业： 
+            知识库管理：文章（Form验证）
+    
+    
+    8. 报障管理
+          后台管理：
+             普通用户：
+                报障列表，创建报障，修改，【查看解决方案】【评分】
+             工程师：
+                报障列表【自己 or 未】
+                列表：
+                    models.tb.objects.filter(Q(processor_id=1)|Q(status=1)).order_by('status')
+                查看报障单id=1：
+                    接单：v = models.tb.objects.filter(id=1,status=1).update(processor_id=22,status=2)
+                    处理：
+                          填写解决方案，提交status=3
+                    ===》 模板
+             老板：
+                查看所有信息
+                
+                页面：
+                    图
+                    列表
+                
+                    # 每个处理者，
+                    # 每个月处理了多少订单
+    
+                    
+                    id    创建时间              内容    处理者
+                     1    2017-02-01 11:11                1
+                     2    2017-03-01 11:11                11
+                     3    2017-04-01 11:11                2
+                     4    2017-05-01 11:11                1
+                     5    2017-02-02 11:11                1
+    
+                    1. 思路
+                        处理者列表 = select 处理着 from tb 
+                        for 处理者 in 处理者列表:
+                            v = select * from tb where  处理者=处理者   group by     创建时间(2017-02)
+                        
+                    2. 思路
+                        # 每个月份全部门处理的订单个数
+                        select * from tb group by 创建时间(%Y-%m)
+                        
+                        
+                        select 
+                            创建时间(%Y-%m),
+                            (select count(id) from tb as T2 where 处理者=1 and T2.ctime = T1.ctime ),
+                            (select count(id) from tb as T2 where 处理者=2 and T2.ctime = T1.ctime ),
+                        from tb as T1 group by 创建时间(%Y-%m)
+                        年月                  id=1      id=2
+                        2017-02                2         
+                        2017-03                0
+                        2017-04                0
+                        2017-05                1
+    
+    9. 权限管理
+    
+       - 动态菜单(关系存在数据库)
+       - 基于角色分配(RBAC)Role Based Access Control
+       
+       流程：
+            a. 用户登陆
+            b. 根据用户获取所有的权限（url+action）
+            c. 根据用户获取所有的权限（url+action）根据URL去重（）
+            d. 放在左侧菜单（）
+       作业:
+            1. 登陆，获取所有权限（url+action）
+                ORM
+                
+                
+                
+            2. 所有菜单（）
+                v = models.Menus.objects.values('id','caption','parent_id')
+                [
+                    {id:'1','caption': '菜单1','parent_id':None},
+                    {'caption': '菜单1.1','parent_id':1},
+                    {'caption': '菜单1.2'},
+                    {'caption': '菜单1.2.1'},
+                    {'caption': '菜单2'},
+                    {'caption': '菜单3'},
+                    {'caption': '菜单3.1'},
+                ]
+                ==>
+                [
+                    {'caption': '菜单1','child': [{'caption': '菜单1.1'},{'caption': '菜单1.2','child':[{'caption': '菜单1.2.1'},]}]}
+                    {'caption': '菜单2'}
+                    {'caption': '菜单3'}
+                ]
+                
+                # 递归
+                # python中：字典，列表（引用类型）
+
+        思考：
+            a. 用递归的形式讲所有菜单的等级管理列(完成)
+            b. 不显示无权限的菜单  (完成)
+            c. 仅展开当前访问的菜单，其他闭合
+
+
+        ====》一个类，一个装饰器，八张表
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+            
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        

@@ -1,0 +1,101 @@
+{% load kingadmin_tags %}
+
+<form class="form-horizontal"  method="post" onsubmit="VerificationBeforeFormSubmit()"> {% csrf_token %}
+ {{ form_obj.errors }}
+  {% for field in form_obj %}
+  <div class="form-group">
+    <label class="col-sm-2 control-label">{{ field.label }}</label>
+    <div class="col-sm-10">
+      {% if field.name in admin_class.filter_horizontal %}
+          <div class="col-lg-5">
+                <input type="search" class="form-control" oninput="FuzzSearch(this)">
+                <select id="id_{{ field.name }}_from" multiple class="form-control">
+                    {% get_available_m2m_data field.name form_obj admin_class as available_m2m_data %}
+                    {% for obj in available_m2m_data %}
+                        <option ondblclick="MoveSelectedOption(this,'id_{{ field.name }}_to')" value="{{ obj.id }}">{{ obj }}</option>
+                    {% endfor %}
+                </select>
+              <p><a onclick="MoveAllElements('id_{{ field.name }}_from','id_{{ field.name }}_to')">Choose All</a></p>
+
+          </div>
+          <div class="col-lg-5">
+                <select tag="selected_m2m" id="id_{{ field.name }}_to" multiple class="form-control" name="{{ field.name }}">
+                    {%  get_selected_m2m_data field.name form_obj admin_class as selected_m2m_data %}
+                    {% for obj in selected_m2m_data %}
+                        <option value="{{ obj.id }}" ondblclick="MoveSelectedOption(this,'id_{{ field.name }}_from')">{{ obj }}</option>
+                    {% endfor %}
+
+                </select>
+              <p><a onclick="MoveAllElements('id_{{ field.name }}_to','id_{{ field.name }}_from')">Remove All</a></p>
+
+          </div>
+      {% else %}
+        {{ field }}
+      {% endif %}
+        <span style="color: red">{{ field.errors.0 }} </span>
+    </div>
+  </div>
+  {% endfor %}
+  {% if not admin_class.form_add %}   <!--如果这是修改表单-->
+      {% for field in admin_class.readonly_fields %}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{ field }}</label>
+        <div class="col-sm-10">
+          <p>{% get_obj_field_val form_obj field %}</p>
+        </div>
+      </div>
+      {% endfor %}
+ {% endif %}
+  <div class="form-group">
+    {% if  form_obj.instance.id %}
+        <div class=" col-sm-2">
+          <a  class="btn btn-danger" href="{% url 'obj_delete' app_name model_name form_obj.instance.id  %}">Delete</a>
+        </div>
+    {% endif %}
+    <div class="col-sm-offset-11 col-sm-2">
+      <button type="submit" class="btn btn-info">Save</button>
+    </div>
+  </div>
+</form>
+
+
+<script>
+
+    function  MoveSelectedOption(ele,target_id) {
+
+        var new_target_id = $(ele).parent().attr('id');
+        var option = "<option value='" + $(ele).val() +"'ondblclick=MoveSelectedOption(this,'"+ new_target_id +"') >" + $(ele).text() +"</option>";
+        $("#"+ target_id).append(option);
+        $(ele).remove();
+
+    }
+
+    function MoveAllElements(from_id,to_id) {
+
+        console.log( $("#"+from_id).children())
+         $("#"+from_id).children().each(function () {
+             MoveSelectedOption(this,to_id);
+         })
+    }
+
+    function FuzzSearch(ele){
+
+        console.log($(ele).val())
+        var search_text = $(ele).val().toUpperCase();
+        $(ele).next().children().each(function () {
+            if ( $(this).text().toUpperCase().search(search_text) != -1){
+                $(this).show();
+            }else {
+                $(this).hide();
+            }
+        })
+
+    }
+
+    function VerificationBeforeFormSubmit() {
+
+
+        $("select[tag] option").prop('selected',true);
+
+    }
+</script>

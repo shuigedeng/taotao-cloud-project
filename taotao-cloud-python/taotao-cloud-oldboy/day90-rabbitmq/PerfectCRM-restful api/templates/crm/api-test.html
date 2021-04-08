@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post">{% csrf_token %}
+
+    <textarea  cols="80" rows="5" name="data"></textarea>
+
+    <input type="submit">
+</form>
+
+{{ serializer_obj }}
+
+
+
+</body>
+</html>

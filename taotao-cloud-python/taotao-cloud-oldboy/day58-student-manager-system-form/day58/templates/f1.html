@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form id="fm" action="/f1.html" method="POST">
+        <p>{{ obj.user }}{{ obj.errors.user.0 }}</p>
+        <p>{{ obj.pwd }}{{ obj.errors.pwd.0 }}</p>
+        <p>{{ obj.age }}{{ obj.errors.age.0 }}</p>
+        <p>{{ obj.email }}{{ obj.errors.email.0 }}</p>
+        <input type="submit" value="提交" />
+    </form>
+    <script src="/static/jquery-3.1.1.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+
+{% block right-content-container %}
+<h3>学员报名|合同审核</h3>
+
+
+
+<form class="form-horizontal" method="post" onsubmit="BeforeFormSubmit(this)">{% csrf_token %}
+
+
+  {{ customer_form }}
+
+  {{ enrollment_form.errors }}
+  {% for field in enrollment_form %}
+    {{ field }}{{ field.errors }}
+
+  {% endfor %}
+
+
+  <input type="submit" class="btn btn-success pull-right"  value="审核通过" >
+
+
+</form>
+    {% if enrollment_link %}
+        <p>请将此报名链接复制并发送给学员填写{{ enrollment_link }}</p>
+    {% endif %}
+
+
+
+<script>
+    function BeforeFormSubmit(ele) {
+        $(":disabled").removeAttr("disabled");
+    }
+
+</script>
+{% endblock %}
+
+
+

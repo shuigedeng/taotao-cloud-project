@@ -1,0 +1,160 @@
+<style>
+    .guige {
+
+    }
+
+    .guige-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .guige-table .title {
+        background: #f5fafe;
+        text-align: left;
+        font-weight: bold;
+        line-height: 32px;
+        height: 32px;
+        font-family: "微软雅黑";
+        border-right: 1px solid #dcdcdc;
+        border-left: 2px solid #0488cd;
+    }
+
+    .guige-table td, .content .guige-table th {
+        border: 1px solid #dcdcdc;
+        line-height: 30px;
+        height: 30px;
+        padding: 0 10px;
+        border-top: 0;
+    }
+
+    .guige-table .body-left {
+        width: 126px;
+        font-weight: normal;
+        text-align: right;
+        color: #666;
+    }
+
+    .guige-table .body-right {
+        color: #333;
+    }
+
+</style>
+<div class="guige">
+    <table class="guige-table">
+        <tbody>
+
+        <tr>
+            <th colspan="5" class="title f14 th"><span class="padding-l-8">基础信息</span></th>
+        </tr>
+        <tr>
+            <td>名称</td>
+            <td colspan="4">值</td>
+        </tr>
+        <tr>
+            <td>操作系统</td>
+            <td colspan="4">{{ response.data.os_platform }}</td>
+        </tr>
+        <tr>
+            <td>系统版本</td>
+            <td colspan="4">{{ response.data.os_version }}</td>
+        </tr>
+        <tr>
+            <td>主板序列号</td>
+            <td colspan="4">{{ response.data.sn }}</td>
+        </tr>
+        <tr>
+            <td>主板型号</td>
+            <td colspan="4">{{ response.data.model }}</td>
+        </tr>
+        <tr>
+            <td>主板厂商</td>
+            <td colspan="4">{{ response.data.manufacturer }}</td>
+        </tr>
+        <tr>
+            <td>CPU逻辑核数</td>
+            <td colspan="4">{{ response.data.cpu_count }}</td>
+        </tr>
+        <tr>
+            <td>CPU物理核数</td>
+            <td colspan="4">{{ response.data.cpu_physical_count }}</td>
+        </tr>
+        <tr>
+            <td>CPU型号</td>
+            <td colspan="4">{{ response.data.cpu_model }}</td>
+        </tr>
+
+
+        <!-- 网卡信息开始 -->
+        <tr>
+            <th colspan="5" class="title f14 th"><span class="padding-l-8">网卡信息</span></th>
+        </tr>
+        <tr>
+            <td>名称</td>
+            <td>MAC地址</td>
+            <td>IP地址</td>
+            <td>掩码</td>
+            <td>UP</td>
+        </tr>
+        {% for item in response.data.nic.all %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.hwaddr }}</td>
+                <td>{{ item.ipaddrs }}</td>
+                <td>{{ item.netmask }}</td>
+                <td>{{ item.up }}</td>
+            </tr>
+        {% endfor %}
+        <!-- 网卡信息结束 -->
+
+        <!-- 硬盘信息开始 -->
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                <span class="padding-l-8">硬盘信息</span>
+            </th>
+        </tr>
+        <tr>
+            <td>插槽</td>
+            <td>容量</td>
+            <td>接口类型</td>
+            <td colspan="2">型号</td>
+        </tr>
+
+        {% for item in response.data.disk.all %}
+            <tr>
+                <td>{{ item.slot }}</td>
+                <td>{{ item.capacity }}</td>
+                <td>{{ item.pd_type }}</td>
+                <td colspan="2">{{ item.model }}</td>
+
+            </tr>
+        {% endfor %}
+        <!-- 硬盘信息结束 -->
+
+        <!-- 内存信息开始 -->
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                <span class="padding-l-8">内存信息</span>
+            </th>
+        </tr>
+        <tr>
+            <td>插槽</td>
+            <td>容量</td>
+            <td>频率</td>
+            <td colspan="2">型号</td>
+        </tr>
+
+        {% for item in response.data.memory.all %}
+            <tr>
+                <td>{{ item.slot }}</td>
+                <td>{{ item.capacity }}</td>
+                <td>{{ item.speed }}</td>
+                <td colspan="2">{{ item.model }}</td>
+            </tr>
+        {% endfor %}
+        <!-- 内存信息结束 -->
+
+
+        </tbody>
+    </table>
+</div>

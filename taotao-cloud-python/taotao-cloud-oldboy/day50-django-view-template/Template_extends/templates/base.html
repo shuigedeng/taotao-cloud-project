@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+
+    {% block styles %}
+
+    {% endblock %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        .nav{
+            line-height: 40px;
+            width: 100%;
+            background-color: #2459a2;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .left{
+            width: 20%;
+            min-height: 600px;
+            overflow: auto;
+            background-color: lightgrey;
+
+        }
+
+        .manage{
+            text-align: center;
+            padding: 20px 0px;
+            margin: 20px 0;
+            font-size: 18px;
+
+        }
+
+        .left,.content{
+            float: left;
+        }
+        .content{
+
+            width: 70%;
+            min-height: 600px;
+
+        }
+        a{
+            text-decoration: none;
+        }
+        h1,h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="nav">标题</div>
+
+    <div class="left">
+         <div class="student manage"><a href="/student/">学生管理</a></div>
+         <div class="teacher manage"><a href="">老师管理</a></div>
+         <div class="course manage"><a href="">课程管理</a></div>
+         <div class="classes manage"><a href="">班里管理</a></div>
+    </div>
+    <div class="content">
+
+        {% block  content%}
+             <h1>WELCOME TO LOGIN</h1>
+        {% endblock %}
+
+
+
+    </div>
+</div>
+
+
+</body>
+</html>

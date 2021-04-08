@@ -1,0 +1,108 @@
+{% extends 'backend_layout.html' %}
+{% block css %}
+
+{% endblock %}
+{% block conent %}
+    <ol class="breadcrumb">
+        <li><a href="#">分类管理</a></li>
+        <li class="active">分类列表</li>
+    </ol>
+    <div>
+        <div class="row" style="padding: 20px 5px;">
+            <form class="form-horizontal">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label">分类名称</label>
+
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" id="nickname" placeholder="请输入分类名称">
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="submit" class="btn btn-primary" value="添 加">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="height: 35px;background-color: #f5f5f5;line-height: 35px;padding: 0 15px;">
+            <i class="fa fa-table" aria-hidden="true"></i>
+            标签列表
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>分类</th>
+                <th>文章个数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>妹子</td>
+                <td>10</td>
+                <td>
+                    <a class="btn btn-danger btn-xs">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        删除
+                    </a>
+                    |
+                    <a class="btn btn-primary btn-xs">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        编辑
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>Coding</td>
+                <td>8</td>
+                <td>
+                    <a class="btn btn-danger btn-xs">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        删除
+                    </a>
+                    |
+                    <a class="btn btn-primary btn-xs">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        编辑
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>旅行</td>
+                <td>10</td>
+                <td>
+                    <a class="btn btn-danger btn-xs">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        删除
+                    </a>
+                    |
+                    <a class="btn btn-primary btn-xs">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        编辑
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="clearfix">
+            <ul class="pagination right" style="margin-top: 0">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="outer">
+    <div class="item">
+        <button onclick="add(this)">+</button>
+        <input type="text">
+    </div>
+
+</div>
+
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+
+    function add(self) {
+
+        //var $clone_obj=$(".item").clone();
+        var $clone_obj=$(self).parent().clone();
+        $clone_obj.children("button").html("-").attr("onclick","remove_obj(this)");
+
+        $(".outer").append($clone_obj)
+    }
+
+    function remove_obj(self) {
+        $(self).parent().remove()
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn{
+            display: inline-block;
+            padding: 5px 15px;
+            background: darkgoldenrod;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <select id="sel" multiple>
+            <option value="1">上海</option>
+            <option value="2">北京</option>
+            <option value="3">广州</option>
+        </select>
+    </div>
+    <div>
+        <input placeholder="用户名" type="text" id="username" />
+        <input placeholder="密码" type="password" id="password" />
+        <div class="btn" onclick="submitForm();">提交</div>
+    </div>
+    <div>
+        <input placeholder="数字" type="text" id="i1" />
+        +
+        <input placeholder="数字" type="text" id="i2" />
+        <div class="btn" onclick="addForm();">等于</div>
+        <input placeholder="数字" type="text" id="i3" />
+    </div>
+    <script src="/static/jquery-3.1.1.js"></script>
+    <script>
+        function submitForm() {
+            var u = $('#username').val();
+            var p = $('#password').val();
+            $.ajax({
+                url: '/ajax2.html',
+                type: 'GET',
+                data:{username: u,password:p},
+                success:function (arg) {
+                    console.log(arg);
+                }
+            })
+
+        }
+        
+        function  addForm() {
+            var v1 = $('#i1').val();
+            var v2 = $('#i2').val();
+            $.ajax({
+                url: '/ajax3.html',
+                type: 'POST',
+                data: { "v1": v1, 'v2':v2},
+                success:function (arg) {
+                    $('#i3').val(arg);
+                    // JS主动刷新页面
+                    // window.location.reload();
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>

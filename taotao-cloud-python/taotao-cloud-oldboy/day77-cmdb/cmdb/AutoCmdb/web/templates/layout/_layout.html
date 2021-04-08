@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/backend.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+
+    {% block css %} {% endblock %}
+</head>
+<body>
+<div class="pg-header">
+    {% include 'include/header_menu.html' %}
+</div>
+<div class="pg-body">
+    <div class="menu">
+        <a id="menu_asset" class="menu-item" href="/asset.html">
+            <i class="fa fa-connectdevelop" aria-hidden="true"></i>
+            <span>资产管理</span>
+        </a>
+        <a id="menu_user_profile" class="menu-item" href="/users.html">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>用户管理</span>
+        </a>
+        <a class="menu-item" href="#">
+            <i class="fa fa-free-code-camp" aria-hidden="true"></i>
+            <span>业务管理</span>
+        </a>
+        <a class="menu-item" href="#">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            <span>IDC管理</span>
+        </a>
+        <a class="menu-item" href="#">
+            <i class="fa fa-cubes" aria-hidden="true"></i>
+            <span>标签管理</span>
+        </a>
+        <a class="menu-item" href="#">
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+            <span>日志管理</span>
+        </a>
+
+    </div>
+    <div class="content">
+        {% block conent %} {% endblock %}
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

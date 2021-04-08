@@ -1,0 +1,39 @@
+{% extends 'backend_layout.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/plugins/kindeditor/themes/default/default.css"/>
+    <style>
+        .kind-content {
+            width: 100%;
+            min-height: 500px;
+            visibility: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="#">文章管理</a></li>
+        <li class="active">创建文章</li>
+    </ol>
+    <div style="padding: 5px 8px;">
+        <h3>找不到文章...</h3>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script charset="utf-8" src="/static/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/static/plugins/kindeditor/lang/zh_CN.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType: 1,
+                uploadJson: '/on.asp',
+                fileManagerJson: '/asp/fjson.asp'
+            });
+        });
+    </script>
+{% endblock %}

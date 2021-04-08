@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/edmure.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/account.css"/>
+</head>
+<body>
+<div class="login">
+    <div style="font-size: 25px; font-weight: bold;text-align: center;">
+        用户登陆
+    </div>
+    <form id="fm" method="POST" action="/login.html">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <label for="password">验证码</label>
+
+            <div class="row">
+                <div class="col-xs-7">
+                    <input type="text" class="form-control" name="check_code" id="check_code" placeholder="请输入验证码">
+                </div>
+                <div class="col-xs-5">
+                    <img id="check_code_img" src="/check_code.html">
+                </div>
+            </div>
+
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="1" name="rmb"> 一个月内自动登陆
+            </label>
+
+            <div class="right">
+                <a href="#">忘记密码？</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <a id="submit" class="btn btn-default">登 陆</a>
+            </div>
+            <div class="col-xs-9" style="padding-left: 0;">
+                <div class="alert alert-danger hide">
+                    <span style="padding: 0 5px 0 5px;display: inline-block;font-size: 14px">
+                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </span>
+                    <span id="error_msg" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <script src="/static/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            bindLogin();
+        });
+        function bindLogin() {
+            $('#submit').click(function () {
+                var $msg = $('#error_msg');
+                $msg.parent().addClass('hide');
+                $.ajax({
+                    url: '/login.html',
+                    type: 'POST',
+                    data: $('#fm').serialize(),
+                    dataType: 'JSON',
+                    success: function (arg) {
+                        if(arg.status){
+                            location.href = '/'
+                        }else{
+                            $msg.parent().removeClass('hide');
+                            $msg.text(arg.message);
+                            var img = $('#check_code_img')[0];
+                            img.src = img.src + '?';
+                            $('#password,#check_code').val('');
+                        }
+
+                    }
+                })
+
+            })
+        }
+    </script>
+</div>
+</body>
+</html>

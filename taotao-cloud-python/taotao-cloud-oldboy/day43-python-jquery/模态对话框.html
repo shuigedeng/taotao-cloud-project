@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content{
+            height: 1800px;
+            background-color: white;
+        }
+
+        .shade{
+            position: fixed;
+            top:0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: gray;
+            opacity: 0.7;
+        }
+
+        .model{
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -100px;
+
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <button onclick="show()">show</button>
+    hellohellohellohellohellohellohellohellohellohellohellohello
+</div>
+
+<div class="shade hide"></div>
+
+<div class="model hide">
+    <button onclick="cancel()">cancel</button>
+</div>
+
+
+<script>
+    function show() {
+        var ele_shade=document.getElementsByClassName("shade")[0];
+        var ele_model=document.getElementsByClassName("model")[0];
+
+        ele_model.classList.remove("hide");
+        ele_shade.classList.remove("hide");
+
+    }
+</script>
+</body>
+</html>

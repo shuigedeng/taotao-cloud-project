@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .condition a{
+            display: inline-block;
+            padding: 5px 8px;
+            border: 1px solid #dddddd;
+        }
+        .condition a.active{
+            background-color: coral;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="condition">
+        <h1>筛选</h1>
+        <div>
+            {% for item in direction_list %}
+                <a>{{ item.name }}</a>
+            {% endfor %}
+        </div>
+        <div>
+            {% for item in class_list %}
+                <a>{{ item.name }}</a>
+            {% endfor %}
+        </div>
+        <div>
+            {% for item in level_list %}
+                <a>{{ item.title }}</a>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div>
+        <h1>结果</h1>
+        {% for row in video_list %}
+            <div>{{ row.title }}</div>
+        {% endfor %}
+    </div>
+</body>
+</html>

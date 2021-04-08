@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .outer{
+            width: 300px;
+            height: 300px;
+            background-color: antiquewhite;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+
+<div class="outer" onclick="func2()">
+    <div class="inner"></div>
+</div>
+
+
+<script>
+
+    var ele=document.getElementsByClassName("inner")[0];
+    ele.onclick= function (e) {
+        alert("I am inner!");
+
+        e.stopPropagation()
+    };
+
+
+    function func2() {
+        alert("I am outer!")
+    }
+</script>
+</body>
+</html>

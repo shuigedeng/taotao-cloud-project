@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<select id="provinces">
+    <option value="">请选择省份</option>
+    <!--<option value="">河北省</option>-->
+    <!--<option value="">河南省</option>-->
+    <!--<option value="">北京</option>-->
+</select>
+
+<select name="" id="citys">
+    <option value="">请选择城市</option>
+</select>
+
+
+
+<script>
+
+//    a={name:"alex"};
+//    b={"name":"alex"};
+//    console.log(a.name);
+//    console.log(b["name"]);
+
+//      data={"河北省":["石家庄","廊坊"],"山西":["晋城","大同"],"陕西":["西安","延安"]};
+//    console.log(data);
+//    console.log(typeof data);
+//    console.log(data["河北省"]);
+//    console.log(data.河北省);
+//
+//      for (var i in data){
+//          console.log(i);
+//      }
+
+
+    data={"河北省":["石家庄","廊坊"],"山西":["晋城","大同"],"陕西":["西安","延安"]};
+    var pro_ele=document.getElementById("provinces");
+    var city_ele=document.getElementById("citys")
+
+    for(var i in data){
+        var ele=document.createElement("option");
+        ele.innerHTML=i;
+        pro_ele.appendChild(ele)
+    }
+
+    pro_ele.onchange=function () {
+        console.log(this.selectedIndex);
+        console.log(this.options[this.selectedIndex])
+
+        var citys=data[this.options[this.selectedIndex].innerHTML];
+
+        city_ele.options.length=1;
+
+        for(var i=0;i<citys.length;i++){
+            var ele=document.createElement("option");
+             ele.innerHTML=citys[i];
+            city_ele.appendChild(ele)
+        }
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="div1 div2">div1</div>
+
+
+<script>
+    var ele=document.getElementsByTagName("div")[0];
+
+    console.log(ele.className);
+    console.log(ele.classList[0]);
+    console.log(ele.classList[1]);
+    ele.classList.add("hide")
+    console.log(ele.className);
+</script>
+</body>
+</html>

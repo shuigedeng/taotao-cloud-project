@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .back{
+            background-color: rebeccapurple;
+            height: 2000px;
+        }
+
+        .shade{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left:0;
+            right: 0;
+            background-color: coral;
+            opacity: 0.4;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .models{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-left: -100px;
+            margin-top: -100px;
+            height: 200px;
+            width: 200px;
+            background-color: gold;
+
+        }
+    </style>
+</head>
+<body>
+<div class="back">
+    <input id="ID1" type="button" value="click" onclick="action1(this)">
+</div>
+
+<div class="shade hide"></div>
+<div class="models hide">
+    <input id="ID2" type="button" value="cancel" onclick="action2(this)">
+</div>
+
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+    function action2(self) {
+
+          //$(self).parent().addClass("hide").prev().addClass("hide");
+
+//        $(self).parent().prev().addClass("hide")
+        //$(self).parent().parent().children(".models,.shade").addClass("hide")
+
+    }
+    
+    function action1(self){
+        $(self).parent().siblings().removeClass("hide");
+
+    }
+//    function action2(self){
+//        $(self).parent().parent().children(".models,.shade").addClass("hide")
+//
+//    }
+</script>
+</body>
+</html>

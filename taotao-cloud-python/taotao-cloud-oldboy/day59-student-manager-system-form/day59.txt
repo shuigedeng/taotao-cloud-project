@@ -1,0 +1,58 @@
+参考博客：                
+http://www.cnblogs.com/wupeiqi/articles/6144178.html
+
+Form
+    1. 验证
+    2. 生成HTML（保留上次输入内容）
+    3. 初始化默认是
+
+Form重点：
+    - 字段
+        用于保存正则表达式
+        ChoiceField *****
+        MultipleChoiceField
+        CharField
+        IntegerField
+        DecimalField
+        DateField
+        DateTimeField
+        EmailField
+        GenericIPAddressField
+        FileField
+        
+        RegexField
+    - HTML插件
+        用于生成HTML标签
+        
+    - 特殊的单选或多选时，数据源是否能实时更新？？？？？*****
+        from app01 import models
+        class LoveForm(forms.Form):
+            price = fields.IntegerField()
+            user_id = fields.IntegerField(
+                # widget=widgets.Select(choices=[(0,'alex'),(1,'刘皓宸'),(2,'杨建'),])
+                widget=widgets.Select()
+            )
+
+            def __init__(self,*args,**kwargs):
+                super(LoveForm,self).__init__(*args,**kwargs)
+                self.fields['user_id'].widget.choices = models.UserInfo.objects.values_list('id','username')
+                
+        from django.forms.models import ModelChoiceField
+        from django.forms.models import ModelChoiceField
+        class LoveForm(forms.Form):
+            price = fields.IntegerField()
+
+            user_id2 = ModelChoiceField(
+                queryset=models.UserInfo.objects.all(),
+                to_field_name='id'
+            )
+        
+        注意：依赖models中的str方法
+                
+
+                
+                
+                
+                
+                
+                

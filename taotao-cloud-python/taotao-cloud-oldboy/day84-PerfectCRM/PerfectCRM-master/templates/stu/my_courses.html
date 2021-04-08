@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% load stu_tags %}
+
+{% block "page-title" %}
+  <h1 class="page-header text-overflow">我的课程</h1>
+
+{% endblock %}
+
+{% block page-content %}
+
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">课程列表</h3>
+        </div>
+
+        <!-- Striped Table -->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>课程</th>
+                            <th>课程类型</th>
+                            <th>开课日期</th>
+                            <th>开课总节次</th>
+                            <th>已上节次</th>
+                            <th>成绩</th>
+                            <th>成绩排名</th>
+                            <th>详细</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enroll_obj in request.user.stu_account.profile.enrollment_set.select_related %}
+                        <tr>
+                            <td><a href="#fakelink" class="btn-link">{{ enroll_obj.course_grade }}</a></td>
+                            <td>{{ enroll_obj.course_grade.get_class_type_display }}</td>
+                            <td>{% if enroll_obj.course_grade.class_type == 0 %}
+                                    {{ enroll_obj.course_grade.start_date }}
+                                {% elif enroll_obj.course_grade.class_type == 1 %}
+                                    {{ enroll_obj.enrolled_date }}
+                                {% endif %}
+                            </td>
+                            <td>{{ enroll_obj.course_grade.total_class_nums }}</td>
+                            <td>{% if enroll_obj.course_grade.class_type == 0  %}
+                                    {{ enroll_obj.course_grade.courserecord_set.select_related.count }}
+                                {% elif enroll_obj.course_grade.class_type == 1 %}
+                                    {% get_study_record_count enroll_obj as study_records %}
+                                    {{ study_records|length }}
+                                {% endif %}
+                            </td>
+                            <td>{%  get_course_score study_records  %}</td>
+                            <td><a href="#" class="btn-link">成绩排名</a> </td>
+                            <td><a href="{% url 'my_homeworks'  enroll_obj.id %}" class="btn-link">作业管理</a> </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- End Striped Table -->
+
+    </div>
+
+{% endblock %}

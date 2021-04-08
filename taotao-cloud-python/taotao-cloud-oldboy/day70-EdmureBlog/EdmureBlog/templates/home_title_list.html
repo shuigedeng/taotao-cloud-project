@@ -1,0 +1,29 @@
+{% extends 'home_layout.html' %}
+
+
+
+{% block content %}
+    <div class="title-list">
+
+
+        {% for row in article_list %}
+        <div class="row-item">
+            <div class="title">
+                <a href="/{{ blog.site }}/{{ row.nid }}.html">{{ row.title }}</a>
+            </div>
+            <div class="tips">
+                <span>{{ blog.user.nickname }}</span>
+                <span>{{ row.create_time|date:"Y-m-d H:i:s" }} </span>
+                <span>
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                    <span>{{ row.comment_count }}</span>
+                </span>
+                <span>
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    <span>{{ row.up_count }}</span>
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

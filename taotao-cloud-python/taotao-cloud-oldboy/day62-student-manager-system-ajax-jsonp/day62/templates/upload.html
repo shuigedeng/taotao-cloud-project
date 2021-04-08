@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn{
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: coral;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe style="display: none" id="iframe1" name="ifra1"></iframe>
+    <form id="fm1" action="/upload_img.html" method="POST" enctype="multipart/form-data" target="ifra1">
+        <input type="file" name="k3" onchange="uploadFile();" />
+    </form>
+    <h3>预览</h3>
+    <div id="preview">
+    </div>
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script>
+
+        function uploadFile() {
+            document.getElementById('iframe1').onload = reloadIframe1;
+            document.getElementById('fm1').submit();
+        }
+        function reloadIframe1() {
+            var content = this.contentWindow.document.body.innerHTML;
+            var obj = JSON.parse(content);
+
+            var tag = document.createElement('img');
+            tag.src = obj.data;
+            $('#preview').empty().append(tag);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+    // 事件准备加载方式一
+//    $(document).ready(function () {
+//         $("ul li").html(5);
+//    });
+// 事件准备加载方式二
+     $(function () {
+        $("ul li").html(5);
+     });
+
+//事件绑定简单形式
+//    var eles=document.getElementsByTagName("li")
+//    eles.onclick=function () {
+//        alert(123)
+//    }
+
+//    $("ul li").click(function () {
+//        alert(6666)
+//    });
+
+//    $("ul li").bind("click",function () {
+//        alert(777)
+//    });
+
+    //事件委托
+//    $('ul').on("click","li",function () {
+//       alert(999);
+//    });
+//
+//    $("button").click(function () {
+//
+//            var $ele=$("<li>");
+//            var len=$("ul li").length;
+//            $ele.html((len+1)*1111);
+//            $("ul").append($ele)
+//    });
+   // $("ul li").unbind("click")
+
+</script>
+</head>
+<body>
+
+<ul>
+    <li>1111</li>
+    <li>2222</li>
+    <li>3333</li>
+    <li>4444</li>
+</ul>
+
+<button>add</button>
+
+</body>
+</html>

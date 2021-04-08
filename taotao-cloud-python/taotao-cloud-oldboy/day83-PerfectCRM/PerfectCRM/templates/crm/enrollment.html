@@ -1,0 +1,138 @@
+{% extends 'index.html' %}
+{% block extra-css %}
+    <link href="/static/plugins/dropzone/dropzone.css" rel="stylesheet">
+
+
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h3>老男孩IT教育|学员报名</h3>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">学员在线报名</h3>
+            </div>
+          <div class="panel-body">
+             <form class="form" method="post" onsubmit=" return BeforeFormSubmit(this)">{% csrf_token %}
+
+                {{ customer_form.errors }}
+              {% for field in customer_form %}
+                  <div class="form-group col-lg-6">
+                    <label class="col-sm-2  control-label">{{ field.label }}</label>
+                    <div class="col-sm-10">
+                      {{ field }}
+                       <span style="color: red;">{{ field.errors.0 }}</span>
+                    </div>
+                  </div>
+
+              {% endfor %}
+              <div class="form-group col-lg-6">
+                <label class="col-sm-2  control-label">报名班级</label>
+                <div class="col-sm-10">
+                  {{ enrollment_obj.class_grade }}
+                </div>
+              </div>
+              <div class="form-group col-lg-6">
+                <label class="col-sm-2  control-label">学费</label>
+                <div class="col-sm-10">
+                  {{ enrollment_obj.class_grade.course.price }}
+                </div>
+              </div>
+
+              <hr>
+
+              <pre style="height: 400px;">{{ enrollment_obj.class_grade.contract_template.content }}</pre>
+
+              <input type="checkbox" name="contract_agreed" >我已认真阅读,无条件同意
+
+             <input type="submit"   class="btn btn-success" value="提交">
+
+            </form>
+
+
+                <p>已上传文件列表</p>
+                <ul id="uploaded_files">
+                    {% for file in uploaded_files %}
+                    <li>{{ file }}</li>
+                    {% endfor %}
+                </ul>
+
+            <form id="myAwesomeDropzone"  action="{% url 'enrollment_fileupload' enrollment_obj.id %}" class="dropzone">
+              <div class="fallback">
+                <input name="file" type="file" multiple />
+              </div>
+            </form>
+
+
+
+          </div>
+          <div class="panel-footer">Panel footer</div>
+        </div>
+    </div>
+
+
+
+<script>
+    function BeforeFormSubmit(ele) {
+        $(":disabled").removeAttr("disabled");
+
+        if ($("#uploaded_files").children().length ==0){
+            alert("请上传证件信息!")
+            return false
+        }
+
+        if (!$("input[name='contract_agreed']").prop("checked")){
+            alert("必须勾选不退费协议!")
+            return false
+        }
+        //return false;
+    }
+
+</script>
+{% endblock %}
+
+{% block extra-js %}
+    <script src="/static/plugins/dropzone/dropzone.js"></script>
+
+
+    <script>
+
+        // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+        Dropzone.options.myAwesomeDropzone = {
+          paramName: "file", // The name that will be used to transfer the file
+          maxFilesize: 2, // MB
+          maxFiles:2,
+          parallelUploads:1,
+          accept: function(file, done) {
+            if (file.name == "justinbieber.jpg") {
+              done("Naha, you don't.");
+            }
+            else { done(); }
+          }
+        };
+
+        $(function() {
+          // Now that the DOM is fully loaded, create the dropzone, and setup the
+          // event listeners
+          // Prevent Dropzone from auto discovering this element:
+          Dropzone.options.myAwesomeDropzone = false;
+          var myDropzone = new Dropzone("#myAwesomeDropzone");
+          myDropzone.on("success", function(file,response) {
+            /* Maybe display some more file information on your page */
+             console.log("completet", file, response);
+             var response = JSON.parse(response);
+             if (!response.status){
+                 alert(response.err_msg);
+             }else {
+                 $("#uploaded_files").append("<li>"+ file.name +"</li>");
+
+             }
+
+          });
+        })
+
+    </script>
+
+{% endblock %}
+

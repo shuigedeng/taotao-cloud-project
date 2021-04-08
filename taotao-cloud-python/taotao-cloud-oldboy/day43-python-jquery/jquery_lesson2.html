@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<a href="">click</a>
+
+<p id="p1" alex="sb">pppp</p>
+<p id="p2" alex="sb">pppp</p>
+
+<div class="outer">outer
+    <div class="inner">
+        inner
+        <p>inner p</p>
+    </div>
+    <p>alex</p>
+</div>
+<div class="outer2">Yuan</div>
+<p>xialv</p>
+
+<ul>
+    <li class="begin">1111</li>
+    <li>2222</li>
+    <li>3333</li>
+    <li>4444</li>
+    <li>4444</li>
+    <li id="end">4444</li>
+    <li>4444</li>
+</ul>
+
+<input type="text">
+<input type="checkbox">
+<input type="submit">
+
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+    //筛选器
+    //$("li").eq(2).css("color","red");
+    //$("li").first().css("color","red");
+    //$("li").last().css("color","red");
+
+    //查找筛选器
+
+    //$(".outer").children("p").css("color","red");
+    //$(".outer").find("p").css("color","red");
+
+    //$("li").eq(2).next().css("color","red");
+    //$("li").eq(2).nextAll().css("color","red");
+    //$("li").eq(2).nextUntil("#end").css("color","red");
+
+    //$("li").eq(4).prev().css("color","red");
+    //$("li").eq(4).prevAll().css("color","red");
+    //$("li").eq(4).prevUntil("li:eq(0)").css("color","red");
+
+    //console.log($(".outer .inner p").parent().html())
+   //$(".outer .inner p").parents().css("color","red");
+   //$(".outer .inner p").parentsUntil("body").css("color","red");
+
+    $(".outer").siblings().css("color","red")
+
+</script>
+</body>
+</html>

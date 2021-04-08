@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .btn{
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: coral;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajax全套</h1>
+    <h3>1.Ajax发送GET请求</h3>
+    <div>
+        <a class="btn" onclick="AjaxSubmit1();">点我</a>
+        <a class="btn" onclick="AjaxSubmit2();">点我</a>
+    </div>
+    <h3>2.Ajax发送POST请求</h3>
+    <div>
+        <a class="btn" onclick="AjaxSubmit3();">点我</a>
+        <a class="btn" onclick="AjaxSubmit4();">点我</a>
+    </div>
+
+    <h3>3.莆田</h3>
+    <div>
+
+        <h6>基于Iframe+Form表单</h6>
+        <iframe id="iframe" name="ifra"></iframe>
+        <form id="fm" action="/ajax1.html" method="POST" target="ifra">
+            <input name="root" value="111111" />
+            <a onclick="AjaxSubmit5()">提交</a>
+        </form>
+
+    </div>
+    <h3>4.文件上传</h3>
+    <input type="file" id="img" />
+    <a class="btn" onclick="AjaxSubmit6();">上传</a>
+    <a class="btn" onclick="AjaxSubmit7();">上传</a>
+
+    <iframe style="display: none" id="iframe1" name="ifra1"></iframe>
+    <form id="fm1" action="/ajax1.html" method="POST" enctype="multipart/form-data" target="ifra1">
+        <input type="text" name="k1" />
+        <input type="text" name="k2" />
+        <input type="file" name="k3" />
+        <a onclick="AjaxSubmit8()">提交</a>
+    </form>
+
+
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script>
+
+        function  AjaxSubmit1() {
+            $.ajax({
+                url: '/ajax1.html',
+                type:'GET',
+                data: {'p':123},
+                success:function (arg) {
+
+                }
+            })
+        }
+
+        function AjaxSubmit2() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4){
+                    // 接收完毕服务器返回的数据
+                    console.log(xhr.responseText);
+
+                }
+            };
+            xhr.open('GET','/ajax1.html?p=123');
+            xhr.send(null);
+        }
+
+        function  AjaxSubmit3() {
+            $.ajax({
+                url: '/ajax1.html',
+                type:'POST',
+                data: {'p':123},
+                success:function (arg) {
+
+                }
+            })
+        }
+
+        function AjaxSubmit4() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4){
+                    // 接收完毕服务器返回的数据
+                    console.log(xhr.responseText);
+
+                }
+            };
+            xhr.open('POST','/ajax1.html');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset-UTF-8');
+            xhr.send("p=456");
+        }
+        
+        function AjaxSubmit5() {
+            document.getElementById('iframe').onload = reloadIframe;
+            document.getElementById('fm').submit();
+        }
+
+        function reloadIframe() {
+            // this=当前标签
+            //console.log(ths);
+            //console.log(ths.contentWindow);
+            //console.log(ths.contentWindow.document.body.innerHTML);
+            //console.log($(ths).contents().find('body').html());
+            var content = this.contentWindow.document.body.innerHTML;
+            var obj = JSON.parse(content);
+            if(obj.status){
+                alert(obj.message);
+            }
+        }
+        
+        function AjaxSubmit6() {
+            //document.getElementById('img')[0]
+            var data = new FormData();
+            data.append('k1','v1');
+            data.append('k2','v2');
+            data.append('k3',document.getElementById('img').files[0]);
+
+            $.ajax({
+                url: '/ajax1.html',
+                type: 'POST',
+                data:data,
+                success:function (arg) {
+                    console.log(arg)
+                },
+                 processData: false,  // tell jQuery not to process the data
+                 contentType: false  // tell jQuery not to set contentType
+
+            })
+        }
+
+        function AjaxSubmit7() {
+            var data = new FormData();
+            data.append('k1','v1');
+            data.append('k2','v2');
+            data.append('k3',document.getElementById('img').files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4){
+                    // 接收完毕服务器返回的数据
+                    console.log(xhr.responseText);
+
+                }
+            };
+            xhr.open('POST','/ajax1.html');
+            xhr.send(data);
+        }
+        
+        function AjaxSubmit8() {
+            document.getElementById('iframe1').onload = reloadIframe1;
+            document.getElementById('fm1').submit();
+        }
+        function reloadIframe1() {
+            var content = this.contentWindow.document.body.innerHTML;
+            var obj = JSON.parse(content);
+            console.log(obj);
+        }
+    </script>
+</body>
+</html>

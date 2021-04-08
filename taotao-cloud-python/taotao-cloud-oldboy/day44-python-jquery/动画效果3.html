@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.1.1.js"></script>
+    <script>
+    $(document).ready(function(){
+   $("#in").click(function(){
+       $("#id1").fadeIn(2000);
+
+
+   });
+    $("#out").click(function(){
+       $("#id1").fadeOut(2000);
+
+   });
+
+    $("#toggle").click(function(){
+       $("#id1").fadeToggle(2000);
+
+
+   });
+    $("#fadeto").click(function(){
+       $("#id1").fadeTo(1000,1);
+
+   });
+});
+
+
+
+    </script>
+
+</head>
+<body>
+      <button id="in">fadein</button>
+      <button id="out">fadeout</button>
+      <button id="toggle">fadetoggle</button>
+      <button id="fadeto">fadeto</button>
+
+      <div id="id1" style="width: 80px;height: 80px;background-color: blueviolet"></div>
+
+</body>
+</html>

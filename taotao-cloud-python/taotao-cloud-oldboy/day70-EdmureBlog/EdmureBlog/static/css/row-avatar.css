@@ -1,0 +1,25 @@
+.article-item{
+    font-size: 13px;
+    border-bottom: 1px dashed #dddddd;
+    padding:  5px 0;
+}
+.article-item h3{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.article-item .avatar{
+    border: 1px solid #d5d5d5;margin-right: 5px;
+}
+
+.article-item .avatar img{
+    width: 70px;height: 70px;padding: 1px;
+
+}
+.article-item .footers{
+    padding: 5px 0 0 0;
+}
+
+.article-item .footers .ele{
+    margin: 0 10px;
+}

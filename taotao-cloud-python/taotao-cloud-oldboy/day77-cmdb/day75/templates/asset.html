@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <style>
+
+    </style>
+</head>
+<body>
+{#    <select id="i1">#}
+{#        <option>上阿海</option>#}
+{#        <option>北京</option>#}
+{#        <option>广州</option>#}
+{#    </select>#}
+
+    <div style="width: 800px;margin: 0 auto;">
+        <h1>资产列表</h1>
+        <div class="btn-group" role="group" aria-label="...">
+          <button id="idCheckAll" type="button" class="btn btn-default">全选</button>
+          <button id="idReverseAll" type="button" class="btn btn-default">反选</button>
+          <button id="idCancelAll" type="button" class="btn btn-default">取消</button>
+          <button id="idEditMode" type="button" class="btn btn-default">进入编辑模式</button>
+          <button type="button" class="btn btn-default">批量删除</button>
+          <button id="idSave" type="button" class="btn btn-default">保存</button>
+          <a id="idAdd" href="/web/asset-add.html" class="btn btn-default">添加</a>
+        </div>
+        <table class="table table-bordered">
+            <thead id="table_th"></thead>
+            <tbody id="table_tb"></tbody>
+        </table>
+        <ul id="idPagination" class="pagination">
+
+        </ul>
+    </div>
+
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script src="/static/js/nbList.js"></script>
+
+    <script>
+        $(function () {
+            $.NB("/web/asset-json.html");
+        });
+
+
+    </script>
+    
+
+</body>
+</html>

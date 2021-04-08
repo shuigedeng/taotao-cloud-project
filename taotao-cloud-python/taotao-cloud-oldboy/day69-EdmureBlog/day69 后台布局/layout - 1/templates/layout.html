@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/commons.css" />
+    {% block css %}{% endblock %}
+    <style>
+        body{
+            margin: 0;
+        }
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+        }
+        .hide{
+            display: none;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #2f72ab;
+            min-width: 1100px;
+            line-height: 48px;
+        }
+        .pg-header .logo{
+            color: white;
+            font-size: 24px;
+            width: 200px;
+            background-color: #1c5a9c;
+            text-align: center;
+        }
+        .pg-header .hl-menu .item{
+            color: white;
+            padding: 0 10px;
+            height: 48px;
+            display: inline-block;
+        }
+        .pg-header .hl-menu .item:hover{
+            background-color: #1c5a9c;
+        }
+        .pg-header .hl-menu .item-set{
+            display: inline-block;
+            position: relative
+        }
+        .pg-header .hl-menu .item-set .sets{
+            position: absolute;
+            width: 150px;
+            background-color: aliceblue;
+            border: 1px solid #dddddd;
+            display: none;
+        }
+        .pg-header .hl-menu .item-set .sets a{
+            display: block;
+            line-height: 30px;
+        }
+        .pg-header .hl-menu .item-set:hover .sets{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="pg-header">
+        <div class="logo left">城管您说话</div>
+        <div class="hl-menu left">
+            <a class="item" href="#">菜单一</a>
+            <a class="item" href="#">菜单二</a>
+            <a class="item" href="#">菜单三</a>
+            <div class="item-set">
+                <a class="item" href="#">菜单四</a>
+                <div class="sets">
+                    <a href="#">菜单四-1</a>
+                    <a href="#">菜单四-2</a>
+                    <a href="#">菜单四-3</a>
+                </div>
+            </div>
+            <div class="item-set">
+                <a class="item" href="#">菜单四</a>
+                <div class="sets">
+                    <a href="#">菜单四-1</a>
+                    <a href="#">菜单四-2</a>
+                    <a href="#">菜单四-3</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="hr-menu right"></div>
+    </div>
+
+    <div class="pg-body">
+        <div class="menus">
+
+        </div>
+        <div class="contents">
+            {% block contents %}{% endblock %}
+        </div>
+    </div>
+    <div class="pg-footer"></div>
+
+    {% block js %}{% endblock %}
+</body>
+</html>

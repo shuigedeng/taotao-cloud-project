@@ -1,0 +1,127 @@
+1. 
+    Python序列化
+        字符串 = json.dumps(对象)    对象->字符串
+        对象 = json.loads(字符串)    字符串->对象
+        
+    JavaScript:
+        字符串 = JSON.stringify(对象) 对象->字符串
+        对象 = JSON.parse(字符串)     字符串->对象
+        
+    应用场景：
+        数据传输时，
+            发送：字符串
+            接收：字符串 -> 对象
+2. ajax
+
+    $.ajax({
+        url: 'http//www.baidu.com',
+        type: 'GET',
+        data: {'k1':'v1'},
+        success:function(arg){
+            // arg是字符串类型
+            // var obj = JSON.parse(arg)
+        }
+    })
+    
+    
+    $.ajax({
+        url: 'http//www.baidu.com',
+        type: 'GET',
+        data: {'k1':'v1'},
+        dataType: 'JSON',
+        success:function(arg){
+            // arg是对象
+        }
+    })
+    
+    
+    $.ajax({
+        url: 'http//www.baidu.com',
+        type: 'GET',
+        data: {'k1':[1,2,3,4]},
+        dataType: 'JSON',
+        success:function(arg){
+            // arg是对象
+        }
+    })
+    
+    发送数据时：
+        data中的v
+        
+        a. 只是字符串或数字
+            $.ajax({
+                url: 'http//www.baidu.com',
+                type: 'GET',
+                data: {'k1':'v1'},
+                dataType: 'JSON',
+                success:function(arg){
+                    // arg是对象
+                }
+            })
+        b. 包含属组
+            $.ajax({
+                url: 'http//www.baidu.com',
+                type: 'GET',
+                data: {'k1':[1,2,3,4]},
+                dataType: 'JSON',
+                traditional: true,
+                success:function(arg){
+                    // arg是对象
+                }
+            })
+            
+        c. 传字典
+        
+            b. 包含属组
+            $.ajax({
+                url: 'http//www.baidu.com',
+                type: 'GET',
+                data: {'k1': JSON.stringify({}) },
+                dataType: 'JSON',
+                success:function(arg){
+                    // arg是对象
+                }
+            })
+            
+    
+    
+3. 事件委托
+
+    $('要绑定标签的上级标签').on('click','要绑定的标签',function(){})
+
+    $('要绑定标签的上级标签').delegate('要绑定的标签','click',function(){})
+
+4. 编辑
+    
+
+5. 总结
+
+        新URL方式：
+            - 独立的页面
+            - 数据量大或条目多
+            
+        对话框方式：
+            - 数据量小或条目少
+                -增加，编辑
+                    - Ajax: 考虑，当前页；td中自定义属性
+                    - 页面（***）
+                
+        删除：
+            对话框
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    

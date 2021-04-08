@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container">
+
+
+<div class="panel panel-bordered panel-info pad-top" >
+    <div class="panel-heading">
+            <h3 class="panel-title">老男孩IT教育|入学报名</h3>
+    </div>
+    <form method="post">{% csrf_token %}
+
+        <div class="panel-body form-horizontal">
+            <p>学习是投资自己最好的方式！</p>
+            {% for field in customer_form %}
+                <div class="form-group col-lg-6">
+                    <label class="col-md-3 control-label">{{ field.label }}</label>
+                    <div class="col-md-9">
+
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+                <div class="form-group col-lg-6">
+                    <label class="col-md-3 control-label" for="demo-text-input">姓名</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static">{{ enroll_obj.customer.qq }}</p>
+                        <small class="help-block">This is a help text</small>
+                    </div>
+                </div>
+
+
+
+        </div>
+        <div class="text-center" style="margin-bottom: 30px">
+            <button class="btn btn-success" type="submit">提交</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

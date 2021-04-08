@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load beeflow_tags %}
+
+{% block page-title-text %}
+  我的流程申请
+{% endblock %}
+
+{% block page-content %}
+
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">我的申请</h3>
+        </div>
+
+        <!-- Striped Table -->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>流程</th>
+                            <th>内容</th>
+                            <th>发起时间</th>
+                            <th>目前状态</th>
+                        </tr>
+                    </thead>
+                {{ request.user.flow_set.all }}
+                    <tbody>
+                        {% for obj in request.user.flow_set.all %}
+                        <tr>
+                            <td>{{ obj.id }}</td>
+                            <td>{{ obj.template.name }}</td>
+                            <td>{{ obj.content }}</td>
+                            <td>{{ obj.date }}</td>
+                            <td>{% get_flow_status obj  %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

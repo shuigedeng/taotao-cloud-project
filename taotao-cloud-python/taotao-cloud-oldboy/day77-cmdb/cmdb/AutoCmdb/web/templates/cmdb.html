@@ -1,0 +1,53 @@
+{% extends 'layout/_layout.html' %}
+
+{% block css %}
+    <style>
+        .chart-item-bg {
+            height: 400px;
+            float: left;
+        }
+
+        .chart-item {
+            height: 300px;
+            float: left;
+        }
+    </style>
+{% endblock %}
+
+{% block conent %}
+    <div>
+        <div style="padding: 20px;" class="clearfix">
+            <div id="container_business" class="chart-item-bg col-xs-12"></div>
+        </div>
+        <div>
+
+        </div>
+        <div style="padding: 20px;" class="clearfix">
+            <div id="container_category" class="chart-item col-xs-6"></div>
+            <div id="container_group" class="chart-item col-xs-6"></div>
+        </div>
+        <!--
+        <h3>动态图示例</h3>
+        <div style="padding: 20px;" class="clearfix">
+            <div id="container_dynamic" class="chart-item-bg col-xs-12"></div>
+        </div>
+        -->
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/plugins/highstock/code/highstock.js"></script>
+    <script type="text/javascript" src="/static/plugins/highchart/code/highcharts.js"></script>
+    <script type="text/javascript" src="/static/plugins/highchart/code/highcharts-3d.js"></script>
+    <script type="text/javascript" src="/static/js/chart.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            initBusiness();
+            initCategory();
+            initGroup();
+            //initDynamic();
+        });
+    </script>
+{% endblock %}

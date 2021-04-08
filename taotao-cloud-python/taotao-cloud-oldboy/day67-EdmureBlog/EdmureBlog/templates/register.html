@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/edmure.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/account.css"/>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="register">
+    <div style="font-size: 25px; font-weight: bold;text-align: center;">
+        用户注册
+    </div>
+    <form role="form">
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="email" class="form-control" id="username" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" class="form-control" id="email" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">确认密码</label>
+            <input type="password" class="form-control" id="confirm_password" placeholder="请重新输入密码">
+        </div>
+
+        <div class="form-group">
+            <label for="password">验证码</label>
+
+            <div class="row">
+                <div class="col-xs-7">
+                    <input type="password" class="form-control" id="password" placeholder="请输入验证码">
+                </div>
+                <div class="col-xs-5">
+                    <img src="/check_code.html">
+                </div>
+            </div>
+
+        </div>
+
+        <input type="submit" class="btn btn-default" value="下一步"/>
+    </form>
+</div>
+</body>
+</html>

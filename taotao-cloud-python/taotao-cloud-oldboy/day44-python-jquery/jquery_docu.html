@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="c1">
+    <p>PPP</p>
+
+</div>
+
+<button>add</button>
+<script src="jquery-3.1.1.js"></script>
+<script>
+        $("button").click(function () {
+           //$(".c1").append("<h1>HELLO YUAN</h1>")
+
+            var $ele=$("<h1></h1>");
+            $ele.html("HELLO WORLD!");
+            $ele.css("color","red");
+
+//内部插入
+            //$(".c1").append($ele);
+            //$ele.appendTo(".c1")
+            //$(".c1").prepend($ele);
+            //$ele.prependTo(".c1")
+
+//外部插入
+            //$(".c1").after($ele)
+            //$ele.insertAfter(".c1")
+            //$(".c1").before($ele)
+            //$ele.insertBefore(".c1")
+//替换
+             //$("p").replaceWith($ele)
+
+//删除与清空
+            //$(".c1").empty()
+            //$(".c1").remove()
+
+//clone
+//             var $ele2= $(".c1").clone();
+//             $(".c1").after($ele2)
+        })
+</script>
+</body>
+</html>

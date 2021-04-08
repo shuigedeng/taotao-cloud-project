@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="float: left;width: 20%;">
+        <ul>
+            {% for item in contact_list_dict.MemberList %}
+                <li username='{{ item.UserName }}'>{{ item.NickName }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div style="float: left;width: 80%;">
+        <p><input id="toUser" type="text" placeholder="收消息用户" /></p>
+        <p><textarea id="msg" placeholder="请输入消息"></textarea></p>
+        <p><input id="btn" type="button" value="发送" /></p>
+    </div>
+    <script src="/static/jquery-1.12.4.js"></script>
+    <script>
+
+        $(function () {
+            bindSendMsg();
+            getMsg();
+        });
+
+        function  bindSendMsg() {
+            $('#btn').click(function () {
+                $.ajax({
+                    url: '/send-msg.html',
+                    type: 'GET',
+                    data: {'toUser': $('#toUser').val(),'msg':$('#msg').val()},
+                    dataType:"JSON",
+                    success:function (arg) {
+
+                    }
+                })
+            })
+        }
+
+        function bindLi() {
+            $('li').dblclick(function () {
+                var v = $(this).attr('username');
+                $('#toUser').val(v);
+            })
+        }
+
+        function getMsg(){
+            $.ajax({
+                url: '/get-msg.html',
+                type: 'GET',
+                success:function (arg) {
+                    console.log(arg);
+                    getMsg();
+                }
+            })
+        }
+    </script>
+</body>
+</html>

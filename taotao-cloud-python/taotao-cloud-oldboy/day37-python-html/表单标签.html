@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<h1>注册页面</h1>
+
+<form action="http://127.0.0.1:8090/index" method="post" enctype="multipart/form-data">
+
+    <p>姓名<input type="text" name="username" placeholder="姓名"></p>
+    <p>密码<input type="password" name="password" placeholder="密码" readonly="readonly"></p>
+    <p>爱好：    音乐<input type="checkbox" name="hobby" value="music" checked="checked">电影<input type="checkbox" name="hobby" value="movie"></p>
+
+    <p>性别：     男<input type="radio" name="gender" value="men">女<input type="radio" name="gender" value="women"></p>
+
+    <p><input type="file" name="put_file"></p>
+
+
+    省
+      <select name="province">
+            <optgroup label="河北省">
+                        <option value="beijing">邯郸</option>
+                        <option value="hebei">廊坊</option>
+                        <option value="henan" selected="selected">唐山</option>
+                        <option value="shanxi">保定</option>
+            </optgroup>
+
+
+      </select>
+
+    简介<textarea name="desc" rows="10" cols="20"></textarea>
+
+    <p><input type="reset" value="重置"></p>
+    <p><input type="button" value="提交注册"></p>
+    <p><input type="submit" value="提交注册"></p>
+
+</form>
+
+
+<!--{"username":"yuan","password":1234,"hobby":["music","movie"],"gender":["men"]}-->
+
+
+
+</body>
+</html>

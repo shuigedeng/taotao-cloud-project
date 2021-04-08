@@ -1,0 +1,35 @@
+{% extends 'layout/_layout.html' %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="/cmdb.html">首页</a></li>
+        <li><a href="/asset.html">资产列表</a></li>
+        <li class="active">添加资产</li>
+    </ol>
+    <div style="padding: 5px 8px;">
+
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/nb-list.js"></script>
+
+    <script>
+        $(function () {
+            $.initMenu('#menu_asset');
+        });
+
+
+    </script>
+{% endblock %}

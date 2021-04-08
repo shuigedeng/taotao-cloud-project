@@ -1,0 +1,82 @@
+<style>
+    .handle_log {
+        font-size: 13px !important;
+        font-family: Tahoma, Geneva, Helvetica, sans-serif !important;
+    }
+
+    .time {
+        padding: 10px;
+        border: 1px solid #ddd;
+        position: absolute;
+        width: 150px;
+        left: -190px;
+        box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+    }
+
+    .record {
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 17px;
+        min-height: 40px;
+        box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.12);
+    }
+
+    .record .auther {
+        text-align: right;
+        padding: 5px 0px;
+        color: #9E9C9C;
+    }
+
+    .record-arrow {
+        position: absolute;
+        width: 24px;
+        height: 14px;
+        background: url(/static/imgs/bg_dot_left3.png) no-repeat;
+        top: 15px;
+        left: -6px;
+        text-indent: -9999em;
+    }
+
+    .tag {
+        padding: 6px;
+        background-color: #00a2ca;
+        margin: 10px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .add-tag {
+        margin: 10px;
+        color: #00a2ca;
+        cursor: pointer;
+        font-size: 16px;
+    }
+</style>
+<div class="clearfix handle_log">
+    <div class="left" style="width:240px;height:200px;">&nbsp;</div>
+    <div class="left clearfix" style="border-left:2px dashed #ddd;width:70%;">
+        {% if response.status %}
+            {{ response.data.asset.assetrecord }}
+            {% for item in response.data.asset.ar.all %}
+                <div style="position:relative;">
+                    <div class="time">{{ item.create_at |date:"Y-m-d H:i:s" }}</div>
+                    <div class="record-arrow"></div>
+                    <div class="record">
+                        {{ item.content }}
+                        <div class="auther">
+                            <span><i class="fa fa-user"></i></span>
+                            {% if  item.creator.name %}
+                            <span>{{ item.creator.name }}</span>
+                            {% else %}
+                            <span>自动采集</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            {{ response.message }}
+        {% endif %}
+    </div>
+</div>

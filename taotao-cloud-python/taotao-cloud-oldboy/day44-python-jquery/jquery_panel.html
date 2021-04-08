@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+       <style>
+
+           *{
+               margin: 0;
+               padding: 0;
+           }
+        .box{
+            width: 500px;
+            height: 200px;
+            position: absolute;
+        }
+
+        .title{
+            background-color: black;
+            height: 50px;
+            width: 500px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+        }
+        .content{
+            width: 500px;
+            height: 150px;
+            background-color: antiquewhite;
+        }
+    </style>
+
+
+    <script>
+        $(function () {
+
+          $(".title").mouseover(function () {
+              $(this).css("cursor","pointer");
+        }).mousedown(function (e) {
+
+                  var eve = e || window.event;
+                // 原始鼠标横纵坐标位置
+
+                  var old_m_x=eve.clientX;
+                  var old_m_y=eve.clientY;
+//                  console.log(old_x);
+//                  console.log(old_y);
+
+                 var old_box_y=$(this).parent().offset().top ;
+                 var old_box_x=$(this).parent().offset().left ;
+
+                  $(this).bind("mousemove",function (eve) {
+                      var new_m_x=eve.clientX;
+                      var new_m_y=eve.clientY;
+
+                      var m_x=new_m_x-old_m_x;
+                      var m_y=new_m_y-old_m_y;
+
+
+
+                  //$(".box").css({"top":old_box_y+m_y+"px","left":old_box_x+m_x+"px"})
+
+                var x = old_box_x + m_x;
+                var y = old_box_y + m_y;
+
+                $(this).parent().css('left',x+'px');
+                $(this).parent().css('top',y+'px');
+                  })
+              })
+          }).mouseout(function(){
+            $(this).unbind('mousemove');
+        })
+
+    </script>
+</head>
+<body>
+
+
+<div class="box">
+    <div class="title">标题</div>
+    <div class="content">内容</div>
+</div>
+
+</body>
+</html>

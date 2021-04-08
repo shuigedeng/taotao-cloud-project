@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        .head{
+            line-height: 40px;
+            background-color: green;
+            color: white;
+            text-align: center;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="outer">
+    <div class="head">标题</div>
+    <div class="content">
+        <a href="/addbook/">添加书籍</a>
+        <a href="/update/">修改书籍</a>
+        <a href="/delete/">删除书籍</a>
+        <a href="/select/">查询书籍</a>
+    </div>
+    <hr>
+    <div class="queryResult">
+         {% for book in book_list %}
+         <div>
+              <p>{{ book.name }} {{ book.author }} {{ book.price }}</p>
+         </div>
+         {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div>hello</div>
+
+<button onclick="f1()">显示</button>
+<button onclick="f2()">隐藏</button>
+<button onclick="f3()">切换</button>
+<script>
+
+    function f1() {
+      $("div").show(1000,function () {
+          alert("show")
+      })
+    }
+
+  function f2() {
+      $("div").hide(1000,function () {
+          alert(1243)
+      })
+    }
+
+     function f3() {
+      $("div").toggle(1000)
+    }
+</script>
+
+</body>
+</html>

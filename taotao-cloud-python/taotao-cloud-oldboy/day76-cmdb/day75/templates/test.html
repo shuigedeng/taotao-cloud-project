@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        String.prototype.format = function (kwargs) {
+            // this ="laiying: {age} - {gender}";
+            // kwargs =  {'age':18,'gender': '女'}
+            var ret = this.replace(/\{(\w+)\}/g,function (km,m) {
+                return kwargs[m];
+            });
+            return ret;
+        };
+        var v = "laiying: {age} - {gender}";
+        var result = v.shizhengwen({'age':18,'gender': '女'});
+        console.log(result);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+
+{% block right-content-container %}
+<h3>学员报名页</h3>
+
+
+
+<form class="form-horizontal" method="post">{% csrf_token %}
+  <div class="form-group">
+    <label  class="col-sm-2 control-label">客户</label>
+    <div class="col-sm-10">
+       <select name="customer_id" class="form-control">
+            {% for customer in customers %}
+                 <option value="{{ customer.id }}">{{ customer }}</option>
+            {% endfor %}
+       </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">报名班级</label>
+    <div class="col-sm-10">
+         <select name="class_grade_id" class="form-control">
+            {% for class_grade in class_lists %}
+                 <option value="{{ class_grade.id }}">{{ class_grade }}</option>
+            {% endfor %}
+       </select>
+    </div>
+  </div>
+  <input type="submit" class="btn btn-success pull-right"  value="下一步" >
+
+
+</form>
+    {% if enrollment_link %}
+        <p>请将此报名链接复制并发送给学员填写{{ enrollment_link }}</p>
+    {% endif %}
+
+
+
+
+{% endblock %}
+
+
+

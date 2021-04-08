@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>个人信息</div>
+    <ul>
+        {% for item in user_init_dict.ContactList %}
+        <li>{{ item.NickName }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/contact-list.html">查看更多联系</a>
+    <div>公众号信息</div>
+    {% for item in  user_init_dict.MPSubscribeMsgList %}
+        <h3>{{ item.NickName }}</h3>
+        {% for msg in item.MPArticleList %}
+            <div style="color: #dddddd"><a href="{{ msg.Url }}">{{ msg.Title }}</a></div>
+        {% endfor %}
+    {% endfor %}
+</body>
+</html>

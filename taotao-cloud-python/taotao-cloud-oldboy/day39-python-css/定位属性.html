@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        *{
+            margin: 0px;
+        }
+
+        .div1{
+            width: 200px;
+            height: 100px;
+            background-color: beige;
+
+
+        }
+         .div2{
+            width: 200px;
+            height: 100px;
+            background-color: rebeccapurple;
+            /*position: relative;*/
+             position: absolute;
+            left: 100px;
+            top:  100px;
+
+
+        }
+         .div3{
+            width: 200px;
+            height: 200px;
+            background-color: green;
+             /*position: relative;*/
+             /*top:-100px;*/
+             /**/
+
+
+
+        }
+         .div4{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+
+        }
+
+        .outer{
+            position: relative;
+        }
+        .returnTop{
+            width: 80px;
+            height: 50px;
+            position: fixed;
+            bottom: 20px;
+            right: 5px;
+            background-color: gray;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="height: 200px;background-color: aqua"></div>
+<div class="outer">
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <div class="div3"></div>
+    <div class="div4"></div>
+</div>
+
+<div style="height: 2000px;background-color: darkgoldenrod"></div>
+
+<div class="returnTop">返回顶部</div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+PLUGINS = {
+    'disk': 'src.plugins.disk.DiskPlugin',
+    'mem': 'src.plugins.mem.MemPlugin',
+    'nic': 'src.plugins.nic.NicPlugin',
+}
+response = {}
+for k,v in PLUGINS.items():
+    pass
+    
+    
+response = {
+    'disk': "disksadfasdfasdfa",
+    'mem': "memasdfasdfasdf",
+    'nic': "nicasdfasdfasdfasf",
+}
+
+class DiskPlugin:
+
+    def execute(self):
+        return 'disksadfasdfasdfa'
+        
+class MemPlugin:
+
+    def execute(self):
+        return 'memasdfasdfasdf'
+        return 'memasdfasdfasdf'
+        return 'memasdfasdfasdf'
+
+class NicPlugin:
+
+    def execute(self):
+        return 'nicasdfasdfasdfasf'
+        

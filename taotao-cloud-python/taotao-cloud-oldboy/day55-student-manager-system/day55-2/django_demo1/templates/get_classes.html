@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <a href="/add_classes.html">添加</a>
+
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>任课老师</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in cls_list  %}
+                    <tr>
+                        <td>
+                            {{ row.id }}
+                        </td>
+                        <td>
+                            {{ row.titile }}
+                        </td>
+                        <td>
+                            {% for item in row.m.all %}
+                                <span>{{ item.name }}</span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="/del_classes.html?nid={{ row.id }}">删除</a>
+
+                            |
+                            <a href="/edit_classes.html?nid={{ row.id }}">编辑</a>
+                            |
+                            <a href="/set_teacher.html?nid={{ row.id }}">分配老师</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

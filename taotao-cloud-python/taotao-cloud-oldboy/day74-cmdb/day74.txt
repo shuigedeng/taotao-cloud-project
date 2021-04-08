@@ -1,0 +1,41 @@
+运维自动化项目
+    减少人工干预，降低人员成本
+    - 资产管理
+    - 操作管理
+    
+CMDB
+    - 运维自动化基础
+    - 资产管理
+    
+    作业：
+        - CMDB采集资产信息示例
+        - Django
+            URL - views  CBV方式
+            # 提交到API的数据结构
+            
+          
+          server_info = plugins.get_server_info(hostname)
+          # 序列化成字符串
+          server_json = Json.dumps(server_info.data)
+          response = requests.post(
+                    url="http//ww.....",
+                    json=server_json
+                )
+        
+    预习：
+        数据库表结构
+        - API验证
+        - 保存资产数据；保存资产变更记录
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+
+
+{% block page-content %}
+ {% csrf_token %}
+  <div class="row">
+        <div class="col-sm-3">
+            <div class="panel ">
+            <div class="panel-heading">
+                <h3 class="panel-title">可操作的主机列表</h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group bord-no">
+                    {% for host_group in request.user.host_groups.all %}
+                        <a class="list-group-item " onclick="ItemToggle(this)" href="#">{{ host_group.name }}
+                            <span class="badge badge-primary">{{ host_group.host_to_remote_users.count }}</span>
+                        </a>
+                        <ul>
+                        {% for host_to_user_obj in host_group.host_to_remote_users.all %}
+                            <li><input type="checkbox" tag="host-select" value="{{ host_to_user_obj.id }}">
+                                {{ host_to_user_obj.host.name }}({{ host_to_user_obj.host.ip_addr }})@{{host_to_user_obj.remote_user.username  }}
+                            </li>
+                         {% endfor %}
+                        </ul>
+
+                    {% endfor %}
+                    <a class="list-group-item "  onclick="ItemToggle(this)" href="#">未分组主机
+                            <span class="badge badge-primary">{{ request.user.host_to_remote_users.count }}</span>
+                    </a>
+                    <ul>
+                        {% for host_to_user_obj in request.user.host_to_remote_users.all %}
+                            <li><input type="checkbox" tag="host-select" value="{{ host_to_user_obj.id }}">
+                                {{ host_to_user_obj.host.name }}({{ host_to_user_obj.host.ip_addr }})@{{host_to_user_obj.remote_user.username  }}
+                            </li>
+                         {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="col-sm-9">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">命令操作</h3>
+                </div>
+                <div class="panel-body">
+                    <textarea  id="cmd_input" class="form-control" placeholder="input your cmd...."> </textarea>
+
+                    <input type="button" onclick="PostTask()" class="btn btn-success pull-right" value="执行命令">
+                </div>
+            </div>
+        </div>
+
+  </div>
+
+<script>
+    function ItemToggle(ele) {
+        $(ele).next().toggle()
+    }
+
+
+
+    function PostTask() {
+        var cmd_text = $("#cmd_input").val().trim();
+        var selected_host_ids = [];
+        $("[tag='host-select']:checked").each(function () {
+            selected_host_ids.push($(this).val());
+        })
+        console.log(selected_host_ids)
+        if (selected_host_ids.length ==0){
+            alert("必须选择主机!")
+            return false;
+        }
+        if (cmd_text.length ==0){
+            alert("必须输入要执行的命令!")
+            return false;
+        }
+        console.log("ready to post task")
+
+        var task_arguments = {
+            'selected_hosts':selected_host_ids,
+            'task_type' : 'cmd',
+            'cmd': cmd_text,
+
+        }
+
+        var csrftoken =  $("input[name='csrfmiddlewaretoken']").val()
+        $.post("{% url 'batch_task_mgr' %}", {'task_data':JSON.stringify(task_arguments),"csrfmiddlewaretoken":csrftoken}, function(callback){
+            console.log("task callback", task_arguments);
+        });//end post
+
+    }
+</script>
+
+{% endblock %}
+
+

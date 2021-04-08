@@ -1,0 +1,128 @@
+<script>
+    function ItemToggle(ele) {
+        $(ele).next().toggle()
+    }
+
+    function  CheckFileTransferType(ele) {
+        if ($(ele).val() == 'send'){
+
+            $("#local_file_path").removeClass("hide");
+        }else {
+            $("#local_file_path").addClass("hide");
+        }
+    }
+
+    function PostTask(self,task_type) {
+
+        var selected_host_ids = [];
+        $("[tag='host-select']:checked").each(function () {
+            selected_host_ids.push($(this).val());
+        })
+        console.log(selected_host_ids)
+        if (selected_host_ids.length ==0){
+            alert("必须选择主机!")
+            return false;
+        }
+
+        var task_arguments = {};
+
+        if (task_type == 'cmd'){
+            var cmd_text = $("#cmd_input").val().trim();
+            if (cmd_text.length ==0){
+                alert("必须输入要执行的命令!")
+                return false;
+            }
+
+            var task_arguments = {
+                'selected_hosts':selected_host_ids,
+                'task_type' : 'cmd',
+                'cmd': cmd_text,
+
+            }
+        }else {
+            var local_file_path = $("#local_file_path").val().trim();
+            var remote_file_path = $("#remote_file_path").val().trim();
+            var file_transfer_type = $("#file_transfer_type").val();
+            if (file_transfer_type == 'send'){
+                if (local_file_path.length == 0){
+                    alert("必须输入要上传到远程服务器的本地文件路径!");
+                    return false;
+                }
+            }
+
+            if (remote_file_path.length == 0){
+                alert("必须输入要远程服务器的文件路径!");
+                return false;
+            }
+
+            var task_arguments = {
+                'selected_hosts':selected_host_ids,
+                'task_type' : 'file_transfer',
+                'file_transfer_type': file_transfer_type,
+                'local_file_path': local_file_path,
+                'remote_file_path': remote_file_path,
+            }
+        }
+
+
+        //禁用提交按钮
+        $(self).addClass("disabled");
+        $("#task_result_container").empty();//清空之前的任务结果
+
+
+        var csrftoken =  $("input[name='csrfmiddlewaretoken']").val()
+        $.post("{% url 'batch_task_mgr' %}", {'task_data':JSON.stringify(task_arguments),"csrfmiddlewaretoken":csrftoken}, function(callback){
+            console.log("task callback:" + callback);
+            var callback = JSON.parse(callback);
+
+            $.each(callback.selected_hosts,function (index,ele) {
+                 var li_ele = "<li log_id='"+ ele['id']  +"' >--------------Host:" + ele.host_to_remote_user__host__name + "(" + ele.host_to_remote_user__host__ip_addr + ")--------------<span tag='log_status'></span></li>";
+                 li_ele += "<pre>waiting for result</pre>";
+
+                 $("#task_result_container").append(li_ele);
+
+
+            });
+
+            //start to get result ....
+
+            ResultRefreshObj = setInterval(function () {
+
+                GetTaskResult(callback.task_id);
+
+            },2000)
+
+
+        });//end post
+
+    }
+
+
+    function  GetTaskResult(task_id) {
+        //
+        $.getJSON("{% url 'get_task_result'  %}", {'task_id':task_id},function(callback){
+            console.log(callback)
+
+            var all_task_done = true ;
+
+            $.each(callback,function (index,ele) {
+                var li_ele =  $("li[log_id="+ ele['id'] +"]");
+                li_ele.children().first().text(ele['status']);
+                li_ele.next().text(ele['result']);
+
+                if (ele['status'] == 0 ){
+                    all_task_done = false; //有任务没完成
+                }
+            })
+
+            if (all_task_done){
+                clearInterval(ResultRefreshObj);
+                $("#task_submit_btn").removeClass("disabled");
+                console.log("-------all task done---------");
+            }
+
+        });//end getJSOn
+
+
+    }
+</script>

@@ -1,0 +1,59 @@
+Tornado
+
+1. 基本操作
+    - 路由系统
+        url -> 类（根据method执行方法）
+        
+    - 控制器
+        class Foo(xxxx):
+            def get(self):
+                self.render
+                self.write
+                self.redirect
+                self.get_argument()
+                self.get_arguments()
+                self.get_cookie()
+                self.set_cookie()
+                self.get_secure_cookie('xxxxxx')
+                self.set_secure_cookie('xxxxxx','oooooo')
+                PS: 加密cookie依赖配置文件 cookie_secret
+                
+                self.request.files['fafafa']
+                self._headers
+                
+                # Handler对象
+                # self.request   => tornado.httputil.HTTPServerRequest
+                
+            def post(self):
+                pass
+    
+    - 模板引擎（更接近Python）
+        - 基本
+            {{ li[0] }}
+            {% for i in range(10) %}
+            
+            {% end %}
+        - UIMethod
+            - 内容
+        - UIModule 
+            - CSS,JS
+            - 内容
+    
+    
+    
+
+2. 自定义开源组件
+    - Session
+        自定义Session：
+        1. 
+            super按照顺序查找
+            类名.方法名(self)
+        2. self是谁？永远是调用方法的对象
+        
+        3. xxxxxx
+    - Form表单验证（*） 
+    
+3. 自定义异步非阻塞Web框架
+
+4. WebSocket
+

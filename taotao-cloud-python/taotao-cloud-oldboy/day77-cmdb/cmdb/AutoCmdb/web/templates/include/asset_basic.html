@@ -1,0 +1,87 @@
+<style>
+    .dotted {
+        border-top: 1px dotted #ddd;
+    }
+
+    .text-left {
+        text-align: left !important;
+    }
+</style>
+<div class="form-horizontal clearfix" style="margin-top:20px;">
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">主机名：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.hostname }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">管理IP：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.manage_ip }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">序列号：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.sn }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">状态：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.device_status_id }}</div>
+    </div>
+
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">更新时间</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.latest_date|date:"Y-m-d" }}</div>
+    </div>
+
+    <div class="dotted  col-md-12"></div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">机房：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.idc.name }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">楼层：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.idc.floor }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">机柜：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.cabinet_num }}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">柜上位置：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.cabinet_order }}</div>
+    </div>
+
+    <div class="dotted col-md-12"></div>
+
+    <div class="form-group col-md-6">
+        <div class="col-md-4 control-label">业务线：</div>
+        <div class="col-md-7 control-label text-left">{{ response.data.asset.business_unit.name }}</div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-group col-md-6">
+            <div class="col-md-4 control-label">业务联系人：</div>
+            <div class="col-md-8 control-label text-left">
+                {% for obj in response.data.asset.business_unit.contact.users.all %}
+                    <div>
+                        <p>{{ obj.name }}</p>
+                        <div style="margin-left: 20px;">
+                            <p>邮箱：{{ obj.email }}</p>
+                            <p>手机：{{ obj.mobile }}</p>
+                            <p>座机：{{ obj.phone }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

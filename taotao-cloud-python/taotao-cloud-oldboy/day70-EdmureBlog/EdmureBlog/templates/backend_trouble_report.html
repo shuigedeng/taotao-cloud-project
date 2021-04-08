@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+</head>
+<body>
+
+<div id="container"></div>
+
+
+<script>
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+    
+    
+    $(function(){
+    
+        initChart();
+    
+    })
+    
+    function initChart(){
+        var config = {
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '动态模拟实时数据'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: '值'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: true
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [
+                {
+                    name: 'A',
+                    data: [
+                        [1491535949788.035, 7.0],
+                        [1491535949888.035, 6.0],
+                        [1491535949988.035, 10.0],
+                        [1491535950088.035, 1.0],
+                    ]
+                },
+                {
+                    name: 'B',
+                    data: [
+                        [1491535949788.035, 8.0],
+                        [1491535949888.035, 2.0],
+                        [1491535949988.035, 40.0],
+                        [1491535950088.035, 1.0],
+                    ]
+                }
+                ,
+                {
+                    name: 'C',
+                    data: [
+                        [1491535949788.035, 10.0],
+                        [1491535949888.035, 2.0],
+                        [1491535949988.035, 10.0],
+                        [1491535950088.035, 8.0],
+                    ]
+                }
+                
+            ]
+        };
+        // 数据库中获取 series
+{#        $('#container').highcharts(config);#}
+        $.ajax({
+            url: '/backend/trouble-json-report.html',
+            dataType: 'json',
+            success:function(arg){
+                config['series'] = arg;
+                $('#container').highcharts(config);
+            }
+        })
+
+    }
+    
+    
+    
+
+</script>
+</body>
+</html>

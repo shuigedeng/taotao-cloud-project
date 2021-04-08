@@ -1,0 +1,35 @@
+<div class="col-sm-3">
+    <div class="panel ">
+    <div class="panel-heading">
+        <h3 class="panel-title">可操作的主机列表</h3>
+    </div>
+    <div class="panel-body">
+        <div class="list-group bord-no">
+            {% for host_group in request.user.host_groups.all %}
+                <a class="list-group-item " onclick="ItemToggle(this)" href="#">{{ host_group.name }}
+                    <span class="badge badge-primary">{{ host_group.host_to_remote_users.count }}</span>
+                </a>
+                <ul>
+                {% for host_to_user_obj in host_group.host_to_remote_users.all %}
+                    <li><input type="checkbox" tag="host-select" value="{{ host_to_user_obj.id }}">
+                        {{ host_to_user_obj.host.name }}({{ host_to_user_obj.host.ip_addr }})@{{host_to_user_obj.remote_user.username  }}
+                    </li>
+                 {% endfor %}
+                </ul>
+
+            {% endfor %}
+            <a class="list-group-item "  onclick="ItemToggle(this)" href="#">未分组主机
+                    <span class="badge badge-primary">{{ request.user.host_to_remote_users.count }}</span>
+            </a>
+            <ul>
+                {% for host_to_user_obj in request.user.host_to_remote_users.all %}
+                    <li><input type="checkbox" tag="host-select" value="{{ host_to_user_obj.id }}">
+                        {{ host_to_user_obj.host.name }}({{ host_to_user_obj.host.ip_addr }})@{{host_to_user_obj.remote_user.username  }}
+                    </li>
+                 {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+</div>

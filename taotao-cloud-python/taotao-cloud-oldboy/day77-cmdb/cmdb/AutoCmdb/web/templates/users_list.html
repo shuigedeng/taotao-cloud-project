@@ -1,0 +1,133 @@
+{% extends 'layout/_layout.html' %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="/cmdb.html">首页</a></li>
+        <li class="active">用户管理</li>
+    </ol>
+    <div style="padding: 5px 8px;">
+
+        <div class="list-block">
+            <div class="clearfix search-area">
+
+                <div class="col-md-offset-10 do-submit">
+                    <a id="search_condition_submit" class="btn btn-primary no-radius">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </div>
+
+                <div id="search_conditions" class="col-md-offset-2 col-md-8">
+                    <div class="condition">
+                        <div class="icons">
+                            <a class="btn btn-default no-radius" onclick="$.AddSearchCondition(this)"><i
+                                    class="fa fa-plus-square"></i></a>
+                        </div>
+                        <div class="inputs">
+                            <div class="input-group">
+                                <div id="search_condition" init="false" class="input-group-btn">
+                                    <label type="button" class="btn btn-default no-radius" style="width: 100px;">&nbsp;</label>
+                                    <button type="button" class="btn btn-default dropdown-toggle no-border-r" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                    <ul class="change-search-condition dropdown-menu">
+
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="clearfix function-area">
+                <div class="btn-group btn-group-sm custom-btn-group">
+                    <a id="check_all" class="btn btn-default no-radius"><i
+                            class="fa fa-check-square"></i> 全选</a>
+                    <a id="check_cancel" class="btn btn-default no-radius"><i class="fa fa-minus-square-o"></i> 取消</a>
+                    <a id="check_reverse" class="btn btn-default no-radius"><i
+                            class="fa fa-check-square-o"></i> 反选</a>
+                    <a class="btn btn-default no-radius" href="#"><i class="fa fa-plus-circle"></i>添加</a>
+                    <a id="do_delete" class="btn btn-default no-radius"><i class="fa fa-trash"></i> 删除</a>
+                    <a id="edit_mode_target" class="btn btn-default no-radius"><i class="fa fa-pencil-square-o"></i>
+                        <span>进入编辑模式</span></a>
+                    <a id="do_save" class="btn btn-default no-radius"><i class="fa fa-floppy-o"></i> 保存</a>
+                    <a id="do_refresh" class="btn btn-default no-radius"><i class="fa fa-refresh"></i> 刷新</a>
+                    <a id="handle_status" class="btn no-radius" tabindex="0" role="button" data-toggle="manual"
+                       data-trigger="focus" data-container="body" data-html="true" data-placement="bottom" title="错误详细"
+                       data-content=""></a>
+                </div>
+            </div>
+
+            <div class="table-responsive table-area">
+                <table class="table table-striped table-bordered">
+                    <!-- 表格标题开始 -->
+                    <thead id="table_head">
+                    <tr>
+
+                    </tr>
+                    </thead>
+                    <!-- 表格标题结束 -->
+
+                    <!-- 表格内容开始 -->
+                    <tbody id="table_body" edit-mode='false'>
+
+                    </tbody>
+                    <!-- 表格内容结束 -->
+
+                </table>
+                <div class="clearfix">
+                    <div class="right">
+                        <ul id="pager" class="pagination pagination-sm no-margin">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 删除层开始 -->
+    <div id="modal_delete" class="alert alert-danger alert-dismissible fade in modal-delete hide" role="alert">
+        <button type="button" class="close" aria-label="Close" onclick="$.Hide('#shade,#modal_delete');"><span>×</span>
+        </button>
+        <h4>确定用户信息？</h4>
+
+        <p style="text-align: right">
+            <button type="button" class="btn btn-danger" id="do_delete_confirm">确定删除</button>
+            <button type="button" class="btn btn-default" onclick="$.Hide('#shade,#modal_delete');">取消</button>
+        </p>
+    </div>
+    <!-- 删除层结束 -->
+
+    <!-- 遮罩层开始 -->
+    <div id='shade' class='shade hide'></div>
+    <!-- 遮罩层结束 -->
+
+    <!-- 加载层开始 -->
+    <div id='loading' class='loading hide'></div>
+    <!-- 加载层结束 -->
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/nb-list.js"></script>
+
+    <script>
+        $(function () {
+            $.initMenu('#menu_user_profile');
+            $.nbDataList('/user.html');
+        });
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            border: 2px solid #dddddd;
+            height: 400px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 750px;margin: 0 auto;">
+        <h1>1024聊天室</h1>
+        <div class="container">
+
+
+        </div>
+        <div class="input">
+            <input type="text" id="txt" />
+            <input type="button" value="发送" id="btn" onclick="sendMessage();" />
+        </div>
+    </div>
+
+    <script src="/static/jquery-1.12.4.js"></script>
+    <script>
+        ws = new WebSocket("ws://127.0.0.1:8888/chat");
+        ws.onmessage = function (event) {
+            $('.container').append(event.data);
+        };
+        ws.onclose = function () {
+
+        };
+        function sendMessage() {
+            ws.send($('#txt').val());
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+上节内容回顾和补充
+
+	编程语言
+		高级
+		低级
+		
+	Python种类
+		JavaPython
+		cPython    *****
+		pypy
+		
+		字节码 和 机器码
+		
+	Python程序：
+		1. 
+			终端：
+				C:\python35\python.exe D:\1.py
+			解释器：
+				C:\python35\python.exe 
+				
+		2. 文件形
+			#/usr/bin/u/ubv/a python
+			
+			python 1.py
+			
+			./1.py      加权限
+			
+		3. 编码
+			#/usr/bin/u/ubv/a python
+			# -*- coding:utf-8 -*-
+			补充：
+				
+			字节，位
+			unicode   utf8   gbk
+			utf8: 3
+			gbk : 2
+		
+		4. print("sdf")
+		
+		5. inp = input('>>>')
+			
+			PS:
+				>>> hello
+				inp = "hello"
+				
+				
+				>>> 10
+				inp = "10"
+				
+				# 如果将字符串转换成数字     new_inp = int(inp)
+				
+				inp * 10 =????? 
+			
+			
+		6. 变量名
+		
+			字母
+			数字
+			下划线
+			
+			要求：
+				不能数字开头
+				不能使用关键字
+				建议不要用python内置的。。。。
+		
+		7. 条件语句
+			1. 基本
+			2. 嵌套
+			3. if   elif   else ...
+			
+		8. while循环
+			while 条件：
+				....
+		
+			print('...')
+			
+			补充：
+				a. while else
+				b. continue   break
+				   continue ,终止当前循环，开始下一次循环
+				   break    ,终止所有循环
+			
+		用户登陆（三次机会重试）
+		count = 0
+		while count < 3:
+			user = input('>>>')
+			pwd = input('>>>')
+			if user == 'alex' and pwd == '123':
+				print('欢迎登陆')
+				print('..........')
+				break
+			else:
+				print('用户名或者密码错误')
+			count = count + 1
+		
+今日内容：
+    运算符
+    基本数据类型
+    Python开发【第三篇】：Python基本数据类型  http://www.cnblogs.com/wupeiqi/articles/5444685.html
+	
+	python开发IDE： pycharm、eclipse
+	
+	1、运算符
+		结果是值
+			算数运算
+				a = 10 * 10
+			赋值运算
+				a = a + 1    a+=1
+
+		结果是布尔值
+			比较运算
+				a = 1 > 5
+			逻辑运算
+				a = 1>6 or 1==1
+			成员运算
+				a = "蚊" in "郑建文"
+		
+	2、基本数据类型
+	
+	
+		数字  int ，所有的功能，都放在int里
+			a1 = 123
+			a1 = 456
+			
+			- int
+				将字符串转换为数字
+					a = "123"
+					print(type(a),a)
+
+					b = int(a)
+					print(type(b),b)
+					
+					num = "0011" 
+					v = int(num, base=16)
+					print(v)
+			- bit_lenght
+					# 当前数字的二进制，至少用n位表示
+					r = age.bit_length()
+			
+		字符串  str
+			s1 = "asdf"
+			s2 = "asdffas"
+			
+			# test = "aLex"
+			# 首字母大写
+			# v = test.capitalize()
+			# print(v)
+
+			# 所有变小写，casefold更牛逼，很多未知的对相应变小写
+			# v1 = test.casefold()
+			# print(v1)
+			# v2 = test.lower()
+			# print(v2)
+
+			# 设置宽度，并将内容居中
+			# 20 代指总长度
+			# *  空白未知填充，一个字符，可有可无
+			# v = test.center(20,"中")
+			# print(v)
+
+			# 去字符串中寻找，寻找子序列的出现次数
+			# test = "aLexalexr"
+			# v = test.count('ex')
+			# print(v)
+
+			# test = "aLexalexr"
+			# v = test.count('ex',5,6)
+			# print(v)
+
+			# 欠
+			# encode
+			# decode
+
+			# 以什么什么结尾
+			# 以什么什么开始
+			# test = "alex"
+			# v = test.endswith('ex')
+			# v = test.startswith('ex')
+			# print(v)
+
+			# 欠
+			# test = "12345678\t9"
+			# v = test.expandtabs(6)
+			# print(v,len(v))
+
+			# 从开始往后找，找到第一个之后，获取其未知
+			# > 或 >=
+			# test = "alexalex"
+			# 未找到 -1
+			# v = test.find('ex')
+			# print(v)
+
+			# index找不到，报错   忽略
+			# test = "alexalex"
+			# v = test.index('8')
+			# print(v)
+
+
+			# 格式化，将一个字符串中的占位符替换为指定的值
+			# test = 'i am {name}, age {a}'
+			# print(test)
+			# v = test.format(name='alex',a=19)
+			# print(v)
+
+			# test = 'i am {0}, age {1}'
+			# print(test)
+			# v = test.format('alex',19)
+			# print(v)
+
+			# 格式化，传入的值 {"name": 'alex', "a": 19}
+			# test = 'i am {name}, age {a}'
+			# v1 = test.format(name='df',a=10)
+			# v2 = test.format_map({"name": 'alex', "a": 19})
+
+			# 字符串中是否只包含 字母和数字
+			# test = "123"
+			# v = test.isalnum()
+			# print(v)
+			
+		列表   list
+			...
+		元祖   tuple
+			...
+		字典   dict
+			...
+		
+		布尔值 bool
+			...

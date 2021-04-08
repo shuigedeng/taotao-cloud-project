@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <textarea id="content"></textarea>
+
+    <script src="/static/plugins/kindeditor/kindeditor-all-min.js"></script>
+
+    <script>
+        var editor = null;
+
+        KindEditor.ready(function (K) {
+            editor = K.create(
+                '#content',
+                {
+                    resizeType: 2,
+                    allowPreviewEmoticons: true,
+                    allowImageUpload: true,
+                    items: [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'link'],
+                    uploadJson: '/laocunzhang.html',
+                    //filePostName: 'xxoo'
+
+                }
+            );
+        });
+
+        function  submitContent() {
+            editor.html()
+        }
+    </script>
+
+
+</body>
+</html>

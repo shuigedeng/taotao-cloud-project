@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="POST" action="/xiaoyun.html">
+        {% csrf_token %}
+    <p>
+        <input type="text" placeholder="用户名" name="user" />
+    </p>
+    <p>
+        <input type="password" placeholder="密码" name="pwd" />
+    </p>
+    <p>
+        <input type="text" placeholder="验证码" name="code" />
+        <img src="/static/imgs/avatar/20130809170025.png">
+        <img src="/shizhengwen.html" onclick="changeImg(this);">
+    </p>
+        <input type="submit" value="提交"/>
+        </form>
+    <script>
+        function changeImg(ths) {
+            ths.src = ths.src + "?";
+        }
+    </script>
+</body>
+</html>

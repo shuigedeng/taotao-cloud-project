@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1>学生注册</h1>
+<hr>
+<form action="{% url 'reg' %}" method="post">
+   <p>姓名<input type="text" name="user"></p>
+   <p>年龄<input type="text" name="age"></p>
+   <p>爱好<input type="checkbox" name="hobby" value="1">篮球
+          <input type="checkbox" name="hobby" value="2">足球
+          <input type="checkbox" name="hobby" value="3">乒乓球
+   </p>
+   <p><input type="submit">提交</p>
+</form>
+
+
+
+</body>
+</html>

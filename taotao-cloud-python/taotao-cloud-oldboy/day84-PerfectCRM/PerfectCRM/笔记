@@ -1,0 +1,247 @@
+CRM 开发
+
+
+需求分析
+    存储所有的客户咨询信息
+    避免重复数据
+    客户的多次跟踪记录
+    客户来源、成单率分析
+    每个销售只能修改自己的客户信息
+    报名流程开发
+    班级管理
+    学员成绩，出勤管理
+    问卷调查
+
+    校区管理
+
+    课程管理
+        课程大纲，周期，价格，代课老师
+
+    讲师的上课记录
+
+    学员就业情况
+
+    知识库
+
+
+    权限管理
+    角色
+        销售
+            销售主管
+
+        讲师
+
+
+        学员
+
+
+        管理员
+
+
+思维导图
+
+业务场景分析（用户使用场景）
+
+销售
+    1. 销售人员A刚从  百度推广  聊了一个客户，录入了CRM系统，咨询了Python全栈开发课程，但是没报名
+    2. 销售B 从 qq群聊了客户，且报名了Python全栈5期课程，给用户发送了报名连接，待用户填写完毕后，把他添加到了PYTHON FULLSTACK S5的班级里
+    3. 销售C 打电话给之前的一个客户，睡服他报名Linux 36期，但是没睡服成功，更新了跟踪记录
+    4. 销售D 聊了一个客户，录入时发现 此客户已存在，不能录入，随后通知相应的客户负责人 跟进
+    5. 销售B 从客户库里过滤出了 所有  超过一个月未跟踪的客户，进行跟踪
+    6. 销售主管 查看了部门 本月的销售报表，包括来源分析，成单率分析，班级报名数量分析，销售额环比，同比
+
+学员
+    1. 客户A 填写了销售发来的 报名连接，上传了个人的证件信息，提交，过了一小会，发现收到一个邮件，告知他报名python 5期课程成功，并帮他开通了学员账号，
+    2. 学员A 登录了学员系统，看到了自己的合同，报名的班级，课程大纲
+    3. 学员A 提交了PY 5期的 第3节课的作业
+    4. 学员A查看了自己在py 5期的 学习成绩，排名
+    5.学员A 录入了一条 转介绍信息
+    6. 学员A 在线 搜素一个问题，发现没有答案，于是提交了一个问题，
+
+讲师
+    1. 登录了CRM，查看自己管理的班级列表
+    2. 进入了python 5期，创建了第3节的上课记录，填入了本节内容，作业需求
+    3. 为PYTHON 5 的第三节课  进行点名，发现小东北迟到了，标记他为迟到状态
+    4. 批量下载了所有学员的 py 5期第二节的作业， 给每个人在线 批了成绩 + 批注
+
+
+管理员
+     1.创建了，课程linux, python ,
+     2.创建了校区 北京，上海，
+     3.创建了班级Python FULLSTACK S5 和Linux 36，
+     4.创建了账号A,B,C,D
+     5.创建了销售，讲师，学员三个角色，并把ABCD分配到了销售角色里
+     6.设置了销售可以操作的权限
+
+
+原型图
+
+    Axure
+
+开发工具选型
+
+    Python
+    Django
+    mysql
+    jquery
+    bootstrap
+    linux
+    nginx
+    pycharm
+
+创建项目
+    设计表结构
+    写代码
+
+
+
+    后续加入的表
+       权限
+       问卷调查
+       知识管理
+       合同
+
+
+
+day 79
+  动态菜单
+  销售角色
+       客户的增删改查
+
+   one 反向查 直接 request.user.userprofile 后面跟反向的小写表名就可以
+   fk 反向查 直接 request.user.userprofile_set 后面跟反向的小写表名+_set就可以
+
+  request.user.userprofile.role.select_related  == request.user.userprofile.role.all
+
+  from django import conf
+  conf.settings 动态获取项目settings配置
+
+
+
+  enabled_admins = {
+        'crm': {'customer': CustomerAdmin,'role':RoleAdmin},
+        'student': {'test': TestAdmin,'role':RoleAdmin},
+  }
+
+>> a.get_status_display()
+ models.CustomerInfo._meta.fields 获取model所有字段对象
+
+ >>> models.CustomerInfo._meta.get_field('status') 取一个字段的对象
+<django.db.models.fields.SmallIntegerField: status>
+>>>
+
+>>> b.get_internal_type()
+'DateField'
+
+
+
+
+selec * from tablename limit offset 50 limit 10 从第5
+selec * from tablename limit  limit 5,10  从第5
+
+
+
+delete
+action
+csrf
+
+
+跨域请求保护
+
+GET  获取数据  幂等
+
+csrf token 令牌 口令
+
+
+action 优化
+面包屑导航
+
+报名流程
+    销售  发起报名流程, 选择班级,发报名连接给学员
+           选择班级
+           选择 客户
+
+
+           生成报名连接
+
+
+    学员  填写在线报名表, 提交个人信息,上传证件信息,同意
+    销售  审核报名表, 审核通过后,创建一条缴费记录,自动把学员添加到相应的班级, 报名成功
+
+
+
+    合同模板
+    缴费
+    报名表
+
+
+讲师上课
+
+
+
+
+自定义用户认证
+request.user.userprofile
+
+class Meta:
+    abstract = True 不创建表,之把字段传递给继承自己的子类
+
+
+    md5是不可以反解
+
+    shitzhengwen  abc123      db shitzhengwen  sfsafjak;lfjksajfkasjfksad
+
+    撞库
+    md5+盐 abc123 = a12bc3
+
+    Single Sign On
+    单点登录    SSO
+
+
+    request.user = userprofile
+
+    c/s
+    b/s
+
+权限管理
+
+    student [
+        my_course
+        my_contract
+        my_homework
+    ]
+    sales [
+        customers
+            get 获取客户表
+            post 修改 客户信息
+        my_customers
+        ....
+    ]
+
+
+
+一条权限 = 一个动作 = 一个url + 请求方法 + 请求参数
+
+
+perm_dic={
+
+    'crm_table_index':['table_index','GET',[],{},],  #可以查看CRM APP里所有数据库表
+    'crm_table_list':['table_list','GET',[],{}],    #可以查看每张表里所有的数据
+    'crm_table_list_view':['table_change','GET',[],{}],#可以访问表里每条数据的修改页
+    'crm_table_list_change':['table_change','POST',[],{}], #可以对表里的每条数据进行修改
+
+    }
+
+
+    'crm_table_list':['table_list','GET',['source','status'],{}]
+
+
+    def perm_check(*args,**kwargs):
+
+        1. 获取当前请求的url
+        2. 把url 解析成url_name ,
+        3. 判断用户是否已登录user.is_authenticated()
+        3. 拿url_name 到permission_dict 去匹配,匹配时要包括请求方法和参数
+        4. 拿匹配到可权限key, 调用user.has_perm(key)
+
+

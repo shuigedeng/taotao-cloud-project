@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.1.1.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<p>111</p>
+<p>222</p>
+<p>333</p>
+
+<script>
+
+
+
+//    $.each(obj,function () {
+//
+//    });
+//
+//    $("").each(function () {
+//
+//    })
+
+
+    $.extend({
+        Myprint:function () {
+            console.log("hello")
+        }
+    });
+
+//    $.Myprint();
+
+    $.fn.extend({
+        GetText:function () {
+//            for(var i=0;i<this.length;i++){
+//                console.log(this[i].innerHTML)
+//            }
+
+            $.each($(this),function (x,y) {
+
+                //console.log(y.innerHTML)
+                //console.log($(y).html())
+            })
+
+        }
+    });
+
+    $("p").GetText()
+
+</script>
+</body>
+</html>

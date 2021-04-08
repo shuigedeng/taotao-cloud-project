@@ -1,0 +1,165 @@
+{% extends 'home_layout.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/plugins/kindeditor/themes/default/default.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="art-title">
+        <a>{{ article.title }}</a>
+    </div>
+    <div class="art-content">
+        {{ article.articledetail.content|safe }}
+    </div>
+    <div class="art-recommend clearfix">
+        <div class="recommend">
+            <a href="#" class="up"
+               style="margin: 5px 10px;display: inline-block;padding: 5px 15px;border: 1px solid #dddddd;text-align: center;">
+                <i class="fa fa-thumbs-o-up fa-3" aria-hidden="true" style="font-size: 25px"></i>
+
+                <div>{{ article.up_count }}</div>
+            </a>
+            <a href="#" class="down"
+               style="margin: 5px 30px 5px 10px;display: inline-block;padding: 5px 15px;border: 1px solid #dddddd;text-align: center;">
+                <i class="fa fa-thumbs-o-down fa-3" aria-hidden="true" style="font-size: 25px"></i>
+
+                <div>{{ article.down_count }}</div>
+            </a>
+        </div>
+    </div>
+    <div class="art-tips clearfix">
+        <div class="tips">
+            <span class="ctime">{{ article.create_time }}</span>
+            <a class="author">{{ blog.user.nickname }}</a>
+            <span class="comment-count">评论({{ article.comment_count }})</span>
+            <span class="read-count">阅读({{ article.read_count }})</span>
+        </div>
+    </div>
+    <div id="AllanboltSignature">
+        <div style="border-bottom: #e0e0e0 1px dashed; border-left: #e0e0e0 1px dashed; padding: 10px; font-family: 微软雅黑; font-size: 11px; border-top: #e0e0e0 1px dashed; border-right: #e0e0e0 1px dashed; "
+             id="PSignature">
+            <div style="float:left;width:70px;">
+                <img src="/static/imgs/o_Warning.png" style="width:65px;height:65px">
+            </div>
+            <div style="float:left;padding-top:10px;">
+
+                <div style="padding: 1px">作者：<a href="http://www.cnblogs.com/wupeiqi/"
+                                                target="_blank">{{ blog.user.nickname }}</a></div>
+                <div style="padding: 1px">出处：<a href="http://www.cnblogs.com/wupeiqi/" target="_blank">http://www.cnblogs.com/{{ blog.site }}.html/</a>
+                </div>
+                <div style="padding: 1px">本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接</div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+    <div class="art-comment">
+        <div class="comment-title">
+            评论列表
+        </div>
+        <div class="comment-list">
+            {% for comment in comment_list %}
+            <div class="comment-item">
+                <div class="reply-title clearfix">
+                    <div class="user-info">
+                        <span>{{ comment.user.nickname }}</span>
+                        <span>{{ comment.create_time }}</span>
+                    </div>
+                    <div class="reply">
+                        <a href="#">回复</a>
+                    </div>
+                </div>
+                <div class="reply-body">
+                    {% if comment.reply %}
+                    <div class="reply-user">@{{ comment.reply.user.nickname }}</div>
+                    {% endif %}
+                    <div class="content">
+                        {{ comment.content }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="comment-item">
+                <div class="reply-title clearfix">
+                    <div class="user-info">
+                        <span>武沛齐</span>
+                        <span>2018-09-09 12:55</span>
+                    </div>
+                    <div class="reply">
+                        <a href="#">回复</a>
+                    </div>
+                </div>
+                <div class="reply-body">
+                    <div class="reply-user">@黑牛蛋</div>
+                    <div class="content">
+                        卧槽卧槽...
+                    </div>
+                </div>
+            </div>
+            <div class="comment-item">
+                <div class="reply-title clearfix">
+                    <div class="user-info">
+                        <span>武沛齐</span>
+                        <span>2018-09-09 12:55</span>
+                    </div>
+                    <div class="reply">
+                        <a href="#">回复</a>
+                    </div>
+                </div>
+                <div class="reply-body">
+                    <div class="reply-user">@黑牛蛋</div>
+                    <div class="content">
+                        卧槽卧槽...
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="comment-list-pager">
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+        <div class="comment-area">
+            <div class="replay-comment-user"></div>
+            <div class="reply-area" style="position: relative;">
+                {% if not request.user %}
+                <div style="text-align:center;line-height:200px;position: absolute;top:0;left:0;right:0;bottom: 0;background-color: rgba(255,255,255,.6)">
+                    您需要登录后才可以回帖 <a href="/login.html">登录</a> | <a href="/register.html">立即注册</a>
+                </div>
+                {% endif %}
+                <textarea name="content" style="width: 100%;height:200px;visibility:hidden;"></textarea>
+            </div>
+            <div>
+                <div class="reply-btn">
+                    <span><span>21</span>/255字</span>
+                    <a class="btn btn-primary">发表回复</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script charset="utf-8" src="/static/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/static/plugins/kindeditor/lang/zh_CN.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+    </script>
+{% endblock %}

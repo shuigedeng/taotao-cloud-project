@@ -1,0 +1,54 @@
+{% extends 'backend_layout.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/plugins/kindeditor/themes/default/default.css"/>
+    <style>
+        .kind-content {
+            width: 100%;
+            min-height: 500px;
+        }
+    </style>
+{% endblock %}
+
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="#">保障管理</a></li>
+        <li class="active">创建报障单</li>
+    </ol>
+    <h1>标题</h1>
+    <h3>{{ obj.title }}</h3>
+    <div style="padding: 5px 8px;">
+        <form method="POST" action="/backend/trouble-kill-{{ nid }}.html" novalidate>
+            {% csrf_token %}
+            <select>
+                <option>手机问题</option>
+                <option>电脑无法开机</option>
+                <option>RTX无法登陆</option>
+            </select>
+            <input type="checkbox"  />
+            <div class="form-group">
+                <label for="detail">解决方案 <span>{{ form.solution.errors.0 }}</span></label>
+                {{ form.solution }}
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="保 存">
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script charset="utf-8" src="/static/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/static/plugins/kindeditor/lang/zh_CN.js"></script>
+    <script>
+        var editor = null;
+        KindEditor.ready(function (K) {
+            editor = K.create('#solution', {
+                resizeType: 1
+            });
+        });
+    </script>
+{% endblock %}

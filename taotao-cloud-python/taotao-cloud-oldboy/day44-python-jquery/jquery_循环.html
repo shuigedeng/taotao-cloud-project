@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>1111</p>
+<p>2222</p>
+<p>3333</p>
+
+<script src="jquery-3.1.1.js"></script>
+
+<script>
+    arr=[11,22,33];
+
+//    for (var i=0;i<arr.length;i++){
+//        $("p").eq(i).html(arr[i])
+//
+//    }
+
+//方式一
+    $.each(arr,function (x,y) {
+        console.log(x);
+        console.log(y);
+    });
+//方式二
+    $("p").each(function () {
+        console.log($(this));
+        $(this).html("hello")
+    })
+
+</script>
+
+
+
+</body>
+</html>

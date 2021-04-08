@@ -1,0 +1,94 @@
+{% extends 'backend_layout.html' %}
+{% load search %}
+{% block css %}
+<style>
+    .conditions a{
+        display: inline-block;
+        padding: 2px 5px;
+        margin-left: 5px;
+    }
+    .conditions a.active{
+        background-color: #b35215;
+        color: #ffffff;
+    }
+</style>
+{% endblock %}
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="#">文章管理</a></li>
+        <li class="active">文章列表</li>
+    </ol>
+    <div>
+
+        <div style="border: 1px dashed #dddddd;padding: 8px;border-left: 3px solid #337ab7;">
+            <i class="fa fa-search" aria-hidden="true"></i> 搜索条件
+        </div>
+        <div style="padding: 10px">
+            <div class="conditions row clearfix" style="margin: 0;padding: 8px 0;">
+                <div class="col-xs-1" style="text-align: right">
+                    {% category_all arg_dict %}
+                </div>
+                <div class="col-xs-11">
+                    {% category_combine category_list arg_dict %}
+                </div>
+            </div>
+            <div class="conditions row clearfix" style="margin: 0;padding: 8px 0;">
+                <div class="col-xs-1" style="text-align: right">
+                    {% article_type_all arg_dict %}
+                </div>
+                <div class="col-xs-11">
+                    {% article_type_combine type_list arg_dict %}
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"
+             style="height: 36px;line-height: 35px;padding: 0 15px;border-top: 1px solid #dddddd;background-color: #f1f0f0">
+            <i class="fa fa-table" aria-hidden="true"></i>
+            搜索文章({{ data_count }}篇)
+            <a target="_blank" href="/backend/add-article.html" class="right"
+               style="display: inline-block;padding:0 10px;background-color: #428bca;color: #ffffff;">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                创建新文章
+            </a>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>文章标题</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in result %}
+                <tr nid="{{ row.nid }}">
+                    <td><a href="/{{ row.blog.site }}/{{ row.nid }}.html">{{ row.title }}</a></td>
+                    <td>
+                        <a class="btn btn-danger btn-xs">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            删除
+                        </a>
+                        |
+                        <a class="btn btn-primary btn-xs" href="/backend/edit-article-{{ row.nid }}.html">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            编辑
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="clearfix">
+            <ul class="pagination right" style="margin-top: 0">
+               {{ page_str }}
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

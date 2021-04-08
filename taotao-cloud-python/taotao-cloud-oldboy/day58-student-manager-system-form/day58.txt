@@ -1,0 +1,70 @@
+day58
+今日概要：
+    - 内容拾遗
+    - 分页
+    - Form验证
+    
+
+1.内容拾遗
+    - 新URL
+        -提交时，保留之前的内容？？？？
+    - 对话框
+        - var data = $('#fmForm表单的ID').serialize();
+         $.ajax({
+            data: $('#fm').serialize()
+         })
+    
+2.分页组件
+    - Django内置分页
+        - Paginator、 Page   
+        - 页面：include
+    
+    - 扩展Django的内置分页
+        - CustomPaginator(Paginator)
+    传入：
+        - 所有数据 
+        - 当前页
+        - 每页显示30条
+        - 最多页面7个
+    
+    - 自定义分页
+    传入：
+        - 所有数据的个数
+        - 当前页
+        - 每页显示30条
+        - 最多页面7个
+    
+
+
+3.Form组件
+
+    - 对用户请求的验证
+        - AJax
+        - Form
+    - 生成HTML代码
+
+    a. 创建一个类
+    b. 类中创建字段（包含正则表达式）
+    c. GET
+        obj = Fr()
+        obj.user = > 自动生成HTML
+        
+    d. POST
+        obj = Fr(request.POST)
+        if obj.is_valid():
+            obj.cleaned_data
+        else:
+            obj.errors
+            return .... obj
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

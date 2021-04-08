@@ -1,0 +1,63 @@
+IT审计系统+ 主机管理
+
+60人
+30人
+
+
+老村长            广告业务线 500
+    root @&@#abdew4345+(&#)   192.168.1.1
+    root @&@#abdew4345+(&#)   192.168.1.2
+    log_reader abc33
+    mysql   adfd
+
+微吼
+
+
+郑建文            电商业务线  300
+大儿子            论坛      200
+                    二手车    200
+
+
+操作的日志记录
+
+
+权限管理混乱的 ,谁有什么权限,不清晰
+
+老村长    192.168.1.1  root,mysql,web
+屎正文    192.168.1.1  web
+
+
+
+操作没有记录
+
+RemoteUser
+    root abc123
+    root abc123
+
+
+
+
+秘钥生成命令
+1.ssh-keygen
+    .ssh/.id_rsa 私钥
+    .ssh/.id_rsa.pub 公钥
+2. 把公钥copy到要登录的目标机器上
+    scp -rp id_rsa alex@192.168.10.35:/home/alex/ #把本地文件copy到远程
+    scp -rp alex@192.168.10.35:/home/alex/id_rsa /tmp/ #把远程文件copy到本地
+
+    查看当前用户id, whoami
+    su - alex 切换用户
+    cat id_rsa.pub >authorized_keys 读出id_rsa.pub的内容并写入到>后的文件,(覆盖)
+    cat id_rsa.pub >>authorized_keys 读出id_rsa.pub的内容并写入到>后的文件,(追加)
+
+3. 在目标机器上,把id_rsa.pub里的key取出写入.ssh/authorized_keys
+
+
+
+
+
+
+
+
+操作人员  系统账号
+老村长     root    df  2016....

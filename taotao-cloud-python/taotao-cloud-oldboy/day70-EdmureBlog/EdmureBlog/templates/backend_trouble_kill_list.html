@@ -1,0 +1,65 @@
+{% extends 'backend_layout.html' %}
+
+{% block conent %}
+    <ol class="breadcrumb" style="margin-bottom: 0;">
+        <li><a href="#">保障管理</a></li>
+        <li class="active">处理保障列表</li>
+    </ol>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>保障标题</th>
+                <th>状态</th>
+                <th>创建时间</th>
+                <th>创建人</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in result %}
+                <tr>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.get_status_display }}</td>
+                    <td>{{ row.ctime }}</td>
+                    <td>{{ row.user.username }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="/backend/trouble-kill-{{ row.id }}.html">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            {% if row.status == 1 %}
+                                抢单
+                            {% elif row.status == 2 %}
+                                处理订单
+                            {% else %}
+                                解决方案
+                            {% endif %}
+                        </a>
+                        |
+                        <a class="btn btn-danger btn-xs">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            删除
+                        </a>
+                        |
+                        <a class="btn btn-primary btn-xs" href="#">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            编辑
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="clearfix">
+            <ul class="pagination right" style="margin-top: 0">
+               {{ page_str }}
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

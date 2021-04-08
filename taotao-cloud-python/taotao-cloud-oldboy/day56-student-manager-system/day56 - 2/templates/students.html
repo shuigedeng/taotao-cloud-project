@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <style>
+        .icon {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="padding: 20px 0;">
+        <a class="btn btn-primary" id="addBtn">添加</a>
+        <a class="btn btn-danger">删除</a>
+    </div>
+
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>班级</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in stu_list %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.gender }}</td>
+                    <td>{{ row.cs.title }}</td>
+                    <td>
+                        <a class="glyphicon glyphicon-remove icon"></a><a class="fa fa-pencil-square-o icon"></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">创建学生</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" placeholder="姓名">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" class="col-sm-2 control-label">年龄</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="age" placeholder="年龄">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="1"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio"  name="gender" value="0"> 女
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" class="col-sm-2 control-label">班级</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="cls_id">
+                                {% for row in cls_list %}
+                                    <option value="{{ row.id }}">{{ row.title }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="errorMsg" style="color: red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btnSave">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/jquery-3.1.1.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+<script>
+    $(function () {
+        bindEvent();
+        bindSave();
+    });
+
+    function bindEvent() {
+        $('#addBtn').click(function () {
+            $('#addModal').modal('show');
+        })
+    }
+    function bindSave() {
+
+        $('#btnSave').click(function () {
+            var postData = {};
+            $('#addModal').find('input,select').each(function () {
+                var v = $(this).val();
+                var n = $(this).attr('name');
+                if(n=='gender'){
+                    if($(this).prop('checked')){
+                        postData[n] = v;
+                    }
+                }else{
+                    postData[n] = v;
+                }
+            });
+            $.ajax({
+                url: '/add_student/',
+                type: 'POST',
+                data: postData,
+                success:function (arg) {
+                    // arg是字符串
+                    // JSON.parse将字符串转换成字典， json.loads
+                    var dict = JSON.parse(arg);
+                    if(dict.status){
+                        window.location.reload();
+                    }else {
+                        $('#errorMsg').text(dict.message);
+                    }
+                }
+            })
+
+        });
+
+
+    }
+
+</script>
+</body>
+</html>

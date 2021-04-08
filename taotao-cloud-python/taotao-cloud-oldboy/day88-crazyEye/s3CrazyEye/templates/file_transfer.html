@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+
+{% block page-content %}
+ {% csrf_token %}
+  <div class="row">
+
+        {% include 'host_list_component.html' %}
+
+        <div class="col-sm-9">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">文件分发</h3>
+                </div>
+                <div class="panel-body">
+                    <select onchange="CheckFileTransferType(this)" class="form-control" id="file_transfer_type">
+                        <option value="send">向远程发送文件</option>
+                        <option value="get">从远程下载文件</option>
+                    </select>
+                    <input type="text" id='local_file_path'  class="form-control" placeholder="本地文件目录">
+                    <input type="text" id='remote_file_path' class="form-control" placeholder="远程路径">
+
+                     <input type="button"  id="task_submit_btn" onclick="PostTask(this,'file_transfer')" class="btn btn-success pull-right" value="执行">
+
+
+                </div>
+            </div>
+
+            {% include 'task_result_component.html' %}
+        </div>
+  </div>
+
+
+
+{% include 'multitask_js_component.html' %}
+{% endblock %}

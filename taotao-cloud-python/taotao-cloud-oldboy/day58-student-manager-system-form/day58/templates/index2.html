@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.css" />
+</head>
+<body>
+    <ul>
+        {% for row in data %}
+            <li>{{ row.name }}-{{ row.age }}</li>
+        {% endfor %}
+    </ul>
+    {% for i in page_obj.pager_num_range %}
+        <a href="/index2.html?p={{ i }}">{{ i }}</a>
+    {% endfor %}
+    <hr/>
+
+    <ul class="pagination pagination-sm">
+        {{ page_obj.page_str|safe }}
+      </ul>
+    <div style="height: 300px;"></div>
+</body>
+</html>

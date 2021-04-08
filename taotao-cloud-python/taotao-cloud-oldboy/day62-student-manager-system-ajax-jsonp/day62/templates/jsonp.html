@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <div id="content"></div>
+    <input type="button" value="发送1" onclick="submitJsonp1();" />
+    <input type="button" value="发送2" onclick="submitJsonp2();" />
+    <input type="button" value="发送3" onclick="submitJsonp3();" />
+    <input type="button" value="发送4" onclick="submitJsonp4();" />
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script>
+        function submitJsonp1() {
+            $.ajax({
+                url: '/ajax3.html',
+                type: 'GET',
+                data: {nid:2},
+                success:function (arg) {
+                    $('#content').html(arg);
+                }
+            })
+        }
+
+        function submitJsonp2() {
+            var tag = document.createElement('script');
+            tag.src = 'http://127.0.0.1:9000/xiaokai.html';
+            document.head.appendChild(tag);
+            document.head.removeChild(tag);
+        }
+
+        function fuck(arg) {
+            $('#content').html(arg);
+        }
+
+        function submitJsonp3() {
+            var tag = document.createElement('script');
+            tag.src = 'http://www.jxntv.cn/data/jmd-jxtv2.html?callback=list&_=1454376870403';
+            document.head.appendChild(tag);
+            document.head.removeChild(tag);
+        }
+
+{#        function list(arg) {#}
+{#            console.log(arg);#}
+{#        }#}
+        
+        function submitJsonp4() {
+            $.ajax({
+                url: 'http://127.0.0.1:9000/xiaokai.html',
+                type: 'POST',
+                dataType: 'jsonp',
+                jsonp: 'callback',
+                jsonpCallback: 'func'
+            })
+        }
+        function func(arg) {
+            console.log(arg);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .w {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .item {
+            width: 25%;
+            float: left;
+        }
+
+        .item img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>姑娘们</div>
+<div class="w" id="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+<script src="/static/jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        var obj = new ScrollImg();
+        obj.fetchImg();
+        obj.scrollEvent();
+
+    });
+    function ScrollImg() {
+        this.NID = 0;
+        this.LASTPOSITION = 3;
+        this.fetchImg = function () {
+            var that = this;
+            $.ajax({
+                url: '/get_imgs.html',
+                type: 'GET',
+                data: {nid: that.NID},
+                dataType: 'JSON',
+                success: function (arg) {
+                    var img_list = arg.data;
+                    $.each(img_list, function (index, v) {
+                        var eqv = (index + that.LASTPOSITION + 1) % 4;
+                        console.log(eqv);
+                        var tag = document.createElement('img');
+                        tag.src = '/' + v.src;
+                        $('#container').children().eq(eqv).append(tag);
+                        if (index + 1 == img_list.length) {
+                            that.LASTPOSITION = eqv;
+                            //that.NID = v.id;
+                        }
+                    })
+
+                }
+
+            })
+        };
+        this.scrollEvent = function () {
+            var that = this;
+            $(window).scroll(function () {
+                var scrollTop = $(window).scrollTop();
+                var winHeight = $(window).height();
+                var docHeight = $(document).height();
+                if (scrollTop + winHeight == docHeight) {
+                    that.fetchImg();
+                }
+            })
+        }
+
+    }
+
+</script>
+</body>
+</html>

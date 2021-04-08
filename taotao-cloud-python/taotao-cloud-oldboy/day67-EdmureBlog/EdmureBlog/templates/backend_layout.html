@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/backend.css"/>
+    {% block css %} {% endblock %}
+</head>
+<body>
+<div class="pg-header">
+    <div class="logo left" style="text-align: center;background-color: #1c5a9c;">
+        <a href="#" style="color: #ffffff;font-size:30px;font-weight: bold;text-decoration: none">
+            EasyStack
+        </a>
+    </div>
+
+    <div class="left-menu left">
+        <a class="menu-item" href="/">博客首页</a>
+    </div>
+
+    <div class="right-menu right clearfix">
+
+        <div class="user-info right">
+            <a href="#" class="avatar">
+                <img class="img-circle" src="/static/imgs/avatar/default.png">
+            </a>
+
+            <div class="more-info">
+                <a href="#" class="more-item">个人信息</a>
+                <a href="/logout.html" class="more-item">注销</a>
+            </div>
+        </div>
+
+        <a class="user-menu right">
+            消息
+            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <span class="badge bg-success">2</span>
+        </a>
+
+        <a class="user-menu right">
+            通知
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            <span class="badge bg-success">2</span>
+        </a>
+
+        <a class="user-menu right">
+            任务
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+            <span class="badge bg-danger">4</span>
+        </a>
+    </div>
+
+</div>
+<div class="pg-body">
+    <div class="menu">
+        <a class="menu-item" href="/backend/article-0-0.html">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>文章管理</span>
+        </a>
+        <a class="menu-item" href="/backend/category.html">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>分类管理</span>
+        </a>
+        <a class="menu-item" href="/backend/tag.html">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>标签管理</span>
+        </a>
+        <a class="menu-item" href="/backend/base-info.html">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>个人信息</span>
+        </a>
+    </div>
+    <div class="content">
+        {% block conent %} {% endblock %}
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

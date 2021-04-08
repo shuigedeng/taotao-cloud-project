@@ -1,0 +1,192 @@
+{% extends 'index.html' %}
+
+{% block page-title-text %}
+    学员报名
+{% endblock %}
+{% block page-content %}
+
+<div class="panel">
+        <div class="eq-height clearfix">
+            <div class="col-md-5 eq-box-md text-center box-vmiddle-wrap bg-primary">
+
+                <!-- Simple Promotion Widget -->
+                <!--===================================================-->
+                <div class="box-vmiddle pad-all">
+                    <h3 class="text-thin">学员报名</h3>
+                    <span class="icon-wrap icon-wrap-lg icon-circle bg-trans-light">
+                        <i class="fa fa-gift fa-5x text-primary"></i>
+                    </span>
+                    <p>2017元旦前报名，享 <span class="text-lg text-bold">50%</span> 优惠，今天就开启技术牛人之路！</p>
+                    <a class="btn btn-lg btn-primary btn-labeled fa fa-arrow-right" href="#">详细活动信息...</a>
+                </div>
+                <!--===================================================-->
+
+            </div>
+            <div class="col-md-7 eq-box-md eq-no-panel">
+
+                <!-- Main Form Wizard -->
+                <!--===================================================-->
+                <div id="demo-main-wz">
+
+                    <!--nav-->
+                    <ul class="row wz-step wz-icon-bw wz-nav-off mar-top wz-steps">
+                        <li class="col-xs-3 {% if response.step < 3 %}active{% endif %}">
+                            <a data-toggle="tab" href="#demo-main-tab1" >
+                                <span class="icon-wrap icon-wrap-xs bg-danger"><i class="fa fa-info"></i></span>
+                                <p class="text-thin">选择班级</p>
+                            </a>
+                        </li>
+                        <li class="col-xs-3 {% if response.step < 4 %}active{% endif %}" >
+                            <a data-toggle="tab" href="#demo-main-tab2" >
+                                <span class="icon-wrap icon-wrap-xs bg-warning"><i class="fa fa-user"></i></span>
+                                <p class="text-thin">审核学员信息</p>
+                            </a>
+                        </li>
+                        <li class="col-xs-3 {% if response.step < 5 %}active{% endif %}">
+                            <a data-toggle="tab" href="#demo-main-tab3">
+                                <span class="icon-wrap icon-wrap-xs bg-info"><i class="fa fa-home"></i></span>
+                                <p class="text-thin">缴费</p>
+                            </a>
+                        </li>
+                        <li class="col-xs-3 {% if response.step > 4 %}active{% endif %}">
+                            <a data-toggle="tab" href="#demo-main-tab4">
+                                <span class="icon-wrap icon-wrap-xs bg-success"><i class="fa fa-heart"></i></span>
+                                <p class="text-thin">报名成功</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!--progress bar-->
+                    <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-primary" style="width: 25%; left: 0%; position: relative; transition: all 0.5s;"></div>
+                    </div>
+
+
+                    <!--form-->
+                    <form class="form-horizontal" method="post">{% csrf_token %}
+                        <div class="panel-body">
+                            <div class="tab-content">
+{#                                {{ enrollment_form.errors }}#}
+                                {% if response.step == 2 %}
+                                      <pre> 请将此报名链接发给学员进行填写 http://localhost:9000{% url 'stu_enrollment' response.enroll_obj.id %} </pre>
+                                {% endif %}
+                                {{ response }}
+                                <!--First tab-->
+                                <div id="demo-main-tab1" class="tab-pane active in">
+                                {% if response.step < 4 %}
+    {#                                    {% for field in enrollment_form %}#}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">客户</label>
+                                            <div class="col-lg-7">
+                                                <select type="text" name="customer" value="{{ customer_obj.id }}" class="form-control" >
+                                                    <option value="{{ customer_obj.id }}">{{ customer_obj }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+    {#                                    {% endfor %}#}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ enrollment_form.school.label }}</label>
+                                            <div class="col-lg-7">
+                                                {{ enrollment_form.school}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ enrollment_form.course_grade.label }}</label>
+                                            <div class="col-lg-7">
+                                                {{ enrollment_form.course_grade}}
+                                            </div>
+                                        </div>
+
+                                    {% if response.step > 2 %}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ enrollment_form.contract_agreed.label }}</label>
+                                            <div class="col-lg-7">
+                                                <div class="checkbox">
+                                                    <label class="form-checkbox form-icon form-text">
+                                                        <input type="checkbox" value="java" name="acceptTerms" disabled checked> 客户已同意协议内容
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ enrollment_form.contract_approved.label }}</label>
+                                            <div class="col-lg-7">
+                                                <div class="checkbox">
+                                                    <label class="form-checkbox form-icon form-text">
+                                                        {% if response.step > 3 %}
+                                                        <input type="checkbox"  name="contract_approved" checked disabled> 验证学员资料无误后选中此框
+                                                        {% else %}
+                                                        <input type="checkbox"  name="contract_approved" > 验证学员资料无误后选中此框
+                                                        {% endif %}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">课程顾问</label>
+                                        <div class="col-lg-7">
+                                            <p>{{ customer_obj.consultant }}</p>
+                                        </div>
+                                    </div>
+                                {% elif response.step == 4 %}
+                                    创建交费纪录
+                                    {{ payment_form.errors }}
+                                    {% for field in payment_form %}
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ field.label }}</label>
+                                            <div class="col-lg-7">
+                                                {% if field.name == 'enrollment' %}
+                                                    <select name="enrollment" class="form-control">
+                                                        <option value="{{ enroll_obj.id }}">{{ enroll_obj }}</option>
+                                                    </select>
+                                                {% else %}
+                                                    {{ field }}
+                                                {% endif %}
+
+                                            </div>
+
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    报名成功
+                                {% endif %}
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <!--Footer button-->
+                        <div class="pull-right pad-all">
+                            {% if response.step < 5 %}
+                            <button type="submit" class="btn btn-success ">下一步</button>
+                            {% else %}
+                            <button type="button" class="btn btn-success ">
+                                <a href="/king_admin/crm_customer/change/{{ customer_obj.id }}/">返回</a>
+                            </button>
+                            {% endif %}
+
+{#                            <button type="button" class="previous btn btn-primary disabled">Previous</button>#}
+{#                            <button type="button" class="next btn btn-primary">Next</button>#}
+{#                            <button type="button" class="finish btn btn-success" disabled="" style="display: none;">Finish</button>#}
+                        </div>
+
+                    </form>
+                </div>
+                <!--===================================================-->
+                <!-- End of Main Form Wizard -->
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom-js %}
+<script src="/static/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="/static/plugins/bootstrap-wizard/form-wizard.js"></script>
+{% endblock %}

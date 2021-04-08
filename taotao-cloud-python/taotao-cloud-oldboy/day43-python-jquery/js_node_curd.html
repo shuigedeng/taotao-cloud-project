@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div1,.div2,.div3,.div4{
+            width: 300px;
+            height: 100px;
+        }
+        .div1{
+            background-color: green;
+        }
+         .div2{
+            background-color: yellow;
+        }
+         .div3{
+            background-color: rebeccapurple;
+        }
+         .div4{
+            background-color: deeppink;
+        }
+    </style>
+</head>
+<body>
+
+<div class="div1">
+    <button onclick="add()">add</button>
+    hello div1
+</div>
+<div class="div2">
+    <button onclick="del()">del</button>
+    hello div2
+</div>
+<div class="div3">
+    <button onclick="change()">change</button>
+    <p>hello div3</p>
+</div>
+<div class="div4">hello div4</div>
+
+
+<script>
+    function change() {
+        var img=document.createElement("img");//<img src="">
+        //img.setAttribute("src","meinv.jpg");
+        img.src="meinv.jpg";
+
+        var ele=document.getElementsByTagName("p")[0];
+        var father=document.getElementsByClassName("div3")[0];
+
+        father.replaceChild(img,ele)
+
+
+    }
+    function add() {
+        var ele=document.createElement("p");//<p></p>
+        ele.innerHTML="<h1>hello p</h1>";
+        //ele.innerText="<h1>hello p</h1>";
+        ele.style.color="red";
+        ele.style.fontSize="10px";
+        var father=document.getElementsByClassName("div1")[0];
+        father.appendChild(ele)
+
+    }
+
+    function del() {
+        var father=document.getElementsByClassName("div1")[0];
+        var son=father.getElementsByTagName("p")[0];
+        father.removeChild(son)
+
+    }
+
+
+</script>
+</body>
+</html>

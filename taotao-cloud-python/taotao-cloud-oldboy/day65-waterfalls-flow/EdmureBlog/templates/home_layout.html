@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/edmure.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/row-avatar.css"/>
+    <link rel="stylesheet" href="/static/css/theme/{{ blog.theme }}.css"/>
+    {% block css %}{% endblock %}
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="pg-header">
+    <div class="title">{{ blog.title }}</div>
+    <div class="menu-list">
+        <a class="menu-item" href="/">首页</a>
+        <a class="menu-item" href="/{{ blog.site }}.html">个人首页</a>
+        <a class="menu-item" href="/backend/index.html">管理</a>
+    </div>
+</div>
+<div class="pg-body">
+    <div class="body-menu">
+        <div class="notice">
+            <div class="notice-header">公告</div>
+            <div class="notice-body">
+                <ul>
+                    <li>昵称：{{ blog.user.nickname }}</li>
+                    <li>粉丝：{{ blog.user.fans.count }}</li>
+                    <li>关注：{{ blog.user.f.count }}</li>
+                    <li>邮箱：{{ blog.user.email }}</li>
+                </ul>
+                <div class="memo">
+                    真实是人生的命脉，是一切价值的根基。
+                </div>
+            </div>
+        </div>
+        <div class="tags">
+            <div class="tags-header">标签</div>
+            <div class="tags-body">
+                <ul>
+                    {% for tag in tag_list %}
+                        <li><a href="/{{ blog.site }}/tag/{{ tag.nid }}.html">{{ tag.title }}({{ tag.article_set.count }})</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="types">
+            <div class="types-header">分类</div>
+            <div class="types-body">
+                <ul>
+                    {% for tag in category_list %}
+                        <li><a href="/{{ blog.site }}/category/{{ tag.nid }}.html">{{ tag.title }}({{ tag.article_set.count }})</a></li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+        <div class="dates">
+            <div class="dates-header">时间</div>
+            <div class="dates-body">
+                <ul>
+                    {% for tag in date_list %}
+                        <li><a href="/{{ blog.site }}/date/{{ tag.ctime }}.html">{{ tag.ctime}}({{ tag.num}})</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+    {% block js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block styles %}
+    <style>
+          h2{
+              color: red;
+          }
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+     {{ block.super }}
+     {% for student in student_list %}
+           <h2>学生{{ student }}</h2>
+     {% endfor %}
+     {% include "test.html" %}
+{% endblock %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .w{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .item{
+            width: 25%;
+            float: left;
+        }
+        .item img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>姑娘们</div>
+    <div class="w" id="container">
+
+        <div class="item">11
+        </div>
+        <div class="item">22
+
+        </div>
+        <div class="item">33
+
+        </div>
+        <div class="item">44
+
+        </div>
+
+    </div>
+    <script src="/static/jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            initImg();
+        });
+        NID = 0;
+        function initImg() {
+           $.ajax({
+                url: '/get_imgs.html',
+                type: 'GET',
+                data:{nid:NID},
+                dataType: 'JSON',
+               success:function (arg) {
+                    var img_list = arg.data;
+                    $.each(img_list,function (index,v) {
+                        var eqv = index % 4;
+                        var tag = document.createElement('img');
+                        tag.src = '/'+ v.src;
+                        $('#container').children().eq(eqv).append(tag);
+                    })
+
+               }
+               
+           })
+        }
+
+
+    </script>
+</body>
+</html>

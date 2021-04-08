@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>资产列表</h1>
+    <table border="1">
+        <thead id="table_th"></thead>
+        <tbody id="table_tb"></tbody>
+    </table>
+
+    <script src="/static/js/jquery-1.12.4.js"></script>
+    
+    <script>
+        $(function () {
+            init();
+        });
+
+        String.prototype.format = function (kwargs) {
+            // this ="laiying: {age} - {gender}";
+            // kwargs =  {'age':18,'gender': '女'}
+            var ret = this.replace(/\{(\w+)\}/g,function (km,m) {
+                return kwargs[m];
+            });
+            return ret;
+        };
+
+
+        function init() {
+            $.ajax({
+                url: '/web/asset-json.html',
+                type: 'GET',
+                dataType: 'JSON',
+                success:function (result) {
+                    initGlobalData(result.global_dict);
+                    initHeader(result.table_config);
+                    initBody(result.table_config,result.data_list)
+
+                }
+            })
+
+        }
+        
+        function initHeader(table_config) {
+            /*
+            table_config = [
+                {
+                    'q': 'id',
+                    'title': 'ID',
+                    'display':false
+                },
+                {
+                    'q': 'name',
+                    'title': '随便',
+                    'display': true
+                }
+            ]
+             */
+
+             /*
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+            </tr>
+            */
+            var tr = document.createElement('tr');
+            $.each(table_config,function (k,item) {
+                if(item.display){
+                    var th = document.createElement('th');
+                    th.innerHTML = item.title;
+                    $(tr).append(th);
+                }
+
+            });
+            $('#table_th').append(tr);
+        }
+
+        function initBody(table_config,data_list){
+            $.each(data_list,function (k,row) {
+                // row = {'cabinet_num': '12B', 'cabinet_order': '1', 'id': 1},
+                var tr = document.createElement('tr');
+
+                $.each(table_config,function (i,colConfig) {
+                   if(colConfig.display){
+                       var td = document.createElement('td');
+
+                       /* 生成文本信息 */
+                       var kwargs = {};
+                       $.each(colConfig.text.kwargs,function (key,value) {
+
+                           if(value.substring(0,2) == '@@'){
+                               var globalName = value.substring(2,value.length); // 全局变量的名称
+                               var currentId = row[colConfig.q]; // 获取的数据库中存储的数字类型值
+                               var t = getTextFromGlobalById(globalName,currentId);
+                               kwargs[key] = t;
+                           }
+                           else if (value[0] == '@'){
+                                kwargs[key] = row[value.substring(1,value.length)]; //cabinet_num
+                           }else{
+                                kwargs[key] = value;
+                           }
+                       });
+                       var temp = colConfig.text.content.format(kwargs);
+                       td.innerHTML = temp;
+
+
+                       /* 属性colConfig.attrs = {'edit-enable': 'true','edit-type': 'select'}  */
+                        $.each(colConfig.attrs,function (kk,vv) {
+                             td.setAttribute(kk,vv);
+                        });
+
+                       $(tr).append(td);
+                   }
+                });
+
+                $('#table_tb').append(tr);
+            });
+
+
+            /*
+            * [
+            *   {'cabinet_num': '12B', 'cabinet_order': '1', 'id': 1},
+            *   {'cabinet_num': '12B', 'cabinet_order': '1', 'id': 1},
+            * ]
+            *
+            *   <tr>
+                    <td>12B</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>12C</td>
+                    <td>1</td>
+                </tr>
+            *
+            * */
+
+        }
+        
+        function initGlobalData(global_dict) {
+            $.each(global_dict,function (k,v) {
+                // k = "device_type_choices"
+                // v= [[0,'xx'],[1,'xxx']]
+                device_type_choices = 123;
+                window[k] = v;
+            })
+        }
+        
+        function getTextFromGlobalById(globalName,currentId) {
+            // globalName = "device_type_choices"
+            // currentId = 1
+            var ret = null;
+            $.each(window[globalName],function (k,item) {
+                console.log(item[0],item[1],currentId);
+                if(item[0] == currentId){
+                    ret = item[1];
+                    return
+                }
+            });
+            return ret;
+        }
+    </script>
+    
+
+</body>
+</html>

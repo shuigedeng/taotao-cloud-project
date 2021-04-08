@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        /*#id1{*/
+            /*color: red;*/
+        /*}*/
+        /*.div1{*/
+            /*color: rebeccapurple;*/
+        /*}*/
+
+        /*div{*/
+            /*color: yellow;*/
+        /*}*/
+
+        /*.div3{*/
+            /*color: red;*/
+        /*}*/
+        /*.div1 .div3{*/
+            /*color: chartreuse;*/
+        /*}*/
+
+        /*#div1 .div3{*/
+            /*color: rebeccapurple!important;*/
+        /*}*/
+
+        /*#div1 .div3  {*/
+            /*color: chartreuse!important;*/
+        /*}*/
+
+        #div1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="div1">
+    hello1
+    <div class="div2">
+        hello2
+        <div class="div3">
+              嵌套优先级
+        </div>
+    </div>
+</div>
+
+      <!--<div class="div1" id="id1" style="color: green">优先级</div>-->
+</body>
+</html>

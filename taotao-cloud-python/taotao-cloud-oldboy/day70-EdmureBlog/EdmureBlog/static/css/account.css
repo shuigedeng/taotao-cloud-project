@@ -1,0 +1,25 @@
+.login {
+    width: 400px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #f0f0f0;
+    padding: 10px 30px 50px 30px;
+    -webkit-box-shadow: 5px 10px 10px rgba(0, 0, 0, .05);
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, .05);
+}
+
+.register {
+    width: 400px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #f0f0f0;
+    padding: 10px 30px 50px 30px;
+    -webkit-box-shadow: 5px 10px 10px rgba(0, 0, 0, .05);
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, .05);
+}
+.alert{
+    padding: 6px;
+    margin-bottom: 0;
+}

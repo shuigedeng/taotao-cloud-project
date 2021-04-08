@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .div1,.div2{
+            width: 200px;
+            height: 100px;
+        }
+        .div1{
+            border: 5px solid rebeccapurple;
+            padding: 20px;
+            margin: 2px;
+            background-color: antiquewhite;
+        }
+        .div2{
+            background-color: rebeccapurple;
+        }
+
+        /*.outer{*/
+            /*position: relative;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+<div class="div1"></div>
+
+<div class="outer">
+<div class="div2"></div>
+</div>
+
+
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+    // offset()相对于视口的偏移量
+//     console.log($(".div1").offset().top);
+//     console.log($(".div1").offset().left);
+//
+//     console.log($(".div2").offset().top);
+//     console.log($(".div2").offset().left);
+
+    //position()：相对于已经定位的父标签的偏移量
+
+//     console.log($(".div1").position().top);
+//     console.log($(".div1").position().left);
+
+//     console.log($(".div2").position().top);
+//     console.log($(".div2").position().left);
+
+
+//     console.log($(".div1").height("300px"));
+//     console.log($(".div1").innerHeight());
+//     console.log($(".div1").outerHeight());
+//     console.log($(".div1").outerHeight(true));
+
+
+
+
+</script>
+</body>
+</html>

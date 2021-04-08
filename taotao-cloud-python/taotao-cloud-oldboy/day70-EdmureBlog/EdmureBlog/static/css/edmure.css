@@ -1,0 +1,44 @@
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.hot-recommend, .hot-comment {
+    border-radius: 0;
+    border: 0;
+    margin-top: 20px;
+}
+
+.hot-recommend .panel-heading, .hot-comment .panel-heading {
+    border-radius: 0;
+}
+
+.hot-recommend .panel-body, .hot-comment .panel-body {
+    padding: 5px 10px;
+}
+
+.hot-recommend li, .hot-comment li {
+    padding: 2px 0;
+}
+.navbar-right li a{
+    padding-left: 5px;
+    padding-right: 5px;
+}

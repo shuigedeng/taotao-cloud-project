@@ -1,0 +1,67 @@
+提交：
+    - Form
+    - Ajax
+
+一、Ajax，偷偷向后台发请求
+    - XMLHttpRequest
+        - 手动使用
+        - jQuery
+    - “伪”Ajax
+        - iframe标签
+        - form表单
+    
+二、Ajax上传文件
+    - jQuery
+    - 原生
+    以上两种方式可利用formData对象，来封装用户提交的数据
+    
+    - Iframe+Form
+    
+    ******Iframe+Form*******
+
+
+
+三、JSONP 跨域Ajax
+    
+    浏览器同源策略：XMLHttpRequest
+    巧妙的机制JSONP
+    
+    JSONP：
+        利用创建script块，在期中执行src属性为：远程url
+        函数(返回值)
+        
+        function 函数(arg){
+            
+        }
+        
+        
+注意：CORS
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

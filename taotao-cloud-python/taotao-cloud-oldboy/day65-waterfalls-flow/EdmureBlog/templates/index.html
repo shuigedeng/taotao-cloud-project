@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/edmure.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/row-avatar.css"/>
+
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+{% include 'include/header.html' %}
+
+<div class="container">
+    <div>
+        <div class="col-md-8">
+            <div class="article-list">
+                {% for row in article_list %}
+                    <div class="article-item clearfix">
+                        <h3><a href="#">{{ row.title }}</a></h3>
+                        <div class="clearfix">
+                            <a class="avatar left" href="#">
+                                <img src="/static/imgs/avatar/20130809170025.png">
+                            </a>
+                            {{ row.summary }}
+                        </div>
+                        <div class="footers">
+                            <a href="#">
+                                <i class="fa fa-user-o" aria-hidden="true"></i>
+                                <span>{{ row.blog.user.nickname }}</span>
+                            </a>
+                            <span>发布于 2014-11-11</span>
+                            <a href="#" class="ele">
+                                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                                <span>{{ row.comment_count }}</span>
+                            </a>
+                            <a href="#" class="ele">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                <span>{{ row.up_count }}</span>
+                            </a>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="clearfix">
+
+                <ul class="pagination">
+                    {{ page_str }}
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default hot-recommend">
+                <div class="panel-heading">吐血推荐</div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Integer molestie lorem at massa</li>
+                        <li>Facilisis in pretium nisl aliquet</li>
+                        <li>Nulla volutpat aliquam velit
+                        </li>
+                        <li>Faucibus porta lacus fringilla vel</li>
+                        <li>Aenean sit amet erat nunc</li>
+                        <li>Eget porttitor lorem</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default hot-comment">
+                <div class="panel-heading">评论最多</div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Integer molestie lorem at massa</li>
+                        <li>Facilisis in pretium nisl aliquet</li>
+                        <li>Nulla volutpat aliquam velit
+                        </li>
+                        <li>Faucibus porta lacus fringilla vel</li>
+                        <li>Aenean sit amet erat nunc</li>
+                        <li>Eget porttitor lorem</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

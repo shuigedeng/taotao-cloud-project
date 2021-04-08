@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .div2{
+            width: 100%;
+            height: 800px;
+        }
+        .div1{
+            width: 40%;
+            height: 150px;
+            background-color: antiquewhite;
+            overflow: auto;
+        }
+        .div2{
+            background-color: rebeccapurple;
+        }
+
+         .returnTop{
+             position: fixed;
+             right: 20px;
+             bottom: 20px;
+             width: 90px;
+             height: 50px;
+             background-color: gray;
+             color: white;
+             text-align: center;
+             line-height: 50px;
+         }
+
+         .hide{
+             display: none;
+         }
+
+    </style>
+</head>
+<body>
+
+
+<div class="div1">
+    <h1>1111</h1>
+    <h1>1111</h1>
+    <h1>1111</h1>
+    <h1>1111</h1>
+    <h1>1111</h1>
+    <h1>1111</h1>
+</div>
+
+<div class="div2">
+    <button onclick="returnTop()">return</button>
+</div>
+
+<div class="returnTop hide" onclick="returnTop()">返回顶部</div>
+
+<script src="jquery-3.1.1.js"></script>
+<script>
+
+
+    window.onscroll=function () {
+
+
+//        console.log($(window).scrollTop());
+
+        if($(window).scrollTop()>300){
+            $(".returnTop").removeClass("hide")
+        }else {
+            $(".returnTop").addClass("hide")
+        }
+
+
+    };
+
+    function returnTop() {
+        $(window).scrollTop(0)
+
+    }
+
+    $(".div2 button").click(function () {
+         $(".div1").scrollTop(0)
+    })
+
+
+
+</script>
+</body>
+</html>

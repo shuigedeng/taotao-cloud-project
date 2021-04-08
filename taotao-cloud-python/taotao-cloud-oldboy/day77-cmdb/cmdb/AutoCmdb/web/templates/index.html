@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
+    <link rel="stylesheet" href="/static/css/backend.css"/>
+    <link rel="stylesheet" href="/static/css/index.css"/>
+</head>
+<body>
+<div class="pg-header">
+    {% include "include/header.html" %}
+</div>
+<div class="pg-body">
+    <div class="row" style="margin: 40px 60px;">
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box default-bg">
+                <i class="fa fa-desktop"></i>
+                <a class="count" href="/cmdb.html">资产</a>
+
+                <div class="title">CMDB</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box blue-bg">
+                <i class="fa fa-cog"></i>
+                <a class="count" href="/configration/order/">配管</a>
+
+                <div class="title">configuration</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box brown-bg">
+                <i class="fa fa-cloud"></i>
+
+                <div class="count">私有云</div>
+                <div class="title">OpenStack</div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box green-bg">
+                <i class="fa fa-eye"></i>
+
+                <div class="count">监控</div>
+                <div class="title">Monitor</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box twitter-bg">
+                <i class="fa fa-connectdevelop"></i>
+
+                <div class="count">堡垒机</div>
+                <div class="title">Bastion</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box task-bg">
+                <i class="fa fa-tasks"></i>
+
+                <div class="count">任务</div>
+                <div class="title">Task</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box dns-bg">
+                <i class="fa fa-tasks"></i>
+                <a class="count" href="/dns/zone/">DNS</a>
+
+                <div class="title">Dynamic DNS</div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box pool-bg">
+                <i class="fa fa-skyatlas"></i>
+                <a class="count" href="/pool/ipaddr/">资源池</a>
+
+                <div class="title">resource pool</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box flow-bg">
+                <i class="fa fa-recycle"></i>
+                <a class="count" href="/publisher/index/">发布</a>
+
+                <div class="title">publisher</div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+            <div class="info-box gray-bg">
+                <i class="fa fa-plus"></i>
+
+                <div class="count">添加</div>
+                <div class="title">ADD</div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

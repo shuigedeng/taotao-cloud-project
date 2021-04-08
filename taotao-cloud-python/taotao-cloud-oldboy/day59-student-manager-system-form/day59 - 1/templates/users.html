@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="/add_user/">添加</a>
+    <ul>
+        {% for row in user_list %}
+            <li>{{ row.id }}-{{ row.username }}-{{ row.email }} <a href="/edit_user-{{ row.id }}/">编辑</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

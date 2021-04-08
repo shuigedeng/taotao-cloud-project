@@ -1,0 +1,76 @@
+.pg-header{
+    height: 80px;
+    background-color: #89b1c6;
+    position: relative;
+    color: #ffffff;
+}
+.pg-header .title{
+    font-size: 30px;
+    line-height: 60px;
+    margin-left: 20px;
+}
+.pg-header .menu-list{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+}
+.pg-header .menu-list a{
+    color: #ffffff;
+    display: inline-block;
+    padding: 3px 5px;
+    margin: 0 5px;
+    background-color: #006699;
+}
+
+.pg-body{
+    min-width: 980px;
+    position: relative;
+}
+.pg-body .body-menu{
+    position: absolute;
+    left: 0;
+    width: 280px;
+}
+.pg-body .body-content{
+    position: absolute;
+    right: 0;
+    left: 280px;
+    overflow: scroll;
+}
+
+.pg-body .body-content .art-title{
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px;
+}
+.pg-body .body-content .art-content{
+    font-size: 12px;
+}
+.pg-body .body-content .art-comment .comment-list {
+    padding: 5px;
+}
+.pg-body .body-content .art-comment .comment-list .comment-item{
+    border-bottom: 1px solid #dddddd;
+
+}
+.pg-body .body-content .art-comment .comment-list .reply-title{
+    margin: 5px 0;
+}
+.pg-body .body-content .art-comment .comment-list .reply-title .user-info{
+    float: left;
+}
+.pg-body .body-content .art-comment .comment-list .reply-title .reply{
+    float: right;
+}
+
+.pg-body .body-content .summary-list{
+
+}
+.pg-body .body-content .summary-list .summary-item{
+    border-bottom: 1px solid #dddddd;padding: 8px 0;
+}
+
+.pg-body .body-content .title-list .row-item{
+    border-bottom: 1px solid #dddddd;padding: 8px 0;
+}

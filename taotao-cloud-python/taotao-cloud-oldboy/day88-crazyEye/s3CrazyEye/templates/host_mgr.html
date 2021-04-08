@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+
+{% block page-content %}
+ {% csrf_token %}
+  <div class="row">
+        {% include 'host_list_component.html' %}
+
+        <div class="col-sm-9">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">命令操作</h3>
+                </div>
+                <div class="panel-body">
+                    <textarea  id="cmd_input" class="form-control" placeholder="input your cmd...."> </textarea>
+
+                    <input type="button"  id="task_submit_btn" onclick="PostTask(this,'cmd')" class="btn btn-success pull-right" value="执行命令">
+                </div>
+            </div>
+
+
+
+            {% include 'task_result_component.html' %}
+
+        </div>
+
+  </div>
+
+{% include 'multitask_js_component.html' %}
+
+{% endblock %}
+
+

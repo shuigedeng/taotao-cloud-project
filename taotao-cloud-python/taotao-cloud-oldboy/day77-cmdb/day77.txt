@@ -1,0 +1,94 @@
+运维自动化项目
+    减少人工干预，降低人员成本
+    - 资产管理
+    - 操作管理
+    
+CMDB
+    - 运维自动化基础
+    - 资产管理
+    
+    功能：
+        - Agent或中控机
+           - 字典套字典 =》 数据
+           - 认证API
+                a. 时间超时
+                b. 访问记录
+                c. 加密后进行比较
+                ====> Tornado：源码中来了 <==== 
+        - API
+        - 后台管理（10分钟完成CURD）
+            - 对于数据库表数据进行增删改查
+              ==》 组件：基本增删改查 《===  
+            
+    作业：
+        - CMDB采集资产信息示例
+        - Django
+            URL - views  CBV方式
+            # 提交到API的数据结构
+            
+          
+          server_info = plugins.get_server_info(hostname)
+          # 序列化成字符串
+          server_json = Json.dumps(server_info.data)
+          response = requests.post(
+                    url="http//ww.....",
+                    json=server_json
+                )
+        
+    预习：
+        数据库表结构
+        - API验证
+        - 保存资产数据；保存资产变更记录
+    
+    
+    
+    作业：
+    
+        前提：
+            1. Agent汇报数据格式
+                {
+                    ‘status’: '',
+                    'hostname':“ｓｓｄｆ”
+                    "data":{
+                        'disk': {status"...}
+                    }
+                }
+            2. 数据库表结构
+            
+            3. 
+            
+            
+    
+    
+        # ========》 server_obj服务器对象 ；server_info  《==========
+        # 硬盘 或 网卡 或 内存
+        # 硬盘：增删改
+        # 1. server_obj反向关联硬盘表，获取数据库中硬盘信息
+        # [
+        #     {'slot': "#1", 'size': '100'},
+        #     {'slot': "#2", 'size': '60'},
+        #     {'slot': "#3", 'size': '88'},
+        # ]
+        # old_list = ['#1','#2','#3']
+        # 2. server_info['disk'] 新汇报的硬盘数据
+        # {
+        #     "#1":{'slot': "#1", 'size': '90'},
+        #     "#4":{'slot': "#4", 'size': '40'},
+        # }
+        # new_list = ['#1','#4']
+        #3. 更新['#1'] 删除['#2','#3'] 增加 ['#4']
+
+        #4. # 增加 ['#4']
+    
+    
+    CMDB总结：
+        1. 三种采集资产方式
+           唯一标识
+           
+        2. API
+           API验证（tornado源码，加密cookie+时间限制+访问记录）
+           数据库表结构
+           
+        3. 后台管理
+            告别CURD，公共组件（前端+后端配置）
+    

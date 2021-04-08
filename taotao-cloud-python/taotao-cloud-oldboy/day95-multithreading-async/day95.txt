@@ -1,0 +1,92 @@
+Day95，爬虫性能相关
+    
+    - 傻等
+        response = requests.get(....)
+    - 机智
+        response = requests.get(....)
+        response = requests.get(....)
+        response = requests.get(....)
+        response = requests.get(....)
+    
+    角色：使用者
+        - 多线程
+        - 多线程
+        - 协程（微线程） + 异步IO =》 1个线程发送N个Http请求
+            - asyncio
+                - 示例1：asyncio.sleep(5)
+                - 示例2：自己封装Http数据包
+                - 示例3：asyncio+aiohttp
+                    aiohttp模块：封装Http数据包 pip3 install aiohttp
+                - 示例4：asyncio+requests
+                    requests模块：封装Http数据包 pip3 install requests
+            - gevent，greenlet+异步IO
+                    pip3 install greenlet
+                    pip3 install gevent
+                - 示例1：gevent+requests
+                - 示例2：gevent（协程池，最多发多少个请求）+requests
+                - 示例3：gevent+requests => grequests
+                        pip3 install grequests
+                
+            - Twisted
+                pip3 install twisted
+            - Tornado
+                pip3 install tornado
+            
+            =====> gevent > Twisted > Tornado > asyncio
+    角色：NB开发者
+        
+        1. socket客户端、服务端
+            连接阻塞
+            setblocking(0): 无数据（连接无响应；数据未返回）就报错
+            
+        2. IO多路复用
+            客户端：
+            try:
+                socket对象1.connet()
+                socket对象2.connet()
+                socket对象3.connet()
+            except Ex..
+                pass
+                
+            while True:
+                r,w,e = select.select([socket对象1,socket对象2,socket对象3,],[socket对象1,socket对象2,socket对象3,],[],0.05)
+                r = [socket对象1,] # 表示有人给我发送数据
+                    xx = socket对象1.recv()
+                w = [socket对象1,] # 表示我已经和别人创建连接成功:
+                    socket对象1.send('"""GET /index HTTP/1.0\r\nHost: baidu.com\r\n\r\n"""')
+    
+    
+        3. 
+            class Foo:
+            
+                def fileno(self):
+                    obj = socket()
+                    return obj.fileno()
+        
+            r,w,e = select.select([socket对象？,对象？,对象？,Foo()],[],[])
+            # 对象必须有： fileno方法，并返回一个文件描述符
+            
+            ========
+            a. select内部：对象.fileno()
+            b. Foo()内部封装socket文件描述符
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

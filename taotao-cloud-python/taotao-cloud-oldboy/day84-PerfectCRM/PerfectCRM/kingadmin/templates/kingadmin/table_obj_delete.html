@@ -1,0 +1,29 @@
+{% extends 'kingadmin/index.html' %}
+{% load kingadmin_tags %}
+
+{% block  right-content-container %}
+<h2 class="page-header">{% get_model_name admin_class %}</h2>
+<h4 class="page-header alert-danger">注意:以下与{{ objs }}相关联的数据都将被删除!</h4>
+
+<div>
+
+
+
+{% for obj in objs  %}
+    {% display_all_related_objs obj  as all_related_obj_eles %}
+    {{ all_related_obj_eles|safe }}
+{% endfor %}
+
+
+
+<form method="post">{% csrf_token %}
+{% if querysets_ids %}
+    <input type="hidden" name="selected_ids" value="{{ querysets_ids }}">
+{% endif %}
+<input type="submit" class="btn btn-danger" value="确认删除">
+<a  class="btn btn-info" >返回</a>
+</form>
+
+</div>
+
+{% endblock %}

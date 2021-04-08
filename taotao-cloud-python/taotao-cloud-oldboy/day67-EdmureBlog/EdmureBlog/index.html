@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="pg-header">
+        {% if request.session.username %}
+            <a>{{ request.session.username }}</a>
+        {% else %}
+            <a>登录</a><a>注册</a>
+        {% endif %}
+    </div>
+    <div class="pg-body">
+        ...
+    </div>
+</body>
+</html>

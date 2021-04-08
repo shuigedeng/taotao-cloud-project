@@ -1,0 +1,153 @@
+from django.shortcuts import render,HttpResponse
+from . import models
+
+
+
+
+class MenuHelper(object):
+
+    def __init__(self,username,current_url):
+        self.permission2action_list = None
+        self.result = None
+        self.username = username
+        self.current_url = current_url
+
+        self.init_data()
+
+
+    def init_data(self):
+        role_list = models.Role.objects.filter(user2role__u__username=self.username)
+        # 11个带着帽子的鬼
+        permission2action_list = models.Permission2Action.objects. \
+            filter(permission2action2role__r__in=role_list). \
+            values('p__url', 'a__code').distinct()
+
+        self.permission2action_list = permission2action_list
+
+        # ??????????????? 2个人, 应该在菜单中显示的 权限 --- 在最后一层 ????????????????????
+        menu_leaf_list = models.Permission2Action.objects. \
+            filter(permission2action2role__r__in=role_list).exclude(p__menu__isnull=True). \
+            values('p_id', 'p__url', 'p__caption', 'p__menu').distinct()
+
+        # 处理相同颜色的袜子
+        #
+        # {
+        #   1:[n1,n2]
+        # }
+        menu_leaf_dict = {}
+        """
+        {
+           1: [{id:xx,caption',url:'...}]
+           1: [{id:xx,caption',url:'...}]
+        }
+        """
+        open_leaf_parent_id = None
+
+        for item in menu_leaf_list:
+            item = {
+                'id': item['p_id'],
+                'url': item['p__url'],
+                'caption': item['p__caption'],
+                'parent_id': item['p__menu'],
+                'child': [],
+                'status': True,  # 是否显示
+                'open': False
+            }
+            if item['parent_id'] in menu_leaf_dict:
+                menu_leaf_dict[item['parent_id']].append(item)
+            else:
+                menu_leaf_dict[item['parent_id']] = [item, ]
+            # item['url'] user_request_url
+            import re
+            if re.match(item['url'], self.current_url):
+                item['open'] = True
+                open_leaf_parent_id = item['parent_id']
+
+        menu_list = models.Menu.objects.values('id', 'caption', 'parent_id')
+        menu_dict = {}
+        for item in menu_list:
+            item['child'] = []
+            item['status'] = False
+            item['open'] = False
+            menu_dict[item['id']] = item
+
+        # 把袜子挂载衣钩上:menu_dict
+        for k, v in menu_leaf_dict.items():
+            menu_dict[k]['child'] = v
+            parent_id = k  # 4
+            while parent_id:
+                # id=4 = True
+                menu_dict[parent_id]['status'] = True
+                parent_id = menu_dict[parent_id]['parent_id']  # 1
+
+        while open_leaf_parent_id:
+            menu_dict[open_leaf_parent_id]['open'] = True
+            open_leaf_parent_id = menu_dict[open_leaf_parent_id]['parent_id']
+
+        # ##################### 处理等级关系
+        # 　menu_dict: 应用：评论（models.xx.objects.values('...')）
+        result = []
+        for row in menu_dict.values():
+            if not row['parent_id']:
+                result.append(row)
+            else:
+                menu_dict[row['parent_id']]['child'].append(row)
+
+        self.result = result
+
+    def menu_content(self,child_list):
+        response = ""
+        tpl = """
+            <div class="item %s">
+                <div class="title">%s</div>
+                <div class="content">%s</div>
+            </div>
+        """
+        for row in child_list:
+            if not row['status']:
+                continue
+            active = ""
+            if row['open']:
+                active = "active"
+            if 'url' in row:
+                response += "<a class='%s' href='%s'>%s</a>" % (active, row['url'], row['caption'])
+            else:
+                title = row['caption']
+                content = self.menu_content(row['child'])
+                response += tpl % (active, title, content)
+        return response
+
+    def menu_tree(self):
+        """
+        :param result:
+        :return:
+        """
+        response = ""
+        tpl = """
+        <div class="item %s">
+            <div class="title">%s</div>
+            <div class="content">%s</div>
+        </div>
+        """
+        for row in self.result:
+            if not row['status']:
+                continue
+            active = ""
+            if row['open']:
+                active = "active"
+            # 第一层第一个
+            title = row['caption']
+            # 第一层第一个的后代
+            content = self.menu_content(row['child'])
+            response += tpl % (active, title, content)
+        return response
+
+def login(request):
+    user_request_url = "/report.html"
+    username = request.GET.get('u')
+    obj = MenuHelper(username,user_request_url)
+    # obj.permission2action_list
+    string = obj.menu_tree()
+
+    return render(request,'index.html',{'menu_string':string})
+

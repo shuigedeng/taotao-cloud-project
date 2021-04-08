@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /**{*/
+           /*color: red;*/
+        /*}*/
+
+
+        #littleP{
+            background-color: blue;
+        }
+
+        .cuihua{
+            color: aquamarine;
+        }
+
+        /*注意：不能写成div .cuihua*/
+        div.cuihua{
+            color: brown;
+
+        }
+
+        #littleP,div.cuihua{
+            color: chartreuse;
+        }
+
+
+
+        .div1>.div2{
+           color: red;
+        }
+
+        .div1 div>p{
+            color: blue;
+        }
+
+
+         .div1 + div{
+             background-color: chartreuse;
+         }
+
+
+        p div{
+            color: red;
+        }
+
+        [alex]{
+            color: red;
+        }
+        p[alex="dasb"]{
+            font-family: "Times New Roman";
+            font-size: 30px;
+        }
+
+        [alex*="b"]{
+            color: teal;
+        }
+    </style>
+</head>
+<body>
+hello body
+
+<div>hello div</div>
+
+<p id="littleP">pppp</p>
+<p id="littlePP">ppp</p>
+<p class="cuihua">pp</p>
+<p class="cuihua">p</p>
+<div class="cuihua">div</div>
+
+<a href="">aaa</a>
+
+
+<div>hello div before</div>
+<div class="div1">
+
+    <div>
+        <a href="">a</a>
+        <p>ppp</p>
+        <div>div3</div>
+    </div>
+
+    <p>p ele</p>
+    <div class="div2">div2</div>
+</div>
+<p>after div1 p</p>
+<div>after div1</div>
+
+
+<p>
+    <div>p中的div</div>
+</p>
+
+<!--属性选择器-->
+
+<div>hello1</div>
+<div alex="sb LI">alex</div>
+<div alex="dasb">hello1</div>
+<p alex="dasb">hello2</p>
+
+<div class="div1 div2">hello1</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+Day96
+    Scrapy框架：
+        - 下载页面
+        - 解析
+        - 并发
+        - 深度
+        
+    安装：http://www.cnblogs.com/wupeiqi/articles/6229292.html
+        Linux
+          pip3 install scrapy
+     
+         
+        Windows
+              a. pip3 install wheel
+              b. 下载twisted http://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted
+              c. 进入下载目录，执行 pip3 install Twisted‑17.1.0‑cp35‑cp35m‑win_amd64.whl
+              d. pip3 install scrapy
+              e. 下载并安装pywin32：https://sourceforge.net/projects/pywin32/files/
+    
+    使用：
+        1. 指定初始URL
+        2. 解析响应内容
+            - 给调度器
+            - 给item；pipeline;用于做格式化；持久化
+            
+            
+        scrapy startproject day96
+        
+        cd day96
+        scrapy genspider chouti chouti.com
+
+        打开chouti.py进行编辑
+        
+        scrapy crawl chout --nolog
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
