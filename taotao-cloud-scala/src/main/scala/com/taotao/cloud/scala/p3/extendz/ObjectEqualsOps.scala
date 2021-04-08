@@ -1,6 +1,5 @@
 package com.taotao.cloud.scala.p3.extendz
 
-import com.qf.bigdata.scala.p3.encapsulation.Person
 
 /**
   *    scala中的类型检查和类型转换

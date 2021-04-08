@@ -1,7 +1,7 @@
 package com.taotao.cloud.scala.p6.akka.third
 
 import akka.actor.{Actor, ActorLogging}
-import com.qf.bigdata.scala.p6.akka.{Header, Shutdown, Start, Stop}
+import  com.taotao.cloud.scala.p6.akka.{Header, Shutdown, Start, Stop}
 
 class RemoteActor extends Actor with ActorLogging {
 	def receive = {

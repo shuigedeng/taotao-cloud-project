@@ -3,7 +3,9 @@ apply plugin: 'scala'
 dependencies {
     implementation "org.scala-lang:scala-library:2.12.8"
     implementation "org.scala-lang:scala-reflect:2.12.8"
+    implementation "org.scala-lang:scala-compiler:2.12.8"
 
-    implementation 'com.typesafe.akka:akka-slf4j_2.11:2.4.20'
-    implementation 'com.typesafe.akka:akka-remote_2.11:2.4.20'
+    implementation 'com.typesafe.akka:akka-slf4j_2.13:2.6.12'
+    implementation 'com.typesafe.akka:akka-actor_2.13:2.6.12'
+    implementation 'com.typesafe.akka:akka-remote_2.13:2.6.12'
 }

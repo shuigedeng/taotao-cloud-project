@@ -1,7 +1,7 @@
 package com.taotao.cloud.scala.p6.akka.third
 
 import akka.actor.{ActorSystem, Props}
-import com.qf.bigdata.scala.p6.akka.{Header, Start}
+import com.taotao.cloud.scala.p6.akka.{Header, Start}
 import com.typesafe.config.ConfigFactory
 
 object AkkaClientApplication extends App {

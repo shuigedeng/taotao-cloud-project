@@ -1,7 +1,7 @@
 package com.taotao.cloud.scala.p6.akka.first
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
-import com.qf.bigdata.scala.p6.akka.Request
+import com.taotao.cloud.scala.p6.akka.Request
 
 
 /*

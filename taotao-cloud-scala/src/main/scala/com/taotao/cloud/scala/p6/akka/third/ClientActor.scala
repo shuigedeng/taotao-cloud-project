@@ -1,7 +1,7 @@
 package com.taotao.cloud.scala.p6.akka.third
 
 import akka.actor.{Actor, ActorLogging}
-import com.qf.bigdata.scala.p6.akka.{Header, Start, Stop}
+import  com.taotao.cloud.scala.p6.akka.{Header, Start, Stop}
 
 class ClientActor extends Actor with ActorLogging {
 

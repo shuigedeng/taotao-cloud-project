@@ -1,7 +1,7 @@
 package com.taotao.cloud.scala.p6.akka.second
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
-import com.qf.bigdata.scala.p6.akka.{Request, Response, Signal}
+import com.taotao.cloud.scala.p6.akka.{Request, Response, Signal}
 
 /*
 	akka actor的本地互相通信
