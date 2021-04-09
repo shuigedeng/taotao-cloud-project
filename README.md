@@ -1,4 +1,4 @@
-#  taotao-cloud-project
+# taotao-cloud-project
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
@@ -9,38 +9,43 @@
   <img src="https://img.shields.io/badge/Knife4j-2.0.2-yellowgreen" alt="Downloads"/>
 </p>
 
-## 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
-&nbsp;
-## 总体架构图
-![mark](https://gitee.com/zlt2000/images/raw/master/springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-&nbsp;
-## 核心依赖 
+## 2. 总体架构图
+![mark](./snapshot/springcloud微服务架构图.jpeg)
+
+
+## 3. 核心依赖 
 依赖 | 版本
 ---|---
-Spring Boot |  2.2.6.RELEASE  
-Spring Cloud | Hoxton.SR8  
-Spring Cloud alibaba | 2.2.1.RELEASE  
-Spring Security OAuth2 | 2.3.6
-Mybatis Plus | 3.3.1
-Hutool | 5.3.5
-Swagger | 2.9.2
-Knife4j | 2.0.2
+Spring |  5.3.4 
+Spring Boot |  2.4.3  
+Spring Cloud | 2020.0.1 
+Spring Cloud alibaba | 2.2.5.RELEASE  
+Spring Security OAuth2 | 5.4.5
+Mybatis Plus | 3.4.2
+Hutool | 5.5.9
+Lombok | 1.18.18
+Mysql | 8.0.20
+Querydsl | 4.4.0
+Swagger | 3.3.0
+Knife4j | 3.0.2
+Redisson | 3.15.0
+Lettuce | 6.0.2.RELEASE
 Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 
-&nbsp;
-## 演示地址
-* **演示地址**： [http://192.168.99.130:3000](http://192.168.99.130:3000)
+## 4. 演示地址
+* **演示地址**： [https://backend.taotaocloud.top](http://192.168.99.130:3000)
   * 账号密码：admin/admin
   * 监控账号密码：admin/admin
   * Grafana账号：admin/admin
   * 任务管理账号密码：admin/admin
   * Sentinel：sentinel/sentinel
 * **演示环境有全方位的监控示例：日志监控系统 + APM系统 + GPE系统**
-* Github地址： https://github.com/shuigedeng/taotao-cloud 
+* Github地址： https://github.com/shuigedeng/taotao-cloud-project 
 * 前后端分离的企业级微服务架构
-* 基于 Spring Cloud Hoxton 、Spring Boot 2.3、 OAuth2 的RBAC权限管理系统  
+* 基于 Spring Cloud Hoxton 、Spring Boot 2.4、 OAuth2 的RBAC权限管理系统  
 * 基于数据驱动视图的理念封装 react , antd  
 * 提供对常见容器化支持 Docker、Kubernetes、Rancher2 支持  
 * 提供 lambda 、stream api 、webflux 的生产实践   
@@ -48,8 +53,7 @@ EasyCaptcha | 1.6.2
 * 引入组件化的思想实现高内聚低耦合并且高度可配置化
 * 注重代码规范，严格控制包依赖，每个工程基本都是最小依赖
 
-&nbsp;
-## 4. 模块说明
+## 5. 模块说明
 ```
 taotao-cloud -- 父项目，公共依赖
 │  ├─taotao-cloud-auth -- spring-security-oauth2 认证模块[9800]
@@ -89,7 +93,7 @@ taotao-cloud -- 父项目，公共依赖
 │  │  ├─taotao-cloud-swagger-starter -- 封装swagger通用逻辑
 ```
 
-#### 开源共建
+## 6.开源共建
 
 1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud)，注意对应提交对应 `dev` 分支
 
