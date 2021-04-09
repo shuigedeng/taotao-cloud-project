@@ -9,10 +9,10 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'chuang_zhi_bo_ke_jiangshi_spider'
+BOT_NAME = 'taotao-cloud-itcast'
 
-SPIDER_MODULES = ['chuang_zhi_bo_ke_jiangshi_spider.spiders']
-NEWSPIDER_MODULE = 'chuang_zhi_bo_ke_jiangshi_spider.spiders'
+SPIDER_MODULES = ['taotao-cloud-itcast.spiders']
+NEWSPIDER_MODULE = 'taotao-cloud-itcast.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -67,7 +67,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'chuang_zhi_bo_ke_jiangshi_spider.pipelines.ChuangZhiBoKeJiangshiSpiderPipeline': 300,
+    'taotao-cloud-itcast.pipelines.ChuangZhiBoKeJiangshiSpiderPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

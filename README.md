@@ -1,7 +1,7 @@
-#  taotao-cloud-platform
+#  taotao-cloud-project
 
 <p align="center">
-  <img src='hhttps://img.shields.io/badge/license-Apache%202-green' alt='License'/>
+  <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
   <img src="https://img.shields.io/badge/Spring%20Boot-2.2.6.RELEASE-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Spring%20Cloud-Hoxton.SR3-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2.2.1.RELEASE-blue" alt="Downloads"/>

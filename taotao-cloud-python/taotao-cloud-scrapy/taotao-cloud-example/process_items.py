@@ -12,10 +12,7 @@ import sys
 import time
 
 from scrapy_redis import get_redis
-
-
 logger = logging.getLogger('process_items')
-
 
 def process_items(r, keys, timeout, limit=0, log_every=1000, wait=.1):
     """Process items from a redis queue.
@@ -39,6 +36,11 @@ def process_items(r, keys, timeout, limit=0, log_every=1000, wait=.1):
         if ret is None:
             time.sleep(wait)
             continue
+
+        try:
+            pass
+        except Exception:
+            pass
 
         source, data = ret
         try:
