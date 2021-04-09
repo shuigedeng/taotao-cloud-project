@@ -2,11 +2,13 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/Spring%20Boot-2.2.6.RELEASE-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Cloud-Hoxton.SR3-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2.2.1.RELEASE-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Elasticsearch-6.8.7-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Knife4j-2.0.2-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring-5.3.4-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.4.3-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.1-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Cloud%20alibaba-2.2.5.RELEASE-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Elasticsearch-6.8.7-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Mybatis%20Plus-3.4.2-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Knife4j-3.0.2-brightgreen" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -32,6 +34,7 @@ Swagger | 3.3.0
 Knife4j | 3.0.2
 Redisson | 3.15.0
 Lettuce | 6.0.2.RELEASE
+Elasticsearch | 6.8.7
 Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 
