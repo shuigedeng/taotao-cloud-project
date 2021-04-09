@@ -109,6 +109,7 @@ def long_polling(request):
 def index(request):
     '''跳转成功显示用户的信息 初始化用户基本信息'''
     # 用户的基本信息请求路径
+    print(TICKET_DICT)
     user_init_url = '%s/cgi-bin/mmwebwx-bin/webwxinit?pass_ticket=%s&r=%s' % (
     BASE_URL, TICKET_DICT['pass_ticket'], int(time.time()))
     print(user_init_url)
