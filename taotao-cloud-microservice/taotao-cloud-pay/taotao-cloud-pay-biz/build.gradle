@@ -32,7 +32,7 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    runtime 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -54,7 +54,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
     // implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-    // runtime 'io.micrometer:micrometer-registry-prometheus'
+    // implementation 'io.micrometer:micrometer-registry-prometheus'
 
     // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingjdbc')
     // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')

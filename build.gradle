@@ -63,7 +63,10 @@ buildscript {
 
     repositories {
         mavenLocal()
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven {
+            allowInsecureProtocol = true
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
         google()
         jcenter()
 
@@ -73,6 +76,8 @@ buildscript {
         mavenCentral()
 
         maven {
+            allowInsecureProtocol = true
+
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                 password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
@@ -112,9 +117,14 @@ allprojects {
     repositories {
         mavenLocal()
 
-        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven {
+            allowInsecureProtocol = true
+            url 'https://maven.aliyun.com/repository/public'
+        }
 
         maven {
+            allowInsecureProtocol = true
+
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                 password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
@@ -123,6 +133,8 @@ allprojects {
         }
 
         maven {
+            allowInsecureProtocol = true
+
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                 password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
@@ -145,7 +157,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "com.google.cloud.tools.jib"
 
-    apply plugin: "com.taotao.cloud.plugin"
+//    apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
         implementation platform('com.taotao.cloud:taotao-cloud-dependencies:1.0.0')
@@ -173,6 +185,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     publishing {
         repositories {
             maven {
+                allowInsecureProtocol = true
                 credentials {
                     username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                     password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
@@ -181,6 +194,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             }
 
             maven {
+                allowInsecureProtocol = true
                 credentials {
                     username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                     password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")

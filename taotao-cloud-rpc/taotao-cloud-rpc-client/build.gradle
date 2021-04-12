@@ -1,4 +1,4 @@
 dependencies {
-    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
-    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
+    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
+    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
 }

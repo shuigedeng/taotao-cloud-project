@@ -1,6 +1,8 @@
-
 repositories {
-    maven { url "http://maven.youzanyun.com/repository/maven-public" }
+    maven {
+        allowInsecureProtocol = true
+        url "http://maven.youzanyun.com/repository/maven-public"
+    }
 }
 
 dependencies {

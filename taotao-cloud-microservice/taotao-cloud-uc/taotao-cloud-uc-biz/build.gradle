@@ -10,7 +10,7 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-//    runtime 'io.micrometer:micrometer-registry-prometheus'
+//    implementation 'io.micrometer:micrometer-registry-prometheus'
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"

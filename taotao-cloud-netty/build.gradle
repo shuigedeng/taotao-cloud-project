@@ -1,4 +1,5 @@
 apply plugin: 'com.google.protobuf'
+apply plugin: 'java'
 
 dependencies {
     implementation(

@@ -1,8 +1,8 @@
 dependencies {
-    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
-    compile project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
+    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
+    implementation project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
 
-    compile 'org.springframework:spring-context:3.2.12.RELEASE'
-    compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'cglib:cglib:3.1'
+    implementation 'org.springframework:spring-context:3.2.12.RELEASE'
+    implementation 'org.apache.commons:commons-collections4:4.0'
+    implementation 'cglib:cglib:3.1'
 }

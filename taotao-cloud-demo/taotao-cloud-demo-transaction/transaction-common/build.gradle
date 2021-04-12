@@ -1,20 +1,20 @@
 
 dependencies {
-    compile "com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE"
-    compile "com.codingapi.txlcn:txlcn-tm:5.0.2.RELEASE"
-    compile "com.codingapi.txlcn:txlcn-txmsg-netty:5.0.2.RELEASE"
+    api "com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE"
+    api "com.codingapi.txlcn:txlcn-tm:5.0.2.RELEASE"
+    api "com.codingapi.txlcn:txlcn-txmsg-netty:5.0.2.RELEASE"
 
-    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
-    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
-    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
-    compile project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
 
-    compile "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-    compile 'mysql:mysql-connector-java'
+    api "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    api 'mysql:mysql-connector-java'
 
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
+    api "org.springframework.boot:spring-boot-starter-web"
+    api "org.springframework.boot:spring-boot-starter-actuator"
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

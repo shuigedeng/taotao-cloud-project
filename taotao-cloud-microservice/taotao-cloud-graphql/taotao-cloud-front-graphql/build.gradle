@@ -15,7 +15,7 @@ dependencies {
 
 //    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:8.0.0'
 //    implementation 'com.graphql-java-kickstart:graphql-java-tools:6.2.0'
-//    runtimeOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
+//    implementationOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
 //    implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.5.1"
 
     implementation 'org.projectlombok:lombok'
