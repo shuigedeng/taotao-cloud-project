@@ -1,0 +1,13 @@
+{
+  "name": "taotao-cloud-mall",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "taotao",
+  "license": "MIT",
+  "scripts": {
+      "dev": "node"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
