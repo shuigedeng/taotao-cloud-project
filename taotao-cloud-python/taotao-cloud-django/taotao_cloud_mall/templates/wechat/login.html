@@ -19,7 +19,7 @@
         //此方法对后台进行请求、长连接请求
         function polling() {
             $.ajax({
-                url: '/polling/',
+                url: '/wechat/polling/',
                 type: "GET",
                 dataType: 'json',
                 success: function(arg){
@@ -31,7 +31,7 @@
                         $('#qcode').attr('src', arg.data);
                         polling();
                     }else {
-                        window.location.href = '/index/'
+                        window.location.href = '/wechat/index/'
                     }
                 }
             })

@@ -13,14 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-from taotao_cloud_order import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('current_datetime/', views.current_datetime),
-    path('get_orders/', views.get_orders),
-    path('get_uc/', views.get_uc),
+    path('wechat/', include("taotao_cloud_wechat.urls")),
+    path('uc/', include("taotao_cloud_uc.urls")),
+    path('order/', include("taotao_cloud_order.urls")),
+    path('oauth2/', include("taotao_cloud_oauth2.urls")),
+    path('product/', include("taotao_cloud_product.urls")),
 ]

@@ -1,33 +1,35 @@
-from django.shortcuts import render, HttpResponse
-import requests
-import time
-import re
 import json
+import re
+import time
 
-#记录当前时间戳
+import requests
+from django.shortcuts import render, HttpResponse
+
+# 记录当前时间戳
 CURRENT_TIME = None
 
-#记录返回的二维码的后缀
+# 记录返回的二维码的后缀
 QCODE = None
 
-#记录长连接的次数
+# 记录长连接的次数
 TIPS = 1
 
-#获取登录成功的cookies
+# 获取登录成功的cookies
 SUCCESS_LONGIN_COOKIES = {}
 
-#保存票据的cookies
+# 保存票据的cookies
 TICKET_COOKIES_DICT = {}
 
-#保存票据的信息
+# 保存票据的信息
 TICKET_DICT = {}
 
-#保存用户的基本信息
+# 保存用户的基本信息
 USER_INIT_DATA = {}
 
 BASE_URL = "http://wx.qq.com"
 
 BASE_SYNC_URL = "https://webpush.weixin.qq.com"
+
 
 def login(request):
     '''登录界面、获取二维码'''
@@ -35,21 +37,22 @@ def login(request):
                      "%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_={0}"
     global CURRENT_TIME
     CURRENT_TIME = str(time.time())
-    #构造二维码的请求URL
+    # 构造二维码的请求URL
     send_qcode_url = base_qcode_url.format(CURRENT_TIME)
-    #通过requests模块发送请求
+    # 通过requests模块发送请求
     reponse = requests.get(send_qcode_url)
 
-    #通过返回值获取二维码的后缀
+    # 通过返回值获取二维码的后缀
     global QCODE
     QCODE = re.findall('uuid = "(.*)";', reponse.text)[0]
 
-    return render(request, "login.html", {"code": QCODE})
+    return render(request, "wechat/login.html", {"code": QCODE})
+
 
 def long_polling(request):
     '''等待用户的扫吗、并返回成功与否'''
 
-    #构造一个返回数据结构
+    # 构造一个返回数据结构
     # 408 用户未扫吗
     # 201 用户已扫码，未提交
     # 200 用户已经扫吗、已提交
@@ -59,23 +62,25 @@ def long_polling(request):
         global TIPS
         base_login_url = "https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid={0}&tip={1}&r=1870606180&_={2}"
 
-        #微信登录的url
+        # 微信登录的url
         login_url = base_login_url.format(QCODE, TIPS, CURRENT_TIME)
         print(login_url)
-        #获取微信登录的信息
+        # 获取微信登录的信息
         login_reponse = requests.get(login_url)
-        print(login_reponse.text)
+        print(login_reponse)
 
         if "window.code=201" in login_reponse.text:
             TIPS = 0
             response_message['status'] = 201
-            response_message['data'] = re.findall(r"userAvatar = '(.*)';",login_reponse.text)[0]
-        elif "window.code=200" in login_reponse.text: #登录成功
+            response_message['data'] = \
+                re.findall(r"userAvatar = '(.*)';", login_reponse.text)[0]
+        elif "window.code=200" in login_reponse.text:  # 登录成功
             # 扫码点击确认后，获取cookie
             global SUCCESS_LONGIN_COOKIES
             SUCCESS_LONGIN_COOKIES.update(login_reponse.cookies.get_dict())
-            #获取跳转的url
-            redirect_uri = re.findall('redirect_uri="(.*)";', login_reponse.text)[0]
+            # 获取跳转的url
+            redirect_uri = \
+                re.findall('redirect_uri="(.*)";', login_reponse.text)[0]
 
             global BASE_URL
             global BASE_SYNC_URL
@@ -89,7 +94,8 @@ def long_polling(request):
             redirect_uri += '&fun=new&version=v2&lang=zh_CN'
 
             # 通过redirect_uri获取 票据、Cookie、返回值
-            reponse_ticekt = requests.get(redirect_uri, cookies=SUCCESS_LONGIN_COOKIES)
+            reponse_ticekt = requests.get(redirect_uri,
+                                          cookies=SUCCESS_LONGIN_COOKIES)
 
             global TICKET_COOKIES_DICT
             global TICKET_DICT
@@ -111,7 +117,7 @@ def index(request):
     # 用户的基本信息请求路径
     print(TICKET_DICT)
     user_init_url = '%s/cgi-bin/mmwebwx-bin/webwxinit?pass_ticket=%s&r=%s' % (
-    BASE_URL, TICKET_DICT['pass_ticket'], int(time.time()))
+        BASE_URL, TICKET_DICT['pass_ticket'], int(time.time()))
     print(user_init_url)
 
     # 提交的表单数据
@@ -129,14 +135,15 @@ def index(request):
     all_cookie_dict.update(SUCCESS_LONGIN_COOKIES)
     all_cookie_dict.update(TICKET_COOKIES_DICT)
 
-    reponse_init = requests.post(user_init_url, json=form_data, cookies=all_cookie_dict)
+    reponse_init = requests.post(user_init_url, json=form_data,
+                                 cookies=all_cookie_dict)
     reponse_init.encoding = 'utf-8'
     print(reponse_init)
-    #获得用户的初始化数据
+    # 获得用户的初始化数据
     user_init_data = json.loads(reponse_init.text)
     USER_INIT_DATA.update(user_init_data)
 
-    return render(request, 'index.html', {"data": user_init_data})
+    return render(request, 'wechat/index.html', {"data": user_init_data})
 
 
 def contact_list(request):
@@ -146,7 +153,8 @@ def contact_list(request):
     :return:
     """
     base_url = "{0}/cgi-bin/mmwebwx-bin/webwxgetcontact?lang=zh_CN&pass_ticket={1}&r={2}&seq=0&skey={3}"
-    url = base_url.format(BASE_URL, TICKET_DICT['pass_ticket'], str(time.time()), TICKET_DICT['skey'])
+    url = base_url.format(BASE_URL, TICKET_DICT['pass_ticket'],
+                          str(time.time()), TICKET_DICT['skey'])
 
     all_cookie_dict = {}
     all_cookie_dict.update(SUCCESS_LONGIN_COOKIES)
@@ -155,20 +163,21 @@ def contact_list(request):
     response = requests.get(url, cookies=all_cookie_dict)
     response.encoding = 'utf-8'
     contact_list_dict = json.loads(response.text)
-    return render(request, 'contact_list.html', {'obj': contact_list_dict})
+    return render(request, 'wechat/contact_list.html', {'obj': contact_list_dict})
 
 
 def send_msg(request):
-    #当前用户的id
+    # 当前用户的id
     from_user_id = USER_INIT_DATA['User']['UserName']
-    #要发送别的用户的id
+    # 要发送别的用户的id
     to_user_id = request.POST.get('user_id')
-    #发送的消息
+    # 发送的消息
     msg = request.POST.get('user_msg')
 
-    #发送的url
-    send_url = BASE_URL + "/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=" + TICKET_DICT['pass_ticket']
-    #发送的表单数据
+    # 发送的url
+    send_url = BASE_URL + "/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=" + \
+               TICKET_DICT['pass_ticket']
+    # 发送的表单数据
     form_data = {
         'BaseRequest': {
             'DeviceID': 'e531777446530354',
@@ -198,10 +207,12 @@ def send_msg(request):
     all_cookie_dict.update(SUCCESS_LONGIN_COOKIES)
     all_cookie_dict.update(TICKET_COOKIES_DICT)
 
-    response = requests.post(send_url, data=form_data_bytes, cookies=all_cookie_dict, headers={
-        'Content-Type': 'application/json'})
+    response = requests.post(send_url, data=form_data_bytes,
+                             cookies=all_cookie_dict, headers={
+            'Content-Type': 'application/json'})
 
     return HttpResponse('ok')
+
 
 def get_msg(request):
     sync_url = BASE_SYNC_URL + "/cgi-bin/mmwebwx-bin/synccheck"
@@ -230,7 +241,9 @@ def get_msg(request):
     response_sync = requests.get(sync_url, params=sync_dict, cookies=all_cookie)
 
     if 'selector:"2"' in response_sync.text:
-        fetch_msg_url = "%s/cgi-bin/mmwebwx-bin/webwxsync?sid=%s&skey=%s&lang=zh_CN&pass_ticket=%s" % (BASE_URL, TICKET_DICT['wxsid'], TICKET_DICT['skey'], TICKET_DICT['pass_ticket'])
+        fetch_msg_url = "%s/cgi-bin/mmwebwx-bin/webwxsync?sid=%s&skey=%s&lang=zh_CN&pass_ticket=%s" % (
+            BASE_URL, TICKET_DICT['wxsid'], TICKET_DICT['skey'],
+            TICKET_DICT['pass_ticket'])
 
         form_data = {
             'BaseRequest': {
@@ -251,10 +264,6 @@ def get_msg(request):
         USER_INIT_DATA['SyncKey'] = res_fetch_msg_dict['SyncKey']
 
         for item in res_fetch_msg_dict['AddMsgList']:
-            print(item['Content'], ":::::", item['FromUserName'], "---->", item['ToUserName'], )
+            print(item['Content'], ":::::", item['FromUserName'], "---->",
+                  item['ToUserName'], )
     return HttpResponse('ok')
-
-
-
-
-

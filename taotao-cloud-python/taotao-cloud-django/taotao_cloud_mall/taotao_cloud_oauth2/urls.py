@@ -14,21 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
-from taotao_cloud_web import views
+from werobot.contrib.django import make_view
+
+from taotao_cloud_wechat import views, robot
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    #获取二维码
-    url(r'^qrcode/', views.login),
-    #长连接请求
-    url(r'^polling/', views.long_polling),
-    #登录成功跳转的页面
-    url(r'^index/', views.index),
-    #获取更多联系人列表
-    url(r'^contact_list/', views.contact_list),
-    #发送消息
-    url(r'^send_msg/', views.send_msg),
-    #获取消息
-    url(r'^get_msg/', views.get_msg),
+
 ]
