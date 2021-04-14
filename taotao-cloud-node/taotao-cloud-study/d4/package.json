@@ -1,0 +1,17 @@
+{
+  "name": "demo04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "md5": "^2.2.1",
+    "node-media-server": "^2.1.0",
+    "silly-datetime": "^0.1.2"
+  }
+}

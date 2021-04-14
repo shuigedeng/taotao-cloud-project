@@ -1,0 +1,39 @@
+/* CSS Document */
+.centerLeft{width:840px;}
+.wjt_ty_margin{margin:0px 10px;}
+.wjt_ty_margin_small{margin:0px 5px;}
+.wjt_left{float: left;}
+.wjt_right{float: right;}
+/*左边用户信息*/
+.comQl{  width: 840px;  height: 154px; box-sizing: border-box; padding: 20px 0;
+    border-bottom: 1px solid #ccc;position: relative;}
+.comQl-user{  width: 90px;  height: 66px;  position: absolute; top:30px; }
+.comQl-user-pic{  width: 40px;  height: 40px; margin:auto;display: block; border-radius:50%;  background-color: #ccc;}
+.comQl-user-nm{  width: 90px;  height: 21px;  text-align: center;display: block; font-size: 12px;margin-top:5px;}
+/*中间问答部分*/
+.comQl-queAns{  width: 600px;  height: 103px;margin-left: 120px;  padding-top: 10px; position: absolute;}
+.comQl-queAns-Q{  width: 589px;  height: 20px;font-weight: bold;  line-height: 20px; font-size: 14px;}
+.comQl-queAns-Q-tag{color:white;  background-color: red;  width: 20px;  height: 20px;}
+.comQl-queAns-Q-con{ color:#000; }
+.comQl-queAns-Q-con:hover{ color:red; }
+.comQl-queAns-A{color:#787d82; font-size:12px; margin:10px 0px;}
+.comQl-queAns-A-tag{ color:#787d82; font-size:12px;  line-height: 20px; }
+.comQl-queAns-A-pic{  width: 16px;  height: 16px;  background-color: #ccc; border-radius: 50%; display:inline-block ;vertical-align:middle;}
+.comQl-queAns-A-nm{ color:#787d82; font-size: 12px;overflow: hidden; }
+.comQl-queAns-A-con{color:#787d82; font-size: 12px;overflow: hidden; }
+
+.comQl-queAns-O{  width: 590px;  height: 24px;padding-bottom:10px;margin-top:5px;font-size: 12px;color: #c8cdd2;}
+.comQl-queAns-O-time{ line-height: 24px;  margin-right: 20px;}
+.comQl-queAns-O-tag{  width: 48px;  height: 20px;  padding: 0 10px;  margin-top:2;margin-right:10px;background: #edf1f2;color: #c8cdd2; }
+.comQl-queAns-O-src{ color: #c8cdd2; padding-right: 10px;}
+.comQl-queAns-O-course{color: #c8cdd2;}
+/*最右浏览和回答*/
+.comQl-record{ font-size: 12px;  position: absolute;  top: 40px;  right: 10px;  height: 51px;  color: #787d82;  text-align: center; width: 100px; }
+.comQl-record-ans,.comQl-record-scan{width:50px;}
+.comQl-record-ans span{display: block;}
+.comQl-record-scan span{display: block;}
+.comQl-record-ansY{ color: #00b33b; }
+.comQl-record-ansN{ color: #787d82; }
+.comQl-record-ans-con{ margin-top:5px; }
+.comQl-record-scan-con{margin-top:5px;}
+

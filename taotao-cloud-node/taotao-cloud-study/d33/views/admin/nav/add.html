@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>增加导航</title>
+</head>
+<body>
+
+    <form action="/admin/nav/doAdd" method="post" enctype="multipart/form-data">
+        
+        标题：<input type="text" name="title" id="title" />
+        <br>
+        <br>
+
+        图片：<input type="file" name="pic" id="pic" />
+        <br>
+        <br>
+
+        描述：<textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

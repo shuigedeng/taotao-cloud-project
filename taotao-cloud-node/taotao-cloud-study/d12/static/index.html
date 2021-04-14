@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>IT营</title>
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="css/dmb.header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/zhanshi.css"/>
+    <link rel="stylesheet" href="css/centerRight.css"/>
+    <link rel="stylesheet" href="css/dmb.bottom.css"/>
+    <link rel="stylesheet" href="css/zz.css" />
+    <link rel="stylesheet" type="text/css" href="css/Ngrade_login.css"/>
+	<script  src="jq/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src = "jq/template.js" type="text/javascript"></script>
+    <script src="jq/underscore.js" type="text/javascript"></script>
+    <script src="js/zz_myAjax0.2.2.js" type="text/javascript"></script>
+    <script src="js/footer.js" type="text/javascript"></script>
+    <script src="js/dj_goto.js" type="text/javascript"></script>
+    <script>
+		$(function(){
+            footer.init($('#bottom'));
+            goto.init($("#GotoTop"));
+        });
+   	</script>
+    
+</head>
+<body>
+
+    <div class = "alert-and-mask-alert"></div>
+    <div class = "alert-and-mask-mask"></div>
+    <div class="header"></div>
+    <div id = "down-header-box" class="down-header-box"></div>
+<div class="container clearfix">
+    <div class="course-nav-box">
+        <div class="nav-container">
+            <div class="title"><span class="title-allCourse-yang">全部课程:</span></div>
+            <div class="direction">
+                <div class="head">方向：</div>
+                <div class="choice">
+                    <span name = "all" class = "all current" >全部</span>
+                    <span name = "fe" class = "fe">前端开发</span>
+                    <span name = "be" class = "be">后端开发</span>
+                    <span name = "mobile" class = "mobile">移动开发</span>
+                    <span name = "data" class = "data">数据处理</span>
+                    <span name = "photo" class = "photo">图像处理</span>
+                </div>
+            </div>
+            <div class="depart">
+                <div class="head">分类：</div>
+                <div class="choice">
+
+
+                </div>
+            </div>
+            <div class="level">
+                <div class="head">难度：</div>
+                <div class="choice">
+                    <span name = "all" class="current">全部</span>
+                    <span name = "fe">初级</span>
+                    <span name = "be">中级</span>
+                    <span name = "mobile">高级</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newCourse"><span class="news">最新</span><span class="news">最热</span></div>
+
+</div>
+<div class="container clearfix">
+    <div class="course-zz">
+
+        <div class="course-list">
+            <div class="js-course-lists">
+                <ul>
+                </ul>
+            </div>
+
+        </div>
+
+        <!--<div class="course-tool-ba clear">
+
+        </div>-->
+        <div class="container-content"></div>
+
+        <div class="course-page-num clear">
+            <div class="pageCenter">
+                <span class="page">首页</span>
+                <span class="page">上一页</span>
+                <span class="pageList class="page"">
+                <ul>
+                    <li class="current">1</li>
+                    <li class="page">2</li>
+                    <li class="page">3</li>
+                    <li class="page">4</li>
+                    <li class="page">5</li>
+                    <li class="page">6</li>
+                </ul>
+                </span>
+                <span class="page">下一个</span>
+                <span class="page">尾页</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div id="bottom" class="clear"></div>
+<div id="GotoTop" class="GotoTop-info"></div>
+</body>
+</html>
+<!--模板-->
+<script type = "type/template" id = "mainlist-template">
+    <li class="course-one">
+        <a href="/view/489" target="_self">
+            <div class="course-list-img">
+                <img width="240" height="135" alt="<%= title %>" src="<%= image %>">
+            </div>
+            <h5>
+                <span><%= title %></span>
+            </h5>
+            <div class="tips">
+                <p class="text-ellipsis"><%= content %></p>
+                <span class="l "><%= info %></span>
+
+                <span class="l ml20">
+                    <%= student %>
+                </span>
+            </div>
+            <span class="time-label"><%= time %></span>
+            <b class="follow-label">跟我学</b>
+        </a>
+    </li>
+
+</script>
+<script src = "js/mainPart.js"></script>
+<script src = "js/headerPart.js"></script>
+<script src = "js/Ngrade_login.js"></script>
+<script src = "js/zhanshi.js"></script>
+<script>
+    header.init($(".header"))
+</script>

@@ -1,0 +1,83 @@
+/* CSS Document */
+.bottom{
+	background:#000;
+	padding:27px 0px;
+	position: relative;
+}
+.bottom_link{
+	padding-left:40px;
+	}
+	.bottom_netlink{
+		padding-right:20px;
+	}
+.ln_our li{
+	float:left;
+}
+.ln_our li a{
+	color:#fff;
+	font-size: 12px;
+	float: left;
+	margin-right: 20px;
+}
+.ln_our li a:hover{
+	color: #fdfca0;
+}
+.ln_copy{
+	margin-top: 10px;
+	font-size: 12px;
+	color: #ccc;
+}
+/*.ln_bottom_weibo{
+	position: absolute;
+	width:200px;
+	height: 35px;
+	border:1px solid #f00;
+	top: 10px;
+	right:20px;
+}*/
+.ln_bottom_ewm li{
+	float: left;
+	width:33px;
+	height: 35px;
+	margin-right:20px;
+}
+.ln_bottom_ewm li a.ln_bottom_weixin{
+	float:left;
+	width:33px;
+	height: 35px;
+	background:url(../image/footer-sprite.png) 0px -279px;
+	opacity:0.5;
+}
+.ln_bottom_ewm li a.ln_bottom_weibo_content{
+	float:left;
+	width:33px;
+	height: 35px;
+	background:url(../image/footer-sprite.png) 0px -320px;
+	opacity:0.5;
+}
+.ln_bottom_ewm li a.ln_bottom_qq{
+	float:left;
+	width:33px;
+	height: 35px;
+	background:url(../image/footer-sprite.png) 0px -360px;
+	opacity:0.5;
+}
+.ln_bottom_ewm li a.ln_bottom_weixin:hover{
+	opacity:1;
+	
+}
+.ln_bottom_ewm li a.ln_bottom_weibo_content:hover{
+	opacity:1;
+}
+.ln_bottom_ewm li a.ln_bottom_qq:hover{
+	opacity:1;
+}
+.ln_copy_ewm{
+	width:170px;
+	height:211px;
+	position:absolute;
+	bottom:75px;
+	right:150px;
+	background:url(../image/footer-sprite.png) no-repeat 0px 0px;
+	display:none;
+}
