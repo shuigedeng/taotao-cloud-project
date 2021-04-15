@@ -1,8 +1,8 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "taotao-cloud-mall-react",
-	"description": "滔滔商城小程序react版",
-	"appid": "wx217ad134fc8590fb",
+	"projectname": "taotao-cloud-mall",
+	"description": "taotao-cloud-mall",
+	"appid": "touristappid",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
@@ -21,4 +21,3 @@
 	"simulatorPluginLibVersion": {},
 	"condition": {}
 }
-

@@ -1,4 +1,4 @@
-jar.enabled = true
+
 
 apply plugin: 'scala'
 

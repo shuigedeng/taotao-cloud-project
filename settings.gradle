@@ -12,12 +12,12 @@ pluginManagement {
 
 rootProject.name = 'taotao-cloud-project'
 
-def oneLayerProjects = ['dependencies', 'scala', 'spring-source', 'spring-native', 'config', 'processor']
+def oneLayerProjects = ['dependencies', 'scala', 'config', 'processor']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'realtime', 'reactive']
+def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'realtime', 'reactive', 'spring']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->

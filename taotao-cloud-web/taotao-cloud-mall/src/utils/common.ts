@@ -1,9 +1,5 @@
 import Taro from '@tarojs/taro'
 
-Taro.getStorage({
-  key: 'keywordsList'
-})
-
 export const formatNumber = (n: number | string): string => {
   n = n.toString()
   return n[1] ? n : '0' + n

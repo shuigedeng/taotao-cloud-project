@@ -1,40 +1,32 @@
 export default {
   pages: [
     "pages/home/index",
-    "pages/cate/index",
-    // "pages/cart/index",
-    // "pages/my/index",
+    "pages/my/index",
+    "pages/classify/index",
+    "pages/cart/index",
+    "pages/lifeCircle/index",
   ],
   window: {
-    backgroundTextStyle: "light",
+    backgroundTextStyle: "dark",
     navigationBarBackgroundColor: "#d43c33",
     navigationBarTitleText: "滔滔商城",
     navigationBarTextStyle: "black",
+    backgroundColor: '#b6a7a6',
+    enablePullDownRefresh: true
   },
   requiredBackgroundModes: ["audio"],
   debug: false,
-  rn: {
-    screenOptions: {
-      // 设置页面的options，参考https://reactnavigation.org/docs/stack-navigator/#options
-      shadowOffset: { width: 0, height: 0 },
-      borderWidth: 0,
-      elevation: 0,
-      shadowOpacity: 1,
-      borderBottomWidth: 0,
-    },
-  },
   permission: {
     "scope.userLocation": {
       desc: "获取地理位置信息的用途描述",
-    },
-    "scope.record": {
-      desc: "授权scope.record",
-    },
-    "scope.userInfo": {
-      desc: "授权scope.userInfo",
-    },
+    }
   },
   tabBar: {
+    custom: false,
+    color: '#d43c33',
+    selectedColor: '#252323',
+    backgroundColor: '#33d438',
+    borderStyle: 'black',
     list: [
       {
         text: "首页",
@@ -44,22 +36,28 @@ export default {
       },
       {
         text: "分类",
-        pagePath: "pages/cate/index",
-        selectedIconPath: "./assets/images/tab-cate-current.png",
-        iconPath: "./assets/images/tab-cate.png",
+        pagePath: "pages/classify/index",
+        selectedIconPath: "./assets/images/tab-home-current.png",
+        iconPath: "./assets/images/tab-home.png",
       },
-      // {
-      //   text: "购物车",
-      //   pagePath: "pages/cart/index",
-      //   selectedIconPath: "./assets/images/tab-cart-current.png",
-      //   iconPath: "./assets/images/tab-cart.png"
-      // },
-      // {
-      //   text: "我的",
-      //   pagePath: "pages/my/index",
-      //   selectedIconPath: "./assets/images/tab-my-current.png",
-      //   iconPath: "./assets/images/tab-my.png"
-      // }
+      {
+        text: "品质生活圈",
+        pagePath: "pages/lifeCircle/index",
+        selectedIconPath: "./assets/images/tab-home-current.png",
+        iconPath: "./assets/images/tab-home.png",
+      },
+      {
+        text: "购物车",
+        pagePath: "pages/cart/index",
+        selectedIconPath: "./assets/images/tab-cart-current.png",
+        iconPath: "./assets/images/tab-cart.png"
+      },
+      {
+        text: "我的",
+        pagePath: "pages/my/index",
+        selectedIconPath: "./assets/images/tab-my-current.png",
+        iconPath: "./assets/images/tab-my.png"
+      }
     ],
   },
   subPackages: [

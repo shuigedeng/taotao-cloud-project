@@ -1,5 +1,4 @@
-import Taro from '@tarojs/taro';
-
+import Taro from '@tarojs/taro'
 const getCurrentPages = Taro.getCurrentPages;
 
 const mapAppKey = "FPXBZ-NMCEX-LM64A-TNISS-CD3OV-32FVH";

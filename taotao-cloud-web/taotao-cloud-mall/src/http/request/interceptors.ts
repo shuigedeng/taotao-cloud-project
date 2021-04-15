@@ -1,5 +1,5 @@
 import Taro, {request} from "@tarojs/taro"
-import {PageResult, Result} from "../../api/model/baseModel";
+import {PageResult, Result} from "@/api/model/baseModel";
 import {HttpStatusEnum} from "../../enums/httpEnum";
 
 let REQUEST_NUM = 0;

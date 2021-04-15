@@ -1,8 +1,8 @@
 export default {
-  navigationStyle: "default",
-  navigationBarBackgroundColor: "#F0F1F2",
-  navigationBarTextStyle: "black",
-  navigationBarTitleText: "首页",
-  backgroundColor: "#F0F1F2",
-  backgroundColorBottom: "#F0F1F2"
+  navigationBarTitleText: '我的',
+  navigationBarBackgroundColor: '#d43c33',
+  navigationBarTextStyle: 'black',
+  backgroundColor: '#d43c33',
+  backgroundTextStyle: 'dark',
+  enablePullDownRefresh: true,
 }

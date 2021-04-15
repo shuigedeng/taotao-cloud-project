@@ -1,4 +1,4 @@
-import { ADD, MINUS } from '../../constants/counter'
+import { ADD, MINUS } from '@/constants/counter'
 
 const INITIAL_STATE = {
   num: 0

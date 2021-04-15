@@ -1,5 +1,4 @@
-import Taro from "@tarojs/taro";
-
+import Taro from '@tarojs/taro'
 /**
  * @description 获取当前页url
  */

@@ -1,7 +1,4 @@
-jar.enabled = true
-
 dependencies {
-
     implementation 'ru.yandex.clickhouse:clickhouse-jdbc:0.1.53'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 

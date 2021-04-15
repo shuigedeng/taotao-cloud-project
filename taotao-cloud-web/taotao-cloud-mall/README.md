@@ -2,6 +2,18 @@
 
 #### 1.小程序端系统简介
 
+
+![](./snapshot/img.png)
+
+```
+yarn add @tarojs/plugin-mock
+yarn add taro-plugin-tailwind
+yarn add taro-plugin-canvas
+yarn add tarojs-plugin-generator
+yarn add redux react-redux redux-thunk sa-sdk-miniprogram cross-env redux-logger
+```
+
+
 **taotao-cloud-mall**
 ```
 后台基于

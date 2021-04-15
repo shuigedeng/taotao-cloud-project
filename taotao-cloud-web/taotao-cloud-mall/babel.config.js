@@ -4,7 +4,7 @@ module.exports = {
   presets: [
     ['taro', {
       framework: 'react',
-      ts: true,
+      ts: true
       // 以下参数为 @babel/preset-env 的参数：
       // https://babeljs.io/docs/en/babel-preset-env
       // loose: true,
@@ -15,7 +15,7 @@ module.exports = {
       //   ios: '9',
       //   android: '5'
       // }
-    }],
+    }]
   ],
   plugins: [
     // [

@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
     "paths": {
+      "@/api/*": ["./src/api/*"],
+      "@/assets/*": ["./src/assets/*"],
       "@/components/*": ["./src/components/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/enums/*": ["./src/enums/*"],
+      "@/http/*": ["./src/http/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/styles/*": ["./src/styles/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/package": ["./package.json"],
       "@/project": ["./project.config.json"]
@@ -27,6 +35,10 @@
     "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"]
   },
+  "include": [
+    "src",
+    "global.d.ts"
+  ],
   "exclude": ["node_modules", "dist"],
   "compileOnSave": false
 }
