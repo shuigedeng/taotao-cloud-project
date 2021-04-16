@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Input} from "@tarojs/components";
+import {Input, View} from "@tarojs/components";
 import "./index.less";
 import {FC} from "@tarojs/taro";
 

@@ -1,7 +1,6 @@
 import React from "react";
 import {Image, Text, View} from '@tarojs/components';
 import './index.less';
-import {FC} from "@tarojs/taro";
 
 type IProps = {
   width?: string
@@ -12,7 +11,7 @@ type IProps = {
   originalPrice: number,
 }
 
-const ProductCard: FC<IProps> = (props) => {
+const ProductCard: Taro.FC<IProps> = (props) => {
   return (
     <View
       className={props.className + ' product-card'}

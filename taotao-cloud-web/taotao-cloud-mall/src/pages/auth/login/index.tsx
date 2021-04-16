@@ -1,16 +1,30 @@
 import Taro from '@tarojs/taro';
-import {Button, View} from '@tarojs/components';
+import {Button, Image, View} from '@tarojs/components';
 import {showErrorToast} from '@/utils/util';
 import {set as setGlobalData} from '../../ucenter/global_data';
 
 import * as user from '../../../utils/user';
 
 import './index.less';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import * as images from "../../../static/images";
 
 const Index: Taro.FC = () => {
 
   const [state, setState] = useState({})
+
+  useEffect(() => {
+    Taro.setNavigationBarTitle({title: "登录"})
+    Taro.setNavigationBarColor({
+      frontColor: "#ffffff",
+      backgroundColor: "#6e0e0e"
+    })
+    Taro.setBackgroundColor({
+      backgroundColor: '#ffffff',
+      backgroundColorTop: '#ffffff', // 顶部窗口的背景色为白色
+      backgroundColorBottom: '#ffffff', // 底部窗口的背景色为白色
+    })
+  })
 
   const accountLogin = () => {
     Taro.navigateTo({
@@ -39,7 +53,7 @@ const Index: Taro.FC = () => {
     });
   }
 
-  const  getUserProfile =(e) => {
+  const getUserProfile = (e) => {
     console.log(e)
 
     Taro.getUserProfile({desc: '获取用户信息'}).then(res => {
@@ -54,11 +68,19 @@ const Index: Taro.FC = () => {
     })
   }
 
+  const getPhoneNumber = (e) => {
+    console.log(e)
+  }
+
   return (
     <View className='container'>
       <View className='login-box'>
-        <Button type='primary' openType='getUserInfo' className='wx-login-btn'
-                onGetUserInfo={wxLogin} onClick={getUserProfile}>微信授权登录</Button>
+        <Button type='primary'
+                className='wx-login-btn'
+                onClick={getUserProfile}
+                openType='getPhoneNumber'
+                onGetPhoneNumber={getPhoneNumber}>微信授权登录</Button>
+
         <Button type='primary' className='account-login-btn'
                 onClick={accountLogin}>账号登录</Button>
       </View>

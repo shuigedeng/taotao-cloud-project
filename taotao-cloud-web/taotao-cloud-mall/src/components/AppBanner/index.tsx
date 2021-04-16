@@ -6,9 +6,7 @@ import banner1 from "../../assets/images/temp/banner1.jpg"
 import banner2 from "../../assets/images/temp/banner2.jpg"
 import banner3 from "../../assets/images/temp/banner3.jpg"
 
-import {FC} from "@tarojs/taro";
-
-const AppBanner: FC = () => {
+const AppBanner: Taro.FC = () => {
   let [state, setState] = useState({
     current: 1,
     list: [

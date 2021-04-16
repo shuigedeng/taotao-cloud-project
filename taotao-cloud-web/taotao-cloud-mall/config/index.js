@@ -147,7 +147,12 @@ const config = {
     router: {
       mode: 'browser', // 或者是 'has'
       customRoutes: {
-        '/pages/home/index': '/home'
+        '/pages/home/index': '/home',
+        '/pages/cart/index': '/cart',
+        '/pages/classify/index': '/classify',
+        '/pages/lifeCircle/index': '/lifeCircle',
+        '/pages/login/index': '/login',
+        '/pages/ucenter/index': '/ucenter',
       }
     },
     esnextModules: ['taro-ui'],
