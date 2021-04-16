@@ -8,5 +8,14 @@ export default {
   },
   queryUser(data: QueryUserParam): Promise<PageResult<LoginVO>> {
     return request.get<PageResult<LoginVO>, QueryUserParam>("/auth/oauth/token/user", data);
-  }
+  },
+  getLoginUserInfo(): Promise<Result<any>> {
+    return request.get("/uc/current", {});
+  },
+  bindPhone(data: any): Promise<Result<any>> {
+    return request.get("/uc/bindPhone", data);
+  },
+  logOut(): Promise<Result<any>> {
+    return request.get("/uc/logout", {});
+  },
 }

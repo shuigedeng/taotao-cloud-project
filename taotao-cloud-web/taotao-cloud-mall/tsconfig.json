@@ -33,10 +33,13 @@
     "jsxFactory": "React.createElement",
     "allowJs": true,
     "resolveJsonModule": true,
-    "typeRoots": ["node_modules/@types", "global.d.ts"]
+    "typeRoots": ["node_modules/@types", "./global.d.ts"],
+    "types": ["node_modules/@types", "global.d.ts"]
   },
   "include": [
-    "src",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
     "global.d.ts"
   ],
   "exclude": ["node_modules", "dist"],

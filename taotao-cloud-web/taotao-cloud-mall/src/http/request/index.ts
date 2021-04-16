@@ -1,7 +1,7 @@
 import Taro, {request as TaroRequest} from '@tarojs/taro'
 import getRequestUrl from './requestUrl'
 import interceptors from './interceptors'
-import {ContentTypeEnum, RequestEnum} from "../../enums/httpEnum";
+import {ContentTypeEnum, RequestEnum} from "@/enums/httpEnum";
 
 interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem))
 

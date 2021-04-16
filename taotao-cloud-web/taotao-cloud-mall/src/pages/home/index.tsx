@@ -13,18 +13,16 @@ const Index: Taro.FC = (props) => {
   };
 
   useEffect(() => {
-    try {
-      const value = Taro.getStorageSync('userInfo')
-      if (value) {
-        Taro.redirectTo({
-          url: '/pages/main/index'
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-
-
+    // try {
+    //   const value = Taro.getStorageSync('userInfo')
+    //   if (value) {
+    //     Taro.redirectTo({
+    //       url: '/pages/main/index'
+    //     })
+    //   }
+    // } catch (e) {
+    //   // Do something when catch error
+    // }
   }, [])
 
 

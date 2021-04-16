@@ -1,7 +1,7 @@
 export default {
   pages: [
     "pages/home/index",
-    "pages/my/index",
+    "pages/ucenter/index",
     "pages/classify/index",
     "pages/cart/index",
     "pages/lifeCircle/index",
@@ -54,22 +54,25 @@ export default {
       },
       {
         text: "我的",
-        pagePath: "pages/my/index",
+        pagePath: "pages/ucenter/index",
         selectedIconPath: "./assets/images/tab-my-current.png",
         iconPath: "./assets/images/tab-my.png"
       }
     ],
   },
   subPackages: [
-    // {
-    //   "root": "pages/details",
-    //   "pages": [
-    //     "pages/djprogramListDetail/index",
-    //     "pages/playListDetail/index",
-    //     "pages/songDetail/index",
-    //     "pages/videoDetail/index",
-    //   ]
-    // },
+    {
+      "root": "pages/login",
+      "pages": [
+        "index",
+      ]
+    },
+    {
+      "root": "pages/auth",
+      "pages": [
+        "login/index",
+      ]
+    },
     // {
     //   "root": "pages/user",
     //   "pages": [
