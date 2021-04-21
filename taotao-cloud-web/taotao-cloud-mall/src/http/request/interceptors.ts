@@ -1,6 +1,6 @@
 import Taro, {request} from "@tarojs/taro"
 import {PageResult, Result} from "@/api/model/baseModel";
-import {HttpStatusEnum} from "../../enums/httpEnum";
+import {HttpStatusEnum} from "@/enums/httpEnum";
 
 let REQUEST_NUM = 0;
 let TIME: NodeJS.Timeout | null;

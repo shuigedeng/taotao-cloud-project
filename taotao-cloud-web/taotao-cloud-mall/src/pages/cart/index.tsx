@@ -1,11 +1,10 @@
-import Taro from '@tarojs/taro';
+import Taro, {usePullDownRefresh} from '@tarojs/taro';
 import {Button, Image, Input, Text, View} from '@tarojs/components';
 import {AtCheckbox} from 'taro-ui';
 import {cartChecked, cartDelete, cartUpdate, getCartListApi} from '../../services/cart';
 
 import './index.less';
 import React, {useEffect, useState} from "react";
-import usePullDownRefresh = Taro.usePullDownRefresh;
 
 const Index: Taro.FC = () => {
   const [state, setState] = useState({

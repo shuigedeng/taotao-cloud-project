@@ -148,6 +148,7 @@ const config = {
       mode: 'browser', // 或者是 'has'
       customRoutes: {
         '/pages/home/index': '/home',
+        '/pages/home_bak/index': '/home_bak',
         '/pages/cart/index': '/cart',
         '/pages/classify/index': '/classify',
         '/pages/lifeCircle/index': '/lifeCircle',

@@ -1,20 +1,31 @@
 export default {
   pages: [
     "pages/home/index",
+    "pages/home_bak/index",
     "pages/ucenter/index",
     "pages/classify/index",
-    "pages/cart/index",
+    // "pages/cart/index",
     "pages/lifeCircle/index",
   ],
+  // window: {
+  //   backgroundTextStyle: "dark",
+  //   navigationBarBackgroundColor: "#d43c33",
+  //   navigationBarTitleText: "滔滔商城",
+  //   navigationBarTextStyle: "black",
+  //   backgroundColor: '#b6a7a6',
+  //   enablePullDownRefresh: true
+  // },
   window: {
-    backgroundTextStyle: "dark",
-    navigationBarBackgroundColor: "#d43c33",
+    backgroundTextStyle: "light",
+    navigationBarBackgroundColor: "#fff",
     navigationBarTitleText: "滔滔商城",
     navigationBarTextStyle: "black",
-    backgroundColor: '#b6a7a6',
-    enablePullDownRefresh: true
+    enablePullDownRefresh: true,
   },
   requiredBackgroundModes: ["audio"],
+  navigateToMiniProgramAppIdList: [
+    "wx4a96aca05249ba58",
+  ],
   debug: false,
   permission: {
     "scope.userLocation": {
@@ -22,11 +33,14 @@ export default {
     }
   },
   tabBar: {
-    custom: false,
-    color: '#d43c33',
-    selectedColor: '#252323',
-    backgroundColor: '#33d438',
-    borderStyle: 'black',
+    // custom: false,
+    // color: '#d43c33',
+    // selectedColor: '#252323',
+    // backgroundColor: '#33d438',
+    // borderStyle: 'black',
+    color: "#000000",
+    selectedColor: "#04304b",
+    backgroundColor: "#fff",
     list: [
       {
         text: "首页",
@@ -46,12 +60,12 @@ export default {
         selectedIconPath: "./assets/images/tab-home-current.png",
         iconPath: "./assets/images/tab-home.png",
       },
-      {
-        text: "购物车",
-        pagePath: "pages/cart/index",
-        selectedIconPath: "./assets/images/tab-cart-current.png",
-        iconPath: "./assets/images/tab-cart.png"
-      },
+      // {
+      //   text: "购物车",
+      //   pagePath: "pages/cart/index",
+      //   selectedIconPath: "./assets/images/tab-cart-current.png",
+      //   iconPath: "./assets/images/tab-cart.png"
+      // },
       {
         text: "我的",
         pagePath: "pages/ucenter/index",
@@ -73,33 +87,5 @@ export default {
         "login/index",
       ]
     },
-    // {
-    //   "root": "pages/user",
-    //   "pages": [
-    //     "pages/user/index",
-    //     "pages/userFans/index",
-    //     "pages/userFocus/index",
-    //     "pages/userEvents/index",
-    //   ]
-    // },
-    // {
-    //   "root": "pages/search",
-    //   "pages": [
-    //     "pages/searchResult/index",
-    //     'pages/search/index',
-    //   ]
-    // },
-    // {
-    //   "root": "pages/dailyRecommend",
-    //   "pages": [
-    //     "pages/dailyRecommend/index",
-    //   ]
-    // },
-    // {
-    //   "root": "pages/recentPlay",
-    //   "pages": [
-    //     "pages/recentPlay/index",
-    //   ]
-    // }
   ],
 };

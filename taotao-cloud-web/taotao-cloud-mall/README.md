@@ -11,6 +11,10 @@ yarn add taro-plugin-tailwind
 yarn add taro-plugin-canvas
 yarn add tarojs-plugin-generator
 yarn add redux react-redux redux-thunk sa-sdk-miniprogram cross-env redux-logger
+yarn add moment @types/moment
+yarn add apollo-boost @apollo/react-hooks
+yarn add graphql @types/graphql
+
 ```
 
 

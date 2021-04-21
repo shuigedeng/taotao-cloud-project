@@ -1,7 +1,7 @@
 export default {
-  navigationBarTitleText: '首页',
-  navigationBarBackgroundColor: '#d43c33',
-  navigationBarTextStyle: 'black',
-  backgroundColor: '#d43c33',
-  backgroundTextStyle: 'dark',
+  navigationBarTitleText: "有地道",
+  // 状态栏自定义
+  navigationStyle: "custom",
+  // 状态栏颜色白色
+  navigationBarTextStyle: "white",
 }

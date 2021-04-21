@@ -30,6 +30,20 @@ export enum RequestEnum {
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE',
+  OPTIONS = 'OPTIONS',
+}
+
+export const conversionRequestEnum = (request: RequestInit) => {
+  let method = request.method;
+  if (method) {
+    for (let requestEnumKey in RequestEnum) {
+      if (requestEnumKey.toLowerCase() == method) {
+        return RequestEnum[requestEnumKey]
+      }
+    }
+  } else {
+    return RequestEnum.OPTIONS
+  }
 }
 
 /**

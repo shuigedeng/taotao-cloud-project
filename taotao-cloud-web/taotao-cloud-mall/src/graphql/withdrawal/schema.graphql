@@ -1,0 +1,76 @@
+type Withdrawal {
+  # id
+  id: ID
+
+  # 姓名
+  name: String
+
+  # 提现金额
+  price: Float
+
+  # 号码
+  phone: String
+
+  # 提现账户
+  account: String
+
+  # 卡号
+  card: String
+
+  # 备注信息
+  remark: String
+
+  # 创建时间
+  createdAt: String
+
+  # 更新时间
+  updatedAt: String
+
+  # 提现状态
+  status: String
+
+  # 类型
+  type: String
+
+  # 用户
+  user: UserInfo
+
+  # 商户的店铺
+  store: Store
+}
+
+type WithdrawalPagination {
+  list: [Withdrawal]
+  pagination: PageInfo
+}
+
+# 店铺类型
+enum WithdrawalType {
+  # 待处理
+  loading
+
+  # 已完成
+  success
+
+  # 已审核
+  audit
+
+  # 已拒绝
+  refuse
+}
+
+enum WithType {
+  # 店铺提现
+  store
+
+  # 用户提现
+  user
+}
+
+enum AuditType {
+  # 通过审核
+  audit
+
+  # 拒绝
+  refuse
+}

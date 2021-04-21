@@ -1,0 +1,22 @@
+type Project {
+  # id
+  id: ID
+
+  # 名称
+  title: String
+
+  # 图片
+  imageUrl: String
+}
+
+# 商品分类上传参数
+input ProjectInput {
+  # id(更新时传递)
+  id: ID
+
+  # 标题
+  title: String
+
+  # 图片key值
+  imageKey: String
+}
