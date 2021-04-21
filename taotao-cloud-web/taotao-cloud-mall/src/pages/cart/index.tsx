@@ -1,332 +1,341 @@
-import Taro, {usePullDownRefresh} from '@tarojs/taro';
-import {Button, Image, Input, Text, View} from '@tarojs/components';
-import {AtCheckbox} from 'taro-ui';
-import {cartChecked, cartDelete, cartUpdate, getCartListApi} from '../../services/cart';
-
-import './index.less';
+import Taro, {usePullDownRefresh} from '@tarojs/taro'
+import {Checkbox, CheckboxGroup, Image, ScrollView, Text, View} from '@tarojs/components'
+import {AtInputNumber} from 'taro-ui'
+import shoppingScan from '../../img/shoppingScan.png'
+import {invitedUsers, singleItem} from '../home/service'
+import './index.less'
 import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {ICartState} from "@/store/state/cart";
 
 const Index: Taro.FC = () => {
-  const [state, setState] = useState({
-    cartGoods: [],
-    cartTotal: {
-      'goodsCount': 0,
-      'goodsAmount': 0.00,
-      'checkedGoodsCount': 0,
-      'checkedGoodsAmount': 0.00
-    },
-    isEditCart: false,
-    checkedAllStatus: true,
-    editCartList: [],
-    hasLogin: false
+  let [state, setState] = useState({
+    editable: false,
+    modal: 'none',
+    discount: 0,
+    couponId: '',
+    cartChecked: true,
+    deleteItem: [],
+    userMsg: [],
   })
 
-  const getCartList = () => {
-    getCartListApi().then(res => {
-      setState(prevState => {
-        return {
-          ...prevState,
-          cartGoods: res.cartList,
-          cartTotal: res.cartTotal
-        }
-      })
-
-      setState(prevState => {
-        return {...prevState, checkedAllStatus: isCheckedAll()}
-      })
-    })
-  }
+  const cartItems = useSelector<ICartState, any[]>(({cartItems}) => cartItems);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const hasLogin = getGlobalData('hasLogin')
-    if (hasLogin) {
-      getCartList();
+    const initData = async () => {
+      console.log('shoppingCart cartItems', cartItems);
+      // const userResult = await userInfo();
+
+      const {deleteItem} = state;
+      for (const iterator of cartItems) {
+        if (iterator.checked) {
+          deleteItem.push(iterator);
+        }
+      }
+      // setState(prevState => {
+      //   return {...prevState, deleteItem: deleteItem, userMsg: userResult.data.userInfo,}
+      // })
     }
+    initData()
+  }, [])
 
-    setState(prevState => {
-      return {...prevState, hasLogin: hasLogin}
-    })
-  }, [getCartList, setState])
+  usePullDownRefresh(async () => {
+    console.log('shoppingCart cartItems', cartItems);
+    // const userResult = await userInfo();
 
-  usePullDownRefresh(() => {
-    Taro.showNavigationBarLoading() //在标题栏中显示加载
-    getCartList();
-    Taro.hideNavigationBarLoading() //完成停止加载
-    Taro.stopPullDownRefresh() //停止下拉刷新
+    const {deleteItem} = state;
+    for (const iterator of cartItems) {
+      if (iterator.checked) {
+        deleteItem.push(iterator);
+      }
+    }
+    // setState(prevState => {
+    //   return {...prevState, deleteItem: deleteItem, userMsg: userResult.data.userInfo,}
+    // })
   })
 
-  const deleteCart = () => {
-    let productIds = state.cartGoods.filter(function (element, index, array) {
-      return element.checked == true;
-    });
 
-    if (productIds.length <= 0) {
-      return false;
+  //点击编辑与完成
+  const editor = () => {
+    setState(prevState => {
+      return {...prevState, editable: !prevState.editable}
+    })
+  }
+
+  const choose = (activiId, amount, require, totalPrice) => {
+    if (totalPrice >= require) {
+      setState(prevState => {
+        return {...prevState, discount: amount, couponId: activiId}
+      })
+    } else {
+      setState(prevState => {
+        return {...prevState, discount: 0, couponId: ''}
+      })
     }
-
-    productIds = productIds.map(function (element, index, array) {
-      if (element.checked == true) {
-        return element.productId;
-      }
-    });
-
-    cartDelete({
-      productIds: productIds
-    }).then(res => {
-      console.log(res.data);
-      let cartList = res.cartList.map(v => {
-        v.checked = false;
-        return v;
-      });
-
-      setState(prevState => {
-        return {
-          ...prevState,
-          cartGoods: cartList,
-          cartTotal: res.cartTotal
-        }
-      })
-
-      setState(prevState => {
-        return {...prevState, checkedAllStatus: isCheckedAll()}
-      })
-    })
-  }
-
-  const isCheckedAll = () => {
-    //判断购物车商品已全选
-    return state.cartGoods.every(function (element, index, array) {
-      return element.checked == true;
-    });
-  }
-
-  const doCheckedAll = () => {
     setState(prevState => {
-      return {...prevState, checkedAllStatus: isCheckedAll()}
+      return {...prevState, activiId: activiId}
     })
   }
 
-  const goLogin = () => {
-    Taro.navigateTo({
-      url: "/pages/auth/login/login"
-    });
-  }
-
-  const cutNumber = (event) => {
-    let itemIndex = event.target.dataset.itemIndex;
-    let cartItem = state.cartGoods[itemIndex];
-    let number = (cartItem.number - 1 > 1) ? cartItem.number - 1 : 1;
-    cartItem.number = number;
+  const open = () => {
     setState(prevState => {
-      updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
-      return {...prevState, cartGoods: state.cartGoods}
+      return {...prevState, modal: 'block'}
     })
   }
 
-  const addNumber = (event) => {
-    let itemIndex = event.target.dataset.itemIndex;
-    let cartItem = state.cartGoods[itemIndex];
-    let number = cartItem.number + 1;
-    cartItem.number = number;
-    setState(prevState => {
-      updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
-      return {...prevState, cartGoods: state.cartGoods}
+  const prompt = () => {
+    Taro.showToast({
+      title: '敬请期待',
+      icon: 'none'
     })
   }
 
-  const updateCart = (productId, goodsId, number, id) => {
-    cartUpdate({
-      productId: productId,
-      goodsId: goodsId,
-      number: number,
-      id: id
-    }).then(() => {
-      setState(prevState => {
-        return {...prevState, checkedAllStatus: isCheckedAll()}
-      })
-    })
-  }
+  //跳转确认订单
+  const handlePay = async () => {
+    const token = Taro.getStorageSync('accessToken');
+    if (token) {
+      // Taro.hideTabBarRedDot({
+      //   index: 2
+      // })
 
-  const checkoutOrder = () => {
-    //获取已选择的商品
-    var checkedGoods = state.cartGoods.filter(function (element, index, array) {
-      return element.checked == true;
-    });
+      // Taro.setTabBarBadge({
+      //   index: 2,
+      //   text: '18',
+      // })
 
-    if (checkedGoods.length <= 0) {
-      return false;
-    }
-
-    // storage中设置了cartId，则是购物车购买
-    try {
-      Taro.setStorageSync('cartId', 0);
       Taro.navigateTo({
-        url: '/pages/checkout/checkout'
-      })
-    } catch (e) {
-    }
-  }
-
-  const editCart = () => {
-    if (state.isEditCart) {
-      getCartList();
-      setState(prevState => {
-        return {...prevState, isEditCart: !prevState.isEditCart}
-      })
-    } else {
-      //编辑状态
-      let tmpCartList = state.cartGoods.map(function (v) {
-        v.checked = false;
-        return v;
+        url: "../orderDetails/index"
       });
-
-      setState(prevState => {
-        return {
-          ...prevState,
-          editCartList: prevState.cartGoods,
-          cartGoods: tmpCartList,
-          isEditCart: !prevState.isEditCart,
-          checkedAllStatus: isCheckedAll(),
-          'cartTotal.checkedGoodsCount': getCheckedGoodsCount()
-        }
-      })
-    }
-  }
-
-  const checkedItem = (event) => {
-    let itemIndex = event.target.dataset.itemIndex;
-    let productIds = [];
-    productIds.push(state.cartGoods[itemIndex].productId);
-    if (!state.isEditCart) {
-      cartChecked({
-        productIds: productIds,
-        isChecked: state.cartGoods[itemIndex].checked ? 0 : 1
-      }).then(res => {
-        setState(prevState => {
-          return {
-            ...prevState,
-            cartGoods: res.cartList,
-            cartTotal: res.cartTotal
-          }
-        })
-
-        setState(prevState => {
-          return {...prevState, checkedAllStatus: isCheckedAll()}
-        })
-      })
-
     } else {
-      //编辑状态
-      let tmpCartData = state.cartGoods.map(function (element, index, array) {
-        if (index == itemIndex) {
-          element.checked = !element.checked;
-        }
-        return element;
+      Taro.switchTab({
+        url: "../mine/index"
       });
-
-      setState(prevState => {
-        return {
-          ...prevState,
-          cartGoods: tmpCartData,
-          checkedAllStatus: isCheckedAll(),
-          'cartTotal.checkedGoodsCount': getCheckedGoodsCount()
-        }
-      })
     }
   }
 
-  const getCheckedGoodsCount = () => {
-    let checkedGoodsCount = 0;
-    state.cartGoods.forEach(function (v) {
-      if (v.checked === true) {
-        checkedGoodsCount += v.number;
-      }
+  const onCheckboxGroupChange = (e) => {
+    setState(prevState => {
+      return {...prevState, discount: 0, activiId: 0,}
+    })
+
+    dispatch({
+      type: 'common/changeCartItemsChecked',
+      payload: e.detail.value
+    })
+  }
+
+  const deleteCart = (deleteItem) => {
+    dispatch({
+      type: 'common/delete',
+      payload: deleteItem
+    })
+    Taro.showToast({
+      title: '删除完成',
+      icon: 'success',
+      duration: 1000,
     });
-    return checkedGoodsCount;
   }
 
-  const {hasLogin, isEditCart, cartGoods, cartTotal, checkedAllStatus} = state;
+  const changeCheck = () => {
+    const {cartChecked} = state;
+    dispatch({
+      type: 'common/changeAllCheckedCartItems',
+      payload: cartChecked
+    })
 
-  return (
-    <View className='container'>
-      {
-        !hasLogin ? <View className='no-login'>
-          <View className='c'>
-            <Text className='text'>还没有登录</Text>
-            <Button className='button' style='background-color:#A9A9A9'
-                    onClick={goLogin}>去登录</Button>
-          </View>
-        </View> : <View className='login'>
-          <View className='service-policy'>
-            <View className='item'>30天无忧退货</View>
-            <View className='item'>48小时快速退款</View>
-            <View className='item'>满88元免邮费</View>
-          </View>
-          {
-            cartGoods.length <= 0 ? <View className='no-cart'>
-              <View className='c'>
-                <Text>空空如也~</Text>
-                <Text>去添加点什么吧</Text>
-              </View>
-            </View> : <View className='cart-view'>
-              <View className='list'>
-                <View className='group-item'>
-                  <View className='goods'>
-                    {
-                      cartGoods.map((item, index) => {
-                        return <View className={`item ${isEditCart ? 'edit' : ''}`} key='id'>
-                          <AtCheckbox onChange={checkedItem}
-                                      options={[{value: item, label: item}]}
-                                      selectedList={item}/>
-                          {/* <van-checkbox value='{ item.checked }' bind:change='checkedItem' data-item-index='{index}'></van-checkbox> */}
-                          <View className='cart-goods'>
-                            <Image className='img' src={item.picUrl}/>
-                            <View className='info'>
-                              <View className='t'>
-                                <Text className='name'>{item.goodsName}</Text>
-                                <Text className='num'>x{item.number}</Text>
-                              </View>
-                              <View
-                                className='attr'>{isEditCart ? '已选择:' : ''}{item.specifications || ''}</View>
-                              <View className='b'>
-                                <Text className='price'>￥{item.price}</Text>
-                                <View className='selnum'>
-                                  <View className='cut' onClick={cutNumber}
-                                        data-item-index={index}>-</View>
-                                  <Input value={item.number} className='number' disabled={true}
-                                         type='number'/>
-                                  <View className='add' onClick={addNumber}
-                                        data-item-index={index}>+</View>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
-                        </View>
-                      })
-                    }
-                  </View>
-                </View>
+    setState(prevState => {
+      return {...prevState, cartChecked: !cartChecked}
+    })
+  }
 
-              </View>
-              <View className='cart-bottom'>
-                {/* <van-checkbox value='{ checkedAllStatus }' bind:change='checkedAll'>全选（{cartTotal.checkedGoodsCount}）</van-checkbox> */}
-                <View
-                  className='total'>{!isEditCart ? '￥' + cartTotal.checkedGoodsAmount : ''}</View>
-                <View className='action_btn_area'>
-                  <View className={!isEditCart ? 'edit' : 'sure'}
-                        onClick={editCart}>{!isEditCart ? '编辑' : '完成'}</View>
+  // 扫码加入购物车
+  const lookForward = async () => {
+    const {result} = await Taro.scanCode({});
+    console.log('扫码result', result);
 
-                  {isEditCart && <View className='delete'
-                                       onClick={deleteCart}>删除({cartTotal.checkedGoodsCount})</View>}
-                  {!isEditCart && <View className='checkout' onClick={checkoutOrder}>下单</View>}
-                </View>
-              </View>
-            </View>
-          }
+    const obj = JSON.parse(result);
+    if (obj.userId) {
+      console.log('扫码邀请');
+      await invitedUsers(obj.userId);
+    } else {
+      console.log('扫码加购');
+      const itemResult = await singleItem(result);
+      console.log('扫码加入购物车itemResult', itemResult);
+      const data: any = {};
+      data.itemId = itemResult.data.item.code;
+      data.name = itemResult.data.item.name;
+      data.number = 1;
+      data.price = itemResult.data.item.price;
+      data.unit = itemResult.data.item.unit;
+      data.imageUrl = itemResult.data.item.imageUrl;
+      data.pointDiscountPrice = itemResult.data.item.pointDiscountPrice;
+      data.originalPrice = itemResult.data.item.originalPrice;
+      data.memberPrice = itemResult.data.item.memberPrice;
+      await dispatch({
+        type: 'common/addToCartByCode',
+        payload: data
+      });
+    }
 
-        </View>
+  }
+  //点击修改加减数量
+  const handleNumberChange = (itemId, number) => {
+    setState(prevState => {
+      return {...prevState, discount: 0, activiId: 0,}
+    })
+    dispatch({
+      type: 'common/changeCartItemNumer',
+      payload: {itemId, number}
+    });
+  }
+
+
+  // 购物车右上角图标
+  if (cartItems.length === 0) {
+    // Taro.hideTabBarRedDot({
+    //   index: 2
+    // })
+    Taro.removeTabBarBadge({
+      index: 2
+    })
+  } else {
+    let sum = 0;
+    let i;
+    for (i in cartItems) {
+      if (cartItems[i].checked) {
+        sum += parseInt(cartItems[i].number);
       }
-    </View>
+    }
+    Taro.setTabBarBadge({
+      index: 2,
+      text: "" + sum + "",
+    })
+  }
+
+  const {couponId, deleteItem} = state;
+  const check = cartItems.every(item => item.checked === true);
+  const totalPrice = {total: 0};
+  if (state.userMsg.role === 'member') {
+    totalPrice.total = cartItems.reduce((total, currentValue) => {
+      if (currentValue.checked) {
+        return total + (currentValue.memberPrice * currentValue.number);
+      }
+      return total;
+    }, 0);
+  } else {
+    totalPrice.total = cartItems.reduce((total, currentValue) => {
+      if (currentValue.checked) {
+        return total + (currentValue.price * currentValue.number);
+      }
+      return total;
+    }, 0);
+  }
+  return (
+    <ScrollView className='buy'>
+      {cartItems.length > 0 ? (
+        <View>
+          <View className='topLine'>
+            <Text className='total'>共计{cartItems.length}件商品</Text>
+            <View className='editor' onClick={editor}>
+              <Text className='total'>{state.editable ? '完成' : '管理'}</Text>
+            </View>
+          </View>
+          {/*中间商品*/}
+          <View className='page-body'>
+            <CheckboxGroup onChange={onCheckboxGroupChange}>
+              <View className='quanbu'>
+                {cartItems.map((item) => (
+                  <View key={item.itemId} className='Framework'>
+                    {/*按钮*/}
+                    <Checkbox value={item.itemId} checked={item.checked}/>
+                    {/*按钮右边的图片文字等*/}
+                    <View className='framework'>
+                      {/*物品图片*/}
+                      <Image src={item.imageUrl} className='goodsOne'/>
+                      <View className='frame'>
+                        {/*物品名称*/}
+                        <Text className='name'>{item.name}</Text>
+                        <View className='work'>
+                          {/*价格*/}
+                          <View style="display:flex;flex-direction:column;">
+                            <Text
+                              className='memberPrice'>￥{(item.memberPrice / 100).toFixed(2)}/{item.unit}</Text>
+                            <Text
+                              className='price'>￥{(item.price / 100).toFixed(2)}/{item.unit}</Text>
+                            <Text
+                              className='originalPrice'>￥{(item.originalPrice / 100).toFixed(2)}/{item.unit}</Text>
+                          </View>
+                          {/*数量选择*/}
+                          <AtInputNumber
+                            min={1}
+                            max={99}
+                            step={1}
+                            width={100}
+                            value={item.number}
+                            onChange={handleNumberChange.bind(this, item.itemId)}
+                            style="margin-top:4PX;"
+                            type="number"/>
+                        </View>
+                        {/*价格小计*/}
+                        <View className='xj'>
+                          <Text className='xiaoj'>小计：</Text>
+                          {
+                            state.userMsg.role === 'member' ? (
+                              <Text
+                                className='ji'>￥{(item.memberPrice * item.number) / 100}/{item.unit}</Text>
+                            ) : (
+                              <Text
+                                className='ji'>￥{(item.price * item.number) / 100}/{item.unit}</Text>
+                            )
+                          }
+
+                        </View>
+                      </View>
+
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </CheckboxGroup>
+            {cartItems.length !== 0 ? (<View className='boTo'>
+              <View className='qx'>
+                <Checkbox value='all' checked={check} onClick={changeCheck}>全选</Checkbox>
+              </View>
+              <View className='rightfk'>
+                <View className='YH'>
+                  <Text className='yh'>合计：</Text>
+                  <Text
+                    className='hj'>￥{(totalPrice.total || 0) / 100 - (state.discount)}/元</Text>
+                </View>
+                {!state.editable ? (
+                  <View className='doubleButtonBox'>
+                    <View className='fk' onClick={handlePay.bind(this, couponId)}>
+                      <Text className='payment'>付款</Text>
+                    </View>
+                  </View>
+                ) : (
+                  <View className='fk' onClick={deleteCart.bind(this, deleteItem)}>
+                    <Text className='delete'>删除</Text>
+                  </View>
+                )}
+              </View>
+            </View>) : ''}
+          </View>
+        </View>
+      ) : (
+        <View className="nullBox">
+          {/* <Image src='https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/takenGoods.png' className="empty" /> */}
+          <Text className="orederNullText">购物车暂无商品</Text>
+        </View>
+      )}
+      <View className='shoppingScan' onClick={lookForward}>
+        <Image src={shoppingScan}/>
+        <Text className='shoppingScanTxt1'>扫一扫</Text>
+        <Text className='shoppingScanTxt2'>商品条形码</Text>
+      </View>
+
+    </ScrollView>
   )
 }
 

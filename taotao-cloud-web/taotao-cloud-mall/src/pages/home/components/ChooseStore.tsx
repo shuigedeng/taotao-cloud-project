@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import {Banner} from "@/pages/home";
 import scan from "@/assets/img/scan.png";
 import Taro from "@tarojs/taro";
-import {useDispatch} from "react-redux";
 
 interface IProps {
   tabbarFix: boolean;
@@ -17,7 +16,6 @@ const ChooseStore: Taro.FC<IProps> = (props) => {
   let [state, setState] = useState<{ input: string; }>({
     input: ""
   })
-  const dispatch = useDispatch();
 
   // 跳转附件商家列表
   const nearshore = () => {

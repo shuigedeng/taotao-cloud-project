@@ -10,18 +10,21 @@ import {
   projectItems,
   singleItem
 } from "./service";
-import {AtIcon} from "taro-ui";
 // import {userInfo} from "../orderDetails/service";
-import shoppingScan from '@/assets/img/shoppingScan.png'
 import "./index.less";
 
 import diamond from "@/assets/img/diamond.png";
 
 import * as moment from "moment";
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import CustomSwiper from "@/pages/home/components/CustomSwiper";
 import ChooseStore from "@/pages/home/components/ChooseStore";
+import ShoppingScan from "@/pages/home/components/ShoppingScan";
+import OptimizationBox from "@/pages/home/components/OptimizationBox";
+import SpecialZone from "@/pages/home/components/SpecialZone";
+import {CartActionType} from "@/store/action/cartAction";
+import {ICartState} from "@/store/state/cart";
 
 moment.locale("zh-cn");
 
@@ -32,18 +35,18 @@ export interface Banner {
   imageUrl: string;
 }
 
-interface Classify {
+export interface Classify {
   id: number;
   title: string;
   imageUrl: string;
 }
 
-enum ItemType {
+export enum ItemType {
   ordinary,
   special
 }
 
-interface Item {
+export interface Item {
   code: number;
   name: string;
   imageUrl: string;
@@ -167,8 +170,7 @@ const Index: Taro.FC = () => {
     toUpper: false
   });
 
-  // const cartItems = useSelector(state => state.cartItems);
-  const cartItems = [];
+  const cartItems = useSelector<ICartState, any[]>(({cartItems}) => cartItems);
   const dispatch = useDispatch();
 
   const getData = async () => {
@@ -251,6 +253,7 @@ const Index: Taro.FC = () => {
     } else {
       let sum = 0;
       let i;
+
       for (i in cartItems) {
         if (cartItems[i].checked) {
           sum += parseInt(cartItems[i].number);
@@ -383,8 +386,8 @@ const Index: Taro.FC = () => {
       data.originalPrice = itemResult.data.item.originalPrice;
       data.memberPrice = itemResult.data.item.memberPrice;
 
-      await dispatch({
-        type: 'common/addToCartByCode',
+      dispatch({
+        type: CartActionType.ADD_TO_CART_BY_CODE,
         payload: data
       });
     }
@@ -397,46 +400,12 @@ const Index: Taro.FC = () => {
     });
   }
 
-// 专题
-  const handleProject = (id) => {
-    Taro.navigateTo({
-      url: `../project/index?id=${id}`
-    });
-  }
-
-  const onOpenDoor = (code, name, number, price, unit, imageUrl, pointDiscountPrice, originalPrice, memberPrice) => {
-    const data: any = {};
-    data.itemId = code;
-    data.name = name;
-    data.number = number;
-    data.price = price;
-    data.unit = unit;
-    data.imageUrl = imageUrl;
-    data.pointDiscountPrice = pointDiscountPrice;
-    data.originalPrice = originalPrice;
-    data.memberPrice = memberPrice;
-    console.log('data', data);
-
-    dispatch({
-      type: 'common/addToCartByCode',
-      payload: data
-    });
-  }
-
-// 跳转商品详情
-  const handleDetails = (code) => {
-    Taro.navigateTo({
-      url: `../details/index?code=${code}`
-    });
-  }
-
 //分类跳转
   const handleItemLists = (id, title) => {
     Taro.navigateTo({
       url: `../itemLists/index?id=${id}&title=${title}`
     });
   }
-
 
 // 会员活动
   const TopUPGetMember = () => {
@@ -465,17 +434,6 @@ const Index: Taro.FC = () => {
 // onTouchStart(e){
 //   console.log('onTouchStart e',e);
 // }
-
-  const {
-    classifyList,
-    itemList,
-    storeName,
-    projectItems1,
-    projectItems2,
-    projectItems3,
-    tabbarFix,
-    statusBarHeight,
-  } = state;
 // const upper = 10
 
   return (
@@ -487,7 +445,6 @@ const Index: Taro.FC = () => {
       <CustomSwiper statusBarHeight={state.statusBarHeight}
                     bannerDataList={state.topBannerList.data}/>
 
-
       <ChooseStore tabbarFix={state.tabbarFix}
                    statusBarHeight={state.statusBarHeight}
                    storeName={state.storeName}
@@ -495,7 +452,7 @@ const Index: Taro.FC = () => {
 
       {/* 分类 */}
       <View className="Grid">
-        {classifyList && classifyList.data.map(gir => (
+        {state.classifyList && state.classifyList.data.map(gir => (
           gir &&
           <View
             className="gird"
@@ -525,121 +482,21 @@ const Index: Taro.FC = () => {
         </View>
       </View>
 
-
       {/* 横线 */}
       <View className="boldLine"/>
 
       {/* 特色专区 */}
-      <View className="SpecialZone">
-        <View
-          className="WithinSpecialZone"
-          onClick={handleProject.bind(this, 1)}
-        >
-          <View className="TodaySpecial">
-            <View className="TodaySpecialCode">
-              <Text className="TodaySpecialTitle">每周新品</Text>
-              <Text className="TodaySpecialLittle">低至一元起</Text>
-            </View>
-            <Text className="TodaySpecialCon">精选低价 持续热销</Text>
-          </View>
-          <View className="specialLeftBox">
-            <Image src={projectItems1.data} className="leftSpecial"/>
-          </View>
-        </View>
-        <View className="WithinSpecialZone2">
-          <View
-            className="specialLeftBox1"
-            onClick={handleProject.bind(this, 2)}
-          >
-            <View className="TodaySpecial">
-              <View className="TodaySpecialCode">
-                <Text className="TodaySpecialTitle">品牌主打</Text>
-                <Text className="TodaySpecialLittle SpecialCoupon">领券超优惠</Text>
-              </View>
-              <Text className="TodaySpecialBrand">品牌特色 味蕾释放</Text>
-            </View>
-            <View className="SpecialZoneImg">
-              <Image src={projectItems2[0] && projectItems2[0].imageUrl} className="leftSpecial1"/>
-              <Image src={projectItems2[1] && projectItems2[1].imageUrl} className="leftSpecial1"/>
-            </View>
-          </View>
-          <View className='divider'/>
-          <View
-            className="specialLeftBox2"
-            onClick={handleProject.bind(this, 3)}
-          >
-            <View className="TodaySpecial">
-              <View className="TodaySpecialCode">
-                <Text className="TodaySpecialTitle">能量必备</Text>
-              </View>
-              <Text className="TodaySpecialBrand">能量加油站 精神整天</Text>
-            </View>
-            <View className="SpecialZoneImg">
-              <Image src={projectItems3[0] && projectItems3[0].imageUrl} className="leftSpecial1"/>
-              <Image src={projectItems3[1] && projectItems3[1].imageUrl} className="leftSpecial1"/>
-            </View>
-          </View>
-        </View>
-      </View>
+      <SpecialZone imageUrl={state.projectItems1.data}
+                   projectItems2={state.projectItems2.data}
+                   projectItems3={state.projectItems3.data}/>
 
       {/* 横线 */}
       <View className="boldLine"/>
 
       {/* 为你优选 */}
-      <View className="optimizationBox">
-        <View className="optimizationLine">
-          <View className="line"/>
-          <Text className="optimizationText">为你推荐</Text>
-          <View className="line"/>
-        </View>
-        <View className="items_box">
-          {itemList && itemList.data.map(item => (
-            item &&
-            <View
-              className="item_box"
-              key={item.code}
-            >
-              <Image src={item.imageUrl} className="image"
-                     onClick={handleDetails.bind(this, item.code)}/>
-              <View className="item_bottom_box">
-                <Text className="title"
-                      onClick={handleDetails.bind(this, item.code)}>{item.name}</Text>
-                <View className="item_right_box">
-                  <View className="priceBox">
-                    <Text className="price">
-                      ￥{(item.price / 100).toFixed(2)}/{item.unit}
-                    </Text>
-                    <Text className="originalPrice">
-                      ￥{(item.originalPrice / 100).toFixed(2)}
-                    </Text>
-                  </View>
-                  <View
-                    className="shoppingCart"
-                    onClick={onOpenDoor.bind(this,
-                      item.code,
-                      item.name,
-                      1,
-                      item.price,
-                      item.unit,
-                      item.imageUrl,
-                      item.pointDiscountPrice,
-                      item.originalPrice,
-                      item.memberPrice,
-                    )}
-                  >
-                    <AtIcon value='shopping-cart' size='20' color='#fff'/>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-      </View>
-      <View className='shoppingScan' onClick={lookForward}>
-        <Image src={shoppingScan}/>
-        <Text className='shoppingScanTxt1'>扫一扫</Text>
-        <Text className='shoppingScanTxt2'>商品条形码</Text>
-      </View>
+      <OptimizationBox itemList={state.itemList.data}/>
+
+      <ShoppingScan lookForward={lookForward}/>
     </View>
   );
 }

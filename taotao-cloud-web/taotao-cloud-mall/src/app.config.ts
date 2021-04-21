@@ -1,9 +1,11 @@
 export default {
   pages: [
+    // 首页
     "pages/home/index",
+    // 分类类
+    "pages/classify/index",
     "pages/home_bak/index",
     "pages/ucenter/index",
-    "pages/classify/index",
     // "pages/cart/index",
     "pages/lifeCircle/index",
   ],
