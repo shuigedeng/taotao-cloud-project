@@ -1,6 +1,8 @@
+import {Item} from "@/api/product/model";
+
 export interface ICartState {
   cartChecked: boolean;
-  cartItems: any[];
+  cartItems: Item[];
   newState: any;
   data: string;
   address: any;

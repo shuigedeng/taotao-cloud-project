@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Image, ScrollView, View} from '@tarojs/components'
 
-import './index.less'
+// import './index.less'
 import {useDispatch} from "react-redux";
 import AppHeader from "@/components/AppHeader";
 import AppBanner from "@/components/AppBanner";

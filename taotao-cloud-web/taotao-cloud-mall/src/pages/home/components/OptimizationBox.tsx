@@ -2,9 +2,9 @@ import {Image, Text, View} from "@tarojs/components";
 import React from "react";
 import Taro from "@tarojs/taro";
 import {AtIcon} from "taro-ui";
-import {Item} from "@/pages/home";
 import {useDispatch} from "react-redux";
 import {CartActionType} from "@/store/action/cartAction";
+import {Item} from "@/api/product/model";
 
 interface IProps {
   itemList: Item[];

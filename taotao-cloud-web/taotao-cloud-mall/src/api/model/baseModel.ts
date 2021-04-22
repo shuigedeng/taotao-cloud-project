@@ -11,13 +11,9 @@ export type Result<D> = {
   timestamp: string
 }
 
-export type PageResult<D> = {
-  code: number;
-  message: string;
+export type Page<D> = {
   total: number;
   pageSize: number;
   currentPage: number;
   data: Array<D>;
-  requestId: string;
-  timestamp: string;
 }

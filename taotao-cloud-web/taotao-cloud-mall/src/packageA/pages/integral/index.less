@@ -1,0 +1,110 @@
+@import '../../../app.less';
+
+.index {
+  background-color: white;
+}
+
+.banner {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background-color: @mainColor;
+  box-sizing: border-box;
+}
+
+// 我的积分
+.myIntegral {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  margin: 50px auto 0;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+}
+
+.integralCon {
+  margin: 20px;
+  padding: 30px 0;
+}
+
+.integralTxt {
+  font-size: 34px;
+}
+
+.integralTitle {
+  font-size: 100px;
+  color: @mainColor;
+}
+
+.integralContent {
+  float: right;
+  color:rgba(0,0,0,0.25);
+}
+
+.integralExchange {
+  width: 120px;
+  height: 50px;
+  line-height: 50px;
+  margin-top: 50px;
+  float: right;
+  font-size: 23px;
+  color: #FFFFFF;
+  background-color: @mainColor;
+  border-radius: 20px;
+}
+
+// 积分详情
+
+.myIntegralBox {
+  position: relative;
+  z-index: 2;
+  min-height: 600px;
+  margin-top: -45px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0px -7px 9px rgba(0,0,0,0.1);
+}
+
+.IntegralBoxTitle {
+  margin-top: 30px;
+  font-size: 45px;
+  font-weight: 600;
+}
+
+.IntegralBoxTxt {
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 400;
+  color:rgba(0,0,0,0.25);
+}
+
+.IntegralBoxCon {
+  display: flex;
+  margin: 20px 0;
+}
+
+.IntegralBoxTime {
+  align-items: center;
+  text {
+    display: block;
+    font-weight:400;
+    color:rgba(0,0,0,0.85);
+  }
+}
+
+.IntegralBoxTimeNum {
+  font-size:26px;
+  font-weight:300;
+  color:rgba(0,0,0,0.85);
+}
+
+.IntegralBoxNum {
+  line-height: 80px;
+  color:rgba(247,181,0,1);
+}
+
+.IntegralBox_view {
+  margin-left: auto;
+}

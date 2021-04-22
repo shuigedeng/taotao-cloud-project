@@ -22,16 +22,18 @@ const config = {
         },
       },
     ],
-    ['taro-plugin-tailwind',
-      {
-        scan: {
-          dirs: ['./src'],
-          exclude: ['dist/**/*'],
-          fileExtensions: ['vue', 'jsx', 'tsx']
-        }
-      }
-    ],
-    // ["@tarojs/plugin-mock"],
+    // ['taro-plugin-tailwind',
+    //   {
+    //     scan: {
+    //       dirs: ['./src'],
+    //       exclude: ['dist/**/*'],
+    //       fileExtensions: ['vue', 'jsx', 'tsx']
+    //     }
+    //   }
+    // ],
+    ["@tarojs/plugin-mock", {
+      host: "0.0.0.0"
+    }],
     ['tarojs-plugin-generator', {
       css: 'less',  //可配置css编译器： 支持 none sass less stylus
       cssModules: 'none',      //开启页面的CssModule化

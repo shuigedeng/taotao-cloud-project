@@ -2,11 +2,12 @@ export default {
   pages: [
     // 首页
     "pages/home/index",
-    // 分类类
+    // 分类
     "pages/classify/index",
+    // 购物车
+    "pages/cart/index",
     "pages/home_bak/index",
     "pages/ucenter/index",
-    // "pages/cart/index",
     "pages/lifeCircle/index",
   ],
   // window: {
@@ -62,12 +63,12 @@ export default {
         selectedIconPath: "./assets/images/tab-home-current.png",
         iconPath: "./assets/images/tab-home.png",
       },
-      // {
-      //   text: "购物车",
-      //   pagePath: "pages/cart/index",
-      //   selectedIconPath: "./assets/images/tab-cart-current.png",
-      //   iconPath: "./assets/images/tab-cart.png"
-      // },
+      {
+        text: "购物车",
+        pagePath: "pages/cart/index",
+        selectedIconPath: "./assets/images/tab-cart-current.png",
+        iconPath: "./assets/images/tab-cart.png"
+      },
       {
         text: "我的",
         pagePath: "pages/ucenter/index",

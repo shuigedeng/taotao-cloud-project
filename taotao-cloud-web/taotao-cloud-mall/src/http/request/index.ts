@@ -10,7 +10,8 @@ interface options<P> {
   data: P,
   contentType?: string,
   header?: any,
-  method: RequestEnum
+  method: RequestEnum,
+  mode?: string,
 }
 
 const create = <T, P>({url, data, contentType, method}: options<P>): Promise<T> => {
@@ -22,7 +23,8 @@ const create = <T, P>({url, data, contentType, method}: options<P>): Promise<T> 
       'content-type': contentType && ContentTypeEnum.JSON,
       // 'Authorization': Taro.getStorageSync('Authorization')
       'Authorization': "9999999999999"
-    }
+    },
+    mode: 'no-cors',
   }
   return Taro.request<T, P>(option).then((res: TaroRequest.SuccessCallbackResult<T>) => {
     return Promise.resolve(res?.data);

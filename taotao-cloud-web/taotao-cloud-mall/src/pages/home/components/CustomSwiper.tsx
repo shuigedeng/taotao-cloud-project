@@ -1,10 +1,10 @@
 import {Image, Swiper, SwiperItem} from "@tarojs/components";
 import React from "react";
-import {Banner} from "@/pages/home";
+import {Banner} from "@/api/banner/model";
 
 interface IProps {
   statusBarHeight?: number;
-  bannerDataList?: Banner[]
+  banners?: Banner[]
 }
 
 const CustomSwiper: Taro.FC<IProps> = (props) => {
@@ -22,7 +22,7 @@ const CustomSwiper: Taro.FC<IProps> = (props) => {
       }
       className="topBanner-box"
     >
-      {props.bannerDataList && props.bannerDataList.map(topBanner => (
+      {props.banners && props.banners.map(topBanner => (
         topBanner &&
         <SwiperItem key={topBanner.id}>
           <Image

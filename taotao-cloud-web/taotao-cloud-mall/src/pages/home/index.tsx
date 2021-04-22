@@ -1,15 +1,6 @@
 import Taro, {useDidShow, usePageScroll, usePullDownRefresh} from "@tarojs/taro";
 import {Image, Text, View,} from "@tarojs/components";
-import {
-  banners,
-  classify,
-  homeCenter,
-  homeCenterQuery,
-  invitedUsers,
-  items,
-  projectItems,
-  singleItem
-} from "./service";
+import {invitedUsers, singleItem} from "./service";
 // import {userInfo} from "../orderDetails/service";
 import "./index.less";
 
@@ -17,74 +8,33 @@ import diamond from "@/assets/img/diamond.png";
 
 import * as moment from "moment";
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import CustomSwiper from "@/pages/home/components/CustomSwiper";
 import ChooseStore from "@/pages/home/components/ChooseStore";
 import ShoppingScan from "@/pages/home/components/ShoppingScan";
 import OptimizationBox from "@/pages/home/components/OptimizationBox";
 import SpecialZone from "@/pages/home/components/SpecialZone";
 import {CartActionType} from "@/store/action/cartAction";
-import {ICartState} from "@/store/state/cart";
+import api from "@/api/index"
+import {Banner} from "@/api/banner/model";
+import {Classify, Item} from "@/api/product/model";
+import {useDispatch, useSelector} from "react-redux";
+import {cartTabBarBadge} from "@/utils/cart";
 
 moment.locale("zh-cn");
-
-export interface Banner {
-  id: number;
-  title: string;
-  position: string;
-  imageUrl: string;
-}
-
-export interface Classify {
-  id: number;
-  title: string;
-  imageUrl: string;
-}
-
-export enum ItemType {
-  ordinary,
-  special
-}
-
-export interface Item {
-  code: number;
-  name: string;
-  imageUrl: string;
-  content: string;
-  originalPrice: number;
-  commission: number;
-  price: number;
-  memberPrice: number;
-  pointDiscountPrice: number;
-  unit: string;
-  stock: number;
-  type: ItemType;
-  kind: ItemType;
-  status: string;
-  followed: Boolean;
-}
 
 interface IState {
   tabbarFix: boolean;
   fixTop: number,
   authorization: boolean;
-  topBannerList: {
+  banners: {
     data: Banner[];
     loading: boolean;
   };
-  homeCenterBannerList: {
-    data: Banner[];
-    loading: boolean;
-  };
-  bottomBannerList: {
-    data: Banner[];
-    loading: boolean;
-  };
-  classifyList: {
+  classify: {
     data: Classify[];
     loading: boolean;
   };
-  itemList: {
+  items: {
     data: Item[];
     loading: boolean;
   };
@@ -124,19 +74,11 @@ const Index: Taro.FC = () => {
     fixTop: 0,
     tabbarFix: false,
     authorization: false,
-    topBannerList: {
-      data: null,
-      loading: true,
-    },
-    homeCenterBannerList: {
+    banners: {
       data: [],
       loading: true,
     },
-    bottomBannerList: {
-      data: [],
-      loading: true,
-    },
-    classifyList: {
+    classify: {
       data: [],
       loading: true,
     },
@@ -152,7 +94,7 @@ const Index: Taro.FC = () => {
     addressQuery: {
       data: []
     },
-    itemList: {
+    items: {
       data: [],
       loading: true
     },
@@ -170,38 +112,28 @@ const Index: Taro.FC = () => {
     toUpper: false
   });
 
-  const cartItems = useSelector<ICartState, any[]>(({cartItems}) => cartItems);
+  // @ts-ignore
+  const cartItems = useSelector(({cart})=> cart.cartItems);
   const dispatch = useDispatch();
 
   const getData = async () => {
-    // 获取top Banner
-    const top = await banners("top");
+    // 首页banners
+    const {data: banners} = await api.banner.getBanners()
+    console.log(banners)
     setState(prevState => {
-      return {...prevState, topBannerList: {data: top.data, loading: false}}
-    })
-
-    // 获取 home center Banner
-    const center = await homeCenterQuery("center");
-    setState(prevState => {
-      return {...prevState, homeCenterBannerList: {data: center.data, loading: false}}
-    })
-
-    // 获取 bottom center Banner
-    const bottom = await homeCenter("bottom");
-    setState(prevState => {
-      return {...prevState, bottomBannerList: {data: bottom.data, loading: false}}
+      return {...prevState, banners: {data: banners, loading: false}}
     })
 
     // 商品分类
-    const classResult = await classify();
+    const {data: classify} = await api.product.getClassify();
     setState(prevState => {
-      return {...prevState, classifyList: {data: classResult.data, loading: false}}
+      return {...prevState, classify: {data: classify, loading: false}}
     })
 
-    // 首页商品goods
-    const goods = await items(18, 1);
+    // 首页商品
+    const {data: pageItem} = await api.product.getItems({currentPage: 1, pageSize: 18});
     setState(prevState => {
-      return {...prevState, itemList: {data: goods.data, loading: false}}
+      return {...prevState, items: {data: pageItem.data, loading: false}}
     })
   }
 
@@ -246,24 +178,7 @@ const Index: Taro.FC = () => {
 
   useEffect(() => {
     // 购物车右上角图标
-    if (cartItems.length === 0) {
-      Taro.removeTabBarBadge({
-        index: 2
-      })
-    } else {
-      let sum = 0;
-      let i;
-
-      for (i in cartItems) {
-        if (cartItems[i].checked) {
-          sum += parseInt(cartItems[i].number);
-        }
-      }
-      Taro.setTabBarBadge({
-        index: 2,
-        text: "" + sum + "",
-      })
-    }
+    cartTabBarBadge(cartItems)
 
     // 状态栏高度大于20 定义barHeight
     let barHeight = 32;
@@ -274,22 +189,18 @@ const Index: Taro.FC = () => {
     console.log('barHeight', barHeight);
     console.log('状态栏高度', state.statusBarHeight);
 
-    if (state.topBannerList.loading) {
+    if (state.banners.loading) {
       Taro.showLoading({
         title: "加载中"
       });
-    } else {
-      Taro.hideLoading();
     }
 
     if (state.toUpper) {
       Taro.showLoading({
         title: "加载中"
       });
-    } else {
-      Taro.hideLoading();
     }
-  }, [state.toUpper, state.statusBarHeight, state.topBannerList])
+  }, [state.toUpper, state.statusBarHeight, state.banners])
 
   useEffect(() => {
     const initData = async () => {
@@ -299,28 +210,26 @@ const Index: Taro.FC = () => {
         });
       }
 
-      if (!Taro.getStorageSync("storeId")) {
-        Taro.navigateTo({
-          url: "../nearbystores/index"
-        });
-      }
+      // if (Taro.getStorageSync("storeId")) {
+      //   Taro.navigateTo({
+      //     url: "../nearbystores/index"
+      //   });
+      // }
 
-      const projectItems1 = await projectItems(1, 1)
-      const {imageUrl} = projectItems1.data.items.list[0];
+      const {data: projectItems1} = await api.product.getProjectItems({projectId: 1, pageSize: 1})
+      const {imageUrl} = projectItems1[0];
       setState(prevState => {
-        return {...prevState, projectItems1: imageUrl}
+        return {...prevState, projectItems1: {data: imageUrl}}
       })
 
-      const projectItems2 = await projectItems(2, 2)
-      const {list: projectItems2List} = projectItems2.data.items;
+      const {data: projectItems2} = await api.product.getProjectItems({projectId: 2, pageSize: 2})
       setState(prevState => {
-        return {...prevState, projectItems2: {data: projectItems2List}}
+        return {...prevState, projectItems2: {data: projectItems2}}
       })
 
-      const projectItems3 = await projectItems(3, 2)
-      const {list: projectItems3List} = projectItems3.data.items;
+      const {data: projectItems3} = await api.product.getProjectItems({projectId: 3, pageSize: 2})
       setState(prevState => {
-        return {...prevState, projectItems3: {data: projectItems3List}}
+        return {...prevState, projectItems3: {data: projectItems3}}
       })
 
       // const userDetail = await userInfo();
@@ -408,7 +317,7 @@ const Index: Taro.FC = () => {
   }
 
 // 会员活动
-  const TopUPGetMember = () => {
+  const topUPGetMember = () => {
     Taro.checkSession({
       success() {
         // if (state.userDetail.role === 'member') {
@@ -443,7 +352,7 @@ const Index: Taro.FC = () => {
     >
       {/* 轮播图 */}
       <CustomSwiper statusBarHeight={state.statusBarHeight}
-                    bannerDataList={state.topBannerList.data}/>
+                    banners={state.banners.data.filter((item) => item.position == 'top')}/>
 
       <ChooseStore tabbarFix={state.tabbarFix}
                    statusBarHeight={state.statusBarHeight}
@@ -452,7 +361,7 @@ const Index: Taro.FC = () => {
 
       {/* 分类 */}
       <View className="Grid">
-        {state.classifyList && state.classifyList.data.map(gir => (
+        {state.classify && state.classify.data.map(gir => (
           gir &&
           <View
             className="gird"
@@ -471,7 +380,7 @@ const Index: Taro.FC = () => {
       {/* 充值 */}
       <View
         className='bg_f5'
-        onClick={TopUPGetMember}
+        onClick={topUPGetMember}
       >
         <View className='TopUP'>
           <View style="flex-direction:row;align-items:center;display:flex;">
@@ -494,7 +403,7 @@ const Index: Taro.FC = () => {
       <View className="boldLine"/>
 
       {/* 为你优选 */}
-      <OptimizationBox itemList={state.itemList.data}/>
+      <OptimizationBox itemList={state.items.data}/>
 
       <ShoppingScan lookForward={lookForward}/>
     </View>

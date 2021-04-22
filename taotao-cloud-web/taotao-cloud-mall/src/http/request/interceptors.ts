@@ -1,5 +1,5 @@
 import Taro, {request} from "@tarojs/taro"
-import {PageResult, Result} from "@/api/model/baseModel";
+import {Page, Result} from "@/api/model/baseModel";
 import {HttpStatusEnum} from "@/enums/httpEnum";
 
 let REQUEST_NUM = 0;
@@ -8,7 +8,7 @@ let TIME: NodeJS.Timeout | null;
 const taotaoCloudInterceptor = (chain) => {
   increaseRequest();
   const requestParams = chain.requestParams;
-  return chain.proceed(requestParams).then((res: request.SuccessCallbackResult<PageResult<any> | Result<any>>) => {
+  return chain.proceed(requestParams).then((res: request.SuccessCallbackResult<Result<any>>) => {
     reduceRequest();
     if (res.statusCode === HttpStatusEnum.NOT_FOUND) {
       errShowToast('请求资源不存在');

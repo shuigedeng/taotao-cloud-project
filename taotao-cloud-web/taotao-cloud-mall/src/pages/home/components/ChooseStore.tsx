@@ -1,8 +1,8 @@
 import {Image, Input, Text, View} from "@tarojs/components";
 import React, {useState} from "react";
-import {Banner} from "@/pages/home";
 import scan from "@/assets/img/scan.png";
 import Taro from "@tarojs/taro";
+import {Banner} from "@/api/banner/model";
 
 interface IProps {
   tabbarFix: boolean;
@@ -37,7 +37,6 @@ const ChooseStore: Taro.FC<IProps> = (props) => {
       url: `../searchPage/index?nameLike=${state.input}`
     });
   }
-
 
   return (
     <View

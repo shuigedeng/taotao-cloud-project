@@ -1,7 +1,7 @@
 import {CartActionType, ICartAction} from "@/store/action/cartAction";
 import {ICartState, initCartState} from "@/store/state/cartState";
 
-export default function cartReducer(state: ICartState = initCartState, action: ICartAction): ICartState {
+export default function index(state: ICartState = initCartState, action: ICartAction): ICartState {
   let {cartItems} = state
 
   switch (action.type) {

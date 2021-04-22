@@ -1,0 +1,64 @@
+@import '../../../app.less';
+
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 500px;
+  overflow: hidden;
+}
+
+.gird {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 20px;
+  text-align: center;
+  padding: 55px 0;
+  font-size: 32px;
+  font-weight: 600;
+  border-radius: 15px;
+  border: 1PX solid #979797;
+}
+
+.gird_img {
+  width: 108px;
+  height: 108px;
+  margin-bottom: 7px;
+}
+
+.grid_name {
+  color: @mainColor;
+  font-size: 36px;
+}
+
+.btn_top_up {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  background-color: @mainColor;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 36px;
+}
+
+.txt_top_up {
+  margin: 0 30px;
+
+  text {
+    display: block;
+    margin-top: 20px;
+    font-size: 26px;
+    color: #6D7278;
+  }
+}
+
+.active_gird {
+  background-color: @mainColor;
+
+  text {
+    color: #fff;
+  }
+}

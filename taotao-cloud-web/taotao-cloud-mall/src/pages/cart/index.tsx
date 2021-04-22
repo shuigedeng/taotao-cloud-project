@@ -1,12 +1,12 @@
 import Taro, {usePullDownRefresh} from '@tarojs/taro'
 import {Checkbox, CheckboxGroup, Image, ScrollView, Text, View} from '@tarojs/components'
 import {AtInputNumber} from 'taro-ui'
-import shoppingScan from '../../img/shoppingScan.png'
+import shoppingScan from '@/assets/img/shoppingScan.png'
 import {invitedUsers, singleItem} from '../home/service'
 import './index.less'
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {ICartState} from "@/store/state/cart";
+import {cartTabBarBadge} from "@/utils/cart";
 
 const Index: Taro.FC = () => {
   let [state, setState] = useState({
@@ -16,10 +16,12 @@ const Index: Taro.FC = () => {
     couponId: '',
     cartChecked: true,
     deleteItem: [],
-    userMsg: [],
+    userMsg: {role: ''},
+    totalPrice: {total: 0}
   })
 
-  const cartItems = useSelector<ICartState, any[]>(({cartItems}) => cartItems);
+  // @ts-ignore
+  const cartItems = useSelector(({cart}) => cart.cartItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,7 +56,6 @@ const Index: Taro.FC = () => {
     //   return {...prevState, deleteItem: deleteItem, userMsg: userResult.data.userInfo,}
     // })
   })
-
 
   //点击编辑与完成
   const editor = () => {
@@ -92,25 +93,26 @@ const Index: Taro.FC = () => {
   }
 
   //跳转确认订单
-  const handlePay = async () => {
+  const handlePay = async (couponId) => {
+    console.log(couponId)
     const token = Taro.getStorageSync('accessToken');
     if (token) {
-      // Taro.hideTabBarRedDot({
-      //   index: 2
-      // })
+      Taro.hideTabBarRedDot({
+        index: 2
+      })
 
-      // Taro.setTabBarBadge({
-      //   index: 2,
-      //   text: '18',
-      // })
+      Taro.setTabBarBadge({
+        index: 2,
+        text: '18',
+      })
 
       Taro.navigateTo({
         url: "../orderDetails/index"
       });
     } else {
-      Taro.switchTab({
-        url: "../mine/index"
-      });
+      // Taro.switchTab({
+      //   url: "../mine/index"
+      // });
     }
   }
 
@@ -177,8 +179,8 @@ const Index: Taro.FC = () => {
         payload: data
       });
     }
-
   }
+
   //点击修改加减数量
   const handleNumberChange = (itemId, number) => {
     setState(prevState => {
@@ -190,47 +192,31 @@ const Index: Taro.FC = () => {
     });
   }
 
+  useEffect(() => {
+    cartTabBarBadge(cartItems)
 
-  // 购物车右上角图标
-  if (cartItems.length === 0) {
-    // Taro.hideTabBarRedDot({
-    //   index: 2
-    // })
-    Taro.removeTabBarBadge({
-      index: 2
-    })
-  } else {
-    let sum = 0;
-    let i;
-    for (i in cartItems) {
-      if (cartItems[i].checked) {
-        sum += parseInt(cartItems[i].number);
-      }
+    const totalPrice = {total: 0};
+    if (state.userMsg.role === 'member') {
+      totalPrice.total = cartItems.reduce((total, currentValue) => {
+        if (currentValue.checked) {
+          return total + (currentValue.memberPrice * currentValue.number);
+        }
+        return total;
+      }, 0);
+    } else {
+      totalPrice.total = cartItems.reduce((total, currentValue) => {
+        if (currentValue.checked) {
+          return total + (currentValue.price * currentValue.number);
+        }
+        return total;
+      }, 0);
     }
-    Taro.setTabBarBadge({
-      index: 2,
-      text: "" + sum + "",
+    setState(prevState => {
+      return {...prevState, totalPrice: totalPrice}
     })
-  }
 
-  const {couponId, deleteItem} = state;
-  const check = cartItems.every(item => item.checked === true);
-  const totalPrice = {total: 0};
-  if (state.userMsg.role === 'member') {
-    totalPrice.total = cartItems.reduce((total, currentValue) => {
-      if (currentValue.checked) {
-        return total + (currentValue.memberPrice * currentValue.number);
-      }
-      return total;
-    }, 0);
-  } else {
-    totalPrice.total = cartItems.reduce((total, currentValue) => {
-      if (currentValue.checked) {
-        return total + (currentValue.price * currentValue.number);
-      }
-      return total;
-    }, 0);
-  }
+  }, [])
+
   return (
     <ScrollView className='buy'>
       {cartItems.length > 0 ? (
@@ -273,7 +259,7 @@ const Index: Taro.FC = () => {
                             step={1}
                             width={100}
                             value={item.number}
-                            onChange={handleNumberChange.bind(this, item.itemId)}
+                            onChange={() => handleNumberChange(item.itemId, item.number)}
                             style="margin-top:4PX;"
                             type="number"/>
                         </View>
@@ -300,22 +286,23 @@ const Index: Taro.FC = () => {
             </CheckboxGroup>
             {cartItems.length !== 0 ? (<View className='boTo'>
               <View className='qx'>
-                <Checkbox value='all' checked={check} onClick={changeCheck}>全选</Checkbox>
+                <Checkbox value='all' checked={cartItems.every(item => item.checked === true)}
+                          onClick={changeCheck}>全选</Checkbox>
               </View>
               <View className='rightfk'>
                 <View className='YH'>
                   <Text className='yh'>合计：</Text>
                   <Text
-                    className='hj'>￥{(totalPrice.total || 0) / 100 - (state.discount)}/元</Text>
+                    className='hj'>￥{(state.totalPrice.total || 0) / 100 - (state.discount)}/元</Text>
                 </View>
                 {!state.editable ? (
                   <View className='doubleButtonBox'>
-                    <View className='fk' onClick={handlePay.bind(this, couponId)}>
+                    <View className='fk' onClick={() => handlePay(state.couponId)}>
                       <Text className='payment'>付款</Text>
                     </View>
                   </View>
                 ) : (
-                  <View className='fk' onClick={deleteCart.bind(this, deleteItem)}>
+                  <View className='fk' onClick={() => deleteCart(state.deleteItem)}>
                     <Text className='delete'>删除</Text>
                   </View>
                 )}

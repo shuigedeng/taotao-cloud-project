@@ -1,0 +1,266 @@
+@import '../../app.less';
+
+.index {
+  background-color: #eeeeee;
+  height: 60ch;
+}
+
+.userInformation {
+  display: flex;
+  padding: 35px;
+  padding-top: 0;
+  padding-left: 40px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.head {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.nameAndPhone {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  font-size: 30px;
+  color: rgba(255, 255, 255, .8);
+}
+
+.phone {
+  font-size: 25px;
+  color: #fff;
+}
+
+.top-up {
+  background-color: @mainColor;
+  padding: 10px;
+}
+
+.myStoreBox1 {
+  border: 1PX solid #e0e3df;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 40px 30px 40px 30px;
+  padding-bottom: 20px;
+  background-color: white;
+}
+
+.myOrdersTopLine {
+  margin: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.myOrderText {
+  margin-left: 10px;
+  font-size: 34px;
+  color: #313131;
+}
+
+.ortherInformationBox {
+  display: flex;
+  width: 90%;
+  margin: 40px auto;  
+}
+
+.ortherInformationBox1 {
+  display: flex;
+  margin: 20px;
+}
+
+.otherInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderName {
+  font-size: 32px;
+  margin: 10px;
+  text-align: center;
+  color: #333333;
+}
+
+.orderName1 {
+  font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #444;
+
+}
+
+.oneConvenient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 25px;
+  button::after {
+    border: none;
+  }
+}
+
+.icon {
+  width: 45px;
+  height: 45px;
+  margin: 10px;
+}
+
+.oneToolName {
+  font-size: 25px;
+  margin-top: 30px;
+  color: #595959;
+}
+
+.oneToolName1 {
+  font-size: 30px;
+  margin-top: 16px;
+  padding: 0;
+  text-align: left !important;
+  border: none;
+  background-color: #fff;
+}
+
+.oneToolName1::after {
+  border: none;
+}
+
+.coupons_num {
+  font-size: 26px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: @mainColor;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.coupons_title {
+  margin: 15rpx;
+}
+
+.coupons_text {
+  margin-left: 20px;
+}
+
+.oneCoupons {
+  position: relative;
+  height: 190px;
+  border-radius: 20px;
+  background-color: @mainColor;
+  display: flex;
+  margin: 20px;
+}
+
+.oneCoupons_left {
+  display: flex;
+  width: 215px;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  border-right: 2Px dotted #fff;
+}
+
+.price {
+  font-size: 54px;
+  margin-left: 5px;
+}
+
+.oneCoupons_right {
+  position: absolute;
+  width: 65%;
+  height: 100%;
+  right: 0;
+}
+
+.oneCoupons_right_top {
+  margin: 20px 80px;
+}
+
+.topLeft {
+  width: 10px;
+  height: 100%;
+  background-color: @mainColor;
+}
+
+.oneCoupons_semicircle {
+  position: relative;
+  View {
+    position: absolute;
+    left: -21px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+}
+
+.oneCoupons_top {
+  top: -21px;
+}
+
+.oneCoupons_bottom {
+  bottom: -21px;
+}
+
+.oneCoupons_title1 {
+  display: block;
+  font-size: 28px;
+  color: #FBFDFF;
+}
+
+.oneCoupons_title2 {
+  display: block;
+  font-size: 25px;
+  color: #FDF1F1;
+  margin-top: 10px;
+}
+
+.oneCoupons_title3 {
+  display: block;
+  width: 120rpx;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 20px;
+  margin-top: 10px;
+  color: @mainColor;
+  background-color: @fffColor;
+  border-radius: 20px;
+}
+
+.oneCoupons_topUp {
+  position: fixed;
+  width: 100%;
+  bottom: 70rpx;
+
+}
+
+.oneCoupons_limited {
+  position: absolute;
+  left: 200px;
+  top: 32px;
+  background-color: #FA6400;
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  &::after {
+    content:"";
+    border:10px solid transparent;
+    border-top-color: #FA6400;
+    position: absolute;
+    bottom: -20px;
+    left:40px;
+  }
+}
+
+.icon_btn {
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  height: 64px;
+  margin: 0 28rpx;
+}

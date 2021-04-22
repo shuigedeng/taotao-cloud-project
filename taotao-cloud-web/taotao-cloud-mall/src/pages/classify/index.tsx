@@ -1,23 +1,21 @@
 import Taro, {usePullDownRefresh, useReachBottom} from "@tarojs/taro";
 import {Image, Input, Text, View,} from "@tarojs/components";
-import {classify, items} from "./service";
 import {AtIcon, AtTabs, AtTabsPane} from "taro-ui";
 import "./index.less";
 import React, {useEffect, useState} from "react";
-import {Classify} from "@/pages/home";
 import {useDispatch, useSelector} from "react-redux";
-import {ICartState} from "@/store/state/cart";
+import {Classify, Item} from "@/api/product/model";
+import {cartTabBarBadge} from "@/utils/cart";
+import api from "@/api/index"
 
 interface IState {
   current: number;
   authorization: boolean;
-  query: {
-    data?: {
-      classify: Classify[]
-    };
+  classify: {
+    data: Classify[];
     loading: boolean;
   };
-  list?: any;
+  list: Item[];
   input: string;
   currentPage: number;
   pageSize: number;
@@ -28,11 +26,9 @@ const Index: Taro.FC = () => {
   let [state, setState] = useState<IState>({
     current: 0,
     authorization: false,
-    query: {
-      data: {
-        classify: [],
-      },
-      loading: false
+    classify: {
+      data: [],
+      loading: true
     },
     list: [],
     input: "",
@@ -41,42 +37,26 @@ const Index: Taro.FC = () => {
     tableId: 1,
   })
 
-  const cartItems = useSelector<ICartState, any[]>(({cartItems}) => cartItems);
+  // @ts-ignore
+  const cartItems = useSelector(({cart}) => cart.cartItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 购物车右上角图标
-    if (cartItems.length === 0) {
-      Taro.removeTabBarBadge({
-        index: 2
-      })
-    } else {
-      let sum = 0;
-      let i;
-      for (i in cartItems) {
-        if (cartItems[i].checked) {
-          sum += parseInt(cartItems[i].number);
-        }
-      }
-      Taro.setTabBarBadge({
-        index: 2,
-        text: "" + sum + "",
-      })
-    }
+    cartTabBarBadge(cartItems)
   }, [])
 
   useEffect(() => {
     const initData = async () => {
-      const {currentPage, pageSize} = state;
-      const result = await classify();
+      const {data: classify} = await api.product.getClassify();
       setState(prevState => {
-        return {...prevState, query: {data: {classify: result.data}, loading: false}}
+        return {...prevState, classify: {data: classify, loading: false}}
       })
-      const id = result.data.classify[0].id;
-      const resultItems = await items(id, currentPage, pageSize);
-      const list = resultItems.data.items.list;
+      const id = classify[0].id;
+
+      const {currentPage, pageSize} = state;
+      const {data: pageItem} = await api.product.getItemsByClassId({currentPage, pageSize}, id);
       setState(prevState => {
-        return {...prevState, list: list}
+        return {...prevState, list: pageItem.data}
       })
     }
     initData()
@@ -84,11 +64,15 @@ const Index: Taro.FC = () => {
 
   usePullDownRefresh(async () => {
     const {pageSize, tableId} = state;
-    const resultItems = await items(tableId, 1, pageSize);
-    const list = resultItems.data.items.list;
+
+    const {data: pageItem} = await api.product.getItemsByClassId({
+      currentPage: 1,
+      pageSize
+    }, tableId);
     setState(prevState => {
-      return {...prevState, list: list, currentPage: 1}
+      return {...prevState, list: pageItem.data}
     })
+
     setTimeout(() => {
       Taro.stopPullDownRefresh(); //停止下拉刷新
     }, 1000);
@@ -97,8 +81,13 @@ const Index: Taro.FC = () => {
   useReachBottom(async () => {
     const {currentPage, pageSize, list, tableId} = state;
     const currentPageAdd = currentPage + 1;
-    const resultItems = await items(tableId, currentPageAdd, pageSize);
-    const {list: newList} = resultItems.data.items;
+
+    const {data: pageItem} = await api.product.getItemsByClassId({
+      currentPage: currentPageAdd,
+      pageSize
+    }, tableId);
+    const {data: newList} = pageItem;
+
     if (newList.length !== 0) {
       //上拉加载
       Taro.showLoading({
@@ -116,6 +105,7 @@ const Index: Taro.FC = () => {
           return {...prevState, list: list}
         })
       }
+
       setTimeout(function () {
         Taro.hideLoading()
       }, 1000)
@@ -135,13 +125,18 @@ const Index: Taro.FC = () => {
     setState(prevState => {
       return {...prevState, current: value}
     })
-    const tabList = state.query.data.classify;
+
+    const tabList = state.classify.data;
     const id = tabList[value].id;
     setState(prevState => {
       return {...prevState, tableId: id}
     })
-    const resultItems = await items(id, state.currentPage, state.pageSize);
-    const list = resultItems.data.items.list;
+    const {data: pageItem} = await api.product.getItemsByClassId({
+      currentPage: state.currentPage,
+      pageSize: state.pageSize
+    }, id);
+    const {data: list} = pageItem;
+
     setState(prevState => {
       return {...prevState, list: list}
     })
@@ -188,7 +183,7 @@ const Index: Taro.FC = () => {
     })
   }
 
-  const tabList = state.query.data.classify;
+  const tabList = state.classify.data;
   return (
     <View className="index">
       {/* 搜索框 */}

@@ -5,7 +5,7 @@ import {set as setGlobalData} from './pages/ucenter/global_data';
 import configStore from "./store";
 import {Global} from "../global";
 
-import 'windi.css';
+// import 'windi.css';
 import 'taro-ui/dist/style/index.scss'
 import {logError} from "@/utils/error";
 import {checkLogin} from "@/utils/user";
@@ -17,37 +17,37 @@ const store = configStore();
 const App: Taro.FC = (props) => {
 
   useDidShow(() => {
-    Taro.getSystemInfo({
-      success: (res) => {
-        global = Object.assign(global, res, {debug: true});
-        if (res.model && res.model.includes("iPhone X")) {
-          global.iphoneX = true;
-          logError("是iphoneX机型");
-        } else global.iphoneX = (res.platform === "ios" &&
-          res.screenHeight === 812 &&
-          res.screenWidth === 375) ||
-          (res.screenHeight === 896 && res.screenWidth === 414);
-        console.log("设备信息", global);
-
-        // let {safeArea, ...obj} = res;
-        // sa.registerApp(safeArea);
-        //
-        // // @ts-ignore
-        // let {host, ...data} = obj;
-        //
-        // sa.registerApp(data);
-        // if (host) {
-        //   sa.registerApp(host);
-        // }
-
-        // sensors.track("submitLogin", {
-        //   ProductName: "submitLogin",
-        //   ProductPrice: 123.45,
-        //   IsAddedToFav: false,
-        // });
-        // sensors.init();
-      },
-    });
+    // Taro.getSystemInfo({
+    //   success: (res) => {
+    //     global = Object.assign(global, res, {debug: true});
+    //     if (res.model && res.model.includes("iPhone X")) {
+    //       global.iphoneX = true;
+    //       logError("是iphoneX机型");
+    //     } else global.iphoneX = (res.platform === "ios" &&
+    //       res.screenHeight === 812 &&
+    //       res.screenWidth === 375) ||
+    //       (res.screenHeight === 896 && res.screenWidth === 414);
+    //     console.log("设备信息", global);
+    //
+    //     // let {safeArea, ...obj} = res;
+    //     // sa.registerApp(safeArea);
+    //     //
+    //     // // @ts-ignore
+    //     // let {host, ...data} = obj;
+    //     //
+    //     // sa.registerApp(data);
+    //     // if (host) {
+    //     //   sa.registerApp(host);
+    //     // }
+    //
+    //     // sensors.track("submitLogin", {
+    //     //   ProductName: "submitLogin",
+    //     //   ProductPrice: 123.45,
+    //     //   IsAddedToFav: false,
+    //     // });
+    //     // sensors.init();
+    //   },
+    // });
 
     checkLogin().then(res => {
       setGlobalData('hasLogin', true);

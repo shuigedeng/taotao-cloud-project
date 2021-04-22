@@ -5,13 +5,13 @@ const getRequestUrl = (url: string) => {
 
   let requestUrl: string;
   if (env === 'production') {
-    requestUrl = `http://127.0.0.1:9900/${prefix}/${version}${url}`
+    requestUrl = `http://192.168.99.37:9527/${prefix}/${version}${url}`
   } else if (env === 'test') {
-    requestUrl = `http://127.0.0.1:9900/${prefix}/${version}${url}`
+    requestUrl = `http://192.168.99.37:9527/${prefix}/${version}${url}`
   } else if (env === 'development') {
-    requestUrl = `http://127.0.0.1:9900/${prefix}/${version}${url}`
+    requestUrl = `http://192.168.99.37:9527/${prefix}/${version}${url}`
   } else {
-    requestUrl = `http://127.0.0.1:9527/${prefix}/${version}${url}`
+    requestUrl = `http://192.168.99.37:9527/${prefix}/${version}${url}`
   }
   return requestUrl
 }
