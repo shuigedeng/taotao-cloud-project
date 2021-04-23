@@ -1,9 +1,8 @@
-// @ts-ignore
 import sensors from "sa-sdk-javascript";
 
 sensors.init({
-  name: 'sensorsdata',
-  server_url: 'http://106.13.201.31:9999/sa.gif',
+  name: 'taotao_cloud_mall',
+  server_url: 'https://log.taotaocloud.top/sa.gif',
   //表示是否开启单页面自动采集 $pageview 功能，SDK 会在 url 改变之后自动采集web页面浏览事件 $pageview。
   is_track_single_page: true,
   is_track_device_id: true,
@@ -11,7 +10,10 @@ sensors.init({
   source_type: {
     search: ['.baidu.com', '.google.'],
     social: ['.renren.com', '.kaixin001.com'],
-    keyword: {baidu: ['wd', 'word', 'keyword'], sogou: 'query'}
+    keyword: {
+      baidu: ['wd', 'word', 'keyword'],
+      sogou: 'query'
+    }
   },
   show_log: true,
   //Web 视区停留相关参数
@@ -71,6 +73,7 @@ sensors.init({
 
 // 设置之后，SDK 就会自动收集页面浏览事件，以及设置初始来源, 用于采集 $pageview 事件。
 sensors.quick('autoTrack');
+
 //sensors.getPresetProperties();;
 //sensors.quick('autoTrackSinglePage');
 //sensors.quick("autoTrackSinglePage",{platForm:"H5"});;

@@ -15472,6 +15472,11 @@ rxjs@^6.4.0, rxjs@^6.6.0:
   dependencies:
     tslib "^1.9.0"
 
+sa-sdk-javascript@^1.16.12:
+  version "1.16.12"
+  resolved "https://registry.yarnpkg.com/sa-sdk-javascript/-/sa-sdk-javascript-1.16.12.tgz#731f0a08cf7922431cbb6405a03a49aa68488546"
+  integrity sha512-cFoZQSMg6M+JEl/bTEx6zkgonFS3aU3D1KmaT1sranZujPkdCT28YE/SehMofcgIAAnHLVTco7ysTSCJ/ojZMA==
+
 sa-sdk-miniprogram@^1.14.7:
   version "1.14.7"
   resolved "https://registry.yarnpkg.com/sa-sdk-miniprogram/-/sa-sdk-miniprogram-1.14.7.tgz#bd762bc2d4fa9972964fe0a38c56c95ee363af11"

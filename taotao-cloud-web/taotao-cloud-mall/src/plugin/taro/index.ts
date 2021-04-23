@@ -26,7 +26,7 @@ export default (ctx: IPluginContext, pluginOpts) => {
   ctx.registerCommand({
     name: 'upload',
     optionsMap: {
-      '--remote': 'server url'
+      '--remote': 'server url',
     },
     synopsisList: [
       'taro upload --remote xxx.xxx.xxx.xxx'

@@ -1,7 +1,22 @@
 import Taro from '@tarojs/taro';
 
-import {ImgError} from '../static/images/index';
+/**
+ * @description 获取当前页url
+ */
+export const getCurrentPageUrl = () => {
+  let pages = Taro.getCurrentPages()
+  let currentPage = pages[pages.length - 1]
+  return currentPage.route
+}
 
+export const pageToLogin = () => {
+  let path = getCurrentPageUrl()
+  if (!path.includes('login')) {
+    Taro.navigateTo({
+      url: "/pages/login/login"
+    });
+  }
+}
 export function showErrorToast(msg) {
   Taro.showToast({
     title: msg,
@@ -10,7 +25,6 @@ export function showErrorToast(msg) {
 }
 
 export function redirect(url) {
-
   //判断页面是否需要登录
   if (false) {
     Taro.redirectTo({

@@ -1,14 +1,14 @@
-import  sa from 'sa-sdk-miniprogram'
+import  sensors from 'sa-sdk-miniprogram'
 import Taro from '@tarojs/taro'
 
-sa.setPara({
+sensors.setPara({
   // 神策分析注册在APP全局函数中的变量名，在非app.js中可以通过getApp().sensors(你这里定义的名字来使用)
   name: 'sensors',
   // 如果要通过sdk自动获取openid，需要在神策分析中配置appid和appsercret，并在这里标志appid,不需要的话，不用填。
-  // appid: 'xxxxx',
+  appid: '',
   // 神策分析数据接收地址
   // server_url: 'https://xxxxx.datasink.xxxx/sa.gif?project=default&token=27eeee',
-  server_url: 'http://106.13.201.31:9999/sa.gif',
+  server_url: 'https://log.taotaocloud.top/sa.gif',
   //默认使用队列发数据时候，两条数据发送间的最大间隔
   send_timeout: 1000,
   // 发送事件的时间使用客户端时间还是服务端时间
@@ -40,7 +40,7 @@ sa.setPara({
 });
 
 
-export default sa;
+export default sensors;
 
 //   email: 'xxx@xx',
 //   favoriteFruits: ['苹果', '油桃'],

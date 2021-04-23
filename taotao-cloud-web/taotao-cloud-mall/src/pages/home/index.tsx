@@ -113,28 +113,33 @@ const Index: Taro.FC = () => {
   });
 
   // @ts-ignore
-  const cartItems = useSelector(({cart})=> cart.cartItems);
+  const cartItems = useSelector(({cart}) => cart.cartItems);
   const dispatch = useDispatch();
 
   const getData = async () => {
     // 首页banners
-    const {data: banners} = await api.banner.getBanners()
-    console.log(banners)
-    setState(prevState => {
-      return {...prevState, banners: {data: banners, loading: false}}
-    })
+    const banners = await api.banner.getBanners()
+    if (banners) {
+      setState(prevState => {
+        return {...prevState, banners: {data: banners.data, loading: false}}
+      })
+    }
 
     // 商品分类
-    const {data: classify} = await api.product.getClassify();
-    setState(prevState => {
-      return {...prevState, classify: {data: classify, loading: false}}
-    })
+    const classify = await api.product.getClassify();
+    if (classify) {
+      setState(prevState => {
+        return {...prevState, classify: {data: classify.data, loading: false}}
+      })
+    }
 
     // 首页商品
-    const {data: pageItem} = await api.product.getItems({currentPage: 1, pageSize: 18});
-    setState(prevState => {
-      return {...prevState, items: {data: pageItem.data, loading: false}}
-    })
+    const pageItem = await api.product.getItems({currentPage: 1, pageSize: 18});
+    if (pageItem) {
+      setState(prevState => {
+        return {...prevState, items: {data: pageItem.data.data, loading: false}}
+      })
+    }
   }
 
   useDidShow(() => {
@@ -216,21 +221,29 @@ const Index: Taro.FC = () => {
       //   });
       // }
 
-      const {data: projectItems1} = await api.product.getProjectItems({projectId: 1, pageSize: 1})
-      const {imageUrl} = projectItems1[0];
-      setState(prevState => {
-        return {...prevState, projectItems1: {data: imageUrl}}
-      })
+      const projectItems1 = await api.product.getProjectItems({projectId: 1, pageSize: 1})
+      if (projectItems1) {
+        console.log(projectItems1)
+        const {imageUrl} = projectItems1.data[0];
+        setState(prevState => {
+          return {...prevState, projectItems1: {data: imageUrl}}
+        })
+      }
 
-      const {data: projectItems2} = await api.product.getProjectItems({projectId: 2, pageSize: 2})
-      setState(prevState => {
-        return {...prevState, projectItems2: {data: projectItems2}}
-      })
+      const projectItems2 = await api.product.getProjectItems({projectId: 2, pageSize: 2})
+      if (projectItems2) {
+        setState(prevState => {
+          return {...prevState, projectItems2: {data: projectItems2.data}}
+        })
+      }
 
-      const {data: projectItems3} = await api.product.getProjectItems({projectId: 3, pageSize: 2})
-      setState(prevState => {
-        return {...prevState, projectItems3: {data: projectItems3}}
-      })
+      const projectItems3 = await api.product.getProjectItems({projectId: 3, pageSize: 2})
+      if (projectItems3) {
+        setState(prevState => {
+          return {...prevState, projectItems3: {data: projectItems3.data}}
+        })
+      }
+
 
       // const userDetail = await userInfo();
       // setState(prevState => {
@@ -352,7 +365,7 @@ const Index: Taro.FC = () => {
     >
       {/* 轮播图 */}
       <CustomSwiper statusBarHeight={state.statusBarHeight}
-                    banners={state.banners.data.filter((item) => item.position == 'top')}/>
+                    banners={state.banners.data && state.banners.data.filter((item) => item.position == 'top')}/>
 
       <ChooseStore tabbarFix={state.tabbarFix}
                    statusBarHeight={state.statusBarHeight}

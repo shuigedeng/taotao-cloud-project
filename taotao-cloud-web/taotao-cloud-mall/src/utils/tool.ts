@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+
 const getCurrentPages = Taro.getCurrentPages;
 
 const mapAppKey = "FPXBZ-NMCEX-LM64A-TNISS-CD3OV-32FVH";
@@ -496,6 +497,14 @@ function checkUpdate() {
   }
 }
 
+const error = (errorMsg) => {
+  Taro.showToast({
+    title: errorMsg,
+    icon: 'none',
+    duration: 2000
+  });
+}
+
 //将秒数转化拆分为其他单位 level 1:分 2:时 3:日
 // function formatSecond(second, level) {
 //   second = parseInt(second) || 0;
@@ -547,6 +556,7 @@ export {
   getLocationName,
   checkUpdate,
   createSocket,
+  error
 }
 
 

@@ -1,9 +1,9 @@
 import Taro, {request as TaroRequest} from '@tarojs/taro'
 import getRequestUrl from './requestUrl'
 import interceptors from './interceptors'
-import {ContentTypeEnum, RequestEnum} from "@/enums/httpEnum";
-
-interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem))
+import {ContentTypeEnum, HTTP_STATUS, RequestEnum} from "@/enums/httpEnum";
+import {Result} from "@/api/model/baseModel";
+import {error} from "@/utils/tool";
 
 interface options<P> {
   url: string,
@@ -26,6 +26,21 @@ const create = <T, P>({url, data, contentType, method}: options<P>): Promise<T> 
     },
     mode: 'no-cors',
   }
+  interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem))
+  // return Taro.request<Result<T>, P>(option).then((res: TaroRequest.SuccessCallbackResult<Result<T>>) => {
+  //   if (res.statusCode === HTTP_STATUS.SUCCESS) {
+  //     let code = res.data.code;
+  //     if (code == HTTP_STATUS.SUCCESS) {
+  //       return Promise.resolve(res.data);
+  //     }
+  //     error(res.data.message)
+  //   }
+  //   error('服务器错误,请稍后重试')
+  // }).catch((err: Error) => {
+  //   console.log('-----------')
+  //   error('服务器错误,请稍后重试')
+  //   return Promise.resolve(null);
+  // })
   return Taro.request<T, P>(option).then((res: TaroRequest.SuccessCallbackResult<T>) => {
     return Promise.resolve(res?.data);
   }).catch((err: Error) => {

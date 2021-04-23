@@ -1,13 +1,12 @@
 import Taro from '@tarojs/taro';
-import {Button, Image, View} from '@tarojs/components';
+import {Button, View} from '@tarojs/components';
 import {showErrorToast} from '@/utils/util';
-import {set as setGlobalData} from '../../ucenter/global_data';
 
-import * as user from '../../../utils/user';
 
 import './index.less';
 import React, {useEffect, useState} from 'react';
-import * as images from "../../../static/images";
+import {setGlobalData} from "@/utils/global";
+import {checkLogin, loginByWeixin} from "@/utils/user";
 
 const Index: Taro.FC = () => {
 
@@ -40,8 +39,8 @@ const Index: Taro.FC = () => {
       return;
     }
 
-    user.checkLogin().catch(() => {
-      user.loginByWeixin(e.detail.userInfo).then(() => {
+    checkLogin().catch(() => {
+      loginByWeixin(e.detail.userInfo).then(() => {
         // setGlobalData('hasLogin', true)
         // Taro.navigateBack({
         //   delta: 1

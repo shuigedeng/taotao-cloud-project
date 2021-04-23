@@ -35,6 +35,7 @@ const config = {
     IS_H5: process.env.TARO_ENV === "h5",
     IS_RN: process.env.TARO_ENV === "rn",
     IS_WEAPP: process.env.TARO_ENV === "weapp",
+    version: JSON.stringify(process.env.npm_package_version)
   },
   alias: {
     "@/api": path.resolve(__dirname, "..", "src/api"),
@@ -139,7 +140,7 @@ const config = {
       chunkFilename: 'js/[name].[chunkhash:8].js'
     },
     router: {
-      mode: 'browser', // 或者是 'has'
+      mode: 'hash', // 或者是 'browser' 有问题
       customRoutes: {
         '/pages/home/index': '/home',
         '/pages/home_bak/index': '/home_bak',

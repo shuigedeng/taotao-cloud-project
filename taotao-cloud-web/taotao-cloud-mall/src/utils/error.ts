@@ -27,3 +27,5 @@ export const logError = (name: string, action?: string, info?: string | object) 
   console.error(time, name, action, info, device)
 }
 
+
+

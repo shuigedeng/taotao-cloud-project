@@ -1,10 +1,10 @@
 import Taro from '@tarojs/taro';
 import {Button, Image, Text, View} from '@tarojs/components';
-import {get as getGlobalData, set as setGlobalData} from './global_data';
 import * as images from '../../static/images/index';
 import './index.less';
 import React, {useEffect, useState} from 'react';
 import api from "@/api/index"
+import {getGlobalData, setGlobalData} from "@/utils/global";
 
 const Index: Taro.FC = () => {
   const [state, setState] = useState({
