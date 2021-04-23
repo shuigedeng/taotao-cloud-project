@@ -1,20 +1,22 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
  // 首页附近商家
-export const nearbyStore = (longitude, latitude, currentPage,) =>
+export const nearbyStore = (longitude, latitude, currentPage, pageSize) =>
 client.query({
   query: gql`
     query(
       $longitude: String!
       $latitude: String!
       $currentPage: Int
+      $pageSize: Int
     ) {
       nearbyStore(
         input: {
           longitude: $longitude
           latitude: $latitude
           currentPage: $currentPage
+          pageSize: $index
         }
       ) {
         list {
@@ -37,7 +39,7 @@ client.query({
       }
     }
   `,
-  variables: { longitude, latitude, currentPage, },
+  variables: { longitude, latitude, currentPage, pageSize},
   fetchPolicy: "no-cache"
 });
 

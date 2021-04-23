@@ -1,43 +1,44 @@
-import Taro, { Component } from "@tarojs/taro";
-import { View, Image, Text } from "@tarojs/components";
+import Taro from "@tarojs/taro";
+import {Image, Text, View} from "@tarojs/components";
 import "./index.less";
+import React, {useEffect, useState} from "react";
 
-export default class paySuccess extends Component {
-  config = {
-    navigationBarTitleText: "支付成功"
-  };
 
-  componentWillUnmount() {}
+const Index: Taro.FC = () => {
+  let [state, setState] = useState({})
 
-  componentDidShow() {}
+  useEffect(() => {
 
-  componentDidHide() {}
+  }, [])
 
-  toHome() {
+  const toHome = () => {
     Taro.switchTab({
       url: "../home/index"
     });
   }
-  toOrder() {
+  const toOrder = () => {
     Taro.switchTab({
       url: "../mine/index"
     });
   }
-  render() {
-    return (
-      <View className="index">
-        <Image src='https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/paySuccessIcon.png' className="payIcon" />
-        <Text className="payText">订单支付成功</Text>
-        <View className="bottomView">
-          <View className="to" onClick={this.toOrder}>
-            返回我的
-          </View>
-          <View className="to" onClick={this.toHome}>
-            返回首页
-          </View>
+
+  return (
+    <View className="index">
+      <Image src='https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/paySuccessIcon.png'
+             className="payIcon"/>
+      <Text className="payText">订单支付成功</Text>
+      <View className="bottomView">
+        <View className="to" onClick={toOrder}>
+          返回我的
+        </View>
+        <View className="to" onClick={toHome}>
+          返回首页
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
+
+
+export default Index
 

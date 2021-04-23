@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 export const freightPrice = () =>
   client.query({

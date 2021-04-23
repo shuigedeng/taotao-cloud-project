@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 // 商品
 export const items = (nameLike,currentPage,pageSize) =>
@@ -11,7 +11,7 @@ client.query({
           code
           name
           content
-          originalPrice 
+          originalPrice
           price
           memberPrice
           unit

@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 // query
 export const orders = (status, currentPage,type) =>
@@ -14,7 +14,7 @@ export const orders = (status, currentPage,type) =>
             amount
             trade{
               id
-              price 
+              price
               status
             }
             orderItem{
@@ -28,11 +28,11 @@ export const orders = (status, currentPage,type) =>
             code
             time
             user{
-              id 
-              imageUrl 
-              nickname 
-              balance 
-              point 
+              id
+              imageUrl
+              nickname
+              balance
+              point
               role
               phone
             }

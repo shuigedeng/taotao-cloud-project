@@ -2705,7 +2705,7 @@
     sucrase "^3.17.1"
     windicss "^2.5.11"
 
-"@windicss/plugin-utils@^0.14.0":
+"@windicss/plugin-utils@^0.14.6":
   version "0.14.6"
   resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-0.14.6.tgz#25d3fdda3a8b0a560f3daed6588abd0a4fbef195"
   integrity sha512-jF+dJ6D4/UqVHSbH5kCdSoPnklLTZDf+seck4unICI0qyzmyPsrO15nmSS/gIvnmCedUfBrQj1MfYOX0tccFjQ==
@@ -14595,12 +14595,12 @@ taro-css-to-react-native@^2.0.4:
     css-mediaquery "^0.1.2"
     postcss-value-parser "^3.3.0"
 
-taro-plugin-tailwind@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/taro-plugin-tailwind/-/taro-plugin-tailwind-1.1.6.tgz#ef1d62b21931d3f12d242db8cb0f3921b016b34f"
-  integrity sha512-goSz6XVbO8bSNgNECt3HBThK7FftvMs6BL7iPQgeyY/dXmB7fY6vLSWWjw3rjfdmbUeRQXf4mWlS+3slCGg0Xw==
+taro-plugin-tailwind@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/taro-plugin-tailwind/-/taro-plugin-tailwind-1.1.7.tgz#974de97b47e0c2754ce7f61477ea87c2618b0db2"
+  integrity sha512-CXd/A6Dvr9FqfzGIn+PFHjxx76kw3qBAJuWsJaSr8V602IaIFdDi/NvKuX467DKoyiZz6MIHr1WEVAQLbhdX6w==
   dependencies:
-    "@windicss/plugin-utils" "^0.14.0"
+    "@windicss/plugin-utils" "^0.14.6"
     postcss-selector-replace "^1.0.2"
     windicss-webpack-plugin "^0.3.3"
 

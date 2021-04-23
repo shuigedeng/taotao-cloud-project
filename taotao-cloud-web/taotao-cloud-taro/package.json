@@ -57,7 +57,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sa-sdk-miniprogram": "^1.14.8",
-    "taro-plugin-tailwind": "^1.1.6",
+    "taro-plugin-tailwind": "^1.1.7",
     "taro-ui": "^3.0.0-alpha.3",
     "tarojs-plugin-generator": "^0.0.21"
   },

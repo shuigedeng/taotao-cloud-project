@@ -1,4 +1,4 @@
-import Taro from "@tarojs/taro";
+import Taro, {useRouter} from "@tarojs/taro";
 import {Button, Image, ScrollView, Text, View} from "@tarojs/components";
 import {details} from "./service";
 import "./index.less";
@@ -6,7 +6,6 @@ import detailsHome from "../../img/homePage.png";
 import shopping from "../../img/shopping.png";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import useRouter = Taro.useRouter;
 
 interface IState {
   number: number;

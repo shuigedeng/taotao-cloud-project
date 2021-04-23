@@ -3298,10 +3298,10 @@
     sucrase "^3.17.1"
     windicss "^2.5.11"
 
-"@windicss/plugin-utils@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-0.14.0.tgz#ca5459e81d38fbe3c1eac0574ffdc8dba06961a4"
-  integrity sha512-PnXKrCX7dl3tQPkfc2RGOQCqzS+3ApTLelGhr0c1kbHgz+EjaS+pK9vhhQm/8xgzyJLyreYUuQEEAvvPtBRBEQ==
+"@windicss/plugin-utils@^0.14.6":
+  version "0.14.6"
+  resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-0.14.6.tgz#25d3fdda3a8b0a560f3daed6588abd0a4fbef195"
+  integrity sha512-jF+dJ6D4/UqVHSbH5kCdSoPnklLTZDf+seck4unICI0qyzmyPsrO15nmSS/gIvnmCedUfBrQj1MfYOX0tccFjQ==
   dependencies:
     debug "^4.3.2"
     fast-glob "^3.2.5"
@@ -7693,7 +7693,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@^3.0.0, extend@~3.0.2:
+extend@^3.0.0, extend@^3.0.2, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -16893,12 +16893,12 @@ taro-css-to-react-native@^2.0.4:
     css-mediaquery "^0.1.2"
     postcss-value-parser "^3.3.0"
 
-taro-plugin-tailwind@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/taro-plugin-tailwind/-/taro-plugin-tailwind-1.1.6.tgz#ef1d62b21931d3f12d242db8cb0f3921b016b34f"
-  integrity sha512-goSz6XVbO8bSNgNECt3HBThK7FftvMs6BL7iPQgeyY/dXmB7fY6vLSWWjw3rjfdmbUeRQXf4mWlS+3slCGg0Xw==
+taro-plugin-tailwind@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/taro-plugin-tailwind/-/taro-plugin-tailwind-1.1.7.tgz#974de97b47e0c2754ce7f61477ea87c2618b0db2"
+  integrity sha512-CXd/A6Dvr9FqfzGIn+PFHjxx76kw3qBAJuWsJaSr8V602IaIFdDi/NvKuX467DKoyiZz6MIHr1WEVAQLbhdX6w==
   dependencies:
-    "@windicss/plugin-utils" "^0.14.0"
+    "@windicss/plugin-utils" "^0.14.6"
     postcss-selector-replace "^1.0.2"
     windicss-webpack-plugin "^0.3.3"
 
@@ -18082,6 +18082,13 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
+
+weapp-qrcode@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/weapp-qrcode/-/weapp-qrcode-1.0.0.tgz#4f3b4b4e7d37710c513439166734587859aebbfc"
+  integrity sha512-4sa3W0rGDVJ9QaeZpAKlAuUxVyjhDwiUqHyGK/jJMsRMXnhb4yO8qWU/pZruMo+iT5J6CraS67lDMFb1VY+RaA==
+  dependencies:
+    extend "^3.0.2"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"

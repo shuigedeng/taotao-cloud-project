@@ -22,15 +22,7 @@ const config = {
         },
       },
     ],
-    // ['taro-plugin-tailwind',
-    //   {
-    //     scan: {
-    //       dirs: ['./src'],
-    //       exclude: ['dist/**/*'],
-    //       fileExtensions: ['vue', 'jsx', 'tsx']
-    //     }
-    //   }
-    // ],
+    ['taro-plugin-tailwind'],
     ["@tarojs/plugin-mock", {
       host: "0.0.0.0"
     }],

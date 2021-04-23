@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 export const handleQuery = ( currentPage, pageSize, projectId) =>
   client.query({
@@ -10,7 +10,7 @@ export const handleQuery = ( currentPage, pageSize, projectId) =>
             code
             name
             imageUrl
-            originalPrice 
+            originalPrice
             price
             memberPrice
           }

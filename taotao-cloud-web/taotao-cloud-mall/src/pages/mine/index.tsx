@@ -1,11 +1,11 @@
-import Taro, { Component, Config } from "@tarojs/taro";
-import { View, Text, Image, OpenData, Button } from "@tarojs/components";
+import Taro, {usePullDownRefresh} from "@tarojs/taro";
+import {Button, Image, OpenData, Text, View} from "@tarojs/components";
 import "./index.less";
-import { userInfo } from "../orderDetails/service";
-import { login } from "../home/service";
-// import { myCoupons } from "../../packageA/pages/myCoupons/service";
-import { freightPrice, myCoupons } from "./service";
-import { AtModal, AtModalHeader, AtModalContent, AtModalAction, AtIcon } from "taro-ui";
+import {userInfo} from "../orderDetails/service";
+import {login} from "../home/service";
+import {freightPrice, myCoupons} from "./service";
+import {AtIcon, AtModal, AtModalAction, AtModalContent, AtModalHeader} from "taro-ui";
+import React, {useEffect, useState} from "react";
 
 interface IState {
   authorization: boolean;
@@ -16,16 +16,9 @@ interface IState {
   visible: boolean;
   couponsTotal?: any;
 }
-export default class Mine extends Component<null, IState> {
-  config: Config = {
-    navigationBarTitleText: "个人中心",
-    // 状态栏自定义
-    navigationStyle: "custom",
-    // 状态栏颜色白色
-    navigationBarTextStyle: "white",
-  };
 
-  state = {
+const Index: Taro.FC = () => {
+  let [state, setState] = useState<IState>({
     authorization: false,
     query: null,
     aboutQuery: {
@@ -33,68 +26,87 @@ export default class Mine extends Component<null, IState> {
     },
     visible: false,
     couponsTotal: null,
-  };
+  })
 
-  async componentWillMount() {
-    const token = Taro.getStorageSync('accessToken');
-    console.log('token', token);
+  useEffect(() => {
+    const init = async () => {
+      const token = Taro.getStorageSync('accessToken');
+      console.log('token', token);
 
-    if (token) {
-      const { data } = await userInfo();
-      console.log('data', data);
+      if (token) {
+        const {data} = await userInfo();
+        console.log('data', data);
 
-      this.setState({
-        query: data.userInfo
-      });
-      this.setState({
-        visible: false
-      });
+        setState(prevState => {
+          return {...prevState, query: data.userInfo, visible: false}
+        })
+      }
+      const aboutResult = await freightPrice();
+      setState(prevState => {
+        return {...prevState, aboutQuery: aboutResult}
+      })
+      const {query} = state;
+      if (query === null) {
+        Taro.showToast({
+          title: '请先登录!',
+          icon: 'none'
+        });
+      }
+      const couponsLen = await myCoupons('useable', 1, 1);
+      const {pagination} = couponsLen.data.coupons;
+      setState(prevState => {
+        return {...prevState, couponsTotal: pagination}
+      })
     }
-    const aboutResult = await freightPrice();
-    this.setState({
-      aboutQuery: aboutResult
-    });
-    const { query } = this.state;
-    if (query === null) {
-      Taro.showToast({
-        title: '请先登录!',
-        icon: 'none'
-      });
-    }
-    const couponsLen = await myCoupons('useable', 1, 1);
-    const { pagination } = couponsLen.data.coupons;
-    this.setState({
-      couponsTotal: pagination
+    init()
+  }, [])
+
+  usePullDownRefresh(async () => {
+    const {data} = await userInfo();
+    setState(prevState => {
+      return {...prevState, query: data.userInfo}
     })
-  }
+    const couponsLen = await myCoupons('useable', 1, 1);
+    const {pagination} = couponsLen.data.coupons;
+    setState(prevState => {
+      return {...prevState, couponsTotal: pagination}
+    })
+
+    setTimeout(() => {
+      Taro.stopPullDownRefresh(); //停止下拉刷新
+    }, 1000);
+  })
 
   //  绑定手机号
-  handleBind() {
+  const handleBind = () => {
     Taro.navigateTo({
       url: "../bindPhoneNum/index"
     });
   }
 
   // 跳转指定订单
-  handleOrder1(id) {
+  const handleOrder1 = (id) => {
     Taro.navigateTo({
       url: `../theorder/index?id=${id}`
     });
   }
+
   //跳转全部订单
-  handleOrderMore() {
+  const handleOrderMore = () => {
     Taro.navigateTo({
       url: `../theorder/index?id=0`
     });
   }
+
   // 授权
-  async onGetUserInfo(e) {
+  const onGetUserInfo = async (e) => {
     const imageUrl = e.detail.userInfo.avatarUrl;
     const nickname = e.detail.userInfo.nickName;
     const res = await Taro.login();
     const code = res.code;
     const result = await login(code, imageUrl, nickname);
     const token = result.data.accessToken;
+
     // //将获取到的 token 存入缓存
     Taro.setStorage({
       key: "accessToken",
@@ -104,11 +116,13 @@ export default class Mine extends Component<null, IState> {
     Taro.showShareMenu({
       withShareTicket: true
     });
+
     const setAuthorization = () => {
-      this.setState({
-        visible: true
-      });
+      setState(prevState => {
+        return {...prevState, visible: true}
+      })
     };
+
     //地理位置授权
     await new Promise(resolve => {
       Taro.getLocation({
@@ -118,6 +132,7 @@ export default class Mine extends Component<null, IState> {
         }
       });
     });
+
     // 检查是否授权了
     Taro.getSetting({
       success(res) {
@@ -130,13 +145,12 @@ export default class Mine extends Component<null, IState> {
         }
       }
     });
-    const { data } = await userInfo();
-    this.setState({
-      query: data.userInfo
-    });
-    this.setState({
-      visible: false
-    });
+
+    const {data} = await userInfo();
+    setState(prevState => {
+      return {...prevState, query: data.userInfo, visible: false}
+    })
+
     if (!Taro.getStorageSync("storeId")) {
       Taro.navigateTo({
         url: "../nearbystores/index"
@@ -145,8 +159,8 @@ export default class Mine extends Component<null, IState> {
   }
 
   // 余额积分奖励优惠券跳转
-  handleJump(id) {
-    const { query } = this.state;
+  const handleJump = (id) => {
+    const {query} = state;
     const userId = query.id;
     switch (id) {
       case 1:
@@ -173,8 +187,9 @@ export default class Mine extends Component<null, IState> {
         break;
     }
   }
+
   //更多服务
-  handle(id) {
+  const handle = (id) => {
     switch (id) {
       case 1:
         Taro.chooseAddress({
@@ -200,20 +215,20 @@ export default class Mine extends Component<null, IState> {
     }
   }
 
-  lookForward() {
-    const { query } = this.state;
+  const lookForward = () => {
+    const {query} = state;
     Taro.checkSession({
       success() {
-        if(query.role==="member"){
+        if (query.role === "member") {
           Taro.navigateTo({
             url: '../theMemberCenter/index'
           });
-        }else{
+        } else {
           Taro.navigateTo({
             url: '../../packageA/pages/topup/index'
           });
         }
-        
+
       },
       fail() {
         Taro.showToast({
@@ -224,235 +239,225 @@ export default class Mine extends Component<null, IState> {
     })
   }
 
-  technicalSupport() {
+  const technicalSupport = () => {
     Taro.navigateToMiniProgram({
       appId: "wx4a96aca05249ba58"
     });
   }
-  //下拉刷新
-  async onPullDownRefresh() {
-    const { data } = await userInfo();
-    this.setState({
-      query: data.userInfo
-    });
-    const couponsLen = await myCoupons('useable', 1, 1);
-    const { pagination } = couponsLen.data.coupons;
-    this.setState({
-      couponsTotal: pagination
-    })
-    setTimeout(() => {
-      Taro.stopPullDownRefresh(); //停止下拉刷新
-    }, 1000);
-  }
+
   //暂不授权
-  temporary() {
-    this.setState({
-      visible: false
-    });
-  }
-
-  OpenLogin() {
-    this.setState({
-      visible: true
+  const temporary = () => {
+    setState(prevState => {
+      return {...prevState, visible: false}
     })
   }
 
-  integralExchange() {
+  const OpenLogin = () => {
+    setState(prevState => {
+      return {...prevState, visible: true}
+    })
+  }
+
+  const integralExchange = () => {
     Taro.navigateTo({
       url: '../../packageA/pages/activityCoupons/index'
     });
   }
 
+  const {query, visible, couponsTotal} = state;
+  console.log('mine query', query);
 
-  render() {
-    const { query, visible, couponsTotal } = this.state;
-    console.log('mine query', query);
+  const otherInformation = [
+    {
+      id: 1,
+      number: `${query ? (query.balance / 100) : (0)}`,
+      name: "余额"
+    },
+    {
+      id: 2,
+      number: `${couponsTotal ? (couponsTotal.total) : (0)}`,
+      name: "优惠券"
+    },
+    {
+      id: 3,
+      number: `${query ? (query.point / 100) : (0)}`,
+      name: "积分"
+    },
+    {
+      id: 4,
+      number: `${query ? (query.follow) : (0)}`,
+      name: "收藏"
+    },
+  ];
+  const orders = [
+    {
+      id: 0,
+      name: '已完成',
+      icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/wc.png'
+    },
+    {
+      id: 1,
+      name: '已付款',
+      icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/fk.png'
+    },
+    {
+      id: 2,
+      name: '待取货',
+      icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/qh.png'
+    },
+    {
+      id: 3,
+      name: '待配送',
+      icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/fh.png'
+    },
+  ];
+  const services = [
+    {
+      id: 1,
+      text: "收货地址",
+      img: ''
+    },
+    {
+      id: 2,
+      text: "在线客服",
+      img: ''
+    },
+    {
+      id: 5,
+      text: "用户协议",
+      img: ''
+    },
+    {
+      id: 6,
+      text: "平台资质",
+      img: ''
+    }
+  ];
 
-    const otherInformation = [
-      {
-        id: 1,
-        number: `${query ? (query.balance / 100) : (0)}`,
-        name: "余额"
-      },
-      {
-        id: 2,
-        number: `${couponsTotal ? (couponsTotal.total) : (0)}`,
-        name: "优惠券"
-      },
-      {
-        id: 3,
-        number: `${query ? (query.point / 100) : (0)}`,
-        name: "积分"
-      },
-      {
-        id: 4,
-        number: `${query ? (query.follow) : (0)}`,
-        name: "收藏"
-      },
-    ];
-    const orders = [
-      {
-        id: 0,
-        name: '已完成',
-        icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/wc.png'
-      },
-      {
-        id: 1,
-        name: '已付款',
-        icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/fk.png'
-      },
-      {
-        id: 2,
-        name: '待取货',
-        icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/qh.png'
-      },
-      {
-        id: 3,
-        name: '待配送',
-        icon: 'https://mengmao-qingying-files.oss-cn-hangzhou.aliyuncs.com/fh.png'
-      },
-    ];
-    const services = [
-      {
-        id: 1,
-        text: "收货地址"
-      },
-      {
-        id: 2,
-        text: "在线客服"
-      },
-      {
-        id: 5,
-        text: "用户协议"
-      },
-      {
-        id: 6,
-        text: "平台资质"
-      }
-    ];
-
-    return (
-      <View className="index">
-        <View className='topInformation'>
-          <View className='personalTitle'>个人中心</View>
-          {/* 上部个人信息 */}
-          <View className="userInformation">
-            <View className="head">
-              <OpenData type="userAvatarUrl" />
-            </View>
-            <View className="mine">
-              {query ? (
-                <View className="mine">
-                  <OpenData type="userNickName" className="title" />
-                  <Text className="phone" onClick={this.handleBind}>
-                    {query.phone ? query.phone : '点击绑定手机'}
-                  </Text>
-                </View>
-              ) : (
-                  <Text className="title2" onClick={this.OpenLogin}>
-                    立即登录
+  return (
+    <View className="index">
+      <View className='topInformation'>
+        <View className='personalTitle'>个人中心</View>
+        {/* 上部个人信息 */}
+        <View className="userInformation">
+          <View className="head">
+            <OpenData type="userAvatarUrl"/>
+          </View>
+          <View className="mine">
+            {query ? (
+              <View className="mine">
+                <OpenData type="userNickName" className="title"/>
+                <Text className="phone" onClick={handleBind}>
+                  {query.phone ? query.phone : '点击绑定手机'}
                 </Text>
-                )}
-            </View>
-            <View className="couponOther">
-              <Button
-                className="integralExchange"
-                onClick={this.integralExchange}
-              >兑换</Button>
-            </View>
-          </View>
-
-          {/* 余额积分奖励优惠券 */}
-          <View className="ortherInformationBox top_padding_bottom">
-            {otherInformation.map(item => (
-              <View
-                className="otherInformation"
-                key={item.id}
-                onClick={this.handleJump.bind(this, item.id)}
-              >
-                <Text className="number">{item.number}</Text>
-                <Text className="name">{item.name}</Text>
               </View>
-            ))}
+            ) : (
+              <Text className="title2" onClick={OpenLogin}>
+                立即登录
+              </Text>
+            )}
           </View>
-        </View>
-        <View className="huiYuan" onClick={this.lookForward}>
-            <Text className='huiYuanFirst'>Plus会员</Text>
-            <Text className='huiYuanSecond'>【专享】领取会员专享优惠券</Text>
-            <Text className='huiYuanThird'>立即领取 > </Text>
-          </View>
-        {/* 我的订单 */}
-        <View className="myStoreBox">
-          <View className="myOrdersTopLine">
-            <Text className="myOrderText">我的订单</Text>
-            <View onClick={this.handleOrderMore}>
-              <Text className="textMore">查看更多</Text>
-              <AtIcon value='chevron-right' size='20' className='rightArrow'></AtIcon>
-            </View>
-          </View>
-          <View className="ortherInformationBox">
-            {orders.map(order => (
-              <View
-                className="otherInformation"
-                key={order.id}
-                onClick={this.handleOrder1.bind(this, order.id)}
-              >
-                <Image src={order.icon} className="iconImage" />
-                <Text className="orderName">{order.name}</Text>
-              </View>
-            ))}
+          <View className="couponOther">
+            <Button
+              className="integralExchange"
+              onClick={integralExchange}
+            >兑换</Button>
           </View>
         </View>
 
-        {/* 我的服务 */}
-        <View className="myServicesBox">
-          <View>
-            {services.map(service => (
-              <View
-                key={service.id}
-                className={
-                  service.id !== 2 ? "one-service" : "one-service-other"
-                }
-                onClick={this.handle.bind(this, service.id)}
-              >
-                <View className="service-left-box">
-                  <Image
-                    src={service.img}
-                    className={service.id == 1 ? "service-img" : "serviceImg"}
-                  />
-                  {service.id !== 2 ? (
-                    <Text className="service-left-box-text">
-                      {service.text}
-                    </Text>
-                  ) : (
-                      <Button open-type="contact" className="button">
-                        {service.text}
-                      </Button>
-                    )}
-                </View>
-                <AtIcon value='chevron-right' className='rightArrow'></AtIcon>
-              </View>
-            ))}
-          </View>
+        {/* 余额积分奖励优惠券 */}
+        <View className="ortherInformationBox top_padding_bottom">
+          {otherInformation.map(item => (
+            <View
+              className="otherInformation"
+              key={item.id}
+              onClick={handleJump.bind(this, item.id)}
+            >
+              <Text className="number">{item.number}</Text>
+              <Text className="name">{item.name}</Text>
+            </View>
+          ))}
         </View>
-        <Text className="support" onClick={this.technicalSupport}>
-          萌猫智科提供技术支持
-        </Text>
-        {visible ? (
-          <AtModal isOpened={visible} closeOnClickOverlay >
-            <AtModalHeader>您还未登录</AtModalHeader>
-            <AtModalContent>
-              <Text className="tit">请先登录再进行操作</Text>
-            </AtModalContent>
-            <AtModalAction>
-              <Button onClick={this.temporary}>暂不登录</Button>
-              <Button
-                openType="getUserInfo"
-                onGetUserInfo={this.onGetUserInfo}>立即登录</Button>
-            </AtModalAction>
-          </AtModal>
-        ) : null}
       </View>
-    );
-  }
+      <View className="huiYuan" onClick={lookForward}>
+        <Text className='huiYuanFirst'>Plus会员</Text>
+        <Text className='huiYuanSecond'>【专享】领取会员专享优惠券</Text>
+        <Text className='huiYuanThird'>立即领取 {">"} </Text>
+      </View>
+      {/* 我的订单 */}
+      <View className="myStoreBox">
+        <View className="myOrdersTopLine">
+          <Text className="myOrderText">我的订单</Text>
+          <View onClick={handleOrderMore}>
+            <Text className="textMore">查看更多</Text>
+            <AtIcon value='chevron-right' size='20' className='rightArrow'/>
+          </View>
+        </View>
+        <View className="ortherInformationBox">
+          {orders.map(order => (
+            <View
+              className="otherInformation"
+              key={order.id}
+              onClick={handleOrder1.bind(this, order.id)}
+            >
+              <Image src={order.icon} className="iconImage"/>
+              <Text className="orderName">{order.name}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {/* 我的服务 */}
+      <View className="myServicesBox">
+        <View>
+          {services.map(service => (
+            <View
+              key={service.id}
+              className={
+                service.id !== 2 ? "one-service" : "one-service-other"
+              }
+              onClick={handle.bind(this, service.id)}
+            >
+              <View className="service-left-box">
+                <Image
+                  src={service.img}
+                  className={service.id == 1 ? "service-img" : "serviceImg"}
+                />
+                {service.id !== 2 ? (
+                  <Text className="service-left-box-text">
+                    {service.text}
+                  </Text>
+                ) : (
+                  <Button open-type="contact" className="button">
+                    {service.text}
+                  </Button>
+                )}
+              </View>
+              <AtIcon value='chevron-right' className='rightArrow'></AtIcon>
+            </View>
+          ))}
+        </View>
+      </View>
+      <Text className="support" onClick={technicalSupport}>
+        萌猫智科提供技术支持
+      </Text>
+      {visible ? (
+        <AtModal isOpened={visible} closeOnClickOverlay>
+          <AtModalHeader>您还未登录</AtModalHeader>
+          <AtModalContent>
+            <Text className="tit">请先登录再进行操作</Text>
+          </AtModalContent>
+          <AtModalAction>
+            <Button onClick={temporary}>暂不登录</Button>
+            <Button
+              openType="getUserInfo"
+              onGetUserInfo={onGetUserInfo}>立即登录</Button>
+          </AtModalAction>
+        </AtModal>
+      ) : null}
+    </View>
+  );
 }
+
+
+export default Index

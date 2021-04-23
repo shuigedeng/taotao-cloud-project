@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 // export const confirm = (itemIds, storeId, couponId, time, address) =>
 //   client.mutate({
@@ -165,7 +165,7 @@ export const addressToLngAndLat = (address) =>
           address:$address
          ) {
           lng
-          lat 
+          lat
          }
        }
      `,

@@ -1,5 +1,5 @@
-import client from "../../utils/client";
 import gql from "graphql-tag";
+import client from "@/http/graphql/client";
 
 // query
 export const orderInformation = id =>
@@ -23,14 +23,14 @@ export const orderInformation = id =>
           createdAt
           trade{
               id
-              price 
+              price
               status
             }
           store{
               name
           }
           user{
-              id 
+              id
           }
           orderItem {
             id
