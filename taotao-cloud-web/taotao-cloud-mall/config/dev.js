@@ -1,4 +1,3 @@
-const HOST = '"http://192.168.99.37:9527"';
 module.exports = {
   env: {
     NODE_ENV: '"development"'
@@ -11,10 +10,7 @@ module.exports = {
     devServer: {
       proxy: {
         '/': {
-          target: JSON.parse(HOST),
-          pathRewrite: {
-            '^/api': '/api'
-          },
+          target: "http://192.168.99.37:9527",
           changeOrigin: true
         },
       }
