@@ -1,14 +1,17 @@
 package com.taotao.cloud.common.aspect;
 
 import com.taotao.cloud.common.utils.JsonUtil;
-import org.aspectj.lang.JoinPoint;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import org.aspectj.lang.JoinPoint;
+
 
 /**
  * 切面基础类
  * <p>封装一些基础方法</p>
+ *
+ * @author dengtao
+ * @since 2021/4/26 08:49
  */
 public abstract class BaseAspect {
 
@@ -18,7 +21,6 @@ public abstract class BaseAspect {
 	 * @param joinPoint
 	 * @param annotationClass
 	 * @param <T>
-	 * @return
 	 */
 	public <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
 		String methodName = joinPoint.getSignature().getName();
