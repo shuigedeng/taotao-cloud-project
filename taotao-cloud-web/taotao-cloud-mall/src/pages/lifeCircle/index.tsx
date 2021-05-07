@@ -12,6 +12,7 @@ import {
   useDidShow,
   useReady
 } from "@tarojs/taro";
+import React from 'react'
 
 
 const Index: Taro.FC = (props) => {
@@ -46,12 +47,12 @@ const Index: Taro.FC = (props) => {
 
   return (
     <View className='index'>
-      <Text>Hello world!</Text>
-      <AtButton type='primary'>I need Taro UI</AtButton>
-      <Text>我的    我的</Text>
-      <AtButton type='primary' circle={true}>我的</AtButton>
-      <Text>我的？</Text>
-      <AtButton type='secondary' circle={true}>我的</AtButton>
+      {/*<Text>Hello world!</Text>*/}
+      {/*<AtButton type='primary'>I need Taro UI</AtButton>*/}
+      {/*<Text>我的    我的</Text>*/}
+      {/*<AtButton type='primary' circle={true}>我的</AtButton>*/}
+      {/*<Text>我的？</Text>*/}
+      {/*<AtButton type='secondary' circle={true}>我的</AtButton>*/}
     </View>
   )
 };

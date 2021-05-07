@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Please sign in</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.css}"/>
+    <link href="/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">TAO-X 登录</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                   autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <input name="_csrf" type="hidden" th:value="${_csrf.token}"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <h2 class="form-signin-heading"></h2>
+        <table class="table table-striped">
+            <tr th:each="user : ${AuthUserOauth2}">
+                <a style="margin: 10px;" th:text="${user.key}"
+                   th:href="@{'/oauth2/authorization/' + ${user.key}}">key</a>
+            </tr>
+        </table>
+        <div class="alert alert-success" role="alert"
+             th:if="${param.error != null && session.SPRING_SECURITY_LAST_EXCEPTION != null}">
+            <p style="color: red" th:if="${not #strings.isEmpty(session.SPRING_SECURITY_LAST_EXCEPTION.message)}"
+               th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">登录失败</p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

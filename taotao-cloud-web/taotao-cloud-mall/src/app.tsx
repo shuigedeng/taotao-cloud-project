@@ -3,8 +3,8 @@ import Taro, {useDidShow,} from "@tarojs/taro";
 import {Provider} from "react-redux";
 import configStore from "./store";
 
-import 'windi.css';
-import 'taro-ui/dist/style/index.scss'
+import './windi.css';
+// import 'taro-ui/dist/style/index.scss'
 import {checkLogin} from "@/utils/user";
 import {setGlobalData} from "@/utils/global";
 import * as weappSensors from './http/sa/miniSensors';

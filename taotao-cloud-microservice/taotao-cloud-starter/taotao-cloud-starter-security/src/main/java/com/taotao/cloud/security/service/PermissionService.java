@@ -16,7 +16,7 @@
 package com.taotao.cloud.security.service;
 
 
-import com.taotao.cloud.core.model.SecurityMenu;
+import com.taotao.cloud.common.model.SecurityMenu;
 import java.util.List;
 
 /**

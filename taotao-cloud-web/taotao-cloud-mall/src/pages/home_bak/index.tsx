@@ -95,114 +95,114 @@ const Index: Taro.FC = (props) => {
 
   return (
     <View className='home'>
-      <AppHeader className={state.isScrollTop ? "" : "scroll"}/>
-      <AppBanner/>
-      <AppNav/>
-      <Seckill className={state.isScrollTop ? "" : "scroll"}/>
+      {/*<AppHeader className={state.isScrollTop ? "" : "scroll"}/>*/}
+      {/*<AppBanner/>*/}
+      {/*<AppNav/>*/}
+      {/*<Seckill className={state.isScrollTop ? "" : "scroll"}/>*/}
 
-      {/* 精品团购 */}
-      <View className=' bgfff pb30'>
-        <ListItem className='mt20 pt20 pb20'>
-          <Image
-            style={{width: "30px", height: "30px"}}
-            mode='aspectFit'
-            src={h1}
-          />
-          <View className='font30 pl30 color999'>
-            <View className='color333'>精品团购</View>
-            <View className='font16'>Boutique group buying</View>
-          </View>
-        </ListItem>
-        <ScrollView
-          style={{
-            height: "235px",
-            width: "100%"
-          }}
-          className='scrollview'
-          scrollX
-          scrollWithAnimation
-        >
-          <View className='list-container flex'>
-            {state.list1.map((e, index) => (
-              <ProductCard
-                className='ml30'
-                width='200px'
-                key={"key" + index}
-                title={e.title}
-                src={e.image2}
-                price={e.price}
-                // @ts-ignore
-                originalPrice={e.originalPrice}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
-      {/* 分类精选 */}
-      <View className=' bgfff pb30'>
-        <ListItem className='mt20 pt20 pb20'>
-          <Image
-            style={{width: "60rpx", height: "60rpx"}}
-            mode='aspectFit'
-            src={h1}
-          />
-          <View className='font30 pl30 color999'>
-            <View className='color333'>分类精选</View>
-            <View className='font16'>Classified selection</View>
-          </View>
-        </ListItem>
-        <ScrollView
-          style={{
-            height: "470rpx",
-            width: "100%"
-          }}
-          className='scrollview'
-          scrollX
-          scrollWithAnimation
-        >
-          <View className='list-container flex'>
-            {state.list1.map((e, index) => (
-              <ProductCard
-                className='ml30'
-                width='240rpx'
-                key={"key" + index}
-                title={e.title}
-                src={e.image3}
-                price={e.price}
-                // @ts-ignore
-                originalPrice={e.originalPrice}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+      {/*/!* 精品团购 *!/*/}
+      {/*<View className=' bgfff pb30'>*/}
+      {/*  <ListItem className='mt20 pt20 pb20'>*/}
+      {/*    <Image*/}
+      {/*      style={{width: "30px", height: "30px"}}*/}
+      {/*      mode='aspectFit'*/}
+      {/*      src={h1}*/}
+      {/*    />*/}
+      {/*    <View className='font30 pl30 color999'>*/}
+      {/*      <View className='color333'>精品团购</View>*/}
+      {/*      <View className='font16'>Boutique group buying</View>*/}
+      {/*    </View>*/}
+      {/*  </ListItem>*/}
+      {/*  <ScrollView*/}
+      {/*    style={{*/}
+      {/*      height: "235px",*/}
+      {/*      width: "100%"*/}
+      {/*    }}*/}
+      {/*    className='scrollview'*/}
+      {/*    scrollX*/}
+      {/*    scrollWithAnimation*/}
+      {/*  >*/}
+      {/*    <View className='list-container flex'>*/}
+      {/*      {state.list1.map((e, index) => (*/}
+      {/*        <ProductCard*/}
+      {/*          className='ml30'*/}
+      {/*          width='200px'*/}
+      {/*          key={"key" + index}*/}
+      {/*          title={e.title}*/}
+      {/*          src={e.image2}*/}
+      {/*          price={e.price}*/}
+      {/*          // @ts-ignore*/}
+      {/*          originalPrice={e.originalPrice}*/}
+      {/*        />*/}
+      {/*      ))}*/}
+      {/*    </View>*/}
+      {/*  </ScrollView>*/}
+      {/*</View>*/}
+      {/*/!* 分类精选 *!/*/}
+      {/*<View className=' bgfff pb30'>*/}
+      {/*  <ListItem className='mt20 pt20 pb20'>*/}
+      {/*    <Image*/}
+      {/*      style={{width: "60rpx", height: "60rpx"}}*/}
+      {/*      mode='aspectFit'*/}
+      {/*      src={h1}*/}
+      {/*    />*/}
+      {/*    <View className='font30 pl30 color999'>*/}
+      {/*      <View className='color333'>分类精选</View>*/}
+      {/*      <View className='font16'>Classified selection</View>*/}
+      {/*    </View>*/}
+      {/*  </ListItem>*/}
+      {/*  <ScrollView*/}
+      {/*    style={{*/}
+      {/*      height: "470rpx",*/}
+      {/*      width: "100%"*/}
+      {/*    }}*/}
+      {/*    className='scrollview'*/}
+      {/*    scrollX*/}
+      {/*    scrollWithAnimation*/}
+      {/*  >*/}
+      {/*    <View className='list-container flex'>*/}
+      {/*      {state.list1.map((e, index) => (*/}
+      {/*        <ProductCard*/}
+      {/*          className='ml30'*/}
+      {/*          width='240rpx'*/}
+      {/*          key={"key" + index}*/}
+      {/*          title={e.title}*/}
+      {/*          src={e.image3}*/}
+      {/*          price={e.price}*/}
+      {/*          // @ts-ignore*/}
+      {/*          originalPrice={e.originalPrice}*/}
+      {/*        />*/}
+      {/*      ))}*/}
+      {/*    </View>*/}
+      {/*  </ScrollView>*/}
+      {/*</View>*/}
 
-      <View className=' bgfff pb30'>
-        <ListItem className='mt20 pt20 pb20'>
-          <Image
-            style={{width: "60rpx", height: "60rpx"}}
-            mode='aspectFit'
-            src={h1}/>
-          <View className='font30 pl30 color999'>
-            <View className='color333'>猜你喜欢</View>
-            <View className='font16'>Classified selection</View>
-          </View>
-        </ListItem>
-        <View className='product-list'>
-          {state.list1.map((e, index) => (
-            <ProductCard
-              className='ml30 mb10'
-              width='332rpx'
-              key={"key" + index}
-              title={e.title}
-              src={e.image3}
-              price={e.price}
-              // @ts-ignore
-              originalPrice={e.originalPrice}
-            />
-          ))}
-        </View>
-      </View>
+      {/*<View className=' bgfff pb30'>*/}
+      {/*  <ListItem className='mt20 pt20 pb20'>*/}
+      {/*    <Image*/}
+      {/*      style={{width: "60rpx", height: "60rpx"}}*/}
+      {/*      mode='aspectFit'*/}
+      {/*      src={h1}/>*/}
+      {/*    <View className='font30 pl30 color999'>*/}
+      {/*      <View className='color333'>猜你喜欢</View>*/}
+      {/*      <View className='font16'>Classified selection</View>*/}
+      {/*    </View>*/}
+      {/*  </ListItem>*/}
+      {/*  <View className='product-list'>*/}
+      {/*    {state.list1.map((e, index) => (*/}
+      {/*      <ProductCard*/}
+      {/*        className='ml30 mb10'*/}
+      {/*        width='332rpx'*/}
+      {/*        key={"key" + index}*/}
+      {/*        title={e.title}*/}
+      {/*        src={e.image3}*/}
+      {/*        price={e.price}*/}
+      {/*        // @ts-ignore*/}
+      {/*        originalPrice={e.originalPrice}*/}
+      {/*      />*/}
+      {/*    ))}*/}
+      {/*  </View>*/}
+      {/*</View>*/}
     </View>
   )
 };

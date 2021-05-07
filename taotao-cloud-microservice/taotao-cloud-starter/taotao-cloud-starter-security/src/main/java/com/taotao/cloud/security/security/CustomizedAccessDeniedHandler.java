@@ -2,9 +2,8 @@ package com.taotao.cloud.security.security;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;

@@ -35,7 +35,6 @@ const config = {
     IS_H5: process.env.TARO_ENV === "h5",
     IS_RN: process.env.TARO_ENV === "rn",
     IS_WEAPP: process.env.TARO_ENV === "weapp",
-    version: JSON.stringify(process.env.npm_package_version)
   },
   alias: {
     "@/api": path.resolve(__dirname, "..", "src/api"),

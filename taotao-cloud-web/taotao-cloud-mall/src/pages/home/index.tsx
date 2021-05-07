@@ -363,62 +363,62 @@ const Index: Taro.FC = () => {
       className="index"
       // onTouchStart={onTouchStart}
     >
-      {/* 轮播图 */}
-      <CustomSwiper statusBarHeight={state.statusBarHeight}
-                    banners={state.banners.data && state.banners.data.filter((item) => item.position == 'top')}/>
+      {/*/!* 轮播图 *!/*/}
+      {/*<CustomSwiper statusBarHeight={state.statusBarHeight}*/}
+      {/*              banners={state.banners.data && state.banners.data.filter((item) => item.position == 'top')}/>*/}
 
-      <ChooseStore tabbarFix={state.tabbarFix}
-                   statusBarHeight={state.statusBarHeight}
-                   storeName={state.storeName}
-                   lookForward={lookForward}/>
+      {/*<ChooseStore tabbarFix={state.tabbarFix}*/}
+      {/*             statusBarHeight={state.statusBarHeight}*/}
+      {/*             storeName={state.storeName}*/}
+      {/*             lookForward={lookForward}/>*/}
 
-      {/* 分类 */}
-      <View className="Grid">
-        {state.classify && state.classify.data.map(gir => (
-          gir &&
-          <View
-            className="gird"
-            onClick={handleItemLists.bind(this, gir.id, gir.title)}
-            key={gir.id}
-          >
-            <Image src={gir.imageUrl} className="gird_img"/>
-            <Text className="grid_title">{gir.title}</Text>
-          </View>
-        ))}
-      </View>
+      {/*/!* 分类 *!/*/}
+      {/*<View className="Grid">*/}
+      {/*  {state.classify && state.classify.data.map(gir => (*/}
+      {/*    gir &&*/}
+      {/*    <View*/}
+      {/*      className="gird"*/}
+      {/*      onClick={handleItemLists.bind(this, gir.id, gir.title)}*/}
+      {/*      key={gir.id}*/}
+      {/*    >*/}
+      {/*      <Image src={gir.imageUrl} className="gird_img"/>*/}
+      {/*      <Text className="grid_title">{gir.title}</Text>*/}
+      {/*    </View>*/}
+      {/*  ))}*/}
+      {/*</View>*/}
 
-      {/* 横线 */}
-      <View className="boldLine"/>
+      {/*/!* 横线 *!/*/}
+      {/*<View className="boldLine"/>*/}
 
-      {/* 充值 */}
-      <View
-        className='bg_f5'
-        onClick={topUPGetMember}
-      >
-        <View className='TopUP'>
-          <View style="flex-direction:row;align-items:center;display:flex;">
-            <Image src={diamond} className="diamondImg"/>
-            <Text className='leftTopUp'>加入有地道会员·每月领99元专享券</Text>
-          </View>
-          <Text className='rightTopUp'>丨1折开卡</Text>
-        </View>
-      </View>
+      {/*/!* 充值 *!/*/}
+      {/*<View*/}
+      {/*  className='bg_f5'*/}
+      {/*  onClick={topUPGetMember}*/}
+      {/*>*/}
+      {/*  <View className='TopUP'>*/}
+      {/*    <View style="flex-direction:row;align-items:center;display:flex;">*/}
+      {/*      <Image src={diamond} className="diamondImg"/>*/}
+      {/*      <Text className='leftTopUp'>加入有地道会员·每月领99元专享券</Text>*/}
+      {/*    </View>*/}
+      {/*    <Text className='rightTopUp'>丨1折开卡</Text>*/}
+      {/*  </View>*/}
+      {/*</View>*/}
 
-      {/* 横线 */}
-      <View className="boldLine"/>
+      {/*/!* 横线 *!/*/}
+      {/*<View className="boldLine"/>*/}
 
-      {/* 特色专区 */}
-      <SpecialZone imageUrl={state.projectItems1.data}
-                   projectItems2={state.projectItems2.data}
-                   projectItems3={state.projectItems3.data}/>
+      {/*/!* 特色专区 *!/*/}
+      {/*<SpecialZone imageUrl={state.projectItems1.data}*/}
+      {/*             projectItems2={state.projectItems2.data}*/}
+      {/*             projectItems3={state.projectItems3.data}/>*/}
 
-      {/* 横线 */}
-      <View className="boldLine"/>
+      {/*/!* 横线 *!/*/}
+      {/*<View className="boldLine"/>*/}
 
-      {/* 为你优选 */}
-      <OptimizationBox itemList={state.items.data}/>
+      {/*/!* 为你优选 *!/*/}
+      {/*<OptimizationBox itemList={state.items.data}/>*/}
 
-      <ShoppingScan lookForward={lookForward}/>
+      {/*<ShoppingScan lookForward={lookForward}/>*/}
     </View>
   );
 }

@@ -78,17 +78,17 @@ export default {
     ],
   },
   subPackages: [
-    {
-      "root": "pages/login",
-      "pages": [
-        "index",
-      ]
-    },
-    {
-      "root": "pages/auth",
-      "pages": [
-        "login/index",
-      ]
-    },
+    //{
+    //  "root": "pages/login",
+    //  "pages": [
+    //    "index",
+    //  ]
+    //},
+    //{
+    //  "root": "pages/auth",
+    //  "pages": [
+    //    "login/index",
+     // ]
+    //},
   ],
 };

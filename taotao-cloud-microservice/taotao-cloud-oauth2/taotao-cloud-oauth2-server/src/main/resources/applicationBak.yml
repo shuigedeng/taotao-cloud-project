@@ -1,0 +1,36 @@
+server:
+  port: 9000
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    servlet:
+      load-on-startup: 1
+  thymeleaf:
+    prefix: classpath:/views/
+    suffix: .html
+    cache: false
+  security:
+    oauth2:
+      resourceserver:
+##        jwt:
+##          public-key-location: classpath:key.public
+##          jws-algorithm: RS512
+##          issuer-uri: http://127.0.0.1:9000
+##        opaquetoken:
+##          introspection-uri: http://localhost:9000/oauth/check_token
+##          client-id: abc
+##          client-secret: abc
+        jwt:
+          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
+
+logging:
+  level:
+    org.springframework.security: debug
+

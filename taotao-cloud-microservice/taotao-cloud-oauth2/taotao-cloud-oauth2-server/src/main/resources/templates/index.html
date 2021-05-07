@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Spring Security OAuth 2.0 Sample</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.css}"/>
+</head>
+<body>
+<div th:fragment="header">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        登录ID: <span sec:authentication="name">User</span>
+                        <a id="sign-out" href="javascript:document.logoutForm.submit()">退出登录</a>
+                        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                            <input hidden type="submit" value="Sign Out"/>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <h2 class="form-signin-heading">Login with OAuth 2.0</h2>
+        <table class="table table-striped">
+            <tr th:each="user : ${AuthUserOauth2}">
+                <td>
+                    <span th:text="${user.key}">name</span>
+                    <a th:if="${user.value == null}" th:href="@{'/oauth2/bind/' + ${user.key}}"> 绑定 </a>
+                    <div th:if="${user.value != null}">
+                        <span th:text="${user.value.nickname}"></span>
+                        <form th:action="@{'/oauth2/unbind/' + ${user.key}  + '/' + ${user.value.principalName}}"
+                              method="post">
+                            <button type="submit" class="btn btn-primary">解绑</button>
+                        </form>
+                        <!--                        <a th:onclick="unbind([[${user.value.principalName}]]);"> 解绑 </a>-->
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<script src="/webjars/jquery/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script>
+    function unbind(empId) {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $.ajax({
+            url: "/oauth2/unbind/" + empId,
+            type: "POST",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (result) {
+                console.log(result)
+            }
+        })
+    }
+</script>
+</body>
+</html>

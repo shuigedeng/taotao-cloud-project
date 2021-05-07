@@ -1,36 +1,86 @@
 server:
-  port: 9000
-  http2:
-    enabled: true
-  undertow:
-    buffer-size: 2048
-    direct-buffers: true
+  port: 6628
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  mvc:
-    servlet:
-      load-on-startup: 1
   thymeleaf:
-    prefix: classpath:/views/
-    suffix: .html
     cache: false
+  application:
+    name: auth
   security:
     oauth2:
+      authorization:
+        client:
+          - client-id: mall
+            client-secret: secret
+            redirect-uri: https://www.baidu.com
+            scope:
+              - mall:read
+              - mall:write
+          - client-id: admin
+            client-secret: secret
+            redirect-uri: http://localhost:6222/login/oauth2/code/admin
+      client:
+        registration:
+          github:
+            client-id: xxxx
+            client-secret: xxxx
+          gitee:
+            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            authorization-grant-type: authorization_code
+            redirect-uri: http://8755af47ae2a.ngrok.io/login/oauth2/code/gitee
+          wechat:
+            client-id: xxx
+            client-secret: xxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: https://xxx/login/oauth2/code/wx
+            scope: snsapi_login
+            client-authentication-method: post
+          qq:
+            client-id: xxx
+            client-secret: xxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: https://xxx/login/oauth2/code/qq
+            scope: get_user_info
+            client-authentication-method: post
+        provider:
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+          wechat:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+            user-info-authentication-method: form
+          qq:
+            authorization-uri: https://graph.qq.com/oauth2.0/authorize
+            token-uri: https://graph.qq.com/oauth2.0/token
+            user-info-uri: https://graph.qq.com/oauth2.0/me
+            user-info-authentication-method: form
       resourceserver:
-##        jwt:
-##          public-key-location: classpath:key.public
-##          jws-algorithm: RS512
-##          issuer-uri: http://127.0.0.1:9000
-##        opaquetoken:
-##          introspection-uri: http://localhost:9000/oauth/check_token
-##          client-id: abc
-##          client-secret: abc
+        #        jwt:
+        #          public-key-location: classpath:key.public
+        #          jws-algorithm: RS512
+        #        opaquetoken:
+        #          introspection-uri: http://localhost:9000/oauth/check_token
+        #          client-id: abc
+        #          client-secret: abc
         jwt:
-          jwk-set-uri: http://127.0.0.1:9000/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:6228/oauth2/jwks
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://register-server:8848/eureka/
 
 logging:
   level:
-    org.springframework.security: debug
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+#    org.springframework.boot.autoconfigure: DEBUG
 
+temp:
+  redirect_uri: http://localhost:8008/mall/login/oauth2/code/mall
