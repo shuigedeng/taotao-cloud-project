@@ -17,7 +17,7 @@ package com.taotao.cloud.oauth2.client.security;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -26,6 +26,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * @author zyc
  */
 public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException {
