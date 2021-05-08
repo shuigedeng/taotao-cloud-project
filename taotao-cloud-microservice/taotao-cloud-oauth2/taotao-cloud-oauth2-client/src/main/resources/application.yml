@@ -11,16 +11,25 @@ spring:
     oauth2:
       client:
         provider:
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
           qq:
             authorizationUri: https://graph.qq.com/oauth2.0/authorize
             tokenUri: https://graph.qq.com/oauth2.0/token
             userInfoUri: https://graph.qq.com/user/get_user_info
             userNameAttribute: nickname
         registration:
+          gitee:
+            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            authorization-grant-type: authorization_code
+            redirect-uri: http://9da31b1edd0e.ngrok.io/api/login/oauth2/code/gitee
           github:
             clientId: Iv1.f4c52616ef60f7be
-            clientSecret: fd586fca34671a8a95ac6f8b5cfeb3fd149e57ca
-            redirectUri: http://localhost/api/login/oauth2/code/github
+            clientSecret: e2c1524fefec9a18a459fb863ceaa8655f7899f1
+            redirectUri: http://0b817f4ac311.ngrok.io/api/login/oauth2/code/github
           qq:
             clientId: clientId
             clientSecret: clientSecret

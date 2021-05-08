@@ -45,7 +45,6 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationManagerResolver;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -71,6 +70,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtBea
 import org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.introspection.NimbusOpaqueTokenIntrospector;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 import org.springframework.util.StreamUtils;
@@ -102,7 +102,7 @@ public class Oauth2ClientConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests(authorizeRequests -> authorizeRequests
 				.mvcMatchers("/messages/**").access("hasAuthority('SCOPE_message.read')")
-				.antMatchers("/api/login/oauth2/code/*").permitAll()
+				.antMatchers("/favicon.ico ").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin(formLogin -> {
@@ -111,7 +111,7 @@ public class Oauth2ClientConfiguration extends WebSecurityConfigurerAdapter {
 				}
 			)
 			// 通过httpSession保存认证信息
-//			.addFilter(new SecurityContextPersistenceFilter())
+			.addFilter(new SecurityContextPersistenceFilter())
 			// 配置OAuth2登录认证
 			.oauth2Login(oauth2LoginConfigurer -> oauth2LoginConfigurer
 				// 认证成功后的处理器
@@ -134,7 +134,6 @@ public class Oauth2ClientConfiguration extends WebSecurityConfigurerAdapter {
 					.userService(new CustomizedOauth2UserService())
 				)
 			)
-			.oauth2Client(Customizer.withDefaults())
 			// 配置匿名用户过滤器
 			.anonymous()
 			.and()
