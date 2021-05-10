@@ -18,9 +18,17 @@ spring:
               - mall:write
           - client-id: admin
             client-secret: secret
-            redirect-uri: http://localhost:6222/login/oauth2/code/admin
+            redirect-uri: http://localhost:6628/login/oauth2/code/admin
       client:
         registration:
+          mall:
+            provider: mall
+            client-id: mall
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            # 必须和auth-server中设置 一模一样!!
+            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
+            scope: mall.read,mall.write
           github:
             client-id: xxxx
             client-secret: xxxx
@@ -44,6 +52,13 @@ spring:
             scope: get_user_info
             client-authentication-method: post
         provider:
+          mall:
+            # 对外的授权服务中心地址
+            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
+            token-uri: http://127.0.0.1:6628/oauth2/token
+            # 写网关下的暴露地址
+            user-info-uri: http://localhost:8008/upms/check_token
+            user-name-attribute: name
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
             token-uri: https://gitee.com/oauth/token
