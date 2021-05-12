@@ -33,6 +33,7 @@ import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Set;
@@ -48,6 +49,9 @@ import java.util.Set;
 public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean {
 
 	private static final String AUTH_KEY = "Authorization";
+
+	@Value("${spring.application.name}")
+	private  String application ;
 
 	private BeanFactory beanFactory;
 
@@ -73,29 +77,18 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
-		System.out.println("");
-		return new OpenApiCustomiser() {
-			@Override
-			public void customise(OpenAPI openApi) {
-				final Paths paths = openApi.getPaths();
+		return openApi -> {
+			final Paths paths = openApi.getPaths();
 
-				Paths newPaths = new Paths();
-				paths.keySet().forEach(e -> {
-					newPaths.put("/taotao-cloud-uc-service" + e, paths.get(e));
-				});
+			Paths newPaths = new Paths();
+			paths.keySet().forEach(e -> newPaths.put("/" + application + e, paths.get(e)));
+			openApi.setPaths(newPaths);
 
-				openApi.setPaths(newPaths);
-				openApi.getPaths().values().stream()
-					.flatMap(pathItem -> pathItem.readOperations().stream())
-					.forEach(operation -> operation.addParametersItem(
-						new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
-			}
+			openApi.getPaths().values().stream()
+				.flatMap(pathItem -> pathItem.readOperations().stream())
+				.forEach(operation -> operation.addParametersItem(
+					new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
 		};
-
-//		return openApi -> openApi.getPaths().values().stream()
-//			.flatMap(pathItem -> pathItem.readOperations().stream())
-//			.forEach(operation -> operation.addParametersItem(
-//				new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
 	}
 
 	@Bean
