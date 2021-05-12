@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.utils;
 
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.uc.api.vo.role.RoleVO;
 import com.taotao.cloud.uc.biz.entity.SysRole;
 

@@ -17,9 +17,9 @@ package com.taotao.cloud.sentinel;
 
 import com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;

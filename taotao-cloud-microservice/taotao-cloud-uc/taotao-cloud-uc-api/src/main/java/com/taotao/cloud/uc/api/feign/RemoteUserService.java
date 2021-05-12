@@ -1,13 +1,12 @@
 package com.taotao.cloud.uc.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.model.SecurityUser;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl;
 import com.taotao.cloud.uc.api.vo.user.UserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**

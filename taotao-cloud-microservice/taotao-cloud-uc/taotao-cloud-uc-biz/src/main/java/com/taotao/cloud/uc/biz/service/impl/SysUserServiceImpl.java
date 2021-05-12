@@ -5,7 +5,6 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.utils.AuthUtil;
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.uc.api.dto.user.UserRoleDTO;
 import com.taotao.cloud.uc.api.query.user.UserPageQuery;
@@ -15,17 +14,16 @@ import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.biz.repository.SysUserRepository;
 import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
 import com.taotao.cloud.uc.biz.service.ISysUserService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * 用户表 服务实现类
@@ -125,16 +123,18 @@ public class SysUserServiceImpl implements ISysUserService {
 		if (!Objects.equals(restPasswordPhone, phone)) {
 			throw new BusinessException(ResultEnum.USER_PHONE_INCONSISTENT_ERROR);
 		}
-		BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
-
-		String oldPassword = restPasswordDTO.getOldPassword();
-		String password = sysUser.getPassword();
-		if (!AuthUtil.validatePass(oldPassword, password)) {
-			throw new BusinessException(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
-		}
+//		BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
+//		BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
+//
+//		String oldPassword = restPasswordDTO.getOldPassword();
+//		String password = sysUser.getPassword();
+//		if (!AuthUtil.validatePass(oldPassword, password)) {
+//			throw new BusinessException(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
+//		}
 
 		String newPassword = restPasswordDTO.getNewPassword();
-		return sysUserRepository.updatePassword(id, passwordEncoder.encode(newPassword));
+//		return sysUserRepository.updatePassword(id, passwordEncoder.encode(newPassword));
+		return true;
 	}
 
 	@Override

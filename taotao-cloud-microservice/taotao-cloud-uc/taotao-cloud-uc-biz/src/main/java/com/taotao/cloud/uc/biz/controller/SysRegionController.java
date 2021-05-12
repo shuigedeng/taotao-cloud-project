@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO;
 import com.taotao.cloud.uc.biz.service.SysRegionService;

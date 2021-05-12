@@ -19,8 +19,8 @@ import cn.hutool.http.ContentType;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class UrlBlockHandler implements BlockExceptionHandler {
 
 		response.setContentType(ContentType.JSON.toString());
 		response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
-		response.getWriter().print(JSONUtil.toJsonStr(Result.failed(e.getMessage())));
+		response.getWriter().print(JSONUtil.toJsonStr(Result.fail(e.getMessage())));
 	}
 
 }

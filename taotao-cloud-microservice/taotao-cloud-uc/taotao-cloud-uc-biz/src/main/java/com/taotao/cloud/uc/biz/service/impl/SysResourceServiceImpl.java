@@ -8,12 +8,6 @@ import com.taotao.cloud.common.enums.ResourceTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
-//import com.taotao.cloud.order.api.dto.OrderDTO;
-//import com.taotao.cloud.order.api.feign.RemoteOrderService;
-//import com.taotao.cloud.order.api.vo.OrderVO;
-//import com.taotao.cloud.product.api.dto.ProductDTO;
-//import com.taotao.cloud.product.api.feign.RemoteProductService;
 import com.taotao.cloud.uc.api.query.resource.ResourcePageQuery;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
 import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
@@ -24,14 +18,6 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
-import io.seata.spring.annotation.GlobalTransactional;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -41,6 +27,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+//import com.taotao.cloud.order.api.dto.OrderDTO;
+//import com.taotao.cloud.order.api.feign.RemoteOrderService;
+//import com.taotao.cloud.order.api.vo.OrderVO;
+//import com.taotao.cloud.product.api.dto.ProductDTO;
+//import com.taotao.cloud.product.api.feign.RemoteProductService;
 
 /**
  * 资源表服务实现类
@@ -194,7 +191,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	}
 
 	@Override
-	@GlobalTransactional(name = "fsp-create-order", rollbackFor = Exception.class)
+//	@GlobalTransactional(name = "fsp-create-order", rollbackFor = Exception.class)
 	public Boolean testSeata() {
 		LogUtil.info("1.添加资源信息");
 		// ResourceDTO resourceDTO = ResourceDTO.builder()

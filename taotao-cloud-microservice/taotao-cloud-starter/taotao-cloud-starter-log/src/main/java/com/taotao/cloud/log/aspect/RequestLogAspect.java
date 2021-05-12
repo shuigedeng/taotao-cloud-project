@@ -24,9 +24,8 @@ import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.AddrUtil;
-import com.taotao.cloud.core.utils.SecurityUtil;
-import com.taotao.cloud.core.utils.WebUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.log.event.RequestLogEvent;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.properties.RequestLogProperties;
@@ -117,8 +116,8 @@ public class RequestLogAspect {
 			requestLog.setApplicationName(applicationName);
 			requestLog.setRequestStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			requestLog.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
-			requestLog.setRequestIp(AddrUtil.getRemoteAddr(request));
-			requestLog.setClientId(SecurityUtil.getClientId());
+			requestLog.setRequestIp(RequestUtil.getRemoteAddr(request));
+//			requestLog.setClientId(SecurityUtil.getClientId());
 			requestLog.setUserId(SecurityUtil.getUserId());
 			requestLog.setUsername(SecurityUtil.getUsername());
 			requestLog.setRequestUrl(URLUtil.getPath(request.getRequestURI()));
@@ -129,9 +128,9 @@ public class RequestLogAspect {
 			requestLog.setClasspath(joinPoint.getTarget().getClass().getName());
 			String name = joinPoint.getSignature().getName();
 			requestLog.setRequestMethodName(name);
-			requestLog.setRequestParams(JsonUtil.toJSONString(WebUtil.getAllRequestParam(request)));
+			requestLog.setRequestParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request)));
 			requestLog
-				.setRequestHeaders(JsonUtil.toJSONString(WebUtil.getAllRequestHeaders(request)));
+				.setRequestHeaders(JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
 			requestLog.setRequestType(LogUtil.getOperateType(name));
 			requestLog.setDescription(LoggerUtil.getControllerMethodDescription(joinPoint));
 			requestLog.setSource(DEFAULT_SOURCE);

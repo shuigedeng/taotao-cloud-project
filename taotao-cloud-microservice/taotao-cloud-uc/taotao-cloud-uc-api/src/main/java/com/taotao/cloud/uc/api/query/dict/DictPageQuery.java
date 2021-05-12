@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.uc.api.query.dict;
 
-import com.taotao.cloud.core.model.BasePageQuery;
+import com.taotao.cloud.common.model.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

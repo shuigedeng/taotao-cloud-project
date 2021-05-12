@@ -23,24 +23,31 @@ import cn.hutool.db.Entity;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.handlers.AbstractSqlParserHandler;
 import com.taotao.cloud.common.exception.CheckedException;
-import com.taotao.cloud.core.model.SecurityUser;
-import com.taotao.cloud.core.utils.SecurityUtil;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.data.mybatis.plus.enums.DataScopeTypeEnum;
+import java.sql.Connection;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.stream.Collectors;
+import javax.sql.DataSource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.security.core.GrantedAuthority;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Mybatis 拦截器 主要用于数据权限拦截

@@ -33,7 +33,7 @@ public class SysDictServiceImpl implements ISysDictService {
 	private final ISysDictItemService sysDictItemService;
 
 	private final QSysDict SYS_DICT = QSysDict.sysDict;
-	private final BooleanExpression PREDICATE = SYS_DICT.delFlag.eq(false);
+	private final BooleanExpression PREDICATE = SYS_DICT.eq(SYS_DICT);
 	private final OrderSpecifier<Integer> SORT_DESC = SYS_DICT.sortNum.desc();
 	private final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = SYS_DICT.createTime
 		.desc();

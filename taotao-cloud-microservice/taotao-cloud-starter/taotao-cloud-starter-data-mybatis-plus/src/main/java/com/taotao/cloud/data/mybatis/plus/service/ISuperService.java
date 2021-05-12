@@ -18,7 +18,7 @@ package com.taotao.cloud.data.mybatis.plus.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.core.lock.DistributedLock;
+import com.taotao.cloud.common.lock.DistributedLock;
 
 /**
  * service接口父类

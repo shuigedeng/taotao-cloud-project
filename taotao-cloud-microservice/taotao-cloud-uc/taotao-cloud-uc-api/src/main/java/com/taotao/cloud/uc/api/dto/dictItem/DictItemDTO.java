@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.api.dto.dictItem;
 
-import com.taotao.cloud.core.mvc.constraints.IntEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
@@ -60,6 +59,6 @@ public class DictItemDTO implements Serializable {
 
 	@Schema(description = "状态 1不启用 2启用", required = true)
 	@NotBlank(message = "字典状态不能为空")
-	@IntEnums(value = {1, 2})
+//	@IntEnums(value = {1, 2})
 	private Integer status;
 }

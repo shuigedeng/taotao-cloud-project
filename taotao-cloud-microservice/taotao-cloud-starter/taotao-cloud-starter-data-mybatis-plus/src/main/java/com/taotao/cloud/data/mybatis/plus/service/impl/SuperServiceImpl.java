@@ -26,10 +26,9 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.core.lock.DistributedLock;
-import com.taotao.cloud.core.lock.ZLock;
+import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.lock.ZLock;
 import com.taotao.cloud.data.mybatis.plus.service.ISuperService;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;

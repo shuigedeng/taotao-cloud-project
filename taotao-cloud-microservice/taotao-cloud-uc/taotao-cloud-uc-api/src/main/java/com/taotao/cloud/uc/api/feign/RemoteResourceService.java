@@ -1,15 +1,14 @@
 package com.taotao.cloud.uc.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl;
 import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
+import java.util.List;
+import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * 远程调用后台资源模块

@@ -2,10 +2,10 @@ package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.model.PageModel;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.model.SecurityUser;
-import com.taotao.cloud.core.utils.SecurityUtil;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.uc.api.dto.user.UserDTO;

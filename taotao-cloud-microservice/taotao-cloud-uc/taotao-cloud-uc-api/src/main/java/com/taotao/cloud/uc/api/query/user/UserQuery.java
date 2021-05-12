@@ -1,6 +1,5 @@
 package com.taotao.cloud.uc.api.query.user;
 
-import com.taotao.cloud.core.mvc.constraints.IntEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -42,11 +41,11 @@ public class UserQuery implements Serializable {
 	private String email;
 
 	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户")
-	@IntEnums(value = {1, 2, 3})
+//	@IntEnums(value = {1, 2, 3})
 	private Integer type;
 
 	@Schema(description = "性别 1男 2女 0未知")
-	@IntEnums(value = {0, 1, 2})
+//	@IntEnums(value = {0, 1, 2})
 	private Integer sex;
 
 	@Schema(description = "部门id")

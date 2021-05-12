@@ -1,15 +1,13 @@
 package com.taotao.cloud.uc.api.dto.resource;
 
-import com.taotao.cloud.core.mvc.constraints.IntEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 /**
  * 资源DTO
@@ -33,7 +31,7 @@ public class ResourceDTO implements Serializable {
 
 	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮", required = true)
 	@NotBlank(message = "资源类型不能超过为空")
-	@IntEnums(value = {1, 2, 3})
+//	@IntEnums(value = {1, 2, 3})
 	private Byte type;
 
 	@Schema(description = "权限标识")

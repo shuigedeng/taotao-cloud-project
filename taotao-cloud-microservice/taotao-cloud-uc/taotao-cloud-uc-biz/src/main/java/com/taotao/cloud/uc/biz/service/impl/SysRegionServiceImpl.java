@@ -15,13 +15,9 @@
  */
 package com.taotao.cloud.uc.biz.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO;
-import com.taotao.cloud.uc.biz.entity.SysRegion;
 import com.taotao.cloud.uc.biz.service.SysRegionService;
-import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,72 +30,74 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRegionServiceImpl implements SysRegionService {
 
-	@Autowired
-	private SysRegionMapper sysRegionMapper;
+//	@Autowired
+//	private SysRegionMapper sysRegionMapper;
 
 	@Override
 	public List<QueryRegionByParentIdVO> queryRegionByParentId(Long parentId) {
-		LambdaQueryWrapper<SysRegion> query = new LambdaQueryWrapper<>();
-		query.eq(SysRegion::getParentId, parentId);
-		List<SysRegion> sysRegions = sysRegionMapper.selectList(query);
-		List<QueryRegionByParentIdVO> result = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
-			sysRegions.forEach(sysRegion -> {
-				QueryRegionByParentIdVO vo = new QueryRegionByParentIdVO();
-				vo.setId(sysRegion.getId());
-				vo.setLabel(sysRegion.getName());
-				vo.setValue(sysRegion.getCode());
-				vo.setChildren(new ArrayList<>());
-				result.add(vo);
-			});
-		}
-		return result;
+//		LambdaQueryWrapper<SysRegion> query = new LambdaQueryWrapper<>();
+//		query.eq(SysRegion::getParentId, parentId);
+//		List<SysRegion> sysRegions = sysRegionMapper.selectList(query);
+//		List<QueryRegionByParentIdVO> result = new ArrayList<>();
+//		if (CollectionUtil.isNotEmpty(sysRegions)) {
+//			sysRegions.forEach(sysRegion -> {
+//				QueryRegionByParentIdVO vo = new QueryRegionByParentIdVO();
+//				vo.setId(sysRegion.getId());
+//				vo.setLabel(sysRegion.getName());
+//				vo.setValue(sysRegion.getCode());
+//				vo.setChildren(new ArrayList<>());
+//				result.add(vo);
+//			});
+//		}
+//		return result;
+		return null;
 	}
 
 	@Override
 	public List<QueryRegionByParentIdVO> tree() {
-		LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(SysRegion::getParentId, 1);
-
-		// 得到一级节点资源列表
-		List<SysRegion> sysRegions = sysRegionMapper.selectList(wrapper);
-		List<QueryRegionByParentIdVO> vos = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
-			sysRegions.forEach(sysRegion -> {
-				QueryRegionByParentIdVO vo = new QueryRegionByParentIdVO();
-				vo.setId(sysRegion.getId());
-				vo.setLabel(sysRegion.getName());
-				vo.setValue(sysRegion.getCode());
-				vo.setChildren(new ArrayList<>());
-				vos.add(vo);
-			});
-		}
-
-		if (vos.size() > 0) {
-			vos.forEach(this::findAllChild);
-		}
-		return vos;
+//		LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
+//		wrapper.eq(SysRegion::getParentId, 1);
+//
+//		// 得到一级节点资源列表
+//		List<SysRegion> sysRegions = sysRegionMapper.selectList(wrapper);
+//		List<QueryRegionByParentIdVO> vos = new ArrayList<>();
+//		if (CollectionUtil.isNotEmpty(sysRegions)) {
+//			sysRegions.forEach(sysRegion -> {
+//				QueryRegionByParentIdVO vo = new QueryRegionByParentIdVO();
+//				vo.setId(sysRegion.getId());
+//				vo.setLabel(sysRegion.getName());
+//				vo.setValue(sysRegion.getCode());
+//				vo.setChildren(new ArrayList<>());
+//				vos.add(vo);
+//			});
+//		}
+//
+//		if (vos.size() > 0) {
+//			vos.forEach(this::findAllChild);
+//		}
+//		return vos;
+		return null;
 	}
 
 	public void findAllChild(QueryRegionByParentIdVO vo) {
-		LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(SysRegion::getParentId, vo.getId());
-		List<SysRegion> sysRegions = sysRegionMapper.selectList(wrapper);
-		List<QueryRegionByParentIdVO> regions = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
-			sysRegions.forEach(sysRegion -> {
-				QueryRegionByParentIdVO region = new QueryRegionByParentIdVO();
-				region.setId(sysRegion.getId());
-				region.setLabel(sysRegion.getName());
-				region.setValue(sysRegion.getCode());
-				region.setChildren(new ArrayList<>());
-				regions.add(region);
-			});
-		}
-
-		vo.setChildren(regions);
-		if (regions.size() > 0) {
-			regions.forEach(this::findAllChild);
-		}
+//		LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
+//		wrapper.eq(SysRegion::getParentId, vo.getId());
+//		List<SysRegion> sysRegions = sysRegionMapper.selectList(wrapper);
+//		List<QueryRegionByParentIdVO> regions = new ArrayList<>();
+//		if (CollectionUtil.isNotEmpty(sysRegions)) {
+//			sysRegions.forEach(sysRegion -> {
+//				QueryRegionByParentIdVO region = new QueryRegionByParentIdVO();
+//				region.setId(sysRegion.getId());
+//				region.setLabel(sysRegion.getName());
+//				region.setValue(sysRegion.getCode());
+//				region.setChildren(new ArrayList<>());
+//				regions.add(region);
+//			});
+//		}
+//
+//		vo.setChildren(regions);
+//		if (regions.size() > 0) {
+//			regions.forEach(this::findAllChild);
+//		}
 	}
 }

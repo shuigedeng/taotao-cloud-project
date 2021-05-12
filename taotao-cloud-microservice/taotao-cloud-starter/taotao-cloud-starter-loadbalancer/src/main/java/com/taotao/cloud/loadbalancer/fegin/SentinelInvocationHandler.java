@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.loadbalancer.fegin;
 
+import static feign.Util.checkNotNull;
+
 import com.alibaba.cloud.sentinel.feign.SentinelContractHolder;
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.EntryType;
@@ -22,22 +24,19 @@ import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.Tracer;
 import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import feign.Feign;
 import feign.InvocationHandlerFactory;
 import feign.MethodMetadata;
 import feign.Target;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.openfeign.FallbackFactory;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static feign.Util.checkNotNull;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler}
@@ -137,7 +136,7 @@ public class SentinelInvocationHandler implements InvocationHandler {
 						// 若是R类型 执行自动降级返回R
 						if (Result.class == method.getReturnType()) {
 							log.error("feign 服务间调用异常", ex);
-							return Result.failed(ex.getLocalizedMessage());
+							return Result.fail(ex.getLocalizedMessage());
 						} else {
 							throw ex;
 						}

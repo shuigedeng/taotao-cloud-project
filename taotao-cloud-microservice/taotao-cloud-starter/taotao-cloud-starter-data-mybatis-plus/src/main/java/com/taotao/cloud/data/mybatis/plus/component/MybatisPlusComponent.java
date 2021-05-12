@@ -22,8 +22,8 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.BeanUtil;
 import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import com.taotao.cloud.data.mybatis.plus.handler.DateMetaObjectHandler;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
@@ -76,8 +76,8 @@ public class MybatisPlusComponent implements InitializingBean {
 		TenantLineInnerInterceptor tenantLineInnerInterceptor = new TenantLineInnerInterceptor();
 		boolean enableTenant = tenantProperties.getEnabled();
 
-		TenantLineHandler tenantHandler = BeanUtil.getBean(TenantLineHandler.class, false);
-		ISqlParserFilter sqlParserFilter = BeanUtil.getBean(ISqlParserFilter.class, false);
+		TenantLineHandler tenantHandler = ContextUtil.getBean(TenantLineHandler.class, false);
+		ISqlParserFilter sqlParserFilter = ContextUtil.getBean(ISqlParserFilter.class, false);
 
 		if (enableTenant && tenantHandler != null && sqlParserFilter != null) {
 			tenantLineInnerInterceptor.setTenantLineHandler(tenantHandler);

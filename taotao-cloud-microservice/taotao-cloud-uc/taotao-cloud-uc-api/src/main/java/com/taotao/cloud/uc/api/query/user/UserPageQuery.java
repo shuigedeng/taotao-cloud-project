@@ -1,8 +1,12 @@
 package com.taotao.cloud.uc.api.query.user;
 
-import com.taotao.cloud.core.model.BasePageQuery;
+import com.taotao.cloud.common.model.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 

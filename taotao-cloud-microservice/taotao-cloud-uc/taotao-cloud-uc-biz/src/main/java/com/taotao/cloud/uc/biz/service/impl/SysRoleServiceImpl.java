@@ -4,7 +4,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.uc.api.dto.role.RoleDTO;
 import com.taotao.cloud.uc.api.dto.role.RoleResourceDTO;
 import com.taotao.cloud.uc.api.query.role.RolePageQuery;
@@ -13,16 +13,15 @@ import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.biz.repository.SysRoleRepository;
 import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * 角色表服务实现类

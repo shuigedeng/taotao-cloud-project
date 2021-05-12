@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.jpa.bean;
 
-import com.taotao.cloud.core.model.SecurityUser;
+import com.taotao.cloud.common.model.SecurityUser;
 import java.util.Optional;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -263,7 +263,7 @@ public class RequestUtil {
 	 * @author dengtao
 	 * @since 2021/2/25 16:58
 	 */
-	public String getRemoteAddr(HttpServletRequest request) {
+	public static String getRemoteAddr(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
 		if (isEmptyIp(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
