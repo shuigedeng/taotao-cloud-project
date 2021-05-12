@@ -15,13 +15,6 @@
  */
 package com.taotao.cloud.security;
 
-import com.taotao.cloud.security.properties.AuthProperties;
-import com.taotao.cloud.security.properties.PermitProperties;
-import com.taotao.cloud.security.properties.RenewProperties;
-import com.taotao.cloud.security.properties.SecurityProperties;
-import com.taotao.cloud.security.properties.SmsCodeProperties;
-import com.taotao.cloud.security.properties.TokenStoreProperties;
-import com.taotao.cloud.security.properties.UrlPermissionProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -32,13 +25,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({
-	TokenStoreProperties.class,
-	SecurityProperties.class,
-	UrlPermissionProperties.class,
-	SmsCodeProperties.class,
-	AuthProperties.class,
-	PermitProperties.class,
-	RenewProperties.class
+//	TokenStoreProperties.class,
+//	SecurityProperties.class,
+//	UrlPermissionProperties.class,
+//	SmsCodeProperties.class,
+//	AuthProperties.class,
+//	PermitProperties.class,
+//	RenewProperties.class
 })
 public class PropertiesAutoConfiguration {
 

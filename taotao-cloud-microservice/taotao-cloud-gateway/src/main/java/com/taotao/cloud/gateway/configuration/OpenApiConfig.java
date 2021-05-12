@@ -20,17 +20,11 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.SwaggerUiConfigParameters;
-import org.springdoc.core.SwaggerUiConfigProperties;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
-import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -66,10 +60,10 @@ public class OpenApiConfig {
 	}
 
 	@Bean
-	public OpenAPI customOpenAPI(@Value("${springdoc.version}") String appVersion) {
+	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
 			.components(new Components())
-			.info(new Info().title("Gateway API").version(appVersion)
+			.info(new Info().title("Gateway API").version("1.0")
 				.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
 }

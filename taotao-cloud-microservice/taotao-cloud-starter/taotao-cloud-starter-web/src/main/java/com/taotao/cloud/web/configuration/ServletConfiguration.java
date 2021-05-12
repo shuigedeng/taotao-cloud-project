@@ -15,13 +15,7 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.web.filter.LbIsolationFilter;
-import com.taotao.cloud.web.filter.TenantFilter;
-import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.properties.FilterProperties;
-import java.util.EnumSet;
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -46,17 +40,18 @@ public class ServletConfiguration implements WebApplicationInitializer {
 //		myServlet.setLoadOnStartup(0);
 
 		//注册filter
-		Dynamic lbIsolationFilter = servletContext
-			.addFilter("lbIsolationFilter", LbIsolationFilter.class);
-		lbIsolationFilter.addMappingForUrlPatterns(
-			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
-
-		Dynamic myFilter = servletContext.addFilter("myFilter", TenantFilter.class);
-		myFilter.addMappingForUrlPatterns(
-			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
-
-		Dynamic traceFilter = servletContext.addFilter("traceFilter", TraceFilter.class);
-		traceFilter.addMappingForUrlPatterns(
-			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
+//		Dynamic lbIsolationFilter = servletContext
+//			.addFilter("lbIsolationFilter", LbIsolationFilter.class);
+//		lbIsolationFilter.addMappingForUrlPatterns(
+//			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
+//
+//		Dynamic myFilter = servletContext.addFilter("myFilter", TenantFilter.class);
+//		myFilter.addMappingForUrlPatterns(
+//			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
+//
+//		Dynamic traceFilter = servletContext.addFilter("traceFilter", TraceFilter.class);
+//		traceFilter.addMappingForUrlPatterns(
+//			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
 	}
+
 }

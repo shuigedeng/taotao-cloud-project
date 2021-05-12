@@ -1,6 +1,6 @@
 dependencies {
+	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 //	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
 	api 'javax.servlet:javax.servlet-api'
 
@@ -11,7 +11,6 @@ dependencies {
 //	api  'org.springframework.security:spring-security-oauth2-client'
 
 	api 'org.springframework.boot:spring-boot-starter-security'
-	api 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
 	api 'org.apache.commons:commons-collections4'

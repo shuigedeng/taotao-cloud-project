@@ -2,6 +2,8 @@ package com.taotao.cloud.security.taox.oauth.resource;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.security.security.CustomizedAccessDeniedHandler;
+import com.taotao.cloud.security.security.CustomizedAuthenticationEntryPoint;
 import com.taotao.cloud.security.taox.annotation.NotAuth;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -44,7 +46,9 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 				registry.anyRequest().authenticated(); // 其他需要先登录再访问
 			})
 			// 资源服务器
-			.oauth2ResourceServer(config -> config.authenticationEntryPoint(this::commence)
+			.oauth2ResourceServer(config -> config
+				.authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
+				.accessDeniedHandler(new CustomizedAccessDeniedHandler())
 				.bearerTokenResolver(bearerTokenResolver())
 				.jwt());
 	}

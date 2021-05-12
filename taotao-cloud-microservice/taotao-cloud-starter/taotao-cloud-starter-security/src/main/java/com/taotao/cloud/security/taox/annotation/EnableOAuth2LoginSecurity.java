@@ -2,8 +2,6 @@ package com.taotao.cloud.security.taox.annotation;
 
 
 import com.taotao.cloud.security.taox.oauth.login.CustomLogoutSuccessHandler;
-import com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler;
-import com.taotao.cloud.security.taox.oauth.login.Oauth2LoginSecurityConfigurer;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -14,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Target(value = {java.lang.annotation.ElementType.TYPE})
 @Documented
 @Import({
-	Oauth2LoginSecurityConfigurer.class,
-	CustomOAuth2AuthenticationSuccessHandler.class,
+//	Oauth2LoginSecurityConfigurer.class,
+//	CustomOAuth2AuthenticationSuccessHandler.class,
 	CustomLogoutSuccessHandler.class
 })
 @EnableWebSecurity

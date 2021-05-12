@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -41,7 +40,7 @@ public class TenantFilter extends OncePerRequestFilter {
 			}
 
 			//保存租户id
-			LogUtil.info("获取到的租户ID为:{}", tenantId);
+//			LogUtil.info("获取到的租户ID为:{}", tenantId);
 			if (StringUtil.isNotBlank(tenantId)) {
 				TenantContextHolder.setTenant(tenantId);
 			} else {

@@ -166,6 +166,20 @@ spring:
     enabled: false
     sender:
       type: kafka
+
+  security:
+    oauth2:
+      resourceserver:
+        #        jwt:
+        #          public-key-location: classpath:key.public
+        #          jws-algorithm: RS512
+        #        opaquetoken:
+        #          introspection-uri: http://localhost:9000/oauth/check_token
+        #          client-id: abc
+        #          client-secret: abc
+        jwt:
+          jwk-set-uri: http://127.0.0.1:6628/oauth2/jwks
+
 #  shardingsphere:
 #    # shardingsphere 开发阶段关闭
 #    enabled: false
@@ -258,20 +272,20 @@ spring:
 #      sql:
 #        show: true
 
-security:
-  oauth2:
-    client:
-      clientId: taotao-cloud-uc-service
-      clientSecret: taotao-cloud-uc-service
-      userAuthorizationUri: http://taotao-cloud-uc-service/oauth/authorize
-      access-token-uri: http://taotao-cloud-uc-service/oauth/token
-    resource:
-      id: taotao-cloud-uc-service
-      prefer-token-info: false
-      token-info-uri: http://taotao-cloud-uc-service/oauth/check_token
-      user-info-uri: http://taotao-cloud-uc-service/oauth/user
-    authorization:
-      check-token-access: http://taotao-cloud-uc-service/oauth/check_token
+#security:
+#  oauth2:
+#    client:
+#      clientId: taotao-cloud-uc-service
+#      clientSecret: taotao-cloud-uc-service
+#      userAuthorizationUri: http://taotao-cloud-uc-service/oauth/authorize
+#      access-token-uri: http://taotao-cloud-uc-service/oauth/token
+#    resource:
+#      id: taotao-cloud-uc-service
+#      prefer-token-info: false
+#      token-info-uri: http://taotao-cloud-uc-service/oauth/check_token
+#      user-info-uri: http://taotao-cloud-uc-service/oauth/user
+#    authorization:
+#      check-token-access: http://taotao-cloud-uc-service/oauth/check_token
 
 #mybatis-plus:
 #  #  mapper-locations: classpath:/mapper/*Mapper.xml

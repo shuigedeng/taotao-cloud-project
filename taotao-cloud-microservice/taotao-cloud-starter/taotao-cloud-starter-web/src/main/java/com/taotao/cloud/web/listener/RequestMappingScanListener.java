@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -35,13 +34,15 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  *
  * @author pangu
  */
+
 public class RequestMappingScanListener implements ApplicationListener<ApplicationReadyEvent> {
 
 	private static final AntPathMatcher PATH_MATCH = new AntPathMatcher();
 	private final Set<String> ignoreApi = new HashSet<>();
 	private final RedisRepository redisRepository;
 
-	public RequestMappingScanListener(@Autowired RedisRepository redisRepository) {
+
+	public RequestMappingScanListener(RedisRepository redisRepository) {
 		this.redisRepository = redisRepository;
 		this.ignoreApi.add("/error");
 		this.ignoreApi.add("/swagger-resources/**");

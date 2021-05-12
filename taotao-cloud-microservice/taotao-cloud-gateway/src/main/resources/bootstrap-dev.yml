@@ -11,6 +11,9 @@ server:
 #    key-store-type: JKS
 #    key-store-password: 1234
 
+springdoc:
+  version: 1.1
+
 spring:
   cache:
     type: none
@@ -51,12 +54,12 @@ spring:
         enabled: false
     nacos:
       discovery:
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:host}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: 103.218.242.48:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
         metadata:
           version: 4
       config:
-        enabled: true
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:host}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        enabled: false
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:host}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace: f402a0ea-5ce7-43cc-b19b-3fb7ded6e46e
         file-extension: yml
     sentinel:

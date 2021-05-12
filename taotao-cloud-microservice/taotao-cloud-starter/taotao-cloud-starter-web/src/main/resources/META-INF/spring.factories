@@ -5,5 +5,5 @@ com.taotao.cloud.web.configuration.UndertowHttp2Configuration,\
 com.taotao.cloud.web.configuration.WebMvcConfiguration, \
 com.taotao.cloud.web.configuration.ServletConfiguration
 
-org.springframework.context.ApplicationListener=\
-com.taotao.cloud.web.listener.RequestMappingScanListener
+#org.springframework.context.ApplicationListener=\
+#com.taotao.cloud.web.listener.RequestMappingScanListener

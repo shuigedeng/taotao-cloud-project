@@ -32,9 +32,6 @@ public class Oauth2AuthenticationFailureHandler implements AuthenticationFailure
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-//        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-//        response.setContentType("text/plain");
-//        response.getWriter().write("认证失败");
 
 	    LogUtil.error("用户认证失败", exception);
 	    ResponseUtil.fail(response, ResultEnum.USER_UNAUTHORIZED_ERROR);

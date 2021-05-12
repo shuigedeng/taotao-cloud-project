@@ -1,21 +1,23 @@
 
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
 
-    // spring boot
     implementation "org.springframework.boot:spring-boot-starter-webflux"
 
-    // spring cloud
-    implementation "org.springframework.cloud:spring-cloud-starter-gateway"
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
+    }
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-
+//    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+//    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     // security
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // alibaba
     implementation 'com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway'
@@ -27,17 +29,13 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.5'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.2'
 
-    // commons
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
 
-    // other
     implementation "eu.bitwalker:UserAgentUtils"
 
-    // lombok
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 //    implementation "org.springframework.cloud:spring-cloud-starter-zipkin"

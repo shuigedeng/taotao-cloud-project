@@ -1,9 +1,11 @@
 package com.taotao.cloud.uc.biz;
 
+import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
+import com.taotao.cloud.security.taox.annotation.EnableOauth2ResourceSecurity;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -14,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @version 1.0.0
  */
 //@EnableTaoTaoCloudOpenapi
-//@EnableTaoTaoCloudOauth2ResourceServer
 //@EnableTaoTaoCloudJPA
 //@EnableTaoTaoCloudP6spy
 //@EnableTaoTaoCloudFeign
@@ -24,10 +25,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableTaoTaoCloudRedis
 //@EnableTaoTaoCloudSeata
 //@EnableTaoTaoCloudSentinel
+//@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
 @EnableEncryptableProperties
+@EnableTaoTaoCloudOpenapi
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
-@SpringCloudApplication
+@SpringBootApplication
+@EnableDiscoveryClient
+@EnableOauth2ResourceSecurity
 public class TaoTaoCloudUcApplication {
 
 	public static void main(String[] args) {

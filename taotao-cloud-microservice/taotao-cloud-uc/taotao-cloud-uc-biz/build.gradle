@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'

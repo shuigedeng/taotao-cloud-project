@@ -18,30 +18,23 @@ package com.taotao.cloud.web.configuration;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.exception.DefaultExceptionAdvice;
 import com.taotao.cloud.web.filter.LbIsolationFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.interceptor.MyInterceptor;
-import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
-import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.support.LoginUserArgumentResolver;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -86,7 +79,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 //	@Bean
-//	@ConditionalOnMissingBean(RequestMappingScanListener.class)
+//	@ConditionalOnBean(value = {RedisRepository.class})
 //	public RequestMappingScanListener resourceAnnotationScan() {
 //		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
 //		LogUtil.info("资源扫描类.[{}]", scan);
@@ -102,6 +95,34 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				DateTimeFormatter.ofPattern(CommonConstant.DATETIME_FORMAT)));
 		};
 	}
+
+	@Bean
+	public LbIsolationFilter lbIsolationFilter() {
+		return new LbIsolationFilter();
+	}
+
+	@Bean
+	public TenantFilter tenantFilter() {
+		return new TenantFilter();
+	}
+
+	@Bean
+	public TraceFilter traceFilter() {
+		return new TraceFilter();
+	}
+
+	@Bean
+	public DefaultExceptionAdvice defaultExceptionAdvice(){
+		return new DefaultExceptionAdvice();
+	}
+
+//	@Bean
+//	public FilterRegistrationBean<Filter1> func(Filter1 filter1) {
+//		FilterRegistrationBean<Filter1> registrationBean = new FilterRegistrationBean<>();
+//		registrationBean.setFilter(filter1);
+//		registrationBean.addUrlPatterns("/demo03/*");
+//		return registrationBean;
+//	}
 
 //	@Override
 //	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {

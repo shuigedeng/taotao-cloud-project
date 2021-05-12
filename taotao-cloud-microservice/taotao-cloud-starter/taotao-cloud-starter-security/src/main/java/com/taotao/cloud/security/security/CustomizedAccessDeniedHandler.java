@@ -19,9 +19,6 @@ public class CustomizedAccessDeniedHandler implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 		AccessDeniedException accessDeniedException) throws IOException {
-//		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-//		response.setContentType("text/plain");
-//		response.getWriter().write("用户未授权");
 
 		LogUtil.error("用户权限不足", accessDeniedException);
 		ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
