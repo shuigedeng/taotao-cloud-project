@@ -15,11 +15,10 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
+import cn.hutool.core.io.LineHandler;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import io.swagger.v3.oas.models.Components;
-import io.swagger.v3.oas.models.ExternalDocumentation;
-import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.*;
 import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -35,6 +34,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
+
+import java.util.Set;
 
 /**
  * SwaggerAutoConfiguration
@@ -72,10 +73,29 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
-		return openApi -> openApi.getPaths().values().stream()
-			.flatMap(pathItem -> pathItem.readOperations().stream())
-			.forEach(operation -> operation.addParametersItem(
-				new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
+		System.out.println("");
+		return new OpenApiCustomiser() {
+			@Override
+			public void customise(OpenAPI openApi) {
+				final Paths paths = openApi.getPaths();
+
+				Paths newPaths = new Paths();
+				paths.keySet().forEach(e -> {
+					newPaths.put("/taotao-cloud-uc-service" + e, paths.get(e));
+				});
+
+				openApi.setPaths(newPaths);
+				openApi.getPaths().values().stream()
+					.flatMap(pathItem -> pathItem.readOperations().stream())
+					.forEach(operation -> operation.addParametersItem(
+						new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
+			}
+		};
+
+//		return openApi -> openApi.getPaths().values().stream()
+//			.flatMap(pathItem -> pathItem.readOperations().stream())
+//			.forEach(operation -> operation.addParametersItem(
+//				new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
 	}
 
 	@Bean
@@ -117,6 +137,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 		return new OpenAPI()
 			.components(components)
+			.openapi("taotao-cloud-uc-service")
 			.info(
 				new Info()
 					.title("SpringShop API")

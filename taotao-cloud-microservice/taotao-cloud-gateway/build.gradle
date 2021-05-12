@@ -13,8 +13,8 @@ dependencies {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
     }
     implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-//    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-//    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     // security
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 //    implementation 'org.springframework.boot:spring-boot-starter-security'

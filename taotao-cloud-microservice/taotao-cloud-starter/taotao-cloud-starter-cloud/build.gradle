@@ -1,7 +1,7 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
-//    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
 
     api 'org.springframework.boot:spring-boot-actuator'
     api 'org.springframework.boot:spring-boot-actuator-autoconfigure'

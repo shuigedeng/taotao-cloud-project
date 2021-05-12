@@ -63,7 +63,7 @@ spring:
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
     sentinel:
-      enabled: true
+      enabled: false
       eager: true
       datasource:
         ds1:

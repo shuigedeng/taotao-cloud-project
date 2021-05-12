@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableTaoTaoCloudP6spy
 //@EnableTaoTaoCloudFeign
 //@EnableTaoTaoCloudMVC
-//@EnableTaoTaoCloudXxlJob
+//@EnableTaoTaoCloudXxlJob	
 //@EnableTaoTaoCloudRequestLog
 //@EnableTaoTaoCloudRedis
 //@EnableTaoTaoCloudSeata

@@ -51,8 +51,10 @@ public class OpenApiConfig {
 
 		definitions.stream()
 			.filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
+			.filter(routeDefinition -> !routeDefinition.getId().startsWith("ReactiveCompositeDiscoveryClient_"))
 			.forEach(routeDefinition -> {
-				String name = routeDefinition.getId().replaceAll("-service", "");
+//				String name = routeDefinition.getId().replaceAll("-service", "");
+				String name = routeDefinition.getId();
 				swaggerUiConfigParameters.addGroup(name);
 				GroupedOpenApi.builder().pathsToMatch("/" + name + "/**").group(name).build();
 			});

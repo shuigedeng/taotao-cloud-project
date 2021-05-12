@@ -58,7 +58,8 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 		ApplicationContext ac) {
 		List<String> permitAllUrls = new ArrayList<>(Arrays.asList(
 			"/swagger-ui.html",
-			"/v2/**",
+			"/v3/**",
+			"/favicon.ico",
 			"/swagger-resources/**",
 			"/webjars/**",
 			"/resources/**"));

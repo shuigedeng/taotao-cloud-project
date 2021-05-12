@@ -44,19 +44,19 @@ shadowJar {
 jib {
     from {
         image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:openjdk8-jdk-alpine'
-        auth {
-            username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-            password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-        }
+//        auth {
+//            username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+//            password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+//        }
     }
     allowInsecureRegistries = true
     to {
         image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud'
         tags = ["${project.name}-${project.version}"]
-        auth {
-            username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-            password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-        }
+//        auth {
+//            username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+//            password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+//        }
     }
     container {
         creationTime = 'USE_CURRENT_TIMESTAMP'

@@ -92,8 +92,7 @@ public class SysDictItemController {
 	@PreAuthorize("hasAuthority('sys:user:add')")
 	@GetMapping("/page")
 	public Result<PageModel<DictItemVO>> getPage(
-		@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "分页查询字典详情DTO", required = true)
-		@Validated DictItemPageQuery dictItemPageQuery) {
+		 DictItemPageQuery dictItemPageQuery) {
 		Pageable pageable = PageRequest
 			.of(dictItemPageQuery.getCurrentPage(), dictItemPageQuery.getPageSize());
 		Page<SysDictItem> page = dictItemService.getPage(pageable, dictItemPageQuery);
