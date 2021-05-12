@@ -11,13 +11,13 @@ spring:
       authorization:
         client:
           - client-id: mall
-            client-secret: secret
+            client-secret: mall
             redirect-uri: https://www.baidu.com
             scope:
               - mall:read
               - mall:write
           - client-id: admin
-            client-secret: secret
+            client-secret: admin
             redirect-uri: http://localhost:6628/login/oauth2/code/admin
       client:
         registration:
@@ -36,7 +36,7 @@ spring:
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
-            redirect-uri: http://8755af47ae2a.ngrok.io/login/oauth2/code/gitee
+            redirect-uri: http://aa3b168ab0f3.ngrok.io/login/oauth2/code/gitee
           wechat:
             client-id: xxx
             client-secret: xxxx
@@ -84,10 +84,6 @@ spring:
         jwt:
           jwk-set-uri: http://127.0.0.1:6228/oauth2/jwks
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://register-server:8848/eureka/
 
 logging:
   level:

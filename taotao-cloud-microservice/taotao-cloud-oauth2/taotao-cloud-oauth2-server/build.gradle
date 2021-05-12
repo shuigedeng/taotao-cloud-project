@@ -1,7 +1,7 @@
 
 dependencies {
 
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
@@ -14,6 +14,11 @@ dependencies {
 //
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api')
 
+    implementation 'org.webjars:jquery:3.4.1'
+    implementation 'org.webjars:bootstrap:3.4.1'
+    implementation 'org.webjars:webjars-locator-core'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
     // spring boot
     implementation('org.springframework.boot:spring-boot-starter-web'){
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
@@ -25,7 +30,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
     // security
-    implementation 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.0'
+    implementation 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.1'
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'

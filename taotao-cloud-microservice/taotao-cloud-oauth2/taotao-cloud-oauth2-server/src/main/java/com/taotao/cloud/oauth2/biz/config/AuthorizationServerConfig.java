@@ -1,75 +1,74 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.oauth2.biz.config;
-
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.ACCESS_TOKEN_TIME_TO_LIVE;
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REFRESH_TOKEN_TIME_TO_LIVE;
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REUSE_REFRESH_TOKENS;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import java.time.Duration;
-import java.util.LinkedList;
-import java.util.List;
+import com.taotao.cloud.oauth2.biz.jose.Jwks;
 import java.util.UUID;
-import javax.annotation.Resource;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author Joe Grandja
  * @since 0.0.1
  */
-@EnableWebSecurity
-@EnableConfigurationProperties(AuthorizationProperties.class)
+@Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
 
-	@Resource
-	private AuthorizationProperties authorizationProperties;
+	@Bean
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+		return http.formLogin(Customizer.withDefaults()).build();
+	}
 
-	// @formatter:off
 	@Bean
 	public RegisteredClientRepository registeredClientRepository() {
-		List<RegisteredClient> list = new LinkedList<>();
-
-		for (AuthorizationProperties.Client clientRegistration : authorizationProperties
-			.getClient()) {
-
-			RegisteredClient.Builder builder = RegisteredClient
-				.withId(UUID.randomUUID().toString())
-				.clientId(clientRegistration.getClientId())
-				.clientSecret(clientRegistration.getClientSecret())
+		RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
+				.clientId("messaging-client")
+				.clientSecret("{bcrypt}$2a$10$86jcNyVMAKhH0HbAXRlu7OxHhSgZdfzA83WL1EsZg2yIMtnlM0qSG")
 				.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-				.authorizationGrantTypes(authorizationGrantTypes -> {
-					authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
-					authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
-					authorizationGrantTypes.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
-					authorizationGrantTypes.add(AuthorizationGrantType.PASSWORD);
-				})
+				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
+				.redirectUri("http://127.0.0.1:8080/authorized")
+				.scope(OidcScopes.OPENID)
+				.scope("message.read")
+				.scope("message.write")
 				.clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
-				.tokenSettings(tokenSettings -> {
-					tokenSettings
-						.settings(settings -> {
-							settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(1000));
-							settings.put(REUSE_REFRESH_TOKENS, true);
-							settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(6000));
-						});
-				})
-				.redirectUri(clientRegistration.getRedirectUri());
-
-			clientRegistration.getScope().forEach(builder::scope);
-
-			list.add(builder.build());
-		}
-
-		return new InMemoryRegisteredClientRepository(list.toArray(new RegisteredClient[0]));
+				.build();
+		return new InMemoryRegisteredClientRepository(registeredClient);
 	}
 
 	@Bean
@@ -81,7 +80,11 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	public ProviderSettings providerSettings() {
-		return new ProviderSettings().issuer("http://127.0.0.1:9000");
+		return new ProviderSettings().issuer("http://127.0.0.1:6628");
 	}
 
+	@Bean
+	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+	}
 }
