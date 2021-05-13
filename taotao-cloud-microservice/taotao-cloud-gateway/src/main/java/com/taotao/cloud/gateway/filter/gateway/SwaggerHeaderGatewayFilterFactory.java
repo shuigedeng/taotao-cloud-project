@@ -15,7 +15,6 @@
 // */
 //package com.taotao.cloud.gateway.filter.gateway;
 //
-//import com.taotao.cloud.gateway.swagger.SwaggerAggProperties;
 //import lombok.AllArgsConstructor;
 //import org.springframework.cloud.gateway.filter.GatewayFilter;
 //import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -28,12 +27,13 @@
 // * SwaggerHeader过滤
 // *
 // * @author dengtao
-// * @since 2020/4/29 22:13
 // * @version 1.0.0
+// * @since 2020/4/29 22:13
 // */
 //@Component
 //@AllArgsConstructor
 //public class SwaggerHeaderGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
+//
 //	private static final String HEADER_NAME = "X-Forwarded-Prefix";
 //
 //	private final SwaggerAggProperties swaggerAggProperties;
@@ -46,7 +46,8 @@
 //			if (!StringUtils.endsWithIgnoreCase(path, swaggerAggProperties.getApiDocsPath())) {
 //				return chain.filter(exchange);
 //			}
-//			String basePath = path.substring(0, path.lastIndexOf(swaggerAggProperties.getApiDocsPath()));
+//			String basePath = path
+//				.substring(0, path.lastIndexOf(swaggerAggProperties.getApiDocsPath()));
 //			ServerHttpRequest newRequest = request.mutate().header(HEADER_NAME, basePath).build();
 //			ServerWebExchange newExchange = exchange.mutate().request(newRequest).build();
 //			return chain.filter(newExchange);

@@ -1,2 +1,3 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.dubbo.configuration.DubboFeignConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.gray.config.GrayConfig,\
+com.taotao.cloud.gray.config.GrayLoadbalancerConfig

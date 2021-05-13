@@ -44,7 +44,8 @@ public class HttpClientComponent {
 	@Bean
 	@Order(500)
 	public HttpClient httpClient(RestTemplateProperties restTemplateProperties) {
-		Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+		Registry<ConnectionSocketFactory> registry = RegistryBuilder
+			.<ConnectionSocketFactory>create()
 			.register("http", PlainConnectionSocketFactory.getSocketFactory())
 			.register("https", SSLConnectionSocketFactory.getSocketFactory())
 			.build();

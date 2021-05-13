@@ -26,6 +26,8 @@ import feign.Logger;
 import feign.Response;
 import feign.Retryer;
 import feign.Util;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -33,9 +35,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
 
 /**
  * FeignAutoConfiguration
@@ -85,6 +84,7 @@ public class FeignAutoConfiguration {
 
 	@Slf4j
 	public static class FeignClientErrorDecoder implements feign.codec.ErrorDecoder {
+
 		@Override
 		public Exception decode(String methodKey, Response response) {
 			String errorContent;

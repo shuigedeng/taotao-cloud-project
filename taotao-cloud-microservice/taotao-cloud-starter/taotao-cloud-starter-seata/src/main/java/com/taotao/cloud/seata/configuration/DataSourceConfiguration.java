@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Primary;
 public class DataSourceConfiguration {
 
 	@Primary
-	@Bean
+	@Bean(name = "seataDataSource")
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource dataSource(DataSourceProperties properties) {
 		HikariDataSource hikariDataSource =

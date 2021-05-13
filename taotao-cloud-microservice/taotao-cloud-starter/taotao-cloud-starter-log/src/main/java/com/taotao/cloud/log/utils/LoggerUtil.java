@@ -16,10 +16,9 @@
 package com.taotao.cloud.log.utils;
 
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import java.lang.reflect.Method;
 import lombok.experimental.UtilityClass;
 import org.aspectj.lang.JoinPoint;
-
-import java.lang.reflect.Method;
 
 /**
  * LogUtil

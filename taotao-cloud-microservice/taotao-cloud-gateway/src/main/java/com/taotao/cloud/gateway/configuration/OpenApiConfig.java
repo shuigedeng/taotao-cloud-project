@@ -45,13 +45,15 @@ public class OpenApiConfig {
 		RouteDefinitionLocator locator) {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
+
 		for (RouteDefinition definition : definitions) {
 			System.out.println("id: " + definition.getId() + "  " + definition.getUri().toString());
 		}
 
 		definitions.stream()
 			.filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
-			.filter(routeDefinition -> !routeDefinition.getId().startsWith("ReactiveCompositeDiscoveryClient_"))
+			.filter(routeDefinition -> !routeDefinition.getId()
+				.startsWith("ReactiveCompositeDiscoveryClient_"))
 			.forEach(routeDefinition -> {
 //				String name = routeDefinition.getId().replaceAll("-service", "");
 				String name = routeDefinition.getId();

@@ -1,8 +1,36 @@
-
 dependencies {
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')) {
+        exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "org.springframework.security", module: "spring-security-core"
+        exclude group: "org.springframework.security", module: "spring-security-crypto"
+        exclude group: "org.springframework.security", module: "spring-security-rsa"
+        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
+    }
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')) {
+        exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "org.springframework.security", module: "spring-security-core"
+        exclude group: "org.springframework.security", module: "spring-security-crypto"
+        exclude group: "org.springframework.security", module: "spring-security-rsa"
+        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
+    }
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')) {
+        exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "org.springframework.security", module: "spring-security-core"
+        exclude group: "org.springframework.security", module: "spring-security-crypto"
+        exclude group: "org.springframework.security", module: "spring-security-rsa"
+        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
+    }
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rule')) {
+        exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "org.springframework.security", module: "spring-security-core"
+        exclude group: "org.springframework.security", module: "spring-security-crypto"
+        exclude group: "org.springframework.security", module: "spring-security-rsa"
+        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
+    }
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
 
@@ -42,9 +70,12 @@ dependencies {
 //    implementation "io.micrometer:micrometer-registry-prometheus"
 }
 
-configurations {
-    compile.exclude group: "org.springframework", module: "spring-webmvc"
-    compile.exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+configurations.all {
+    exclude group: "org.springframework", module: "spring-webmvc"
+    exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+    exclude group: "org.springframework.security", module: "spring-security-core"
+    exclude group: "org.springframework.security", module: "spring-security-crypto"
+    exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
 }
 
 springBoot {

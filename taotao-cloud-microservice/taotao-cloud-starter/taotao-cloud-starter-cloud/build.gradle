@@ -12,6 +12,8 @@ dependencies {
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
+    api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
 
     api 'com.fasterxml.jackson.module:jackson-module-kotlin'

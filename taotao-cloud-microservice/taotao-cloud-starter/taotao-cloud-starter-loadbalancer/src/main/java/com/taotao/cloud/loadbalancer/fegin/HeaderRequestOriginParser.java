@@ -16,7 +16,6 @@
 package com.taotao.cloud.loadbalancer.fegin;
 
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**

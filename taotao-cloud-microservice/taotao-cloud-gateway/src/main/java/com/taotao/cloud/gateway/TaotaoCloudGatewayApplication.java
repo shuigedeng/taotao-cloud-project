@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.gateway;
 
+import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -23,15 +24,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * TaotaoCloudGatewayApplication
  *
  * @author dengtao
- * @since 2020/10/10 09:06
  * @version 1.0.0
+ * @since 2020/10/10 09:06
  */
-//@EnableTaoTaoCloudRequestLog
-//@EnableTaoTaoCloudRedis
-//@EnableTaoTaoCloudOAuth2RedisTokenStore
-//@EnableAutoConfiguration(exclude = {ResourceServerTokenRelayAutoConfiguration.class})
-// @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-// 	classes = {ResourceServerTokenRelayAutoConfiguration.class})})
 @SpringBootApplication
 @EnableDiscoveryClient
 public class TaotaoCloudGatewayApplication {

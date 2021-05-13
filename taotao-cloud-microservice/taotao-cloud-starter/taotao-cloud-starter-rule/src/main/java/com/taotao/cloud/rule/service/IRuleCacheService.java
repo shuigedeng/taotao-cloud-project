@@ -6,7 +6,6 @@ import java.util.Set;
 
 /**
  * 规则缓存业务
- *
  */
 public interface IRuleCacheService {
 

@@ -1,6 +1,7 @@
 package com.taotao.cloud.rule.service.impl;
 
-import cn.hutool.json.JSONObject;
+import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.rule.constant.RuleConstant;
 import com.taotao.cloud.rule.entity.BlackList;
 import com.taotao.cloud.rule.service.IRuleCacheService;
@@ -16,16 +17,16 @@ import org.springframework.stereotype.Service;
 public class RuleCacheServiceImpl implements IRuleCacheService {
 
 	@Autowired
-	private RedisService redisService;
+	private RedisRepository repository;
 
 	@Override
 	public Set<Object> getBlackList(String ip) {
-		return redisService.sGet(RuleConstant.getBlackListCacheKey(ip));
+		return repository.sGet(RuleConstant.getBlackListCacheKey(ip));
 	}
 
 	@Override
 	public Set<Object> getBlackList() {
-		return redisService.sGet(RuleConstant.getBlackListCacheKey());
+		return repository.sGet(RuleConstant.getBlackListCacheKey());
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
 		String key = StringUtils.isNotBlank(blackList.getIp()) ? RuleConstant
 			.getBlackListCacheKey(blackList.getIp())
 			: RuleConstant.getBlackListCacheKey();
-		redisService.sSet(key, JSONObject.toJSONString(blackList));
+		repository.sSet(key, JsonUtil.toJSONString(blackList));
 	}
 
 	@Override
@@ -41,6 +42,6 @@ public class RuleCacheServiceImpl implements IRuleCacheService {
 		String key = StringUtils.isNotBlank(blackList.getIp()) ? RuleConstant
 			.getBlackListCacheKey(blackList.getIp())
 			: RuleConstant.getBlackListCacheKey();
-		redisService.setRemove(key, JSONObject.toJSONString(blackList));
+		repository.setRemove(key, JsonUtil.toJSONString(blackList));
 	}
 }
