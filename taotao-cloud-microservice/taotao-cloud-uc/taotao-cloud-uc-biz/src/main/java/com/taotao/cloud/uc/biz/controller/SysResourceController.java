@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/resource")
-@Tag(name = "SysResourceController", description = "资源管理API")
+@Tag(name = "资源管理API", description = "资源管理API")
 public class SysResourceController {
 
 	private final ISysResourceService resourceService;

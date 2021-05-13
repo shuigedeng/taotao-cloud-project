@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/region")
-@Tag(name = "SysRegionController", description = "地区管理API")
+@Tag(name = "地区管理API", description = "地区管理API")
 public class SysRegionController {
 
 	@Autowired

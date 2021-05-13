@@ -54,7 +54,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
-@Tag(name = "SysUserController", description = "用户管理API")
+@Tag(name = "用户管理API", description = "用户管理API")
 public class SysUserController {
 
 	private final ISysUserService sysUserService;

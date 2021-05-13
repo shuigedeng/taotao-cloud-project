@@ -1,17 +1,16 @@
 package com.taotao.cloud.uc.api.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 
 /**
  * 用户DTO
@@ -23,7 +22,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "UserDTO", description = "用户DTO")
+@Schema(description = "用户DTO")
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = -1972549738577159538L;
@@ -42,12 +41,12 @@ public class UserDTO implements Serializable {
 
 	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户", required = true)
 	@NotNull(message = "用户类型不能为空")
-//	@IntEnums(value = {1, 2, 3})
+	@IntEnums(value = {1, 2, 3})
 	private Integer type;
 
 	@Schema(description = "性别 1男 2女 0未知", required = true)
 	@NotNull(message = "用户性别不能为空")
-//	@IntEnums(value = {0, 1, 2})
+	@IntEnums(value = {0, 1, 2})
 	private Integer sex;
 
 	@Schema(description = "手机号", required = true)

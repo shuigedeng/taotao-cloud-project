@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/dept")
-@Tag(name = "SysDeptController", description = "部门管理API")
+@Tag(name = "部门管理API", description = "部门管理API")
 @AllArgsConstructor
 public class SysDeptController {
 

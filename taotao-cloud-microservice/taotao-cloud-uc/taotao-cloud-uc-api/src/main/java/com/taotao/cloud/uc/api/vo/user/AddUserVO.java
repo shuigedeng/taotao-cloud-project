@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "AddUserVO", description = "用户注册VO")
+@Schema(description = "用户注册VO")
 public class AddUserVO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;

@@ -36,7 +36,7 @@ import org.slf4j.MDC;
  */
 @Data
 @Builder
-@Schema(name = "Result", description = "返回结果对象")
+@Schema(description = "返回结果对象")
 public class Result<T> implements Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;

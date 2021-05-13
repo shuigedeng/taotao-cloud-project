@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/dict")
-@Tag(name = "SysDictController", description = "字典管理API")
+@Tag(name = "字典管理API", description = "字典管理API")
 public class SysDictController {
 
 	private final ISysDictService dictService;
