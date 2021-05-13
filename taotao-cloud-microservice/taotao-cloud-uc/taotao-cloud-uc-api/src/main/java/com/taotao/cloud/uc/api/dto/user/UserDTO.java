@@ -1,5 +1,6 @@
 package com.taotao.cloud.uc.api.dto.user;
 
+import com.taotao.cloud.web.mvc.constraints.IntEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import javax.validation.constraints.Email;

@@ -34,7 +34,7 @@ import org.springframework.data.domain.Page;
 @Data
 @Builder
 @AllArgsConstructor
-@Schema(name = "PageResult", description = "分页结果对象")
+@Schema(description = "分页结果对象")
 public class PageModel<T> implements Serializable {
 
 	private static final long serialVersionUID = -275582248840137389L;

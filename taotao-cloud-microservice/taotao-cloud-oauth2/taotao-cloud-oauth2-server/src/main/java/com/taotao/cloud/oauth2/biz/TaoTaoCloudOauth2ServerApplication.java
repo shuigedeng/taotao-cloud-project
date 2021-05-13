@@ -28,8 +28,15 @@ package com.taotao.cloud.oauth2.biz;
 //import com.taotao.cloud.security.service.IUserDetailsService;
 //import com.taotao.cloud.security.service.impl.UserDetailsServiceImpl;
 //import com.taotao.cloud.swagger.annotation.EnableTaoTaoCloudSwagger2;
+import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
+import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
+import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
+import com.taotao.cloud.security.taox.annotation.EnableOauth2ResourceSecurity;
+import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.cloud.client.SpringCloudApplication;
 //import org.springframework.context.annotation.Bean;
@@ -55,7 +62,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableTaoTaoCloudSeata
 //@EnableTransactionManagement(proxyTargetClass = true)
 //@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
+@EnableEncryptableProperties
+@EnableTaoTaoCloudOpenapi
+@EnableTaoTaoCloudSeata
+@EnableTaoTaoCloudJPA
+@EnableTaoTaoCloudSentinel
 @SpringBootApplication
+@EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {
 
     public static void main(String[] args) {

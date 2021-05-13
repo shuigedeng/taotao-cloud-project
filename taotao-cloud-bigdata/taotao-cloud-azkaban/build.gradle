@@ -15,7 +15,7 @@ dependencies {
 //    ```
 
 //    需要自行安装到本地
-    implementation "com.dingtalk:dingtalk-api:1.0.0"
+//    implementation "com.dingtalk:dingtalk-api:1.0.0"
 
     implementation "com.linkedin.azkaban:azkaban:2.5.0"
 }

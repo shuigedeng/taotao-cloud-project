@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "DictVO", description = "字典VO")
+@Schema(description = "字典VO")
 public class DictVO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;
