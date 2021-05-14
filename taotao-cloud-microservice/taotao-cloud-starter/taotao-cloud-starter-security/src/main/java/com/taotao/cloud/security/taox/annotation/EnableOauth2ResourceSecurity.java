@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Target(value = { java.lang.annotation.ElementType.TYPE })
 @Documented
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 @Import({Oauth2ResourceSecurityConfigurer.class})
 public @interface EnableOauth2ResourceSecurity {
 

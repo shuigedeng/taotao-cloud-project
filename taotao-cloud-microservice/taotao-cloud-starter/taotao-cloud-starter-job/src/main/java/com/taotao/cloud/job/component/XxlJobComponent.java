@@ -18,7 +18,7 @@ package com.taotao.cloud.job.component;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.core.utils.AddrUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.job.constant.XxlJobConstant;
 import com.taotao.cloud.job.properties.XxlProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
@@ -57,7 +57,7 @@ public class XxlJobComponent {
 		executor.setIp(xxlProperties.getIp());
 
 		if (StrUtil.isEmpty(xxlProperties.getIp())) {
-			executor.setIp(AddrUtil.getLocalAddr());
+			executor.setIp(RequestUtil.getLocalAddr());
 		}
 		executor.setPort(xxlProperties.getPort());
 		executor.setLogPath(xxlProperties.getLogPath());
