@@ -26,14 +26,21 @@ import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.interceptor.MyInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
+import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.support.LoginUserArgumentResolver;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -97,24 +104,25 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public LbIsolationFilter lbIsolationFilter() {
-		return new LbIsolationFilter();
+	public Validator validator() {
+		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
+			.configure()
+			// 快速失败模式
+			.failFast(true)
+			.buildValidatorFactory();
+		return validatorFactory.getValidator();
 	}
 
 	@Bean
-	public TenantFilter tenantFilter() {
-		return new TenantFilter();
-	}
-
-	@Bean
-	public TraceFilter traceFilter() {
-		return new TraceFilter();
+	public RequestContextListener requestContextListener() {
+		return new RequestContextListener();
 	}
 
 	@Bean
 	public DefaultExceptionAdvice defaultExceptionAdvice(){
 		return new DefaultExceptionAdvice();
 	}
+
 
 //	@Bean
 //	public FilterRegistrationBean<Filter1> func(Filter1 filter1) {

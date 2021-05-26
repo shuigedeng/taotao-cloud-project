@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.context.request.RequestContextListener;
 
 /**
  * 默认异步任务配置
@@ -35,11 +34,6 @@ import org.springframework.web.context.request.RequestContextListener;
 @EnableAsync(proxyTargetClass = true)
 @EnableConfigurationProperties({AsyncTaskProperties.class})
 public class AsyncTaskConfiguration {
-
-	@Bean
-	public RequestContextListener requestContextListener() {
-		return new RequestContextListener();
-	}
 
 	@Bean
 	public TaskExecutor taskExecutor(AsyncTaskProperties asyncTaskProperties) {
