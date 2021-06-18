@@ -12,6 +12,11 @@ server:
     key-store-password: 1234
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:6628/oauth2/jwks #配置RSA的公钥访问地址
   cache:
     type: none
   main:

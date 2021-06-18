@@ -40,7 +40,6 @@ public class TaotaoCloudGatewayApplication {
 		 */
 		// System.setProperty("JM.LOG.PATH", "");
 		// System.setProperty("JM.SNAPSHOT.PATH", "");
-
 		SpringApplication.run(TaotaoCloudGatewayApplication.class, args);
 	}
 }

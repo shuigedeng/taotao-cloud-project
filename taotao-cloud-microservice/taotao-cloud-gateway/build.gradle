@@ -2,53 +2,36 @@ dependencies {
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')) {
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-        exclude group: "org.springframework.security", module: "spring-security-core"
-        exclude group: "org.springframework.security", module: "spring-security-crypto"
-        exclude group: "org.springframework.security", module: "spring-security-rsa"
-        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
     }
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')) {
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-        exclude group: "org.springframework.security", module: "spring-security-core"
-        exclude group: "org.springframework.security", module: "spring-security-crypto"
-        exclude group: "org.springframework.security", module: "spring-security-rsa"
-        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
     }
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')) {
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-        exclude group: "org.springframework.security", module: "spring-security-core"
-        exclude group: "org.springframework.security", module: "spring-security-crypto"
-        exclude group: "org.springframework.security", module: "spring-security-rsa"
-        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
     }
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rule')) {
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-        exclude group: "org.springframework.security", module: "spring-security-core"
-        exclude group: "org.springframework.security", module: "spring-security-crypto"
-        exclude group: "org.springframework.security", module: "spring-security-rsa"
-        exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
     }
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+
+    implementation 'org.springframework.security:spring-security-core:5.4.2'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+    implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
+    implementation 'com.nimbusds:nimbus-jose-jwt:8.16'
 
     implementation "org.springframework.boot:spring-boot-starter-webflux"
-
+    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
     }
-    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
-    // security
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    // alibaba
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     implementation 'com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway'
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
@@ -74,9 +57,6 @@ dependencies {
 configurations.all {
     exclude group: "org.springframework", module: "spring-webmvc"
     exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-    exclude group: "org.springframework.security", module: "spring-security-core"
-    exclude group: "org.springframework.security", module: "spring-security-crypto"
-    exclude group: "org.springframework.security", module: "spring-security-oauth2-core"
 }
 
 springBoot {

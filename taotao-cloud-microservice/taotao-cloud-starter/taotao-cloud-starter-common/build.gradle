@@ -14,14 +14,14 @@ dependencies {
     api 'com.github.whvcse:easy-captcha'
     api 'javax.validation:validation-api'
     api 'io.projectreactor:reactor-core'
-    api 'cn.afterturn:easypoi-base'
+    api 'cn.afterturn:easypoi-base:4.3.0'
     api 'com.nepxion:banner'
     api 'com.github.xkzhangsan:xk-time:3.1.0'
 
     api 'com.baomidou:mybatis-plus-core:3.4.2'
 
-    api 'io.swagger.core.v3:swagger-models'
-    api 'io.swagger.core.v3:swagger-annotations:2.1.6'
+    api "io.swagger.core.v3:swagger-models:2.1.7"
+    api 'io.swagger.core.v3:swagger-annotations:2.1.7'
 
     api 'org.springframework:spring-core'
     api 'org.springframework:spring-tx'

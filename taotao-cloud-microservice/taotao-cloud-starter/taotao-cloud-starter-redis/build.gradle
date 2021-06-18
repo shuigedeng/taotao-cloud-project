@@ -5,7 +5,7 @@ dependencies {
         exclude group: 'io.lettuce', module: 'lettuce-core'
     }
     api "io.lettuce:lettuce-core"
-    api 'org.redisson:redisson'
+    api 'org.redisson:redisson:3.15.0'
 
     api "commons-io:commons-io"
     api "org.apache.commons:commons-pool2"

@@ -4,11 +4,11 @@ dependencies {
 
 	api 'javax.servlet:javax.servlet-api'
 
-//	api  'org.springframework.security:spring-security-core'
+	api  'org.springframework.security:spring-security-core'
 //	api  'org.springframework.security:spring-security-web'
-//	api  'org.springframework.security:spring-security-config'
-//	api  'org.springframework.security:spring-security-oauth2-core'
-//	api  'org.springframework.security:spring-security-oauth2-client'
+	api  'org.springframework.security:spring-security-config'
+	api  'org.springframework.security:spring-security-oauth2-core'
+	api  'org.springframework.security:spring-security-oauth2-client'
 
 	api 'org.springframework.boot:spring-boot-starter-security'
 	api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
