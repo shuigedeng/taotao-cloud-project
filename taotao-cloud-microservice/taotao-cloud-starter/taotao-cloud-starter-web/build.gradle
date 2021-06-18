@@ -14,8 +14,6 @@ dependencies {
 
     api "org.mapstruct:mapstruct"
 
-    api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
-
     api('org.springframework.boot:spring-boot-starter-web') {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
