@@ -15,15 +15,45 @@
  */
 package com.taotao.cloud.core.initializer;
 
+import static com.taotao.cloud.common.constant.CommonConstant.SPRING_BOOT_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.SPRING_CLOUD_ALIBABA_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.SPRING_CLOUD_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.SPRING_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BACKEND;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BACKEND_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BLOG;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BLOG_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAX;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAX_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT_RESOURCE_LOCATION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_BOOT_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_CLOUD_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.VERSION;
+
+import com.nepxion.banner.BannerConstant;
 import com.nepxion.banner.Description;
+import com.nepxion.banner.DescriptionBanner;
 import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.core.config.Config;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.SpringVersion;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * Banner初始化
@@ -37,30 +67,74 @@ public class BannerInitializer implements
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
-			String springBootVersion = SpringBootVersion.getVersion();
-			String springVersion = SpringVersion.getVersion();
+		if (applicationContext instanceof AnnotationConfigApplicationContext) {
+			AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) applicationContext;
+			annotationConfigApplicationContext.register(Config.class);
+		} else {
+			ConfigurableEnvironment environment = applicationContext.getEnvironment();
+			System.out.println();
 
-			LogoBanner logoBanner = new LogoBanner(BannerInitializer.class,
-				CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT_RESOURCE_LOCATION,
-				CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT,
-				5,
+			LogoBanner logoBanner = new LogoBanner(
+				BannerInitializer.class,
+				TAOTAO_CLOUD_BANNER_DEFAULT_RESOURCE_LOCATION,
+				TAOTAO_CLOUD_BANNER_DEFAULT,
+				1,
 				6,
-				new Color[5],
-				true);
+				new Color[]{Color.red},
+				true
+			);
 
-			CustomBanner.show(logoBanner,
-				new Description(SpringVersion.class.getName() + ":",
-					springVersion, 0, 1),
-				new Description(SpringBootVersion.class.getName() + ":",
-					springBootVersion, 0, 1),
-				new Description(CommonConstant.TAOTAO_CLOUD_BANNER_VERSION,
-					CommonConstant.TAOTAO_CLOUD_BANNER_PROJECT_VERSION, 0, 1),
-				new Description(CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB,
-					CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB_URL, 0, 1),
-				new Description(CommonConstant.TAOTAO_CLOUD_BANNER_BLOG,
-					CommonConstant.TAOTAO_CLOUD_BANNER_BLOG_URL, 0, 1)
+			int leftCellPadding = 0;
+			int rightCellPadding = 1;
+
+			show(logoBanner,
+				new Description(TAOTAO_CLOUD_BANNER, TAOTAO_CLOUD_BANNER_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_DATAX, TAOTAO_CLOUD_BANNER_DATAX_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_BACKEND, TAOTAO_CLOUD_BANNER_BACKEND_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_GITHUB, TAOTAO_CLOUD_BANNER_GITHUB_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_BLOG, TAOTAO_CLOUD_BANNER_BLOG_URL,
+					leftCellPadding, rightCellPadding),
+
+				new Description(TAOTAO_CLOUD_VERSION, environment.getProperty(VERSION, ""),
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_SPRING_VERSION, environment.getProperty(SPRING_VERSION,
+					Objects.requireNonNull(SpringVersion.getVersion())),
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_SPRING_BOOT_VERSION,
+					environment.getProperty(SPRING_BOOT_VERSION, SpringBootVersion.getVersion()),
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_SPRING_CLOUD_VERSION,
+					environment.getProperty(SPRING_CLOUD_VERSION, ""),
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION,
+					environment.getProperty(SPRING_CLOUD_ALIBABA_VERSION, ""),
+					leftCellPadding, rightCellPadding)
 			);
 		}
+	}
+
+	public void show(LogoBanner logoBanner, Description... descriptionList) {
+		String bannerShown = System.getProperty(BannerConstant.BANNER_SHOWN, "true");
+		if (!Boolean.parseBoolean(bannerShown)) {
+			return;
+		}
+
+		String bannerShownAnsiMode = System
+			.getProperty(BannerConstant.BANNER_SHOWN_ANSI_MODE, "true");
+		if (Boolean.parseBoolean(bannerShownAnsiMode)) {
+			System.out.println(logoBanner.getBanner());
+		} else {
+			System.out.println(logoBanner.getPlainBanner());
+		}
+
+		List<Description> descriptions = new ArrayList<>();
+		descriptions.addAll(Arrays.asList(descriptionList));
+
+		DescriptionBanner descriptionBanner = new DescriptionBanner();
+		System.out.println(descriptionBanner.getBanner(descriptions));
 	}
 }

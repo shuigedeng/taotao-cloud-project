@@ -43,3 +43,16 @@ for (project in threeLayerProjects) {
         }
     }
 }
+
+//// gradle生命周期中的钩子方法
+//gradle.settingsEvaluated {
+//    println 'init phase: settingsEvaluated'
+//}
+//
+//gradle.projectsLoaded {
+//    println 'init phase: projectsLoaded'
+//}
+//
+//gradle.beforeProject {
+//    println 'init phase: projectsLoaded'
+//}

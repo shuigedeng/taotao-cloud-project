@@ -34,15 +34,52 @@ public class CommonConstant {
 	public static final String TIME_ZONE_GMT8 = "GMT+8";
 	public static final String BEARER_TYPE = "bearea";
 
+	public static final String TAOTAO = "taotao";
+	public static final String CLOUD = "cloud";
+	public static final String SPRING = "spring";
+	public static final String BOOT = "boot";
+	public static final String ALIBABA = "alibaba";
+	public static final String COLON = ":";
+	public static final String UNDER = "_";
+
 	/******************************** banner 配置 ******************************/
-	public static final String TAOTAO_CLOUD_BANNER_PROJECT_VERSION = "1.0.0";
-	public static final String TAOTAO_CLOUD_BANNER_VERSION = "taotao_cloud_version:";
+	public static final String VERSION = "version";
+	public static final String TAOTAO_CLOUD_VERSION =
+		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+
+	public static final String SPRING_VERSION = "springVersion";
+	public static final String TAOTAO_CLOUD_SPRING_VERSION =
+		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+			+ VERSION.toUpperCase() + COLON;
+
+	public static final String SPRING_BOOT_VERSION = "springBootVersion";
+	public static final String TAOTAO_CLOUD_SPRING_BOOT_VERSION =
+		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+			+ BOOT.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+
+	public static final String SPRING_CLOUD_VERSION = "springCloudVersion";
+	public static final String TAOTAO_CLOUD_SPRING_CLOUD_VERSION =
+		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+			+ CLOUD.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+
+	public static final String SPRING_CLOUD_ALIBABA_VERSION = "springCloudAlibabaVersion";
+	public static final String TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION =
+		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+			+ CLOUD.toUpperCase() + UNDER + ALIBABA.toUpperCase() + UNDER + VERSION.toUpperCase()
+			+ COLON;
+
 	public static final String TAOTAO_CLOUD_BANNER_DEFAULT_RESOURCE_LOCATION = "/banner/banner.txt";
 	public static final String TAOTAO_CLOUD_BANNER_DEFAULT = "WELCOME TO TAOTAO CLOUD";
-	public static final String TAOTAO_CLOUD_BANNER_GITHUB = "GITHUB:";
+	public static final String TAOTAO_CLOUD_BANNER_GITHUB = "TAOTAO_CLOUD_GITHUB:";
 	public static final String TAOTAO_CLOUD_BANNER_GITHUB_URL = "https://github.com/shuigedeng/taotao-cloud-project";
-	public static final String TAOTAO_CLOUD_BANNER_BLOG = "BLOG";
+	public static final String TAOTAO_CLOUD_BANNER_BLOG = "TAOTAO_CLOUD_BLOG:";
 	public static final String TAOTAO_CLOUD_BANNER_BLOG_URL = "https://blog.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_DATAX = "TAOTAO_CLOUD_DATAX:";
+	public static final String TAOTAO_CLOUD_BANNER_DATAX_URL = "https://datax.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_BACKEND = "TAOTAO_CLOUD_BACKEND:";
+	public static final String TAOTAO_CLOUD_BANNER_BACKEND_URL = "https://backend.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER = "TAOTAO_CLOUD:";
+	public static final String TAOTAO_CLOUD_BANNER_URL = "https://taotaocloud.top/";
 
 	/******************************** 请求头 配置 ******************************/
 	public static final String TAOTAO_CLOUD_TENANT_ID = "taotao-cloud-tenant-id";
@@ -52,7 +89,6 @@ public class CommonConstant {
 	public static final String TAOTAO_CLOUD_TRACE_ID = "taotao-cloud-trace-id";
 	public static final String TAOTAO_CLOUD_TRACE_HEADER = "taotao-cloud-trace-header";
 
-	public static final String TAOTAO_CLOUD_VERSION = "taotao-cloud-version";
 
 	public static final String TAOTAO_CLOUD_USER_HEADER = "taotao-cloud-user-header";
 	public static final String TAOTAO_CLOUD_USER_NAME_HEADER = "taotao-cloud-user-name-header";

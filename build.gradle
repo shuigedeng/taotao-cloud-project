@@ -1,5 +1,8 @@
 buildscript {
     ext {
+        taotaoCloudVersion = "1.0.0"
+        taotaoCloudGroup = "com.taotao.cloud"
+
         springVersion = '5.3.4'
         springBootVersion = '2.4.5'
         springCloudVersion = '2020.0.2'
@@ -9,7 +12,7 @@ buildscript {
         springDataCommonsVersion = '2.4.5'
         springKafkaVersion = '2.6.5'
 
-        fasterxmlVersion= '2.11.3'
+        fasterxmlVersion = '2.11.3'
         transmittableVersion = '2.12.1'
         slf4jVersion = '1.7.30'
         easypoiVersion = '4.3.0'
@@ -107,8 +110,9 @@ plugins {
 }
 
 allprojects {
-    group 'com.taotao.cloud'
-    version '1.0.0'
+    version project.taotaoCloudVersion
+    group project.taotaoCloudGroup
+
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
@@ -142,9 +146,6 @@ allprojects {
             url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
         }
 
-
-
-        jcenter()
         mavenCentral()
     }
 }
@@ -163,6 +164,28 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     dependencies {
         implementation platform('com.taotao.cloud:taotao-cloud-dependencies:1.0.0')
+    }
+
+    task createProperties(dependsOn: processResources) {
+        doLast {
+            def fileDir = new File("$buildDir/resources/main");
+            if (fileDir.exists() && fileDir.isDirectory()) {
+                new File("$buildDir/resources/main/taotao-cloud-gradle.properties").withWriter { w ->
+                    def projectProperties = project.properties
+
+                    Properties p = new Properties()
+                    projectProperties.each { entry ->
+                        p[entry.key.toString()] = entry.value.toString()
+                    }
+
+                    p.store w, null
+                }
+            }
+        }
+    }
+
+    classes {
+        dependsOn createProperties
     }
 
     checkstyle {
@@ -256,7 +279,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         }
         to {
             image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud'
-            tags = ["${project.name}".toString(),"${project.version}".toString() ]
+            tags = ["${project.name}".toString(), "${project.version}".toString()]
 //            auth {
 //                username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
 //                password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
@@ -268,7 +291,58 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             mainClass = 'com.taotao.cloud.dubbo.account.provider.AccountServiceApplication'
             args = ['some', 'args']
             ports = ['8010']
-            labels = [key1:'value1', key2:'value2']
+            labels = [key1: 'value1', key2: 'value2']
         }
     }
 }
+
+//task printlnDefaultTask {
+//    println  project.properties
+//}
+
+//configurations.all{
+//    resolutionStrategy{
+//        //修改gradle不自动处理版本冲突
+//        // failOnVersionConflict()
+//
+//        //手动指定某个jar版本
+//        //force 'org.slf4j:slf4j-api:1.7.24'
+//    }
+//}
+//
+// gradle生命周期中的钩子方法
+//gradle.projectsEvaluated {
+//    System.setProperty("version", project.version)
+//    System.setProperty("gradleVersion", gradle.gradleVersion)
+//
+//    project.setProperty("version", project.version)
+//}
+//
+//System.setProperty("version", project.version)
+//System.setProperty("gradleVersion", gradle.gradleVersion)
+//
+//project.setProperty("version", project.version)
+
+//gradle.afterProject {
+//    System.setProperty("version", project.version)
+//    System.setProperty("gradleVersion", gradle.gradleVersion)
+//
+//    project.setProperty("version", project.version)
+//}
+
+////任务图
+//gradle.taskGraph.whenReady {
+//    println 'config phase: taskGraph.whenReady'
+//}
+//
+//gradle.taskGraph.beforeTask{
+//    println 'execute phase: taskGraph.beforeTask'
+//}
+//
+//gradle.taskGraph.afterTask {
+//    println "execute phase: taskGraph.afterTask"
+//}
+//
+//gradle.buildFinished {
+//    println 'execute phase: buildFinished'
+//}

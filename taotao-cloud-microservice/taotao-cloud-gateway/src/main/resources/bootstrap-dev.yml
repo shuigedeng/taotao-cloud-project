@@ -20,6 +20,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive
+    banner-mode: off
   application:
     name: taotao-cloud-gateway-service
   redis:

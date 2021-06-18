@@ -16,6 +16,7 @@ spring:
     type: none
   main:
     allow-bean-definition-overriding: true
+    banner-mode: off
   application:
     name: taotao-cloud-gateway-service
   redis:
