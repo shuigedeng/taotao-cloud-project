@@ -1,4 +1,3 @@
-
 dependencies {
     implementation 'io.trino:trino-jdbc:351'
     implementation 'io.trino:trino-spi:351'
