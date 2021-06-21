@@ -15,7 +15,9 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import lombok.experimental.UtilityClass;
@@ -30,14 +32,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ExceptionUtil {
 
-	/**
-	 * trace2String
-	 *
-	 * @param t throwable
-	 * @return java.lang.String
-	 * @author dengtao
-	 * @since 2021/2/25 16:13
-	 */
 	public static String trace2String(Throwable t) {
 		if (t == null) {
 			return "";
@@ -50,23 +44,82 @@ public class ExceptionUtil {
 				}
 			}
 		} catch (Exception exp) {
-			throw new BaseException(exp.getMessage());
+			throw new BaseException(ResultEnum.ERROR, exp);
 		}
 	}
 
-	/**
-	 * trace2String
-	 *
-	 * @param stackTraceElements stackTraceElements
-	 * @return java.lang.String
-	 * @author dengtao
-	 * @since 2021/2/25 16:14
-	 */
 	public static String trace2String(StackTraceElement[] stackTraceElements) {
 		StringBuilder sb = new StringBuilder();
-		for (StackTraceElement stackTraceElement : stackTraceElements) {
-			sb.append(stackTraceElement.toString()).append("\n");
+		for (StackTraceElement stackTraceElemen : stackTraceElements) {
+			sb.append(stackTraceElemen.toString()).append("\n");
 		}
 		return sb.toString();
+	}
+
+	private static String lineSeparator() {
+		return System.getProperty("line.separator");
+	}
+
+	public static String getFullMessage(Throwable e) {
+		if (e == null) {
+			return "";
+		}
+		return "【详细错误】" + lineSeparator() + getDetailMessage(e) + lineSeparator() + "【堆栈打印】"
+			+ lineSeparator() + getFullStackTrace(e);
+	}
+
+	public static String getFullStackTrace(Throwable e) {
+		if (e == null) {
+			return "";
+		}
+		StringWriter sw = null;
+		PrintWriter pw = null;
+		try {
+			sw = new StringWriter();
+			pw = new PrintWriter(sw);
+			// 将出错的栈信息输出到printWriter中
+			e.printStackTrace(pw);
+			pw.flush();
+			sw.flush();
+		} finally {
+			if (sw != null) {
+				try {
+					sw.close();
+				} catch (IOException e1) {
+				}
+			}
+			if (pw != null) {
+				pw.close();
+			}
+		}
+		return sw.toString();
+	}
+
+	public static String getDetailMessage(Throwable ex) {
+		if (ex == null) {
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		while (ex != null) {
+			sb.append(
+				"【" + ex.getClass().getName() + "】→" + StringUtil.nullToEmpty(ex.getMessage())
+					+ lineSeparator());
+			ex = ex.getCause();
+		}
+		return sb.toString();
+	}
+
+	public static void ignoreException(Runnable runnable, boolean isPrintInfo) {
+		try {
+			runnable.run();
+		} catch (Exception e) {
+			if (!isPrintInfo) {
+				LogUtil.error(getFullStackTrace(e));
+			}
+		}
+	}
+
+	public static void ignoreException(Runnable runnable) {
+		ignoreException(runnable, false);
 	}
 }

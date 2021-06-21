@@ -51,6 +51,12 @@ public class BaseException extends RuntimeException implements Serializable {
 		this.message = message;
 	}
 
+	public BaseException(Throwable e) {
+		super(e);
+		this.code = ResultEnum.ERROR.getCode();
+		this.message = ResultEnum.ERROR.getData();
+	}
+
 	public BaseException(String message, Throwable e) {
 		super(message, e);
 		this.code = ResultEnum.ERROR.getCode();
