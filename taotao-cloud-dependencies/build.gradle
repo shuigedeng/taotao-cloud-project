@@ -90,18 +90,18 @@ publishing {
     repositories {
         maven {
             url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
-//            credentials {
-//                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-//                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-//            }
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
         }
 
         maven {
             url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
-//            credentials {
-//                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-//                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-//            }
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+            }
         }
     }
 
