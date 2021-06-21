@@ -163,5 +163,6 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+
 knife4j:
   enable: false
