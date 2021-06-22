@@ -15,29 +15,34 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.taotao.cloud.common.constant.CommonConstant;
+import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.taotao.cloud.common.json.LampJacksonModule;
+import com.taotao.cloud.common.json.RemoteDataDeserializer;
+import com.taotao.cloud.common.model.RemoteData;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.exception.DefaultExceptionAdvice;
-import com.taotao.cloud.web.filter.LbIsolationFilter;
-import com.taotao.cloud.web.filter.TenantFilter;
-import com.taotao.cloud.web.filter.TraceFilter;
-import com.taotao.cloud.web.interceptor.MyInterceptor;
+import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
-import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.support.LoginUserArgumentResolver;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.context.request.RequestContextListener;
@@ -65,7 +70,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
 	}
 
 	@Override
@@ -96,10 +101,33 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 		return customizer -> {
-			customizer.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(
-				DateTimeFormatter.ofPattern(CommonConstant.DATETIME_FORMAT)));
-			customizer.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(
-				DateTimeFormatter.ofPattern(CommonConstant.DATETIME_FORMAT)));
+			ObjectMapper objectMapper = customizer.createXmlMapper(true).build();
+			objectMapper
+				.setLocale(Locale.CHINA)
+				//去掉默认的时间戳格式
+				.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+				// 时区
+				.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
+				//Date参数日期格式
+				.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT, Locale.CHINA))
+
+				//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
+				.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
+				// 忽略不能转义的字符
+				.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(), true)
+				//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
+				.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+				//忽略未知字段
+				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+				//单引号处理
+				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+
+			// 注册自定义模块
+			objectMapper.registerModule(new LampJacksonModule())
+				.registerModule(new SimpleModule().addDeserializer(RemoteData.class, RemoteDataDeserializer.INSTANCE))
+				.findAndRegisterModules();
+
+			customizer.configure(objectMapper);
 		};
 	}
 
@@ -117,12 +145,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public RequestContextListener requestContextListener() {
 		return new RequestContextListener();
 	}
-
-	@Bean
-	public DefaultExceptionAdvice defaultExceptionAdvice(){
-		return new DefaultExceptionAdvice();
-	}
-
 
 //	@Bean
 //	public FilterRegistrationBean<Filter1> func(Filter1 filter1) {

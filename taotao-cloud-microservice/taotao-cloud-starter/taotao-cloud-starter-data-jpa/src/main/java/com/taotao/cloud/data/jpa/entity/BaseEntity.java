@@ -23,6 +23,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
+import javax.validation.groups.Default;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -82,5 +83,19 @@ public class BaseEntity {
 	@Builder.Default
 	@Column(name = "del_flag", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否删除 0-正常 1-删除'")
 	private Boolean delFlag = false;
+
+	/**
+	 * 保存和缺省验证组
+	 */
+	public interface Save extends Default {
+
+	}
+
+	/**
+	 * 更新和缺省验证组
+	 */
+	public interface Update extends Default {
+
+	}
 
 }

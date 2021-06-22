@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.common.exception.BaseException;
 import java.util.Arrays;
 import lombok.experimental.UtilityClass;
@@ -45,6 +44,10 @@ public class ContextUtil {
 
 	public ConfigurableApplicationContext getApplicationContext() {
 		return applicationContext;
+	}
+
+	public static boolean isWeb() {
+		return getApplicationContext() != null;
 	}
 
 	/**

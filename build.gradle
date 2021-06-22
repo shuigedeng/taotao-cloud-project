@@ -326,7 +326,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 //    System.setProperty("gradleVersion", gradle.gradleVersion)
 //
 //    project.setProperty("version", project.version)
-//}
+//}p6spyVersion
 
 ////任务图
 //gradle.taskGraph.whenReady {

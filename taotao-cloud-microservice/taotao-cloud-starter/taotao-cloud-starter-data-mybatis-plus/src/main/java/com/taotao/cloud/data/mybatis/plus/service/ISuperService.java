@@ -18,7 +18,11 @@ package com.taotao.cloud.data.mybatis.plus.service;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.data.mybatis.plus.mapper.SuperMapper;
+import java.util.List;
 
 /**
  * service接口父类
@@ -28,6 +32,32 @@ import com.taotao.cloud.common.lock.DistributedLock;
  * @version 1.0.0
  */
 public interface ISuperService<T> extends IService<T> {
+
+	/**
+	 * 获取实体的类型
+	 *
+	 * @return
+	 */
+	Class<T> getEntityClass();
+
+	/**
+	 * 批量保存数据
+	 * <p>
+	 * 注意：该方法仅仅测试过mysql
+	 *
+	 * @param entityList
+	 * @return
+	 */
+	default boolean saveBatchSomeColumn(List<T> entityList) {
+		if (entityList.isEmpty()) {
+			return true;
+		}
+		if (entityList.size() > 5000) {
+			throw new BaseException("");
+		}
+		return SqlHelper.retBool(((SuperMapper) getBaseMapper()).insertBatchSomeColumn(entityList));
+	}
+
 	/**
 	 * 幂等性新增记录
 	 *

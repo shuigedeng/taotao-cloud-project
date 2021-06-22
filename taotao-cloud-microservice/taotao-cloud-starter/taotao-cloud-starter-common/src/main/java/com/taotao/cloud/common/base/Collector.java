@@ -317,7 +317,6 @@ public class Collector {
 			} else {
 				return 0;
 			}
-
 		}
 
 		@Override

@@ -5,7 +5,7 @@ dependencies {
 
     api 'com.querydsl:querydsl-apt'
     api 'com.querydsl:querydsl-jpa'
-    api 'p6spy:p6spy'
+    api 'p6spy:p6spy:3.9.1'
     api "mysql:mysql-connector-java"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"

@@ -1,7 +1,7 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    implementation 'p6spy:p6spy'
+    implementation 'p6spy:p6spy:3.9.1'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

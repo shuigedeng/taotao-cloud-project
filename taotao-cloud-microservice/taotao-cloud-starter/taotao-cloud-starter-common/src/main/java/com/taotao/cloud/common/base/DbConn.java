@@ -3,6 +3,7 @@ package com.taotao.cloud.common.base;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.common.utils.TimeWatchUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -227,7 +228,7 @@ public final class DbConn implements AutoCloseable {
 
 		public DbException(String message, String sql, Exception exp) {
 			super(message, exp);
-			if (PropertyUtil.getPropertyCache("bsf.db.printSqlError.enabled", true) && !StringUtils
+			if (PropertyUtil.getPropertyCache("bsf.db.printSqlError.enabled", true) && !StringUtil
 				.isEmpty(sql)) {
 				LogUtil.error("错误sql:" + sql);
 			}

@@ -19,12 +19,20 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
+import com.taotao.cloud.redis.properties.CustomCacheProperties;
+import com.taotao.cloud.redis.redis.RedisOps;
+import com.taotao.cloud.redis.repository.CacheOps;
+import com.taotao.cloud.redis.repository.CachePlusOps;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.redis.repository.impl.RedisOpsImpl;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -36,6 +44,7 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -50,7 +59,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 @EnableCaching
+@AllArgsConstructor
 public class TaoTaoCloudRedisConfiguration implements InitializingBean {
+
+	private final CustomCacheProperties cacheProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -95,6 +107,37 @@ public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 	public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate) {
 		return new RedisRepository(redisTemplate);
 	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public RedisOps getRedisOps(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
+		return new RedisOps(redisTemplate, stringRedisTemplate, cacheProperties.getCacheNullVal());
+	}
+
+	/**
+	 * redis 持久库
+	 *
+	 * @param redisOps the redis template
+	 * @return the redis repository
+	 */
+	@Bean
+	@ConditionalOnMissingBean
+	public CacheOps cacheOps(RedisOps redisOps) {
+		return new RedisOpsImpl(redisOps);
+	}
+
+	/**
+	 * redis 增强持久库
+	 *
+	 * @param redisOps the redis template
+	 * @return the redis repository
+	 */
+	@Bean
+	@ConditionalOnMissingBean
+	public CachePlusOps cachePlusOps(RedisOps redisOps) {
+		return new RedisOpsImpl(redisOps);
+	}
+
 
 	@Primary
 	@Bean(name = "cacheManager")

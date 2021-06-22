@@ -2,5 +2,7 @@ org.springframework.context.ApplicationContextInitializer=\
 com.taotao.cloud.core.initializer.BannerInitializer, \
 com.taotao.cloud.core.initializer.CoreApplicationContextInitializer, \
 com.taotao.cloud.core.initializer.TtlMDCAdapterInitializer
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.core.configuration.EndPointConfiguration
+com.taotao.cloud.core.configuration.EndPointConfiguration, \
+com.taotao.cloud.core.configuration.CoreConfiguration

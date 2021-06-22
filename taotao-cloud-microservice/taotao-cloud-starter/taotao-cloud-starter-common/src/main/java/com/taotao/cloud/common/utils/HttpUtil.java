@@ -27,7 +27,7 @@ public class HttpUtil {
 	 */
 	public static Object getRequest(String requestUrl, String charSetName) {
 		String res = "";
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		try {
 			URL url = new URL(requestUrl);
 			HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();

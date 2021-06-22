@@ -28,8 +28,10 @@ import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
+import com.taotao.cloud.data.mybatis.plus.mapper.SuperMapper;
 import com.taotao.cloud.data.mybatis.plus.service.ISuperService;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +43,16 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  */
 public class SuperServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements ISuperService<T> {
+	private Class<T> entityClass = null;
+
+	@Override
+	public Class<T> getEntityClass() {
+		if (entityClass == null) {
+			this.entityClass = (Class) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+		}
+		return this.entityClass;
+	}
+
 	@Override
 	public boolean saveIdempotency(T entity, DistributedLock locker, String lockKey, Wrapper<T> countWrapper, String msg) throws Exception {
 		if (locker == null) {
