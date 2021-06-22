@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        taotaoCloudVersion = "1.1.0"
+        taotaoCloudVersion = "1.2.0"
         taotaoCloudGroup = "com.taotao.cloud"
 
         springVersion = '5.3.4'
         springBootVersion = '2.5.1'
         springCloudVersion = '2020.0.3'
-        springCloudAlibabaVersion = '2021.2'
+        springCloudAlibabaVersion = '2021.1'
 
         springSecurityVersion = '5.4.5'
         springDataCommonsVersion = '2.4.5'
@@ -161,7 +161,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 //    apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
-        implementation platform("com.taotao.cloud:taotao-cloud-dependencies:1.0.0")
+        implementation platform("com.taotao.cloud:taotao-cloud-dependencies:1.1.0")
     }
 
     task createProperties(dependsOn: processResources) {
