@@ -161,7 +161,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 //    apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
-        implementation platform("com.taotao.cloud:taotao-cloud-dependencies:1.1.0")
+        implementation platform("com.taotao.cloud:taotao-cloud-dependencies:$taotaoCloudVersion")
     }
 
     task createProperties(dependsOn: processResources) {
