@@ -38,9 +38,9 @@ public class StringUtil {
 	/**
 	 * 部分字符串获取
 	 *
-	 * @param str    str
+	 * @param str    字符串
 	 * @param maxlen 最大长度
-	 * @return java.lang.String
+	 * @return java.lang.String 字符串
 	 * @author dengtao
 	 * @since 2021/2/25 16:41
 	 */
@@ -57,9 +57,9 @@ public class StringUtil {
 	/**
 	 * 部分字符串获取 超出部分末尾...
 	 *
-	 * @param str    str
-	 * @param maxlen maxlen
-	 * @return java.lang.String
+	 * @param str    字符串
+	 * @param maxlen 最大长度
+	 * @return java.lang.String 字符串
 	 * @author dengtao
 	 * @since 2021/2/25 16:41
 	 */

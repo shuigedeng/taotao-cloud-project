@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.base;
 
 import com.taotao.cloud.common.base.Callable.Action1;
@@ -24,8 +39,9 @@ import lombok.var;
 /**
  * 自定义线程池及关键方法包装实现 装饰
  *
- * @author: chejiangyi
- * @version: 2019-07-23 20:56
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2021/6/22 17:14
  **/
 public class ThreadPool {
 
@@ -34,7 +50,7 @@ public class ThreadPool {
 	}
 
 	public static void initSystem() {
-		System = new ThreadPool("bsf.threadPool.system",
+		System = new ThreadPool("taotao.cloud.threadPool.system",
 			ThreadPoolProperties.getThreadPoolMinSize(),
 			ThreadPoolProperties.getThreadPoolMaxSize());
 	}
@@ -59,7 +75,7 @@ public class ThreadPool {
 		this.name = name;
 		threadPool = new ThreadPoolExecutor(threadPoolMinSize, threadPoolMaxSize,
 			60L, TimeUnit.SECONDS,
-			new SynchronousQueue<Runnable>(), new SystemThreadPoolFactory());
+			new SynchronousQueue<>(), new SystemThreadPoolFactory());
 		threadMonitor = new ThreadMonitor(this.name, threadPool);
 	}
 
@@ -67,7 +83,7 @@ public class ThreadPool {
 		if (checkHealth && threadPool.getMaximumPoolSize() <= threadPool.getPoolSize()
 			&& threadPool.getQueue().size() > 0) {
 			LogUtil.warn(
-				"bsf线程池已满,任务开始出现排队,请考虑设置bsf.threadpool.max,当前:" + threadPool.getMaximumPoolSize());
+				"bsf线程池已满,任务开始出现排队,请考虑设置taotao.cloud.threadpool.max,当前:" + threadPool.getMaximumPoolSize());
 		}
 	}
 
@@ -243,10 +259,9 @@ public class ThreadPool {
 			Thread t = factory.newThread(r);
 			t.setName("bsf-threadPool-" + t.getName());
 			var handler = t.getUncaughtExceptionHandler();
-			if (handler == null
-				|| !(handler instanceof DefaultBsfThreadPoolUncaughtExceptionHandler)) {
+			if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
-					new DefaultBsfThreadPoolUncaughtExceptionHandler(handler));
+					new DefaultThreadPoolUncaughtExceptionHandler(handler));
 			}
 			//后台线程模式
 			t.setDaemon(true);
@@ -255,12 +270,12 @@ public class ThreadPool {
 	}
 
 
-	public static class DefaultBsfThreadPoolUncaughtExceptionHandler implements
+	public static class DefaultThreadPoolUncaughtExceptionHandler implements
 		Thread.UncaughtExceptionHandler {
 
 		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler = null;
 
-		public DefaultBsfThreadPoolUncaughtExceptionHandler(
+		public DefaultThreadPoolUncaughtExceptionHandler(
 			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
 		}
@@ -277,8 +292,5 @@ public class ThreadPool {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);
 			}
 		}
-
-
 	}
-
 }

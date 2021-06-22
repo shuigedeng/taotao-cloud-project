@@ -18,8 +18,6 @@ package com.taotao.cloud.common.utils;
 import cn.hutool.core.date.SystemClock;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import lombok.experimental.UtilityClass;
-
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;

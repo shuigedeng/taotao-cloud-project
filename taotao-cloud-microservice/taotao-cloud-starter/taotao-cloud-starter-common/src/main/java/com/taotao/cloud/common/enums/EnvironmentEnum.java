@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.enums;
 
 import com.taotao.cloud.common.base.CoreProperties;
@@ -6,40 +21,49 @@ import com.taotao.cloud.common.utils.ReflectionUtil;
 import lombok.val;
 
 /**
- * @author: chejiangyi 默认环境枚举
- * @version: 2019-05-27 13:38
+ * 默认环境枚举
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/4/30 10:25
  **/
 public enum EnvironmentEnum {
 	JOB_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "job_DEV", ""),
-		"bsf_job_url"),//DEV.job.b2bcsx.com
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "job_DEV", ""),
+		"taotao_cloud_job_url"),
 	APOLLO_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "apollo_DEV", ""),
-		"bsf_apollo_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "apollo_DEV",
+			""),
+		"taotao_cloud_apollo_url"),
 	APOLLO_PRD(EnvironmentTypeEnum.PRD, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "apollo_prd", ""),
-		"bsf_apollo_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "apollo_prd",
+			""),
+		"taotao_cloud_apollo_url"),
 	CAT_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "cat_DEV", ""),
-		"bsf_cat_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "cat_DEV", ""),
+		"taotao_cloud_cat_url"),
 	ELK_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "elk_DEV", ""),
-		"bsf_elk_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "elk_DEV", ""),
+		"taotao_cloud_elk_url"),
 	RocketMQ_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "rocketmq_DEV", ""),
-		"bsf_rocketmq_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "rocketmq_DEV",
+			""),
+		"taotao_cloud_rocketmq_url"),
 	EUREKA_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "eureka_DEV", ""),
-		"bsf_eureka_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "eureka_DEV",
+			""),
+		"taotao_cloud_eureka_url"),
 	REDIS_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "redis_DEV", ""),
-		"bsf_redis_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "redis_DEV",
+			""),
+		"taotao_cloud_redis_url"),
 	ES_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "es_DEV", ""),
-		"bsf_es_url"),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "es_DEV", ""),
+		"taotao_cloud_es_url"),
 	FILE_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.yh.csx.bsf.core.base.BsfBaseConfig", "file_DEV", ""),
-		"bsf_file_url");
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "file_DEV",
+			""),
+		"taotao_cloud_file_url");
 	private EnvironmentTypeEnum env;
 	private String url;
 	private String serverkey;
@@ -66,7 +90,7 @@ public enum EnvironmentEnum {
 		for (val e : EnvironmentEnum.values()) {
 			if (e.getServerkey().equalsIgnoreCase(serverKey) && e.getEnv().toString()
 				.equalsIgnoreCase(PropertyUtil.getPropertyCache(
-					CoreProperties.BsfEnv, ""))) {
+					CoreProperties.TaoTaoCloudEnv, ""))) {
 				return e;
 			}
 		}

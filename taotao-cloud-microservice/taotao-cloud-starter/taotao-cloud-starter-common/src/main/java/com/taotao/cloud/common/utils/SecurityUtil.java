@@ -183,7 +183,8 @@ public class SecurityUtil {
 	 * @since 2021/2/25 16:59
 	 */
 	public BCryptPasswordEncoder getPasswordEncoder() {
-		BCryptPasswordEncoder passwordEncoder = ContextUtil.getBean(BCryptPasswordEncoder.class, true);
+		BCryptPasswordEncoder passwordEncoder = ContextUtil
+			.getBean(BCryptPasswordEncoder.class, true);
 		if (Objects.isNull(passwordEncoder)) {
 			passwordEncoder = new BCryptPasswordEncoder();
 		}

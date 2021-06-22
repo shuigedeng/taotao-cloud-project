@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.utils;
 
 import java.util.concurrent.Callable;
@@ -5,21 +20,24 @@ import java.util.function.Consumer;
 import lombok.Getter;
 
 /**
- * @创建人 霍钧城
- * @创建时间 2020年12月03日 17:28:00
- * @描述 错误补偿工具类
+ * 错误补偿工具类
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/4/30 10:23
  */
 public class FailOverUtil {
 
 	private final static String name = "补偿工具";
 
 	/**
-	 * @描述 错误补偿工具类
-	 * @参数 [consumer, c1]
-	 * @返回值 T
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/25
-	 * @修改历史：
+	 * 错误补偿工具类
+	 *
+	 * @param consumer
+	 * @param c1
+	 * @return T
+	 * @author dengtao
+	 * @since 2021/6/22 17:41
 	 */
 	public static <T> T invoke(Consumer<Result<T>> consumer, Callable<T>... c1) {
 		Result<T> result = new Result<>();
@@ -52,12 +70,11 @@ public class FailOverUtil {
 	}
 
 	/**
-	 * @描述 反馈结果
-	 * @参数
-	 * @返回值
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/25
-	 * @修改历史：
+	 * 反馈结果
+	 *
+	 * @author dengtao
+	 * @version 1.0.0
+	 * @since 2021/6/22 17:42
 	 */
 	@Getter
 	public static class Result<T> {

@@ -56,13 +56,13 @@ public class CoreApplicationContextInitializer implements
 		ContextUtil.setApplicationContext(context);
 
 		ConfigurableEnvironment environment = context.getEnvironment();
-		if ("false".equalsIgnoreCase(environment.getProperty(CoreProperties.BsfEnabled))) {
+		if ("false".equalsIgnoreCase(environment.getProperty(CoreProperties.TaoTaoCloudEnabled))) {
 			return;
 		}
 
 		//环境变量初始化
 		String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
-		String propertyValue2 = environment.getProperty(CoreProperties.BsfEnv);
+		String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv);
 
 		if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
 			//optimizeJson(environment);
@@ -71,7 +71,7 @@ public class CoreApplicationContextInitializer implements
 			setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
 			LogUtil
 				.info(CoreProperties.Project,
-					CoreProperties.BsfEnv + "=" + propertyValue2);
+					CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
 			for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 				if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
 					setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[bsf环境变量]");
@@ -117,10 +117,10 @@ public class CoreApplicationContextInitializer implements
 					val rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
 					if (rollingPolicy != null
 						&& rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
-						setDefaultProperty(CoreProperties.BsfLoggingFileTotalSize, "1GB", message);
+						setDefaultProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB", message);
 						((SizeAndTimeBasedRollingPolicy) rollingPolicy).setTotalSizeCap(FileSize
 							.valueOf(environment
-								.getProperty(CoreProperties.BsfLoggingFileTotalSize, "1GB")));
+								.getProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB")));
 					}
 				}
 			}
@@ -159,11 +159,11 @@ public class CoreApplicationContextInitializer implements
 			if (data != null && data.size() > 0) {
 				for (val e : data.entrySet()) {
 					if (PropertyUtil
-						.getPropertyCache(CoreProperties.BsfContextRestartEnabled, false)
+						.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartEnabled, false)
 						== false) {
 						return;
 					}
-					if (e.getKey().equalsIgnoreCase(CoreProperties.BsfContextRestartText)) {
+					if (e.getKey().equalsIgnoreCase(CoreProperties.TaoTaoCloudContextRestartText)) {
 						refreshConetext();
 						return;
 					}
@@ -182,7 +182,7 @@ public class CoreApplicationContextInitializer implements
 			val context = ContextUtil.getApplicationContext();
 			ApplicationArguments args = context.getBean(ApplicationArguments.class);
 			val waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
-				PropertyUtil.getPropertyCache(CoreProperties.BsfContextRestartTimeSpan, 10));
+				PropertyUtil.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartTimeSpan, 10));
 
 			Thread thread = new Thread(() -> {
 				try {

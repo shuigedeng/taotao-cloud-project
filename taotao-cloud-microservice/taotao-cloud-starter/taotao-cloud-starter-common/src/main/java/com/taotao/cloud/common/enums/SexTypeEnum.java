@@ -22,7 +22,7 @@ package com.taotao.cloud.common.enums;
  * @version 1.0.0
  * @since 2020/4/30 10:25
  */
-public enum UserSexTypeEnum implements BaseEnum {
+public enum SexTypeEnum implements BaseEnum {
 	/**
 	 * 未知
 	 */
@@ -39,7 +39,7 @@ public enum UserSexTypeEnum implements BaseEnum {
 	private final byte code;
 	private final String description;
 
-	UserSexTypeEnum(byte code, String description) {
+	SexTypeEnum(byte code, String description) {
 		this.code = code;
 		this.description = description;
 	}
@@ -50,7 +50,7 @@ public enum UserSexTypeEnum implements BaseEnum {
 
 	@Override
 	public String getNameByCode(int code) {
-		for (UserSexTypeEnum result : UserSexTypeEnum.values()) {
+		for (SexTypeEnum result : SexTypeEnum.values()) {
 			if (result.getCode() == code) {
 				return result.name().toLowerCase();
 			}

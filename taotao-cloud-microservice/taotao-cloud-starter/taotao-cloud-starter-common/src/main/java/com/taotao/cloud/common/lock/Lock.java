@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 锁
+ * 锁对象
  *
  * @author dengtao
  * @version 1.0.0

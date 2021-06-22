@@ -1,5 +1,19 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.json;
-
 
 import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT;
 import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
@@ -24,13 +38,15 @@ import java.time.format.DateTimeFormatter;
 /**
  * jackson 自定义序列化 & 反序列化 规则
  *
- * @author zuihou
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/5/2 16:49
  */
-public class LampJacksonModule extends SimpleModule {
+public class JacksonModule extends SimpleModule {
 
-	public LampJacksonModule() {
+	public JacksonModule() {
 		super(PackageVersion.VERSION);
-		this.addDeserializer(LocalDateTime.class, LampLocalDateTimeDeserializer.INSTANCE);
+		this.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
 		this.addDeserializer(LocalDate.class,
 			new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
 		this.addDeserializer(LocalTime.class,

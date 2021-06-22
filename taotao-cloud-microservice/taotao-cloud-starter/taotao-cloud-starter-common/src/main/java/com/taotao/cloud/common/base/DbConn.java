@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.base;
 
 import com.taotao.cloud.common.utils.ContextUtil;
@@ -19,8 +34,11 @@ import javax.sql.DataSource;
 import lombok.Data;
 
 /**
- * @author: chejiangyi
- * @version: 2019-10-20 10:59
+ * DbConn
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2021/6/22 17:08
  **/
 @Data
 public final class DbConn implements AutoCloseable {
@@ -54,7 +72,7 @@ public final class DbConn implements AutoCloseable {
 	}
 
 	private boolean getPrintSql() {
-		return PropertyUtil.getPropertyCache(CoreProperties.BsfIsPrintSqlTimeWatch, true);
+		return PropertyUtil.getPropertyCache(CoreProperties.TaoTaoCloudIsPrintSqlTimeWatch, true);
 	}
 
 	/**
@@ -64,7 +82,7 @@ public final class DbConn implements AutoCloseable {
 	public void close() {
 		TimeWatchUtil.print(getPrintSql(), "[db]close", () -> {
 			try {
-				if (conn != null && conn.isClosed() == false) {
+				if (conn != null && !conn.isClosed()) {
 					conn.close();
 				}
 			} catch (Exception e) {
@@ -228,7 +246,7 @@ public final class DbConn implements AutoCloseable {
 
 		public DbException(String message, String sql, Exception exp) {
 			super(message, exp);
-			if (PropertyUtil.getPropertyCache("bsf.db.printSqlError.enabled", true) && !StringUtil
+			if (PropertyUtil.getPropertyCache("taotao.cloud.db.printSqlError.enabled", true) && !StringUtil
 				.isEmpty(sql)) {
 				LogUtil.error("错误sql:" + sql);
 			}

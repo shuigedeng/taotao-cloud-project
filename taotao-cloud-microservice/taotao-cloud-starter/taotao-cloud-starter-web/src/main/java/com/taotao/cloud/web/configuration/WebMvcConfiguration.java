@@ -22,12 +22,8 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.common.json.LampJacksonModule;
-import com.taotao.cloud.common.json.RemoteDataDeserializer;
-import com.taotao.cloud.common.model.RemoteData;
+import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.web.exception.DefaultExceptionAdvice;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
@@ -114,7 +110,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
 				.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
 				// 忽略不能转义的字符
-				.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(), true)
+				.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
+					true)
 				//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
 				.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 				//忽略未知字段
@@ -123,8 +120,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 
 			// 注册自定义模块
-			objectMapper.registerModule(new LampJacksonModule())
-				.registerModule(new SimpleModule().addDeserializer(RemoteData.class, RemoteDataDeserializer.INSTANCE))
+			objectMapper.registerModule(new JacksonModule())
 				.findAndRegisterModules();
 
 			customizer.configure(objectMapper);

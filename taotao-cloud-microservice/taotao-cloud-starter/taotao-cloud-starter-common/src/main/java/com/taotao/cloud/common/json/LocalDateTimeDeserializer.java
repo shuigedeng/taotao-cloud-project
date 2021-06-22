@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.json;
 
 
@@ -21,7 +36,6 @@ import com.fasterxml.jackson.core.JsonTokenId;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -31,18 +45,17 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  * 字段类型是LocalDateTime时，可以按照以下6种格式反序列化： 1. yyyy-MM-dd 2. yyyy年MM月dd日 3. yyyy/MM/dd 4. yyyy-MM-dd
  * HH:mm:ss 5. yyyy年MM月dd日HH时mm分ss秒 6. yyyy/MM/dd HH:mm:ss
  *
- * @author zuihou
- * @date 2020/6/18 上午10:50
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/5/2 16:47
  */
-@SuppressWarnings("ALL")
-public class LampLocalDateTimeDeserializer extends JSR310DateTimeDeserializerBase<LocalDateTime> {
+public class LocalDateTimeDeserializer extends JSR310DateTimeDeserializerBase<LocalDateTime> {
 
-	public static final LampLocalDateTimeDeserializer INSTANCE = new LampLocalDateTimeDeserializer();
+	public static final LocalDateTimeDeserializer INSTANCE = new LocalDateTimeDeserializer();
 	private static final long serialVersionUID = 1L;
 	private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 	/**
@@ -66,27 +79,27 @@ public class LampLocalDateTimeDeserializer extends JSR310DateTimeDeserializerBas
 		return this;
 	}
 
-	private LampLocalDateTimeDeserializer() {
+	private LocalDateTimeDeserializer() {
 		this(DEFAULT_FORMATTER);
 	}
 
-	public LampLocalDateTimeDeserializer(DateTimeFormatter formatter) {
+	public LocalDateTimeDeserializer(DateTimeFormatter formatter) {
 		super(LocalDateTime.class, formatter);
 	}
 
-	protected LampLocalDateTimeDeserializer(LampLocalDateTimeDeserializer base, Boolean leniency) {
+	protected LocalDateTimeDeserializer(LocalDateTimeDeserializer base, Boolean leniency) {
 		super(base, leniency);
 	}
 
 	@Override
-	protected LampLocalDateTimeDeserializer withLeniency(Boolean leniency) {
-		return new LampLocalDateTimeDeserializer(this, leniency);
+	protected LocalDateTimeDeserializer withLeniency(Boolean leniency) {
+		return new LocalDateTimeDeserializer(this, leniency);
 	}
 
 	@Override
 	protected JSR310DateTimeDeserializerBase<LocalDateTime> withDateFormat(
 		DateTimeFormatter formatter) {
-		return new LocalDateTimeDeserializer(formatter);
+		return new com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer(formatter);
 	}
 
 	private LocalDateTime convert(String source) {

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.utils;
 
 import java.util.Timer;
@@ -9,9 +24,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 
 /**
- * @创建人 霍钧城
- * @创建时间 2020年12月03日 17:28:00
- * @描述 异步处理异常工具类
+ * 异步处理异常工具类
+ *
+ * @author dengtao
+ * @version 1.0.0
+ * @since 2020/4/30 10:23
  */
 public class AsyncUtil {
 
@@ -21,36 +38,36 @@ public class AsyncUtil {
 	private static Timer taskTimer = new Timer(name, true);
 
 	/**
-	 * @描述 启动线程
-	 * @参数 [task]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/28
-	 * @修改历史：
+	 * 启动线程
+	 *
+	 * @param task
+	 * @author dengtao
+	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task) {
 		execute(task, 0, 0, null);
 	}
 
 	/**
-	 * @描述 线程启动 出错后重试，最大重试maxRetryCount次，每次默认多延迟1秒执行，最大延迟5秒
-	 * @参数 [task, maxRetryCount]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/28
-	 * @修改历史：
+	 * 线程启动 出错后重试，最大重试maxRetryCount次，每次默认多延迟1秒执行，最大延迟5秒
+	 *
+	 * @param task
+	 * @param maxRetryCount
+	 * @author dengtao
+	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount) {
 		execute(task, maxRetryCount, 0, null);
 	}
 
 	/**
-	 * @描述 出错后重试，最大重试maxRetryCount次，每次默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
-	 * @参数 [task, maxRetryCount, consumer]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/28
-	 * @修改历史：
+	 * 出错后重试，最大重试maxRetryCount次，每次默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
+	 *
+	 * @param task
+	 * @param maxRetryCount
+	 * @param consumer
+	 * @author dengtao
+	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount,
 		BiConsumer<Boolean, Throwable> consumer) {
@@ -58,13 +75,14 @@ public class AsyncUtil {
 	}
 
 	/**
-	 * @描述 出错后重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行,如果delaySeconds<=0
-	 * 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
-	 * @参数 [task, maxRetryCount, delaySeconds, consumer]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/28
-	 * @修改历史：
+	 * 出错后重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行,如果delaySeconds<=0 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
+	 *
+	 * @param task
+	 * @param maxRetryCount
+	 * @param delaySeconds
+	 * @param consumer
+	 * @author dengtao
+	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount, int delaySeconds,
 		BiConsumer<Boolean, Throwable> consumer) {
@@ -72,13 +90,16 @@ public class AsyncUtil {
 	}
 
 	/**
-	 * @描述 出错后重试，延迟firstDelaySeconds后开始重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行，如果delaySeconds<=0
+	 * 出错后重试，延迟firstDelaySeconds后开始重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行，如果delaySeconds<=0
 	 * 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
-	 * @参数 [task, firstDelaySeconds, maxRetryCount, delaySeconds, consumer]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/28
-	 * @修改历史：
+	 *
+	 * @param task
+	 * @param firstDelaySeconds
+	 * @param maxRetryCount
+	 * @param delaySeconds
+	 * @param consumer
+	 * @author dengtao
+	 * @since 2021/6/22 17:40
 	 */
 	public static void executeDelay(Runnable task, int firstDelaySeconds, int maxRetryCount,
 		int delaySeconds, BiConsumer<Boolean, Throwable> consumer) {
@@ -143,7 +164,7 @@ public class AsyncUtil {
 				try {
 					resultConsumer.accept(exception == null, exception);
 				} catch (Throwable e) {
-					LogUtil.error( name, "处理结果回调异常", e);
+					LogUtil.error(name, "处理结果回调异常", e);
 				}
 			}
 		}

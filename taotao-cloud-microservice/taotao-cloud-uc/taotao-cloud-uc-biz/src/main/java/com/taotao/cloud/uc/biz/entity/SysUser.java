@@ -1,9 +1,7 @@
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.common.enums.UserSexTypeEnum;
-import com.taotao.cloud.common.enums.UserTypeEnum;
+import com.taotao.cloud.common.enums.SexTypeEnum;
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import com.taotao.cloud.uc.api.vo.user.UserVO;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -59,7 +57,7 @@ public class SysUser extends BaseEntity {
     private int type = 3;
 
     /**
-     * @see UserSexTypeEnum
+     * @see SexTypeEnum
      */
     @Column(name = "sex", nullable = false, columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
     @Builder.Default

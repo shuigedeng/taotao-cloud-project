@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
@@ -12,14 +27,11 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.json.LampJacksonModule;
-import com.taotao.cloud.common.json.RemoteDataDeserializer;
-import com.taotao.cloud.common.model.RemoteData;
+import com.taotao.cloud.common.json.JacksonModule;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -80,9 +92,7 @@ public class JsonUtil {
 		MAPPER.registerModule(new JavaTimeModule());
 
 		// 注册自定义模块
-		MAPPER.registerModule(new LampJacksonModule());
-		MAPPER.registerModule(
-			new SimpleModule().addDeserializer(RemoteData.class, RemoteDataDeserializer.INSTANCE));
+		MAPPER.registerModule(new JacksonModule());
 	}
 
 	/**

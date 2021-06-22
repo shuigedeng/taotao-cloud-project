@@ -1,5 +1,19 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.json;
-
 
 import static com.taotao.cloud.common.json.EnumSerializer.ALL_ENUM_KEY_FIELD;
 
@@ -20,9 +34,10 @@ import org.springframework.beans.BeanUtils;
  * 此反序列化类有bug，请使用 com.fasterxml.jackson.databind.deser.std.EnumDeserializer bug1： 不支持接收List<Enum>
  * bug2: 传错删除没有报错
  *
- * @author zuihou
- * @date 2019-07-25 22:15
+ * @author dengtao
+ * @version 1.0.0
  * @see com.fasterxml.jackson.databind.deser.std.EnumDeserializer
+ * @since 2021/6/22 17:27
  */
 @Slf4j
 @Deprecated

@@ -16,11 +16,10 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.exception.BaseException;
-import lombok.experimental.UtilityClass;
-import lombok.val;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import lombok.experimental.UtilityClass;
+import lombok.val;
 
 /**
  * ReflectionUtils
