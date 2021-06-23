@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.core.initializer.CoreApplicationRunner;
-import com.taotao.cloud.core.initializer.CoreCommandLineRunner;
-import org.springframework.context.annotation.Configuration;
+import com.taotao.cloud.core.runner.CoreApplicationRunner;
+import com.taotao.cloud.core.runner.CoreCommandLineRunner;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -27,7 +26,6 @@ import org.springframework.context.annotation.Import;
  * @version 1.0.0
  * @since 2021/04/02 10:25
  */
-@Configuration
 @Import({CoreApplicationRunner.class, CoreCommandLineRunner.class})
 public class CoreConfiguration {
 

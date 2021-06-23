@@ -16,7 +16,6 @@
 package com.taotao.cloud.common.base;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * CoreProperties
@@ -25,7 +24,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 1.0.0
  * @since 2021/6/22 17:08
  **/
-@ConfigurationProperties
 @Data
 public class CoreProperties {
 //    /**
@@ -48,13 +46,13 @@ public class CoreProperties {
 	public static String LoggingFileMaxHistory = "logging.file.max-history";
 	public static String LoggingFileMaxSize = "logging.file.max-size";
 
-	public static String TaoTaoCloudEnv = "taotao.cloud.env";
-	public static String TaoTaoCloudLoggingFileTotalSize = "taotao.cloud.logging.file.total-size";
-	public static String TaoTaoCloudContextRestartText = "taotao.cloud.context.restart.text";
-	public static String TaoTaoCloudContextRestartEnabled = "taotao.cloud.context.restart.enabled";
-	public static String TaoTaoCloudContextRestartTimeSpan = "taotao.cloud.context.restart.timespan";
-	public static String TaoTaoCloudEnabled = "taotao.cloud.enabled";
-	public static String TaoTaoCloudCollectHookEnabled = "taotao.cloud.collect.hook.enabled";
-	public static String TaoTaoCloudIsPrintSqlTimeWatch = "taotao.cloud.db.printSql.enabled";
-	public static String TaoTaoCloudIsPrintSqlError = "taotao.cloud.db.printSqlError.enabled";
+	public static String TaoTaoCloudEnv = "taotao.cloud.core.env";
+	public static String TaoTaoCloudLoggingFileTotalSize = "taotao.cloud.core.logging.file.total-size";
+	public static String TaoTaoCloudContextRestartText = "taotao.cloud.core.context.restart.text";
+	public static String TaoTaoCloudContextRestartEnabled = "taotao.cloud.core.context.restart.enabled";
+	public static String TaoTaoCloudContextRestartTimeSpan = "taotao.cloud.core.context.restart.timespan";
+	public static String TaoTaoCloudEnabled = "taotao.cloud.core.enabled";
+	public static String TaoTaoCloudCollectHookEnabled = "taotao.cloud.core.collect.hook.enabled";
+	public static String TaoTaoCloudIsPrintSqlTimeWatch = "taotao.cloud.core.db.printSql.enabled";
+	public static String TaoTaoCloudIsPrintSqlError = "taotao.cloud.core.db.printSqlError.enabled";
 }

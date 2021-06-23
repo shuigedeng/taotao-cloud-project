@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.initializer;
+package com.taotao.cloud.core.runner;
 
 import com.taotao.cloud.common.base.CoreProperties;
 import com.taotao.cloud.common.utils.LogUtil;

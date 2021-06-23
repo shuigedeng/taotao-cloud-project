@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.initializer;
+package com.taotao.cloud.core.runner;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Arrays;

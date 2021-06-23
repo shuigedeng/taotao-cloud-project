@@ -29,39 +29,39 @@ import lombok.val;
  **/
 public enum EnvironmentEnum {
 	JOB_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "job_DEV", ""),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "job_DEV", ""),
 		"taotao_cloud_job_url"),
 	APOLLO_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "apollo_DEV",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "apollo_DEV",
 			""),
 		"taotao_cloud_apollo_url"),
 	APOLLO_PRD(EnvironmentTypeEnum.PRD, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "apollo_prd",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "apollo_prd",
 			""),
 		"taotao_cloud_apollo_url"),
 	CAT_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "cat_DEV", ""),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "cat_DEV", ""),
 		"taotao_cloud_cat_url"),
 	ELK_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "elk_DEV", ""),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "elk_DEV", ""),
 		"taotao_cloud_elk_url"),
 	RocketMQ_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "rocketmq_DEV",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "rocketmq_DEV",
 			""),
 		"taotao_cloud_rocketmq_url"),
 	EUREKA_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "eureka_DEV",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "eureka_DEV",
 			""),
 		"taotao_cloud_eureka_url"),
 	REDIS_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "redis_DEV",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "redis_DEV",
 			""),
 		"taotao_cloud_redis_url"),
 	ES_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "es_DEV", ""),
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "es_DEV", ""),
 		"taotao_cloud_es_url"),
 	FILE_DEV(EnvironmentTypeEnum.DEV, ReflectionUtil
-		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBasConfig", "file_DEV",
+		.tryGetStaticFieldValue("com.taotao.cloud.common.base.TaoTaoCloudBaseConfig", "file_DEV",
 			""),
 		"taotao_cloud_file_url");
 	private EnvironmentTypeEnum env;

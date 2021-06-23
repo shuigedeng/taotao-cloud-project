@@ -56,25 +56,29 @@ public class CoreApplicationContextInitializer implements
 		ContextUtil.setApplicationContext(context);
 
 		ConfigurableEnvironment environment = context.getEnvironment();
-		if ("false".equalsIgnoreCase(environment.getProperty(CoreProperties.TaoTaoCloudEnabled))) {
+		if ("false"
+			.equalsIgnoreCase(environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
 			return;
 		}
 
 		//环境变量初始化
 		String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
-		String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv);
+		String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");
 
 		if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
 			//optimizeJson(environment);
 			optimize(environment);
+
 			//LogUtils.info(CoreApplicationContextInitializer.class,CoreProperties.Project,CoreProperties.SpringApplicationName+"="+propertyValue);
 			setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
+
 			LogUtil
 				.info(CoreProperties.Project,
 					CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
+
 			for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 				if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
-					setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[bsf环境变量]");
+					setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[taotao cloud 环境变量]");
 				}
 			}
 		}
@@ -99,6 +103,7 @@ public class CoreApplicationContextInitializer implements
 
 	private void optimizeLog(ConfigurableEnvironment environment) {
 		String message = "[日志标准规范]";
+
 		//MQ客户端日志目录
 		setDefaultProperty("rocketmq.client.logRoot", "log", message);
 
@@ -109,18 +114,20 @@ public class CoreApplicationContextInitializer implements
 
 		//日志优化最大
 		ILoggerFactory factory = LoggerFactory.getILoggerFactory();
-		if (factory != null && factory instanceof LoggerContext) {
+		if (factory instanceof LoggerContext) {
 			val root = ((LoggerContext) factory).getLogger("ROOT");
 			if (root != null) {
 				val file = root.getAppender("FILE");
-				if (file != null && file instanceof RollingFileAppender) {
+				if (file instanceof RollingFileAppender) {
 					val rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
-					if (rollingPolicy != null
-						&& rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
-						setDefaultProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB", message);
+					if (rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
+						setDefaultProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB",
+							message);
+
 						((SizeAndTimeBasedRollingPolicy) rollingPolicy).setTotalSizeCap(FileSize
 							.valueOf(environment
-								.getProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB")));
+								.getProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize,
+									"1GB")));
 					}
 				}
 			}
@@ -164,7 +171,7 @@ public class CoreApplicationContextInitializer implements
 						return;
 					}
 					if (e.getKey().equalsIgnoreCase(CoreProperties.TaoTaoCloudContextRestartText)) {
-						refreshConetext();
+						refreshContext();
 						return;
 					}
 				}
@@ -172,17 +179,19 @@ public class CoreApplicationContextInitializer implements
 		});
 	}
 
-	void refreshConetext() {
+	void refreshContext() {
 		if (ContextUtil.getApplicationContext() != null) {
 			if (ContextUtil.mainClass == null) {
 				LogUtil.error(CoreProperties.Project, "重启失败",
 					new BaseException("检测到重启上下文事件,因无法找到启动类，重启失败!!!"));
 				return;
 			}
+
 			val context = ContextUtil.getApplicationContext();
 			ApplicationArguments args = context.getBean(ApplicationArguments.class);
 			val waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
-				PropertyUtil.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartTimeSpan, 10));
+				PropertyUtil
+					.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartTimeSpan, 10));
 
 			Thread thread = new Thread(() -> {
 				try {
