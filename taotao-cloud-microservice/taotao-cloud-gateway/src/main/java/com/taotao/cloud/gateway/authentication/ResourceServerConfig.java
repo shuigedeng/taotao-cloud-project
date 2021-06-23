@@ -19,11 +19,19 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.oauth2.server.resource.web.server.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
+import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
+import org.springframework.security.web.server.authentication.ServerAuthenticationEntryPointFailureHandler;
+import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 
 /**
  * ResourceServerConfig
@@ -36,24 +44,68 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @Configuration
 @EnableWebFluxSecurity
 public class ResourceServerConfig {
+
+	private final PermissionAuthManager authorizationManager;
+
+	private static final String[] ENDPOINTS = {
+		"/actuator/**",
+		"/v3/**",
+		"/fallback",
+		"/favicon.ico",
+		"/swagger-resources/**",
+		"/webjars/**",
+		"/druid/**",
+		"/*/*.html",
+		"/*/*.css",
+		"/*/*.js",
+		"/*.js",
+		"/*.css",
+		"/*.html",
+		"/*/favicon.ico",
+		"/*/api-docs",
+		"/css/**",
+		"/js/**",
+		"/images/**"
+	};
+
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+		ServerBearerTokenAuthenticationConverter tokenAuthenticationConverter =
+			new ServerBearerTokenAuthenticationConverter();
+		tokenAuthenticationConverter.setAllowUriQueryParameter(true);
+
+		ServerAuthenticationEntryPoint entryPoint = (exchange, e) -> {
+			LogUtil.error("认证失败", e);
+			return ResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
+		};
+		ServerAccessDeniedHandler accessDenied = (exchange, e) -> {
+			LogUtil.error("授权失败", e);
+			return ResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
+		};
+
+		AuthenticationManagerComponent customAuthenticationManager = new AuthenticationManagerComponent();
+		AuthenticationWebFilter oauth2Filter = new AuthenticationWebFilter(
+			customAuthenticationManager);
+		oauth2Filter.setServerAuthenticationConverter(tokenAuthenticationConverter);
+		oauth2Filter.setAuthenticationFailureHandler(
+			new ServerAuthenticationEntryPointFailureHandler(entryPoint));
+		oauth2Filter.setAuthenticationSuccessHandler(new Oauth2AuthSuccessHandler());
+
 		http
 			.csrf().disable()
 			.httpBasic().disable()
-			.authorizeExchange()
-			.pathMatchers("/**").permitAll()
-			.anyExchange().authenticated()
+			.headers().frameOptions().disable()
 			.and()
+			.authorizeExchange()
+			.pathMatchers(ENDPOINTS).permitAll()
+			.pathMatchers(HttpMethod.OPTIONS).permitAll()
+			.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
+			.anyExchange().access(authorizationManager)
+			.and()
+			.addFilterAt(oauth2Filter, SecurityWebFiltersOrder.AUTHENTICATION)
 			.exceptionHandling()
-			.authenticationEntryPoint((exchange, e) -> {
-				LogUtil.error("认证失败", e);
-				return ResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
-			})
-			.accessDeniedHandler((exchange, e) -> {
-				LogUtil.error("授权失败", e);
-				return ResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
-			})
+			.authenticationEntryPoint(entryPoint)
+			.accessDeniedHandler(accessDenied)
 			.and()
 			.oauth2ResourceServer()
 			.jwt();

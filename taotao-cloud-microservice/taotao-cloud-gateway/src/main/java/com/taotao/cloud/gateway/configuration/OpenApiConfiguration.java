@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
  * @since 2021/03/04 13:48
  */
 @Component
-public class OpenApiConfig {
+public class OpenApiConfiguration {
 
 	@Bean
 	@Lazy(false)

@@ -31,13 +31,13 @@ import org.springframework.web.reactive.result.view.ViewResolver;
  * @author pangu
  */
 @Configuration
-public class SentinelConfig {
+public class SentinelConfiguration {
 
 	private final List<ViewResolver> viewResolvers;
 
 	private final ServerCodecConfigurer serverCodecConfigurer;
 
-	public SentinelConfig(ObjectProvider<List<ViewResolver>> viewResolversProvider,
+	public SentinelConfiguration(ObjectProvider<List<ViewResolver>> viewResolversProvider,
 		ServerCodecConfigurer serverCodecConfigurer) {
 		this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
 		this.serverCodecConfigurer = serverCodecConfigurer;

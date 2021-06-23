@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(value = "gray.rule.enabled", havingValue = "true")
 @AutoConfigureBefore(GatewayReactiveLoadBalancerClientAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
-public class GrayLoadBalancerClientConfig {
+public class GrayLoadBalancerConfiguration {
 
 	@Bean
 	public ReactiveLoadBalancerClientFilter gatewayLoadBalancerClientFilter(

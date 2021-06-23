@@ -38,7 +38,7 @@ import javax.annotation.PreDestroy;
  * @version 1.0.0
  */
 @Configuration
-public class HttpConfiguration {
+public class HttpsConfiguration {
 
 	// @Autowired
 	// private HttpHandler httpHandler;
