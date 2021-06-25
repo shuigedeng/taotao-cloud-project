@@ -1,5 +1,4 @@
-
-export HADOOP_HOME="/root/taotao-bigdata/hadoop3.3.0"
+export HADOOP_HOME="/opt/taotao-bigdata/hadoop3.3.0"
 export HADOOP_USER="root"
 export HADOOP_COMMON_HOME=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME

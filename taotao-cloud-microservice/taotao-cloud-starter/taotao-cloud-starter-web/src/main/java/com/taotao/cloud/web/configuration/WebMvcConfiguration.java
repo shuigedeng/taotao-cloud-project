@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
+import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.support.LoginUserArgumentResolver;
@@ -67,6 +68,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(new PrometheusMetricsInterceptor()).addPathPatterns("/**");
 	}
 
 	@Override

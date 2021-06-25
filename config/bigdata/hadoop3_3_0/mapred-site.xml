@@ -53,6 +53,18 @@
 		</value>
 	</property>
 
+	<!--历史服务器端地址-->
+	<property>
+		<name>mapreduce.jobhistory.address</name>
+		<value>192.168.1.10:10020</value>
+	</property>
+
+	<!--历史服务器web端地址-->
+	<property>
+		<name>mapreduce.jobhistory.webapp.address</name>
+		<value>192.168.1.10:19888</value>
+	</property>
+
 	<!--<property>-->
 	<!--	<name>yarn.app.mapreduce.am.resource.mb</name>-->
 	<!--	<value>4096</value>-->

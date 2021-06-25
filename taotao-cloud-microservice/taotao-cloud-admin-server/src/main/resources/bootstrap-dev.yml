@@ -1,0 +1,74 @@
+server:
+  port: 8888
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-admin-server
+  boot:
+    admin:
+      notify:
+        mail:
+          enabled: true
+          to: 981376577@qq.com
+          cc: 981376577@qq.com
+          from: Spring Boot Admin <981376577@qq.com>
+  mail:
+    host: smtp.qq.com
+    password: vwdrmsvmevosbeed
+    port: 465
+    username: 981376577@qq.com
+    protocol: smtps
+  security:
+    user:
+      name: admin
+      password: root123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
+        metadata:
+          version: 5
+      config:
+        enabled: false
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}
+        namespace:
+        file-extension: yml
+#  sleuth:
+#    web:
+#      client:
+#        # sleuth 开发阶段关闭
+#        enabled: true
+#    sampler:
+#      probability: 1.0
+#  zipkin:
+#    # zipkin 开发阶段关闭
+#    enabled: true
+#    sender:
+#      type: kafka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  health:
+    elasticsearch:
+      enabled: false

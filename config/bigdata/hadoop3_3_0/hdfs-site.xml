@@ -31,6 +31,11 @@
 		<value>192.168.1.10:9870</value>
 	</property>
 
+<!--	<property>-->
+<!--		<name>dfs.namenode.secondary.http-address</name>-->
+<!--		<value>hadoop104:9868</value>-->
+<!--	</property>-->
+
 	<property>
 		<name>dfs.replication</name>
 		<value>1</value>

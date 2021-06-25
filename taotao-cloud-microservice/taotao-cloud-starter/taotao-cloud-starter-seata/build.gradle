@@ -1,7 +1,11 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api group: 'io.seata', name: 'seata-spring-boot-starter', version: '1.4.2'
+    api('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
+        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
+    }
+    api 'io.seata:seata-spring-boot-starter:1.4.0'
+
     api "com.zaxxer:HikariCP"
     api "org.springframework.cloud:spring-cloud-starter-openfeign"
 

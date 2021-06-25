@@ -1,39 +1,40 @@
 ###########################################
+# 编译安装
 cd /root/github
-
 git clone https://github.com/alibaba/nacos.git
-
 cd nacos/
-
 mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U
+cd nacos/distribution/target/nacos-server-2.0.2-SNAPSHOT
+cp -r nacos/ /opt/taotao-cloud/nacos2.0.2
+cd /root/taotao-cloud/nacos2.0.2/conf
 
-cd nacos/distribution/target/nacos-server-1.4.1-SNAPSHOT
-
-cp -r nacos/ /root/taotao-cloud/nacos1.4.1
-
-cd /root/taotao-cloud/nacos1.4.1/conf
+# 直接下载安装
+cd /opt/taotao-cloud
+wget  https://github.com/alibaba/nacos/releases/download/2.0.2/nacos-server-2.0.2.tar.gz
+tar -zxvf nacos-server-2.0.2.tar.gz
+mv nacos nacos2.0.2
+cd nacos2.0.2
 
 vim application.properties
 # #*************** Config Module Related Configurations ***************#
 # ### If use MySQL as datasource:
-# spring.datasource.platform=mysql
-#
+spring.datasource.platform=mysql
 # ### Count of DB:
-# db.num=1
-#
+db.num=1
 # ### Connect URL of DB:
-# db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-# db.user.0=root
-# db.password.0=123456
+db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+db.user.0=root
+db.password.0=123456
 
-mysql –uroot –p123456 -Dnacos</root/taotao-cloud/nacos-1.4.1/conf/nacos-mysql.sql
+server.tomcat.accesslog.enabled=false
 
+mysql –u root –p 123456 -D nacos</opt/taotao-cloud/nacos2.0.2/conf/nacos-mysql.sql
 
 ##################### nacos.sh #############################
 #!/bin/bash
 
 function start_nacos() {
-     /root/taotao-cloud/nacos1.4.1/bin/startup.sh -m standalone
+     /root/taotao-cloud/nacos2.0.2/bin/startup.sh -m standalone
      sleep 30
      echo " nacos started"
 }

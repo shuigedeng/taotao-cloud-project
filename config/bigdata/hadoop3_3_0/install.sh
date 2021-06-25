@@ -1,9 +1,11 @@
 ###########################################
+cd /opt/taotao-bigdata
+
 wget https://mirror.bit.edu.cn/apache/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz
 
-tar -zxvf hadoop-3.3.0.tar.gz -C /bigdata/
+tar -zxvf hadoop-3.3.0.tar.gz
 
-cd /bigdata/hadoop-3.3.0/etc/hadoop
+cd hadoop-3.3.0/etc/hadoop
 
 # 1.添加环境变量
 # 2.修改配置文件
@@ -16,6 +18,12 @@ start-dfs.sh
 start-yarn.sh
 
 hadoop-httpfs start
+
+#开启历史服务器
+mapred --daemon start historyserver
+
+查看 JobHistory
+http://192.168.1.10:19888/jobhistory
 
 hadoop fs -mkdir -p /tmp
 hadoop fs -chmod 777 /tmp

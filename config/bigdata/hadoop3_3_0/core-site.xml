@@ -25,41 +25,54 @@
 	<property>
 		<name>hadoop.tmp.dir</name>
 		<value>/opt/taotao-bigdata/hadoop3.3.0/tmp</value>
-		<description>hadoop数据存放</description>
+		<description>指定hadoop数据的存储目录</description>
 	</property>
 
 	<property>
 		<name>fs.hdfs.impl</name>
 		<value>org.apache.hadoop.hdfs.DistributedFileSystem</value>
+		<description>分布式问文件系统的实现</description>
 	</property>
+
+<!--	<property>-->
+<!--		<name>hadoop.http.staticuser.user</name>-->
+<!--		<value>Tom</value>-->
+<!--		<description>配置HDFS网页登录使用的静态用户为Tom</description>-->
+<!--	</property>-->
 
 	<property>
 		<name>hadoop.proxyuser.hue.groups</name>
 		<value>*</value>
+		<description>配置hue允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.hue.hosts</name>
 		<value>*</value>
+		<description>配置hue允许通过代理访问的主机节点</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.root.groups</name>
 		<value>*</value>
+		<description>配置root允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.root.hosts</name>
 		<value>*</value>
+		<description>配置root允许通过代理访问的主机节点</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.httpfs.hosts</name>
 		<value>*</value>
+		<description>配置httpfs允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.httpfs.groups</name>
 		<value>*</value>
+		<description>配置httpfs允许通过代理访问的主机节点</description>
 	</property>
 </configuration>

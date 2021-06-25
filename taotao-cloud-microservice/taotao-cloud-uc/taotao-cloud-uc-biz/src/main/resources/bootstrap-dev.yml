@@ -16,18 +16,18 @@ jasypt:
 
 seata:
   enabled: true
+  application-id: taotao-cloud-uc
+  tx-service-group: taotao_cloud_tx_group
+  enable-auto-data-source-proxy: true
   service:
     grouplist:
       default: ${TAOTAO_CLOUD_SEATA_HOST}:${TAOTAO_CLOUD_SEATA_PORT}
     vgroup-mapping:
-      my_test_tx_group: default
-  application-id: taotao-cloud-uc-service
-  tx-service-group: my_test_tx_group
-  enable-auto-data-source-proxy: true
+      taotao_cloud_tx_group: default
   config:
     type: nacos
     nacos:
-      namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
+      namespace:
       server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME}
@@ -38,7 +38,7 @@ seata:
       application: seata-server
       server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT}
       group: SEATA_GROUP
-      namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
+      namespace:
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD}
       cluster: default
@@ -47,7 +47,13 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-uc-service
+    name: taotao-cloud-uc
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:8888
+        username: admin
+        password: root123456
   cloud:
     loadbalancer:
       ribbon:
@@ -63,22 +69,58 @@ spring:
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
     sentinel:
-      enabled: false
+      enabled: true
       eager: true
       datasource:
-        ds1:
+        #流控 名称随意
+        flow:
           nacos:
             server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
-            dataId: taotao-cloud-uc-sentinel
-            groupId: DEFAULT_GROUP
+            dataId: ${spring.application.name}-flow-rules
+            namespace:
+            groupId: SENTINEL_GROUP
             data-type: json
+            # 规则类型，取值见：
+            # org.springframework.cloud.alibaba.sentinel.datasource.RuleType
             rule-type: flow
+        #熔断降级 名称随意
+        degrade:
+          nacos:
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            dataId: ${spring.application.name}-degrade-rules
+            namespace:
+            groupId: SENTINEL_GROUP
+            rule-type: degrade
+        #系统规则 名称随意
+        system:
+          nacos:
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            dataId: ${spring.application.name}-system-rules
+            namespace:
+            groupId: SENTINEL_GROUP
+            rule-type: system
+        #授权规则 名称随意
+        authority:
+          nacos:
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            dataId: ${spring.application.name}-authority-rules
+            namespace:
+            groupId: SENTINEL_GROUP
+            rule-type: authority
+        #参数规则 名称随意
+        param-flow:
+          nacos:
+            server-addr:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            dataId: ${spring.application.name}-param-flow-rules
+            namespace:
+            groupId: SENTINEL_GROUP
+            rule-type: param-flow
       transport:
         dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -110,7 +152,7 @@ spring:
     host: ${TAOTAO_CLOUD_REDIS_HOST}
     port: ${TAOTAO_CLOUD_REDIS_PORT}
     database: 1
-    #password: ${TAOTAO-CLOUD-REDIS-PASSWORD:123456}
+    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
     lettuce:
       pool:
         max-active: 8
@@ -187,7 +229,7 @@ spring:
 #      names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
 #      mysql-master-1:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -202,7 +244,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-slave-1:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -217,7 +259,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-master-2:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -232,7 +274,7 @@ spring:
 #          pool-name: DatebookHikariCP
 #      mysql-slave-2:
 #        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-uc-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 #        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
 #        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
 #        driver-class-name: com.mysql.jdbc.Driver
@@ -271,21 +313,6 @@ spring:
 #    props:
 #      sql:
 #        show: true
-
-#security:
-#  oauth2:
-#    client:
-#      clientId: taotao-cloud-uc-service
-#      clientSecret: taotao-cloud-uc-service
-#      userAuthorizationUri: http://taotao-cloud-uc-service/oauth/authorize
-#      access-token-uri: http://taotao-cloud-uc-service/oauth/token
-#    resource:
-#      id: taotao-cloud-uc-service
-#      prefer-token-info: false
-#      token-info-uri: http://taotao-cloud-uc-service/oauth/check_token
-#      user-info-uri: http://taotao-cloud-uc-service/oauth/user
-#    authorization:
-#      check-token-access: http://taotao-cloud-uc-service/oauth/check_token
 
 #mybatis-plus:
 #  #  mapper-locations: classpath:/mapper/*Mapper.xml
@@ -384,7 +411,17 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      show-details: ALWAYS
   metrics:
+    export:
+      prometheus:
+        enabled: true
     tags:
       application: ${spring.application.name}
   health:

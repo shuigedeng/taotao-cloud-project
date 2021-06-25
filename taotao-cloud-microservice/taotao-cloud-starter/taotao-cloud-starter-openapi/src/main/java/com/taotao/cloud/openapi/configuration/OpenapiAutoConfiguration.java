@@ -15,10 +15,12 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
-import cn.hutool.core.io.LineHandler;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import io.swagger.v3.oas.models.*;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
@@ -33,10 +35,9 @@ import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Set;
+import org.springframework.core.env.Environment;
 
 /**
  * SwaggerAutoConfiguration
@@ -46,18 +47,22 @@ import java.util.Set;
  * @since 2020/4/30 10:10
  */
 @Slf4j
-public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean {
+public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean,
+	EnvironmentAware {
 
 	private static final String AUTH_KEY = "Authorization";
 
-	@Value("${spring.application.name}")
-	private  String application ;
-
 	private BeanFactory beanFactory;
+	private Environment environment;
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		this.beanFactory = beanFactory;
+	}
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
 	}
 
 	@Override
@@ -68,20 +73,24 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public GroupedOpenApi groupedOpenApi() {
+		String applicationName = environment.getProperty("spring.application.name", "");
+
 		return GroupedOpenApi
 			.builder()
-			.group("springshop-public")
+			.group(applicationName)
 			.pathsToMatch("/public/**")
 			.build();
 	}
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
+		String applicationName = environment.getProperty("spring.application.name", "");
+
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
 			Paths newPaths = new Paths();
-			paths.keySet().forEach(e -> newPaths.put("/" + application + e, paths.get(e)));
+			paths.keySet().forEach(e -> newPaths.put("/" + applicationName + e, paths.get(e)));
 			openApi.setPaths(newPaths);
 
 			openApi.getPaths().values().stream()
@@ -96,15 +105,16 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		Components components = new Components();
 
 		// 添加auth认证header
-		components.addSecuritySchemes("exampleAuth",
+		components.addSecuritySchemes("token",
 			new SecurityScheme()
-				.description("exampleAuth")
+				.description("token")
 				.type(SecurityScheme.Type.APIKEY)
-				.name("auth")
+				.name("token")
 				.in(In.HEADER)
 				.scheme("basic")
 		);
-		components.addSecuritySchemes("bearer-key",
+
+		components.addSecuritySchemes("bearer",
 			new SecurityScheme()
 				.type(SecurityScheme.Type.HTTP)
 				.scheme("bearer")
@@ -112,40 +122,44 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		);
 
 		// 添加全局header
-		components.addParameters("exampleParameter",
+		components.addParameters("meta",
 			new Parameter()
-				.description("exampleParameter")
+				.description("元数据")
 				.in(In.HEADER.toString())
 				.schema(
 					new StringSchema()
 				)
-				.name("exampleParameter")
+				.name("meta")
 		);
 
-		components.addHeaders("exampleHeader",
+		components.addHeaders("version",
 			new Header()
-				.description("myHeader2 header")
+				.description("版本号")
 				.schema(new StringSchema())
 		);
 
+		String taotaoCloudVersion = environment.getProperty("taotaoCloudVersion");
+		String applicationName = environment.getProperty("spring.application.name", "");
+
 		return new OpenAPI()
 			.components(components)
-			.openapi("taotao-cloud-uc-service")
+			.openapi(applicationName)
 			.info(
 				new Info()
-					.title("SpringShop API")
-					.description("Spring shop sample application")
-					.version("v0.0.1")
+					.title(applicationName.toUpperCase() + " API")
+					.description("TaoTao Cloud 电商及大数据平台")
+					.version(taotaoCloudVersion)
 					.license(
 						new License()
 							.name("Apache 2.0")
-							.url("http://springdoc.org")
+							.url(
+								"https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
 					)
 			)
 			.externalDocs(
 				new ExternalDocumentation()
-					.description("SpringShop Wiki Documentation")
-					.url("https://springshop.wiki.github.org/docs")
+					.description("TaoTao Cloud Wiki Documentation")
+					.url("https://github.com/shuigedeng/taotao-cloud-project/wiki")
 			);
 	}
 

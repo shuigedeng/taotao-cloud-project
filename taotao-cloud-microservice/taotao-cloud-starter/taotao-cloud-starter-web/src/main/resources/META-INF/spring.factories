@@ -6,5 +6,5 @@ com.taotao.cloud.web.configuration.ServletConfiguration, \
 com.taotao.cloud.web.configuration.ExceptionConfiguration, \
 com.taotao.cloud.web.configuration.ResponseConfiguration
 
-#org.springframework.context.ApplicationListener=\
-#com.taotao.cloud.web.listener.RequestMappingScanListener
+org.springframework.context.ApplicationListener=\
+com.taotao.cloud.web.listener.PrometheusListener

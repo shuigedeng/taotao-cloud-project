@@ -51,7 +51,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 //    implementation "org.springframework.cloud:spring-cloud-starter-zipkin"
-//    implementation "io.micrometer:micrometer-registry-prometheus"
+
 }
 
 configurations.all {

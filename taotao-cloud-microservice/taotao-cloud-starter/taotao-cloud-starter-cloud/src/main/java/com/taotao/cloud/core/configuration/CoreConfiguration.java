@@ -17,6 +17,10 @@ package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -29,4 +33,12 @@ import org.springframework.context.annotation.Import;
 @Import({CoreApplicationRunner.class, CoreCommandLineRunner.class})
 public class CoreConfiguration {
 
+	@Value("${spring.application.name}")
+	private String applicationName;
+
+	@Bean(value = "meterRegistryCustomizer")
+	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
+		return meterRegistry -> meterRegistry.config()
+			.commonTags("application", applicationName);
+	}
 }

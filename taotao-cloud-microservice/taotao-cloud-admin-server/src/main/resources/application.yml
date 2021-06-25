@@ -1,0 +1,45 @@
+server:
+  port: 8888
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-admin-server
+  security:
+    user:
+      name: admin
+      password: root123456
+  boot:
+    admin:
+      notify:
+        mail:
+          enabled: true
+          to: 981376577@qq.com
+          cc: 981376577@qq.com
+          from: Spring Boot Admin <981376577@qq.com>
+  mail:
+    host: smtp.qq.com
+    password: vwdrmsvmevosbeed
+    port: 465
+    username: 981376577@qq.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  health:
+    elasticsearch:
+      enabled: false
