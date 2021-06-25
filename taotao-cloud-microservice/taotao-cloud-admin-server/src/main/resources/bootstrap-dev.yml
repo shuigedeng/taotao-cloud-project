@@ -21,7 +21,7 @@ spring:
           from: Spring Boot Admin <981376577@qq.com>
   mail:
     host: smtp.qq.com
-    password: vwdrmsvmevosbeed
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD}
     port: 465
     username: 981376577@qq.com
     protocol: smtps
