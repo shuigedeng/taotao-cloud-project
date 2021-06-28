@@ -1,14 +1,18 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
 
-//    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-//    implementation 'io.micrometer:micrometer-registry-prometheus'
-
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
+
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.alibaba.csp:sentinel-core:1.8.0'
+    }
 }
 
 shadowJar {

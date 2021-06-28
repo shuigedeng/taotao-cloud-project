@@ -4,8 +4,6 @@ import com.taotao.cloud.web.exception.AbstractGlobalResponseBodyAdvice;
 import javax.servlet.Servlet;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -17,7 +15,9 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@RestControllerAdvice(annotations = {RestController.class, Controller.class})
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
+//	RestController.class, Controller.class})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
 public class ResponseConfiguration extends AbstractGlobalResponseBodyAdvice {
 
 }

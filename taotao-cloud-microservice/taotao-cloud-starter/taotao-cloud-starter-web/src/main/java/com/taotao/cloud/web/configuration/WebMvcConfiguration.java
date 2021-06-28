@@ -39,8 +39,10 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -55,6 +57,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version 1.0.0
  * @since 2020/9/29 14:30
  */
+@Configuration
+@AutoConfigureBefore({PrometheusConfiguration.class})
 @AllArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
@@ -65,10 +69,20 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		argumentResolvers.add(new LoginUserArgumentResolver());
 	}
 
+	@Bean
+	public HeaderThreadLocalInterceptor headerThreadLocalInterceptor(){
+		return new HeaderThreadLocalInterceptor();
+	}
+
+	@Bean
+	public PrometheusMetricsInterceptor prometheusMetricsInterceptor(){
+		return new PrometheusMetricsInterceptor();
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
-		registry.addInterceptor(new PrometheusMetricsInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(headerThreadLocalInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(prometheusMetricsInterceptor()).addPathPatterns("/**");
 	}
 
 	@Override

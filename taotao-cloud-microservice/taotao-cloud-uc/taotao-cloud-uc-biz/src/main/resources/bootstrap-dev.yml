@@ -16,7 +16,7 @@ jasypt:
 
 seata:
   enabled: true
-  application-id: taotao-cloud-uc
+  application-id: ${spring.application.name}
   tx-service-group: taotao_cloud_tx_group
   enable-auto-data-source-proxy: true
   service:
@@ -110,7 +110,7 @@ spring:
         #参数规则 名称随意
         param-flow:
           nacos:
-            server-addr:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
             dataId: ${spring.application.name}-param-flow-rules
             namespace:
             groupId: SENTINEL_GROUP
@@ -120,7 +120,7 @@ spring:
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver

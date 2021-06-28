@@ -17,7 +17,9 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@RestControllerAdvice(annotations = {RestController.class, Controller.class})
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
+//	RestController.class, Controller.class})
+@RestControllerAdvice
 public class ExceptionConfiguration extends DefaultExceptionAdvice {
 
 }

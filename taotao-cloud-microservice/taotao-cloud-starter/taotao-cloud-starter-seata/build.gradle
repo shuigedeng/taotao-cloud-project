@@ -4,7 +4,7 @@ dependencies {
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'
     }
-    api 'io.seata:seata-spring-boot-starter:1.4.0'
+    api 'io.seata:seata-spring-boot-starter:1.4.1'
 
     api "com.zaxxer:HikariCP"
     api "org.springframework.cloud:spring-cloud-starter-openfeign"

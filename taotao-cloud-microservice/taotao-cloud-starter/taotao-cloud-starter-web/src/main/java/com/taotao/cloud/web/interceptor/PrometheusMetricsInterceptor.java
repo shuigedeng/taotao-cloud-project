@@ -15,10 +15,16 @@
  */
 package com.taotao.cloud.web.interceptor;
 
-import com.taotao.cloud.web.configuration.PrometheusConfiguration.TaoTaoCloudMetrics;
+import com.taotao.cloud.web.configuration.PrometheusConfiguration;
+import io.prometheus.client.Counter;
+import io.prometheus.client.Gauge;
+import io.prometheus.client.Histogram;
+import io.prometheus.client.Summary;
+import java.util.Objects;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * PrometheusInterceptor
@@ -27,7 +33,19 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @version 1.0.0
  * @since 2021/06/25 16:50
  */
-public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
+public class PrometheusMetricsInterceptor implements HandlerInterceptor {
+
+	@Resource
+	private Counter requestCounter;
+
+	@Resource
+	private Summary requestLatency;
+
+	@Resource
+	private Gauge inprogressRequests;
+
+	@Resource
+	private Histogram requestLatencyHistogram;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -36,14 +54,14 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
 		String method = request.getMethod();
 		int status = response.getStatus();
 
-		TaoTaoCloudMetrics.inprogressRequests.labels(requestURI, method).inc();
+		inprogressRequests.labels(requestURI, method).inc();
 
-		TaoTaoCloudMetrics.histogramRequestTimer = TaoTaoCloudMetrics.requestLatencyHistogram
+		PrometheusConfiguration.histogramRequestTimer = requestLatencyHistogram
 			.labels(requestURI, method, String.valueOf(status)).startTimer();
 
-		TaoTaoCloudMetrics.requestTimer = TaoTaoCloudMetrics.requestLatency
+		PrometheusConfiguration.requestTimer = requestLatency
 			.labels(requestURI, method, String.valueOf(status)).startTimer();
-		return super.preHandle(request, response, handler);
+		return true;
 	}
 
 	@Override
@@ -53,14 +71,16 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
 		String method = request.getMethod();
 		int status = response.getStatus();
 
-		TaoTaoCloudMetrics.requestCounter.labels(requestURI, method, String.valueOf(status)).inc();
+		requestCounter.labels(requestURI, method, String.valueOf(status)).inc();
 
-		TaoTaoCloudMetrics.inprogressRequests.labels(requestURI, method).dec();
+		inprogressRequests.labels(requestURI, method).dec();
 
-		TaoTaoCloudMetrics.histogramRequestTimer.observeDuration();
+		if (Objects.nonNull(PrometheusConfiguration.histogramRequestTimer)) {
+			PrometheusConfiguration.histogramRequestTimer.observeDuration();
+		}
 
-		TaoTaoCloudMetrics.requestTimer.observeDuration();
-
-		super.afterCompletion(request, response, handler, ex);
+		if (Objects.nonNull(PrometheusConfiguration.requestTimer)) {
+			PrometheusConfiguration.requestTimer.observeDuration();
+		}
 	}
 }

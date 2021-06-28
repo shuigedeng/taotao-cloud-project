@@ -12,7 +12,7 @@ transport.threadFactory.clientWorkerThreadPrefix=NettyClientWorkerThread
 transport.threadFactory.bossThreadSize=1
 transport.threadFactory.workerThreadSize=default
 transport.shutdown.wait=3
-# 修改为 my_test_tx_group
+# 修改为 taotao_cloud_tx_group
 service.vgroupMapping.taotao_cloud_tx_group=default
 # 修改为 192.168.1.10
 service.default.grouplist=192.168.1.10:8091

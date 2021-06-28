@@ -3,9 +3,13 @@ dependencies {
 
     api ('com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'){
         exclude group: 'com.fasterxml.jackson.dataformat', module: 'jackson-dataformat-xml'
+        exclude group: 'com.alibaba.csp', module: 'sentinel-core'
     }
 
-    api "com.alibaba.csp:sentinel-datasource-nacos"
+    api ("com.alibaba.csp:sentinel-datasource-nacos"){
+        exclude group: 'com.alibaba.csp', module: 'sentinel-core'
+    }
+    api "com.alibaba.csp:sentinel-core:1.8.0"
     api 'org.springframework.boot:spring-boot-starter'
     api 'org.springframework:spring-web'
     api 'org.springframework:spring-webflux'
