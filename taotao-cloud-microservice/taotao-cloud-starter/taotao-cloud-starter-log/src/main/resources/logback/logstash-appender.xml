@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<!-- logstash-appender properties -->
+	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<!-- the TCP address of the logstash -->
+		<destination>${LOGSTASH_DESTINATION}</destination>
+
+		<!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
+				<!--<timestamp>-->
+				<!--    <timeZone>GMT+8</timeZone>-->
+				<!--</timestamp>-->
+				<pattern>
+					<pattern>
+						{
+						"application_name": "${APP_NAME:-}",
+						"trace_id": "%X{t-traceId:-}",
+						"server_ip": "${SERVER_IP:-}",
+						"server_port": "${SERVER_PORT:-}",
+						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+						"logday": "%d{yyyy-MM-dd}",
+						"thread": "%thread",
+						"pid": "${PID:-}",
+						"parent_span_id" : "%X{X-B3-ParentSpanId:-}",
+						"span_id": "%X{X-B3-SpanId:-}",
+						"exportable": "%X{X-Span-Export:-}",
+						"logger": "%logger{36}",
+						"level": "%p",
+						"message": "%msg",
+						"host": "${SERVER_IP:-}",
+						"stack_trace": "%ex",
+						"source": "taotao_cloud_sys_log"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+		<connectionStrategy>
+			<roundRobin>
+				<connectionTTL>5 minutes</connectionTTL>
+			</roundRobin>
+		</connectionStrategy>
+	</appender>
+</included>

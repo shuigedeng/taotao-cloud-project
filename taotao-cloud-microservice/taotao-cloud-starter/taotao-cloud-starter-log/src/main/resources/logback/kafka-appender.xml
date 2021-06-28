@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<appender name="KAFKA" class="com.taotao.cloud.log.appender.TaoTaoCloudKafkaAppender">
+		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
+				<!--<timestamp>-->
+				<!--    <timeZone>GMT+8</timeZone>-->
+				<!--</timestamp>-->
+				<pattern>
+					<pattern>
+						{
+						"application_name": "${APP_NAME:-}",
+						"trace_id": "%X{t-traceId:-}",
+						"server_ip": "${SERVER_IP:-}",
+						"server_port": "${SERVER_PORT:-}",
+						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+						"logday": "%d{yyyy-MM-dd}",
+						"thread": "%thread",
+						"pid": "${PID:-}",
+						"parent_span_id" : "%X{X-B3-ParentSpanId:-}",
+						"span_id": "%X{X-B3-SpanId:-}",
+						"exportable": "%X{X-Span-Export:-}",
+						"logger": "%logger{36}",
+						"level": "%p",
+						"message": "%msg",
+						"host": "${SERVER_IP:-}",
+						"stack_trace": "%ex",
+						"source": "taotao_cloud_sys_log"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+		<topic>taotao-cloud-sys-log</topic>
+		<keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
+		<deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+		<producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS}</producerConfig>
+		<producerConfig>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
+		<producerConfig>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
+		<producerConfig>acks=0</producerConfig>
+		<producerConfig>retries=0</producerConfig>
+		<producerConfig>batch.size=10</producerConfig>
+		<producerConfig>buffer-memory=33554432</producerConfig>
+		<producerConfig>linger.ms=1000</producerConfig>
+		<producerConfig>max.block.ms=0</producerConfig>
+	</appender>
+
+	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="KAFKA"/>
+	</appender>
+
+	<logger name="org.apache.kafka" level="off"/>
+
+</included>

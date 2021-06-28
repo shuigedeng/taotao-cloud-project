@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}/${APP_NAME}.all.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}/history/${APP_NAME:-}.all.%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
+			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+			<totalSizeCap>7GB</totalSizeCap>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}/${APP_NAME}.WARN.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}/history/${APP_NAME:-}.warn.%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
+			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+			<totalSizeCap>7GB</totalSizeCap>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}/${APP_NAME:-}.error.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}/history/${APP_NAME:-}.error.%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<MaxHistory>${LOG_FILE_MAX_DAY}</MaxHistory>
+			<maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+			<totalSizeCap>7GB</totalSizeCap>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+</included>

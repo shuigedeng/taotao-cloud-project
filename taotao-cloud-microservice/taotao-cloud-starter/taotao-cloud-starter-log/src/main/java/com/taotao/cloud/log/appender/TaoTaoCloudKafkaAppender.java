@@ -42,7 +42,7 @@ import org.apache.kafka.common.serialization.ByteArraySerializer;
  * @version 1.0.0
  * @since 2020/6/12 16:28
  */
-public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
+public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	/**
 	 * Kafka clients uses this prefix for its slf4j logging. This appender defers appends of any
@@ -60,7 +60,7 @@ public class TaotaoKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		}
 	};
 
-	public TaotaoKafkaAppender() {
+	public TaoTaoCloudKafkaAppender() {
 		// setting these as config values sidesteps an unnecessary warning (minor bug in KafkaProducer)
 		addProducerConfigValue(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
 			ByteArraySerializer.class.getName());
