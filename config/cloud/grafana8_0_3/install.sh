@@ -1,12 +1,18 @@
 ###########################################
+# https://grafana.com/grafana/download
 
-cd /root/taotao-cloud/prometheus2.23.0
+cd /root/taotao-cloud/grafana8.0.3
 
-wget https://github.com/prometheus/prometheus/releases/download/v2.23.0/prometheus-2.23.0.linux-amd64.tar.gz
+wget https://dl.grafana.com/oss/release/grafana-8.0.3.linux-amd64.tar.gz
 
-tar -zxvf prometheus-2.23.0.linux-amd64.tar.gz
+tar -zxvf grafana-8.0.3.linux-amd64.tar.gz
 
-mv prometheus-2.23.0.linux-amd64 prometheus2.23.0
+mv grafana-8.0.3.linux-amd64 grafana8.0.3
+
+
+
+
+
 
 # 使用本地路径存储数据
 mkdir prometheus2.23.0/data
