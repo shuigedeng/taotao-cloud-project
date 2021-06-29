@@ -53,7 +53,7 @@
     -->
 
 	<logger name="org.springframework.cloud.openfeign" level="DEBUG"/>
-	<logger name="org.apache.kafka" level="DEBUG"/>
+	<logger name="org.apache.kafka" level="OFF"/>
 
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>

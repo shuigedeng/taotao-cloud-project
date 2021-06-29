@@ -11,6 +11,22 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: taotao-cloud-admin-server
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      #采样率，默认为0.1
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    #发送数据类型 kafaka、rabbitmq、web
+    sender:
+      type: WEB
   boot:
     admin:
       notify:

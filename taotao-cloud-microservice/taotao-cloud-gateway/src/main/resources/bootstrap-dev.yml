@@ -20,6 +20,12 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-gateway
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:8888
+        username: admin
+        password: root123456
   sleuth:
     enabled: true
     web:
@@ -68,7 +74,7 @@ spring:
         enabled: false
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: 4
       config:

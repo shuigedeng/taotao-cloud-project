@@ -39,7 +39,7 @@
 		</filter>
 	</appender>
 
-	<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}/${APP_NAME:-}.error.log</file>
 		<append>true</append>
 		<encoder>

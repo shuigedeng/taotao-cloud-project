@@ -50,7 +50,7 @@ public class ResourceServerConfig {
 	private static final String[] ENDPOINTS = {
 		"/actuator/**",
 		"/v3/**",
-		"/**/v3/**",
+		"/*/v3/**",
 		"/fallback",
 		"/favicon.ico",
 		"/swagger-resources/**",
