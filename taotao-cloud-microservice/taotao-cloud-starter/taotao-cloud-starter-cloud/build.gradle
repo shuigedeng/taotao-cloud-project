@@ -13,9 +13,9 @@ dependencies {
 
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    api 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    api 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 //    api 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
-//    api 'org.springframework.cloud:spring-cloud-starter-sleuth'
-//    api 'org.springframework.cloud:spring-cloud-starter-zipkin'
 //    api 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 //    api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
 //    api 'org.springframework.cloud:spring-cloud-starter-kubernetes'

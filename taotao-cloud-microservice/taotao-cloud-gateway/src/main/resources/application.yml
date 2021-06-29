@@ -23,13 +23,13 @@ spring:
     allow-bean-definition-overriding: true
     banner-mode: off
   application:
-    name: taotao-cloud-gateway-service
+    name: taotao-cloud-gateway
   redis:
     client-name: taotao-cloud-gateway-redis-client
-    host: ${TAOTAO-CLOUD-REDIS-HOST:192.168.1.10}
-    port: ${TAOTAO-CLOUD-REDIS-PORT:6379}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:127.0.0.1}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 0
-    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     lettuce:
       pool:
         max-active: 8
@@ -37,7 +37,7 @@ spring:
         max-idle: 8
         min-idle: 0
   kafka:
-    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST:192.168.1.10}:${TAOTAO-CLOUD-KAFKA-PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:127.0.0.1}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 0
       batch-size: 16384
@@ -56,20 +56,20 @@ spring:
         enabled: false
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: 4
       config:
         enabled: false
-        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace: f402a0ea-5ce7-43cc-b19b-3fb7ded6e46e
         file-extension: yml
     sentinel:
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:192.168.1.10}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8858}
-        port: ${TAOTAO-CLOUD-SENTINEL-PORT:8718}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8858}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8717}
       scg:
         fallback:
           mode: response
@@ -83,12 +83,12 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
-        - id: taotao-cloud-uc-service
-          uri: lb://taotao-cloud-uc-service
+        - id: taotao-cloud-uc
+          uri: lb://taotao-cloud-uc
           predicates:
-            - Path=/taotao-cloud-uc-service/**
+            - Path=/taotao-cloud-uc/**
           filters:
-            - RewritePath=/taotao-cloud-uc-service/(?<remaining>.*), /${remaining}
+            - RewritePath=/taotao-cloud-uc/(?<remaining>.*), /${remaining}
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:

@@ -67,7 +67,13 @@ public class OpenApiConfiguration {
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
 			.components(new Components())
-			.info(new Info().title("Gateway API").version("1.0")
-				.license(new License().name("Apache 2.0").url("http://springdoc.org")));
+			.info(new Info()
+				.title("Gateway API")
+				.version("1.0")
+				.license(new License()
+					.name("Apache 2.0")
+					.url("http://springdoc.org")
+				)
+			);
 	}
 }

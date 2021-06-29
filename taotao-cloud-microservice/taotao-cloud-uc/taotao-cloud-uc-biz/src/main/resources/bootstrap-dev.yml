@@ -46,6 +46,7 @@ seata:
 spring:
   main:
     allow-bean-definition-overriding: true
+    banner-mode: off
   application:
     name: taotao-cloud-uc
   boot:
@@ -54,10 +55,32 @@ spring:
         url: http://127.0.0.1:8888
         username: admin
         password: root123456
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      #采样率，默认为0.1
+      probability: 1.0
+    messaging:
+      enabled: false
+      kafka:
+        enabled: true
+        mapper:
+          enabled: true
+        remote-service-name: ${spring.application.name}-trace
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    #发送数据类型 kafaka、rabbitmq、web
+    sender:
+      type: WEB
   cloud:
     loadbalancer:
-      ribbon:
-        enabled: false
+      enabled: true
     nacos:
       discovery:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
@@ -172,7 +195,7 @@ spring:
           username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME}
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD}
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST}:${TAOTAO_CLOUD_KAFKA_PORT}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:127.0.0.1}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 0
       batch-size: 16384
@@ -195,20 +218,6 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
-  sleuth:
-    # sleuth 开发阶段关闭
-    enabled: false
-    web:
-      client:
-        enabled: false
-    sampler:
-      probability: 1.0
-  zipkin:
-    # zipkin 开发阶段关闭
-    enabled: false
-    sender:
-      type: kafka
-
   security:
     oauth2:
       resourceserver:
@@ -221,7 +230,6 @@ spring:
         #          client-secret: abc
         jwt:
           jwk-set-uri: http://127.0.0.1:6628/oauth2/jwks
-
 #  shardingsphere:
 #    # shardingsphere 开发阶段关闭
 #    enabled: false
@@ -385,8 +393,6 @@ taotao:
 feign:
   sentinel:
     enabled: true
-  hystrix:
-    enabled: false
   okhttp:
     enabled: true
   httpclient:

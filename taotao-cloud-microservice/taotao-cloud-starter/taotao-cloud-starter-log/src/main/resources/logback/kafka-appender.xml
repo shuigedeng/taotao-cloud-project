@@ -49,6 +49,4 @@
 		<appender-ref ref="KAFKA"/>
 	</appender>
 
-	<logger name="org.apache.kafka" level="true"/>
-
 </included>

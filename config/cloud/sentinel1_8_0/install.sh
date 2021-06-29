@@ -1,7 +1,7 @@
 ###########################################
-wget https://github.com/alibaba/Sentinel/releases/sentinel-dashboard-1.8.0.jar
+cd /opt/taotao-cloud/sentinel1.8.0
 
-cp sentinel-dashboard-1.8.0.jar /opt/taotao-cloud/sentinel1.8.0
+wget https://github.com/alibaba/Sentinel/releases/sentinel-dashboard-1.8.0.jar
 
 ##################### sentinel.sh #############################
 #!/bin/bash

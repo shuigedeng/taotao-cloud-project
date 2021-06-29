@@ -52,6 +52,9 @@
     private static Logger logger = LoggerFactory.getLogger(Class1.class);
     -->
 
+	<logger name="org.springframework.cloud.openfeign" level="DEBUG"/>
+	<logger name="org.apache.kafka" level="DEBUG"/>
+
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="FILE_ALL"/>
