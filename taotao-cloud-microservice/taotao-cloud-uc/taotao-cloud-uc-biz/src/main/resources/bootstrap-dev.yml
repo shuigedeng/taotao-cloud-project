@@ -8,7 +8,7 @@ server:
 
 jasypt:
   encryptor:
-    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD}
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
     algorithm: PBEWITHHMACSHA512ANDAES_256
 #    property:
 #      prefix: "ENC@["
@@ -21,26 +21,26 @@ seata:
   enable-auto-data-source-proxy: true
   service:
     grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST}:${TAOTAO_CLOUD_SEATA_PORT}
+      default: ${TAOTAO_CLOUD_SEATA_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_PORT:8091}
     vgroup-mapping:
       taotao_cloud_tx_group: default
   config:
     type: nacos
     nacos:
       namespace:
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT}
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
-      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME}
-      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD}
+      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
+      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
   registry:
     type: nacos
     nacos:
       application: seata-server
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT}
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
       namespace:
-      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME}
-      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD}
+      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
+      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: default
 
 spring:
@@ -69,7 +69,7 @@ spring:
         enabled: true
         mapper:
           enabled: true
-        remote-service-name: ${spring.application.name}-trace
+        remote-service-name: ${spring.application.name}-sleuth
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
@@ -83,12 +83,12 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: 5
       config:
         enabled: false
-        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
     sentinel:
@@ -98,7 +98,7 @@ spring:
         #流控 名称随意
         flow:
           nacos:
-            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
             dataId: ${spring.application.name}-flow-rules
             namespace:
             groupId: SENTINEL_GROUP
@@ -109,7 +109,7 @@ spring:
         #熔断降级 名称随意
         degrade:
           nacos:
-            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
             dataId: ${spring.application.name}-degrade-rules
             namespace:
             groupId: SENTINEL_GROUP
@@ -117,7 +117,7 @@ spring:
         #系统规则 名称随意
         system:
           nacos:
-            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
             dataId: ${spring.application.name}-system-rules
             namespace:
             groupId: SENTINEL_GROUP
@@ -125,7 +125,7 @@ spring:
         #授权规则 名称随意
         authority:
           nacos:
-            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
             dataId: ${spring.application.name}-authority-rules
             namespace:
             groupId: SENTINEL_GROUP
@@ -133,19 +133,19 @@ spring:
         #参数规则 名称随意
         param-flow:
           nacos:
-            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
             dataId: ${spring.application.name}-param-flow-rules
             namespace:
             groupId: SENTINEL_GROUP
             rule-type: param-flow
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT}
-        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:127.0.0.1}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8858}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8717}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST}:${TAOTAO_CLOUD_MYSQL_PORT}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: ${TAOTAO_CLOUD_MYSQL_USERNAME}
-    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD}
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/taotao-cloud-uc-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     hikari:
       auto-commit: true
@@ -172,8 +172,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST}
-    port: ${TAOTAO_CLOUD_REDIS_PORT}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:127.0.0.1}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
     lettuce:
@@ -190,10 +190,10 @@ spring:
       client:
         reactive:
           endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT}
+            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:127.0.0.1}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
           connection-timeout: 5
-          username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME}
-          password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD}
+          username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
+          password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:127.0.0.1}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
