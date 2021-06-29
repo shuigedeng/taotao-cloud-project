@@ -3,7 +3,7 @@
 	<!-- Context listeners -->
 	<contextName>${APP_NAME}</contextName>
 
-	<contextListener class=" com.taotao.cloud.log.listener.SystemPropertyLoggerContextListener"/>
+<!--	<contextListener class=" com.taotao.cloud.log.listener.SystemPropertyLoggerContextListener"/>-->
 
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
 	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="../logs/application/${APP_NAME}"/>
@@ -34,7 +34,7 @@
 	
 	<include resource="logback/kafka-appender.xml"/>
 	
-	<include resource="logback/logstash-appender.xml"/>
+<!--	<include resource="logback/logstash-appender.xml"/>-->
 
 	<!--为某个包单独配置logger
     比如定时任务，写代码的包名为：net.add1s.slf4j-logback
