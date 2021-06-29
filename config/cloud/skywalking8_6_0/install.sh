@@ -94,14 +94,14 @@ export CATALINA_OPTS
 
 2、基于JAR file的服务(SpringBoot)
 在启动应用程序的命令行中添加 -javaagent 参数，并确保在-jar参数之前添加它，例如:
-java -javaagent:/opt/taotao-cloud/skywalking8.6.0/agent/skywalking-agent.jar
--Dskywalking.agent.service_name=taotao-cloud-gateway
--Dskywalking.agent.authentication=taotao-cloud
--Dskywalking.logging.file_name=taotao-cloud-gateway.skywalking.log
--Dskywalking.logging.level=INFO
--Dskywalking.logging.dir=../logs/application/taotao-cloud-gateway
--Dskywalking.collector.backend_service=127.0.0.1:11800
--jar taotao-cloud-gateway.jar
+java -javaagent:/Users/dengtao/software/skywalking/agent/skywalking-agent.jar \
+-Dskywalking.agent.service_name=taotao-cloud-gateway \
+-Dskywalking.agent.authentication=taotao-cloud \
+-Dskywalking.logging.file_name=taotao-cloud-gateway.skywalking.log \
+-Dskywalking.logging.level=INFO \
+-Dskywalking.logging.dir=../logs/application/taotao-cloud-gateway \
+-Dskywalking.collector.backend_service=103.218.242.48:11800 \
+-jar taotao-cloud-gateway-1.3.0.jar
 
 ##################### skywalking.sh #############################
 #!/bin/bash

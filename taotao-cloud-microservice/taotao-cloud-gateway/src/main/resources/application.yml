@@ -24,13 +24,13 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-gateway
-  boot:
-    admin:
-      client:
-        enabled: true
-        url: http://127.0.0.1:8888
-        username: admin
-        password: root123456
+#  boot:
+#    admin:
+#      client:
+#        enabled: true
+#        url: http://127.0.0.1:8888
+#        username: admin
+#        password: root123456
   sleuth:
     enabled: true
     web:

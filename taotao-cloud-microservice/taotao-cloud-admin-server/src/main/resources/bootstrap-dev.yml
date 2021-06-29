@@ -51,6 +51,8 @@ spring:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
         metadata:
           version: 5
+          user.name: "admin"
+          user.password: "root123456"
       config:
         enabled: false
         server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}

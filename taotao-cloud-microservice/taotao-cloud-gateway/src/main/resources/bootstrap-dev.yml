@@ -20,12 +20,13 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-gateway
-  boot:
-    admin:
-      client:
-        url: http://127.0.0.1:8888
-        username: admin
-        password: root123456
+#  boot:
+#    admin:
+#      client:
+#        enabled: true
+#        url: http://127.0.0.1:8888
+#        username: admin
+#        password: root123456
   sleuth:
     enabled: true
     web:
@@ -70,13 +71,14 @@ spring:
         linger.ms: 500
   cloud:
     loadbalancer:
-      ribbon:
-        enabled: false
+      enabled: true
     nacos:
       discovery:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
-          version: 4
+          version: 5
+          user.name: "admin"
+          user.password: "root123456"
       config:
         enabled: false
         server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
@@ -293,16 +295,6 @@ spring:
                 redis-rate-limiter.burstCapacity: 5
       default-filters:
         - AddRequestHeader=X-Request-taotao-cloud, 1.0
-#  sleuth:
-#    web:
-#      client:
-#        enabled: false
-#    sampler:
-#      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
-#  zipkin:
-#    enabled: false
-#    sender:
-#      type: kafka
 
 taotao:
   cloud:

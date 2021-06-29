@@ -39,6 +39,11 @@ spring:
     password: vwdrmsvmevosbeed
     port: 465
     username: 981376577@qq.com
+  # 重试
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
 
 management:
   endpoints:
