@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.admin.server.controller;
+package com.taotao.cloud.aftersale.biz.controller;
 
-import com.taotao.cloud.admin.server.entity.Withdraw;
+import com.taotao.cloud.aftersale.biz.entity.Withdraw;
 import com.taotao.cloud.aftersale.api.vo.WithdrawVO;
-import com.taotao.cloud.admin.server.mapper.WithdrawMapper;
-import com.taotao.cloud.admin.server.service.IWithdrawService;
+import com.taotao.cloud.aftersale.biz.mapper.WithdrawMapper;
+import com.taotao.cloud.aftersale.biz.service.IWithdrawService;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import io.swagger.annotations.Api;

@@ -13,24 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.admin.server.service;
+package com.taotao.cloud.aftersale.biz.service.impl;
 
-import com.taotao.cloud.admin.server.entity.Withdraw;
+import com.taotao.cloud.aftersale.biz.entity.Withdraw;
+import com.taotao.cloud.aftersale.biz.repository.WithdrawRepository;
+import com.taotao.cloud.aftersale.biz.service.IWithdrawService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
+ * WithdrawServiceImpl
+ *
  * @author dengtao
- * @since 2020/11/13 09:59
+ * @since 2020/11/13 10:00
  * @version 1.0.0
  */
-public interface IWithdrawService {
-	/**
-	 * 根据id查询提现申请信息
-	 *
-	 * @param id id
-	 * @return com.taotao.cloud.aftersale.biz.entity.Withdraw
-	 * @author dengtao
-	 * @since 2020/11/20 上午9:46
-	 * @version 1.0.0
-	 */
-    Withdraw findWithdrawById(Long id);
+@Service
+@AllArgsConstructor
+public class WithdrawServiceImpl implements IWithdrawService {
+
+	private final WithdrawRepository withdrawRepository;
+
+	@Override
+	public Withdraw findWithdrawById(Long id) {
+		return withdrawRepository.getOne(id);
+	}
 }

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.admin.server.mapper;
+package com.taotao.cloud.aftersale.biz.mapper;
 
-import com.taotao.cloud.admin.server.entity.Withdraw;
+import com.taotao.cloud.aftersale.biz.entity.Withdraw;
 import com.taotao.cloud.aftersale.api.vo.WithdrawVO;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
