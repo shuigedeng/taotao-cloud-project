@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<appender name="KAFKA" class="com.taotao.cloud.log.appender.TaoTaoCloudKafkaAppender">
-		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
-				<!--<timestamp>-->
-				<!--    <timeZone>GMT+8</timeZone>-->
-				<!--</timestamp>-->
+<!--	<appender name="KAFKA" class="com.taotao.cloud.log.appender.TaoTaoCloudKafkaAppender">-->
+	<appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>
-					<pattern>
-						{
-						"application_name": "${APP_NAME:-}",
-						"trace_id": "%X{t-traceId:-}",
-						"server_ip": "${SERVER_IP:-}",
-						"server_port": "${SERVER_PORT:-}",
-						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
-						"logday": "%d{yyyy-MM-dd}",
-						"thread": "%thread",
-						"pid": "${PID:-}",
-						"parent_span_id" : "%X{X-B3-ParentSpanId:-}",
-						"span_id": "%X{X-B3-SpanId:-}",
-						"exportable": "%X{X-Span-Export:-}",
-						"logger": "%logger{36}",
-						"level": "%p",
-						"message": "%msg",
-						"host": "${SERVER_IP:-}",
-						"stack_trace": "%ex",
-						"source": "taotao_cloud_sys_log"
-						}
-					</pattern>
+					{
+					"application_name": "${APP_NAME:-}",
+					"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",
+					"server_ip": "${SERVER_IP:-}",
+					"server_port": "${SERVER_PORT:-}",
+					"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+					"logday": "%d{yyyy-MM-dd}",
+					"thread": "%thread",
+					"pid": "${PID:-}",
+					"logger": "%logger{36}",
+					"level": "%p",
+					"method": "%M",
+					"line": "%L",
+					"message": "%msg",
+					"host": "${SERVER_IP:-}",
+					"stack_trace": "%ex",
+					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
+					"zipkin_span_id": "%X{X-B3-SpanId:-}",
+					"zipkin_trace_id": "%X{X-B3-TraceId:-}",
+					"zipkin_span_export": "%X{X-Span-Export:-}",
+					"skywalking_trace_id": "%X{tid:-}",
+					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
+					"source": "taotao_cloud_sys_log",
+					}
 				</pattern>
-			</providers>
+			</layout>
 		</encoder>
+<!--		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">-->
+<!--				<pattern>-->
+<!--					<pattern>-->
+<!--						{-->
+<!--						"env": "${env}",-->
+<!--						"service":"${service}",-->
+<!--						"date":"%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
+<!--						"level":"%level",-->
+<!--						"thread": "%thread",-->
+<!--						"logger": "%logger{36}",-->
+<!--						"msg":"%msg",-->
+<!--						"exception":"%exception"-->
+<!--						}-->
+<!--					</pattern>-->
+<!--				</pattern>-->
+<!--			</providers>-->
+<!--		</encoder>-->
 		<topic>taotao-cloud-sys-log</topic>
 		<keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
 		<deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>

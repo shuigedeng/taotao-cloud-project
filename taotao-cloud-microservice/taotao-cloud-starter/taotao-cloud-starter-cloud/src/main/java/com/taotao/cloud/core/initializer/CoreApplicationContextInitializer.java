@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.core.initializer;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
@@ -157,7 +159,8 @@ public class CoreApplicationContextInitializer implements
 
 	void setDefaultProperty(String key, String defaultPropertyValue, String message) {
 		PropertyUtil
-			.setDefaultInitProperty(CoreApplicationContextInitializer.class, CoreProperties.Project,
+			.setDefaultInitProperty(CoreApplicationContextInitializer.class,
+				PropertyUtil.getProperty(SpringApplicationName),
 				key, defaultPropertyValue, message);
 	}
 
@@ -165,9 +168,8 @@ public class CoreApplicationContextInitializer implements
 		PropertyCache.Default.listenUpdateCache("通过配置刷新上下文监听", (data) -> {
 			if (data != null && data.size() > 0) {
 				for (val e : data.entrySet()) {
-					if (PropertyUtil
-						.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartEnabled, false)
-						== false) {
+					if (!PropertyUtil
+						.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartEnabled, false)) {
 						return;
 					}
 					if (e.getKey().equalsIgnoreCase(CoreProperties.TaoTaoCloudContextRestartText)) {
@@ -182,7 +184,7 @@ public class CoreApplicationContextInitializer implements
 	void refreshContext() {
 		if (ContextUtil.getApplicationContext() != null) {
 			if (ContextUtil.mainClass == null) {
-				LogUtil.error(CoreProperties.Project, "重启失败",
+				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + " 重启失败",
 					new BaseException("检测到重启上下文事件,因无法找到启动类，重启失败!!!"));
 				return;
 			}
@@ -201,8 +203,7 @@ public class CoreApplicationContextInitializer implements
 					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(CoreProperties.Project,
-						"重启失败", new BaseException(
+					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "重启失败", new BaseException(
 							"根据启动类" + ContextUtil.mainClass.getName() + "动态启动main失败"));
 				}
 			});

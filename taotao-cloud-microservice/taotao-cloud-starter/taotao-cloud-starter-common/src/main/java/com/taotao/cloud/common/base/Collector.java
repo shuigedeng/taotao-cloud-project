@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.common.base;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.NumberUtil;
@@ -248,8 +250,8 @@ public class Collector {
 				if (last != null) {
 					lastMinTimeSpan = last.getTime();
 				}
-			} catch (Exception exp) {
-				LogUtil.error("Collector hook 保存耗时统计出错", exp);
+			} catch (Exception e) {
+				LogUtil.error("Collector hook 保存耗时统计出错", e);
 			}
 		}
 
@@ -264,8 +266,8 @@ public class Collector {
 				if (last != null) {
 					lastMinTimeSpanPerMinute = last.getTime();
 				}
-			} catch (Exception exp) {
-				LogUtil.error("Collector hook 保存耗时统计出错", exp);
+			} catch (Exception e) {
+				LogUtil.error("Collector hook 保存耗时统计出错", e);
 			}
 		}
 
@@ -371,7 +373,7 @@ public class Collector {
 				return false;
 			}
 			if (tagCache.size() > super.size()) {
-				LogUtil.info("tagCache 缓存存在溢出风险");
+				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)+ " tag cache 缓存存在溢出风险");
 			}
 			if (super.add(sortInfo)) {
 				tagCache.put(hash, sortInfo);

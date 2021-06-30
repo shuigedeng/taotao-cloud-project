@@ -312,7 +312,7 @@ public final class DateUtils {
 			date = dateFormat.parse(dateStr);
 
 		} catch (Exception e) {
-			log.info("DateUtils error", e);
+			LogUtil.info("DateUtils error", e);
 		}
 		return date;
 	}

@@ -1,5 +1,6 @@
 package com.taotao.cloud.gateway.service.impl;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -41,7 +42,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware {
 	 */
 	public String delete(String id) {
 		try {
-			log.info("gateway delete route id {}", id);
+			LogUtil.info("gateway delete route id {0}", id);
 			this.routeDefinitionWriter.delete(Mono.just(id));
 			return "delete success";
 		} catch (Exception e) {
@@ -57,7 +58,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware {
 	 */
 	public String update(RouteDefinition definition) {
 		try {
-			log.info("gateway update route {}", definition);
+			LogUtil.info("gateway update route {0}", definition);
 			this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
 		} catch (Exception e) {
 			return "update fail,not find route  routeId: " + definition.getId();
@@ -78,7 +79,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware {
 	 * @return
 	 */
 	public String add(RouteDefinition definition) {
-		log.info("gateway add route {}", definition);
+		LogUtil.info("gateway add route {0}", definition);
 		routeDefinitionWriter.save(Mono.just(definition)).subscribe();
 		this.publisher.publishEvent(new RefreshRoutesEvent(this));
 		return "success";

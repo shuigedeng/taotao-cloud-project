@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.gateway.route;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
@@ -23,6 +25,7 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -65,7 +68,8 @@ public class NacosRouteDefinitionRepository implements RouteDefinitionRepository
 			List<RouteDefinition> routeDefinitions = getListByStr(content);
 			return Flux.fromIterable(routeDefinitions);
 		} catch (NacosException e) {
-			LogUtil.error("getRouteDefinitions by nacos error", e);
+			LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
+				+ "get route definitions from nacos error info: {0}", e, e.getErrMsg());
 		}
 		return Flux.fromIterable(CollUtil.newArrayList());
 	}
@@ -87,7 +91,7 @@ public class NacosRouteDefinitionRepository implements RouteDefinitionRepository
 					}
 				});
 		} catch (NacosException e) {
-			LogUtil.error("nacos-addListener-error", e);
+			LogUtil.error("nacos addListener error", e);
 		}
 	}
 

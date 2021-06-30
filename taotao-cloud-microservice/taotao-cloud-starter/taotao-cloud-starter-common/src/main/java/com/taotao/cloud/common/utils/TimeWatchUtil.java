@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.common.utils;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import com.taotao.cloud.common.base.Callable;
 import com.taotao.cloud.common.base.CoreProperties;
-import lombok.var;
 
 /**
  * TimeWatchUtil
@@ -56,10 +57,11 @@ public class TimeWatchUtil {
 	 */
 	public static <T> T print(boolean isPrint, String msg, Callable.Func0<T> action0) {
 		if (isPrint) {
-			var b = System.currentTimeMillis();
+			long b = System.currentTimeMillis();
 			T t = action0.invoke();
-			var e = System.currentTimeMillis();
-			LogUtil.info(CoreProperties.Project, msg + " 耗时:" + (e - b) + "毫秒");
+			long e = System.currentTimeMillis();
+			LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "--" + msg + " 耗时: {0}, ",
+				(e - b) + "毫秒");
 			return t;
 		} else {
 			return action0.invoke();

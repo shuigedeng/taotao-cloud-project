@@ -1,41 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-	<!-- logstash-appender properties -->
 	<appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-		<!-- the TCP address of the logstash -->
 		<destination>${LOGSTASH_DESTINATION}</destination>
 
-		<!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
-				<!--<timestamp>-->
-				<!--    <timeZone>GMT+8</timeZone>-->
-				<!--</timestamp>-->
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>
-					<pattern>
-						{
-						"application_name": "${APP_NAME:-}",
-						"trace_id": "%X{t-traceId:-}",
-						"server_ip": "${SERVER_IP:-}",
-						"server_port": "${SERVER_PORT:-}",
-						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
-						"logday": "%d{yyyy-MM-dd}",
-						"thread": "%thread",
-						"pid": "${PID:-}",
-						"parent_span_id" : "%X{X-B3-ParentSpanId:-}",
-						"span_id": "%X{X-B3-SpanId:-}",
-						"exportable": "%X{X-Span-Export:-}",
-						"logger": "%logger{36}",
-						"level": "%p",
-						"message": "%msg",
-						"host": "${SERVER_IP:-}",
-						"stack_trace": "%ex",
-						"source": "taotao_cloud_sys_log"
-						}
-					</pattern>
+					{
+					"application_name": "${APP_NAME:-}",
+					"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",
+					"server_ip": "${SERVER_IP:-}",
+					"server_port": "${SERVER_PORT:-}",
+					"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+					"logday": "%d{yyyy-MM-dd}",
+					"thread": "%thread",
+					"pid": "${PID:-}",
+					"logger": "%logger{36}",
+					"level": "%p",
+					"method": "%M",
+					"line": "%L",
+					"message": "%msg",
+					"host": "${SERVER_IP:-}",
+					"stack_trace": "%ex",
+					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
+					"zipkin_span_id": "%X{X-B3-SpanId:-}",
+					"zipkin_trace_id": "%X{X-B3-TraceId:-}",
+					"zipkin_span_export": "%X{X-Span-Export:-}",
+					"skywalking_trace_id": "%X{tid:-}",
+					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
+					"source": "taotao_cloud_sys_log",
+					}
 				</pattern>
-			</providers>
+			</layout>
 		</encoder>
+
+<!--		&lt;!&ndash;<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">&ndash;&gt;-->
+<!--		<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--			&lt;!&ndash;			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">&ndash;&gt;-->
+<!--			<provider-->
+<!--				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider"/>-->
+<!--			<customFields>{"project":"iservice"}</customFields>-->
+<!--			<pattern>-->
+<!--				<pattern>-->
+<!--					{-->
+<!--					"application_name": "${APP_NAME:-}",-->
+<!--					"server_ip": "${SERVER_IP:-}",-->
+<!--					"server_port": "${SERVER_PORT:-}",-->
+<!--					"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
+<!--					"logday": "%d{yyyy-MM-dd}",-->
+<!--					"thread": "%thread",-->
+<!--					"pid": "${PID:-}",-->
+<!--					"logger": "%logger{36}",-->
+<!--					"level": "%p",-->
+<!--					"method": "%M",-->
+<!--					"line": "%L",-->
+<!--					"message": "%msg",-->
+<!--					"host": "${SERVER_IP:-}",-->
+<!--					"stack_trace": "%ex",-->
+<!--					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",-->
+<!--					"zipkin_span_id": "%X{X-B3-SpanId:-}",-->
+<!--					"zipkin_trace_id": "%X{X-B3-TraceId:-}",-->
+<!--					"zipkin_span_export": "%X{X-Span-Export:-}",-->
+<!--					"skywalking_trace_id": "%X{tid:-}",-->
+<!--					"source": "taotao_cloud_sys_log",-->
+<!--					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",-->
+<!--					}-->
+<!--				</pattern>-->
+<!--			</pattern>-->
+<!--		</encoder>-->
 		<connectionStrategy>
 			<roundRobin>
 				<connectionTTL>5 minutes</connectionTTL>

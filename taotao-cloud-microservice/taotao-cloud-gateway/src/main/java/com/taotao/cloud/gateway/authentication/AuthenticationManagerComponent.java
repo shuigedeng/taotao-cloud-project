@@ -24,22 +24,23 @@ import reactor.core.publisher.Mono;
  * 自定义认证管理器
  *
  * @author dengtao
- * @since 2020/4/29 22:09
  * @version 1.0.0
+ * @since 2020/4/29 22:09
  */
 public class AuthenticationManagerComponent implements ReactiveAuthenticationManager {
-    private static final String FAILURE = "token已失效";
-    private static final String EXPIRED = "token已过期";
-    private static final String FAILED = "用户认证失败";
+
+	private static final String FAILURE = "token已失效";
+	private static final String EXPIRED = "token已过期";
+	private static final String FAILED = "用户认证失败";
 
 
-    @Override
-    public Mono<Authentication> authenticate(Authentication authentication) {
-		LogUtil.info("authentication: " + authentication.toString());
+	@Override
+	public Mono<Authentication> authenticate(Authentication authentication) {
+		LogUtil.info("taotao cloud user authentication info : {0}", authentication.toString());
 
-	    return Mono.justOrEmpty(authentication);
+		return Mono.justOrEmpty(authentication);
 
-	    //从Redis中获取当前路径可访问角色列表
+		//从Redis中获取当前路径可访问角色列表
 //	    URI uri = authorizationContext.getExchange().getRequest().getURI();
 //	    Object obj = redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLES_MAP, uri.getPath());
 //	    List<String> authorities = Convert.toList(String.class,obj);
@@ -53,7 +54,6 @@ public class AuthenticationManagerComponent implements ReactiveAuthenticationMan
 //		    .any(authorities::contains)
 //		    .map(AuthorizationDecision::new)
 //		    .defaultIfEmpty(new AuthorizationDecision(false));
-
 
 //        return Mono.justOrEmpty(authentication)
 //                .filter(a -> a instanceof BearerTokenAuthenticationToken)
@@ -76,5 +76,5 @@ public class AuthenticationManagerComponent implements ReactiveAuthenticationMan
 //                    return Mono.just(accessTokenValue);
 //                }))
 //                .cast(Authentication.class);
-    }
+	}
 }

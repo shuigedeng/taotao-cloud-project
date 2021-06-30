@@ -41,9 +41,8 @@ public class ConfigService {
 
 	@NacosConfigListener(dataId = "taotao-cloud", type = ConfigType.YAML)
 	public void onReceived(Properties value) {
-		LogUtil.info("onReceived(Properties) : {}", value);
+		LogUtil.info("taotao cloud on received from nacos properties data : {0}", value);
 	}
-
 
 	@RefreshScope
 	@Configuration
@@ -73,7 +72,8 @@ public class ConfigService {
 
 						@Override
 						public void receiveConfigInfo(String configInfo) {
-							LogUtil.info(configInfo);
+							LogUtil.info("taotao cloud on received from nacos config info : {0}",
+								configInfo);
 						}
 					});
 		}

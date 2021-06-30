@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -46,8 +47,10 @@ public class OpenApiConfiguration {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
 
+		assert definitions != null;
+
 		for (RouteDefinition definition : definitions) {
-			System.out.println("id: " + definition.getId() + "  " + definition.getUri().toString());
+			LogUtil.info("spring cloud gateway route definition : {0}, uri: {1}", definition.getId(), definition.getUri().toString());
 		}
 
 		definitions.stream()

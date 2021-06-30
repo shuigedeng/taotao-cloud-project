@@ -3,6 +3,7 @@ package com.taotao.cloud.gateway.service.impl;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.gateway.service.SafeRuleService;
@@ -54,13 +55,13 @@ public class SafeRuleServiceImpl implements SafeRuleService {
 			blackLists.addAll(ruleCacheService.getBlackList());
 			// 检查是否在黑名单中
 			checkBlackLists(forbid, blackLists, originUri, requestMethod);
-			log.debug("黑名单检查完成 - {}", stopwatch.stop());
+			LogUtil.debug("黑名单检查完成 - {0}", stopwatch.stop());
 			if (forbid.get()) {
-				log.info("属于黑名单地址 - {}", originUri.getPath());
+				LogUtil.info("属于黑名单地址 - {0}", originUri.getPath());
 				return ResponseUtil.fail(exchange, "已列入黑名单，访问受限");
 			}
 		} catch (Exception e) {
-			log.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
+			LogUtil.error("黑名单检查异常: {0} - {1}", e.getMessage(), stopwatch.stop());
 		}
 		return null;
 	}

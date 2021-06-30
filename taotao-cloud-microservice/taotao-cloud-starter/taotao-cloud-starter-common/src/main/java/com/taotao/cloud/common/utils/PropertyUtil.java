@@ -54,7 +54,7 @@ public class PropertyUtil {
 		return (T) BeanUtil.convert(value, defaultvalue.getClass());
 	}
 
-	public static Object getProperty(String key) {
+	public static String getProperty(String key) {
 		String value = System.getProperty(key);
 		if (value == null) {
 			value = System.getenv(key);
@@ -95,7 +95,10 @@ public class PropertyUtil {
 			if (!Strings.isEmpty(propertyValue)) {
 				System.setProperty(key, propertyValue);
 				PropertyCache.Default.tryUpdateCache(key, propertyValue);
-				LogUtil.info(module, "设置" + key + "=" + propertyValue + " " + message);
+
+				LogUtil
+					.info(module + " set default init property key: {0}, value: {1}, message: {2}",
+						key, propertyValue, message);
 			}
 		} else {
 			if (Strings.isEmpty(getSystemProperty(key, ""))) {

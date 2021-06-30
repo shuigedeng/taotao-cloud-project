@@ -10,6 +10,7 @@ dependencies {
 
     api "com.github.danielwegener:logback-kafka-appender:0.2.0-RC2"
     api "net.logstash.logback:logstash-logback-encoder"
+    api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.6.0'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

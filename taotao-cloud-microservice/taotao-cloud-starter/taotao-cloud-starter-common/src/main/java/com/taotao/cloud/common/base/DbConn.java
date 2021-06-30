@@ -244,11 +244,12 @@ public final class DbConn implements AutoCloseable {
 
 	public class DbException extends RuntimeException {
 
-		public DbException(String message, String sql, Exception exp) {
-			super(message, exp);
-			if (PropertyUtil.getPropertyCache("taotao.cloud.db.printSqlError.enabled", true) && !StringUtil
+		public DbException(String message, String sql, Exception e) {
+			super(message, e);
+			if (PropertyUtil.getPropertyCache("taotao.cloud.db.printSqlError.enabled", true)
+				&& !StringUtil
 				.isEmpty(sql)) {
-				LogUtil.error("错误sql:" + sql);
+				LogUtil.error("错误sql: {0}", e, sql);
 			}
 		}
 	}

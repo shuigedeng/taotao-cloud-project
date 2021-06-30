@@ -83,7 +83,7 @@ public class ThreadPool {
 		if (checkHealth && threadPool.getMaximumPoolSize() <= threadPool.getPoolSize()
 			&& threadPool.getQueue().size() > 0) {
 			LogUtil.warn(
-				"bsf线程池已满,任务开始出现排队,请考虑设置taotao.cloud.threadpool.max,当前:" + threadPool.getMaximumPoolSize());
+				"线程池已满,任务开始出现排队,请考虑设置taotao.cloud.threadpool.max,当前:" + threadPool.getMaximumPoolSize());
 		}
 	}
 
@@ -284,9 +284,10 @@ public class ThreadPool {
 		public void uncaughtException(Thread t, Throwable e) {
 			try {
 				if (e != null) {
-					LogUtil.error("【警告】bsf TheadPool未捕获错误", e);
+					LogUtil.error("[警告] TheadPool未捕获错误", e);
 				}
 			} catch (Exception e2) {
+				LogUtil.error("[警告] TheadPool未捕获错误", e2);
 			}
 			if (lastUncaughtExceptionHandler != null) {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);

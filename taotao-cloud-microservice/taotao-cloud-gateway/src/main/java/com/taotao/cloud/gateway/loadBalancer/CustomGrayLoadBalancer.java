@@ -110,7 +110,9 @@ public class CustomGrayLoadBalancer implements ReactorServiceInstanceLoadBalance
 		Map<ServiceInstance, Integer> weightMap = new HashMap<>();
 		for (ServiceInstance instance : instances) {
 			Map<String, String> metadata = instance.getMetadata();
-			LogUtil.info(metadata.get("version") + "-->weight:" + metadata.get("weight"));
+			LogUtil.info("taotao cloud gray loadbalancer nacos version: {0} , weight: {1}",
+				metadata.get("version"), metadata.get("weight"));
+
 			if (metadata.containsKey("weight")) {
 				weightMap.put(instance, Integer.valueOf(metadata.get("weight")));
 			}

@@ -76,11 +76,11 @@ public class ResourceServerConfig {
 		tokenAuthenticationConverter.setAllowUriQueryParameter(true);
 
 		ServerAuthenticationEntryPoint entryPoint = (exchange, e) -> {
-			LogUtil.error("认证失败", e);
+			LogUtil.error("user authentication error : {0}", e, e.getMessage());
 			return ResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
 		};
 		ServerAccessDeniedHandler accessDenied = (exchange, e) -> {
-			LogUtil.error("授权失败", e);
+			LogUtil.error("user access denied error : {0}", e, e.getMessage());
 			return ResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
 		};
 

@@ -58,7 +58,7 @@ public final class PingYinUtil {
 			}
 			return buffer.toString();
 		} catch (Exception e) {
-			log.warn("\u53D6\u4E2D\u6587\u62FC\u97F3\u6709\u9519" + e.getMessage());
+			LogUtil.warn("\u53D6\u4E2D\u6587\u62FC\u97F3\u6709\u9519" + e.getMessage());
 		}
 		return null;
 	}

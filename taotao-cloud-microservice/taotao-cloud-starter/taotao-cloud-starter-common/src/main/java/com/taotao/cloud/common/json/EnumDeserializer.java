@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.taotao.cloud.common.utils.LogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -68,7 +69,7 @@ public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 			}
 			return Enum.valueOf(propertyType, val);
 		} catch (Exception e) {
-			log.warn("解析枚举失败", e);
+			LogUtil.error("解析枚举失败", e);
 			return null;
 		}
 	}

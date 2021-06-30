@@ -318,7 +318,7 @@ public class RequestUtil {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
-			LogUtil.error("InetAddress.getLocalHost()-error", e);
+			LogUtil.error("InetAddress.getLocalHost()--error", e);
 		}
 		return "";
 	}

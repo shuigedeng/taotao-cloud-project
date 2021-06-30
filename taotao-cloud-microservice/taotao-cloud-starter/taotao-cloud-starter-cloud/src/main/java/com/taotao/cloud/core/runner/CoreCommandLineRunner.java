@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.core.runner;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import com.taotao.cloud.common.utils.LogUtil;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import org.springframework.boot.CommandLineRunner;
 
 /**
@@ -31,7 +32,8 @@ public class CoreCommandLineRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		String strArgs = Arrays.stream(args).collect(Collectors.joining("|"));
-		LogUtil.info("Application started with arguments:" + strArgs);
+		String strArgs = String.join("|", args);
+		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)
+			+ "-- started with arguments length: {0}, args: {1}", args.length, strArgs);
 	}
 }

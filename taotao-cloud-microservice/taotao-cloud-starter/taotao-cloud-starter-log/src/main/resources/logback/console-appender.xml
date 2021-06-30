@@ -3,9 +3,10 @@
 	<!-- 控制台日志 -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
-		<encoder>
-			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
-			<charset>UTF-8</charset>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+				<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			</layout>
 		</encoder>
 	</appender>
 </included>

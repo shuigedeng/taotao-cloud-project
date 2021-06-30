@@ -105,7 +105,7 @@ public class AsyncUtil {
 		int delaySeconds, BiConsumer<Boolean, Throwable> consumer) {
 		Executor executor = new Executor(task, maxRetryCount, delaySeconds, consumer);
 		if (firstDelaySeconds > 0) {
-			LogUtil.warn(name, "延迟执行异常，将会在[" + firstDelaySeconds + "]秒后执行重试");
+			LogUtil.warn(name + " 延迟执行异常，将会在[" + firstDelaySeconds + "]秒后执行重试");
 			taskTimer.schedule(new Task(executor), firstDelaySeconds * 1000L);
 		} else {
 			executor.execute();
@@ -142,9 +142,9 @@ public class AsyncUtil {
 				if (retryAttempts++ < maxRetryCount) {
 					int delay = delaySeconds > 0 ? delaySeconds
 						: retrySeconds[Math.min(retryAttempts, retrySeconds.length) - 1];
-					LogUtil.warn(name,
-						"执行异常，将会在[" + delay + "]秒后进行第[" + retryAttempts + "]次重试，异常信息：" + e
-							.getMessage(), e);
+					LogUtil.warn(
+						name + " 执行异常，将会在[" + delay + "]秒后进行第[" + retryAttempts + "]次重试，异常信息：" + e
+							.getMessage());
 					taskTimer.schedule(new Task(this), delay * 1000L);
 					return;
 				}
@@ -152,19 +152,17 @@ public class AsyncUtil {
 			}
 			if (exception != null) {
 				if (maxRetryCount > 0) {
-					LogUtil.error(name,
-						"执行异常，重试[" + maxRetryCount + "]后仍然失败，异常信息：" + exception.getMessage(),
-						exception);
+					LogUtil.error(name + " 执行异常，重试[" + maxRetryCount + "]后仍然失败，异常信息：" + exception
+						.getMessage());
 				} else {
-					LogUtil.error(name, "执行异常，异常信息：" + exception.getMessage(),
-						exception);
+					LogUtil.error(name + " 执行异常, 异常信息：{0}", exception, exception.getMessage());
 				}
 			}
 			if (resultConsumer != null) {
 				try {
 					resultConsumer.accept(exception == null, exception);
 				} catch (Throwable e) {
-					LogUtil.error(name, "处理结果回调异常", e);
+					LogUtil.error(name + " 处理结果回调异常", e);
 				}
 			}
 		}

@@ -15,7 +15,10 @@
  */
 package com.taotao.cloud.common.base;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 import lombok.AllArgsConstructor;
@@ -67,7 +70,7 @@ public class ProcessExitEvent {
 						}
 					}
 				}
-				LogUtil.info("应用已正常退出！");
+				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) +"--应用已正常退出！");
 			} catch (Exception e) {
 				LogUtil.error("进程关闭事件回调处理出错", e);
 			}

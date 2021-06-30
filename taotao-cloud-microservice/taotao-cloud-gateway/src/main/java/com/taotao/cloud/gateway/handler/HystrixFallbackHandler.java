@@ -53,7 +53,8 @@ public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
 		Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
 		originalUris.ifPresent(originalUri -> LogUtil
-			.error("网关执行请求:{}失败,请求主机: {},请求数据:{} hystrix服务降级处理", null, originalUri,
+			.error("网关执行请求:{0}失败,请求主机: {1},请求数据:{2} hystrix服务降级处理", null,
+				originalUri,
 				socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
 				buildMessage(serverRequest)));
 

@@ -5,6 +5,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
@@ -41,7 +42,7 @@ public class VersionGrayLoadBalancer implements GrayLoadBalancer {
 
 		//注册中心无实例 抛出异常
 		if (CollUtil.isEmpty(instances)) {
-			log.warn("No instance available for {}", serviceId);
+			LogUtil.warn("No instance available for {0}", serviceId);
 			throw new NotFoundException("No instance available for " + serviceId);
 		}
 
@@ -56,7 +57,7 @@ public class VersionGrayLoadBalancer implements GrayLoadBalancer {
 			Map<String, String> metadata = instance.getMetadata();
 			String targetVersion = MapUtil.getStr(metadata, CommonConstant.TAOTAO_CLOUD_VERSION);
 			if (reqVersion.equalsIgnoreCase(targetVersion)) {
-				log.debug("gray requst match success :{} {}", reqVersion, instance);
+				LogUtil.debug("gray requst match success :{0} {1}", reqVersion, instance);
 				return instance;
 			}
 		}

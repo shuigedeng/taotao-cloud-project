@@ -5,21 +5,25 @@
 
 <!--	<contextListener class=" com.taotao.cloud.log.listener.SystemPropertyLoggerContextListener"/>-->
 
+	<property name="LOG_PATH" value="${user.dir}"/>
+	<property name="TAOTAO_CLOUD_VERSION" value="${taotaoCloudVersion}"/>
+	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
+
+<!--	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion"/>-->
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
-	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="../logs/application/${APP_NAME}"/>
+	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/application/${APP_NAME}"/>
 	<springProperty name="LOG_MAX_FILE_SIZE" scope="context" source="logback.filesize" defaultValue="2GB"/>
 	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
 	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="0000"/>
-	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="localhost:9092"/>
-	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="127.0.0.1:4560"/>
+	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="192.168.1.10:9092"/>
+	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="192.168.1.10:4560"/>
 
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
-		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%level){blue} %clr(${PID}){magenta} %clr([%X{t-traceId}]){yellow} %clr([%thread]){orange} %clr(%logger){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%-5level]){blue} %clr(${PID}){magenta} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr(TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}]){yellow}  %clr(SkywalkingTraceId:[%X{tid:-}]){blue} %clr([%thread]){orange} %clr(%logger){cyan} %clr(Method:[%M]){orange} %clr(Line:[%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
 	<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"
-		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%X{t-traceId}] [%thread] %logger %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
-	
-	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] ${PID} ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}]  SkywalkingTraceId:[%X{tid:-}] [%thread] %logger Method:[%M] Line:[%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
 	<conversionRule conversionWord="wex"

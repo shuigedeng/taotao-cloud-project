@@ -1,5 +1,6 @@
 package com.taotao.cloud.gateway.filter;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.loadBalancer.GrayLoadBalancer;
 import java.net.URI;
 import lombok.extern.slf4j.Slf4j;
@@ -57,10 +58,8 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 		// preserve the original url
 		ServerWebExchangeUtils.addOriginalRequestUrl(exchange, url);
 
-		if (log.isTraceEnabled()) {
-			log.trace(ReactiveLoadBalancerClientFilter.class.getSimpleName()
-				+ " url before: " + url);
-		}
+		LogUtil.info(ReactiveLoadBalancerClientFilter.class.getSimpleName()
+			+ " url before: {0}", url);
 		// 这里呢会进行调用真正的负载均衡
 		return choose(exchange).doOnNext(response -> {
 
@@ -83,9 +82,8 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
 			URI requestUrl = LoadBalancerUriTools.reconstructURI(serviceInstance, uri);
 
-			if (log.isTraceEnabled()) {
-				log.trace("LoadBalancerClientFilter url chosen: " + requestUrl);
-			}
+			LogUtil.info("LoadBalancerClientFilter url chosen: " + requestUrl);
+
 			exchange.getAttributes()
 				.put(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR, requestUrl);
 		}).then(chain.filter(exchange));

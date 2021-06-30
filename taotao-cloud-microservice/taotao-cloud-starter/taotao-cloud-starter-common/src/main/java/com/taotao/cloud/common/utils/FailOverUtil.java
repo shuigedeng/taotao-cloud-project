@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.common.utils;
 
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import lombok.Getter;
@@ -53,7 +55,8 @@ public class FailOverUtil {
 					result.throwable = e;
 					if (i > 0) {
 						LogUtil
-							.error(name.concat("-失败-补偿次数" + i), ExceptionUtil.getFullStackTrace(e));
+							.error(name.concat("-失败-补偿次数" + i) + " error info: {0}", e,
+								ExceptionUtil.getFullStackTrace(e));
 					} else {
 						LogUtil.error(ExceptionUtil.getFullStackTrace(e));
 					}
@@ -61,7 +64,9 @@ public class FailOverUtil {
 				times = i + 1;
 			}
 			if (result.success && times > 0) {
-				LogUtil.info(name, "补偿成功，补偿次数：" + times);
+				LogUtil.info(
+					PropertyUtil.getProperty(SpringApplicationName) + " " + name
+						+ " 补偿成功, 补偿次数：{0}", times);
 			}
 		} finally {
 			consumer.accept(result);

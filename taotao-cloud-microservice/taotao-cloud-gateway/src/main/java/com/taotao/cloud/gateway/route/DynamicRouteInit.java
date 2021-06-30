@@ -45,16 +45,16 @@
 //			ConfigService configService = NacosFactory.createConfigService(properties);
 //
 //			String content = configService.getConfig(MateConstant.CONFIG_DATA_ID_DYNAMIC_ROUTES, nacosProperties.getGroup(), MateConstant.CONFIG_TIMEOUT_MS);
-//			log.info("初始化网关路由开始");
+//			LogUtil.info("初始化网关路由开始");
 //			updateRoute(content);
-//			log.info("初始化网关路由完成");
+//			LogUtil.info("初始化网关路由完成");
 //			//开户监听，实现动态
 //			configService.addListener(MateConstant.CONFIG_DATA_ID_DYNAMIC_ROUTES, nacosProperties.getGroup(), new Listener() {
 //				@Override
 //				public void receiveConfigInfo(String configInfo) {
-//					log.info("更新网关路由开始");
+//					LogUtil.info("更新网关路由开始");
 //					updateRoute(configInfo);
-//					log.info("更新网关路由完成");
+//					LogUtil.info("更新网关路由完成");
 //				}
 //				@Override
 //				public Executor getExecutor() {
@@ -62,7 +62,7 @@
 //				}
 //			});
 //		} catch (NacosException e) {
-//			log.error("加载路由出错：{}", e.getErrMsg());
+//			LogUtil.error("加载路由出错：{}", e.getErrMsg());
 //		}
 //	}
 //
@@ -70,7 +70,7 @@
 //		Yaml yaml = new Yaml();
 //		GatewayRoute gatewayRoute = yaml.loadAs(content, GatewayRoute.class);
 //		gatewayRoute.getRoutes().forEach(route -> {
-//			log.info("加载路由：{},{}", route.getId(), route);
+//			LogUtil.info("加载路由：{},{}", route.getId(), route);
 //			routeDefinitionWriter.save(Mono.just(route)).subscribe();
 //		});
 //	}
