@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        taotaoCloudVersion = "1.3.0"
+        taotaoCloudVersion = "1.4.0"
         taotaoCloudGroup = "com.taotao.cloud"
 
         springVersion = '5.3.4'
