@@ -1,0 +1,242 @@
+server:
+  port: 9997
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+
+temp:
+  redirect_uri: http://localhost:8008/mall/login/oauth2/code/mall
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: taotao_cloud_tx_group
+  enable-auto-data-source-proxy: true
+  service:
+    grouplist:
+      default: ${TAOTAO_CLOUD_SEATA_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_PORT:8091}
+    vgroup-mapping:
+      taotao_cloud_tx_group: default
+  config:
+    type: nacos
+    nacos:
+      namespace:
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
+      group: SEATA_GROUP
+      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
+      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
+      group: SEATA_GROUP
+      namespace:
+      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
+      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
+      cluster: default
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: off
+  application:
+    name: taotao-cloud-oauth2-client
+  cloud:
+    loadbalancer:
+      enabled: true
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      #采样率，默认为0.1
+      probability: 1.0
+    messaging:
+      enabled: false
+      kafka:
+        enabled: true
+        mapper:
+          enabled: true
+        remote-service-name: ${spring.application.name}-sleuth
+  mvc:
+    servlet:
+      load-on-startup: 1
+  #    thymeleaf:
+  #      prefix: classpath:/views/
+  #      suffix: .html
+  #      cache: false
+  cache:
+    type: none
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.1.10}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 25000
+      login-timeout: 5
+      validation-timeout: 3000
+      max-lifetime: 50000
+      read-only: false
+      connection-test-query: SELECT 1
+      maximum-pool-size: 15
+      minimum-idle: 10
+      pool-name: DatebookHikariCP
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+  redis:
+    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.1.10}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+    database: 1
+    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  kafka:
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.1.10}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500
+    consumer:
+      auto-commit-interval: 1S
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
+  security:
+    oauth2:
+      authorization:
+        client:
+          - client-id: mall
+            client-secret: mall
+            redirect-uri: https://www.baidu.com
+            scope:
+              - mall:read
+              - mall:write
+          - client-id: admin
+            client-secret: admin
+            redirect-uri: http://localhost:6628/login/oauth2/code/admin
+      client:
+        provider:
+          mall:
+            # 对外的授权服务中心地址
+            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
+            token-uri: http://127.0.0.1:6628/oauth2/token
+            # 写网关下的暴露地址
+            user-info-uri: http://localhost:8008/upms/check_token
+            user-name-attribute: name
+          wechat:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+            user-info-authentication-method: form
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+          qq:
+            authorizationUri: https://graph.qq.com/oauth2.0/authorize
+            tokenUri: https://graph.qq.com/oauth2.0/token
+            userInfoUri: https://graph.qq.com/user/get_user_info
+            user-info-authentication-method: form
+            userNameAttribute: nickname
+        registration:
+          mall:
+            provider: mall
+            client-id: mall
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            # 必须和auth-server中设置 一模一样!!
+            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
+            scope: mall.read,mall.write
+          wechat:
+            client-id: xxx
+            client-secret: xxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: https://xxx/login/oauth2/code/wx
+            scope: snsapi_login
+            client-authentication-method: post
+          gitee:
+            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            authorization-grant-type: authorization_code
+            redirect-uri: http://9da31b1edd0e.ngrok.io/api/login/oauth2/code/gitee
+          github:
+            clientId: Iv1.f4c52616ef60f7be
+            clientSecret: e2c1524fefec9a18a459fb863ceaa8655f7899f1
+            redirectUri: http://0b817f4ac311.ngrok.io/api/login/oauth2/code/github
+          qq:
+            clientId: clientId
+            clientSecret: clientSecret
+            # 在本地测试时需要配置代理将自己在qq注册的redirectUri重定向为http://localhost/api/login/oauth2/code/qq
+            redirectUri: https://www.zyc.red/api/login/oauth2/code/qq
+            authorizationGrantType: authorization_code
+            scope: get_user_info
+            # 授权码模式需要传递code、state、client_id、client_secret等参数，OAuth2AuthorizationCodeGrantRequestEntityConverter
+            # 会根据当前的认证方式传递不同的参数
+            clientAuthenticationMethod: post
+      resourceserver:
+        #        jwt:
+        #          public-key-location: classpath:key.public
+        #          jws-algorithm: RS512
+        #        opaquetoken:
+        #          introspection-uri: http://localhost:9000/oauth/check_token
+        #          client-id: abc
+        #          client-secret: abc
+        jwt:
+          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 10000
+    max-connections-per-route: 1000
+  client:
+    config:
+      feign-name:
+        connectTimeout: 300000
+        readTimeout: 300000
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}

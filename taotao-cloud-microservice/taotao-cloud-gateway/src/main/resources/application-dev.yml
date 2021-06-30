@@ -1,0 +1,380 @@
+server:
+  http:
+    port: 9443
+  port: 9999
+  shutdown: graceful
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+knife4j:
+  enable: false
+
+spring:
+  cache:
+    type: none
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+    banner-mode: off
+  application:
+    name: taotao-cloud-gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          #配置RSA的公钥访问地址
+#          jwk-set-uri: http://taotao-cloud-oauth2-server/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      #采样率，默认为0.1
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.1.10}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    #发送数据类型 kafaka、rabbitmq、web
+    sender:
+      type: WEB
+  redis:
+    client-name: taotao-cloud-gateway-redis-client
+    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.1.10}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+    database: 0
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  kafka:
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.1.10}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500
+  cloud:
+    loadbalancer:
+      enabled: true
+    gateway:
+      loadbalancer:
+        use404: false
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        - id: taotao-cloud-uc
+          uri: lb://taotao-cloud-uc
+          predicates:
+            - Path=/taotao-cloud-uc/**
+          filters:
+            - RewritePath=/taotao-cloud-uc/(?<remaining>.*), /${remaining}
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+#        - id: auth-user-password-token
+#          uri: lb://taotao-cloud-oauth2
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/auth/oauth/token/user
+#          filters:
+#            - StripPrefix=3
+#            - RequestTime=true
+#            - ImageCode
+#            - PreserveHostHeader
+#            - id: auth-login-third-token
+#              uri: lb://taotao-cloud-auth
+#              predicates:
+#                - Path=http://${taotao.cloud.gateway.base-uri}/auth/oauth/token/third
+#              filters:
+#                - StripPrefix=3
+#                - RequestTime=true
+#                - PreserveHostHeader
+#        # 发送短信接口要做接口限制
+#        - id: auth-sms-code
+#          uri: lb://taotao-cloud-auth
+#          predicates:
+#            - Path=http://${taotao.cloud.gateway.base-uri}/auth/sms/code
+#          filters:
+#            - StripPrefix=3
+#            - RequestTime=true
+#            - PreserveHostHeader
+#        # 数据重复校验要做接口限制
+#        - id: uc-repeact-check
+#          uri: lb://taotao-cloud-uc
+#          predicates:
+#            - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
+#          filters:
+#            - StripPrefix=3
+#            - RequestTime=true
+#            - PreserveHostHeader
+#        - id: openapi
+#          uri: http://localhost:${server.port}
+#          predicates:
+#            - Path=/v3/api-docs/**
+#          filters:
+#            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+#        - id: taotao-cloud-uc-service
+#          uri: lb://taotao-cloud-uc-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/user/**
+#          filters:
+#            - RewritePath=/user/(?<path>.*), /$\{path}
+#            - StripPrefix=3
+#            - PreserveHostHeader
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: '#{@remoteAddrKeyResolver}'
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#        - id: taotao-cloud-auth-service
+#          uri: lb://taotao-cloud-auth-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/auth/**
+#          filters:
+#            - StripPrefix=3
+#            - PreserveHostHeader
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: '#{@remoteAddrKeyResolver}'
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#        - id: taotao-cloud-order-service
+#          uri: lb://taotao-cloud-order-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/order/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-aftersale-service
+#          uri: lb://taotao-cloud-aftersale-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/aftersale/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-customer-service
+#          uri: lb://taotao-cloud-customer-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/customer/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-dfs-service
+#          uri: lb://taotao-cloud-dfs-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/dfs/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-pay-service
+#          uri: lb://taotao-cloud-pay-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/pay/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-log-service
+#          uri: lb://taotao-cloud-log-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/log/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-member-service
+#          uri: lb://taotao-cloud-member-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/member/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-mail-service
+#          uri: lb://taotao-cloud-mail-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/mail/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-logistics-service
+#          uri: lb://taotao-cloud-logistics-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/logistics/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-manager-service
+#          uri: lb://taotao-cloud-manager-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/manager/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#        - id: taotao-cloud-product-service
+#          uri: lb://taotao-cloud-product-service
+#          predicates:
+#            - Path=${taotao.cloud.gateway.base-uri}/product/**
+#          filters:
+#            - StripPrefix=3
+#            - name: RequestRateLimiter
+#              args:
+#                #使用SpEL按名称引用bean
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                #允许用户每秒处理多少个请求
+#                redis-rate-limiter.replenishRate: 1
+#                #令牌桶的容量，允许在一秒钟内完成的最大请求数
+#                redis-rate-limiter.burstCapacity: 5
+      default-filters:
+        - AddRequestHeader=X-Request-taotao-cloud, 1.0
+
+taotao:
+  cloud:
+    core:
+      enabled: true
+      env: dev
+      logging:
+        file:
+          total-size: 10GB
+      context:
+        restart:
+          enabled: false
+          text:
+          timespan:
+      collect:
+        hook:
+          enabled: true
+      db:
+        printSql:
+          enabled: true
+        printSqlError:
+          enabled: true
+    log:
+      request-log:
+        enabled: false
+        types:
+          - kafka
+    gateway:
+      prefix: /api
+      version: /v1.0
+      dynamic:
+        route:
+          enabled: false
+          type: nacos
+      log:
+        trace:
+          enabled: true
+      security:
+        ignore:
+          http-urls: >
+            /*/api-docs,
+            /code,
+            /uc/repeat/check,
+            /uc/user,
+            /auth/client,
+            /manager/graphql,
+            /manager/graphiql,
+            /auth/oauth/**,
+            /auth/mobile/login,
+            /auth/sms/code,
+            /auth/social/**,
+            /auth/css/**,
+            /auth/images/**,
+            /auth/js/**,
+            /favicon.ico,
+            /manifest.json,
+            /robots.txt
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  health:
+    elasticsearch:
+      enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: off
+    org.springframework.security: off
+    org.springframework.security.oauth2: off
+    org.springframework.boot.autoconfigure: off

@@ -6,7 +6,6 @@ dependencies {
 
     api "de.codecentric:spring-boot-admin-starter-client:2.4.0"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
-    api "io.micrometer:micrometer-registry-prometheus"
 
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
@@ -19,6 +18,8 @@ dependencies {
 //    api 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 //    api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
 //    api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
+
+    api "io.micrometer:micrometer-registry-prometheus"
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

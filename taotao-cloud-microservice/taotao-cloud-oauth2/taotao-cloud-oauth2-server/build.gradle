@@ -1,6 +1,5 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api')
 
     implementation 'org.webjars:jquery:3.4.1'

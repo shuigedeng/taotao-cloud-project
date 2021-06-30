@@ -1,92 +1,21 @@
 server:
-  port: 8888
-  http2:
-    enabled: true
-  undertow:
-    buffer-size: 2048
-    direct-buffers: true
+  port: 10000
 
 spring:
   main:
     allow-bean-definition-overriding: true
   application:
     name: taotao-cloud-admin-server
-  sleuth:
-    enabled: true
-    web:
-      client:
-        enabled: true
-    sampler:
-      #采样率，默认为0.1
-      probability: 1.0
-  zipkin:
-    enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
-    discoveryClientEnabled: false
-    #发送数据类型 kafaka、rabbitmq、web
-    sender:
-      type: WEB
-  boot:
-    admin:
-      notify:
-        mail:
-          enabled: true
-          to: 981376577@qq.com
-          cc: 981376577@qq.com
-          from: Spring Boot Admin <981376577@qq.com>
-  mail:
-    host: smtp.qq.com
-    password: ${TAOTAO_CLOUD_MAIL_PASSWORD}
-    port: 465
-    username: 981376577@qq.com
-    protocol: smtps
-  security:
-    user:
-      name: admin
-      password: root123456
   cloud:
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: 5
           user.name: "admin"
           user.password: "root123456"
       config:
         enabled: false
-        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml
-#  sleuth:
-#    web:
-#      client:
-#        # sleuth 开发阶段关闭
-#        enabled: true
-#    sampler:
-#      probability: 1.0
-#  zipkin:
-#    # zipkin 开发阶段关闭
-#    enabled: true
-#    sender:
-#      type: kafka
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-    tags:
-      application: ${spring.application.name}
-  health:
-    elasticsearch:
-      enabled: false

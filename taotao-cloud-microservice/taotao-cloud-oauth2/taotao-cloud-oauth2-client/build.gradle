@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 //
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
@@ -7,7 +7,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation "org.springframework.boot:spring-boot-starter-validation"

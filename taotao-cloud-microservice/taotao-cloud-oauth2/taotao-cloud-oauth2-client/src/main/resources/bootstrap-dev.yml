@@ -1,0 +1,40 @@
+server:
+  port: 9997
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-oauth2-service
+  cloud:
+    loadbalancer:
+      enabled: true
+    nacos:
+      discovery:
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT}
+        metadata:
+          version: 5
+      config:
+        enabled: false
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT}
+        namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
+        file-extension: yml
+    sentinel:
+      enabled: false
+      eager: true
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_DS1_NACOS_PORT}
+            dataId: taotao-cloud-uc-sentinel
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+      transport:
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT}

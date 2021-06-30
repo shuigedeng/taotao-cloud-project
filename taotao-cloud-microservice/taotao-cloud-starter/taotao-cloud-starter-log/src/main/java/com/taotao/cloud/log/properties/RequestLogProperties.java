@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.request-log")
+@ConfigurationProperties(prefix = "taotao.cloud.log.request-log")
 public class RequestLogProperties {
 
 	/**

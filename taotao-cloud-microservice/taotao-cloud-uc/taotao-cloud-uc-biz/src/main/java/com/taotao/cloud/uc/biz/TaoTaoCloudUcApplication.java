@@ -35,7 +35,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableOauth2ResourceSecurity
 public class TaoTaoCloudUcApplication {
 
-
 	public static void main(String[] args) {
 		 SpringApplication.run(TaoTaoCloudUcApplication.class, args);
 	}

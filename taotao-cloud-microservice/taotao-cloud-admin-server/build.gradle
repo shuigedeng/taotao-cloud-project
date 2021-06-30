@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
 
     implementation 'de.codecentric:spring-boot-admin-starter-server:2.4.0'
 
@@ -21,6 +22,4 @@ dependencies {
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    // implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-    // implementation 'io.micrometer:micrometer-registry-prometheus'
 }
