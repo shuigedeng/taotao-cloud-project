@@ -194,4 +194,9 @@ public class CommonConstant {
 
 	/************************* 邮箱 **********************/
 	public static final Long RESOURCE_TREE_ROOT_ID = 0L;
+
+	public static final String ZIPKIN_TRACE_ID = "X-B3-TraceId";
+	public static final String ZIPKIN_SPANE_ID = "X-B3-SpanId";
+
+
 }

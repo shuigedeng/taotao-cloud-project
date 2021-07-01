@@ -103,7 +103,6 @@ management:
       post:
         enabled: true
   metrics:
-    enable: true
     export:
       prometheus:
         enabled: true

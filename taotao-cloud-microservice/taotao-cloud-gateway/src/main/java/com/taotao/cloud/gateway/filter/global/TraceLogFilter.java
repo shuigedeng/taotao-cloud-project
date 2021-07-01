@@ -35,11 +35,11 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:13
  */
 @Component
-public class TraceFilter implements GlobalFilter, Ordered {
+public class TraceLogFilter implements GlobalFilter, Ordered {
 
 	private final TraceProperties traceProperties;
 
-	public TraceFilter(TraceProperties traceProperties) {
+	public TraceLogFilter(TraceProperties traceProperties) {
 		this.traceProperties = traceProperties;
 	}
 

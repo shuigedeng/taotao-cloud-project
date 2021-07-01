@@ -54,7 +54,7 @@ public class OpenApiConfiguration {
 		}
 
 		definitions.stream()
-			.filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
+			.filter(routeDefinition -> routeDefinition.getId().startsWith("taotao-cloud"))
 			.filter(routeDefinition -> !routeDefinition.getId()
 				.startsWith("ReactiveCompositeDiscoveryClient_"))
 			.forEach(routeDefinition -> {

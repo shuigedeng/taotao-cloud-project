@@ -24,6 +24,9 @@ public class TraceFilter extends OncePerRequestFilter {
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		if (request.getRequestURI().startsWith("/actuator")) {
+			return true;
+		}
 		return !filterProperties.getTrace();
 	}
 
@@ -33,10 +36,11 @@ public class TraceFilter extends OncePerRequestFilter {
 		try {
 			String traceId = TraceUtil.getTraceId(request);
 			TraceUtil.mdcTraceId(traceId);
+			TraceUtil.mdcZipkinTraceId(request);
+			TraceUtil.mdcZipkinSpanId(request);
 			filterChain.doFilter(request, response);
 		} finally {
 			MDC.clear();
 		}
-
 	}
 }
