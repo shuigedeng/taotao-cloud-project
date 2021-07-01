@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.exception;
 
-import com.taotao.cloud.common.annotation.base.IgnoreResponseBodyAdvice;
+import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import com.taotao.cloud.common.model.Result;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

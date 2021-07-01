@@ -10,7 +10,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -22,10 +22,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2019/9/15
  */
+@AllArgsConstructor
 public class LbIsolationFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private FilterProperties filterProperties;
+	private final FilterProperties filterProperties;
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

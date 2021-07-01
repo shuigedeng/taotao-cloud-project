@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.filter.global;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.TraceUtil;
-import com.taotao.cloud.gateway.properties.TraceProperties;
+import com.taotao.cloud.gateway.properties.CustomRequestTraceProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -37,15 +37,15 @@ import reactor.core.publisher.Mono;
 @Component
 public class TraceLogFilter implements GlobalFilter, Ordered {
 
-	private final TraceProperties traceProperties;
+	private final CustomRequestTraceProperties customRequestTraceProperties;
 
-	public TraceLogFilter(TraceProperties traceProperties) {
-		this.traceProperties = traceProperties;
+	public TraceLogFilter(CustomRequestTraceProperties customRequestTraceProperties) {
+		this.customRequestTraceProperties = customRequestTraceProperties;
 	}
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		if (traceProperties.getEnabled()) {
+		if (customRequestTraceProperties.getEnabled()) {
 			String traceId = IdGeneratorUtil.getIdStr();
 			TraceUtil.mdcTraceId(traceId);
 			ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()

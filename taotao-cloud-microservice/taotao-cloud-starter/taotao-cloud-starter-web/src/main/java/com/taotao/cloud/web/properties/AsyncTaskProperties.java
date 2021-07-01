@@ -13,32 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.properties;
+package com.taotao.cloud.web.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 动态路由配置
+ * 异步任务Properties
  *
  * @author dengtao
- * @since 2020/5/2 11:15
  * @version 1.0.0
+ * @since 2020/7/24 08:22
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.gateway.dynamic.route")
-public class DynamicRouteProperties {
+@ConfigurationProperties(prefix = AsyncTaskProperties.BASE_ASYNC_TASK_PREFIX)
+public class AsyncTaskProperties {
 
-    /**
-     * 是否开启
-     */
-    private Boolean enabled = false;
+	public static final String ENABLED = "enabled";
+	public static final String TRUE = "true";
 
-    /**
-     * 类型
-     */
-    private String type = "nacos";
+	public static final String BASE_ASYNC_TASK_PREFIX = "taotao.cloud.web.async.task";
 
+	/**
+	 * 线程池维护线程的最小数量
+	 */
+	private int corePoolSize = 10;
+
+	/**
+	 * 线程池维护线程的最大数量
+	 */
+	private int maxPoolSiz = 200;
+
+	/**
+	 * 队列最大长度
+	 */
+	private int queueCapacity = 300;
+
+	/**
+	 * 线程池前缀
+	 */
+	private String threadNamePrefix = "taotao-cloud-executor-";
 }

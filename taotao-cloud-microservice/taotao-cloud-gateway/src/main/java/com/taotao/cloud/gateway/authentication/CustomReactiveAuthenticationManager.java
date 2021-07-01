@@ -27,12 +27,11 @@ import reactor.core.publisher.Mono;
  * @version 1.0.0
  * @since 2020/4/29 22:09
  */
-public class AuthenticationManagerComponent implements ReactiveAuthenticationManager {
+public class CustomReactiveAuthenticationManager implements ReactiveAuthenticationManager {
 
 	private static final String FAILURE = "token已失效";
 	private static final String EXPIRED = "token已过期";
 	private static final String FAILED = "用户认证失败";
-
 
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {

@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.StringPoolConstant;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,7 +60,7 @@ public class RequestUtil {
 
 	private final static String UNKNOWN_STR = "unknown";
 
-	private static final ThreadLocal<WebContext> THREAD_CONTEXT = new ThreadLocal<>();
+	private static final ThreadLocal<WebContext> THREAD_CONTEXT = new TransmittableThreadLocal<>();
 
 	public static WebContext getContext() {
 		return THREAD_CONTEXT.get();

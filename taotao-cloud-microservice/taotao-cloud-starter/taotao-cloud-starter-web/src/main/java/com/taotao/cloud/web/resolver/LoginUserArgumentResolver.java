@@ -1,4 +1,4 @@
-package com.taotao.cloud.web.support;
+package com.taotao.cloud.web.resolver;
 
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.SecurityUtil;

@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.annotation.base;
+package com.taotao.cloud.web;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.taotao.cloud.web.properties.AsyncTaskProperties;
+import com.taotao.cloud.web.properties.FilterProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * 忽略全局响应包装
+ * PropertiesAutoConfiguration
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2021/6/22 16:58
+ * @since 2020/7/29 14:18
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(value = {ElementType.METHOD, ElementType.TYPE})
-public @interface IgnoreResponseBodyAdvice {
+@EnableConfigurationProperties({FilterProperties.class, AsyncTaskProperties.class})
+public class PropertiesAutoConfiguration {
 
 }

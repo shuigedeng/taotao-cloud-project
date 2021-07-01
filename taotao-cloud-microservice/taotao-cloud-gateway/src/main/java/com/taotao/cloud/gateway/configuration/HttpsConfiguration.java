@@ -15,48 +15,44 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.HttpHandler;
-import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.util.pattern.PathPatternParser;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 /**
  * 配置http服务，使其即支持http又支持https服务（https通过配置文件配置）
  *
  * @author dengtao
- * @since 2020/4/29 22:11
  * @version 1.0.0
+ * @since 2020/4/29 22:11
  */
 @Configuration
 public class HttpsConfiguration {
 
-	// @Autowired
-	// private HttpHandler httpHandler;
-	// private WebServer webServer;
-	//
-	// @Value("${server.http.port}")
-	// private Integer httpPort;
-	//
-	// @PostConstruct
-	// public void start() {
-	// 	NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(httpPort);
-	// 	WebServer webServer = factory.getWebServer(httpHandler);
-	// 	webServer.start();
-	// }
-	//
-	// @PreDestroy
-	// public void stop() {
-	// 	webServer.stop();
-	// }
+	@Autowired
+	private HttpHandler httpHandler;
+
+	@Autowired
+	private WebServer webServer;
+
+	@Value("${server.http.port}")
+	private Integer httpPort;
+
+	@PostConstruct
+	public void start() {
+		NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(httpPort);
+		WebServer webServer = factory.getWebServer(httpHandler);
+		webServer.start();
+	}
+
+	@PreDestroy
+	public void stop() {
+		webServer.stop();
+	}
 
 }

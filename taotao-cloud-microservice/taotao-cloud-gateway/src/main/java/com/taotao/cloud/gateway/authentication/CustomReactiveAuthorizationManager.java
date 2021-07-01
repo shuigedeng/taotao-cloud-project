@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:10
  */
 @Component
-public class PermissionAuthManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+public class CustomReactiveAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
 	@Override
 	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,

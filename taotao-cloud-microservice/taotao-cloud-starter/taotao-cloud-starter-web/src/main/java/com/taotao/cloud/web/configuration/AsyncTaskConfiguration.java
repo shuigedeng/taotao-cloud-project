@@ -15,12 +15,16 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.web.async.AsyncTaskProperties;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.async.AsyncThreadPoolTaskExecutor;
+import com.taotao.cloud.web.properties.AsyncTaskProperties;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import lombok.AllArgsConstructor;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -31,12 +35,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
+@AllArgsConstructor
 @EnableAsync(proxyTargetClass = true)
-@EnableConfigurationProperties({AsyncTaskProperties.class})
-public class AsyncTaskConfiguration {
+public class AsyncTaskConfiguration implements AsyncConfigurer {
+
+	private final AsyncTaskProperties asyncTaskProperties;
 
 	@Bean
-	public TaskExecutor taskExecutor(AsyncTaskProperties asyncTaskProperties) {
+	public TaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
 		executor.setCorePoolSize(asyncTaskProperties.getCorePoolSize());
 		executor.setMaxPoolSize(asyncTaskProperties.getMaxPoolSiz());
@@ -46,5 +52,17 @@ public class AsyncTaskConfiguration {
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 		executor.initialize();
 		return executor;
+	}
+
+	@Override
+	public Executor getAsyncExecutor() {
+		return taskExecutor();
+	}
+
+	@Override
+	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+		return (ex, method, params) -> LogUtil
+			.error("class#method: " + method.getDeclaringClass().getName() + "#" + method
+				.getName(), ex);
 	}
 }

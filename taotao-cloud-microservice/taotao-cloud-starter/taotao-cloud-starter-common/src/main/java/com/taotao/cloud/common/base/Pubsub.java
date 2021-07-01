@@ -37,9 +37,9 @@ public class Pubsub {
 	private final Object lock = new Object();
 
 	public <T> void pub(String event, T data) {
-		val subs = subscribeList.get(event);
+		ConcurrentHashMap<String, Sub> subs = subscribeList.get(event);
 		if (subs != null) {
-			for (val sub : subs.entrySet()) {
+			for (Map.Entry<String, Sub> sub : subs.entrySet()) {
 				try {
 					sub.getValue().action.invoke(data);
 				} catch (Exception e) {

@@ -34,7 +34,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  *
  * @author pangu
  */
-
 public class RequestMappingScanListener implements ApplicationListener<ApplicationReadyEvent> {
 
 	private static final AntPathMatcher PATH_MATCH = new AntPathMatcher();

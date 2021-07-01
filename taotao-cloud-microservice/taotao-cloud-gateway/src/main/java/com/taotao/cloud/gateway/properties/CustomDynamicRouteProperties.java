@@ -13,43 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.properties;
+package com.taotao.cloud.gateway.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 网关配置
+ * 动态路由配置
  *
  * @author dengtao
- * @version 1.0.0
  * @since 2020/5/2 11:15
+ * @version 1.0.0
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = FilterProperties.BASE_WEB_FILTER_PREFIX)
-public class FilterProperties {
+@ConfigurationProperties(prefix = "taotao.cloud.gateway.dynamic.route")
+public class CustomDynamicRouteProperties {
 
-	public static final String BASE_WEB_FILTER_PREFIX = "taotao.cloud.web.filter";
+    /**
+     * 是否开启
+     */
+    private Boolean enabled = false;
 
-	/**
-	 * 开启负载均衡隔离规则
-	 */
-	private Boolean lbIsolation = true;
+    /**
+     * 类型
+     */
+    private String type = "nacos";
 
-	/**
-	 * 开启租户过滤器
-	 */
-	private Boolean tenant = true;
-
-	/**
-	 * 开启日志链路追踪过滤器
-	 */
-	private Boolean trace = true;
-
-	/**
-	 * 开启日志链路追踪过滤器
-	 */
-	private Boolean webContext = true;
 }

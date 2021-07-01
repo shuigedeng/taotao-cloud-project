@@ -15,15 +15,10 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.web.filter.LbIsolationFilter;
-import com.taotao.cloud.web.filter.TenantFilter;
-import com.taotao.cloud.web.filter.TraceFilter;
-import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.common.utils.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
@@ -34,12 +29,11 @@ import org.springframework.web.WebApplicationInitializer;
  * @since 2021/04/08 15:26
  */
 @Slf4j
-@EnableConfigurationProperties({FilterProperties.class})
 public class ServletConfiguration implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		log.info("servletContext.getServerInfo=== {}", servletContext.getServerInfo());
+		LogUtil.info("servletContext.getServerInfo=== {0}", servletContext.getServerInfo());
 
 		//注册servlet
 //		ServletRegistration.Dynamic myServlet = servletContext
@@ -61,20 +55,4 @@ public class ServletConfiguration implements WebApplicationInitializer {
 //		traceFilter.addMappingForUrlPatterns(
 //			EnumSet.of(DispatcherType.REQUEST, DispatcherType.ASYNC), false, "/*");
 	}
-
-	@Bean
-	public LbIsolationFilter lbIsolationFilter() {
-		return new LbIsolationFilter();
-	}
-
-	@Bean
-	public TenantFilter tenantFilter() {
-		return new TenantFilter();
-	}
-
-	@Bean
-	public TraceFilter traceFilter() {
-		return new TraceFilter();
-	}
-
 }

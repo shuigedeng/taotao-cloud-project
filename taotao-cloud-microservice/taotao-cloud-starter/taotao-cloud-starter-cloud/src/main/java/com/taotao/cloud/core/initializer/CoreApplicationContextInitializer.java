@@ -17,8 +17,12 @@ package com.taotao.cloud.core.initializer;
 
 import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
 
+import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.rolling.RollingFileAppender;
+import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 import com.taotao.cloud.common.base.CoreProperties;
@@ -82,9 +86,7 @@ public class CoreApplicationContextInitializer implements
 				//LogUtils.info(CoreApplicationContextInitializer.class,CoreProperties.Project,CoreProperties.SpringApplicationName+"="+propertyValue);
 				setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
 
-				LogUtil
-					.info(CoreProperties.Project,
-						CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
+				LogUtil.info(CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
 
 				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 					if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
@@ -117,21 +119,21 @@ public class CoreApplicationContextInitializer implements
 		String message = "[日志标准规范]";
 
 		//MQ客户端日志目录
-		setDefaultProperty("rocketmq.client.logRoot", "log", message);
+//		setDefaultProperty("rocketmq.client.logRoot", "log", message);
 
 		//文件优化
-		setDefaultProperty(CoreProperties.LoggingFile, "log/app.log", message);
-		setDefaultProperty(CoreProperties.LoggingFileMaxHistory, "3", message);
-		setDefaultProperty(CoreProperties.LoggingFileMaxSize, "10MB", message);
+//		setDefaultProperty(CoreProperties.LoggingFile, "log/app.log", message);
+//		setDefaultProperty(CoreProperties.LoggingFileMaxHistory, "3", message);
+//		setDefaultProperty(CoreProperties.LoggingFileMaxSize, "10MB", message);
 
 		//日志优化最大
 		ILoggerFactory factory = LoggerFactory.getILoggerFactory();
 		if (factory instanceof LoggerContext) {
-			val root = ((LoggerContext) factory).getLogger("ROOT");
+			Logger root = ((LoggerContext) factory).getLogger("ROOT");
 			if (root != null) {
-				val file = root.getAppender("FILE");
+				Appender<ILoggingEvent> file = root.getAppender("FILE");
 				if (file instanceof RollingFileAppender) {
-					val rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
+					RollingPolicy rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
 					if (rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
 						setDefaultProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB",
 							message);
@@ -152,12 +154,12 @@ public class CoreApplicationContextInitializer implements
 
 		if (ContextUtil.isWeb()) {
 			//tomcat 优化 * 核心数
-			setDefaultProperty(CoreProperties.ServerTomcatMaxThreads, ((int) (200 * cpuCount)) + "",
-				"[自动化调优]");
-			setDefaultProperty(CoreProperties.ServerTomcatMaxConnections,
-				((int) (10000 * cpuCount)) + "", "[自动化调优]");
-			setDefaultProperty(CoreProperties.ServerTomcatMinSpaceThreads,
-				((int) (20 * (cpuCount / 2))) + "", "[自动化调优]");
+//			setDefaultProperty(CoreProperties.ServerTomcatMaxThreads, ((int) (200 * cpuCount)) + "",
+//				"[自动化调优]");
+//			setDefaultProperty(CoreProperties.ServerTomcatMaxConnections,
+//				((int) (10000 * cpuCount)) + "", "[自动化调优]");
+//			setDefaultProperty(CoreProperties.ServerTomcatMinSpaceThreads,
+//				((int) (20 * (cpuCount / 2))) + "", "[自动化调优]");
 
 			//tomcat 传输优化
 			//setDefaultProperty(CoreProperties.ServeCompressionEnabled, "true", "[自动化调优]");

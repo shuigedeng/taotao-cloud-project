@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.val;
 
 /**
  * 全局进程关闭事件定义
@@ -34,16 +33,16 @@ import lombok.val;
  **/
 public class ProcessExitEvent {
 
-	private static ArrayList<ExitCallback> callBackList = new ArrayList<>();
-	private static Object lock = new Object();
+	private static final ArrayList<ExitCallback> CALL_BACK_LIST = new ArrayList<>();
+	private static final Object LOCK = new Object();
 
 	/**
 	 * @param action0
 	 * @param order   越大越晚 必须大于0
 	 */
 	public static void register(Callable.Action0 action0, int order, Boolean asynch) {
-		synchronized (lock) {
-			callBackList.add(new ExitCallback(action0, Math.abs(order), asynch));
+		synchronized (LOCK) {
+			CALL_BACK_LIST.add(new ExitCallback(action0, Math.abs(order), asynch));
 		}
 	}
 
@@ -51,17 +50,17 @@ public class ProcessExitEvent {
 		//JVM 停止或重启时
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			try {
-				synchronized (lock) {
-					callBackList.sort(Comparator.comparingInt(c -> c.order));
-					for (val a : callBackList) {
+				synchronized (LOCK) {
+					CALL_BACK_LIST.sort(Comparator.comparingInt(c -> c.order));
+					for (ExitCallback exitCallback : CALL_BACK_LIST) {
 						Callable.Action0 method = () -> {
 							try {
-								a.action0.invoke();
+								exitCallback.action0.invoke();
 							} catch (Exception e2) {
 								LogUtil.error("进程关闭事件回调处理出错", e2);
 							}
 						};
-						if (a.asynch) {
+						if (exitCallback.async) {
 							new Thread(() -> {
 								method.invoke();
 							}).start();
@@ -70,7 +69,7 @@ public class ProcessExitEvent {
 						}
 					}
 				}
-				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) +"--应用已正常退出！");
+				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "--应用已正常退出！");
 			} catch (Exception e) {
 				LogUtil.error("进程关闭事件回调处理出错", e);
 			}
@@ -89,6 +88,6 @@ public class ProcessExitEvent {
 		/**
 		 * 异步支持
 		 */
-		Boolean asynch = false;
+		Boolean async = false;
 	}
 }

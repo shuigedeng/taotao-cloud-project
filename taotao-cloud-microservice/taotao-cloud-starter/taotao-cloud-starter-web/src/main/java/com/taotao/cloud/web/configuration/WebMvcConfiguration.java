@@ -23,12 +23,19 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.taotao.cloud.common.json.JacksonModule;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.web.filter.LbIsolationFilter;
+import com.taotao.cloud.web.filter.TenantFilter;
+import com.taotao.cloud.web.filter.TraceFilter;
+import com.taotao.cloud.web.filter.WebContextFilter;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
+import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
-import com.taotao.cloud.web.support.LoginUserArgumentResolver;
+import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.resolver.LoginUserArgumentResolver;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.List;
@@ -40,12 +47,16 @@ import javax.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -63,6 +74,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	private final RedisRepository redisRepository;
+	private final FilterProperties filterProperties;
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
@@ -70,12 +82,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public HeaderThreadLocalInterceptor headerThreadLocalInterceptor(){
+	public HeaderThreadLocalInterceptor headerThreadLocalInterceptor() {
 		return new HeaderThreadLocalInterceptor();
 	}
 
 	@Bean
-	public PrometheusMetricsInterceptor prometheusMetricsInterceptor(){
+	public PrometheusMetricsInterceptor prometheusMetricsInterceptor() {
 		return new PrometheusMetricsInterceptor();
 	}
 
@@ -102,13 +114,23 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				"classpath:/resources");
 	}
 
-//	@Bean
-//	@ConditionalOnBean(value = {RedisRepository.class})
-//	public RequestMappingScanListener resourceAnnotationScan() {
-//		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
-//		LogUtil.info("资源扫描类.[{}]", scan);
-//		return scan;
-//	}
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+
+	}
+
+	@Override
+	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+		WebMvcConfigurer.super.configureAsyncSupport(configurer);
+	}
+
+	@Bean
+	@ConditionalOnBean(value = {RedisRepository.class})
+	public RequestMappingScanListener resourceAnnotationScan() {
+		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
+		LogUtil.info("资源扫描类.[{}]", scan);
+		return scan;
+	}
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
@@ -158,17 +180,43 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		return new RequestContextListener();
 	}
 
-//	@Bean
-//	public FilterRegistrationBean<Filter1> func(Filter1 filter1) {
-//		FilterRegistrationBean<Filter1> registrationBean = new FilterRegistrationBean<>();
-//		registrationBean.setFilter(filter1);
-//		registrationBean.addUrlPatterns("/demo03/*");
-//		return registrationBean;
-//	}
+	@Bean
+	public FilterRegistrationBean<LbIsolationFilter> lbIsolationFilterFilterRegistrationBean() {
+		FilterRegistrationBean<LbIsolationFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new LbIsolationFilter(filterProperties));
+		registrationBean.addUrlPatterns("/**");
+		registrationBean.setName(LbIsolationFilter.class.getName());
+		registrationBean.setOrder(1);
+		return registrationBean;
+	}
 
-//	@Override
-//	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-//		Oauth2HttpMessageConverter oauth2HttpMessageConverter = new Oauth2HttpMessageConverter();
-//		converters.add(0, oauth2HttpMessageConverter);
-//	}
+	@Bean
+	public FilterRegistrationBean<TenantFilter> tenantFilterFilterRegistrationBean() {
+		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new TenantFilter(filterProperties));
+		registrationBean.addUrlPatterns("/**");
+		registrationBean.setName(TenantFilter.class.getName());
+		registrationBean.setOrder(2);
+		return registrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean<TraceFilter> traceFilterFilterRegistrationBean() {
+		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new TraceFilter(filterProperties));
+		registrationBean.addUrlPatterns("/**");
+		registrationBean.setName(TraceFilter.class.getName());
+		registrationBean.setOrder(3);
+		return registrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean<WebContextFilter> webContextFilterFilterRegistrationBean() {
+		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new WebContextFilter(filterProperties));
+		registrationBean.addUrlPatterns("/**");
+		registrationBean.setName(WebContextFilter.class.getName());
+		registrationBean.setOrder(4);
+		return registrationBean;
+	}
 }

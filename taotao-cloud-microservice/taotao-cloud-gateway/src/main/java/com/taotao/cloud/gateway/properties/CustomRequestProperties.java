@@ -6,8 +6,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @Data
 @RefreshScope
-@ConfigurationProperties(value = TaoTaoCloudRequestProperties.BASE_REQUEST_PREFIX)
-public class TaoTaoCloudRequestProperties {
+@ConfigurationProperties(value = CustomRequestProperties.BASE_REQUEST_PREFIX)
+public class CustomRequestProperties {
 
 	public static final String BASE_REQUEST_PREFIX = "taotao.cloud.request";
 

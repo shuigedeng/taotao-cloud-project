@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,7 +35,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.val;
 
 /**
  * 自定义采集器
@@ -44,7 +44,6 @@ import lombok.val;
  * @since 2021/6/22 17:07
  **/
 public class Collector {
-
 	/**
 	 * 默认实例
 	 */
@@ -68,13 +67,14 @@ public class Collector {
 		try {
 			Object obj = type.newInstance();
 			if (type == Hook.class) {
-				val o = (Hook) obj;
+				Hook o = (Hook) obj;
 				o.setKey(key);
 				o.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
 			}
 			return obj;
 		} catch (Exception e) {
-			throw new BaseException(e.toString());
+			LogUtil.error(e.getMessage(), e);
+			throw new BaseException(e.getMessage());
 		}
 	}
 
@@ -183,9 +183,9 @@ public class Collector {
 
 		public Object run(String tag, Object obj, String methodName, Object[] params) {
 			if (method == null) {
-				val find = Arrays.stream(obj.getClass().getMethods())
+				Optional<Method> find = Arrays.stream(obj.getClass().getMethods())
 					.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
-				if (find.isPresent() == false) {
+				if (!find.isPresent()) {
 					throw new BaseException("未找到方法:" + obj.getClass().getName() + "下" + methodName);
 				}
 				method = find.get();
@@ -214,7 +214,7 @@ public class Collector {
 				}
 				current.getAndIncrement();
 				//每秒重新计数,不用保证十分精确
-				val second = System.currentTimeMillis() / 1000;
+				long second = System.currentTimeMillis() / 1000;
 				if (second != lastSecond) {
 					lastSecond = second;
 					lastErrorPerSecond.set(0);
@@ -224,9 +224,9 @@ public class Collector {
 						sortListPerMinute.removeMore(0);
 					}
 				}
-				val start = System.currentTimeMillis();
+				long start = System.currentTimeMillis();
 				T result = func.invoke();
-				val timeSpan = System.currentTimeMillis() - start;
+				long timeSpan = System.currentTimeMillis() - start;
 				insertOrUpdate(tag, timeSpan);
 				insertOrUpdatePerMinute(tag, timeSpan);
 				lastSuccessPerSecond.getAndIncrement();
@@ -246,7 +246,7 @@ public class Collector {
 			try {
 				sortList.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
 				sortList.removeMore(this.maxLength);
-				val last = sortList.getLast();
+				SortInfo last = sortList.getLast();
 				if (last != null) {
 					lastMinTimeSpan = last.getTime();
 				}
@@ -262,7 +262,7 @@ public class Collector {
 			try {
 				sortListPerMinute.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
 				sortListPerMinute.removeMore(this.maxLength);
-				val last = sortListPerMinute.getLast();
+				SortInfo last = sortListPerMinute.getLast();
 				if (last != null) {
 					lastMinTimeSpanPerMinute = last.getTime();
 				}
@@ -328,13 +328,7 @@ public class Collector {
 
 		@Override
 		public int compareTo(SortInfo o) {
-			if (o.time > this.time) {
-				return 1;
-			} else if (o.time < this.time) {
-				return -1;
-			} else {
-				return 0;
-			}
+			return Double.compare(o.time, this.time);
 		}
 
 		@Override
@@ -355,16 +349,16 @@ public class Collector {
 
 	public static class SortList extends ConcurrentSkipListSet<SortInfo> {
 
-		protected Map tagCache = new ConcurrentHashMap<Integer, Object>();
+		protected Map<Integer, Object> tagCache = new ConcurrentHashMap<>();
 
 		@Override
 		public boolean add(SortInfo sortInfo) {
 			Integer hash = sortInfo.tag.hashCode();
 			if (tagCache.containsKey(hash)) {
-				val value = tagCache.get(hash);
+				Object value = tagCache.get(hash);
 				if (value != null) {
 					//累加
-					val sort = ((SortInfo) value);
+					SortInfo sort = ((SortInfo) value);
 					sort.getCount().getAndIncrement();
 					if (sort.time < sortInfo.time) {
 						sort.maxTime = sortInfo.time;
@@ -373,7 +367,8 @@ public class Collector {
 				return false;
 			}
 			if (tagCache.size() > super.size()) {
-				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)+ " tag cache 缓存存在溢出风险");
+				LogUtil
+					.info(PropertyUtil.getProperty(SpringApplicationName) + " tag cache 缓存存在溢出风险");
 			}
 			if (super.add(sortInfo)) {
 				tagCache.put(hash, sortInfo);
@@ -394,6 +389,7 @@ public class Collector {
 					return this.last();
 				}
 			} catch (NoSuchElementException e) {
+				LogUtil.error(e.getMessage(), e);
 			}
 			return null;
 		}
@@ -403,7 +399,7 @@ public class Collector {
 			int count = this.size();
 			while (this.size() > maxLength) {
 				count--;
-				val last = this.pollLast();
+				SortInfo last = this.pollLast();
 				if (last != null) {
 					this.remove(last);
 				}
@@ -418,7 +414,7 @@ public class Collector {
 
 		public String toText() {
 			StringBuilder sb = new StringBuilder();
-			for (val o : this) {
+			for (SortInfo o : this) {
 				sb.append(String
 					.format("[耗时ms]%s[tag]%s[次数]%s[最大耗时ms]%s\r\n", NumberUtil.scale(o.time, 2),
 						o.tag.toString(), o.count, NumberUtil.scale(o.maxTime, 2)));

@@ -15,8 +15,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = TaoTaoCloudApiProperties.BASE_AUTHENTICATION_PREFIX)
-public class TaoTaoCloudApiProperties {
+@ConfigurationProperties(prefix = CustomOpenApiProperties.BASE_AUTHENTICATION_PREFIX)
+public class CustomOpenApiProperties {
 
 	public static final String BASE_AUTHENTICATION_PREFIX = "taotao.cloud.authentication";
 

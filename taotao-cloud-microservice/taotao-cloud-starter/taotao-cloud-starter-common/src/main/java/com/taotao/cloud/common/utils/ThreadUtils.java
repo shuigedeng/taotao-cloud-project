@@ -18,7 +18,6 @@ package com.taotao.cloud.common.utils;
 import com.taotao.cloud.common.base.Callable;
 import com.taotao.cloud.common.base.ThreadPool;
 import java.util.Collection;
-import lombok.var;
 
 /**
  * 提供线程池操作类 默认使用自定义的全局bsf线程池
@@ -42,7 +41,7 @@ public class ThreadUtils {
 	public static <T> void parallelFor(String taskName, int parallelCount, Collection<T> taskList,
 		final Callable.Action1<T> action) {
 		if (parallelCount < 2) {
-			for (var t : taskList) {
+			for (T t : taskList) {
 				action.invoke(t);
 			}
 		} else {

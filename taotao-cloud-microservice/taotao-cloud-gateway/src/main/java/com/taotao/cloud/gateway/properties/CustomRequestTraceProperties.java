@@ -13,46 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.async;
+package com.taotao.cloud.gateway.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 异步任务Properties
+ * 日志链路追踪配置
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/7/24 08:22
+ * @since 2020/5/2 11:15
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = AsyncTaskProperties.BASE_ASYNC_TASK_PREFIX)
-public class AsyncTaskProperties {
-
-	public static final String ENABLED = "enabled";
-	public static final String TRUE = "true";
-
-	public static final String BASE_ASYNC_TASK_PREFIX = "taotao.cloud.web.async.task";
+@ConfigurationProperties(prefix = "taotao.cloud.filter.trace.log")
+public class CustomRequestTraceProperties {
 
 	/**
-	 * 线程池维护线程的最小数量
+	 * 是否开启日志链路追踪
 	 */
-	private int corePoolSize = 10;
-
-	/**
-	 * 线程池维护线程的最大数量
-	 */
-	private int maxPoolSiz = 200;
-
-	/**
-	 * 队列最大长度
-	 */
-	private int queueCapacity = 300;
-
-	/**
-	 * 线程池前缀
-	 */
-	private String threadNamePrefix = "taotao-cloud-executor-";
+	private Boolean enabled = true;
 }

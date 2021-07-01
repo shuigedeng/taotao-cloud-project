@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.properties;
+package com.taotao.cloud.web.annotation;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * 日志链路追踪配置
+ * 忽略全局响应包装
  *
  * @author dengtao
  * @version 1.0.0
- * @since 2020/5/2 11:15
+ * @since 2021/6/22 16:58
  */
-@Data
-@RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.filter.trace.log")
-public class TraceProperties {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.METHOD, ElementType.TYPE})
+public @interface IgnoreResponseBodyAdvice {
 
-	/**
-	 * 是否开启日志链路追踪
-	 */
-	private Boolean enabled = true;
 }

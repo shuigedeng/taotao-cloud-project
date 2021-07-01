@@ -10,7 +10,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -20,9 +20,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2020/6/15 11:30
  */
+@AllArgsConstructor
 public class TenantFilter extends OncePerRequestFilter {
-	@Autowired
-	private FilterProperties filterProperties;
+
+	private final FilterProperties filterProperties;
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

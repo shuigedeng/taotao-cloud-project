@@ -35,7 +35,7 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:10
  * @version 1.0.0
  */
-public class Oauth2AuthSuccessHandler implements ServerAuthenticationSuccessHandler {
+public class CustomServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
