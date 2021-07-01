@@ -43,7 +43,6 @@ import com.nepxion.banner.Description;
 import com.nepxion.banner.DescriptionBanner;
 import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
-import com.taotao.cloud.core.config.Config;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +52,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.SpringVersion;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
@@ -62,15 +62,13 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
+@Order(2)
 public class BannerInitializer implements
 	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		if (applicationContext instanceof AnnotationConfigApplicationContext) {
-			AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) applicationContext;
-			annotationConfigApplicationContext.register(Config.class);
-		} else {
+		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
 			ConfigurableEnvironment environment = applicationContext.getEnvironment();
 			System.out.println();
 

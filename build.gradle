@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        taotaoCloudVersion = "1.4.0"
+        taotaoCloudVersion = taotaoCloudVersion
         taotaoCloudGroup = "com.taotao.cloud"
 
         springVersion = '5.3.4'
@@ -168,7 +168,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         doLast {
             def fileDir = new File("$buildDir/resources/main");
             if (fileDir.exists() && fileDir.isDirectory()) {
-                new File("$buildDir/resources/main/taotao-cloud-gradle.properties").withWriter { w ->
+                new File("$buildDir/resources/main/application.properties").withWriter { w ->
                     def projectProperties = project.properties
 
                     Properties p = new Properties()

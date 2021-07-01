@@ -37,6 +37,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.util.ReflectionUtils;
 
@@ -47,46 +49,54 @@ import org.springframework.util.ReflectionUtils;
  * @version 1.0.0
  * @since 2020/5/15 10:45
  */
+@Order(0)
 public class CoreApplicationContextInitializer implements
 	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
-		if (ContextUtil.mainClass == null) {
-			ContextUtil.mainClass = deduceMainApplicationClass();
-		}
-		ContextUtil.setApplicationContext(context);
+		if (context instanceof AnnotationConfigApplicationContext) {
+//			AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) context;
+//			annotationConfigApplicationContext.register(Config.class);
+		} else {
+			if (ContextUtil.mainClass == null) {
+				ContextUtil.mainClass = deduceMainApplicationClass();
+			}
+			ContextUtil.setApplicationContext(context);
 
-		ConfigurableEnvironment environment = context.getEnvironment();
-		if ("false"
-			.equalsIgnoreCase(environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
-			return;
-		}
+			ConfigurableEnvironment environment = context.getEnvironment();
+			if ("false"
+				.equalsIgnoreCase(
+					environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
+				return;
+			}
 
-		//环境变量初始化
-		String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
-		String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");
+			//环境变量初始化
+			String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
+			String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");
 
-		if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
-			//optimizeJson(environment);
-			optimize(environment);
+			if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
+				//optimizeJson(environment);
+				optimize(environment);
 
-			//LogUtils.info(CoreApplicationContextInitializer.class,CoreProperties.Project,CoreProperties.SpringApplicationName+"="+propertyValue);
-			setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
+				//LogUtils.info(CoreApplicationContextInitializer.class,CoreProperties.Project,CoreProperties.SpringApplicationName+"="+propertyValue);
+				setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
 
-			LogUtil
-				.info(CoreProperties.Project,
-					CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
+				LogUtil
+					.info(CoreProperties.Project,
+						CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
 
-			for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
-				if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
-					setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[taotao cloud 环境变量]");
+				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
+					if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
+						setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[taotao cloud 环境变量]");
+					}
 				}
 			}
+
+			optimizeLog(environment);
+			this.registerContextRefreshEvent();
 		}
 
-		optimizeLog(environment);
-		this.registerContextRefreshEvent();
 	}
 
 	private Class<?> deduceMainApplicationClass() {
@@ -203,7 +213,8 @@ public class CoreApplicationContextInitializer implements
 					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "重启失败", new BaseException(
+					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "重启失败",
+						new BaseException(
 							"根据启动类" + ContextUtil.mainClass.getName() + "动态启动main失败"));
 				}
 			});

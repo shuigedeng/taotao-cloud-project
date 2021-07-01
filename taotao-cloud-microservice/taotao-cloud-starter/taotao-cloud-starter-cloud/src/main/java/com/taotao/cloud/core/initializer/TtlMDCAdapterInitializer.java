@@ -18,6 +18,8 @@ package com.taotao.cloud.core.initializer;
 import org.slf4j.TtlMDCAdapter;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.annotation.Order;
 
 /**
  * 初始化TtlMDCAdapter实例，并替换MDC中的adapter对象
@@ -26,11 +28,14 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version 1.0.0
  * @since 2020/5/2 11:19
  */
+@Order(1)
 public class TtlMDCAdapterInitializer implements
 	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		TtlMDCAdapter.getInstance();
+		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
+			TtlMDCAdapter.getInstance();
+		}
 	}
 }
