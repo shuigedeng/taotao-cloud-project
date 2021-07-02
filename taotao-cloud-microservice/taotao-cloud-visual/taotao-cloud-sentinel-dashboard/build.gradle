@@ -2,10 +2,17 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
 
-    implementation 'de.codecentric:spring-boot-admin-starter-server:2.4.0'
+    implementation 'com.alibaba.csp:sentinel-core'
+    implementation 'com.alibaba.csp:sentinel-web-servlet'
+    implementation 'com.alibaba.csp:sentinel-transport-simple-http'
+    implementation 'com.alibaba.csp:sentinel-parameter-flow-control'
+    implementation 'com.alibaba.csp:sentinel-api-gateway-adapter-common'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.3'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.5'
+    implementation 'org.apache.httpcomponents:httpasyncclient:4.1.3'
+    implementation 'org.apache.httpcomponents:httpcore-nio:4.4.6'
 
     // spring boot
     implementation('org.springframework.boot:spring-boot-starter-web') {
@@ -15,10 +22,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    // spring cloud alibaba
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
