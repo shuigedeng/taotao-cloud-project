@@ -1,11 +1,11 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,23 +15,26 @@
  */
 package com.taotao.cloud.sentinel.dashboard;
 
+import com.alibaba.csp.sentinel.init.InitExecutor;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * TaoTaoCloudAdminServerApplication
+ * Sentinel dashboard application.
  *
- * @author dengtao
- * @version 1.0.0
- * @since 2020/11/26 下午7:55
+ * @author Carpenter Lee
  */
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudSentinelDashboardApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudSentinelDashboardApplication.class, args);
-	}
+    public static void main(String[] args) {
+        triggerSentinelInit();
+        SpringApplication.run(TaoTaoCloudSentinelDashboardApplication.class, args);
+    }
 
+    private static void triggerSentinelInit() {
+        new Thread(() -> InitExecutor.doInit()).start();
+    }
 }

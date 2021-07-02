@@ -1,11 +1,11 @@
 server:
-  port: 10000
+  port: 10002
 
 spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-admin-server
+    name: taotao-cloud-sentinel-dashboard
   cloud:
     nacos:
       discovery:

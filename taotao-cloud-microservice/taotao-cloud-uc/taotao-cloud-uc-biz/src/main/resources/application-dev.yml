@@ -115,6 +115,17 @@ taotao:
       log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
       # 使用日志系统记录sql
       #appender: com.p6spy.engine.spy.appender.Slf4JLogger
+    xxl:
+      job:
+        enabled: true
+        admin:
+          addresses:
+        executor:
+          appname: ${spring.application.name}
+          ip:
+          port: 6996
+          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+          log-path:
 
 spring:
   main:
