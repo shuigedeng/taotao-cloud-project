@@ -60,7 +60,7 @@ buildscript {
 
         qcloudsmsVersion = '1.0.6'
         userAgentUtilsVersion = '1.21'
-        xxlJobVersion = '2.2.0'
+        xxlJobVersion = '2.3.0'
         mapstructVersion = "1.4.1.Final"
     }
 

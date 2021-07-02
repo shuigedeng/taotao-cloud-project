@@ -1,0 +1,200 @@
+server:
+  port: 10001
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+  servlet:
+    context-path: /xxl-job-admin
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-xxl-job-admin
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      #采样率，默认为0.1
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.1.10}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    #发送数据类型 kafaka、rabbitmq、web
+    sender:
+      type: WEB
+  redis:
+    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.1.10}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+    database: 1
+    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.1.10}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 25000
+      login-timeout: 5
+      validation-timeout: 3000
+      max-lifetime: 50000
+      read-only: false
+      connection-test-query: SELECT 1
+      maximum-pool-size: 15
+      minimum-idle: 10
+      pool-name: DatebookHikariCP
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+  kafka:
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.1.10}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500
+    consumer:
+      auto-commit-interval: 1S
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
+  mail:
+    host: smtp.qq.com
+    port: 465
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+    username: 981376577@qq.com
+    from: 981376577@qq.com
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  web:
+    resources:
+      static-locations: classpath:/static/
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    request-context-attribute: request
+    settings: { number_format: 0.########## }
+  mvc:
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+
+xxl:
+  job:
+    login:
+      username: admin
+      password: 123456
+    accessToken: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+    i18n: zh_CN
+    #触发池
+    triggerpool:
+      fast:
+        max: 200
+      slow:
+        max: 100
+    logretentiondays: 30
+
+taotao:
+  cloud:
+    core:
+      enabled: true
+      env: dev
+      logging:
+        file:
+          total-size: 10GB
+      context:
+        restart:
+          enabled: false
+          text:
+          timespan:
+      collect:
+        hook:
+          enabled: true
+      db:
+        printSql:
+          enabled: true
+        printSqlError:
+          enabled: true
+    log:
+      request-log:
+        enabled: false
+
+
+management:
+  server:
+    base-path: /actuator
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+    env:
+      post:
+        enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  health:
+    mail:
+      enabled: false
+    elasticsearch:
+      enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: off
+    org.springframework.security: off
+    org.springframework.security.oauth2: off
+    org.springframework.boot.autoconfigure: off

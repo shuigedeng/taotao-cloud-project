@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.taotao.cloud.common.json.JacksonModule;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.filter.LbIsolationFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
@@ -31,7 +30,6 @@ import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.WebContextFilter;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
-import com.taotao.cloud.web.listener.RequestMappingScanListener;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.properties.FilterProperties;
@@ -47,7 +45,6 @@ import javax.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -124,13 +121,13 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		WebMvcConfigurer.super.configureAsyncSupport(configurer);
 	}
 
-	@Bean
-	@ConditionalOnBean(value = {RedisRepository.class})
-	public RequestMappingScanListener resourceAnnotationScan() {
-		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
-		LogUtil.info("资源扫描类.[{}]", scan);
-		return scan;
-	}
+//	@Bean
+//	@ConditionalOnBean(value = {RedisRepository.class})
+//	public RequestMappingScanListener resourceAnnotationScan() {
+//		RequestMappingScanListener scan = new RequestMappingScanListener(redisRepository);
+//		LogUtil.info("资源扫描类.[{}]", scan);
+//		return scan;
+//	}
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {

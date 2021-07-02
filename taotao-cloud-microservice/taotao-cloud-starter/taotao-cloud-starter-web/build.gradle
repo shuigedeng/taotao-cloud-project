@@ -1,6 +1,5 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')

@@ -1,0 +1,21 @@
+server:
+  port: 10001
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: taotao-cloud-xxl-job-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+        metadata:
+          version: 5
+          user.name: "admin"
+          user.password: "root123456"
+      config:
+        enabled: false
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
+        namespace:
+        file-extension: yml

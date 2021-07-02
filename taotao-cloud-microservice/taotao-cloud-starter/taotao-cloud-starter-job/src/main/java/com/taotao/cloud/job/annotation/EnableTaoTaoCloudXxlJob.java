@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.job.annotation;
 
-import com.taotao.cloud.job.component.XxlJobComponent;
+import com.taotao.cloud.job.component.XxlJobAutoConfiguration;
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,9 +30,10 @@ import org.springframework.context.annotation.Import;
  * @version 1.0.0
  * @since 2020/5/3 07:47
  */
+@Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({XxlJobComponent.class})
+@Import({XxlJobAutoConfiguration.class})
 public @interface EnableTaoTaoCloudXxlJob {
 
 }

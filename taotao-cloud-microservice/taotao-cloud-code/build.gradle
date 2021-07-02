@@ -1,21 +1,17 @@
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
-
-    implementation('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-    }
-    implementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
 
     implementation 'org.apache.velocity:velocity:1.7'
     implementation 'commons-io:commons-io'
     implementation 'org.apache.commons:commons-configuration2:2.6'
     implementation 'commons-configuration:commons-configuration:1.6'
-    implementation 'mysql:mysql-connector-java'
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
