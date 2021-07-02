@@ -125,7 +125,7 @@ taotao:
           ip:
           port: 6996
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path:
+          log-path: ${logging.file:${user.dir}/logs/application/${spring.application.name}/xxl-job}
 
 spring:
   main:
