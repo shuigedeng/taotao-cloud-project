@@ -10,55 +10,34 @@ tar -zxvf grafana-8.0.3.linux-amd64.tar.gz
 mv grafana-8.0.3.linux-amd64 grafana8.0.3
 
 
-
-
-
-
-# 使用本地路径存储数据
-mkdir prometheus2.23.0/data
-
-/root/taotao-cloud/prometheus2.23.0/prometheus \
---storage.tsdb.path="/root/taotao-cloud/prometheus2.23.0/data" \
---log.level=debug \
---web.enable-lifecycle \
---web.enable-admin-api \
---config.file="/root/taotao-cloud/prometheus2.23.0/prometheus.yml"
-
-http://taotao-cloud:9090
-http://taotao-cloud:9090/metrics
-
-##################### prometheus.sh #############################
+##################### grafana.sh #############################
 #!/bin/bash
 
-function start_prometheus() {
-  /root/taotao-cloud/prometheus2.23.0/prometheus \
-  --storage.tsdb.path="/root/taotao-cloud/prometheus2.23.0/data" \
-  --log.level=debug \
-  --web.enable-lifecycle \
-  --web.enable-admin-api \
-  --config.file="/root/taotao-cloud/prometheus2.23.0/prometheus.yml"
+function start_grafana() {
+  nohup sh /opt/taotao-cloud/grafana8.0.3/bin/grafana-server >/opt/taotao-cloud/grafana8.0.3/start.out 2>&1 &
 
   sleep 10
-  echo "prometheus started"
+  echo "grafana started"
 }
 
-function stop_prometheus() {
-	  /root/taotao-cloud/prometheus6.0.1/bin/prometheus-cli -h 192.168.1.5 -a taotao-cloud shutdown
+function stop_grafana() {
+    ps -ef | grep grafana|grep -v grep|awk '{print $2}' |xargs kill -9
+
     sleep 10
-    echo "prometheus stoped"
+    echo "grafana stoped"
 }
 
 case $1 in
 "start")
-    start_prometheus
+    start_grafana
     ;;
 "stop")
-    stop_prometheus
+    stop_grafana
     ;;
 "restart")
-    stop_prometheus
+    stop_grafana
     sleep 10
-    start_prometheus
+    start_grafana
     ;;
 *)
     echo Invalid Args!

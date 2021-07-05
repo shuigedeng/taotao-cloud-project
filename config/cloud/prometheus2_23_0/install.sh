@@ -37,7 +37,7 @@ function start_prometheus() {
 }
 
 function stop_prometheus() {
-	  /root/taotao-cloud/prometheus6.0.1/bin/prometheus-cli -h 192.168.1.5 -a taotao-cloud shutdown
+    ps -ef | grep prometheus|grep -v grep|awk '{print $2}' |xargs kill -9
     sleep 10
     echo "prometheus stoped"
 }

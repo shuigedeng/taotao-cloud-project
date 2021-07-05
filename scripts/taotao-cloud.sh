@@ -10,6 +10,16 @@ function start_taotao_cloud() {
   /root/script/sentinel.sh start
   /root/script/zipkin.sh start
   /root/script/skywalking.sh start
+  /root/script/prometheus.sh start
+  /root/script/grafana.sh start
+
+  su elasticsearch
+  sleep 5
+
+  /root/script/elasticsearch.sh start
+  /root/script/kibana.sh start
+
+  su root
 }
 
 function stop_taotao_cloud() {
@@ -22,6 +32,12 @@ function stop_taotao_cloud() {
 	/root/script/sentinel.sh stop
 	/root/script/zipkin.sh stop
 	/root/script/skywalking.sh stop
+
+	su elasticsearch
+  sleep 5
+	/root/script/elasticsearch.sh stop
+  /root/script/kibana.sh stop
+  su root
 }
 
 case $1 in
