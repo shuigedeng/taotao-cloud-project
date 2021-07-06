@@ -52,13 +52,15 @@ su root
 #!/bin/bash
 
 function start_elasticsearch() {
+  sleep 5
   nohup /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
   sleep 10
   echo "elasticsearch started"
 }
 
 function stop_elasticsearch() {
-   ps -ef | grep elasticsearch|grep -v grep|awk '{print $2}' |xargs kill -9
+  sleep 5
+   ps -ef | grep elasticsearch7.8.0|grep -v grep|awk '{print $2}' |xargs kill -9
 
    sleep 10
    echo "elasticsearch stoped"

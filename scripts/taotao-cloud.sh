@@ -33,10 +33,7 @@ function start_taotao_cloud() {
   /root/script/grafana.sh start
 
   # tcp/http -> 9200 http://192.168.1.10:9200
-  su elasticsearch
-  sleep 5
-  /home/elasticsearch/elasticsearch.sh start
-  su root
+  su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
   # tcp/http -> 5601 http://192.168.1.10:5601
   /root/script/kibana.sh start
@@ -54,11 +51,10 @@ function stop_taotao_cloud() {
 	/root/script/sentinel.sh stop
 	/root/script/zipkin.sh stop
 	/root/script/skywalking.sh stop
+	/root/script/prometheus.sh stop
+  /root/script/grafana.sh stop
 
-	su elasticsearch
-  sleep 5
-	/home/elasticsearch/elasticsearch.sh stop
-  su root
+	su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
 
   /root/script/kibana.sh stop
   /root/script/logstash.sh stop

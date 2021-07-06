@@ -10,7 +10,7 @@ mv kafka_2.13-2.6.0/ kafka2.13-2.6.0
 cd kafka2.13-2.6.0/conf
 
 vim server.properties
-# listeners=PLAINTEXT://192.168.1.10:9092
+# listeners=PLAINTEXT://:9092
 # advertised.listeners=PLAINTEXT://host:9092
 # log.dirs=/opt/taotao-bigdata/kafka2.13-2.6.0/logs
 # zookeeper.connect=192.168.1.10:2181/kafka

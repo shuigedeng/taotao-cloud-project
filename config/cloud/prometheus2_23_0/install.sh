@@ -38,7 +38,7 @@ function start_prometheus() {
 }
 
 function stop_prometheus() {
-    ps -ef | grep prometheus|grep -v grep|awk '{print $2}' |xargs kill -9
+    ps -ef | grep prometheus2.23.0|grep -v grep|awk '{print $2}' |xargs kill -9
     sleep 10
     echo "prometheus stoped"
 }

@@ -47,7 +47,7 @@ function start_redis() {
 }
 
 function stop_redis() {
-	/opt/taotao-cloud/redis-6.2.4/bin/redis-cli -h 192.168.1.10 -a taotao-cloud shutdown
+	/opt/taotao-cloud/redis-6.2.4/bin/redis-cli -h 192.168.1.10 -a taotao-cloud shutdown 2>/dev/null
   sleep 10
   echo "redis stoped"
 }
