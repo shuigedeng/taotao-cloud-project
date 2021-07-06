@@ -21,7 +21,7 @@
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
 	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="0000"/>
 	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="192.168.1.10:9092"/>
-	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="192.168.1.10:4560"/>
+	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="103.218.242.48:9601"/>
 
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
 		defaultValue="%clr([${OS_NAME:-}]){yellow} %clr([${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} [${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%-5level]){blue} %clr(${PID}){magenta} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr(TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}]){yellow}  %clr(TaoTaoCloudVersionId:[${TAOTAO_CLOUD_VERSION:-}]){yellow}   %clr(SkywalkingTraceId:[%X{tid:-}]){blue} %clr([%thread]){orange} %clr(%logger){cyan} %clr(Method:[%M]){orange} %clr(Line:[%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
@@ -42,7 +42,7 @@
 	
 	<include resource="logback/kafka-appender.xml"/>
 	
-<!--	<include resource="logback/logstash-appender.xml"/>-->
+	<include resource="logback/logstash-appender.xml"/>
 
 	<!--为某个包单独配置logger
     比如定时任务，写代码的包名为：net.add1s.slf4j-logback
@@ -69,6 +69,7 @@
 		<appender-ref ref="FILE_WARN"/>
 		<appender-ref ref="FILE_ERROR"/>
 		<appender-ref ref="KAFKA_ASYNC"/>
+		<appender-ref ref="LOGSTASH"/>
 	</root>
 
 	<springProfile name="dev">
@@ -78,6 +79,7 @@
 			<appender-ref ref="FILE_WARN"/>
 			<appender-ref ref="FILE_ERROR"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="LOGSTASH"/>
 		</root>
 	</springProfile>
 

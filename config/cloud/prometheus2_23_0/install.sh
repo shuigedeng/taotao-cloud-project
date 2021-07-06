@@ -21,6 +21,11 @@ mkdir prometheus2.23.0/data
 http://taotao-cloud:9090
 http://taotao-cloud:9090/metrics
 
+# 修改时间
+rpm -ivh http://mirrors.wlnmp.com/centos/wlnmp-release-centos.noarch.rpm
+yum install wntp -y
+ntpdate time1.aliyun.com
+
 ##################### prometheus.sh #############################
 #!/bin/bash
 

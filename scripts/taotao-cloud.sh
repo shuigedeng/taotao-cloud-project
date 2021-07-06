@@ -20,7 +20,7 @@ function start_taotao_cloud() {
   /root/script/nacos.sh start
   # tcp -> 8091
   /root/script/seata.sh start
-  # tcp/http -> 8719 http://192.168.1.10:8719
+  # tcp/http -> 8849 http://192.168.1.10:8849 sentinel/sentinel
   /root/script/sentinel.sh start
   # tcp/http -> 9411 http://192.168.1.10:9411
   /root/script/zipkin.sh start
@@ -39,6 +39,9 @@ function start_taotao_cloud() {
   /root/script/kibana.sh start
   # tcp/http -> 9601 input port
   /root/script/logstash.sh start
+
+   # tcp/http -> 9100
+  /root/script/node_exporter.sh start
 }
 
 function stop_taotao_cloud() {
@@ -58,6 +61,7 @@ function stop_taotao_cloud() {
 
   /root/script/kibana.sh stop
   /root/script/logstash.sh stop
+  /root/script/node_exporter.sh stop
 }
 
 case $1 in

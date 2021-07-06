@@ -24,7 +24,6 @@ import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -156,7 +155,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 		final ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, partition,
 			timestamp, key,
-			Base64.getEncoder().encode(jsonObject.toString().getBytes()));
+			JSONUtil.toJsonStr(jsonObject).getBytes());
 
 		final Producer<byte[], byte[]> producer = lazyProducer.get();
 		if (producer != null) {
