@@ -15,11 +15,11 @@ function start_taotao_cloud() {
 
   su elasticsearch
   sleep 5
-
   /root/script/elasticsearch.sh start
-  /root/script/kibana.sh start
-
   su root
+
+  /root/script/kibana.sh start
+  /root/script/logstash.sh start
 }
 
 function stop_taotao_cloud() {
@@ -36,8 +36,10 @@ function stop_taotao_cloud() {
 	su elasticsearch
   sleep 5
 	/root/script/elasticsearch.sh stop
-  /root/script/kibana.sh stop
   su root
+
+  /root/script/kibana.sh stop
+  /root/script/logstash.sh stop
 }
 
 case $1 in

@@ -1,0 +1,10 @@
+dataSourceKey: defaultDS
+destination: example
+groupId:
+esMapping:
+  _index: test
+  _type: _doc
+  _id: _id
+  upsert: true
+  sql: "select a.id as _id,a.name,a.address from test a"
+  commitBatch: 3000

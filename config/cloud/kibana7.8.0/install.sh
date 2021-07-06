@@ -21,7 +21,6 @@ elasticsearch.hosts: ["http://192.168.1.10:9200"]
 # 设置语言为中文
 i18n.locale: "zh-CN"
 
-
 ##################### kibana.sh #############################
 #!/bin/bash
 
