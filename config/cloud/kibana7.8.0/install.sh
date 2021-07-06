@@ -25,7 +25,7 @@ i18n.locale: "zh-CN"
 #!/bin/bash
 
 function start_kibana() {
-  nohup sh /opt/taotao-cloud/kibana7.8.0/bin/kibana >/opt/taotao-cloud/kibana7.8.0/start.out 2>&1 &
+  nohup /opt/taotao-cloud/kibana7.8.0/bin/kibana --allow-root  >/opt/taotao-cloud/kibana7.8.0/start.out 2>&1 &
   sleep 10
 
   echo "kibana started"

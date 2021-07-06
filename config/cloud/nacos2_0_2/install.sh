@@ -34,7 +34,8 @@ mysql –u root –p 123456 -D nacos</opt/taotao-cloud/nacos2.0.2/conf/nacos-mys
 #!/bin/bash
 
 function start_nacos() {
-     /root/taotao-cloud/nacos2.0.2/bin/startup.sh -m standalone
+     nohup /root/taotao-cloud/nacos2.0.2/bin/startup.sh -m standalone \
+      >/root/taotao-cloud/nacos2.0.2/start.out 2>&1 &
      sleep 30
      echo " nacos started"
 }

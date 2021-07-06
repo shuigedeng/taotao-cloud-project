@@ -28,7 +28,7 @@ source "https://gems.ruby-china.com/"
 #!/bin/bash
 
 function start_logstash() {
-  nohup sh /opt/taotao-cloud/logstash7.8.0/bin/logstash  \
+  nohup /opt/taotao-cloud/logstash7.8.0/bin/logstash  \
   -f /opt/taotao-cloud/logstash7.8.0/config/logstash-es.conf \
   >/opt/taotao-cloud/logstash7.8.0/logstash-es.out 2>&1 &
   sleep 10

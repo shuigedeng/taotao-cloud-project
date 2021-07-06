@@ -21,6 +21,8 @@ adduser elasticsearch
 passwd elasticsearch
 chown -R elasticsearch elasticsearch7.8.0
 
+chown -R elasticsearch /root/taotao-cloud/elasticsearch.sh
+
 su elasticsearch
 ./elasticsearch -d
 
@@ -50,7 +52,7 @@ su root
 #!/bin/bash
 
 function start_elasticsearch() {
-  nohup sh /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
+  nohup /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
   sleep 10
   echo "elasticsearch started"
 }

@@ -25,12 +25,13 @@ http://taotao-cloud:9090/metrics
 #!/bin/bash
 
 function start_prometheus() {
-  /root/taotao-cloud/prometheus2.23.0/prometheus \
-  --storage.tsdb.path="/root/taotao-cloud/prometheus2.23.0/data" \
-  --log.level=debug \
+  nohup /opt/taotao-cloud/prometheus2.23.0/prometheus \
+  --storage.tsdb.path="/opt/taotao-cloud/prometheus2.23.0/data" \
+  --log.level=info \
   --web.enable-lifecycle \
   --web.enable-admin-api \
-  --config.file="/root/taotao-cloud/prometheus2.23.0/prometheus.yml"
+  --config.file="/opt/taotao-cloud/prometheus2.23.0/prometheus.yml" \
+  >/opt/taotao-cloud/prometheus2.23.0/start.out 2>&1 &
 
   sleep 10
   echo "prometheus started"
