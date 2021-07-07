@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<driverClass>com.mysql.jdbc.Driver</driverClass>
+				<url>jdbc:mysql://127.0.0.1:3306/databaseName</url>
+				<user>root</user>
+				<password>root</password>
+			</dataSource>
+		</connectionSource>
+	</appender>
+
+	<appender name="LOGSTASH_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="LOGSTASH"/>
+	</appender>
+</included>
