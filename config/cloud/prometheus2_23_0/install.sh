@@ -26,6 +26,26 @@ rpm -ivh http://mirrors.wlnmp.com/centos/wlnmp-release-centos.noarch.rpm
 yum install wntp -y
 ntpdate time1.aliyun.com
 
+########配置邮件告警
+vim alertmanager.yml
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.163.com:25' # 邮箱smtp服务器代理
+  smtp_from: 'xxxxxxx@163.com' # 发送邮箱名称
+  smtp_auth_username: 'xxxxxx@163.com' # 邮箱名称
+  smtp_auth_password: 'xxxxx' # 邮箱密码或授权码
+  smtp_require_tls: false
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'mail'
+receivers:
+- name: 'mail'
+  email_configs:
+  - to: 'xxxxxxxx@qq.com'
+
 ##################### prometheus.sh #############################
 #!/bin/bash
 
