@@ -18,16 +18,16 @@
 					"level": "%p",
 					"method": "%M",
 					"line": "%L",
-					"message": "%msg",
+					"message": "%replace(%msg){'\"', '\''}",
 					"host": "${SERVER_IP:-}",
-					"stack_trace": "%ex",
+					"stack_trace": "%replace(%ex){'\n', ''}",
 					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
 					"zipkin_span_id": "%X{X-B3-SpanId:-}",
 					"zipkin_trace_id": "%X{X-B3-TraceId:-}",
 					"zipkin_span_export": "%X{X-Span-Export:-}",
 					"skywalking_trace_id": "%X{tid:-}",
 					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
-					"source": "taotao_cloud_sys_log",
+					"source": "taotao_cloud_sys_log"
 					}
 				</pattern>
 			</layout>
@@ -55,7 +55,7 @@
 		<deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
 		<producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS}</producerConfig>
 		<producerConfig>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
-		<producerConfig>value.serializer=org.apache.kafka.common.serialization.ByteArraySerializer</producerConfig>
+		<producerConfig>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
 		<producerConfig>acks=0</producerConfig>
 		<producerConfig>retries=0</producerConfig>
 		<producerConfig>batch.size=10</producerConfig>

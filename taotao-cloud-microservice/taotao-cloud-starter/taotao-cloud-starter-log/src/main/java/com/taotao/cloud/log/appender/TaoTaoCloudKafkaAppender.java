@@ -22,6 +22,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -146,7 +147,13 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	protected void append(E e) {
 		final byte[] payload = encoder.encode(e);
 		String s = new String(payload);
-		JSONObject jsonObject = JSONUtil.parseObj(s);
+
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = JSONUtil.parseObj(s);
+		} catch (Exception exception) {
+			LogUtil.error(exception);
+		}
 		jsonObject.put("ctime",
 			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 		final byte[] key = keyingStrategy.createKey(e);
