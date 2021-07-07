@@ -9,4 +9,12 @@
 			</layout>
 		</encoder>
 	</appender>
+
+	<appender name="CONSOLE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="CONSOLE"/>
+	</appender>
 </included>

@@ -150,7 +150,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 		JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject = JSONUtil.parseObj(s);
+			jsonObject = JSONUtil.parseObj(s.replace("\n", ""));
 		} catch (Exception exception) {
 			LogUtil.error(exception);
 		}

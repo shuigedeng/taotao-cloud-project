@@ -7,6 +7,7 @@
 				<pattern>
 					{
 					"application_name": "${APP_NAME:-}",
+					"env": "${SPRING_PROFILES_ACTIVE:-}",
 					"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",
 					"server_ip": "${SERVER_IP:-}",
 					"server_port": "${SERVER_PORT:-}",
@@ -14,13 +15,13 @@
 					"logday": "%d{yyyy-MM-dd}",
 					"thread": "%thread",
 					"pid": "${PID:-}",
-					"logger": "%logger{36}",
+					"logger": "%logger{360}",
 					"level": "%p",
 					"method": "%M",
 					"line": "%L",
 					"message": "%replace(%msg){'\"', '\''}",
 					"host": "${SERVER_IP:-}",
-					"stack_trace": "%replace(%ex){'\n', ''}",
+					"stack_trace": "%replace(%ex){'\"', '\''}",
 					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
 					"zipkin_span_id": "%X{X-B3-SpanId:-}",
 					"zipkin_trace_id": "%X{X-B3-TraceId:-}",
@@ -32,24 +33,6 @@
 				</pattern>
 			</layout>
 		</encoder>
-<!--		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
-<!--			<providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">-->
-<!--				<pattern>-->
-<!--					<pattern>-->
-<!--						{-->
-<!--						"env": "${env}",-->
-<!--						"service":"${service}",-->
-<!--						"date":"%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
-<!--						"level":"%level",-->
-<!--						"thread": "%thread",-->
-<!--						"logger": "%logger{36}",-->
-<!--						"msg":"%msg",-->
-<!--						"exception":"%exception"-->
-<!--						}-->
-<!--					</pattern>-->
-<!--				</pattern>-->
-<!--			</providers>-->
-<!--		</encoder>-->
 		<topic>taotao-cloud-sys-log</topic>
 		<keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
 		<deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
@@ -57,14 +40,19 @@
 		<producerConfig>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
 		<producerConfig>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
 		<producerConfig>acks=0</producerConfig>
-		<producerConfig>retries=0</producerConfig>
+		<producerConfig>retries=1</producerConfig>
 		<producerConfig>batch.size=10</producerConfig>
 		<producerConfig>buffer-memory=33554432</producerConfig>
+		<producerConfig>properties.max.request.size==2097152</producerConfig>
 		<producerConfig>linger.ms=1000</producerConfig>
 		<producerConfig>max.block.ms=0</producerConfig>
 	</appender>
 
 	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
 		<appender-ref ref="KAFKA"/>
 	</appender>
 

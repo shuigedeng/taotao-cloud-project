@@ -5,19 +5,20 @@
 
 		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
 			<customFields>{"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}"}</customFields>
+			<customFields>{"env": "${SPRING_PROFILES_ACTIVE:-}"}</customFields>
 			<customFields>{"server_ip": "${SERVER_IP:-}"}</customFields>
 			<customFields>{"server_port": "${SERVER_PORT:-}"}</customFields>
 			<customFields>{"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}"}</customFields>
 			<customFields>{"logday": "%d{yyyy-MM-dd}"}</customFields>
 			<customFields>{"thread": "%thread"}</customFields>
 			<customFields>{"pid": "${PID:-}"}</customFields>
-			<customFields>{"logger": "%logger{36}"}</customFields>
+			<customFields>{"logger": "%logger{360}"}</customFields>
 			<customFields>{"level": "%p"}</customFields>
 			<customFields>{"method": "%M"}</customFields>
 			<customFields>{"line": "%L"}</customFields>
-			<customFields>{"msg": "%msg"}</customFields>
+			<customFields>{"msg": "%replace(%msg){'\"', '\''}"}</customFields>
 			<customFields>{"host": "${SERVER_IP:-}"}</customFields>
-			<customFields>{"stack_trace": "%ex"}</customFields>
+			<customFields>{"stack_trace": "%replace(%ex){'\"', '\''}"}</customFields>
 			<customFields>{"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}"}</customFields>
 			<customFields>{"zipkin_span_id": "%X{X-B3-SpanId:-}"}</customFields>
 			<customFields>{"zipkin_trace_id": "%X{X-B3-TraceId:-}"}</customFields>
@@ -66,5 +67,13 @@
 				<connectionTTL>5 minutes</connectionTTL>
 			</roundRobin>
 		</connectionStrategy>
+	</appender>
+
+	<appender name="LOGSTASH_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="LOGSTASH"/>
 	</appender>
 </included>

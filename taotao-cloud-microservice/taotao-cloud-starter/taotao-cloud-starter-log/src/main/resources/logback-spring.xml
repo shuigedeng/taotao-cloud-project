@@ -15,6 +15,7 @@
 
 	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue=""/>
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
+	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
 	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/application/${APP_NAME}"/>
 	<springProperty name="LOG_MAX_FILE_SIZE" scope="context" source="logback.filesize" defaultValue="2GB"/>
 	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
@@ -24,10 +25,10 @@
 	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="103.218.242.48:9601"/>
 
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
-		defaultValue="%clr([${OS_NAME:-}]){yellow} %clr([${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} [${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%-5level]){blue} %clr(${PID}){magenta} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr(TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}]){yellow}  %clr(TaoTaoCloudVersionId:[${TAOTAO_CLOUD_VERSION:-}]){yellow}   %clr(SkywalkingTraceId:[%X{tid:-}]){blue} %clr([%thread]){orange} %clr(%logger){cyan} %clr(Method:[%M]){orange} %clr(Line:[%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%thread]){orange} %clr([${SPRING_PROFILES_ACTIVE:-}]){cyan} %clr([%level]){blue} %clr([${PID}]){magenta} %clr([${OS_NAME:-}]){yellow} %clr([${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} %clr(TaoTaoCloudVersion:[${TAOTAO_CLOUD_VERSION:-}]){yellow} %clr(TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr(SkywalkingTraceId:[%X{tid:-}]){blue} %clr(%logger{360}){cyan} %clr(Method:[%M]){orange} %clr(Line:[%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"
-		defaultValue="[${OS_NAME:-}] [${OS_VERSION:-}]  ${USER_TIMEZONE:-}]  [${JAVA_VERSION:-}] [${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] ${TAOTAO_CLOUD_VERSION} ${PID} ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}] TaoTaoCloudVersionId:[${TAOTAO_CLOUD_VERSION:-}] SkywalkingTraceId:[%X{tid:-}] [%thread] %logger Method:[%M] Line:[%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${SPRING_PROFILES_ACTIVE:-}] [%level] [${PID}] [${OS_NAME:-}] [${OS_VERSION:-}] [${USER_TIMEZONE:-}] [${JAVA_VERSION:-}] TaoTaoCloudVersion:[${TAOTAO_CLOUD_VERSION:-}] TaoTaoCloudTraceId:[%X{taotao-cloud-trace-id:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] SkywalkingTraceId:[%X{tid:-}] %logger{360} Method:[%M] Line:[%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
 	<conversionRule conversionWord="wex"
@@ -64,49 +65,52 @@
 	<logger name="org.apache.kafka" level="OFF"/>
 
 	<root level="INFO">
-		<appender-ref ref="CONSOLE"/>
-		<appender-ref ref="FILE_ALL"/>
-		<appender-ref ref="FILE_WARN"/>
-		<appender-ref ref="FILE_ERROR"/>
+		<appender-ref ref="CONSOLE_ASYNC"/>
+		<appender-ref ref="FILE_ALL_ASYNC"/>
+		<appender-ref ref="FILE_WARN_ASYNC"/>
+		<appender-ref ref="FILE_ERROR_ASYNC"/>
 		<appender-ref ref="KAFKA_ASYNC"/>
-		<appender-ref ref="LOGSTASH"/>
+		<appender-ref ref="LOGSTASH_ASYNC"/>
 	</root>
 
 	<springProfile name="dev">
 		<root level="INFO">
-			<appender-ref ref="CONSOLE"/>
-			<appender-ref ref="FILE_ALL"/>
-			<appender-ref ref="FILE_WARN"/>
-			<appender-ref ref="FILE_ERROR"/>
+			<appender-ref ref="CONSOLE_ASYNC"/>
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
-			<appender-ref ref="LOGSTASH"/>
+			<appender-ref ref="LOGSTASH_ASYNC"/>
 		</root>
 	</springProfile>
 
 	<springProfile name="test">
 		<root level="INFO">
-			<appender-ref ref="FILE_ALL"/>
-			<appender-ref ref="FILE_WARN"/>
-			<appender-ref ref="FILE_ERROR"/>
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="LOGSTASH_ASYNC"/>
 		</root>
 	</springProfile>
 
 	<springProfile name="pre">
 		<root level="INFO">
-			<appender-ref ref="FILE_ALL"/>
-			<appender-ref ref="FILE_WARN"/>
-			<appender-ref ref="FILE_ERROR"/>
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="LOGSTASH_ASYNC"/>
 		</root>
 	</springProfile>
 
 	<springProfile name="pro">
 		<root level="INFO">
-			<appender-ref ref="FILE_ALL"/>
-			<appender-ref ref="FILE_WARN"/>
-			<appender-ref ref="FILE_ERROR"/>
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="LOGSTASH_ASYNC"/>
 		</root>
 	</springProfile>
 </configuration>

@@ -4,7 +4,8 @@
 		<file>${LOG_FILE}/${APP_NAME}.all.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -22,7 +23,8 @@
 		<file>${LOG_FILE}/${APP_NAME}.WARN.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -45,7 +47,8 @@
 		<file>${LOG_FILE}/${APP_NAME:-}.error.log</file>
 		<append>true</append>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+			<layout
+				class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
 				<pattern>${CONSOLE_LOG_PATTERN_NO_COLOR}</pattern>
 			</layout>
 		</encoder>
@@ -62,5 +65,29 @@
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
+	</appender>
+
+	<appender name="FILE_ALL_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="FILE_ALL"/>
+	</appender>
+
+	<appender name="FILE_WARN_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="FILE_WARN"/>
+	</appender>
+
+	<appender name="FILE_ERROR_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>512</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<includeCallerData>true</includeCallerData>
+
+		<appender-ref ref="FILE_ERROR"/>
 	</appender>
 </included>
