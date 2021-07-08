@@ -75,6 +75,8 @@ public class CoreApplicationContextInitializer implements
 				return;
 			}
 
+			setDefaultProperty("nacos.logging.default.config.enabled", "false", "[taotao cloud 环境变量]");
+
 			//环境变量初始化
 			String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
 			String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");

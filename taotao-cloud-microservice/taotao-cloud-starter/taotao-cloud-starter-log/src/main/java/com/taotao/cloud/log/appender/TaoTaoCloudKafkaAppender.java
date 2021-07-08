@@ -23,6 +23,8 @@ import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
 import com.taotao.cloud.common.utils.LogUtil;
+
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -154,17 +156,17 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		} catch (Exception exception) {
 			LogUtil.error(exception);
 		}
-		jsonObject.put("ctime",
+		jsonObject.set("ctime",
 			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 		final byte[] key = keyingStrategy.createKey(e);
 
 		final Long timestamp = isAppendTimestamp() ? getTimestamp(e) : null;
 
-		final ProducerRecord<byte[], byte[]> record = new ProducerRecord<>(topic, partition,
+		final ProducerRecord<byte[],String> record = new ProducerRecord<>(topic, partition,
 			timestamp, key,
-			JSONUtil.toJsonStr(jsonObject).getBytes());
+			JSONUtil.toJsonStr(jsonObject));
 
-		final Producer<byte[], byte[]> producer = lazyProducer.get();
+		final Producer<byte[], String> producer = lazyProducer.get();
 		if (producer != null) {
 			deliveryStrategy.send(lazyProducer.get(), record, e, failedDeliveryCallback);
 		} else {
@@ -180,7 +182,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 		}
 	}
 
-	protected Producer<byte[], byte[]> createProducer() {
+	protected Producer<byte[], String> createProducer() {
 		return new KafkaProducer<>(new HashMap<>(producerConfig));
 	}
 
@@ -204,10 +206,10 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	 */
 	private class LazyProducer {
 
-		private volatile Producer<byte[], byte[]> producer;
+		private volatile Producer<byte[], String> producer;
 
-		public Producer<byte[], byte[]> get() {
-			Producer<byte[], byte[]> result = this.producer;
+		public Producer<byte[], String> get() {
+			Producer<byte[], String> result = this.producer;
 			if (result == null) {
 				synchronized (this) {
 					result = this.producer;
@@ -220,8 +222,8 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 			return result;
 		}
 
-		protected Producer<byte[], byte[]> initialize() {
-			Producer<byte[], byte[]> producer = null;
+		protected Producer<byte[], String> initialize() {
+			Producer<byte[], String> producer = null;
 			try {
 				producer = createProducer();
 			} catch (Exception e) {

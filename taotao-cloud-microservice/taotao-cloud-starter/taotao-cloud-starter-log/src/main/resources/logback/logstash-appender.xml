@@ -7,137 +7,206 @@
 		<reconnectionDelay>1 second</reconnectionDelay>
 		<writeBufferSize>16384</writeBufferSize>
 		<writeTimeout>1 minute</writeTimeout>
-<!--		<connectionStrategy>-->
-<!--			<random>-->
-<!--				<connectionTTL>5 minutes</connectionTTL>-->
-<!--			</random>-->
-<!--			<roundRobin>-->
-<!--				<connectionTTL>5 minutes</connectionTTL>-->
-<!--			</roundRobin>-->
-<!--			<preferPrimary>-->
-<!--				<secondaryConnectionTTL>5 minutes</secondaryConnectionTTL>-->
-<!--			</preferPrimary>-->
-<!--		</connectionStrategy>-->
 
-		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
-			<includeCallerData>true</includeCallerData>
-			<version>${TAOTAO_CLOUD_VERSION}</version>
-			<writeVersionAsInteger>true</writeVersionAsInteger>
-			<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+		<!--		<connectionStrategy>-->
+		<!--			<random>-->
+		<!--				<connectionTTL>5 minutes</connectionTTL>-->
+		<!--			</random>-->
+		<!--			<roundRobin>-->
+		<!--				<connectionTTL>5 minutes</connectionTTL>-->
+		<!--			</roundRobin>-->
+		<!--			<preferPrimary>-->
+		<!--				<secondaryConnectionTTL>5 minutes</secondaryConnectionTTL>-->
+		<!--			</preferPrimary>-->
+		<!--		</connectionStrategy>-->
 
-			<provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />
 
-			<customFields>
-				{
-				"application_name": "${APP_NAME:-}",
-				"env": "${SPRING_PROFILES_ACTIVE:-}",
-				"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",
-				"server_ip": "${SERVER_IP:-}",
-				"server_port": "${SERVER_PORT:-}",
-				"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
-				"logday": "%d{yyyy-MM-dd}",
-				"thread": "%thread",
-				"pid": "${PID:-}",
-				"logger": "%logger{360}",
-				"level": "%p",
-				"method": "%M",
-				"line": "%L",
-				"message": "%msg",
-				"stack_trace": "%ex",
-				"host": "${SERVER_IP:-}",
-				"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
-				"zipkin_span_id": "%X{X-B3-SpanId:-}",
-				"zipkin_trace_id": "%X{X-B3-TraceId:-}",
-				"zipkin_span_export": "%X{X-Span-Export:-}",
-				"skywalking_trace_id": "%X{tid:-}",
-				"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
-				"source": "taotao_cloud_sys_log"
-				}
-			</customFields>
+				<mdc/>
+				<version>
+					<fieldName>version</fieldName>
+					<version>${TAOTAO_CLOUD_VERSION:--}</version>
+					<writeAsInteger>false</writeAsInteger>
+				</version>
+				<timestamp>
+					<fieldName>ts</fieldName>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<message/>
+				<rawMessage/>
+				<threadName/>
+				<logLevel/>
+				<logLevelValue/>
+				<callerData/>
+				<stackTrace/>
+				<rootStackTraceElement/>
+				<stackHash/>
+				<throwableClassName/>
+				<throwableRootCauseClassName/>
+				<context/>
+				<contextName/>
+				<tags/>
+				<logstashMarkers/>
+				<sequence/>
+				<arguments>
+					<includeNonStructuredArguments>true</includeNonStructuredArguments>
+				</arguments>
+
+<!--				<callerData>-->
+<!--					<classFieldName>class</classFieldName>-->
+<!--					<methodFieldName>method</methodFieldName>-->
+<!--					<lineFieldName>line</lineFieldName>-->
+<!--					<fileFieldName>file</fileFieldName>-->
+<!--				</callerData>-->
+
+<!--				<jsonFactoryDecorator class="net.logstash.logback.decorate.CharacterEscapesJsonFactoryDecorator">-->
+<!--					<escape>-->
+<!--						<targetCharacterCode>10</targetCharacterCode>-->
+<!--						<escapeSequence>\u2028</escapeSequence>-->
+<!--					</escape>-->
+<!--				</jsonFactoryDecorator>-->
+
+				<pattern>
+					<omitEmptyFields>true</omitEmptyFields>
+					<pattern>
+						{
+						"application_name": "${APP_NAME:-}",
+						"env": "${SPRING_PROFILES_ACTIVE:-}",
+						"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",
+						"server_ip": "${SERVER_IP:-}",
+						"server_port": "${SERVER_PORT:-}",
+						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+						"logday": "%d{yyyy-MM-dd}",
+						"thread": "%thread",
+						"pid": "${PID:-}",
+						"logger": "%logger{360}",
+						"level": "%p",
+						"method": "%M",
+						"line": "%L",
+						"message": "%msg",
+						"host": "${SERVER_IP:-}",
+						"stack_trace": "%ex",
+						"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
+						"zipkin_span_id": "%X{X-B3-SpanId:-}",
+						"zipkin_trace_id": "%X{X-B3-TraceId:-}",
+						"zipkin_span_export": "%X{X-Span-Export:-}",
+						"skywalking_trace_id": "%X{tid:-}",
+						"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
+						"source": "taotao_cloud_sys_log"
+						}
+					</pattern>
+				</pattern>
+			</providers>
 		</encoder>
 
-<!--		<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--			<customFields>{"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}"}</customFields>-->
-<!--			<customFields>{"env": "${SPRING_PROFILES_ACTIVE:-}"}</customFields>-->
-<!--			<customFields>{"server_ip": "${SERVER_IP:-}"}</customFields>-->
-<!--			<customFields>{"server_port": "${SERVER_PORT:-}"}</customFields>-->
-<!--			<customFields>{"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}"}</customFields>-->
-<!--			<customFields>{"logday": "%d{yyyy-MM-dd}"}</customFields>-->
-<!--			<customFields>{"thread": "%thread"}</customFields>-->
-<!--			<customFields>{"pid": "${PID:-}"}</customFields>-->
-<!--			<customFields>{"logger": "%logger{360}"}</customFields>-->
-<!--			<customFields>{"level": "%p"}</customFields>-->
-<!--			<customFields>{"method": "%M"}</customFields>-->
-<!--			<customFields>{"line": "%L"}</customFields>-->
-<!--			<customFields>{"msg": "%replace(%msg){'\"', '\''}"}</customFields>-->
-<!--			<customFields>{"host": "${SERVER_IP:-}"}</customFields>-->
-<!--			<customFields>{"stack_trace": "%replace(%ex){'\"', '\''}"}</customFields>-->
-<!--			<customFields>{"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}"}</customFields>-->
-<!--			<customFields>{"zipkin_span_id": "%X{X-B3-SpanId:-}"}</customFields>-->
-<!--			<customFields>{"zipkin_trace_id": "%X{X-B3-TraceId:-}"}</customFields>-->
-<!--			<customFields>{"zipkin_span_export": "%X{X-Span-Export:-}"}</customFields>-->
-<!--			<customFields>{"skywalking_trace_id": "%X{tid:-}"}</customFields>-->
-<!--			<customFields>{"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}"}</customFields>-->
-<!--			<customFields>{"source": "taotao_cloud_sys_log"}</customFields>-->
-<!--		</encoder>-->
+		<!--		<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+		<!--			<includeCallerData>true</includeCallerData>-->
+		<!--			<version>${TAOTAO_CLOUD_VERSION}</version>-->
+		<!--			<writeVersionAsInteger>true</writeVersionAsInteger>-->
+		<!--			<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>-->
 
-<!--		<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--			<includeCallerData>true</includeCallerData>-->
-<!--			<version>2</version>-->
-<!--			<writeVersionAsInteger>true</writeVersionAsInteger>-->
-<!--			<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>-->
+		<!--			<provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider" />-->
+		<!--				<pattern>-->
+		<!--					{-->
+		<!--					"application_name": "${APP_NAME:-}",-->
+		<!--					"env": "${SPRING_PROFILES_ACTIVE:-}",-->
+		<!--					"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",-->
+		<!--					"server_ip": "${SERVER_IP:-}",-->
+		<!--					"server_port": "${SERVER_PORT:-}",-->
+		<!--					"timestamp": "${TIMESTAMP:-}",-->
+		<!--					"logday": "${CURRENT_DATE:-}",-->
+		<!--					"thread": "%thread",-->
+		<!--					"pid": "${PID:-}",-->
+		<!--					"logger": "%logger{360}",-->
+		<!--					"level": "%p",-->
+		<!--					"method": "%M",-->
+		<!--					"line": "%L",-->
+		<!--					"message": "%msg",-->
+		<!--					"stack_trace": "%ex",-->
+		<!--					"host": "${SERVER_IP:-}",-->
+		<!--					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",-->
+		<!--					"zipkin_span_id": "%X{X-B3-SpanId:-}",-->
+		<!--					"zipkin_trace_id": "%X{X-B3-TraceId:-}",-->
+		<!--					"zipkin_span_export": "%X{X-Span-Export:-}",-->
+		<!--					"skywalking_trace_id": "%X{tid:-}",-->
+		<!--					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",-->
+		<!--					"source": "taotao_cloud_sys_log"-->
+		<!--					}-->
+		<!--				</pattern>-->
+		<!--		</encoder>-->
 
-<!--			<prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">-->
-<!--				<layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">-->
-<!--					<pattern>-->
-<!--						{-->
-<!--						"application_name": "${APP_NAME:-}",-->
-<!--						"env": "${SPRING_PROFILES_ACTIVE:-}",-->
-<!--						"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",-->
-<!--						"server_ip": "${SERVER_IP:-}",-->
-<!--						"server_port": "${SERVER_PORT:-}",-->
-<!--						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
-<!--						"logday": "%d{yyyy-MM-dd}",-->
-<!--						"thread": "%thread",-->
-<!--						"pid": "${PID:-}",-->
-<!--						"logger": "%logger{360}",-->
-<!--						"level": "%p",-->
-<!--						"method": "%M",-->
-<!--						"line": "%L",-->
-<!--						"message": "%replace(%msg){'\"', '\''}",-->
-<!--						"host": "${SERVER_IP:-}",-->
-<!--						"stack_trace": "%replace(%ex){'\"', '\''}",-->
-<!--						"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",-->
-<!--						"zipkin_span_id": "%X{X-B3-SpanId:-}",-->
-<!--						"zipkin_trace_id": "%X{X-B3-TraceId:-}",-->
-<!--						"zipkin_span_export": "%X{X-Span-Export:-}",-->
-<!--						"skywalking_trace_id": "%X{tid:-}",-->
-<!--						"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",-->
-<!--						"source": "taotao_cloud_sys_log"-->
-<!--						}-->
-<!--					</pattern>-->
-<!--				</layout>-->
-<!--			</prefix>-->
-<!--		</encoder>-->
+		<!--		<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+		<!--			<customFields>-->
+		<!--				{-->
+		<!--				"application_name": "${APP_NAME:-}",-->
+		<!--				"env": "${SPRING_PROFILES_ACTIVE:-}",-->
+		<!--				"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",-->
+		<!--				"server_ip": "${SERVER_IP:-}",-->
+		<!--				"server_port": "${SERVER_PORT:-}",-->
+		<!--				"timestamp": "${TIMESTAMP:-}",-->
+		<!--				"logday": "${CURRENT_DATE:-}",-->
+		<!--				"thread": "%thread",-->
+		<!--				"pid": "${PID:-}",-->
+		<!--				"logger": "%logger{360}",-->
+		<!--				"level": "%p",-->
+		<!--				"method": "%M",-->
+		<!--				"line": "%L",-->
+		<!--				"message": "%msg",-->
+		<!--				"stack_trace": "%ex",-->
+		<!--				"host": "${SERVER_IP:-}",-->
+		<!--				"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",-->
+		<!--				"zipkin_span_id": "%X{X-B3-SpanId:-}",-->
+		<!--				"zipkin_trace_id": "%X{X-B3-TraceId:-}",-->
+		<!--				"zipkin_span_export": "%X{X-Span-Export:-}",-->
+		<!--				"skywalking_trace_id": "%X{tid:-}",-->
+		<!--				"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",-->
+		<!--				"source": "taotao_cloud_sys_log"-->
+		<!--				}-->
+		<!--			</customFields>-->
+		<!--		</encoder>-->
 
-<!--		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
-<!--			<providers>-->
-<!--				<timestamp/>-->
-<!--				<pattern>-->
-<!--					<pattern>-->
-<!--						{-->
-<!--						"custom_constant": "123",-->
-<!--						"tags": ["one", "two"],-->
-<!--						"logger": "%logger",-->
-<!--						"level": "%level",-->
-<!--						"thread": "%thread",-->
-<!--						"message": "%message",-->
-<!--						...-->
-<!--						}-->
-<!--					</pattern>-->
-<!--				</pattern>-->
-<!--			</providers>-->
-<!--		</encoder>-->
+
+		<!--		<encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+		<!--			<includeCallerData>true</includeCallerData>-->
+		<!--			<version>2</version>-->
+		<!--			<writeVersionAsInteger>true</writeVersionAsInteger>-->
+		<!--			<timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>-->
+
+		<!--			<prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">-->
+		<!--				<layout-->
+		<!--					class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">-->
+		<!--					<pattern>-->
+		<!--						{-->
+		<!--						"application_name": "${APP_NAME:-}",-->
+		<!--						"env": "${SPRING_PROFILES_ACTIVE:-}",-->
+		<!--						"taotao_cloud_version": "${TAOTAO_CLOUD_VERSION:-}",-->
+		<!--						"server_ip": "${SERVER_IP:-}",-->
+		<!--						"server_port": "${SERVER_PORT:-}",-->
+		<!--						"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
+		<!--						"logday": "%d{yyyy-MM-dd}",-->
+		<!--						"thread": "%thread",-->
+		<!--						"pid": "${PID:-}",-->
+		<!--						"logger": "%logger{360}",-->
+		<!--						"level": "%p",-->
+		<!--						"method": "%M",-->
+		<!--						"line": "%L",-->
+		<!--						"message": "%replace(%msg){'\"', '\''}",-->
+		<!--						"host": "${SERVER_IP:-}",-->
+		<!--						"stack_trace": "%replace(%ex){'\"', '\''}",-->
+		<!--						"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",-->
+		<!--						"zipkin_span_id": "%X{X-B3-SpanId:-}",-->
+		<!--						"zipkin_trace_id": "%X{X-B3-TraceId:-}",-->
+		<!--						"zipkin_span_export": "%X{X-Span-Export:-}",-->
+		<!--						"skywalking_trace_id": "%X{tid:-}",-->
+		<!--						"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",-->
+		<!--						"source": "taotao_cloud_sys_log"-->
+		<!--						}-->
+		<!--					</pattern>-->
+		<!--				</layout>-->
+		<!--			</prefix>-->
+		<!--		</encoder>-->
 	</appender>
 
 	<appender name="LOGSTASH_ASYNC" class="ch.qos.logback.classic.AsyncAppender">

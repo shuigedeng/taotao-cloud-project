@@ -13,7 +13,7 @@
 
 	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
 
-	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue=""/>
+	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue="--"/>
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
 	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
 	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/application/${APP_NAME}"/>
