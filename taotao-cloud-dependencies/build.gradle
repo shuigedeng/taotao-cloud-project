@@ -111,6 +111,15 @@ publishing {
                 password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
         }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+            }
+        }
     }
 
     publications {

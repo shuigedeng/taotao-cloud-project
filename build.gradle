@@ -224,6 +224,15 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                 }
                 url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
             }
+
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+                credentials {
+                    username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                    password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+                }
+            }
         }
 
         publications {
