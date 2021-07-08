@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: taotao-cloud-uc-biz
-          image: 172.16.10.230:88/taotao-cloud/taotao-cloud-uc-biz:${CICD_EXECUTION_SEQUENCE}
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:taotao-cloud-uc-biz-1.6.0:${CICD_EXECUTION_SEQUENCE}
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -79,7 +79,7 @@ spec:
             - name: rbd-pvc
           securityContext:
             allowPrivilegeEscalation: false
-            capabilities: {}
+            capabilities: { }
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
@@ -92,11 +92,11 @@ spec:
         - name: ali
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
+      securityContext: { }
       terminationGracePeriodSeconds: 30
   volumes:
     - name: log-cache
-      emptyDir: {}
+      emptyDir: { }
     - name: sdb
       hostPath:
         path: /opt/taotao/cloud/uc/data
