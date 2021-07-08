@@ -208,21 +208,18 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     publishing {
         repositories {
             maven {
-                allowInsecureProtocol = true
-                credentials {
-                    username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                    password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+//                https://repomanage.rdc.aliyun.com/
+                if (project.version.endsWith('-SNAPSHOT')) {
+                    url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
+                } else {
+                    url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
                 }
-                url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
-            }
 
-            maven {
                 allowInsecureProtocol = true
                 credentials {
                     username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                     password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
                 }
-                url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
             }
 
             maven {
@@ -276,30 +273,8 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         }
     }
 
-    jib {
-        from {
-//            image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:openjdk8-jdk-alpine'
-//            auth {
-//                username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-//                password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-//            }
-        }
-        to {
-            image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud'
-            tags = ["${project.name}".toString(), "${project.version}".toString()]
-//            auth {
-//                username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-//                password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
-//            }
-        }
-        container {
-            creationTime = 'USE_CURRENT_TIMESTAMP'
-            jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Dspring.profiles.active=dev', '-Dfile.encoding=utf-8', '-Duser.timezone=Asia/Shanghai']
-            mainClass = 'com.taotao.cloud.dubbo.account.provider.AccountServiceApplication'
-            args = ['some', 'args']
-            ports = ['8010']
-            labels = [key1: 'value1', key2: 'value2']
-        }
+    shadowJar {
+        zip64 true
     }
 }
 

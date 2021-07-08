@@ -97,15 +97,14 @@ dependencies {
 publishing {
     repositories {
         maven {
-            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
-            credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+//                https://repomanage.rdc.aliyun.com/
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
+            } else {
+                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
             }
-        }
 
-        maven {
-            url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
+            allowInsecureProtocol = true
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
                 password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
