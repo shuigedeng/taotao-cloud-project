@@ -1,4 +1,4 @@
-# <center>**taotao-cloud-project**</center>
+# <p align="center">**taotao-cloud-project**</p>
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
