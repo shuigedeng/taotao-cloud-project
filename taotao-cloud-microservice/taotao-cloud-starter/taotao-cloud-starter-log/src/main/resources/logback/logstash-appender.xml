@@ -69,7 +69,7 @@
 <!--				</jsonFactoryDecorator>-->
 
 				<pattern>
-					<omitEmptyFields>true</omitEmptyFields>
+					<omitEmptyFields>false</omitEmptyFields>
 					<pattern>
 						{
 						"application_name": "${APP_NAME:-}",

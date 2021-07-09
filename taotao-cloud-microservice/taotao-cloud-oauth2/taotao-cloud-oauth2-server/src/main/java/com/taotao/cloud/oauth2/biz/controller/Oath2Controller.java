@@ -16,8 +16,6 @@
 package com.taotao.cloud.oauth2.biz.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +45,9 @@ public class Oath2Controller {
 	 * @param oAuth2AuthorizedClient OAuth2客户端信息
 	 * @return OAuth2客户端信息
 	 */
-	@GetMapping("/client")
-	public OAuth2AuthorizedClient user(
-		@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-		return oAuth2AuthorizedClient;
-	}
+//	@GetMapping("/client")
+//	public OAuth2AuthorizedClient user(
+//		@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+//		return oAuth2AuthorizedClient;
+//	}
 }

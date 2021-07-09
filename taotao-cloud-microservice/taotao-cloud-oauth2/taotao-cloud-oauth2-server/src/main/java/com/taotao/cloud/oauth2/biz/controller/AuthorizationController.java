@@ -3,20 +3,9 @@ package com.taotao.cloud.oauth2.biz.controller;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Joe Grandja
@@ -26,7 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class AuthorizationController {
 
-    private final OAuth2AuthorizedClientService authorizedClientService;
+//    private final OAuth2AuthorizedClientService authorizedClientService;
 
 //    @GetMapping(value = "/login")
 //    public String login(Model model) {

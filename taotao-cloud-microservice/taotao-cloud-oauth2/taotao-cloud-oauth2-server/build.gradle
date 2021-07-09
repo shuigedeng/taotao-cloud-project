@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-auth:taotao-cloud-auth-api')
 
     implementation 'org.webjars:jquery:3.4.1'
@@ -17,15 +17,15 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     implementation "org.springframework.boot:spring-boot-starter-security"
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.1.1'
     implementation 'com.nimbusds:nimbus-jose-jwt:9.7'
-    implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
+//    implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 //    implementation('com.alibaba.cloud:spring-cloud-alibaba-seata:2.2.0.RELEASE') {
 //        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
 //    }

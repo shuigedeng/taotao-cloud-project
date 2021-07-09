@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="_csrf" th:content="${_csrf.token}"/>
-<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Please sign in</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css"
           th:href="@{/webjars/bootstrap/css/bootstrap.css}"/>
@@ -26,7 +26,7 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-<!--        <input name="_csrf" type="hidden" th:value="${_csrf.token}"/>-->
+        <input name="_csrf" type="hidden" th:value="${_csrf.token}"/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         <h2 class="form-signin-heading"></h2>
         <table class="table table-striped">

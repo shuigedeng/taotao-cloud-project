@@ -99,9 +99,9 @@ spring:
         mapper:
           enabled: true
         remote-service-name: ${spring.application.name}-sleuth
-  mvc:
-    servlet:
-      load-on-startup: 1
+#  mvc:
+#    servlet:
+#      load-on-startup: 1
 #    thymeleaf:
 #      prefix: classpath:/views/
 #      suffix: .html
@@ -240,16 +240,16 @@ spring:
             token-uri: https://graph.qq.com/oauth2.0/token
             user-info-uri: https://graph.qq.com/oauth2.0/me
             user-info-authentication-method: form
-      resourceserver:
-        #        jwt:
-        #          public-key-location: classpath:key.public
-        #          jws-algorithm: RS512
-        #        opaquetoken:
-        #          introspection-uri: http://localhost:9000/oauth/check_token
-        #          client-id: abc
-        #          client-secret: abc
-        jwt:
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+#      resourceserver:
+#        #        jwt:
+#        #          public-key-location: classpath:key.public
+#        #          jws-algorithm: RS512
+#        #        opaquetoken:
+#        #          introspection-uri: http://localhost:9000/oauth/check_token
+#        #          client-id: abc
+#        #          client-secret: abc
+#        jwt:
+#          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
 
 feign:
   sentinel:
