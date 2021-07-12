@@ -28,7 +28,6 @@ import javax.crypto.SecretKey;
 
 /**
  * @author Joe Grandja
- * @since 0.1.0
  */
 final class KeyGeneratorUtils {
 
