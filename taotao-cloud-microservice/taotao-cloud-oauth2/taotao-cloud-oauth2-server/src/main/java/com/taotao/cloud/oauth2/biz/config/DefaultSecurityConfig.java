@@ -39,7 +39,9 @@ public class DefaultSecurityConfig {
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests.anyRequest().authenticated()
 			)
-			.formLogin(withDefaults());
+			.formLogin(withDefaults())
+			.oauth2ResourceServer()
+			.jwt();
 		return http.build();
 	}
 	// @formatter:on
@@ -48,10 +50,10 @@ public class DefaultSecurityConfig {
 	@Bean
 	UserDetailsService users() {
 		UserDetails user = User.withDefaultPasswordEncoder()
-				.username("user1")
-				.password("password")
-				.roles("USER")
-				.build();
+			.username("user1")
+			.password("password")
+			.roles("USER")
+			.build();
 		return new InMemoryUserDetailsManager(user);
 	}
 	// @formatter:on
