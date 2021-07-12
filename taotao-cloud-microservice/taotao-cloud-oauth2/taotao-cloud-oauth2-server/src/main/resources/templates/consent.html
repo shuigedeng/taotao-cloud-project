@@ -49,7 +49,7 @@
 
                 <p th:if="${not #lists.isEmpty(previouslyApprovedScopes)}">You have already granted the following permissions to the above app:</p>
                 <div th:each="scope: ${previouslyApprovedScopes}" class="form-group form-check py-1">
-                    <input class="form-check-input"
+                    <input class="form-check-input"previouslyApprovedScopes
                            type="checkbox"
                            th:id="${scope.scope}"
                            disabled
@@ -84,4 +84,3 @@
 </div>
 </body>
 </html>
-https://www.baidu.com/?code=XQsQGxYJWWrEbZxetMW-uIX7sLwln3YN6BccoYnuGQ20ii3M487MPIF4OL_iRX-BX6K5uEIvGGOUWQlTFhY7jzbERkL5VNMv3wzgBTJHvwslO8MGXRrd0XU4PoMEDRVR
