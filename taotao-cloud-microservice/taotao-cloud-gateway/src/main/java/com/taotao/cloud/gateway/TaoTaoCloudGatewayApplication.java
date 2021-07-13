@@ -29,7 +29,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class TaotaoCloudGatewayApplication {
+public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
 		/**
@@ -40,6 +40,6 @@ public class TaotaoCloudGatewayApplication {
 		 */
 		// System.setProperty("JM.LOG.PATH", "");
 		// System.setProperty("JM.SNAPSHOT.PATH", "");
-		SpringApplication.run(TaotaoCloudGatewayApplication.class, args);
+		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 	}
 }

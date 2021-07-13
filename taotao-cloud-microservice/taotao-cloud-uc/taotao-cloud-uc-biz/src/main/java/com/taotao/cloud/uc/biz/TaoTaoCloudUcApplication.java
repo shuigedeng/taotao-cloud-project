@@ -6,7 +6,6 @@ import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
-import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.security.taox.annotation.EnableOauth2ResourceSecurity;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
@@ -27,7 +26,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableTaoTaoCloudFeign
 @EnableEncryptableProperties
 @EnableTaoTaoCloudOpenapi
-@EnableTaoTaoCloudSeata
+//@EnableTaoTaoCloudSeata
 @EnableTaoTaoCloudJPA
 @EnableTaoTaoCloudSentinel
 @SpringBootApplication
