@@ -213,3 +213,41 @@ taotao-cloud-project -- 父项目
 开发: 目前个人独立开放
 
 ## 9.项目截图
+<table>
+    <tr>
+        <td><img alt="首页" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/1.png"/></td>
+        <td><img alt="用户搜索" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/2.png"/></td>
+    </tr>
+	<tr>
+        <td><img alt="server_metrics" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/3.png"/></td>
+        <td><img alt="application_metrics" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/4.png"/></td>
+    </tr>
+	<tr>
+        <td><img alt="持续集成2" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/5.png"/></td>
+        <td><img alt="sonar结果" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/5.png"/></td>
+    </tr>
+    <tr>
+        <td><img alt="skywalking首页.png" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/7.png"/></td>
+        <td><img alt="skywalking应用拓扑图" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/7.png"/></td>
+    </tr>
+    <tr>
+        <td><img alt="elk" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/9.png"/></td>
+        <td><img alt="任务中心" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/10.png"/></td>
+    </tr>
+
+[comment]: <> (    <tr>)
+
+[comment]: <> (        <td><img alt="日志中心02" src="https://gitee.com/zlt2000/images/raw/master/%E6%97%A5%E5%BF%97%E4%B8%AD%E5%BF%8302.png"/></td>)
+
+[comment]: <> (        <td><img alt="慢查询sql" src="https://gitee.com/zlt2000/images/raw/master/%E6%85%A2%E6%9F%A5%E8%AF%A2sql.png"/></td>)
+
+[comment]: <> (    </tr>)
+
+[comment]: <> (    <tr>)
+
+[comment]: <> (        <td><img alt="nacos-discovery" src="https://gitee.com/zlt2000/images/raw/master/nacos-discovery.png"/></td>)
+
+[comment]: <> (        <td><img alt="应用吞吐量监控" src="https://gitee.com/zlt2000/images/raw/master/%E5%BA%94%E7%94%A8%E5%90%9E%E5%90%90%E9%87%8F%E7%9B%91%E6%8E%A7.png"/></td>)
+
+[comment]: <> (    </tr>)
+</table>

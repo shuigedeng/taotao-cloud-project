@@ -25,9 +25,9 @@ dependencies {
     implementation 'com.nimbusds:nimbus-jose-jwt:9.7'
 //    implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
 
-//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-//    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 //    implementation('com.alibaba.cloud:spring-cloud-alibaba-seata:2.2.0.RELEASE') {
 //        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
 //    }

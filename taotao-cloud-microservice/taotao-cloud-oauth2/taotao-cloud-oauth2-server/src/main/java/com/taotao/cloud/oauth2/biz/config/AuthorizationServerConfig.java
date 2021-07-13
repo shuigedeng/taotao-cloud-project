@@ -15,11 +15,16 @@
  */
 package com.taotao.cloud.oauth2.biz.config;
 
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.ACCESS_TOKEN_TIME_TO_LIVE;
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REFRESH_TOKEN_TIME_TO_LIVE;
+import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REUSE_REFRESH_TOKENS;
+
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.oauth2.biz.jose.Jwks;
+import java.time.Duration;
 import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,15 +54,16 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
+		throws Exception {
 		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
-				new OAuth2AuthorizationServerConfigurer<>();
+			new OAuth2AuthorizationServerConfigurer<>();
 		authorizationServerConfigurer
-				.authorizationEndpoint(authorizationEndpoint ->
-						authorizationEndpoint.consentPage("/oauth2/consent"));
+			.authorizationEndpoint(authorizationEndpoint ->
+				authorizationEndpoint.consentPage("/oauth2/consent"));
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer
-				.getEndpointsMatcher();
+			.getEndpointsMatcher();
 
 		http
 			.requestMatcher(endpointsMatcher)
@@ -73,19 +79,27 @@ public class AuthorizationServerConfig {
 	@Bean
 	public RegisteredClientRepository registeredClientRepository() {
 		RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-				.clientId("messaging-client")
-				.clientSecret("{noop}secret")
-				.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
-				.redirectUri("https://www.baidu.com")
-				.scope(OidcScopes.OPENID)
-				.scope("message.read")
-				.scope("message.write")
-				.clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
-				.build();
+			.clientId("messaging-client")
+			.clientSecret("{noop}secret")
+			.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+			.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+			.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+			.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+			.redirectUri("http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc")
+			.redirectUri("https://www.baidu.com")
+			.scope(OidcScopes.OPENID)
+			.scope("message.read")
+			.scope("message.write")
+			.clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
+			.tokenSettings(tokenSettings -> {
+				tokenSettings
+					.settings(settings -> {
+						settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(1000));
+						settings.put(REUSE_REFRESH_TOKENS, true);
+						settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(6000));
+					});
+			})
+			.build();
 		return new InMemoryRegisteredClientRepository(registeredClient);
 	}
 	// @formatter:on

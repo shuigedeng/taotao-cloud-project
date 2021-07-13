@@ -28,8 +28,10 @@ package com.taotao.cloud.oauth2.biz;
 //import com.taotao.cloud.security.service.IUserDetailsService;
 //import com.taotao.cloud.security.service.impl.UserDetailsServiceImpl;
 //import com.taotao.cloud.swagger.annotation.EnableTaoTaoCloudSwagger2;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 //import org.springframework.cloud.client.SpringCloudApplication;
 //import org.springframework.context.annotation.Bean;
@@ -61,7 +63,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableTaoTaoCloudJPA
 //@EnableTaoTaoCloudSentinel
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {
 
     public static void main(String[] args) {
