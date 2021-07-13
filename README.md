@@ -216,23 +216,23 @@ taotao-cloud-project -- 父项目
 <table>
     <tr>
         <td><img alt="首页" src="snapshot/project/1.png"/></td>
-        <td><img alt="用户搜索" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/2.png"/></td>
+        <td><img alt="用户搜索" src="snapshot/project/2.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="server_metrics" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/3.png"/></td>
-        <td><img alt="application_metrics" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/4.png"/></td>
+        <td><img alt="server_metrics" src="snapshot/project/3.png"/></td>
+        <td><img alt="application_metrics" src="snapshot/project/4.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="持续集成2" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/5.png"/></td>
-        <td><img alt="sonar结果" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/5.png"/></td>
+        <td><img alt="持续集成2" src="snapshot/project/5.png"/></td>
+        <td><img alt="sonar结果" src="snapshot/project/5.png"/></td>
     </tr>
     <tr>
-        <td><img alt="skywalking首页.png" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/7.png"/></td>
-        <td><img alt="skywalking应用拓扑图" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/7.png"/></td>
+        <td><img alt="skywalking首页.png" src="snapshot/project/7.png"/></td>
+        <td><img alt="skywalking应用拓扑图" src="snapshot/project/7.png"/></td>
     </tr>
     <tr>
-        <td><img alt="elk" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/9.png"/></td>
-        <td><img alt="任务中心" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/10.png"/></td>
+        <td><img alt="elk" src="snapshot/project/9.png"/></td>
+        <td><img alt="任务中心" src="snapshot/project/10.png"/></td>
     </tr>
 
 [comment]: <> (    <tr>)
