@@ -224,11 +224,11 @@ taotao-cloud-project -- 父项目
     </tr>
 	<tr>
         <td><img alt="持续集成2" src="snapshot/project/5.png"/></td>
-        <td><img alt="sonar结果" src="snapshot/project/5.png"/></td>
+        <td><img alt="sonar结果" src="snapshot/project/6.png"/></td>
     </tr>
     <tr>
         <td><img alt="skywalking首页.png" src="snapshot/project/7.png"/></td>
-        <td><img alt="skywalking应用拓扑图" src="snapshot/project/7.png"/></td>
+        <td><img alt="skywalking应用拓扑图" src="snapshot/project/8.png"/></td>
     </tr>
     <tr>
         <td><img alt="elk" src="snapshot/project/9.png"/></td>
