@@ -215,7 +215,7 @@ taotao-cloud-project -- 父项目
 ## 9.项目截图
 <table>
     <tr>
-        <td><img alt="首页" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/1.png"/></td>
+        <td><img alt="首页" src="snapshot/project/1.png"/></td>
         <td><img alt="用户搜索" src="https://github.com/shuigedeng/taotao-cloud-project/tree/master/snapshot/project/2.png"/></td>
     </tr>
 	<tr>
