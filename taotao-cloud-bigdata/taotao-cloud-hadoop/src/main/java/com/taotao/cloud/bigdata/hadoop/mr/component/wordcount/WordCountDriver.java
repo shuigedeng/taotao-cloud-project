@@ -51,9 +51,9 @@ public class WordCountDriver {
 		conf.set("fs.defaultFS", "hdfs://mini1:9000/");*/
 		Job job = Job.getInstance(conf);
 
-		job.setJar("c:/wc.jar");
+//		job.setJar("c:/wc.jar");
 		//指定本程序的jar包所在的本地路径
-		/*job.setJarByClass(WordcountDriver.class);*/
+		job.setJarByClass(WordCountDriver.class);
 
 		//指定本业务job要使用的mapper/Reducer业务类
 		job.setMapperClass(WordCountMapper.class);
@@ -69,7 +69,6 @@ public class WordCountDriver {
 
 		//指定需要使用combiner，以及用哪个类作为combiner的逻辑
 		job.setCombinerClass(WordCountCombiner.class);
-		// job.setCombinerClass(WordCountReducer.class);
 
 		//如果不设置InputFormat，它默认用的是TextInputformat.class
 		job.setInputFormatClass(CombineTextInputFormat.class);

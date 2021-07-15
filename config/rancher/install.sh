@@ -19,7 +19,18 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
   "registry-mirrors": ["https://sef9c1bz.mirror.aliyuncs.com"],
   "dns": ["8.8.8.8", "8.8.4.4"],
   "debug": true,
-  "experimental": false
+  "experimental": false,
+
+#    "max-concurrent-downloads": 3,
+#    "max-concurrent-uploads": 5,
+#    "registry-mirrors": ["https://7bezldxe.mirror.aliyuncs.com/","https://IP:PORT/"],
+#    "storage-driver": "overlay2",
+#    "storage-opts": ["overlay2.override_kernel_check=true"],
+#    "log-driver": "json-file",
+#    "log-opts": {
+#        "max-size": "100m",
+#        "max-file": "3"
+#    }
 }
 EOF
 
