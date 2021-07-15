@@ -11,9 +11,9 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     api 'org.springframework.cloud:spring-cloud-starter-sleuth'
     api 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
-//    api 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
-//    api 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
-//    api 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
+
+    api 'com.taobao.arthas:arthas-spring-boot-starter:3.4.5'
+
 //    api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 
     api "io.micrometer:micrometer-registry-prometheus"
