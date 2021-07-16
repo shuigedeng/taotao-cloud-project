@@ -24,7 +24,6 @@ import ch.qos.logback.core.spi.ContextAwareBase;
 import ch.qos.logback.core.spi.LifeCycle;
 
 /**
- * @author wang.liang
  */
 public class SystemPropertyLoggerContextListener extends ContextAwareBase implements
 	LoggerContextListener, LifeCycle {
