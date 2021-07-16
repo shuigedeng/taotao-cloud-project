@@ -15,18 +15,16 @@
  */
 package com.taotao.cloud.log.service.impl;
 
-import cn.hutool.json.JSON;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
+import java.util.Base64;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
-
-import javax.annotation.Resource;
-import java.util.Base64;
 
 /**
  * 审计日志实现类-Kafka
@@ -38,17 +36,23 @@ import java.util.Base64;
 @Slf4j
 public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
-	public static final String REQUEST_LOG_TOPIC = "taotao-cloud-request-log";
+	public static final String REQUEST_LOG_TOPIC = "request-log-";
+
+	private final String appName;
 
 	@Resource
 	private KafkaTemplate<String, Object> kafkaTemplate;
+
+	public KafkaRequestLogServiceImpl(String appName) {
+		this.appName = appName;
+	}
 
 	@Override
 	public void save(RequestLog requestLog) {
 		String request = JsonUtil.toJSONString(requestLog);
 
-		ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send(REQUEST_LOG_TOPIC,
-			Base64.getEncoder().encode(request.getBytes()));
+		ListenableFuture<SendResult<String, Object>> future = kafkaTemplate
+			.send(REQUEST_LOG_TOPIC + appName, Base64.getEncoder().encode(request.getBytes()));
 		future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
 			@Override
 			public void onFailure(Throwable throwable) {

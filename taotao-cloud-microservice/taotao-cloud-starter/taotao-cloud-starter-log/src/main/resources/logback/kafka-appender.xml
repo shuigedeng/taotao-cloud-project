@@ -28,7 +28,7 @@
 					"zipkin_span_export": "%X{X-Span-Export:-}",
 					"skywalking_trace_id": "%X{tid:-}",
 					"taotao_cloud_trace_id": "%X{taotao-cloud-trace-id:-}",
-					"source": "taotao_cloud_sys_log"
+					"source": "system-log-${APP_NAME:-}"
 					}
 				</pattern>
 			</layout>

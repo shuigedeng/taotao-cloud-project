@@ -44,7 +44,7 @@
 	
 	<include resource="logback/kafka-appender.xml"/>
 	
-	<include resource="logback/logstash-appender.xml"/>
+<!--	<include resource="logback/logstash-appender.xml"/>-->
 
 	<!--为某个包单独配置logger
     比如定时任务，写代码的包名为：net.add1s.slf4j-logback
@@ -71,7 +71,7 @@
 		<appender-ref ref="FILE_WARN_ASYNC"/>
 		<appender-ref ref="FILE_ERROR_ASYNC"/>
 		<appender-ref ref="KAFKA_ASYNC"/>
-		<appender-ref ref="LOGSTASH_ASYNC"/>
+<!--		<appender-ref ref="LOGSTASH_ASYNC"/>-->
 	</root>
 
 	<springProfile name="dev">
@@ -81,7 +81,7 @@
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
-			<appender-ref ref="LOGSTASH_ASYNC"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
 
@@ -91,7 +91,7 @@
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
-			<appender-ref ref="LOGSTASH_ASYNC"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
 
@@ -101,7 +101,7 @@
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
-			<appender-ref ref="LOGSTASH_ASYNC"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
 
@@ -111,7 +111,7 @@
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
 			<appender-ref ref="KAFKA_ASYNC"/>
-			<appender-ref ref="LOGSTASH_ASYNC"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
 </configuration>

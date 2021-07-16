@@ -24,9 +24,10 @@ import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.ApplicationEventPublisher;
@@ -43,8 +44,11 @@ import org.springframework.kafka.core.KafkaTemplate;
 @Slf4j
 public class RequestLogComponent implements InitializingBean {
 
-	@Autowired
-	RequestLogProperties requestLogProperties;
+	@Resource
+	private RequestLogProperties requestLogProperties;
+
+	@Value("${spring.application.name}")
+	private String appName;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -91,7 +95,7 @@ public class RequestLogComponent implements InitializingBean {
 	public KafkaRequestLogServiceImpl kafkaSysLogService() {
 		if (determineLogType()) {
 			if (determineLogType("kafka")) {
-				return new KafkaRequestLogServiceImpl();
+				return new KafkaRequestLogServiceImpl(appName);
 			}
 		}
 		return null;
