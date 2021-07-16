@@ -16,50 +16,50 @@
 
 <!-- Put site-specific property overrides in this file. -->
 <configuration>
-	<property>
-		<name>fs.default.name</name>
-		<value>hdfs://taotao-cloud:9000</value>
-		<description>hdfs内部通讯访问地址</description>
-	</property>
+<!--	<property>-->
+<!--		<name>fs.default.name</name>-->
+<!--		<value>hdfs://taotao-cloud:9000</value>-->
+<!--		<description>hdfs内部通讯访问地址</description>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.tmp.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/tmp</value>
-		<description>hadoop数据存放</description>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.tmp.dir</name>-->
+<!--		<value>/root/taotao-bigdata/hadoop3.3.0/tmp</value>-->
+<!--		<description>hadoop数据存放</description>-->
+<!--	</property>-->
 
-	<property>
-		<name>fs.hdfs.impl</name>
-		<value>org.apache.hadoop.hdfs.DistributedFileSystem</value>
-	</property>
+<!--	<property>-->
+<!--		<name>fs.hdfs.impl</name>-->
+<!--		<value>org.apache.hadoop.hdfs.DistributedFileSystem</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.hue.groups</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.hue.groups</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.hue.hosts</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.hue.hosts</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.root.groups</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.root.groups</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.root.hosts</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.root.hosts</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.httpfs.hosts</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.httpfs.hosts</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>hadoop.proxyuser.httpfs.groups</name>
-		<value>*</value>
-	</property>
+<!--	<property>-->
+<!--		<name>hadoop.proxyuser.httpfs.groups</name>-->
+<!--		<value>*</value>-->
+<!--	</property>-->
 </configuration>

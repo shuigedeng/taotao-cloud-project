@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.bigdata.hadoop.mr.component.rjoin;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -26,10 +28,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.springframework.beans.BeanUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * 订单表和商品表合到一起 order.txt(订单id, 日期, 商品编号, 数量) 1001	20150710	P0001	2 1002	20150710	P0001	3
@@ -87,14 +85,14 @@ public class RJoin {
 			for (InfoBean bean : beans) {
 				if ("1".equals(bean.getFlag())) {    //产品的
 					try {
-						BeanUtils.copyProperties(pdBean, bean);
+//						BeanUtils.copyProperties(pdBean, bean);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				} else {
 					InfoBean odbean = new InfoBean();
 					try {
-						BeanUtils.copyProperties(odbean, bean);
+//						BeanUtils.copyProperties(odbean, bean);
 						orderBeans.add(odbean);
 					} catch (Exception e) {
 						e.printStackTrace();

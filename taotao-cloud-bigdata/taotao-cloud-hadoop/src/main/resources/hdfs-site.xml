@@ -16,38 +16,38 @@
 
 <!-- Put site-specific property overrides in this file. -->
 <configuration>
-	<property>
-		<name>dfs.namenode.name.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/data/nameNode</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.namenode.name.dir</name>-->
+<!--		<value>/root/taotao-bigdata/hadoop3.3.0/data/nameNode</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.datanode.data.dir</name>
-		<value>/root/taotao-bigdata/hadoop3.3.0/data/dataNode</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.datanode.data.dir</name>-->
+<!--		<value>/root/taotao-bigdata/hadoop3.3.0/data/dataNode</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.namenode.http.address</name>
-		<value>taotao-cloud:9870</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.namenode.http.address</name>-->
+<!--		<value>taotao-cloud:9870</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.replication</name>
-		<value>1</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.replication</name>-->
+<!--		<value>1</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.webhdfs.enabled</name>
-		<value>true</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.webhdfs.enabled</name>-->
+<!--		<value>true</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.permissions.enabled</name>
-		<value>false</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.permissions.enabled</name>-->
+<!--		<value>false</value>-->
+<!--	</property>-->
 
-	<property>
-		<name>dfs.permissions</name>
-		<value>false</value>
-	</property>
+<!--	<property>-->
+<!--		<name>dfs.permissions</name>-->
+<!--		<value>false</value>-->
+<!--	</property>-->
 </configuration>

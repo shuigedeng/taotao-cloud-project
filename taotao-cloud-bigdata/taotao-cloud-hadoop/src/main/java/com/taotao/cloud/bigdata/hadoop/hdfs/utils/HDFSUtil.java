@@ -15,7 +15,13 @@
  */
 package com.taotao.cloud.bigdata.hadoop.hdfs.utils;
 
-import com.taotao.cloud.common.utils.JsonUtil;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.BlockLocation;
@@ -27,15 +33,6 @@ import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
 import org.apache.hadoop.io.IOUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * HDFSUtil
@@ -127,26 +124,25 @@ public class HDFSUtil {
 		}
 	}
 
-
-	/**
-	 * HDFS创建文件
-	 */
-	public void createFile(String path, MultipartFile file) throws Exception {
-		if (StringUtils.isEmpty(path)) {
-			return;
-		} else {
-			file.getBytes();
-		}
-		String fileName = file.getOriginalFilename();
-		// 上传时默认当前目录，后面自动拼接文件的目录
-		Path newPath = new Path(path + "/" + fileName);
-		// 打开一个输出流
-		FileSystem fileSystem = getFileSystem();
-		FSDataOutputStream outputStream = fileSystem.create(newPath);
-		outputStream.write(file.getBytes());
-		outputStream.close();
-		fileSystem.close();
-	}
+//	/**
+//	 * HDFS创建文件
+//	 */
+//	public void createFile(String path, MultipartFile file) throws Exception {
+//		if (StringUtils.isEmpty(path)) {
+//			return;
+//		} else {
+//			file.getBytes();
+//		}
+//		String fileName = file.getOriginalFilename();
+//		// 上传时默认当前目录，后面自动拼接文件的目录
+//		Path newPath = new Path(path + "/" + fileName);
+//		// 打开一个输出流
+//		FileSystem fileSystem = getFileSystem();
+//		FSDataOutputStream outputStream = fileSystem.create(newPath);
+//		outputStream.write(file.getBytes());
+//		outputStream.close();
+//		fileSystem.close();
+//	}
 
 	/**
 	 * 读取HDFS文件内容
@@ -328,7 +324,8 @@ public class HDFSUtil {
 			return null;
 		}
 		String jsonStr = readFile(path);
-		return JsonUtil.toObject(jsonStr, clazz);
+//		return JsonUtil.(jsonStr, clazz);
+		return null;
 	}
 
 	/**

@@ -1,28 +1,33 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
-    implementation('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    implementation 'org.springframework.boot:spring-boot-starter-test'
-
-    implementation 'org.springframework.cloud:spring-cloud-context'
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-    implementation 'org.apache.hadoop:hadoop-common:3.3.0'
     implementation 'org.apache.hadoop:hadoop-hdfs:3.3.0'
     implementation 'org.apache.hadoop:hadoop-client:3.3.0'
+    implementation 'org.apache.hadoop:hadoop-hdfs-client:3.3.0'
+
+    implementation 'org.slf4j:slf4j-log4j12:1.7.30'
+    implementation 'junit:junit:4.12'
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+
+//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+//
+//    implementation('org.springframework.boot:spring-boot-starter-web') {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+//    }
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+//    implementation 'org.springframework.boot:spring-boot-starter-test'
+//
+//    implementation 'org.springframework.cloud:spring-cloud-context'
+//    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
-configurations {
-    compile.exclude group:"org.springframework.security.oauth", module: "spring-security-oauth2"
-    compile.exclude group:"org.slf4j", module: "slf4j-log4j12"
-    compile.exclude group:"org.springframework.security", module: "spring-security-core"
-    compile.exclude group:"org.eclipse.jetty", module: "*"
-}
+//configurations {
+//    compile.exclude group:"org.springframework.security.oauth", module: "spring-security-oauth2"
+//    compile.exclude group:"org.slf4j", module: "slf4j-log4j12"
+//    compile.exclude group:"org.springframework.security", module: "spring-security-core"
+//    compile.exclude group:"org.eclipse.jetty", module: "*"
+//}
+
