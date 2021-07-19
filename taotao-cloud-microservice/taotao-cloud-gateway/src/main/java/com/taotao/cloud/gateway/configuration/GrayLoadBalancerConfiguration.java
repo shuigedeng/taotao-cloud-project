@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.configuration;
 
-import com.taotao.cloud.gateway.filter.GrayReactiveLoadBalancerClientFilter;
+import com.taotao.cloud.gateway.filter.global.GrayReactiveLoadBalancerClientFilter;
 import com.taotao.cloud.gateway.loadBalancer.GrayLoadBalancer;
 import com.taotao.cloud.gateway.loadBalancer.VersionGrayLoadBalancer;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

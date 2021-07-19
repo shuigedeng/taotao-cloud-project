@@ -1,4 +1,4 @@
-package com.taotao.cloud.gateway.filter;
+package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.loadBalancer.GrayLoadBalancer;
