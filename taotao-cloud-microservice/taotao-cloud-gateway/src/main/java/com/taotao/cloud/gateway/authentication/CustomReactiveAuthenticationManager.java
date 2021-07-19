@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 /**
  * 自定义认证管理器
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 22:09
  */

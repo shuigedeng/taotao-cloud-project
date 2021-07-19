@@ -22,7 +22,7 @@ import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, createT
  *
  * nc -lk 8888
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/3 09:05
  * @version 1.0.0
  */

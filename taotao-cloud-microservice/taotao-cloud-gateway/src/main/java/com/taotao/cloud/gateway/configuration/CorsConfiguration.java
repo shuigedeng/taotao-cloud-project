@@ -25,7 +25,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 /**
  * 跨域配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 22:11
  * @version 1.0.0
  */

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 /**
  * 退款流水表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 15:46
  */
 @Data

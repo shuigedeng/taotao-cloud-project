@@ -41,7 +41,7 @@ import java.util.Map;
 /**
  * 认证成功处理器
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/13 16:15
  * @version 1.0.0
  */

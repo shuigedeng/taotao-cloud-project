@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * DBLoader
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:27
  */
@@ -35,7 +35,7 @@ public class DBLoader {
 	 *
 	 * @param ruleMap ruleMap
 	 * @return void
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/11/26 下午8:27
 	 */

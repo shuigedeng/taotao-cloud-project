@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.util.Assert;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */

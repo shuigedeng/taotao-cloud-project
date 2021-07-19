@@ -44,7 +44,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * oss 客户端工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/12 16:36
  */
@@ -180,7 +180,7 @@ public class OSSClientUtil {
 	/**
 	 * 生成路径以及文件名 例如：//robot/2019/04/28/15564277465972939.jpg
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 */
 	private static String getFilePath(String sourceFileName, String md5) {
 		LocalDateTime dateTime = LocalDateTime.now();
@@ -199,7 +199,7 @@ public class OSSClientUtil {
 	/**
 	 * 检查文件大小
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 */
 	private static boolean checkFileSize(Long len, int size, String unit) {
 		double fileSize;
@@ -226,7 +226,7 @@ public class OSSClientUtil {
 	 * 计算所需要的分片数量
 	 *
 	 * @param uploadFile uploadFile
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/9 11:44
 	 */
 	public static int calPartCount(MultipartFile uploadFile) {

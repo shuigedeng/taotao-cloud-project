@@ -2362,7 +2362,7 @@
           "src/*"
         ]
       },
-      "pathsBasePath": "/Users/dengtao/projects/taotao-projects/taotao-cloud-vite",
+      "pathsBasePath": "/Users/shuigedeng/projects/taotao-projects/taotao-cloud-vite",
       "target": 1,
       "baseUrl": "./",
       "lib": [

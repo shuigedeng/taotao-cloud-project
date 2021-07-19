@@ -26,7 +26,7 @@
 ///**
 // * KafkaSend
 // *
-// * @author dengtao
+// * @author shuigedeng
 // * @version v1.0
 // * @since 2020/9/23 16:48
 // */

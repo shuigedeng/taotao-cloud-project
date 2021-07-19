@@ -20,7 +20,7 @@ import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:25
  * @version 1.0.0
  */

@@ -60,7 +60,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * ①切面注解得到请求数据 -> ②发布监听事件 -> ③异步监听日志入库
  * </p>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/3 11:47
  */

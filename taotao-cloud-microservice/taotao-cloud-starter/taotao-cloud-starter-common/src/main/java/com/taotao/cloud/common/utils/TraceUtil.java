@@ -24,7 +24,7 @@ import org.slf4j.MDC;
 /**
  * 链路追踪工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:49
  */
@@ -35,7 +35,7 @@ public class TraceUtil {
 	 *
 	 * @param request 　HttpServletRequest
 	 * @return java.lang.String 跟踪ID
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:59
 	 */
 	public static String getTraceId(HttpServletRequest request) {
@@ -54,7 +54,7 @@ public class TraceUtil {
 	 * 获取traceId
 	 *
 	 * @return java.lang.String 跟踪ID
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:55
 	 */
 	public static String getTraceId() {
@@ -65,7 +65,7 @@ public class TraceUtil {
 	 * 传递traceId至MDC
 	 *
 	 * @param traceId 　跟踪ID
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:57
 	 */
 	public static void mdcTraceId(String traceId) {
@@ -79,7 +79,7 @@ public class TraceUtil {
 	 *
 	 * @param request 　HttpServletRequest
 	 * @return java.lang.String 跟踪ID
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:59
 	 */
 	public static String getZipkinTraceId(HttpServletRequest request) {
@@ -99,7 +99,7 @@ public class TraceUtil {
 	 *
 	 * @param request 　HttpServletRequest
 	 * @return java.lang.String 跟踪ID
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:59
 	 */
 	public static String getZipkinSpanId(HttpServletRequest request) {
@@ -118,7 +118,7 @@ public class TraceUtil {
 	 * 传递zipkinTraceId至MDC
 	 *
 	 * @param request 　request
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:57
 	 */
 	public static void mdcZipkinTraceId(HttpServletRequest request) {
@@ -132,7 +132,7 @@ public class TraceUtil {
 	 * 传递zipkinSpanId至MDC
 	 *
 	 * @param request 　request
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:57
 	 */
 	public static void mdcZipkinSpanId(HttpServletRequest request) {

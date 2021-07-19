@@ -23,7 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * nohup java -jar /root/taotao-cloud/taotao-cloud-portal-1.0.jar >/root/taotao-cloud/logs/portal.log 2>&1 &
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2021/1/18 下午4:54
  * @version 1.0.0
  */

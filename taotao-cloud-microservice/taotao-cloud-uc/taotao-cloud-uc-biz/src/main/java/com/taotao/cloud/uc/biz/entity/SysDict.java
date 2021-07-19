@@ -18,7 +18,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 /**
  * 字典表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/15 11:00
  */
 @Data

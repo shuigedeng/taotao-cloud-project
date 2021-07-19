@@ -23,7 +23,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * 此时定义的序列化操作表示可以序列化所有类的对象，当然，这个对象所在的类一定要实现序列化接口
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:14
  */

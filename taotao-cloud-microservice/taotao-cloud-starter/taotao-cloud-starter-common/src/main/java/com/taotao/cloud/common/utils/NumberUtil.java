@@ -22,7 +22,7 @@ import lombok.experimental.UtilityClass;
 /**
  * NumberUtils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:39
  */
@@ -35,7 +35,7 @@ public class NumberUtil {
 	 * @param number number
 	 * @param scale  scale
 	 * @return double
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:34
 	 */
 	public double scale(Number number, int scale) {

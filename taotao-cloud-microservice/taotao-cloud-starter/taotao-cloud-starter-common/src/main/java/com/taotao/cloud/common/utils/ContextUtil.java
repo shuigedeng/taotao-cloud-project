@@ -28,7 +28,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * 获取上下文
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:33
  */
@@ -56,7 +56,7 @@ public class ContextUtil {
 	 * @param type     类型
 	 * @param required 是否必须
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:54
 	 */
 	public <T> T getBean(Class<T> type, boolean required) {
@@ -83,7 +83,7 @@ public class ContextUtil {
 	 * @param type     类型
 	 * @param required 是否必须
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:55
 	 */
 	public Object getBean(String type, boolean required) {
@@ -104,7 +104,7 @@ public class ContextUtil {
 	 * 获取bean定义信息
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:55
 	 */
 	public String getBeanDefinitionText() {
@@ -125,7 +125,7 @@ public class ContextUtil {
 	 * @param name  name
 	 * @param clazz clazz
 	 * @param args  args
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:43
 	 */
 	public void registerBean(String name,
@@ -150,7 +150,7 @@ public class ContextUtil {
 	 * @param name                  name
 	 * @param clazz                 clazz
 	 * @param beanDefinitionBuilder beanDefinitionBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:44
 	 */
 	public void registerBean(String name,
@@ -168,7 +168,7 @@ public class ContextUtil {
 	 * 取消注册bean
 	 *
 	 * @param name name
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:44
 	 */
 	public void unRegisterBean(String name) {
@@ -185,7 +185,7 @@ public class ContextUtil {
 	 * @param applicationContext applicationContext
 	 * @param name               name
 	 * @param clazz              clazz
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 14:45
 	 */
 	public void checkRegisterBean(ApplicationContext applicationContext, String name, Class clazz) {

@@ -263,7 +263,7 @@ taotao:
       license: Apache
       license-url: https://opensource.org/licenses/Apache-2.0Url
       contact:
-        name: dengtao
+        name: shuigedeng
         url: http://dtbox.top/
         email: 981376577@qq.com
       base-package: com.taotao.cloud.uc.biz.controller

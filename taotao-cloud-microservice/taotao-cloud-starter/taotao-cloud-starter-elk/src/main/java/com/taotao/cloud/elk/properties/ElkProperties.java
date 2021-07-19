@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * ElkProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 16:18
  */

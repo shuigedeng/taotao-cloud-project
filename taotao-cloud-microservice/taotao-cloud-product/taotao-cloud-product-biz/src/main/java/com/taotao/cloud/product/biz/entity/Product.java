@@ -13,7 +13,7 @@ import javax.persistence.Table;
 /**
  * 商品信息表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 16:03
  */
 @Data

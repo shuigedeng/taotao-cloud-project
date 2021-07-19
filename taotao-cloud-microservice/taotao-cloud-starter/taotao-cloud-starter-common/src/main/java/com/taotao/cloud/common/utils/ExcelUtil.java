@@ -35,7 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * ExcelUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:34
  */
@@ -51,7 +51,7 @@ public class ExcelUtil {
 	 * @param fileName       文件名称
 	 * @param isCreateHeader 是否创建表头
 	 * @param response       response
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,
@@ -70,7 +70,7 @@ public class ExcelUtil {
 	 * @param pojoClass pojo类型
 	 * @param fileName  文件名称
 	 * @param response  response
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,
@@ -87,7 +87,7 @@ public class ExcelUtil {
 	 * @param fileName     文件名称
 	 * @param response     response
 	 * @param exportParams 导出参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public static void exportExcel(List<?> list, Class<?> pojoClass, String fileName,
@@ -101,7 +101,7 @@ public class ExcelUtil {
 	 * @param list     数据
 	 * @param fileName 文件名称
 	 * @param response response
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public static void exportExcel(List<Map<String, Object>> list, String fileName,
@@ -117,7 +117,7 @@ public class ExcelUtil {
 	 * @param fileName     文件名称
 	 * @param response     response
 	 * @param exportParams 导出参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName,
@@ -132,7 +132,7 @@ public class ExcelUtil {
 	 * @param list     数据
 	 * @param fileName 文件名称
 	 * @param response response
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	private static void defaultExport(List<Map<String, Object>> list, String fileName,
@@ -147,7 +147,7 @@ public class ExcelUtil {
 	 * @param fileName 文件名称
 	 * @param response response
 	 * @param workbook excel数据
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	private static void downLoadExcel(String fileName, HttpServletResponse response,
@@ -171,7 +171,7 @@ public class ExcelUtil {
 	 * @param headerRows 表头行
 	 * @param pojoClass  pojo类型
 	 * @return java.util.List<T>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:03
 	 */
 	public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows,
@@ -199,7 +199,7 @@ public class ExcelUtil {
 	 * @param file      excel文件
 	 * @param pojoClass pojo类型
 	 * @return java.util.List<T>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:03
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Class<T> pojoClass)
@@ -215,7 +215,7 @@ public class ExcelUtil {
 	 * @param headerRows 表头行
 	 * @param pojoClass  pojo类型
 	 * @return java.util.List<T>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:03
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows,
@@ -232,7 +232,7 @@ public class ExcelUtil {
 	 * @param needVerfiy 是否检验excel内容
 	 * @param pojoClass  pojo类型
 	 * @return java.util.List<T>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:04
 	 */
 	public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows,
@@ -256,7 +256,7 @@ public class ExcelUtil {
 	 * @param needVerfiy  是否检验excel内容
 	 * @param pojoClass   pojo类型
 	 * @return java.util.List<T>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:04
 	 */
 	public static <T> List<T> importExcel(InputStream inputStream, Integer titleRows,

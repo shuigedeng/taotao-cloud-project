@@ -23,7 +23,7 @@ import graphql.schema.idl.RuntimeWiring;
  * graphql-java provides optional scalars in the graphql-java-extended-scalars library. We can wire
  * a scalar from this library by adding the scalar to the RuntimeWiring.
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2021/02/19 13:46
  */

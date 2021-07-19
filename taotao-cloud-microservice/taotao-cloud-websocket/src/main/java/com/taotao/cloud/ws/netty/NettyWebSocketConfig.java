@@ -22,7 +22,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 /**
  * NettyWebSocketConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/30 下午4:39
  * @version 1.0.0
  */

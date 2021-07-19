@@ -30,7 +30,7 @@
 // /**
 //  * 部门管理 服务实现类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 11:11
 //  */
 // @Service
@@ -183,7 +183,7 @@
 //      * @param id
 //      * @param idList
 //      * @return void
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:12
 //      */
 //     private void checkChildrenExists(int id, List<Integer> idList) {

@@ -25,7 +25,7 @@ import io.trino.spi.type.Type;
 /**
  * CollectListStatsSerializer
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 18:04
  */

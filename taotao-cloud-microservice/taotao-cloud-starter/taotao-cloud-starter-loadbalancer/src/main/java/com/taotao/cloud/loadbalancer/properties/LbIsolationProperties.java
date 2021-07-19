@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * RibbonProperties 配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2017/11/17
  */

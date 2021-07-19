@@ -18,7 +18,7 @@ package com.taotao.cloud.common.enums;
 /**
  * 返回结果枚举 code规则 500 + 自增三位数
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 15:36
  */
@@ -232,7 +232,7 @@ public enum ResultEnum implements BaseEnum {
 	 *
 	 * @param code code
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 15:48
 	 */
 	public static String getMessageByCode(int code) {

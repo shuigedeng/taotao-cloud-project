@@ -31,7 +31,7 @@ import java.util.Arrays;
 /**
  * SharedFriendsStepTwo
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:18
  */

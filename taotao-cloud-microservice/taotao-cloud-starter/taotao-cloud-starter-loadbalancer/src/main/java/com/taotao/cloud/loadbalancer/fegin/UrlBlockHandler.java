@@ -30,7 +30,7 @@ import org.springframework.http.HttpStatus;
  * <p>
  * {@link com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.DefaultBlockExceptionHandler} *
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/15 11:31
  */

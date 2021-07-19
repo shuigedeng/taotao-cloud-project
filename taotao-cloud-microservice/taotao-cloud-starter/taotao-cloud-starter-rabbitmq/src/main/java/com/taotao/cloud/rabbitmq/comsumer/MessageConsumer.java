@@ -20,7 +20,7 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
 /**
  * MessageConsumer
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/29 15:57
  */
@@ -29,7 +29,7 @@ public interface MessageConsumer {
 	/**
 	 * 消费消息
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/9/29 15:57
 	 */

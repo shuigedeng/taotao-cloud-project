@@ -2,7 +2,7 @@
 
 # 该脚本为Linux下启动java程序的脚本
 #
-# author: dengtao
+# author: shuigedeng
 # date: 2021/1/15
 #
 # 特别注意：

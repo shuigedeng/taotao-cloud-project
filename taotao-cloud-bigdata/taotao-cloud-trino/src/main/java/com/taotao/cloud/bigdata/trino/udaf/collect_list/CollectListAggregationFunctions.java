@@ -28,7 +28,7 @@ import io.trino.spi.type.StandardTypes;
 import io.trino.spi.type.VarcharType;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 17:52
  */

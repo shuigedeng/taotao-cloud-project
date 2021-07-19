@@ -18,7 +18,7 @@ package com.taotao.cloud.file.util;
 /**
  * 媒体类型工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:45
  */

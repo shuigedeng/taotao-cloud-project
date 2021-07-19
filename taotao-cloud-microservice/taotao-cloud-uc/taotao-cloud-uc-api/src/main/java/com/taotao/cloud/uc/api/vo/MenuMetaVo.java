@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 菜单DTO
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 10:44
  */
 @Data

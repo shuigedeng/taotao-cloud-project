@@ -21,7 +21,7 @@ import lombok.Data;
 /**
  * 用户实体绑定spring security
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:27
  */

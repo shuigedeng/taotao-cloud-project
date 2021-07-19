@@ -41,7 +41,7 @@ import java.util.Objects;
 /**
  * 文件工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 11:10
  */
@@ -62,7 +62,7 @@ public class FileUtil {
 	 *
 	 * @param multipartFile 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static UploadFileInfo getMultipartFileInfo(MultipartFile multipartFile) {
@@ -96,7 +96,7 @@ public class FileUtil {
 	 *
 	 * @param file 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static UploadFileInfo getFileInfo(File file) {
@@ -121,7 +121,7 @@ public class FileUtil {
 	 *
 	 * @param inputStream inputStream
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static String fileMd5(InputStream inputStream) {
@@ -134,7 +134,7 @@ public class FileUtil {
 	 * @param file 文件对象
 	 * @param path 保存路径
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:43
 	 */
 	public static String saveFile(MultipartFile file, String path) {
@@ -159,7 +159,7 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static boolean deleteFile(String path) {
@@ -183,7 +183,7 @@ public class FileUtil {
 	 * @param file        文件对象
 	 * @param acceptTypes 接受类型
 	 * @return com.taotao.cloud.file.pojo.ResultBody
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static Boolean validType(MultipartFile file, String[] acceptTypes) {
@@ -211,7 +211,7 @@ public class FileUtil {
 	 *
 	 * @param file 文件对象
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String extractFilename(MultipartFile file) {
@@ -226,7 +226,7 @@ public class FileUtil {
 	 * @param fileName  文件名称
 	 * @param extension 扩展名称
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String extractFilename(String fileName, String extension) {
@@ -239,7 +239,7 @@ public class FileUtil {
 	 *
 	 * @param fileName fileName
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	private static String encodingFilename(String fileName) {
@@ -253,7 +253,7 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:44
 	 */
 	public static String getExtension(MultipartFile file) {
@@ -269,7 +269,7 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:45
 	 */
 	public static boolean isImage(File file) {
@@ -291,7 +291,7 @@ public class FileUtil {
 	 *
 	 * @param file file
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/26 10:45
 	 */
 	public static boolean isImage(MultipartFile file) {

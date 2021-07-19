@@ -20,7 +20,7 @@ import com.taotao.cloud.core.model.Result;
 /**
  * ISmsCodeService
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 16:27
  * @version 1.0.0
  */
@@ -31,7 +31,7 @@ public interface ISmsCodeService {
      * @param deviceId  前端唯一标识
      * @param imageCode 验证码
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:27
      */
     void saveImageCode(String deviceId, String imageCode);
@@ -41,7 +41,7 @@ public interface ISmsCodeService {
      *
      * @param mobile 前端唯一标识(手机号码
      * @return com.taotao.cloud.common.model.Result<java.lang.String>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:27
      */
     Result<Boolean> sendSmsCode(String phone);
@@ -51,7 +51,7 @@ public interface ISmsCodeService {
      *
      * @param deviceId 前端唯一标识/手机号
      * @return java.lang.String
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:28
      */
     String getCode(String deviceId);
@@ -61,7 +61,7 @@ public interface ISmsCodeService {
      *
      * @param deviceId 前端唯一标识/手机号
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:28
      */
     void remove(String deviceId);
@@ -72,7 +72,7 @@ public interface ISmsCodeService {
      * @param phone      手机号码
      * @param verifyCode 验证码
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:28
      */
     void validate(String phone, String verifyCode);

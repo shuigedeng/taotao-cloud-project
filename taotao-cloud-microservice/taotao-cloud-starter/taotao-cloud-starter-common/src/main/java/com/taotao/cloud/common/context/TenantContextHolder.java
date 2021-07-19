@@ -20,7 +20,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 /**
  * 租户context holder
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 17:18
  */

@@ -42,7 +42,7 @@
 ///**
 // * UserServiceDetail
 // *
-// * @author dengtao
+// * @author shuigedeng
 // * @since 2020/4/29 17:46
 // */
 //public class UserDetailsServiceImpl implements IUserDetailsService {
@@ -61,7 +61,7 @@
 //	 *
 //	 * @param username 用户名
 //	 * @return org.springframework.security.core.userdetails.UserDetails
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/4/29 17:46
 //	 */
 //	@Override

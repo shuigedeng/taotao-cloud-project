@@ -20,7 +20,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
  * 1.本地运行 本地数据参数
  * <p>
- * ----	 /Users/dengtao/spark/input /Users/dengtao/spark/input
+ * ----	 /Users/shuigedeng/spark/input /Users/shuigedeng/spark/input
  * <p>
  * 2.本地运行 hadoop数据参数
  * <p>
@@ -38,7 +38,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * hdfs://127.0.0.1/spark/wordcount/output
  * <p>
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/26 上午9:35
  * @version 1.0.0
  */
@@ -54,7 +54,7 @@ object ScalaWordCount {
 
     val value = context.textFile("/")
 
-    context.textFile("/Users/dengtao/spark/input")
+    context.textFile("/Users/shuigedeng/spark/input")
       .flatMap(_.split(" "))
       .map((_, 1))
       .reduceByKey(_ + _)

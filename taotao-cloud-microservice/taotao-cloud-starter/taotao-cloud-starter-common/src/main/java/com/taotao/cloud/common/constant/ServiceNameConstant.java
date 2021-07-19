@@ -18,7 +18,7 @@ package com.taotao.cloud.common.constant;
 /**
  * 微服务名称常量
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:24
  */

@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * UserAuthenticationConverterComponent<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/12 09:15
  * @version 1.0.0
  */

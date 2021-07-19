@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */

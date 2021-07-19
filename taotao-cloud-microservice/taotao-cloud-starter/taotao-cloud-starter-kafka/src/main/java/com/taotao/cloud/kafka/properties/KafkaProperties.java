@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * XxlProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/16 11:36
  */

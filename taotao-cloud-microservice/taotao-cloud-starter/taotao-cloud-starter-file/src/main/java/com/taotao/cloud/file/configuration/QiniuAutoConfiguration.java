@@ -39,7 +39,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
@@ -91,7 +91,7 @@ public class QiniuAutoConfiguration {
 	/**
 	 * 构建一个七牛上传工具实例
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/10/26 11:36
 	 */
@@ -103,7 +103,7 @@ public class QiniuAutoConfiguration {
 	/**
 	 * 认证信息实例
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/10/26 11:36
 	 */
@@ -115,7 +115,7 @@ public class QiniuAutoConfiguration {
 	/**
 	 * 构建七牛空间管理实例
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/10/26 11:36
 	 */

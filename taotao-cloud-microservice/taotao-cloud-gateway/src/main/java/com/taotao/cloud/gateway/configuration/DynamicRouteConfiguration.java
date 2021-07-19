@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 动态路由配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 19:33
  */

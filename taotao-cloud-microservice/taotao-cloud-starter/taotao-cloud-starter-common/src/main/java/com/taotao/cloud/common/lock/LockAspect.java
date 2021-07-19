@@ -33,7 +33,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 /**
  * 分布式锁切面
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
@@ -101,7 +101,7 @@ public class LockAspect {
 	 * @param methodSignature 方法签名
 	 * @param args            参数
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:49
 	 */
 	private String getValBySpEL(String spEL, MethodSignature methodSignature, Object[] args) {

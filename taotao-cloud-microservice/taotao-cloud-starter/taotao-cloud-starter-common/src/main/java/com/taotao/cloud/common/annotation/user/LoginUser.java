@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
  * <p>
  * 例6：public void test(@LoginUser(isResource = true) SysUser user) //能获取SysUser对象的实时的用户信息和资源信息
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:05
  */

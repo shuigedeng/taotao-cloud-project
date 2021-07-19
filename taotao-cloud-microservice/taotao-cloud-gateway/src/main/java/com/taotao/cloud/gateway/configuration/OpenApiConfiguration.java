@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 /**
  * OpenApiConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/03/04 13:48
  */

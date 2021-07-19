@@ -28,7 +28,7 @@ import java.io.Serializable;
 /**
  * 客户端对象DTO
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 17:05
  * @version 1.0.0
  */

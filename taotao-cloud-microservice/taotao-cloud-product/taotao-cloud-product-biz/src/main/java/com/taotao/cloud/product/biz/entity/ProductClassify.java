@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * 商品分类表
- * @author dengtao
+ * @author shuigedeng
  */
 @Data
 @SuperBuilder

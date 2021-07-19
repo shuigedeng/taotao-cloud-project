@@ -34,7 +34,7 @@ import reactor.core.publisher.Mono;
 /**
  * 自定义返回util
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:22
  */
@@ -46,7 +46,7 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param data     数据对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
 	public void success(HttpServletResponse response, Object data) throws IOException {
@@ -59,7 +59,7 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param data     数据对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
 	public void fail(HttpServletResponse response, Object data) throws IOException {
@@ -72,7 +72,7 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
 	public void result(HttpServletResponse response, Result<?> result) throws IOException {
@@ -84,7 +84,7 @@ public class ResponseUtil {
 	 *
 	 * @param response   response
 	 * @param resultEnum 数据对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:48
 	 */
 	public void fail(HttpServletResponse response, ResultEnum resultEnum) throws IOException {
@@ -97,7 +97,7 @@ public class ResponseUtil {
 	 *
 	 * @param response response
 	 * @param result   数据
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
 	private void writeResponse(HttpServletResponse response, Result<?> result) throws IOException {
@@ -118,7 +118,7 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param data     数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> success(ServerWebExchange exchange, Object data) {
@@ -132,7 +132,7 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param data     数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> fail(ServerWebExchange exchange, Object data) {
@@ -146,7 +146,7 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param result   数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
 	public Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
@@ -159,7 +159,7 @@ public class ResponseUtil {
 	 * @param exchange   exchange
 	 * @param resultEnum 状态码
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:51
 	 */
 	public Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
@@ -173,7 +173,7 @@ public class ResponseUtil {
 	 * @param exchange exchange
 	 * @param result   数据
 	 * @return reactor.core.publisher.Mono<java.lang.Void>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:52
 	 */
 	public Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {

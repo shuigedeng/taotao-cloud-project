@@ -34,7 +34,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  * 安全服务工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:39
  */
@@ -46,7 +46,7 @@ public class SecurityUtil {
 	 *
 	 * @param result   result
 	 * @param response response
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
 	public void writeResponse(Result<?> result, HttpServletResponse response) throws IOException {
@@ -61,7 +61,7 @@ public class SecurityUtil {
 	 * 获取认证信息
 	 *
 	 * @return org.springframework.security.core.Authentication
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
 	public Authentication getAuthentication() {
@@ -73,7 +73,7 @@ public class SecurityUtil {
 	 *
 	 * @param authentication 认证信息
 	 * @return com.taotao.cloud.core.model.SecurityUser
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
 	public SecurityUser getUser(Authentication authentication) {
@@ -93,7 +93,7 @@ public class SecurityUtil {
 	 * 获取用户信息
 	 *
 	 * @return com.taotao.cloud.core.model.SecurityUser
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
 	public SecurityUser getUser() {
@@ -105,7 +105,7 @@ public class SecurityUtil {
 	 * 获取用户姓名
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
 	public String getUsername() {
@@ -117,7 +117,7 @@ public class SecurityUtil {
 	 * 获取用户id
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
 	public Long getUserId() {
@@ -129,7 +129,7 @@ public class SecurityUtil {
 	 * 获取客户端id
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
 //	public String getClientId() {
@@ -148,7 +148,7 @@ public class SecurityUtil {
 //	 *
 //	 * @param request request
 //	 * @return java.lang.String
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2021/2/25 16:58
 //	 */
 //	public String extractToken(HttpServletRequest request) {
@@ -168,7 +168,7 @@ public class SecurityUtil {
 	 * @param newPass                密码
 	 * @param passwordEncoderOldPass 加密后的密码
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:58
 	 */
 	public boolean validatePass(String newPass, String passwordEncoderOldPass) {
@@ -179,7 +179,7 @@ public class SecurityUtil {
 	 * 获取密码加密工具
 	 *
 	 * @return org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
 	public BCryptPasswordEncoder getPasswordEncoder() {
@@ -196,7 +196,7 @@ public class SecurityUtil {
 	 *
 	 * @param request request
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
 //	private String extractHeaderToken(HttpServletRequest request) {
@@ -221,7 +221,7 @@ public class SecurityUtil {
 	 *
 	 * @param request request
 	 * @return java.lang.String[]
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
 //	public String[] extractClient(HttpServletRequest request) {
@@ -237,7 +237,7 @@ public class SecurityUtil {
 	 *
 	 * @param header header中的参数
 	 * @return java.lang.String[]
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
 	public String[] extractHeaderClient(String header) {
@@ -256,7 +256,7 @@ public class SecurityUtil {
 	 *
 	 * @param authentication 认证信息
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
 	public String getUsername(Authentication authentication) {

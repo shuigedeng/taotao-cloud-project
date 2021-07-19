@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * 操作日志注解
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:00
  */

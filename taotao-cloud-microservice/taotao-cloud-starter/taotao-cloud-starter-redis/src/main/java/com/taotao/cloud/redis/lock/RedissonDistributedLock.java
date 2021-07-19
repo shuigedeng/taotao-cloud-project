@@ -31,7 +31,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 /**
  * redisson分布式锁实现，基本锁功能的抽象实现
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 07:47
  */

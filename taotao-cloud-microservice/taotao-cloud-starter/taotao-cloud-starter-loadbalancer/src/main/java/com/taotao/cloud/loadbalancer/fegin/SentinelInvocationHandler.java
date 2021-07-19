@@ -41,7 +41,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler}
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/15 11:31
  */

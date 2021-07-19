@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 /**
  * NettyWebSocketServer
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/30 下午4:39
  * @version 1.0.0
  */

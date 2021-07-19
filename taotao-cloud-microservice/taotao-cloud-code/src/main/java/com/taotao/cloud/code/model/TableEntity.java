@@ -3,7 +3,7 @@ package com.taotao.cloud.code.model;
 import java.util.List;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/15 11:13
  */
 public class TableEntity {

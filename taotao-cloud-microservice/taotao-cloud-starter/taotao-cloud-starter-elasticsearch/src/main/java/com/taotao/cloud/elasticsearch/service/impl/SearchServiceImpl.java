@@ -26,7 +26,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 /**
  * 搜索服务实现
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 07:48
  */

@@ -21,7 +21,7 @@ import org.springframework.context.ApplicationEvent;
 /**
  * 系统日志事件
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/3 13:33
  */

@@ -48,7 +48,7 @@ import java.util.regex.Pattern;
 /**
  * TaotaoCloudAuthenticationProvider
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/19 11:21
  * @version 1.0.0
  */

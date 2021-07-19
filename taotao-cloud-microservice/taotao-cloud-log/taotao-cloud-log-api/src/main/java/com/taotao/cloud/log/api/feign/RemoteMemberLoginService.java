@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * RemoteMemberLoginService
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/27 下午3:06
  * @version 1.0.0
  */
@@ -23,7 +23,7 @@ public interface RemoteMemberLoginService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<ChatbotVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 上午10:45
 	 * @version 1.0.0
 	 */

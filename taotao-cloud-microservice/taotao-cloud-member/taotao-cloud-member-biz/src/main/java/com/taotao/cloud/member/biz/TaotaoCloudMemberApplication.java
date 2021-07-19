@@ -18,7 +18,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/20 下午3:47
  * @version 1.0.0
  */

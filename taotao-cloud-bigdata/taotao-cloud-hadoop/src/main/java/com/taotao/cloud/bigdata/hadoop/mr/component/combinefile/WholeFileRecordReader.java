@@ -32,7 +32,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
  * RecordReader的核心工作逻辑： 通过nextKeyValue()方法去读取数据构造将返回的key   value 通过getCurrentKey 和
  * getCurrentValue来返回上面构造好的key和value
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:14
  */

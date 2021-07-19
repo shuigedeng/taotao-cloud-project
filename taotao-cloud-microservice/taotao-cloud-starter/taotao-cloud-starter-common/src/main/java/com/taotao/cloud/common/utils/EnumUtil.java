@@ -20,7 +20,7 @@ import lombok.experimental.UtilityClass;
 /**
  * EnumUtils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:35
  */
@@ -33,7 +33,7 @@ public class EnumUtil {
 	 * @param enumType enumType
 	 * @param name     name
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:13
 	 */
 	public <T extends Enum<?>> T lookup(Class<T> enumType, String name) {

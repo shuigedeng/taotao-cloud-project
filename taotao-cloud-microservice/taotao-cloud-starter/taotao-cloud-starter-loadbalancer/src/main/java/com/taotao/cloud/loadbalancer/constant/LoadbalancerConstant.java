@@ -3,7 +3,7 @@ package com.taotao.cloud.loadbalancer.constant;
 /**
  * 分布式文件存储常量
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 09:36
  */

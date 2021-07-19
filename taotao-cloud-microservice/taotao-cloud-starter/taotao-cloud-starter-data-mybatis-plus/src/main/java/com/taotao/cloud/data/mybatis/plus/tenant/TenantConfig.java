@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * 多租户自动配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 11:20
  * @version 1.0.0
  */

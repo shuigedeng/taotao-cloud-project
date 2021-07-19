@@ -24,7 +24,7 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 /**
  * CustomHealthIndicator
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/04/02 10:23
  */

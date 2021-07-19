@@ -24,7 +24,7 @@ import lombok.Getter;
 /**
  * 错误补偿工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:23
  */
@@ -38,7 +38,7 @@ public class FailOverUtil {
 	 * @param consumer
 	 * @param c1
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:41
 	 */
 	public static <T> T invoke(Consumer<Result<T>> consumer, Callable<T>... c1) {
@@ -77,7 +77,7 @@ public class FailOverUtil {
 	/**
 	 * 反馈结果
 	 *
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2021/6/22 17:42
 	 */

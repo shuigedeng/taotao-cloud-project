@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 审计日志配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:19
  */

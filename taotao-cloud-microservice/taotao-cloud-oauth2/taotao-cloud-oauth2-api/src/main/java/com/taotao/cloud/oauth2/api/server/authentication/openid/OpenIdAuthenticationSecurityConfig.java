@@ -29,7 +29,7 @@
 // /**
 //  * OpenId认证安全配置
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/5/2 11:16
 //  * @version 1.0.0
 //  */

@@ -34,7 +34,7 @@ import java.util.List;
  * 后台管理模块中有对oauth_client_details的crud， 注意同步redis的数据
  * 注意对oauth_client_details清除redis db部分数据的清空
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 17:40
  * @version 1.0.0
  */
@@ -63,7 +63,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      *
      * @param clientId clientId
      * @return org.springframework.security.oauth2.provider.ClientDetails
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 17:42
      */
     private ClientDetails cacheAndGetClient(String clientId) {
@@ -105,7 +105,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      *
      * @param clientId clientId
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 17:44
      */
     private void removeRedisCache(String clientId) {
@@ -116,7 +116,7 @@ public class RedisClientDetailsServiceComponent extends JdbcClientDetailsService
      * 将oauth_client_details全表刷入redis
      *
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 17:45
      */
     public void loadAllClientToCache() {

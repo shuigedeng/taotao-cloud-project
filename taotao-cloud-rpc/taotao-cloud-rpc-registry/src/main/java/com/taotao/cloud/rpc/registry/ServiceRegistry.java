@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.registry
  * Date: 2020/2/27 11:23
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.registry;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * 服务注册<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 11:23
  */
@@ -35,7 +35,7 @@ public class ServiceRegistry {
      * 连接zk
      *
      * @return org.apache.zookeeper.ZooKeeper
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 13:47
      */
     private ZooKeeper connectZookeeper() {
@@ -61,7 +61,7 @@ public class ServiceRegistry {
      * @param zk   zookeeper
      * @param data data
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 13:47
      */
     private void createNode(ZooKeeper zk, String data) {
@@ -84,7 +84,7 @@ public class ServiceRegistry {
      *
      * @param data data
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 13:47
      */
     public void registry(String data) {

@@ -7,9 +7,9 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 // import lombok.experimental.SuperBuilder;
 //
 // /**
-//  * dengtao
+//  * shuigedeng
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/6/15 11:00
 //  */
 // @Data

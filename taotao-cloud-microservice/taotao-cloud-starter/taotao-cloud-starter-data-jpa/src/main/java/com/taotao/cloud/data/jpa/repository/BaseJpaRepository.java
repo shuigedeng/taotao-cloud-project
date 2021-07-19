@@ -37,7 +37,7 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 /**
  * 基础jpa Repository
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/28 16:00
  */

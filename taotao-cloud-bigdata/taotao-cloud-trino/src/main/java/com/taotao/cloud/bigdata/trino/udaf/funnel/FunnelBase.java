@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * 漏斗基础信息
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/1/25 下午3:44
  */

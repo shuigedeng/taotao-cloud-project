@@ -2,7 +2,7 @@
  * Project Name: projects
  * Package Name: com.taotao.cloud.reactive.uc.entity
  * Date: 2020/9/10 14:05
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.uc.entity;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @date 2020/9/10 14:05
  */

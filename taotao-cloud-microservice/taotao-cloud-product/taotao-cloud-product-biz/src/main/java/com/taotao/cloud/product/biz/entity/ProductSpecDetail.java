@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  */
 @Data
 @SuperBuilder

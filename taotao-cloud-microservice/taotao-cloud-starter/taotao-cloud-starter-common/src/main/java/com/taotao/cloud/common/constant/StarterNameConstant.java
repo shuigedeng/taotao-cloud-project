@@ -18,7 +18,7 @@ package com.taotao.cloud.common.constant;
 /**
  * starter 名称常量
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:24
  */

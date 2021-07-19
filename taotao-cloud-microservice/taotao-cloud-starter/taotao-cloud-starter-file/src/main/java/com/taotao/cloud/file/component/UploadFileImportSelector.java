@@ -29,7 +29,7 @@ import org.springframework.core.type.AnnotationMetadata;
 /**
  * TaotaoCloudImportSelector
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 12:59
  */

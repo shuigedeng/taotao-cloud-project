@@ -61,7 +61,7 @@ import org.springframework.util.Assert;
 /**
  * DefaultSecurityConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/03/30 18:01
  */

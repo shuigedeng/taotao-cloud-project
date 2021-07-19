@@ -23,7 +23,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * TaotaoCloudGatewayApplication
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/10 09:06
  */

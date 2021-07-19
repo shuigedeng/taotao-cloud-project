@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Import;
 /**
  * 开启feign拦截器传递数据给下游服务，包含基础数据和http的相关数据
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/5 13:40
  */

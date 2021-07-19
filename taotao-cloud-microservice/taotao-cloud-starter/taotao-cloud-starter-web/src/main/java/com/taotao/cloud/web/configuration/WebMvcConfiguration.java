@@ -61,7 +61,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 自定义mvc配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/29 14:30
  */

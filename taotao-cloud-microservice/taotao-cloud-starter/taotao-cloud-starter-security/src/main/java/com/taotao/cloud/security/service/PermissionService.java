@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 权限服务
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/2 15:47
  */
 public interface PermissionService {
@@ -32,7 +32,7 @@ public interface PermissionService {
 	 *
 	 * @param roleCodes 角色code列表，多个以','隔开
 	 * @return java.util.List<com.taotao.cloud.auth.model.SecurityUserMenu>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/5/12 20:38
 	 */
 	List<SecurityMenu> findMenuByRoleCodes(String roleCodes);

@@ -42,7 +42,7 @@
 ///**
 // * SecurityHandlerComponent
 // *
-// * @author dengtao
+// * @author shuigedeng
 // * @version 1.0.0
 // * @since 2020/4/30 09:05
 // */
@@ -52,7 +52,7 @@
 //	/**
 //	 * AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常
 //	 *
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/10/9 11:12
 //	 */
 //	@Bean
@@ -63,7 +63,7 @@
 //	/**
 //	 * OAuth2AccessDeniedHandler 用来解决认证过的用户访问无权限资源时的异常
 //	 *
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/10/9 11:13
 //	 */
 //	@Bean

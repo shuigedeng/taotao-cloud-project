@@ -25,7 +25,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * Fastdfs文件服务Properties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 09:40
  */

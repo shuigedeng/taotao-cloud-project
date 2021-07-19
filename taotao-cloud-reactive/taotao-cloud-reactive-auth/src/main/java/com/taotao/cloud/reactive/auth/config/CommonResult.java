@@ -2,14 +2,14 @@
  * Project Name: projects
  * Package Name: com.taotao.cloud.reactive.auth
  * Date: 2020/9/10 16:59
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.auth.config;
 
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @date 2020/9/10 16:59
  */

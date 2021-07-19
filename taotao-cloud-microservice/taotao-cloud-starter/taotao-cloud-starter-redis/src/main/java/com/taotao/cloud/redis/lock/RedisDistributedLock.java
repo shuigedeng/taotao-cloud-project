@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis分布式锁实现
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 07:47
  * @deprecated 建议使用Redisson的实现方式 {@link RedissonDistributedLock}

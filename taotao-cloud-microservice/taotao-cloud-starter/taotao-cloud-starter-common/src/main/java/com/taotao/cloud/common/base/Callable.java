@@ -18,7 +18,7 @@ package com.taotao.cloud.common.base;
 /**
  * 通用回调定义
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:06
  **/

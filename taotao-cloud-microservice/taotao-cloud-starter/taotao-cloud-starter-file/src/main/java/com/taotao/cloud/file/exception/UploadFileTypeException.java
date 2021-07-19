@@ -21,7 +21,7 @@ import com.taotao.cloud.common.exception.BaseException;
 /**
  * 业务异常
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:21
  */

@@ -21,7 +21,7 @@ import java.util.Random;
 /**
  * WeightMeta<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 22:10
  */

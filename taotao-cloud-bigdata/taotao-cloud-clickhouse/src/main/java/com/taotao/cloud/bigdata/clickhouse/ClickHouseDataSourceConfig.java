@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * ClickHouseDataSourceConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/03/16 16:52
  */

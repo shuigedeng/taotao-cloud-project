@@ -37,7 +37,7 @@ import java.util.Map;
  * <p>
  * taotao_cloud_funnel(ctime, 86400*1000*3, event, 'SingUp,AppPageView,AppClick,NewsAction')
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/1/25 下午3:52
  */

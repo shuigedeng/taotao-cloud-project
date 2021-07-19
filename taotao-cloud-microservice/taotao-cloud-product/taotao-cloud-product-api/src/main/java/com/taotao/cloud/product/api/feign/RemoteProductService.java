@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 远程调用订单模块
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "RemoteProductService", value = ServiceNameConstant.TAOTAO_CLOUD_PRODUCT_CENTER, fallbackFactory = RemoteProductFallbackImpl.class)
@@ -25,7 +25,7 @@ public interface RemoteProductService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 下午3:23
 	 * @version 1.0.0
 	 */
@@ -37,7 +37,7 @@ public interface RemoteProductService {
 	 *
 	 * @param productDTO productDTO
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 下午3:23
 	 * @version 1.0.0
 	 */

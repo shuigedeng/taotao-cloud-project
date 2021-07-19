@@ -24,7 +24,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 /**
  * RemoteLogFallbackImpl
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 21:43
  */
 public class RemoteWithdrawFallbackImpl implements FallbackFactory<RemoteWithdrawService> {

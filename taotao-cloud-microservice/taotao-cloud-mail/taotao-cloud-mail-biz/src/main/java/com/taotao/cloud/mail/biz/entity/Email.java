@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 /**
  * 邮件信息表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:46
  * @version 1.0.0
  */

@@ -40,7 +40,7 @@ import org.apache.kafka.common.serialization.ByteArraySerializer;
 /**
  * TaotaoKafkaAppender
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/12 16:28
  */

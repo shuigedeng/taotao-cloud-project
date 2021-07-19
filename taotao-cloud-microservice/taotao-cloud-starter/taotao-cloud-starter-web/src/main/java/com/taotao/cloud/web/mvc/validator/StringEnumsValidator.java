@@ -25,7 +25,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * StringEnumsValidator
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/14 13:56
  */

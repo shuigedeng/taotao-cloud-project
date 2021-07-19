@@ -20,7 +20,7 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
 /**
  * 消息处理者
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/29 15:55
  */
@@ -30,7 +30,7 @@ public interface MessageProcess<T> {
 	 * 处理消息
 	 *
 	 * @param message message
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/29 15:56
 	 */
 	DetailResponse process(T message);

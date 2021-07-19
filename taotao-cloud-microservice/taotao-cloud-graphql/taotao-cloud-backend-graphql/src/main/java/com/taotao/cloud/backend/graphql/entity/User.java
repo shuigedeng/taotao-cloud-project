@@ -18,7 +18,7 @@ package com.taotao.cloud.backend.graphql.entity;
 import lombok.Data;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/9 09:53
  * @version 1.0.0
  */

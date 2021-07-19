@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * FileService
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/12 21:26
  * @version 1.0.0
  */
@@ -16,7 +16,7 @@ public interface FileService {
 	 *
 	 * @param uploadFile 文件内容
 	 * @return com.taotao.cloud.dfs.biz.entity.File
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 上午11:00
 	 * @version 1.0.0
 	 */
@@ -27,7 +27,7 @@ public interface FileService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.dfs.biz.entity.File
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 上午11:14
 	 * @version 1.0.0
 	 */
@@ -37,7 +37,7 @@ public interface FileService {
 	//  * 删除文件
 	//  *
 	//  * @param objectName
-	//  * @author dengtao
+	//  * @author shuigedeng
 	//  * @since 2020/9/9 11:17
 	//  */
 	// Boolean delete(String objectName);
@@ -46,7 +46,7 @@ public interface FileService {
 	//  * 查询oss上的所有文件
 	//  *
 	//  * @param
-	//  * @author dengtao
+	//  * @author shuigedeng
 	//  * @since 2020/9/9 11:20
 	//  */
 	// List<OSSObjectSummary> list();
@@ -56,7 +56,7 @@ public interface FileService {
 	//  *
 	//  * @param outputStream
 	//  * @param objectName
-	//  * @author dengtao
+	//  * @author shuigedeng
 	//  * @since 2020/9/9 11:23
 	//  */
 	// void exportOssFile(ServletOutputStream outputStream, String objectName);

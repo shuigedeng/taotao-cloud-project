@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 父类，注意这个类不要让 mp 扫描
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 11:19
  * @version 1.0.0
  */

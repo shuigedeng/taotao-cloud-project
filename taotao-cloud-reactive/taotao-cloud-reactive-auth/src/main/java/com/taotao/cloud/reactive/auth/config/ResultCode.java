@@ -3,14 +3,14 @@
  * Package Name: com.taotao.cloud.reactive.auth
  * Descroption:
  * Date: 2020/9/10 17:00
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.auth.config;
 
 /**
  * 〈〉<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @since v1.0.0
  * @version v1.0.0
  * @see

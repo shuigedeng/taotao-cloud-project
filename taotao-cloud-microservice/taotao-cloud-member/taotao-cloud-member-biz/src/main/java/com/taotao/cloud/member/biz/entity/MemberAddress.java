@@ -12,7 +12,7 @@ import javax.persistence.Table;
 /**
  * 会员收货地址
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/15 11:00
  */
 @Data

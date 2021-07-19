@@ -29,7 +29,7 @@ import lombok.experimental.UtilityClass;
 /**
  * FileUtils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:36
  */
@@ -41,7 +41,7 @@ public class FileUtil {
 	 *
 	 * @param filepath 文件路径
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
 	public boolean existFile(String filepath) {
@@ -54,7 +54,7 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
 	public String getDirectoryPath(String path) {
@@ -67,7 +67,7 @@ public class FileUtil {
 	 *
 	 * @param cls 类型
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
 	public String getDirectoryPath(Class<?> cls) {
@@ -86,7 +86,7 @@ public class FileUtil {
 	 *
 	 * @param cls 类型
 	 * @return java.io.File
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
 	public File getJarFile(Class<?> cls) {
@@ -105,7 +105,7 @@ public class FileUtil {
 	//  *
 	//  * @param paths 路径列表
 	//  * @return java.lang.String
-	//  * @author dengtao
+	//  * @author shuigedeng
 	//  * @since 2020/10/15 15:03
 	//  * @version 1.0.0
 	//  */
@@ -124,7 +124,7 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return java.lang.Boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
 	public Boolean createDirectory(String path) {
@@ -144,7 +144,7 @@ public class FileUtil {
 	 *
 	 * @param path     文件路径
 	 * @param contents 内容
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
 	public static void appendAllText(String path, String contents) {
@@ -169,7 +169,7 @@ public class FileUtil {
 	 *
 	 * @param path     文件路径
 	 * @param contents 内容
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
 	public void writeAllText(String path, String contents) {
@@ -194,7 +194,7 @@ public class FileUtil {
 	 *
 	 * @param path 文件路径
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
 	public String readAllText(String path) {
@@ -221,7 +221,7 @@ public class FileUtil {
 	 * 获取行分隔符
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
 	public String lineSeparator() {
@@ -233,7 +233,7 @@ public class FileUtil {
 	 *
 	 * @param filePath 文件路径
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
 	public String getFileName(String filePath) {

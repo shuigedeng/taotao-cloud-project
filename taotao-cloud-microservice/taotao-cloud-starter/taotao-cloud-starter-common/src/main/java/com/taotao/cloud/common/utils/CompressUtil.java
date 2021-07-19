@@ -42,7 +42,7 @@ import org.apache.commons.compress.utils.IOUtils;
 /**
  * 压缩文件夹工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:45
  */

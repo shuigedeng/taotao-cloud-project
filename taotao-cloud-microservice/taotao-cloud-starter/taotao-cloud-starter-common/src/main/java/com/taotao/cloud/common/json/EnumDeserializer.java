@@ -35,7 +35,7 @@ import org.springframework.beans.BeanUtils;
  * 此反序列化类有bug，请使用 com.fasterxml.jackson.databind.deser.std.EnumDeserializer bug1： 不支持接收List<Enum>
  * bug2: 传错删除没有报错
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @see com.fasterxml.jackson.databind.deser.std.EnumDeserializer
  * @since 2021/6/22 17:27

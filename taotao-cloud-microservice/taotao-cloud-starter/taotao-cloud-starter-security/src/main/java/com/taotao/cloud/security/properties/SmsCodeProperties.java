@@ -21,7 +21,7 @@
 ///**
 // * 验证码配置
 // *
-// * @author dengtao
+// * @author shuigedeng
 // * @version 1.0.0
 // * @since 2020/5/2 11:20
 // */

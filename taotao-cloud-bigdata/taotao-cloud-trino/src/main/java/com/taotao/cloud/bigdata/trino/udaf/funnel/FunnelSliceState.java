@@ -23,7 +23,7 @@ import io.trino.spi.type.Type;
 /**
  * FunnelSliceState
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2021/1/25 下午3:57
  * @version 1.0.0
  */

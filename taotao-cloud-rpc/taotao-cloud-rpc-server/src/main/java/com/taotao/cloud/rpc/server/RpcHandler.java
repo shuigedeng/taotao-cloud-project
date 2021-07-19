@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.server
  * Date: 2020/2/27 14:40
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.server;
 
@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * rpc 核心处理器<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 14:40
  */
@@ -38,7 +38,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 * @param ctx     ctx
 	 * @param request request
 	 * @return void
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/2/27 14:42
 	 */
 	@Override
@@ -61,7 +61,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 *
 	 * @param request request
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/2/27 14:46
 	 */
 	private Object doRequestHandle(RpcRequest request) throws Throwable {

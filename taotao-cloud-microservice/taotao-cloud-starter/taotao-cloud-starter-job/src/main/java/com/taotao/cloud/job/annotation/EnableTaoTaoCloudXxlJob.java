@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Import;
 /**
  * 开启xxl job
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 07:47
  */

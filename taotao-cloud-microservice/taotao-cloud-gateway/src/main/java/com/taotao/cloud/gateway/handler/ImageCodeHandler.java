@@ -35,7 +35,7 @@ import reactor.core.publisher.Mono;
 /**
  * 图形验证码处理器
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 22:11
  */

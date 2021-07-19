@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * RabbitMQ配置类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/28 17:17
  */

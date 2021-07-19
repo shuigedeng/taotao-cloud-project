@@ -10,7 +10,7 @@
 // /**
 //  * 部门管理 服务类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 11:10
 //  */
 // public interface ISysDeptService {
@@ -20,7 +20,7 @@
 //      *
 //      * @param
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysDept>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:10
 //      */
 //     List<SysDept> selectDeptList();
@@ -30,7 +30,7 @@
 //      *
 //      * @param entity
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:10
 //      */
 //     boolean updateDeptById(DeptDTO entity);
@@ -40,7 +40,7 @@
 //      *
 //      * @param ids
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:11
 //      */
 //     boolean batchDeleteDeptByIds(List<Integer> ids);
@@ -50,7 +50,7 @@
 //      *
 //      * @param deptId
 //      * @return java.lang.String
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:11
 //      */
 //     String selectDeptNameByDeptId(int deptId);
@@ -60,7 +60,7 @@
 //      *
 //      * @param deptName
 //      * @return java.util.List<com.taotao.cloud.uc.api.entity.SysDept>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:11
 //      */
 //     List<SysDept> selectDeptListBydeptName(String deptName);
@@ -70,7 +70,7 @@
 //      *
 //      * @param deptId
 //      * @return java.util.List<java.lang.Integer>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:11
 //      */
 //     List<Integer> selectDeptIds(int deptId);
@@ -80,7 +80,7 @@
 //      *
 //      * @param
 //      * @return java.util.List<com.taotao.cloud.uc.api.vo.SysDeptTreeVo>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:11
 //      */
 //     List<SysDeptTreeVo> queryDepartTreeList();

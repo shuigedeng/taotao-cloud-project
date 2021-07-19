@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
 /**
  * 角色-资源DTO
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 10:44
  */
 @Data

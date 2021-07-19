@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分布式锁顶级接口
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
@@ -34,7 +34,7 @@ public interface DistributedLock {
 	 * @param unit      {@code leaseTime} 参数的时间单位
 	 * @param isFair    是否公平锁
 	 * @return com.taotao.cloud.core.lock.ZLock 锁对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:46
 	 */
 	ZLock lock(String key, long leaseTime, TimeUnit unit, boolean isFair) throws Exception;
@@ -59,7 +59,7 @@ public interface DistributedLock {
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
 	 * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
 	 * @return com.taotao.cloud.core.lock.ZLock 锁对象，如果获取锁失败则为null
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:47
 	 */
 	ZLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair)
@@ -83,7 +83,7 @@ public interface DistributedLock {
 	 * 释放锁
 	 *
 	 * @param lock 锁对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:47
 	 */
 	void unlock(Object lock) throws Exception;
@@ -92,7 +92,7 @@ public interface DistributedLock {
 	 * 释放锁
 	 *
 	 * @param zLock 锁抽象对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:47
 	 */
 	default void unlock(ZLock zLock) throws Exception {

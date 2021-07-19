@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 第三方用户信息管理API
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020-10-16 16:23:49
  * @since 1.0
  */

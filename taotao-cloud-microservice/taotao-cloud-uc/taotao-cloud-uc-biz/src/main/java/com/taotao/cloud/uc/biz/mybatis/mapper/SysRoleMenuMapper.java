@@ -20,7 +20,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 //      *
 //      * @param userId
 //      * @return java.util.List<java.lang.Integer>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/6/15 11:33
 //     */
 //     @Select("SELECT rm.menu_id " +

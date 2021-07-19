@@ -23,7 +23,7 @@ import com.taotao.cloud.common.base.CoreProperties;
 /**
  * TimeWatchUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:46
  */
@@ -35,7 +35,7 @@ public class TimeWatchUtil {
 	 * @param isPrint 是否打印
 	 * @param msg     消息
 	 * @param action0 action0
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:53
 	 */
 	public static void print(boolean isPrint, String msg, Callable.Action0 action0) {
@@ -52,7 +52,7 @@ public class TimeWatchUtil {
 	 * @param msg     消息
 	 * @param action0 action0
 	 * @return T 消息对象
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:54
 	 */
 	public static <T> T print(boolean isPrint, String msg, Callable.Func0<T> action0) {

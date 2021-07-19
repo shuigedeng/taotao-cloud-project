@@ -24,7 +24,7 @@ import org.springframework.core.annotation.Order;
 /**
  * 初始化TtlMDCAdapter实例，并替换MDC中的adapter对象
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:19
  */

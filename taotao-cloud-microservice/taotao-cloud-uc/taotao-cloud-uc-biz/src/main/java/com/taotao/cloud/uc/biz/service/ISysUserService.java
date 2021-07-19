@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 用户表 服务类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 13:20
  */
 public interface ISysUserService {
@@ -24,7 +24,7 @@ public interface ISysUserService {
 	 *
 	 * @param sysUser sysUser
 	 * @return com.taotao.cloud.uc.biz.entity.SysUser
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 15:27
 	 * @version 1.0.0
 	 */
@@ -35,7 +35,7 @@ public interface ISysUserService {
 	 *
 	 * @param id      id
 	 * @param userDTO userDTO
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/30 14:01
 	 * @version 1.0.0
 	 */
@@ -45,7 +45,7 @@ public interface ISysUserService {
 	 * 根据用户id删除用户
 	 *
 	 * @param id id
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/30 14:07
 	 * @version 1.0.0
 	 */
@@ -55,7 +55,7 @@ public interface ISysUserService {
 	 * 查询用户集合
 	 *
 	 * @param userQuery userListQuery
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/30 14:10
 	 * @version 1.0.0
 	 */
@@ -65,7 +65,7 @@ public interface ISysUserService {
 	 * 重置密码
 	 *
 	 * @param restPasswordDTO restPasswordDTO
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/30 14:22
 	 * @version 1.0.0
 	 */
@@ -75,7 +75,7 @@ public interface ISysUserService {
 	 * 根据用户id查询用户信息
 	 *
 	 * @param userId userId
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/30 14:36
 	 * @version 1.0.0
 	 */
@@ -86,7 +86,7 @@ public interface ISysUserService {
 	 *
 	 * @param userQuery userQuery
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.SysUserVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/14 21:40
 	 * @version 1.0.0
 	 */
@@ -97,7 +97,7 @@ public interface ISysUserService {
 	 *
 	 * @param userRoleDTO
 	 * @return java.lang.Boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/21 09:24
 	 * @version 1.0.0
 	 */
@@ -108,7 +108,7 @@ public interface ISysUserService {
 	 *
 	 * @param username
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/21 15:03
 	 * @version 1.0.0
 	 */
@@ -119,7 +119,7 @@ public interface ISysUserService {
 	 *
 	 * @param phone 手机
 	 * @return java.lang.Boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 15:22
 	 * @version 1.0.0
 	 */
@@ -130,7 +130,7 @@ public interface ISysUserService {
 	 *
 	 * @param id 用户id
 	 * @return java.lang.Boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 15:40
 	 * @version 1.0.0
 	 */

@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件上传抽象类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 07:47
  */

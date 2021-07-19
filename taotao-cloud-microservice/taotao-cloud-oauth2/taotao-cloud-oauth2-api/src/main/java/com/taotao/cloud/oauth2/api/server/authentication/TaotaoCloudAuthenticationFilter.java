@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
  * 3.封装成自己的Authentication的实现类SmsCodeAuthenticationToken（未认证）
  * 4.调用 AuthenticationManager 的 authenticate 方法进行验证（即MobileAuthenticationProvider
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 20:23
  * @version 1.0.0
  */

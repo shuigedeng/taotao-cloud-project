@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * SysApplicationService
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2021/03/12 16:28
  */

@@ -3,7 +3,7 @@
  * Package Name: com.taotao.cloud.reactive.uc.repository
  * Descroption:
  * Date: 2020/9/10 14:07
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.uc.repository;
 
@@ -13,7 +13,7 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 /**
  * 〈〉<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/9/10 14:07
  * @see

@@ -28,7 +28,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * ZookeeperConfiguration
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/3 下午3:16
  * @version 1.0.0
  */

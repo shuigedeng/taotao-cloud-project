@@ -20,7 +20,7 @@ import lombok.experimental.UtilityClass;
 /**
  * StringUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:42
  */
@@ -41,7 +41,7 @@ public class StringUtil {
 	 * @param str    字符串
 	 * @param maxlen 最大长度
 	 * @return java.lang.String 字符串
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:41
 	 */
 	public static String subString2(String str, int maxlen) {
@@ -60,7 +60,7 @@ public class StringUtil {
 	 * @param str    字符串
 	 * @param maxlen 最大长度
 	 * @return java.lang.String 字符串
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:41
 	 */
 	public static String subString3(String str, int maxlen) {

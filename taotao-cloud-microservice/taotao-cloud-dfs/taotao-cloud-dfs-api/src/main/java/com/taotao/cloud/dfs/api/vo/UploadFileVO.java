@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/12 17:10
  * @version 1.0.0
  */

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 索引服务
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 08:01
  */
@@ -35,7 +35,7 @@ public interface IIndexService {
 	 *
 	 * @param indexDto indexDto
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:57
 	 */
 	boolean create(IndexDto indexDto) throws IOException;
@@ -45,7 +45,7 @@ public interface IIndexService {
 	 *
 	 * @param indexName 索引名
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:57
 	 */
 	boolean delete(String indexName) throws IOException;
@@ -57,7 +57,7 @@ public interface IIndexService {
 	 * @param indices  默认显示的索引名
 	 * @return com.taotao.cloud.core.model.PageResult<java.util.HashMap < java.lang.String,
 		* java.lang.String>>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:58
 	 */
 	PageModel<HashMap<String, String>> list(String queryStr, String indices) throws IOException;
@@ -68,7 +68,7 @@ public interface IIndexService {
 	 *
 	 * @param indexName 索引名
 	 * @return java.util.Map<java.lang.String, java.lang.Object>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:58
 	 */
 	Map<String, Object> show(String indexName) throws IOException;

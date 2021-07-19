@@ -18,7 +18,7 @@ package com.taotao.cloud.data.mybatis.plus.enums;
 /**
  * 数据权限类型
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:40
  * @version 1.0.0
  */

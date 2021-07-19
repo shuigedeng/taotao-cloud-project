@@ -29,7 +29,7 @@
 // /**
 //  * 手机认证安全配置
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/29 20:26
 //  * @version 1.0.0
 //  */

@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * 继承了BaseEnum接口的枚举值，将会统一按照以下格式序列化 { "code": "XX", "desc": "xxx" }
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 16:45
  */

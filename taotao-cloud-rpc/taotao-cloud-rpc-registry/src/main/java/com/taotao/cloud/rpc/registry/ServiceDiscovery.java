@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.registry
  * Date: 2020/2/27 13:48
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.registry;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * client用于发现server节点的变化 并且实现负载均衡<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 13:48
  */
@@ -41,7 +41,7 @@ public class ServiceDiscovery {
      * 连接zk
      *
      * @return org.apache.zookeeper.ZooKeeper
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 14:01
      */
     private ZooKeeper connectZooKeeper() {
@@ -64,7 +64,7 @@ public class ServiceDiscovery {
      *
      * @param zk zk
      * @return void
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 14:01
      */
     private void watchNode(final ZooKeeper zk) {
@@ -92,7 +92,7 @@ public class ServiceDiscovery {
      * 服务发现
      *
      * @return java.lang.String
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/2/27 14:02
      */
     public String discover() {

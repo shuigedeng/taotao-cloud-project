@@ -21,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 随机工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:38
  */

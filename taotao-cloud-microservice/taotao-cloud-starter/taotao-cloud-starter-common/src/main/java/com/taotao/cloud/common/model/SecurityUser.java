@@ -29,7 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * 用户手机号和账号密码 身份权限认证类 登陆身份认证
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 17:52
  */

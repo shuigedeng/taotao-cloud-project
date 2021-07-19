@@ -29,7 +29,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * JStreamWordCount
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/3 09:07
  */

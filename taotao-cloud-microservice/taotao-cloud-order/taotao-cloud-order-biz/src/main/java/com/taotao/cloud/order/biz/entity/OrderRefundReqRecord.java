@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * 售后退款操作记录表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 15:49
  */
 @Data

@@ -22,7 +22,7 @@ import lombok.experimental.UtilityClass;
  * 如果发现当前时间少于上次生成id的时间(时间回拨)，着计算回拨的时间差 2. 如果时间差(offset)小于等于5ms，着等待 offset * 2 的时间再生成 3.
  * 如果offset大于5，则直接抛出异常
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2019/3/5
  */
@@ -35,7 +35,7 @@ public class IdGeneratorUtil {
 	 * 获取id
 	 *
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:18
 	 */
 	public long getId() {
@@ -46,7 +46,7 @@ public class IdGeneratorUtil {
 	 * 获取id 字符串
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:19
 	 */
 	public String getIdStr() {

@@ -3,7 +3,7 @@ package com.taotao.cloud.java.concurrent.jvm.demo;
 /**
  * TestDeadThread
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/3 下午6:49
  * @version 1.0.0
  */

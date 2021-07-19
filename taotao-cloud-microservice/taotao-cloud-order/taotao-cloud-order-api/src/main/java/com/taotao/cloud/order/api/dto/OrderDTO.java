@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/22 12:29
  * @version 1.0.0
  */

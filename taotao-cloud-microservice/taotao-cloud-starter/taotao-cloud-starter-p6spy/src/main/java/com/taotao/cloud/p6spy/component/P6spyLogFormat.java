@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 /**
  * P6spy SQL 日志格式化
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/14 09:37
  */

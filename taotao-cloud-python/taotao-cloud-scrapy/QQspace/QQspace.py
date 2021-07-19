@@ -12,7 +12,7 @@ driver.find_element_by_id('switcher_plogin').click()
 driver.find_element_by_name('u').clear()
 driver.find_element_by_name('u').send_keys('981376577')
 driver.find_element_by_name('p').clear()
-driver.find_element_by_name('p').send_keys('dengtao762762762')
+driver.find_element_by_name('p').send_keys('shuigedeng762762762')
 
 driver.execute_script("document.getElementById('login_button').parentNode.hidefocus=false;")
 driver.find_element_by_xpath('//*[@id="loginform"]/div[4]/a').click()

@@ -27,7 +27,7 @@ import org.apache.hadoop.mapreduce.Reducer;
  * <p>
  * KEYOUT是单词 VLAUEOUT是总次数
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:08
  */

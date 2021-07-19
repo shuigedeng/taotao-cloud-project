@@ -26,7 +26,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/11 14:42
  */
@@ -42,7 +42,7 @@ public interface DictMapper {
 	 *
 	 * @param dictDTO dictDTO
 	 * @return com.taotao.cloud.uc.biz.entity.SysDict
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 14:52
 	 */
 	SysDict dictDTOToSysDict(DictDTO dictDTO);
@@ -52,7 +52,7 @@ public interface DictMapper {
 	 *
 	 * @param dictList userList
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 15:00
 	 */
 	List<DictVO> sysDictToDictVO(List<SysDict> dictList);
@@ -62,7 +62,7 @@ public interface DictMapper {
 	 *
 	 * @param sysDict sysDict
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 14:47
 	 */
 	DictVO SysDictToDictVO(SysDict sysDict);
@@ -72,7 +72,7 @@ public interface DictMapper {
 	 *
 	 * @param dictDTO dictDTO
 	 * @param dict    dict
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 16:59
 	 */
 	void copyDictDtoToSysDict(DictDTO dictDTO, @MappingTarget SysDict dict);

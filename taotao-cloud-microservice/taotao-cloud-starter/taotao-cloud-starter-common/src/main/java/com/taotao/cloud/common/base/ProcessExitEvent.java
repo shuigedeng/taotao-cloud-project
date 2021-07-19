@@ -27,7 +27,7 @@ import lombok.Data;
 /**
  * 全局进程关闭事件定义
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:09
  **/

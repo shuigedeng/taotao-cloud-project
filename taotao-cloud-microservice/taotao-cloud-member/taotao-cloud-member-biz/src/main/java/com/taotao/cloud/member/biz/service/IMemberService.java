@@ -7,7 +7,7 @@ import com.taotao.cloud.member.biz.entity.Member;
 /**
  * 会员(c端用户)表服务接口
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020-10-16 16:23:49
  * @since 1.0
  */
@@ -18,7 +18,7 @@ public interface IMemberService {
 	 *
 	 * @param memberQuery memberQuery
 	 * @return com.taotao.cloud.uc.biz.entity.MemberUser
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/16 17:58
 	 * @version 1.0.0
 	 */
@@ -29,7 +29,7 @@ public interface IMemberService {
 	 *
 	 * @param memberDTO memberDTO
 	 * @return java.lang.Boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/19 09:01
 	 * @version 1.0.0
 	 */
@@ -40,7 +40,7 @@ public interface IMemberService {
 	 *
 	 * @param nicknameOrUserNameOrPhoneOrEmail nicknameOrUserNameOrPhoneOrEmail
 	 * @return com.taotao.cloud.uc.biz.entity.MemberUser
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/19 09:15
 	 * @version 1.0.0
 	 */
@@ -51,7 +51,7 @@ public interface IMemberService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.member.biz.entity.Member
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 下午4:17
 	 * @version 1.0.0
 	 */

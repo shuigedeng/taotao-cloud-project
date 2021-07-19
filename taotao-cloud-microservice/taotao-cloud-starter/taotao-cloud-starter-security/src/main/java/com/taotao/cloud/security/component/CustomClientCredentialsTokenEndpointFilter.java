@@ -31,7 +31,7 @@
 //  * Description: 自定义的 {@link ClientCredentialsTokenEndpointFilter}<br>
 //  * Details: 为了使用自定义的 {@link AuthenticationEntryPoint}, 从而自定义发生异常时的响应格式
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/9/29 16:08
 //  * @version 1.0.0
 //  */

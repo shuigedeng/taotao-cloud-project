@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * 远程调用会员用户模块
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteMemberService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteMemberFallbackImpl.class)
@@ -23,7 +23,7 @@ public interface RemoteMemberService {
 	 *
 	 * @param nicknameOrUserNameOrPhoneOrEmail 用户名
 	 * @return com.taotao.cloud.common.model.Result<com.taotao.cloud.uc.api.dto.UserDetailsInfo>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/29 17:48
 	 */
 	@GetMapping(value = "/member/info/security")
@@ -34,7 +34,7 @@ public interface RemoteMemberService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.member.api.vo.MemberVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 下午4:10
 	 * @version 1.0.0
 	 */

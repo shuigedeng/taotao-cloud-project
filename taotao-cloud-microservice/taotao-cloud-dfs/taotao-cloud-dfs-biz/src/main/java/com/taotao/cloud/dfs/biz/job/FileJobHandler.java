@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.cloud.uc.biz.job
  * Date: 2020/6/16 14:43
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.dfs.biz.job;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @since 2020/6/16 14:43
  */

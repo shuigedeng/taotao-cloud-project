@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 /**
  * 在验证过程中发生异常会触发此类事件
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 21:23
  * @version 1.0.0
  */

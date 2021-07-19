@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * CustomStorm
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @date 2019-07-01 14:03
  */
@@ -46,7 +46,7 @@ public class CustomStorm {
 	 *
 	 * @return void
 	 * @throws
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @link
 	 * @version v1.0.0
 	 * @since 2019-07-01 14:06
@@ -72,7 +72,7 @@ public class CustomStorm {
 	 * 用来切割句子
 	 *
 	 * @param sentence 句子
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2019-07-01 14:06
 	 */
 	public void split(String sentence) {
@@ -96,7 +96,7 @@ public class CustomStorm {
 	 * @param word word
 	 * @return void
 	 * @throws
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @link
 	 * @version v1.0.0
 	 * @since 2019-07-01 14:07

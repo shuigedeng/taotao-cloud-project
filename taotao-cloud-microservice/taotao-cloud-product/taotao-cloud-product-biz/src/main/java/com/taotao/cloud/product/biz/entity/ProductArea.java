@@ -15,7 +15,7 @@ import javax.persistence.Table;
 /**
  * 商品销售范围表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 16:04
  */
 @Data

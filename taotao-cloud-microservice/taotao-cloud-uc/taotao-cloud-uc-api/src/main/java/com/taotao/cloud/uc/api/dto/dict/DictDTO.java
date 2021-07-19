@@ -28,7 +28,7 @@ import java.io.Serializable;
 /**
  * 添加字典实体对象
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */

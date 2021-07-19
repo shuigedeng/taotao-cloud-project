@@ -20,7 +20,7 @@ package com.taotao.cloud.core.endpoint;
  * <p>
  * 名字必须要用 MBean 结尾
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2021/04/08 14:50
  */

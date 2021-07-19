@@ -7,7 +7,7 @@ package com.taotao.cloud.uc.biz.mybatis.mapper;// package com.taotao.cloud.uc.bi
 // /**
 //  * SysDictItemMapper
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 11:25
 //  */
 // public interface SysDictItemMapper extends SuperMapper<SysDictItem> {

@@ -58,7 +58,7 @@ import java.util.Map;
 /**
  * RedisTokensServiceImpl
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 16:03
  * @version 1.0.0
  */
@@ -177,7 +177,7 @@ public class RedisTokensServiceImpl implements ITokensService {
 	 * @param params   params
 	 * @param clientId clientId
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/29 16:03
 	 */
 	private String getRedisKey(Map<String, Object> params, String clientId) {

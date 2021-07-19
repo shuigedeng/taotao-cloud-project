@@ -12,7 +12,7 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 // /**
 //  * 社交实体类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/5/2 16:42
 //  */
 // @Data

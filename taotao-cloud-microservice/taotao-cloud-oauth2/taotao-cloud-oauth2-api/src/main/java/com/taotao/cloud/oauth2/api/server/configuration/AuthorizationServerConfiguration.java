@@ -53,7 +53,7 @@ import java.util.Objects;
 /**
  * 授权服务器 主要是配置客户端信息和认证信息
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 20:01
  * @version 1.0.0
  */
@@ -75,7 +75,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 * 客户端详情信息写死在这里或者是通过数据库来存储调取详情信息。
 	 *
 	 * @param clients clients
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/29 20:01
 	 */
 	@Override
@@ -87,7 +87,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 * 用来配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services),告诉spring security token的生成方式。
 	 *
 	 * @param endpoints endpoints
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/29 20:08
 	 */
 	@Override
@@ -162,7 +162,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	 * 用来配置令牌端点(Token Endpoint)的安全约束.
 	 *
 	 * @param securityConfigurer securityConfigurer
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/29 20:12
 	 */
 	@Override

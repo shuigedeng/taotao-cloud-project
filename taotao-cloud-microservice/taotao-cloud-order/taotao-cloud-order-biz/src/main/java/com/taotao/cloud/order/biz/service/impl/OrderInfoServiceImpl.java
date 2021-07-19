@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.cloud.order.biz.service.impl
  * Date: 2020/6/10 16:55
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.order.biz.service.impl;
 
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/6/10 16:55
  */

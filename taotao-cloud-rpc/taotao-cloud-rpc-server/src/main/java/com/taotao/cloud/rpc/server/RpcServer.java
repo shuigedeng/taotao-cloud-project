@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.server
  * Date: 2020/2/27 14:06
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.server;
 
@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * rpc 核心处理器<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 14:06
  */

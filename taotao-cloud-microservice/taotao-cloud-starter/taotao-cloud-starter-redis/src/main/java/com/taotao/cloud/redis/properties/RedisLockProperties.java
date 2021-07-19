@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * CacheManagerProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:16
  */

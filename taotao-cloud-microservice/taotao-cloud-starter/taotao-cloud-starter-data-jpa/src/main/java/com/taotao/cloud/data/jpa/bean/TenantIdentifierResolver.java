@@ -22,7 +22,7 @@
 // /**
 //  * jpa 多租户识别解析器
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/9/28 17:29
 //  * @version 1.0.0.0
 //  */

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 /**
  * 字典项表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:42
  */
 @Data

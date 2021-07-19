@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * 扩展properties工具类 来源于网络
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:10
  */

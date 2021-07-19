@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * service接口父类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 10:27
  * @version 1.0.0
  */

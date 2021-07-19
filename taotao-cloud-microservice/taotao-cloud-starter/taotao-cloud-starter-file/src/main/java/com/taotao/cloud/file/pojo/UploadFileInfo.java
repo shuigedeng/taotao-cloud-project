@@ -20,7 +20,7 @@ import lombok.Data;
 /**
  * file实体类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/12 15:54
  */

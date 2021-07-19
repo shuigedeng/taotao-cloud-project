@@ -18,7 +18,7 @@ package com.taotao.cloud.log.biz.service;
 import com.taotao.cloud.log.biz.entity.MemberLogin;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:59
  * @version 1.0.0
  */
@@ -29,7 +29,7 @@ public interface IMemberLoginService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.log.biz.entity.MemberLogin
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 下午1:08
 	 * @version 1.0.0
 	 */

@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/25 下午4:59
  */

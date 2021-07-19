@@ -25,7 +25,7 @@
 // /**
 //  * OpenId认证提供者
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/29 21:24
 //  * @version 1.0.0
 //  */

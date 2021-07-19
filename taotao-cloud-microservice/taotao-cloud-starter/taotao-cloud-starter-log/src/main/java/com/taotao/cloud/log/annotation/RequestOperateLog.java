@@ -20,7 +20,7 @@ import java.lang.annotation.*;
 /**
  * 系统操作记录
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/3 13:32
  */

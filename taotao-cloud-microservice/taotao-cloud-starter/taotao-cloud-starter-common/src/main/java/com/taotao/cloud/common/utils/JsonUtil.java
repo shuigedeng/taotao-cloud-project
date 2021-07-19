@@ -45,7 +45,7 @@ import lombok.experimental.UtilityClass;
 /**
  * 基于 Jackson 的 json 工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2019/3/5
  */
@@ -100,7 +100,7 @@ public class JsonUtil {
 	 *
 	 * @param o 要转换的对象
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:21
 	 */
 	public static String toJSONString(Object o) {
@@ -113,7 +113,7 @@ public class JsonUtil {
 	 * @param o      要转换的对象
 	 * @param format 是否格式化json
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:21
 	 */
 	public static String toJSONString(Object o, boolean format) {
@@ -142,7 +142,7 @@ public class JsonUtil {
 	 * @param json json字符串
 	 * @param cls  目标对象
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, Class<T> cls) {
@@ -163,7 +163,7 @@ public class JsonUtil {
 	 * @param parametrized     目标对象
 	 * @param parameterClasses 泛型对象
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, Class<?> parametrized, Class<?>... parameterClasses) {
@@ -185,7 +185,7 @@ public class JsonUtil {
 	 * @param json          json字符串
 	 * @param typeReference 目标对象类型
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <T> T toObject(String json, TypeReference<T> typeReference) {
@@ -204,7 +204,7 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static JsonNode parse(String json) {
@@ -223,7 +223,7 @@ public class JsonUtil {
 	 *
 	 * @param o 要转换的对象
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <K, V> Map<K, V> toMap(Object o) {
@@ -241,7 +241,7 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <T> List<T> toList(String json) {
@@ -261,7 +261,7 @@ public class JsonUtil {
 	 * @param json json字符串
 	 * @param cls  list的元素类型
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:22
 	 */
 	public static <T> List<T> toList(String json, Class<T> cls) {

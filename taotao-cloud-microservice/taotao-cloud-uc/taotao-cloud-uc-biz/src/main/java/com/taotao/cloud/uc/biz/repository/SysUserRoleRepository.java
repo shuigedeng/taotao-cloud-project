@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 /**
  * 用户-角色第三方表Repository
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/9/29 18:02
  * @version 1.0.0
  */

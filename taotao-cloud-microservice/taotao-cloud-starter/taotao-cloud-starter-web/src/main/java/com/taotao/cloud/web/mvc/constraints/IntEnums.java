@@ -27,7 +27,7 @@ import javax.validation.Payload;
 /**
  * IntEnums
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/14 13:39
  */

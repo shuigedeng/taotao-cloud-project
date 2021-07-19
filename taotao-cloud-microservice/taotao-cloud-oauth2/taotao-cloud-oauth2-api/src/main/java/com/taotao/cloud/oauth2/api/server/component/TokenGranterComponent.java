@@ -70,7 +70,7 @@ import java.util.Set;
  * }
  * </pre>
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020-06-23 14:52
  * @see CompositeTokenGranter
  * @version 1.0.0
@@ -87,7 +87,7 @@ public class TokenGranterComponent implements TokenGranter {
      *
      * @param configurer            {@link AuthorizationServerEndpointsConfigurer}
      * @param authenticationManager {@link AuthenticationManager}, grantType 为 password 时需要
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020-06-23 15:28:24
      */
     public TokenGranterComponent(AuthorizationServerEndpointsConfigurer configurer, AuthenticationManager authenticationManager) {

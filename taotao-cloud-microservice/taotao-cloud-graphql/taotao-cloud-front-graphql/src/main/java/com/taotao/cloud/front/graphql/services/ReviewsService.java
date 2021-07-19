@@ -18,7 +18,7 @@ package com.taotao.cloud.front.graphql.services;
 /**
  * ReviewsService
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2021/02/19 13:48
  */

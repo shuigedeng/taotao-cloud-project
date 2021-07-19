@@ -21,7 +21,7 @@ import java.io.Serializable;
 /**
  * 基础异常
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/13 10:56
  */

@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * 授权控制器<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/7/24 17:05
  * @version 1.0.0
  */

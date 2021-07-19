@@ -22,7 +22,7 @@ import lombok.experimental.UtilityClass;
 /**
  * ClassPoolUtils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:33
  */
@@ -35,7 +35,7 @@ public class ClassPoolUtil {
 	 * 获取对象池
 	 *
 	 * @return javassist.ClassPool
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:12
 	 */
 	public ClassPool getInstance() {

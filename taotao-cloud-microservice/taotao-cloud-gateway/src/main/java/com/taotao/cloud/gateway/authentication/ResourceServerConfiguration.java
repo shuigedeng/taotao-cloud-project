@@ -36,7 +36,7 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 /**
  * ResourceServerConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/06/18 14:41
  */

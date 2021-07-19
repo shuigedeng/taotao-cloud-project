@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * Oauth2UserServiceComponent
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/15 14:21
  * @version 1.0.0
  */

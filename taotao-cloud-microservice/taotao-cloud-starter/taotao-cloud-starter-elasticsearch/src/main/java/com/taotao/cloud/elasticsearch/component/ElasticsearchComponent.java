@@ -38,7 +38,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 /**
  * es配置类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 06:47
  */
@@ -68,7 +68,7 @@ public class ElasticsearchComponent implements InitializingBean {
 	 *
 	 * @param builder        builder
 	 * @param poolProperties poolProperties
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:53
 	 */
 	private void setRequestConfig(RestClientBuilder builder,
@@ -87,7 +87,7 @@ public class ElasticsearchComponent implements InitializingBean {
 	 *
 	 * @param builder        builder
 	 * @param poolProperties poolProperties
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:53
 	 */
 	private void setHttpClientConfig(RestClientBuilder builder,

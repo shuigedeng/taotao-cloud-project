@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * HttpsConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2021/2/1 下午1:53
  * @version 1.0.0
  */

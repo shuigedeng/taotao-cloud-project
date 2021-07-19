@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * ISysDictItemService
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 11:25
  */
 public interface ISysDictItemService {
@@ -22,7 +22,7 @@ public interface ISysDictItemService {
      * 根据字典id删除字典项
      *
      * @param dictId dictId
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/9/30 11:29
      * @version 1.0.0
      */
@@ -32,7 +32,7 @@ public interface ISysDictItemService {
      * 添加字典项详情
      *
      * @param dictItemDTO dictItemDTO
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/9/30 12:37
      * @version 1.0.0
      */
@@ -43,7 +43,7 @@ public interface ISysDictItemService {
      *
      * @param id          id
      * @param dictItemDTO dictItemDTO
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/9/30 12:40
      * @version 1.0.0
      */
@@ -53,7 +53,7 @@ public interface ISysDictItemService {
      * 根据id删除字典项详情
      *
      * @param id id
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/9/30 12:44
      * @version 1.0.0
      */
@@ -63,7 +63,7 @@ public interface ISysDictItemService {
      * 分页查询字典详情内容
      *
      * @param dictItemPageQuery dictItemQuery
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/9/30 12:48
      * @version 1.0.0
      */
@@ -74,7 +74,7 @@ public interface ISysDictItemService {
      *
      * @param dictItemQuery dictItemQuery
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysDictItem>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 11:02
      * @version 1.0.0
      */

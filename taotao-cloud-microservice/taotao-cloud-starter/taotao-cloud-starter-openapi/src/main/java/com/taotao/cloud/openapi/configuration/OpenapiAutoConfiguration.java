@@ -42,7 +42,7 @@ import org.springframework.core.env.Environment;
 /**
  * SwaggerAutoConfiguration
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:10
  */
@@ -361,7 +361,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 //	 * @param globalOperationParameters globalOperationParameters
 //	 * @param docketOperationParameters docketOperationParameters
 //	 * @return java.util.List<springfox.documentation.service.Parameter>
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/4/30 10:10
 //	 */
 //	private List<Parameter> assemblyGlobalOperationParameters(

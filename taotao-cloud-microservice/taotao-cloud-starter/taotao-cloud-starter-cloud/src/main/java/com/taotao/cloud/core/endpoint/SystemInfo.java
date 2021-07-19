@@ -20,7 +20,7 @@ import org.springframework.boot.actuate.endpoint.jmx.annotation.JmxEndpoint;
 /**
  * SystemInfo
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/04/08 14:51
  */

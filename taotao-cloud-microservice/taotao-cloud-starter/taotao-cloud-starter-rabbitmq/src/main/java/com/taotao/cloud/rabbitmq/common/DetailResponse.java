@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 /**
  * DetailResponse
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/28 17:28
  */

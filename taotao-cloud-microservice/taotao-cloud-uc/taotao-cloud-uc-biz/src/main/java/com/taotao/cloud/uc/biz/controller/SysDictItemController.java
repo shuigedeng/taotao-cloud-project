@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 字典项管理API
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 11:21
  */
 @Validated

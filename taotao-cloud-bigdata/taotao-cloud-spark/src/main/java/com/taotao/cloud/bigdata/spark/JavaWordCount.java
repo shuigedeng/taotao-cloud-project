@@ -26,7 +26,7 @@ import java.util.Arrays;
 /**
  * 1.本地运行 本地数据参数
  * <p>
- * ----	 /Users/dengtao/spark/input /Users/dengtao/spark/input
+ * ----	 /Users/shuigedeng/spark/input /Users/shuigedeng/spark/input
  * <p>
  * 2.本地运行 hadoop数据参数
  * <p>
@@ -39,7 +39,7 @@ import java.util.Arrays;
  * \ hdfs://127.0.0.1/spark/wordcount/input \ hdfs://127.0.0.1/spark/wordcount/output
  * <p>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 上午9:35
  */
@@ -52,7 +52,7 @@ public class JavaWordCount {
 
 		JavaSparkContext jsc = new JavaSparkContext(javaWordCount);
 
-		JavaPairRDD<String, Integer> counts = jsc.textFile("/Users/dengtao/spark/input")
+		JavaPairRDD<String, Integer> counts = jsc.textFile("/Users/shuigedeng/spark/input")
 			.flatMap(lines -> Arrays.asList(lines.split(" ")).iterator())
 			.mapToPair(new PairFunction<String, String, Integer>() {
 				@Override
@@ -73,7 +73,7 @@ public class JavaWordCount {
 			})
 			.sortByKey(false);
 
-		sorts.saveAsTextFile("/Users/dengtao/spark/output");
+		sorts.saveAsTextFile("/Users/shuigedeng/spark/output");
 
 		Thread.sleep(Long.MAX_VALUE);
 

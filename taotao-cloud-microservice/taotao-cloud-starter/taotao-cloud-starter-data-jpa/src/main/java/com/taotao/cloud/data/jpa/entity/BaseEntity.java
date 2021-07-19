@@ -40,7 +40,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 /**
  * 基础实体类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/28 16:28
  */

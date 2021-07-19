@@ -31,7 +31,7 @@ import reactor.core.publisher.Mono;
 /**
  * 认证成功处理类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 22:10
  * @version 1.0.0
  */

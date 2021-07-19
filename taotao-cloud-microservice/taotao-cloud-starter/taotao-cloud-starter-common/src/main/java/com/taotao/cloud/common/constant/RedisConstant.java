@@ -18,7 +18,7 @@ package com.taotao.cloud.common.constant;
 /**
  * RedisConstant
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/04/06 14:11
  */

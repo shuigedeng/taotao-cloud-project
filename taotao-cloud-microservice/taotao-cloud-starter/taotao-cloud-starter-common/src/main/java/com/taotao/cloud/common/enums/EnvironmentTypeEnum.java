@@ -18,7 +18,7 @@ package com.taotao.cloud.common.enums;
 /**
  * EnvironmentTypeEnum
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:27
  **/

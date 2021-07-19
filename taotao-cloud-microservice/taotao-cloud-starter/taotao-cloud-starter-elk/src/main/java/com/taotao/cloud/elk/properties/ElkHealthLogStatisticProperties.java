@@ -23,7 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * ElkHealthLogStatisticProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/3 10:43
  */

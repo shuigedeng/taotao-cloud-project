@@ -21,7 +21,7 @@ import lombok.Data;
 /**
  * 日志
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/15 11:00
  */

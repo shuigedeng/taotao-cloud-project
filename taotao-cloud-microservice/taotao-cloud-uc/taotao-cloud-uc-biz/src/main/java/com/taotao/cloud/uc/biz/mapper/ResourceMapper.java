@@ -27,7 +27,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/11 16:58
  * @version 1.0.0
  */
@@ -43,7 +43,7 @@ public interface ResourceMapper {
 	 *
 	 * @param resourceDTO resourceDTO
 	 * @return com.taotao.cloud.uc.biz.entity.SysResource
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 17:21
 	 * @version 1.0.0
 	 */
@@ -54,7 +54,7 @@ public interface ResourceMapper {
 	 *
 	 * @param sysResource sysResource
 	 * @return com.taotao.cloud.uc.api.vo.resource.ResourceVO
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 17:25
 	 * @version 1.0.0
 	 */
@@ -65,7 +65,7 @@ public interface ResourceMapper {
 	 *
 	 * @param resourceList userList
 	 * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 15:00
 	 * @version 1.0.0
 	 */
@@ -77,7 +77,7 @@ public interface ResourceMapper {
 	 * @param resourceDTO resourceDTO
 	 * @param sysResource sysResource
 	 * @return void
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 16:59
 	 * @version 1.0.0
 	 */

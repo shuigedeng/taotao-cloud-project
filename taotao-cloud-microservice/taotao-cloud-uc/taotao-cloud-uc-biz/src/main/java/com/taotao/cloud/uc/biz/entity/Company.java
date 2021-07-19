@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 /**
  * 公司表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/16 13:43
  * @version 1.0.0
  */

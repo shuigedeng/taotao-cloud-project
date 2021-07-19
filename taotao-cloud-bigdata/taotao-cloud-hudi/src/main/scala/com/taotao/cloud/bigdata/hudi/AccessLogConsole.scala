@@ -26,7 +26,7 @@ import org.slf4j.{Logger, LoggerFactory}
  *
  * -e dev -b host:9092 -t taotao-cloud-sys-log -m 0
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/27 下午3:06
  * @version 1.0.0
  */

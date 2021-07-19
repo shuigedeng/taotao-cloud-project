@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * 用户注册VO
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 10:44
  */
 @Data

@@ -34,7 +34,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * 消息生产者
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/28 17:18
  */

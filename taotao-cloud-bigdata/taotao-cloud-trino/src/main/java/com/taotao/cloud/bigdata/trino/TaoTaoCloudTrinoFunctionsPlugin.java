@@ -35,7 +35,7 @@ import java.util.Set;
  * <p>
  * ${TRINO_HOME}/bin/launcher restart
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 17:37
  */

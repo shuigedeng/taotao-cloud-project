@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * http请求操作类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @link https://bbs.huaweicloud.com/blogs/104013
  * @since 2020/6/2 16:39

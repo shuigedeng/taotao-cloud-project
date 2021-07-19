@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 异步任务Properties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/7/24 08:22
  */

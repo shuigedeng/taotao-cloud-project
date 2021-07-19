@@ -20,7 +20,7 @@ import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, createT
 /**
  * SBatchWordCount
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/3 09:05
  * @version 1.0.0
  */
@@ -29,7 +29,7 @@ object SBatchWordCount {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
 
-    val lines = env.readTextFile("/Users/dengtao/spark/hello.txt")
+    val lines = env.readTextFile("/Users/shuigedeng/spark/hello.txt")
 
     lines.flatMap(_.split(" "))
       .map((_, 1))

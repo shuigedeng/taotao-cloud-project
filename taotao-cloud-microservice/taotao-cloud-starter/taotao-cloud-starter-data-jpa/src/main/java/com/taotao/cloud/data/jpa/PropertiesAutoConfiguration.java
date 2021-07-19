@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * jpa 属性自动注入配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */

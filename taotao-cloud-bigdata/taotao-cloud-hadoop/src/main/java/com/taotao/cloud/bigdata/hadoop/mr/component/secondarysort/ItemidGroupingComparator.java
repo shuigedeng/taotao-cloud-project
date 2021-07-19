@@ -21,7 +21,7 @@ import org.apache.hadoop.io.WritableComparator;
 /**
  * 利用reduce端的GroupingComparator来实现将一组bean看成相同的key
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:33
  */

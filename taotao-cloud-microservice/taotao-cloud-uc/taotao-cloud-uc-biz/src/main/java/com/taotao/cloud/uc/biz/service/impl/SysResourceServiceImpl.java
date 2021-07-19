@@ -42,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 资源表服务实现类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020-10-16 16:23:05
  * @since 1.0
  */
@@ -157,7 +157,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	 * @param pidList 初始化的父级ID
 	 * @param sumList 保存的全部ID
 	 * @return java.util.List<java.lang.Long>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/11 16:48
 	 * @version 1.0.0
 	 */
@@ -223,7 +223,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 //			.amount(BigDecimal.ZERO)
 //			.mainStatus(1)
 //			.childStatus(1)
-//			.receiverName("dengtao")
+//			.receiverName("shuigedeng")
 //			.receiverPhone("15730445330")
 //			.receiverAddressJson("sjdlasjdfljsldf")
 //			.build();

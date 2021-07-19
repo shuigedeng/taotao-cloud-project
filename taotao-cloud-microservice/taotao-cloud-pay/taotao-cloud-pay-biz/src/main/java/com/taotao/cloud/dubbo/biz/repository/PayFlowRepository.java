@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 10:01
  * @version 1.0.0
  */

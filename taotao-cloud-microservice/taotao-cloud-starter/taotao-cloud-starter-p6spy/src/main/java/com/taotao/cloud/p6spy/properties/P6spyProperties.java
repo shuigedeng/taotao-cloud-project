@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * P6spyProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/14 09:11
  */

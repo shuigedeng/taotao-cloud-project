@@ -32,7 +32,7 @@ import io.trino.spi.type.StandardTypes;
  * <p>
  * taotao_cloud_funnel_merge(user_depth, 4)
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/1/25 下午3:52
  */

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 /**
  * 校验器：利用正则表达式校验邮箱、手机号等
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:49
  */
@@ -71,7 +71,7 @@ public final class ValidatorUtil {
 	 *
 	 * @param username 用户名
 	 * @return boolean 校验通过返回true，否则返回false
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:49
 	 */
 	public static boolean isUserName(String username) {
@@ -83,7 +83,7 @@ public final class ValidatorUtil {
 	 *
 	 * @param password 密码
 	 * @return boolean 校验通过返回true，否则返回false
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:55
 	 */
 	public static boolean isPassword(String password) {
@@ -95,7 +95,7 @@ public final class ValidatorUtil {
 	 *
 	 * @param phone 手机号
 	 * @return boolean 是否校验成功
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:50
 	 */
 	public static boolean checkPhone(String phone) {

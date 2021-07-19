@@ -28,7 +28,7 @@
 //import org.springframework.stereotype.Component;
 //
 ///**
-// * @author dengtao
+// * @author shuigedeng
 // * @version 1.0.0
 // * @since 2020/10/30 17:43
 // */
@@ -44,7 +44,7 @@
 //	 * 获取HDFS配置信息
 //	 *
 //	 * @return org.apache.hadoop.conf.Configuration
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/11/26 下午8:11
 //	 */
 //	public static Configuration getConfiguration() {

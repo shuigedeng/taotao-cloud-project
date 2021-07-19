@@ -34,7 +34,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * 1002	20150710	P0002	3 1003	20150710	P0003	3 product.txt(商品编号, 商品名字, 价格, 数量) P0001	小米5	1001	2
  * P0002	锤子T1	1000	3 P0003	锤子	1002	4
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:30
  */

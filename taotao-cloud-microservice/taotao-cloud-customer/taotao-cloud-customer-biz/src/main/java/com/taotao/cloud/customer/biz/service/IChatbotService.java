@@ -18,7 +18,7 @@ package com.taotao.cloud.customer.biz.service;
 import com.taotao.cloud.customer.biz.entity.Chatbot;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:59
  * @version 1.0.0
  */
@@ -28,7 +28,7 @@ public interface IChatbotService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.customer.biz.entity.Chatbot
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 上午10:42
 	 * @version 1.0.0
 	 */

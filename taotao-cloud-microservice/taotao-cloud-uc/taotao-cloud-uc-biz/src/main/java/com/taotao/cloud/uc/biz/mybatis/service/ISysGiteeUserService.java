@@ -24,7 +24,7 @@
 //      *
 //      * @param sysGiteeUser
 //      * @return java.lang.Boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/5/22 13:10
 //     */
 //     Boolean add(SysGiteeUser sysGiteeUser);

@@ -19,7 +19,7 @@ import com.taotao.cloud.file.constant.UploadFileConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */

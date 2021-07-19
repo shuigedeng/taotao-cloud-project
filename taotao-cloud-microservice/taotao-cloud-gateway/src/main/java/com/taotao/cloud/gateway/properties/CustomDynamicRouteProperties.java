@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 动态路由配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 11:15
  * @version 1.0.0
  */

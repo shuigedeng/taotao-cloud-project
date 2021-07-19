@@ -21,7 +21,7 @@ import com.taotao.cloud.common.lock.DistributedLock;
 /**
  * service接口父类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:27
  */
@@ -36,7 +36,7 @@ public interface ISuperService<T> {
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:18
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
@@ -50,7 +50,7 @@ public interface ISuperService<T> {
 	 * @param lockKey   锁的key
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:18
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
@@ -64,7 +64,7 @@ public interface ISuperService<T> {
 	 * @param predicate 判断是否存在的条件
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:18
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
@@ -78,7 +78,7 @@ public interface ISuperService<T> {
 	 * @param lockKey   锁的keyø
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 17:18
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,

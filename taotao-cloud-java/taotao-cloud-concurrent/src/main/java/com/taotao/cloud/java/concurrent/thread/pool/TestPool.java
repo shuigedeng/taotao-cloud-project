@@ -22,9 +22,9 @@ public class TestPool {
 
         //用来记录各线程的返回结果
         // TODO: 2018/5/4
-        // dengtao: hello
-        // dengtao:
-        // dengtao: hellosadflkjslf
+        // shuigedeng: hello
+        // shuigedeng:
+        // shuigedeng: hellosadflkjslf
 
         ArrayList<Future<?>> results = new ArrayList<Future<?>>();
 

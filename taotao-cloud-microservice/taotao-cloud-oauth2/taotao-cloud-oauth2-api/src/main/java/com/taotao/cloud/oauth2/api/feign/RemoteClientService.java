@@ -22,7 +22,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 远程调用客户端
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:42
  * @version 1.0.0
  */

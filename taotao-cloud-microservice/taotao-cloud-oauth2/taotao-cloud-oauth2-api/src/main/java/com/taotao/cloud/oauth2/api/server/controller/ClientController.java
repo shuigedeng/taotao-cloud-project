@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * 应用管理API
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 15:10
  * @version 1.0.0
  */

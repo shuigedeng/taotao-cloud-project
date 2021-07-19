@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.client
  * Date: 2020/2/27 15:14
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.client;
 
@@ -24,7 +24,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 /**
  * client<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 15:14
  */
@@ -45,7 +45,7 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
 	 *
 	 * @param request request
 	 * @return com.taotao.rpc.common.RpcReponse
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/2/27 15:19
 	 */
 	public RpcReponse send(RpcRequest request) throws Exception {

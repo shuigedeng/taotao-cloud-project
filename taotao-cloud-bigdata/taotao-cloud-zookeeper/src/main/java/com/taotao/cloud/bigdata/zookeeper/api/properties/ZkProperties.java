@@ -22,7 +22,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * RestTemplate 配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2017/11/17
  * @version 1.0.0
  */

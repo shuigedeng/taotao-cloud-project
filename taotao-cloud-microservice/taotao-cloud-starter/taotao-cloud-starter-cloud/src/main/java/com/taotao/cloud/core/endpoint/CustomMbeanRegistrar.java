@@ -29,7 +29,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * CustomMbeanRegistrar
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/04/08 15:11
  */

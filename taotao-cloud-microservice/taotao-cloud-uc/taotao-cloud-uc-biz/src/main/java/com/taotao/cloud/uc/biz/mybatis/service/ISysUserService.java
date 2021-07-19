@@ -14,7 +14,7 @@
 // /**
 //  * 用户表 服务类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 13:20
 //  */
 // public interface ISysUserService {
@@ -24,7 +24,7 @@
 //      *
 //      * @param userListQuery
 //      * @return com.baomidou.mybatisplus.core.metadata.IPage<com.taotao.cloud.uc.api.entity.SysUser>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:20
 //      */
 //     IPage<SysUser> getUsersWithRolePage(UserListQuery userListQuery);
@@ -34,7 +34,7 @@
 //      *
 //      * @param userAddDto userAddDto
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:20
 //      */
 //     UserAddVO insertUser(UserAddDTO userAddDto);
@@ -44,7 +44,7 @@
 //      *
 //      * @param updateDTO updateDTO
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:20
 //      */
 //     boolean updateUser(UserUpdateDTO updateDTO);
@@ -54,7 +54,7 @@
 //      *
 //      * @param userId
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:20
 //      */
 //     boolean removeUser(Integer userId);
@@ -65,7 +65,7 @@
 //      * @param userId
 //      * @param password
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:20
 //      */
 //     boolean restPass(Integer userId, String password);
@@ -75,7 +75,7 @@
 //      *
 //      * @param sysUser
 //      * @return com.taotao.cloud.auth.model.SecurityUser
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:21
 //      */
 //     SecurityUser findUserInfo(SysUser sysUser);
@@ -85,7 +85,7 @@
 //      *
 //      * @param username
 //      * @return com.taotao.cloud.uc.api.entity.SysUser
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:21
 //      */
 //     SysUser findUserInByName(String username);
@@ -95,7 +95,7 @@
 //      *
 //      * @param userId
 //      * @return java.util.Set<java.lang.String>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:21
 //      */
 //     Set<String> findPermsByUserId(Long userId);
@@ -105,7 +105,7 @@
 //      *
 //      * @param userId
 //      * @return java.util.Set<java.lang.String>
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:21
 //      */
 //     Set<String> findRoleIdByUserId(Long userId);
@@ -115,7 +115,7 @@
 //      *
 //      * @param userAddDTO
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:21
 //      */
 //     boolean register(UserAddDTO userAddDTO);
@@ -125,7 +125,7 @@
 //      *
 //      * @param sysUser
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:22
 //      */
 //     boolean updateUserInfo(SysUser sysUser);
@@ -135,7 +135,7 @@
 //      *
 //      * @param userIdOrUserNameOrMobileOrEmail
 //      * @return com.taotao.cloud.uc.api.entity.SysUser
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:22
 //      */
 //     SysUser findUserByUserIdOrUserNameOrMobile(String userIdOrUserNameOrMobileOrEmail);
@@ -145,7 +145,7 @@
 //      *
 //      * @param repeatCheckDTO
 //      * @return boolean
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:22
 //      */
 //     boolean repeatCheck(RepeatCheckDTO repeatCheckDTO);
@@ -156,7 +156,7 @@
 //      * @param providerId
 //      * @param providerUserId
 //      * @return com.taotao.cloud.uc.api.entity.SysUser
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 13:22
 //      */
 //     SysUser getUserBySocial(String providerId, int providerUserId);

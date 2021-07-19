@@ -33,7 +33,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * 12位序列，毫秒内的计数，12位的计数顺序号支持每个节点每毫秒(同一机器，同一时间截)产生4096个ID序号<br> 加起来刚好64位，为一个Long型。<br>
  * SnowFlake的优点是，整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分)，并且效率较高，经测试，SnowFlake每秒能够产生26万ID左右。
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:42
  */
@@ -92,7 +92,7 @@ public class SequenceUtil {
 	 *
 	 * @param workerId     工作机器 ID
 	 * @param datacenterId 序列号
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:39
 	 */
 	public SequenceUtil(long workerId, long datacenterId) {
@@ -111,7 +111,7 @@ public class SequenceUtil {
 	 * @param datacenterId datacenterId
 	 * @param maxWorkerId  maxWorkerId
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:39
 	 */
 	protected static long getMaxWorkerId(long datacenterId, long maxWorkerId) {
@@ -135,7 +135,7 @@ public class SequenceUtil {
 	 *
 	 * @param maxDatacenterId maxDatacenterId
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:40
 	 */
 	protected static long getDatacenterId(long maxDatacenterId) {
@@ -163,7 +163,7 @@ public class SequenceUtil {
 	 * 获取下一个ID
 	 *
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:40
 	 */
 	public synchronized long nextId() {
@@ -216,7 +216,7 @@ public class SequenceUtil {
 	 *
 	 * @param lastTimestamp lastTimestamp
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:40
 	 */
 	protected long tilNextMillis(long lastTimestamp) {
@@ -231,7 +231,7 @@ public class SequenceUtil {
 	 * timeGen
 	 *
 	 * @return long
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:40
 	 */
 	protected long timeGen() {

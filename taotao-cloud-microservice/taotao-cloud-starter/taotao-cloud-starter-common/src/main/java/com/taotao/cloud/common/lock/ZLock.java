@@ -21,7 +21,7 @@ import lombok.Getter;
 /**
  * 锁对象抽象
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */

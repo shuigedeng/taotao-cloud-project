@@ -32,7 +32,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 /**
  * 默认异步任务配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */

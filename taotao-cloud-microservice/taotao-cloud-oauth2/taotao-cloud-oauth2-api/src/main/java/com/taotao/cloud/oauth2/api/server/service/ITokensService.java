@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * ITokensService
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 16:02
  * @version 1.0.0
  */
@@ -38,7 +38,7 @@ public interface ITokensService {
      *
      * @param params   请求参数
      * @param clientId 应用id
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 16:02
      */
     PageResult<TokenVO> listTokens(Map<String, Object> params, String clientId);
@@ -49,7 +49,7 @@ public interface ITokensService {
      * @param request  request
      * @param response response
      * @param token    token
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 17:07
      */
     OAuth2AccessToken getToken(HttpServletRequest request, HttpServletResponse response, AbstractAuthenticationToken token);

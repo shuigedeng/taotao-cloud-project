@@ -27,7 +27,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * SpringdocProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:11
  */

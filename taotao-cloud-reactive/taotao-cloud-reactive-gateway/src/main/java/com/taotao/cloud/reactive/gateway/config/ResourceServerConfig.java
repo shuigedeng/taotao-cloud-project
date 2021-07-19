@@ -2,7 +2,7 @@
  * Project Name: projects
  * Package Name: com.taotao.cloud.reactive.gateway.config
  * Date: 2020/9/10 15:12
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.gateway.config;
 
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @date 2020/9/10 15:12
  */

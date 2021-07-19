@@ -22,7 +22,7 @@ import java.util.Collection;
 /**
  * 提供线程池操作类 默认使用自定义的全局bsf线程池
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:49
  **/
@@ -35,7 +35,7 @@ public class ThreadUtils {
 	 * @param parallelCount 并行数量
 	 * @param taskList      任务列表
 	 * @param action        action
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:55
 	 */
 	public static <T> void parallelFor(String taskName, int parallelCount, Collection<T> taskList,

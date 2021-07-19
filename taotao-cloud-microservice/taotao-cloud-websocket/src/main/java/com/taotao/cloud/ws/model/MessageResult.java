@@ -16,7 +16,7 @@
 package com.taotao.cloud.ws.model;/**
   * 
   *
-  * @author dengtao
+  * @author shuigedeng
   * @since 2020/12/18 下午3:21
   * @version 1.0.0
 */

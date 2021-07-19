@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 /**
  * NettyServerHandler
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/30 下午4:36
  * @version 1.0.0
  */

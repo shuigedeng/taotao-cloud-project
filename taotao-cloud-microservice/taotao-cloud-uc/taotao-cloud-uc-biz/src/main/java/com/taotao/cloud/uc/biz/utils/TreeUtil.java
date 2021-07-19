@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * TreeUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/21 11:20
  * @version 1.0.0
  */
@@ -39,7 +39,7 @@ public class TreeUtil {
      * @param treeNodes 传入的树节点列表
      * @param parentId  父节点
      * @return java.util.List<T>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 11:21
      * @version 1.0.0
      */
@@ -68,7 +68,7 @@ public class TreeUtil {
      * @param treeNodes 传入的树节点列表
      * @param parentId  父节点
      * @return java.util.List<T>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 11:22
      * @version 1.0.0
      */
@@ -88,7 +88,7 @@ public class TreeUtil {
      * @param treeNode  节点
      * @param treeNodes 子节点列表
      * @return T
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 11:23
      * @version 1.0.0
      */
@@ -110,7 +110,7 @@ public class TreeUtil {
      * @param resources 资源列表
      * @param parentId  父id
      * @return java.util.List<ResourceTree>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 11:23
      * @version 1.0.0
      */

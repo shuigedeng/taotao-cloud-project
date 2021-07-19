@@ -43,7 +43,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 /**
  * 索引服务实现
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/15 11:27
  */

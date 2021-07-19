@@ -26,7 +26,7 @@ import java.io.Serializable;
 /**
  * 客户端查询query
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 17:05
  * @version 1.0.0
  */

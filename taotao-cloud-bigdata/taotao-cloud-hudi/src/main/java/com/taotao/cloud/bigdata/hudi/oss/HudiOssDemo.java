@@ -22,7 +22,7 @@ public class HudiOssDemo {
 		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 			"com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
 		System.setProperty("HADOOP_USER_NAME", "root");
-		System.setProperty("hadoop.home.dir", "/Users/dengtao/hadoop");
+		System.setProperty("hadoop.home.dir", "/Users/shuigedeng/hadoop");
 
 		SparkSession spark = SparkSession
 			.builder()
@@ -34,10 +34,10 @@ public class HudiOssDemo {
 			.getOrCreate();
 
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
-		jsc.setCheckpointDir("file:///Users/dengtao/checkpoint");
+		jsc.setCheckpointDir("file:///Users/shuigedeng/checkpoint");
 
 		String tableName = "hudi_trips_cow";
-		String basePath = "/Users/dengtao/hudi";
+		String basePath = "/Users/shuigedeng/hudi";
 		DataGenerator dataGen = new DataGenerator();
 
 		List<String> inserts = convertToStringList(dataGen.generateInserts(10));

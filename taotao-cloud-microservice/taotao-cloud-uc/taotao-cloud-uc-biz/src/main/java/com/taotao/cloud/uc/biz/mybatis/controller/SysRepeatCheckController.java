@@ -14,7 +14,7 @@
 // /**
 //  * 数据重复校验API
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 11:44
 //  */
 // @RestController

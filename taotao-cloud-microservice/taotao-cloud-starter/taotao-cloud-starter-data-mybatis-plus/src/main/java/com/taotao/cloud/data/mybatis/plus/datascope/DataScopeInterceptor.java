@@ -52,7 +52,7 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * Mybatis 拦截器 主要用于数据权限拦截
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:40
  * @version 1.0.0
  */

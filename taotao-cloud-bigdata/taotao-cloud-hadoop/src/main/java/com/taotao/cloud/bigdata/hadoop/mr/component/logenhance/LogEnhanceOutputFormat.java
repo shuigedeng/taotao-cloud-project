@@ -29,7 +29,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * maptask或者reducetask在最终输出时，先调用OutputFormat的getRecordWriter方法拿到一个RecordWriter
  * 然后再调用RecordWriter的write(k,v)方法将数据写出
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:25
  */

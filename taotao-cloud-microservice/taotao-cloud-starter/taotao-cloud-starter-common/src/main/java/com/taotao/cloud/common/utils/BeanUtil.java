@@ -27,7 +27,7 @@ import org.springframework.boot.convert.ApplicationConversionService;
 /**
  * BeanUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2019/9/8
  */
@@ -62,7 +62,7 @@ public class BeanUtil {
 	 * @param value 值
 	 * @param type  类型
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public <T> T convert(Object value, Class<T> type) {
@@ -78,7 +78,7 @@ public class BeanUtil {
 	 * @param value 值
 	 * @param type  类型
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
 	public <T> T tryConvert(Object value, Class<T> type) {
@@ -94,7 +94,7 @@ public class BeanUtil {
 	 *
 	 * @param obj 对象
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:46
 	 */
 	public <T> T deepClone(T obj) {

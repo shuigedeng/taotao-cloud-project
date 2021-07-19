@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * OauthLogoutHandler
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 21:21
  * @version 1.0.0
  */

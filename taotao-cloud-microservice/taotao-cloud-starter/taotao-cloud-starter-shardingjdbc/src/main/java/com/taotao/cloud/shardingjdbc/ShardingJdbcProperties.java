@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * ShardingJdbcProperties
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/22 17:30
  */

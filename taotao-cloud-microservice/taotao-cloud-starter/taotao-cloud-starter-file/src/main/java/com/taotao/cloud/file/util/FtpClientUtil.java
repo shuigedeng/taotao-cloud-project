@@ -35,7 +35,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * ftp客户端工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/12 16:36
  */

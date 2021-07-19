@@ -30,7 +30,7 @@ dependencies {
 //    repositories {
 //        maven {
 //            // 本地 repo 地址，这里写上你们电脑上自己的地址
-//            url = '/Users/dengtao/software/mvn_repo'
+//            url = '/Users/shuigedeng/software/mvn_repo'
 //        }
 //    }
 //

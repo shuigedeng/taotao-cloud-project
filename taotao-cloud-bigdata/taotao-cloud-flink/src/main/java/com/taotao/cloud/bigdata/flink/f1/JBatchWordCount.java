@@ -31,7 +31,7 @@ import org.apache.flink.util.Collector;
 /**
  * JBatchWordCount
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/3 09:05
  */
@@ -45,7 +45,7 @@ public class JBatchWordCount {
 
 		StreamExecutionEnvironment env = StreamExecutionEnvironment
 			.createLocalEnvironmentWithWebUI(conf);
-		DataStream<String> dss = env.readTextFile("/Users/dengtao/spark/hello.txt");
+		DataStream<String> dss = env.readTextFile("/Users/shuigedeng/spark/hello.txt");
 
 		DataStream<String> dso = dss.flatMap(new FlatMapFunction<String, String>() {
 			@Override

@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * 角色-资源服务类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 13:20
  */
 public interface ISysRoleResourceService {
@@ -15,7 +15,7 @@ public interface ISysRoleResourceService {
      * @param roleId
      * @param resourceIds
      * @return java.lang.Boolean
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 09:20
      * @version 1.0.0
      */

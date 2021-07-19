@@ -19,7 +19,7 @@ package com.taotao.cloud.coupon.biz.service;
 import com.taotao.cloud.coupon.biz.entity.Withdraw;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:59
  * @version 1.0.0
  */
@@ -29,7 +29,7 @@ public interface IWithdrawService {
 	 *
 	 * @param id id
 	 * @return com.taotao.cloud.aftersale.biz.entity.Withdraw
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/20 上午9:46
 	 * @version 1.0.0
 	 */

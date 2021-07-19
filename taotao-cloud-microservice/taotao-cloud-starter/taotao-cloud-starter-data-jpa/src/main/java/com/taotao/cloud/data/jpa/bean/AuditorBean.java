@@ -23,7 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * 获取当前审计用户 主要用于CreatedBy LastModifiedBy
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/28 16:43
  */

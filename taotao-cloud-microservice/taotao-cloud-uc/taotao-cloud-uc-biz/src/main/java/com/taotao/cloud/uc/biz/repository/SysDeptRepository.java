@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 /**
  * 后台部门表Repository
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/9/29 18:02
  * @version 1.0.0
  */

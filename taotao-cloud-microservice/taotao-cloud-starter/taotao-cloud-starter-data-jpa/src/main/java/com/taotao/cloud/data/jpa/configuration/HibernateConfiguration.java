@@ -39,7 +39,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 /**
  * Hibernate 自动配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/9/28 17:31
  */

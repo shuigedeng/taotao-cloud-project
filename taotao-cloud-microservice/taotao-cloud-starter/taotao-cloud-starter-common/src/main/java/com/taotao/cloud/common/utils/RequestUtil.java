@@ -52,7 +52,7 @@ import reactor.core.publisher.Mono;
 /**
  * RequestUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:43
  */
@@ -261,7 +261,7 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:58
 	 */
 	public static String getRemoteAddr(HttpServletRequest request) {
@@ -301,7 +301,7 @@ public class RequestUtil {
 	 *
 	 * @param ip ip地址
 	 * @return boolean
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:58
 	 */
 	public static boolean isEmptyIp(String ip) {
@@ -312,7 +312,7 @@ public class RequestUtil {
 	 * 获取本机的IP地址
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:58
 	 */
 	public static String getLocalAddr() {
@@ -329,7 +329,7 @@ public class RequestUtil {
 	 * 获取ip地址
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:33
 	 */
 	public static String getIpAddress() {
@@ -352,7 +352,7 @@ public class RequestUtil {
 	 * 获取ip地址
 	 *
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:33
 	 */
 	public static String getIpAddress0() {
@@ -385,7 +385,7 @@ public class RequestUtil {
 	 *
 	 * @param regex 10.0.18 网址前两个或前三个地址段
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:33
 	 */
 	public static String getIpAddressMatched(String regex) {
@@ -421,7 +421,7 @@ public class RequestUtil {
 	 *
 	 * @param regex 10.0.18 排除地址段，两个或前三个地址段
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:34
 	 */
 	public static String getIpAddressExMatched(String regex) {
@@ -457,7 +457,7 @@ public class RequestUtil {
 	 *
 	 * @param source source
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:34
 	 */
 	private static String buildRegex(String source) {
@@ -479,7 +479,7 @@ public class RequestUtil {
 	 *
 	 * @param request request
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/10/15 15:46
 	 */
 	public static String getRemoteAddr(ServerHttpRequest request) {

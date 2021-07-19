@@ -26,7 +26,7 @@ import java.util.function.BiConsumer;
 /**
  * 异步处理异常工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:23
  */
@@ -41,7 +41,7 @@ public class AsyncUtil {
 	 * 启动线程
 	 *
 	 * @param task
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task) {
@@ -53,7 +53,7 @@ public class AsyncUtil {
 	 *
 	 * @param task
 	 * @param maxRetryCount
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount) {
@@ -66,7 +66,7 @@ public class AsyncUtil {
 	 * @param task
 	 * @param maxRetryCount
 	 * @param consumer
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount,
@@ -81,7 +81,7 @@ public class AsyncUtil {
 	 * @param maxRetryCount
 	 * @param delaySeconds
 	 * @param consumer
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
 	public static void execute(Runnable task, int maxRetryCount, int delaySeconds,
@@ -98,7 +98,7 @@ public class AsyncUtil {
 	 * @param maxRetryCount
 	 * @param delaySeconds
 	 * @param consumer
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:40
 	 */
 	public static void executeDelay(Runnable task, int firstDelaySeconds, int maxRetryCount,

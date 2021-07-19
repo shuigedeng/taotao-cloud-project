@@ -49,7 +49,7 @@ import java.time.format.DateTimeFormatter;
  * 字段类型是LocalDateTime时，可以按照以下6种格式反序列化： 1. yyyy-MM-dd 2. yyyy年MM月dd日 3. yyyy/MM/dd 4. yyyy-MM-dd
  * HH:mm:ss 5. yyyy年MM月dd日HH时mm分ss秒 6. yyyy/MM/dd HH:mm:ss
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 16:47
  */

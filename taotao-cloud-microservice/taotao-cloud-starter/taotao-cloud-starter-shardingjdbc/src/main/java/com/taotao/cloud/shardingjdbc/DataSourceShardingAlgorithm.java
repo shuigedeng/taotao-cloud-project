@@ -22,7 +22,7 @@ import org.apache.shardingsphere.api.sharding.hint.HintShardingValue;
 /**
  * 数据库分源算法
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/22 17:30
  */

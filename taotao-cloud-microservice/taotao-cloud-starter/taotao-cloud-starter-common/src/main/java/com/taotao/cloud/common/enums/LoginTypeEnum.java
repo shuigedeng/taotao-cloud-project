@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.SecurityConstant;
 /**
  * 用户登录类型
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 18:11
  */

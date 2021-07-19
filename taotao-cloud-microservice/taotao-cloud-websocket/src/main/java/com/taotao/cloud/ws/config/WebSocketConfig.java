@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * WebSocketConfig
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/18 下午2:52
  * @version 1.0.0
  */

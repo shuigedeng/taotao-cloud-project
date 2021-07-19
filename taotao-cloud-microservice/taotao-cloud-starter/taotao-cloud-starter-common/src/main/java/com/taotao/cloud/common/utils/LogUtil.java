@@ -30,7 +30,7 @@ import org.slf4j.spi.LocationAwareLogger;
 /**
  * LogUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @since 2020/4/27 16:16
  */
@@ -50,7 +50,7 @@ public class LogUtil {
 	 * 获取栈中类信息
 	 *
 	 * @return org.slf4j.spi.LocationAwareLogger
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:26
 	 */
 	public LocationAwareLogger getLocationAwareLogger() {
@@ -67,7 +67,7 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:26
 	 */
 	public void debug(String msg, Object... arguments) {
@@ -83,7 +83,7 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
 	public void info(String msg, Object... arguments) {
@@ -99,7 +99,7 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
 	public void warn(String msg, Object... arguments) {
@@ -116,7 +116,7 @@ public class LogUtil {
 	 * @param msg       msg
 	 * @param error     error
 	 * @param arguments 参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
 	public void error(String msg, Throwable error, Object... arguments) {
@@ -131,7 +131,7 @@ public class LogUtil {
 	 * Error级别日志
 	 *
 	 * @param error error
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
 	public void error(Throwable error) {
@@ -144,7 +144,7 @@ public class LogUtil {
 	 *
 	 * @param msg       msg
 	 * @param arguments 参数
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
 	public void error(String msg, Object... arguments) {
@@ -176,7 +176,7 @@ public class LogUtil {
 	 *
 	 * @param e exception
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
 	public String exceptionToString(Exception e) {
@@ -197,7 +197,7 @@ public class LogUtil {
 	 *
 	 * @param throwable throwable
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:29
 	 */
 	public String getStackTrace(Throwable throwable) {
@@ -213,7 +213,7 @@ public class LogUtil {
 	 *
 	 * @param methodName 方法名称
 	 * @return int
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:29
 	 */
 	public int getOperateType(String methodName) {

@@ -35,7 +35,7 @@ import javax.validation.Payload;
  * <p>
  * 跟 javax.validation.constraints.Pattern 的区别在于： 本类校验时，传递过来的参数为null或者""时，不会校验正则表达式
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 16:59
  */

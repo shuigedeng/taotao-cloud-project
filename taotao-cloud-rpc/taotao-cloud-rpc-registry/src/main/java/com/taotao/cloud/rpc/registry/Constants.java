@@ -2,14 +2,14 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.registry
  * Date: 2020/2/27 11:22
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.registry;
 
 /**
  * 静态常量
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 11:22
  */

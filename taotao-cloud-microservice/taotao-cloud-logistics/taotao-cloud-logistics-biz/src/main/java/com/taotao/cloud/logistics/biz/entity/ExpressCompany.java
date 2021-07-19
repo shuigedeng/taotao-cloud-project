@@ -16,7 +16,7 @@ import javax.persistence.Table;
 /**
  * 物流公司表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/13 09:46
  * @version 1.0.0
  */

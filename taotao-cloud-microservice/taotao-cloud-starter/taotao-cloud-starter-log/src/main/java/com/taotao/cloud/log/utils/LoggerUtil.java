@@ -23,7 +23,7 @@ import org.aspectj.lang.JoinPoint;
 /**
  * LogUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2020/4/27 16:16
  */
@@ -35,7 +35,7 @@ public class LoggerUtil {
 	 *
 	 * @param point point
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/4/30 10:21
 	 */
 	public String getControllerMethodDescription(JoinPoint point) throws Exception {

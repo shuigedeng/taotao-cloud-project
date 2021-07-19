@@ -32,7 +32,7 @@ import java.io.Serializable;
 /**
  * 会员query
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/9/30 08:49
  * @version 1.0.0
  */

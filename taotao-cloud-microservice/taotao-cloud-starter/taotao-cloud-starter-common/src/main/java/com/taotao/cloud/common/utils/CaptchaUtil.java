@@ -28,7 +28,7 @@ import lombok.experimental.UtilityClass;
 /**
  * 生成验证码工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:28
  */
@@ -51,7 +51,7 @@ public class CaptchaUtil {
 	 * 获取验证码
 	 *
 	 * @return com.wf.captcha.ArithmeticCaptcha
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
 	public ArithmeticCaptcha getArithmeticCaptcha() {
@@ -64,7 +64,7 @@ public class CaptchaUtil {
 	 * 生成图片
 	 *
 	 * @return java.awt.image.BufferedImage
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
 	public BufferedImage createImage() {
@@ -77,7 +77,7 @@ public class CaptchaUtil {
 	 *
 	 * @param verifyImg verifyImg
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
 	public String drawRandomText(BufferedImage verifyImg) {
@@ -132,7 +132,7 @@ public class CaptchaUtil {
 	 * 随机取色
 	 *
 	 * @return java.awt.Color
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
 	private Color getRandomColor() {

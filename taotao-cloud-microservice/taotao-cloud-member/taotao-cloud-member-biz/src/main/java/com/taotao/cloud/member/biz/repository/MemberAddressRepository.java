@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 /**
  * 会员收货地址Repository
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/9/29 18:02
  * @version 1.0.0
  */

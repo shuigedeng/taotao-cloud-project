@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * 负载均衡隔离规则过滤器
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2019/9/15
  */

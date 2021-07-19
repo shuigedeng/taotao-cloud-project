@@ -22,7 +22,7 @@ import lombok.var;
 /**
  * Dbconn 简化使用和事务支持
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:09
  **/

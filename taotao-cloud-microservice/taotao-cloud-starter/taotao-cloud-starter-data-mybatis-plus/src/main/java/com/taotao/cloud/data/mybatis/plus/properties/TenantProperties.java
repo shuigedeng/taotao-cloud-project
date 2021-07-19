@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * 多租户Properties
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 11:19
  * @version 1.0.0
  */

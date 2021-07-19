@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.client
  * Date: 2020/2/27 15:08
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.rpc.client;
 
@@ -17,7 +17,7 @@ import java.util.UUID;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @create 2020/2/27 15:08
  */
@@ -38,7 +38,7 @@ public class RpcProxy {
 	 *
 	 * @param interfaceClass interfaceClass
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/2/27 15:09
 	 */
 	public <T> T create(Class<?> interfaceClass) {

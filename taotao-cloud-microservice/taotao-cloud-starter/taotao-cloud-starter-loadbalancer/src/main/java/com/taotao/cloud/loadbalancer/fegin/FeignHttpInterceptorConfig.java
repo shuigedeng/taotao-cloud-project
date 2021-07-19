@@ -34,7 +34,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * feign拦截器，只包含http相关数据
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/5 13:33
  */

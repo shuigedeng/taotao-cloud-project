@@ -30,7 +30,7 @@ import java.io.IOException;
 /**
  * 认证失败处理器
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/13 16:08
  * @version 1.0.0
  */

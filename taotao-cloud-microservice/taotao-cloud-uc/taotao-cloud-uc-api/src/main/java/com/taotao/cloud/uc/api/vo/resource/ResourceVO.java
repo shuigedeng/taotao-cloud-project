@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * 资源VO
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/14 10:44
  */
 @Data

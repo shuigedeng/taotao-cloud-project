@@ -29,7 +29,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 /**
  * PropertiesAutoConfiguration
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */

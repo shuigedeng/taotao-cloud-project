@@ -18,7 +18,7 @@ package com.taotao.cloud.bigdata.hbase.service;
 /**
  * HbaseService
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/30 11:13
  */

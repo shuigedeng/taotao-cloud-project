@@ -37,7 +37,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * FastBuildRabbitMqConsumer
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/28 17:26
  */
 @Slf4j

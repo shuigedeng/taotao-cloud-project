@@ -2,7 +2,7 @@
  * Project Name: projects
  * Package Name: com.taotao.cloud.reactive.auth.config
  * Date: 2020/9/10 17:14
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.reactive.auth.config;
 
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @date 2020/9/10 17:14
  */

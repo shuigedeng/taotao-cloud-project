@@ -22,7 +22,7 @@ import java.io.IOException;
 /**
  * 搜索服务
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 08:01
  */
@@ -33,7 +33,7 @@ public interface ISearchService {
 	 *
 	 * @param indexName 索引名
 	 * @param searchDto 搜索Dto
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/9/29 15:37
 	 */
 	PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException;

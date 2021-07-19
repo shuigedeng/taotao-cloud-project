@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 字典表 服务类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 11:18
  */
 public interface ISysDictService {
@@ -21,7 +21,7 @@ public interface ISysDictService {
      * @param sysDict
      *        sysDict
      * @return com.taotao.cloud.uc.biz.entity.SysDict
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 09:35
      * @version 1.0.0
      */
@@ -31,7 +31,7 @@ public interface ISysDictService {
      * 查询所有字典集合
      *
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysDict>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 09:36
      * @version 1.0.0
      */
@@ -43,7 +43,7 @@ public interface ISysDictService {
      * @param page          page
      * @param dictPageQuery dictPageQuery
      * @return org.springframework.data.domain.Page<com.taotao.cloud.uc.biz.entity.SysDict>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 09:36
      * @version 1.0.0
      */
@@ -54,7 +54,7 @@ public interface ISysDictService {
      *
      * @param id id
      * @return java.lang.Boolean
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 09:36
      * @version 1.0.0
      */
@@ -65,7 +65,7 @@ public interface ISysDictService {
      *
      * @param code code
      * @return java.lang.Boolean
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/15 09:36
      * @version 1.0.0
      */

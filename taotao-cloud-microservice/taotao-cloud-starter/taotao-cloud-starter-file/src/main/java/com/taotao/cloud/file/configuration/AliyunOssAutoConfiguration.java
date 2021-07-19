@@ -51,7 +51,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 阿里云oss自动配置
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:49
  */
@@ -280,7 +280,7 @@ public class AliyunOssAutoConfiguration {
 		/**
 		 * 检查文件大小
 		 *
-		 * @author dengtao
+		 * @author shuigedeng
 		 */
 		private boolean checkFileSize(Long len, int size, String unit) {
 			double fileSize;
@@ -307,7 +307,7 @@ public class AliyunOssAutoConfiguration {
 		 * 计算所需要的分片数量
 		 *
 		 * @param uploadFile uploadFile
-		 * @author dengtao
+		 * @author shuigedeng
 		 * @since 2020/9/9 11:44
 		 */
 		public int calPartCount(MultipartFile uploadFile) {

@@ -21,7 +21,7 @@
 // /**
 //  * Ribbon扩展配置类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/6/15 11:31
 //  * @version 1.0.0
 //  */

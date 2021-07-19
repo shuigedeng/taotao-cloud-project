@@ -46,7 +46,7 @@ import org.apache.hadoop.io.LongWritable;
  * <p>
  * GenericUDAFResolver和GenericUDAFResolver2接口的区别是:  后面的允许evaluator实现利用GenericUDAFParameterInfo可以访问更多的信息，例如DISTINCT限定符，通配符(*)。
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 17:19
  */

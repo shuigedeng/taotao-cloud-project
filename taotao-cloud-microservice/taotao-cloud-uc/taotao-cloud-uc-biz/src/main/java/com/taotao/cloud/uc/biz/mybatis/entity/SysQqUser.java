@@ -12,7 +12,7 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 // /**
 //  * 官方文档中get_user_info接口的用户信息返回实体
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/29 21:02
 //  */
 // @Data

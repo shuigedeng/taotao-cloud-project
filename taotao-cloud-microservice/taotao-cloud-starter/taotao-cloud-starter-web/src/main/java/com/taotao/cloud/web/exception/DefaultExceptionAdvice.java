@@ -55,7 +55,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 /**
  * 异常通用处理
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
@@ -214,7 +214,7 @@ public class DefaultExceptionAdvice {
 	 *
 	 * @param request request
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:53
 	 */
 	private String uri(NativeWebRequest request) {
@@ -231,7 +231,7 @@ public class DefaultExceptionAdvice {
 	 *
 	 * @param request request
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:53
 	 */
 	private String query(NativeWebRequest request) {
@@ -250,7 +250,7 @@ public class DefaultExceptionAdvice {
 	 *
 	 * @param result result
 	 * @return java.util.Map<java.lang.String, java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:53
 	 */
 	private Map<String, String> getErrors(BindingResult result) {
@@ -267,7 +267,7 @@ public class DefaultExceptionAdvice {
 	 *
 	 * @param e exception
 	 * @return java.util.Map<java.lang.String, java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:54
 	 */
 	private Map<String, String> getErrors(ConstraintViolationException e) {

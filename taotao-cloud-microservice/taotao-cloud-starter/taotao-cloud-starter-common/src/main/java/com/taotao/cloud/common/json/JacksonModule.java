@@ -38,7 +38,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * jackson 自定义序列化 & 反序列化 规则
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 16:49
  */

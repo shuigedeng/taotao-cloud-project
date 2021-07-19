@@ -25,7 +25,7 @@
 ///**
 // * HDFSComponent
 // *
-// * @author dengtao
+// * @author shuigedeng
 // * @version 1.0.0
 // * @since 2020/10/29 15:19
 // */
@@ -47,7 +47,7 @@
 //	 * 获取HDFS配置信息
 //	 *
 //	 * @return org.apache.hadoop.conf.Configuration
-//	 * @author dengtao
+//	 * @author shuigedeng
 //	 * @since 2020/10/29 15:22
 //	 */
 //	private Configuration getConfiguration() {

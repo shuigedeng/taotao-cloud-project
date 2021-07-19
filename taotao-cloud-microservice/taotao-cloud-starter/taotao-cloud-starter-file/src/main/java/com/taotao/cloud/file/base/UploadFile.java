@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件上传接口
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:42
  */
@@ -34,7 +34,7 @@ public interface UploadFile {
 	 *
 	 * @param file 文件对象
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/12 16:01
 	 */
 	UploadFileInfo upload(File file) throws UploadFileException;
@@ -45,7 +45,7 @@ public interface UploadFile {
 	 * @param file    file
 	 * @param fileKey fileKey
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/12 17:03
 	 */
 	UploadFileInfo upload(File file, String fileKey) throws UploadFileException;
@@ -55,7 +55,7 @@ public interface UploadFile {
 	 *
 	 * @param file file
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/12 17:47
 	 */
 	UploadFileInfo upload(MultipartFile file) throws UploadFileException;
@@ -66,7 +66,7 @@ public interface UploadFile {
 	 * @param file    file
 	 * @param fileKey fileKey
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/12 17:47
 	 */
 	UploadFileInfo upload(MultipartFile file, String fileKey) throws UploadFileException;
@@ -76,7 +76,7 @@ public interface UploadFile {
 	 *
 	 * @param uploadFileInfo fileInfo
 	 * @return com.taotao.cloud.file.pojo.FileInfo
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2020/11/12 17:47
 	 */
 	UploadFileInfo delete(UploadFileInfo uploadFileInfo) throws UploadFileException;

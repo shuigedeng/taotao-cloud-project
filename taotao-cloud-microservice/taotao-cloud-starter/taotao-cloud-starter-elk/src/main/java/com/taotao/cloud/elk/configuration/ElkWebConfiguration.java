@@ -29,7 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * ElkWebConfiguration
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/3 10:43
  */

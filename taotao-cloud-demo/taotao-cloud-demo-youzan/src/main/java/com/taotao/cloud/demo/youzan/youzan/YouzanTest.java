@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.cloud.demo.youzan.youzan
  * Date: 2020/4/29 10:27
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.demo.youzan.youzan;
 
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
  * @since 2020/4/29 10:27
  */

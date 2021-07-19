@@ -29,7 +29,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 /**
  * TaoTaoCloudAdminServerApplication
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午7:55
  */

@@ -27,7 +27,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * 相当于一个yarn集群的客户端 需要在此封装我们的mr程序的相关运行参数，指定jar包 最后提交给yarn
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:04
  */

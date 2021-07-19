@@ -18,7 +18,7 @@ package com.taotao.cloud.common.base;
 /**
  * 实现了此接口，表示此类将会支持验证框架。
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:10
  */

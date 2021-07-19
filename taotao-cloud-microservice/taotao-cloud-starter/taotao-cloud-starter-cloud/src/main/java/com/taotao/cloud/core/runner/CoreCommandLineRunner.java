@@ -24,7 +24,7 @@ import org.springframework.boot.CommandLineRunner;
 /**
  * CoreCommandLineRunner
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/06/22 10:53
  */

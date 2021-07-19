@@ -49,7 +49,7 @@ import org.springframework.util.ReflectionUtils;
 /**
  * 应用上下文初始化器
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/15 10:45
  */

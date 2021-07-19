@@ -37,7 +37,7 @@ import org.apache.hadoop.io.IOUtils;
 /**
  * HDFSUtil
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 15:27
  */

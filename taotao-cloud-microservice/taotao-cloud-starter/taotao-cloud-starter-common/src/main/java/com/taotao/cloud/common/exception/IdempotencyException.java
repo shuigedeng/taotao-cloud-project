@@ -20,7 +20,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 /**
  * 幂等性异常
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:22
  */

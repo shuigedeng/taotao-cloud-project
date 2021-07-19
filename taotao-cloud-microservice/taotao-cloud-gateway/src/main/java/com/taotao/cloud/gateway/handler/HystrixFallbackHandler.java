@@ -38,7 +38,7 @@ import reactor.core.publisher.Mono;
 /**
  * Hystrix 降级处理
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 22:11
  */

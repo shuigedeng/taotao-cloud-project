@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.vo.role.RoleVO;
 import com.taotao.cloud.uc.biz.entity.SysRole;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/20 16:16
  * @version 1.0.0
  */

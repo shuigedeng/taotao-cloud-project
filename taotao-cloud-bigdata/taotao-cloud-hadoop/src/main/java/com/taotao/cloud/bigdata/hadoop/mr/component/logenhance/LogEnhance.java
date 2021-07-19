@@ -33,7 +33,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * LogEnhance
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:26
  */

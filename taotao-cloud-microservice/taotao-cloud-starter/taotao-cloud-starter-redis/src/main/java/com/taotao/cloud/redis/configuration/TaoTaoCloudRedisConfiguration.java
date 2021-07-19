@@ -53,7 +53,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * redis 配置类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */

@@ -36,7 +36,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 /**
  * MapSideJoin
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/26 下午8:28
  */

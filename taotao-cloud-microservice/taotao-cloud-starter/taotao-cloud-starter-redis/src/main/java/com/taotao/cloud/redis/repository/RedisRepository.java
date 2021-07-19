@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
 /**
  * Redis Repository redis 基本操作 可扩展,基本够用了
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/30 10:15
  */

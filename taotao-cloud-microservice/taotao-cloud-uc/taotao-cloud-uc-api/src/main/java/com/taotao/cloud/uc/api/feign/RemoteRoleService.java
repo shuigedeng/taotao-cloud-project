@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 远程调用后台角色模块
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:42
  */
 @FeignClient(contextId = "remoteRoleService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteUserFallbackImpl.class)
@@ -23,7 +23,7 @@ public interface RemoteRoleService {
      *
      * @param userId 用户id
      * @return com.taotao.cloud.core.model.Result<java.util.List < com.taotao.cloud.uc.api.vo.role.RoleVO>>
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/10/21 15:13
      * @version 1.0.0
      */

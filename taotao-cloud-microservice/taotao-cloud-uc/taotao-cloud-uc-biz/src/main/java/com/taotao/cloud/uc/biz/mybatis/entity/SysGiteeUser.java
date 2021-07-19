@@ -9,7 +9,7 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 // /**
 //  * Gitee 用户信息
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/29 20:52
 //  */
 // @Data

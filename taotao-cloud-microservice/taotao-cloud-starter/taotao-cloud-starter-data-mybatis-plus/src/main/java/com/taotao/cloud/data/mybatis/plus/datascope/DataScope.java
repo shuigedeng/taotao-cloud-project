@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 数据权限查询参数
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/5/2 16:40
  * @version 1.0.0
  */

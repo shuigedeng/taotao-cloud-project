@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.vo.user.UserVO;
 import com.taotao.cloud.uc.biz.entity.SysUser;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/20 16:16
  * @version 1.0.0
  */

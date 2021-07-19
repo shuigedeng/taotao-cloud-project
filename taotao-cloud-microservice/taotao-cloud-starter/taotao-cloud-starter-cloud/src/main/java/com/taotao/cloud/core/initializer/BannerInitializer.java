@@ -58,7 +58,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 /**
  * Banner初始化
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */

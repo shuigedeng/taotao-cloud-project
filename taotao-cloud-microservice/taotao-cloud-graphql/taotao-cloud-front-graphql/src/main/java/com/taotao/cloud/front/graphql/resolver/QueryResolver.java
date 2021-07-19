@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Resolver中的方法，入参及返回值类型，必须和graphqls文件中定义的一致，否则启动报错
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/9 09:54
  * @version 1.0.0
  */

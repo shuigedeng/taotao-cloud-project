@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  * <p>
  * 则：UserController 的所有CRUD方法均分别需要 user:add、user:update、user:delete、user:view 等权限
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/6/22 17:01
  */

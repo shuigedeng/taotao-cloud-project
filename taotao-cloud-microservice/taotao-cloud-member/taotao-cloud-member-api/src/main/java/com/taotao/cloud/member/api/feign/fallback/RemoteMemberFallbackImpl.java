@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 /**
  * RemoteMemberFallbackImpl
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/11/20 下午4:10
  * @version 1.0.0
  */

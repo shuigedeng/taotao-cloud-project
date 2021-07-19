@@ -18,7 +18,7 @@ package com.taotao.cloud.bigdata.trino.udaf.avg;
 import java.text.DecimalFormat;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 17:59
  */

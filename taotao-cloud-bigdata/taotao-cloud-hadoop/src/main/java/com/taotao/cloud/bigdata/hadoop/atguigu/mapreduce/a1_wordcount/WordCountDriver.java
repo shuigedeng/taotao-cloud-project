@@ -16,13 +16,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * /user/atguigu/input\
  * /user/atguigu/output
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/7/16 09:56
  */
 public class WordCountDriver {
 
-	private static String PATH = "/Users/dengtao/Downloads/尚硅谷大数据/尚硅谷-hadoop3资料/11_input";
+	private static String PATH = "/Users/shuigedeng/Downloads/尚硅谷大数据/尚硅谷-hadoop3资料/11_input";
 
 	public static void main(String[] args)
 		throws IOException, ClassNotFoundException, InterruptedException {

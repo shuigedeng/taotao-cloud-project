@@ -21,7 +21,7 @@ import org.gradle.api.Project;
 /**
  * MyPlugin
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2021/2/4 下午2:54
  */

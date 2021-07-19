@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * 角色-资源第三方表
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/6/15 11:00
  */
 @Data

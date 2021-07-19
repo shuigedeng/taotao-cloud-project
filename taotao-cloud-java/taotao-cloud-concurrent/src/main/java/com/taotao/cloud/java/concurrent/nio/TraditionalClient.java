@@ -13,7 +13,7 @@ public class TraditionalClient {
         System.out.println("Connected with server " + socket.getInetAddress()
                 + ":" + socket.getPort());
         // 读取文件
-        FileInputStream inputStream = new FileInputStream("/home/dengtao/公司资料/新建文本文档.txt");
+        FileInputStream inputStream = new FileInputStream("/home/shuigedeng/公司资料/新建文本文档.txt");
         // 输出文件
         DataOutputStream output = new DataOutputStream(socket.getOutputStream());
         // 缓冲区4096K

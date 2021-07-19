@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 字典表 服务实现类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/30 11:19
  */
 @Service

@@ -26,7 +26,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  * <p>
  * 自定义函数不失效，则需要将导出的Jar包放到HIVE_HOME/lib目录
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/29 16:58
  */

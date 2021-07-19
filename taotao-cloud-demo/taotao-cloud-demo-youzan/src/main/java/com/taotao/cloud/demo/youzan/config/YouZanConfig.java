@@ -2,7 +2,7 @@
  * Project Name: super-member-system
  * Package Name: com.grcloudcrm.youzan.config
  * Date: 2020/4/16 11:25
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.demo.youzan.config;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 有赞配置类<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0
  * @since 2020/4/16 11:25
  */

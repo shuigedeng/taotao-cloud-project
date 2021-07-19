@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * 64kb/50毫秒
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/12/3 下午6:49
  * @version 1.0.0
  */

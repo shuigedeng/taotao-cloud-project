@@ -40,7 +40,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * TaotaoCloudAuthApplication
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 15:13
  * @version 1.0.0
  */

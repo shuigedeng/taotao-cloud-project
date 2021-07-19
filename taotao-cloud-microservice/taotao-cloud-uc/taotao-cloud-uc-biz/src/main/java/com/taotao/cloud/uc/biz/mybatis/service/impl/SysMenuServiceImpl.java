@@ -26,7 +26,7 @@
 // /**
 //  * 菜单权限表 服务实现类
 //  *
-//  * @author dengtao
+//  * @author shuigedeng
 //  * @since 2020/4/30 11:42
 //  */
 // @Service
@@ -107,7 +107,7 @@
 //      *
 //      * @param menu
 //      * @return void
-//      * @author dengtao
+//      * @author shuigedeng
 //      * @since 2020/4/30 11:43
 //      */
 //     private void verifyForm(SysMenu menu) {

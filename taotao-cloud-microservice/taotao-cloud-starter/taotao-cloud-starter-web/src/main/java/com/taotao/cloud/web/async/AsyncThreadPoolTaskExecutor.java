@@ -10,7 +10,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 /**
  * 这是{@link ThreadPoolTaskExecutor}的一个简单替换，可搭配TransmittableThreadLocal实现父子线程之间的数据传递
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2019/8/14
  */
 public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {

@@ -34,7 +34,7 @@ import java.util.UUID;
 /**
  * LoginController
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2021/1/18 下午4:56
  * @version 1.0.0
  */

@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 /**
  * 错误重试工具类
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:23
  */
@@ -39,7 +39,7 @@ public abstract class RetryUtil {
 	 * @param expectExceptions 期待异常(抛出符合相应异常时候重试),空或者空容器默认进行重试
 	 * @return R
 	 * @version 1.0.0
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/6/22 17:45
 	 */
 	public static <R> R invoke(Supplier<R> dataSupplier, Consumer<Throwable> exceptionCaught,

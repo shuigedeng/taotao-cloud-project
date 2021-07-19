@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * sentinel 请求头解析判断
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/15 11:31
  */

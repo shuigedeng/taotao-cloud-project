@@ -45,7 +45,7 @@ import java.util.Map;
 /**
  * ES查询Builder
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/3 06:49
  */
@@ -79,7 +79,7 @@ public class SearchBuilder {
 	 * @param elasticsearchTemplate elasticsearchTemplate
 	 * @param indexName             indexName
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:50
 	 */
 	public static SearchBuilder builder(ElasticsearchRestTemplate elasticsearchTemplate,
@@ -96,7 +96,7 @@ public class SearchBuilder {
 	 *
 	 * @param elasticsearchTemplate elasticsearchTemplate
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:50
 	 */
 	public static SearchBuilder builder(ElasticsearchRestTemplate elasticsearchTemplate) {
@@ -112,7 +112,7 @@ public class SearchBuilder {
 	 *
 	 * @param indices 索引名数组
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:50
 	 */
 	public SearchBuilder setIndices(String... indices) {
@@ -127,7 +127,7 @@ public class SearchBuilder {
 	 *
 	 * @param queryStr 查询关键字
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:50
 	 */
 	public SearchBuilder setStringQuery(String queryStr) {
@@ -147,7 +147,7 @@ public class SearchBuilder {
 	 * @param page  当前页数
 	 * @param limit 每页显示数
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:50
 	 */
 	public SearchBuilder setPage(Integer page, Integer limit) {
@@ -164,7 +164,7 @@ public class SearchBuilder {
 	 * @param field 排序字段
 	 * @param order 顺序方向
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:51
 	 */
 	public SearchBuilder addSort(String field, SortOrder order) {
@@ -180,7 +180,7 @@ public class SearchBuilder {
 	 * @param preTags  高亮处理前缀
 	 * @param postTags 高亮处理后缀
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:51
 	 */
 	public SearchBuilder setHighlight(String field, String preTags, String postTags) {
@@ -200,7 +200,7 @@ public class SearchBuilder {
 	 *
 	 * @param isHighlighter 是否需要高亮处理
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:51
 	 */
 	public SearchBuilder setIsHighlight(Boolean isHighlighter) {
@@ -216,7 +216,7 @@ public class SearchBuilder {
 	 *
 	 * @param routing 路由数组
 	 * @return com.taotao.cloud.elasticsearch.builder.SearchBuilder
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:52
 	 */
 	public SearchBuilder setRouting(String... routing) {
@@ -230,7 +230,7 @@ public class SearchBuilder {
 	 * 返回结果
 	 *
 	 * @return org.elasticsearch.action.search.SearchResponse
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:54
 	 */
 	public SearchResponse get() throws IOException {
@@ -241,7 +241,7 @@ public class SearchBuilder {
 	 * 返回列表结果
 	 *
 	 * @return java.util.List<java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:54
 	 */
 	public List<String> getList() throws IOException {
@@ -252,7 +252,7 @@ public class SearchBuilder {
 	 * 返回分页结果
 	 *
 	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:54
 	 */
 	public PageModel<String> getPage() throws IOException {
@@ -265,7 +265,7 @@ public class SearchBuilder {
 	 * @param page  当前页数
 	 * @param limit 每页显示
 	 * @return com.taotao.cloud.core.model.PageResult<java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:54
 	 */
 	public PageModel<String> getPage(Integer page, Integer limit) throws IOException {
@@ -282,7 +282,7 @@ public class SearchBuilder {
 	 *
 	 * @param searchHits searchHits
 	 * @return java.util.List<java.lang.String>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:55
 	 */
 	private List<String> getList(SearchHits searchHits) {
@@ -308,7 +308,7 @@ public class SearchBuilder {
 	 *
 	 * @param result          目标对象
 	 * @param highlightFields 高亮配置
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:55
 	 */
 	private <T> void populateHighLightedFields(T result,
@@ -326,7 +326,7 @@ public class SearchBuilder {
 	 *
 	 * @param texts texts
 	 * @return java.lang.String
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/26 08:55
 	 */
 	private String concat(Text[] texts) {

@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 /***
  *
  * 得到中文首字母
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0.0
  * @since 2020/6/2 16:50
  */

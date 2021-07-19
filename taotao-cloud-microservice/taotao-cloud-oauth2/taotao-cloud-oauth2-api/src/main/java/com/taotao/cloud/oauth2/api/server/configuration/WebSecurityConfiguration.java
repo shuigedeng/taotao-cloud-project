@@ -75,7 +75,7 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VAL
 /**
  * web安全配置类
  *
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/4/29 20:14
  * @version 1.0.0
  */
@@ -156,7 +156,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * 这个方法是去数据库查询用户的密码，做权限验证
      *
-     * @author dengtao
+     * @author shuigedeng
      * @since 2020/4/29 20:15
      */
     @Autowired

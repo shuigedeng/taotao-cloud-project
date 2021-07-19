@@ -24,7 +24,7 @@ import lombok.val;
 /**
  * ReflectionUtils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version 1.0
  * @since 2019-07-31 09:54
  **/
@@ -36,7 +36,7 @@ public class ReflectionUtil {
 	 *
 	 * @param type 类型
 	 * @return java.lang.Class<?>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
 	public Class<?> classForName(String type) {
@@ -52,7 +52,7 @@ public class ReflectionUtil {
 	 *
 	 * @param type 类型
 	 * @return java.lang.Class<?>
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
 	public Class<?> tryClassForName(String type) {
@@ -69,7 +69,7 @@ public class ReflectionUtil {
 	 * @param cls        类
 	 * @param methodName 方法名
 	 * @return java.lang.reflect.Method
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
 	public Method findMethod(Class<?> cls, String methodName) {
@@ -95,7 +95,7 @@ public class ReflectionUtil {
 	 * @param methodName 方法名
 	 * @param argsTypes  参数类型
 	 * @return java.lang.reflect.Method
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
 	public Method findMethod0(Class<?> cls, String methodName, Class<?>... argsTypes)
@@ -115,7 +115,7 @@ public class ReflectionUtil {
 	 * @param param        参数
 	 * @param defaultValue 默认值
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
 	public <T> T tryCallMethod(Object obj, String methodName, Object[] param, T defaultValue) {
@@ -142,7 +142,7 @@ public class ReflectionUtil {
 	 * @param methodName 方法名
 	 * @param param      参数
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
 	public Object callMethod(Object obj, String methodName, Object[] param) {
@@ -164,7 +164,7 @@ public class ReflectionUtil {
 	 * @param methodName 方法名
 	 * @param params     参数
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
 	public Object callMethod(Class<?> clazz, String methodName, Object[] params) {
@@ -187,7 +187,7 @@ public class ReflectionUtil {
 	 * @param params     参数
 	 * @param paramTypes 参数类型
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
 	public Object callMethodWithParams(Class<?> clazz, String methodName, Object[] params,
@@ -211,7 +211,7 @@ public class ReflectionUtil {
 	 * @param params     参数
 	 * @param paramTypes 参数类型
 	 * @return java.lang.Object
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
 	public Object callMethodWithParams(Object object, String methodName, Object[] params,
@@ -233,7 +233,7 @@ public class ReflectionUtil {
 	 * @param cls  类型
 	 * @param name 字段名称
 	 * @return java.lang.reflect.Field
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
 	public Field findField(Class<?> cls, String name) {
@@ -259,7 +259,7 @@ public class ReflectionUtil {
 	 * @param obj  对象
 	 * @param name 字段名称
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
 	public <T> T getFieldValue(Object obj, String name) {
@@ -284,7 +284,7 @@ public class ReflectionUtil {
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
 	public <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
@@ -311,7 +311,7 @@ public class ReflectionUtil {
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
 	public <T> T tryGetStaticFieldValue(String cls, String name, T defaultValue) {
@@ -329,7 +329,7 @@ public class ReflectionUtil {
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
 	public <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
@@ -355,7 +355,7 @@ public class ReflectionUtil {
 	 * @param field 字段
 	 * @param obj   对象
 	 * @param value 值
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
 	public void setFieldValue(Field field, Object obj, Object value) {
@@ -376,7 +376,7 @@ public class ReflectionUtil {
 	 * @param path 路径
 	 * @param deft deft
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
 	public <T> T tryGetValue(Object obj, String path, T deft) {
@@ -404,7 +404,7 @@ public class ReflectionUtil {
 	 * @param obj  对象
 	 * @param path 路径
 	 * @return T
-	 * @author dengtao
+	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
 	public <T> T tryGetValue(Object obj, String path) {

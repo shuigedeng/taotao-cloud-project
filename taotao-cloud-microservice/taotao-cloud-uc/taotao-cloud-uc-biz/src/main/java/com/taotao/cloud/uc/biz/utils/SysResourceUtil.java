@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 
 /**
- * @author dengtao
+ * @author shuigedeng
  * @since 2020/10/20 16:16
  * @version 1.0.0
  */
