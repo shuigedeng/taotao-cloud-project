@@ -28,7 +28,7 @@
 // * @version 1.0.0
 // * @since 2020/4/29 20:26
 // */
-//public class TaotaoCloudAuthenticationToken extends AbstractAuthenticationToken {
+//public class TaoTaoCloudAuthenticationToken extends AbstractAuthenticationToken {
 //
 //	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 //
@@ -49,7 +49,7 @@
 //	 */
 //	private final String userType;
 //
-//	public TaotaoCloudAuthenticationToken(Object principal,
+//	public TaoTaoCloudAuthenticationToken(Object principal,
 //		Object credentials,
 //		String grantType,
 //		String userType) {
@@ -61,7 +61,7 @@
 //		setAuthenticated(false);
 //	}
 //
-//	public TaotaoCloudAuthenticationToken(Object principal,
+//	public TaoTaoCloudAuthenticationToken(Object principal,
 //		Object credentials,
 //		String grantType,
 //		String userType,

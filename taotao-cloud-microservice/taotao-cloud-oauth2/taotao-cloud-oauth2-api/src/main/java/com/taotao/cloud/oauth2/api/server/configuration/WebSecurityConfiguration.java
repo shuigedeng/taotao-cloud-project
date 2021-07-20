@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oauth2.api.server.configuration;
 
-import com.taotao.cloud.oauth2.api.server.authentication.TaotaoCloudAuthenticationSecurityConfig;
+import com.taotao.cloud.oauth2.api.server.authentication.TaoTaoCloudAuthenticationSecurityConfig;
 import com.taotao.cloud.oauth2.api.server.component.Oauth2UserServiceComponent;
 import com.taotao.cloud.oauth2.api.server.handler.OauthLogoutSuccessHandler;
 import com.taotao.cloud.security.service.IUserDetailsService;
@@ -89,7 +89,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final LogoutHandler oauthLogoutHandler;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private final AuthenticationFailureHandler authenticationFailureHandler;
-    private final TaotaoCloudAuthenticationSecurityConfig taotaoCloudAuthenticationSecurityConfig;
+    private final TaoTaoCloudAuthenticationSecurityConfig taotaoCloudAuthenticationSecurityConfig;
     private final IUserDetailsService userDetailsService;
     private final ApplicationEventPublisher applicationEventPublisher;
 

@@ -1,7 +1,7 @@
 import scrapy
 
 
-class TaotaoCloudBlogSpider(scrapy.Spider):
+class TaoTaoCloudBlogSpider(scrapy.Spider):
     name = 'taotao_cloud_blog'
     allowed_domains = ['blog.taotaocloud.top']
     start_urls = ['https://blog.taotaocloud.top/']

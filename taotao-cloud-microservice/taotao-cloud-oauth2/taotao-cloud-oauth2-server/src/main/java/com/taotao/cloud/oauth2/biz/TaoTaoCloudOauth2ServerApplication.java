@@ -38,7 +38,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * TaotaoCloudAuthApplication
+ * TaoTaoCloudAuthApplication
  *
  * @author shuigedeng
  * @since 2020/4/29 15:13

@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'taotao_cloud_blog_spider.middlewares.TaotaoCloudBlogSpiderSpiderMiddleware': 543,
+#    'taotao_cloud_blog_spider.middlewares.TaoTaoCloudBlogSpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'taotao_cloud_blog_spider.middlewares.TaotaoCloudBlogSpiderDownloaderMiddleware': 543,
+#    'taotao_cloud_blog_spider.middlewares.TaoTaoCloudBlogSpiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'taotao_cloud_blog_spider.pipelines.TaotaoCloudBlogSpiderPipeline': 300,
+#    'taotao_cloud_blog_spider.pipelines.TaoTaoCloudBlogSpiderPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

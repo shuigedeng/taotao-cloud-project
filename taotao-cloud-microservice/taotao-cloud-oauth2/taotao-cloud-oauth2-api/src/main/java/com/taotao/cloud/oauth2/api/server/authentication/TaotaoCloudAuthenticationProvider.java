@@ -21,7 +21,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.security.service.IUserDetailsService;
-import com.taotao.cloud.security.token.TaotaoCloudAuthenticationToken;
+import com.taotao.cloud.security.token.TaoTaoCloudAuthenticationToken;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -46,20 +46,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * TaotaoCloudAuthenticationProvider
+ * TaoTaoCloudAuthenticationProvider
  *
  * @author shuigedeng
  * @since 2020/10/19 11:21
  * @version 1.0.0
  */
-public class TaotaoCloudAuthenticationProvider implements
+public class TaoTaoCloudAuthenticationProvider implements
         AuthenticationProvider, InitializingBean, MessageSourceAware {
     protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
     private UserCache userCache = new NullUserCache();
     private boolean forcePrincipalAsString = false;
     protected boolean hideUserNotFoundExceptions = true;
-    private UserDetailsChecker preAuthenticationChecks = new TaotaoCloudAuthenticationProvider.DefaultPreAuthenticationChecks();
-    private UserDetailsChecker postAuthenticationChecks = new TaotaoCloudAuthenticationProvider.DefaultPostAuthenticationChecks();
+    private UserDetailsChecker preAuthenticationChecks = new TaoTaoCloudAuthenticationProvider.DefaultPreAuthenticationChecks();
+    private UserDetailsChecker postAuthenticationChecks = new TaoTaoCloudAuthenticationProvider.DefaultPostAuthenticationChecks();
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private volatile String userNotFoundEncodedPassword;
     private PasswordEncoder passwordEncoder;
@@ -67,7 +67,7 @@ public class TaotaoCloudAuthenticationProvider implements
     private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
     private ISmsCodeService smsCodeService;
 
-    public TaotaoCloudAuthenticationProvider() {
+    public TaoTaoCloudAuthenticationProvider() {
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
 
@@ -81,11 +81,11 @@ public class TaotaoCloudAuthenticationProvider implements
     @Override
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException {
-        Assert.isInstanceOf(TaotaoCloudAuthenticationToken.class, authentication,
+        Assert.isInstanceOf(TaoTaoCloudAuthenticationToken.class, authentication,
                 () -> messages.getMessage(
                         "AbstractUserDetailsAuthenticationProvider.onlySupports",
-                        "Only TaotaoCloudAuthenticationToken is supported"));
-        TaotaoCloudAuthenticationToken authenticationToken = (TaotaoCloudAuthenticationToken) authentication;
+                        "Only TaoTaoCloudAuthenticationToken is supported"));
+        TaoTaoCloudAuthenticationToken authenticationToken = (TaoTaoCloudAuthenticationToken) authentication;
         String grantType = authenticationToken.getGrantType();
         Object principal = authenticationToken.getPrincipal();
         Object credentials = authenticationToken.getCredentials();
@@ -128,7 +128,7 @@ public class TaotaoCloudAuthenticationProvider implements
             cacheWasUsed = false;
             try {
                 user = retrieveUser(username,
-                        (TaotaoCloudAuthenticationToken) authentication);
+                        (TaoTaoCloudAuthenticationToken) authentication);
             } catch (UsernameNotFoundException notFound) {
                 LogUtil.error("User '" + username + "' not found");
 
@@ -153,17 +153,17 @@ public class TaotaoCloudAuthenticationProvider implements
         try {
             preAuthenticationChecks.check(user);
             additionalAuthenticationChecks(user,
-                    (TaotaoCloudAuthenticationToken) authentication);
+                    (TaoTaoCloudAuthenticationToken) authentication);
         } catch (AuthenticationException exception) {
             if (cacheWasUsed) {
                 // There was a problem, so try again after checking
                 // we're using latest data (i.e. not from the cache)
                 cacheWasUsed = false;
                 user = retrieveUser(username,
-                        (TaotaoCloudAuthenticationToken) authentication);
+                        (TaoTaoCloudAuthenticationToken) authentication);
                 preAuthenticationChecks.check(user);
                 additionalAuthenticationChecks(user,
-                        (TaotaoCloudAuthenticationToken) authentication);
+                        (TaoTaoCloudAuthenticationToken) authentication);
             } else {
                 throw exception;
             }
@@ -181,7 +181,7 @@ public class TaotaoCloudAuthenticationProvider implements
 
     // 第三步校验
     protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  TaotaoCloudAuthenticationToken authentication)
+                                                  TaoTaoCloudAuthenticationToken authentication)
             throws AuthenticationException {
         Object credentials = authentication.getCredentials();
         if (credentials == null) {
@@ -209,7 +209,7 @@ public class TaotaoCloudAuthenticationProvider implements
     }
 
     protected final UserDetails retrieveUser(String username,
-                                             TaotaoCloudAuthenticationToken authentication)
+                                             TaoTaoCloudAuthenticationToken authentication)
             throws AuthenticationException {
         prepareTimingAttackProtection();
         try {
@@ -234,11 +234,11 @@ public class TaotaoCloudAuthenticationProvider implements
     protected Authentication createSuccessAuthentication(Object principal,
                                                          Authentication authentication,
                                                          UserDetails user) {
-        TaotaoCloudAuthenticationToken result = new TaotaoCloudAuthenticationToken(
+        TaoTaoCloudAuthenticationToken result = new TaoTaoCloudAuthenticationToken(
                 principal,
                 authentication.getCredentials(),
-                ((TaotaoCloudAuthenticationToken) authentication).getGrantType(),
-                ((TaotaoCloudAuthenticationToken) authentication).getUserType(),
+                ((TaoTaoCloudAuthenticationToken) authentication).getGrantType(),
+                ((TaoTaoCloudAuthenticationToken) authentication).getUserType(),
                 this.authoritiesMapper.mapAuthorities(user.getAuthorities()));
         result.setDetails(authentication.getDetails());
         return result;
@@ -250,7 +250,7 @@ public class TaotaoCloudAuthenticationProvider implements
         }
     }
 
-    private void mitigateAgainstTimingAttack(TaotaoCloudAuthenticationToken authentication) {
+    private void mitigateAgainstTimingAttack(TaoTaoCloudAuthenticationToken authentication) {
         if (authentication.getCredentials() != null) {
             String presentedPassword = authentication.getCredentials().toString();
             this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
@@ -301,7 +301,7 @@ public class TaotaoCloudAuthenticationProvider implements
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return (TaotaoCloudAuthenticationToken.class
+        return (TaoTaoCloudAuthenticationToken.class
                 .isAssignableFrom(authentication));
     }
 

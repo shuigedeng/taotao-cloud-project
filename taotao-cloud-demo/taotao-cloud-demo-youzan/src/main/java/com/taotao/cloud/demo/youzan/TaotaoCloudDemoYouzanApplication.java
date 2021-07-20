@@ -13,10 +13,10 @@ import java.io.Writer;
 
 // @RestController
 // @SpringBootApplication
-public class TaotaoCloudDemoYouzanApplication {
+public class TaoTaoCloudDemoYouzanApplication {
 
     public static void main(String[] args) {
-        // SpringApplication.run(TaotaoCloudDemoYouzanApplication.class, args);
+        // SpringApplication.run(TaoTaoCloudDemoYouzanApplication.class, args);
     }
 
     // @RequestMapping("/sm.gif")

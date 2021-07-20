@@ -26,10 +26,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaotaoCloudBackendGraphqlApplication {
+public class TaoTaoCloudBackendGraphqlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudBackendGraphqlApplication.class, args);
+		SpringApplication.run(TaoTaoCloudBackendGraphqlApplication.class, args);
 	}
 
 }

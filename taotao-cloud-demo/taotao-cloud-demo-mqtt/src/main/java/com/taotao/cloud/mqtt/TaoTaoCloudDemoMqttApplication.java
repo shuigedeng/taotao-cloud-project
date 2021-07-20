@@ -19,9 +19,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TaotaoCloudDemoMqttApplication {
+public class TaoTaoCloudDemoMqttApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudDemoMqttApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDemoMqttApplication.class, args);
 	}
 }

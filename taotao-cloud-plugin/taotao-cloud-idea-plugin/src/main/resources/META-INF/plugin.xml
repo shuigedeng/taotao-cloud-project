@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.taotao.cloud.idea.plugin</id>
-    <name>TaotaoCloudIdeaPlugin</name>
+    <name>TaoTaoCloudIdeaPlugin</name>
     <vendor
 		email="981376577@qq.com"
 		url="https://taotaocloud.top">

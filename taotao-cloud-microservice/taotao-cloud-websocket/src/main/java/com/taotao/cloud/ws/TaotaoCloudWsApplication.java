@@ -12,10 +12,10 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 @SpringBootApplication
-public class TaotaoCloudWsApplication {
+public class TaoTaoCloudWsApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(TaotaoCloudWsApplication.class, args);
+		SpringApplication.run(TaoTaoCloudWsApplication.class, args);
 
 		//启动服务端
 		NettyServer nettyServer = new NettyServer();

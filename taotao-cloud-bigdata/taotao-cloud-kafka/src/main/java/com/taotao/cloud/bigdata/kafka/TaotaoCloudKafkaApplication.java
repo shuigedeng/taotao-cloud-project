@@ -25,10 +25,10 @@ import org.springframework.kafka.annotation.KafkaListener;
 @SpringBootApplication
 @EnableKafka
 @Slf4j
-public class TaotaoCloudKafkaApplication {
+public class TaoTaoCloudKafkaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudKafkaApplication.class, args);
+		SpringApplication.run(TaoTaoCloudKafkaApplication.class, args);
 	}
 
 	@KafkaListener(topics = "access")

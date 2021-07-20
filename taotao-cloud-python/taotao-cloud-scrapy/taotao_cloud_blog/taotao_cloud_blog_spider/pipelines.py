@@ -8,6 +8,6 @@
 from itemadapter import ItemAdapter
 
 
-class TaotaoCloudBlogSpiderPipeline:
+class TaoTaoCloudBlogSpiderPipeline:
     def process_item(self, item, spider):
         return item

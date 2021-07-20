@@ -32,10 +32,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaotaoCloudDfsApplication {
+public class TaoTaoCloudDfsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudDfsApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDfsApplication.class, args);
 	}
 
 }

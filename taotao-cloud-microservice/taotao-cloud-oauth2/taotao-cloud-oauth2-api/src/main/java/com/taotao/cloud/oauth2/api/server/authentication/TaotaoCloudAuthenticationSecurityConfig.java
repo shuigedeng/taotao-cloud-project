@@ -29,14 +29,14 @@
  import org.springframework.stereotype.Component;
 
  /**
-  * TaotaoCloudAuthentication认证安全配置
+  * TaoTaoCloudAuthentication认证安全配置
   *
   * @author shuigedeng
   * @since 2020/5/2 11:16
   * @version 1.0.0
   */
  @Component
- public class TaotaoCloudAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+ public class TaoTaoCloudAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
      @Autowired
      private PasswordEncoder passwordEncoder;
      @Autowired
@@ -51,13 +51,13 @@
      @Override
      public void configure(HttpSecurity http) throws Exception {
          super.configure(http);
-         TaotaoCloudAuthenticationFilter taotaoCloudAuthenticationFilter = new TaotaoCloudAuthenticationFilter();
+         TaoTaoCloudAuthenticationFilter taotaoCloudAuthenticationFilter = new TaoTaoCloudAuthenticationFilter();
 
          taotaoCloudAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
          taotaoCloudAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
          taotaoCloudAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
 
-         TaotaoCloudAuthenticationProvider taotaoCloudAuthenticationProvider = new TaotaoCloudAuthenticationProvider();
+         TaoTaoCloudAuthenticationProvider taotaoCloudAuthenticationProvider = new TaoTaoCloudAuthenticationProvider();
          taotaoCloudAuthenticationProvider.setUserDetailService(userDetailsService);
          taotaoCloudAuthenticationProvider.setHideUserNotFoundExceptions(false);
          taotaoCloudAuthenticationProvider.setSmsCodeService(smsCodeService);

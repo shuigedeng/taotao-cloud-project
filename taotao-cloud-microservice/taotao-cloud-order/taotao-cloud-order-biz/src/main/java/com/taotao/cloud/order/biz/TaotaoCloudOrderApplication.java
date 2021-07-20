@@ -28,10 +28,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaotaoCloudOrderApplication {
+public class TaoTaoCloudOrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudOrderApplication.class, args);
+		SpringApplication.run(TaoTaoCloudOrderApplication.class, args);
 	}
 
 }

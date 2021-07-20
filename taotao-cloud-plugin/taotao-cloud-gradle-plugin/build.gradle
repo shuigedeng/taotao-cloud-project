@@ -45,8 +45,8 @@ dependencies {
 //            //from components.java
 //
 //            pom {
-//                name = 'TaotaoCloudGradlePlugin'
-//                description = 'TaotaoCloudGradlePlugin'
+//                name = 'TaoTaoCloudGradlePlugin'
+//                description = 'TaoTaoCloudGradlePlugin'
 //                url = 'https://taotaocloud.top'
 ////                properties = [
 ////                        myProp: "value",

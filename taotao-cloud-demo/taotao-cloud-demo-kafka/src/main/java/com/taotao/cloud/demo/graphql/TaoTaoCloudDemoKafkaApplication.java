@@ -20,10 +20,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 //@EnableKafka
-public class TaotaoCloudDemoKafkaApplication {
+public class TaoTaoCloudDemoKafkaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaotaoCloudDemoKafkaApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDemoKafkaApplication.class, args);
 	}
 
 //	@KafkaListener(topics = "access")

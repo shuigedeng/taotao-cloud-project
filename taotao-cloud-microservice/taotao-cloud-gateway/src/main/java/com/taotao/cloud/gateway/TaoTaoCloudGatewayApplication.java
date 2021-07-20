@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * TaotaoCloudGatewayApplication
+ * TaoTaoCloudGatewayApplication
  *
  * @author shuigedeng
  * @version 1.0.0

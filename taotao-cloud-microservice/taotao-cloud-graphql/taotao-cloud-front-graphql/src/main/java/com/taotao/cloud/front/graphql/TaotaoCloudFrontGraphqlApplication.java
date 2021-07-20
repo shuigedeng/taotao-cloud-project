@@ -7,10 +7,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class TaotaoCloudFrontGraphqlApplication {
+public class TaoTaoCloudFrontGraphqlApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaotaoCloudFrontGraphqlApplication.class, args);
+        SpringApplication.run(TaoTaoCloudFrontGraphqlApplication.class, args);
     }
 
 }

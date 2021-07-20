@@ -27,7 +27,7 @@ import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
 /**
- * TaotaoCloudImportSelector
+ * TaoTaoCloudImportSelector
  *
  * @author shuigedeng
  * @version 1.0.0

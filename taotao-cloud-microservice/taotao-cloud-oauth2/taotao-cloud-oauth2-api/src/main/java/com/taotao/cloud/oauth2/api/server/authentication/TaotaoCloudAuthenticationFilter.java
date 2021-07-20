@@ -17,7 +17,7 @@ package com.taotao.cloud.oauth2.api.server.authentication;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.security.token.TaotaoCloudAuthenticationToken;
+import com.taotao.cloud.security.token.TaoTaoCloudAuthenticationToken;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,8 +40,8 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2020/4/29 20:23
  * @version 1.0.0
  */
-public class TaotaoCloudAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-    TaotaoCloudAuthenticationFilter() {
+public class TaoTaoCloudAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+    TaoTaoCloudAuthenticationFilter() {
 //        super(new AntPathRequestMatcher(CommonConstant.CUSTOM_OAUTH_LOGIN, HttpMethod.POST.toString()));
     }
 
@@ -50,7 +50,7 @@ public class TaotaoCloudAuthenticationFilter extends AbstractAuthenticationProce
         String grantType = obtainParameter(request, CommonConstant.TAOTAO_CLOUD_GRANT_TYPE);
         String userType = obtainParameter(request, CommonConstant.TAOTAO_CLOUD_USER_TYPE);
 
-        TaotaoCloudAuthenticationToken token;
+        TaoTaoCloudAuthenticationToken token;
         String principal;
         String credentials;
 
@@ -75,7 +75,7 @@ public class TaotaoCloudAuthenticationFilter extends AbstractAuthenticationProce
         }
         principal = principal.trim();
 
-        token = new TaotaoCloudAuthenticationToken(principal, credentials, grantType, userType);
+        token = new TaoTaoCloudAuthenticationToken(principal, credentials, grantType, userType);
         setDetails(request, token);
         return this.getAuthenticationManager().authenticate(token);
     }
