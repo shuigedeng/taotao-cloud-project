@@ -15,15 +15,27 @@
  */
 package com.taotao.cloud.loadbalancer.annotation;
 
-import com.taotao.cloud.loadbalancer.component.HttpClientComponent;
+import com.taotao.cloud.loadbalancer.properties.RestTemplateProperties;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.annotation.Order;
 
 /**
- * 开启feign拦截器传递数据给下游服务，包含基础数据和http的相关数据
+ * EnableTaoTaoCloudHttpClient
  *
  * @author shuigedeng
  * @version 1.0.0
@@ -31,7 +43,54 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({HttpClientComponent.class})
+@Import({EnableTaoTaoCloudHttpClient.HttpClientComponent.class})
 public @interface EnableTaoTaoCloudHttpClient {
 
+
+
+
+	/**
+	 * HttpClientComponent
+	 *
+	 * @author shuigedeng
+	 * @version 1.0.0
+	 * @since 2020/6/15 11:31
+	 */
+	public class HttpClientComponent {
+
+		/**
+		 * 使用连接池的 httpclient
+		 */
+		@Bean
+		@Order(500)
+		public HttpClient httpClient(RestTemplateProperties restTemplateProperties) {
+			Registry<ConnectionSocketFactory> registry = RegistryBuilder
+				.<ConnectionSocketFactory>create()
+				.register("http", PlainConnectionSocketFactory.getSocketFactory())
+				.register("https", SSLConnectionSocketFactory.getSocketFactory())
+				.build();
+
+			PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
+				registry);
+			// 最大链接数
+			connectionManager.setMaxTotal(restTemplateProperties.getMaxTotal());
+			// 同路由并发数20
+			connectionManager.setDefaultMaxPerRoute(restTemplateProperties.getMaxPerRoute());
+
+			RequestConfig requestConfig = RequestConfig.custom()
+				// 读超时
+				.setSocketTimeout(restTemplateProperties.getReadTimeout())
+				// 链接超时
+				.setConnectTimeout(restTemplateProperties.getConnectTimeout())
+				// 链接不够用的等待时间
+				.setConnectionRequestTimeout(restTemplateProperties.getReadTimeout())
+				.build();
+
+			return HttpClientBuilder.create()
+				.setDefaultRequestConfig(requestConfig)
+				.setConnectionManager(connectionManager)
+				.setRetryHandler(new DefaultHttpRequestRetryHandler(3, true))
+				.build();
+		}
+	}
 }

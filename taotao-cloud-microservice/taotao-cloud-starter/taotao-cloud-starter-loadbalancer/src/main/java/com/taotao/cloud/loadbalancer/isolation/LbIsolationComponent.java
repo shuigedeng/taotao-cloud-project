@@ -13,9 +13,8 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
   */
- package com.taotao.cloud.ribbon.lb;
+ package com.taotao.cloud.loadbalancer.isolation;
 
- import com.taotao.cloud.loadbalancer.isolation.CustomLoadBalancer;
  import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  import org.springframework.cloud.client.ServiceInstance;
  import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
