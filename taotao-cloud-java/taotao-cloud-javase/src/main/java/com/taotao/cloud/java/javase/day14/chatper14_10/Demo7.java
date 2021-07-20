@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 案例2：使用阻塞队列实现生产者和消费者
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo7 {

@@ -7,7 +7,7 @@ import java.util.ListIterator;
 /**
  * ArrayList的使用
  * 存储结构:数组，查找遍历速度块，增删慢
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

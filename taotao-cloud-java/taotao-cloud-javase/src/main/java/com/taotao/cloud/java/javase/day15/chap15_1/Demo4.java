@@ -9,7 +9,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 /**
  * 使用字节缓冲流读取
  * BufferedInputStream
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

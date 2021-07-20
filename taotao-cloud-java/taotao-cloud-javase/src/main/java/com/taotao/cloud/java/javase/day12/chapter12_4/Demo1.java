@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Map接口的使用
  * 特点:(1)存储键值对 (2)键不能重复，值可以重复 (3)无序
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

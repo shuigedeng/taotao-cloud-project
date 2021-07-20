@@ -9,7 +9,7 @@ import java.net.Socket;
 
 /**
  * TCP服务器端
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpFileServer {

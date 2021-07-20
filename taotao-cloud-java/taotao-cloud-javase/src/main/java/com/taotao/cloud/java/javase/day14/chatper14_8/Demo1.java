@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 	
  * 
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

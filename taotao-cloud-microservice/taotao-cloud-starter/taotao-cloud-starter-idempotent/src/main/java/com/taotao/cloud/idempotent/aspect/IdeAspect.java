@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  * 两种模式的拦截 1.rid 是针对每一次请求的 2.key+val 是针对相同参数请求
  * </p>
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Slf4j
 @Aspect

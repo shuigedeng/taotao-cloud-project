@@ -11,7 +11,7 @@
 ///**
 // * RestTemplate Http请求封装
 // *
-// * @author pangu
+// * @author shuigedeng
 // */
 //public class RestTemplateUtil {
 //

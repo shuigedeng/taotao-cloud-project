@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * 学生类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Student implements Serializable{

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Classname EmailUtil
  * @Description 邮件工具类
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-06-15 10:47
  * @Version 1.0
  */

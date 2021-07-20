@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
  * 使用字节缓冲流写入文件
  * BufferedOutputStream
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

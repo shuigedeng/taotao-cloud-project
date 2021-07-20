@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chapter14_1;
 /**
  * 卖票窗口类(线程类)
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TicketWin extends Thread{

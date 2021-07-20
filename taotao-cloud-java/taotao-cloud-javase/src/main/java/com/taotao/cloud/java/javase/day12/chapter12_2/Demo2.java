@@ -9,7 +9,7 @@ import java.util.ListIterator;
 /**
  * LinkedList的使用
  * 存储结构:双向链表
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

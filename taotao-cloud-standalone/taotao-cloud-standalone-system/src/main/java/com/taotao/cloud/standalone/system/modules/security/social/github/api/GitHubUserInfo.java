@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @Classname GiteeAdapter
  * @Description github 用户信息
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 21:49
  * @Version 1.0
  */

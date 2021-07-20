@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_5;
 /**
  * 创建两个锁对象
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class MyLock {

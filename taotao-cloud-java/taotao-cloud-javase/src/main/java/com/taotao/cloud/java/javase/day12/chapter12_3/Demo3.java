@@ -9,7 +9,7 @@ import java.util.Iterator;
  * 存储过程(重复依据)
  * (1)根据hashcode计算保存的位置，如果此位置为空，则直接保存，如果不为空执行第二步。
  * (2)再执行equals方法，如果equals方法为true，则认为是重复，否则，形成链表
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

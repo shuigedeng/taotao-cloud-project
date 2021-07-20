@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 /**
  * @Classname SecurityUtil
  * @Description 安全服务工具类
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-05-08 10:12
  * @Version 1.0
  */
@@ -40,7 +40,7 @@ public class SecurityUtil {
     }
 
     /**
-     * @Author 李号东
+     * @Author shuigedeng
      * @Description 获取用户
      * @since 11:29 2019-05-10
      **/

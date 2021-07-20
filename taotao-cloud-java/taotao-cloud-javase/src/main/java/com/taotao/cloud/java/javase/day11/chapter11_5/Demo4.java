@@ -6,7 +6,7 @@ package com.taotao.cloud.java.javase.day11.chapter11_5;
 3.在text前面插入一个easy
 4.将每个单词的首字母改为大写
 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

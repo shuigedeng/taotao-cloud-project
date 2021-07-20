@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day09.abs2;
 /**
  * 交通工具类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public abstract class Vehicle {

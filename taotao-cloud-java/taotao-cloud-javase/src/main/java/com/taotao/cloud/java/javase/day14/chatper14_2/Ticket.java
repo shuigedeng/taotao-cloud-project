@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_2;
 /**
  * 票类(共享资源)
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Ticket implements Runnable {

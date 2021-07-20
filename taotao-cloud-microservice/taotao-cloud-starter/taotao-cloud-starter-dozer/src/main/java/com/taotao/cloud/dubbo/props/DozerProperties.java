@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 /**
  * Dozer属性
- * @author pangu
+ * @author shuigedeng
  */
 @Data
 @RefreshScope

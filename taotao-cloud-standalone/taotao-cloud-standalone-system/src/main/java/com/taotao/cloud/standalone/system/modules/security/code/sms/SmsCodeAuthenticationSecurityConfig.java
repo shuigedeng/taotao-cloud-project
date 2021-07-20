@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Classname SmsCodeAuthenticationSecurityConfig
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 12:08
  * @Version 1.0
  */

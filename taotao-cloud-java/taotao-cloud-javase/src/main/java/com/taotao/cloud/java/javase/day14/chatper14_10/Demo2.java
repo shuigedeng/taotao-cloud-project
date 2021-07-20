@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 /**
  * 使用多线程操作CopyOnWriteArrayList
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

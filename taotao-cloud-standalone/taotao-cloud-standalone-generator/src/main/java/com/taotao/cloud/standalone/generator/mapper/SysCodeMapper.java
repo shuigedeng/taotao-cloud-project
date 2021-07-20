@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @Classname SysCodeMapper
  * @Description 代码生成mapper
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-29 18:51
  * @Version 1.0
  */

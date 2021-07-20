@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * @Classname R
  * @Description 响应信息主体
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-03-27 21:54
  * @Version 1.0
  */

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day09.final_1;
 /**
  * final修饰类：最终类，不能被继承
- * @author wgy
+ * @author shuigedeng
  *
  */
 public  class Car {

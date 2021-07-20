@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chapter14_1;
 /**
  * 线程类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class MyThread extends Thread {

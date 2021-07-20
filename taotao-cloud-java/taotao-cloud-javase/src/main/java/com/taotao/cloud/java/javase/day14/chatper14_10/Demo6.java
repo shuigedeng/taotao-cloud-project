@@ -6,7 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
  * 阻塞队列的使用
  * 案例1：创建一个有界队列，添加数据
  * 案例2：使用阻塞队列实现生产者和消费者
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

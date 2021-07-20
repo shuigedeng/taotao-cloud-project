@@ -6,7 +6,7 @@ import java.util.Scanner;
  * 演示try...catch...finally...使用
  * finally最后的
  * 表示有没有发生异常都会执行的代码
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

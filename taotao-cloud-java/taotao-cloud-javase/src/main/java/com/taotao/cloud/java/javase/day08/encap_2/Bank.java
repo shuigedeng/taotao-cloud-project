@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * 银行类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Bank {

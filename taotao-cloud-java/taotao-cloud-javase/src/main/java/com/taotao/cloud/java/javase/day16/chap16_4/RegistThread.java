@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /**
  * 实现注册功能
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class RegistThread extends Thread{

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day09.abs;
 /**
  * 抽象动物类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public abstract class Animal {

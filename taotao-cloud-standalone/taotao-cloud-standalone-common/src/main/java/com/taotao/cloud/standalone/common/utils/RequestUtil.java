@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Classname RequestUtil
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019/12/28 3:29 下午
  * @Version 1.0
  */

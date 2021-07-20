@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Classname SysCodeGenController
  * @Description 代码生成
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-02 14:32
  * @Version 1.0
  */

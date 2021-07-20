@@ -7,7 +7,7 @@ import java.util.Iterator;
  * HashSet集合的使用
  * 存储结构:哈希表(数组+链表+红黑树)
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

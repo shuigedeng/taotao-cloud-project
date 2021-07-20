@@ -10,7 +10,7 @@ import org.redisson.config.Config;
 /**
  * Redisson核心配置，用于提供初始化的redisson实例
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-22
  */
 @Slf4j

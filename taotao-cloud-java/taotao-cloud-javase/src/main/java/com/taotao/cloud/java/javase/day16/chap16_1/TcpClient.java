@@ -11,7 +11,7 @@ import java.net.Socket;
  * 2 获取输出流，发送数据给服务器
  * 3 获取输入流，读取服务器回复的数据
  * 4 关闭释放资源
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpClient {

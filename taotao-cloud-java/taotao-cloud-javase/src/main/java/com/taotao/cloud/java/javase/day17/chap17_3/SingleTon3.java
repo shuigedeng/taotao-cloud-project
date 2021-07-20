@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day17.chap17_3;
 /**
  * 单例第三种写法：静态内部类写法
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class SingleTon3 {

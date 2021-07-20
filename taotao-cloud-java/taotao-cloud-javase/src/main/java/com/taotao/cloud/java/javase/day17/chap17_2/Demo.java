@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * 客户程序
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo {

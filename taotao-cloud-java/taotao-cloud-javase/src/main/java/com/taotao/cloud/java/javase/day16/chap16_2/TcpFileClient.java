@@ -6,7 +6,7 @@ import java.net.Socket;
 
 /**
  * Tcp客户端
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpFileClient {

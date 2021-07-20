@@ -32,7 +32,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 /**
  * 请求资源扫描监听器
  *
- * @author pangu
+ * @author shuigedeng
  */
 public class RequestMappingScanListener implements ApplicationListener<ApplicationReadyEvent> {
 

@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * @Classname SensitiveInfoSerialize
  * @Description 脱敏序列化类
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019/12/9 4:20 下午
  * @Version 1.0
  */

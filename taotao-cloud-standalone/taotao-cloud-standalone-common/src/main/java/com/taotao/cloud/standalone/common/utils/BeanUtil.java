@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @Classname BeanUtil
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019-09-23 15:22
  * @Version 1.0
  */

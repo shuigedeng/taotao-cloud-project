@@ -3,7 +3,7 @@ package com.taotao.cloud.standalone.common.constant;
 /**
  * @Classname MenuConstant
  * @Description 菜单常量
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-04-29 19:49
  * @Version 1.0
  */

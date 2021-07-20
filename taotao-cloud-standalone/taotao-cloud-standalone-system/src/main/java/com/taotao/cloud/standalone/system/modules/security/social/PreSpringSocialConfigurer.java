@@ -8,7 +8,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 /**
  * @Classname GiteeAdapter
  * @Description
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 21:49
  * @Version 1.0
  */

@@ -4,7 +4,7 @@ import java.io.FileWriter;
 
 /**
  * 使用FileWriter写入文件
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

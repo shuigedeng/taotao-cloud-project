@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @Classname DataScopeContext
  * @Description 创建环境角色Context:
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-06-08 16:11
  * @Version 1.0
  */

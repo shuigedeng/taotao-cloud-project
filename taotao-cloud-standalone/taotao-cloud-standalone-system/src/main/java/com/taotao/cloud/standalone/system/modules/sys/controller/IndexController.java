@@ -37,7 +37,7 @@ import java.util.UUID;
 /**
  * @Classname IndexController
  * @Description 主页模块
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-05-07 12:38
  * @Version 1.0
  */
@@ -130,7 +130,7 @@ public class IndexController {
 
 
     /**
-     * @Author 李号东
+     * @Author shuigedeng
      * @Description 暂时这样写
      * @since 08:12 2019-06-22
      **/
@@ -146,7 +146,7 @@ public class IndexController {
     }
 
     /**
-     * @Author 李号东
+     * @Author shuigedeng
      * @Description 使用jwt前后分离 只需要前端清除token即可 暂时返回success
      * @since 08:13 2019-06-22
      **/

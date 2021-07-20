@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @Classname FebsAuthenticationFailureHandler
  * @Description 登录失败处理器
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-07 23:45
  * @Version 1.0
  */

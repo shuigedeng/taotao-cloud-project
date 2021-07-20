@@ -8,7 +8,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 /**
  * 使用字符缓冲流读取文件
  * BufferedReader
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

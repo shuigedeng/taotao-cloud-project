@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * throws:声明异常
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo7 {

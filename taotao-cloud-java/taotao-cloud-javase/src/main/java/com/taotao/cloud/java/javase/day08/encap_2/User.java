@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day08.encap_2;
 /**
  * 用户类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class User {

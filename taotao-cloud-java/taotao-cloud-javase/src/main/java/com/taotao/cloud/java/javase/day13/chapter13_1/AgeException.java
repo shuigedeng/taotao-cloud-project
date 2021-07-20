@@ -3,7 +3,7 @@ package com.taotao.cloud.java.javase.day13.chapter13_1;
  * 自定义异常
  * (1)继承Exception 或子类
  * (2)添加构造方法
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class AgeException extends RuntimeException{

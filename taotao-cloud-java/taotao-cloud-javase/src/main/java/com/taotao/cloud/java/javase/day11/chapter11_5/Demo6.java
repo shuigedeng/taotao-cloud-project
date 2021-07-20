@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * 验证StringBuilder效率高于String
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

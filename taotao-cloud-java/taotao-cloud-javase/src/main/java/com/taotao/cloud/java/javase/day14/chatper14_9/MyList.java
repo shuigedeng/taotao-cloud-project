@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * ReentrantLock的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class MyList {

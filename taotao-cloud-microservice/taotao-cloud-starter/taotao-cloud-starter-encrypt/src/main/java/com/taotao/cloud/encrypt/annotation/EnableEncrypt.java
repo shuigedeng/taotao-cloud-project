@@ -10,7 +10,7 @@ import java.lang.annotation.*;
  * Enable encrypt of the Spring Application Context
  * 支持res和rsa的加密方式
  *
- * @author gaoyang pangu
+ * @author gaoyang shuigedeng
  * @since 1.6.8
  */
 @Target({ElementType.TYPE})

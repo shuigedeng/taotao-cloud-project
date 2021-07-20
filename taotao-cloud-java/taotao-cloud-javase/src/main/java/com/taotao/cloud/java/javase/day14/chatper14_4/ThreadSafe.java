@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * 线程安全问题:
  * 两个线程同时向一个数组中存放数据
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class ThreadSafe {

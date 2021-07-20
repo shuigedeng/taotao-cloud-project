@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 树根节点
- * @author pangu
+ * @author shuigedeng
  */
 @Data
 public class TreeNode implements INode {

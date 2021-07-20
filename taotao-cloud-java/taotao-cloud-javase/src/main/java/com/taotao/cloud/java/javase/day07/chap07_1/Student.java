@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day07.chap07_1;
 /**
  * 学生类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Student {

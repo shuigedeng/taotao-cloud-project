@@ -13,7 +13,7 @@ import java.net.Socket;
  * 3 获取输入流，读取客户端发送的数据
  * 4 获取输出流，发送数据给客户端
  * 5 关闭释放资源
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpServer {

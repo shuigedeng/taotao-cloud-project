@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * 用户注册登录客户端
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class UserClient {

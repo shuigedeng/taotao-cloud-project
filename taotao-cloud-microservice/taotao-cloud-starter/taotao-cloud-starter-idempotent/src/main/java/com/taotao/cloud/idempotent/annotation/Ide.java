@@ -5,7 +5,7 @@ import com.taotao.cloud.idempotent.enums.IdeTypeEnum;
 import java.lang.annotation.*;
 
 /**
- * @author pangu
+ * @author shuigedeng
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

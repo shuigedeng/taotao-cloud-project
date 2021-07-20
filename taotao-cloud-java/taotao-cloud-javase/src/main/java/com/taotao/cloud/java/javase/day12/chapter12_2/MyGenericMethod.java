@@ -2,7 +2,7 @@ package com.taotao.cloud.java.javase.day12.chapter12_2;
 /**
  * 泛型方法
  * 语法：<T> 返回值类型
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class MyGenericMethod {

@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 方法类型
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Getter
 @AllArgsConstructor

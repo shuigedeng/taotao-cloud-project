@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * 演示CopyOnWriteArraySet
  * 重复依据：equals方法
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

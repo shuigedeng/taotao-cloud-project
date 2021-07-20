@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day08.inheritance_1;
 /**
  * 鱼类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Fish extends Animal{

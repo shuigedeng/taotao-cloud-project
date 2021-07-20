@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @Classname GithubProperties
  * @Description github第三方登录配置
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 21:49
  * @Version 1.0
  */

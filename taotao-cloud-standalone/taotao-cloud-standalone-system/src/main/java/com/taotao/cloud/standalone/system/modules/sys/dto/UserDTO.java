@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Classname UserDTO
  * @Description 用户Dto
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-04-23 21:26
  * @Version 1.0
  */

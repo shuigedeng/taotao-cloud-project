@@ -10,7 +10,7 @@ import java.util.Scanner;
  * （1）正常没有发生异常
  * （2）发生异常并捕获
  * （3）发生异常，不能捕获
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

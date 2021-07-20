@@ -8,7 +8,7 @@ import org.springframework.social.connect.ConnectionFactory;
 /**
  * @Classname SocialAutoConfigurerAdapter
  * @Description 不想引入1.5版本的springboot的话只能自己按照源码重写
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-06 14:45
  * @Version 1.0
  */

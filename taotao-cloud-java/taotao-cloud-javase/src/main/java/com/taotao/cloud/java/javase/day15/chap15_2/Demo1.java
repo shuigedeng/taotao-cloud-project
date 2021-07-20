@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 /**
  * 使用FileInputStream读取文件
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

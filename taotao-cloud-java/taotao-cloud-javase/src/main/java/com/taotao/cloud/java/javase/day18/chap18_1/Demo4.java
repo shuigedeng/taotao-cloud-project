@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  * 2 类::静态方法
  * 3 类::实例方法
  * 4 类::new
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

@@ -10,7 +10,7 @@ import java.util.Iterator;
  * (2)删除元素
  * (3)遍历元素
  * (4)判断
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

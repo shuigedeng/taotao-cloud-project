@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * 演示多重catch的使用
  * try...catch(类型1)...catch(类型2)...
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

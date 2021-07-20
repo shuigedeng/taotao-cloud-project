@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * 分布式锁解析器
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-22
  * @link https://github.com/TaXueWWL/redis-distributed-lock
  */

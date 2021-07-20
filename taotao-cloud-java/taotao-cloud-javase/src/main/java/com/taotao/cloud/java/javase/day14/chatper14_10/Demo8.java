@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ConcurrentHashMap的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo8 {

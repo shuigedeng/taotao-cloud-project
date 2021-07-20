@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Stream的使用
  * (1)中间操作
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

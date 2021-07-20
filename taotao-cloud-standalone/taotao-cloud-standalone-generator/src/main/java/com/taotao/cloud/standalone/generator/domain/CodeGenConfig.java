@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @Classname CodeGenConfig
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-04 16:34
  * @Version 1.0
  */

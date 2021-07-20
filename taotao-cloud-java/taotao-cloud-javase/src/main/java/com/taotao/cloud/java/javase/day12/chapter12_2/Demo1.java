@@ -6,7 +6,7 @@ import java.util.Vector;
 /**
  * 演示Vector集合的使用
  * 存储结构:数组
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

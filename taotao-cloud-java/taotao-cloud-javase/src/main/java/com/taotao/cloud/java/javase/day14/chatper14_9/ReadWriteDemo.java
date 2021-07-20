@@ -2,7 +2,7 @@ package com.taotao.cloud.java.javase.day14.chatper14_9;
 /**
  * 演示读写锁的使用
  * ReentrantReadWriteLock
- * @author wgy
+ * @author shuigedeng
  *
  */
 

@@ -16,7 +16,7 @@ import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
 /**
  * Dubbo、Feign整合类
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Slf4j
 public class DubboFeignBuilder extends Feign.Builder {

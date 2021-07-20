@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * 案例1：递归遍历文件夹
  * 案例2：递归删除文件夹
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class ListDemo {

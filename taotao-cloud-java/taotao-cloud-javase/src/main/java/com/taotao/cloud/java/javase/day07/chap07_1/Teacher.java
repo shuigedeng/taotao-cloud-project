@@ -8,7 +8,7 @@ package com.taotao.cloud.java.javase.day07.chap07_1;
  * 方法
  *  sayHi()
  *  know(Student s); 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Teacher {

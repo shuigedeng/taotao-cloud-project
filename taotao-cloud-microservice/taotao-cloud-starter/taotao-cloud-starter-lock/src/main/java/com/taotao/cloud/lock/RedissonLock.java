@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分布式锁实现基于Redisson
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-22
  */
 @Slf4j

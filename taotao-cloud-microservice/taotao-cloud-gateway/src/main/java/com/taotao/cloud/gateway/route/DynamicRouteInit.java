@@ -23,7 +23,7 @@
 // * 动态路由初始化类
 // * 请将/doc/nacos目录下的mate-dynamic-routes.yaml配置至nacos
 // *
-// * @author pangu
+// * @author shuigedeng
 // * @since 2.3.8
 // */
 //@Slf4j

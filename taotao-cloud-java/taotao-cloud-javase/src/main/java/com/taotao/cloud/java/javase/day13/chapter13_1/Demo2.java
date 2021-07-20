@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 演示异常的产生和传递
  * 要求：输入两个数字实现两个数字相除
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

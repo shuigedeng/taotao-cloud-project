@@ -7,7 +7,7 @@ import java.util.TreeSet;
  * 使用TreeSet保存数据
  * 存储结构:红黑树
  * 要求：元素必须要实现Comparable接口,compareTo()方法返回值为0,认为是重复元素
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

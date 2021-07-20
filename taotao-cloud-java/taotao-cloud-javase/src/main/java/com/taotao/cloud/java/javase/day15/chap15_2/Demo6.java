@@ -5,7 +5,7 @@ import java.io.FileWriter;
 
 /**
  * 演示BufferedWriter的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

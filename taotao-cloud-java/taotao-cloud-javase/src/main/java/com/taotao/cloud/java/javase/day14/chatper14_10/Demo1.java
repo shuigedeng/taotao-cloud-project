@@ -8,7 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 
- * @author wgy
+ * @author shuigedeng
  * 演示：使用多线程操作线程不安全集合
  */
 public class Demo1 {

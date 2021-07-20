@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * (4)使用transient（瞬间的）修饰属性，这个属性不能序列化
  * (5)静态属性不能被序列化
  * (6)序列化多个对象,可以借助集合实现
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

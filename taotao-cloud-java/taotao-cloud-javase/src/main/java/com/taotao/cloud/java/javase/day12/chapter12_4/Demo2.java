@@ -9,7 +9,7 @@ import com.qf.chapter12_3.Person;
  * HashMap集合的使用
  * 存储结构:哈希表(数组+链表+红黑树)
  * 使用key可hashcode和equals作为重复
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

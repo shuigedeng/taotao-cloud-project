@@ -5,7 +5,7 @@ import java.net.Socket;
 
 /**
  * 使用TCP实现接收多个客户端请求
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpServer {

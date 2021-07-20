@@ -39,7 +39,7 @@ public interface ISysMenuService extends IService<SysMenu> {
     List<SysMenu> selectMenuTree(Integer uid);
 
     /**
-     * @Author 李号东
+     * @Author shuigedeng
      * @Description 根据父id查询菜单
      * @since 18:43 2019-05-12
      **/

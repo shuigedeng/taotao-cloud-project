@@ -19,7 +19,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 /**
  * @Classname WeixinAuthConfig
  * @Description 微信配置
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-23 16:50
  * @Version 1.0
  */

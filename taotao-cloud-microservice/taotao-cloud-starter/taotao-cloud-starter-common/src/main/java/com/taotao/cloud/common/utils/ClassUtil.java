@@ -26,7 +26,7 @@ import org.springframework.util.ClassUtils;
 /**
  * 类操作工具类
  *
- * @author pangu
+ * @author shuigedeng
  */
 @UtilityClass
 public class ClassUtil extends ClassUtils {

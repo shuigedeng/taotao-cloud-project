@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 
 /**
  * 线程安全问题
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day10.interface_2;
 /**
  * 接口
- * @author wgy
+ * @author shuigedeng
  *
  */
 public interface Flyable {

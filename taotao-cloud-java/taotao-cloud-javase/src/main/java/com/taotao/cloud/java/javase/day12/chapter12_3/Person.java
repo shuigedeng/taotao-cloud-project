@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day12.chapter12_3;
 /**
  * 人类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Person implements Comparable<Person>{

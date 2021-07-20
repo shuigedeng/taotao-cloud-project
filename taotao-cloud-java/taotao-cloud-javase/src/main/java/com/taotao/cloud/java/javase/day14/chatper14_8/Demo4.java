@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 
 /**
  * 使用两个线程，并发计算1~50、51~100的和，再进行汇总统计。
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

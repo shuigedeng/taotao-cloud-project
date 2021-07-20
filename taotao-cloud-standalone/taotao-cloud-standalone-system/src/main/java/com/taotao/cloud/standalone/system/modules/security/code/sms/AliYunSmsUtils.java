@@ -16,7 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 /**
  * @Classname SmsUtils
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-25 17:40
  * @Version 1.0
  */

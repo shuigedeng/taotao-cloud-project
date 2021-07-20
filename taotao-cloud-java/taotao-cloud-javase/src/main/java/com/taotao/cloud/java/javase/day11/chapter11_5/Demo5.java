@@ -2,7 +2,7 @@ package com.taotao.cloud.java.javase.day11.chapter11_5;
 /**
  * StringBuffer和StringBuilder的使用
  * 和String区别(1)效率比String高 (2)比String节省内存 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

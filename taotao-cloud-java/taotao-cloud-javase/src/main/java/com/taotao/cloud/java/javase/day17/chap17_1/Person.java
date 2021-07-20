@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Person类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Person implements Serializable,Cloneable{

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Classname SocialRedisHelper
  * @Description 将第三方用户信息保存到redis里面
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-06 11:48
  * @Version 1.0
  */

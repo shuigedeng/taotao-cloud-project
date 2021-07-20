@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 /**
  * 使用InputStreamReader读取文件，指定使用的编码
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

@@ -6,7 +6,7 @@ import java.util.TreeSet;
 /**
  * TreeSet的使用
  * 存储结构:红黑树 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

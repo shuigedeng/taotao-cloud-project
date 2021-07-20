@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * @Classname SmsCodeAuthenticationToken
  * @Description
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 11:49
  * @Version 1.0
  */

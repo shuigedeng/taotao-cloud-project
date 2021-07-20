@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 /**
  * Collection的使用:保存学生信息
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

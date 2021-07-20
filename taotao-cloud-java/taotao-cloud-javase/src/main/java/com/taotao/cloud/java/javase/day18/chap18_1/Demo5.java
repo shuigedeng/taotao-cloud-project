@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 /**
  * Stream的使用
  * (1)创建流
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

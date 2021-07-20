@@ -22,7 +22,7 @@ import java.util.Set;
 /**
  * @Classname UserDetailsServiceImpl
  * @Description 用户身份验证
- * @Author 李号东 lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-05-07 20:30
  * @Version 1.0
  */

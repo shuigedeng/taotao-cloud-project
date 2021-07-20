@@ -6,7 +6,7 @@ import java.io.FileWriter;
 /**
  * 使用FileReader和FileWriter复制文本文件,不能复制图片或二进制文件
  * 使用字节流复制任意文件。
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

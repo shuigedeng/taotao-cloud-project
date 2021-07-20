@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  * 使用ObjectInputStream实现反序列化(读取重构成对象)
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo7 {

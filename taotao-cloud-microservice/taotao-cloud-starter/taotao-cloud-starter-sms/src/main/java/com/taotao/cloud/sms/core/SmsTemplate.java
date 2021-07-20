@@ -5,7 +5,7 @@ import lombok.NonNull;
 /**
  * 短信通用操作
  *
- * @author pangu
+ * @author shuigedeng
  */
 public interface SmsTemplate {
 

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Stream的使用 终止操作
  * 
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo8 {

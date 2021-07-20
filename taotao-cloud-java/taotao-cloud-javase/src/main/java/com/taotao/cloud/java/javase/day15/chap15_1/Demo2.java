@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 /**
  * 演示文件字节输出流的使用
  * FileOutputStream
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 /**
  * @Classname IPUtil
  * @Description IP工具类
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019/12/14 10:19 下午
  * @Version 1.0
  */

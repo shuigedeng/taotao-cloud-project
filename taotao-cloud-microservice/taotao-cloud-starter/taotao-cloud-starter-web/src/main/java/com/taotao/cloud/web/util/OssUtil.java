@@ -5,7 +5,7 @@ import org.apache.commons.io.FilenameUtils;
 /**
  * OSS处理工具类
  *
- * @author pangu
+ * @author shuigedeng
  */
 public class OssUtil {
 

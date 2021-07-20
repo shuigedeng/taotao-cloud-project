@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day08.poly_1;
 /**
  * 主人类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Master {

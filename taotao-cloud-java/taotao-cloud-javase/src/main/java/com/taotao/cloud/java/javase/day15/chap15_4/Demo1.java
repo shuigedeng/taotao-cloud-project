@@ -10,7 +10,7 @@ import java.util.Properties;
  * （1）分隔符
  * （2）文件操作
  * （3）文件夹操作
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

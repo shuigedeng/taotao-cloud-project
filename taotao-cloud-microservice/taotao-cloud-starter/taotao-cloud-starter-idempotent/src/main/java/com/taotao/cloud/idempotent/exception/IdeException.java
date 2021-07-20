@@ -3,7 +3,7 @@ package com.taotao.cloud.idempotent.exception;
 /**
  * 幂等校验异常
  *
- * @author pangu
+ * @author shuigedeng
  */
 public class IdeException extends RuntimeException {
 

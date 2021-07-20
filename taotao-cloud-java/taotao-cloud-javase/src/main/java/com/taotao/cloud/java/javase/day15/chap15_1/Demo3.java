@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 
 /**
  * 使用文件字节流实现文件的复制
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

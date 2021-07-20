@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_3;
 /**
  * 线程类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class SleepThread extends Thread{

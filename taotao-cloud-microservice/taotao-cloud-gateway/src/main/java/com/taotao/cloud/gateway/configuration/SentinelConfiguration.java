@@ -28,7 +28,7 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 /**
  * SGW Sentinel配置
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Configuration
 public class SentinelConfiguration {

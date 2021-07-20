@@ -6,7 +6,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * 使用FileReader读取文件
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

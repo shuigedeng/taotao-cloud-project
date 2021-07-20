@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day08.inheritance_1;
 /**
  * 蛇类
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Snake extends Animal{

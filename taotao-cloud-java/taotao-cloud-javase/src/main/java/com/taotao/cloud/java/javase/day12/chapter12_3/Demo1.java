@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * 测试Set接口的使用
  * 特点：（1）无序、没有下标 （2）不能重复
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

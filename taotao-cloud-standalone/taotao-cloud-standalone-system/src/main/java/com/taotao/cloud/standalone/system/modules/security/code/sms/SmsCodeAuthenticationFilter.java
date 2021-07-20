@@ -19,7 +19,7 @@ import java.io.IOException;
  * 2.从request中获取手机号
  * 3.封装成自己的Authenticaiton的实现类SmsCodeAuthenticationToken（未认证）
  * 4.调用 AuthenticationManager 的 authenticate 方法进行验证（即SmsCodeAuthenticationProvider）
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-08 11:46
  * @Version 1.0
  */

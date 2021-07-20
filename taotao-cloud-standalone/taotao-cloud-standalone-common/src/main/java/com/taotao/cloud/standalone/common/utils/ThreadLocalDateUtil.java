@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @Classname ThreadLocalDateUtil
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019-09-24 09:54
  * @Version 1.0
  */

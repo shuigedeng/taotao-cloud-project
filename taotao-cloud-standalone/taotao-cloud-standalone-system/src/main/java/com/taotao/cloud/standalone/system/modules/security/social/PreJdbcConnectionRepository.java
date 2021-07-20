@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * @Classname PreConnectionData
  * @Description 个别sql语句问题 需要重写
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-19 09:18
  * @Version 1.0
  */

@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_2;
 /**
  * 存钱
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class AddMoney implements Runnable {

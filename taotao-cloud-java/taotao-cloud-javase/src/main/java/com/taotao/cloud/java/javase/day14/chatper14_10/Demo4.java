@@ -5,7 +5,7 @@ import java.util.Queue;
 
 /**
  * Queue接口的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

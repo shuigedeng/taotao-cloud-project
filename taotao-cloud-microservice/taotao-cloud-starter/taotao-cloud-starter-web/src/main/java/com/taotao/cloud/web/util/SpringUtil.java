@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Spring工具类
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Slf4j
 public class SpringUtil implements ApplicationContextAware, DisposableBean {

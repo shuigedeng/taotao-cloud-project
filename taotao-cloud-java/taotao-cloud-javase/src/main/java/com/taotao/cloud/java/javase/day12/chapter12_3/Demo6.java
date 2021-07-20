@@ -7,7 +7,7 @@ import java.util.TreeSet;
  * TreeSet集合的使用
  * Comparator:实现定制比较(比较器)
  * Comparable：可比较的
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

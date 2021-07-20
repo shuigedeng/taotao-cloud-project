@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * @Classname SysDictItemServiceImpl
  * @Description TODO
- * @Author Created by Lihaodong (alias:小东啊) im.lihaodong@gmail.com
+ * @Author shuigedeng
  * @since 2019-09-02 18:07
  * @Version 1.0
  */

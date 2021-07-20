@@ -15,7 +15,7 @@ import org.springframework.core.annotation.Order;
 /**
  * Redisson自动化配置
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-20
  */
 @Slf4j

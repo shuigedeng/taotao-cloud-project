@@ -2,7 +2,7 @@ package com.taotao.cloud.java.javase.day08.inheritance_4;
 /**
  * super调用父类的构造方法
  * (1)super调用父类的无参构造
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TestB {

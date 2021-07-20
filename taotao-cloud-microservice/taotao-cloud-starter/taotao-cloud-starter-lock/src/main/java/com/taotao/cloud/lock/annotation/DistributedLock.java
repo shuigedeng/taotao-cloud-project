@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * Redisson分布式锁注解
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

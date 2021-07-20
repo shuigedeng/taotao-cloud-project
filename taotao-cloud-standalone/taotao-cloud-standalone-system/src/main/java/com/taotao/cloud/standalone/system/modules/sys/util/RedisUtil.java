@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * @Classname RedisUtil
  * @Description redis工具类
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-07-22 16:15
  * @Version 1.0
  */

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @Classname SysCodeServiceImpl
  * @Description 代码生成服务实现类
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-08-02 14:21
  * @Version 1.0
  */

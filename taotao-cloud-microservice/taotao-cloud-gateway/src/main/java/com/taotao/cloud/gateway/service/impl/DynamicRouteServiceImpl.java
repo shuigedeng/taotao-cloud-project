@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
  * 动态更新路由网关service 1）实现一个Spring提供的事件推送接口ApplicationEventPublisherAware
  * 2）提供动态路由的基础方法，可通过获取bean操作该类的方法。该类提供新增路由、更新路由、删除路由，然后实现发布的功能。
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Slf4j
 @Service

@@ -15,7 +15,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 /**
  * 通过header里的token获取用户信息
  *
- * @author pangu
+ * @author shuigedeng
  * @link https://my.oschina.net/u/4149877/blog/3143391/print
  * @link https://blog.csdn.net/aiyaya_/article/details/79221733
  */

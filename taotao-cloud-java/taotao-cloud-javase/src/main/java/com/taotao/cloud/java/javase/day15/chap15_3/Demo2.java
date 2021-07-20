@@ -5,7 +5,7 @@ import java.io.OutputStreamWriter;
 
 /**
  * 使用OutputStreamWriter写入文件，使用指定的编码
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

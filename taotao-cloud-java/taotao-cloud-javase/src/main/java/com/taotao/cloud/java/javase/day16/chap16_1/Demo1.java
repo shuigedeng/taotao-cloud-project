@@ -7,7 +7,7 @@ import java.net.InetAddress;
  * (1)创建本机IP地址对象
  * (2)创建局域网IP地址对象
  * (3)创建外网IP地址对象
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

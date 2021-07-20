@@ -8,7 +8,7 @@ import java.util.ListIterator;
 /**
  * List子接口的使用
  * 特点：1 有序 有下标  2 可以重复
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

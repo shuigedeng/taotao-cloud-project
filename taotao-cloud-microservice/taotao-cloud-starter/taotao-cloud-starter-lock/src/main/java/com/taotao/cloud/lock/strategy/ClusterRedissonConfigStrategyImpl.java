@@ -9,7 +9,7 @@ import org.redisson.config.Config;
 /**
  * 集群方式Redisson配置
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-22
  */
 @Slf4j

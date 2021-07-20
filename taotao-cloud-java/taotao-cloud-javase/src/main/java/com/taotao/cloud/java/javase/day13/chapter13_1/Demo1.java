@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
  * 演示常见运行时异常
  * 运行时异常:RuntimeException以及子类
  * 检查时异常:Exception以及子类，除了RuntimeException
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo1 {

@@ -21,7 +21,7 @@ import static org.apache.dubbo.spring.boot.util.DubboUtils.*;
 /**
  * Dubbo配置
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Slf4j
 @Configuration

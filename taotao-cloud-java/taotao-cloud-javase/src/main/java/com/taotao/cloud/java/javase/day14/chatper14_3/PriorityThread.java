@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_3;
 /**
  * 优先级
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class PriorityThread extends Thread{

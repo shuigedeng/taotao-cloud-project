@@ -8,7 +8,7 @@ import java.util.concurrent.FutureTask;
  * Callable和Runnable接口的区别
  * (1)Callable接口中call方法有返回值,Runnable接口中run方法没有返回值
  * (2)Callable接口中call方法有声明异常，Runnable接口中run方法没有异常
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo2 {

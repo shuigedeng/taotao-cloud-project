@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Undertow http2 h2c 配置，对 servlet 开启
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(Undertow.class)

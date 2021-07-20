@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * 幂等枚举类
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Getter
 @AllArgsConstructor

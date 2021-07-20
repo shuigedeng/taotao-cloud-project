@@ -2,7 +2,7 @@ package com.taotao.cloud.java.javase.day08.inheritance_1;
 
 /**
  * 动物类(父类)
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Animal {

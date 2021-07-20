@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * List的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo4 {

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * TCP客户端：一直向服务器发送数据
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class TcpClient {

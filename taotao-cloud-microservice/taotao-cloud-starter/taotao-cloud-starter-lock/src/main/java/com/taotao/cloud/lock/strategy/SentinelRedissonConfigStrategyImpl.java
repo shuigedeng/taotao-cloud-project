@@ -9,7 +9,7 @@ import org.redisson.config.Config;
 /**
  * 哨兵方式Redis连接配置
  *
- * @author pangu
+ * @author shuigedeng
  * @date 2020-10-22
  */
 @Slf4j

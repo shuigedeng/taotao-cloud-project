@@ -1,7 +1,7 @@
 package com.taotao.cloud.java.javase.day14.chatper14_3;
 /**
  * join方法的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class JoinThread extends Thread {

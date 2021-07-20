@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * 安全规则业务类
- * @author pangu
+ * @author shuigedeng
  */
 public interface SafeRuleService {
 

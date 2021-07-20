@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * ConcurrentLinkedQueue的使用
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo5 {

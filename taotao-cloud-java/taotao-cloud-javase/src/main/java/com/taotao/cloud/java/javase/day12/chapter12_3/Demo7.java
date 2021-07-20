@@ -7,7 +7,7 @@ import java.util.TreeSet;
  * 要求：使用TreeSet集合实现字符串按照长度进行排序
  * helloworld  zhang  lisi   wangwu  beijing  xian  nanjing
  * Comparator接口实现定制比较
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo7 {

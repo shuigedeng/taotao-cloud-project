@@ -17,7 +17,7 @@ import java.util.List;
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 
     /**
-     * @Author 李号东
+     * @Author shuigedeng
      * @Description 根据userId获取菜单id
      * @since 11:21 2019-05-10
      **/

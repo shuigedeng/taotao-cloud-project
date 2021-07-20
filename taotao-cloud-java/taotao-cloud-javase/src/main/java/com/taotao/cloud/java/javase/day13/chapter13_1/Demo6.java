@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * try...finally的使用
  * 不能处理异常，可以释放资源，把异常向上抛出
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo6 {

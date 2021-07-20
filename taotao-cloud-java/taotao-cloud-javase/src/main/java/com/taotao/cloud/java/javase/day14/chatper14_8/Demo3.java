@@ -7,7 +7,7 @@ import java.util.concurrent.Future;
 
 /**
  * 使用线程池计算1-100的和
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class Demo3 {

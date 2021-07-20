@@ -6,7 +6,7 @@ package com.taotao.cloud.java.javase.day17.chap17_3;
  * （3）通过一个公开的方法，返回这个对象
  * 
  * 优点：线程安全，缺点:声明周期太长，浪费空间
- * @author wgy
+ * @author shuigedeng
  *
  */
 public class SingleTon {

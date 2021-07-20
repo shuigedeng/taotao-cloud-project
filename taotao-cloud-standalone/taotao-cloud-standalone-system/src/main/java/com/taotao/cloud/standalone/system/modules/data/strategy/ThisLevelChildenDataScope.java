@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @Classname ThisLevelChildenDataScope
  * @Description 本级以及子级
- * @Author Created by Lihaodong (alias:小东啊) lihaodongmail@163.com
+ * @Author shuigedeng
  * @since 2019-06-08 16:30
  * @Version 1.0
  */

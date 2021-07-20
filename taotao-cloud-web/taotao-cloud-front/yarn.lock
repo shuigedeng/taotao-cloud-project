@@ -8418,7 +8418,7 @@ path-to-regexp@0.1.7:
 path-to-regexp@^1.7.0:
   version "1.8.0"
   resolved "https://registry.nlark.com/path-to-regexp/download/path-to-regexp-1.8.0.tgz?cache=0&sync_timestamp=1618846901095&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-1.8.0.tgz#887b3ba9d84393e87a0a0b9f4cb756198b53548a"
-  integrity sha1-iHs7qdhDk+h6CgufTLdWGYtTVIo=
+  integrity sha1-iHs7qdhDk+h6CgufTLdshuigedengtTVIo=
   dependencies:
     isarray "0.0.1"
 
@@ -11631,7 +11631,7 @@ type-fest@^0.20.2:
 type-fest@^0.21.3:
   version "0.21.3"
   resolved "https://registry.nlark.com/type-fest/download/type-fest-0.21.3.tgz?cache=0&sync_timestamp=1620390523712&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftype-fest%2Fdownload%2Ftype-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
-  integrity sha1-0mCiSwGYQ24TP6JqUkptZfo7Ljc=
+  integrity sha1-0mCiSshuigedengQ24TP6JqUkptZfo7Ljc=
 
 type-fest@^0.3.1:
   version "0.3.1"

@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 全局常量枚举
  *
- * @author pangu
+ * @author shuigedeng
  */
 @Getter
 @AllArgsConstructor
