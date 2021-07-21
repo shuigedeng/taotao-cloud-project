@@ -123,6 +123,8 @@ object AccessLogHudi {
             )
             .mode(SaveMode.Append)
             .save(accessLogConf.hudiBasePath)
+
+
         }
 
         batchDF.unpersist()

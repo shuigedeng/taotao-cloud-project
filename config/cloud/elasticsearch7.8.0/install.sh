@@ -23,6 +23,9 @@ chown -R elasticsearch elasticsearch7.8.0
 
 chown -R elasticsearch /root/taotao-cloud/elasticsearch.sh
 
+elasticsearch/jvm.options
+-Xms [SIZE] g -Xmx [SIZE] g
+
 su elasticsearch
 ./elasticsearch -d
 
@@ -53,7 +56,9 @@ su root
 
 function start_elasticsearch() {
   sleep 5
-  nohup /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
+  nohup /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch \
+  -Xmx4g -Xms4g \
+  -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
   sleep 10
   echo "elasticsearch started"
 }

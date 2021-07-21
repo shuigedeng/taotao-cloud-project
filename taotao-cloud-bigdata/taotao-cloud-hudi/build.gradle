@@ -10,6 +10,8 @@ dependencies {
     implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.0")
     implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0")
 
+    implementation 'org.elasticsearch:elasticsearch-spark-20_2.11:6.0.0'
+
     implementation("org.apache.hudi:hudi-common:0.7.0")
     implementation("org.apache.hudi:hudi-client:0.7.0")
     implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.7.0")

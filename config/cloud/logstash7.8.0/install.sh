@@ -20,6 +20,10 @@ vim Gemfile
 # 将source这一行改成如下所示：
 source "https://gems.ruby-china.com/"
 
+config/jvm.options
+-Xms256m
+-Xmx256m
+
 ./bin/logstash-plugin install logstash-codec-json_lines
 ./bin/logstash-plugin install logstash-input-jdbc
 ./bin/logstash-plugin install logstash-output-elasticsearch

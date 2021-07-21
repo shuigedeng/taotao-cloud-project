@@ -35,6 +35,11 @@ sh nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -u nacos -w nacos
 # 在业务系统中执行sql文件
 cp /opt/github/seata/script/client/at/db/mysql.sql /opt/taotao-cloud/seata1.4.0/conf/client-mysql.sql
 
+
+vim seata-server.sh
+
+exec “$JAVACMD” $JAVA_OPTS -server -Xmx1024m -Xms1024m -Xmn512m -Xss256k
+
 ##################### seata.sh #############################
 #!/bin/bash
 

@@ -27,6 +27,11 @@ db.user.0=root
 db.password.0=123456
 
 server.tomcat.accesslog.enabled=false
+management.endpoints.web.exposure.include=*
+management.metrics.export.elastic.enabled=true
+
+# startup.sh
+JAVA_OPT="${JAVA_OPT} -server -Xms300m -Xmx300m -Xmn100m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=160m"
 
 mysql –u root –p 123456 -D nacos</opt/taotao-cloud/nacos2.0.2/conf/nacos-mysql.sql
 
