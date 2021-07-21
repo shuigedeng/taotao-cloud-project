@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 @Import({Oauth2ResourceSecurityConfigurer.class})
-public @interface EnableOauth2ResourceSecurity {
+public @interface EnableTaoTaoCloudOauth2ResourceSecurity {
 
 
 }

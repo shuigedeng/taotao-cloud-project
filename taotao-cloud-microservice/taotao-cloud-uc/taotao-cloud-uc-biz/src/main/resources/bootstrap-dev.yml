@@ -14,35 +14,6 @@ server:
 ##      prefix: "ENC@["
 ##      suffix: "]"
 
-#seata:
-#  enabled: true
-#  application-id: ${spring.application.name}
-#  tx-service-group: taotao_cloud_tx_group
-#  enable-auto-data-source-proxy: true
-#  service:
-#    grouplist:
-#      default: ${TAOTAO_CLOUD_SEATA_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_PORT:8091}
-#    vgroup-mapping:
-#      taotao_cloud_tx_group: default
-#  config:
-#    type: nacos
-#    nacos:
-#      namespace:
-#      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
-#      group: SEATA_GROUP
-#      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
-#      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
-#  registry:
-#    type: nacos
-#    nacos:
-#      application: seata-server
-#      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:192.168.1.10}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
-#      group: SEATA_GROUP
-#      namespace:
-#      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
-#      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
-#      cluster: default
-
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -56,7 +27,7 @@ spring:
       discovery:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.1.10}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
-          version: 5
+          version: 1.0
           user.name: "admin"
           user.password: "root123456"
       config:

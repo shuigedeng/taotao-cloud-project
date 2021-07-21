@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 	CustomLogoutSuccessHandler.class
 })
 @EnableWebSecurity
-public @interface EnableOAuth2LoginSecurity {
+public @interface EnableTaoTaoCloudOAuth2LoginSecurity {
 
 	String value() default "";
 }
