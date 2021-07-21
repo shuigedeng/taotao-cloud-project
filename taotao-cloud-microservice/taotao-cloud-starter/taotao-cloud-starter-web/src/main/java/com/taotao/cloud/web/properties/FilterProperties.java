@@ -36,7 +36,7 @@ public class FilterProperties {
 	/**
 	 * 开启负载均衡隔离规则
 	 */
-	private Boolean lbIsolation = true;
+	private Boolean version = true;
 
 	/**
 	 * 开启租户过滤器

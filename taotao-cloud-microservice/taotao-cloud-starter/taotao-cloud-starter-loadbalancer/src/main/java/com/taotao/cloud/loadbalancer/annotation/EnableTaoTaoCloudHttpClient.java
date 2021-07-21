@@ -46,9 +46,6 @@ import org.springframework.core.annotation.Order;
 @Import({EnableTaoTaoCloudHttpClient.HttpClientComponent.class})
 public @interface EnableTaoTaoCloudHttpClient {
 
-
-
-
 	/**
 	 * HttpClientComponent
 	 *

@@ -4,7 +4,9 @@ dependencies {
     api 'org.springframework.boot:spring-boot-actuator'
     api 'org.springframework.boot:spring-boot-actuator-autoconfigure'
 
-    api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+    }
     api 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
     api 'org.springframework.cloud:spring-cloud-starter-bootstrap'

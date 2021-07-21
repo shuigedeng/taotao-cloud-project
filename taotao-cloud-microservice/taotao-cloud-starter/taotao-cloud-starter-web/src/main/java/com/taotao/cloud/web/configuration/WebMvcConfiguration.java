@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.web.filter.LbIsolationFilter;
+import com.taotao.cloud.web.filter.VersionFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.WebContextFilter;
@@ -178,11 +178,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public FilterRegistrationBean<LbIsolationFilter> lbIsolationFilterFilterRegistrationBean() {
-		FilterRegistrationBean<LbIsolationFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter(new LbIsolationFilter(filterProperties));
+	public FilterRegistrationBean<VersionFilter> lbIsolationFilterFilterRegistrationBean() {
+		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new VersionFilter(filterProperties));
 		registrationBean.addUrlPatterns("/**");
-		registrationBean.setName(LbIsolationFilter.class.getName());
+		registrationBean.setName(VersionFilter.class.getName());
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}

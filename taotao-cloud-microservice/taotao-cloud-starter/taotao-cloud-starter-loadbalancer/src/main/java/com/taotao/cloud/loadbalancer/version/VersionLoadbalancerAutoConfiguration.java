@@ -13,11 +13,10 @@
   * See the License for the specific language governing permissions and
   * limitations under the License.
   */
- package com.taotao.cloud.loadbalancer.isolation;
+ package com.taotao.cloud.loadbalancer.version;
 
  import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  import org.springframework.cloud.client.ServiceInstance;
- import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
  import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
  import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
  import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
@@ -31,17 +30,17 @@
   * @version 1.0.0
   * @since 2020/6/15 11:31
   */
- @ConditionalOnProperty(value = "taotao.cloud.ribbon.isolation.enabled", havingValue = "true")
- @LoadBalancerClient
- public class LbIsolationComponent {
+ public class VersionLoadbalancerAutoConfiguration {
 
 	 @Bean
+	 @ConditionalOnProperty(value = "taotao.cloud.loadbalancer.version.enabled", havingValue = "true")
 	 public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
 		 Environment environment,
 		 LoadBalancerClientFactory loadBalancerClientFactory) {
 		 String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
-		 return new CustomLoadBalancer(
-			 loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class));
+		 return new VersionLoadBalancer(
+			 loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class),
+			 name);
 	 }
 
  }

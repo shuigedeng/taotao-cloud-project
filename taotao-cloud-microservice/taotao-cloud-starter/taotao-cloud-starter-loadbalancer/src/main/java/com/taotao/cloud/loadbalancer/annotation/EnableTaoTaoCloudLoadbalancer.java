@@ -15,12 +15,12 @@
   */
  package com.taotao.cloud.loadbalancer.annotation;
 
- import com.taotao.cloud.loadbalancer.isolation.LbIsolationComponent;
- import java.lang.annotation.ElementType;
- import java.lang.annotation.Retention;
- import java.lang.annotation.RetentionPolicy;
- import java.lang.annotation.Target;
- import org.springframework.context.annotation.Import;
+ import com.taotao.cloud.loadbalancer.version.VersionLoadbalancerAutoConfiguration;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 
  /**
   *
@@ -31,7 +31,7 @@
   */
  @Target(ElementType.TYPE)
  @Retention(RetentionPolicy.RUNTIME)
- @Import({LbIsolationComponent.class})
- public @interface EnableTaoTaoCloudLbIsolation {
+ @LoadBalancerClients(defaultConfiguration = VersionLoadbalancerAutoConfiguration.class)
+ public @interface EnableTaoTaoCloudLoadbalancer {
 
  }

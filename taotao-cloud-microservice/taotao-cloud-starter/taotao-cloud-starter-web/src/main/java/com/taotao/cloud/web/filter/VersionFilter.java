@@ -2,7 +2,7 @@ package com.taotao.cloud.web.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.context.LbIsolationContextHolder;
+import com.taotao.cloud.common.context.VersionContextHolder;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import java.util.Objects;
@@ -23,13 +23,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @since 2019/9/15
  */
 @AllArgsConstructor
-public class LbIsolationFilter extends OncePerRequestFilter {
+public class VersionFilter extends OncePerRequestFilter {
 
 	private final FilterProperties filterProperties;
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return !filterProperties.getLbIsolation();
+		return !filterProperties.getVersion();
 	}
 
 	@Override
@@ -41,12 +41,12 @@ public class LbIsolationFilter extends OncePerRequestFilter {
 			RequestContextHolder.setRequestAttributes(attributes, true);
 			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_VERSION);
 			if (StrUtil.isNotEmpty(version)) {
-				LbIsolationContextHolder.setVersion(version);
+				VersionContextHolder.setVersion(version);
 			}
 
 			filterChain.doFilter(request, response);
 		} finally {
-			LbIsolationContextHolder.clear();
+			VersionContextHolder.clear();
 		}
 	}
 }
