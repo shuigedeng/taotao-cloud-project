@@ -1,8 +1,6 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
-    api "org.springframework.boot:spring-boot-starter-validation"
-
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }

@@ -12,6 +12,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job')
 
     api "org.mapstruct:mapstruct"
+    api "org.springframework.boot:spring-boot-starter-validation"
 
     api('org.springframework.boot:spring-boot-starter-web') {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

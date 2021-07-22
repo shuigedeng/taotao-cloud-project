@@ -1,12 +1,5 @@
-
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
-
-    implementation "org.springframework.boot:spring-boot-starter-validation"
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
