@@ -17,7 +17,7 @@ for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'realtime', 'reactive', 'spring']
+def twoLayerProjects = ['bigdata', 'java', 'rpc', 'standalone', 'container', 'offline', 'reactive', 'spring']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
@@ -29,11 +29,11 @@ for (project in twoLayerProjects) {
     }
 }
 
-def threeLayerProjects = ['microservice', 'demo']
+def threeLayerProjects = ['microservice', 'demo', 'realtime']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
-        if (directory.name != "build" && directory.name != "out") {
+        if (directory.name != "build" && directory.name != "out" && directory.name != "src") {
             include "${dir}:${directory.name}"
             directory.eachDir {
                 if (it.name != "build" && it.name != "src" && it.name != "out") {

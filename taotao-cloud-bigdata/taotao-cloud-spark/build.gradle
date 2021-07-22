@@ -1,5 +1,6 @@
-
 apply plugin: 'scala'
+apply plugin: 'java'
+apply plugin: 'idea'
 
 dependencies {
     implementation "org.apache.spark:spark-core_2.12:3.0.1"

@@ -19,7 +19,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 /**
- * MyPlugin
+ * TaoTaoCloudPlugin
  *
  * @author shuigedeng
  * @version 1.0.0
