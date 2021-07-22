@@ -1,19 +1,15 @@
-//apply plugin: 'maven-publish'
-//apply plugin: 'com.google.protobuf'
-
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        mavenCentral()
     }
-    dependencies {
-        classpath "gradle.plugin.com.google.protobuf:protobuf-gradle-plugin:0.8.15"
-    }
+//    dependencies {
+//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
+//    }
 }
 
-apply plugin: "com.google.protobuf"
 apply plugin: 'java'
+apply plugin: 'idea'
+//apply plugin: 'com.google.protobuf'
 
 dependencies {
     implementation(
@@ -29,24 +25,24 @@ dependencies {
     )
 }
 
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.2.0"
-    }
-
-    plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
-        }
-    }
-
-    generateProtoTasks.generatedFilesBaseDir = "src"
-
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {
-                setOutputSubDir 'java'
-            }
-        }
-    }
-}
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.0.0"
+//    }
+//
+//    plugins {
+//        grpc {
+//            artifact = 'io.grpc:protoc-gen-grpc-java:1.4.0'
+//        }
+//    }
+//
+//    generateProtoTasks.generatedFilesBaseDir = "src"
+//
+//    generateProtoTasks {
+//        all()*.plugins {
+//            grpc {
+//                setOutputSubDir 'java'
+//            }
+//        }
+//    }
+//}

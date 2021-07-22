@@ -1,8 +1,13 @@
 apply plugin: 'scala'
+apply plugin: 'java'
+apply plugin: 'idea'
 
 dependencies {
     implementation "org.scala-lang:scala-library:2.12.8"
     implementation "org.scala-lang:scala-reflect:2.12.8"
+
+    implementation "org.slf4j:slf4j-api:1.7.10"
+    implementation "org.slf4j:slf4j-log4j12:1.7.10"
 
     //implementation "org.scala-lang:scala-implementationr:2.12.8"
 
