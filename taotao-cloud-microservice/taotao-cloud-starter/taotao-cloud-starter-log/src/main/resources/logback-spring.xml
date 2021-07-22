@@ -21,7 +21,7 @@
 	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
 	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="0000"/>
-	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="192.168.1.10:9092"/>
+	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="172.16.3.240:9092"/>
 	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="103.218.242.48:9601"/>
 
 	<!--	see ch.qos.logback.classic.PatternLayout-->

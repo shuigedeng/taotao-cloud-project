@@ -1,13 +1,11 @@
 ##################################################
 cd /opt/taotao-bigdata/
 
-wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz
 
-tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz
+tar -zxvf apache-zookeeper-3.6.3-bin.tar.gz
 
-mv apache-zookeeper-3.6.2-bin zookeeper3.6.2
-
-cd zookeeper3.6.2
+mv apache-zookeeper-3.6.3-bin
 
 mkdir data
 mkdir data/zookeeper
@@ -16,7 +14,7 @@ cd conf
 cp zoo_sample.cfg zoo.cfg
 
 vim zoo.cfg
-dataDir=/opt/taotao-bigdata/zookeeper3.6.2/data/zookeeper
+dataDir=/opt/cloud/apache-zookeeper-3.6.3-bin/data/zookeeper
 # #关闭zookeeper内置的管理器
 admin.enableServer=false
 
@@ -33,13 +31,13 @@ export JVMFLAGS="-Xms512m -Xmx1024m $JVMFLAGS" #这里是需要设置的内存�
 #!/bin/bash
 
 function start_zookeeper() {
-     /opt/taotao-bigdata/zookeeper3.6.2/bin/zkServer.sh start
+     /opt/cloud/apache-zookeeper-3.6.3-bin/bin/zkServer.sh start
      echo "zkServer started"
      sleep 10
 }
 
 function stop_zookeeper() {
-     /opt/taotao-bigdata/zookeeper3.6.2/bin/zkServer.sh stop
+     /opt/cloud/apache-zookeeper-3.6.3-bin/bin/zkServer.sh stop
      sleep 10
      echo "zkServer stoped"
 }

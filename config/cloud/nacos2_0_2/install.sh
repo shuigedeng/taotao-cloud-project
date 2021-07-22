@@ -5,15 +5,15 @@ git clone https://github.com/alibaba/nacos.git
 cd nacos/
 mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U
 cd nacos/distribution/target/nacos-server-2.0.2-SNAPSHOT
-cp -r nacos/ /opt/taotao-cloud/nacos2.0.2
-cd /root/taotao-cloud/nacos2.0.2/conf
+cp -r nacos/ /opt/cloud/nacos
+cd /root/cloud/nacos/conf
 
 # 直接下载安装
-cd /opt/taotao-cloud
+cd /opt/cloud
 wget  https://github.com/alibaba/nacos/releases/download/2.0.2/nacos-server-2.0.2.tar.gz
 tar -zxvf nacos-server-2.0.2.tar.gz
-mv nacos nacos2.0.2
-cd nacos2.0.2
+mv nacos nacos
+cd nacos
 
 vim application.properties
 # #*************** Config Module Related Configurations ***************#
@@ -22,7 +22,7 @@ spring.datasource.platform=mysql
 # ### Count of DB:
 db.num=1
 # ### Connect URL of DB:
-db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+db.url.0=jdbc:mysql://127.0.0.1:3306/taotao-cloud-nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
 db.user.0=root
 db.password.0=123456
 
@@ -31,16 +31,18 @@ management.endpoints.web.exposure.include=*
 management.metrics.export.elastic.enabled=true
 
 # startup.sh
-JAVA_OPT="${JAVA_OPT} -server -Xms300m -Xmx300m -Xmn100m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=160m"
+JAVA_OPT="${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=160m"
 
-mysql –u root –p 123456 -D nacos</opt/taotao-cloud/nacos2.0.2/conf/nacos-mysql.sql
+mysql –uroot –p
+create database taotao-cloud-nacos;
+source /opt/cloud/nacos/conf/nacos-mysql.sql
 
 ##################### nacos.sh #############################
 #!/bin/bash
 
 function start_nacos() {
-     nohup /opt/taotao-cloud/nacos2.0.2/bin/startup.sh -m standalone \
-      >/opt/taotao-cloud/nacos2.0.2/start.out 2>&1 &
+     nohup /opt/cloud/nacos/bin/startup.sh -m standalone \
+      >/opt/cloud/nacos/start.out 2>&1 &
      sleep 30
      echo " nacos started"
 }

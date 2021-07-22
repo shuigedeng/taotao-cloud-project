@@ -13,7 +13,7 @@ vim spark-env.sh
 # export HADOOP_HOME="/opt/taotao-bigdata/hadoop3.3.0"
 # export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 # export YARN_CONF_DIR="$HADOOP_HOME/etc/hadoop"
-# export SPARK_MASTER_HOST=192.168.1.10
+# export SPARK_MASTER_HOST=172.16.3.240
 # export SPARK_HOME="/opt/taotao-bigdata/spark3.0.0"
 # export SPARK_LOG_DIR="/opt/taotao-bigdata/spark3.0.0/log"
 # export SPARK_PID_DIR="/opt/taotao-bigdata/spark3.0.0/pid"

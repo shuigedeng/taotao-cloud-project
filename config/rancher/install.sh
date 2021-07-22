@@ -19,7 +19,7 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
   "registry-mirrors": ["https://sef9c1bz.mirror.aliyuncs.com"],
   "dns": ["8.8.8.8", "8.8.4.4"],
   "debug": true,
-  "experimental": false,
+  "experimental": false
 
 #    "max-concurrent-downloads": 3,
 #    "max-concurrent-uploads": 5,

@@ -1,13 +1,15 @@
 ###########################################
-cd /opt/taotao-cloud/sentinel1.8.0
+cd /opt/cloud/sentinel
 
-wget https://github.com/alibaba/Sentinel/releases/sentinel-dashboard-1.8.0.jar
+wget https://github.com/alibaba/Sentinel/releases/download/1.8.2/sentinel-dashboard-1.8.2.jar
 
 ##################### sentinel.sh #############################
 #!/bin/bash
 
 function start_sentinel() {
-     nohup java -Dserver.port=8849 -Dcsp.sentinel.dashboard.server=192.168.1.10:8849  -jar /opt/taotao-cloud/sentinel1.8.0/sentinel-dashboard-1.8.0.jar >/opt/taotao-cloud/sentinel1.8.0/start.log 2>&1 &
+     nohup java -Dserver.port=8849 -Dcsp.sentinel.dashboard.server=172.16.3.240:8849  \
+      -jar /opt/cloud/sentinel/sentinel-dashboard-1.8.2.jar  \
+      >/opt/cloud/sentinel/start.log 2>&1 &
      sleep 10
      echo " sentinel started"
 }

@@ -1,7 +1,7 @@
 ###########################################
 # https://grafana.com/grafana/download
 
-cd /root/taotao-cloud/grafana8.0.3
+cd /root/cloud/grafana8.0.3
 
 wget https://dl.grafana.com/oss/release/grafana-8.0.3.linux-amd64.tar.gz
 
@@ -13,9 +13,9 @@ mv grafana-8.0.3.linux-amd64 grafana8.0.3
 #!/bin/bash
 
 function start_grafana() {
-  nohup /opt/taotao-cloud/grafana8.0.3/bin/grafana-server \
-  -homepath /opt/taotao-cloud/grafana8.0.3 \
-   >/opt/taotao-cloud/grafana8.0.3/start.out 2>&1 &
+  nohup /opt/cloud/grafana-8.0.3/bin/grafana-server \
+  -homepath /opt/cloud/grafana-8.0.3 \
+   >/opt/cloud/grafana-8.0.3/start.out 2>&1 &
 
   sleep 10
   echo "grafana started"

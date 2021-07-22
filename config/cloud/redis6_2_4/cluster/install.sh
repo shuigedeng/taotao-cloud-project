@@ -122,7 +122,7 @@ cp /opt/taotao-cloud/redis-6.2.4/redis.conf redis_7006.conf
 
 daemonize yes
 port 7000
-bind 192.168.1.10
+bind 172.16.3.240
 requirepass taotao-cloud
 masterauth taotao-cloud
 

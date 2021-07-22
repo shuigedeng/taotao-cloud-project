@@ -52,7 +52,7 @@ nohup hive --service hiveserver2 >/opt/taotao-bigdata/hive3.1.2/logs/hiveserver2
 
 hive --hiveconf hive.root.logger=DEBUG,console
 
-beeline -i ~/.hiverc -u jdbc:hive2://192.168.1.10:10000 -n root
+beeline -i ~/.hiverc -u jdbc:hive2://172.16.3.240:10000 -n root
 
 
 ###########################################

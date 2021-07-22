@@ -1,7 +1,7 @@
 ###########################################
 # http://skywalking.apache.org/downloads/
 
-cd /opt/taotao-cloud/skywalking8.6.0
+cd /opt/cloud/skywalking8.6.0
 
 # 1、官网下载skywalking服务端
 wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.6.0/apache-skywalking-apm-es7-8.6.0.tar.gz
@@ -18,7 +18,7 @@ storage:
   mysql:
     properties:
       #修改jdbcUrl
-      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://192.168.1.10:3306/taotao-cloud-skywalking"}
+      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/cloud-skywalking"}
       #修改user
       dataSource.user: ${SW_DATA_SOURCE_USER:root}
       #修改password
@@ -54,12 +54,12 @@ receiver-sharing-server:
     gRPCSslKeyPath: ${SW_RECEIVER_GRPC_SSL_KEY_PATH:""}
     gRPCSslCertChainPath: ${SW_RECEIVER_GRPC_SSL_CERT_CHAIN_PATH:""}
     #修改authentication
-    authentication: ${SW_AUTHENTICATION:"taotao-cloud"}
+    authentication: ${SW_AUTHENTICATION:"cloud"}
 
 # 5、下载mysql驱动包到 /opt/skywalking/oap-libs 目录下
 cp mysql-connector-java-8.0.17.jar skywalking8.6.0/oap-libs
 
-# 6、进入mysql 创建 taotao-cloud-skywalking 数据库
+# 6、进入mysql 创建 cloud-skywalking 数据库
 
 # 7、启动collector服务
 #初始化
@@ -95,25 +95,26 @@ export CATALINA_OPTS
 2、基于JAR file的服务(SpringBoot)
 在启动应用程序的命令行中添加 -javaagent 参数，并确保在-jar参数之前添加它，例如:
 java -javaagent:/Users/shuigedeng/software/skywalking/agent/skywalking-agent.jar \
--Dskywalking.agent.service_name=taotao-cloud-gateway \
--Dskywalking.agent.authentication=taotao-cloud \
--Dskywalking.logging.file_name=taotao-cloud-gateway.skywalking.log \
+-Dskywalking.agent.service_name=cloud-gateway \
+-Dskywalking.agent.authentication=cloud \
+-Dskywalking.logging.file_name=cloud-gateway.skywalking.log \
 -Dskywalking.logging.level=INFO \
--Dskywalking.logging.dir=../logs/application/taotao-cloud-gateway \
+-Dskywalking.logging.dir=../logs/application/cloud-gateway \
 -Dskywalking.collector.backend_service=103.218.242.48:11800 \
--jar taotao-cloud-gateway-1.3.0.jar
+-jar cloud-gateway-1.3.0.jar
 
 ##################### skywalking.sh #############################
 #!/bin/bash
 
 function start_skywalking() {
-     nohup sh /opt/taotao-cloud/skywalking8.6.0/bin/startup.sh  >/opt/taotao-cloud/skywalking8.6.0/start.log 2>&1 &
+     nohup sh /opt/cloud/apache-skywalking-apm-bin-es7/bin/startup.sh \
+      >/opt/cloud/apache-skywalking-apm-bin-es7/start.log 2>&1 &
      sleep 10
      echo " skywalking started"
 }
 
 function stop_skywalking() {
-     ps -ef | grep skywalking8.6.0|grep -v grep|awk '{print $2}' |xargs kill -9
+     ps -ef | grep skywalking|grep -v grep|awk '{print $2}' |xargs kill -9
      sleep 10
      echo "skywalking stoped"
 }

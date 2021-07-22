@@ -25,7 +25,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.1.10}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
     #发送数据类型 kafaka、rabbitmq、web
@@ -33,7 +33,7 @@ spring:
       type: WEB
   redis:
     client-name: taotao-cloud-sentinel-dashboard-redis-client
-    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.1.10}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 0
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}

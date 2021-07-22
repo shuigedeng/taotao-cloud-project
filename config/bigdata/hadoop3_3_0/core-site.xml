@@ -18,7 +18,7 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://192.168.1.10:9000</value>
+		<value>hdfs://172.16.3.240:9000</value>
 		<description>hdfs内部通讯访问地址</description>
 	</property>
 

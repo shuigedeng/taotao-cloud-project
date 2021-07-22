@@ -13,12 +13,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:192.168.1.10}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.3.240}:${TAOTAO-CLOUD-NACOS-PORT:8848}
         metadata:
           version: 6
       config:
         enabled: false
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:192.168.1.10}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.3.240}:${TAOTAO-CLOUD-NACOS-PORT:8848}
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
 

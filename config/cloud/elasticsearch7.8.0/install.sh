@@ -1,7 +1,7 @@
 ###########################################
 # https://mirrors.huaweicloud.com/elasticsearch/
 
-cd /root/taotao-cloud/elasticsearch7.8.0
+cd /root/cloud/elasticsearch7.8.0
 
 wget https://mirrors.huaweicloud.com/elasticsearch/7.8.0/elasticsearch-7.8.0-linux-x86_64.tar.gz
 
@@ -21,7 +21,7 @@ adduser elasticsearch
 passwd elasticsearch
 chown -R elasticsearch elasticsearch7.8.0
 
-chown -R elasticsearch /root/taotao-cloud/elasticsearch.sh
+chown -R elasticsearch /root/cloud/elasticsearch.sh
 
 elasticsearch/jvm.options
 -Xms [SIZE] g -Xmx [SIZE] g
@@ -56,16 +56,15 @@ su root
 
 function start_elasticsearch() {
   sleep 5
-  nohup /opt/taotao-cloud/elasticsearch7.8.0/bin/elasticsearch \
-  -Xmx4g -Xms4g \
-  -d >/opt/taotao-cloud/elasticsearch7.8.0/start.out 2>&1 &
+  nohup /opt/cloud/elasticsearch-7.8.0/bin/elasticsearch \
+  -d >/opt/cloud/elasticsearch-7.8.0/start.out 2>&1 &
   sleep 10
   echo "elasticsearch started"
 }
 
 function stop_elasticsearch() {
   sleep 5
-   ps -ef | grep elasticsearch7.8.0|grep -v grep|awk '{print $2}' |xargs kill -9
+   ps -ef | grep elasticsearch-7.8.0|grep -v grep|awk '{print $2}' |xargs kill -9
 
    sleep 10
    echo "elasticsearch stoped"

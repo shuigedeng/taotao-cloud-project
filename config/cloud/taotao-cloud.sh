@@ -13,29 +13,29 @@ function start_taotao_cloud() {
   # tcp -> 9092
   # JMX_PORT -> 9999
   /root/script/kafka.sh start
-  # http -> 8848 http://192.168.1.10:8848/nacos  nacos/nacos
+  # http -> 8848 http://172.16.3.240:8848/nacos  nacos/nacos
   # tcp -> 9848 客户端gRPC请求服务端端口，用于客户端向服务端发起连接和请求
   # tcp -> 9849 服务端gRPC请求服务端端口，用于服务间同步等
   # tcp -> 7848 nacos集群通信，进行选举，检测等
   /root/script/nacos.sh start
   # tcp -> 8091
   /root/script/seata.sh start
-  # tcp/http -> 8849 http://192.168.1.10:8849 sentinel/sentinel
+  # tcp/http -> 8849 http://172.16.3.240:8849 sentinel/sentinel
   /root/script/sentinel.sh start
-  # tcp/http -> 9411 http://192.168.1.10:9411
+  # tcp/http -> 9411 http://172.16.3.240:9411
   /root/script/zipkin.sh start
   # tcp -> 11800
-  # http -> 18080 http://192.168.1.10:18080
+  # http -> 18080 http://172.16.3.240:18080
   /root/script/skywalking.sh start
-  # tcp/http -> 9090 http://192.168.1.10:9090 http://192.168.1.10:9090/metrics
+  # tcp/http -> 9090 http://172.16.3.240:9090 http://172.16.3.240:9090/metrics
   /root/script/prometheus.sh start
-  # tcp/http -> 3000 http://192.168.1.10:3000 admin/admin
+  # tcp/http -> 3000 http://172.16.3.240:3000 admin/admin
   /root/script/grafana.sh start
 
-  # tcp/http -> 9200 http://192.168.1.10:9200
+  # tcp/http -> 9200 http://172.16.3.240:9200
   su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
-  # tcp/http -> 5601 http://192.168.1.10:5601
+  # tcp/http -> 5601 http://172.16.3.240:5601
   /root/script/kibana.sh start
   # tcp/http -> 9601 input port
   /root/script/logstash.sh start

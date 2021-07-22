@@ -23,7 +23,7 @@ hadoop-httpfs start
 mapred --daemon start historyserver
 
 查看 JobHistory
-http://192.168.1.10:19888/jobhistory
+http://172.16.3.240:19888/jobhistory
 
 hadoop fs -mkdir -p /tmp
 hadoop fs -chmod 777 /tmp
