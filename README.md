@@ -30,11 +30,14 @@ taotao cloud project 创建这个仓库的目的就是工作以来的技术总�
 
 总之基于Spring Cloud Alibaba的微服务架构。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
-## 2. 微服务模块总体架构图
+## 2. springcloud微服务架构图
 ![mark](./snapshot/springcloud微服务架构图.jpeg)
 
 
-## 3. 核心依赖 
+## 3. springcloud微服务分层图
+![mark](./snapshot/springcloud微服务分层图.png)
+
+## 4. 核心依赖 
 依赖 | 版本
 ---|---
 Spring |  5.3.4 
@@ -56,7 +59,7 @@ Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 Guava | 29.0-jre
 
-## 4. 演示地址
+## 5. 演示地址
 * taotao cloud 首页: [https://taotaocloud.top](https://taotaocloud.top)
 * 博客系统地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
 * 大屏监控系统地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top)
@@ -67,7 +70,7 @@ Guava | 29.0-jre
 * 任务管理账号密码：admin/admin
 * Sentinel：sentinel/sentinel
 
-## 5. 功能特点
+## 6. 功能特点
 
 * 微服务技术框架: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
 * 主体框架：采用最新的Spring Boot 2.5.1、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2.2.5.RELEASE版本进行设计
@@ -93,7 +96,7 @@ Guava | 29.0-jre
 
 > PS: 借鉴了其他开源项目
 
-## 6. 模块说明
+## 7. 模块说明
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
@@ -198,7 +201,7 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-music -- 音乐小程序模块
 ```
 
-## 7.开源共建
+## 8.开源共建
 
 1. 欢迎提交 [pull request](https://github.com/shuigedeng/taotao-cloud-project)，注意对应提交对应 `dev` 分支
 
@@ -208,11 +211,11 @@ taotao-cloud-project -- 父项目
 
 4. mail: <a href="981376577@qq.com">981376577@qq.com</a> | <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3130998334&site=qq&menu=yes"> QQ: 981376577</a>    
 
-## 8.参与贡献
+## 9.参与贡献
 
 开发: 目前个人独立开放
 
-## 9.项目截图
+## 10.项目截图
 <table>
     <tr>
         <td><img alt="首页" src="snapshot/project/1.png"/></td>

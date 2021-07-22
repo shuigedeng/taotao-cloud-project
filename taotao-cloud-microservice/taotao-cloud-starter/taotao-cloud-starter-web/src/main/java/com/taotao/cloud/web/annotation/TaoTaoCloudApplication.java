@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 是否启用自动获取用户信息注解 样例：public Object getUser(@EnableUser LoginUser user)
+ * TaoTaoCloudApplication
  *
  * @author shuigedeng
  */
