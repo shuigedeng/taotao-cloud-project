@@ -23,18 +23,17 @@
 
 	<property>
 		<name>yarn.app.mapreduce.am.env</name>
-		<value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+		<value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
 	</property>
-
 	<property>
 		<name>mapreduce.map.env</name>
-		<value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+		<value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
 	</property>
-
 	<property>
 		<name>mapreduce.reduce.env</name>
-		<value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+		<value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
 	</property>
+
 
 	<property>
 		<name>mapreduce.application.classpath</name>
@@ -49,7 +48,7 @@
 			$HADOOP_HOME/share/hadoop/hdfs/*,
 			$HADOOP_HOME/share/hadoop/hdfs/lib/*,
 			$HADOOP_HOME/share/hadoop/yarn/*,
-			$HADOOP_HOME/share/hadoop/yarn/lib/*,
+			$HADOOP_HOME/share/hadoop/yarn/lib/*
 		</value>
 	</property>
 

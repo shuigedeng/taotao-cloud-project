@@ -1,7 +1,7 @@
 package com.taotao.cloud.product.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.product.api.dto.ProductDTO;
 import com.taotao.cloud.product.api.feign.fallback.RemoteProductFallbackImpl;
 import com.taotao.cloud.product.api.vo.ProductVO;

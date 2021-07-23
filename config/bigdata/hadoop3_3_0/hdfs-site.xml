@@ -18,12 +18,12 @@
 <configuration>
 	<property>
 		<name>dfs.namenode.name.dir</name>
-		<value>/opt/taotao-bigdata/hadoop3.3.0/data/nameNode</value>
+		<value>/opt/bigdata/hadoop-3.3.0/data/nameNode</value>
 	</property>
 
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>/opt/taotao-bigdata/hadoop3.3.0/data/dataNode</value>
+		<value>/opt/bigdata/hadoop-3.3.0/data/dataNode</value>
 	</property>
 
 	<property>

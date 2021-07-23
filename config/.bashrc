@@ -13,7 +13,7 @@ export GRADLE_HOM="/opt/taotao-common/gradle7.1"
 export PATH=$PATH:$GRADLE_HOM/bin
 
 
-export HADOOP_HOME="/opt/taotao-bigdata/hadoop3.3.0"
+export HADOOP_HOME="/opt/bigdata/hadoop-3.3.0"
 export HADOOP_COMMON_HOME=$HADOOP_HOME
 export HADOOP_HDFS_HOME=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME

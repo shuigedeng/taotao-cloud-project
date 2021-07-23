@@ -4,8 +4,14 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-starter-loadbalancer"
     api "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
     api "io.github.openfeign:feign-okhttp"
-    api group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '3.0.1'
     api group: 'com.alibaba.csp', name: 'sentinel-spring-webmvc-adapter', version: '1.8.1'
+
+//    api ("org.springframework.cloud:spring-cloud-starter-openfeign"){
+//        exclude group: 'org.springframework.cloud', module: 'spring-cloud-openfeign-core'
+//    }
+//    api group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.6.RELEASE'
+
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
 
     api "org.apache.httpcomponents:httpclient"
     api "org.apache.httpcomponents:httpmime"
@@ -14,3 +20,10 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
+    }
+}
+

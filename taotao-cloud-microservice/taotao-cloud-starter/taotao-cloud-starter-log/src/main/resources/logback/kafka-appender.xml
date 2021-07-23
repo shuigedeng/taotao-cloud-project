@@ -33,7 +33,7 @@
 				</pattern>
 			</layout>
 		</encoder>
-		<topic>taotao-cloud-sys-log</topic>
+		<topic>${APP_NAME:taotao-cloud-sys-log}</topic>
 		<keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy"/>
 		<deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
 		<producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS}</producerConfig>

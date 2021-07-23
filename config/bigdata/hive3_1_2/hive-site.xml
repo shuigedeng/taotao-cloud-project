@@ -28,12 +28,12 @@
 
 	<property>
 		<name>hive.metastore.uris</name>
-		<value>thrift://taotao-cloud:9083</value>
+		<value>thrift://172.16.3.240:9083</value>
 	</property>
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
-		<value>taotao-cloud</value>
+		<value>172.16.3.240</value>
 	</property>
 
 	<property>
@@ -53,7 +53,7 @@
 
 	<property>
 		<name>javax.jdo.option.ConnectionURL</name>
-		<value>jdbc:mysql://192.168.1.5:3306/hive?createDatabaseIfNotExist=TRUE</value>
+		<value>jdbc:mysql://172.16.3.240:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
 	</property>
 
 	<property>

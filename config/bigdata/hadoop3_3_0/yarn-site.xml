@@ -54,18 +54,26 @@
 	<property>
 		<name>yarn.application.classpath</name>
 		<value>
-			$HADOOP_HOME/etc/*,
-			$HADOOP_HOME/etc/hadoop/*,
-			$HADOOP_HOME/lib/*,
-			$HADOOP_HOME/share/hadoop/common/*,
-			$HADOOP_HOME/share/hadoop/common/lib/*,
-			$HADOOP_HOME/share/hadoop/mapreduce/*,
-			$HADOOP_HOME/share/hadoop/mapreduce/lib-examples/*,
-			$HADOOP_HOME/share/hadoop/hdfs/*,
-			$HADOOP_HOME/share/hadoop/hdfs/lib/*,
-			$HADOOP_HOME/share/hadoop/yarn/*,
-			$HADOOP_HOME/share/hadoop/yarn/lib/*,
+			/opt/bigdata/hadoop-3.3.0/etc/hadoop:/opt/bigdata/hadoop-3.3.0/share/hadoop/common/lib/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/common/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/hdfs:/opt/bigdata/hadoop-3.3.0/share/hadoop/hdfs/lib/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/hdfs/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/mapreduce/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/yarn:/opt/bigdata/hadoop-3.3.0/share/hadoop/yarn/lib/*:/opt/bigdata/hadoop-3.3.0/share/hadoop/yarn/*
 		</value>
+		<description>hadoop classpath 命令的值</description>
+	</property>
+
+	<!-- 开启日志聚集功能 -->
+	<property>
+		<name>yarn.log-aggregation-enable</name>
+		<value>true</value>
+		<description>mapred --daemon start historyserver 启动</description>
+	</property>
+	<!-- 设置日志聚集服务器地址 -->
+	<property>
+		<name>yarn.log.server.url</name>
+		<value>http://172.16.3.240:19888/jobhistory/logs</value>
+	</property>
+	<!-- 设置日志保留时间为 7 天 -->
+	<property>
+		<name>yarn.log-aggregation.retain-seconds</name>
+		<value>604800</value>
 	</property>
 
 	<!--<property>-->

@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.product.api.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,35 +31,35 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "商品对象DTO")
+//@ApiModel(value = "商品对象DTO")
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "商品名称")
+//    @ApiModelProperty(value = "商品名称")
     private String name;
 
-    @ApiModelProperty(value = "供应商id")
+//    @ApiModelProperty(value = "供应商id")
     private Long supplierId;
 
-    @ApiModelProperty(value = "图片id")
+//    @ApiModelProperty(value = "图片id")
     private Long picId;
 
-    @ApiModelProperty(value = "视频id")
+//    @ApiModelProperty(value = "视频id")
     private Long videoId;
 
-    @ApiModelProperty(value = "商品详情图片id")
+//    @ApiModelProperty(value = "商品详情图片id")
     private Long detailPicId;
 
-    @ApiModelProperty(value = "商品第一张图片id")
+//    @ApiModelProperty(value = "商品第一张图片id")
     private Long firstPicId;
 
-    @ApiModelProperty(value = "商品海报id")
+//    @ApiModelProperty(value = "商品海报id")
     private Long posterPicId;
 
-    @ApiModelProperty(value = "备注")
+//    @ApiModelProperty(value = "备注")
     private String remark;
 
-    @ApiModelProperty(value = "商品状态")
+//    @ApiModelProperty(value = "商品状态")
     private Integer status;
 }

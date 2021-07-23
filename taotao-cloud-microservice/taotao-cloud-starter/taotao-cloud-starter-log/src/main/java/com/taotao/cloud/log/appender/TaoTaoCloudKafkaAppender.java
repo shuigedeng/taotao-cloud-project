@@ -23,12 +23,11 @@ import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
 import com.taotao.cloud.common.utils.LogUtil;
-
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -147,6 +146,7 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	@Override
 	protected void append(E e) {
+		Map<String, String> copyOfPropertyMap = super.context.getCopyOfPropertyMap();
 		final byte[] payload = encoder.encode(e);
 		String s = new String(payload);
 

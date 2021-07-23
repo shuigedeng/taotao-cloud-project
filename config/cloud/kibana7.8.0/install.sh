@@ -17,7 +17,7 @@ server.port: 5601
 # 服务器ip  本机
 server.host: "0.0.0.0"
 # Elasticsearch 服务地址
-elasticsearch.hosts: ["http://172.16.3.240:9200"]
+elasticsearch.hosts: ["http://127.0.0.1:9200"]
 # 设置语言为中文
 i18n.locale: "zh-CN"
 

@@ -18,13 +18,13 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://172.16.3.240:9000</value>
+		<value>hdfs://172.16.3.240:8020</value>
 		<description>hdfs内部通讯访问地址</description>
 	</property>
 
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/opt/taotao-bigdata/hadoop3.3.0/tmp</value>
+		<value>/opt/bigdata/hadoop-3.3.0/tmp</value>
 		<description>指定hadoop数据的存储目录</description>
 	</property>
 
@@ -34,11 +34,11 @@
 		<description>分布式问文件系统的实现</description>
 	</property>
 
-<!--	<property>-->
-<!--		<name>hadoop.http.staticuser.user</name>-->
-<!--		<value>Tom</value>-->
-<!--		<description>配置HDFS网页登录使用的静态用户为Tom</description>-->
-<!--	</property>-->
+	<property>
+		<name>hadoop.http.staticuser.user</name>
+		<value>root</value>
+		<description>配置HDFS网页登录使用的静态用户为root</description>
+	</property>
 
 	<property>
 		<name>hadoop.proxyuser.hue.groups</name>

@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.order.api.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,32 +32,32 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "订单对象DTO")
+//@ApiModel(value = "订单对象DTO")
 public class OrderDTO implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 
-    @ApiModelProperty(value = "买家ID")
+//    @ApiModelProperty(value = "买家ID")
     private Long memberId;
 
-    @ApiModelProperty(value = "订单编码")
+//    @ApiModelProperty(value = "订单编码")
     private String code;
 
-    @ApiModelProperty(value = "订单金额")
+//    @ApiModelProperty(value = "订单金额")
     private BigDecimal amount;
 
-    @ApiModelProperty(value = "订单主状态")
+//    @ApiModelProperty(value = "订单主状态")
     private Integer mainStatus;
 
-    @ApiModelProperty(value = "订单子状态")
+//    @ApiModelProperty(value = "订单子状态")
     private Integer childStatus;
 
-    @ApiModelProperty(value = "收货人姓名")
+//    @ApiModelProperty(value = "收货人姓名")
     private String receiverName;
 
-    @ApiModelProperty(value = "收货人电话")
+//    @ApiModelProperty(value = "收货人电话")
     private String receiverPhone;
 
-    @ApiModelProperty(value = " 收货地址:json的形式存储")
+//    @ApiModelProperty(value = " 收货地址:json的形式存储")
     private String receiverAddressJson;
 }

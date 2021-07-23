@@ -1,8 +1,8 @@
 package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.common.exception.FeignException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.order.api.dto.OrderDTO;
 import com.taotao.cloud.order.api.feign.RemoteOrderService;
 import com.taotao.cloud.order.api.vo.OrderVO;

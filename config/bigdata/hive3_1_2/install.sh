@@ -1,5 +1,5 @@
 ################################################
-wget https://mirror.bit.edu.cn/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
+wget https://mirrors.bfsu.edu.cn/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz
 
 tar -zxvf apache-hive-3.1.2-bin.tar.gz -C /bigdata
 
@@ -10,17 +10,16 @@ cd /root/taotao-bigdata/hive3.1.2/conf
 vim hive-site.xml
 
 ## 重点
-cp ~/soft/mysql-connector-java-8.0.17.jar /root/taotao-bigdata/hive3.1.2/lib
+cp /opt/soft/mysql-connector-java-8.0.20.jar /root/taotao-bigdata/hive3.1.2/lib
 rm -rf /root/taotao-bigdata/hive3.1.2/lib/guava*.jar
 cp /root/taotao-bigdata/hadoop3.3.0/share/hadoop/common/lib/guava-27.0-jre.jar /root/taotao-bigdata/hive3.1.2/lib/
-
 
 cp hive-env.sh.template hive-env.sh
 vim hive-env.sh
 # 最末尾添加
-# export JAVA_HOME=/root/taotao-common/jdk1.8.0_211
-# HADOOP_HOME=/root/taotao-bigdata/hadoop3.3.0
-# export HIVE_CONF_DIR=/root/taotao-bigdata/hive3.1.2/conf
+ export JAVA_HOME=/opt/common/jdk1.8.0_211
+ HADOOP_HOME=/opt/bigdata/hadoop-3.3.0
+ export HIVE_CONF_DIR=/opt/bigdata/apache-hive-3.1.2-bin/conf
 #
 # tez配置可以不添加
 # export TEZ_HOME=/bigdata/tez
@@ -34,21 +33,21 @@ vim hive-env.sh
 # export HIVE_AUX_JARS_PATH=/bigdata/hadoop-3.1.4/share/hadoop/common/hadoop-lzo-0.4.21-SNAPSHOT.jar$TEZ_JARS
 
 cp hive-log4j2.properties.template hive-log4j2.properties
-mkdir /root/taotao-bigdata/hive3.1.2/logs
+mkdir /opt/bigdata/apache-hive-3.1.2-bin/logs
 vim hive-log4j2.properties
 # 最末尾添加
-# hive.log.dir=/root/taotao-bigdata/hive3.1.2/logs
+# hive.log.dir=/opt/bigdata/apache-hive-3.1.2-bin/logs
 
 cp hive-exec-log4j2.properties.template hive-exec-log4j2.properties
 # 最末尾添加
-# hive.log.dir=/root/taotao-bigdata/hive3.1.2/logs
+# hive.log.dir=/opt/bigdata/apache-hive-3.1.2-bin/logs
 
 ################################################
 
 schematool -dbType mysql -initSchema
 
-nohup hive --service metastore >/opt/taotao-bigdata/hive3.1.2/logs/metastore.log  2>&1 &
-nohup hive --service hiveserver2 >/opt/taotao-bigdata/hive3.1.2/logs/hiveserver2.log  2>&1 &
+nohup hive --service metastore >/opt/bigdata/apache-hive-3.1.2-bin/logs/metastore.log  2>&1 &
+nohup hive --service hiveserver2 >/opt/bigdata/apache-hive-3.1.2-bin/logs/hiveserver2.log  2>&1 &
 
 hive --hiveconf hive.root.logger=DEBUG,console
 
