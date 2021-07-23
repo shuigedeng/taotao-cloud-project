@@ -12,14 +12,15 @@ dependencies {
 //    }
 //    api group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.6.RELEASE'
 
-    api 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//    api 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-configurations.all {
-    resolutionStrategy {
-        force 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
-    }
-}
+//configurations.all {
+//    resolutionStrategy {
+//        force 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
+//    }
+//}

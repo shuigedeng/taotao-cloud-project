@@ -4,9 +4,9 @@ buildscript {
         taotaoCloudGroup = "com.taotao.cloud"
 
         springVersion = '5.3.4'
-        springBootVersion = '2.5.1'
+        springBootVersion = '2.5.2'
         springCloudVersion = '2020.0.3'
-        springCloudAlibabaVersion = '2.2.6.RELEASE'
+        springCloudAlibabaVersion = '2021.1'
 
         springSecurityVersion = '5.4.5'
         springDataCommonsVersion = '2.4.5'
