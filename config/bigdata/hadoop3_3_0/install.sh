@@ -67,29 +67,47 @@ hadoop fs -chmod 777 /common/lib
 hdfs dfs -put -f /opt/soft/json-serde-1.3.8-jar-with-dependencies.jar /common/lib
 hdfs dfs -put -f /opt/soft/json-udf-1.3.8-jar-with-dependencies.jar /common/lib
 
-###########################################
+########################################### hadoop.sh ###########################################
 #!/bin/bash
 
 function start_hadoop() {
     start-dfs.sh
     echo "dfs started"
-    sleep 20
+    sleep 10
 
     start-yarn.sh
     echo "yarn started"
+    sleep 10
 
-    start-history-server.sh
+#    start-history-server.sh
+
+    hdfs --daemon start httpfs
+    echo "httpfs started"
+    sleep 10
+
+    mapred --daemon start historyserver
+    echo "historyserver started"
+    sleep 10
 }
 
 function stop_hadoop() {
+    mapred --daemon stop historyserver
+    echo "historyserver stoped"
+    sleep 10
+
+    hdfs --daemon stop httpfs
+    echo "httpfs stoped"
+    sleep 10
+
     stop-yarn.sh
-    echo "dfs stoped"
+    echo "yarn stoped"
     sleep 10
 
     stop-dfs.sh
     echo "dfs stoped"
+    sleep 10
 
-    stop-history-server.sh
+#    stop-history-server.sh
 }
 
 case $1 in

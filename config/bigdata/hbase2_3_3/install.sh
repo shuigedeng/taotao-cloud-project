@@ -1,4 +1,7 @@
 ################################################
+
+https://mirrors.bfsu.edu.cn/apache/hbase/2.4.4/hbase-2.4.4-bin.tar.gz
+
 tar -zxvf hbase-2.3.3-bin.tar.gz -C /root/taotao-bigdata
 
 mv hbase-2.3.3/ hbase2.3.3/

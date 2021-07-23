@@ -25,4 +25,4 @@ mkdir /etc/frp && tar -zxvf frp_0.33.0_linux_amd64.tar.gz -C /etc/frp
 
 vim frpc.ini
 
-nohup sh /etc/frp/frpc -c /etc/frp/frpc.ini &
+nohup /opt/common/frp_0.33.0_linux_amd64/frpc -c /opt/common/frp_0.33.0_linux_amd64/frpc.ini &

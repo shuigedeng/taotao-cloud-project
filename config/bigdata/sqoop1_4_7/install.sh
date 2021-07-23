@@ -1,5 +1,7 @@
 ################################################
-wget https://mirror.bit.edu.cn/apache/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
+
+wget http://archive.apache.org/dist/sqoop/1.4.7/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
+
 tar -zxvf sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz -C /root/taotao-bigdata/
 
 mv sqoop-1.4.7.bin__hadoop-2.6.0 sqoop1.4.7
