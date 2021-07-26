@@ -47,6 +47,12 @@ function start_taotao_cloud() {
 
   # tcp/http -> 5601 http://172.16.3.240:5601
   /root/script/cloud/kibana.sh start
+
+  # tcp/http -> 5601 http://172.16.3.240:8081
+  /root/script/cloud/arthas.sh start
+
+  # tcp/http -> 5601 http://172.16.3.240:8089
+  /root/script/cloud/canal.sh start
   
   # tcp/http -> 9601 input port
   #/root/script/cloud/logstash.sh start
@@ -56,6 +62,10 @@ function start_taotao_cloud() {
 }
 
 function stop_taotao_cloud() {
+  /root/script/cloud/canal.sh stop
+
+  /root/script/cloud/arthas.sh stop
+
   /root/script/cloud/kibana.sh stop
   
   su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
