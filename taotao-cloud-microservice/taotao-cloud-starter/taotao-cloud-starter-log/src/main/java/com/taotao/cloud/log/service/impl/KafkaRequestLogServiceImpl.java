@@ -18,7 +18,6 @@ package com.taotao.cloud.log.service.impl;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
-import java.util.Base64;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -52,7 +51,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 		String request = JsonUtil.toJSONString(requestLog);
 
 		ListenableFuture<SendResult<String, Object>> future = kafkaTemplate
-			.send(REQUEST_LOG_TOPIC + appName, Base64.getEncoder().encode(request.getBytes()));
+			.send(REQUEST_LOG_TOPIC + appName, request);
 		future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
 			@Override
 			public void onFailure(Throwable throwable) {
@@ -61,7 +60,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
 			@Override
 			public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
-				log.info("远程日志记录成功：{}", requestLog);
+//				log.info("远程日志记录成功：{}", requestLog);
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.TraceUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.slf4j.MDC;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -41,18 +43,20 @@ public class TenantFilter extends OncePerRequestFilter {
 			}
 
 			//保存租户id
-//			LogUtil.info("获取到的租户ID为:{}", tenantId);
 			if (StringUtil.isNotBlank(tenantId)) {
 				TenantContextHolder.setTenant(tenantId);
+				TraceUtil.mdcTenantId(tenantId);
 			} else {
 				if (StringUtil.isBlank(TenantContextHolder.getTenant())) {
 					TenantContextHolder.setTenant(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
+					TraceUtil.mdcTenantId(CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT);
 				}
 			}
 
 			filterChain.doFilter(request, response);
 		} finally {
 			TenantContextHolder.clear();
+			MDC.clear();
 		}
 	}
 }

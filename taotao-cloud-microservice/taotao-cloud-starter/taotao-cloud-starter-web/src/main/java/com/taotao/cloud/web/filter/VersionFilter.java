@@ -3,6 +3,7 @@ package com.taotao.cloud.web.filter;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.VersionContextHolder;
+import com.taotao.cloud.common.utils.TraceUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.slf4j.MDC;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -39,14 +41,16 @@ public class VersionFilter extends OncePerRequestFilter {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
 				.requireNonNull(RequestContextHolder.getRequestAttributes());
 			RequestContextHolder.setRequestAttributes(attributes, true);
-			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_VERSION);
+			String version = request.getHeader(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
 			if (StrUtil.isNotEmpty(version)) {
 				VersionContextHolder.setVersion(version);
+				TraceUtil.mdcVersion(version);
 			}
 
 			filterChain.doFilter(request, response);
 		} finally {
 			VersionContextHolder.clear();
+			MDC.clear();
 		}
 	}
 }

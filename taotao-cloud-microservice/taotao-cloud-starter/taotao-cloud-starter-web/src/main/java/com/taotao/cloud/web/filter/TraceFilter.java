@@ -1,6 +1,7 @@
 package com.taotao.cloud.web.filter;
 
 
+import com.taotao.cloud.common.context.TraceContextHolder;
 import com.taotao.cloud.common.utils.TraceUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
@@ -35,11 +36,14 @@ public class TraceFilter extends OncePerRequestFilter {
 		FilterChain filterChain) throws ServletException, IOException {
 		try {
 			String traceId = TraceUtil.getTraceId(request);
+			TraceContextHolder.setTraceId(traceId);
 			TraceUtil.mdcTraceId(traceId);
+
 			TraceUtil.mdcZipkinTraceId(request);
 			TraceUtil.mdcZipkinSpanId(request);
 			filterChain.doFilter(request, response);
 		} finally {
+			TraceContextHolder.clear();;
 			MDC.clear();
 		}
 	}

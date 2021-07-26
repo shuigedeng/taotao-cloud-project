@@ -89,7 +89,8 @@ public class CommonConstant {
 	public static final String TAOTAO_CLOUD_TRACE_ID = "taotao-cloud-trace-id";
 	public static final String TAOTAO_CLOUD_TRACE_HEADER = "taotao-cloud-trace-header";
 
-	public static final String TAOTAO_CLOUD_VERSION_HEADER = "taotao-cloud-version";
+	public static final String TAOTAO_CLOUD_REQUEST_VERSION = "taotao-cloud-request-version";
+	public static final String TAOTAO_CLOUD_REQUEST_VERSION_HEADER = "taotao-cloud-request-version-header";
 
 	public static final String TAOTAO_CLOUD_USER_HEADER = "taotao-cloud-user-header";
 	public static final String TAOTAO_CLOUD_USER_NAME_HEADER = "taotao-cloud-user-name-header";

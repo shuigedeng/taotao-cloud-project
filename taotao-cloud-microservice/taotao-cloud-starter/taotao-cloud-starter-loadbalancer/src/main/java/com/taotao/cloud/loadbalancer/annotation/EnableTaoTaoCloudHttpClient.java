@@ -53,13 +53,13 @@ public @interface EnableTaoTaoCloudHttpClient {
 	 * @version 1.0.0
 	 * @since 2020/6/15 11:31
 	 */
-	public class HttpClientComponent {
+	class HttpClientComponent {
 
 		/**
 		 * 使用连接池的 httpclient
 		 */
-		@Bean
 		@Order(500)
+		@Bean
 		public HttpClient httpClient(RestTemplateProperties restTemplateProperties) {
 			Registry<ConnectionSocketFactory> registry = RegistryBuilder
 				.<ConnectionSocketFactory>create()

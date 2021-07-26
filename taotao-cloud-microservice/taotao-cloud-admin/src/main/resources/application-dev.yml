@@ -6,11 +6,24 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
+arthas:
+  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+  telnetPort: -1
+  httpPort: -1
+  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0
+  agent-id: ${spring.application.name}
+  app-name: ${spring.application.name}
+  tunnel-server: ws://172.16.3.240:7777/ws
+
 spring:
   main:
     allow-bean-definition-overriding: true
+    banner-mode: off
   application:
-    name: taotao-cloud-admin-server
+    name: taotao-cloud-admin
   sleuth:
     enabled: true
     web:
@@ -44,9 +57,9 @@ spring:
   security:
     user:
       name: admin
-      password: root123456
+      password: 123456
   redis:
-    client-name: taotao-cloud-admin-server-redis-client
+    client-name: taotao-cloud-admin-redis-client
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 0
@@ -57,6 +70,20 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+  kafka:
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.3.240}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      properties:
+        linger.ms: 500
 
 taotao:
   cloud:
@@ -82,7 +109,6 @@ taotao:
     log:
       request-log:
         enabled: false
-
 
 management:
   endpoints:

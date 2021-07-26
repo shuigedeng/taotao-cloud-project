@@ -27,7 +27,7 @@ seata:
   config:
     type: nacos
     nacos:
-      namespace:
+      namespace: 58d8ef8f-9325-4d2a-8e29-0b3632252b93
       server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
@@ -35,97 +35,25 @@ seata:
   registry:
     type: nacos
     nacos:
-      application: seata-server
+      application: taotao-cloud-seata
       server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
-      namespace:
+      namespace: 58d8ef8f-9325-4d2a-8e29-0b3632252b93
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: default
 
-taotao:
-  cloud:
-    core:
-      enabled: true
-      env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
-    log:
-      request-log:
-        enabled: true
-        types:
-          - logger
-          - kafka
-    oauth2:
-      security:
-        enabled: true
-        ignore:
-          # 忽略认证的地址
-          http-urls: >
-            /api-docs,
-            /user/info/username,
-            /user/info/id/*,
-            /resource/test/seata,
-            /role/info/userId,
-            /resource/info/codes,
-            /member/info/security,
-            /user,
-            /role
-    swagger:
-      enabled: true
-      title: 用户中心
-      description: 用户中心接口文档
-      version: 1.0
-      license: Apache
-      license-url: https://opensource.org/licenses/Apache-2.0Url
-      contact:
-        name: shuigedeng
-        url: http://dtbox.top/
-        email: 981376577@qq.com
-      base-package: com.taotao.cloud.uc.biz.controller
-      host: ${spring.cloud.client.ip-address}:${server.port}
-    ribbon:
-      isolation:
-        enabled: true
-      rest-template:
-        max-total: 200
-        max-per-route: 50
-        read-timeout: 35000
-        connect-timeout: 10000
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.component.P6spyLogger
-      log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
-      # 使用日志系统记录sql
-      #appender: com.p6spy.engine.spy.appender.Slf4JLogger
-    xxl:
-      job:
-        enabled: true
-        admin:
-          addresses:
-        executor:
-          appname: ${spring.application.name}
-          ip:
-          port: 6996
-          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${logging.file:${user.dir}/logs/application/${spring.application.name}/xxl-job}
+arthas:
+  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+  telnetPort: -1
+  httpPort: -1
+  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0
+  agent-id: ${spring.application.name}
+  app-name: ${spring.application.name}
+  tunnel-server: ws://172.16.3.240:7777/ws
 
 spring:
   main:
@@ -144,13 +72,6 @@ spring:
     sampler:
       #采样率，默认为0.1
       probability: 1.0
-    messaging:
-      enabled: false
-      kafka:
-        enabled: true
-        mapper:
-          enabled: true
-        remote-service-name: ${spring.application.name}-sleuth
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
@@ -339,6 +260,90 @@ spring:
     props:
       sql:
         show: true
+
+taotao:
+  cloud:
+    core:
+      enabled: true
+      env: dev
+      logging:
+        file:
+          total-size: 10GB
+      context:
+        restart:
+          enabled: false
+          text:
+          timespan:
+      collect:
+        hook:
+          enabled: true
+      db:
+        printSql:
+          enabled: true
+        printSqlError:
+          enabled: true
+    log:
+      request-log:
+        enabled: true
+        types:
+          - logger
+          - kafka
+    oauth2:
+      security:
+        enabled: true
+        ignore:
+          # 忽略认证的地址
+          http-urls: >
+            /api-docs,
+            /user/info/username,
+            /user/info/id/*,
+            /resource/test/seata,
+            /role/info/userId,
+            /resource/info/codes,
+            /member/info/security,
+            /user,
+            /role
+    swagger:
+      enabled: true
+      title: 用户中心
+      description: 用户中心接口文档
+      version: 1.0
+      license: Apache
+      license-url: https://opensource.org/licenses/Apache-2.0Url
+      contact:
+        name: shuigedeng
+        url: http://dtbox.top/
+        email: 981376577@qq.com
+      base-package: com.taotao.cloud.uc.biz.controller
+      host: ${spring.cloud.client.ip-address}:${server.port}
+    ribbon:
+      isolation:
+        enabled: true
+      rest-template:
+        max-total: 200
+        max-per-route: 50
+        read-timeout: 35000
+        connect-timeout: 10000
+    p6spy:
+      enabled: true
+      dateformat: yyyy-MM-dd HH:mm:ss
+      driverlist: com.mysql.cj.jdbc.Driver
+      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+      appender: com.taotao.cloud.p6spy.component.P6spyLogger
+      log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
+      # 使用日志系统记录sql
+      #appender: com.p6spy.engine.spy.appender.Slf4JLogger
+    xxl:
+      job:
+        enabled: true
+        admin:
+          addresses:
+        executor:
+          appname: ${spring.application.name}
+          ip:
+          port: 6996
+          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+          log-path: ${logging.file:${user.dir}/logs/application/${spring.application.name}/xxl-job}
 
 mybatis-plus:
   #  mapper-locations: classpath:/mapper/*Mapper.xml

@@ -72,8 +72,7 @@ public class XxlJobAutoConfiguration {
 			String serverList = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(TAO_TAO_CLOUD_XXL_JOB_ADMIN))
 				.flatMap(s -> discoveryClient.getInstances(s).stream()).map(instance -> String
-					.format("http://%s:%s/%s", instance.getHost(), instance.getPort(),
-						XXL_JOB_ADMIN))
+					.format("http://%s:%s", instance.getHost(), instance.getPort()))
 				.collect(Collectors.joining(","));
 			xxlJobSpringExecutor.setAdminAddresses(serverList);
 		} else {

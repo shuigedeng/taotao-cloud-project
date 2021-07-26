@@ -36,7 +36,6 @@ public class TaoTaoCloudGatewayApplication {
 		 * 设置nacos客户端日志和快照目录
 		 *
 		 * @see LocalConfigInfoProcessor
-		 * @since 2021/2/2 上午10:48
 		 */
 		// System.setProperty("JM.LOG.PATH", "");
 		// System.setProperty("JM.SNAPSHOT.PATH", "");

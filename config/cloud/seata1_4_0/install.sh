@@ -32,7 +32,7 @@ cp /opt/github/seata/script/config-center/config.txt .
 cp -r /opt/github/seata/script/config-center/nacos .
 
 cd nacos
-sh nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -u nacos -w nacos
+nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -t 58d8ef8f-9325-4d2a-8e29-0b3632252b93 -u nacos -w nacos
 
 # 在业务系统中执行sql文件
 cp /opt/github/seata/script/client/at/db/mysql.sql /opt/cloud/seata/conf/client-mysql.sql

@@ -94,9 +94,9 @@ public class AuthorizationServerConfig {
 			.tokenSettings(tokenSettings -> {
 				tokenSettings
 					.settings(settings -> {
-						settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(1000));
+						settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(40000));
 						settings.put(REUSE_REFRESH_TOKENS, true);
-						settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(6000));
+						settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(60000));
 					});
 			})
 			.build();

@@ -13,19 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.job;
+package com.taotao.cloud.common.context;
 
-import com.taotao.cloud.job.properties.XxlJobProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
- * PropertiesAutoConfiguration
+ * 租户context holder
  *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/6/16 11:36
+ * @since 2020/4/29 17:18
  */
-@EnableConfigurationProperties({XxlJobProperties.class})
-public class PropertiesAutoConfiguration {
+public class TraceContextHolder {
 
+	private TraceContextHolder() {
+	}
+
+	private static final ThreadLocal<String> CONTEXT = new TransmittableThreadLocal<>();
+
+	public static void setTraceId(String traceId) {
+		CONTEXT.set(traceId);
+	}
+
+	public static String getTraceId() {
+		return CONTEXT.get();
+	}
+
+	public static void clear() {
+		CONTEXT.remove();
+	}
 }

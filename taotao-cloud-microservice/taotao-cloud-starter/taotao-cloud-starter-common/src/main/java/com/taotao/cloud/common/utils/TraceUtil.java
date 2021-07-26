@@ -75,6 +75,34 @@ public class TraceUtil {
 	}
 
 	/**
+	 * 传递tenantId至MDC
+	 *
+	 * @param tenantId 　租户id
+	 * @author shuigedeng
+	 * @since 2021/6/22 17:57
+	 */
+	public static void mdcTenantId(String tenantId) {
+		if (StrUtil.isNotBlank(tenantId)) {
+			MDC.put(CommonConstant.TAOTAO_CLOUD_TENANT_ID, tenantId);
+		}
+	}
+
+	/**
+	 * 传递version至MDC
+	 *
+	 * @param version 　租户id
+	 * @author shuigedeng
+	 * @since 2021/6/22 17:57
+	 */
+	public static void mdcVersion(String version) {
+		if (StrUtil.isNotBlank(version)) {
+			MDC.put(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION, version);
+		}
+	}
+
+
+
+	/**
 	 * 从header和参数中获取traceId 从前端传入数据
 	 *
 	 * @param request 　HttpServletRequest
