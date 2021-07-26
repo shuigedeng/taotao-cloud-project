@@ -27,6 +27,10 @@ export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 spark-shell --master spark://172.16.3.240:7077
 
+spark-shell \
+  --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \
+  --conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer'
+
 spark.master.taotaocloud.com:8080
 spark.worker.taotaocloud.com:8080
 spark.task.taotaocloud.com:8080

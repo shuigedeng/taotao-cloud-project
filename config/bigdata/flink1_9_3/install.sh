@@ -6,27 +6,29 @@ tar -zxvf flink-1.9.3-bin-scala_2.12.tgz -C /root/taotao-bigdata
 
 mv flink-1.9.3 flink1.9.3
 
-export FLINK_HOME="/root/taotao-bigdata/flink1.9.3"
+export FLINK_HOME="/opt/bigdata/flink-1.10.3"
 export PATH=$FLINK_HOME/bin:$PATH
 
 vim flink-conf.yaml
 jobmanager.rpc.address: 192.168.1.5
 
+vim slave
+172.16.3.240
+
+sql-client.sh \
+embedded -j /opt/github/hudi-release-0.8.0/packaging/hudi-flink-bundle/target/hudi-flink-bundle_2.12-0.8.0.jar \
+shell
 
 ################################################
 #!/bin/bash
 
-spark-shell \
-  --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \
-  --conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer'
-
 function start_flink() {
-    /opt/flink-1.9.3/bin/start-cluster.sh
+    /opt/bigdata/flink-1.10.3/bin/start-cluster.sh
     echo "flink started"
 }
 
 function stop_flink() {
-     /opt/flink-1.9.3/bin/stop-cluster.sh
+     /opt/bigdata/flink-1.10.3/bin/stop-cluster.sh
      echo "flink stoped"
 }
 
