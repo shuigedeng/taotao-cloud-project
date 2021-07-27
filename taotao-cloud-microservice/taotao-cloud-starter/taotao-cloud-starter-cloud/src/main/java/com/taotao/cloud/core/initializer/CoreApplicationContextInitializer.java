@@ -100,7 +100,6 @@ public class CoreApplicationContextInitializer implements
 			optimizeLog(environment);
 			this.registerContextRefreshEvent();
 		}
-
 	}
 
 	private Class<?> deduceMainApplicationClass() {

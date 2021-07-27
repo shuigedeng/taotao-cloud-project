@@ -18,18 +18,18 @@ package com.taotao.cloud.bigdata.hudi.config
 import scopt.OptionParser
 
 case class AccessLogConf(
-                          env: String = "",
-                          brokerList: String = "",
-                          sourceTopic: String = "",
-                          metaType: String = "",
-                          checkpointDir: String = "",
-                          path: String = "",
-                          trigger: String = "50",
-                          hudiBasePath: String = "",
-                          tableType: String = "COW",
-                          syncDB: String = "",
-                          syncJDBCUrl: String = "",
-                          syncJDBCUsername: String = ""
+                          var env: String = "",
+                          var brokerList: String = "",
+                          var sourceTopic: String = "",
+                          var metaType: String = "",
+                          var checkpointDir: String = "",
+                          var path: String = "",
+                          var trigger: String = "50",
+                          var hudiBasePath: String = "",
+                          var tableType: String = "COW",
+                          var syncDB: String = "",
+                          var syncJDBCUrl: String = "",
+                          var syncJDBCUsername: String = ""
                         )
 
 object AccessLogConf {

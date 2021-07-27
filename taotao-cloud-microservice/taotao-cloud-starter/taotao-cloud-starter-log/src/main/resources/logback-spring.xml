@@ -5,7 +5,7 @@
 
 <!--	<contextListener class=" com.taotao.cloud.log.listener.SystemPropertyLoggerContextListener"/>-->
 
-	<property name="LOG_PATH" value="${user.dir}"/>
+	<property name="LOG_PATH" value="${user.home}"/>
 	<property name="OS_NAME" value="${os.name}"/>
 	<property name="OS_VERSION" value="${os.version}"/>
 	<property name="USER_TIMEZONE" value="${user.timezone}"/>

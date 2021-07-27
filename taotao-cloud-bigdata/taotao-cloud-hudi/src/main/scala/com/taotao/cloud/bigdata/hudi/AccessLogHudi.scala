@@ -107,8 +107,7 @@ object AccessLogHudi {
             )
 
           newDF
-            .select(from_json($"value", msb.value)
-              .as("access_log"))
+            .select(from_json($"value", msb.value).as("access_log"))
             .select("access_log.*")
             .write
             .format("org.apache.hudi")
@@ -123,8 +122,6 @@ object AccessLogHudi {
             )
             .mode(SaveMode.Append)
             .save(accessLogConf.hudiBasePath)
-
-
         }
 
         batchDF.unpersist()

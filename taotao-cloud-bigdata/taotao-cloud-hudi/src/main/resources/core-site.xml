@@ -5,63 +5,60 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://host:9000</value>
+		<value>hdfs://172.16.3.240:8020</value>
+		<description>hdfs内部通讯访问地址</description>
 	</property>
 
 	<property>
 		<name>hadoop.tmp.dir</name>
-		<value>/opt/hadoop/tmp</value>
+		<value>/opt/bigdata/hadoop-3.3.0/tmp</value>
+		<description>指定hadoop数据的存储目录</description>
 	</property>
 
 	<property>
 		<name>fs.hdfs.impl</name>
 		<value>org.apache.hadoop.hdfs.DistributedFileSystem</value>
+		<description>分布式问文件系统的实现</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.hue.groups</name>
 		<value>*</value>
+		<description>配置hue允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.hue.hosts</name>
 		<value>*</value>
+		<description>配置hue允许通过代理访问的主机节点</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.root.groups</name>
 		<value>*</value>
+		<description>配置root允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.root.hosts</name>
 		<value>*</value>
+		<description>配置root允许通过代理访问的主机节点</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.httpfs.hosts</name>
 		<value>*</value>
+		<description>配置httpfs允许代理的用户所属组</description>
 	</property>
 
 	<property>
 		<name>hadoop.proxyuser.httpfs.groups</name>
 		<value>*</value>
+		<description>配置httpfs允许通过代理访问的主机节点</description>
 	</property>
 
 	<property>
-		<name>io.compression.codecs</name>
-		<value>
-			org.apache.hadoop.io.compress.GzipCodec,
-			org.apache.hadoop.io.compress.DefaultCodec,
-			org.apache.hadoop.io.compress.BZip2Codec,
-			org.apache.hadoop.io.compress.SnappyCodec,
-			com.hadoop.compression.lzo.LzoCodec,
-			com.hadoop.compression.lzo.LzopCodec
-		</value>
-	</property>
-
-	<property>
-		<name>io.compression.codec.lzo.class</name>
-		<value>com.hadoop.compression.lzo.LzoCodec</value>
+		<name>dfs.permissions</name>
+		<value>false</value>
 	</property>
 </configuration>

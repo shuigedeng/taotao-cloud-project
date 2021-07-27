@@ -23,17 +23,17 @@
 
 	<property>
 		<name>hive.metastore.warehouse.dir</name>
-		<value>/user/hive/warehouse</value>
+		<value>hdfs://172.16.3.240:9870/user/hive/warehouse</value>
 	</property>
 
 	<property>
 		<name>hive.metastore.uris</name>
-		<value>thrift://host:9083</value>
+		<value>thrift://172.16.3.240:9083</value>
 	</property>
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
-		<value>host/</value>
+		<value>172.16.3.240</value>
 	</property>
 
 	<property>
@@ -43,7 +43,7 @@
 
 	<property>
 		<name>hive.exec.scratchdir</name>
-		<value>/tmp</value>
+		<value>/user/hive/scratchdir</value>
 	</property>
 
 	<property>
@@ -53,7 +53,7 @@
 
 	<property>
 		<name>javax.jdo.option.ConnectionURL</name>
-		<value>jdbc:mysql://host:3306/hive?createDatabaseIfNotExist=TRUE</value>
+		<value>jdbc:mysql://172.16.3.240:3306/taotao-cloud-hive?createDatabaseIfNotExist=TRUE</value>
 	</property>
 
 	<property>
@@ -68,7 +68,7 @@
 
 	<property>
 		<name>javax.jdo.option.ConnectionPassword</name>
-		<value>n3nbhbn3ymb!</value>
+		<value>123456</value>
 	</property>
 
 	<property>
@@ -80,4 +80,5 @@
 		<name>hive.metastore.event.db.notification.api.auth</name>
 		<value>false</value>
 	</property>
+
 </configuration>

@@ -3,19 +3,28 @@ apply plugin: 'scala'
 dependencies {
     implementation "com.alibaba:fastjson:1.2.3"
 
-    implementation("org.apache.spark:spark-sql_2.12:3.1.0")
-    implementation("org.apache.spark:spark-streaming_2.12:3.1.0")
-    implementation("org.apache.spark:spark-hive_2.12:3.1.0")
-    implementation("org.apache.spark:spark-avro_2.12:3.1.0")
-    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.0")
-    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.0")
+    implementation("org.apache.spark:spark-core_2.12:3.1.1")
+    implementation("org.apache.spark:spark-catalyst_2.12:3.1.1")
+    implementation("org.apache.spark:spark-graphx_2.12:3.1.1")
 
-    implementation 'org.elasticsearch:elasticsearch-spark-20_2.11:6.0.0'
+    implementation("org.apache.spark:spark-sql_2.12:3.1.1"){
+        exclude group: 'org.codehaus.janino', module: 'janino'
+    }
 
-    implementation("org.apache.hudi:hudi-common:0.7.0")
-    implementation("org.apache.hudi:hudi-client:0.7.0")
-    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.7.0")
-    implementation("org.apache.hudi:hudi-spark-bundle_2.12:0.7.0")
+    implementation("org.apache.spark:spark-streaming_2.12:3.1.1")
+    implementation("org.apache.spark:spark-mllib_2.12:3.1.1")
+    implementation("org.apache.spark:spark-hive_2.12:3.1.1")
+    implementation("org.apache.spark:spark-avro_2.12:3.1.1")
+    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.12:3.1.1")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.1")
+
+//    implementation 'org.elasticsearch:elasticsearch-spark-20_2.11:6.0.0'
+    implementation group: 'org.elasticsearch', name: 'elasticsearch-spark-30_2.12', version: '7.13.0'
+
+    implementation("org.apache.hudi:hudi-common:0.8.0")
+    implementation("org.apache.hudi:hudi-client:0.8.0")
+//    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.8.0")
+    implementation("org.apache.hudi:hudi-spark-bundle_2.12:0.8.0")
 
     implementation('org.apache.hadoop:hadoop-common:3.3.0')
     implementation('org.apache.hadoop:hadoop-client:3.3.0')
@@ -28,7 +37,6 @@ dependencies {
 
     implementation("mysql:mysql-connector-java")
     implementation("commons-codec:commons-codec:1.6")
-    implementation('org.codehaus.janino:janino:3.0.11')
 
     implementation('com.github.scopt:scopt_2.12:4.0.0-RC2') {
         exclude group: 'org.scala-lang', module: 'scala-library'
@@ -36,6 +44,8 @@ dependencies {
     }
 
     implementation('com.google.guava:guava')
+
+    implementation 'org.codehaus.janino:janino:3.0.8'
 }
 
 configurations {
@@ -46,12 +56,13 @@ configurations {
         resolutionStrategy {
             force "org.apache.avro:avro:1.8.2"
             force 'com.google.guava:guava:27.0-jre'
+            force 'org.codehaus.janino:janino:3.0.8'
+            force 'org.apache.spark:spark-core_2.12:3.1.1'
         }
     }
 
     compile.exclude group: "xml-apis", module: "xml-apis"
     compile.exclude group: "xerces", module: "xercesImpl"
-
 }
 
 //shadowJar {
@@ -77,16 +88,16 @@ shadowJar {
     mergeServiceFiles()
     classifier = null
 //    version = 1.0
-    manifest {
-        attributes(
-                'Main-Class': "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
-        )
-    }
+//    manifest {
+//        attributes(
+//                'Main-Class': "com.taotao.cloud.hudi.AccessLogConsole"
+//        )
+//    }
     zip64 true
-    dependencies {
-        exclude(dependency('xml-apis:xml-apis:.*'))
-        exclude(dependency('xerces:xercesImpl:.*'))
-        exclude(dependency('org.apache.avro:avro:1.7.*'))
-        exclude(dependency{ it.moduleGroup == 'xml-apis' })
-    }
+//    dependencies {
+//        exclude(dependency('xml-apis:xml-apis:.*'))
+//        exclude(dependency('xerces:xercesImpl:.*'))
+//        exclude(dependency('org.apache.avro:avro:1.7.*'))
+//        exclude(dependency{ it.moduleGroup == 'xml-apis' })
+//    }
 }
