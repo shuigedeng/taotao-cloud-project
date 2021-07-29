@@ -18,7 +18,8 @@ package com.taotao.cloud.gateway.filter.global;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.TraceUtil;
-import com.taotao.cloud.gateway.properties.CustomRequestTraceProperties;
+import com.taotao.cloud.gateway.properties.FilterProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -35,27 +36,19 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:13
  */
 @Component
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "trace", havingValue = "true", matchIfMissing = true)
 public class TraceLogFilter implements GlobalFilter, Ordered {
-
-	private final CustomRequestTraceProperties customRequestTraceProperties;
-
-	public TraceLogFilter(CustomRequestTraceProperties customRequestTraceProperties) {
-		this.customRequestTraceProperties = customRequestTraceProperties;
-	}
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		if (customRequestTraceProperties.getEnabled()) {
-			String traceId = IdGeneratorUtil.getIdStr();
-			TraceUtil.mdcTraceId(traceId);
-			ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-				.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
-				.build();
+		String traceId = IdGeneratorUtil.getIdStr();
+		TraceUtil.mdcTraceId(traceId);
+		ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
+			.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
+			.build();
 
-			ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-			return chain.filter(build);
-		}
-		return chain.filter(exchange);
+		ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
+		return chain.filter(build);
 	}
 
 	@Override

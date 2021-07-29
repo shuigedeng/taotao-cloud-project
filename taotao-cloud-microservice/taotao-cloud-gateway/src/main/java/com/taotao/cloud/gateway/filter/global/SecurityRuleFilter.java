@@ -1,8 +1,10 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.SafeRuleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -20,12 +22,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration(proxyBeanMethods = false)
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
 public class SecurityRuleFilter implements WebFilter {
 
 	private final SafeRuleService safeRuleService;
 
 	@Override
-	@SuppressWarnings("all")
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 		/**
 		 * 是否开启黑名单

@@ -1,33 +1,34 @@
 ##################################################
 wget https://repo1.maven.org/maven2/com/facebook/presto/presto-server/0.236/presto-server-0.236.tar.gz
+wget https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.236/presto-cli-0.236-executable.jar
 
 tar presto-server-0.236.tar.gz -C /root/taotao-bigdata
 
 mv presto-server-0.236 presto0.236
 
-mkdri etc data
+mkdir etc data
 
 cd presto0.236/etc
 
 # 添加hudi支持
-mkdir presto0.236/plugins/hive-hadoop3
-cp hudi-presto-bundle-0.6.2-incubating.jar .
+cp hudi-presto-bundle-0.6.2-incubating.jar presto0.236/plugins/hive-hadoop2
 
-
-http://taotao-cloud:8080/ui
+http://172.16.3.240:28081/ui
 
 # 客户端安装
+mv presto-cli-0.236-executable.jar presto
+chmod u+x presto
 
 ##################################################
 #!/bin/bash
 
 function start_presto() {
-    /root/taotao-bigdata/presto0.236/bin/launcher start
+    /opt/bigdata/presto-server-0.236/bin/launcher start
     echo "presto started"
 }
 
 function stop_presto() {
-    /root/taotao-bigdata/presto0.236/bin/launcher stop
+    /opt/bigdata/presto-server-0.236/bin/launcher stop
     echo "presto stoped"
 }
 
@@ -45,4 +46,4 @@ case $1 in
 esac
 
 
-./presto --server taotao-cloud:8080 --catalog hive  --schema default
+./presto --server 172.16.3.240:28081 --catalog hive  --schema taotao_cloud_log

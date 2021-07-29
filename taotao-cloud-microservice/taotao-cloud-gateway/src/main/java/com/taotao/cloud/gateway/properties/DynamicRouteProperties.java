@@ -20,29 +20,56 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 网关配置
+ * 动态路由配置
  *
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 11:15
+ *
+ * Data Id：scg-routes
+ * Group：SCG_GATEWAY
+ *
+ * [{
+ *     "id": "consumer-router",
+ *     "order": 0,
+ *     "predicates": [{
+ *         "args": {
+ *             "pattern": "/consume/**"
+ *         },
+ *         "name": "Path"
+ *     }],
+ *     "uri": "lb://nacos-consumer"
+ * },{
+ *     "id": "provider-router",
+ *     "order": 2,
+ *     "predicates": [{
+ *         "args": {
+ *             "pattern": "/provide/**"
+ *         },
+ *         "name": "Path"
+ *     }],
+ *     "uri": "lb://nacos-provider"
+ * }]
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.gateway")
-public class CustomGatewayProperties {
+@ConfigurationProperties(prefix = DynamicRouteProperties.PREFIX)
+public class DynamicRouteProperties {
+
+	public static final String PREFIX = "taotao.cloud.gateway.dynamic.route";
 
 	/**
-	 * 网关基础路由前缀
+	 * 是否开启
 	 */
-	private String prefix = "/api";
+	private Boolean enabled = false;
 
 	/**
-	 * 网关基础路由版本
+	 * 类型
 	 */
-	private String version = "/v1.0";
+	private String type = "nacos";
 
-	/**
-	 * 网关基础路由uri
-	 */
-	private String baseUri = prefix + version;
+	private String dataId = "";
+
+	private String groupId = "";
+
 }

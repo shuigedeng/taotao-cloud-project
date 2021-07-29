@@ -57,60 +57,41 @@ beeline -i ~/.hiverc -u jdbc:hive2://172.16.3.240:10000 -n root
 ###########################################
 #!/bin/bash
 
-HIVE_LOG_DIR=$HIVE_HOME/logs
+function start_hive() {
+   nohup hive --service metastore >/opt/bigdata/apache-hive-3.1.2-bin/logs/metastore.log  2>&1 &
+   sleep 10
+   echo "hive metastore started"
 
-function check_process()
-{
-    pid=$(ps -ef 2>/dev/null | grep -v grep | grep -i $1 | awk '{print $2}')
-    ppid=$(netstat -nltp 2>/dev/null | grep $2 | awk '{print $7}' | cut -d '/' -f 1)
-    echo $pid
-    [[ "$pid" =~ "$ppid" ]] && [ "$ppid" ] && return 0 || return 1
-}
-
-function hive_start()
-{
-    metapid=$(check_process HiveMetastore 9083)
-    cmd="nohup hive --service metastore >$HIVE_LOG_DIR/metastore.log 2>&1 &"
-    cmd=$cmd" sleep 4; hdfs dfsadmin -safemode wait >/dev/null 2>&1"
-    [ -z "$metapid" ] && eval $cmd || echo "Metastroe started"
-
+   nohup hive --service hiveserver2 >/opt/bigdata/apache-hive-3.1.2-bin/logs/hiveserver2.log  2>&1 &
     sleep 10
-
-    server2pid=$(check_process HiveServer2 10000)
-    cmd="nohup hive --service hiveserver2 >$HIVE_LOG_DIR/hiveServer2.log 2>&1 &"
-    [ -z "$server2pid" ] && eval $cmd || echo "HiveServer2 started"
+   echo "hive hiveserver2 started"
 }
 
-function hive_stop()
-{
-    metapid=$(check_process HiveMetastore 9083)
-    [ "$metapid" ] && kill $metapid || echo "Metastore stoped"
-
+function stop_hive() {
+     ps -ef | grep metastore|grep -v grep|awk '{print $2}' |xargs kill -9
      sleep 10
+     echo "hive metastore stoped"
 
-    server2pid=$(check_process HiveServer2 10000)
-    [ "$server2pid" ] && kill $server2pid || echo "HiveServer2 stoped"
+     ps -ef | grep hiveserver2|grep -v grep|awk '{print $2}' |xargs kill -9
+     sleep 10
+     echo "hive hiveserver2 stoped"
 }
 
 case $1 in
 "start")
-    hive_start
+    start_hive
     ;;
 "stop")
-    hive_stop
+    stop_hive
     ;;
 "restart")
-    hive_stop
-    sleep 2
-    hive_start
-    ;;
-"status")
-    check_process HiveMetastore 9083 >/dev/null && echo "Metastore 正常" || echo "Metasto failed"
-    check_process HiveServer2 10000 >/dev/null && echo "HiveServer2 正常" || echo "HiveServe failed"
+    stop_hive
+    sleep 15
+    start_hive
     ;;
 *)
     echo Invalid Args!
-    echo 'Usage: '$(basename $0)' start|stop|restart|status'
+    echo 'Usage: '$(basename $0)' start|stop|restart'
     ;;
 esac
 

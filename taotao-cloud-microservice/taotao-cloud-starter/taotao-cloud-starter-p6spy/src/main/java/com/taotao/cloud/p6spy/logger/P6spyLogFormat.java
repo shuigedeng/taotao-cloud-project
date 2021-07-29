@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.p6spy.component;
+package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
-
 import com.taotao.cloud.common.constant.CommonConstant;
 import java.time.LocalDateTime;
+import com.p6spy.engine.spy.appender.SingleLineFormat;
 
 /**
  * P6spy SQL 日志格式化

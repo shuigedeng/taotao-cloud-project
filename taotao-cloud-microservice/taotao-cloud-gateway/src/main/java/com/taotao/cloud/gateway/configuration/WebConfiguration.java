@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
-import com.taotao.cloud.gateway.properties.CustomGatewayProperties;
-import com.taotao.cloud.gateway.properties.CustomDynamicRouteProperties;
-import com.taotao.cloud.gateway.properties.CustomRequestTraceProperties;
+import com.taotao.cloud.gateway.properties.ApiProperties;
+import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
+import com.taotao.cloud.gateway.properties.FilterProperties;
+import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,9 +41,10 @@ import reactor.core.publisher.Mono;
  */
 @Configuration
 @EnableConfigurationProperties({
-	CustomRequestTraceProperties.class,
-	CustomDynamicRouteProperties.class,
-	CustomGatewayProperties.class,
+	DynamicRouteProperties.class,
+	ApiProperties.class,
+	FilterProperties.class,
+	SecurityProperties.class
 })
 public class WebConfiguration {
 

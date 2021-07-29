@@ -22,6 +22,8 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
+import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.DateUtils;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
@@ -123,19 +125,27 @@ public class RequestLogAspect {
 			requestLog.setRequestUrl(URLUtil.getPath(request.getRequestURI()));
 			requestLog.setRequestMethod(request.getMethod());
 			Object[] args = joinPoint.getArgs();
-			requestLog.setRequestArgs(Arrays.toString(args));
-			requestLog.setRequestUa(request.getHeader("user-agent"));
-			requestLog.setClasspath(joinPoint.getTarget().getClass().getName());
+			requestLog.setRequestArgs(Arrays.toString(args).replaceAll("\"", "'")
+				.replace("\n", ""));
+			requestLog.setRequestUa(request.getHeader("user-agent").replaceAll("\"", "'")
+				.replace("\n", ""));
+			requestLog.setClasspath(joinPoint.getTarget().getClass().getName().replaceAll("\"", "'")
+				.replace("\n", ""));
 			String name = joinPoint.getSignature().getName();
 			requestLog.setRequestMethodName(name);
-			requestLog.setRequestParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request)));
 			requestLog
-				.setRequestHeaders(JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
+				.setRequestParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request))
+					.replaceAll("\"", "'")
+					.replace("\n", ""));
+			requestLog
+				.setRequestHeaders(
+					JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
 			requestLog.setRequestType(LogUtil.getOperateType(name));
 			requestLog.setDescription(LoggerUtil.getControllerMethodDescription(joinPoint));
 			requestLog.setSource(DEFAULT_SOURCE);
 			requestLog.setCtime(
 				String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
+			requestLog.setLogday(DateUtil.getCurrentDate());
 			SYS_LOG_THREAD_LOCAL.set(requestLog);
 		}
 	}
@@ -166,8 +176,11 @@ public class RequestLogAspect {
 		RequestLog requestLog = SYS_LOG_THREAD_LOCAL.get();
 		if (Objects.nonNull(requestLog)) {
 			requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getValue());
-			requestLog.setExDetail(LogUtil.getStackTrace(e));
-			requestLog.setExDesc(e.getMessage());
+			String stackTrace = LogUtil.getStackTrace(e);
+			requestLog.setExDetail(stackTrace.replaceAll("\"", "'")
+				.replace("\n", ""));
+			requestLog.setExDesc(e.getMessage().replaceAll("\"", "'")
+				.replace("\n", ""));
 			publisher.publishEvent(new RequestLogEvent(requestLog));
 			SYS_LOG_THREAD_LOCAL.remove();
 		}

@@ -1,20 +1,8 @@
 dependencies {
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')) {
-        exclude group: "org.springframework", module: "spring-webmvc"
-        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-    }
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')) {
-        exclude group: "org.springframework", module: "spring-webmvc"
-        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-    }
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')) {
-        exclude group: "org.springframework", module: "spring-webmvc"
-        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-    }
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rule')) {
-        exclude group: "org.springframework", module: "spring-webmvc"
-        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
-    }
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rule'))
 
     implementation 'org.springframework.security:spring-security-core:5.4.2'
     implementation 'org.springframework.security:spring-security-config'
@@ -49,31 +37,38 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-//    implementation "org.springframework.cloud:spring-cloud-starter-zipkin"
-
 }
 
-configurations.all {
-    exclude group: "org.springframework", module: "spring-webmvc"
-    exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+configurations {
+    all {
+        exclude group: "org.springframework", module: "spring-webmvc"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+    }
 }
 
-springBoot {
-    mainClassName = 'com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication'
-    buildInfo {
-        properties {
-            artifact = 'zuul'
-            version = '1.0.0'
-            group = 'com.github.rep3.cloud'
-            name = 'zuul'
-        }
+shadowJar {
+    zip64 true
+    classifier = null
+    manifest {
+        attributes(
+                'Main-Class': "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
+        )
+    }
+
+    dependencies {
+        exclude(dependency('org.springframework:spring-webmvc:.*'))
+        exclude(dependency('com.alibaba.csp:sentinel-spring-webmvc-adapter:.*'))
+
+        // exclude(dependency('xerces:xercesImpl:.*'))
+        // exclude(dependency { it.moduleGroup == 'xml-apis' })
+        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
+        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
     }
 }
 
 bootJar {
 //    zip64 true
-    // jar包名称，默认是settings.gradle下的工程名 rootProject.name = 'alog-server'
+//    jar包名称，默认是settings.gradle下的工程名 rootProject.name = 'alog-server'
 //    baseName = 'taotao-cloud-gateway'
     classifier = null
     // jar包版本号
@@ -88,8 +83,6 @@ bootJar {
 //        exclude(dependency('org.springframework:spring-webmvc:*'))
 //        exclude(dependency('com.alibaba.csp:sentinel-spring-webmvc-adapter:*'))
 //    }
-
-
     mainClass = 'com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication'
     // 指定依赖包的路径
 //    manifest {
@@ -97,24 +90,4 @@ bootJar {
 //                'Main-Class': "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
 //        )
 //    }
-}
-
-shadowJar {
-    zip64 true
-    classifier = null
-//    version = 1.0
-    manifest {
-        attributes(
-                'Main-Class': "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
-        )
-    }
-
-    dependencies {
-        exclude(dependency('org.springframework:spring-webmvc:.*'))
-        exclude(dependency('com.alibaba.csp:sentinel-spring-webmvc-adapter:.*'))
-        // exclude(dependency('xerces:xercesImpl:.*'))
-        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
-    }
 }

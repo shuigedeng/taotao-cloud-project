@@ -16,20 +16,25 @@
    limitations under the License.
 -->
 <configuration>
-	<property>
-		<name>hive.server2.enable.doAs</name>
-		<value>true</value>
-	</property>
+	<!--	<property>-->
+	<!--		<name>hive.server2.enable.doAs</name>-->
+	<!--		<value>true</value>-->
+	<!--	</property>-->
 
-	<property>
-		<name>hive.metastore.warehouse.dir</name>
-		<value>hdfs://172.16.3.240:9870/user/hive/warehouse</value>
-	</property>
+	<!--	<property>-->
+	<!--		<name>hive.server2.long.polling.timeout</name>-->
+	<!--		<value>5000</value>-->
+	<!--	</property>-->
 
-	<property>
-		<name>hive.metastore.uris</name>
-		<value>thrift://172.16.3.240:9083</value>
-	</property>
+	<!--	<property>-->
+	<!--		<name>hive.server2.authentication</name>-->
+	<!--		<value>NONE</value>-->
+	<!--	</property>-->
+
+	<!--	<property>-->
+	<!--		<name>hive.server2.thrift.max.worker.threads</name>-->
+	<!--		<value>1000</value>-->
+	<!--	</property>-->
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
@@ -41,14 +46,34 @@
 		<value>10000</value>
 	</property>
 
+	<!--	<property>-->
+	<!--		<name>hive.server2.enable.impersonation</name>-->
+	<!--		<value>true</value>-->
+	<!--	</property>-->
+
 	<property>
-		<name>hive.exec.scratchdir</name>
-		<value>/user/hive/scratchdir</value>
+		<name>hive.metastore.uris</name>
+		<value>thrift://172.16.3.240:9083</value>
 	</property>
 
 	<property>
-		<name>hive.server2.enable.impersonation</name>
-		<value>true</value>
+		<name>hive.metastore.warehouse.dir</name>
+		<value>hdfs://172.16.3.240:9870/user/hive/warehouse</value>
+	</property>
+
+	<!--	<property>-->
+	<!--		<name>hive.metastore.event.db.notification.api.auth</name>-->
+	<!--		<value>false</value>-->
+	<!--	</property>-->
+
+	<!--	<property>-->
+	<!--		<name>hive.metastore.schema.verification</name>-->
+	<!--		<value>false</value>-->
+	<!--	</property>-->
+
+	<property>
+		<name>hive.exec.scratchdir</name>
+		<value>hdfs://172.16.3.240:9870/user/hive/scratchdir</value>
 	</property>
 
 	<property>
@@ -75,10 +100,4 @@
 		<name>datanucleus.autoStartMechanism</name>
 		<value>SchemaTable</value>
 	</property>
-
-	<property>
-		<name>hive.metastore.event.db.notification.api.auth</name>
-		<value>false</value>
-	</property>
-
 </configuration>

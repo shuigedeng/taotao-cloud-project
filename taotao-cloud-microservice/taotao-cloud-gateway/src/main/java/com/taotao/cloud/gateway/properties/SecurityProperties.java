@@ -15,40 +15,42 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = CustomOpenApiProperties.BASE_AUTHENTICATION_PREFIX)
-public class CustomOpenApiProperties {
+@ConfigurationProperties(prefix = SecurityProperties.PREFIX)
+public class SecurityProperties {
 
-	public static final String BASE_AUTHENTICATION_PREFIX = "taotao.cloud.authentication";
+	public static final String PREFIX = "taotao.cloud.gateway.security";
 
-	/**
-	 * 监控中心和swagger需要访问的url
-	 */
-	private static final String[] ENDPOINTS = {
-		"/oauth/**",
+	public static final String[] ENDPOINTS = {
 		"/actuator/**",
-		"/v2/api-docs/**",
-		"/swagger/api-docs",
-		"/swagger-ui.html",
-		"/doc.html",
+		"/v3/**",
+		"/*/v3/**",
+		"/fallback",
+		"/favicon.ico",
 		"/swagger-resources/**",
 		"/webjars/**",
 		"/druid/**",
-		"/error/**",
-		"/assets/**",
-		"/auth/logout",
-		"/auth/code",
-		"/auth/sms-code"
+		"/*/*.html",
+		"/*/*.css",
+		"/*/*.js",
+		"/*.js",
+		"/*.css",
+		"/*.html",
+		"/*/favicon.ico",
+		"/*/api-docs",
+		"/css/**",
+		"/js/**",
+		"/images/**"
 	};
+
+	/**
+	 * 是否启用网关鉴权模式
+	 */
+	private Boolean enabled = true;
 
 	/**
 	 * 忽略URL，List列表形式
 	 */
 	private List<String> ignoreUrl = new ArrayList<>();
-
-	/**
-	 * 是否启用网关鉴权模式
-	 */
-	private Boolean enable = true;
 
 	/**
 	 * 首次加载合并ENDPOINTS

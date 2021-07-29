@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function start_taotao_bigdata() {
-  /root/script/cloud/redis.sh start
+  #/root/script/cloud/redis.sh start
 
   /root/script/cloud/mysql.sh start
 
@@ -9,11 +9,11 @@ function start_taotao_bigdata() {
 
   /root/script/cloud/kafka.sh start
 
-  /root/script/cloud/prometheus.sh start
+  # /root/script/cloud/prometheus.sh start
 
-  /root/script/cloud/grafana.sh start
+  # /root/script/cloud/grafana.sh start
 
-  su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
+  # su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
   /root/script/bigdata/hadoop.sh start
 
@@ -33,11 +33,11 @@ function stop_taotao_bigdata() {
 
   /root/script/bigdata/hadoop.sh stop
 
-  su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
+  # su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
 
-  /root/script/cloud/grafana.sh stop
+  # /root/script/cloud/grafana.sh stop
 
-  /root/script/cloud/prometheus.sh stop
+  # /root/script/cloud/prometheus.sh stop
 
   /root/script/cloud/kafka.sh stop
 
@@ -45,7 +45,7 @@ function stop_taotao_bigdata() {
 
   /root/script/cloud/mysql.sh stop
 
-  /root/script/cloud/redis.sh stop
+  # /root/script/cloud/redis.sh stop
 
 }
 

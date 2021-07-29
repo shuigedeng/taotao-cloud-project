@@ -13,32 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.gateway.loadBalancer;
+package com.taotao.cloud.gateway.properties;
 
-import java.util.Map;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * WeightRandomUtils<br>
+ * 网关配置
  *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/4/29 22:10
+ * @since 2020/5/2 11:15
  */
-public class WeightRandomUtils {
+@Data
+@RefreshScope
+@ConfigurationProperties(prefix = ApiProperties.PREFIX)
+public class ApiProperties {
 
-	public static <T> WeightMeta<T> buildWeightMeta(final Map<T, Integer> weightMap) {
-		if (weightMap.isEmpty()) {
-			return null;
-		}
-		final int size = weightMap.size();
-		Object[] nodes = new Object[size];
-		int[] weights = new int[size];
-		int index = 0;
-		int weightAdder = 0;
-		for (Map.Entry<T, Integer> each : weightMap.entrySet()) {
-			nodes[index] = each.getKey();
-			weights[index++] = (weightAdder = weightAdder + each.getValue());
-		}
-		return new WeightMeta<>((T[]) nodes, weights);
-	}
+	public static final String PREFIX = "taotao.cloud.gateway.api";
+
+	/**
+	 * 网关基础路由前缀
+	 */
+	private String prefix = "/api";
+
+	/**
+	 * 网关基础路由版本
+	 */
+	private String version = "/v1.0";
+
+	/**
+	 * 网关基础路由uri
+	 */
+	private String baseUri = prefix + version;
 }

@@ -179,4 +179,10 @@ public class RequestLog implements Serializable {
 	 */
 	@JsonProperty(value = "ctime")
 	private String ctime;
+
+	/**
+	 * 记录时间
+	 */
+	@JsonProperty(value = "logday")
+	private String logday;
 }

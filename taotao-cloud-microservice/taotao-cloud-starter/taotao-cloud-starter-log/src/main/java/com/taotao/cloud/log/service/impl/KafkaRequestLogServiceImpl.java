@@ -40,7 +40,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 	private final String appName;
 
 	@Resource
-	private KafkaTemplate<String, Object> kafkaTemplate;
+	private KafkaTemplate<String, String> kafkaTemplate;
 
 	public KafkaRequestLogServiceImpl(String appName) {
 		this.appName = appName;
@@ -50,16 +50,17 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 	public void save(RequestLog requestLog) {
 		String request = JsonUtil.toJSONString(requestLog);
 
-		ListenableFuture<SendResult<String, Object>> future = kafkaTemplate
+		ListenableFuture<SendResult<String, String>> future = kafkaTemplate
 			.send(REQUEST_LOG_TOPIC + appName, request);
-		future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
+
+		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 			@Override
 			public void onFailure(Throwable throwable) {
 				log.error("远程日志记录失败：{}", throwable.getMessage());
 			}
 
 			@Override
-			public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
+			public void onSuccess(SendResult<String, String> stringObjectSendResult) {
 //				log.info("远程日志记录成功：{}", requestLog);
 			}
 		});

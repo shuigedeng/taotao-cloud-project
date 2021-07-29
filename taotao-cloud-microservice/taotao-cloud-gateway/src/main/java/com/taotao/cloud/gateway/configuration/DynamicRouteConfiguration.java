@@ -15,34 +15,136 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.cloud.nacos.NacosConfigProperties;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.nacos.api.NacosFactory;
+import com.alibaba.nacos.api.config.listener.Listener;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
+import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
- * 动态路由配置
+ * 基于nacos动态路由配置
  *
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/5/2 19:33
  */
 @Configuration
-@ConditionalOnProperty(prefix = "taotao.cloud.nacos.dynamic.route", name = "enabled", havingValue = "false")
+@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "false")
 public class DynamicRouteConfiguration {
 
-	@Autowired
-	private ApplicationEventPublisher publisher;
-
 	@Configuration
-	@ConditionalOnProperty(prefix = "taotao.cloud.nacos.dynamic.route", name = "type", havingValue = "nacos", matchIfMissing = true)
+	@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "type", havingValue = "nacos", matchIfMissing = false)
 	public class NacosDynamicRoute {
-		// @Autowired
-		// private NacosConfigProperties nacosConfigProperties;
-		//
-		// @Bean
-		// public NacosRouteDefinitionRepository nacosRouteDefinitionRepository() {
-		// 	return new NacosRouteDefinitionRepository(publisher, nacosConfigProperties);
-		// }
+
+		@Bean
+		public NacosRouteDefinitionRepository nacosRouteDefinitionRepository(
+			ApplicationEventPublisher publisher,
+			NacosConfigProperties nacosConfigProperties,
+			DynamicRouteProperties dynamicRouteProperties) {
+			return new NacosRouteDefinitionRepository(publisher, nacosConfigProperties,
+				dynamicRouteProperties);
+		}
 	}
+
+	/**
+	 * nacos路由数据源
+	 *
+	 * @author shuigedeng
+	 * @version 1.0.0
+	 * @since 2020/5/2 19:26
+	 */
+	public static class NacosRouteDefinitionRepository implements RouteDefinitionRepository {
+
+		private final ApplicationEventPublisher publisher;
+		private final NacosConfigProperties nacosConfigProperties;
+		private final DynamicRouteProperties dynamicRouteProperties;
+
+		public NacosRouteDefinitionRepository(
+			ApplicationEventPublisher publisher,
+			NacosConfigProperties nacosConfigProperties,
+			DynamicRouteProperties dynamicRouteProperties) {
+			this.publisher = publisher;
+			this.dynamicRouteProperties = dynamicRouteProperties;
+			this.nacosConfigProperties = nacosConfigProperties;
+			addListener();
+		}
+
+		@Override
+		public Flux<RouteDefinition> getRouteDefinitions() {
+			try {
+				String content = NacosFactory
+					.createConfigService(nacosConfigProperties.assembleConfigServiceProperties())
+					.getConfig(
+						dynamicRouteProperties.getDataId(),
+						dynamicRouteProperties.getGroupId(),
+						5000);
+				List<RouteDefinition> routeDefinitions = getListByStr(content);
+				return Flux.fromIterable(routeDefinitions);
+			} catch (NacosException e) {
+				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
+					+ "get route definitions from nacos error info: {0}", e, e.getErrMsg());
+			}
+			return Flux.fromIterable(CollUtil.newArrayList());
+		}
+
+		private void addListener() {
+			try {
+				NacosFactory
+					.createConfigService(nacosConfigProperties.assembleConfigServiceProperties())
+					.addListener(
+						dynamicRouteProperties.getDataId(),
+						dynamicRouteProperties.getGroupId(),
+						new Listener() {
+							@Override
+							public Executor getExecutor() {
+								return null;
+							}
+
+							@Override
+							public void receiveConfigInfo(String configInfo) {
+								publisher.publishEvent(new RefreshRoutesEvent(this));
+							}
+						});
+			} catch (NacosException e) {
+				LogUtil.error("nacos addListener error", e);
+			}
+		}
+
+		@Override
+		public Mono<Void> save(Mono<RouteDefinition> route) {
+			return null;
+		}
+
+		@Override
+		public Mono<Void> delete(Mono<String> routeId) {
+			return null;
+		}
+
+		private List<RouteDefinition> getListByStr(String content) {
+			if (StrUtil.isNotEmpty(content)) {
+				return JSONObject.parseArray(content, RouteDefinition.class);
+			}
+			return new ArrayList<>(0);
+		}
+	}
+
 }

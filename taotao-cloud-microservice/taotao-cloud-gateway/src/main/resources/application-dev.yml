@@ -305,6 +305,46 @@ spring:
 
 taotao:
   cloud:
+    log:
+      request-log:
+        enabled: false
+    gateway:
+      dynamic:
+        route:
+          enabled: false
+          type: nacos
+          data-id:
+          group-id:
+      filter:
+        blacklist: true
+        gray: true
+        log: true
+        sign: true
+        trace: true
+      security:
+        enabled: true
+        ignore-url: >
+          /*/api-docs,
+          /code,
+          /uc/repeat/check,
+          /uc/user,
+          /auth/client,
+          /manager/graphql,
+          /manager/graphiql,
+          /auth/oauth/**,
+          /auth/mobile/login,
+          /auth/sms/code,
+          /auth/social/**,
+          /auth/css/**,
+          /auth/images/**,
+          /auth/js/**,
+          /favicon.ico,
+          /manifest.json,
+          /robots.txt
+      api:
+        base-uri:
+        prefix: /api
+        version: v1.0
     core:
       enabled: true
       env: dev
@@ -324,41 +364,6 @@ taotao:
           enabled: true
         printSqlError:
           enabled: true
-    log:
-      request-log:
-        enabled: false
-        types:
-          - kafka
-    gateway:
-      prefix: /api
-      version: /v1.0
-      dynamic:
-        route:
-          enabled: false
-          type: nacos
-      log:
-        trace:
-          enabled: true
-      security:
-        ignore:
-          http-urls: >
-            /*/api-docs,
-            /code,
-            /uc/repeat/check,
-            /uc/user,
-            /auth/client,
-            /manager/graphql,
-            /manager/graphiql,
-            /auth/oauth/**,
-            /auth/mobile/login,
-            /auth/sms/code,
-            /auth/social/**,
-            /auth/css/**,
-            /auth/images/**,
-            /auth/js/**,
-            /favicon.ico,
-            /manifest.json,
-            /robots.txt
 
 management:
   endpoints:

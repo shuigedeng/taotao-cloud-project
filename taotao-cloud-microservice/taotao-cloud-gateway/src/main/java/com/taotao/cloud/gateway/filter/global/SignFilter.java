@@ -16,6 +16,7 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLDecoder;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.Part;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.ResolvableType;
@@ -50,6 +52,7 @@ import reactor.core.publisher.Mono;
  * @since 2021/07/19 14:42
  */
 @Component
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "sign", havingValue = "true", matchIfMissing = true)
 public class SignFilter implements GlobalFilter {
 
 	private static final List<HttpMessageReader<?>> MESSAGE_READERS = HandlerStrategies
@@ -133,7 +136,8 @@ public class SignFilter implements GlobalFilter {
 		}
 
 		return MESSAGE_READERS.stream()
-			.filter(reader -> reader.canRead(resolvableType, exchange.getRequest().getHeaders().getContentType()))
+			.filter(reader -> reader
+				.canRead(resolvableType, exchange.getRequest().getHeaders().getContentType()))
 			.findFirst()
 			.orElseThrow(() -> new IllegalStateException("no suitable HttpMessageReader."))
 			.readMono(resolvableType, exchange.getRequest(), Collections.emptyMap())

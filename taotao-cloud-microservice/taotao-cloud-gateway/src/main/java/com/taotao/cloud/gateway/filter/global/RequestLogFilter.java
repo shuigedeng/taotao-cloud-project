@@ -5,8 +5,10 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.TraceUtil;
+import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -20,10 +22,10 @@ import reactor.core.publisher.Mono;
  * 打印请求和响应简要日志
  *
  * @author shuigedeng
- * @author L.cm
  * @since 2020-7-16
  */
 @Component
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "log", havingValue = "true", matchIfMissing = true)
 public class RequestLogFilter implements GlobalFilter, Ordered {
 
 	private static final String START_TIME = "startTime";
@@ -50,11 +52,6 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 		String header = JsonUtil.toJSONString(headers);
 		beforeReqLog.append("===Headers=== : {3}\n");
 		beforeReqArgs.add(header);
-//		headers.forEach((headerName, headerValue) -> {
-//			beforeReqLog.append("===Headers=== {} : {}\n");
-//			beforeReqArgs.add(headerName);
-//			beforeReqArgs.add(StringUtils.join(headerValue));
-//		});
 		beforeReqLog.append("================ TaoTao Cloud Request End =================\n");
 		LogUtil.info(beforeReqLog.toString(), beforeReqArgs.toArray());
 
@@ -73,7 +70,8 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 			responseLog
 				.append("\n\n================ TaoTao Cloud Response Start  ================\n");
 			responseLog
-				.append("<=== requestMethod: {0}, requestUrl: {1}, traceId: {2}, executeTime: {3}\n");
+				.append(
+					"<=== requestMethod: {0}, requestUrl: {1}, traceId: {2}, executeTime: {3}\n");
 			responseArgs.add(requestMethod);
 			responseArgs.add(requestUrl);
 			responseArgs.add(TraceUtil.getTraceId());
@@ -83,13 +81,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 			responseLog.append("===Headers=== : {4}\n");
 			responseArgs.add(httpHeader);
 
-//			httpHeaders.forEach((headerName, headerValue) -> {
-//				responseLog.append("===Headers===  {}: {}\n");
-//				responseArgs.add(headerName);
-//				responseArgs.add(StringUtils.join(headerValue));
-//			});
 			exchange.getAttributes().remove(START_TIME);
-
 			responseLog.append("================  TaoTao Cloud Response End  =================\n");
 			LogUtil.info(responseLog.toString(), responseArgs.toArray());
 		}));

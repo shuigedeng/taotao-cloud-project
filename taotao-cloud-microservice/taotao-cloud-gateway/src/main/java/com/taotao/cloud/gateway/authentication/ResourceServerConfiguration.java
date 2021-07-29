@@ -18,8 +18,11 @@ package com.taotao.cloud.gateway.authentication;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.gateway.properties.SecurityProperties;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -43,31 +46,11 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 @AllArgsConstructor
 @Configuration
 @EnableWebFluxSecurity
+@ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class ResourceServerConfiguration {
 
 	private final CustomReactiveAuthorizationManager customReactiveAuthorizationManager;
-
-	private static final String[] ENDPOINTS = {
-		"/actuator/**",
-		"/v3/**",
-		"/*/v3/**",
-		"/fallback",
-		"/favicon.ico",
-		"/swagger-resources/**",
-		"/webjars/**",
-		"/druid/**",
-		"/*/*.html",
-		"/*/*.css",
-		"/*/*.js",
-		"/*.js",
-		"/*.css",
-		"/*.html",
-		"/*/favicon.ico",
-		"/*/api-docs",
-		"/css/**",
-		"/js/**",
-		"/images/**"
-	};
+	private final SecurityProperties securityProperties;
 
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
@@ -85,12 +68,16 @@ public class ResourceServerConfiguration {
 		};
 
 		CustomReactiveAuthenticationManager customReactiveAuthenticationManager = new CustomReactiveAuthenticationManager();
-		AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(customReactiveAuthenticationManager);
-		authenticationWebFilter.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
+		AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(
+			customReactiveAuthenticationManager);
+		authenticationWebFilter
+			.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
 		authenticationWebFilter.setAuthenticationFailureHandler(
 			new ServerAuthenticationEntryPointFailureHandler(serverAuthenticationEntryPoint));
 		authenticationWebFilter
 			.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
+
+		List<String> ignoreUrl = securityProperties.getIgnoreUrl();
 
 		http
 			.csrf().disable()
@@ -98,7 +85,7 @@ public class ResourceServerConfiguration {
 			.headers().frameOptions().disable()
 			.and()
 			.authorizeExchange()
-			.pathMatchers(ENDPOINTS).permitAll()
+			.pathMatchers(ignoreUrl.toArray(new String[ignoreUrl.size()])).permitAll()
 			.pathMatchers(HttpMethod.OPTIONS).permitAll()
 			.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
 			.anyExchange().access(customReactiveAuthorizationManager)

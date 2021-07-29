@@ -37,7 +37,7 @@ import org.springframework.core.env.Environment;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)
-@ConditionalOnProperty(prefix = "taotao.cloud.p6spy", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class P6spyConfiguration implements ApplicationRunner {
 
 	private final Environment environment;
@@ -56,7 +56,7 @@ public class P6spyConfiguration implements ApplicationRunner {
 		Field[] fields = P6spyProperties.class.getDeclaredFields();
 		for (Field field : fields) {
 			String fieldName = field.getName();
-			String propertiesName = "taotao.cloud.p6spy.".concat(fieldName);
+			String propertiesName = P6spyProperties.PREFIX.concat(".").concat(fieldName);
 			if (p6spyProperties.containsProperty(propertiesName)) {
 				String systemPropertyValue = p6spyProperties
 					.getProperty(propertiesName, defaults.get(fieldName));

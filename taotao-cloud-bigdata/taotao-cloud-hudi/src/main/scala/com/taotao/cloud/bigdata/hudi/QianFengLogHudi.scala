@@ -43,11 +43,11 @@ import scala.collection.mutable
  * @since 2020/11/27 下午3:06
  * @version 1.0.0
  */
-object AccessLogHudi {
-  val LOGGER: Logger = LoggerFactory.getLogger("AccessLogHudi")
+object QianFengLogHudi {
+  val LOGGER: Logger = LoggerFactory.getLogger(QianFengLogHudi.getClass)
 
   def main(args: Array[String]): Unit = {
-    val accessLogConf: AccessLogConf = AccessLogConf.parseConf(AccessLogHudi, args)
+    val accessLogConf: AccessLogConf = AccessLogConf.parseConf(QianFengLogHudi, args)
     val sparkSession: SparkSession = SparkHelper.getSparkSession(accessLogConf.env);
 
     sparkSession.streams.addListener(new StreamingQueryListener() {
