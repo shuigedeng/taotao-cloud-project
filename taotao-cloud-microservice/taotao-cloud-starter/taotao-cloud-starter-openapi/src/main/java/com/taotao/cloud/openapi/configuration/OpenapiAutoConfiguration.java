@@ -22,13 +22,17 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.headers.Header;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.media.IntegerSchema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
-import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.security.SecurityScheme.In;
+import io.swagger.v3.oas.models.servers.Server;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -38,6 +42,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpHeaders;
 
 /**
  * SwaggerAutoConfiguration
@@ -78,7 +83,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		return GroupedOpenApi
 			.builder()
 			.group(applicationName)
-			.pathsToMatch("/public/**")
+			.pathsToMatch("/**")
 			.build();
 	}
 
@@ -96,71 +101,92 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 			openApi.getPaths().values().stream()
 				.flatMap(pathItem -> pathItem.readOperations().stream())
 				.forEach(operation -> operation.addParametersItem(
-					new HeaderParameter().$ref("#/components/parameters/myConsumerTypeHeader")));
+					new HeaderParameter()));
 		};
 	}
 
 	@Bean
 	public OpenAPI openApi() {
 		Components components = new Components();
-
 		// 添加auth认证header
 		components.addSecuritySchemes("token",
 			new SecurityScheme()
 				.description("token")
-				.type(SecurityScheme.Type.APIKEY)
+				.type(SecurityScheme.Type.HTTP)
 				.name("token")
 				.in(In.HEADER)
 				.scheme("basic")
 		);
-
 		components.addSecuritySchemes("bearer",
 			new SecurityScheme()
+				.name(HttpHeaders.AUTHORIZATION)
 				.type(SecurityScheme.Type.HTTP)
+				.in(In.HEADER)
 				.scheme("bearer")
 				.bearerFormat("JWT")
 		);
-
 		// 添加全局header
-		components.addParameters("meta",
-			new Parameter()
-				.description("元数据")
-				.in(In.HEADER.toString())
-				.schema(
-					new StringSchema()
-				)
-				.name("meta")
-		);
-
-		components.addHeaders("version",
+		components.addHeaders("taotao-cloud-request-version-header",
 			new Header()
 				.description("版本号")
 				.schema(new StringSchema())
 		);
-
-		String taotaoCloudVersion = environment.getProperty("taotaoCloudVersion");
+		components.addHeaders("taotao-cloud-request-weight-header",
+			new Header()
+				.description("权重")
+				.schema(new IntegerSchema())
+		);
 		String applicationName = environment.getProperty("spring.application.name", "");
+		String taotaoCloudVersion = environment.getProperty("taotaoCloudVersion");
+		String ip = environment.getProperty("spring.cloud.client.ip-address",
+			"0.0.0.0");
+		String port = environment.getProperty("server.port",
+			"9999");
+
+		List<Server> servers = new ArrayList<>();
+		Server s1 = new Server();
+		s1.setUrl("http://" + ip + ":" + port + "/" + applicationName);
+		s1.setDescription("本地地址");
+		servers.add(s1);
+		Server s2 = new Server();
+		s2.setUrl("http://dev.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s2.setDescription("测试环境地址");
+		servers.add(s2);
+		Server s3 = new Server();
+		s3.setUrl("http://pre.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s3.setDescription("预上线环境地址");
+		servers.add(s3);
+		Server s4 = new Server();
+		s4.setUrl("http://pro.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s4.setDescription("生产环境地址");
+		servers.add(s4);
+
+		Info info = new Info()
+			.title(applicationName.toUpperCase() + " API")
+			.description("TAOTAO CLOUD 电商及大数据平台")
+			.version(taotaoCloudVersion)
+			.contact(new Contact()
+				.name("dengtao")
+				.email("981376577@qq.com")
+				.url("https://github.com/shuigedeng/taotao-cloud-project")
+			)
+			.termsOfService(applicationName)
+			.license(new License()
+				.name("Apache 2.0")
+				.url(
+					"https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
+			);
+
+		ExternalDocumentation externalDocumentation = new ExternalDocumentation()
+			.description("TaoTao Cloud Wiki Documentation")
+			.url("https://github.com/shuigedeng/taotao-cloud-project/wiki");
 
 		return new OpenAPI()
 			.components(components)
-			.openapi(applicationName)
-			.info(
-				new Info()
-					.title(applicationName.toUpperCase() + " API")
-					.description("TaoTao Cloud 电商及大数据平台")
-					.version(taotaoCloudVersion)
-					.license(
-						new License()
-							.name("Apache 2.0")
-							.url(
-								"https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
-					)
-			)
-			.externalDocs(
-				new ExternalDocumentation()
-					.description("TaoTao Cloud Wiki Documentation")
-					.url("https://github.com/shuigedeng/taotao-cloud-project/wiki")
-			);
+			.openapi("3.0.0")
+			.info(info)
+			.servers(servers)
+			.externalDocs(externalDocumentation);
 	}
 
 //	@Bean

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.taotao.cloud.common.utils.LogUtil;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
@@ -44,6 +45,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * @since 2021/03/04 13:48
  */
+@EnableKnife4j
 @Component
 public class OpenApiConfiguration {
 

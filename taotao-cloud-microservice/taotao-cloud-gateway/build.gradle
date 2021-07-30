@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.9'
     implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.9'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.3'
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3'
 
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"

@@ -20,7 +20,7 @@ buildscript {
         reactorVersion = '3.4.3'
         servletApiVersion = '4.0.1'
         bannerVersion = "1.0.2"
-        lombokVersion = '1.18.18'
+        lombokVersion = '1.18.20'
         javassistVersion = '3.27.0-GA'
         easyCaptchaVersion = '1.6.2'
         hutoolVersion = '5.5.9'

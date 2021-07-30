@@ -30,13 +30,18 @@ import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
+import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
+import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -144,6 +149,106 @@ public class DynamicRouteConfiguration {
 				return JSONObject.parseArray(content, RouteDefinition.class);
 			}
 			return new ArrayList<>(0);
+		}
+	}
+
+	/**
+	 * 动态更新路由网关service 1）实现一个Spring提供的事件推送接口ApplicationEventPublisherAware
+	 * 2）提供动态路由的基础方法，可通过获取bean操作该类的方法。该类提供新增路由、更新路由、删除路由，然后实现发布的功能。
+	 */
+	@Component
+	public class DynamicRouteComponent implements ApplicationEventPublisherAware {
+
+		@Autowired
+		private RouteDefinitionWriter routeDefinitionWriter;
+		@Autowired
+		private RouteDefinitionLocator routeDefinitionLocator;
+
+		/**
+		 * 发布事件
+		 */
+		@Autowired
+		private ApplicationEventPublisher publisher;
+
+		@Override
+		public void setApplicationEventPublisher(
+			ApplicationEventPublisher applicationEventPublisher) {
+			this.publisher = applicationEventPublisher;
+		}
+
+		/**
+		 * 删除路由
+		 *
+		 * @param id
+		 * @return
+		 */
+		public String delete(String id) {
+			try {
+				LogUtil.info("gateway delete route id {}", id);
+				this.routeDefinitionWriter.delete(Mono.just(id)).subscribe();
+				this.publisher.publishEvent(new RefreshRoutesEvent(this));
+				return "delete success";
+			} catch (Exception e) {
+				return "delete fail";
+			}
+		}
+
+		/**
+		 * 更新路由
+		 *
+		 * @param definitions
+		 * @return
+		 */
+		public String updateList(List<RouteDefinition> definitions) {
+			LogUtil.info("gateway update route {}", definitions);
+			// 删除缓存routerDefinition
+			List<RouteDefinition> routeDefinitionsExits = routeDefinitionLocator.getRouteDefinitions()
+				.buffer().blockFirst();
+			if (!CollUtil.isEmpty(routeDefinitionsExits)) {
+				routeDefinitionsExits.forEach(routeDefinition -> {
+					LogUtil.info("delete routeDefinition:{}", routeDefinition);
+					delete(routeDefinition.getId());
+				});
+			}
+			definitions.forEach(definition -> {
+				updateById(definition);
+			});
+			return "success";
+		}
+
+		/**
+		 * 更新路由
+		 *
+		 * @param definition
+		 * @return
+		 */
+		public String updateById(RouteDefinition definition) {
+			try {
+				LogUtil.info("gateway update route {}", definition);
+				this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
+			} catch (Exception e) {
+				return "update fail,not find route  routeId: " + definition.getId();
+			}
+			try {
+				routeDefinitionWriter.save(Mono.just(definition)).subscribe();
+				this.publisher.publishEvent(new RefreshRoutesEvent(this));
+				return "success";
+			} catch (Exception e) {
+				return "update route fail";
+			}
+		}
+
+		/**
+		 * 增加路由
+		 *
+		 * @param definition
+		 * @return
+		 */
+		public String add(RouteDefinition definition) {
+			LogUtil.info("gateway add route {}", definition);
+			routeDefinitionWriter.save(Mono.just(definition)).subscribe();
+			this.publisher.publishEvent(new RefreshRoutesEvent(this));
+			return "success";
 		}
 	}
 

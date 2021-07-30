@@ -5,6 +5,9 @@ server:
   undertow:
     buffer-size: 2048
     direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
 
 jasypt:
   encryptor:
@@ -56,20 +59,19 @@ arthas:
   tunnel-server: ws://172.16.3.240:7777/ws
 
 spring:
+  application:
+    name: taotao-cloud-uc
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
-  application:
-    name: taotao-cloud-uc
+  mvc:
+    servlet:
+      load-on-startup: 1
   servlet:
     multipart:
-      # 开启 multipart 上传功能
       enabled: true
-      # 文件写入磁盘的阈值
       file-size-threshold: 2KB
-      # 最大文件大小
       max-file-size: 200MB
-      # 最大请求大小
       max-request-size: 215MB
   cloud:
     loadbalancer:
@@ -234,7 +236,6 @@ spring:
         inline:
           sharding-column: id
           algorithm-expression: ds_$->{id % 2}
-      #      binding-tables: sys_user,sys_dept,sys_job
       tables:
         sys_user:
           key-generator-column-name: id
@@ -255,6 +256,7 @@ spring:
     props:
       sql:
         show: true
+
 
 taotao:
   cloud:
@@ -279,19 +281,6 @@ taotao:
             /member/info/security,
             /user,
             /role
-    swagger:
-      enabled: true
-      title: 用户中心
-      description: 用户中心接口文档
-      version: 1.0
-      license: Apache
-      license-url: https://opensource.org/licenses/Apache-2.0Url
-      contact:
-        name: shuigedeng
-        url: http://dtbox.top/
-        email: 981376577@qq.com
-      base-package: com.taotao.cloud.uc.biz.controller
-      host: ${spring.cloud.client.ip-address}:${server.port}
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -306,12 +295,12 @@ taotao:
         executor:
           appname: ${spring.application.name}
           ip:
-          port: 0
+          port: 1111
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${logging.file:${user.home}}/logs/application/${spring.application.name}/xxl-job}
 
 mybatis-plus:
-  #  mapper-locations: classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.taotao.cloud.*.biz.entity
   global-config:
     db-config:

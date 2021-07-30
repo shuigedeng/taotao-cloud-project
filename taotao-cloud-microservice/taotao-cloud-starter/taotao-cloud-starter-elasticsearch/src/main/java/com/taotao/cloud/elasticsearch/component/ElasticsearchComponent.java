@@ -17,9 +17,8 @@ package com.taotao.cloud.elasticsearch.component;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.elasticsearch.constant.ElasticsearchConstant;
+import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -42,14 +41,14 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @version 1.0.0
  * @since 2020/5/3 06:47
  */
-@ConditionalOnProperty(prefix = ElasticsearchConstant.BASE_ELASTICSEARCH_PREFIX,
-	name = ElasticsearchConstant.ENABLED, havingValue = ElasticsearchConstant.TRUE)
+@ConditionalOnProperty(prefix = ElasticsearchProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElasticsearchComponent implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELASTICSEARCH_STARTER + "]"
-			+ "elasticsearch模块已启动");
+		LogUtil.info(
+			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELASTICSEARCH_STARTER + "]"
+				+ "elasticsearch模块已启动");
 	}
 
 	@Bean
@@ -61,7 +60,6 @@ public class ElasticsearchComponent implements InitializingBean {
 			setHttpClientConfig(builder, poolProperties, restProperties);
 		};
 	}
-
 
 	/**
 	 * 异步httpclient连接延时配置

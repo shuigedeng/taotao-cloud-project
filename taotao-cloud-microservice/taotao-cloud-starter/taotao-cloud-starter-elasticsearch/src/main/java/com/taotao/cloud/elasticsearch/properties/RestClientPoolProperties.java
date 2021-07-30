@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elasticsearch.properties;
 
-import com.taotao.cloud.elasticsearch.constant.ElasticsearchConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -29,8 +28,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = ElasticsearchConstant.BASE_ELASTICSEARCH_REST_POOL_PREFIX)
+@ConfigurationProperties(prefix = RestClientPoolProperties.PREFIX)
 public class RestClientPoolProperties {
+
+	public static final String PREFIX = "taotao.cloud.elasticsearch.rest-pool";
 
 	/**
 	 * 链接建立超时时间

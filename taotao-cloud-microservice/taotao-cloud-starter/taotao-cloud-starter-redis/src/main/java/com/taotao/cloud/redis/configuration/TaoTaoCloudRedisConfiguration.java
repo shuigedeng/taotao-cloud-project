@@ -18,8 +18,10 @@ package com.taotao.cloud.redis.configuration;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
+import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.redis.RedisOps;
 import com.taotao.cloud.redis.repository.CacheOps;
 import com.taotao.cloud.redis.repository.CachePlusOps;
@@ -29,10 +31,12 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -112,6 +116,15 @@ public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	public RedisOps getRedisOps(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
 		return new RedisOps(redisTemplate, stringRedisTemplate, cacheProperties.getCacheNullVal());
+	}
+
+	@Bean
+	@ConditionalOnClass(RedissonClient.class)
+	@ConditionalOnProperty(prefix = RedisLockProperties.BASE_REDIS_LOCK_PREFIX,
+		name = RedisLockProperties.ENABLED,
+		havingValue = RedisLockProperties.TRUE)
+	public RedissonDistributedLock redissonDistributedLock(){
+		return new RedissonDistributedLock();
 	}
 
 	/**

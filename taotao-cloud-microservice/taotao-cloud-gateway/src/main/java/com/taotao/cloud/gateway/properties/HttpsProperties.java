@@ -14,7 +14,7 @@ public class HttpsProperties {
 	/**
 	 * 是否启用https
 	 */
-	private Boolean enabled = true;
+	private Boolean enabled = false;
 
 	private Integer port = 9443;
 }

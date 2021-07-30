@@ -318,7 +318,7 @@ taotao:
           group-id:
       filter:
         blacklist: true
-        gray: true
+        gray: false
         log: true
         sign: true
         trace: true

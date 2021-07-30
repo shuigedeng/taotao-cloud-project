@@ -13,28 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.elasticsearch.properties;
+package com.taotao.cloud.web.idempotent;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Import;
 
 /**
- * 索引配置
+ * 开启Idempotent配置
  *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/5/3 08:00
+ * @since 2020/5/3 07:47
  */
-@Data
-@RefreshScope
-@ConfigurationProperties(prefix = ElasticsearchProperties.PREFIX)
-public class ElasticsearchProperties {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Import({IdempotentAspect.class})
+@ConditionalOnProperty(prefix = "taotao.cloud.web.idempotent", name = "enabled", havingValue = "true")
+public @interface EnableTaoTaoIdempotent {
 
-	public static final String PREFIX = "taotao.cloud.elasticsearch";
-
-	/**
-	 * Elasticsearch 总开关
-	 */
-	private boolean enabled = false;
 }

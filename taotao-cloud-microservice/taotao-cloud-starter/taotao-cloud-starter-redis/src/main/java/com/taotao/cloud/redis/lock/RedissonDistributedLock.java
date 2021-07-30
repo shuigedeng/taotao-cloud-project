@@ -35,10 +35,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  * @version 1.0.0
  * @since 2020/5/3 07:47
  */
-@ConditionalOnClass(RedissonClient.class)
-@ConditionalOnProperty(prefix = RedisLockProperties.BASE_REDIS_LOCK_PREFIX,
-	name = RedisLockProperties.ENABLED,
-	havingValue = RedisLockProperties.TRUE)
 public class RedissonDistributedLock implements DistributedLock {
 
 	@Autowired

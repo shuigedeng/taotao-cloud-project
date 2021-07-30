@@ -24,15 +24,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({
-//	TokenStoreProperties.class,
-//	SecurityProperties.class,
-//	UrlPermissionProperties.class,
-//	SmsCodeProperties.class,
-//	AuthProperties.class,
-//	PermitProperties.class,
-//	RenewProperties.class
-})
+@EnableConfigurationProperties({})
 public class PropertiesAutoConfiguration {
 
 }
