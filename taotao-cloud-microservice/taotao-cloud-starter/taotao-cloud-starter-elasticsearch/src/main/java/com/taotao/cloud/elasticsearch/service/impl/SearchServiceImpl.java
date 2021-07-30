@@ -15,12 +15,10 @@
  */
 package com.taotao.cloud.elasticsearch.service.impl;
 
-import com.taotao.cloud.core.model.PageModel;
-import com.taotao.cloud.elasticsearch.builder.SearchBuilder;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import com.taotao.cloud.elasticsearch.service.ISearchService;
 import java.io.IOException;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 /**
@@ -40,10 +38,11 @@ public class SearchServiceImpl implements ISearchService {
 
 	@Override
 	public PageModel<String> strQuery(String indexName, SearchDto searchDto) throws IOException {
-		return SearchBuilder.builder(elasticsearchRestTemplate, indexName)
-			.setStringQuery(searchDto.getQueryStr())
-			.addSort(searchDto.getSortCol(), SortOrder.DESC)
-			.setIsHighlight(searchDto.getIsHighlighter())
-			.getPage(searchDto.getPage(), searchDto.getLimit());
+//		return SearchBuilder.builder(elasticsearchRestTemplate, indexName)
+//			.setStringQuery(searchDto.getQueryStr())
+//			.addSort(searchDto.getSortCol(), SortOrder.DESC)
+//			.setIsHighlight(searchDto.getIsHighlighter())
+//			.getPage(searchDto.getPage(), searchDto.getLimit());
+		return null;
 	}
 }

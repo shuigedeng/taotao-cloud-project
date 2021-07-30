@@ -48,7 +48,7 @@ import reactor.core.publisher.Mono;
  * @since 2020/5/2 19:33
  */
 @Configuration
-@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "false")
+@ConditionalOnProperty(prefix = DynamicRouteProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicRouteConfiguration {
 
 	@Configuration

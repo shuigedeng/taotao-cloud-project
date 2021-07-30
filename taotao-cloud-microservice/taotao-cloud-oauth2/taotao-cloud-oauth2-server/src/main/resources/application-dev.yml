@@ -6,38 +6,6 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
-temp:
-  redirect_uri: http://localhost:8008/mall/login/oauth2/code/mall
-
-seata:
-  enabled: true
-  application-id: ${spring.application.name}
-  tx-service-group: taotao_cloud_tx_group
-  enable-auto-data-source-proxy: true
-  service:
-    grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_PORT:8091}
-    vgroup-mapping:
-      taotao_cloud_tx_group: default
-  config:
-    type: nacos
-    nacos:
-      namespace:
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
-      group: SEATA_GROUP
-      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
-      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
-      group: SEATA_GROUP
-      namespace:
-      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
-      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
-      cluster: default
-
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
   # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
@@ -65,46 +33,34 @@ spring:
       client:
         enabled: true
     sampler:
-      #采样率，默认为0.1
       probability: 1.0
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
-    #发送数据类型 kafaka、rabbitmq、web
     sender:
       type: WEB
-#  mvc:
-#    servlet:
-#      load-on-startup: 1
-#    thymeleaf:
-#      prefix: classpath:/views/
-#      suffix: .html
-#      cache: false
-  cache:
-    type: none
-#  datasource:
-#    type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.3.240}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-#    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-#    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-#    hikari:
-#      auto-commit: true
-#      connection-timeout: 30000
-#      idle-timeout: 25000
-#      login-timeout: 5
-#      validation-timeout: 3000
-#      max-lifetime: 50000
-#      read-only: false
-#      connection-test-query: SELECT 1
-#      maximum-pool-size: 15
-#      minimum-idle: 10
-#      pool-name: DatebookHikariCP
-#      data-source-properties:
-#        cachePrepStmts: true
-#        prepStmtCacheSize: 250
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.3.240}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
+    password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 25000
+      login-timeout: 5
+      validation-timeout: 3000
+      max-lifetime: 50000
+      read-only: false
+      connection-test-query: SELECT 1
+      maximum-pool-size: 15
+      minimum-idle: 10
+      pool-name: DatebookHikariCP
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
   jpa:
     database: mysql
     show-sql: true
@@ -133,9 +89,6 @@ spring:
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
       acks: 1
       properties:
         linger.ms: 500
@@ -151,17 +104,6 @@ spring:
       missing-topics-fatal: false
   security:
     oauth2:
-      authorization:
-        client:
-          - client-id: mall
-            client-secret: mall
-            redirect-uri: https://www.baidu.com
-            scope:
-              - mall:read
-              - mall:write
-          - client-id: admin
-            client-secret: admin
-            redirect-uri: http://localhost:6628/login/oauth2/code/admin
       client:
         registration:
           mall:
@@ -229,40 +171,18 @@ spring:
 
 taotao:
   cloud:
-    core:
-      enabled: true
-      env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
     log:
       request-log:
         enabled: true
         types:
-          - logger
           - kafka
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.component.P6spyLogger
-      log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
-      # 使用日志系统记录sql
-      #appender: com.p6spy.engine.spy.appender.Slf4JLogger
+      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+      log-message-format: com.taotao.cloud.p6spy.logger.P6spyLogFormat
 
 feign:
   sentinel:
@@ -287,8 +207,6 @@ feign:
       enabled: true
 
 management:
-  server:
-    base-path: /actuator
   endpoints:
     web:
       exposure:

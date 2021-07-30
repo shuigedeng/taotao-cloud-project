@@ -6,10 +6,17 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-lock')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-idempotent')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-file')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
 
     api "org.mapstruct:mapstruct"
     api "org.springframework.boot:spring-boot-starter-validation"

@@ -17,25 +17,9 @@ package com.taotao.cloud.elasticsearch.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.elasticsearch.model.AggItemVo;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
-import org.elasticsearch.search.aggregations.bucket.histogram.ExtendedBounds;
-import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
-import org.elasticsearch.search.aggregations.bucket.histogram.ParsedDateHistogram;
-import org.elasticsearch.search.aggregations.bucket.range.ParsedDateRange;
-import org.elasticsearch.search.aggregations.bucket.range.Range;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
-import org.elasticsearch.search.aggregations.metrics.Cardinality;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,6 +29,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
+import org.elasticsearch.search.aggregations.bucket.histogram.LongBounds;
+import org.elasticsearch.search.aggregations.bucket.histogram.ParsedDateHistogram;
+import org.elasticsearch.search.aggregations.bucket.range.ParsedDateRange;
+import org.elasticsearch.search.aggregations.bucket.range.Range;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.metrics.Cardinality;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 /**
  * 聚合服务实现
@@ -110,7 +109,7 @@ public class AggregationServiceImpl implements IAggregationService {
 						//时区相差8小时
 						.timeZone(ZoneId.systemDefault())
 						.minDocCount(0L)
-						.extendedBounds(new ExtendedBounds(
+						.extendedBounds(new LongBounds(
 							curDateTime.minusDays(1).format(
 								DateTimeFormatter.ofPattern(CommonConstant.DATETIME_FORMAT)),
 							curDateTime
@@ -137,7 +136,7 @@ public class AggregationServiceImpl implements IAggregationService {
 						//时区相差8小时
 						.timeZone(ZoneId.systemDefault())
 						.minDocCount(0L)
-						.extendedBounds(new ExtendedBounds(
+						.extendedBounds(new LongBounds(
 							localDate.minusDays(6)
 								.format(DateTimeFormatter.ofPattern(CommonConstant.DATE_FORMAT)),
 							localDate
@@ -182,7 +181,7 @@ public class AggregationServiceImpl implements IAggregationService {
 				)
 		).size(0);
 
-		RestHighLevelClient client = BeanUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
 		SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 		Aggregations aggregations = response.getAggregations();
 		Map<String, Object> result = new HashMap<>(15);

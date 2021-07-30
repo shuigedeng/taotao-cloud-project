@@ -15,53 +15,27 @@
  */
 package com.taotao.cloud.oauth2.biz;
 
-//import com.taotao.cloud.core.annotation.EnableTaoTaoCloudMVC;
-//import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
-//import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
-//import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
-//import com.taotao.cloud.redis.annotation.EnableTaoTaoCloudRedis;
-//import com.taotao.cloud.ribbon.annotation.EnableTaoTaoCloudFeign;
-//import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
-//import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOAuth2RedisTokenStore;
-//import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2ResourceServer;
-//import com.taotao.cloud.security.annotation.EnableTaoTaoCloudSecurityComponent;
-//import com.taotao.cloud.security.service.IUserDetailsService;
-//import com.taotao.cloud.security.service.impl.UserDetailsServiceImpl;
-//import com.taotao.cloud.swagger.annotation.EnableTaoTaoCloudSwagger2;
-
+import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudFeign;
+import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudHttpClient;
+import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudLoadbalancer;
+import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
+import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-//import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-//import org.springframework.cloud.client.SpringCloudApplication;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * TaoTaoCloudAuthApplication
+ * TaoTaoCloudOauth2ServerApplication
  *
  * @author shuigedeng
  * @since 2020/4/29 15:13
  * @version 1.0.0
  */
-//@EnableTaoTaoCloudOAuth2RedisTokenStore
-//@EnableTaoTaoCloudOauth2ResourceServer
-//@EnableTaoTaoCloudSecurityComponent
-//@EnableTaoTaoCloudRedis
-//@EnableTaoTaoCloudSwagger2
-//@EnableTaoTaoCloudJPA
-//@EnableTaoTaoCloudP6spy
-//@EnableTaoTaoCloudFeign
-//@EnableTaoTaoCloudRequestLog
-//@EnableTaoTaoCloudMVC
-//@EnableTaoTaoCloudSeata
-//@EnableTransactionManagement(proxyTargetClass = true)
-//@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
-//@EnableEncryptableProperties
-//@EnableTaoTaoCloudOpenapi
-//@EnableTaoTaoCloudSeata
-//@EnableTaoTaoCloudJPA
-//@EnableTaoTaoCloudSentinel
+@EnableTaoTaoCloudLoadbalancer
+@EnableTaoTaoCloudHttpClient
+@EnableTaoTaoCloudFeign
+@EnableTaoTaoCloudP6spy
+@EnableTaoTaoCloudSentinel
 @SpringBootApplication
 @EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {

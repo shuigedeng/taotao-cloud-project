@@ -18,8 +18,8 @@ package com.taotao.cloud.elasticsearch.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.core.model.PageModel;
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.elasticsearch.model.IndexDto;
 import com.taotao.cloud.elasticsearch.service.IIndexService;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class IndexServiceImpl implements IIndexService {
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
-	private final RestHighLevelClient client = BeanUtil.getBean(RestHighLevelClient.class, true);
+	private final RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
 
 	@Override
 	public boolean create(IndexDto indexDto) throws IOException {
@@ -99,7 +99,8 @@ public class IndexServiceImpl implements IIndexService {
 			};
 			listOfIndicesFromEs = mapper.readValue(rawBody, typeRef);
 		}
-		return PageModel.succeed(100, 1, 10, listOfIndicesFromEs);
+		return null;
+//		return PageModel.PageModelBuilder(100, 1, 10, listOfIndicesFromEs);
 	}
 
 	/**

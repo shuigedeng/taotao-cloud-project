@@ -18,9 +18,13 @@ package com.taotao.cloud.elasticsearch.builder;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.core.model.PageModel;
-import com.taotao.cloud.core.utils.BeanUtil;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
@@ -36,11 +40,6 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * ES查询Builder
@@ -87,7 +86,7 @@ public class SearchBuilder {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		SearchRequest searchRequest = new SearchRequest(indexName);
 		searchRequest.source(searchSourceBuilder);
-		RestHighLevelClient client = BeanUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
 		return new SearchBuilder(searchRequest, searchSourceBuilder, client);
 	}
 
@@ -103,7 +102,7 @@ public class SearchBuilder {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.source(searchSourceBuilder);
-		RestHighLevelClient client = BeanUtil.getBean(RestHighLevelClient.class, true);
+		RestHighLevelClient client = ContextUtil.getBean(RestHighLevelClient.class, true);
 		return new SearchBuilder(searchRequest, searchSourceBuilder, client);
 	}
 
@@ -274,7 +273,8 @@ public class SearchBuilder {
 		SearchHits searchHits = response.getHits();
 		TotalHits totalCnt = searchHits.getTotalHits();
 		List<String> list = getList(searchHits);
-		return PageModel.succeed(totalCnt.value, 1, 10, list);
+//		return PageModel.succeed(totalCnt.value, 1, 10, list);
+		return null;
 	}
 
 	/**

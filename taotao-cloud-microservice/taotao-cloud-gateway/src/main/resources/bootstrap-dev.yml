@@ -1,7 +1,13 @@
 server:
-  http:
-    port: 9443
   port: 9999
+  shutdown: graceful
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234
 
 spring:
   main:

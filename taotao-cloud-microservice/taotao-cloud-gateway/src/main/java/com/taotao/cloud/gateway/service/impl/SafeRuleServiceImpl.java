@@ -6,10 +6,10 @@ import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
-import com.taotao.cloud.gateway.service.SafeRuleService;
-import com.taotao.cloud.rule.constant.RuleConstant;
-import com.taotao.cloud.rule.entity.BlackList;
-import com.taotao.cloud.rule.service.IRuleCacheService;
+import com.taotao.cloud.gateway.rule.BlackList;
+import com.taotao.cloud.gateway.rule.RuleConstant;
+import com.taotao.cloud.gateway.service.IRuleCacheService;
+import com.taotao.cloud.gateway.service.ISafeRuleService;
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SafeRuleServiceImpl implements SafeRuleService {
+public class SafeRuleServiceImpl implements ISafeRuleService {
 
 	private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 

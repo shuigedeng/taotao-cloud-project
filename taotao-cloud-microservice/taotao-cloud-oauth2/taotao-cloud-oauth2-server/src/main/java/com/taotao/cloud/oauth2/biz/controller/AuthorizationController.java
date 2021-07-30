@@ -1,7 +1,5 @@
 package com.taotao.cloud.oauth2.biz.controller;
 
-
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +25,6 @@ public class AuthorizationController {
 //        model.addAttribute("AuthUserOauth2", socials);
 //        return "login";
 //    }
-
-
 
     @GetMapping(value = "/resource/ids")
     @ResponseBody

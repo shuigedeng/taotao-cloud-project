@@ -1,2 +1,2 @@
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.sentinel.SentinelAutoConfigure
+#com.taotao.cloud.sentinel.configuration.SentinelAutoConfiguration

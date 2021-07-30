@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR;
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR;
-
 import cn.hutool.http.HttpStatus;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
@@ -32,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -60,12 +58,11 @@ public class RouterFunctionConfiguration {
 	private static final String FALLBACK = "/fallback";
 	private static final String CODE = "/code";
 
-	private final HystrixFallbackHandler hystrixFallbackHandler;
-	private final ImageCodeHandler imageCodeWebHandler;
-	private final ApiProperties apiProperties;
-
 	@Bean
-	public RouterFunction<ServerResponse> routerFunction() {
+	public RouterFunction<ServerResponse> routerFunction(
+		HystrixFallbackHandler hystrixFallbackHandler,
+		ImageCodeHandler imageCodeWebHandler,
+		ApiProperties apiProperties) {
 		return RouterFunctions.route(
 			RequestPredicates.path(FALLBACK)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), hystrixFallbackHandler)
@@ -88,7 +85,7 @@ public class RouterFunctionConfiguration {
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest serverRequest) {
 			Optional<Object> originalUris = serverRequest
-				.attribute(GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
+				.attribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
 			originalUris.ifPresent(originalUri -> LogUtil
@@ -115,7 +112,8 @@ public class RouterFunctionConfiguration {
 				String serialize = JsonUtil.toJSONString(message);
 				message.append(serialize);
 			}
-			Object requestBody = request.exchange().getAttribute(CACHED_REQUEST_BODY_ATTR);
+			Object requestBody = request.exchange()
+				.getAttribute(ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR);
 			if (Objects.nonNull(requestBody)) {
 				message.append(" 请求body: ");
 				message.append(requestBody.toString());

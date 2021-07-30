@@ -2,7 +2,7 @@ package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.properties.FilterProperties;
-import com.taotao.cloud.gateway.service.SafeRuleService;
+import com.taotao.cloud.gateway.service.ISafeRuleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
 public class SecurityRuleFilter implements WebFilter {
 
-	private final SafeRuleService safeRuleService;
+	private final ISafeRuleService ISafeRuleService;
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -36,7 +36,7 @@ public class SecurityRuleFilter implements WebFilter {
 		if (true) {
 			LogUtil.debug("进入黑名单模式");
 			// 检查黑名单
-			Mono<Void> result = safeRuleService.filterBlackList(exchange);
+			Mono<Void> result = ISafeRuleService.filterBlackList(exchange);
 			if (result != null) {
 				return result;
 			}

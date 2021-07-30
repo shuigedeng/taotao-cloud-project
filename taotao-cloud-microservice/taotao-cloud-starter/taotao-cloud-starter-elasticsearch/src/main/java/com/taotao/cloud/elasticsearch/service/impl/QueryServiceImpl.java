@@ -16,16 +16,15 @@
 package com.taotao.cloud.elasticsearch.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.core.model.PageModel;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.LogicDelDto;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
 import com.taotao.cloud.elasticsearch.service.IQueryService;
 import com.taotao.cloud.elasticsearch.service.ISearchService;
-
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
+import javax.annotation.Resource;
 
 /**
  * 查询服务实现
@@ -51,7 +50,8 @@ public class QueryServiceImpl implements IQueryService {
 	public PageModel<String> strQuery(String indexName, SearchDto searchDto,
 		LogicDelDto logicDelDto) throws IOException {
 		setLogicDelQueryStr(searchDto, logicDelDto);
-		return searchService.strQuery(indexName, searchDto);
+//		return searchService.strQuery(indexName, searchDto);
+		return null;
 	}
 
 	/**

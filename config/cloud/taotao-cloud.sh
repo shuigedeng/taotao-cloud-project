@@ -37,7 +37,7 @@ function start_taotao_cloud() {
   /root/script/cloud/skywalking.sh start
   
   # tcp/http -> 9090 http://172.16.3.240:9090 http://172.16.3.240:9090/metrics
-  /root/script/cloud/prometheus.sh start
+  #/root/script/cloud/prometheus.sh start
   
   # tcp/http -> 3000 http://172.16.3.240:3000 admin/admin
   #/root/script/cloud/grafana.sh start
@@ -72,7 +72,7 @@ function stop_taotao_cloud() {
   
   #/root/script/cloud/grafana.sh stop
   
-  /root/script/cloud/prometheus.sh stop
+  #/root/script/cloud/prometheus.sh stop
   
   /root/script/cloud/skywalking.sh stop
   

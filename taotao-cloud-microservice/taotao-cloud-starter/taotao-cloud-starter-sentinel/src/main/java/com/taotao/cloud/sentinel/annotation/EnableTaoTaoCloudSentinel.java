@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sentinel.annotation;
 
-import com.taotao.cloud.sentinel.SentinelAutoConfigure;
+import com.taotao.cloud.sentinel.configuration.SentinelAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启xxl job
+ * 开启Sentinel
  *
  * @author shuigedeng
  * @version 1.0.0
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({SentinelAutoConfigure.class})
+@Import({SentinelAutoConfiguration.class})
 public @interface EnableTaoTaoCloudSentinel {
 
 }

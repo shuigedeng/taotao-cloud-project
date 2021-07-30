@@ -1,12 +1,20 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
-//
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer'))
 
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework:spring-webflux'
+    implementation 'io.projectreactor.netty:reactor-netty'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.webjars:webjars-locator-core'
+    implementation 'org.webjars:bootstrap:3.4.1'
+    implementation 'org.webjars:jquery:3.4.1'
 
     implementation implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

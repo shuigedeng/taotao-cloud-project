@@ -15,9 +15,11 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
+import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import com.taotao.cloud.gateway.properties.FilterProperties;
+import com.taotao.cloud.gateway.properties.HttpsProperties;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
@@ -44,7 +46,9 @@ import reactor.core.publisher.Mono;
 	DynamicRouteProperties.class,
 	ApiProperties.class,
 	FilterProperties.class,
-	SecurityProperties.class
+	SecurityProperties.class,
+	HttpsProperties.class,
+	NacosConfigProperties.class
 })
 public class WebConfiguration {
 

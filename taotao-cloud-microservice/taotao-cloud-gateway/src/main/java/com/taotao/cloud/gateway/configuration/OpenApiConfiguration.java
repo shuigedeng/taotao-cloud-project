@@ -17,13 +17,20 @@ package com.taotao.cloud.gateway.configuration;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.Paths;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.SwaggerUiConfigParameters;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
@@ -40,9 +47,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class OpenApiConfiguration {
 
+	@Value("${taotaoCloudVersion}")
+	String version;
+
 	@Bean
 	@Lazy(false)
-	public List<GroupedOpenApi> apis(SwaggerUiConfigParameters swaggerUiConfigParameters,
+	public List<GroupedOpenApi> apis(
+		SwaggerUiConfigParameters swaggerUiConfigParameters,
 		RouteDefinitionLocator locator) {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
@@ -50,7 +61,9 @@ public class OpenApiConfiguration {
 		assert definitions != null;
 
 		for (RouteDefinition definition : definitions) {
-			LogUtil.info("spring cloud gateway route definition : {0}, uri: {1}", definition.getId(), definition.getUri().toString());
+			LogUtil
+				.info("spring cloud gateway route definition : {0}, uri: {1}", definition.getId(),
+					definition.getUri().toString());
 		}
 
 		definitions.stream()
@@ -68,14 +81,59 @@ public class OpenApiConfiguration {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
-			.components(new Components())
-			.info(new Info()
-				.title("Gateway API")
-				.version("1.0")
-				.license(new License()
-					.name("Apache 2.0")
-					.url("http://springdoc.org")
-				)
+			.tags(new ArrayList<>())
+			.extensions(new HashMap<>())
+			.openapi("TAOTAO CLOUD API")
+			.paths(
+				new Paths()
+					.addPathItem("", new PathItem())
+					.addPathItem("", new PathItem())
+			)
+			.servers(new ArrayList<>())
+			.security(new ArrayList<>())
+			.schemaRequirement("", new SecurityScheme()
+				.scheme("")
+				.description("")
+				.extensions(new HashMap<>())
+				.bearerFormat("")
+				.name("")
+			)
+			.externalDocs(
+				new ExternalDocumentation()
+					.description("")
+					.extensions(new HashMap<>())
+					.url("")
+			)
+			.components(
+				new Components()
+					.schemas(new HashMap<>())
+					.responses(new HashMap<>())
+					.parameters(new HashMap<>())
+					.examples(new HashMap<>())
+					.requestBodies(new HashMap<>())
+					.headers(new HashMap<>())
+					.securitySchemes(new HashMap<>())
+					.links(new HashMap<>())
+					.callbacks(new HashMap<>())
+					.extensions(new HashMap<>())
+			)
+			.info(
+				new Info()
+					.title("TAOTAO CLOUD API")
+					.version(version)
+					.description("TAOTAO CLOUD API")
+					.extensions(new HashMap<>())
+					.contact(new Contact()
+						.name("")
+						.url("")
+						.email("")
+						.extensions(new HashMap<>())
+					)
+					.termsOfService("")
+					.license(new License()
+						.name("Apache 2.0")
+						.url("http://springdoc.org")
+					)
 			);
 	}
 }

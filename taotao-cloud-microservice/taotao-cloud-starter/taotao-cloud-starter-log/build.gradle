@@ -1,18 +1,16 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
 
     api 'com.fasterxml.jackson.core:jackson-databind'
+
     api "org.springframework.boot:spring-boot-starter"
     api "org.springframework.boot:spring-boot-starter-aop"
-    api "org.springframework.kafka:spring-kafka"
 
     api "com.github.danielwegener:logback-kafka-appender:0.2.0-RC2"
     api "net.logstash.logback:logstash-logback-encoder"
     api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.6.0'
-
-    api 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

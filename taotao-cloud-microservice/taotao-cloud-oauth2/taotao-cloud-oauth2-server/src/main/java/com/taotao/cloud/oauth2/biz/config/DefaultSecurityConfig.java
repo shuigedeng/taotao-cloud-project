@@ -32,7 +32,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 
-	// @formatter:off
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
@@ -44,9 +43,7 @@ public class DefaultSecurityConfig {
 			.jwt();
 		return http.build();
 	}
-	// @formatter:on
 
-	// @formatter:off
 	@Bean
 	UserDetailsService users() {
 		UserDetails user = User.withDefaultPasswordEncoder()
@@ -56,6 +53,5 @@ public class DefaultSecurityConfig {
 			.build();
 		return new InMemoryUserDetailsManager(user);
 	}
-	// @formatter:on
 
 }

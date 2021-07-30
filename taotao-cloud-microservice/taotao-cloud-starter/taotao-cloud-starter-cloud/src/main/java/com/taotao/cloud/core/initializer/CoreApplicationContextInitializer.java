@@ -69,23 +69,20 @@ public class CoreApplicationContextInitializer implements
 			ContextUtil.setApplicationContext(context);
 
 			ConfigurableEnvironment environment = context.getEnvironment();
+			setDefaultProperty("nacos.logging.default.config.enabled", "false", "[taotao cloud 环境变量]");
 			if ("false"
 				.equalsIgnoreCase(
 					environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
 				return;
 			}
 
-			setDefaultProperty("nacos.logging.default.config.enabled", "false", "[taotao cloud 环境变量]");
-
 			//环境变量初始化
 			String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
 			String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");
 
 			if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
-				//optimizeJson(environment);
 				optimize(environment);
 
-				//LogUtils.info(CoreApplicationContextInitializer.class,CoreProperties.Project,CoreProperties.SpringApplicationName+"="+propertyValue);
 				setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
 
 				LogUtil.info(CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
@@ -118,9 +115,6 @@ public class CoreApplicationContextInitializer implements
 
 	private void optimizeLog(ConfigurableEnvironment environment) {
 		String message = "[日志标准规范]";
-
-		//MQ客户端日志目录
-//		setDefaultProperty("rocketmq.client.logRoot", "log", message);
 
 		//文件优化
 //		setDefaultProperty(CoreProperties.LoggingFile, "log/app.log", message);
@@ -202,9 +196,9 @@ public class CoreApplicationContextInitializer implements
 				return;
 			}
 
-			val context = ContextUtil.getApplicationContext();
+			ConfigurableApplicationContext context = ContextUtil.getApplicationContext();
 			ApplicationArguments args = context.getBean(ApplicationArguments.class);
-			val waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
+			int waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
 				PropertyUtil
 					.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartTimeSpan, 10));
 

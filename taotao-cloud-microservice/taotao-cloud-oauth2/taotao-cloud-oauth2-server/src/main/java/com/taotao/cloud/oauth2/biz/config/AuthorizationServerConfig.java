@@ -30,14 +30,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
-import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -75,7 +78,6 @@ public class AuthorizationServerConfig {
 		return http.formLogin(Customizer.withDefaults()).build();
 	}
 
-	// @formatter:off
 	@Bean
 	public RegisteredClientRepository registeredClientRepository() {
 		RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -102,7 +104,22 @@ public class AuthorizationServerConfig {
 			.build();
 		return new InMemoryRegisteredClientRepository(registeredClient);
 	}
-	// @formatter:on
+
+	@Bean
+	public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+		return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
+	}
+
+	@Bean
+	public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+		return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
+	}
+
+//	@Bean
+//	public OAuth2AuthorizationConsentService authorizationConsentService() {
+//		// Will be used by the ConsentController
+//		return new InMemoryOAuth2AuthorizationConsentService();
+//	}
 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource() {
@@ -113,13 +130,23 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	public ProviderSettings providerSettings() {
-		return new ProviderSettings().issuer("http://auth-server:9000");
+		return new ProviderSettings()
+			.authorizationEndpoint("http://127.0.0.1:9998/oauth2/authorize")
+			.tokenEndpoint("http://127.0.0.1:9998/oauth2/token")
+			.jwkSetEndpoint("http://127.0.0.1:9998/oauth2/jwks")
+			.issuer("http://127.0.0.1:9998");
 	}
 
-	@Bean
-	public OAuth2AuthorizationConsentService authorizationConsentService() {
-		// Will be used by the ConsentController
-		return new InMemoryOAuth2AuthorizationConsentService();
-	}
+//	@Bean
+//	public EmbeddedDatabase embeddedDatabase() {
+//		return new EmbeddedDatabaseBuilder()
+//			.generateUniqueName(true)
+//			.setType(EmbeddedDatabaseType.H2)
+//			.setScriptEncoding("UTF-8")
+//			.addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql")
+//			.addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql")
+//			.addScript("org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql")
+//			.build();
+//	}
 
 }

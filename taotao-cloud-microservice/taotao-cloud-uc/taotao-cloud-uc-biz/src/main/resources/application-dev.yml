@@ -61,6 +61,16 @@ spring:
     banner-mode: off
   application:
     name: taotao-cloud-uc
+  servlet:
+    multipart:
+      # 开启 multipart 上传功能
+      enabled: true
+      # 文件写入磁盘的阈值
+      file-size-threshold: 2KB
+      # 最大文件大小
+      max-file-size: 200MB
+      # 最大请求大小
+      max-request-size: 215MB
   cloud:
     loadbalancer:
       enabled: true
@@ -70,14 +80,11 @@ spring:
       client:
         enabled: true
     sampler:
-      #采样率，默认为0.1
       probability: 1.0
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
-    #发送数据类型 kafaka、rabbitmq、web
     sender:
       type: WEB
   datasource:
@@ -124,7 +131,6 @@ spring:
   data:
     elasticsearch:
       repositories:
-        # elasticsearch 开发阶段关闭
         enabled: false
       client:
         reactive:
@@ -141,9 +147,6 @@ spring:
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
       acks: 1
       properties:
         linger.ms: 500
@@ -160,17 +163,9 @@ spring:
   security:
     oauth2:
       resourceserver:
-        #        jwt:
-        #          public-key-location: classpath:key.public
-        #          jws-algorithm: RS512
-        #        opaquetoken:
-        #          introspection-uri: http://localhost:9000/oauth/check_token
-        #          client-id: abc
-        #          client-secret: abc
         jwt:
           jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
   shardingsphere:
-    # shardingsphere 开发阶段关闭
     enabled: false
     datasource:
       names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
@@ -263,25 +258,6 @@ spring:
 
 taotao:
   cloud:
-    core:
-      enabled: true
-      env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
     log:
       request-log:
         enabled: true
@@ -316,14 +292,6 @@ taotao:
         email: 981376577@qq.com
       base-package: com.taotao.cloud.uc.biz.controller
       host: ${spring.cloud.client.ip-address}:${server.port}
-    ribbon:
-      isolation:
-        enabled: true
-      rest-template:
-        max-total: 200
-        max-per-route: 50
-        read-timeout: 35000
-        connect-timeout: 10000
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -338,9 +306,9 @@ taotao:
         executor:
           appname: ${spring.application.name}
           ip:
-          port: 6996
+          port: 0
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${logging.file:${user.dir}/logs/application/${spring.application.name}/xxl-job}
+          log-path: ${logging.file:${user.home}}/logs/application/${spring.application.name}/xxl-job}
 
 mybatis-plus:
   #  mapper-locations: classpath:/mapper/*Mapper.xml

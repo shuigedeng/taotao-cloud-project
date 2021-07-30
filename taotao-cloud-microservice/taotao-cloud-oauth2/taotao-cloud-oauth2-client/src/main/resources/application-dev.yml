@@ -6,44 +6,32 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
-temp:
-  redirect_uri: http://localhost:8008/mall/login/oauth2/code/mall
+messages:
+  base-uri: http://127.0.0.1:9998/messages
 
-seata:
-  enabled: true
-  application-id: ${spring.application.name}
-  tx-service-group: taotao_cloud_tx_group
-  enable-auto-data-source-proxy: true
-  service:
-    grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_PORT:8091}
-    vgroup-mapping:
-      taotao_cloud_tx_group: default
-  config:
-    type: nacos
-    nacos:
-      namespace:
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
-      group: SEATA_GROUP
-      username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
-      password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
-      group: SEATA_GROUP
-      namespace:
-      username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
-      password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
-      cluster: default
+arthas:
+  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+  telnetPort: -1
+  httpPort: -1
+  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0
+  agent-id: ${spring.application.name}
+  app-name: ${spring.application.name}
+  tunnel-server: ws://172.16.3.240:7777/ws
 
 spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
   application:
     name: taotao-cloud-oauth2-client
+  thymeleaf:
+    cache: false
   cloud:
     loadbalancer:
       enabled: true
@@ -53,24 +41,13 @@ spring:
       client:
         enabled: true
     sampler:
-      #采样率，默认为0.1
       probability: 1.0
-    messaging:
-      enabled: false
-      kafka:
-        enabled: true
-        mapper:
-          enabled: true
-        remote-service-name: ${spring.application.name}-sleuth
-  mvc:
-    servlet:
-      load-on-startup: 1
-  #    thymeleaf:
-  #      prefix: classpath:/views/
-  #      suffix: .html
-  #      cache: false
-  cache:
-    type: none
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    discoveryClientEnabled: false
+    sender:
+      type: WEB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.3.240}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -92,6 +69,15 @@ spring:
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
+  jpa:
+    database: mysql
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
@@ -111,9 +97,6 @@ spring:
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
       acks: 1
       properties:
         linger.ms: 500
@@ -129,86 +112,49 @@ spring:
       missing-topics-fatal: false
   security:
     oauth2:
-      authorization:
-        client:
-          - client-id: mall
-            client-secret: mall
-            redirect-uri: https://www.baidu.com
-            scope:
-              - mall:read
-              - mall:write
-          - client-id: admin
-            client-secret: admin
-            redirect-uri: http://localhost:6628/login/oauth2/code/admin
       client:
-        provider:
-          mall:
-            # 对外的授权服务中心地址
-            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
-            token-uri: http://127.0.0.1:6628/oauth2/token
-            # 写网关下的暴露地址
-            user-info-uri: http://localhost:8008/upms/check_token
-            user-name-attribute: name
-          wechat:
-            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
-            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
-            user-info-uri: https://api.weixin.qq.com/sns/userinfo
-            user-info-authentication-method: form
-          gitee:
-            authorization-uri: https://gitee.com/oauth/authorize
-            token-uri: https://gitee.com/oauth/token
-            user-info-uri: https://gitee.com/api/v5/user
-          qq:
-            authorizationUri: https://graph.qq.com/oauth2.0/authorize
-            tokenUri: https://graph.qq.com/oauth2.0/token
-            userInfoUri: https://graph.qq.com/user/get_user_info
-            user-info-authentication-method: form
-            userNameAttribute: nickname
         registration:
-          mall:
-            provider: mall
-            client-id: mall
+          messaging-client-oidc:
+            provider: spring
+            client-id: messaging-client
             client-secret: secret
             authorization-grant-type: authorization_code
-            # 必须和auth-server中设置 一模一样!!
-            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
-            scope: mall.read,mall.write
-          wechat:
-            client-id: xxx
-            client-secret: xxxx
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: messaging-client-oidc
+          messaging-client-authorization-code:
+            provider: spring
+            client-id: messaging-client
+            client-secret: secret
             authorization-grant-type: authorization_code
-            redirect-uri: https://xxx/login/oauth2/code/wx
-            scope: snsapi_login
-            client-authentication-method: post
-          gitee:
-            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
-            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
-            authorization-grant-type: authorization_code
-            redirect-uri: http://9da31b1edd0e.ngrok.io/api/login/oauth2/code/gitee
-          github:
-            clientId: Iv1.f4c52616ef60f7be
-            clientSecret: e2c1524fefec9a18a459fb863ceaa8655f7899f1
-            redirectUri: http://0b817f4ac311.ngrok.io/api/login/oauth2/code/github
-          qq:
-            clientId: clientId
-            clientSecret: clientSecret
-            # 在本地测试时需要配置代理将自己在qq注册的redirectUri重定向为http://localhost/api/login/oauth2/code/qq
-            redirectUri: https://www.zyc.red/api/login/oauth2/code/qq
-            authorizationGrantType: authorization_code
-            scope: get_user_info
-            # 授权码模式需要传递code、state、client_id、client_secret等参数，OAuth2AuthorizationCodeGrantRequestEntityConverter
-            # 会根据当前的认证方式传递不同的参数
-            clientAuthenticationMethod: post
-      resourceserver:
-        #        jwt:
-        #          public-key-location: classpath:key.public
-        #          jws-algorithm: RS512
-        #        opaquetoken:
-        #          introspection-uri: http://localhost:9000/oauth/check_token
-        #          client-id: abc
-        #          client-secret: abc
-        jwt:
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+            redirect-uri: "http://127.0.0.1:8080/authorized"
+            scope: message.read,message.write
+            client-name: messaging-client-authorization-code
+          messaging-client-client-credentials:
+            provider: spring
+            client-id: messaging-client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: message.read,message.write
+            client-name: messaging-client-client-credentials
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:9998
+taotao:
+  cloud:
+    log:
+      request-log:
+        enabled: true
+        types:
+          - kafka
+          - logger
+    p6spy:
+      enabled: true
+      dateformat: yyyy-MM-dd HH:mm:ss
+      driverlist: com.mysql.cj.jdbc.Driver
+      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+      log-message-format: com.taotao.cloud.p6spy.logger.P6spyLogFormat
 
 feign:
   sentinel:
@@ -237,6 +183,35 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+    env:
+      post:
+        enabled: true
   metrics:
+    export:
+      prometheus:
+        enabled: true
     tags:
       application: ${spring.application.name}
+  health:
+    mail:
+      enabled: false
+    elasticsearch:
+      enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+#    org.springframework.boot.autoconfigure: DEBUG

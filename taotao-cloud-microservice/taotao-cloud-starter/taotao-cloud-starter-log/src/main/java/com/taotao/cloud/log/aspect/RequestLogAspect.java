@@ -18,7 +18,6 @@ package com.taotao.cloud.log.aspect;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.URLUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
@@ -154,13 +153,13 @@ public class RequestLogAspect {
 	public void doAfterReturning(Object ret) {
 		RequestLog requestLog = SYS_LOG_THREAD_LOCAL.get();
 		if (Objects.nonNull(requestLog)) {
-			R r = Convert.convert(R.class, ret);
-			if (r.getCode() == HttpStatus.OK.value()) {
-				requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getValue());
-			} else {
-				requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getValue());
-				requestLog.setExDetail(r.getMsg());
-			}
+//			R r = Convert.convert(R.class, ret);
+//			if (r.getCode() == HttpStatus.OK.value()) {
+//				requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getValue());
+//			} else {
+//				requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getValue());
+//				requestLog.setExDetail(r.getMsg());
+//			}
 			requestLog.setTenantId(TenantContextHolder.getTenant());
 			requestLog.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			long endTime = Instant.now().toEpochMilli();

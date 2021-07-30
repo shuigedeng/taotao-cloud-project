@@ -3,7 +3,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
     api "mysql:mysql-connector-java"
-    api 'com.baomidou:mybatis-plus-extension'
+    api 'com.baomidou:mybatis-plus-boot-starter:3.2.0'
 
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

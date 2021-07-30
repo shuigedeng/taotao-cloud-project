@@ -1,6 +1,4 @@
 server:
-  http:
-    port: 9443
   port: 9999
   shutdown: graceful
   http2:
@@ -30,8 +28,6 @@ arthas:
   tunnel-server: ws://172.16.3.240:7777/ws
 
 spring:
-  cache:
-    type: none
   main:
     allow-bean-definition-overriding: true
     web-application-type: reactive
@@ -51,16 +47,18 @@ spring:
       client:
         enabled: true
     sampler:
-      #采样率，默认为0.1
       probability: 1.0
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
-    #发送数据类型 kafaka、rabbitmq、web
     sender:
       type: WEB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
   redis:
     client-name: taotao-cloud-gateway-redis-client
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
@@ -309,6 +307,9 @@ taotao:
       request-log:
         enabled: false
     gateway:
+      https:
+        enabled: false
+        port: 9443
       dynamic:
         route:
           enabled: false
@@ -345,25 +346,6 @@ taotao:
         base-uri:
         prefix: /api
         version: v1.0
-    core:
-      enabled: true
-      env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
 
 management:
   endpoints:

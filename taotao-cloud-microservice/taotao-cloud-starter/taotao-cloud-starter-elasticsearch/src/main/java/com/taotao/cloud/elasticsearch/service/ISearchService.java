@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.service;
 
-import com.taotao.cloud.core.model.PageModel;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.elasticsearch.model.SearchDto;
 import java.io.IOException;
 
