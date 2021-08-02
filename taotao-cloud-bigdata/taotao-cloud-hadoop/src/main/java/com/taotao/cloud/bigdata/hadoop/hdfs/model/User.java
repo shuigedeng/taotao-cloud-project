@@ -18,9 +18,6 @@ package com.taotao.cloud.bigdata.hadoop.hdfs.model;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.hadoop.io.Writable;
 
 /**
@@ -30,9 +27,6 @@ import org.apache.hadoop.io.Writable;
  * @version 1.0.0
  * @since 2020/10/29 15:28
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements Writable {
 
 	private String username;

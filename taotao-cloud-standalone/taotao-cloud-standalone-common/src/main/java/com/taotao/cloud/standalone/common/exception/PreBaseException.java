@@ -1,9 +1,9 @@
 package com.taotao.cloud.standalone.common.exception;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 /**
  * @Classname BaseException
@@ -16,12 +16,8 @@ public class PreBaseException extends RuntimeException implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Setter
-    @Getter
     private String msg;
 
-    @Setter
-    @Getter
     private int code = 500;
 
     public PreBaseException(String msg) {

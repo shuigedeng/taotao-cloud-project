@@ -1,12 +1,9 @@
 package com.taotao.cloud.standalone.common.utils;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+import org.springframework.http.HttpStatus;
 
 
 /**
@@ -16,10 +13,6 @@ import java.io.Serializable;
  * @since 2019-03-27 21:54
  * @Version 1.0
  */
-@Setter
-@Getter
-@ToString
-@Accessors(chain = true)
 public class R implements Serializable {
 
     private static final long serialVersionUID = 1L;

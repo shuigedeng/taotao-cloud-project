@@ -1,14 +1,12 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
 import java.util.Date;
 
 /**
  * @author menglili
  */
-@Data
 public class UserToken {
     private Integer id;
     private Integer cusId;

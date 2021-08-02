@@ -3,7 +3,6 @@ package com.tatoao.cloud.demo.seata.storage.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tatoao.cloud.demo.seata.storage.mapper.StorageMapper;
 import com.tatoao.cloud.demo.seata.storage.model.Storage;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +11,6 @@ import javax.annotation.Resource;
  * @author zlt
  * @since 2019/9/14
  */
-@Slf4j
 @Service
 public class StorageService {
 	@Resource

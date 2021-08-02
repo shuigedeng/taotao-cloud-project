@@ -1,7 +1,6 @@
 package com.taotao.cloud.standalone.system.modules.sys.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
  * @since 2019-05-05 16:38
  * @Version 1.0
  */
-@Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MenuVo {
 

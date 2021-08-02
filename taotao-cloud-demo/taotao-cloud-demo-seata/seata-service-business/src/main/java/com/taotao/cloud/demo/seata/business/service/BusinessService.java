@@ -3,7 +3,6 @@ package com.taotao.cloud.demo.seata.business.service;
 import com.taotao.cloud.demo.seata.business.feign.OrderFeignClient;
 import com.taotao.cloud.demo.seata.business.feign.StorageFeignClient;
 import io.seata.spring.annotation.GlobalTransactional;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +13,6 @@ import javax.annotation.Resource;
  * @author zlt
  * @since 2019/9/14
  */
-@Slf4j
 @Service
 public class BusinessService {
 	private static final String COMMODITY_CODE = "P001";

@@ -1,12 +1,10 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.util;
 
-import lombok.Data;
 
 /**
  * @author menglili
  * 调用搜索服务用到的对象，与搜索服务中的数据格式对应
  */
-@Data
 public class SearchPojo {
     private String apiName;
     private Integer start;

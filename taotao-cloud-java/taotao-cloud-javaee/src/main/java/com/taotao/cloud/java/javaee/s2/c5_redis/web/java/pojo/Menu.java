@@ -1,13 +1,9 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo;
 
-import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-@Data
 public class Menu {
     private Integer id;
     private Integer parentId;

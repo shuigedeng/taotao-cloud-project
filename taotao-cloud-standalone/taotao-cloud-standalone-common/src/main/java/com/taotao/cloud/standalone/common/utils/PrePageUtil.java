@@ -1,7 +1,6 @@
 package com.taotao.cloud.standalone.common.utils;
 
 import cn.hutool.core.util.PageUtil;
-import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
  * @since 2019-07-18 16:23
  * @Version 1.0
  */
-@UtilityClass
 public class PrePageUtil extends PageUtil {
 
     /**

@@ -7,7 +7,6 @@
 package com.taotao.cloud.reactive.gateway.config;
 
 import com.sun.deploy.util.ArrayUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -28,7 +27,6 @@ import reactor.core.publisher.Mono;
  * @version v1.0.0
  * @date 2020/9/10 15:12
  */
-@AllArgsConstructor
 @Configuration
 @EnableWebFluxSecurity
 public class ResourceServerConfig {

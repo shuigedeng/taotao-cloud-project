@@ -1,11 +1,9 @@
 package com.taotao.cloud.standalone.system.modules.sys.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.util.List;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 /**
  * @Classname DeptTreeVo
@@ -14,9 +12,6 @@ import java.util.List;
  * @since 2019-06-09 15:15
  * @Version 1.0
  */
-@Setter
-@Getter
-@ToString
 public class DeptTreeVo {
 
     private int id;

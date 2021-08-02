@@ -1,16 +1,5 @@
 package com.taotao.cloud.java.javaee.s2.c6_elasticsearch.java.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Date;
-
-
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class SmsLogs {
 
     private String id;// 唯一ID 1

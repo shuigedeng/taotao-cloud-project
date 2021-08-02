@@ -1,7 +1,6 @@
 package com.taotao.cloud.standalone.common.exception;
 
 import com.taotao.cloud.standalone.common.utils.R;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AccountExpiredException;
@@ -19,7 +18,6 @@ import java.sql.SQLException;
  * @since 2019-03-29 13:23
  * @Version 1.0
  */
-@Slf4j
 @RestControllerAdvice
 public class BExceptionHandler {
 

@@ -4,7 +4,6 @@ import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.entity.Custom
 import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.mapper.CustomerMapper;
 import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.service.CustomerService;
 import com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.utils.JSON;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired

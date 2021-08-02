@@ -1,8 +1,5 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo;
 
-import lombok.Data;
-
-@Data
 public class ApiMapping {
     private Integer id;
     private String gatewayApiName;

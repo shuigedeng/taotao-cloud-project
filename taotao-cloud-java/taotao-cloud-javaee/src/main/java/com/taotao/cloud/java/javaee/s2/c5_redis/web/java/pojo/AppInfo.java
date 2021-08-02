@@ -1,8 +1,5 @@
 package com.taotao.cloud.java.javaee.s2.c5_redis.web.java.pojo;
 
-import lombok.Data;
-
-@Data
 public class AppInfo {
     private Integer id;
     private String corpName;

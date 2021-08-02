@@ -4,7 +4,6 @@ import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.entity.Customer
 import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.service.CustomerService;
 import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.utils.JSON;
 import com.taotao.cloud.java.javaee.s2.c7_springboot.search.java.vo.LayUITableVO;
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -29,7 +28,6 @@ import java.util.Map;
 
 
 @Service
-@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private String index = "openapi_customer";

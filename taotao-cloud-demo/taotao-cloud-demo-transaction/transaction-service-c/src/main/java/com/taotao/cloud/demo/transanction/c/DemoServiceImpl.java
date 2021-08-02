@@ -4,7 +4,6 @@ import com.codingapi.txlcn.common.util.Transactions;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.codingapi.txlcn.tracing.TracingContext;
 import com.taotao.cloud.demo.transaction.common.db.domain.Demo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +17,6 @@ import java.util.Date;
  * @author ujued
  */
 @Service
-@Slf4j
 public class DemoServiceImpl implements DemoService {
     @Resource
     private DemoMapper demoMapper;

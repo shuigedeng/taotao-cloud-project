@@ -1,7 +1,5 @@
 package com.taotao.cloud.bigdata.realtime.mall.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.math.BigDecimal;
@@ -11,8 +9,6 @@ import java.math.BigDecimal;
  * Date: 2021/2/5
  * Desc: 订单宽表实体类
  */
-@Data
-@AllArgsConstructor
 public class OrderWide {
     Long detail_id;
     Long order_id ;

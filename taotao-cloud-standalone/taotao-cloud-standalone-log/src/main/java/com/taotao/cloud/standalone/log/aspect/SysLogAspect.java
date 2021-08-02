@@ -11,7 +11,6 @@ import com.taotao.cloud.standalone.log.event.SysLogEvent;
 import com.taotao.cloud.standalone.log.util.LogUtil;
 import com.taotao.cloud.standalone.security.PreSecurityUser;
 import com.taotao.cloud.standalone.security.util.SecurityUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -38,7 +37,6 @@ import java.util.Objects;
  * @Version 1.0
  * ①切面注解得到请求数据 -> ②发布监听事件 -> ③异步监听日志入库
  */
-@Slf4j
 @Aspect
 @Component
 public class SysLogAspect {

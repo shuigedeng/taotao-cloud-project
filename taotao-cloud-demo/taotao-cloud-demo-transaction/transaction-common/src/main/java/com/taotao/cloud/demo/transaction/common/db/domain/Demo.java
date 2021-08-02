@@ -1,9 +1,6 @@
 package com.taotao.cloud.demo.transaction.common.db.domain;
 
 import com.codingapi.txlcn.common.util.id.RandomUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -13,9 +10,6 @@ import java.util.Date;
  *
  * @author ujued
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class Demo {
     private Long id;
     private String kid = RandomUtils.randomKey();

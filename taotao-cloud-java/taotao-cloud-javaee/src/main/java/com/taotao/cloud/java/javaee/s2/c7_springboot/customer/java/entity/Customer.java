@@ -1,10 +1,8 @@
 package com.taotao.cloud.java.javaee.s2.c7_springboot.customer.java.entity;
 
-import lombok.Data;
 
 import java.io.Serializable;
 
-@Data
 public class Customer implements Serializable {
 
     /**

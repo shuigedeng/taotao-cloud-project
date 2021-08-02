@@ -6,7 +6,6 @@ import com.codingapi.txlcn.tracing.TracingContext;
 import com.taotao.cloud.demo.transaction.common.db.domain.Demo;
 import com.taotao.cloud.demo.transaction.common.spring.ServiceBClient;
 import com.taotao.cloud.demo.transaction.common.spring.ServiceCClient;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,6 @@ import java.util.Objects;
  * @author ujued
  */
 @Service
-@Slf4j
 public class DemoServiceImpl implements DemoService {
     @Resource
     private DemoMapper demoMapper;

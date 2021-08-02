@@ -1,6 +1,5 @@
 package com.taotao.cloud.standalone.common.utils;
 
-import lombok.experimental.UtilityClass;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2019/12/28 3:29 下午
  * @Version 1.0
  */
-@UtilityClass
 public class RequestUtil {
 
     /**

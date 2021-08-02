@@ -1,8 +1,6 @@
 package com.taotao.cloud.java.javaee.s1.c11_web.java.pojo;
 
-import lombok.Data;
 
-@Data
 public class AppInfo {
     private Integer id;
     private String corpName;

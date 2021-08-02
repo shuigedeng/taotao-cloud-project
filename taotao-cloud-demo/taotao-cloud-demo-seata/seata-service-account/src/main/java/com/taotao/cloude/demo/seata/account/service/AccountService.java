@@ -3,7 +3,6 @@ package com.taotao.cloude.demo.seata.account.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloude.demo.seata.account.mapper.AccountMapper;
 import com.taotao.cloude.demo.seata.account.model.Account;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,7 +10,6 @@ import javax.annotation.Resource;
 /**
  * @since 2019/9/14
  */
-@Slf4j
 @Service
 public class AccountService {
 
