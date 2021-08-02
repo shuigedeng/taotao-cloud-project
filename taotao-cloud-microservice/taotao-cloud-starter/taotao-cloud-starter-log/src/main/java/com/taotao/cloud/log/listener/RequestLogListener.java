@@ -22,7 +22,6 @@ import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 
@@ -33,7 +32,6 @@ import org.springframework.scheduling.annotation.Async;
  * @version 1.0.0
  * @since 2020/6/3 13:33
  */
-@Slf4j
 public class RequestLogListener {
 
 	@Async

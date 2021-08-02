@@ -28,13 +28,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = RedisLockProperties.BASE_REDIS_LOCK_PREFIX)
+@ConfigurationProperties(prefix = RedisLockProperties.PREFIX)
 public class RedisLockProperties {
 
-	public static final String ENABLED = "enabled";
-	public static final String TRUE = "true";
-
-	public static final String BASE_REDIS_LOCK_PREFIX = "taotao.cloud.redis.lock";
+	public static final String PREFIX = "taotao.cloud.redis.lock";
 
 	private boolean enabled = false;
 }

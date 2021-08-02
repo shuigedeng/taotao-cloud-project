@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.experimental.UtilityClass;
 import org.slf4j.LoggerFactory;
 import org.slf4j.spi.LocationAwareLogger;
 
@@ -34,17 +33,16 @@ import org.slf4j.spi.LocationAwareLogger;
  * @version v1.0.0
  * @since 2020/4/27 16:16
  */
-@UtilityClass
 public class LogUtil {
 
 	/**
 	 * 空数组
 	 */
-	private final Object[] EMPTY_ARRAY = new Object[]{};
+	private static final Object[] EMPTY_ARRAY = new Object[]{};
 	/**
 	 * 全类名
 	 */
-	private final String FQDN = LogUtil.class.getName();
+	private static final String FQDN = LogUtil.class.getName();
 
 	/**
 	 * 获取栈中类信息
@@ -53,7 +51,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:26
 	 */
-	public LocationAwareLogger getLocationAwareLogger() {
+	public static LocationAwareLogger getLocationAwareLogger() {
 		StackTraceElement[] stackTraceElement = Thread.currentThread().getStackTrace();
 		StackTraceElement frame = stackTraceElement[stackTraceElement.length - 1];
 
@@ -70,7 +68,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:26
 	 */
-	public void debug(String msg, Object... arguments) {
+	public static void debug(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
@@ -86,7 +84,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
-	public void info(String msg, Object... arguments) {
+	public static void info(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
@@ -102,7 +100,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
-	public void warn(String msg, Object... arguments) {
+	public static void warn(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
@@ -119,7 +117,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:27
 	 */
-	public void error(String msg, Throwable error, Object... arguments) {
+	public static void error(String msg, Throwable error, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
@@ -134,7 +132,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
-	public void error(Throwable error) {
+	public static void error(Throwable error) {
 		getLocationAwareLogger()
 			.log(null, FQDN, LocationAwareLogger.ERROR_INT, null, EMPTY_ARRAY, error);
 	}
@@ -147,7 +145,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
-	public void error(String msg, Object... arguments) {
+	public static void error(String msg, Object... arguments) {
 		if (arguments != null && arguments.length > 0) {
 			msg = MessageFormat.format(msg, arguments);
 		}
@@ -155,19 +153,19 @@ public class LogUtil {
 			.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, null);
 	}
 
-	public boolean isErrorEnabled() {
+	public static boolean isErrorEnabled() {
 		return getLocationAwareLogger().isErrorEnabled();
 	}
 
-	public boolean isWarnEnabled() {
+	public static boolean isWarnEnabled() {
 		return getLocationAwareLogger().isWarnEnabled();
 	}
 
-	public boolean isDebugEnabled() {
+	public static boolean isDebugEnabled() {
 		return getLocationAwareLogger().isDebugEnabled();
 	}
 
-	public boolean isInfoEnabled() {
+	public static boolean isInfoEnabled() {
 		return getLocationAwareLogger().isInfoEnabled();
 	}
 
@@ -179,7 +177,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:28
 	 */
-	public String exceptionToString(Exception e) {
+	public static String exceptionToString(Exception e) {
 		if (e == null) {
 			return "无具体异常信息";
 		}
@@ -200,7 +198,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:29
 	 */
-	public String getStackTrace(Throwable throwable) {
+	public  static String getStackTrace(Throwable throwable) {
 		StringWriter sw = new StringWriter();
 		try (PrintWriter pw = new PrintWriter(sw)) {
 			throwable.printStackTrace(pw);
@@ -216,7 +214,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:29
 	 */
-	public int getOperateType(String methodName) {
+	public static int getOperateType(String methodName) {
 		if (methodName.startsWith("get")) {
 			return CommonConstant.OPERATE_TYPE_GET;
 		}

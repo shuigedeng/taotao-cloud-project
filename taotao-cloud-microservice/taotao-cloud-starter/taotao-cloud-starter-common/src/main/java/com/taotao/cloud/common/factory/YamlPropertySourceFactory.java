@@ -18,7 +18,6 @@ package com.taotao.cloud.common.factory;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
@@ -33,8 +32,10 @@ import org.springframework.core.io.support.PropertySourceFactory;
  * @since 2020/5/2 16:40
  * @link https://blog.csdn.net/zxl8899/article/details/106382719/
  */
-@AllArgsConstructor
 public class YamlPropertySourceFactory implements PropertySourceFactory {
+
+	public YamlPropertySourceFactory() {
+	}
 
 	@Override
 	public PropertySource<?> createPropertySource(String name, EncodedResource resource)

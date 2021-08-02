@@ -7,17 +7,19 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * @author: chejiangyi
  * @version: 2019-07-01 17:55 上下文添加过滤器
  **/
-@AllArgsConstructor
 public class WebContextFilter extends OncePerRequestFilter {
 
 	private final FilterProperties filterProperties;
+
+	public WebContextFilter(FilterProperties filterProperties) {
+		this.filterProperties = filterProperties;
+	}
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

@@ -19,7 +19,6 @@ import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
 
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
-import lombok.Getter;
 
 /**
  * 错误补偿工具类
@@ -81,11 +80,34 @@ public class FailOverUtil {
 	 * @version 1.0.0
 	 * @since 2021/6/22 17:42
 	 */
-	@Getter
 	public static class Result<T> {
 
 		private boolean success = false;
 		private Throwable throwable;
 		private T response;
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public void setSuccess(boolean success) {
+			this.success = success;
+		}
+
+		public Throwable getThrowable() {
+			return throwable;
+		}
+
+		public void setThrowable(Throwable throwable) {
+			this.throwable = throwable;
+		}
+
+		public T getResponse() {
+			return response;
+		}
+
+		public void setResponse(T response) {
+			this.response = response;
+		}
 	}
 }

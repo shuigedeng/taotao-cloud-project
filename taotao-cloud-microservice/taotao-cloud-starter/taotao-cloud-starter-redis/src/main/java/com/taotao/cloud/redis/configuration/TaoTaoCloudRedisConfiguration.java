@@ -20,22 +20,16 @@ import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.CacheManagerProperties;
-import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
-import com.taotao.cloud.redis.redis.RedisOps;
-import com.taotao.cloud.redis.repository.CacheOps;
-import com.taotao.cloud.redis.repository.CachePlusOps;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.redis.repository.impl.RedisOpsImpl;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.AllArgsConstructor;
 import org.redisson.api.RedissonClient;
+import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -48,7 +42,6 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -61,17 +54,25 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */
-@Configuration
 @EnableCaching
-@AllArgsConstructor
+@Configuration
 public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 
-	private final CustomCacheProperties cacheProperties;
+	private final RedissonClient redissonClient;
+
+	public TaoTaoCloudRedisConfiguration(RedissonClient redissonClient) {
+		this.redissonClient = redissonClient;
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_REDIS_STARTER + "]"
 			+ "redis模块已启动");
+	}
+
+	@Bean
+	public RedissonConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
+		return new RedissonConnectionFactory(redisson);
 	}
 
 	@Bean
@@ -109,71 +110,14 @@ public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 
 	@Bean
 	public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate) {
-		return new RedisRepository(redisTemplate);
+		return new RedisRepository(redisTemplate, false);
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	public RedisOps getRedisOps(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
-		return new RedisOps(redisTemplate, stringRedisTemplate, cacheProperties.getCacheNullVal());
-	}
-
-	@Bean
-	@ConditionalOnClass(RedissonClient.class)
-	@ConditionalOnProperty(prefix = RedisLockProperties.BASE_REDIS_LOCK_PREFIX,
-		name = RedisLockProperties.ENABLED,
-		havingValue = RedisLockProperties.TRUE)
-	public RedissonDistributedLock redissonDistributedLock(){
-		return new RedissonDistributedLock();
-	}
-
-	/**
-	 * redis 持久库
-	 *
-	 * @param redisOps the redis template
-	 * @return the redis repository
-	 */
-	@Bean
-	@ConditionalOnMissingBean
-	public CacheOps cacheOps(RedisOps redisOps) {
-		return new RedisOpsImpl(redisOps);
-	}
-
-	/**
-	 * redis 增强持久库
-	 *
-	 * @param redisOps the redis template
-	 * @return the redis repository
-	 */
-	@Bean
-	@ConditionalOnMissingBean
-	public CachePlusOps cachePlusOps(RedisOps redisOps) {
-		return new RedisOpsImpl(redisOps);
-	}
-
-
-	@Primary
-	@Bean(name = "cacheManager")
-	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory,
-		CacheManagerProperties cacheManagerProperties) {
-		RedisCacheConfiguration difConf = getDefConf().entryTtl(Duration.ofHours(1));
-
-		//自定义的缓存过期时间配置
-		int configSize = cacheManagerProperties.getConfigs() == null ? 0
-			: cacheManagerProperties.getConfigs().size();
-		Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>(configSize);
-		if (configSize > 0) {
-			cacheManagerProperties.getConfigs().forEach(e -> {
-				RedisCacheConfiguration conf = getDefConf()
-					.entryTtl(Duration.ofSeconds(e.getSecond()));
-				redisCacheConfigurationMap.put(e.getKey(), conf);
-			});
-		}
-
-		return RedisCacheManager.builder(redisConnectionFactory)
-			.cacheDefaults(difConf)
-			.withInitialCacheConfigurations(redisCacheConfigurationMap)
-			.build();
+	@ConditionalOnBean(RedissonClient.class)
+	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
+	public RedissonDistributedLock redissonDistributedLock() {
+		return new RedissonDistributedLock(redissonClient);
 	}
 
 	@Bean
@@ -189,8 +133,35 @@ public class TaoTaoCloudRedisConfiguration implements InitializingBean {
 		};
 	}
 
+	@Primary
+	@Bean(name = "cacheManager")
+	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory,
+		CacheManagerProperties cacheManagerProperties) {
+		RedisCacheConfiguration difConf = getDefConf().entryTtl(Duration.ofHours(1));
+
+		//自定义的缓存过期时间配置¬
+		int configSize = cacheManagerProperties.getConfigs() == null ? 0
+			: cacheManagerProperties.getConfigs().size();
+
+		Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>(configSize);
+		if (configSize > 0) {
+			cacheManagerProperties.getConfigs().forEach(e -> {
+				RedisCacheConfiguration conf = getDefConf()
+					.entryTtl(Duration.ofSeconds(e.getSecond()));
+				redisCacheConfigurationMap.put(e.getKey(), conf);
+			});
+		}
+
+		return RedisCacheManager
+			.builder(redisConnectionFactory)
+			.cacheDefaults(difConf)
+			.withInitialCacheConfigurations(redisCacheConfigurationMap)
+			.build();
+	}
+
 	private RedisCacheConfiguration getDefConf() {
-		return RedisCacheConfiguration.defaultCacheConfig()
+		return RedisCacheConfiguration
+			.defaultCacheConfig()
 			.disableCachingNullValues()
 			.computePrefixWith(cacheName -> "cache".concat(":").concat(cacheName).concat(":"))
 			.serializeKeysWith(RedisSerializationContext.SerializationPair

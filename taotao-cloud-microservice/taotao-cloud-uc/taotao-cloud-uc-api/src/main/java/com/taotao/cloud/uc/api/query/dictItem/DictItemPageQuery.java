@@ -17,11 +17,7 @@ package com.taotao.cloud.uc.api.query.dictItem;
 
 import com.taotao.cloud.common.model.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import java.util.Objects;
 
 /**
  * 字典项分页查询query
@@ -30,11 +26,6 @@ import lombok.experimental.SuperBuilder;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Data
-@SuperBuilder
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "DictItemPageQuery", description = "字典项分页查询query")
 public class DictItemPageQuery extends BasePageQuery {
 
@@ -50,4 +41,171 @@ public class DictItemPageQuery extends BasePageQuery {
 	private String description;
 	@Schema(description = "状态(1不启用 2启用)")
 	private Boolean status;
+
+	public DictItemPageQuery() {
+	}
+
+	public DictItemPageQuery(Long dictId, String itemText, String itemValue,
+		String description, Boolean status) {
+		this.dictId = dictId;
+		this.itemText = itemText;
+		this.itemValue = itemValue;
+		this.description = description;
+		this.status = status;
+	}
+
+	public DictItemPageQuery(Integer currentPage, Integer pageSize, Long dictId,
+		String itemText, String itemValue, String description, Boolean status) {
+		super(currentPage, pageSize);
+		this.dictId = dictId;
+		this.itemText = itemText;
+		this.itemValue = itemValue;
+		this.description = description;
+		this.status = status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "DictItemPageQuery{" +
+			"dictId=" + dictId +
+			", itemText='" + itemText + '\'' +
+			", itemValue='" + itemValue + '\'' +
+			", description='" + description + '\'' +
+			", status=" + status +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		DictItemPageQuery that = (DictItemPageQuery) o;
+		return Objects.equals(dictId, that.dictId) && Objects.equals(itemText,
+			that.itemText) && Objects.equals(itemValue, that.itemValue)
+			&& Objects.equals(description, that.description) && Objects.equals(
+			status, that.status);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), dictId, itemText, itemValue, description, status);
+	}
+
+	public Long getDictId() {
+		return dictId;
+	}
+
+	public void setDictId(Long dictId) {
+		this.dictId = dictId;
+	}
+
+	public String getItemText() {
+		return itemText;
+	}
+
+	public void setItemText(String itemText) {
+		this.itemText = itemText;
+	}
+
+	public String getItemValue() {
+		return itemValue;
+	}
+
+	public void setItemValue(String itemValue) {
+		this.itemValue = itemValue;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	public static DictItemPageQueryBuilder builder() {
+		return new DictItemPageQueryBuilder();
+	}
+
+
+	public static final class DictItemPageQueryBuilder {
+
+		private Integer currentPage = 1;
+		private Integer pageSize = 10;
+		private Long dictId;
+		private String itemText;
+		private String itemValue;
+		private String description;
+		private Boolean status;
+
+		private DictItemPageQueryBuilder() {
+		}
+
+		public static DictItemPageQueryBuilder aDictItemPageQuery() {
+			return new DictItemPageQueryBuilder();
+		}
+
+		public DictItemPageQueryBuilder currentPage(Integer currentPage) {
+			this.currentPage = currentPage;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder pageSize(Integer pageSize) {
+			this.pageSize = pageSize;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder dictId(Long dictId) {
+			this.dictId = dictId;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder itemText(String itemText) {
+			this.itemText = itemText;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder itemValue(String itemValue) {
+			this.itemValue = itemValue;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public DictItemPageQueryBuilder status(Boolean status) {
+			this.status = status;
+			return this;
+		}
+
+		public DictItemPageQuery build() {
+			DictItemPageQuery dictItemPageQuery = new DictItemPageQuery();
+			dictItemPageQuery.setCurrentPage(currentPage);
+			dictItemPageQuery.setPageSize(pageSize);
+			dictItemPageQuery.setDictId(dictId);
+			dictItemPageQuery.setItemText(itemText);
+			dictItemPageQuery.setItemValue(itemValue);
+			dictItemPageQuery.setDescription(description);
+			dictItemPageQuery.setStatus(status);
+			return dictItemPageQuery;
+		}
+	}
 }

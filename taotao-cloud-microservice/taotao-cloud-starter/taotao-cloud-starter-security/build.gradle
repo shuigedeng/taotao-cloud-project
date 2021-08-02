@@ -16,6 +16,6 @@ dependencies {
 	api 'org.apache.commons:commons-collections4'
 	api 'org.apache.commons:commons-lang3'
 
-	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

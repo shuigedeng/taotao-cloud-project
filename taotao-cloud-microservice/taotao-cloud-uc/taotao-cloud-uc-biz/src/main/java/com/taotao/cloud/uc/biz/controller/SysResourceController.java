@@ -54,13 +54,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 1.0
  */
 @Validated
-@AllArgsConstructor
 @RestController
 @RequestMapping("/resource")
 @Tag(name = "资源管理API", description = "资源管理API")
 public class SysResourceController {
 
 	private final ISysResourceService resourceService;
+
+	public SysResourceController(ISysResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
 
 	@Operation(summary = "添加资源", description = "添加资源", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加资源")

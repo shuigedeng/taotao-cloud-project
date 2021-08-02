@@ -18,6 +18,7 @@ package com.taotao.cloud.common.base;
 import com.taotao.cloud.common.base.Callable.Action1;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.LogUtil;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -31,10 +32,6 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.val;
-import lombok.var;
 
 /**
  * 自定义线程池及关键方法包装实现 装饰
@@ -58,18 +55,30 @@ public class ThreadPool {
 	public static ThreadPool System;
 	private ThreadPoolExecutor threadPool;
 
-	@Getter
-	@Setter
 	private boolean checkHealth = true;
+
+	public boolean isCheckHealth() {
+		return checkHealth;
+	}
+
+	public void setCheckHealth(boolean checkHealth) {
+		this.checkHealth = checkHealth;
+	}
 
 	public ThreadPoolExecutor getThreadPool() {
 		return threadPool;
 	}
 
-	@Getter
 	private ThreadMonitor threadMonitor;
-	@Getter
 	private String name;
+
+	public ThreadMonitor getThreadMonitor() {
+		return threadMonitor;
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	public ThreadPool(String name, int threadPoolMinSize, int threadPoolMaxSize) {
 		this.name = name;
@@ -154,7 +163,7 @@ public class ThreadPool {
 
 				final CountDownLatch latch = new CountDownLatch(runningTasks.size());
 				List<Future<?>> result = new ArrayList<>(parallelCount2);
-				for (val obj : runningTasks) {
+				for (T obj : runningTasks) {
 					Future<?> future = threadPool.submit(() -> {
 						try {
 							action.invoke(obj);
@@ -258,7 +267,7 @@ public class ThreadPool {
 		public Thread newThread(Runnable r) {
 			Thread t = factory.newThread(r);
 			t.setName("bsf-threadPool-" + t.getName());
-			var handler = t.getUncaughtExceptionHandler();
+			UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
 			if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
 					new DefaultThreadPoolUncaughtExceptionHandler(handler));

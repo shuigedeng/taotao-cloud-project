@@ -13,8 +13,6 @@ import com.taotao.cloud.gateway.service.ISafeRuleService;
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -29,9 +27,7 @@ import reactor.core.publisher.Mono;
  *
  * @author shuigedeng
  */
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class SafeRuleServiceImpl implements ISafeRuleService {
 
 	private final AntPathMatcher antPathMatcher = new AntPathMatcher();

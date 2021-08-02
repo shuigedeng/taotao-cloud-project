@@ -3,8 +3,8 @@ package com.taotao.cloud.gateway.properties;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.PostConstruct;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -13,7 +13,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  *
  * @date 2020-10-28
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = SecurityProperties.PREFIX)
 public class SecurityProperties {
@@ -58,5 +57,54 @@ public class SecurityProperties {
 	@PostConstruct
 	public void initIgnoreUrl() {
 		Collections.addAll(ignoreUrl, ENDPOINTS);
+	}
+
+	public SecurityProperties (){}
+	public SecurityProperties(Boolean enabled, List<String> ignoreUrl) {
+		this.enabled = enabled;
+		this.ignoreUrl = ignoreUrl;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<String> getIgnoreUrl() {
+		return ignoreUrl;
+	}
+
+	public void setIgnoreUrl(List<String> ignoreUrl) {
+		this.ignoreUrl = ignoreUrl;
+	}
+
+	@Override
+	public String toString() {
+		return "SecurityProperties{" +
+			"enabled=" + enabled +
+			", ignoreUrl=" + ignoreUrl +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SecurityProperties that = (SecurityProperties) o;
+		return Objects.equals(enabled, that.enabled) && Objects.equals(ignoreUrl,
+			that.ignoreUrl);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(enabled, ignoreUrl);
 	}
 }

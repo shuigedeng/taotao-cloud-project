@@ -15,18 +15,13 @@
  */
 package com.taotao.cloud.redis.lock;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
-import com.taotao.cloud.redis.properties.RedisLockProperties;
 import java.util.concurrent.TimeUnit;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
  * redisson分布式锁实现，基本锁功能的抽象实现
@@ -37,8 +32,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  */
 public class RedissonDistributedLock implements DistributedLock {
 
-	@Autowired
-	private RedissonClient redisson;
+	private final RedissonClient redisson;
+
+	public RedissonDistributedLock(RedissonClient redisson) {
+		this.redisson = redisson;
+	}
 
 	private ZLock getLock(String key, boolean isFair) {
 		RLock lock;

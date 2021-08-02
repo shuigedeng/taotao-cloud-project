@@ -43,7 +43,6 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
  * @version 1.0.0
  * @since 2021/06/18 14:41
  */
-@AllArgsConstructor
 @Configuration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -51,6 +50,13 @@ public class ResourceServerConfiguration {
 
 	private final CustomReactiveAuthorizationManager customReactiveAuthorizationManager;
 	private final SecurityProperties securityProperties;
+
+	public ResourceServerConfiguration(
+		CustomReactiveAuthorizationManager customReactiveAuthorizationManager,
+		SecurityProperties securityProperties) {
+		this.customReactiveAuthorizationManager = customReactiveAuthorizationManager;
+		this.securityProperties = securityProperties;
+	}
 
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {

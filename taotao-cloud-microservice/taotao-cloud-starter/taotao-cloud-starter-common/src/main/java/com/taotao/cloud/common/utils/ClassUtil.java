@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import lombok.experimental.UtilityClass;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.Nullable;
@@ -28,7 +27,6 @@ import org.springframework.util.ClassUtils;
  *
  * @author shuigedeng
  */
-@UtilityClass
 public class ClassUtil extends ClassUtils {
 
 	/**
@@ -53,7 +51,8 @@ public class ClassUtil extends ClassUtils {
 			return annotation;
 		}
 		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
-		return AnnotatedElementUtils.findMergedAnnotation(specificMethod.getDeclaringClass(), annotationType);
+		return AnnotatedElementUtils.findMergedAnnotation(specificMethod.getDeclaringClass(),
+			annotationType);
 	}
 
 	/**
@@ -64,7 +63,8 @@ public class ClassUtil extends ClassUtils {
 	 * @param <A>            泛型标记
 	 * @return {boolean}
 	 */
-	public static <A extends Annotation> boolean isAnnotated(Method method, Class<A> annotationType) {
+	public static <A extends Annotation> boolean isAnnotated(Method method,
+		Class<A> annotationType) {
 		// 先找方法，再找方法上的类
 		boolean isMethodAnnotated = AnnotatedElementUtils.isAnnotated(method, annotationType);
 		if (isMethodAnnotated) {

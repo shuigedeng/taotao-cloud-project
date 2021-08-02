@@ -17,7 +17,6 @@ package com.taotao.cloud.common.base;
 
 import java.util.HashMap;
 import javax.sql.DataSource;
-import lombok.var;
 
 /**
  * Dbconn 简化使用和事务支持
@@ -53,7 +52,7 @@ public class DbHelper {
 	}
 
 	public static <T> T get(DataSource dataSource, Callable.Func1<T, DbConn> action0) {
-		try (var db2 = new DbConn(dataSource)) {
+		try (DbConn db2 = new DbConn(dataSource)) {
 			return action0.invoke(db2);
 		}
 	}

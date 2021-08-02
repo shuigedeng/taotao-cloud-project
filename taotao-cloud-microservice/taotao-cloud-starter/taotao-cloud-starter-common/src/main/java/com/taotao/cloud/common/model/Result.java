@@ -23,8 +23,7 @@ import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Builder;
-import lombok.Data;
+import java.util.Objects;
 import org.slf4j.MDC;
 
 /**
@@ -34,8 +33,6 @@ import org.slf4j.MDC;
  * @version 1.0.0
  * @since 2020/4/29 15:15
  */
-@Data
-@Builder
 @Schema(description = "返回结果对象")
 public class Result<T> implements Serializable {
 
@@ -69,7 +66,8 @@ public class Result<T> implements Serializable {
 	}
 
 	public static <T> Result<T> of(int code, T data, String msg) {
-		return Result.<T>builder()
+		return Result
+			.<T>builder()
 			.code(code)
 			.data(data)
 			.message(msg)
@@ -105,5 +103,126 @@ public class Result<T> implements Serializable {
 
 	public static Result<String> fail(ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.ERROR);
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "Result{" +
+			"code=" + code +
+			", data=" + data +
+			", message='" + message + '\'' +
+			", requestId='" + requestId + '\'' +
+			", timestamp=" + timestamp +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Result<?> result = (Result<?>) o;
+		return code == result.code && Objects.equals(data, result.data)
+			&& Objects.equals(message, result.message) && Objects.equals(
+			requestId, result.requestId) && Objects.equals(timestamp, result.timestamp);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, data, message, requestId, timestamp);
+	}
+
+	public static <T> ResultBuilder<T> builder() {
+		return new ResultBuilder<>();
+	}
+
+	public static final class ResultBuilder<T> {
+
+		private int code;
+		private T data;
+		private String message;
+		private String requestId;
+		private LocalDateTime timestamp;
+
+		private ResultBuilder() {
+		}
+
+		public ResultBuilder<T>  code(int code) {
+			this.code = code;
+			return this;
+		}
+
+		public ResultBuilder<T>  data(T data) {
+			this.data = data;
+			return this;
+		}
+
+		public ResultBuilder<T>  message(String message) {
+			this.message = message;
+			return this;
+		}
+
+		public ResultBuilder<T> requestId(String requestId) {
+			this.requestId = requestId;
+			return this;
+		}
+
+		public ResultBuilder<T> timestamp(LocalDateTime timestamp) {
+			this.timestamp = timestamp;
+			return this;
+		}
+
+		public <T> Result<T> build() {
+			Result<T> result = new Result<>();
+			result.setCode(code);
+			result.setData(data);
+			result.setMessage(message);
+			result.setRequestId(requestId);
+			result.setTimestamp(timestamp);
+			return result;
+		}
 	}
 }

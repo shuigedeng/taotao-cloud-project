@@ -3,7 +3,6 @@ package com.taotao.cloud.gateway.filter.global;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -19,13 +18,16 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-@RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
 public class SecurityRuleFilter implements WebFilter {
 
 	private final ISafeRuleService ISafeRuleService;
+
+	public SecurityRuleFilter(com.taotao.cloud.gateway.service.ISafeRuleService ISafeRuleService) {
+		this.ISafeRuleService = ISafeRuleService;
+	}
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {

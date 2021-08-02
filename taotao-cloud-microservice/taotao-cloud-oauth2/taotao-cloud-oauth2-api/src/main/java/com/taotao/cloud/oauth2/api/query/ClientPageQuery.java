@@ -15,10 +15,12 @@
  */
 package com.taotao.cloud.oauth2.api.query;
 
-import com.taotao.cloud.core.model.BasePageQuery;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import com.taotao.cloud.common.model.BasePageQuery;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 

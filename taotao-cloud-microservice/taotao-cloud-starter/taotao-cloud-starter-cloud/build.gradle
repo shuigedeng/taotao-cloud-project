@@ -22,6 +22,5 @@ dependencies {
     api "de.codecentric:spring-boot-admin-starter-client:2.4.0"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

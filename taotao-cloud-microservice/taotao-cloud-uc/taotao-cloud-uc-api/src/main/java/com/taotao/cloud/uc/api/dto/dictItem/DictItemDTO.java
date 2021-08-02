@@ -15,15 +15,13 @@
  */
 package com.taotao.cloud.uc.api.dto.dictItem;
 
+import com.taotao.cloud.uc.api.vo.DeptTreeVo.DeptTreeVoBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 添加字典实体对象
@@ -32,10 +30,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "DictItemDTO", description = "添加字典项对象DTO")
 public class DictItemDTO implements Serializable {
 
@@ -61,4 +55,145 @@ public class DictItemDTO implements Serializable {
 	@NotBlank(message = "字典状态不能为空")
 //	@IntEnums(value = {1, 2})
 	private Integer status;
+
+	@Override
+	public String toString() {
+		return "DictItemDTO{" +
+			"dictId=" + dictId +
+			", itemText='" + itemText + '\'' +
+			", itemValue='" + itemValue + '\'' +
+			", description='" + description + '\'' +
+			", status=" + status +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		DictItemDTO that = (DictItemDTO) o;
+		return Objects.equals(dictId, that.dictId) && Objects.equals(itemText,
+			that.itemText) && Objects.equals(itemValue, that.itemValue)
+			&& Objects.equals(description, that.description) && Objects.equals(
+			status, that.status);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dictId, itemText, itemValue, description, status);
+	}
+
+	public Long getDictId() {
+		return dictId;
+	}
+
+	public void setDictId(Long dictId) {
+		this.dictId = dictId;
+	}
+
+	public String getItemText() {
+		return itemText;
+	}
+
+	public void setItemText(String itemText) {
+		this.itemText = itemText;
+	}
+
+	public String getItemValue() {
+		return itemValue;
+	}
+
+	public void setItemValue(String itemValue) {
+		this.itemValue = itemValue;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public DictItemDTO() {
+	}
+
+	public DictItemDTO(Long dictId, String itemText, String itemValue, String description,
+		Integer status) {
+		this.dictId = dictId;
+		this.itemText = itemText;
+		this.itemValue = itemValue;
+		this.description = description;
+		this.status = status;
+	}
+
+	public static DictItemDTOBuilder builder() {
+		return new DictItemDTOBuilder();
+	}
+
+
+
+	public static final class DictItemDTOBuilder {
+
+		private Long dictId;
+		private String itemText;
+		private String itemValue;
+		private String description;
+		//	@IntEnums(value = {1, 2})
+		private Integer status;
+
+		private DictItemDTOBuilder() {
+		}
+
+		public static DictItemDTOBuilder aDictItemDTO() {
+			return new DictItemDTOBuilder();
+		}
+
+		public DictItemDTOBuilder dictId(Long dictId) {
+			this.dictId = dictId;
+			return this;
+		}
+
+		public DictItemDTOBuilder itemText(String itemText) {
+			this.itemText = itemText;
+			return this;
+		}
+
+		public DictItemDTOBuilder itemValue(String itemValue) {
+			this.itemValue = itemValue;
+			return this;
+		}
+
+		public DictItemDTOBuilder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public DictItemDTOBuilder status(Integer status) {
+			this.status = status;
+			return this;
+		}
+
+		public DictItemDTO build() {
+			DictItemDTO dictItemDTO = new DictItemDTO();
+			dictItemDTO.setDictId(dictId);
+			dictItemDTO.setItemText(itemText);
+			dictItemDTO.setItemValue(itemValue);
+			dictItemDTO.setDescription(description);
+			dictItemDTO.setStatus(status);
+			return dictItemDTO;
+		}
+	}
 }

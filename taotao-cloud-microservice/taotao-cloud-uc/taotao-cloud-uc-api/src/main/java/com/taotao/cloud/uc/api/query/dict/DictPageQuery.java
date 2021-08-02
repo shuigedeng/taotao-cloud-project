@@ -17,11 +17,7 @@ package com.taotao.cloud.uc.api.query.dict;
 
 import com.taotao.cloud.common.model.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import java.util.Objects;
 
 /**
  * 字典分页查询query
@@ -30,11 +26,6 @@ import lombok.experimental.SuperBuilder;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Data
-@SuperBuilder
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "DictPageQuery", description = "字典分页查询query")
 public class DictPageQuery extends BasePageQuery {
 
@@ -51,4 +42,151 @@ public class DictPageQuery extends BasePageQuery {
 
 	@Schema(description = "备注信息")
 	private String remark;
+
+	public DictPageQuery() {
+	}
+
+	public DictPageQuery(String dictName, String dictCode, String description, String remark) {
+		this.dictName = dictName;
+		this.dictCode = dictCode;
+		this.description = description;
+		this.remark = remark;
+	}
+
+	public DictPageQuery(Integer currentPage, Integer pageSize, String dictName,
+		String dictCode, String description, String remark) {
+		super(currentPage, pageSize);
+		this.dictName = dictName;
+		this.dictCode = dictCode;
+		this.description = description;
+		this.remark = remark;
+	}
+
+	@Override
+	public String toString() {
+		return "DictPageQuery{" +
+			"dictName='" + dictName + '\'' +
+			", dictCode='" + dictCode + '\'' +
+			", description='" + description + '\'' +
+			", remark='" + remark + '\'' +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		DictPageQuery that = (DictPageQuery) o;
+		return Objects.equals(dictName, that.dictName) && Objects.equals(dictCode,
+			that.dictCode) && Objects.equals(description, that.description)
+			&& Objects.equals(remark, that.remark);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), dictName, dictCode, description, remark);
+	}
+
+	public String getDictName() {
+		return dictName;
+	}
+
+	public void setDictName(String dictName) {
+		this.dictName = dictName;
+	}
+
+	public String getDictCode() {
+		return dictCode;
+	}
+
+	public void setDictCode(String dictCode) {
+		this.dictCode = dictCode;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+	public static DictPageQueryBuilder builder() {
+		return new DictPageQueryBuilder();
+	}
+
+
+	public static final class DictPageQueryBuilder {
+
+		private Integer currentPage = 1;
+		private Integer pageSize = 10;
+		private String dictName;
+		private String dictCode;
+		private String description;
+		private String remark;
+
+		private DictPageQueryBuilder() {
+		}
+
+		public static DictPageQueryBuilder aDictPageQuery() {
+			return new DictPageQueryBuilder();
+		}
+
+		public DictPageQueryBuilder currentPage(Integer currentPage) {
+			this.currentPage = currentPage;
+			return this;
+		}
+
+		public DictPageQueryBuilder pageSize(Integer pageSize) {
+			this.pageSize = pageSize;
+			return this;
+		}
+
+		public DictPageQueryBuilder dictName(String dictName) {
+			this.dictName = dictName;
+			return this;
+		}
+
+		public DictPageQueryBuilder dictCode(String dictCode) {
+			this.dictCode = dictCode;
+			return this;
+		}
+
+		public DictPageQueryBuilder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public DictPageQueryBuilder remark(String remark) {
+			this.remark = remark;
+			return this;
+		}
+
+		public DictPageQuery build() {
+			DictPageQuery dictPageQuery = new DictPageQuery();
+			dictPageQuery.setCurrentPage(currentPage);
+			dictPageQuery.setPageSize(pageSize);
+			dictPageQuery.setDictName(dictName);
+			dictPageQuery.setDictCode(dictCode);
+			dictPageQuery.setDescription(description);
+			dictPageQuery.setRemark(remark);
+			return dictPageQuery;
+		}
+	}
 }

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import lombok.experimental.UtilityClass;
 
 /**
  * StringUtil
@@ -24,14 +23,13 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:42
  */
-@UtilityClass
 public class StringUtil {
 
-	public String nullToEmpty(Object str) {
+	public static String nullToEmpty(Object str) {
 		return str != null ? str.toString() : "";
 	}
 
-	public boolean isEmpty(String str) {
+	public static boolean isEmpty(String str) {
 		return str == null || str.isEmpty();
 	}
 

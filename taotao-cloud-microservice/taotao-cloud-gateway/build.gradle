@@ -33,8 +33,6 @@ dependencies {
 
     implementation "eu.bitwalker:UserAgentUtils"
 
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 

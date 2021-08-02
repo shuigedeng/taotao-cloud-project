@@ -176,11 +176,16 @@ public class GrayConfiguration {
 	 * @version 1.0.0
 	 * @since 2020/4/27 13:59
 	 */
-	@AllArgsConstructor
 	public static class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
 		private final String serviceId;
 		private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
+
+		public GrayLoadBalancer(String serviceId,
+			ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider) {
+			this.serviceId = serviceId;
+			this.serviceInstanceListSupplierProvider = serviceInstanceListSupplierProvider;
+		}
 
 		@Override
 		public Mono<Response<ServiceInstance>> choose(Request request) {

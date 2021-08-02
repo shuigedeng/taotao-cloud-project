@@ -17,10 +17,7 @@ package com.taotao.cloud.uc.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 /**
  * ApplicationDTO
@@ -29,10 +26,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0
  * @since 2021/03/12 16:31
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "QueryRegionByParentIdVO", description = "查询应用列表数据VO")
 public class QueryRegionByParentIdVO {
 
@@ -47,4 +40,124 @@ public class QueryRegionByParentIdVO {
 
 	@Schema(description = "子数据")
 	private List<QueryRegionByParentIdVO> children;
+
+	public QueryRegionByParentIdVO() {
+	}
+
+	public QueryRegionByParentIdVO(String id, String label, String value,
+		List<QueryRegionByParentIdVO> children) {
+		this.id = id;
+		this.label = label;
+		this.value = value;
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return "QueryRegionByParentIdVO{" +
+			"id='" + id + '\'' +
+			", label='" + label + '\'' +
+			", value='" + value + '\'' +
+			", children=" + children +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		QueryRegionByParentIdVO that = (QueryRegionByParentIdVO) o;
+		return Objects.equals(id, that.id) && Objects.equals(label, that.label)
+			&& Objects.equals(value, that.value) && Objects.equals(children,
+			that.children);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, label, value, children);
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public List<QueryRegionByParentIdVO> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<QueryRegionByParentIdVO> children) {
+		this.children = children;
+	}
+
+	public static QueryRegionByParentIdVOBuilder builder() {
+		return new QueryRegionByParentIdVOBuilder();
+	}
+
+	public static final class QueryRegionByParentIdVOBuilder {
+
+		private String id;
+		private String label;
+		private String value;
+		private List<QueryRegionByParentIdVO> children;
+
+		private QueryRegionByParentIdVOBuilder() {
+		}
+
+		public static QueryRegionByParentIdVOBuilder aQueryRegionByParentIdVO() {
+			return new QueryRegionByParentIdVOBuilder();
+		}
+
+		public QueryRegionByParentIdVOBuilder id(String id) {
+			this.id = id;
+			return this;
+		}
+
+		public QueryRegionByParentIdVOBuilder label(String label) {
+			this.label = label;
+			return this;
+		}
+
+		public QueryRegionByParentIdVOBuilder value(String value) {
+			this.value = value;
+			return this;
+		}
+
+		public QueryRegionByParentIdVOBuilder children(List<QueryRegionByParentIdVO> children) {
+			this.children = children;
+			return this;
+		}
+
+		public QueryRegionByParentIdVO build() {
+			QueryRegionByParentIdVO queryRegionByParentIdVO = new QueryRegionByParentIdVO();
+			queryRegionByParentIdVO.setId(id);
+			queryRegionByParentIdVO.setLabel(label);
+			queryRegionByParentIdVO.setValue(value);
+			queryRegionByParentIdVO.setChildren(children);
+			return queryRegionByParentIdVO;
+		}
+	}
 }

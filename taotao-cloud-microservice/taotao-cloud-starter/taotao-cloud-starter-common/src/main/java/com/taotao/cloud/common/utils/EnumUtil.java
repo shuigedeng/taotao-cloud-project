@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import lombok.experimental.UtilityClass;
-
 /**
  * EnumUtils
  *
@@ -24,7 +22,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:35
  */
-@UtilityClass
 public class EnumUtil {
 
 	/**
@@ -36,7 +33,7 @@ public class EnumUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:13
 	 */
-	public <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
+	public static  <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
 		for (T t : enumType.getEnumConstants()) {
 			if (t.name().equalsIgnoreCase(name)) {
 				return t;

@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.common.lock;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 /**
  * 锁对象抽象
  *
@@ -25,16 +22,23 @@ import lombok.Getter;
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
-@AllArgsConstructor
 public class ZLock implements AutoCloseable {
 
-	@Getter
 	private final Object lock;
 
 	private final DistributedLock locker;
 
+	public ZLock(Object lock, DistributedLock locker) {
+		this.lock = lock;
+		this.locker = locker;
+	}
+
 	@Override
 	public void close() throws Exception {
 		locker.unlock(lock);
+	}
+
+	public Object getLock() {
+		return lock;
 	}
 }

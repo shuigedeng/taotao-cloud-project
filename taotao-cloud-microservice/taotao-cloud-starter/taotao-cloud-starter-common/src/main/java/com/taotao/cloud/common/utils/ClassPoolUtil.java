@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import javassist.ClassPool;
 import javassist.LoaderClassPath;
-import lombok.experimental.UtilityClass;
 
 /**
  * ClassPoolUtils
@@ -26,7 +25,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:33
  */
-@UtilityClass
 public class ClassPoolUtil {
 
 	public static volatile ClassPool instance;
@@ -38,7 +36,7 @@ public class ClassPoolUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:12
 	 */
-	public ClassPool getInstance() {
+	public static ClassPool getInstance() {
 		if (instance == null) {
 			synchronized (ClassPoolUtil.class) {
 				if (instance == null) {

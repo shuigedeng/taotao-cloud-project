@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.common.base;
 
+import com.taotao.cloud.common.base.Callable.Action1;
 import com.taotao.cloud.common.enums.EventEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.val;
 
 /**
  * 发布订阅
@@ -65,7 +64,7 @@ public class Pubsub {
 	}
 
 	public boolean removeSub(String event, String subName) {
-		val subs = subscribeList.get(event);
+		ConcurrentHashMap<String, Sub> subs = subscribeList.get(event);
 		if (subs != null) {
 			subs.remove(subName);
 			if (subs.size() == 0) {
@@ -76,11 +75,55 @@ public class Pubsub {
 		return false;
 	}
 
-	@Data
-	@AllArgsConstructor
 	public static class Sub<T> {
 
 		private String name;
 		private Callable.Action1<T> action;
+
+		public Sub(String name, Action1<T> action) {
+			this.name = name;
+			this.action = action;
+		}
+
+		@Override
+		public String toString() {
+			return "Sub{" +
+				"name='" + name + '\'' +
+				", action=" + action +
+				'}';
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			Sub<?> sub = (Sub<?>) o;
+			return Objects.equals(name, sub.name) && Objects.equals(action, sub.action);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(name, action);
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public Action1<T> getAction() {
+			return action;
+		}
+
+		public void setAction(Action1<T> action) {
+			this.action = action;
+		}
 	}
 }

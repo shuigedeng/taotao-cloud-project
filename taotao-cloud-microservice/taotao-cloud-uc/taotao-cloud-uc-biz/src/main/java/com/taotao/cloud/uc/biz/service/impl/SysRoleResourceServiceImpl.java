@@ -21,7 +21,6 @@ import com.taotao.cloud.uc.biz.entity.QSysRoleResource;
 import com.taotao.cloud.uc.biz.entity.SysRoleResource;
 import com.taotao.cloud.uc.biz.repository.SysRoleResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,11 +33,16 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class SysRoleResourceServiceImpl implements ISysRoleResourceService {
 
     private final SysRoleResourceRepository roleResourceRepository;
-    private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
+
+	public SysRoleResourceServiceImpl(
+		SysRoleResourceRepository roleResourceRepository) {
+		this.roleResourceRepository = roleResourceRepository;
+	}
+
+	private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
 
     @Override
     public Boolean saveRoleResource(Long roleId, Set<Long> resourceIds) {

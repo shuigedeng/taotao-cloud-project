@@ -17,7 +17,8 @@ package com.taotao.cloud.log.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
-import lombok.Data;
+import java.util.Objects;
+
 /**
  * 日志
  *
@@ -25,7 +26,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2020/6/15 11:00
  */
-@Data
 public class RequestLog implements Serializable {
 
 	private static final long serialVersionUID = -749360940290141180L;
@@ -185,4 +185,285 @@ public class RequestLog implements Serializable {
 	 */
 	@JsonProperty(value = "logday")
 	private String logday;
+
+	public RequestLog(){}
+
+	public String getTraceId() {
+		return traceId;
+	}
+
+	public void setTraceId(String traceId) {
+		this.traceId = traceId;
+	}
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRequestIp() {
+		return requestIp;
+	}
+
+	public void setRequestIp(String requestIp) {
+		this.requestIp = requestIp;
+	}
+
+	public Integer getOperateType() {
+		return operateType;
+	}
+
+	public void setOperateType(Integer operateType) {
+		this.operateType = operateType;
+	}
+
+	public Integer getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(Integer requestType) {
+		this.requestType = requestType;
+	}
+
+	public String getRequestMethodName() {
+		return requestMethodName;
+	}
+
+	public void setRequestMethodName(String requestMethodName) {
+		this.requestMethodName = requestMethodName;
+	}
+
+	public String getRequestMethod() {
+		return requestMethod;
+	}
+
+	public void setRequestMethod(String requestMethod) {
+		this.requestMethod = requestMethod;
+	}
+
+	public String getRequestUrl() {
+		return requestUrl;
+	}
+
+	public void setRequestUrl(String requestUrl) {
+		this.requestUrl = requestUrl;
+	}
+
+	public String getRequestArgs() {
+		return requestArgs;
+	}
+
+	public void setRequestArgs(String requestArgs) {
+		this.requestArgs = requestArgs;
+	}
+
+	public String getRequestParams() {
+		return requestParams;
+	}
+
+	public void setRequestParams(String requestParams) {
+		this.requestParams = requestParams;
+	}
+
+	public String getRequestHeaders() {
+		return requestHeaders;
+	}
+
+	public void setRequestHeaders(String requestHeaders) {
+		this.requestHeaders = requestHeaders;
+	}
+
+	public String getRequestUa() {
+		return requestUa;
+	}
+
+	public void setRequestUa(String requestUa) {
+		this.requestUa = requestUa;
+	}
+
+	public String getClasspath() {
+		return classpath;
+	}
+
+	public void setClasspath(String classpath) {
+		this.classpath = classpath;
+	}
+
+	public Long getRequestStartTime() {
+		return requestStartTime;
+	}
+
+	public void setRequestStartTime(Long requestStartTime) {
+		this.requestStartTime = requestStartTime;
+	}
+
+	public Long getRequestEndTime() {
+		return requestEndTime;
+	}
+
+	public void setRequestEndTime(Long requestEndTime) {
+		this.requestEndTime = requestEndTime;
+	}
+
+	public Long getRequestConsumingTime() {
+		return requestConsumingTime;
+	}
+
+	public void setRequestConsumingTime(Long requestConsumingTime) {
+		this.requestConsumingTime = requestConsumingTime;
+	}
+
+	public String getExDetail() {
+		return exDetail;
+	}
+
+	public void setExDetail(String exDetail) {
+		this.exDetail = exDetail;
+	}
+
+	public String getExDesc() {
+		return exDesc;
+	}
+
+	public void setExDesc(String exDesc) {
+		this.exDesc = exDesc;
+	}
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
+	public String getLogday() {
+		return logday;
+	}
+
+	public void setLogday(String logday) {
+		this.logday = logday;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestLog{" +
+			"traceId='" + traceId + '\'' +
+			", applicationName='" + applicationName + '\'' +
+			", username='" + username + '\'' +
+			", userId=" + userId +
+			", clientId='" + clientId + '\'' +
+			", description='" + description + '\'' +
+			", requestIp='" + requestIp + '\'' +
+			", operateType=" + operateType +
+			", requestType=" + requestType +
+			", requestMethodName='" + requestMethodName + '\'' +
+			", requestMethod='" + requestMethod + '\'' +
+			", requestUrl='" + requestUrl + '\'' +
+			", requestArgs='" + requestArgs + '\'' +
+			", requestParams='" + requestParams + '\'' +
+			", requestHeaders='" + requestHeaders + '\'' +
+			", requestUa='" + requestUa + '\'' +
+			", classpath='" + classpath + '\'' +
+			", requestStartTime=" + requestStartTime +
+			", requestEndTime=" + requestEndTime +
+			", requestConsumingTime=" + requestConsumingTime +
+			", exDetail='" + exDetail + '\'' +
+			", exDesc='" + exDesc + '\'' +
+			", tenantId='" + tenantId + '\'' +
+			", source='" + source + '\'' +
+			", ctime='" + ctime + '\'' +
+			", logday='" + logday + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		RequestLog that = (RequestLog) o;
+		return Objects.equals(traceId, that.traceId) && Objects.equals(
+			applicationName, that.applicationName) && Objects.equals(username,
+			that.username) && Objects.equals(userId, that.userId)
+			&& Objects.equals(clientId, that.clientId) && Objects.equals(
+			description, that.description) && Objects.equals(requestIp, that.requestIp)
+			&& Objects.equals(operateType, that.operateType) && Objects.equals(
+			requestType, that.requestType) && Objects.equals(requestMethodName,
+			that.requestMethodName) && Objects.equals(requestMethod, that.requestMethod)
+			&& Objects.equals(requestUrl, that.requestUrl) && Objects.equals(
+			requestArgs, that.requestArgs) && Objects.equals(requestParams,
+			that.requestParams) && Objects.equals(requestHeaders, that.requestHeaders)
+			&& Objects.equals(requestUa, that.requestUa) && Objects.equals(
+			classpath, that.classpath) && Objects.equals(requestStartTime,
+			that.requestStartTime) && Objects.equals(requestEndTime, that.requestEndTime)
+			&& Objects.equals(requestConsumingTime, that.requestConsumingTime)
+			&& Objects.equals(exDetail, that.exDetail) && Objects.equals(exDesc,
+			that.exDesc) && Objects.equals(tenantId, that.tenantId)
+			&& Objects.equals(source, that.source) && Objects.equals(ctime,
+			that.ctime) && Objects.equals(logday, that.logday);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(traceId, applicationName, username, userId, clientId, description,
+			requestIp, operateType, requestType, requestMethodName, requestMethod, requestUrl,
+			requestArgs, requestParams, requestHeaders, requestUa, classpath, requestStartTime,
+			requestEndTime, requestConsumingTime, exDetail, exDesc, tenantId, source, ctime,
+			logday);
+	}
 }

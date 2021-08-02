@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

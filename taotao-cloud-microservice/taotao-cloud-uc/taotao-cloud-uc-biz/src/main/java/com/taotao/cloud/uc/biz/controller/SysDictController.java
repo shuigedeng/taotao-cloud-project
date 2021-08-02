@@ -20,7 +20,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -45,12 +44,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/dict")
 @Tag(name = "字典管理API", description = "字典管理API")
 public class SysDictController {
 
 	private final ISysDictService dictService;
+
+	public SysDictController(ISysDictService dictService) {
+		this.dictService = dictService;
+	}
 
 	@Operation(summary = "添加字典信息", description = "添加字典信息", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加字典信息")

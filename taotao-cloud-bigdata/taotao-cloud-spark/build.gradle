@@ -25,7 +25,7 @@ dependencies {
     implementation "org.scala-lang:scala-reflect:2.12.8"
 
     implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
 
     implementation "org.slf4j:slf4j-api:1.7.25"
     implementation "org.slf4j:slf4j-log4j12:1.7.25"

@@ -24,14 +24,16 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
@@ -52,7 +54,6 @@ import reactor.core.publisher.Mono;
  * @since 2020/4/29 22:11
  */
 @Configuration
-@AllArgsConstructor
 public class RouterFunctionConfiguration {
 
 	private static final String FALLBACK = "/fallback";
@@ -62,12 +63,15 @@ public class RouterFunctionConfiguration {
 	public RouterFunction<ServerResponse> routerFunction(
 		HystrixFallbackHandler hystrixFallbackHandler,
 		ImageCodeHandler imageCodeWebHandler,
+		FaviconHandler faviconHandler,
 		ApiProperties apiProperties) {
-		return RouterFunctions.route(
-			RequestPredicates.path(FALLBACK)
+		return RouterFunctions
+			.route(RequestPredicates.path(FALLBACK)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), hystrixFallbackHandler)
 			.andRoute(RequestPredicates.GET(apiProperties.getBaseUri() + CODE)
-				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), imageCodeWebHandler);
+				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), imageCodeWebHandler)
+			.andRoute(RequestPredicates.GET("/favicon.ico")
+				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler);
 	}
 
 	/**
@@ -132,11 +136,14 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	@AllArgsConstructor
 	public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 
 		private static final String PARAM_T = "t";
 		private final RedisRepository redisRepository;
+
+		public ImageCodeHandler(RedisRepository redisRepository) {
+			this.redisRepository = redisRepository;
+		}
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
@@ -153,6 +160,37 @@ public class RouterFunctionConfiguration {
 					.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.bodyValue(Result.success(captcha.toBase64()));
+			} catch (Exception e) {
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
+			}
+		}
+	}
+
+	/**
+	 * 图形验证码处理器
+	 *
+	 * @author shuigedeng
+	 * @version 1.0.0
+	 * @since 2020/4/29 22:11
+	 */
+	@Component
+	public class FaviconHandler implements HandlerFunction<ServerResponse> {
+
+		@Override
+		public Mono<ServerResponse> handle(ServerRequest request) {
+			try {
+				ClassPathResource classPathResource = new ClassPathResource("favicon.ico");
+				InputStream inputStream = classPathResource.getInputStream();
+
+				byte[] bytes = IOUtils.toByteArray(inputStream);
+
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.IMAGE_PNG)
+					.bodyValue(bytes);
 			} catch (Exception e) {
 				return ServerResponse
 					.status(HttpStatus.HTTP_OK)

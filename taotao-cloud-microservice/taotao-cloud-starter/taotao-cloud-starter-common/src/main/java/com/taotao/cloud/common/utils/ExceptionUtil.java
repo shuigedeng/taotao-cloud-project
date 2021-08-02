@@ -20,7 +20,6 @@ import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import lombok.experimental.UtilityClass;
 
 /**
  * ExceptionUtils
@@ -29,7 +28,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:35
  **/
-@UtilityClass
 public class ExceptionUtil {
 
 	public static String trace2String(Throwable t) {

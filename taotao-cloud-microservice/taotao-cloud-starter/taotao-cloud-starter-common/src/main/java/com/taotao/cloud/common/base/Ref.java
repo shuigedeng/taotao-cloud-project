@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.common.base;
 
-import lombok.Data;
+
+import java.util.Objects;
 
 /**
  * 模拟out和ref语法
@@ -24,7 +25,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2021/6/22 17:10
  **/
-@Data
 public class Ref<T> {
 
 	private volatile T data;
@@ -35,5 +35,37 @@ public class Ref<T> {
 
 	public boolean isNull() {
 		return data == null;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Ref<?> ref = (Ref<?>) o;
+		return Objects.equals(data, ref.data);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(data);
+	}
+
+	@Override
+	public String toString() {
+		return "Ref{" +
+			"data=" + data +
+			'}';
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
 	}
 }

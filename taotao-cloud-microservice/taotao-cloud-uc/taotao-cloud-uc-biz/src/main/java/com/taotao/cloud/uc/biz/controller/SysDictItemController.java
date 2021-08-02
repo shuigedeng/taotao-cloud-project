@@ -45,12 +45,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/dict/item")
 @Tag(name = "字典项管理API", description = "字典项管理API")
 public class SysDictItemController {
 
 	private final ISysDictItemService dictItemService;
+
+	public SysDictItemController(ISysDictItemService dictItemService) {
+		this.dictItemService = dictItemService;
+	}
 
 	@Operation(summary = "添加字典项详情", description = "添加字典项详情", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加字典项详情")

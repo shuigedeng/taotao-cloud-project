@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 日期工具类
@@ -48,7 +47,6 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @since 2020/4/30 10:23
  */
-@Slf4j
 public final class DateUtils {
 
 	public static final String DEFAULT_YEAR_FORMAT = "yyyy";

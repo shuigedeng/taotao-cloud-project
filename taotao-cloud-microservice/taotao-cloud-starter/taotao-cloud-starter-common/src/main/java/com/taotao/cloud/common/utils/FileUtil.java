@@ -24,7 +24,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import lombok.experimental.UtilityClass;
 
 /**
  * FileUtils
@@ -33,7 +32,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:36
  */
-@UtilityClass
 public class FileUtil {
 
 	/**
@@ -44,7 +42,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
-	public boolean existFile(String filepath) {
+	public static boolean existFile(String filepath) {
 		File file = new File(filepath);
 		return file.exists();
 	}
@@ -57,7 +55,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
-	public String getDirectoryPath(String path) {
+	public static String getDirectoryPath(String path) {
 		File file = new File(path);
 		return file.getAbsolutePath();
 	}
@@ -70,7 +68,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
-	public String getDirectoryPath(Class<?> cls) {
+	public static String getDirectoryPath(Class<?> cls) {
 		File file = getJarFile(cls);
 		if (file == null) {
 			return null;
@@ -89,7 +87,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
-	public File getJarFile(Class<?> cls) {
+	public static File getJarFile(Class<?> cls) {
 		String path = cls.getProtectionDomain().getCodeSource().getLocation().getFile();
 		try {
 			// 转换处理中文及空格
@@ -127,7 +125,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:15
 	 */
-	public Boolean createDirectory(String path) {
+	public static Boolean createDirectory(String path) {
 		File file = new File(path);
 		if (!file.isDirectory()) {
 			file = file.getParentFile();
@@ -172,7 +170,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
-	public void writeAllText(String path, String contents) {
+	public static void writeAllText(String path, String contents) {
 		try {
 			File f = new File(path);
 			if (f.exists()) {
@@ -197,7 +195,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
-	public String readAllText(String path) {
+	public static String readAllText(String path) {
 		try {
 			File f = new File(path);
 			if (f.exists()) {
@@ -224,7 +222,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
-	public String lineSeparator() {
+	public static String lineSeparator() {
 		return System.getProperty("line.separator");
 	}
 
@@ -236,7 +234,7 @@ public class FileUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:16
 	 */
-	public String getFileName(String filePath) {
+	public static String getFileName(String filePath) {
 		String path = filePath.replace("\\\\", "/");
 		return path.substring(path.lastIndexOf("/") + 1, path.length());
 	}

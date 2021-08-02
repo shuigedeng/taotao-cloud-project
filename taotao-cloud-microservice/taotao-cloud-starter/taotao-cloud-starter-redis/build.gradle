@@ -1,16 +1,13 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api("org.springframework.boot:spring-boot-starter-data-redis") {
-        exclude group: 'io.lettuce', module: 'lettuce-core'
+    api("org.redisson:redisson-spring-boot-starter:3.15.0") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
     }
-    api "io.lettuce:lettuce-core"
-    api 'org.redisson:redisson:3.15.0'
 
     api "commons-io:commons-io"
     api "org.apache.commons:commons-pool2"
     api "org.apache.commons:commons-collections4"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

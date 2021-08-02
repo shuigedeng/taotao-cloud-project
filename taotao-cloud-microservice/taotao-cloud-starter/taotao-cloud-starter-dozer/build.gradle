@@ -4,6 +4,6 @@ dependencies {
     api 'com.github.dozermapper:dozer-core:6.5.0'
     api 'com.github.dozermapper:dozer-spring4:6.5.0'
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -17,13 +17,13 @@ import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT;
 import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT_MATCHES;
 
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 
@@ -34,7 +34,6 @@ import org.springframework.lang.Nullable;
  * @author zuihou
  * @date 2019-04-30
  */
-@Slf4j
 public class String2DateConverter extends BaseDateConverter<Date> implements Converter<String, Date> {
 
     protected static final Map<String, String> FORMAT = new LinkedHashMap(15);
@@ -69,7 +68,7 @@ public class String2DateConverter extends BaseDateConverter<Date> implements Con
             dateFormat.setLenient(false);
             return dateFormat.parse(dateStr);
         } catch (ParseException e) {
-            log.info("转换日期失败, date={}, format={}", dateStr, format, e);
+            LogUtil.error("转换日期失败, date={}, format={}", dateStr, format, e);
             throw new BaseException(e.getMessage(), e);
         }
     }

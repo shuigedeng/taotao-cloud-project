@@ -25,7 +25,6 @@ import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import javax.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -41,7 +40,6 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @version 1.0.0
  * @since 2020/4/30 10:21
  */
-@Slf4j
 public class RequestLogComponent implements InitializingBean {
 
 	@Resource

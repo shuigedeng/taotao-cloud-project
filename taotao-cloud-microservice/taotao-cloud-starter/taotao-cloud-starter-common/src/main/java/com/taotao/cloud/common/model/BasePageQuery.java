@@ -17,16 +17,10 @@ package com.taotao.cloud.common.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 基础分页查询
@@ -35,12 +29,6 @@ import lombok.experimental.SuperBuilder;
  * @version 1.0.0
  * @since 2020/5/2 16:40
  */
-@Data
-@Accessors(chain = true)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder
 @Schema(name = "BasePageQuery", description = "基础分页查询对象")
 public class BasePageQuery implements Serializable {
 
@@ -48,15 +36,66 @@ public class BasePageQuery implements Serializable {
 
 	@Schema(description = "当前第几页，默认1", example = "1", required = true)
 	@NotNull(message = "当前页显示数量不能为空")
-	@Builder.Default
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
 	private Integer currentPage = 1;
 
 	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")
-	@Builder.Default
 	@Min(value = 5)
 	@Max(value = 100)
 	private Integer pageSize = 10;
+
+	public BasePageQuery() {
+	}
+
+	public BasePageQuery(Integer currentPage, Integer pageSize) {
+		this.currentPage = currentPage;
+		this.pageSize = pageSize;
+	}
+
+	@Override
+	public String toString() {
+		return "BasePageQuery{" +
+			"currentPage=" + currentPage +
+			", pageSize=" + pageSize +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		BasePageQuery that = (BasePageQuery) o;
+		return Objects.equals(currentPage, that.currentPage) && Objects.equals(
+			pageSize, that.pageSize);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(currentPage, pageSize);
+	}
+
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
 }

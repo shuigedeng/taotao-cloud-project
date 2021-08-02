@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.log.service.impl;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 审计日志实现类-logger
@@ -26,11 +26,10 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @since 2020/5/2 11:18
  */
-@Slf4j
 public class LoggerRequestLogServiceImpl implements IRequestLogService {
 
 	@Override
 	public void save(RequestLog requestLog) {
-		log.info("本地日志记录成功：{}", requestLog);
+		LogUtil.info("本地日志记录成功：{}", requestLog);
 	}
 }

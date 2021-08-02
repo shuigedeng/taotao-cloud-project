@@ -19,10 +19,7 @@ import static com.taotao.cloud.common.base.StrPool.COLON;
 
 import cn.hutool.core.util.StrUtil;
 import java.time.Duration;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import java.util.Objects;
 import org.springframework.lang.NonNull;
 
 /**
@@ -32,10 +29,6 @@ import org.springframework.lang.NonNull;
  * @version 1.0.0
  * @since 2020/5/2 16:56
  */
-@Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public class CacheHashKey extends CacheKey {
 
 	/**
@@ -56,5 +49,32 @@ public class CacheHashKey extends CacheKey {
 
 	public CacheKey tran() {
 		return new CacheKey(StrUtil.join(COLON, getKey(), getField()), getExpire());
+	}
+
+	@Override
+	public String toString() {
+		return "CacheHashKey{" +
+			"field=" + field +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		CacheHashKey that = (CacheHashKey) o;
+		return field.equals(that.field);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), field);
 	}
 }

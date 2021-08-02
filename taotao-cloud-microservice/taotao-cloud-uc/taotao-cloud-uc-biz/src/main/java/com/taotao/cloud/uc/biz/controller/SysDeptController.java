@@ -2,7 +2,6 @@ package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.uc.biz.service.ISysDeptService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/dept")
 @Tag(name = "部门管理API", description = "部门管理API")
-@AllArgsConstructor
 public class SysDeptController {
 
 	private final ISysDeptService deptService;
+
+	public SysDeptController(ISysDeptService deptService) {
+		this.deptService = deptService;
+	}
 }

@@ -20,10 +20,8 @@ import com.taotao.cloud.web.async.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.web.properties.AsyncTaskProperties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
-import lombok.AllArgsConstructor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -36,15 +34,19 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
-@AllArgsConstructor
 @EnableScheduling
 @EnableAsync(proxyTargetClass = true)
 public class AsyncTaskConfiguration implements AsyncConfigurer {
 
 	private final AsyncTaskProperties asyncTaskProperties;
 
+	public AsyncTaskConfiguration(
+		AsyncTaskProperties asyncTaskProperties) {
+		this.asyncTaskProperties = asyncTaskProperties;
+	}
+
 	@Bean
-	public TaskExecutor taskExecutor() {
+	public Executor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
 		executor.setCorePoolSize(asyncTaskProperties.getCorePoolSize());
 		executor.setMaxPoolSize(asyncTaskProperties.getMaxPoolSiz());
@@ -54,11 +56,6 @@ public class AsyncTaskConfiguration implements AsyncConfigurer {
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 		executor.initialize();
 		return executor;
-	}
-
-	@Override
-	public Executor getAsyncExecutor() {
-		return taskExecutor();
 	}
 
 	@Override

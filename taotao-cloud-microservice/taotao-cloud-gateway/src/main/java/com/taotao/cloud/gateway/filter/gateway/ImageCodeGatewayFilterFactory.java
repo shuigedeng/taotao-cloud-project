@@ -20,8 +20,6 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -36,7 +34,6 @@ import org.springframework.util.MultiValueMap;
  * @since 2020/4/29 22:13
  */
 @Component
-@AllArgsConstructor
 public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
 
 	private static final String PARAM_CODE = "code";
@@ -48,6 +45,17 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 	private static final String ERROR = "验证码错误";
 
 	private final RedisRepository redisRepository;
+
+	public ImageCodeGatewayFilterFactory(
+		RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
+	}
+
+	public ImageCodeGatewayFilterFactory(Class<Object> configClass,
+		RedisRepository redisRepository) {
+		super(configClass);
+		this.redisRepository = redisRepository;
+	}
 
 	@Override
 	public GatewayFilter apply(Object config) {
@@ -62,7 +70,6 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 		};
 	}
 
-	@SneakyThrows
 	private void validateCode(ServerHttpRequest request) {
 		MultiValueMap<String, String> params = request.getQueryParams();
 		String code = params.getFirst(PARAM_CODE);

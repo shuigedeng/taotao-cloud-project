@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.exception.BaseException;
 import java.util.Arrays;
-import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -32,17 +31,16 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version 1.0.0
  * @since 2020/6/2 16:33
  */
-@UtilityClass
 public class ContextUtil {
 
-	public Class<?> mainClass;
-	private ConfigurableApplicationContext applicationContext;
+	public static Class<?> mainClass;
+	public static ConfigurableApplicationContext applicationContext;
 
-	public void setApplicationContext(ConfigurableApplicationContext applicationContext) {
+	public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
 		ContextUtil.applicationContext = applicationContext;
 	}
 
-	public ConfigurableApplicationContext getApplicationContext() {
+	public static ConfigurableApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
 
@@ -59,7 +57,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:54
 	 */
-	public <T> T getBean(Class<T> type, boolean required) {
+	public static <T> T getBean(Class<T> type, boolean required) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
 		if (type != null && applicationContext != null) {
 			try {
@@ -86,7 +84,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:55
 	 */
-	public Object getBean(String type, boolean required) {
+	public static Object getBean(String type, boolean required) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
 		if (type != null && applicationContext != null) {
 			if (required) {
@@ -107,7 +105,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:55
 	 */
-	public String getBeanDefinitionText() {
+	public static String getBeanDefinitionText() {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
 		String[] beans = applicationContext.getBeanDefinitionNames();
 		Arrays.sort(beans);
@@ -128,7 +126,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:43
 	 */
-	public void registerBean(String name,
+	public static void registerBean(String name,
 		Class clazz,
 		Object... args) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
@@ -153,7 +151,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:44
 	 */
-	public void registerBean(String name,
+	public static void registerBean(String name,
 		Class clazz,
 		BeanDefinitionBuilder beanDefinitionBuilder) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
@@ -171,7 +169,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:44
 	 */
-	public void unRegisterBean(String name) {
+	public static void unRegisterBean(String name) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
 		BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) applicationContext
 			.getBeanFactory();
@@ -188,7 +186,8 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:45
 	 */
-	public void checkRegisterBean(ApplicationContext applicationContext, String name, Class clazz) {
+	public static void checkRegisterBean(ApplicationContext applicationContext, String name,
+		Class clazz) {
 		if (applicationContext.containsBean(name)) {
 			Object bean = applicationContext.getBean(name);
 			if (!bean.getClass().isAssignableFrom(clazz)) {

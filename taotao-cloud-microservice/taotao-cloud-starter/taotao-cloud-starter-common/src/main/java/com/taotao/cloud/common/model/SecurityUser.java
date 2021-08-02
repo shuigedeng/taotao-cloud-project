@@ -21,7 +21,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +32,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @version 1.0.0
  * @since 2020/4/29 17:52
  */
-@Data
 public class SecurityUser implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;
@@ -128,5 +126,256 @@ public class SecurityUser implements UserDetails, Serializable {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public SecurityUser(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getLockFlag() {
+		return lockFlag;
+	}
+
+	public void setLockFlag(String lockFlag) {
+		this.lockFlag = lockFlag;
+	}
+
+	public String getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(String delFlag) {
+		this.delFlag = delFlag;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Set<String> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<String> permissions) {
+		this.permissions = permissions;
+	}
+
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<String> roles) {
+		this.roles = roles;
+	}
+
+	public static SecurityUserBuilder builder() {
+		return new SecurityUserBuilder();
+	}
+
+	public static final class SecurityUserBuilder {
+
+		private Long userId;
+		private String username;
+		private String password;
+		private String deptId;
+		private String jobId;
+		private String email;
+		private String phone;
+		private String avatar;
+		private String lockFlag;
+		private String delFlag;
+		private String nickname;
+		private Integer sex;
+		private Integer type;
+		private Set<String> permissions;
+		private Set<String> roles;
+
+		private SecurityUserBuilder() {
+		}
+
+		public static SecurityUserBuilder aSecurityUser() {
+			return new SecurityUserBuilder();
+		}
+
+		public SecurityUserBuilder userId(Long userId) {
+			this.userId = userId;
+			return this;
+		}
+
+		public SecurityUserBuilder username(String username) {
+			this.username = username;
+			return this;
+		}
+
+		public SecurityUserBuilder password(String password) {
+			this.password = password;
+			return this;
+		}
+
+		public SecurityUserBuilder deptId(String deptId) {
+			this.deptId = deptId;
+			return this;
+		}
+
+		public SecurityUserBuilder jobId(String jobId) {
+			this.jobId = jobId;
+			return this;
+		}
+
+		public SecurityUserBuilder email(String email) {
+			this.email = email;
+			return this;
+		}
+
+		public SecurityUserBuilder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public SecurityUserBuilder avatar(String avatar) {
+			this.avatar = avatar;
+			return this;
+		}
+
+		public SecurityUserBuilder lockFlag(String lockFlag) {
+			this.lockFlag = lockFlag;
+			return this;
+		}
+
+		public SecurityUserBuilder delFlag(String delFlag) {
+			this.delFlag = delFlag;
+			return this;
+		}
+
+		public SecurityUserBuilder nickname(String nickname) {
+			this.nickname = nickname;
+			return this;
+		}
+
+		public SecurityUserBuilder sex(Integer sex) {
+			this.sex = sex;
+			return this;
+		}
+
+		public SecurityUserBuilder type(Integer type) {
+			this.type = type;
+			return this;
+		}
+
+		public SecurityUserBuilder permissions(Set<String> permissions) {
+			this.permissions = permissions;
+			return this;
+		}
+
+		public SecurityUserBuilder roles(Set<String> roles) {
+			this.roles = roles;
+			return this;
+		}
+
+		public SecurityUser build() {
+			SecurityUser securityUser = new SecurityUser();
+			securityUser.setUserId(userId);
+			securityUser.setUsername(username);
+			securityUser.setPassword(password);
+			securityUser.setDeptId(deptId);
+			securityUser.setJobId(jobId);
+			securityUser.setEmail(email);
+			securityUser.setPhone(phone);
+			securityUser.setAvatar(avatar);
+			securityUser.setLockFlag(lockFlag);
+			securityUser.setDelFlag(delFlag);
+			securityUser.setNickname(nickname);
+			securityUser.setSex(sex);
+			securityUser.setType(type);
+			securityUser.setPermissions(permissions);
+			securityUser.setRoles(roles);
+			return securityUser;
+		}
 	}
 }

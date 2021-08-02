@@ -33,7 +33,7 @@ import java.util.function.BiConsumer;
 public class AsyncUtil {
 
 	private final static String name = "异步处理异常工具";
-	private static ExecutorService executorService = new ThreadPoolExecutor(1, 20,
+	private static final ExecutorService executorService = new ThreadPoolExecutor(1, 20,
 		60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
 	private static Timer taskTimer = new Timer(name, true);
 

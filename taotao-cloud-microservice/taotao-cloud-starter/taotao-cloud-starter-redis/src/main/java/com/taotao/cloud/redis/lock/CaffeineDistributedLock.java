@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2019/08/07
  */
 public class CaffeineDistributedLock implements DistributedLock {
+
 	@Override
 	public ZLock lock(String key, long leaseTime,
 		TimeUnit unit, boolean isFair) throws Exception {

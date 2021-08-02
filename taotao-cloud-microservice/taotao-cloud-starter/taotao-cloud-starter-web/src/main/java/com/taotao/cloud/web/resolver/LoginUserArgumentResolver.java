@@ -4,8 +4,6 @@ import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.web.annotation.EnableUser;
 import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -19,9 +17,10 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * @link https://my.oschina.net/u/4149877/blog/3143391/print
  * @link https://blog.csdn.net/aiyaya_/article/details/79221733
  */
-@Slf4j
-@AllArgsConstructor
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
+
+	public LoginUserArgumentResolver() {
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {

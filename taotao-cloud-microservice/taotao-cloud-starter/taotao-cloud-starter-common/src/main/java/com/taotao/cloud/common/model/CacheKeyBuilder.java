@@ -109,7 +109,6 @@ public interface CacheKeyBuilder {
 	 * 根据动态参数 拼接参数
 	 *
 	 * @param suffix 动态参数
-	 * @return
 	 */
 	default String getKey(Object... suffix) {
 		ArrayList<String> regionList = new ArrayList<>();

@@ -30,10 +30,10 @@ import java.util.List;
  */
 @Data
 @RefreshScope
-@ConfigurationProperties(prefix = CacheManagerProperties.BASE_REDIS_CACHE_MANAGER_PREFIX)
+@ConfigurationProperties(prefix = CacheManagerProperties.PREFIX)
 public class CacheManagerProperties {
 
-	public static final String BASE_REDIS_CACHE_MANAGER_PREFIX = "taotao.cloud.redis.cache.manager";
+	public static final String PREFIX = "taotao.cloud.redis.cache.manager";
 
 	private List<CacheConfig> configs;
 
@@ -49,4 +49,6 @@ public class CacheManagerProperties {
 		 */
 		private long second = 60;
 	}
+
+
 }

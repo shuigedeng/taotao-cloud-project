@@ -13,7 +13,6 @@ import com.taotao.cloud.uc.biz.service.ISysDictService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,11 +25,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/4/30 11:19
  */
 @Service
-@AllArgsConstructor
 public class SysDictServiceImpl implements ISysDictService {
 
 	private final SysDictRepository sysDictRepository;
 	private final ISysDictItemService sysDictItemService;
+
+	public SysDictServiceImpl(SysDictRepository sysDictRepository,
+		ISysDictItemService sysDictItemService) {
+		this.sysDictRepository = sysDictRepository;
+		this.sysDictItemService = sysDictItemService;
+	}
 
 	private final QSysDict SYS_DICT = QSysDict.sysDict;
 	private final BooleanExpression PREDICATE = SYS_DICT.eq(SYS_DICT);

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.base;
 
-import lombok.Data;
 
 /**
  * CoreProperties
@@ -24,7 +23,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2021/6/22 17:08
  **/
-@Data
 public class CoreProperties {
 	public static String SpringApplicationName = "spring.application.name";
 

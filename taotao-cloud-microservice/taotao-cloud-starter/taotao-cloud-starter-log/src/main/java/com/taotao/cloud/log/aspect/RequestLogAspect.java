@@ -65,9 +65,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @version 1.0.0
  * @since 2020/6/3 11:47
  */
-@Slf4j
 @Aspect
-@AllArgsConstructor
 public class RequestLogAspect {
 
 	@Value("${spring.application.name}")
@@ -75,10 +73,15 @@ public class RequestLogAspect {
 
 	private static final String DEFAULT_SOURCE = "taotao_cloud_request_log";
 
-	@Resource
-	private RequestLogProperties requestLogProperties;
+	private final RequestLogProperties requestLogProperties;
 
 	private final ApplicationEventPublisher publisher;
+
+	public RequestLogAspect(RequestLogProperties requestLogProperties,
+		ApplicationEventPublisher publisher) {
+		this.requestLogProperties = requestLogProperties;
+		this.publisher = publisher;
+	}
 
 	/**
 	 * log实体类

@@ -1,19 +1,10 @@
 package com.taotao.cloud.gateway.rule;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Objects;
 
 /**
  * 黑名单工具类
  */
-@Setter
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class BlackList {
 
 	/**
@@ -56,4 +47,119 @@ public class BlackList {
 	 */
 	private String createTime;
 
+	public BlackList() {
+	}
+
+	public BlackList(Long id, String ip, String requestUri, String requestMethod,
+		String startTime, String endTime, String status, String createTime) {
+		this.id = id;
+		this.ip = ip;
+		this.requestUri = requestUri;
+		this.requestMethod = requestMethod;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.status = status;
+		this.createTime = createTime;
+	}
+
+	@Override
+	public String toString() {
+		return "BlackList{" +
+			"id=" + id +
+			", ip='" + ip + '\'' +
+			", requestUri='" + requestUri + '\'' +
+			", requestMethod='" + requestMethod + '\'' +
+			", startTime='" + startTime + '\'' +
+			", endTime='" + endTime + '\'' +
+			", status='" + status + '\'' +
+			", createTime='" + createTime + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		BlackList blackList = (BlackList) o;
+		return Objects.equals(id, blackList.id) && Objects.equals(ip, blackList.ip)
+			&& Objects.equals(requestUri, blackList.requestUri)
+			&& Objects.equals(requestMethod, blackList.requestMethod)
+			&& Objects.equals(startTime, blackList.startTime) && Objects.equals(
+			endTime, blackList.endTime) && Objects.equals(status, blackList.status)
+			&& Objects.equals(createTime, blackList.createTime);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, ip, requestUri, requestMethod, startTime, endTime, status,
+			createTime);
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getRequestUri() {
+		return requestUri;
+	}
+
+	public void setRequestUri(String requestUri) {
+		this.requestUri = requestUri;
+	}
+
+	public String getRequestMethod() {
+		return requestMethod;
+	}
+
+	public void setRequestMethod(String requestMethod) {
+		this.requestMethod = requestMethod;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
 }

@@ -5,13 +5,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.aspect.BaseAspect;
 import com.taotao.cloud.common.lock.ZLock;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,9 +29,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  *
  * @author shuigedeng
  */
-@Slf4j
 @Aspect
-@RequiredArgsConstructor
 @ConditionalOnClass(RedisRepository.class)
 public class IdempotentAspect extends BaseAspect {
 
@@ -59,6 +56,11 @@ public class IdempotentAspect extends BaseAspect {
 	private static final int LOCK_WAIT_TIME = 10;
 
 	private final RedissonDistributedLock redissonDistributedLock;
+
+
+	public IdempotentAspect(RedissonDistributedLock redissonDistributedLock) {
+		this.redissonDistributedLock = redissonDistributedLock;
+	}
 
 	@Pointcut("@annotation(vip.mate.core.ide.annotation.Ide)")
 	public void watchIde() {
@@ -91,13 +93,13 @@ public class IdempotentAspect extends BaseAspect {
 						if (Objects.isNull(result)) {
 							throw new IdempotentException("命中RID重复请求");
 						}
-						log.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
+						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{0}={1}", HEADER_RID_KEY, rid);
 					} else {
-						log.warn(
-							"msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
+						LogUtil.warn(
+							"msg1=header没有rid,防重复提交功能失效,,remoteHost={0}" + request.getRemoteHost());
 					}
 				} catch (Exception e) {
-					log.error("获取redis锁发生异常", e);
+					LogUtil.error("获取redis锁发生异常", e);
 					throw e;
 				}
 			}
@@ -124,7 +126,7 @@ public class IdempotentAspect extends BaseAspect {
 							val = params;
 						} else {
 							//如果自定义的key,在请求参数中没有此参数,说明非法请求
-							log.warn("自定义的key,在请求参数中没有此参数,防重复提交功能失效");
+							LogUtil.warn("自定义的key,在请求参数中没有此参数,防重复提交功能失效");
 						}
 					}
 
@@ -139,19 +141,19 @@ public class IdempotentAspect extends BaseAspect {
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
-								log.error("msg1=不允许重复执行,,key={},,targetName={},,methodName={}",
+								LogUtil.error("msg1=不允许重复执行,,key={0},,targetName={1},,methodName={2}",
 									perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 							//存储在当前线程
 							PER_FIX_KEY.set(perFix);
-							log.info("msg1=当前请求已成功锁定:{}", perFix);
+							LogUtil.info("msg1=当前请求已成功锁定:{0}", perFix);
 						} catch (Exception e) {
-							log.error("获取redis锁发生异常", e);
+							LogUtil.error("获取redis锁发生异常", e);
 							throw e;
 						}
 					} else {
-						log.warn("自定义的key,在请求参数中value为空,防重复提交功能失效");
+						LogUtil.warn("自定义的key,在请求参数中value为空,防重复提交功能失效");
 					}
 				}
 			}
@@ -173,9 +175,9 @@ public class IdempotentAspect extends BaseAspect {
 					if (StringUtils.isNotBlank(rid)) {
 						try {
 //							redisService.unLock(REDIS_KEY_PREFIX + rid);
-							log.info("msg1=当前请求已成功处理,,rid={}", rid);
+							LogUtil.info("msg1=当前请求已成功处理,,rid={0}", rid);
 						} catch (Exception e) {
-							log.error("释放redis锁异常", e);
+							LogUtil.error("释放redis锁异常", e);
 						}
 					}
 					PER_FIX_KEY.remove();
@@ -188,17 +190,17 @@ public class IdempotentAspect extends BaseAspect {
 					if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(PER_FIX_KEY.get())) {
 						try {
 //							redisService.unLock(PER_FIX_KEY.get());
-							log.info("msg1=当前请求已成功释放,,key={}", PER_FIX_KEY.get());
+							LogUtil.info("msg1=当前请求已成功释放,,key={0}", PER_FIX_KEY.get());
 							PER_FIX_KEY.set(null);
 							PER_FIX_KEY.remove();
 						} catch (Exception e) {
-							log.error("释放redis锁异常", e);
+							LogUtil.error("释放redis锁异常", e);
 						}
 					}
 				}
 			}
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			LogUtil.error(e.getMessage(), e);
 		}
 	}
 }

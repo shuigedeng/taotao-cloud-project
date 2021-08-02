@@ -25,13 +25,7 @@ package com.taotao.cloud.uc.api.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
+import java.util.Objects;
 
 /**
  * TreeNode
@@ -40,32 +34,141 @@ import lombok.experimental.SuperBuilder;
  * @version 1.0.0
  * @since 2020/10/21 11:02
  */
-@Data
-@Accessors(chain = true)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder
 @Schema(name = "TreeNode", description = "树节点")
 public class TreeNode implements Serializable {
 
 	private static final long serialVersionUID = -4546704465269983480L;
 
 	@Schema(description = "id")
-	protected Long id;
+	private Long id;
 
 	@Schema(description = "parentId")
-	protected Long parentId;
+	private Long parentId;
 
 	@Schema(description = "children")
-	protected List<TreeNode> children;
+	private List<TreeNode> children;
 
 	@Schema(description = "是否包含子节点")
-	@Builder.Default
 	private Boolean hasChildren = false;
 
 	public void add(TreeNode node) {
 		children.add(node);
 	}
 
+	public TreeNode() {
+	}
+
+	public TreeNode(Long id, Long parentId,
+		List<TreeNode> children, Boolean hasChildren) {
+		this.id = id;
+		this.parentId = parentId;
+		this.children = children;
+		this.hasChildren = hasChildren;
+	}
+
+	@Override
+	public String toString() {
+		return "TreeNode{" +
+			"id=" + id +
+			", parentId=" + parentId +
+			", children=" + children +
+			", hasChildren=" + hasChildren +
+			'}';
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<TreeNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<TreeNode> children) {
+		this.children = children;
+	}
+
+	public Boolean getHasChildren() {
+		return hasChildren;
+	}
+
+	public void setHasChildren(Boolean hasChildren) {
+		this.hasChildren = hasChildren;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TreeNode treeNode = (TreeNode) o;
+		return Objects.equals(id, treeNode.id) && Objects.equals(parentId,
+			treeNode.parentId) && Objects.equals(children, treeNode.children)
+			&& Objects.equals(hasChildren, treeNode.hasChildren);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, parentId, children, hasChildren);
+	}
+
+	public static final class TreeNodeBuilder {
+
+		private Long id;
+		private Long parentId;
+		private List<TreeNode> children;
+		private Boolean hasChildren = false;
+
+		private TreeNodeBuilder() {
+		}
+
+		public static TreeNodeBuilder aTreeNode() {
+			return new TreeNodeBuilder();
+		}
+
+		public TreeNodeBuilder id(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public TreeNodeBuilder parentId(Long parentId) {
+			this.parentId = parentId;
+			return this;
+		}
+
+		public TreeNodeBuilder children(List<TreeNode> children) {
+			this.children = children;
+			return this;
+		}
+
+		public TreeNodeBuilder hasChildren(Boolean hasChildren) {
+			this.hasChildren = hasChildren;
+			return this;
+		}
+
+		public TreeNode build() {
+			TreeNode treeNode = new TreeNode();
+			treeNode.setId(id);
+			treeNode.setParentId(parentId);
+			treeNode.setChildren(children);
+			treeNode.setHasChildren(hasChildren);
+			return treeNode;
+		}
+	}
 }

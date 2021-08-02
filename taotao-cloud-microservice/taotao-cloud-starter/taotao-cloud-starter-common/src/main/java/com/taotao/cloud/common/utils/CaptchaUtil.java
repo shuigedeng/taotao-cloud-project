@@ -23,7 +23,6 @@ import java.awt.image.BufferedImage;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
-import lombok.experimental.UtilityClass;
 
 /**
  * 生成验证码工具类
@@ -32,12 +31,11 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/4/30 10:28
  */
-@UtilityClass
 public class CaptchaUtil {
 
-	private final int width = 200;
-	private final int height = 50;
-	private Random random;
+	private static final int width = 200;
+	private static final int height = 50;
+	private static Random random;
 
 	static {
 		try {
@@ -54,7 +52,7 @@ public class CaptchaUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
-	public ArithmeticCaptcha getArithmeticCaptcha() {
+	public static ArithmeticCaptcha getArithmeticCaptcha() {
 		ArithmeticCaptcha captcha = new ArithmeticCaptcha(width, height);
 		captcha.setLen(2);
 		return captcha;
@@ -67,7 +65,7 @@ public class CaptchaUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
-	public BufferedImage createImage() {
+	public static BufferedImage createImage() {
 		//生成对应宽高的初始图片
 		return new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	}
@@ -80,7 +78,7 @@ public class CaptchaUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
-	public String drawRandomText(BufferedImage verifyImg) {
+	public static String drawRandomText(BufferedImage verifyImg) {
 		Graphics2D graphics = (Graphics2D) verifyImg.getGraphics();
 		//设置画笔颜色-验证码背景色
 		graphics.setColor(Color.WHITE);
@@ -129,13 +127,13 @@ public class CaptchaUtil {
 	}
 
 	/**
-	 * 随机取色
+	 * 随机取色o
 	 *
 	 * @return java.awt.Color
 	 * @author shuigedeng
 	 * @since 2021/2/25 15:58
 	 */
-	private Color getRandomColor() {
+	private static Color getRandomColor() {
 		return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
 	}
 }

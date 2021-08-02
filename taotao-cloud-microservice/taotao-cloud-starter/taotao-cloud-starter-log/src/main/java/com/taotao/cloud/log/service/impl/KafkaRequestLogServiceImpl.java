@@ -16,10 +16,10 @@
 package com.taotao.cloud.log.service.impl;
 
 import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
 import javax.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -32,7 +32,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * @version 1.0.0
  * @since 2020/5/2 11:18
  */
-@Slf4j
 public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
 	public static final String REQUEST_LOG_TOPIC = "request-log-";
@@ -56,7 +55,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 			@Override
 			public void onFailure(Throwable throwable) {
-				log.error("远程日志记录失败：{}", throwable.getMessage());
+				LogUtil.error("远程日志记录失败：{}", throwable);
 			}
 
 			@Override

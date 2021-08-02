@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import lombok.experimental.UtilityClass;
 
 /**
  * 高效分布式ID生成算法(sequence),基于Snowflake算法优化实现64位自增ID算法。 其中解决时间回拨问题的优化方案如下： 1.
@@ -26,10 +25,9 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2019/3/5
  */
-@UtilityClass
 public class IdGeneratorUtil {
 
-	private final SequenceUtil WORKER = new SequenceUtil();
+	private static final SequenceUtil WORKER = new SequenceUtil();
 
 	/**
 	 * 获取id
@@ -38,7 +36,7 @@ public class IdGeneratorUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:18
 	 */
-	public long getId() {
+	public static long getId() {
 		return WORKER.nextId();
 	}
 
@@ -49,7 +47,7 @@ public class IdGeneratorUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:19
 	 */
-	public String getIdStr() {
+	public static String getIdStr() {
 		return String.valueOf(WORKER.nextId());
 	}
 }

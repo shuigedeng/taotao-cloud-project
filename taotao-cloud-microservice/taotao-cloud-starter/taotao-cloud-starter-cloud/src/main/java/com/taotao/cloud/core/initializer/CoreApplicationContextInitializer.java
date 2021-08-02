@@ -32,9 +32,9 @@ import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import lombok.val;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
@@ -69,7 +69,8 @@ public class CoreApplicationContextInitializer implements
 			ContextUtil.setApplicationContext(context);
 
 			ConfigurableEnvironment environment = context.getEnvironment();
-			setDefaultProperty("nacos.logging.default.config.enabled", "false", "[taotao cloud 环境变量]");
+			setDefaultProperty("nacos.logging.default.config.enabled", "false",
+				"[taotao cloud 环境变量]");
 			if ("false"
 				.equalsIgnoreCase(
 					environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
@@ -174,7 +175,7 @@ public class CoreApplicationContextInitializer implements
 	void registerContextRefreshEvent() {
 		PropertyCache.Default.listenUpdateCache("通过配置刷新上下文监听", (data) -> {
 			if (data != null && data.size() > 0) {
-				for (val e : data.entrySet()) {
+				for (Map.Entry<String, Object> e : data.entrySet()) {
 					if (!PropertyUtil
 						.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartEnabled, false)) {
 						return;

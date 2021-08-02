@@ -3,6 +3,6 @@ dependencies {
 
     api "com.xuxueli:xxl-job-core"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

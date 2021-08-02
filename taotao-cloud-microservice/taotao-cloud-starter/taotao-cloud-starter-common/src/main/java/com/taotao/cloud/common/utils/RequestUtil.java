@@ -35,8 +35,8 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.val;
 import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
+import org.springframework.boot.web.server.WebServer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.codec.ByteArrayDecoder;
@@ -99,7 +99,7 @@ public class RequestUtil {
 		if (!isWeb()) {
 			return "";
 		}
-		val webServer = getConfigurableWebServerApplicationContext().getWebServer();
+		WebServer webServer = getConfigurableWebServerApplicationContext().getWebServer();
 		if (webServer == null) {
 			return "";
 		}

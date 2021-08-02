@@ -23,7 +23,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * http请求操作类
@@ -33,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
  * @link https://bbs.huaweicloud.com/blogs/104013
  * @since 2020/6/2 16:39
  */
-@Slf4j
 public class HttpUtil {
 
 	/**

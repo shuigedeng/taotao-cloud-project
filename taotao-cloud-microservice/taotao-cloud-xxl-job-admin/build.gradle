@@ -17,5 +17,5 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
 }

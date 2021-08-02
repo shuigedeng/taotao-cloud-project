@@ -43,8 +43,5 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-context"
 
-    api 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

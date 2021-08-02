@@ -47,12 +47,18 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-@AllArgsConstructor
 public class SysResourceServiceImpl implements ISysResourceService {
 	private final SysResourceRepository sysResourceRepository;
 	private final ISysRoleService sysRoleService;
 
-//	private final RemoteOrderService remoteOrderService;
+	public SysResourceServiceImpl(
+		SysResourceRepository sysResourceRepository,
+		ISysRoleService sysRoleService) {
+		this.sysResourceRepository = sysResourceRepository;
+		this.sysRoleService = sysRoleService;
+	}
+
+	//	private final RemoteOrderService remoteOrderService;
 //	private final RemoteProductService remoteProductService;
 
 	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;

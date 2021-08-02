@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.redis.configuration.PropertiesAutoConfiguration,\
+com.taotao.cloud.redis.PropertiesAutoConfiguration,\
 com.taotao.cloud.redis.configuration.TaoTaoCloudRedisConfiguration

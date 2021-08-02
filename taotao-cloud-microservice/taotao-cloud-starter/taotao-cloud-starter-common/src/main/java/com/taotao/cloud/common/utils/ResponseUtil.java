@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import javax.servlet.http.HttpServletResponse;
-import lombok.experimental.UtilityClass;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -38,7 +37,6 @@ import reactor.core.publisher.Mono;
  * @version 1.0.0
  * @since 2020/5/2 11:22
  */
-@UtilityClass
 public class ResponseUtil {
 
 	/**
@@ -49,7 +47,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
-	public void success(HttpServletResponse response, Object data) throws IOException {
+	public static void success(HttpServletResponse response, Object data) throws IOException {
 		Result<?> result = Result.success(data);
 		writeResponse(response, result);
 	}
@@ -62,7 +60,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
-	public void fail(HttpServletResponse response, Object data) throws IOException {
+	public static void fail(HttpServletResponse response, Object data) throws IOException {
 		Result<?> result = Result.fail(data);
 		writeResponse(response, result);
 	}
@@ -75,7 +73,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:47
 	 */
-	public void result(HttpServletResponse response, Result<?> result) throws IOException {
+	public static void result(HttpServletResponse response, Result<?> result) throws IOException {
 		writeResponse(response, result);
 	}
 
@@ -87,7 +85,8 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:48
 	 */
-	public void fail(HttpServletResponse response, ResultEnum resultEnum) throws IOException {
+	public static void fail(HttpServletResponse response, ResultEnum resultEnum)
+		throws IOException {
 		Result<String> result = Result.fail(resultEnum);
 		writeResponse(response, result);
 	}
@@ -100,7 +99,8 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
-	private void writeResponse(HttpServletResponse response, Result<?> result) throws IOException {
+	private static void writeResponse(HttpServletResponse response, Result<?> result)
+		throws IOException {
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpStatus.OK.value());
 		response.setCharacterEncoding("UTF-8");
@@ -121,7 +121,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
-	public Mono<Void> success(ServerWebExchange exchange, Object data) {
+	public static Mono<Void> success(ServerWebExchange exchange, Object data) {
 		Result<Object> result = Result.success(data);
 		return writeResponse(exchange, result);
 	}
@@ -135,7 +135,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
-	public Mono<Void> fail(ServerWebExchange exchange, Object data) {
+	public static Mono<Void> fail(ServerWebExchange exchange, Object data) {
 		Result<Object> result = Result.fail(data);
 		return writeResponse(exchange, result);
 	}
@@ -149,7 +149,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
-	public Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
+	public static Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
 		return writeResponse(exchange, result);
 	}
 
@@ -162,7 +162,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:51
 	 */
-	public Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
+	public static Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
 		Result<String> result = Result.fail(resultEnum);
 		return writeResponse(exchange, result);
 	}
@@ -176,7 +176,7 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:52
 	 */
-	public Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {
+	public static Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {
 		ServerHttpResponse response = exchange.getResponse();
 		response.getHeaders().setAccessControlAllowCredentials(true);
 		response.getHeaders().setAccessControlAllowOrigin("*");

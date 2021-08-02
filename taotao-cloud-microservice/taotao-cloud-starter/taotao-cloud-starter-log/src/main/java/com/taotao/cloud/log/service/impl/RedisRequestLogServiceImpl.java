@@ -16,15 +16,14 @@
 package com.taotao.cloud.log.service.impl;
 
 import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import lombok.extern.slf4j.Slf4j;
-
-import javax.annotation.Resource;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import javax.annotation.Resource;
 
 /**
  * 审计日志实现类-redis
@@ -33,7 +32,6 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0.0
  * @since 2020/5/2 11:18
  */
-@Slf4j
 public class RedisRequestLogServiceImpl implements IRequestLogService {
 
 	private static final String SYS_LOG = "sys:log:request:";
@@ -47,9 +45,9 @@ public class RedisRequestLogServiceImpl implements IRequestLogService {
 			.format(Instant.now());
 		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(requestLog));
 		if (index > 0) {
-			log.info("redis远程日志记录成功：{}", requestLog);
+			LogUtil.info("redis远程日志记录成功：{0}", requestLog);
 		} else {
-			log.error("redis远程日志记录失败：{}", requestLog);
+			LogUtil.error("redis远程日志记录失败：{0}", requestLog);
 		}
 	}
 }

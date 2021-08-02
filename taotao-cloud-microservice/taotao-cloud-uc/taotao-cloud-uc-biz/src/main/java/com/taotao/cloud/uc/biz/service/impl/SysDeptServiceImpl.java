@@ -2,7 +2,6 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.repository.SysDeptRepository;
 import com.taotao.cloud.uc.biz.service.ISysDeptService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +12,11 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-@AllArgsConstructor
 public class SysDeptServiceImpl implements ISysDeptService {
-    private final SysDeptRepository sysDeptRepository;
+
+	private final SysDeptRepository sysDeptRepository;
+
+	public SysDeptServiceImpl(SysDeptRepository sysDeptRepository) {
+		this.sysDeptRepository = sysDeptRepository;
+	}
 }

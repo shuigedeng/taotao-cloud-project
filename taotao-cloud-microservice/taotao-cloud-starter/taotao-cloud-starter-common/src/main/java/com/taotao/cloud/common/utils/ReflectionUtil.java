@@ -18,8 +18,6 @@ package com.taotao.cloud.common.utils;
 import com.taotao.cloud.common.exception.BaseException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import lombok.experimental.UtilityClass;
-import lombok.val;
 
 /**
  * ReflectionUtils
@@ -28,7 +26,6 @@ import lombok.val;
  * @version 1.0
  * @since 2019-07-31 09:54
  **/
-@UtilityClass
 public class ReflectionUtil {
 
 	/**
@@ -39,7 +36,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
-	public Class<?> classForName(String type) {
+	public static Class<?> classForName(String type) {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
@@ -55,7 +52,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
-	public Class<?> tryClassForName(String type) {
+	public static Class<?> tryClassForName(String type) {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
@@ -72,11 +69,11 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
-	public Method findMethod(Class<?> cls, String methodName) {
+	public static Method findMethod(Class<?> cls, String methodName) {
 		Method find = null;
 		while (cls != null) {
-			for (val methods : new Method[][]{cls.getMethods(), cls.getDeclaredMethods()}) {
-				for (val method : methods) {
+			for (Method[] methods : new Method[][]{cls.getMethods(), cls.getDeclaredMethods()}) {
+				for (Method method : methods) {
 					if (method.getName().equalsIgnoreCase(methodName)) {
 						find = method;
 						break;
@@ -98,7 +95,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
-	public Method findMethod0(Class<?> cls, String methodName, Class<?>... argsTypes)
+	public static Method findMethod0(Class<?> cls, String methodName, Class<?>... argsTypes)
 		throws NoSuchMethodException, SecurityException {
 		Method find = null;
 		if (cls != null) {
@@ -118,10 +115,11 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
-	public <T> T tryCallMethod(Object obj, String methodName, Object[] param, T defaultValue) {
+	public static <T> T tryCallMethod(Object obj, String methodName, Object[] param,
+		T defaultValue) {
 		try {
 			if (obj != null) {
-				val find = findMethod(obj.getClass(), methodName);
+				Method find = findMethod(obj.getClass(), methodName);
 				if (find != null) {
 					if (!find.isAccessible()) {
 						find.setAccessible(true);
@@ -145,9 +143,9 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
-	public Object callMethod(Object obj, String methodName, Object[] param) {
+	public static Object callMethod(Object obj, String methodName, Object[] param) {
 		try {
-			val find = findMethod(obj.getClass(), methodName);
+			Method find = findMethod(obj.getClass(), methodName);
 			if (find != null) {
 				return find.invoke(obj, param);
 			}
@@ -167,9 +165,9 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
-	public Object callMethod(Class<?> clazz, String methodName, Object[] params) {
+	public static Object callMethod(Class<?> clazz, String methodName, Object[] params) {
 		try {
-			val find = findMethod(clazz, methodName);
+			Method find = findMethod(clazz, methodName);
 			if (find != null) {
 				return find.invoke(null, params);
 			}
@@ -190,10 +188,10 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
-	public Object callMethodWithParams(Class<?> clazz, String methodName, Object[] params,
+	public static Object callMethodWithParams(Class<?> clazz, String methodName, Object[] params,
 		Class<?>... paramTypes) {
 		try {
-			val find = findMethod0(clazz, methodName, paramTypes);
+			Method find = findMethod0(clazz, methodName, paramTypes);
 			if (find != null) {
 				return find.invoke(null, params);
 			}
@@ -214,10 +212,10 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:36
 	 */
-	public Object callMethodWithParams(Object object, String methodName, Object[] params,
+	public static Object callMethodWithParams(Object object, String methodName, Object[] params,
 		Class<?>... paramTypes) {
 		try {
-			val find = findMethod0(object.getClass(), methodName, paramTypes);
+			Method find = findMethod0(object.getClass(), methodName, paramTypes);
 			if (find != null) {
 				return find.invoke(object, params);
 			}
@@ -236,11 +234,11 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
-	public Field findField(Class<?> cls, String name) {
+	public static Field findField(Class<?> cls, String name) {
 		Field find = null;
 		while (cls != null) {
-			for (val fields : new Field[][]{cls.getFields(), cls.getDeclaredFields()}) {
-				for (val field : fields) {
+			for (Field[] fields : new Field[][]{cls.getFields(), cls.getDeclaredFields()}) {
+				for (Field field : fields) {
 					if (field.getName().equalsIgnoreCase(name)) {
 						find = field;
 						return find;
@@ -262,9 +260,9 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
-	public <T> T getFieldValue(Object obj, String name) {
+	public static <T> T getFieldValue(Object obj, String name) {
 		try {
-			val find = findField(obj.getClass(), name);
+			Field find = findField(obj.getClass(), name);
 			if (find != null) {
 				if (!find.isAccessible()) {
 					find.setAccessible(true);
@@ -287,10 +285,10 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
-	public <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
+	public static <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
 		try {
 			if (obj != null) {
-				val find = findField(obj.getClass(), name);
+				Field find = findField(obj.getClass(), name);
 				if (find != null) {
 					if (!find.isAccessible()) {
 						find.setAccessible(true);
@@ -314,7 +312,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
-	public <T> T tryGetStaticFieldValue(String cls, String name, T defaultValue) {
+	public static <T> T tryGetStaticFieldValue(String cls, String name, T defaultValue) {
 		try {
 			return tryGetStaticFieldValue(Class.forName(cls), name, defaultValue);
 		} catch (Exception exp) {
@@ -332,10 +330,10 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:37
 	 */
-	public <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
+	public static <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
 		try {
 			if (cls != null) {
-				val find = findField(cls, name);
+				Field find = findField(cls, name);
 				if (find != null) {
 					if (!find.isAccessible()) {
 						find.setAccessible(true);
@@ -358,7 +356,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
-	public void setFieldValue(Field field, Object obj, Object value) {
+	public static void setFieldValue(Field field, Object obj, Object value) {
 		try {
 			if (!field.isAccessible()) {
 				field.setAccessible(true);
@@ -379,7 +377,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
-	public <T> T tryGetValue(Object obj, String path, T deft) {
+	public static <T> T tryGetValue(Object obj, String path, T deft) {
 		if (obj == null || path == null || path.length() == 0) {
 			return deft;
 		}
@@ -407,7 +405,7 @@ public class ReflectionUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:38
 	 */
-	public <T> T tryGetValue(Object obj, String path) {
+	public static <T> T tryGetValue(Object obj, String path) {
 		return tryGetValue(obj, path, null);
 	}
 }

@@ -7,7 +7,7 @@
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.core.utils.BeanUtil;
+import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
 import com.taotao.cloud.order.biz.entity.Order;
 import com.taotao.cloud.order.biz.entity.QOrder;

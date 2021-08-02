@@ -16,9 +16,7 @@
 package com.taotao.cloud.common.model;
 
 import java.time.Duration;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 import org.springframework.lang.NonNull;
 
 /**
@@ -28,9 +26,6 @@ import org.springframework.lang.NonNull;
  * @version 1.0.0
  * @since 2020/5/2 16:42
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CacheKey {
 
 	/**
@@ -48,5 +43,54 @@ public class CacheKey {
 		this.key = key;
 	}
 
+	public CacheKey() {
+	}
 
+	public CacheKey(@NonNull String key, Duration expire) {
+		this.key = key;
+		this.expire = expire;
+	}
+
+	@Override
+	public String toString() {
+		return "CacheKey{" +
+			"key='" + key + '\'' +
+			", expire=" + expire +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CacheKey cacheKey = (CacheKey) o;
+		return key.equals(cacheKey.key) && Objects.equals(expire, cacheKey.expire);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(key, expire);
+	}
+
+	@NonNull
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(@NonNull String key) {
+		this.key = key;
+	}
+
+	public Duration getExpire() {
+		return expire;
+	}
+
+	public void setExpire(Duration expire) {
+		this.expire = expire;
+	}
 }

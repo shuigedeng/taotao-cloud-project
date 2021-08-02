@@ -15,15 +15,12 @@
  */
 package com.taotao.cloud.uc.api.dto.dict;
 
+import com.taotao.cloud.uc.api.dto.DictDTO.DictDTOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * 添加字典实体对象
@@ -32,10 +29,6 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "DictDTO", description = "添加字典对象DTO")
 public class DictDTO implements Serializable {
 
@@ -59,4 +52,143 @@ public class DictDTO implements Serializable {
 
 	@Schema(description = "备注信息")
 	private String remark;
+
+	@Override
+	public String toString() {
+		return "DictDTO{" +
+			"dictName='" + dictName + '\'' +
+			", dictCode='" + dictCode + '\'' +
+			", description='" + description + '\'' +
+			", dictSort=" + dictSort +
+			", remark='" + remark + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		DictDTO dictDTO = (DictDTO) o;
+		return Objects.equals(dictName, dictDTO.dictName) && Objects.equals(
+			dictCode, dictDTO.dictCode) && Objects.equals(description,
+			dictDTO.description) && Objects.equals(dictSort, dictDTO.dictSort)
+			&& Objects.equals(remark, dictDTO.remark);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dictName, dictCode, description, dictSort, remark);
+	}
+
+	public String getDictName() {
+		return dictName;
+	}
+
+	public void setDictName(String dictName) {
+		this.dictName = dictName;
+	}
+
+	public String getDictCode() {
+		return dictCode;
+	}
+
+	public void setDictCode(String dictCode) {
+		this.dictCode = dictCode;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getDictSort() {
+		return dictSort;
+	}
+
+	public void setDictSort(Integer dictSort) {
+		this.dictSort = dictSort;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public DictDTO() {
+	}
+
+	public DictDTO(String dictName, String dictCode, String description, Integer dictSort,
+		String remark) {
+		this.dictName = dictName;
+		this.dictCode = dictCode;
+		this.description = description;
+		this.dictSort = dictSort;
+		this.remark = remark;
+	}
+
+	public static DictDTOBuilder builder() {
+		return new DictDTOBuilder();
+	}
+
+
+	public static final class DictDTOBuilder {
+
+		private String dictName;
+		private String dictCode;
+		private String description;
+		private Integer dictSort;
+		private String remark;
+
+		private DictDTOBuilder() {
+		}
+
+		public static DictDTOBuilder aDictDTO() {
+			return new DictDTOBuilder();
+		}
+
+		public DictDTOBuilder dictName(String dictName) {
+			this.dictName = dictName;
+			return this;
+		}
+
+		public DictDTOBuilder dictCode(String dictCode) {
+			this.dictCode = dictCode;
+			return this;
+		}
+
+		public DictDTOBuilder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public DictDTOBuilder dictSort(Integer dictSort) {
+			this.dictSort = dictSort;
+			return this;
+		}
+
+		public DictDTOBuilder remark(String remark) {
+			this.remark = remark;
+			return this;
+		}
+
+		public DictDTO build() {
+			DictDTO dictDTO = new DictDTO();
+			dictDTO.setDictName(dictName);
+			dictDTO.setDictCode(dictCode);
+			dictDTO.setDescription(description);
+			dictDTO.setDictSort(dictSort);
+			dictDTO.setRemark(remark);
+			return dictDTO;
+		}
+	}
 }

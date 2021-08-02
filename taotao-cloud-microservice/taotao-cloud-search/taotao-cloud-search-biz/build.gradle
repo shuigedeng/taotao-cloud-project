@@ -38,7 +38,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
     implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
 
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'

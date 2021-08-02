@@ -9,7 +9,7 @@ dependencies {
     implementation 'io.netty:netty-all:4.1.51.Final'
 
     implementation 'org.projectlombok:lombok'
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
 }
 
 shadowJar {

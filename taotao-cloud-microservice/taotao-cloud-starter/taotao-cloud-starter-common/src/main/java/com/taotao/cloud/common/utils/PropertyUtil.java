@@ -17,7 +17,7 @@ package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.base.Callable;
 import com.taotao.cloud.common.base.PropertyCache;
-import lombok.val;
+import java.util.Map;
 import org.apache.logging.log4j.util.Strings;
 
 /**
@@ -32,10 +32,10 @@ public class PropertyUtil {
 	public static String NULL = "<?NULL?>";
 
 	public static void eachProperty(Callable.Action3<String, String, Object> call) {
-		for (val key : System.getProperties().stringPropertyNames()) {
+		for (String key : System.getProperties().stringPropertyNames()) {
 			call.invoke("properties", key, System.getProperty(key));
 		}
-		for (val kv : System.getenv().entrySet()) {
+		for (Map.Entry<String, String> kv : System.getenv().entrySet()) {
 			call.invoke("env", kv.getKey(), kv.getValue());
 		}
 	}

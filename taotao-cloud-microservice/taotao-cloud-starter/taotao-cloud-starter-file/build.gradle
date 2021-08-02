@@ -10,6 +10,6 @@ dependencies {
     api 'com.github.tobato:fastdfs-client'
     api 'commons-net:commons-net'
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

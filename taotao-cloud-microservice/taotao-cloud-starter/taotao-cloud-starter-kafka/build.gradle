@@ -6,6 +6,6 @@ dependencies {
 
     api 'org.springframework.kafka:spring-kafka'
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

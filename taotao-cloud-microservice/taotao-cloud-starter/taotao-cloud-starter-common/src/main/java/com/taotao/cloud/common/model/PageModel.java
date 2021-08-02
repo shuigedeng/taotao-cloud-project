@@ -19,9 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import java.util.Objects;
 import org.springframework.data.domain.Page;
 
 /**
@@ -31,9 +29,6 @@ import org.springframework.data.domain.Page;
  * @version 1.0.0
  * @since 2020/4/29 15:40
  */
-@Data
-@Builder
-@AllArgsConstructor
 @Schema(description = "分页结果对象")
 public class PageModel<T> implements Serializable {
 
@@ -51,6 +46,15 @@ public class PageModel<T> implements Serializable {
 	private List<T> data;
 
 	public PageModel() {
+	}
+
+	public PageModel(long totalSize, int totalPage, int currentPage, int pageSize,
+		List<T> data) {
+		this.totalSize = totalSize;
+		this.totalPage = totalPage;
+		this.currentPage = currentPage;
+		this.pageSize = pageSize;
+		this.data = data;
 	}
 
 	public static <T> PageModel<T> convertJpaPage(Page<T> page) {
@@ -86,5 +90,130 @@ public class PageModel<T> implements Serializable {
 			.pageSize(pageSize)
 			.data(data)
 			.build();
+	}
+
+	public long getTotalSize() {
+		return totalSize;
+	}
+
+	public void setTotalSize(long totalSize) {
+		this.totalSize = totalSize;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public List<T> getData() {
+		return data;
+	}
+
+	public void setData(List<T> data) {
+		this.data = data;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		PageModel<?> pageModel = (PageModel<?>) o;
+		return totalSize == pageModel.totalSize && totalPage == pageModel.totalPage
+			&& currentPage == pageModel.currentPage && pageSize == pageModel.pageSize
+			&& Objects.equals(data, pageModel.data);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(totalSize, totalPage, currentPage, pageSize, data);
+	}
+
+	@Override
+	public String toString() {
+		return "PageModel{" +
+			"totalSize=" + totalSize +
+			", totalPage=" + totalPage +
+			", currentPage=" + currentPage +
+			", pageSize=" + pageSize +
+			", data=" + data +
+			'}';
+	}
+
+	public static <T> PageModelBuilder<T> builder() {
+		return new PageModelBuilder<>();
+	}
+
+	public static final class PageModelBuilder<T> {
+
+		private long totalSize;
+		private int totalPage;
+		private int currentPage;
+		private int pageSize;
+		private List<T> data;
+
+		private PageModelBuilder() {
+		}
+
+		public static PageModelBuilder aPageModel() {
+			return new PageModelBuilder();
+		}
+
+		public PageModelBuilder totalSize(long totalSize) {
+			this.totalSize = totalSize;
+			return this;
+		}
+
+		public PageModelBuilder totalPage(int totalPage) {
+			this.totalPage = totalPage;
+			return this;
+		}
+
+		public PageModelBuilder currentPage(int currentPage) {
+			this.currentPage = currentPage;
+			return this;
+		}
+
+		public PageModelBuilder pageSize(int pageSize) {
+			this.pageSize = pageSize;
+			return this;
+		}
+
+		public PageModelBuilder data(List<T> data) {
+			this.data = data;
+			return this;
+		}
+
+		public PageModel build() {
+			PageModel pageModel = new PageModel();
+			pageModel.setTotalSize(totalSize);
+			pageModel.setTotalPage(totalPage);
+			pageModel.setCurrentPage(currentPage);
+			pageModel.setPageSize(pageSize);
+			pageModel.setData(data);
+			return pageModel;
+		}
 	}
 }

@@ -11,7 +11,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -24,10 +23,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2019/9/15
  */
-@AllArgsConstructor
 public class VersionFilter extends OncePerRequestFilter {
 
 	private final FilterProperties filterProperties;
+
+	public VersionFilter(FilterProperties filterProperties) {
+		this.filterProperties = filterProperties;
+	}
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

@@ -52,12 +52,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/role")
 @Tag(name = "角色管理API", description = "角色管理API")
 public class SysRoleController {
 
 	private final ISysRoleService sysRoleService;
+
+	public SysRoleController(ISysRoleService sysRoleService) {
+		this.sysRoleService = sysRoleService;
+	}
 
 	@Operation(summary = "根据角色id获取角色信息", description = "根据角色id获取角色信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据角色id获取角色信息")

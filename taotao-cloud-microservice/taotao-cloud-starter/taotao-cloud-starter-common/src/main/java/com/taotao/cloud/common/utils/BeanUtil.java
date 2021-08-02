@@ -21,7 +21,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import lombok.experimental.UtilityClass;
 import org.springframework.boot.convert.ApplicationConversionService;
 
 /**
@@ -31,7 +30,6 @@ import org.springframework.boot.convert.ApplicationConversionService;
  * @version 1.0.0
  * @since 2019/9/8
  */
-@UtilityClass
 public class BeanUtil {
 
 	/**
@@ -40,7 +38,7 @@ public class BeanUtil {
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
 	 */
-	public void copyIgnoredNull(Object source, Object target) {
+	public static void copyIgnoredNull(Object source, Object target) {
 		cn.hutool.core.bean.BeanUtil
 			.copyProperties(source, target, CopyOptions.create().ignoreNullValue().ignoreError());
 	}
@@ -51,7 +49,7 @@ public class BeanUtil {
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
 	 */
-	public void copyIncludeNull(Object source, Object target) {
+	public static void copyIncludeNull(Object source, Object target) {
 		cn.hutool.core.bean.BeanUtil
 			.copyProperties(source, target, CopyOptions.create().ignoreError());
 	}
@@ -65,7 +63,7 @@ public class BeanUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
-	public <T> T convert(Object value, Class<T> type) {
+	public static <T> T convert(Object value, Class<T> type) {
 		if (value == null) {
 			return null;
 		}
@@ -81,7 +79,7 @@ public class BeanUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
-	public <T> T tryConvert(Object value, Class<T> type) {
+	public static <T> T tryConvert(Object value, Class<T> type) {
 		try {
 			return convert(value, type);
 		} catch (Exception e) {
@@ -97,7 +95,7 @@ public class BeanUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:46
 	 */
-	public <T> T deepClone(T obj) {
+	public static <T> T deepClone(T obj) {
 		try {
 			try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream()) {
 				try (ObjectOutputStream out = new ObjectOutputStream(byteOut)) {

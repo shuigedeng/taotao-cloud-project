@@ -3,6 +3,6 @@ dependencies {
 
     api "org.springframework.boot:spring-boot-starter-data-elasticsearch"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

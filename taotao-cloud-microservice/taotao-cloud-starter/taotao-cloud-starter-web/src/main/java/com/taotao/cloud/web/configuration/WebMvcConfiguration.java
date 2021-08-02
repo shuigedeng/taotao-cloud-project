@@ -67,11 +67,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @AutoConfigureBefore({PrometheusConfiguration.class})
-@AllArgsConstructor
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	private final RedisRepository redisRepository;
 	private final FilterProperties filterProperties;
+
+	public WebMvcConfiguration(RedisRepository redisRepository,
+		FilterProperties filterProperties) {
+		this.redisRepository = redisRepository;
+		this.filterProperties = filterProperties;
+	}
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {

@@ -16,7 +16,8 @@
 package com.taotao.cloud.log.properties;
 
 import com.taotao.cloud.common.enums.LogTypeEnum;
-import lombok.Data;
+import java.util.Arrays;
+import java.util.Objects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/2 11:19
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.log.request-log")
 public class RequestLogProperties {
@@ -42,4 +42,52 @@ public class RequestLogProperties {
 	 */
 	private String[] types = new String[]{LogTypeEnum.LOGGER.getName()};
 
+	public RequestLogProperties(Boolean enabled, String[] types) {
+		this.enabled = enabled;
+		this.types = types;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String[] getTypes() {
+		return types;
+	}
+
+	public void setTypes(String[] types) {
+		this.types = types;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestLogProperties{" +
+			"enabled=" + enabled +
+			", types=" + Arrays.toString(types) +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		RequestLogProperties that = (RequestLogProperties) o;
+		return Objects.equals(enabled, that.enabled) && Arrays.equals(types,
+			that.types);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = Objects.hash(enabled);
+		result = 31 * result + Arrays.hashCode(types);
+		return result;
+	}
 }

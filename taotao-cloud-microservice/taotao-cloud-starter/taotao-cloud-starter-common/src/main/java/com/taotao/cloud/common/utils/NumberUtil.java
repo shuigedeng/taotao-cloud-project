@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import java.math.BigDecimal;
 import java.util.Random;
-import lombok.experimental.UtilityClass;
 
 /**
  * NumberUtils
@@ -26,7 +25,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2020/6/2 16:39
  */
-@UtilityClass
 public class NumberUtil {
 
 	/**

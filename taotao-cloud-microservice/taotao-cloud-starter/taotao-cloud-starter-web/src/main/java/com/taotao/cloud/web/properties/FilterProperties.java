@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.properties;
 
-import lombok.Data;
+import java.util.Objects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,12 +26,11 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/2 11:15
  */
-@Data
 @RefreshScope
-@ConfigurationProperties(prefix = FilterProperties.BASE_WEB_FILTER_PREFIX)
+@ConfigurationProperties(prefix = FilterProperties.PREFIX)
 public class FilterProperties {
 
-	public static final String BASE_WEB_FILTER_PREFIX = "taotao.cloud.web.filter";
+	public static final String PREFIX = "taotao.cloud.web.filter";
 
 	/**
 	 * 开启负载均衡隔离规则
@@ -52,4 +51,77 @@ public class FilterProperties {
 	 * 开启日志链路追踪过滤器
 	 */
 	private Boolean webContext = true;
+
+	public FilterProperties() {
+	}
+
+	public FilterProperties(Boolean version, Boolean tenant, Boolean trace,
+		Boolean webContext) {
+		this.version = version;
+		this.tenant = tenant;
+		this.trace = trace;
+		this.webContext = webContext;
+	}
+
+	@Override
+	public String toString() {
+		return "FilterProperties{" +
+			"version=" + version +
+			", tenant=" + tenant +
+			", trace=" + trace +
+			", webContext=" + webContext +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		FilterProperties that = (FilterProperties) o;
+		return Objects.equals(version, that.version) && Objects.equals(tenant,
+			that.tenant) && Objects.equals(trace, that.trace) && Objects.equals(
+			webContext, that.webContext);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(version, tenant, trace, webContext);
+	}
+
+	public Boolean getVersion() {
+		return version;
+	}
+
+	public void setVersion(Boolean version) {
+		this.version = version;
+	}
+
+	public Boolean getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Boolean tenant) {
+		this.tenant = tenant;
+	}
+
+	public Boolean getTrace() {
+		return trace;
+	}
+
+	public void setTrace(Boolean trace) {
+		this.trace = trace;
+	}
+
+	public Boolean getWebContext() {
+		return webContext;
+	}
+
+	public void setWebContext(Boolean webContext) {
+		this.webContext = webContext;
+	}
 }

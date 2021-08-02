@@ -23,8 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "地区管理API", description = "地区管理API")
 public class SysRegionController {
 
-	@Autowired
-	private SysRegionService sysRegionService;
+	private final SysRegionService sysRegionService;
+
+	public SysRegionController(SysRegionService sysRegionService) {
+
+		this.sysRegionService = sysRegionService;
+	}
 
 	@Operation(summary = "根据父id查询", description = "根据父id查询", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据父id查询")

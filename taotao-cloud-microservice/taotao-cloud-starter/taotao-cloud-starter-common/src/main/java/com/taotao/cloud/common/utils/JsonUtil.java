@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-import lombok.experimental.UtilityClass;
 
 /**
  * 基于 Jackson 的 json 工具类
@@ -49,7 +48,6 @@ import lombok.experimental.UtilityClass;
  * @version 1.0.0
  * @since 2019/3/5
  */
-@UtilityClass
 public class JsonUtil {
 
 	public static final ObjectMapper MAPPER = new ObjectMapper();

@@ -17,7 +17,6 @@ package com.taotao.cloud.log.utils;
 
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import java.lang.reflect.Method;
-import lombok.experimental.UtilityClass;
 import org.aspectj.lang.JoinPoint;
 
 /**
@@ -27,7 +26,6 @@ import org.aspectj.lang.JoinPoint;
  * @version v1.0
  * @since 2020/4/27 16:16
  */
-@UtilityClass
 public class LoggerUtil {
 
 	/**
@@ -38,7 +36,7 @@ public class LoggerUtil {
 	 * @author shuigedeng
 	 * @since 2020/4/30 10:21
 	 */
-	public String getControllerMethodDescription(JoinPoint point) throws Exception {
+	public static String getControllerMethodDescription(JoinPoint point) throws Exception {
 		// 获取连接点目标类名
 		String targetName = point.getTarget().getClass().getName();
 		// 获取连接点签名的方法名

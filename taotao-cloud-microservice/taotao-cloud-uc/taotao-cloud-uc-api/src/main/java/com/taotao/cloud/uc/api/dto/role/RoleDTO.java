@@ -1,15 +1,12 @@
 package com.taotao.cloud.uc.api.dto.role;
 
+import com.taotao.cloud.uc.api.vo.DeptTreeVo.DeptTreeVoBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-
+import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * 角色DTO
@@ -17,10 +14,6 @@ import java.io.Serializable;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "RoleDTO", description = "添加角色对象DTO")
 public class RoleDTO implements Serializable {
 
@@ -40,5 +33,105 @@ public class RoleDTO implements Serializable {
 	@Schema(description = "备注")
 	private String remark;
 
+	@Override
+	public String toString() {
+		return "RoleDTO{" +
+			"name='" + name + '\'' +
+			", code='" + code + '\'' +
+			", remark='" + remark + '\'' +
+			'}';
+	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		RoleDTO roleDTO = (RoleDTO) o;
+		return Objects.equals(name, roleDTO.name) && Objects.equals(code,
+			roleDTO.code) && Objects.equals(remark, roleDTO.remark);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, code, remark);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public RoleDTO() {
+	}
+
+	public RoleDTO(String name, String code, String remark) {
+		this.name = name;
+		this.code = code;
+		this.remark = remark;
+	}
+
+	public static RoleDTOBuilder builder() {
+		return new RoleDTOBuilder();
+	}
+
+
+	public static final class RoleDTOBuilder {
+
+		private String name;
+		private String code;
+		private String remark;
+
+		private RoleDTOBuilder() {
+		}
+
+		public static RoleDTOBuilder aRoleDTO() {
+			return new RoleDTOBuilder();
+		}
+
+		public RoleDTOBuilder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public RoleDTOBuilder code(String code) {
+			this.code = code;
+			return this;
+		}
+
+		public RoleDTOBuilder remark(String remark) {
+			this.remark = remark;
+			return this;
+		}
+
+		public RoleDTO build() {
+			RoleDTO roleDTO = new RoleDTO();
+			roleDTO.setName(name);
+			roleDTO.setCode(code);
+			roleDTO.setRemark(remark);
+			return roleDTO;
+		}
+	}
 }

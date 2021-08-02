@@ -18,12 +18,7 @@ package com.taotao.cloud.common.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
+import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -33,12 +28,6 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @version 1.0.0
  * @since 2020/5/2 16:40
  */
-@Data
-@Accessors(chain = true)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder
 @Schema(name = "BaseDateTimeQuery", description = "基础时间查询对象")
 public class BaseDateTimeQuery implements Serializable {
 
@@ -51,4 +40,88 @@ public class BaseDateTimeQuery implements Serializable {
 	@Schema(description = "结束时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime endTime;
+
+	public BaseDateTimeQuery() {
+	}
+
+	public BaseDateTimeQuery(LocalDateTime startTime, LocalDateTime endTime) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		BaseDateTimeQuery that = (BaseDateTimeQuery) o;
+		return Objects.equals(startTime, that.startTime) && Objects.equals(endTime,
+			that.endTime);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(startTime, endTime);
+	}
+
+	@Override
+	public String toString() {
+		return "BaseDateTimeQuery{" +
+			"startTime=" + startTime +
+			", endTime=" + endTime +
+			'}';
+	}
+
+	public static BaseDateTimeQueryBuilder builder() {
+		return new BaseDateTimeQueryBuilder();
+	}
+
+	public static final class BaseDateTimeQueryBuilder {
+
+		private LocalDateTime startTime;
+		private LocalDateTime endTime;
+
+		private BaseDateTimeQueryBuilder() {
+		}
+
+		public static BaseDateTimeQueryBuilder aBaseDateTimeQuery() {
+			return new BaseDateTimeQueryBuilder();
+		}
+
+		public BaseDateTimeQueryBuilder startTime(LocalDateTime startTime) {
+			this.startTime = startTime;
+			return this;
+		}
+
+		public BaseDateTimeQueryBuilder endTime(LocalDateTime endTime) {
+			this.endTime = endTime;
+			return this;
+		}
+
+		public BaseDateTimeQuery build() {
+			BaseDateTimeQuery baseDateTimeQuery = new BaseDateTimeQuery();
+			baseDateTimeQuery.setStartTime(startTime);
+			baseDateTimeQuery.setEndTime(endTime);
+			return baseDateTimeQuery;
+		}
+	}
 }

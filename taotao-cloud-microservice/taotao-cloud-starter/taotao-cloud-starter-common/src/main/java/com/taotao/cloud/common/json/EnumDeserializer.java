@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.taotao.cloud.common.utils.LogUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -40,7 +39,6 @@ import org.springframework.beans.BeanUtils;
  * @see com.fasterxml.jackson.databind.deser.std.EnumDeserializer
  * @since 2021/6/22 17:27
  */
-@Slf4j
 @Deprecated
 public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 

@@ -16,7 +16,6 @@
 package com.taotao.cloud.common.utils;
 
 import java.util.Random;
-import lombok.extern.slf4j.Slf4j;
 
 /***
  *
@@ -25,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @since 2020/6/2 16:50
  */
-@Slf4j
 public final class PingYinUtil {
 
 	private PingYinUtil() {

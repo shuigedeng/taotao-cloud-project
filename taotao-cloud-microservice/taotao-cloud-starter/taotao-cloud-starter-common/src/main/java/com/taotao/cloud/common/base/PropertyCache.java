@@ -20,8 +20,6 @@ import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import lombok.val;
-import lombok.var;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 
@@ -48,16 +46,16 @@ public class PropertyCache implements CommandLineRunner {
 
 	public <T> T get(String key, T defaultValue) {
 		if (!isStart) {
-			val v = PropertyUtil.getProperty(key);
+			String v = PropertyUtil.getProperty(key);
 			if (v == null) {
 				return defaultValue;
 			} else {
 				return (T) BeanUtil.convert(v, defaultValue.getClass());
 			}
 		}
-		var value = cache.get(key);
+		Object value = cache.get(key);
 		if (value == null) {
-			val v = PropertyUtil.getProperty(key);
+			String v = PropertyUtil.getProperty(key);
 			if (v != null) {
 				cache.put(key, v);
 			} else {

@@ -4,6 +4,6 @@ dependencies {
     api "org.apache.shardingsphere:sharding-jdbc-spring-namespace"
     api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter"
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

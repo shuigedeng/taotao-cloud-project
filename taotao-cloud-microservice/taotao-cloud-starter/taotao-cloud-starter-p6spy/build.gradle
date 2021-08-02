@@ -3,6 +3,6 @@ dependencies {
 
     implementation 'p6spy:p6spy:3.9.1'
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

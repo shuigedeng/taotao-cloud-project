@@ -18,7 +18,6 @@ package com.taotao.cloud.common.enums;
 import com.taotao.cloud.common.base.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import lombok.val;
 
 /**
  * 默认环境枚举
@@ -87,7 +86,7 @@ public enum EnvironmentEnum {
 	}
 
 	public static EnvironmentEnum get(String serverKey, EnvironmentEnum defaultValue) {
-		for (val e : EnvironmentEnum.values()) {
+		for (EnvironmentEnum e : EnvironmentEnum.values()) {
 			if (e.getServerkey().equalsIgnoreCase(serverKey) && e.getEnv().toString()
 				.equalsIgnoreCase(PropertyUtil.getPropertyCache(
 					CoreProperties.TaoTaoCloudEnv, ""))) {

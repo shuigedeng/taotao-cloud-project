@@ -11,7 +11,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,10 +21,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2020/6/15 11:30
  */
-@AllArgsConstructor
 public class TenantFilter extends OncePerRequestFilter {
 
 	private final FilterProperties filterProperties;
+
+	public TenantFilter(FilterProperties filterProperties) {
+		this.filterProperties = filterProperties;
+	}
 
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {

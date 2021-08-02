@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/job")
 @Tag(name = "岗位管理API", description = "岗位管理API")
 public class SysJobController {
 
 	private final ISysJobService sysJobService;
 
+	public SysJobController(ISysJobService sysJobService) {
+		this.sysJobService = sysJobService;
+	}
 }

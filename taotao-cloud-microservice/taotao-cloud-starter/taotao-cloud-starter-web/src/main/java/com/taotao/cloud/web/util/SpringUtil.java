@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.util;
 
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.LogUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +15,6 @@ import java.util.List;
  *
  * @author shuigedeng
  */
-@Slf4j
 public class SpringUtil implements ApplicationContextAware, DisposableBean {
 
 	private static ApplicationContext applicationContext = null;
@@ -31,7 +30,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 		if (addCallback) {
 			SpringUtil.CALL_BACKS.add(callBack);
 		} else {
-			log.warn("CallBack：{} 已无法添加！立即执行", callBack.getCallBackName());
+			LogUtil.warn("CallBack：{} 已无法添加！立即执行", callBack.getCallBackName());
 			callBack.executor();
 		}
 	}
@@ -104,7 +103,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 清除SpringContextHolder中的ApplicationContext为Null.
 	 */
 	private static void clearHolder() {
-		log.debug("清除SpringContextHolder中的ApplicationContext:"
+		LogUtil.debug("清除SpringContextHolder中的ApplicationContext:"
 			+ applicationContext);
 		applicationContext = null;
 	}
@@ -117,7 +116,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		if (SpringUtil.applicationContext != null) {
-			log.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:"
+			LogUtil.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:"
 				+ SpringUtil.applicationContext);
 		}
 		SpringUtil.applicationContext = applicationContext;

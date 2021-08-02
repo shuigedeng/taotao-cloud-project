@@ -16,9 +16,10 @@
 package com.taotao.cloud.common.lock;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.aspect.BaseAspect;
 import com.taotao.cloud.common.exception.LockException;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Objects;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,12 +38,11 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * @version 1.0.0
  * @since 2020/5/2 09:12
  */
-@Slf4j
 @Aspect
-public class LockAspect {
+public class LockAspect extends BaseAspect {
 
 	@Autowired(required = false)
-	private DistributedLock locker;
+	private DistributedLock distributedLock;
 
 	/**
 	 * 用于SpEL表达式解析.
@@ -55,13 +55,13 @@ public class LockAspect {
 	private final DefaultParameterNameDiscoverer nameDiscoverer = new DefaultParameterNameDiscoverer();
 
 	@Around("@within(lock) || @annotation(lock)")
-	public Object aroundLock(ProceedingJoinPoint point, Lock lock) throws Throwable {
+	public Object aroundLock(ProceedingJoinPoint point, Lock lock)
+		throws Throwable {
 		if (lock == null) {
-			// 获取类上的注解
 			lock = point.getTarget().getClass().getDeclaredAnnotation(Lock.class);
 		}
 		String lockKey = lock.key();
-		if (locker == null) {
+		if (distributedLock == null) {
 			throw new LockException("DistributedLock is null");
 		}
 		if (StrUtil.isEmpty(lockKey)) {
@@ -70,27 +70,35 @@ public class LockAspect {
 
 		if (lockKey.contains("#")) {
 			MethodSignature methodSignature = (MethodSignature) point.getSignature();
-			//获取方法参数值
 			Object[] args = point.getArgs();
 			lockKey = getValBySpEL(lockKey, methodSignature, args);
 		}
+
 		ZLock lockObj = null;
 		try {
 			//加锁
 			if (lock.waitTime() > 0) {
-				lockObj = locker.tryLock(lockKey, lock.waitTime(), lock.leaseTime(), lock.unit(),
+				lockObj = distributedLock.tryLock(lockKey,
+					lock.waitTime(),
+					lock.leaseTime(),
+					lock.unit(),
 					lock.isFair());
 			} else {
-				lockObj = locker.lock(lockKey, lock.leaseTime(), lock.unit(), lock.isFair());
+				lockObj = distributedLock.tryLock(lockKey,
+					lock.leaseTime(),
+					lock.unit(),
+					lock.isFair());
 			}
 
 			if (lockObj != null) {
+				LogUtil.info("获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
 				return point.proceed();
 			} else {
+				LogUtil.error("获取分布式锁[失败]");
 				throw new LockException("锁等待超时");
 			}
 		} finally {
-			locker.unlock(lockObj);
+			distributedLock.unlock(lockObj);
 		}
 	}
 

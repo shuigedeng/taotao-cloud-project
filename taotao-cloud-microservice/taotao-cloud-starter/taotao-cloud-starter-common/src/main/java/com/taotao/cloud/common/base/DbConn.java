@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
-import lombok.Data;
 
 /**
  * DbConn
@@ -40,7 +39,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2021/6/22 17:08
  **/
-@Data
 public final class DbConn implements AutoCloseable {
 
 	Connection conn;

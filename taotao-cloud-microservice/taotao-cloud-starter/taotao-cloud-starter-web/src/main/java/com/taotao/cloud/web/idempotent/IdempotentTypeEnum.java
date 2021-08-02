@@ -1,16 +1,11 @@
 package com.taotao.cloud.web.idempotent;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 /**
  * 幂等枚举类
  *
  * @author shuigedeng
  */
-@Getter
-@AllArgsConstructor
 public enum IdempotentTypeEnum {
 
 	/**
@@ -28,4 +23,17 @@ public enum IdempotentTypeEnum {
 
 	private final Integer index;
 	private final String title;
+
+	IdempotentTypeEnum(Integer index, String title) {
+		this.index = index;
+		this.title = title;
+	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public String getTitle() {
+		return title;
+	}
 }

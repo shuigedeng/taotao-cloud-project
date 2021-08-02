@@ -1,4 +1,4 @@
-package com.taotao.cloud.redis.properties;
+package com.taotao.cloud.redis.enums;
 
 /**
  * 序列化类型

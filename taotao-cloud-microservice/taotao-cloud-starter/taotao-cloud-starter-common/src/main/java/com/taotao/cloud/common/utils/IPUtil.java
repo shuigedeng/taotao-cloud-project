@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Objects;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * IP工具类
@@ -26,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
  * @version 1.0.0
  * @since 2020/4/30 10:28
  */
-@Slf4j
 public class IPUtil {
 
 	private final static boolean IP_LOCAL = false;

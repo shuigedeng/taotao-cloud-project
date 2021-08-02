@@ -1,9 +1,9 @@
 package com.taotao.cloud.web.template;
 
 import com.taotao.cloud.common.utils.JsonUtil;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.val;
 
 /**
  * 底层模板方法的扩展，用于前台freemarker的java函数扩展，方便使用。 但是使用前要么在controller层（SpringMvcController）进行重新注入，要么在类似NetMvcHandlerInterceptor拦截器方式注入重载
@@ -73,7 +73,7 @@ public class HtmlHelper extends SimpleTemplateProvider {
 
 	public String enumDesc(String enumClass, Object value) {
 		try {
-			for (val item : Class.forName(enumClass).getEnumConstants()) {
+			for (Object item : Class.forName(enumClass).getEnumConstants()) {
 				if (item == value || item.getClass().getField("Value").get(item).toString()
 					.equals(value.toString())) {
 					return item.getClass().getField("Desc").get(item).toString();
@@ -87,8 +87,8 @@ public class HtmlHelper extends SimpleTemplateProvider {
 
 	public List<Object> enums(String enumClass) {
 		try {
-			val objs = new ArrayList<Object>();
-			for (val item : Class.forName(enumClass).getEnumConstants()) {
+			List<Object> objs = new ArrayList<Object>();
+			for (Object item : Class.forName(enumClass).getEnumConstants()) {
 				objs.add(item);
 			}
 			return objs;
@@ -99,7 +99,7 @@ public class HtmlHelper extends SimpleTemplateProvider {
 
 	public Object filed(Object o, String filedName) {
 		try {
-			val f = o.getClass().getField(filedName);
+			Field f = o.getClass().getField(filedName);
 			f.setAccessible(true);
 			return f.get(o);
 		} catch (Exception e) {
@@ -109,11 +109,11 @@ public class HtmlHelper extends SimpleTemplateProvider {
 
 	public Object filed2(Object o, String filedName) {
 		try {
-			val fs = filedName.split("\\.");
+			String[] fs = filedName.split("\\.");
 			Object d = o;
-			for (val f : fs) {
+			for (String f : fs) {
 				if (d != null) {
-					val v = d.getClass().getDeclaredField(f);
+					Field v = d.getClass().getDeclaredField(f);
 					v.setAccessible(true);
 					d = v.get(d);
 				} else {

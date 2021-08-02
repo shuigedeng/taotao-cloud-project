@@ -2,11 +2,8 @@ package com.taotao.cloud.uc.api.dto.resource;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -15,10 +12,6 @@ import org.hibernate.validator.constraints.Length;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Schema(name = "ResourceDTO", description = "添加资源对象DTO")
 public class ResourceDTO implements Serializable {
 
@@ -66,4 +59,274 @@ public class ResourceDTO implements Serializable {
 
 	@Schema(description = "排序值")
 	private Integer sortNum;
+
+	@Override
+	public String toString() {
+		return "ResourceDTO{" +
+			"name='" + name + '\'' +
+			", type=" + type +
+			", perms='" + perms + '\'' +
+			", path='" + path + '\'' +
+			", component='" + component + '\'' +
+			", parentId=" + parentId +
+			", icon='" + icon + '\'' +
+			", keepAlive=" + keepAlive +
+			", hidden=" + hidden +
+			", alwaysShow=" + alwaysShow +
+			", redirect='" + redirect + '\'' +
+			", isFrame=" + isFrame +
+			", sortNum=" + sortNum +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ResourceDTO that = (ResourceDTO) o;
+		return Objects.equals(name, that.name) && Objects.equals(type, that.type)
+			&& Objects.equals(perms, that.perms) && Objects.equals(path,
+			that.path) && Objects.equals(component, that.component)
+			&& Objects.equals(parentId, that.parentId) && Objects.equals(icon,
+			that.icon) && Objects.equals(keepAlive, that.keepAlive)
+			&& Objects.equals(hidden, that.hidden) && Objects.equals(alwaysShow,
+			that.alwaysShow) && Objects.equals(redirect, that.redirect)
+			&& Objects.equals(isFrame, that.isFrame) && Objects.equals(sortNum,
+			that.sortNum);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, type, perms, path, component, parentId, icon, keepAlive, hidden,
+			alwaysShow, redirect, isFrame, sortNum);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Byte getType() {
+		return type;
+	}
+
+	public void setType(Byte type) {
+		this.type = type;
+	}
+
+	public String getPerms() {
+		return perms;
+	}
+
+	public void setPerms(String perms) {
+		this.perms = perms;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getComponent() {
+		return component;
+	}
+
+	public void setComponent(String component) {
+		this.component = component;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Boolean getKeepAlive() {
+		return keepAlive;
+	}
+
+	public void setKeepAlive(Boolean keepAlive) {
+		this.keepAlive = keepAlive;
+	}
+
+	public Boolean getHidden() {
+		return hidden;
+	}
+
+	public void setHidden(Boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public Boolean getAlwaysShow() {
+		return alwaysShow;
+	}
+
+	public void setAlwaysShow(Boolean alwaysShow) {
+		this.alwaysShow = alwaysShow;
+	}
+
+	public String getRedirect() {
+		return redirect;
+	}
+
+	public void setRedirect(String redirect) {
+		this.redirect = redirect;
+	}
+
+	public Boolean getFrame() {
+		return isFrame;
+	}
+
+	public void setFrame(Boolean frame) {
+		isFrame = frame;
+	}
+
+	public Integer getSortNum() {
+		return sortNum;
+	}
+
+	public void setSortNum(Integer sortNum) {
+		this.sortNum = sortNum;
+	}
+
+	public ResourceDTO() {
+	}
+
+	public ResourceDTO(String name, Byte type, String perms, String path, String component,
+		Long parentId, String icon, Boolean keepAlive, Boolean hidden, Boolean alwaysShow,
+		String redirect, Boolean isFrame, Integer sortNum) {
+		this.name = name;
+		this.type = type;
+		this.perms = perms;
+		this.path = path;
+		this.component = component;
+		this.parentId = parentId;
+		this.icon = icon;
+		this.keepAlive = keepAlive;
+		this.hidden = hidden;
+		this.alwaysShow = alwaysShow;
+		this.redirect = redirect;
+		this.isFrame = isFrame;
+		this.sortNum = sortNum;
+	}
+
+	public static ResourceDTOBuilder builder() {
+		return new ResourceDTOBuilder();
+	}
+
+
+	public static final class ResourceDTOBuilder {
+
+		private String name;
+		private Byte type;
+		private String perms;
+		private String path;
+		private String component;
+		private Long parentId;
+		private String icon;
+		private Boolean keepAlive;
+		private Boolean hidden;
+		private Boolean alwaysShow;
+		private String redirect;
+		private Boolean isFrame;
+		private Integer sortNum;
+
+		private ResourceDTOBuilder() {
+		}
+
+		public static ResourceDTOBuilder aResourceDTO() {
+			return new ResourceDTOBuilder();
+		}
+
+		public ResourceDTOBuilder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public ResourceDTOBuilder type(Byte type) {
+			this.type = type;
+			return this;
+		}
+
+		public ResourceDTOBuilder perms(String perms) {
+			this.perms = perms;
+			return this;
+		}
+
+		public ResourceDTOBuilder path(String path) {
+			this.path = path;
+			return this;
+		}
+
+		public ResourceDTOBuilder component(String component) {
+			this.component = component;
+			return this;
+		}
+
+		public ResourceDTOBuilder parentId(Long parentId) {
+			this.parentId = parentId;
+			return this;
+		}
+
+		public ResourceDTOBuilder icon(String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public ResourceDTOBuilder keepAlive(Boolean keepAlive) {
+			this.keepAlive = keepAlive;
+			return this;
+		}
+
+		public ResourceDTOBuilder hidden(Boolean hidden) {
+			this.hidden = hidden;
+			return this;
+		}
+
+		public ResourceDTOBuilder alwaysShow(Boolean alwaysShow) {
+			this.alwaysShow = alwaysShow;
+			return this;
+		}
+
+		public ResourceDTOBuilder redirect(String redirect) {
+			this.redirect = redirect;
+			return this;
+		}
+
+		public ResourceDTOBuilder isFrame(Boolean isFrame) {
+			this.isFrame = isFrame;
+			return this;
+		}
+
+		public ResourceDTOBuilder sortNum(Integer sortNum) {
+			this.sortNum = sortNum;
+			return this;
+		}
+
+		public ResourceDTO build() {
+			return new ResourceDTO(name, type, perms, path, component, parentId, icon, keepAlive,
+				hidden, alwaysShow, redirect, isFrame, sortNum);
+		}
+	}
 }
+

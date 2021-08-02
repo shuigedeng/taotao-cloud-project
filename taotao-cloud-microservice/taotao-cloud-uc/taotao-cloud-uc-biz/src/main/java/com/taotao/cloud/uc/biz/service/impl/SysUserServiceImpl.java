@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,10 +31,17 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/4/30 13:22
  */
 @Service
-@AllArgsConstructor
 public class SysUserServiceImpl implements ISysUserService {
+
 	private final SysUserRepository sysUserRepository;
 	private final ISysUserRoleService sysUserRoleService;
+
+	public SysUserServiceImpl(SysUserRepository sysUserRepository,
+		ISysUserRoleService sysUserRoleService) {
+		this.sysUserRepository = sysUserRepository;
+		this.sysUserRoleService = sysUserRoleService;
+	}
+
 	private final static QSysUser SYS_USER = QSysUser.sysUser;
 
 	private final static String DEFAULT_PASSWORD = "123456";
@@ -190,7 +196,6 @@ public class SysUserServiceImpl implements ISysUserService {
 		findUserInfoById(userId);
 		return sysUserRoleService.saveUserRoles(userId, userRoleDTO.getRoleIds());
 	}
-
 
 //    @Override
 //    public boolean doPostSignUp(SysUser user) {

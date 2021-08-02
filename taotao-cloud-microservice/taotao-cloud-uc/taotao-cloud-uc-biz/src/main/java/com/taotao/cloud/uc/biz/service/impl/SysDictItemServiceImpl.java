@@ -14,7 +14,6 @@ import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/4/30 11:24
  */
 @Service
-@AllArgsConstructor
 public class SysDictItemServiceImpl implements ISysDictItemService {
     private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
     private final static BooleanExpression PREDICATE = SYS_DICT_ITEM.delFlag.eq(false);
@@ -35,7 +33,12 @@ public class SysDictItemServiceImpl implements ISysDictItemService {
 
     private final SysDictItemRepository dictItemRepository;
 
-    @Override
+	public SysDictItemServiceImpl(
+		SysDictItemRepository dictItemRepository) {
+		this.dictItemRepository = dictItemRepository;
+	}
+
+	@Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteByDictId(Long dictId) {
         dictItemRepository.deleteByDictId(dictId);

@@ -18,7 +18,6 @@ package com.taotao.cloud.web.configuration;
 import com.taotao.cloud.common.utils.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
@@ -28,7 +27,6 @@ import org.springframework.web.WebApplicationInitializer;
  * @version 1.0.0
  * @since 2021/04/08 15:26
  */
-@Slf4j
 public class ServletConfiguration implements WebApplicationInitializer {
 
 	@Override

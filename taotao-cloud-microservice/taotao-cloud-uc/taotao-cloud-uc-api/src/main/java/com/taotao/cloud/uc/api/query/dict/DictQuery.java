@@ -15,15 +15,10 @@
  */
 package com.taotao.cloud.uc.api.query.dict;
 
+import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO.QueryRegionByParentIdVOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
+import java.util.Objects;
 
 /**
  * 字典查询query
@@ -32,13 +27,6 @@ import lombok.experimental.Accessors;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Data
-@Builder
-@Accessors(chain = true)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @Schema(name = "DictQuery", description = "字典查询query")
 public class DictQuery implements Serializable {
 
@@ -55,4 +43,123 @@ public class DictQuery implements Serializable {
 
 	@Schema(description = "备注信息")
 	private String remark;
+	public DictQuery(){}
+
+	public DictQuery(String dictName, String dictCode, String description, String remark) {
+		this.dictName = dictName;
+		this.dictCode = dictCode;
+		this.description = description;
+		this.remark = remark;
+	}
+
+	@Override
+	public String toString() {
+		return "DictQuery{" +
+			"dictName='" + dictName + '\'' +
+			", dictCode='" + dictCode + '\'' +
+			", description='" + description + '\'' +
+			", remark='" + remark + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		DictQuery dictQuery = (DictQuery) o;
+		return Objects.equals(dictName, dictQuery.dictName) && Objects.equals(
+			dictCode, dictQuery.dictCode) && Objects.equals(description,
+			dictQuery.description) && Objects.equals(remark, dictQuery.remark);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dictName, dictCode, description, remark);
+	}
+
+	public String getDictName() {
+		return dictName;
+	}
+
+	public void setDictName(String dictName) {
+		this.dictName = dictName;
+	}
+
+	public String getDictCode() {
+		return dictCode;
+	}
+
+	public void setDictCode(String dictCode) {
+		this.dictCode = dictCode;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public static DictQueryBuilder builder() {
+		return new DictQueryBuilder();
+	}
+
+
+
+	public static final class DictQueryBuilder {
+
+		private String dictName;
+		private String dictCode;
+		private String description;
+		private String remark;
+
+		private DictQueryBuilder() {
+		}
+
+		public static DictQueryBuilder aDictQuery() {
+			return new DictQueryBuilder();
+		}
+
+		public DictQueryBuilder dictName(String dictName) {
+			this.dictName = dictName;
+			return this;
+		}
+
+		public DictQueryBuilder dictCode(String dictCode) {
+			this.dictCode = dictCode;
+			return this;
+		}
+
+		public DictQueryBuilder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public DictQueryBuilder remark(String remark) {
+			this.remark = remark;
+			return this;
+		}
+
+		public DictQuery build() {
+			DictQuery dictQuery = new DictQuery();
+			dictQuery.setDictName(dictName);
+			dictQuery.setDictCode(dictCode);
+			dictQuery.setDescription(description);
+			dictQuery.setRemark(remark);
+			return dictQuery;
+		}
+	}
 }

@@ -17,12 +17,12 @@ package com.taotao.cloud.common.base;
 
 import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
 
+import com.taotao.cloud.common.base.Callable.Action0;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.util.Objects;
 
 /**
  * 全局进程关闭事件定义
@@ -76,8 +76,6 @@ public class ProcessExitEvent {
 		}));
 	}
 
-	@Data
-	@AllArgsConstructor
 	private static class ExitCallback {
 
 		Callable.Action0 action0;
@@ -89,5 +87,62 @@ public class ProcessExitEvent {
 		 * 异步支持
 		 */
 		Boolean async = false;
+
+		public ExitCallback(Action0 action0, Integer order, Boolean async) {
+			this.action0 = action0;
+			this.order = order;
+			this.async = async;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			ExitCallback that = (ExitCallback) o;
+			return Objects.equals(action0, that.action0) && Objects.equals(order,
+				that.order) && Objects.equals(async, that.async);
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(action0, order, async);
+		}
+
+		@Override
+		public String toString() {
+			return "ExitCallback{" +
+				"action0=" + action0 +
+				", order=" + order +
+				", async=" + async +
+				'}';
+		}
+
+		public Action0 getAction0() {
+			return action0;
+		}
+
+		public void setAction0(Action0 action0) {
+			this.action0 = action0;
+		}
+
+		public Integer getOrder() {
+			return order;
+		}
+
+		public void setOrder(Integer order) {
+			this.order = order;
+		}
+
+		public Boolean getAsync() {
+			return async;
+		}
+
+		public void setAsync(Boolean async) {
+			this.async = async;
+		}
 	}
 }

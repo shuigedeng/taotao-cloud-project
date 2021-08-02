@@ -25,7 +25,6 @@ import java.util.Base64;
 import java.util.Map;
 import java.util.Objects;
 import javax.servlet.http.HttpServletResponse;
-import lombok.experimental.UtilityClass;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +37,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @version 1.0.0
  * @since 2020/4/30 10:39
  */
-@UtilityClass
 public class SecurityUtil {
 
 	/**
@@ -49,7 +47,8 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
-	public void writeResponse(Result<?> result, HttpServletResponse response) throws IOException {
+	public static void writeResponse(Result<?> result, HttpServletResponse response)
+		throws IOException {
 		response.setCharacterEncoding(CharsetUtil.UTF_8);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		PrintWriter printWriter = response.getWriter();
@@ -64,7 +63,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
-	public Authentication getAuthentication() {
+	public static Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
 
@@ -76,7 +75,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:54
 	 */
-	public SecurityUser getUser(Authentication authentication) {
+	public static SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
 			return null;
 		}
@@ -96,7 +95,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
-	public SecurityUser getUser() {
+	public static SecurityUser getUser() {
 		Authentication authentication = getAuthentication();
 		return getUser(authentication);
 	}
@@ -108,7 +107,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
-	public String getUsername() {
+	public static String getUsername() {
 		SecurityUser user = getUser();
 		return Objects.isNull(user) ? "" : user.getUsername();
 	}
@@ -120,7 +119,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:55
 	 */
-	public Long getUserId() {
+	public static Long getUserId() {
 		SecurityUser user = getUser();
 		return Objects.isNull(user) ? null : user.getUserId();
 	}
@@ -141,7 +140,7 @@ public class SecurityUtil {
 //		return null;
 //	}
 
-	private final String BASIC_ = "Basic ";
+	private static final String BASIC_ = "Basic ";
 
 //	/**
 //	 * 获取request(header/param)中的token
@@ -171,7 +170,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:58
 	 */
-	public boolean validatePass(String newPass, String passwordEncoderOldPass) {
+	public static boolean validatePass(String newPass, String passwordEncoderOldPass) {
 		return getPasswordEncoder().matches(newPass, passwordEncoderOldPass);
 	}
 
@@ -182,7 +181,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
-	public BCryptPasswordEncoder getPasswordEncoder() {
+	public static BCryptPasswordEncoder getPasswordEncoder() {
 		BCryptPasswordEncoder passwordEncoder = ContextUtil
 			.getBean(BCryptPasswordEncoder.class, true);
 		if (Objects.isNull(passwordEncoder)) {
@@ -240,7 +239,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
-	public String[] extractHeaderClient(String header) {
+	public static String[] extractHeaderClient(String header) {
 		byte[] base64Client = header.substring(BASIC_.length()).getBytes(StandardCharsets.UTF_8);
 		byte[] decoded = Base64.getDecoder().decode(base64Client);
 		String clientStr = new String(decoded, StandardCharsets.UTF_8);
@@ -259,7 +258,7 @@ public class SecurityUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:59
 	 */
-	public String getUsername(Authentication authentication) {
+	public static String getUsername(Authentication authentication) {
 		Object principal = authentication.getPrincipal();
 		String username = null;
 		if (principal instanceof SecurityUser) {

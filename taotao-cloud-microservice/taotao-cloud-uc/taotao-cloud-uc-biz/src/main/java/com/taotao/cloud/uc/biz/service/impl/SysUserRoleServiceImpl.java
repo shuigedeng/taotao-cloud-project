@@ -21,7 +21,6 @@ import com.taotao.cloud.uc.biz.entity.QSysUserRole;
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.biz.repository.SysUserRoleRepository;
 import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,14 +33,19 @@ import java.util.stream.Collectors;
  * @since 2020/10/21 09:20
  * @version 1.0.0
  */
-@AllArgsConstructor
 @Service
 public class SysUserRoleServiceImpl implements ISysUserRoleService {
 
     private final SysUserRoleRepository userRoleRepository;
+
+	public SysUserRoleServiceImpl(
+		SysUserRoleRepository userRoleRepository) {
+		this.userRoleRepository = userRoleRepository;
+	}
+
     private final static QSysUserRole SYS_USER_ROLE = QSysUserRole.sysUserRole;
 
-    @Override
+	@Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
         BooleanExpression expression = SYS_USER_ROLE.userId.eq(userId);
