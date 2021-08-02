@@ -20,7 +20,6 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.dubbo.biz.repository.PayFlowRepository;
 import com.taotao.cloud.dubbo.biz.service.IPayFlowService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,10 +30,13 @@ import java.util.Optional;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class PayFlowServiceImpl implements IPayFlowService {
 
 	private final PayFlowRepository payFlowRepository;
+
+	public PayFlowServiceImpl(PayFlowRepository payFlowRepository) {
+		this.payFlowRepository = payFlowRepository;
+	}
 
 	@Override
 	public PayFlow findPayFlowById(Long id) {

@@ -2,24 +2,27 @@ package com.taotao.cloud.encrypt.config;
 
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.handler.InitHandler;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
 
 /**
  * 加密过滤器
  *
  * @author gaoyang
  */
-@Slf4j
 public class EncryptFilter implements Filter {
 
 	private EncryptHandler encryptHandler;

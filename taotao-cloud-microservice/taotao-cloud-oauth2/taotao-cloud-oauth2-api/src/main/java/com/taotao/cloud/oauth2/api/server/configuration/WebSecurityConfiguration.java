@@ -19,8 +19,6 @@ import com.taotao.cloud.oauth2.api.server.authentication.TaoTaoCloudAuthenticati
 import com.taotao.cloud.oauth2.api.server.component.Oauth2UserServiceComponent;
 import com.taotao.cloud.oauth2.api.server.handler.OauthLogoutSuccessHandler;
 import com.taotao.cloud.security.service.IUserDetailsService;
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
@@ -81,7 +79,6 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VAL
  */
 @Order(2)
 @EnableWebSecurity
-@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthenticationEntryPoint authenticationEntryPoint;

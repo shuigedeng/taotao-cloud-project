@@ -18,7 +18,6 @@ package com.taotao.cloud.rabbitmq.producer;
 import com.rabbitmq.client.Channel;
 import com.taotao.cloud.rabbitmq.common.Constants;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -36,7 +35,6 @@ import java.util.concurrent.TimeoutException;
  * @version 1.0.0
  * @since 2020/5/28 17:34
  */
-@Slf4j
 @Component
 public class RabbitMQBuildMessageProducer {
 

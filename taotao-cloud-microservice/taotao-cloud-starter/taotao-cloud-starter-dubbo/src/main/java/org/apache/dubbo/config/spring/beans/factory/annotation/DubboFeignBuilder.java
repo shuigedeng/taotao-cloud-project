@@ -1,24 +1,21 @@
 package org.apache.dubbo.config.spring.beans.factory.annotation;
 
+import static com.alibaba.spring.util.AnnotationUtils.getAttributes;
+import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
+
 import feign.Feign;
 import feign.Target;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Objects;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ReflectionUtils;
-
-import java.util.Objects;
-
-import static com.alibaba.spring.util.AnnotationUtils.getAttributes;
-import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
 
 /**
  * Dubbo、Feign整合类
  *
  * @author shuigedeng
  */
-@Slf4j
 public class DubboFeignBuilder extends Feign.Builder {
 
     @Autowired

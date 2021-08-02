@@ -9,6 +9,4 @@ dependencies {
     implementation 'cn.hutool:hutool-all'
     implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
 
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }

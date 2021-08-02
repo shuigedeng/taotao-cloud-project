@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.logistics.biz.controller;
 
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.logistics.api.vo.ExpressCompanyVO;
 import com.taotao.cloud.logistics.biz.entity.ExpressCompany;
@@ -23,7 +22,6 @@ import com.taotao.cloud.logistics.biz.mapper.ExpressCompanyMapper;
 import com.taotao.cloud.logistics.biz.service.IExpressCompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +38,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/express/company")
 @Api(value = "物流公司管理API", tags = {"物流公司管理API"})
 public class ExpressCompanyController {
 
 	private final IExpressCompanyService expressCompanyService;
+
+	public ExpressCompanyController(
+		IExpressCompanyService expressCompanyService) {
+		this.expressCompanyService = expressCompanyService;
+	}
 
 	@ApiOperation("根据id查询物流公司信息")
 	@RequestOperateLog(description = "根据id查询物流公司信息")

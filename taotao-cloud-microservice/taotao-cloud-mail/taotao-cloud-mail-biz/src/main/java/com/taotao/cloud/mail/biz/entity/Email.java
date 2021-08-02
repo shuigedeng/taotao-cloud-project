@@ -1,18 +1,12 @@
 package com.taotao.cloud.mail.biz.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import groovy.transform.EqualsAndHashCode;
+import groovy.transform.ToString;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 /**
  * 邮件信息表
@@ -21,13 +15,6 @@ import java.time.LocalDateTime;
  * @since 2020/11/13 09:46
  * @version 1.0.0
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tt_email")
 @org.hibernate.annotations.Table(appliesTo = "tt_email", comment = "邮件信息表")

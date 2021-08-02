@@ -1,6 +1,5 @@
 package com.taotao.cloud.product.biz.controller;
 
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.product.api.dto.ProductDTO;
 import com.taotao.cloud.product.api.vo.ProductVO;
@@ -9,7 +8,6 @@ import com.taotao.cloud.product.biz.mapper.ProductMapper;
 import com.taotao.cloud.product.biz.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020/4/30 11:03
  */
 @Validated
-@AllArgsConstructor
 @RestController
 @RequestMapping("/product")
 @Api(value = "商品管理API", tags = {"商品管理API"})
 public class ProductController {
 
 	private final IProductService productInfoService;
+
+	public ProductController(IProductService productInfoService) {
+		this.productInfoService = productInfoService;
+	}
 
 	@ApiOperation("根据id查询商品信息")
 	@RequestOperateLog(description = "根据id查询商品信息")

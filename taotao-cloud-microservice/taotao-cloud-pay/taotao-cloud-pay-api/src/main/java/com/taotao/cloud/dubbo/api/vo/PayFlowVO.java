@@ -17,10 +17,6 @@ package com.taotao.cloud.dubbo.api.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,10 +27,6 @@ import java.time.LocalDateTime;
  * @since 2020/11/20 上午9:42
  * @version 1.0.0
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(value = "支付流水信息VO", description = "支付流水信息VO")
 public class PayFlowVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;

@@ -1,8 +1,7 @@
 package com.taotao.cloud.member.biz.controller;
 
 import com.taotao.cloud.member.biz.service.IMemberAddressService;
-import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/member/address")
-@Api(value = "会员收货地址管理API", tags = {"会员收货地址管理API"})
-@AllArgsConstructor
+@Tag(name = "会员收货地址管理API", description = "会员收货地址管理API")
 public class MemberAddressController {
     private final IMemberAddressService memberAddressService;
+
+	public MemberAddressController(
+		IMemberAddressService memberAddressService) {
+		this.memberAddressService = memberAddressService;
+	}
 }

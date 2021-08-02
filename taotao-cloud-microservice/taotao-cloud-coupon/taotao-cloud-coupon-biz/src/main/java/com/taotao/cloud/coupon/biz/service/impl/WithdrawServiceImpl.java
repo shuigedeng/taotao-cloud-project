@@ -18,7 +18,6 @@ package com.taotao.cloud.coupon.biz.service.impl;
 import com.taotao.cloud.coupon.biz.entity.Withdraw;
 import com.taotao.cloud.coupon.biz.repository.WithdrawRepository;
 import com.taotao.cloud.coupon.biz.service.IWithdrawService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,10 +28,14 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class WithdrawServiceImpl implements IWithdrawService {
 
 	private final WithdrawRepository withdrawRepository;
+
+	public WithdrawServiceImpl(
+		WithdrawRepository withdrawRepository) {
+		this.withdrawRepository = withdrawRepository;
+	}
 
 	@Override
 	public Withdraw findWithdrawById(Long id) {

@@ -17,10 +17,6 @@ package com.taotao.cloud.oauth2.api.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,10 +28,6 @@ import java.util.Date;
  * @since 2020/4/29 16:56
  * @version 1.0.0
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(value = "TokenVO", description = "TokenVO")
 public class TokenVO implements Serializable {
 

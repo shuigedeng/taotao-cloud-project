@@ -12,8 +12,6 @@ dependencies {
 
     implementation 'org.apache.hbase:hbase-client:2.4.0'
 
-    implementation 'org.projectlombok:lombok'
-    
 }
 
 configurations {

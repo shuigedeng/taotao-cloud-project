@@ -20,7 +20,6 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.log.biz.entity.MemberLogin;
 import com.taotao.cloud.log.biz.repository.MemberLoginRepository;
 import com.taotao.cloud.log.biz.service.IMemberLoginService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,10 +30,14 @@ import java.util.Optional;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class MemberLoginServiceImpl implements IMemberLoginService {
 
 	private final MemberLoginRepository memberLoginRepository;
+
+	public MemberLoginServiceImpl(
+		MemberLoginRepository memberLoginRepository) {
+		this.memberLoginRepository = memberLoginRepository;
+	}
 
 	@Override
 	public MemberLogin findMemberLoginById(Long id) {

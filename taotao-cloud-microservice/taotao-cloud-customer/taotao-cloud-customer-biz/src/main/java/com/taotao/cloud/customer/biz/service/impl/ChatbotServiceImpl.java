@@ -18,7 +18,6 @@ package com.taotao.cloud.customer.biz.service.impl;
 import com.taotao.cloud.customer.biz.entity.Chatbot;
 import com.taotao.cloud.customer.biz.repository.ChatbotRepository;
 import com.taotao.cloud.customer.biz.service.IChatbotService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,7 +26,6 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class ChatbotServiceImpl implements IChatbotService {
 
 	private final ChatbotRepository chatbotRepository;

@@ -19,7 +19,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/30 下午4:44
  * @version 1.0.0
  */
-@Slf4j
 @Component
 @ChannelHandler.Sharable
 public class NettyByteEncoder extends MessageToByteEncoder<byte[]> {

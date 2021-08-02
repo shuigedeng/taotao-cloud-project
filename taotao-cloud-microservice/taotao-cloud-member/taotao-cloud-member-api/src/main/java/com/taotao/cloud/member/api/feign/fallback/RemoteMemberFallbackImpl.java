@@ -1,8 +1,8 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.RemoteMemberService;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -21,13 +21,13 @@ public class RemoteMemberFallbackImpl implements FallbackFactory<RemoteMemberSer
 			@Override
 			public Result<SecurityUser> getMemberSecurityUser(String getMemberSecurityUser) {
 				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, getMemberSecurityUser);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 
 			@Override
 			public Result<MemberVO> findMemberById(Long id) {
 				LogUtil.error("调用findMemberById异常：{}", throwable, id);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 		};
 	}

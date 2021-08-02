@@ -7,6 +7,4 @@ dependencies {
 
     implementation 'cn.hutool:hutool-all'
 
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }

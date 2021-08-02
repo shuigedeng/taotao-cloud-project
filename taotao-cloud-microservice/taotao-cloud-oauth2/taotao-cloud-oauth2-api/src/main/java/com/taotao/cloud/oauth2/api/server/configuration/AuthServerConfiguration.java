@@ -26,7 +26,6 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
-import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -98,7 +97,6 @@ public class AuthServerConfiguration {
 
 	// 指定token 生成的加解密密钥
 	@Bean
-	@SneakyThrows
 	public JWKSource<SecurityContext> jwkSource() {
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 		keyPairGenerator.initialize(2048);

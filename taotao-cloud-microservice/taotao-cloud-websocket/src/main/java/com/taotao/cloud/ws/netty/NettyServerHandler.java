@@ -26,7 +26,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -36,7 +35,6 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/30 下午4:36
  * @version 1.0.0
  */
-@Slf4j
 @Component
 @ChannelHandler.Sharable
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {

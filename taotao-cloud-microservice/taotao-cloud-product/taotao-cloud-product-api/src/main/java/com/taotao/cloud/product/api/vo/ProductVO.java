@@ -1,9 +1,5 @@
 package com.taotao.cloud.product.api.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,10 +10,6 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 //@ApiModel(value = "商品VO", description = "商品VO")
 public class ProductVO implements Serializable {
 

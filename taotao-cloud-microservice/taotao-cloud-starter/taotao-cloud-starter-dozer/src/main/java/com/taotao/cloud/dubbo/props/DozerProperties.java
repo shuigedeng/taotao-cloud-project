@@ -1,6 +1,5 @@
 package com.taotao.cloud.dubbo.props;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.io.Resource;
@@ -16,7 +15,6 @@ import java.util.stream.Stream;
  * Dozer属性
  * @author shuigedeng
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.dozer")
 public class DozerProperties {
@@ -62,4 +60,6 @@ public class DozerProperties {
             return new Resource[0];
         }
     }
+
+
 }

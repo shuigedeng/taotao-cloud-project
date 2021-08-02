@@ -22,7 +22,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +32,6 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/30 下午4:35
  * @version 1.0.0
  */
-@Slf4j
 @Component
 @Configuration
 public class NettyServer {

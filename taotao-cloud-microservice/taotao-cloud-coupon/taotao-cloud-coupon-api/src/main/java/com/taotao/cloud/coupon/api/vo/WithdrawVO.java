@@ -15,51 +15,234 @@
  */
 package com.taotao.cloud.coupon.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author shuigedeng
- * @since 2020/11/20 上午9:42
  * @version 1.0.0
+ * @since 2020/11/20 上午9:42
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ApiModel(value = "提现申请VO", description = "提现申请VO")
+@Schema(name = "WithdrawVO", description = "提现申请VO")
 public class WithdrawVO implements Serializable {
+
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@ApiModelProperty(value = "申请单号")
+	@Schema(description = "申请单号")
 	private String code;
 
-	@ApiModelProperty(value = "公司ID")
+	@Schema(description = "公司ID")
 	private Long companyId;
 
-	@ApiModelProperty(value = "商城ID")
+	@Schema(description = "商城ID")
 	private Long mallId;
 
-	@ApiModelProperty(value = "提现金额")
+	@Schema(description = "提现金额")
 	private BigDecimal amount;
 
-	@ApiModelProperty(value = "钱包余额")
+	@Schema(description = "钱包余额")
 	private BigDecimal balanceAmount;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
+
+	@Override
+	public String toString() {
+		return "WithdrawVO{" +
+			"id=" + id +
+			", code='" + code + '\'' +
+			", companyId=" + companyId +
+			", mallId=" + mallId +
+			", amount=" + amount +
+			", balanceAmount=" + balanceAmount +
+			", createTime=" + createTime +
+			", lastModifiedTime=" + lastModifiedTime +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		WithdrawVO that = (WithdrawVO) o;
+		return Objects.equals(id, that.id) && Objects.equals(code, that.code)
+			&& Objects.equals(companyId, that.companyId) && Objects.equals(mallId,
+			that.mallId) && Objects.equals(amount, that.amount) && Objects.equals(
+			balanceAmount, that.balanceAmount) && Objects.equals(createTime, that.createTime)
+			&& Objects.equals(lastModifiedTime, that.lastModifiedTime);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, code, companyId, mallId, amount, balanceAmount, createTime,
+			lastModifiedTime);
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Long getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(Long mallId) {
+		this.mallId = mallId;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(BigDecimal balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
+
+	public WithdrawVO() {
+	}
+
+	public WithdrawVO(Long id, String code, Long companyId, Long mallId, BigDecimal amount,
+		BigDecimal balanceAmount, LocalDateTime createTime, LocalDateTime lastModifiedTime) {
+		this.id = id;
+		this.code = code;
+		this.companyId = companyId;
+		this.mallId = mallId;
+		this.amount = amount;
+		this.balanceAmount = balanceAmount;
+		this.createTime = createTime;
+		this.lastModifiedTime = lastModifiedTime;
+	}
+
+	public static WithdrawVOBuilder builder() {
+		return new WithdrawVOBuilder();
+	}
+
+	public static final class WithdrawVOBuilder {
+
+		private Long id;
+		private String code;
+		private Long companyId;
+		private Long mallId;
+		private BigDecimal amount;
+		private BigDecimal balanceAmount;
+		private LocalDateTime createTime;
+		private LocalDateTime lastModifiedTime;
+
+		private WithdrawVOBuilder() {
+		}
+
+		public static WithdrawVOBuilder aWithdrawVO() {
+			return new WithdrawVOBuilder();
+		}
+
+		public WithdrawVOBuilder id(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public WithdrawVOBuilder code(String code) {
+			this.code = code;
+			return this;
+		}
+
+		public WithdrawVOBuilder companyId(Long companyId) {
+			this.companyId = companyId;
+			return this;
+		}
+
+		public WithdrawVOBuilder mallId(Long mallId) {
+			this.mallId = mallId;
+			return this;
+		}
+
+		public WithdrawVOBuilder amount(BigDecimal amount) {
+			this.amount = amount;
+			return this;
+		}
+
+		public WithdrawVOBuilder balanceAmount(BigDecimal balanceAmount) {
+			this.balanceAmount = balanceAmount;
+			return this;
+		}
+
+		public WithdrawVOBuilder createTime(LocalDateTime createTime) {
+			this.createTime = createTime;
+			return this;
+		}
+
+		public WithdrawVOBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
+			this.lastModifiedTime = lastModifiedTime;
+			return this;
+		}
+
+		public WithdrawVO build() {
+			WithdrawVO withdrawVO = new WithdrawVO();
+			withdrawVO.setId(id);
+			withdrawVO.setCode(code);
+			withdrawVO.setCompanyId(companyId);
+			withdrawVO.setMallId(mallId);
+			withdrawVO.setAmount(amount);
+			withdrawVO.setBalanceAmount(balanceAmount);
+			withdrawVO.setCreateTime(createTime);
+			withdrawVO.setLastModifiedTime(lastModifiedTime);
+			return withdrawVO;
+		}
+	}
 }

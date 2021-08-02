@@ -2,13 +2,9 @@ package com.taotao.cloud.order.biz.entity;
 
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 /**
  * 售后退款操作记录表
@@ -16,14 +12,7 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/4/30 15:49
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-//@Entity
+@Entity
 @Table(name = "tt_order_refund_req_record")
 @org.hibernate.annotations.Table(appliesTo = "tt_order_refund_req_record", comment = "售后退款操作记录表")
 public class OrderRefundReqRecord extends BaseEntity {

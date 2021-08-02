@@ -1,7 +1,6 @@
 package com.taotao.cloud.encrypt.handler;
 
 import com.taotao.cloud.encrypt.annotation.SeparateEncrypt;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
  *
  * @author gaoyang
  */
-@Slf4j
 public class InitHandler {
 
 	public static void handler(FilterConfig filterConfig, Set<String> encryptCacheUri, AtomicBoolean isEncryptAnnotation) {

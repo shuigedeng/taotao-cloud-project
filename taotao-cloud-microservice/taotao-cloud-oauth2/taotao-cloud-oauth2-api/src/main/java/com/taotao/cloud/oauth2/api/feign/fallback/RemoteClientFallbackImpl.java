@@ -16,7 +16,6 @@
 package com.taotao.cloud.oauth2.api.feign.fallback;
 
 import com.taotao.cloud.oauth2.api.feign.RemoteClientService;
-import lombok.AllArgsConstructor;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +26,6 @@ import org.springframework.stereotype.Component;
  * @since 2020/4/29 21:43
  * @version 1.0.0
  */
-@AllArgsConstructor
 @Component
 public class RemoteClientFallbackImpl implements FallbackFactory<RemoteClientService> {
     @Override

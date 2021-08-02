@@ -1,8 +1,5 @@
 package com.taotao.cloud.bigdata.realtime.mall.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,9 +9,7 @@ import java.util.Date;
  * Date: 2021/2/24
  * Desc:地区统计宽表实体类
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+
 public class ProvinceStats {
 
     private String stt;

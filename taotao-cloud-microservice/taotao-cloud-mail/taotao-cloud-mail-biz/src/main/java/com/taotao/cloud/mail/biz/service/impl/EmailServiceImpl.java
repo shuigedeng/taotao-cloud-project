@@ -20,7 +20,6 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.mail.biz.entity.Email;
 import com.taotao.cloud.mail.biz.repository.EmailRepository;
 import com.taotao.cloud.mail.biz.service.IEmailService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,10 +30,13 @@ import java.util.Optional;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class EmailServiceImpl implements IEmailService {
 
 	private final EmailRepository emailRepository;
+
+	public EmailServiceImpl(EmailRepository emailRepository) {
+		this.emailRepository = emailRepository;
+	}
 
 	@Override
 	public Email findEmailById(Long id) {

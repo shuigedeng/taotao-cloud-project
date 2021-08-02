@@ -16,12 +16,9 @@
 package com.taotao.cloud.oauth2.api.server.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import groovy.transform.EqualsAndHashCode;
+import groovy.transform.ToString;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
@@ -31,14 +28,6 @@ import javax.persistence.Table;
  * @since 2020/5/2 11:17
  * @version 1.0.0
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
 @Table(name = "oauth_client_details")
 @org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")
 public class Client extends BaseEntity {

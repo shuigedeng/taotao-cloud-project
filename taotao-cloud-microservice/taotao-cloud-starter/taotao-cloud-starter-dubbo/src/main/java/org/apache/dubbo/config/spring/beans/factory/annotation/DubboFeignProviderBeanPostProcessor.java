@@ -1,6 +1,5 @@
 package org.apache.dubbo.config.spring.beans.factory.annotation;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.common.utils.ArrayUtils;
 import org.apache.dubbo.config.MethodConfig;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -45,7 +44,6 @@ import static org.springframework.util.ClassUtils.resolveClassName;
 import static org.springframework.util.StringUtils.hasText;
 
 
-@Slf4j
 public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegistryPostProcessor, EnvironmentAware,
         ResourceLoaderAware, BeanClassLoaderAware {
 

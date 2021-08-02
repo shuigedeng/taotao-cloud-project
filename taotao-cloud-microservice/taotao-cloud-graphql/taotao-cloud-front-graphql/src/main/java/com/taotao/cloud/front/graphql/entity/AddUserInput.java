@@ -15,17 +15,47 @@
  */
 package com.taotao.cloud.front.graphql.entity;
 
-import lombok.Data;
 
 /**
  * @author shuigedeng
  * @since 2020/11/9 09:54
  * @version 1.0.0
  */
-@Data
 public class AddUserInput {
 	private String nickname;
 	private String mail;
 	private String password;
 	private String description;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

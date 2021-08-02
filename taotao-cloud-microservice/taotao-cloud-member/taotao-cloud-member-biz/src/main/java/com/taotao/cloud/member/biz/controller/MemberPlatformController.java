@@ -1,8 +1,7 @@
 package com.taotao.cloud.member.biz.controller;
 
 import com.taotao.cloud.member.biz.service.IMemberPlatformService;
-import io.swagger.annotations.Api;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/member/platform")
-@Api(value = "第三方用户信息管理API", tags = {"第三方用户信息管理API"})
-@AllArgsConstructor
+@Tag(name = "第三方用户信息管理API", description = "第三方用户信息管理API")
 public class MemberPlatformController {
-    private final IMemberPlatformService memberPlatformService;
+
+	private final IMemberPlatformService memberPlatformService;
+
+	public MemberPlatformController(
+		IMemberPlatformService memberPlatformService) {
+		this.memberPlatformService = memberPlatformService;
+	}
 }

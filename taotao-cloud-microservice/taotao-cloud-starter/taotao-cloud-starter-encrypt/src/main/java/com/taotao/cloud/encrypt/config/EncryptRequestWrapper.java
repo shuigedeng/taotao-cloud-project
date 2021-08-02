@@ -1,7 +1,6 @@
 package com.taotao.cloud.encrypt.config;
 
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 
 import javax.servlet.ReadListener;
@@ -18,7 +17,6 @@ import java.net.URLDecoder;
  *
  * @author gaoyang
  */
-@Slf4j
 public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 
 	private byte[] body;

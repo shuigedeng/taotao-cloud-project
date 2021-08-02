@@ -2,8 +2,6 @@ package com.taotao.cloud.encrypt.handler.impl;
 
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.SignEncryptHandler;
-import lombok.extern.slf4j.Slf4j;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -16,7 +14,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author gaoyang
  */
-@Slf4j
 public class SignEncryptHandlerImpl implements SignEncryptHandler {
 	@Override
 	public Object handle(Object proceed, long timeout, TimeUnit timeUnit, String signSecret, Map<Object, Object> jsonMap) throws EncryptException {

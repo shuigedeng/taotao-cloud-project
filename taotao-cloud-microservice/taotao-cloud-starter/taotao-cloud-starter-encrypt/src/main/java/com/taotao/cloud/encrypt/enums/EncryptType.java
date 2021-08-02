@@ -1,16 +1,12 @@
 package com.taotao.cloud.encrypt.enums;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * 加密类型枚举类
  *
  * @author gaoyang
  */
-@Getter
-@AllArgsConstructor
 public enum EncryptType {
 
 	/**
@@ -31,4 +27,8 @@ public enum EncryptType {
 	RSA("非对称加密,需指定公钥和私钥");
 
 	private String describe;
+
+	EncryptType(String describe) {
+		this.describe = describe;
+	}
 }

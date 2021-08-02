@@ -1,7 +1,6 @@
 package com.taotao.cloud.encrypt.config;
 
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
@@ -14,14 +13,17 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  * @author gaoyang
  */
 @Configuration
-@AllArgsConstructor
 public class WebConfiguration {
 
-	@Autowired(required = false)
 	private final EncryptHandler encryptHandler;
 
-	Environment environment;
+	private final Environment environment;
 
+	public WebConfiguration(EncryptHandler encryptHandler,
+		Environment environment) {
+		this.encryptHandler = encryptHandler;
+		this.environment = environment;
+	}
 
 	@Bean
 	@Conditional(DefaultCondition.class)

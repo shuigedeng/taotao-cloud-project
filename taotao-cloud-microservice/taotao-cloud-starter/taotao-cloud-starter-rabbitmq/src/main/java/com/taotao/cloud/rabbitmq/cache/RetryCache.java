@@ -19,7 +19,6 @@ import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageSender;
 import com.taotao.cloud.rabbitmq.producer.MessageWithTime;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;

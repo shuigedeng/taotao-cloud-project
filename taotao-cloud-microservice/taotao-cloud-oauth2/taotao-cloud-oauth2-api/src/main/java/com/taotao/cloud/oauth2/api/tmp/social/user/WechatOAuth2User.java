@@ -1,10 +1,8 @@
 package com.taotao.cloud.oauth2.api.tmp.social.user;
 
-import lombok.Data;
 
 import java.util.Map;
 
-@Data
 public class WechatOAuth2User implements CustomOAuth2User {
     public static final String TYPE = "wechat";
     public static final String APP_ID = "appid";

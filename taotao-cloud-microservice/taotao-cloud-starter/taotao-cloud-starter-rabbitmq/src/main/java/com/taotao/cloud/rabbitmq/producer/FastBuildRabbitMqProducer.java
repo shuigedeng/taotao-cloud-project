@@ -20,7 +20,6 @@ import com.taotao.cloud.rabbitmq.cache.RetryCache;
 import com.taotao.cloud.rabbitmq.common.Constants;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -38,7 +37,6 @@ import java.util.concurrent.TimeoutException;
  * @version 1.0.0
  * @since 2020/5/28 17:18
  */
-@Slf4j
 public class FastBuildRabbitMqProducer {
 
 	private final ConnectionFactory connectionFactory;

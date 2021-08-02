@@ -18,7 +18,6 @@ package com.taotao.cloud.operation.biz.service.impl;
 import com.taotao.cloud.operation.biz.entity.Withdraw;
 import com.taotao.cloud.operation.biz.repository.WithdrawRepository;
 import com.taotao.cloud.operation.biz.service.IWithdrawService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class WithdrawServiceImpl implements IWithdrawService {
 
 	private final WithdrawRepository withdrawRepository;

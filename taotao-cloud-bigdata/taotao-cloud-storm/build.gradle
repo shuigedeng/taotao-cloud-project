@@ -2,6 +2,5 @@
 dependencies {
     implementation group: 'junit', name: 'junit', version: '4.12'
 
-    implementation 'org.projectlombok:lombok'
-    
+
 }

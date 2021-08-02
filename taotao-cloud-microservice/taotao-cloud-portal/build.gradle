@@ -21,8 +21,6 @@ dependencies {
     implementation 'cn.hutool:hutool-all'
     implementation 'io.netty:netty-all:4.1.51.Final'
 
-    implementation 'org.projectlombok:lombok'
-    
 }
 
 shadowJar {

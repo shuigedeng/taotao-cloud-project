@@ -15,14 +15,12 @@
  */
 package com.taotao.cloud.backend.graphql.entity;
 
-import lombok.Data;
 
 /**
  * @author shuigedeng
  * @since 2020/11/9 10:56
  * @version 1.0.0
  */
-@Data
 public class Article {
 	private String id;
 	private User author;
@@ -30,4 +28,52 @@ public class Article {
 	private String content;
 	private String createBy;
 	private Integer thumbUp;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public Integer getThumbUp() {
+		return thumbUp;
+	}
+
+	public void setThumbUp(Integer thumbUp) {
+		this.thumbUp = thumbUp;
+	}
 }

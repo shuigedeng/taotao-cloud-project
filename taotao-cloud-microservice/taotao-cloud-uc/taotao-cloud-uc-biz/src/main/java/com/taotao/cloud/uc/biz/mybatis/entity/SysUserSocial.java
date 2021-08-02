@@ -2,12 +2,6 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 //
 // import com.baomidou.mybatisplus.annotation.TableName;
 // import com.taotao.cloud.data.mybatis.plus.mapper.SuperEntity;
-// import lombok.Data;
-// import lombok.EqualsAndHashCode;
-// import lombok.NoArgsConstructor;
-// import lombok.ToString;
-// import lombok.experimental.Accessors;
-// import lombok.experimental.SuperBuilder;
 //
 // /**
 //  * 社交实体类

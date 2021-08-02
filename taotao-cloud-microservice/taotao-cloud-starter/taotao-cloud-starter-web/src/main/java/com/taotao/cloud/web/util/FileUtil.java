@@ -1,7 +1,6 @@
 //package com.taotao.cloud.web.util;
 //
 //import com.google.common.base.Preconditions;
-//import lombok.extern.slf4j.Slf4j;
 //import org.apache.commons.lang3.ArrayUtils;
 //import org.apache.commons.lang3.StringUtils;
 //import org.springframework.core.io.FileSystemResource;

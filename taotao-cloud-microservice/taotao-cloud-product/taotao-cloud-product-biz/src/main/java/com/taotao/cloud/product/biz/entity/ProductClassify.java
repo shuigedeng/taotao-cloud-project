@@ -2,9 +2,6 @@ package com.taotao.cloud.product.biz.entity;
 
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,13 +11,6 @@ import java.time.LocalDateTime;
  * 商品分类表
  * @author shuigedeng
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 //@Entity
 @Table(name = "tt_product_classify")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_classify", comment = "商品分类表")

@@ -1,8 +1,8 @@
 package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.core.model.SecurityUser;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.fallback.RemoteMemberFallbackImpl;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -35,8 +35,8 @@ public interface RemoteMemberService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.member.api.vo.MemberVO>
 	 * @author shuigedeng
-	 * @since 2020/11/20 下午4:10
 	 * @version 1.0.0
+	 * @since 2020/11/20 下午4:10
 	 */
 	@GetMapping("/member/info/id/{id:[0-9]*}")
 	Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id);

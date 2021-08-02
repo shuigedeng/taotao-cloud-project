@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.bigdata.kafka;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -32,7 +31,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * @since 2020/9/23 16:48
  */
 @Component
-@Slf4j
 public class KafkaSend implements CommandLineRunner {
 
 	@Autowired

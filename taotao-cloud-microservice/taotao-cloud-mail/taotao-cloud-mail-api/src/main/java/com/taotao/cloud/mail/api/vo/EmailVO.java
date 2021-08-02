@@ -15,12 +15,6 @@
  */
 package com.taotao.cloud.mail.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -30,10 +24,6 @@ import java.time.LocalDateTime;
  * @since 2020/11/20 上午9:42
  * @version 1.0.0
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(value = "邮件信息VO", description = "邮件信息VO")
 public class EmailVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;

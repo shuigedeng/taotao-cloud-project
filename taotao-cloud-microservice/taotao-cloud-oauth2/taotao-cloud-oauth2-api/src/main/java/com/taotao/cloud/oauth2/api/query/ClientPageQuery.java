@@ -16,13 +16,8 @@
 package com.taotao.cloud.oauth2.api.query;
 
 import com.taotao.cloud.common.model.BasePageQuery;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
+import groovy.transform.EqualsAndHashCode;
+import groovy.transform.ToString;
 
 /**
  * 客户端分页查询Query
@@ -31,13 +26,6 @@ import lombok.experimental.SuperBuilder;
  * @since 2020/5/14 17:05
  * @version 1.0.0
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @ApiModel(value = "客户端分页查询Query")
 public class ClientPageQuery extends BasePageQuery {
     private static final long serialVersionUID = 5953949488238258726L;

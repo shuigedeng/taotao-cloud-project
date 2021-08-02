@@ -23,7 +23,6 @@ import com.taotao.cloud.mail.biz.mapper.EmailMapper;
 import com.taotao.cloud.mail.biz.service.IEmailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +39,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/email")
 @Api(value = "物流公司管理API", tags = {"物流公司管理API"})
 public class EmailController {
 
 	private final IEmailService emailService;
+
+	public EmailController(IEmailService emailService) {
+		this.emailService = emailService;
+	}
 
 	@ApiOperation("根据id查询邮件信息")
 	@RequestOperateLog(description = "根据id查询邮件信息")

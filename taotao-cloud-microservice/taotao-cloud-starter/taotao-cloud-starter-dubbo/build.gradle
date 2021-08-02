@@ -3,6 +3,4 @@ dependencies {
 
     api 'com.alibaba.cloud:spring-cloud-starter-dubbo'
 
-    implementation 'org.projectlombok:lombok'
-    
 }

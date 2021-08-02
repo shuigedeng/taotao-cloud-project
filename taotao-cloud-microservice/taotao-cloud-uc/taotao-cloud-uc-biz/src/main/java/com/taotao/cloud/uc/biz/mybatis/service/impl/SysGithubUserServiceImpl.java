@@ -10,7 +10,6 @@
 // import com.taotao.cloud.uc.biz.entity.SysGithubUser;
 // import com.taotao.cloud.uc.biz.mapper.SysGithubUserMapper;
 // import com.taotao.cloud.uc.biz.service.ISysGithubUserService;
-// import lombok.extern.slf4j.Slf4j;
 // import org.springframework.stereotype.Service;
 //
 // import java.util.Collections;

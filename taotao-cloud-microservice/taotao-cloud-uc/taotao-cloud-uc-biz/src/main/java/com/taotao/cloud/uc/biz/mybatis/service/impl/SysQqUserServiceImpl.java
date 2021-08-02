@@ -10,7 +10,6 @@
 // import com.taotao.cloud.uc.biz.entity.SysQqUser;
 // import com.taotao.cloud.uc.biz.mapper.SysQqUserMapper;
 // import com.taotao.cloud.uc.biz.service.ISysQqUserService;
-// import lombok.extern.slf4j.Slf4j;
 // import org.springframework.stereotype.Service;
 //
 // import java.util.Collections;

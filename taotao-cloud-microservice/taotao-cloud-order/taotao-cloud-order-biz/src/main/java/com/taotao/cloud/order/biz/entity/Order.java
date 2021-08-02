@@ -3,14 +3,6 @@ package com.taotao.cloud.order.biz.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
 import com.taotao.cloud.order.api.constant.OrderConstant;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,13 +16,6 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/4/30 15:37
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tt_order")
 @org.hibernate.annotations.Table(appliesTo = "tt_order", comment = "订单信息表")

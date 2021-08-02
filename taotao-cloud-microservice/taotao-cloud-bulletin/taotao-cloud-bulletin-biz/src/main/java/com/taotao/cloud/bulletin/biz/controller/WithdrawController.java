@@ -19,11 +19,9 @@ import com.taotao.cloud.bulletin.api.vo.WithdrawVO;
 import com.taotao.cloud.bulletin.biz.entity.Withdraw;
 import com.taotao.cloud.bulletin.biz.mapper.WithdrawMapper;
 import com.taotao.cloud.bulletin.biz.service.IWithdrawService;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +38,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/withdraw")
 @Api(value = "提现申请管理API", tags = {"提现申请管理API"})
 public class WithdrawController {
 
 	private final IWithdrawService withdrawService;
+
+	public WithdrawController(IWithdrawService withdrawService) {
+		this.withdrawService = withdrawService;
+	}
 
 	@ApiOperation("根据id查询提现申请信息")
 	@RequestOperateLog(description = "根据id查询提现申请信息")

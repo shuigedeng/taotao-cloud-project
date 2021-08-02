@@ -16,7 +16,6 @@
 // package com.taotao.cloud.auth.biz.authentication.openid;
 //
 // import com.taotao.cloud.security.service.impl.UserDetailsServiceImpl;
-// import lombok.AllArgsConstructor;
 // import org.springframework.security.authentication.AuthenticationManager;
 // import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 // import org.springframework.security.config.annotation.web.builders.HttpSecurity;

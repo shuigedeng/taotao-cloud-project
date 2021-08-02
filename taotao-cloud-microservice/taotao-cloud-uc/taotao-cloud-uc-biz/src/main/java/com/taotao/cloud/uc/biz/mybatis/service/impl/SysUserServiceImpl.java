@@ -23,7 +23,6 @@
 // import com.taotao.cloud.uc.biz.entity.SysUserRole;
 // import com.taotao.cloud.uc.biz.mapper.SysUserMapper;
 // import com.taotao.cloud.uc.biz.service.*;
-// import lombok.extern.slf4j.Slf4j;
 // import org.apache.commons.lang3.StringUtils;
 // import org.springframework.beans.BeanUtils;
 // import org.springframework.beans.factory.annotation.Autowired;

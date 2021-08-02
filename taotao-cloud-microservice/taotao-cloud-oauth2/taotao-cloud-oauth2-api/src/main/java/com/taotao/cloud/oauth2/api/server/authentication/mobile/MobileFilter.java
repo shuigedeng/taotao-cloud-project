@@ -19,8 +19,6 @@
 // import com.taotao.cloud.core.utils.AuthUtil;
 // import com.taotao.cloud.security.exception.ValidateCodeException;
 // import com.taotao.cloud.security.properties.SecurityProperties;
-// import lombok.AllArgsConstructor;
-// import lombok.extern.slf4j.Slf4j;
 // import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 // import org.springframework.stereotype.Component;
 // import org.springframework.util.AntPathMatcher;

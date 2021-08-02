@@ -23,7 +23,6 @@ import com.taotao.cloud.dubbo.biz.mapper.PayFlowMapper;
 import com.taotao.cloud.dubbo.biz.service.IPayFlowService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +39,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/pay/flow")
 @Api(value = "支付流水管理API", tags = {"支付流水管理API"})
 public class PayFlowController {
 
 	private final IPayFlowService payFlowService;
+
+	public PayFlowController(IPayFlowService payFlowService) {
+		this.payFlowService = payFlowService;
+	}
 
 	@ApiOperation("根据id查询支付信息")
 	@RequestOperateLog(description = "根据id查询支付信息")

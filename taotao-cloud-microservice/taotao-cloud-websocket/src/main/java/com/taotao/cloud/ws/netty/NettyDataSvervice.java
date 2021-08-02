@@ -18,7 +18,6 @@ package com.taotao.cloud.ws.netty;
 
 import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * NettyDataSvervice
@@ -27,7 +26,6 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2020/12/30 下午4:37
  * @version 1.0.0
  */
-@Slf4j
 public class NettyDataSvervice {
 
 	private static final ReentrantLock LOCK = new ReentrantLock();

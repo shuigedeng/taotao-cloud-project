@@ -2,14 +2,12 @@ package com.taotao.cloud.order.biz.entity;
 
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import groovy.transform.EqualsAndHashCode;
+import groovy.transform.ToString;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 /**
  * 订单超时信息表
@@ -17,13 +15,6 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/4/30 15:44
  */
-@Data
-@SuperBuilder
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tt_order_overtime")
 @org.hibernate.annotations.Table(appliesTo = "tt_order_overtime", comment = "订单超时信息表")

@@ -19,6 +19,4 @@ dependencies {
         exclude group: 'jmxri', module: 'com.sun.jmx'
     }
 
-    implementation 'org.projectlombok:lombok'
-    
 }

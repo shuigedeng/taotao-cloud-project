@@ -2,7 +2,6 @@ package com.taotao.cloud.member.biz.service.impl;
 
 import com.taotao.cloud.member.biz.repository.MemberPlatformRepository;
 import com.taotao.cloud.member.biz.service.IMemberPlatformService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,7 +12,11 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-@AllArgsConstructor
 public class MemberPlatformServiceImpl implements IMemberPlatformService {
     private final MemberPlatformRepository memberPlatformRepository;
+
+	public MemberPlatformServiceImpl(
+		MemberPlatformRepository memberPlatformRepository) {
+		this.memberPlatformRepository = memberPlatformRepository;
+	}
 }

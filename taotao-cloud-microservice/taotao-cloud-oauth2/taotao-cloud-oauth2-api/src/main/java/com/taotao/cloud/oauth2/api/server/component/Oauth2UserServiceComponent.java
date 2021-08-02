@@ -17,8 +17,6 @@ package com.taotao.cloud.oauth2.api.server.component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +44,6 @@ import java.util.Set;
  * @since 2020/10/15 14:21
  * @version 1.0.0
  */
-@Slf4j
 public class Oauth2UserServiceComponent extends DefaultOAuth2UserService {
 
     private static final String QQ = "qq";
@@ -56,7 +53,6 @@ public class Oauth2UserServiceComponent extends DefaultOAuth2UserService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @SneakyThrows
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) {
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
@@ -115,7 +111,6 @@ public class Oauth2UserServiceComponent extends DefaultOAuth2UserService {
      * @param openIdResponse qq的openId响应字符串
      * @return qq的openId
      */
-    @SneakyThrows
     private String extractQqOpenId(String openIdResponse) {
         String openId = openIdResponse.substring(openIdResponse.indexOf('(') + 1, openIdResponse.indexOf(')'));
         Map<String, String> map = objectMapper.readValue(openId, new TypeReference<Map<String, String>>() {
@@ -129,7 +124,6 @@ public class Oauth2UserServiceComponent extends DefaultOAuth2UserService {
      * @param userInfoResponse qq的用户信息响应字符串
      * @return qq的用户信息
      */
-    @SneakyThrows
     private Map<String, Object> extractQqUserInfo(String userInfoResponse) {
         return objectMapper.readValue(userInfoResponse, new TypeReference<Map<String, Object>>() {
         });

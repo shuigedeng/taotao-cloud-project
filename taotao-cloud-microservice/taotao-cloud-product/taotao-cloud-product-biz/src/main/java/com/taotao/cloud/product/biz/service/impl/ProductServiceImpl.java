@@ -14,7 +14,6 @@ import com.taotao.cloud.product.biz.entity.Product;
 import com.taotao.cloud.product.biz.repository.ProductRepository;
 import com.taotao.cloud.product.biz.service.IProductService;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +25,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository productRepository;
 
-    @Override
+	public ProductServiceImpl(
+		ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+
+	@Override
     public Product findProductById(Long id) {
         Optional<Product> optionalProductInfo = productRepository.findById(id);
         return optionalProductInfo.orElseThrow(() -> new BusinessException(ResultEnum.PRODUCT_NOT_EXIST));

@@ -4,6 +4,4 @@ dependencies {
     api 'net.oschina.j2cache:j2cache-core:2.8.2-release'
     api 'org.ehcache:ehcache:3.4.0'
 
-    implementation 'org.projectlombok:lombok'
-    
 }

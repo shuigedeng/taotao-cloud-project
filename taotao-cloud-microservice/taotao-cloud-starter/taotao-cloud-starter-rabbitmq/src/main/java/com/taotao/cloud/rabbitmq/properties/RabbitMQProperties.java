@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.rabbitmq.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/28 17:35
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.rabbitmq")
 public class RabbitMQProperties {

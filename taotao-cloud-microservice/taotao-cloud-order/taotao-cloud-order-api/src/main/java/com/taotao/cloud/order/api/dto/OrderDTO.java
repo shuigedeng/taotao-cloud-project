@@ -15,10 +15,6 @@
  */
 package com.taotao.cloud.order.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,10 +24,6 @@ import java.math.BigDecimal;
  * @since 2020/10/22 12:29
  * @version 1.0.0
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 //@ApiModel(value = "订单对象DTO")
 public class OrderDTO implements Serializable {
 

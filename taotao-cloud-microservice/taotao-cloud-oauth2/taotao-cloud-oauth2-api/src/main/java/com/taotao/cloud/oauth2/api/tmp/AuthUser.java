@@ -1,15 +1,9 @@
 package com.taotao.cloud.oauth2.api.tmp;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author : zhiyi Date: 2020/2/10
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class AuthUser {
 
 	// 我们的全局永久唯一凭证是 id, security 想要的也是这个, 只是他定义的名字叫 username

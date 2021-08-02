@@ -15,57 +15,45 @@
  */
 package com.taotao.cloud.oauth2.api.query;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-import lombok.experimental.SuperBuilder;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 /**
  * 客户端查询query
  *
  * @author shuigedeng
- * @since 2020/5/14 17:05
  * @version 1.0.0
+ * @since 2020/5/14 17:05
  */
-@Data
-@Builder
-@Accessors(chain = true)
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "客户端查询query")
+@Schema(name = "ClientQuery", description = "客户端查询query")
 public class ClientQuery implements Serializable {
 
-    private static final long serialVersionUID = -7605952923416404638L;
+	private static final long serialVersionUID = -7605952923416404638L;
 
-    @ApiModelProperty(value = "应用标识")
-    private String clientId;
-    @ApiModelProperty(value = "应用名称")
-    private String clientName;
-    @ApiModelProperty(value = "资源ID")
-    private String resourceIds;
-    @ApiModelProperty(value = "客户端密钥")
-    private String clientSecret;
-    @ApiModelProperty(value = "客户端密钥(明文)")
-    private String clientSecretStr;
-    @ApiModelProperty(value = "作用域")
-    private String scope;
-    @ApiModelProperty(value = "授权方式")
-    private String authorizedGrantTypes;
-    @ApiModelProperty(value = "客户端重定向uri")
-    private String webServerRedirectUri;
-    @ApiModelProperty(value = "权限范围")
-    private String authorities;
-    @ApiModelProperty(value = "请求令牌有效时间")
-    private Integer accessTokenValiditySeconds;
-    @ApiModelProperty(value = "刷新令牌有效时间")
-    private Integer refreshTokenValiditySeconds;
-    @ApiModelProperty(value = "扩展信息")
-    private String additionalInformation;
-    @ApiModelProperty(value = "是否自动放行")
-    private String autoapprove;
+	@Schema(description = "应用标识")
+	private String clientId;
+	@Schema(description = "应用名称")
+	private String clientName;
+	@Schema(description = "资源ID")
+	private String resourceIds;
+	@Schema(description = "客户端密钥")
+	private String clientSecret;
+	@Schema(description = "客户端密钥(明文)")
+	private String clientSecretStr;
+	@Schema(description = "作用域")
+	private String scope;
+	@Schema(description = "授权方式")
+	private String authorizedGrantTypes;
+	@Schema(description = "客户端重定向uri")
+	private String webServerRedirectUri;
+	@Schema(description = "权限范围")
+	private String authorities;
+	@Schema(description = "请求令牌有效时间")
+	private Integer accessTokenValiditySeconds;
+	@Schema(description = "刷新令牌有效时间")
+	private Integer refreshTokenValiditySeconds;
+	@Schema(description = "扩展信息")
+	private String additionalInformation;
+	@Schema(description = "是否自动放行")
+	private String autoapprove;
 }

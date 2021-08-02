@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -67,7 +66,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @since 2021/05/11 08:57
  */
 @EnableWebSecurity
-@AllArgsConstructor
 public class DefaultSecurityConfig {
 
 	private final ClientRegistrationRepository clientRegistrationRepository;

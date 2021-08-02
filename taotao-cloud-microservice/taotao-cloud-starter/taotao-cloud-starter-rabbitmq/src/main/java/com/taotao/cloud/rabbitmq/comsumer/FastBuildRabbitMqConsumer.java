@@ -22,7 +22,6 @@ import com.rabbitmq.client.ShutdownSignalException;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageProcess;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.Connection;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -40,7 +39,6 @@ import java.util.concurrent.TimeoutException;
  * @author shuigedeng
  * @since 2020/5/28 17:26
  */
-@Slf4j
 @SuppressWarnings("all")
 public class FastBuildRabbitMqConsumer {
 

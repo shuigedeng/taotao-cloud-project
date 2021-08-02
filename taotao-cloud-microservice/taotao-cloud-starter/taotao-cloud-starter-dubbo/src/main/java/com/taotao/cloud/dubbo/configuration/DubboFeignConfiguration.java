@@ -1,7 +1,12 @@
 package com.taotao.cloud.dubbo.configuration;
 
+import static java.util.Collections.emptySet;
+import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERTY_NAME;
+import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_PREFIX;
+import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
+
 import feign.Feign;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Set;
 import org.apache.dubbo.config.AbstractConfig;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignBuilder;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignProviderBeanPostProcessor;
@@ -13,17 +18,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
-import java.util.Set;
-
-import static java.util.Collections.emptySet;
-import static org.apache.dubbo.spring.boot.util.DubboUtils.*;
-
 /**
  * Dubbo配置
  *
  * @author shuigedeng
  */
-@Slf4j
 @Configuration
 @ConditionalOnProperty(prefix = DUBBO_PREFIX, name = "enabled", matchIfMissing = true, havingValue = "true")
 @ConditionalOnClass(AbstractConfig.class)

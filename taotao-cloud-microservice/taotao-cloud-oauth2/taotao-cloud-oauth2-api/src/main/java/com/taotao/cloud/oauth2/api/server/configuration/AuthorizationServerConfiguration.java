@@ -23,7 +23,6 @@ import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.security.component.WebResponseExceptionTranslatorComponent;
 import com.taotao.cloud.security.service.IUserDetailsService;
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -58,7 +57,6 @@ import java.util.Objects;
  * @version 1.0.0
  */
 @Configuration
-@AllArgsConstructor
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 

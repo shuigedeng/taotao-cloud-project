@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.rabbitmq.common;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * DetailResponse
@@ -26,9 +23,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0
  * @since 2020/5/28 17:28
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class DetailResponse {
 
 	private boolean ifSuccess;

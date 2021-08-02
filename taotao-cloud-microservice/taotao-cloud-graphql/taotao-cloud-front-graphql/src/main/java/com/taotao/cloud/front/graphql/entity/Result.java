@@ -15,18 +15,12 @@
  */
 package com.taotao.cloud.front.graphql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author shuigedeng
  * @since 2020/11/9 09:53
  * @version 1.0.0
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Result {
 	private Integer respCode;
 	private String msg;

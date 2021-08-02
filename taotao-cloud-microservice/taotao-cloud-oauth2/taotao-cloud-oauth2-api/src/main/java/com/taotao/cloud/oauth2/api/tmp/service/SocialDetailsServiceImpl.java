@@ -6,7 +6,6 @@ import com.taotao.cloud.oauth2.api.tmp.social.user.CustomOAuth2User;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesRegistrationAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +13,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class SocialDetailsServiceImpl implements SocialDetailsService {
 
 	//	final UserOauth2Mapper userOauth2Mapper;

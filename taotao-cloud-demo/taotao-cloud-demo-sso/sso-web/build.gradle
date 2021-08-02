@@ -4,7 +4,4 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-context"
 
     implementation 'cn.hutool:hutool-all'
-
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }

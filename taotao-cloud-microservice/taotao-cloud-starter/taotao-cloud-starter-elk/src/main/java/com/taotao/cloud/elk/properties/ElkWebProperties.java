@@ -16,7 +16,6 @@
 package com.taotao.cloud.elk.properties;
 
 import com.taotao.cloud.elk.constant.ElkConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/6/3 10:43
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = ElkConstant.BASE_ELK_WEB_PREFIX)
 public class ElkWebProperties {

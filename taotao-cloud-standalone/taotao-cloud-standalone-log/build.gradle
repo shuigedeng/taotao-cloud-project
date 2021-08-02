@@ -2,6 +2,4 @@ dependencies {
     implementation project(":taotao-cloud-standalone:taotao-cloud-standalone-common")
     implementation project(":taotao-cloud-standalone:taotao-cloud-standalone-security")
 
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }

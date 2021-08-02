@@ -1,13 +1,11 @@
 package com.taotao.cloud.portal.util;
 
-import lombok.Data;
 
 /**
  * @author xiaoming
  * @since 2020/3/9
  * @blame xiaoming
  */
-@Data
 public class ResponseBase {
 
     /**

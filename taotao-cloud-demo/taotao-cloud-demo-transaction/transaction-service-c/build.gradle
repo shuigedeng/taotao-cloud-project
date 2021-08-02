@@ -3,8 +3,6 @@ dependencies {
     implementation project(':taotao-cloud-demo:taotao-cloud-demo-transaction:transaction-common')
     implementation 'cn.hutool:hutool-all'
 
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
 }
 
 

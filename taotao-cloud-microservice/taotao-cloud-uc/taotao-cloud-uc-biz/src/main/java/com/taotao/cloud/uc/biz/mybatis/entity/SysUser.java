@@ -4,9 +4,6 @@ package com.taotao.cloud.uc.biz.mybatis.entity;// package com.taotao.cloud.uc.bi
 // import com.taotao.cloud.common.enums.UserSexTypeEnum;
 // import com.taotao.cloud.common.enums.UserTypeEnum;
 // import com.taotao.cloud.data.mybatis.plus.mapper.SuperEntity;
-// import lombok.*;
-// import lombok.experimental.Accessors;
-// import lombok.experimental.SuperBuilder;
 //
 // /**
 //  * 用户表

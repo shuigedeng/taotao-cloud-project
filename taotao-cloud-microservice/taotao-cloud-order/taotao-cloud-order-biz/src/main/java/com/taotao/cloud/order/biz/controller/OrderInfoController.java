@@ -7,7 +7,6 @@ import com.taotao.cloud.order.api.vo.OrderVO;
 import com.taotao.cloud.order.biz.entity.Order;
 import com.taotao.cloud.order.biz.mapper.OrderMapper;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/order")
 //@Api(value = "订单管理API", tags = {"订单管理API"})
 public class OrderInfoController {
 
 	private final IOrderInfoService orderInfoService;
 
-//	@ApiOperation("获取订单信息")
+
+	public OrderInfoController(IOrderInfoService orderInfoService) {
+		this.orderInfoService = orderInfoService;
+	}
+
+	//	@ApiOperation("获取订单信息")
 	@GetMapping("/info/{code}")
 	@RequestOperateLog(description = "获取订单信息")
 	@PreAuthorize("hasAuthority('order:info:code')")

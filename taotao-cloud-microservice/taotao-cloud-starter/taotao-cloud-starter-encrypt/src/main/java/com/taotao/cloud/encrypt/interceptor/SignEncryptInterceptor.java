@@ -8,7 +8,6 @@ import com.taotao.cloud.encrypt.wrapper.EncryptRequestWrapperFactory;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.swing.text.html.FormSubmitEvent.MethodType;
-import lombok.AllArgsConstructor;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -17,13 +16,17 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * 签名加密拦截器
  *
- * @author gaoyang
  */
-@AllArgsConstructor
 public class SignEncryptInterceptor implements MethodInterceptor {
 
 	private final String signSecret;
 	private final SignEncryptHandler signEncryptHandler;
+
+	public SignEncryptInterceptor(String signSecret,
+		SignEncryptHandler signEncryptHandler) {
+		this.signSecret = signSecret;
+		this.signEncryptHandler = signEncryptHandler;
+	}
 
 	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {

@@ -17,8 +17,6 @@
 // import com.taotao.cloud.uc.biz.service.ISysGiteeUserService;
 // import com.taotao.cloud.uc.biz.service.ISysUserService;
 // import com.taotao.cloud.uc.biz.service.ISysUserSocialService;
-// import lombok.AllArgsConstructor;
-// import lombok.extern.slf4j.Slf4j;
 // import org.springframework.stereotype.Service;
 // import org.springframework.transaction.annotation.Transactional;
 //

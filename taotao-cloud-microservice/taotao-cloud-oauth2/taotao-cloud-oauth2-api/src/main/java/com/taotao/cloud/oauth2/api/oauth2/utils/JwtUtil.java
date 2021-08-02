@@ -5,10 +5,7 @@ import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.converter.RsaKeyConverters;
-
-import javax.crypto.Cipher;
+import groovy.util.logging.Slf4j;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
@@ -17,8 +14,9 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Base64;
 import java.util.Date;
+import javax.crypto.Cipher;
+import org.springframework.security.converter.RsaKeyConverters;
 
-@Slf4j
 public final class JwtUtil {
 
 	/**

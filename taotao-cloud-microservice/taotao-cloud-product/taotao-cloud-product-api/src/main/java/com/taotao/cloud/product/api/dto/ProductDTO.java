@@ -15,10 +15,6 @@
  */
 package com.taotao.cloud.product.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -27,10 +23,6 @@ import java.io.Serializable;
  * @since 2020/10/22 12:29
  * @version 1.0.0
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 //@ApiModel(value = "商品对象DTO")
 public class ProductDTO implements Serializable {
 

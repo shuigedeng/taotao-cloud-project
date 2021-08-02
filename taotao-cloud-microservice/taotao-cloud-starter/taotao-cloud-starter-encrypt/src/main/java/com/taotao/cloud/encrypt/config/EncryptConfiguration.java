@@ -6,7 +6,6 @@ import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.handler.impl.AesEncryptHandler;
 import com.taotao.cloud.encrypt.handler.impl.Base64EncryptHandler;
 import com.taotao.cloud.encrypt.handler.impl.RsaEncryptHandler;
-import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -24,14 +23,19 @@ import org.springframework.core.env.Environment;
  *
  * @author gaoyang
  */
-@Data
 @Configuration
 @EnableAutoConfiguration
 public class EncryptConfiguration implements ApplicationContextAware, BeanFactoryPostProcessor,
 	EnvironmentAware {
 
-	private ApplicationContext applicationContext;
-	private Environment environment;
+	private final ApplicationContext applicationContext;
+	private final Environment environment;
+
+	public EncryptConfiguration(ApplicationContext applicationContext,
+		Environment environment) {
+		this.applicationContext = applicationContext;
+		this.environment = environment;
+	}
 
 	@Override
 	public void postProcessBeanFactory(

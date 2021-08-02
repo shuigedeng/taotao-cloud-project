@@ -1,16 +1,12 @@
 package com.taotao.cloud.dfs.biz.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.dfs.api.vo.FileVO;
 import com.taotao.cloud.dfs.api.vo.UploadFileVO;
 import com.taotao.cloud.dfs.biz.entity.File;
 import com.taotao.cloud.dfs.biz.mapper.FileMapper;
 import com.taotao.cloud.dfs.biz.service.FileService;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -35,12 +31,15 @@ import java.util.stream.Collectors;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/file")
 @Api(value = "文件管理API", tags = {"文件管理API"})
 public class FileController {
 
 	private final FileService fileService;
+
+	public FileController(FileService fileService) {
+		this.fileService = fileService;
+	}
 
 	@ApiOperation("上传单个文件")
 	@RequestOperateLog(description = "上传单个文件")

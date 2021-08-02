@@ -5,6 +5,4 @@ dependencies {
     implementation "org.springframework.kafka:spring-kafka:2.3.1.RELEASE"
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
-    implementation 'org.projectlombok:lombok'
-    
 }

@@ -23,8 +23,6 @@ import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;

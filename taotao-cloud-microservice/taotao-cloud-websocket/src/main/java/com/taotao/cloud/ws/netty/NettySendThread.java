@@ -16,7 +16,6 @@
 package com.taotao.cloud.ws.netty;
 
 import io.netty.channel.ChannelHandlerContext;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -28,7 +27,6 @@ import java.util.Objects;
  * @since 2020/12/30 下午4:46
  * @version 1.0.0
  */
-@Slf4j
 public class NettySendThread implements Runnable {
 	private final ChannelHandlerContext ctx;
 	private final String data;

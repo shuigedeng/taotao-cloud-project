@@ -3,8 +3,6 @@ package com.taotao.cloud.encrypt.handler.impl;
 import com.taotao.cloud.encrypt.entity.RsaKey;
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Base64Utils;
 
 import javax.crypto.BadPaddingException;
@@ -24,8 +22,6 @@ import java.util.Map;
  *
  * @author gaoyang
  */
-@Data
-@Slf4j
 public class RsaEncryptHandler implements EncryptHandler {
 
 	private static final String KEY_ALGORITHM = "RSA";

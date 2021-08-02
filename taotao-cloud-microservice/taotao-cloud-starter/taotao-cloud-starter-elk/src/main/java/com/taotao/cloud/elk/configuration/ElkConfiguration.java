@@ -25,7 +25,6 @@ import com.taotao.cloud.elk.component.LogStatisticsFilter;
 import com.taotao.cloud.elk.constant.ElkConstant;
 import com.taotao.cloud.elk.properties.ElkProperties;
 import javax.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 import org.slf4j.ILoggerFactory;

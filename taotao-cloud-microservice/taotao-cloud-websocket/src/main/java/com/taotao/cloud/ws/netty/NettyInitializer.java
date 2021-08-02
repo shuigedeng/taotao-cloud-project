@@ -18,7 +18,6 @@ package com.taotao.cloud.ws.netty;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Component;
  * @since 2020/12/30 下午4:45
  * @version 1.0.0
  */
-@Slf4j
 @Component
 @ChannelHandler.Sharable
 public class NettyInitializer extends ChannelInitializer {

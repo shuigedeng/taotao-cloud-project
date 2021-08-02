@@ -8,7 +8,6 @@ import com.taotao.cloud.oauth2.api.tmp.social.user.QQOAuth2User;
 import com.taotao.cloud.oauth2.api.tmp.social.user.UserDetailOAuthUser;
 import com.taotao.cloud.oauth2.api.tmp.social.user.WechatOAuth2User;
 import java.util.Map;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -26,14 +25,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 0.0.1
  */
 @Controller
-@AllArgsConstructor
 public class AuthorizationController {
 
     private final SocialDetailsService socialDetailsService;
 
     private final OAuth2AuthorizedClientService authorizedClientService;
 
-    @GetMapping(value = "/loginPage")
+	public AuthorizationController(
+		SocialDetailsService socialDetailsService,
+		OAuth2AuthorizedClientService authorizedClientService) {
+		this.socialDetailsService = socialDetailsService;
+		this.authorizedClientService = authorizedClientService;
+	}
+
+	@GetMapping(value = "/loginPage")
     public String login(Model model) {
         // 已经登录不能再进入登录界面
 

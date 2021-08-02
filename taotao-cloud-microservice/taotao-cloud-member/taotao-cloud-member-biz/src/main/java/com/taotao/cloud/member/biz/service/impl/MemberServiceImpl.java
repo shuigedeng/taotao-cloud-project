@@ -3,23 +3,21 @@ package com.taotao.cloud.member.biz.service.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.core.utils.AddrUtil;
-import com.taotao.cloud.core.utils.AuthUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.QMember;
 import com.taotao.cloud.member.biz.repository.MemberRepository;
 import com.taotao.cloud.member.biz.service.IMemberService;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 /**
  * 会员(c端用户)表服务实现类
@@ -29,9 +27,14 @@ import java.util.Optional;
  * @since 1.0
  */
 @Service
-@AllArgsConstructor
 public class MemberServiceImpl implements IMemberService {
+
 	private final MemberRepository memberUserRepository;
+
+	public MemberServiceImpl(
+		MemberRepository memberUserRepository) {
+		this.memberUserRepository = memberUserRepository;
+	}
 
 	private static final QMember MEMBER = QMember.member;
 
@@ -65,12 +68,12 @@ public class MemberServiceImpl implements IMemberService {
 			throw new BusinessException(ResultEnum.MEMBER_PHONE_EXIST);
 		}
 		HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-		BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
+		BCryptPasswordEncoder passwordEncoder = SecurityUtil.getPasswordEncoder();
 		Member member = Member.builder()
 			.nickname(nickname)
 			.phone(phone)
 			.password(passwordEncoder.encode(memberDTO.getPassword()))
-			.createIp(AddrUtil.getRemoteAddr(request))
+			.createIp(RequestUtil.getRemoteAddr(request))
 			.build();
 		return memberUserRepository.saveAndFlush(member);
 	}

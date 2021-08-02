@@ -23,7 +23,6 @@ import com.taotao.cloud.operation.biz.mapper.WithdrawMapper;
 import com.taotao.cloud.operation.biz.service.IWithdrawService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@AllArgsConstructor
 @RequestMapping("/withdraw")
 @Api(value = "提现申请管理API", tags = {"提现申请管理API"})
 public class WithdrawController {

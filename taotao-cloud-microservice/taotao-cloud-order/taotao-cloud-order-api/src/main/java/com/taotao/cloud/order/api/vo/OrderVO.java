@@ -1,9 +1,5 @@
 package com.taotao.cloud.order.api.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,10 +11,6 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 //@ApiModel(value = "订单VO", description = "订单VO")
 public class OrderVO implements Serializable {
 

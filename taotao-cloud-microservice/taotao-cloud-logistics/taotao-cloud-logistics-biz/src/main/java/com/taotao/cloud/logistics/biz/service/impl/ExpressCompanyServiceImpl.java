@@ -20,7 +20,6 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.logistics.biz.entity.ExpressCompany;
 import com.taotao.cloud.logistics.biz.repository.ExpressCompanyRepository;
 import com.taotao.cloud.logistics.biz.service.IExpressCompanyService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

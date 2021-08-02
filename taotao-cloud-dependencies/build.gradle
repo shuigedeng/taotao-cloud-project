@@ -47,7 +47,6 @@ dependencies {
         api "eu.bitwalker:UserAgentUtils:${userAgentUtilsVersion}"
 
         api "org.aspectj:aspectjweaver:${aspectjweaverVersion}"
-        api "org.projectlombok:lombok:${lombokVersion}"
         api "org.slf4j:slf4j-api:${slf4jVersion}"
         api "org.javassist:javassist:${javassistVersion}"
         api "org.mapstruct:mapstruct:${mapstructVersion}"
