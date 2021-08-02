@@ -1,8 +1,6 @@
 /**
- * Project Name: my-projects
- * Package Name: com.taotao.cloud.order.biz.service.impl
- * Date: 2020/6/10 16:55
- * Author: shuigedeng
+ * Project Name: my-projects Package Name: com.taotao.cloud.order.biz.service.impl Date: 2020/6/10
+ * 16:55 Author: shuigedeng
  */
 package com.taotao.cloud.order.biz.service.impl;
 
@@ -13,7 +11,6 @@ import com.taotao.cloud.order.biz.entity.Order;
 import com.taotao.cloud.order.biz.entity.QOrder;
 import com.taotao.cloud.order.biz.repository.OrderInfoRepository;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +22,15 @@ import org.springframework.transaction.annotation.Transactional;
  * @create 2020/6/10 16:55
  */
 @Service
-@AllArgsConstructor
 public class OrderInfoServiceImpl implements IOrderInfoService {
 
 	private final OrderInfoRepository orderInfoRepository;
+
+	public OrderInfoServiceImpl(
+		OrderInfoRepository orderInfoRepository) {
+		this.orderInfoRepository = orderInfoRepository;
+	}
+
 	private final static QOrder ORDER_INFO = QOrder.order;
 
 	@Override

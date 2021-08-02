@@ -36,7 +36,7 @@ public class NumberUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:34
 	 */
-	public double scale(Number number, int scale) {
+	public static double scale(Number number, int scale) {
 		BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
 		return bg.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}

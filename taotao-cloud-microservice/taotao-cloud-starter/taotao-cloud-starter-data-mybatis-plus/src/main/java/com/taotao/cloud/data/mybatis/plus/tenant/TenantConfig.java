@@ -22,8 +22,6 @@ import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
@@ -39,7 +37,6 @@ import org.springframework.context.annotation.Bean;
  * @since 2020/5/2 11:20
  * @version 1.0.0
  */
-@AllArgsConstructor
 @ConditionalOnProperty(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_TENANT_PREFIX,
 	name = MybatisPlusConstant.ENABLED, havingValue = MybatisPlusConstant.TRUE)
 public class TenantConfig implements InitializingBean {
@@ -51,7 +48,11 @@ public class TenantConfig implements InitializingBean {
 
     private final TenantProperties tenantProperties;
 
-    @Bean
+	public TenantConfig(TenantProperties tenantProperties) {
+		this.tenantProperties = tenantProperties;
+	}
+
+	@Bean
     public TenantLineHandler tenantHandler() {
         return new TenantLineHandler() {
             /**

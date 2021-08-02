@@ -15,14 +15,12 @@
  */
 package com.taotao.cloud.log.aspect;
 
-import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.URLUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.utils.DateUtil;
-import com.taotao.cloud.common.utils.DateUtils;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
@@ -37,10 +35,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Objects;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -50,7 +45,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -87,15 +81,6 @@ public class RequestLogAspect {
 	 * log实体类
 	 **/
 	private final TransmittableThreadLocal<RequestLog> SYS_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
-
-	/**
-	 * 事件发布是由ApplicationContext对象管控的，我们发布事件前需要注入ApplicationContext对象调用publishEvent方法完成事件发布
-	 *
-	 * @param publisher publisher
-	 */
-	public RequestLogAspect(ApplicationEventPublisher publisher) {
-		this.publisher = publisher;
-	}
 
 	/***
 	 * 定义controller切入点拦截规则，拦截SysLog注解的方法

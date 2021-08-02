@@ -16,7 +16,6 @@
 package com.taotao.cloud.file.util;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;

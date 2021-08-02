@@ -1,6 +1,5 @@
 package com.taotao.cloud.job.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -11,7 +10,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @author lishangbu
  * @date 2020/9/14
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = XxlJobProperties.BASE_XXL_JOB_PREFIX)
 public class XxlJobProperties {
@@ -31,4 +29,27 @@ public class XxlJobProperties {
 	@NestedConfigurationProperty
 	private XxlExecutorProperties executor = new XxlExecutorProperties();
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public XxlAdminProperties getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(XxlAdminProperties admin) {
+		this.admin = admin;
+	}
+
+	public XxlExecutorProperties getExecutor() {
+		return executor;
+	}
+
+	public void setExecutor(XxlExecutorProperties executor) {
+		this.executor = executor;
+	}
 }

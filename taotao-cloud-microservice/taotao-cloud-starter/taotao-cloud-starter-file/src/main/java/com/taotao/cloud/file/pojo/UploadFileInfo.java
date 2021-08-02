@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.file.pojo;
 
-import lombok.Data;
 
 /**
  * file实体类
@@ -24,7 +23,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2020/11/12 15:54
  */
-@Data
 public class UploadFileInfo {
 
 	/**
@@ -66,4 +64,69 @@ public class UploadFileInfo {
 	 * 访问路径
 	 */
 	private String url;
+
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFileMd5() {
+		return fileMd5;
+	}
+
+	public void setFileMd5(String fileMd5) {
+		this.fileMd5 = fileMd5;
+	}
+
+	public Boolean getImg() {
+		return isImg;
+	}
+
+	public void setImg(Boolean img) {
+		isImg = img;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

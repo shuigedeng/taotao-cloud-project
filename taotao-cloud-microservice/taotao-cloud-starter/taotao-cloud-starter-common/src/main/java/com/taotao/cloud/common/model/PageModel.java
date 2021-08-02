@@ -177,10 +177,6 @@ public class PageModel<T> implements Serializable {
 		private PageModelBuilder() {
 		}
 
-		public static PageModelBuilder aPageModel() {
-			return new PageModelBuilder();
-		}
-
 		public PageModelBuilder totalSize(long totalSize) {
 			this.totalSize = totalSize;
 			return this;

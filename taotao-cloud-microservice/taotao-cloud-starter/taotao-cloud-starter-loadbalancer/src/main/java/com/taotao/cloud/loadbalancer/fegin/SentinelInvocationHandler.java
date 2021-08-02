@@ -25,6 +25,7 @@ import com.alibaba.csp.sentinel.Tracer;
 import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import feign.Feign;
 import feign.InvocationHandlerFactory;
 import feign.MethodMetadata;
@@ -35,7 +36,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -45,7 +45,6 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @version 1.0.0
  * @since 2020/6/15 11:31
  */
-@Slf4j
 public class SentinelInvocationHandler implements InvocationHandler {
 
 	public static final String EQUALS = "equals";
@@ -135,7 +134,7 @@ public class SentinelInvocationHandler implements InvocationHandler {
 					} else {
 						// 若是R类型 执行自动降级返回R
 						if (Result.class == method.getReturnType()) {
-							log.error("feign 服务间调用异常", ex);
+							LogUtil.error("feign 服务间调用异常", ex);
 							return Result.fail(ex.getLocalizedMessage());
 						} else {
 							throw ex;

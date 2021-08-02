@@ -3,10 +3,10 @@ package com.taotao.cloud.data.mybatis.plus.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
+import java.util.Objects;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+
 
 /**
  * 包括id、create_time、created_by、updated_by、update_time字段的表继承的基础实体
@@ -14,10 +14,6 @@ import lombok.experimental.Accessors;
  * @author zuihou
  * @date 2019/05/05
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@ToString(callSuper = true)
 public class Entity<T> extends SuperEntity<T> {
 
 	public static final String UPDATE_TIME = "updateTime";
@@ -42,4 +38,53 @@ public class Entity<T> extends SuperEntity<T> {
 	public Entity() {
 	}
 
+	@Override
+	public String toString() {
+		return "Entity{" +
+			"updateTime=" + updateTime +
+			", updatedBy=" + updatedBy +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		Entity<?> entity = (Entity<?>) o;
+		return Objects.equals(updateTime, entity.updateTime) && Objects.equals(
+			updatedBy, entity.updatedBy);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), updateTime, updatedBy);
+	}
+
+	public Entity(LocalDateTime updateTime, T updatedBy) {
+		this.updateTime = updateTime;
+		this.updatedBy = updatedBy;
+	}
+
+	public LocalDateTime getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(LocalDateTime updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public T getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(T updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 }

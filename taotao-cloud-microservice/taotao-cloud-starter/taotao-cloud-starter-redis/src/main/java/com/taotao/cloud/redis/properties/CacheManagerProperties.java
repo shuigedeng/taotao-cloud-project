@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.redis.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -28,7 +27,6 @@ import java.util.List;
  * @version 1.0.0
  * @since 2020/4/30 10:16
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = CacheManagerProperties.PREFIX)
 public class CacheManagerProperties {
@@ -37,7 +35,6 @@ public class CacheManagerProperties {
 
 	private List<CacheConfig> configs;
 
-	@Data
 	public static class CacheConfig {
 
 		/**
@@ -48,7 +45,30 @@ public class CacheManagerProperties {
 		 * 过期时间，sec
 		 */
 		private long second = 60;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+		public long getSecond() {
+			return second;
+		}
+
+		public void setSecond(long second) {
+			this.second = second;
+		}
 	}
 
+	public List<CacheConfig> getConfigs() {
+		return configs;
+	}
 
+	public void setConfigs(
+		List<CacheConfig> configs) {
+		this.configs = configs;
+	}
 }

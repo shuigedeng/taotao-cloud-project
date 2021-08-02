@@ -1,6 +1,7 @@
 package com.taotao.cloud.sms.core;
 
-import lombok.NonNull;
+
+import org.springframework.lang.NonNull;
 
 /**
  * 短信通用操作

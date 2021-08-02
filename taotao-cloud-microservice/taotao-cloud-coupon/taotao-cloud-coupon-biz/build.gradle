@@ -1,63 +1,10 @@
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-openapi')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-seata')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
-
     implementation project(':taotao-cloud-microservice:taotao-cloud-coupon:taotao-cloud-coupon-api')
 
-    // QueryDSL
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-
-    // mapstruct
-    implementation "org.mapstruct:mapstruct"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
-
-    // jasypt
-    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
-
-    // spring boot
-    //developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    implementation('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-
-    // spring cloud
-    implementation 'org.springframework.cloud:spring-cloud-context'
-
-    // spring cloud alibaba
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
-    implementation('com.alibaba.cloud:spring-cloud-alibaba-seata:2.2.0.RELEASE') {
-        exclude group: 'io.seata', module: 'seata-spring-boot-starter'
-    }
-    implementation 'io.seata:seata-spring-boot-starter:1.3.0'
-
-    implementation 'org.projectlombok:lombok'
-    
-    // implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-    // implementation 'io.micrometer:micrometer-registry-prometheus'
-
-    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingjdbc')
-    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
-    // implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk')
 }
 
 shadowJar {

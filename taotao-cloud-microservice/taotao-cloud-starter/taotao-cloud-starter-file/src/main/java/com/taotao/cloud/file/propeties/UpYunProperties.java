@@ -16,7 +16,6 @@
 package com.taotao.cloud.file.propeties;
 
 import com.taotao.cloud.file.constant.UploadFileConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/26 09:39
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
 	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_UPYUN)
@@ -52,4 +50,36 @@ public class UpYunProperties {
 	 * 图片对外域名
 	 */
 	private String domain;
+
+	public String getBucketName() {
+		return bucketName;
+	}
+
+	public void setBucketName(String bucketName) {
+		this.bucketName = bucketName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 }

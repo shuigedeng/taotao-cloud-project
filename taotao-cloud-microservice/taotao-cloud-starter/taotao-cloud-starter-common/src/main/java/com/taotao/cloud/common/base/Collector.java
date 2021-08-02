@@ -30,11 +30,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * 自定义采集器
@@ -44,6 +39,7 @@ import lombok.Setter;
  * @since 2021/6/22 17:07
  **/
 public class Collector {
+
 	/**
 	 * 默认实例
 	 */
@@ -171,15 +167,28 @@ public class Collector {
 
 		protected SortList sortListPerMinute = new SortList();
 		protected double lastMinTimeSpanPerMinute = 0;
-		@Getter
-		@Setter
 		protected Integer maxLength = 10;
+
+		public Integer getMaxLength() {
+			return maxLength;
+		}
+
+		public void setMaxLength(Integer maxLength) {
+			this.maxLength = maxLength;
+		}
+
 		protected volatile Long lastSecond = 0L;
 		protected volatile Long lastMinute = 0L;
 		protected Method method;
-		@Getter
-		@Setter
 		private String key;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
 
 		public Object run(String tag, Object obj, String methodName, Object[] params) {
 			if (method == null) {
@@ -316,15 +325,56 @@ public class Collector {
 		}
 	}
 
-	@AllArgsConstructor
-	@NoArgsConstructor
-	@Data
 	public static class SortInfo implements Comparable<SortInfo> {
 
 		protected Object tag;
 		protected double time;
 		protected double maxTime;
 		protected volatile AtomicLong count;
+
+		public SortInfo() {
+		}
+
+		public SortInfo(Object tag, double time, double maxTime,
+			AtomicLong count) {
+			this.tag = tag;
+			this.time = time;
+			this.maxTime = maxTime;
+			this.count = count;
+		}
+
+
+		public Object getTag() {
+			return tag;
+		}
+
+		public void setTag(Object tag) {
+			this.tag = tag;
+		}
+
+		public double getTime() {
+			return time;
+		}
+
+		public void setTime(double time) {
+			this.time = time;
+		}
+
+		public double getMaxTime() {
+			return maxTime;
+		}
+
+		public void setMaxTime(double maxTime) {
+			this.maxTime = maxTime;
+		}
+
+		public AtomicLong getCount() {
+			return count;
+		}
+
+		public void setCount(AtomicLong count) {
+			this.count = count;
+		}
 
 		@Override
 		public int compareTo(SortInfo o) {

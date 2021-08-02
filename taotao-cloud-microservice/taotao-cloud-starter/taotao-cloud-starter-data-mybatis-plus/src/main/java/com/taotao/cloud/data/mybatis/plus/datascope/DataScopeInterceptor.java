@@ -24,6 +24,7 @@ import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
 import com.baomidou.mybatisplus.extension.handlers.AbstractSqlParserHandler;
 import com.taotao.cloud.common.exception.CheckedException;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.data.mybatis.plus.enums.DataScopeTypeEnum;
 import java.sql.Connection;
@@ -34,8 +35,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import javax.sql.DataSource;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -56,17 +55,19 @@ import org.springframework.security.core.GrantedAuthority;
  * @since 2020/5/2 16:40
  * @version 1.0.0
  */
-@Slf4j
-@AllArgsConstructor
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})})
 public class DataScopeInterceptor extends AbstractSqlParserHandler implements Interceptor {
 
     private final DataSource dataSource;
 
-    @Override
+	public DataScopeInterceptor(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	@Override
     public Object intercept(Invocation invocation) throws Throwable {
-        if (log.isInfoEnabled()) {
-            log.debug("进入 PrepareInterceptor 拦截器...");
+        if (LogUtil.isInfoEnabled()) {
+	        LogUtil.debug("进入 PrepareInterceptor 拦截器...");
         }
 
         StatementHandler statementHandler = PluginUtils.realTarget(invocation.getTarget());

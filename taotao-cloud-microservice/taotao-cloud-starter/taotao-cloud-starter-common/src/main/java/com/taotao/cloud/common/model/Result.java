@@ -190,17 +190,17 @@ public class Result<T> implements Serializable {
 		private ResultBuilder() {
 		}
 
-		public ResultBuilder<T>  code(int code) {
+		public ResultBuilder<T> code(int code) {
 			this.code = code;
 			return this;
 		}
 
-		public ResultBuilder<T>  data(T data) {
+		public ResultBuilder<T> data(T data) {
 			this.data = data;
 			return this;
 		}
 
-		public ResultBuilder<T>  message(String message) {
+		public ResultBuilder<T> message(String message) {
 			this.message = message;
 			return this;
 		}
@@ -215,7 +215,7 @@ public class Result<T> implements Serializable {
 			return this;
 		}
 
-		public <T> Result<T> build() {
+		public Result<T> build() {
 			Result<T> result = new Result<>();
 			result.setCode(code);
 			result.setData(data);

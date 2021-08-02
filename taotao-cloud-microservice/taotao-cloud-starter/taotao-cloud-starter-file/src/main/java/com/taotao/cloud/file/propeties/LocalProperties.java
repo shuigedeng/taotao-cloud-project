@@ -16,7 +16,6 @@
 package com.taotao.cloud.file.propeties;
 
 import com.taotao.cloud.file.constant.UploadFileConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/26 09:40
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
 	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_LOCAL)
@@ -40,4 +38,36 @@ public class LocalProperties {
 	private String filePath = sysPath + "/upload";
 
 	private String filDir = "/upload";
+
+	public static String getSysPath() {
+		return sysPath;
+	}
+
+	public static void setSysPath(String sysPath) {
+		LocalProperties.sysPath = sysPath;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFilDir() {
+		return filDir;
+	}
+
+	public void setFilDir(String filDir) {
+		this.filDir = filDir;
+	}
 }

@@ -51,6 +51,15 @@ public class CacheHashKey extends CacheKey {
 		return new CacheKey(StrUtil.join(COLON, getKey(), getField()), getExpire());
 	}
 
+	@NonNull
+	public Object getField() {
+		return field;
+	}
+
+	public void setField(@NonNull Object field) {
+		this.field = field;
+	}
+
 	@Override
 	public String toString() {
 		return "CacheHashKey{" +

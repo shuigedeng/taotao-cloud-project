@@ -33,7 +33,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import io.swagger.v3.oas.models.servers.Server;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
@@ -51,7 +50,6 @@ import org.springframework.http.HttpHeaders;
  * @version 1.0.0
  * @since 2020/4/30 10:10
  */
-@Slf4j
 public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean,
 	EnvironmentAware {
 

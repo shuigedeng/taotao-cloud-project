@@ -60,7 +60,7 @@ public class RequestLogComponent implements InitializingBean {
 
 	@Bean
 	public RequestLogAspect sysLogAspect(ApplicationEventPublisher publisher) {
-		return new RequestLogAspect(publisher);
+		return new RequestLogAspect(requestLogProperties, publisher);
 	}
 
 	@Bean

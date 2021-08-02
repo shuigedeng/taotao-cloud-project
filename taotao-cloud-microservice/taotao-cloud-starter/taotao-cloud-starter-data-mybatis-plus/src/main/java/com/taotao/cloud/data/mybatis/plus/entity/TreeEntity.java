@@ -4,14 +4,12 @@ import static com.baomidou.mybatisplus.annotation.SqlCondition.LIKE;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
 
 /**
  * 包括id、create_time、created_by、updated_by、update_time、label、parent_id、sort_value 字段的表继承的树形实体
@@ -19,10 +17,6 @@ import lombok.experimental.Accessors;
  * @author zuihou
  * @date 2019/05/05
  */
-@Getter
-@Setter
-@Accessors(chain = true)
-@ToString(callSuper = true)
 public class TreeEntity<E, T extends Serializable> extends Entity<T> {
 
 	/**
@@ -57,5 +51,96 @@ public class TreeEntity<E, T extends Serializable> extends Entity<T> {
 		if (getChildren() == null) {
 			this.setChildren(new ArrayList<>());
 		}
+	}
+
+	@Override
+	public String
+	toString() {
+		return "TreeEntity{" +
+			"label='" + label + '\'' +
+			", parentId=" + parentId +
+			", sortValue=" + sortValue +
+			", children=" + children +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		TreeEntity<?, ?> that = (TreeEntity<?, ?>) o;
+		return Objects.equals(label, that.label) && Objects.equals(parentId,
+			that.parentId) && Objects.equals(sortValue, that.sortValue)
+			&& Objects.equals(children, that.children);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), label, parentId, sortValue, children);
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public T getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(T parentId) {
+		this.parentId = parentId;
+	}
+
+	public Integer getSortValue() {
+		return sortValue;
+	}
+
+	public void setSortValue(Integer sortValue) {
+		this.sortValue = sortValue;
+	}
+
+	public List<E> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<E> children) {
+		this.children = children;
+	}
+
+	public TreeEntity(T id, LocalDateTime createTime, T createdBy,
+		LocalDateTime updateTime, T updatedBy, String label, T parentId,
+		Integer sortValue, List<E> children) {
+		super(id, createTime, createdBy, updateTime, updatedBy);
+		this.label = label;
+		this.parentId = parentId;
+		this.sortValue = sortValue;
+		this.children = children;
+	}
+
+	public TreeEntity(String label, T parentId, Integer sortValue, List<E> children) {
+		this.label = label;
+		this.parentId = parentId;
+		this.sortValue = sortValue;
+		this.children = children;
+	}
+
+	public TreeEntity(LocalDateTime updateTime, T updatedBy, String label, T parentId,
+		Integer sortValue, List<E> children) {
+		super(updateTime, updatedBy);
+		this.label = label;
+		this.parentId = parentId;
+		this.sortValue = sortValue;
+		this.children = children;
 	}
 }

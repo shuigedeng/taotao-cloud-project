@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elasticsearch.model;
 
-import lombok.Data;
 
 /**
  * 聚合VO
@@ -24,9 +23,25 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2020/5/3 07:48
  */
-@Data
 public class AggItemVo {
 
 	private String name;
 	private Long value;
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getValue() {
+		return value;
+	}
+
+	public void setValue(Long value) {
+		this.value = value;
+	}
 }

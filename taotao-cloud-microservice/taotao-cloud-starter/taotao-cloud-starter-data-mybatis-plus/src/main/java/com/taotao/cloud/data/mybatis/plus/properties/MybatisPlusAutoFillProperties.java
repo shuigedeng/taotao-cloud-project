@@ -16,7 +16,6 @@
 package com.taotao.cloud.data.mybatis.plus.properties;
 
 import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/2 11:19
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_AUTO_FILL_PREFIX)
 public class MybatisPlusAutoFillProperties {
@@ -52,4 +50,44 @@ public class MybatisPlusAutoFillProperties {
 	 * 更新时间字段名
 	 */
 	private String updateTimeField = "updateTime";
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Boolean getEnableInsertFill() {
+		return enableInsertFill;
+	}
+
+	public void setEnableInsertFill(Boolean enableInsertFill) {
+		this.enableInsertFill = enableInsertFill;
+	}
+
+	public Boolean getEnableUpdateFill() {
+		return enableUpdateFill;
+	}
+
+	public void setEnableUpdateFill(Boolean enableUpdateFill) {
+		this.enableUpdateFill = enableUpdateFill;
+	}
+
+	public String getCreateTimeField() {
+		return createTimeField;
+	}
+
+	public void setCreateTimeField(String createTimeField) {
+		this.createTimeField = createTimeField;
+	}
+
+	public String getUpdateTimeField() {
+		return updateTimeField;
+	}
+
+	public void setUpdateTimeField(String updateTimeField) {
+		this.updateTimeField = updateTimeField;
+	}
 }

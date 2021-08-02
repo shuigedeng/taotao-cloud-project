@@ -21,10 +21,10 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.file.exception.UploadFileTypeException;
 import com.taotao.cloud.file.exception.UploadFileException;
 import com.taotao.cloud.file.pojo.UploadFileInfo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +45,6 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2020/10/26 11:10
  */
-@Slf4j
 public class FileUtil {
 
 	public static final String UPLOAD_FILE_PARSE_ERROR_MESSAGE = "解析文件失败";
@@ -82,7 +81,7 @@ public class FileUtil {
 			String extName = cn.hutool.core.io.FileUtil.extName(file);
 			uploadFileInfo.setName(extractFilename(originalFilename, extName));
 			uploadFileInfo.setContentType(multipartFile.getContentType());
-			uploadFileInfo.setIsImg(isImage(file));
+			uploadFileInfo.setImg(isImage(file));
 			uploadFileInfo.setSize(multipartFile.getSize());
 			uploadFileInfo.setFileType(FileTypeUtil.getType(multipartFile.getInputStream()));
 			return uploadFileInfo;
@@ -107,7 +106,7 @@ public class FileUtil {
 			uploadFileInfo.setName(file.getName());
 			uploadFileInfo.setFileMd5(md5);
 			uploadFileInfo.setContentType(new MimetypesFileTypeMap().getContentType(file));
-			uploadFileInfo.setIsImg(isImage(file));
+			uploadFileInfo.setImg(isImage(file));
 			uploadFileInfo.setSize(cn.hutool.core.io.FileUtil.size(file));
 			uploadFileInfo.setFileType(cn.hutool.core.io.FileUtil.getType(file));
 			return uploadFileInfo;
@@ -149,7 +148,7 @@ public class FileUtil {
 			file.transferTo(targetFile);
 			return path;
 		} catch (Exception e) {
-			log.error(UPLOAD_FILE_SAVE_ERROR_MESSAGE, e);
+			LogUtil.error(UPLOAD_FILE_SAVE_ERROR_MESSAGE, e);
 			return null;
 		}
 	}
@@ -311,7 +310,7 @@ public class FileUtil {
 	public static byte[] getFileByteArray(File file) {
 		long fileSize = file.length();
 		if (fileSize > Integer.MAX_VALUE) {
-			log.error(UPLOAD_FILE_TOO_BIG);
+			LogUtil.error(UPLOAD_FILE_TOO_BIG);
 			return null;
 		}
 		byte[] buffer = null;

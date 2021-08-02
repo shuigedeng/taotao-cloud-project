@@ -20,7 +20,6 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

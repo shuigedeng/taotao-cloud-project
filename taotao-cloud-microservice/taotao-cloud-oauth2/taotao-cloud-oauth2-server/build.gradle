@@ -43,8 +43,7 @@ dependencies {
     implementation 'org.apache.commons:commons-collections4'
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
 
-    implementation 'org.projectlombok:lombok'
-    
+
 
     // jpa
 //    annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

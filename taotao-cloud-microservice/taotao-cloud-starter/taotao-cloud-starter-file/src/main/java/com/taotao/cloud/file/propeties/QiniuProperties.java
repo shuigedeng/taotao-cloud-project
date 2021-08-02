@@ -16,7 +16,6 @@
 package com.taotao.cloud.file.propeties;
 
 import com.taotao.cloud.file.constant.UploadFileConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/26 09:39
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
 	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_QINIU)
@@ -51,4 +49,44 @@ public class QiniuProperties {
 	private String bucketName;
 
 	private String zone;
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
+
+	public String getBucketName() {
+		return bucketName;
+	}
+
+	public void setBucketName(String bucketName) {
+		this.bucketName = bucketName;
+	}
+
+	public String getZone() {
+		return zone;
+	}
+
+	public void setZone(String zone) {
+		this.zone = zone;
+	}
 }

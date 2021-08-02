@@ -6,21 +6,22 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.sms.props.SmsProperties;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.Random;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 
-@Slf4j
-@RequiredArgsConstructor
 public class AliSmsTemplate implements SmsTemplate {
 
 	private final SmsProperties smsProperties;
+
+	public AliSmsTemplate(SmsProperties smsProperties) {
+		this.smsProperties = smsProperties;
+	}
 
 	/**
 	 * 获取默认客户端
@@ -64,10 +65,10 @@ public class AliSmsTemplate implements SmsTemplate {
 		request.putQueryParameter("TemplateParam", templateParam);
 		try {
 			CommonResponse response = this.getDefaultAcsClient().getCommonResponse(request);
-			log.info(response.getData());
+			LogUtil.info(response.getData());
 			return true;
 		} catch (Exception e) {
-			log.error("异常：{}", e);
+			LogUtil.error("异常：{}", e);
 		}
 		return false;
 	}

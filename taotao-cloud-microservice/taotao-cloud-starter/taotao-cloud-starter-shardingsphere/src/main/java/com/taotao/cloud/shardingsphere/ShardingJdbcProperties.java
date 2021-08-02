@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.shardingsphere;
 
-import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -25,9 +24,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 1.0.0
  * @since 2020/6/22 17:30
  */
-@AllArgsConstructor
 @ConfigurationProperties(value = "taotao.cloud.shardingsphere")
 public class ShardingJdbcProperties {
 
 	private boolean enabled = false;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

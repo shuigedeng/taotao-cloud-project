@@ -16,7 +16,6 @@
 package com.taotao.cloud.file.propeties;
 
 import com.taotao.cloud.file.constant.UploadFileConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/26 09:39
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
 	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_NGINX)
@@ -41,4 +39,21 @@ public class NginxProperties {
 	 * nginx文件下载路径
 	 */
 	private String downPath;
+
+
+	public String getUploadPath() {
+		return uploadPath;
+	}
+
+	public void setUploadPath(String uploadPath) {
+		this.uploadPath = uploadPath;
+	}
+
+	public String getDownPath() {
+		return downPath;
+	}
+
+	public void setDownPath(String downPath) {
+		this.downPath = downPath;
+	}
 }

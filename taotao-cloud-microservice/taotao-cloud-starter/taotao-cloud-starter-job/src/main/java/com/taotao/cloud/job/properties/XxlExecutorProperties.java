@@ -1,6 +1,5 @@
 package com.taotao.cloud.job.properties;
 
-import lombok.Data;
 
 /**
  * xxl-job执行器配置
@@ -8,7 +7,6 @@ import lombok.Data;
  * @author lishangbu
  * @date 2020/9/14
  */
-@Data
 public class XxlExecutorProperties {
 
 	/**
@@ -47,4 +45,59 @@ public class XxlExecutorProperties {
 	 */
 	private Integer logRetentionDays = 30;
 
+	public String getAppname() {
+		return appname;
+	}
+
+	public void setAppname(String appname) {
+		this.appname = appname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public Integer getPort() {
+		return port;
+	}
+
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getLogPath() {
+		return logPath;
+	}
+
+	public void setLogPath(String logPath) {
+		this.logPath = logPath;
+	}
+
+	public Integer getLogRetentionDays() {
+		return logRetentionDays;
+	}
+
+	public void setLogRetentionDays(Integer logRetentionDays) {
+		this.logRetentionDays = logRetentionDays;
+	}
 }

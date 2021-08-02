@@ -43,10 +43,6 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
-    implementation 'org.projectlombok:lombok'
-    
-
-    //annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 //    implementation 'io.micrometer:micrometer-registry-prometheus'

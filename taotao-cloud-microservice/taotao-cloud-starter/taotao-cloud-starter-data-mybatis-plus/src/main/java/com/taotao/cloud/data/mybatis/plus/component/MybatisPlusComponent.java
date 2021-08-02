@@ -28,7 +28,6 @@ import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import com.taotao.cloud.data.mybatis.plus.handler.DateMetaObjectHandler;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -41,11 +40,17 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/5/2 11:20
  */
-@AllArgsConstructor
 public class MybatisPlusComponent implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
 	private final MybatisPlusAutoFillProperties autoFillProperties;
+
+	public MybatisPlusComponent(
+		TenantProperties tenantProperties,
+		MybatisPlusAutoFillProperties autoFillProperties) {
+		this.tenantProperties = tenantProperties;
+		this.autoFillProperties = autoFillProperties;
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

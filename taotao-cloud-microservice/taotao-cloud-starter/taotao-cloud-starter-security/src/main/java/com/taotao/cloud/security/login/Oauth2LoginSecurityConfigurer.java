@@ -3,8 +3,6 @@ package com.taotao.cloud.security.taox.oauth.login;
 import com.taotao.cloud.security.login.CustomLogoutSuccessHandler;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,14 +15,27 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-@Log4j2
-@AllArgsConstructor
 @Order(99)
 public class Oauth2LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	private final com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler;
 
 	private final ClientRegistrationRepository repository;
+
+	public Oauth2LoginSecurityConfigurer(
+		com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler,
+		ClientRegistrationRepository repository) {
+		this.successHandler = successHandler;
+		this.repository = repository;
+	}
+
+	public Oauth2LoginSecurityConfigurer(boolean disableDefaults,
+		com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler,
+		ClientRegistrationRepository repository) {
+		super(disableDefaults);
+		this.successHandler = successHandler;
+		this.repository = repository;
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -63,6 +74,7 @@ public class Oauth2LoginSecurityConfigurer extends WebSecurityConfigurerAdapter 
 
 		// 恢复 redirect_url 参数
 		authorization
-			.authorizationRequestRepository(new com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthorizationRequestRepository());
+			.authorizationRequestRepository(
+				new com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthorizationRequestRepository());
 	}
 }

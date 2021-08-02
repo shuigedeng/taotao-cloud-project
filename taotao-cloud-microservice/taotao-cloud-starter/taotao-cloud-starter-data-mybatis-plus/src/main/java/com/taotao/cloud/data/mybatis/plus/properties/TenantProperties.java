@@ -16,7 +16,6 @@
 package com.taotao.cloud.data.mybatis.plus.properties;
 
 import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -30,7 +29,6 @@ import java.util.List;
  * @since 2020/5/2 11:19
  * @version 1.0.0
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_TENANT_PREFIX)
 public class TenantProperties {
@@ -50,4 +48,28 @@ public class TenantProperties {
      * 需要配置mapper的全路径如：com.central.user.mapper.SysUserMapper.findList
      */
     private List<String> ignoreSqlList = new ArrayList<>();
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<String> getIgnoreTables() {
+		return ignoreTables;
+	}
+
+	public void setIgnoreTables(List<String> ignoreTables) {
+		this.ignoreTables = ignoreTables;
+	}
+
+	public List<String> getIgnoreSqlList() {
+		return ignoreSqlList;
+	}
+
+	public void setIgnoreSqlList(List<String> ignoreSqlList) {
+		this.ignoreSqlList = ignoreSqlList;
+	}
 }

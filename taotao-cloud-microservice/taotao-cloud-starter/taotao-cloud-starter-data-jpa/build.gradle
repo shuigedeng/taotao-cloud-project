@@ -7,7 +7,6 @@ dependencies {
     api 'com.querydsl:querydsl-jpa'
     api 'p6spy:p6spy:3.9.1'
     api "mysql:mysql-connector-java"
-
     
     annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"

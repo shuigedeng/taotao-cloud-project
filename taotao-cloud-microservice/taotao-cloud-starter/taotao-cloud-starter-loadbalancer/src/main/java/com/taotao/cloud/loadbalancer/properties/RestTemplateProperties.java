@@ -16,7 +16,6 @@
 package com.taotao.cloud.loadbalancer.properties;
 
 import com.taotao.cloud.loadbalancer.constant.LoadbalancerConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2017/11/17
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = LoadbalancerConstant.BASE_LOADBALANCER_REST_TEMPLATE_PREFIX)
 public class RestTemplateProperties {
@@ -48,4 +46,36 @@ public class RestTemplateProperties {
 	 * 链接超时时间 ms
 	 */
 	private int connectTimeout = 10000;
+
+	public int getMaxTotal() {
+		return maxTotal;
+	}
+
+	public void setMaxTotal(int maxTotal) {
+		this.maxTotal = maxTotal;
+	}
+
+	public int getMaxPerRoute() {
+		return maxPerRoute;
+	}
+
+	public void setMaxPerRoute(int maxPerRoute) {
+		this.maxPerRoute = maxPerRoute;
+	}
+
+	public int getReadTimeout() {
+		return readTimeout;
+	}
+
+	public void setReadTimeout(int readTimeout) {
+		this.readTimeout = readTimeout;
+	}
+
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+
+	public void setConnectTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+	}
 }

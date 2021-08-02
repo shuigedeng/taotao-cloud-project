@@ -18,7 +18,6 @@ package com.taotao.cloud.file.propeties;
 import com.taotao.cloud.file.constant.UploadFileConstant;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -29,7 +28,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/26 09:40
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
 	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_FASTDFS)
@@ -47,4 +45,28 @@ public class FastdfsProperties {
 	 * Tracker 地址列表
 	 */
 	private List<String> trackerList = new ArrayList<>();
+
+	public int getSoTimeout() {
+		return soTimeout;
+	}
+
+	public void setSoTimeout(int soTimeout) {
+		this.soTimeout = soTimeout;
+	}
+
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+
+	public void setConnectTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+	}
+
+	public List<String> getTrackerList() {
+		return trackerList;
+	}
+
+	public void setTrackerList(List<String> trackerList) {
+		this.trackerList = trackerList;
+	}
 }

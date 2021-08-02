@@ -16,8 +16,7 @@
 package com.taotao.cloud.elasticsearch.model;
 
 import java.io.Serializable;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
 /**
  * SearchDto
@@ -26,8 +25,6 @@ import lombok.EqualsAndHashCode;
  * @version 1.0.0
  * @since 2020/5/3 07:49
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
 public class SearchDto implements Serializable {
 
 	private static final long serialVersionUID = -2084416068307485742L;
@@ -55,4 +52,73 @@ public class SearchDto implements Serializable {
 	 * es的路由
 	 */
 	private String routing;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SearchDto searchDto = (SearchDto) o;
+		return Objects.equals(queryStr, searchDto.queryStr) && Objects.equals(page,
+			searchDto.page) && Objects.equals(limit, searchDto.limit)
+			&& Objects.equals(sortCol, searchDto.sortCol) && Objects.equals(
+			isHighlighter, searchDto.isHighlighter) && Objects.equals(routing,
+			searchDto.routing);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(queryStr, page, limit, sortCol, isHighlighter, routing);
+	}
+
+	public String getQueryStr() {
+		return queryStr;
+	}
+
+	public void setQueryStr(String queryStr) {
+		this.queryStr = queryStr;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+	public String getSortCol() {
+		return sortCol;
+	}
+
+	public void setSortCol(String sortCol) {
+		this.sortCol = sortCol;
+	}
+
+	public Boolean getHighlighter() {
+		return isHighlighter;
+	}
+
+	public void setHighlighter(Boolean highlighter) {
+		isHighlighter = highlighter;
+	}
+
+	public String getRouting() {
+		return routing;
+	}
+
+	public void setRouting(String routing) {
+		this.routing = routing;
+	}
 }

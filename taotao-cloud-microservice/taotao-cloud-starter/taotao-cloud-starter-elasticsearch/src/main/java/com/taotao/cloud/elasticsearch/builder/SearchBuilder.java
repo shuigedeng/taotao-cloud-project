@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -48,7 +47,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @version 1.0.0
  * @since 2020/5/3 06:49
  */
-@Data
 public class SearchBuilder {
 
 	/**
@@ -335,5 +333,29 @@ public class SearchBuilder {
 			sb.append(text.toString());
 		}
 		return sb.toString();
+	}
+
+	public SearchRequest getSearchRequest() {
+		return searchRequest;
+	}
+
+	public void setSearchRequest(SearchRequest searchRequest) {
+		this.searchRequest = searchRequest;
+	}
+
+	public SearchSourceBuilder getSearchBuilder() {
+		return searchBuilder;
+	}
+
+	public void setSearchBuilder(SearchSourceBuilder searchBuilder) {
+		this.searchBuilder = searchBuilder;
+	}
+
+	public RestHighLevelClient getClient() {
+		return client;
+	}
+
+	public void setClient(RestHighLevelClient client) {
+		this.client = client;
 	}
 }

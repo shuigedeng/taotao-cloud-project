@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elasticsearch.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/3 08:00
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = ElasticsearchProperties.PREFIX)
 public class ElasticsearchProperties {
@@ -37,4 +35,12 @@ public class ElasticsearchProperties {
 	 * Elasticsearch 总开关
 	 */
 	private boolean enabled = false;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

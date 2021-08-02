@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.sharding.jdbc.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.mybatis.plus.mapper.SuperEntity;
+import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.p6spy.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/10/14 09:11
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = P6spyProperties.PREFIX)
 public class P6spyProperties {
@@ -342,4 +340,293 @@ public class P6spyProperties {
 	 * #jndicontextcustom=java.naming.factory.url.pkgs;org.jboss.naming:org.jnp.interfaces
 	 */
 	private String jndicontextcustom;
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getModulelist() {
+		return modulelist;
+	}
+
+	public void setModulelist(String modulelist) {
+		this.modulelist = modulelist;
+	}
+
+	public String getDriverlist() {
+		return driverlist;
+	}
+
+	public void setDriverlist(String driverlist) {
+		this.driverlist = driverlist;
+	}
+
+	public Boolean getAutoflush() {
+		return autoflush;
+	}
+
+	public void setAutoflush(Boolean autoflush) {
+		this.autoflush = autoflush;
+	}
+
+	public String getDateformat() {
+		return dateformat;
+	}
+
+	public void setDateformat(String dateformat) {
+		this.dateformat = dateformat;
+	}
+
+	public String getStacktraceclass() {
+		return stacktraceclass;
+	}
+
+	public void setStacktraceclass(String stacktraceclass) {
+		this.stacktraceclass = stacktraceclass;
+	}
+
+	public Boolean getReloadproperties() {
+		return reloadproperties;
+	}
+
+	public void setReloadproperties(Boolean reloadproperties) {
+		this.reloadproperties = reloadproperties;
+	}
+
+	public Integer getReloadpropertiesinterval() {
+		return reloadpropertiesinterval;
+	}
+
+	public void setReloadpropertiesinterval(Integer reloadpropertiesinterval) {
+		this.reloadpropertiesinterval = reloadpropertiesinterval;
+	}
+
+	public String getAppender() {
+		return appender;
+	}
+
+	public void setAppender(String appender) {
+		this.appender = appender;
+	}
+
+	public String getLogfile() {
+		return logfile;
+	}
+
+	public void setLogfile(String logfile) {
+		this.logfile = logfile;
+	}
+
+	public Boolean getAppend() {
+		return append;
+	}
+
+	public void setAppend(Boolean append) {
+		this.append = append;
+	}
+
+	public String getLogMessageFormat() {
+		return logMessageFormat;
+	}
+
+	public void setLogMessageFormat(String logMessageFormat) {
+		this.logMessageFormat = logMessageFormat;
+	}
+
+	public String getCustomLogMessageFormat() {
+		return customLogMessageFormat;
+	}
+
+	public void setCustomLogMessageFormat(String customLogMessageFormat) {
+		this.customLogMessageFormat = customLogMessageFormat;
+	}
+
+	public String getDatabaseDialectDateFormat() {
+		return databaseDialectDateFormat;
+	}
+
+	public void setDatabaseDialectDateFormat(String databaseDialectDateFormat) {
+		this.databaseDialectDateFormat = databaseDialectDateFormat;
+	}
+
+	public String getDatabaseDialectTimestampFormat() {
+		return databaseDialectTimestampFormat;
+	}
+
+	public void setDatabaseDialectTimestampFormat(String databaseDialectTimestampFormat) {
+		this.databaseDialectTimestampFormat = databaseDialectTimestampFormat;
+	}
+
+	public String getDatabaseDialectBooleanFormat() {
+		return databaseDialectBooleanFormat;
+	}
+
+	public void setDatabaseDialectBooleanFormat(String databaseDialectBooleanFormat) {
+		this.databaseDialectBooleanFormat = databaseDialectBooleanFormat;
+	}
+
+	public String getDatabaseDialectBinaryFormat() {
+		return databaseDialectBinaryFormat;
+	}
+
+	public void setDatabaseDialectBinaryFormat(String databaseDialectBinaryFormat) {
+		this.databaseDialectBinaryFormat = databaseDialectBinaryFormat;
+	}
+
+	public Boolean getJmx() {
+		return jmx;
+	}
+
+	public void setJmx(Boolean jmx) {
+		this.jmx = jmx;
+	}
+
+	public String getJmxPrefix() {
+		return jmxPrefix;
+	}
+
+	public void setJmxPrefix(String jmxPrefix) {
+		this.jmxPrefix = jmxPrefix;
+	}
+
+	public Boolean getUseNanoTime() {
+		return useNanoTime;
+	}
+
+	public void setUseNanoTime(Boolean useNanoTime) {
+		this.useNanoTime = useNanoTime;
+	}
+
+	public String getRealdatasource() {
+		return realdatasource;
+	}
+
+	public void setRealdatasource(String realdatasource) {
+		this.realdatasource = realdatasource;
+	}
+
+	public String getRealdatasourceclass() {
+		return realdatasourceclass;
+	}
+
+	public void setRealdatasourceclass(String realdatasourceclass) {
+		this.realdatasourceclass = realdatasourceclass;
+	}
+
+	public String getRealdatasourceproperties() {
+		return realdatasourceproperties;
+	}
+
+	public void setRealdatasourceproperties(String realdatasourceproperties) {
+		this.realdatasourceproperties = realdatasourceproperties;
+	}
+
+	public Boolean getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Boolean filter) {
+		this.filter = filter;
+	}
+
+	public String getInclude() {
+		return include;
+	}
+
+	public void setInclude(String include) {
+		this.include = include;
+	}
+
+	public String getExclude() {
+		return exclude;
+	}
+
+	public void setExclude(String exclude) {
+		this.exclude = exclude;
+	}
+
+	public String getSqlexpression() {
+		return sqlexpression;
+	}
+
+	public void setSqlexpression(String sqlexpression) {
+		this.sqlexpression = sqlexpression;
+	}
+
+	public String getExcludecategories() {
+		return excludecategories;
+	}
+
+	public void setExcludecategories(String excludecategories) {
+		this.excludecategories = excludecategories;
+	}
+
+	public Boolean getExcludebinary() {
+		return excludebinary;
+	}
+
+	public void setExcludebinary(Boolean excludebinary) {
+		this.excludebinary = excludebinary;
+	}
+
+	public Integer getExecutionThreshold() {
+		return executionThreshold;
+	}
+
+	public void setExecutionThreshold(Integer executionThreshold) {
+		this.executionThreshold = executionThreshold;
+	}
+
+	public Boolean getOutagedetection() {
+		return outagedetection;
+	}
+
+	public void setOutagedetection(Boolean outagedetection) {
+		this.outagedetection = outagedetection;
+	}
+
+	public Integer getOutagedetectioninterval() {
+		return outagedetectioninterval;
+	}
+
+	public void setOutagedetectioninterval(Integer outagedetectioninterval) {
+		this.outagedetectioninterval = outagedetectioninterval;
+	}
+
+	public Boolean getStacktrace() {
+		return stacktrace;
+	}
+
+	public void setStacktrace(Boolean stacktrace) {
+		this.stacktrace = stacktrace;
+	}
+
+	public String getJndicontextfactory() {
+		return jndicontextfactory;
+	}
+
+	public void setJndicontextfactory(String jndicontextfactory) {
+		this.jndicontextfactory = jndicontextfactory;
+	}
+
+	public String getJndicontextproviderurl() {
+		return jndicontextproviderurl;
+	}
+
+	public void setJndicontextproviderurl(String jndicontextproviderurl) {
+		this.jndicontextproviderurl = jndicontextproviderurl;
+	}
+
+	public String getJndicontextcustom() {
+		return jndicontextcustom;
+	}
+
+	public void setJndicontextcustom(String jndicontextcustom) {
+		this.jndicontextcustom = jndicontextcustom;
+	}
 }

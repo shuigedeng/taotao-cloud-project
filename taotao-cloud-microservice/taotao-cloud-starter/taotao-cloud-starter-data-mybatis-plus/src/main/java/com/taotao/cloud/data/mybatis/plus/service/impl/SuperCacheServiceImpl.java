@@ -19,7 +19,7 @@ import com.taotao.cloud.common.model.CacheKeyBuilder;
 import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
 import com.taotao.cloud.data.mybatis.plus.mapper.SuperMapper;
 import com.taotao.cloud.data.mybatis.plus.service.ISuperCacheService;
-import com.taotao.cloud.redis.repository.CacheOps;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 基于 CacheOps 实现的 缓存实现 默认的key规则： #{CacheKeyBuilder#key()}:id
+ * 基于 redisRepository 实现的 缓存实现 默认的key规则： #{CacheKeyBuilder#key()}:id
  * <p>
  * 1，getByIdCache：新增的方法： 先查缓存，在查db 2，removeById：重写 ServiceImpl 类的方法，删除db后，淘汰缓存 3，removeByIds：重写
  * ServiceImpl 类的方法，删除db后，淘汰缓存 4，updateAllById： 新增的方法： 修改数据（所有字段）后，淘汰缓存 5，updateById：重写 ServiceImpl
@@ -55,7 +55,7 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	ISuperCacheService<T> {
 
 	@Autowired
-	protected CacheOps cacheOps;
+	protected RedisRepository redisRepository;
 
 	protected static final int MAX_BATCH_KEY_SIZE = 20;
 
@@ -70,7 +70,7 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	@Transactional(readOnly = true)
 	public T getByIdCache(Serializable id) {
 		CacheKey cacheKey = cacheKeyBuilder().key(id);
-		return cacheOps.get(cacheKey, k -> super.getById(id));
+		return redisRepository.get(cacheKey, k -> super.getById(id));
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		List<List<CacheKey>> partitionKeys = Lists.partition(keys, MAX_BATCH_KEY_SIZE);
 
 		// 用切割后的 partitionKeys 分批去缓存查， 返回的是缓存中存在的数据
-		List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) cacheOps.find(ks))
-			.flatMap(Collection::stream).collect(Collectors.toList());
+//		List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) redisRepository.find(ks))
+//			.flatMap(Collection::stream).collect(Collectors.toList());
 
 		// 所有的key
 		List<Serializable> keysList = Lists.newArrayList(ids);
@@ -95,15 +95,15 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		Set<Serializable> missedKeys = Sets.newLinkedHashSet();
 
 		List<T> allList = new ArrayList<>();
-		for (int i = 0; i < valueList.size(); i++) {
-			T v = valueList.get(i);
-			Serializable k = keysList.get(i);
-			if (v == null) {
-				missedKeys.add(k);
-			} else {
-				allList.add(v);
-			}
-		}
+//		for (int i = 0; i < valueList.size(); i++) {
+//			T v = valueList.get(i);
+//			Serializable k = keysList.get(i);
+//			if (v == null) {
+//				missedKeys.add(k);
+//			} else {
+//				allList.add(v);
+//			}
+//		}
 		// 加载miss 的数据，并设置到缓存
 		if (CollUtil.isNotEmpty(missedKeys)) {
 			if (loader == null) {
@@ -119,7 +119,7 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	@Override
 	@Transactional(readOnly = true)
 	public T getByKey(CacheKey key, Function<CacheKey, Object> loader) {
-		Object id = cacheOps.get(key, loader);
+		Object id = redisRepository.get(key, loader);
 		return id == null ? null : getByIdCache(Convert.toLong(id));
 	}
 
@@ -254,14 +254,14 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	protected void delCache(Collection<? extends Serializable> idList) {
 		CacheKey[] keys = idList.stream().map(id -> cacheKeyBuilder().key(id))
 			.toArray(CacheKey[]::new);
-		cacheOps.del(keys);
+		redisRepository.del(keys);
 	}
 
 	protected void delCache(T model) {
 		Object id = getId(model);
 		if (id != null) {
 			CacheKey key = cacheKeyBuilder().key(id);
-			cacheOps.del(key);
+			redisRepository.del(key);
 		}
 	}
 
@@ -269,7 +269,7 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		Object id = getId(model);
 		if (id != null) {
 			CacheKey key = cacheKeyBuilder().key(id);
-			cacheOps.set(key, model);
+			redisRepository.set(key, model);
 		}
 	}
 

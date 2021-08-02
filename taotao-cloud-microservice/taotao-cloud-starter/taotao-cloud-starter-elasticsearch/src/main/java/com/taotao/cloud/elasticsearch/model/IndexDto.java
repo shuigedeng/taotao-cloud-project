@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elasticsearch.model;
 
-import lombok.Data;
 
 /**
  * 索引对象
@@ -24,7 +23,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2020/5/3 07:48
  */
-@Data
 public class IndexDto {
 
 	/**
@@ -47,4 +45,45 @@ public class IndexDto {
 	 * mappings内容
 	 */
 	private String mappingsSource;
+
+
+	public String getIndexName() {
+		return indexName;
+	}
+
+	public void setIndexName(String indexName) {
+		this.indexName = indexName;
+	}
+
+	public Integer getNumberOfShards() {
+		return numberOfShards;
+	}
+
+	public void setNumberOfShards(Integer numberOfShards) {
+		this.numberOfShards = numberOfShards;
+	}
+
+	public Integer getNumberOfReplicas() {
+		return numberOfReplicas;
+	}
+
+	public void setNumberOfReplicas(Integer numberOfReplicas) {
+		this.numberOfReplicas = numberOfReplicas;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getMappingsSource() {
+		return mappingsSource;
+	}
+
+	public void setMappingsSource(String mappingsSource) {
+		this.mappingsSource = mappingsSource;
+	}
 }

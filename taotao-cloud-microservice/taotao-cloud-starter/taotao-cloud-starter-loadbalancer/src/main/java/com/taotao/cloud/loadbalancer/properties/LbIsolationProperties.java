@@ -16,7 +16,6 @@
 package com.taotao.cloud.loadbalancer.properties;
 
 import com.taotao.cloud.loadbalancer.constant.LoadbalancerConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2017/11/17
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = LoadbalancerConstant.BASE_LOADBALANCER_ISOLATION_PREFIX)
 public class LbIsolationProperties {
@@ -36,4 +34,12 @@ public class LbIsolationProperties {
 	 * 是否开启ribbon自定义隔离规则
 	 */
 	private boolean enabled = true;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

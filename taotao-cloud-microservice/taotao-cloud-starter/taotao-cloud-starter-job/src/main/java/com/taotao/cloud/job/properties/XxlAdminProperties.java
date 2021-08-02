@@ -1,6 +1,5 @@
 package com.taotao.cloud.job.properties;
 
-import lombok.Data;
 
 /**
  * xxl-job管理平台配置
@@ -8,7 +7,6 @@ import lombok.Data;
  * @author lishangbu
  * @date 2020/9/14
  */
-@Data
 public class XxlAdminProperties {
 
 	/**
@@ -16,4 +14,11 @@ public class XxlAdminProperties {
 	 */
 	private String addresses;
 
+	public String getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(String addresses) {
+		this.addresses = addresses;
+	}
 }

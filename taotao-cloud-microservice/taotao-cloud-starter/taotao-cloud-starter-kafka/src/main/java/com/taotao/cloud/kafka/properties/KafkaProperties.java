@@ -16,7 +16,6 @@
 package com.taotao.cloud.kafka.properties;
 
 import com.taotao.cloud.kafka.constant.KafkaConstant;
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,7 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/6/16 11:36
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = KafkaConstant.BASE_KAFKA_PREFIX)
 public class KafkaProperties {
@@ -36,4 +34,12 @@ public class KafkaProperties {
 	 * job开关,默认为false，非必填
 	 */
 	private boolean enabled = false;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

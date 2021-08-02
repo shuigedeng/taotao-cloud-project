@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.redis.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/4/30 10:16
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = RedisLockProperties.PREFIX)
 public class RedisLockProperties {
@@ -34,4 +32,13 @@ public class RedisLockProperties {
 	public static final String PREFIX = "taotao.cloud.redis.lock";
 
 	private boolean enabled = false;
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

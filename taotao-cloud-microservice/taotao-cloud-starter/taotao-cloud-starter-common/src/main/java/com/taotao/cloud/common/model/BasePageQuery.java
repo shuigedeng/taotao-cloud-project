@@ -96,6 +96,4 @@ public class BasePageQuery implements Serializable {
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
 	}
-
-
 }

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elasticsearch.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @version 1.0.0
  * @since 2020/5/3 06:47
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = RestClientPoolProperties.PREFIX)
 public class RestClientPoolProperties {
@@ -53,4 +51,44 @@ public class RestClientPoolProperties {
 	 * 最大路由连接数
 	 */
 	private Integer maxConnectPerRoute = 10;
+
+	public Integer getConnectTimeOut() {
+		return connectTimeOut;
+	}
+
+	public void setConnectTimeOut(Integer connectTimeOut) {
+		this.connectTimeOut = connectTimeOut;
+	}
+
+	public Integer getSocketTimeOut() {
+		return socketTimeOut;
+	}
+
+	public void setSocketTimeOut(Integer socketTimeOut) {
+		this.socketTimeOut = socketTimeOut;
+	}
+
+	public Integer getConnectionRequestTimeOut() {
+		return connectionRequestTimeOut;
+	}
+
+	public void setConnectionRequestTimeOut(Integer connectionRequestTimeOut) {
+		this.connectionRequestTimeOut = connectionRequestTimeOut;
+	}
+
+	public Integer getMaxConnectNum() {
+		return maxConnectNum;
+	}
+
+	public void setMaxConnectNum(Integer maxConnectNum) {
+		this.maxConnectNum = maxConnectNum;
+	}
+
+	public Integer getMaxConnectPerRoute() {
+		return maxConnectPerRoute;
+	}
+
+	public void setMaxConnectPerRoute(Integer maxConnectPerRoute) {
+		this.maxConnectPerRoute = maxConnectPerRoute;
+	}
 }

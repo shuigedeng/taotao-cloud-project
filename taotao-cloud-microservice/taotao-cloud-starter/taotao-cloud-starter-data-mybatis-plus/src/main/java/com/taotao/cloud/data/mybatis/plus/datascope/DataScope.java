@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.data.mybatis.plus.datascope;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.Map;
+import java.util.Objects;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +29,6 @@ import java.util.List;
  * @since 2020/5/2 16:40
  * @version 1.0.0
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
 public class DataScope extends HashMap {
 
     /**
@@ -43,4 +41,73 @@ public class DataScope extends HashMap {
      */
     private List<Integer> deptIds = new ArrayList<>();
 
+	public DataScope(int initialCapacity, float loadFactor, String scopeFiledName,
+		List<Integer> deptIds) {
+		super(initialCapacity, loadFactor);
+		this.scopeFiledName = scopeFiledName;
+		this.deptIds = deptIds;
+	}
+
+	public DataScope(int initialCapacity, String scopeFiledName,
+		List<Integer> deptIds) {
+		super(initialCapacity);
+		this.scopeFiledName = scopeFiledName;
+		this.deptIds = deptIds;
+	}
+
+	public DataScope(String scopeFiledName, List<Integer> deptIds) {
+		this.scopeFiledName = scopeFiledName;
+		this.deptIds = deptIds;
+	}
+
+	public DataScope(Map m, String scopeFiledName, List<Integer> deptIds) {
+		super(m);
+		this.scopeFiledName = scopeFiledName;
+		this.deptIds = deptIds;
+	}
+
+	@Override
+	public String toString() {
+		return "DataScope{" +
+			"scopeFiledName='" + scopeFiledName + '\'' +
+			", deptIds=" + deptIds +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		DataScope dataScope = (DataScope) o;
+		return Objects.equals(scopeFiledName, dataScope.scopeFiledName)
+			&& Objects.equals(deptIds, dataScope.deptIds);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), scopeFiledName, deptIds);
+	}
+
+	public String getScopeFiledName() {
+		return scopeFiledName;
+	}
+
+	public void setScopeFiledName(String scopeFiledName) {
+		this.scopeFiledName = scopeFiledName;
+	}
+
+	public List<Integer> getDeptIds() {
+		return deptIds;
+	}
+
+	public void setDeptIds(List<Integer> deptIds) {
+		this.deptIds = deptIds;
+	}
 }
