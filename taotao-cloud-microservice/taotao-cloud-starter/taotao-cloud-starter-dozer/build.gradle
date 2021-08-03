@@ -1,9 +1,0 @@
-dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
-    api 'com.github.dozermapper:dozer-core:6.5.0'
-    api 'com.github.dozermapper:dozer-spring4:6.5.0'
-
-    
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
-}

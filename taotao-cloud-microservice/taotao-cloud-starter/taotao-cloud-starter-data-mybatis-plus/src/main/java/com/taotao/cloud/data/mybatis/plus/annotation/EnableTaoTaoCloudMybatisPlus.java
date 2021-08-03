@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.mybatis.plus.annotation;
 
-import com.taotao.cloud.data.mybatis.plus.component.MybatisPlusComponent;
+import com.taotao.cloud.data.mybatis.plus.configuration.MybatisPlusConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({MybatisPlusComponent.class})
+@Import({MybatisPlusConfiguration.class})
 public @interface EnableTaoTaoCloudMybatisPlus {
 
 }

@@ -16,14 +16,19 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-file')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
 
-    api "org.mapstruct:mapstruct"
-    api "org.springframework.boot:spring-boot-starter-validation"
-
     api('org.springframework.boot:spring-boot-starter-web') {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
     api 'org.springframework.boot:spring-boot-starter-actuator'
     api 'org.springframework.boot:spring-boot-starter-undertow'
+    api 'org.springframework.boot:spring-boot-starter-aop'
+    api 'org.springframework.boot:spring-boot-starter-json'
+    api 'org.springframework.boot:spring-boot-starter-quartz'
+    api "org.springframework.boot:spring-boot-starter-validation"
+
+    api "org.mapstruct:mapstruct"
+    api 'cn.afterturn:easypoi-spring-boot-starter:4.4.0'
+    api 'com.github.dozermapper:dozer-spring-boot-starter:6.5.2'
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"

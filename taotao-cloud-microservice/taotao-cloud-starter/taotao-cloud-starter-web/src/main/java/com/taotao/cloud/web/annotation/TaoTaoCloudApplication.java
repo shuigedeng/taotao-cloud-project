@@ -21,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * TaoTaoCloudApplication
@@ -49,7 +48,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTaoTaoCloudSentinel
 @EnableTaoTaoCloudOauth2ResourceSecurity
 @EnableEncryptableProperties
-@EnableTransactionManagement
 @EnableDiscoveryClient
 @SpringBootApplication
 public @interface TaoTaoCloudApplication {

@@ -41,6 +41,59 @@ public class DataScope extends HashMap {
      */
     private List<Integer> deptIds = new ArrayList<>();
 
+	/**
+	 * 限制范围的字段名称 （除个人外）
+	 */
+	private String scopeName = "org_id";
+	/**
+	 * 限制范围为个人时的字段名称
+	 */
+	private String selfScopeName = "created_by";
+	/**
+	 * 当前用户ID
+	 */
+	private Long userId;
+
+	/**
+	 * 具体的数据范围
+	 */
+	private List<Long> orgIds;
+
+
+
+
+	public String getScopeName() {
+		return scopeName;
+	}
+
+	public void setScopeName(String scopeName) {
+		this.scopeName = scopeName;
+	}
+
+	public String getSelfScopeName() {
+		return selfScopeName;
+	}
+
+	public void setSelfScopeName(String selfScopeName) {
+		this.selfScopeName = selfScopeName;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public List<Long> getOrgIds() {
+		return orgIds;
+	}
+
+	public void setOrgIds(List<Long> orgIds) {
+		this.orgIds = orgIds;
+	}
+
 	public DataScope(int initialCapacity, float loadFactor, String scopeFiledName,
 		List<Integer> deptIds) {
 		super(initialCapacity, loadFactor);

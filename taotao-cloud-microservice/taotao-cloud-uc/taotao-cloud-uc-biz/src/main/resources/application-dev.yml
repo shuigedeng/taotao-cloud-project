@@ -107,6 +107,7 @@ spring:
       maximum-pool-size: 15
       minimum-idle: 10
       pool-name: DatebookHikariCP
+      register-mbeans: true
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
@@ -202,7 +203,7 @@ spring:
       # Netty线程池数量,默认值: 当前处理核数量 * 2
       nettyThreads: 32
       # 编码
-      codec: !<org.redisson.codec.JsonJacksonCodec> { }
+      codec: !<org.redisson.codec.JsonJacksonCodec> {}
       # 传输模式
       transportMode: "NIO"
 

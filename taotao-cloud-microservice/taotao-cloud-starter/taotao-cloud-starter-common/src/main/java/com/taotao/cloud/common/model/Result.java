@@ -81,6 +81,10 @@ public class Result<T> implements Serializable {
 		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS);
 	}
 
+	public static <T> Result<T> success() {
+		return of(ResultEnum.SUCCESS.getCode(), null, CommonConstant.SUCCESS);
+	}
+
 	public static <T> Result<T> success(T data, int code) {
 		return of(code, data, CommonConstant.SUCCESS);
 	}
@@ -97,12 +101,30 @@ public class Result<T> implements Serializable {
 		return of(ResultEnum.ERROR.getCode(), data, CommonConstant.ERROR);
 	}
 
+	public static <T> Result<T> fail(Throwable throwable) {
+		// todo
+		return null;
+	}
+
 	public static <T> Result<T> fail(T data, int code) {
 		return of(code, data, CommonConstant.ERROR);
 	}
 
 	public static Result<String> fail(ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.ERROR);
+	}
+
+	public static <T> Result<T> validFail(ResultEnum resultEnum) {
+		// todo
+		return null;
+	}
+	public static <T> Result<T> validFail(String msg, Object... args) {
+		// todo
+		return null;
+	}
+	public static <T> Result<T> validFail(String msg) {
+		// todo
+		return null;
 	}
 
 	public int getCode() {

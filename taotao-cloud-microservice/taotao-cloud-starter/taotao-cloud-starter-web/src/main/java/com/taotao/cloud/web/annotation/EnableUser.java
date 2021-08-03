@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
  *
  * @author shuigedeng
  */
-
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

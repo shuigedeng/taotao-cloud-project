@@ -268,4 +268,9 @@ public class SecurityUtil {
 		}
 		return username;
 	}
+
+	public static String getTenant() {
+		// todo
+		return "";
+	}
 }

@@ -1,0 +1,19 @@
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    #默认area
+    default:
+      type: caffeine
+      keyConvertor: fastjson
+  remote:
+    default:
+      # type由 redis.lettuce 变为了redis.springdata
+      type: redis.springdata
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50

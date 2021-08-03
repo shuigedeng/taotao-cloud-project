@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.mybatis.plus.properties;
 
-import com.taotao.cloud.data.mybatis.plus.constant.MybatisPlusConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,13 +26,15 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/5/2 11:19
  */
 @RefreshScope
-@ConfigurationProperties(prefix = MybatisPlusConstant.BASE_MYBATIS_PLUS_AUTO_FILL_PREFIX)
+@ConfigurationProperties(prefix = MybatisPlusAutoFillProperties.PREFIX)
 public class MybatisPlusAutoFillProperties {
+
+	public static final String PREFIX = "taotao.cloud.data.mybatis-plus.auto-fill";
 
 	/**
 	 * 是否开启自动填充字段
 	 */
-	private Boolean enabled = false;
+	private Boolean enabled = true;
 	/**
 	 * 是否开启了插入填充
 	 */
@@ -42,6 +43,19 @@ public class MybatisPlusAutoFillProperties {
 	 * 是否开启了更新填充
 	 */
 	private Boolean enableUpdateFill = true;
+	/**
+	 * 创建时间字段名
+	 */
+	private String idField = "id";
+
+	public String getIdField() {
+		return idField;
+	}
+
+	public void setIdField(String idField) {
+		this.idField = idField;
+	}
+
 	/**
 	 * 创建时间字段名
 	 */

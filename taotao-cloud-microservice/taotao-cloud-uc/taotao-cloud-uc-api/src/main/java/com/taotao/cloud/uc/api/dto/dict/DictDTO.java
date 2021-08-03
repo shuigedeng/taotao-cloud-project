@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.api.dto.dict;
 
-import com.taotao.cloud.uc.api.dto.DictDTO.DictDTOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
