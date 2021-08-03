@@ -9,11 +9,11 @@ dependencies {
     // cache starter
     api 'org.springframework.boot:spring-boot-starter-cache'
     api 'net.sf.ehcache:ehcache:2.10.9.2'
-    api('com.github.ben-manes.caffeine:caffeine:3.0.3') {
+    api('com.github.ben-manes.caffeine:caffeine:2.9.0') {
         exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
     }
-    api 'com.alicp.jetcache:jetcache-starter-redis-lettuce:2.6.0'
-    api 'com.alicp.jetcache:jetcache-starter-redis-springdata:2.6.0'
+//    api 'com.alicp.jetcache:jetcache-starter-redis-lettuce:2.6.0'
+//    api 'com.alicp.jetcache:jetcache-starter-redis-springdata:2.6.0'
 
     api "commons-io:commons-io"
     api "org.apache.commons:commons-pool2"

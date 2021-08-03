@@ -1,5 +1,5 @@
 server:
-  port: 9996
+  port: 9995
   http2:
     enabled: true
   undertow:
@@ -60,7 +60,7 @@ arthas:
 
 spring:
   application:
-    name: taotao-cloud-uc
+    name: taotao-cloud-order
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
@@ -125,7 +125,7 @@ spring:
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
-    lettuce:
+    lettordere:
       pool:
         max-active: 8
         max-wait: -1
@@ -220,7 +220,7 @@ spring:
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.3.240}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
-    producer:
+    prodorderer:
       retries: 0
       batch-size: 16384
       buffer-memory: 33554432
@@ -250,7 +250,7 @@ spring:
       names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
       mysql-master-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.mysql.jdbc.Driver
@@ -265,7 +265,7 @@ spring:
           pool-name: DatebookHikariCP
       mysql-slave-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.mysql.jdbc.Driver
@@ -280,7 +280,7 @@ spring:
           pool-name: DatebookHikariCP
       mysql-master-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.mysql.jdbc.Driver
@@ -295,7 +295,7 @@ spring:
           pool-name: DatebookHikariCP
       mysql-slave-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-uc?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.mysql.jdbc.Driver
@@ -372,7 +372,7 @@ taotao:
         executor:
           appname: ${spring.application.name}
           ip:
-          port: 1112
+          port: 1111
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${logging.file:${user.home}}/logs/application/${spring.application.name}/xxl-job}
 

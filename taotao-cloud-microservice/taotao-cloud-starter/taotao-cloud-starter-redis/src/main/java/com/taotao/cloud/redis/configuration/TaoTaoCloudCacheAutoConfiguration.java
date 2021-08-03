@@ -15,25 +15,11 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.alicp.jetcache.anno.CacheConsts;
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
-import com.alicp.jetcache.anno.config.EnableMethodCache;
-import com.alicp.jetcache.anno.support.GlobalCacheConfig;
-import com.alicp.jetcache.anno.support.SpringConfigProvider;
-import com.alicp.jetcache.embedded.EmbeddedCacheBuilder;
-import com.alicp.jetcache.embedded.LinkedHashMapCacheBuilder;
-import com.alicp.jetcache.redis.springdata.RedisSpringDataCacheBuilder;
-import com.alicp.jetcache.support.FastjsonKeyConvertor;
-import com.alicp.jetcache.support.JavaValueDecoder;
-import com.alicp.jetcache.support.JavaValueEncoder;
-import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.base.StrPool;
-import com.taotao.cloud.common.factory.YamlPropertySourceFactory;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -44,9 +30,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -94,7 +78,6 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 			return sb.toString();
 		};
 	}
-
 
 	@Bean(name = "redisCacheManager")
 	@Primary
@@ -179,41 +162,42 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 		return cacheManager;
 	}
 
-	@Configuration
-	@EnableMethodCache(basePackages = "com.taotao.cloud")
-	@EnableCreateCacheAnnotation
-	@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:jetcache.yml")
-	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "JETCACHE")
-	public class JetCacheAutoConfiguration {
-
-		@Bean
-		public SpringConfigProvider springConfigProvider() {
-			return new SpringConfigProvider();
-		}
-
-		@Bean
-		public GlobalCacheConfig config() {
-			Map localBuilders = new HashMap();
-			EmbeddedCacheBuilder localBuilder = LinkedHashMapCacheBuilder
-				.createLinkedHashMapCacheBuilder()
-				.keyConvertor(FastjsonKeyConvertor.INSTANCE);
-			localBuilders.put(CacheConsts.DEFAULT_AREA, localBuilder);
-
-			Map remoteBuilders = new HashMap(6);
-			RedisSpringDataCacheBuilder<?> redisSpringDataCacheBuilder = RedisSpringDataCacheBuilder.createBuilder()
-				.keyConvertor(FastjsonKeyConvertor.INSTANCE)
-				.valueEncoder(JavaValueEncoder.INSTANCE)
-				.valueDecoder(JavaValueDecoder.INSTANCE);
-			remoteBuilders.put(CacheConsts.DEFAULT_AREA, redisSpringDataCacheBuilder);
-
-			GlobalCacheConfig globalCacheConfig = new GlobalCacheConfig();
-			// globalCacheConfig.setConfigProvider(configProvider);//for jetcache <=2.5
-			globalCacheConfig.setLocalCacheBuilders(localBuilders);
-			globalCacheConfig.setRemoteCacheBuilders(remoteBuilders);
-			globalCacheConfig.setStatIntervalMinutes(15);
-			globalCacheConfig.setAreaInCacheName(false);
-
-			return globalCacheConfig;
-		}
-	}
+//	@Configuration
+//	@EnableMethodCache(basePackages = "com.taotao.cloud")
+//	@EnableCreateCacheAnnotation
+//	@PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:jetcache.yml")
+//	public class JetCacheAutoConfiguration {
+//
+//		@Bean
+//		@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "JETCACHE")
+//		public SpringConfigProvider springConfigProvider() {
+//			return new SpringConfigProvider();
+//		}
+//
+//		@Bean
+//		@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "JETCACHE")
+//		public GlobalCacheConfig config() {
+//			Map localBuilders = new HashMap();
+//			EmbeddedCacheBuilder localBuilder = LinkedHashMapCacheBuilder
+//				.createLinkedHashMapCacheBuilder()
+//				.keyConvertor(FastjsonKeyConvertor.INSTANCE);
+//			localBuilders.put(CacheConsts.DEFAULT_AREA, localBuilder);
+//
+//			Map remoteBuilders = new HashMap(6);
+//			RedisSpringDataCacheBuilder<?> redisSpringDataCacheBuilder = RedisSpringDataCacheBuilder.createBuilder()
+//				.keyConvertor(FastjsonKeyConvertor.INSTANCE)
+//				.valueEncoder(JavaValueEncoder.INSTANCE)
+//				.valueDecoder(JavaValueDecoder.INSTANCE);
+//			remoteBuilders.put(CacheConsts.DEFAULT_AREA, redisSpringDataCacheBuilder);
+//
+//			GlobalCacheConfig globalCacheConfig = new GlobalCacheConfig();
+//			// globalCacheConfig.setConfigProvider(configProvider);//for jetcache <=2.5
+//			globalCacheConfig.setLocalCacheBuilders(localBuilders);
+//			globalCacheConfig.setRemoteCacheBuilders(remoteBuilders);
+//			globalCacheConfig.setStatIntervalMinutes(15);
+//			globalCacheConfig.setAreaInCacheName(false);
+//
+//			return globalCacheConfig;
+//		}
+//	}
 }

@@ -84,9 +84,10 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		List<List<CacheKey>> partitionKeys = Lists.partition(keys, MAX_BATCH_KEY_SIZE);
 
 		// 用切割后的 partitionKeys 分批去缓存查， 返回的是缓存中存在的数据
-		List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) redisRepository.find(ks))
-			.flatMap(Collection::stream).collect(Collectors.toList());
+//		List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) redisRepository.find(ks))
+//			.flatMap(Collection::stream).collect(Collectors.toList());
 
+		List<T> valueList = new ArrayList<>();
 		// 所有的key
 		List<Serializable> keysList = Lists.newArrayList(ids);
 		// 缓存不存在的key

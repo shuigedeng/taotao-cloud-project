@@ -80,7 +80,7 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 
 		permitAllUrls.forEach(url -> registry.antMatchers(url).permitAll());
 
-		LogUtil.info("permit all urls: {}", permitAllUrls);
+		LogUtil.info("permit all urls: {0}", permitAllUrls.toString());
 	}
 
 	/**

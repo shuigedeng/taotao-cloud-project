@@ -5,6 +5,8 @@ import com.taotao.cloud.data.jpa.entity.BaseEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
@@ -13,7 +15,7 @@ import javax.persistence.Table;
  * @author shuigedeng
  * @since 2020/4/30 15:45
  */
-//@Entity
+@Entity
 @Table(name = "tt_order_pay_seq")
 @org.hibernate.annotations.Table(appliesTo = "tt_order_pay_seq", comment = "订单支付流水表")
 public class OrderPaySeq extends BaseEntity {
@@ -21,64 +23,69 @@ public class OrderPaySeq extends BaseEntity {
 	/**
 	 * 支付流水编码--需要与微信的预支付ID进行关联
 	 */
+	@Column(name = "pay_code", columnDefinition = "varchar(32) not null comment '支付流水编码'")
 	private String payCode;
 
 	/**
 	 * 买家ID
 	 */
+	@Column(name = "customer_id", nullable = false, columnDefinition = "bigint not null comment '买家ID'")
 	private Long customerId;
 
 	/**
 	 * 付款方银行编码
 	 */
+	@Column(name = "payer_bank_code", columnDefinition = "varchar(32) not null comment '付款方银行编码'")
 	private String payerBankCode;
 
 	/**
 	 * 交易金额
 	 */
-	private BigDecimal actualAmount = new BigDecimal(0);
+	@Column(name = "actual_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '交易金额'")
+	private BigDecimal actualAmount = BigDecimal.ZERO;
 
 	/**
 	 * 微信预支付ID
 	 */
+	@Column(name = "prepay_id", columnDefinition = "varchar(32) not null comment '微信预支付ID'")
 	private String prepayId;
 
 	/**
 	 * 微信交易ID
 	 */
+	@Column(name = "transaction_id", columnDefinition = "varchar(32) not null comment '微信交易ID'")
 	private String transactionId;
 
 	/**
 	 * 微信商户ID
 	 */
+	@Column(name = "mch_id", columnDefinition = "varchar(32) not null comment '微信商户ID'")
 	private String mchId;
 
 	/**
 	 * 微信APPID
 	 */
+	@Column(name = "app_id", columnDefinition = "varchar(32) not null comment '微信APPID'")
 	private String appId;
 
 	/**
 	 * 状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功
 	 */
-	private Short status;
+	@Column(name = "status", columnDefinition = "int not null default 0 comment '状态 0-等待支付 1-超时关闭 2-支付失败 3-支付成功'")
+	private Integer status;
 
 	/**
 	 * 备注
 	 */
+	@Column(name = "remark", columnDefinition = "varchar(3200) comment '备注'")
 	private String remark;
-
-	/**
-	 * 创建时间
-	 */
-	private LocalDateTime createDate = LocalDateTime.now();
 
 	public OrderPaySeq() {
 	}
 
 	public OrderPaySeq(String payCode, Long customerId, String payerBankCode,
 		BigDecimal actualAmount, String prepayId, String transactionId, String mchId,
-		String appId, Short status, String remark, LocalDateTime createDate) {
+		String appId, Integer status, String remark) {
 		this.payCode = payCode;
 		this.customerId = customerId;
 		this.payerBankCode = payerBankCode;
@@ -89,14 +96,12 @@ public class OrderPaySeq extends BaseEntity {
 		this.appId = appId;
 		this.status = status;
 		this.remark = remark;
-		this.createDate = createDate;
 	}
 
 	public OrderPaySeq(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
 		LocalDateTime lastModifiedTime, int version, Boolean delFlag, String payCode,
 		Long customerId, String payerBankCode, BigDecimal actualAmount, String prepayId,
-		String transactionId, String mchId, String appId, Short status, String remark,
-		LocalDateTime createDate) {
+		String transactionId, String mchId, String appId, Integer status, String remark) {
 		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
 		this.payCode = payCode;
 		this.customerId = customerId;
@@ -108,7 +113,6 @@ public class OrderPaySeq extends BaseEntity {
 		this.appId = appId;
 		this.status = status;
 		this.remark = remark;
-		this.createDate = createDate;
 	}
 
 	@Override
@@ -124,7 +128,6 @@ public class OrderPaySeq extends BaseEntity {
 			", appId='" + appId + '\'' +
 			", status=" + status +
 			", remark='" + remark + '\'' +
-			", createDate=" + createDate +
 			"} " + super.toString();
 	}
 
@@ -146,14 +149,13 @@ public class OrderPaySeq extends BaseEntity {
 			&& Objects.equals(prepayId, that.prepayId) && Objects.equals(
 			transactionId, that.transactionId) && Objects.equals(mchId, that.mchId)
 			&& Objects.equals(appId, that.appId) && Objects.equals(status,
-			that.status) && Objects.equals(remark, that.remark)
-			&& Objects.equals(createDate, that.createDate);
+			that.status) && Objects.equals(remark, that.remark);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), payCode, customerId, payerBankCode, actualAmount,
-			prepayId, transactionId, mchId, appId, status, remark, createDate);
+			prepayId, transactionId, mchId, appId, status, remark);
 	}
 
 	public String getPayCode() {
@@ -220,11 +222,11 @@ public class OrderPaySeq extends BaseEntity {
 		this.appId = appId;
 	}
 
-	public Short getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Short status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -234,14 +236,6 @@ public class OrderPaySeq extends BaseEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public LocalDateTime getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(LocalDateTime createDate) {
-		this.createDate = createDate;
 	}
 
 
@@ -259,9 +253,8 @@ public class OrderPaySeq extends BaseEntity {
 		private String transactionId;
 		private String mchId;
 		private String appId;
-		private Short status;
+		private Integer status;
 		private String remark;
-		private LocalDateTime createDate = LocalDateTime.now();
 		private Long id;
 		private Long createBy;
 		private Long lastModifiedBy;
@@ -317,18 +310,13 @@ public class OrderPaySeq extends BaseEntity {
 			return this;
 		}
 
-		public OrderPaySeqBuilder status(Short status) {
+		public OrderPaySeqBuilder status(Integer status) {
 			this.status = status;
 			return this;
 		}
 
 		public OrderPaySeqBuilder remark(String remark) {
 			this.remark = remark;
-			return this;
-		}
-
-		public OrderPaySeqBuilder createDate(LocalDateTime createDate) {
-			this.createDate = createDate;
 			return this;
 		}
 
@@ -379,7 +367,6 @@ public class OrderPaySeq extends BaseEntity {
 			orderPaySeq.setAppId(appId);
 			orderPaySeq.setStatus(status);
 			orderPaySeq.setRemark(remark);
-			orderPaySeq.setCreateDate(createDate);
 			orderPaySeq.setId(id);
 			orderPaySeq.setCreateBy(createBy);
 			orderPaySeq.setLastModifiedBy(lastModifiedBy);

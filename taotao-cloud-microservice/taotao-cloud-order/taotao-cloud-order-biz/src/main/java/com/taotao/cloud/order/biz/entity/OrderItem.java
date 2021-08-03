@@ -3,6 +3,8 @@ package com.taotao.cloud.order.biz.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -57,14 +59,12 @@ public class OrderItem extends BaseEntity {
 	/**
 	 * 商品单价
 	 */
-	@Builder.Default
 	@Column(name = "product_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '商品单价'")
 	private BigDecimal productPrice = BigDecimal.ZERO;
 
 	/**
 	 * 购买数量
 	 */
-	@Builder.Default
 	@Column(name = "num", columnDefinition = "int not null default 1 comment '购买数量'")
 	private Integer num = 1;
 
@@ -101,7 +101,6 @@ public class OrderItem extends BaseEntity {
 	/**
 	 * 退货数量
 	 */
-	@Builder.Default
 	@Column(name = "reject_count", columnDefinition = "int not null default 0 comment '退货数量'")
 	private Integer rejectCount = 0;
 
@@ -110,4 +109,401 @@ public class OrderItem extends BaseEntity {
 	 */
 	@Column(name = "type", columnDefinition = "int not null default 0 comment '0-普通商品 1-秒杀商品'")
 	private Integer type = 0;
+
+	@Override
+	public String toString() {
+		return "OrderItem{" +
+			"itemCode='" + itemCode + '\'' +
+			", productSpuId=" + productSpuId +
+			", productSpuCode='" + productSpuCode + '\'' +
+			", productSpuName='" + productSpuName + '\'' +
+			", productSkuId=" + productSkuId +
+			", productSkuName='" + productSkuName + '\'' +
+			", productPrice=" + productPrice +
+			", num=" + num +
+			", sumAmount=" + sumAmount +
+			", productPicUrl='" + productPicUrl + '\'' +
+			", supplierId=" + supplierId +
+			", supplierName='" + supplierName + '\'' +
+			", refundTime=" + refundTime +
+			", rejectCount=" + rejectCount +
+			", type=" + type +
+			"} " + super.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
+		OrderItem orderItem = (OrderItem) o;
+		return Objects.equals(itemCode, orderItem.itemCode) && Objects.equals(
+			productSpuId, orderItem.productSpuId) && Objects.equals(productSpuCode,
+			orderItem.productSpuCode) && Objects.equals(productSpuName,
+			orderItem.productSpuName) && Objects.equals(productSkuId,
+			orderItem.productSkuId) && Objects.equals(productSkuName,
+			orderItem.productSkuName) && Objects.equals(productPrice,
+			orderItem.productPrice) && Objects.equals(num, orderItem.num)
+			&& Objects.equals(sumAmount, orderItem.sumAmount) && Objects.equals(
+			productPicUrl, orderItem.productPicUrl) && Objects.equals(supplierId,
+			orderItem.supplierId) && Objects.equals(supplierName, orderItem.supplierName)
+			&& Objects.equals(refundTime, orderItem.refundTime)
+			&& Objects.equals(rejectCount, orderItem.rejectCount)
+			&& Objects.equals(type, orderItem.type);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), itemCode, productSpuId, productSpuCode,
+			productSpuName,
+			productSkuId, productSkuName, productPrice, num, sumAmount, productPicUrl, supplierId,
+			supplierName, refundTime, rejectCount, type);
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public Long getProductSpuId() {
+		return productSpuId;
+	}
+
+	public void setProductSpuId(Long productSpuId) {
+		this.productSpuId = productSpuId;
+	}
+
+	public String getProductSpuCode() {
+		return productSpuCode;
+	}
+
+	public void setProductSpuCode(String productSpuCode) {
+		this.productSpuCode = productSpuCode;
+	}
+
+	public String getProductSpuName() {
+		return productSpuName;
+	}
+
+	public void setProductSpuName(String productSpuName) {
+		this.productSpuName = productSpuName;
+	}
+
+	public Long getProductSkuId() {
+		return productSkuId;
+	}
+
+	public void setProductSkuId(Long productSkuId) {
+		this.productSkuId = productSkuId;
+	}
+
+	public String getProductSkuName() {
+		return productSkuName;
+	}
+
+	public void setProductSkuName(String productSkuName) {
+		this.productSkuName = productSkuName;
+	}
+
+	public BigDecimal getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(BigDecimal productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
+	}
+
+	public BigDecimal getSumAmount() {
+		return sumAmount;
+	}
+
+	public void setSumAmount(BigDecimal sumAmount) {
+		this.sumAmount = sumAmount;
+	}
+
+	public String getProductPicUrl() {
+		return productPicUrl;
+	}
+
+	public void setProductPicUrl(String productPicUrl) {
+		this.productPicUrl = productPicUrl;
+	}
+
+	public Long getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
+	}
+
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
+	public Integer getRefundTime() {
+		return refundTime;
+	}
+
+	public void setRefundTime(Integer refundTime) {
+		this.refundTime = refundTime;
+	}
+
+	public Integer getRejectCount() {
+		return rejectCount;
+	}
+
+	public void setRejectCount(Integer rejectCount) {
+		this.rejectCount = rejectCount;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public OrderItem(){}
+	public OrderItem(String itemCode, Long productSpuId, String productSpuCode,
+		String productSpuName, Long productSkuId, String productSkuName,
+		BigDecimal productPrice, Integer num, BigDecimal sumAmount, String productPicUrl,
+		Long supplierId, String supplierName, Integer refundTime, Integer rejectCount,
+		Integer type) {
+		this.itemCode = itemCode;
+		this.productSpuId = productSpuId;
+		this.productSpuCode = productSpuCode;
+		this.productSpuName = productSpuName;
+		this.productSkuId = productSkuId;
+		this.productSkuName = productSkuName;
+		this.productPrice = productPrice;
+		this.num = num;
+		this.sumAmount = sumAmount;
+		this.productPicUrl = productPicUrl;
+		this.supplierId = supplierId;
+		this.supplierName = supplierName;
+		this.refundTime = refundTime;
+		this.rejectCount = rejectCount;
+		this.type = type;
+	}
+
+	public OrderItem(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
+		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
+		String itemCode, Long productSpuId, String productSpuCode, String productSpuName,
+		Long productSkuId, String productSkuName, BigDecimal productPrice, Integer num,
+		BigDecimal sumAmount, String productPicUrl, Long supplierId, String supplierName,
+		Integer refundTime, Integer rejectCount, Integer type) {
+		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
+		this.itemCode = itemCode;
+		this.productSpuId = productSpuId;
+		this.productSpuCode = productSpuCode;
+		this.productSpuName = productSpuName;
+		this.productSkuId = productSkuId;
+		this.productSkuName = productSkuName;
+		this.productPrice = productPrice;
+		this.num = num;
+		this.sumAmount = sumAmount;
+		this.productPicUrl = productPicUrl;
+		this.supplierId = supplierId;
+		this.supplierName = supplierName;
+		this.refundTime = refundTime;
+		this.rejectCount = rejectCount;
+		this.type = type;
+	}
+
+	public static OrderItemBuilder builder(){
+		return new OrderItemBuilder();
+	}
+
+	public static final class OrderItemBuilder {
+
+		private String itemCode;
+		private Long productSpuId;
+		private String productSpuCode;
+		private String productSpuName;
+		private Long productSkuId;
+		private String productSkuName;
+		private BigDecimal productPrice = BigDecimal.ZERO;
+		private Integer num = 1;
+		private BigDecimal sumAmount = BigDecimal.ZERO;
+		private String productPicUrl;
+		private Long supplierId;
+		private String supplierName;
+		private Integer refundTime;
+		private Integer rejectCount = 0;
+		private Integer type = 0;
+		private Long id;
+		private Long createBy;
+		private Long lastModifiedBy;
+		private LocalDateTime createTime;
+		private LocalDateTime lastModifiedTime;
+		private int version = 1;
+		private Boolean delFlag = false;
+
+		private OrderItemBuilder() {
+		}
+
+		public static OrderItemBuilder anOrderItem() {
+			return new OrderItemBuilder();
+		}
+
+		public OrderItemBuilder itemCode(String itemCode) {
+			this.itemCode = itemCode;
+			return this;
+		}
+
+		public OrderItemBuilder productSpuId(Long productSpuId) {
+			this.productSpuId = productSpuId;
+			return this;
+		}
+
+		public OrderItemBuilder productSpuCode(String productSpuCode) {
+			this.productSpuCode = productSpuCode;
+			return this;
+		}
+
+		public OrderItemBuilder productSpuName(String productSpuName) {
+			this.productSpuName = productSpuName;
+			return this;
+		}
+
+		public OrderItemBuilder productSkuId(Long productSkuId) {
+			this.productSkuId = productSkuId;
+			return this;
+		}
+
+		public OrderItemBuilder productSkuName(String productSkuName) {
+			this.productSkuName = productSkuName;
+			return this;
+		}
+
+		public OrderItemBuilder productPrice(BigDecimal productPrice) {
+			this.productPrice = productPrice;
+			return this;
+		}
+
+		public OrderItemBuilder num(Integer num) {
+			this.num = num;
+			return this;
+		}
+
+		public OrderItemBuilder sumAmount(BigDecimal sumAmount) {
+			this.sumAmount = sumAmount;
+			return this;
+		}
+
+		public OrderItemBuilder productPicUrl(String productPicUrl) {
+			this.productPicUrl = productPicUrl;
+			return this;
+		}
+
+		public OrderItemBuilder supplierId(Long supplierId) {
+			this.supplierId = supplierId;
+			return this;
+		}
+
+		public OrderItemBuilder supplierName(String supplierName) {
+			this.supplierName = supplierName;
+			return this;
+		}
+
+		public OrderItemBuilder refundTime(Integer refundTime) {
+			this.refundTime = refundTime;
+			return this;
+		}
+
+		public OrderItemBuilder rejectCount(Integer rejectCount) {
+			this.rejectCount = rejectCount;
+			return this;
+		}
+
+		public OrderItemBuilder type(Integer type) {
+			this.type = type;
+			return this;
+		}
+
+		public OrderItemBuilder id(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public OrderItemBuilder createBy(Long createBy) {
+			this.createBy = createBy;
+			return this;
+		}
+
+		public OrderItemBuilder lastModifiedBy(Long lastModifiedBy) {
+			this.lastModifiedBy = lastModifiedBy;
+			return this;
+		}
+
+		public OrderItemBuilder createTime(LocalDateTime createTime) {
+			this.createTime = createTime;
+			return this;
+		}
+
+		public OrderItemBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
+			this.lastModifiedTime = lastModifiedTime;
+			return this;
+		}
+
+		public OrderItemBuilder version(int version) {
+			this.version = version;
+			return this;
+		}
+
+		public OrderItemBuilder delFlag(Boolean delFlag) {
+			this.delFlag = delFlag;
+			return this;
+		}
+
+		public OrderItem build() {
+			OrderItem orderItem = new OrderItem();
+			orderItem.setItemCode(itemCode);
+			orderItem.setProductSpuId(productSpuId);
+			orderItem.setProductSpuCode(productSpuCode);
+			orderItem.setProductSpuName(productSpuName);
+			orderItem.setProductSkuId(productSkuId);
+			orderItem.setProductSkuName(productSkuName);
+			orderItem.setProductPrice(productPrice);
+			orderItem.setNum(num);
+			orderItem.setSumAmount(sumAmount);
+			orderItem.setProductPicUrl(productPicUrl);
+			orderItem.setSupplierId(supplierId);
+			orderItem.setSupplierName(supplierName);
+			orderItem.setRefundTime(refundTime);
+			orderItem.setRejectCount(rejectCount);
+			orderItem.setType(type);
+			orderItem.setId(id);
+			orderItem.setCreateBy(createBy);
+			orderItem.setLastModifiedBy(lastModifiedBy);
+			orderItem.setCreateTime(createTime);
+			orderItem.setLastModifiedTime(lastModifiedTime);
+			orderItem.setVersion(version);
+			orderItem.setDelFlag(delFlag);
+			return orderItem;
+		}
+	}
 }

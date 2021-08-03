@@ -51,12 +51,6 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 		this.redisRepository = redisRepository;
 	}
 
-	public ImageCodeGatewayFilterFactory(Class<Object> configClass,
-		RedisRepository redisRepository) {
-		super(configClass);
-		this.redisRepository = redisRepository;
-	}
-
 	@Override
 	public GatewayFilter apply(Object config) {
 		return (exchange, chain) -> {

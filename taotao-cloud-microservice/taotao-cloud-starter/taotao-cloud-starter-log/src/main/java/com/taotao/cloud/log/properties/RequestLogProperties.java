@@ -42,9 +42,7 @@ public class RequestLogProperties {
 	 */
 	private String[] types = new String[]{LogTypeEnum.LOGGER.getName()};
 
-	public RequestLogProperties(Boolean enabled, String[] types) {
-		this.enabled = enabled;
-		this.types = types;
+	public RequestLogProperties() {
 	}
 
 	public Boolean getEnabled() {

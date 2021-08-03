@@ -102,6 +102,12 @@ spring:
             - Path=/taotao-cloud-uc/**
           filters:
             - RewritePath=/taotao-cloud-uc/(?<remaining>.*), /${remaining}
+        - id: taotao-cloud-order
+          uri: lb://taotao-cloud-order
+          predicates:
+            - Path=/taotao-cloud-order/**
+          filters:
+            - RewritePath=/taotao-cloud-order/(?<remaining>.*), /${remaining}
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:

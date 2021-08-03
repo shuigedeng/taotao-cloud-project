@@ -1,8 +1,3 @@
-server:
-  port: 9600
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  application:
-    name: taotao-cloud-order-service
+  profiles:
+    active: dev

@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "tt_sys_company")
-@org.hibernate.annotations.Table(appliesTo = "tt_company", comment = "公司表")
+@org.hibernate.annotations.Table(appliesTo = "tt_sys_company", comment = "公司表")
 public class SysCompany extends BaseEntity {
 
 	private static final long serialVersionUID = -8206387430513096669L;

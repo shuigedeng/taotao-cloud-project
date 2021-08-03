@@ -27,8 +27,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({RedisProperties.class,
-	RedisLockProperties.class, CustomCacheProperties.class})
+@EnableConfigurationProperties({RedisProperties.class, RedisLockProperties.class, CustomCacheProperties.class})
 public class PropertiesAutoConfiguration {
 
 }
