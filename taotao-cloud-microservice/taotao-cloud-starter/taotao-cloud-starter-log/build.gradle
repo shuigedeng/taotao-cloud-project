@@ -12,5 +12,7 @@ dependencies {
     api "net.logstash.logback:logstash-logback-encoder"
     api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.6.0'
 
+    implementation 'com.baomidou:mybatis-plus-extension'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

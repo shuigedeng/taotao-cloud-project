@@ -273,4 +273,9 @@ public class SecurityUtil {
 		// todo
 		return "";
 	}
+
+	public static String getClientId() {
+		// todo
+		return "";
+	}
 }

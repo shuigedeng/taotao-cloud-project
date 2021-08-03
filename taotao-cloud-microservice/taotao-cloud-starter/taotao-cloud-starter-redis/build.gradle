@@ -8,7 +8,7 @@ dependencies {
 
     // cache starter
     api 'org.springframework.boot:spring-boot-starter-cache'
-    api 'net.sf.ehcache:echcache:2.10.9.2'
+    api 'net.sf.ehcache:ehcache:2.10.9.2'
     api('com.github.ben-manes.caffeine:caffeine:3.0.3') {
         exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
     }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.log.component;
+package com.taotao.cloud.log.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -40,7 +40,7 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @version 1.0.0
  * @since 2020/4/30 10:21
  */
-public class RequestLogComponent implements InitializingBean {
+public class RequestLogConfiguration implements InitializingBean {
 
 	@Resource
 	private RequestLogProperties requestLogProperties;

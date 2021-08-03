@@ -34,8 +34,6 @@ public @interface RequestOperateLog {
 	 */
 	String description() default "";
 
-
-
 	/**
 	 * 是否启用 操作日志
 	 *

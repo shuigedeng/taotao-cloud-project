@@ -181,12 +181,27 @@ public class RequestLog implements Serializable {
 	private String ctime;
 
 	/**
+	 * 返回值
+	 */
+	@JsonProperty(value = "result")
+	private String result;
+
+	/**
 	 * 记录时间
 	 */
 	@JsonProperty(value = "logday")
 	private String logday;
 
 	public RequestLog(){}
+
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 
 	public String getTraceId() {
 		return traceId;

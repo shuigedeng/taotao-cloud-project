@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.annotation;
 
-import com.taotao.cloud.log.component.RequestLogComponent;
+import com.taotao.cloud.log.configuration.RequestLogConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({RequestLogComponent.class})
+@Import({RequestLogConfiguration.class})
 public @interface EnableTaoTaoCloudRequestLog {
 
 }
