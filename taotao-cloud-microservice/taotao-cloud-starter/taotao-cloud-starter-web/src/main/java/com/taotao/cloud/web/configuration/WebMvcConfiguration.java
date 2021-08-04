@@ -16,7 +16,10 @@
 package com.taotao.cloud.web.configuration;
 
 import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.web.filter.XssFilter.IGNORE_PARAM_VALUE;
+import static com.taotao.cloud.web.filter.XssFilter.IGNORE_PATH;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -35,15 +38,19 @@ import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.VersionFilter;
 import com.taotao.cloud.web.filter.WebContextFilter;
+import com.taotao.cloud.web.filter.XssFilter;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.properties.XssProperties;
+import com.taotao.cloud.web.xss.XssStringJsonDeserializer;
 import io.swagger.v3.oas.annotations.Operation;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -58,6 +65,7 @@ import javax.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -102,11 +110,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	private final RedisRepository redisRepository;
 	private final FilterProperties filterProperties;
+	private final XssProperties xssProperties;
 
 	public WebMvcConfiguration(RedisRepository redisRepository,
-		FilterProperties filterProperties) {
+		FilterProperties filterProperties,
+		XssProperties xssProperties) {
 		this.redisRepository = redisRepository;
 		this.filterProperties = filterProperties;
+		this.xssProperties = xssProperties;
 	}
 
 	@Override
@@ -191,10 +202,16 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 
 			// 注册自定义模块
-			objectMapper.registerModule(new JacksonModule())
-				.findAndRegisterModules();
+			objectMapper.registerModule(new JacksonModule()).findAndRegisterModules();
 
 			customizer.configure(objectMapper);
+
+			/**
+			 * 配置跨站攻击 反序列化处理器
+			 */
+			if (xssProperties.getRequestBodyEnabled()) {
+				customizer.deserializerByType(String.class, new XssStringJsonDeserializer());
+			}
 		};
 	}
 
@@ -251,6 +268,26 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		registrationBean.setName(WebContextFilter.class.getName());
 		registrationBean.setOrder(4);
 		return registrationBean;
+	}
+
+	/**
+	 * 配置跨站攻击过滤器
+	 */
+	@Bean
+	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
+		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
+		filterRegistration.setFilter(new XssFilter());
+		filterRegistration.setEnabled(xssProperties.getEnabled());
+		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
+		filterRegistration.setOrder(xssProperties.getOrder());
+
+		Map<String, String> initParameters = new HashMap<>(4);
+		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
+		initParameters.put(IGNORE_PARAM_VALUE,
+			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+		filterRegistration.setInitParameters(initParameters);
+		return filterRegistration;
 	}
 
 

@@ -29,6 +29,11 @@ public class CommonConstant {
 	private CommonConstant() {
 	}
 
+	/**
+	 * 文件分隔符
+	 */
+	public static final String PATH_SPLIT = "/";
+
 	public static final String SUCCESS = "success";
 	public static final String ERROR = "error";
 	public static final String TIME_ZONE_GMT8 = "GMT+8";

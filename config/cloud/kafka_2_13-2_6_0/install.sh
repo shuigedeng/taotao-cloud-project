@@ -1,19 +1,20 @@
 ##################################################
-cd /opt/taotao-bigdata/
+cd /opt/soft
 
 wget http://mirrors.hust.edu.cn/apache/kafka/2.6.0/kafka_2.12-2.8.0.tgz
 
-tar -zxvf kafka_2.12-2.8.0.tgz
+tar -zxvf kafka_2.12-2.8.0.tgz -C /opt/cloud
 
-cd kafka2.12-2.8.0/conf
+cd /opt/cloudkafka2.12-2.8.0
 
-vim server.properties
-# listeners=PLAINTEXT://:9092
-# advertised.listeners=PLAINTEXT://host:9092
-# log.dirs=/opt/cloud/kafka_2.12-2.8.0/logs
-# zookeeper.connect=172.16.3.240:2181/kafka
-# 这个是删除topic时才用得到的，如果不想删除topic，可以不加
-# delete.topic.enable=true
+vim conf/server.properties
+
+listeners=PLAINTEXT://:9092
+advertised.listeners=PLAINTEXT://host:9092
+log.dirs=/opt/cloud/kafka_2.12-2.8.0/logs
+zookeeper.connect=172.16.3.240:2181/kafka
+这个是删除topic时才用得到的，如果不想删除topic，可以不加
+delete.topic.enable=true
 
 vim bin/kafka-server-start.sh
 修改：export KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"

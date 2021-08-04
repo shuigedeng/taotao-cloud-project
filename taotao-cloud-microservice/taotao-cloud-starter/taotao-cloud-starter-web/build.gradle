@@ -15,6 +15,8 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-file')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elasticsearch')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper')
 
     api('org.springframework.boot:spring-boot-starter-web') {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

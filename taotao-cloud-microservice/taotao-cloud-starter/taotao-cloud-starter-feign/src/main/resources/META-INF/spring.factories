@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.loadbalancer.PropertiesAutoConfiguration
+com.taotao.cloud.feign.PropertiesAutoConfiguration

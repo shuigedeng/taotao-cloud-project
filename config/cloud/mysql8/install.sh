@@ -84,28 +84,28 @@ mysql_secure_installation
 #
 # All done!
 
-修改密码长度：
-set global validate_password.length=6;
-
-修改密码规则：
-set global validate_password.policy=LOW;
-
-先查看密码规则
-SHOW VARIABLES LIKE 'validate_password%';
-
 mysql -uroot -p
 
+先查看密码规则
+-- SHOW VARIABLES LIKE 'validate_password%';
+
+修改密码长度：
+-- set global validate_password.length=6;
+
+修改密码规则：
+-- set global validate_password.policy=LOW;
+
 -- use mysql;
--- ALTER USER 'root'@'%' IDENTIFIED BY '123456';
+
+-- update user set host='%' where user='root';
 
 -- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 
-FLUSH PRIVILEGES; // 允许root远程登录
+-- alter user 'root'@'%' identified by '123456' password expire never;
 
 -- flush privileges; // 刷新权限
+
 -- exit // 退出
-
-
 
 ##################### mysql.sh #############################
 #!/bin/bash

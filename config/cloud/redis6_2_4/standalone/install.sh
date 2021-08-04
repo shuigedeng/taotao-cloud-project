@@ -1,21 +1,23 @@
 ###########################################
-cd /opt/cloud
+cd /opt/soft
 
 wget http://download.redis.io/releases/redis-6.2.4.tar.gz
 
 yum install tar -y
-tar -zxvf redis-6.2.4.tar.gz
+
+tar -zxvf redis-6.2.4.tar.gz -C /opt/cloud
 
 cd redis-6.2.4
 
 yum install gcc make -y
+
 make PREFIX=/opt/cloud/redis-6.2.4 install
 
 mkdir -p ./{data,pid,logs}
 
 vim redis.conf
 # 主要修改这几项
-bind 127.0.0.1
+bind 0.0.0.0
 daemonize yes
 pidfile /opt/cloud/redis-6.2.4/pid/redis_6379.pid
 logfile "/opt/cloud/redis-6.2.4/logs/redis.log"
@@ -23,11 +25,11 @@ dir /opt/cloud/redis-6.2.4/data
 requirepass taotao-cloud
 
 #测试
-redis-cli -h  127.0.0.1 -p 6379
+./bin/redis-cli -h  127.0.0.1 -p 6379
 登录后 auth taotao-cloud
 
 #redis 自带的压测命令
-redis-benchmark -h 127.0.0.1 -p 6379 -c 50 -n 10000
+./bin/redis-benchmark -h 127.0.0.1 -p 6379 -a taotao-cloud -c 50 -n 10000
 
 # 服务器可能在程序正在对 AOF 文件进行写入时停机， 如果停机造成了 AOF 文件出错（corrupt），
 # 那么 Redis 在重启时会拒绝载入这个 AOF 文件， 从而确保数据的一致性不会被破坏。

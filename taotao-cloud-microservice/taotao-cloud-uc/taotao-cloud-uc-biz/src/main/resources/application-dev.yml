@@ -203,7 +203,7 @@ spring:
       # Netty线程池数量,默认值: 当前处理核数量 * 2
       nettyThreads: 32
       # 编码
-#      codec: !<org.redisson.codec.JsonJacksonCodec> {}
+      #      codec: !<org.redisson.codec.JsonJacksonCodec> {}
       # 传输模式
       transportMode: "NIO"
 
@@ -334,7 +334,6 @@ spring:
       sql:
         show: true
 
-
 taotao:
   cloud:
     log:
@@ -343,21 +342,6 @@ taotao:
         types:
           - logger
           - kafka
-    oauth2:
-      security:
-        enabled: true
-        ignore:
-          # 忽略认证的地址
-          http-urls: >
-            /api-docs,
-            /user/info/username,
-            /user/info/id/*,
-            /resource/test/seata,
-            /role/info/userId,
-            /resource/info/codes,
-            /member/info/security,
-            /user,
-            /role
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -375,6 +359,37 @@ taotao:
           port: 1112
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${logging.file:${user.home}}/logs/application/${spring.application.name}/xxl-job}
+    zookeeper:
+      enabled: false
+    sms:
+      enabled: false
+    feign:
+      enabled: true
+      loadbalancer:
+        enabled: true
+        rest-template:
+          enabled: true
+    web:
+      async:
+        task:
+          enabled: true
+      dozer:
+        enabled: true
+      encrypt:
+        enabled: true
+      filter:
+        version: true
+        tenant: true
+        trace: true
+        web-context: true
+      limit:
+        enabled: false
+      xss:
+        enabled: true
+    sentinel:
+      enabled: true
+    seata:
+      enabled: true
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

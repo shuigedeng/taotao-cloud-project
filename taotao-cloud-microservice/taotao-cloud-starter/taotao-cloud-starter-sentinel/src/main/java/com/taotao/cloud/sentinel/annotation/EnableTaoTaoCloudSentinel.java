@@ -23,11 +23,11 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启Sentinel
+ * 开启feign拦截器传递数据给下游服务，包含基础数据和http的相关数据
  *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @since 2020/4/5 13:40
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

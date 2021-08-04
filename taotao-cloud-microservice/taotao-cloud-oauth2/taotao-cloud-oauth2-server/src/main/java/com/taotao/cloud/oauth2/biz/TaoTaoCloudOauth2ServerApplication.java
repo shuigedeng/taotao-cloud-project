@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.oauth2.biz;
 
-import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudFeign;
-import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudHttpClient;
-import com.taotao.cloud.loadbalancer.annotation.EnableTaoTaoCloudLoadbalancer;
+import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
+import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudHttpClient;
+import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
 import org.springframework.boot.SpringApplication;

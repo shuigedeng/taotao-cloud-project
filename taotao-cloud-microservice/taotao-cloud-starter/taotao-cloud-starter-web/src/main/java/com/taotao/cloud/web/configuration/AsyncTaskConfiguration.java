@@ -19,11 +19,13 @@ import com.alibaba.ttl.TtlCallable;
 import com.alibaba.ttl.TtlRunnable;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.properties.AsyncTaskProperties;
+import com.taotao.cloud.web.properties.EncryptProperties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -40,6 +42,7 @@ import org.springframework.util.concurrent.ListenableFuture;
  */
 @EnableScheduling
 @EnableAsync(proxyTargetClass = true)
+@ConditionalOnProperty(prefix = AsyncTaskProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AsyncTaskConfiguration implements AsyncConfigurer {
 
 	private final AsyncTaskProperties asyncTaskProperties;

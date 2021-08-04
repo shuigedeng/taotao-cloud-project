@@ -17,6 +17,7 @@ package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.seata.properties.SeataProperties;
 import com.zaxxer.hikari.HikariDataSource;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -32,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +49,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @ConditionalOnBean(DataSource.class)
 @EnableAutoDataSourceProxy
+@ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SeataDataSourceConfiguration {
 
 	@Primary
@@ -59,20 +62,20 @@ public class SeataDataSourceConfiguration {
 	}
 
 	@Bean
-	public SeataXidFilter seataXidFilter(){
+	public SeataXidFilter seataXidFilter() {
 		return new SeataXidFilter();
 	}
 
 
 	@Bean
-	public SeataInterceptor seataInterceptor(){
+	public SeataInterceptor seataInterceptor() {
 		return new SeataInterceptor();
 	}
 
 
 	/**
-	 * 判断当前数据库是否有undo_log 该表，如果没有，
-	 * 创建该表 undo_log 为seata 记录事务sql执行的记录表 第二阶段时，如果confirm会清除记录，如果是cancel 会根据记录补偿原数据
+	 * 判断当前数据库是否有undo_log 该表，如果没有， 创建该表 undo_log 为seata 记录事务sql执行的记录表 第二阶段时，如果confirm会清除记录，如果是cancel
+	 * 会根据记录补偿原数据
 	 */
 	@PostConstruct
 	public void detectTable(DataSource dataSource) {
@@ -102,7 +105,7 @@ public class SeataDataSourceConfiguration {
 	 * @version 1.0.0
 	 * @since 2020/10/22 17:01
 	 */
-	public class SeataXidFilter extends OncePerRequestFilter {
+	public static class SeataXidFilter extends OncePerRequestFilter {
 
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -124,7 +127,7 @@ public class SeataDataSourceConfiguration {
 	 * @version 1.0.0
 	 * @since 2020/10/22 17:00
 	 */
-	public class SeataInterceptor implements RequestInterceptor {
+	public static class SeataInterceptor implements RequestInterceptor {
 
 		// 这里在feign请求的header中加入xid
 		// 注意：这里一定要将feign.hystrix.enabled设为false，因为为true时feign是通过线程池调用，而XID并不是一个InheritablThreadLocal变量。

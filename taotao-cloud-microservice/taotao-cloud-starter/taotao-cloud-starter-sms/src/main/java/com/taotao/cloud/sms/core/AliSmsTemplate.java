@@ -7,7 +7,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.sms.props.SmsProperties;
+import com.taotao.cloud.sms.props.AliSmsProperties;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -17,10 +17,10 @@ import org.springframework.lang.NonNull;
 
 public class AliSmsTemplate implements SmsTemplate {
 
-	private final SmsProperties smsProperties;
+	private final AliSmsProperties aliSmsProperties;
 
-	public AliSmsTemplate(SmsProperties smsProperties) {
-		this.smsProperties = smsProperties;
+	public AliSmsTemplate(AliSmsProperties aliSmsProperties) {
+		this.aliSmsProperties = aliSmsProperties;
 	}
 
 	/**
@@ -30,10 +30,10 @@ public class AliSmsTemplate implements SmsTemplate {
 	 */
 	public IAcsClient getDefaultAcsClient() {
 		DefaultProfile profile = DefaultProfile
-			.getProfile(smsProperties.getRegionId(), smsProperties.getAccessKey(),
-				smsProperties.getSecretKey());
-		DefaultProfile.addEndpoint(smsProperties.getRegionId(),
-			smsProperties.getProduct(), smsProperties.getDomain());
+			.getProfile(aliSmsProperties.getRegionId(), aliSmsProperties.getAccessKey(),
+				aliSmsProperties.getSecretKey());
+		DefaultProfile.addEndpoint(aliSmsProperties.getRegionId(),
+			aliSmsProperties.getProduct(), aliSmsProperties.getDomain());
 		//可自助调整超时时间
 		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -48,10 +48,10 @@ public class AliSmsTemplate implements SmsTemplate {
 	private CommonRequest request() {
 		CommonRequest request = new CommonRequest();
 		request.setSysMethod(MethodType.POST);
-		request.setSysDomain(smsProperties.getDomain());
+		request.setSysDomain(aliSmsProperties.getDomain());
 		request.setSysVersion(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		request.setSysAction("SendSms");
-		request.putQueryParameter("RegionId", smsProperties.getRegionId());
+		request.putQueryParameter("RegionId", aliSmsProperties.getRegionId());
 		return request;
 	}
 

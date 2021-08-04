@@ -1,4 +1,3 @@
-
 dependencies {
     api "com.codingapi.txlcn:txlcn-tc:5.0.2.RELEASE"
     api "com.codingapi.txlcn:txlcn-tm:5.0.2.RELEASE"

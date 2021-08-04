@@ -1,15 +1,15 @@
 ###########################################
 # 编译安装
-cd /root/github
+cd /opt/github
 git clone https://github.com/alibaba/nacos.git
 cd nacos/
 mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U
 cd nacos/distribution/target/nacos-server-2.0.2-SNAPSHOT
 cp -r nacos/ /opt/cloud/nacos
-cd /root/cloud/nacos/conf
+cd /opt/github/nacos/conf
 
 # 直接下载安装
-cd /opt/cloud
+cd /opt/soft
 wget  https://github.com/alibaba/nacos/releases/download/2.0.2/nacos-server-2.0.2.tar.gz
 tar -zxvf nacos-server-2.0.2.tar.gz
 mv nacos nacos

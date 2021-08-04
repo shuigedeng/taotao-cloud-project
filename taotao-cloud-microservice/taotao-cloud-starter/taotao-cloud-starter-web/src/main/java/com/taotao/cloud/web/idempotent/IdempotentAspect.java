@@ -4,10 +4,9 @@ import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.aspect.BaseAspect;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.redis.lock.RedissonDistributedLock;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.CodeSignature;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -30,7 +28,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author shuigedeng
  */
 @Aspect
-@ConditionalOnClass(RedisRepository.class)
 public class IdempotentAspect extends BaseAspect {
 
 	private final ThreadLocal<String> PER_FIX_KEY = new ThreadLocal<String>();
@@ -55,11 +52,10 @@ public class IdempotentAspect extends BaseAspect {
 	 */
 	private static final int LOCK_WAIT_TIME = 10;
 
-	private final RedissonDistributedLock redissonDistributedLock;
+	private final DistributedLock distributedLock;
 
-
-	public IdempotentAspect(RedissonDistributedLock redissonDistributedLock) {
-		this.redissonDistributedLock = redissonDistributedLock;
+	public IdempotentAspect(DistributedLock distributedLock) {
+		this.distributedLock = distributedLock;
 	}
 
 	@Pointcut("@annotation(vip.mate.core.ide.annotation.Ide)")
@@ -87,7 +83,7 @@ public class IdempotentAspect extends BaseAspect {
 
 				try {
 					if (StringUtils.isNotBlank(rid)) {
-						ZLock result = redissonDistributedLock.tryLock(REDIS_KEY_PREFIX + rid,
+						ZLock result = distributedLock.tryLock(REDIS_KEY_PREFIX + rid,
 							LOCK_WAIT_TIME,
 							TimeUnit.MILLISECONDS);
 						if (Objects.isNull(result)) {
@@ -136,7 +132,7 @@ public class IdempotentAspect extends BaseAspect {
 						perFix = perFix + ":" + val;
 
 						try {
-							ZLock result = redissonDistributedLock.tryLock(perFix, LOCK_WAIT_TIME,
+							ZLock result = distributedLock.tryLock(perFix, LOCK_WAIT_TIME,
 								TimeUnit.MILLISECONDS);
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();

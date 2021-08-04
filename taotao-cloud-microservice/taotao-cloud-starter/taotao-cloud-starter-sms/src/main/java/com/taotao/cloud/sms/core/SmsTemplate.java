@@ -10,7 +10,6 @@ import org.springframework.lang.NonNull;
  */
 public interface SmsTemplate {
 
-
 	/**
 	 * 发送短消息
 	 *

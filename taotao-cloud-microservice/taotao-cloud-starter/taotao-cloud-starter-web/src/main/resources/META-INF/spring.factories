@@ -6,7 +6,12 @@ com.taotao.cloud.web.configuration.PrometheusConfiguration, \
 com.taotao.cloud.web.configuration.WebMvcConfiguration, \
 com.taotao.cloud.web.configuration.ServletConfiguration, \
 com.taotao.cloud.web.configuration.ExceptionConfiguration, \
-com.taotao.cloud.web.configuration.ResponseConfiguration
+com.taotao.cloud.web.configuration.ResponseConfiguration, \
+com.taotao.cloud.web.configuration.StrategyConfiguration, \
+com.taotao.cloud.web.configuration.JasyptConfiguration, \
+com.taotao.cloud.web.configuration.LimitConfiguration, \
+com.taotao.cloud.web.configuration.IdempotentConfiguration, \
+com.taotao.cloud.web.configuration.DozerConfiguration
 
 #org.springframework.context.ApplicationListener=\
 #com.taotao.cloud.web.listener.PrometheusListener

@@ -18,13 +18,12 @@ package com.taotao.cloud.web.limit;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Limit
- *
- * @author shuigedeng
- * @version v1.0
- * @since 2021/08/04 08:46
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

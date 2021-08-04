@@ -1,6 +1,6 @@
 package com.taotao.cloud.elasticsearch.config;
 
-import com.central.es.properties.RestClientPoolProperties;
+import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;

@@ -17,14 +17,12 @@ package com.taotao.cloud.web.limit;
 
 import com.aliyun.oss.common.utils.StringUtils;
 import com.google.common.collect.ImmutableList;
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -34,30 +32,20 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * LimitAspect
  *
- * @RestController
- * public class LimiterController {
- * private static final AtomicInteger ATOMIC_INTEGER_1 = new AtomicInteger();
- * private static final AtomicInteger ATOMIC_INTEGER_2 = new AtomicInteger();
- * private static final AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
- *
- * Limit(key = "limitTest", period = 10, count = 3)
- * GetMapping("/limitTest1")
- * public int testLimiter1() {
- * 	return ATOMIC_INTEGER_1.incrementAndGet();
- * 	}
- *
- * GetMapping("/limitTest2")
- * public int testLimiter2() {
- * 	return ATOMIC_INTEGER_2.incrementAndGet();
- * 	}
- *
- * GetMapping("/limitTest3")
- * public int testLimiter3() {
- * 	return ATOMIC_INTEGER_3.incrementAndGet();
- * 	}
- *
  * @author shuigedeng
  * @version 1.0.0
+ * @RestController public class LimiterController { private static final AtomicInteger
+ * ATOMIC_INTEGER_1 = new AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_2 = new
+ * AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
+ * <p>
+ * Limit(key = "limitTest", period = 10, count = 3) GetMapping("/limitTest1") public int
+ * testLimiter1() { return ATOMIC_INTEGER_1.incrementAndGet(); }
+ * <p>
+ * GetMapping("/limitTest2") public int testLimiter2() { return ATOMIC_INTEGER_2.incrementAndGet();
+ * }
+ * <p>
+ * GetMapping("/limitTest3") public int testLimiter3() { return ATOMIC_INTEGER_3.incrementAndGet();
+ * }
  * @since 2021/08/04 08:49
  */
 @Aspect
@@ -65,20 +53,18 @@ public class LimitAspect {
 
 	private static final String UNKNOWN = "unknown";
 
-	private final RedisTemplate<String, Serializable> limitRedisTemplate;
+	private final RedisTemplate<String, String> limitRedisTemplate;
 
-	@Autowired
-	public LimitAspect(RedisTemplate<String, Serializable> limitRedisTemplate) {
+	public LimitAspect(RedisTemplate<String, String> limitRedisTemplate) {
 		this.limitRedisTemplate = limitRedisTemplate;
 	}
 
 	/**
 	 * @param pjp
-	 * @author xiaofu
 	 * @description 切面
 	 * @date 2020/4/8 13:04
 	 */
-	@Around("execution(public * *(..)) && @annotation(com.xiaofu.limit.api.Limit)")
+	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.web.limit.Limit)")
 	public Object interceptor(ProceedingJoinPoint pjp) {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
@@ -103,7 +89,8 @@ public class LimitAspect {
 				key = StringUtils.upperCase(method.getName());
 		}
 
-		ImmutableList<String> keys = ImmutableList.of(StringUtils.join(limitAnnotation.prefix(), key));
+		ImmutableList<String> keys = ImmutableList.of(
+			StringUtils.join(limitAnnotation.prefix(), key));
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
@@ -122,7 +109,6 @@ public class LimitAspect {
 	}
 
 	/**
-	 * @author xiaofu
 	 * @description 编写 redis Lua 限流脚本
 	 * @date 2020/4/8 13:24
 	 */
@@ -146,7 +132,6 @@ public class LimitAspect {
 
 
 	/**
-	 * @author xiaofu
 	 * @description 获取id地址
 	 * @date 2020/4/8 13:24
 	 */

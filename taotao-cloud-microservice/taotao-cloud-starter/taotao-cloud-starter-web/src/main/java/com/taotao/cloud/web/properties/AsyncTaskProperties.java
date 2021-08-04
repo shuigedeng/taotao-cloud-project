@@ -30,10 +30,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = AsyncTaskProperties.PREFIX)
 public class AsyncTaskProperties {
 
-	public static final String ENABLED = "enabled";
-	public static final String TRUE = "true";
-
 	public static final String PREFIX = "taotao.cloud.web.async.task";
+
+	private boolean enabled = true;
 
 	/**
 	 * 线程池维护线程的最小数量
@@ -125,5 +124,13 @@ public class AsyncTaskProperties {
 
 	public void setThreadNamePrefix(String threadNamePrefix) {
 		this.threadNamePrefix = threadNamePrefix;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

@@ -63,11 +63,13 @@ import org.springframework.stereotype.Component;
  * @since 2021/08/04 08:26
  */
 @Aspect
-@Component
 public class EncryptAspect {
 
-	@Autowired
-	private StringEncryptor stringEncryptor;
+	private final StringEncryptor stringEncryptor;
+
+	public EncryptAspect(StringEncryptor stringEncryptor) {
+		this.stringEncryptor = stringEncryptor;
+	}
 
 	@Pointcut("@annotation(com.xiaofu.annotation.EncryptMethod)")
 	public void pointCut() {

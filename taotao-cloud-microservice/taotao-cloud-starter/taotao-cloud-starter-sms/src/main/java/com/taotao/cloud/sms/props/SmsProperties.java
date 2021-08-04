@@ -1,113 +1,31 @@
 package com.taotao.cloud.sms.props;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+@RefreshScope
 @ConfigurationProperties(prefix = SmsProperties.PREFIX)
 public class SmsProperties {
 
-	public static final String PREFIX = "taotao.cloud.sms.ali";
+	public static final String PREFIX = "taotao.cloud.sms";
 
-	/**
-	 * 短信API产品名称
-	 */
-	private String product = "Dysmsapi";
+	private boolean enabled = false;
 
-	/**
-	 * 短信API产品域名
-	 */
-	private String domain = "dysmsapi.aliyuncs.com";
+	private String type = "ali";
 
-	/**
-	 * 区域标识
-	 */
-	private String regionId = "cn-hangzhou";
-
-	/**
-	 * 是否可用
-	 */
-	private boolean enable;
-
-	/**
-	 * accessKeyId
-	 */
-	private String accessKey;
-
-	/**
-	 * accessSecret
-	 */
-	private String secretKey;
-
-	/**
-	 * 短信模板ID
-	 */
-	private String templateId;
-
-	/**
-	 * 短信签名
-	 */
-	private String signName;
-
-	public String getProduct() {
-		return product;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public String getDomain() {
-		return domain;
+	public String getType() {
+		return type;
 	}
 
-	public void setDomain(String domain) {
-		this.domain = domain;
-	}
-
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public void setRegionId(String regionId) {
-		this.regionId = regionId;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
-	}
-
-	public String getAccessKey() {
-		return accessKey;
-	}
-
-	public void setAccessKey(String accessKey) {
-		this.accessKey = accessKey;
-	}
-
-	public String getSecretKey() {
-		return secretKey;
-	}
-
-	public void setSecretKey(String secretKey) {
-		this.secretKey = secretKey;
-	}
-
-	public String getTemplateId() {
-		return templateId;
-	}
-
-	public void setTemplateId(String templateId) {
-		this.templateId = templateId;
-	}
-
-	public String getSignName() {
-		return signName;
-	}
-
-	public void setSignName(String signName) {
-		this.signName = signName;
+	public void setType(String type) {
+		this.type = type;
 	}
 }

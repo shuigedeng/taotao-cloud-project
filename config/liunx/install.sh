@@ -25,4 +25,4 @@ DNS2=61.128.128.68
 
 dnf install vim
 
-
+dnf install langpacks-en glibc-all-langpacks -y

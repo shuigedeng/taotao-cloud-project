@@ -1,11 +1,11 @@
 ##################################################
-cd /opt/taotao-bigdata/
+cd /opt/soft
 
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz
 
-tar -zxvf apache-zookeeper-3.6.3-bin.tar.gz
+tar -zxvf apache-zookeeper-3.6.3-bin.tar.gz -C /opt/cloud
 
-mv apache-zookeeper-3.6.3-bin
+cd /opt/cloud/apache-zookeeper-3.6.3-bin
 
 mkdir data
 mkdir data/zookeeper
@@ -19,13 +19,13 @@ dataDir=/opt/cloud/apache-zookeeper-3.6.3-bin/data/zookeeper
 admin.enableServer=false
 
 #zkServer.sh
-/conf/java.env  vim java.env
+vim conf/java.env
 
 #!/bin/sh
-export JAVA_HOME=/usr/java/jdk # 这是你JDK安装路劲
-#export JAVA_HOME=/home/jdk1.8.0_131
+export JAVA_HOME="/opt/common/jdk1.8.0_211"
 # heap size MUST be modified according to cluster environment
-export JVMFLAGS="-Xms512m -Xmx1024m $JVMFLAGS" #这里是需要设置的内存大小，-Xms512m 最小内存 -Xmx1024m 最大使用内存
+#这里是需要设置的内存大小，-Xms512m 最小内存 -Xmx1024m 最大使用内存
+export JVMFLAGS="-Xms512m -Xmx1024m $JVMFLAGS"
 
 ##################### zookeeper.sh #############################
 #!/bin/bash
