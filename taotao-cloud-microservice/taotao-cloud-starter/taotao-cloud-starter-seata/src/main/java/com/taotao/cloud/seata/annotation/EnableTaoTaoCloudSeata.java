@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.seata.annotation;
 
-import com.taotao.cloud.seata.configuration.DataSourceConfiguration;
-import com.taotao.cloud.seata.filter.SeataXidFilter;
-import com.taotao.cloud.seata.interceptor.SeataInterceptor;
+import com.taotao.cloud.seata.configuration.SeataDataSourceConfiguration;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -35,7 +33,7 @@ import org.springframework.context.annotation.Import;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @EnableAutoDataSourceProxy
-@Import({SeataInterceptor.class, DataSourceConfiguration.class, SeataXidFilter.class})
+@Import({SeataDataSourceConfiguration.class})
 public @interface EnableTaoTaoCloudSeata {
 
 }

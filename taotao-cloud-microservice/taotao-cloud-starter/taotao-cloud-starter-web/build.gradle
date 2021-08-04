@@ -30,6 +30,10 @@ dependencies {
     api 'cn.afterturn:easypoi-spring-boot-starter:4.4.0'
     api 'com.github.dozermapper:dozer-spring-boot-starter:6.5.2'
 
+    api('org.owasp.antisamy:antisamy:1.6.4') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"

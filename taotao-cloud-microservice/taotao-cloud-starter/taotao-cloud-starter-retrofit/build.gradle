@@ -3,6 +3,5 @@ dependencies {
 
     api 'com.github.lianjiatech:retrofit-spring-boot-starter:2.2.8'
 
-    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

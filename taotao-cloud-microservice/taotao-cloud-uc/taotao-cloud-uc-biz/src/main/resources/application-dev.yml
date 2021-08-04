@@ -13,9 +13,9 @@ jasypt:
   encryptor:
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
     algorithm: PBEWITHHMACSHA512ANDAES_256
-#    property:
-#      prefix: "ENC@["
-#      suffix: "]"
+    property:
+      prefix: "ENC@["
+      suffix: "]"
 
 seata:
   enabled: true

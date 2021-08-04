@@ -18,6 +18,7 @@ package com.taotao.cloud.web;
 import com.taotao.cloud.web.dozer.DozerProperties;
 import com.taotao.cloud.web.properties.AsyncTaskProperties;
 import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.xss.properties.XssProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -27,7 +28,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({FilterProperties.class, AsyncTaskProperties.class, DozerProperties.class})
+@EnableConfigurationProperties({FilterProperties.class, AsyncTaskProperties.class, DozerProperties.class, XssProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

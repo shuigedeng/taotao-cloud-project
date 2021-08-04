@@ -1,14 +1,13 @@
 package com.taotao.cloud.web.util;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.env.Environment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Spring工具类
@@ -135,5 +134,27 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 */
 	public static ApplicationContext getApplicationContext() {
 		return SpringUtil.applicationContext;
+	}
+
+	/**
+	 * 回调方法
+	 *
+	 * @author shuigedeng 针对某些初始化方法，在SpringUtil 初始化前时，<br> 可提交一个 提交回调任务。<br> 在SpringUtil 初始化后，进行回调使用
+	 */
+	public static interface CallBack {
+
+		/**
+		 * 回调执行方法
+		 */
+		void executor();
+
+		/**
+		 * 本回调任务名称
+		 *
+		 * @return /
+		 */
+		default String getCallBackName() {
+			return Thread.currentThread().getId() + ":" + this.getClass().getName();
+		}
 	}
 }
