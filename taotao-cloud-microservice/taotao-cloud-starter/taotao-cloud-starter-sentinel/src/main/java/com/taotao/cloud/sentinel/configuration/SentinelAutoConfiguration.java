@@ -24,6 +24,7 @@ import com.sun.corba.se.spi.orbutil.proxy.InvocationHandlerFactory;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import java.lang.annotation.Target;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -36,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.type.MethodMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
@@ -89,7 +91,7 @@ public class SentinelAutoConfiguration {
 	 *
 	 * @author pangu
 	 */
-	public final class MateFeignSentinel {
+	public static final class MateFeignSentinel {
 
 		private MateFeignSentinel() {
 

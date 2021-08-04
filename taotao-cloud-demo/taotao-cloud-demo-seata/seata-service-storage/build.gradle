@@ -1,10 +1,8 @@
-
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
     implementation project(':taotao-cloud-demo:taotao-cloud-demo-seata:seata-common')
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
 
     implementation 'cn.hutool:hutool-all'
-
 }

@@ -6,7 +6,7 @@ dependencies {
 
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-loadbalancer')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
 

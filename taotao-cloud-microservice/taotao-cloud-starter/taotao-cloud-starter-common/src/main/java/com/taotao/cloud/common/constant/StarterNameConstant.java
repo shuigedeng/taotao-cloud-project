@@ -37,7 +37,7 @@ public class StarterNameConstant {
 
 	public static final String TAOTAO_CLOUD_REDIS_STARTER = "taotao-cloud-starter-redis";
 
-	public static final String TAOTAO_CLOUD_RIBBON_STARTER = "taotao-cloud-starter-loadbalancer";
+	public static final String TAOTAO_CLOUD_RIBBON_STARTER = "taotao-cloud-starter-feign";
 
 	public static final String TAOTAO_CLOUD_FEIGN_STARTER = "taotao-cloud-feign-starter";
 
