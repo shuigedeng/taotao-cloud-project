@@ -12,7 +12,7 @@ object TaoTaoCloudUtil {
   val dataFrameWriterEsOptions = Map(
     "es.index.auto.create" -> "true",
     "es.nodes.wan.only" -> "true",
-    "es.nodes" -> "172.16.3.240",
+    "es.nodes" -> "172.16.6.151",
     "es.port" -> "9200",
     "es.write.operation" -> "upsert",
     "es.mapping.id" -> "id"
@@ -89,7 +89,7 @@ object TaoTaoCloudUtil {
       .option(DataSourceWriteOptions.HIVE_SYNC_ENABLED_OPT_KEY, "true")
       .option(DataSourceWriteOptions.HIVE_PARTITION_FIELDS_OPT_KEY, "logday")
       .option(DataSourceWriteOptions.HIVE_PARTITION_EXTRACTOR_CLASS_OPT_KEY, "org.apache.hudi.hive.MultiPartKeysValueExtractor")
-      .option(DataSourceWriteOptions.HIVE_URL_OPT_KEY, "jdbc:hive2://172.16.3.240:10000")
+      .option(DataSourceWriteOptions.HIVE_URL_OPT_KEY, "jdbc:hive2://172.16.6.151:10000")
       .option(DataSourceWriteOptions.HIVE_USER_OPT_KEY, "root")
       .option(DataSourceWriteOptions.HIVE_PASS_OPT_KEY, "root")
 
@@ -188,7 +188,7 @@ object TaoTaoCloudUtil {
       .option(DataSourceWriteOptions.HIVE_SYNC_ENABLED_OPT_KEY, "true")
       .option(DataSourceWriteOptions.HIVE_PARTITION_FIELDS_OPT_KEY, "logday")
       .option(DataSourceWriteOptions.HIVE_PARTITION_EXTRACTOR_CLASS_OPT_KEY, "org.apache.hudi.hive.MultiPartKeysValueExtractor")
-      .option(DataSourceWriteOptions.HIVE_URL_OPT_KEY, "jdbc:hive2://172.16.3.240:10000")
+      .option(DataSourceWriteOptions.HIVE_URL_OPT_KEY, "jdbc:hive2://172.16.6.151:10000")
       .option(DataSourceWriteOptions.HIVE_USER_OPT_KEY, "root")
       .option(DataSourceWriteOptions.HIVE_PASS_OPT_KEY, "root")
 

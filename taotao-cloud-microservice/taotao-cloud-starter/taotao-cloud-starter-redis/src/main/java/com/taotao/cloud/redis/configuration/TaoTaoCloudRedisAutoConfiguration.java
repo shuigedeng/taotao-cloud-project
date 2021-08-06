@@ -16,6 +16,7 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
@@ -58,7 +59,7 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public RedissonConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
+	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
 		return new RedissonConnectionFactory(redisson);
 	}
 
@@ -110,7 +111,7 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnBean(RedissonClient.class)
 	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
-	public RedissonDistributedLock redissonDistributedLock() {
+	public DistributedLock redissonDistributedLock() {
 		return new RedissonDistributedLock(redissonClient);
 	}
 }

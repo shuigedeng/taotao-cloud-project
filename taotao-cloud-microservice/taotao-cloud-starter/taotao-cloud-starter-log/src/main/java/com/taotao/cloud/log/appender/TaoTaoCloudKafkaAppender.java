@@ -18,6 +18,7 @@ package com.taotao.cloud.log.appender;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.spi.AppenderAttachableImpl;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
@@ -27,7 +28,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -35,7 +35,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
-
+import org.apache.kafka.common.errors.InterruptException;
 /**
  * TaotaoKafkaAppender
  *
@@ -146,29 +146,36 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 	@Override
 	protected void append(E e) {
-		Map<String, String> copyOfPropertyMap = super.context.getCopyOfPropertyMap();
 		final byte[] payload = encoder.encode(e);
 		String s = new String(payload);
 
-		JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObject;
 		try {
-			jsonObject = JSONUtil.parseObj(s.replace("\n", ""));
+			s = s.replace("[", "#")
+				.replace("]", "#")
+				.replace("\n", "");
+			if (StrUtil.isNotBlank(s)) {
+				jsonObject = JSONUtil.parseObj(s);
+			} else {
+				throw new Exception(s);
+			}
 		} catch (Exception exception) {
-			LogUtil.error(exception);
+			LogUtil.error(s, exception);
+			return;
 		}
+
 		jsonObject.set("ctime",
 			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 		final byte[] key = keyingStrategy.createKey(e);
 
 		final Long timestamp = isAppendTimestamp() ? getTimestamp(e) : null;
-
-		final ProducerRecord<byte[],String> record = new ProducerRecord<>(topic, partition,
+		final ProducerRecord<byte[], String> record = new ProducerRecord<>(topic, partition,
 			timestamp, key,
 			JSONUtil.toJsonStr(jsonObject));
 
 		final Producer<byte[], String> producer = lazyProducer.get();
 		if (producer != null) {
-			deliveryStrategy.send(lazyProducer.get(), record, e, failedDeliveryCallback);
+			deliveryStrategy.send(producer, record, e, failedDeliveryCallback);
 		} else {
 			failedDeliveryCallback.onFailedDelivery(e, null);
 		}

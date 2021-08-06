@@ -5,15 +5,19 @@
 # zipkin-server更多版本（2.14.1-2.23.2【当前最新版】）下载地址：
 # https://repo1.maven.org/maven2/io/zipkin/zipkin-server/
 
-cd /opt/cloud/zipkin
+cd /opt/soft/
 
 wget https://repo1.maven.org/maven2/io/zipkin/zipkin-server/2.23.2/zipkin-server-2.23.2-exec.jar
+
+mkdir /opt/cloud/zipkin
+cp zipkin-server-2.23.2-exec.jar /opt/cloud/zipkin
 
 # zipkin mysql脚本
 https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql
 
 mysql –uroot –p
 create database `taotao-cloud-zipkin`;
+use  `taotao-cloud-zipkin`;
 source /opt/cloud/zipkin/mysql.sql
 
 # java -jar zipkin-server-2.23.2-exec.jar
@@ -21,7 +25,7 @@ source /opt/cloud/zipkin/mysql.sql
 # --zipkin.collector.rabbitmq.username=xxx
 # --zipkin.collector.rabbitmq.password=xxx
 # --STORAGE_TYPE=mysql
-# --MYSQL_HOST=172.16.3.240
+# --MYSQL_HOST=172.16.6.151
 # --MYSQL_TCP_PORT=3306
 # --MYSQL_DB=cloud-zipkin
 # --MYSQL_USER=root

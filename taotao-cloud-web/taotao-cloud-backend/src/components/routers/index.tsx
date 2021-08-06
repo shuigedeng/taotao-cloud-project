@@ -17,16 +17,16 @@ const Routers: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/*<Route path='/' exact render={() => <Redirect to='/dashboard'/>}/>*/}
+        <Route path='/' exact render={() => <Redirect to='/dashboard'/>}/>
         <Route path="/500" component={View500} />
         <Route path="/login" component={Login} />
         <Route path="/404" component={View404} />
-        <Route path="/tailwindexplames" component={Tailwindexplames} />
+        {/*<Route path="/tailwindexplames" component={Tailwindexplames} />*/}
         <Route
           path="/"
           render={() => {
             if (!token) {
-              return <Redirect to="/tailwindexplames" />
+              return <Redirect to="/login" />
             } else {
               if (roles && roles.length > 0) {
                 return <Container />

@@ -25,8 +25,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.jasypt.encryption.StringEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * EncryptAspect
@@ -71,7 +69,7 @@ public class EncryptAspect {
 		this.stringEncryptor = stringEncryptor;
 	}
 
-	@Pointcut("@annotation(com.xiaofu.annotation.EncryptMethod)")
+	@Pointcut("@annotation(com.taotao.cloud.web.jasypt.EncryptMethod)")
 	public void pointCut() {
 	}
 

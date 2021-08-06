@@ -16,7 +16,6 @@
  */
 package com.taotao.cloud.oss.props;
 
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -35,7 +34,6 @@ import java.io.Serializable;
  *     region: custom-domain: oss.mate.vip
  * </p>
  */
-@Data
 public class OssProperties implements Serializable {
 
     private static final long serialVersionUID = 7111600914195056135L;
@@ -82,4 +80,67 @@ public class OssProperties implements Serializable {
      */
     private String bucketName = "mate";
 
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public String getCustomDomain() {
+		return customDomain;
+	}
+
+	public void setCustomDomain(String customDomain) {
+		this.customDomain = customDomain;
+	}
+
+	public Boolean getPathStyleAccess() {
+		return pathStyleAccess;
+	}
+
+	public void setPathStyleAccess(Boolean pathStyleAccess) {
+		this.pathStyleAccess = pathStyleAccess;
+	}
+
+	public String getAppId() {
+		return appId;
+	}
+
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
+
+	public String getBucketName() {
+		return bucketName;
+	}
+
+	public void setBucketName(String bucketName) {
+		this.bucketName = bucketName;
+	}
 }

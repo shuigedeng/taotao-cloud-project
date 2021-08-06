@@ -11,11 +11,11 @@ cd /opt/github/nacos/conf
 # 直接下载安装
 cd /opt/soft
 wget  https://github.com/alibaba/nacos/releases/download/2.0.2/nacos-server-2.0.2.tar.gz
-tar -zxvf nacos-server-2.0.2.tar.gz
-mv nacos nacos
-cd nacos
+tar -zxvf nacos-server-2.0.2.tar.gz -C /opt/cloud
 
-vim application.properties
+cd /opt/cloud/nacos
+
+vim conf/application.properties
 # #*************** Config Module Related Configurations ***************#
 # ### If use MySQL as datasource:
 spring.datasource.platform=mysql
@@ -34,7 +34,8 @@ management.metrics.export.elastic.enabled=true
 JAVA_OPT="${JAVA_OPT} -server -Xms1g -Xmx1g -Xmn512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=160m"
 
 mysql –uroot –p
-create database taotao-cloud-nacos;
+create database `taotao-cloud-nacos`;
+use `taotao-cloud-nacos`;
 source /opt/cloud/nacos/conf/nacos-mysql.sql
 
 ##################### nacos.sh #############################

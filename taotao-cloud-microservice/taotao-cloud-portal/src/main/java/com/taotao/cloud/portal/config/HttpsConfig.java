@@ -32,11 +32,11 @@ import org.springframework.context.annotation.Configuration;
  * HttpsConfig
  *
  * @author shuigedeng
- * @since 2021/2/1 下午1:53
  * @version 1.0.0
+ * @since 2021/2/1 下午1:53
  */
 @Configuration
-@ConditionalOnProperty(name = "server.ssl.enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value = "server.ssl.enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfig {
 
 	/**
@@ -62,9 +62,9 @@ public class HttpsConfig {
 		undertowFactory.addDeploymentInfoCustomizers(deploymentInfo -> {
 			// 开启HTTP自动跳转至HTTPS
 			deploymentInfo.addSecurityConstraint(new SecurityConstraint()
-				.addWebResourceCollection(new WebResourceCollection().addUrlPattern("/*"))
-				.setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
-				.setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
+					.addWebResourceCollection(new WebResourceCollection().addUrlPattern("/*"))
+					.setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
+					.setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
 				.setConfidentialPortManager(exchange -> httpsPort);
 		});
 		return undertowFactory;

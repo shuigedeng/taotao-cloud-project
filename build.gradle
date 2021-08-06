@@ -83,6 +83,8 @@ buildscript {
         mavenCentral()
         google()
         maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
         gradlePluginPortal()
     }
 
@@ -117,6 +119,7 @@ allprojects {
 
     repositories {
         mavenLocal()
+        mavenCentral()
 
         maven {
             allowInsecureProtocol = true
@@ -142,6 +145,8 @@ allprojects {
             }
             url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
         }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
 
         mavenCentral()
     }
@@ -156,6 +161,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'org.springframework.boot'
     apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "com.google.cloud.tools.jib"
+    apply plugin: "org.springdoc.openapi-gradle-plugin"
 
 //    apply plugin: "com.taotao.cloud.plugin"
 
@@ -271,6 +277,8 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             }
         }
     }
+
+    jar.enabled = true
 
     shadowJar {
         zip64 true

@@ -5,7 +5,7 @@ wget https://github.com/seata/seata/releases/download/v1.4.0/seata-server-1.4.0.
 
 unzip seata-server-1.4.0.zip
 
-mv /opt/cloud/seata /opt/cloud/seata
+mv /opt/cloud/seata /opt/cloud/
 
 cd /opt/cloud/seata/conf
 
@@ -15,30 +15,31 @@ git clone https://github.com/seata/seata.git
 cd seata
 mvn -Prelease-all -DskipTests clean install -U
 
-# 修改registry.conf
+# 1/修改registry.conf
 使用的nacos作为配置中心和注册中心，使用将配置文件改为nacos
 
-# 修改file.conf
+# 2.修改file.conf
+cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/seata/lib
 修改数据库地址，注意mysql5/mysql8驱动不同
-
 创建数据库 在数据库中执行 sql文件
- mysql -uroot -p
-create database `cloud-seata`;
-source /opt/github/seata/script/server/db/mysql.sql
+mysql -uroot -p
+create database `taotao-cloud-seata`;
+use `taotao-cloud-seata`;
+source /opt/cloud/seata/conf/mysql.sql
+#source /opt/github/seata/script/server/db/mysql.sql
 
-# 导入config.txt配置到nacos
+# 3.导入config.txt配置到nacos
 cd conf
 cp /opt/github/seata/script/config-center/config.txt .
 cp -r /opt/github/seata/script/config-center/nacos .
 
 cd nacos
-nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -t 58d8ef8f-9325-4d2a-8e29-0b3632252b93 -u nacos -w nacos
+nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -t 6f9ac92d-8a72-4581-92b0-af71dbd67e2e -u nacos -w nacos
 
-# 在业务系统中执行sql文件
+# 4.在业务系统中执行sql文件
 cp /opt/github/seata/script/client/at/db/mysql.sql /opt/cloud/seata/conf/client-mysql.sql
 
-
-vim seata-server.sh
+vim bin/seata-server.sh
 
 exec “$JAVACMD” $JAVA_OPTS -server -Xmx1024m -Xms1024m -Xmn512m -Xss256k
 
@@ -46,7 +47,7 @@ exec “$JAVACMD” $JAVA_OPTS -server -Xmx1024m -Xms1024m -Xmn512m -Xss256k
 #!/bin/bash
 
 function start_seata() {
-     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 127.0.0.1 >/opt/cloud/seata/logs/seata.out 2>&1 &
+     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 172.16.6.151 >/opt/cloud/seata/logs/seata.out 2>&1 &
      sleep 10
      echo "seata started"
 }

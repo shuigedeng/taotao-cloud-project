@@ -18,7 +18,7 @@ public class RemoteMemberLoginFallbackImpl implements FallbackFactory<RemoteMemb
 		return new RemoteMemberLoginService() {
 			@Override
 			public Result<MemberLoginVO> findMemberLoginById(Long id) {
-				LogUtil.error("调用findMemberLoginById异常：{}", throwable, id);
+				LogUtil.error("调用findMemberLoginById异常：{0}", throwable, id);
 				return Result.failed(null, 500);
 			}
 		};

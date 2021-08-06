@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.rabbitmq.annotation;
 
-import com.taotao.cloud.rabbitmq.component.RabbitMqComponent;
+import com.taotao.cloud.rabbitmq.configuration.RabbitMqConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({RabbitMqComponent.class})
+@Import({RabbitMqConfiguration.class})
 public @interface EnableTaoTaoCloudRabbitMQ {
 
 }

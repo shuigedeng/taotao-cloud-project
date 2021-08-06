@@ -1,3 +1,6 @@
+bootJar.enabled = true
+jar.enabled = true
+
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
@@ -11,7 +14,7 @@ dependencies {
 
 configurations.all {
     resolutionStrategy {
-        force 'com.alibaba.csp:sentinel-core:1.8.0'
+        force 'com.alibaba.csp:sentinel-core:1.8.1'
     }
 }
 

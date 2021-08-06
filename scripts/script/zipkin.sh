@@ -2,7 +2,7 @@
 
 function start_zipkin() {
      nohup java -jar /opt/taotao-cloud/zipkin2.23.2/zipkin-server-2.23.2-exec.jar \
-        --MYSQL_HOST=172.16.3.240 \
+        --MYSQL_HOST=172.16.6.151 \
         --MYSQL_TCP_PORT=3306 \
         --MYSQL_DB=taotao-cloud-zipkin \
         --MYSQL_USER=root \

@@ -18,6 +18,10 @@ package com.taotao.cloud.sentinel.configuration;
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webflux.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
+import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
+import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
@@ -62,10 +66,21 @@ public class SentinelAutoConfiguration {
 	@ConditionalOnClass(HttpServletRequest.class)
 	public BlockExceptionHandler blockExceptionHandler() {
 		return (request, response, e) -> {
-			LogUtil.error("HttpServletRequest sentinel 降级 资源名称{0}", e.getRule().getResource(), e);
-			LogUtil.error("WebmvcHandler Sentinel调用失败: {0}", e);
-			Result<String> result = Result.fail(e.getMessage());
-			ResponseUtil.fail(response, result);
+			LogUtil.error("WebmvcHandler sentinel 降级 资源名称{0}", e, e.getRule().getResource());
+			String errMsg = e.getMessage();
+			if (e instanceof FlowException) {
+				errMsg = "被限流了";
+			}
+			if (e instanceof DegradeException) {
+				errMsg = "服务降级了";
+			}
+			if (e instanceof SystemBlockException) {
+				errMsg = "系统过载保护";
+			}
+			if (e instanceof AuthorityException) {
+				errMsg = "限流权限控制异常";
+			}
+			ResponseUtil.fail(response, errMsg);
 		};
 	}
 
@@ -74,8 +89,7 @@ public class SentinelAutoConfiguration {
 	@ConditionalOnClass(ServerResponse.class)
 	public BlockRequestHandler blockRequestHandler() {
 		return (exchange, e) -> {
-			LogUtil.error("ServerResponse sentinel 降级 资源名称{0}", e.getCause(), e);
-			LogUtil.error("WebfluxHandler Sentinel调用失败: {0}", e);
+			LogUtil.error("ServerResponse sentinel 降级 资源名称{0}",e, e.getCause());
 			return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromValue(Result.fail(e.getMessage())));

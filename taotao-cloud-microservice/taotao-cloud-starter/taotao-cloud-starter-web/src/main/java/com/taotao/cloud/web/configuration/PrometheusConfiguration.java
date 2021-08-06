@@ -7,7 +7,6 @@ import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
 import javax.annotation.Resource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * PrometheusConfiguration
@@ -15,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  * @author zuihou
  * @date 2020/12/30 2:48 下午
  */
-@Configuration
 public class PrometheusConfiguration {
 
 	@Resource

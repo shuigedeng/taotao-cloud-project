@@ -131,7 +131,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     let isUnmount = true
     if (isUnmount) {
-      // refreshCaptcha()
+      refreshCaptcha()
       // socialLogin()
     }
     return () => {
@@ -190,6 +190,9 @@ const Login: React.FC = () => {
 
   const submit = (event: React.MouseEvent) => {
     event.preventDefault()
+    message.success('亲，由于微服务众多，服务器内存不够，囊中羞涩，敬请期待', 10)
+    return;
+
     setLoading(true)
     setBasicState(prevState => {
       return { ...prevState, loginBtn: true }

@@ -1,13 +1,16 @@
 ###########################################
 
-cd /root/taotao-cloud/canal1.1.5/{deployer, adapter}
+cd /opt/soft
 
 wget https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.deployer-1.1.5.tar.gz
 wget https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.adapter-1.1.5.tar.gz
 wget https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.admin-1.1.5.tar.gz
 
-tar -zxvf canal.deployer-1.1.5.tar.gz -C deployer
-tar -zxvf canal.adapter-1.1.5.tar.gz -C adapter
+mkdir /op/cloud/canal/{deployer, adapter, admin}
+
+tar -zxvf canal.deployer-1.1.5.tar.gz -C /op/cloud/canal/deployer
+tar -zxvf canal.adapter-1.1.5.tar.gz -C /op/cloud/canal/adapter
+tar -zxvf canal.admin-1.1.5.tar.gz -C /op/cloud/canal/admin
 
 export CANAL_ADMIN_HOME=/opt/cloud/canal/admin
 export PATH=$PATH:${CANAL_ADMIN_HOME}/bin
@@ -16,6 +19,7 @@ export CANAL_SERVER_HOME=/opt/cloud/canal/deployer
 export PATH=$PATH:${CANAL_SERVER_HOME}/bin
 
 # 对于自建 MySQL , 需要先开启 Binlog 写入功能，配置 binlog-format 为 ROW 模式，my.cnf 中配置如下
+
 [mysqld]
 server-id=1
 log-bin=mysql-bin
@@ -30,8 +34,9 @@ server-id用于标识唯一的数据库，不能和别的服务器重复，建�
 binlog-ignore-db：表示同步的时候忽略的数据库。
 binlog-do-db：指定需要同步的数据库（如果没有此项，表示同步所有的库）。
 
+mysql -uroot -p
 CREATE USER canaladmin IDENTIFIED BY '123456';
-GRANT ALL ON canal_manager.* TO 'canaladmin'@'%';
+GRANT ALL ON `taotao-cloud-canal-manager`.* TO 'canaladmin'@'%';
 FLUSH PRIVILEGES;
 
 CREATE USER canal IDENTIFIED BY '123456';
@@ -40,7 +45,7 @@ FLUSH PRIVILEGES;
 
 cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/canal/admin/lib/
 
-### 配置canal -admin
+### 配置canal --admin
 vi /opt/cloud/canal/admin/conf/application.yml
 server:
   port: 8089
@@ -185,7 +190,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 http://127.0.0.1:8089/ 默认登录 admin/123456
 
 
-######## 配置canaldeployer
+######## 配置canal --deployer
 cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/canal/ployer/lib/
 
 vi /opt/cloud/canal/deployer/conf/canal.properties
@@ -209,7 +214,6 @@ canal.instance.global.manager.address = ${canal.admin.manager}
 #canal.instance.global.spring.xml = classpath:spring/memory-instance.xml
 canal.instance.global.spring.xml = classpath:spring/file-instance.xml
 #canal.instance.global.spring.xml = classpath:spring/default-instance.xml
-
 
 ##################################################
 #########                    Kafka                   #############

@@ -16,7 +16,6 @@
 package com.taotao.cloud.seata.annotation;
 
 import com.taotao.cloud.seata.configuration.SeataDataSourceConfiguration;
-import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,7 +31,6 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@EnableAutoDataSourceProxy
 @Import({SeataDataSourceConfiguration.class})
 public @interface EnableTaoTaoCloudSeata {
 

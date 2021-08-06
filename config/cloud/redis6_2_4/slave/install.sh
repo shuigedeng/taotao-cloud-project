@@ -57,14 +57,14 @@ dbfilename dump_6382.rdb
 info replication
 
 2，将6381作为从机，归属于6380机器
-slaveof 172.16.3.240 6380
+slaveof 172.16.6.151 6380
 
 3，将6382作为从机，归属于6380机器
-slaveof 172.16.3.240 6380
+slaveof 172.16.6.151 6380
 
 #######配置文件配置
 修改从节点配置文件
-replicaof 172.16.3.240 6380
+replicaof 172.16.6.151 6380
 masterauth taotao-cloud
 slave-read-only yes
 

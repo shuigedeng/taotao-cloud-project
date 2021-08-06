@@ -25,7 +25,7 @@ import org.slf4j.{Logger, LoggerFactory}
  *
  * -e dev -b host:9092 -t taotao-cloud-sys-log -m 0
  *
- * spark-submit --master spark://172.16.3.240:7077 --class com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole  taotao-cloud-hudi-1.8.0.jar
+ * spark-submit --master spark://172.16.6.151:7077 --class com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole  taotao-cloud-hudi-1.8.0.jar
  *
  * java -cp taotao-cloud-hudi-1.8.0.jar  com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogConsole
  *
@@ -51,7 +51,7 @@ object TaoTaoCloudLogConsole {
     val dataframe: DataFrame = spark
       .readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "172.16.3.240:9092")
+      .option("kafka.bootstrap.servers", "172.16.6.151:9092")
       .option("subscribe", "sys-log-taotao-cloud-gateway")
       //      .option("subscribe", "*-taotao-cloud-*")
       //      .option("subscribePattern", "sys-log-*")

@@ -18,7 +18,7 @@ arthas:
 #!/bin/bash
 
 function start_arthas() {
-   nohup java -jar -Dserver.port=8081 \
+   nohup java -jar \
     -Dserver.port=8081 \
     /opt/cloud/arthas/arthas-tunnel-server-3.5.2-fatjar.jar \
     >/opt/cloud/arthas/start.out 2>&1 &

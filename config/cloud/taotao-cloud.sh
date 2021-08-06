@@ -17,7 +17,7 @@ function start_taotao_cloud() {
   # JMX_PORT -> 9999
   /root/script/cloud/kafka.sh start
   
-  # http -> 8848 http://172.16.3.240:8848/nacos  nacos/nacos
+  # http -> 8848 http://172.16.6.151:8848/nacos  nacos/nacos
   # tcp -> 9848 客户端gRPC请求服务端端口，用于客户端向服务端发起连接和请求
   # tcp -> 9849 服务端gRPC请求服务端端口，用于服务间同步等
   # tcp -> 7848 nacos集群通信，进行选举，检测等
@@ -26,33 +26,33 @@ function start_taotao_cloud() {
   # tcp -> 8091
   /root/script/cloud/seata.sh start
   
-  # tcp/http -> 8849 http://172.16.3.240:8849 sentinel/sentinel
+  # tcp/http -> 8849 http://172.16.6.151:8849 sentinel/sentinel
   /root/script/cloud/sentinel.sh start
   
-  # tcp/http -> 9411 http://172.16.3.240:9411
+  # tcp/http -> 9411 http://172.16.6.151:9411
   /root/script/cloud/zipkin.sh start
   
   # tcp -> 11800
-  # http -> 18080 http://172.16.3.240:18080
+  # http -> 18080 http://172.16.6.151:18080
   /root/script/cloud/skywalking.sh start
   
-  # tcp/http -> 9090 http://172.16.3.240:9090 http://172.16.3.240:9090/metrics
+  # tcp/http -> 9090 http://172.16.6.151:9090 http://172.16.6.151:9090/metrics
   #/root/script/cloud/prometheus.sh start
   
-  # tcp/http -> 3000 http://172.16.3.240:3000 admin/admin
+  # tcp/http -> 3000 http://172.16.6.151:3000 admin/admin
   #/root/script/cloud/grafana.sh start
 
-  # tcp/http -> 9200 http://172.16.3.240:9200
+  # tcp/http -> 9200 http://172.16.6.151:9200
   #su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
-  # tcp/http -> 5601 http://172.16.3.240:5601
+  # tcp/http -> 5601 http://172.16.6.151:5601
   #/root/script/cloud/kibana.sh start
 
-  # tcp/http -> 5601 http://172.16.3.240:8081
+  # tcp/http -> 5601 http://172.16.6.151:8081
   /root/script/cloud/arthas.sh start
 
-  # tcp/http -> 5601 http://172.16.3.240:8089
-  /root/script/cloud/canal.sh start
+  # tcp/http -> 5601 http://172.16.6.151:8089
+  #/root/script/cloud/canal.sh start
   
   # tcp/http -> 9601 input port
   #/root/script/cloud/logstash.sh start
@@ -64,7 +64,7 @@ function start_taotao_cloud() {
 function stop_taotao_cloud() {
   /root/script/cloud/canal.sh stop
 
-  /root/script/cloud/arthas.sh stop
+  #/root/script/cloud/arthas.sh stop
 
   #/root/script/cloud/kibana.sh stop
   

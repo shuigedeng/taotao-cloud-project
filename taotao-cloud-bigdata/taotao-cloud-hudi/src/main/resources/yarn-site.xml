@@ -20,7 +20,7 @@
 
 	<property>
 		<name>yarn.resourcemanager.hostname</name>
-		<value>172.16.3.240</value>
+		<value>172.16.6.151</value>
 	</property>
 
 	<property>
@@ -48,7 +48,7 @@
 	<!--设置日志聚集服务器地址-->
 	<property>
 		<name>yarn.log.server.url</name>
-		<value>http://172.16.3.240:19888/jobhistory/logs</value>
+		<value>http://172.16.6.151:19888/jobhistory/logs</value>
 	</property>
 
 	<property>

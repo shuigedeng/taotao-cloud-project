@@ -34,6 +34,7 @@ dependencies {
 
     api('org.owasp.antisamy:antisamy:1.6.4') {
         exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
     }
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

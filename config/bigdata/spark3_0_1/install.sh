@@ -13,19 +13,19 @@ export SCALA_HOME="/opt/common/scala-2.12.14"
 export HADOOP_HOME="/opt/bigdata/hadoop-3.3.0"
 export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 export YARN_CONF_DIR="$HADOOP_HOME/etc/hadoop"
-export SPARK_MASTER_HOST=172.16.3.240
+export SPARK_MASTER_HOST=172.16.6.151
 export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
 export SPARK_LOG_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/logs"
 export SPARK_PID_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/pid"
 
-cp slaves.template slaves && vim slaves && 172.16.3.240
+cp slaves.template slaves && vim slaves && 172.16.6.151
 
 cp log4j.properties.template log4j.properties
 
 export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-spark-shell --master spark://172.16.3.240:7077
+spark-shell --master spark://172.16.6.151:7077
 
 spark-shell \
   --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \

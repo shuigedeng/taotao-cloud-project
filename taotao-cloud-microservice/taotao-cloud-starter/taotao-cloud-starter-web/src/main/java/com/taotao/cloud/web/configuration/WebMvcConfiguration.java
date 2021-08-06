@@ -46,6 +46,10 @@ import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.xss.XssStringJsonDeserializer;
+import io.prometheus.client.Counter;
+import io.prometheus.client.Gauge;
+import io.prometheus.client.Histogram;
+import io.prometheus.client.Summary;
 import io.swagger.v3.oas.annotations.Operation;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -72,7 +76,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
@@ -104,7 +107,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @version 1.0.0
  * @since 2020/9/29 14:30
  */
-@Configuration
 @AutoConfigureBefore({PrometheusConfiguration.class})
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
@@ -112,12 +114,24 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	private final FilterProperties filterProperties;
 	private final XssProperties xssProperties;
 
+	private final Counter requestCounter;
+	private final Summary requestLatency;
+	private final Gauge inprogressRequests;
+	private final Histogram requestLatencyHistogram;
+
 	public WebMvcConfiguration(RedisRepository redisRepository,
 		FilterProperties filterProperties,
-		XssProperties xssProperties) {
+		XssProperties xssProperties, Counter requestCounter,
+		Summary requestLatency, Gauge inprogressRequests,
+		Histogram requestLatencyHistogram) {
 		this.redisRepository = redisRepository;
 		this.filterProperties = filterProperties;
 		this.xssProperties = xssProperties;
+
+		this.requestCounter = requestCounter;
+		this.requestLatency = requestLatency;
+		this.inprogressRequests = inprogressRequests;
+		this.requestLatencyHistogram = requestLatencyHistogram;
 	}
 
 	@Override
@@ -125,20 +139,17 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		argumentResolvers.add(new LoginUserArgumentResolver());
 	}
 
-	@Bean
-	public HeaderThreadLocalInterceptor headerThreadLocalInterceptor() {
-		return new HeaderThreadLocalInterceptor();
-	}
-
-	@Bean
-	public PrometheusMetricsInterceptor prometheusMetricsInterceptor() {
-		return new PrometheusMetricsInterceptor();
-	}
+//	@Bean
+//	public PrometheusMetricsInterceptor prometheusMetricsInterceptor() {
+//		return new PrometheusMetricsInterceptor();
+//	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(headerThreadLocalInterceptor()).addPathPatterns("/**");
-		registry.addInterceptor(prometheusMetricsInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(
+			new PrometheusMetricsInterceptor(requestCounter, requestLatency, inprogressRequests,
+				requestLatencyHistogram)).addPathPatterns("/**");
 	}
 
 	@Override

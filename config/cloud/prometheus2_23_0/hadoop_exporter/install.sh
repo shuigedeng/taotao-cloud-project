@@ -34,13 +34,13 @@ export MAPRED_HISTORYSERVER_OPTS="-javaagent:/root/taotao-cloud/hadoop/jmx_prome
 在prometheus根目录下新建configs目录，并新建文件 组件名.json
 [
  {
-  "targets": ["172.16.3.240:30002","ip2:port","ip3:port"]
+  "targets": ["172.16.6.151:30002","ip2:port","ip3:port"]
  }
 ]
 
 [
  {
-  "targets": ["172.16.3.240:30003","ip2:port","ip3:port"]
+  "targets": ["172.16.6.151:30003","ip2:port","ip3:port"]
  }
 ]
 

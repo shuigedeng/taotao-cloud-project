@@ -2354,7 +2354,7 @@ public class RedisRepository {
 			byte[] keys = serializer.serialize(key);
 			byte[] values = OBJECT_SERIALIZER.serialize(value);
 			connection.set(keys, values);
-			LogUtil.info("[redisTemplate redis]放入 缓存  url:{}", key);
+			LogUtil.info("[redisTemplate redis]放入 缓存  url:{0}", key);
 			return 1L;
 		});
 	}

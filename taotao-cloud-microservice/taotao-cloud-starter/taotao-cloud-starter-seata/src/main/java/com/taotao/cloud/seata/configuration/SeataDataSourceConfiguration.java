@@ -26,13 +26,13 @@ import io.seata.rm.datasource.DataSourceProxy;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import java.io.IOException;
 import java.sql.SQLException;
-import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -47,7 +47,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2020/10/22 14:48
  */
-@ConditionalOnBean(DataSource.class)
 @EnableAutoDataSourceProxy
 @ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SeataDataSourceConfiguration {
@@ -66,39 +65,51 @@ public class SeataDataSourceConfiguration {
 		return new SeataXidFilter();
 	}
 
-
 	@Bean
 	public SeataInterceptor seataInterceptor() {
 		return new SeataInterceptor();
 	}
 
-
-	/**
-	 * 判断当前数据库是否有undo_log 该表，如果没有， 创建该表 undo_log 为seata 记录事务sql执行的记录表 第二阶段时，如果confirm会清除记录，如果是cancel
-	 * 会根据记录补偿原数据
-	 */
-	@PostConstruct
-	public void detectTable(DataSource dataSource) {
-		try {
-			dataSource.getConnection().prepareStatement(undoLogSql).execute();
-		} catch (SQLException e) {
-			LogUtil.error("创建[seata] undo_log表错误。", e);
-		}
+	@Bean
+	public DetectTable detectTable(DataSource dataSource) {
+		return new DetectTable(dataSource);
 	}
 
-	public static final String undoLogSql = "CREATE TABLE IF NOT EXISTS undo_log(" +
-		"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
-		"`branch_id` bigint(20) NOT NULL," +
-		"`xid` varchar(100) NOT NULL," +
-		"`context` varchar(128) NOT NULL," +
-		"`rollback_info` longblob NOT NULL," +
-		"`log_status` int(11) NOT NULL," +
-		"`log_created` datetime NOT NULL," +
-		"`log_modified` datetime NOT NULL," +
-		"`ext` varchar(100) DEFAULT NULL," +
-		"PRIMARY KEY (`id`)," +
-		"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
-		")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+	public static class DetectTable implements ApplicationRunner {
+
+		public static final String undoLogSql = "CREATE TABLE IF NOT EXISTS undo_log(" +
+			"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
+			"`branch_id` bigint(20) NOT NULL," +
+			"`xid` varchar(100) NOT NULL," +
+			"`context` varchar(128) NOT NULL," +
+			"`rollback_info` longblob NOT NULL," +
+			"`log_status` int(11) NOT NULL," +
+			"`log_created` datetime NOT NULL," +
+			"`log_modified` datetime NOT NULL," +
+			"`ext` varchar(100) DEFAULT NULL," +
+			"PRIMARY KEY (`id`)," +
+			"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
+			")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+
+		private final DataSource dataSource;
+
+		public DetectTable(DataSource dataSource) {
+			this.dataSource = dataSource;
+		}
+
+		@Override
+		public void run(ApplicationArguments args) throws Exception {
+			/**
+			 * 判断当前数据库是否有undo_log 该表，如果没有， 创建该表 undo_log 为seata 记录事务sql执行的记录表 第二阶段时，如果confirm会清除记录，如果是cancel
+			 * 会根据记录补偿原数据
+			 */
+			try {
+				dataSource.getConnection().prepareStatement(undoLogSql).execute();
+			} catch (SQLException e) {
+				LogUtil.error("创建[seata] undo_log表错误。", e);
+			}
+		}
+	}
 
 	/**
 	 * @author shuigedeng
@@ -106,7 +117,6 @@ public class SeataDataSourceConfiguration {
 	 * @since 2020/10/22 17:01
 	 */
 	public static class SeataXidFilter extends OncePerRequestFilter {
-
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain) throws ServletException, IOException {
@@ -118,7 +128,6 @@ public class SeataDataSourceConfiguration {
 			filterChain.doFilter(request, response);
 		}
 	}
-
 
 	/**
 	 * SeataInterceptor

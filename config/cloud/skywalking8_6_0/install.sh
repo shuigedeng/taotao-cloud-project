@@ -1,16 +1,18 @@
 ###########################################
 # http://skywalking.apache.org/downloads/
 
-cd /opt/cloud/skywalking8.6.0
+cd /opt/soft/
 
 # 1、官网下载skywalking服务端
 wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.7.0/apache-skywalking-apm-es7-8.7.0.tar.gz
 
 # 2、上传解压 3、重命名文件夹
-tar -zxvf apache-skywalking-apm-es7-8.6.0.tar.gz
+tar -zxvf apache-skywalking-apm-es7-8.7.0.tar.gz -C /opt/cloud
+
+cd /opt/cloud/apache-skywalking-apm-bin-es7
 
 # 4、修改配置文件
-vim skywalking8.6.0/config/application.yml
+vim config/application.yml
 
 storage:
   #修改h2 为mysql
@@ -18,7 +20,7 @@ storage:
   mysql:
     properties:
       #修改jdbcUrl
-      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/cloud-skywalking"}
+      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/taotao-cloud-skywalking"}
       #修改user
       dataSource.user: ${SW_DATA_SOURCE_USER:root}
       #修改password
@@ -54,37 +56,36 @@ receiver-sharing-server:
     gRPCSslKeyPath: ${SW_RECEIVER_GRPC_SSL_KEY_PATH:""}
     gRPCSslCertChainPath: ${SW_RECEIVER_GRPC_SSL_CERT_CHAIN_PATH:""}
     #修改authentication
-    authentication: ${SW_AUTHENTICATION:"cloud"}
+    authentication: ${SW_AUTHENTICATION:"taotao-cloud"}
 
 # 5、下载mysql驱动包到 /opt/skywalking/oap-libs 目录下
-cp mysql-connector-java-8.0.17.jar skywalking8.6.0/oap-libs
+cp mysql-connector-java-8.0.20.jar /opt/cloud/apache-skywalking-apm-bin-es7/oap-libs
 
 # 6、进入mysql 创建 cloud-skywalking 数据库
+mysql –uroot –p
+create database `taotao-cloud-skywalking`;
 
 # 7、启动collector服务
 #初始化
-cd skywalking8.6.0/bin/
-./oapServiceInit.sh
+/opt/cloud/apache-skywalking-apm-bin-es7/bin/oapServiceInit.sh
 
 #启动collector服务
-./oapService.sh
+/opt/cloud/apache-skywalking-apm-bin-es7/bin/oapService.sh
 
 # 8、配置 Skywalking Web服务
-vim skywalking8.6.0/webapp/webapp.yml
+vim /opt/cloud/apache-skywalking-apm-bin-es7/webapp/webapp.yml
 # 修改webapp.yml 文件配置如下
-#默认的8080容易与其他软件冲突，建议改一下比如18080
+#默认的8080容易与其他软件冲突，建议改一下比如28080
 
 # 9、启动web服务
-cd skywalking8.6.0/bin
-./webappService.sh
+/opt/cloud/apache-skywalking-apm-bin-es7/bin/webappService.sh
 
 启动bin目录下的startup.sh可以将collector和Web模块一起启动起来。
-访问http://ip:18080进入SkyWalking UI
+http://172.16.6.151.:18080进入SkyWalking UI
 
 # 9、探针配置（Agent）
 vim skywalking8.6.0/agent/config/agent.config
 修改项目名字、日志打印级别、skywalking的服务地址
-
 
 # 10、客户端启动Agent
 1、基于Tomcat的服务(SpringMvc)

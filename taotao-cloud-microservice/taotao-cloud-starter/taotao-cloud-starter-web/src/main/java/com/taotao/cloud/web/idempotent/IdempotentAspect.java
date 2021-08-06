@@ -58,7 +58,7 @@ public class IdempotentAspect extends BaseAspect {
 		this.distributedLock = distributedLock;
 	}
 
-	@Pointcut("@annotation(vip.mate.core.ide.annotation.Ide)")
+	@Pointcut("@annotation(com.taotao.cloud.web.idempotent.Idempotent)")
 	public void watchIde() {
 
 	}

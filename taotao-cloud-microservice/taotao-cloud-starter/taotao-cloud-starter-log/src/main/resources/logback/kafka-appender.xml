@@ -21,8 +21,8 @@
 					"method": "%M",
 					"line": "%L",
 					"message": "%replace(%msg){'\"', '\''}",
-					"host": "${SERVER_IP:-}",
 					"stack_trace": "%replace(%ex){'\"', '\''}",
+					"host": "${SERVER_IP:-}",
 					"zipkin_parent_span_id": "%X{X-B3-ParentSpanId:-}",
 					"zipkin_span_id": "%X{X-B3-SpanId:-}",
 					"zipkin_trace_id": "%X{X-B3-TraceId:-}",
@@ -42,22 +42,22 @@
 		<producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS}</producerConfig>
 		<producerConfig>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
 		<producerConfig>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
-		<producerConfig>acks=0</producerConfig>
-		<producerConfig>linger.ms=1000</producerConfig>
+		<producerConfig>acks=1</producerConfig>
+		<producerConfig>linger.ms=0</producerConfig>
 		<producerConfig>retries=0</producerConfig>
 		<producerConfig>batch.size=10</producerConfig>
 		<producerConfig>buffer-memory=33554432</producerConfig>
-		<producerConfig>properties.max.request.size=2097152</producerConfig>
-		<producerConfig>max.block.ms=200</producerConfig>
+		<producerConfig>max.request.size=1048576</producerConfig>
+		<producerConfig>max.block.ms=6000</producerConfig>
 	</appender>
 
-	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-		<queueSize>500</queueSize>
-		<neverBlock>true</neverBlock>
-		<discardingThreshold>0</discardingThreshold>
-		<includeCallerData>true</includeCallerData>
+<!--	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+<!--		<queueSize>500</queueSize>-->
+<!--		<neverBlock>true</neverBlock>-->
+<!--		<discardingThreshold>0</discardingThreshold>-->
+<!--		<includeCallerData>true</includeCallerData>-->
 
-		<appender-ref ref="KAFKA"/>
-	</appender>
+<!--		<appender-ref ref="KAFKA"/>-->
+<!--	</appender>-->
 
 </included>

@@ -15,24 +15,27 @@
  */
 package com.taotao.cloud.portal.controller;
 
-import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.portal.util.CaptchaUtil;
 import com.taotao.cloud.portal.util.Constants;
 import com.taotao.cloud.portal.util.CookieUtil;
-import com.taotao.cloud.portal.util.ResponseBase;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.wf.captcha.ArithmeticCaptcha;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.LinkedHashMap;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * IndexController
  *
  * @author shuigedeng
- * @since 2021/1/18 下午4:55
  * @version 1.0.0
+ * @since 2021/1/18 下午4:55
  */
 @Controller
 public class IndexController {
@@ -41,7 +44,8 @@ public class IndexController {
 	// private UserServiceFegin userServiceFegin;
 
 	@RequestMapping("")
-	public String index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String index(HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
 		String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
 		System.out.println(">>>>>>>>>>>>>>> index token: " + token);
 
@@ -69,7 +73,22 @@ public class IndexController {
 	}
 
 	@RequestMapping("/login.html")
-	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String login(HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
 		return "login";
+	}
+
+	@GetMapping("/code")
+	@ResponseBody
+	public Map<String, Object> code(HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
+		ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
+		Map<String, Object> res = new HashMap<>();
+		res.put("code", 200);
+		res.put("message", "success");
+		res.put("data", captcha.toBase64());
+		res.put("requestId", "232");
+		res.put("timestamp", LocalDateTime.now());
+		return res;
 	}
 }

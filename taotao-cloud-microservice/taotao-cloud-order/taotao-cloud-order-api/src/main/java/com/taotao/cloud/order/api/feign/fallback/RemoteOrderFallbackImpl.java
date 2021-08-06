@@ -20,13 +20,13 @@ public class RemoteOrderFallbackImpl implements FallbackFactory<RemoteOrderServi
         return new RemoteOrderService() {
             @Override
             public Result<OrderVO> findOrderInfoByCode(String code) {
-                LogUtil.error("调用findOrderInfoByCode异常：{}", code, throwable);
+                LogUtil.error("调用findOrderInfoByCode异常：{0}", throwable, code);
 				throw new FeignException(throwable.getMessage());
             }
 
             @Override
             public Result<OrderVO> saveOrder(OrderDTO orderDTO) {
-                LogUtil.error("调用saveOrder异常：{}", orderDTO, throwable);
+                LogUtil.error("调用saveOrder异常：{0}", throwable, orderDTO);
 				throw new FeignException(throwable.getMessage());
             }
         };

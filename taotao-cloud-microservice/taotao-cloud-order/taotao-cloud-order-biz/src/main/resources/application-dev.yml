@@ -8,14 +8,19 @@ server:
     threads:
       io: 16
       worker: 256
+    accesslog:
+      dir: ${user.home}/logs/accesslog/${spring.application.name}/
+      enabled: true
+  servlet:
+    application-display-name: ${spring.application.name}
 
 jasypt:
   encryptor:
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
     algorithm: PBEWITHHMACSHA512ANDAES_256
-#    property:
-#      prefix: "ENC@["
-#      suffix: "]"
+    property:
+      prefix: "ENC@["
+      suffix: "]"
 
 seata:
   enabled: true
@@ -24,14 +29,14 @@ seata:
   enable-auto-data-source-proxy: true
   service:
     grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_PORT:8091}
+      default: ${TAOTAO_CLOUD_SEATA_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_PORT:8091}
     vgroup-mapping:
       taotao_cloud_tx_group: default
   config:
     type: nacos
     nacos:
-      namespace: 58d8ef8f-9325-4d2a-8e29-0b3632252b93
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
+      namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
@@ -39,9 +44,9 @@ seata:
     type: nacos
     nacos:
       application: taotao-cloud-seata
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.3.240}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
-      namespace: 58d8ef8f-9325-4d2a-8e29-0b3632252b93
+      namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: default
@@ -56,7 +61,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.3.240:7777/ws
+  tunnel-server: ws://172.16.6.151:7777/ws
 
 spring:
   application:
@@ -85,13 +90,15 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
   datasource:
+    dynamic:
+      enabled: false
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.3.240}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -121,7 +128,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
@@ -203,23 +210,26 @@ spring:
       # Netty线程池数量,默认值: 当前处理核数量 * 2
       nettyThreads: 32
       # 编码
-#      codec: !<org.redisson.codec.JsonJacksonCodec> {}
+      #      codec: !<org.redisson.codec.JsonJacksonCodec> {}
       # 传输模式
       transportMode: "NIO"
 
-  data:
     elasticsearch:
       repositories:
         enabled: false
       client:
         reactive:
           endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.3.240}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
           connection-timeout: 5
           username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
+    redis:
+      repositories:
+        enabled: true
+
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.3.240}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     prodorderer:
       retries: 0
       batch-size: 16384
@@ -244,6 +254,19 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+  mail:
+    host: smtp.aliyun.com
+    username: xxxxx@aliyun.com
+    password: xxxxxxxxx
+    port: 465
+    properties:
+      smtp:
+        auth: true
+        timeout: 2500
+      mail:
+        smtp:
+          ssl:
+            enable: true
   shardingsphere:
     enabled: false
     datasource:
@@ -334,30 +357,17 @@ spring:
       sql:
         show: true
 
-
 taotao:
   cloud:
+    redis:
+      lock:
+        enabled: true
     log:
       request-log:
         enabled: true
         types:
           - logger
           - kafka
-    oauth2:
-      security:
-        enabled: true
-        ignore:
-          # 忽略认证的地址
-          http-urls: >
-            /api-docs,
-            /user/info/username,
-            /user/info/id/*,
-            /resource/test/seata,
-            /role/info/userId,
-            /resource/info/codes,
-            /member/info/security,
-            /user,
-            /role
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -372,9 +382,43 @@ taotao:
         executor:
           appname: ${spring.application.name}
           ip:
-          port: 1111
+          port: 1113
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${logging.file:${user.home}}/logs/application/${spring.application.name}/xxl-job}
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}}
+    zookeeper:
+      enabled: false
+    sms:
+      enabled: false
+    feign:
+      enabled: true
+      loadbalancer:
+        enabled: true
+        rest-template:
+          enabled: true
+    web:
+      async:
+        task:
+          enabled: true
+      dozer:
+        enabled: true
+      encrypt:
+        enabled: true
+      filter:
+        version: true
+        tenant: true
+        trace: true
+        web-context: true
+      limit:
+        enabled: false
+      xss:
+        enabled: true
+    sentinel:
+      enabled: true
+    seata:
+      enabled: true
+    cache:
+      enabled: true
+      type: redis
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
@@ -442,3 +486,7 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+
+springdoc:
+  packages-to-exclude:
+    - cn.afterturn.easypoi.wps.controller

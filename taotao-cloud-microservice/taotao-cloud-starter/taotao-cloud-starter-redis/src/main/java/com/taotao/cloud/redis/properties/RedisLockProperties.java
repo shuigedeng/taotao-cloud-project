@@ -33,7 +33,6 @@ public class RedisLockProperties {
 
 	private boolean enabled = false;
 
-
 	public boolean isEnabled() {
 		return enabled;
 	}

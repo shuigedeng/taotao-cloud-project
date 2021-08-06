@@ -5,7 +5,7 @@
 <configuration>
 	<property>
 		<name>fs.default.name</name>
-		<value>hdfs://172.16.3.240:8020</value>
+		<value>hdfs://172.16.6.151:8020</value>
 		<description>hdfs内部通讯访问地址</description>
 	</property>
 

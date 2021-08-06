@@ -19,6 +19,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.base.StrPool;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
+import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
 import java.util.Map;
 import java.util.Objects;
@@ -45,6 +46,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @since 2020/4/30 10:13
  */
 @EnableCaching
+@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "enabled", havingValue = "true")
 public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 
 	private final CustomCacheProperties cacheProperties;
@@ -146,11 +148,13 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 	public CacheManager caffeineCacheManager() {
 		CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 
-		Caffeine caffeine = Caffeine.newBuilder()
+		Caffeine caffeine = Caffeine
+			.newBuilder()
 			.recordStats()
 			.initialCapacity(500)
 			.expireAfterWrite(cacheProperties.getDef().getTimeToLive())
 			.maximumSize(cacheProperties.getDef().getMaxSize());
+
 		cacheManager.setAllowNullValues(cacheProperties.getDef().isCacheNullValues());
 		cacheManager.setCaffeine(caffeine);
 

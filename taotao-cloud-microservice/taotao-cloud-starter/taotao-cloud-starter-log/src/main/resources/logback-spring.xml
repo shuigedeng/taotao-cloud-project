@@ -21,8 +21,8 @@
 	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
 	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="0000"/>
-	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="172.16.3.240:9092"/>
-	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="172.16.3.240:9601"/>
+	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="172.16.6.151:9092"/>
+	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="172.16.6.151:9601"/>
 
 	<!--	see ch.qos.logback.classic.PatternLayout-->
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
@@ -70,7 +70,7 @@
 		<appender-ref ref="FILE_ALL_ASYNC"/>
 		<appender-ref ref="FILE_WARN_ASYNC"/>
 		<appender-ref ref="FILE_ERROR_ASYNC"/>
-		<appender-ref ref="KAFKA_ASYNC"/>
+		<appender-ref ref="KAFKA"/>
 <!--		<appender-ref ref="LOGSTASH_ASYNC"/>-->
 	</root>
 
@@ -80,7 +80,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -90,7 +90,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -100,7 +100,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -110,7 +110,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-			<appender-ref ref="KAFKA_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>

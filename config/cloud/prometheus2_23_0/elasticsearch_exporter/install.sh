@@ -18,7 +18,7 @@ nohup ./elasticsearch_exporter
  --es.timeout=10s
  --web.listen-address=":9114"
  --web.telemetry-path="/metrics"
- --es.uri http://172.16.3.240:9200 &
+ --es.uri http://172.16.6.151:9200 &
 
 curl "http://127.0.0.1:9114/metrics
 

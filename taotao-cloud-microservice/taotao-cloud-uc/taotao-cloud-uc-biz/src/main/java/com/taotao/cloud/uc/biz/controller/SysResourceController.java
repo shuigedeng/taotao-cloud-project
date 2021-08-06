@@ -6,8 +6,10 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.uc.api.dto.resource.ResourceDTO;
 import com.taotao.cloud.uc.api.query.resource.ResourcePageQuery;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
@@ -59,9 +61,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysResourceController {
 
 	private final ISysResourceService resourceService;
+	private final RedisRepository redisRepository;
 
-	public SysResourceController(ISysResourceService resourceService) {
+	public SysResourceController(ISysResourceService resourceService,
+		RedisRepository redisRepository) {
 		this.resourceService = resourceService;
+		this.redisRepository = redisRepository;
 	}
 
 	@Operation(summary = "添加资源", description = "添加资源", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
@@ -302,6 +307,20 @@ public class SysResourceController {
 
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "测试分布式事务")
+	@GetMapping("/test/se")
+	@SentinelResource(value = "se")
+	public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
+		redisRepository.set("hslfjsl", "sldf");
+		if (1 == id) {
+			throw new RuntimeException("hahahaaha");
+		} else {
+			Boolean result = resourceService.testSeata();
+			return Result.success(result);
+		}
+	}
+
+	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/seata")
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
 	public Result<Boolean> testSeata() {
@@ -309,9 +328,10 @@ public class SysResourceController {
 		return Result.success(result);
 	}
 
-	public String testSeataException(BlockException e) {
+	public Result<Boolean> testSeataException(BlockException e) {
 		e.printStackTrace();
-		return "该接口已经被限流啦!";
+		LogUtil.error(" 该接口已经被限流啦", e);
+		return Result.fail(false);
 	}
 
 }

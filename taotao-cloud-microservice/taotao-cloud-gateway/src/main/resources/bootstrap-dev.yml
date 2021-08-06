@@ -19,26 +19,28 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.3.240}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
           version: 1.8.0
           user.name: "admin"
           user.password: "123456"
         group: TAOTAO_CLOUD_GROUP
-        namespace: d25e03e2-39d7-4174-a463-642fe172d58e
+        namespace: a47ee768-fbe2-467a-97a8-68bec33af6fd
         username: nacos
         password: nacos
       config:
         enabled: false
-        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.3.240}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
+        server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml
     sentinel:
+      app:
+        type: 1
       enabled: true
       eager: true
       transport:
-        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.3.240}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
-        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8711}
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
       scg:
         fallback:
           mode: response

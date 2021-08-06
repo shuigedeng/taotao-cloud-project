@@ -51,12 +51,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.3.240}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.6.151}:${TAOTAO-CLOUD-NACOS-PORT:8848}
         metadata:
           version: 5
       config:
         enabled: false
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.3.240}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.6.151}:${TAOTAO-CLOUD-NACOS-PORT:8848}
         namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
         file-extension: yml
     sentinel:
@@ -71,11 +71,11 @@ spring:
             data-type: json
             rule-type: flow
       transport:
-        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:172.16.3.240}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8858}
+        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:172.16.6.151}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8858}
         port: ${TAOTAO-CLOUD-SENTINEL-PORT:8717}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:172.16.3.240}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-operation-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:172.16.6.151}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-operation-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO-CLOUD-MYSQL-USERNAME:ENC(RGAhmAvQZI2/69eo8rl5bSwPXjXkMTk8M0QuL5vlVM/epApayMBFzdlLpomy8kDk)}
     password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:ENC(y9HJzgk9hlfH3n3kh/UMI1n+V4E5R3pb2K4JyKT58qBg7CLq1xvGALRi7X1tL21F)}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -104,7 +104,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO-CLOUD-REDIS-HOST:172.16.3.240}
+    host: ${TAOTAO-CLOUD-REDIS-HOST:172.16.6.151}
     port: ${TAOTAO-CLOUD-REDIS-PORT:6379}
     database: 1
     #    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:123456}

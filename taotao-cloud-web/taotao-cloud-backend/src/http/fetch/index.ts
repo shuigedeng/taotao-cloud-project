@@ -38,7 +38,7 @@ const handleHeaders = (contentType: string = ContentTypeEnum.JSON): Headers => {
   if (token) {
     headers.append('Authorization', 'bearer ' + token)
   }
-  headers.append('CLOUD_HEADER', 'CLOUD_HEADER_VALUE')
+  // headers.append('CLOUD_HEADER', 'CLOUD_HEADER_VALUE')
   // headers.append("Access-Control-Allow-Origin", "*");
   // headers.append("Access-Control-Allow-Headers", "*");
   // headers.append("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
@@ -49,6 +49,7 @@ const handleHeaders = (contentType: string = ContentTypeEnum.JSON): Headers => {
 }
 
 const handleResponse = (res: Response): any => {
+  console.log(res.status)
   if (res.status === HttpStatusEnum.NOT_FOUND) {
     throw new HttpError('请求资源不存在!')
   } else if (res.status === HttpStatusEnum.BAD_GATEWAY) {

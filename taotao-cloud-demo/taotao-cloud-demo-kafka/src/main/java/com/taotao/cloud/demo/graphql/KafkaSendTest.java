@@ -34,7 +34,7 @@ public class KafkaSendTest {
 
 	public static void main(String[] args) {
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "172.16.3.240:9092");
+		props.put("bootstrap.servers", "172.16.6.151:9092");
 		props.put("acks", "0");
 		props.put("retries", 1);
 //		props.put("batch.size", 16384);

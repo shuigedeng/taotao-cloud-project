@@ -21,7 +21,6 @@ import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
 import java.util.Objects;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -35,17 +34,19 @@ import org.springframework.web.servlet.HandlerInterceptor;
  */
 public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 
-	@Resource
-	private Counter requestCounter;
+	private final Counter requestCounter;
+	private final Summary requestLatency;
+	private final Gauge inprogressRequests;
+	private final Histogram requestLatencyHistogram;
 
-	@Resource
-	private Summary requestLatency;
-
-	@Resource
-	private Gauge inprogressRequests;
-
-	@Resource
-	private Histogram requestLatencyHistogram;
+	public PrometheusMetricsInterceptor(Counter requestCounter,
+		Summary requestLatency, Gauge inprogressRequests,
+		Histogram requestLatencyHistogram) {
+		this.requestCounter = requestCounter;
+		this.requestLatency = requestLatency;
+		this.inprogressRequests = inprogressRequests;
+		this.requestLatencyHistogram = requestLatencyHistogram;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,

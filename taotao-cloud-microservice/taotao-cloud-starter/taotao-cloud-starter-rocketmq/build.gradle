@@ -3,7 +3,6 @@ dependencies {
 
     api 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
 
-    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 }

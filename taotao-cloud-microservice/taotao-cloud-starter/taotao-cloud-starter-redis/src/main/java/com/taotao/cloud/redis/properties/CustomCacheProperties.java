@@ -5,6 +5,7 @@ import com.taotao.cloud.redis.enums.SerializerType;
 import java.time.Duration;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * 缓存配置
@@ -12,10 +13,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author zuihou
  * @date 2019/08/06
  */
+@RefreshScope
 @ConfigurationProperties(prefix = CustomCacheProperties.PREFIX)
 public class CustomCacheProperties {
 
 	public static final String PREFIX = "taotao.cloud.cache";
+
+	private boolean enabled = true;
+
 	/**
 	 * 目前只支持 REDIS 和 CAFFEINE ！ CAFFEINE 只用于项目的开发环境或者演示环境使用，  生产环境请用redis！！！
 	 */
@@ -149,5 +154,13 @@ public class CustomCacheProperties {
 	public void setConfigs(
 		Map<String, Cache> configs) {
 		this.configs = configs;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

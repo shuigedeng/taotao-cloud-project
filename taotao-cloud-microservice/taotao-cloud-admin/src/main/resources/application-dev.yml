@@ -16,7 +16,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.3.240:7777/ws
+  tunnel-server: ws://172.16.6.151:7777/ws
 
 spring:
   main:
@@ -34,7 +34,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.3.240}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
     #发送数据类型 kafaka、rabbitmq、web
@@ -60,7 +60,7 @@ spring:
       password: 123456
   redis:
     client-name: taotao-cloud-admin-redis-client
-    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.3.240}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 0
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -71,7 +71,7 @@ spring:
         max-idle: 8
         min-idle: 0
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.3.240}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 0
       batch-size: 16384

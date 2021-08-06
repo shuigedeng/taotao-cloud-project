@@ -22,6 +22,7 @@ package com.taotao.cloud.data.mybatis.plus.configuration;
  * @version 1.0.0
  * @since 2021/08/02 23:12
  */
+
 import com.baomidou.dynamic.datasource.processor.DsProcessor;
 import com.baomidou.dynamic.datasource.provider.AbstractJdbcDataSourceProvider;
 import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
@@ -35,19 +36,19 @@ import java.util.HashMap;
 import java.util.Map;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
  * 动态数据源切换配置
  */
-@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @EnableConfigurationProperties(DataSourceProperties.class)
+@ConditionalOnProperty(prefix = "taotao.cloud.data.dynamic.datasource", name = "enabled",havingValue = "true")
 public class DynamicDataSourceAutoConfiguration {
 
 	@Bean

@@ -1,7 +1,5 @@
 package com.taotao.cloud.mail.core;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,13 +17,17 @@ import java.io.File;
  *
  * @author xuzhanfu
  */
-@Slf4j
-@AllArgsConstructor
 public class JavaMailTemplate implements MailTemplate {
 
 	private final JavaMailSender mailSender;
 
 	private final MailProperties mailProperties;
+
+	public JavaMailTemplate(JavaMailSender mailSender,
+		MailProperties mailProperties) {
+		this.mailSender = mailSender;
+		this.mailProperties = mailProperties;
+	}
 
 	@Override
 	public void sendSimpleMail(String to, String subject, String content, String... cc) {
