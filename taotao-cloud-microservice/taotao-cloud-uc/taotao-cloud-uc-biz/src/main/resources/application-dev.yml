@@ -374,6 +374,7 @@ taotao:
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+
     xxl:
       job:
         enabled: true
@@ -384,7 +385,7 @@ taotao:
           ip:
           port: 1113
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/xxl-job/${spring.application.name}}
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
     zookeeper:
       enabled: false
     sms:

@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.p6spy.properties;
 
+import com.taotao.cloud.common.utils.PropertyUtil;
+import java.io.File;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -91,10 +93,8 @@ public class P6spyProperties {
 	 * # specifies the appender to use for logging # Please note: reload means forgetting all the
 	 * previously set # settings (even those set during runtime - via JMX) # and starting with the
 	 * clean table # (only the properties read from the configuration file) # (default is
-	 * com.p6spy.engine.spy.appender.FileLogger)
-	 * #appender=com.p6spy.engine.spy.appender.Slf4JLogger
-	 * #appender=com.p6spy.engine.spy.appender.StdoutLogger
-	 * #appender=com.p6spy.engine.spy.appender.FileLogger
+	 * com.p6spy.engine.spy.appender.FileLogger) #appender=com.p6spy.engine.spy.appender.Slf4JLogger
+	 * #appender=com.p6spy.engine.spy.appender.StdoutLogger #appender=com.p6spy.engine.spy.appender.FileLogger
 	 */
 	private String appender = "com.taotao.cloud.p6spy.logger.P6spyLogger";
 
@@ -103,7 +103,10 @@ public class P6spyProperties {
 	 * forward slashes in their pathname (e:/test/spy.log) # (used for
 	 * com.p6spy.engine.spy.appender.FileLogger only) # (default is spy.log)
 	 */
-	private String logfile = "spy.log";
+	private String logfile =
+		System.getenv("user.home") + File.separator + "logs" + File.separator + "p6spy"
+			+ File.separator + PropertyUtil.getProperty("spring.application.name")
+			+ File.separator + "spy.log";
 
 	/**
 	 * 指定是否每次是增加 Log，设置为 false 则每次都会先进行清空 默认true # append to the p6spy log file. if this is set to
@@ -128,8 +131,7 @@ public class P6spyProperties {
 	 * %(effectiveSqlSingleLine)  the SQL statement as submitted to the driver, with all new lines
 	 * removed #   %(sql)                     the SQL statement with all bind variables replaced
 	 * with actual values #   %(sqlSingleLine)           the SQL statement with all bind variables
-	 * replaced with actual values, with all new lines removed
-	 * # customLogMessageFormat=%(currentTime)|%(executionTime)|%(category)|connection%(connectionId)|%(sqlSingleLine)
+	 * replaced with actual values, with all new lines removed # customLogMessageFormat=%(currentTime)|%(executionTime)|%(category)|connection%(connectionId)|%(sqlSingleLine)
 	 */
 	private String customLogMessageFormat = "%(currentTime)|%(executionTime)|%(category)|connection%(connectionId)|%(sqlSingleLine)";
 
@@ -189,8 +191,8 @@ public class P6spyProperties {
 	 * com.p6spy.engine.spy.P6DataSource # # (that provides also connection pooling and xa support).
 	 * # # then add the JNDI name and class name of the real             # # DataSource here # # # #
 	 * Values set in this item cannot be reloaded using the          # # reloadproperties variable.
-	 * Once it is loaded, it remains # # in memory until the application is restarted.
-	 *   # # # #################################################################
+	 * Once it is loaded, it remains # # in memory until the application is restarted. # # #
+	 * #################################################################
 	 * #realdatasource=/RealMySqlDS
 	 */
 	private String realdatasource;
