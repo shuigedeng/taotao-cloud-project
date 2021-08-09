@@ -5,6 +5,7 @@ target/
 .gradle
 /gradle
 /out
+/vendor
 
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -32,6 +33,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+vendor/
 
 .iml
 mvnw
@@ -50,3 +52,4 @@ help.md
 **/out
 .gradle
 
+**/vendor/

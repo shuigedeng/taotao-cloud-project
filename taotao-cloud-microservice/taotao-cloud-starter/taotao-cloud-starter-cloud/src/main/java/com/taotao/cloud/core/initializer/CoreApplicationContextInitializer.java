@@ -25,6 +25,7 @@ import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
+import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.common.base.CoreProperties;
 import com.taotao.cloud.common.base.PropertyCache;
 import com.taotao.cloud.common.enums.EnvironmentEnum;
@@ -32,6 +33,7 @@ import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
+import java.io.File;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -69,8 +71,19 @@ public class CoreApplicationContextInitializer implements
 			ContextUtil.setApplicationContext(context);
 
 			ConfigurableEnvironment environment = context.getEnvironment();
+
+			/**
+			 * 设置nacos客户端日志和快照目录
+			 *
+			 * @see LocalConfigInfoProcessor
+			 */
+			Object orDefault = environment.getSystemEnvironment().get("user.home");
+
+			setDefaultProperty("JM.LOG.PATH", orDefault + File.separator + "logs", "");
+			setDefaultProperty("JM.SNAPSHOT.PATH", orDefault + File.separator + "logs", "");
 			setDefaultProperty("nacos.logging.default.config.enabled", "false",
 				"[taotao cloud 环境变量]");
+//
 			if ("false"
 				.equalsIgnoreCase(
 					environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {

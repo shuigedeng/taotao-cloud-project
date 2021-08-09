@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.gateway;
 
-import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -32,13 +31,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
-		/**
-		 * 设置nacos客户端日志和快照目录
-		 *
-		 * @see LocalConfigInfoProcessor
-		 */
-		// System.setProperty("JM.LOG.PATH", "");
-		// System.setProperty("JM.SNAPSHOT.PATH", "");
 		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 	}
 }
