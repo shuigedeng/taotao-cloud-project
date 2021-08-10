@@ -3,97 +3,100 @@
 function start_taotao_cloud() {
   # tcp -> 3306 端口 3306 是 MySQL 协议的默认端口，由 mysql 客户端、MySQL 连接器以及 mysqldump 和 mysqlpump 等实用程序使用
   # tcp -> 33060 端口 33060 是 MySQL 数据库扩展接口（MySQL X 协议）的默认端口
-  /root/script/cloud/mysql.sh start
+  /root/script/mysql.sh start
   
   # tcp -> 6379
-  /root/script/cloud/redis.sh start
+  /root/script/redis.sh start
  
   # tcp -> 2181 对cline端提供服务
   # tcp -> 3888 选举leader使用
   # tcp -> 2888 集群内机器通讯使用（Leader监听此端口）
-  /root/script/cloud/zookeeper.sh start
+  /root/script/zookeeper.sh start
   
   # tcp -> 9092
   # JMX_PORT -> 9999
-  /root/script/cloud/kafka.sh start
+  /root/script/kafka.sh start
   
   # http -> 8848 http://172.16.6.151:8848/nacos  nacos/nacos
   # tcp -> 9848 客户端gRPC请求服务端端口，用于客户端向服务端发起连接和请求
   # tcp -> 9849 服务端gRPC请求服务端端口，用于服务间同步等
   # tcp -> 7848 nacos集群通信，进行选举，检测等
-  /root/script/cloud/nacos.sh start
+  /root/script/nacos.sh start
   
   # tcp -> 8091
-  /root/script/cloud/seata.sh start
+  /root/script/seata.sh start
   
   # tcp/http -> 8849 http://172.16.6.151:8849 sentinel/sentinel
-  /root/script/cloud/sentinel.sh start
+  /root/script/sentinel.sh start
   
   # tcp/http -> 9411 http://172.16.6.151:9411
-  /root/script/cloud/zipkin.sh start
+  /root/script/zipkin.sh start
   
   # tcp -> 11800
   # http -> 18080 http://172.16.6.151:18080
-  /root/script/cloud/skywalking.sh start
+  /root/script/skywalking.sh start
+
+  # tcp/http -> 5601 http://172.16.6.151:8081
+  /root/script/arthas.sh start
   
   # tcp/http -> 9090 http://172.16.6.151:9090 http://172.16.6.151:9090/metrics
-  #/root/script/cloud/prometheus.sh start
+  #/root/script/prometheus.sh start
   
   # tcp/http -> 3000 http://172.16.6.151:3000 admin/admin
-  #/root/script/cloud/grafana.sh start
+  #/root/script/grafana.sh start
 
   # tcp/http -> 9200 http://172.16.6.151:9200
   #su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
   # tcp/http -> 5601 http://172.16.6.151:5601
-  #/root/script/cloud/kibana.sh start
-
-  # tcp/http -> 5601 http://172.16.6.151:8081
-  /root/script/cloud/arthas.sh start
+  #/root/script/kibana.sh start
 
   # tcp/http -> 5601 http://172.16.6.151:8089
-  #/root/script/cloud/canal.sh start
+  #/root/script/canal.sh start
   
   # tcp/http -> 9601 input port
-  #/root/script/cloud/logstash.sh start
+  #/root/script/logstash.sh start
 
   # tcp/http -> 9100
-  #/root/script/cloud/node_exporter.sh start
+  #/root/script/node_exporter.sh start
 }
 
 function stop_taotao_cloud() {
-  /root/script/cloud/canal.sh stop
+  #/root/script/canal.sh stop
 
-  #/root/script/cloud/arthas.sh stop
+  #/root/script/arthas.sh stop
 
-  #/root/script/cloud/kibana.sh stop
+  #root/script/logstash.sh stop
+  
+  #/root/script/node_exporter.sh stop
+  
+  #/root/script/kibana.sh stop
   
   #su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
   
-  #/root/script/cloud/grafana.sh stop
+  #/root/script/grafana.sh stop
   
-  #/root/script/cloud/prometheus.sh stop
+  #/root/script/prometheus.sh stop
   
-  /root/script/cloud/skywalking.sh stop
+  /root/script/arthas.sh stop
   
-  /root/script/cloud/zipkin.sh stop
+  /root/script/skywalking.sh stop
   
-  /root/script/cloud/sentinel.sh stop
+  /root/script/zipkin.sh stop
   
-  /root/script/cloud/seata.sh stop
+  /root/script/sentinel.sh stop
   
-  /root/script/cloud/nacos.sh stop
+  /root/script/seata.sh stop
   
-  /root/script/cloud/kafka.sh stop
+  /root/script/nacos.sh stop
   
-  /root/script/cloud/zookeeper.sh stop
+  /root/script/kafka.sh stop
   
-  /root/script/cloud/redis.sh stop
+  /root/script/zookeeper.sh stop
   
-  /root/script/cloud/mysql.sh stop
+  /root/script/redis.sh stop
   
-  #root/script/cloud/logstash.sh stop
-  #/root/script/cloud/node_exporter.sh stop
+  /root/script/mysql.sh stop
 }
 
 case $1 in

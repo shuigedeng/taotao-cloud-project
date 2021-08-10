@@ -111,7 +111,7 @@ function start_skywalking() {
      nohup sh /opt/cloud/apache-skywalking-apm-bin-es7/bin/startup.sh \
       >/opt/cloud/apache-skywalking-apm-bin-es7/start.log 2>&1 &
      sleep 10
-     echo " skywalking started"
+     echo "skywalking started"
 }
 
 function stop_skywalking() {

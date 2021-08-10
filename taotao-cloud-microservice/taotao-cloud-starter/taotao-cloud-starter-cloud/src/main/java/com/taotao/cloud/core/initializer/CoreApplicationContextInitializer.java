@@ -77,10 +77,9 @@ public class CoreApplicationContextInitializer implements
 			 *
 			 * @see LocalConfigInfoProcessor
 			 */
-			Object orDefault = environment.getSystemEnvironment().get("user.home");
-
-			setDefaultProperty("JM.LOG.PATH", orDefault + File.separator + "logs", "");
-			setDefaultProperty("JM.SNAPSHOT.PATH", orDefault + File.separator + "logs", "");
+			String userHome = PropertyUtil.getProperty("user.home");
+			setDefaultProperty("JM.LOG.PATH", userHome + File.separator + "logs", "");
+			setDefaultProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs", "");
 			setDefaultProperty("nacos.logging.default.config.enabled", "false",
 				"[taotao cloud 环境变量]");
 //

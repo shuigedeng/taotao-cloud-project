@@ -126,14 +126,11 @@ public class SentinelConfiguration {
 			)
 		);
 
-		rules.add(new GatewayFlowRule("some_customized_api")
-			.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_CUSTOM_API_NAME)
-			.setCount(5)
+		rules.add(new GatewayFlowRule("taotao-cloud-uc")
+			.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_ROUTE_ID)
+			.setCount(3)
+			.setGrade(RuleConstant.FLOW_GRADE_QPS)
 			.setIntervalSec(1)
-			.setParamItem(new GatewayParamFlowItem()
-				.setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_URL_PARAM)
-				.setFieldName("pn")
-			)
 		);
 		GatewayRuleManager.loadRules(rules);
 	}

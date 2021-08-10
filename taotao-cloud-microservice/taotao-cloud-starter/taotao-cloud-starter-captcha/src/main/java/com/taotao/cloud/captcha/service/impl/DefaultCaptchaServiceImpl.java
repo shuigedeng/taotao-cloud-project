@@ -13,10 +13,6 @@ import com.taotao.cloud.captcha.model.vo.CaptchaVO;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.StringUtils;
 import java.util.Properties;
-
-/**
- * Created by raodeming on 2019/12/25.
- */
 public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 
 	@Override

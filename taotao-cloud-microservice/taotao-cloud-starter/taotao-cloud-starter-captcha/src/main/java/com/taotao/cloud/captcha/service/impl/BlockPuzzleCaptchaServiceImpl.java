@@ -59,12 +59,14 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		if (!validatedReq(r)) {
 			return r;
 		}
+
 		//原生图片
 		BufferedImage originalImage = ImageUtils.getOriginal();
 		if (null == originalImage) {
 			logger.error("滑动底图未初始化成功，请检查路径");
 			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
+
 		//设置水印
 		Graphics backgroundGraphics = originalImage.getGraphics();
 		int width = originalImage.getWidth();
@@ -247,6 +249,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			Base64.Encoder encoder = Base64.getEncoder();
 			dataVO.setOriginalImageBase64(
 				encoder.encodeToString(oriCopyImages).replaceAll("\r|\n", ""));
+
 			//point信息不传到前端，只做后端check校验
 //            dataVO.setPoint(point);
 			dataVO.setJigsawImageBase64(

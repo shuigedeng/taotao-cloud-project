@@ -47,7 +47,8 @@ exec “$JAVACMD” $JAVA_OPTS -server -Xmx1024m -Xms1024m -Xmn512m -Xss256k
 #!/bin/bash
 
 function start_seata() {
-     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 172.16.6.151 >/opt/cloud/seata/logs/seata.out 2>&1 &
+     nohup sh /opt/cloud/seata/bin/seata-server.sh -p 8091 -h 172.16.6.151 \
+     >/opt/cloud/seata/logs/seata.out 2>&1 &
      sleep 10
      echo "seata started"
 }

@@ -112,21 +112,45 @@ spring:
         - id: taotao-cloud-uc
           uri: lb://taotao-cloud-uc
           predicates:
-            - Path=/taotao-cloud-uc/**
+            - Path=${taotao.cloud.gateway.base-uri}/uc/**
           filters:
-            - RewritePath=/taotao-cloud-uc/(?<remaining>.*), /${remaining}
+            - RewritePath=/uc/(?<path>.*), /$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
         - id: taotao-cloud-order
           uri: lb://taotao-cloud-order
+          metadata:
+            - aa=hello
           predicates:
-            - Path=/taotao-cloud-order/**
+            - Path=/order/**
           filters:
-            - RewritePath=/taotao-cloud-order/(?<remaining>.*), /${remaining}
+#            - RewritePath=${taotao.cloud.gateway.base-uri}/order/(?<path>.*), /${path}
+            - RewritePath=/order/(?<path>.*), /$\{path}
+            - StripPrefix=3
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
         - id: openapi
           uri: http://localhost:${server.port}
+          metadata:
+            - aa=hello
           predicates:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+            - SwaggerHeader
       #        - id: auth-user-password-token
       #          uri: lb://taotao-cloud-oauth2
       #          predicates:
@@ -326,6 +350,7 @@ taotao:
       request-log:
         enabled: false
     gateway:
+      base-uri: /api/v2021.8
       https:
         enabled: false
         port: 9443

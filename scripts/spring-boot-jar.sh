@@ -12,17 +12,26 @@
 # 根据实际情况来修改以下配置信息 ##################################
 
 # JAVA应用程序的名称
-APP_NAME=uid-consumer
+APP_NAME=taotao-cloud-uc
 # JAVA应用程序端口号
-SERVER_PORT=9999
+SERVER_PORT=9996
 # jar包存放路径
-JAR_PATH='/app/uid-consumer'
+JAR_PATH='/opt/taotao-cloud'
 # jar包名称
-JAR_NAME=uid-consumer-1.1.0-SNAPSHOT.jar
+JAR_NAME=taotao-cloud-uc-biz-2021.7.jar
 # PID 代表是PID文件
-JAR_PID=$JAR_NAME\.pid
+JAR_PID=$JAR_PATH/pids/$APP_NAME\.pid
+
+if [ ! -d $JAR_PATH/pids ]; then
+    mkdir $JAR_PATH/pids
+fi
+
 # 日志输出文件
-LOG_FILE=logs
+LOG_FILE=$JAR_PATH/logs
+
+if [ ! -d LOG_FILE ]; then
+    mkdir LOG_FILE
+fi
 
 # java虚拟机启动参数
 JAVA_OPTS="-Xms512m
@@ -72,10 +81,14 @@ start() {
     echo "$APP_NAME is already running pid is ${pid}"
   else
     # jar服务启动脚本
-    nohup java $JAVA_OPTS -Xloggc:$LOG_FILE/gc/gclog.log -XX:HeapDumpPath=$LOG_FILE/gc/HeapDump.hprof -jar $JAR_PATH/$JAR_NAME >./$LOG_FILE/run.log 2>&1 &
+    nohup java $JAVA_OPTS \
+    -Xloggc:$LOG_FILE/$APP_NAME/gclog.log \
+    -XX:HeapDumpPath=$LOG_FILE/$APP_NAME/HeapDump.hprof \
+    -jar $JAR_PATH/$JAR_NAME >$LOG_FILE/$APP_NAME\.log 2>&1 &
+
     echo $! > $JAR_PID
     echo "start $APP_NAME successed pid is $! "
-    tail -1000f $LOG_FILE/run.log
+    tail -1000f $LOG_FILE/$APP_NAME\.log
    fi
 }
 

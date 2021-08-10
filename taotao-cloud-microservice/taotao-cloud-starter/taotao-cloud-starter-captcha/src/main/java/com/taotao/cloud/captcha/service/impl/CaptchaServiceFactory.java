@@ -10,9 +10,6 @@ import java.util.ServiceLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by raodeming on 2020/5/26.
- */
 public class CaptchaServiceFactory {
 
 	private static Logger logger = LoggerFactory.getLogger(CaptchaServiceFactory.class);

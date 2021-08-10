@@ -27,7 +27,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.media.IntegerSchema;
 import io.swagger.v3.oas.models.media.StringSchema;
-import io.swagger.v3.oas.models.parameters.HeaderParameter;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import io.swagger.v3.oas.models.servers.Server;
@@ -88,18 +87,22 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
 		String applicationName = environment.getProperty("spring.application.name", "");
+		String[] split = applicationName.split("-");
+		String name = split[split.length - 1];
 
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
 			Paths newPaths = new Paths();
-			paths.keySet().forEach(e -> newPaths.put("/" + applicationName + e, paths.get(e)));
+			paths.keySet()
+				.forEach(e -> newPaths.put("/api/v2021.8" + "/" + name + e, paths.get(e)));
 			openApi.setPaths(newPaths);
 
 			openApi.getPaths().values().stream()
 				.flatMap(pathItem -> pathItem.readOperations().stream())
-				.forEach(operation -> operation.addParametersItem(
-					new HeaderParameter()));
+				.forEach(operation -> {
+
+				});
 		};
 	}
 
@@ -138,24 +141,21 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		String taotaoCloudVersion = environment.getProperty("taotaoCloudVersion");
 		String ip = environment.getProperty("spring.cloud.client.ip-address",
 			"0.0.0.0");
-		String port = environment.getProperty("server.port",
-			"9999");
-
 		List<Server> servers = new ArrayList<>();
 		Server s1 = new Server();
-		s1.setUrl("http://" + ip + ":" + port + "/" + applicationName);
+		s1.setUrl("http://" + ip + ":9999/");
 		s1.setDescription("本地地址");
 		servers.add(s1);
 		Server s2 = new Server();
-		s2.setUrl("http://dev.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s2.setUrl("http://dev.taotaocloud.top/");
 		s2.setDescription("测试环境地址");
 		servers.add(s2);
 		Server s3 = new Server();
-		s3.setUrl("http://pre.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s3.setUrl("http://pre.taotaocloud.top/");
 		s3.setDescription("预上线环境地址");
 		servers.add(s3);
 		Server s4 = new Server();
-		s4.setUrl("http://pro.taotaocloud.top/api/v" + taotaoCloudVersion + "/" + applicationName);
+		s4.setUrl("http://pro.taotaocloud.top/");
 		s4.setDescription("生产环境地址");
 		servers.add(s4);
 
@@ -181,7 +181,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 		return new OpenAPI()
 			.components(components)
-			.openapi("3.0.0")
+			.openapi("3.0.1")
 			.info(info)
 			.servers(servers)
 			.externalDocs(externalDocumentation);

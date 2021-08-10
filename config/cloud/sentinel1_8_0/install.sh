@@ -18,7 +18,7 @@ cp sentinel-dashboard-1.8.2.jar /opt/cloud/sentinel
        -jar /opt/cloud/sentinel/sentinel-dashboard-1.8.2.jar  \
        >/opt/cloud/sentinel/start.log 2>&1 &
       sleep 10
-      echo " sentinel started"
+      echo "sentinel started"
  }
 
  function stop_sentinel() {
@@ -55,7 +55,7 @@ function start_sentinel() {
       -jar /opt/cloud/sentinel/sentinel-dashboard-1.8.2.jar  \
       >/opt/cloud/sentinel/start.log 2>&1 &
      sleep 10
-     echo " sentinel started"
+     echo "sentinel started"
 }
 
 function stop_sentinel() {

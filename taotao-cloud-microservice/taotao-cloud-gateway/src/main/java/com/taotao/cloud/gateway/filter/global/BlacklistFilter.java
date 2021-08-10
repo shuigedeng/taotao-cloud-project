@@ -21,11 +21,11 @@ import reactor.core.publisher.Mono;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
-public class SecurityRuleFilter implements WebFilter {
+public class BlacklistFilter implements WebFilter {
 
 	private final ISafeRuleService ISafeRuleService;
 
-	public SecurityRuleFilter(com.taotao.cloud.gateway.service.ISafeRuleService ISafeRuleService) {
+	public BlacklistFilter(ISafeRuleService ISafeRuleService) {
 		this.ISafeRuleService = ISafeRuleService;
 	}
 
@@ -35,13 +35,11 @@ public class SecurityRuleFilter implements WebFilter {
 		 * 是否开启黑名单
 		 * 从redis里查询黑名单是否存在
 		 */
-		if (true) {
-			LogUtil.debug("进入黑名单模式");
-			// 检查黑名单
-			Mono<Void> result = ISafeRuleService.filterBlackList(exchange);
-			if (result != null) {
-				return result;
-			}
+		LogUtil.debug("进入黑名单模式");
+		// 检查黑名单
+		Mono<Void> result = ISafeRuleService.filterBlackList(exchange);
+		if (result != null) {
+			return result;
 		}
 
 		/**

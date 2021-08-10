@@ -54,8 +54,7 @@ function start_kafka() {
 }
 
 function stop_kafka() {
-
- /opt/cloud/kafka_2.12-2.8.0/bin/kafka-server-stop.sh
+  /opt/cloud/kafka_2.12-2.8.0/bin/kafka-server-stop.sh
   sleep 10
   echo "kafka stoped"
 }

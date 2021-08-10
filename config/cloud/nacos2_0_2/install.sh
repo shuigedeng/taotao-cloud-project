@@ -45,7 +45,7 @@ function start_nacos() {
      nohup /opt/cloud/nacos/bin/startup.sh -m standalone \
       >/opt/cloud/nacos/start.out 2>&1 &
      sleep 30
-     echo " nacos started"
+     echo "nacos started"
 }
 
 function stop_nacos() {

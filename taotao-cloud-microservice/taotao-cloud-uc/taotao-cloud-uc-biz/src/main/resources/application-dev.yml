@@ -366,7 +366,6 @@ taotao:
       request-log:
         enabled: true
         types:
-          - logger
           - kafka
     p6spy:
       enabled: true

@@ -27,9 +27,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by raodeming on 2019/12/25.
- */
 public abstract class AbstractCaptchaService implements CaptchaService {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());

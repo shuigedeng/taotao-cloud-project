@@ -42,13 +42,13 @@
 		<producerConfig>bootstrap.servers=${BOOTSTRAP_SERVERS}</producerConfig>
 		<producerConfig>key.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
 		<producerConfig>value.serializer=org.apache.kafka.common.serialization.StringSerializer</producerConfig>
-		<producerConfig>acks=1</producerConfig>
-		<producerConfig>linger.ms=0</producerConfig>
+		<producerConfig>acks=0</producerConfig>
+		<producerConfig>linger.ms=100</producerConfig>
 		<producerConfig>retries=0</producerConfig>
-		<producerConfig>batch.size=10</producerConfig>
+		<producerConfig>batch.size=50</producerConfig>
 		<producerConfig>buffer-memory=33554432</producerConfig>
 		<producerConfig>max.request.size=1048576</producerConfig>
-		<producerConfig>max.block.ms=6000</producerConfig>
+		<producerConfig>max.block.ms=200</producerConfig>
 	</appender>
 
 <!--	<appender name="KAFKA_ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->

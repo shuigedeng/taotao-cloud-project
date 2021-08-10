@@ -38,6 +38,7 @@ public class SecurityProperties {
 		"/*/api-docs",
 		"/css/**",
 		"/js/**",
+		"/api/v2021.8/uc/resource/**",
 		"/images/**"
 	};
 

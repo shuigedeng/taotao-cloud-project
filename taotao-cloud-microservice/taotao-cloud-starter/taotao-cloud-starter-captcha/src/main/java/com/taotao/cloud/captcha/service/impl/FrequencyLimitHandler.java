@@ -10,10 +10,6 @@ import com.taotao.cloud.captcha.util.StringUtils;
 import java.util.Objects;
 import java.util.Properties;
 
-/**
- * @author WongBin
- * @date 2021/1/21
- */
 public interface FrequencyLimitHandler {
 
 	String LIMIT_KEY = "AJ.CAPTCHA.REQ.LIMIT-%s-%s";

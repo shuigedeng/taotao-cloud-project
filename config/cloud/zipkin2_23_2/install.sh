@@ -49,7 +49,7 @@ function start_zipkin() {
         --MYSQL_PASS=123456 \
      >/opt/cloud/zipkin/start.out 2>&1 &
      sleep 10
-     echo " zipkin started"
+     echo "zipkin started"
 }
 
 function stop_zipkin() {
