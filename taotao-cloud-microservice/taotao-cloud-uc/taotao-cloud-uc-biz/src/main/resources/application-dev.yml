@@ -128,6 +128,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
+    repositories:
+      enabled: true
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
@@ -214,19 +216,16 @@ spring:
       # 传输模式
       transportMode: "NIO"
 
-    elasticsearch:
-      repositories:
-        enabled: false
-      client:
-        reactive:
-          endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
-          connection-timeout: 5
-          username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
-          password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
-    redis:
-      repositories:
-        enabled: true
+  elasticsearch:
+    repositories:
+      enabled: false
+    client:
+      reactive:
+        endpoints:
+          - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+        connection-timeout: 5
+        username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
+        password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
 
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
@@ -253,7 +252,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
   mail:
     host: smtp.aliyun.com
     username: xxxxx@aliyun.com
@@ -486,6 +485,7 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+    io.seata: debug
 
 springdoc:
   packages-to-exclude:

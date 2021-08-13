@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
@@ -323,7 +325,7 @@ public class SysResourceController {
 	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/seata")
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
-	public Result<Boolean> testSeata() {
+	public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {
 		Boolean result = resourceService.testSeata();
 		return Result.success(result);
 	}
@@ -331,7 +333,7 @@ public class SysResourceController {
 	public Result<Boolean> testSeataException(BlockException e) {
 		e.printStackTrace();
 		LogUtil.error(" 该接口已经被限流啦", e);
-		return Result.fail(false);
+		return Result.fail("该接口已经被限流啦");
 	}
 
 }

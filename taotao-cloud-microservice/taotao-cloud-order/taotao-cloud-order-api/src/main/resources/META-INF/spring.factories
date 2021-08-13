@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.order.api.feign.fallback.RemoteOrderFallbackImpl
+com.taotao.cloud.order.api.feign.fallback.RemoteOrderFallbackImpl, \
+com.taotao.cloud.order.api.feign.fallback.RemoteOrderItemFallbackImpl

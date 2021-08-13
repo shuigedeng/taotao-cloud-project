@@ -17,6 +17,7 @@ package com.taotao.cloud.oauth2.biz.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,7 +37,9 @@ public class DefaultSecurityConfig {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests(authorizeRequests ->
-				authorizeRequests.anyRequest().authenticated()
+				authorizeRequests
+					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+					.anyRequest().authenticated()
 			)
 			.formLogin(withDefaults())
 			.oauth2ResourceServer()
@@ -47,9 +50,9 @@ public class DefaultSecurityConfig {
 	@Bean
 	UserDetailsService users() {
 		UserDetails user = User.withDefaultPasswordEncoder()
-			.username("user1")
-			.password("password")
-			.roles("USER")
+			.username("admin")
+			.password("admin")
+			.roles("USER", "ADMIN")
 			.build();
 		return new InMemoryUserDetailsManager(user);
 	}

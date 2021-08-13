@@ -52,7 +52,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class SeataDataSourceConfiguration {
 
 	@Primary
-	@Bean(name = "seataDataSource")
+	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource dataSource(DataSourceProperties properties) {
 		HikariDataSource hikariDataSource =
@@ -69,6 +69,8 @@ public class SeataDataSourceConfiguration {
 	public SeataInterceptor seataInterceptor() {
 		return new SeataInterceptor();
 	}
+
+
 
 	@Bean
 	public DetectTable detectTable(DataSource dataSource) {
@@ -117,6 +119,7 @@ public class SeataDataSourceConfiguration {
 	 * @since 2020/10/22 17:01
 	 */
 	public static class SeataXidFilter extends OncePerRequestFilter {
+
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain) throws ServletException, IOException {
@@ -148,4 +151,31 @@ public class SeataDataSourceConfiguration {
 			}
 		}
 	}
+
+//	@Bean
+//	public SeataAspect seataAspect() {
+//		return new SeataAspect();
+//	}
+//
+//	@Aspect
+//	public static class SeataAspect extends BaseAspect {
+//
+//		@Before("execution(* com.taotao.cloud.*.biz.service.*.*(..))")
+//		public void before(JoinPoint joinPoint) throws TransactionException {
+//			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+//			Method method = signature.getMethod();
+//			GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
+//			tx.begin(300000, "tran");
+//			LogUtil.info("**********创建分布式事务完毕 {0}", tx.getXid());
+//		}
+//
+//		@AfterThrowing(throwing = "e", pointcut = "execution(* com.taotao.cloud.*.biz.service.*.*(..))")
+//		public void doRecoveryActions(Throwable e) throws Exception {
+//			LogUtil.info("方法执行异常:{0}", e.getMessage());
+//			if (!StrUtil.isBlank(RootContext.getXID())) {
+//				GlobalTransactionContext.reload(RootContext.getXID()).rollback();
+//			}
+//		}
+//
+//	}
 }

@@ -7,7 +7,12 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResourceTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.order.api.dto.OrderDTO;
+import com.taotao.cloud.order.api.feign.RemoteOrderItemService;
+import com.taotao.cloud.order.api.feign.RemoteOrderService;
+import com.taotao.cloud.order.api.vo.OrderVO;
 import com.taotao.cloud.uc.api.query.resource.ResourcePageQuery;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
 import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
@@ -18,6 +23,8 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
+import io.seata.spring.annotation.GlobalTransactional;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -49,16 +56,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class SysResourceServiceImpl implements ISysResourceService {
 	private final SysResourceRepository sysResourceRepository;
 	private final ISysRoleService sysRoleService;
+	private final RemoteOrderItemService remoteOrderItemService;
+	private final RemoteOrderService remoteOrderService;
 
 	public SysResourceServiceImpl(
 		SysResourceRepository sysResourceRepository,
-		ISysRoleService sysRoleService) {
+		ISysRoleService sysRoleService,
+		RemoteOrderItemService remoteOrderItemService,
+		RemoteOrderService remoteOrderService) {
 		this.sysResourceRepository = sysResourceRepository;
 		this.sysRoleService = sysRoleService;
+		this.remoteOrderItemService = remoteOrderItemService;
+		this.remoteOrderService = remoteOrderService;
 	}
-
-	//	private final RemoteOrderService remoteOrderService;
-//	private final RemoteProductService remoteProductService;
 
 	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;
 
@@ -196,16 +206,34 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	}
 
 	@Override
-//	@GlobalTransactional(name = "fsp-create-order", rollbackFor = Exception.class)
+	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
 		LogUtil.info("1.添加资源信息");
-		// ResourceDTO resourceDTO = ResourceDTO.builder()
-		// 	.name("资源三")
-		// 	.type((byte) 1)
-		// 	.parentId(0L)
-		// 	.sortNum(2)
-		// 	.build();
-		// saveResource(resourceDTO);
+		SysResource sysResource = SysResource.builder()
+		 	.name("资源三")
+		 	.type((byte) 1)
+		 	.parentId(0L)
+		 	.sortNum(2)
+		 	.build();
+		 saveResource(sysResource);
+
+
+		LogUtil.info("1.远程添加订单信息");
+		OrderDTO orderDTO = OrderDTO.builder()
+			.memberId(2L)
+			.code("33333")
+			.amount(BigDecimal.ZERO)
+			.mainStatus(1)
+			.childStatus(1)
+			.receiverName("shuigedeng")
+			.receiverPhone("15730445330")
+			.receiverAddressJson("sjdlasjdfljsldf")
+			.build();
+
+		Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
+		if(orderVOResult.getCode() != 200){
+			throw new BusinessException("创建订单失败");
+		}
 
 //		LogUtil.info("2.远程添加商品信息");
 //		ProductDTO productDTO = ProductDTO.builder()
@@ -220,19 +248,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 //			.status(1)
 //			.build();
 //		remoteProductService.saveProduct(productDTO);
-//
-//		LogUtil.info("3.远程添加订单信息");
-//		OrderDTO orderDTO = OrderDTO.builder()
-//			.memberId(2L)
-//			.code("33333")
-//			.amount(BigDecimal.ZERO)
-//			.mainStatus(1)
-//			.childStatus(1)
-//			.receiverName("shuigedeng")
-//			.receiverPhone("15730445330")
-//			.receiverAddressJson("sjdlasjdfljsldf")
-//			.build();
-//		Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
+
 		return true;
 	}
 }

@@ -44,8 +44,11 @@ public class Result<T> implements Serializable {
 	@Schema(description = "返回数据")
 	private T data;
 
-	@Schema(description = "消息体 error success")
-	private String message;
+	@Schema(description = "是否成功")
+	private boolean success;
+
+	@Schema(description = "异常消息体")
+	private String errorMsg;
 
 	@Schema(description = "请求id")
 	private String requestId;
@@ -57,20 +60,23 @@ public class Result<T> implements Serializable {
 	public Result() {
 	}
 
-	public Result(int code, T data, String message, String requestId, LocalDateTime timestamp) {
+	public Result(int code, T data, boolean success, String errorMsg, String requestId,
+		LocalDateTime timestamp) {
 		this.code = code;
 		this.data = data;
-		this.message = message;
+		this.success = success;
+		this.errorMsg = errorMsg;
 		this.requestId = requestId;
 		this.timestamp = timestamp;
 	}
 
-	public static <T> Result<T> of(int code, T data, String msg) {
+	public static <T> Result<T> of(int code, T data, boolean success, String errorMsg) {
 		return Result
 			.<T>builder()
 			.code(code)
 			.data(data)
-			.message(msg)
+			.success(success)
+			.errorMsg(errorMsg)
 			.timestamp(LocalDateTime.now())
 			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC
 				.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr())
@@ -78,53 +84,84 @@ public class Result<T> implements Serializable {
 	}
 
 	public static <T> Result<T> success(T data) {
-		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS);
+		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS, "");
 	}
 
 	public static <T> Result<T> success() {
-		return of(ResultEnum.SUCCESS.getCode(), null, CommonConstant.SUCCESS);
+		return of(ResultEnum.SUCCESS.getCode(), null, CommonConstant.SUCCESS, "");
 	}
 
 	public static <T> Result<T> success(T data, int code) {
-		return of(code, data, CommonConstant.SUCCESS);
+		return of(code, data, CommonConstant.SUCCESS, "");
 	}
 
 	public static Result<String> success(String data, ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.SUCCESS);
+		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.SUCCESS, "");
 	}
 
 	public static Result<String> fail() {
-		return of(ResultEnum.ERROR.getCode(), ResultEnum.ERROR.getData(), CommonConstant.ERROR);
+		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR,
+			ResultEnum.ERROR.getData());
 	}
 
-	public static <T> Result<T> fail(T data) {
-		return of(ResultEnum.ERROR.getCode(), data, CommonConstant.ERROR);
+	public static <T> Result<T> fail(String errorMsg) {
+		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}
 
-	public static <T> Result<T> fail(Throwable throwable) {
-		// todo
-		return null;
-	}
-
-	public static <T> Result<T> fail(T data, int code) {
-		return of(code, data, CommonConstant.ERROR);
+	public static <T> Result<T> fail(String data, int code) {
+		return of(code, null, CommonConstant.ERROR, data);
 	}
 
 	public static Result<String> fail(ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.ERROR);
+		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
+	}
+
+	public static <T> Result<T> fail(Throwable throwable) {
+		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, throwable.getMessage());
 	}
 
 	public static <T> Result<T> validFail(ResultEnum resultEnum) {
-		// todo
-		return null;
+		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
 	}
-	public static <T> Result<T> validFail(String msg, Object... args) {
-		// todo
-		return null;
+
+	public static <T> Result<T> validFail(String errorMsg, Object... args) {
+		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}
-	public static <T> Result<T> validFail(String msg) {
-		// todo
-		return null;
+
+	public static <T> Result<T> validFail(String errorMsg) {
+		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
+	}
+
+	@Override
+	public String toString() {
+		return "Result{" +
+			"code=" + code +
+			", data=" + data +
+			", success=" + success +
+			", errorMsg='" + errorMsg + '\'' +
+			", requestId='" + requestId + '\'' +
+			", timestamp=" + timestamp +
+			'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Result<?> result = (Result<?>) o;
+		return code == result.code && success == result.success && Objects.equals(data,
+			result.data) && Objects.equals(errorMsg, result.errorMsg)
+			&& Objects.equals(requestId, result.requestId) && Objects.equals(
+			timestamp, result.timestamp);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, data, success, errorMsg, requestId, timestamp);
 	}
 
 	public int getCode() {
@@ -143,12 +180,20 @@ public class Result<T> implements Serializable {
 		this.data = data;
 	}
 
-	public String getMessage() {
-		return message;
+	public boolean isSuccess() {
+		return success;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 	public String getRequestId() {
@@ -167,45 +212,16 @@ public class Result<T> implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	@Override
-	public String toString() {
-		return "Result{" +
-			"code=" + code +
-			", data=" + data +
-			", message='" + message + '\'' +
-			", requestId='" + requestId + '\'' +
-			", timestamp=" + timestamp +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Result<?> result = (Result<?>) o;
-		return code == result.code && Objects.equals(data, result.data)
-			&& Objects.equals(message, result.message) && Objects.equals(
-			requestId, result.requestId) && Objects.equals(timestamp, result.timestamp);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(code, data, message, requestId, timestamp);
-	}
-
-	public static <T> ResultBuilder<T> builder() {
-		return new ResultBuilder<>();
+	public static ResultBuilder builder() {
+		return new ResultBuilder();
 	}
 
 	public static final class ResultBuilder<T> {
 
 		private int code;
 		private T data;
-		private String message;
+		private boolean success;
+		private String errorMsg;
 		private String requestId;
 		private LocalDateTime timestamp;
 
@@ -217,31 +233,37 @@ public class Result<T> implements Serializable {
 			return this;
 		}
 
-		public ResultBuilder<T> data(T data) {
+		public ResultBuilder data(T data) {
 			this.data = data;
 			return this;
 		}
 
-		public ResultBuilder<T> message(String message) {
-			this.message = message;
+		public ResultBuilder success(boolean success) {
+			this.success = success;
 			return this;
 		}
 
-		public ResultBuilder<T> requestId(String requestId) {
+		public ResultBuilder errorMsg(String errorMsg) {
+			this.errorMsg = errorMsg;
+			return this;
+		}
+
+		public ResultBuilder requestId(String requestId) {
 			this.requestId = requestId;
 			return this;
 		}
 
-		public ResultBuilder<T> timestamp(LocalDateTime timestamp) {
+		public ResultBuilder timestamp(LocalDateTime timestamp) {
 			this.timestamp = timestamp;
 			return this;
 		}
 
-		public Result<T> build() {
-			Result<T> result = new Result<>();
+		public Result build() {
+			Result result = new Result();
 			result.setCode(code);
 			result.setData(data);
-			result.setMessage(message);
+			result.setSuccess(success);
+			result.setErrorMsg(errorMsg);
 			result.setRequestId(requestId);
 			result.setTimestamp(timestamp);
 			return result;

@@ -40,6 +40,10 @@ public class BusinessException extends BaseException {
 		super(message, e);
 	}
 
+	public BusinessException(Throwable e) {
+		super(e);
+	}
+
 	public BusinessException(Integer code, String message, Throwable e) {
 		super(code, message, e);
 	}

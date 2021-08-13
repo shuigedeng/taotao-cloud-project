@@ -1,5 +1,6 @@
 package com.taotao.cloud.order.biz.controller;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.order.api.dto.OrderDTO;
@@ -7,6 +8,8 @@ import com.taotao.cloud.order.api.vo.OrderVO;
 import com.taotao.cloud.order.biz.entity.Order;
 import com.taotao.cloud.order.biz.mapper.OrderMapper;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/order")
-//@Api(value = "订单管理API", tags = {"订单管理API"})
+@Tag(name = "订单管理API", description = "订单管理API")
 public class OrderInfoController {
 
 	private final IOrderInfoService orderInfoService;
-
 
 	public OrderInfoController(IOrderInfoService orderInfoService) {
 		this.orderInfoService = orderInfoService;
 	}
 
-	//	@ApiOperation("获取订单信息")
+	@Operation(summary = "获取订单信息", description = "获取订单信息", method = CommonConstant.GET)
 	@GetMapping("/info/{code}")
 	@RequestOperateLog(description = "获取订单信息")
 	@PreAuthorize("hasAuthority('order:info:code')")
@@ -45,7 +47,7 @@ public class OrderInfoController {
 		return Result.success(vo);
 	}
 
-//	@ApiOperation("添加订单信息")
+	@Operation(summary = "添加订单信息", description = "添加订单信息", method = CommonConstant.POST)
 	@PostMapping
 	@RequestOperateLog(description = "添加订单信息")
 	Result<OrderVO> saveOrder(@Validated @RequestBody OrderDTO orderDTO) {

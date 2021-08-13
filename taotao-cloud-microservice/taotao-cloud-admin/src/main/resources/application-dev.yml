@@ -30,14 +30,11 @@ spring:
       client:
         enabled: true
     sampler:
-      #采样率，默认为0.1
       probability: 1.0
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
-    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
     discoveryClientEnabled: false
-    #发送数据类型 kafaka、rabbitmq、web
     sender:
       type: WEB
   boot:
@@ -78,10 +75,7 @@ spring:
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
-      acks: 1
+      acks: 0
       properties:
         linger.ms: 500
 

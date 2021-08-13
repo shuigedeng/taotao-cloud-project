@@ -167,7 +167,7 @@ spring:
         #          client-id: abc
         #          client-secret: abc
         jwt:
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
 
 taotao:
   cloud:

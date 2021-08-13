@@ -33,7 +33,7 @@ function start_taotao_cloud() {
   /root/script/zipkin.sh start
   
   # tcp -> 11800
-  # http -> 18080 http://172.16.6.151:18080
+  # http -> 18080 http://172.16.6.151:28080
   /root/script/skywalking.sh start
 
   # tcp/http -> 5601 http://172.16.6.151:8081

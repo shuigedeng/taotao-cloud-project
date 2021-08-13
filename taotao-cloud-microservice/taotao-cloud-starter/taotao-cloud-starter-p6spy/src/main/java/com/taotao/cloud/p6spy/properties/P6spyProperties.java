@@ -96,7 +96,8 @@ public class P6spyProperties {
 	 * com.p6spy.engine.spy.appender.FileLogger) #appender=com.p6spy.engine.spy.appender.Slf4JLogger
 	 * #appender=com.p6spy.engine.spy.appender.StdoutLogger #appender=com.p6spy.engine.spy.appender.FileLogger
 	 */
-	private String appender = "com.taotao.cloud.p6spy.logger.P6spyLogger";
+//	private String appender = "com.taotao.cloud.p6spy.logger.P6spyLogger";
+	private String appender = "com.p6spy.engine.spy.appender.FileLogger";
 
 	/**
 	 * 指定 Log 的文件名 默认 spy.log # name of logfile to use, note Windows users should make sure to use

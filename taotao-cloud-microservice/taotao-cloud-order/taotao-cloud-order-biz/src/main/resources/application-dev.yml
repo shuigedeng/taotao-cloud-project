@@ -9,7 +9,7 @@ server:
       io: 16
       worker: 256
     accesslog:
-      dir: ${user.home}/logs/accesslog/${spring.application.name}/
+      dir: ${user.home}/logs/undertow/${spring.application.name}
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}
@@ -366,7 +366,6 @@ taotao:
       request-log:
         enabled: true
         types:
-          - logger
           - kafka
     p6spy:
       enabled: true
@@ -374,6 +373,7 @@ taotao:
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+
     xxl:
       job:
         enabled: true
@@ -382,9 +382,9 @@ taotao:
         executor:
           appname: ${spring.application.name}
           ip:
-          port: 1113
+          port: 1114
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/xxl-job/${spring.application.name}}
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
     zookeeper:
       enabled: false
     sms:

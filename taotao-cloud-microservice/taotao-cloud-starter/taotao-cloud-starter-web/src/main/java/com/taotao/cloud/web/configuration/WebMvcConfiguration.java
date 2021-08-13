@@ -16,10 +16,7 @@
 package com.taotao.cloud.web.configuration;
 
 import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.web.filter.XssFilter.IGNORE_PARAM_VALUE;
-import static com.taotao.cloud.web.filter.XssFilter.IGNORE_PATH;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -38,7 +35,6 @@ import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.VersionFilter;
 import com.taotao.cloud.web.filter.WebContextFilter;
-import com.taotao.cloud.web.filter.XssFilter;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
@@ -54,7 +50,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -69,7 +64,6 @@ import javax.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -245,7 +239,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilterFilterRegistrationBean() {
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new VersionFilter(filterProperties));
-		registrationBean.addUrlPatterns("/**");
+		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(VersionFilter.class.getName());
 		registrationBean.setOrder(1);
 		return registrationBean;
@@ -255,7 +249,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public FilterRegistrationBean<TenantFilter> tenantFilterFilterRegistrationBean() {
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TenantFilter(filterProperties));
-		registrationBean.addUrlPatterns("/**");
+		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(TenantFilter.class.getName());
 		registrationBean.setOrder(2);
 		return registrationBean;
@@ -265,7 +259,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public FilterRegistrationBean<TraceFilter> traceFilterFilterRegistrationBean() {
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TraceFilter(filterProperties));
-		registrationBean.addUrlPatterns("/**");
+		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(TraceFilter.class.getName());
 		registrationBean.setOrder(3);
 		return registrationBean;
@@ -275,31 +269,31 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public FilterRegistrationBean<WebContextFilter> webContextFilterFilterRegistrationBean() {
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new WebContextFilter(filterProperties));
-		registrationBean.addUrlPatterns("/**");
+		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(WebContextFilter.class.getName());
 		registrationBean.setOrder(4);
 		return registrationBean;
 	}
 
-	/**
-	 * 配置跨站攻击过滤器
-	 */
-	@Bean
-	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
-		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
-		filterRegistration.setFilter(new XssFilter());
-		filterRegistration.setEnabled(xssProperties.getEnabled());
-		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
-		filterRegistration.setOrder(xssProperties.getOrder());
-
-		Map<String, String> initParameters = new HashMap<>(4);
-		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
-		initParameters.put(IGNORE_PARAM_VALUE,
-			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
-		filterRegistration.setInitParameters(initParameters);
-		return filterRegistration;
-	}
+//	/**
+//	 * 配置跨站攻击过滤器
+//	 */
+//	@Bean
+//	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+//	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
+//		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
+//		filterRegistration.setFilter(new XssFilter());
+//		filterRegistration.setEnabled(xssProperties.getEnabled());
+//		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
+//		filterRegistration.setOrder(xssProperties.getOrder());
+//
+//		Map<String, String> initParameters = new HashMap<>(4);
+//		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
+//		initParameters.put(IGNORE_PARAM_VALUE,
+//			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+//		filterRegistration.setInitParameters(initParameters);
+//		return filterRegistration;
+//	}
 
 
 	/**

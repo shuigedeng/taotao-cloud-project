@@ -27,6 +27,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -35,6 +36,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -48,10 +50,10 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
-//	RestController.class, Controller.class})
+@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
+	RestController.class, Controller.class})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
-@RestControllerAdvice
+//@RestControllerAdvice
 public class ExceptionConfiguration {
 
 	@ExceptionHandler({BaseException.class})
@@ -245,13 +247,13 @@ public class ExceptionConfiguration {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:53
 	 */
-	private Map<String, String> getErrors(BindingResult result) {
+	private String getErrors(BindingResult result) {
 		Map<String, String> map = new HashMap<>();
 		List<FieldError> list = result.getFieldErrors();
 		for (FieldError error : list) {
 			map.put(error.getField(), error.getDefaultMessage());
 		}
-		return map;
+		return map.toString();
 	}
 
 	/**
@@ -262,7 +264,7 @@ public class ExceptionConfiguration {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:54
 	 */
-	private Map<String, String> getErrors(ConstraintViolationException e) {
+	private String getErrors(ConstraintViolationException e) {
 		Map<String, String> map = new HashMap<>();
 		Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
 		for (ConstraintViolation<?> constraintViolation : constraintViolations) {
@@ -270,7 +272,7 @@ public class ExceptionConfiguration {
 			String message = constraintViolation.getMessage();
 			map.put(property, message);
 		}
-		return map;
+		return map.toString();
 	}
 
 	private void printLog(NativeWebRequest req, Exception e) {

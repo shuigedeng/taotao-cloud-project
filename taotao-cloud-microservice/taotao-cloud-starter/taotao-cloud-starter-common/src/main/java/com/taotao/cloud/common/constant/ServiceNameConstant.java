@@ -27,23 +27,23 @@ public class ServiceNameConstant {
 	private ServiceNameConstant() {
 	}
 
-	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth-service";
+	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth";
 
-	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-service";
+	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc";
 
-	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file-service";
+	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file";
 
-	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-service";
+	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order";
 
-	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-service";
+	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product";
 
-	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale-service";
+	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale";
 
-	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-service";
+	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer";
 
-	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics-service";
+	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics";
 
-	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail-service";
+	public static final String TAOTAO_CLOUD_MAIL_CENTER = "taotao-cloud-mail";
 
-	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay-service";
+	public static final String TAOTAO_CLOUD_PAY_CENTER = "taotao-cloud-pay";
 }

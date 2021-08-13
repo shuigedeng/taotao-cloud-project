@@ -17,6 +17,7 @@ package com.taotao.cloud.openapi.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -93,9 +94,11 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
+			String taotaoCloudVersion = PropertyUtil.getProperty("taotaoCloudVersion");
 			Paths newPaths = new Paths();
 			paths.keySet()
-				.forEach(e -> newPaths.put("/api/v2021.8" + "/" + name + e, paths.get(e)));
+				.forEach(e -> newPaths.put("/api/v" + taotaoCloudVersion + "/" + name + e,
+					paths.get(e)));
 			openApi.setPaths(newPaths);
 
 			openApi.getPaths().values().stream()

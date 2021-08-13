@@ -61,7 +61,7 @@ public class ResponseUtil {
 	 * @since 2020/10/15 15:47
 	 */
 	public static void fail(HttpServletResponse response, Object data) throws IOException {
-		Result<?> result = Result.fail(data);
+		Result<?> result = Result.fail(data.toString());
 		writeResponse(response, result);
 	}
 
@@ -136,7 +136,7 @@ public class ResponseUtil {
 	 * @since 2020/10/15 15:50
 	 */
 	public static Mono<Void> fail(ServerWebExchange exchange, Object data) {
-		Result<Object> result = Result.fail(data);
+		Result<Object> result = Result.fail(data.toString());
 		return writeResponse(exchange, result);
 	}
 

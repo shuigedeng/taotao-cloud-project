@@ -40,7 +40,7 @@ spring:
         jwt:
           #配置RSA的公钥访问地址
           #          jwk-set-uri: http://taotao-cloud-oauth2-server/oauth2/jwks
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
   sleuth:
     enabled: true
     web:
@@ -82,7 +82,7 @@ spring:
       # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
       # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
       # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
-      acks: 1
+      acks: 0
       properties:
         linger.ms: 500
   cloud:
@@ -112,7 +112,7 @@ spring:
         - id: taotao-cloud-uc
           uri: lb://taotao-cloud-uc
           predicates:
-            - Path=${taotao.cloud.gateway.base-uri}/uc/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/uc/**
           filters:
             - RewritePath=/uc/(?<path>.*), /$\{path}
             - StripPrefix=2
@@ -126,14 +126,11 @@ spring:
                 redis-rate-limiter.burstCapacity: 20
         - id: taotao-cloud-order
           uri: lb://taotao-cloud-order
-          metadata:
-            - aa=hello
           predicates:
-            - Path=/order/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
-#            - RewritePath=${taotao.cloud.gateway.base-uri}/order/(?<path>.*), /${path}
             - RewritePath=/order/(?<path>.*), /$\{path}
-            - StripPrefix=3
+            - StripPrefix=2
             - RequestTime=true
             - PreserveHostHeader
             - SwaggerHeader
@@ -143,7 +140,7 @@ spring:
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
         - id: openapi
-          uri: http://localhost:${server.port}
+          uri: http://${spring.cloud.client.ip-address}:${server.port}
           metadata:
             - aa=hello
           predicates:
@@ -350,7 +347,6 @@ taotao:
       request-log:
         enabled: false
     gateway:
-      base-uri: /api/v2021.8
       https:
         enabled: false
         port: 9443
@@ -369,27 +365,13 @@ taotao:
       security:
         enabled: true
         ignore-url: >
-          /*/api-docs,
-          /code,
-          /uc/repeat/check,
-          /uc/user,
-          /auth/client,
-          /manager/graphql,
-          /manager/graphiql,
-          /auth/oauth/**,
-          /auth/mobile/login,
-          /auth/sms/code,
-          /auth/social/**,
-          /auth/css/**,
-          /auth/images/**,
-          /auth/js/**,
-          /favicon.ico,
-          /manifest.json,
-          /robots.txt
+          /uc/resource/**,
+          /order/order/**,
+          /auth/code
       api:
-        base-uri:
         prefix: /api
-        version: v1.0
+        version: v${taotaoCloudVersion}
+        base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
 
 management:
   endpoints:

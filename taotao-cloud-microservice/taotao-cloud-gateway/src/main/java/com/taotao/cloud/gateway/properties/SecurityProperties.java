@@ -1,10 +1,13 @@
 package com.taotao.cloud.gateway.properties;
 
+import com.taotao.cloud.common.utils.ContextUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -15,6 +18,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  */
 @RefreshScope
 @ConfigurationProperties(prefix = SecurityProperties.PREFIX)
+@AutoConfigureBefore(ApiProperties.class)
 public class SecurityProperties {
 
 	public static final String PREFIX = "taotao.cloud.gateway.security";
@@ -38,7 +42,6 @@ public class SecurityProperties {
 		"/*/api-docs",
 		"/css/**",
 		"/js/**",
-		"/api/v2021.8/uc/resource/**",
 		"/images/**"
 	};
 
@@ -57,10 +60,18 @@ public class SecurityProperties {
 	 */
 	@PostConstruct
 	public void initIgnoreUrl() {
-		Collections.addAll(ignoreUrl, ENDPOINTS);
+		ApiProperties apiProperties = ContextUtil.getBean(ApiProperties.class, true);
+		if (Objects.nonNull(apiProperties)) {
+			String baseUri = apiProperties.getBaseUri();
+			ignoreUrl = ignoreUrl.stream().map(url -> baseUri + url)
+				.collect(Collectors.toList());
+			Collections.addAll(ignoreUrl, ENDPOINTS);
+		}
 	}
 
-	public SecurityProperties (){}
+	public SecurityProperties() {
+	}
+
 	public SecurityProperties(Boolean enabled, List<String> ignoreUrl) {
 		this.enabled = enabled;
 		this.ignoreUrl = ignoreUrl;

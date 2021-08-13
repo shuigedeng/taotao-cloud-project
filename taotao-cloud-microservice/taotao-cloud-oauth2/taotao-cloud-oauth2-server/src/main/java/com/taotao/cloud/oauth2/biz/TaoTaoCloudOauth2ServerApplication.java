@@ -16,7 +16,6 @@
 package com.taotao.cloud.oauth2.biz;
 
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
-import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudHttpClient;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
@@ -32,7 +31,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 1.0.0
  */
 @EnableTaoTaoCloudLoadbalancer
-@EnableTaoTaoCloudHttpClient
 @EnableTaoTaoCloudFeign
 @EnableTaoTaoCloudP6spy
 @EnableTaoTaoCloudSentinel

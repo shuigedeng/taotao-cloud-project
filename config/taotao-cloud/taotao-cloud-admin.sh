@@ -13,7 +13,6 @@
 
 VERSION=2021.8
 APP_NAME=taotao-cloud-admin
-SERVER_PORT=10000
 
 # jar包存放路径
 JAR_PATH="/opt/taotao-cloud/${APP_NAME}"
@@ -42,6 +41,7 @@ JAVA_OPTS="
 -Dskywalking.logging.level=INFO
 -Dskywalking.logging.dir=${JAR_PATH}
 -Dskywalking.collector.backend_service=172.16.6.151:11800
+-DTAOTAO_CLOUD_MAIL_PASSWORD=xxxxxx
 "
 
 # 根据实际情况来修改以上配置信息 ##################################
