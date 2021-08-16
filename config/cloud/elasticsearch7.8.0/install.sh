@@ -1,16 +1,16 @@
 ###########################################
 # https://mirrors.huaweicloud.com/elasticsearch/
 
-cd /root/cloud/elasticsearch7.8.0
+cd /opt/soft
 
 wget https://mirrors.huaweicloud.com/elasticsearch/7.8.0/elasticsearch-7.8.0-linux-x86_64.tar.gz
 
-tar -zxvf elasticsearch-7.8.0-linux-x86_64.tar.gz
+tar -zxvf elasticsearch-7.8.0-linux-x86_64.tar.gz -C /opt/cloud
 
-mv elasticsearch-7.8.0-linux-x86_64 elasticsearch7.8.0
+cd /opt/cloud/elasticsearch-7.8.0
 
 # 修改配置文件
-vim ./config/elasticsearch.yml
+vim config/elasticsearch.yml
 # 修改以下几项：
 node.name: node-1 # 设置节点名
 network.host: 0.0.0.0 # 允许外部 ip 访问
@@ -19,15 +19,16 @@ cluster.initial_master_nodes: ["node-1"] # 设置集群初始主节点
 #新建用户并赋权
 adduser elasticsearch
 passwd elasticsearch
-chown -R elasticsearch elasticsearch7.8.0
 
-chown -R elasticsearch /root/cloud/elasticsearch.sh
+chown -R elasticsearch elasticsearch-7.8.0
 
 elasticsearch/jvm.options
 -Xms [SIZE] g -Xmx [SIZE] g
 
 su elasticsearch
-./elasticsearch -d
+cd ~
+vim elasticsearch.sh
+chmod +x elasticsearch.sh
 
 # 错误处理
 # 启动之后可能会报以下三个错误：
@@ -41,10 +42,10 @@ su root
   # 修改 /etc/security/limits.conf 文件
   vim /etc/security/limits.conf
   # 添加以下四行
-  * soft nofile 65536
-  * hard nofile 131072
-  * soft nproc 2048
-  * hard nproc 4096
+  soft nofile 65536
+  hard nofile 131072
+  soft nproc 2048
+  hard nproc 4096
 
 [3] 的解决方法：
   在/etc/sysctl.conf文件最后添加一行
@@ -55,7 +56,6 @@ su root
 #!/bin/bash
 
 function start_elasticsearch() {
-  sleep 5
   nohup /opt/cloud/elasticsearch-7.8.0/bin/elasticsearch \
   -d >/opt/cloud/elasticsearch-7.8.0/start.out 2>&1 &
   sleep 10
@@ -63,7 +63,7 @@ function start_elasticsearch() {
 }
 
 function stop_elasticsearch() {
-  sleep 5
+   sleep 5
    ps -ef | grep elasticsearch-7.8.0|grep -v grep|awk '{print $2}' |xargs kill -9
 
    sleep 10

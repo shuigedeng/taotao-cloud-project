@@ -1,7 +1,9 @@
 ###########################################
 # http://skywalking.apache.org/downloads/
+# http://archive.apache.org/dist/skywalking/
 
 cd /opt/soft/
+
 
 # 1、官网下载skywalking服务端
 wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.7.0/apache-skywalking-apm-es7-8.7.0.tar.gz

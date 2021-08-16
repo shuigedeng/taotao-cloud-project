@@ -1,22 +1,22 @@
 ###########################################
 
-cd /root/taotao-cloud/prometheus2.23.0
+cd /opt/soft
 
 wget https://github.com/prometheus/prometheus/releases/download/v2.23.0/prometheus-2.23.0.linux-amd64.tar.gz
 
-tar -zxvf prometheus-2.23.0.linux-amd64.tar.gz
+tar -zxvf prometheus-2.23.0.linux-amd64.tar.gz -C /opt/cloud
 
-mv prometheus-2.23.0.linux-amd64 prometheus2.23.0
+cd /opt/cloud/prometheus-2.23.0.linux-amd64
 
 # 使用本地路径存储数据
-mkdir prometheus2.23.0/data
+mkdir data
 
-/root/taotao-cloud/prometheus2.23.0/prometheus \
---storage.tsdb.path="/root/taotao-cloud/prometheus2.23.0/data" \
+/opt/cloud/prometheus-2.23.0.linux-amd64/prometheus \
+--storage.tsdb.path="/opt/cloud/prometheus-2.23.0.linux-amd64/data" \
 --log.level=debug \
 --web.enable-lifecycle \
 --web.enable-admin-api \
---config.file="/root/taotao-cloud/prometheus2.23.0/prometheus.yml"
+--config.file="/opt/cloud/prometheus-2.23.0.linux-amd64/prometheus.yml"
 
 http://taotao-cloud:9090
 http://taotao-cloud:9090/metrics

@@ -1,16 +1,16 @@
 ###########################################
 # https://mirrors.huaweicloud.com/kibana
 
-cd /root/cloud/kibana7.8.0
+cd /opt/soft
 
 wget https://mirrors.huaweicloud.com/kibana/7.8.0/kibana-7.8.0-linux-x86_64.tar.gz
 
-tar -zxvf kibana-7.8.0-linux-x86_64.tar.gz
+tar -zxvf kibana-7.8.0-linux-x86_64.tar.gz -C /opt/cloud
 
-mv kibana-7.8.0-linux-x86_64 kibana7.8.0
+cd /opt/cloud/kibana-7.8.0-linux-x86_64
 
 # 修改配置文件
-vim ./config/kibana.yml
+vim config/kibana.yml
 # 修改以下几项：
 # 服务端口
 server.port: 5601
@@ -24,11 +24,12 @@ i18n.locale: "zh-CN"
 # bin/kibana
 NODE_OPTIONS="$NODE_OPTIONS --max-old-space-size=400"
 
-##################### kibana.sh #############################
+##################### c #############################
 #!/bin/bash
 
 function start_kibana() {
-  nohup /opt/cloud/kibana-7.8.0-linux-x86_64/bin/kibana --allow-root \
+  nohup /opt/cloud/kibana-7.8.0-linux-x86_64/bin/kibana \
+   --allow-root \
   >/opt/cloud/kibana-7.8.0-linux-x86_64/start.out 2>&1 &
   sleep 10
 

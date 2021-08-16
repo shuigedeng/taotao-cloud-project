@@ -1,13 +1,13 @@
 ###########################################
 # https://grafana.com/grafana/download
 
-cd /root/cloud/grafana8.0.3
+cd /opt/soft
 
 wget https://dl.grafana.com/oss/release/grafana-8.0.3.linux-amd64.tar.gz
 
-tar -zxvf grafana-8.0.3.linux-amd64.tar.gz
+tar -zxvf grafana-8.0.3.linux-amd64.tar.gz -C /opt/cloud
 
-mv grafana-8.0.3.linux-amd64 grafana8.0.3
+cd /opt/cloud/grafana-8.0.3
 
 ##################### grafana.sh #############################
 #!/bin/bash

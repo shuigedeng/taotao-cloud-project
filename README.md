@@ -218,24 +218,28 @@ taotao-cloud-project -- 父项目
 ## 10.项目截图
 <table>
     <tr>
-        <td><img alt="首页" src="snapshot/project/1.png"/></td>
-        <td><img alt="用户搜索" src="snapshot/project/2.png"/></td>
+        <td><img alt="调度任务中心" src="snapshot/project/1.png"/></td>
+        <td><img alt="nacos服务注册" src="snapshot/project/2.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="server_metrics" src="snapshot/project/3.png"/></td>
-        <td><img alt="application_metrics" src="snapshot/project/4.png"/></td>
+        <td><img alt="granfana页面" src="snapshot/project/3.png"/></td>
+        <td><img alt="prometheus页面" src="snapshot/project/4.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="持续集成2" src="snapshot/project/5.png"/></td>
-        <td><img alt="sonar结果" src="snapshot/project/6.png"/></td>
+        <td><img alt="skywalking页面" src="snapshot/project/5.png"/></td>
+        <td><img alt="sentinel页面" src="snapshot/project/6.png"/></td>
     </tr>
     <tr>
-        <td><img alt="skywalking首页.png" src="snapshot/project/7.png"/></td>
-        <td><img alt="skywalking应用拓扑图" src="snapshot/project/8.png"/></td>
+        <td><img alt="kibana页面" src="snapshot/project/7.png"/></td>
+        <td><img alt="zipkin页面" src="snapshot/project/8.png"/></td>
     </tr>
     <tr>
-        <td><img alt="elk" src="snapshot/project/9.png"/></td>
-        <td><img alt="任务中心" src="snapshot/project/10.png"/></td>
+        <td><img alt="springadmin页面" src="snapshot/project/9.png"/></td>
+        <td><img alt="knife4j页面" src="snapshot/project/10.png"/></td>
+    </tr>
+    <tr>
+        <td><img alt="swagger页面" src="snapshot/project/11.png"/></td>
+        <td><img alt="arthas页面" src="snapshot/project/12.png"/></td>
     </tr>
 
 [comment]: <> (    <tr>)

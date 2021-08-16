@@ -210,6 +210,13 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         showViolations = true
     }
 
+    configurations.all {
+        resolutionStrategy {
+            cacheChangingModulesFor 0, "seconds"
+            cacheDynamicVersionsFor 0, "seconds"
+        }
+    }
+
     publishing {
         repositories {
             maven {

@@ -50,7 +50,7 @@ public class OrderInfoController {
 	@Operation(summary = "添加订单信息", description = "添加订单信息", method = CommonConstant.POST)
 	@PostMapping
 	@RequestOperateLog(description = "添加订单信息")
-	Result<OrderVO> saveOrder(@Validated @RequestBody OrderDTO orderDTO) {
+	Result<OrderVO> saveOrder( @RequestBody OrderDTO orderDTO) {
 		Order order = orderInfoService.saveOrder(orderDTO);
 		OrderVO vo = OrderMapper.INSTANCE.orderToOrderVO(order);
 		return Result.success(vo);

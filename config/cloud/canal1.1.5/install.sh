@@ -8,9 +8,9 @@ wget https://github.com/alibaba/canal/releases/download/canal-1.1.5/canal.admin-
 
 mkdir /op/cloud/canal/{deployer, adapter, admin}
 
-tar -zxvf canal.deployer-1.1.5.tar.gz -C /op/cloud/canal/deployer
-tar -zxvf canal.adapter-1.1.5.tar.gz -C /op/cloud/canal/adapter
-tar -zxvf canal.admin-1.1.5.tar.gz -C /op/cloud/canal/admin
+tar -zxvf canal.deployer-1.1.5.tar.gz -C /opt/cloud/canal/deployer
+tar -zxvf canal.adapter-1.1.5.tar.gz -C /opt/cloud/canal/adapter
+tar -zxvf canal.admin-1.1.5.tar.gz -C /opt/cloud/canal/admin
 
 export CANAL_ADMIN_HOME=/opt/cloud/canal/admin
 export PATH=$PATH:${CANAL_ADMIN_HOME}/bin
@@ -35,15 +35,21 @@ binlog-ignore-db：表示同步的时候忽略的数据库。
 binlog-do-db：指定需要同步的数据库（如果没有此项，表示同步所有的库）。
 
 mysql -uroot -p
+set global validate_password.length=6;
+set global validate_password.policy=LOW;
+
 CREATE USER canaladmin IDENTIFIED BY '123456';
 GRANT ALL ON `taotao-cloud-canal-manager`.* TO 'canaladmin'@'%';
 FLUSH PRIVILEGES;
 
 CREATE USER canal IDENTIFIED BY '123456';
-GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' ;
+grant system_user on *.* to 'root';
+GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%';
+
 FLUSH PRIVILEGES;
 
 cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/canal/admin/lib/
+cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/canal/deployer/lib/
 
 ### 配置canal --admin
 vi /opt/cloud/canal/admin/conf/application.yml
@@ -70,10 +76,12 @@ canal:
   adminPasswd: admin
 
 1.进入mysql 中执行
+mysql -uroot -p
 use mysql
 soruce /opt/cloud/canal/admin/conf/canal_manager.sql
+
 ---
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `taotao-cloud-canal-manager` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
+CREATE DATABASE IF NOT EXISTS `taotao-cloud-canal-manager`;
 
 USE `taotao-cloud-canal-manager`;
 
@@ -191,13 +199,12 @@ http://127.0.0.1:8089/ 默认登录 admin/123456
 
 
 ######## 配置canal --deployer
-cp /opt/soft/mysql-connector-java-8.0.20.jar /opt/cloud/canal/ployer/lib/
-
 vi /opt/cloud/canal/deployer/conf/canal.properties
 
 #################################################
 #########               destinations            #############
 #################################################
+# 修改目标
 canal.destinations = taotao-cloud
 # conf root dir
 canal.conf.dir = ../conf
@@ -218,7 +225,8 @@ canal.instance.global.spring.xml = classpath:spring/file-instance.xml
 ##################################################
 #########                    Kafka                   #############
 ##################################################
-kafka.bootstrap.servers = 192.168.1.151:6667
+# 修改kafka
+kafka.bootstrap.servers = 172.16.6.151:9092
 kafka.acks = all
 kafka.compression.type = none
 kafka.batch.size = 16384
@@ -232,18 +240,17 @@ kafka.kerberos.enable = false
 kafka.kerberos.krb5.file = "../conf/kerberos/krb5.conf"
 kafka.kerberos.jaas.file = "../conf/kerberos/jaas.conf"
 
-
-
-cd /opt/module/canal/canaldeployer/conf/example/instance.properties
+cd /opt/cloud/canal/deployer/conf/example/instance.properties
 #################################################
 ## mysql serverId , v1.0.26+ will autoGen
 # canal.instance.mysql.slaveId=0
+# 修改slaveId 不能和mysql slaveId相同
 canal.instance.mysql.slaveId=12368
 # enable gtid use true/false
 canal.instance.gtidon=false
 
 # position info
-canal.instance.master.address=192.168.1.153:3306
+canal.instance.master.address=127.0.0.1:3306
 canal.instance.master.journal.name=
 canal.instance.master.position=
 canal.instance.master.timestamp=
@@ -255,6 +262,7 @@ canal.instance.rds.secretkey=
 canal.instance.rds.instanceId=
 
 # table meta tsdb info
+# 修改为false
 canal.instance.tsdb.enable=false
 #canal.instance.tsdb.url=jdbc:mysql://127.0.0.1:3306/canal_tsdb
 #canal.instance.tsdb.dbUsername=canal
@@ -267,9 +275,10 @@ canal.instance.tsdb.enable=false
 #canal.instance.standby.gtid=
 
 # username/password
+# 修改为canal
 canal.instance.dbUsername=canal
-canal.instance.dbPassword=canal%123
-
+# 修改为123456
+canal.instance.dbPassword=123456
 
 canal.instance.defaultDatabaseName = location
 canal.instance.connectionCharset = UTF-8
@@ -301,12 +310,6 @@ canal.mq.partition=0
 #canal.mq.partitionHash=test.table:id^name,.*\\..*
 #canal.mq.dynamicTopicPartitionNum=test.*:4,mycanal:6
 #################################################
-
-
-
-
-
-
 
 
 cd deployer

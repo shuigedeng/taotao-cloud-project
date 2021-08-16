@@ -34,14 +34,14 @@ JAVA_OPTS="
 -XX:+PrintGCDetails
 -XX:+HeapDumpOnOutOfMemoryError
 -Dfile.encoding=utf-8
--javaagent:/opt/taotao-cloud/skywalking-agent.jar
+-javaagent:/opt/cloud/apache-skywalking-apm-bin/agent/skywalking-agent.jar
 -Dskywalking.agent.service_name=${APP_NAME}
 -Dskywalking.agent.authentication=taotao-cloud
--Dskywalking.logging.file_name=${LOG_FILE}/${APP_NAME}\.skywalking.log
+-Dskywalking.logging.file_name=${APP_NAME}.skywalking.log
 -Dskywalking.logging.level=INFO
 -Dskywalking.logging.dir=${JAR_PATH}
 -Dskywalking.collector.backend_service=172.16.6.151:11800
--DTAOTAO_CLOUD_MAIL_PASSWORD=xxxxxx
+-DTAOTAO_CLOUD_MAIL_PASSWORD=vwdrmsvmevosbeed
 "
 
 # 根据实际情况来修改以上配置信息 ##################################

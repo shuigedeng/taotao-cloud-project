@@ -234,6 +234,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		if(orderVOResult.getCode() != 200){
 			throw new BusinessException("创建订单失败");
 		}
+		LogUtil.info("OrderVO ===> {0}", orderVOResult);
 
 //		LogUtil.info("2.远程添加商品信息");
 //		ProductDTO productDTO = ProductDTO.builder()

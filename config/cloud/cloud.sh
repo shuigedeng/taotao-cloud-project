@@ -40,19 +40,19 @@ function start_taotao_cloud() {
   /root/script/arthas.sh start
   
   # tcp/http -> 9090 http://172.16.6.151:9090 http://172.16.6.151:9090/metrics
-  #/root/script/prometheus.sh start
+  /root/script/prometheus.sh start
   
   # tcp/http -> 3000 http://172.16.6.151:3000 admin/admin
-  #/root/script/grafana.sh start
+  /root/script/grafana.sh start
 
   # tcp/http -> 9200 http://172.16.6.151:9200
-  #su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
+  su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
   # tcp/http -> 5601 http://172.16.6.151:5601
-  #/root/script/kibana.sh start
+  /root/script/kibana.sh start
 
   # tcp/http -> 5601 http://172.16.6.151:8089
-  #/root/script/canal.sh start
+  /root/script/canal.sh start
   
   # tcp/http -> 9601 input port
   #/root/script/logstash.sh start
