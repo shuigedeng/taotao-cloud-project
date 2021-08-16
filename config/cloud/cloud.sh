@@ -62,21 +62,21 @@ function start_taotao_cloud() {
 }
 
 function stop_taotao_cloud() {
-  #/root/script/canal.sh stop
-
-  #/root/script/arthas.sh stop
-
   #root/script/logstash.sh stop
-  
+
   #/root/script/node_exporter.sh stop
+
+  /root/script/canal.sh stop
+
+  /root/script/arthas.sh stop
+
+  /root/script/kibana.sh stop
   
-  #/root/script/kibana.sh stop
+  su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
   
-  #su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh stop"
+  /root/script/grafana.sh stop
   
-  #/root/script/grafana.sh stop
-  
-  #/root/script/prometheus.sh stop
+  /root/script/prometheus.sh stop
   
   /root/script/arthas.sh stop
   
