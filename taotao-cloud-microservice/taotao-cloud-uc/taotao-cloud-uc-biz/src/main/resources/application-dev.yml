@@ -230,14 +230,14 @@ spring:
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
-      retries: 0
+      retries: 1
       batch-size: 16384
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: 1
+      acks: 0
       properties:
-        linger.ms: 500
+        linger.ms: 100
     consumer:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
@@ -485,7 +485,6 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    io.seata: debug
 
 springdoc:
   packages-to-exclude:

@@ -46,6 +46,7 @@ public class CaptchaServiceFactory {
 		for (CaptchaCacheService item : cacheServices) {
 			cacheService.put(item.type(), item);
 		}
+
 		ServiceLoader<CaptchaService> services = ServiceLoader.load(CaptchaService.class);
 		for (CaptchaService item : services) {
 			instances.put(item.captchaType(), item);

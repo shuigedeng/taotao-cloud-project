@@ -26,11 +26,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
-import lombok.Cleanup;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import com.taotao.cloud.oss.props.OssProperties;
 import org.springframework.beans.factory.InitializingBean;
-import vip.mate.core.oss.props.OssProperties;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -44,19 +41,22 @@ import java.util.*;
  * @author 858695266
  * @since 1.0
  */
-@RequiredArgsConstructor
 public class OssTemplate implements InitializingBean {
 
 	private final OssProperties ossProperties;
 
-	private AmazonS3 amazonS3;
+	private final AmazonS3 amazonS3;
+	public OssTemplate(OssProperties ossProperties, AmazonS3 amazonS3) {
+		this.ossProperties = ossProperties;
+		this.amazonS3 = amazonS3;
+	}
+
 
 	/**
 	 * 创建bucket
 	 *
 	 * @param bucketName bucket名称
 	 */
-	@SneakyThrows
 	public void createBucket(String bucketName) {
 		if (!amazonS3.doesBucketExistV2(bucketName)) {
 			amazonS3.createBucket((bucketName));
@@ -70,7 +70,6 @@ public class OssTemplate implements InitializingBean {
 	 * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets">AWS
 	 * API Documentation</a>
 	 */
-	@SneakyThrows
 	public List<Bucket> getAllBuckets() {
 		return amazonS3.listBuckets();
 	}
@@ -80,7 +79,6 @@ public class OssTemplate implements InitializingBean {
 	 * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets">AWS
 	 * API Documentation</a>
 	 */
-	@SneakyThrows
 	public Optional<Bucket> getBucket(String bucketName) {
 		return amazonS3.listBuckets().stream().filter(b -> b.getName().equals(bucketName)).findFirst();
 	}
@@ -91,7 +89,6 @@ public class OssTemplate implements InitializingBean {
 	 * "http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket">AWS API
 	 * Documentation</a>
 	 */
-	@SneakyThrows
 	public void removeBucket(String bucketName) {
 		amazonS3.deleteBucket(bucketName);
 	}
@@ -106,7 +103,6 @@ public class OssTemplate implements InitializingBean {
 	 * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjects">AWS
 	 * API Documentation</a>
 	 */
-	@SneakyThrows
 	public List<S3ObjectSummary> getAllObjectsByPrefix(String bucketName, String prefix, boolean recursive) {
 		ObjectListing objectListing = amazonS3.listObjects(bucketName, prefix);
 		return new ArrayList<>(objectListing.getObjectSummaries());
@@ -121,7 +117,6 @@ public class OssTemplate implements InitializingBean {
 	 * @return url
 	 * @see AmazonS3#generatePresignedUrl(String bucketName, String key, Date expiration)
 	 */
-	@SneakyThrows
 	public String getObjectURL(String bucketName, String objectName, Integer expires) {
 		Date date = new Date();
 		Calendar calendar = new GregorianCalendar();
@@ -140,7 +135,6 @@ public class OssTemplate implements InitializingBean {
 	 * @see <a href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject">AWS
 	 * API Documentation</a>
 	 */
-	@SneakyThrows
 	public InputStream getObject(String bucketName, String objectName) {
 		return amazonS3.getObject(bucketName, objectName).getObjectContent();
 	}
@@ -192,7 +186,7 @@ public class OssTemplate implements InitializingBean {
 	 * API Documentation</a>
 	 */
 	public S3Object getObjectInfo(String bucketName, String objectName) throws Exception {
-		@Cleanup S3Object object = amazonS3.getObject(bucketName, objectName);
+		S3Object object = amazonS3.getObject(bucketName, objectName);
 		return object;
 	}
 

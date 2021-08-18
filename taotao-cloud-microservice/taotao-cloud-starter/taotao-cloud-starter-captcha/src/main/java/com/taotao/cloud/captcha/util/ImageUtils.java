@@ -1,6 +1,7 @@
 package com.taotao.cloud.captcha.util;
 
 import com.taotao.cloud.captcha.model.common.CaptchaBaseMapEnum;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,30 +16,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.imageio.ImageIO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 public class ImageUtils {
 
-	private static Logger logger = LoggerFactory.getLogger(ImageUtils.class);
 	private static Map<String, String> originalCacheMap = new ConcurrentHashMap();  //滑块底图
 	private static Map<String, String> slidingBlockCacheMap = new ConcurrentHashMap(); //滑块
 	private static Map<String, String> picClickCacheMap = new ConcurrentHashMap(); //点选文字
 	private static Map<String, String[]> fileNameMap = new ConcurrentHashMap<>();
 
 	public static void cacheImage(String captchaOriginalPathJigsaw,
-		String captchaOriginalPathClick) {
+			String captchaOriginalPathClick) {
 		//滑动拼图
 		if (StringUtils.isBlank(captchaOriginalPathJigsaw)) {
 			originalCacheMap.putAll(getResourcesImagesFile("defaultImages/jigsaw/original"));
 			slidingBlockCacheMap.putAll(
-				getResourcesImagesFile("defaultImages/jigsaw/slidingBlock"));
+					getResourcesImagesFile("defaultImages/jigsaw/slidingBlock"));
 		} else {
 			originalCacheMap.putAll(
-				getImagesFile(captchaOriginalPathJigsaw + File.separator + "original"));
+					getImagesFile(captchaOriginalPathJigsaw + File.separator + "original"));
 			slidingBlockCacheMap.putAll(
-				getImagesFile(captchaOriginalPathJigsaw + File.separator + "slidingBlock"));
+					getImagesFile(captchaOriginalPathJigsaw + File.separator + "slidingBlock"));
 		}
 		//点选文字
 		if (StringUtils.isBlank(captchaOriginalPathClick)) {
@@ -47,26 +44,26 @@ public class ImageUtils {
 			picClickCacheMap.putAll(getImagesFile(captchaOriginalPathClick));
 		}
 		fileNameMap.put(CaptchaBaseMapEnum.ORIGINAL.getCodeValue(),
-			originalCacheMap.keySet().toArray(new String[0]));
+				originalCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.SLIDING_BLOCK.getCodeValue(),
-			slidingBlockCacheMap.keySet().toArray(new String[0]));
+				slidingBlockCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.PIC_CLICK.getCodeValue(),
-			picClickCacheMap.keySet().toArray(new String[0]));
-		logger.info("初始化底图:{}", JsonUtil.toJSONString(fileNameMap));
+				picClickCacheMap.keySet().toArray(new String[0]));
+		LogUtil.info("初始化底图:{0}", JsonUtil.toJSONString(fileNameMap));
 	}
 
 	public static void cacheBootImage(Map<String, String> originalMap,
-		Map<String, String> slidingBlockMap, Map<String, String> picClickMap) {
+			Map<String, String> slidingBlockMap, Map<String, String> picClickMap) {
 		originalCacheMap.putAll(originalMap);
 		slidingBlockCacheMap.putAll(slidingBlockMap);
 		picClickCacheMap.putAll(picClickMap);
 		fileNameMap.put(CaptchaBaseMapEnum.ORIGINAL.getCodeValue(),
-			originalCacheMap.keySet().toArray(new String[0]));
+				originalCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.SLIDING_BLOCK.getCodeValue(),
-			slidingBlockCacheMap.keySet().toArray(new String[0]));
+				slidingBlockCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.PIC_CLICK.getCodeValue(),
-			picClickCacheMap.keySet().toArray(new String[0]));
-		logger.info("自定义resource底图:{}", JsonUtil.toJSONString(fileNameMap));
+				picClickCacheMap.keySet().toArray(new String[0]));
+		LogUtil.info("自定义resource底图:{0}", JsonUtil.toJSONString(fileNameMap));
 	}
 
 
@@ -145,7 +142,7 @@ public class ImageUtils {
 		ClassLoader classLoader = ImageUtils.class.getClassLoader();
 		for (int i = 1; i <= 6; i++) {
 			InputStream resourceAsStream = classLoader.getResourceAsStream(
-				path.concat("/").concat(String.valueOf(i).concat(".png")));
+					path.concat("/").concat(String.valueOf(i).concat(".png")));
 			byte[] bytes = new byte[0];
 			try {
 				bytes = FileCopyUtils.copyToByteArray(resourceAsStream);

@@ -31,7 +31,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 1.0.0
  * @since 2020/5/28 17:32
  */
-@Slf4j
 public class RetryCache {
 
 	private MessageSender sender;

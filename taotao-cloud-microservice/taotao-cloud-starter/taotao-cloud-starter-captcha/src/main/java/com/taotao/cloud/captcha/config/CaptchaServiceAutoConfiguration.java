@@ -1,35 +1,31 @@
 package com.taotao.cloud.captcha.config;
 
 import com.taotao.cloud.captcha.model.common.Const;
-import com.taotao.cloud.captcha.properties.AjCaptchaProperties;
+import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.FileCopyUtils;
 
-@Configuration
-public class AjCaptchaServiceAutoConfiguration {
-
-	private static Logger logger = LoggerFactory.getLogger(AjCaptchaServiceAutoConfiguration.class);
+public class CaptchaServiceAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public CaptchaService captchaService(AjCaptchaProperties prop) {
-		logger.info("自定义配置项：{}", prop.toString());
+	public CaptchaService captchaService(CaptchaProperties prop) {
+		LogUtil.info("自定义配置项：{0}", prop.toString());
 		Properties config = new Properties();
+
 		config.put(Const.CAPTCHA_CACHETYPE, prop.getCacheType().name());
 		config.put(Const.CAPTCHA_WATER_MARK, prop.getWaterMark());
 		config.put(Const.CAPTCHA_FONT_TYPE, prop.getFontType());
@@ -53,20 +49,19 @@ public class AjCaptchaServiceAutoConfiguration {
 		config.put(Const.REQ_VALIDATE_MINUTE_LIMIT, prop.getReqVerifyMinuteLimit() + "");
 
 		if ((StringUtils.isNotBlank(prop.getJigsaw()) && prop.getJigsaw().startsWith("classpath:"))
-			|| (StringUtils.isNotBlank(prop.getPicClick()) && prop.getPicClick()
-			.startsWith("classpath:"))) {
+				|| (StringUtils.isNotBlank(prop.getPicClick()) && prop.getPicClick()
+				.startsWith("classpath:"))) {
 			//自定义resources目录下初始化底图
 			config.put(Const.CAPTCHA_INIT_ORIGINAL, "true");
 			initializeBaseMap(prop.getJigsaw(), prop.getPicClick());
 		}
-		CaptchaService s = CaptchaServiceFactory.getInstance(config);
-		return s;
+		return CaptchaServiceFactory.getInstance(config);
 	}
 
 	private static void initializeBaseMap(String jigsaw, String picClick) {
 		ImageUtils.cacheBootImage(getResourcesImagesFile(jigsaw + "/original/*.png"),
-			getResourcesImagesFile(jigsaw + "/slidingBlock/*.png"),
-			getResourcesImagesFile(picClick + "/*.png"));
+				getResourcesImagesFile(jigsaw + "/slidingBlock/*.png"),
+				getResourcesImagesFile(picClick + "/*.png"));
 	}
 
 	public static Map<String, String> getResourcesImagesFile(String path) {

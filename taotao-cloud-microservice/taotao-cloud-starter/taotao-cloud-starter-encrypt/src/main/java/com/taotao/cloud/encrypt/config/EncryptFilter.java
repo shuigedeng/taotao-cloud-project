@@ -1,5 +1,6 @@
 package com.taotao.cloud.encrypt.config;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.handler.InitHandler;
 import java.io.IOException;
@@ -61,13 +62,13 @@ public class EncryptFilter implements Filter {
 		if (responseData.length == 0) {
 			return;
 		}
-		log.info("接收的报文：" + new String(responseData));
+		LogUtil.info("接收的报文：" + new String(responseData));
 		byte[] encryptByte = encryptHandler.encode(URLEncoder.encode(new String(responseData), "UTF-8").getBytes());
-		log.info("加密后的报文：" + new String(encryptByte));
+		LogUtil.info("加密后的报文：" + new String(encryptByte));
 		servletResponse.setContentLength(-1);
 		servletResponse.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		ServletOutputStream outputStream = servletResponse.getOutputStream();
-		log.info("outputStream: " + outputStream.toString());
+		LogUtil.info("outputStream: " + outputStream.toString());
 		outputStream.write(encryptByte);
 		outputStream.flush();
 	}

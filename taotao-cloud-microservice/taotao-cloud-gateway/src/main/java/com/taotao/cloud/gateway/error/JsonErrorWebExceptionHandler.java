@@ -111,7 +111,7 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 	 */
 	public static Map<String, Object> responseError(String errorMessage) {
 		Result<Object> result = Result.fail(errorMessage);
-		Map<String, Object> map = BeanUtil.beanToMap(result);
+		Map<String, Object> map = BeanUtil.beanToMap(result, false, false);
 		LocalDateTime timestamp = (LocalDateTime) map
 			.getOrDefault("timestamp", LocalDateTime.now());
 		map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));

@@ -1,5 +1,6 @@
 package com.taotao.cloud.encrypt.handler.impl;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.entity.RsaKey;
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
@@ -39,7 +40,7 @@ public class RsaEncryptHandler implements EncryptHandler {
 			byte[] bytes = encryptByPublicKey(content, Base64Utils.decodeFromString(publicKey));
 			return bytes;
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			LogUtil.error(e.getMessage());
 			throw new EncryptException("rsa加密错误", e);
 		}
 	}
@@ -50,7 +51,7 @@ public class RsaEncryptHandler implements EncryptHandler {
 			byte[] bytes = decryptByPrivateKey(Base64Utils.decode(content), Base64Utils.decodeFromString(privateKey));
 			return bytes;
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			LogUtil.error(e.getMessage());
 			throw new EncryptException("rsa解密错误", e);
 		}
 	}

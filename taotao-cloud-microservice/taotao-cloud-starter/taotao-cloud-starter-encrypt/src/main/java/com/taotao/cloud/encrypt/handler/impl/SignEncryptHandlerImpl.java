@@ -1,5 +1,6 @@
 package com.taotao.cloud.encrypt.handler.impl;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.SignEncryptHandler;
 import java.nio.charset.Charset;
@@ -21,7 +22,7 @@ public class SignEncryptHandlerImpl implements SignEncryptHandler {
 		Object timestamp = jsonMap.get("timestamp");
 		this.checkParam(sign, timestamp, timeout, timeUnit);
 		String digestMd5 = this.getDigest(jsonMap, signSecret, StandardCharsets.UTF_8);
-		log.debug("加密后的字符：" + digestMd5);
+		LogUtil.debug("加密后的字符：" + digestMd5);
 		if (!digestMd5.equals(sign)) {
 			throw new EncryptException("Illegal request,Decryption failed");
 		}

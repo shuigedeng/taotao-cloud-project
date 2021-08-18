@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function start_taotao_cloud() {
+function start_cloud() {
   # tcp -> 3306 端口 3306 是 MySQL 协议的默认端口，由 mysql 客户端、MySQL 连接器以及 mysqldump 和 mysqlpump 等实用程序使用
   # tcp -> 33060 端口 33060 是 MySQL 数据库扩展接口（MySQL X 协议）的默认端口
   /root/script/mysql.sh start
@@ -51,7 +51,7 @@ function start_taotao_cloud() {
   # tcp/http -> 5601 http://172.16.6.151:5601
   /root/script/kibana.sh start
 
-  # tcp/http -> 5601 http://172.16.6.151:8089
+  # tcp/http -> 8089 http://172.16.6.151:8089
   /root/script/canal.sh start
   
   # tcp/http -> 9601 input port
@@ -61,14 +61,12 @@ function start_taotao_cloud() {
   #/root/script/node_exporter.sh start
 }
 
-function stop_taotao_cloud() {
+function stop_cloud() {
   #root/script/logstash.sh stop
 
   #/root/script/node_exporter.sh stop
 
   /root/script/canal.sh stop
-
-  /root/script/arthas.sh stop
 
   /root/script/kibana.sh stop
   
@@ -101,15 +99,15 @@ function stop_taotao_cloud() {
 
 case $1 in
 "start")
-    start_taotao_cloud
+    start_cloud
     ;;
 "stop")
-    stop_taotao_cloud
+    stop_cloud
     ;;
 "restart")
-    stop_taotao_cloud
+    stop_cloud
     sleep 15
-    start_taotao_cloud
+    start_cloud
     ;;
 *)
     echo Invalid Args!

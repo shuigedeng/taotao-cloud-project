@@ -4,10 +4,10 @@ package com.taotao.cloud.captcha.properties;
 import com.taotao.cloud.captcha.model.common.CaptchaTypeEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(AjCaptchaProperties.PREFIX)
-public class AjCaptchaProperties {
+@ConfigurationProperties(CaptchaProperties.PREFIX)
+public class CaptchaProperties {
 
-	public static final String PREFIX = "aj.captcha";
+	public static final String PREFIX = "taotao.cloud.captcha";
 
 	/**
 	 * 验证码类型.
@@ -23,7 +23,6 @@ public class AjCaptchaProperties {
 	 * 点选文字底图路径.
 	 */
 	private String picClick = "";
-
 
 	/**
 	 * 右下角水印文字(我的水印).
@@ -68,7 +67,8 @@ public class AjCaptchaProperties {
 	/**
 	 * 缓存类型redis/local/....
 	 */
-	private StorageType cacheType = StorageType.local;
+	private StorageType cacheType = StorageType.redis;
+
 	/**
 	 * 历史数据清除开关
 	 */

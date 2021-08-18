@@ -26,20 +26,17 @@ import org.springframework.core.env.Environment;
 @Configuration
 @EnableAutoConfiguration
 public class EncryptConfiguration implements ApplicationContextAware, BeanFactoryPostProcessor,
-	EnvironmentAware {
+		EnvironmentAware {
 
-	private final ApplicationContext applicationContext;
-	private final Environment environment;
+	private ApplicationContext applicationContext;
+	private Environment environment;
 
-	public EncryptConfiguration(ApplicationContext applicationContext,
-		Environment environment) {
-		this.applicationContext = applicationContext;
-		this.environment = environment;
+	public EncryptConfiguration() {
 	}
 
 	@Override
 	public void postProcessBeanFactory(
-		ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
+			ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
 		DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) configurableListableBeanFactory;
 		GenericBeanDefinition bean = new GenericBeanDefinition();
 		EncryptType type = environment.getProperty("encrypt.type", EncryptType.class);
@@ -93,4 +90,13 @@ public class EncryptConfiguration implements ApplicationContextAware, BeanFactor
 		}
 	}
 
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
 }

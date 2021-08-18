@@ -1,8 +1,4 @@
 package com.taotao.cloud.captcha.util;
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

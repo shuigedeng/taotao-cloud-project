@@ -205,7 +205,7 @@ vi /opt/cloud/canal/deployer/conf/canal.properties
 #########               destinations            #############
 #################################################
 # 修改目标
-canal.destinations = taotao-cloud
+canal.destinations = example
 # conf root dir
 canal.conf.dir = ../conf
 # auto scan instance dir add/remove and start/stop instance
@@ -292,6 +292,7 @@ canal.instance.defaultDatabaseName = location
 canal.instance.filter.regex=location\\..*
 
 # table black regex
+# 修改为注释
 #canal.instance.filter.black.regex=mysql\\.slave_.*
 
 canal.instance.filter.black.regex=
@@ -301,7 +302,7 @@ canal.instance.filter.black.regex=
 #canal.instance.filter.black.field=test1.t_product:subject/product_image,test2.t_company:id/name/contact/ch
 
 # mq config
-canal.mq.topic=canallocal
+canal.mq.topic=bin-log-taotao-cloud
 # dynamic topic route by schema or table regex
 #canal.mq.dynamicTopic=mytest1.user,mytest2\\..*,.*\\..*
 canal.mq.partition=0

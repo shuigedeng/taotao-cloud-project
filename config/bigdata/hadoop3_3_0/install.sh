@@ -1,18 +1,17 @@
 ###########################################
-cd /opt/taotao-bigdata
+cd /opt/soft
 
 wget https://mirrors.bfsu.edu.cn/apache/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz
 
-tar -zxvf hadoop-3.3.0.tar.gz
+tar -zxvf hadoop-3.3.0.tar.gz -C /opt/bigdata
 
-cd hadoop-3.3.0/etc/hadoop
-
-yum install openssl-devel
-
-hadoop checknative
+cd /opt/bigdata/hadoop-3.3.0/etc/hadoop
 
 # 1.添加环境变量
 # 2.修改配置文件
+
+yum install openssl-devel
+hadoop checknative
 
 ###########################################
 hdfs namenode -format

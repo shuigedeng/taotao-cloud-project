@@ -1,0 +1,3 @@
+com.taotao.cloud.captcha.service.impl.BlockPuzzleCaptchaServiceImpl
+com.taotao.cloud.captcha.service.impl.ClickWordCaptchaServiceImpl
+com.taotao.cloud.captcha.service.impl.DefaultCaptchaServiceImpl

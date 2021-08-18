@@ -16,7 +16,9 @@
  */
 package com.taotao.cloud.oss.config;
 
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.oss.controller.OssEndpoint;
+import com.taotao.cloud.oss.core.OssTemplate;
+import com.taotao.cloud.oss.props.OssProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -24,10 +26,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import vip.mate.core.common.constant.ComponentConstant;
-import vip.mate.core.oss.controller.OssEndpoint;
-import vip.mate.core.oss.core.OssTemplate;
-import vip.mate.core.oss.props.OssProperties;
 
 /**
  * AWS自动配置类
@@ -36,7 +34,6 @@ import vip.mate.core.oss.props.OssProperties;
  * @link https://github.com/pig-mesh/oss-spring-boot-starter
  * @since 1.0.0
  */
-@Slf4j
 @Configuration
 public class OssConfiguration {
 

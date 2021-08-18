@@ -1,4 +1,4 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-
+    api 'org.springframework.boot:spring-boot-starter-data-mongodb'
 }

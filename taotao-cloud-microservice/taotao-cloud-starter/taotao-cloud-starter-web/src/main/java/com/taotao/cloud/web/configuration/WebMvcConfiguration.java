@@ -18,6 +18,7 @@ package com.taotao.cloud.web.configuration;
 import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
 
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -147,6 +148,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 	@Override
+	public void configureMessageConverters(
+		List<HttpMessageConverter<?>> converters) {
+
+
+		WebMvcConfigurer.super.configureMessageConverters(converters);
+	}
+
+	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverterFactory(new IntegerToEnumConverterFactory());
 		registry.addConverterFactory(new StringToEnumConverterFactory());
@@ -193,7 +202,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
 				//Date参数日期格式
 				.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT, Locale.CHINA))
-
+				// 包含null
+				.setSerializationInclusion(Include.ALWAYS)
 				//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
 				.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
 				// 忽略不能转义的字符
@@ -203,6 +213,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
 				//忽略未知字段
 				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+				//DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES相当于配置，JSON串含有未知字段时，反序列化依旧可以成功
 				//单引号处理
 				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 

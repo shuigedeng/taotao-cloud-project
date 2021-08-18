@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.captcha.config.AjCaptchaAutoConfiguration
+com.taotao.cloud.captcha.config.CaptchaAutoConfiguration, \
+com.taotao.cloud.captcha.PropertiesAutoConfiguration

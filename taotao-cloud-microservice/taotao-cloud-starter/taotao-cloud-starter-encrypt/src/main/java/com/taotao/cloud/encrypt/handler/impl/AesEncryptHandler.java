@@ -1,5 +1,6 @@
 package com.taotao.cloud.encrypt.handler.impl;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import org.springframework.util.Base64Utils;
@@ -30,7 +31,7 @@ public class AesEncryptHandler implements EncryptHandler {
 			byte[] byteAes = cipher.doFinal(content);
 			return Base64Utils.encode(byteAes);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			LogUtil.error(e.getMessage());
 			throw new EncryptException("rsa加密错误", e);
 		}
 	}

@@ -3,6 +3,7 @@ package com.taotao.cloud.web.annotation;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
+import com.taotao.cloud.file.annotation.EnableTaoTaoCloudUploadFile;
 import com.taotao.cloud.job.annotation.EnableTaoTaoCloudXxlJob;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
@@ -30,9 +31,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 //@EnableTaoTaoCloudElasticsearch
-//@EnableTaoTaoCloudUploadFile
-//@EnableTaoTaoIdempotent
-//@EnableRedissonLock
+@EnableTaoTaoCloudUploadFile
 @EnableTaoTaoCloudZookeeper
 @EnableTaoTaoCloudShardingsphere
 @EnableTaoTaoCloudRequestLog

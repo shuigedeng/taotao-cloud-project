@@ -1,5 +1,6 @@
 package org.apache.dubbo.config.spring.beans.factory.annotation;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import org.apache.dubbo.common.utils.ArrayUtils;
 import org.apache.dubbo.config.MethodConfig;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -97,7 +98,7 @@ public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegist
         if (!CollectionUtils.isEmpty(resolvedPackagesToScan)) {
             registerServiceBeans(resolvedPackagesToScan, registry);
         } else {
-            log.warn("packagesToScan is empty , ServiceBean registry will be ignored!");
+            LogUtil.warn("packagesToScan is empty , ServiceBean registry will be ignored!");
         }
     }
 
@@ -135,11 +136,11 @@ public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegist
                 for (BeanDefinitionHolder beanDefinitionHolder : beanDefinitionHolders) {
                     registerServiceBean(beanDefinitionHolder, registry, scanner);
                 }
-                log.info(beanDefinitionHolders.size() + " annotated Dubbo's @DubboService Components { " +
+                LogUtil.info(beanDefinitionHolders.size() + " annotated Dubbo's @DubboService Components { " +
                         beanDefinitionHolders +
                         " } were scanned under package[" + packageToScan + "]");
             } else {
-                log.warn("No Spring Bean annotating Dubbo's @DubboService was found under package["
+                LogUtil.warn("No Spring Bean annotating Dubbo's @DubboService was found under package["
                         + packageToScan + "]");
             }
 
@@ -169,9 +170,9 @@ public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegist
         }
 
         if (beanNameGenerator == null) {
-            log.info("BeanNameGenerator bean can't be found in BeanFactory with name ["
+            LogUtil.info("BeanNameGenerator bean can't be found in BeanFactory with name ["
                     + CONFIGURATION_BEAN_NAME_GENERATOR + "]");
-            log.info("BeanNameGenerator will be a instance of " +
+            LogUtil.info("BeanNameGenerator will be a instance of " +
                     AnnotationBeanNameGenerator.class.getName() +
                     " , it maybe a potential problem on bean name generation.");
             beanNameGenerator = new AnnotationBeanNameGenerator();
@@ -240,10 +241,10 @@ public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegist
 
         if (scanner.checkCandidate(beanName, serviceBeanDefinition)) { // check duplicated candidate bean
             registry.registerBeanDefinition(beanName, serviceBeanDefinition);
-            log.warn("The BeanDefinition[" + serviceBeanDefinition +
+            LogUtil.warn("The BeanDefinition[" + serviceBeanDefinition +
                     "] of ServiceBean has been registered with name : " + beanName);
         } else {
-            log.warn("The Duplicated BeanDefinition[" + serviceBeanDefinition +
+            LogUtil.warn("The Duplicated BeanDefinition[" + serviceBeanDefinition +
                     "] of ServiceBean[ bean name : " + beanName +
                     "] was be found , Did @DubboComponentScan scan to same package in many times?");
         }

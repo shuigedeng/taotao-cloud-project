@@ -1,9 +1,3 @@
-/*
- *Copyright © 2018 anji-plus
- *安吉加加信息技术有限公司
- *http://www.anji-plus.com
- *All rights reserved.
- */
 package com.taotao.cloud.captcha.service.impl;
 
 
@@ -12,7 +6,9 @@ import com.taotao.cloud.captcha.model.common.ResponseModel;
 import com.taotao.cloud.captcha.model.vo.CaptchaVO;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Properties;
+
 public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 
 	@Override
@@ -79,14 +75,14 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		try {
 			String codeKey = String.format(REDIS_SECOND_CAPTCHA_KEY,
-				captchaVO.getCaptchaVerification());
+					captchaVO.getCaptchaVerification());
 			if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
 				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
 			}
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
-			logger.error("验证码坐标解析失败", e);
+			LogUtil.error("验证码坐标解析失败", e);
 			return ResponseModel.errorMsg(e.getMessage());
 		}
 		return ResponseModel.success();

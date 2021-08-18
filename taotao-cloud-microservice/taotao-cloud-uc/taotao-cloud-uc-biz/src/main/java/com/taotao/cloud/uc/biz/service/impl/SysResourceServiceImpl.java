@@ -34,6 +34,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -217,6 +218,8 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		 	.build();
 		 saveResource(sysResource);
 
+		String traceId = TraceContext.traceId();
+		LogUtil.info("skywalking traceid ===> {0}", traceId);
 
 		LogUtil.info("1.远程添加订单信息");
 		OrderDTO orderDTO = OrderDTO.builder()

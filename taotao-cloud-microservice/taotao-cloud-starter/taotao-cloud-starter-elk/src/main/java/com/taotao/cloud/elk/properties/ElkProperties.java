@@ -37,4 +37,36 @@ public class ElkProperties {
 	private String springAppName = "";
 
 	private String[] destinations = {"127.0.0.1:4560"};
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public String getSpringAppName() {
+		return springAppName;
+	}
+
+	public void setSpringAppName(String springAppName) {
+		this.springAppName = springAppName;
+	}
+
+	public String[] getDestinations() {
+		return destinations;
+	}
+
+	public void setDestinations(String[] destinations) {
+		this.destinations = destinations;
+	}
 }

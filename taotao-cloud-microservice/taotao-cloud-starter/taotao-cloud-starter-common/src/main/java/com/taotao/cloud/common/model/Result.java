@@ -17,6 +17,8 @@ package com.taotao.cloud.common.model;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
@@ -34,6 +36,7 @@ import org.slf4j.MDC;
  * @since 2020/4/29 15:15
  */
 @Schema(description = "返回结果对象")
+@JsonInclude(Include.ALWAYS)
 public class Result<T> implements Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;

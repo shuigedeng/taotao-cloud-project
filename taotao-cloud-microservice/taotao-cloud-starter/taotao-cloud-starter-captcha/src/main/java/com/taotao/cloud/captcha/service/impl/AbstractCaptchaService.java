@@ -1,9 +1,3 @@
-/*
- *Copyright © 2018 anji-plus
- *安吉加加信息技术有限公司
- *http://www.anji-plus.com
- *All rights reserved.
- */
 package com.taotao.cloud.captcha.service.impl;
 
 import com.taotao.cloud.captcha.model.common.Const;
@@ -17,6 +11,7 @@ import com.taotao.cloud.captcha.util.CacheUtil;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.captcha.util.MD5Util;
 import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,12 +19,8 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Properties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractCaptchaService implements CaptchaService {
-
-	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected static final String IMAGE_TYPE_PNG = "png";
 
@@ -71,32 +62,32 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		boolean aBoolean = Boolean.parseBoolean(config.getProperty(Const.CAPTCHA_INIT_ORIGINAL));
 		if (!aBoolean) {
 			ImageUtils.cacheImage(config.getProperty(Const.ORIGINAL_PATH_JIGSAW),
-				config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
+					config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
 		}
-		logger.info("--->>>初始化验证码底图<<<---" + captchaType());
+		LogUtil.info("--->>>初始化验证码底图<<<---" + captchaType());
 		waterMark = config.getProperty(Const.CAPTCHA_WATER_MARK, "我的水印");
 		slipOffset = config.getProperty(Const.CAPTCHA_SLIP_OFFSET, "5");
 		waterMarkFontStr = config.getProperty(Const.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
 		captchaAesStatus = Boolean.parseBoolean(
-			config.getProperty(Const.CAPTCHA_AES_STATUS, "true"));
+				config.getProperty(Const.CAPTCHA_AES_STATUS, "true"));
 		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "WenQuanZhengHei.ttf");
 		//clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "SourceHanSansCN-Normal.otf");
 		cacheType = config.getProperty(Const.CAPTCHA_CACHETYPE, "local");
 		captchaInterferenceOptions = Integer.parseInt(
-			config.getProperty(Const.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
+				config.getProperty(Const.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
 
 		// 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示，
 		// 通过加载resources下的font字体解决，无需在linux中安装字体
 		loadWaterMarkFont();
 
 		if (cacheType.equals("local")) {
-			logger.info("初始化local缓存...");
+			LogUtil.info("初始化local缓存...");
 			CacheUtil.init(
-				Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
-				Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
+					Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
+					Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
 		if (config.getProperty(Const.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
-			logger.info("历史资源清除开关...开启..." + captchaType());
+			LogUtil.info("历史资源清除开关...开启..." + captchaType());
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -106,9 +97,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		}
 		if (config.getProperty(Const.REQ_FREQUENCY_LIMIT_ENABLE, "0").equals("1")) {
 			if (limitHandler == null) {
-				logger.info("接口分钟内限流开关...开启...");
+				LogUtil.info("接口分钟内限流开关...开启...");
 				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config,
-					getCacheService(cacheType));
+						getCacheService(cacheType));
 			}
 		}
 	}
@@ -182,7 +173,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		if (limitHandler != null) {
 			// 验证失败 分钟内计数
 			String fails = String.format(FrequencyLimitHandler.LIMIT_KEY, "FAIL",
-				data.getClientUid());
+					data.getClientUid());
 			CaptchaCacheService cs = getCacheService(cacheType);
 			if (!cs.exists(fails)) {
 				cs.set(fails, "1", 60);
@@ -198,17 +189,17 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	private void loadWaterMarkFont() {
 		try {
 			if (waterMarkFontStr.toLowerCase().endsWith(".ttf") || waterMarkFontStr.toLowerCase()
-				.endsWith(".ttc")
-				|| waterMarkFontStr.toLowerCase().endsWith(".otf")) {
+					.endsWith(".ttc")
+					|| waterMarkFontStr.toLowerCase().endsWith(".otf")) {
 				this.waterMarkFont = Font.createFont(Font.TRUETYPE_FONT,
-						getClass().getResourceAsStream("/fonts/" + waterMarkFontStr))
-					.deriveFont(Font.BOLD, HAN_ZI_SIZE / 2);
+								getClass().getResourceAsStream("/fonts/" + waterMarkFontStr))
+						.deriveFont(Font.BOLD, HAN_ZI_SIZE / 2);
 			} else {
 				this.waterMarkFont = new Font(waterMarkFontStr, Font.BOLD, HAN_ZI_SIZE / 2);
 			}
 
 		} catch (Exception e) {
-			logger.error("load font error:{}", e);
+			LogUtil.error("load font error:{}", e, e.getMessage());
 		}
 	}
 

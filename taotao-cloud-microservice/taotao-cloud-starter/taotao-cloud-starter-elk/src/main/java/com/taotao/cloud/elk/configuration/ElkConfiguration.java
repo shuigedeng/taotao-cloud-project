@@ -21,6 +21,7 @@ import ch.qos.logback.core.encoder.Encoder;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elk.component.LogStatisticsFilter;
 import com.taotao.cloud.elk.constant.ElkConstant;
 import com.taotao.cloud.elk.properties.ElkProperties;
@@ -40,7 +41,6 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/6/3 10:43
  */
-@Slf4j
 @ConditionalOnProperty(
 	prefix = ElkConstant.BASE_ELK_PREFIX,
 	name = ElkConstant.ENABLED,
@@ -50,7 +50,7 @@ public class ElkConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		log.info(
+		LogUtil.info(
 			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELK_STARTER + "]" + "elk模块已启动");
 	}
 
