@@ -61,6 +61,7 @@ public class OssConfiguration {
     @Bean
     @RefreshScope
     public OssProperties ossProperties(){
-        return (OssProperties) redisTemplate.opsForValue().get(ComponentConstant.OSS_DEFAULT);
+        //ComponentConstant.OSS_DEFAULT
+        return (OssProperties) redisTemplate.opsForValue().get("");
     }
 }

@@ -100,6 +100,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'idea'
+    id 'signing'
     id 'maven-publish'
     id "com.google.cloud.tools.jib" version "2.8.0"
     id "com.github.johnrengelman.shadow" version "6.1.0"
@@ -156,6 +157,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'java'
     apply plugin: 'java-library'
     apply plugin: 'idea'
+    apply plugin: 'signing'
     apply plugin: 'checkstyle'
     apply plugin: 'maven-publish'
     apply plugin: 'org.springframework.boot'
@@ -221,6 +223,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         repositories {
             maven {
 //                https://repomanage.rdc.aliyun.com/
+                name = "AliyunRepository"
                 if (project.version.endsWith('-SNAPSHOT')) {
                     url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
                 } else {
@@ -235,11 +238,26 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             }
 
             maven {
-                name = "GitHubPackages"
+                name = "GitHubPackagesRepository"
                 url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
                 credentials {
                     username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
                     password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+                }
+            }
+
+            maven {
+                name = "SonatypeRepository"
+                if (project.version.endsWith('-SNAPSHOT')) {
+                    url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                } else {
+                    url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                }
+//                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                allowInsecureProtocol = true
+                credentials {
+                    username = "${ossrhUsername}"
+                    password = "${ossrhPassword}"
                 }
             }
         }
@@ -247,9 +265,11 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         publications {
             mavenJava(MavenPublication) {
                 //artifact bootJar
-                groupId rootProject.group
+//                groupId rootProject.group
+                groupId "io.github.shuigedeng"
                 artifactId project.name
                 version rootProject.version
+//                version "2.0"
 
                 //打包类型 war: components.web jar: components.java
                 from components.java
@@ -270,8 +290,8 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                     }
                     developers {
                         developer {
-                            id = 'tiga'
-                            name = 'tiga'
+                            id = 'taotao'
+                            name = 'taotao'
                             email = '981376577@qq.com'
                         }
                     }
@@ -283,6 +303,10 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                 }
             }
         }
+    }
+
+    signing {
+        sign publishing.publications.mavenJava
     }
 
     jar.enabled = true

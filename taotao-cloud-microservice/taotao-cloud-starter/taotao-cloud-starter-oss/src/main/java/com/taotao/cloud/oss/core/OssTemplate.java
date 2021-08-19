@@ -45,10 +45,10 @@ public class OssTemplate implements InitializingBean {
 
 	private final OssProperties ossProperties;
 
-	private final AmazonS3 amazonS3;
-	public OssTemplate(OssProperties ossProperties, AmazonS3 amazonS3) {
+	private  AmazonS3 amazonS3;
+
+	public OssTemplate(OssProperties ossProperties) {
 		this.ossProperties = ossProperties;
-		this.amazonS3 = amazonS3;
 	}
 
 

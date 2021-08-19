@@ -16,6 +16,7 @@
 package com.taotao.cloud.rabbitmq.producer;
 
 import com.rabbitmq.client.Channel;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.rabbitmq.cache.RetryCache;
 import com.taotao.cloud.rabbitmq.common.Constants;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
@@ -84,7 +85,7 @@ public class FastBuildRabbitMqProducer {
 		rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
 			assert correlationData != null;
 			if (!ack) {
-				log.info("send message failed: " + cause + correlationData.toString());
+				LogUtil.info("send message failed: " + cause + correlationData.toString());
 			} else {
 				retryCache.del(Long.parseLong(Objects.requireNonNull(correlationData.getId())));
 			}
@@ -98,7 +99,7 @@ public class FastBuildRabbitMqProducer {
 					e.printStackTrace();
 				}
 
-				log.info("send message failed: " + replyCode + " " + replyText);
+				LogUtil.info("send message failed: " + replyCode + " " + replyText);
 				rabbitTemplate.send(message);
 			});
 
@@ -145,7 +146,7 @@ public class FastBuildRabbitMqProducer {
 		try {
 			channel.close();
 		} catch (TimeoutException e) {
-			log.info("close channel time out ", e);
+			LogUtil.info("close channel time out ", e);
 		}
 	}
 

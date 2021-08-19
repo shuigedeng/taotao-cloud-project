@@ -16,6 +16,7 @@
 package com.taotao.cloud.rabbitmq.producer;
 
 import com.rabbitmq.client.Channel;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.rabbitmq.common.Constants;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import org.springframework.amqp.rabbit.connection.Connection;
@@ -74,7 +75,7 @@ public class RabbitMQBuildMessageProducer {
 		rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
 			if (!ack) {
 				//可以进行日志记录、异常处理、补偿处理等
-				log.info("send message failed: " + cause + correlationData.toString());
+				LogUtil.info("send message failed: " + cause + correlationData.toString());
 			} else {
 				//TODO 更新数据库，可靠性投递机制
 			}
@@ -83,7 +84,7 @@ public class RabbitMQBuildMessageProducer {
 		//回调函数: return返回
 		rabbitTemplate
 			.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
-				log.info("send message failed: " + replyCode + " " + replyText);
+				LogUtil.info("send message failed: " + replyCode + " " + replyText);
 				rabbitTemplate.send(message);
 			});
 
@@ -112,7 +113,7 @@ public class RabbitMQBuildMessageProducer {
 		try {
 			channel.close();
 		} catch (TimeoutException e) {
-			log.info("close channel time out ", e);
+			LogUtil.info("close channel time out ", e);
 		}
 	}
 

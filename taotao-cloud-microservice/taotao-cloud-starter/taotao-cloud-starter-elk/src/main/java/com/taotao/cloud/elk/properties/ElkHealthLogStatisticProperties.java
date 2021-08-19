@@ -31,4 +31,12 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class ElkHealthLogStatisticProperties {
 
 	private boolean enabled = false;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

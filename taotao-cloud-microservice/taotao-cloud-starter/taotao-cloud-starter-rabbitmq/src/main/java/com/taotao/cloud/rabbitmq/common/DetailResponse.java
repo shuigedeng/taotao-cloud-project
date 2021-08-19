@@ -30,4 +30,36 @@ public class DetailResponse {
 	private String errorCode;
 
 	private String errMsg;
+
+	public DetailResponse(){}
+
+	public DetailResponse(boolean ifSuccess, String errorCode, String errMsg) {
+		this.ifSuccess = ifSuccess;
+		this.errorCode = errorCode;
+		this.errMsg = errMsg;
+	}
+
+	public boolean isIfSuccess() {
+		return ifSuccess;
+	}
+
+	public void setIfSuccess(boolean ifSuccess) {
+		this.ifSuccess = ifSuccess;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
 }
