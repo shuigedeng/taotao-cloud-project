@@ -166,6 +166,7 @@ public class DateUtil {
 	 * 获取当前日期
 	 *
 	 * @param pattern 格式化
+	 * @return 当前时间
 	 */
 	public static String getCurrentDate(String pattern) {
 		return LocalDate.now().format(DateTimeFormatter.ofPattern(pattern));

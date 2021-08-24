@@ -34,9 +34,8 @@ public class FailOverUtil {
 	/**
 	 * 错误补偿工具类
 	 *
-	 * @param consumer
-	 * @param c1
-	 * @return T
+	 * @param consumer consumer
+	 * @param c1 c1
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:41
 	 */

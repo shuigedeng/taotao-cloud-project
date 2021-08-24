@@ -82,7 +82,6 @@ public abstract class BaseAspect {
 	 * @param key
 	 * @param condition
 	 * @param arguments
-	 * @return
 	 */
 	public String getCacheKey(String key, String condition, Object[] arguments) {
 		StringBuilder sb = new StringBuilder();

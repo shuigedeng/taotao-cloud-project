@@ -155,7 +155,9 @@ public class JsonUtil {
 	}
 
 	/**
+	 * <p>
 	 * 字符串转换为指定对象，并增加泛型转义 例如：List<Integer> test = toObject(jsonStr, List.class, Integer.class);
+	 * </p>
 	 *
 	 * @param json             json字符串
 	 * @param parametrized     目标对象

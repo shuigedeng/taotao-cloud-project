@@ -92,11 +92,11 @@ dependencies {
         api "com.github.xiaoymin:knife4j-spring-ui:${knife4jVersion}"
     }
 }
-
 publishing {
     repositories {
         maven {
 //                https://repomanage.rdc.aliyun.com/
+            name = "AliyunRepository"
             if (project.version.endsWith('-SNAPSHOT')) {
                 url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
             } else {
@@ -111,18 +111,109 @@ publishing {
         }
 
         maven {
-            name = "GitHubPackages"
+            name = "GitHubPackagesRepository"
             url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
                 password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
             }
         }
+
+        maven {
+            name = "SonatypeRepository"
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            } else {
+                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }
+            allowInsecureProtocol = true
+            credentials {
+                username = "${ossrhUsername}"
+                password = "${ossrhPassword}"
+            }
+        }
     }
 
     publications {
-        versionPlatform(MavenPublication) {
+        mavenJava(MavenPublication) {
+//                groupId rootProject.group
+            groupId "io.github.shuigedeng"
+            artifactId project.name
+            version rootProject.version
+
+            //打包类型 war: components.web jar: components.java
             from components.javaPlatform
+
+//                artifact shadowJar
+//            artifact sourcesJar
+//            artifact javadocJar
+
+            pom {
+                name = 'taotao cloud library'
+                description = 'a concise description of taotao cloud library'
+                url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+
+//                    properties = [
+//                            "taotao": "anotherValue",
+//                            "prop.with.dots": "anotherValue",
+//                    ]
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'taotao'
+                        name = 'taotao'
+                        email = '981376577@qq.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
+                    url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                }
+            }
         }
     }
 }
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+//publishing {
+//    repositories {
+//        maven {
+////                https://repomanage.rdc.aliyun.com/
+//            if (project.version.endsWith('-SNAPSHOT')) {
+//                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
+//            } else {
+//                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
+//            }
+//
+//            allowInsecureProtocol = true
+//            credentials {
+//                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+//                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+//            }
+//        }
+//
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
+//            credentials {
+//                username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+//                password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+//            }
+//        }
+//    }
+//
+//    publications {
+//        versionPlatform(MavenPublication) {
+//            from components.javaPlatform
+//        }
+//    }
+//}

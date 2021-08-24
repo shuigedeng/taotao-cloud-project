@@ -8,11 +8,11 @@ repositories {
     jcenter()
 }
 
-shadowJar {
-    zip64 true
-    mergeServiceFiles()
-    version = '1.0.1'
-}
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//    version = '1.0.1'
+//}
 
 dependencies {
     //添加gradle版本

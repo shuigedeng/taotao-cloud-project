@@ -13,3 +13,18 @@ dependencies {
     
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//    classifier = null
+//
+////    dependencies {
+////        // exclude(dependency('xml-apis:xml-apis:.*'))
+////        // exclude(dependency('xerces:xercesImpl:.*'))
+////        // exclude(dependency { it.moduleGroup == 'xml-apis' })
+////        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
+////        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
+////    }
+//
+//}

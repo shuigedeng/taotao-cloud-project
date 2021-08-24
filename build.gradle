@@ -1,7 +1,7 @@
 buildscript {
     ext {
         taotaoCloudVersion = version
-        taotaoCloudGroup = "com.taotao.cloud"
+        taotaoCloudGroup = "io.github.shuigedeng"
 
         springVersion = '5.3.4'
         springBootVersion = '2.5.2'
@@ -90,7 +90,7 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+//        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
         classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:2.8.0"
     }
@@ -161,14 +161,14 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'checkstyle'
     apply plugin: 'maven-publish'
     apply plugin: 'org.springframework.boot'
-    apply plugin: "com.github.johnrengelman.shadow"
+//    apply plugin: "com.github.johnrengelman.shadow"
     apply plugin: "com.google.cloud.tools.jib"
     apply plugin: "org.springdoc.openapi-gradle-plugin"
 
 //    apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
-        implementation platform("com.taotao.cloud:taotao-cloud-dependencies:$taotaoCloudVersion")
+        implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
     }
 
     task createProperties(dependsOn: processResources) {
@@ -219,6 +219,39 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         }
     }
 
+    javadoc {
+        failOnError false
+
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
+
+    task sourcesJar(type: Jar) {
+//        from sourceSets.main.allJava
+        from sourceSets.main.allSource
+
+        archiveClassifier = 'sources'
+    }
+
+    task javadocJar(type: Jar) {
+        from javadoc
+        archiveClassifier = 'javadoc'
+    }
+
+    jar {
+        enabled = true
+        classifier = null
+    }
+
+//    shadowJar {
+//        zip64 true
+//        mergeServiceFiles()
+//        classifier = null
+//
+////        finalizedBy(javadocJar, sourcesJar)
+//    }
+
     publishing {
         repositories {
             maven {
@@ -253,7 +286,6 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                 } else {
                     url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                 }
-//                url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 allowInsecureProtocol = true
                 credentials {
                     username = "${ossrhUsername}"
@@ -264,20 +296,23 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
         publications {
             mavenJava(MavenPublication) {
-                //artifact bootJar
 //                groupId rootProject.group
                 groupId "io.github.shuigedeng"
                 artifactId project.name
                 version rootProject.version
-//                version "2.0"
 
                 //打包类型 war: components.web jar: components.java
                 from components.java
+
+//                artifact shadowJar
+                artifact sourcesJar
+                artifact javadocJar
 
                 pom {
                     name = 'taotao cloud library'
                     description = 'a concise description of taotao cloud library'
                     url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+
 //                    properties = [
 //                            "taotao": "anotherValue",
 //                            "prop.with.dots": "anotherValue",
@@ -307,12 +342,6 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     signing {
         sign publishing.publications.mavenJava
-    }
-
-    jar.enabled = true
-
-    shadowJar {
-        zip64 true
     }
 }
 

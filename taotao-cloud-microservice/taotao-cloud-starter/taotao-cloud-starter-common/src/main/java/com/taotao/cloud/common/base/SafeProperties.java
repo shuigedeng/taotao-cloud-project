@@ -69,7 +69,6 @@ public class SafeProperties {
 	 *
 	 * @param key
 	 * @param value
-	 * @return
 	 */
 	public String setProperty(String key, String value) {
 		return setProperty(key, value, BLANK);
@@ -81,7 +80,6 @@ public class SafeProperties {
 	 * @param key     键
 	 * @param value   与键对应的值
 	 * @param comment 对键值对的说明
-	 * @return
 	 */
 	public synchronized String setProperty(String key, String value, String comment) {
 		Object oldValue = props.setProperty(key, value);
@@ -99,7 +97,6 @@ public class SafeProperties {
 	 * 根据key获取属性表中相应的value。
 	 *
 	 * @param key
-	 * @return
 	 */
 	public String getProperty(String key) {
 		return props.getProperty(key);
@@ -110,7 +107,6 @@ public class SafeProperties {
 	 *
 	 * @param key
 	 * @param defaultValue
-	 * @return
 	 */
 	public String getProperty(String key, String defaultValue) {
 		return props.getProperty(key, defaultValue);
@@ -119,8 +115,7 @@ public class SafeProperties {
 	/**
 	 * 从一个字符流中读取属性到属性表中
 	 *
-	 * @param reader
-	 * @throws IOException
+	 * @param reader reader
 	 */
 	public synchronized void load(Reader reader) {
 		load0(new LineReader(reader));
@@ -129,8 +124,7 @@ public class SafeProperties {
 	/**
 	 * 从一个字节流中读取属性到属性表中
 	 *
-	 * @param inStream
-	 * @throws IOException
+	 * @param inStream inStream
 	 */
 	public synchronized void load(InputStream inStream) {
 		load0(new LineReader(inStream));
@@ -139,9 +133,8 @@ public class SafeProperties {
 	/**
 	 * 从一个字节流中读取属性到属性表中
 	 *
-	 * @param inStream
-	 * @param charset
-	 * @throws IOException
+	 * @param inStream inStream
+	 * @param charset charset
 	 */
 	public synchronized void load(InputStream inStream, String charset) {
 		try {
@@ -157,7 +150,6 @@ public class SafeProperties {
 	 *
 	 * @param file    属性文件
 	 * @param charset 字符集
-	 * @throws IOException
 	 */
 	public synchronized void load(File file, String charset) {
 		try {
@@ -173,7 +165,6 @@ public class SafeProperties {
 	 * 从一个文件中读取属性到属性表中 默认字符集为utf-8
 	 *
 	 * @param file 属性文件
-	 * @throws IOException
 	 */
 	public synchronized void load(File file) {
 		try {
@@ -189,7 +180,6 @@ public class SafeProperties {
 	 * 将属性表中的属性写到字符流里面。
 	 *
 	 * @param writer
-	 * @throws IOException
 	 */
 	public void store(Writer writer) {
 		try {
@@ -204,7 +194,6 @@ public class SafeProperties {
 	 * 将属性表中的属性写到字节流里面。
 	 *
 	 * @param out
-	 * @throws IOException
 	 */
 	public void store(OutputStream out) {
 		try {
@@ -228,7 +217,6 @@ public class SafeProperties {
 	 * 如果属性表中某个key对应的value值和参数value相同 那么返回true，否则返回false。
 	 *
 	 * @param value
-	 * @return
 	 */
 	public boolean containsValue(String value) {
 		return props.containsValue(value);
@@ -238,7 +226,6 @@ public class SafeProperties {
 	 * 如果属性表中存在参数key，返回true，否则返回false。
 	 *
 	 * @param key
-	 * @return
 	 */
 	public boolean containsKey(String key) {
 		return props.containsKey(key);
@@ -247,7 +234,6 @@ public class SafeProperties {
 	/**
 	 * 获取属性表中键值对数量
 	 *
-	 * @return
 	 */
 	public int size() {
 		return props.size();
@@ -256,7 +242,6 @@ public class SafeProperties {
 	/**
 	 * 检查属性表是否为空
 	 *
-	 * @return
 	 */
 	public boolean isEmpty() {
 		return props.isEmpty();
@@ -273,7 +258,6 @@ public class SafeProperties {
 	/**
 	 * 获取属性表中所有key的集合。
 	 *
-	 * @return
 	 */
 	public Set<String> propertyNames() {
 		return props.stringPropertyNames();

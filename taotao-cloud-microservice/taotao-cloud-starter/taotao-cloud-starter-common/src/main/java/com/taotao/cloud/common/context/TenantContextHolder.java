@@ -18,8 +18,9 @@ package com.taotao.cloud.common.context;
 import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
+ * <p>
  * 租户context holder
- *
+ *</p>
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 17:18

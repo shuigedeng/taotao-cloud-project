@@ -103,8 +103,7 @@ public final class DateUtils {
 	/**
 	 * 解析日期
 	 *
-	 * @param source
-	 * @return
+	 * @param source source
 	 */
 	public static LocalDate parse(String source) {
 		String sourceTrim = source.trim();
@@ -142,7 +141,6 @@ public final class DateUtils {
 	 * 格式化日期,返回格式为 yyyy-MM
 	 *
 	 * @param date 日期
-	 * @return 格式化后的字符串
 	 */
 	public static String format(LocalDateTime date, String pattern) {
 		if (date == null) {
@@ -618,7 +616,6 @@ public final class DateUtils {
 	 *
 	 * @param start yyyy-MM-dd
 	 * @param end   yyyy-MM-dd
-	 * @return 2个日期之间的所有的周
 	 */
 	public static List<String> getBetweenWeek(String start, String end) {
 		return getBetweenWeek(LocalDate.parse(start), LocalDate.parse(end));

@@ -117,7 +117,6 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param data     数据
-	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
@@ -131,7 +130,6 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param data     数据
-	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
@@ -145,7 +143,6 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param result   数据
-	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:50
 	 */
@@ -158,7 +155,6 @@ public class ResponseUtil {
 	 *
 	 * @param exchange   exchange
 	 * @param resultEnum 状态码
-	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:51
 	 */
@@ -172,7 +168,6 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param result   数据
-	 * @return reactor.core.publisher.Mono<java.lang.Void>
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:52
 	 */

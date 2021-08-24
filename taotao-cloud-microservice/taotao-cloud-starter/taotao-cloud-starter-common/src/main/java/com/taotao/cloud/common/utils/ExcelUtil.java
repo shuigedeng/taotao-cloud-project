@@ -51,6 +51,7 @@ public class ExcelUtil {
 	 * @param fileName       文件名称
 	 * @param isCreateHeader 是否创建表头
 	 * @param response       response
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
@@ -87,6 +88,7 @@ public class ExcelUtil {
 	 * @param fileName     文件名称
 	 * @param response     response
 	 * @param exportParams 导出参数
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
@@ -101,6 +103,7 @@ public class ExcelUtil {
 	 * @param list     数据
 	 * @param fileName 文件名称
 	 * @param response response
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
@@ -170,7 +173,7 @@ public class ExcelUtil {
 	 * @param titleRows  标题行
 	 * @param headerRows 表头行
 	 * @param pojoClass  pojo类型
-	 * @return java.util.List<T>
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2021/2/25 17:03
 	 */
@@ -198,7 +201,7 @@ public class ExcelUtil {
 	 *
 	 * @param file      excel文件
 	 * @param pojoClass pojo类型
-	 * @return java.util.List<T>
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2021/2/25 17:03
 	 */
@@ -231,7 +234,7 @@ public class ExcelUtil {
 	 * @param headerRows 表头行
 	 * @param needVerfiy 是否检验excel内容
 	 * @param pojoClass  pojo类型
-	 * @return java.util.List<T>
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2021/2/25 17:04
 	 */
@@ -255,7 +258,7 @@ public class ExcelUtil {
 	 * @param headerRows  表头行
 	 * @param needVerfiy  是否检验excel内容
 	 * @param pojoClass   pojo类型
-	 * @return java.util.List<T>
+	 * @throws IOException
 	 * @author shuigedeng
 	 * @since 2021/2/25 17:04
 	 */

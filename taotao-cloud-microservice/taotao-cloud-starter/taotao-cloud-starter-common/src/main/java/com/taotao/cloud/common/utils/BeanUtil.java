@@ -59,7 +59,6 @@ public class BeanUtil {
 	 *
 	 * @param value 值
 	 * @param type  类型
-	 * @return T
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
@@ -75,7 +74,6 @@ public class BeanUtil {
 	 *
 	 * @param value 值
 	 * @param type  类型
-	 * @return T
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:45
 	 */
@@ -91,7 +89,6 @@ public class BeanUtil {
 	 * 深度克隆
 	 *
 	 * @param obj 对象
-	 * @return T
 	 * @author shuigedeng
 	 * @since 2020/10/15 15:46
 	 */

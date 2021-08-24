@@ -32,7 +32,6 @@ public class ReflectionUtil {
 	 * classForName
 	 *
 	 * @param type 类型
-	 * @return java.lang.Class<?>
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */
@@ -48,7 +47,6 @@ public class ReflectionUtil {
 	 * tryClassForName
 	 *
 	 * @param type 类型
-	 * @return java.lang.Class<?>
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:35
 	 */

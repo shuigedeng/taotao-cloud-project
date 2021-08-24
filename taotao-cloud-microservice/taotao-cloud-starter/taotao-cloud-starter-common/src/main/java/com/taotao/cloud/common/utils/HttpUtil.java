@@ -29,7 +29,6 @@ import java.net.URL;
  *
  * @author shuigedeng
  * @version 1.0.0
- * @link https://bbs.huaweicloud.com/blogs/104013
  * @since 2020/6/2 16:39
  */
 public class HttpUtil {
@@ -37,8 +36,8 @@ public class HttpUtil {
 	/**
 	 * 发送GET请求
 	 *
-	 * @param requestUrl
-	 * @return
+	 * @param requestUrl requestUrl
+	 * @param charSetName charSetName
 	 */
 	public static Object getRequest(String requestUrl, String charSetName) {
 		String res = "";
@@ -71,9 +70,8 @@ public class HttpUtil {
 	/**
 	 * 发送POST请求
 	 *
-	 * @param path
-	 * @param post
-	 * @return
+	 * @param path path
+	 * @param post post
 	 */
 	public static Object postRequest(String path, String post) {
 		URL url = null;

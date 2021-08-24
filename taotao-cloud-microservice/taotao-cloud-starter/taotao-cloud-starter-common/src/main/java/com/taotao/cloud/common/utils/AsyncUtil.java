@@ -40,7 +40,7 @@ public class AsyncUtil {
 	/**
 	 * 启动线程
 	 *
-	 * @param task
+	 * @param task task
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
@@ -51,8 +51,8 @@ public class AsyncUtil {
 	/**
 	 * 线程启动 出错后重试，最大重试maxRetryCount次，每次默认多延迟1秒执行，最大延迟5秒
 	 *
-	 * @param task
-	 * @param maxRetryCount
+	 * @param task  task
+	 * @param maxRetryCount maxRetryCount
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
@@ -63,9 +63,9 @@ public class AsyncUtil {
 	/**
 	 * 出错后重试，最大重试maxRetryCount次，每次默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
 	 *
-	 * @param task
-	 * @param maxRetryCount
-	 * @param consumer
+	 * @param task task
+	 * @param maxRetryCount maxRetryCount
+	 * @param consumer consumer
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
@@ -75,12 +75,15 @@ public class AsyncUtil {
 	}
 
 	/**
-	 * 出错后重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行,如果delaySeconds<=0 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
 	 *
-	 * @param task
-	 * @param maxRetryCount
-	 * @param delaySeconds
-	 * @param consumer
+	 * <p>
+	 * 出错后重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行,如果delaySeconds小于等于0
+	 * 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
+	 *</p>
+	 * @param task consumer
+	 * @param maxRetryCount maxRetryCount
+	 * @param delaySeconds delaySeconds
+	 * @param consumer consumer
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:39
 	 */
@@ -90,14 +93,14 @@ public class AsyncUtil {
 	}
 
 	/**
-	 * 出错后重试，延迟firstDelaySeconds后开始重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行，如果delaySeconds<=0
+	 * 出错后重试，延迟firstDelaySeconds后开始重试，最大重试maxRetryCount次，每次延迟delaySeconds秒执行，如果delaySeconds小于等于0
 	 * 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
 	 *
-	 * @param task
-	 * @param firstDelaySeconds
-	 * @param maxRetryCount
-	 * @param delaySeconds
-	 * @param consumer
+	 * @param task task
+	 * @param firstDelaySeconds firstDelaySeconds
+	 * @param maxRetryCount maxRetryCount
+	 * @param delaySeconds delaySeconds
+	 * @param consumer  consumer
 	 * @author shuigedeng
 	 * @since 2021/6/22 17:40
 	 */

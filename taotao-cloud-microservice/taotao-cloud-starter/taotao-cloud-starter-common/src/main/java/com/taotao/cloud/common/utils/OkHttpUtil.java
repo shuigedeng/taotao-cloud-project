@@ -189,13 +189,15 @@ public class OkHttpUtil {
 	 *          // 如果是false的话传统的表单提交
 	 *          .post(true)
 	 *          .sync();
-	 *
+	 *  </p>
 	 *  <p>
+	 *
+	 *
 	 *  // 选择异步有两个方法，一个是带回调接口，一个是直接返回结果
 	 *  OkHttpUtils.builder().url("")
 	 *              .post(false)
 	 *              .async();
-	 *
+	 * </p>
 	 * <p>
 	 *  OkHttpUtils.builder().url("")
 	 *          .post(false)
@@ -210,7 +212,7 @@ public class OkHttpUtil {
 	 *                    // 请求失败后的处理
 	 *                }
 	 *     });
-	 *
+	 * </p>
 	 * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
 	 * @return
 	 */

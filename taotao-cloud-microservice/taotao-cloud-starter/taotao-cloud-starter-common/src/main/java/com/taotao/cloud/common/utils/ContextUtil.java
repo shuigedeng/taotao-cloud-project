@@ -53,7 +53,6 @@ public class ContextUtil {
 	 *
 	 * @param type     类型
 	 * @param required 是否必须
-	 * @return T
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:54
 	 */

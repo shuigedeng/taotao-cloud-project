@@ -29,11 +29,10 @@ public class EnumUtil {
 	 *
 	 * @param enumType enumType
 	 * @param name     name
-	 * @return T
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:13
 	 */
-	public static  <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
+	public static <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
 		for (T t : enumType.getEnumConstants()) {
 			if (t.name().equalsIgnoreCase(name)) {
 				return t;
