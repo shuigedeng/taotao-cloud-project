@@ -23,6 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+/**
+ * CustomLogoutSuccessHandler
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:57
+ */
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	@Override

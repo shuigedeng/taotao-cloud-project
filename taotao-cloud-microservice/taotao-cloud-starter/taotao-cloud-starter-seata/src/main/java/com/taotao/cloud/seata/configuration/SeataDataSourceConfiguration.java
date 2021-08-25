@@ -55,8 +55,10 @@ public class SeataDataSourceConfiguration {
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource dataSource(DataSourceProperties properties) {
-		HikariDataSource hikariDataSource =
-			properties.initializeDataSourceBuilder().type(HikariDataSource.class).build();
+		HikariDataSource hikariDataSource = properties
+				.initializeDataSourceBuilder()
+				.type(HikariDataSource.class)
+				.build();
 		return new DataSourceProxy(hikariDataSource);
 	}
 
@@ -70,8 +72,6 @@ public class SeataDataSourceConfiguration {
 		return new SeataInterceptor();
 	}
 
-
-
 	@Bean
 	public DetectTable detectTable(DataSource dataSource) {
 		return new DetectTable(dataSource);
@@ -80,18 +80,18 @@ public class SeataDataSourceConfiguration {
 	public static class DetectTable implements ApplicationRunner {
 
 		public static final String undoLogSql = "CREATE TABLE IF NOT EXISTS undo_log(" +
-			"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
-			"`branch_id` bigint(20) NOT NULL," +
-			"`xid` varchar(100) NOT NULL," +
-			"`context` varchar(128) NOT NULL," +
-			"`rollback_info` longblob NOT NULL," +
-			"`log_status` int(11) NOT NULL," +
-			"`log_created` datetime NOT NULL," +
-			"`log_modified` datetime NOT NULL," +
-			"`ext` varchar(100) DEFAULT NULL," +
-			"PRIMARY KEY (`id`)," +
-			"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
-			")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+				"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
+				"`branch_id` bigint(20) NOT NULL," +
+				"`xid` varchar(100) NOT NULL," +
+				"`context` varchar(128) NOT NULL," +
+				"`rollback_info` longblob NOT NULL," +
+				"`log_status` int(11) NOT NULL," +
+				"`log_created` datetime NOT NULL," +
+				"`log_modified` datetime NOT NULL," +
+				"`ext` varchar(100) DEFAULT NULL," +
+				"PRIMARY KEY (`id`)," +
+				"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
+				")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
 		private final DataSource dataSource;
 
@@ -122,7 +122,7 @@ public class SeataDataSourceConfiguration {
 
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException {
+				FilterChain filterChain) throws ServletException, IOException {
 			String restXid = request.getHeader("xid");
 			if (StrUtil.isNotBlank(restXid)) {
 				RootContext.bind(restXid);
@@ -152,30 +152,30 @@ public class SeataDataSourceConfiguration {
 		}
 	}
 
-//	@Bean
-//	public SeataAspect seataAspect() {
-//		return new SeataAspect();
-//	}
-//
-//	@Aspect
-//	public static class SeataAspect extends BaseAspect {
-//
-//		@Before("execution(* com.taotao.cloud.*.biz.service.*.*(..))")
-//		public void before(JoinPoint joinPoint) throws TransactionException {
-//			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-//			Method method = signature.getMethod();
-//			GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
-//			tx.begin(300000, "tran");
-//			LogUtil.info("**********创建分布式事务完毕 {0}", tx.getXid());
-//		}
-//
-//		@AfterThrowing(throwing = "e", pointcut = "execution(* com.taotao.cloud.*.biz.service.*.*(..))")
-//		public void doRecoveryActions(Throwable e) throws Exception {
-//			LogUtil.info("方法执行异常:{0}", e.getMessage());
-//			if (!StrUtil.isBlank(RootContext.getXID())) {
-//				GlobalTransactionContext.reload(RootContext.getXID()).rollback();
-//			}
-//		}
-//
-//	}
+	//@Bean
+	//public SeataAspect seataAspect() {
+	//	return new SeataAspect();
+	//}
+	//
+	//@Aspect
+	//public static class SeataAspect extends BaseAspect {
+	//
+	//	@Before("execution(* com.taotao.cloud.*.biz.service.*.*(..))")
+	//	public void before(JoinPoint joinPoint) throws TransactionException {
+	//		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+	//		Method method = signature.getMethod();
+	//		GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
+	//		tx.begin(300000, "tran");
+	//		LogUtil.info("**********创建分布式事务完毕 {0}", tx.getXid());
+	//	}
+	//
+	//	@AfterThrowing(throwing = "e", pointcut = "execution(* com.taotao.cloud.*.biz.service.*.*(..))")
+	//	public void doRecoveryActions(Throwable e) throws Exception {
+	//		LogUtil.info("方法执行异常:{0}", e.getMessage());
+	//		if (!StrUtil.isBlank(RootContext.getXID())) {
+	//			GlobalTransactionContext.reload(RootContext.getXID()).rollback();
+	//		}
+	//	}
+	//
+	//}
 }

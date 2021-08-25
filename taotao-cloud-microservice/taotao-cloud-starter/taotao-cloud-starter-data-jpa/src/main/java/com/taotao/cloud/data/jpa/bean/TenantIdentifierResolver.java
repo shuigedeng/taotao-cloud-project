@@ -18,8 +18,6 @@
  import com.taotao.cloud.common.context.TenantContextHolder;
  import org.apache.commons.lang3.StringUtils;
  import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.context.annotation.Lazy;
 
  /**
   * jpa 多租户识别解析器
@@ -33,18 +31,22 @@
 	 //private final DatabaseManager databaseManager;
 	 //
 	 //public TenantIdentifierResolver(@Autowired @Lazy final DatabaseManager databaseManager) {
-		// this.databaseManager = databaseManager;
+	 // this.databaseManager = databaseManager;
 	 //}
 
 	 @Override
 	 public String resolveCurrentTenantIdentifier() {
 		 //if (StringUtils.isBlank(TenantContextHolder.getTenant())) {
-			// return databaseManager.getDefaultSchemaName();
+		 // return databaseManager.getDefaultSchemaName();
 		 //}
 		 //
 		 //return databaseManager.getSchemaNameByCompanyId(TenantContextHolder.getTenant());
+		 String tenant = TenantContextHolder.getTenant();
+		 if (StringUtils.isBlank(tenant)) {
+			 return "1";
+		 }
 
-		 return TenantContextHolder.getTenant();
+		 return tenant;
 	 }
 
 	 @Override

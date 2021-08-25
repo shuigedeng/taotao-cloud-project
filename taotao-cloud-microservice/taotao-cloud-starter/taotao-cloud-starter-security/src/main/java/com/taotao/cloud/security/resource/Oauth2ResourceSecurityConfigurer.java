@@ -18,9 +18,9 @@ package com.taotao.cloud.security.resource;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.security.security.CustomizedAccessDeniedHandler;
 import com.taotao.cloud.security.security.CustomizedAuthenticationEntryPoint;
-import com.taotao.cloud.security.annotation.NotAuth;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -46,8 +46,15 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-@Configuration
+/**
+ * Oauth2ResourceSecurityConfigurer
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:57
+ */
 @Order(101)
+@Configuration
 public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Override

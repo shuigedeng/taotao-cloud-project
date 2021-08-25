@@ -24,16 +24,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-
 /**
- * 接口需要特定的权限，但是当前用户是匿名用户或者是记住我的用户
+ * 用户未认证 接口需要特定的权限，但是当前用户是匿名用户或者是记住我的用户
  *
- * @author zyc
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:55
  */
 public class CustomizedAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-	    LogUtil.error("用户未认证", authException);
-	    ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
-    }
+
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+		AuthenticationException authException) throws IOException {
+		LogUtil.error("用户未认证", authException);
+		ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
+	}
 }

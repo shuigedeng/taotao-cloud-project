@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.security.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +25,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
+/**
+ * SecurityUtil
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:54
+ */
 public class SecurityUtil {
 
 	public static Integer userId() {
@@ -38,7 +46,7 @@ public class SecurityUtil {
 			Jwt principal = (Jwt) jwtAuthenticationToken.getPrincipal();
 			return Arrays.asList(((String) principal.getClaims().get("scp")).split(" "));
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 	public static List<String> roles() {

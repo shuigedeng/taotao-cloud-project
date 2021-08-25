@@ -57,7 +57,6 @@ public class RabbitMqConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", value = "enabled", havingValue = "true")
 	public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
 		return new FastBuildRabbitMqProducer(connectionFactory);
 	}

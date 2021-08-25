@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 
 /**
  * 消息中心常量
- *
  */
 public class MessageConstant {
 
@@ -79,7 +78,7 @@ public class MessageConstant {
 	 * 订单组
 	 */
 	public static final String ORDER_BINDER_GROUP =
-		ORDER_MESSAGE + StringPool.DASH + "binder-group";
+			ORDER_MESSAGE + StringPool.DASH + "binder-group";
 
 
 }

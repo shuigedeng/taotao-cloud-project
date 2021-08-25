@@ -30,6 +30,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 /**
  * 登录成功,返回 Token
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:58
  */
 public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 

@@ -6,7 +6,6 @@ import org.springframework.messaging.SubscribableChannel;
 
 /**
  * 消费者Channel
- *
  */
 public interface MateSink {
 

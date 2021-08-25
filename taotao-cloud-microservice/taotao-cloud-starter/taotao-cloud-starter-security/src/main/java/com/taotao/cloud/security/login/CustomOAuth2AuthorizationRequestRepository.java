@@ -23,7 +23,11 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequ
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 
 /**
- * 获取 额外 字段
+ * CustomOAuth2AuthorizationRequestRepository
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:58
  */
 public final class CustomOAuth2AuthorizationRequestRepository implements
 	AuthorizationRequestRepository<OAuth2AuthorizationRequest> {

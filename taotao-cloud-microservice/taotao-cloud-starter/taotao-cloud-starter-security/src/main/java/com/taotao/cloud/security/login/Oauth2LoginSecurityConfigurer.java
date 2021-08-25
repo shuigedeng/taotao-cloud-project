@@ -29,6 +29,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * Oauth2LoginSecurityConfigurer
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 09:58
+ */
 @Order(99)
 public class Oauth2LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
