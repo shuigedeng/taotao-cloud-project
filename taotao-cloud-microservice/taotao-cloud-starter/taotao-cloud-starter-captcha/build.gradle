@@ -1,5 +1,3 @@
-jar.enabled = true
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

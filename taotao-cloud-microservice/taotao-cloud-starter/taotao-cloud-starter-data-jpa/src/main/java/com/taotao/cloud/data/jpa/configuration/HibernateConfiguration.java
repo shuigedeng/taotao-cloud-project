@@ -18,12 +18,21 @@ package com.taotao.cloud.data.jpa.configuration;
 import static org.hibernate.cfg.AvailableSettings.DIALECT;
 import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
 import static org.hibernate.cfg.AvailableSettings.JDBC_TIME_ZONE;
+import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT;
+import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER;
+import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER;
 import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
 
+import com.taotao.cloud.data.jpa.bean.AuditorBean;
+import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
+import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
+import org.hibernate.MultiTenancyStrategy;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
+import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -53,12 +62,26 @@ public class HibernateConfiguration {
 	}
 
 	@Bean
+	public AuditorBean auditorBean(){
+		return new AuditorBean();
+	}
+
+	@Bean
+	@ConditionalOnBean(DataSource.class)
+	public TenantConnectionProvider tenantConnectionProvider(DataSource dataSource){
+		return new TenantConnectionProvider(dataSource);
+	}
+
+	@Bean
+	public TenantIdentifierResolver tenantIdentifierResolver(){
+		return new TenantIdentifierResolver();
+	}
+
+	@Bean
 	JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
-		//Auto creating scheme when true
 		hibernateJpaVendorAdapter.setGenerateDdl(true);
-		//Database type
 		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
 		return hibernateJpaVendorAdapter;
 	}
@@ -67,16 +90,17 @@ public class HibernateConfiguration {
 	@ConditionalOnBean(DataSource.class)
 	LocalContainerEntityManagerFactoryBean entityManagerFactory(
 		final DataSource dataSource,
-		final JpaVendorAdapter jpaVendorAdapter
-		// final MultiTenantConnectionProvider multiTenantConnectionProvider,
-		// final CurrentTenantIdentifierResolver currentTenantIdentifierResolver
-	) {
+		final JpaVendorAdapter jpaVendorAdapter,
+		final MultiTenantConnectionProvider multiTenantConnectionProvider,
+		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
-		// newJpaProperties.put(MULTI_TENANT, MultiTenancyStrategy.SCHEMA);
-		// newJpaProperties.put(
-		//         MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
-		// newJpaProperties.put(
-		//         MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
+
+		newJpaProperties.put(MULTI_TENANT, MultiTenancyStrategy.DISCRIMINATOR);
+		newJpaProperties.put(
+			MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
+		newJpaProperties.put(
+			MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
+
 		newJpaProperties.put(
 			IMPLICIT_NAMING_STRATEGY, SpringImplicitNamingStrategy.class.getName());
 		newJpaProperties.put(
@@ -86,12 +110,15 @@ public class HibernateConfiguration {
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 			new LocalContainerEntityManagerFactoryBean();
+
 		entityManagerFactoryBean.setDataSource(dataSource);
 		entityManagerFactoryBean.setJpaPropertyMap(newJpaProperties);
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
+
 		entityManagerFactoryBean
 			.setPackagesToScan("com.taotao.cloud.*.biz.entity", "com.taotao.cloud.*.entity");
 		entityManagerFactoryBean.setPersistenceUnitName("default");
+
 		return entityManagerFactoryBean;
 	}
 }

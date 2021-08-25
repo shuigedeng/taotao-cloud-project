@@ -55,11 +55,6 @@ public class ConfigService {
 		@Autowired
 		private NacosConfigProperties configProperties;
 
-//    @NacosConfigListener(dataId = "${spring.application.name}.yaml")
-//    public void onMessage(String config) {
-//        System.out.println();
-//    }
-
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			nacosConfigManager.getConfigService()

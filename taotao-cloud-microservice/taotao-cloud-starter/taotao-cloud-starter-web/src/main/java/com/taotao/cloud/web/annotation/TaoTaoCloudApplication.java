@@ -1,6 +1,23 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.annotation;
 
+import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
+import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
 import com.taotao.cloud.file.annotation.EnableTaoTaoCloudUploadFile;
@@ -12,6 +29,7 @@ import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2ResourceSecurity;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
 import com.taotao.cloud.shardingsphere.annotation.EnableTaoTaoCloudShardingsphere;
+import com.taotao.cloud.sms.annotation.EnableTaoTaoCloudSms;
 import com.taotao.cloud.zookeeper.annotation.EnableTaoTaoCloudZookeeper;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import java.lang.annotation.Documented;
@@ -25,12 +43,16 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * TaoTaoCloudApplication
  *
+ * @version 1.0.0
  * @author shuigedeng
+ * @since 2021/8/25 08:15
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-//@EnableTaoTaoCloudElasticsearch
+@EnableTaoTaoCloudSms
+@EnableTaoTaoCloudCaptcha
+@EnableTaoTaoCloudElasticsearch
 @EnableTaoTaoCloudUploadFile
 @EnableTaoTaoCloudZookeeper
 @EnableTaoTaoCloudShardingsphere

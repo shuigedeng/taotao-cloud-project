@@ -26,7 +26,8 @@ import org.springframework.context.annotation.PropertySource;
  * @since 2021/06/17 17:21
  */
 @Configuration
-@PropertySource(ignoreResourceNotFound = true, value = {"classpath:/taotao-cloud-gradle.properties"})
+@PropertySource(ignoreResourceNotFound = true, value = {
+	"classpath:/taotao-cloud-gradle.properties"})
 public class Config {
 
 }

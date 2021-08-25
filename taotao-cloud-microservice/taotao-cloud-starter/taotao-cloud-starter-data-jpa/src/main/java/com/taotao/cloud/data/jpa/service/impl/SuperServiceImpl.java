@@ -59,22 +59,28 @@ public class SuperServiceImpl<M extends BaseJpaRepository<T, Long>, T> implement
 			throw new LockException("锁的key为空");
 		}
 
+		//try {
+		//	boolean isLock = lock.lock(lockKey);
+		//	if (isLock) {
+		//		long count = jpaRepository.count(predicate);
+		//		if (count == 0) {
+		//			jpaRepository.save(entity);
+		//			return true;
+		//		} else {
+		//			throw new IdempotencyException(StrUtil.isEmpty(msg) ? "数据已存在" : msg);
+		//		}
+		//	} else {
+		//		throw new LockException("锁等待超时");
+		//	}
+		//} catch (Exception e) {
+		// e.printStackTrace();
+		//} finally {
 		// try {
-		// 	boolean isLock = lock.lock(lockKey);
-		// 	if (isLock) {
-		// 		long count = jpaRepository.count(predicate);
-		// 		if (count == 0) {
-		// 			jpaRepository.save(entity);
-		// 			return true;
-		// 		} else {
-		// 			throw new IdempotencyException(StrUtil.isEmpty(msg) ? "数据已存在" : msg);
-		// 		}
-		// 	} else {
-		// 		throw new LockException("锁等待超时");
-		// 	}
-		// } finally {
-		// 	lock.releaseLock(lockKey);
+		//	 lock.unlock(lockKey);
+		// } catch (Exception e) {
+		//	 e.printStackTrace();
 		// }
+		//}
 		return true;
 	}
 

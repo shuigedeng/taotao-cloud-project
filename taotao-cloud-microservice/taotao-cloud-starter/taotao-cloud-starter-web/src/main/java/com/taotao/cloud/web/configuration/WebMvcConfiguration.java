@@ -116,8 +116,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	public WebMvcConfiguration(RedisRepository redisRepository,
 		FilterProperties filterProperties,
-		XssProperties xssProperties, Counter requestCounter,
-		Summary requestLatency, Gauge inprogressRequests,
+		XssProperties xssProperties,
+		Counter requestCounter,
+		Summary requestLatency,
+		Gauge inprogressRequests,
 		Histogram requestLatencyHistogram) {
 		this.redisRepository = redisRepository;
 		this.filterProperties = filterProperties;
@@ -134,23 +136,21 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		argumentResolvers.add(new LoginUserArgumentResolver());
 	}
 
-//	@Bean
-//	public PrometheusMetricsInterceptor prometheusMetricsInterceptor() {
-//		return new PrometheusMetricsInterceptor();
-//	}
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(
-			new PrometheusMetricsInterceptor(requestCounter, requestLatency, inprogressRequests,
-				requestLatencyHistogram)).addPathPatterns("/**");
+				new PrometheusMetricsInterceptor(
+					requestCounter,
+					requestLatency,
+					inprogressRequests,
+					requestLatencyHistogram))
+			.addPathPatterns("/**");
 	}
 
 	@Override
 	public void configureMessageConverters(
 		List<HttpMessageConverter<?>> converters) {
-
 
 		WebMvcConfigurer.super.configureMessageConverters(converters);
 	}
@@ -222,9 +222,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 			customizer.configure(objectMapper);
 
-			/**
-			 * 配置跨站攻击 反序列化处理器
-			 */
+			// 配置跨站攻击 反序列化处理器
 			if (xssProperties.getRequestBodyEnabled()) {
 				customizer.deserializerByType(String.class, new XssStringJsonDeserializer());
 			}
@@ -306,11 +304,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //		return filterRegistration;
 //	}
 
-
 	/**
 	 * 请求资源扫描监听器
-	 *
-	 * @author shuigedeng
 	 */
 	public static class RequestMappingScanListener implements
 		ApplicationListener<ApplicationReadyEvent> {
@@ -327,16 +322,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 			this.ignoreApi.add("/v2/api-docs-ext/**");
 		}
 
-		/**
-		 * 默认事件
-		 *
-		 * @param event ApplicationReadyEvent
-		 */
 		@Override
 		public void onApplicationEvent(@NotNull ApplicationReadyEvent event) {
 			try {
 				ConfigurableApplicationContext applicationContext = event.getApplicationContext();
 				Environment env = applicationContext.getEnvironment();
+
 				// 获取微服务模块名称
 				String microService = env.getProperty("spring.application.name", "application");
 				if (redisRepository == null || applicationContext
@@ -348,6 +339,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				// 所有接口映射
 				RequestMappingHandlerMapping mapping = applicationContext
 					.getBean(RequestMappingHandlerMapping.class);
+
 				// 获取url与类和方法的对应信息
 				Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 				List<Map<String, String>> list = new ArrayList<>();
@@ -387,11 +379,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 					RequestMethodsRequestCondition methodsCondition = info.getMethodsCondition();
 					String methods = getMethods(methodsCondition.getMethods());
 					Map<String, String> api = Maps.newHashMap();
+
 					// 类名
 					String className = method.getMethod().getDeclaringClass().getName();
+
 					// 方法名
 					String methodName = method.getMethod().getName();
 					String fullName = className + "." + methodName;
+
 					// md5码
 					String md5 = DigestUtils.md5DigestAsHex((microService + urls).getBytes());
 					String summary = "";
@@ -438,12 +433,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 					microService,
 					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 
-				LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]",
+				LogUtil.info("资源扫描结果:serviceId=[{0}] size=[{1}] redis缓存key=[{2}]",
 					microService,
 					list.size(),
 					CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
 			} catch (Exception e) {
-				LogUtil.error("error: {}", e.getMessage());
+				LogUtil.error("error: {0}", e.getMessage());
 			}
 		}
 
@@ -463,6 +458,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 		 *
 		 * @param requestPath 请求地址
 		 * @return boolean
+		 * @author shuigedeng
+		 * @since 2021/8/24 23:49
 		 */
 		private boolean isIgnore(String requestPath) {
 			for (String path : ignoreApi) {
@@ -513,8 +510,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	 * 通过header里的token获取用户信息
 	 *
 	 * @author shuigedeng
-	 * @link https://my.oschina.net/u/4149877/blog/3143391/print
-	 * @link https://blog.csdn.net/aiyaya_/article/details/79221733
+	 * @version 1.0.0
+	 * @see <a href="https://my.oschina.net/u/4149877/blog/3143391/print">https://my.oschina.net/u/4149877/blog/3143391/print</a>
+	 * @see <a href="https://blog.csdn.net/aiyaya_/article/details/79221733">https://blog.csdn.net/aiyaya_/article/details/79221733</a>
+	 * @since 2021/8/25 08:59
 	 */
 	public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -539,9 +538,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtil.getUser();
 
-			/**
-			 * 根据value状态获取更多用户信息，待实现
-			 */
+			//根据value状态获取更多用户信息，待实现
 			return loginUser;
 		}
 	}

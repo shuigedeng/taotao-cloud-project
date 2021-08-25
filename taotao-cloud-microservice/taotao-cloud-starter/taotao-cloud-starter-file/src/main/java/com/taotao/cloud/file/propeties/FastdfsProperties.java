@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.file.propeties;
 
-import com.taotao.cloud.file.constant.UploadFileConstant;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,9 +28,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/10/26 09:40
  */
 @RefreshScope
-@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
-	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_FASTDFS)
+@ConfigurationProperties(prefix = FastdfsProperties.PREFIX)
 public class FastdfsProperties {
+
+	public static final String PREFIX = "taotao.cloud.file.fastdfs";
 
 	/**
 	 * 读取时间

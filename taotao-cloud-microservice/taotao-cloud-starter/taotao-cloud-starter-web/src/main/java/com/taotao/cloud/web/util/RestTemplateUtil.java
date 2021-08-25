@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.util;
 
 import java.util.Arrays;
@@ -15,14 +30,18 @@ import org.springframework.web.client.RestTemplate;
  * RestTemplate Http请求封装
  *
  * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 22:57
  */
 public class RestTemplateUtil {
 
 	/**
 	 * get请求（超时设置）
 	 *
-	 * @param url
-	 * @return
+	 * @param url url
+	 * @return java.util.Map
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:57
 	 */
 	public static Map httpGetRequestFactoryToMap(String url) {
 		//超时处理设置
@@ -37,7 +56,10 @@ public class RestTemplateUtil {
 	/**
 	 * get请求（无超时设置）
 	 *
-	 * @param url
+	 * @param url url
+	 * @return java.util.Map
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:57
 	 */
 	public static Map restTemplateGetToMap(String url) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -47,16 +69,23 @@ public class RestTemplateUtil {
 	/**
 	 * get请求 并接收封装成string
 	 *
-	 * @param url
+	 * @param url url
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:58
 	 */
 	public static String restTemplateGetToStr(String url) {
 		RestTemplate restTemplate = new RestTemplate();
 		return restTemplate.getForObject(url, String.class);
 	}
 
-
 	/**
 	 * get请求 并添加消息头
+	 *
+	 * @param url url
+	 * @return org.springframework.http.ResponseEntity<java.lang.String>
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:58
 	 */
 	public static ResponseEntity<String> httpGetHeaders(String url) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -69,10 +98,15 @@ public class RestTemplateUtil {
 	/**
 	 * post请求 添加请求参数以及消息头
 	 *
-	 * @param url
-	 * @param map
+	 * @param url  url
+	 * @param map  map
+	 * @param type type
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:58
 	 */
-	public static String getCommonPolicyJson(String url, MultiValueMap<String, String> map,
+	public static String getCommonPolicyJson(String url,
+		MultiValueMap<String, String> map,
 		MediaType type) {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();

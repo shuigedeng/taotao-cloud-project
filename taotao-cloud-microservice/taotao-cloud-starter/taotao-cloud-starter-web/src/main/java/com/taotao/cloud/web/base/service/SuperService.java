@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -10,17 +25,12 @@ import java.util.List;
  * 基于MP的 IService 新增了2个方法： saveBatchSomeColumn、updateAllById 其中： 1，updateAllById 执行后，会清除缓存
  * 2，saveBatchSomeColumn 批量插入
  *
- * @param <T> 实体
- * @author zuihou
- * @date 2020年03月03日20:49:03
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 08:19
  */
 public interface SuperService<T> extends IService<T> {
 
-	/**
-	 * 获取实体的类型
-	 *
-	 * @return
-	 */
 	@Override
 	Class<T> getEntityClass();
 
@@ -29,8 +39,10 @@ public interface SuperService<T> extends IService<T> {
 	 * <p>
 	 * 注意：该方法仅仅测试过mysql
 	 *
-	 * @param entityList
-	 * @return
+	 * @param entityList entityList
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021/8/25 08:20
 	 */
 	default boolean saveBatchSomeColumn(List<T> entityList) {
 		if (entityList.isEmpty()) {
@@ -45,8 +57,10 @@ public interface SuperService<T> extends IService<T> {
 	/**
 	 * 根据id修改 entity 的所有字段
 	 *
-	 * @param entity
-	 * @return
+	 * @param entity entity
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021/8/25 08:20
 	 */
 	boolean updateAllById(T entity);
 

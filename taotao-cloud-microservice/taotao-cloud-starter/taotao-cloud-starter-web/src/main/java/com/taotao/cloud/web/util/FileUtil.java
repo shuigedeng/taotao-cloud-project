@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.util;
 
 import com.google.common.base.Preconditions;
@@ -18,6 +33,8 @@ import org.springframework.http.ResponseEntity;
  * 文件处理工具类
  *
  * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 23:00
  */
 public class FileUtil {
 
@@ -30,8 +47,10 @@ public class FileUtil {
 	 * 获取文件类型
 	 *
 	 * @param file 文件
-	 * @return 文件类型
+	 * @return java.lang.String
 	 * @throws Exception Exception
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:00
 	 */
 	private static String getFileType(File file) throws Exception {
 		Preconditions.checkNotNull(file);
@@ -46,7 +65,9 @@ public class FileUtil {
 	 * 校验文件类型是否是允许下载的类型
 	 *
 	 * @param fileType fileType
-	 * @return Boolean
+	 * @return java.lang.Boolean
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:01
 	 */
 	private static Boolean fileTypeIsValid(String fileType) {
 		Preconditions.checkNotNull(fileType);
@@ -54,6 +75,16 @@ public class FileUtil {
 		return ArrayUtils.contains(VALID_FILE_TYPE, fileType);
 	}
 
+	/**
+	 * 下载
+	 *
+	 * @param filePath filePath
+	 * @param fileName fileName
+	 * @param delete   delete
+	 * @param response response
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:01
+	 */
 	public static void download(String filePath, String fileName, Boolean delete,
 		HttpServletResponse response) throws Exception {
 		File file = new File(filePath);
@@ -87,6 +118,8 @@ public class FileUtil {
 	 * 递归删除文件或目录
 	 *
 	 * @param filePath 文件或目录
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:02
 	 */
 	public static void delete(String filePath) {
 		File file = new File(filePath);
@@ -99,6 +132,14 @@ public class FileUtil {
 		file.delete();
 	}
 
+	/**
+	 * 导出文件
+	 *
+	 * @param file file
+	 * @return org.springframework.http.ResponseEntity<org.springframework.core.io.FileSystemResource>
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:02
+	 */
 	public static ResponseEntity<FileSystemResource> export(File file) {
 		if (file == null) {
 			return null;

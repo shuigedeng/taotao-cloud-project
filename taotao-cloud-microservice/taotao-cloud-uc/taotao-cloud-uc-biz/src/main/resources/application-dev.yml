@@ -358,42 +358,10 @@ spring:
 
 taotao:
   cloud:
-    redis:
-      lock:
-        enabled: true
-    log:
-      request-log:
-        enabled: true
-        types:
-          - kafka
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-
-    xxl:
-      job:
-        enabled: true
-        admin:
-          addresses:
-        executor:
-          appname: ${spring.application.name}
-          ip:
-          port: 1113
-          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
     zookeeper:
       enabled: false
-    sms:
-      enabled: false
-    feign:
-      enabled: true
-      loadbalancer:
-        enabled: true
-        rest-template:
-          enabled: true
+      lock:
+        enabled: false
     web:
       async:
         task:
@@ -408,9 +376,49 @@ taotao:
         trace: true
         web-context: true
       limit:
-        enabled: false
+        enabled: true
+      idempotent:
+        enabled: true
       xss:
         enabled: true
+    sms:
+      enabled: false
+    shardingsphere:
+      enabled: false
+    log:
+      request-log:
+        enabled: true
+        types:
+          - kafka
+    p6spy:
+      enabled: true
+      dateformat: yyyy-MM-dd HH:mm:ss
+      driverlist: com.mysql.cj.jdbc.Driver
+      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
+      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
+    redis:
+      lock:
+        enabled: true
+    xxl:
+      job:
+        enabled: true
+        admin:
+          addresses:
+        executor:
+          appname: ${spring.application.name}
+          ip:
+          port: 1113
+          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
+
+
+    feign:
+      enabled: true
+      loadbalancer:
+        enabled: true
+        rest-template:
+          enabled: true
+
     sentinel:
       enabled: true
     seata:
@@ -485,6 +493,7 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+    org.springframework.cloud.openfeign: off
 
 springdoc:
   packages-to-exclude:

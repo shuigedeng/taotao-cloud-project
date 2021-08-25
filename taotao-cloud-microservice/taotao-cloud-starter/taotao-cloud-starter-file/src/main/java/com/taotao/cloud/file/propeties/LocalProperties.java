@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.file.propeties;
 
-import com.taotao.cloud.file.constant.UploadFileConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,9 +26,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/10/26 09:40
  */
 @RefreshScope
-@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX
-	+ UploadFileConstant.JOINER + UploadFileConstant.DFS_LOCAL)
+@ConfigurationProperties(prefix = LocalProperties.PREFIX)
 public class LocalProperties {
+
+	public static final String PREFIX = "taotao.cloud.file.local";
 
 	public static String sysPath = System.getProperty("user.dir");
 

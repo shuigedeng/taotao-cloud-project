@@ -25,6 +25,8 @@ dependencies {
     api "io.swagger.core.v3:swagger-models:2.1.7"
     api 'io.swagger.core.v3:swagger-annotations:2.1.7'
 
+    api 'com.thoughtworks.xstream:xstream:1.4.17'
+
     api 'org.springframework:spring-core'
     api 'org.springframework:spring-tx'
     api 'org.springframework:spring-context'

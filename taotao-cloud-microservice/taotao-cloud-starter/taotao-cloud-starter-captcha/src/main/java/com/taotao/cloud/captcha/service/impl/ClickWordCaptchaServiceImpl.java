@@ -1,12 +1,27 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.captcha.service.impl;
 
 
-import com.taotao.cloud.captcha.model.common.CaptchaTypeEnum;
-import com.taotao.cloud.captcha.model.common.Const;
-import com.taotao.cloud.captcha.model.common.RepCodeEnum;
-import com.taotao.cloud.captcha.model.common.ResponseModel;
-import com.taotao.cloud.captcha.model.vo.CaptchaVO;
-import com.taotao.cloud.captcha.model.vo.PointVO;
+import com.taotao.cloud.captcha.model.CaptchaTypeEnum;
+import com.taotao.cloud.captcha.model.CaptchaVO;
+import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.PointVO;
+import com.taotao.cloud.captcha.model.RepCodeEnum;
+import com.taotao.cloud.captcha.model.ResponseModel;
 import com.taotao.cloud.captcha.util.AESUtil;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.captcha.util.JsonUtil;
@@ -26,8 +41,10 @@ import java.util.Set;
 
 /**
  * 点选文字验证码
- * <p>
- * Created by raodeming on 2019/12/25.
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 16:51
  */
 public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 
@@ -46,14 +63,14 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	public void init(Properties config) {
 		super.init(config);
 		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE,
-				"SourceHanSansCN-Normal.otf");
+			"SourceHanSansCN-Normal.otf");
 		try {
 			if (clickWordFontStr.toLowerCase().endsWith(".ttf")
-					|| clickWordFontStr.toLowerCase().endsWith(".ttc")
-					|| clickWordFontStr.toLowerCase().endsWith(".otf")) {
+				|| clickWordFontStr.toLowerCase().endsWith(".ttc")
+				|| clickWordFontStr.toLowerCase().endsWith(".otf")) {
 				this.clickWordFont = Font.createFont(Font.TRUETYPE_FONT,
-								getClass().getResourceAsStream("/fonts/" + clickWordFontStr))
-						.deriveFont(Font.BOLD, HAN_ZI_SIZE);
+						getClass().getResourceAsStream("/fonts/" + clickWordFontStr))
+					.deriveFont(Font.BOLD, HAN_ZI_SIZE);
 			} else {
 				this.clickWordFont = new Font(clickWordFontStr, Font.BOLD, HAN_ZI_SIZE);
 			}
@@ -80,7 +97,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		CaptchaVO imageData = getImageData(bufferedImage);
 		if (imageData == null
-				|| StringUtils.isBlank(imageData.getOriginalImageBase64())) {
+			|| StringUtils.isBlank(imageData.getOriginalImageBase64())) {
 			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_ERROR);
 		}
 		return ResponseModel.successData(imageData);
@@ -131,9 +148,9 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		for (int i = 0; i < point.size(); i++) {
 			if (point.get(i).x - HAN_ZI_SIZE > point1.get(i).x
-					|| point1.get(i).x > point.get(i).x + HAN_ZI_SIZE
-					|| point.get(i).y - HAN_ZI_SIZE > point1.get(i).y
-					|| point1.get(i).y > point.get(i).y + HAN_ZI_SIZE) {
+				|| point1.get(i).x > point.get(i).x + HAN_ZI_SIZE
+				|| point.get(i).y - HAN_ZI_SIZE > point1.get(i).y
+				|| point1.get(i).y > point.get(i).y + HAN_ZI_SIZE) {
 				afterValidateFail(captchaVO);
 				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_COORDINATE_ERROR);
 			}
@@ -143,7 +160,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		String value = null;
 		try {
 			value = AESUtil.aesEncrypt(captchaVO.getToken().concat("---").concat(pointJson),
-					secretKey);
+				secretKey);
 		} catch (Exception e) {
 			LogUtil.error("AES加密失败", e);
 			afterValidateFail(captchaVO);
@@ -151,7 +168,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		String secondKey = String.format(REDIS_SECOND_CAPTCHA_KEY, value);
 		CaptchaServiceFactory.getCache(cacheType)
-				.set(secondKey, captchaVO.getToken(), EXPIRESIN_THREE);
+			.set(secondKey, captchaVO.getToken(), EXPIRESIN_THREE);
 		captchaVO.setResult(true);
 		captchaVO.resetClientFlag();
 		return ResponseModel.successData(captchaVO);
@@ -171,7 +188,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		try {
 			String codeKey = String.format(REDIS_SECOND_CAPTCHA_KEY,
-					captchaVO.getCaptchaVerification());
+				captchaVO.getCaptchaVerification());
 			if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
 				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
 			}
@@ -240,7 +257,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 			//随机字体颜色
 			if (isFontColorRandom()) {
 				backgroundGraphics.setColor(new Color(RandomUtils.getRandomInt(1, 255),
-						RandomUtils.getRandomInt(1, 255), RandomUtils.getRandomInt(1, 255)));
+					RandomUtils.getRandomInt(1, 255), RandomUtils.getRandomInt(1, 255)));
 			} else {
 				backgroundGraphics.setColor(Color.BLACK);
 			}
@@ -261,7 +278,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		backgroundGraphics.setFont(waterMarkFont);
 		backgroundGraphics.setColor(Color.white);
 		backgroundGraphics.drawString(waterMark, width - getEnOrChLength(waterMark),
-				height - (HAN_ZI_SIZE / 2) + 7);
+			height - (HAN_ZI_SIZE / 2) + 7);
 
 		//创建合并图片
 		BufferedImage combinedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -269,7 +286,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		combinedGraphics.drawImage(backgroundImage, 0, 0, null);
 
 		dataVO.setOriginalImageBase64(
-				ImageUtils.getImageToBase64Str(backgroundImage).replaceAll("\r|\n", ""));
+			ImageUtils.getImageToBase64Str(backgroundImage).replaceAll("\r|\n", ""));
 		//pointList信息不传到前端，只做后端check校验
 		//dataVO.setPointList(pointList);
 		dataVO.setWordList(wordList);
@@ -278,7 +295,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		//将坐标信息存入redis中
 		String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
 		CaptchaServiceFactory.getCache(cacheType)
-				.set(codeKey, JsonUtil.toJSONString(pointList), EXPIRESIN_SECONDS);
+			.set(codeKey, JsonUtil.toJSONString(pointList), EXPIRESIN_SECONDS);
 //        base64StrToImage(getImageToBase64Str(backgroundImage), "D:\\点击.png");
 		return dataVO;
 	}
@@ -306,7 +323,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @return
 	 */
 	private static PointVO randomWordPoint(int imageWidth, int imageHeight, int wordSortIndex,
-			int wordCount) {
+		int wordCount) {
 		int avgWidth = imageWidth / (wordCount + 1);
 		int x, y;
 		if (avgWidth < HAN_ZI_SIZE_HALF) {
@@ -314,10 +331,10 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		} else {
 			if (wordSortIndex == 0) {
 				x = RandomUtils.getRandomInt(1 + HAN_ZI_SIZE_HALF,
-						avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
+					avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
 			} else {
 				x = RandomUtils.getRandomInt(avgWidth * wordSortIndex + HAN_ZI_SIZE_HALF,
-						avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
+					avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
 			}
 		}
 		y = RandomUtils.getRandomInt(HAN_ZI_SIZE, imageHeight - HAN_ZI_SIZE);

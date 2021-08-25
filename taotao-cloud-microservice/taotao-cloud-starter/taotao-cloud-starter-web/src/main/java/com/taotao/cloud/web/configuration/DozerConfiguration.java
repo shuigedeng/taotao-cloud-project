@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.configuration;
 
 import com.github.dozermapper.core.Mapper;
@@ -7,6 +22,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -17,7 +33,10 @@ import org.springframework.context.annotation.Bean;
 /**
  * Dozer配置
  *
- * @link http://dozer.sourceforge.net/documentation/usage.html http://www.jianshu.com/p/bf8f0e8aee23
+ * @author shuigedeng
+ * @version 1.0.0
+ * @see <a href="http://dozer.sourceforge.net/documentation/usage.html">http://www.jianshu.com/p/bf8f0e8aee23</a>
+ * @since 2021/8/24 23:44
  */
 @ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
 @ConditionalOnMissingBean(Mapper.class)
@@ -26,11 +45,6 @@ public class DozerConfiguration {
 
 	private final DozerProperties properties;
 
-	/**
-	 * Constructor for creating auto configuration.
-	 *
-	 * @param properties properties
-	 */
 	public DozerConfiguration(DozerProperties properties) {
 		this.properties = properties;
 	}
@@ -40,24 +54,25 @@ public class DozerConfiguration {
 		return new DozerHelper(mapper);
 	}
 
-	/**
-	 * Creates default Dozer mapper
-	 *
-	 * @return Dozer mapper
-	 * @throws IOException if there is an exception during initialization.
-	 */
 	@Bean
 	public DozerBeanMapperFactoryBean dozerMapper() throws IOException {
 		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
 		// 官方这样子写，没法用 匹配符！
-		//factoryBean.setMappingFiles(properties.getMappingFiles());
+		// factoryBean.setMappingFiles(properties.getMappingFiles());
 		factoryBean.setMappingFiles(properties.resolveMapperLocations());
 		return factoryBean;
 	}
 
-	public class DozerHelper {
+	/**
+	 * DozerHelper
+	 *
+	 * @version 1.0.0
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:45
+	 */
+	public static class DozerHelper {
 
-		private Mapper mapper;
+		private final Mapper mapper;
 
 		public DozerHelper(Mapper mapper) {
 			this.mapper = mapper;
@@ -67,14 +82,6 @@ public class DozerConfiguration {
 			return this.mapper;
 		}
 
-		/**
-		 * Constructs new instance of destinationClass and performs mapping between from source
-		 *
-		 * @param source
-		 * @param destinationClass
-		 * @param <T>
-		 * @return
-		 */
 		public <T> T map(Object source, Class<T> destinationClass) {
 			if (source == null) {
 				return null;
@@ -92,12 +99,6 @@ public class DozerConfiguration {
 			return mapper.map(source, destinationClass);
 		}
 
-		/**
-		 * Performs mapping between source and destination objects
-		 *
-		 * @param source
-		 * @param destination
-		 */
 		public void map(Object source, Object destination) {
 			if (source == null) {
 				return;
@@ -105,15 +106,6 @@ public class DozerConfiguration {
 			mapper.map(source, destination);
 		}
 
-		/**
-		 * Constructs new instance of destinationClass and performs mapping between from source
-		 *
-		 * @param source
-		 * @param destinationClass
-		 * @param mapId
-		 * @param <T>
-		 * @return
-		 */
 		public <T> T map(Object source, Class<T> destinationClass, String mapId) {
 			if (source == null) {
 				return null;
@@ -121,13 +113,6 @@ public class DozerConfiguration {
 			return mapper.map(source, destinationClass, mapId);
 		}
 
-		/**
-		 * Performs mapping between source and destination objects
-		 *
-		 * @param source
-		 * @param destination
-		 * @param mapId
-		 */
 		public void map(Object source, Object destination, String mapId) {
 			if (source == null) {
 				return;
@@ -135,29 +120,19 @@ public class DozerConfiguration {
 			mapper.map(source, destination, mapId);
 		}
 
-		/**
-		 * 将集合转成集合 List<A> -->  List<B>
-		 *
-		 * @param sourceList       源集合
-		 * @param destinationClass 待转类型
-		 * @param <T>
-		 * @return
-		 */
 		public <T, E> List<T> mapList(Collection<E> sourceList, Class<T> destinationClass) {
 			return mapPage(sourceList, destinationClass);
 		}
-
 
 		public <T, E> List<T> mapPage(Collection<E> sourceList, Class<T> destinationClass) {
 			if (sourceList == null || sourceList.isEmpty() || destinationClass == null) {
 				return Collections.emptyList();
 			}
-			List<T> destinationList = sourceList.parallelStream()
-				.filter(item -> item != null)
+
+			return sourceList.parallelStream()
+				.filter(Objects::nonNull)
 				.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
 				.collect(Collectors.toList());
-
-			return destinationList;
 		}
 
 		public <T, E> Set<T> mapSet(Collection<E> sourceList, Class<T> destinationClass) {

@@ -23,7 +23,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Limit
+ * 限流
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 23:36
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

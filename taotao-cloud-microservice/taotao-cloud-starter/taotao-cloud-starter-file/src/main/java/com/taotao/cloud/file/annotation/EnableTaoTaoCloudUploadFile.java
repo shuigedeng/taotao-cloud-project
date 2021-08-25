@@ -15,13 +15,11 @@
  */
 package com.taotao.cloud.file.annotation;
 
-import com.taotao.cloud.file.component.UploadFileImportSelector;
-import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.configuration.FileAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -33,12 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@ConditionalOnProperty(
-	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
-	name = UploadFileConstant.ENABLED,
-	havingValue = UploadFileConstant.TRUE
-)
-@Import({UploadFileImportSelector.class})
+@Import({FileAutoConfiguration.class})
 public @interface EnableTaoTaoCloudUploadFile {
 
 }

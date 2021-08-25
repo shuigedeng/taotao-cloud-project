@@ -27,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 
@@ -43,6 +44,7 @@ public class HttpClientConfiguration {
 	 */
 	@Order(500)
 	@Bean
+	@LoadBalanced
 	@ConditionalOnProperty(prefix = RestTemplateProperties.PREFIX, name = "enabled", havingValue = "true")
 	public HttpClient httpClient(RestTemplateProperties restTemplateProperties) {
 		Registry<ConnectionSocketFactory> registry = RegistryBuilder

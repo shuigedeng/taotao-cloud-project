@@ -15,92 +15,24 @@
  */
 package com.taotao.cloud.file.configuration;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractUploadFile;
-import com.taotao.cloud.file.constant.UploadFileConstant;
-import com.taotao.cloud.file.exception.UploadFileException;
-import com.taotao.cloud.file.pojo.UploadFileInfo;
+import com.taotao.cloud.file.propeties.FileProperties;
 import com.taotao.cloud.file.propeties.LocalProperties;
-import com.taotao.cloud.file.util.FileUtil;
-import java.io.File;
+import com.taotao.cloud.file.service.UploadFileService;
+import com.taotao.cloud.file.service.impl.LocalUploadFileServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.Assert;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(
-	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
-	name = UploadFileConstant.TYPE,
-	havingValue = UploadFileConstant.DFS_LOCAL
-)
+@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "LOCAL")
 public class LocalAutoConfiguration {
 
-	private final LocalProperties properties;
-
-	public LocalAutoConfiguration(LocalProperties properties) {
-		super();
-		Assert.notNull(properties, "LocalProperties为null");
-		this.properties = properties;
-	}
-
 	@Bean
-	public LocalUploadFile fileUpload() {
-		return new LocalUploadFile();
+	public UploadFileService fileUpload(LocalProperties properties) {
+		return new LocalUploadFileServiceImpl(properties);
 	}
 
-	public class LocalUploadFile extends AbstractUploadFile {
-
-		@Override
-		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
-			try {
-				String filePath = properties.getFilePath() + "/" + uploadFileInfo.getName();
-				String s = FileUtil.saveFile(file, filePath);
-				if (s == null) {
-					throw new UploadFileException("[local]文件上传失败");
-				}
-				uploadFileInfo.setUrl(uploadFileInfo.getName());
-				return uploadFileInfo;
-			} catch (Exception e) {
-				LogUtil.error("[local]文件上传失败:", e);
-				throw new UploadFileException("[local]文件上传失败");
-			}
-		}
-
-		@Override
-		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
-			try {
-				String filePath = properties.getFilePath() + "/" + uploadFileInfo.getName();
-				File newFile = cn.hutool.core.io.FileUtil.newFile(filePath);
-				File copy = cn.hutool.core.io.FileUtil.copy(file, newFile, true);
-				if (copy == null) {
-					throw new UploadFileException("[local]文件上传失败");
-				}
-				uploadFileInfo.setUrl(uploadFileInfo.getName());
-				return uploadFileInfo;
-			} catch (Exception e) {
-				LogUtil.error("[local]文件上传失败:", e);
-				throw new UploadFileException("[local]文件上传失败");
-			}
-		}
-
-		@Override
-		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
-			try {
-				String filePath = properties.getFilePath() + uploadFileInfo.getName();
-				boolean b = FileUtil.deleteFile(filePath);
-				if (!b) {
-					throw new UploadFileException("[local]文件删除失败");
-				}
-			} catch (Exception e) {
-				LogUtil.error("[local]文件删除失败:", e);
-				throw new UploadFileException("[local]文件删除失败");
-			}
-			return uploadFileInfo;
-		}
-	}
 }

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.file.propeties;
 
-import com.taotao.cloud.file.constant.UploadFileConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,8 +26,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/10/26 09:39
  */
 @RefreshScope
-@ConfigurationProperties(prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX)
+@ConfigurationProperties(prefix = FileProperties.PREFIX)
 public class FileProperties {
+
+	public static final String PREFIX = "taotao.cloud.file";
 
 	/**
 	 * 是否开启
@@ -36,9 +37,54 @@ public class FileProperties {
 	private Boolean enabled = false;
 
 	/**
-	 * 类型
+	 * 存储类型
 	 */
-	private String type = UploadFileConstant.DFS_ALIYUN;
+	private DFSTypeEnum type = DFSTypeEnum.ALIYUN;
+
+	/**
+	 * 存储类型
+	 *
+	 * @author shuigedeng
+	 * @version 1.0.0
+	 * @since 2020/4/30 10:25
+	 */
+	public enum DFSTypeEnum {
+		/**
+		 * 阿里云存储
+		 */
+		ALIYUN,
+		/**
+		 * 腾讯云存储
+		 */
+		QCLOUD,
+		/**
+		 * 七牛云存储
+		 */
+		QINIU,
+		/**
+		 * fastdfs存储
+		 */
+		FASTDFS,
+		/**
+		 * nginx存储
+		 */
+		NGINX,
+		/**
+		 * 本地存储
+		 */
+		LOCAL,
+		/**
+		 * ftp存储
+		 */
+		FTP,
+		/**
+		 * 又拍云存储
+		 */
+		UPYUN;
+
+
+	}
+
 
 	public Boolean getEnabled() {
 		return enabled;
@@ -48,11 +94,11 @@ public class FileProperties {
 		this.enabled = enabled;
 	}
 
-	public String getType() {
+	public DFSTypeEnum getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(DFSTypeEnum type) {
 		this.type = type;
 	}
 }

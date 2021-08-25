@@ -39,6 +39,5 @@ public class AuditorBean implements AuditorAware<Long> {
 		} catch (Exception e) {
 			return Optional.empty();
 		}
-
 	}
 }

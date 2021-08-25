@@ -15,10 +15,6 @@
  */
 package com.taotao.cloud.oauth2.biz.config;
 
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.ACCESS_TOKEN_TIME_TO_LIVE;
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REFRESH_TOKEN_TIME_TO_LIVE;
-import static org.springframework.security.oauth2.server.authorization.config.TokenSettings.REUSE_REFRESH_TOKENS;
-
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -31,7 +27,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,7 +41,9 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -55,7 +52,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * @author Daniel Garnier-Moiroux
  */
 @EnableJpaAuditing
-@EnableJpaRepositories(basePackages = "com.example.springjdbcdemo.infrastruction")
+//@EnableJpaRepositories(basePackages = "com.example.springjdbcdemo.infrastruction")
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
 
@@ -96,26 +93,26 @@ public class AuthorizationServerConfig {
 			.scope(OidcScopes.OPENID)
 			.scope("message.read")
 			.scope("message.write")
-			.clientSettings(clientSettings -> clientSettings.requireUserConsent(true))
-			.tokenSettings(tokenSettings -> {
-				tokenSettings
-					.settings(settings -> {
-						settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(40000));
-						settings.put(REUSE_REFRESH_TOKENS, true);
-						settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofMinutes(60000));
-					});
-			})
+			.clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+			.tokenSettings(TokenSettings.builder()
+				.accessTokenTimeToLive(Duration.ofMinutes(40000))
+				.reuseRefreshTokens(true)
+				.refreshTokenTimeToLive(Duration.ofMinutes(60000))
+				.build()
+			)
 			.build();
 		return new InMemoryRegisteredClientRepository(registeredClient);
 	}
 
 	@Bean
-	public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+	public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate,
+		RegisteredClientRepository registeredClientRepository) {
 		return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
 	}
 
 	@Bean
-	public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+	public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate,
+		RegisteredClientRepository registeredClientRepository) {
 		return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
 	}
 
@@ -134,11 +131,12 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	public ProviderSettings providerSettings() {
-		return new ProviderSettings()
+		return ProviderSettings.builder()
 			.authorizationEndpoint("http://127.0.0.1:9998/oauth2/authorize")
 			.tokenEndpoint("http://127.0.0.1:9998/oauth2/token")
 			.jwkSetEndpoint("http://127.0.0.1:9998/oauth2/jwks")
-			.issuer("http://127.0.0.1:9998");
+			.issuer("http://127.0.0.1:9998")
+			.build();
 	}
 
 //	@Bean

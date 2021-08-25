@@ -1,6 +1,3 @@
-bootJar.enabled = true
-jar.enabled = true
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
@@ -22,8 +19,6 @@ configurations {
         }
 
         exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
-        exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
     }
 }
 

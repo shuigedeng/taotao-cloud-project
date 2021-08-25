@@ -23,7 +23,9 @@ import org.xnio.XnioWorker;
 /**
  * Undertow http2 h2c 配置，对 servlet 开启
  *
+ * @version 1.0.0
  * @author shuigedeng
+ * @since 2021/8/24 23:48
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(Undertow.class)
@@ -32,8 +34,6 @@ public class UndertowHttp2Configuration {
 
 	/**
 	 * 实例化UndertowServerFactoryCustomizer，解决undertow启动提示warn的问题
-	 *
-	 * @return UndertowServerFactoryCustomizer
 	 */
 	@Bean
 	public UndertowServerFactoryCustomizer undertowServerFactoryCustomizer() {
@@ -42,8 +42,6 @@ public class UndertowHttp2Configuration {
 
 	/**
 	 * 解决undertow警告Buffer pool was not set on WebSocketDeploymentInfo
-	 *
-	 * @author shuigedeng
 	 */
 	public class UndertowServerFactoryCustomizer implements
 		WebServerFactoryCustomizer<UndertowServletWebServerFactory> {

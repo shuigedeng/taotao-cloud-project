@@ -1,5 +1,19 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.base.controller;
-
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -10,9 +24,9 @@ import com.taotao.cloud.web.base.service.SuperService;
 /**
  * 基础接口
  *
- * @param <Entity> 实体
- * @author zuihou
- * @date 2020年03月07日21:56:32
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/25 08:22
  */
 public interface BaseController<Entity> {
 

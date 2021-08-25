@@ -1,9 +1,24 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.captcha.service.impl;
 
-import com.taotao.cloud.captcha.model.common.Const;
-import com.taotao.cloud.captcha.model.common.RepCodeEnum;
-import com.taotao.cloud.captcha.model.common.ResponseModel;
-import com.taotao.cloud.captcha.model.vo.CaptchaVO;
+import com.taotao.cloud.captcha.model.CaptchaVO;
+import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.RepCodeEnum;
+import com.taotao.cloud.captcha.model.ResponseModel;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.AESUtil;
@@ -20,6 +35,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Properties;
 
+/**
+ * AbstractCaptchaService
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 16:50
+ */
 public abstract class AbstractCaptchaService implements CaptchaService {
 
 	protected static final String IMAGE_TYPE_PNG = "png";
@@ -62,19 +84,19 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		boolean aBoolean = Boolean.parseBoolean(config.getProperty(Const.CAPTCHA_INIT_ORIGINAL));
 		if (!aBoolean) {
 			ImageUtils.cacheImage(config.getProperty(Const.ORIGINAL_PATH_JIGSAW),
-					config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
+				config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
 		}
 		LogUtil.info("--->>>初始化验证码底图<<<---" + captchaType());
 		waterMark = config.getProperty(Const.CAPTCHA_WATER_MARK, "我的水印");
 		slipOffset = config.getProperty(Const.CAPTCHA_SLIP_OFFSET, "5");
 		waterMarkFontStr = config.getProperty(Const.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
 		captchaAesStatus = Boolean.parseBoolean(
-				config.getProperty(Const.CAPTCHA_AES_STATUS, "true"));
+			config.getProperty(Const.CAPTCHA_AES_STATUS, "true"));
 		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "WenQuanZhengHei.ttf");
 		//clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "SourceHanSansCN-Normal.otf");
 		cacheType = config.getProperty(Const.CAPTCHA_CACHETYPE, "local");
 		captchaInterferenceOptions = Integer.parseInt(
-				config.getProperty(Const.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
+			config.getProperty(Const.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
 
 		// 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示，
 		// 通过加载resources下的font字体解决，无需在linux中安装字体
@@ -83,8 +105,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		if (cacheType.equals("local")) {
 			LogUtil.info("初始化local缓存...");
 			CacheUtil.init(
-					Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
-					Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
+				Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
+				Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
 		if (config.getProperty(Const.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
 			LogUtil.info("历史资源清除开关...开启..." + captchaType());
@@ -99,7 +121,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 			if (limitHandler == null) {
 				LogUtil.info("接口分钟内限流开关...开启...");
 				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config,
-						getCacheService(cacheType));
+					getCacheService(cacheType));
 			}
 		}
 	}
@@ -173,7 +195,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		if (limitHandler != null) {
 			// 验证失败 分钟内计数
 			String fails = String.format(FrequencyLimitHandler.LIMIT_KEY, "FAIL",
-					data.getClientUid());
+				data.getClientUid());
 			CaptchaCacheService cs = getCacheService(cacheType);
 			if (!cs.exists(fails)) {
 				cs.set(fails, "1", 60);
@@ -189,11 +211,11 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	private void loadWaterMarkFont() {
 		try {
 			if (waterMarkFontStr.toLowerCase().endsWith(".ttf") || waterMarkFontStr.toLowerCase()
-					.endsWith(".ttc")
-					|| waterMarkFontStr.toLowerCase().endsWith(".otf")) {
+				.endsWith(".ttc")
+				|| waterMarkFontStr.toLowerCase().endsWith(".otf")) {
 				this.waterMarkFont = Font.createFont(Font.TRUETYPE_FONT,
-								getClass().getResourceAsStream("/fonts/" + waterMarkFontStr))
-						.deriveFont(Font.BOLD, HAN_ZI_SIZE / 2);
+						getClass().getResourceAsStream("/fonts/" + waterMarkFontStr))
+					.deriveFont(Font.BOLD, HAN_ZI_SIZE / 2);
 			} else {
 				this.waterMarkFont = new Font(waterMarkFontStr, Font.BOLD, HAN_ZI_SIZE / 2);
 			}

@@ -5,9 +5,9 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dfs.biz.entity.File;
 import com.taotao.cloud.dfs.biz.repository.FileRepository;
 import com.taotao.cloud.dfs.biz.service.FileService;
-import com.taotao.cloud.file.base.UploadFile;
+import com.taotao.cloud.file.service.UploadFileService;
 import com.taotao.cloud.file.exception.UploadFileException;
-import com.taotao.cloud.file.pojo.UploadFileInfo;
+import com.taotao.cloud.file.model.UploadFileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,12 +26,12 @@ public class FileServiceImpl implements FileService {
 	@Autowired
 	private FileRepository fileRepository;
 	@Autowired
-	private UploadFile uploadFile;
+	private UploadFileService uploadFileService;
 
 	@Override
 	public File upload(MultipartFile file) {
 		try {
-			UploadFileInfo upload = uploadFile.upload(file);
+			UploadFileInfo upload = uploadFileService.upload(file);
 
 			// 添加文件数据
 			return new File();

@@ -16,40 +16,25 @@
 package com.taotao.cloud.file.configuration;
 
 import com.UpYun;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.file.base.AbstractUploadFile;
-import com.taotao.cloud.file.constant.UploadFileConstant;
-import com.taotao.cloud.file.exception.UploadFileException;
-import com.taotao.cloud.file.pojo.UploadFileInfo;
+import com.taotao.cloud.file.propeties.FileProperties;
 import com.taotao.cloud.file.propeties.UpYunProperties;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.HashMap;
+import com.taotao.cloud.file.service.UploadFileService;
+import com.taotao.cloud.file.service.impl.UpYunUploadFileServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.util.Assert;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(
-	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
-	name = UploadFileConstant.TYPE,
-	havingValue = UploadFileConstant.DFS_UPYUN
-)
+@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "UPYUN")
 public class UpYunAutoConfiguration {
 
 	private final UpYunProperties properties;
 
 	public UpYunAutoConfiguration(UpYunProperties properties) {
-		super();
-		Assert.notNull(properties, "UpYunProperties为null");
 		this.properties = properties;
 	}
 
@@ -67,95 +52,9 @@ public class UpYunAutoConfiguration {
 	}
 
 	@Bean
-	public UpYunUploadFile fileUpload(UpYun upyun) {
-		return new UpYunUploadFile(upyun);
+	public UploadFileService fileUpload(UpYun upyun) {
+		return new UpYunUploadFileServiceImpl(upyun, properties);
 	}
 
-	public class UpYunUploadFile extends AbstractUploadFile {
 
-		private final UpYun upyun;
-
-		public UpYunUploadFile(UpYun upyun) {
-			super();
-			this.upyun = upyun;
-		}
-
-		@Override
-		protected UploadFileInfo uploadFile(MultipartFile file, UploadFileInfo uploadFileInfo) {
-			boolean bFlag;
-			try {
-				InputStream inputStream = file.getInputStream();
-				String fileName = uploadFileInfo.getName();
-				String filePath =
-					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
-						.md5(fileName);
-				byte[] buffer;
-
-				ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
-				byte[] b = new byte[1000];
-				int n;
-				while ((n = inputStream.read(b)) != -1) {
-					bos.write(b, 0, n);
-				}
-				inputStream.close();
-				bos.close();
-				buffer = bos.toByteArray();
-
-				bFlag = upyun.writeFile(filePath, buffer);
-				uploadFileInfo.setUrl(filePath);
-			} catch (Exception e) {
-				LogUtil.error("[UpYun]文件上传失败:", e);
-				throw new UploadFileException("[UpYun]文件上传失败");
-			}
-			if (!bFlag) {
-				throw new UploadFileException("[UpYun]文件上传失败");
-			}
-			return uploadFileInfo;
-		}
-
-		@Override
-		protected UploadFileInfo uploadFile(File file, UploadFileInfo uploadFileInfo) {
-			boolean bFlag;
-			try {
-				InputStream inputStream = new FileInputStream(file);
-				String fileName = uploadFileInfo.getName();
-				String filePath =
-					properties.getDomain() + "/" + properties.getBucketName() + "/" + UpYun
-						.md5(fileName);
-				byte[] buffer;
-
-				ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
-				byte[] b = new byte[1000];
-				int n;
-				while ((n = inputStream.read(b)) != -1) {
-					bos.write(b, 0, n);
-				}
-				inputStream.close();
-				bos.close();
-				buffer = bos.toByteArray();
-
-				bFlag = upyun.writeFile(filePath, buffer);
-				uploadFileInfo.setUrl(filePath);
-			} catch (Exception e) {
-				LogUtil.error("[UpYun]文件上传失败:", e);
-				throw new UploadFileException("[UpYun]文件上传失败");
-			}
-
-			if (!bFlag) {
-				throw new UploadFileException("[UpYun]文件上传失败");
-			}
-			return uploadFileInfo;
-		}
-
-		@Override
-		public UploadFileInfo delete(UploadFileInfo uploadFileInfo) {
-			try {
-				upyun.deleteFile(uploadFileInfo.getUrl(), new HashMap<>());
-			} catch (Exception e) {
-				LogUtil.error("[UpYun]文件删除失败:", e);
-				throw new UploadFileException("[UpYun]文件删除失败");
-			}
-			return uploadFileInfo;
-		}
-	}
 }

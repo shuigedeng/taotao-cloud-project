@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.template;
 
 import com.taotao.cloud.common.utils.RequestUtil;
@@ -12,17 +27,42 @@ import org.springframework.util.StringUtils;
 
 /**
  * 模板访问java代码的注入类 一般通过Html或者tpl访问 如:Html.request()或者tpl.request()
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 23:14
  */
 public class TemplateProvider {
 
+	/**
+	 * request
+	 *
+	 * @return javax.servlet.http.HttpServletRequest
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:14
+	 */
 	public HttpServletRequest request() {
 		return RequestUtil.getRequest();
 	}
 
+	/**
+	 * response
+	 *
+	 * @return javax.servlet.http.HttpServletResponse
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:14
+	 */
 	public HttpServletResponse response() {
 		return RequestUtil.getResponse();
 	}
 
+	/**
+	 * session
+	 *
+	 * @return javax.servlet.http.HttpSession
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:14
+	 */
 	public HttpSession session() {
 		return RequestUtil.getRequest().getSession();
 	}
@@ -30,9 +70,10 @@ public class TemplateProvider {
 	/**
 	 * 设置参数 request.setAttribute(key,value)
 	 *
-	 * @param key
-	 * @param value
-	 * @return
+	 * @param key   key
+	 * @param value value
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:14
 	 */
 	public void setattr(String key, Object value) {
 		request().setAttribute(key, value);
@@ -42,8 +83,10 @@ public class TemplateProvider {
 	 * 获取参数 默认request.getAttribute(key) 支持key,也支持public字段表达式多层数据获取（通过反射深度查找）；格式:
 	 * key.字段(或public).字段(或public)
 	 *
-	 * @param key
-	 * @return
+	 * @param key key
+	 * @return java.lang.Object
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:14
 	 */
 	public Object getattr(String key) {
 		if (key.contains(".")) {
@@ -74,14 +117,15 @@ public class TemplateProvider {
 		}
 	}
 
-
 	/**
 	 * where 三元运算符
 	 *
 	 * @param istrue   条件bool值
 	 * @param trueObj  true 结果
 	 * @param falseObj false结果
-	 * @return
+	 * @return java.lang.Object
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:15
 	 */
 	public Object where(Boolean istrue, Object trueObj, Object falseObj) {
 		return istrue ? trueObj : falseObj;
@@ -92,9 +136,11 @@ public class TemplateProvider {
 	 *
 	 * @param str    字符串
 	 * @param maxlen 最大长度
-	 * @return
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:15
 	 */
-	public String cutstring(String str, int maxlen) {
+	public String cutString(String str, int maxlen) {
 		if (StringUtils.isEmpty(str)) {
 			return str;
 		}
@@ -107,11 +153,13 @@ public class TemplateProvider {
 	/**
 	 * 日期字符串
 	 *
-	 * @param date
-	 * @param format
-	 * @return
+	 * @param date   date
+	 * @param format format
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:15
 	 */
-	public String datestring(Date date, String format) {
+	public String dateString(Date date, String format) {
 		if (date == null) {
 			return "";
 		}
@@ -121,15 +169,17 @@ public class TemplateProvider {
 	/**
 	 * 默认打印
 	 *
-	 * @param o
-	 * @return
+	 * @param o o
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:16
 	 */
 	public String print(Object o) {
 		if (o == null) {
 			return "";
 		}
 		if (o instanceof Date) {
-			return datestring((Date) o, "yyyy-MM-dd HH:mm:ss");
+			return dateString((Date) o, "yyyy-MM-dd HH:mm:ss");
 		}
 		return o.toString();
 	}

@@ -1,15 +1,36 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.captcha.service.impl;
 
-
-import com.taotao.cloud.captcha.model.common.Const;
-import com.taotao.cloud.captcha.model.common.RepCodeEnum;
-import com.taotao.cloud.captcha.model.common.ResponseModel;
-import com.taotao.cloud.captcha.model.vo.CaptchaVO;
+import com.taotao.cloud.captcha.model.CaptchaVO;
+import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.RepCodeEnum;
+import com.taotao.cloud.captcha.model.ResponseModel;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.util.StringUtils;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * FrequencyLimitHandler
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 16:51
+ */
 public interface FrequencyLimitHandler {
 
 	String LIMIT_KEY = "AJ.CAPTCHA.REQ.LIMIT-%s-%s";
@@ -86,7 +107,7 @@ public interface FrequencyLimitHandler {
 			cacheService.increment(getKey, 1);
 			// 1分钟内请求次数过多
 			if (Long.valueOf(getCnts) > Long.parseLong(
-					config.getProperty(Const.REQ_GET_MINUTE_LIMIT, "120"))) {
+				config.getProperty(Const.REQ_GET_MINUTE_LIMIT, "120"))) {
 				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_GET_ERROR);
 			}
 
@@ -99,10 +120,10 @@ public interface FrequencyLimitHandler {
 			}
 			// 1分钟内失败5次
 			if (Long.valueOf(failCnts) > Long.parseLong(
-					config.getProperty(Const.REQ_GET_LOCK_LIMIT, "5"))) {
+				config.getProperty(Const.REQ_GET_LOCK_LIMIT, "5"))) {
 				// get接口锁定5分钟
 				cacheService.set(lockKey, "1",
-						Long.valueOf(config.getProperty(Const.REQ_GET_LOCK_SECONDS, "300")));
+					Long.valueOf(config.getProperty(Const.REQ_GET_LOCK_SECONDS, "300")));
 				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LOCK_GET_ERROR);
 			}
 			return null;
@@ -126,7 +147,7 @@ public interface FrequencyLimitHandler {
 			}
 			cacheService.increment(key, 1);
 			if (Long.valueOf(v) > Long.valueOf(
-					config.getProperty(Const.REQ_CHECK_MINUTE_LIMIT, "600"))) {
+				config.getProperty(Const.REQ_CHECK_MINUTE_LIMIT, "600"))) {
 				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_CHECK_ERROR);
 			}
 			return null;
@@ -146,7 +167,7 @@ public interface FrequencyLimitHandler {
 			}
 			cacheService.increment(key, 1);
 			if (Long.valueOf(v) > Long.valueOf(
-					config.getProperty(Const.REQ_VALIDATE_MINUTE_LIMIT, "600"))) {
+				config.getProperty(Const.REQ_VALIDATE_MINUTE_LIMIT, "600"))) {
 				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_VERIFY_ERROR);
 			}
 			return null;

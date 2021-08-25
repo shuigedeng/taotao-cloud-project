@@ -27,6 +27,7 @@ public class ZookeeperAutoConfiguration {
 	public CuratorFramework curatorFramework(ZookeeperProperties property) {
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(property.getBaseSleepTime(),
 			property.getMaxRetries());
+
 		return CuratorFrameworkFactory.builder()
 			.connectString(property.getConnectString())
 			.connectionTimeoutMs(property.getConnectionTimeout())

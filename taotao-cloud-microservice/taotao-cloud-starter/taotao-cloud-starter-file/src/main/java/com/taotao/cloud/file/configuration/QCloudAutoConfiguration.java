@@ -15,28 +15,30 @@
  */
 package com.taotao.cloud.file.configuration;
 
-import com.taotao.cloud.file.constant.UploadFileConstant;
+import com.taotao.cloud.file.propeties.FileProperties;
 import com.taotao.cloud.file.propeties.QCloudProperties;
+import com.taotao.cloud.file.service.UploadFileService;
+import com.taotao.cloud.file.service.impl.QCloudUploadFileServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.util.Assert;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(
-	prefix = UploadFileConstant.BASE_UPLOAD_FILE_PREFIX,
-	name = UploadFileConstant.TYPE,
-	havingValue = UploadFileConstant.DFS_QCLOUD
-)
+@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "QCLOUD")
 public class QCloudAutoConfiguration {
 
 	private final QCloudProperties properties;
 
 	public QCloudAutoConfiguration(QCloudProperties properties) {
-		super();
-		Assert.notNull(properties, "QCloudProperties为null");
 		this.properties = properties;
+	}
+
+
+	@Bean
+	public UploadFileService fileUpload() {
+		return new QCloudUploadFileServiceImpl(properties);
 	}
 }

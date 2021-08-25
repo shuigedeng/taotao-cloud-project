@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.data.jpa;
 
+import com.taotao.cloud.data.jpa.properties.TenantProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -24,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@Configuration
+@EnableConfigurationProperties({TenantProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

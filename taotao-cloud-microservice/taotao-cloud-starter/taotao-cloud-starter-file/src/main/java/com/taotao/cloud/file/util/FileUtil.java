@@ -24,7 +24,7 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.file.exception.UploadFileTypeException;
 import com.taotao.cloud.file.exception.UploadFileException;
-import com.taotao.cloud.file.pojo.UploadFileInfo;
+import com.taotao.cloud.file.model.UploadFileInfo;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 

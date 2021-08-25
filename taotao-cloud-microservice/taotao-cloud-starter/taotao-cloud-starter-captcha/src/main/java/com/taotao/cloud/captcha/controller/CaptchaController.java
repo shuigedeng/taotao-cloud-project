@@ -1,13 +1,22 @@
 ///*
-// *Copyright © 2018 anji-plus
-// *安吉加加信息技术有限公司
-// *http://www.anji-plus.com
-// *All rights reserved.
+// * Copyright 2002-2021 the original author or authors.
+// *
+// * Licensed under the Apache License, Version 2.0 (the "License");
+// * you may not use this file except in compliance with the License.
+// * You may obtain a copy of the License at
+// *
+// *      https://www.apache.org/licenses/LICENSE-2.0
+// *
+// * Unless required by applicable law or agreed to in writing, software
+// * distributed under the License is distributed on an "AS IS" BASIS,
+// * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// * See the License for the specific language governing permissions and
+// * limitations under the License.
 // */
 //package com.taotao.cloud.captcha.controller;
 //
-//import com.taotao.cloud.captcha.model.common.ResponseModel;
-//import com.taotao.cloud.captcha.model.vo.CaptchaVO;
+//import com.taotao.cloud.captcha.model.CaptchaVO;
+//import com.taotao.cloud.captcha.model.ResponseModel;
 //import com.taotao.cloud.captcha.service.CaptchaService;
 //import com.taotao.cloud.captcha.util.StringUtils;
 //import javax.servlet.http.HttpServletRequest;
@@ -38,7 +47,7 @@
 //		return captchaService.check(data);
 //	}
 //
-//	//@PostMapping("/verify")
+//	@PostMapping("/verify")
 //	public ResponseModel verify(@RequestBody CaptchaVO data, HttpServletRequest request) {
 //		return captchaService.verification(data);
 //	}

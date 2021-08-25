@@ -65,6 +65,7 @@ buildscript {
 
     repositories {
         mavenLocal()
+
         maven {
             allowInsecureProtocol = true
             url "http://maven.aliyun.com/nexus/content/groups/public/"
@@ -90,9 +91,10 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-//        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
         classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:2.8.0"
+
+//        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
     }
 }
 
@@ -104,9 +106,10 @@ plugins {
     id 'maven-publish'
     id "com.google.cloud.tools.jib" version "2.8.0"
     id "com.github.johnrengelman.shadow" version "6.1.0"
-//    id "org.jetbrains.intellij" version "0.6.5"
     id "com.github.johnrengelman.processes" version "0.5.0"
     id "org.springdoc.openapi-gradle-plugin" version "1.3.0"
+
+//    id "org.jetbrains.intellij" version "0.6.5"
 }
 
 allprojects {
@@ -148,29 +151,10 @@ allprojects {
         }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
-
-        mavenCentral()
     }
 }
 
-configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'idea'
-    apply plugin: 'signing'
-    apply plugin: 'checkstyle'
-    apply plugin: 'maven-publish'
-    apply plugin: 'org.springframework.boot'
-//    apply plugin: "com.github.johnrengelman.shadow"
-    apply plugin: "com.google.cloud.tools.jib"
-    apply plugin: "org.springdoc.openapi-gradle-plugin"
-
-//    apply plugin: "com.taotao.cloud.plugin"
-
-    dependencies {
-        implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
-    }
-
+configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
     task createProperties(dependsOn: processResources) {
         doLast {
             def fileDir = new File("$buildDir/resources/main");
@@ -191,6 +175,25 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     classes {
         dependsOn createProperties
+    }
+}
+
+configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'signing'
+    apply plugin: 'checkstyle'
+    apply plugin: 'maven-publish'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: "com.google.cloud.tools.jib"
+    apply plugin: "org.springdoc.openapi-gradle-plugin"
+
+//    apply plugin: "com.github.johnrengelman.shadow"
+//    apply plugin: "com.taotao.cloud.plugin"
+
+    dependencies {
+        implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
     }
 
     checkstyle {
@@ -256,7 +259,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         repositories {
             maven {
 //                https://repomanage.rdc.aliyun.com/
-                name = "AliyunRepository"
+                name = "Aliyun"
                 if (project.version.endsWith('-SNAPSHOT')) {
                     url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
                 } else {
@@ -271,7 +274,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             }
 
             maven {
-                name = "GitHubPackagesRepository"
+                name = "GitHub"
                 url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
                 credentials {
                     username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
@@ -280,7 +283,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             }
 
             maven {
-                name = "SonatypeRepository"
+                name = "Sonatype"
                 if (project.version.endsWith('-SNAPSHOT')) {
                     url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 } else {
@@ -296,8 +299,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
         publications {
             mavenJava(MavenPublication) {
-//                groupId rootProject.group
-                groupId "io.github.shuigedeng"
+                groupId rootProject.group
                 artifactId project.name
                 version rootProject.version
 
@@ -309,27 +311,25 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                 artifact javadocJar
 
                 pom {
-                    name = 'taotao cloud library'
-                    description = 'a concise description of taotao cloud library'
+                    name = project.name
+                    description = project.name
                     url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
 
-//                    properties = [
-//                            "taotao": "anotherValue",
-//                            "prop.with.dots": "anotherValue",
-//                    ]
                     licenses {
                         license {
                             name = 'The Apache License, Version 2.0'
                             url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                         }
                     }
+
                     developers {
                         developer {
-                            id = 'taotao'
-                            name = 'taotao'
+                            id = 'dengtao'
+                            name = 'dengtao'
                             email = '981376577@qq.com'
                         }
                     }
+
                     scm {
                         connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
                         developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'

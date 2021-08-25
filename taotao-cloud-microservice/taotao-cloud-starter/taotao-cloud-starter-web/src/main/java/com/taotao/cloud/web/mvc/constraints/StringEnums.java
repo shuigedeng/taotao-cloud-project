@@ -28,19 +28,21 @@ import javax.validation.Payload;
  * StringEnums
  *
  * @author shuigedeng
- * @since 2020/10/14 13:39
  * @version 1.0.0
+ * @since 2020/10/14 13:39
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
+	ElementType.CONSTRUCTOR, ElementType.PARAMETER})
 @Constraint(validatedBy = StringEnumsValidator.class)
 public @interface StringEnums {
-    String[] enumList() default {};
 
-    String message() default "";
+	String[] enumList() default {};
 
-    Class<?>[] groups() default {};
+	String message() default "";
 
-    Class<? extends Payload>[] payload() default {};
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.web.util;
 
 import cn.hutool.core.collection.CollectionUtil;
@@ -16,8 +31,9 @@ import org.owasp.validator.html.ScanException;
 /**
  * XSS 工具类， 用于过滤特殊字符
  *
- * @author zuihou
- * @date 2019/07/02
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/24 22:48
  */
 public class XssUtil {
 
@@ -84,11 +100,13 @@ public class XssUtil {
 	}
 
 	/**
-	 * 跨站攻击语句过滤 方法
+	 * 跨站攻击语句过滤
 	 *
 	 * @param paramValue           待过滤的参数
 	 * @param ignoreParamValueList 忽略过滤的参数列表
-	 * @return 清理后的字符串
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:48
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList) {
 		AntiSamy antiSamy = new AntiSamy();
@@ -105,9 +123,9 @@ public class XssUtil {
 				str = stripXSSAndSql(str);
 				str = str.replaceAll("&quot;", "\"");
 				str = str.replaceAll("&amp;", "&");
-//                str = str.replaceAll("'", "'");
-//                str = str.replaceAll("'", "＇");
-//                str = str.replaceAll(" ", "*");
+				//str = str.replaceAll("'", "'");
+				//str = str.replaceAll("'", "＇");
+				//str = str.replaceAll(" ", "*");
 				str = str.replaceAll("&lt;", "<");
 				str = str.replaceAll("&gt;", ">");
 				LogUtil.debug("xss filter value after xssClean" + str);
@@ -125,10 +143,12 @@ public class XssUtil {
 	/**
 	 * 过滤形参
 	 *
-	 * @param paramValue
-	 * @param ignoreParamValueList
-	 * @param param
-	 * @return
+	 * @param paramValue           paramValue
+	 * @param ignoreParamValueList ignoreParamValueList
+	 * @param param                param
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:51
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList,
 		String param) {
@@ -143,9 +163,10 @@ public class XssUtil {
 	/**
 	 * xss校验
 	 *
-	 * @param value
-	 * @return
-	 * @author 杨慕义
+	 * @param value value
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:51
 	 */
 	public static String stripXSSAndSql(String value) {
 		if (StrUtil.isBlank(value)) {
@@ -179,16 +200,15 @@ public class XssUtil {
 		return value;
 	}
 
-	public static void main(String[] args) {
-//        System.out.println(stripXSSAndSql("<span style=\"background&#45;color&#58; &#35;e67e23\">减肥啦</span>"));
-//        try {
-//            String url = URLDecoder.decode("<img src=\"http://112.30.98.118:9025/file/1/image/public/202012/20201204160811_mxsroqyxdk.jpg\">", "UTF-8");
-//            System.out.println(url);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-	}
-
+	/**
+	 * isIgnoreParamValue
+	 *
+	 * @param paramValue           paramValue
+	 * @param ignoreParamValueList ignoreParamValueList
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:51
+	 */
 	private static boolean isIgnoreParamValue(String paramValue,
 		List<String> ignoreParamValueList) {
 		if (StrUtil.isBlank(paramValue)) {
@@ -205,4 +225,14 @@ public class XssUtil {
 
 		return false;
 	}
+
+	//public static void main(String[] args) {
+	//    System.out.println(stripXSSAndSql("<span style=\"background&#45;color&#58; &#35;e67e23\">减肥啦</span>"));
+	//    try {
+	//        String url = URLDecoder.decode("<img src=\"http://112.30.98.118:9025/file/1/image/public/202012/20201204160811_mxsroqyxdk.jpg\">", "UTF-8");
+	//        System.out.println(url);
+	//    } catch (UnsupportedEncodingException e) {
+	//        e.printStackTrace();
+	//    }
+	//}
 }

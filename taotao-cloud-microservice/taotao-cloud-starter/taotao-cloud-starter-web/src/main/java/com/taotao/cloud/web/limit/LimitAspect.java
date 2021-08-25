@@ -17,6 +17,7 @@ package com.taotao.cloud.web.limit;
 
 import com.aliyun.oss.common.utils.StringUtils;
 import com.google.common.collect.ImmutableList;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,7 +35,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  *
  * @author shuigedeng
  * @version 1.0.0
- * @RestController public class LimiterController { private static final AtomicInteger
+ * @RestController public class LimiterController
+ * { private static final AtomicInteger
  * ATOMIC_INTEGER_1 = new AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_2 = new
  * AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
  * <p>
@@ -53,17 +55,12 @@ public class LimitAspect {
 
 	private static final String UNKNOWN = "unknown";
 
-	private final RedisTemplate<String, String> limitRedisTemplate;
+	private final RedisRepository redisRepository;
 
-	public LimitAspect(RedisTemplate<String, String> limitRedisTemplate) {
-		this.limitRedisTemplate = limitRedisTemplate;
+	public LimitAspect(RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
 	}
 
-	/**
-	 * @param pjp
-	 * @description 切面
-	 * @date 2020/4/8 13:04
-	 */
 	@Around("execution(public * *(..)) && @annotation(com.taotao.cloud.web.limit.Limit)")
 	public Object interceptor(ProceedingJoinPoint pjp) {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
@@ -75,9 +72,7 @@ public class LimitAspect {
 		int limitPeriod = limitAnnotation.period();
 		int limitCount = limitAnnotation.count();
 
-		/**
-		 * 根据限流类型获取不同的key ,如果不传我们会以方法名作为key
-		 */
+		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
 		switch (limitType) {
 			case IP:
 				key = getIpAddress();
@@ -91,10 +86,11 @@ public class LimitAspect {
 
 		ImmutableList<String> keys = ImmutableList.of(
 			StringUtils.join(limitAnnotation.prefix(), key));
+
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
-			Number count = limitRedisTemplate.execute(redisScript, keys, limitCount, limitPeriod);
+			Number count = redisRepository.getRedisTemplate().execute(redisScript, keys, limitCount, limitPeriod);
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {
@@ -109,8 +105,11 @@ public class LimitAspect {
 	}
 
 	/**
-	 * @description 编写 redis Lua 限流脚本
-	 * @date 2020/4/8 13:24
+	 * redis Lua 限流脚本
+	 *
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:37
 	 */
 	public String buildLuaScript() {
 		StringBuilder lua = new StringBuilder();
@@ -130,10 +129,12 @@ public class LimitAspect {
 		return lua.toString();
 	}
 
-
 	/**
-	 * @description 获取id地址
-	 * @date 2020/4/8 13:24
+	 * 获取ip地址
+	 *
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:37
 	 */
 	public String getIpAddress() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

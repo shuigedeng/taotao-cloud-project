@@ -32,12 +32,6 @@ public class StringToEnumConverterFactory implements ConverterFactory<String, Ba
 
 	private static final Map<Class, Converter> CONVERTERS = MapUtil.newHashMap();
 
-	/**
-	 * 获取一个从 Integer 转化为 T 的转换器，T 是一个泛型，有多个实现
-	 *
-	 * @param targetType 转换后的类型
-	 * @return 返回一个转化器
-	 */
 	@Override
 	public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
 		Converter<String, T> converter = CONVERTERS.get(targetType);

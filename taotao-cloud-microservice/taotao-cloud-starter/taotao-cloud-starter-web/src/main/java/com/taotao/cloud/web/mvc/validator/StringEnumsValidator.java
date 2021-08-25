@@ -47,7 +47,7 @@ public class StringEnumsValidator implements ConstraintValidator<StringEnums, St
 		} else {
 			constraintValidatorContext.disableDefaultConstraintViolation();
 			constraintValidatorContext.buildConstraintViolationWithTemplate(
-				String.format("当前值: [%s] 不在字段范围内,字段典范围为[%s]", value, Arrays.toString(enumList)))
+					String.format("当前值: [%s] 不在字段范围内,字段典范围为[%s]", value, Arrays.toString(enumList)))
 				.addConstraintViolation();
 			return false;
 		}

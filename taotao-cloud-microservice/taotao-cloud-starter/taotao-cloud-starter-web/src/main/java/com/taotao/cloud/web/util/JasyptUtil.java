@@ -22,9 +22,11 @@ import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
+ * JasyptUtil
+ *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/11/13 09:25
+ * @since 2021/8/24 22:59
  */
 public class JasyptUtil {
 
@@ -44,14 +46,38 @@ public class JasyptUtil {
 		}
 	}
 
+	/**
+	 * 编码
+	 *
+	 * @param content content
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:59
+	 */
 	public String encrypt(String content) {
 		return stringEncryptor.encrypt(content);
 	}
 
+	/**
+	 * 解码
+	 *
+	 * @param content content
+	 * @return java.lang.String
+	 * @author shuigedeng
+	 * @since 2021/8/24 22:59
+	 */
 	public String decrypt(String content) {
 		return stringEncryptor.decrypt(content);
 	}
 
+	/**
+	 * 获取StringEncryptor
+	 *
+	 * @param password 密码
+	 * @return org.jasypt.encryption.StringEncryptor
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:00
+	 */
 	public static StringEncryptor getInstance(String password) throws Exception {
 		if (password == null || password.trim().equals("")) {
 			System.out.println("秘钥不能为空！");

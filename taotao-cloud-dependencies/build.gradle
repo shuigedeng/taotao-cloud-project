@@ -13,13 +13,6 @@ dependencies {
     api platform("com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}")
 
     constraints {
-//        api 'ch.vorburger.mariaDB4j:mariaDB4j-springboot:2.4.0'
-//        api 'org.mariadb.jdbc:mariadb-java-client:2.2.5'
-//
-//        api 'org.mockito:mockito-core:2.22.0'
-//        api 'org.mockito:mockito-junit-jupiter:2.22.0'
-//        api 'org.assertj:assertj-core:3.11.1'
-
         api "org.apache.commons:commons-lang3:${commonsVersion}"
         api "org.apache.commons:commons-collections4:${commonsCollections4Version}"
         api "org.apache.httpcomponents:httpclient:${httpcomponentsVersion}"
@@ -90,13 +83,37 @@ dependencies {
         api "io.springfox:springfox-swagger-ui:${swaggerVersion}"
         api "io.springfox:springfox-bean-validators:${swaggerVersion}"
         api "com.github.xiaoymin:knife4j-spring-ui:${knife4jVersion}"
+
+        api "io.github.shuigedeng:taotao-cloud-starter-captcha:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-cloud:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-redis:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-data-jpa:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-dubbo:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-elasticsearch:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-elk:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-encrypt:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-feign:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-file:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-job:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-kafka:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-log:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-mail:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-mongodb:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-openapi:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-oss:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-p6spy:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-pay:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-rabbitmq:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-redis:${project.version}"
+        api "io.github.shuigedeng:taotao-cloud-starter-rocketmq:${project.version}"
     }
 }
+
 publishing {
     repositories {
         maven {
-//                https://repomanage.rdc.aliyun.com/
-            name = "AliyunRepository"
+            name = "Aliyun"
             if (project.version.endsWith('-SNAPSHOT')) {
                 url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
             } else {
@@ -111,7 +128,7 @@ publishing {
         }
 
         maven {
-            name = "GitHubPackagesRepository"
+            name = "GitHub"
             url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
@@ -120,7 +137,7 @@ publishing {
         }
 
         maven {
-            name = "SonatypeRepository"
+            name = "Sonatype"
             if (project.version.endsWith('-SNAPSHOT')) {
                 url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             } else {
@@ -136,40 +153,33 @@ publishing {
 
     publications {
         mavenJava(MavenPublication) {
-//                groupId rootProject.group
-            groupId "io.github.shuigedeng"
+            groupId rootProject.group
             artifactId project.name
             version rootProject.version
 
             //打包类型 war: components.web jar: components.java
             from components.javaPlatform
 
-//                artifact shadowJar
-//            artifact sourcesJar
-//            artifact javadocJar
-
             pom {
-                name = 'taotao cloud library'
-                description = 'a concise description of taotao cloud library'
+                name = project.name
+                description = project.name
                 url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
 
-//                    properties = [
-//                            "taotao": "anotherValue",
-//                            "prop.with.dots": "anotherValue",
-//                    ]
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
+
                 developers {
                     developer {
-                        id = 'taotao'
-                        name = 'taotao'
+                        id = 'dengtao'
+                        name = 'dengtao'
                         email = '981376577@qq.com'
                     }
                 }
+
                 scm {
                     connection = 'scm:git:git@github.com:shuigedeng/taotao-cloud-project.git'
                     developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
@@ -183,37 +193,3 @@ publishing {
 signing {
     sign publishing.publications.mavenJava
 }
-
-//publishing {
-//    repositories {
-//        maven {
-////                https://repomanage.rdc.aliyun.com/
-//            if (project.version.endsWith('-SNAPSHOT')) {
-//                url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
-//            } else {
-//                url = "https://repo.rdc.aliyun.com/repository/136936-release-reey0l/"
-//            }
-//
-//            allowInsecureProtocol = true
-//            credentials {
-//                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-//                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-//            }
-//        }
-//
-//        maven {
-//            name = "GitHubPackages"
-//            url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
-//            credentials {
-//                username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
-//                password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
-//            }
-//        }
-//    }
-//
-//    publications {
-//        versionPlatform(MavenPublication) {
-//            from components.javaPlatform
-//        }
-//    }
-//}

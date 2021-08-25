@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.sms;
 
-import com.taotao.cloud.sms.props.AliSmsProperties;
-import com.taotao.cloud.sms.props.SmsProperties;
+import com.taotao.cloud.sms.properties.AliSmsProperties;
+import com.taotao.cloud.sms.properties.SmsProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**

@@ -75,19 +75,19 @@ public class EncryptAspect {
 
 	@Around("pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) {
-		/**
-		 * 加密
-		 */
 		encrypt(joinPoint);
-		/**
-		 * 解密
-		 */
-		Object decrypt = decrypt(joinPoint);
-		return decrypt;
+
+		return decrypt(joinPoint);
 	}
 
+	/**
+	 * 加密
+	 *
+	 * @param joinPoint  joinPoint
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:39
+	 */
 	public void encrypt(ProceedingJoinPoint joinPoint) {
-
 		try {
 			Object[] objects = joinPoint.getArgs();
 			if (objects.length != 0) {
@@ -105,6 +105,14 @@ public class EncryptAspect {
 		}
 	}
 
+	/**
+	 * 解密
+	 *
+	 * @param joinPoint  joinPoint
+	 * @return java.lang.Object
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:39
+	 */
 	public Object decrypt(ProceedingJoinPoint joinPoint) {
 		Object result = null;
 		try {
@@ -123,8 +131,16 @@ public class EncryptAspect {
 		return result;
 	}
 
+	/**
+	 *  handler
+	 *
+	 * @param obj obj
+	 * @param type  type
+	 * @return java.lang.Object
+	 * @author shuigedeng
+	 * @since 2021/8/24 23:39
+	 */
 	private Object handler(Object obj, String type) throws IllegalAccessException {
-
 		if (Objects.isNull(obj)) {
 			return null;
 		}
