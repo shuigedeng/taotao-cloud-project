@@ -385,6 +385,8 @@ taotao:
       enabled: false
     shardingsphere:
       enabled: false
+    sentinel:
+      enabled: true
     log:
       request-log:
         enabled: true
@@ -418,9 +420,6 @@ taotao:
         enabled: true
         rest-template:
           enabled: true
-
-    sentinel:
-      enabled: true
     seata:
       enabled: true
     cache:

@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.sentinel;
 
-import com.taotao.cloud.feign.properties.FeignProperties;
-import com.taotao.cloud.feign.properties.LbIsolationProperties;
-import com.taotao.cloud.feign.properties.RestTemplateProperties;
 import com.taotao.cloud.sentinel.properties.SentinelProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 

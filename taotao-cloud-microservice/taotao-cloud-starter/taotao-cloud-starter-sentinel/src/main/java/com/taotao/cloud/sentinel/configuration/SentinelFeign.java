@@ -60,6 +60,13 @@ public final class SentinelFeign {
 		private FeignContext feignContext;
 
 		@Override
+		public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+			this.applicationContext = applicationContext;
+			feignContext = this.applicationContext.getBean(FeignContext.class);
+		}
+
+		@Override
 		public Feign.Builder invocationHandlerFactory(
 			InvocationHandlerFactory invocationHandlerFactory) {
 			throw new UnsupportedOperationException();
@@ -77,7 +84,8 @@ public final class SentinelFeign {
 				@Override
 				public InvocationHandler create(Target target,
 					Map<Method, MethodHandler> dispatch) {
-					FeignClient feignClient = AnnotationUtils.findAnnotation(target.type(), FeignClient.class);
+					FeignClient feignClient = AnnotationUtils.findAnnotation(target.type(),
+						FeignClient.class);
 
 					Class fallback = feignClient.fallback();
 					Class fallbackFactory = feignClient.fallbackFactory();
@@ -88,6 +96,7 @@ public final class SentinelFeign {
 
 					Object fallbackInstance;
 					FallbackFactory fallbackFactoryInstance;
+
 					// check fallback and fallbackFactory properties
 					if (void.class != fallback) {
 						fallbackInstance = getFromContext(beanName, "fallback", fallback,
@@ -95,6 +104,7 @@ public final class SentinelFeign {
 						return new SentinelInvocationHandler(target, dispatch,
 							new FallbackFactory.Default(fallbackInstance));
 					}
+
 					if (void.class != fallbackFactory) {
 						fallbackFactoryInstance = (FallbackFactory) getFromContext(beanName,
 							"fallbackFactory",
@@ -137,14 +147,6 @@ public final class SentinelFeign {
 			}
 			return null;
 		}
-
-		@Override
-		public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-			this.applicationContext = applicationContext;
-			feignContext = this.applicationContext.getBean(FeignContext.class);
-		}
-
 	}
 
 }

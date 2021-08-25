@@ -43,8 +43,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * TaoTaoCloudApplication
  *
- * @version 1.0.0
  * @author shuigedeng
+ * @version 1.0.0
  * @since 2021/8/25 08:15
  */
 @Target(ElementType.TYPE)

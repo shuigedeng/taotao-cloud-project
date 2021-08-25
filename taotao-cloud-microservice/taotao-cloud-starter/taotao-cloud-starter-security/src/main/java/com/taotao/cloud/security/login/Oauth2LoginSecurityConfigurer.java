@@ -1,6 +1,20 @@
-package com.taotao.cloud.security.taox.oauth.login;
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.taotao.cloud.security.login;
 
-import com.taotao.cloud.security.login.CustomLogoutSuccessHandler;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
@@ -18,19 +32,19 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Order(99)
 public class Oauth2LoginSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-	private final com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler;
+	private final CustomOAuth2AuthenticationSuccessHandler successHandler;
 
 	private final ClientRegistrationRepository repository;
 
 	public Oauth2LoginSecurityConfigurer(
-		com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler,
+		CustomOAuth2AuthenticationSuccessHandler successHandler,
 		ClientRegistrationRepository repository) {
 		this.successHandler = successHandler;
 		this.repository = repository;
 	}
 
 	public Oauth2LoginSecurityConfigurer(boolean disableDefaults,
-		com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthenticationSuccessHandler successHandler,
+		CustomOAuth2AuthenticationSuccessHandler successHandler,
 		ClientRegistrationRepository repository) {
 		super(disableDefaults);
 		this.successHandler = successHandler;
@@ -75,6 +89,6 @@ public class Oauth2LoginSecurityConfigurer extends WebSecurityConfigurerAdapter 
 		// 恢复 redirect_url 参数
 		authorization
 			.authorizationRequestRepository(
-				new com.taotao.cloud.security.taox.oauth.login.CustomOAuth2AuthorizationRequestRepository());
+				new CustomOAuth2AuthorizationRequestRepository());
 	}
 }

@@ -19,7 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * RestTemplate 配置
+ * SentinelProperties
  *
  * @author shuigedeng
  * @version 1.0.0
