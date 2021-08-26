@@ -29,36 +29,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "configuration")
 public class ConfigurationTag {
-    @PriorityColumn(column = "asyncExecute", priority = true)
-    private Boolean async;
-    private TokenId tokenId;
-    @PriorityColumn(column = "async")
-    private boolean asyncExecute;
 
-    @XmlAttribute(name = "async")
-    public Boolean getAsync() {
-        return async;
-    }
+	@PriorityColumn(column = "asyncExecute", priority = true)
+	private Boolean async;
+	private TokenId tokenId;
+	@PriorityColumn(column = "async")
+	private boolean asyncExecute;
 
-    @XmlElement(name = "token-id")
-    public TokenId getTokenId() {
-        return tokenId;
-    }
+	@XmlAttribute(name = "async")
+	public Boolean getAsync() {
+		return async;
+	}
 
-    @XmlElement(name = "async-execute", type = Boolean.class)
-    public boolean getAsyncExecute() {
-        return asyncExecute;
-    }
+	@XmlElement(name = "token-id")
+	public TokenId getTokenId() {
+		return tokenId;
+	}
 
-    public void setAsync(Boolean async) {
-        this.async = async;
-    }
+	@XmlElement(name = "async-execute", type = Boolean.class)
+	public boolean getAsyncExecute() {
+		return asyncExecute;
+	}
 
-    public void setTokenId(TokenId tokenId) {
-        this.tokenId = tokenId;
-    }
+	public void setAsync(Boolean async) {
+		this.async = async;
+	}
 
-    public void setAsyncExecute(boolean asyncExecute) {
-        this.asyncExecute = asyncExecute;
-    }
+	public void setTokenId(TokenId tokenId) {
+		this.tokenId = tokenId;
+	}
+
+	public void setAsyncExecute(boolean asyncExecute) {
+		this.asyncExecute = asyncExecute;
+	}
 }

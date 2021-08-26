@@ -19,7 +19,6 @@ public interface DynamicQuery {
 	
 	 /**
      * 查询对象列表，返回List
-     * @param resultClass
      * @param nativeSql
      * @param params
      * @return  List<T>

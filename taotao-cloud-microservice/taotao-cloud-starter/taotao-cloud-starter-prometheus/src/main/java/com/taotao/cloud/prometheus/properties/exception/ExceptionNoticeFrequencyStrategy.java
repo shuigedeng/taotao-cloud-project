@@ -2,7 +2,6 @@ package com.taotao.cloud.prometheus.properties.exception;
 
 import com.taotao.cloud.prometheus.properties.enums.NoticeFrequencyType;
 import java.time.Duration;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
@@ -87,8 +86,10 @@ public class ExceptionNoticeFrequencyStrategy {
 
 	@Override
 	public String toString() {
-		return "ExceptionNoticeFrequencyStrategy [enabled=" + enabled + ", frequencyType=" + frequencyType
-				+ ", noticeTimeInterval=" + noticeTimeInterval + ", noticeShowCount=" + noticeShowCount + "]";
+		return "ExceptionNoticeFrequencyStrategy [enabled=" + enabled + ", frequencyType="
+			+ frequencyType
+			+ ", noticeTimeInterval=" + noticeTimeInterval + ", noticeShowCount=" + noticeShowCount
+			+ "]";
 	}
 
 }

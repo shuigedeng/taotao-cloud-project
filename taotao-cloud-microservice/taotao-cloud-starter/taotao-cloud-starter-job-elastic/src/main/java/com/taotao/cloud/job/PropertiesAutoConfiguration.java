@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.job;
 
-import com.taotao.cloud.job.properties.XxlJobProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -25,7 +24,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/6/16 11:36
  */
-@EnableConfigurationProperties({XxlJobProperties.class})
+@EnableConfigurationProperties({})
 public class PropertiesAutoConfiguration {
 
 }

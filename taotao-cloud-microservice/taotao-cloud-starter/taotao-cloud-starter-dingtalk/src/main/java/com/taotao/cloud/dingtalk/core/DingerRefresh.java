@@ -23,8 +23,8 @@ package com.taotao.cloud.dingtalk.core;
  */
 public class DingerRefresh {
 
-    protected static void dingerFresh() {
-        AbstractDingerDefinitionResolver.clear();
-    }
+	protected static void dingerFresh() {
+		AbstractDingerDefinitionResolver.clear();
+	}
 
 }

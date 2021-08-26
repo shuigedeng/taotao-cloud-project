@@ -3,8 +3,8 @@
  */
 package com.taotao.cloud.opencv.biz.common.web;
 
-import com.acts.opencv.common.mapper.JsonMapper;
-import com.acts.opencv.common.utils.Constants;
+import com.taotao.cloud.opencv.biz.common.mapper.JsonMapper;
+import com.taotao.cloud.opencv.biz.common.utils.Constants;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,33 +18,28 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * 控制器支持类
- * 创建者	Songer
- * 创建时间	2016年7月21日
- *
+ * 控制器支持类 创建者	Songer 创建时间	2016年7月21日
  */
-public abstract class BaseController{
+public abstract class BaseController {
 
 	/**
 	 * 添加Model消息
-	 * @param message
 	 */
 	protected void addMessage(Model model, String... messages) {
 		StringBuilder sb = new StringBuilder();
-		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
+		for (String message : messages) {
+			sb.append(message).append(messages.length > 1 ? "<br/>" : "");
 		}
 		model.addAttribute("message", sb.toString());
 	}
 
 	/**
 	 * 添加Flash消息
-	 * @param message
 	 */
 	protected void addMessage(RedirectAttributes redirectAttributes, String... messages) {
 		StringBuilder sb = new StringBuilder();
-		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
+		for (String message : messages) {
+			sb.append(message).append(messages.length > 1 ? "<br/>" : "");
 		}
 		redirectAttributes.addFlashAttribute("message", sb.toString());
 	}
@@ -52,8 +47,8 @@ public abstract class BaseController{
 
 	/**
 	 * 客户端返回JSON字符串
+	 *
 	 * @param response
-	 * @param string
 	 * @return
 	 */
 	protected void renderString(HttpServletResponse response, Object object) {
@@ -72,13 +67,11 @@ public abstract class BaseController{
 
 	/**
 	 * 客户端返回图片类型
-	 * @param response
-	 * @param object void
-	 * @throws IOException
-	 * @Date 2018年3月13日
-	 * 更新日志
-	 * 2018年3月13日 Songer  首次创建
 	 *
+	 * @param response
+	 * @param object   void
+	 * @throws IOException
+	 * @Date 2018年3月13日 更新日志 2018年3月13日 Songer  首次创建
 	 */
 	protected void renderImage(HttpServletResponse response, byte[] object) {
 		try {
@@ -115,18 +108,15 @@ public abstract class BaseController{
 
 	/**
 	 * 客户端返回字符串
+	 *
 	 * @param response
-	 * @param string
-	 * @return
 	 */
 	protected void renderString(HttpServletResponse response) {
-		 renderString(response, Constants.SUCCESS);
+		renderString(response, Constants.SUCCESS);
 	}
 
 	/**
-	 * 初始化数据绑定
-	 * 1. 将所有传递进来的String进行HTML编码，防止XSS攻击
-	 * 2. 将字段中Date类型转换为String类型
+	 * 初始化数据绑定 1. 将所有传递进来的String进行HTML编码，防止XSS攻击 2. 将字段中Date类型转换为String类型
 	 */
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -136,6 +126,7 @@ public abstract class BaseController{
 			public void setAsText(String text) {
 				setValue(text == null ? null : StringEscapeUtils.escapeHtml4(text.trim()));
 			}
+
 			@Override
 			public String getAsText() {
 				Object value = getValue();

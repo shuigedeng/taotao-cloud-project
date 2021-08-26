@@ -30,109 +30,113 @@ import java.util.Map;
  */
 public class DingFeedCard extends DingTalkMessage {
 
-    /**
-     * {@link FeedCard}
-     */
-    private FeedCard feedCard;
+	/**
+	 * {@link FeedCard}
+	 */
+	private FeedCard feedCard;
 
-    public DingFeedCard() {
-        setMsgtype(DingTalkMsgType.FEED_CARD.type());
-    }
+	public DingFeedCard() {
+		setMsgtype(DingTalkMsgType.FEED_CARD.type());
+	}
 
-    public DingFeedCard(List<FeedCard.Link> links) {
-        this();
-        this.feedCard = new FeedCard(links);
-    }
+	public DingFeedCard(List<FeedCard.Link> links) {
+		this();
+		this.feedCard = new FeedCard(links);
+	}
 
-    public FeedCard getFeedCard() {
-        return feedCard;
-    }
+	public FeedCard getFeedCard() {
+		return feedCard;
+	}
 
-    public void setFeedCard(FeedCard feedCard) {
-        this.feedCard = feedCard;
-    }
+	public void setFeedCard(FeedCard feedCard) {
+		this.feedCard = feedCard;
+	}
 
-    public static class FeedCard implements Serializable {
-        /**
-         * {@link Link}
-         */
-        private List<Link> links;
+	public static class FeedCard implements Serializable {
 
-        public FeedCard() {
-        }
+		/**
+		 * {@link Link}
+		 */
+		private List<Link> links;
 
-        public FeedCard(List<Link> links) {
-            this.links = links;
-        }
+		public FeedCard() {
+		}
 
-        public List<Link> getLinks() {
-            return links;
-        }
+		public FeedCard(List<Link> links) {
+			this.links = links;
+		}
 
-        public void setLinks(List<Link> links) {
-            this.links = links;
-        }
+		public List<Link> getLinks() {
+			return links;
+		}
 
-        public static class Link implements Serializable {
-            /**
-             * 单条信息文本
-             */
-            private String title;
-            /**
-             * 点击单条信息到跳转链接
-             */
-            private String messageURL;
-            /**
-             * 单条信息后面图片的URL
-             */
-            private String picURL;
+		public void setLinks(List<Link> links) {
+			this.links = links;
+		}
 
-            public Link() {
-            }
+		public static class Link implements Serializable {
 
-            public Link(String title, String messageURL, String picURL) {
-                this.title = title;
-                this.messageURL = messageURL;
-                this.picURL = picURL;
-            }
+			/**
+			 * 单条信息文本
+			 */
+			private String title;
+			/**
+			 * 点击单条信息到跳转链接
+			 */
+			private String messageURL;
+			/**
+			 * 单条信息后面图片的URL
+			 */
+			private String picURL;
 
-            public String getTitle() {
-                return title;
-            }
+			public Link() {
+			}
 
-            public void setTitle(String title) {
-                this.title = title;
-            }
+			public Link(String title, String messageURL, String picURL) {
+				this.title = title;
+				this.messageURL = messageURL;
+				this.picURL = picURL;
+			}
 
-            public String getMessageURL() {
-                return messageURL;
-            }
+			public String getTitle() {
+				return title;
+			}
 
-            public void setMessageURL(String messageURL) {
-                this.messageURL = messageURL;
-            }
+			public void setTitle(String title) {
+				this.title = title;
+			}
 
-            public String getPicURL() {
-                return picURL;
-            }
+			public String getMessageURL() {
+				return messageURL;
+			}
 
-            public void setPicURL(String picURL) {
-                this.picURL = picURL;
-            }
-        }
-    }
+			public void setMessageURL(String messageURL) {
+				this.messageURL = messageURL;
+			}
 
-    @Override
-    public void transfer(Map<String, Object> params) {
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            Object value = entry.getValue();
-            if (List.class.isInstance(value)) {
-                List<ImageTextDeo> imageTexts = (List<ImageTextDeo>) value;
-                for (ImageTextDeo imageText : imageTexts) {
-                    this.feedCard.links.add(new FeedCard.Link(imageText.getTitle(), imageText.getUrl(), imageText.getPicUrl()));
-                }
-                break;
-            }
-        }
-    }
+			public String getPicURL() {
+				return picURL;
+			}
+
+			public void setPicURL(String picURL) {
+				this.picURL = picURL;
+			}
+		}
+	}
+
+	@Override
+	public void transfer(Map<String, Object> params) {
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			Object value = entry.getValue();
+			if (List.class.isInstance(value)) {
+				List<ImageTextDeo> imageTexts = (List<ImageTextDeo>) value;
+				for (ImageTextDeo imageText : imageTexts) {
+					this.feedCard.links.add(
+						new FeedCard.Link(imageText.getTitle(), imageText.getUrl(),
+							imageText.getPicUrl()));
+				}
+				break;
+			}
+		}
+	}
 }

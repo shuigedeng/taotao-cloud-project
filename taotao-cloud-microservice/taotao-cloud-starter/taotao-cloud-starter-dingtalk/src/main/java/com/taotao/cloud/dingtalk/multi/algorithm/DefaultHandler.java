@@ -17,21 +17,24 @@ package com.taotao.cloud.dingtalk.multi.algorithm;
 
 
 import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
 import java.util.List;
 
 /**
  * DefaultHandler
  *
  * <blockquote>
- *     {@link DingerConfigHandler}
+ * {@link DingerConfigHandler}
  * </blockquote>
  *
  * @author Jaemon
  * @since 1.0
  */
 public class DefaultHandler implements AlgorithmHandler {
-    @Override
-    public DingerConfig handler(List<DingerConfig> dingerConfigs, DingerConfig defaultDingerConfig) {
-        return defaultDingerConfig;
-    }
+
+	@Override
+	public DingerConfig handler(List<DingerConfig> dingerConfigs,
+		DingerConfig defaultDingerConfig) {
+		return defaultDingerConfig;
+	}
 }

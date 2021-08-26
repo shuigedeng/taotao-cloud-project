@@ -26,11 +26,11 @@ import com.taotao.cloud.dingtalk.core.entity.DingerCallback;
  */
 public interface DingerExceptionCallback {
 
-    /**
-     * 通知回调执行
-     *
-     * @param dingerCallback 异常回调信息
-     */
-    void execute(DingerCallback dingerCallback);
+	/**
+	 * 通知回调执行
+	 *
+	 * @param dingerCallback 异常回调信息
+	 */
+	void execute(DingerCallback dingerCallback);
 
 }

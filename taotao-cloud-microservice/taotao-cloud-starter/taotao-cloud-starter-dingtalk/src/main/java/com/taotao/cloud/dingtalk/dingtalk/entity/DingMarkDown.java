@@ -28,61 +28,62 @@ import java.util.Map;
  */
 public class DingMarkDown extends Message {
 
-    /**
-     * {@link MarkDown}
-     */
-    private MarkDown markdown;
+	/**
+	 * {@link MarkDown}
+	 */
+	private MarkDown markdown;
 
-    public DingMarkDown(MarkDown markdown) {
-        setMsgtype(DingTalkMsgType.MARKDOWN.type());
-        this.markdown = markdown;
-    }
+	public DingMarkDown(MarkDown markdown) {
+		setMsgtype(DingTalkMsgType.MARKDOWN.type());
+		this.markdown = markdown;
+	}
 
-    public MarkDown getMarkdown() {
-        return markdown;
-    }
+	public MarkDown getMarkdown() {
+		return markdown;
+	}
 
-    public void setMarkdown(MarkDown markdown) {
-        this.markdown = markdown;
-    }
+	public void setMarkdown(MarkDown markdown) {
+		this.markdown = markdown;
+	}
 
-    public static class MarkDown implements Serializable {
-        /**
-         * 首屏会话透出的展示内容, 不会展示在具体的显示内容上
-         */
-        private String title;
-        /**
-         * markdown格式的消息
-         */
-        private String text;
+	public static class MarkDown implements Serializable {
 
-        public String getTitle() {
-            return title;
-        }
+		/**
+		 * 首屏会话透出的展示内容, 不会展示在具体的显示内容上
+		 */
+		private String title;
+		/**
+		 * markdown格式的消息
+		 */
+		private String text;
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+		public String getTitle() {
+			return title;
+		}
 
-        public String getText() {
-            return text;
-        }
+		public void setTitle(String title) {
+			this.title = title;
+		}
 
-        public void setText(String text) {
-            this.text = text;
-        }
+		public String getText() {
+			return text;
+		}
 
-        public MarkDown() {
-        }
+		public void setText(String text) {
+			this.text = text;
+		}
 
-        public MarkDown(String title, String text) {
-            this.title = title;
-            this.text = text;
-        }
-    }
+		public MarkDown() {
+		}
 
-    @Override
-    public void transfer(Map<String, Object> params) {
-        this.markdown.text = replaceContent(this.markdown.text, params);
-    }
+		public MarkDown(String title, String text) {
+			this.title = title;
+			this.text = text;
+		}
+	}
+
+	@Override
+	public void transfer(Map<String, Object> params) {
+		this.markdown.text = replaceContent(this.markdown.text, params);
+	}
 }

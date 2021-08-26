@@ -4,7 +4,6 @@ import com.taotao.cloud.prometheus.properties.enums.ListenType;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 

@@ -1,8 +1,8 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
-    api "com.xuxueli:xxl-job-core"
+    api "com.dangdang:elastic-job-lite-core:2.1.5"
+    api "com.dangdang:elastic-job-lite-spring:2.1.5"
 
-    
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

@@ -15,6 +15,9 @@
  */
 package com.taotao.cloud.dingtalk.config;
 
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.MARKDOWN_MESSAGE;
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.TEXT_MESSAGE;
+
 import com.taotao.cloud.dingtalk.multi.MultiDingerAlgorithmInjectRegister;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
 import com.taotao.cloud.dingtalk.support.DefaultDingerAsyncCallable;
@@ -34,7 +37,7 @@ import org.springframework.context.annotation.Import;
 
 
 /**
- *  实例化bean配置
+ * 实例化bean配置
  *
  * @author Jaemon
  * @since 1.0
@@ -43,71 +46,71 @@ import org.springframework.context.annotation.Import;
 @Import(AutoBeanConfiguration.class)
 public class BeanConfiguration {
 
-    /**
-     * 默认Text消息格式配置
-     *
-     * @return CustomMessage
-     */
-    @ConditionalOnMissingBean(name = TEXT_MESSAGE)
-    @Bean(TEXT_MESSAGE)
-    public CustomMessage textMessage() {
-        return new TextMessage();
-    }
+	/**
+	 * 默认Text消息格式配置
+	 *
+	 * @return CustomMessage
+	 */
+	@ConditionalOnMissingBean(name = TEXT_MESSAGE)
+	@Bean(TEXT_MESSAGE)
+	public CustomMessage textMessage() {
+		return new TextMessage();
+	}
 
-    /**
-     * 默认markdown消息格式配置
-     *
-     * @return CustomMessage
-     */
-    @ConditionalOnMissingBean(name = MARKDOWN_MESSAGE)
-    @Bean(MARKDOWN_MESSAGE)
-    public CustomMessage markDownMessage() {
-        return new MarkDownMessage();
-    }
-
-
-    /**
-     * 默认签名算法
-     *
-     * @return 签名实体
-     */
-    @Bean
-    @ConditionalOnMissingBean(DingerSignAlgorithm.class)
-    public DingerSignAlgorithm dingerSignAlgorithm() {
-        return new DingTalkSignAlgorithm();
-    }
+	/**
+	 * 默认markdown消息格式配置
+	 *
+	 * @return CustomMessage
+	 */
+	@ConditionalOnMissingBean(name = MARKDOWN_MESSAGE)
+	@Bean(MARKDOWN_MESSAGE)
+	public CustomMessage markDownMessage() {
+		return new MarkDownMessage();
+	}
 
 
-    /**
-     * 默认dkid生成配置
-     *
-     * @return 返回dkid
-     */
-    @Bean
-    @ConditionalOnMissingBean(DingerIdGenerator.class)
-    public DingerIdGenerator dingerIdGenerator() {
-        return new DefaultDingerIdGenerator();
-    }
+	/**
+	 * 默认签名算法
+	 *
+	 * @return 签名实体
+	 */
+	@Bean
+	@ConditionalOnMissingBean(DingerSignAlgorithm.class)
+	public DingerSignAlgorithm dingerSignAlgorithm() {
+		return new DingTalkSignAlgorithm();
+	}
 
-    /**
-     * 默认异步执行回调实例
-     *
-     * @return 回调实例
-     */
-    @Bean
-    @ConditionalOnMissingBean(DingerAsyncCallback.class)
-    public DingerAsyncCallback dingerAsyncCallback() {
-        return new DefaultDingerAsyncCallable();
-    }
 
-    @Bean
-    @ConditionalOnMissingBean(DingerExceptionCallback.class)
-    public DingerExceptionCallback dingerExceptionCallback() {
-        return new DefaultDingerExceptionCallback();
-    }
+	/**
+	 * 默认dkid生成配置
+	 *
+	 * @return 返回dkid
+	 */
+	@Bean
+	@ConditionalOnMissingBean(DingerIdGenerator.class)
+	public DingerIdGenerator dingerIdGenerator() {
+		return new DefaultDingerIdGenerator();
+	}
 
-    @Bean
-    public static MultiDingerAlgorithmInjectRegister multiDingerAlgorithmInjectRegister() {
-        return new MultiDingerAlgorithmInjectRegister();
-    }
+	/**
+	 * 默认异步执行回调实例
+	 *
+	 * @return 回调实例
+	 */
+	@Bean
+	@ConditionalOnMissingBean(DingerAsyncCallback.class)
+	public DingerAsyncCallback dingerAsyncCallback() {
+		return new DefaultDingerAsyncCallable();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean(DingerExceptionCallback.class)
+	public DingerExceptionCallback dingerExceptionCallback() {
+		return new DefaultDingerExceptionCallback();
+	}
+
+	@Bean
+	public static MultiDingerAlgorithmInjectRegister multiDingerAlgorithmInjectRegister() {
+		return new MultiDingerAlgorithmInjectRegister();
+	}
 }

@@ -22,30 +22,28 @@ package com.taotao.cloud.dingtalk.core.entity.enums;
  * @since 1.0
  */
 public enum DingerResponseCodeEnum {
-    SUCCESS("D000", "success"),
+	SUCCESS("D000", "success"),
 
-    DINGER_DISABLED("D101", "Dinger未启用"),
+	DINGER_DISABLED("D101", "Dinger未启用"),
 
-    MESSAGE_TYPE_UNSUPPORTED("D201", "无法支持的消息类型"),
-    SEND_MESSAGE_FAILED("D202", "消息发送失败"),
-    MESSAGE_PROCESSING_FAILED("D203", "消息处理异常"),
-    FAILED("D999", "failed")
+	MESSAGE_TYPE_UNSUPPORTED("D201", "无法支持的消息类型"),
+	SEND_MESSAGE_FAILED("D202", "消息发送失败"),
+	MESSAGE_PROCESSING_FAILED("D203", "消息处理异常"),
+	FAILED("D999", "failed");
 
-    ;
+	private String code;
+	private String message;
 
-    private String code;
-    private String message;
+	DingerResponseCodeEnum(String code, String message) {
+		this.code = code;
+		this.message = message;
+	}
 
-    DingerResponseCodeEnum(String code, String message) {
-        this.code = code;
-        this.message = message;
-    }
+	public String code() {
+		return code;
+	}
 
-    public String code() {
-        return code;
-    }
-
-    public String message() {
-        return message;
-    }
+	public String message() {
+		return message;
+	}
 }

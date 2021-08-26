@@ -22,17 +22,17 @@ package com.taotao.cloud.dingtalk.core.entity.enums;
  * @since 1.0
  */
 public enum AsyncExecuteType {
-    TRUE(true),
-    FALSE(false),
-    NONE(false);
+	TRUE(true),
+	FALSE(false),
+	NONE(false);
 
-    private boolean type;
+	private boolean type;
 
-    AsyncExecuteType(boolean type) {
-        this.type = type;
-    }
+	AsyncExecuteType(boolean type) {
+		this.type = type;
+	}
 
-    public boolean type() {
-        return type;
-    }
+	public boolean type() {
+		return type;
+	}
 }

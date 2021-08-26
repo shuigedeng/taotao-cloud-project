@@ -26,13 +26,14 @@ import org.slf4j.LoggerFactory;
  * @since 1.0
  */
 public class DefaultDingerAsyncCallable implements DingerAsyncCallback {
-    private static final Logger log = LoggerFactory.getLogger(DefaultDingerAsyncCallable.class);
-    
-    @Override
-    public void execute(String dingerId, String result) {
-        if (log.isDebugEnabled()) {
-            log.debug("dingerId=[{}], result=[{}].",
-                    dingerId, result);
-        }
-    }
+
+	private static final Logger log = LoggerFactory.getLogger(DefaultDingerAsyncCallable.class);
+
+	@Override
+	public void execute(String dingerId, String result) {
+		if (log.isDebugEnabled()) {
+			log.debug("dingerId=[{}], result=[{}].",
+				dingerId, result);
+		}
+	}
 }

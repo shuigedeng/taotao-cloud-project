@@ -1,9 +1,9 @@
 package com.taotao.cloud.seckill.biz.service;
 
+import com.taotao.cloud.seckill.biz.common.entity.Result;
+import com.taotao.cloud.seckill.biz.common.entity.Seckill;
 import java.util.List;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.entity.Seckill;
 
 public interface ISeckillService {
 

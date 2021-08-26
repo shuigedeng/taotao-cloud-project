@@ -22,8 +22,12 @@ package com.taotao.cloud.dingtalk.core.entity.enums;
  * @since 1.0
  */
 public enum MessageMainType {
-    /** xml dinger msg */
-    XML,
-    /** annotation dinger msg */
-    ANNOTATION;
+	/**
+	 * xml dinger msg
+	 */
+	XML,
+	/**
+	 * annotation dinger msg
+	 */
+	ANNOTATION;
 }

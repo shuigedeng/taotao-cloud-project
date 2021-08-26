@@ -1,6 +1,7 @@
 package com.taotao.cloud.netty.autoconfigure;
 
-import org.yeauty.annotation.EnableWebSocket;
+
+import com.taotao.cloud.netty.annotation.EnableWebSocket;
 
 @EnableWebSocket
 public class NettyWebSocketAutoConfigure {

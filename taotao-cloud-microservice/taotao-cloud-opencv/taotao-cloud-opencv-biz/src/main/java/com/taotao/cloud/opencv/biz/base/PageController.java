@@ -1,8 +1,8 @@
 package com.taotao.cloud.opencv.biz.base;
 
-import com.acts.opencv.common.utils.Constants;
-import com.acts.opencv.common.utils.OpenCVUtil;
-import com.acts.opencv.common.web.BaseController;
+import com.taotao.cloud.opencv.biz.common.utils.Constants;
+import com.taotao.cloud.opencv.biz.common.utils.OpenCVUtil;
+import com.taotao.cloud.opencv.biz.common.web.BaseController;
 import java.io.File;
 import java.util.Vector;
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "page")
 public class PageController extends BaseController {
+
 	private static final Logger logger = LoggerFactory.getLogger(
-			PageController.class);
+		PageController.class);
 
 	/**
-	 * 答题卡识别优化
-	 * 创建者 Songer
-	 * 创建时间	2018年3月23日
+	 * 答题卡识别优化 创建者 Songer 创建时间	2018年3月23日
 	 */
 	@RequestMapping(value = "pageOCR")
 	public void pageOCR(HttpServletResponse response, String imagefile, Integer ocrType) {
@@ -73,13 +72,11 @@ public class PageController extends BaseController {
 
 	/**
 	 * 使用tesseract方式识别页码，注意tessdata放到tomcat的bin目录下
-	 * @Author 王嵩
+	 *
 	 * @param filePath
 	 * @return String
-	 * @Date 2018年4月4日
-	 * 更新日志
-	 * 2018年4月4日 王嵩  首次创建
-	 *
+	 * @Author 王嵩
+	 * @Date 2018年4月4日 更新日志 2018年4月4日 王嵩  首次创建
 	 */
 	public String getPageNoByTesseract(String filePath) {
 		String result = "";
@@ -97,13 +94,11 @@ public class PageController extends BaseController {
 
 	/**
 	 * 使用轮廓识别页码
-	 * @Author 王嵩
+	 *
 	 * @param filePath
 	 * @return String
-	 * @Date 2018年4月8日
-	 * 更新日志
-	 * 2018年4月8日 王嵩  首次创建
-	 *
+	 * @Author 王嵩
+	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public String getPageNoByContours(String filePath) {
 		Mat source = Highgui.imread(filePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
@@ -130,7 +125,7 @@ public class PageController extends BaseController {
 			if (contArea > 1200) {// 此处是根据轮廓面积
 				// 红线画出识别的轮廓
 				Core.rectangle(image, new Point(r.x, r.y), new Point(r.x + r.width, r.y
-						+ r.height), new Scalar(0, 0, 255), 2);
+					+ r.height), new Scalar(0, 0, 255), 2);
 				pageSize++;
 			}
 		}
@@ -143,12 +138,11 @@ public class PageController extends BaseController {
 
 	/**
 	 * 使用模板匹配识别页码
-	 * @Author 王嵩
+	 *
 	 * @param filePath
 	 * @return String
-	 * @Date 2018年4月8日
-	 * 更新日志
-	 * 2018年4月8日 王嵩  首次创建
+	 * @Author 王嵩
+	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public String getPageNoByTemplate(String filePath) {
 		String pageSize = "";
@@ -173,8 +167,9 @@ public class PageController extends BaseController {
 		Core.normalize(destination, destination, 0, 255, Core.NORM_MINMAX, -1, new Mat());
 		MinMaxLocResult minmaxLoc = Core.minMaxLoc(destination);
 		Point matchLoc = minmaxLoc.maxLoc;
-		Core.rectangle(pageimage, matchLoc, new Point(matchLoc.x + matchtemp.cols(), matchLoc.y + matchtemp.rows()),
-				new Scalar(0), 2);
+		Core.rectangle(pageimage, matchLoc,
+			new Point(matchLoc.x + matchtemp.cols(), matchLoc.y + matchtemp.rows()),
+			new Scalar(0), 2);
 		System.out.println(matchLoc.x + "   " + matchLoc.y);
 		pageSize = getPage(matchLoc.x) + "";
 		String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "page1.png";
@@ -185,19 +180,18 @@ public class PageController extends BaseController {
 
 	/**
 	 * 根据横坐标返回页码
-	 * @Author 王嵩
+	 *
 	 * @param x
 	 * @return int
-	 * @Date 2018年4月8日
-	 * 更新日志
-	 * 2018年4月8日 王嵩  首次创建
-	 *
+	 * @Author 王嵩
+	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public int getPage(double x) {
 		// 减去2像素，是因为shuzi.png外边框是预留了2像素的，因此匹配结果坐标为：2,2;72,2;142,2
 		// Math.floor 返回不大于的最大整数
 		return (int) Math.floor((x - 2) / 70) + 1;
 	}
+
 	public static void main(String[] args) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		Mat markmat1 = Highgui.imread("D:\\test\\abc\\1.png", Highgui.CV_LOAD_IMAGE_GRAYSCALE);
@@ -206,7 +200,8 @@ public class PageController extends BaseController {
 		Vector<MatOfPoint> contours2 = OpenCVUtil.findContours(markmat2);
 		Mat mat1 = getSimMark("D:\\test\\abc\\1.png");
 		Mat mat2 = getSimMark("D:\\test\\abc\\2.png");
-		double result1 = Imgproc.matchShapes(contours1.get(0), contours2.get(0), Imgproc.CV_CONTOURS_MATCH_I1, 0);
+		double result1 = Imgproc.matchShapes(contours1.get(0), contours2.get(0),
+			Imgproc.CV_CONTOURS_MATCH_I1, 0);
 		double result2 = Imgproc.matchShapes(mat1, mat2, Imgproc.CV_CONTOURS_MATCH_I1, 0);
 		System.out.println(result1);
 		System.out.println(result2);
@@ -217,7 +212,8 @@ public class PageController extends BaseController {
 		// Imgproc.threshold(markmat, markmat, 190, 255, Imgproc.THRESH_BINARY_INV);
 		Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
 		Mat rsmat = new Mat();
-		Imgproc.findContours(markmat, contours, rsmat, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE, new Point());
+		Imgproc.findContours(markmat, contours, rsmat, Imgproc.RETR_TREE,
+			Imgproc.CHAIN_APPROX_SIMPLE, new Point());
 		MatOfPoint markMop = new MatOfPoint();
 		Mat result = new Mat(markmat.size(), CvType.CV_8U, new Scalar(255));
 		Imgproc.drawContours(result, contours, 0, new Scalar(0), 1);

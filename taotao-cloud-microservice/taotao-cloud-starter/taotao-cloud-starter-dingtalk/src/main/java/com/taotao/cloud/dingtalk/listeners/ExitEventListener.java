@@ -28,18 +28,19 @@ import org.springframework.context.event.ContextClosedEvent;
  * @since 1.0
  */
 public class ExitEventListener
-        extends MultiDingerRefresh
-        implements ApplicationListener<ContextClosedEvent> {
-    private static final Logger log = LoggerFactory.getLogger(ExitEventListener.class);
+	extends MultiDingerRefresh
+	implements ApplicationListener<ContextClosedEvent> {
 
-    @Override
-    public void onApplicationEvent(ContextClosedEvent event) {
-        // support devtools
-        refresh();
-    }
+	private static final Logger log = LoggerFactory.getLogger(ExitEventListener.class);
 
-    private void refresh() {
-        multiDingerRefresh();
-        DingerListenersProperty.clear();
-    }
+	@Override
+	public void onApplicationEvent(ContextClosedEvent event) {
+		// support devtools
+		refresh();
+	}
+
+	private void refresh() {
+		multiDingerRefresh();
+		DingerListenersProperty.clear();
+	}
 }

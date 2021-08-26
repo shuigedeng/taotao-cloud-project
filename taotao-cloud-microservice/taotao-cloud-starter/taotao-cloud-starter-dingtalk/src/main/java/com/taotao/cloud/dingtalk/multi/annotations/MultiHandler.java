@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.multi.annotations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * MultiHandler, 作用于 XXXDinger层，标识当前Dinger为多Dinger接口
@@ -28,5 +32,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface MultiHandler {
 
-    MultiDinger value();
+	MultiDinger value();
 }

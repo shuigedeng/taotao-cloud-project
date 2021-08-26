@@ -18,6 +18,14 @@ package com.taotao.cloud.dingtalk.core.spring;
 import com.taotao.cloud.dingtalk.core.ClassPathDingerScanner;
 import com.taotao.cloud.dingtalk.core.DefaultDingerDefinitionResolver;
 import com.taotao.cloud.dingtalk.core.annatations.DingerScan;
+import com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum;
+import com.taotao.cloud.dingtalk.exception.DingerAnalysisException;
+import com.taotao.cloud.dingtalk.exception.DingerException;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -28,12 +36,6 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.StringUtils;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * DingerScannerRegistrar
  *
@@ -41,68 +43,68 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class DingerScannerRegistrar
-        extends DefaultDingerDefinitionResolver
-        implements ImportBeanDefinitionRegistrar
-{
-    private static final Logger log = LoggerFactory.getLogger(DingerScannerRegistrar.class);
+	extends DefaultDingerDefinitionResolver
+	implements ImportBeanDefinitionRegistrar {
 
-    @Override
-    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        AnnotationAttributes annoAttrs = AnnotationAttributes.fromMap(
-                importingClassMetadata.getAnnotationAttributes(DingerScan.class.getName())
-        );
+	private static final Logger log = LoggerFactory.getLogger(DingerScannerRegistrar.class);
 
-        if (annoAttrs != null) {
-            registerBeanDefinitions(annoAttrs, registry);
-        }
-    }
+	@Override
+	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
+		BeanDefinitionRegistry registry) {
+		AnnotationAttributes annoAttrs = AnnotationAttributes.fromMap(
+			importingClassMetadata.getAnnotationAttributes(DingerScan.class.getName())
+		);
 
-    void registerBeanDefinitions(AnnotationAttributes annoAttrs, BeanDefinitionRegistry registry) {
-        ClassPathDingerScanner scanner = new ClassPathDingerScanner(registry);
+		if (annoAttrs != null) {
+			registerBeanDefinitions(annoAttrs, registry);
+		}
+	}
 
-        Class<? extends Annotation> annotationClass = annoAttrs.getClass("annotationClass");
-        if (!Annotation.class.equals(annotationClass)) {
-            scanner.setAnnotationClass(annotationClass);
-        }
+	void registerBeanDefinitions(AnnotationAttributes annoAttrs, BeanDefinitionRegistry registry) {
+		ClassPathDingerScanner scanner = new ClassPathDingerScanner(registry);
 
-        Class<?> markerInterface = annoAttrs.getClass("markerInterface");
-        if (!Class.class.equals(markerInterface)) {
-            scanner.setMarkerInterface(markerInterface);
-        }
+		Class<? extends Annotation> annotationClass = annoAttrs.getClass("annotationClass");
+		if (!Annotation.class.equals(annotationClass)) {
+			scanner.setAnnotationClass(annotationClass);
+		}
 
-        Class<? extends BeanNameGenerator> generatorClass = annoAttrs.getClass("nameGenerator");
-        if (!BeanNameGenerator.class.equals(generatorClass)) {
-            scanner.setBeanNameGenerator(BeanUtils.instantiateClass(generatorClass));
-        }
+		Class<?> markerInterface = annoAttrs.getClass("markerInterface");
+		if (!Class.class.equals(markerInterface)) {
+			scanner.setMarkerInterface(markerInterface);
+		}
 
-        List<String> basePackages = new ArrayList<>();
+		Class<? extends BeanNameGenerator> generatorClass = annoAttrs.getClass("nameGenerator");
+		if (!BeanNameGenerator.class.equals(generatorClass)) {
+			scanner.setBeanNameGenerator(BeanUtils.instantiateClass(generatorClass));
+		}
 
-        basePackages.addAll(
-                Arrays.stream(annoAttrs.getStringArray("value"))
-                        .filter(StringUtils::hasText)
-                        .collect(Collectors.toList())
-        );
+		List<String> basePackages = new ArrayList<>();
 
-        basePackages.addAll(
-                Arrays.stream(annoAttrs.getStringArray("basePackages"))
-                        .filter(StringUtils::hasText)
-                        .collect(Collectors.toList())
-        );
+		basePackages.addAll(
+			Arrays.stream(annoAttrs.getStringArray("value"))
+				.filter(StringUtils::hasText)
+				.collect(Collectors.toList())
+		);
 
+		basePackages.addAll(
+			Arrays.stream(annoAttrs.getStringArray("basePackages"))
+				.filter(StringUtils::hasText)
+				.collect(Collectors.toList())
+		);
 
-        scanner.registerFilters();
-        scanner.doScan(
-                StringUtils.toStringArray(basePackages)
-        );
+		scanner.registerFilters();
+		scanner.doScan(
+			StringUtils.toStringArray(basePackages)
+		);
 
-        try {
-            resolver(scanner.getDingerClasses());
-            dingerClasses = scanner.getDingerClasses();
-        } catch (DingerException ex) {
-            throw new DingerAnalysisException(ex.getPairs(), ex.getMessage());
-        } catch (Exception ex) {
-            throw new DingerException(ex, ExceptionEnum.UNKNOWN);
-        }
-    }
+		try {
+			resolver(scanner.getDingerClasses());
+			dingerClasses = scanner.getDingerClasses();
+		} catch (DingerException ex) {
+			throw new DingerAnalysisException(ex.getPairs(), ex.getMessage());
+		} catch (Exception ex) {
+			throw new DingerException(ex, ExceptionEnum.UNKNOWN);
+		}
+	}
 
 }

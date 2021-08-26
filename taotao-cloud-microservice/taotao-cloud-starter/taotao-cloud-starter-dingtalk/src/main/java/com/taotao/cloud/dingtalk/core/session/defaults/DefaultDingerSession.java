@@ -17,6 +17,7 @@ package com.taotao.cloud.dingtalk.core.session.defaults;
 
 
 import com.taotao.cloud.dingtalk.core.DingerHandleProxy;
+import com.taotao.cloud.dingtalk.core.session.Configuration;
 import com.taotao.cloud.dingtalk.core.session.DingerSession;
 import java.lang.reflect.Proxy;
 
@@ -28,25 +29,25 @@ import java.lang.reflect.Proxy;
  */
 public class DefaultDingerSession implements DingerSession {
 
-    private final Configuration configuration;
+	private final Configuration configuration;
 
-    public DefaultDingerSession(Configuration configuration) {
-        this.configuration = configuration;
-    }
+	public DefaultDingerSession(Configuration configuration) {
+		this.configuration = configuration;
+	}
 
-    @Override
-    public <T> T getDinger(Class<T> type) {
-        return (T) Proxy.newProxyInstance(
-                // bugfix gitee#I29N15
-                Thread.currentThread().getContextClassLoader(),
-                new Class[]{type},
-                new DingerHandleProxy(configuration())
-        );
-    }
+	@Override
+	public <T> T getDinger(Class<T> type) {
+		return (T) Proxy.newProxyInstance(
+			// bugfix gitee#I29N15
+			Thread.currentThread().getContextClassLoader(),
+			new Class[]{type},
+			new DingerHandleProxy(configuration())
+		);
+	}
 
-    @Override
-    public Configuration configuration() {
-        return configuration;
-    }
+	@Override
+	public Configuration configuration() {
+		return configuration;
+	}
 
 }

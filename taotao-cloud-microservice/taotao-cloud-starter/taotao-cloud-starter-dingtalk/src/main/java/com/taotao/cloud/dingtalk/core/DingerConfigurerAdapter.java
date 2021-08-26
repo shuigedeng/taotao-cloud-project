@@ -16,21 +16,21 @@
 package com.taotao.cloud.dingtalk.core;
 
 /**
- *  DingTalk Configurer Adapter
+ * DingTalk Configurer Adapter
  *
  * @author Jaemon
  * @since 1.0
  */
 public class DingerConfigurerAdapter {
 
-    /**
-     * configure for dinger Client
-     *
-     * @param config {@link DingerManagerBuilder}
-     * @throws Exception ex
-     */
-    public void configure(DingerManagerBuilder config) throws Exception {
+	/**
+	 * configure for dinger Client
+	 *
+	 * @param config {@link DingerManagerBuilder}
+	 * @throws Exception ex
+	 */
+	public void configure(DingerManagerBuilder config) throws Exception {
 
-    }
+	}
 
 }

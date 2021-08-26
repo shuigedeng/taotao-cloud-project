@@ -26,14 +26,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "phone")
 public class PhoneTag {
-    private String value;
 
-    @XmlAttribute(required = true, name = "value")
-    public String getValue() {
-        return value;
-    }
+	private String value;
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	@XmlAttribute(required = true, name = "value")
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

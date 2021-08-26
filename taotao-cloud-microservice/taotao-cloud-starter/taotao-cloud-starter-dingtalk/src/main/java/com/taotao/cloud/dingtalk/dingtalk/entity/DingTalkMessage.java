@@ -26,7 +26,8 @@ import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
  * @since 1.0
  */
 public class DingTalkMessage extends MsgType {
-    public DingTalkMessage() {
-        setDingerType(DingerType.DINGTALK);
-    }
+
+	public DingTalkMessage() {
+		setDingerType(DingerType.DINGTALK);
+	}
 }

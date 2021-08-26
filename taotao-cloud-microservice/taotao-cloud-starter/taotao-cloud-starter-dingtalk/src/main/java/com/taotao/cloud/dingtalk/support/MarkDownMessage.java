@@ -28,20 +28,20 @@ import java.util.List;
  */
 public class MarkDownMessage implements CustomMessage {
 
-    @Override
-    public String message(String projectId, DingerRequest request) {
-        String content = request.getContent();
-        String title = request.getTitle();
-        List<String> phones = request.getPhones();
-        // markdown在text内容里需要有@手机号
-        StringBuilder text = new StringBuilder(title);
-        if (phones != null && !phones.isEmpty()) {
-            for (String phone : phones) {
-                text.append("@").append(phone);
-            }
-        }
-        return MessageFormat.format(
-                "#### 【Dinger通知】 {0} \n - 项目名称: {1}\n- 内容: {2}",
-                text, projectId, content);
-    }
+	@Override
+	public String message(String projectId, DingerRequest request) {
+		String content = request.getContent();
+		String title = request.getTitle();
+		List<String> phones = request.getPhones();
+		// markdown在text内容里需要有@手机号
+		StringBuilder text = new StringBuilder(title);
+		if (phones != null && !phones.isEmpty()) {
+			for (String phone : phones) {
+				text.append("@").append(phone);
+			}
+		}
+		return MessageFormat.format(
+			"#### 【Dinger通知】 {0} \n - 项目名称: {1}\n- 内容: {2}",
+			text, projectId, content);
+	}
 }

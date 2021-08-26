@@ -18,7 +18,11 @@ package com.taotao.cloud.dingtalk.listeners;
 
 import com.taotao.cloud.dingtalk.core.DingerConfig;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -28,33 +32,36 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public class DingerListenersProperty {
-    /**
-     * dingerClasses
-     */
-    protected static List<Class<?>> dingerClasses = new ArrayList<>();
-    /**
-     * Dinger默认的DingerConfig
-     */
-    protected static Map<DingerType, DingerConfig> defaultDingerConfigs = new HashMap<>();
 
-    protected static List<Class<?>> dingerClasses() {
-        return dingerClasses;
-    }
+	/**
+	 * dingerClasses
+	 */
+	protected static List<Class<?>> dingerClasses = new ArrayList<>();
+	/**
+	 * Dinger默认的DingerConfig
+	 */
+	protected static Map<DingerType, DingerConfig> defaultDingerConfigs = new HashMap<>();
 
-    protected static void emptyDingerClasses() {
-        if (dingerClasses != null && !dingerClasses.isEmpty()) {
-            dingerClasses.clear();
-        }
-    }
+	protected static List<Class<?>> dingerClasses() {
+		return dingerClasses;
+	}
 
-    protected final static List<DingerType> enabledDingerTypes;
-    static {
-        enabledDingerTypes = Arrays.stream(DingerType.values()).filter(e -> e.isEnabled()).collect(Collectors.toList());
-    }
+	protected static void emptyDingerClasses() {
+		if (dingerClasses != null && !dingerClasses.isEmpty()) {
+			dingerClasses.clear();
+		}
+	}
 
-    protected static void clear() {
-        dingerClasses.clear();
-        defaultDingerConfigs.clear();
-    }
+	protected final static List<DingerType> enabledDingerTypes;
+
+	static {
+		enabledDingerTypes = Arrays.stream(DingerType.values()).filter(e -> e.isEnabled())
+			.collect(Collectors.toList());
+	}
+
+	protected static void clear() {
+		dingerClasses.clear();
+		defaultDingerConfigs.clear();
+	}
 
 }

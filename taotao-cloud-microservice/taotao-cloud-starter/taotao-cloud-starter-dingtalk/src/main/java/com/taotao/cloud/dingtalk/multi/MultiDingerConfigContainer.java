@@ -29,52 +29,48 @@ import java.util.Map;
  * @since 1.0
  */
 public enum MultiDingerConfigContainer {
-    /**
-     * instance
-     */
-    INSTANCE;
+	/**
+	 * instance
+	 */
+	INSTANCE;
 
-    /** 全局 MultiDingerConfig key */
-    public static final String GLOABL_KEY = MultiDingerConfigContainer.class.getName();
-    /**
-     * <blockquote>
-     *     { <br>
-     *         key: dingclasssName | GLOABL_KEY <br>
-     *         value: {@link MultiDingerConfig} <br>
-     *     } <br>
-     * </blockquote>
-     */
-    private Map<String, MultiDingerConfig> container;
+	/**
+	 * 全局 MultiDingerConfig key
+	 */
+	public static final String GLOABL_KEY = MultiDingerConfigContainer.class.getName();
+	/**
+	 * <blockquote>
+	 * { <br> key: dingclasssName | GLOABL_KEY <br> value: {@link MultiDingerConfig} <br> } <br>
+	 * </blockquote>
+	 */
+	private Map<String, MultiDingerConfig> container;
 
-    MultiDingerConfigContainer() {
-        this.container = new HashMap<>();
-    }
+	MultiDingerConfigContainer() {
+		this.container = new HashMap<>();
+	}
 
-    /**
-     * @param key
-     *              DingerClass类名 | {@link MultiDingerConfigContainer#GLOABL_KEY}
-     * @param multiDingerConfig
-     *              {@link MultiDingerConfig}
-     * @return
-     *              {@link MultiDingerConfig}
-     */
-    public MultiDingerConfig put(String key, MultiDingerConfig multiDingerConfig) {
-        return this.container.put(key, multiDingerConfig);
-    }
+	/**
+	 * @param key               DingerClass类名 | {@link MultiDingerConfigContainer#GLOABL_KEY}
+	 * @param multiDingerConfig {@link MultiDingerConfig}
+	 * @return {@link MultiDingerConfig}
+	 */
+	public MultiDingerConfig put(String key, MultiDingerConfig multiDingerConfig) {
+		return this.container.put(key, multiDingerConfig);
+	}
 
-    public boolean isEmpty() {
-        return this.container.isEmpty();
-    }
+	public boolean isEmpty() {
+		return this.container.isEmpty();
+	}
 
-    public MultiDingerConfig get(DingerType dingerType, String key) {
-        key = dingerType + DingerConstant.SPOT_SEPERATOR + key;
-        if (this.container.containsKey(key)) {
-            return this.container.get(key);
-        }
-        return this.container.get(dingerType + DingerConstant.SPOT_SEPERATOR + GLOABL_KEY);
-    }
+	public MultiDingerConfig get(DingerType dingerType, String key) {
+		key = dingerType + DingerConstant.SPOT_SEPERATOR + key;
+		if (this.container.containsKey(key)) {
+			return this.container.get(key);
+		}
+		return this.container.get(dingerType + DingerConstant.SPOT_SEPERATOR + GLOABL_KEY);
+	}
 
-    protected static void clear() {
-        MultiDingerConfigContainer.INSTANCE.container.clear();
-    }
+	protected static void clear() {
+		MultiDingerConfigContainer.INSTANCE.container.clear();
+	}
 }

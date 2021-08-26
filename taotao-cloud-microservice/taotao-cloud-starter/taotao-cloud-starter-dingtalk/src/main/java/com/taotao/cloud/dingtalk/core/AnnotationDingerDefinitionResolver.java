@@ -15,6 +15,12 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
+import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
+
 import com.taotao.cloud.dingtalk.core.annatations.DingerImageText;
 import com.taotao.cloud.dingtalk.core.annatations.DingerLink;
 import com.taotao.cloud.dingtalk.core.annatations.DingerMarkdown;
@@ -23,11 +29,10 @@ import com.taotao.cloud.dingtalk.core.entity.DingerMethod;
 import com.taotao.cloud.dingtalk.core.entity.enums.MessageMainType;
 import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Method;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -36,59 +41,65 @@ import java.util.List;
  * @author Jaemon
  * @since 1.2
  */
-public class AnnotationDingerDefinitionResolver extends AbstractDingerDefinitionResolver<List<Class<?>>> {
-    private static final Logger log = LoggerFactory.getLogger(AnnotationDingerDefinitionResolver.class);
+public class AnnotationDingerDefinitionResolver extends
+	AbstractDingerDefinitionResolver<List<Class<?>>> {
 
-    @Override
-    public void resolver(List<Class<?>> dingerClasses) {
-        for (Class<?> dingerClass : dingerClasses) {
-            // dinger 层钉钉机器人配置
-            DingerConfig dingerConfiguration = dingerConfiguration(dingerClass);
+	private static final Logger log = LoggerFactory.getLogger(
+		AnnotationDingerDefinitionResolver.class);
 
-            String namespace = dingerClass.getName();
-            Method[] methods = dingerClass.getMethods();
-            for (Method method : methods) {
-                String dingerName = namespace + SPOT_SEPERATOR + method.getName();
-                String dingerDefinitionKey = MessageMainType.ANNOTATION + SPOT_SEPERATOR;
+	@Override
+	public void resolver(List<Class<?>> dingerClasses) {
+		for (Class<?> dingerClass : dingerClasses) {
+			// dinger 层钉钉机器人配置
+			DingerConfig dingerConfiguration = dingerConfiguration(dingerClass);
 
-                Object source;
-                MessageSubType messageSubType;
-                int[] paramTypes = null;
-                if (method.isAnnotationPresent(DingerText.class)) {
-                    source = method.getAnnotation(DingerText.class);
-                    messageSubType = MessageSubType.TEXT;
-                } else if (method.isAnnotationPresent(DingerMarkdown.class)) {
-                    source = method.getAnnotation(DingerMarkdown.class);
-                    messageSubType = MessageSubType.MARKDOWN;
-                } else if (method.isAnnotationPresent(DingerImageText.class)) {
-                    paramTypes = methodParamsGenericType(method, DingerImageText.clazz);
-                    if (paramTypes.length != 1) {
-                        throw new DingerException(IMAGETEXT_METHOD_PARAM_EXCEPTION, dingerName);
-                    }
-                    source = method.getAnnotation(DingerImageText.class);
-                    messageSubType = MessageSubType.IMAGETEXT;
-                } else if (method.isAnnotationPresent(DingerLink.class)) {
-                    paramTypes = methodParamsType(method, DingerLink.clazz);
-                    if (paramTypes.length != 1) {
-                        throw new DingerException(LINK_METHOD_PARAM_EXCEPTION, dingerName);
-                    }
-                    source = method.getAnnotation(DingerLink.class);
-                    messageSubType = MessageSubType.LINK;
-                } else {
-                    if (log.isDebugEnabled()) {
-                        log.debug("register annotation dingerDefinition and skip method={}(possible use xml definition).", dingerName);
-                    }
-                    continue;
-                }
+			String namespace = dingerClass.getName();
+			Method[] methods = dingerClass.getMethods();
+			for (Method method : methods) {
+				String dingerName = namespace + SPOT_SEPERATOR + method.getName();
+				String dingerDefinitionKey = MessageMainType.ANNOTATION + SPOT_SEPERATOR;
 
-                registerDingerDefinition(
-                        dingerName, source,
-                        dingerDefinitionKey + messageSubType,
-                        dingerConfiguration,
-                        new DingerMethod(dingerName, parameterNameDiscoverer.getParameterNames(method), paramTypes)
-                );
-            }
+				Object source;
+				MessageSubType messageSubType;
+				int[] paramTypes = null;
+				if (method.isAnnotationPresent(DingerText.class)) {
+					source = method.getAnnotation(DingerText.class);
+					messageSubType = MessageSubType.TEXT;
+				} else if (method.isAnnotationPresent(DingerMarkdown.class)) {
+					source = method.getAnnotation(DingerMarkdown.class);
+					messageSubType = MessageSubType.MARKDOWN;
+				} else if (method.isAnnotationPresent(DingerImageText.class)) {
+					paramTypes = methodParamsGenericType(method, DingerImageText.clazz);
+					if (paramTypes.length != 1) {
+						throw new DingerException(IMAGETEXT_METHOD_PARAM_EXCEPTION, dingerName);
+					}
+					source = method.getAnnotation(DingerImageText.class);
+					messageSubType = MessageSubType.IMAGETEXT;
+				} else if (method.isAnnotationPresent(DingerLink.class)) {
+					paramTypes = methodParamsType(method, DingerLink.clazz);
+					if (paramTypes.length != 1) {
+						throw new DingerException(LINK_METHOD_PARAM_EXCEPTION, dingerName);
+					}
+					source = method.getAnnotation(DingerLink.class);
+					messageSubType = MessageSubType.LINK;
+				} else {
+					if (log.isDebugEnabled()) {
+						log.debug(
+							"register annotation dingerDefinition and skip method={}(possible use xml definition).",
+							dingerName);
+					}
+					continue;
+				}
 
-        }
-    }
+				registerDingerDefinition(
+					dingerName, source,
+					dingerDefinitionKey + messageSubType,
+					dingerConfiguration,
+					new DingerMethod(dingerName, parameterNameDiscoverer.getParameterNames(method),
+						paramTypes)
+				);
+			}
+
+		}
+	}
 }

@@ -27,110 +27,80 @@ import java.util.Map;
  */
 public interface DingerHttpClient {
 
-    /**
-     * get request
-     *
-     * @param url
-     *          请求URL地址
-     * @return
-     *          response message
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String get(String url) throws SendMsgException;
+	/**
+	 * get request
+	 *
+	 * @param url 请求URL地址
+	 * @return response message
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String get(String url) throws SendMsgException;
 
-    /**
-     * get request
-     *
-     * @param url
-     *          请求URL地址
-     * @param headers
-     *          请求头
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String get(String url, Map<String, String> headers) throws SendMsgException;
+	/**
+	 * get request
+	 *
+	 * @param url     请求URL地址
+	 * @param headers 请求头
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String get(String url, Map<String, String> headers) throws SendMsgException;
 
-    /**
-     * get request
-     *
-     * @param url
-     *          请求URL地址
-     * @param headers
-     *          请求头
-     * @param params
-     *          请求参数
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String get(String url, Map<String, String> headers, Map<String, ?> params) throws SendMsgException;
+	/**
+	 * get request
+	 *
+	 * @param url     请求URL地址
+	 * @param headers 请求头
+	 * @param params  请求参数
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String get(String url, Map<String, String> headers, Map<String, ?> params)
+		throws SendMsgException;
 
-    /**
-     * post request
-     *
-     * @param url
-     *          请求URL地址
-     * @param message
-     *          请求体信息
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String post(String url, String message) throws SendMsgException;
+	/**
+	 * post request
+	 *
+	 * @param url     请求URL地址
+	 * @param message 请求体信息
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String post(String url, String message) throws SendMsgException;
 
-    /**
-     * post request
-     *
-     * @param url
-     *          请求URL地址
-     * @param headers
-     *          请求头
-     * @param message
-     *          请求体信息
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String post(String url, Map<String, String> headers, String message) throws SendMsgException;
+	/**
+	 * post request
+	 *
+	 * @param url     请求URL地址
+	 * @param headers 请求头
+	 * @param message 请求体信息
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String post(String url, Map<String, String> headers, String message) throws SendMsgException;
 
 
-    /**
-     * post request
-     *
-     * @param url
-     *          请求URL地址
-     * @param headers
-     *          请求头
-     * @param message
-     *          请求体信息
-     * @param <T>
-     *          请求内容类型
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    <T> String post(String url, Map<String, String> headers, T message) throws SendMsgException;
+	/**
+	 * post request
+	 *
+	 * @param url     请求URL地址
+	 * @param headers 请求头
+	 * @param message 请求体信息
+	 * @param <T>     请求内容类型
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	<T> String post(String url, Map<String, String> headers, T message) throws SendMsgException;
 
-    /**
-     * post request
-     *
-     * @param url
-     *          请求URL地址
-     * @param headers
-     *          请求头
-     * @param params
-     *          请求参数
-     * @return
-     *          响应内容
-     * @throws SendMsgException
-     *          ex {@link SendMsgException}
-     */
-    String post(String url, Map<String, String> headers, Map<String, ?> params) throws SendMsgException;
+	/**
+	 * post request
+	 *
+	 * @param url     请求URL地址
+	 * @param headers 请求头
+	 * @param params  请求参数
+	 * @return 响应内容
+	 * @throws SendMsgException ex {@link SendMsgException}
+	 */
+	String post(String url, Map<String, String> headers, Map<String, ?> params)
+		throws SendMsgException;
 }

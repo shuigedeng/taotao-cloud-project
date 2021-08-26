@@ -17,6 +17,7 @@ package com.taotao.cloud.dingtalk.multi.algorithm;
 
 
 import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.multi.MultiDingerAlgorithmInjectRegister;
 import java.util.List;
 
 /**
@@ -26,54 +27,52 @@ import java.util.List;
  * @since 1.0
  */
 public interface AlgorithmHandler {
-    /** 默认索引号从0开始 */
-    int DEFAULT_INDEX = 0;
-    /**
-     * {@link MultiDingerAlgorithmInjectRegister}
-     */
-    String MULTI_DINGER_PRIORITY_EXECUTE = "multiDingerAlgorithmInjectRegister";
 
-    /**
-     * 具体算法处理逻辑
-     *
-     * @param dingerConfigs
-     *              多钉钉机器人配置集
-     * @param defaultDingerConfig
-     *              默认钉钉机器人配置，即： 未开启MultiDinger时使用的机器人配置
-     * @return dingerConfig
-     *              返回当前应该使用的钉钉机器人配置{@link DingerConfig}
-     * */
-    DingerConfig handler(List<DingerConfig> dingerConfigs, DingerConfig defaultDingerConfig);
+	/**
+	 * 默认索引号从0开始
+	 */
+	int DEFAULT_INDEX = 0;
+	/**
+	 * {@link MultiDingerAlgorithmInjectRegister}
+	 */
+	String MULTI_DINGER_PRIORITY_EXECUTE = "multiDingerAlgorithmInjectRegister";
 
-    /**
-     * dingerConfig
-     *
-     * @param dingerConfigs
-     *              多钉钉机器人配置集
-     * @param defaultDingerConfig
-     *              默认钉钉机器人配置，即： 未开启MultiDinger时使用的机器人配置
-     * @return dingerConfig
-     *              返回当前应该使用的钉钉机器人配置{@link DingerConfig}
-     * */
-    default DingerConfig dingerConfig(List<DingerConfig> dingerConfigs, DingerConfig defaultDingerConfig) {
-        if (dingerConfigs == null || dingerConfigs.isEmpty()) {
-            return defaultDingerConfig;
-        }
+	/**
+	 * 具体算法处理逻辑
+	 *
+	 * @param dingerConfigs       多钉钉机器人配置集
+	 * @param defaultDingerConfig 默认钉钉机器人配置，即： 未开启MultiDinger时使用的机器人配置
+	 * @return dingerConfig 返回当前应该使用的钉钉机器人配置{@link DingerConfig}
+	 */
+	DingerConfig handler(List<DingerConfig> dingerConfigs, DingerConfig defaultDingerConfig);
 
-        // 如果只配置一个，则不需要执行算法处理逻辑
-        if (dingerConfigs.size() == 1) {
-            return dingerConfigs.get(0);
-        }
+	/**
+	 * dingerConfig
+	 *
+	 * @param dingerConfigs       多钉钉机器人配置集
+	 * @param defaultDingerConfig 默认钉钉机器人配置，即： 未开启MultiDinger时使用的机器人配置
+	 * @return dingerConfig 返回当前应该使用的钉钉机器人配置{@link DingerConfig}
+	 */
+	default DingerConfig dingerConfig(List<DingerConfig> dingerConfigs,
+		DingerConfig defaultDingerConfig) {
+		if (dingerConfigs == null || dingerConfigs.isEmpty()) {
+			return defaultDingerConfig;
+		}
 
-        return handler(dingerConfigs, defaultDingerConfig);
-    }
+		// 如果只配置一个，则不需要执行算法处理逻辑
+		if (dingerConfigs.size() == 1) {
+			return dingerConfigs.get(0);
+		}
 
-    /**
-     * 算法ID
-     *
-     * @return algorithmId
-     */
-    default String algorithmId() {
-        return this.getClass().getSimpleName();
-    }
+		return handler(dingerConfigs, defaultDingerConfig);
+	}
+
+	/**
+	 * 算法ID
+	 *
+	 * @return algorithmId
+	 */
+	default String algorithmId() {
+		return this.getClass().getSimpleName();
+	}
 }

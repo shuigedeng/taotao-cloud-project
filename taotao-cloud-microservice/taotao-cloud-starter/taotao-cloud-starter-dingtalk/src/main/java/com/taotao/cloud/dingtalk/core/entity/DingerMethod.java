@@ -7,39 +7,40 @@ package com.taotao.cloud.dingtalk.core.entity;
  * @version 1.0
  */
 public class DingerMethod {
-    String methodName;
-    String[] methodParams;
-    int[] paramTypes;
 
-    public DingerMethod(String methodName, String[] methodParams, int[] paramTypes) {
-        this.methodName = methodName;
-        this.methodParams = methodParams;
-        this.paramTypes = paramTypes;
-    }
+	String methodName;
+	String[] methodParams;
+	int[] paramTypes;
 
-    public boolean check() {
-        if (paramTypes == null) {
-            return false;
-        }
+	public DingerMethod(String methodName, String[] methodParams, int[] paramTypes) {
+		this.methodName = methodName;
+		this.methodParams = methodParams;
+		this.paramTypes = paramTypes;
+	}
 
-        int length = this.methodParams.length;
-        for (int index : paramTypes) {
-            if (index >= length) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean check() {
+		if (paramTypes == null) {
+			return false;
+		}
 
-    public String getMethodName() {
-        return methodName;
-    }
+		int length = this.methodParams.length;
+		for (int index : paramTypes) {
+			if (index >= length) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public String[] getMethodParams() {
-        return methodParams;
-    }
+	public String getMethodName() {
+		return methodName;
+	}
 
-    public int[] getParamTypes() {
-        return paramTypes;
-    }
+	public String[] getMethodParams() {
+		return methodParams;
+	}
+
+	public int[] getParamTypes() {
+		return paramTypes;
+	}
 }

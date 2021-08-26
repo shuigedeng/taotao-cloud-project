@@ -4,7 +4,6 @@ import com.taotao.cloud.prometheus.pojos.PromethuesNotice;
 import com.taotao.cloud.prometheus.properties.notice.EmailNoticeProperty;
 import com.taotao.cloud.prometheus.text.NoticeTextResolver;
 import java.util.regex.Pattern;
-
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;

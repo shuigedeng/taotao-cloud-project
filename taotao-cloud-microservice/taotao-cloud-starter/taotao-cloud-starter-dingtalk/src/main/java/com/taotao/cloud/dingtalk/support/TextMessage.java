@@ -27,11 +27,11 @@ import java.text.MessageFormat;
  */
 public class TextMessage implements CustomMessage {
 
-    @Override
-    public String message(String projectId, DingerRequest request) {
-        String content = request.getContent();
-        return MessageFormat.format(
-                "【Dinger通知】 {0}\n- 内容: {1}.",
-                projectId, content);
-    }
+	@Override
+	public String message(String projectId, DingerRequest request) {
+		String content = request.getContent();
+		return MessageFormat.format(
+			"【Dinger通知】 {0}\n- 内容: {1}.",
+			projectId, content);
+	}
 }

@@ -28,43 +28,44 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "message")
 public class MessageTag {
-    private String identityId;
-    @PriorityColumn(clazz = BodyTag.class, column = "type", priority = true)
-    private String dingerType;
-    private BodyTag body;
-    private ConfigurationTag configuration;
 
-    @XmlAttribute(required = true, name = "id")
-    public String getIdentityId() {
-        return identityId;
-    }
+	private String identityId;
+	@PriorityColumn(clazz = BodyTag.class, column = "type", priority = true)
+	private String dingerType;
+	private BodyTag body;
+	private ConfigurationTag configuration;
 
-    @XmlAttribute(name = "type")
-    public String getDingerType() {
-        return dingerType.toUpperCase();
-    }
+	@XmlAttribute(required = true, name = "id")
+	public String getIdentityId() {
+		return identityId;
+	}
 
-    public BodyTag getBody() {
-        return body;
-    }
+	@XmlAttribute(name = "type")
+	public String getDingerType() {
+		return dingerType.toUpperCase();
+	}
 
-    public ConfigurationTag getConfiguration() {
-        return configuration;
-    }
+	public BodyTag getBody() {
+		return body;
+	}
 
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId;
-    }
+	public ConfigurationTag getConfiguration() {
+		return configuration;
+	}
 
-    public void setDingerType(String dingerType) {
-        this.dingerType = dingerType;
-    }
+	public void setIdentityId(String identityId) {
+		this.identityId = identityId;
+	}
 
-    public void setBody(BodyTag body) {
-        this.body = body;
-    }
+	public void setDingerType(String dingerType) {
+		this.dingerType = dingerType;
+	}
 
-    public void setConfiguration(ConfigurationTag configuration) {
-        this.configuration = configuration;
-    }
+	public void setBody(BodyTag body) {
+		this.body = body;
+	}
+
+	public void setConfiguration(ConfigurationTag configuration) {
+		this.configuration = configuration;
+	}
 }

@@ -27,34 +27,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jaemon
  * @since 1.0
  */
-@XmlRootElement(name="body")
+@XmlRootElement(name = "body")
 public class BodyTag {
-    @PriorityColumn(clazz = MessageTag.class, column = "dingerType")
-    private String type = MessageSubType.TEXT.name();
-    private ContentTag content;
-    private PhonesTag phones;
 
-    public String getType() {
-        return type;
-    }
+	@PriorityColumn(clazz = MessageTag.class, column = "dingerType")
+	private String type = MessageSubType.TEXT.name();
+	private ContentTag content;
+	private PhonesTag phones;
 
-    public ContentTag getContent() {
-        return content;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public PhonesTag getPhones() {
-        return phones;
-    }
+	public ContentTag getContent() {
+		return content;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public PhonesTag getPhones() {
+		return phones;
+	}
 
-    public void setContent(ContentTag content) {
-        this.content = content;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setPhones(PhonesTag phones) {
-        this.phones = phones;
-    }
+	public void setContent(ContentTag content) {
+		this.content = content;
+	}
+
+	public void setPhones(PhonesTag phones) {
+		this.phones = phones;
+	}
 }

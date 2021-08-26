@@ -1,11 +1,9 @@
-# Auto Configuration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.github.jaemon.dinger.config.BeanConfiguration,\
-com.github.jaemon.dinger.config.DingerAutoConfiguration,\
-com.github.jaemon.dinger.config.DingerConfiguration,\
-com.github.jaemon.dinger.config.DingerHttpClientConfig,\
-com.github.jaemon.dinger.config.DingerThreadPoolConfig
+com.taotao.cloud.dingtalk.config.BeanConfiguration,\
+com.taotao.cloud.dingtalk.config.DingerAutoConfiguration,\
+com.taotao.cloud.dingtalk.config.DingerConfiguration,\
+com.taotao.cloud.dingtalk.config.DingerHttpClientConfig,\
+com.taotao.cloud.dingtalk.config.DingerThreadPoolConfig
 
-# Application Listeners
 org.springframework.context.ApplicationListener=\
-com.github.jaemon.dinger.listeners.ExitEventListener
+com.taotao.cloud.dingtalk.listeners.ExitEventListener

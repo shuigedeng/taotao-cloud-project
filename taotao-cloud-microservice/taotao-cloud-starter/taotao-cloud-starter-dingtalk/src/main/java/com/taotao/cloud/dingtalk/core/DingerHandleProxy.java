@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 package com.taotao.cloud.dingtalk.core;
+
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
+
 import com.taotao.cloud.dingtalk.core.annatations.DingerClose;
 import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.core.entity.MsgType;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerResponseCodeEnum;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+import com.taotao.cloud.dingtalk.core.session.Configuration;
+import java.lang.reflect.Method;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Method;
-import java.util.*;
 
 
 /**
@@ -33,66 +36,67 @@ import java.util.*;
  * @since 1.0
  */
 public class DingerHandleProxy extends DingerInvocationHandler {
-    private static final Logger log = LoggerFactory.getLogger(DingerHandleProxy.class);
 
-    public DingerHandleProxy(Configuration configuration) {
-        this.dingerRobot = configuration.getDingerRobot();
-        this.dingerProperties = configuration.getDingerProperties();
-    }
+	private static final Logger log = LoggerFactory.getLogger(DingerHandleProxy.class);
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Class<?> dingerClass = method.getDeclaringClass();
+	public DingerHandleProxy(Configuration configuration) {
+		this.dingerRobot = configuration.getDingerRobot();
+		this.dingerProperties = configuration.getDingerProperties();
+	}
 
-        final String methodName = method.getName();
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		Class<?> dingerClass = method.getDeclaringClass();
 
-        if (
-                ignoreMethodMap.containsKey(methodName)
-        ) {
-            return ignoreMethodMap.get(methodName).execute(this, args);
-        }
+		final String methodName = method.getName();
 
-        if (
-                dingerClass.isAnnotationPresent(DingerClose.class)
-        ) {
-            return null;
-        }
+		if (
+			ignoreMethodMap.containsKey(methodName)
+		) {
+			return ignoreMethodMap.get(methodName).execute(this, args);
+		}
 
-        if (
-                method.isAnnotationPresent(DingerClose.class)
-        ) {
-            return null;
-        }
+		if (
+			dingerClass.isAnnotationPresent(DingerClose.class)
+		) {
+			return null;
+		}
 
-        final String dingerClassName = dingerClass.getName();
-        String keyName = dingerClassName + SPOT_SEPERATOR + methodName;
-        try {
-            DingerType useDinger = dingerType(method);
-            DingerDefinition dingerDefinition = dingerDefinition(
-                    useDinger, dingerClassName, keyName
-            );
+		if (
+			method.isAnnotationPresent(DingerClose.class)
+		) {
+			return null;
+		}
 
-            DingerResponse dingerResponse;
+		final String dingerClassName = dingerClass.getName();
+		String keyName = dingerClassName + SPOT_SEPERATOR + methodName;
+		try {
+			DingerType useDinger = dingerType(method);
+			DingerDefinition dingerDefinition = dingerDefinition(
+				useDinger, dingerClassName, keyName
+			);
 
-            if (dingerDefinition == null) {
-                dingerResponse = DingerResponse.failed(
-                        DingerResponseCodeEnum.MESSAGE_TYPE_UNSUPPORTED,
-                        String.format("method %s does not support dinger %s.", keyName, useDinger));
-            } else {
-                // method params map
-                Map<String, Object> params = paramsHandler(method, dingerDefinition, args);
+			DingerResponse dingerResponse;
 
-                MsgType message = transfer(dingerDefinition, params);
+			if (dingerDefinition == null) {
+				dingerResponse = DingerResponse.failed(
+					DingerResponseCodeEnum.MESSAGE_TYPE_UNSUPPORTED,
+					String.format("method %s does not support dinger %s.", keyName, useDinger));
+			} else {
+				// method params map
+				Map<String, Object> params = paramsHandler(method, dingerDefinition, args);
 
-                dingerResponse = dingerRobot.send(message);
-            }
+				MsgType message = transfer(dingerDefinition, params);
 
-            // return...
-            return resultHandler(method.getReturnType(), dingerResponse);
-        } finally {
-            DingerHelper.clearDinger();
-        }
-    }
+				dingerResponse = dingerRobot.send(message);
+			}
+
+			// return...
+			return resultHandler(method.getReturnType(), dingerResponse);
+		} finally {
+			DingerHelper.clearDinger();
+		}
+	}
 
 
 }

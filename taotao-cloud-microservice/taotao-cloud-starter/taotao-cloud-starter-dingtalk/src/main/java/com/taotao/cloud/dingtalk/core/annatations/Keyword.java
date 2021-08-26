@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core.annatations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Keyword(quick locate to servive log)
@@ -28,5 +32,6 @@ import java.lang.annotation.*;
 @Target(ElementType.PARAMETER)
 @Deprecated
 public @interface Keyword {
-    boolean keyword() default true;
+
+	boolean keyword() default true;
 }

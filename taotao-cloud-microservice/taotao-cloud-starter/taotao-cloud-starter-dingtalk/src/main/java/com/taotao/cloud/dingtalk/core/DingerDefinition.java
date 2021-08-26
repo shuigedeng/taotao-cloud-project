@@ -29,137 +29,132 @@ import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
  */
 public interface DingerDefinition {
 
-    /**
-     * dingerName
-     *
-     * @return dingerName
-     */
-    String dingerName();
+	/**
+	 * dingerName
+	 *
+	 * @return dingerName
+	 */
+	String dingerName();
 
-    /**
-     * setKeyName
-     *
-     * @param dingerName dingerName
-     */
-    void setDingerName(String dingerName);
+	/**
+	 * setKeyName
+	 *
+	 * @param dingerName dingerName
+	 */
+	void setDingerName(String dingerName);
 
-    /**
-     * dingerDefinition生成器
-     *
-     * @return dingerDefinitionGenerator
-     */
-    Class<? extends DingerDefinitionGenerator> dingerDefinitionGenerator();
+	/**
+	 * dingerDefinition生成器
+	 *
+	 * @return dingerDefinitionGenerator
+	 */
+	Class<? extends DingerDefinitionGenerator> dingerDefinitionGenerator();
 
-    /**
-     * setDingerDefinitionGenerator
-     *
-     * @param dingerDefinitionGenerator dingerDefinitionGenerator
-     */
-    void setDingerDefinitionGenerator(Class<? extends DingerDefinitionGenerator> dingerDefinitionGenerator);
+	/**
+	 * setDingerDefinitionGenerator
+	 *
+	 * @param dingerDefinitionGenerator dingerDefinitionGenerator
+	 */
+	void setDingerDefinitionGenerator(
+		Class<? extends DingerDefinitionGenerator> dingerDefinitionGenerator);
 
-    /**
-     * 获取Dinger消息体内容
-     *
-     * @return message
-     */
-    MsgType message();
+	/**
+	 * 获取Dinger消息体内容
+	 *
+	 * @return message
+	 */
+	MsgType message();
 
-    /**
-     * 设置Dinger消息体内容
-     *
-     * @param message message
-     */
-    void setMessage(MsgType message);
+	/**
+	 * 设置Dinger消息体内容
+	 *
+	 * @param message message
+	 */
+	void setMessage(MsgType message);
 
-    /**
-     * 获取Dinger机器人配置
-     *
-     * @return dingerConfig
-     */
-    DingerConfig dingerConfig();
+	/**
+	 * 获取Dinger机器人配置
+	 *
+	 * @return dingerConfig
+	 */
+	DingerConfig dingerConfig();
 
-    /**
-     * 设置Dinger机器人配置
-     *
-     * @param dingerConfig dingerConfig
-     */
-    void setDingerConfig(DingerConfig dingerConfig);
+	/**
+	 * 设置Dinger机器人配置
+	 *
+	 * @param dingerConfig dingerConfig
+	 */
+	void setDingerConfig(DingerConfig dingerConfig);
 
-    /**
-     * dingerType
-     *
-     * @return dingerType
-     */
-    DingerType dingerType();
+	/**
+	 * dingerType
+	 *
+	 * @return dingerType
+	 */
+	DingerType dingerType();
 
 
-    /**
-     * setDingerType
-     *
-     * @param dingerType
-     *          dingerType
-     */
-    void setDingerType(DingerType dingerType);
+	/**
+	 * setDingerType
+	 *
+	 * @param dingerType dingerType
+	 */
+	void setDingerType(DingerType dingerType);
 
-    /**
-     * messageMainType
-     *
-     * @return dingerType
-     */
-    MessageMainType messageMainType();
+	/**
+	 * messageMainType
+	 *
+	 * @return dingerType
+	 */
+	MessageMainType messageMainType();
 
-    /**
-     * setMessageMainType
-     *
-     * @param messageMainType messageMainType
-     */
-    void setMessageMainType(MessageMainType messageMainType);
+	/**
+	 * setMessageMainType
+	 *
+	 * @param messageMainType messageMainType
+	 */
+	void setMessageMainType(MessageMainType messageMainType);
 
-    /**
-     * messageSubType
-     *
-     * @return messageSubType
-     */
-    MessageSubType messageSubType();
+	/**
+	 * messageSubType
+	 *
+	 * @return messageSubType
+	 */
+	MessageSubType messageSubType();
 
-    /**
-     * setMessageSubType
-     *
-     * @param messageSubType
-     *          messageSubType
-     */
-    void setMessageSubType(MessageSubType messageSubType);
+	/**
+	 * setMessageSubType
+	 *
+	 * @param messageSubType messageSubType
+	 */
+	void setMessageSubType(MessageSubType messageSubType);
 
-    /**
-     * methodParams
-     *
-     * @return
-     *      array
-     */
-    String[] methodParams();
+	/**
+	 * methodParams
+	 *
+	 * @return array
+	 */
+	String[] methodParams();
 
-    /**
-     * setMethodParams
-     *
-     * @param methodParams
-     *          methodParams
-     */
-    void setMethodParams(String[] methodParams);
+	/**
+	 * setMethodParams
+	 *
+	 * @param methodParams methodParams
+	 */
+	void setMethodParams(String[] methodParams);
 
-    /**
-     * genericIndex
-     *
-     * @return
-     *      genericIndex
-     */
-    int[] genericIndex();
+	/**
+	 * genericIndex
+	 *
+	 * @return genericIndex
+	 */
+	int[] genericIndex();
 
-    /**
-     * setGenericIndex
-     *
-     * @param genericIndex
-     *          genericIndex
-     */
-    void setGenericIndex(int[] genericIndex);
+	/**
+	 * setGenericIndex
+	 *
+	 * @param genericIndex genericIndex
+	 */
+	void setGenericIndex(int[] genericIndex);
 
 }

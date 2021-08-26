@@ -1,12 +1,12 @@
 package com.taotao.cloud.seckill.biz.service.impl;
 
-import com.itstyle.seckill.common.dynamicquery.DynamicQuery;
-import com.itstyle.seckill.common.entity.RedPacket;
-import com.itstyle.seckill.common.entity.RedPacketRecord;
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.redis.RedisUtil;
-import com.itstyle.seckill.distributedlock.redis.RedissLockUtil;
-import com.itstyle.seckill.service.IRedPacketService;
+import com.taotao.cloud.seckill.biz.common.dynamicquery.DynamicQuery;
+import com.taotao.cloud.seckill.biz.common.entity.RedPacket;
+import com.taotao.cloud.seckill.biz.common.entity.RedPacketRecord;
+import com.taotao.cloud.seckill.biz.common.entity.Result;
+import com.taotao.cloud.seckill.biz.common.redis.RedisUtil;
+import com.taotao.cloud.seckill.biz.distributedlock.redis.RedissLockUtil;
+import com.taotao.cloud.seckill.biz.service.IRedPacketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

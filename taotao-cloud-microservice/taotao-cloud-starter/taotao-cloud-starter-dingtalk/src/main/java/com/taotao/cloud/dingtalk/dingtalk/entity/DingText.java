@@ -28,45 +28,46 @@ import java.util.Map;
  */
 public class DingText extends Message {
 
-    /**
-     * 消息内容
-     * */
-    private Text text;
+	/**
+	 * 消息内容
+	 */
+	private Text text;
 
-    public DingText(Text text) {
-        setMsgtype(DingTalkMsgType.TEXT.type());
-        this.text = text;
-    }
+	public DingText(Text text) {
+		setMsgtype(DingTalkMsgType.TEXT.type());
+		this.text = text;
+	}
 
-    public Text getText() {
-        return text;
-    }
+	public Text getText() {
+		return text;
+	}
 
-    public void setText(Text text) {
-        this.text = text;
-    }
+	public void setText(Text text) {
+		this.text = text;
+	}
 
-    public static class Text implements Serializable {
-        private String content;
+	public static class Text implements Serializable {
 
-        public String getContent() {
-            return content;
-        }
+		private String content;
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+		public String getContent() {
+			return content;
+		}
 
-        public Text() {
-        }
+		public void setContent(String content) {
+			this.content = content;
+		}
 
-        public Text(String content) {
-            this.content = content;
-        }
-    }
+		public Text() {
+		}
 
-    @Override
-    public void transfer(Map<String, Object> params) {
-        this.text.content = replaceContent(this.text.content, params);
-    }
+		public Text(String content) {
+			this.content = content;
+		}
+	}
+
+	@Override
+	public void transfer(Map<String, Object> params) {
+		this.text.content = replaceContent(this.text.content, params);
+	}
 }

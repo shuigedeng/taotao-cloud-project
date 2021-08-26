@@ -7,10 +7,6 @@ public class DingDingTextNotice extends DingDingNotice {
 
 	private DingDingText text;
 
-	/**
-	 * @param at
-	 * @param msgtype
-	 */
 	public DingDingTextNotice(String msg, String[] phones) {
 		super(new DingDingAt(phones), DingdingTextType.TEXT.getMsgType());
 		text = new DingDingText(msg);

@@ -1,6 +1,6 @@
 package com.taotao.cloud.seckill.biz.common.exception;
 
-import com.itstyle.seckill.common.entity.Result;
+import com.taotao.cloud.seckill.biz.common.entity.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;

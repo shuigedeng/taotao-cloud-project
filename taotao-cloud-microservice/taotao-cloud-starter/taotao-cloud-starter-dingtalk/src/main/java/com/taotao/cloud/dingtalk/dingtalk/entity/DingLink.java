@@ -29,88 +29,101 @@ import java.util.Map;
  * @since 1.0
  */
 public class DingLink extends DingTalkMessage {
-    /** {@link Link} */
-    private Link link;
 
-    public DingLink() {
-        setMsgtype(DingTalkMsgType.LINK.type());
-    }
+	/**
+	 * {@link Link}
+	 */
+	private Link link;
 
-    public DingLink(Link link) {
-        this();
-        this.link = link;
-    }
+	public DingLink() {
+		setMsgtype(DingTalkMsgType.LINK.type());
+	}
 
-    public Link getLink() {
-        return link;
-    }
+	public DingLink(Link link) {
+		this();
+		this.link = link;
+	}
 
-    public void setLink(Link link) {
-        this.link = link;
-    }
+	public Link getLink() {
+		return link;
+	}
 
-    public static class Link implements Serializable {
-        /** 消息标题 */
-        private String title;
-        /** 消息内容。如果太长只会部分展示 */
-        private String text;
-        /** 点击消息跳转的URL */
-        private String messageUrl;
-        /** 图片URL */
-        private String picUrl;
+	public void setLink(Link link) {
+		this.link = link;
+	}
 
-        public Link() {
-        }
+	public static class Link implements Serializable {
 
-        public Link(String title, String text, String messageUrl, String picUrl) {
-            this.title = title;
-            this.text = text;
-            this.messageUrl = messageUrl;
-            this.picUrl = picUrl;
-        }
+		/**
+		 * 消息标题
+		 */
+		private String title;
+		/**
+		 * 消息内容。如果太长只会部分展示
+		 */
+		private String text;
+		/**
+		 * 点击消息跳转的URL
+		 */
+		private String messageUrl;
+		/**
+		 * 图片URL
+		 */
+		private String picUrl;
 
-        public String getTitle() {
-            return title;
-        }
+		public Link() {
+		}
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+		public Link(String title, String text, String messageUrl, String picUrl) {
+			this.title = title;
+			this.text = text;
+			this.messageUrl = messageUrl;
+			this.picUrl = picUrl;
+		}
 
-        public String getText() {
-            return text;
-        }
+		public String getTitle() {
+			return title;
+		}
 
-        public void setText(String text) {
-            this.text = text;
-        }
+		public void setTitle(String title) {
+			this.title = title;
+		}
 
-        public String getMessageUrl() {
-            return messageUrl;
-        }
+		public String getText() {
+			return text;
+		}
 
-        public void setMessageUrl(String messageUrl) {
-            this.messageUrl = messageUrl;
-        }
+		public void setText(String text) {
+			this.text = text;
+		}
 
-        public String getPicUrl() {
-            return picUrl;
-        }
+		public String getMessageUrl() {
+			return messageUrl;
+		}
 
-        public void setPicUrl(String picUrl) {
-            this.picUrl = picUrl;
-        }
-    }
+		public void setMessageUrl(String messageUrl) {
+			this.messageUrl = messageUrl;
+		}
 
-    @Override
-    public void transfer(Map<String, Object> params) {
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            Object value = entry.getValue();
-            if (DingerLink.clazz.isInstance(value)) {
-                LinkDeo link = (LinkDeo) value;
-                this.link = new Link(link.getTitle(), link.getText(), link.getMessageUrl(), link.getPicUrl());
-                break;
-            }
-        }
-    }
+		public String getPicUrl() {
+			return picUrl;
+		}
+
+		public void setPicUrl(String picUrl) {
+			this.picUrl = picUrl;
+		}
+	}
+
+	@Override
+	public void transfer(Map<String, Object> params) {
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			Object value = entry.getValue();
+			if (DingerLink.clazz.isInstance(value)) {
+				LinkDeo link = (LinkDeo) value;
+				this.link = new Link(link.getTitle(), link.getText(), link.getMessageUrl(),
+					link.getPicUrl());
+				break;
+			}
+		}
+	}
 }

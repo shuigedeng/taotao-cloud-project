@@ -24,24 +24,20 @@ package com.taotao.cloud.dingtalk.core.session;
  */
 public interface DingerSession {
 
-    /**
-     * Retrieves a dinger.
-     *
-     * @param type
-     *          dinger interface class
-     * @param <T>
-     *          the dinger type
-     * @return
-     *          a dinger bound to this DingerSession
-     */
-    <T> T getDinger(Class<T> type);
+	/**
+	 * Retrieves a dinger.
+	 *
+	 * @param type dinger interface class
+	 * @param <T>  the dinger type
+	 * @return a dinger bound to this DingerSession
+	 */
+	<T> T getDinger(Class<T> type);
 
-    /**
-     * dinger configuration
-     *
-     * @return
-     *      {@link Configuration}
-     */
-    Configuration configuration();
+	/**
+	 * dinger configuration
+	 *
+	 * @return {@link Configuration}
+	 */
+	Configuration configuration();
 
 }

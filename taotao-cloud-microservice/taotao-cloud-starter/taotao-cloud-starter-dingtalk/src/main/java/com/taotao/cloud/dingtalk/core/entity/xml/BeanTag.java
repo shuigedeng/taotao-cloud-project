@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core.entity.xml;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 /**
  * BeanTag
@@ -27,28 +27,29 @@ import java.util.List;
  * @author Jaemon
  * @since 1.0
  */
-@XmlRootElement(name="dinger")
+@XmlRootElement(name = "dinger")
 public class BeanTag {
-    private String namespace;
-    private List<MessageTag> messages;
 
-    @XmlAttribute(required = true)
-    public String getNamespace() {
-        return namespace;
-    }
+	private String namespace;
+	private List<MessageTag> messages;
 
-    @XmlElements(value = {
-            @XmlElement(name = "message", type = MessageTag.class)
-    })
-    public List<MessageTag> getMessages() {
-        return messages;
-    }
+	@XmlAttribute(required = true)
+	public String getNamespace() {
+		return namespace;
+	}
 
-    public void setNamespace(String namespace) {
-        this.namespace = namespace;
-    }
+	@XmlElements(value = {
+		@XmlElement(name = "message", type = MessageTag.class)
+	})
+	public List<MessageTag> getMessages() {
+		return messages;
+	}
 
-    public void setMessages(List<MessageTag> messages) {
-        this.messages = messages;
-    }
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public void setMessages(List<MessageTag> messages) {
+		this.messages = messages;
+	}
 }

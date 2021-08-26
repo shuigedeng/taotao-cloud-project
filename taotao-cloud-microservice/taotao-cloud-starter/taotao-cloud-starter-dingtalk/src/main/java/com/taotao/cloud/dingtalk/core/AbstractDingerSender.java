@@ -31,44 +31,41 @@ import org.slf4j.LoggerFactory;
  * @since 1.0
  */
 public abstract class AbstractDingerSender
-        extends DingerHelper
-        implements DingerSender {
-    protected static final Logger log = LoggerFactory.getLogger(AbstractDingerSender.class);
+	extends DingerHelper
+	implements DingerSender {
 
-    protected DingerProperties dingerProperties;
-    protected DingerManagerBuilder dingTalkManagerBuilder;
+	protected static final Logger log = LoggerFactory.getLogger(AbstractDingerSender.class);
 
-    public AbstractDingerSender(DingerProperties dingerProperties, DingerManagerBuilder dingTalkManagerBuilder) {
-        this.dingerProperties = dingerProperties;
-        this.dingTalkManagerBuilder = dingTalkManagerBuilder;
-    }
+	protected DingerProperties dingerProperties;
+	protected DingerManagerBuilder dingTalkManagerBuilder;
 
-    /**
-     * 消息类型校验
-     *
-     * @param messageSubType
-     *              消息类型
-     * @return
-     *              消息生成器
-     */
-    protected CustomMessage customMessage(MessageSubType messageSubType) {
-        return messageSubType == MessageSubType.TEXT ? dingTalkManagerBuilder.textMessage : dingTalkManagerBuilder.markDownMessage;
-    }
+	public AbstractDingerSender(DingerProperties dingerProperties,
+		DingerManagerBuilder dingTalkManagerBuilder) {
+		this.dingerProperties = dingerProperties;
+		this.dingTalkManagerBuilder = dingTalkManagerBuilder;
+	}
 
-    /**
-     * 异常回调
-     *
-     * @param dingerId
-     *          dingerId
-     * @param message
-     *          message
-     * @param ex
-     *          ex
-     * @param <T>
-     *          T
-     */
-    protected <T> void exceptionCallback(String dingerId, T message, DingerException ex) {
-        DingerCallback dkExCallable = new DingerCallback(dingerId, message, ex);
-        dingTalkManagerBuilder.dingerExceptionCallback.execute(dkExCallable);
-    }
+	/**
+	 * 消息类型校验
+	 *
+	 * @param messageSubType 消息类型
+	 * @return 消息生成器
+	 */
+	protected CustomMessage customMessage(MessageSubType messageSubType) {
+		return messageSubType == MessageSubType.TEXT ? dingTalkManagerBuilder.textMessage
+			: dingTalkManagerBuilder.markDownMessage;
+	}
+
+	/**
+	 * 异常回调
+	 *
+	 * @param dingerId dingerId
+	 * @param message  message
+	 * @param ex       ex
+	 * @param <T>      T
+	 */
+	protected <T> void exceptionCallback(String dingerId, T message, DingerException ex) {
+		DingerCallback dkExCallable = new DingerCallback(dingerId, message, ex);
+		dingTalkManagerBuilder.dingerExceptionCallback.execute(dkExCallable);
+	}
 }

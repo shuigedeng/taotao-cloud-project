@@ -27,25 +27,27 @@ import com.taotao.cloud.dingtalk.core.spring.DingerSessionTemplate;
  * @version 1.2
  */
 public abstract class DingerSessionSupport {
-    private DingerSessionTemplate dingerSessionTemplate;
 
-    public void setDingerSessionFactory(DingerSessionFactory dingerSessionFactory) {
+	private DingerSessionTemplate dingerSessionTemplate;
 
-        if (
-                dingerSessionTemplate == null ||
-                        dingerSessionFactory != this.dingerSessionTemplate.getDingerSessionFactory()
-        ) {
-            this.dingerSessionTemplate = createDingerSessionTemplate(dingerSessionFactory);
-        }
+	public void setDingerSessionFactory(DingerSessionFactory dingerSessionFactory) {
 
-    }
+		if (
+			dingerSessionTemplate == null ||
+				dingerSessionFactory != this.dingerSessionTemplate.getDingerSessionFactory()
+		) {
+			this.dingerSessionTemplate = createDingerSessionTemplate(dingerSessionFactory);
+		}
 
-    public DingerSession getDingerSession() {
-        return this.dingerSessionTemplate;
-    }
+	}
+
+	public DingerSession getDingerSession() {
+		return this.dingerSessionTemplate;
+	}
 
 
-    protected DingerSessionTemplate createDingerSessionTemplate(DingerSessionFactory dingerSessionFactory) {
-        return new DingerSessionTemplate(dingerSessionFactory);
-    }
+	protected DingerSessionTemplate createDingerSessionTemplate(
+		DingerSessionFactory dingerSessionFactory) {
+		return new DingerSessionTemplate(dingerSessionFactory);
+	}
 }

@@ -1,5 +1,6 @@
 package com.taotao.cloud.prometheus.config;
 
+import com.google.gson.Gson;
 import com.taotao.cloud.prometheus.httpclient.DefaultDingdingHttpClient;
 import com.taotao.cloud.prometheus.httpclient.DingdingHttpClient;
 import com.taotao.cloud.prometheus.properties.notice.DingDingNoticeProperty;

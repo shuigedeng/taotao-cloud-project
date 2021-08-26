@@ -22,11 +22,11 @@ package com.taotao.cloud.dingtalk.core;
  * @since 1.0
  */
 public interface DingerDefinitionResolver<T> {
-    /**
-     * 解析器
-     *
-     * @param context
-     *          上下文路径
-     */
-    void resolver(T context);
+
+	/**
+	 * 解析器
+	 *
+	 * @param context 上下文路径
+	 */
+	void resolver(T context);
 }

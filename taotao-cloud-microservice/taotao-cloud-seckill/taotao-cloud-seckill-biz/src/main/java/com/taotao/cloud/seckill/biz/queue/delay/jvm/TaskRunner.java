@@ -1,6 +1,6 @@
 package com.taotao.cloud.seckill.biz.queue.delay.jvm;
 
-import com.itstyle.seckill.common.redis.RedisUtil;
+import com.taotao.cloud.seckill.biz.common.redis.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

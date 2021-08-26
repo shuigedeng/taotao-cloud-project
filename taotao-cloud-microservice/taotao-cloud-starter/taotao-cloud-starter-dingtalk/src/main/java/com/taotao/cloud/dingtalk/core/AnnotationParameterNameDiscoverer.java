@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import org.springframework.core.ParameterNameDiscoverer;
-
+import com.taotao.cloud.dingtalk.core.annatations.Parameter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import org.springframework.core.ParameterNameDiscoverer;
 
 /**
  * 注解参数名称解析
@@ -28,40 +28,39 @@ import java.lang.reflect.Method;
  * @since 1.2
  */
 public class AnnotationParameterNameDiscoverer implements ParameterNameDiscoverer {
-    @Override
-    public String[] getParameterNames(Method method) {
-        return getParameterNames(method.getParameters(), method.getParameterAnnotations());
-    }
 
-    @Override
-    public String[] getParameterNames(Constructor<?> ctor) {
-        return getParameterNames(ctor.getParameters(), ctor.getParameterAnnotations());
-    }
+	@Override
+	public String[] getParameterNames(Method method) {
+		return getParameterNames(method.getParameters(), method.getParameterAnnotations());
+	}
 
-    /**
-     * 获取参数名称
-     *
-     * @param parameters
-     *      参数对象{@link java.lang.reflect.Parameter}集
-     * @param parameterAnnotations
-     *      参数注解
-     * @return
-     *      参数名称
-     */
-    protected String[] getParameterNames(java.lang.reflect.Parameter[] parameters, Annotation[][] parameterAnnotations) {
-        String[] params = new String[parameterAnnotations.length];
+	@Override
+	public String[] getParameterNames(Constructor<?> ctor) {
+		return getParameterNames(ctor.getParameters(), ctor.getParameterAnnotations());
+	}
 
-        for (int i = 0; i < parameterAnnotations.length; i++) {
-            Annotation[] parameterAnnotation = parameterAnnotations[i];
-            params[i] = parameters[i].getName();
-            for (Annotation annotation : parameterAnnotation) {
-                if (Parameter.class.isInstance(annotation)) {
-                    Parameter dingerParam = (Parameter) annotation;
-                    params[i] = dingerParam.value();
-                    break;
-                }
-            }
-        }
-        return params;
-    }
+	/**
+	 * 获取参数名称
+	 *
+	 * @param parameters           参数对象{@link java.lang.reflect.Parameter}集
+	 * @param parameterAnnotations 参数注解
+	 * @return 参数名称
+	 */
+	protected String[] getParameterNames(java.lang.reflect.Parameter[] parameters,
+		Annotation[][] parameterAnnotations) {
+		String[] params = new String[parameterAnnotations.length];
+
+		for (int i = 0; i < parameterAnnotations.length; i++) {
+			Annotation[] parameterAnnotation = parameterAnnotations[i];
+			params[i] = parameters[i].getName();
+			for (Annotation annotation : parameterAnnotation) {
+				if (Parameter.class.isInstance(annotation)) {
+					Parameter dingerParam = (Parameter) annotation;
+					params[i] = dingerParam.value();
+					break;
+				}
+			}
+		}
+		return params;
+	}
 }

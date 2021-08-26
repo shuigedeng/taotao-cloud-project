@@ -26,18 +26,15 @@ import java.util.Map;
  */
 public interface ParamHandler {
 
-    /**
-     * Dinger方法参数处理
-     *
-     * @param method
-     *          执行方法
-     * @param dingerDefinition
-     *          Dinger定义
-     * @param values
-     *          Dinger方法实参
-     * @return
-     *          形参和实参的映射关系
-     */
-    Map<String, Object> paramsHandler(Method method, DingerDefinition dingerDefinition, Object[] values);
+	/**
+	 * Dinger方法参数处理
+	 *
+	 * @param method           执行方法
+	 * @param dingerDefinition Dinger定义
+	 * @param values           Dinger方法实参
+	 * @return 形参和实参的映射关系
+	 */
+	Map<String, Object> paramsHandler(Method method, DingerDefinition dingerDefinition,
+		Object[] values);
 
 }

@@ -25,27 +25,28 @@ import org.springframework.beans.factory.FactoryBean;
  * @since 1.0
  */
 public class DingerFactoryBean<T> extends DingerSessionSupport implements FactoryBean<T> {
-    private Class<T> dingerInterface;
 
-    public DingerFactoryBean() {
-    }
+	private Class<T> dingerInterface;
 
-    public DingerFactoryBean(Class dingerInterface) {
-        this.dingerInterface = dingerInterface;
-    }
+	public DingerFactoryBean() {
+	}
 
-    @Override
-    public T getObject() throws Exception {
-        return getDingerSession().getDinger(this.dingerInterface);
-    }
+	public DingerFactoryBean(Class dingerInterface) {
+		this.dingerInterface = dingerInterface;
+	}
 
-    @Override
-    public Class<?> getObjectType() {
-        return dingerInterface;
-    }
+	@Override
+	public T getObject() throws Exception {
+		return getDingerSession().getDinger(this.dingerInterface);
+	}
 
-    @Override
-    public boolean isSingleton() {
-        return true;
-    }
+	@Override
+	public Class<?> getObjectType() {
+		return dingerInterface;
+	}
+
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
 }

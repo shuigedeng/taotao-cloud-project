@@ -16,6 +16,9 @@
 package com.taotao.cloud.dingtalk.core.entity.enums;
 
 
+import static com.taotao.cloud.dingtalk.core.DingerDefinitionHandler.WETALK_AT_ALL;
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION;
+
 import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.core.entity.MsgType;
 import com.taotao.cloud.dingtalk.dingtalk.entity.DingFeedCard;
@@ -40,109 +43,116 @@ import java.util.Objects;
  * @since 1.0
  */
 public enum MessageSubType {
-    /** Text类型 */
-    TEXT(true) {
-        @Override
-        public MsgType msgType(DingerType dingerType, DingerRequest request) {
-            String content = request.getContent();
-            boolean atAll = request.isAtAll();
-            List<String> phones = request.getPhones();
-            if (dingerType == DingerType.DINGTALK) {
-                Message message = new DingText(new DingText.Text(content));
+	/**
+	 * Text类型
+	 */
+	TEXT(true) {
+		@Override
+		public MsgType msgType(DingerType dingerType, DingerRequest request) {
+			String content = request.getContent();
+			boolean atAll = request.isAtAll();
+			List<String> phones = request.getPhones();
+			if (dingerType == DingerType.DINGTALK) {
+				Message message = new DingText(new DingText.Text(content));
 
-                if (atAll) {
-                    message.setAt(new Message.At(true));
-                } else if (phones != null && !phones.isEmpty()) {
-                    message.setAt(new Message.At(phones));
-                }
+				if (atAll) {
+					message.setAt(new Message.At(true));
+				} else if (phones != null && !phones.isEmpty()) {
+					message.setAt(new Message.At(phones));
+				}
 
-                return message;
-            } else {
-                WeText.Text text = new WeText.Text(content);
-                WeText weText = new WeText(text);
-                if (atAll) {
-                    text.setMentioned_mobile_list(Arrays.asList(WETALK_AT_ALL));
-                } else if (phones != null && !phones.isEmpty()) {
-                    text.setMentioned_mobile_list(phones);
-                }
-                return weText;
-            }
-        }
-    },
+				return message;
+			} else {
+				WeText.Text text = new WeText.Text(content);
+				WeText weText = new WeText(text);
+				if (atAll) {
+					text.setMentioned_mobile_list(Arrays.asList(WETALK_AT_ALL));
+				} else if (phones != null && !phones.isEmpty()) {
+					text.setMentioned_mobile_list(phones);
+				}
+				return weText;
+			}
+		}
+	},
 
-    /** Markdown类型 */
-    MARKDOWN(true) {
-        @Override
-        public MsgType msgType(DingerType dingerType, DingerRequest request) {
-            String content = request.getContent();
-            String title = request.getTitle();
-            List<String> phones = request.getPhones();
-            if (dingerType == DingerType.DINGTALK) {
-                Message message = new DingMarkDown(new DingMarkDown.MarkDown(title, content));
+	/**
+	 * Markdown类型
+	 */
+	MARKDOWN(true) {
+		@Override
+		public MsgType msgType(DingerType dingerType, DingerRequest request) {
+			String content = request.getContent();
+			String title = request.getTitle();
+			List<String> phones = request.getPhones();
+			if (dingerType == DingerType.DINGTALK) {
+				Message message = new DingMarkDown(new DingMarkDown.MarkDown(title, content));
 
-                if (!phones.isEmpty()) {
-                    message.setAt(new Message.At(phones));
-                }
+				if (!phones.isEmpty()) {
+					message.setAt(new Message.At(phones));
+				}
 
-                return message;
-            } else {
-                WeMarkdown.Markdown markdown = new WeMarkdown.Markdown(content);
-                WeMarkdown weMarkdown = new WeMarkdown(markdown);
-                return weMarkdown;
-            }
-        }
-    },
+				return message;
+			} else {
+				WeMarkdown.Markdown markdown = new WeMarkdown.Markdown(content);
+				WeMarkdown weMarkdown = new WeMarkdown(markdown);
+				return weMarkdown;
+			}
+		}
+	},
 
-    /** 图文类型 */
-    IMAGETEXT(false) {
-        @Override
-        public MsgType msgType(DingerType dingerType, DingerRequest request) {
-            if (dingerType == DingerType.DINGTALK) {
-                return new DingFeedCard(new ArrayList<>());
-            } else {
-                return new WeNews(new ArrayList<>());
-            }
-        }
-    },
+	/**
+	 * 图文类型
+	 */
+	IMAGETEXT(false) {
+		@Override
+		public MsgType msgType(DingerType dingerType, DingerRequest request) {
+			if (dingerType == DingerType.DINGTALK) {
+				return new DingFeedCard(new ArrayList<>());
+			} else {
+				return new WeNews(new ArrayList<>());
+			}
+		}
+	},
 
-    /** link类型, 只支持 {@link DingerType#DINGTALK} */
-    LINK(false) {
-        @Override
-        public MsgType msgType(DingerType dingerType, DingerRequest request) {
-            if (dingerType == DingerType.DINGTALK) {
-                return new DingLink();
-            } else {
-                throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType, this.name());
-            }
-        }
-    }
+	/**
+	 * link类型, 只支持 {@link DingerType#DINGTALK}
+	 */
+	LINK(false) {
+		@Override
+		public MsgType msgType(DingerType dingerType, DingerRequest request) {
+			if (dingerType == DingerType.DINGTALK) {
+				return new DingLink();
+			} else {
+				throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType,
+					this.name());
+			}
+		}
+	};
 
-    ;
+	/**
+	 * 是否支持显示设置消息子类型调用
+	 */
+	private boolean support;
 
-    /** 是否支持显示设置消息子类型调用 */
-    private boolean support;
+	MessageSubType(boolean support) {
+		this.support = support;
+	}
 
-    MessageSubType(boolean support) {
-        this.support = support;
-    }
+	public boolean isSupport() {
+		return support;
+	}
 
-    public boolean isSupport() {
-        return support;
-    }
+	/**
+	 * 获取指定消息类型
+	 *
+	 * @param dingerType Dinger类型 {@link DingerType}
+	 * @param request    消息请求体 {@link  DingerRequest}
+	 * @return 消息体 {@link MsgType}
+	 */
+	public abstract MsgType msgType(DingerType dingerType, DingerRequest request);
 
-    /**
-     * 获取指定消息类型
-     *
-     * @param dingerType
-     *          Dinger类型 {@link DingerType}
-     * @param request
-     *          消息请求体 {@link  DingerRequest}
-     * @return
-     *          消息体 {@link MsgType}
-     */
-    public abstract MsgType msgType(DingerType dingerType, DingerRequest request);
-
-    public static boolean contains(String value) {
-        return Arrays.stream(MessageSubType.values()).filter(e -> Objects.equals(e.name(), value)).count() > 0;
-    }
+	public static boolean contains(String value) {
+		return Arrays.stream(MessageSubType.values()).filter(e -> Objects.equals(e.name(), value))
+			.count() > 0;
+	}
 }

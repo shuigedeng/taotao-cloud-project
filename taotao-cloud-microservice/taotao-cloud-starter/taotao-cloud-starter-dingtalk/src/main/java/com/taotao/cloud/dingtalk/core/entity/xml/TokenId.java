@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.core.entity.xml;
 
+import static com.taotao.cloud.dingtalk.utils.DingerUtils.replaceHeadTailLineBreak;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
@@ -28,43 +30,44 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlRootElement(name = "token-id")
 public class TokenId {
-    /**
-     * dinger sign secret key
-     */
-    private String secret;
-    /**
-     * inner decryptKey
-     */
-    private String decryptKey;
-    /**
-     * dinger tokenId
-     */
-    private String value;
 
-    @XmlAttribute(name = "secret")
-    public String getSecret() {
-        return secret != null ? secret.trim() : secret;
-    }
+	/**
+	 * dinger sign secret key
+	 */
+	private String secret;
+	/**
+	 * inner decryptKey
+	 */
+	private String decryptKey;
+	/**
+	 * dinger tokenId
+	 */
+	private String value;
 
-    @XmlAttribute(name = "decrypt-key")
-    public String getDecryptKey() {
-        return decryptKey != null ? decryptKey.trim() : decryptKey;
-    }
+	@XmlAttribute(name = "secret")
+	public String getSecret() {
+		return secret != null ? secret.trim() : secret;
+	}
 
-    @XmlValue
-    public String getValue() {
-        return replaceHeadTailLineBreak(value);
-    }
+	@XmlAttribute(name = "decrypt-key")
+	public String getDecryptKey() {
+		return decryptKey != null ? decryptKey.trim() : decryptKey;
+	}
 
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
+	@XmlValue
+	public String getValue() {
+		return replaceHeadTailLineBreak(value);
+	}
 
-    public void setDecryptKey(String decryptKey) {
-        this.decryptKey = decryptKey;
-    }
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public void setDecryptKey(String decryptKey) {
+		this.decryptKey = decryptKey;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

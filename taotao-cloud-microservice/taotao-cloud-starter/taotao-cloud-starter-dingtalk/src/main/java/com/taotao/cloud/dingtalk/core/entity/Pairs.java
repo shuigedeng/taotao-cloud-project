@@ -23,28 +23,26 @@ package com.taotao.cloud.dingtalk.core.entity;
  */
 public interface Pairs<K, V> {
 
-    /**
-     * 消息码
-     *
-     * @return K
-     */
-    K code();
+	/**
+	 * 消息码
+	 *
+	 * @return K
+	 */
+	K code();
 
-    /**
-     * 消息描述
-     *
-     * @return V
-     */
-    V desc();
+	/**
+	 * 消息描述
+	 *
+	 * @return V
+	 */
+	V desc();
 
-    /**
-     * message
-     *
-     * @param args
-     *          args
-     * @return
-     *          message
-     */
-    V message(Object... args);
+	/**
+	 * message
+	 *
+	 * @param args args
+	 * @return message
+	 */
+	V message(Object... args);
 
 }

@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core.annatations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * PriorityColumn
@@ -27,7 +31,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
 public @interface PriorityColumn {
-    Class<?> clazz() default Void.class;
-    String column();
-    boolean priority() default false;
+
+	Class<?> clazz() default Void.class;
+
+	String column();
+
+	boolean priority() default false;
 }

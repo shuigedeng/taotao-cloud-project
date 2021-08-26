@@ -16,18 +16,18 @@
 package com.taotao.cloud.dingtalk.support;
 
 /**
- *  dkid 生成接口
+ * dkid 生成接口
  *
  * @author Jaemon
  * @since 1.0
  */
 public interface DingerIdGenerator {
 
-    /**
-     * dkid生成规则, 须保证全局唯一
-     *
-     * @return dkid
-     */
-    String dingerId();
+	/**
+	 * dkid生成规则, 须保证全局唯一
+	 *
+	 * @return dkid
+	 */
+	String dingerId();
 
 }

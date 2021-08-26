@@ -18,31 +18,36 @@ package com.taotao.cloud.dingtalk.core.annatations;
 
 import com.taotao.cloud.dingtalk.core.entity.ImageTextDeo;
 import com.taotao.cloud.dingtalk.core.entity.enums.AsyncExecuteType;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * DingerImageText
  *
- *  @author Jaemon
+ * @author Jaemon
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
 public @interface DingerImageText {
-    /**
-     * tokenId
-     *
-     * @return token info
-     */
-    DingerTokenId tokenId() default @DingerTokenId("");
 
-    /**
-     * asyncExecute
-     *
-     * @return async execute send
-     */
-    AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
+	/**
+	 * tokenId
+	 *
+	 * @return token info
+	 */
+	DingerTokenId tokenId() default @DingerTokenId("");
 
-    Class<?> clazz = ImageTextDeo.class;
+	/**
+	 * asyncExecute
+	 *
+	 * @return async execute send
+	 */
+	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
+
+	Class<?> clazz = ImageTextDeo.class;
 }

@@ -1,7 +1,8 @@
 package com.taotao.cloud.seckill.biz.service;
 
-import com.itstyle.seckill.common.entity.RedPacket;
-import com.itstyle.seckill.common.entity.Result;
+
+import com.taotao.cloud.seckill.biz.common.entity.RedPacket;
+import com.taotao.cloud.seckill.biz.common.entity.Result;
 
 public interface IRedPacketService {
 

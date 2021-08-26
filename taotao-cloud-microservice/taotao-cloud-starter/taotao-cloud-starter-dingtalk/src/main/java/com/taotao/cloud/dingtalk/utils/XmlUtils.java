@@ -17,11 +17,11 @@ package com.taotao.cloud.dingtalk.utils;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.NEW_LINE;
 
-import javax.xml.bind.JAXB;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
+import javax.xml.bind.JAXB;
 
 
 /**
@@ -32,45 +32,45 @@ import java.util.List;
  */
 public class XmlUtils {
 
-    private XmlUtils() {
-    }
+	private XmlUtils() {
+	}
 
-    /**
-     * xmlString to javaBean
-     *
-     * @param xmlString xmlString
-     * @param clazz clazz
-     * @param <T> T
-     * @return javaBean
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T xmlToJavaBean(String xmlString, Class<T> clazz) {
-        return (T) JAXB.unmarshal(new StringReader(xmlString), clazz);
-    }
+	/**
+	 * xmlString to javaBean
+	 *
+	 * @param xmlString xmlString
+	 * @param clazz     clazz
+	 * @param <T>       T
+	 * @return javaBean
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T xmlToJavaBean(String xmlString, Class<T> clazz) {
+		return (T) JAXB.unmarshal(new StringReader(xmlString), clazz);
+	}
 
-    /**
-     * xml list String to javaBean
-     *
-     * @param xmlString xmlString
-     * @param clazz clazz
-     * @param <T> T
-     * @return javaBean
-     */
-    public static <T> T xmlToJavaBean(List<String> xmlString, Class<T> clazz) {
-        return (T) JAXB.unmarshal(new StringReader(String.join(NEW_LINE, xmlString)), clazz);
-    }
+	/**
+	 * xml list String to javaBean
+	 *
+	 * @param xmlString xmlString
+	 * @param clazz     clazz
+	 * @param <T>       T
+	 * @return javaBean
+	 */
+	public static <T> T xmlToJavaBean(List<String> xmlString, Class<T> clazz) {
+		return (T) JAXB.unmarshal(new StringReader(String.join(NEW_LINE, xmlString)), clazz);
+	}
 
-    /**
-     * javaBean to xmlString
-     *
-     * @param bean bean
-     * @param <T> T
-     * @return xmlString
-     */
-    public static <T> String javaBeanToXML(T bean) {
-        Writer writer = new StringWriter();
-        JAXB.marshal(bean, writer);
-        return writer.toString();
-    }
+	/**
+	 * javaBean to xmlString
+	 *
+	 * @param bean bean
+	 * @param <T>  T
+	 * @return xmlString
+	 */
+	public static <T> String javaBeanToXML(T bean) {
+		Writer writer = new StringWriter();
+		JAXB.marshal(bean, writer);
+		return writer.toString();
+	}
 
 }

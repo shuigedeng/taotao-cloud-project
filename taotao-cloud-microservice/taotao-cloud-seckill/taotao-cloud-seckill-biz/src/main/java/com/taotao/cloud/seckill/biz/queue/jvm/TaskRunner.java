@@ -1,7 +1,7 @@
 package com.taotao.cloud.seckill.biz.queue.jvm;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.enums.SeckillStatEnum;
+import com.taotao.cloud.seckill.biz.common.entity.SuccessKilled;
+import com.taotao.cloud.seckill.biz.service.ISeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.itstyle.seckill.common.entity.SuccessKilled;
-import com.itstyle.seckill.service.ISeckillService;
 /**
  * 消费秒杀队列
  * 创建者 科帮网

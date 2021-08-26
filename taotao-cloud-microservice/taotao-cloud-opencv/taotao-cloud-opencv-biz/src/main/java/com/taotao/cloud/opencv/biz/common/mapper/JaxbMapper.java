@@ -1,7 +1,7 @@
 package com.taotao.cloud.opencv.biz.common.mapper;
 
-import com.acts.opencv.common.utils.Exceptions;
-import com.acts.opencv.common.utils.Reflections;
+import com.taotao.cloud.opencv.biz.common.utils.Exceptions;
+import com.taotao.cloud.opencv.biz.common.utils.Reflections;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Collection;

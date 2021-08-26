@@ -26,23 +26,24 @@ import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
  * @version 1.2
  */
 public class Configuration {
-    protected DingerProperties dingerProperties;
-    protected DingerRobot dingerRobot;
 
-    private Configuration(DingerProperties dingerProperties, DingerRobot dingerRobot) {
-        this.dingerProperties = dingerProperties;
-        this.dingerRobot = dingerRobot;
-    }
+	protected DingerProperties dingerProperties;
+	protected DingerRobot dingerRobot;
 
-    public static Configuration of(DingerProperties dingerProperties, DingerRobot dingerRobot) {
-        return new Configuration(dingerProperties, dingerRobot);
-    }
+	private Configuration(DingerProperties dingerProperties, DingerRobot dingerRobot) {
+		this.dingerProperties = dingerProperties;
+		this.dingerRobot = dingerRobot;
+	}
 
-    public DingerProperties getDingerProperties() {
-        return dingerProperties;
-    }
+	public static Configuration of(DingerProperties dingerProperties, DingerRobot dingerRobot) {
+		return new Configuration(dingerProperties, dingerRobot);
+	}
 
-    public DingerRobot getDingerRobot() {
-        return dingerRobot;
-    }
+	public DingerProperties getDingerProperties() {
+		return dingerProperties;
+	}
+
+	public DingerRobot getDingerRobot() {
+		return dingerRobot;
+	}
 }

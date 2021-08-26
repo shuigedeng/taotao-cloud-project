@@ -29,29 +29,29 @@ import java.util.List;
  */
 public interface DingerConfigHandler {
 
-    /**
-     * 多Dinger机器人配置
-     *
-     * <pre>
-     *     1. DingerConfig中的DingerType统一使用 {@link MultiDinger#dinger()} 中指定的
-     *     2. dingerConfigs的配置信息必须是 {@link MultiDinger#dinger()} 指定的机器人配置信息
-     * </pre>
-     *
-     * @return dingerConfigs
-     * */
-    List<DingerConfig> dingerConfigs();
+	/**
+	 * 多Dinger机器人配置
+	 *
+	 * <pre>
+	 *     1. DingerConfig中的DingerType统一使用 {@link MultiDinger#dinger()} 中指定的
+	 *     2. dingerConfigs的配置信息必须是 {@link MultiDinger#dinger()} 指定的机器人配置信息
+	 * </pre>
+	 *
+	 * @return dingerConfigs
+	 */
+	List<DingerConfig> dingerConfigs();
 
-    /**
-     * 执行逻辑处理器
-     *
-     * <blockquote>
-     *     default algorithmHandler {@link DefaultHandler}
-     * </blockquote>
-     *
-     * @return algorithmHandler {@link AlgorithmHandler}
-     * */
-    default Class<? extends AlgorithmHandler> algorithmHandler() {
-        return DingerHandler.class;
-    }
+	/**
+	 * 执行逻辑处理器
+	 *
+	 * <blockquote>
+	 * default algorithmHandler {@link DefaultHandler}
+	 * </blockquote>
+	 *
+	 * @return algorithmHandler {@link AlgorithmHandler}
+	 */
+	default Class<? extends AlgorithmHandler> algorithmHandler() {
+		return DingerHandler.class;
+	}
 
 }

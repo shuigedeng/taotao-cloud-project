@@ -25,27 +25,28 @@ import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
  * @since 1.0
  */
 public class MultiDinger {
-    private String key;
-    private Class<? extends DingerConfigHandler> dingerConfigHandler;
 
-    public MultiDinger(String key, Class<? extends DingerConfigHandler> dingerConfigHandler) {
-        this.key = key;
-        this.dingerConfigHandler = dingerConfigHandler;
-    }
+	private String key;
+	private Class<? extends DingerConfigHandler> dingerConfigHandler;
 
-    public String getKey() {
-        return key;
-    }
+	public MultiDinger(String key, Class<? extends DingerConfigHandler> dingerConfigHandler) {
+		this.key = key;
+		this.dingerConfigHandler = dingerConfigHandler;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public String getKey() {
+		return key;
+	}
 
-    public Class<? extends DingerConfigHandler> getDingerConfigHandler() {
-        return dingerConfigHandler;
-    }
+	public void setKey(String key) {
+		this.key = key;
+	}
 
-    public void setDingerConfigHandler(Class<? extends DingerConfigHandler> dingerConfigHandler) {
-        this.dingerConfigHandler = dingerConfigHandler;
-    }
+	public Class<? extends DingerConfigHandler> getDingerConfigHandler() {
+		return dingerConfigHandler;
+	}
+
+	public void setDingerConfigHandler(Class<? extends DingerConfigHandler> dingerConfigHandler) {
+		this.dingerConfigHandler = dingerConfigHandler;
+	}
 }

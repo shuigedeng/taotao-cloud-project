@@ -25,63 +25,65 @@ import java.util.List;
  * @since 1.0
  */
 public class Message extends DingTalkMessage implements Serializable {
-    private At at;
 
-    public Message() {
-    }
+	private At at;
 
-    public Message(At at) {
-        this.at = at;
-    }
+	public Message() {
+	}
 
-    public At getAt() {
-        return at;
-    }
+	public Message(At at) {
+		this.at = at;
+	}
 
-    public void setAt(At at) {
-        this.at = at;
-    }
+	public At getAt() {
+		return at;
+	}
 
-    public static class At implements Serializable {
-        /**
-         * 被@人的手机号(在content里添加@人的手机号)
-         * */
-        private List<String> atMobiles;
-        /**
-         * `@所有人`时：true，否则为：false
-         * */
-        private Boolean isAtAll = false;
+	public void setAt(At at) {
+		this.at = at;
+	}
 
-        public At() {
-        }
+	public static class At implements Serializable {
 
-        public At(List<String> atMobiles) {
-            this.atMobiles = atMobiles;
-        }
+		/**
+		 * 被@人的手机号(在content里添加@人的手机号)
+		 */
+		private List<String> atMobiles;
+		/**
+		 * `@所有人`时：true，否则为：false
+		 */
+		private Boolean isAtAll = false;
 
-        public At(Boolean isAtAll) {
-            this.isAtAll = isAtAll;
-        }
+		public At() {
+		}
 
-        public At(List<String> atMobiles, Boolean isAtAll) {
-            this.atMobiles = atMobiles;
-            this.isAtAll = isAtAll;
-        }
+		public At(List<String> atMobiles) {
+			this.atMobiles = atMobiles;
+		}
 
-        public List<String> getAtMobiles() {
-            return atMobiles;
-        }
+		public At(Boolean isAtAll) {
+			this.isAtAll = isAtAll;
+		}
 
-        public void setAtMobiles(List<String> atMobiles) {
-            this.atMobiles = atMobiles;
-        }
+		public At(List<String> atMobiles, Boolean isAtAll) {
+			this.atMobiles = atMobiles;
+			this.isAtAll = isAtAll;
+		}
 
-        public Boolean getIsAtAll() {
-            return isAtAll;
-        }
+		public List<String> getAtMobiles() {
+			return atMobiles;
+		}
 
-        public void setIsAtAll(Boolean atAll) {
-            isAtAll = atAll;
-        }
-    }
+		public void setAtMobiles(List<String> atMobiles) {
+			this.atMobiles = atMobiles;
+		}
+
+		public Boolean getIsAtAll() {
+			return isAtAll;
+		}
+
+		public void setIsAtAll(Boolean atAll) {
+			isAtAll = atAll;
+		}
+	}
 }

@@ -27,23 +27,28 @@ import java.util.Map;
  * @since 1.0
  */
 public class MultiDingerProperty {
-    /** app start at multiDinger */
-    static boolean multiDinger = false;
-    protected static Map<String, IgnoreMethod> ignoreMethodMap = new HashMap<>();
 
-    static {
-        for (
-                IgnoreMethod ignoreMethod : IgnoreMethod.values()
-        ) {
-            ignoreMethodMap.put(ignoreMethod.getMethodName(), ignoreMethod);
-        }
-    }
+	/**
+	 * app start at multiDinger
+	 */
+	static boolean multiDinger = false;
+	protected static Map<String, IgnoreMethod> ignoreMethodMap = new HashMap<>();
 
-    protected static boolean multiDinger() {
-        return multiDinger;
-    }
+	static {
+		for (
+			IgnoreMethod ignoreMethod : IgnoreMethod.values()
+		) {
+			ignoreMethodMap.put(ignoreMethod.getMethodName(), ignoreMethod);
+		}
+	}
 
-    protected static void clear() {
-        ignoreMethodMap.clear();
-    };
+	protected static boolean multiDinger() {
+		return multiDinger;
+	}
+
+	protected static void clear() {
+		ignoreMethodMap.clear();
+	}
+
+	;
 }

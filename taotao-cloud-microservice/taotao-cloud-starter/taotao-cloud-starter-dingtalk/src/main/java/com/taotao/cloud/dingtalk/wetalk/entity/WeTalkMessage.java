@@ -26,7 +26,8 @@ import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
  * @since 1.0
  */
 public class WeTalkMessage extends MsgType {
-    public WeTalkMessage() {
-        setDingerType(DingerType.WETALK);
-    }
+
+	public WeTalkMessage() {
+		setDingerType(DingerType.WETALK);
+	}
 }

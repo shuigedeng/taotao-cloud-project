@@ -16,6 +16,7 @@
 package com.taotao.cloud.dingtalk.multi.entity;
 
 
+import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.core.DingerConfig;
 import com.taotao.cloud.dingtalk.multi.algorithm.AlgorithmHandler;
 import java.util.List;
@@ -27,66 +28,69 @@ import java.util.List;
  * @since 1.0
  */
 public class MultiDingerAlgorithmDefinition {
-    /**
-     * dingerClass + {@link DingerConstant#SPOT_SEPERATOR} + {@link AlgorithmHandler}.simpleName
-     */
-    private String key;
-    /**
-     * 算法处理类 {@link AlgorithmHandler}
-     *
-     * <br>
-     * <code>
-     *     // 父类.class.isAssignableFrom(子类.class) <br>
-     *     AlgorithmHandler.class.isAssignableFrom(algorithm) = true
-     * </code>
-     */
-    private Class<? extends AlgorithmHandler> algorithm;
-    /**
-     * 有效的钉钉机器人配置集合
-     */
-    private List<DingerConfig> dingerConfigs;
-    /** handler name */
-    private String dingerConfigHandlerClassName;
 
-    public MultiDingerAlgorithmDefinition(
-            String key, Class<? extends AlgorithmHandler> algorithm,
-            List<DingerConfig> dingerConfigs, String dingerConfigHandlerClassName
-    ) {
-        this.key = key;
-        this.algorithm = algorithm;
-        this.dingerConfigs = dingerConfigs;
-        this.dingerConfigHandlerClassName = dingerConfigHandlerClassName;
-    }
+	/**
+	 * dingerClass + {@link DingerConstant#SPOT_SEPERATOR} + {@link AlgorithmHandler}.simpleName
+	 */
+	private String key;
+	/**
+	 * 算法处理类 {@link AlgorithmHandler}
+	 *
+	 * <br>
+	 * <code>
+	 * // 父类.class.isAssignableFrom(子类.class) <br> AlgorithmHandler.class.isAssignableFrom(algorithm)
+	 * = true
+	 * </code>
+	 */
+	private Class<? extends AlgorithmHandler> algorithm;
+	/**
+	 * 有效的钉钉机器人配置集合
+	 */
+	private List<DingerConfig> dingerConfigs;
+	/**
+	 * handler name
+	 */
+	private String dingerConfigHandlerClassName;
 
-    public String getKey() {
-        return key;
-    }
+	public MultiDingerAlgorithmDefinition(
+		String key, Class<? extends AlgorithmHandler> algorithm,
+		List<DingerConfig> dingerConfigs, String dingerConfigHandlerClassName
+	) {
+		this.key = key;
+		this.algorithm = algorithm;
+		this.dingerConfigs = dingerConfigs;
+		this.dingerConfigHandlerClassName = dingerConfigHandlerClassName;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public String getKey() {
+		return key;
+	}
 
-    public Class<? extends AlgorithmHandler> getAlgorithm() {
-        return algorithm;
-    }
+	public void setKey(String key) {
+		this.key = key;
+	}
 
-    public void setAlgorithm(Class<? extends AlgorithmHandler> algorithm) {
-        this.algorithm = algorithm;
-    }
+	public Class<? extends AlgorithmHandler> getAlgorithm() {
+		return algorithm;
+	}
 
-    public List<DingerConfig> getDingerConfigs() {
-        return dingerConfigs;
-    }
+	public void setAlgorithm(Class<? extends AlgorithmHandler> algorithm) {
+		this.algorithm = algorithm;
+	}
 
-    public void setDingerConfigs(List<DingerConfig> dingerConfigs) {
-        this.dingerConfigs = dingerConfigs;
-    }
+	public List<DingerConfig> getDingerConfigs() {
+		return dingerConfigs;
+	}
 
-    public String getDingerConfigHandlerClassName() {
-        return dingerConfigHandlerClassName;
-    }
+	public void setDingerConfigs(List<DingerConfig> dingerConfigs) {
+		this.dingerConfigs = dingerConfigs;
+	}
 
-    public void setDingerConfigHandlerClassName(String dingerConfigHandlerClassName) {
-        this.dingerConfigHandlerClassName = dingerConfigHandlerClassName;
-    }
+	public String getDingerConfigHandlerClassName() {
+		return dingerConfigHandlerClassName;
+	}
+
+	public void setDingerConfigHandlerClassName(String dingerConfigHandlerClassName) {
+		this.dingerConfigHandlerClassName = dingerConfigHandlerClassName;
+	}
 }

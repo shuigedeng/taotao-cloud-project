@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *  实例化bean配置
+ * 实例化bean配置
  *
  * @author Jaemon
  * @since 1.0
@@ -30,8 +30,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @AutoConfigureAfter(DingerHttpClientConfig.class)
 public class AutoBeanConfiguration {
-    @Bean
-    public DingerHttpClient dingerHttpClient() {
-        return new DingerHttpTemplate();
-    }
+
+	@Bean
+	public DingerHttpClient dingerHttpClient() {
+		return new DingerHttpTemplate();
+	}
 }

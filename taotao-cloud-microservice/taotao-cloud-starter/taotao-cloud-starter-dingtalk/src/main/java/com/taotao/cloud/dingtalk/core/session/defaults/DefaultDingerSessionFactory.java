@@ -16,6 +16,7 @@
 package com.taotao.cloud.dingtalk.core.session.defaults;
 
 
+import com.taotao.cloud.dingtalk.core.session.Configuration;
 import com.taotao.cloud.dingtalk.core.session.DingerSession;
 import com.taotao.cloud.dingtalk.core.session.DingerSessionFactory;
 

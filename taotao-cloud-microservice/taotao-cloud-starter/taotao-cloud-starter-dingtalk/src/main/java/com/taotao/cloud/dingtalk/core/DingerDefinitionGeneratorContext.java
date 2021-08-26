@@ -22,19 +22,20 @@ package com.taotao.cloud.dingtalk.core;
  * @since 1.0
  */
 public class DingerDefinitionGeneratorContext<T> {
-    private String keyName;
-    private T source;
 
-    public DingerDefinitionGeneratorContext(String keyName, T source) {
-        this.keyName = keyName;
-        this.source = source;
-    }
+	private String keyName;
+	private T source;
 
-    public String getKeyName() {
-        return keyName;
-    }
+	public DingerDefinitionGeneratorContext(String keyName, T source) {
+		this.keyName = keyName;
+		this.source = source;
+	}
 
-    public T getSource() {
-        return source;
-    }
+	public String getKeyName() {
+		return keyName;
+	}
+
+	public T getSource() {
+		return source;
+	}
 }

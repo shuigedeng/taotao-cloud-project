@@ -1,8 +1,8 @@
 package com.taotao.cloud.opencv.biz.base;
 
-import com.acts.opencv.common.utils.Constants;
-import com.acts.opencv.common.utils.OpenCVUtil;
-import com.acts.opencv.common.web.BaseController;
+import com.taotao.cloud.opencv.biz.common.utils.Constants;
+import com.taotao.cloud.opencv.biz.common.utils.OpenCVUtil;
+import com.taotao.cloud.opencv.biz.common.web.BaseController;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
@@ -95,7 +95,6 @@ public class RealTestController extends BaseController {
 	 * 获得锚点(定位点)
 	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
 	 * @Author 王嵩
-	 * @param src
 	 * @param mattmp
 	 * @param anchor01
 	 * @param anchor02

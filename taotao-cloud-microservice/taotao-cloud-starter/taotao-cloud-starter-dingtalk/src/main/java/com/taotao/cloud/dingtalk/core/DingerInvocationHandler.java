@@ -24,11 +24,11 @@ import java.lang.reflect.InvocationHandler;
  * @since 1.2
  */
 public abstract class DingerInvocationHandler
-        extends DingerMessageHandler
-        implements InvocationHandler {
+	extends DingerMessageHandler
+	implements InvocationHandler {
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

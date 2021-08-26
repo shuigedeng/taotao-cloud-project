@@ -22,55 +22,64 @@ package com.taotao.cloud.dingtalk.core.entity;
  * @since 1.0
  */
 public class LinkDeo {
-    /** 消息标题 */
-    private String title;
-    /** 消息内容。如果太长只会部分展示 */
-    private String text;
-    /** 点击消息跳转的URL */
-    private String messageUrl;
-    /** 图片URL */
-    private String picUrl;
 
-    private LinkDeo(String title, String text, String messageUrl, String picUrl) {
-        this.title = title;
-        this.text = text;
-        this.messageUrl = messageUrl;
-        this.picUrl = picUrl;
-    }
+	/**
+	 * 消息标题
+	 */
+	private String title;
+	/**
+	 * 消息内容。如果太长只会部分展示
+	 */
+	private String text;
+	/**
+	 * 点击消息跳转的URL
+	 */
+	private String messageUrl;
+	/**
+	 * 图片URL
+	 */
+	private String picUrl;
 
-    public static LinkDeo instance(String title, String text, String messageUrl, String picUrl) {
-        return new LinkDeo(title, text, messageUrl, picUrl);
-    }
+	private LinkDeo(String title, String text, String messageUrl, String picUrl) {
+		this.title = title;
+		this.text = text;
+		this.messageUrl = messageUrl;
+		this.picUrl = picUrl;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public static LinkDeo instance(String title, String text, String messageUrl, String picUrl) {
+		return new LinkDeo(title, text, messageUrl, picUrl);
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public String getMessageUrl() {
-        return messageUrl;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public void setMessageUrl(String messageUrl) {
-        this.messageUrl = messageUrl;
-    }
+	public String getMessageUrl() {
+		return messageUrl;
+	}
 
-    public String getPicUrl() {
-        return picUrl;
-    }
+	public void setMessageUrl(String messageUrl) {
+		this.messageUrl = messageUrl;
+	}
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
 }

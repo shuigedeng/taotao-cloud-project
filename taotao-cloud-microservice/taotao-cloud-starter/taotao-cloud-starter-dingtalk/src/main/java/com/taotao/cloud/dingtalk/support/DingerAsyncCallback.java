@@ -23,13 +23,11 @@ package com.taotao.cloud.dingtalk.support;
  */
 public interface DingerAsyncCallback {
 
-    /**
-     * 异步执行回调函数
-     *
-     * @param dingerId
-     *              Dinger日志ID
-     * @param result
-     *              返回结果
-     */
-    void execute(String dingerId, String result);
+	/**
+	 * 异步执行回调函数
+	 *
+	 * @param dingerId Dinger日志ID
+	 * @param result   返回结果
+	 */
+	void execute(String dingerId, String result);
 }

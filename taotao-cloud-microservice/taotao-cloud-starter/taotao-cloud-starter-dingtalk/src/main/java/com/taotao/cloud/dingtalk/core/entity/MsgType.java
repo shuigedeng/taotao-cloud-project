@@ -27,67 +27,64 @@ import java.util.Map;
  * @since 1.0
  */
 public class MsgType implements Serializable {
-    private static final String PREFIX_TAG = "\\$\\{";
-    private static final String SUFFIX_TAG = "}";
 
-    /**
-     * 消息类型
-     * */
-    private volatile DingerType dingerType;
+	private static final String PREFIX_TAG = "\\$\\{";
+	private static final String SUFFIX_TAG = "}";
 
-    private String msgtype;
+	/**
+	 * 消息类型
+	 */
+	private volatile DingerType dingerType;
 
-    public DingerType getDingerType() {
-        return dingerType;
-    }
+	private String msgtype;
 
-    public void setDingerType(DingerType dingerType) {
-        this.dingerType = dingerType;
-    }
+	public DingerType getDingerType() {
+		return dingerType;
+	}
 
-    public String getMsgtype() {
-        return msgtype;
-    }
+	public void setDingerType(DingerType dingerType) {
+		this.dingerType = dingerType;
+	}
 
-    public void setMsgtype(String msgtype) {
-        this.msgtype = msgtype;
-    }
+	public String getMsgtype() {
+		return msgtype;
+	}
 
-    /**
-     * 转换发送内容
-     *
-     * @param params
-     *          参数和实际值映射集
-     */
-    public void transfer(Map<String, Object> params) {
-    }
+	public void setMsgtype(String msgtype) {
+		this.msgtype = msgtype;
+	}
 
-    /**
-     * 转换文本内容
-     *
-     * @param content
-     *          文本内容
-     * @param params
-     *          参数和实际值映射集
-     * @return
-     *          转换后的文本内容
-     */
-    protected String replaceContent(String content, Map<String, Object> params) {
-        for (String k: params.keySet()) {
-            Object v = params.get(k);
-            String key = PREFIX_TAG + k +SUFFIX_TAG;
-            if (v instanceof CharSequence
-                    || v instanceof Character
-                    || v instanceof Boolean
-                    || v instanceof Number) {
-                content = content.replaceAll(key, v.toString());
-            } else {
+	/**
+	 * 转换发送内容
+	 *
+	 * @param params 参数和实际值映射集
+	 */
+	public void transfer(Map<String, Object> params) {
+	}
+
+	/**
+	 * 转换文本内容
+	 *
+	 * @param content 文本内容
+	 * @param params  参数和实际值映射集
+	 * @return 转换后的文本内容
+	 */
+	protected String replaceContent(String content, Map<String, Object> params) {
+		for (String k : params.keySet()) {
+			Object v = params.get(k);
+			String key = PREFIX_TAG + k + SUFFIX_TAG;
+			if (v instanceof CharSequence
+				|| v instanceof Character
+				|| v instanceof Boolean
+				|| v instanceof Number) {
+				content = content.replaceAll(key, v.toString());
+			} else {
 //                content = content.replaceAll(key, v.toString());
-                continue;
-            }
+				continue;
+			}
 
-        }
+		}
 
-        return content;
-    }
+		return content;
+	}
 }

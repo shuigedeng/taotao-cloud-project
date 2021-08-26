@@ -1,8 +1,8 @@
 package com.taotao.cloud.opencv.biz.base;
 
-import com.acts.opencv.common.utils.Constants;
-import com.acts.opencv.common.utils.OpenCVUtil;
-import com.acts.opencv.common.web.BaseController;
+import com.taotao.cloud.opencv.biz.common.utils.Constants;
+import com.taotao.cloud.opencv.biz.common.utils.OpenCVUtil;
+import com.taotao.cloud.opencv.biz.common.web.BaseController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 
 @Controller
 @RequestMapping(value = "rect")
@@ -96,8 +95,6 @@ public class RectificationController extends BaseController {
 	 * 获得锚点(定位点)
 	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
 	 * @Author 王嵩
-	 * @param src
-	 * @param mattmp
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
@@ -174,8 +171,6 @@ public class RectificationController extends BaseController {
 	 * 获得锚点(定位点)
 	 * 方法2，霍夫曼圆变换查找定位点
 	 * @Author 王嵩
-	 * @param src
-	 * @param mattmp
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
@@ -271,6 +266,5 @@ public class RectificationController extends BaseController {
 		Highgui.imwrite(destPath, src04);
 
 	}
-
 
 }

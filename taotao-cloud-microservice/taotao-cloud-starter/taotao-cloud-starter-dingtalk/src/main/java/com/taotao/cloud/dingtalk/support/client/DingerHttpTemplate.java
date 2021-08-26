@@ -17,13 +17,12 @@ package com.taotao.cloud.dingtalk.support.client;
 
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.exception.SendMsgException;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 /**
  * Dinger默认Http客户端
@@ -32,18 +31,20 @@ import java.util.Map;
  * @since 1.0
  */
 public class DingerHttpTemplate extends AbstractDingerHttpClient {
-    @Autowired
-    @Qualifier(DingerConstant.DINGER_REST_TEMPLATE)
-    private RestTemplate restTemplate;
 
-    @Override
-    public <T> String post(String url, Map<String, String> headers, T message) throws SendMsgException {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        headers.forEach((headerName, headerValue) -> {
-            httpHeaders.set(headerName, headerValue);
-        });
+	@Autowired
+	@Qualifier(DingerConstant.DINGER_REST_TEMPLATE)
+	private RestTemplate restTemplate;
 
-        HttpEntity<T> request = new HttpEntity<>(message, httpHeaders);
-        return restTemplate.postForObject(url, request, String.class);
-    }
+	@Override
+	public <T> String post(String url, Map<String, String> headers, T message)
+		throws SendMsgException {
+		HttpHeaders httpHeaders = new HttpHeaders();
+		headers.forEach((headerName, headerValue) -> {
+			httpHeaders.set(headerName, headerValue);
+		});
+
+		HttpEntity<T> request = new HttpEntity<>(message, httpHeaders);
+		return restTemplate.postForObject(url, request, String.class);
+	}
 }

@@ -20,20 +20,21 @@ import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import java.util.UUID;
 
 /**
- *  dkid 生成默认算法
+ * dkid 生成默认算法
  *
  * @author Jaemon
  * @since 1.0
  */
 public class DefaultDingerIdGenerator implements DingerIdGenerator {
-    @Override
-    public String dingerId() {
-        StringBuilder dkid = new StringBuilder(DingerConstant.DINGER_PREFIX);
-        String uuid = UUID.randomUUID()
-                .toString()
-                .replaceAll("-", "")
-                .toUpperCase();
-        dkid.append(uuid);
-        return dkid.toString();
-    }
+
+	@Override
+	public String dingerId() {
+		StringBuilder dkid = new StringBuilder(DingerConstant.DINGER_PREFIX);
+		String uuid = UUID.randomUUID()
+			.toString()
+			.replaceAll("-", "")
+			.toUpperCase();
+		dkid.append(uuid);
+		return dkid.toString();
+	}
 }

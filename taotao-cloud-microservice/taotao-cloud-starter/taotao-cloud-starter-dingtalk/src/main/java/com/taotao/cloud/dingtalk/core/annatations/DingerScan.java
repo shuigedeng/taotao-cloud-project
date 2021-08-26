@@ -16,10 +16,14 @@
 package com.taotao.cloud.dingtalk.core.annatations;
 
 import com.taotao.cloud.dingtalk.core.spring.DingerScannerRegistrar;
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
 
 /**
  * DingerScan
@@ -32,53 +36,53 @@ import java.lang.annotation.*;
 @Documented
 @Import(DingerScannerRegistrar.class)
 public @interface DingerScan {
-    /**
-     * Alias for the {@link #basePackages()} attribute. Allows for more concise
-     * annotation declarations e.g.:
-     * {@code @DingerScan("org.my.pkg")} instead of {@code @DingerScan(basePackages = "org.my.pkg"})}.
-     *
-     * @return base package names
-     */
-    String[] value() default {};
 
-    /**
-     * Base packages to scan for Dinger interfaces. Note that only interfaces
-     * with at least one method will be registered; concrete classes will be
-     * ignored.
-     *
-     * @return base package names for scanning dinger interface
-     */
-    String[] basePackages() default {};
+	/**
+	 * Alias for the {@link #basePackages()} attribute. Allows for more concise annotation
+	 * declarations e.g.: {@code @DingerScan("org.my.pkg")} instead of {@code
+	 * @DingerScan(basePackages = "org.my.pkg"})}.
+	 *
+	 * @return base package names
+	 */
+	String[] value() default {};
 
-    /**
-     * The {@link BeanNameGenerator} class to be used for naming detected components
-     * within the Spring container.
-     *
-     * @return the class of {@link BeanNameGenerator}
-     */
-    Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
+	/**
+	 * Base packages to scan for Dinger interfaces. Note that only interfaces with at least one
+	 * method will be registered; concrete classes will be ignored.
+	 *
+	 * @return base package names for scanning dinger interface
+	 */
+	String[] basePackages() default {};
 
-    /**
-     * This property specifies the annotation that the scanner will search for.
-     * <p>
-     * The scanner will register all interfaces in the base package that also have
-     * the specified annotation.
-     * <p>
-     * Note this can be combined with markerInterface.
-     *
-     * @return the annotation that the scanner will search for
-     */
-    Class<? extends Annotation> annotationClass() default Annotation.class;
+	/**
+	 * The {@link BeanNameGenerator} class to be used for naming detected components within the
+	 * Spring container.
+	 *
+	 * @return the class of {@link BeanNameGenerator}
+	 */
+	Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
 
-    /**
-     * This property specifies the parent that the scanner will search for.
-     * <p>
-     * The scanner will register all interfaces in the base package that also have
-     * the specified interface class as a parent.
-     * <p>
-     * Note this can be combined with annotationClass.
-     *
-     * @return the parent that the scanner will search for
-     */
-    Class<?> markerInterface() default Class.class;
+	/**
+	 * This property specifies the annotation that the scanner will search for.
+	 * <p>
+	 * The scanner will register all interfaces in the base package that also have the specified
+	 * annotation.
+	 * <p>
+	 * Note this can be combined with markerInterface.
+	 *
+	 * @return the annotation that the scanner will search for
+	 */
+	Class<? extends Annotation> annotationClass() default Annotation.class;
+
+	/**
+	 * This property specifies the parent that the scanner will search for.
+	 * <p>
+	 * The scanner will register all interfaces in the base package that also have the specified
+	 * interface class as a parent.
+	 * <p>
+	 * Note this can be combined with annotationClass.
+	 *
+	 * @return the parent that the scanner will search for
+	 */
+	Class<?> markerInterface() default Class.class;
 }

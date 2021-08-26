@@ -23,46 +23,47 @@ package com.taotao.cloud.dingtalk.support.sign;
  * @since 1.0
  */
 public class SignResult extends SignBase {
-    /**
-     * 秘钥
-     */
-    private String sign;
-    /**
-     * 时间戳
-     */
-    private Long timestamp;
 
-    public SignResult() {
-    }
+	/**
+	 * 秘钥
+	 */
+	private String sign;
+	/**
+	 * 时间戳
+	 */
+	private Long timestamp;
 
-    public SignResult(String sign, Long timestamp) {
-        this.sign = sign;
-        this.timestamp = timestamp;
-    }
+	public SignResult() {
+	}
 
-    public String getSign() {
-        return sign;
-    }
+	public SignResult(String sign, Long timestamp) {
+		this.sign = sign;
+		this.timestamp = timestamp;
+	}
 
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
+	public String getSign() {
+		return sign;
+	}
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
+	public Long getTimestamp() {
+		return timestamp;
+	}
 
-    @Override
-    public String transfer() {
-        StringBuilder signStr = new StringBuilder(SEPERATOR);
-        signStr
-                .append("sign=").append(this.sign)
-                .append(SEPERATOR)
-                .append("timestamp=").append(this.timestamp);
-        return signStr.toString();
-    }
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	@Override
+	public String transfer() {
+		StringBuilder signStr = new StringBuilder(SEPERATOR);
+		signStr
+			.append("sign=").append(this.sign)
+			.append(SEPERATOR)
+			.append("timestamp=").append(this.timestamp);
+		return signStr.toString();
+	}
 }

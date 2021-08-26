@@ -15,11 +15,18 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
+
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIES_PREFIX;
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
+
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
+import java.io.IOException;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
@@ -28,136 +35,132 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import java.io.IOException;
-import java.util.*;
-
-import static com.github.jaemon.dinger.constant.DingerConstant.DINGER_PROPERTIES_PREFIX;
-import static com.github.jaemon.dinger.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.github.jaemon.dinger.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
-
 /**
  * Default DingerDefinition Resolver
  *
  * @author Jaemon
  * @since 1.2
  */
-public class DefaultDingerDefinitionResolver extends DingerListenersProperty implements EnvironmentAware {
-    private static final Logger log = LoggerFactory.getLogger(DefaultDingerDefinitionResolver.class);
-    private final DingerDefinitionResolver xmlDingerDefinitionResolver;
-    private final DingerDefinitionResolver annotaDingerDefinitionResolver;
-    private Environment environment;
+public class DefaultDingerDefinitionResolver extends DingerListenersProperty implements
+	EnvironmentAware {
 
-    public DefaultDingerDefinitionResolver() {
-        xmlDingerDefinitionResolver = new XmlDingerDefinitionResolver();
-        annotaDingerDefinitionResolver = new AnnotationDingerDefinitionResolver();
-    }
+	private static final Logger log = LoggerFactory.getLogger(
+		DefaultDingerDefinitionResolver.class);
+	private final DingerDefinitionResolver xmlDingerDefinitionResolver;
+	private final DingerDefinitionResolver annotaDingerDefinitionResolver;
+	private Environment environment;
 
-    /**
-     * 解析处理
-     *
-     * @param dingerClasses
-     *          Dinger类集合
-     * */
-    protected void resolver(List<Class<?>> dingerClasses) {
-        registerDefaultDingerConfig(environment);
+	public DefaultDingerDefinitionResolver() {
+		xmlDingerDefinitionResolver = new XmlDingerDefinitionResolver();
+		annotaDingerDefinitionResolver = new AnnotationDingerDefinitionResolver();
+	}
 
-        // deal with xml
-        dingerXmlResolver();
+	/**
+	 * 解析处理
+	 *
+	 * @param dingerClasses Dinger类集合
+	 */
+	protected void resolver(List<Class<?>> dingerClasses) {
+		registerDefaultDingerConfig(environment);
 
-        // deal with annotation
-        annotaDingerDefinitionResolver.resolver(dingerClasses);
-    }
+		// deal with xml
+		dingerXmlResolver();
 
-    /**
-     *  Xml定义Dinger解析处理
-     * */
-    protected void dingerXmlResolver() {
-        boolean debugEnabled = log.isDebugEnabled();
-        String dingerLocationsProp = DingerConstant.DINGER_PROPERTIES_PREFIX + "dinger-locations";
-        String dingerLocations = environment.getProperty(dingerLocationsProp);
-        if (dingerLocations == null) {
-            if (debugEnabled) {
-                log.debug("dinger xml is not configured.");
-            }
-            return;
-        }
+		// deal with annotation
+		annotaDingerDefinitionResolver.resolver(dingerClasses);
+	}
 
-        // 处理xml配置转为dingerDefinition
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources;
-        try {
-            resources = resolver.getResources(dingerLocations);
-        } catch (IOException e) {
-            throw new DingerException(RESOURCE_CONFIG_EXCEPTION, dingerLocations);
-        }
-        if (resources.length == 0) {
-            log.warn("dinger xml is empty under {}.", dingerLocations);
-            return;
-        }
+	/**
+	 * Xml定义Dinger解析处理
+	 */
+	protected void dingerXmlResolver() {
+		boolean debugEnabled = log.isDebugEnabled();
+		String dingerLocationsProp = DINGER_PROPERTIES_PREFIX + "dinger-locations";
+		String dingerLocations = environment.getProperty(dingerLocationsProp);
+		if (dingerLocations == null) {
+			if (debugEnabled) {
+				log.debug("dinger xml is not configured.");
+			}
+			return;
+		}
 
-        xmlDingerDefinitionResolver.resolver(resources);
-    }
+		// 处理xml配置转为dingerDefinition
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		Resource[] resources;
+		try {
+			resources = resolver.getResources(dingerLocations);
+		} catch (IOException e) {
+			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, dingerLocations);
+		}
+		if (resources.length == 0) {
+			log.warn("dinger xml is empty under {}.", dingerLocations);
+			return;
+		}
 
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
+		xmlDingerDefinitionResolver.resolver(resources);
+	}
 
-    /**
-     * 注册默认的Dinger机器人信息, 即配置文件内容
-     *
-     * @param environment
-     *          environment
-     */
-    private void registerDefaultDingerConfig(Environment environment) {
-        if (environment == null) {
-            log.warn("environment is null.");
-            return;
-        }
-        for (DingerType dingerType : enabledDingerTypes) {
-            String dingers = DINGER_PROPERTIES_PREFIX + "dingers" + SPOT_SEPERATOR + dingerType.name().toLowerCase() + SPOT_SEPERATOR;
-            String tokenIdProp = dingers + "token-id";
-            String secretProp = dingers + "secret";
-            String decryptProp = dingers + "decrypt";
-            String decryptKeyProp = dingers + "decryptKey";
-            String asyncExecuteProp = dingers + "async";
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
 
-            if (DingerUtils.isEmpty(tokenIdProp)) {
-                if (log.isDebugEnabled()) {
-                    log.debug("dinger={} is not open.", dingerType);
-                }
-                continue;
-            }
-            String tokenId = environment.getProperty(tokenIdProp);
-            String secret = environment.getProperty(secretProp);
-            boolean decrypt = getProperty(environment, decryptProp);
-            boolean async = getProperty(environment, asyncExecuteProp);
-            DingerConfig defaultDingerConfig = DingerConfig.instance(tokenId);
-            defaultDingerConfig.setDingerType(dingerType);
-            defaultDingerConfig.setSecret(secret);
-            if (decrypt) {
-                defaultDingerConfig.setDecryptKey(
-                        environment.getProperty(decryptKeyProp)
-                );
-            }
-            defaultDingerConfig.setAsyncExecute(async);
+	/**
+	 * 注册默认的Dinger机器人信息, 即配置文件内容
+	 *
+	 * @param environment environment
+	 */
+	private void registerDefaultDingerConfig(Environment environment) {
+		if (environment == null) {
+			log.warn("environment is null.");
+			return;
+		}
+		for (DingerType dingerType : enabledDingerTypes) {
+			String dingers =
+				DINGER_PROPERTIES_PREFIX + "dingers" + SPOT_SEPERATOR + dingerType.name()
+					.toLowerCase() + SPOT_SEPERATOR;
+			String tokenIdProp = dingers + "token-id";
+			String secretProp = dingers + "secret";
+			String decryptProp = dingers + "decrypt";
+			String decryptKeyProp = dingers + "decryptKey";
+			String asyncExecuteProp = dingers + "async";
 
-            defaultDingerConfig.check();
-            defaultDingerConfigs.put(dingerType, defaultDingerConfig);
-        }
-    }
+			if (DingerUtils.isEmpty(tokenIdProp)) {
+				if (log.isDebugEnabled()) {
+					log.debug("dinger={} is not open.", dingerType);
+				}
+				continue;
+			}
+			String tokenId = environment.getProperty(tokenIdProp);
+			String secret = environment.getProperty(secretProp);
+			boolean decrypt = getProperty(environment, decryptProp);
+			boolean async = getProperty(environment, asyncExecuteProp);
+			DingerConfig defaultDingerConfig = DingerConfig.instance(tokenId);
+			defaultDingerConfig.setDingerType(dingerType);
+			defaultDingerConfig.setSecret(secret);
+			if (decrypt) {
+				defaultDingerConfig.setDecryptKey(
+					environment.getProperty(decryptKeyProp)
+				);
+			}
+			defaultDingerConfig.setAsyncExecute(async);
 
-    /**
-     * getProperty
-     *
-     * @param environment  environment
-     * @param prop prop
-     * @return prop value
-     */
-    private boolean getProperty(Environment environment, String prop) {
-        if (environment.getProperty(prop) != null) {
-            return environment.getProperty(prop, boolean.class);
-        }
-        return false;
-    }
+			defaultDingerConfig.check();
+			defaultDingerConfigs.put(dingerType, defaultDingerConfig);
+		}
+	}
+
+	/**
+	 * getProperty
+	 *
+	 * @param environment environment
+	 * @param prop        prop
+	 * @return prop value
+	 */
+	private boolean getProperty(Environment environment, String prop) {
+		if (environment.getProperty(prop) != null) {
+			return environment.getProperty(prop, boolean.class);
+		}
+		return false;
+	}
 }

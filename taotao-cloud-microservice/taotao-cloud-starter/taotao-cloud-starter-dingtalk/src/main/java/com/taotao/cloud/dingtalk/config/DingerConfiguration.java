@@ -19,6 +19,7 @@ import com.taotao.cloud.dingtalk.core.DingerConfigurerAdapter;
 import com.taotao.cloud.dingtalk.core.DingerManagerBuilder;
 import com.taotao.cloud.dingtalk.core.DingerRobot;
 import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
+import com.taotao.cloud.dingtalk.exception.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -37,29 +38,30 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(DingerProperties.class)
 public class DingerConfiguration {
 
-    @Autowired
-    private DingerProperties dingerProperties;
+	@Autowired
+	private DingerProperties dingerProperties;
 
-    @Bean
-    @ConditionalOnMissingBean(DingerConfigurerAdapter.class)
-    public DingerConfigurerAdapter dingerConfigurerAdapter() {
-        return new DingerConfigurerAdapter();
-    }
+	@Bean
+	@ConditionalOnMissingBean(DingerConfigurerAdapter.class)
+	public DingerConfigurerAdapter dingerConfigurerAdapter() {
+		return new DingerConfigurerAdapter();
+	}
 
-    @Bean
-    public DingerManagerBuilder dingerManagerBuilder() {
-        return new DingerManagerBuilder();
-    }
+	@Bean
+	public DingerManagerBuilder dingerManagerBuilder() {
+		return new DingerManagerBuilder();
+	}
 
 
-    @Bean
-    public DingerRobot dingerSender(DingerConfigurerAdapter dingerConfigurerAdapter, DingerManagerBuilder dingerManagerBuilder){
-        try {
-            dingerConfigurerAdapter.configure(dingerManagerBuilder);
-        } catch (Exception ex) {
-            throw new ConfigurationException(ex);
-        }
-        return new DingerRobot(dingerProperties, dingerManagerBuilder);
-    }
+	@Bean
+	public DingerRobot dingerSender(DingerConfigurerAdapter dingerConfigurerAdapter,
+		DingerManagerBuilder dingerManagerBuilder) {
+		try {
+			dingerConfigurerAdapter.configure(dingerManagerBuilder);
+		} catch (Exception ex) {
+			throw new ConfigurationException(ex);
+		}
+		return new DingerRobot(dingerProperties, dingerManagerBuilder);
+	}
 
 }

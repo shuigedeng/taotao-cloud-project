@@ -19,56 +19,56 @@ package com.taotao.cloud.dingtalk.core.entity;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 
 /**
- *  异常回调信息实体
+ * 异常回调信息实体
  *
  * @author Jaemon
  * @since 1.0
  */
 public class DingerCallback<T> {
 
-    /**
-     * 处理唯一id
-     */
-    private String dkid;
-    /**
-     * 通知信息
-     */
-    private T message;
-    /**
-     * 异常对象
-     */
-    private DingerException ex;
+	/**
+	 * 处理唯一id
+	 */
+	private String dkid;
+	/**
+	 * 通知信息
+	 */
+	private T message;
+	/**
+	 * 异常对象
+	 */
+	private DingerException ex;
 
-    public DingerCallback() {
-    }
+	public DingerCallback() {
+	}
 
-    public DingerCallback(String dkid, T message, DingerException ex) {
-        this.dkid = dkid;
-        this.message = message;
-        this.ex = ex;
-    }
+	public DingerCallback(String dkid, T message, DingerException ex) {
+		this.dkid = dkid;
+		this.message = message;
+		this.ex = ex;
+	}
 
-    public String getDkid() {
-        return dkid;
-    }
+	public String getDkid() {
+		return dkid;
+	}
 
-    public void setDkid(String dkid) {
-        this.dkid = dkid;
-    }
+	public void setDkid(String dkid) {
+		this.dkid = dkid;
+	}
 
-    public T getMessage() {
-        return message;
-    }
+	public T getMessage() {
+		return message;
+	}
 
-    public void setMessage(T message) {
-        this.message = message;
-    }
+	public void setMessage(T message) {
+		this.message = message;
+	}
 
-    public DingerException getEx() {
-        return ex;
-    }
+	public DingerException getEx() {
+		return ex;
+	}
 
-    public void setEx(DingerException ex) {
-        this.ex = ex;
-    }
+	public void setEx(DingerException ex) {
+		this.ex = ex;
+	}
 }

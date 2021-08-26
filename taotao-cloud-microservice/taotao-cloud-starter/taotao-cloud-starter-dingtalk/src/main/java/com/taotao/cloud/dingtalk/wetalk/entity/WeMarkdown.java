@@ -27,46 +27,48 @@ import java.util.Map;
  * @since 1.0
  */
 public class WeMarkdown extends WeTalkMessage {
-    private Markdown markdown;
 
-    public WeMarkdown(Markdown markdown) {
-        setMsgtype(WeTalkMsgType.MARKDOWN.type());
-        this.markdown = markdown;
-    }
+	private Markdown markdown;
 
-    public Markdown getMarkdown() {
-        return markdown;
-    }
+	public WeMarkdown(Markdown markdown) {
+		setMsgtype(WeTalkMsgType.MARKDOWN.type());
+		this.markdown = markdown;
+	}
 
-    public void setMarkdown(Markdown markdown) {
-        this.markdown = markdown;
-    }
+	public Markdown getMarkdown() {
+		return markdown;
+	}
 
-    public static class Markdown implements Serializable {
-        /**
-         * markdown内容，最长不超过4096个字节，必须是utf8编码
-         * */
-        private String content;
+	public void setMarkdown(Markdown markdown) {
+		this.markdown = markdown;
+	}
 
-        public String getContent() {
-            return content;
-        }
+	public static class Markdown implements Serializable {
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+		/**
+		 * markdown内容，最长不超过4096个字节，必须是utf8编码
+		 */
+		private String content;
 
-        public Markdown() {
-        }
+		public String getContent() {
+			return content;
+		}
 
-        public Markdown(String content) {
-            this.content = content;
-        }
-    }
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public Markdown() {
+		}
+
+		public Markdown(String content) {
+			this.content = content;
+		}
+	}
 
 
-    @Override
-    public void transfer(Map<String, Object> params) {
-        this.markdown.content = replaceContent(this.markdown.content, params);
-    }
+	@Override
+	public void transfer(Map<String, Object> params) {
+		this.markdown.content = replaceContent(this.markdown.content, params);
+	}
 }

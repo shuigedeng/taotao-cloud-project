@@ -18,7 +18,11 @@ package com.taotao.cloud.dingtalk.multi.annotations;
 
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
 import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * MultiDinger
@@ -30,17 +34,18 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MultiDinger {
-    /**
-     * 指定Dinger类型
-     *
-     * @return
-     *      dinger {@link DingerType}
-     */
-    DingerType dinger();
-    /**
-     * global dingerHandler
-     *
-     * @return {@link DingerConfigHandler}
-     */
-    Class<? extends DingerConfigHandler> handler();
+
+	/**
+	 * 指定Dinger类型
+	 *
+	 * @return dinger {@link DingerType}
+	 */
+	DingerType dinger();
+
+	/**
+	 * global dingerHandler
+	 *
+	 * @return {@link DingerConfigHandler}
+	 */
+	Class<? extends DingerConfigHandler> handler();
 }

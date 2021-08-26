@@ -22,63 +22,73 @@ package com.taotao.cloud.dingtalk.core.entity;
  * @since 1.0
  */
 public class ImageTextDeo {
-    /** 标题 */
-    private String title;
-    /** 描述-仅限Wetalk */
-    private String description;
-    /** title点击链接地址 */
-    private String url;
-    /** 图片地址 */
-    private String picUrl;
 
-    private ImageTextDeo(String title, String url, String picUrl) {
-        this.title = title;
-        this.url = url;
-        this.picUrl = picUrl;
-    }
+	/**
+	 * 标题
+	 */
+	private String title;
+	/**
+	 * 描述-仅限Wetalk
+	 */
+	private String description;
+	/**
+	 * title点击链接地址
+	 */
+	private String url;
+	/**
+	 * 图片地址
+	 */
+	private String picUrl;
 
-    private ImageTextDeo(String title, String description, String url, String picUrl) {
-        this(title, url, picUrl);
-        this.description = description;
-    }
+	private ImageTextDeo(String title, String url, String picUrl) {
+		this.title = title;
+		this.url = url;
+		this.picUrl = picUrl;
+	}
 
-    public static ImageTextDeo instance(String title, String url, String picUrl) {
-        return new ImageTextDeo(title, url, picUrl);
-    }
+	private ImageTextDeo(String title, String description, String url, String picUrl) {
+		this(title, url, picUrl);
+		this.description = description;
+	}
 
-    public static ImageTextDeo instance(String title, String description, String url, String picUrl) {
-        return new ImageTextDeo(title, description, url, picUrl);
-    }
+	public static ImageTextDeo instance(String title, String url, String picUrl) {
+		return new ImageTextDeo(title, url, picUrl);
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public static ImageTextDeo instance(String title, String description, String url,
+		String picUrl) {
+		return new ImageTextDeo(title, description, url, picUrl);
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	public String getUrl() {
+		return url;
+	}
 
-    public String getPicUrl() {
-        return picUrl;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
 }

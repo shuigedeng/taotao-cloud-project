@@ -17,7 +17,11 @@ package com.taotao.cloud.dingtalk.core.annatations;
 
 
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 指定当前 <code>***Dinger</code> 使用的 Dinger 类型
@@ -29,11 +33,11 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 public @interface Dinger {
-    /**
-     * 指定使用的Dinger
-     *
-     * @return
-     *         返回Dinger {@link DingerType}
-     */
-    DingerType value();
+
+	/**
+	 * 指定使用的Dinger
+	 *
+	 * @return 返回Dinger {@link DingerType}
+	 */
+	DingerType value();
 }

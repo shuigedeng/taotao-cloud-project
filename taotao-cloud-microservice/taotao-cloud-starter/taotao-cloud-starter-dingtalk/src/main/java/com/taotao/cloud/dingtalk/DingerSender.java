@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk;
 
-
+import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
 import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
@@ -29,34 +29,27 @@ import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
  */
 public interface DingerSender {
 
+	/**
+	 * 发送消息到指定群
+	 *
+	 * <pre>
+	 *     使用配置的默认钉钉机器人, {@link DingerProperties#getDefaultDinger()}
+	 * </pre>
+	 *
+	 * @param messageSubType 消息类型{@link MessageSubType}
+	 * @param request        请求体 {@link DingerRequest}
+	 * @return 响应报文
+	 */
+	DingerResponse send(MessageSubType messageSubType, DingerRequest request);
 
-    /**
-     * 发送消息到指定群
-     *
-     * <pre>
-     *     使用配置的默认钉钉机器人, {@link DingerProperties#getDefaultDinger()}
-     * </pre>
-     *
-     * @param messageSubType
-     *              消息类型{@link MessageSubType}
-     * @param request
-     *              请求体 {@link DingerRequest}
-     * @return
-     *              响应报文
-     * */
-    DingerResponse send(MessageSubType messageSubType, DingerRequest request);
-
-    /**
-     * 发送消息到指定群
-     *
-     * @param dingerType
-     *              Dinger类型 {@link DingerType}
-     * @param messageSubType
-     *              消息类型{@link MessageSubType}
-     * @param request
-     *              请求体 {@link DingerRequest}
-     * @return
-     *              响应报文
-     * */
-    DingerResponse send(DingerType dingerType, MessageSubType messageSubType, DingerRequest request);
+	/**
+	 * 发送消息到指定群
+	 *
+	 * @param dingerType     Dinger类型 {@link DingerType}
+	 * @param messageSubType 消息类型{@link MessageSubType}
+	 * @param request        请求体 {@link DingerRequest}
+	 * @return 响应报文
+	 */
+	DingerResponse send(DingerType dingerType, MessageSubType messageSubType,
+		DingerRequest request);
 }

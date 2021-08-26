@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core.annatations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * DingerConfiguration(xml and annotation)
@@ -27,25 +31,26 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 public @interface DingerConfiguration {
-    /**
-     * dinger tokenId
-     *
-     * @return tokenId
-     */
-    String tokenId();
 
-    /**
-     * internal decryptKey for tokenId
-     *
-     * @return decryptKey
-     */
-    String decryptKey() default "";
+	/**
+	 * dinger tokenId
+	 *
+	 * @return tokenId
+	 */
+	String tokenId();
 
-    /**
-     * dinger secret
-     *
-     * @return secret
-     */
-    String secret() default "";
+	/**
+	 * internal decryptKey for tokenId
+	 *
+	 * @return decryptKey
+	 */
+	String decryptKey() default "";
+
+	/**
+	 * dinger secret
+	 *
+	 * @return secret
+	 */
+	String secret() default "";
 
 }

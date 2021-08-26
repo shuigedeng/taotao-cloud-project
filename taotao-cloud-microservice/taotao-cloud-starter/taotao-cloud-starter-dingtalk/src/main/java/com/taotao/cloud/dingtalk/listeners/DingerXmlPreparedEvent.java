@@ -16,14 +16,13 @@
 package com.taotao.cloud.dingtalk.listeners;
 
 import com.taotao.cloud.dingtalk.core.annatations.DingerScan;
+import java.util.HashSet;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -34,36 +33,36 @@ import java.util.Set;
  */
 @Deprecated
 public class DingerXmlPreparedEvent
-        implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger log = LoggerFactory.getLogger(DingerXmlPreparedEvent.class);
+	implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
-    @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        log.info("ready to execute dinger analysis.");
-        loadPrimarySources(event);
-    }
+	private static final Logger log = LoggerFactory.getLogger(DingerXmlPreparedEvent.class);
 
-    /**
-     * loadPrimarySources
-     *
-     * @param event
-     *          event {@link ApplicationEnvironmentPreparedEvent}
-     */
-    private void loadPrimarySources(ApplicationEnvironmentPreparedEvent event) {
-        Set<?> allSources;
-        if (SpringBootVersion.getVersion().startsWith("1.")) {
-            allSources = event.getSpringApplication().getSources();
-        } else {
-            allSources = event.getSpringApplication().getAllSources();
-        }
-        Set<Class<?>> primarySources = new HashSet<>();
-        for (Object source : allSources) {
-            if (Class.class.isInstance(source)) {
-                Class<?> clazz = (Class<?>) source;
-                if (clazz.isAnnotationPresent(DingerScan.class)) {
-                    primarySources.add(clazz);
-                }
-            }
-        }
-    }
+	@Override
+	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+		log.info("ready to execute dinger analysis.");
+		loadPrimarySources(event);
+	}
+
+	/**
+	 * loadPrimarySources
+	 *
+	 * @param event event {@link ApplicationEnvironmentPreparedEvent}
+	 */
+	private void loadPrimarySources(ApplicationEnvironmentPreparedEvent event) {
+		Set<?> allSources;
+		if (SpringBootVersion.getVersion().startsWith("1.")) {
+			allSources = event.getSpringApplication().getSources();
+		} else {
+			allSources = event.getSpringApplication().getAllSources();
+		}
+		Set<Class<?>> primarySources = new HashSet<>();
+		for (Object source : allSources) {
+			if (Class.class.isInstance(source)) {
+				Class<?> clazz = (Class<?>) source;
+				if (clazz.isAnnotationPresent(DingerScan.class)) {
+					primarySources.add(clazz);
+				}
+			}
+		}
+	}
 }

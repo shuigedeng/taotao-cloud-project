@@ -15,10 +15,6 @@
  */
 package com.taotao.cloud.dingtalk.core.entity.enums;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * Dinger类型
  *
@@ -26,29 +22,31 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 public enum DingerType {
-    DINGTALK("钉钉", "https://oapi.dingtalk.com/robot/send?access_token", true),
-    WETALK("企业微信", "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key", true);
+	DINGTALK("钉钉", "https://oapi.dingtalk.com/robot/send?access_token", true),
+	WETALK("企业微信", "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key", true);
 
-    private String type;
-    private String robotUrl;
-    /** 是否开启 */
-    private boolean enabled;
+	private String type;
+	private String robotUrl;
+	/**
+	 * 是否开启
+	 */
+	private boolean enabled;
 
-    DingerType(String type, String robotUrl, boolean enabled) {
-        this.type = type;
-        this.robotUrl = robotUrl;
-        this.enabled = enabled;
-    }
+	DingerType(String type, String robotUrl, boolean enabled) {
+		this.type = type;
+		this.robotUrl = robotUrl;
+		this.enabled = enabled;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getRobotUrl() {
-        return robotUrl;
-    }
+	public String getRobotUrl() {
+		return robotUrl;
+	}
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 }

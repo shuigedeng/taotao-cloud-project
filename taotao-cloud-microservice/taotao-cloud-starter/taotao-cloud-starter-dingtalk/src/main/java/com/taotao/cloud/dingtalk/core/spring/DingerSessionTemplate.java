@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.core.spring;
 
+import com.taotao.cloud.dingtalk.core.session.Configuration;
 import com.taotao.cloud.dingtalk.core.session.DingerSession;
 import com.taotao.cloud.dingtalk.core.session.DingerSessionFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -26,33 +27,34 @@ import org.springframework.beans.factory.DisposableBean;
  * @version 1.2
  */
 public class DingerSessionTemplate implements DingerSession, DisposableBean {
-    private final DingerSessionFactory dingerSessionFactory;
-    private final DingerSession dingerSession;
-    private final Configuration configuration;
 
-    public DingerSessionTemplate(DingerSessionFactory dingerSessionFactory) {
-        this.dingerSessionFactory = dingerSessionFactory;
-        this.dingerSession = dingerSessionFactory.dingerSession();
-        this.configuration = dingerSessionFactory.getConfiguration();
-    }
+	private final DingerSessionFactory dingerSessionFactory;
+	private final DingerSession dingerSession;
+	private final Configuration configuration;
 
-    @Override
-    public <T> T getDinger(Class<T> type) {
-        return dingerSession.getDinger(type);
-    }
+	public DingerSessionTemplate(DingerSessionFactory dingerSessionFactory) {
+		this.dingerSessionFactory = dingerSessionFactory;
+		this.dingerSession = dingerSessionFactory.dingerSession();
+		this.configuration = dingerSessionFactory.getConfiguration();
+	}
 
-    @Override
-    public Configuration configuration() {
-        return configuration;
-    }
+	@Override
+	public <T> T getDinger(Class<T> type) {
+		return dingerSession.getDinger(type);
+	}
 
-    @Override
-    public void destroy() {
+	@Override
+	public Configuration configuration() {
+		return configuration;
+	}
 
-    }
+	@Override
+	public void destroy() {
+
+	}
 
 
-    public DingerSessionFactory getDingerSessionFactory() {
-        return dingerSessionFactory;
-    }
+	public DingerSessionFactory getDingerSessionFactory() {
+		return dingerSessionFactory;
+	}
 }

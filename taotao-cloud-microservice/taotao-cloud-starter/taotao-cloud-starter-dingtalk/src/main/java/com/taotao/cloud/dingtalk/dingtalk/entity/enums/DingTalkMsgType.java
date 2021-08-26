@@ -21,41 +21,39 @@ package com.taotao.cloud.dingtalk.dingtalk.entity.enums;
  * @author Jaemon
  * @since 1.0
  */
-public enum  DingTalkMsgType {
-    /**
-     * text类型
-     */
-    TEXT("text"),
+public enum DingTalkMsgType {
+	/**
+	 * text类型
+	 */
+	TEXT("text"),
 
-    /**
-     * link类型
-     */
-    LINK("link"),
+	/**
+	 * link类型
+	 */
+	LINK("link"),
 
-    /**
-     * markdown类型
-     */
-    MARKDOWN("markdown"),
+	/**
+	 * markdown类型
+	 */
+	MARKDOWN("markdown"),
 
-    /**
-     * ActionCard类型
-     */
-    ACTION_CARD("actionCard"),
+	/**
+	 * ActionCard类型
+	 */
+	ACTION_CARD("actionCard"),
 
-    /**
-     * FeedCard类型
-     */
-    FEED_CARD("feedCard")
+	/**
+	 * FeedCard类型
+	 */
+	FEED_CARD("feedCard");
 
-    ;
+	private String type;
 
-    private String type;
+	DingTalkMsgType(String type) {
+		this.type = type;
+	}
 
-    DingTalkMsgType(String type) {
-        this.type = type;
-    }
-
-    public String type() {
-        return type;
-    }
+	public String type() {
+		return type;
+	}
 }

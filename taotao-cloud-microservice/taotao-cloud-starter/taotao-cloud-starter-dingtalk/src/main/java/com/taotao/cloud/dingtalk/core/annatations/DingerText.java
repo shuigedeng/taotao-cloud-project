@@ -17,7 +17,11 @@ package com.taotao.cloud.dingtalk.core.annatations;
 
 
 import com.taotao.cloud.dingtalk.core.entity.enums.AsyncExecuteType;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * DingerText
@@ -34,38 +38,39 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Documented
 public @interface DingerText {
-    /**
-     * text
-     *
-     * @return send text
-     */
-    String value();
 
-    /**
-     * atAll. either atAll or phones
-     *
-     * @return whether &#064;all members
-     */
-    boolean atAll() default false;
+	/**
+	 * text
+	 *
+	 * @return send text
+	 */
+	String value();
 
-    /**
-     * phones. either atAll or phones
-     *
-     * @return &#064; designated members
-     */
-    String[] phones() default {};
+	/**
+	 * atAll. either atAll or phones
+	 *
+	 * @return whether &#064;all members
+	 */
+	boolean atAll() default false;
 
-    /**
-     * tokenId
-     *
-     * @return token info
-     */
-    DingerTokenId tokenId() default @DingerTokenId("");
+	/**
+	 * phones. either atAll or phones
+	 *
+	 * @return &#064; designated members
+	 */
+	String[] phones() default {};
 
-    /**
-     * asyncExecute
-     *
-     * @return async execute send
-     */
-    AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
+	/**
+	 * tokenId
+	 *
+	 * @return token info
+	 */
+	DingerTokenId tokenId() default @DingerTokenId("");
+
+	/**
+	 * asyncExecute
+	 *
+	 * @return async execute send
+	 */
+	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
 }

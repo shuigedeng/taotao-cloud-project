@@ -3,6 +3,10 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
 //    implementation project(':taotao-cloud-microservice:taotao-cloud-product:taotao-cloud-product-api')
 
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-prometheus')
+
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"

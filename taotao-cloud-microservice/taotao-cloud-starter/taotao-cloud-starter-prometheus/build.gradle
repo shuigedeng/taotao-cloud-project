@@ -1,6 +1,13 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
 
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    api "com.google.code.gson:gson"
+
+    api('com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery') {
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-netflix-ribbon'
+    }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

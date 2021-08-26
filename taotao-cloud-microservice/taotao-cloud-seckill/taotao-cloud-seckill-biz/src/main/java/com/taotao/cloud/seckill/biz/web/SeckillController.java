@@ -1,57 +1,55 @@
 package com.taotao.cloud.seckill.biz.web;
 
-import com.itstyle.seckill.common.enums.SeckillStatEnum;
+import com.itstyle.seckill.common.entity.Result;
+import com.itstyle.seckill.common.entity.SuccessKilled;
 import com.itstyle.seckill.common.exception.RrException;
+import com.itstyle.seckill.queue.disruptor.DisruptorUtil;
+import com.itstyle.seckill.queue.disruptor.SeckillEvent;
+import com.itstyle.seckill.queue.jvm.SeckillQueue;
+import com.itstyle.seckill.service.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.entity.SuccessKilled;
-import com.itstyle.seckill.queue.disruptor.DisruptorUtil;
-import com.itstyle.seckill.queue.disruptor.SeckillEvent;
-import com.itstyle.seckill.queue.jvm.SeckillQueue;
-import com.itstyle.seckill.service.ISeckillService;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 不要较真 这只是一个模拟多线程秒杀案例
  */
-@Api(tags ="秒杀")
+@Api(tags = "秒杀")
 @RestController
 @RequestMapping("/seckill")
 public class SeckillController {
+
 	private final static Logger LOGGER = LoggerFactory.getLogger(SeckillController.class);
-	
+
 	private static int corePoolSize = Runtime.getRuntime().availableProcessors();
 	/**
 	 * 创建线程池  调整队列数 拒绝服务
 	 */
-	private static ThreadPoolExecutor executor  = new ThreadPoolExecutor(corePoolSize, corePoolSize+1, 10l, TimeUnit.SECONDS,
-			new LinkedBlockingQueue<>(1000));
-	
+	private static ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
+		corePoolSize + 1, 10l, TimeUnit.SECONDS,
+		new LinkedBlockingQueue<>(1000));
+
 	@Autowired
 	private ISeckillService seckillService;
-	
-	@ApiOperation(value="秒杀一(最low实现)",nickname="爪哇笔记")
+
+	@ApiOperation(value = "秒杀一(最low实现)", nickname = "爪哇笔记")
 	@PostMapping("/start")
-	public Result start(long seckillId){
+	public Result start(long seckillId) {
 		int skillNum = 10;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀一(会出现超卖)");
 		/**
 		 * 开启新线程之前，将RequestAttributes对象设置为子线程共享
@@ -60,174 +58,180 @@ public class SeckillController {
 		 */
 		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		RequestContextHolder.setRequestAttributes(sra, true);
-		for(int i=0;i<skillNum;i++){
+		for (int i = 0; i < skillNum; i++) {
 			final long userId = i;
 			Runnable task = () -> {
-                /**
-                 * 坏蛋说 抛异常影响最终效果
-                 */
-				try{
-                    Result result = seckillService.startSeckil(killId, userId);
-                    if(result!=null){
-                        LOGGER.info("用户:{}{}",userId,result.get("msg"));
-                    }else{
-                        LOGGER.info("用户:{}{}",userId,"哎呦喂，人也太多了，请稍后！");
-                    }
-                }catch (RrException e){
-                    LOGGER.error("哎呀报错了{}",e.getMsg());
-                }
+				/**
+				 * 坏蛋说 抛异常影响最终效果
+				 */
+				try {
+					Result result = seckillService.startSeckil(killId, userId);
+					if (result != null) {
+						LOGGER.info("用户:{}{}", userId, result.get("msg"));
+					} else {
+						LOGGER.info("用户:{}{}", userId, "哎呦喂，人也太多了，请稍后！");
+					}
+				} catch (RrException e) {
+					LOGGER.error("哎呀报错了{}", e.getMsg());
+				}
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀二(程序锁)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀二(程序锁)", nickname = "科帮网")
 	@PostMapping("/startLock")
-	public Result startLock(long seckillId){
+	public Result startLock(long seckillId) {
 		int skillNum = 1000;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀二(正常)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				Result result = seckillService.startSeckilLock(killId, userId);
-				LOGGER.info("用户:{}{}",userId,result.get("msg"));
+				LOGGER.info("用户:{}{}", userId, result.get("msg"));
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀三(AOP程序锁)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀三(AOP程序锁)", nickname = "科帮网")
 	@PostMapping("/startAopLock")
-	public Result startAopLock(long seckillId){
+	public Result startAopLock(long seckillId) {
 		int skillNum = 1000;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀三(正常)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				Result result = seckillService.startSeckilAopLock(killId, userId);
-				LOGGER.info("用户:{}{}",userId,result.get("msg"));
+				LOGGER.info("用户:{}{}", userId, result.get("msg"));
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀四(数据库悲观锁)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀四(数据库悲观锁)", nickname = "科帮网")
 	@PostMapping("/startDBPCC_ONE")
-	public Result startDBPCC_ONE(long seckillId){
+	public Result startDBPCC_ONE(long seckillId) {
 		int skillNum = 1000;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀四(正常)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				Result result = seckillService.startSeckilDBPCC_ONE(killId, userId);
-				LOGGER.info("用户:{}{}",userId,result.get("msg"));
+				LOGGER.info("用户:{}{}", userId, result.get("msg"));
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀五(数据库悲观锁)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀五(数据库悲观锁)", nickname = "科帮网")
 	@PostMapping("/startDPCC_TWO")
-	public Result startDPCC_TWO(long seckillId){
+	public Result startDPCC_TWO(long seckillId) {
 		int skillNum = 1000;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀五(正常、数据库锁最优实现)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				Result result = seckillService.startSeckilDBPCC_TWO(killId, userId);
-				LOGGER.info("用户:{}{}",userId,result.get("msg"));
+				LOGGER.info("用户:{}{}", userId, result.get("msg"));
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀六(数据库乐观锁)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀六(数据库乐观锁)", nickname = "科帮网")
 	@PostMapping("/startDBOCC")
-	public Result startDBOCC(long seckillId){
+	public Result startDBOCC(long seckillId) {
 		int skillNum = 1000;
 		final CountDownLatch latch = new CountDownLatch(skillNum);
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀六(正常、数据库锁最优实现)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				//这里使用的乐观锁、可以自定义抢购数量、如果配置的抢购人数比较少、比如120:100(人数:商品) 会出现少买的情况
 				//用户同时进入会出现更新失败的情况
-				Result result = seckillService.startSeckilDBOCC(killId, userId,1);
-				LOGGER.info("用户:{}{}",userId,result.get("msg"));
+				Result result = seckillService.startSeckilDBOCC(killId, userId, 1);
+				LOGGER.info("用户:{}{}", userId, result.get("msg"));
 				latch.countDown();
 			};
 			executor.execute(task);
 		}
 		try {
 			latch.await();// 等待所有人任务结束
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀柒(进程内队列)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀柒(进程内队列)", nickname = "科帮网")
 	@PostMapping("/startQueue")
-	public Result startQueue(long seckillId){
+	public Result startQueue(long seckillId) {
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀柒(正常)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				SuccessKilled kill = new SuccessKilled();
@@ -237,9 +241,9 @@ public class SeckillController {
 				/**
 				 * 虽然进入了队列，但是不一定能秒杀成功 进队列出队有间隙
 				 */
-				if(flag){
+				if (flag) {
 					//LOGGER.info("用户:{}{}",kill.getUserId(),"秒杀成功");
-				}else{
+				} else {
 					//LOGGER.info("用户:{}{}",userId,"秒杀失败");
 				}
 			};
@@ -247,20 +251,21 @@ public class SeckillController {
 		}
 		try {
 			Thread.sleep(10000);
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return Result.ok();
 	}
-	@ApiOperation(value="秒杀柒(Disruptor队列)",nickname="科帮网")
+
+	@ApiOperation(value = "秒杀柒(Disruptor队列)", nickname = "科帮网")
 	@PostMapping("/startDisruptorQueue")
-	public Result startDisruptorQueue(long seckillId){
+	public Result startDisruptorQueue(long seckillId) {
 		seckillService.deleteSeckill(seckillId);
-		final long killId =  seckillId;
+		final long killId = seckillId;
 		LOGGER.info("开始秒杀八(正常)");
-		for(int i=0;i<1000;i++){
+		for (int i = 0; i < 1000; i++) {
 			final long userId = i;
 			Runnable task = () -> {
 				SeckillEvent kill = new SeckillEvent();
@@ -272,8 +277,8 @@ public class SeckillController {
 		}
 		try {
 			Thread.sleep(10000);
-			Long  seckillCount = seckillService.getSeckillCount(seckillId);
-			LOGGER.info("一共秒杀出{}件商品",seckillCount);
+			Long seckillCount = seckillService.getSeckillCount(seckillId);
+			LOGGER.info("一共秒杀出{}件商品", seckillCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

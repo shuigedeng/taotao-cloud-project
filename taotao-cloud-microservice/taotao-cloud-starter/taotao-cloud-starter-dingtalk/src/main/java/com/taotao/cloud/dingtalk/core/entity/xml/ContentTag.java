@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.core.entity.xml;
 
+import static com.taotao.cloud.dingtalk.utils.DingerUtils.replaceHeadTailLineBreak;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
@@ -26,27 +28,30 @@ import javax.xml.bind.annotation.XmlValue;
  * @author Jaemon
  * @since 1.0
  */
-@XmlRootElement(name="content")
+@XmlRootElement(name = "content")
 public class ContentTag {
-    /** markdown格式时必填 */
-    private String title;
-    private String content;
 
-    @XmlAttribute
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * markdown格式时必填
+	 */
+	private String title;
+	private String content;
 
-    @XmlValue
-    public String getContent() {
-        return replaceHeadTailLineBreak(content);
-    }
+	@XmlAttribute
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	@XmlValue
+	public String getContent() {
+		return replaceHeadTailLineBreak(content);
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

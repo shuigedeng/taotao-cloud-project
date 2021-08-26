@@ -27,99 +27,102 @@ import java.util.List;
  * @since 1.0
  */
 public class DingActionCard extends DingTalkMessage {
-    /**
-     * {@link ActionCard}
-     */
-    private ActionCard actionCard;
 
-    public DingActionCard() {
-        setMsgtype(DingTalkMsgType.ACTION_CARD.type());
-    }
+	/**
+	 * {@link ActionCard}
+	 */
+	private ActionCard actionCard;
 
-    public ActionCard getActionCard() {
-        return actionCard;
-    }
+	public DingActionCard() {
+		setMsgtype(DingTalkMsgType.ACTION_CARD.type());
+	}
 
-    public void setActionCard(ActionCard actionCard) {
-        this.actionCard = actionCard;
-    }
+	public ActionCard getActionCard() {
+		return actionCard;
+	}
 
-    public static class ActionCard implements Serializable {
-        /**
-         * 首屏会话透出的展示内容
-         */
-        private String title;
-        /**
-         * markdown格式的消息
-         */
-        private String text;
-        /**
-         * 0-按钮竖直排列，1-按钮横向排列
-         */
-        private String btnOrientation;
-        /**
-         * 按钮
-         */
-        private List<Button> btns;
+	public void setActionCard(ActionCard actionCard) {
+		this.actionCard = actionCard;
+	}
 
-        public String getTitle() {
-            return title;
-        }
+	public static class ActionCard implements Serializable {
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+		/**
+		 * 首屏会话透出的展示内容
+		 */
+		private String title;
+		/**
+		 * markdown格式的消息
+		 */
+		private String text;
+		/**
+		 * 0-按钮竖直排列，1-按钮横向排列
+		 */
+		private String btnOrientation;
+		/**
+		 * 按钮
+		 */
+		private List<Button> btns;
 
-        public String getText() {
-            return text;
-        }
+		public String getTitle() {
+			return title;
+		}
 
-        public void setText(String text) {
-            this.text = text;
-        }
+		public void setTitle(String title) {
+			this.title = title;
+		}
 
-        public String getBtnOrientation() {
-            return btnOrientation;
-        }
+		public String getText() {
+			return text;
+		}
 
-        public void setBtnOrientation(String btnOrientation) {
-            this.btnOrientation = btnOrientation;
-        }
+		public void setText(String text) {
+			this.text = text;
+		}
 
-        public List<Button> getBtns() {
-            return btns;
-        }
+		public String getBtnOrientation() {
+			return btnOrientation;
+		}
 
-        public void setBtns(List<Button> btns) {
-            this.btns = btns;
-        }
+		public void setBtnOrientation(String btnOrientation) {
+			this.btnOrientation = btnOrientation;
+		}
 
-        public static class Button implements Serializable {
-            /**
-             * 按钮标题
-             */
-            private String title;
-            /**
-             * 点击按钮触发的URL
-             */
-            private String actionURL;
+		public List<Button> getBtns() {
+			return btns;
+		}
 
-            public String getTitle() {
-                return title;
-            }
+		public void setBtns(List<Button> btns) {
+			this.btns = btns;
+		}
 
-            public void setTitle(String title) {
-                this.title = title;
-            }
+		public static class Button implements Serializable {
 
-            public String getActionURL() {
-                return actionURL;
-            }
+			/**
+			 * 按钮标题
+			 */
+			private String title;
+			/**
+			 * 点击按钮触发的URL
+			 */
+			private String actionURL;
 
-            public void setActionURL(String actionURL) {
-                this.actionURL = actionURL;
-            }
-        }
-    }
+			public String getTitle() {
+				return title;
+			}
+
+			public void setTitle(String title) {
+				this.title = title;
+			}
+
+			public String getActionURL() {
+				return actionURL;
+			}
+
+			public void setActionURL(String actionURL) {
+				this.actionURL = actionURL;
+			}
+		}
+	}
 
 }

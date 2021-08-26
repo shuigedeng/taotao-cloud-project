@@ -22,40 +22,38 @@ package com.taotao.cloud.dingtalk.wetalk.entity.enums;
  * @since 1.0
  */
 public enum WeTalkMsgType {
-    /**
-     * text类型
-     */
-    TEXT("text"),
+	/**
+	 * text类型
+	 */
+	TEXT("text"),
 
-    /**
-     * markdown类型
-     */
-    MARKDOWN("markdown"),
+	/**
+	 * markdown类型
+	 */
+	MARKDOWN("markdown"),
 
-    /**
-     * 图片类型
-     */
-    IMAGE("image"),
+	/**
+	 * 图片类型
+	 */
+	IMAGE("image"),
 
-    /**
-     * 图文类型
-     */
-    NEWS("news"),
+	/**
+	 * 图文类型
+	 */
+	NEWS("news"),
 
-    /**
-     * 文件类型
-     */
-    FILE("file")
+	/**
+	 * 文件类型
+	 */
+	FILE("file");
 
-    ;
+	private String type;
 
-    private String type;
+	WeTalkMsgType(String type) {
+		this.type = type;
+	}
 
-    WeTalkMsgType(String type) {
-        this.type = type;
-    }
-
-    public String type() {
-        return type;
-    }
+	public String type() {
+		return type;
+	}
 }

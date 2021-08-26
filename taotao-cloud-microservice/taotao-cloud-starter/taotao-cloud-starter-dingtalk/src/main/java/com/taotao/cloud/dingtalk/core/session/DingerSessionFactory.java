@@ -23,19 +23,17 @@ package com.taotao.cloud.dingtalk.core.session;
  */
 public interface DingerSessionFactory {
 
-    /**
-     * dinger session
-     *
-     * @return
-     *      {@link DingerSession}
-     */
-    DingerSession dingerSession();
+	/**
+	 * dinger session
+	 *
+	 * @return {@link DingerSession}
+	 */
+	DingerSession dingerSession();
 
-    /**
-     * dinger configuration
-     *
-     * @return
-     *      {@link Configuration}
-     */
-    Configuration getConfiguration();
+	/**
+	 * dinger configuration
+	 *
+	 * @return {@link Configuration}
+	 */
+	Configuration getConfiguration();
 }

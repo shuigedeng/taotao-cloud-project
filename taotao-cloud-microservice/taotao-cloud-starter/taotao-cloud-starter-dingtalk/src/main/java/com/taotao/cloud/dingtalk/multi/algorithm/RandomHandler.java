@@ -17,6 +17,7 @@ package com.taotao.cloud.dingtalk.multi.algorithm;
 
 
 import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.utils.RandomUtils;
 import java.util.List;
 
 /**
@@ -26,10 +27,12 @@ import java.util.List;
  * @since 1.0
  */
 public class RandomHandler implements AlgorithmHandler {
-    @Override
-    public DingerConfig handler(List<DingerConfig> dingerConfigs, DingerConfig defaultDingerConfig) {
-        int size = dingerConfigs.size();
-        int index = RandomUtils.nextInt(size);
-        return dingerConfigs.get(index);
-    }
+
+	@Override
+	public DingerConfig handler(List<DingerConfig> dingerConfigs,
+		DingerConfig defaultDingerConfig) {
+		int size = dingerConfigs.size();
+		int index = RandomUtils.nextInt(size);
+		return dingerConfigs.get(index);
+	}
 }

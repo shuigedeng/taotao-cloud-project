@@ -1,13 +1,13 @@
 package com.taotao.cloud.seckill.biz.queue.redis;
 
+import com.taotao.cloud.seckill.biz.common.entity.Result;
+import com.taotao.cloud.seckill.biz.common.enums.SeckillStatEnum;
+import com.taotao.cloud.seckill.biz.common.redis.RedisUtil;
+import com.taotao.cloud.seckill.biz.common.webSocket.WebSocketServer;
+import com.taotao.cloud.seckill.biz.service.ISeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.enums.SeckillStatEnum;
-import com.itstyle.seckill.common.redis.RedisUtil;
-import com.itstyle.seckill.common.webSocket.WebSocketServer;
-import com.itstyle.seckill.service.ISeckillService;
 /**
  * 消费者
  * @author 科帮网 By https://blog.52itstyle.vip

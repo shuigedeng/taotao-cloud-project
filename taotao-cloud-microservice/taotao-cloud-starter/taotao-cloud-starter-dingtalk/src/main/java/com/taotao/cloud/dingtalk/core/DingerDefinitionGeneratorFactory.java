@@ -15,12 +15,13 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import com.taotao.cloud.dingtalk.exception.DingerException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINGERDEFINITION_ERROR;
 
+import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -30,28 +31,31 @@ import java.util.Map;
  * @since 1.0
  */
 public class DingerDefinitionGeneratorFactory {
-    private static final Logger log = LoggerFactory.getLogger(DingerDefinitionGeneratorFactory.class);
-    /** dingerDefinition生成器 */
-    static final Map<String, DingerDefinitionGenerator> dingTalkDefinitionGeneratorMap = new HashMap<>();
 
-    /**
-     * 根据key获取对应生成处理逻辑类
-     *
-     * @param key
-     *          key
-     * @return
-     *          dingerDefinitionGenerator {@link DingerDefinitionGenerator}
-     * */
-    public static DingerDefinitionGenerator get(String key) {
-        DingerDefinitionGenerator dingTalkDefinitionGenerator = dingTalkDefinitionGeneratorMap.get(key);
-        if (dingTalkDefinitionGenerator == null) {
-            if (log.isDebugEnabled()) {
-                log.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
-                        key, dingTalkDefinitionGeneratorMap.keySet());
-            }
-            throw new DingerException(DINGERDEFINITION_ERROR, key);
-        }
-        return dingTalkDefinitionGenerator;
-    }
+	private static final Logger log = LoggerFactory.getLogger(
+		DingerDefinitionGeneratorFactory.class);
+	/**
+	 * dingerDefinition生成器
+	 */
+	static final Map<String, DingerDefinitionGenerator> dingTalkDefinitionGeneratorMap = new HashMap<>();
+
+	/**
+	 * 根据key获取对应生成处理逻辑类
+	 *
+	 * @param key key
+	 * @return dingerDefinitionGenerator {@link DingerDefinitionGenerator}
+	 */
+	public static DingerDefinitionGenerator get(String key) {
+		DingerDefinitionGenerator dingTalkDefinitionGenerator = dingTalkDefinitionGeneratorMap.get(
+			key);
+		if (dingTalkDefinitionGenerator == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
+					key, dingTalkDefinitionGeneratorMap.keySet());
+			}
+			throw new DingerException(DINGERDEFINITION_ERROR, key);
+		}
+		return dingTalkDefinitionGenerator;
+	}
 
 }

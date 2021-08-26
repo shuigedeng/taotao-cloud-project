@@ -15,6 +15,10 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
+
+import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
+
+import com.taotao.cloud.dingtalk.core.annatations.Dinger;
 import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
 import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.core.entity.MsgType;
@@ -22,9 +26,6 @@ import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
 import com.taotao.cloud.dingtalk.multi.MultiDingerConfigContainer;
 import com.taotao.cloud.dingtalk.multi.MultiDingerProperty;
 import com.taotao.cloud.dingtalk.multi.entity.MultiDingerConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -33,9 +34,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
-
-import static com.github.jaemon.dinger.constant.DingerConstant.SPOT_SEPERATOR;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * DingerMessageHandler
@@ -44,188 +46,186 @@ import static com.github.jaemon.dinger.constant.DingerConstant.SPOT_SEPERATOR;
  * @since 1.0
  */
 public class DingerMessageHandler
-        extends MultiDingerProperty
-        implements ParamHandler, MessageTransfer, ResultHandler<DingerResponse> {
-    private static final Logger log = LoggerFactory.getLogger(DingerMessageHandler.class);
+	extends MultiDingerProperty
+	implements ParamHandler, MessageTransfer, ResultHandler<DingerResponse> {
 
-    protected DingerRobot dingerRobot;
-    protected DingerProperties dingerProperties;
+	private static final Logger log = LoggerFactory.getLogger(DingerMessageHandler.class);
 
-    @Override
-    public Map<String, Object> paramsHandler(Method method, DingerDefinition dingerDefinition, Object[] values) {
-        Map<String, Object> params = new HashMap<>();
-        int valueLength = values.length;
-        if (valueLength == 0) {
-            return params;
-        }
+	protected DingerRobot dingerRobot;
+	protected DingerProperties dingerProperties;
 
-        String[] keys = dingerDefinition.methodParams();
-        int[] genericIndex = dingerDefinition.genericIndex();
-        if (genericIndex.length > 0) {
-            for (int i : genericIndex) {
-                params.put(keys[i], values[i]);
-            }
+	@Override
+	public Map<String, Object> paramsHandler(Method method, DingerDefinition dingerDefinition,
+		Object[] values) {
+		Map<String, Object> params = new HashMap<>();
+		int valueLength = values.length;
+		if (valueLength == 0) {
+			return params;
+		}
 
-            return params;
-        }
+		String[] keys = dingerDefinition.methodParams();
+		int[] genericIndex = dingerDefinition.genericIndex();
+		if (genericIndex.length > 0) {
+			for (int i : genericIndex) {
+				params.put(keys[i], values[i]);
+			}
 
-        int keyLength = keys.length;
-        if (keyLength == valueLength) {
-            for (int i = 0; i < valueLength; i++) {
-                params.put(keys[i], values[i]);
-            }
-            return params;
-        }
+			return params;
+		}
 
-        Parameter[] parameters = method.getParameters();
-        for (int i = 0; i < parameters.length; i++) {
-            Parameter parameter = parameters[i];
-            String paramName = parameter.getName();
-            com.github.jaemon.dinger.core.annatations.Parameter[] panno =
-                    parameter.getDeclaredAnnotationsByType(com.github.jaemon.dinger.core.annatations.Parameter.class);
-            if (panno != null && panno.length > 0) {
-                paramName = panno[0].value();
-            }
-            params.put(paramName, values[i]);
-        }
+		int keyLength = keys.length;
+		if (keyLength == valueLength) {
+			for (int i = 0; i < valueLength; i++) {
+				params.put(keys[i], values[i]);
+			}
+			return params;
+		}
 
-        return params;
-    }
+		Parameter[] parameters = method.getParameters();
+		for (int i = 0; i < Objects.requireNonNull(parameters).length; i++) {
+			Parameter parameter = parameters[i];
+			String paramName = parameter.getName();
+			com.taotao.cloud.dingtalk.core.annatations.Parameter[] panno =
+				parameter.getDeclaredAnnotationsByType(
+					com.taotao.cloud.dingtalk.core.annatations.Parameter.class);
+			if (panno != null && panno.length > 0) {
+				paramName = panno[0].value();
+			}
+			params.put(paramName, values[i]);
+		}
 
-
-    @Override
-    public MsgType transfer(DingerDefinition dingerDefinition, Map<String, Object> params) {
-        MsgType message = copyProperties(dingerDefinition.message());
-        message.transfer(params);
-        return message;
-    }
+		return params;
+	}
 
 
-    @Override
-    public Object resultHandler(Class<?> resultType, DingerResponse dingerResponse) {
-        String name = resultType.getName();
-        if (String.class.getName().equals(name)) {
-            return Optional.ofNullable(dingerResponse).map(e -> e.getData()).orElse(null);
-        } else if (DingerResponse.class.getName().equals(name)) {
-            return dingerResponse;
-        }
-        return null;
-    }
+	@Override
+	public MsgType transfer(DingerDefinition dingerDefinition, Map<String, Object> params) {
+		MsgType message = copyProperties(dingerDefinition.message());
+		message.transfer(params);
+		return message;
+	}
 
 
-    /**
-     * copyProperties
-     *
-     * @param src src
-     * @param <T> T extends Message
-     * @return msg
-     */
-    private <T extends MsgType> T copyProperties(MsgType src) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(src);
+	@Override
+	public Object resultHandler(Class<?> resultType, DingerResponse dingerResponse) {
+		String name = resultType.getName();
+		if (String.class.getName().equals(name)) {
+			return Optional.ofNullable(dingerResponse).map(e -> e.getData()).orElse(null);
+		} else if (DingerResponse.class.getName().equals(name)) {
+			return dingerResponse;
+		}
+		return null;
+	}
 
-            ByteArrayInputStream byteIn = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream in = new ObjectInputStream(byteIn);
-            T dest = (T) in.readObject();
-            return dest;
-        } catch (Exception e) {
-            //
-            if (log.isDebugEnabled()) {
-                log.debug("copy properties error:", e);
-            }
-            return null;
-        }
-    }
 
-    /**
-     * 获取方法执行的Dinger
-     *
-     * @param method
-     *          代理方法
-     * @return
-     *          返回Dinger
-     */
-    DingerType dingerType(Method method) {
-        Class<?> dingerClass = method.getDeclaringClass();
-        if (dingerClass.isAnnotationPresent(Dinger.class)) {
-            return dingerClass.getAnnotation(Dinger.class).value();
-        }
+	/**
+	 * copyProperties
+	 *
+	 * @param src src
+	 * @param <T> T extends Message
+	 * @return msg
+	 */
+	private <T extends MsgType> T copyProperties(MsgType src) {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(src);
 
-        return dingerProperties.getDefaultDinger();
-    }
+			ByteArrayInputStream byteIn = new ByteArrayInputStream(baos.toByteArray());
+			ObjectInputStream in = new ObjectInputStream(byteIn);
+			T dest = (T) in.readObject();
+			return dest;
+		} catch (Exception e) {
+			//
+			if (log.isDebugEnabled()) {
+				log.debug("copy properties error:", e);
+			}
+			return null;
+		}
+	}
 
-    /**
-     * 获取Dinger定义
-     *
-     * <pre>
-     *     优先级: local(dinger为空使用默认 {@link DingerMessageHandler#dingerType}) > multi > default({@link DingerMessageHandler#dingerType})
-     * </pre>
-     *
-     * @param useDinger
-     *          代理方法使用的Dinger
-     * @param dingerClassName
-     *          代理类全限定名
-     * @param keyName
-     *          代理方法全限定名
-     * @return
-     *          dingerDefinition {@link DingerDefinition}
-     */
-    DingerDefinition dingerDefinition(DingerType useDinger, String dingerClassName, String keyName) {
-        DingerDefinition dingerDefinition;
-        DingerConfig localDinger = DingerHelper.getLocalDinger();
+	/**
+	 * 获取方法执行的Dinger
+	 *
+	 * @param method 代理方法
+	 * @return 返回Dinger
+	 */
+	DingerType dingerType(Method method) {
+		Class<?> dingerClass = method.getDeclaringClass();
+		if (dingerClass.isAnnotationPresent(Dinger.class)) {
+			return dingerClass.getAnnotation(Dinger.class).value();
+		}
 
-        // 优先使用用户设定 dingerConfig
-        if (localDinger == null) {
-            String dingerName = useDinger + SPOT_SEPERATOR + keyName;
-            dingerDefinition = AbstractDingerDefinitionResolver
-                    .Container.INSTANCE.get(dingerName);
+		return dingerProperties.getDefaultDinger();
+	}
 
-            if (dingerDefinition == null) {
-                return null;
-            }
-            DingerConfig dingerMethodDefaultDingerConfig = dingerDefinition.dingerConfig();
+	/**
+	 * 获取Dinger定义
+	 *
+	 * <pre>
+	 *     优先级: local(dinger为空使用默认 {@link DingerMessageHandler#dingerType}) > multi > default({@link DingerMessageHandler#dingerType})
+	 * </pre>
+	 *
+	 * @param useDinger       代理方法使用的Dinger
+	 * @param dingerClassName 代理类全限定名
+	 * @param keyName         代理方法全限定名
+	 * @return dingerDefinition {@link DingerDefinition}
+	 */
+	DingerDefinition dingerDefinition(DingerType useDinger, String dingerClassName,
+		String keyName) {
+		DingerDefinition dingerDefinition;
+		DingerConfig localDinger = DingerHelper.getLocalDinger();
 
-            // 判断是否是multiDinger
-            if (multiDinger()) {
-                MultiDingerConfig multiDingerConfig =
-                        MultiDingerConfigContainer
-                                .INSTANCE.get(useDinger, dingerClassName);
-                DingerConfig dingerConfig = null;
-                if (multiDingerConfig != null) {
-                    // 拿到MultiDingerConfig中当前应该使用的DingerConfig
-                    dingerConfig = multiDingerConfig.getAlgorithmHandler()
-                            .dingerConfig(
-                                    multiDingerConfig.getDingerConfigs(),
-                                    dingerMethodDefaultDingerConfig
-                            );
-                }
+		// 优先使用用户设定 dingerConfig
+		if (localDinger == null) {
+			String dingerName = useDinger + SPOT_SEPERATOR + keyName;
+			dingerDefinition = AbstractDingerDefinitionResolver
+				.Container.INSTANCE.get(dingerName);
 
-                // use default dingerConfig
-                if (dingerConfig == null) {
-                    dingerConfig = dingerMethodDefaultDingerConfig;
-                }
+			if (dingerDefinition == null) {
+				return null;
+			}
+			DingerConfig dingerMethodDefaultDingerConfig = dingerDefinition.dingerConfig();
 
-                DingerHelper.assignDinger(dingerConfig);
-            } else {
-                DingerHelper.assignDinger(dingerMethodDefaultDingerConfig);
-            }
+			// 判断是否是multiDinger
+			if (multiDinger()) {
+				MultiDingerConfig multiDingerConfig =
+					MultiDingerConfigContainer
+						.INSTANCE.get(useDinger, dingerClassName);
+				DingerConfig dingerConfig = null;
+				if (multiDingerConfig != null) {
+					// 拿到MultiDingerConfig中当前应该使用的DingerConfig
+					dingerConfig = multiDingerConfig.getAlgorithmHandler()
+						.dingerConfig(
+							multiDingerConfig.getDingerConfigs(),
+							dingerMethodDefaultDingerConfig
+						);
+				}
 
-        } else {
-            DingerType dingerType = localDinger.getDingerType();
-            if (dingerType == null) {
-                dingerType = useDinger;
-            }
-            keyName = dingerType + SPOT_SEPERATOR + keyName;
-            dingerDefinition = AbstractDingerDefinitionResolver
-                    .Container.INSTANCE.get(keyName);
+				// use default dingerConfig
+				if (dingerConfig == null) {
+					dingerConfig = dingerMethodDefaultDingerConfig;
+				}
 
-            if (dingerDefinition == null) {
-                return null;
-            }
-        }
+				DingerHelper.assignDinger(dingerConfig);
+			} else {
+				DingerHelper.assignDinger(dingerMethodDefaultDingerConfig);
+			}
 
-        return dingerDefinition;
-    }
+		} else {
+			DingerType dingerType = localDinger.getDingerType();
+			if (dingerType == null) {
+				dingerType = useDinger;
+			}
+			keyName = dingerType + SPOT_SEPERATOR + keyName;
+			dingerDefinition = AbstractDingerDefinitionResolver
+				.Container.INSTANCE.get(keyName);
+
+			if (dingerDefinition == null) {
+				return null;
+			}
+		}
+
+		return dingerDefinition;
+	}
 }

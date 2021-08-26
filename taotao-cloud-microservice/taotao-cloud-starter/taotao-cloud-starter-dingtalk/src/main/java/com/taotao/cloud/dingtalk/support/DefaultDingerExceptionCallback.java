@@ -27,16 +27,17 @@ import org.slf4j.LoggerFactory;
  * @since 1.0
  */
 public class DefaultDingerExceptionCallback implements DingerExceptionCallback {
-    private static final Logger log = LoggerFactory.getLogger(DefaultDingerExceptionCallback.class);
 
-    @Override
-    public void execute(DingerCallback dkExCallable) {
-        DingerException ex = dkExCallable.getEx();
+	private static final Logger log = LoggerFactory.getLogger(DefaultDingerExceptionCallback.class);
 
-        log.error("异常静默处理:{}-{}->{}.",
-                ex.getPairs().code(),
-                ex.getPairs().desc(),
-                ex.getMessage()
-        );
-    }
+	@Override
+	public void execute(DingerCallback dkExCallable) {
+		DingerException ex = dkExCallable.getEx();
+
+		log.error("异常静默处理:{}-{}->{}.",
+			ex.getPairs().code(),
+			ex.getPairs().desc(),
+			ex.getMessage()
+		);
+	}
 }

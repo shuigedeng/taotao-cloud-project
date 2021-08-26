@@ -1,6 +1,5 @@
 package com.taotao.cloud.seckill.biz.queue.delay.beanstalkd;
 
-import com.dinstone.beanstalkc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

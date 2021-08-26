@@ -26,65 +26,66 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = DingerConstant.DINGER_PROPERTIES_PREFIX + "executor-pool")
 public class DingerThreadPoolProperties {
-    private static final int DEFAULT_CORE_SIZE = Runtime.getRuntime().availableProcessors() + 1;
-    /**
-     * 线程池维护线程的最小数量, 选填
-     */
-    private int coreSize = DEFAULT_CORE_SIZE;
-    /**
-     * 线程池维护线程的最大数量, 选填
-     */
-    private int maxSize = DEFAULT_CORE_SIZE * 2;
-    /**
-     * 空闲线程的存活时间, 选填
-     */
-    private int keepAliveSeconds = 60;
-    /**
-     * 持有等待执行的任务队列, 选填
-     */
-    private int queueCapacity = 10;
-    /**
-     * 线程名称前缀, 选填
-     */
-    private String threadNamePrefix = DingerConstant.DEFAULT_THREAD_NAME_PREFIX;
 
-    public int getCoreSize() {
-        return coreSize;
-    }
+	private static final int DEFAULT_CORE_SIZE = Runtime.getRuntime().availableProcessors() + 1;
+	/**
+	 * 线程池维护线程的最小数量, 选填
+	 */
+	private int coreSize = DEFAULT_CORE_SIZE;
+	/**
+	 * 线程池维护线程的最大数量, 选填
+	 */
+	private int maxSize = DEFAULT_CORE_SIZE * 2;
+	/**
+	 * 空闲线程的存活时间, 选填
+	 */
+	private int keepAliveSeconds = 60;
+	/**
+	 * 持有等待执行的任务队列, 选填
+	 */
+	private int queueCapacity = 10;
+	/**
+	 * 线程名称前缀, 选填
+	 */
+	private String threadNamePrefix = DingerConstant.DEFAULT_THREAD_NAME_PREFIX;
 
-    public void setCoreSize(int coreSize) {
-        this.coreSize = coreSize;
-    }
+	public int getCoreSize() {
+		return coreSize;
+	}
 
-    public int getMaxSize() {
-        return maxSize;
-    }
+	public void setCoreSize(int coreSize) {
+		this.coreSize = coreSize;
+	}
 
-    public void setMaxSize(int maxSize) {
-        this.maxSize = maxSize;
-    }
+	public int getMaxSize() {
+		return maxSize;
+	}
 
-    public int getKeepAliveSeconds() {
-        return keepAliveSeconds;
-    }
+	public void setMaxSize(int maxSize) {
+		this.maxSize = maxSize;
+	}
 
-    public void setKeepAliveSeconds(int keepAliveSeconds) {
-        this.keepAliveSeconds = keepAliveSeconds;
-    }
+	public int getKeepAliveSeconds() {
+		return keepAliveSeconds;
+	}
 
-    public int getQueueCapacity() {
-        return queueCapacity;
-    }
+	public void setKeepAliveSeconds(int keepAliveSeconds) {
+		this.keepAliveSeconds = keepAliveSeconds;
+	}
 
-    public void setQueueCapacity(int queueCapacity) {
-        this.queueCapacity = queueCapacity;
-    }
+	public int getQueueCapacity() {
+		return queueCapacity;
+	}
 
-    public String getThreadNamePrefix() {
-        return threadNamePrefix;
-    }
+	public void setQueueCapacity(int queueCapacity) {
+		this.queueCapacity = queueCapacity;
+	}
 
-    public void setThreadNamePrefix(String threadNamePrefix) {
-        this.threadNamePrefix = threadNamePrefix;
-    }
+	public String getThreadNamePrefix() {
+		return threadNamePrefix;
+	}
+
+	public void setThreadNamePrefix(String threadNamePrefix) {
+		this.threadNamePrefix = threadNamePrefix;
+	}
 }

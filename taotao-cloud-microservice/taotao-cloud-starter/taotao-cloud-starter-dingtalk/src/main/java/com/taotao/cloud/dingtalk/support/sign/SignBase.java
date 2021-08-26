@@ -22,12 +22,13 @@ package com.taotao.cloud.dingtalk.support.sign;
  * @since 1.0
  */
 public abstract class SignBase {
-    protected final static String SEPERATOR = "&";
 
-    /**
-     * 签名对象转字符串
-     *
-     * @return 返回转换后结果
-     */
-    public abstract String transfer();
+	protected final static String SEPERATOR = "&";
+
+	/**
+	 * 签名对象转字符串
+	 *
+	 * @return 返回转换后结果
+	 */
+	public abstract String transfer();
 }

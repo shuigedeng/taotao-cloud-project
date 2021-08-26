@@ -26,43 +26,45 @@ import com.taotao.cloud.dingtalk.core.DingerInvocationHandler;
  */
 public enum IgnoreMethod {
 
-    EQUALS("equals") {
-        @Override
-        public Boolean execute(DingerInvocationHandler invocationHandler, Object[] args) {
-            return invocationHandler.equals(args[0]);
-        }
-    },
-    CLONE("clone") {
-        @Override
-        public Object execute(DingerInvocationHandler invocationHandler, Object[] args) throws CloneNotSupportedException {
-            return invocationHandler.clone();
-        }
-    },
-    HASH_CODE("hashCode") {
-        @Override
-        public Integer execute(DingerInvocationHandler invocationHandler, Object[] args) throws Exception {
-            return invocationHandler.hashCode();
-        }
-    },
-    TO_STRING("toString") {
-        @Override
-        public String execute(DingerInvocationHandler invocationHandler, Object[] args) throws Exception {
-            return invocationHandler.toString();
-        }
-    },
+	EQUALS("equals") {
+		@Override
+		public Boolean execute(DingerInvocationHandler invocationHandler, Object[] args) {
+			return invocationHandler.equals(args[0]);
+		}
+	},
+	CLONE("clone") {
+		@Override
+		public Object execute(DingerInvocationHandler invocationHandler, Object[] args)
+			throws CloneNotSupportedException {
+			return invocationHandler.clone();
+		}
+	},
+	HASH_CODE("hashCode") {
+		@Override
+		public Integer execute(DingerInvocationHandler invocationHandler, Object[] args)
+			throws Exception {
+			return invocationHandler.hashCode();
+		}
+	},
+	TO_STRING("toString") {
+		@Override
+		public String execute(DingerInvocationHandler invocationHandler, Object[] args)
+			throws Exception {
+			return invocationHandler.toString();
+		}
+	};
 
-    ;
+	private String methodName;
 
-    private String methodName;
-
-    IgnoreMethod(String methodName) {
-        this.methodName = methodName;
-    }
+	IgnoreMethod(String methodName) {
+		this.methodName = methodName;
+	}
 
 
-    public abstract Object execute(DingerInvocationHandler invocationHandler, Object[] args) throws Exception;
+	public abstract Object execute(DingerInvocationHandler invocationHandler, Object[] args)
+		throws Exception;
 
-    public String getMethodName() {
-        return methodName;
-    }
+	public String getMethodName() {
+		return methodName;
+	}
 }

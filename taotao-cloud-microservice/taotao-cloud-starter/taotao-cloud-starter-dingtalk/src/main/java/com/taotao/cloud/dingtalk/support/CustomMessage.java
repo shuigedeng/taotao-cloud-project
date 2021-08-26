@@ -26,16 +26,13 @@ import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
  */
 public interface CustomMessage {
 
-    /**
-     * 自定义消息
-     *
-     * @param projectId
-     *              projectId
-     * @param request
-     *              消息请求体 {@link DingerRequest}
-     * @return
-     *              消息内容字符串
-     */
-    String message(String projectId, DingerRequest request);
+	/**
+	 * 自定义消息
+	 *
+	 * @param projectId projectId
+	 * @param request   消息请求体 {@link DingerRequest}
+	 * @return 消息内容字符串
+	 */
+	String message(String projectId, DingerRequest request);
 
 }

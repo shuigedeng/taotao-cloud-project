@@ -10,5 +10,7 @@ dependencies {
     api 'com.egzosn:pay-java-paypal:2.14.1'
     api 'com.egzosn:pay-java-fuiou:2.14.1'
 
-    annotationProcessor "org.springframework.boot:springoot-configuration-processor:${springBootVersion}"
+    api 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

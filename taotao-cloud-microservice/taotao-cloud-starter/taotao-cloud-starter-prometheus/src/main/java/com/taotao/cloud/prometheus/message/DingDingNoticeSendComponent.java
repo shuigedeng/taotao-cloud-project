@@ -22,7 +22,6 @@ public class DingDingNoticeSendComponent<T extends PromethuesNotice> implements 
 
 	/**
 	 * @param httpClient
-	 * @param exceptionNoticeResolver
 	 * @param dingDingNoticeProperty
 	 */
 	public DingDingNoticeSendComponent(DingdingHttpClient httpClient, NoticeTextResolver<T> noticeResolver,

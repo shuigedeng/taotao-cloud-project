@@ -1,8 +1,8 @@
 package com.taotao.cloud.seckill.biz.queue.jvm;
+import com.taotao.cloud.seckill.biz.common.entity.SuccessKilled;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.itstyle.seckill.common.entity.SuccessKilled;
 /**
  * 秒杀队列(固定长度为100)
  * @author 科帮网 By https://blog.52itstyle.com

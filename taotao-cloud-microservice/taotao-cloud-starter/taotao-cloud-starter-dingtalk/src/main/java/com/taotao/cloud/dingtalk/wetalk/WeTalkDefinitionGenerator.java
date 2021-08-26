@@ -25,6 +25,7 @@ import com.taotao.cloud.dingtalk.core.annatations.DingerMarkdown;
 import com.taotao.cloud.dingtalk.core.annatations.DingerText;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerDefinitionType;
 import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+import com.taotao.cloud.dingtalk.core.entity.xml.MessageTag;
 
 /**
  * 企业微信消息体定义生成类
@@ -33,70 +34,77 @@ import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
  * @since 1.0
  */
 public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
-    /**
-     * 生成生成注解文本消息体定义
-     */
-    public static class AnnotationText extends DingerDefinitionGenerator<DingerText> {
 
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerText> context) {
-            return dingerTextHandler(DingerType.WETALK, context);
-        }
-    }
+	/**
+	 * 生成生成注解文本消息体定义
+	 */
+	public static class AnnotationText extends DingerDefinitionGenerator<DingerText> {
 
-
-    /**
-     * 生成注解Markdown消息体定义
-     */
-    public static class AnnotationMarkDown extends DingerDefinitionGenerator<DingerMarkdown> {
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerMarkdown> context) {
-            return dingerMarkdownHandler(DingerType.WETALK, context);
-        }
-    }
+		@Override
+		public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerText> context) {
+			return dingerTextHandler(DingerType.WETALK, context);
+		}
+	}
 
 
-    /**
-     * 生成XML文本消息体定义
-     */
-    public static class XmlText extends DingerDefinitionGenerator<MessageTag> {
+	/**
+	 * 生成注解Markdown消息体定义
+	 */
+	public static class AnnotationMarkDown extends DingerDefinitionGenerator<DingerMarkdown> {
 
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
-            return xmlHandler(DingerDefinitionType.WETALK_XML_TEXT, context);
-        }
-    }
-
-
-    /**
-     * 生成XML Markdown消息体定义
-     */
-    public static class XmlMarkdown extends DingerDefinitionGenerator<MessageTag> {
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
-            return xmlHandler(DingerDefinitionType.WETALK_XML_MARKDOWN, context);
-        }
-    }
+		@Override
+		public DingerDefinition generator(
+			DingerDefinitionGeneratorContext<DingerMarkdown> context) {
+			return dingerMarkdownHandler(DingerType.WETALK, context);
+		}
+	}
 
 
-    /**
-     * 生成XML ImageText消息体定义
-     */
-    public static class AnnotationImageText extends DingerDefinitionGenerator<DingerImageText> {
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerImageText> context) {
-            return dingerImageTextHandler(DingerType.WETALK, context);
-        }
-    }
+	/**
+	 * 生成XML文本消息体定义
+	 */
+	public static class XmlText extends DingerDefinitionGenerator<MessageTag> {
+
+		@Override
+		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
+			return xmlHandler(DingerDefinitionType.WETALK_XML_TEXT, context);
+		}
+	}
 
 
-    /**
-     * 生成XML ImageText消息体定义
-     */
-    public static class XmlImageText extends DingerDefinitionGenerator<MessageTag> {
-        @Override
-        public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
-            return xmlHandler(DingerDefinitionType.WETALK_XML_IMAGETEXT, context);
-        }
-    }
+	/**
+	 * 生成XML Markdown消息体定义
+	 */
+	public static class XmlMarkdown extends DingerDefinitionGenerator<MessageTag> {
+
+		@Override
+		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
+			return xmlHandler(DingerDefinitionType.WETALK_XML_MARKDOWN, context);
+		}
+	}
+
+
+	/**
+	 * 生成XML ImageText消息体定义
+	 */
+	public static class AnnotationImageText extends DingerDefinitionGenerator<DingerImageText> {
+
+		@Override
+		public DingerDefinition generator(
+			DingerDefinitionGeneratorContext<DingerImageText> context) {
+			return dingerImageTextHandler(DingerType.WETALK, context);
+		}
+	}
+
+
+	/**
+	 * 生成XML ImageText消息体定义
+	 */
+	public static class XmlImageText extends DingerDefinitionGenerator<MessageTag> {
+
+		@Override
+		public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
+			return xmlHandler(DingerDefinitionType.WETALK_XML_IMAGETEXT, context);
+		}
+	}
 }

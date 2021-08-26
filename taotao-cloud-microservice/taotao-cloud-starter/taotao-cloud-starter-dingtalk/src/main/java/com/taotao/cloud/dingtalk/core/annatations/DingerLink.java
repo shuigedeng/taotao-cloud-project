@@ -18,31 +18,36 @@ package com.taotao.cloud.dingtalk.core.annatations;
 
 import com.taotao.cloud.dingtalk.core.entity.LinkDeo;
 import com.taotao.cloud.dingtalk.core.entity.enums.AsyncExecuteType;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * DingerLink(仅限DingTalk {@link com.github.jaemon.dinger.core.entity.enums.DingerType#DINGTALK})
  *
- *  @author Jaemon
+ * @author Jaemon
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
 public @interface DingerLink {
-    /**
-     * tokenId
-     *
-     * @return token info
-     */
-    DingerTokenId tokenId() default @DingerTokenId("");
 
-    /**
-     * asyncExecute
-     *
-     * @return async execute send
-     */
-    AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
+	/**
+	 * tokenId
+	 *
+	 * @return token info
+	 */
+	DingerTokenId tokenId() default @DingerTokenId("");
 
-    Class<?> clazz = LinkDeo.class;
+	/**
+	 * asyncExecute
+	 *
+	 * @return async execute send
+	 */
+	AsyncExecuteType asyncExecute() default AsyncExecuteType.NONE;
+
+	Class<?> clazz = LinkDeo.class;
 }

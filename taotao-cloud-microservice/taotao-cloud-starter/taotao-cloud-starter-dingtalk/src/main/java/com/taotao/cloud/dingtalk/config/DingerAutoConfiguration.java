@@ -40,47 +40,49 @@ import org.springframework.util.StringUtils;
 @EnableConfigurationProperties(DingerProperties.class)
 @AutoConfigureAfter(DingerConfiguration.class)
 public class DingerAutoConfiguration implements InitializingBean {
-    private final DingerProperties properties;
-    private final DingerRobot dingerRobot;
-    private final ResourceLoader resourceLoader;
 
-    public DingerAutoConfiguration(
-            DingerProperties dingerProperties,
-            DingerRobot dingerRobot,
-            ResourceLoader resourceLoader
-    ) {
-        this.properties = dingerProperties;
-        this.dingerRobot = dingerRobot;
-        this.resourceLoader = resourceLoader;
-    }
+	private final DingerProperties properties;
+	private final DingerRobot dingerRobot;
+	private final ResourceLoader resourceLoader;
 
-    @Bean
-    @ConditionalOnMissingBean
-    public DingerSessionFactory dingerSessionFactory() throws Exception {
-        DingerSessionFactoryBean factory = new DingerSessionFactoryBean();
+	public DingerAutoConfiguration(
+		DingerProperties dingerProperties,
+		DingerRobot dingerRobot,
+		ResourceLoader resourceLoader
+	) {
+		this.properties = dingerProperties;
+		this.dingerRobot = dingerRobot;
+		this.resourceLoader = resourceLoader;
+	}
 
-        factory.setConfiguration(
-                com.github.jaemon.dinger.core.session.Configuration.of(properties, dingerRobot)
-        );
+	@Bean
+	@ConditionalOnMissingBean
+	public DingerSessionFactory dingerSessionFactory() throws Exception {
+		DingerSessionFactoryBean factory = new DingerSessionFactoryBean();
 
-        return factory.getObject();
-    }
+		factory.setConfiguration(
+			com.taotao.cloud.dingtalk.core.session.Configuration.of(properties, dingerRobot)
+		);
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        checkConfigFileExists();
-    }
+		return factory.getObject();
+	}
 
-    private void checkConfigFileExists() {
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		checkConfigFileExists();
+	}
 
-        if (
-                StringUtils.hasText(this.properties.getDingerLocations())
-        ) {
+	private void checkConfigFileExists() {
 
-            Resource resource = this.resourceLoader.getResource(this.properties.getDingerLocations());
+		if (
+			StringUtils.hasText(this.properties.getDingerLocations())
+		) {
 
-            Assert.state(resource.exists(), "Cannot find config location: " + resource
-                    + " (please add config file or check your Dinger configuration)");
-        }
-    }
+			Resource resource = this.resourceLoader.getResource(
+				this.properties.getDingerLocations());
+
+			Assert.state(resource.exists(), "Cannot find config location: " + resource
+				+ " (please add config file or check your Dinger configuration)");
+		}
+	}
 }

@@ -26,12 +26,12 @@ import com.taotao.cloud.dingtalk.core.DingerRefresh;
  */
 public class MultiDingerRefresh extends DingerRefresh {
 
-    protected static void multiDingerRefresh() {
-        dingerFresh();
+	protected static void multiDingerRefresh() {
+		dingerFresh();
 
-        MultiDingerProperty.clear();
-        MultiDingerAlgorithmInjectRegister.clear();
-        MultiDingerConfigContainer.clear();
-    }
+		MultiDingerProperty.clear();
+		MultiDingerAlgorithmInjectRegister.clear();
+		MultiDingerConfigContainer.clear();
+	}
 
 }

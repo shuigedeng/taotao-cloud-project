@@ -16,6 +16,11 @@
 package com.taotao.cloud.dingtalk.core;
 
 import com.taotao.cloud.dingtalk.core.spring.DingerFactoryBean;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -28,12 +33,6 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 import org.springframework.util.ClassUtils;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
 /**
  * Dinger扫描器
  *
@@ -41,101 +40,104 @@ import java.util.Set;
  * @since 1.2
  */
 public class ClassPathDingerScanner extends ClassPathBeanDefinitionScanner {
-    private static final Logger log = LoggerFactory.getLogger(ClassPathDingerScanner.class);
-    private List<Class<?>> dingerClasses;
-    private Class<? extends Annotation> annotationClass;
-    private Class<?> markerInterface;
 
-    public ClassPathDingerScanner(BeanDefinitionRegistry registry) {
-        super(registry, false);
-        dingerClasses = new ArrayList<>();
-    }
+	private static final Logger log = LoggerFactory.getLogger(ClassPathDingerScanner.class);
+	private List<Class<?>> dingerClasses;
+	private Class<? extends Annotation> annotationClass;
+	private Class<?> markerInterface;
 
-    public void setAnnotationClass(Class<? extends Annotation> annotationClass) {
-        this.annotationClass = annotationClass;
-    }
+	public ClassPathDingerScanner(BeanDefinitionRegistry registry) {
+		super(registry, false);
+		dingerClasses = new ArrayList<>();
+	}
 
-    public void setMarkerInterface(Class<?> markerInterface) {
-        this.markerInterface = markerInterface;
-    }
+	public void setAnnotationClass(Class<? extends Annotation> annotationClass) {
+		this.annotationClass = annotationClass;
+	}
 
-    public void registerFilters() {
-        boolean acceptAllInterfaces = true;
+	public void setMarkerInterface(Class<?> markerInterface) {
+		this.markerInterface = markerInterface;
+	}
 
-        // if specified, use the given annotation and / or marker interface
-        if (this.annotationClass != null) {
-            addIncludeFilter(new AnnotationTypeFilter(this.annotationClass));
-            acceptAllInterfaces = false;
-        }
+	public void registerFilters() {
+		boolean acceptAllInterfaces = true;
 
-        // override AssignableTypeFilter to ignore matches on the actual marker interface
-        if (this.markerInterface != null) {
-            addIncludeFilter(new AssignableTypeFilter(this.markerInterface) {
-                @Override
-                protected boolean matchClassName(String className) {
-                    return false;
-                }
-            });
-            acceptAllInterfaces = false;
-        }
+		// if specified, use the given annotation and / or marker interface
+		if (this.annotationClass != null) {
+			addIncludeFilter(new AnnotationTypeFilter(this.annotationClass));
+			acceptAllInterfaces = false;
+		}
 
-        if (acceptAllInterfaces) {
-            // default include filter that accepts all classes
-            addIncludeFilter((metadataReader, metadataReaderFactory) -> true);
-        }
+		// override AssignableTypeFilter to ignore matches on the actual marker interface
+		if (this.markerInterface != null) {
+			addIncludeFilter(new AssignableTypeFilter(this.markerInterface) {
+				@Override
+				protected boolean matchClassName(String className) {
+					return false;
+				}
+			});
+			acceptAllInterfaces = false;
+		}
 
-        // exclude package-info.java
-        addExcludeFilter((metadataReader, metadataReaderFactory) -> {
-            String className = metadataReader.getClassMetadata().getClassName();
-            return className.endsWith("package-info");
-        });
-    }
+		if (acceptAllInterfaces) {
+			// default include filter that accepts all classes
+			addIncludeFilter((metadataReader, metadataReaderFactory) -> true);
+		}
 
-    @Override
-    public Set<BeanDefinitionHolder> doScan(String... basePackages) {
-        Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
+		// exclude package-info.java
+		addExcludeFilter((metadataReader, metadataReaderFactory) -> {
+			String className = metadataReader.getClassMetadata().getClassName();
+			return className.endsWith("package-info");
+		});
+	}
 
-        if (beanDefinitions.isEmpty()) {
-            log.warn("No Dinger was found in '{}' package. Please check your configuration.",
-                    Arrays.toString(basePackages));
-        } else {
-            processBeanDefinitions(beanDefinitions);
-        }
+	@Override
+	public Set<BeanDefinitionHolder> doScan(String... basePackages) {
+		Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
 
-        return beanDefinitions;
-    }
+		if (beanDefinitions.isEmpty()) {
+			log.warn("No Dinger was found in '{}' package. Please check your configuration.",
+				Arrays.toString(basePackages));
+		} else {
+			processBeanDefinitions(beanDefinitions);
+		}
 
-    @Override
-    protected boolean isCandidateComponent(AnnotatedBeanDefinition annotatedBeanDefinition) {
-        return annotatedBeanDefinition.getMetadata().isInterface() && annotatedBeanDefinition.getMetadata().isIndependent();
-    }
+		return beanDefinitions;
+	}
 
-    private void processBeanDefinitions(Set<BeanDefinitionHolder> beanDefinitions) {
-        boolean debugEnabled = log.isDebugEnabled();
-        GenericBeanDefinition definition;
-        for (BeanDefinitionHolder beanDefinition : beanDefinitions) {
-            definition = (GenericBeanDefinition) beanDefinition.getBeanDefinition();
-            String beanClassName = definition.getBeanClassName();
+	@Override
+	protected boolean isCandidateComponent(AnnotatedBeanDefinition annotatedBeanDefinition) {
+		return annotatedBeanDefinition.getMetadata().isInterface()
+			&& annotatedBeanDefinition.getMetadata().isIndependent();
+	}
 
-            if (debugEnabled) {
-                log.debug("Creating DingerFactoryBean with name '{}' and '{}' dingerInterface",
-                        beanDefinition.getBeanName(), beanClassName);
-            }
+	private void processBeanDefinitions(Set<BeanDefinitionHolder> beanDefinitions) {
+		boolean debugEnabled = log.isDebugEnabled();
+		GenericBeanDefinition definition;
+		for (BeanDefinitionHolder beanDefinition : beanDefinitions) {
+			definition = (GenericBeanDefinition) beanDefinition.getBeanDefinition();
+			String beanClassName = definition.getBeanClassName();
 
-            try {
-                dingerClasses.add(ClassUtils.forName(beanClassName, this.getClass().getClassLoader()));
-            } catch (ClassNotFoundException e) {
-                log.warn("beanClassName=[{}] not found", beanClassName);
-            }
+			if (debugEnabled) {
+				log.debug("Creating DingerFactoryBean with name '{}' and '{}' dingerInterface",
+					beanDefinition.getBeanName(), beanClassName);
+			}
 
-            definition.setBeanClass(DingerFactoryBean.class);
-            definition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
-            definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
-        }
+			try {
+				dingerClasses.add(
+					ClassUtils.forName(beanClassName, this.getClass().getClassLoader()));
+			} catch (ClassNotFoundException e) {
+				log.warn("beanClassName=[{}] not found", beanClassName);
+			}
 
-    }
+			definition.setBeanClass(DingerFactoryBean.class);
+			definition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
+			definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
+		}
 
-    public List<Class<?>> getDingerClasses() {
-        return dingerClasses;
-    }
+	}
+
+	public List<Class<?>> getDingerClasses() {
+		return dingerClasses;
+	}
 }

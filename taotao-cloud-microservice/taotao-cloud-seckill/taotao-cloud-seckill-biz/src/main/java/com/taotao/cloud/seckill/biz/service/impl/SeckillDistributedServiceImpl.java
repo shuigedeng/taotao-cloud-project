@@ -1,21 +1,21 @@
 package com.taotao.cloud.seckill.biz.service.impl;
 
+import com.taotao.cloud.seckill.biz.common.dynamicquery.DynamicQuery;
+import com.taotao.cloud.seckill.biz.common.entity.Result;
+import com.taotao.cloud.seckill.biz.common.entity.SuccessKilled;
+import com.taotao.cloud.seckill.biz.common.enums.SeckillStatEnum;
+import com.taotao.cloud.seckill.biz.common.exception.RrException;
+import com.taotao.cloud.seckill.biz.distributedlock.redis.RedissLockUtil;
+import com.taotao.cloud.seckill.biz.distributedlock.zookeeper.ZkLockUtil;
+import com.taotao.cloud.seckill.biz.service.ISeckillDistributedService;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.itstyle.seckill.common.exception.RrException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itstyle.seckill.common.dynamicquery.DynamicQuery;
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.entity.SuccessKilled;
-import com.itstyle.seckill.common.enums.SeckillStatEnum;
-import com.itstyle.seckill.distributedlock.redis.RedissLockUtil;
-import com.itstyle.seckill.distributedlock.zookeeper.ZkLockUtil;
-import com.itstyle.seckill.service.ISeckillDistributedService;
 @Service
 public class SeckillDistributedServiceImpl implements ISeckillDistributedService {
 	

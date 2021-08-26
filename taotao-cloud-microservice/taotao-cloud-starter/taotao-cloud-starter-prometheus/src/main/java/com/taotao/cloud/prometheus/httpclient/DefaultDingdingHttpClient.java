@@ -1,5 +1,8 @@
 package com.taotao.cloud.prometheus.httpclient;
 
+import com.taotao.cloud.prometheus.pojos.dingding.DingDingNotice;
+import com.taotao.cloud.prometheus.pojos.dingding.DingDingResult;
+import com.taotao.cloud.prometheus.properties.notice.DingDingNoticeProperty;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -17,9 +20,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.gson.Gson;
-import com.kuding.pojos.dingding.DingDingNotice;
-import com.kuding.pojos.dingding.DingDingResult;
-import com.kuding.properties.notice.DingDingNoticeProperty;
 
 import feign.Feign;
 import feign.FeignException;

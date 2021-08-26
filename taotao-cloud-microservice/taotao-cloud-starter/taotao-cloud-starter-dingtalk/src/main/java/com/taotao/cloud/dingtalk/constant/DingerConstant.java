@@ -16,38 +16,40 @@
 package com.taotao.cloud.dingtalk.constant;
 
 /**
- *  常量类
+ * 常量类
  *
  * @author Jaemon
  * @since 1.0
  */
 public interface DingerConstant {
 
-    String DINGER_PREFIX = "D";
-    /**
-     * 默认线程池中线程名称前缀
-     */
-    String DEFAULT_THREAD_NAME_PREFIX = "dinger-";
+	String DINGER_PREFIX = "D";
+	/**
+	 * 默认线程池中线程名称前缀
+	 */
+	String DEFAULT_THREAD_NAME_PREFIX = "dinger-";
 
 
-    /**
-     * bean name
-     */
-    String TEXT_MESSAGE = "textMessage";
-    /**
-     * bean name
-     */
-    String MARKDOWN_MESSAGE = "markDownMessage";
-    /**
-     * bean name
-     */
-    String DINGER_EXECUTOR = "dingerExecutor";
-    /** 自定义restTemplate名称 */
-    String DINGER_REST_TEMPLATE = "dingerRestTemplate";
+	/**
+	 * bean name
+	 */
+	String TEXT_MESSAGE = "textMessage";
+	/**
+	 * bean name
+	 */
+	String MARKDOWN_MESSAGE = "markDownMessage";
+	/**
+	 * bean name
+	 */
+	String DINGER_EXECUTOR = "dingerExecutor";
+	/**
+	 * 自定义restTemplate名称
+	 */
+	String DINGER_REST_TEMPLATE = "dingerRestTemplate";
 
-    String NEW_LINE = "\r\n";
-    String SPOT_SEPERATOR = ".";
+	String NEW_LINE = "\r\n";
+	String SPOT_SEPERATOR = ".";
 
-    String DINGER_PROP_PREFIX = "spring.dinger";
-    String DINGER_PROPERTIES_PREFIX = DINGER_PROP_PREFIX + SPOT_SEPERATOR;
+	String DINGER_PROP_PREFIX = "spring.dinger";
+	String DINGER_PROPERTIES_PREFIX = DINGER_PROP_PREFIX + SPOT_SEPERATOR;
 }

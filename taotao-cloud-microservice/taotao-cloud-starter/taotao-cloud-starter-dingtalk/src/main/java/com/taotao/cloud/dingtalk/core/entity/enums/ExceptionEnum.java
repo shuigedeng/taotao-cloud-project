@@ -25,101 +25,93 @@ import com.taotao.cloud.dingtalk.core.entity.ExceptionPairs;
  * @since 1.0
  */
 public enum ExceptionEnum implements ExceptionPairs {
-    /** 发送异常, 1XXX, {@link com.github.jaemon.dinger.exception.SendMsgException} */
-    SEND_MSG(1000, "发送消息异常"),
+	/**
+	 * 发送异常
+	 */
+	SEND_MSG(1000, "发送消息异常"),
+
+	/**
+	 * 消息类型异常
+	 */
+	MSG_TYPE_CHECK(2000, "消息类型异常"),
+
+	/**
+	 * 异步调用相关异常
+	 */
+	ASYNC_CALL(3000, "异步调用异常"),
+
+	/**
+	 * dingTalkManagerBuilder 配置异常
+	 */
+	MULTI_DINGER_SCAN_ERROR(4000, "配置了多个DingerScan注解"),
+	/**
+	 *
+	 */
+	CONFIG_ERROR(4001, "配置异常"),
+	RESOURCE_CONFIG_EXCEPTION(4002, "读取资源[%s]信息异常"),
+
+	/**
+	 * 配置文件相关异常, 5XXX,
+	 */
+	PROPERTIES_ERROR(5000, "配置文件异常"),
+
+	/**
+	 * Dinger解析XML相关异常, 60XX
+	 */
+	DINER_XML_NAMESPACE_INVALID(6000, "xml文件namespace=%s对应的类不存在"),
+	DINER_XML_MSGTYPE_INVALID(6001, "xml id=%s文件message type=%s无效"),
+
+	DINGERDEFINITION_ERROR(6004, "key=%s无对应的DingerDefinitionGenerator"),
+	DINGERDEFINITIONTYPE_ERROR(6005, "%s中消息体定义主类型期望=%s, 实际=%s"),
+
+	/** Dinger解析注解相关异常, 63XX */
+
+	/** Dinger解析公共相关异常, 65XX */
+	/**
+	 * 注解DingerText和Dinger xml重复配置也会抛出该异常
+	 */
+	DINGER_REPEATED_EXCEPTION(6500, "重复的DingerId=%s对象"),
+	DINGERDEFINITIONTYPE_UNDEFINED_KEY(6501, "当前key=%s在DingerDefinitionType中没定义"),
+	IMAGETEXT_METHOD_PARAM_EXCEPTION(6502, "方法%s的参数不符合图文消息定义规范"),
+	METHOD_DEFINITION_EXCEPTION(6503, "方法%s定义不符合规范"),
+	LINK_METHOD_PARAM_EXCEPTION(6504, "方法%s的参数不符合Link消息定义规范"),
+	DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION(6505, "Dinger[%s]暂不支持消息类型[%s]"),
+
+	/**
+	 * Multi Dinger解析相关异常, 70XX
+	 */
+	DINGER_CONFIG_HANDLER_EXCEPTION(7000, "%s中指定的dingerconfigs[%d]数据异常"),
+	MULTIDINGER_ALGORITHM_EXCEPTION(7001, "%s中算法为空"),
+	MULTIDINGER_ANNOTATTION_EXCEPTION(7002, "%s中的MultiDinger.dinger=%s已经被警用"),
+
+	/**
+	 * Multi Dinger属性注入相关异常, 75XX
+	 */
+	ALGORITHM_FIELD_INSTANCE_NOT_EXISTS(7500, "算法[%s]中属性字段[%s]实例不存在"),
+	ALGORITHM_FIELD_INSTANCE_NOT_MATCH(7501, "算法[%s]中属性字段[%s]实例不匹配"),
+	ALGORITHM_FIELD_INJECT_FAILED(7502, "算法[%s]中属性字段[%s]注入失败"),
+
+	/**
+	 * 未知异常
+	 */
+	UNKNOWN(9999, "未知异常");
 
 
+	private int code;
+	private String message;
 
+	ExceptionEnum(int code, String message) {
+		this.code = code;
+		this.message = message;
+	}
 
+	@Override
+	public Integer code() {
+		return code;
+	}
 
-    /** 消息类型异常, {@link com.github.jaemon.dinger.exception.MsgTypeException} */
-    MSG_TYPE_CHECK(2000, "消息类型异常"),
-
-
-
-
-
-    /** 异步调用相关异常, {@link com.github.jaemon.dinger.exception.AsyncCallException} */
-    ASYNC_CALL(3000, "异步调用异常"),
-
-
-
-
-
-    /**
-     * dingTalkManagerBuilder 配置异常
-     */
-    MULTI_DINGER_SCAN_ERROR(4000, "配置了多个DingerScan注解"),
-    /** {@link com.github.jaemon.dinger.exception.ConfigurationException} */
-    CONFIG_ERROR(4001, "配置异常"),
-    RESOURCE_CONFIG_EXCEPTION(4002, "读取资源[%s]信息异常"),
-
-
-
-
-
-    /** 配置文件相关异常, 5XXX, {@link com.github.jaemon.dinger.exception.InvalidPropertiesFormatException} */
-    PROPERTIES_ERROR(5000, "配置文件异常"),
-
-
-
-
-
-    /** Dinger解析XML相关异常, 60XX */
-    DINER_XML_NAMESPACE_INVALID(6000, "xml文件namespace=%s对应的类不存在"),
-    DINER_XML_MSGTYPE_INVALID(6001, "xml id=%s文件message type=%s无效"),
-
-    DINGERDEFINITION_ERROR(6004, "key=%s无对应的DingerDefinitionGenerator"),
-    DINGERDEFINITIONTYPE_ERROR(6005, "%s中消息体定义主类型期望=%s, 实际=%s"),
-
-
-    /** Dinger解析注解相关异常, 63XX */
-
-
-    /** Dinger解析公共相关异常, 65XX */
-    /** 注解DingerText和Dinger xml重复配置也会抛出该异常 */
-    DINGER_REPEATED_EXCEPTION(6500, "重复的DingerId=%s对象"),
-    DINGERDEFINITIONTYPE_UNDEFINED_KEY(6501, "当前key=%s在DingerDefinitionType中没定义"),
-    IMAGETEXT_METHOD_PARAM_EXCEPTION(6502, "方法%s的参数不符合图文消息定义规范"),
-    METHOD_DEFINITION_EXCEPTION(6503, "方法%s定义不符合规范"),
-    LINK_METHOD_PARAM_EXCEPTION(6504, "方法%s的参数不符合Link消息定义规范"),
-    DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION(6505, "Dinger[%s]暂不支持消息类型[%s]"),
-
-
-
-
-
-    /** Multi Dinger解析相关异常, 70XX */
-    DINGER_CONFIG_HANDLER_EXCEPTION(7000, "%s中指定的dingerconfigs[%d]数据异常"),
-    MULTIDINGER_ALGORITHM_EXCEPTION(7001, "%s中算法为空"),
-    MULTIDINGER_ANNOTATTION_EXCEPTION(7002, "%s中的MultiDinger.dinger=%s已经被警用"),
-
-    /** Multi Dinger属性注入相关异常, 75XX */
-    ALGORITHM_FIELD_INSTANCE_NOT_EXISTS(7500, "算法[%s]中属性字段[%s]实例不存在"),
-    ALGORITHM_FIELD_INSTANCE_NOT_MATCH(7501, "算法[%s]中属性字段[%s]实例不匹配"),
-    ALGORITHM_FIELD_INJECT_FAILED(7502, "算法[%s]中属性字段[%s]注入失败"),
-
-
-    /** 未知异常 */
-    UNKNOWN(9999, "未知异常")
-    ;
-
-
-    private int code;
-    private String message;
-
-    ExceptionEnum(int code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-
-    @Override
-    public Integer code() {
-        return code;
-    }
-
-    @Override
-    public String desc() {
-        return message;
-    }
+	@Override
+	public String desc() {
+		return message;
+	}
 }

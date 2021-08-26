@@ -27,27 +27,28 @@ import java.util.List;
  * @since 1.0
  */
 public class MultiDingerConfig {
-    private AlgorithmHandler algorithmHandler;
-    private List<DingerConfig> dingerConfigs;
 
-    public MultiDingerConfig(AlgorithmHandler algorithmHandler, List<DingerConfig> dingerConfigs) {
-        this.algorithmHandler = algorithmHandler;
-        this.dingerConfigs = dingerConfigs;
-    }
+	private AlgorithmHandler algorithmHandler;
+	private List<DingerConfig> dingerConfigs;
 
-    public AlgorithmHandler getAlgorithmHandler() {
-        return algorithmHandler;
-    }
+	public MultiDingerConfig(AlgorithmHandler algorithmHandler, List<DingerConfig> dingerConfigs) {
+		this.algorithmHandler = algorithmHandler;
+		this.dingerConfigs = dingerConfigs;
+	}
 
-    public void setAlgorithmHandler(AlgorithmHandler algorithmHandler) {
-        this.algorithmHandler = algorithmHandler;
-    }
+	public AlgorithmHandler getAlgorithmHandler() {
+		return algorithmHandler;
+	}
 
-    public List<DingerConfig> getDingerConfigs() {
-        return dingerConfigs;
-    }
+	public void setAlgorithmHandler(AlgorithmHandler algorithmHandler) {
+		this.algorithmHandler = algorithmHandler;
+	}
 
-    public void setDingerConfigs(List<DingerConfig> dingerConfigs) {
-        this.dingerConfigs = dingerConfigs;
-    }
+	public List<DingerConfig> getDingerConfigs() {
+		return dingerConfigs;
+	}
+
+	public void setDingerConfigs(List<DingerConfig> dingerConfigs) {
+		this.dingerConfigs = dingerConfigs;
+	}
 }

@@ -27,15 +27,12 @@ import java.util.Map;
  */
 public interface MessageTransfer {
 
-    /**
-     * 转换Dinger消息体发送内容
-     *
-     * @param dingerDefinition dingerDefinition
-     *                  Dinger消息体定义
-     * @param params params
-     *                  变量列表
-     * @return Message
-     *                  消息内容
-     */
-    MsgType transfer(DingerDefinition dingerDefinition, Map<String, Object> params);
+	/**
+	 * 转换Dinger消息体发送内容
+	 *
+	 * @param dingerDefinition dingerDefinition Dinger消息体定义
+	 * @param params           params 变量列表
+	 * @return Message 消息内容
+	 */
+	MsgType transfer(DingerDefinition dingerDefinition, Map<String, Object> params);
 }

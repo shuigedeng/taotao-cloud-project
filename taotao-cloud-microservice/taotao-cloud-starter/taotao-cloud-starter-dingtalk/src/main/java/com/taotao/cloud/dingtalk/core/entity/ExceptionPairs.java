@@ -23,10 +23,10 @@ package com.taotao.cloud.dingtalk.core.entity;
  */
 public interface ExceptionPairs extends Pairs<Integer, String> {
 
-    @Override
-    default String message(Object... args) {
-        String message = String.format(this.desc(), args);
-        return String.format("{code=%d, message=%s}", code(), message);
-    }
+	@Override
+	default String message(Object... args) {
+		String message = String.format(this.desc(), args);
+		return String.format("{code=%d, message=%s}", code(), message);
+	}
 
 }

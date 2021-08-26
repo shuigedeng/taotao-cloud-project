@@ -22,15 +22,13 @@ package com.taotao.cloud.dingtalk.core;
  * @since 1.0
  */
 public interface ResultHandler<T> {
-    /**
-     * Dinger方法返回结果处理
-     *
-     * @param resultType
-     *          返回结果类型
-     * @param t T
-     *          实际返回信息
-     * @return
-     *          最终返回信息
-     */
-    Object resultHandler(Class<?> resultType, T t);
+
+	/**
+	 * Dinger方法返回结果处理
+	 *
+	 * @param resultType 返回结果类型
+	 * @param t          T 实际返回信息
+	 * @return 最终返回信息
+	 */
+	Object resultHandler(Class<?> resultType, T t);
 }

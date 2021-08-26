@@ -15,7 +15,12 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
+import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
+
 import com.taotao.cloud.dingtalk.exception.DingerException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -26,10 +31,6 @@ import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.SimpleMetadataReaderFactory;
 import org.springframework.util.ClassUtils;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * ClassPathScanForResources
@@ -38,99 +39,92 @@ import java.util.List;
  * @since 1.0
  */
 public final class ClassPathScanForResources {
-    private static final Logger log = LoggerFactory.getLogger(ClassPathScanForResources.class);
-    private static final String CLASSPATH_ALL_URL_PREFIX = "classpath*:";
-    private static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
-    private static final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-    /**
-     * 扫描包
-     *
-     * @param packageSearchPath
-     *          扫描的包路径， <code>classpath*:com.jaemon.dinger/**\/*.class</code>
-     * @return
-     *          包下的所有资源文件集
-     */
-    public static Resource[] doScanPackage(String packageSearchPath) {
-        try {
-            return resolver.getResources(packageSearchPath);
-        } catch (IOException ex) {
-            log.error(packageSearchPath, ex);
-            throw new DingerException(RESOURCE_CONFIG_EXCEPTION, packageSearchPath);
-        }
-    }
+	private static final Logger log = LoggerFactory.getLogger(ClassPathScanForResources.class);
+	private static final String CLASSPATH_ALL_URL_PREFIX = "classpath*:";
+	private static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
+	private static final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-    /**
-     * @param basePackage
-     *          包名， eg： <code>com.jaemon.dinger</code>
-     * @return
-     *          包下的所有接口集合
-     */
-    public static List<Class<?>> scanInterfaces(String basePackage) {
-        return scanClasses(basePackage, true);
-    }
+	/**
+	 * 扫描包
+	 *
+	 * @param packageSearchPath 扫描的包路径， <code>classpath*:com.jaemon.dinger/**\/*.class</code>
+	 * @return 包下的所有资源文件集
+	 */
+	public static Resource[] doScanPackage(String packageSearchPath) {
+		try {
+			return resolver.getResources(packageSearchPath);
+		} catch (IOException ex) {
+			log.error(packageSearchPath, ex);
+			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, packageSearchPath);
+		}
+	}
+
+	/**
+	 * @param basePackage 包名， eg： <code>com.jaemon.dinger</code>
+	 * @return 包下的所有接口集合
+	 */
+	public static List<Class<?>> scanInterfaces(String basePackage) {
+		return scanClasses(basePackage, true);
+	}
 
 
-    /**
-     * @param basePackage
-     *          包名， eg： <code>com.jaemon.dinger</code>
-     * @return
-     *          包下的所有类集合
-     */
-    public static List<Class<?>> scanClasses(String basePackage) {
-        return scanClasses(basePackage, false);
-    }
+	/**
+	 * @param basePackage 包名， eg： <code>com.jaemon.dinger</code>
+	 * @return 包下的所有类集合
+	 */
+	public static List<Class<?>> scanClasses(String basePackage) {
+		return scanClasses(basePackage, false);
+	}
 
 
-    /**
-     * @param basePackage
-     *          包名， eg： <code>com.jaemon.dinger</code>
-     * @param filterInterface
-     *          是否过滤接口
-     * @return
-     *          包下的所有类集合
-     */
-    private static List<Class<?>> scanClasses(String basePackage, boolean filterInterface) {
-        boolean debugEnabled = log.isDebugEnabled();
-        String packageSearchPath = CLASSPATH_ALL_URL_PREFIX +
-                resolveBasePackage(basePackage) + "/" + DEFAULT_RESOURCE_PATTERN;
-        Resource[] resources = doScanPackage(packageSearchPath);
+	/**
+	 * @param basePackage     包名， eg： <code>com.jaemon.dinger</code>
+	 * @param filterInterface 是否过滤接口
+	 * @return 包下的所有类集合
+	 */
+	private static List<Class<?>> scanClasses(String basePackage, boolean filterInterface) {
+		boolean debugEnabled = log.isDebugEnabled();
+		String packageSearchPath = CLASSPATH_ALL_URL_PREFIX +
+			resolveBasePackage(basePackage) + "/" + DEFAULT_RESOURCE_PATTERN;
+		Resource[] resources = doScanPackage(packageSearchPath);
 
-        List<Class<?>> classes = new ArrayList<>();
+		List<Class<?>> classes = new ArrayList<>();
 
-        if (resources.length == 0) {
-            return classes;
-        }
+		if (resources.length == 0) {
+			return classes;
+		}
 
-        SimpleMetadataReaderFactory factory = new SimpleMetadataReaderFactory();
-        for (Resource resource : resources) {
-            String resourceFilename = resource.getFilename();
-            if (!resource.isReadable()) {
-                if (debugEnabled) {
-                    log.debug("Ignored because not readable: {} ", resourceFilename);
-                }
-                continue;
-            }
-            try {
-                MetadataReader metadataReader = factory.getMetadataReader(resource);
-                ClassMetadata classMetadata = metadataReader.getClassMetadata();
-                Class<?> clazz = Class.forName(classMetadata.getClassName());
-                if (filterInterface && !clazz.isInterface()) {
-                    if (debugEnabled) {
-                        log.debug("source class={} is interface and skip.", resourceFilename);
-                    }
-                    continue;
-                }
-                classes.add(clazz);
-            } catch (IOException | ClassNotFoundException e) {
-                log.warn("resource={} read exception and message={}.", resourceFilename, e.getMessage());
-                continue;
-            }
-        }
-        return classes;
-    }
+		SimpleMetadataReaderFactory factory = new SimpleMetadataReaderFactory();
+		for (Resource resource : resources) {
+			String resourceFilename = resource.getFilename();
+			if (!resource.isReadable()) {
+				if (debugEnabled) {
+					log.debug("Ignored because not readable: {} ", resourceFilename);
+				}
+				continue;
+			}
+			try {
+				MetadataReader metadataReader = factory.getMetadataReader(resource);
+				ClassMetadata classMetadata = metadataReader.getClassMetadata();
+				Class<?> clazz = Class.forName(classMetadata.getClassName());
+				if (filterInterface && !clazz.isInterface()) {
+					if (debugEnabled) {
+						log.debug("source class={} is interface and skip.", resourceFilename);
+					}
+					continue;
+				}
+				classes.add(clazz);
+			} catch (IOException | ClassNotFoundException e) {
+				log.warn("resource={} read exception and message={}.", resourceFilename,
+					e.getMessage());
+				continue;
+			}
+		}
+		return classes;
+	}
 
-    private static String resolveBasePackage(String basePackage) {
-        return ClassUtils.convertClassNameToResourcePath(basePackage);
-    }
+	private static String resolveBasePackage(String basePackage) {
+		return ClassUtils.convertClassNameToResourcePath(basePackage);
+	}
 }

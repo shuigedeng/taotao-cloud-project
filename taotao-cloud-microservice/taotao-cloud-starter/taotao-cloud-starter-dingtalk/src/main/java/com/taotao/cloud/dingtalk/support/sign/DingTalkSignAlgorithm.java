@@ -16,6 +16,8 @@
 package com.taotao.cloud.dingtalk.support.sign;
 
 
+import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+
 /**
  * 默认签名算法 {@link DingerType#DINGTALK}
  *
@@ -23,12 +25,13 @@ package com.taotao.cloud.dingtalk.support.sign;
  * @since 1.0
  */
 public class DingTalkSignAlgorithm implements DingerSignAlgorithm<SignResult> {
-    @Override
-    public SignResult sign(String secret) throws Exception {
-        Long timestamp = System.currentTimeMillis();
 
-        String sign = algorithm(timestamp, secret);
+	@Override
+	public SignResult sign(String secret) throws Exception {
+		Long timestamp = System.currentTimeMillis();
 
-        return new SignResult(sign, timestamp);
-    }
+		String sign = algorithm(timestamp, secret);
+
+		return new SignResult(sign, timestamp);
+	}
 }
