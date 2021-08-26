@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.opencv.api.feign.fallback.RemoteFileFallbackImpl

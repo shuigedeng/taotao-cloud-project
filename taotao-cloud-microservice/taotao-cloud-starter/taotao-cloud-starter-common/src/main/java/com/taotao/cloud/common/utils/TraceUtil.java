@@ -101,7 +101,6 @@ public class TraceUtil {
 	}
 
 
-
 	/**
 	 * 从header和参数中获取traceId 从前端传入数据
 	 *

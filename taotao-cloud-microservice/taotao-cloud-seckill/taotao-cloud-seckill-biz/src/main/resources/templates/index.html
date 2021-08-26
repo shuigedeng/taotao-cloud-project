@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="keywords" content="从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓"/>
+    <meta name="description" content="从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓"/>
+    <meta name="author" content="小柒2012" />
+    <meta name="site" content="https://blog.52itstyle.com" />
+    <title>分布式秒杀系统</title>
+    <link rel="stylesheet" th:href="@{/iview/iview.css}">
+    <style type="text/css">
+	[v-cloak] {
+			  display: none;
+			}
+	</style>
+</head>
+<body>
+<div class="container" style="margin-top: 1%;text-align:center;font-size: 20px;">
+          从0到1构建分布式秒杀系统，脱离案例讲架构都是耍流氓
+</div>
+<div id="app" v-cloak>
+     <div style="margin-bottom: 8px;margin-top: 8px;margin-left: 20px;margin-right: 20px">
+		<i-input placeholder="商品名称"  style="width: 300px"></i-input>
+		<i-button type="primary" icon="ios-search" >搜索</i-button>
+        <i-button type="primary"  icon="close">重置</i-button>
+	</div>
+	<div style="margin-bottom: 8px;margin-top: 8px;margin-left: 20px;margin-right: 20px">
+		<template> 
+			<i-table :content="self" :columns="tableTitle" :data="seckillData"></i-table>
+		 	<br>
+		</template>
+    </div>
+</div>
+<script th:src="@{/goods/js/jquery-1.9.1.min.js}"></script>
+<script th:src="@{/js/webSocket.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/iview/iview.min.js}"></script>
+<script>
+/**
+ * 用户js
+ */
+var tableTitle = [ {
+	key : "name",
+	title : "商品名称"
+}, {
+	key : "number",
+	title : "数量"
+}, {
+	key : "startTime",
+	title : "秒杀时间",
+	render: function (h, params) {  
+		return h('div', new Date(params.row.startTime).Format('yyyy-MM-dd hh:mm:ss'));
+   } 
+},{
+	title : '操作',
+	key : 'action',
+	width : 500,
+	align : 'center',
+	render : function(h, params) {
+		var functionList = [];
+		//购买
+		var seeH = h('Button', {
+			props : {
+				type : 'primary',
+				size : 'small',
+				icon : 'ios-infinite'
+			},
+			style : {
+				marginRight : '8px'
+			},
+			on : {
+				click : function() {
+					window.open(params.row.seckillId+".shtml");     
+				}
+			}
+		}, '购买');
+		functionList.push(seeH);
+		// 返回方法集合
+		return h('div', functionList);
+	}
+} ];
+var vm = new Vue({
+	el: '#app',
+	data:{
+		seckillData : [],
+	},
+	methods: {
+		listSeckill: function () {
+			$.ajax({
+				type: "POST",
+			    url: "seckillPage/list",
+			    data: {},
+			    dataType: "json",
+			    success: function(result){
+					vm.seckillData = result.msg;
+				}
+			});
+		},
+		initFormatter : function(){  
+		      Date.prototype.Format = function(fmt) { //  
+			        let o = {    
+			            "M+" : this.getMonth()+1,                 //月份    
+			            "d+" : this.getDate(),                    //日    
+			            "h+" : this.getHours(),                   //小时    
+			            "m+" : this.getMinutes(),                 //分    
+			            "s+" : this.getSeconds(),                 //秒    
+			            "q+" : Math.floor((this.getMonth()+3)/3), //季度    
+			            "S"  : this.getMilliseconds()             //毫秒    
+			        };    
+			        if(/(y+)/.test(fmt))    
+			            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));    
+			        for(var k in o)    
+			            if(new RegExp("("+ k +")").test(fmt))    
+			                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));    
+			        return fmt;    
+			      }  
+		} 
+	},
+	created : function() {
+		this.listSeckill();
+		this.initFormatter();
+	}
+});						
+</script>
+</body>
+</html>

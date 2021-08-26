@@ -1,0 +1,135 @@
+#   Copyright 2019 Yanzheng (https://github.com/micyo202). All rights reserved.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+version: "3"
+
+services:
+
+  nacos:
+    image: nacos/nacos-server:1.1.4
+    ports:
+      - "8848:8848"
+    environment:
+      MODE: standalone
+    restart: always
+
+  sentinel:
+    image: bladex/sentinel-dashboard:1.7.1
+    ports:
+      - "8858:8858"
+    restart: always
+
+  seata:
+    image: seataio/seata-server:1.0.0
+    ports:
+      - "8091:8091"
+    environment:
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+      - /PATH/TO/CONFIG_FILE:/root/seata-config
+    depends_on:
+      - nacos
+    restart: always
+
+  zipkin:
+    image: openzipkin/zipkin:2.20
+    ports:
+      - "9411:9411"
+    environment:
+      RABBIT_ADDRESSES: localhost:5672
+      RABBIT_USER: guest
+      RABBIT_PASSWORD: guest
+      STORAGE_TYPE: mysql
+      MYSQL_HOST: localhost
+      MYSQL_USER: lion
+      MYSQL_PASS: lion
+      MYSQL_DB: zipkin
+    restart: always
+
+  skywalking-oap-server:
+    image: apache/skywalking-oap-server:6.6.0-es7
+    container_name: skywalking-oap-server
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      SW_STORAGE: mysql
+      SW_JDBC_URL: jdbc:mysql://localhost:3306/skywalking
+      SW_DATA_SOURCE_USER: lion
+      SW_DATA_SOURCE_PASSWORD: lion
+    restart: always
+
+  skywalking-ui:
+    image: apache/skywalking-ui:6.6.0
+    container_name: skywalking-ui
+    ports:
+      - "8900:8080"
+    depends_on:
+      - skywalking-oap-server
+    environment:
+      SW_OAP_ADDRESS: skywalking-oap-server:12800
+    restart: always
+
+  lion-admin:
+    image: micyo202/lion-admin:2.0.8.GA
+    ports:
+      - "8200:8200"
+    environment:
+      REGISTER_HOST: localhost
+    depends_on:
+      - nacos
+    restart: always
+
+  lion-gateway:
+    image: micyo202/lion-gateway:2.0.8.GA
+    ports:
+      - "8400:8400"
+    environment:
+      REGISTER_HOST: localhost
+    depends_on:
+      - nacos
+      - sentinel
+    restart: always
+
+  lion-auth:
+    image: micyo202/lion-auth:2.0.8.GA
+    ports:
+      - "8888:8888"
+    environment:
+      REGISTER_HOST: localhost
+    depends_on:
+      - nacos
+      - sentinel
+    restart: always
+
+  lion-demo-provider:
+    image: micyo202/lion-demo-provider:2.0.8.GA
+    ports:
+      - "8601:8601"
+    environment:
+      REGISTER_HOST: localhost
+    depends_on:
+      - nacos
+      - sentinel
+    restart: always
+
+  lion-demo-consumer:
+    image: micyo202/lion-demo-consumer:2.0.8.GA
+    ports:
+      - "8701:8701"
+    environment:
+      REGISTER_HOST: localhost
+    depends_on:
+      - nacos
+      - sentinel
+    restart: always

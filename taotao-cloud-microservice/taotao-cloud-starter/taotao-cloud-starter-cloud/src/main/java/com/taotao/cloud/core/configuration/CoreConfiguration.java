@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 /**
- * EndPoindConfiguration
+ * CoreConfiguration
  *
  * @author shuigedeng
  * @version 1.0.0

@@ -158,13 +158,13 @@ public class KubernetesClientBuilder {
 		AppsAPIGroupClient oclient = createKubernetesClient().adapt(AppsAPIGroupClient.class);
 		MixedOperation<Deployment, DeploymentList, RollableScalableResource<Deployment>> operation1
 			= oclient.deployments();
-//将资源转换为JSON 查看
+		//将资源转换为JSON 查看
 		DeploymentList deploymentList = operation1.list();
 		List<Deployment> deployments = deploymentList.getItems();
-//创建Deployment，返回创建好的Deployment文件
+		//创建Deployment，返回创建好的Deployment文件
 		oclient.deployments()
 			.create(getDepandDeployment("appName", "image", "nodeName"));
-//删除同上，返回结果为boolean类型数据
+		//删除同上，返回结果为boolean类型数据
 		oclient.deployments()
 			.delete(getDepandDeployment("appName", "image", "nodeName"));
 	}

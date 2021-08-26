@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+
+    api "com.xuxueli:xxl-job-core"
+
+    
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

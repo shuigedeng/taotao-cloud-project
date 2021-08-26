@@ -49,5 +49,5 @@ public class StarterNameConstant {
 
 	public static final String TAOTAO_CLOUD_ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
 
-	public static final String TAOTAO_CLOUD_JOB_STARTER = "taotao-cloud-starter-job";
+	public static final String TAOTAO_CLOUD_JOB_STARTER = "taotao-cloud-starter-job-xxl";
 }

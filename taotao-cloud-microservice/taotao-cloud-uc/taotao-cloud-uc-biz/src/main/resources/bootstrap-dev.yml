@@ -6,14 +6,6 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
-#jasypt:
-#  encryptor:
-#    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
-#    algorithm: PBEWITHHMACSHA512ANDAES_256
-##    property:
-##      prefix: "ENC@["
-##      suffix: "]"
-
 spring:
   main:
     allow-bean-definition-overriding: true

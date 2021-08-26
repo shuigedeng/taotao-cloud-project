@@ -1,0 +1,206 @@
+#   Copyright 2019 Yanzheng (https://github.com/micyo202). All rights reserved.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lion-deploy
+  namespace: default
+spec:
+  replicas: 1 # 副本数量
+  revisionHistoryLimit: 3 # 设置保留的历史版本个数，默认是 10
+  minReadySeconds: 10 # 设置 pod 准备就绪的最小秒数（需要估一个比较合理的值，从容器启动到应用正常提供服务）
+  strategy:
+    type: RollingUpdate # 滚动更新
+    rollingUpdate:
+      maxSurge: 30% # 更新时允许最大激增的容器数，可以是个数，也可以是百分比（默认 replicas 的 1/4 向上取整）
+      maxUnavailable: 30% # 更新时允许最大 unavailable 容器数，可以是个数，也可以是百分比（默认 replicas 的 1/4 向上取整）
+  selector:
+    matchLabels:
+      name: lion
+  template:
+    metadata:
+      labels:
+        name: lion
+    spec:
+      containers:
+        - name: lion-admin
+          image: micyo202/lion-admin:2.0.8.GA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8200
+          env:
+            - name: REGISTER_HOST
+              value: localhost
+          resources:
+            requests: # 最小资源配置
+              cpu: 300m # 代表0.3CPU
+              memory: 500Mi
+            limits: # 最大资源配置
+              cpu: 500m # 代表0.5CPU
+              memory: 1024Mi
+
+        - name: lion-gateway
+          image: micyo202/lion-gateway:2.0.8.GA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8400
+          env:
+            - name: REGISTER_HOST
+              value: localhost
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+
+        - name: lion-auth
+          image: micyo202/lion-auth:2.0.8.GA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8888
+          env:
+            - name: REGISTER_HOST
+              value: localhost
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+
+        - name: lion-demo-provider
+          image: micyo202/lion-demo-provider:2.0.8.GA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8601
+          env:
+            - name: REGISTER_HOST
+              value: localhost
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+
+        - name: lion-demo-consumer
+          image: micyo202/lion-demo-consumer:2.0.8.GA
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8701
+          env:
+            - name: REGISTER_HOST
+              value: localhost
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1024Mi
+
+      restartPolicy: Always # Pod的重启策略
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: lion-service
+  namespace: default
+spec:
+  selector:
+    name: lion
+  type: NodePort
+  ports:
+    - name: lion-admin
+      protocol: TCP
+      port: 8200  # Service端口
+      targetPort: 8200  # 容器端口
+      nodePort: 31820 # 对外暴露访问端口
+
+    - name: lion-gateway
+      protocol: TCP
+      port: 8400
+      targetPort: 8400
+      nodePort: 31840
+
+    - name: lion-auth
+      protocol: TCP
+      port: 8888
+      targetPort: 8888
+      nodePort: 31888
+
+    - name: lion-demo-provider
+      protocol: TCP
+      port: 8601
+      targetPort: 8601
+      nodePort: 31861
+
+    - name: lion-demo-consumer
+      protocol: TCP
+      port: 8701
+      targetPort: 8701
+      nodePort: 31871
+
+---
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: lion-hpa
+  namespace: default
+spec:
+  scaleTargetRef: # 指定需要管理的 Deployment/ReplicaSet 的名字
+    apiVersion: apps/v1
+    kind: Deployment
+    name: lion-deploy
+  minReplicas: 3  # pod可伸缩最小范围
+  maxReplicas: 10 # pod可伸缩最大范围
+  metrics:
+    - type: Resource  # Resource类型指标
+      resource:
+        name: cpu # CPU指标
+        target:
+          type: Utilization # Utilization类型的目标值，Resource类型的指标支持Utilization和AverageValue类型的目标值
+          averageUtilization: 50  # 指定 CPU 使用率（自动扩容/缩容的触发条件）
+    - type: Resource
+      resource:
+        name: memory  # 内存指标
+        target:
+          type: Utilization # Utilization类型的目标值，Resource类型的指标支持Utilization和AverageValue类型的目标值
+          averageUtilization: 60  # 指定内存使用率（自动扩容/缩容的触发条件）
+    - type: Pods  # Pods类型指标
+      pods:
+        metric:
+          name: packets-per-second  # 每秒数据包
+        target:
+          type: AverageValue  # AverageValue类型的目标值，Pods指标类型下只支持AverageValue类型的目标值
+          averageValue: 1k  # 指定每秒数据包平均值（自动扩容/缩容的触发条件）
+    - type: Object  # Object类型指标
+      object:
+        # 监控指标的对象描述，指标数据来源于该对象
+        describedObject:
+          apiVersion: networking.k8s.io/v1beta1
+          kind: Ingress
+          name: main-route
+        metric:
+          name: requests-per-second # 每秒请求数
+        target:
+          type: Value # Value类型的目标值，Object类型的指标只支持Value和AverageValue类型的目标值
+          value: 10k  # 每秒请求数平均值（自动扩容/缩容的触发条件）

@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  * @version 1.0.0
  * @since 2020/5/2 11:23
  */
-public abstract class RetryUtil {
+public class RetryUtil {
 
 	private final static String name = "重试工具";
 

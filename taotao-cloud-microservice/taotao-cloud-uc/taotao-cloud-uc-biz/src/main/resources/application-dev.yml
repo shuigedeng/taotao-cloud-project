@@ -26,6 +26,24 @@ redisson:
   single-server-config:
     address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+  registry:
+    address: spring-cloud://localhost
+    timeout: 15000
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+  cloud:
+    subscribed-services: '*'
+  scan:
+    base-packages: com.taotao.cloud.*.biz.service.impl
+  provider:
+    loadbalance: roundrobin
+
 seata:
   enabled: true
   application-id: ${spring.application.name}
@@ -150,6 +168,7 @@ spring:
           username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
     mongodb:
+
       database:
       host:
   kafka:
@@ -462,3 +481,4 @@ logging:
 springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
+

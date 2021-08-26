@@ -1,2 +1,2 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.job.PropertiesAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.egzosn.pay.spring.boot.autoconfigue.PayAutoConfiguration
