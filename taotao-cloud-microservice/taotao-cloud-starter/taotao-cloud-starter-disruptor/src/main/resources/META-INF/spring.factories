@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lmax.disruptor.spring.boot.DisruptorAutoConfiguration,\
+com.lmax.disruptor.spring.boot.RingBufferAutoConfiguration

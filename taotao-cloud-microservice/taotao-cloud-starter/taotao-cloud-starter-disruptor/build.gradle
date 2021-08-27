@@ -1,8 +1,11 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api "org.apache.shardingsphere:sharding-jdbc-spring-namespace"
-    api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter"
+//    Disruptor它是一个开源的并发框架,并获得2011 Duke’s 程序框架创新奖,能够在无锁的情况下实现网络的Queue并发操作。
+    api "com.lmax:disruptor:3.4.3"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
+

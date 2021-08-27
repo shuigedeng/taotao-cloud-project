@@ -1,8 +1,11 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api "org.apache.shardingsphere:sharding-jdbc-spring-namespace"
-    api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter"
+//    api 'com.dianping.cat:cat-client:2.0.2'
+    api 'net.logstash.logback:logstash-logback-encoder'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
+

@@ -1,8 +1,13 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    api "org.apache.shardingsphere:sharding-jdbc-spring-namespace"
-    api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter"
+    api 'io.reactivex.rxjava2:rxjava:2.0.0'
+    testImplementation 'org.mockito:mockito-all:1.10.19'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
+
