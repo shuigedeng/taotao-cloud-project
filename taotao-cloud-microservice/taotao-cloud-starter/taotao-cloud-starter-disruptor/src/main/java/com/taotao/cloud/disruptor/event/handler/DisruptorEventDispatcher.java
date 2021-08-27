@@ -1,17 +1,18 @@
 package com.taotao.cloud.disruptor.event.handler;
 
+import com.lmax.disruptor.EventHandler;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.handler.chain.HandlerChain;
+import com.taotao.cloud.disruptor.event.handler.chain.HandlerChainResolver;
+import com.taotao.cloud.disruptor.event.handler.chain.ProxiedHandlerChain;
 import org.springframework.core.Ordered;
 
-import com.lmax.disruptor.EventHandler;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
-import com.lmax.disruptor.spring.boot.event.handler.chain.HandlerChain;
-import com.lmax.disruptor.spring.boot.event.handler.chain.HandlerChainResolver;
-import com.lmax.disruptor.spring.boot.event.handler.chain.ProxiedHandlerChain;
 
 /**
  * Disruptor 事件分发实现
  */
-public class DisruptorEventDispatcher extends AbstractRouteableEventHandler<DisruptorEvent> implements EventHandler<DisruptorEvent>, Ordered {
+public class DisruptorEventDispatcher extends AbstractRouteableEventHandler<DisruptorEvent> implements
+	EventHandler<DisruptorEvent>, Ordered {
 	
 	private int order = 0;
  

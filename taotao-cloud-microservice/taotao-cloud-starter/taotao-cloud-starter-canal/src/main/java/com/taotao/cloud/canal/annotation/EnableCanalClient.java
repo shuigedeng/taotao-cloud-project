@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.annotation;
 
-import com.wwjd.starter.canal.config.CanalClientConfiguration;
-import com.wwjd.starter.canal.config.CanalConfig;
+import com.taotao.cloud.canal.config.CanalClientConfiguration;
+import com.taotao.cloud.canal.config.CanalConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

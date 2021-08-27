@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.disruptor.event;
 
-@SuppressWarnings("serial")
 public class DisruptorRefreshedEvent extends DisruptorEvent {
 
 	public DisruptorRefreshedEvent(Object source) {

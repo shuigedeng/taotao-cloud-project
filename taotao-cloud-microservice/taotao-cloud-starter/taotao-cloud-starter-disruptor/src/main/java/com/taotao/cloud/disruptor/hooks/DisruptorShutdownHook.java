@@ -1,7 +1,7 @@
 package com.taotao.cloud.disruptor.hooks;
 
 import com.lmax.disruptor.dsl.Disruptor;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public class DisruptorShutdownHook extends Thread{
 	

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.disruptor.context;
 
+import com.taotao.cloud.disruptor.context.event.DisruptorEventPublisherAware;
 import java.security.AccessControlContext;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -28,7 +29,6 @@ import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.lmax.disruptor.spring.boot.context.event.DisruptorEventPublisherAware;
 
 public class DisruptorEventAwareProcessor implements ApplicationContextAware ,BeanPostProcessor, InitializingBean {
 
@@ -75,7 +75,7 @@ public class DisruptorEventAwareProcessor implements ApplicationContextAware ,Be
 	@Override
 	public Object postProcessBeforeInitialization(final Object bean, String beanName) throws BeansException {
 		AccessControlContext acc = null;
-		if (System.getSecurityManager() != null && (bean instanceof DisruptorEventPublisherAware )) {
+		if (System.getSecurityManager() != null && (bean instanceof DisruptorEventPublisherAware)) {
 			acc = getAccessControlContext();
 		}
 		if (acc != null) {

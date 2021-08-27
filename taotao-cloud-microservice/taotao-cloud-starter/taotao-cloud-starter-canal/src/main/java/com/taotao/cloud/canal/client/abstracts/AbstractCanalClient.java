@@ -3,10 +3,10 @@ package com.taotao.cloud.canal.client.abstracts;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
-import com.wwjd.starter.canal.client.interfaces.CanalClient;
-import com.wwjd.starter.canal.client.interfaces.TransponderFactory;
-import com.wwjd.starter.canal.client.transfer.DefaultMessageTransponder;
-import com.wwjd.starter.canal.config.CanalConfig;
+import com.taotao.cloud.canal.client.interfaces.CanalClient;
+import com.taotao.cloud.canal.client.interfaces.TransponderFactory;
+import com.taotao.cloud.canal.client.transfer.DefaultMessageTransponder;
+import com.taotao.cloud.canal.config.CanalConfig;
 import org.apache.commons.lang.StringUtils;
 
 import java.net.InetSocketAddress;

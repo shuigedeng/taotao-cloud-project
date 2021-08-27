@@ -1,8 +1,8 @@
 package com.taotao.cloud.canal.client.core;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.wwjd.starter.canal.client.abstracts.option.AbstractDBOption;
-import com.wwjd.starter.canal.client.interfaces.CanalEventListener;
+import com.taotao.cloud.canal.client.abstracts.option.AbstractDBOption;
+import com.taotao.cloud.canal.client.interfaces.CanalEventListener;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;

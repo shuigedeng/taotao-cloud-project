@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.disruptor.event;
 
-@SuppressWarnings("serial")
 public class DisruptorBindEvent extends DisruptorEvent {
 
 	/**

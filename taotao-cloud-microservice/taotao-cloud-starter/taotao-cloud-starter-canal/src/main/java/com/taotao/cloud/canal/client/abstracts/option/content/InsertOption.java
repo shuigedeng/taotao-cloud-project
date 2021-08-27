@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.client.abstracts.option.content;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.wwjd.starter.canal.client.abstracts.option.AbstractDBOption;
+import com.taotao.cloud.canal.client.abstracts.option.AbstractDBOption;
 
 /**
  * 新增数据

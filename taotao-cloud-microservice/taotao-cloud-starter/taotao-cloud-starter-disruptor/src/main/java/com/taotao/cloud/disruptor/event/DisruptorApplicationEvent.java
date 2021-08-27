@@ -17,7 +17,6 @@ package com.taotao.cloud.disruptor.event;
 
 import org.springframework.context.ApplicationEvent;
 
-@SuppressWarnings("serial")
 public class DisruptorApplicationEvent extends ApplicationEvent {
 
 	/**

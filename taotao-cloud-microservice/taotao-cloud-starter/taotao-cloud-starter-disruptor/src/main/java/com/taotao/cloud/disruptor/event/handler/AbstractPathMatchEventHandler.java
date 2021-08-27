@@ -1,5 +1,6 @@
 package com.taotao.cloud.disruptor.event.handler;
 
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
 
 public abstract class AbstractPathMatchEventHandler<T extends DisruptorEvent> extends AbstractAdviceEventHandler<T>  implements PathProcessor<T> {
 

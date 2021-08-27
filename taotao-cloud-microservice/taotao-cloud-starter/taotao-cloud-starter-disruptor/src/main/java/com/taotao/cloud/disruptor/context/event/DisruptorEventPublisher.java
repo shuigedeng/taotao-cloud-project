@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.disruptor.context.event;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public interface DisruptorEventPublisher {
 

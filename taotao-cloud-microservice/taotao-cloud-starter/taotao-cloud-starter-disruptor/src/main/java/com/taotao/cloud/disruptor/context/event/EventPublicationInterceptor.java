@@ -16,13 +16,13 @@
 package com.taotao.cloud.disruptor.context.event;
 
 
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import java.lang.reflect.Constructor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
 
 public class EventPublicationInterceptor
 		implements MethodInterceptor, DisruptorEventPublisherAware, InitializingBean {

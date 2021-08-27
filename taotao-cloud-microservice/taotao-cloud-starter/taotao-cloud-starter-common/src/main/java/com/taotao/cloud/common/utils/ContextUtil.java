@@ -21,6 +21,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -46,6 +47,15 @@ public class ContextUtil {
 
 	public static boolean isWeb() {
 		return getApplicationContext() != null;
+	}
+
+
+	public static ConfigurableWebServerApplicationContext getConfigurableWebServerApplicationContext() {
+		ApplicationContext context = getApplicationContext();
+		if (context != null && context instanceof ConfigurableWebServerApplicationContext) {
+			return (ConfigurableWebServerApplicationContext) context;
+		}
+		return null;
 	}
 
 	/**

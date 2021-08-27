@@ -1,6 +1,5 @@
 package com.taotao.cloud.disruptor.exception;
 
-@SuppressWarnings("serial")
 public class EventHandleException extends RuntimeException {
 
     public EventHandleException(Exception e) {

@@ -1,11 +1,11 @@
 package com.taotao.cloud.canal.client.core;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.wwjd.starter.canal.annotation.ListenPoint;
-import com.wwjd.starter.canal.client.abstracts.AbstractCanalClient;
-import com.wwjd.starter.canal.client.interfaces.CanalEventListener;
-import com.wwjd.starter.canal.config.CanalConfig;
-import com.wwjd.starter.canal.util.BeanUtil;
+import com.taotao.cloud.canal.annotation.ListenPoint;
+import com.taotao.cloud.canal.client.abstracts.AbstractCanalClient;
+import com.taotao.cloud.canal.client.interfaces.CanalEventListener;
+import com.taotao.cloud.canal.config.CanalConfig;
+import com.taotao.cloud.canal.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -119,7 +119,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 		}
 		
 		//若是你喜欢通过注解的方式去监听的话。。
-		Map<String, Object> listenerMap = BeanUtil.getBeansWithAnnotation(com.wwjd.starter.canal.annotation.CanalEventListener.class);
+		Map<String, Object> listenerMap = BeanUtil.getBeansWithAnnotation(com.taotao.cloud.canal.annotation.CanalEventListener.class);
 		//也放入 map
 		if (listenerMap != null) {
 			for (Object target : listenerMap.values()) {

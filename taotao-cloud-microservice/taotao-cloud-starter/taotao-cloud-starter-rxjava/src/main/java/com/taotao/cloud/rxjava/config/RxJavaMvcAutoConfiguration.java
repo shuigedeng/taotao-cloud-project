@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.rxjava.config;
 
-import io.jmnarloch.spring.boot.rxjava.mvc.ObservableReturnValueHandler;
-import io.jmnarloch.spring.boot.rxjava.mvc.SingleReturnValueHandler;
+import com.taotao.cloud.rxjava.mvc.ObservableReturnValueHandler;
+import com.taotao.cloud.rxjava.mvc.SingleReturnValueHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

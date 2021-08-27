@@ -1,9 +1,9 @@
 package com.taotao.cloud.canal.config;
 
 
-import com.wwjd.starter.canal.client.core.SimpleCanalClient;
-import com.wwjd.starter.canal.client.interfaces.CanalClient;
-import com.wwjd.starter.canal.util.BeanUtil;
+import com.taotao.cloud.canal.client.core.SimpleCanalClient;
+import com.taotao.cloud.canal.client.interfaces.CanalClient;
+import com.taotao.cloud.canal.util.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

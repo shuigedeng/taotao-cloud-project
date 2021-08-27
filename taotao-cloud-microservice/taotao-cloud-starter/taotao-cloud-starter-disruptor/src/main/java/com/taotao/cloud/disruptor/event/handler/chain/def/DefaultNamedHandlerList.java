@@ -1,5 +1,10 @@
 package com.taotao.cloud.disruptor.event.handler.chain.def;
 
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.handler.DisruptorHandler;
+import com.taotao.cloud.disruptor.event.handler.NamedHandlerList;
+import com.taotao.cloud.disruptor.event.handler.chain.HandlerChain;
+import com.taotao.cloud.disruptor.event.handler.chain.ProxiedHandlerChain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,11 +13,6 @@ import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
-import com.lmax.disruptor.spring.boot.event.handler.DisruptorHandler;
-import com.lmax.disruptor.spring.boot.event.handler.NamedHandlerList;
-import com.lmax.disruptor.spring.boot.event.handler.chain.HandlerChain;
-import com.lmax.disruptor.spring.boot.event.handler.chain.ProxiedHandlerChain;
 
 public class DefaultNamedHandlerList implements NamedHandlerList<DisruptorEvent> {
 

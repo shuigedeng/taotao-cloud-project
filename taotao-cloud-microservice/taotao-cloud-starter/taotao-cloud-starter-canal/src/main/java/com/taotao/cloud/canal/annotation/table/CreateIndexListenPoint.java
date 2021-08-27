@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.annotation.table;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.wwjd.starter.canal.annotation.ListenPoint;
+import com.taotao.cloud.canal.annotation.ListenPoint;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;

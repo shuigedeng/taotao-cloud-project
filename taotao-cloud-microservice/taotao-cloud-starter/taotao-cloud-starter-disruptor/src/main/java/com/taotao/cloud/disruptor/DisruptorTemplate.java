@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.disruptor;
 
+import com.taotao.cloud.disruptor.event.DisruptorBindEvent;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lmax.disruptor.EventTranslatorOneArg;
 import com.lmax.disruptor.dsl.Disruptor;
-import com.lmax.disruptor.spring.boot.event.DisruptorBindEvent;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
 
 public class DisruptorTemplate {
 	

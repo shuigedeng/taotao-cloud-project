@@ -1,12 +1,12 @@
 package com.taotao.cloud.disruptor.event.handler.chain;
 
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.handler.DisruptorHandler;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
-import com.lmax.disruptor.spring.boot.event.handler.DisruptorHandler;
 
 public class ProxiedHandlerChain implements HandlerChain<DisruptorEvent> {
 

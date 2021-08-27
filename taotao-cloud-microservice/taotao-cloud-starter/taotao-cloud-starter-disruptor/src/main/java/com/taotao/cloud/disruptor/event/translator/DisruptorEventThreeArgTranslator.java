@@ -16,7 +16,7 @@
 package com.taotao.cloud.disruptor.event.translator;
 
 import com.lmax.disruptor.EventTranslatorThreeArg;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public class DisruptorEventThreeArgTranslator implements EventTranslatorThreeArg<DisruptorEvent, String, String, String> {
 

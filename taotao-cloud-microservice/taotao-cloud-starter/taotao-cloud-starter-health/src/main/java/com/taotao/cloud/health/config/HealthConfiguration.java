@@ -1,12 +1,15 @@
 package com.taotao.cloud.health.config;
 
-import com.yh.csx.bsf.core.util.LogUtils;
-import com.yh.csx.bsf.core.util.WebUtils;
-import com.yh.csx.bsf.health.dump.DumpProvider;
-import com.yh.csx.bsf.health.export.ExportProvider;
-import com.yh.csx.bsf.health.filter.*;
-import com.yh.csx.bsf.health.collect.HealthCheckProvider;
-import com.yh.csx.bsf.health.warn.WarnProvider;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.health.collect.HealthCheckProvider;
+import com.taotao.cloud.health.dump.DumpProvider;
+import com.taotao.cloud.health.export.ExportProvider;
+import com.taotao.cloud.health.filter.DoubtApiInterceptor;
+import com.taotao.cloud.health.filter.DumpFilter;
+import com.taotao.cloud.health.filter.HealthReportFilter;
+import com.taotao.cloud.health.filter.PingFilter;
+import com.taotao.cloud.health.warn.WarnProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,19 +26,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  **/
 @Configuration
 @ConditionalOnProperty(name = "bsf.health.enabled", havingValue = "true")
-@EnableConfigurationProperties({ HealthProperties.class, WarnProperties.class, ExportProperties.class })
+@EnableConfigurationProperties({HealthProperties.class, WarnProperties.class,
+	ExportProperties.class})
 public class HealthConfiguration {
+
 	@ConditionalOnProperty(name = "bsf.health.warn.enabled", havingValue = "true")
 	@Bean(destroyMethod = "close")
 	public WarnProvider getWarnProvider() {
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project, "报警服务注册成功");
+		LogUtil.info(HealthProperties.Project, "报警服务注册成功");
 		return new WarnProvider();
 	}
 
 	@ConditionalOnProperty(name = "bsf.health.check.enabled", havingValue = "true")
 	@Bean(destroyMethod = "close")
 	public HealthCheckProvider getHealthCheckProvider() {
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project, "自动健康检查服务注册成功");
+		LogUtil.info(HealthProperties.Project, "自动健康检查服务注册成功");
 		return new HealthCheckProvider();
 	}
 
@@ -49,15 +54,15 @@ public class HealthConfiguration {
 		filterRegistrationBean.setFilter(new HealthReportFilter());
 		filterRegistrationBean.setName("healthReportFilter");
 		filterRegistrationBean.addUrlPatterns("/bsf/health/*");
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project,
-				"health报表注册成功,访问:" + WebUtils.getBaseUrl() + "/bsf/health/");
+		LogUtil.info(HealthProperties.Project,
+			"health报表注册成功,访问:" + RequestUtil.getBaseUrl() + "/bsf/health/");
 		return filterRegistrationBean;
 	}
 
 	@ConditionalOnProperty(name = "bsf.health.export.enabled", havingValue = "true")
 	@Bean(initMethod = "start", destroyMethod = "close")
 	public ExportProvider getExportProvider() {
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project, "自动上传健康报表服务注册成功");
+		LogUtil.info(HealthProperties.Project, "自动上传健康报表服务注册成功");
 		return new ExportProvider();
 	}
 
@@ -77,8 +82,8 @@ public class HealthConfiguration {
 		filterRegistrationBean.setFilter(new DumpFilter());
 		filterRegistrationBean.setName("bsfDumpFilter");
 		filterRegistrationBean.addUrlPatterns("/bsf/health/dump/*");
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project,
-				"health dump注册成功,访问:" + WebUtils.getBaseUrl() + "/bsf/health/dump/");
+		LogUtil.info(HealthProperties.Project,
+			"health dump注册成功,访问:" + RequestUtil.getBaseUrl() + "/bsf/health/dump/");
 		return filterRegistrationBean;
 	}
 
@@ -92,22 +97,22 @@ public class HealthConfiguration {
 		filterRegistrationBean.setFilter(new PingFilter());
 		filterRegistrationBean.setName("bsfpingFilter");
 		filterRegistrationBean.addUrlPatterns("/bsf/health/ping/");
-		LogUtils.info(HealthConfiguration.class, HealthProperties.Project,
-				"health ping注册成功,访问:" + WebUtils.getBaseUrl() + "/bsf/health/ping/");
+		LogUtil.info(HealthProperties.Project,
+			"health ping注册成功,访问:" + RequestUtil.getBaseUrl() + "/bsf/health/ping/");
 		return filterRegistrationBean;
 	}
 
-	@ConditionalOnProperty(name = "bsf.health.doubtapi.enabled", havingValue =  "true")
+	@ConditionalOnProperty(name = "bsf.health.doubtapi.enabled", havingValue = "true")
 	@Bean
 	@ConditionalOnWebApplication
-	public WebMvcConfigurer webMvcConfigurer() { 
-		  return new  WebMvcConfigurer() {	  
-			  @Override 
-			  public void addInterceptors(InterceptorRegistry registry) {
-				  registry.addInterceptor(new DoubtApiInterceptor()).addPathPatterns("/**");	  
-				
-			  }
-		  
-		  }; 
-	  }
+	public WebMvcConfigurer webMvcConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addInterceptors(InterceptorRegistry registry) {
+				registry.addInterceptor(new DoubtApiInterceptor()).addPathPatterns("/**");
+
+			}
+
+		};
+	}
 }

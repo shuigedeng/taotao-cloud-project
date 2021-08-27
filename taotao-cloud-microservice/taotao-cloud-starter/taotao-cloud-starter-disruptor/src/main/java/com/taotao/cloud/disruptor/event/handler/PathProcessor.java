@@ -1,6 +1,7 @@
 package com.taotao.cloud.disruptor.event.handler;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 /**
  * 给Handler设置路径

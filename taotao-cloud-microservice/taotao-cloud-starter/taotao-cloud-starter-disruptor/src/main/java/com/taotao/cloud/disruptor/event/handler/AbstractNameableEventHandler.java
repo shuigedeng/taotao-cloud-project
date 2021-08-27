@@ -1,6 +1,7 @@
 package com.taotao.cloud.disruptor.event.handler;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public abstract class AbstractNameableEventHandler<T extends DisruptorEvent> implements DisruptorHandler<T>, Nameable {
 

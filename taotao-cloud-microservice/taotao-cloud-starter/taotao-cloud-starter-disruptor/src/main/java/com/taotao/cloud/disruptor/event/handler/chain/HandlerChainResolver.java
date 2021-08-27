@@ -1,6 +1,7 @@
 package com.taotao.cloud.disruptor.event.handler.chain;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public interface HandlerChainResolver<T extends DisruptorEvent> {
 

@@ -1,11 +1,11 @@
 package com.taotao.cloud.disruptor.event.handler.chain;
 
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.handler.DisruptorHandler;
+import com.taotao.cloud.disruptor.event.handler.NamedHandlerList;
 import java.util.Map;
 import java.util.Set;
 
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
-import com.lmax.disruptor.spring.boot.event.handler.DisruptorHandler;
-import com.lmax.disruptor.spring.boot.event.handler.NamedHandlerList;
 
 /**
  * HandlerChain管理器，负责创建和维护HandlerChain

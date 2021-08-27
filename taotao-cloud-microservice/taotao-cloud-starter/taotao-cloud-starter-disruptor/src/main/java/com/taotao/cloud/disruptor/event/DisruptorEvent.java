@@ -5,7 +5,6 @@ import java.util.EventObject;
 /**
  * 事件(Event) 就是通过 Disruptor 进行交换的数据类型。
  */
-@SuppressWarnings("serial")
 public abstract class DisruptorEvent extends EventObject {
 
 	/** System time when the event happened */

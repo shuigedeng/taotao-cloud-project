@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.client.abstracts.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.wwjd.starter.canal.client.interfaces.IDBOption;
+import com.taotao.cloud.canal.client.interfaces.IDBOption;
 
 /**
  * 数据库操作抽象类

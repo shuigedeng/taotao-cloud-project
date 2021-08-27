@@ -1,8 +1,11 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-//    api 'com.dianping.cat:cat-client:2.0.2'
+    api 'com.dianping.cat:cat-client:3.0.0'
     api 'net.logstash.logback:logstash-logback-encoder'
+
+    api 'org.apache.httpcomponents:httpclient'
+    api 'org.apache.httpcomponents:httpmime'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

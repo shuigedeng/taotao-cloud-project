@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.client.core;
 
-import com.wwjd.starter.canal.annotation.ListenPoint;
 
+import com.taotao.cloud.canal.annotation.ListenPoint;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;

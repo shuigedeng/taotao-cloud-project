@@ -3,10 +3,10 @@ package com.taotao.cloud.canal.client.abstracts;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
-import com.wwjd.starter.canal.client.core.ListenerPoint;
-import com.wwjd.starter.canal.client.interfaces.CanalEventListener;
-import com.wwjd.starter.canal.client.interfaces.MessageTransponder;
-import com.wwjd.starter.canal.config.CanalConfig;
+import com.taotao.cloud.canal.client.core.ListenerPoint;
+import com.taotao.cloud.canal.client.interfaces.CanalEventListener;
+import com.taotao.cloud.canal.client.interfaces.MessageTransponder;
+import com.taotao.cloud.canal.config.CanalConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

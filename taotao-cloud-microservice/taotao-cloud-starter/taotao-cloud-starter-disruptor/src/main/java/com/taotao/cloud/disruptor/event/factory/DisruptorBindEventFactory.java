@@ -16,8 +16,8 @@
 package com.taotao.cloud.disruptor.event.factory;
 
 import com.lmax.disruptor.EventFactory;
-import com.lmax.disruptor.spring.boot.event.DisruptorBindEvent;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.event.DisruptorBindEvent;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
 
 public class DisruptorBindEventFactory implements EventFactory<DisruptorEvent> {
 

@@ -16,9 +16,9 @@
 package com.taotao.cloud.disruptor.event.translator;
 
 import com.lmax.disruptor.EventTranslatorOneArg;
-import com.lmax.disruptor.spring.boot.event.DisruptorBindEvent;
-import com.lmax.disruptor.spring.boot.event.DisruptorEvent;
-import com.lmax.disruptor.spring.boot.util.StringUtils;
+import com.taotao.cloud.disruptor.event.DisruptorBindEvent;
+import com.taotao.cloud.disruptor.event.DisruptorEvent;
+import com.taotao.cloud.disruptor.util.StringUtils;
 
 public class DisruptorEventOneArgTranslator implements EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> {
 

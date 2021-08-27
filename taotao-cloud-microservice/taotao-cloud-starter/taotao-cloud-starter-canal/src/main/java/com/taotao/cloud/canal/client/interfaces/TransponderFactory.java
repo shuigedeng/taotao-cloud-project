@@ -1,9 +1,9 @@
 package com.taotao.cloud.canal.client.interfaces;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.wwjd.starter.canal.client.core.ListenerPoint;
-import com.wwjd.starter.canal.config.CanalConfig;
 
+import com.taotao.cloud.canal.client.core.ListenerPoint;
+import com.taotao.cloud.canal.config.CanalConfig;
 import java.util.List;
 import java.util.Map;
 
