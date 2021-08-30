@@ -1,16 +1,17 @@
 package com.taotao.cloud.data.mybatis.plus.conditions;
 
 
-import static com.taotao.cloud.common.base.StrPool.PERCENT;
-import static com.taotao.cloud.common.base.StrPool.UNDERSCORE;
+
+import static com.taotao.cloud.common.constant.StrPool.PERCENT;
+import static com.taotao.cloud.common.constant.StrPool.UNDERSCORE;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.taotao.cloud.common.utils.DateUtils;
-import com.taotao.cloud.common.utils.StrHelper;
+import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.LbqWrapper;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.data.mybatis.plus.conditions.update.LbuWrapper;
@@ -114,12 +115,12 @@ public final class Wraps {
 				if (key.endsWith("_st")) {
 					String beanField = StrUtil.subBefore(key, "_st", true);
 					wrapper.ge(getDbField(beanField, modelClazz),
-						DateUtils.getStartTime(value.toString()));
+						DateUtil.getStartTime(value.toString()));
 				}
 				if (key.endsWith("_ed")) {
 					String beanField = StrUtil.subBefore(key, "_ed", true);
 					wrapper.le(getDbField(beanField, modelClazz),
-						DateUtils.getEndTime(value.toString()));
+						DateUtil.getEndTime(value.toString()));
 				}
 			}
 		}

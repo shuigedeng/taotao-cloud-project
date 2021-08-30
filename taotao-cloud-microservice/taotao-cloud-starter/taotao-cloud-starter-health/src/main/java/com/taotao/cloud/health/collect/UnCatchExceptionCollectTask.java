@@ -1,15 +1,14 @@
 package com.taotao.cloud.health.collect;
 
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.EnumWarnType;
-import com.taotao.cloud.health.base.FieldReport;
-import com.taotao.cloud.health.base.Report;
-import com.taotao.cloud.health.config.HealthProperties;
+import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
@@ -17,6 +16,13 @@ import java.lang.Thread.UncaughtExceptionHandler;
  * @version: 2019-07-26 13:36
  **/
 public class UnCatchExceptionCollectTask extends AbstractCollectTask {
+
+	private Throwable lastException = null;
+	private CollectTaskProperties properties;
+
+	public UnCatchExceptionCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
+	}
 
 	public UnCatchExceptionCollectTask() {
 		//注入异常处理
@@ -32,8 +38,6 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 		return -1;
 	}
 
-	private Throwable lastException = null;
-
 	@Override
 	public String getDesc() {
 		return "全局未捕获异常拦截监测";
@@ -41,12 +45,12 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "uncatch.info";
+		return "taotao.cloud.health.collect.uncatch.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.uncatch.enabled", true);
+		return properties.isUncatchEnabled();
 	}
 
 	@Override
@@ -55,11 +59,10 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 			new UnCatchInfo(StringUtil.nullToEmpty(ExceptionUtil.trace2String(lastException))));
 	}
 
-
 	public static class DefaultUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler = null;
-		private UnCatchExceptionCollectTask unCatchExceptionCheckTask = null;
+		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
+		private UnCatchExceptionCollectTask unCatchExceptionCheckTask;
 
 		public DefaultUncaughtExceptionHandler(
 			UnCatchExceptionCollectTask unCatchExceptionCheckTask,
@@ -75,17 +78,16 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 					this.unCatchExceptionCheckTask.lastException = e;
 					AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "未捕获错误",
 						ExceptionUtil.trace2String(e));
-					LogUtil.error(HealthProperties.Project,
-						"未捕获错误", e);
+					LogUtil.error(UnCatchExceptionCollectTask.class, StarterName.HEALTH_STARTER, e,
+						"未捕获错误");
 				}
 			} catch (Exception e2) {
+
 			}
 			if (lastUncaughtExceptionHandler != null) {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);
 			}
 		}
-
-
 	}
 
 	@Override
@@ -100,7 +102,7 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	private static class UnCatchInfo {
 
-		@FieldReport(name = "uncatch.trace", desc = "未捕获错误堆栈")
+		@FieldReport(name = "taotao.cloud.health.collect.uncatch.trace", desc = "未捕获错误堆栈")
 		private String trace;
 
 		public UnCatchInfo() {

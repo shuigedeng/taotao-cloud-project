@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.base.service;
 
-import com.taotao.cloud.common.model.CacheKey;
+import com.taotao.cloud.redis.model.CacheKey;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;

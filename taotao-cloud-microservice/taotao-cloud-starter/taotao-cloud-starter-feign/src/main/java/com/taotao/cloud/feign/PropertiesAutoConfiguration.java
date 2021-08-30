@@ -17,7 +17,6 @@ package com.taotao.cloud.feign;
 
 import com.taotao.cloud.feign.properties.FeignProperties;
 import com.taotao.cloud.feign.properties.LbIsolationProperties;
-import com.taotao.cloud.feign.properties.RestTemplateProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -27,7 +26,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({RestTemplateProperties.class, LbIsolationProperties.class, FeignProperties.class})
+@EnableConfigurationProperties({LbIsolationProperties.class, FeignProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

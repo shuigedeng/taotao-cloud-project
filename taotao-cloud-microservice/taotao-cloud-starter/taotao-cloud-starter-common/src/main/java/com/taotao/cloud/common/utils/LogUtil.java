@@ -18,12 +18,8 @@ package com.taotao.cloud.common.utils;
 import com.taotao.cloud.common.constant.CommonConstant;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -56,8 +52,7 @@ public class LogUtil {
 		StackTraceElement frame = stackTraceElement[stackTraceElement.length - 1];
 
 		return (LocationAwareLogger) LoggerFactory.getLogger(frame.getClassName() + "-" +
-			frame.getMethodName().split("\\$")[0] + "-" +
-			frame.getLineNumber());
+			frame.getMethodName().split("\\$")[0] + "-" + frame.getLineNumber());
 	}
 
 	/**
@@ -69,12 +64,23 @@ public class LogUtil {
 	 * @since 2021/2/25 16:26
 	 */
 	public static void debug(String msg, Object... arguments) {
-		if (arguments != null && arguments.length > 0) {
-			msg = MessageFormat.format(msg, arguments);
+		if (isDebugEnabled()) {
+			//if (arguments != null && arguments.length > 0) {
+			//	msg = MessageFormatter.format(msg, arguments).getMessage();
+			//}
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.DEBUG_INT, msg, arguments, null);
 		}
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.DEBUG_INT, msg, EMPTY_ARRAY, null);
 	}
+
+	public static void debug(Class<?> cls, String project, String msg, Object... arguments) {
+		if (isDebugEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.DEBUG_INT,
+					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
+		}
+	}
+
 
 	/**
 	 * Info级别日志
@@ -85,11 +91,18 @@ public class LogUtil {
 	 * @since 2021/2/25 16:27
 	 */
 	public static void info(String msg, Object... arguments) {
-		if (arguments != null && arguments.length > 0) {
-			msg = MessageFormat.format(msg, arguments);
+		if (isInfoEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.INFO_INT, msg, arguments, null);
 		}
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.INFO_INT, msg, EMPTY_ARRAY, null);
+	}
+
+	public static void info(Class<?> cls, String project, String msg, Object... arguments) {
+		if (isInfoEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.INFO_INT,
+					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
+		}
 	}
 
 	/**
@@ -101,28 +114,34 @@ public class LogUtil {
 	 * @since 2021/2/25 16:27
 	 */
 	public static void warn(String msg, Object... arguments) {
-		if (arguments != null && arguments.length > 0) {
-			msg = MessageFormat.format(msg, arguments);
+		if (isWarnEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.WARN_INT, msg, arguments, null);
 		}
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.WARN_INT, msg, EMPTY_ARRAY, null);
 	}
 
-	/**
-	 * Error级别日志
-	 *
-	 * @param msg       msg
-	 * @param error     error
-	 * @param arguments 参数
-	 * @author shuigedeng
-	 * @since 2021/2/25 16:27
-	 */
-	public static void error(String msg, Throwable error, Object... arguments) {
-		if (arguments != null && arguments.length > 0) {
-			msg = MessageFormat.format(msg, arguments);
+	public static void warn(Class<?> cls, String project, String msg, Object... arguments) {
+		if (isWarnEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.WARN_INT,
+					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
 		}
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, error);
+	}
+
+	public static void error(Throwable error, String msg, Object... arguments) {
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, arguments, error);
+		}
+	}
+
+	public static void error(Class<?> cls, String project, Throwable error, String msg,
+		Object... arguments) {
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT,
+					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, error);
+		}
 	}
 
 	/**
@@ -133,8 +152,18 @@ public class LogUtil {
 	 * @since 2021/2/25 16:28
 	 */
 	public static void error(Throwable error) {
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.ERROR_INT, null, EMPTY_ARRAY, error);
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.ERROR_INT, null, EMPTY_ARRAY, error);
+		}
+	}
+
+	public static void error(Class<?> cls, String project, Throwable error) {
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT, project, EMPTY_ARRAY,
+					error);
+		}
 	}
 
 	/**
@@ -146,27 +175,18 @@ public class LogUtil {
 	 * @since 2021/2/25 16:28
 	 */
 	public static void error(String msg, Object... arguments) {
-		if (arguments != null && arguments.length > 0) {
-			msg = MessageFormat.format(msg, arguments);
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, arguments, null);
 		}
-		getLocationAwareLogger()
-			.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, EMPTY_ARRAY, null);
 	}
 
-	public static boolean isErrorEnabled() {
-		return getLocationAwareLogger().isErrorEnabled();
-	}
-
-	public static boolean isWarnEnabled() {
-		return getLocationAwareLogger().isWarnEnabled();
-	}
-
-	public static boolean isDebugEnabled() {
-		return getLocationAwareLogger().isDebugEnabled();
-	}
-
-	public static boolean isInfoEnabled() {
-		return getLocationAwareLogger().isInfoEnabled();
+	public static void error(Class<?> cls, String project, String msg, Object... arguments) {
+		if (isErrorEnabled()) {
+			getLocationAwareLogger()
+				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT,
+					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
+		}
 	}
 
 	/**
@@ -198,7 +218,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021/2/25 16:29
 	 */
-	public  static String getStackTrace(Throwable throwable) {
+	public static String getStackTrace(Throwable throwable) {
 		StringWriter sw = new StringWriter();
 		try (PrintWriter pw = new PrintWriter(sw)) {
 			throwable.printStackTrace(pw);
@@ -240,5 +260,21 @@ public class LogUtil {
 			return CommonConstant.OPERATE_TYPE_DELETE;
 		}
 		return CommonConstant.OPERATE_TYPE_GET;
+	}
+
+	public static boolean isDebugEnabled() {
+		return getLocationAwareLogger().isDebugEnabled();
+	}
+
+	public static boolean isInfoEnabled() {
+		return getLocationAwareLogger().isInfoEnabled();
+	}
+
+	public static boolean isErrorEnabled() {
+		return getLocationAwareLogger().isErrorEnabled();
+	}
+
+	public static boolean isWarnEnabled() {
+		return getLocationAwareLogger().isWarnEnabled();
 	}
 }

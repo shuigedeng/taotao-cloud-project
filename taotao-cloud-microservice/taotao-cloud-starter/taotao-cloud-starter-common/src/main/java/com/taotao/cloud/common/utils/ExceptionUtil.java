@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
@@ -112,7 +113,8 @@ public class ExceptionUtil {
 			runnable.run();
 		} catch (Exception e) {
 			if (!isPrintInfo) {
-				LogUtil.error(getFullStackTrace(e));
+				LogUtil.error(ExceptionUtil.class, StarterName.COMMON_STARTER,
+					getFullStackTrace(e));
 			}
 		}
 	}

@@ -20,11 +20,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 
-
 /**
- * 切面基础类
- * <p>
- * 封装一些基础方法
+ * 切面基础类 封装一些基础方法
  *
  * @author shuigedeng
  * @version 1.0.0
@@ -59,7 +56,6 @@ public abstract class BaseAspect {
 	 * @param targetName
 	 * @param methodName
 	 * @param arguments
-	 * @return
 	 */
 	public String getCacheKey(String key, String targetName, String methodName,
 		Object[] arguments) {
@@ -74,28 +70,5 @@ public abstract class BaseAspect {
 		}
 		return sb.toString().replace("[", "").replace("\"", "").replace("]", "")
 			.replace("com.gofun.", "");
-	}
-
-	/**
-	 * 获取key 根据condition
-	 *
-	 * @param key
-	 * @param condition
-	 * @param arguments
-	 */
-	public String getCacheKey(String key, String condition, Object[] arguments) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(key);
-		String argJson = JsonUtil.toJSONString(arguments);
-		String[] params = null;
-		if (condition != null && condition.trim().startsWith("#")) {
-			condition = condition.trim();
-			params = condition.split(",");
-			for (String param : params) {
-				param = param.replace("#", "");
-//				JSONObject val = (JSONObject) JSONPath.read(condition, param);
-			}
-		}
-		return sb.toString();
 	}
 }

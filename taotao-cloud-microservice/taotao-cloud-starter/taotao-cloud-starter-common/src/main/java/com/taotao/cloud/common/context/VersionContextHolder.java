@@ -18,9 +18,7 @@ package com.taotao.cloud.common.context;
 import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
- * <p>
  * 负载均衡规则Holder
- * </p>
  *
  * @author shuigedeng
  * @version 1.0.0

@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -33,6 +33,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import io.swagger.v3.oas.models.servers.Server;
 import java.util.ArrayList;
 import java.util.List;
+import com.taotao.cloud.core.properties.CoreProperties;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
@@ -70,13 +71,12 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_SPRINGDOC_STARTER + "]"
-			+ "springdoc模块已启动");
+		LogUtil.info(OpenapiAutoConfiguration.class, StarterName.OPENAPI_STARTER, "模块已启动");
 	}
 
 	@Bean
 	public GroupedOpenApi groupedOpenApi() {
-		String applicationName = environment.getProperty("spring.application.name", "");
+		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 
 		return GroupedOpenApi
 			.builder()
@@ -87,7 +87,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
-		String applicationName = environment.getProperty("spring.application.name", "");
+		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 		String[] split = applicationName.split("-");
 		String name = split[split.length - 1];
 

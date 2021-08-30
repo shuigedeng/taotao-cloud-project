@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.awt.Color;
 import java.awt.Font;
@@ -41,7 +42,7 @@ public class CaptchaUtil {
 		try {
 			random = SecureRandom.getInstanceStrong();
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			LogUtil.error(CaptchaUtil.class, StarterName.COMMON_STARTER, e);
 		}
 	}
 

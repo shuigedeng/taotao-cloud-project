@@ -17,6 +17,7 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -59,7 +60,6 @@ public class JsonUtil {
 		MAPPER.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
 		//去掉默认的时间戳格式
 		MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-
 		// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
 		//忽略未知字段
 		MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -78,8 +78,8 @@ public class JsonUtil {
 		// 忽略不能转义的字符
 		MAPPER.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
 			true);
-		// 排除空值字段
-		MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		// 包含null
+		MAPPER.setSerializationInclusion(Include.ALWAYS);
 		// 使用驼峰式
 		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
 		// 使用bean名称
@@ -150,7 +150,7 @@ public class JsonUtil {
 		try {
 			return MAPPER.readValue(json, cls);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e);
 		}
 	}
 
@@ -175,7 +175,7 @@ public class JsonUtil {
 				.constructParametricType(parametrized, parameterClasses);
 			return MAPPER.readValue(json, javaType);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e);
 		}
 	}
 
@@ -195,7 +195,7 @@ public class JsonUtil {
 		try {
 			return MAPPER.readValue(json, typeReference);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e);
 		}
 	}
 
@@ -214,7 +214,7 @@ public class JsonUtil {
 		try {
 			return MAPPER.readTree(json);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new BaseException(e);
 		}
 	}
 

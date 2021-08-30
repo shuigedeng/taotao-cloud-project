@@ -8,6 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.util.StringUtils;
 
 /**
  * @author: chejiangyi
@@ -20,10 +21,12 @@ public class PingFilter implements Filter {
 		FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String conetextPath = org.springframework.util.StringUtils.trimTrailingCharacter(
+
+		String conetextPath = StringUtils.trimTrailingCharacter(
 			request.getContextPath(), '/');
+
 		String uri = request.getRequestURI();
-		if (uri.startsWith(conetextPath + "/bsf/health/ping/")) {
+		if (uri.startsWith(conetextPath + "/taotao/cloud/health/ping/")) {
 			response.setHeader("Content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().append("ok");

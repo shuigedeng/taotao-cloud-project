@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
@@ -44,6 +45,7 @@ import okhttp3.Response;
  * @since 2021/06/28 17:18
  */
 public class OkHttpUtil {
+
 	private static volatile OkHttpClient okHttpClient = null;
 	private static volatile Semaphore semaphore = null;
 	private Map<String, String> headerMap;
@@ -77,8 +79,6 @@ public class OkHttpUtil {
 
 	/**
 	 * 用于异步请求时，控制访问线程数，返回结果
-	 *
-	 * @return
 	 */
 	private static Semaphore getSemaphoreInstance() {
 		//只能1个线程同时访问
@@ -92,8 +92,6 @@ public class OkHttpUtil {
 
 	/**
 	 * 创建OkHttpUtil
-	 *
-	 * @return
 	 */
 	public static OkHttpUtil builder() {
 		return new OkHttpUtil();
@@ -101,9 +99,6 @@ public class OkHttpUtil {
 
 	/**
 	 * 添加url
-	 *
-	 * @param url
-	 * @return
 	 */
 	public OkHttpUtil url(String url) {
 		this.url = url;
@@ -144,16 +139,9 @@ public class OkHttpUtil {
 	/**
 	 * get请求，方法顺序按照这种方式，切记选择post/get一定要放在倒数第二，同步或者异步倒数第一，才会正确执行
 	 * <p>
-	 * OkHttpUtils.builder().url("请求地址，http/https都可以")
-	 *         // 有参数的话添加参数，可多个
-	 *         .addParam("参数名", "参数值")
-	 *         .addParam("参数名", "参数值")
-	 *         // 也可以添加多个
-	 *         .addHeader("Content-Type", "application/json; charset=utf-8")
-	 *         .get()
-	 *         // 可选择是同步请求还是异步请求
-	 *         //.async();
-	 *         .sync();
+	 * OkHttpUtils.builder().url("请求地址，http/https都可以") // 有参数的话添加参数，可多个 .addParam("参数名", "参数值")
+	 * .addParam("参数名", "参数值") // 也可以添加多个 .addHeader("Content-Type", "application/json;
+	 * charset=utf-8") .get() // 可选择是同步请求还是异步请求 //.async(); .sync();
 	 */
 	public OkHttpUtil get() {
 		request = new Request.Builder().get();
@@ -168,7 +156,7 @@ public class OkHttpUtil {
 						append("&");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
 			}
 			urlBuilder.deleteCharAt(urlBuilder.length() - 1);
 		}
@@ -177,44 +165,26 @@ public class OkHttpUtil {
 	}
 
 	/**
-	 *  post请求，分为两种，一种是普通表单提交，一种是json提交
-	 *  <p>
-	 *  OkHttpUtils.builder().url("请求地址，http/https都可以")
-	 *          // 有参数的话添加参数，可多个
-	 *          .addParam("参数名", "参数值")
-	 *          .addParam("参数名", "参数值")
-	 *          // 也可以添加多个
-	 *          .addHeader("Content-Type", "application/json; charset=utf-8")
-	 *          // 如果是true的话，会类似于postman中post提交方式的raw，用json的方式提交，不是表单
-	 *          // 如果是false的话传统的表单提交
-	 *          .post(true)
-	 *          .sync();
-	 *  </p>
-	 *  <p>
-	 *
-	 *
-	 *  // 选择异步有两个方法，一个是带回调接口，一个是直接返回结果
-	 *  OkHttpUtils.builder().url("")
-	 *              .post(false)
-	 *              .async();
+	 * post请求，分为两种，一种是普通表单提交，一种是json提交
+	 * <p>
+	 * OkHttpUtils.builder().url("请求地址，http/https都可以") // 有参数的话添加参数，可多个 .addParam("参数名", "参数值")
+	 * .addParam("参数名", "参数值") // 也可以添加多个 .addHeader("Content-Type", "application/json;
+	 * charset=utf-8") // 如果是true的话，会类似于postman中post提交方式的raw，用json的方式提交，不是表单 // 如果是false的话传统的表单提交
+	 * .post(true) .sync();
 	 * </p>
 	 * <p>
-	 *  OkHttpUtils.builder().url("")
-	 *          .post(false)
-	 *          .async(new OkHttpUtils.ICallBack() {
-	 *                @Override
-	 *                public void onSuccessful(Call call, String data) {
-	 *                    // 请求成功后的处理
-	 *                }
-	 *
-	 *                @Override
-	 *                public void onFailure(Call call, String errorMsg) {
-	 *                    // 请求失败后的处理
-	 *                }
-	 *     });
+	 * <p>
+	 * <p>
+	 * // 选择异步有两个方法，一个是带回调接口，一个是直接返回结果 OkHttpUtils.builder().url("") .post(false) .async();
 	 * </p>
+	 * <p>
+	 * OkHttpUtils.builder().url("") .post(false) .async(new OkHttpUtils.ICallBack() {
+	 *
 	 * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
 	 * @return
+	 * @Override public void onSuccessful(Call call, String data) { // 请求成功后的处理 }
+	 * @Override public void onFailure(Call call, String errorMsg) { // 请求失败后的处理 } });
+	 * </p>
 	 */
 	public OkHttpUtil post(boolean isJsonPost) {
 		RequestBody requestBody;
@@ -249,7 +219,7 @@ public class OkHttpUtil {
 			assert response.body() != null;
 			return response.body().string();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
 			return "请求失败：" + e.getMessage();
 		}
 	}
@@ -277,7 +247,7 @@ public class OkHttpUtil {
 		try {
 			getSemaphoreInstance().acquire();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
 		}
 		return buffer.toString();
 	}
@@ -316,7 +286,7 @@ public class OkHttpUtil {
 					request.addHeader(entry.getKey(), entry.getValue());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
 			}
 		}
 	}
@@ -334,7 +304,7 @@ public class OkHttpUtil {
 			sc.init(null, trustAllCerts, new SecureRandom());
 			ssfFactory = sc.getSocketFactory();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
 		}
 		return ssfFactory;
 	}

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.elk.PropertiesAutoConfiguration
+com.taotao.cloud.canal.PropertiesAutoConfiguration

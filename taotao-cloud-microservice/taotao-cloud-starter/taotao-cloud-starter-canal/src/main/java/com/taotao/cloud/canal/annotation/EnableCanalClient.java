@@ -1,7 +1,7 @@
 package com.taotao.cloud.canal.annotation;
 
-import com.taotao.cloud.canal.config.CanalClientConfiguration;
-import com.taotao.cloud.canal.config.CanalConfig;
+import com.taotao.cloud.canal.configuration.CanalClientConfiguration;
+import com.taotao.cloud.canal.properties.CanalProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -19,6 +19,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import({CanalConfig.class, CanalClientConfiguration.class})
+@Import({CanalClientConfiguration.class})
 public @interface EnableCanalClient {
 }

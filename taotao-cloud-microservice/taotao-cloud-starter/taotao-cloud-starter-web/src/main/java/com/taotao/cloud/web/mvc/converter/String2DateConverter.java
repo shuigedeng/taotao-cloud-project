@@ -15,21 +15,21 @@
  */
 package com.taotao.cloud.web.mvc.converter;
 
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_MONTH_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_MONTH_FORMAT_SLASH;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_YEAR_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_MONTH_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_MONTH_FORMAT_SLASH;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_YEAR_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT_MATCHES;
 
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.LogUtil;

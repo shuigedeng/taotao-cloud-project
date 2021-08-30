@@ -1,6 +1,6 @@
 package com.taotao.cloud.order.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.dto.OrderItemDTO;
 import com.taotao.cloud.order.api.feign.fallback.RemoteOrderItemFallbackImpl;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteOrderService", value = ServiceNameConstant.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderItemFallbackImpl.class)
+@FeignClient(contextId = "remoteOrderService", value = ServiceName.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderItemFallbackImpl.class)
 public interface RemoteOrderItemService {
 
 	@PostMapping(value = "/orderItem/save")

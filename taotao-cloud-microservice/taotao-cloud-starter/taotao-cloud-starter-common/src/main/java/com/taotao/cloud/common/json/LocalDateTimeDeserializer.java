@@ -16,18 +16,18 @@
 package com.taotao.cloud.common.json;
 
 
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtils.SLASH_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT_MATCHES;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonParser;

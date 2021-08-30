@@ -1,11 +1,11 @@
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.base.PropertyCache;
+import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.base.Report;
-import com.taotao.cloud.health.utils.ConvertUtils;
+import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.health.model.Report;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class Rule {
 			try {
 				if (checkvalue instanceof Number) {
 					double checkvaluevalue2 = ((Number) checkvalue).doubleValue();
-					double warnvalue = (ConvertUtils.convert(value, Number.class)).doubleValue();
+					double warnvalue = (BeanUtil.convert(value, Number.class)).doubleValue();
 					if (type == RuleType.less && checkvaluevalue2 < warnvalue) {
 						return true;
 					} else if (type == RuleType.more && checkvaluevalue2 > warnvalue) {
@@ -108,12 +108,11 @@ public class Rule {
 
 		public RulesAnalyzer() {
 			//订阅配置改变，重新注册规则
-			PropertyCache.Default.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
-
+			PropertyCache.DEFAULT.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
 				for (Map.Entry<String, Object> e : map.entrySet()) {
 					String key = e.getKey();
-					if (StringUtils.startsWithIgnoreCase(key, "bsf.health.strategy.")) {
-						key = key.replace("bsf.health.strategy.", "");
+					if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
+						key = key.replace("taotao.cloud.health.strategy.", "");
 						Object rule = rules.get(key);
 						if (rule != null) {
 							registerRules(key,
@@ -150,7 +149,7 @@ public class Rule {
 		}
 
 		public void registerRulesByProperties(String field) {
-			String value = PropertyUtil.getPropertyCache("bsf.health.strategy." + field, "");
+			String value = PropertyUtil.getPropertyCache("taotao.cloud.health.strategy." + field, "");
 			registerRules(field, value);
 		}
 

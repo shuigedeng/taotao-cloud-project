@@ -1,8 +1,8 @@
 package com.taotao.cloud.health.filter;
 
-import com.taotao.cloud.common.base.Collector;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.base.HealthException;
+import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.health.model.HealthException;
 import java.util.Properties;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -16,10 +16,6 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-/**
- * @author: chejiangyi
- * @version: 2019-08-02 09:43
- **/
 @Intercepts({
 	@Signature(method = "query", type = Executor.class, args = {MappedStatement.class, Object.class,
 		RowBounds.class, ResultHandler.class}),
@@ -37,10 +33,12 @@ public class SqlMybatisInterceptor implements Interceptor {
 		if (invocation.getArgs().length > 1) {
 			parameter = invocation.getArgs()[1];
 		}
+
 		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
 		String sql = boundSql.getSql();
+
 		try {
-			Object returnObj = Collector.Default.hook("bsf.mybatis.sql.hook").run(
+			Object returnObj = Collector.DEFAULT.hook("taotao.cloud.health.mybatis.sql.hook").run(
 				StringUtil.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
 					try {
 						return invocation.proceed();

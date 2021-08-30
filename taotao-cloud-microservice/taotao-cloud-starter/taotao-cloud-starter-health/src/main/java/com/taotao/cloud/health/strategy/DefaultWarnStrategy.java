@@ -1,7 +1,7 @@
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.Report;
+import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.collect.IOCollectTask;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,28 +38,28 @@ public class DefaultWarnStrategy {
 
 	public void setDefaultStrategy() {
 		this.rulesAnalyzer.registerRules("cpu.process",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.cpu.process", "[>0.7]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.process", "[>0.7]"));
 		this.rulesAnalyzer.registerRules("cpu.system",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.cpu.system", "[>0.7]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.system", "[>0.7]"));
 		this.rulesAnalyzer.registerRules("io.current.dir.usable.size",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.io.current.dir.usable.size",
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.io.current.dir.usable.size",
 				"[<500]"));
 		this.rulesAnalyzer.registerRules("memery.jvm.max",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.memery.jvm.max", "[<256]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.jvm.max", "[<256]"));
 		this.rulesAnalyzer.registerRules("memery.system.free",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.memery.system.free", "[<256]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.system.free", "[<256]"));
 		this.rulesAnalyzer.registerRules("thread.deadlocked.count",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.thread.deadlocked.count", "[>10]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.deadlocked.count", "[>10]"));
 		this.rulesAnalyzer.registerRules("thread.total",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.thread.total", "[>1000]"));
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.total", "[>1000]"));
 		this.rulesAnalyzer.registerRules("tomcat.threadPool.poolSize.count",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.tomcat.threadPool.poolSize.count",
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.tomcat.threadPool.poolSize.count",
 				"[>1000]"));
 		this.rulesAnalyzer.registerRules("tomcat.threadPool.active.count",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.tomcat.threadPool.active.count",
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.tomcat.threadPool.active.count",
 				"[>200]"));
 		this.rulesAnalyzer.registerRules("tomcat.threadPool.queue.size",
-			PropertyUtil.getPropertyCache("bsf.health.strategy.tomcat.threadPool.queue.size",
+			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.tomcat.threadPool.queue.size",
 				"[>50]"));
 		if (this.rulesAnalyzer.getRules("io.current.dir.usable.size") != null) {
 			//设置报警回调

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -107,7 +108,7 @@ public class YmlUtil {
 			Yaml yaml = new Yaml();
 			return yaml.loadAs(inputStream, Map.class);
 		} catch (IOException e) {
-			LogUtil.error("IO流处理失败", e);
+			LogUtil.error(YmlUtil.class, StarterName.COMMON_STARTER, "IO流处理失败", e);
 		}
 		return null;
 	}

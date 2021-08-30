@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.log.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.log.aspect.RequestLogAspect;
 import com.taotao.cloud.log.listener.RequestLogListener;
 import com.taotao.cloud.log.properties.RequestLogProperties;
@@ -45,12 +47,9 @@ public class RequestLogConfiguration implements InitializingBean {
 	@Resource
 	private RequestLogProperties requestLogProperties;
 
-	@Value("${spring.application.name}")
-	private String appName;
-
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(StarterNameConstant.TAOTAO_CLOUD_LOG_STARTER + "{0}", "日志模块已启动");
+		LogUtil.info(RequestLogConfiguration.class, StarterName.LOG_STARTER, "模块已启动");
 	}
 
 	@Bean
@@ -93,7 +92,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	public KafkaRequestLogServiceImpl kafkaSysLogService() {
 		if (determineLogType()) {
 			if (determineLogType("kafka")) {
-				return new KafkaRequestLogServiceImpl(appName);
+				return new KafkaRequestLogServiceImpl(PropertyUtil.getProperty(CoreProperties.SpringApplicationName));
 			}
 		}
 		return null;

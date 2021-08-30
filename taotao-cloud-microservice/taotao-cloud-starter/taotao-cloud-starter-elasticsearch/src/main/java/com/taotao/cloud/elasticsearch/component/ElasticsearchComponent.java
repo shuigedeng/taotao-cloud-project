@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.component;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
@@ -46,9 +46,7 @@ public class ElasticsearchComponent implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(
-			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_ELASTICSEARCH_STARTER + "]"
-				+ "elasticsearch模块已启动");
+		LogUtil.info(ElasticsearchComponent.class, StarterName.ELASTICSEARCH_STARTER, "模块已启动");
 	}
 
 	@Bean

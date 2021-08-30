@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -90,8 +91,8 @@ public class RetryUtil {
 				exceptionCaught.accept(throwable);
 			}
 		} catch (Throwable e) {
-			LogUtil
-				.error("retry exception caught throw error:" + ExceptionUtil.getFullStackTrace(e));
+			LogUtil.error(RetryUtil.class, StarterName.COMMON_STARTER,e,
+				"retry exception caught throw error:" + ExceptionUtil.getFullStackTrace(e));
 		}
 	}
 

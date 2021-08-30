@@ -1,6 +1,6 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
     api 'com.aliyun:aliyun-java-sdk-core:4.5.6'
 

@@ -6,7 +6,6 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
 import com.taotao.cloud.order.api.feign.RemoteOrderService;
 import com.taotao.cloud.order.api.vo.OrderVO;
-import io.seata.core.exception.TransactionException;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

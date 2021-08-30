@@ -2,9 +2,8 @@ package com.taotao.cloud.health.collect;
 
 
 import com.taotao.cloud.common.utils.ExceptionUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.HashMap;
@@ -16,14 +15,17 @@ import java.util.HashMap;
 public class ThreadCollectTask extends AbstractCollectTask {
 
 	ThreadMXBean threadMXBean;
+	CollectTaskProperties properties;
+	private HashMap<Long, Long> lastThreadUserTime = new HashMap<>();
 
-	public ThreadCollectTask() {
+	public ThreadCollectTask(CollectTaskProperties properties) {
 		threadMXBean = ManagementFactory.getThreadMXBean();
+		this.properties = properties;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.thread.timeSpan", 10);
+		return properties.getThreadTimeSpan();
 	}
 
 	@Override
@@ -33,15 +35,14 @@ public class ThreadCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "thread.info";
+		return "taotao.cloud.health.collect.thread.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.thread.enabled", true);
+		return properties.isThreadEnabled();
 	}
 
-	private HashMap<Long, Long> lastThreadUserTime = new HashMap<>();
 
 	@Override
 	protected Object getData() {
@@ -53,7 +54,7 @@ public class ThreadCollectTask extends AbstractCollectTask {
 		java.lang.management.ThreadInfo runable = null;
 		java.lang.management.ThreadInfo wait = null;
 		java.lang.management.ThreadInfo block = null;
-		HashMap<Long, Long> treadUserTime = new HashMap<Long, Long>();
+		HashMap<Long, Long> treadUserTime = new HashMap<>();
 		for (java.lang.management.ThreadInfo info : threadMXBean.dumpAllThreads(false, false)) {
 			treadUserTime.put(info.getThreadId(),
 				threadMXBean.getThreadUserTime(info.getThreadId()));
@@ -104,21 +105,21 @@ public class ThreadCollectTask extends AbstractCollectTask {
 
 	private static class ThreadInfo {
 
-		@FieldReport(name = "thread.deadlocked.count", desc = "死锁线程数")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.deadlocked.count", desc = "死锁线程数")
 		private double deadlockedThreadCount;
-		@FieldReport(name = "thread.total", desc = "线程总数")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.total", desc = "线程总数")
 		private double threadCount;
-		@FieldReport(name = "thread.runable.count", desc = "运行线程总数")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.runable.count", desc = "运行线程总数")
 		private double runableThreadCount;
-		@FieldReport(name = "thread.blocked.count", desc = "阻塞线程总数")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.blocked.count", desc = "阻塞线程总数")
 		private double blockedThreadCount;
-		@FieldReport(name = "thread.waiting.count", desc = "等待线程总数")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.waiting.count", desc = "等待线程总数")
 		private double waitingThreadCount;
-		@FieldReport(name = "thread.runable.max.detail", desc = "最近运行最耗时的线程详情")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.runable.max.detail", desc = "最近运行最耗时的线程详情")
 		private String maxRunableDetail;
-		@FieldReport(name = "thread.blocked.max.detail", desc = "阻塞最耗时的线程详情")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.blocked.max.detail", desc = "阻塞最耗时的线程详情")
 		private String maxBlockedDetail;
-		@FieldReport(name = "thread.waiting.max.detail", desc = "等待最耗时的线程详情")
+		@FieldReport(name = "taotao.cloud.health.collect.thread.waiting.max.detail", desc = "等待最耗时的线程详情")
 		private String maxWaitingDetail;
 
 		public ThreadInfo() {

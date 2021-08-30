@@ -2,9 +2,9 @@ package com.taotao.cloud.security.jwt.utils;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.base.StrPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.DateUtils;
+import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.security.jwt.model.ContextConstants;
 import com.taotao.cloud.security.jwt.model.ExceptionCode;
@@ -124,7 +124,7 @@ public final class JwtUtil {
 		Token tokenInfo = new Token();
 		tokenInfo.setToken(builder.compact());
 		tokenInfo.setExpire(expire);
-		tokenInfo.setExpiration(DateUtils.date2LocalDateTime(exp));
+		tokenInfo.setExpiration(DateUtil.date2LocalDateTime(exp));
 		return tokenInfo;
 	}
 

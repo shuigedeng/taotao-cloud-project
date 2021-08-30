@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
     api "net.logstash.logback:logstash-logback-encoder"
     api 'org.aspectj:aspectjweaver'

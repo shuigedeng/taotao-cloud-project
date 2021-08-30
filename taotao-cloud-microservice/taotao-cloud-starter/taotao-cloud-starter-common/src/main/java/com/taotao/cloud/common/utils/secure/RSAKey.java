@@ -1,36 +1,36 @@
-/**
- *   Copyright 2019 Yanzheng (https://github.com/micyo202). All rights reserved.
+/*
+ * Copyright 2002-2021 the original author or authors.
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.taotao.cloud.common.utils.secure;
 
 /**
- * RSAKey
- * RSA公钥、私钥常量类
+ *  RSA公钥、私钥常量类
  *
- * @author Yanzheng (https://github.com/micyo202)
- * @date 2019/10/21
+ * @version 1.0.0
+ * @author shuigedeng
+ * @since 2021/8/27 19:26
  */
 public enum RSAKey {
 
-    /**
-     * 公钥
-     */
-    PUBLIC,
+	/**
+	 * 公钥
+	 */
+	PUBLIC,
 
-    /**
-     * 私钥
-     */
-    PRIVATE
+	/**
+	 * 私钥
+	 */
+	PRIVATE
 }

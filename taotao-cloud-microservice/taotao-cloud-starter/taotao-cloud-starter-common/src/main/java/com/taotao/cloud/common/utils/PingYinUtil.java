@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import java.util.Random;
 
 /***
@@ -56,7 +57,8 @@ public final class PingYinUtil {
 			}
 			return buffer.toString();
 		} catch (Exception e) {
-			LogUtil.warn("\u53D6\u4E2D\u6587\u62FC\u97F3\u6709\u9519" + e.getMessage());
+			LogUtil.error(PingYinUtil.class, StarterName.COMMON_STARTER,
+				"\u53D6\u4E2D\u6587\u62FC\u97F3\u6709\u9519", e);
 		}
 		return null;
 	}

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -39,6 +40,7 @@ public class ReflectionUtil {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -54,6 +56,7 @@ public class ReflectionUtil {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			return null;
 		}
 	}
@@ -127,6 +130,7 @@ public class ReflectionUtil {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			return defaultValue;
 		}
 	}
@@ -149,6 +153,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到方法" + StringUtil.nullToEmpty(methodName));
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -171,6 +176,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到方法" + StringUtil.nullToEmpty(methodName));
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -195,6 +201,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到方法" + StringUtil.nullToEmpty(methodName));
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -219,6 +226,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到方法" + StringUtil.nullToEmpty(methodName));
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -269,6 +277,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到字段" + StringUtil.nullToEmpty(name));
 		} catch (Exception e) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, e);
 			throw new BaseException(e.getMessage());
 		}
 	}
@@ -296,6 +305,7 @@ public class ReflectionUtil {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			return defaultValue;
 		}
 	}
@@ -314,6 +324,7 @@ public class ReflectionUtil {
 		try {
 			return tryGetStaticFieldValue(Class.forName(cls), name, defaultValue);
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			return defaultValue;
 		}
 	}
@@ -341,6 +352,7 @@ public class ReflectionUtil {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			return defaultValue;
 		}
 	}
@@ -361,6 +373,7 @@ public class ReflectionUtil {
 			}
 			field.set(obj, value);
 		} catch (Exception exp) {
+			LogUtil.error(ReflectionUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}

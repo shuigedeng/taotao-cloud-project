@@ -16,7 +16,11 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.exception.BaseException;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -46,13 +50,12 @@ public class ContextUtil {
 	}
 
 	public static boolean isWeb() {
-		return getApplicationContext() != null;
+		return getConfigurableWebServerApplicationContext() != null;
 	}
-
 
 	public static ConfigurableWebServerApplicationContext getConfigurableWebServerApplicationContext() {
 		ApplicationContext context = getApplicationContext();
-		if (context != null && context instanceof ConfigurableWebServerApplicationContext) {
+		if (context instanceof ConfigurableWebServerApplicationContext) {
 			return (ConfigurableWebServerApplicationContext) context;
 		}
 		return null;
@@ -127,6 +130,48 @@ public class ContextUtil {
 	}
 
 	/**
+	 * 获取所有被注解的 bean
+	 *
+	 * @param anno
+	 * @return
+	 * @author 阿导
+	 * @time 2018/5/28 14:04
+	 * @CopyRight 万物皆导
+	 */
+	public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
+		Map<String, Object> map;
+		try {
+			//获取注解的 bean
+			map = applicationContext.getBeansWithAnnotation(anno);
+		} catch (Exception e) {
+			map = null;
+		}
+		return map;
+	}
+
+	/**
+	 * 获取 bean 的类型
+	 *
+	 * @param clazz
+	 * @return
+	 * @author 阿导
+	 * @time 2018/5/28 14:03
+	 * @CopyRight 万物皆导
+	 */
+	public static <T> List<T> getBeansOfType(Class<T> clazz) {
+		//声明一个结果
+		Map<String, T> map;
+		try {
+			//获取类型
+			map = applicationContext.getBeansOfType(clazz);
+		} catch (Exception e) {
+			map = null;
+		}
+		//返回 bean 的类型
+		return map == null ? null : new ArrayList<>(map.values());
+	}
+
+	/**
 	 * 注册bean
 	 *
 	 * @param name  name
@@ -135,9 +180,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:43
 	 */
-	public static void registerBean(String name,
-		Class clazz,
-		Object... args) {
+	public static void registerBean(String name, Class clazz, Object... args) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		checkRegisterBean(applicationContext, name, clazz);
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
@@ -160,8 +203,7 @@ public class ContextUtil {
 	 * @author shuigedeng
 	 * @since 2020/10/15 14:44
 	 */
-	public static void registerBean(String name,
-		Class clazz,
+	public static void registerBean(String name, Class clazz,
 		BeanDefinitionBuilder beanDefinitionBuilder) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
 		checkRegisterBean(applicationContext, name, clazz);

@@ -1,10 +1,9 @@
 package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.annotation.Annotation;
 
 /**
@@ -12,14 +11,20 @@ import java.lang.annotation.Annotation;
  */
 public class XxlJobCollectTask extends AbstractCollectTask {
 
+	private CollectTaskProperties properties;
+
+	public XxlJobCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.xxljob.timeSpan", 20);
+		return properties.getXxljobTimeSpan();
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.xxljob.enabled", true);
+		return properties.isXxljobEnabled();
 	}
 
 	@Override
@@ -29,7 +34,7 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "xxljob.info";
+		return "taotao.cloud.health.collect.xxljob.info";
 	}
 
 	@Override
@@ -39,19 +44,20 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 			false) == null) {
 			return null;
 		}
+
 		JobInfo data = new JobInfo();
 		Class<?> aClass = ReflectionUtil.classForName(
 			"com.xxl.job.core.handler.annotation.JobHandler");
 		data.count = ContextUtil.getApplicationContext().getBeanNamesForAnnotation(
 			(Class<? extends Annotation>) aClass).length;
+
 		return data;
 	}
 
 	private static class JobInfo {
 
-		@FieldReport(name = "xxljob.count", desc = "xxljob任务数量")
+		@FieldReport(name = "taotao.cloud.health.collect.xxljob.count", desc = "xxljob任务数量")
 		private Integer count;
-
 
 		public Integer getCount() {
 			return count;

@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.taotao.cloud.common.utils.StrHelper;
+import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

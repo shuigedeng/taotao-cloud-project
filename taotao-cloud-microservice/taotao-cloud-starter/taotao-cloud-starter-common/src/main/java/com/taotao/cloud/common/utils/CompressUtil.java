@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -60,6 +61,7 @@ public class CompressUtil {
 		) {
 			zip(srcDir, outputStream);
 		} catch (Exception exp) {
+			LogUtil.error(CompressUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException("压缩文件出错", exp);
 		}
 	}
@@ -117,9 +119,7 @@ public class CompressUtil {
 	 * @param destDir     解压后输出路径
 	 */
 	public static void unzip(String zipFileName, String destDir) {
-		try (
-			InputStream inputStream = new FileInputStream(zipFileName);
-		) {
+		try (InputStream inputStream = new FileInputStream(zipFileName);) {
 			unzip(inputStream, destDir);
 		} catch (Exception exp) {
 			throw new BaseException("解压文件出错", exp);
@@ -157,6 +157,7 @@ public class CompressUtil {
 				}
 			}
 		} catch (Exception exp) {
+			LogUtil.error(CompressUtil.class, StarterName.COMMON_STARTER, exp);
 			throw new BaseException("解压文件出错", exp);
 		}
 	}

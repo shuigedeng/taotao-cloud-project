@@ -4,12 +4,10 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.Context;
 import cn.hutool.core.date.DateUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractExport;
-import com.taotao.cloud.health.base.BsfEnvironmentEnum;
-import com.taotao.cloud.health.base.Report;
-import com.taotao.cloud.health.config.ExportProperties;
-import com.taotao.cloud.health.config.HealthProperties;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.health.properties.ExportProperties;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,22 +30,23 @@ public class ElkExport extends AbstractExport {
 	public void start() {
 		super.start();
 		ILoggerFactory log = LoggerFactory.getILoggerFactory();
-		if (log != null && log instanceof Context) {
+		if (log instanceof Context) {
 			appender = new LogstashTcpSocketAppender();
 			appender.setContext((Context) log);
-			String[] destinations = ExportProperties.Default().getBsfElkDestinations();
+			String[] destinations = ExportProperties.Default().getElkDestinations();
 			if (destinations == null || destinations.length == 0) {
-				destinations = new String[]{
-					PropertyUtil.getPropertyCache(BsfEnvironmentEnum.ELK_DEV.getServerkey(), "")};
+				return;
 			}
+
 			for (String destination : destinations) {
 				appender.addDestination(destination);
 			}
+
 			LogstashEncoder encoder = new LogstashEncoder();
 			String appname =
-				"bsfReport-" + PropertyUtil.getPropertyCache(HealthProperties.SpringApplictionName,
+				"Report-" + PropertyUtil.getPropertyCache(CoreProperties.SpringApplicationName,
 					"");
-			encoder.setCustomFields("{\"appname\":\"" + appname + "\",\"appindex\":\"bsfReport\"}");
+			encoder.setCustomFields("{\"appname\":\"" + appname + "\",\"appindex\":\"Report\"}");
 			encoder.setEncoding("UTF-8");
 			appender.setEncoder(encoder);
 			appender.start();
@@ -56,18 +55,19 @@ public class ElkExport extends AbstractExport {
 
 	@Override
 	public void run(Report report) {
-		if (appender == null || !ExportProperties.Default().isBsfElkEnabled()) {
+		if (appender == null || !ExportProperties.Default().isElkEnabled()) {
 			return;
 		}
-		Map<String, Object> map = new LinkedHashMap();
+		Map<String, Object> map = new LinkedHashMap<>();
 		report.eachReport((String field, Report.ReportItem reportItem) -> {
 			if (reportItem != null && reportItem.getValue() instanceof Number) {
 				map.put(field.replace(".", "_"), reportItem.getValue());
 			}
 			return reportItem;
 		});
+
 		LoggingEvent event = createLoggerEvent(map,
-			"bsf Report:" + DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			"taotao cloud Report:" + DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		appender.doAppend(event);
 	}
 
@@ -75,7 +75,7 @@ public class ElkExport extends AbstractExport {
 		LoggingEvent loggingEvent = new LoggingEvent();
 		loggingEvent.setTimeStamp(System.currentTimeMillis());
 		loggingEvent.setLevel(Level.INFO);
-		loggingEvent.setLoggerName("bsfReportLogger");
+		loggingEvent.setLoggerName("ReportLogger");
 		loggingEvent.setMarker(new MapEntriesAppendingMarker(values));
 		loggingEvent.setMessage(message);
 		loggingEvent.setArgumentArray(new String[0]);

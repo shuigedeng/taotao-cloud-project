@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
     api 'com.egzosn:pay-java-common:2.14.1'
     api 'com.egzosn:pay-java-ali:2.14.1'
@@ -14,3 +14,6 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
+

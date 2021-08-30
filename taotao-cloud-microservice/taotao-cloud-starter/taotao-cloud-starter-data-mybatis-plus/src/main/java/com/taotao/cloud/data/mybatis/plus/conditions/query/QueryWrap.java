@@ -1,10 +1,8 @@
 package com.taotao.cloud.data.mybatis.plus.conditions.query;
 
-import static com.baomidou.mybatisplus.core.enums.WrapperKeyword.APPLY;
 import static com.taotao.cloud.data.mybatis.plus.conditions.Wraps.replace;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.SharedString;
@@ -14,7 +12,7 @@ import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.taotao.cloud.common.utils.StrHelper;
+import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

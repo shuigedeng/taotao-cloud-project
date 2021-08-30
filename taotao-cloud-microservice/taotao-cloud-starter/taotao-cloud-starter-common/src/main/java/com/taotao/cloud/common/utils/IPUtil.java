@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.taotao.cloud.common.constant.StarterName;
 import java.util.Objects;
 
 /**
@@ -48,14 +49,14 @@ public class IPUtil {
 		String api = String.format("http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true", ip);
 		JsonNode node = JsonUtil.parse((String) HttpUtil.getRequest(api, "gbk"));
 		if (Objects.nonNull(node)) {
-			LogUtil.info(node.toString());
+			LogUtil.info(IPUtil.class, StarterName.COMMON_STARTER, node.toString());
 			return node.get("addr").toString();
 		}
 
 		return null;
 	}
 
-	public static void main(String[] args) {
-		System.err.println(getCityInfo("220.248.12.158"));
-	}
+	//public static void main(String[] args) {
+	//	System.err.println(getCityInfo("220.248.12.158"));
+	//}
 }

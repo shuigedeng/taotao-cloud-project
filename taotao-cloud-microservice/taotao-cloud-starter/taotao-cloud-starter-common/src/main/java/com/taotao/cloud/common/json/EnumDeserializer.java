@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import org.springframework.beans.BeanUtils;
 
@@ -31,8 +32,8 @@ import org.springframework.beans.BeanUtils;
  * <p>
  * 字段类型是枚举类型时，可以按照以下2种格式反序列化： 1. 字符串形式：字段名： "XX" 2. 对象形式： 字段名： { "code": "XX" }
  * <p>
- * 此反序列化类有bug，请使用 com.fasterxml.jackson.databind.deser.std.EnumDeserializer bug1： 不支持接收List
- * bug2: 传错删除没有报错
+ * 此反序列化类有bug，请使用 com.fasterxml.jackson.databind.deser.std.EnumDeserializer bug1： 不支持接收List bug2:
+ * 传错删除没有报错
  *
  * @author shuigedeng
  * @version 1.0.0
@@ -67,7 +68,7 @@ public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 			}
 			return Enum.valueOf(propertyType, val);
 		} catch (Exception e) {
-			LogUtil.error("解析枚举失败", e);
+			LogUtil.error(EnumDeserializer.class, StarterName.COMMON_STARTER, e,"解析枚举失败");
 			return null;
 		}
 	}

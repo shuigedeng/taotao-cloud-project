@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.core.runner;
 
-import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class CoreApplicationRunner implements ApplicationRunner {
 		HashMap<String, Object> map = new HashMap<>(2);
 		map.put("data", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		map.put("state", status);
-		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "--应用已正常启动!");
+		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "-- 应用已正常启动!");
 	}
 
 }

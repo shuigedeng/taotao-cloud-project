@@ -2,10 +2,9 @@
 //
 //import com.dianping.cat.status.StatusExtension;
 //import com.dianping.cat.status.StatusExtensionRegister;
-//import com.taotao.cloud.health.base.AbstractExport;
 //import com.taotao.cloud.health.base.Report;
 //import com.taotao.cloud.health.collect.HealthCheckProvider;
-//import com.taotao.cloud.health.config.ExportProperties;
+//import com.taotao.cloud.health.properties.ExportProperties;
 //import java.util.LinkedHashMap;
 //import java.util.Map;
 //
@@ -42,18 +41,18 @@
 //
 //		@Override
 //		public String getDescription() {
-//			return "bsf性能报表";
+//			return "taotao cloud性能报表";
 //		}
 //
 //		@Override
 //		public String getId() {
-//			return "bsf性能报表";
+//			return "taotao cloud性能报表";
 //		}
 //
 //		@Override
 //		public Map<String, String> getProperties() {
 //			Map<String, String> map = new LinkedHashMap();
-//			if (!ExportProperties.Default().isBsfCatEnabled()) {
+//			if (!ExportProperties.Default().isCatEnabled()) {
 //				return map;
 //			}
 //			val healthProvider = ContextUtils.getBean(HealthCheckProvider.class, false);

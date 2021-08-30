@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.constant.StarterName;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,7 +37,7 @@ public class HttpUtil {
 	/**
 	 * 发送GET请求
 	 *
-	 * @param requestUrl requestUrl
+	 * @param requestUrl  requestUrl
 	 * @param charSetName charSetName
 	 */
 	public static Object getRequest(String requestUrl, String charSetName) {
@@ -62,7 +63,7 @@ public class HttpUtil {
 				throw new Exception("连接失败");
 			}
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
+			LogUtil.error(HttpUtil.class, StarterName.COMMON_STARTER, e);
 		}
 		return null;
 	}
@@ -107,7 +108,7 @@ public class HttpUtil {
 
 			return bos.toString("utf-8");
 		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
+			LogUtil.error(HttpUtil.class, StarterName.COMMON_STARTER, e);
 		}
 		return null;
 	}

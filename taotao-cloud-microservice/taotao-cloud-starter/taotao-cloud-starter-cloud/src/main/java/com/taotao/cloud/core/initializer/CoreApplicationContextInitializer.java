@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.initializer;
 
-import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
@@ -26,18 +26,20 @@ import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
-import com.taotao.cloud.common.base.CoreProperties;
-import com.taotao.cloud.common.base.PropertyCache;
-import com.taotao.cloud.common.enums.EnvironmentEnum;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.core.enums.EnvironmentEnum;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import java.io.File;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import org.apache.logging.log4j.util.Strings;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -56,8 +58,7 @@ import org.springframework.util.ReflectionUtils;
  * @since 2020/5/15 10:45
  */
 @Order(0)
-public class CoreApplicationContextInitializer implements
-	ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class CoreApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
@@ -69,40 +70,37 @@ public class CoreApplicationContextInitializer implements
 				ContextUtil.mainClass = deduceMainApplicationClass();
 			}
 			ContextUtil.setApplicationContext(context);
-
 			ConfigurableEnvironment environment = context.getEnvironment();
-
 			/**
 			 * 设置nacos客户端日志和快照目录
 			 *
 			 * @see LocalConfigInfoProcessor
 			 */
-			String userHome = PropertyUtil.getProperty("user.home");
-			setDefaultProperty("JM.LOG.PATH", userHome + File.separator + "logs", "");
-			setDefaultProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs", "");
+			String userHome = environment.getProperty("user.home");
+			setDefaultProperty("JM.LOG.PATH", userHome + File.separator + "logs", "[taotao cloud 环境变量]");
+			setDefaultProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs", "[taotao cloud 环境变量]");
 			setDefaultProperty("nacos.logging.default.config.enabled", "false",
 				"[taotao cloud 环境变量]");
-//
-			if ("false"
-				.equalsIgnoreCase(
-					environment.getProperty(CoreProperties.TaoTaoCloudEnabled, "true"))) {
+
+			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled", Boolean.class);
+			if (Boolean.FALSE.equals(isEnabled)) {
 				return;
 			}
 
 			//环境变量初始化
-			String propertyValue = environment.getProperty(CoreProperties.SpringApplicationName);
-			String propertyValue2 = environment.getProperty(CoreProperties.TaoTaoCloudEnv, "dev");
+			String applicationName = environment.getProperty(CoreProperties.SpringApplicationName);
+			String env = environment.getProperty(CoreProperties.PREFIX + ".env", String.class);
 
-			if (!Strings.isEmpty(propertyValue) && !Strings.isEmpty(propertyValue2)) {
+			if (!StringUtil.isEmpty(applicationName) && !StringUtil.isEmpty(env)) {
 				optimize(environment);
 
-				setDefaultProperty(CoreProperties.SpringApplicationName, propertyValue, "");
+				setDefaultProperty(CoreProperties.SpringApplicationName, applicationName, "[taotao cloud 环境变量]");
 
-				LogUtil.info(CoreProperties.TaoTaoCloudEnv + "=" + propertyValue2);
+				LogUtil.info(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,CoreProperties.PREFIX + ".dev" + " =============== " + env);
 
 				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
-					if (e2.getEnv().toString().equalsIgnoreCase(propertyValue2)) {
-						setDefaultProperty(e2.getServerkey(), e2.getUrl(), "[taotao cloud 环境变量]");
+					if (e2.toString().equalsIgnoreCase(env)) {
+						setDefaultProperty(e2.name(), e2.getName(), "[taotao cloud 环境变量]");
 					}
 				}
 			}
@@ -130,9 +128,9 @@ public class CoreApplicationContextInitializer implements
 		String message = "[日志标准规范]";
 
 		//文件优化
-//		setDefaultProperty(CoreProperties.LoggingFile, "log/app.log", message);
-//		setDefaultProperty(CoreProperties.LoggingFileMaxHistory, "3", message);
-//		setDefaultProperty(CoreProperties.LoggingFileMaxSize, "10MB", message);
+		//setDefaultProperty(CoreProperties.LoggingFile, "log/app.log", message);
+		//setDefaultProperty(CoreProperties.LoggingFileMaxHistory, "3", message);
+		//setDefaultProperty(CoreProperties.LoggingFileMaxSize, "10MB", message);
 
 		//日志优化最大
 		ILoggerFactory factory = LoggerFactory.getILoggerFactory();
@@ -143,12 +141,12 @@ public class CoreApplicationContextInitializer implements
 				if (file instanceof RollingFileAppender) {
 					RollingPolicy rollingPolicy = ((RollingFileAppender) file).getRollingPolicy();
 					if (rollingPolicy instanceof SizeAndTimeBasedRollingPolicy) {
-						setDefaultProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize, "1GB",
+						setDefaultProperty(CoreProperties.LoggingFileTotalSize, "1GB",
 							message);
 
 						((SizeAndTimeBasedRollingPolicy) rollingPolicy).setTotalSizeCap(FileSize
 							.valueOf(environment
-								.getProperty(CoreProperties.TaoTaoCloudLoggingFileTotalSize,
+								.getProperty(CoreProperties.LoggingFileTotalSize,
 									"1GB")));
 					}
 				}
@@ -162,13 +160,12 @@ public class CoreApplicationContextInitializer implements
 
 		if (ContextUtil.isWeb()) {
 			//tomcat 优化 * 核心数
-//			setDefaultProperty(CoreProperties.ServerTomcatMaxThreads, ((int) (200 * cpuCount)) + "",
-//				"[自动化调优]");
-//			setDefaultProperty(CoreProperties.ServerTomcatMaxConnections,
-//				((int) (10000 * cpuCount)) + "", "[自动化调优]");
-//			setDefaultProperty(CoreProperties.ServerTomcatMinSpaceThreads,
-//				((int) (20 * (cpuCount / 2))) + "", "[自动化调优]");
-
+			//setDefaultProperty(CoreProperties.ServerTomcatMaxThreads, ((int) (200 * cpuCount)) + "",
+			//	"[自动化调优]");
+			//setDefaultProperty(CoreProperties.ServerTomcatMaxConnections,
+			//	((int) (10000 * cpuCount)) + "", "[自动化调优]");
+			//setDefaultProperty(CoreProperties.ServerTomcatMinSpaceThreads,
+			//	((int) (20 * (cpuCount / 2))) + "", "[自动化调优]");
 			//tomcat 传输优化
 			//setDefaultProperty(CoreProperties.ServeCompressionEnabled, "true", "[自动化调优]");
 			//setDefaultProperty(CoreProperties.ServeCompressionMimeTypes, "application/json,application/xml,text/html,text/xml,text/plain", "[自动化调优]");
@@ -179,20 +176,23 @@ public class CoreApplicationContextInitializer implements
 
 	void setDefaultProperty(String key, String defaultPropertyValue, String message) {
 		PropertyUtil
-			.setDefaultInitProperty(CoreApplicationContextInitializer.class,
+			.setDefaultInitProperty(
+				CoreApplicationContextInitializer.class,
 				PropertyUtil.getProperty(SpringApplicationName),
 				key, defaultPropertyValue, message);
 	}
 
 	void registerContextRefreshEvent() {
-		PropertyCache.Default.listenUpdateCache("通过配置刷新上下文监听", (data) -> {
+		PropertyCache.DEFAULT.listenUpdateCache("通过配置刷新上下文监听", (data) -> {
 			if (data != null && data.size() > 0) {
+				CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
+
 				for (Map.Entry<String, Object> e : data.entrySet()) {
-					if (!PropertyUtil
-						.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartEnabled, false)) {
+					if (!coreProperties.isContextRestartEnabled()) {
 						return;
 					}
-					if (e.getKey().equalsIgnoreCase(CoreProperties.TaoTaoCloudContextRestartText)) {
+
+					if (e.getKey().equalsIgnoreCase(CoreProperties.ContextRestartText)) {
 						refreshContext();
 						return;
 					}
@@ -204,16 +204,17 @@ public class CoreApplicationContextInitializer implements
 	void refreshContext() {
 		if (ContextUtil.getApplicationContext() != null) {
 			if (ContextUtil.mainClass == null) {
-				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + " 重启失败",
+				LogUtil.error(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,PropertyUtil.getProperty(SpringApplicationName) + " 重启失败",
 					new BaseException("检测到重启上下文事件,因无法找到启动类，重启失败!!!"));
 				return;
 			}
 
 			ConfigurableApplicationContext context = ContextUtil.getApplicationContext();
 			ApplicationArguments args = context.getBean(ApplicationArguments.class);
+			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
+
 			int waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
-				PropertyUtil
-					.getPropertyCache(CoreProperties.TaoTaoCloudContextRestartTimeSpan, 10));
+				coreProperties.getContextRestartTimespan());
 
 			Thread thread = new Thread(() -> {
 				try {
@@ -223,7 +224,7 @@ public class CoreApplicationContextInitializer implements
 					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "重启失败",
+					LogUtil.error(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,PropertyUtil.getProperty(SpringApplicationName) + "重启失败",
 						new BaseException(
 							"根据启动类" + ContextUtil.mainClass.getName() + "动态启动main失败"));
 				}

@@ -16,7 +16,7 @@
 package com.taotao.cloud.data.jpa.service;
 
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.core.lock.DistributedLock;
 
 /**
  * service接口父类

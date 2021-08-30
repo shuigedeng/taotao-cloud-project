@@ -1,8 +1,8 @@
 package com.taotao.cloud.health.utils;
 
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.health.config.HealthProperties;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
@@ -69,7 +69,7 @@ public class ProcessUtils {
 			return result.toString();
 
 		} catch (Exception e) {
-			LogUtil.error(HealthProperties.Project, "execCmd", e);
+			LogUtil.error(StarterName.HEALTH_STARTER, "execCmd", e);
 		} finally {
 			closeStream(bufrIn);
 			// 销毁子进程

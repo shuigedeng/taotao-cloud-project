@@ -1,10 +1,10 @@
 package com.taotao.cloud.job.component;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.job.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
@@ -79,8 +79,7 @@ public class XxlJobAutoConfiguration {
 			xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdmin().getAddresses());
 		}
 
-		LogUtil.info(
-			"[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_JOB_STARTER + "]" + "job模块已启动");
+		LogUtil.info(XxlJobAutoConfiguration.class, StarterName.JOB_XXL_STARTER, "模块已启动");
 		return xxlJobSpringExecutor;
 	}
 

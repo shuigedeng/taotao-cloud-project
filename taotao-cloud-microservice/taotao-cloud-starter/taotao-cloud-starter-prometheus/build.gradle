@@ -1,6 +1,6 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
 
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
     api "com.google.code.gson:gson"

@@ -15,13 +15,23 @@
  */
 package com.taotao.cloud.core.configuration;
 
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
+
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
+import com.taotao.cloud.core.thread.ThreadMonitor;
+import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * CoreConfiguration
@@ -30,15 +40,50 @@ import org.springframework.context.annotation.Import;
  * @version 1.0.0
  * @since 2021/04/02 10:25
  */
-@Import({CoreApplicationRunner.class, CoreCommandLineRunner.class})
-public class CoreConfiguration {
+public class CoreConfiguration implements InitializingBean {
 
-	@Value("${spring.application.name}")
-	private String applicationName;
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.info(CoreConfiguration.class, StarterName.CLOUD_STARTER, " CoreConfiguration 模块已启动");
+	}
 
 	@Bean(value = "meterRegistryCustomizer")
 	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
-		return meterRegistry -> meterRegistry.config()
-			.commonTags("application", applicationName);
+		return meterRegistry -> meterRegistry
+			.config()
+			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
+	}
+
+	@Bean(initMethod = "shutdown")
+	@Lazy
+	public ThreadPool getSystemThreadPool() {
+		if (ThreadPool.DEFAULT == null || ThreadPool.DEFAULT.isShutdown()) {
+			ThreadPool.initSystem();
+		}
+		return ThreadPool.DEFAULT;
+	}
+
+	@Bean
+	@ConditionalOnBean(ThreadPool.class)
+	@Lazy
+	public ThreadMonitor getSystemThreadPoolMonitor() {
+		return ThreadPool.DEFAULT.getThreadMonitor();
+	}
+
+	@Bean
+	@Lazy
+	public PropertyCache getPropertyCache() {
+		PropertyCache.DEFAULT.clear();
+		return PropertyCache.DEFAULT;
+	}
+
+	@Bean
+	public CoreApplicationRunner coreApplicationRunner() {
+		return new CoreApplicationRunner();
+	}
+
+	@Bean
+	public CoreCommandLineRunner coreCommandLineRunner() {
+		return new CoreCommandLineRunner();
 	}
 }

@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'

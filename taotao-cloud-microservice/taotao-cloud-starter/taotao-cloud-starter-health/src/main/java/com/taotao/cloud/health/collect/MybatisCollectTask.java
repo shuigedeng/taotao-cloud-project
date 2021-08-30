@@ -1,11 +1,10 @@
 package com.taotao.cloud.health.collect;
 
 
-import com.taotao.cloud.common.base.Collector;
-import com.taotao.cloud.common.base.Collector.Hook;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.core.model.Collector.Hook;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
  * @author: chejiangyi
@@ -13,33 +12,37 @@ import com.taotao.cloud.health.base.FieldReport;
  **/
 public class MybatisCollectTask extends AbstractCollectTask {
 
-	public MybatisCollectTask() {
+	private CollectTaskProperties properties;
+
+	public MybatisCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.mybatis.timeSpan", 20);
+		return properties.getMybatisTimeSpan();
 	}
 
 	@Override
 	public String getDesc() {
-		return "bsf mybatis性能采集";
+		return "mybatis性能采集";
 	}
 
 	@Override
 	public String getName() {
-		return "bsf.health.mybatis.info";
+		return "taotao.cloud.health.collect.mybatis.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.mybatis.enabled", true);
+		return properties.isMybatisEnabled();
 	}
 
 	@Override
 	protected Object getData() {
 		SqlMybatisInfo info = new SqlMybatisInfo();
-		Hook hook = Collector.Default.hook("bsf.mybatis.sql.hook");
+
+		Hook hook = Collector.DEFAULT.hook("taotao.cloud.health.collect.mybatis.sql.hook");
 		if (hook != null) {
 			info.hookCurrent = hook.getCurrent();
 			info.hookError = hook.getLastErrorPerSecond();
@@ -52,15 +55,15 @@ public class MybatisCollectTask extends AbstractCollectTask {
 
 	private static class SqlMybatisInfo {
 
-		@FieldReport(name = "mybatis.sql.hook.error", desc = "mybatis 拦截上一次每秒出错次数")
+		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.error", desc = "mybatis 拦截上一次每秒出错次数")
 		private Long hookError;
-		@FieldReport(name = "mybatis.sql.hook.success", desc = "mybatis 拦截上一次每秒成功次数")
+		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.success", desc = "mybatis 拦截上一次每秒成功次数")
 		private Long hookSuccess;
-		@FieldReport(name = "mybatis.sql.hook.current", desc = "mybatis 拦截当前执行任务数")
+		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.current", desc = "mybatis 拦截当前执行任务数")
 		private Long hookCurrent;
-		@FieldReport(name = "mybatis.sql.hook.list.detail", desc = "mybatis 拦截历史最大耗时任务列表")
+		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.list.detail", desc = "mybatis 拦截历史最大耗时任务列表")
 		private String hookList;
-		@FieldReport(name = "mybatis.sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
+		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
 		private String hookListPerMinute;
 
 		public SqlMybatisInfo() {

@@ -35,7 +35,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
-import org.apache.kafka.common.errors.InterruptException;
+
 /**
  * TaotaoKafkaAppender
  *

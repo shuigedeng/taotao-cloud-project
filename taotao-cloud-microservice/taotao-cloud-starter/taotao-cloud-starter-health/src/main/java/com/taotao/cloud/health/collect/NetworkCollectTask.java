@@ -3,21 +3,22 @@ package com.taotao.cloud.health.collect;
 
 import static com.taotao.cloud.health.utils.ProcessUtils.getProcessID;
 
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
-import com.taotao.cloud.health.utils.ConvertUtils;
+import com.taotao.cloud.common.utils.BeanUtil;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.utils.ProcessUtils;
 
 public class NetworkCollectTask extends AbstractCollectTask {
 
-	public NetworkCollectTask() {
+	private CollectTaskProperties properties;
 
+	public NetworkCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.network.timeSpan", 10);
+		return properties.getNetworkTimeSpan();
 	}
 
 	@Override
@@ -27,34 +28,34 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "network.info";
+		return "taotao.cloud.health.collect.network.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.network.enabled", true);
+		return properties.isNetworkEnabled();
 	}
 
 
 	@Override
 	protected Object getData() {
 		NetworkInfo ioInfo = new NetworkInfo();
-		ioInfo.processSysTcpListenNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processSysTcpListenNum = BeanUtil.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'LISTEN' |wc -l"),
 			Long.class);
-		ioInfo.processSysTcpEstablishedNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processSysTcpEstablishedNum = BeanUtil.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'ESTABLISHED' |wc -l"),
 			Long.class);
-		ioInfo.processSysTcpTimeWaitNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processSysTcpTimeWaitNum = BeanUtil.convert(ProcessUtils.execCmd(
 				"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1 |egrep -w 'TIME_WAIT' |wc -l"),
 			Long.class);
-		ioInfo.processTcpListenNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processTcpListenNum = BeanUtil.convert(ProcessUtils.execCmd(
 			"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'LISTEN' |wc -l".replaceAll(
 				"\\$PID", getProcessID())), Long.class);
-		ioInfo.processTcpEstablishedNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processTcpEstablishedNum = BeanUtil.convert(ProcessUtils.execCmd(
 			"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'ESTABLISHED' |wc -l".replaceAll(
 				"\\$PID", getProcessID())), Long.class);
-		ioInfo.processTcpTimeWaitNum = ConvertUtils.convert(ProcessUtils.execCmd(
+		ioInfo.processTcpTimeWaitNum = BeanUtil.convert(ProcessUtils.execCmd(
 			"netstat -anp |awk '/^tcp/ {print $6,$7}' |cut -d/ -f1  |egrep -w '$PID' |egrep -w 'TIME_WAIT' |wc -l".replaceAll(
 				"\\$PID", getProcessID())), Long.class);
 		return ioInfo;
@@ -63,17 +64,17 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 	private static class NetworkInfo {
 
-		@FieldReport(name = "network.process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
 		private long processTcpListenNum;
-		@FieldReport(name = "network.process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
 		private long processTcpEstablishedNum;
-		@FieldReport(name = "network.process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
 		private long processTcpTimeWaitNum;
-		@FieldReport(name = "network.sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
 		private long processSysTcpListenNum;
-		@FieldReport(name = "network.sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
 		private long processSysTcpEstablishedNum;
-		@FieldReport(name = "network.sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
 		private long processSysTcpTimeWaitNum;
 
 		public NetworkInfo() {

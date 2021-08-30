@@ -1,6 +1,6 @@
 package com.taotao.cloud.product.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.product.api.dto.ProductDTO;
 import com.taotao.cloud.product.api.feign.fallback.RemoteProductFallbackImpl;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "RemoteProductService", value = ServiceNameConstant.TAOTAO_CLOUD_PRODUCT_CENTER, fallbackFactory = RemoteProductFallbackImpl.class)
+@FeignClient(contextId = "RemoteProductService", value = ServiceName.TAOTAO_CLOUD_PRODUCT_CENTER, fallbackFactory = RemoteProductFallbackImpl.class)
 public interface RemoteProductService {
 
 	/**

@@ -22,6 +22,9 @@ dependencies {
     api 'com.baomidou:mybatis-plus-core:3.4.2'
     api 'com.squareup.okhttp3:okhttp'
 
+    api 'org.apache.httpcomponents:httpclient'
+    api 'org.apache.httpcomponents:httpmime'
+    
     api "io.swagger.core.v3:swagger-models:2.1.7"
     api 'io.swagger.core.v3:swagger-annotations:2.1.7'
 

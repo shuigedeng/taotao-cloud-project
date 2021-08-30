@@ -1,13 +1,13 @@
 package com.taotao.cloud.health.filter;
 
-import com.taotao.cloud.common.base.Collector;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.health.properties.DoubtApiProperties;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * 拦截器，统计接口内存增长
@@ -15,45 +15,41 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @author Robin.Wang
  * @date 2019-09-28
  */
-public class DoubtApiInterceptor extends HandlerInterceptorAdapter {
+public class DoubtApiInterceptor implements HandlerInterceptor {
 
 	ThreadLocal<Long> beforeMem = new ThreadLocal<>();
-	Map<String, DoubtApiInfo> statitisMap = new ConcurrentHashMap<>();
-	/**
-	 * 增长内存统计阈值，默认3M
-	 */
-	private static final int DEFAULT_THRESHOLD = 3 * 1024 * 1024;
+	Map<String, DoubtApiInfo> statisticMap = new ConcurrentHashMap<>();
+	DoubtApiProperties properties;
+
+	public DoubtApiInterceptor(DoubtApiProperties properties) {
+		this.properties = properties;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-		Object handler)
-		throws Exception {
-		if (!PropertyUtil.getPropertyCache("bsf.health.doubtapi.enabled", false)) {
-			return true;
-		}
+		Object handler) throws Exception {
+
 		beforeMem.set(getJVMUsed());
+
 		return true;
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-		Object handler, Exception ex)
-		throws Exception {
-		if (!PropertyUtil.getPropertyCache("bsf.health.doubtapi.enabled", false)) {
-			return;
-		}
+		Object handler, Exception ex) throws Exception {
 		Long data = beforeMem.get();
 		beforeMem.remove();
+
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod method = (HandlerMethod) handler;
 			String methodPath =
 				method.getBean().getClass().getName() + "." + method.getMethod().getName();
 			String url = request.getRequestURI();
+
 			long increMem = getJVMUsed() - data;
-			if (increMem > PropertyUtil.getPropertyCache("bsf.health.doubtapi.threshold",
-				DEFAULT_THRESHOLD)) {
-				if (statitisMap.containsKey(methodPath)) {
-					DoubtApiInfo staticInfo = statitisMap.get(methodPath);
+			if (increMem > properties.getThreshold()) {
+				if (statisticMap.containsKey(methodPath)) {
+					DoubtApiInfo staticInfo = statisticMap.get(methodPath);
 					staticInfo.uri = url;
 					staticInfo.count += 1;
 					staticInfo.totalIncreMem += increMem;
@@ -61,7 +57,6 @@ public class DoubtApiInterceptor extends HandlerInterceptorAdapter {
 						staticInfo.totalIncreMem = increMem;
 						staticInfo.count = 1;
 					}
-
 				} else {
 					DoubtApiInfo staticInfo = new DoubtApiInfo();
 					staticInfo.method = methodPath;
@@ -69,9 +64,10 @@ public class DoubtApiInterceptor extends HandlerInterceptorAdapter {
 					//第一次不计算内存
 					staticInfo.count = 0;
 					staticInfo.totalIncreMem = 0;
-					statitisMap.put(methodPath, staticInfo);
+					statisticMap.put(methodPath, staticInfo);
 				}
-				Collector.Default.value("bsf.doubtapi.info").set(statitisMap);
+
+				Collector.DEFAULT.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
 			}
 		}
 	}

@@ -1,11 +1,10 @@
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.DefaultHttpClient;
-import com.taotao.cloud.health.base.FieldReport;
-import com.taotao.cloud.health.base.HttpClientManager;
+import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.core.http.HttpClientManager;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.pool.PoolStats;
@@ -17,14 +16,20 @@ import org.apache.http.pool.PoolStats;
  */
 public class HttpPoolCollectTask extends AbstractCollectTask {
 
+	private CollectTaskProperties properties;
+
+	public HttpPoolCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.httpPool.timeSpan", 20);
+		return properties.getHttpPoolTimeSpan();
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.httpPool.enabled", true);
+		return properties.isHttpPoolEnabled();
 	}
 
 	@Override
@@ -34,16 +39,17 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "bsf.httpPool.info";
+		return "taotao.cloud.health.collect.httpPool.info";
 	}
 
 	@Override
 	protected Object getData() {
 		ConcurrentHashMap<String, DefaultHttpClient> pool = ReflectionUtil.getFieldValue(
-			HttpClientManager.Default, "pool");
+			HttpClientManager.DEFAULT, "pool");
 		if (pool == null) {
 			return null;
 		}
+
 		HttpPoolInfo data = new HttpPoolInfo();
 		StringBuilder detail = new StringBuilder();
 		pool.forEach((id, client) -> {
@@ -67,13 +73,13 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	private static class HttpPoolInfo {
 
-		@FieldReport(name = "bsf.httpPool.available", desc = "HttpPool可用的连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.httpPool.available", desc = "HttpPool可用的连接数")
 		private Integer availableCount = 0;
-		@FieldReport(name = "bsf.httpPool.pending", desc = "HttpPool等待的连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.httpPool.pending", desc = "HttpPool等待的连接数")
 		private Integer pendingCount = 0;
-		@FieldReport(name = "bsf.httpPool.leased", desc = "HttpPool使用中的连接数")
+		@FieldReport(name = "taotao.cloud.health.collect.httpPool.leased", desc = "HttpPool使用中的连接数")
 		private Integer leasedCount = 0;
-		@FieldReport(name = "bsf.httpPool.detail", desc = "HttpPool详情")
+		@FieldReport(name = "taotao.cloud.health.collect.httpPool.detail", desc = "HttpPool详情")
 		private String poolDetail;
 
 		public HttpPoolInfo() {

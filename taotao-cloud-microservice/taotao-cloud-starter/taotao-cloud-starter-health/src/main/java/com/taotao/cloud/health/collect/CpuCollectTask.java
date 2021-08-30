@@ -1,9 +1,8 @@
 package com.taotao.cloud.health.collect;
 
 import com.sun.management.OperatingSystemMXBean;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.management.ManagementFactory;
 
 /**
@@ -13,14 +12,16 @@ import java.lang.management.ManagementFactory;
 public class CpuCollectTask extends AbstractCollectTask {
 
 	OperatingSystemMXBean sysembean;
+	CollectTaskProperties properties;
 
-	public CpuCollectTask() {
-		sysembean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+	public CpuCollectTask(CollectTaskProperties properties) {
+		this.sysembean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+		this.properties = properties;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.cpu.timeSpan", 10);
+		return properties.getCpuTimeSpan();
 	}
 
 	@Override
@@ -30,12 +31,12 @@ public class CpuCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "cpu.info";
+		return "taotao.cloud.health.collect.cpu.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.cpu.enabled", true);
+		return properties.isCpuEnabled();
 	}
 
 	@Override
@@ -50,11 +51,11 @@ public class CpuCollectTask extends AbstractCollectTask {
 
 	private static class CpuInfo {
 
-		@FieldReport(name = "cpu.process", desc = "进程cpu负载")
+		@FieldReport(name = "taotao.cloud.health.collect.cpu.process", desc = "进程cpu负载")
 		private double processCpuLoad;
-		@FieldReport(name = "cpu.system", desc = "系统cpu负载")
+		@FieldReport(name = "taotao.cloud.health.collect.cpu.system", desc = "系统cpu负载")
 		private double systemCpuLoad;
-		@FieldReport(name = "cpu.core.num", desc = "系统cpu核心数")
+		@FieldReport(name = "taotao.cloud.health.collect.cpu.core.num", desc = "系统cpu核心数")
 		private Integer cpuCoreNumber;
 
 		public CpuInfo() {

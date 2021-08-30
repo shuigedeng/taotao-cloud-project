@@ -33,8 +33,8 @@ import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerIntercept
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.taotao.cloud.common.base.StrPool;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
@@ -100,8 +100,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_MYBATIS_PLUS_STARTER + "]"
-			+ "mybatis-plus模式已开启");
+		LogUtil.info(MybatisPlusConfiguration.class, StarterName.MYBATIS_PLUS_STARTER, "模块已开启");
 	}
 
 	/**

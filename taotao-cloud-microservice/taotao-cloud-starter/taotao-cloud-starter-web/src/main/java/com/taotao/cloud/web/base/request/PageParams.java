@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.cloud.common.base.StrPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.AntiSqlFilterUtils;
 import com.taotao.cloud.data.mybatis.plus.entity.Entity;
 import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;

@@ -3,11 +3,10 @@ package com.taotao.cloud.health.collect;
 
 import static com.taotao.cloud.health.utils.ProcessUtils.getProcessID;
 
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.EnumWarnType;
-import com.taotao.cloud.health.base.FieldReport;
-import com.taotao.cloud.health.utils.ConvertUtils;
+import com.taotao.cloud.common.utils.BeanUtil;
+import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.utils.ProcessUtils;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,16 +20,20 @@ import java.io.FileOutputStream;
  **/
 public class IOCollectTask extends AbstractCollectTask {
 
-	public static boolean getIsAutoClear() {
-		return PropertyUtil.getPropertyCache("bsf.health.io.autoClear", true);
+	private CollectTaskProperties properties;
+
+
+	public IOCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
 	}
 
-	public IOCollectTask() {
+	public static boolean getIsAutoClear() {
+		return true;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.io.timeSpan", 10);
+		return properties.getIoTimeSpan();
 	}
 
 	@Override
@@ -40,12 +43,12 @@ public class IOCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "io.info";
+		return "taotao.cloud.health.collect.io.info";
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.io.enabled", true);
+		return properties.isIoEnabled();
 	}
 
 	@Override
@@ -55,16 +58,16 @@ public class IOCollectTask extends AbstractCollectTask {
 		ioInfo.currentDirUsableSize = file.getUsableSpace() / byteToMb;
 		ioInfo.currentDirTotalSize = file.getTotalSpace() / byteToMb;
 		ioInfo.currentDir = file.getAbsolutePath();
-		long processReadSize = ConvertUtils.convert(ProcessUtils.execCmd(
+		long processReadSize = BeanUtil.convert(ProcessUtils.execCmd(
 			"cat /proc/$PID/io |egrep -E 'read_bytes'|awk '{print $2}'".replaceAll("\\$PID",
 				getProcessID())), Long.class);
 		ioInfo.processReadSize = processReadSize > 0 ? processReadSize / byteToMb : processReadSize;
-		long processWriteSize = ConvertUtils.convert(ProcessUtils.execCmd(
+		long processWriteSize = BeanUtil.convert(ProcessUtils.execCmd(
 			"cat /proc/$PID/io |egrep -E '^write_bytes'|awk '{print $2}'".replaceAll("\\$PID",
 				getProcessID())), Long.class);
 		ioInfo.processWriteSize =
 			processWriteSize > 0 ? processWriteSize / byteToMb : processWriteSize;
-		ioInfo.processWa = ConvertUtils.convert(
+		ioInfo.processWa = BeanUtil.convert(
 			ProcessUtils.execCmd("top -bn1 | sed -n '3p'|cut -d, -f5 |awk '{print $1}'"),
 			Double.class);
 		return ioInfo;
@@ -86,7 +89,7 @@ public class IOCollectTask extends AbstractCollectTask {
 
 	private static String clearfile(String filepath) {
 		File f = new File(filepath);
-		if (f == null || !f.exists()) {
+		if (!f.exists()) {
 			return "";
 		}
 		try {
@@ -112,17 +115,17 @@ public class IOCollectTask extends AbstractCollectTask {
 
 	private static class IoInfo {
 
-		@FieldReport(name = "io.current.dir.usable.size", desc = "当前目录可用大小(M)")
+		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.usable.size", desc = "当前目录可用大小(M)")
 		private double currentDirUsableSize;
-		@FieldReport(name = "io.current.dir.total.size", desc = "当前目录总大小(M)")
+		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.total.size", desc = "当前目录总大小(M)")
 		private double currentDirTotalSize;
-		@FieldReport(name = "io.current.dir.path", desc = "当前目录路径")
+		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.path", desc = "当前目录路径")
 		private String currentDir;
-		@FieldReport(name = "io.process.read.size", desc = "当前进程的读io(B)")
+		@FieldReport(name = "taotao.cloud.health.collect.io.process.read.size", desc = "当前进程的读io(B)")
 		private long processReadSize;
-		@FieldReport(name = "io.process.write.size", desc = "当前进程的写io(B)")
+		@FieldReport(name = "taotao.cloud.health.collect.io.process.write.size", desc = "当前进程的写io(B)")
 		private long processWriteSize;
-		@FieldReport(name = "io.process.wa", desc = "磁盘wa百分比")
+		@FieldReport(name = "taotao.cloud.health.collect.io.process.wa", desc = "磁盘wa百分比")
 		private double processWa;
 
 		public IoInfo() {

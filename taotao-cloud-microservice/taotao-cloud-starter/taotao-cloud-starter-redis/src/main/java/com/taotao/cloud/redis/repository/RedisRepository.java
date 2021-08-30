@@ -17,8 +17,8 @@ package com.taotao.cloud.redis.repository;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
-import com.taotao.cloud.common.model.CacheHashKey;
-import com.taotao.cloud.common.model.CacheKey;
+import com.taotao.cloud.redis.model.CacheHashKey;
+import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.val.NullVal;
 import java.nio.charset.Charset;

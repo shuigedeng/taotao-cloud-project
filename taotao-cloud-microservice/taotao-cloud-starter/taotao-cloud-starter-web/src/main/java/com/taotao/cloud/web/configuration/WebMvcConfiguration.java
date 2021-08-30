@@ -15,15 +15,17 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import static com.taotao.cloud.common.utils.DateUtils.DEFAULT_DATE_TIME_FORMAT;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.json.JacksonModule;
@@ -193,34 +195,73 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
 		return customizer -> {
-			ObjectMapper objectMapper = customizer.createXmlMapper(true).build();
-			objectMapper
-				.setLocale(Locale.CHINA)
-				//去掉默认的时间戳格式
-				.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-				// 时区
-				.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
-				//Date参数日期格式
-				.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT, Locale.CHINA))
-				// 包含null
-				.setSerializationInclusion(Include.ALWAYS)
-				//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
-				.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
-				// 忽略不能转义的字符
-				.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
-					true)
-				//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
-				.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-				//忽略未知字段
-				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-				//DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES相当于配置，JSON串含有未知字段时，反序列化依旧可以成功
-				//单引号处理
-				.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+			ObjectMapper mapper = customizer.createXmlMapper(true).build();
+			//objectMapper
+			//	.setLocale(Locale.CHINA)
+			//	//去掉默认的时间戳格式
+			//	.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+			//	// 时区
+			//	.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
+			//	//Date参数日期格式
+			//	.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT, Locale.CHINA))
+			//	// 包含null
+			//	.setSerializationInclusion(Include.ALWAYS)
+			//	//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
+			//	.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
+			//	// 忽略不能转义的字符
+			//	.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
+			//		true)
+			//	//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
+			//	.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+			//	//忽略未知字段
+			//	.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+			//	//DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES相当于配置，JSON串含有未知字段时，反序列化依旧可以成功
+			//	//单引号处理
+			//	.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+
+			mapper.findAndRegisterModules();
+			mapper.setLocale(Locale.CHINA);
+			// 时区
+			mapper.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
+			//去掉默认的时间戳格式
+			mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+			// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
+			//忽略未知字段
+			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			// 忽略空Bean转json的错误
+			//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
+			mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+			// 允许不带引号的字段名称
+			mapper.configure(JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature(), true);
+			// 允许单引号
+			mapper.configure(JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true);
+			// allow int startWith 0
+			mapper.configure(JsonReadFeature.ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature(), true);
+			// 允许字符串存在转义字符：\r \n \t
+			//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
+			mapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
+			// 忽略不能转义的字符
+			mapper.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
+				true);
+			// 包含null
+			mapper.setSerializationInclusion(Include.ALWAYS);
+			// 使用驼峰式
+			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+			// 使用bean名称
+			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
+			// 所有日期格式都统一为固定格式
+			mapper.setDateFormat(
+				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
+			mapper.registerModule(new Jdk8Module());
+			mapper.registerModule(new JavaTimeModule());
 
 			// 注册自定义模块
-			objectMapper.registerModule(new JacksonModule()).findAndRegisterModules();
+			mapper.registerModule(new JacksonModule());
 
-			customizer.configure(objectMapper);
+			// 注册自定义模块
+			mapper.registerModule(new JacksonModule()).findAndRegisterModules();
+
+			customizer.configure(mapper);
 
 			// 配置跨站攻击 反序列化处理器
 			if (xssProperties.getRequestBodyEnabled()) {

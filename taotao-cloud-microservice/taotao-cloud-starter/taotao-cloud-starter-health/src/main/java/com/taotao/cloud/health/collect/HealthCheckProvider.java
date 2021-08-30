@@ -1,12 +1,13 @@
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.base.ThreadPool;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.EnumWarnType;
-import com.taotao.cloud.health.base.Report;
-import com.taotao.cloud.health.config.HealthProperties;
+import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
+import com.taotao.cloud.health.properties.HealthProperties;
 import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,46 +20,48 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	protected List<AbstractCollectTask> checkTasks = new ArrayList<>();
 	protected DefaultWarnStrategy strategy = DefaultWarnStrategy.Default;
-	private boolean isclose = false;
+	private boolean isclose;
+	private CollectTaskProperties properties;
 
 	public void registerCollectTask(AbstractCollectTask task) {
 		checkTasks.add(task);
 	}
 
-
-	public HealthCheckProvider() {
+	public HealthCheckProvider(CollectTaskProperties properties) {
 		isclose = false;
-		registerCollectTask(new CpuCollectTask());
-		registerCollectTask(new IOCollectTask());
-		registerCollectTask(new MemeryCollectTask());
-		registerCollectTask(new ThreadCollectTask());
-		registerCollectTask(new UnCatchExceptionCollectTask());
-		registerCollectTask(new BsfThreadPoolSystemCollectTask());
-		registerCollectTask(new BsfEurekaCollectTask());
-		registerCollectTask(new MybatisCollectTask());
-		registerCollectTask(new DataSourceCollectTask());
-		registerCollectTask(new TomcatCollectTask());
-		registerCollectTask(new JedisCollectTask());
-		registerCollectTask(new NetworkCollectTask());
-		registerCollectTask(new XxlJobCollectTask());
-		registerCollectTask(new FileCollectTask());
-		registerCollectTask(new RocketMQCollectTask());
-		registerCollectTask(new HttpPoolCollectTask());
-		registerCollectTask(new CatCollectTask());
-		registerCollectTask(new ElasticSearchCollectTask());
-		registerCollectTask(new ElkCollectTask());
-		registerCollectTask(new DoubtApiCollectTask());
-		registerCollectTask(new LogStatisticCollectTask());
+		this.properties = properties;
 
-		ThreadPool.System.submit("bsf系统任务:HealthCheckProvider采集任务", () -> {
-			while (!ThreadPool.System.isShutdown() && !isclose) {
+		registerCollectTask(new CpuCollectTask(properties));
+		registerCollectTask(new IOCollectTask(properties));
+		registerCollectTask(new MemeryCollectTask(properties));
+		registerCollectTask(new ThreadCollectTask(properties));
+		registerCollectTask(new UnCatchExceptionCollectTask());
+		registerCollectTask(new ThreadPoolSystemCollectTask(properties));
+		//registerCollectTask(new BsfEurekaCollectTask());
+		registerCollectTask(new MybatisCollectTask(properties));
+		registerCollectTask(new DataSourceCollectTask(properties));
+		registerCollectTask(new TomcatCollectTask(properties));
+		registerCollectTask(new JedisCollectTask(properties));
+		registerCollectTask(new NetworkCollectTask(properties));
+		registerCollectTask(new XxlJobCollectTask(properties));
+		//registerCollectTask(new FileCollectTask());
+		//registerCollectTask(new RocketMQCollectTask());
+		registerCollectTask(new HttpPoolCollectTask(properties));
+		//registerCollectTask(new CatCollectTask());
+		//registerCollectTask(new ElasticSearchCollectTask());
+		registerCollectTask(new ElkCollectTask(properties));
+		registerCollectTask(new DoubtApiCollectTask(properties));
+		registerCollectTask(new LogStatisticCollectTask(properties));
+
+		ThreadPool.DEFAULT.submit("系统任务:HealthCheckProvider采集任务", () -> {
+			while (!ThreadPool.DEFAULT.isShutdown() && !isclose) {
 				try {
 					run();
 				} catch (Exception e) {
-					LogUtil.warn(HealthProperties.Project, "run 循环采集出错", e);
+					LogUtil.warn(StarterName.HEALTH_STARTER, "run 循环采集出错", e);
 				}
 				try {
-					Thread.sleep(HealthProperties.Default().getBsfHealthTimeSpan() * 1000);
+					Thread.sleep(HealthProperties.Default().getHealthTimeSpan() * 1000);
 				} catch (Exception e) {
 				}
 			}
@@ -67,7 +70,7 @@ public class HealthCheckProvider implements AutoCloseable {
 
 
 	public Report getReport(boolean isAnalyse) {
-		Report report = new Report().setDesc("健康检查报表").setName("bsf.health.report");
+		Report report = new Report().setDesc("健康检查报表").setName("taotao.cloud.health.report");
 		for (AbstractCollectTask task : checkTasks) {
 			if (task.getEnabled()) {
 				try {
@@ -77,7 +80,7 @@ public class HealthCheckProvider implements AutoCloseable {
 							report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
-					LogUtil.error(HealthProperties.Project,
+					LogUtil.error(StarterName.HEALTH_STARTER,
 						task.getName() + "采集获取报表出错", e);
 				}
 
@@ -95,7 +98,7 @@ public class HealthCheckProvider implements AutoCloseable {
 		if (StringUtil.isEmpty(text)) {
 			return;
 		}
-		AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "bsf健康检查", text);
+		AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "健康检查", text);
 
 	}
 
@@ -106,7 +109,7 @@ public class HealthCheckProvider implements AutoCloseable {
 			try {
 				task.close();
 			} catch (Exception exp) {
-				LogUtil.warn(HealthProperties.Project, "close资源释放出错",
+				LogUtil.warn(StarterName.HEALTH_STARTER, "close资源释放出错",
 					exp);
 			}
 		}

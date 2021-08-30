@@ -2,24 +2,30 @@ package com.taotao.cloud.health.collect;
 
 
 import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
  * @author Huang Zhaoping
  */
 public class ElkCollectTask extends AbstractCollectTask {
 
+	private CollectTaskProperties properties;
+
+	public ElkCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.elk.timeSpan", 20);
+		return properties.getElkTimeSpan();
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.elk.enabled", true);
+		return properties.isElkEnabled();
+
 	}
 
 	@Override
@@ -29,7 +35,7 @@ public class ElkCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "elk.info";
+		return "taotao.cloud.health.collect.elk.info";
 	}
 
 	@Override
@@ -48,9 +54,9 @@ public class ElkCollectTask extends AbstractCollectTask {
 
 	private static class ElkInfo {
 
-		@FieldReport(name = "elk.queue.size", desc = "ELK消息队列大小")
+		@FieldReport(name = "taotao.cloud.health.collect.elk.queue.size", desc = "ELK消息队列大小")
 		private Integer queueSize;
-		@FieldReport(name = "elk.consecutiveDropped", desc = "ELK消息连续丢弃数量")
+		@FieldReport(name = "taotao.cloud.health.collect.elk.consecutiveDropped", desc = "ELK消息连续丢弃数量")
 		private Long consecutiveDropped;
 
 		public ElkInfo() {

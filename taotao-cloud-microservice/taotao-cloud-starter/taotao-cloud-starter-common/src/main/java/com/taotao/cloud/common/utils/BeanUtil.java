@@ -66,7 +66,7 @@ public class BeanUtil {
 		if (value == null) {
 			return null;
 		}
-		return (T) ApplicationConversionService.getSharedInstance().convert(value, type);
+		return ApplicationConversionService.getSharedInstance().convert(value, type);
 	}
 
 	/**

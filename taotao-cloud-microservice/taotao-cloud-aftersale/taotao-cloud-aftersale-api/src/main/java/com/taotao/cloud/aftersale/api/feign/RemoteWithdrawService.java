@@ -17,7 +17,7 @@ package com.taotao.cloud.aftersale.api.feign;
 
 import com.taotao.cloud.aftersale.api.feign.fallback.RemoteWithdrawFallbackImpl;
 import com.taotao.cloud.aftersale.api.vo.WithdrawVO;
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.core.model.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteWithdrawService", value = ServiceNameConstant.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteWithdrawFallbackImpl.class)
+@FeignClient(contextId = "remoteWithdrawService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteWithdrawFallbackImpl.class)
 public interface RemoteWithdrawService {
 
 	/**

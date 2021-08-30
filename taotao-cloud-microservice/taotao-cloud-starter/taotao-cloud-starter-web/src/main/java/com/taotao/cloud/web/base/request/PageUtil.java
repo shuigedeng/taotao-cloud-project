@@ -17,7 +17,7 @@ package com.taotao.cloud.web.base.request;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.taotao.cloud.common.utils.DateUtils;
+import com.taotao.cloud.common.utils.DateUtil;
 import java.util.Map;
 
 /**
@@ -52,10 +52,10 @@ public class PageUtil {
 				continue;
 			}
 			if (key.endsWith("_st")) {
-				extra.put(key, DateUtils.getStartTime(value.toString()));
+				extra.put(key, DateUtil.getStartTime(value.toString()));
 			}
 			if (key.endsWith("_ed")) {
-				extra.put(key, DateUtils.getEndTime(value.toString()));
+				extra.put(key, DateUtil.getEndTime(value.toString()));
 			}
 		}
 	}

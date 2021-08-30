@@ -17,7 +17,7 @@ package com.taotao.cloud.redis.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.base.StrPool;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;

@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -54,8 +54,7 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info("[TAOTAO CLOUD][" + StarterNameConstant.TAOTAO_CLOUD_REDIS_STARTER + "]"
-			+ "redis模块已启动");
+		LogUtil.info(TaoTaoCloudRedisAutoConfiguration.class, StarterName.REDIS_STARTER, "模块已启动");
 	}
 
 	@Bean

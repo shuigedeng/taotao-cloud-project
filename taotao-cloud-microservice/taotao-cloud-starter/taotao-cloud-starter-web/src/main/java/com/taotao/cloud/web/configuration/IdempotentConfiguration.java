@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.web.idempotent.IdempotentAspect;
-import com.taotao.cloud.web.properties.EncryptProperties;
 import com.taotao.cloud.web.properties.IdempotentProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

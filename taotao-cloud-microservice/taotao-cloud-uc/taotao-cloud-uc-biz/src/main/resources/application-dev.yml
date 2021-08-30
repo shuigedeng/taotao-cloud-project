@@ -394,14 +394,14 @@ spring:
 
 taotao:
   cloud:
+    core:
+      env: dev
+      enabled: true
     zookeeper:
       enabled: false
       lock:
         enabled: false
     web:
-      async:
-        task:
-          enabled: true
       dozer:
         enabled: true
       encrypt:
@@ -454,13 +454,12 @@ taotao:
       enabled: true
       loadbalancer:
         enabled: true
-        rest-template:
-          enabled: true
     cache:
       enabled: true
       type: redis
     rabbitmq:
       enabled: false
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

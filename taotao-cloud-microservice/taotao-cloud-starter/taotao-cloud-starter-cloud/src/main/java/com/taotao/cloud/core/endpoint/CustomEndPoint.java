@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.core.endpoint;
 
-import com.taotao.cloud.core.indicator.CustomHealthIndicator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.web.annotation.WebEndpoint;

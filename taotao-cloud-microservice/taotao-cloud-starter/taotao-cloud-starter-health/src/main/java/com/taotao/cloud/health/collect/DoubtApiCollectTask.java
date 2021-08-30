@@ -1,11 +1,10 @@
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.base.Collector;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.health.base.AbstractCollectTask;
-import com.taotao.cloud.health.base.FieldReport;
+import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.health.model.FieldReport;
 import com.taotao.cloud.health.filter.DoubtApiInterceptor;
 import com.taotao.cloud.health.filter.DoubtApiInterceptor.DoubtApiInfo;
+import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -18,14 +17,20 @@ import java.util.Map;
  */
 public class DoubtApiCollectTask extends AbstractCollectTask {
 
+	private CollectTaskProperties properties;
+
+	public DoubtApiCollectTask(CollectTaskProperties properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public int getTimeSpan() {
-		return PropertyUtil.getPropertyCache("bsf.health.doubtapi.timeSpan", 20);
+		return properties.getDoubtApiTimeSpan();
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return PropertyUtil.getPropertyCache("bsf.health.doubtapi.enabled", false);
+		return properties.isDoubtApiEnabled();
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getName() {
-		return "doubtapi.info";
+		return "taotao.cloud.health.collect.doubtapi.info";
 	}
 
 	@Override
@@ -43,18 +48,18 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 		ApiUsedMemoryTopInfo info = new ApiUsedMemoryTopInfo();
 		try {
-			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) Collector.Default.value(
-				"bsf.doubtapi.info").get();
+			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) Collector.DEFAULT.value(
+				"taotao.cloud.health.doubtapi.info").get();
 			if (map != null && map.size() > 0) {
 				DoubtApiInfo[] copy = map.values()
 					.toArray(new DoubtApiInfo[map.values().size()]);
 				Arrays.sort(copy);
-				int detailLen = copy.length > 5 ? 5 : copy.length;
+				int detailLen = Math.min(copy.length, 5);
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0; i < detailLen; i++) {
 					DoubtApiInfo o = copy[i];
 
-					long avg = 0;
+					long avg;
 					if (o.getCount() > 0) {
 						avg = o.getTotalIncreMem() / 1024 / 1024 / o.getCount();
 					} else {
@@ -74,7 +79,7 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	public static class ApiUsedMemoryTopInfo {
 
-		@FieldReport(name = "doubt.api.detail", desc = "可疑内存增长api分析报告")
+		@FieldReport(name = "taotao.cloud.health.collect.doubt.api.detail", desc = "可疑内存增长api分析报告")
 		String detail;
 
 		public ApiUsedMemoryTopInfo() {

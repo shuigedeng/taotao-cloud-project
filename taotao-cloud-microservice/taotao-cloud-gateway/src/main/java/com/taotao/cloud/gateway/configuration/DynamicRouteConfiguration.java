@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.gateway.configuration;
 
-import static com.taotao.cloud.common.base.CoreProperties.SpringApplicationName;
+import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -25,7 +25,7 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
 import java.util.ArrayList;
 import java.util.List;

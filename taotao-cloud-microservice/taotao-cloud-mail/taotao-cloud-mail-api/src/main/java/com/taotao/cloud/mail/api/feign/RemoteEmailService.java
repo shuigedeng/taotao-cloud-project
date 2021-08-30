@@ -1,6 +1,6 @@
 package com.taotao.cloud.mail.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.mail.api.feign.fallback.RemoteEmailFallbackImpl;
 import com.taotao.cloud.mail.api.vo.EmailVO;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteEmailService", value = ServiceNameConstant.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemoteEmailFallbackImpl.class)
+@FeignClient(contextId = "remoteEmailService", value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemoteEmailFallbackImpl.class)
 public interface RemoteEmailService {
 
 	/**

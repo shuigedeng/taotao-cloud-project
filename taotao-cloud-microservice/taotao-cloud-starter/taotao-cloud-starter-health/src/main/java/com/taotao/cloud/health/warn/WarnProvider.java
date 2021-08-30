@@ -1,15 +1,16 @@
 package com.taotao.cloud.health.warn;
 
-import com.taotao.cloud.common.base.ThreadPool;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.base.AbstractWarn;
-import com.taotao.cloud.health.base.EnumWarnType;
-import com.taotao.cloud.health.base.Message;
-import com.taotao.cloud.health.config.HealthProperties;
-import com.taotao.cloud.health.config.WarnProperties;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.model.Message;
+import com.taotao.cloud.health.properties.WarnProperties;
 import com.taotao.cloud.health.utils.ExceptionUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,10 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
-/**
- * @author: chejiangyi
- * @version: 2019-07-23 20:20
- **/
 public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	ApplicationRunner {
 
@@ -33,23 +30,24 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	private AtomicInteger atomicInteger = new AtomicInteger(0);
 	private Object lock = new Object();
 	private List<AbstractWarn> warns = new ArrayList<>();
-	private boolean isClose = false;
+	private boolean isClose;
 	private DuplicateFilter duplicateFilter = new DuplicateFilter();
 	private AtomicBoolean atomicChannel = new AtomicBoolean(false);
 
 	public WarnProvider() {
 		isClose = false;
+
 		RegisterWarn();
-		ThreadPool.System.submit("bsf系统任务:WarnProvider 实时报警任务", () -> {
-			while (!ThreadPool.System.isShutdown() && !isClose) {
+
+		ThreadPool.DEFAULT.submit("系统任务:WarnProvider 实时报警任务", () -> {
+			while (!ThreadPool.DEFAULT.isShutdown() && !isClose) {
 				try {
 					notifyRunning();
 				} catch (Exception exp) {
-					LogUtil.warn(HealthProperties.Project,
-						"WarnProvider 消息循环异常");
+					LogUtil.warn(StarterName.HEALTH_STARTER, "WarnProvider 消息循环异常");
 				}
 				try {
-					Thread.sleep(WarnProperties.Default().getBsfHealthWarnTimeSpan() * 1000);
+					Thread.sleep(WarnProperties.Default().getTimeSpan() * 1000);
 				} catch (Exception e) {
 				}
 			}
@@ -57,13 +55,14 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	}
 
 	public void RegisterWarn() {
-		if ("true".equals(
-			PropertyUtil.getPropertyCache("bsf.message.dingding.enabled", "false"))) {
-			warns.add(new DingdingWarn());
-		}
-		if ("true".equals(PropertyUtil.getPropertyCache("bsf.message.flybook.enabled", "false"))) {
-			warns.add(new FlyBookWarn());
-		}
+		//if ("true".equals(
+		//	PropertyUtil.getPropertyCache("bsf.message.dingding.enabled", "false"))) {
+		//	warns.add(new DingdingWarn());
+		//}
+		//
+		//if ("true".equals(PropertyUtil.getPropertyCache("bsf.message.flybook.enabled", "false"))) {
+		//	warns.add(new FlyBookWarn());
+		//}
 	}
 
 	public void ClearWarn() {
@@ -79,7 +78,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		if (msgscount > 0) {
 			StringBuilder content = new StringBuilder();
 			content.append(String.format("最新报警累计:%s条,详情请查看日志系统,最后%s条报警内容如下:\n", msgscount,
-				WarnProperties.Default().getBsfHealthWarnCacheCount()));
+				WarnProperties.Default().getCacheCount()));
 			allmsgs.forEach(c -> {
 				if (c.getWarnType().getLevel() > (temp.getWarnType()).getLevel()) {
 					temp.setWarnType(c.getWarnType());
@@ -113,9 +112,9 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			//加锁
 			messages.add(msg);
 			//清理多余
-			if (messages.size() > WarnProperties.Default().getBsfHealthWarnCacheCount()) {
+			if (messages.size() > WarnProperties.Default().getCacheCount()) {
 				for (int i = 0;
-					i < messages.size() - WarnProperties.Default().getBsfHealthWarnCacheCount();
+					i < messages.size() - WarnProperties.Default().getCacheCount();
 					i++) {
 					if (!messages.isEmpty()) {
 						messages.removeFirst();
@@ -156,13 +155,14 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			if (message != null && EnumWarnType.ERROR == message.getWarnType()) {
 				ExceptionUtils.reportException(message);
 			}
+			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 			for (AbstractWarn warn : warns) {
 				message.setTitle(String.format("[%s][%s][%s][%s]%s",
 					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 					RequestUtil.getIpAddress(),
-					PropertyUtil.getPropertyCache(HealthProperties.BsfEnv, ""),
+					PropertyUtil.getPropertyCache(coreProperties.getEnv().getName(), ""),
 					StringUtil.nullToEmpty(
-						PropertyUtil.getPropertyCache(HealthProperties.SpringApplictionName, "")),
+						PropertyUtil.getPropertyCache(CoreProperties.SpringApplicationName, "")),
 					StringUtil.nullToEmpty(message.getTitle())));
 				warn.notify(message);
 			}
@@ -177,7 +177,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	@Override
 	public void run(ApplicationArguments args) {
 		atomicChannel.getAndSet(true);
-		LogUtil.info(HealthProperties.Project, "开启消息通道");
+		LogUtil.info(StarterName.HEALTH_STARTER, "开启消息通道");
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			int hash = StringUtil.nullToEmpty(message).replaceAll("\\d+", "").hashCode();
 			/*超过1分钟清理*/
 			if (System.currentTimeMillis() - lastClearTime > TimeUnit.MINUTES.toMillis(
-				WarnProperties.Default().getBsfHealthWarnDuplicateTimeSpan())) {
+				WarnProperties.Default().getDuplicateTimeSpan())) {
 				cacheTag.clear();
 				lastClearTime = System.currentTimeMillis();
 			}
