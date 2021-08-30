@@ -78,7 +78,7 @@ public interface HttpClient extends Closeable {
 		//长连接保持时间 s
 		ConnectionTimeToLive(-1),
 		//重试次数 【常用】
-		RetryCount(-1);
+		RetryCount(3);
 
 		private Object defaultvalue;
 
@@ -141,7 +141,7 @@ public interface HttpClient extends Closeable {
 	/**
 	 * 请求参数
 	 */
-	public static class Params {
+	class Params {
 
 		private List<Header> headers;
 		private Map<String, Object> data;

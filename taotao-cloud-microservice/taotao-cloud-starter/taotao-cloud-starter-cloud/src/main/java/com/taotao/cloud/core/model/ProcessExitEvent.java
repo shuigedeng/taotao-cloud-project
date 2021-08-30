@@ -4,6 +4,8 @@ package com.taotao.cloud.core.model;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Callable.Action0;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.utils.PropertyUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -43,16 +45,16 @@ public class ProcessExitEvent {
 							}
 						};
 
-						if (a.asynch) {
+						if (a.async) {
 							new Thread(method::invoke).start();
 						} else {
 							method.invoke();
 						}
 					}
 				}
-				LogUtil.info(ProcessExitEvent.class, StarterName.CLOUD_STARTER, "应用已正常退出！");
+				LogUtil.info(ProcessExitEvent.class, PropertyUtil.getProperty(CoreProperties.SpringApplicationName), "应用已正常退出！");
 			} catch (Exception e) {
-				LogUtil.error(ProcessExitEvent.class, StarterName.CLOUD_STARTER, "进程关闭事件回调处理出错",
+				LogUtil.error(ProcessExitEvent.class, PropertyUtil.getProperty(CoreProperties.SpringApplicationName), "进程关闭事件回调处理出错",
 					e);
 			}
 		}));
@@ -68,15 +70,15 @@ public class ProcessExitEvent {
 		/**
 		 * 异步支持
 		 */
-		Boolean asynch;
+		Boolean async;
 
 		public ExitCallback() {
 		}
 
-		public ExitCallback(Action0 action0, Integer order, Boolean asynch) {
+		public ExitCallback(Action0 action0, Integer order, Boolean async) {
 			this.action0 = action0;
 			this.order = order;
-			this.asynch = asynch;
+			this.async = async;
 		}
 
 		public Action0 getAction0() {
@@ -95,12 +97,12 @@ public class ProcessExitEvent {
 			this.order = order;
 		}
 
-		public Boolean getAsynch() {
-			return asynch;
+		public Boolean getAsync() {
+			return async;
 		}
 
-		public void setAsynch(Boolean asynch) {
-			this.asynch = asynch;
+		public void setAsync(Boolean async) {
+			this.async = async;
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class HttpClientProperties {
 	/**
 	 * 总连接池大小
 	 */
-	private boolean maxTotal = (boolean) HttpClient.EnumHttpConnectParam.MaxTotal.getDefaultValue();
+	private int maxTotal = (int) HttpClient.EnumHttpConnectParam.MaxTotal.getDefaultValue();
 
 
 	/**
@@ -88,8 +88,7 @@ public class HttpClientProperties {
 					initMap.trySetDefaultParams(en, m.invoke(null));
 				}
 			} catch (Exception e) {
-				LogUtil.error(HttpClientProperties.class, StarterName.CLOUD_STARTER,
-					"httpclient toMap", e);
+
 			}
 		}
 		return initMap;
@@ -104,11 +103,11 @@ public class HttpClientProperties {
 		this.tcpNoDelay = tcpNoDelay;
 	}
 
-	public boolean isMaxTotal() {
+	public int getMaxTotal() {
 		return maxTotal;
 	}
 
-	public void setMaxTotal(boolean maxTotal) {
+	public void setMaxTotal(int maxTotal) {
 		this.maxTotal = maxTotal;
 	}
 

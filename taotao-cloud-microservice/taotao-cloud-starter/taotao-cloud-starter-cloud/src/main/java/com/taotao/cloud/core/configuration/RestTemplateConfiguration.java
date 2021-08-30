@@ -53,7 +53,7 @@ public class RestTemplateConfiguration implements InitializingBean {
 	 */
 	private static final int READ_TIMEOUT = 90 * 1000;
 
-	@Bean(initMethod = "close")
+	@Bean(destroyMethod = "close")
 	public DefaultHttpClient getDefaultHttpClient() {
 		if (DefaultHttpClient.DEFAULT == null || DefaultHttpClient.DEFAULT.isClose()) {
 			DefaultHttpClient.initDefault();

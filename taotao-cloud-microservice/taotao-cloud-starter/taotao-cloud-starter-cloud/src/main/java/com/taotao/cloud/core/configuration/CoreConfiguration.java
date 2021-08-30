@@ -54,8 +54,7 @@ public class CoreConfiguration implements InitializingBean {
 			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
 	}
 
-	@Bean(initMethod = "shutdown")
-	@Lazy
+	@Bean(destroyMethod = "shutdown")
 	public ThreadPool getSystemThreadPool() {
 		if (ThreadPool.DEFAULT == null || ThreadPool.DEFAULT.isShutdown()) {
 			ThreadPool.initSystem();
@@ -65,13 +64,11 @@ public class CoreConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean(ThreadPool.class)
-	@Lazy
 	public ThreadMonitor getSystemThreadPoolMonitor() {
 		return ThreadPool.DEFAULT.getThreadMonitor();
 	}
 
 	@Bean
-	@Lazy
 	public PropertyCache getPropertyCache() {
 		PropertyCache.DEFAULT.clear();
 		return PropertyCache.DEFAULT;

@@ -61,9 +61,7 @@ public class HttpClientManager {
 		DefaultHttpClient httpClient = pool.get(httpClientId);
 		if (httpClient != null) {
 			synchronized (lock) {
-				if (httpClient != null) {
-					pool.remove(httpClient);
-				}
+				pool.remove(httpClient);
 			}
 			httpClient.close();
 			return true;
