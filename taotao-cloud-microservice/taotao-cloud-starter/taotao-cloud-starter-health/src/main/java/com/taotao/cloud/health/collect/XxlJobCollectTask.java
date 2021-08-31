@@ -47,7 +47,7 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 
 		JobInfo data = new JobInfo();
 		Class<?> aClass = ReflectionUtil.classForName(
-			"com.xxl.job.core.handler.annotation.JobHandler");
+			"com.xxl.job.core.handler.annotation.XxlJob");
 		data.count = ContextUtil.getApplicationContext().getBeanNamesForAnnotation(
 			(Class<? extends Annotation>) aClass).length;
 

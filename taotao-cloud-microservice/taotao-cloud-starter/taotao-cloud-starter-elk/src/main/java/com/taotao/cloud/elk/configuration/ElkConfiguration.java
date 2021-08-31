@@ -50,8 +50,7 @@ public class ElkConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(
-			"[TAOTAO CLOUD][" + StarterName.TAOTAO_CLOUD_ELK_STARTER + "]" + "elk模块已启动");
+		LogUtil.started(ElkConfiguration.class,StarterName.ELK_STARTER);
 	}
 
 	@Resource

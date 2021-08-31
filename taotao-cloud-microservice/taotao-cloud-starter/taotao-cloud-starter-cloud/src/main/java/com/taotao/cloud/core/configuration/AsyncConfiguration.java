@@ -22,7 +22,6 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.thread.ThreadPool;
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
@@ -51,8 +50,7 @@ public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(AsyncConfiguration.class, StarterName.CLOUD_STARTER,
-			" AsyncConfiguration 模块已启动");
+		LogUtil.started(AsyncConfiguration.class, StarterName.CLOUD_STARTER);
 	}
 
 	//@Override
@@ -62,6 +60,8 @@ public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
 
 	@Bean
 	public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+		LogUtil.started(ThreadPoolTaskExecutor.class, StarterName.CLOUD_STARTER);
+
 		ThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
 		executor.setCorePoolSize(asyncProperties.getCorePoolSize());
 		executor.setMaxPoolSize(asyncProperties.getMaxPoolSiz());
@@ -143,7 +143,7 @@ public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
 		 */
 		private void showThreadPoolInfo(String method) {
 			ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-			LogUtil.info(AsyncConfiguration.class, StarterName.CLOUD_STARTER,
+			LogUtil.info(
 				"threadNamePrefix[{}], method[{}], taskCount[{}], completedTaskCount[{}], activeCount[{}], queueSize[{}]",
 				this.getThreadNamePrefix(),
 				method,

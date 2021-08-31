@@ -16,9 +16,12 @@
  */
 package com.taotao.cloud.oss.config;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.oss.controller.OssEndpoint;
 import com.taotao.cloud.oss.core.OssTemplate;
 import com.taotao.cloud.oss.props.OssProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,7 +38,12 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @since 1.0.0
  */
 @Configuration
-public class OssConfiguration {
+public class OssConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(OssConfiguration.class, StarterName.OSS_STARTER);
+	}
 
     @Autowired
     @SuppressWarnings("all")
@@ -49,18 +57,24 @@ public class OssConfiguration {
     @ConditionalOnMissingBean(OssTemplate.class)
     @ConditionalOnProperty(name = "oss.enable", havingValue = "true", matchIfMissing = true)
     public OssTemplate ossTemplate() {
+	    LogUtil.started(OssTemplate.class, StarterName.OSS_STARTER);
+
         return new OssTemplate(properties);
     }
 
     @Bean
     @ConditionalOnProperty(name = "oss.info", havingValue = "true")
     public OssEndpoint ossEndpoint(OssTemplate template) {
+	    LogUtil.started(OssEndpoint.class, StarterName.OSS_STARTER);
+
         return new OssEndpoint(template);
     }
 
     @Bean
     @RefreshScope
     public OssProperties ossProperties(){
+	    LogUtil.started(OssProperties.class, StarterName.OSS_STARTER);
+
         //ComponentConstant.OSS_DEFAULT
         return (OssProperties) redisTemplate.opsForValue().get("");
     }

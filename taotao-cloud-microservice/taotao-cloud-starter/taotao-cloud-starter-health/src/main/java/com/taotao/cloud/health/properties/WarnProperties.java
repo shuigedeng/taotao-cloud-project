@@ -17,7 +17,7 @@ public class WarnProperties {
 	/**
 	 * 报警是否开启
 	 */
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * 报警消息缓存数量

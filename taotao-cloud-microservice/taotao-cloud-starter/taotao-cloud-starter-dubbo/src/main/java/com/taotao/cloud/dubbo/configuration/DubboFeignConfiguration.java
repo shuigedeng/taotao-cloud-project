@@ -5,11 +5,14 @@ import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERT
 import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_PREFIX;
 import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import feign.Feign;
 import java.util.Set;
 import org.apache.dubbo.config.AbstractConfig;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignBuilder;
 import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignProviderBeanPostProcessor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
@@ -26,12 +29,19 @@ import org.springframework.core.env.Environment;
 @Configuration
 @ConditionalOnProperty(prefix = DUBBO_PREFIX, name = "enabled", matchIfMissing = true, havingValue = "true")
 @ConditionalOnClass(AbstractConfig.class)
-public class DubboFeignConfiguration {
+public class DubboFeignConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DubboFeignConfiguration.class, StarterName.DUBBO_STARTER);
+	}
 
     @ConditionalOnProperty(prefix = DUBBO_SCAN_PREFIX, name = BASE_PACKAGES_PROPERTY_NAME)
     @ConditionalOnClass(ConfigurationPropertySources.class)
     @Bean
     public DubboFeignProviderBeanPostProcessor dubboFeignProviderBeanPostProcessor(Environment environment) {
+	    LogUtil.started(DubboFeignProviderBeanPostProcessor.class, StarterName.DUBBO_STARTER);
+
         Set<String> packagesToScan = environment.getProperty(DUBBO_SCAN_PREFIX + BASE_PACKAGES_PROPERTY_NAME, Set.class, emptySet());
         return new DubboFeignProviderBeanPostProcessor(packagesToScan);
     }
@@ -39,6 +49,8 @@ public class DubboFeignConfiguration {
     @Primary
     @Bean
     public Feign.Builder feignDubboBuilder() {
+	    LogUtil.started(DubboFeignBuilder.class, StarterName.DUBBO_STARTER);
+
         return new DubboFeignBuilder();
     }
 }

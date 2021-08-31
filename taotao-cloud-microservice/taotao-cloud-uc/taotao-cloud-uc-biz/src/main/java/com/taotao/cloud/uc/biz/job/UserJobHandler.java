@@ -11,7 +11,6 @@ import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
-
 /**
  * <br>
  *

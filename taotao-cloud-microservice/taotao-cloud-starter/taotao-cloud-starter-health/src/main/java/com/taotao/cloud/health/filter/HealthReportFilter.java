@@ -23,18 +23,24 @@ import org.springframework.util.StringUtils;
  **/
 public class HealthReportFilter implements Filter {
 
+	private HealthCheckProvider healthProvider;
+
+	public HealthReportFilter(HealthCheckProvider healthProvider) {
+		this.healthProvider = healthProvider;
+	}
+
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 		FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		if (request.getRequestURI()
-			.equalsIgnoreCase(StringUtils.trimTrailingCharacter(request.getContextPath(),
-				'/') + "/taotao/cloud/health/")) {
+		String conetextPath = org.springframework.util.StringUtils.trimTrailingCharacter(
+			request.getContextPath(), '/');
+		String uri = request.getRequestURI();
+
+		if (uri.startsWith(conetextPath + "/taotao/cloud/health/report")) {
 			try {
-				HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class,
-					false);
 				String html;
 
 				if (Objects.nonNull(healthProvider)) {

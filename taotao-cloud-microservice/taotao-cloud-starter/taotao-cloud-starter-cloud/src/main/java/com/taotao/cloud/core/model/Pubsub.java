@@ -26,7 +26,7 @@ public class Pubsub {
 				try {
 					sub.getValue().action.invoke(data);
 				} catch (Exception e) {
-					LogUtil.error(Pubsub.class, StarterName.CLOUD_STARTER, "分发订阅失败", e);
+					LogUtil.error(e,"分发订阅失败");
 				}
 			}
 		}

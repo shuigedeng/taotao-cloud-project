@@ -99,8 +99,7 @@ public class PropertyUtil {
 				System.setProperty(key, propertyValue);
 				PropertyCache.DEFAULT.tryUpdateCache(key, propertyValue);
 
-				LogUtil.info(cls, module,
-					" set default init property key: {}, value: {}, message: {}",
+				LogUtil.info(" set default init property key: {}, value: {}, message: {}",
 					key, propertyValue, message);
 			}
 		} else {

@@ -13,7 +13,7 @@ public class PingProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.ping";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean isEnabled() {
 		return enabled;

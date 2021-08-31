@@ -44,11 +44,13 @@ public class CoreConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(CoreConfiguration.class, StarterName.CLOUD_STARTER, " CoreConfiguration 模块已启动");
+		LogUtil.started(CoreConfiguration.class, StarterName.CLOUD_STARTER);
 	}
 
 	@Bean(value = "meterRegistryCustomizer")
 	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
+		LogUtil.started(MeterRegistryCustomizer.class, StarterName.CLOUD_STARTER);
+
 		return meterRegistry -> meterRegistry
 			.config()
 			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
@@ -56,6 +58,8 @@ public class CoreConfiguration implements InitializingBean {
 
 	@Bean(destroyMethod = "shutdown")
 	public ThreadPool getSystemThreadPool() {
+		LogUtil.started(ThreadPool.class, StarterName.CLOUD_STARTER);
+
 		if (ThreadPool.DEFAULT == null || ThreadPool.DEFAULT.isShutdown()) {
 			ThreadPool.initSystem();
 		}
@@ -65,22 +69,30 @@ public class CoreConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnBean(ThreadPool.class)
 	public ThreadMonitor getSystemThreadPoolMonitor() {
+		LogUtil.started(ThreadMonitor.class, StarterName.CLOUD_STARTER);
+
 		return ThreadPool.DEFAULT.getThreadMonitor();
 	}
 
 	@Bean
 	public PropertyCache getPropertyCache() {
+		LogUtil.started(PropertyCache.class, StarterName.CLOUD_STARTER);
+
 		PropertyCache.DEFAULT.clear();
 		return PropertyCache.DEFAULT;
 	}
 
 	@Bean
 	public CoreApplicationRunner coreApplicationRunner() {
+		LogUtil.started(CoreApplicationRunner.class, StarterName.CLOUD_STARTER);
+
 		return new CoreApplicationRunner();
 	}
 
 	@Bean
 	public CoreCommandLineRunner coreCommandLineRunner() {
+		LogUtil.started(CoreCommandLineRunner.class, StarterName.CLOUD_STARTER);
+
 		return new CoreCommandLineRunner();
 	}
 }

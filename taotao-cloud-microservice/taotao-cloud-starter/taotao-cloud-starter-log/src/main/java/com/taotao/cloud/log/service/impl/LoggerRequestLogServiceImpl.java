@@ -30,6 +30,6 @@ public class LoggerRequestLogServiceImpl implements IRequestLogService {
 
 	@Override
 	public void save(RequestLog requestLog) {
-		LogUtil.info("本地日志记录成功：{0}", requestLog);
+		LogUtil.info("本地日志记录成功：{}", requestLog);
 	}
 }

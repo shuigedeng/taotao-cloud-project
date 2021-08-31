@@ -18,13 +18,17 @@ package com.taotao.cloud.sms.configuration;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.sms.properties.AliSmsProperties;
 import com.taotao.cloud.sms.properties.SmsProperties;
 import com.taotao.cloud.sms.service.SmsService;
 import com.taotao.cloud.sms.service.impl.AliSmsServiceImpl;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 短信配置
@@ -33,13 +37,21 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/8/25 09:19
  */
+@Configuration
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")
-public class SmsConfiguration {
+public class SmsConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(SmsConfiguration.class, StarterName.SMS_STARTER);
+	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "ALIYUN")
 	public IAcsClient iAcsClient(AliSmsProperties aliSmsProperties) {
+		LogUtil.started(IAcsClient.class, StarterName.SMS_STARTER);
+
 		DefaultProfile profile = DefaultProfile.getProfile(
 			aliSmsProperties.getRegionId(),
 			aliSmsProperties.getAccessKey(),
@@ -59,6 +71,8 @@ public class SmsConfiguration {
 	@Bean
 	@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "ALIYUN")
 	public SmsService aliSmsTemplate(AliSmsProperties smsProperties, IAcsClient iAcsClient) {
+		LogUtil.started(SmsService.class, StarterName.SMS_STARTER);
+
 		return new AliSmsServiceImpl(smsProperties, iAcsClient);
 	}
 }

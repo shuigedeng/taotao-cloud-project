@@ -1,5 +1,6 @@
 package com.taotao.cloud.disruptor.config;
 
+import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.disruptor.exception.EventHandleException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -139,7 +140,7 @@ public class Ini implements Map<String, Ini.Section> {
 	}
 
 	private static String cleanName(String sectionName) {
-		String name = StringUtils.trimToNull(sectionName);
+		String name = StringUtil.trimToNull(sectionName);
 		if (name == null) {
 			log.trace(
 				"Specified name was null or empty.  Defaulting to the default section (name = \"\")");
@@ -251,7 +252,7 @@ public class Ini implements Map<String, Ini.Section> {
 	private void addSection(String name, StringBuilder content) {
 		if (content.length() > 0) {
 			String contentString = content.toString();
-			String cleaned = StringUtils.trimToNull(contentString);
+			String cleaned = StringUtil.trimToNull(contentString);
 			if (cleaned != null) {
 				Section section = new Section(name, contentString);
 				if (!section.isEmpty()) {
@@ -275,7 +276,7 @@ public class Ini implements Map<String, Ini.Section> {
 		while (scanner.hasNextLine()) {
 
 			String rawLine = scanner.nextLine();
-			String line = StringUtils.trimToNull(rawLine);
+			String line = StringUtil.trimToNull(rawLine);
 
 			if (line == null || line.startsWith(COMMENT_POUND) || line.startsWith(
 				COMMENT_SEMICOLON)) {
@@ -307,12 +308,12 @@ public class Ini implements Map<String, Ini.Section> {
 	}
 
 	protected static boolean isSectionHeader(String line) {
-		String s = StringUtils.trimToNull(line);
+		String s = StringUtil.trimToNull(line);
 		return s != null && s.startsWith(SECTION_PREFIX) && s.endsWith(SECTION_SUFFIX);
 	}
 
 	protected static String getSectionName(String line) {
-		String s = StringUtils.trimToNull(line);
+		String s = StringUtil.trimToNull(line);
 		if (isSectionHeader(s)) {
 			return cleanName(s.substring(1, s.length() - 1));
 		}
@@ -416,7 +417,7 @@ public class Ini implements Map<String, Ini.Section> {
 			}
 			this.name = name;
 			Map<String, String> props;
-			if (StringUtils.isNotBlank(sectionContent)) {
+			if (!StringUtil.isEmpty(sectionContent)) {
 				props = toMapProps(sectionContent);
 			} else {
 				props = new LinkedHashMap<String, String>();
@@ -436,7 +437,7 @@ public class Ini implements Map<String, Ini.Section> {
 		//Protected to access in a test case - NOT considered part of Shiro's public API
 
 		protected static boolean isContinued(String line) {
-			if (StringUtils.isBlank(line)) {
+			if (!StringUtil.isEmpty(line)) {
 				return false;
 			}
 			int length = line.length();
@@ -463,7 +464,7 @@ public class Ini implements Map<String, Ini.Section> {
 
 		//Protected to access in a test case - NOT considered part of Shiro's public API
 		protected static String[] splitKeyValue(String keyValueLine) {
-			String line = StringUtils.trimToNull(keyValueLine);
+			String line = StringUtil.trimToNull(keyValueLine);
 			if (line == null) {
 				return null;
 			}
@@ -491,8 +492,8 @@ public class Ini implements Map<String, Ini.Section> {
 				}
 			}
 
-			String key = StringUtils.trimToNull(keyBuffer.toString());
-			String value = StringUtils.trimToNull(valueBuffer.toString());
+			String key = StringUtil.trimToNull(keyBuffer.toString());
+			String value = StringUtil.trimToNull(valueBuffer.toString());
 
 			if (key == null || value == null) {
 				String msg = "Line argument must contain a key and a value.  Only one string token was found.";
@@ -511,7 +512,7 @@ public class Ini implements Map<String, Ini.Section> {
 			StringBuilder lineBuffer = new StringBuilder();
 			Scanner scanner = new Scanner(content);
 			while (scanner.hasNextLine()) {
-				line = StringUtils.trimToNull(scanner.nextLine());
+				line = StringUtil.trimToNull(scanner.nextLine());
 				if (isContinued(line)) {
 					//strip off the last continuation backslash:
 					line = line.substring(0, line.length() - 1);

@@ -366,7 +366,7 @@ public class RequestUtil {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(ReflectionUtil.class, StarterName.CLOUD_STARTER, e);
+			LogUtil.error( e);
 		}
 		return "";
 	}
@@ -403,7 +403,7 @@ public class RequestUtil {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(ReflectionUtil.class, StarterName.CLOUD_STARTER, e);
+			LogUtil.error( e);
 		}
 		return "";
 	}
@@ -440,7 +440,7 @@ public class RequestUtil {
 				}
 			}
 		} catch (Exception e) {
-			LogUtil.error(ReflectionUtil.class, StarterName.CLOUD_STARTER, e);
+			LogUtil.error( e);
 		}
 		return "";
 	}

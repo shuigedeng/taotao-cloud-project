@@ -15,13 +15,16 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
-import javax.annotation.Resource;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * PrometheusConfiguration
@@ -30,10 +33,19 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/8/24 23:47
  */
-public class PrometheusConfiguration {
+@Configuration
+public class PrometheusConfiguration implements InitializingBean {
 
-	@Resource
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(PrometheusConfiguration.class, StarterName.PROMETHEUS_STARTER );
+	}
+
 	private PrometheusMeterRegistry prometheusMeterRegistry;
+
+	public PrometheusConfiguration(PrometheusMeterRegistry prometheusMeterRegistry) {
+		this.prometheusMeterRegistry = prometheusMeterRegistry;
+	}
 
 	/**
 	 * 用于统计请求总数 计数器可以用于记录只会增加不会减少的指标类型，比如记录应用请求的总量(http_requests_total)，
@@ -41,6 +53,8 @@ public class PrometheusConfiguration {
 	 */
 	@Bean
 	public Counter requestCounter() {
+		LogUtil.started(Counter.class, StarterName.WEB_STARTER);
+
 		return Counter.build()
 			.name("order_requests_total")
 			.help("请求总数")
@@ -54,6 +68,8 @@ public class PrometheusConfiguration {
 	 */
 	@Bean
 	public Gauge getInprogressRequests() {
+		LogUtil.started(Gauge.class, StarterName.WEB_STARTER);
+
 		return Gauge.build()
 			.name("io_namespace_http_inprogress_requests")
 			.labelNames("path", "method")
@@ -66,6 +82,8 @@ public class PrometheusConfiguration {
 	 */
 	@Bean
 	public Histogram getRequestLatencyHistogram() {
+		LogUtil.started(Histogram.class, StarterName.WEB_STARTER);
+
 		return Histogram.build()
 			.name("io_namespace_http_requests_latency_seconds_histogram")
 			.labelNames("path", "method", "code")
@@ -81,6 +99,8 @@ public class PrometheusConfiguration {
 	 */
 	@Bean
 	public Summary requestLatency() {
+		LogUtil.started(Summary.class, StarterName.WEB_STARTER);
+
 		return Summary.build()
 			.name("requestLatency")
 			.quantile(0.5, 0.05)

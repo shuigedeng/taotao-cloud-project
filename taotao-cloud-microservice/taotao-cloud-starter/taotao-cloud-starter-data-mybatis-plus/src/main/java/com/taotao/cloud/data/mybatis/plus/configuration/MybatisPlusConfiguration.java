@@ -69,6 +69,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
@@ -78,6 +79,7 @@ import org.springframework.context.annotation.Profile;
  * @version 1.0.0
  * @since 2020/5/2 11:20
  */
+@Configuration
 public class MybatisPlusConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
@@ -100,7 +102,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(MybatisPlusConfiguration.class, StarterName.MYBATIS_PLUS_STARTER, "模块已开启");
+		LogUtil.started(MybatisPlusConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	/**
@@ -108,6 +110,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlInjector sqlInjector() {
+		LogUtil.started(MateSqlInjector.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new MateSqlInjector();
 	}
 
@@ -118,6 +121,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 	@Profile({"local", "dev", "test"})
 	@ConditionalOnProperty(value = "mybatis-plus.sql-log.enable", matchIfMissing = true)
 	public SqlLogInterceptor sqlLogInterceptor() {
+		LogUtil.started(SqlLogInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new SqlLogInterceptor();
 	}
 
@@ -127,6 +131,8 @@ public class MybatisPlusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public MybatisPlusInterceptor mybatisPlusInterceptor() {
+		LogUtil.started(MybatisPlusInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
+
 		boolean enableTenant = tenantProperties.getEnabled();
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
@@ -168,6 +174,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
 	public MetaObjectHandler metaObjectHandler() {
+		LogUtil.started(MetaObjectHandler.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new DateMetaObjectHandler(autoFillProperties);
 	}
 
@@ -176,6 +183,7 @@ public class MybatisPlusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ConfigurationCustomizer configurationCustomizer() {
+		LogUtil.started(ConfigurationCustomizer.class, StarterName.MYBATIS_PLUS_STARTER);
 		return configuration -> {
 			configuration.setDefaultEnumTypeHandler(EnumTypeHandler.class);
 			// 关闭 mybatis 默认的日志

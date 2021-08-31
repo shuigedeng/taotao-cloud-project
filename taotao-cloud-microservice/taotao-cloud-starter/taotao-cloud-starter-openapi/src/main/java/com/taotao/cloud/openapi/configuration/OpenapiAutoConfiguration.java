@@ -41,6 +41,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 
@@ -51,6 +52,7 @@ import org.springframework.http.HttpHeaders;
  * @version 1.0.0
  * @since 2020/4/30 10:10
  */
+@Configuration
 public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean,
 	EnvironmentAware {
 
@@ -71,11 +73,13 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(OpenapiAutoConfiguration.class, StarterName.OPENAPI_STARTER, "模块已启动");
+		LogUtil.started(OpenapiAutoConfiguration.class, StarterName.OPENAPI_STARTER);
 	}
 
 	@Bean
 	public GroupedOpenApi groupedOpenApi() {
+		LogUtil.started(GroupedOpenApi.class, StarterName.OPENAPI_STARTER);
+
 		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 
 		return GroupedOpenApi
@@ -87,6 +91,8 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
+		LogUtil.started(OpenApiCustomiser.class, StarterName.OPENAPI_STARTER);
+
 		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 		String[] split = applicationName.split("-");
 		String name = split[split.length - 1];
@@ -111,6 +117,8 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenAPI openApi() {
+		LogUtil.started(OpenAPI.class, StarterName.OPENAPI_STARTER);
+
 		Components components = new Components();
 		// 添加auth认证header
 		components.addSecuritySchemes("token",

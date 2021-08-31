@@ -61,7 +61,7 @@ public class CompressUtil {
 		) {
 			zip(srcDir, outputStream);
 		} catch (Exception exp) {
-			LogUtil.error(CompressUtil.class, StarterName.COMMON_STARTER, exp);
+			LogUtil.error( exp);
 			throw new BaseException("压缩文件出错", exp);
 		}
 	}
@@ -157,7 +157,7 @@ public class CompressUtil {
 				}
 			}
 		} catch (Exception exp) {
-			LogUtil.error(CompressUtil.class, StarterName.COMMON_STARTER, exp);
+			LogUtil.error( exp);
 			throw new BaseException("解压文件出错", exp);
 		}
 	}

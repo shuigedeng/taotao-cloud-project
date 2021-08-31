@@ -18,8 +18,12 @@ package com.taotao.cloud.captcha.configuration;
 import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * CaptchaStorageAutoConfiguration
@@ -28,11 +32,19 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/8/24 16:38
  */
-public class CaptchaStorageAutoConfiguration {
+@Configuration
+public class CaptchaStorageAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(CaptchaStorageAutoConfiguration.class, StarterName.CAPTCHA_STARTER);
+	}
 
 	@Bean
 	@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 	public CaptchaCacheService captchaCacheService(CaptchaProperties captchaProperties) {
+		LogUtil.started(CaptchaCacheService.class, StarterName.CAPTCHA_STARTER);
+
 		return CaptchaServiceFactory.getCache(captchaProperties.getCacheType().name());
 	}
 }

@@ -13,7 +13,7 @@ public class DumpProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.dump";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean isEnabled() {
 		return enabled;

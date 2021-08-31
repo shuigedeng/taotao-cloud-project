@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
+@org.apache.dubbo.config.annotation.Service
 public class SysDeptServiceImpl implements ISysDeptService {
 
 	private final SysDeptRepository sysDeptRepository;

@@ -46,7 +46,7 @@ public class XssStringJsonSerializer extends JsonSerializer<String> {
 			String encodedValue = XssUtil.xssClean(value, null);
 			jsonGenerator.writeString(encodedValue);
 		} catch (Exception e) {
-			LogUtil.error("序列化失败:[{0}]", value, e);
+			LogUtil.error("序列化失败:[{}]", value, e);
 		}
 	}
 

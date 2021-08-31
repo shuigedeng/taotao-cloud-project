@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.abstracts;
 
 import com.alibaba.otter.canal.client.CanalConnector;
@@ -5,24 +20,22 @@ import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
 import com.taotao.cloud.canal.interfaces.CanalClient;
 import com.taotao.cloud.canal.interfaces.TransponderFactory;
-import com.taotao.cloud.canal.transfer.DefaultMessageTransponder;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import org.apache.commons.lang.StringUtils;
-
+import com.taotao.cloud.canal.transfer.DefaultMessageTransponder;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Canal 客户端抽象类
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 15:02
- * @Modified_By 阿导 2018/5/28 15:02
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 21:27
  */
 public abstract class AbstractCanalClient implements CanalClient {
 
@@ -34,41 +47,22 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * canal 配置
 	 */
-	private CanalProperties canalProperties;
+	private final CanalProperties canalProperties;
 
 	/**
 	 * 转换工厂类
 	 */
 	protected final TransponderFactory factory;
 
-	/**
-	 * 构造方法，初始化 canal 的配置以及转换信息的工厂实例
-	 *
-	 * @param canalProperties
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:04
-	 * @CopyRight 万物皆导
-	 */
 	protected AbstractCanalClient(CanalProperties canalProperties) {
 		//参数校验
 		Objects.requireNonNull(canalProperties, "canalConfig 不能为空!");
 		Objects.requireNonNull(canalProperties, "transponderFactory 不能为空!");
 		//初始化配置
 		this.canalProperties = canalProperties;
-		this.factory = (connector, config,listeners, annoListeners) -> new DefaultMessageTransponder(connector, config, listeners, annoListeners);
-		;
+		this.factory = DefaultMessageTransponder::new;
 	}
 
-	/**
-	 * 别拦我，我想开启 canal 客户端
-	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:05
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	public void start() {
 		//可能有多个客户端
@@ -77,38 +71,33 @@ public abstract class AbstractCanalClient implements CanalClient {
 		for (Map.Entry<String, CanalProperties.Instance> instanceEntry : instanceMap.entrySet()) {
 			process(processInstanceEntry(instanceEntry), instanceEntry);
 		}
-
 	}
 
 	/**
 	 * 初始化 canal 连接
 	 *
-	 * @param connector
-	 * @param config
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:06
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:54
 	 */
-	protected abstract void process(CanalConnector connector, Map.Entry<String, CanalProperties.Instance> config);
+	protected abstract void process(CanalConnector connector,
+		Map.Entry<String, CanalProperties.Instance> config);
 
 	/**
 	 * 处理 canal 连接实例
 	 *
-	 * @param instanceEntry
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:11
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:54
 	 */
-	private CanalConnector processInstanceEntry(Map.Entry<String, CanalProperties.Instance> instanceEntry) {
+	private CanalConnector processInstanceEntry(
+		Map.Entry<String, CanalProperties.Instance> instanceEntry) {
 		//获取配置
 		CanalProperties.Instance instance = instanceEntry.getValue();
+
 		//声明连接
 		CanalConnector connector;
+
 		//是否是集群模式
 		if (instance.isClusterEnabled()) {
-
 			//zookeeper 连接集合
 			List<SocketAddress> addresses = new ArrayList<>();
 			for (String s : instance.getZookeeperAddress()) {
@@ -121,11 +110,15 @@ public abstract class AbstractCanalClient implements CanalClient {
 			}
 
 			//若集群的话，使用 newClusterConnector 方法初始化
-			connector = CanalConnectors.newClusterConnector(addresses, instanceEntry.getKey(), instance.getUserName(), instance.getPassword());
+			connector = CanalConnectors.newClusterConnector(addresses, instanceEntry.getKey(),
+				instance.getUserName(), instance.getPassword());
 		} else {
 			//若不是集群的话，使用 newSingleConnector 初始化
-			connector = CanalConnectors.newSingleConnector(new InetSocketAddress(instance.getHost(), instance.getPort()), instanceEntry.getKey(), instance.getUserName(), instance.getPassword());
+			connector = CanalConnectors.newSingleConnector(
+				new InetSocketAddress(instance.getHost(), instance.getPort()),
+				instanceEntry.getKey(), instance.getUserName(), instance.getPassword());
 		}
+
 		//canal 连接
 		connector.connect();
 		if (!StringUtils.isEmpty(instance.getFilter())) {
@@ -138,6 +131,7 @@ public abstract class AbstractCanalClient implements CanalClient {
 
 		//canal 连接反转
 		connector.rollback();
+
 		//返回 canal 连接
 		return connector;
 	}
@@ -146,17 +140,14 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 获取 canal 配置
 	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:09
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:55
 	 */
 	protected Map<String, CanalProperties.Instance> getConfig() {
 		//canal 配置
 		CanalProperties config = canalProperties;
 		Map<String, CanalProperties.Instance> instanceMap;
-		if (config != null && (instanceMap = config.getInstances()) != null && !instanceMap.isEmpty()) {
+		if ((instanceMap = config.getInstances()) != null && !instanceMap.isEmpty()) {
 			//返回配置实例
 			return config.getInstances();
 		} else {
@@ -164,29 +155,11 @@ public abstract class AbstractCanalClient implements CanalClient {
 		}
 	}
 
-	/**
-	 * 停止 canal 客户端
-	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:08
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	public void stop() {
 		setRunning(false);
 	}
 
-	/**
-	 * 返回 canal 客户端的状态
-	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:08
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	public boolean isRunning() {
 		return running;
@@ -195,11 +168,8 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 设置 canal 客户端状态
 	 *
-	 * @param running
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:07
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:55
 	 */
 	private void setRunning(boolean running) {
 		this.running = running;

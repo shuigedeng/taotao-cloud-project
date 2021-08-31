@@ -1,7 +1,6 @@
 package com.taotao.cloud.core.db;
 
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
@@ -235,7 +234,7 @@ public final class DbConn implements AutoCloseable {
 			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 
 			if (coreProperties.isPrintSqlError() && !StringUtil.isEmpty(sql)) {
-				LogUtil.error(this.getClass(), StarterName.CLOUD_STARTER, "错误sql:" + sql);
+				LogUtil.error("错误sql:" + sql);
 			}
 		}
 	}

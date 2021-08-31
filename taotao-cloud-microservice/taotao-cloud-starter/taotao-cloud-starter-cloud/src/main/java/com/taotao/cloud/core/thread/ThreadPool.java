@@ -1,7 +1,6 @@
 package com.taotao.cloud.core.thread;
 
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -55,7 +54,8 @@ public class ThreadPool {
 	public ThreadPool(String name, int threadPoolMinSize, int threadPoolMaxSize) {
 		this.name = name;
 
-		ThreadPoolTaskExecutor threadPoolTaskExecutor = ContextUtil.getBean(ThreadPoolTaskExecutor.class, true);
+		ThreadPoolTaskExecutor threadPoolTaskExecutor = ContextUtil.getBean(
+			ThreadPoolTaskExecutor.class, true);
 		if (Objects.isNull(threadPoolTaskExecutor)) {
 			threadPoolExecutor = new ThreadPoolExecutor(
 				threadPoolMinSize,
@@ -75,9 +75,9 @@ public class ThreadPool {
 		if (checkHealth
 			&& threadPoolExecutor.getMaximumPoolSize() <= threadPoolExecutor.getPoolSize()
 			&& threadPoolExecutor.getQueue().size() > 0) {
-			LogUtil.warn(ThreadPool.class, StarterName.CLOUD_STARTER,
-				"线程池已满,任务开始出现排队,taotao.cloud.core.threadpool.threadPoolMaxSiz,当前:"
-					+ threadPoolExecutor.getMaximumPoolSize());
+			LogUtil.warn(
+				"线程池已满,任务开始出现排队,taotao.cloud.core.threadpool.threadPoolMaxSiz,当前: {}"
+				, threadPoolExecutor.getMaximumPoolSize());
 		}
 	}
 
@@ -105,8 +105,7 @@ public class ThreadPool {
 			try {
 				DEFAULT.shutdown();
 			} catch (Exception e) {
-				LogUtil.error(ThreadPool.class, StarterName.CLOUD_STARTER, "关闭SystemThreadPool时出错",
-					e);
+				LogUtil.error(e, "关闭SystemThreadPool时出错");
 			}
 		}, Integer.MAX_VALUE, false);
 	}
@@ -167,8 +166,7 @@ public class ThreadPool {
 				try {
 					latch.await();
 				} catch (InterruptedException exp) {
-					LogUtil.error(ThreadPool.class, StarterName.CLOUD_STARTER,
-						"parallelFor 任务计数异常", exp);
+					LogUtil.error(exp, "parallelFor 任务计数异常");
 				}
 
 				for (Future<?> f : result) {
@@ -236,8 +234,7 @@ public class ThreadPool {
 				try {
 					latch.await();
 				} catch (InterruptedException exp) {
-					LogUtil.error(ThreadPool.class, StarterName.CLOUD_STARTER,
-						"parallelFor 任务计数异常", exp);
+					LogUtil.error(exp, "parallelFor 任务计数异常");
 				}
 				if (!exceptionRef.isNull()) {
 					throw new BaseException("parallelFor 并行执行出错", exceptionRef.getData());
@@ -282,8 +279,7 @@ public class ThreadPool {
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(DefaultThreadPoolUncaughtExceptionHandler.class,
-					StarterName.CLOUD_STARTER, "【警告】TheadPool 未捕获错误", e);
+				LogUtil.error(e, "[警告] TheadPool 未捕获错误");
 			}
 
 			if (lastUncaughtExceptionHandler != null) {

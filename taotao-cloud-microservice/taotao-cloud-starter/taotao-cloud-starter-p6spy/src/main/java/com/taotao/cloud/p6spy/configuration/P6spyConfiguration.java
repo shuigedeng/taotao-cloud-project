@@ -18,9 +18,12 @@ package com.taotao.cloud.p6spy.configuration;
 import com.p6spy.engine.spy.P6ModuleManager;
 import com.p6spy.engine.spy.P6SpyDriver;
 import com.p6spy.engine.spy.P6SpyOptions;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.p6spy.properties.P6spyProperties;
 import java.lang.reflect.Field;
 import java.util.Map;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -38,7 +41,12 @@ import org.springframework.core.env.Environment;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)
 @ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-public class P6spyConfiguration implements ApplicationRunner {
+public class P6spyConfiguration implements ApplicationRunner , InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(P6spyConfiguration.class, StarterName.P6SPY_STARTER);
+	}
 
 	private final Environment environment;
 

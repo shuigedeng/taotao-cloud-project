@@ -15,8 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.config;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.support.client.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.client.DingerHttpTemplate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +32,18 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(DingerHttpClientConfig.class)
-public class AutoBeanConfiguration {
+public class AutoBeanConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(AutoBeanConfiguration.class, StarterName.DINGTALK_STARTER);
+	}
+
 
 	@Bean
 	public DingerHttpClient dingerHttpClient() {
+		LogUtil.started(DingerHttpClient.class, StarterName.DINGTALK_STARTER);
+
 		return new DingerHttpTemplate();
 	}
 }

@@ -26,13 +26,12 @@ import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 
 /**
@@ -42,29 +41,39 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @version 1.0.0
  * @since 2020/4/30 10:21
  */
+@Configuration
 public class RequestLogConfiguration implements InitializingBean {
-
-	@Resource
-	private RequestLogProperties requestLogProperties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(RequestLogConfiguration.class, StarterName.LOG_STARTER, "模块已启动");
+		LogUtil.started(RequestLogConfiguration.class, StarterName.LOG_STARTER);
+	}
+
+	private final RequestLogProperties requestLogProperties;
+
+	public RequestLogConfiguration(RequestLogProperties requestLogProperties) {
+		this.requestLogProperties = requestLogProperties;
 	}
 
 	@Bean
 	public RequestLogListener sysLogListener() {
+		LogUtil.started(RequestLogListener.class, StarterName.LOG_STARTER);
+
 		return new RequestLogListener();
 	}
 
 	@Bean
 	public RequestLogAspect sysLogAspect(ApplicationEventPublisher publisher) {
+		LogUtil.started(RequestLogAspect.class, StarterName.LOG_STARTER);
+
 		return new RequestLogAspect(requestLogProperties, publisher);
 	}
 
 	@Bean
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "logger", matchIfMissing = true)
 	public LoggerRequestLogServiceImpl loggerSysLogService() {
+		LogUtil.started(LoggerRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+
 		if (determineLogType()) {
 			if (determineLogType("logger")) {
 				return new LoggerRequestLogServiceImpl();
@@ -78,6 +87,8 @@ public class RequestLogConfiguration implements InitializingBean {
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "redis")
 	@ConditionalOnBean(value = {RedisRepository.class})
 	public RedisRequestLogServiceImpl redisSysLogService() {
+		LogUtil.started(RedisRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+
 		if (determineLogType()) {
 			if (determineLogType("redis")) {
 				return new RedisRequestLogServiceImpl();
@@ -90,9 +101,12 @@ public class RequestLogConfiguration implements InitializingBean {
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "kafka")
 	@ConditionalOnClass({KafkaTemplate.class})
 	public KafkaRequestLogServiceImpl kafkaSysLogService() {
+		LogUtil.started(KafkaRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+
 		if (determineLogType()) {
 			if (determineLogType("kafka")) {
-				return new KafkaRequestLogServiceImpl(PropertyUtil.getProperty(CoreProperties.SpringApplicationName));
+				return new KafkaRequestLogServiceImpl(
+					PropertyUtil.getProperty(CoreProperties.SpringApplicationName));
 			}
 		}
 		return null;

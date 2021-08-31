@@ -13,7 +13,7 @@ public class ReportProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.report";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean isEnabled() {
 		return enabled;

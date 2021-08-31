@@ -1,5 +1,7 @@
 package com.taotao.cloud.disruptor;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.event.factory.DisruptorBindEventFactory;
 import com.taotao.cloud.disruptor.event.handler.DisruptorEventDispatcher;
@@ -8,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -29,7 +32,12 @@ import com.lmax.disruptor.dsl.Disruptor;
 @ConditionalOnClass({ Disruptor.class })
 @ConditionalOnProperty(prefix = DisruptorProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ DisruptorProperties.class })
-public class RingBufferAutoConfiguration implements ApplicationContextAware {
+public class RingBufferAutoConfiguration implements ApplicationContextAware , InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(RingBufferAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
+	}
 
 	private ApplicationContext applicationContext;
 	
@@ -41,12 +49,16 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware {
 	@Bean
 	@ConditionalOnMissingBean
 	public WaitStrategy waitStrategy() {
+		LogUtil.started(WaitStrategy.class, StarterName.DISRUPTOR_STARTER);
+
 		return WaitStrategys.YIELDING_WAIT;
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventFactory<DisruptorEvent> eventFactory() {
+		LogUtil.started(EventFactory.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorBindEventFactory();
 	}
 	
@@ -75,6 +87,8 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware {
 			EventFactory<DisruptorEvent> eventFactory,
 			@Autowired(required = false) DisruptorEventDispatcher preEventHandler,
 			@Autowired(required = false) DisruptorEventDispatcher postEventHandler) {
+		LogUtil.started(RingBuffer.class, StarterName.DISRUPTOR_STARTER);
+
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
 		// 创建线程池
 		ExecutorService executor = Executors.newFixedThreadPool(properties.getRingThreadNumbers());

@@ -17,7 +17,9 @@ package com.taotao.cloud.redis.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.Maps;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
@@ -31,6 +33,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -45,9 +48,15 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */
+@Configuration
 @EnableCaching
 @ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "enabled", havingValue = "true")
 public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(TaoTaoCloudCacheAutoConfiguration.class, StarterName.REDIS_STARTER);
+	}
 
 	private final CustomCacheProperties cacheProperties;
 
@@ -56,16 +65,13 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 		this.cacheProperties = cacheProperties;
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-
-	}
-
 	/**
 	 * key 的生成
 	 */
 	@Bean
 	public KeyGenerator keyGenerator() {
+		LogUtil.started(KeyGenerator.class, StarterName.REDIS_STARTER);
+
 		return (target, method, objects) -> {
 			StringBuilder sb = new StringBuilder();
 			sb.append(target.getClass().getName());
@@ -85,6 +91,8 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 	@Primary
 	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "REDIS")
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+		LogUtil.started(CacheManager.class, StarterName.REDIS_STARTER);
+
 		RedisCacheConfiguration defConfig = getDefConf();
 		defConfig.entryTtl(cacheProperties.getDef().getTimeToLive());
 
@@ -146,6 +154,8 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 	@Bean("caffeineCacheManager")
 	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "CAFFEINE")
 	public CacheManager caffeineCacheManager() {
+		LogUtil.started(CaffeineCacheManager.class, StarterName.REDIS_STARTER);
+
 		CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 
 		Caffeine caffeine = Caffeine

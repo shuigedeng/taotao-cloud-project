@@ -31,7 +31,7 @@ public class TenantConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(TenantConfiguration.class, StarterName.MYBATIS_PLUS_STARTER, "模块已开启");
+		LogUtil.started(TenantConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	private final TenantProperties tenantProperties;
@@ -46,6 +46,7 @@ public class TenantConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlParserFilter sqlParserFilter() {
+		LogUtil.started(ISqlParserFilter.class, StarterName.MYBATIS_PLUS_STARTER);
 		return metaObject -> {
 			MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
 			return tenantProperties.getIgnoreSqlList().stream().anyMatch(
@@ -60,6 +61,7 @@ public class TenantConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
+		LogUtil.started(TenantLineInnerInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new TenantLineInnerInterceptor(new TenantLineHandler() {
 			/**
 			 * 获取租户ID

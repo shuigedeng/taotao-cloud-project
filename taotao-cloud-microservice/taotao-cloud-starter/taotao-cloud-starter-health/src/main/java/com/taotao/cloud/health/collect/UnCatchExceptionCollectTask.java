@@ -22,9 +22,7 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	public UnCatchExceptionCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
-	}
 
-	public UnCatchExceptionCollectTask() {
 		//注入异常处理
 		UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
 		if (!(handler instanceof DefaultUncaughtExceptionHandler)) {
@@ -78,8 +76,7 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 					this.unCatchExceptionCheckTask.lastException = e;
 					AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "未捕获错误",
 						ExceptionUtil.trace2String(e));
-					LogUtil.error(UnCatchExceptionCollectTask.class, StarterName.HEALTH_STARTER, e,
-						"未捕获错误");
+					LogUtil.error( e, "未捕获错误");
 				}
 			} catch (Exception e2) {
 

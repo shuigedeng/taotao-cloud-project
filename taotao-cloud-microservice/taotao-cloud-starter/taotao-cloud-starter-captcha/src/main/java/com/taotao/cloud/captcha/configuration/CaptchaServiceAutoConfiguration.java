@@ -21,12 +21,17 @@ import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.configuration.CoreConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -40,12 +45,21 @@ import org.springframework.util.FileCopyUtils;
  * @version 1.0.0
  * @since 2021/8/24 16:38
  */
-public class CaptchaServiceAutoConfiguration {
+@Configuration
+public class CaptchaServiceAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(CaptchaServiceAutoConfiguration.class, StarterName.CAPTCHA_STARTER);
+	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 	public CaptchaService captchaService(CaptchaProperties prop) {
+		LogUtil.started(CaptchaService.class, StarterName.CAPTCHA_STARTER);
+
+
 		Properties config = new Properties();
 
 		config.put(Const.CAPTCHA_CACHETYPE, prop.getCacheType().name());

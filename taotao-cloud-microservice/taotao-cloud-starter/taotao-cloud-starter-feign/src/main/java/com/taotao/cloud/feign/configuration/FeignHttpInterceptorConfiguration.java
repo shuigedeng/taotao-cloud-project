@@ -17,7 +17,9 @@ package com.taotao.cloud.feign.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
+import com.taotao.cloud.common.utils.LogUtil;
 import feign.RequestInterceptor;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -26,7 +28,9 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -38,7 +42,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @version 1.0.0
  * @since 2020/4/5 13:33
  */
-public class FeignHttpInterceptorConfiguration {
+@Configuration
+public class FeignHttpInterceptorConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(FeignHttpInterceptorConfiguration.class, StarterName.FEIGN_STARTER);
+	}
 
 	protected List<String> requestHeaders = new ArrayList<>();
 
@@ -55,6 +65,8 @@ public class FeignHttpInterceptorConfiguration {
 	 */
 	@Bean
 	public RequestInterceptor httpFeignInterceptor() {
+		LogUtil.started(RequestInterceptor.class, StarterName.FEIGN_STARTER);
+
 		return template -> {
 			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 			if (requestAttributes != null) {

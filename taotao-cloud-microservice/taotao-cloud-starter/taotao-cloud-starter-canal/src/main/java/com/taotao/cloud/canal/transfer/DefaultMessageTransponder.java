@@ -1,9 +1,24 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.transfer;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.annotation.ListenPoint;
 import com.taotao.cloud.canal.abstracts.AbstractBasicMessageTransponder;
+import com.taotao.cloud.canal.annotation.ListenPoint;
 import com.taotao.cloud.canal.core.CanalMsg;
 import com.taotao.cloud.canal.core.ListenerPoint;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
@@ -16,15 +31,13 @@ import java.util.function.Predicate;
 import org.springframework.util.StringUtils;
 
 /**
- * 默認的信息轉換器
+ * 默认信息转换器
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 17:21
- * @Modified_By 阿导 2018/5/28 17:21
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 21:30
  */
 public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
-
 
 	public DefaultMessageTransponder(CanalConnector connector,
 		Map.Entry<String, CanalProperties.Instance> config,
@@ -33,19 +46,6 @@ public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 		super(connector, config, listeners, annoListeners);
 	}
 
-
-	/**
-	 * 断言注解方式的监听过滤规则
-	 *
-	 * @param destination 指定
-	 * @param schemaName  数据库实例
-	 * @param tableName   表名称
-	 * @param eventType   事件类型
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:00
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	protected Predicate<Map.Entry<Method, ListenPoint>> getAnnotationFilter(String destination,
 		String schemaName, String tableName, CanalEntry.EventType eventType) {
@@ -56,12 +56,12 @@ public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 
 		//看看数据库实例名是否一样
 		Predicate<Map.Entry<Method, ListenPoint>> sf = e -> e.getValue().schema().length == 0
-			|| Arrays.stream(e.getValue().schema()).anyMatch(s -> s.equals(schemaName))
+			|| Arrays.asList(e.getValue().schema()).contains(schemaName)
 			|| schemaName == null;
 
 		//看看表名是否一样
 		Predicate<Map.Entry<Method, ListenPoint>> tf = e -> e.getValue().table().length == 0
-			|| Arrays.stream(e.getValue().table()).anyMatch(t -> t.equals(tableName))
+			|| Arrays.asList(e.getValue().table()).contains(tableName)
 			|| tableName == null;
 
 		//类型一致？
@@ -72,17 +72,6 @@ public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 		return df.and(sf).and(tf).and(ef);
 	}
 
-	/**
-	 * 获取处理的参数
-	 *
-	 * @param method    监听的方法
-	 * @param canalMsg  事件节点
-	 * @param rowChange 詳細參數
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 17:18
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	protected Object[] getInvokeArgs(Method method, CanalMsg canalMsg,
 		CanalEntry.RowChange rowChange) {
@@ -92,16 +81,6 @@ public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 			.toArray();
 	}
 
-
-	/**
-	 * 忽略实体类的类型
-	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 17:15
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	protected List<CanalEntry.EntryType> getIgnoreEntryTypes() {
 		return Arrays.asList(CanalEntry.EntryType.TRANSACTIONBEGIN,

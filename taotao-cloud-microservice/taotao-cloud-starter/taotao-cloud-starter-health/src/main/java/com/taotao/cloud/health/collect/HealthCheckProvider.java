@@ -32,16 +32,16 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.properties = properties;
 
 		registerCollectTask(new CpuCollectTask(properties));
-		registerCollectTask(new IOCollectTask(properties));
+		//registerCollectTask(new IOCollectTask(properties));
 		registerCollectTask(new MemeryCollectTask(properties));
 		registerCollectTask(new ThreadCollectTask(properties));
-		registerCollectTask(new UnCatchExceptionCollectTask());
+		registerCollectTask(new UnCatchExceptionCollectTask(properties));
 		registerCollectTask(new ThreadPoolSystemCollectTask(properties));
 		//registerCollectTask(new BsfEurekaCollectTask());
 		registerCollectTask(new MybatisCollectTask(properties));
 		registerCollectTask(new DataSourceCollectTask(properties));
 		registerCollectTask(new TomcatCollectTask(properties));
-		registerCollectTask(new JedisCollectTask(properties));
+		//registerCollectTask(new JedisCollectTask(properties));
 		registerCollectTask(new NetworkCollectTask(properties));
 		registerCollectTask(new XxlJobCollectTask(properties));
 		//registerCollectTask(new FileCollectTask());

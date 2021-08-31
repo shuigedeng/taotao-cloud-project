@@ -27,6 +27,8 @@ public class StarterName {
 	private StarterName() {
 	}
 
+	public static final String STARTED = "started";
+
 	public static final String CANAL_STARTER = "taotao-cloud-starter-canal";
 	public static final String CAPTCHA_STARTER = "taotao-cloud-starter-captcha";
 	public static final String CLOUD_STARTER = "taotao-cloud-starter-cloud";

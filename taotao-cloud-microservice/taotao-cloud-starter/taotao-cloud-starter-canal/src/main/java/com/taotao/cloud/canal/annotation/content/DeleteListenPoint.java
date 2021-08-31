@@ -1,60 +1,58 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.annotation.content;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.taotao.cloud.canal.annotation.ListenPoint;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
-
-import java.lang.annotation.*;
 
 /**
  * 删除操作监听器
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 17:23
- * @Modified_By 阿导 2018/5/28 17:23
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 22:00
  */
-
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @ListenPoint(eventType = CanalEntry.EventType.DELETE)
 public @interface DeleteListenPoint {
 
-    /**
-     * canal 指令
-     * default for all
-     *
-     * @return canal destination
-     * @author 阿导
-     * @time 2018/5/28 15:49
-     * @CopyRight 万物皆导
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String destination() default "";
+	/**
+	 * canal 指令 default for all
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String destination() default "";
 
+	/**
+	 * 数据库实例
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String[] schema() default {};
 
-    /**
-     * 数据库实例
-     *
-     * @return canal destination
-     * @author 阿导
-     * @time 2018/5/28 15:49
-     * @CopyRight 万物皆导
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String[] schema() default {};
-
-    /**
-     * 监听的表
-     * default for all
-     *
-     * @return canal destination
-     * @author 阿导
-     * @time 2018/5/28 15:50
-     * @CopyRight 万物皆导
-     */
-    @AliasFor(annotation = ListenPoint.class)
-    String[] table() default {};
+	/**
+	 * 监听的表 default for all
+	 */
+	@AliasFor(annotation = ListenPoint.class)
+	String[] table() default {};
 
 }

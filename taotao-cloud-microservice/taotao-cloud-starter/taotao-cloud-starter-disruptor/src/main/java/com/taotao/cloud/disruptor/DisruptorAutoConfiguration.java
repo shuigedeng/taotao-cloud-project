@@ -8,6 +8,8 @@ import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.disruptor.annotation.EventRule;
 import com.taotao.cloud.disruptor.config.EventHandlerDefinition;
 import com.taotao.cloud.disruptor.config.Ini;
@@ -40,6 +42,7 @@ import java.util.concurrent.ThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -58,7 +61,12 @@ import org.springframework.util.ObjectUtils;
 @ConditionalOnClass({Disruptor.class})
 @ConditionalOnProperty(prefix = DisruptorProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({DisruptorProperties.class})
-public class DisruptorAutoConfiguration implements ApplicationContextAware {
+public class DisruptorAutoConfiguration implements ApplicationContextAware , InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DisruptorAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
+	}
 
 	private static final Logger LOG = LoggerFactory.getLogger(DisruptorAutoConfiguration.class);
 	private ApplicationContext applicationContext;
@@ -76,18 +84,24 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 	@Bean
 	@ConditionalOnMissingBean
 	public WaitStrategy waitStrategy() {
+		LogUtil.started(WaitStrategy.class, StarterName.DISRUPTOR_STARTER);
+
 		return WaitStrategys.YIELDING_WAIT;
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public ThreadFactory threadFactory() {
+		LogUtil.started(DisruptorEventThreadFactory.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorEventThreadFactory();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventFactory<DisruptorEvent> eventFactory() {
+		LogUtil.started(DisruptorBindEventFactory.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorBindEventFactory();
 	}
 
@@ -96,6 +110,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 	 */
 	@Bean("disruptorHandlers")
 	public Map<String, DisruptorHandler<DisruptorEvent>> disruptorHandlers() {
+		LogUtil.started(DisruptorEvent.class, StarterName.DISRUPTOR_STARTER);
 
 		Map<String, DisruptorHandler<DisruptorEvent>> disruptorPreHandlers = new LinkedHashMap<String, DisruptorHandler<DisruptorEvent>>();
 
@@ -114,7 +129,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 					entry.getKey(), EventRule.class);
 				if (annotationType == null) {
 					// 注解为空，则打印错误信息
-					LOG.error("Not Found AnnotationType {0} on Bean {1} Whith Name {2}",
+					LOG.error("Not Found AnnotationType {} on Bean {} Whith Name {}",
 						EventRule.class, entry.getValue().getClass(), entry.getKey());
 				} else {
 					handlerChainDefinitionMap.put(annotationType.value(), entry.getKey());
@@ -135,6 +150,8 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 	@Bean("disruptorEventHandlers")
 	public List<DisruptorEventDispatcher> disruptorEventHandlers(DisruptorProperties properties,
 		@Qualifier("disruptorHandlers") Map<String, DisruptorHandler<DisruptorEvent>> eventHandlers) {
+		LogUtil.started(DisruptorEventDispatcher.class, StarterName.DISRUPTOR_STARTER);
+
 		// 获取定义 拦截链规则
 		List<EventHandlerDefinition> handlerDefinitions = properties.getHandlerDefinitions();
 		// 拦截器集合
@@ -250,10 +267,10 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 		WaitStrategy waitStrategy,
 		ThreadFactory threadFactory,
 		EventFactory<DisruptorEvent> eventFactory,
-		@Qualifier("disruptorEventHandlers")
-			List<DisruptorEventDispatcher> disruptorEventHandlers) {
+		@Qualifier("disruptorEventHandlers") List<DisruptorEventDispatcher> disruptorEventHandlers) {
 
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
+		LogUtil.started(Disruptor.class, StarterName.DISRUPTOR_STARTER);
 
 		Disruptor<DisruptorEvent> disruptor = null;
 		if (properties.isMultiProducer()) {
@@ -301,23 +318,31 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> oneArgEventTranslator() {
+		LogUtil.started(EventTranslatorOneArg.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorEventOneArgTranslator();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorTwoArg<DisruptorEvent, String, String> twoArgEventTranslator() {
+		LogUtil.started(EventTranslatorTwoArg.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorEventTwoArgTranslator();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorThreeArg<DisruptorEvent, String, String, String> threeArgEventTranslator() {
+		LogUtil.started(EventTranslatorThreeArg.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorEventThreeArgTranslator();
 	}
 
 	@Bean
 	public DisruptorTemplate disruptorTemplate() {
+		LogUtil.started(DisruptorTemplate.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorTemplate();
 	}
 
@@ -325,6 +350,8 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 	public ApplicationListener<DisruptorApplicationEvent> disruptorEventListener(
 		Disruptor<DisruptorEvent> disruptor,
 		EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> oneArgEventTranslator) {
+		LogUtil.started(DisruptorApplicationEvent.class, StarterName.DISRUPTOR_STARTER);
+
 		return new ApplicationListener<DisruptorApplicationEvent>() {
 
 			@Override
@@ -338,6 +365,8 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware {
 
 	@Bean
 	public DisruptorEventAwareProcessor disruptorEventAwareProcessor() {
+		LogUtil.started(DisruptorEventAwareProcessor.class, StarterName.DISRUPTOR_STARTER);
+
 		return new DisruptorEventAwareProcessor();
 	}
 

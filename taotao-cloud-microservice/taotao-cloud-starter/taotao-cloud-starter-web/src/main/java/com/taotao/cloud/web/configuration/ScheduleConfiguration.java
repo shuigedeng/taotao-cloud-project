@@ -24,6 +24,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -37,6 +38,7 @@ import org.springframework.scheduling.support.CronTrigger;
  * @version 1.0.0
  * @since 2021/8/24 23:48
  */
+@Configuration
 @EnableScheduling
 public class ScheduleConfiguration implements SchedulingConfigurer {
 

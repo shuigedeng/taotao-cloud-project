@@ -20,6 +20,7 @@ import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,12 +31,12 @@ import org.springframework.web.client.RestTemplate;
  * @version 1.0.0
  * @since 2021/8/24 23:48
  */
+@Configuration
 public class RestTemplateConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(RestTemplateConfiguration.class, StarterName.CLOUD_STARTER,
-			" RestTemplateConfiguration 模块已启动");
+		LogUtil.started(RestTemplateConfiguration.class, StarterName.CLOUD_STARTER);
 	}
 
 	/**
@@ -55,6 +56,8 @@ public class RestTemplateConfiguration implements InitializingBean {
 
 	@Bean(destroyMethod = "close")
 	public DefaultHttpClient getDefaultHttpClient() {
+		LogUtil.started(DefaultHttpClient.class, StarterName.CLOUD_STARTER);
+
 		if (DefaultHttpClient.DEFAULT == null || DefaultHttpClient.DEFAULT.isClose()) {
 			DefaultHttpClient.initDefault();
 		}
@@ -63,12 +66,16 @@ public class RestTemplateConfiguration implements InitializingBean {
 
 	@Bean
 	public HttpClient httpClient(DefaultHttpClient defaultHttpClient) {
+		LogUtil.started(HttpClient.class, StarterName.CLOUD_STARTER);
+
 		return defaultHttpClient.getClient();
 	}
 
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate(HttpClient httpClient) {
+		LogUtil.started(RestTemplate.class, StarterName.CLOUD_STARTER);
+
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
 		factory.setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT);
 		factory.setConnectTimeout(CONNECT_TIMEOUT);

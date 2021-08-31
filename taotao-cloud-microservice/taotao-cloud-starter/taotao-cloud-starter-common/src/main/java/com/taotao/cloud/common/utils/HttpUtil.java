@@ -63,7 +63,7 @@ public class HttpUtil {
 				throw new Exception("连接失败");
 			}
 		} catch (Exception e) {
-			LogUtil.error(HttpUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error(e);
 		}
 		return null;
 	}
@@ -108,7 +108,7 @@ public class HttpUtil {
 
 			return bos.toString("utf-8");
 		} catch (Exception e) {
-			LogUtil.error(HttpUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error(e);
 		}
 		return null;
 	}

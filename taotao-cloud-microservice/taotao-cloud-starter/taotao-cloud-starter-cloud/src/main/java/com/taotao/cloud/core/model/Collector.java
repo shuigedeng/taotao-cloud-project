@@ -248,8 +248,7 @@ public class Collector {
 					lastMinTimeSpan = last.getTime();
 				}
 			} catch (Exception exp) {
-				LogUtil.error(Hook.class, StarterName.CLOUD_STARTER, "Collector hook 保存耗时统计出错",
-					exp);
+				LogUtil.error(exp, "Collector hook 保存耗时统计出错");
 			}
 		}
 
@@ -265,8 +264,7 @@ public class Collector {
 					lastMinTimeSpanPerMinute = last.getTime();
 				}
 			} catch (Exception exp) {
-				LogUtil.error(Hook.class, StarterName.CLOUD_STARTER, "Collector hook 保存耗时统计出错",
-					exp);
+				LogUtil.error(exp,"Collector hook 保存耗时统计出错");
 			}
 		}
 
@@ -498,7 +496,7 @@ public class Collector {
 				return false;
 			}
 			if (tagCache.size() > super.size()) {
-				LogUtil.info(SortList.class, StarterName.CLOUD_STARTER, "tag cache 缓存存在溢出风险");
+				LogUtil.info("tag cache 缓存存在溢出风险");
 			}
 			if (super.add(sortInfo)) {
 				tagCache.put(hash, sortInfo);
@@ -533,9 +531,7 @@ public class Collector {
 					this.remove(last);
 				}
 				if (count < -10) {
-					LogUtil.error(SortList.class, StarterName.CLOUD_STARTER,
-						"【严重bug】remove more,item:" + (last != null ? last.toString() : ""),
-						new Exception("长时间无法移除导致死循环"));
+					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString() : " 长时间无法移除导致死循环"));
 					break;
 				}
 			}

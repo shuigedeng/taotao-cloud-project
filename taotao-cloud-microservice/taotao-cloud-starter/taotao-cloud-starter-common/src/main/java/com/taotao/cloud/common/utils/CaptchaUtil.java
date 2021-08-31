@@ -42,7 +42,7 @@ public class CaptchaUtil {
 		try {
 			random = SecureRandom.getInstanceStrong();
 		} catch (NoSuchAlgorithmException e) {
-			LogUtil.error(CaptchaUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error( e);
 		}
 	}
 

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.core;
 
 import com.alibaba.otter.canal.client.CanalConnector;
@@ -6,12 +21,16 @@ import com.taotao.cloud.canal.annotation.ListenPoint;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.thread.ThreadPool.DefaultThreadPoolUncaughtExceptionHandler;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
@@ -19,19 +38,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
 /**
- * 通过线程池处理
+ * SimpleCanalClient
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 14:52
- * @Modified_By 阿导 2018/5/28 14:52
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 22:08
  */
 public class SimpleCanalClient extends AbstractCanalClient {
 
 	/**
 	 * 声明一个线程池
 	 */
-	private ThreadPoolExecutor executor;
+	private final ThreadPoolExecutor executor;
 
 	/**
 	 * 通过实现接口的监听器
@@ -43,22 +61,9 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	 */
 	private final List<ListenerPoint> annoListeners = new ArrayList<>();
 
-	/**
-	 * 日志记录
-	 */
-	private final static Logger logger = LoggerFactory.getLogger(SimpleCanalClient.class);
-
-	/**
-	 * 构造方法，进行一些基本信息初始化
-	 *
-	 * @param canalProperties
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:33
-	 * @CopyRight 万物皆导
-	 */
 	public SimpleCanalClient(CanalProperties canalProperties) {
 		super(canalProperties);
+
 		//这边上可能需要调整，紧跟德叔脚步走，默认核心线程数5个，最大线程数20个，
 		// 线程两分钟分钟不执行就。。。
 		executor = new ThreadPoolExecutor(
@@ -67,35 +72,37 @@ public class SimpleCanalClient extends AbstractCanalClient {
 			120L,
 			TimeUnit.SECONDS,
 			new SynchronousQueue<>(),
-			Executors.defaultThreadFactory());
+			new ThreadFactory() {
+				private final ThreadFactory factory = Executors.defaultThreadFactory();
+
+				@Override
+				public Thread newThread(Runnable r) {
+					Thread t = factory.newThread(r);
+					t.setName("taotao-cloud-canal-thread-" + t.getName());
+
+					UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
+					if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
+						t.setUncaughtExceptionHandler(
+							new DefaultThreadPoolUncaughtExceptionHandler(handler));
+					}
+
+					//后台线程模式
+					t.setDaemon(true);
+					return t;
+				}
+			});
 
 		//初始化监听器
 		initListeners();
 	}
 
-	/**
-	 * @param connector
-	 * @param config
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:01
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	protected void process(CanalConnector connector,
 		Map.Entry<String, CanalProperties.Instance> config) {
 		executor.submit(factory.newTransponder(connector, config, listeners, annoListeners));
 	}
 
-	/**
-	 * 关闭 canal 客户端
-	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 15:00
-	 * @CopyRight 万物皆导
-	 */
+
 	@Override
 	public void stop() {
 		//停止 canal 客户端
@@ -108,14 +115,11 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	/**
 	 * 初始化监听器
 	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:53
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 22:09
 	 */
 	private void initListeners() {
-		logger.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
+		LogUtil.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
 		//获取监听器
 		List<CanalEventListener> list = ContextUtil.getBeansOfType(CanalEventListener.class);
 		//若没有任何监听的，我也不知道引入这个 jar 干什么，直接返回吧
@@ -135,7 +139,6 @@ public class SimpleCanalClient extends AbstractCanalClient {
 				Method[] methods = target.getClass().getDeclaredMethods();
 				if (methods.length > 0) {
 					for (Method method : methods) {
-						//获取监听的节点,感谢 JKwangzhicheng 提出的 bug ，这边我查了一些资料，发现工具类用错了，AnnotatedElementUtils 支持子注解覆盖父注解的属性，而 AnnotationUtils 则不可以，大家今后可以通过不同的需求使用对应的工具类
 						ListenPoint lp = AnnotatedElementUtils.findMergedAnnotation(method,
 							ListenPoint.class);
 						if (lp != null) {
@@ -147,11 +150,11 @@ public class SimpleCanalClient extends AbstractCanalClient {
 		}
 
 		//初始化监听结束
-		logger.info("{}: 监听器初始化完成.", Thread.currentThread().getName());
+		LogUtil.info("{}: 监听器初始化完成.", Thread.currentThread().getName());
 
 		//整个项目上下文都没发现监听器。。。
-		if (logger.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
-			logger.warn("{}: 该项目中没有任何监听的目标! ", Thread.currentThread().getName());
+		if (LogUtil.isWarnEnabled() && listeners.isEmpty() && annoListeners.isEmpty()) {
+			LogUtil.warn("{}: 项目中没有任何监听的目标! ", Thread.currentThread().getName());
 		}
 	}
 }

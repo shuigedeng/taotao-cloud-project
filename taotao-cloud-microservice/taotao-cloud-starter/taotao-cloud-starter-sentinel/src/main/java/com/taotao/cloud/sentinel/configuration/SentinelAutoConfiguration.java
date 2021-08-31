@@ -22,12 +22,15 @@ import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.sentinel.model.SentinelFeign;
 import com.taotao.cloud.sentinel.properties.SentinelProperties;
 import feign.Feign;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -50,14 +53,20 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SentinelProperties.PREFIX, name = "enabled", havingValue = "true")
-public class SentinelAutoConfiguration {
+public class SentinelAutoConfiguration implements InitializingBean {
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(SentinelAutoConfiguration.class, StarterName.SENTINEL_STARTER);
+	}
 
 	@Bean
 	@Scope("prototype")
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(name = "feign.sentinel.enabled")
 	public Feign.Builder feignSentinelBuilder() {
+		LogUtil.started(Feign.Builder.class, StarterName.SENTINEL_STARTER);
+
 		return SentinelFeign.builder();
 	}
 
@@ -65,8 +74,10 @@ public class SentinelAutoConfiguration {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(HttpServletRequest.class)
 	public BlockExceptionHandler blockExceptionHandler() {
+		LogUtil.started(BlockExceptionHandler.class, StarterName.SENTINEL_STARTER);
+
 		return (request, response, e) -> {
-			LogUtil.error("WebmvcHandler sentinel 降级 资源名称{0}", e, e.getRule().getResource());
+			LogUtil.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
 			String errMsg = e.getMessage();
 			if (e instanceof FlowException) {
 				errMsg = "被限流了";
@@ -88,8 +99,10 @@ public class SentinelAutoConfiguration {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(ServerResponse.class)
 	public BlockRequestHandler blockRequestHandler() {
+		LogUtil.started(BlockRequestHandler.class, StarterName.SENTINEL_STARTER);
+
 		return (exchange, e) -> {
-			LogUtil.error("ServerResponse sentinel 降级 资源名称{0}",e, e.getCause());
+			LogUtil.error("ServerResponse sentinel 降级 资源名称{}",e, e.getCause());
 			return ServerResponse.status(HttpStatus.TOO_MANY_REQUESTS)
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(BodyInserters.fromValue(Result.fail(e.getMessage())));

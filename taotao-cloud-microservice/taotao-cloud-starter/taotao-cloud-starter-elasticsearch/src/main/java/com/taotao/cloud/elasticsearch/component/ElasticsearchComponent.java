@@ -46,7 +46,7 @@ public class ElasticsearchComponent implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(ElasticsearchComponent.class, StarterName.ELASTICSEARCH_STARTER, "模块已启动");
+		LogUtil.started(ElasticsearchComponent.class, StarterName.ELASTICSEARCH_STARTER);
 	}
 
 	@Bean

@@ -19,6 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  **/
 public class DumpFilter implements Filter {
 
+	private DumpProvider dumpProvider;
+
+	public DumpFilter(DumpProvider dumpProvider) {
+		this.dumpProvider = dumpProvider;
+	}
+
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 		FilterChain chain) throws IOException, ServletException {
@@ -29,8 +35,7 @@ public class DumpFilter implements Filter {
 			request.getContextPath(), '/');
 
 		String uri = request.getRequestURI();
-		if (uri.startsWith(conetextPath + "/taotao/cloud/health/dump/")) {
-			DumpProvider dumpProvider = ContextUtil.getBean(DumpProvider.class, false);
+		if (uri.startsWith(conetextPath + "/taotao/cloud/health/dump")) {
 			if (Objects.nonNull(dumpProvider)) {
 				if (uri.startsWith(conetextPath + "/taotao/cloud/health/dump/zip/")) {
 					dumpProvider.zip(request.getParameter("name"));

@@ -17,6 +17,8 @@ package com.taotao.cloud.web.configuration;
 
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.properties.DozerProperties;
 import java.io.IOException;
 import java.util.Collection;
@@ -25,10 +27,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Dozer配置
@@ -38,10 +42,17 @@ import org.springframework.context.annotation.Bean;
  * @see <a href="http://dozer.sourceforge.net/documentation/usage.html">http://www.jianshu.com/p/bf8f0e8aee23</a>
  * @since 2021/8/24 23:44
  */
+@Configuration
 @ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
 @ConditionalOnMissingBean(Mapper.class)
 @ConditionalOnProperty(prefix = DozerProperties.PREFIX, name = "enabled", havingValue = "true")
-public class DozerConfiguration {
+public class DozerConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DozerConfiguration.class, StarterName.WEB_STARTER);
+	}
+
 
 	private final DozerProperties properties;
 
@@ -51,11 +62,15 @@ public class DozerConfiguration {
 
 	@Bean
 	public DozerHelper getDozerUtil(Mapper mapper) {
+		LogUtil.started(DozerHelper.class, StarterName.WEB_STARTER);
+
 		return new DozerHelper(mapper);
 	}
 
 	@Bean
 	public DozerBeanMapperFactoryBean dozerMapper() throws IOException {
+		LogUtil.started(DozerBeanMapperFactoryBean.class, StarterName.WEB_STARTER);
+
 		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
 		// 官方这样子写，没法用 匹配符！
 		// factoryBean.setMappingFiles(properties.getMappingFiles());
@@ -66,8 +81,8 @@ public class DozerConfiguration {
 	/**
 	 * DozerHelper
 	 *
-	 * @version 1.0.0
 	 * @author shuigedeng
+	 * @version 1.0.0
 	 * @since 2021/8/24 23:45
 	 */
 	public static class DozerHelper {

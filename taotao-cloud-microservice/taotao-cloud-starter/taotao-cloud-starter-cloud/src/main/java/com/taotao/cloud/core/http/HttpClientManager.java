@@ -26,8 +26,7 @@ public class HttpClientManager {
 			try {
 				DEFAULT.closeAll();
 			} catch (Exception e) {
-				LogUtil.error(DefaultHttpClient.class, StarterName.CLOUD_STARTER, "关闭httpclient时出错",
-					e);
+				LogUtil.error(e,"关闭httpclient时出错");
 			}
 		}, Integer.MAX_VALUE - 1, false);
 	}

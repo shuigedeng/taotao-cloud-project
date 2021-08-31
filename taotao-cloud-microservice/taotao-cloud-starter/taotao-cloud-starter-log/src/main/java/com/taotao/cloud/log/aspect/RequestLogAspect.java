@@ -313,7 +313,7 @@ public class RequestLogAspect {
 			}
 			return annotation;
 		} catch (Exception e) {
-			LogUtil.error("获取 {0}.{1} 的 @RequestOperateLog 注解失败", e,
+			LogUtil.error("获取 {}.{} 的 @RequestOperateLog 注解失败", e,
 				point.getSignature().getDeclaringTypeName(),
 				point.getSignature().getName());
 			return null;

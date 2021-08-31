@@ -81,7 +81,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 
 	@Override
 	public void destroy(Properties config) {
-		LogUtil.info("start-clear-history-data-{0}", captchaType());
+		LogUtil.info("start-clear-history-data-{}", captchaType());
 	}
 
 	@Override

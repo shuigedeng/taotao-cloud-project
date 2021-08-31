@@ -106,10 +106,10 @@ public class IdempotentAspect extends BaseAspect {
 						if (Objects.isNull(result)) {
 							throw new IdempotentException("命中RID重复请求");
 						}
-						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{0}={1}", HEADER_RID_KEY, rid);
+						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
 					} else {
 						LogUtil.warn(
-							"msg1=header没有rid,防重复提交功能失效,,remoteHost={0}" + request.getRemoteHost());
+							"msg1=header没有rid,防重复提交功能失效,,remoteHost={}" + request.getRemoteHost());
 					}
 				} catch (Exception e) {
 					LogUtil.error("获取redis锁发生异常", e);
@@ -155,13 +155,13 @@ public class IdempotentAspect extends BaseAspect {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
 								LogUtil.error(
-									"msg1=不允许重复执行,,key={0},,targetName={1},,methodName={2}",
+									"不允许重复执行,,key={},,targetName={},,methodName={}",
 									perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 							//存储在当前线程
 							PER_FIX_KEY.set(perFix);
-							LogUtil.info("msg1=当前请求已成功锁定:{0}", perFix);
+							LogUtil.info("msg1=当前请求已成功锁定:{}", perFix);
 						} catch (Exception e) {
 							LogUtil.error("获取redis锁发生异常", e);
 							throw e;
@@ -189,7 +189,7 @@ public class IdempotentAspect extends BaseAspect {
 					if (StringUtils.isNotBlank(rid)) {
 						try {
 //							redisService.unLock(REDIS_KEY_PREFIX + rid);
-							LogUtil.info("msg1=当前请求已成功处理,,rid={0}", rid);
+							LogUtil.info("msg1=当前请求已成功处理,,rid={}", rid);
 						} catch (Exception e) {
 							LogUtil.error("释放redis锁异常", e);
 						}
@@ -204,7 +204,7 @@ public class IdempotentAspect extends BaseAspect {
 					if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(PER_FIX_KEY.get())) {
 						try {
 //							redisService.unLock(PER_FIX_KEY.get());
-							LogUtil.info("msg1=当前请求已成功释放,,key={0}", PER_FIX_KEY.get());
+							LogUtil.info("msg1=当前请求已成功释放,,key={}", PER_FIX_KEY.get());
 							PER_FIX_KEY.set(null);
 							PER_FIX_KEY.remove();
 						} catch (Exception e) {

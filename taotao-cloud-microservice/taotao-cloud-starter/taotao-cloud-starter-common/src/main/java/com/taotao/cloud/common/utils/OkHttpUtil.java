@@ -156,7 +156,7 @@ public class OkHttpUtil {
 						append("&");
 				}
 			} catch (Exception e) {
-				LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
+				LogUtil.error( e);
 			}
 			urlBuilder.deleteCharAt(urlBuilder.length() - 1);
 		}
@@ -219,7 +219,7 @@ public class OkHttpUtil {
 			assert response.body() != null;
 			return response.body().string();
 		} catch (IOException e) {
-			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error( e);
 			return "请求失败：" + e.getMessage();
 		}
 	}
@@ -247,7 +247,7 @@ public class OkHttpUtil {
 		try {
 			getSemaphoreInstance().acquire();
 		} catch (InterruptedException e) {
-			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error( e);
 		}
 		return buffer.toString();
 	}
@@ -286,7 +286,7 @@ public class OkHttpUtil {
 					request.addHeader(entry.getKey(), entry.getValue());
 				}
 			} catch (Exception e) {
-				LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
+				LogUtil.error( e);
 			}
 		}
 	}
@@ -304,7 +304,7 @@ public class OkHttpUtil {
 			sc.init(null, trustAllCerts, new SecureRandom());
 			ssfFactory = sc.getSocketFactory();
 		} catch (Exception e) {
-			LogUtil.error(OkHttpUtil.class, StarterName.COMMON_STARTER, e);
+			LogUtil.error( e);
 		}
 		return ssfFactory;
 	}

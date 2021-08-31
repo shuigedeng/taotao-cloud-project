@@ -45,9 +45,9 @@ public class RedisRequestLogServiceImpl implements IRequestLogService {
 			.format(Instant.now());
 		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(requestLog));
 		if (index > 0) {
-			LogUtil.info("redis远程日志记录成功：{0}", requestLog);
+			LogUtil.info("redis远程日志记录成功：{}", requestLog);
 		} else {
-			LogUtil.error("redis远程日志记录失败：{0}", requestLog);
+			LogUtil.error("redis远程日志记录失败：{}", requestLog);
 		}
 	}
 }

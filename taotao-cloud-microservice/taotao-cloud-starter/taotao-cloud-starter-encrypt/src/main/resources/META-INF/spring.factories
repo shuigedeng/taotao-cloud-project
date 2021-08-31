@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  vip.mate.core.encrypt.config.WebConfiguration
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#  vip.mate.core.encrypt.config.WebConfiguration

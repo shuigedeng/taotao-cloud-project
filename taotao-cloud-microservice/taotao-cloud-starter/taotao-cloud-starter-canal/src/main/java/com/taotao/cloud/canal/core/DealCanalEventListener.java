@@ -1,37 +1,40 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.core;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.taotao.cloud.canal.abstracts.option.AbstractDBOption;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
-import org.springframework.util.CollectionUtils;
-
 import java.util.List;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 处理 Canal 监听器
  *
- * @author 阿导
- * @CopyRight 万物皆导
- * @created 2018年05月28日 20:13:00
- * @Modified_By 阿导 2018/5/28 20:13
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 21:47
  */
-@SuppressWarnings("all")
 public class DealCanalEventListener implements CanalEventListener {
-	
+
 	/**
-	 * 頭結點
+	 * 头结点
 	 */
 	private AbstractDBOption header;
-	
-	/**
-	 * 默認構造方法，必須傳入鏈路
-	 *
-	 * @param dbOptions
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/30 17:46
-	 * @CopyRight 杭州弧途科技有限公司（青团社）
-	 */
+
 	public DealCanalEventListener(AbstractDBOption... dbOptions) {
 		AbstractDBOption tmp = null;
 		for (AbstractDBOption dbOption : dbOptions) {
@@ -42,9 +45,9 @@ public class DealCanalEventListener implements CanalEventListener {
 			}
 			tmp = dbOption;
 		}
-		
+
 	}
-	
+
 	public DealCanalEventListener(List<AbstractDBOption> dbOptions) {
 		if (CollectionUtils.isEmpty(dbOptions)) {
 			return;
@@ -59,23 +62,11 @@ public class DealCanalEventListener implements CanalEventListener {
 			tmp = dbOption;
 		}
 	}
-	
-	/**
-	 * 处理数据库的操作
-	 *
-	 * @param destination
-	 * @param schemaName
-	 * @param tableName
-	 * @param rowChange
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/29 09:43
-	 * @CopyRight 万物皆导
-	 */
+
 	@Override
-	public void onEvent(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
+	public void onEvent(String destination, String schemaName, String tableName,
+		CanalEntry.RowChange rowChange) {
 		this.header.doChain(destination, schemaName, tableName, rowChange);
 	}
-	
-	
+
 }

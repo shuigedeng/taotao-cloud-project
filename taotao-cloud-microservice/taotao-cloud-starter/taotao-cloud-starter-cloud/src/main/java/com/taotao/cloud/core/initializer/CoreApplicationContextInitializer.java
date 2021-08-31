@@ -27,13 +27,11 @@ import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.enums.EnvironmentEnum;
+import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import java.io.File;
@@ -58,10 +56,13 @@ import org.springframework.util.ReflectionUtils;
  * @since 2020/5/15 10:45
  */
 @Order(0)
-public class CoreApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class CoreApplicationContextInitializer implements
+	ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
+		LogUtil.started(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER);
+
 		if (context instanceof AnnotationConfigApplicationContext) {
 //			AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) context;
 //			annotationConfigApplicationContext.register(Config.class);
@@ -77,12 +78,15 @@ public class CoreApplicationContextInitializer implements ApplicationContextInit
 			 * @see LocalConfigInfoProcessor
 			 */
 			String userHome = environment.getProperty("user.home");
-			setDefaultProperty("JM.LOG.PATH", userHome + File.separator + "logs", "[taotao cloud 环境变量]");
-			setDefaultProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs", "[taotao cloud 环境变量]");
+			setDefaultProperty("JM.LOG.PATH", userHome + File.separator + "logs",
+				"[taotao cloud 环境变量]");
+			setDefaultProperty("JM.SNAPSHOT.PATH", userHome + File.separator + "logs",
+				"[taotao cloud 环境变量]");
 			setDefaultProperty("nacos.logging.default.config.enabled", "false",
 				"[taotao cloud 环境变量]");
 
-			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled", Boolean.class);
+			Boolean isEnabled = environment.getProperty(CoreProperties.PREFIX + ".enabled",
+				Boolean.class);
 			if (Boolean.FALSE.equals(isEnabled)) {
 				return;
 			}
@@ -94,9 +98,10 @@ public class CoreApplicationContextInitializer implements ApplicationContextInit
 			if (!StringUtil.isEmpty(applicationName) && !StringUtil.isEmpty(env)) {
 				optimize(environment);
 
-				setDefaultProperty(CoreProperties.SpringApplicationName, applicationName, "[taotao cloud 环境变量]");
+				setDefaultProperty(CoreProperties.SpringApplicationName, applicationName,
+					"[taotao cloud 环境变量]");
 
-				LogUtil.info(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,CoreProperties.PREFIX + ".dev" + " =============== " + env);
+				LogUtil.info(CoreProperties.PREFIX + ".dev" + " =============== " + env);
 
 				for (EnvironmentEnum e2 : EnvironmentEnum.values()) {
 					if (e2.toString().equalsIgnoreCase(env)) {
@@ -204,8 +209,8 @@ public class CoreApplicationContextInitializer implements ApplicationContextInit
 	void refreshContext() {
 		if (ContextUtil.getApplicationContext() != null) {
 			if (ContextUtil.mainClass == null) {
-				LogUtil.error(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,PropertyUtil.getProperty(SpringApplicationName) + " 重启失败",
-					new BaseException("检测到重启上下文事件,因无法找到启动类，重启失败!!!"));
+				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
+					+ " 检测到重启上下文事件,因无法找到启动类，重启失败!!!");
 				return;
 			}
 
@@ -224,9 +229,8 @@ public class CoreApplicationContextInitializer implements ApplicationContextInit
 					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
 						.invoke(null, new Object[]{args.getSourceArgs()});
 				} catch (Exception exp) {
-					LogUtil.error(CoreApplicationContextInitializer.class, StarterName.CLOUD_STARTER,PropertyUtil.getProperty(SpringApplicationName) + "重启失败",
-						new BaseException(
-							"根据启动类" + ContextUtil.mainClass.getName() + "动态启动main失败"));
+					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "根据启动类"
+						+ ContextUtil.mainClass.getName() + "动态启动main失败");
 				}
 			});
 			thread.setDaemon(false);

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.abstracts;
 
 import com.alibaba.otter.canal.client.CanalConnector;
@@ -9,56 +24,30 @@ import com.taotao.cloud.canal.core.ListenerPoint;
 import com.taotao.cloud.canal.exception.CanalClientException;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.properties.CanalProperties;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 /**
  * 消息处理转换类
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 16:27
- * @Modified_By 阿导 2018/5/28 16:27
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 21:36
  */
 public abstract class AbstractBasicMessageTransponder extends AbstractMessageTransponder {
 
-	/**
-	 * 日志记录
-	 */
-	private final static Logger logger = LoggerFactory.getLogger(
-		AbstractBasicMessageTransponder.class);
-
-	/**
-	 * @param connector     canal 连接器
-	 * @param config        canal 连接配置
-	 * @param listeners     实现接口层的 canal 监听器
-	 * @param annoListeners 通过注解方式的 canal 监听器
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:27
-	 * @CopyRight 万物皆导
-	 */
 	public AbstractBasicMessageTransponder(CanalConnector connector,
-		Map.Entry<String, CanalProperties.Instance> config, List<CanalEventListener> listeners,
+		Map.Entry<String, CanalProperties.Instance> config,
+		List<CanalEventListener> listeners,
 		List<ListenerPoint> annoListeners) {
 		super(connector, config, listeners, annoListeners);
 	}
 
-	/**
-	 * 处理消息
-	 *
-	 * @param message
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:50
-	 * @CopyRight 万物皆导
-	 */
 	@Override
 	protected void distributeEvent(Message message) {
 		//获取操作实体
@@ -67,10 +56,11 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 		for (CanalEntry.Entry entry : entries) {
 			//忽略实体类的类型
 			List<CanalEntry.EntryType> ignoreEntryTypes = getIgnoreEntryTypes();
-			if (ignoreEntryTypes != null
-				&& ignoreEntryTypes.stream().anyMatch(t -> entry.getEntryType() == t)) {
+			if (ignoreEntryTypes != null && ignoreEntryTypes.stream()
+				.anyMatch(t -> entry.getEntryType() == t)) {
 				continue;
 			}
+
 			//canal 改变信息
 			CanalEntry.RowChange rowChange;
 			try {
@@ -85,6 +75,7 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 			distributeByAnnotation(destination,
 				entry.getHeader().getSchemaName(),
 				entry.getHeader().getTableName(), rowChange);
+
 			distributeByImpl(destination,
 				entry.getHeader().getSchemaName(),
 				entry.getHeader().getTableName(), rowChange);
@@ -99,10 +90,8 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param schemaName  实例名称
 	 * @param tableName   表名称
 	 * @param rowChange   数据
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:35
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:39
 	 */
 	protected void distributeByAnnotation(String destination,
 		String schemaName,
@@ -110,30 +99,31 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 		CanalEntry.RowChange rowChange) {
 
 		//对注解的监听器进行事件委托
-		if (!CollectionUtils.isEmpty(annoListeners)) {
-			annoListeners.forEach(point -> point
-				.getInvokeMap()
-				.entrySet()
-				.stream()
-				.filter(getAnnotationFilter(destination, schemaName, tableName,
-					rowChange.getEventType()))
-				.forEach(entry -> {
-					Method method = entry.getKey();
-					method.setAccessible(true);
-					try {
-						CanalMsg canalMsg = new CanalMsg();
-						canalMsg.setDestination(destination);
-						canalMsg.setSchemaName(schemaName);
-						canalMsg.setTableName(tableName);
+		if (!CollectionUtils.isEmpty(annotationListeners)) {
+			annotationListeners
+				.forEach(point -> point
+					.getInvokeMap()
+					.entrySet()
+					.stream()
+					.filter(getAnnotationFilter(destination, schemaName, tableName,
+						rowChange.getEventType()))
+					.forEach(entry -> {
+						Method method = entry.getKey();
+						method.setAccessible(true);
+						try {
+							CanalMsg canalMsg = new CanalMsg();
+							canalMsg.setDestination(destination);
+							canalMsg.setSchemaName(schemaName);
+							canalMsg.setTableName(tableName);
 
-						Object[] args = getInvokeArgs(method, canalMsg, rowChange);
-						method.invoke(point.getTarget(), args);
-					} catch (Exception e) {
-						logger.error("{}: 委托 canal 监听器发生错误! 错误类:{}, 方法名:{}",
-							Thread.currentThread().getName(),
-							point.getTarget().getClass().getName(), method.getName());
-					}
-				}));
+							Object[] args = getInvokeArgs(method, canalMsg, rowChange);
+							method.invoke(point.getTarget(), args);
+						} catch (Exception e) {
+							LogUtil.error("{}: 委托 canal 监听器发生错误! 错误类:{}, 方法名:{}",
+								Thread.currentThread().getName(),
+								point.getTarget().getClass().getName(), method.getName());
+						}
+					}));
 		}
 	}
 
@@ -145,17 +135,15 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param schemaName  库实例
 	 * @param tableName   表名
 	 * @param rowChange   參數
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:46
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:39
 	 */
 	protected void distributeByImpl(String destination,
 		String schemaName,
 		String tableName,
 		CanalEntry.RowChange rowChange) {
-		if (listeners != null) {
-			for (CanalEventListener listener : listeners) {
+		if (implListeners != null) {
+			for (CanalEventListener listener : implListeners) {
 				listener.onEvent(destination, schemaName, tableName, rowChange);
 			}
 		}
@@ -169,10 +157,8 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param schemaName  数据库实例
 	 * @param tableName   表名称
 	 * @param eventType   事件类型
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:00
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:38
 	 */
 	protected abstract Predicate<Map.Entry<Method, ListenPoint>> getAnnotationFilter(
 		String destination, String schemaName, String tableName, CanalEntry.EventType eventType);
@@ -184,23 +170,18 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param method    委托处理的方法
 	 * @param canalMsg  其他信息
 	 * @param rowChange 处理的数据
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:30
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:38
 	 */
 	protected abstract Object[] getInvokeArgs(Method method, CanalMsg canalMsg,
 		CanalEntry.RowChange rowChange);
 
 
 	/**
-	 * 返回一个空集合
+	 * 忽略实体类的类型
 	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 16:29
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:37
 	 */
 	protected List<CanalEntry.EntryType> getIgnoreEntryTypes() {
 		return Collections.emptyList();

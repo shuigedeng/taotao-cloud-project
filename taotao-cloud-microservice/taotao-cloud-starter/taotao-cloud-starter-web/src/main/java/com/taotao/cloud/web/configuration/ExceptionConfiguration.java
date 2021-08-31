@@ -16,6 +16,7 @@
 package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -36,8 +37,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
@@ -64,13 +67,19 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @author shuigedeng
  * @since 2021/8/24 23:46
  */
+@Configuration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
 	RestController.class, Controller.class})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
 //@RestControllerAdvice
-public class ExceptionConfiguration {
+public class ExceptionConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(ExceptionConfiguration.class, StarterName.WEB_STARTER);
+	}
 
 	@ExceptionHandler({BaseException.class})
 	public Result<String> baseException(NativeWebRequest req, BaseException e) {
@@ -292,7 +301,7 @@ public class ExceptionConfiguration {
 	}
 
 	private void printLog(NativeWebRequest req, Exception e) {
-		LogUtil.error("【全局异常拦截】{0}: 请求路径: {1}, 请求参数: {2}, 异常信息 {3} ", e,
+		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 			e.getClass().getName(), uri(req), query(req), e.getMessage());
 //		LogUtil.error(e.getMessage(), e);
 	}

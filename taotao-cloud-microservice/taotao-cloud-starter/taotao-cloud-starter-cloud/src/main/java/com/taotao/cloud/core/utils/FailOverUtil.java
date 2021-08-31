@@ -17,7 +17,6 @@ package com.taotao.cloud.core.utils;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.concurrent.Callable;
@@ -55,19 +54,18 @@ public class FailOverUtil {
 				} catch (Exception e) {
 					result.throwable = e;
 					if (i > 0) {
-						LogUtil.error(FailOverUtil.class, StarterName.CLOUD_STARTER,
-							name.concat("-失败-补偿次数 {}") + " error info {}", i,
+						LogUtil.error(name.concat("-失败-补偿次数 {}") + " error info {}", i,
 							ExceptionUtil.getFullStackTrace(e));
 					} else {
-						LogUtil.error(FailOverUtil.class, StarterName.CLOUD_STARTER,
+						LogUtil.error(
 							ExceptionUtil.getFullStackTrace(e));
 					}
 				}
 				times = i + 1;
 			}
 			if (result.success && times > 0) {
-				LogUtil.info(FailOverUtil.class, StarterName.CLOUD_STARTER,
-					PropertyUtil.getProperty(SpringApplicationName) + " {} 补偿成功, 补偿次数：{}", name,
+				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + " {} 补偿成功, 补偿次数：{}",
+					name,
 					times);
 			}
 		} finally {

@@ -57,7 +57,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 	@Override
 	public void destroy(Properties config) {
-		LogUtil.info("start-clear-history-data-{0}", captchaType());
+		LogUtil.info("start-clear-history-data-}", captchaType());
 	}
 
 	@Override
@@ -274,7 +274,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
 			CaptchaServiceFactory.getCache(cacheType)
 				.set(codeKey, JsonUtil.toJSONString(point), EXPIRESIN_SECONDS);
-			LogUtil.debug("token：{0},point:{1}", dataVO.getToken(), JsonUtil.toJSONString(point));
+			LogUtil.debug("token：{},point:{}", dataVO.getToken(), JsonUtil.toJSONString(point));
 			return dataVO;
 		} catch (Exception e) {
 			e.printStackTrace();

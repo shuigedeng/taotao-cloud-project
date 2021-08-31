@@ -26,7 +26,7 @@ public class PingFilter implements Filter {
 			request.getContextPath(), '/');
 
 		String uri = request.getRequestURI();
-		if (uri.startsWith(conetextPath + "/taotao/cloud/health/ping/")) {
+		if (uri.startsWith(conetextPath + "/taotao/cloud/health/ping")) {
 			response.setHeader("Content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().append("ok");

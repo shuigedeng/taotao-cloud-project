@@ -150,4 +150,8 @@ public class StringUtil {
 	public static boolean hasText(String str) {
 		return hasText((CharSequence) str);
 	}
+
+	public static String trimToNull(String nextLine) {
+		return  nextLine.trim();
+	}
 }

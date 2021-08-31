@@ -16,7 +16,9 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
  * @version: 2019-08-03 21:17
  **/
 public class JedisCollectTask extends AbstractCollectTask {
+
 	private CollectTaskProperties properties;
+
 	public JedisCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
 	}

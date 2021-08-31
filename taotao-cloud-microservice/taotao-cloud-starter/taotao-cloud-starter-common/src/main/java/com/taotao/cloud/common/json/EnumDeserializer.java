@@ -68,10 +68,8 @@ public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 			}
 			return Enum.valueOf(propertyType, val);
 		} catch (Exception e) {
-			LogUtil.error(EnumDeserializer.class, StarterName.COMMON_STARTER, e,"解析枚举失败");
+			LogUtil.error( e,"解析枚举失败");
 			return null;
 		}
 	}
-
-
 }

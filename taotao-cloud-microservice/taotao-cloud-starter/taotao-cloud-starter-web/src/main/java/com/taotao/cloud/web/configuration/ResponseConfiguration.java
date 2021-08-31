@@ -15,11 +15,15 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import javax.servlet.Servlet;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -35,12 +39,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @version 1.0.0
  * @since 2021/8/24 23:47
  */
+@Configuration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 //@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
 //	RestController.class, Controller.class})
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
-public class ResponseConfiguration implements ResponseBodyAdvice {
+public class ResponseConfiguration implements ResponseBodyAdvice , InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(ResponseConfiguration.class, StarterName.WEB_STARTER);
+	}
 
 	@Override
 	public boolean supports(MethodParameter methodParameter, Class aClass) {

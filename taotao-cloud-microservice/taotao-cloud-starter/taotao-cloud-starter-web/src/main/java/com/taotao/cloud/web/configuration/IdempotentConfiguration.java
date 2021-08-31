@@ -15,12 +15,16 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.web.idempotent.IdempotentAspect;
 import com.taotao.cloud.web.properties.IdempotentProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * IdempotentConfiguration
@@ -29,11 +33,20 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/8/24 23:47
  */
-public class IdempotentConfiguration {
+@Configuration
+public class IdempotentConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(IdempotentConfiguration.class, StarterName.WEB_STARTER);
+	}
+
 	@Bean
 	@ConditionalOnBean({DistributedLock.class})
 	@ConditionalOnProperty(prefix = IdempotentProperties.PREFIX, name = "enabled", havingValue = "true")
 	public IdempotentAspect idempotentAspect(DistributedLock distributedLock) {
+		LogUtil.started(IdempotentAspect.class, StarterName.WEB_STARTER);
+
 		return new IdempotentAspect(distributedLock);
 	}
 }

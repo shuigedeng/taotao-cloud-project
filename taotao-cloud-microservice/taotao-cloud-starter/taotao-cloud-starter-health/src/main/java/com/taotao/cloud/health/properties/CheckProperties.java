@@ -14,7 +14,7 @@ public class CheckProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.check";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean isEnabled() {
 		return enabled;

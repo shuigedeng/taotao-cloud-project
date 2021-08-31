@@ -71,7 +71,7 @@ public class ImageUtils {
 			slidingBlockCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.PIC_CLICK.getCodeValue(),
 			picClickCacheMap.keySet().toArray(new String[0]));
-		LogUtil.info("初始化底图:{0}", JsonUtil.toJSONString(fileNameMap));
+		LogUtil.info("初始化底图:{}", JsonUtil.toJSONString(fileNameMap));
 	}
 
 	public static void cacheBootImage(Map<String, String> originalMap,
@@ -85,7 +85,7 @@ public class ImageUtils {
 			slidingBlockCacheMap.keySet().toArray(new String[0]));
 		fileNameMap.put(CaptchaBaseMapEnum.PIC_CLICK.getCodeValue(),
 			picClickCacheMap.keySet().toArray(new String[0]));
-		LogUtil.info("自定义resource底图:{0}", JsonUtil.toJSONString(fileNameMap));
+		LogUtil.info("自定义resource底图:{}", JsonUtil.toJSONString(fileNameMap));
 	}
 
 

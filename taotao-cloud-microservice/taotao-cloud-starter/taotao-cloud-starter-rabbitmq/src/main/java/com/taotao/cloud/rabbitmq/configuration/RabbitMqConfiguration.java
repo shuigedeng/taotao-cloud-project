@@ -15,11 +15,14 @@
  */
 package com.taotao.cloud.rabbitmq.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.rabbitmq.producer.FastBuildRabbitMqProducer;
 import com.taotao.cloud.rabbitmq.properties.RabbitMQProperties;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -36,16 +39,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(FastBuildRabbitMqProducer.class)
 @ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", name = "enabled", havingValue = "true")
-public class RabbitMqConfiguration {
+public class RabbitMqConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(RabbitMqConfiguration.class, StarterName.RABBITMQ_STARTER);
+	}
 
 	@Bean
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+		LogUtil.started(RabbitTemplate.class, StarterName.RABBITMQ_STARTER);
 		return new RabbitTemplate(connectionFactory);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public ConnectionFactory connectionFactory(RabbitMQProperties rabbitMqProperties) {
+		LogUtil.started(ConnectionFactory.class, StarterName.RABBITMQ_STARTER);
 		CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 		connectionFactory.setAddresses(rabbitMqProperties.getAddresses());
 		connectionFactory.setUsername(rabbitMqProperties.getUsername());
@@ -58,6 +68,7 @@ public class RabbitMqConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public FastBuildRabbitMqProducer fastRabbitMqProducer(ConnectionFactory connectionFactory) {
+		LogUtil.started(FastBuildRabbitMqProducer.class, StarterName.RABBITMQ_STARTER);
 		return new FastBuildRabbitMqProducer(connectionFactory);
 	}
 }

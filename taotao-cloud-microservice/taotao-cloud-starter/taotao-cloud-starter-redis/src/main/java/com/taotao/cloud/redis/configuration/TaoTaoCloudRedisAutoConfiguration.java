@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -44,6 +45,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @version 1.0.0
  * @since 2020/4/30 10:13
  */
+@Configuration
 public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 
 	private final RedissonClient redissonClient;
@@ -54,27 +56,32 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(TaoTaoCloudRedisAutoConfiguration.class, StarterName.REDIS_STARTER, "模块已启动");
+		LogUtil.started(TaoTaoCloudRedisAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean
 	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
+		LogUtil.started(RedisConnectionFactory.class, StarterName.REDIS_STARTER);
 		return new RedissonConnectionFactory(redisson);
 	}
 
 	@Bean
 	public RedisSerializer<String> redisKeySerializer() {
+		LogUtil.started(RedisSerializer.class, StarterName.REDIS_STARTER);
 		return RedisSerializer.string();
 	}
 
 	@Bean
 	public RedisSerializer<Object> redisValueSerializer() {
+		LogUtil.started(RedisSerializer.class, StarterName.REDIS_STARTER);
 		return RedisSerializer.json();
 	}
 
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+		LogUtil.started(RedisTemplate.class, StarterName.REDIS_STARTER);
+
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(factory);
 
@@ -97,11 +104,15 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate) {
+		LogUtil.started(RedisRepository.class, StarterName.REDIS_STARTER);
+
 		return new RedisRepository(redisTemplate, false);
 	}
 
 	@Bean("stringRedisTemplate")
 	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
+		LogUtil.started(StringRedisTemplate.class, StarterName.REDIS_STARTER);
+
 		StringRedisTemplate template = new StringRedisTemplate();
 		template.setConnectionFactory(factory);
 		return template;
@@ -111,6 +122,8 @@ public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {
 	@ConditionalOnBean(RedissonClient.class)
 	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
 	public DistributedLock redissonDistributedLock() {
+		LogUtil.started(DistributedLock.class, StarterName.REDIS_STARTER);
+
 		return new RedissonDistributedLock(redissonClient);
 	}
 }

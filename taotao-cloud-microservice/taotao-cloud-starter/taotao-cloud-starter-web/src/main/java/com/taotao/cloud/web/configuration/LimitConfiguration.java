@@ -15,13 +15,17 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
 import com.taotao.cloud.web.properties.LimitProperties;
 import org.jasypt.encryption.StringEncryptor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
@@ -31,11 +35,20 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @version 1.0.0
  * @since 2021/8/24 23:47
  */
-public class LimitConfiguration {
+@Configuration
+public class LimitConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(LimitConfiguration.class, StarterName.WEB_STARTER);
+	}
+
 	@Bean
 	@ConditionalOnBean({RedisRepository.class})
 	@ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true")
 	public LimitAspect limitAspect(RedisRepository redisRepository) {
+		LogUtil.started(LimitAspect.class, StarterName.WEB_STARTER);
+
 		return new LimitAspect(redisRepository);
 	}
 }

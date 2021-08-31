@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.properties;
 
 import java.util.LinkedHashMap;
@@ -5,21 +20,26 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 从配置文件获取 canal 配置，前缀是 canal.client
+ * CanalProperties
+ *
+ * @author shuigedeng
+ * @version 1.0.0
+ * @since 2021/8/30 21:24
  */
+@RefreshScope
 @ConfigurationProperties(prefix = CanalProperties.PREFIX)
 public class CanalProperties {
 
 	public static final String PREFIX = "taotao.cloud.canal";
 
-	/**
-	 * 配置信息
-	 */
-	private Map<String, Instance> instances = new LinkedHashMap<>();
-
 	private boolean enabled = false;
+
+	// 配置信息
+	private Map<String, Instance> instances = new LinkedHashMap<>();
 
 	public boolean isEnabled() {
 		return enabled;
@@ -29,16 +49,10 @@ public class CanalProperties {
 		this.enabled = enabled;
 	}
 
-	/**
-	 * 返回实例
-	 */
 	public Map<String, Instance> getInstances() {
 		return instances;
 	}
 
-	/**
-	 * 设置实例
-	 */
 	public void setInstances(Map<String, Instance> instances) {
 		this.instances = instances;
 	}

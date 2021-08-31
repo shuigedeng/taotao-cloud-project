@@ -16,6 +16,7 @@
 package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.seata.properties.SeataProperties;
 import com.zaxxer.hikari.HikariDataSource;
@@ -31,12 +32,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -47,14 +50,22 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * @version 1.0.0
  * @since 2020/10/22 14:48
  */
+@Configuration
 @EnableAutoDataSourceProxy
 @ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")
-public class SeataDataSourceConfiguration {
+public class SeataDataSourceConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(SeataDataSourceConfiguration.class, StarterName.SEATA_STARTER);
+	}
 
 	@Primary
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource dataSource(DataSourceProperties properties) {
+		LogUtil.started(DataSourceProxy.class, StarterName.SEATA_STARTER);
+
 		HikariDataSource hikariDataSource = properties
 				.initializeDataSourceBuilder()
 				.type(HikariDataSource.class)
@@ -64,16 +75,19 @@ public class SeataDataSourceConfiguration {
 
 	@Bean
 	public SeataXidFilter seataXidFilter() {
+		LogUtil.started(SeataXidFilter.class, StarterName.SEATA_STARTER);
 		return new SeataXidFilter();
 	}
 
 	@Bean
 	public SeataInterceptor seataInterceptor() {
+		LogUtil.started(SeataInterceptor.class, StarterName.SEATA_STARTER);
 		return new SeataInterceptor();
 	}
 
 	@Bean
 	public DetectTable detectTable(DataSource dataSource) {
+		LogUtil.started(DetectTable.class, StarterName.SEATA_STARTER);
 		return new DetectTable(dataSource);
 	}
 

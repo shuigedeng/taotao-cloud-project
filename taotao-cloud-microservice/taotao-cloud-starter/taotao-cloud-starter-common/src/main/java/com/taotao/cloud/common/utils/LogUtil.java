@@ -16,10 +16,11 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
 import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.MessageFormatter;
 import org.slf4j.spi.LocationAwareLogger;
 
 /**
@@ -73,15 +74,6 @@ public class LogUtil {
 		}
 	}
 
-	public static void debug(Class<?> cls, String project, String msg, Object... arguments) {
-		if (isDebugEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.DEBUG_INT,
-					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
-		}
-	}
-
-
 	/**
 	 * Info级别日志
 	 *
@@ -97,12 +89,17 @@ public class LogUtil {
 		}
 	}
 
-	public static void info(Class<?> cls, String project, String msg, Object... arguments) {
-		if (isInfoEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.INFO_INT,
-					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
+	public static void started(Class<?> cls, String project, String... message) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" [").append(project).append("] ");
+		sb.append(" [").append(cls.getName()).append("] ");
+
+		if (message.length > 0) {
+			sb.append(Arrays.toString(message) + " ");
 		}
+
+		sb.append(StarterName.STARTED);
+		info(sb.toString());
 	}
 
 	/**
@@ -120,27 +117,10 @@ public class LogUtil {
 		}
 	}
 
-	public static void warn(Class<?> cls, String project, String msg, Object... arguments) {
-		if (isWarnEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.WARN_INT,
-					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
-		}
-	}
-
 	public static void error(Throwable error, String msg, Object... arguments) {
 		if (isErrorEnabled()) {
 			getLocationAwareLogger()
 				.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, arguments, error);
-		}
-	}
-
-	public static void error(Class<?> cls, String project, Throwable error, String msg,
-		Object... arguments) {
-		if (isErrorEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT,
-					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, error);
 		}
 	}
 
@@ -158,14 +138,6 @@ public class LogUtil {
 		}
 	}
 
-	public static void error(Class<?> cls, String project, Throwable error) {
-		if (isErrorEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT, project, EMPTY_ARRAY,
-					error);
-		}
-	}
-
 	/**
 	 * Error级别日志
 	 *
@@ -178,14 +150,6 @@ public class LogUtil {
 		if (isErrorEnabled()) {
 			getLocationAwareLogger()
 				.log(null, FQDN, LocationAwareLogger.ERROR_INT, msg, arguments, null);
-		}
-	}
-
-	public static void error(Class<?> cls, String project, String msg, Object... arguments) {
-		if (isErrorEnabled()) {
-			getLocationAwareLogger()
-				.log(null, cls.getName(), LocationAwareLogger.ERROR_INT,
-					"[TAOTAO CLOUD][" + project + "]" + msg, arguments, null);
 		}
 	}
 

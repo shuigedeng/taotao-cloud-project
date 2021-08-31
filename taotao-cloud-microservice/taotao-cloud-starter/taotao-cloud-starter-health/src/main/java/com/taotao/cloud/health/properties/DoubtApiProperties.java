@@ -13,7 +13,7 @@ public class DoubtApiProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.doubtapi";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	//增长内存统计阈值，默认3M
 	private  int threshold = 3 * 1024 * 1024;

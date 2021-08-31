@@ -17,6 +17,7 @@ package com.taotao.cloud.feign.configuration;
 
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -28,6 +29,7 @@ import feign.Util;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -44,26 +46,35 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true")
-public class FeignAutoConfiguration {
+public class FeignAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(FeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public RequestOriginParser requestOriginParser() {
+		LogUtil.started(RequestOriginParser.class, StarterName.FEIGN_STARTER);
 		return new HeaderRequestOriginParser();
 	}
 
 	@Bean
-	Logger.Level feignLoggerLevel() {
+	public Logger.Level feignLoggerLevel() {
+		LogUtil.started(Logger.Level.class, StarterName.FEIGN_STARTER);
 		return Logger.Level.FULL;
 	}
 
 	@Bean
-	Retryer retryer() {
+	public Retryer retryer() {
+		LogUtil.started(Retryer.class, StarterName.FEIGN_STARTER);
 		return new Retryer.Default();
 	}
 
 	@Bean
-	FeignClientErrorDecoder feignClientErrorDecoder() {
+	public FeignClientErrorDecoder feignClientErrorDecoder() {
+		LogUtil.started(FeignClientErrorDecoder.class, StarterName.FEIGN_STARTER);
 		return new FeignClientErrorDecoder();
 	}
 
@@ -75,7 +86,7 @@ public class FeignAutoConfiguration {
 			String errorContent;
 			try {
 				errorContent = Util.toString(response.body().asReader(Charset.defaultCharset()));
-				LogUtil.error("feign调用异常{0}", errorContent);
+				LogUtil.error("feign调用异常{}", errorContent);
 				return JsonUtil.toObject(errorContent, BaseException.class);
 			} catch (IOException e) {
 				e.printStackTrace();

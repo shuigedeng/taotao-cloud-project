@@ -113,8 +113,7 @@ public class ExceptionUtil {
 			runnable.run();
 		} catch (Exception e) {
 			if (!isPrintInfo) {
-				LogUtil.error(ExceptionUtil.class, StarterName.COMMON_STARTER,
-					getFullStackTrace(e));
+				LogUtil.error(getFullStackTrace(e));
 			}
 		}
 	}

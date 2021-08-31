@@ -345,16 +345,17 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     }
 }
 
-task deployStarter {
-    subprojects.findAll(pro -> {
-        if (pro.name.startsWith("taotao-cloud-starter-")) {
-//            println( pro.getAllTasks(true))
-            Set<Task> task= pro.getTasks().findAll {ta -> ta.name.contains("publishMavenJavaPublicationToSonatypeRepository")}
-            task.forEach( ta -> {
-            })
-        }
-    })
-}
+//task deployStarter {
+//    subprojects.findAll(pro -> {
+//        if (pro.name.startsWith("taotao-cloud-starter-")) {
+////            println( pro.getAllTasks(true))
+//            Set<Task> task= pro.getTasks().findAll {ta -> ta.name.contains("publishMavenJavaPublicationToSonatypeRepository")}
+//            task.forEach( ta -> {
+//                println(ta.name)
+//            })
+//        }
+//    })
+//}
 
 //task printlnDefaultTask {
 //    println  project.properties

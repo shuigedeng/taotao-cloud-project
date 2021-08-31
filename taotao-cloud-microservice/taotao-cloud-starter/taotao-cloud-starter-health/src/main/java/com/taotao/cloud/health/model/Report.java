@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author: chejiangyi
@@ -69,9 +70,11 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		//求平均
 		for (Map.Entry<String, Object> item : sums.entrySet()) {
 			if (item.getValue() instanceof Number) {
-				sums.replace(item.getKey(),
-					NumberUtil.scale(((Number) item.getValue()).doubleValue() / reportList.size(),
-						2));
+				Object value = item.getValue();
+				if (Objects.nonNull(value) && !reportList.isEmpty()) {
+					sums.replace(item.getKey(),
+						NumberUtil.scale(((Number) value).doubleValue() / reportList.size(), 2));
+				}
 			}
 		}
 

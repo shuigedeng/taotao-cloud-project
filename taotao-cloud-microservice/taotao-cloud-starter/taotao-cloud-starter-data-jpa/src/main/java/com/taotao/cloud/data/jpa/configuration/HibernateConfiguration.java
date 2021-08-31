@@ -23,6 +23,8 @@ import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_CONNECTION_PROVID
 import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER;
 import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
@@ -33,12 +35,14 @@ import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -52,8 +56,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  * @version 1.0.0
  * @since 2020/9/28 17:31
  */
+@Configuration
 @EnableJpaAuditing
-public class HibernateConfiguration {
+public class HibernateConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(HibernateConfiguration.class, StarterName.JPA_STARTER);
+	}
 
 	private final JpaProperties jpaProperties;
 
@@ -63,22 +73,26 @@ public class HibernateConfiguration {
 
 	@Bean
 	public AuditorBean auditorBean(){
+		LogUtil.started(AuditorBean.class, StarterName.JPA_STARTER);
 		return new AuditorBean();
 	}
 
 	@Bean
 	@ConditionalOnBean(DataSource.class)
 	public TenantConnectionProvider tenantConnectionProvider(DataSource dataSource){
+		LogUtil.started(TenantConnectionProvider.class, StarterName.JPA_STARTER);
 		return new TenantConnectionProvider(dataSource);
 	}
 
 	@Bean
 	public TenantIdentifierResolver tenantIdentifierResolver(){
+		LogUtil.started(TenantIdentifierResolver.class, StarterName.JPA_STARTER);
 		return new TenantIdentifierResolver();
 	}
 
 	@Bean
 	JpaVendorAdapter jpaVendorAdapter() {
+		LogUtil.started(JpaVendorAdapter.class, StarterName.JPA_STARTER);
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
 		hibernateJpaVendorAdapter.setGenerateDdl(true);
@@ -93,6 +107,8 @@ public class HibernateConfiguration {
 		final JpaVendorAdapter jpaVendorAdapter,
 		final MultiTenantConnectionProvider multiTenantConnectionProvider,
 		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
+		LogUtil.started(LocalContainerEntityManagerFactoryBean.class, StarterName.JPA_STARTER);
+
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 
 		newJpaProperties.put(MULTI_TENANT, MultiTenancyStrategy.DISCRIMINATOR);

@@ -40,8 +40,8 @@ public class ProcessExitEvent {
 							try {
 								a.action0.invoke();
 							} catch (Exception e2) {
-								LogUtil.error(ProcessExitEvent.class, StarterName.CLOUD_STARTER,
-									"进程关闭事件回调处理出错", e2);
+								LogUtil.error(e2,
+									"进程关闭事件回调处理出错");
 							}
 						};
 
@@ -52,9 +52,12 @@ public class ProcessExitEvent {
 						}
 					}
 				}
-				LogUtil.info(ProcessExitEvent.class, PropertyUtil.getProperty(CoreProperties.SpringApplicationName), "应用已正常退出！");
+				LogUtil.info(
+					PropertyUtil.getProperty(CoreProperties.SpringApplicationName) + " 应用已正常退出！");
 			} catch (Exception e) {
-				LogUtil.error(ProcessExitEvent.class, PropertyUtil.getProperty(CoreProperties.SpringApplicationName), "进程关闭事件回调处理出错",
+				LogUtil.error(
+					PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+						+ " 进程关闭事件回调处理出错",
 					e);
 			}
 		}));

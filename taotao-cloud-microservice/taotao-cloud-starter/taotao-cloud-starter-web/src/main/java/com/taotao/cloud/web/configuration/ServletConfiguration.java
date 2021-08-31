@@ -15,9 +15,12 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
@@ -27,11 +30,17 @@ import org.springframework.web.WebApplicationInitializer;
  * @version 1.0.0
  * @since 2021/04/08 15:26
  */
-public class ServletConfiguration implements WebApplicationInitializer {
+@Configuration
+public class ServletConfiguration implements WebApplicationInitializer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(ServletConfiguration.class, StarterName.WEB_STARTER);
+	}
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		LogUtil.info("servletContext.getServerInfo=== {0}", servletContext.getServerInfo());
+		LogUtil.info("servletContext.getServerInfo=== {}", servletContext.getServerInfo());
 
 		//注册servlet
 //		ServletRegistration.Dynamic myServlet = servletContext

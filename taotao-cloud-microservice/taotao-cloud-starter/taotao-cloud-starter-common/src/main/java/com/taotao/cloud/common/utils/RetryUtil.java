@@ -91,7 +91,7 @@ public class RetryUtil {
 				exceptionCaught.accept(throwable);
 			}
 		} catch (Throwable e) {
-			LogUtil.error(RetryUtil.class, StarterName.COMMON_STARTER,e,
+			LogUtil.error(e,
 				"retry exception caught throw error:" + ExceptionUtil.getFullStackTrace(e));
 		}
 	}

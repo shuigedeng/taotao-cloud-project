@@ -768,7 +768,7 @@ public class DateUtil {
 			date = dateFormat.parse(dateStr);
 
 		} catch (Exception e) {
-			LogUtil.error(DateUtil.class, StarterName.COMMON_STARTER, "DateUtil error", e);
+			LogUtil.error("DateUtil error", e);
 		}
 		return date;
 	}

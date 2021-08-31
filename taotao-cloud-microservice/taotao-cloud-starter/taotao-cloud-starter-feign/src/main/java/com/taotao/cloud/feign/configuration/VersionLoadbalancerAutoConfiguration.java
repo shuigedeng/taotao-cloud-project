@@ -18,7 +18,9 @@
  import cn.hutool.core.util.StrUtil;
  import com.alibaba.cloud.nacos.NacosServiceInstance;
  import com.taotao.cloud.common.constant.CommonConstant;
+ import com.taotao.cloud.common.constant.StarterName;
  import com.taotao.cloud.common.context.VersionContextHolder;
+ import com.taotao.cloud.common.utils.LogUtil;
  import com.taotao.cloud.feign.properties.LbIsolationProperties;
  import java.util.List;
  import java.util.Random;
@@ -26,6 +28,7 @@
  import java.util.stream.Collectors;
  import org.apache.commons.logging.Log;
  import org.apache.commons.logging.LogFactory;
+ import org.springframework.beans.factory.InitializingBean;
  import org.springframework.beans.factory.ObjectProvider;
  import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  import org.springframework.cloud.client.ServiceInstance;
@@ -43,6 +46,7 @@
  import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
  import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
  import org.springframework.context.annotation.Bean;
+ import org.springframework.context.annotation.Configuration;
  import org.springframework.core.env.Environment;
  import org.springframework.http.HttpHeaders;
  import reactor.core.publisher.Mono;
@@ -54,13 +58,21 @@
   * @version 1.0.0
   * @since 2020/6/15 11:31
   */
- public class VersionLoadbalancerAutoConfiguration {
+ @Configuration
+ public class VersionLoadbalancerAutoConfiguration implements InitializingBean {
+
+	 @Override
+	 public void afterPropertiesSet() throws Exception {
+		 LogUtil.started(VersionLoadbalancerAutoConfiguration.class, StarterName.FEIGN_STARTER);
+	 }
 
 	 @Bean
 	 @ConditionalOnProperty(prefix = LbIsolationProperties.PREFIX, name = "enabled", havingValue = "true")
 	 public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
 		 Environment environment,
 		 LoadBalancerClientFactory loadBalancerClientFactory) {
+		 LogUtil.started(ReactorLoadBalancer.class, StarterName.FEIGN_STARTER);
+
 		 String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
 		 return new VersionLoadBalancer(
 			 loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class),

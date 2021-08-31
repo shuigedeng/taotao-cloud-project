@@ -22,9 +22,11 @@ import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
 import com.taotao.cloud.core.endpoint.MBeanDemo;
 import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
 import com.taotao.cloud.core.endpoint.CustomHealthIndicator;
+import com.taotao.cloud.core.runner.CoreCommandLineRunner;
 import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * EndPointConfiguration
@@ -33,11 +35,12 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/04/02 10:25
  */
+@Configuration
 public class EndPointConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.info(EndPointConfiguration.class, StarterName.CLOUD_STARTER, " EndPointConfiguration 模块已启动");
+		LogUtil.started(EndPointConfiguration.class, StarterName.CLOUD_STARTER);
 	}
 
 	@Bean

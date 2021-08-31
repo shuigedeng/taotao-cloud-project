@@ -15,12 +15,16 @@
  */
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.jasypt.EncryptAspect;
 import com.taotao.cloud.web.properties.EncryptProperties;
 import org.jasypt.encryption.StringEncryptor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 加解密自动注入配置
@@ -29,12 +33,20 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2021/8/24 23:47
  */
-public class JasyptConfiguration {
+@Configuration
+public class JasyptConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(JasyptConfiguration.class, StarterName.WEB_STARTER);
+	}
 
 	@Bean
 	@ConditionalOnBean({StringEncryptor.class})
 	@ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 	public EncryptAspect encryptAspect(StringEncryptor stringEncryptor) {
+		LogUtil.started(EncryptAspect.class, StarterName.WEB_STARTER);
+
 		return new EncryptAspect(stringEncryptor);
 	}
 }

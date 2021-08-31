@@ -28,6 +28,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -66,6 +67,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -73,6 +75,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
@@ -104,8 +107,14 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @version 1.0.0
  * @since 2020/9/29 14:30
  */
+@Configuration
 @AutoConfigureBefore({PrometheusConfiguration.class})
-public class WebMvcConfiguration implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(WebMvcConfiguration.class, StarterName.WEB_STARTER);
+	}
 
 	private final RedisRepository redisRepository;
 	private final FilterProperties filterProperties;
@@ -194,6 +203,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
+		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class, StarterName.WEB_STARTER);
+
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();
 			//objectMapper
@@ -272,6 +283,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public Validator validator() {
+		LogUtil.started(Validator.class, StarterName.WEB_STARTER);
+
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
 			.configure()
 			// 快速失败模式
@@ -282,11 +295,15 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public RequestContextListener requestContextListener() {
+		LogUtil.started(RequestContextListener.class, StarterName.WEB_STARTER);
+
 		return new RequestContextListener();
 	}
 
 	@Bean
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilterFilterRegistrationBean() {
+		LogUtil.started(VersionFilter.class, StarterName.WEB_STARTER);
+
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new VersionFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
@@ -297,6 +314,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public FilterRegistrationBean<TenantFilter> tenantFilterFilterRegistrationBean() {
+		LogUtil.started(TenantFilter.class, StarterName.WEB_STARTER);
+
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TenantFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
@@ -307,6 +326,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public FilterRegistrationBean<TraceFilter> traceFilterFilterRegistrationBean() {
+		LogUtil.started(TraceFilter.class, StarterName.WEB_STARTER);
+
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TraceFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
@@ -317,6 +338,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public FilterRegistrationBean<WebContextFilter> webContextFilterFilterRegistrationBean() {
+		LogUtil.started(WebContextFilter.class, StarterName.WEB_STARTER);
+
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new WebContextFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
@@ -373,7 +396,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				String microService = env.getProperty("spring.application.name", "application");
 				if (redisRepository == null || applicationContext
 					.containsBean("resourceServerConfiguration")) {
-					LogUtil.warn("[{0}]忽略接口资源扫描", microService);
+					LogUtil.warn("[{}]忽略接口资源扫描", microService);
 					return;
 				}
 
@@ -474,12 +497,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 					microService,
 					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 
-				LogUtil.info("资源扫描结果:serviceId=[{0}] size=[{1}] redis缓存key=[{2}]",
+				LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]",
 					microService,
 					list.size(),
 					CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
 			} catch (Exception e) {
-				LogUtil.error("error: {0}", e.getMessage());
+				LogUtil.error("error: {}", e.getMessage());
 			}
 		}
 

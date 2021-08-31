@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.canal.core;
 
 
@@ -26,17 +41,6 @@ public class ListenerPoint {
 	 */
 	private Map<Method, ListenPoint> invokeMap = new HashMap<>();
 
-	/**
-	 * 构造方法，设置目标，方法以及注解类型
-	 *
-	 * @param target 目标
-	 * @param method 方法
-	 * @param anno   注解类型
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:49
-	 * @CopyRight 万物皆导
-	 */
 	ListenerPoint(Object target, Method method, ListenPoint anno) {
 		this.target = target;
 		this.invokeMap.put(method, anno);
@@ -45,11 +49,8 @@ public class ListenerPoint {
 	/**
 	 * 返回目标类
 	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:50
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:42
 	 */
 	public Object getTarget() {
 		return target;
@@ -58,11 +59,8 @@ public class ListenerPoint {
 	/**
 	 * 获取监听的操作方法和节点
 	 *
-	 * @param
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:51
-	 * @CopyRight 万物皆导
+	 * @author shuigedeng
+	 * @since 2021/8/30 21:42
 	 */
 	public Map<Method, ListenPoint> getInvokeMap() {
 		return invokeMap;

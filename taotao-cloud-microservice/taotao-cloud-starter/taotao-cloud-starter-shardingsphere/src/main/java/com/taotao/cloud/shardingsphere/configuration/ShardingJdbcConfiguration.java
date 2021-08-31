@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.shardingsphere.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.shardingsphere.algorithm.DataSourceShardingAlgorithm;
 import com.taotao.cloud.shardingsphere.properties.ShardingJdbcProperties;
 import java.beans.ConstructorProperties;
@@ -25,10 +27,12 @@ import org.apache.shardingsphere.shardingjdbc.spring.boot.masterslave.SpringBoot
 import org.apache.shardingsphere.shardingjdbc.spring.boot.shadow.SpringBootShadowRuleConfigurationProperties;
 import org.apache.shardingsphere.shardingjdbc.spring.boot.sharding.SpringBootShardingRuleConfigurationProperties;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * ShardingJdbcConfiguration
@@ -37,9 +41,15 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/6/22 17:30
  */
+@Configuration
 @ConditionalOnProperty(prefix = ShardingJdbcProperties.PREIX, name = "enabled", havingValue = "true")
 public class ShardingJdbcConfiguration extends SpringBootConfiguration implements
-	ApplicationContextAware {
+	ApplicationContextAware, InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(ShardingJdbcConfiguration.class, StarterName.SHARDINGSPHERE_STARTER);
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
@@ -64,6 +74,8 @@ public class ShardingJdbcConfiguration extends SpringBootConfiguration implement
 
 	@Bean
 	public DataSourceShardingAlgorithm dataSourceShardingAlgorithm() {
+		LogUtil.started(DataSourceShardingAlgorithm.class, StarterName.SHARDINGSPHERE_STARTER);
+
 		return new DataSourceShardingAlgorithm();
 	}
 

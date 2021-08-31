@@ -93,10 +93,10 @@ public class LockAspect extends BaseAspect {
 			}
 
 			if (lockObj != null) {
-				LogUtil.info(LockAspect.class, StarterName.CLOUD_STARTER,"获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
+				LogUtil.info("获取Redis分布式锁[成功]，加锁完成，开始执行业务逻辑...");
 				return point.proceed();
 			} else {
-				LogUtil.error(LockAspect.class, StarterName.CLOUD_STARTER,"获取分布式锁[失败]");
+				LogUtil.error("获取分布式锁[失败]");
 				throw new LockException("锁等待超时");
 			}
 		} finally {

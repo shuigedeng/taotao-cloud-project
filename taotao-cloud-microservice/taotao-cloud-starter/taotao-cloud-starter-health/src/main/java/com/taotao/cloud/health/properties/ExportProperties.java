@@ -18,7 +18,7 @@ public class ExportProperties {
 		return ContextUtil.getApplicationContext().getBean(ExportProperties.class);
 	}
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	//上传报表循环间隔时间 秒
 	private int exportTimeSpan = 30;
