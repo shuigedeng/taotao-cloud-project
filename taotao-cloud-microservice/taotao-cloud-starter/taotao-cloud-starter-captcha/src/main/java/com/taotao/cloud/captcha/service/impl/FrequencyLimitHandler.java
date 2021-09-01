@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.captcha.service.impl;
 
-import com.taotao.cloud.captcha.model.CaptchaVO;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.Const;
-import com.taotao.cloud.captcha.model.RepCodeEnum;
-import com.taotao.cloud.captcha.model.ResponseModel;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
-import com.taotao.cloud.captcha.util.StringUtils;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -37,27 +37,18 @@ public interface FrequencyLimitHandler {
 
 	/**
 	 * get 接口限流
-	 *
-	 * @param captchaVO
-	 * @return
 	 */
-	ResponseModel validateGet(CaptchaVO captchaVO);
+	void validateGet(Captcha captcha);
 
 	/**
 	 * check接口限流
-	 *
-	 * @param captchaVO
-	 * @return
 	 */
-	ResponseModel validateCheck(CaptchaVO captchaVO);
+	void validateCheck(Captcha captcha);
 
 	/**
 	 * verify接口限流
-	 *
-	 * @param captchaVO
-	 * @return
 	 */
-	ResponseModel validateVerify(CaptchaVO captchaVO);
+	void validateVerify(Captcha captcha);
 
 
 	/***
@@ -83,95 +74,97 @@ public interface FrequencyLimitHandler {
 			this.cacheService = cacheService;
 		}
 
-		private String getClientCId(CaptchaVO input, String type) {
+		private String getClientCId(Captcha input, String type) {
 			return String.format(LIMIT_KEY, type, input.getClientUid());
 		}
 
 		@Override
-		public ResponseModel validateGet(CaptchaVO d) {
+		public void validateGet(Captcha captcha) {
 			// 无客户端身份标识，不限制
-			if (StringUtils.isEmpty(d.getClientUid())) {
-				return null;
+			if (StrUtil.isEmpty(captcha.getClientUid())) {
+				throw new CaptchaException("客户端身份标识不能为空");
 			}
-			String getKey = getClientCId(d, "GET");
-			String lockKey = getClientCId(d, "LOCK");
+
 			// 失败次数过多，锁定
+			String lockKey = getClientCId(captcha, "LOCK");
 			if (Objects.nonNull(cacheService.get(lockKey))) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LOCK_GET_ERROR);
+				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LOCK_GET_ERROR);
 			}
+
+			String getKey = getClientCId(captcha, "GET");
 			String getCnts = cacheService.get(getKey);
 			if (Objects.isNull(getCnts)) {
 				cacheService.set(getKey, "1", 60);
 				getCnts = "1";
 			}
 			cacheService.increment(getKey, 1);
+
 			// 1分钟内请求次数过多
-			if (Long.valueOf(getCnts) > Long.parseLong(
+			if (Long.parseLong(getCnts) > Long.parseLong(
 				config.getProperty(Const.REQ_GET_MINUTE_LIMIT, "120"))) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_GET_ERROR);
+				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_GET_ERROR);
 			}
 
 			// 失败次数验证
-			String failKey = getClientCId(d, "FAIL");
+			String failKey = getClientCId(captcha, "FAIL");
 			String failCnts = cacheService.get(failKey);
 			// 没有验证失败，通过校验
 			if (Objects.isNull(failCnts)) {
-				return null;
+				return;
 			}
+
 			// 1分钟内失败5次
-			if (Long.valueOf(failCnts) > Long.parseLong(
+			if (Long.parseLong(failCnts) > Long.parseLong(
 				config.getProperty(Const.REQ_GET_LOCK_LIMIT, "5"))) {
 				// get接口锁定5分钟
 				cacheService.set(lockKey, "1",
-					Long.valueOf(config.getProperty(Const.REQ_GET_LOCK_SECONDS, "300")));
-				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LOCK_GET_ERROR);
+					Long.parseLong(config.getProperty(Const.REQ_GET_LOCK_SECONDS, "300")));
+				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LOCK_GET_ERROR);
 			}
-			return null;
 		}
 
 		@Override
-		public ResponseModel validateCheck(CaptchaVO d) {
+		public void validateCheck(Captcha captcha) {
 			// 无客户端身份标识，不限制
-			if (StringUtils.isEmpty(d.getClientUid())) {
-				return null;
+			if (StrUtil.isEmpty(captcha.getClientUid())) {
+				throw new CaptchaException("客户端身份标识不能为空");
 			}
             /*String getKey = getClientCId(d, "GET");
             if(Objects.isNull(cacheService.get(getKey))){
                 return ResponseModel.errorMsg(RepCodeEnum.API_REQ_INVALID);
             }*/
-			String key = getClientCId(d, "CHECK");
+
+			String key = getClientCId(captcha, "CHECK");
 			String v = cacheService.get(key);
 			if (Objects.isNull(v)) {
 				cacheService.set(key, "1", 60);
 				v = "1";
 			}
 			cacheService.increment(key, 1);
-			if (Long.valueOf(v) > Long.valueOf(
+			if (Long.parseLong(v) > Long.parseLong(
 				config.getProperty(Const.REQ_CHECK_MINUTE_LIMIT, "600"))) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_CHECK_ERROR);
+				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_CHECK_ERROR);
 			}
-			return null;
 		}
 
 		@Override
-		public ResponseModel validateVerify(CaptchaVO d) {
+		public void validateVerify(Captcha captcha) {
             /*String getKey = getClientCId(d, "GET");
             if(Objects.isNull(cacheService.get(getKey))){
                 return ResponseModel.errorMsg(RepCodeEnum.API_REQ_INVALID);
             }*/
-			String key = getClientCId(d, "VERIFY");
+			String key = getClientCId(captcha, "VERIFY");
 			String v = cacheService.get(key);
 			if (Objects.isNull(v)) {
 				cacheService.set(key, "1", 60);
 				v = "1";
 			}
+
 			cacheService.increment(key, 1);
-			if (Long.valueOf(v) > Long.valueOf(
+			if (Long.parseLong(v) > Long.parseLong(
 				config.getProperty(Const.REQ_VALIDATE_MINUTE_LIMIT, "600"))) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_REQ_LIMIT_VERIFY_ERROR);
+				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_VERIFY_ERROR);
 			}
-			return null;
 		}
 	}
-
 }

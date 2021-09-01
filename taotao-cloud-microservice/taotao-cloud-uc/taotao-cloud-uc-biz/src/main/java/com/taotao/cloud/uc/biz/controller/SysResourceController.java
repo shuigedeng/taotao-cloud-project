@@ -310,7 +310,7 @@ public class SysResourceController {
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/se")
-	@SentinelResource(value = "se")
+	//@SentinelResource(value = "se")
 	public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
 		redisRepository.set("hslfjsl", "sldf");
 		if (1 == id) {

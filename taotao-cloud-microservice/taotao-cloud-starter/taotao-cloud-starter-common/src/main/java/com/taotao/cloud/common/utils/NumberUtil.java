@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -37,8 +39,15 @@ public class NumberUtil {
 	 * @since 2021/2/25 16:34
 	 */
 	public static double scale(Number number, int scale) {
-		BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
-		return bg.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+		if (Objects.nonNull(number)) {
+			try {
+				BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
+				return bg.setScale(scale, RoundingMode.HALF_UP).doubleValue();
+			} catch (Exception e) {
+				LogUtil.error(e);
+			}
+		}
+		return 0;
 	}
 
 	private static String[] hanArr = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};

@@ -2415,6 +2415,7 @@ public class RedisRepository {
 		Object resultStr = redisTemplate.execute((RedisCallback<Object>) connection -> {
 			RedisSerializer<String> serializer = getRedisSerializer();
 			byte[] keys = serializer.serialize(key);
+			assert keys != null;
 			byte[] values = connection.get(keys);
 			return OBJECT_SERIALIZER.deserialize(values);
 		});

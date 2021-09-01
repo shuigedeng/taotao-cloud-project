@@ -22,7 +22,7 @@ package com.taotao.cloud.captcha.model;
  * @version 1.0.0
  * @since 2021/8/24 16:46
  */
-public enum CaptchaBaseMapEnum {
+public enum CaptchaBaseEnum {
 	ORIGINAL("ORIGINAL", "滑动拼图底图"),
 	SLIDING_BLOCK("SLIDING_BLOCK", "滑动拼图滑块底图"),
 	PIC_CLICK("PIC_CLICK", "文字点选底图");
@@ -30,7 +30,7 @@ public enum CaptchaBaseMapEnum {
 	private final String codeValue;
 	private final String codeDesc;
 
-	CaptchaBaseMapEnum(String codeValue, String codeDesc) {
+	CaptchaBaseEnum(String codeValue, String codeDesc) {
 		this.codeValue = codeValue;
 		this.codeDesc = codeDesc;
 	}
@@ -44,8 +44,8 @@ public enum CaptchaBaseMapEnum {
 	}
 
 	//根据codeValue获取枚举
-	public static CaptchaBaseMapEnum parseFromCodeValue(String codeValue) {
-		for (CaptchaBaseMapEnum e : CaptchaBaseMapEnum.values()) {
+	public static CaptchaBaseEnum parseFromCodeValue(String codeValue) {
+		for (CaptchaBaseEnum e : CaptchaBaseEnum.values()) {
 			if (e.codeValue.equals(codeValue)) {
 				return e;
 			}
@@ -55,7 +55,7 @@ public enum CaptchaBaseMapEnum {
 
 	//根据codeValue获取描述
 	public static String getCodeDescByCodeBalue(String codeValue) {
-		CaptchaBaseMapEnum enumItem = parseFromCodeValue(codeValue);
+		CaptchaBaseEnum enumItem = parseFromCodeValue(codeValue);
 		return enumItem == null ? "" : enumItem.getCodeDesc();
 	}
 
@@ -67,7 +67,7 @@ public enum CaptchaBaseMapEnum {
 	//列出所有值字符串
 	public static String getString() {
 		StringBuffer buffer = new StringBuffer();
-		for (CaptchaBaseMapEnum e : CaptchaBaseMapEnum.values()) {
+		for (CaptchaBaseEnum e : CaptchaBaseEnum.values()) {
 			buffer.append(e.codeValue).append("--").append(e.getCodeDesc()).append(", ");
 		}
 		buffer.deleteCharAt(buffer.lastIndexOf(","));

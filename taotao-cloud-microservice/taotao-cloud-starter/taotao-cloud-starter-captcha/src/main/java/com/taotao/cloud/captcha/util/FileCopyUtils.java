@@ -33,7 +33,7 @@ import java.nio.file.Files;
  * @version 1.0.0
  * @since 2021/8/24 16:52
  */
-public abstract class FileCopyUtils {
+public class FileCopyUtils {
 
 	public static final int BUFFER_SIZE = 4096;
 
@@ -45,8 +45,8 @@ public abstract class FileCopyUtils {
 	}
 
 	public static void copy(byte[] in, File out) throws IOException {
-		copy((InputStream) (new ByteArrayInputStream(in)),
-			(OutputStream) Files.newOutputStream(out.toPath()));
+		copy(new ByteArrayInputStream(in),
+			Files.newOutputStream(out.toPath()));
 	}
 
 	public static byte[] copyToByteArray(File in) throws IOException {
@@ -81,9 +81,7 @@ public abstract class FileCopyUtils {
 				out.close();
 			} catch (IOException var8) {
 			}
-
 		}
-
 	}
 
 	public static byte[] copyToByteArray(InputStream in) throws IOException {
@@ -107,8 +105,7 @@ public abstract class FileCopyUtils {
 			}
 
 			out.flush();
-			int var5 = byteCount;
-			return var5;
+			return byteCount;
 		} finally {
 			try {
 				in.close();

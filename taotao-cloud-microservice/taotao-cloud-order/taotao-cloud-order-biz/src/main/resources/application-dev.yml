@@ -22,6 +22,28 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
+redisson:
+  single-server-config:
+    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-enable: false
+  registry:
+    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    timeout: 15000
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+  cloud:
+    subscribed-services: taotao-cloud-uc
+  scan:
+    base-packages: com.taotao.cloud.*.biz.service.impl
+  provider:
+    loadbalance: roundrobin
+
 seata:
   enabled: true
   application-id: ${spring.application.name}
@@ -78,9 +100,6 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-  cloud:
-    loadbalancer:
-      enabled: true
   sleuth:
     enabled: true
     web:
@@ -95,8 +114,6 @@ spring:
     sender:
       type: WEB
   datasource:
-    dynamic:
-      enabled: false
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -132,88 +149,14 @@ spring:
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
-    lettordere:
+    lettuce:
       pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
-    redisson:
-      config:
-        # 单节点配置
-        singleServerConfig:
-          # 连接空闲超时，单位：毫秒
-          idleConnectionTimeout: 10000
-          # 连接超时，单位：毫秒
-          connectTimeout: 10000
-          # 命令等待超时，单位：毫秒
-          timeout: 3000
-          # 命令失败重试次数,如果尝试达到 retryAttempts（命令失败重试次数） 仍然不能将命令发送至某个指定的节点时，将抛出错误。
-          # 如果尝试在此限制之内发送成功，则开始启用 timeout（命令等待超时） 计时。
-          retryAttempts: 3
-          # 命令重试发送时间间隔，单位：毫秒
-          retryInterval: 1500
-          #  # 重新连接时间间隔，单位：毫秒
-          #  reconnectionTimeout: 3000
-          #  # 执行失败最大次数
-          #  failedAttempts: 3
-          # 密码
-          password:
-          # 单个连接最大订阅数量
-          subscriptionsPerConnection: 5
-          # 客户端名称
-          clientName: null
-          #  # 节点地址
-          address: redis://ip
-          # 发布和订阅连接的最小空闲连接数
-          subscriptionConnectionMinimumIdleSize: 1
-          # 发布和订阅连接池大小
-          subscriptionConnectionPoolSize: 50
-          # 最小空闲连接数
-          connectionMinimumIdleSize: 32
-          # 连接池大小
-          connectionPoolSize: 64
-          # 数据库编号
-          database: 0
-          # DNS监测时间间隔，单位：毫秒
-          dnsMonitoringInterval: 5000
-        # 线程池数量,默认值: 当前处理核数量 * 2
-        clusterServersConfig:
-          idleConnectionTimeout: 10000
-          connectTimeout: 10000
-          timeout: 3000
-          retryAttempts: 3
-          retryInterval: 1500
-          failedSlaveReconnectionInterval: 3000
-          failedSlaveCheckInterval: 60000
-          password: null
-          subscriptionsPerConnection: 5
-          clientName: null
-          loadBalancer: ！<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
-          subscriptionConnectionMinimumIdleSize: 1
-          subscriptionConnectionPoolSize: 50
-          slaveConnectionMinimumIdleSize: 24
-          slaveConnectionPoolSize: 64
-          masterConnectionMinimumIdleSize: 24
-          masterConnectionPoolSize: 64
-          readMode: "SLAVE"
-          subscriptionMode: "SLAVE"
-          nodeAddresses:
-            - "redis://192.168.35.142:7002"
-            - "redis://192.168.35.142:7001"
-            - "redis://192.168.35.142:7000"
-          scanInterval: 1000
-          pingConnectionInterval: 0
-          keepAlive: false
-          tcpNoDelay: false
-      threads: 16
-      # Netty线程池数量,默认值: 当前处理核数量 * 2
-      nettyThreads: 32
-      # 编码
-      #      codec: !<org.redisson.codec.JsonJacksonCodec> {}
-      # 传输模式
-      transportMode: "NIO"
-
+        max-active: 1500
+        max-wait: 5000
+        max-idle: 500
+        min-idle: 100
+    connect-timeout: 60000
+  data:
     elasticsearch:
       repositories:
         enabled: false
@@ -224,21 +167,20 @@ spring:
           connection-timeout: 5
           username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
-    redis:
-      repositories:
-        enabled: true
-
+    mongodb:
+      database:
+      host:
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
-    prodorderer:
-      retries: 0
+    producer:
+      retries: 1
       batch-size: 16384
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: 1
+      acks: 0
       properties:
-        linger.ms: 500
+        linger.ms: 100
     consumer:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
@@ -249,16 +191,20 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
+  rabbitmq:
+    host:
+    port:
   security:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
+          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
   mail:
-    host: smtp.aliyun.com
-    username: xxxxx@aliyun.com
-    password: xxxxxxxxx
+    host: smtp.qq.com
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+    username: 981376577@qq.com
     port: 465
+    protocol: smtps
     properties:
       smtp:
         auth: true
@@ -269,99 +215,247 @@ spring:
             enable: true
   shardingsphere:
     enabled: false
+    # 分库分表 + 读写分离
     datasource:
       names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
       mysql-master-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/m1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.p6spy.engine.spy.P6SpyDriver
         hikari:
-          connection-test-query: SELECT 1
-          max-lifetime: 120000
-          maximum-pool-size: 15
-          minimum-idle: 3
-          connection-timeout: 30000
-          idle-timeout: 30000
           auto-commit: true
+          connection-timeout: 30000
+          idle-timeout: 25000
+          login-timeout: 5
+          validation-timeout: 3000
+          max-lifetime: 50000
+          read-only: false
+          connection-test-query: SELECT 1
+          maximum-pool-size: 15
+          minimum-idle: 10
           pool-name: DatebookHikariCP
+          register-mbeans: true
+          data-source-properties:
+            cachePrepStmts: true
+            prepStmtCacheSize: 250
       mysql-slave-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/s1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.p6spy.engine.spy.P6SpyDriver
         hikari:
-          connection-test-query: SELECT 1
-          max-lifetime: 120000
-          maximum-pool-size: 15
-          minimum-idle: 3
-          connection-timeout: 30000
-          idle-timeout: 30000
           auto-commit: true
+          connection-timeout: 30000
+          idle-timeout: 25000
+          login-timeout: 5
+          validation-timeout: 3000
+          max-lifetime: 50000
+          read-only: false
+          connection-test-query: SELECT 1
+          maximum-pool-size: 15
+          minimum-idle: 10
           pool-name: DatebookHikariCP
+          register-mbeans: true
+          data-source-properties:
+            cachePrepStmts: true
+            prepStmtCacheSize: 250
       mysql-master-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/m2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.p6spy.engine.spy.P6SpyDriver
         hikari:
-          connection-test-query: SELECT 1
-          max-lifetime: 120000
-          maximum-pool-size: 15
-          minimum-idle: 3
-          connection-timeout: 30000
-          idle-timeout: 30000
           auto-commit: true
+          connection-timeout: 30000
+          idle-timeout: 25000
+          login-timeout: 5
+          validation-timeout: 3000
+          max-lifetime: 50000
+          read-only: false
+          connection-test-query: SELECT 1
+          maximum-pool-size: 15
+          minimum-idle: 10
           pool-name: DatebookHikariCP
+          register-mbeans: true
+          data-source-properties:
+            cachePrepStmts: true
+            prepStmtCacheSize: 250
       mysql-slave-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-order?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/s2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.p6spy.engine.spy.P6SpyDriver
         hikari:
-          connection-test-query: SELECT 1
-          max-lifetime: 120000
-          maximum-pool-size: 15
-          minimum-idle: 3
-          connection-timeout: 30000
-          idle-timeout: 30000
           auto-commit: true
+          connection-timeout: 30000
+          idle-timeout: 25000
+          login-timeout: 5
+          validation-timeout: 3000
+          max-lifetime: 50000
+          read-only: false
+          connection-test-query: SELECT 1
+          maximum-pool-size: 15
+          minimum-idle: 10
           pool-name: DatebookHikariCP
+          register-mbeans: true
+          data-source-properties:
+            cachePrepStmts: true
+            prepStmtCacheSize: 250
     sharding:
       default-database-strategy:
+        ##根据用户ID分库
         inline:
-          sharding-column: id
-          algorithm-expression: ds_$->{id % 2}
+          sharding-column: user_id
+          algorithm-expression: mysql-master-$->{user_id % 2}
       tables:
         sys_user:
-          key-generator-column-name: id
-          actual-data-nodes: ds_$->{0..1}.sys_user_$->{0..3}
+          #自增列名称，缺省表示不使用自增主键生成器
+          #key-generator-column-name: order_id
+          key-generator:
+            #自增列名称，缺省表示不使用自增主键生成器
+            column: order_id
+            #雪花算法，如果系统并发比较低，数据将分布不是很均匀
+            type: SNOWFLAKE
+            #工作机器唯一id，默认为0，最大1024
+            props:
+              worker:
+                id: 2
+          #根据订单ID分表
+          actual-data-nodes: mysql-master-$->{0..1}.t_order_$->{0..1}
           table-strategy:
             inline:
-              sharding-column: id
-              algorithm-expression: sys_user_$->{id % 4}
+              sharding-column: order_id
+              algorithm-expression: t_order_$->{order_id % 2}
       master-slave-rules:
-        ds_0:
+        #指定master0为主库，slave0为它的从库
+        mysql-master-1:
           load-balance-algorithm-type: round_robin
           master-data-source-name: mysql-master-1
           slave-data-source-names: mysql-slave-1
-        ds_1:
+        #指定master1为主库，slave1为它的从库
+        mysql-master-2:
           load-balance-algorithm-type: round_robin
           master-data-source-name: mysql-master-2
           slave-data-source-names: mysql-slave-2
     props:
+      #是否开启SQL显示，默认值: false
       sql:
         show: true
+      #工作线程数量，默认值: CPU核数
+      executor:
+        size: 4
+      #是否在启动时检查分表元数据一致性，默认值: false
+      check:
+        table:
+          metadata:
+            enabled:
+
+  cloud:
+    loadbalancer:
+      enabled: true
+    stream:
+      bindings:
+        sms-output:
+          destination: sms-topic
+          content-type: application/json
+        sms-input:
+          destination: sms-topic
+          content-type: text/plain
+          group: sms-group
+        email-output:
+          destination: email-topic
+          content-type: application/json
+        email-input:
+          destination: email-topic
+          content-type: text/plain
+          group: email-group
+        order-output:
+          destination: order-topic
+          content-type: application/json
+        order-input:
+          destination: order-topic
+          content-type: text/plain
+          group: order-binder-group
+      rocketmq:
+        binder:
+          name-server:
+      rabbit:
+        binder:
+          admin-addresses:
+      kafka:
+        binder:
+          brokers:
 
 taotao:
   cloud:
-    redis:
-      lock:
+    health:
+      enabled: true
+      doubtapi:
         enabled: true
+      dump:
+        enabled: true
+      export:
+        enabled: true
+      ping:
+        enabled: true
+      report:
+        enabled: true
+      warn:
+        enabled: true
+      check:
+        enabled: true
+    canal:
+      enabled: true
+      instances:
+        example:
+          clusterEnabled: false
+          zookeeperAddress: 172.16.6.151:2181
+          host: 172.16.6.151
+          port: 11111
+          userName: canal
+          password: 123456
+          batchSize: 1000
+          filter:
+          retryCount: 3
+          acquireInterval: 3000
+    core:
+      env: dev
+      enabled: true
+    captcha:
+      enabled: true
+    zookeeper:
+      enabled: false
+      lock:
+        enabled: false
+    web:
+      dozer:
+        enabled: true
+      encrypt:
+        enabled: true
+      filter:
+        version: true
+        tenant: true
+        trace: true
+        web-context: true
+      limit:
+        enabled: true
+      idempotent:
+        enabled: true
+      xss:
+        enabled: true
+    sms:
+      enabled: false
+    shardingsphere:
+      enabled: false
+    sentinel:
+      enabled: true
+    seata:
+      enabled: true
     log:
       request-log:
         enabled: true
@@ -373,9 +467,11 @@ taotao:
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-
-    xxl:
-      job:
+    redis:
+      lock:
+        enabled: true
+    job:
+      xxl:
         enabled: true
         admin:
           addresses:
@@ -385,40 +481,15 @@ taotao:
           port: 1114
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${user.home}/logs/xxl-job/${spring.application.name}
-    zookeeper:
-      enabled: false
-    sms:
-      enabled: false
     feign:
       enabled: true
       loadbalancer:
         enabled: true
-        rest-template:
-          enabled: true
-    web:
-      async:
-        task:
-          enabled: true
-      dozer:
-        enabled: true
-      encrypt:
-        enabled: true
-      filter:
-        version: true
-        tenant: true
-        trace: true
-        web-context: true
-      limit:
-        enabled: false
-      xss:
-        enabled: true
-    sentinel:
-      enabled: true
-    seata:
-      enabled: true
     cache:
       enabled: true
       type: redis
+    rabbitmq:
+      enabled: false
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
@@ -427,9 +498,11 @@ mybatis-plus:
     db-config:
       id-type: auto
       table-underline: true
-      field-strategy: NOT_NULL
       logic-delete-value: 1
       logic-not-delete-value: 0
+      insert-strategy: ignored
+      update-strategy: ignored
+      select-strategy: ignored
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
@@ -469,6 +542,8 @@ management:
       enabled: true
     health:
       show-details: ALWAYS
+    shutdown:
+      enabled: true
   metrics:
     export:
       prometheus:
@@ -486,6 +561,7 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+    org.springframework.cloud.openfeign: off
 
 springdoc:
   packages-to-exclude:

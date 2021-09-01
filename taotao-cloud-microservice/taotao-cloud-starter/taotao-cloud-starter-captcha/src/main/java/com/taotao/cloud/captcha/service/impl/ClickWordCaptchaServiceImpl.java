@@ -16,18 +16,19 @@
 package com.taotao.cloud.captcha.service.impl;
 
 
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
+import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaTypeEnum;
-import com.taotao.cloud.captcha.model.CaptchaVO;
 import com.taotao.cloud.captcha.model.Const;
-import com.taotao.cloud.captcha.model.PointVO;
-import com.taotao.cloud.captcha.model.RepCodeEnum;
-import com.taotao.cloud.captcha.model.ResponseModel;
-import com.taotao.cloud.captcha.util.AESUtil;
+import com.taotao.cloud.captcha.model.Point;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.captcha.util.JsonUtil;
-import com.taotao.cloud.captcha.util.RandomUtils;
-import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.RandomUtil;
+import com.taotao.cloud.common.utils.secure.AESUtil;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -62,8 +63,10 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	@Override
 	public void init(Properties config) {
 		super.init(config);
+
 		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE,
 			"SourceHanSansCN-Normal.otf");
+
 		try {
 			if (clickWordFontStr.toLowerCase().endsWith(".ttf")
 				|| clickWordFontStr.toLowerCase().endsWith(".ttc")
@@ -85,41 +88,39 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	}
 
 	@Override
-	public ResponseModel get(CaptchaVO captchaVO) {
-		ResponseModel r = super.get(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+	public Captcha get(Captcha captcha) {
+		super.get(captcha);
+
 		BufferedImage bufferedImage = ImageUtils.getPicClick();
 		if (null == bufferedImage) {
 			LogUtil.error("滑动底图未初始化成功，请检查路径");
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_BASEMAP_NULL);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
-		CaptchaVO imageData = getImageData(bufferedImage);
-		if (imageData == null
-			|| StringUtils.isBlank(imageData.getOriginalImageBase64())) {
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_ERROR);
+
+		Captcha imageData = getImageData(bufferedImage);
+		if (StrUtil.isBlank(imageData.getOriginalImageBase64())) {
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_ERROR);
 		}
-		return ResponseModel.successData(imageData);
+
+		return imageData;
 	}
 
 	@Override
-	public ResponseModel check(CaptchaVO captchaVO) {
-		ResponseModel r = super.check(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+	public Captcha check(Captcha captcha) {
+		check(captcha);
+
 		//取坐标信息
-		String codeKey = String.format(REDIS_CAPTCHA_KEY, captchaVO.getToken());
+		String codeKey = String.format(REDIS_CAPTCHA_KEY, captcha.getToken());
 		if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_INVALID);
 		}
+
 		String s = CaptchaServiceFactory.getCache(cacheType).get(codeKey);
 		//验证码只用一次，即刻失效
 		CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
-		List<PointVO> point = null;
-		List<PointVO> point1 = null;
-		String pointJson = null;
+		List<Point> point;
+		List<Point> point1;
+		String pointJson;
 		/**
 		 * [
 		 *             {
@@ -137,68 +138,68 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		 * ]
 		 */
 		try {
-			point = JsonUtil.parseArray(s, PointVO.class);
+			point = JsonUtil.toList(s, Point.class);
 			//aes解密
-			pointJson = decrypt(captchaVO.getPointJson(), point.get(0).getSecretKey());
-			point1 = JsonUtil.parseArray(pointJson, PointVO.class);
+			pointJson = decrypt(captcha.getPointJson(), point.get(0).getSecretKey());
+			point1 = JsonUtil.toList(pointJson, Point.class);
 		} catch (Exception e) {
 			LogUtil.error("验证码坐标解析失败", e);
-			afterValidateFail(captchaVO);
-			return ResponseModel.errorMsg(e.getMessage());
+			afterValidateFail(captcha);
+			throw new CaptchaException(e.getMessage());
 		}
+
 		for (int i = 0; i < point.size(); i++) {
 			if (point.get(i).x - HAN_ZI_SIZE > point1.get(i).x
 				|| point1.get(i).x > point.get(i).x + HAN_ZI_SIZE
 				|| point.get(i).y - HAN_ZI_SIZE > point1.get(i).y
 				|| point1.get(i).y > point.get(i).y + HAN_ZI_SIZE) {
-				afterValidateFail(captchaVO);
-				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_COORDINATE_ERROR);
+				afterValidateFail(captcha);
+				throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_COORDINATE_ERROR);
 			}
 		}
+
 		//校验成功，将信息存入缓存
 		String secretKey = point.get(0).getSecretKey();
-		String value = null;
+		String value;
 		try {
-			value = AESUtil.aesEncrypt(captchaVO.getToken().concat("---").concat(pointJson),
+			value = AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
 				secretKey);
 		} catch (Exception e) {
 			LogUtil.error("AES加密失败", e);
-			afterValidateFail(captchaVO);
-			return ResponseModel.errorMsg(e.getMessage());
+			afterValidateFail(captcha);
+			throw new CaptchaException(e.getMessage());
 		}
 		String secondKey = String.format(REDIS_SECOND_CAPTCHA_KEY, value);
 		CaptchaServiceFactory.getCache(cacheType)
-			.set(secondKey, captchaVO.getToken(), EXPIRESIN_THREE);
-		captchaVO.setResult(true);
-		captchaVO.resetClientFlag();
-		return ResponseModel.successData(captchaVO);
+			.set(secondKey, captcha.getToken(), EXPIRESIN_THREE);
+		captcha.setResult(true);
+		captcha.resetClientFlag();
+		return captcha;
 	}
 
 	@Override
-	public ResponseModel verification(CaptchaVO captchaVO) {
+	public Captcha verification(Captcha captcha) {
         /*if (captchaVO == null) {
             return RepCodeEnum.NULL_ERROR.parseError("captchaVO");
         }
-        if (StringUtils.isEmpty(captchaVO.getCaptchaVerification())) {
+        if (StrUtil.isEmpty(captchaVO.getCaptchaVerification())) {
             return RepCodeEnum.NULL_ERROR.parseError("captchaVerification");
         }*/
-		ResponseModel r = super.verification(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+		super.verification(captcha);
+
 		try {
 			String codeKey = String.format(REDIS_SECOND_CAPTCHA_KEY,
-				captchaVO.getCaptchaVerification());
+				captcha.getCaptchaVerification());
 			if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
+				throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_INVALID);
 			}
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
 			LogUtil.error("验证码坐标解析失败", e);
-			return ResponseModel.errorMsg(e.getMessage());
+			throw new CaptchaException(e.getMessage());
 		}
-		return ResponseModel.success();
+		return captcha;
 	}
 
 	public int getWordTotalCount() {
@@ -226,10 +227,10 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 */
 	private boolean fontColorRandom = Boolean.TRUE;
 
-	private CaptchaVO getImageData(BufferedImage backgroundImage) {
-		CaptchaVO dataVO = new CaptchaVO();
-		List<String> wordList = new ArrayList<String>();
-		List<PointVO> pointList = new ArrayList();
+	private Captcha getImageData(BufferedImage backgroundImage) {
+		Captcha dataVO = new Captcha();
+		List<String> wordList = new ArrayList<>();
+		List<Point> pointList = new ArrayList<>();
 
 		Graphics backgroundGraphics = backgroundImage.getGraphics();
 		int width = backgroundImage.getWidth();
@@ -237,12 +238,13 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 
 		int wordCount = getWordTotalCount();
 		//定义随机1到arr.length某一个字不参与校验
-		int num = RandomUtils.getRandomInt(1, wordCount);
+		int num = RandomUtil.randomInt(1, wordCount);
 		Set<String> currentWords = getRandomWords(wordCount);
 		String secretKey = null;
 		if (captchaAesStatus) {
-			secretKey = AESUtil.getKey();
+			secretKey = RandomUtil.randomString(16);
 		}
+		
         /*for (int i = 0; i < wordCount; i++) {
             String word;
             do {
@@ -252,18 +254,18 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		int i = 0;
 		for (String word : currentWords) {
 			//随机字体坐标
-			PointVO point = randomWordPoint(width, height, i, wordCount);
+			Point point = randomWordPoint(width, height, i, wordCount);
 			point.setSecretKey(secretKey);
 			//随机字体颜色
 			if (isFontColorRandom()) {
-				backgroundGraphics.setColor(new Color(RandomUtils.getRandomInt(1, 255),
-					RandomUtils.getRandomInt(1, 255), RandomUtils.getRandomInt(1, 255)));
+				backgroundGraphics.setColor(new Color(RandomUtil.randomInt(1, 255),
+					RandomUtil.randomInt(1, 255), RandomUtil.randomInt(1, 255)));
 			} else {
 				backgroundGraphics.setColor(Color.BLACK);
 			}
 			//设置角度
 			AffineTransform affineTransform = new AffineTransform();
-			affineTransform.rotate(Math.toRadians(RandomUtils.getRandomInt(-45, 45)), 0, 0);
+			affineTransform.rotate(Math.toRadians(RandomUtil.randomInt(-45, 45)), 0, 0);
 			Font rotatedFont = clickWordFont.deriveFont(affineTransform);
 			backgroundGraphics.setFont(rotatedFont);
 			backgroundGraphics.drawString(word, point.getX(), point.getY());
@@ -290,26 +292,23 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		//pointList信息不传到前端，只做后端check校验
 		//dataVO.setPointList(pointList);
 		dataVO.setWordList(wordList);
-		dataVO.setToken(RandomUtils.getUUID());
+		dataVO.setToken(IdUtil.randomUUID());
 		dataVO.setSecretKey(secretKey);
 		//将坐标信息存入redis中
 		String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
 		CaptchaServiceFactory.getCache(cacheType)
 			.set(codeKey, JsonUtil.toJSONString(pointList), EXPIRESIN_SECONDS);
-//        base64StrToImage(getImageToBase64Str(backgroundImage), "D:\\点击.png");
+		//base64StrToImage(getImageToBase64Str(backgroundImage), "D:\\点击.png");
 		return dataVO;
 	}
 
 	private Set<String> getRandomWords(int wordCount) {
 		Set<String> words = new HashSet<>();
 		int size = HAN_ZI.length();
-		for (; ; ) {
-			String t = HAN_ZI.charAt(RandomUtils.getRandomInt(size)) + "";
+		do {
+			String t = HAN_ZI.charAt(RandomUtil.randomInt(size)) + "";
 			words.add(t);
-			if (words.size() >= wordCount) {
-				break;
-			}
-		}
+		} while (words.size() < wordCount);
 		return words;
 	}
 
@@ -320,25 +319,24 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param imageHeight   图片高度
 	 * @param wordSortIndex 字体循环排序下标(i)
 	 * @param wordCount     字数量
-	 * @return
 	 */
-	private static PointVO randomWordPoint(int imageWidth, int imageHeight, int wordSortIndex,
+	private static Point randomWordPoint(int imageWidth, int imageHeight, int wordSortIndex,
 		int wordCount) {
 		int avgWidth = imageWidth / (wordCount + 1);
 		int x, y;
 		if (avgWidth < HAN_ZI_SIZE_HALF) {
-			x = RandomUtils.getRandomInt(1 + HAN_ZI_SIZE_HALF, imageWidth);
+			x = RandomUtil.randomInt(1 + HAN_ZI_SIZE_HALF, imageWidth);
 		} else {
 			if (wordSortIndex == 0) {
-				x = RandomUtils.getRandomInt(1 + HAN_ZI_SIZE_HALF,
+				x = RandomUtil.randomInt(1 + HAN_ZI_SIZE_HALF,
 					avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
 			} else {
-				x = RandomUtils.getRandomInt(avgWidth * wordSortIndex + HAN_ZI_SIZE_HALF,
+				x = RandomUtil.randomInt(avgWidth * wordSortIndex + HAN_ZI_SIZE_HALF,
 					avgWidth * (wordSortIndex + 1) - HAN_ZI_SIZE_HALF);
 			}
 		}
-		y = RandomUtils.getRandomInt(HAN_ZI_SIZE, imageHeight - HAN_ZI_SIZE);
-		return new PointVO(x, y, null);
+		y = RandomUtil.randomInt(HAN_ZI_SIZE, imageHeight - HAN_ZI_SIZE);
+		return new Point(x, y, null);
 	}
 
 

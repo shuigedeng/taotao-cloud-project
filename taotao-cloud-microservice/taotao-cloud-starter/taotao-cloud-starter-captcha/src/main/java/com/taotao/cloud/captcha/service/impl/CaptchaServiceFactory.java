@@ -34,7 +34,21 @@ import org.slf4j.LoggerFactory;
  */
 public class CaptchaServiceFactory {
 
-	private static Logger logger = LoggerFactory.getLogger(CaptchaServiceFactory.class);
+	public volatile static Map<String, CaptchaService> instances = new HashMap<>();
+	public volatile static Map<String, CaptchaCacheService> cacheService = new HashMap<>();
+
+	static {
+		ServiceLoader<CaptchaCacheService> cacheServices = ServiceLoader.load(
+			CaptchaCacheService.class);
+		for (CaptchaCacheService item : cacheServices) {
+			cacheService.put(item.type(), item);
+		}
+
+		ServiceLoader<CaptchaService> services = ServiceLoader.load(CaptchaService.class);
+		for (CaptchaService item : services) {
+			instances.put(item.captchaType(), item);
+		}
+	}
 
 	public static CaptchaService getInstance(Properties config) {
 		//先把所有CaptchaService初始化，通过init方法，实例字体等，add by lide1202@hotmail.com
@@ -51,27 +65,12 @@ public class CaptchaServiceFactory {
 		if (ret == null) {
 			throw new RuntimeException("unsupported-[captcha.type]=" + captchaType);
 		}
+
 		ret.init(config);
 		return ret;
 	}
 
 	public static CaptchaCacheService getCache(String cacheType) {
 		return cacheService.get(cacheType);
-	}
-
-	public volatile static Map<String, CaptchaService> instances = new HashMap();
-	public volatile static Map<String, CaptchaCacheService> cacheService = new HashMap();
-
-	static {
-		ServiceLoader<CaptchaCacheService> cacheServices = ServiceLoader.load(
-			CaptchaCacheService.class);
-		for (CaptchaCacheService item : cacheServices) {
-			cacheService.put(item.type(), item);
-		}
-
-		ServiceLoader<CaptchaService> services = ServiceLoader.load(CaptchaService.class);
-		for (CaptchaService item : services) {
-			instances.put(item.captchaType(), item);
-		}
 	}
 }

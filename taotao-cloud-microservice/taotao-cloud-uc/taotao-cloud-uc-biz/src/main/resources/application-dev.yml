@@ -28,17 +28,19 @@ redisson:
 
 dubbo:
   application:
+    id: ${spring.application.name}
     name: ${spring.application.name}
     qos-enable: false
+    qos-accept-foreign-ip: false
   registry:
-    address: spring-cloud://localhost
+    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
   protocol:
     name: dubbo
     port: -1
     serialization: kryo
   cloud:
-    subscribed-services: '*'
+    subscribed-services: 'taotao-cloud-order'
   scan:
     base-packages: com.taotao.cloud.*.biz.service.impl
   provider:
@@ -427,6 +429,8 @@ taotao:
     core:
       env: dev
       enabled: true
+    captcha:
+      enabled: true
     zookeeper:
       enabled: false
       lock:
@@ -497,9 +501,11 @@ mybatis-plus:
     db-config:
       id-type: auto
       table-underline: true
-      field-strategy: NOT_NULL
       logic-delete-value: 1
       logic-not-delete-value: 0
+      insert-strategy: ignored
+      update-strategy: ignored
+      select-strategy: ignored
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

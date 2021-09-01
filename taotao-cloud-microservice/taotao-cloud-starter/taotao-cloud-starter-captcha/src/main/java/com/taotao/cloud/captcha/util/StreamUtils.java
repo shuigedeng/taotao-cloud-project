@@ -35,7 +35,7 @@ import java.nio.charset.Charset;
  * @version 1.0.0
  * @since 2021/8/24 16:53
  */
-public abstract class StreamUtils {
+public class StreamUtils {
 
 	public static final int BUFFER_SIZE = 4096;
 	private static final byte[] EMPTY_CONTENT = new byte[0];
@@ -48,7 +48,7 @@ public abstract class StreamUtils {
 			return new byte[0];
 		} else {
 			ByteArrayOutputStream out = new ByteArrayOutputStream(4096);
-			copy((InputStream) in, out);
+			copy(in, out);
 			return out.toByteArray();
 		}
 	}

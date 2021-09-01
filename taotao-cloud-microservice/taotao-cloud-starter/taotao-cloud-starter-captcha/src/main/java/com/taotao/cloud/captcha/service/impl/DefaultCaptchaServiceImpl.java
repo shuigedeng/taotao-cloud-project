@@ -16,11 +16,11 @@
 package com.taotao.cloud.captcha.service.impl;
 
 
-import com.taotao.cloud.captcha.model.CaptchaVO;
-import com.taotao.cloud.captcha.model.RepCodeEnum;
-import com.taotao.cloud.captcha.model.ResponseModel;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaException;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.service.CaptchaService;
-import com.taotao.cloud.captcha.util.StringUtils;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Properties;
 
@@ -63,51 +63,52 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 	}
 
 	@Override
-	public ResponseModel get(CaptchaVO captchaVO) {
-		if (captchaVO == null) {
-			return RepCodeEnum.NULL_ERROR.parseError("captchaVO");
+	public Captcha get(Captcha captcha) {
+		if (captcha == null) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("captchaVO"));
 		}
-		if (StringUtils.isEmpty(captchaVO.getCaptchaType())) {
-			return RepCodeEnum.NULL_ERROR.parseError("类型");
+		if (StrUtil.isEmpty(captcha.getCaptchaType())) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("类型"));
 		}
-		return getService(captchaVO.getCaptchaType()).get(captchaVO);
+		return getService(captcha.getCaptchaType()).get(captcha);
 	}
 
 	@Override
-	public ResponseModel check(CaptchaVO captchaVO) {
-		if (captchaVO == null) {
-			return RepCodeEnum.NULL_ERROR.parseError("captchaVO");
+	public Captcha check(Captcha captcha) {
+		if (captcha == null) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("captchaVO"));
 		}
-		if (StringUtils.isEmpty(captchaVO.getCaptchaType())) {
-			return RepCodeEnum.NULL_ERROR.parseError("类型");
+		if (StrUtil.isEmpty(captcha.getCaptchaType())) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("二次校验参数"));
 		}
-		if (StringUtils.isEmpty(captchaVO.getToken())) {
-			return RepCodeEnum.NULL_ERROR.parseError("token");
+		if (StrUtil.isEmpty(captcha.getToken())) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("token"));
 		}
-		return getService(captchaVO.getCaptchaType()).check(captchaVO);
+		return getService(captcha.getCaptchaType()).check(captcha);
 	}
 
 	@Override
-	public ResponseModel verification(CaptchaVO captchaVO) {
-		if (captchaVO == null) {
-			return RepCodeEnum.NULL_ERROR.parseError("captchaVO");
+	public Captcha verification(Captcha captcha) {
+		if (captcha == null) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("captchaVO"));
 		}
-		if (StringUtils.isEmpty(captchaVO.getCaptchaVerification())) {
-			return RepCodeEnum.NULL_ERROR.parseError("二次校验参数");
+		if (StrUtil.isEmpty(captcha.getCaptchaVerification())) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("二次校验参数"));
 		}
+
 		try {
 			String codeKey = String.format(REDIS_SECOND_CAPTCHA_KEY,
-				captchaVO.getCaptchaVerification());
+				captcha.getCaptchaVerification());
 			if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
+				throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_INVALID);
 			}
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
 			LogUtil.error("验证码坐标解析失败", e);
-			return ResponseModel.errorMsg(e.getMessage());
+			throw new CaptchaException(e.getMessage());
 		}
-		return ResponseModel.success();
+		return captcha;
 	}
 
 }

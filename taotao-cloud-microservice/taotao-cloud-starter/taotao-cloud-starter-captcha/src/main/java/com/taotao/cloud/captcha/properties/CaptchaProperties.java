@@ -30,7 +30,7 @@ public class CaptchaProperties {
 
 	public static final String PREFIX = "taotao.cloud.captcha";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * 验证码类型.
@@ -100,7 +100,7 @@ public class CaptchaProperties {
 	/**
 	 * 一分钟内接口请求次数限制 开关
 	 */
-	private boolean reqFrequencyLimitEnable = false;
+	private boolean reqFrequencyLimitEnable = true;
 
 	/***
 	 * 一分钟内check接口失败次数
@@ -117,6 +117,7 @@ public class CaptchaProperties {
 	private int reqGetMinuteLimit = 100;
 	private int reqCheckMinuteLimit = 100;
 	private int reqVerifyMinuteLimit = 100;
+
 
 	public boolean isHistoryDataClearEnable() {
 		return historyDataClearEnable;

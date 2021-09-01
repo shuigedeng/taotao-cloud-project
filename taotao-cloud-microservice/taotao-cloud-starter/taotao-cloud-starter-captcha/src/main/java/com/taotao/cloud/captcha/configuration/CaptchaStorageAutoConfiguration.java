@@ -15,15 +15,20 @@
  */
 package com.taotao.cloud.captcha.configuration;
 
+import com.taotao.cloud.captcha.controller.CaptchaController;
 import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * CaptchaStorageAutoConfiguration
@@ -33,6 +38,9 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/8/24 16:38
  */
 @Configuration
+@Import(CaptchaController.class)
+@AutoConfigureAfter(CaptchaServiceAutoConfiguration.class)
+@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CaptchaStorageAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -41,7 +49,6 @@ public class CaptchaStorageAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 	public CaptchaCacheService captchaCacheService(CaptchaProperties captchaProperties) {
 		LogUtil.started(CaptchaCacheService.class, StarterName.CAPTCHA_STARTER);
 

@@ -27,7 +27,7 @@ import java.util.Objects;
  * @version 1.0.0
  * @since 2021/8/24 16:47
  */
-public class PointVO {
+public class Point {
 
 	private String secretKey;
 
@@ -59,16 +59,16 @@ public class PointVO {
 		this.y = y;
 	}
 
-	public PointVO(int x, int y, String secretKey) {
+	public Point(int x, int y, String secretKey) {
 		this.secretKey = secretKey;
 		this.x = x;
 		this.y = y;
 	}
 
-	public PointVO() {
+	public Point() {
 	}
 
-	public PointVO(int x, int y) {
+	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -77,7 +77,7 @@ public class PointVO {
 		return String.format("{\"secretKey\":\"%s\",\"x\":%d,\"y\":%d}", secretKey, x, y);
 	}
 
-	public PointVO parse(String jsonStr) {
+	public Point parse(String jsonStr) {
 		Map<String, Object> m = new HashMap();
 		Arrays.stream(jsonStr
 			.replaceFirst(",\\{", "\\{")
@@ -102,8 +102,8 @@ public class PointVO {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		PointVO pointVO = (PointVO) o;
-		return x == pointVO.x && y == pointVO.y && Objects.equals(secretKey, pointVO.secretKey);
+		Point point = (Point) o;
+		return x == point.x && y == point.y && Objects.equals(secretKey, point.secretKey);
 	}
 
 	@Override

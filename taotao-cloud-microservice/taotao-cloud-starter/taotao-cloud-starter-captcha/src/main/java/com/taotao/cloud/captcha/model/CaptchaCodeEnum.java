@@ -24,11 +24,8 @@ import java.text.MessageFormat;
  * @version 1.0.0
  * @since 2021/8/24 16:48
  */
-public enum RepCodeEnum {
+public enum CaptchaCodeEnum {
 
-	/**
-	 * 0001 - 0099 网关应答码
-	 */
 	SUCCESS("0000", "成功"),
 	ERROR("0001", "操作失败"),
 	EXCEPTION("9999", "服务器内部异常"),
@@ -55,7 +52,7 @@ public enum RepCodeEnum {
 	private String code;
 	private String desc;
 
-	RepCodeEnum(String code, String desc) {
+	CaptchaCodeEnum(String code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}
@@ -72,18 +69,8 @@ public enum RepCodeEnum {
 		return this.name();
 	}
 
-	/**
-	 * 将入参fieldNames与this.desc组合成错误信息 {fieldName}不能为空
-	 *
-	 * @param fieldNames fieldNames
-	 */
-	public ResponseModel parseError(Object... fieldNames) {
-		ResponseModel errorMessage = new ResponseModel();
-		String newDesc = MessageFormat.format(this.desc, fieldNames);
-
-		errorMessage.setRepCode(this.code);
-		errorMessage.setRepMsg(newDesc);
-		return errorMessage;
+	public String parseError(Object... fieldNames) {
+		return MessageFormat.format(this.desc, fieldNames);
 	}
 
 }

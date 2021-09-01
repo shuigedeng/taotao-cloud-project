@@ -15,15 +15,14 @@
  */
 package com.taotao.cloud.captcha.configuration;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.Const;
 import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.captcha.util.StringUtils;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.configuration.CoreConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -46,6 +45,7 @@ import org.springframework.util.FileCopyUtils;
  * @since 2021/8/24 16:38
  */
 @Configuration
+@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CaptchaServiceAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -55,10 +55,8 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
 	public CaptchaService captchaService(CaptchaProperties prop) {
 		LogUtil.started(CaptchaService.class, StarterName.CAPTCHA_STARTER);
-
 
 		Properties config = new Properties();
 
@@ -84,9 +82,10 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 		config.put(Const.REQ_CHECK_MINUTE_LIMIT, prop.getReqCheckMinuteLimit() + "");
 		config.put(Const.REQ_VALIDATE_MINUTE_LIMIT, prop.getReqVerifyMinuteLimit() + "");
 
-		if ((StringUtils.isNotBlank(prop.getJigsaw()) && prop.getJigsaw().startsWith("classpath:"))
-			|| (StringUtils.isNotBlank(prop.getPicClick()) && prop.getPicClick()
+		if ((StrUtil.isNotBlank(prop.getJigsaw()) && prop.getJigsaw().startsWith("classpath:"))
+			|| (StrUtil.isNotBlank(prop.getPicClick()) && prop.getPicClick()
 			.startsWith("classpath:"))) {
+
 			//自定义resources目录下初始化底图
 			config.put(Const.CAPTCHA_INIT_ORIGINAL, "true");
 			initializeBaseMap(prop.getJigsaw(), prop.getPicClick());
@@ -95,9 +94,11 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 	}
 
 	public static void initializeBaseMap(String jigsaw, String picClick) {
-		ImageUtils.cacheBootImage(getResourcesImagesFile(jigsaw + "/original/*.png"),
+		ImageUtils.cacheBootImage(
+			getResourcesImagesFile(jigsaw + "/original/*.png"),
 			getResourcesImagesFile(jigsaw + "/slidingBlock/*.png"),
-			getResourcesImagesFile(picClick + "/*.png"));
+			getResourcesImagesFile(picClick + "/*.png")
+		);
 	}
 
 	public static Map<String, String> getResourcesImagesFile(String path) {

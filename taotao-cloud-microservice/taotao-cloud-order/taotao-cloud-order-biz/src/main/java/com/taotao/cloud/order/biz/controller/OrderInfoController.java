@@ -4,10 +4,8 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.order.api.dto.OrderDTO;
+import com.taotao.cloud.order.api.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.OrderVO;
-import com.taotao.cloud.order.biz.entity.Order;
-import com.taotao.cloud.order.biz.mapper.OrderMapper;
-import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -42,17 +40,15 @@ public class OrderInfoController {
 	@RequestOperateLog(description = "获取订单信息")
 	@PreAuthorize("hasAuthority('order:info:code')")
 	public Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code) {
-		Order order = orderInfoService.findOrderInfoByCode(code);
-		OrderVO vo = OrderMapper.INSTANCE.orderToOrderVO(order);
+		OrderVO vo = orderInfoService.findOrderInfoByCode(code);
 		return Result.success(vo);
 	}
 
 	@Operation(summary = "添加订单信息", description = "添加订单信息", method = CommonConstant.POST)
 	@PostMapping
 	@RequestOperateLog(description = "添加订单信息")
-	Result<OrderVO> saveOrder( @RequestBody OrderDTO orderDTO) {
-		Order order = orderInfoService.saveOrder(orderDTO);
-		OrderVO vo = OrderMapper.INSTANCE.orderToOrderVO(order);
+	Result<OrderVO> saveOrder(@RequestBody OrderDTO orderDTO) {
+		OrderVO vo = orderInfoService.saveOrder(orderDTO);
 		return Result.success(vo);
 	}
 

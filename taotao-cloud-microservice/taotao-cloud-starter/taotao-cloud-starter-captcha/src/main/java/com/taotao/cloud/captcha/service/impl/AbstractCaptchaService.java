@@ -15,18 +15,18 @@
  */
 package com.taotao.cloud.captcha.service.impl;
 
-import com.taotao.cloud.captcha.model.CaptchaVO;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
+import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.Const;
-import com.taotao.cloud.captcha.model.RepCodeEnum;
-import com.taotao.cloud.captcha.model.ResponseModel;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
-import com.taotao.cloud.captcha.util.AESUtil;
 import com.taotao.cloud.captcha.util.CacheUtil;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.captcha.util.MD5Util;
-import com.taotao.cloud.captcha.util.StringUtils;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.secure.AESUtil;
+import com.taotao.cloud.common.utils.secure.MD5Util;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,6 +49,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	protected static int HAN_ZI_SIZE = 25;
 
 	protected static int HAN_ZI_SIZE_HALF = HAN_ZI_SIZE / 2;
+
 	//check校验坐标
 	protected static String REDIS_CAPTCHA_KEY = "RUNNING:CAPTCHA:%s";
 
@@ -77,6 +78,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	protected static int captchaInterferenceOptions = 0;
 
+	private static FrequencyLimitHandler limitHandler;
+
 	//判断应用是否实现了自定义缓存，没有就使用内存
 	@Override
 	public void init(final Properties config) {
@@ -86,6 +89,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 			ImageUtils.cacheImage(config.getProperty(Const.ORIGINAL_PATH_JIGSAW),
 				config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
 		}
+
 		LogUtil.info("--->>>初始化验证码底图<<<---" + captchaType());
 		waterMark = config.getProperty(Const.CAPTCHA_WATER_MARK, "我的水印");
 		slipOffset = config.getProperty(Const.CAPTCHA_SLIP_OFFSET, "5");
@@ -108,6 +112,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 				Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
 				Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
+
 		if (config.getProperty(Const.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
 			LogUtil.info("历史资源清除开关...开启..." + captchaType());
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
@@ -117,6 +122,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 				}
 			}));
 		}
+
 		if (config.getProperty(Const.REQ_FREQUENCY_LIMIT_ENABLE, "0").equals("1")) {
 			if (limitHandler == null) {
 				LogUtil.info("接口分钟内限流开关...开启...");
@@ -135,19 +141,18 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	}
 
-	private static FrequencyLimitHandler limitHandler;
-
 	@Override
-	public ResponseModel get(CaptchaVO captchaVO) {
+	public Captcha get(Captcha captcha) {
 		if (limitHandler != null) {
-			captchaVO.setClientUid(getValidateClientId(captchaVO));
-			return limitHandler.validateGet(captchaVO);
+			captcha.setClientUid(getValidateClientId(captcha));
+			// 校验客户端请求数据
+			limitHandler.validateGet(captcha);
 		}
-		return null;
+		return captcha;
 	}
 
 	@Override
-	public ResponseModel check(CaptchaVO captchaVO) {
+	public Captcha check(Captcha captcha) {
 		if (limitHandler != null) {
 			// 验证客户端
            /* ResponseModel ret = limitHandler.validateCheck(captchaVO);
@@ -155,43 +160,41 @@ public abstract class AbstractCaptchaService implements CaptchaService {
                 return ret;
             }
             // 服务端参数验证*/
-			captchaVO.setClientUid(getValidateClientId(captchaVO));
-			return limitHandler.validateCheck(captchaVO);
+
+			captcha.setClientUid(getValidateClientId(captcha));
+			limitHandler.validateCheck(captcha);
 		}
-		return null;
+		return captcha;
 	}
 
 	@Override
-	public ResponseModel verification(CaptchaVO captchaVO) {
-		if (captchaVO == null) {
-			return RepCodeEnum.NULL_ERROR.parseError("captchaVO");
+	public Captcha verification(Captcha captcha) {
+		if (captcha == null) {
+			throw new CaptchaException(CaptchaCodeEnum.NULL_ERROR.parseError("captcha"));
 		}
-		if (StringUtils.isEmpty(captchaVO.getCaptchaVerification())) {
-			return RepCodeEnum.NULL_ERROR.parseError("captchaVerification");
+		if (StrUtil.isEmpty(captcha.getCaptchaVerification())) {
+			throw new CaptchaException(
+				CaptchaCodeEnum.NULL_ERROR.parseError("captchaVerification"));
 		}
 		if (limitHandler != null) {
-			return limitHandler.validateVerify(captchaVO);
+			limitHandler.validateVerify(captcha);
 		}
-		return null;
+		return captcha;
 	}
 
-	protected boolean validatedReq(ResponseModel resp) {
-		return resp == null || resp.isSuccess();
-	}
-
-	protected String getValidateClientId(CaptchaVO req) {
+	protected String getValidateClientId(Captcha req) {
 		// 以服务端获取的客户端标识 做识别标志
-		if (StringUtils.isNotEmpty(req.getBrowserInfo())) {
-			return MD5Util.md5(req.getBrowserInfo());
+		if (StrUtil.isNotEmpty(req.getBrowserInfo())) {
+			return MD5Util.encrypt(req.getBrowserInfo());
 		}
 		// 以客户端Ui组件id做识别标志
-		if (StringUtils.isNotEmpty(req.getClientUid())) {
+		if (StrUtil.isNotEmpty(req.getClientUid())) {
 			return req.getClientUid();
 		}
 		return null;
 	}
 
-	protected void afterValidateFail(CaptchaVO data) {
+	protected void afterValidateFail(Captcha data) {
 		if (limitHandler != null) {
 			// 验证失败 分钟内计数
 			String fails = String.format(FrequencyLimitHandler.LIMIT_KEY, "FAIL",
@@ -205,8 +208,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	}
 
 	/**
-	 * 加载resources下的font字体，add by lide1202@hotmail.com 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示，
-	 * 通过加载resources下的font字体解决，无需在linux中安装字体
+	 * 加载resources下的font字体 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示， 通过加载resources下的font字体解决，无需在linux中安装字体
 	 */
 	private void loadWaterMarkFont() {
 		try {
@@ -221,7 +223,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 			}
 
 		} catch (Exception e) {
-			LogUtil.error("load font error:{}", e, e.getMessage());
+			LogUtil.error(e, "load font error:{}", e.getMessage());
 		}
 	}
 
@@ -257,13 +259,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	/**
 	 * 解密前端坐标aes加密
-	 *
-	 * @param point
-	 * @return
-	 * @throws Exception
 	 */
 	public static String decrypt(String point, String key) throws Exception {
-		return AESUtil.aesDecrypt(point, key);
+		return AESUtil.decrypt(point, key);
 	}
 
 	protected static int getEnOrChLength(String s) {

@@ -59,7 +59,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 							+ ((Number) item.value).doubleValue());
 					}
 				} else {
-					if (item.value != null && item.value instanceof Number) {
+					if (item.value instanceof Number) {
 						sums.put(fieldname, ((Number) item.value).doubleValue());
 					}
 				}
@@ -71,7 +71,7 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		for (Map.Entry<String, Object> item : sums.entrySet()) {
 			if (item.getValue() instanceof Number) {
 				Object value = item.getValue();
-				if (Objects.nonNull(value) && !reportList.isEmpty()) {
+				if (!reportList.isEmpty()) {
 					sums.replace(item.getKey(),
 						NumberUtil.scale(((Number) value).doubleValue() / reportList.size(), 2));
 				}

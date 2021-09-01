@@ -16,8 +16,7 @@
 package com.taotao.cloud.captcha.service;
 
 
-import com.taotao.cloud.captcha.model.CaptchaVO;
-import com.taotao.cloud.captcha.model.ResponseModel;
+import com.taotao.cloud.captcha.model.Captcha;
 import java.util.Properties;
 
 /**
@@ -36,24 +35,18 @@ public interface CaptchaService {
 
 	/**
 	 * 获取验证码
-	 *
-	 * @param captchaVO
 	 */
-	ResponseModel get(CaptchaVO captchaVO);
+	Captcha get(Captcha captcha);
 
 	/**
 	 * 核对验证码(前端)
-	 *
-	 * @param captchaVO
 	 */
-	ResponseModel check(CaptchaVO captchaVO);
+	Captcha check(Captcha captcha);
 
 	/**
 	 * 二次校验验证码(后端)
-	 *
-	 * @param captchaVO
 	 */
-	ResponseModel verification(CaptchaVO captchaVO);
+	Captcha verification(Captcha captcha);
 
 	/***
 	 * 验证码类型

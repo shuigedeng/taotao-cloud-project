@@ -83,6 +83,7 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 			"/webjars/**",
 			"/actuator/**",
 			"/order/**",
+			"/captcha/**",
 			"/taotao/cloud/health/**",
 			"/resource/**"));
 

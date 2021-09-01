@@ -16,17 +16,17 @@
 package com.taotao.cloud.captcha.service.impl;
 
 
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
+import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaTypeEnum;
-import com.taotao.cloud.captcha.model.CaptchaVO;
-import com.taotao.cloud.captcha.model.PointVO;
-import com.taotao.cloud.captcha.model.RepCodeEnum;
-import com.taotao.cloud.captcha.model.ResponseModel;
-import com.taotao.cloud.captcha.util.AESUtil;
+import com.taotao.cloud.captcha.model.Point;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.captcha.util.JsonUtil;
-import com.taotao.cloud.captcha.util.RandomUtils;
-import com.taotao.cloud.captcha.util.StringUtils;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.RandomUtil;
+import com.taotao.cloud.common.utils.secure.AESUtil;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -66,17 +66,14 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	}
 
 	@Override
-	public ResponseModel get(CaptchaVO captchaVO) {
-		ResponseModel r = super.get(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+	public Captcha get(Captcha captchaVO) {
+		super.get(captchaVO);
 
 		//原生图片
 		BufferedImage originalImage = ImageUtils.getOriginal();
 		if (null == originalImage) {
 			LogUtil.error("滑动底图未初始化成功，请检查路径");
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_BASEMAP_NULL);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
 
 		//设置水印
@@ -93,97 +90,100 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		BufferedImage jigsawImage = ImageUtils.getBase64StrToImage(jigsawImageBase64);
 		if (null == jigsawImage) {
 			LogUtil.error("滑动底图未初始化成功，请检查路径");
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_BASEMAP_NULL);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_BASEMAP_NULL);
 		}
-		CaptchaVO captcha = pictureTemplatesCut(originalImage, jigsawImage, jigsawImageBase64);
+
+		Captcha captcha = pictureTemplatesCut(originalImage, jigsawImage, jigsawImageBase64);
 		if (captcha == null
-			|| StringUtils.isBlank(captcha.getJigsawImageBase64())
-			|| StringUtils.isBlank(captcha.getOriginalImageBase64())) {
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_ERROR);
+			|| StrUtil.isBlank(captcha.getJigsawImageBase64())
+			|| StrUtil.isBlank(captcha.getOriginalImageBase64())) {
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_ERROR);
 		}
-		return ResponseModel.successData(captcha);
+		return captcha;
 	}
 
 	@Override
-	public ResponseModel check(CaptchaVO captchaVO) {
-		ResponseModel r = super.check(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+	public Captcha check(Captcha captcha) {
+		check(captcha);
+
 		//取坐标信息
-		String codeKey = String.format(REDIS_CAPTCHA_KEY, captchaVO.getToken());
+		String codeKey = String.format(REDIS_CAPTCHA_KEY, captcha.getToken());
 		if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_INVALID);
 		}
+
 		String s = CaptchaServiceFactory.getCache(cacheType).get(codeKey);
 		//验证码只用一次，即刻失效
 		CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
-		PointVO point = null;
-		PointVO point1 = null;
-		String pointJson = null;
+		Point point;
+		Point point1;
+		String pointJson;
+
 		try {
-			point = JsonUtil.parseObject(s, PointVO.class);
+			point = JsonUtil.toObject(s, Point.class);
 			//aes解密
-			pointJson = decrypt(captchaVO.getPointJson(), point.getSecretKey());
-			point1 = JsonUtil.parseObject(pointJson, PointVO.class);
+			pointJson = decrypt(captcha.getPointJson(), point.getSecretKey());
+			point1 = JsonUtil.toObject(pointJson, Point.class);
 		} catch (Exception e) {
 			LogUtil.error("验证码坐标解析失败", e);
-			afterValidateFail(captchaVO);
-			return ResponseModel.errorMsg(e.getMessage());
+			afterValidateFail(captcha);
+			throw new CaptchaException(e.getMessage());
 		}
+
 		if (point.x - Integer.parseInt(slipOffset) > point1.x
 			|| point1.x > point.x + Integer.parseInt(slipOffset)
 			|| point.y != point1.y) {
-			afterValidateFail(captchaVO);
-			return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_COORDINATE_ERROR);
+			afterValidateFail(captcha);
+			throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_COORDINATE_ERROR);
 		}
+
 		//校验成功，将信息存入缓存
 		String secretKey = point.getSecretKey();
-		String value = null;
+		String value;
 		try {
-			value = AESUtil.aesEncrypt(captchaVO.getToken().concat("---").concat(pointJson),
+			value = AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
 				secretKey);
 		} catch (Exception e) {
 			LogUtil.error("AES加密失败", e);
-			afterValidateFail(captchaVO);
-			return ResponseModel.errorMsg(e.getMessage());
+			afterValidateFail(captcha);
+			throw new CaptchaException(e.getMessage());
 		}
+
 		String secondKey = String.format(REDIS_SECOND_CAPTCHA_KEY, value);
 		CaptchaServiceFactory.getCache(cacheType)
-			.set(secondKey, captchaVO.getToken(), EXPIRESIN_THREE);
-		captchaVO.setResult(true);
-		captchaVO.resetClientFlag();
-		return ResponseModel.successData(captchaVO);
+			.set(secondKey, captcha.getToken(), EXPIRESIN_THREE);
+		captcha.setResult(true);
+		captcha.resetClientFlag();
+
+		return captcha;
 	}
 
 	@Override
-	public ResponseModel verification(CaptchaVO captchaVO) {
-		ResponseModel r = super.verification(captchaVO);
-		if (!validatedReq(r)) {
-			return r;
-		}
+	public Captcha verification(Captcha captcha) {
+		super.verification(captcha);
+
 		try {
 			String codeKey = String.format(REDIS_SECOND_CAPTCHA_KEY,
-				captchaVO.getCaptchaVerification());
+				captcha.getCaptchaVerification());
 			if (!CaptchaServiceFactory.getCache(cacheType).exists(codeKey)) {
-				return ResponseModel.errorMsg(RepCodeEnum.API_CAPTCHA_INVALID);
+				throw new CaptchaException(CaptchaCodeEnum.API_CAPTCHA_INVALID);
 			}
 			//二次校验取值后，即刻失效
 			CaptchaServiceFactory.getCache(cacheType).delete(codeKey);
 		} catch (Exception e) {
 			LogUtil.error("验证码坐标解析失败", e);
-			return ResponseModel.errorMsg(e.getMessage());
+			throw new CaptchaException(e.getMessage());
 		}
-		return ResponseModel.success();
+		return captcha;
 	}
 
 	/**
 	 * 根据模板切图
 	 */
-	public CaptchaVO pictureTemplatesCut(BufferedImage originalImage, BufferedImage jigsawImage,
+	public Captcha pictureTemplatesCut(BufferedImage originalImage, BufferedImage jigsawImage,
 		String jigsawImageBase64) {
 		try {
-			CaptchaVO dataVO = new CaptchaVO();
+			Captcha dataVO = new Captcha();
 
 			int originalWidth = originalImage.getWidth();
 			int originalHeight = originalImage.getHeight();
@@ -191,7 +191,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			int jigsawHeight = jigsawImage.getHeight();
 
 			//随机生成拼图坐标
-			PointVO point = generateJigsawPoint(originalWidth, originalHeight, jigsawWidth,
+			Point point = generateJigsawPoint(originalWidth, originalHeight, jigsawWidth,
 				jigsawHeight);
 			int x = point.getX();
 			int y = point.getY();
@@ -211,11 +211,11 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				int position = 0;
 				if (originalWidth - x - 5 > jigsawWidth * 2) {
 					//在原扣图右边插入干扰图
-					position = RandomUtils.getRandomInt(x + jigsawWidth + 5,
+					position = RandomUtil.randomInt(x + jigsawWidth + 5,
 						originalWidth - jigsawWidth);
 				} else {
 					//在原扣图左边插入干扰图
-					position = RandomUtils.getRandomInt(100, x - jigsawWidth - 5);
+					position = RandomUtil.randomInt(100, x - jigsawWidth - 5);
 				}
 				while (true) {
 					String s = ImageUtils.getslidingBlock();
@@ -231,7 +231,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				while (true) {
 					String s = ImageUtils.getslidingBlock();
 					if (!jigsawImageBase64.equals(s)) {
-						Integer randomInt = RandomUtils.getRandomInt(jigsawWidth,
+						Integer randomInt = RandomUtil.randomInt(jigsawWidth,
 							100 - jigsawWidth);
 						interferenceByTemplate(originalImage,
 							Objects.requireNonNull(ImageUtils.getBase64StrToImage(s)),
@@ -265,7 +265,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 //            dataVO.setPoint(point);
 			dataVO.setJigsawImageBase64(
 				encoder.encodeToString(jigsawImages).replaceAll("\r|\n", ""));
-			dataVO.setToken(RandomUtils.getUUID());
+			dataVO.setToken(RandomUtil.randomString(16));
 			dataVO.setSecretKey(point.getSecretKey());
 //            base64StrToImage(encoder.encodeToString(oriCopyImages), "D:\\原图.png");
 //            base64StrToImage(encoder.encodeToString(jigsawImages), "D:\\滑动.png");
@@ -274,7 +274,7 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 			String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
 			CaptchaServiceFactory.getCache(cacheType)
 				.set(codeKey, JsonUtil.toJSONString(point), EXPIRESIN_SECONDS);
-			LogUtil.debug("token：{},point:{}", dataVO.getToken(), JsonUtil.toJSONString(point));
+			LogUtil.info("token：{},point:{}", dataVO.getToken(), JsonUtil.toJSONString(point));
 			return dataVO;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -292,12 +292,12 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param jigsawHeight
 	 * @return
 	 */
-	private static PointVO generateJigsawPoint(int originalWidth, int originalHeight,
+	private static Point generateJigsawPoint(int originalWidth, int originalHeight,
 		int jigsawWidth, int jigsawHeight) {
 		Random random = new Random();
 		int widthDifference = originalWidth - jigsawWidth;
 		int heightDifference = originalHeight - jigsawHeight;
-		int x, y = 0;
+		int x, y;
 		if (widthDifference <= 0) {
 			x = 5;
 		} else {
@@ -310,9 +310,9 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 		String key = null;
 		if (captchaAesStatus) {
-			key = AESUtil.getKey();
+			key = RandomUtil.randomString(16);
 		}
-		return new PointVO(x, y, key);
+		return new Point(x, y, key);
 	}
 
 	/**

@@ -15,24 +15,25 @@
  */
 package com.taotao.cloud.captcha.model;
 
-import java.awt.Point;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * CaptchaVO
+ * Captcha
  *
  * @author shuigedeng
  * @version 1.0.0
  * @since 2021/8/24 16:47
  */
-public class CaptchaVO implements Serializable {
+public class Captcha implements Serializable {
 
 	/**
 	 * 验证码id(后台申请)
 	 */
 	private String captchaId;
-
+	/**
+	 *
+	 */
 	private String projectCode;
 
 	/**
@@ -56,7 +57,7 @@ public class CaptchaVO implements Serializable {
 	/**
 	 * 滑块点选坐标
 	 */
-	private PointVO point;
+	private Point point;
 
 	/**
 	 * 滑块图片base64
@@ -71,14 +72,12 @@ public class CaptchaVO implements Serializable {
 	/**
 	 * 点选坐标
 	 */
-	private List<Point> pointList;
-
+	private List<java.awt.Point> pointList;
 
 	/**
 	 * 点坐标(base64加密传输)
 	 */
 	private String pointJson;
-
 
 	/**
 	 * UUID(每次请求的验证码唯一标识)
@@ -95,11 +94,12 @@ public class CaptchaVO implements Serializable {
 	 */
 	private String captchaVerification;
 
-	/***
+	/**
 	 * 客户端UI组件id,组件初始化时设置一次，UUID
 	 */
 	private String clientUid;
-	/***
+
+	/**
 	 * 客户端的请求时间，预留字段
 	 */
 	private Long ts;
@@ -170,11 +170,11 @@ public class CaptchaVO implements Serializable {
 		this.originalImageBase64 = originalImageBase64;
 	}
 
-	public PointVO getPoint() {
+	public Point getPoint() {
 		return point;
 	}
 
-	public void setPoint(PointVO point) {
+	public void setPoint(Point point) {
 		this.point = point;
 	}
 
@@ -194,11 +194,11 @@ public class CaptchaVO implements Serializable {
 		this.wordList = wordList;
 	}
 
-	public List<Point> getPointList() {
+	public List<java.awt.Point> getPointList() {
 		return pointList;
 	}
 
-	public void setPointList(List<Point> pointList) {
+	public void setPointList(List<java.awt.Point> pointList) {
 		this.pointList = pointList;
 	}
 

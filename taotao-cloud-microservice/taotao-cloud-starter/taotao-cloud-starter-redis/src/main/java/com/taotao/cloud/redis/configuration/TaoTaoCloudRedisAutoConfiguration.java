@@ -23,6 +23,7 @@ import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.redisson.api.RedissonClient;
+import org.redisson.spring.data.connection.RedissonConnection;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

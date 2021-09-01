@@ -8,10 +8,13 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
+import com.taotao.cloud.order.api.service.IOrderInfoService;
+import com.taotao.cloud.order.api.vo.OrderVO;
 import com.taotao.cloud.order.biz.entity.Order;
 import com.taotao.cloud.order.biz.entity.QOrder;
+import com.taotao.cloud.order.biz.mapper.OrderMapper;
 import com.taotao.cloud.order.biz.repository.OrderInfoRepository;
-import com.taotao.cloud.order.biz.service.IOrderInfoService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version v1.0.0
  * @create 2020/6/10 16:55
  */
-@Service
+@DubboService
 public class OrderInfoServiceImpl implements IOrderInfoService {
 
 	private final OrderInfoRepository orderInfoRepository;
@@ -36,18 +39,20 @@ public class OrderInfoServiceImpl implements IOrderInfoService {
 	private final static QOrder ORDER_INFO = QOrder.order;
 
 	@Override
-	public Order findOrderInfoByCode(String code) {
+	public OrderVO findOrderInfoByCode(String code) {
 		BooleanExpression expression = ORDER_INFO.delFlag.eq(false).and(ORDER_INFO.code.eq(code));
-		return orderInfoRepository.fetchOne(expression);
+		Order order = orderInfoRepository.fetchOne(expression);
+		return OrderMapper.INSTANCE.orderToOrderVO(order);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Order saveOrder(OrderDTO orderDTO) {
+	public OrderVO saveOrder(OrderDTO orderDTO) {
 		Order order = Order.builder().build();
 		BeanUtil.copyIgnoredNull(orderDTO, order);
 		String traceId = TraceContext.traceId();
 		LogUtil.info("skywalking traceid ===> {0}", traceId);
-		return orderInfoRepository.saveAndFlush(order);
+		Order order1 = orderInfoRepository.saveAndFlush(order);
+		return OrderMapper.INSTANCE.orderToOrderVO(order1);
 	}
 }

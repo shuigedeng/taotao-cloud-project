@@ -1,6 +1,7 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -12,6 +13,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
 import com.taotao.cloud.order.api.feign.RemoteOrderItemService;
 import com.taotao.cloud.order.api.feign.RemoteOrderService;
+import com.taotao.cloud.order.api.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.OrderVO;
 import com.taotao.cloud.uc.api.query.resource.ResourcePageQuery;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
@@ -34,6 +36,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,11 +58,15 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
+@DubboService
 public class SysResourceServiceImpl implements ISysResourceService {
 	private final SysResourceRepository sysResourceRepository;
 	private final ISysRoleService sysRoleService;
 	private final RemoteOrderItemService remoteOrderItemService;
 	private final RemoteOrderService remoteOrderService;
+
+	@DubboReference
+	private IOrderInfoService iOrderInfoService;
 
 	public SysResourceServiceImpl(
 		SysResourceRepository sysResourceRepository,
@@ -207,37 +215,37 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	}
 
 	@Override
-	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
+	//@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
-		LogUtil.info("1.添加资源信息");
-		SysResource sysResource = SysResource.builder()
-		 	.name("资源三")
-		 	.type((byte) 1)
-		 	.parentId(0L)
-		 	.sortNum(2)
-		 	.build();
-		 saveResource(sysResource);
+		//LogUtil.info("1.添加资源信息");
+		//SysResource sysResource = SysResource.builder()
+		// 	.name("资源三")
+		// 	.type((byte) 1)
+		// 	.parentId(0L)
+		// 	.sortNum(2)
+		// 	.build();
+		// saveResource(sysResource);
+		//
+		//String traceId = TraceContext.traceId();
+		//LogUtil.info("skywalking traceid ===> {0}", traceId);
+		//
+		//LogUtil.info("1.远程添加订单信息");
+		//OrderDTO orderDTO = OrderDTO.builder()
+		//	.memberId(2L)
+		//	.code("33333")
+		//	.amount(BigDecimal.ZERO)
+		//	.mainStatus(1)
+		//	.childStatus(1)
+		//	.receiverName("shuigedeng")
+		//	.receiverPhone("15730445330")
+		//	.receiverAddressJson("sjdlasjdfljsldf")
+		//	.build();
 
-		String traceId = TraceContext.traceId();
-		LogUtil.info("skywalking traceid ===> {0}", traceId);
-
-		LogUtil.info("1.远程添加订单信息");
-		OrderDTO orderDTO = OrderDTO.builder()
-			.memberId(2L)
-			.code("33333")
-			.amount(BigDecimal.ZERO)
-			.mainStatus(1)
-			.childStatus(1)
-			.receiverName("shuigedeng")
-			.receiverPhone("15730445330")
-			.receiverAddressJson("sjdlasjdfljsldf")
-			.build();
-
-		Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
-		if(orderVOResult.getCode() != 200){
-			throw new BusinessException("创建订单失败");
-		}
-		LogUtil.info("OrderVO ===> {0}", orderVOResult);
+		//Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
+		//if(orderVOResult.getCode() != 200){
+		//	throw new BusinessException("创建订单失败");
+		//}
+		//LogUtil.info("OrderVO ===> {0}", orderVOResult);
 
 //		LogUtil.info("2.远程添加商品信息");
 //		ProductDTO productDTO = ProductDTO.builder()
@@ -252,6 +260,12 @@ public class SysResourceServiceImpl implements ISysResourceService {
 //			.status(1)
 //			.build();
 //		remoteProductService.saveProduct(productDTO);
+
+		SysResource resourceById = findResourceById(37L);
+		LogUtil.info("resourceById ======> ", resourceById);
+
+		OrderVO orderInfoByCode = iOrderInfoService.findOrderInfoByCode("33333");
+		LogUtil.info("OrderVO ====> {}", orderInfoByCode);
 
 		return true;
 	}
