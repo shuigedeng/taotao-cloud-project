@@ -25,18 +25,21 @@ import org.slf4j.MDC;
  * 链路追踪工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:49
+ * @version 2021.9
+ * @since 2021-09-02 14:39:33
  */
 public class TraceUtil {
+
+	private TraceUtil() {
+	}
 
 	/**
 	 * 从header和参数中获取traceId 从前端传入数据
 	 *
-	 * @param request 　HttpServletRequest
-	 * @return java.lang.String 跟踪ID
+	 * @param request 　request
+	 * @return {@link String } 跟踪ID
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:59
+	 * @since 2021-09-02 14:39:44
 	 */
 	public static String getTraceId(HttpServletRequest request) {
 		String traceId = request.getParameter(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
@@ -53,9 +56,9 @@ public class TraceUtil {
 	/**
 	 * 获取traceId
 	 *
-	 * @return java.lang.String 跟踪ID
+	 * @return {@link String } 跟踪ID
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:55
+	 * @since 2021-09-02 14:40:16
 	 */
 	public static String getTraceId() {
 		return MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
@@ -66,7 +69,7 @@ public class TraceUtil {
 	 *
 	 * @param traceId 　跟踪ID
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:57
+	 * @since 2021-09-02 14:48:47
 	 */
 	public static void mdcTraceId(String traceId) {
 		if (StrUtil.isNotBlank(traceId)) {
@@ -79,7 +82,7 @@ public class TraceUtil {
 	 *
 	 * @param tenantId 　租户id
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:57
+	 * @since 2021-09-02 14:48:59
 	 */
 	public static void mdcTenantId(String tenantId) {
 		if (StrUtil.isNotBlank(tenantId)) {
@@ -92,7 +95,7 @@ public class TraceUtil {
 	 *
 	 * @param version 　租户id
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:57
+	 * @since 2021-09-02 14:49:14
 	 */
 	public static void mdcVersion(String version) {
 		if (StrUtil.isNotBlank(version)) {
@@ -100,14 +103,13 @@ public class TraceUtil {
 		}
 	}
 
-
 	/**
-	 * 从header和参数中获取traceId 从前端传入数据
+	 * 从header和参数中获取Zipkin traceId 从前端传入数据
 	 *
 	 * @param request 　HttpServletRequest
-	 * @return java.lang.String 跟踪ID
+	 * @return {@link String } 跟踪ID
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:59
+	 * @since 2021-09-02 14:49:23
 	 */
 	public static String getZipkinTraceId(HttpServletRequest request) {
 		String zipkinTraceId = request.getParameter(CommonConstant.ZIPKIN_TRACE_ID);
@@ -122,12 +124,12 @@ public class TraceUtil {
 	}
 
 	/**
-	 * 从header和参数中获取traceId 从前端传入数据
+	 * 从header和参数中获取Zipkin SpanId 从前端传入数据
 	 *
 	 * @param request 　HttpServletRequest
-	 * @return java.lang.String 跟踪ID
+	 * @return {@link String } 跟踪ID
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:59
+	 * @since 2021-09-02 14:49:43
 	 */
 	public static String getZipkinSpanId(HttpServletRequest request) {
 		String zipkinSpanId = request.getParameter(CommonConstant.ZIPKIN_SPANE_ID);
@@ -146,7 +148,7 @@ public class TraceUtil {
 	 *
 	 * @param request 　request
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:57
+	 * @since 2021-09-02 14:50:07
 	 */
 	public static void mdcZipkinTraceId(HttpServletRequest request) {
 		String zipkinTraceId = getZipkinTraceId(request);
@@ -160,7 +162,7 @@ public class TraceUtil {
 	 *
 	 * @param request 　request
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:57
+	 * @since 2021-09-02 14:50:16
 	 */
 	public static void mdcZipkinSpanId(HttpServletRequest request) {
 		String zipkinSpanId = getZipkinSpanId(request);

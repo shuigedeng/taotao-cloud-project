@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.session;
 
 
-import com.taotao.cloud.dingtalk.core.DingerRobot;
+import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.dingtalk.properties.DingerProperties;
 
 /**

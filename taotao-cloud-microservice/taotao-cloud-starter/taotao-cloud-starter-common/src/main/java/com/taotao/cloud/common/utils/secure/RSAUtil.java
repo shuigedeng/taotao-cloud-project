@@ -35,9 +35,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * RSAUtil
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:27
+ * @version 2021.9
+ * @since 2021-09-02 17:55:01
  */
 public class RSAUtil {
 
@@ -56,6 +56,10 @@ public class RSAUtil {
 
 	/**
 	 * 随机生成密钥对（公钥、私钥）
+	 *
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:55:15
 	 */
 	public static Map<RSAKey, String> generatorPairKey() {
 		try {
@@ -92,6 +96,8 @@ public class RSAUtil {
 	 * @param text      明文
 	 * @param publicKey 公钥
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:55:15
 	 */
 	public static String encrypt(String text, String publicKey) {
 		if (StringUtils.isAnyBlank(text, publicKey)) {
@@ -119,6 +125,8 @@ public class RSAUtil {
 	 * @param ciphertext 密文
 	 * @param privateKey 私钥
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:55:15
 	 */
 	public static String decrypt(String ciphertext, String privateKey) {
 		if (StringUtils.isAnyBlank(ciphertext, privateKey)) {

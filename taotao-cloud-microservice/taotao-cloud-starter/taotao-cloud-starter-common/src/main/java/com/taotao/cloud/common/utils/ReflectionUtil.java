@@ -15,48 +15,52 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * ReflectionUtils
+ * ReflectionUtil
  *
  * @author shuigedeng
- * @version 1.0
- * @since 2019-07-31 09:54
- **/
+ * @version 2021.9
+ * @since 2021-09-02 15:02:23
+ */
 public class ReflectionUtil {
+
+	private ReflectionUtil() {
+	}
 
 	/**
 	 * classForName
 	 *
 	 * @param type 类型
+	 * @return {@link Class }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:35
+	 * @since 2021-09-02 15:02:32
 	 */
 	public static Class<?> classForName(String type) {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
 
 	/**
-	 * tryClassForName
+	 * 类型
 	 *
 	 * @param type 类型
+	 * @return {@link Class }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:35
+	 * @since 2021-09-02 15:02:39
 	 */
 	public static Class<?> tryClassForName(String type) {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			return null;
 		}
 	}
@@ -66,9 +70,9 @@ public class ReflectionUtil {
 	 *
 	 * @param cls        类
 	 * @param methodName 方法名
-	 * @return java.lang.reflect.Method
+	 * @return {@link Method }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:35
+	 * @since 2021-09-02 15:02:47
 	 */
 	public static Method findMethod(Class<?> cls, String methodName) {
 		Method find = null;
@@ -92,9 +96,9 @@ public class ReflectionUtil {
 	 * @param cls        类型
 	 * @param methodName 方法名
 	 * @param argsTypes  参数类型
-	 * @return java.lang.reflect.Method
+	 * @return {@link Method }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:35
+	 * @since 2021-09-02 15:03:01
 	 */
 	public static Method findMethod0(Class<?> cls, String methodName, Class<?>... argsTypes)
 		throws NoSuchMethodException, SecurityException {
@@ -112,9 +116,10 @@ public class ReflectionUtil {
 	 * @param methodName   方法名
 	 * @param param        参数
 	 * @param defaultValue 默认值
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:35
+	 * @since 2021-09-02 15:03:09
 	 */
 	public static <T> T tryCallMethod(Object obj, String methodName, Object[] param,
 		T defaultValue) {
@@ -141,9 +146,9 @@ public class ReflectionUtil {
 	 * @param obj        对象
 	 * @param methodName 方法名
 	 * @param param      参数
-	 * @return java.lang.Object
+	 * @return {@link Object }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:36
+	 * @since 2021-09-02 15:03:17
 	 */
 	public static Object callMethod(Object obj, String methodName, Object[] param) {
 		try {
@@ -164,9 +169,9 @@ public class ReflectionUtil {
 	 * @param clazz      类型
 	 * @param methodName 方法名
 	 * @param params     参数
-	 * @return java.lang.Object
+	 * @return {@link Object }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:36
+	 * @since 2021-09-02 15:03:25
 	 */
 	public static Object callMethod(Class<?> clazz, String methodName, Object[] params) {
 		try {
@@ -188,9 +193,9 @@ public class ReflectionUtil {
 	 * @param methodName 方法名
 	 * @param params     参数
 	 * @param paramTypes 参数类型
-	 * @return java.lang.Object
+	 * @return {@link Object }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:36
+	 * @since 2021-09-02 15:03:38
 	 */
 	public static Object callMethodWithParams(Class<?> clazz, String methodName, Object[] params,
 		Class<?>... paramTypes) {
@@ -213,9 +218,9 @@ public class ReflectionUtil {
 	 * @param methodName 方法名
 	 * @param params     参数
 	 * @param paramTypes 参数类型
-	 * @return java.lang.Object
+	 * @return {@link Object }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:36
+	 * @since 2021-09-02 15:03:48
 	 */
 	public static Object callMethodWithParams(Object object, String methodName, Object[] params,
 		Class<?>... paramTypes) {
@@ -226,7 +231,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到方法" + StringUtil.nullToEmpty(methodName));
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -236,9 +241,9 @@ public class ReflectionUtil {
 	 *
 	 * @param cls  类型
 	 * @param name 字段名称
-	 * @return java.lang.reflect.Field
+	 * @return {@link Field }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:37
+	 * @since 2021-09-02 15:03:57
 	 */
 	public static Field findField(Class<?> cls, String name) {
 		Field find = null;
@@ -262,9 +267,10 @@ public class ReflectionUtil {
 	 *
 	 * @param obj  对象
 	 * @param name 字段名称
+	 * @param <T>  T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:37
+	 * @since 2021-09-02 15:04:04
 	 */
 	public static <T> T getFieldValue(Object obj, String name) {
 		try {
@@ -277,7 +283,7 @@ public class ReflectionUtil {
 			}
 			throw new Exception("未找到字段" + StringUtil.nullToEmpty(name));
 		} catch (Exception e) {
-			LogUtil.error( e);
+			LogUtil.error(e);
 			throw new BaseException(e.getMessage());
 		}
 	}
@@ -288,9 +294,10 @@ public class ReflectionUtil {
 	 * @param obj          对象
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:37
+	 * @since 2021-09-02 15:04:13
 	 */
 	public static <T> T tryGetFieldValue(Object obj, String name, T defaultValue) {
 		try {
@@ -305,7 +312,7 @@ public class ReflectionUtil {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			return defaultValue;
 		}
 	}
@@ -316,15 +323,16 @@ public class ReflectionUtil {
 	 * @param cls          对象全路径
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:37
+	 * @since 2021-09-02 15:04:21
 	 */
 	public static <T> T tryGetStaticFieldValue(String cls, String name, T defaultValue) {
 		try {
 			return tryGetStaticFieldValue(Class.forName(cls), name, defaultValue);
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			return defaultValue;
 		}
 	}
@@ -335,9 +343,10 @@ public class ReflectionUtil {
 	 * @param cls          类型
 	 * @param name         字段名称
 	 * @param defaultValue 默认值
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:37
+	 * @since 2021-09-02 15:04:28
 	 */
 	public static <T> T tryGetStaticFieldValue(Class<?> cls, String name, T defaultValue) {
 		try {
@@ -352,7 +361,7 @@ public class ReflectionUtil {
 			}
 			return defaultValue;
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			return defaultValue;
 		}
 	}
@@ -364,7 +373,7 @@ public class ReflectionUtil {
 	 * @param obj   对象
 	 * @param value 值
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:38
+	 * @since 2021-09-02 15:04:36
 	 */
 	public static void setFieldValue(Field field, Object obj, Object value) {
 		try {
@@ -373,7 +382,7 @@ public class ReflectionUtil {
 			}
 			field.set(obj, value);
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -384,9 +393,10 @@ public class ReflectionUtil {
 	 * @param obj  对象
 	 * @param path 路径
 	 * @param deft deft
+	 * @param <T>  T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:38
+	 * @since 2021-09-02 15:04:43
 	 */
 	public static <T> T tryGetValue(Object obj, String path, T deft) {
 		if (obj == null || path == null || path.length() == 0) {
@@ -412,9 +422,10 @@ public class ReflectionUtil {
 	 *
 	 * @param obj  对象
 	 * @param path 路径
+	 * @param <T>  T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:38
+	 * @since 2021-09-02 15:04:53
 	 */
 	public static <T> T tryGetValue(Object obj, String path) {
 		return tryGetValue(obj, path, null);

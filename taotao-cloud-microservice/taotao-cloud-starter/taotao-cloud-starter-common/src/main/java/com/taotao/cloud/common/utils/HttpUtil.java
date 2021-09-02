@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -26,19 +25,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * http请求操作类
+ * HttpUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:39
+ * @version 2021.9
+ * @since 2021-09-02 16:43:58
  */
 public class HttpUtil {
+
+	private HttpUtil() {
+	}
 
 	/**
 	 * 发送GET请求
 	 *
 	 * @param requestUrl  requestUrl
 	 * @param charSetName charSetName
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:44:09
 	 */
 	public static Object getRequest(String requestUrl, String charSetName) {
 		String res = "";
@@ -73,6 +78,9 @@ public class HttpUtil {
 	 *
 	 * @param path path
 	 * @param post post
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:44:22
 	 */
 	public static Object postRequest(String path, String post) {
 		URL url = null;

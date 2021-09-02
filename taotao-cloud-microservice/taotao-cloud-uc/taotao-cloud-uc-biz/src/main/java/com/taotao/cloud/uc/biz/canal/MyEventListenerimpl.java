@@ -1,9 +1,9 @@
 package com.taotao.cloud.uc.biz.canal;
 
-import com.taotao.cloud.canal.abstracts.option.content.DeleteOption;
-import com.taotao.cloud.canal.abstracts.option.content.InsertOption;
-import com.taotao.cloud.canal.abstracts.option.content.UpdateOption;
-import com.taotao.cloud.canal.core.DealCanalEventListener;
+import com.taotao.cloud.canal.abstracts.DeleteOption;
+import com.taotao.cloud.canal.abstracts.InsertOption;
+import com.taotao.cloud.canal.abstracts.UpdateOption;
+import com.taotao.cloud.canal.model.DealCanalEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

@@ -22,7 +22,7 @@ import static com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer.GLOABL_
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
@@ -40,8 +40,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;

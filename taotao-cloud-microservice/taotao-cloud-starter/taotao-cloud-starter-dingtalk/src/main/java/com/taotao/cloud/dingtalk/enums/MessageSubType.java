@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.enums;
 
 
-import static com.taotao.cloud.dingtalk.core.DingerDefinitionHandler.WETALK_AT_ALL;
+import static com.taotao.cloud.dingtalk.model.DingerDefinitionHandler.WETALK_AT_ALL;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION;
 
 import com.taotao.cloud.dingtalk.entity.DingerRequest;

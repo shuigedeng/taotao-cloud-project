@@ -19,22 +19,28 @@ import javassist.ClassPool;
 import javassist.LoaderClassPath;
 
 /**
- * ClassPoolUtils
+ * ClassPoolUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:33
+ * @version 2021.9
+ * @since 2021-09-02 17:44:33
  */
 public class ClassPoolUtil {
 
+	private ClassPoolUtil() {
+	}
+
+	/**
+	 * instance
+	 */
 	public static volatile ClassPool instance;
 
 	/**
 	 * 获取对象池
 	 *
-	 * @return javassist.ClassPool
+	 * @return {@link javassist.ClassPool }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:12
+	 * @since 2021-09-02 17:44:24
 	 */
 	public static ClassPool getInstance() {
 		if (instance == null) {

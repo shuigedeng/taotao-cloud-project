@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.abstracts.option.table.DropTableOption;
+import com.taotao.cloud.canal.abstracts.DropTableOption;
 import org.springframework.stereotype.Component;
 
 /**

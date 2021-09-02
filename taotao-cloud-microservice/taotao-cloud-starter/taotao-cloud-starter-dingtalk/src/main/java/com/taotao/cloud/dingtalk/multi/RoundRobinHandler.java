@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.multi;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.model.DingerConfig;
 import java.util.List;
 
 /**

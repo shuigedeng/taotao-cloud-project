@@ -18,9 +18,9 @@ package com.taotao.cloud.common.utils.secure;
 /**
  *  RSA公钥、私钥常量类
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:26
+ * @version 2021.9
+ * @since 2021-09-02 17:56:47
  */
 public enum RSAKey {
 

@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.dingtalk.definition;
 
-import com.taotao.cloud.dingtalk.core.DingerDefinition;
-import com.taotao.cloud.dingtalk.core.DingerDefinitionGenerator;
-import com.taotao.cloud.dingtalk.core.DingerDefinitionGeneratorContext;
-import com.taotao.cloud.dingtalk.core.DingerDefinitionHandler;
+import com.taotao.cloud.dingtalk.model.DingerDefinition;
+import com.taotao.cloud.dingtalk.model.DingerDefinitionGenerator;
+import com.taotao.cloud.dingtalk.model.DingerDefinitionGeneratorContext;
+import com.taotao.cloud.dingtalk.model.DingerDefinitionHandler;
 import com.taotao.cloud.dingtalk.annatations.DingerImageText;
 import com.taotao.cloud.dingtalk.annatations.DingerLink;
 import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;
@@ -26,8 +26,6 @@ import com.taotao.cloud.dingtalk.annatations.DingerText;
 import com.taotao.cloud.dingtalk.enums.DingerDefinitionType;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.xml.MessageTag;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 钉钉消息体定义生成类

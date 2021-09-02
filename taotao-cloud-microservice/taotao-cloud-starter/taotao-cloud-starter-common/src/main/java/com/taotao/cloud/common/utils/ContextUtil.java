@@ -30,29 +30,66 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * 获取上下文
+ * 上下文工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:33
+ * @version 2021.9
+ * @since 2021-09-02 17:37:14
  */
 public class ContextUtil {
 
+	private ContextUtil() {
+	}
+
+	/**
+	 * mainClass
+	 */
 	public static Class<?> mainClass;
+	/**
+	 * applicationContext
+	 */
 	public static ConfigurableApplicationContext applicationContext;
 
+	/**
+	 * setApplicationContext
+	 *
+	 * @param applicationContext applicationContext
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:37:28
+	 */
 	public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
 		ContextUtil.applicationContext = applicationContext;
 	}
 
+	/**
+	 * getApplicationContext
+	 *
+	 * @return {@link ConfigurableApplicationContext }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:37:32
+	 */
 	public static ConfigurableApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
 
+	/**
+	 * isWeb
+	 *
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:37:36
+	 */
 	public static boolean isWeb() {
 		return getConfigurableWebServerApplicationContext() != null;
 	}
 
+	/**
+	 * getConfigurableWebServerApplicationContext
+	 *
+	 * @return {@link ConfigurableWebServerApplicationContext }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:37:38
+	 */
 	public static ConfigurableWebServerApplicationContext getConfigurableWebServerApplicationContext() {
 		ApplicationContext context = getApplicationContext();
 		if (context instanceof ConfigurableWebServerApplicationContext) {
@@ -66,8 +103,9 @@ public class ContextUtil {
 	 *
 	 * @param type     类型
 	 * @param required 是否必须
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:54
+	 * @since 2021-09-02 17:37:46
 	 */
 	public static <T> T getBean(Class<T> type, boolean required) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
@@ -92,9 +130,9 @@ public class ContextUtil {
 	 *
 	 * @param type     类型
 	 * @param required 是否必须
-	 * @return java.lang.Object
+	 * @return {@link Object }
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:55
+	 * @since 2021-09-02 17:37:57
 	 */
 	public static Object getBean(String type, boolean required) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
@@ -113,9 +151,9 @@ public class ContextUtil {
 	/**
 	 * 获取bean定义信息
 	 *
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:55
+	 * @since 2021-09-02 17:38:08
 	 */
 	public static String getBeanDefinitionText() {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
@@ -130,13 +168,12 @@ public class ContextUtil {
 	}
 
 	/**
-	 * 获取所有被注解的 bean
+	 * 获取所有被注解的
 	 *
-	 * @param anno
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:04
-	 * @CopyRight 万物皆导
+	 * @param anno anno
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:38:14
 	 */
 	public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> anno) {
 		Map<String, Object> map;
@@ -152,11 +189,10 @@ public class ContextUtil {
 	/**
 	 * 获取 bean 的类型
 	 *
-	 * @param clazz
-	 * @return
-	 * @author 阿导
-	 * @time 2018/5/28 14:03
-	 * @CopyRight 万物皆导
+	 * @param clazz clazz
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:38:22
 	 */
 	public static <T> List<T> getBeansOfType(Class<T> clazz) {
 		//声明一个结果
@@ -178,7 +214,7 @@ public class ContextUtil {
 	 * @param clazz clazz
 	 * @param args  args
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:43
+	 * @since 2021-09-02 17:38:27
 	 */
 	public static void registerBean(String name, Class clazz, Object... args) {
 		ConfigurableApplicationContext applicationContext = getApplicationContext();
@@ -201,7 +237,7 @@ public class ContextUtil {
 	 * @param clazz                 clazz
 	 * @param beanDefinitionBuilder beanDefinitionBuilder
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:44
+	 * @since 2021-09-02 17:38:33
 	 */
 	public static void registerBean(String name, Class clazz,
 		BeanDefinitionBuilder beanDefinitionBuilder) {
@@ -218,7 +254,7 @@ public class ContextUtil {
 	 *
 	 * @param name name
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:44
+	 * @since 2021-09-02 17:38:37
 	 */
 	public static void unRegisterBean(String name) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
@@ -235,7 +271,7 @@ public class ContextUtil {
 	 * @param name               name
 	 * @param clazz              clazz
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:45
+	 * @since 2021-09-02 17:38:43
 	 */
 	public static void checkRegisterBean(ApplicationContext applicationContext, String name,
 		Class clazz) {

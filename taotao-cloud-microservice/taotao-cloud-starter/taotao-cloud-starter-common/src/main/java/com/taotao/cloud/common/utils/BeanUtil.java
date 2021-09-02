@@ -27,17 +27,23 @@ import org.springframework.boot.convert.ApplicationConversionService;
  * BeanUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2019/9/8
+ * @version 2021.9
+ * @since 2021-09-02 17:45:40
  */
 public class BeanUtil {
+
+	private BeanUtil() {
+	}
 
 	/**
 	 * 复制Bean对象属性<br>
 	 *
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:45:45
 	 */
+
 	public static void copyIgnoredNull(Object source, Object target) {
 		cn.hutool.core.bean.BeanUtil
 			.copyProperties(source, target, CopyOptions.create().ignoreNullValue().ignoreError());
@@ -48,6 +54,8 @@ public class BeanUtil {
 	 *
 	 * @param source 源Bean对象
 	 * @param target 目标Bean对象
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:45:45
 	 */
 	public static void copyIncludeNull(Object source, Object target) {
 		cn.hutool.core.bean.BeanUtil
@@ -55,12 +63,14 @@ public class BeanUtil {
 	}
 
 	/**
-	 * 类型转换
+	 * convert 类型转换
 	 *
 	 * @param value 值
 	 * @param type  类型
+	 * @param <T>   T
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:45
+	 * @since 2021-09-02 17:46:05
 	 */
 	public static <T> T convert(Object value, Class<T> type) {
 		if (value == null) {
@@ -74,8 +84,10 @@ public class BeanUtil {
 	 *
 	 * @param value 值
 	 * @param type  类型
+	 * @param <T>   T
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:45
+	 * @since 2021-09-02 17:46:40
 	 */
 	public static <T> T tryConvert(Object value, Class<T> type) {
 		try {
@@ -88,9 +100,11 @@ public class BeanUtil {
 	/**
 	 * 深度克隆
 	 *
-	 * @param obj 对象
+	 * @param obj obj
+	 * @param <T> T
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:46
+	 * @since 2021-09-02 17:47:00
 	 */
 	public static <T> T deepClone(T obj) {
 		try {

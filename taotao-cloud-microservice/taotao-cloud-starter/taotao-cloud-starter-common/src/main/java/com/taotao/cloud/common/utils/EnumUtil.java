@@ -16,21 +16,25 @@
 package com.taotao.cloud.common.utils;
 
 /**
- * EnumUtils
+ * EnumUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:35
+ * @version 2021.9
+ * @since 2021-09-02 17:17:56
  */
 public class EnumUtil {
+
+	private EnumUtil() {
+	}
 
 	/**
 	 * 通过属性获取枚举
 	 *
 	 * @param enumType enumType
 	 * @param name     name
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:13
+	 * @since 2021-09-02 17:18:02
 	 */
 	public static <T extends Enum<?>> T lookup(Class<T> enumType, String name) {
 		for (T t : enumType.getEnumConstants()) {

@@ -17,12 +17,12 @@ package com.taotao.cloud.common.utils;
 
 import java.util.Random;
 
-/***
+/**
+ * PingYinUtil
  *
- * 得到中文首字母
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:50
+ * @version 2021.9
+ * @since 2021-09-02 16:24:19
  */
 public final class PingYinUtil {
 
@@ -31,6 +31,12 @@ public final class PingYinUtil {
 
 	/**
 	 * 返回首字母
+	 *
+	 * @param strChinese strChinese
+	 * @param bUpCase    bUpCase
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:24:30
 	 */
 	public static String getPyIndexStr(String strChinese, boolean bUpCase) {
 		try {
@@ -64,8 +70,13 @@ public final class PingYinUtil {
 
 	/**
 	 * 得到首字母
+	 *
+	 * @param charGbk charGbk
+	 * @param bUpCase bUpCase
+	 * @return char
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:24:40
 	 */
-	@SuppressWarnings("AlibabaUndefineMagicConstant")
 	private static char getPyIndexChar(char charGbk, boolean bUpCase) {
 		char result;
 		if (charGbk >= 45217 && charGbk <= 45252) {

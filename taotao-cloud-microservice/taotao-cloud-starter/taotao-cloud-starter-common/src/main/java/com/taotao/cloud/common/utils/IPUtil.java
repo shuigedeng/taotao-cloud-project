@@ -22,15 +22,26 @@ import java.util.Objects;
  * IP工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:28
+ * @version 2021.9
+ * @since 2021-09-02 16:41:13
  */
 public class IPUtil {
 
+	private IPUtil() {
+	}
+
+	/**
+	 * IP_LOCAL
+	 */
 	private final static boolean IP_LOCAL = false;
 
 	/**
 	 * 根据ip获取详细地址
+	 *
+	 * @param ip ip
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:41:27
 	 */
 	public static String getCityInfo(String ip) {
 		if (IP_LOCAL) {
@@ -43,6 +54,11 @@ public class IPUtil {
 
 	/**
 	 * 根据ip获取详细地址 临时使用，待调整
+	 *
+	 * @param ip ip
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:41:38
 	 */
 	public static String getHttpCityInfo(String ip) {
 		String api = String.format("http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true", ip);

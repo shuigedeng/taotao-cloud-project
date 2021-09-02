@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.abstracts.option.table.RenameTableOption;
+import com.taotao.cloud.canal.abstracts.RenameTableOption;
 import org.springframework.stereotype.Component;
 
 /**

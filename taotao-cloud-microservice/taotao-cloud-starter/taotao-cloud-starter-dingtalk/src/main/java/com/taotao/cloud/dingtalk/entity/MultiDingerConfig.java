@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.entity;
 
 
-import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.multi.AlgorithmHandler;
 import java.util.List;
 

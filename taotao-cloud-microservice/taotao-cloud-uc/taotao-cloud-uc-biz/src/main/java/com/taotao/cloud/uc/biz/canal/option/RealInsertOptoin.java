@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.abstracts.option.content.InsertOption;
+import com.taotao.cloud.canal.abstracts.InsertOption;
 import java.util.List;
 import org.springframework.stereotype.Component;
 

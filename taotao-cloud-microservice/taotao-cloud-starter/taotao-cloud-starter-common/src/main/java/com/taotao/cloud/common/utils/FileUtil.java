@@ -26,13 +26,16 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**
- * FileUtils
+ * FileUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:36
+ * @version 2021.9
+ * @since 2021-09-02 16:44:44
  */
 public class FileUtil {
+
+	private FileUtil() {
+	}
 
 	/**
 	 * 文件是否存在
@@ -40,7 +43,7 @@ public class FileUtil {
 	 * @param filepath 文件路径
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:15
+	 * @since 2021-09-02 16:46:10
 	 */
 	public static boolean existFile(String filepath) {
 		File file = new File(filepath);
@@ -51,9 +54,9 @@ public class FileUtil {
 	 * 获取文件目录路径
 	 *
 	 * @param path 文件路径
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:15
+	 * @since 2021-09-02 16:46:03
 	 */
 	public static String getDirectoryPath(String path) {
 		File file = new File(path);
@@ -63,10 +66,10 @@ public class FileUtil {
 	/**
 	 * 获取文件目录路径
 	 *
-	 * @param cls 类型
-	 * @return java.lang.String
+	 * @param cls cls
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:15
+	 * @since 2021-09-02 16:45:57
 	 */
 	public static String getDirectoryPath(Class<?> cls) {
 		File file = getJarFile(cls);
@@ -83,9 +86,9 @@ public class FileUtil {
 	 * 获取文件
 	 *
 	 * @param cls 类型
-	 * @return java.io.File
+	 * @return {@link java.io.File }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:15
+	 * @since 2021-09-02 16:45:49
 	 */
 	public static File getJarFile(Class<?> cls) {
 		String path = cls.getProtectionDomain().getCodeSource().getLocation().getFile();
@@ -121,9 +124,9 @@ public class FileUtil {
 	 * 创建目录
 	 *
 	 * @param path 文件路径
-	 * @return java.lang.Boolean
+	 * @return {@link java.lang.Boolean }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:15
+	 * @since 2021-09-02 16:45:40
 	 */
 	public static Boolean createDirectory(String path) {
 		File file = new File(path);
@@ -143,7 +146,7 @@ public class FileUtil {
 	 * @param path     文件路径
 	 * @param contents 内容
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:16
+	 * @since 2021-09-02 16:45:30
 	 */
 	public static void appendAllText(String path, String contents) {
 		try {
@@ -159,7 +162,6 @@ public class FileUtil {
 		} catch (IOException exp) {
 			throw new BaseException("追加文件异常", exp);
 		}
-
 	}
 
 	/**
@@ -168,7 +170,7 @@ public class FileUtil {
 	 * @param path     文件路径
 	 * @param contents 内容
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:16
+	 * @since 2021-09-02 16:45:20
 	 */
 	public static void writeAllText(String path, String contents) {
 		try {
@@ -191,9 +193,9 @@ public class FileUtil {
 	 * 读取文件内容
 	 *
 	 * @param path 文件路径
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:16
+	 * @since 2021-09-02 16:45:10
 	 */
 	public static String readAllText(String path) {
 		try {
@@ -218,9 +220,9 @@ public class FileUtil {
 	/**
 	 * 获取行分隔符
 	 *
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:16
+	 * @since 2021-09-02 16:45:02
 	 */
 	public static String lineSeparator() {
 		return System.getProperty("line.separator");
@@ -230,9 +232,9 @@ public class FileUtil {
 	 * 根据文件路径获取文件名
 	 *
 	 * @param filePath 文件路径
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:16
+	 * @since 2021-09-02 16:44:55
 	 */
 	public static String getFileName(String filePath) {
 		String path = filePath.replace("\\\\", "/");

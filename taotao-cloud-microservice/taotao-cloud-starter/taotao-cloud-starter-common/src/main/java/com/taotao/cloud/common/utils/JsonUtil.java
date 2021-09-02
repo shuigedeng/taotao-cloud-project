@@ -16,7 +16,6 @@
 package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -46,11 +45,17 @@ import java.util.TimeZone;
  * 基于 Jackson 的 json 工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2019/3/5
+ * @version 2021.9
+ * @since 2021-09-02 16:37:15
  */
 public class JsonUtil {
 
+	private JsonUtil() {
+	}
+
+	/**
+	 * MAPPER
+	 */
 	public static final ObjectMapper MAPPER = new ObjectMapper();
 
 	static {
@@ -96,39 +101,39 @@ public class JsonUtil {
 	/**
 	 * 对象转换为json字符串
 	 *
-	 * @param o 要转换的对象
-	 * @return java.lang.String
+	 * @param object 要转换的对象
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:21
+	 * @since 2021-09-02 16:37:25
 	 */
-	public static String toJSONString(Object o) {
-		return toJSONString(o, false);
+	public static String toJSONString(Object object) {
+		return toJSONString(object, false);
 	}
 
 	/**
 	 * 对象转换为json字符串
 	 *
-	 * @param o      要转换的对象
+	 * @param object 要转换的对象
 	 * @param format 是否格式化json
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:21
+	 * @since 2021-09-02 16:37:57
 	 */
-	public static String toJSONString(Object o, boolean format) {
+	public static String toJSONString(Object object, boolean format) {
 		try {
-			if (o == null) {
+			if (object == null) {
 				return "";
 			}
-			if (o instanceof Number) {
-				return o.toString();
+			if (object instanceof Number) {
+				return object.toString();
 			}
-			if (o instanceof String) {
-				return (String) o;
+			if (object instanceof String) {
+				return (String) object;
 			}
 			if (format) {
-				return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+				return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 			}
-			return MAPPER.writeValueAsString(o);
+			return MAPPER.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
 			throw new BaseException(e.getMessage());
 		}
@@ -141,7 +146,7 @@ public class JsonUtil {
 	 * @param cls  目标对象
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:38:13
 	 */
 	public static <T> T toObject(String json, Class<T> cls) {
 		if (StrUtil.isBlank(json) || cls == null) {
@@ -155,16 +160,14 @@ public class JsonUtil {
 	}
 
 	/**
-	 * <p>
 	 * 字符串转换为指定对象，并增加泛型转义 例如：List<Integer> test = toObject(jsonStr, List.class, Integer.class);
-	 * </p>
 	 *
 	 * @param json             json字符串
 	 * @param parametrized     目标对象
 	 * @param parameterClasses 泛型对象
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:38:36
 	 */
 	public static <T> T toObject(String json, Class<?> parametrized, Class<?>... parameterClasses) {
 		if (StrUtil.isBlank(json) || parametrized == null) {
@@ -186,7 +189,7 @@ public class JsonUtil {
 	 * @param typeReference 目标对象类型
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:38:49
 	 */
 	public static <T> T toObject(String json, TypeReference<T> typeReference) {
 		if (StrUtil.isBlank(json) || typeReference == null) {
@@ -203,9 +206,9 @@ public class JsonUtil {
 	 * 字符串转换为JsonNode对象
 	 *
 	 * @param json json字符串
-	 * @return T
+	 * @return {@link com.fasterxml.jackson.databind.JsonNode }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:39:01
 	 */
 	public static JsonNode parse(String json) {
 		if (StrUtil.isBlank(json)) {
@@ -221,28 +224,28 @@ public class JsonUtil {
 	/**
 	 * 对象转换为map对象
 	 *
-	 * @param o 要转换的对象
-	 * @return T
+	 * @param object 要转换的对象
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:39:09
 	 */
-	public static <K, V> Map<K, V> toMap(Object o) {
-		if (o == null) {
+	public static <K, V> Map<K, V> toMap(Object object) {
+		if (object == null) {
 			return null;
 		}
-		if (o instanceof String) {
-			return toObject((String) o, Map.class);
+		if (object instanceof String) {
+			return toObject((String) object, Map.class);
 		}
-		return MAPPER.convertValue(o, Map.class);
+		return MAPPER.convertValue(object, Map.class);
 	}
 
 	/**
 	 * json字符串转换为list对象
 	 *
 	 * @param json json字符串
-	 * @return T
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:39:18
 	 */
 	public static <T> List<T> toList(String json) {
 		if (StrUtil.isNotBlank(json)) {
@@ -260,9 +263,9 @@ public class JsonUtil {
 	 *
 	 * @param json json字符串
 	 * @param cls  list的元素类型
-	 * @return T
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:22
+	 * @since 2021-09-02 16:39:29
 	 */
 	public static <T> List<T> toList(String json, Class<T> cls) {
 		if (StrUtil.isBlank(json)) {

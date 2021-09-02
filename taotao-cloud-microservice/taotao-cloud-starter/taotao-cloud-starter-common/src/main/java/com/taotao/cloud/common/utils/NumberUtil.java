@@ -21,13 +21,25 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * NumberUtils
+ * NumberUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:39
+ * @version 2021.9
+ * @since 2021-09-02 16:32:13
  */
 public class NumberUtil {
+
+	private NumberUtil() {
+	}
+
+	/**
+	 * hanArr
+	 */
+	private static String[] hanArr = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+	/**
+	 * unitArr
+	 */
+	private static String[] unitArr = {"十", "百", "千", "万", "十", "白", "千", "亿", "十", "百", "千"};
 
 	/**
 	 * 数字转double
@@ -36,7 +48,7 @@ public class NumberUtil {
 	 * @param scale  scale
 	 * @return double
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:34
+	 * @since 2021-09-02 16:32:28
 	 */
 	public static double scale(Number number, int scale) {
 		if (Objects.nonNull(number)) {
@@ -50,16 +62,27 @@ public class NumberUtil {
 		return 0;
 	}
 
-	private static String[] hanArr = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
-	private static String[] unitArr = {"十", "百", "千", "万", "十", "白", "千", "亿", "十", "百", "千"};
-
 	/**
 	 * String转成int的值， 若无法转换，默认返回0
+	 *
+	 * @param string string
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:33:31
 	 */
 	public static int stoi(String string) {
 		return stoi(string, 0);
 	}
 
+	/**
+	 * stoi
+	 *
+	 * @param string       string
+	 * @param defaultValue defaultValue
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:33:43
+	 */
 	public static int stoi(String string, int defaultValue) {
 		if ((string == null) || (string.equalsIgnoreCase("") || (string.equals("null")))) {
 			return defaultValue;
@@ -76,11 +99,25 @@ public class NumberUtil {
 
 	/**
 	 * String转成long的值， 若无法转换，默认返回0
+	 *
+	 * @param string string
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:33:50
 	 */
 	public static long stol(String string) {
 		return stol(string, 0);
 	}
 
+	/**
+	 * stol
+	 *
+	 * @param string       string
+	 * @param defaultValue defaultValue
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:33:53
+	 */
 	public static long stol(String string, long defaultValue) {
 		if ((string == null) || (string.equalsIgnoreCase(""))) {
 			return defaultValue;
@@ -98,11 +135,25 @@ public class NumberUtil {
 
 	/**
 	 * String转成double的值， 若无法转换，默认返回0.00
+	 *
+	 * @param string string
+	 * @return double
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:34:04
 	 */
 	public static double stod(String string) {
 		return stod(string, 0.00);
 	}
 
+	/**
+	 * stod
+	 *
+	 * @param string       string
+	 * @param defaultValue defaultValue
+	 * @return double
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:34:07
+	 */
 	public static double stod(String string, double defaultValue) {
 		if ((string == null) || (string.equalsIgnoreCase(""))) {
 			return defaultValue;
@@ -120,6 +171,11 @@ public class NumberUtil {
 
 	/**
 	 * 将整数转成中文表示
+	 *
+	 * @param number number
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:34:12
 	 */
 	public static String toChineseNum(int number) {
 		String numStr = String.valueOf(number);
@@ -144,6 +200,12 @@ public class NumberUtil {
 
 	/**
 	 * 获取一个属于[min, max)中的随机数
+	 *
+	 * @param min min
+	 * @param max max
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:34:18
 	 */
 	public static int random(int min, int max) {
 		return new Random().nextInt(max - min) + min;

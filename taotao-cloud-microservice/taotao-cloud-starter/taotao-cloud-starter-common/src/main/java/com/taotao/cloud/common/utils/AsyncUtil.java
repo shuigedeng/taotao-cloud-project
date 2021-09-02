@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -28,13 +27,22 @@ import java.util.function.BiConsumer;
  * 异步处理异常工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:23
+ * @version 2021.9
+ * @since 2021-09-02 17:47:39
  */
 public class AsyncUtil {
 
+	private AsyncUtil() {
+	}
+
+	/**
+	 * name
+	 */
 	private final static String name = "异步处理异常工具";
 
+	/**
+	 * executorService
+	 */
 	private static final ExecutorService executorService = new ThreadPoolExecutor(
 		1,
 		20,
@@ -42,6 +50,9 @@ public class AsyncUtil {
 		TimeUnit.SECONDS,
 		new LinkedBlockingQueue<>());
 
+	/**
+	 * taskTimer
+	 */
 	private static final Timer taskTimer = new Timer(name, true);
 
 	/**
@@ -49,7 +60,7 @@ public class AsyncUtil {
 	 *
 	 * @param task task
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:39
+	 * @since 2021-09-02 17:47:58
 	 */
 	public static void execute(Runnable task) {
 		execute(task, 0, 0, null);
@@ -61,7 +72,7 @@ public class AsyncUtil {
 	 * @param task          task
 	 * @param maxRetryCount maxRetryCount
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:39
+	 * @since 2021-09-02 17:48:05
 	 */
 	public static void execute(Runnable task, int maxRetryCount) {
 		execute(task, maxRetryCount, 0, null);
@@ -74,7 +85,7 @@ public class AsyncUtil {
 	 * @param maxRetryCount maxRetryCount
 	 * @param consumer      consumer
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:39
+	 * @since 2021-09-02 17:48:13
 	 */
 	public static void execute(Runnable task, int maxRetryCount,
 		BiConsumer<Boolean, Throwable> consumer) {
@@ -87,12 +98,12 @@ public class AsyncUtil {
 	 * 默认延迟1秒执行，每次增加1秒，最大延迟5秒，返回执行结果
 	 * </p>
 	 *
-	 * @param task          consumer
+	 * @param task          task
 	 * @param maxRetryCount maxRetryCount
 	 * @param delaySeconds  delaySeconds
 	 * @param consumer      consumer
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:39
+	 * @since 2021-09-02 17:48:22
 	 */
 	public static void execute(Runnable task, int maxRetryCount, int delaySeconds,
 		BiConsumer<Boolean, Throwable> consumer) {
@@ -109,7 +120,7 @@ public class AsyncUtil {
 	 * @param delaySeconds      delaySeconds
 	 * @param consumer          consumer
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:40
+	 * @since 2021-09-02 17:48:34
 	 */
 	public static void executeDelay(Runnable task, int firstDelaySeconds, int maxRetryCount,
 		int delaySeconds, BiConsumer<Boolean, Throwable> consumer) {
@@ -123,13 +134,38 @@ public class AsyncUtil {
 		}
 	}
 
+	/**
+	 * Executor
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 17:48:44
+	 */
 	private static class Executor implements Runnable {
 
+		/**
+		 * retrySeconds
+		 */
 		private final int[] retrySeconds = {1, 2, 3, 4, 5};
+		/**
+		 * task
+		 */
 		private final Runnable task;
+		/**
+		 * maxRetryCount
+		 */
 		private final int maxRetryCount;
+		/**
+		 * delaySeconds
+		 */
 		private final int delaySeconds;
+		/**
+		 * retryAttempts
+		 */
 		private int retryAttempts;
+		/**
+		 * resultConsumer
+		 */
 		private final BiConsumer<Boolean, Throwable> resultConsumer;
 
 		public Executor(Runnable task, int maxRetryCount, int delaySeconds,
@@ -140,6 +176,12 @@ public class AsyncUtil {
 			this.resultConsumer = resultConsumer;
 		}
 
+		/**
+		 * execute
+		 *
+		 * @author shuigedeng
+		 * @since 2021-09-02 17:49:58
+		 */
 		public void execute() {
 			executorService.execute(this);
 		}
@@ -180,8 +222,18 @@ public class AsyncUtil {
 		}
 	}
 
+	/**
+	 * Task
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 17:48:57
+	 */
 	private static class Task extends TimerTask {
 
+		/**
+		 * task
+		 */
 		private final Executor task;
 
 		public Task(Executor task) {

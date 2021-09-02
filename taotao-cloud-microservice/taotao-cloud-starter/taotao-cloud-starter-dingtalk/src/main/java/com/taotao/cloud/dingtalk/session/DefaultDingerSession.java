@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.session;
 
 
-import com.taotao.cloud.dingtalk.core.DingerHandleProxy;
+import com.taotao.cloud.dingtalk.model.DingerHandleProxy;
 import java.lang.reflect.Proxy;
 
 /**

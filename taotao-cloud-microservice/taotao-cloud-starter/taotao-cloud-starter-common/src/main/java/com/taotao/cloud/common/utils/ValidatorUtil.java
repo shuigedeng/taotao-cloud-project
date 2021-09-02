@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  * 校验器：利用正则表达式校验邮箱、手机号等
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:49
+ * @version 2021.9
+ * @since 2021-09-02 14:37:50
  */
 public final class ValidatorUtil {
 
@@ -64,15 +64,18 @@ public final class ValidatorUtil {
 	 * 正则表达式:验证手机号
 	 */
 	private static final String REGEX_MOBILE = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+	/**
+	 * pattern
+	 */
 	private static final Pattern PATTERN = Pattern.compile(REGEX_MOBILE);
 
 	/**
 	 * 校验用户名
 	 *
 	 * @param username 用户名
-	 * @return boolean 校验通过返回true，否则返回false
+	 * @return boolean  校验通过返回true，否则返回false
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:49
+	 * @since 2021-09-02 14:38:30
 	 */
 	public static boolean isUserName(String username) {
 		return Pattern.matches(REGEX_USERNAME, username);
@@ -82,9 +85,9 @@ public final class ValidatorUtil {
 	 * 校验密码
 	 *
 	 * @param password 密码
-	 * @return boolean 校验通过返回true，否则返回false
+	 * @return boolean  校验通过返回true，否则返回false
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:55
+	 * @since 2021-09-02 14:38:57
 	 */
 	public static boolean isPassword(String password) {
 		return Pattern.matches(REGEX_PASSWORD, password);
@@ -94,9 +97,9 @@ public final class ValidatorUtil {
 	 * 校验手机号
 	 *
 	 * @param phone 手机号
-	 * @return boolean 是否校验成功
+	 * @return boolean  是否校验成功
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:50
+	 * @since 2021-09-02 14:39:07
 	 */
 	public static boolean checkPhone(String phone) {
 		//noinspection AlibabaUndefineMagicConstant

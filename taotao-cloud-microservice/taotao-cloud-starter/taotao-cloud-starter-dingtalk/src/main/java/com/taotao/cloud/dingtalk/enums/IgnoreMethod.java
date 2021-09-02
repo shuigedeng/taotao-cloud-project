@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.enums;
 
 
-import com.taotao.cloud.dingtalk.core.DingerInvocationHandler;
+import com.taotao.cloud.dingtalk.model.DingerInvocationHandler;
 
 /**
  * Ignore Method

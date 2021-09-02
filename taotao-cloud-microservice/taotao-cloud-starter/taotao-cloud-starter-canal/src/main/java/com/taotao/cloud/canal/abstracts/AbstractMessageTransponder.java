@@ -18,7 +18,7 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
-import com.taotao.cloud.canal.core.ListenerPoint;
+import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.interfaces.MessageTransponder;
 import com.taotao.cloud.canal.properties.CanalProperties;

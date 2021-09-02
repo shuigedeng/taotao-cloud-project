@@ -31,13 +31,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * 安全服务工具类
+ * SecurityUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:39
+ * @version 2021.9
+ * @since 2021-09-02 14:55:47
  */
 public class SecurityUtil {
+
+	private SecurityUtil() {
+	}
+
+	/**
+	 * Basic
+	 */
+	private static final String BASIC_ = "Basic ";
 
 	/**
 	 * 回写数据
@@ -45,7 +53,7 @@ public class SecurityUtil {
 	 * @param result   result
 	 * @param response response
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:54
+	 * @since 2021-09-02 14:55:57
 	 */
 	public static void writeResponse(Result<?> result, HttpServletResponse response)
 		throws IOException {
@@ -59,9 +67,9 @@ public class SecurityUtil {
 	/**
 	 * 获取认证信息
 	 *
-	 * @return org.springframework.security.core.Authentication
+	 * @return {@link Authentication }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:54
+	 * @since 2021-09-02 14:56:05
 	 */
 	public static Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
@@ -71,9 +79,9 @@ public class SecurityUtil {
 	 * 获取用户信息
 	 *
 	 * @param authentication 认证信息
-	 * @return com.taotao.cloud.core.model.SecurityUser
+	 * @return {@link SecurityUser }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:54
+	 * @since 2021-09-02 14:56:13
 	 */
 	public static SecurityUser getUser(Authentication authentication) {
 		if (Objects.isNull(authentication)) {
@@ -91,9 +99,9 @@ public class SecurityUtil {
 	/**
 	 * 获取用户信息
 	 *
-	 * @return com.taotao.cloud.core.model.SecurityUser
+	 * @return {@link SecurityUser }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:55
+	 * @since 2021-09-02 14:56:28
 	 */
 	public static SecurityUser getUser() {
 		Authentication authentication = getAuthentication();
@@ -103,9 +111,9 @@ public class SecurityUtil {
 	/**
 	 * 获取用户姓名
 	 *
-	 * @return java.lang.String
+	 * @return {@link String }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:55
+	 * @since 2021-09-02 14:56:33
 	 */
 	public static String getUsername() {
 		SecurityUser user = getUser();
@@ -115,51 +123,49 @@ public class SecurityUtil {
 	/**
 	 * 获取用户id
 	 *
-	 * @return java.lang.String
+	 * @return {@link Long }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:55
+	 * @since 2021-09-02 14:56:38
 	 */
 	public static Long getUserId() {
 		SecurityUser user = getUser();
 		return Objects.isNull(user) ? null : user.getUserId();
 	}
 
-	/**
-	 * 获取客户端id
-	 *
-	 * @return java.lang.String
-	 * @author shuigedeng
-	 * @since 2020/10/15 15:55
-	 */
-//	public String getClientId() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		if (authentication instanceof OAuth2Authentication) {
-//			OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
-//			return auth2Authentication.getOAuth2Request().getClientId();
-//		}
-//		return null;
-//	}
+	///**
+	// * 获取客户端id
+	// *
+	// * @return java.lang.String
+	// * @author shuigedeng
+	// * @since 2020/10/15 15:55
+	// */
+	//public String getClientId() {
+	//	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	//	if (authentication instanceof OAuth2Authentication) {
+	//		OAuth2Authentication auth2Authentication = (OAuth2Authentication) authentication;
+	//		return auth2Authentication.getOAuth2Request().getClientId();
+	//	}
+	//	return null;
+	//}
 
-	private static final String BASIC_ = "Basic ";
-
-//	/**
-//	 * 获取request(header/param)中的token
-//	 *
-//	 * @param request request
-//	 * @return java.lang.String
-//	 * @author shuigedeng
-//	 * @since 2021/2/25 16:58
-//	 */
-//	public String extractToken(HttpServletRequest request) {
-//		String token = extractHeaderToken(request);
-//		if (token == null) {
-//			token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
-//			if (token == null) {
-//				LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
-//			}
-//		}
-//		return token;
-//	}
+	///**
+	// * 获取request(header/param)中的token
+	// *
+	// * @param request request
+	// * @return java.lang.String
+	// * @author shuigedeng
+	// * @since 2021/2/25 16:58
+	// */
+	//public String extractToken(HttpServletRequest request) {
+	//	String token = extractHeaderToken(request);
+	//	if (token == null) {
+	//		token = request.getParameter(OAuth2AccessToken.ACCESS_TOKEN);
+	//		if (token == null) {
+	//			LogUtil.error("Token not found in request parameters.  Not an OAuth2 request.");
+	//		}
+	//	}
+	//	return token;
+	//}
 
 	/**
 	 * 验证密码
@@ -168,7 +174,7 @@ public class SecurityUtil {
 	 * @param passwordEncoderOldPass 加密后的密码
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:58
+	 * @since 2021-09-02 14:57:20
 	 */
 	public static boolean validatePass(String newPass, String passwordEncoderOldPass) {
 		return getPasswordEncoder().matches(newPass, passwordEncoderOldPass);
@@ -177,9 +183,9 @@ public class SecurityUtil {
 	/**
 	 * 获取密码加密工具
 	 *
-	 * @return org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+	 * @return {@link BCryptPasswordEncoder }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:59
+	 * @since 2021-09-02 14:57:28
 	 */
 	public static BCryptPasswordEncoder getPasswordEncoder() {
 		BCryptPasswordEncoder passwordEncoder = ContextUtil
@@ -190,54 +196,54 @@ public class SecurityUtil {
 		return passwordEncoder;
 	}
 
-	/**
-	 * 解析head中的token
-	 *
-	 * @param request request
-	 * @return java.lang.String
-	 * @author shuigedeng
-	 * @since 2021/2/25 16:59
-	 */
-//	private String extractHeaderToken(HttpServletRequest request) {
-//		Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
-//		while (headers.hasMoreElements()) {
-//			String value = headers.nextElement();
-//			if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
-//				String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length())
-//					.trim();
-//				int commaIndex = authHeaderValue.indexOf(',');
-//				if (commaIndex > 0) {
-//					authHeaderValue = authHeaderValue.substring(0, commaIndex);
-//				}
-//				return authHeaderValue;
-//			}
-//		}
-//		return null;
-//	}
+	///**
+	// * 解析head中的token
+	// *
+	// * @param request request
+	// * @return java.lang.String
+	// * @author shuigedeng
+	// * @since 2021/2/25 16:59
+	// */
+	//private String extractHeaderToken(HttpServletRequest request) {
+	//	Enumeration<String> headers = request.getHeaders(CommonConstant.TOKEN_HEADER);
+	//	while (headers.hasMoreElements()) {
+	//		String value = headers.nextElement();
+	//		if ((value.startsWith(OAuth2AccessToken.BEARER_TYPE))) {
+	//			String authHeaderValue = value.substring(OAuth2AccessToken.BEARER_TYPE.length())
+	//				.trim();
+	//			int commaIndex = authHeaderValue.indexOf(',');
+	//			if (commaIndex > 0) {
+	//				authHeaderValue = authHeaderValue.substring(0, commaIndex);
+	//			}
+	//			return authHeaderValue;
+	//		}
+	//	}
+	//	return null;
+	//}
 
-	/**
-	 * 从header 请求中的clientId:clientSecret
-	 *
-	 * @param request request
-	 * @return java.lang.String[]
-	 * @author shuigedeng
-	 * @since 2021/2/25 16:59
-	 */
-//	public String[] extractClient(HttpServletRequest request) {
-//		String header = request.getHeader("BasicAuthorization");
-//		if (header == null || !header.startsWith(BASIC_)) {
-//			throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
-//		}
-//		return extractHeaderClient(header);
-//	}
+	///**
+	// * 从header 请求中的clientId:clientSecret
+	// *
+	// * @param request request
+	// * @return java.lang.String[]
+	// * @author shuigedeng
+	// * @since 2021/2/25 16:59
+	// */
+	//public String[] extractClient(HttpServletRequest request) {
+	//	String header = request.getHeader("BasicAuthorization");
+	//	if (header == null || !header.startsWith(BASIC_)) {
+	//		throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
+	//	}
+	//	return extractHeaderClient(header);
+	//}
 
 	/**
 	 * 从header 请求中的clientId:clientSecret
 	 *
 	 * @param header header中的参数
-	 * @return java.lang.String[]
+	 * @return String[]
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:59
+	 * @since 2021-09-02 14:57:55
 	 */
 	public static String[] extractHeaderClient(String header) {
 		byte[] base64Client = header.substring(BASIC_.length()).getBytes(StandardCharsets.UTF_8);
@@ -254,9 +260,9 @@ public class SecurityUtil {
 	 * 获取登陆的用户名
 	 *
 	 * @param authentication 认证信息
-	 * @return java.lang.String
+	 * @return {@link String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:59
+	 * @since 2021-09-02 14:58:07
 	 */
 	public static String getUsername(Authentication authentication) {
 		Object principal = authentication.getPrincipal();
@@ -269,11 +275,25 @@ public class SecurityUtil {
 		return username;
 	}
 
+	/**
+	 * 获取租户信息
+	 *
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:58:20
+	 */
 	public static String getTenant() {
 		// todo
 		return "";
 	}
 
+	/**
+	 * getClientId
+	 *
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:58:29
+	 */
 	public static String getClientId() {
 		// todo
 		return "";

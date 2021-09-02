@@ -29,13 +29,18 @@ import org.springframework.util.ClassUtils;
  */
 public class ClassUtil extends ClassUtils {
 
+	private ClassUtil() {
+	}
+
 	/**
 	 * 获取Annotation
 	 *
 	 * @param method         Method
 	 * @param annotationType 注解类
 	 * @param <A>            泛型标记
-	 * @return {Annotation}
+	 * @return A
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:40:12
 	 */
 	@Nullable
 	public static <A extends Annotation> A getAnnotation(Method method, Class<A> annotationType) {
@@ -61,7 +66,9 @@ public class ClassUtil extends ClassUtils {
 	 * @param method         Method
 	 * @param annotationType 注解类
 	 * @param <A>            泛型标记
-	 * @return {boolean}
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:40:50
 	 */
 	public static <A extends Annotation> boolean isAnnotated(Method method,
 		Class<A> annotationType) {

@@ -16,8 +16,7 @@
 package com.taotao.cloud.dingtalk.multi;
 
 
-import com.taotao.cloud.dingtalk.core.DingerConfig;
-import com.taotao.cloud.dingtalk.multi.MultiDingerAlgorithmInjectRegister;
+import com.taotao.cloud.dingtalk.model.DingerConfig;
 import java.util.List;
 
 /**

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
@@ -23,14 +22,25 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * ExceptionUtils
+ * ExceptionUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:35
- **/
+ * @version 2021.9
+ * @since 2021-09-02 16:47:00
+ */
 public class ExceptionUtil {
 
+	private ExceptionUtil() {
+	}
+
+	/**
+	 * trace2String
+	 *
+	 * @param t t
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:06
+	 */
 	public static String trace2String(Throwable t) {
 		if (t == null) {
 			return "";
@@ -47,6 +57,14 @@ public class ExceptionUtil {
 		}
 	}
 
+	/**
+	 * trace2String
+	 *
+	 * @param stackTraceElements stackTraceElements
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:16
+	 */
 	public static String trace2String(StackTraceElement[] stackTraceElements) {
 		StringBuilder sb = new StringBuilder();
 		for (StackTraceElement stackTraceElemen : stackTraceElements) {
@@ -55,10 +73,25 @@ public class ExceptionUtil {
 		return sb.toString();
 	}
 
+	/**
+	 * lineSeparator
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:20
+	 */
 	private static String lineSeparator() {
 		return System.getProperty("line.separator");
 	}
 
+	/**
+	 * getFullMessage
+	 *
+	 * @param e e
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:23
+	 */
 	public static String getFullMessage(Throwable e) {
 		if (e == null) {
 			return "";
@@ -67,6 +100,14 @@ public class ExceptionUtil {
 			+ lineSeparator() + getFullStackTrace(e);
 	}
 
+	/**
+	 * getFullStackTrace
+	 *
+	 * @param e e
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:27
+	 */
 	public static String getFullStackTrace(Throwable e) {
 		if (e == null) {
 			return "";
@@ -94,6 +135,14 @@ public class ExceptionUtil {
 		return sw.toString();
 	}
 
+	/**
+	 * getDetailMessage
+	 *
+	 * @param ex ex
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:33
+	 */
 	public static String getDetailMessage(Throwable ex) {
 		if (ex == null) {
 			return "";
@@ -108,6 +157,14 @@ public class ExceptionUtil {
 		return sb.toString();
 	}
 
+	/**
+	 * ignoreException
+	 *
+	 * @param runnable    runnable
+	 * @param isPrintInfo isPrintInfo
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:37
+	 */
 	public static void ignoreException(Runnable runnable, boolean isPrintInfo) {
 		try {
 			runnable.run();
@@ -118,6 +175,13 @@ public class ExceptionUtil {
 		}
 	}
 
+	/**
+	 * ignoreException
+	 *
+	 * @param runnable runnable
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:47:44
+	 */
 	public static void ignoreException(Runnable runnable) {
 		ignoreException(runnable, false);
 	}

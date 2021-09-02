@@ -31,13 +31,16 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * 自定义返回util
+ * ResponseUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:22
+ * @version 2021.9
+ * @since 2021-09-02 15:00:26
  */
 public class ResponseUtil {
+
+	private ResponseUtil() {
+	}
 
 	/**
 	 * 成功返回数据
@@ -45,7 +48,7 @@ public class ResponseUtil {
 	 * @param response response
 	 * @param data     数据对象
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:47
+	 * @since 2021-09-02 15:00:32
 	 */
 	public static void success(HttpServletResponse response, Object data) throws IOException {
 		Result<?> result = Result.success(data);
@@ -58,7 +61,7 @@ public class ResponseUtil {
 	 * @param response response
 	 * @param data     数据对象
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:47
+	 * @since 2021-09-02 15:00:41
 	 */
 	public static void fail(HttpServletResponse response, Object data) throws IOException {
 		Result<?> result = Result.fail(data.toString());
@@ -71,7 +74,7 @@ public class ResponseUtil {
 	 * @param response response
 	 * @param result   数据对象
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:47
+	 * @since 2021-09-02 15:00:50
 	 */
 	public static void result(HttpServletResponse response, Result<?> result) throws IOException {
 		writeResponse(response, result);
@@ -83,7 +86,7 @@ public class ResponseUtil {
 	 * @param response   response
 	 * @param resultEnum 数据对象
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:48
+	 * @since 2021-09-02 15:00:58
 	 */
 	public static void fail(HttpServletResponse response, ResultEnum resultEnum)
 		throws IOException {
@@ -97,7 +100,7 @@ public class ResponseUtil {
 	 * @param response response
 	 * @param result   数据
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:50
+	 * @since 2021-09-02 15:01:08
 	 */
 	private static void writeResponse(HttpServletResponse response, Result<?> result)
 		throws IOException {
@@ -117,8 +120,9 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param data     数据
+	 * @return {@link Mono }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:50
+	 * @since 2021-09-02 15:01:18
 	 */
 	public static Mono<Void> success(ServerWebExchange exchange, Object data) {
 		Result<Object> result = Result.success(data);
@@ -130,8 +134,9 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param data     数据
+	 * @return {@link Mono }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:50
+	 * @since 2021-09-02 15:01:26
 	 */
 	public static Mono<Void> fail(ServerWebExchange exchange, Object data) {
 		Result<Object> result = Result.fail(data.toString());
@@ -143,8 +148,9 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param result   数据
+	 * @return {@link Mono }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:50
+	 * @since 2021-09-02 15:01:33
 	 */
 	public static Mono<Void> result(ServerWebExchange exchange, Result<?> result) {
 		return writeResponse(exchange, result);
@@ -155,8 +161,9 @@ public class ResponseUtil {
 	 *
 	 * @param exchange   exchange
 	 * @param resultEnum 状态码
+	 * @return {@link Mono }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:51
+	 * @since 2021-09-02 15:01:41
 	 */
 	public static Mono<Void> fail(ServerWebExchange exchange, ResultEnum resultEnum) {
 		Result<String> result = Result.fail(resultEnum);
@@ -168,8 +175,19 @@ public class ResponseUtil {
 	 *
 	 * @param exchange exchange
 	 * @param result   数据
+	 * @return {@link Mono }
 	 * @author shuigedeng
-	 * @since 2020/10/15 15:52
+	 * @since 2021-09-02 15:01:48
+	 */
+
+	/**
+	 * writeResponse
+	 *
+	 * @param exchange exchange
+	 * @param result   result
+	 * @return {@link Mono }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:00:17
 	 */
 	public static Mono<Void> writeResponse(ServerWebExchange exchange, Result<?> result) {
 		ServerHttpResponse response = exchange.getResponse();

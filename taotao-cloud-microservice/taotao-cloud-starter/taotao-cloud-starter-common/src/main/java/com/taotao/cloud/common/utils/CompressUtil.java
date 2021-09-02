@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,24 +43,27 @@ import org.apache.commons.compress.utils.IOUtils;
  * 压缩文件夹工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:45
+ * @version 2021.9
+ * @since 2021-09-02 17:39:13
  */
 public class CompressUtil {
+
+	private CompressUtil() {
+	}
 
 	/**
 	 * 压缩文件夹到指定zip文件
 	 *
 	 * @param srcDir     源文件夹
 	 * @param targetFile 目标知道zip文件
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:39:25
 	 */
 	public static void zip(String srcDir, String targetFile) {
-		try (
-			OutputStream outputStream = new FileOutputStream(targetFile);
-		) {
+		try (OutputStream outputStream = new FileOutputStream(targetFile);) {
 			zip(srcDir, outputStream);
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			throw new BaseException("压缩文件出错", exp);
 		}
 	}
@@ -71,6 +73,8 @@ public class CompressUtil {
 	 *
 	 * @param srcDir       源文件夹
 	 * @param outputStream 压缩后文件的输出流
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:39:25
 	 */
 	public static void zip(String srcDir, OutputStream outputStream) {
 		try (
@@ -117,6 +121,8 @@ public class CompressUtil {
 	 *
 	 * @param zipFileName 源zip文件路径
 	 * @param destDir     解压后输出路径
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:39:25
 	 */
 	public static void unzip(String zipFileName, String destDir) {
 		try (InputStream inputStream = new FileInputStream(zipFileName);) {
@@ -131,6 +137,8 @@ public class CompressUtil {
 	 *
 	 * @param inputStream zip文件输入流，可以是本地文件输入流，也可以是web请求上传流
 	 * @param destDir     解压后输出路径
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:39:25
 	 */
 	public static void unzip(InputStream inputStream, String destDir) {
 		try (
@@ -157,7 +165,7 @@ public class CompressUtil {
 				}
 			}
 		} catch (Exception exp) {
-			LogUtil.error( exp);
+			LogUtil.error(exp);
 			throw new BaseException("解压文件出错", exp);
 		}
 	}

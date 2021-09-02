@@ -23,9 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * MD5Util
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:26
+ * @version 2021.9
+ * @since 2021-09-02 17:54:26
  */
 public class MD5Util {
 
@@ -42,6 +42,8 @@ public class MD5Util {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:56:32
 	 */
 	public static String encrypt(String text) {
 		if (StringUtils.isEmpty(text)) {

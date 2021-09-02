@@ -16,14 +16,13 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.core.DingerRobot;
+import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.awt.Color;
 import java.awt.Font;
@@ -29,29 +28,41 @@ import java.util.Random;
  * 生成验证码工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:28
+ * @version 2021.9
+ * @since 2021-09-02 17:44:44
  */
 public class CaptchaUtil {
 
+	private CaptchaUtil() {
+	}
+
+	/**
+	 * width
+	 */
 	private static final int width = 200;
+	/**
+	 * height
+	 */
 	private static final int height = 50;
+	/**
+	 * random
+	 */
 	private static Random random;
 
 	static {
 		try {
 			random = SecureRandom.getInstanceStrong();
 		} catch (NoSuchAlgorithmException e) {
-			LogUtil.error( e);
+			LogUtil.error(e);
 		}
 	}
 
 	/**
 	 * 获取验证码
 	 *
-	 * @return com.wf.captcha.ArithmeticCaptcha
+	 * @return {@link com.wf.captcha.ArithmeticCaptcha }
 	 * @author shuigedeng
-	 * @since 2021/2/25 15:58
+	 * @since 2021-09-02 17:45:06
 	 */
 	public static ArithmeticCaptcha getArithmeticCaptcha() {
 		ArithmeticCaptcha captcha = new ArithmeticCaptcha(width, height);
@@ -62,9 +73,9 @@ public class CaptchaUtil {
 	/**
 	 * 生成图片
 	 *
-	 * @return java.awt.image.BufferedImage
+	 * @return {@link java.awt.image.BufferedImage }
 	 * @author shuigedeng
-	 * @since 2021/2/25 15:58
+	 * @since 2021-09-02 17:45:13
 	 */
 	public static BufferedImage createImage() {
 		//生成对应宽高的初始图片
@@ -75,9 +86,9 @@ public class CaptchaUtil {
 	 * 随机画图
 	 *
 	 * @param verifyImg verifyImg
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 15:58
+	 * @since 2021-09-02 17:45:18
 	 */
 	public static String drawRandomText(BufferedImage verifyImg) {
 		Graphics2D graphics = (Graphics2D) verifyImg.getGraphics();
@@ -128,11 +139,11 @@ public class CaptchaUtil {
 	}
 
 	/**
-	 * 随机取色o
+	 * 随机取色
 	 *
-	 * @return java.awt.Color
+	 * @return {@link java.awt.Color }
 	 * @author shuigedeng
-	 * @since 2021/2/25 15:58
+	 * @since 2021-09-02 17:45:27
 	 */
 	private static Color getRandomColor() {
 		return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));

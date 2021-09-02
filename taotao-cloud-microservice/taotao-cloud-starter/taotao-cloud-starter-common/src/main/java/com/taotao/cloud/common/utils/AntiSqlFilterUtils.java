@@ -23,17 +23,28 @@ import java.util.Map;
  * sql过滤
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:29
+ * @version 2021.9
+ * @since 2021-09-02 17:50:31
  */
 public final class AntiSqlFilterUtils {
 
 	private AntiSqlFilterUtils() {
 	}
 
+	/**
+	 * KEY_WORDS
+	 */
 	private static final String[] KEY_WORDS = {";", "\"", "'", "/*", "*/", "--", "exec",
 		"select", "update", "delete", "insert", "alter", "drop", "create", "shutdown"};
 
+	/**
+	 * getSafeParameterMap
+	 *
+	 * @param parameterMap parameterMap
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:50:43
+	 */
 	public static Map<String, String[]> getSafeParameterMap(Map<String, String[]> parameterMap) {
 		Map<String, String[]> map = new HashMap<>(parameterMap.size());
 		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
@@ -43,6 +54,14 @@ public final class AntiSqlFilterUtils {
 		return map;
 	}
 
+	/**
+	 * getSafeValues
+	 *
+	 * @param oldValues oldValues
+	 * @return java.lang.String[]
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:50:50
+	 */
 	public static String[] getSafeValues(String[] oldValues) {
 		if (ArrayUtil.isNotEmpty(oldValues)) {
 			String[] newValues = new String[oldValues.length];
@@ -54,6 +73,14 @@ public final class AntiSqlFilterUtils {
 		return null;
 	}
 
+	/**
+	 * getSafeValue
+	 *
+	 * @param oldValue oldValue
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:00
+	 */
 	public static String getSafeValue(String oldValue) {
 		if (oldValue == null || "".equals(oldValue)) {
 			return oldValue;

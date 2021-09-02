@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.spring;
 
-import com.taotao.cloud.dingtalk.core.ClassPathDingerScanner;
-import com.taotao.cloud.dingtalk.core.DefaultDingerDefinitionResolver;
+import com.taotao.cloud.dingtalk.model.ClassPathDingerScanner;
+import com.taotao.cloud.dingtalk.model.DefaultDingerDefinitionResolver;
 import com.taotao.cloud.dingtalk.annatations.DingerScan;
 import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 import com.taotao.cloud.dingtalk.exception.DingerAnalysisException;
@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;

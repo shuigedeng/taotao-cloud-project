@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.enums;
 
-import com.taotao.cloud.dingtalk.core.DingerDefinitionGenerator;
+import com.taotao.cloud.dingtalk.model.DingerDefinitionGenerator;
 import com.taotao.cloud.dingtalk.definition.DingTalkDefinitionGenerator;
 import com.taotao.cloud.dingtalk.definition.WeTalkDefinitionGenerator;
 

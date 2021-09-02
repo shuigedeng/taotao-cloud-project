@@ -23,9 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * SHAUtil
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:27
+ * @version 2021.9
+ * @since 2021-09-02 17:55:47
  */
 public class SHAUtil {
 
@@ -46,6 +46,8 @@ public class SHAUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt(String text) {
 		return encrypt(text, SHA_1);
@@ -56,6 +58,8 @@ public class SHAUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt224(String text) {
 		return encrypt(text, SHA_224);
@@ -66,6 +70,8 @@ public class SHAUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt256(String text) {
 		return encrypt(text, SHA_256);
@@ -76,6 +82,8 @@ public class SHAUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt384(String text) {
 		return encrypt(text, SHA_384);
@@ -86,6 +94,8 @@ public class SHAUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	public static String encrypt512(String text) {
 		return encrypt(text, SHA_512);
@@ -97,6 +107,8 @@ public class SHAUtil {
 	 * @param text      明文
 	 * @param algorithm 加密类型
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	private static String encrypt(String text, String algorithm) {
 		if (StringUtils.isBlank(text)) {
@@ -118,6 +130,8 @@ public class SHAUtil {
 	 *
 	 * @param bytes 字节
 	 * @return 字符串
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:58:16
 	 */
 	private static String bytes2Str(byte[] bytes) {
 		StringBuilder stringBuilder = new StringBuilder();

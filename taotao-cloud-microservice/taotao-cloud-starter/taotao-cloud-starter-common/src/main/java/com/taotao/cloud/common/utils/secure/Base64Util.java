@@ -22,9 +22,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Base64工具类
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:25
+ * @version 2021.9
+ * @since 2021-09-02 17:52:02
  */
 public class Base64Util {
 
@@ -36,6 +36,8 @@ public class Base64Util {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encode(String text) {
 		if (StringUtils.isBlank(text)) {
@@ -49,6 +51,8 @@ public class Base64Util {
 	 *
 	 * @param ciphertext 密文
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String decode(String ciphertext) {
 		if (StringUtils.isBlank(ciphertext)) {

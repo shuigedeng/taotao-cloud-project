@@ -23,21 +23,28 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 /**
- * XmlUtil
+ * Xml 工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 20:24
+ * @version 2021.9
+ * @since 2021-09-02 14:33:51
  */
 public class XmlUtil {
 
 	private XmlUtil() {
 	}
 
+	/**
+	 * xml tag
+	 */
 	private static final String XML_TAG = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
 	/**
 	 * 单例方法
+	 *
+	 * @return {@link XStream }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:34:22
 	 */
 	private static XStream getInstance() {
 		XStream xStream = new XStream(new DomDriver(StandardCharsets.UTF_8.name())) {
@@ -71,6 +78,10 @@ public class XmlUtil {
 	 *
 	 * @param xml   xml字符串
 	 * @param clazz 对象类型
+	 * @param <T>   T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:35:22
 	 */
 	public static <T> T xml2Obj(String xml, Class<T> clazz) {
 		return xml2Obj(xml, clazz, clazz.getSimpleName());
@@ -82,6 +93,10 @@ public class XmlUtil {
 	 * @param xml         xml字符串
 	 * @param clazz       对象类型
 	 * @param rootElement 根节点名称
+	 * @param <T>         T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:35:36
 	 */
 	public static <T> T xml2Obj(String xml, Class<T> clazz, String rootElement) {
 		XStream xStream = getInstance();
@@ -97,6 +112,10 @@ public class XmlUtil {
 	 *
 	 * @param xml   xml文件
 	 * @param clazz 对象类型
+	 * @param <T>   T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:35:46
 	 */
 	public static <T> T xml2Obj(File xml, Class<T> clazz) {
 		return xml2Obj(xml, clazz, clazz.getSimpleName());
@@ -108,6 +127,10 @@ public class XmlUtil {
 	 * @param xml         xml文件
 	 * @param clazz       对象类型
 	 * @param rootElement 根节点名称
+	 * @param <T>         T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:35:55
 	 */
 	public static <T> T xml2Obj(File xml, Class<T> clazz, String rootElement) {
 		XStream xStream = getInstance();
@@ -122,6 +145,9 @@ public class XmlUtil {
 	 * 将java对象转化为xml字符串（包含xml头部信息）
 	 *
 	 * @param object java对象
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:36:05
 	 */
 	public static String obj2XmlWithTag(Object object) {
 		return obj2XmlWithTag(object, object.getClass().getSimpleName());
@@ -130,7 +156,11 @@ public class XmlUtil {
 	/**
 	 * 将java对象转化为xml字符串（包含xml头部信息）
 	 *
-	 * @param object java对象
+	 * @param object      java对象
+	 * @param rootElement 根节点
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:36:13
 	 */
 	public static String obj2XmlWithTag(Object object, String rootElement) {
 		return XML_TAG + "\n" + obj2Xml(object, rootElement);
@@ -140,6 +170,9 @@ public class XmlUtil {
 	 * 将java对象转化为xml字符串
 	 *
 	 * @param object java对象
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:36:41
 	 */
 	public static String obj2Xml(Object object) {
 		return obj2Xml(object, object.getClass().getSimpleName());
@@ -148,7 +181,11 @@ public class XmlUtil {
 	/**
 	 * 将java对象转化为xml字符串
 	 *
-	 * @param object java对象
+	 * @param object      java对象
+	 * @param rootElement 根节点
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:36:53
 	 */
 	public static String obj2Xml(Object object, String rootElement) {
 		XStream xStream = getInstance();

@@ -16,9 +16,9 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.core.DingerConfigurerAdapter;
-import com.taotao.cloud.dingtalk.core.DingerManagerBuilder;
-import com.taotao.cloud.dingtalk.core.DingerRobot;
+import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
+import com.taotao.cloud.dingtalk.model.DingerManagerBuilder;
+import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.dingtalk.session.DingerSessionFactory;
 import com.taotao.cloud.dingtalk.session.SessionConfiguration;
 import com.taotao.cloud.dingtalk.spring.DingerSessionFactoryBean;

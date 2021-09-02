@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-
 /**
  * StringUtil
  *
@@ -25,10 +24,29 @@ package com.taotao.cloud.common.utils;
  */
 public class StringUtil {
 
+	private StringUtil() {
+	}
+
+	/**
+	 * nullToEmpty
+	 *
+	 * @param str str
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:51:15
+	 */
 	public static String nullToEmpty(Object str) {
 		return str != null ? str.toString() : "";
 	}
 
+	/**
+	 * isEmpty
+	 *
+	 * @param str str
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:51:23
+	 */
 	public static boolean isEmpty(String str) {
 		return str == null || str.isEmpty();
 	}
@@ -38,9 +56,9 @@ public class StringUtil {
 	 *
 	 * @param str    字符串
 	 * @param maxlen 最大长度
-	 * @return java.lang.String 字符串
+	 * @return {@link String } 字符串
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:41
+	 * @since 2021-09-02 14:51:32
 	 */
 	public static String subString2(String str, int maxlen) {
 		if (StringUtil.isEmpty(str)) {
@@ -57,9 +75,9 @@ public class StringUtil {
 	 *
 	 * @param str    字符串
 	 * @param maxlen 最大长度
-	 * @return java.lang.String 字符串
+	 * @return {@link String } 字符串
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:41
+	 * @since 2021-09-02 14:51:46
 	 */
 	public static String subString3(String str, int maxlen) {
 		if (StringUtil.isEmpty(str)) {
@@ -151,7 +169,15 @@ public class StringUtil {
 		return hasText((CharSequence) str);
 	}
 
+	/**
+	 * trimToNull
+	 *
+	 * @param nextLine nextLine
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:51:58
+	 */
 	public static String trimToNull(String nextLine) {
-		return  nextLine.trim();
+		return nextLine.trim();
 	}
 }

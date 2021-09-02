@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
@@ -41,20 +40,40 @@ import okhttp3.Response;
  * OkHttpUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/06/28 17:18
+ * @version 2021.9
+ * @since 2021-09-02 16:25:02
  */
 public class OkHttpUtil {
-
+	/**
+	 * okHttpClient
+	 */
 	private static volatile OkHttpClient okHttpClient = null;
+	/**
+	 * semaphore
+	 */
 	private static volatile Semaphore semaphore = null;
+	/**
+	 * headerMap
+	 */
 	private Map<String, String> headerMap;
+	/**
+	 * paramMap
+	 */
 	private Map<String, String> paramMap;
+	/**
+	 * url
+	 */
 	private String url;
+	/**
+	 * request
+	 */
 	private Request.Builder request;
 
 	/**
 	 * 初始化okHttpClient，并且允许https访问
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:26:25
 	 */
 	private OkHttpUtil() {
 		if (okHttpClient == null) {
@@ -79,6 +98,10 @@ public class OkHttpUtil {
 
 	/**
 	 * 用于异步请求时，控制访问线程数，返回结果
+	 *
+	 * @return {@link java.util.concurrent.Semaphore }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:26:34
 	 */
 	private static Semaphore getSemaphoreInstance() {
 		//只能1个线程同时访问
@@ -92,13 +115,22 @@ public class OkHttpUtil {
 
 	/**
 	 * 创建OkHttpUtil
+	 *
+	 * @return {@link com.taotao.cloud.common.utils.OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:26:43
 	 */
 	public static OkHttpUtil builder() {
 		return new OkHttpUtil();
 	}
 
 	/**
-	 * 添加url
+	 * 获取url
+	 *
+	 * @param url url
+	 * @return {@link com.taotao.cloud.common.utils.OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:27:06
 	 */
 	public OkHttpUtil url(String url) {
 		this.url = url;
@@ -111,7 +143,9 @@ public class OkHttpUtil {
 	 *
 	 * @param key   参数名
 	 * @param value 参数值
-	 * @return
+	 * @return {@link OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:27:17
 	 */
 	public OkHttpUtil addParam(String key, String value) {
 		if (paramMap == null) {
@@ -126,7 +160,9 @@ public class OkHttpUtil {
 	 *
 	 * @param key   参数名
 	 * @param value 参数值
-	 * @return
+	 * @return {@link com.taotao.cloud.common.utils.OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:28:19
 	 */
 	public OkHttpUtil addHeader(String key, String value) {
 		if (headerMap == null) {
@@ -142,6 +178,10 @@ public class OkHttpUtil {
 	 * OkHttpUtils.builder().url("请求地址，http/https都可以") // 有参数的话添加参数，可多个 .addParam("参数名", "参数值")
 	 * .addParam("参数名", "参数值") // 也可以添加多个 .addHeader("Content-Type", "application/json;
 	 * charset=utf-8") .get() // 可选择是同步请求还是异步请求 //.async(); .sync();
+	 *
+	 * @return {@link com.taotao.cloud.common.utils.OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:28:38
 	 */
 	public OkHttpUtil get() {
 		request = new Request.Builder().get();
@@ -156,7 +196,7 @@ public class OkHttpUtil {
 						append("&");
 				}
 			} catch (Exception e) {
-				LogUtil.error( e);
+				LogUtil.error(e);
 			}
 			urlBuilder.deleteCharAt(urlBuilder.length() - 1);
 		}
@@ -173,18 +213,16 @@ public class OkHttpUtil {
 	 * .post(true) .sync();
 	 * </p>
 	 * <p>
-	 * <p>
-	 * <p>
 	 * // 选择异步有两个方法，一个是带回调接口，一个是直接返回结果 OkHttpUtils.builder().url("") .post(false) .async();
 	 * </p>
 	 * <p>
 	 * OkHttpUtils.builder().url("") .post(false) .async(new OkHttpUtils.ICallBack() {
+	 * </p>
 	 *
 	 * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
-	 * @return
-	 * @Override public void onSuccessful(Call call, String data) { // 请求成功后的处理 }
-	 * @Override public void onFailure(Call call, String errorMsg) { // 请求失败后的处理 } });
-	 * </p>
+	 * @return {@link com.taotao.cloud.common.utils.OkHttpUtil }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:02
 	 */
 	public OkHttpUtil post(boolean isJsonPost) {
 		RequestBody requestBody;
@@ -210,7 +248,9 @@ public class OkHttpUtil {
 	/**
 	 * 同步请求
 	 *
-	 * @return
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:32
 	 */
 	public String sync() {
 		setHeader(request);
@@ -219,7 +259,7 @@ public class OkHttpUtil {
 			assert response.body() != null;
 			return response.body().string();
 		} catch (IOException e) {
-			LogUtil.error( e);
+			LogUtil.error(e);
 			return "请求失败：" + e.getMessage();
 		}
 	}
@@ -227,6 +267,10 @@ public class OkHttpUtil {
 
 	/**
 	 * 异步请求，有返回值
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:37
 	 */
 	public String async() {
 		StringBuilder buffer = new StringBuilder("");
@@ -247,7 +291,7 @@ public class OkHttpUtil {
 		try {
 			getSemaphoreInstance().acquire();
 		} catch (InterruptedException e) {
-			LogUtil.error( e);
+			LogUtil.error(e);
 		}
 		return buffer.toString();
 	}
@@ -256,7 +300,9 @@ public class OkHttpUtil {
 	/**
 	 * 异步请求，带有接口回调
 	 *
-	 * @param callBack
+	 * @param callBack callBack
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:42
 	 */
 	public void async(ICallBack callBack) {
 		setHeader(request);
@@ -277,7 +323,9 @@ public class OkHttpUtil {
 	/**
 	 * 为request添加请求头
 	 *
-	 * @param request
+	 * @param request request
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:48
 	 */
 	private void setHeader(Request.Builder request) {
 		if (headerMap != null) {
@@ -286,7 +334,7 @@ public class OkHttpUtil {
 					request.addHeader(entry.getKey(), entry.getValue());
 				}
 			} catch (Exception e) {
-				LogUtil.error( e);
+				LogUtil.error(e);
 			}
 		}
 	}
@@ -295,7 +343,10 @@ public class OkHttpUtil {
 	/**
 	 * 生成安全套接字工厂，用于https请求的证书跳过
 	 *
-	 * @return
+	 * @param trustAllCerts trustAllCerts
+	 * @return {@link javax.net.ssl.SSLSocketFactory }
+	 * @author shuigedeng
+	 * @since 2021-09-02 16:29:54
 	 */
 	private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
 		SSLSocketFactory ssfFactory = null;
@@ -304,12 +355,18 @@ public class OkHttpUtil {
 			sc.init(null, trustAllCerts, new SecureRandom());
 			ssfFactory = sc.getSocketFactory();
 		} catch (Exception e) {
-			LogUtil.error( e);
+			LogUtil.error(e);
 		}
 		return ssfFactory;
 	}
 
-
+	/**
+	 * buildTrustManagers
+	 *
+	 * @return javax.net.ssl.TrustManager[]
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:10:34
+	 */
 	private static TrustManager[] buildTrustManagers() {
 		return new TrustManager[]{
 			new X509TrustManager() {
@@ -330,7 +387,11 @@ public class OkHttpUtil {
 	}
 
 	/**
-	 * 自定义一个接口回调
+	 * ICallBack
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 16:30:13
 	 */
 	public interface ICallBack {
 

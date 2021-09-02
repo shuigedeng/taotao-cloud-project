@@ -18,12 +18,10 @@ package com.taotao.cloud.log.appender;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.spi.AppenderAttachableImpl;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
-import com.taotao.cloud.common.utils.LogUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -151,16 +149,12 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 		JSONObject jsonObject;
 		try {
-			s = s.replace("[", "#")
+			jsonObject = JSONUtil.parseObj(s
+				.replace("[", "#")
 				.replace("]", "#")
-				.replace("\n", "");
-			if (StrUtil.isNotBlank(s)) {
-				jsonObject = JSONUtil.parseObj(s);
-			} else {
-				throw new Exception(s);
-			}
+				.replace("\n", "")
+			);
 		} catch (Exception exception) {
-			LogUtil.error(s, exception);
 			return;
 		}
 

@@ -27,8 +27,8 @@ import org.apache.commons.lang3.StringUtils;
  * AESUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 19:25
+ * @version 2021.9
+ * @since 2021-09-02 17:51:17
  */
 public class AESUtil {
 
@@ -60,6 +60,8 @@ public class AESUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:25
 	 */
 	public static String encrypt(String text) {
 		return encrypt(text, DEFAULT_KEY);
@@ -71,6 +73,8 @@ public class AESUtil {
 	 * @param text 明文
 	 * @param key  秘钥（必须16位）
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:25
 	 */
 	public static String encrypt(String text, String key) {
 		if (StringUtils.isAnyBlank(text, key) || 16 != key.length()) {
@@ -98,6 +102,8 @@ public class AESUtil {
 	 *
 	 * @param ciphertext 密文
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:25
 	 */
 	public static String decrypt(String ciphertext) {
 		return decrypt(ciphertext, DEFAULT_KEY);
@@ -109,6 +115,8 @@ public class AESUtil {
 	 * @param ciphertext 密文
 	 * @param key        秘钥（必须16位）
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:25
 	 */
 	public static String decrypt(String ciphertext, String key) {
 		if (StringUtils.isAnyBlank(ciphertext, key) || 16 != key.length()) {

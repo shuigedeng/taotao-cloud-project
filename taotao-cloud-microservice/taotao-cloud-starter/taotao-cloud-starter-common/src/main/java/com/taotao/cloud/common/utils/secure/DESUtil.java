@@ -28,9 +28,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * DESUtil
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 19:26
+ * @version 2021.9
+ * @since 2021-09-02 17:52:29
  */
 public class DESUtil {
 
@@ -52,6 +52,8 @@ public class DESUtil {
 	 *
 	 * @param text 明文
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encrypt(String text) {
 		return encrypt(text, DEFAULT_KEY);
@@ -63,6 +65,8 @@ public class DESUtil {
 	 * @param text 明文
 	 * @param key  秘钥
 	 * @return 密文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String encrypt(String text, String key) {
 		if (StringUtils.isAnyBlank(text, key)) {
@@ -94,6 +98,8 @@ public class DESUtil {
 	 *
 	 * @param ciphertext 密文
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String decrypt(String ciphertext) {
 		return decrypt(ciphertext, DEFAULT_KEY);
@@ -105,13 +111,14 @@ public class DESUtil {
 	 * @param ciphertext 密文
 	 * @param key        秘钥
 	 * @return 明文
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:51:28
 	 */
 	public static String decrypt(String ciphertext, String key) {
 		if (StringUtils.isAnyBlank(ciphertext, key)) {
 			return null;
 		}
 		try {
-
 			// 生成一个可信任的随机数源
 			SecureRandom secureRandom = new SecureRandom();
 			// 从原始密钥数据创建DESKeySpec对象

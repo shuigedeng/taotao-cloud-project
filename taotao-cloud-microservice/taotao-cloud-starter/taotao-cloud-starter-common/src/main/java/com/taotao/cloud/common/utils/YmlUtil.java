@@ -24,46 +24,59 @@ import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * YmlUtil
+ * Yml 工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 20:24
+ * @version 2021.9
+ * @since 2021-09-02 14:27:56
  */
 public class YmlUtil {
 
 	private YmlUtil() {
 	}
 
+	/**
+	 * bootstrap.yml
+	 */
 	private static final String BOOTSTRAP_YML = "bootstrap.yml";
+
+	/**
+	 * application.yml
+	 */
 	private static final String APPLICATION_YML = "application.yml";
 
 	/**
 	 * 获取bootstrap.yml配置内容
 	 *
 	 * @param key 键
-	 * @return 值
+	 * @return {@link Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:31:01
 	 */
 	public static Object getBootstrapValue(String key) {
 		return getValueByYml(BOOTSTRAP_YML, key);
 	}
 
 	/**
-	 * 获取application.yml配置内容
+	 * 获取Application.yml配置内容
 	 *
 	 * @param key 键
-	 * @return 值
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:31:43
 	 */
 	public static Object getApplicationValue(String key) {
 		return getValueByYml(APPLICATION_YML, key);
 	}
 
 	/**
-	 * 获取yml配置内容
+	 * 获取yml值
 	 *
-	 * @param fileName yml文件名
+	 * @param fileName 文件名称
 	 * @param key      键
-	 * @return 值
+	 * @return {@link Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:32:04
 	 */
 	public static Object getValueByYml(String fileName, String key) {
 		Map<String, Object> map = getYml(fileName);
@@ -93,7 +106,9 @@ public class YmlUtil {
 	 * 获取 yml 文件内容
 	 *
 	 * @param fileName yml文件名
-	 * @return
+	 * @return {@link Map }
+	 * @author shuigedeng
+	 * @since 2021-09-02 14:32:40
 	 */
 	public static Map<String, Object> getYml(String fileName) {
 		if (StringUtils.isBlank(fileName)) {

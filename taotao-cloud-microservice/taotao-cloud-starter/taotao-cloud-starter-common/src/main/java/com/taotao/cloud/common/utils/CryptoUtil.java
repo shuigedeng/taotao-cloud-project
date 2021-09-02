@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.common.utils;
 
 import java.io.BufferedInputStream;
@@ -16,16 +31,28 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * 加密工具类，包含MD5,BASE64,SHA,CRC32
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 17:35:02
  */
 public class CryptoUtil {
 
+	private CryptoUtil() {
+	}
+
+	/**
+	 * DEFAULT_CHARSET
+	 */
 	private static final String DEFAULT_CHARSET = "UTF-8";
 
 	/**
 	 * MD5加密
 	 *
-	 * @param bytes an array of byte.
-	 * @return a {@link String} object.
+	 * @param bytes bytes
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:29
 	 */
 	public static String encodeMD5(final byte[] bytes) {
 		return DigestUtils.md5Hex(bytes);
@@ -34,8 +61,10 @@ public class CryptoUtil {
 	/**
 	 * MD5加密，默认UTF-8
 	 *
-	 * @param str a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str str
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:34
 	 */
 	public static String encodeMD5(final String str) {
 		return encodeMD5(str, DEFAULT_CHARSET);
@@ -44,9 +73,11 @@ public class CryptoUtil {
 	/**
 	 * MD5加密
 	 *
-	 * @param str     a {@link String} object.
-	 * @param charset a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str     str
+	 * @param charset charset
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:38
 	 */
 	public static String encodeMD5(final String str, final String charset) {
 		if (str == null) {
@@ -63,8 +94,10 @@ public class CryptoUtil {
 	/**
 	 * SHA加密
 	 *
-	 * @param bytes an array of byte.
-	 * @return a {@link String} object.
+	 * @param bytes bytes
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:43
 	 */
 	public static String encodeSHA(final byte[] bytes) {
 		return DigestUtils.sha512Hex(bytes);
@@ -73,9 +106,11 @@ public class CryptoUtil {
 	/**
 	 * SHA加密
 	 *
-	 * @param str     a {@link String} object.
-	 * @param charset a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str     str
+	 * @param charset charset
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:48
 	 */
 	public static String encodeSHA(final String str, final String charset) {
 		if (str == null) {
@@ -92,8 +127,10 @@ public class CryptoUtil {
 	/**
 	 * SHA加密,默认utf-8
 	 *
-	 * @param str a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str str
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:53
 	 */
 	public static String encodeSHA(final String str) {
 		return encodeSHA(str, DEFAULT_CHARSET);
@@ -102,8 +139,10 @@ public class CryptoUtil {
 	/**
 	 * BASE64加密
 	 *
-	 * @param bytes an array of byte.
-	 * @return a {@link String} object.
+	 * @param bytes bytes
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:35:57
 	 */
 	public static String encodeBASE64(final byte[] bytes) {
 		return new String(Base64.encodeBase64String(bytes));
@@ -112,9 +151,11 @@ public class CryptoUtil {
 	/**
 	 * BASE64加密
 	 *
-	 * @param str     a {@link String} object.
-	 * @param charset a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str     str
+	 * @param charset charset
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:02
 	 */
 	public static String encodeBASE64(final String str, String charset) {
 		if (str == null) {
@@ -131,8 +172,10 @@ public class CryptoUtil {
 	/**
 	 * BASE64加密,默认UTF-8
 	 *
-	 * @param str a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str str
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:07
 	 */
 	public static String encodeBASE64(final String str) {
 		return encodeBASE64(str, DEFAULT_CHARSET);
@@ -141,8 +184,10 @@ public class CryptoUtil {
 	/**
 	 * BASE64解密,默认UTF-8
 	 *
-	 * @param str a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str str
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:14
 	 */
 	public static String decodeBASE64(String str) {
 		return decodeBASE64(str, DEFAULT_CHARSET);
@@ -151,9 +196,11 @@ public class CryptoUtil {
 	/**
 	 * BASE64解密
 	 *
-	 * @param str     a {@link String} object.
-	 * @param charset 字符编码
-	 * @return a {@link String} object.
+	 * @param str     str
+	 * @param charset charset
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:18
 	 */
 	public static String decodeBASE64(String str, String charset) {
 		try {
@@ -167,8 +214,10 @@ public class CryptoUtil {
 	/**
 	 * CRC32字节校验
 	 *
-	 * @param bytes an array of byte.
-	 * @return a {@link String} object.
+	 * @param bytes bytes
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:22
 	 */
 	public static String crc32(byte[] bytes) {
 		CRC32 crc32 = new CRC32();
@@ -179,9 +228,11 @@ public class CryptoUtil {
 	/**
 	 * CRC32字符串校验
 	 *
-	 * @param str     a {@link String} object.
-	 * @param charset a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str     str
+	 * @param charset charset
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:27
 	 */
 	public static String crc32(final String str, String charset) {
 		try {
@@ -195,8 +246,10 @@ public class CryptoUtil {
 	/**
 	 * CRC32字符串校验,默认UTF-8编码读取
 	 *
-	 * @param str a {@link String} object.
-	 * @return a {@link String} object.
+	 * @param str str
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:37
 	 */
 	public static String crc32(final String str) {
 		return crc32(str, DEFAULT_CHARSET);
@@ -205,8 +258,10 @@ public class CryptoUtil {
 	/**
 	 * CRC32流校验
 	 *
-	 * @param input a {@link InputStream} object.
-	 * @return a {@link String} object.
+	 * @param input input
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:42
 	 */
 	public static String crc32(InputStream input) {
 		CRC32 crc32 = new CRC32();
@@ -227,8 +282,10 @@ public class CryptoUtil {
 	/**
 	 * CRC32文件唯一校验
 	 *
-	 * @param file a {@link File} object.
-	 * @return a {@link String} object.
+	 * @param file file
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:47
 	 */
 	public static String crc32(File file) {
 		InputStream input = null;
@@ -246,8 +303,10 @@ public class CryptoUtil {
 	/**
 	 * CRC32文件唯一校验
 	 *
-	 * @param url a {@link URL} object.
-	 * @return a {@link String} object.
+	 * @param url url
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:36:51
 	 */
 	public static String crc32(URL url) {
 		InputStream input = null;

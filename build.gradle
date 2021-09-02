@@ -161,7 +161,6 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
             if (fileDir.exists() && fileDir.isDirectory()) {
                 new File("$buildDir/resources/main/application.properties").withWriter { w ->
                     def projectProperties = project.properties
-
                     Properties p = new Properties()
                     projectProperties.each { entry ->
                         p[entry.key.toString()] = entry.value.toString()

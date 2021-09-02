@@ -22,11 +22,17 @@ package com.taotao.cloud.common.utils;
  * 如果offset大于5，则直接抛出异常
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2019/3/5
+ * @version 2021.9
+ * @since 2021-09-02 16:42:02
  */
 public class IdGeneratorUtil {
 
+	private IdGeneratorUtil() {
+	}
+
+	/**
+	 * WORKER
+	 */
 	private static final SequenceUtil WORKER = new SequenceUtil();
 
 	/**
@@ -34,7 +40,7 @@ public class IdGeneratorUtil {
 	 *
 	 * @return long
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:18
+	 * @since 2021-09-02 16:43:10
 	 */
 	public static long getId() {
 		return WORKER.nextId();
@@ -43,9 +49,9 @@ public class IdGeneratorUtil {
 	/**
 	 * 获取id 字符串
 	 *
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:19
+	 * @since 2021-09-02 16:43:20
 	 */
 	public static String getIdStr() {
 		return String.valueOf(WORKER.nextId());

@@ -15,19 +15,24 @@
  */
 package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.constant.StarterName;
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * 错误重试工具类
+ * RetryUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:23
+ * @version 2021.9
+ * @since 2021-09-02 14:58:57
  */
 public class RetryUtil {
 
+	private RetryUtil() {
+	}
+
+	/**
+	 * name
+	 */
 	private final static String name = "重试工具";
 
 	/**
@@ -39,13 +44,13 @@ public class RetryUtil {
 	 * @param sleepTime        重试间隔睡眠时间(注意：阻塞当前线程)
 	 * @param expectExceptions 期待异常(抛出符合相应异常时候重试),空或者空容器默认进行重试
 	 * @return R
-	 * @version 1.0.0
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:45
+	 * @since 2021-09-02 14:59:11
 	 */
 	public static <R> R invoke(Supplier<R> dataSupplier, Consumer<Throwable> exceptionCaught,
 		int retryCount, long sleepTime, List<Class<? extends Throwable>> expectExceptions) {
 		Throwable ex;
+
 		try {
 			// 产生数据
 			return dataSupplier == null ? null : dataSupplier.get();
@@ -72,7 +77,7 @@ public class RetryUtil {
 				}
 				return dataSupplier.get();
 			} catch (InterruptedException e) {
-				System.err.println("thread interrupted !! break retry,cause:" + e.getMessage());
+				LogUtil.error("thread interrupted !! break retry,cause:" + e.getMessage());
 				// 恢复中断信号
 				Thread.currentThread().interrupt();
 				// 线程中断直接退出重试
@@ -85,6 +90,14 @@ public class RetryUtil {
 		return null;
 	}
 
+	/**
+	 * catchException
+	 *
+	 * @param exceptionCaught exceptionCaught
+	 * @param throwable       throwable
+	 * @author shuigedeng
+	 * @since 2021-09-02 17:04:42
+	 */
 	private static void catchException(Consumer<Throwable> exceptionCaught, Throwable throwable) {
 		try {
 			if (exceptionCaught != null) {
@@ -97,7 +110,11 @@ public class RetryUtil {
 	}
 
 	/**
-	 * 函数式接口可以抛出异常
+	 * Supplier
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 14:59:53
 	 */
 	@FunctionalInterface
 	public interface Supplier<T> {

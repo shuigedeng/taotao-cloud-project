@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.listeners;
 
 
-import com.taotao.cloud.dingtalk.core.DingerConfig;
+import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import java.util.ArrayList;
 import java.util.Arrays;
