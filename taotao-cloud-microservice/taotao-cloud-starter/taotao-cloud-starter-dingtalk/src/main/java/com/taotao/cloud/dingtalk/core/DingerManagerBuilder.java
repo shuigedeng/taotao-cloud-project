@@ -15,20 +15,13 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_EXECUTOR;
-import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_REST_TEMPLATE;
-import static com.taotao.cloud.dingtalk.constant.DingerConstant.MARKDOWN_MESSAGE;
-import static com.taotao.cloud.dingtalk.constant.DingerConstant.TEXT_MESSAGE;
-
 import com.taotao.cloud.dingtalk.support.CustomMessage;
 import com.taotao.cloud.dingtalk.support.DingerAsyncCallback;
 import com.taotao.cloud.dingtalk.support.DingerExceptionCallback;
+import com.taotao.cloud.dingtalk.support.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
-import com.taotao.cloud.dingtalk.support.client.DingerHttpClient;
-import com.taotao.cloud.dingtalk.support.sign.DingerSignAlgorithm;
+import com.taotao.cloud.dingtalk.support.DingerSignAlgorithm;
 import java.util.concurrent.Executor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -40,30 +33,34 @@ import org.springframework.web.client.RestTemplate;
  */
 public class DingerManagerBuilder {
 
-	@Autowired
-	@Qualifier(DINGER_REST_TEMPLATE)
-	RestTemplate dingerRestTemplate;
-	@Autowired
-	DingerExceptionCallback dingerExceptionCallback;
-	@Autowired
-	@Qualifier(TEXT_MESSAGE)
-	CustomMessage textMessage;
-	@Autowired
-	@Qualifier(MARKDOWN_MESSAGE)
-	CustomMessage markDownMessage;
-	@Autowired
-	DingerSignAlgorithm dingerSignAlgorithm;
-	@Autowired
-	DingerIdGenerator dingerIdGenerator;
-	@Autowired(required = false)
-	@Qualifier(DINGER_EXECUTOR)
-	Executor dingTalkExecutor;
-	@Autowired
-	DingerAsyncCallback dingerAsyncCallback;
-	@Autowired
-	DingerHttpClient dingerHttpClient;
+	private RestTemplate dingerRestTemplate;
+	private DingerExceptionCallback dingerExceptionCallback;
+	private CustomMessage textMessage;
+	private CustomMessage markDownMessage;
+	private DingerSignAlgorithm dingerSignAlgorithm;
+	private DingerIdGenerator dingerIdGenerator;
+	private Executor dingTalkExecutor;
+	private DingerAsyncCallback dingerAsyncCallback;
+	private DingerHttpClient dingerHttpClient;
 
-	public DingerManagerBuilder() {
+	public DingerManagerBuilder(RestTemplate dingerRestTemplate,
+		DingerExceptionCallback dingerExceptionCallback,
+		CustomMessage textMessage,
+		CustomMessage markDownMessage,
+		DingerSignAlgorithm dingerSignAlgorithm,
+		DingerIdGenerator dingerIdGenerator,
+		Executor dingTalkExecutor,
+		DingerAsyncCallback dingerAsyncCallback,
+		DingerHttpClient dingerHttpClient) {
+		this.dingerRestTemplate = dingerRestTemplate;
+		this.dingerExceptionCallback = dingerExceptionCallback;
+		this.textMessage = textMessage;
+		this.markDownMessage = markDownMessage;
+		this.dingerSignAlgorithm = dingerSignAlgorithm;
+		this.dingerIdGenerator = dingerIdGenerator;
+		this.dingTalkExecutor = dingTalkExecutor;
+		this.dingerAsyncCallback = dingerAsyncCallback;
+		this.dingerHttpClient = dingerHttpClient;
 	}
 
 	/**
@@ -185,5 +182,82 @@ public class DingerManagerBuilder {
 			this.dingerAsyncCallback = dingerAsyncCallback;
 		}
 		return this;
+	}
+
+
+	public RestTemplate getDingerRestTemplate() {
+		return dingerRestTemplate;
+	}
+
+	public void setDingerRestTemplate(RestTemplate dingerRestTemplate) {
+		this.dingerRestTemplate = dingerRestTemplate;
+	}
+
+	public DingerExceptionCallback getDingerExceptionCallback() {
+		return dingerExceptionCallback;
+	}
+
+	public void setDingerExceptionCallback(
+		DingerExceptionCallback dingerExceptionCallback) {
+		this.dingerExceptionCallback = dingerExceptionCallback;
+	}
+
+	public CustomMessage getTextMessage() {
+		return textMessage;
+	}
+
+	public void setTextMessage(CustomMessage textMessage) {
+		this.textMessage = textMessage;
+	}
+
+	public CustomMessage getMarkDownMessage() {
+		return markDownMessage;
+	}
+
+	public void setMarkDownMessage(CustomMessage markDownMessage) {
+		this.markDownMessage = markDownMessage;
+	}
+
+	public DingerSignAlgorithm getDingerSignAlgorithm() {
+		return dingerSignAlgorithm;
+	}
+
+	public void setDingerSignAlgorithm(
+		DingerSignAlgorithm dingerSignAlgorithm) {
+		this.dingerSignAlgorithm = dingerSignAlgorithm;
+	}
+
+	public DingerIdGenerator getDingerIdGenerator() {
+		return dingerIdGenerator;
+	}
+
+	public void setDingerIdGenerator(DingerIdGenerator dingerIdGenerator) {
+		this.dingerIdGenerator = dingerIdGenerator;
+	}
+
+	public Executor getDingTalkExecutor() {
+		return dingTalkExecutor;
+	}
+
+	public void setDingTalkExecutor(Executor dingTalkExecutor) {
+		this.dingTalkExecutor = dingTalkExecutor;
+	}
+
+	public DingerAsyncCallback getDingerAsyncCallback() {
+		return dingerAsyncCallback;
+	}
+
+	public void setDingerAsyncCallback(
+		DingerAsyncCallback dingerAsyncCallback) {
+		this.dingerAsyncCallback = dingerAsyncCallback;
+	}
+
+	public DingerHttpClient getDingerHttpClient() {
+		return dingerHttpClient;
+	}
+
+	public void setDingerHttpClient(
+		DingerHttpClient dingerHttpClient) {
+		this.dingerHttpClient = dingerHttpClient;
 	}
 }

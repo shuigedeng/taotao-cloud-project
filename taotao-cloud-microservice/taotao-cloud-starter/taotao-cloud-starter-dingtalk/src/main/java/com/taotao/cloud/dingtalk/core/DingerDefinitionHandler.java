@@ -15,27 +15,27 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINGERDEFINITIONTYPE_ERROR;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGERDEFINITIONTYPE_ERROR;
 
-import com.taotao.cloud.dingtalk.core.annatations.DingerImageText;
-import com.taotao.cloud.dingtalk.core.annatations.DingerLink;
-import com.taotao.cloud.dingtalk.core.annatations.DingerMarkdown;
-import com.taotao.cloud.dingtalk.core.annatations.DingerText;
-import com.taotao.cloud.dingtalk.core.annatations.DingerTokenId;
-import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
-import com.taotao.cloud.dingtalk.core.entity.enums.AsyncExecuteType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerDefinitionType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageMainType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
-import com.taotao.cloud.dingtalk.core.entity.xml.BodyTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.ConfigurationTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.ContentTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.MessageTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.PhoneTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.PhonesTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.TokenId;
+import com.taotao.cloud.dingtalk.annatations.DingerImageText;
+import com.taotao.cloud.dingtalk.annatations.DingerLink;
+import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;
+import com.taotao.cloud.dingtalk.annatations.DingerText;
+import com.taotao.cloud.dingtalk.annatations.DingerTokenId;
+import com.taotao.cloud.dingtalk.entity.DingerRequest;
+import com.taotao.cloud.dingtalk.entity.MsgType;
+import com.taotao.cloud.dingtalk.enums.AsyncExecuteType;
+import com.taotao.cloud.dingtalk.enums.DingerDefinitionType;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.MessageMainType;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
+import com.taotao.cloud.dingtalk.xml.BodyTag;
+import com.taotao.cloud.dingtalk.xml.ConfigurationTag;
+import com.taotao.cloud.dingtalk.xml.ContentTag;
+import com.taotao.cloud.dingtalk.xml.MessageTag;
+import com.taotao.cloud.dingtalk.xml.PhoneTag;
+import com.taotao.cloud.dingtalk.xml.PhonesTag;
+import com.taotao.cloud.dingtalk.xml.TokenId;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,7 +54,6 @@ import org.slf4j.LoggerFactory;
  */
 public class DingerDefinitionHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(DingerDefinitionHandler.class);
 	/**
 	 * 企业微信@所有人标识
 	 */

@@ -15,18 +15,19 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
-import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
-import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerResponseCodeEnum;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.entity.DingerRequest;
+import com.taotao.cloud.dingtalk.entity.DingerResponse;
+import com.taotao.cloud.dingtalk.entity.MsgType;
+import com.taotao.cloud.dingtalk.enums.DingerResponseCodeEnum;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.MediaTypeEnum;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.exception.AsyncCallException;
 import com.taotao.cloud.dingtalk.exception.SendMsgException;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
-import com.taotao.cloud.dingtalk.support.client.MediaTypeEnum;
-import com.taotao.cloud.dingtalk.support.sign.SignBase;
+import com.taotao.cloud.dingtalk.support.SignBase;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class DingerRobot extends AbstractDingerSender {
 	 */
 	protected <T extends MsgType> DingerResponse send(T message) {
 		DingerType dingerType = message.getDingerType();
-		String dkid = dingTalkManagerBuilder.dingerIdGenerator.dingerId();
+		String dkid = dingTalkManagerBuilder.getDingerIdGenerator().dingerId();
 		Map<DingerType, DingerProperties.Dinger> dingers = dingerProperties.getDingers();
 		if (!
 			(
@@ -106,15 +107,13 @@ public class DingerRobot extends AbstractDingerSender {
 			StringBuilder webhook = new StringBuilder();
 			webhook.append(dinger.getRobotUrl()).append("=").append(dinger.getTokenId());
 
-			if (log.isDebugEnabled()) {
-				log.debug("dingerId={} send message and use dinger={}, tokenId={}.", dkid,
-					dingerType, dinger.getTokenId());
-			}
+			LogUtil.info("dingerId={} send message and use dinger={}, tokenId={}.", dkid,
+				dingerType, dinger.getTokenId());
 
 			// 处理签名问题(只支持DingTalk)
 			if (dingerType == DingerType.DINGTALK &&
 				DingerUtils.isNotEmpty((dinger.getSecret()))) {
-				SignBase sign = dingTalkManagerBuilder.dingerSignAlgorithm.sign(
+				SignBase sign = dingTalkManagerBuilder.getDingerSignAlgorithm().sign(
 					dinger.getSecret().trim());
 				webhook.append(sign.transfer());
 			}
@@ -124,12 +123,12 @@ public class DingerRobot extends AbstractDingerSender {
 
 			// 异步处理, 直接返回标识id
 			if (dinger.isAsync()) {
-				dingTalkManagerBuilder.dingTalkExecutor.execute(() -> {
+				dingTalkManagerBuilder.getDingTalkExecutor().execute(() -> {
 					try {
-						String result = dingTalkManagerBuilder.dingerHttpClient.post(
+						String result = dingTalkManagerBuilder.getDingerHttpClient().post(
 							webhook.toString(), headers, message
 						);
-						dingTalkManagerBuilder.dingerAsyncCallback.execute(dkid, result);
+						dingTalkManagerBuilder.getDingerAsyncCallback().execute(dkid, result);
 					} catch (Exception e) {
 						exceptionCallback(dkid, message, new AsyncCallException(e));
 					}
@@ -137,7 +136,7 @@ public class DingerRobot extends AbstractDingerSender {
 				return DingerResponse.success(dkid, dkid);
 			}
 
-			String response = dingTalkManagerBuilder.dingerHttpClient.post(
+			String response = dingTalkManagerBuilder.getDingerHttpClient().post(
 				webhook.toString(), headers, message
 			);
 			return DingerResponse.success(dkid, response);

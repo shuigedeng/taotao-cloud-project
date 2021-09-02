@@ -18,17 +18,15 @@ package com.taotao.cloud.dingtalk.core;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIES_PREFIX;
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 
-import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
 import java.io.IOException;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
@@ -44,8 +42,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 public class DefaultDingerDefinitionResolver extends DingerListenersProperty implements
 	EnvironmentAware {
 
-	private static final Logger log = LoggerFactory.getLogger(
-		DefaultDingerDefinitionResolver.class);
 	private final DingerDefinitionResolver xmlDingerDefinitionResolver;
 	private final DingerDefinitionResolver annotaDingerDefinitionResolver;
 	private Environment environment;
@@ -74,13 +70,10 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 	 * Xml定义Dinger解析处理
 	 */
 	protected void dingerXmlResolver() {
-		boolean debugEnabled = log.isDebugEnabled();
 		String dingerLocationsProp = DINGER_PROPERTIES_PREFIX + "dinger-locations";
 		String dingerLocations = environment.getProperty(dingerLocationsProp);
 		if (dingerLocations == null) {
-			if (debugEnabled) {
-				log.debug("dinger xml is not configured.");
-			}
+			LogUtil.debug("dinger xml is not configured.");
 			return;
 		}
 
@@ -93,7 +86,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, dingerLocations);
 		}
 		if (resources.length == 0) {
-			log.warn("dinger xml is empty under {}.", dingerLocations);
+			LogUtil.warn("dinger xml is empty under {}.", dingerLocations);
 			return;
 		}
 
@@ -112,7 +105,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 	 */
 	private void registerDefaultDingerConfig(Environment environment) {
 		if (environment == null) {
-			log.warn("environment is null.");
+			LogUtil.warn("environment is null.");
 			return;
 		}
 		for (DingerType dingerType : enabledDingerTypes) {
@@ -126,9 +119,7 @@ public class DefaultDingerDefinitionResolver extends DingerListenersProperty imp
 			String asyncExecuteProp = dingers + "async";
 
 			if (DingerUtils.isEmpty(tokenIdProp)) {
-				if (log.isDebugEnabled()) {
-					log.debug("dinger={} is not open.", dingerType);
-				}
+				LogUtil.debug("dinger={} is not open.", dingerType);
 				continue;
 			}
 			String tokenId = environment.getProperty(tokenIdProp);

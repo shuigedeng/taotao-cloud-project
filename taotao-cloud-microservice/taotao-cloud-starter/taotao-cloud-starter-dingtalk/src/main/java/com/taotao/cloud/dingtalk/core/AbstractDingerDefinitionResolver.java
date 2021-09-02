@@ -16,22 +16,21 @@
 package com.taotao.cloud.dingtalk.core;
 
 
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINGER_REPEATED_EXCEPTION;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.METHOD_DEFINITION_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGER_REPEATED_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.METHOD_DEFINITION_EXCEPTION;
 
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.annatations.AsyncExecute;
+import com.taotao.cloud.dingtalk.annatations.DingerConfiguration;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.core.annatations.AsyncExecute;
-import com.taotao.cloud.dingtalk.core.annatations.DingerConfiguration;
-import com.taotao.cloud.dingtalk.core.entity.DingerMethod;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerDefinitionType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+import com.taotao.cloud.dingtalk.entity.DingerMethod;
+import com.taotao.cloud.dingtalk.enums.DingerDefinitionType;
+import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterNameDiscoverer;
 
 /**
@@ -43,8 +42,6 @@ import org.springframework.core.ParameterNameDiscoverer;
 public abstract class AbstractDingerDefinitionResolver<T> extends DingerListenersProperty implements
 	DingerDefinitionResolver<T> {
 
-	private static final Logger log = LoggerFactory.getLogger(
-		AbstractDingerDefinitionResolver.class);
 	/**
 	 * dinger消息类型和对应生成器映射关系
 	 */
@@ -105,14 +102,11 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 		DingerConfig dingerConfiguration,
 		DingerMethod dingerMethod
 	) {
-		boolean debugEnabled = log.isDebugEnabled();
 		for (DingerType dingerType : enabledDingerTypes) {
 			DingerConfig defaultDingerConfig = defaultDingerConfigs.get(dingerType);
 			if (dingerConfiguration == null) {
-				if (debugEnabled) {
-					log.debug("dinger={} not open and skip the corresponding dinger registration.",
-						dingerType);
-				}
+				LogUtil.debug("dinger={} not open and skip the corresponding dinger registration.",
+					dingerType);
 				continue;
 			}
 			String keyName = dingerType + DingerConstant.SPOT_SEPERATOR + dingerName;
@@ -121,9 +115,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 				dingerDefinitionGeneratorMap.get(key);
 			if (dingerDefinitionGeneratorClass == null) {
 //                throw new DingerException(ExceptionEnum.DINGERDEFINITIONTYPE_UNDEFINED_KEY, key);
-				if (debugEnabled) {
-					log.debug("当前key=%s在DingerDefinitionType中没定义", key);
-				}
+				LogUtil.debug("当前key=%s在DingerDefinitionType中没定义", key);
 				continue;
 			}
 
@@ -135,12 +127,11 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 			);
 
 			if (dingerDefinition == null) {
-				if (debugEnabled) {
-					log.debug("keyName={} dinger[{}] format is illegal.", keyName,
-						dingerDefinitionKey);
-				}
+				LogUtil.debug("keyName={} dinger[{}] format is illegal.", keyName,
+					dingerDefinitionKey);
 				continue;
 			}
+
 			if (Container.INSTANCE.contains(keyName)) {
 				throw new DingerException(DINGER_REPEATED_EXCEPTION, keyName);
 			}
@@ -158,9 +149,7 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
 				.merge(defaultDingerConfig);
 
 			Container.INSTANCE.put(keyName, dingerDefinition);
-			if (debugEnabled) {
-				log.debug("dinger definition={} has been registed.", keyName);
-			}
+			LogUtil.debug("dinger definition={} has been registed.", keyName);
 		}
 	}
 

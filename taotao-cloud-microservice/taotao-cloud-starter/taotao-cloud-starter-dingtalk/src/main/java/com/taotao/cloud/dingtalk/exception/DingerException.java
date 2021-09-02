@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.exception;
 
 
-import com.taotao.cloud.dingtalk.core.entity.ExceptionPairs;
+import com.taotao.cloud.dingtalk.entity.ExceptionPairs;
 
 /**
  * 异常类

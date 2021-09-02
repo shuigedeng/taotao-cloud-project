@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.support;
 
 
-import com.taotao.cloud.dingtalk.core.entity.DingerCallback;
+import com.taotao.cloud.dingtalk.entity.DingerCallback;
 
 /**
  * 发送异常回调接口

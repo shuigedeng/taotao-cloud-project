@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.exception;
 
 
-import com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum;
+import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 
 /**
  * 配置异常

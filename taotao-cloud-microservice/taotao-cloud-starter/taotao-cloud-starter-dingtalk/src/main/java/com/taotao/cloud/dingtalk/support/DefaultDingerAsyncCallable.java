@@ -16,8 +16,7 @@
 package com.taotao.cloud.dingtalk.support;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.taotao.cloud.common.utils.LogUtil;
 
 /**
  * 默认异步执行回调
@@ -27,13 +26,9 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultDingerAsyncCallable implements DingerAsyncCallback {
 
-	private static final Logger log = LoggerFactory.getLogger(DefaultDingerAsyncCallable.class);
-
 	@Override
 	public void execute(String dingerId, String result) {
-		if (log.isDebugEnabled()) {
-			log.debug("dingerId=[{}], result=[{}].",
-				dingerId, result);
-		}
+		LogUtil.info("dingerId=[{}], result=[{}].",
+			dingerId, result);
 	}
 }

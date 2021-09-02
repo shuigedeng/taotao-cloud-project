@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.core;
 
 
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
+import com.taotao.cloud.dingtalk.entity.MsgType;
 import java.util.Map;
 
 /**

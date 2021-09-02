@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.dingtalk.support;
 
-import com.taotao.cloud.dingtalk.core.entity.DingerCallback;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.entity.DingerCallback;
 import com.taotao.cloud.dingtalk.exception.DingerException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 默认消息通知
@@ -28,13 +27,11 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultDingerExceptionCallback implements DingerExceptionCallback {
 
-	private static final Logger log = LoggerFactory.getLogger(DefaultDingerExceptionCallback.class);
-
 	@Override
 	public void execute(DingerCallback dkExCallable) {
 		DingerException ex = dkExCallable.getEx();
 
-		log.error("异常静默处理:{}-{}->{}.",
+		LogUtil.error("异常静默处理:{}-{}->{}.",
 			ex.getPairs().code(),
 			ex.getPairs().desc(),
 			ex.getMessage()

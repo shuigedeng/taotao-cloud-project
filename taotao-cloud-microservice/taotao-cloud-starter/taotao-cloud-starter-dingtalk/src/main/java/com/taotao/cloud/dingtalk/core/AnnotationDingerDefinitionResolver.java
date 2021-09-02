@@ -16,23 +16,22 @@
 package com.taotao.cloud.dingtalk.core;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
 
-import com.taotao.cloud.dingtalk.core.annatations.DingerImageText;
-import com.taotao.cloud.dingtalk.core.annatations.DingerLink;
-import com.taotao.cloud.dingtalk.core.annatations.DingerMarkdown;
-import com.taotao.cloud.dingtalk.core.annatations.DingerText;
-import com.taotao.cloud.dingtalk.core.entity.DingerMethod;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageMainType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.annatations.DingerImageText;
+import com.taotao.cloud.dingtalk.annatations.DingerLink;
+import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;
+import com.taotao.cloud.dingtalk.annatations.DingerText;
+import com.taotao.cloud.dingtalk.entity.DingerMethod;
+import com.taotao.cloud.dingtalk.enums.MessageMainType;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.lang.reflect.Method;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -43,9 +42,6 @@ import org.slf4j.LoggerFactory;
  */
 public class AnnotationDingerDefinitionResolver extends
 	AbstractDingerDefinitionResolver<List<Class<?>>> {
-
-	private static final Logger log = LoggerFactory.getLogger(
-		AnnotationDingerDefinitionResolver.class);
 
 	@Override
 	public void resolver(List<Class<?>> dingerClasses) {
@@ -83,11 +79,9 @@ public class AnnotationDingerDefinitionResolver extends
 					source = method.getAnnotation(DingerLink.class);
 					messageSubType = MessageSubType.LINK;
 				} else {
-					if (log.isDebugEnabled()) {
-						log.debug(
-							"register annotation dingerDefinition and skip method={}(possible use xml definition).",
-							dingerName);
-					}
+					LogUtil.debug(
+						"register annotation dingerDefinition and skip method={}(possible use xml definition).",
+						dingerName);
 					continue;
 				}
 

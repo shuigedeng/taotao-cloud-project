@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.utils;
 
-import com.taotao.cloud.dingtalk.core.spring.ApplicationHome;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.spring.ApplicationHome;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URI;
@@ -26,8 +27,6 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -40,7 +39,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  */
 public class PackageUtils {
 
-	private static final Logger log = LoggerFactory.getLogger(PackageUtils.class);
 	private static final ApplicationHome applicationHome = new ApplicationHome();
 
 	public static final String SPOT = ".";
@@ -101,9 +99,7 @@ public class PackageUtils {
 			URL url = classLoader.getResource(packageName.replace(SPOT, SLANT));
 			// packageName is not exist
 			if (url == null) {
-				if (log.isDebugEnabled()) {
-					log.debug("packageName={} is not exist.", packageName);
-				}
+				LogUtil.debug("packageName={} is not exist.", packageName);
 				return;
 			}
 			URI uri = url.toURI();
@@ -119,7 +115,7 @@ public class PackageUtils {
 					// bugfix gitee#I29N15
 					Class<?> clazz = classLoader.loadClass(className);
 					// clazz.isInterface(): XXXDinger.java must be an interface
-					boolean check = isInterface ? clazz.isInterface() : true;
+					boolean check = !isInterface || clazz.isInterface();
 					if (check) {
 						if (filterAnnotations.length > 0) {
 							for (Class<? extends Annotation> annotation : filterAnnotations) {
@@ -136,24 +132,16 @@ public class PackageUtils {
 							}
 						}
 					} else {
-						if (log.isTraceEnabled()) {
-							log.trace("skip class {}.", clazz.getName());
-						}
+						LogUtil.debug("skip class {}.", clazz.getName());
 					}
-
 				} else {
 					forClassNames(packageName + SPOT + name, classNames, isInterface,
 						filterAnnotations);
 				}
 			}
 		} catch (Exception ex) {
-			if (log.isDebugEnabled()) {
-				log.error("when analysis packageName={} catch exception=",
-					packageName, ex);
-			} else {
-				log.warn("when analysis packageName={} catch exception={}.",
-					packageName, ex.getMessage());
-			}
+			LogUtil.error("when analysis packageName={} catch exception=",
+				packageName, ex);
 		}
 	}
 
@@ -206,14 +194,12 @@ public class PackageUtils {
 							}
 						}
 					} else {
-						if (log.isTraceEnabled()) {
-							log.trace("skip class {}.", clazz.getName());
-						}
+						LogUtil.debug("skip class {}.", clazz.getName());
 					}
 				}
 			}
 		} catch (Exception ex) {
-			log.error("when analysis packageName={} catch exception=",
+			LogUtil.error("when analysis packageName={} catch exception=",
 				packageName, ex);
 		}
 	}
@@ -266,7 +252,7 @@ public class PackageUtils {
 				}
 			}
 		} catch (Exception ex) {
-			log.error("when analysis packageName={} catch exception=",
+			LogUtil.error("when analysis packageName={} catch exception=",
 				packageName, ex);
 		}
 	}

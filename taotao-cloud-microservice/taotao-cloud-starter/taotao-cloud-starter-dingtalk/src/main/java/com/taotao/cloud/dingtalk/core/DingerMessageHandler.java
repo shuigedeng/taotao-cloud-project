@@ -18,14 +18,15 @@ package com.taotao.cloud.dingtalk.core;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 
-import com.taotao.cloud.dingtalk.core.annatations.Dinger;
-import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
-import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.multi.MultiDingerConfigContainer;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.annatations.Dinger;
+import com.taotao.cloud.dingtalk.entity.DingerResponse;
+import com.taotao.cloud.dingtalk.entity.MsgType;
+import com.taotao.cloud.dingtalk.entity.MultiDingerConfig;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
 import com.taotao.cloud.dingtalk.multi.MultiDingerProperty;
-import com.taotao.cloud.dingtalk.multi.entity.MultiDingerConfig;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -36,8 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * DingerMessageHandler
@@ -45,11 +44,8 @@ import org.slf4j.LoggerFactory;
  * @author Jaemon
  * @since 1.0
  */
-public class DingerMessageHandler
-	extends MultiDingerProperty
+public class DingerMessageHandler extends MultiDingerProperty
 	implements ParamHandler, MessageTransfer, ResultHandler<DingerResponse> {
-
-	private static final Logger log = LoggerFactory.getLogger(DingerMessageHandler.class);
 
 	protected DingerRobot dingerRobot;
 	protected DingerProperties dingerProperties;
@@ -85,9 +81,9 @@ public class DingerMessageHandler
 		for (int i = 0; i < Objects.requireNonNull(parameters).length; i++) {
 			Parameter parameter = parameters[i];
 			String paramName = parameter.getName();
-			com.taotao.cloud.dingtalk.core.annatations.Parameter[] panno =
+			com.taotao.cloud.dingtalk.annatations.Parameter[] panno =
 				parameter.getDeclaredAnnotationsByType(
-					com.taotao.cloud.dingtalk.core.annatations.Parameter.class);
+					com.taotao.cloud.dingtalk.annatations.Parameter.class);
 			if (panno != null && panno.length > 0) {
 				paramName = panno[0].value();
 			}
@@ -136,10 +132,7 @@ public class DingerMessageHandler
 			T dest = (T) in.readObject();
 			return dest;
 		} catch (Exception e) {
-			//
-			if (log.isDebugEnabled()) {
-				log.debug("copy properties error:", e);
-			}
+			LogUtil.debug("copy properties error:", e);
 			return null;
 		}
 	}

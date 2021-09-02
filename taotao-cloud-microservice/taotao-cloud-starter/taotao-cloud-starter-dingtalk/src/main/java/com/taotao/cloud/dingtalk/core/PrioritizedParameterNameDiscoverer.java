@@ -36,7 +36,6 @@ public class PrioritizedParameterNameDiscoverer implements ParameterNameDiscover
 
 	private final List<ParameterNameDiscoverer> parameterNameDiscoverers = new LinkedList<>();
 
-
 	/**
 	 * Add a further {@link ParameterNameDiscoverer} delegate to the list of discoverers that this
 	 * {@code PrioritizedParameterNameDiscoverer} checks.

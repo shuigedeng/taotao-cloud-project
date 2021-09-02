@@ -16,10 +16,10 @@
 package com.taotao.cloud.dingtalk.core;
 
 
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageMainType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
+import com.taotao.cloud.dingtalk.entity.MsgType;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.MessageMainType;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
 
 /**
  * DingerDefinition

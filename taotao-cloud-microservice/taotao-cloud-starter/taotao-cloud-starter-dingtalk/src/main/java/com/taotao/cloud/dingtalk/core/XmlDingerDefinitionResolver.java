@@ -16,30 +16,29 @@
 package com.taotao.cloud.dingtalk.core;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINER_XML_MSGTYPE_INVALID;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINER_XML_NAMESPACE_INVALID;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINER_XML_MSGTYPE_INVALID;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINER_XML_NAMESPACE_INVALID;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
 
-import com.taotao.cloud.dingtalk.core.annatations.DingerImageText;
-import com.taotao.cloud.dingtalk.core.annatations.DingerLink;
-import com.taotao.cloud.dingtalk.core.entity.DingerMethod;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageMainType;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
-import com.taotao.cloud.dingtalk.core.entity.xml.BeanTag;
-import com.taotao.cloud.dingtalk.core.entity.xml.MessageTag;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.annatations.DingerImageText;
+import com.taotao.cloud.dingtalk.annatations.DingerLink;
+import com.taotao.cloud.dingtalk.entity.DingerMethod;
+import com.taotao.cloud.dingtalk.enums.MessageMainType;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.utils.XmlUtils;
+import com.taotao.cloud.dingtalk.xml.BeanTag;
+import com.taotao.cloud.dingtalk.xml.MessageTag;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.util.FileCopyUtils;
 
@@ -52,16 +51,12 @@ import org.springframework.util.FileCopyUtils;
  */
 public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolver<Resource[]> {
 
-	private static final Logger log = LoggerFactory.getLogger(XmlDingerDefinitionResolver.class);
 
 	@Override
 	public void resolver(Resource[] resources) {
-		boolean debugEnabled = log.isDebugEnabled();
 		for (Resource resource : resources) {
 			if (!resource.isReadable()) {
-				if (debugEnabled) {
-					log.debug("Ignored because not readable: {} ", resource.getFilename());
-				}
+				LogUtil.debug("Ignored because not readable: {} ", resource.getFilename());
 				continue;
 			}
 			String xml;
@@ -73,9 +68,7 @@ public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolve
 			xml = transferXml(xml);
 			BeanTag dingerBean = XmlUtils.xmlToJavaBean(xml, BeanTag.class);
 			if (dingerBean == null) {
-				if (debugEnabled) {
-					log.debug("dinger xml file: {} content is empty.", resource.getFilename());
-				}
+				LogUtil.debug("dinger xml file: {} content is empty.", resource.getFilename());
 				continue;
 			}
 			String namespace = dingerBean.getNamespace();
@@ -94,10 +87,8 @@ public class XmlDingerDefinitionResolver extends AbstractDingerDefinitionResolve
 			for (MessageTag message : messages) {
 				String methodName = message.getIdentityId();
 				if (!dingerClassMethods.containsKey(methodName)) {
-					if (debugEnabled) {
-						log.debug("namespace={}, messageId={} undefined in dingerClass.",
-							namespace, methodName);
-					}
+					LogUtil.debug("namespace={}, messageId={} undefined in dingerClass.",
+						namespace, methodName);
 					continue;
 				}
 				String dingerName = namespace + SPOT_SEPERATOR + methodName;

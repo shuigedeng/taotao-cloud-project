@@ -16,23 +16,24 @@
 package com.taotao.cloud.dingtalk.multi;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.MULTIDINGER_ALGORITHM_EXCEPTION;
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.MULTIDINGER_ANNOTATTION_EXCEPTION;
-import static com.taotao.cloud.dingtalk.multi.MultiDingerConfigContainer.GLOABL_KEY;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.MULTIDINGER_ALGORITHM_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.MULTIDINGER_ANNOTATTION_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer.GLOABL_KEY;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.core.DingerConfig;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
+import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.exception.MultiDingerRegisterException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;
-import com.taotao.cloud.dingtalk.multi.algorithm.AlgorithmHandler;
-import com.taotao.cloud.dingtalk.multi.annotations.EnableMultiDinger;
-import com.taotao.cloud.dingtalk.multi.annotations.MultiDinger;
-import com.taotao.cloud.dingtalk.multi.annotations.MultiHandler;
-import com.taotao.cloud.dingtalk.multi.entity.MultiDingerAlgorithmDefinition;
-import com.taotao.cloud.dingtalk.multi.entity.MultiDingerConfig;
+import com.taotao.cloud.dingtalk.annatations.EnableMultiDinger;
+import com.taotao.cloud.dingtalk.annatations.MultiDinger;
+import com.taotao.cloud.dingtalk.annatations.MultiHandler;
+import com.taotao.cloud.dingtalk.entity.MultiDingerAlgorithmDefinition;
+import com.taotao.cloud.dingtalk.entity.MultiDingerConfig;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +65,6 @@ public class MultiDingerScannerRegistrar
 	extends DingerListenersProperty
 	implements ImportBeanDefinitionRegistrar, Ordered {
 
-	private static final Logger log = LoggerFactory.getLogger(MultiDingerScannerRegistrar.class);
 	/**
 	 * 算法{@link AlgorithmHandler}容器
 	 *
@@ -94,9 +94,8 @@ public class MultiDingerScannerRegistrar
 
 	private void doScanAndRegister(AnnotationMetadata importingClassMetadata,
 		BeanDefinitionRegistry registry) {
-		boolean debugEnabled = log.isDebugEnabled();
 		if (!importingClassMetadata.hasAnnotation(EnableMultiDinger.class.getName())) {
-			log.warn("import class can't find EnableMultiDinger annotation.");
+			LogUtil.warn("import class can't find EnableMultiDinger annotation.");
 			return;
 		}
 
@@ -106,13 +105,13 @@ public class MultiDingerScannerRegistrar
 
 		AnnotationAttributes[] value = annotationAttributes.getAnnotationArray("value");
 		boolean aloneMulti = value.length == 0;
-		log.info("multi dinger register and is it global register? {}.", !aloneMulti);
+		LogUtil.info("multi dinger register and is it global register? {}.", !aloneMulti);
 		// 指定多机器人配置处理逻辑
 		if (aloneMulti) {
 			// 处理需要执行MultiDinger逻辑的dingerClass
 			List<Class<?>> dingerClasses = dingerClasses();
 			if (dingerClasses.isEmpty()) {
-				log.warn("dinger class is empty, so no need to deal with multiDinger.");
+				LogUtil.warn("dinger class is empty, so no need to deal with multiDinger.");
 				return;
 			}
 
@@ -127,10 +126,8 @@ public class MultiDingerScannerRegistrar
 				DingerType dinger = attributes.getEnum("dinger");
 				Class<? extends DingerConfigHandler> handler = attributes.getClass("handler");
 
-				if (debugEnabled) {
-					log.debug("enable {} global multi dinger, and multiDinger handler class={}.",
+				LogUtil.debug("enable {} global multi dinger, and multiDinger handler class={}.",
 						dinger, handler.getName());
-				}
 				DingerConfigHandler dingerConfigHandler = BeanUtils.instantiateClass(handler);
 				registerHandler(registry, dinger,
 					dinger + SPOT_SEPERATOR + GLOABL_KEY, dingerConfigHandler);
@@ -147,7 +144,6 @@ public class MultiDingerScannerRegistrar
 	 * @param dingerClasses dingerClass集
 	 */
 	private void multiDingerHandler(BeanDefinitionRegistry registry, List<Class<?>> dingerClasses) {
-		boolean debugEnabled = log.isDebugEnabled();
 
 		int valid = 0;
 		for (Class<?> dingerClass : dingerClasses) {
@@ -158,7 +154,7 @@ public class MultiDingerScannerRegistrar
 				String beanName = dingerConfigHandler.getSimpleName();
 				// 如果DingerClass指定的MultiHandler对应的处理器为接口，则直接跳过
 				if (dingerConfigHandler.isInterface()) {
-					log.warn("dingerClass={} handler className={} is interface and skip.",
+					LogUtil.warn("dingerClass={} handler className={} is interface and skip.",
 						dingerClass.getSimpleName(), beanName);
 					continue;
 				}
@@ -169,17 +165,15 @@ public class MultiDingerScannerRegistrar
 				registerHandler(registry, dinger, dinger + SPOT_SEPERATOR + key,
 					handler);
 
-				if (debugEnabled) {
-					log.debug(
+				LogUtil.debug(
 						"regiseter multi dinger for dingerClass={} and dingerConfigHandler={}.",
 						dingerClass.getSimpleName(), beanName);
-				}
 				valid++;
 			}
 		}
 
 		if (valid == 0) {
-			log.warn(
+			LogUtil.warn(
 				"enable global multi dinger but none dinger interface be decorated with @MultiHandler.");
 		}
 	}
@@ -247,10 +241,8 @@ public class MultiDingerScannerRegistrar
 			);
 			mode = AnalysisEnum.SPRING_CONTAINER;
 		}
-		if (log.isDebugEnabled()) {
-			log.debug("key={}, algorithm={} analysis through mode {}.",
+		LogUtil.debug("key={}, algorithm={} analysis through mode {}.",
 				key, algorithm.getSimpleName(), mode);
-		}
 
 	}
 

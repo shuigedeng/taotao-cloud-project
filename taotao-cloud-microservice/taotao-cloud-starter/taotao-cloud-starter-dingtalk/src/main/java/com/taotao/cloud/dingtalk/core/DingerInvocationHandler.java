@@ -23,9 +23,8 @@ import java.lang.reflect.InvocationHandler;
  * @author Jaemon
  * @since 1.2
  */
-public abstract class DingerInvocationHandler
-	extends DingerMessageHandler
-	implements InvocationHandler {
+public abstract class DingerInvocationHandler extends DingerMessageHandler implements
+	InvocationHandler {
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {

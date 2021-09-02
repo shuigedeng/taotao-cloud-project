@@ -17,6 +17,7 @@ package com.taotao.cloud.dingtalk.multi;
 
 
 import com.taotao.cloud.dingtalk.core.DingerRefresh;
+import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;
 
 /**
  * MultiDingerRefresh

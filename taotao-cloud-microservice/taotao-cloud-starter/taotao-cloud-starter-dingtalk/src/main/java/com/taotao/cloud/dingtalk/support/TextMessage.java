@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.support;
 
 
-import com.taotao.cloud.dingtalk.core.entity.DingerRequest;
+import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import java.text.MessageFormat;
 
 /**

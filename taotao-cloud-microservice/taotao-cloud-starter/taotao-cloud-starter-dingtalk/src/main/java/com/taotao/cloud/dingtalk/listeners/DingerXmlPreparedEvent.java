@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.listeners;
 
-import com.taotao.cloud.dingtalk.core.annatations.DingerScan;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.dingtalk.annatations.DingerScan;
 import java.util.HashSet;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -35,11 +36,9 @@ import org.springframework.context.ApplicationListener;
 public class DingerXmlPreparedEvent
 	implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
-	private static final Logger log = LoggerFactory.getLogger(DingerXmlPreparedEvent.class);
-
 	@Override
 	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-		log.info("ready to execute dinger analysis.");
+		LogUtil.info("ready to execute dinger analysis.");
 		loadPrimarySources(event);
 	}
 

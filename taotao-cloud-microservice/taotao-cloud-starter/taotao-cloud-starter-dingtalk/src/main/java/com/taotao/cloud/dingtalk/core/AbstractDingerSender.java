@@ -15,14 +15,11 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import com.taotao.cloud.dingtalk.DingerSender;
-import com.taotao.cloud.dingtalk.core.entity.DingerCallback;
-import com.taotao.cloud.dingtalk.core.entity.DingerProperties;
-import com.taotao.cloud.dingtalk.core.entity.enums.MessageSubType;
+import com.taotao.cloud.dingtalk.entity.DingerCallback;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * AbstractDingTalkSender
@@ -30,11 +27,7 @@ import org.slf4j.LoggerFactory;
  * @author Jaemon
  * @since 1.0
  */
-public abstract class AbstractDingerSender
-	extends DingerHelper
-	implements DingerSender {
-
-	protected static final Logger log = LoggerFactory.getLogger(AbstractDingerSender.class);
+public abstract class AbstractDingerSender extends DingerHelper implements DingerSender {
 
 	protected DingerProperties dingerProperties;
 	protected DingerManagerBuilder dingTalkManagerBuilder;
@@ -52,8 +45,8 @@ public abstract class AbstractDingerSender
 	 * @return 消息生成器
 	 */
 	protected CustomMessage customMessage(MessageSubType messageSubType) {
-		return messageSubType == MessageSubType.TEXT ? dingTalkManagerBuilder.textMessage
-			: dingTalkManagerBuilder.markDownMessage;
+		return messageSubType == MessageSubType.TEXT ? dingTalkManagerBuilder.getTextMessage()
+			: dingTalkManagerBuilder.getMarkDownMessage();
 	}
 
 	/**
@@ -66,6 +59,6 @@ public abstract class AbstractDingerSender
 	 */
 	protected <T> void exceptionCallback(String dingerId, T message, DingerException ex) {
 		DingerCallback dkExCallable = new DingerCallback(dingerId, message, ex);
-		dingTalkManagerBuilder.dingerExceptionCallback.execute(dkExCallable);
+		dingTalkManagerBuilder.getDingerExceptionCallback().execute(dkExCallable);
 	}
 }

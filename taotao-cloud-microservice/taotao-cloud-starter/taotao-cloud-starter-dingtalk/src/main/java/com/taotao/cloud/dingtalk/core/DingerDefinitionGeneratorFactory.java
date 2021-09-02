@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.DINGERDEFINITION_ERROR;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGERDEFINITION_ERROR;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -32,8 +31,6 @@ import org.slf4j.LoggerFactory;
  */
 public class DingerDefinitionGeneratorFactory {
 
-	private static final Logger log = LoggerFactory.getLogger(
-		DingerDefinitionGeneratorFactory.class);
 	/**
 	 * dingerDefinition生成器
 	 */
@@ -49,10 +46,8 @@ public class DingerDefinitionGeneratorFactory {
 		DingerDefinitionGenerator dingTalkDefinitionGenerator = dingTalkDefinitionGeneratorMap.get(
 			key);
 		if (dingTalkDefinitionGenerator == null) {
-			if (log.isDebugEnabled()) {
-				log.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
-					key, dingTalkDefinitionGeneratorMap.keySet());
-			}
+			LogUtil.debug("key={}, dingTalkDefinitionGeneratorMap={}.",
+				key, dingTalkDefinitionGeneratorMap.keySet());
 			throw new DingerException(DINGERDEFINITION_ERROR, key);
 		}
 		return dingTalkDefinitionGenerator;

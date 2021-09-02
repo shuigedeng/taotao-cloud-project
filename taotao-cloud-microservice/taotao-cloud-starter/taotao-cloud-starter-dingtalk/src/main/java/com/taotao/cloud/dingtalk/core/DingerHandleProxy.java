@@ -17,16 +17,14 @@ package com.taotao.cloud.dingtalk.core;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 
-import com.taotao.cloud.dingtalk.core.annatations.DingerClose;
-import com.taotao.cloud.dingtalk.core.entity.DingerResponse;
-import com.taotao.cloud.dingtalk.core.entity.MsgType;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerResponseCodeEnum;
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
-import com.taotao.cloud.dingtalk.core.session.Configuration;
+import com.taotao.cloud.dingtalk.annatations.DingerClose;
+import com.taotao.cloud.dingtalk.entity.DingerResponse;
+import com.taotao.cloud.dingtalk.entity.MsgType;
+import com.taotao.cloud.dingtalk.enums.DingerResponseCodeEnum;
+import com.taotao.cloud.dingtalk.enums.DingerType;
+import com.taotao.cloud.dingtalk.session.SessionConfiguration;
 import java.lang.reflect.Method;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -37,11 +35,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DingerHandleProxy extends DingerInvocationHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(DingerHandleProxy.class);
 
-	public DingerHandleProxy(Configuration configuration) {
-		this.dingerRobot = configuration.getDingerRobot();
-		this.dingerProperties = configuration.getDingerProperties();
+	public DingerHandleProxy(SessionConfiguration sessionConfiguration) {
+		this.dingerRobot = sessionConfiguration.getDingerRobot();
+		this.dingerProperties = sessionConfiguration.getDingerProperties();
 	}
 
 	@Override
@@ -50,21 +47,15 @@ public class DingerHandleProxy extends DingerInvocationHandler {
 
 		final String methodName = method.getName();
 
-		if (
-			ignoreMethodMap.containsKey(methodName)
-		) {
+		if (ignoreMethodMap.containsKey(methodName)) {
 			return ignoreMethodMap.get(methodName).execute(this, args);
 		}
 
-		if (
-			dingerClass.isAnnotationPresent(DingerClose.class)
-		) {
+		if (dingerClass.isAnnotationPresent(DingerClose.class)) {
 			return null;
 		}
 
-		if (
-			method.isAnnotationPresent(DingerClose.class)
-		) {
+		if (method.isAnnotationPresent(DingerClose.class)) {
 			return null;
 		}
 

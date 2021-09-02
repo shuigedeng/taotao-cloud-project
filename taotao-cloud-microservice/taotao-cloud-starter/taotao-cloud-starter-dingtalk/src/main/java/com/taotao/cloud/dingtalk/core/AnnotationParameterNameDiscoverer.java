@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import com.taotao.cloud.dingtalk.core.annatations.Parameter;
+import com.taotao.cloud.dingtalk.annatations.Parameter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

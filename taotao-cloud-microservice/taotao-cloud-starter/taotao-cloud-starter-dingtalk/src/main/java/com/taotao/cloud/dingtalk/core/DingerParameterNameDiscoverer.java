@@ -21,35 +21,22 @@ import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.StandardReflectionParameterNameDiscoverer;
 
 /**
- * {@link org.springframework.core.ParameterNameDiscoverer} implementation that tries several
- * discoverer delegates in succession. Those added first in the {@code addDiscoverer} method have
- * highest priority. If one returns {@code null}, the next will be tried.
- *
- * <p>The default behavior is to return {@code null} if no discoverer matches.
- *
- * @author Jaemon
- * @see org.springframework.core.PrioritizedParameterNameDiscoverer
- * @since 1.2
- */
-
-/**
- * Default implementation of the {@link ParameterNameDiscoverer} strategy interface,
- * using the Java 8 standard reflection mechanism (if available), and falling back
- * to the ASM-based {@link LocalVariableTableParameterNameDiscoverer} for checking
- * debug information in the class file.
+ * Default implementation of the {@link ParameterNameDiscoverer} strategy interface, using the Java
+ * 8 standard reflection mechanism (if available), and falling back to the ASM-based {@link
+ * LocalVariableTableParameterNameDiscoverer} for checking debug information in the class file.
  *
  * <p>If a Kotlin reflection implementation is present,
- * {@link KotlinReflectionParameterNameDiscoverer} is added first in the list and
- * used for Kotlin classes and interfaces. When compiling or running as a GraalVM
- * native image, the {@code KotlinReflectionParameterNameDiscoverer} is not used.
+ * {@link KotlinReflectionParameterNameDiscoverer} is added first in the list and used for Kotlin
+ * classes and interfaces. When compiling or running as a GraalVM native image, the {@code
+ * KotlinReflectionParameterNameDiscoverer} is not used.
  *
  * <p>Further discoverers may be added through {@link #addDiscoverer(ParameterNameDiscoverer)}.
  *
  * @author Jaemon
- * @since 1.0
  * @see StandardReflectionParameterNameDiscoverer
  * @see LocalVariableTableParameterNameDiscoverer
  * @see KotlinReflectionParameterNameDiscoverer
+ * @since 1.0
  */
 public class DingerParameterNameDiscoverer extends PrioritizedParameterNameDiscoverer {
 

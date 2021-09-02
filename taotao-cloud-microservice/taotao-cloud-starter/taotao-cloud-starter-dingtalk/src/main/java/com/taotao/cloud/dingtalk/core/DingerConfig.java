@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.core;
 
 
-import com.taotao.cloud.dingtalk.core.entity.enums.DingerType;
+import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.utils.ConfigTools;
 import com.taotao.cloud.dingtalk.utils.DingerUtils;
 

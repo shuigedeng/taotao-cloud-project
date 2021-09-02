@@ -24,31 +24,29 @@ package com.taotao.cloud.dingtalk.core;
  */
 public abstract class DingerDefinitionGenerator<T> {
 
-    protected DingerDefinitionGenerator() {
-        register(this);
-    }
+	protected DingerDefinitionGenerator() {
+		register(this);
+	}
 
-    /**
-     * 具体dinger definition生成逻辑
-     *
-     * @param context
-     *      Dinger定义源
-     * @return
-     *          dingerDefinition {@link DingerDefinition}
-     * */
-    public abstract DingerDefinition generator(DingerDefinitionGeneratorContext<T> context);
+	/**
+	 * 具体dinger definition生成逻辑
+	 *
+	 * @param context Dinger定义源
+	 * @return dingerDefinition {@link DingerDefinition}
+	 */
+	public abstract DingerDefinition generator(DingerDefinitionGeneratorContext<T> context);
 
-    protected String key() {
-        return this.getClass().getName();
-    }
+	protected String key() {
+		return this.getClass().getName();
+	}
 
-    /**
-     * 注册dingerDefinitionGenerator实例
-     *
-     * @param dingerDefinitionGenerator
-     *          dingerDefinitionGenerator实例
-     * */
-    private void register(DingerDefinitionGenerator dingerDefinitionGenerator) {
-        DingerDefinitionGeneratorFactory.dingTalkDefinitionGeneratorMap.put(key(), dingerDefinitionGenerator);
-    }
+	/**
+	 * 注册dingerDefinitionGenerator实例
+	 *
+	 * @param dingerDefinitionGenerator dingerDefinitionGenerator实例
+	 */
+	private void register(DingerDefinitionGenerator dingerDefinitionGenerator) {
+		DingerDefinitionGeneratorFactory.dingTalkDefinitionGeneratorMap.put(key(),
+			dingerDefinitionGenerator);
+	}
 }

@@ -15,14 +15,13 @@
  */
 package com.taotao.cloud.dingtalk.core;
 
-import static com.taotao.cloud.dingtalk.core.entity.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
+import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -40,7 +39,6 @@ import org.springframework.util.ClassUtils;
  */
 public final class ClassPathScanForResources {
 
-	private static final Logger log = LoggerFactory.getLogger(ClassPathScanForResources.class);
 	private static final String CLASSPATH_ALL_URL_PREFIX = "classpath*:";
 	private static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
 	private static final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -55,7 +53,7 @@ public final class ClassPathScanForResources {
 		try {
 			return resolver.getResources(packageSearchPath);
 		} catch (IOException ex) {
-			log.error(packageSearchPath, ex);
+			LogUtil.error(packageSearchPath, ex);
 			throw new DingerException(RESOURCE_CONFIG_EXCEPTION, packageSearchPath);
 		}
 	}
@@ -84,7 +82,6 @@ public final class ClassPathScanForResources {
 	 * @return 包下的所有类集合
 	 */
 	private static List<Class<?>> scanClasses(String basePackage, boolean filterInterface) {
-		boolean debugEnabled = log.isDebugEnabled();
 		String packageSearchPath = CLASSPATH_ALL_URL_PREFIX +
 			resolveBasePackage(basePackage) + "/" + DEFAULT_RESOURCE_PATTERN;
 		Resource[] resources = doScanPackage(packageSearchPath);
@@ -99,9 +96,7 @@ public final class ClassPathScanForResources {
 		for (Resource resource : resources) {
 			String resourceFilename = resource.getFilename();
 			if (!resource.isReadable()) {
-				if (debugEnabled) {
-					log.debug("Ignored because not readable: {} ", resourceFilename);
-				}
+				LogUtil.debug("Ignored because not readable: {} ", resourceFilename);
 				continue;
 			}
 			try {
@@ -109,14 +104,12 @@ public final class ClassPathScanForResources {
 				ClassMetadata classMetadata = metadataReader.getClassMetadata();
 				Class<?> clazz = Class.forName(classMetadata.getClassName());
 				if (filterInterface && !clazz.isInterface()) {
-					if (debugEnabled) {
-						log.debug("source class={} is interface and skip.", resourceFilename);
-					}
+					LogUtil.debug("source class={} is interface and skip.", resourceFilename);
 					continue;
 				}
 				classes.add(clazz);
 			} catch (IOException | ClassNotFoundException e) {
-				log.warn("resource={} read exception and message={}.", resourceFilename,
+				LogUtil.warn("resource={} read exception and message={}.", resourceFilename,
 					e.getMessage());
 				continue;
 			}

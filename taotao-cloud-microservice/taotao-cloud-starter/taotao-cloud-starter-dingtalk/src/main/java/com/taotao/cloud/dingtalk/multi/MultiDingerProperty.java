@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.multi;
 
 
-import com.taotao.cloud.dingtalk.core.entity.enums.IgnoreMethod;
+import com.taotao.cloud.dingtalk.enums.IgnoreMethod;
 import java.util.HashMap;
 import java.util.Map;
 
