@@ -32,18 +32,26 @@ import org.springframework.web.bind.annotation.PutMapping;
  * <p>
  * 继承该类，在SuperController类的基础上扩展了以下方法： 1，get ： 根据ID查询缓存，若缓存不存在，则查询DB
  *
+ * @param <Entity>    Entity
+ * @param <Id>        Id
+ * @param <PageQuery> PageQuery
+ * @param <S>         S
+ * @param <SaveDTO>   SaveDTO
+ * @param <UpdateDTO> UpdateDTO
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:23
+ * @version 2021.9
+ * @since 2021-09-02 21:13:28
  */
 public abstract class SuperCacheController<S extends SuperCacheService<Entity>, Id extends Serializable, Entity, PageQuery, SaveDTO, UpdateDTO>
-	extends SuperController<S, Id, Entity, PageQuery, SaveDTO, UpdateDTO> {
+		extends SuperController<S, Id, Entity, PageQuery, SaveDTO, UpdateDTO> {
 
 	/**
 	 * 查询
 	 *
 	 * @param id 主键id
-	 * @return 查询结果
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:14:19
 	 */
 	@Override
 	@Operation(summary = "查询结果", description = "查询结果", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
@@ -57,7 +65,9 @@ public abstract class SuperCacheController<S extends SuperCacheService<Entity>, 
 	/**
 	 * 刷新缓存
 	 *
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:14:24
 	 */
 	@Operation(summary = "刷新缓存", description = "刷新缓存", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/refreshCache")
@@ -71,7 +81,9 @@ public abstract class SuperCacheController<S extends SuperCacheService<Entity>, 
 	/**
 	 * 清理缓存
 	 *
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:14:35
 	 */
 	@Operation(summary = "清理缓存", description = "清理缓存", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/clearCache")

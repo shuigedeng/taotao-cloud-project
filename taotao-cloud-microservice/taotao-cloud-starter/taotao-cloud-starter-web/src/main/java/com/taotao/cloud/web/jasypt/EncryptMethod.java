@@ -27,13 +27,16 @@ import java.lang.annotation.Target;
  * EncryptMethod
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2021/08/04 08:24
+ * @version 2021.9
+ * @since 2021-09-02 22:04:53
  */
 @Documented
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EncryptMethod {
 
+	/**
+	 * 类型
+	 */
 	String type() default ENCRYPT;
 }

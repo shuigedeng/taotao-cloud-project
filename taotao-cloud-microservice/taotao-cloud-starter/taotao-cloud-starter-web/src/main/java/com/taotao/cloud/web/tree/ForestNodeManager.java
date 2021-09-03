@@ -23,8 +23,8 @@ import java.util.Objects;
  * 森林管理类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:05
+ * @version 2021.9
+ * @since 2021-09-02 22:20:48
  */
 public class ForestNodeManager<T extends INode> {
 
@@ -54,9 +54,9 @@ public class ForestNodeManager<T extends INode> {
 	 * 根据节点ID获取一个节点
 	 *
 	 * @param id 节点ID
-	 * @return com.taotao.cloud.web.tree.INode 对应的节点对象
+	 * @return {@link com.taotao.cloud.web.tree.INode }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:05
+	 * @since 2021-09-02 22:20:56
 	 */
 	public INode getTreeNodeAT(Long id) {
 		for (INode forestNode : list) {
@@ -72,7 +72,7 @@ public class ForestNodeManager<T extends INode> {
 	 *
 	 * @param parentId parentId
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:05
+	 * @since 2021-09-02 22:21:06
 	 */
 	public void addParentId(Long parentId) {
 		parentIds.add(parentId);
@@ -81,9 +81,9 @@ public class ForestNodeManager<T extends INode> {
 	/**
 	 * 获取树的根节点(一个森林对应多颗树)
 	 *
-	 * @return java.util.List<T> 树的根节点集合
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:05
+	 * @since 2021-09-02 22:21:16
 	 */
 	public List<T> getRoot() {
 		List<T> roots = new ArrayList<>();
@@ -98,9 +98,9 @@ public class ForestNodeManager<T extends INode> {
 	@Override
 	public String toString() {
 		return "ForestNodeManager{" +
-			"list=" + list +
-			", parentIds=" + parentIds +
-			'}';
+				"list=" + list +
+				", parentIds=" + parentIds +
+				'}';
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class ForestNodeManager<T extends INode> {
 		}
 		ForestNodeManager<?> that = (ForestNodeManager<?>) o;
 		return Objects.equals(list, that.list) && Objects.equals(parentIds,
-			that.parentIds);
+				that.parentIds);
 	}
 
 	@Override

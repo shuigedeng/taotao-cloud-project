@@ -27,8 +27,8 @@ import org.slf4j.spi.MDCAdapter;
  * 重构{@link LogbackMDCAdapter}类，搭配TransmittableThreadLocal实现父子线程之间的数据传递
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:20
+ * @version 2021.9
+ * @since 2021-09-02 20:00:47
  */
 public class TtlMDCAdapter implements MDCAdapter {
 

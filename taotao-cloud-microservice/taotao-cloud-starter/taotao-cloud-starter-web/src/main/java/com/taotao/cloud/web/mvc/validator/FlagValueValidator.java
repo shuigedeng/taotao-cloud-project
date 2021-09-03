@@ -22,11 +22,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 校验标识，只有Y和N两种状态的标识
+ * 校验标识，只有Y和N两种状态的标识 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:29
+ * @version 2021.9
+ * @since 2021-09-03 08:04:17
  */
 public class FlagValueValidator implements ConstraintValidator<FlagValue, String> {
 

@@ -19,9 +19,9 @@ package com.taotao.cloud.web.enums;
 /**
  * 菜单类型
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:43
+ * @version 2021.9
+ * @since 2021-09-02 22:14:43
  */
 public enum MenuTypeEnum {
 

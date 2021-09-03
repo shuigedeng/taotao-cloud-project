@@ -21,11 +21,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 忽略XSS 配置类
+ * XssProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:23
+ * @version 2021.9
+ * @since 2021-09-02 22:15:05
  */
 @RefreshScope
 @ConfigurationProperties(prefix = XssProperties.PREFIX)
@@ -45,22 +45,22 @@ public class XssProperties {
 	private List<String> patterns = CollUtil.newArrayList("/*");
 
 	private List<String> ignorePaths = CollUtil.newArrayList(
-		"favicon.ico",
-		"/**/doc.html",
-		"/**/swagger-ui.html",
-		"/csrf",
-		"/webjars/**",
-		"/v3/**",
-		"/swagger-resources/**",
-		"/resources/**",
-		"/static/**",
-		"/public/**",
-		"/classpath:*",
-		"/actuator/**",
-		"/**/noxss/**",
-		"/**/activiti/**",
-		"/**/service/model/**",
-		"/**/service/editor/**"
+			"favicon.ico",
+			"/**/doc.html",
+			"/**/swagger-ui.html",
+			"/csrf",
+			"/webjars/**",
+			"/v3/**",
+			"/swagger-resources/**",
+			"/resources/**",
+			"/static/**",
+			"/public/**",
+			"/classpath:*",
+			"/actuator/**",
+			"/**/noxss/**",
+			"/**/activiti/**",
+			"/**/service/model/**",
+			"/**/service/editor/**"
 	);
 	private List<String> ignoreParamValues = CollUtil.newArrayList("noxss");
 

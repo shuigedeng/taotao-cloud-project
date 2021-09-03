@@ -18,11 +18,11 @@ package com.taotao.cloud.common.enums;
 import com.taotao.cloud.common.constant.SecurityConstant;
 
 /**
- * 用户登录类型
+ * 用户登录类型 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 18:11
+ * @version 2021.9
+ * @since 2021-09-02 20:22:27
  */
 public enum LoginTypeEnum implements BaseEnum {
 	/**

@@ -35,8 +35,8 @@ import org.springframework.scheduling.support.CronTrigger;
  * ScheduleConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:48
+ * @version 2021.9
+ * @since 2021-09-02 21:28:58
  */
 @Configuration
 @EnableScheduling
@@ -57,11 +57,11 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
 
 		final List<Schedule> scheduleList = scheduleMapper.getScheduleListByAppName(
-			applicationName);
+				applicationName);
 
 		if (CollectionUtils.isNotEmpty(scheduleList)) {
 			LogUtil.info("定时任务即将启动，预计启动任务数量[" + scheduleList.size() + "]，时间："
-				+ DateUtil.getCurrentDateTime());
+					+ DateUtil.getCurrentDateTime());
 			for (Schedule schedule : scheduleList) {
 				// 判断任务是否有效
 				if (schedule.getValid()) {
@@ -71,16 +71,24 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 				}
 			}
 			LogUtil.info(
-				"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
+					"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
 		}
 	}
 
+	/**
+	 * getRunnable
+	 *
+	 * @param schedule schedule
+	 * @return {@link java.lang.Runnable }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:29:05
+	 */
 	private Runnable getRunnable(Schedule schedule) {
 		return () -> {
 			try {
 				final Object bean = SpringUtil.getBean(schedule.getClassName());
 				final Method method = bean.getClass()
-					.getMethod(schedule.getMethod(), (Class<?>[]) null);
+						.getMethod(schedule.getMethod(), (Class<?>[]) null);
 				method.invoke(bean);
 			} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
 				LogUtil.error("定时任务调度失败", e);
@@ -88,6 +96,14 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 		};
 	}
 
+	/**
+	 * getTrigger
+	 *
+	 * @param schedule schedule
+	 * @return {@link org.springframework.scheduling.Trigger }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:29:08
+	 */
 	private Trigger getTrigger(Schedule schedule) {
 		return triggerContext -> {
 			// 将Cron 0/1 * * * * ? 输入取得下一次执行的时间
@@ -100,8 +116,9 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 	/**
 	 * Schedule 定时任务实体类
 	 *
-	 * @author Yanzheng (https://github.com/micyo202)
-	 * @date 2019/08/09
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 21:29:23
 	 */
 	public class Schedule extends BaseEntity {
 

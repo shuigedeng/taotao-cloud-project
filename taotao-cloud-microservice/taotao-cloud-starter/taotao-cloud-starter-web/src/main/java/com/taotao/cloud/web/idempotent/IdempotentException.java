@@ -20,9 +20,9 @@ import com.taotao.cloud.common.exception.BaseException;
 /**
  * 幂等校验异常
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:42
+ * @version 2021.9
+ * @since 2021-09-02 22:19:03
  */
 public class IdempotentException extends BaseException {
 

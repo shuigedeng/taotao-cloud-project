@@ -18,28 +18,51 @@ package com.taotao.cloud.common.context;
 import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
- * 租户context holder
+ * TraceContextHolder
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 17:18
+ * @version 2021.9
+ * @since 2021-09-02 19:33:52
  */
 public class TraceContextHolder {
 
 	private TraceContextHolder() {
 	}
 
-	private static final ThreadLocal<String> CONTEXT = new TransmittableThreadLocal<>();
+	/**
+	 * TRACE_CONTEXT
+	 */
+	private static final ThreadLocal<String> TRACE_CONTEXT = new TransmittableThreadLocal<>();
 
+	/**
+	 * setTraceId
+	 *
+	 * @param traceId traceId
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:33:58
+	 */
 	public static void setTraceId(String traceId) {
-		CONTEXT.set(traceId);
+		TRACE_CONTEXT.set(traceId);
 	}
 
+	/**
+	 * getTraceId
+	 *
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:34:00
+	 */
 	public static String getTraceId() {
-		return CONTEXT.get();
+		return TRACE_CONTEXT.get();
 	}
 
+	/**
+	 * clear
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:34:06
+	 */
 	public static void clear() {
-		CONTEXT.remove();
+		TRACE_CONTEXT.remove();
 	}
 }

@@ -33,8 +33,8 @@ import org.springframework.http.ResponseEntity;
  * 文件处理工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:00
+ * @version 2021.9
+ * @since 2021-09-02 22:23:56
  */
 public class FileUtil {
 
@@ -47,10 +47,9 @@ public class FileUtil {
 	 * 获取文件类型
 	 *
 	 * @param file 文件
-	 * @return java.lang.String
-	 * @throws Exception Exception
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:00
+	 * @since 2021-09-02 22:24:07
 	 */
 	private static String getFileType(File file) throws Exception {
 		Preconditions.checkNotNull(file);
@@ -65,9 +64,9 @@ public class FileUtil {
 	 * 校验文件类型是否是允许下载的类型
 	 *
 	 * @param fileType fileType
-	 * @return java.lang.Boolean
+	 * @return {@link java.lang.Boolean }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:01
+	 * @since 2021-09-02 22:24:15
 	 */
 	private static Boolean fileTypeIsValid(String fileType) {
 		Preconditions.checkNotNull(fileType);
@@ -83,10 +82,10 @@ public class FileUtil {
 	 * @param delete   delete
 	 * @param response response
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:01
+	 * @since 2021-09-02 22:24:23
 	 */
 	public static void download(String filePath, String fileName, Boolean delete,
-		HttpServletResponse response) throws Exception {
+			HttpServletResponse response) throws Exception {
 		File file = new File(filePath);
 		if (!file.exists()) {
 			throw new Exception("文件未找到");
@@ -97,11 +96,11 @@ public class FileUtil {
 			throw new Exception("暂不支持该类型文件下载");
 		}
 		response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-			"attachment;fileName=" + java.net.URLEncoder.encode(fileName, "utf-8"));
+				"attachment;fileName=" + java.net.URLEncoder.encode(fileName, "utf-8"));
 		response.setContentType(MediaType.MULTIPART_FORM_DATA_VALUE);
 		response.setCharacterEncoding("utf-8");
 		try (InputStream inputStream = new FileInputStream(
-			file); OutputStream os = response.getOutputStream()) {
+				file); OutputStream os = response.getOutputStream()) {
 			byte[] b = new byte[2048];
 			int length;
 			while ((length = inputStream.read(b)) > 0) {
@@ -117,9 +116,9 @@ public class FileUtil {
 	/**
 	 * 递归删除文件或目录
 	 *
-	 * @param filePath 文件或目录
+	 * @param filePath filePath
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:02
+	 * @since 2021-09-02 22:24:30
 	 */
 	public static void delete(String filePath) {
 		File file = new File(filePath);
@@ -136,9 +135,9 @@ public class FileUtil {
 	 * 导出文件
 	 *
 	 * @param file file
-	 * @return org.springframework.http.ResponseEntity<org.springframework.core.io.FileSystemResource>
+	 * @return {@link org.springframework.http.ResponseEntity }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:02
+	 * @since 2021-09-02 22:24:37
 	 */
 	public static ResponseEntity<FileSystemResource> export(File file) {
 		if (file == null) {
@@ -150,10 +149,10 @@ public class FileUtil {
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");
 		return ResponseEntity
-			.ok()
-			.headers(headers)
-			.contentLength(file.length())
-			.contentType(MediaType.parseMediaType("application/octet-stream"))
-			.body(new FileSystemResource(file));
+				.ok()
+				.headers(headers)
+				.contentLength(file.length())
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(new FileSystemResource(file));
 	}
 }

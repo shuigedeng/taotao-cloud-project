@@ -22,44 +22,44 @@ import java.util.List;
  * 节点
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:07
+ * @version 2021.9
+ * @since 2021-09-02 22:21:57
  */
 public interface INode extends Serializable {
 
 	/**
 	 * getId
 	 *
-	 * @return java.lang.Long
+	 * @return {@link java.lang.Long }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:07
+	 * @since 2021-09-02 22:22:11
 	 */
 	Long getId();
 
 	/**
 	 * getParentId
 	 *
-	 * @return java.lang.Long
+	 * @return {@link java.lang.Long }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:07
+	 * @since 2021-09-02 22:22:18
 	 */
 	Long getParentId();
 
 	/**
 	 * getChildren
 	 *
-	 * @return java.util.List<com.taotao.cloud.web.tree.INode>
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:07
+	 * @since 2021-09-02 22:22:22
 	 */
 	List<INode> getChildren();
 
 	/**
 	 * getHasChildren
 	 *
-	 * @return java.lang.Boolean
+	 * @return {@link java.lang.Boolean }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:07
+	 * @since 2021-09-02 22:22:30
 	 */
 	default Boolean getHasChildren() {
 		return false;

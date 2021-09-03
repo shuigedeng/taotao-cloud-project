@@ -22,11 +22,11 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 
 /**
- * CustomHealthIndicator
+ * CustomHealthIndicator 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/02 10:23
+ * @version 2021.9
+ * @since 2021-09-02 21:02:46
  */
 public class CustomHealthIndicator implements HealthIndicator {
 

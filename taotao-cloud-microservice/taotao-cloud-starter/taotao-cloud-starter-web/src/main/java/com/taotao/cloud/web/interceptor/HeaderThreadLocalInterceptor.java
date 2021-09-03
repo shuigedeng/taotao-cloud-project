@@ -28,8 +28,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * <p>
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:40
+ * @version 2021.9
+ * @since 2021-09-02 22:01:25
  */
 public class HeaderThreadLocalInterceptor implements HandlerInterceptor {
 

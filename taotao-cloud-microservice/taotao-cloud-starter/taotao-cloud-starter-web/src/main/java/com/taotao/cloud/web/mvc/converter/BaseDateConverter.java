@@ -23,8 +23,8 @@ import java.util.function.Function;
  * 解决入参为 Date类型
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:25
+ * @version 2021.9
+ * @since 2021-09-02 22:09:34
  */
 public abstract class BaseDateConverter<T> {
 
@@ -33,9 +33,9 @@ public abstract class BaseDateConverter<T> {
 	 *
 	 * @param source   源数据
 	 * @param function 回调
-	 * @return T 转换后的数据
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:26
+	 * @since 2021-09-02 22:09:45
 	 */
 	public T convert(String source, Function<String, T> function) {
 		if (source == null || source.isEmpty()) {
@@ -54,9 +54,9 @@ public abstract class BaseDateConverter<T> {
 	/**
 	 * 获取子类 具体的格式化表达式
 	 *
-	 * @return java.util.Map<java.lang.String, java.lang.String> 格式化
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:26
+	 * @since 2021-09-02 22:10:09
 	 */
 	protected abstract Map<String, String> getFormat();
 }

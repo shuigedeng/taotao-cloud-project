@@ -22,18 +22,36 @@ import java.util.Objects;
  * 用户实体绑定spring security
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:27
+ * @version 2021.9
+ * @since 2021-09-02 19:16:31
  */
 public class SecurityMenu implements Serializable {
 
 	private static final long serialVersionUID = -749360940290141180L;
 
+	/**
+	 * url
+	 */
 	private String url;
+	/**
+	 * path
+	 */
 	private String path;
+	/**
+	 * sort
+	 */
 	private Integer sort;
+	/**
+	 * type
+	 */
 	private Integer type;
+	/**
+	 * hidden
+	 */
 	private Boolean hidden;
+	/**
+	 * pathMethod
+	 */
 	private String pathMethod;
 
 	public SecurityMenu() {

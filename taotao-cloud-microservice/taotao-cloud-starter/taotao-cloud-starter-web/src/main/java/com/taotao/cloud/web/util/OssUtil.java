@@ -21,12 +21,18 @@ import org.apache.commons.io.FilenameUtils;
  * OSS处理工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:59
+ * @version 2021.9
+ * @since 2021-09-02 22:25:42
  */
 public class OssUtil {
 
+	/**
+	 * IMAGES_STR
+	 */
 	public static final String IMAGES_STR = "png,jpg,jpeg,gif,tif,bmp";
+	/**
+	 * VIDEO_STR
+	 */
 	public static final String VIDEO_STR = "avi,wmv,mpeg,mp4,mov,flv,rm,rmvb,3gp";
 
 	/**
@@ -35,7 +41,7 @@ public class OssUtil {
 	 * @param fileName 文件名
 	 * @return int
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:59
+	 * @since 2021-09-02 22:25:58
 	 */
 	public static int getFileType(String fileName) {
 		String fileType = FilenameUtils.getExtension(fileName);

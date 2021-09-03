@@ -1,6 +1,20 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.model;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -21,9 +35,10 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 自定义采集器
  *
- * @author: chejiangyi
- * @version: 2019-07-30 16:11
- **/
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:30:39
+ */
 public class Collector {
 
 	/**
@@ -31,10 +46,25 @@ public class Collector {
 	 */
 	public static Collector DEFAULT = new Collector();
 
+	/**
+	 * map
+	 */
 	private final Map<String, Object> map = new ConcurrentHashMap<>();
 
+	/**
+	 * lock
+	 */
 	private final Object lock = new Object();
 
+	/**
+	 * get
+	 *
+	 * @param key  key
+	 * @param type type
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:00
+	 */
 	protected Object get(String key, Class type) {
 		if (!map.containsKey(key)) {
 			synchronized (lock) {
@@ -47,6 +77,15 @@ public class Collector {
 		return map.get(key);
 	}
 
+	/**
+	 * createFactory
+	 *
+	 * @param key  key
+	 * @param type type
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:04
+	 */
 	private Object createFactory(String key, Class type) {
 		try {
 			Object obj = type.newInstance();
@@ -61,27 +100,66 @@ public class Collector {
 		}
 	}
 
+	/**
+	 * sum
+	 *
+	 * @param key key
+	 * @return {@link com.taotao.cloud.core.model.Collector.Sum }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:08
+	 */
 	public Sum sum(String key) {
 		return (Sum) get(key, Sum.class);
 	}
 
+	/**
+	 * hook
+	 *
+	 * @param key key
+	 * @return {@link com.taotao.cloud.core.model.Collector.Hook }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:13
+	 */
 	public Hook hook(String key) {
 		return (Hook) get(key, Hook.class);
 	}
 
+	/**
+	 * call
+	 *
+	 * @param key key
+	 * @return {@link com.taotao.cloud.core.model.Collector.Call }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:16
+	 */
 	public Call call(String key) {
 		return (Call) get(key, Call.class);
 	}
 
+	/**
+	 * value
+	 *
+	 * @param key key
+	 * @return {@link com.taotao.cloud.core.model.Collector.Value }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:31:18
+	 */
 	public Value value(String key) {
 		return (Value) get(key, Value.class);
 	}
 
 	/**
-	 * 设值
+	 * Value
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:31:26
 	 */
 	public static class Value {
 
+		/**
+		 * value
+		 */
 		protected Object value;
 
 		public void set(Object value) {
@@ -108,9 +186,16 @@ public class Collector {
 
 	/**
 	 * 累加
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:31:36
 	 */
 	public static class Sum {
 
+		/**
+		 * sum
+		 */
 		protected AtomicInteger sum = new AtomicInteger(0);
 
 		public void add(int count) {
@@ -136,6 +221,10 @@ public class Collector {
 
 	/**
 	 * 拦截
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:31:46
 	 */
 	public static class Hook {
 
@@ -143,44 +232,99 @@ public class Collector {
 		 * 当前正在处理数
 		 */
 		protected AtomicLong current = new AtomicLong(0);
+		/**
+		 * 最近每秒失败次数
+		 */
+		protected AtomicLong lastErrorPerSecond = new AtomicLong(0);
+		/**
+		 * 最近每秒成功次数
+		 */
+		protected AtomicLong lastSuccessPerSecond = new AtomicLong(0);
+		/**
+		 * sortList
+		 */
+		protected SortList sortList = new SortList();
+		/**
+		 * lastMinTimeSpan
+		 */
+		protected double lastMinTimeSpan = 0;
+		/**
+		 * sortListPerMinute
+		 */
+		protected SortList sortListPerMinute = new SortList();
+		/**
+		 * lastMinTimeSpanPerMinute
+		 */
+		protected double lastMinTimeSpanPerMinute = 0;
+		/**
+		 * maxLength
+		 */
+		protected Integer maxLength = 10;
+		/**
+		 * lastSecond
+		 */
+		protected volatile Long lastSecond = 0L;
+		/**
+		 * lastMinute
+		 */
+		protected volatile Long lastMinute = 0L;
+		/**
+		 * method
+		 */
+		protected Method method;
+		/**
+		 * key
+		 */
+		private String key;
 
+		/**
+		 * getCurrent
+		 *
+		 * @return {@link java.lang.Long }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:05
+		 */
 		public Long getCurrent() {
 			return current.get();
 		}
 
 		/**
-		 * 最近每秒失败次数
+		 * getLastErrorPerSecond
+		 *
+		 * @return {@link java.lang.Long }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:08
 		 */
-		protected AtomicLong lastErrorPerSecond = new AtomicLong(0);
-
 		public Long getLastErrorPerSecond() {
 			return lastErrorPerSecond.get();
 		}
 
 		/**
-		 * 最近每秒成功次数
+		 * getLastSuccessPerSecond
+		 *
+		 * @return {@link java.lang.Long }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:12
 		 */
-		protected AtomicLong lastSuccessPerSecond = new AtomicLong(0);
-
 		public Long getLastSuccessPerSecond() {
 			return lastSuccessPerSecond.get();
 		}
 
-		protected SortList sortList = new SortList();
-		protected double lastMinTimeSpan = 0;
-
-		protected SortList sortListPerMinute = new SortList();
-		protected double lastMinTimeSpanPerMinute = 0;
-		protected Integer maxLength = 10;
-		protected volatile Long lastSecond = 0L;
-		protected volatile Long lastMinute = 0L;
-		protected Method method;
-		private String key;
-
+		/**
+		 * run
+		 *
+		 * @param tag        tag
+		 * @param obj        obj
+		 * @param methodName methodName
+		 * @param params     params
+		 * @return {@link java.lang.Object }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:15
+		 */
 		public Object run(String tag, Object obj, String methodName, Object[] params) {
 			if (method == null) {
 				Optional<Method> find = Arrays.stream(obj.getClass().getMethods())
-					.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
+						.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
 				if (!find.isPresent()) {
 					throw new BaseException("未找到方法:" + obj.getClass().getName() + "下" + methodName);
 				}
@@ -195,6 +339,14 @@ public class Collector {
 			});
 		}
 
+		/**
+		 * run
+		 *
+		 * @param tag    tag
+		 * @param action action
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:19
+		 */
 		public void run(String tag, Callable.Action0 action) {
 			run(tag, () -> {
 				action.invoke();
@@ -202,6 +354,16 @@ public class Collector {
 			});
 		}
 
+		/**
+		 * run
+		 *
+		 * @param tag  tag
+		 * @param func func
+		 * @param <T>  T
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:24
+		 */
 		public <T> T run(String tag, Callable.Func0<T> func) {
 			try {
 				CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
@@ -236,6 +398,14 @@ public class Collector {
 			}
 		}
 
+		/**
+		 * insertOrUpdate
+		 *
+		 * @param info     info
+		 * @param timeSpan timeSpan
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:38
+		 */
 		protected void insertOrUpdate(Object info, double timeSpan) {
 			if (info == null || timeSpan < lastMinTimeSpan) {
 				return;
@@ -252,6 +422,14 @@ public class Collector {
 			}
 		}
 
+		/**
+		 * insertOrUpdatePerMinute
+		 *
+		 * @param info     info
+		 * @param timeSpan timeSpan
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:40
+		 */
 		protected void insertOrUpdatePerMinute(Object info, double timeSpan) {
 			if (info == null || timeSpan < lastMinTimeSpanPerMinute) {
 				return;
@@ -264,12 +442,16 @@ public class Collector {
 					lastMinTimeSpanPerMinute = last.getTime();
 				}
 			} catch (Exception exp) {
-				LogUtil.error(exp,"Collector hook 保存耗时统计出错");
+				LogUtil.error(exp, "Collector hook 保存耗时统计出错");
 			}
 		}
 
 		/**
 		 * 最长耗时列表n条
+		 *
+		 * @return {@link com.taotao.cloud.core.model.Collector.SortList }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:47
 		 */
 		public SortList getMaxTimeSpanList() {
 			return sortList;
@@ -277,6 +459,10 @@ public class Collector {
 
 		/**
 		 * 最长耗时列表n条每分钟
+		 *
+		 * @return {@link com.taotao.cloud.core.model.Collector.SortList }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:34:56
 		 */
 		public SortList getMaxTimeSpanListPerMinute() {
 			return sortListPerMinute;
@@ -369,10 +555,17 @@ public class Collector {
 	}
 
 	/**
-	 * 调用
+	 * Collector
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:35:15
 	 */
 	public static class Call {
 
+		/**
+		 * func
+		 */
 		private Callable.Func0<Object> func;
 
 		/**
@@ -398,18 +591,37 @@ public class Collector {
 		}
 	}
 
+	/**
+	 * SortInfo
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:35:26
+	 */
 	public static class SortInfo implements Comparable<SortInfo> {
 
+		/**
+		 * tag
+		 */
 		protected Object tag;
+		/**
+		 * time
+		 */
 		protected double time;
+		/**
+		 * maxTime
+		 */
 		protected double maxTime;
+		/**
+		 * count
+		 */
 		protected volatile AtomicLong count;
 
 		public SortInfo() {
 		}
 
 		public SortInfo(Object tag, double time, double maxTime,
-			AtomicLong count) {
+				AtomicLong count) {
 			this.tag = tag;
 			this.time = time;
 			this.maxTime = maxTime;
@@ -476,8 +688,18 @@ public class Collector {
 		}
 	}
 
+	/**
+	 * SortList
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:35:51
+	 */
 	public static class SortList extends ConcurrentSkipListSet<SortInfo> {
 
+		/**
+		 * tagCache
+		 */
 		protected Map tagCache = new ConcurrentHashMap<Integer, Object>();
 
 		@Override
@@ -511,6 +733,13 @@ public class Collector {
 			return super.remove(o);
 		}
 
+		/**
+		 * getLast
+		 *
+		 * @return {@link com.taotao.cloud.core.model.Collector.SortInfo }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:36:02
+		 */
 		public SortInfo getLast() {
 			try {
 				if (!this.isEmpty()) {
@@ -521,7 +750,13 @@ public class Collector {
 			return null;
 		}
 
-
+		/**
+		 * removeMore
+		 *
+		 * @param maxLength maxLength
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:36:05
+		 */
 		public void removeMore(int maxLength) {
 			int count = this.size();
 			while (this.size() > maxLength) {
@@ -531,18 +766,26 @@ public class Collector {
 					this.remove(last);
 				}
 				if (count < -10) {
-					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString() : " 长时间无法移除导致死循环"));
+					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString()
+							: " 长时间无法移除导致死循环"));
 					break;
 				}
 			}
 		}
 
+		/**
+		 * toText
+		 *
+		 * @return {@link java.lang.String }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:36:10
+		 */
 		public String toText() {
 			StringBuilder sb = new StringBuilder();
 			for (SortInfo o : this) {
 				sb.append(String.format("[耗时ms]%s[tag]%s[次数]%s[最大耗时ms]%s\r\n",
-					NumberUtil.scale(o.time, 2), o.tag.toString(), o.count,
-					NumberUtil.scale(o.maxTime, 2)));
+						NumberUtil.scale(o.time, 2), o.tag.toString(), o.count,
+						NumberUtil.scale(o.maxTime, 2)));
 			}
 			return sb.toString();
 		}

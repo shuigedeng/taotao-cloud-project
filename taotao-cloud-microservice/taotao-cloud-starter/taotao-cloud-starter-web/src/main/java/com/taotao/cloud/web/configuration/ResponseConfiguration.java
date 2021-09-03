@@ -36,8 +36,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 全局统一返回值 包装器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:47
+ * @version 2021.9
+ * @since 2021-09-02 21:28:49
  */
 @Configuration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
@@ -45,7 +45,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 //@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
 //	RestController.class, Controller.class})
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
-public class ResponseConfiguration implements ResponseBodyAdvice , InitializingBean {
+public class ResponseConfiguration implements ResponseBodyAdvice, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -56,7 +56,7 @@ public class ResponseConfiguration implements ResponseBodyAdvice , InitializingB
 	public boolean supports(MethodParameter methodParameter, Class aClass) {
 		// 类上如果被 IgnoreResponseBodyAdvice 标识就不拦截
 		if (methodParameter.getDeclaringClass()
-			.isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
+				.isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
 			return false;
 		}
 
@@ -66,7 +66,8 @@ public class ResponseConfiguration implements ResponseBodyAdvice , InitializingB
 
 	@Override
 	public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType,
-		Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+			Class aClass, ServerHttpRequest serverHttpRequest,
+			ServerHttpResponse serverHttpResponse) {
 		if (o == null) {
 			return null;
 		}

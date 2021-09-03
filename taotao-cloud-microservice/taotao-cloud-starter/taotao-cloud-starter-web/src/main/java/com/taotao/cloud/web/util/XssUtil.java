@@ -32,56 +32,56 @@ import org.owasp.validator.html.ScanException;
  * XSS 工具类， 用于过滤特殊字符
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:48
+ * @version 2021.9
+ * @since 2021-09-02 22:29:42
  */
 public class XssUtil {
 
 	private static final String ANTISAMY_SLASHDOT_XML = "antisamy-slashdot-1.4.4.xml";
 	private static Policy policy = null;
 	private static final Pattern SCRIPT_BETWEEN_PATTERN = Pattern.compile(
-		"<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>",
-		Pattern.CASE_INSENSITIVE);
+			"<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>",
+			Pattern.CASE_INSENSITIVE);
 	private static final Pattern SCRIPT_END_PATTERN = Pattern.compile(
-		"</[\r\n| | ]*script[\r\n| | ]*>", Pattern.CASE_INSENSITIVE);
+			"</[\r\n| | ]*script[\r\n| | ]*>", Pattern.CASE_INSENSITIVE);
 	private static final Pattern SCRIPT_START_PATTERN = Pattern.compile("<[\r\n| | ]*script(.*?)>",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern EVAL_PATTERN = Pattern.compile("eval\\((.*?)\\)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern E_XPRESSION_PATTERN = Pattern.compile("e-xpression\\((.*?)\\)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern MOCHA_PATTERN = Pattern.compile("mocha[\r\n| | ]*:[\r\n| | ]*",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern EXPRESSION_PATTERN = Pattern.compile("expression\\((.*?)\\)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern URL_PATTERN = Pattern.compile("url\\((.*?)\\)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern VBSCRIPT_PATTERN = Pattern.compile(
-		"vbscript[\r\n| | ]*:[\r\n| | ]*",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			"vbscript[\r\n| | ]*:[\r\n| | ]*",
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern JAVASCRIPT_PATTERN = Pattern.compile(
-		"javascript[\r\n| | ]*:[\r\n| | ]*", Pattern.CASE_INSENSITIVE);
+			"javascript[\r\n| | ]*:[\r\n| | ]*", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ONLOAD_PATTERN = Pattern.compile("onload(.*?)=",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern ONMOUSEOVER_PATTERN = Pattern.compile("onMouseOver=.*?//",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern ONMOUSEOVER_PATTERN_2 = Pattern.compile("onmouseover(.*)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern ONMOUSEOVER_PATTERN_3 = Pattern.compile("onmouseover=.*?",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern ALERT_PATTERN = Pattern.compile("alert(.*)",
-		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+			Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static String REPLACE_STRING = "";
 	private static Pattern script = null;
 
 	static {
 		script = Pattern.compile(
-			"<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>",
-			Pattern.CASE_INSENSITIVE);
+				"<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>",
+				Pattern.CASE_INSENSITIVE);
 
 		LogUtil.debug(" start read XSS config file [" + ANTISAMY_SLASHDOT_XML + "]");
 		InputStream inputStream = XssUtil.class.getClassLoader()
-			.getResourceAsStream(ANTISAMY_SLASHDOT_XML);
+				.getResourceAsStream(ANTISAMY_SLASHDOT_XML);
 		try {
 			policy = Policy.getInstance(inputStream);
 			LogUtil.debug("read XSS config file [" + ANTISAMY_SLASHDOT_XML + "] success");
@@ -93,7 +93,8 @@ public class XssUtil {
 					inputStream.close();
 				} catch (IOException e) {
 					LogUtil.error(
-						"close XSS config file [" + ANTISAMY_SLASHDOT_XML + "] fail , reason:", e);
+							"close XSS config file [" + ANTISAMY_SLASHDOT_XML + "] fail , reason:",
+							e);
 				}
 			}
 		}
@@ -104,9 +105,9 @@ public class XssUtil {
 	 *
 	 * @param paramValue           待过滤的参数
 	 * @param ignoreParamValueList 忽略过滤的参数列表
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:48
+	 * @since 2021-09-02 22:29:53
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList) {
 		AntiSamy antiSamy = new AntiSamy();
@@ -146,12 +147,12 @@ public class XssUtil {
 	 * @param paramValue           paramValue
 	 * @param ignoreParamValueList ignoreParamValueList
 	 * @param param                param
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:51
+	 * @since 2021-09-02 22:30:03
 	 */
 	public static String xssClean(String paramValue, List<String> ignoreParamValueList,
-		String param) {
+			String param) {
 		if (isIgnoreParamValue(param, ignoreParamValueList)) {
 			//虽然过滤固定字段 允许标签 但是关键函数必须处理 不允许出现
 			return stripXSSAndSql(paramValue);
@@ -164,9 +165,9 @@ public class XssUtil {
 	 * xss校验
 	 *
 	 * @param value value
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:51
+	 * @since 2021-09-02 22:30:13
 	 */
 	public static String stripXSSAndSql(String value) {
 		if (StrUtil.isBlank(value)) {
@@ -207,10 +208,10 @@ public class XssUtil {
 	 * @param ignoreParamValueList ignoreParamValueList
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:51
+	 * @since 2021-09-02 22:30:21
 	 */
 	private static boolean isIgnoreParamValue(String paramValue,
-		List<String> ignoreParamValueList) {
+			List<String> ignoreParamValueList) {
 		if (StrUtil.isBlank(paramValue)) {
 			return true;
 		}

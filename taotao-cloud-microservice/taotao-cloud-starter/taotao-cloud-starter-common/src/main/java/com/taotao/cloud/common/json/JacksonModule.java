@@ -37,11 +37,17 @@ import java.time.format.DateTimeFormatter;
  * jackson 自定义序列化  反序列化 规则
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:49
+ * @version 2021.9
+ * @since 2021-09-02 19:20:49
  */
 public class JacksonModule extends SimpleModule {
 
+	/**
+	 * JacksonModule
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:21:04
+	 */
 	public JacksonModule() {
 		super(PackageVersion.VERSION);
 		this.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
@@ -62,5 +68,4 @@ public class JacksonModule extends SimpleModule {
 		this.addSerializer(BigDecimal.class, ToStringSerializer.instance);
 		this.addSerializer(BaseEnum.class, EnumSerializer.INSTANCE);
 	}
-
 }

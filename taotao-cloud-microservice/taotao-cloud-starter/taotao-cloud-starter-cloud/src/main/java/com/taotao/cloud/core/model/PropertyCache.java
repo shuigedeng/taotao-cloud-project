@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.model;
 
 import com.taotao.cloud.common.utils.BeanUtil;
@@ -9,14 +24,26 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 
 /**
- * @author: chejiangyi
- * @version: 2019-08-10 13:00 属性缓存层
- **/
+ * 属性缓存层
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:37:32
+ */
 @Order(200000000)
 public class PropertyCache implements CommandLineRunner {
 
+	/**
+	 * DEFAULT
+	 */
 	public static PropertyCache DEFAULT = new PropertyCache();
+	/**
+	 * cache
+	 */
 	private ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<>();
+	/**
+	 * isStart
+	 */
 	private boolean isStart = false;
 
 	@Override
@@ -26,6 +53,16 @@ public class PropertyCache implements CommandLineRunner {
 		isStart = true;
 	}
 
+	/**
+	 * get
+	 *
+	 * @param key          key
+	 * @param defaultValue defaultValue
+	 * @param <T>          T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:37:54
+	 */
 	public <T> T get(String key, T defaultValue) {
 		if (!isStart) {
 			String v = PropertyUtil.getProperty(key);
@@ -52,8 +89,16 @@ public class PropertyCache implements CommandLineRunner {
 		}
 	}
 
+	/**
+	 * tryUpdateCache
+	 *
+	 * @param key   key
+	 * @param value value
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:38:10
+	 */
 	public void tryUpdateCache(String key, Object value) {
-		if (isStart == false) {
+		if (!isStart) {
 			return;
 		}
 		if (cache.containsKey(key)) {
@@ -70,10 +115,24 @@ public class PropertyCache implements CommandLineRunner {
 		});
 	}
 
+	/**
+	 * listenUpdateCache
+	 *
+	 * @param name   name
+	 * @param action action
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:38:14
+	 */
 	public void listenUpdateCache(String name, Callable.Action1<HashMap<String, Object>> action) {
 		Pubsub.DEFAULT.sub(EventEnum.PropertyCacheUpdateEvent, new Pubsub.Sub(name, action));
 	}
 
+	/**
+	 * clear
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:38:20
+	 */
 	public void clear() {
 		cache.clear();
 	}

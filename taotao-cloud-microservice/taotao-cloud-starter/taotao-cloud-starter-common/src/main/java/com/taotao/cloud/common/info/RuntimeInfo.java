@@ -21,8 +21,8 @@ import java.io.Serializable;
  * 运行时信息，包括内存总大小、已用大小、可用大小等
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:26:16
  */
 public class RuntimeInfo implements Serializable {
 
@@ -30,6 +30,9 @@ public class RuntimeInfo implements Serializable {
 
 	/**
 	 * 获得运行时对象
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:20
 	 */
 	public final Runtime getRuntime() {
 		return currentRuntime;
@@ -37,6 +40,9 @@ public class RuntimeInfo implements Serializable {
 
 	/**
 	 * 获得JVM最大可用内存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getMaxMemory() {
 		return currentRuntime.maxMemory();
@@ -44,6 +50,9 @@ public class RuntimeInfo implements Serializable {
 
 	/**
 	 * 获得JVM已分配内存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getTotalMemory() {
 		return currentRuntime.totalMemory();
@@ -51,6 +60,9 @@ public class RuntimeInfo implements Serializable {
 
 	/**
 	 * 获得JVM已分配内存中的剩余空间
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getFreeMemory() {
 		return currentRuntime.freeMemory();
@@ -58,6 +70,9 @@ public class RuntimeInfo implements Serializable {
 
 	/**
 	 * 获得JVM最大可用内存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:20
 	 */
 	public final long getUsableMemory() {
 		return currentRuntime.maxMemory() - currentRuntime.totalMemory()

@@ -46,8 +46,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * TaoTaoCloudApplication
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:15
+ * @version 2021.9
+ * @since 2021-09-02 21:02:52
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

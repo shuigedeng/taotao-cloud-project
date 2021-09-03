@@ -27,39 +27,37 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
 
 /**
- * 默认异步任务配置
+ * 异步任务配置
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 09:12
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
+@Configuration
 @EnableAsync(proxyTargetClass = true)
 public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
-
-	private final AsyncProperties asyncProperties;
-
-	public AsyncConfiguration(AsyncProperties asyncProperties) {
-		this.asyncProperties = asyncProperties;
-	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(AsyncConfiguration.class, StarterName.CLOUD_STARTER);
 	}
 
-	//@Override
-	//public Executor getAsyncExecutor() {
-	//
-	//}
+	@Override
+	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+		return (ex, method, params) -> LogUtil
+			.error("class#method: " + method.getDeclaringClass().getName() + "#" + method
+				.getName(), ex);
+	}
 
 	@Bean
-	public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+	public ThreadPoolTaskExecutor threadPoolTaskExecutor(AsyncProperties asyncProperties) {
 		LogUtil.started(ThreadPoolTaskExecutor.class, StarterName.CLOUD_STARTER);
 
 		ThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
@@ -75,19 +73,12 @@ public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
 		return executor;
 	}
 
-	@Override
-	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-		return (ex, method, params) -> LogUtil
-			.error("class#method: " + method.getDeclaringClass().getName() + "#" + method
-				.getName(), ex);
-	}
-
 	/**
 	 * 这是{@link ThreadPoolTaskExecutor}的一个简单替换，可搭配TransmittableThreadLocal实现父子线程之间的数据传递
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
-	 * @since 2019/8/14
+	 * @version 2021.9
+	 * @since 2021-09-02 20:02:27
 	 */
 	public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
@@ -137,9 +128,9 @@ public class AsyncConfiguration implements AsyncConfigurer, InitializingBean {
 		/**
 		 * 每次执行任务时输出当前线程池状态
 		 *
-		 * @param method 方法名
+		 * @param method method
 		 * @author shuigedeng
-		 * @since 2021/8/24 23:44
+		 * @since 2021-09-02 20:03:15
 		 */
 		private void showThreadPoolInfo(String method) {
 			ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();

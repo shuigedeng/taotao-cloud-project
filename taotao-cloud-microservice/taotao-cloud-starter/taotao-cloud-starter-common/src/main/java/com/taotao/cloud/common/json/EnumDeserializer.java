@@ -45,7 +45,6 @@ public class EnumDeserializer extends StdDeserializer<Enum<?>> {
 
 	public static final EnumDeserializer INSTANCE = new EnumDeserializer();
 
-
 	public EnumDeserializer() {
 		super(Enum.class);
 	}

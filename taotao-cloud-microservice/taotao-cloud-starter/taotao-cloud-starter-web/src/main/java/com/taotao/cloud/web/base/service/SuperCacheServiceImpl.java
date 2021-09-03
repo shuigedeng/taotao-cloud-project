@@ -29,9 +29,9 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
 import com.taotao.cloud.redis.model.CacheKey;
 import com.taotao.cloud.redis.model.CacheKeyBuilder;
-import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.base.mapper.SuperMapper;
 import java.io.Serializable;
@@ -60,11 +60,11 @@ import org.springframework.transaction.annotation.Transactional;
  * 类的方法，修改db后，淘汰缓存
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:19
+ * @version 2021.9
+ * @since 2021-09-02 21:21:08
  */
 public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
-	SuperServiceImpl<M, T> implements SuperCacheService<T> {
+		SuperServiceImpl<M, T> implements SuperCacheService<T> {
 
 	@Autowired
 	protected RedisRepository redisRepository;
@@ -83,7 +83,7 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	@Override
 	@Transactional(readOnly = true)
 	public List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-		Function<Collection<? extends Serializable>, Collection<T>> loader) {
+			Function<Collection<? extends Serializable>, Collection<T>> loader) {
 		if (ids.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -93,8 +93,8 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		List<List<CacheKey>> partitionKeys = Lists.partition(keys, MAX_BATCH_KEY_SIZE);
 
 		// 用切割后的 partitionKeys 分批去缓存查， 返回的是缓存中存在的数据
-//		List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) redisRepository.find(ks))
-//			.flatMap(Collection::stream).collect(Collectors.toList());
+		//List<T> valueList = partitionKeys.stream().map(ks -> (List<T>) redisRepository.find(ks))
+		//.flatMap(Collection::stream).collect(Collectors.toList());
 
 		List<T> valueList = new ArrayList<>();
 		// 所有的key
@@ -130,7 +130,6 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		Object id = redisRepository.get(key, loader);
 		return id == null ? null : getByIdCache(Convert.toLong(id));
 	}
-
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -194,16 +193,16 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 	public boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize) {
 		TableInfo tableInfo = TableInfoHelper.getTableInfo(getEntityClass());
 		Assert.notNull(tableInfo,
-			"error: can not execute. because can not find cache of TableInfo for entity!");
+				"error: can not execute. because can not find cache of TableInfo for entity!");
 		String keyProperty = tableInfo.getKeyProperty();
 		Assert.notEmpty(keyProperty,
-			"error: can not execute. because can not find column for id from entity!");
+				"error: can not execute. because can not find column for id from entity!");
 
 		BiPredicate<SqlSession, T> predicate = (sqlSession, entity) -> {
 			Object idVal = ReflectionKit.getFieldValue(entity, keyProperty);
 			return StringUtils.checkValNull(idVal)
-				|| CollectionUtils.isEmpty(
-				sqlSession.selectList(getSqlStatement(SqlMethod.SELECT_BY_ID), entity));
+					|| CollectionUtils.isEmpty(
+					sqlSession.selectList(getSqlStatement(SqlMethod.SELECT_BY_ID), entity));
 		};
 
 		BiConsumer<SqlSession, T> consumer = (sqlSession, entity) -> {
@@ -217,15 +216,15 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 
 		String sqlStatement = SqlHelper.getSqlStatement(this.mapperClass, SqlMethod.INSERT_ONE);
 		return SqlHelper.executeBatch(getEntityClass(), log, entityList, batchSize,
-			(sqlSession, entity) -> {
-				if (predicate.test(sqlSession, entity)) {
-					sqlSession.insert(sqlStatement, entity);
-					// 设置缓存
-					setCache(entity);
-				} else {
-					consumer.accept(sqlSession, entity);
-				}
-			});
+				(sqlSession, entity) -> {
+					if (predicate.test(sqlSession, entity)) {
+						sqlSession.insert(sqlStatement, entity);
+						// 设置缓存
+						setCache(entity);
+					} else {
+						consumer.accept(sqlSession, entity);
+					}
+				});
 
 
 	}
@@ -254,14 +253,13 @@ public abstract class SuperCacheServiceImpl<M extends SuperMapper<T>, T> extends
 		list().forEach(this::delCache);
 	}
 
-
 	protected void delCache(Serializable... ids) {
 		delCache(Arrays.asList(ids));
 	}
 
 	protected void delCache(Collection<? extends Serializable> idList) {
 		CacheKey[] keys = idList.stream().map(id -> cacheKeyBuilder().key(id))
-			.toArray(CacheKey[]::new);
+				.toArray(CacheKey[]::new);
 		redisRepository.del(keys);
 	}
 

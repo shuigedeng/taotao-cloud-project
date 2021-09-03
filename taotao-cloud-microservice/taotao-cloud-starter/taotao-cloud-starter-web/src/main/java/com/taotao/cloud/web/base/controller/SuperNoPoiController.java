@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-
 import com.taotao.cloud.web.base.service.SuperService;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -36,19 +35,19 @@ import java.lang.reflect.ParameterizedType;
  * @param <SaveDTO>   保存参数
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:24
+ * @version 2021.9
+ * @since 2021-09-02 21:15:26
  */
 public abstract class SuperNoPoiController<S extends SuperService<Entity>, Id extends Serializable, Entity, PageQuery, SaveDTO, UpdateDTO> extends
-	SuperSimpleController<S, Entity>
-	implements SaveController<Entity, SaveDTO>, UpdateController<Entity, UpdateDTO>,
-	DeleteController<Entity, Id>, QueryController<Entity, Id, PageQuery> {
+		SuperSimpleController<S, Entity>
+		implements SaveController<Entity, SaveDTO>, UpdateController<Entity, UpdateDTO>,
+		DeleteController<Entity, Id>, QueryController<Entity, Id, PageQuery> {
 
 	@Override
 	public Class<Entity> getEntityClass() {
 		if (entityClass == null) {
 			this.entityClass = (Class<Entity>) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[2];
+					.getGenericSuperclass()).getActualTypeArguments()[2];
 		}
 		return this.entityClass;
 	}

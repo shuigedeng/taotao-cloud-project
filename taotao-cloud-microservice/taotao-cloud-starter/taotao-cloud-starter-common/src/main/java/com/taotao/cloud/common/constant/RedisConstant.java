@@ -19,17 +19,23 @@ package com.taotao.cloud.common.constant;
  * RedisConstant
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/06 14:11
+ * @version 2021.9
+ * @since 2021-09-02 19:35:46
  */
 public class RedisConstant {
 
-	/********图形验证码***********/
+	/**
+	 * 图形验证码
+	 */
 	public static final String TAOTAO_CLOUD_CAPTCHA_KEY = "taotao_cloud_captcha_key:";
 
-	/********短信验证码***********/
+	/**
+	 * 短信验证码
+	 */
 	public static final String TAOTAO_CLOUD_SMS_KEY = "taotao_cloud_sms_key:";
 
-	/********分布式锁key***********/
+	/**
+	 * 分布式锁key
+	 */
 	public static final String LOCK_KEY_PREFIX = "LOCK_KEY:";
 }

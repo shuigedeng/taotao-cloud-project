@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Mapper数据模型节点
+ * Mapper数据模型节点 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:08
+ * @version 2021.9
+ * @since 2021-09-03 08:05:13
  */
 public class MapperNode extends TreeNode {
 

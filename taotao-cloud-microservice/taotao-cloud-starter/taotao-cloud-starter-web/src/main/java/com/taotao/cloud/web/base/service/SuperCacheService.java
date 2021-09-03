@@ -27,8 +27,8 @@ import org.springframework.lang.NonNull;
  * 上的方法
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:18
+ * @version 2021.9
+ * @since 2021-09-02 21:20:06
  */
 public interface SuperCacheService<T> extends SuperService<T> {
 
@@ -36,7 +36,9 @@ public interface SuperCacheService<T> extends SuperService<T> {
 	 * 根据id 先查缓存，再查db
 	 *
 	 * @param id 主键
-	 * @return 对象
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:20:20
 	 */
 	T getByIdCache(Serializable id);
 
@@ -45,7 +47,9 @@ public interface SuperCacheService<T> extends SuperService<T> {
 	 *
 	 * @param key    缓存key
 	 * @param loader 加载器
-	 * @return 对象
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:20:34
 	 */
 	T getByKey(CacheKey key, Function<CacheKey, Object> loader);
 
@@ -54,18 +58,26 @@ public interface SuperCacheService<T> extends SuperService<T> {
 	 *
 	 * @param ids    主键id
 	 * @param loader 回调
-	 * @return 对象集合
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:20:44
 	 */
 	List<T> findByIds(@NonNull Collection<? extends Serializable> ids,
-		Function<Collection<? extends Serializable>, Collection<T>> loader);
+			Function<Collection<? extends Serializable>, Collection<T>> loader);
 
 	/**
 	 * 刷新缓存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:20:51
 	 */
 	void refreshCache();
 
 	/**
 	 * 清理缓存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:20:55
 	 */
 	void clearCache();
 }

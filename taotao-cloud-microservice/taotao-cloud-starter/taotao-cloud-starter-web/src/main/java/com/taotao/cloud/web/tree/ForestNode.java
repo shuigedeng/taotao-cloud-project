@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 森林节点
+ * 森林节点 
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:04
+ * @version 2021.9
+ * @since 2021-09-03 08:05:01
  */
 public class ForestNode extends TreeNode {
 

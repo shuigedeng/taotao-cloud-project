@@ -35,12 +35,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Dozer配置
+ * DozerConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
+ * @version 2021.9
  * @see <a href="http://dozer.sourceforge.net/documentation/usage.html">http://www.jianshu.com/p/bf8f0e8aee23</a>
- * @since 2021/8/24 23:44
+ * @since 2021-09-02 21:24:03
  */
 @Configuration
 @ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
@@ -53,13 +53,6 @@ public class DozerConfiguration implements InitializingBean {
 		LogUtil.started(DozerConfiguration.class, StarterName.WEB_STARTER);
 	}
 
-
-	private final DozerProperties properties;
-
-	public DozerConfiguration(DozerProperties properties) {
-		this.properties = properties;
-	}
-
 	@Bean
 	public DozerHelper getDozerUtil(Mapper mapper) {
 		LogUtil.started(DozerHelper.class, StarterName.WEB_STARTER);
@@ -68,7 +61,7 @@ public class DozerConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public DozerBeanMapperFactoryBean dozerMapper() throws IOException {
+	public DozerBeanMapperFactoryBean dozerMapper(DozerProperties properties) throws IOException {
 		LogUtil.started(DozerBeanMapperFactoryBean.class, StarterName.WEB_STARTER);
 
 		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
@@ -82,8 +75,8 @@ public class DozerConfiguration implements InitializingBean {
 	 * DozerHelper
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
-	 * @since 2021/8/24 23:45
+	 * @version 2021.9
+	 * @since 2021-09-02 21:24:48
 	 */
 	public static class DozerHelper {
 
@@ -97,6 +90,16 @@ public class DozerConfiguration implements InitializingBean {
 			return this.mapper;
 		}
 
+		/**
+		 * map
+		 *
+		 * @param source           source
+		 * @param destinationClass destinationClass
+		 * @param <T>              T
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:24:52
+		 */
 		public <T> T map(Object source, Class<T> destinationClass) {
 			if (source == null) {
 				return null;
@@ -104,6 +107,16 @@ public class DozerConfiguration implements InitializingBean {
 			return mapper.map(source, destinationClass);
 		}
 
+		/**
+		 * map2
+		 *
+		 * @param source           source
+		 * @param destinationClass destinationClass
+		 * @param <T>              T
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:04
+		 */
 		public <T> T map2(Object source, Class<T> destinationClass) {
 			if (source == null) {
 				try {
@@ -114,6 +127,14 @@ public class DozerConfiguration implements InitializingBean {
 			return mapper.map(source, destinationClass);
 		}
 
+		/**
+		 * map
+		 *
+		 * @param source      source
+		 * @param destination destination
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:12
+		 */
 		public void map(Object source, Object destination) {
 			if (source == null) {
 				return;
@@ -121,6 +142,17 @@ public class DozerConfiguration implements InitializingBean {
 			mapper.map(source, destination);
 		}
 
+		/**
+		 * map
+		 *
+		 * @param source           source
+		 * @param destinationClass destinationClass
+		 * @param mapId            mapId
+		 * @param <T>              T
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:15
+		 */
 		public <T> T map(Object source, Class<T> destinationClass, String mapId) {
 			if (source == null) {
 				return null;
@@ -128,6 +160,15 @@ public class DozerConfiguration implements InitializingBean {
 			return mapper.map(source, destinationClass, mapId);
 		}
 
+		/**
+		 * map
+		 *
+		 * @param source      source
+		 * @param destination destination
+		 * @param mapId       mapId
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:21
+		 */
 		public void map(Object source, Object destination, String mapId) {
 			if (source == null) {
 				return;
@@ -135,28 +176,59 @@ public class DozerConfiguration implements InitializingBean {
 			mapper.map(source, destination, mapId);
 		}
 
+		/**
+		 * mapList
+		 *
+		 * @param sourceList       sourceList
+		 * @param destinationClass destinationClass
+		 * @param <T>              T
+		 * @param <E>              E
+		 * @return {@link java.util.List }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:26
+		 */
 		public <T, E> List<T> mapList(Collection<E> sourceList, Class<T> destinationClass) {
 			return mapPage(sourceList, destinationClass);
 		}
 
+		/**
+		 * mapPage
+		 *
+		 * @param sourceList       sourceList
+		 * @param destinationClass destinationClass
+		 * @param <T>              T
+		 * @param <E>              E
+		 * @return {@link List }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:36
+		 */
 		public <T, E> List<T> mapPage(Collection<E> sourceList, Class<T> destinationClass) {
 			if (sourceList == null || sourceList.isEmpty() || destinationClass == null) {
 				return Collections.emptyList();
 			}
 
 			return sourceList.parallelStream()
-				.filter(Objects::nonNull)
-				.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
-				.collect(Collectors.toList());
+					.filter(Objects::nonNull)
+					.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
+					.collect(Collectors.toList());
 		}
 
+		/**
+		 * mapSet
+		 *
+		 * @param sourceList       sourceList
+		 * @param destinationClass destinationClass
+		 * @return {@link java.util.Set }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:25:56
+		 */
 		public <T, E> Set<T> mapSet(Collection<E> sourceList, Class<T> destinationClass) {
 			if (sourceList == null || sourceList.isEmpty() || destinationClass == null) {
 				return Collections.emptySet();
 			}
 			return sourceList.parallelStream()
-				.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
-				.collect(Collectors.toSet());
+					.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
+					.collect(Collectors.toSet());
 		}
 	}
 }

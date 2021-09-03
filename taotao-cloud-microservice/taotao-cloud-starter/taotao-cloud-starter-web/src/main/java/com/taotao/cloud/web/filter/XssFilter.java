@@ -35,15 +35,14 @@ import org.springframework.util.AntPathMatcher;
  * 跨站工具 过滤器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:43
+ * @version 2021.9
+ * @since 2021-09-02 21:59:41
  */
 public class XssFilter implements Filter {
 
 	/**
 	 * 可放行的请求路径
 	 */
-
 	public static final String IGNORE_PATH = "ignorePath";
 	/**
 	 * 可放行的参数值
@@ -65,12 +64,12 @@ public class XssFilter implements Filter {
 	public void init(FilterConfig fc) {
 		this.ignorePathList = StrUtil.split(fc.getInitParameter(IGNORE_PATH), CharUtil.COMMA);
 		this.ignoreParamValueList = StrUtil.split(fc.getInitParameter(IGNORE_PARAM_VALUE),
-			CharUtil.COMMA);
+				CharUtil.COMMA);
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-		throws IOException, ServletException {
+			throws IOException, ServletException {
 		// 判断uri是否包含项目名称
 		String uriPath = ((HttpServletRequest) request).getRequestURI();
 		if (isIgnorePath(uriPath)) {
@@ -80,9 +79,17 @@ public class XssFilter implements Filter {
 		}
 		LogUtil.debug("过滤器包装请求路径=[{}]", uriPath);
 		chain.doFilter(new XssRequestWrapper((HttpServletRequest) request, ignoreParamValueList),
-			response);
+				response);
 	}
 
+	/**
+	 * isIgnorePath
+	 *
+	 * @param uriPath uriPath
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:15:15
+	 */
 	private boolean isIgnorePath(String uriPath) {
 		if (StrUtil.isBlank(uriPath)) {
 			return true;
@@ -91,6 +98,6 @@ public class XssFilter implements Filter {
 			return false;
 		}
 		return ignorePathList.stream()
-			.anyMatch(url -> uriPath.startsWith(url) || ANT_PATH_MATCHER.match(url, uriPath));
+				.anyMatch(url -> uriPath.startsWith(url) || ANT_PATH_MATCHER.match(url, uriPath));
 	}
 }

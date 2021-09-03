@@ -17,10 +17,8 @@ package com.taotao.cloud.core.lock;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.aspect.BaseAspect;
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.initializer.CoreApplicationContextInitializer;
 import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -37,8 +35,8 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * 分布式锁切面
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 09:12
+ * @version 2021.9
+ * @since 2021-09-02 20:27:36
  */
 @Aspect
 public class LockAspect extends BaseAspect {
@@ -58,7 +56,7 @@ public class LockAspect extends BaseAspect {
 
 	@Around("@within(lock) || @annotation(lock)")
 	public Object aroundLock(ProceedingJoinPoint point, Lock lock)
-		throws Throwable {
+			throws Throwable {
 		if (lock == null) {
 			lock = point.getTarget().getClass().getDeclaredAnnotation(Lock.class);
 		}
@@ -81,15 +79,15 @@ public class LockAspect extends BaseAspect {
 			//加锁
 			if (lock.waitTime() > 0) {
 				lockObj = distributedLock.tryLock(lockKey,
-					lock.waitTime(),
-					lock.leaseTime(),
-					lock.unit(),
-					lock.isFair());
+						lock.waitTime(),
+						lock.leaseTime(),
+						lock.unit(),
+						lock.isFair());
 			} else {
 				lockObj = distributedLock.tryLock(lockKey,
-					lock.leaseTime(),
-					lock.unit(),
-					lock.isFair());
+						lock.leaseTime(),
+						lock.unit(),
+						lock.isFair());
 			}
 
 			if (lockObj != null) {
@@ -110,9 +108,9 @@ public class LockAspect extends BaseAspect {
 	 * @param spEL            spEL
 	 * @param methodSignature 方法签名
 	 * @param args            参数
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:49
+	 * @since 2021-09-02 20:28:11
 	 */
 	private String getValBySpEL(String spEL, MethodSignature methodSignature, Object[] args) {
 		//获取方法形参名数组

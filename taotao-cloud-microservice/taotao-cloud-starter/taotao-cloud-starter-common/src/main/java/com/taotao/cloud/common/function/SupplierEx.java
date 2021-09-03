@@ -19,11 +19,18 @@ package com.taotao.cloud.common.function;
  * SupplierEx
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:26
+ * @version 2021.9
+ * @since 2021-09-02 19:28:31
  */
 @FunctionalInterface
 public interface SupplierEx<T> {
 
+	/**
+	 * get
+	 *
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:28:36
+	 */
 	T get() throws Exception;
 }

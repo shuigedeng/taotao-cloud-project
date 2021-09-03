@@ -22,25 +22,29 @@ import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.web.base.service.SuperService;
 
 /**
- * 基础接口
+ * BaseController
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:22
+ * @version 2021.9
+ * @since 2021-09-02 21:03:10
  */
 public interface BaseController<Entity> {
 
 	/**
 	 * 获取实体的类型
 	 *
-	 * @return 实体的类型
+	 * @return {@link java.lang.Class }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:03:20
 	 */
 	Class<Entity> getEntityClass();
 
 	/**
 	 * 获取Service
 	 *
-	 * @return Service
+	 * @return {@link com.taotao.cloud.web.base.service.SuperService }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:03:26
 	 */
 	SuperService<Entity> getBaseService();
 
@@ -49,7 +53,9 @@ public interface BaseController<Entity> {
 	 *
 	 * @param data 返回内容
 	 * @param <T>  返回类型
-	 * @return R 成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:03:37
 	 */
 	default <T> Result<T> success(T data) {
 		return Result.success(data);
@@ -58,7 +64,9 @@ public interface BaseController<Entity> {
 	/**
 	 * 成功返回
 	 *
-	 * @return R.true
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:03:51
 	 */
 	default Result<Boolean> success() {
 		return Result.success();
@@ -68,7 +76,9 @@ public interface BaseController<Entity> {
 	 * 失败返回
 	 *
 	 * @param msg 失败消息
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:00
 	 */
 	default Result<String> fail(String msg) {
 		return Result.fail(msg);
@@ -80,7 +90,9 @@ public interface BaseController<Entity> {
 	 *
 	 * @param code 失败编码
 	 * @param msg  失败消息
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:08
 	 */
 	default Result<String> fail(int code, String msg) {
 		return Result.fail(msg, code);
@@ -90,7 +102,9 @@ public interface BaseController<Entity> {
 	 * 失败返回
 	 *
 	 * @param exception 异常
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:19
 	 */
 	default <T> Result<T> fail(BusinessException exception) {
 		return Result.fail(exception);
@@ -100,7 +114,9 @@ public interface BaseController<Entity> {
 	 * 失败返回
 	 *
 	 * @param throwable 异常
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:28
 	 */
 	default <T> Result<T> fail(Throwable throwable) {
 		return Result.fail(throwable);
@@ -110,7 +126,9 @@ public interface BaseController<Entity> {
 	 * 参数校验失败返回
 	 *
 	 * @param msg 错误消息
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:35
 	 */
 	default <T> Result<T> validFail(String msg) {
 		return Result.validFail(msg);
@@ -121,7 +139,9 @@ public interface BaseController<Entity> {
 	 *
 	 * @param msg  错误消息
 	 * @param args 错误参数
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:42
 	 */
 	default <T> Result<T> validFail(String msg, Object... args) {
 		return Result.validFail(msg, args);
@@ -131,7 +151,9 @@ public interface BaseController<Entity> {
 	 * 参数校验失败返回
 	 *
 	 * @param resultEnum 错误编码
-	 * @return 失败
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:50
 	 */
 	default <T> Result<T> validFail(ResultEnum resultEnum) {
 		return Result.validFail(resultEnum);
@@ -140,7 +162,9 @@ public interface BaseController<Entity> {
 	/**
 	 * 获取当前id
 	 *
-	 * @return userId
+	 * @return {@link java.lang.Long }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:04:56
 	 */
 	default Long getUserId() {
 		return SecurityUtil.getUserId();
@@ -149,7 +173,9 @@ public interface BaseController<Entity> {
 	/**
 	 * 当前请求租户
 	 *
-	 * @return 租户编码
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:05:02
 	 */
 	default String getTenant() {
 		return SecurityUtil.getTenant();
@@ -158,7 +184,9 @@ public interface BaseController<Entity> {
 	/**
 	 * 登录人账号
 	 *
-	 * @return 账号
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:05:12
 	 */
 	default String getAccount() {
 		return SecurityUtil.getUser().getNickname();
@@ -167,7 +195,9 @@ public interface BaseController<Entity> {
 	/**
 	 * 登录人姓名
 	 *
-	 * @return 姓名
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:05:17
 	 */
 	default String getName() {
 		return SecurityUtil.getUsername();

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.thread;
 
 
@@ -28,78 +43,36 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 /**
  * 自定义线程池及关键方法包装实现 装饰
  *
- * @author: chejiangyi
- * @version: 2019-07-23 20:56
- **/
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:46:36
+ */
 public class ThreadPool {
+
+	/**
+	 * DEFAULT
+	 */
+	public static ThreadPool DEFAULT;
+	/**
+	 * threadPoolExecutor
+	 */
+	private ThreadPoolExecutor threadPoolExecutor;
+	/**
+	 * checkHealth
+	 */
+	private boolean checkHealth = true;
+	/**
+	 * threadMonitor
+	 */
+	private ThreadMonitor threadMonitor;
+	/**
+	 * name
+	 */
+	private String name;
 
 	static {
 		initSystem();
-	}
 
-	public static void initSystem() {
-		ThreadPoolProperties threadPoolProperties = ContextUtil.getBean(ThreadPoolProperties.class,
-			true);
-		DEFAULT = new ThreadPool("taotao.cloud.core.threadPool",
-			threadPoolProperties.getThreadPoolMinSize(),
-			threadPoolProperties.getThreadPoolMaxSiz());
-	}
-
-	public static ThreadPool DEFAULT;
-	private ThreadPoolExecutor threadPoolExecutor;
-	private boolean checkHealth = true;
-	private ThreadMonitor threadMonitor;
-	private String name;
-
-	public ThreadPool(String name, int threadPoolMinSize, int threadPoolMaxSize) {
-		this.name = name;
-
-		ThreadPoolTaskExecutor threadPoolTaskExecutor = ContextUtil.getBean(
-			ThreadPoolTaskExecutor.class, true);
-		if (Objects.isNull(threadPoolTaskExecutor)) {
-			threadPoolExecutor = new ThreadPoolExecutor(
-				threadPoolMinSize,
-				threadPoolMaxSize,
-				60L,
-				TimeUnit.SECONDS,
-				new SynchronousQueue<>(),
-				new CoreThreadPoolFactory());
-		} else {
-			threadPoolExecutor = threadPoolTaskExecutor.getThreadPoolExecutor();
-		}
-
-		threadMonitor = new ThreadMonitor(this.name, threadPoolExecutor);
-	}
-
-	private void checkHealth() {
-		if (checkHealth
-			&& threadPoolExecutor.getMaximumPoolSize() <= threadPoolExecutor.getPoolSize()
-			&& threadPoolExecutor.getQueue().size() > 0) {
-			LogUtil.warn(
-				"线程池已满,任务开始出现排队,taotao.cloud.core.threadpool.threadPoolMaxSiz,当前: {}"
-				, threadPoolExecutor.getMaximumPoolSize());
-		}
-	}
-
-	public <T> Future<T> submit(String taskName, Callable<T> task) {
-		checkHealth();
-		return threadMonitor.hook().run(taskName, () -> threadPoolExecutor.submit(task));
-	}
-
-	public Future<?> submit(String taskName, Runnable task) {
-		checkHealth();
-		return threadMonitor.hook().run(taskName, () -> threadPoolExecutor.submit(task));
-	}
-
-	public boolean isShutdown() {
-		return threadPoolExecutor.isShutdown();
-	}
-
-	public void shutdown() {
-		threadPoolExecutor.shutdown();
-	}
-
-	static {
 		//JVM 停止或重启时，关闭线程池释
 		ProcessExitEvent.register(() -> {
 			try {
@@ -111,16 +84,119 @@ public class ThreadPool {
 	}
 
 	/**
+	 * initSystem
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:46:54
+	 */
+	public static void initSystem() {
+		ThreadPoolProperties threadPoolProperties = ContextUtil.getBean(ThreadPoolProperties.class,
+				true);
+		DEFAULT = new ThreadPool("taotao.cloud.core.threadPool",
+				threadPoolProperties.getThreadPoolMinSize(),
+				threadPoolProperties.getThreadPoolMaxSiz());
+	}
+
+	public ThreadPool(String name, int threadPoolMinSize, int threadPoolMaxSize) {
+		this.name = name;
+
+		ThreadPoolTaskExecutor threadPoolTaskExecutor = ContextUtil.getBean(
+				ThreadPoolTaskExecutor.class, true);
+		if (Objects.isNull(threadPoolTaskExecutor)) {
+			threadPoolExecutor = new ThreadPoolExecutor(
+					threadPoolMinSize,
+					threadPoolMaxSize,
+					60L,
+					TimeUnit.SECONDS,
+					new SynchronousQueue<>(),
+					new CoreThreadPoolFactory());
+		} else {
+			threadPoolExecutor = threadPoolTaskExecutor.getThreadPoolExecutor();
+		}
+
+		threadMonitor = new ThreadMonitor(this.name, threadPoolExecutor);
+	}
+
+	/**
+	 * checkHealth
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:47:26
+	 */
+	private void checkHealth() {
+		if (checkHealth
+				&& threadPoolExecutor.getMaximumPoolSize() <= threadPoolExecutor.getPoolSize()
+				&& threadPoolExecutor.getQueue().size() > 0) {
+			LogUtil.warn(
+					"线程池已满,任务开始出现排队,taotao.cloud.core.threadpool.threadPoolMaxSiz,当前: {}"
+					, threadPoolExecutor.getMaximumPoolSize());
+		}
+	}
+
+	/**
+	 * submit
+	 *
+	 * @param taskName taskName
+	 * @param task     task
+	 * @param <T>      T
+	 * @return {@link java.util.concurrent.Future }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:47:31
+	 */
+	public <T> Future<T> submit(String taskName, Callable<T> task) {
+		checkHealth();
+		return threadMonitor.hook().run(taskName, () -> threadPoolExecutor.submit(task));
+	}
+
+	/**
+	 * submit
+	 *
+	 * @param taskName taskName
+	 * @param task     task
+	 * @return {@link java.util.concurrent.Future }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:47:41
+	 */
+	public Future<?> submit(String taskName, Runnable task) {
+		checkHealth();
+		return threadMonitor.hook().run(taskName, () -> threadPoolExecutor.submit(task));
+	}
+
+	/**
+	 * isShutdown
+	 *
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:47:50
+	 */
+	public boolean isShutdown() {
+		return threadPoolExecutor.isShutdown();
+	}
+
+	/**
+	 * shutdown
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:47:52
+	 */
+	public void shutdown() {
+		threadPoolExecutor.shutdown();
+	}
+
+
+	/**
 	 * 任务拆分多个小任务分批并行处理，并行处理完一批再并行处理下一批。 在抛出错误的时候有问题，未修复，仅试验，不要用这个方法。
 	 *
-	 * @param taskName
-	 * @param parallelCount
-	 * @param array
-	 * @param action
-	 * @param <T>
+	 * @param taskName      taskName
+	 * @param parallelCount parallelCount
+	 * @param array         array
+	 * @param action        action
+	 * @param <T>           T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:48:09
 	 */
 	public <T> void parallelFor(String taskName, int parallelCount, List<T> array,
-		final Action1<T> action) {
+			final Action1<T> action) {
 		checkHealth();
 
 		threadMonitor.hook().run(taskName, () -> {
@@ -179,21 +255,21 @@ public class ThreadPool {
 			}
 			return 1;
 		});
-
 	}
-
 
 	/**
 	 * 任务使用固定并行大小处理任务,直到所有任务处理完毕。
 	 *
-	 * @param taskName
-	 * @param parallelCount
-	 * @param array
-	 * @param action
-	 * @param <T>
+	 * @param taskName      taskName
+	 * @param parallelCount parallelCount
+	 * @param array         array
+	 * @param action        action
+	 * @param <T>           T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:48:25
 	 */
 	public <T> void parallelFor2(String taskName, int parallelCount, Collection<T> array,
-		final Action1<T> action) {
+			final Action1<T> action) {
 		checkHealth();
 		threadMonitor.hook().run(taskName, () -> {
 			int parallelCount2 = parallelCount;
@@ -244,8 +320,18 @@ public class ThreadPool {
 		});
 	}
 
+	/**
+	 * CoreThreadPoolFactory
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:48:39
+	 */
 	public static class CoreThreadPoolFactory implements ThreadFactory {
 
+		/**
+		 * factory
+		 */
 		private final ThreadFactory factory = Executors.defaultThreadFactory();
 
 		@Override
@@ -256,7 +342,7 @@ public class ThreadPool {
 			UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
 			if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
-					new DefaultThreadPoolUncaughtExceptionHandler(handler));
+						new DefaultThreadPoolUncaughtExceptionHandler(handler));
 			}
 
 			//后台线程模式
@@ -265,14 +351,20 @@ public class ThreadPool {
 		}
 	}
 
-
+	/**
+	 * DefaultThreadPoolUncaughtExceptionHandler
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:48:50
+	 */
 	public static class DefaultThreadPoolUncaughtExceptionHandler implements
-		Thread.UncaughtExceptionHandler {
+			Thread.UncaughtExceptionHandler {
 
 		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
 
 		public DefaultThreadPoolUncaughtExceptionHandler(
-			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
+				Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
 		}
 

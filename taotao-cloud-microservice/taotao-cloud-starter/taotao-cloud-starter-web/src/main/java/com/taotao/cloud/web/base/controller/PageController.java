@@ -22,11 +22,13 @@ import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.web.base.request.PageParams;
 
 /**
- * 分页Controller
+ * PageController
  *
+ * @param <Entity>    Entity
+ * @param <PageQuery> PageQuery
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:22
+ * @version 2021.9
+ * @since 2021-09-02 21:06:58
  */
 public interface PageController<Entity, PageQuery> extends BaseController<Entity> {
 
@@ -35,7 +37,7 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 *
 	 * @param params params
 	 * @author shuigedeng
-	 * @since 2021/8/25 08:22
+	 * @since 2021-09-02 21:07:14
 	 */
 	default void handlerQueryParams(PageParams<PageQuery> params) {
 	}
@@ -46,7 +48,9 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 * 子类可以覆盖后重写查询逻辑
 	 *
 	 * @param params 分页参数
-	 * @return 分页信息
+	 * @return {@link com.baomidou.mybatisplus.core.metadata.IPage }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:07:20
 	 */
 	default IPage<Entity> query(PageParams<PageQuery> params) {
 		handlerQueryParams(params);
@@ -66,7 +70,9 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 *
 	 * @param model  实体类
 	 * @param params 分页参数
-	 * @return 查询构造器
+	 * @return {@link com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:07:30
 	 */
 	default QueryWrap<Entity> handlerWrapper(Entity model, PageParams<PageQuery> params) {
 		return Wraps.q(model, params.getExtra(), getEntityClass());
@@ -77,7 +83,8 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 * <p>
 	 * 如：执行@Echo回显
 	 *
-	 * @param page 分页对象
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:07:37
 	 */
 	default void handlerResult(IPage<Entity> page) {
 	}

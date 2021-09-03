@@ -26,11 +26,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * 跨站攻击请求包装器
+ * 跨站攻击请求包装器 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:43
+ * @version 2021.9
+ * @since 2021-09-03 08:05:44
  */
 public class XssRequestWrapper extends HttpServletRequestWrapper {
 

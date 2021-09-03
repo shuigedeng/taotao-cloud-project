@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.web.template;
 
-import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.core.utils.RequestUtil;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,17 +29,17 @@ import org.springframework.util.StringUtils;
  * 模板访问java代码的注入类 一般通过Html或者tpl访问 如:Html.request()或者tpl.request()
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:14
+ * @version 2021.9
+ * @since 2021-09-02 22:19:10
  */
 public class TemplateProvider {
 
 	/**
 	 * request
 	 *
-	 * @return javax.servlet.http.HttpServletRequest
+	 * @return {@link javax.servlet.http.HttpServletRequest }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:14
+	 * @since 2021-09-02 22:19:15
 	 */
 	public HttpServletRequest request() {
 		return RequestUtil.getRequest();
@@ -48,9 +48,9 @@ public class TemplateProvider {
 	/**
 	 * response
 	 *
-	 * @return javax.servlet.http.HttpServletResponse
+	 * @return {@link javax.servlet.http.HttpServletResponse }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:14
+	 * @since 2021-09-02 22:19:19
 	 */
 	public HttpServletResponse response() {
 		return RequestUtil.getResponse();
@@ -59,9 +59,9 @@ public class TemplateProvider {
 	/**
 	 * session
 	 *
-	 * @return javax.servlet.http.HttpSession
+	 * @return {@link javax.servlet.http.HttpSession }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:14
+	 * @since 2021-09-02 22:19:25
 	 */
 	public HttpSession session() {
 		return RequestUtil.getRequest().getSession();
@@ -73,7 +73,7 @@ public class TemplateProvider {
 	 * @param key   key
 	 * @param value value
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:14
+	 * @since 2021-09-02 22:19:35
 	 */
 	public void setattr(String key, Object value) {
 		request().setAttribute(key, value);
@@ -84,9 +84,9 @@ public class TemplateProvider {
 	 * key.字段(或public).字段(或public)
 	 *
 	 * @param key key
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:14
+	 * @since 2021-09-02 22:19:44
 	 */
 	public Object getattr(String key) {
 		if (key.contains(".")) {
@@ -123,9 +123,9 @@ public class TemplateProvider {
 	 * @param istrue   条件bool值
 	 * @param trueObj  true 结果
 	 * @param falseObj false结果
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:15
+	 * @since 2021-09-02 22:19:55
 	 */
 	public Object where(Boolean istrue, Object trueObj, Object falseObj) {
 		return istrue ? trueObj : falseObj;
@@ -136,9 +136,9 @@ public class TemplateProvider {
 	 *
 	 * @param str    字符串
 	 * @param maxlen 最大长度
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:15
+	 * @since 2021-09-02 22:20:05
 	 */
 	public String cutString(String str, int maxlen) {
 		if (StringUtils.isEmpty(str)) {
@@ -155,9 +155,9 @@ public class TemplateProvider {
 	 *
 	 * @param date   date
 	 * @param format format
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:15
+	 * @since 2021-09-02 22:20:14
 	 */
 	public String dateString(Date date, String format) {
 		if (date == null) {
@@ -170,9 +170,9 @@ public class TemplateProvider {
 	 * 默认打印
 	 *
 	 * @param o o
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:16
+	 * @since 2021-09-02 22:20:21
 	 */
 	public String print(Object o) {
 		if (o == null) {

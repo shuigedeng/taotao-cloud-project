@@ -16,11 +16,11 @@
 package com.taotao.cloud.common.constant;
 
 /**
- * starter 名称常量
+ * starter 名称常量 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:24
+ * @version 2021.9
+ * @since 2021-09-02 20:42:10
  */
 public class StarterName {
 

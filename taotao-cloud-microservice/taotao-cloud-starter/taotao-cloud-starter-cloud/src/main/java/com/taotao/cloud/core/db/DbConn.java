@@ -19,12 +19,18 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 /**
- * @author: chejiangyi
- * @version: 2019-10-20 10:59
- **/
+ * DbConn
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:04:17
+ */
 public final class DbConn implements AutoCloseable {
 
-	Connection conn;
+	/**
+	 * conn
+	 */
+	private Connection conn;
 
 	public DbConn(Connection conn) {
 		this.conn = conn;
@@ -56,6 +62,13 @@ public final class DbConn implements AutoCloseable {
 		}
 	}
 
+	/**
+	 * getPrintSql
+	 *
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:28
+	 */
 	private boolean getPrintSql() {
 		CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 		return coreProperties.isDbPrintSqlEnabled();
@@ -77,6 +90,13 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * beginTransaction
+	 *
+	 * @param level level
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:33
+	 */
 	public void beginTransaction(int level) {
 		TimeWatchUtil.print(getPrintSql(), "[db]beginTransaction", () -> {
 			try {
@@ -93,6 +113,12 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * commit
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:37
+	 */
 	public void commit() {
 		TimeWatchUtil.print(getPrintSql(), "[db]commit", () -> {
 			try {
@@ -106,6 +132,12 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * rollback
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:39
+	 */
 	public void rollback() {
 		TimeWatchUtil.print(getPrintSql(), "[db]rollback", () -> {
 			try {
@@ -120,6 +152,15 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * executeSql
+	 *
+	 * @param sql             sql
+	 * @param parameterValues parameterValues
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:44
+	 */
 	public int executeSql(final String sql, final Object[] parameterValues) {
 		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
@@ -132,6 +173,15 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * executeScalar
+	 *
+	 * @param sql             sql
+	 * @param parameterValues parameterValues
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:48
+	 */
 	public Object executeScalar(final String sql, final Object[] parameterValues) {
 		try {
 			Object value = null;
@@ -146,6 +196,15 @@ public final class DbConn implements AutoCloseable {
 		}
 	}
 
+	/**
+	 * executeResultSet
+	 *
+	 * @param sql             sql
+	 * @param parameterValues parameterValues
+	 * @return {@link java.sql.ResultSet }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:53
+	 */
 	public ResultSet executeResultSet(final String sql, final Object[] parameterValues) {
 		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
@@ -160,6 +219,15 @@ public final class DbConn implements AutoCloseable {
 		});
 	}
 
+	/**
+	 * executeList
+	 *
+	 * @param sql             sql
+	 * @param parameterValues parameterValues
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:04:57
+	 */
 	public List<Map<String, Object>> executeList(final String sql, final Object[] parameterValues) {
 		return TimeWatchUtil.print(getPrintSql(), "[db]" + sql, () -> {
 			try {
@@ -178,6 +246,14 @@ public final class DbConn implements AutoCloseable {
 
 	}
 
+	/**
+	 * toMapList
+	 *
+	 * @param rs rs
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:05:00
+	 */
 	public List<Map<String, Object>> toMapList(ResultSet rs) {
 		try {
 			List<Map<String, Object>> list = new ArrayList<>();
@@ -203,6 +279,14 @@ public final class DbConn implements AutoCloseable {
 		}
 	}
 
+	/**
+	 * attachParameterObjects
+	 *
+	 * @param statement statement
+	 * @param values    values
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:05:03
+	 */
 	private void attachParameterObjects(PreparedStatement statement, Object[] values)
 		throws Exception {
 		if (values != null) {
@@ -217,6 +301,14 @@ public final class DbConn implements AutoCloseable {
 		}
 	}
 
+	/**
+	 * tableIsExist
+	 *
+	 * @param tablename tablename
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:05:06
+	 */
 	public boolean tableIsExist(String tablename) {
 		List<Map<String, Object>> ds = executeList("Select name from sysobjects where Name=?",
 			new Object[]{tablename});
@@ -227,6 +319,13 @@ public final class DbConn implements AutoCloseable {
 		}
 	}
 
+	/**
+	 * DbException
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:05:11
+	 */
 	public class DbException extends RuntimeException {
 
 		public DbException(String message, String sql, Exception exp) {

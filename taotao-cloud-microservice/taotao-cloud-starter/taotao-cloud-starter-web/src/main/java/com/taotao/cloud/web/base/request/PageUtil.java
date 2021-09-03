@@ -21,11 +21,11 @@ import com.taotao.cloud.common.utils.DateUtil;
 import java.util.Map;
 
 /**
- * 分页工具类
+ * PageUtil
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/25 08:21
+ * @version 2021.9
+ * @since 2021-09-02 21:19:45
  */
 public class PageUtil {
 
@@ -36,6 +36,8 @@ public class PageUtil {
 	 * 重置时间区间参数
 	 *
 	 * @param params 分页参数
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:19:51
 	 */
 	public static <T> void timeRange(PageParams<T> params) {
 		if (params == null) {

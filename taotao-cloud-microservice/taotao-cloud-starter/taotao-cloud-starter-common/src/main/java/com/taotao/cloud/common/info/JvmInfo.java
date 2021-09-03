@@ -21,8 +21,8 @@ import java.io.Serializable;
  * JvmInfo
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:23:34
  */
 public class JvmInfo implements Serializable {
 
@@ -33,6 +33,9 @@ public class JvmInfo implements Serializable {
 
 	/**
 	 * 取得当前JVM的名称
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getName() {
 		return JAVA_VM_NAME;
@@ -40,6 +43,9 @@ public class JvmInfo implements Serializable {
 
 	/**
 	 * 取得当前JVM的版本
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getVersion() {
 		return JAVA_VM_VERSION;
@@ -47,6 +53,9 @@ public class JvmInfo implements Serializable {
 
 	/**
 	 * 取得当前JVM的厂商
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getVendor() {
 		return JAVA_VM_VENDOR;
@@ -54,6 +63,9 @@ public class JvmInfo implements Serializable {
 
 	/**
 	 * 取得当前JVM的信息
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:23:47
 	 */
 	public final String getInfo() {
 		return JAVA_VM_INFO;

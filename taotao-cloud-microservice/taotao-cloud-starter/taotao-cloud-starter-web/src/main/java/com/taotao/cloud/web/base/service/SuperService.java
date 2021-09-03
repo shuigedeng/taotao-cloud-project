@@ -26,11 +26,18 @@ import java.util.List;
  * 2，saveBatchSomeColumn 批量插入
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:19
+ * @version 2021.9
+ * @since 2021-09-02 21:21:51
  */
 public interface SuperService<T> extends IService<T> {
 
+	/**
+	 * getEntityClass
+	 *
+	 * @return {@link java.lang.Class }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:21:58
+	 */
 	@Override
 	Class<T> getEntityClass();
 
@@ -39,10 +46,9 @@ public interface SuperService<T> extends IService<T> {
 	 * <p>
 	 * 注意：该方法仅仅测试过mysql
 	 *
-	 * @param entityList entityList
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/8/25 08:20
+	 * @since 2021-09-02 21:22:06
 	 */
 	default boolean saveBatchSomeColumn(List<T> entityList) {
 		if (entityList.isEmpty()) {
@@ -60,7 +66,7 @@ public interface SuperService<T> extends IService<T> {
 	 * @param entity entity
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/8/25 08:20
+	 * @since 2021-09-02 21:22:14
 	 */
 	boolean updateAllById(T entity);
 

@@ -18,11 +18,11 @@ package com.taotao.cloud.common.exception;
 import com.taotao.cloud.common.enums.ResultEnum;
 
 /**
- * 分布式锁异常
+ * LockException 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:22
+ * @version 2021.9
+ * @since 2021-09-02 20:14:42
  */
 public class LockException extends BaseException {
 

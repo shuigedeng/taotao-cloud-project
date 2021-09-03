@@ -23,11 +23,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * IntEnumsValidator
+ * IntEnumsValidator 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/14 13:56
+ * @version 2021.9
+ * @since 2021-09-03 08:04:20
  */
 public class IntEnumsValidator implements ConstraintValidator<IntEnums, Integer> {
 

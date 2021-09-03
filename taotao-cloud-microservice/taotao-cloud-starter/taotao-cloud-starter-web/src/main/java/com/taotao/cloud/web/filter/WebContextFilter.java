@@ -23,13 +23,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 /**
  * 上下文过滤器
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:43
+ * @version 2021.9
+ * @since 2021-09-02 22:15:38
  */
 public class WebContextFilter extends OncePerRequestFilter {
 

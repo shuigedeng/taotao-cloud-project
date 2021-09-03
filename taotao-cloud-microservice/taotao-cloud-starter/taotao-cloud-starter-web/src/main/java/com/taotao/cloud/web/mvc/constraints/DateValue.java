@@ -35,7 +35,9 @@ import javax.validation.Payload;
  * <p>
  * yyyy-MM-dd HH:mm:ss
  *
- * @author aaronuu
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 22:07:34
  */
 @Documented
 @Constraint(validatedBy = DateValueValidator.class)
@@ -65,6 +67,7 @@ public @interface DateValue {
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {
+
 		DateValue[] value();
 	}
 }

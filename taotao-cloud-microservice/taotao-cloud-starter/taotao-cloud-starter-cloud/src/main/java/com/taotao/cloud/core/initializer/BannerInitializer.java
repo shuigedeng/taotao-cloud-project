@@ -56,14 +56,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.SpringVersion;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Banner初始化
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 09:12
+ * @version 2021.9
+ * @since 2021-09-02 20:22:33
  */
 @Order(2)
 public class BannerInitializer implements
@@ -120,6 +119,14 @@ public class BannerInitializer implements
 		}
 	}
 
+	/**
+	 * show
+	 *
+	 * @param logoBanner      logoBanner
+	 * @param descriptionList descriptionList
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:22:45
+	 */
 	public void show(LogoBanner logoBanner, Description... descriptionList) {
 		String bannerShown = System.getProperty(BannerConstant.BANNER_SHOWN, "true");
 		if (!Boolean.parseBoolean(bannerShown)) {

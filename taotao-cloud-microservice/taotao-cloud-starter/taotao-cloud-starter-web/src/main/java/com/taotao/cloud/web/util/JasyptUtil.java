@@ -25,11 +25,14 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
  * JasyptUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:59
+ * @version 2021.9
+ * @since 2021-09-02 22:24:54
  */
 public class JasyptUtil {
 
+	/**
+	 * stringEncryptor
+	 */
 	private static StringEncryptor stringEncryptor;
 
 	static {
@@ -38,7 +41,7 @@ public class JasyptUtil {
 		if (stringEncryptor == null) {
 			try {
 				String password = ContextUtil.getApplicationContext().getEnvironment()
-					.getProperty("jasypt.encryptor.password", "taotao-cloud");
+						.getProperty("jasypt.encryptor.password", "taotao-cloud");
 				stringEncryptor = getInstance(password);
 			} catch (Exception e) {
 				LogUtil.error(e);
@@ -50,9 +53,9 @@ public class JasyptUtil {
 	 * 编码
 	 *
 	 * @param content content
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:59
+	 * @since 2021-09-02 22:25:10
 	 */
 	public String encrypt(String content) {
 		return stringEncryptor.encrypt(content);
@@ -62,9 +65,9 @@ public class JasyptUtil {
 	 * 解码
 	 *
 	 * @param content content
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:59
+	 * @since 2021-09-02 22:25:16
 	 */
 	public String decrypt(String content) {
 		return stringEncryptor.decrypt(content);
@@ -73,10 +76,10 @@ public class JasyptUtil {
 	/**
 	 * 获取StringEncryptor
 	 *
-	 * @param password 密码
-	 * @return org.jasypt.encryption.StringEncryptor
+	 * @param password password
+	 * @return {@link org.jasypt.encryption.StringEncryptor }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:00
+	 * @since 2021-09-02 22:25:26
 	 */
 	public static StringEncryptor getInstance(String password) throws Exception {
 		if (password == null || password.trim().equals("")) {

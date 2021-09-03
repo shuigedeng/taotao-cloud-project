@@ -27,8 +27,8 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
  * TaoTaoCloudEndPoint
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/08 14:29
+ * @version 2021.9
+ * @since 2021-09-02 20:08:52
  */
 @Endpoint(id = "taotao-cloud")
 public class TaoTaoCloudEndPoint {

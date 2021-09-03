@@ -26,8 +26,8 @@ import org.springframework.stereotype.Service;
  * 策略模式注解
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:20
+ * @version 2021.9
+ * @since 2021-09-02 22:16:24
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -37,19 +37,11 @@ public @interface HandlerType {
 
 	/**
 	 * type
-	 *
-	 * @return java.lang.String
-	 * @author shuigedeng
-	 * @since 2021/8/24 23:20
 	 */
 	String type();
 
 	/**
 	 * source
-	 *
-	 * @return java.lang.String
-	 * @author shuigedeng
-	 * @since 2021/8/24 23:20
 	 */
 	String source();
 }

@@ -23,23 +23,28 @@ import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
 /**
- * 错误补偿工具类
+ * FailOverUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:23
+ * @version 2021.9
+ * @since 2021-09-02 20:50:38
  */
 public class FailOverUtil {
 
+	/**
+	 * name
+	 */
 	private final static String name = "补偿工具";
 
 	/**
-	 * 错误补偿工具类
+	 * invoke
 	 *
 	 * @param consumer consumer
 	 * @param c1       c1
+	 * @param <T>      T
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:41
+	 * @since 2021-09-02 20:50:56
 	 */
 	public static <T> T invoke(Consumer<Result<T>> consumer, Callable<T>... c1) {
 		Result<T> result = new Result<>();
@@ -55,18 +60,18 @@ public class FailOverUtil {
 					result.throwable = e;
 					if (i > 0) {
 						LogUtil.error(name.concat("-失败-补偿次数 {}") + " error info {}", i,
-							ExceptionUtil.getFullStackTrace(e));
+								ExceptionUtil.getFullStackTrace(e));
 					} else {
 						LogUtil.error(
-							ExceptionUtil.getFullStackTrace(e));
+								ExceptionUtil.getFullStackTrace(e));
 					}
 				}
 				times = i + 1;
 			}
 			if (result.success && times > 0) {
 				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + " {} 补偿成功, 补偿次数：{}",
-					name,
-					times);
+						name,
+						times);
 			}
 		} finally {
 			consumer.accept(result);
@@ -75,11 +80,12 @@ public class FailOverUtil {
 	}
 
 	/**
-	 * 反馈结果
+	 * Result
 	 *
+	 * @param <T> T
 	 * @author shuigedeng
-	 * @version 1.0.0
-	 * @since 2021/6/22 17:42
+	 * @version 2021.9
+	 * @since 2021-09-02 20:51:11
 	 */
 	public static class Result<T> {
 

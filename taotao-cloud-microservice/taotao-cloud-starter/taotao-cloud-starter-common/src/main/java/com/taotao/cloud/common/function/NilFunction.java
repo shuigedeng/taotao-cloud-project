@@ -19,11 +19,17 @@ package com.taotao.cloud.common.function;
  * NilFunction
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:26
+ * @version 2021.9
+ * @since 2021-09-02 19:28:12
  */
 @FunctionalInterface
 public interface NilFunction {
 
+	/**
+	 * process
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:28:15
+	 */
 	void process() throws Exception;
 }

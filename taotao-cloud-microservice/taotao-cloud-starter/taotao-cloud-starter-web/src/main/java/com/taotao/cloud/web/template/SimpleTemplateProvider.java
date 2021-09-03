@@ -19,8 +19,8 @@ package com.taotao.cloud.web.template;
  * TemplateProvider 缩写简写扩展，方便页面模板里面使用
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:12
+ * @version 2021.9
+ * @since 2021-09-02 22:18:10
  */
 public class SimpleTemplateProvider extends TemplateProvider {
 
@@ -28,9 +28,9 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * getattr方法 缩写
 	 *
 	 * @param key key
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:12
+	 * @since 2021-09-02 22:18:19
 	 */
 	public Object g(String key) {
 		return getattr(key);
@@ -42,7 +42,7 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * @param key   key
 	 * @param value value
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:13
+	 * @since 2021-09-02 22:18:28
 	 */
 	public void s(String key, Object value) {
 		setattr(key, value);
@@ -53,9 +53,9 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 *
 	 * @param key   key
 	 * @param value value
-	 * @return com.taotao.cloud.web.template.SimpleTemplateProvider
+	 * @return {@link com.taotao.cloud.web.template.SimpleTemplateProvider }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:13
+	 * @since 2021-09-02 22:18:34
 	 */
 	public SimpleTemplateProvider s2(String key, Object value) {
 		setattr(key, value);
@@ -68,9 +68,9 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * @param istrue   istrue
 	 * @param trueObj  trueObj
 	 * @param falseObj falseObj
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:13
+	 * @since 2021-09-02 22:18:44
 	 */
 	public Object w(boolean istrue, Object trueObj, Object falseObj) {
 		return where(istrue, trueObj, falseObj);
@@ -80,9 +80,9 @@ public class SimpleTemplateProvider extends TemplateProvider {
 	 * print 缩写
 	 *
 	 * @param o o
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:13
+	 * @since 2021-09-02 22:18:56
 	 */
 	public String p(Object o) {
 		return print(o);

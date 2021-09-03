@@ -30,9 +30,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * 日志链路追踪过滤器
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:43
+ * @version 2021.9
+ * @since 2021-09-02 22:16:19
  */
 public class TraceFilter extends OncePerRequestFilter {
 

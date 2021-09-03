@@ -21,8 +21,8 @@ import java.io.Serializable;
  * UserInfo
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:27:07
  */
 public class UserInfo implements Serializable {
 
@@ -36,6 +36,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得当前登录用户的名字
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getName() {
 		return USER_NAME;
@@ -43,6 +46,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得当前登录用户的home目录
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getHomeDir() {
 		return USER_HOME;
@@ -50,6 +56,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得当前目录
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getCurrentDir() {
 		return USER_DIR;
@@ -57,6 +66,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得临时目录
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getTempDir() {
 		return JAVA_IO_TMPDIR;
@@ -64,6 +76,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得当前登录用户的语言设置
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getLanguage() {
 		return USER_LANGUAGE;
@@ -71,6 +86,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 取得当前登录用户的国家或区域设置
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	public final String getCountry() {
 		return USER_COUNTRY;
@@ -78,6 +96,9 @@ public class UserInfo implements Serializable {
 
 	/**
 	 * 将当前用户的信息转换成字符串。
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:27:12
 	 */
 	@Override
 	public final String toString() {

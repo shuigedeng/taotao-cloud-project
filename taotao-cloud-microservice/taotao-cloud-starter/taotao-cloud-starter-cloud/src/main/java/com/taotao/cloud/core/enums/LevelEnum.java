@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 报警级别
+ * LevelEnum 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:43
- **/
+ * @version 2021.9
+ * @since 2021-09-02 21:15:18
+ */
 public enum LevelEnum {
 	//报警级别
 	HIGN(3, "极其严重"),

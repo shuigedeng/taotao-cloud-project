@@ -30,13 +30,19 @@ import org.springframework.context.ConfigurableApplicationContext;
  * CustomMbeanRegistrar
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/08 15:11
+ * @version 2021.9
+ * @since 2021-09-02 20:08:05
  */
 public class CustomMbeanRegistrar implements ApplicationContextAware, InitializingBean,
 	DisposableBean {
 
+	/**
+	 * applicationContext
+	 */
 	private ConfigurableApplicationContext applicationContext;
+	/**
+	 * objectName
+	 */
 	private final ObjectName objectName = new ObjectName(
 		"com.taotao.cloud.core.endpoint:type=CustomAdmin,name=SystemInfoMBean");
 

@@ -27,11 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @param <S>      Service
  * @param <Entity> 实体
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:24
+ * @version 2021.9
+ * @since 2021-09-02 21:15:37
  */
 public abstract class SuperSimpleController<S extends SuperService<Entity>, Entity> implements
-	BaseController<Entity> {
+		BaseController<Entity> {
 
 	Class<Entity> entityClass = null;
 	@Autowired
@@ -41,7 +41,7 @@ public abstract class SuperSimpleController<S extends SuperService<Entity>, Enti
 	public Class<Entity> getEntityClass() {
 		if (entityClass == null) {
 			this.entityClass = (Class<Entity>) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1];
+					.getGenericSuperclass()).getActualTypeArguments()[1];
 		}
 		return this.entityClass;
 	}

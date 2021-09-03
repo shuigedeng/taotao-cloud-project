@@ -29,8 +29,8 @@ import javax.validation.Payload;
  * EnumValue
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/14 13:39
+ * @version 2021.9
+ * @since 2021-09-02 22:27:04
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
 	ElementType.CONSTRUCTOR, ElementType.PARAMETER})

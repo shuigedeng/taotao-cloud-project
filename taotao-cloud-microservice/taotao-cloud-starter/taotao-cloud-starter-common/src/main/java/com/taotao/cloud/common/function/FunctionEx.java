@@ -19,11 +19,19 @@ package com.taotao.cloud.common.function;
  * FunctionEx
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:26
+ * @version 2021.9
+ * @since 2021-09-02 19:28:02
  */
 @FunctionalInterface
 public interface FunctionEx<T, R> {
 
+	/**
+	 * apply
+	 *
+	 * @param t t
+	 * @return R
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:28:05
+	 */
 	R apply(T t) throws Exception;
 }

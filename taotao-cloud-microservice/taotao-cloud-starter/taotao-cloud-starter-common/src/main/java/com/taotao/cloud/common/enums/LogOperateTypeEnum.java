@@ -19,8 +19,8 @@ package com.taotao.cloud.common.enums;
  * 日志操作类型
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:25
+ * @version 2021.9
+ * @since 2021-09-02 19:32:36
  */
 public enum LogOperateTypeEnum implements BaseEnum {
 	/**

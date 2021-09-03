@@ -32,12 +32,15 @@ import org.springframework.core.convert.converter.Converter;
  * String2LocalDateTimeConverter
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:28
+ * @version 2021.9
+ * @since 2021-09-02 22:11:52
  */
 public class String2LocalDateTimeConverter extends BaseDateConverter<LocalDateTime> implements
 	Converter<String, LocalDateTime> {
 
+	/**
+	 * FORMAT
+	 */
 	protected static final Map<String, String> FORMAT = new LinkedHashMap(5);
 
 	static {

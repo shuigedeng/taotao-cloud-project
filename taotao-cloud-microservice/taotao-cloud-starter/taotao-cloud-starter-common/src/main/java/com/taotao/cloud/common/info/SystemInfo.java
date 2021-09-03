@@ -21,13 +21,19 @@ import java.io.Serializable;
  * SystemInfo
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:26:50
  */
 public class SystemInfo implements Serializable {
 
+	/**
+	 * info
+	 *
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:26:58
+	 */
 	public static String info() {
-
 		UserInfo userInfo = new UserInfo();
 		OsInfo osInfo = new OsInfo();
 		JavaInfo javaInfo = new JavaInfo();

@@ -19,8 +19,8 @@ package com.taotao.cloud.web.strategy;
  * 业务处理策略接口
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:16
+ * @version 2021.9
+ * @since 2021-09-02 22:15:21
  */
 @FunctionalInterface
 public interface BusinessHandler<R, T> {
@@ -29,9 +29,9 @@ public interface BusinessHandler<R, T> {
 	 * 业务处理
 	 *
 	 * @param t 业务实体返回参数
-	 * @return R 结果
+	 * @return R
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:16
+	 * @since 2021-09-02 22:15:31
 	 */
 	R businessHandler(T t);
 }

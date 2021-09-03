@@ -18,11 +18,11 @@ package com.taotao.cloud.common.tuple;
 import java.io.Serializable;
 
 /**
- * Tuple6
+ * Tuple6 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:40
+ * @version 2021.9
+ * @since 2021-09-02 19:27:52
  */
 public class Tuple6<T1, T2, T3, T4, T5, T6> implements Serializable {
 

@@ -30,13 +30,12 @@ import org.slf4j.MDC;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 /**
  * 负载均衡隔离规则过滤器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2019/9/15
+ * @version 2021.9
+ * @since 2021-09-02 22:16:36
  */
 public class VersionFilter extends OncePerRequestFilter {
 

@@ -16,11 +16,11 @@
 package com.taotao.cloud.core.enums;
 
 /**
- * EtTimeEnum
+ * EtTimeEnum 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:29
+ * @version 2021.9
+ * @since 2021-09-02 21:12:15
  */
 public enum EtTimeEnum {
 	S01(1, 1, "延迟1秒"),

@@ -19,17 +19,17 @@ package com.taotao.cloud.common.enums;
  * 通用枚举接口
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/29 13:55
+ * @version 2021.9
+ * @since 2021-09-02 19:30:28
  */
 public interface BaseEnum {
 
 	/**
 	 * 获取枚举编码
 	 *
-	 * @return java.lang.Integer
+	 * @return {@link java.lang.Integer }
 	 * @author shuigedeng
-	 * @since 2021/2/25 15:42
+	 * @since 2021-09-02 19:30:35
 	 */
 	Integer getCode();
 
@@ -37,9 +37,9 @@ public interface BaseEnum {
 	 * 通过code获取枚举名称
 	 *
 	 * @param code code
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2020/10/15 14:38
+	 * @since 2021-09-02 19:30:48
 	 */
 	String getNameByCode(int code);
 }

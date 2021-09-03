@@ -16,11 +16,11 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 目录类型
+ * 目录类型 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 15:37
+ * @version 2021.9
+ * @since 2021-09-02 20:24:39
  */
 public enum ResourceTypeEnum implements BaseEnum {
 	/**

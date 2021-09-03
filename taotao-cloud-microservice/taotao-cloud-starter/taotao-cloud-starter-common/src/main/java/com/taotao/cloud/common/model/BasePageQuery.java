@@ -26,20 +26,26 @@ import javax.validation.constraints.NotNull;
  * 基础分页查询
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-02 19:09:09
  */
 @Schema(name = "BasePageQuery", description = "基础分页查询对象")
 public class BasePageQuery implements Serializable {
 
 	private static final long serialVersionUID = -2483306509077581330L;
 
+	/**
+	 * 当前第几页
+	 */
 	@Schema(description = "当前第几页，默认1", example = "1", required = true)
 	@NotNull(message = "当前页显示数量不能为空")
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
 	private Integer currentPage = 1;
 
+	/**
+	 * 每页显示条数
+	 */
 	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")
 	@Min(value = 5)

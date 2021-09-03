@@ -27,11 +27,11 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * Dozer属性
+ * DozerProperties
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:22
+ * @version 2021.9
+ * @since 2021-09-02 22:14:08
  */
 @RefreshScope
 @ConfigurationProperties(prefix = DozerProperties.PREFIX)
@@ -68,12 +68,27 @@ public class DozerProperties {
 		return this;
 	}
 
+	/**
+	 * resolveMapperLocations
+	 *
+	 * @return org.springframework.core.io.Resource[]
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:14:32
+	 */
 	public Resource[] resolveMapperLocations() {
 		return Stream.of(Optional.ofNullable(this.mappingFiles).orElse(new String[0]))
-			.flatMap(location -> Stream.of(getResources(location)))
-			.toArray(Resource[]::new);
+				.flatMap(location -> Stream.of(getResources(location)))
+				.toArray(Resource[]::new);
 	}
 
+	/**
+	 * getResources
+	 *
+	 * @param location location
+	 * @return org.springframework.core.io.Resource[]
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:14:22
+	 */
 	private Resource[] getResources(String location) {
 		try {
 			return PATTERN_RESOLVER.getResources(location);

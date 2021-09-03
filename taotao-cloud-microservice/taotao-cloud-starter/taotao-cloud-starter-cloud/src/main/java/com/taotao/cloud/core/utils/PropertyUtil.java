@@ -27,13 +27,23 @@ import java.util.Map;
  * PropertyUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:38
- **/
+ * @version 2021.9
+ * @since 2021-09-02 20:51:35
+ */
 public class PropertyUtil {
 
+	/**
+	 * NULL
+	 */
 	public static String NULL = "<?NULL?>";
 
+	/**
+	 * eachProperty
+	 *
+	 * @param call call
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:51:44
+	 */
 	public static void eachProperty(Callable.Action3<String, String, Object> call) {
 		for (String key : System.getProperties().stringPropertyNames()) {
 			call.invoke("properties", key, System.getProperty(key));
@@ -44,6 +54,16 @@ public class PropertyUtil {
 		}
 	}
 
+	/**
+	 * getProperty
+	 *
+	 * @param key          key
+	 * @param defaultvalue defaultvalue
+	 * @param <T>          T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:51:48
+	 */
 	public static <T> T getProperty(String key, T defaultvalue) {
 		String value = System.getProperty(key);
 		if (value == null) {
@@ -58,6 +78,14 @@ public class PropertyUtil {
 		return (T) BeanUtil.convert(value, defaultvalue.getClass());
 	}
 
+	/**
+	 * getProperty
+	 *
+	 * @param key key
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:51:57
+	 */
 	public static String getProperty(String key) {
 		String value = System.getProperty(key);
 		if (value == null) {
@@ -69,6 +97,16 @@ public class PropertyUtil {
 		return value;
 	}
 
+	/**
+	 * getEnvProperty
+	 *
+	 * @param key          key
+	 * @param defaultvalue defaultvalue
+	 * @param <T>          T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:52:00
+	 */
 	public static <T> T getEnvProperty(String key, T defaultvalue) {
 		String value = System.getenv(key);
 		if (value == null) {
@@ -78,6 +116,16 @@ public class PropertyUtil {
 		}
 	}
 
+	/**
+	 * getSystemProperty
+	 *
+	 * @param key          key
+	 * @param defaultvalue defaultvalue
+	 * @param <T>          T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:52:08
+	 */
 	public static <T> T getSystemProperty(String key, T defaultvalue) {
 		String value = System.getProperty(key);
 		if (value == null) {
@@ -87,20 +135,41 @@ public class PropertyUtil {
 		}
 	}
 
+	/**
+	 * setDefaultInitProperty
+	 *
+	 * @param cls           cls
+	 * @param module        module
+	 * @param key           key
+	 * @param propertyValue propertyValue
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:52:16
+	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
-		String propertyValue) {
+			String propertyValue) {
 		setDefaultInitProperty(cls, module, key, propertyValue, "");
 	}
 
+	/**
+	 * setDefaultInitProperty
+	 *
+	 * @param cls           cls
+	 * @param module        module
+	 * @param key           key
+	 * @param propertyValue propertyValue
+	 * @param message       message
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:52:19
+	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
-		String propertyValue, String message) {
+			String propertyValue, String message) {
 		if (StringUtil.isEmpty(PropertyUtil.getPropertyCache(key, ""))) {
 			if (!StringUtil.isEmpty(propertyValue)) {
 				System.setProperty(key, propertyValue);
 				PropertyCache.DEFAULT.tryUpdateCache(key, propertyValue);
 
 				LogUtil.info(" set default init property key: {}, value: {}, message: {}",
-					key, propertyValue, message);
+						key, propertyValue, message);
 			}
 		} else {
 			if (StringUtil.isEmpty(getSystemProperty(key, ""))) {
@@ -109,6 +178,16 @@ public class PropertyUtil {
 		}
 	}
 
+	/**
+	 * getPropertyCache
+	 *
+	 * @param key          key
+	 * @param defaultvalue defaultvalue
+	 * @param <T>          T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:52:22
+	 */
 	public static <T> T getPropertyCache(String key, T defaultvalue) {
 		return PropertyCache.DEFAULT.get(key, defaultvalue);
 	}

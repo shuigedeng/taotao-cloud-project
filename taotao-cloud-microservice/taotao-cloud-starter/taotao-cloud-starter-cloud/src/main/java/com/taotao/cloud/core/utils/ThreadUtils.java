@@ -23,9 +23,9 @@ import java.util.Collection;
  * 提供线程池操作类 默认使用自定义的全局线程池
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/2 16:49
- **/
+ * @version 2021.9
+ * @since 2021-09-02 20:57:25
+ */
 public class ThreadUtils {
 
 	/**
@@ -36,10 +36,10 @@ public class ThreadUtils {
 	 * @param taskList      任务列表
 	 * @param action        action
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:55
+	 * @since 2021-09-02 20:57:35
 	 */
 	public static <T> void parallelFor(String taskName, int parallelCount, Collection<T> taskList,
-		final Callable.Action1<T> action) {
+			final Callable.Action1<T> action) {
 		if (parallelCount < 2) {
 			for (T t : taskList) {
 				action.invoke(t);

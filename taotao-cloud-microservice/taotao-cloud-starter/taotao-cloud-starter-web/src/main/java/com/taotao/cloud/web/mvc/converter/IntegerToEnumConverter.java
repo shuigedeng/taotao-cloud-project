@@ -22,11 +22,11 @@ import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 
 /**
- * Integer枚举转化器
+ * Integer枚举转化器 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/29 14:06
+ * @version 2021.9
+ * @since 2021-09-03 08:03:40
  */
 public class IntegerToEnumConverter<T extends BaseEnum> implements Converter<Integer, T> {
 

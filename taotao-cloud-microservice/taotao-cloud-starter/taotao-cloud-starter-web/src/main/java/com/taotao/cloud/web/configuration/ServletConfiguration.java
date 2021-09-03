@@ -24,11 +24,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
- * ServletConfiguration
+ * ServletConfiguration 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/08 15:26
+ * @version 2021.9
+ * @since 2021-09-02 22:13:50
  */
 @Configuration
 public class ServletConfiguration implements WebApplicationInitializer, InitializingBean {

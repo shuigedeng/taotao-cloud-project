@@ -19,11 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * LimitProperties
+ * LimitProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:23
+ * @version 2021.9
+ * @since 2021-09-03 08:04:34
  */
 @RefreshScope
 @ConfigurationProperties(prefix = LimitProperties.PREFIX)

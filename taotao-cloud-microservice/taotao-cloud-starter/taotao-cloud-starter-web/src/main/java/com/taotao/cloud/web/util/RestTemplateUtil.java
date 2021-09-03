@@ -27,11 +27,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * RestTemplate Http请求封装
+ * RestTemplateUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:57
+ * @version 2021.9
+ * @since 2021-09-02 22:26:13
  */
 public class RestTemplateUtil {
 
@@ -39,9 +39,9 @@ public class RestTemplateUtil {
 	 * get请求（超时设置）
 	 *
 	 * @param url url
-	 * @return java.util.Map
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:57
+	 * @since 2021-09-02 22:26:22
 	 */
 	public static Map httpGetRequestFactoryToMap(String url) {
 		//超时处理设置
@@ -57,9 +57,9 @@ public class RestTemplateUtil {
 	 * get请求（无超时设置）
 	 *
 	 * @param url url
-	 * @return java.util.Map
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:57
+	 * @since 2021-09-02 22:26:32
 	 */
 	public static Map restTemplateGetToMap(String url) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -70,9 +70,9 @@ public class RestTemplateUtil {
 	 * get请求 并接收封装成string
 	 *
 	 * @param url url
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:58
+	 * @since 2021-09-02 22:26:42
 	 */
 	public static String restTemplateGetToStr(String url) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -83,9 +83,9 @@ public class RestTemplateUtil {
 	 * get请求 并添加消息头
 	 *
 	 * @param url url
-	 * @return org.springframework.http.ResponseEntity<java.lang.String>
+	 * @return {@link org.springframework.http.ResponseEntity }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:58
+	 * @since 2021-09-02 22:26:50
 	 */
 	public static ResponseEntity<String> httpGetHeaders(String url) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -101,20 +101,20 @@ public class RestTemplateUtil {
 	 * @param url  url
 	 * @param map  map
 	 * @param type type
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:58
+	 * @since 2021-09-02 22:26:59
 	 */
 	public static String getCommonPolicyJson(String url,
-		MultiValueMap<String, String> map,
-		MediaType type) {
+			MultiValueMap<String, String> map,
+			MediaType type) {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 
 		//设置header
 		headers.setContentType(type);
 		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(
-			map, headers);
+				map, headers);
 
 		//执行请求
 		ResponseEntity<String> resp = restTemplate.postForEntity(url, request, String.class);

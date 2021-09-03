@@ -35,32 +35,54 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 分页参数
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 21:17:47
  */
 @Schema(name = "PageParams", description = "分页参数")
 public class PageParams<T> {
 
+	/**
+	 * 查询参数
+	 */
 	@NotNull(message = "查询对象model不能为空")
 	@Schema(description = "查询参数", example = "10", required = true)
 	private T model;
 
+	/**
+	 * 每页显示条数
+	 */
 	@Schema(description = "每页显示条数，默认10", example = "10", required = true)
 	@NotNull(message = "每页数据显示数量不能为空")
 	@Min(value = 5)
 	@Max(value = 100)
 	private long size = 10;
 
+	/**
+	 * 当前第几页
+	 */
 	@Schema(description = "当前第几页，默认1", example = "1", required = true)
 	@NotNull(message = "当前页显示数量不能为空")
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
 	private long current = 1;
 
+	/**
+	 * 排序
+	 */
 	@Schema(description = "排序,默认createTime", allowableValues = "id,createTime,updateTime", example = "id")
 	private String sort = SuperEntity.FIELD_ID;
 
+	/**
+	 * 排序规则
+	 */
 	@Schema(description = "排序规则, 默认descending", allowableValues = "descending,ascending", example = "descending")
 	private String order = "descending";
 
+	/**
+	 * 扩展参数
+	 */
 	@Schema(description = "扩展参数")
 	private Map<String, Object> extra = new HashMap<>(16);
 
@@ -69,7 +91,9 @@ public class PageParams<T> {
 	 * eg.2, 参数：{order:"name", order:"descending,ascending" }。 排序： name desc eg.3,
 	 * 参数：{order:"name,id", order:"descending" }。 排序： name desc
 	 *
-	 * @return 分页对象
+	 * @return {@link com.baomidou.mybatisplus.core.metadata.IPage }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:19:05
 	 */
 	@JsonIgnore
 	public <E> IPage<E> buildPage() {
@@ -97,8 +121,9 @@ public class PageParams<T> {
 			}
 
 			orders.add(
-				StrUtil.equalsAny(orderArr[i], "ascending", "ascend") ? OrderItem.asc(underlineSort)
-					: OrderItem.desc(underlineSort));
+					StrUtil.equalsAny(orderArr[i], "ascending", "ascend") ? OrderItem.asc(
+							underlineSort)
+							: OrderItem.desc(underlineSort));
 		}
 
 		page.setOrders(orders);
@@ -108,6 +133,10 @@ public class PageParams<T> {
 
 	/**
 	 * 计算当前分页偏移量
+	 *
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:19:16
 	 */
 	@JsonIgnore
 	public long offset() {
@@ -118,6 +147,15 @@ public class PageParams<T> {
 		return (current - 1) * this.size;
 	}
 
+	/**
+	 * put
+	 *
+	 * @param key   key
+	 * @param value value
+	 * @return {@link com.taotao.cloud.web.base.request.PageParams }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:19:25
+	 */
 	@JsonIgnore
 	public PageParams<T> put(String key, Object value) {
 		if (this.extra == null) {
@@ -127,6 +165,14 @@ public class PageParams<T> {
 		return this;
 	}
 
+	/**
+	 * putAll
+	 *
+	 * @param extra extra
+	 * @return {@link com.taotao.cloud.web.base.request.PageParams }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:19:30
+	 */
 	@JsonIgnore
 	public PageParams<T> putAll(Map<String, Object> extra) {
 		if (this.extra == null) {
@@ -140,7 +186,7 @@ public class PageParams<T> {
 	}
 
 	public PageParams(T model, long size, long current, String sort, String order,
-		Map<String, Object> extra) {
+			Map<String, Object> extra) {
 		this.model = model;
 		this.size = size;
 		this.current = current;

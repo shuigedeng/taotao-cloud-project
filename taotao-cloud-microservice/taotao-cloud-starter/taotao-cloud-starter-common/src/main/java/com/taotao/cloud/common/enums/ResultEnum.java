@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 package com.taotao.cloud.common.enums;
-
 /**
- * 返回结果枚举 code规则 500 + 自增三位数
+ * 返回结果枚举 code规则 500 + 自增三位数 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 15:36
+ * @version 2021.9
+ * @since 2021-09-02 20:25:00
  */
 public enum ResultEnum implements BaseEnum {
 	/**

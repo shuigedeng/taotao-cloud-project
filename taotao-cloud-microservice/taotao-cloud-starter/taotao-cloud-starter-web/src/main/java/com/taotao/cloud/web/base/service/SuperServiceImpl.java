@@ -28,20 +28,21 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * 2，removeById：重写 ServiceImpl 类的方法，删除db 3，removeByIds：重写 ServiceImpl 类的方法，删除db 4，updateAllById：
  * 新增的方法： 修改数据（所有字段） 5，updateById：重写 ServiceImpl 类的方法，修改db后
- *</p>
+ * </p>
+ *
  * @param <M> Mapper
  * @param <T> 实体
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:20
+ * @version 2021.9
+ * @since 2021-09-02 21:22:34
  */
 public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M, T> implements
-	SuperService<T> {
+		SuperService<T> {
 
 	private Class<T> entityClass = null;
 
 	public SuperMapper getSuperMapper() {
-		if (baseMapper instanceof SuperMapper) {
+		if (baseMapper != null) {
 			return baseMapper;
 		}
 		throw new BusinessException("未查询到mapper");
@@ -51,7 +52,7 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M
 	public Class<T> getEntityClass() {
 		if (entityClass == null) {
 			this.entityClass = (Class) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1];
+					.getGenericSuperclass()).getActualTypeArguments()[1];
 		}
 		return this.entityClass;
 	}
@@ -66,7 +67,9 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M
 	 * 处理新增相关处理
 	 *
 	 * @param model 实体
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:22:52
 	 */
 	protected Result<T> handlerSave(T model) {
 		return Result.success(model);
@@ -76,7 +79,9 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M
 	 * 处理修改相关处理
 	 *
 	 * @param model 实体
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:23:00
 	 */
 	protected Result<T> handlerUpdateAllById(T model) {
 		return Result.success(model);
@@ -86,7 +91,9 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M
 	 * 处理修改相关处理
 	 *
 	 * @param model 实体
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:23:06
 	 */
 	protected Result<T> handlerUpdateById(T model) {
 		return Result.success(model);

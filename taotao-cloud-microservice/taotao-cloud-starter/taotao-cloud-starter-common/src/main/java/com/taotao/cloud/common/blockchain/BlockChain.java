@@ -25,21 +25,32 @@ import org.apache.commons.collections4.CollectionUtils;
 /**
  * BlockChain
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 20:55
+ * @version 2021.9
+ * @since 2021-09-02 19:40:25
  */
 public class BlockChain {
 
 	private BlockChain() {
 	}
 
+	/**
+	 * BLOCK_CHAIN
+	 */
 	private static final List<Block> BLOCK_CHAIN = new ArrayList<>();
 
+	/**
+	 * DIFFICULTY
+	 */
 	private static final int DIFFICULTY = 5;
 
 	/**
 	 * 开采块链
+	 *
+	 * @param data data
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:40:42
 	 */
 	public static String minedBlockChain(String data) {
 		String hash;
@@ -53,6 +64,11 @@ public class BlockChain {
 
 	/**
 	 * 解析块链
+	 *
+	 * @param blockHash blockHash
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:40:46
 	 */
 	public static String decryptBlockchain(String blockHash) {
 		if ("ALL".equalsIgnoreCase(blockHash)) {
@@ -72,6 +88,10 @@ public class BlockChain {
 
 	/**
 	 * 检查区块链的完整性
+	 *
+	 * @return {@link java.lang.Boolean }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:40:54
 	 */
 	public static Boolean isChainValid() {
 		Block currentBlock;

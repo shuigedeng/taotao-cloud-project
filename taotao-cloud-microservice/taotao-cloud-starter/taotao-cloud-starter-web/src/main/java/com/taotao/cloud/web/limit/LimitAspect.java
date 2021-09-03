@@ -24,7 +24,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -32,13 +31,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * LimitAspect
- *
- * @author shuigedeng
- * @version 1.0.0
- * @RestController public class LimiterController
- * { private static final AtomicInteger
- * ATOMIC_INTEGER_1 = new AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_2 = new
- * AtomicInteger(); private static final AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
+ * <p>
+ * {@code { private static final AtomicInteger ATOMIC_INTEGER_1 = new AtomicInteger(); private
+ * static final AtomicInteger ATOMIC_INTEGER_2 = new AtomicInteger(); private static final
+ * AtomicInteger ATOMIC_INTEGER_3 = new AtomicInteger();
  * <p>
  * Limit(key = "limitTest", period = 10, count = 3) GetMapping("/limitTest1") public int
  * testLimiter1() { return ATOMIC_INTEGER_1.incrementAndGet(); }
@@ -47,14 +43,23 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * }
  * <p>
  * GetMapping("/limitTest3") public int testLimiter3() { return ATOMIC_INTEGER_3.incrementAndGet();
- * }
- * @since 2021/08/04 08:49
+ * } }
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 22:05:48
  */
 @Aspect
 public class LimitAspect {
 
+	/**
+	 * UNKNOWN
+	 */
 	private static final String UNKNOWN = "unknown";
 
+	/**
+	 * redisRepository
+	 */
 	private final RedisRepository redisRepository;
 
 	public LimitAspect(RedisRepository redisRepository) {
@@ -85,12 +90,13 @@ public class LimitAspect {
 		}
 
 		ImmutableList<String> keys = ImmutableList.of(
-			StringUtils.join(limitAnnotation.prefix(), key));
+				StringUtils.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
-			Number count = redisRepository.getRedisTemplate().execute(redisScript, keys, limitCount, limitPeriod);
+			Number count = redisRepository.getRedisTemplate()
+					.execute(redisScript, keys, limitCount, limitPeriod);
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {
@@ -107,9 +113,9 @@ public class LimitAspect {
 	/**
 	 * redis Lua 限流脚本
 	 *
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:37
+	 * @since 2021-09-02 22:06:58
 	 */
 	public String buildLuaScript() {
 		StringBuilder lua = new StringBuilder();
@@ -132,9 +138,9 @@ public class LimitAspect {
 	/**
 	 * 获取ip地址
 	 *
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:37
+	 * @since 2021-09-02 22:07:08
 	 */
 	public String getIpAddress() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

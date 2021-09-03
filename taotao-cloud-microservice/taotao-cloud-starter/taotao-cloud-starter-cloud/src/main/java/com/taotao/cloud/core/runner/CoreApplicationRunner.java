@@ -27,7 +27,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 
 /**
- * 容器生命周期监听程序
+ * CoreApplicationRunner
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:45:34
  */
 @Order
 public class CoreApplicationRunner implements ApplicationRunner {
@@ -37,6 +41,13 @@ public class CoreApplicationRunner implements ApplicationRunner {
 		saveStatus("STARTED");
 	}
 
+	/**
+	 * saveStatus
+	 *
+	 * @param status status
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:45:44
+	 */
 	private void saveStatus(String status) {
 		HashMap<String, Object> map = new HashMap<>(2);
 		map.put("data", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));

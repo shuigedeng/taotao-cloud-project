@@ -18,11 +18,11 @@ package com.taotao.cloud.common.exception;
 import com.taotao.cloud.common.enums.ResultEnum;
 
 /**
- * 业务异常
+ * BusinessException 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:21
+ * @version 2021.9
+ * @since 2021-09-02 20:09:13
  */
 public class BusinessException extends BaseException {
 

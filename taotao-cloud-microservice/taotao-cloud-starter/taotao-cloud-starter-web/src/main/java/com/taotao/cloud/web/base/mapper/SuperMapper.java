@@ -24,8 +24,8 @@ import org.apache.ibatis.annotations.Param;
  * 基于MP的 BaseMapper 新增了2个方法： insertBatchSomeColumn、updateAllById
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:21
+ * @version 2021.9
+ * @since 2021-09-02 21:17:15
  */
 public interface SuperMapper<T> extends BaseMapper<T> {
 
@@ -34,6 +34,8 @@ public interface SuperMapper<T> extends BaseMapper<T> {
 	 *
 	 * @param entity 实体
 	 * @return 修改数量
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:17:23
 	 */
 	int updateAllById(@Param(Constants.ENTITY) T entity);
 
@@ -44,6 +46,8 @@ public interface SuperMapper<T> extends BaseMapper<T> {
 	 *
 	 * @param entityList 实体集合
 	 * @return 插入数量
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:17:23
 	 */
 	int insertBatchSomeColumn(List<T> entityList);
 

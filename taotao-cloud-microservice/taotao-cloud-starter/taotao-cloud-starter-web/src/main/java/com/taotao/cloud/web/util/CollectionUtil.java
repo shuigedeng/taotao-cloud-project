@@ -25,8 +25,8 @@ import org.springframework.lang.Nullable;
  * CollectionUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:45
+ * @version 2021.9
+ * @since 2021-09-02 22:23:00
  */
 public class CollectionUtil {
 
@@ -34,8 +34,9 @@ public class CollectionUtil {
 	 * 将以“,”分隔的字符串转成为Collection
 	 *
 	 * @param str 字符串
+	 * @return {@link java.util.Collection }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:46
+	 * @since 2021-09-02 22:23:13
 	 */
 	public static Collection<? extends Serializable> stringToCollection(String str) {
 		if (StringUtils.isBlank(str)) {
@@ -54,13 +55,14 @@ public class CollectionUtil {
 	 * 将字组转换成Collection
 	 *
 	 * @param longArray Long数组
-	 * @return java.util.Collection<? extends java.io.Serializable>
+	 * @return {@link java.util.Collection }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:47
+	 * @since 2021-09-02 22:23:21
 	 */
 	public static Collection<? extends Serializable> arrayToCollection(Long[] longArray) {
 		return Arrays.asList(longArray);
 	}
+
 
 	/**
 	 * 字符串转换为long
@@ -69,7 +71,7 @@ public class CollectionUtil {
 	 * @param defaultValue defaultValue
 	 * @return long
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:03
+	 * @since 2021-09-02 22:23:30
 	 */
 	public static long strToLong(@Nullable final String str, final long defaultValue) {
 		if (str == null) {
@@ -89,7 +91,7 @@ public class CollectionUtil {
 	 * @param defaultValue defaultValue
 	 * @return long
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:03
+	 * @since 2021-09-02 22:23:41
 	 */
 	public static long objectToLong(@Nullable final Object str, final long defaultValue) {
 		if (str == null) {

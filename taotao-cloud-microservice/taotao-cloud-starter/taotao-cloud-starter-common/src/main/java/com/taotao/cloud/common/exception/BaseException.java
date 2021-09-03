@@ -22,8 +22,8 @@ import java.io.Serializable;
  * 基础异常
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/13 10:56
+ * @version 2021.9
+ * @since 2021-09-02 19:29:47
  */
 public class BaseException extends RuntimeException implements Serializable {
 

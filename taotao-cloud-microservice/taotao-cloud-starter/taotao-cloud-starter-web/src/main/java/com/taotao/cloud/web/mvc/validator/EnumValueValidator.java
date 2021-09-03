@@ -21,11 +21,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * EnumValueValidator
+ * EnumValueValidator 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/14 13:40
+ * @version 2021.9
+ * @since 2021-09-03 08:04:16
  */
 public class EnumValueValidator implements ConstraintValidator<EnumValue, Integer> {
 

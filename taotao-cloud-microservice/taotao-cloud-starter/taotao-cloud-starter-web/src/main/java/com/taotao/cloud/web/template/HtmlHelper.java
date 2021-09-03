@@ -25,8 +25,8 @@ import java.util.List;
  * 要么在类似NetMvcHandlerInterceptor拦截器方式注入重载
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:09
+ * @version 2021.9
+ * @since 2021-09-02 22:16:52
  */
 public class HtmlHelper extends SimpleTemplateProvider {
 
@@ -35,9 +35,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param str    str
 	 * @param maxlen maxlen
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:09
+	 * @since 2021-09-02 22:17:02
 	 */
 	public String substring3(String str, int maxlen) {
 		return this.cutString(str, maxlen);
@@ -50,7 +50,7 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param pageSize    pageSize
 	 * @return int
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:10
+	 * @since 2021-09-02 22:17:07
 	 */
 	public int totalPageNum(int totalRecord, int pageSize) {
 		return (totalRecord + pageSize - 1) / pageSize + 1;
@@ -60,23 +60,23 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * help
 	 *
 	 * @param str str
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:10
+	 * @since 2021-09-02 22:17:11
 	 */
 	public String help(String str) {
 		return String.format(
-			"<img class='texthelp' width=\"20\" height=\"20\" title=\"%s\" style=\"\" src=\"/content/images/help.png\">",
-			str);
+				"<img class='texthelp' width=\"20\" height=\"20\" title=\"%s\" style=\"\" src=\"/content/images/help.png\">",
+				str);
 	}
 
 	/**
 	 * isnull
 	 *
 	 * @param o o
-	 * @return java.lang.Boolean
+	 * @return {@link java.lang.Boolean }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:10
+	 * @since 2021-09-02 22:17:16
 	 */
 	public Boolean isnull(Object o) {
 		return o == null;
@@ -86,9 +86,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * empty
 	 *
 	 * @param o o
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:10
+	 * @since 2021-09-02 22:17:21
 	 */
 	public Object empty(Object o) {
 		if (o == null || o.equals("null")) {
@@ -103,9 +103,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o            o
 	 * @param defaultValue defaultValue
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:11
+	 * @since 2021-09-02 22:17:25
 	 */
 	public Object defaultValue(Object o, Object defaultValue) {
 		if (o == null) {
@@ -123,12 +123,12 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * @param data2     data2
 	 * @param trueObj   trueObj
 	 * @param falseObj  falseObj
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:11
+	 * @since 2021-09-02 22:17:31
 	 */
 	public Object w2(String condition, Object data1, Object data2, Object trueObj,
-		Object falseObj) {
+			Object falseObj) {
 		if (condition.equals("==")) {
 			if (data1 == data2) {
 				return trueObj;
@@ -160,15 +160,15 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param enumClass enumClass
 	 * @param value     value
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:11
+	 * @since 2021-09-02 22:17:35
 	 */
 	public String enumDesc(String enumClass, Object value) {
 		try {
 			for (Object item : Class.forName(enumClass).getEnumConstants()) {
 				if (item == value || item.getClass().getField("Value").get(item).toString()
-					.equals(value.toString())) {
+						.equals(value.toString())) {
 					return item.getClass().getField("Desc").get(item).toString();
 				}
 			}
@@ -182,9 +182,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * enums
 	 *
 	 * @param enumClass enumClass
-	 * @return java.util.List<java.lang.Object>
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:11
+	 * @since 2021-09-02 22:17:39
 	 */
 	public List<Object> enums(String enumClass) {
 		try {
@@ -203,9 +203,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o         o
 	 * @param filedName filedName
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:11
+	 * @since 2021-09-02 22:17:43
 	 */
 	public Object filed(Object o, String filedName) {
 		try {
@@ -222,9 +222,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 *
 	 * @param o         o
 	 * @param filedName filedName
-	 * @return java.lang.Object
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:12
+	 * @since 2021-09-02 22:17:47
 	 */
 	public Object filed2(Object o, String filedName) {
 		try {
@@ -249,9 +249,9 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 * toJson
 	 *
 	 * @param o o
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:12
+	 * @since 2021-09-02 22:17:55
 	 */
 	public String toJson(Object o) {
 		return JsonUtil.toJSONString(o);

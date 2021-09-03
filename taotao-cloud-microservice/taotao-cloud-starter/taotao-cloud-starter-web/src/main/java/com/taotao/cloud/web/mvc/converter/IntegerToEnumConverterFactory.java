@@ -25,20 +25,23 @@ import org.springframework.core.convert.converter.ConverterFactory;
  * Integer枚举转化器工厂类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/29 14:08
+ * @version 2021.9
+ * @since 2021-09-02 22:10:28
  */
 public class IntegerToEnumConverterFactory implements ConverterFactory<Integer, BaseEnum> {
 
+	/**
+	 * CONVERTERS
+	 */
 	private static final Map<Class, Converter> CONVERTERS = new ConcurrentHashMap<>();
 
 	/**
 	 * 获取一个从 Integer 转化为 T 的转换器，T 是一个泛型，有多个实现
 	 *
-	 * @param targetType 转换后的类型
-	 * @return org.springframework.core.convert.converter.Converter<java.lang.Integer, T> 返回一个转化器
+	 * @param targetType targetType  转换后的类型
+	 * @return {@link org.springframework.core.convert.converter.Converter } 返回一个转化器
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:26
+	 * @since 2021-09-02 22:10:37
 	 */
 	@Override
 	public <T extends BaseEnum> Converter<Integer, T> getConverter(Class<T> targetType) {

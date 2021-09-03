@@ -18,11 +18,11 @@ package com.taotao.cloud.web.strategy;
 import java.lang.annotation.Annotation;
 
 /**
- * 策略模型业务类型注解实现类
+ * 策略模型业务类型注解实现类 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:21
+ * @version 2021.9
+ * @since 2021-09-03 08:04:54
  */
 public class HandlerTypeImpl implements HandlerType {
 

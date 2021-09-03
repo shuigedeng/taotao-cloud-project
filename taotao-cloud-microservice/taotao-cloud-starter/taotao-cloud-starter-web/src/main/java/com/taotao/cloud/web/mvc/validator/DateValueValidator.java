@@ -22,11 +22,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 日期校验格式，通过format的参数来校验格式
+ * 日期校验格式，通过format的参数来校验格式 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:28
+ * @version 2021.9
+ * @since 2021-09-03 08:04:15
  */
 public class DateValueValidator implements ConstraintValidator<DateValue, String> {
 

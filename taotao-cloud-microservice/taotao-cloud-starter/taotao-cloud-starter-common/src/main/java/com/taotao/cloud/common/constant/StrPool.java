@@ -19,8 +19,8 @@ package com.taotao.cloud.common.constant;
  * StrPool
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:23
+ * @version 2021.9
+ * @since 2021-09-02 19:39:05
  */
 public class StrPool {
 

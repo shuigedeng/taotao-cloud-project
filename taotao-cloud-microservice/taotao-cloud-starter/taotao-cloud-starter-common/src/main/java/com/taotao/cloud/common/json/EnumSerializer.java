@@ -25,13 +25,22 @@ import java.io.IOException;
  * 继承了BaseEnum接口的枚举值，将会统一按照以下格式序列化 { "code": "XX", "desc": "xxx" }
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:45
+ * @version 2021.9
+ * @since 2021-09-02 19:20:18
  */
 public class EnumSerializer extends StdSerializer<BaseEnum> {
 
+	/**
+	 * INSTANCE
+	 */
 	public static final EnumSerializer INSTANCE = new EnumSerializer();
+	/**
+	 * ALL_ENUM_KEY_FIELD
+	 */
 	public static final String ALL_ENUM_KEY_FIELD = "code";
+	/**
+	 * ALL_ENUM_DESC_FIELD
+	 */
 	public static final String ALL_ENUM_DESC_FIELD = "desc";
 
 	public EnumSerializer() {

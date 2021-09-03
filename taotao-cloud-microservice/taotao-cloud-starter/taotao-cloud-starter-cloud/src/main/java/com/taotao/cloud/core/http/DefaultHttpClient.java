@@ -1,8 +1,23 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.taotao.cloud.core.model.Callable;
 import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.core.model.Callable;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import java.io.IOException;
 import java.net.URI;
@@ -37,40 +52,72 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Created by yanglikai on 2019/5/23. by chejiangyi
+ * DefaultHttpClient
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:09:34
  */
 public class DefaultHttpClient implements HttpClient {
 
-	static {
-		initDefault();
-	}
-
-	public static void initDefault() {
-		DEFAULT = DefaultHttpClient.create("taotao.cloud.core.default.httpclient", HttpClientProperties.toMap());
-	}
-
+	/**
+	 * DEFAULT
+	 */
 	public static DefaultHttpClient DEFAULT;
+	/**
+	 * initParams
+	 */
 	private InitMap initParams;
-
-	public InitMap getInitParams() {
-		return initParams;
-	}
-
-	public void setInitParams(InitMap initParams) {
-		this.initParams = initParams;
-	}
-
+	/**
+	 * manager
+	 */
 	private PoolingHttpClientConnectionManager manager;
+	/**
+	 * client
+	 */
 	private CloseableHttpClient client;
 
-	public static DefaultHttpClient create(String httpClientId, InitMap initParams) {
-		return HttpClientManager.DEFAULT.register(httpClientId, new DefaultHttpClient(initParams));
+	static {
+		initDefault();
 	}
 
 	private DefaultHttpClient(InitMap initParams) {
 		this.initParams = this.initDefaultParams(initParams);
 	}
 
+	/**
+	 * initDefault
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:10:22
+	 */
+	public static void initDefault() {
+		DEFAULT = DefaultHttpClient.create("taotao.cloud.core.http.httpclient",
+			HttpClientProperties.toMap());
+	}
+
+	/**
+	 * create
+	 *
+	 * @param httpClientId httpClientId
+	 * @param initParams   initParams
+	 * @return {@link DefaultHttpClient }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:08
+	 */
+	public static DefaultHttpClient create(String httpClientId, InitMap initParams) {
+		return HttpClientManager.DEFAULT.register(httpClientId, new DefaultHttpClient(initParams));
+	}
+
+
+	/**
+	 * initDefaultParams
+	 *
+	 * @param initParams initParams
+	 * @return {@link InitMap }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:35
+	 */
 	private InitMap initDefaultParams(InitMap initParams) {
 		if (initParams == null) {
 			initParams = new InitMap();
@@ -81,6 +128,12 @@ public class DefaultHttpClient implements HttpClient {
 		return initParams;
 	}
 
+	/**
+	 * open
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:38
+	 */
 	public void open() {
 		Registry registry =
 			RegistryBuilder
@@ -89,9 +142,9 @@ public class DefaultHttpClient implements HttpClient {
 				.register("https", SSLConnectionSocketFactory.getSystemSocketFactory())
 				.build();
 
-//    HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connectionFactory =
-//            new ManagedHttpClientConnectionFactory(DefaultHttpRequestWriterFactory.INSTANCE, DefaultHttpResponseParserFactory.INSTANCE);
-//    DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
+		//HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connectionFactory =
+		//        new ManagedHttpClientConnectionFactory(DefaultHttpRequestWriterFactory.INSTANCE, DefaultHttpResponseParserFactory.INSTANCE);
+		//DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
 
 		manager = new PoolingHttpClientConnectionManager(registry);
 
@@ -160,18 +213,42 @@ public class DefaultHttpClient implements HttpClient {
 			.build();
 	}
 
+	/**
+	 * checkUri
+	 *
+	 * @param uri uri
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:52
+	 */
 	private void checkUri(String uri) {
 		if (uri == null) {
 			throw new HttpException("Uri cannot be null");
 		}
 	}
 
+	/**
+	 * checkParmas
+	 *
+	 * @param params params
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:55
+	 */
 	private void checkParmas(Params params) {
 		if (params == null) {
 			throw new HttpException("Params cannot be null");
 		}
 	}
 
+	/**
+	 * get
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @param action action
+	 * @return {@link CloseableHttpResponse }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:11:58
+	 */
 	public CloseableHttpResponse get(String uri, Params params,
 		Callable.Func1<CloseableHttpResponse, CloseableHttpResponse> action) {
 		checkUri(uri);
@@ -212,6 +289,16 @@ public class DefaultHttpClient implements HttpClient {
 		return JsonUtil.toObject(rsp, ref);
 	}
 
+	/**
+	 * post
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @param action action
+	 * @return {@link CloseableHttpResponse }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:04
+	 */
 	public CloseableHttpResponse post(String uri, Params params,
 		Callable.Func1<CloseableHttpResponse, CloseableHttpResponse> action) {
 		checkUri(uri);
@@ -241,6 +328,16 @@ public class DefaultHttpClient implements HttpClient {
 		return JsonUtil.toObject(rsp, ref);
 	}
 
+	/**
+	 * patch
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @param action action
+	 * @return {@link CloseableHttpResponse }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:10
+	 */
 	public CloseableHttpResponse patch(String uri, Params params,
 		Callable.Func1<CloseableHttpResponse, CloseableHttpResponse> action) {
 		checkUri(uri);
@@ -270,6 +367,16 @@ public class DefaultHttpClient implements HttpClient {
 		return JsonUtil.toObject(rsp, ref);
 	}
 
+	/**
+	 * put
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @param action action
+	 * @return {@link CloseableHttpResponse }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:16
+	 */
 	public CloseableHttpResponse put(String uri, Params params,
 		Callable.Func1<CloseableHttpResponse, CloseableHttpResponse> action) {
 		checkUri(uri);
@@ -299,6 +406,16 @@ public class DefaultHttpClient implements HttpClient {
 		return JsonUtil.toObject(rsp, ref);
 	}
 
+	/**
+	 * delete
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @param action action
+	 * @return {@link CloseableHttpResponse }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:20
+	 */
 	public CloseableHttpResponse delete(String uri, Params params,
 		Callable.Func1<CloseableHttpResponse, CloseableHttpResponse> action) {
 		checkUri(uri);
@@ -339,6 +456,15 @@ public class DefaultHttpClient implements HttpClient {
 		return JsonUtil.toObject(rsp, ref);
 	}
 
+	/**
+	 * getGet
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @return {@link HttpGet }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:25
+	 */
 	private HttpGet getGet(String uri, Params params) {
 		HttpGet httpGet = new HttpGet(uri);
 		Iterator headers = params.getHeaders().iterator();
@@ -369,6 +495,15 @@ public class DefaultHttpClient implements HttpClient {
 		return httpGet;
 	}
 
+	/**
+	 * getPost
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @return {@link HttpPost }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:28
+	 */
 	private HttpPost getPost(String uri, Params params) {
 		HttpPost httpPost = new HttpPost(uri);
 		Iterator headers = params.getHeaders().iterator();
@@ -389,6 +524,15 @@ public class DefaultHttpClient implements HttpClient {
 		return httpPost;
 	}
 
+	/**
+	 * getPut
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @return {@link HttpPut }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:32
+	 */
 	private HttpPut getPut(String uri, Params params) {
 		HttpPut httpPut = new HttpPut(uri);
 		Iterator headers = params.getHeaders().iterator();
@@ -409,6 +553,15 @@ public class DefaultHttpClient implements HttpClient {
 		return httpPut;
 	}
 
+	/**
+	 * getPatch
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @return {@link HttpPatch }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:38
+	 */
 	private HttpPatch getPatch(String uri, Params params) {
 		HttpPatch httpPatch = new HttpPatch(uri);
 		Iterator headers = params.getHeaders().iterator();
@@ -429,6 +582,16 @@ public class DefaultHttpClient implements HttpClient {
 		return httpPatch;
 	}
 
+
+	/**
+	 * getDelete
+	 *
+	 * @param uri    uri
+	 * @param params params
+	 * @return {@link HttpDelete }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:41
+	 */
 	private HttpDelete getDelete(String uri, Params params) {
 		HttpDelete httpDelete = new HttpDelete(uri);
 		Iterator headers = params.getHeaders().iterator();
@@ -459,6 +622,14 @@ public class DefaultHttpClient implements HttpClient {
 		return httpDelete;
 	}
 
+	/**
+	 * toString
+	 *
+	 * @param response response
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:44
+	 */
 	public String toString(CloseableHttpResponse response) {
 		try {
 			return EntityUtils.toString(response.getEntity());
@@ -472,6 +643,13 @@ public class DefaultHttpClient implements HttpClient {
 		}
 	}
 
+	/**
+	 * endStream
+	 *
+	 * @param response response
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:46
+	 */
 	public void endStream(CloseableHttpResponse response) {
 		try {
 			if (response.getEntity() != null) {
@@ -487,7 +665,13 @@ public class DefaultHttpClient implements HttpClient {
 		}
 	}
 
-
+	/**
+	 * isClose
+	 *
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:12:49
+	 */
 	public boolean isClose() {
 		return this.manager == null && this.client == null;
 	}
@@ -539,5 +723,14 @@ public class DefaultHttpClient implements HttpClient {
 
 	public void setClient(CloseableHttpClient client) {
 		this.client = client;
+	}
+
+
+	public InitMap getInitParams() {
+		return initParams;
+	}
+
+	public void setInitParams(InitMap initParams) {
+		this.initParams = initParams;
 	}
 }

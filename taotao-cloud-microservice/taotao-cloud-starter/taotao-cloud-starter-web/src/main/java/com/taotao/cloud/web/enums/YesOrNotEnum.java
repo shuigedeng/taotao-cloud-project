@@ -20,8 +20,8 @@ package com.taotao.cloud.web.enums;
  * 是或否的枚举，一般用在数据库字段，例如del_flag字段，char(1)，填写Y或N
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/07/30 17:59
+ * @version 2021.9
+ * @since 2021-09-02 22:14:57
  */
 public enum YesOrNotEnum {
 

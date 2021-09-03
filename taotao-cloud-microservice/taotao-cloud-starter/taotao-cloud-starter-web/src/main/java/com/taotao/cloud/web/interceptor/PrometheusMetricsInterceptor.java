@@ -26,11 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
- * PrometheusInterceptor
+ * PrometheusMetricsInterceptor
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/06/25 16:50
+ * @version 2021.9
+ * @since 2021-09-02 22:02:41
  */
 public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 

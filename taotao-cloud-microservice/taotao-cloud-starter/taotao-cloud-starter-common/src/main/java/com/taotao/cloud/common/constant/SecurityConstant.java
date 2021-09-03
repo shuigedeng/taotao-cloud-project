@@ -16,11 +16,11 @@
 package com.taotao.cloud.common.constant;
 
 /**
- * Security 公共常量
+ * Security 公共常量 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 20:23
+ * @version 2021.9
+ * @since 2021-09-02 20:42:27
  */
 public class SecurityConstant {
 

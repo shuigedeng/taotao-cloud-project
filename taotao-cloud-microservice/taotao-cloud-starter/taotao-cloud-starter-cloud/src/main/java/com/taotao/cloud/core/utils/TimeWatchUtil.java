@@ -17,9 +17,7 @@ package com.taotao.cloud.core.utils;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.initializer.CoreApplicationContextInitializer;
 import com.taotao.cloud.core.model.Callable;
 
 
@@ -27,8 +25,8 @@ import com.taotao.cloud.core.model.Callable;
  * TimeWatchUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:46
+ * @version 2021.9
+ * @since 2021-09-02 20:57:49
  */
 public class TimeWatchUtil {
 
@@ -39,7 +37,7 @@ public class TimeWatchUtil {
 	 * @param msg     消息
 	 * @param action0 action0
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:53
+	 * @since 2021-09-02 20:57:58
 	 */
 	public static void print(boolean isPrint, String msg, Callable.Action0 action0) {
 		print(isPrint, msg, () -> {
@@ -54,9 +52,10 @@ public class TimeWatchUtil {
 	 * @param isPrint 是否打印
 	 * @param msg     消息
 	 * @param action0 action0
-	 * @return T 消息对象
+	 * @param <T>     T
+	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/6/22 17:54
+	 * @since 2021-09-02 20:58:09
 	 */
 	public static <T> T print(boolean isPrint, String msg, Callable.Func0<T> action0) {
 		if (isPrint) {
@@ -64,7 +63,7 @@ public class TimeWatchUtil {
 			T t = action0.invoke();
 			long e = System.currentTimeMillis();
 			LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "--" + msg + " 耗时: {}, ",
-				(e - b) + "毫秒");
+					(e - b) + "毫秒");
 			return t;
 		} else {
 			return action0.invoke();

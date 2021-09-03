@@ -25,18 +25,24 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 基础时间查询
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-02 19:07:59
  */
 @Schema(name = "BaseDateTimeQuery", description = "基础时间查询对象")
 public class BaseDateTimeQuery implements Serializable {
 
 	private static final long serialVersionUID = -2483306509077581330L;
 
+	/**
+	 * 开始时间
+	 */
 	@Schema(description = "开始时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime startTime;
 
+	/**
+	 * 结束时间
+	 */
 	@Schema(description = "结束时间 时间格式:yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime endTime;
@@ -91,6 +97,13 @@ public class BaseDateTimeQuery implements Serializable {
 			'}';
 	}
 
+	/**
+	 * builder
+	 *
+	 * @return {@link BaseDateTimeQueryBuilder }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:08:24
+	 */
 	public static BaseDateTimeQueryBuilder builder() {
 		return new BaseDateTimeQueryBuilder();
 	}

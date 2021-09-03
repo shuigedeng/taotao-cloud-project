@@ -51,18 +51,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 导入导出
+ * PoiController
  *
+ * @param <PageQuery> PageQuery
+ * @param <Entity>    Entity
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:23
+ * @version 2021.9
+ * @since 2021-09-02 21:07:59
  */
 public interface PoiController<Entity, PageQuery> extends PageController<Entity, PageQuery> {
 
 	/**
 	 * 获取实体的类型
 	 *
-	 * @return 实体的类型
+	 * @return {@link java.lang.Class }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:15
 	 */
 	default Class<?> getExcelClass() {
 		return getEntityClass();
@@ -75,14 +79,16 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * @param params   参数
 	 * @param request  请求
 	 * @param response 响应
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:22
 	 */
 	@Operation(summary = "导出Excel", description = "导出Excel", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestMapping(value = "/export", method = RequestMethod.POST, produces = "application/octet-stream")
 	@RequestOperateLog(
-		"'导出Excel:'.concat(#params.extra[" + NormalExcelConstants.FILE_NAME + "]?:'')")
+			"'导出Excel:'.concat(#params.extra[" + NormalExcelConstants.FILE_NAME + "]?:'')")
 	@PreAuthorize("hasAnyPermission('{}export')")
 	default void exportExcel(@RequestBody @Validated PageParams<PageQuery> params,
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) {
 		ExportParams exportParams = getExportParams(params);
 
 		List<?> list = findExportList(params);
@@ -101,15 +107,13 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * 查询待导出的数据， 子类可以重写
 	 *
 	 * @param params params
-	 * @return java.util.List<?>
-	 * @author tangyh
-	 * @date 2021/5/23 10:25 下午
-	 * @create [2021/5/23 10:25 下午 ] [tangyh] [初始创建]
-	 * @update [2021/5/23 10:25 下午 ] [tangyh] [变更描述]
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:33
 	 */
 	default List<?> findExportList(PageParams<PageQuery> params) {
 		params.setSize(
-			params.getSize() == -1 ? Convert.toLong(Integer.MAX_VALUE) : params.getSize());
+				params.getSize() == -1 ? Convert.toLong(Integer.MAX_VALUE) : params.getSize());
 		IPage<Entity> page = query(params);
 		return BeanUtil.copyToList(page.getRecords(), getExcelClass());
 	}
@@ -118,7 +122,9 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * 预览Excel
 	 *
 	 * @param params 预览参数
-	 * @return 预览html
+	 * @return {@link com.taotao.cloud.common.model.Result } 预览html
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:45
 	 */
 	@Operation(summary = "预览Excel", description = "预览Excel", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestMapping(value = "/preview", method = RequestMethod.POST)
@@ -137,24 +143,26 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * @param simpleFile 上传文件
 	 * @param request    请求
 	 * @param response   响应
-	 * @return 是否导入成功
+	 * @return {@link com.taotao.cloud.common.model.Result } 是否导入成功
 	 * @throws Exception 异常
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:09
 	 */
 	@Operation(summary = "导入Excel", description = "导入Excel", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PostMapping(value = "/import")
 	@RequestOperateLog(value = "'导入Excel:' + #simpleFile?.originalFilename", request = false)
 	@PreAuthorize("hasAnyPermission('{}import')")
 	default Result<Boolean> importExcel(@RequestParam(value = "file") MultipartFile simpleFile,
-		HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		ImportParams params = new ImportParams();
 
 		params.setTitleRows(StrUtil.isEmpty(request.getParameter("titleRows")) ? 0
-			: Convert.toInt(request.getParameter("titleRows")));
+				: Convert.toInt(request.getParameter("titleRows")));
 		params.setHeadRows(StrUtil.isEmpty(request.getParameter("headRows")) ? 1
-			: Convert.toInt(request.getParameter("headRows")));
+				: Convert.toInt(request.getParameter("headRows")));
 		List<Map<String, String>> list = ExcelImportUtil.importExcel(simpleFile.getInputStream(),
-			Map.class, params);
+				Map.class, params);
 
 		if (list != null && !list.isEmpty()) {
 			return handlerImport(list);
@@ -166,7 +174,9 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * 转换后保存
 	 *
 	 * @param list 集合
-	 * @return 是否成功
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:35
 	 */
 	default Result<Boolean> handlerImport(List<Map<String, String>> list) {
 		return Result.success(true);
@@ -176,7 +186,9 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * 构建导出参数 子类可以重写
 	 *
 	 * @param params 分页参数
-	 * @return 导出参数
+	 * @return {@link cn.afterturn.easypoi.excel.entity.ExportParams }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:45
 	 */
 	default ExportParams getExportParams(PageParams<PageQuery> params) {
 		Object title = params.getExtra().get("title");
@@ -185,7 +197,7 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 
 		ExcelType excelType = ExcelType.XSSF.name().equals(type) ? ExcelType.XSSF : ExcelType.HSSF;
 		ExportParams ep = new ExportParams(title == null ? null : String.valueOf(title),
-			sheetName.toString(), excelType);
+				sheetName.toString(), excelType);
 		enhanceExportParams(ep);
 		return ep;
 	}
@@ -194,9 +206,8 @@ public interface PoiController<Entity, PageQuery> extends PageController<Entity,
 	 * 子类增强ExportParams
 	 *
 	 * @param ep ep
-	 * @author tangyh
-	 * @date 2021/5/23 10:27 下午
-	 * @create [2021/5/23 10:27 下午 ] [tangyh] [初始创建]
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:51
 	 */
 	default void enhanceExportParams(ExportParams ep) {
 	}

@@ -28,8 +28,8 @@ import org.springframework.core.io.support.PropertySourceFactory;
  * 加载yml格式的自定义配置文件
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-02 19:29:15
  */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
@@ -45,6 +45,14 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
 		return new PropertiesPropertySource(sourceName, propertiesFromYaml);
 	}
 
+	/**
+	 * loadYamlIntoProperties
+	 *
+	 * @param resource resource
+	 * @return {@link java.util.Properties }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:29:21
+	 */
 	private Properties loadYamlIntoProperties(EncodedResource resource)
 		throws FileNotFoundException {
 		try {

@@ -25,11 +25,14 @@ import org.springframework.core.convert.converter.ConverterFactory;
  * string枚举转化器工厂类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/29 14:22
+ * @version 2021.9
+ * @since 2021-09-02 22:12:49
  */
 public class StringToEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
 
+	/**
+	 * CONVERTERS
+	 */
 	private static final Map<Class, Converter> CONVERTERS = MapUtil.newHashMap();
 
 	@Override

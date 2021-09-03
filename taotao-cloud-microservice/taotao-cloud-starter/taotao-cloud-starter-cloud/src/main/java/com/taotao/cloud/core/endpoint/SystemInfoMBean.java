@@ -21,8 +21,8 @@ package com.taotao.cloud.core.endpoint;
  * 名字必须要用 MBean 结尾
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2021/04/08 14:50
+ * @version 2021.9
+ * @since 2021-09-02 20:08:43
  */
 public interface SystemInfoMBean {
 

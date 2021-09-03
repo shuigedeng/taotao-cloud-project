@@ -25,13 +25,16 @@ import java.lang.annotation.Target;
  * EncryptField
  *
  * @author shuigedeng
- * @version v1.0
- * @since 2021/08/04 08:24
+ * @version 2021.9
+ * @since 2021-09-02 22:04:46
  */
 @Documented
 @Target({ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EncryptField {
 
+	/**
+	 * 值
+	 */
 	String[] value() default "";
 }

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
@@ -36,20 +35,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * 查询Controller
+ * QueryController
  *
+ * @param <Entity>    Entity
+ * @param <PageQuery> PageQuery
+ * @param <Id>        Id
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:23
+ * @version 2021.9
+ * @since 2021-09-02 21:11:18
  */
 public interface QueryController<Entity, Id extends Serializable, PageQuery> extends
-	PageController<Entity, PageQuery> {
+		PageController<Entity, PageQuery> {
 
 	/**
 	 * 查询
 	 *
 	 * @param id 主键id
-	 * @return 查询结果
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:11:48
 	 */
 	@Operation(summary = "单体查询", description = "单体查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@GetMapping("/{id}")
@@ -63,7 +67,9 @@ public interface QueryController<Entity, Id extends Serializable, PageQuery> ext
 	 * 分页查询
 	 *
 	 * @param params 分页参数
-	 * @return 分页数据
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:11:55
 	 */
 	@Operation(summary = "分页列表查询", description = "分页列表查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/page")
@@ -77,7 +83,9 @@ public interface QueryController<Entity, Id extends Serializable, PageQuery> ext
 	 * 批量查询
 	 *
 	 * @param data 批量查询
-	 * @return 查询结果
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:12:04
 	 */
 	@Operation(summary = "批量查询", description = "批量查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/query")

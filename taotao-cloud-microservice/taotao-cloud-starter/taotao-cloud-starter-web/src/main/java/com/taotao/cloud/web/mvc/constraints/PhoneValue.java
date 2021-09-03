@@ -29,11 +29,9 @@ import javax.validation.Payload;
 /**
  * 校验手机号码格式
  *
- * @param null
  * @author shuigedeng
- * @version 1.0.0
- * @return
- * @since 2021/8/24 23:25
+ * @version 2021.9
+ * @since 2021-09-02 22:16:04
  */
 @Documented
 @Constraint(validatedBy = PhoneValueValidator.class)

@@ -26,8 +26,8 @@ import java.lang.annotation.Target;
  * 限流
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:36
+ * @version 2021.9
+ * @since 2021-09-02 22:23:45
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

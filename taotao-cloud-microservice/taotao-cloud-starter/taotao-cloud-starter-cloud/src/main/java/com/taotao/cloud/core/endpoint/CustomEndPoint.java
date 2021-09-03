@@ -24,8 +24,8 @@ import org.springframework.boot.actuate.health.Health;
  * CustomEndPoint
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/02 10:24
+ * @version 2021.9
+ * @since 2021-09-02 20:13:40
  */
 @WebEndpoint(id = "myHealth")
 public class CustomEndPoint {

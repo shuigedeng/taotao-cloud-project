@@ -18,11 +18,11 @@ package com.taotao.cloud.core.endpoint;
 import org.springframework.boot.actuate.endpoint.jmx.annotation.JmxEndpoint;
 
 /**
- * SystemInfo
+ * SystemInfo 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/04/08 14:51
+ * @version 2021.9
+ * @since 2021-09-02 21:06:46
  */
 public class SystemInfo implements SystemInfoMBean {
 

@@ -16,11 +16,11 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 日志类型
+ * 日志类型 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:25
+ * @version 2021.9
+ * @since 2021-09-02 20:22:52
  */
 public enum LogTypeEnum implements BaseEnum {
 	/**

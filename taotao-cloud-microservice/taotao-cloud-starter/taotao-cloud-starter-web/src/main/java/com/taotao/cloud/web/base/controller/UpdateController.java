@@ -29,13 +29,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * 修改Controller
+ * UpdateController
  *
  * @param <Entity>    实体
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:24
+ * @version 2021.9
+ * @since 2021-09-02 21:15:51
  */
 public interface UpdateController<Entity, UpdateDTO> extends BaseController<Entity> {
 
@@ -43,14 +43,16 @@ public interface UpdateController<Entity, UpdateDTO> extends BaseController<Enti
 	 * 修改
 	 *
 	 * @param updateDTO 修改DTO
-	 * @return 修改后的实体数据
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:16:08
 	 */
 	@Operation(summary = "修改", description = "修改UpdateDTO中不为空的字段", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping
 	@RequestOperateLog(value = "'修改:' + #updateDTO?.id", request = false)
 	@PreAuthorize("hasAnyPermission('{}edit')")
 	default Result<Entity> update(
-		@RequestBody @Validated(SuperEntity.Update.class) UpdateDTO updateDTO) {
+			@RequestBody @Validated(SuperEntity.Update.class) UpdateDTO updateDTO) {
 		Result<Entity> result = handlerUpdate(updateDTO);
 		if (result.getData() != null) {
 			Entity model = BeanUtil.toBean(updateDTO, getEntityClass());
@@ -63,14 +65,17 @@ public interface UpdateController<Entity, UpdateDTO> extends BaseController<Enti
 	/**
 	 * 修改所有字段
 	 *
-	 * @param entity 实体
+	 * @param entity entity
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:16:16
 	 */
 	@Operation(summary = "修改所有字段", description = "修改所有字段，没有传递的字段会被置空", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/all")
 	@RequestOperateLog(value = "'修改所有字段:' + #entity?.id", request = false)
 	@PreAuthorize("hasAnyPermission('{}edit')")
 	default Result<Entity> updateAll(
-		@RequestBody @Validated(SuperEntity.Update.class) Entity entity) {
+			@RequestBody @Validated(SuperEntity.Update.class) Entity entity) {
 		getBaseService().updateAllById(entity);
 		return Result.success(entity);
 	}
@@ -79,7 +84,9 @@ public interface UpdateController<Entity, UpdateDTO> extends BaseController<Enti
 	 * 自定义更新
 	 *
 	 * @param model 修改DTO
-	 * @return 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:16:25
 	 */
 	default Result<Entity> handlerUpdate(UpdateDTO model) {
 		return Result.success();

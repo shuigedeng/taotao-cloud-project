@@ -28,19 +28,23 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * 删除Controller
+ * DeleteController
  *
+ * @param <Id>     Id
+ * @param <Entity> Entity
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:22
+ * @version 2021.9
+ * @since 2021-09-02 21:05:45
  */
 public interface DeleteController<Entity, Id extends Serializable> extends BaseController<Entity> {
 
 	/**
 	 * 删除方法
 	 *
-	 * @param ids id
-	 * @return 是否成功
+	 * @param ids ids
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:06:18
 	 */
 	@Operation(summary = "删除", description = "删除", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@DeleteMapping
@@ -57,8 +61,10 @@ public interface DeleteController<Entity, Id extends Serializable> extends BaseC
 	/**
 	 * 自定义删除
 	 *
-	 * @param ids id
-	 * @return 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @param ids ids
+	 * @return {@link com.taotao.cloud.common.model.Result } 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:06:27
 	 */
 	default Result<Boolean> handlerDelete(List<Id> ids) {
 		return Result.success(true);

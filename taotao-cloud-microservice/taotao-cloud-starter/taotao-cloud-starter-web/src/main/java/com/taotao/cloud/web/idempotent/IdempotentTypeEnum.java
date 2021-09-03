@@ -19,8 +19,8 @@ package com.taotao.cloud.web.idempotent;
  * 幂等枚举类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:42
+ * @version 2021.9
+ * @since 2021-09-02 22:20:28
  */
 public enum IdempotentTypeEnum {
 	/**

@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2002-2021 the original author or authors.
  *
@@ -22,11 +21,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 校验状态，判断是否为 StatusEnum 中的值
+ * 校验状态，判断是否为 StatusEnum 中的值 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:30
+ * @version 2021.9
+ * @since 2021-09-03 08:04:24
  */
 public class StatusValueValidator implements ConstraintValidator<StatusValue, String> {
 

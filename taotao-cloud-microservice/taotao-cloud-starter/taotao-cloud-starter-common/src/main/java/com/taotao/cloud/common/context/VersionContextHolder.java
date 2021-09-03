@@ -21,24 +21,47 @@ import com.alibaba.ttl.TransmittableThreadLocal;
  * 负载均衡规则Holder
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:25
+ * @version 2021.9
+ * @since 2021-09-02 19:34:15
  */
 public class VersionContextHolder {
 
 	private VersionContextHolder() {
 	}
 
+	/**
+	 * VERSION_CONTEXT
+	 */
 	private static final ThreadLocal<String> VERSION_CONTEXT = new TransmittableThreadLocal<>();
 
+	/**
+	 * setVersion
+	 *
+	 * @param version version
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:34:26
+	 */
 	public static void setVersion(String version) {
 		VERSION_CONTEXT.set(version);
 	}
 
+	/**
+	 * getVersion
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:34:28
+	 */
 	public static String getVersion() {
 		return VERSION_CONTEXT.get();
 	}
 
+	/**
+	 * clear
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:34:32
+	 */
 	public static void clear() {
 		VERSION_CONTEXT.remove();
 	}

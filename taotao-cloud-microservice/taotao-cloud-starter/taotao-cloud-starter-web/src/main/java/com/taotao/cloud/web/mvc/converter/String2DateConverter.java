@@ -46,12 +46,15 @@ import org.springframework.lang.Nullable;
  * String2DateConverter
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:27
+ * @version 2021.9
+ * @since 2021-09-02 22:11:14
  */
 public class String2DateConverter extends BaseDateConverter<Date> implements
-	Converter<String, Date> {
+		Converter<String, Date> {
 
+	/**
+	 * FORMAT
+	 */
 	protected static final Map<String, String> FORMAT = new LinkedHashMap(15);
 
 	static {
@@ -75,9 +78,9 @@ public class String2DateConverter extends BaseDateConverter<Date> implements
 	 *
 	 * @param dateStr String 字符型日期
 	 * @param format  String 格式
-	 * @return java.util.Date
+	 * @return {@link java.util.Date }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:27
+	 * @since 2021-09-02 22:11:29
 	 */
 	protected static Date parseDate(String dateStr, String format) {
 		try {

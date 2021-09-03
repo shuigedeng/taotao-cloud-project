@@ -18,11 +18,11 @@ package com.taotao.cloud.common.exception;
 import com.taotao.cloud.common.enums.ResultEnum;
 
 /**
- * 消息异常
+ * MessageException 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/13 09:53
+ * @version 2021.9
+ * @since 2021-09-02 20:20:35
  */
 public class MessageException extends BaseException {
 

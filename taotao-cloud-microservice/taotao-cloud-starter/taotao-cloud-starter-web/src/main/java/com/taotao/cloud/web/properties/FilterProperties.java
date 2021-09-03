@@ -18,13 +18,12 @@ package com.taotao.cloud.web.properties;
 import java.util.Objects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-
 /**
- * FilterProperties
+ * FilterProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:15
+ * @version 2021.9
+ * @since 2021-09-03 08:04:30
  */
 @RefreshScope
 @ConfigurationProperties(prefix = FilterProperties.PREFIX)

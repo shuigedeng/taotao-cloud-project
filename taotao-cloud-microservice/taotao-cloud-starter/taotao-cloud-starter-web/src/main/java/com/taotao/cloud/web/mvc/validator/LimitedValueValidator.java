@@ -20,11 +20,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * LimitedValueValidator
+ * LimitedValueValidator 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:29
+ * @version 2021.9
+ * @since 2021-09-03 08:04:23
  */
 public class LimitedValueValidator implements ConstraintValidator<LimitedValue, Object> {
 

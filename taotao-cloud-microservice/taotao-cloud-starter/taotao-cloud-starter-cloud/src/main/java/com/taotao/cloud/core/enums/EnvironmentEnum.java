@@ -16,12 +16,12 @@
 package com.taotao.cloud.core.enums;
 
 /**
- * EnvironmentTypeEnum
+ * EnvironmentEnum
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:27
- **/
+ * @version 2021.9
+ * @since 2021-09-02 20:23:43
+ */
 public enum EnvironmentEnum {
 	//开发环境
 	DEV("开发"),

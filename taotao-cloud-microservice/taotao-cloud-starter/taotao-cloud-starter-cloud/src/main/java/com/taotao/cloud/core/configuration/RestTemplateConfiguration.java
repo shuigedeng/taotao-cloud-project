@@ -87,6 +87,4 @@ public class RestTemplateConfiguration implements InitializingBean {
 		//restTemplate.setInterceptors(Collections.singletonList(new GrayHttpRequestInterceptor()));
 		return restTemplate;
 	}
-
-
 }

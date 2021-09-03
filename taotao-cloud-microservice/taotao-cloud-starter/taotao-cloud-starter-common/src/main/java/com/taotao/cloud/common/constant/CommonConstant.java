@@ -21,8 +21,8 @@ import java.time.format.DateTimeFormatter;
  * 全局公共常量
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:23
+ * @version 2021.9
+ * @since 2021-09-02 19:35:37
  */
 public class CommonConstant {
 
@@ -47,7 +47,9 @@ public class CommonConstant {
 	public static final String COLON = ":";
 	public static final String UNDER = "_";
 
-	/******************************** banner 配置 ******************************/
+	/**
+	 * banner 配置
+	 */
 	public static final String VERSION = "version";
 	public static final String TAOTAO_CLOUD_VERSION =
 		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
@@ -86,7 +88,9 @@ public class CommonConstant {
 	public static final String TAOTAO_CLOUD_BANNER = "TAOTAO_CLOUD:";
 	public static final String TAOTAO_CLOUD_BANNER_URL = "https://taotaocloud.top/";
 
-	/******************************** 请求头 配置 ******************************/
+	/**
+	 * 请求头 配置
+	 */
 	public static final String TAOTAO_CLOUD_TENANT_ID = "taotao-cloud-tenant-id";
 	public static final String TAOTAO_CLOUD_TENANT_ID_DEFAULT = "1";
 	public static final String TAOTAO_CLOUD_TENANT_HEADER = "taotao-cloud-tenant-header";
@@ -102,7 +106,9 @@ public class CommonConstant {
 	public static final String TAOTAO_CLOUD_USER_ID_HEADER = "taotao-cloud-user-id-header";
 	public static final String TAOTAO_CLOUD_USER_ROLE_HEADER = "taotao-cloud-user-role-header";
 
-	/******************************** 公共日期格式 配置 ******************************/
+	/**
+	 * 公共日期格式 配置
+	 */
 	public static final String MONTH_FORMAT = "yyyy-MM";
 	public static final String DATE_FORMAT = "yyyy-MM-dd";
 	public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -121,13 +127,17 @@ public class CommonConstant {
 	public static final String DATETIME_FORMATTER_SHORT = "yyyyMMddHHmmss";
 	public static final String TIME_FORMATTER_SHORT = "HHmmss";
 
-	/******************************** 操作日志类型 配置 ******************************/
+	/**
+	 * 操作日志类型 配置
+	 */
 	public static final int OPERATE_TYPE_GET = 1;
 	public static final int OPERATE_TYPE_SAVE = 2;
 	public static final int OPERATE_TYPE_UPDATE = 3;
 	public static final int OPERATE_TYPE_DELETE = 4;
 
-	/******************************** 请求方式 配置 ******************************/
+	/**
+	 * 请求方式 配置
+	 */
 	public static final String GET = "GET";
 	public static final String HEAD = "HEAD";
 	public static final String POST = "POST";
@@ -137,22 +147,29 @@ public class CommonConstant {
 	public static final String OPTIONS = "OPTIONS";
 	public static final String TRACE = "TRACE";
 
-	/******************************** 用户类型 配置 ******************************/
+	/**
+	 * 用户类型 配置
+	 */
 	public static final String MEMBER_USER = "member";
 	public static final String BACKEND_USER = "backend";
 
-	/******************************** 登录类型 配置 ******************************/
+	/**
+	 * 登录类型 配置
+	 */
 	public static final String PHONE_LOGIN = "phone";
 	public static final String QR_LOGIN = "qr";
 	public static final String PASSWORD_LOGIN = "password";
 
-	/******************************** 资源 配置 ******************************/
+	/**
+	 * 资源 配置
+	 */
 	public static final String TAOTAO_CLOUD_SERVICE_RESOURCE = "taotao-cloud-service-resource";
 	public static final Long TAOTAO_CLOUD_RESOURCE_EXPIRE = 18000L;
 	public static final String TAOTAO_CLOUD_API_RESOURCE = "taotao-cloud-api-resource";
 
-
-	/******************************** token信息 配置 ******************************/
+	/**
+	 * token信息 配置
+	 */
 	public static final String TAOTAO_CLOUD_TOKEN_HEADER = "Authorization";
 	public static final String TAOTAO_CLOUD_TOKEN_BEARER_TYPE = "Bearer";
 	public static final String TAOTAO_CLOUD_ACCESS_TOKEN = "access_token";
@@ -166,40 +183,64 @@ public class CommonConstant {
 	public static final String VERIFY_CODE = "verify_code";
 	public static final String QR_CODE = "qr_code";
 
-	/************************* 邮箱 **********************/
+	/**
+	 * 邮箱
+	 */
 	public static final String RESET_MAIL = "MAIL";
 
-	/************************* 权重key **********************/
+	/**
+	 * 权重key
+	 */
 	public static final String WEIGHT_KEY = "weight";
 
-	/************************* 删除 **********************/
+	/**
+	 * 删除
+	 */
 	public static final String STATUS_DEL = "1";
 
-	/************************* 正常 **********************/
+	/**
+	 * 正常
+	 */
 	public static final String STATUS_NORMAL = "0";
 
-	/************************* 锁定 **********************/
+	/**
+	 * 锁定
+	 */
 	public static final String STATUS_LOCK = "9";
 
-	/************************* 目录 **********************/
+	/**
+	 * 目录
+	 */
 	public static final Integer CATALOG = -1;
 
-	/************************* 菜单 **********************/
+	/**
+	 * 菜单
+	 */
 	public static final Integer MENU = 1;
 
-	/************************* 权限 **********************/
+	/**
+	 * 权限
+	 */
 	public static final Integer PERMISSION = 2;
 
-	/************************* 删除标记 **********************/
+	/**
+	 * 删除标记
+	 */
 	public static final String DEL_FLAG = "is_del";
 
-	/************************* 超级管理员用户名 **********************/
+	/**
+	 * 超级管理员用户名
+	 */
 	public static final String ADMIN_USER_NAME = "admin";
 
-	/************************* 注册中心元数据 版本号 **********************/
+	/**
+	 * 注册中心元数据 版本号
+	 */
 	public static final String METADATA_VERSION = "version";
 
-	/************************* 邮箱 **********************/
+	/**
+	 * 邮箱
+	 */
 	public static final Long RESOURCE_TREE_ROOT_ID = 0L;
 
 	public static final String ZIPKIN_TRACE_ID = "X-B3-TraceId";

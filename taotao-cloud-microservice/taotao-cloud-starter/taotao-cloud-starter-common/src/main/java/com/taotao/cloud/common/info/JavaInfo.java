@@ -21,8 +21,8 @@ import java.io.Serializable;
  * JavaInfo
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:22:37
  */
 public class JavaInfo implements Serializable {
 
@@ -34,7 +34,10 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl.的版本
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:22:49
 	 */
+
 	public final String getVersion() {
 		return JAVA_VERSION;
 	}
@@ -43,6 +46,8 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl.的厂商
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:22:49
 	 */
 	public final String getVendor() {
 		return JAVA_VENDOR;
@@ -52,6 +57,8 @@ public class JavaInfo implements Serializable {
 	 * 取得当前Java impl.的厂商网站的URL
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:22:49
 	 */
 	public final String getVendorURL() {
 		return JAVA_VENDOR_URL;
@@ -59,6 +66,9 @@ public class JavaInfo implements Serializable {
 
 	/**
 	 * 将Java Implementation的信息转换成字符串
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:22:49
 	 */
 	@Override
 	public final String toString() {

@@ -1,7 +1,21 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.model;
 
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Callable.Action0;
 import com.taotao.cloud.core.properties.CoreProperties;
@@ -10,17 +24,31 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * @author: chejiangyi
- * @version: 2019-09-25 19:59 全局进程关闭事件定义
- **/
+ * 全局进程关闭事件定义
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:36:39
+ */
 public class ProcessExitEvent {
 
+	/**
+	 * callBackList
+	 */
 	private static ArrayList<ExitCallback> callBackList = new ArrayList<>();
+	/**
+	 * lock
+	 */
 	private static final Object lock = new Object();
 
 	/**
-	 * @param action0
-	 * @param order   越大越晚 必须大于0
+	 * 越大越晚 必须大于0
+	 *
+	 * @param action0 action0
+	 * @param order   order
+	 * @param asynch  asynch
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:37:02
 	 */
 	public static void register(Callable.Action0 action0, int order, Boolean asynch) {
 		synchronized (lock) {
@@ -41,7 +69,7 @@ public class ProcessExitEvent {
 								a.action0.invoke();
 							} catch (Exception e2) {
 								LogUtil.error(e2,
-									"进程关闭事件回调处理出错");
+										"进程关闭事件回调处理出错");
 							}
 						};
 
@@ -53,18 +81,28 @@ public class ProcessExitEvent {
 					}
 				}
 				LogUtil.info(
-					PropertyUtil.getProperty(CoreProperties.SpringApplicationName) + " 应用已正常退出！");
+						PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+								+ " 应用已正常退出！");
 			} catch (Exception e) {
 				LogUtil.error(
-					PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
-						+ " 进程关闭事件回调处理出错",
-					e);
+						PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+								+ " 进程关闭事件回调处理出错", e);
 			}
 		}));
 	}
 
+	/**
+	 * ExitCallback
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:37:07
+	 */
 	private static class ExitCallback {
 
+		/**
+		 * action0
+		 */
 		Callable.Action0 action0;
 		/**
 		 * 顺序

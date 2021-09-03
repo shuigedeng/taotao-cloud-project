@@ -63,15 +63,15 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * 全局统一返回值 包装器
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:46
+ * @version 2021.9
+ * @since 2021-09-02 21:26:19
  */
 @Configuration
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
-	RestController.class, Controller.class})
+		RestController.class, Controller.class})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
 //@RestControllerAdvice
 public class ExceptionConfiguration implements InitializingBean {
@@ -113,7 +113,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({IllegalArgumentException.class})
 	public Result<String> illegalArgumentException(NativeWebRequest req,
-		IllegalArgumentException e) {
+			IllegalArgumentException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
 	}
@@ -132,21 +132,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public Result<String> badUsernameNotFoundException(NativeWebRequest req,
-		UsernameNotFoundException e) {
+			UsernameNotFoundException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req,
-		HttpRequestMethodNotSupportedException e) {
+			HttpRequestMethodNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
 	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req,
-		HttpMediaTypeNotSupportedException e) {
+			HttpMediaTypeNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
 	}
@@ -159,7 +159,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
-		DataIntegrityViolationException e) {
+			DataIntegrityViolationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -175,11 +175,11 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * @RequestBody上validate失败后抛出的异常是MethodArgumentNotValidException异常
+	 * RequestBody上validate失败后抛出的异常是MethodArgumentNotValidException异常
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result<Map<String, String>> handleMethodArgumentNotValidException(NativeWebRequest req,
-		MethodArgumentNotValidException e) {
+			MethodArgumentNotValidException e) {
 		printLog(req, e);
 		BindingResult bindingResult = e.getBindingResult();
 		return Result.fail(getErrors(bindingResult));
@@ -187,21 +187,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
 	public Result<String> requestTypeMismatch(NativeWebRequest req,
-		MethodArgumentTypeMismatchException e) {
+			MethodArgumentTypeMismatchException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
 	}
 
 	@ExceptionHandler({MissingServletRequestParameterException.class})
 	public Result<String> requestMissingServletRequest(NativeWebRequest req,
-		MissingServletRequestParameterException e) {
+			MissingServletRequestParameterException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
 	}
 
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	public Result<String> httpMessageNotReadableException(NativeWebRequest req,
-		HttpMessageNotReadableException e) {
+			HttpMessageNotReadableException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
 	}
@@ -213,11 +213,11 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * @RequestParam上validate失败后抛出的异常是javax.validation.ConstraintViolationException
+	 * RequestParam上validate失败后抛出的异常是javax.validation.ConstraintViolationException
 	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	public Result<Map<String, String>> handleException(NativeWebRequest req,
-		ConstraintViolationException e) {
+			ConstraintViolationException e) {
 		printLog(req, e);
 		return Result.fail(getErrors(e));
 	}
@@ -232,9 +232,9 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * 获取请求路径
 	 *
 	 * @param request request
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:53
+	 * @since 2021-09-02 21:27:08
 	 */
 	private String uri(NativeWebRequest request) {
 		HttpServletRequest nativeRequest = request.getNativeRequest(HttpServletRequest.class);
@@ -249,9 +249,9 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * 获取请求参数
 	 *
 	 * @param request request
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:53
+	 * @since 2021-09-02 21:27:14
 	 */
 	private String query(NativeWebRequest request) {
 		HttpServletRequest nativeRequest = request.getNativeRequest(HttpServletRequest.class);
@@ -268,9 +268,9 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * getErrors
 	 *
 	 * @param result result
-	 * @return java.util.Map<java.lang.String, java.lang.String>
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:53
+	 * @since 2021-09-02 21:27:21
 	 */
 	private String getErrors(BindingResult result) {
 		Map<String, String> map = new HashMap<>();
@@ -284,10 +284,10 @@ public class ExceptionConfiguration implements InitializingBean {
 	/**
 	 * getErrors
 	 *
-	 * @param e exception
-	 * @return java.util.Map<java.lang.String, java.lang.String>
+	 * @param e e
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/2/25 16:54
+	 * @since 2021-09-02 21:27:27
 	 */
 	private String getErrors(ConstraintViolationException e) {
 		Map<String, String> map = new HashMap<>();
@@ -300,9 +300,17 @@ public class ExceptionConfiguration implements InitializingBean {
 		return map.toString();
 	}
 
+	/**
+	 * printLog
+	 *
+	 * @param req req
+	 * @param e   e
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:27:34
+	 */
 	private void printLog(NativeWebRequest req, Exception e) {
 		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
-			e.getClass().getName(), uri(req), query(req), e.getMessage());
+				e.getClass().getName(), uri(req), query(req), e.getMessage());
 //		LogUtil.error(e.getMessage(), e);
 	}
 }

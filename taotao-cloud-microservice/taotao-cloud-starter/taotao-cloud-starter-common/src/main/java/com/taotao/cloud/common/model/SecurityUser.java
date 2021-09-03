@@ -29,30 +29,75 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 用户手机号和账号密码 身份权限认证类 登陆身份认证
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 17:52
+ * @version 2021.9
+ * @since 2021-09-02 19:17:12
  */
 public class SecurityUser implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;
-
+	/**
+	 * ROLE_PREFIX
+	 */
 	private static final String ROLE_PREFIX = "ROLE_";
-
+	/**
+	 * userId
+	 */
 	private Long userId;
+	/**
+	 * username
+	 */
 	private String username;
+	/**
+	 * password
+	 */
 	private String password;
+	/**
+	 * deptId
+	 */
 	private String deptId;
+	/**
+	 * jobId
+	 */
 	private String jobId;
+	/**
+	 * email
+	 */
 	private String email;
+	/**
+	 * phone
+	 */
 	private String phone;
+	/**
+	 * avatar
+	 */
 	private String avatar;
+	/**
+	 * lockFlag
+	 */
 	private String lockFlag;
+	/**
+	 * delFlag
+	 */
 	private String delFlag;
+	/**
+	 * nickname
+	 */
 	private String nickname;
+	/**
+	 * sex
+	 */
 	private Integer sex;
+	/**
+	 * type
+	 */
 	private Integer type;
-
+	/**
+	 * permissions
+	 */
 	private Set<String> permissions;
+	/**
+	 * roles
+	 */
 	private Set<String> roles;
 
 	public SecurityUser() {
@@ -60,11 +105,15 @@ public class SecurityUser implements UserDetails, Serializable {
 	}
 
 	/**
+	 * SecurityUser
+	 *
 	 * @param userId      用户Id
 	 * @param username    用户名称
 	 * @param password    密码
 	 * @param permissions 权限
 	 * @param roles       权限
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:18:58
 	 */
 	public SecurityUser(Long userId,
 		String username,

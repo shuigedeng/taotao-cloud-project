@@ -20,11 +20,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 限定值校验器
+ * 限定值校验器 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:29
+ * @version 2021.9
+ * @since 2021-09-03 08:04:21
  */
 public class JoinLengthValidator implements ConstraintValidator<JoinLength, String> {
 

@@ -22,8 +22,8 @@ import org.apache.commons.lang3.StringUtils;
  * OsInfo
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/27 20:46
+ * @version 2021.9
+ * @since 2021-09-02 19:24:14
  */
 public class OsInfo implements Serializable {
 
@@ -59,13 +59,20 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 取得当前OS的架构
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
+
 	public final String getArch() {
 		return OS_ARCH;
 	}
 
 	/**
 	 * 取得当前OS的名称
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final String getName() {
 		return OS_NAME;
@@ -73,6 +80,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 取得当前OS的版本
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final String getVersion() {
 		return OS_VERSION;
@@ -80,6 +90,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isAix() {
 		return IS_OS_AIX;
@@ -87,6 +100,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isHpUx() {
 		return IS_OS_HP_UX;
@@ -94,6 +110,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isIrix() {
 		return IS_OS_IRIX;
@@ -101,6 +120,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isLinux() {
 		return IS_OS_LINUX;
@@ -108,6 +130,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isMac() {
 		return IS_OS_MAC;
@@ -115,6 +140,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isMacOsX() {
 		return IS_OS_MAC_OSX;
@@ -122,6 +150,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isOs2() {
 		return IS_OS_OS2;
@@ -129,6 +160,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isSolaris() {
 		return IS_OS_SOLARIS;
@@ -136,6 +170,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isSunOS() {
 		return IS_OS_SUN_OS;
@@ -143,6 +180,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows() {
 		return IS_OS_WINDOWS;
@@ -150,6 +190,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows2000() {
 		return IS_OS_WINDOWS_2000;
@@ -157,6 +200,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows95() {
 		return IS_OS_WINDOWS_95;
@@ -171,6 +217,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindowsME() {
 		return IS_OS_WINDOWS_ME;
@@ -178,6 +227,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindowsNT() {
 		return IS_OS_WINDOWS_NT;
@@ -185,6 +237,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindowsXP() {
 		return IS_OS_WINDOWS_XP;
@@ -192,6 +247,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows7() {
 		return IS_OS_WINDOWS_7;
@@ -199,6 +257,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindoows8() {
 		return IS_OS_WINDOWS_8;
@@ -206,6 +267,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows8_1() {
 		return IS_OS_WINDOWS_8_1;
@@ -213,6 +277,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 判断当前OS的类型
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:24:22
 	 */
 	public final boolean isWindows10() {
 		return IS_OS_WINDOWS_10;
@@ -220,6 +287,11 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 匹配OS名称
+	 *
+	 * @param osNamePrefix osNamePrefix
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:25:38
 	 */
 	private boolean getOSMatches(String osNamePrefix) {
 		if (StringUtils.isBlank(OS_NAME)) {
@@ -231,6 +303,12 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 匹配OS名称
+	 *
+	 * @param osNamePrefix    osNamePrefix
+	 * @param osVersionPrefix osVersionPrefix
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:25:43
 	 */
 	private boolean getOSMatches(String osNamePrefix, String osVersionPrefix) {
 		if (StringUtils.isAnyBlank(OS_NAME, (OS_VERSION))) {
@@ -242,6 +320,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 取得OS的文件路径的分隔符
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:25:43
 	 */
 	public final String getFileSeparator() {
 		return FILE_SEPARATOR;
@@ -249,13 +330,16 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 取得OS的文本文件换行符
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:25:43
 	 */
 	public final String getLineSeparator() {
 		return LINE_SEPARATOR;
 	}
 
 	/**
-	 * 取得OS的搜索路径分隔符
+	 * 取得OS的搜索路径分隔符 * @author shuigedeng * @since 2021-09-02 19:25:43
 	 */
 	public final String getPathSeparator() {
 		return PATH_SEPARATOR;
@@ -263,6 +347,9 @@ public class OsInfo implements Serializable {
 
 	/**
 	 * 将OS的信息转换成字符串
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:25:43
 	 */
 	@Override
 	public final String toString() {

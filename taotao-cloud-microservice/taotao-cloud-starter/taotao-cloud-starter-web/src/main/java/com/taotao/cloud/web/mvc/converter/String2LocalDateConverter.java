@@ -32,12 +32,15 @@ import java.util.Map;
 /**
  * String2LocalDateConverter
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:27
+ * @version 2021.9
+ * @since 2021-09-02 22:11:42
  */
 public class String2LocalDateConverter extends BaseDateConverter<LocalDate> implements Converter<String, LocalDate> {
 
+    /**
+     * FORMAT
+     */
     protected static final Map<String, String> FORMAT = new LinkedHashMap(5);
 
     static {

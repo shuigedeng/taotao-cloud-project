@@ -33,8 +33,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
  * 租户过滤器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/15 11:30
+ * @version 2021.9
+ * @since 2021-09-02 22:15:01
  */
 public class TenantFilter extends OncePerRequestFilter {
 

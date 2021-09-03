@@ -28,13 +28,13 @@ import javax.validation.Payload;
  * StringEnums
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/14 13:39
+ * @version 2021.9
+ * @since 2021-09-03 08:03:33
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
-	ElementType.CONSTRUCTOR, ElementType.PARAMETER})
+		ElementType.CONSTRUCTOR, ElementType.PARAMETER})
 @Constraint(validatedBy = StringEnumsValidator.class)
 public @interface StringEnums {
 

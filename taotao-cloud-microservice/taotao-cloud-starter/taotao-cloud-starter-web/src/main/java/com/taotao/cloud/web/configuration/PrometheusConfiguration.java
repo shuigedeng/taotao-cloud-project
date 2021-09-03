@@ -30,15 +30,15 @@ import org.springframework.context.annotation.Configuration;
  * PrometheusConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:47
+ * @version 2021.9
+ * @since 2021-09-02 21:28:17
  */
 @Configuration
 public class PrometheusConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PrometheusConfiguration.class, StarterName.PROMETHEUS_STARTER );
+		LogUtil.started(PrometheusConfiguration.class, StarterName.PROMETHEUS_STARTER);
 	}
 
 	private PrometheusMeterRegistry prometheusMeterRegistry;
@@ -56,14 +56,14 @@ public class PrometheusConfiguration implements InitializingBean {
 		LogUtil.started(Counter.class, StarterName.WEB_STARTER);
 
 		return Counter.build()
-			.name("order_requests_total")
-			.help("请求总数")
-			.labelNames("service", "method", "code")
-			.register(prometheusMeterRegistry.getPrometheusRegistry());
+				.name("order_requests_total")
+				.help("请求总数")
+				.labelNames("service", "method", "code")
+				.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
 	/**
-	 * 36		 * 使用Gauge可以反映应用的当前状态,例如在监控主机时，主机当前空闲的内容大小(node_memory_MemFree)， 37		 *
+	 * 使用Gauge可以反映应用的当前状态,例如在监控主机时，主机当前空闲的内容大小(node_memory_MemFree)， 37		 *
 	 * 可用内存大小(node_memory_MemAvailable)。或者容器当前的CPU使用率,内存使用率。这里我们使用 Gauge记录当前应用正在处理的Http请求数量。 38
 	 */
 	@Bean
@@ -71,10 +71,10 @@ public class PrometheusConfiguration implements InitializingBean {
 		LogUtil.started(Gauge.class, StarterName.WEB_STARTER);
 
 		return Gauge.build()
-			.name("io_namespace_http_inprogress_requests")
-			.labelNames("path", "method")
-			.help("Inprogress requests.")
-			.register(prometheusMeterRegistry.getPrometheusRegistry());
+				.name("io_namespace_http_inprogress_requests")
+				.labelNames("path", "method")
+				.help("Inprogress requests.")
+				.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
 	/**
@@ -85,10 +85,10 @@ public class PrometheusConfiguration implements InitializingBean {
 		LogUtil.started(Histogram.class, StarterName.WEB_STARTER);
 
 		return Histogram.build()
-			.name("io_namespace_http_requests_latency_seconds_histogram")
-			.labelNames("path", "method", "code")
-			.help("Request latency in seconds.")
-			.register(prometheusMeterRegistry.getPrometheusRegistry());
+				.name("io_namespace_http_requests_latency_seconds_histogram")
+				.labelNames("path", "method", "code")
+				.help("Request latency in seconds.")
+				.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
 	public static Histogram.Timer histogramRequestTimer;
@@ -102,12 +102,12 @@ public class PrometheusConfiguration implements InitializingBean {
 		LogUtil.started(Summary.class, StarterName.WEB_STARTER);
 
 		return Summary.build()
-			.name("requestLatency")
-			.quantile(0.5, 0.05)
-			.quantile(0.9, 0.01)
-			.labelNames("path", "method", "code")
-			.help("Request latency in seconds.")
-			.register(prometheusMeterRegistry.getPrometheusRegistry());
+				.name("requestLatency")
+				.quantile(0.5, 0.05)
+				.quantile(0.9, 0.01)
+				.labelNames("path", "method", "code")
+				.help("Request latency in seconds.")
+				.register(prometheusMeterRegistry.getPrometheusRegistry());
 	}
 
 	public static Summary.Timer requestTimer;

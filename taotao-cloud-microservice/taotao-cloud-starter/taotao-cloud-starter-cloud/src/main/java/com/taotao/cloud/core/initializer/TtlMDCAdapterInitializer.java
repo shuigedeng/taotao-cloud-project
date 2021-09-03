@@ -27,8 +27,8 @@ import org.springframework.core.annotation.Order;
  * 初始化TtlMDCAdapter实例，并替换MDC中的adapter对象
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:19
+ * @version 2021.9
+ * @since 2021-09-02 20:24:54
  */
 @Order(1)
 public class TtlMDCAdapterInitializer implements

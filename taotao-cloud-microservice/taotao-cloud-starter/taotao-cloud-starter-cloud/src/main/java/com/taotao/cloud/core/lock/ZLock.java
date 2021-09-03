@@ -19,13 +19,19 @@ package com.taotao.cloud.core.lock;
  * 锁对象抽象
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 09:12
+ * @version 2021.9
+ * @since 2021-09-02 20:28:36
  */
 public class ZLock implements AutoCloseable {
 
+	/**
+	 * lock
+	 */
 	private final Object lock;
 
+	/**
+	 * locker
+	 */
 	private final DistributedLock locker;
 
 	public ZLock(Object lock, DistributedLock locker) {

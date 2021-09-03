@@ -28,41 +28,34 @@ import org.jasypt.encryption.StringEncryptor;
 
 /**
  * EncryptAspect
- *
- * @EncryptMethod
- * @PostMapping(value = "test")
- * @ResponseBody
- * public Object testEncrypt(@RequestBody UserVo user, @EncryptField String name) {
- *
- *     return insertUser(user, name);
- * }
- *
- * private UserVo insertUser(UserVo user, String name) {
- *     System.out.println("加密后的数据：user" + JSON.toJSONString(user));
- *     return user;
- * }
- *
- * @Data
- * public class UserVo implements Serializable {
- *
- *     private Long userId;
- *
- *     @EncryptField
- *     private String mobile;
- *
- *     @EncryptField
- *     private String address;
- *
- *     private String age;
- * }
+ * <p>
+ * {@code
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/08/04 08:26
+ * @version 2021.9
+ * @EncryptMethod
+ * @PostMapping(value = "test")
+ * @ResponseBody public Object testEncrypt(@RequestBody UserVo user, @EncryptField String name) {
+ * <p>
+ * return insertUser(user, name); }
+ * <p>
+ * private UserVo insertUser(UserVo user, String name) { System.out.println("加密后的数据：user" +
+ * JSON.toJSONString(user)); return user; }
+ * @Data public class UserVo implements Serializable {
+ * <p>
+ * private Long userId;
+ * @EncryptField private String mobile;
+ * @EncryptField private String address;
+ * <p>
+ * private String age; } }
+ * @since 2021-09-02 22:01:53
  */
 @Aspect
 public class EncryptAspect {
 
+	/**
+	 * stringEncryptor
+	 */
 	private final StringEncryptor stringEncryptor;
 
 	public EncryptAspect(StringEncryptor stringEncryptor) {
@@ -83,9 +76,9 @@ public class EncryptAspect {
 	/**
 	 * 加密
 	 *
-	 * @param joinPoint  joinPoint
+	 * @param joinPoint joinPoint
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:39
+	 * @since 2021-09-02 22:03:39
 	 */
 	public void encrypt(ProceedingJoinPoint joinPoint) {
 		try {
@@ -108,10 +101,10 @@ public class EncryptAspect {
 	/**
 	 * 解密
 	 *
-	 * @param joinPoint  joinPoint
-	 * @return java.lang.Object
+	 * @param joinPoint joinPoint
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:39
+	 * @since 2021-09-02 22:03:45
 	 */
 	public Object decrypt(ProceedingJoinPoint joinPoint) {
 		Object result = null;
@@ -132,13 +125,13 @@ public class EncryptAspect {
 	}
 
 	/**
-	 *  handler
+	 * handler
 	 *
-	 * @param obj obj
-	 * @param type  type
-	 * @return java.lang.Object
+	 * @param obj  obj
+	 * @param type type
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:39
+	 * @since 2021-09-02 22:03:53
 	 */
 	private Object handler(Object obj, String type) throws IllegalAccessException {
 		if (Objects.isNull(obj)) {
@@ -162,6 +155,14 @@ public class EncryptAspect {
 		return obj;
 	}
 
+	/**
+	 * encryptValue
+	 *
+	 * @param realValue realValue
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:03:57
+	 */
 	public String encryptValue(Object realValue) {
 		String value = null;
 		try {
@@ -172,6 +173,14 @@ public class EncryptAspect {
 		return value;
 	}
 
+	/**
+	 * decryptValue
+	 *
+	 * @param realValue realValue
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:04:05
+	 */
 	public String decryptValue(Object realValue) {
 		String value = String.valueOf(realValue);
 		try {

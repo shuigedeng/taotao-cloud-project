@@ -19,8 +19,8 @@ package com.taotao.cloud.web.jasypt;
  * EncryptConstant
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/08/04 08:25
+ * @version 2021.9
+ * @since 2021-09-02 22:16:04
  */
 public interface EncryptConstant {
 

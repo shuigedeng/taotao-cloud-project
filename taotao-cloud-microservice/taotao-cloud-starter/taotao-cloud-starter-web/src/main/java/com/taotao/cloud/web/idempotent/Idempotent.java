@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2002-2021 the original author or authors.
  *
@@ -26,8 +25,8 @@ import java.lang.annotation.Target;
  * Idempotent
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:41
+ * @version 2021.9
+ * @since 2021-09-02 22:16:44
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

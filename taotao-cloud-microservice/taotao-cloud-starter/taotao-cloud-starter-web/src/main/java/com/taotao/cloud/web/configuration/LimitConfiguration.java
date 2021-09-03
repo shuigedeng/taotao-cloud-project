@@ -20,20 +20,18 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
 import com.taotao.cloud.web.properties.LimitProperties;
-import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * 限流自动注入配置
+ * LimitConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:47
+ * @version 2021.9
+ * @since 2021-09-02 21:28:08
  */
 @Configuration
 public class LimitConfiguration implements InitializingBean {

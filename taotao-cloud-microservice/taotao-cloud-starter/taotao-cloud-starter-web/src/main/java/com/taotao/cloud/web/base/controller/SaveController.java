@@ -28,11 +28,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * 新增
+ * SaveController
  *
+ * @param <Entity>  Entity
+ * @param <SaveDTO> SaveDTO
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:23
+ * @version 2021.9
+ * @since 2021-09-02 21:12:22
  */
 public interface SaveController<Entity, SaveDTO> extends BaseController<Entity> {
 
@@ -40,9 +42,11 @@ public interface SaveController<Entity, SaveDTO> extends BaseController<Entity> 
 	 * 新增
 	 *
 	 * @param saveDTO 保存参数
-	 * @return 实体
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:12:44
 	 */
-	@Operation(summary = "新增", description = "新增", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	@Operation(summary = "新增", description = "新增", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@PutMapping("/all")
 	@RequestOperateLog(value = "新增", request = false)
 	@PreAuthorize("hasAnyPermission('{}add')")
@@ -60,7 +64,9 @@ public interface SaveController<Entity, SaveDTO> extends BaseController<Entity> 
 	 * 自定义新增
 	 *
 	 * @param model 保存对象
-	 * @return 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @return {@link com.taotao.cloud.common.model.Result } 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:12:52
 	 */
 	default Result<Entity> handlerSave(SaveDTO model) {
 		return Result.success();

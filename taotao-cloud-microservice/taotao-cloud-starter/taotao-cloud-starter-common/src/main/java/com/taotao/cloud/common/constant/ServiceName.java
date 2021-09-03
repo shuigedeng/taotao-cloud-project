@@ -16,11 +16,11 @@
 package com.taotao.cloud.common.constant;
 
 /**
- * 微服务名称常量
+ * 微服务名称常量 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:24
+ * @version 2021.9
+ * @since 2021-09-02 20:42:22
  */
 public class ServiceName {
 

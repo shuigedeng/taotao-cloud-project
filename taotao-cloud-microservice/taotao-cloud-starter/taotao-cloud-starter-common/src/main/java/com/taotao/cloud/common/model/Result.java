@@ -41,21 +41,39 @@ public class Result<T> implements Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;
 
+	/**
+	 * 状态码
+	 */
 	@Schema(description = "状态码", required = true)
 	private int code;
 
+	/**
+	 * 返回数据
+	 */
 	@Schema(description = "返回数据")
 	private T data;
 
+	/**
+	 * 是否成功
+	 */
 	@Schema(description = "是否成功")
 	private boolean success;
 
+	/**
+	 * 异常消息体
+	 */
 	@Schema(description = "异常消息体")
 	private String errorMsg;
 
+	/**
+	 * 请求id
+	 */
 	@Schema(description = "请求id")
 	private String requestId;
 
+	/**
+	 * 请求结束时间
+	 */
 	@Schema(description = "请求结束时间")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime timestamp;
@@ -73,6 +91,19 @@ public class Result<T> implements Serializable {
 		this.timestamp = timestamp;
 	}
 
+
+	/**
+	 * of
+	 *
+	 * @param code     code
+	 * @param data     data
+	 * @param success  success
+	 * @param errorMsg errorMsg
+	 * @param <T>      T
+	 * @return {@link Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:12:35
+	 */
 	public static <T> Result<T> of(int code, T data, boolean success, String errorMsg) {
 		return Result
 			.<T>builder()
@@ -86,51 +117,159 @@ public class Result<T> implements Serializable {
 			.build();
 	}
 
+	/**
+	 * success
+	 *
+	 * @param data data
+	 * @param <T>  T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:15:21
+	 */
 	public static <T> Result<T> success(T data) {
 		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS, "");
 	}
 
+	/**
+	 * success
+	 *
+	 * @param <T> T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:15:07
+	 */
 	public static <T> Result<T> success() {
 		return of(ResultEnum.SUCCESS.getCode(), null, CommonConstant.SUCCESS, "");
 	}
 
+	/**
+	 * success
+	 *
+	 * @param data data
+	 * @param code code
+	 * @param <T>  T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:58
+	 */
 	public static <T> Result<T> success(T data, int code) {
 		return of(code, data, CommonConstant.SUCCESS, "");
 	}
 
+	/**
+	 * success
+	 *
+	 * @param data       data
+	 * @param resultEnum resultEnum
+	 * @return {@link Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:13:07
+	 */
 	public static Result<String> success(String data, ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.SUCCESS, "");
 	}
 
+	/**
+	 * fail
+	 *
+	 * @return {@link Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:13:14
+	 */
 	public static Result<String> fail() {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR,
 			ResultEnum.ERROR.getData());
 	}
 
+	/**
+	 * fail
+	 *
+	 * @param errorMsg errorMsg
+	 * @param <T>      T
+	 * @return {@link Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:13:19
+	 */
 	public static <T> Result<T> fail(String errorMsg) {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}
 
+	/**
+	 * fail
+	 *
+	 * @param data data
+	 * @param code code
+	 * @param <T>  T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:41
+	 */
 	public static <T> Result<T> fail(String data, int code) {
 		return of(code, null, CommonConstant.ERROR, data);
 	}
 
+	/**
+	 * fail
+	 *
+	 * @param resultEnum resultEnum
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:32
+	 */
 	public static Result<String> fail(ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
 	}
 
+	/**
+	 * fail
+	 *
+	 * @param throwable throwable
+	 * @param <T>       T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:24
+	 */
 	public static <T> Result<T> fail(Throwable throwable) {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, throwable.getMessage());
 	}
 
+	/**
+	 * validFail
+	 *
+	 * @param resultEnum resultEnum
+	 * @param <T>        T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:18
+	 */
 	public static <T> Result<T> validFail(ResultEnum resultEnum) {
 		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
 	}
 
+
+	/**
+	 * validFail
+	 *
+	 * @param errorMsg errorMsg
+	 * @param args     args
+	 * @param <T>      T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:11
+	 */
 	public static <T> Result<T> validFail(String errorMsg, Object... args) {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}
 
+	/**
+	 * validFail
+	 *
+	 * @param errorMsg errorMsg
+	 * @param <T>      T
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:14:03
+	 */
 	public static <T> Result<T> validFail(String errorMsg) {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}

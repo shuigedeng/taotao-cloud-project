@@ -27,11 +27,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * IdempotentConfiguration
+ * IdempotentConfiguration 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:47
+ * @version 2021.9
+ * @since 2021-09-02 22:13:17
  */
 @Configuration
 public class IdempotentConfiguration implements InitializingBean {

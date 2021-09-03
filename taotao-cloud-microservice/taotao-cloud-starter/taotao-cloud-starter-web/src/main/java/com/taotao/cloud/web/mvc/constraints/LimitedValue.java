@@ -27,9 +27,9 @@ import javax.validation.Payload;
 /**
  * LimitedValue
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/24 23:25
+ * @version 2021.9
+ * @since 2021-09-02 22:08:26
  */
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
@@ -37,7 +37,9 @@ import javax.validation.Payload;
 @Constraint(validatedBy = {LimitedValueValidator.class})
 public @interface LimitedValue {
 
-	//默认错误消息
+	/**
+	 * 默认错误消息
+	 */
 	String message() default "必须为指定值";
 
 	boolean allowNullValue() default false;
@@ -46,9 +48,13 @@ public @interface LimitedValue {
 
 	int[] intValues() default {};
 
-	//分组
+	/**
+	 * 分组
+	 */
 	Class<?>[] groups() default {};
 
-	//负载
+	/**
+	 * 负载
+	 */
 	Class<? extends Payload>[] payload() default {};
 }

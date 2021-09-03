@@ -27,11 +27,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * 状态校验，校验参数的状态是否是 StatusEnum 中的值
+ * 状态校验，校验参数的状态是否是 StatusEnum 中的值 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:25
+ * @version 2021.9
+ * @since 2021-09-03 08:03:31
  */
 @Documented
 @Constraint(validatedBy = StatusValueValidator.class)

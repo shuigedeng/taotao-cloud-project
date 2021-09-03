@@ -23,11 +23,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * 校验手机号是否合法
+ * 校验手机号是否合法 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:29
+ * @version 2021.9
+ * @since 2021-09-03 08:04:24
  */
 public class PhoneValueValidator implements ConstraintValidator<PhoneValue, String> {
 

@@ -26,22 +26,36 @@ import org.springframework.data.domain.Page;
  * 返回分页实体类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 15:40
+ * @version 2021.9
+ * @since 2021-09-02 19:09:19
  */
 @Schema(description = "分页结果对象")
 public class PageModel<T> implements Serializable {
 
 	private static final long serialVersionUID = -275582248840137389L;
-
+	/**
+	 * 总条数
+	 */
 	@Schema(description = "总条数")
 	private long totalSize;
+	/**
+	 * 总页数
+	 */
 	@Schema(description = "总页数")
 	private int totalPage;
+	/**
+	 * 当前第几页
+	 */
 	@Schema(description = "当前第几页")
 	private int currentPage;
+	/**
+	 * 每页显示条数
+	 */
 	@Schema(description = "每页显示条数")
 	private int pageSize;
+	/**
+	 * 返回数据
+	 */
 	@Schema(description = "返回数据")
 	private List<T> data;
 
@@ -57,6 +71,15 @@ public class PageModel<T> implements Serializable {
 		this.data = data;
 	}
 
+	/**
+	 * convertJpaPage
+	 *
+	 * @param page page
+	 * @param <T>  T
+	 * @return {@link PageModel }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:10:45
+	 */
 	public static <T> PageModel<T> convertJpaPage(Page<T> page) {
 		return of(
 			page.getTotalElements(),
@@ -67,6 +90,15 @@ public class PageModel<T> implements Serializable {
 		);
 	}
 
+	/**
+	 * convertMybatisPage
+	 *
+	 * @param page page
+	 * @param <T>  T
+	 * @return {@link PageModel }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:10:49
+	 */
 	public static <T> PageModel<T> convertMybatisPage(IPage<T> page) {
 		return of(
 			page.getTotal(),
@@ -77,6 +109,19 @@ public class PageModel<T> implements Serializable {
 		);
 	}
 
+	/**
+	 * of
+	 *
+	 * @param totalSize   totalSize
+	 * @param totalPage   totalPage
+	 * @param currentPage currentPage
+	 * @param pageSize    pageSize
+	 * @param data        data
+	 * @param <T>         T
+	 * @return {@link com.taotao.cloud.common.model.PageModel }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:11:10
+	 */
 	public static <T> PageModel<T> of(
 		long totalSize,
 		int totalPage,

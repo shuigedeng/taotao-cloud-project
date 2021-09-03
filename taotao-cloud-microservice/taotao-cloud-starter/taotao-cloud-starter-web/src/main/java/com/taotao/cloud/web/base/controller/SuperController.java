@@ -39,20 +39,20 @@ import java.lang.reflect.ParameterizedType;
  * @param <SaveDTO>   保存参数
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 08:24
+ * @version 2021.9
+ * @since 2021-09-02 21:14:54
  */
 public abstract class SuperController<S extends SuperService<Entity>, Id extends Serializable, Entity, PageQuery, SaveDTO, UpdateDTO> extends
-	SuperSimpleController<S, Entity>
-	implements SaveController<Entity, SaveDTO>, UpdateController<Entity, UpdateDTO>,
-	DeleteController<Entity, Id>, PoiController<Entity, PageQuery>,
-	QueryController<Entity, Id, PageQuery> {
+		SuperSimpleController<S, Entity>
+		implements SaveController<Entity, SaveDTO>, UpdateController<Entity, UpdateDTO>,
+		DeleteController<Entity, Id>, PoiController<Entity, PageQuery>,
+		QueryController<Entity, Id, PageQuery> {
 
 	@Override
 	public Class<Entity> getEntityClass() {
 		if (entityClass == null) {
 			this.entityClass = (Class<Entity>) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[2];
+					.getGenericSuperclass()).getActualTypeArguments()[2];
 		}
 		return this.entityClass;
 	}

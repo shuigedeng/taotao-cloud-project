@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 过滤跨站脚本的 反序列化工具
+ *  过滤跨站脚本的 反序列化工具 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:43
+ * @version 2021.9
+ * @since 2021-09-03 08:05:48
  */
 public class XssStringJsonDeserializer extends JsonDeserializer<String> {
 

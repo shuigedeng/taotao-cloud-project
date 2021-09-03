@@ -21,11 +21,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 忽略全局响应包装
+ * 忽略全局响应包装 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 16:58
+ * @version 2021.9
+ * @since 2021-09-02 22:05:21
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD, ElementType.TYPE})

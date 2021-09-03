@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,58 +41,209 @@ import org.apache.http.message.BasicNameValuePair;
 import org.springframework.util.StringUtils;
 
 /**
- * Created by yanglikai on 2019/5/23. by chejiangyi
+ * HttpClient
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:15:08
  */
 public interface HttpClient extends Closeable {
 
-	String get(String var1);
+	/**
+	 * get
+	 *
+	 * @param url url
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:20
+	 */
+	String get(String url);
 
-	String get(String var1, Params var2);
+	/**
+	 * get
+	 *
+	 * @param url    url
+	 * @param params params
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:23
+	 */
+	String get(String url, Params params);
 
-	<T> T get(String var1, TypeReference<T> var2);
+	/**
+	 * get
+	 *
+	 * @param url            url
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:26
+	 */
+	<T> T get(String url, TypeReference<T> tTypeReference);
 
-	<T> T get(String var1, Params var2, TypeReference<T> var3);
+	/**
+	 * get
+	 *
+	 * @param url            url
+	 * @param params         params
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:35
+	 */
+	<T> T get(String url, Params params, TypeReference<T> tTypeReference);
 
-	String post(String var1, Params var2);
+	/**
+	 * post
+	 *
+	 * @param url    url
+	 * @param params params
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:44
+	 */
+	String post(String url, Params params);
 
-	<T> T post(String var1, Params var2, TypeReference<T> var3);
+	/**
+	 * post
+	 *
+	 * @param url            url
+	 * @param params         params
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:48
+	 */
+	<T> T post(String url, Params params, TypeReference<T> tTypeReference);
 
-	String put(String var1, Params var2);
+	/**
+	 * put
+	 *
+	 * @param url    url
+	 * @param params params
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:16:57
+	 */
+	String put(String url, Params params);
 
-	<T> T put(String var1, Params var2, TypeReference<T> var3);
+	/**
+	 * put
+	 *
+	 * @param url            url
+	 * @param params         params
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:17:00
+	 */
+	<T> T put(String url, Params params, TypeReference<T> tTypeReference);
 
-	String delete(String var1);
+	/**
+	 * delete
+	 *
+	 * @param url url
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:17:07
+	 */
+	String delete(String url);
 
-	<T> T delete(String var1, TypeReference<T> var2);
+	/**
+	 * delete
+	 *
+	 * @param url            url
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:17:09
+	 */
+	<T> T delete(String url, TypeReference<T> tTypeReference);
 
-	String delete(String var1, Params var2);
+	/**
+	 * delete
+	 *
+	 * @param url    url
+	 * @param params params
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:17:17
+	 */
+	String delete(String url, Params params);
 
-	<T> T delete(String var1, Params var2, TypeReference<T> var3);
+	/**
+	 * delete
+	 *
+	 * @param url            url
+	 * @param params         params
+	 * @param tTypeReference tTypeReference
+	 * @param <T>            T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:17:25
+	 */
+	<T> T delete(String url, Params params, TypeReference<T> tTypeReference);
 
+	/**
+	 * EnumHttpConnectParam
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:17:38
+	 */
 	public static enum EnumHttpConnectParam {
-		//Tcp是否粘包(批量封包发送)
+		/**
+		 * Tcp是否粘包(批量封包发送)
+		 */
 		TcpNoDelay(true),
-		//总连接池大小
+		/**
+		 * 总连接池大小
+		 */
 		MaxTotal(500),
-		//单个host连接池大小
+		/**
+		 * 单个host连接池大小
+		 */
 		DefaultMaxPerRoute(500),
-		//连接是否需要验证有效时间
+		/**
+		 * 连接是否需要验证有效时间
+		 */
 		ValidateAfterInactivity(10000),
-		//连接超时时间 【常用】
+		/**
+		 * 连接超时时间 【常用】
+		 */
 		ConnectTimeout(10000),
-		//socket通讯超时时间 【常用】
+		/**
+		 * socket通讯超时时间 【常用】
+		 */
 		SocketTimeout(15000),
-		//请求从连接池获取超时时间
+		/**
+		 * 请求从连接池获取超时时间
+		 */
 		ConnectionRequestTimeout(2000),
-		//连接池共享
+		/**
+		 * 连接池共享
+		 */
 		ConnectionManagerShared(true),
-		//回收时间间隔 s
+		/**
+		 * 回收时间间隔 s
+		 */
 		EvictIdleConnectionsTime(60),
-		//是否回收
+		/**
+		 * 是否回收
+		 */
 		IsEvictExpiredConnections(true),
-		//长连接保持时间 s
+		/**
+		 * 长连接保持时间 s
+		 */
 		ConnectionTimeToLive(-1),
-		//重试次数 【常用】
+		/**
+		 * 重试次数 【常用】
+		 */
 		RetryCount(3);
 
 		private Object defaultvalue;
@@ -90,6 +256,14 @@ public interface HttpClient extends Closeable {
 			this.defaultvalue = defaultvalue;
 		}
 
+		/**
+		 * get
+		 *
+		 * @param value value
+		 * @return {@link com.taotao.cloud.core.http.HttpClient.EnumHttpConnectParam }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:17:44
+		 */
 		public static EnumHttpConnectParam get(String value) {
 			for (EnumHttpConnectParam v : EnumHttpConnectParam.values()) {
 				if (v.name().equalsIgnoreCase(value)) {
@@ -102,6 +276,10 @@ public interface HttpClient extends Closeable {
 
 	/**
 	 * 初始化参数
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:17:50
 	 */
 	public static class InitMap extends HashMap<EnumHttpConnectParam, Object> {
 
@@ -114,6 +292,14 @@ public interface HttpClient extends Closeable {
 			return StringUtils.trimTrailingCharacter(stringBuilder.toString(), ',');
 		}
 
+		/**
+		 * trySetDefaultParams
+		 *
+		 * @param key          key
+		 * @param defaultValue defaultValue
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:17:56
+		 */
 		public void trySetDefaultParams(EnumHttpConnectParam key, Object defaultValue) {
 			if (this.containsKey(key)) {
 				return;
@@ -121,10 +307,28 @@ public interface HttpClient extends Closeable {
 			this.put(key, defaultValue);
 		}
 
+		/**
+		 * trySetDefaultParams
+		 *
+		 * @param key          key
+		 * @param defaultValue defaultValue
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:17:59
+		 */
 		public void trySetDefaultParams(String key, Object defaultValue) {
 			this.trySetDefaultParams(EnumHttpConnectParam.valueOf(key), defaultValue);
 		}
 
+		/**
+		 * getParams
+		 *
+		 * @param key  key
+		 * @param type type
+		 * @param <T>  T
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:18:01
+		 */
 		public <T> T getParams(EnumHttpConnectParam key, Class<T> type) {
 			Object value = this.get(key);
 			if (value == null) {
@@ -133,6 +337,15 @@ public interface HttpClient extends Closeable {
 			return BeanUtil.convert(value, type);
 		}
 
+		/**
+		 * getParams
+		 *
+		 * @param key  key
+		 * @param type type
+		 * @return T
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:18:08
+		 */
 		public <T> T getParams(String key, Class<T> type) {
 			return getParams(EnumHttpConnectParam.valueOf(key), type);
 		}
@@ -140,12 +353,28 @@ public interface HttpClient extends Closeable {
 
 	/**
 	 * 请求参数
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 20:18:16
 	 */
 	class Params {
 
+		/**
+		 * headers
+		 */
 		private List<Header> headers;
+		/**
+		 * data
+		 */
 		private Map<String, Object> data;
+		/**
+		 * bodyMultimap
+		 */
 		private Map<String, Collection<ContentBody>> bodyMultimap;
+		/**
+		 * contentType
+		 */
 		private ContentType contentType;
 
 		private Params() {
@@ -191,6 +420,13 @@ public interface HttpClient extends Closeable {
 			}
 		}
 
+		/**
+		 * toEntity
+		 *
+		 * @return {@link org.apache.http.HttpEntity }
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:18:58
+		 */
 		public HttpEntity toEntity() {
 			if (!this.contentType.equals(ContentType.MULTIPART_FORM_DATA)) {
 				return EntityBuilder.create().setContentType(this.contentType)
@@ -212,10 +448,10 @@ public interface HttpClient extends Closeable {
 				}
 
 				Map<String, Collection<ContentBody>> items = this.bodyMultimap;
-				Iterator var10 = items.keySet().iterator();
+				Iterator url0 = items.keySet().iterator();
 
-				while (var10.hasNext()) {
-					String key = (String) var10.next();
+				while (url0.hasNext()) {
+					String key = (String) url0.next();
 					Collection<ContentBody> value = (Collection) items.get(key);
 					Iterator var6 = value.iterator();
 

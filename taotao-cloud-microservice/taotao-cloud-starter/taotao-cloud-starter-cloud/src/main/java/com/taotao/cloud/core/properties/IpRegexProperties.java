@@ -19,11 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * LogEnableProperties
+ * IpRegexProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/08/27 17:27
+ * @version 2021.9
+ * @since 2021-09-02 20:42:30
  */
 @RefreshScope
 @ConfigurationProperties(prefix = IpRegexProperties.PREFIX)
@@ -31,7 +31,13 @@ public class IpRegexProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.ip";
 
+	/**
+	 * include
+	 */
 	private Include include;
+	/**
+	 * exclude
+	 */
 	private Exclude exclude;
 
 	private static class Include {

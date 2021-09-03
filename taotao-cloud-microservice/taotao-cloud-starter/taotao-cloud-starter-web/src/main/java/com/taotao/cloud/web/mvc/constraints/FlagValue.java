@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2002-2021 the original author or authors.
  *
@@ -31,8 +30,8 @@ import javax.validation.Payload;
  * 校验标识，只有Y和N两种状态的标识
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:24
+ * @version 2021.9
+ * @since 2021-09-02 22:29:34
  */
 @Documented
 @Constraint(validatedBy = FlagValueValidator.class)

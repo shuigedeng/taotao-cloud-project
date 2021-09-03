@@ -24,17 +24,20 @@ import org.aspectj.lang.JoinPoint;
  * 切面基础类 封装一些基础方法
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/6/22 17:06
+ * @version 2021.9
+ * @since 2021-09-02 19:41:13
  */
 public abstract class BaseAspect {
 
 	/**
 	 * 获取切面方法上包含的指定注解
 	 *
-	 * @param joinPoint
-	 * @param annotationClass
-	 * @param <T>
+	 * @param joinPoint       joinPoint
+	 * @param annotationClass annotationClass
+	 * @param <T>             T
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:41:20
 	 */
 	public <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
 		String methodName = joinPoint.getSignature().getName();
@@ -53,9 +56,13 @@ public abstract class BaseAspect {
 	/**
 	 * 默认key策略
 	 *
-	 * @param targetName
-	 * @param methodName
-	 * @param arguments
+	 * @param key        key
+	 * @param targetName targetName
+	 * @param methodName methodName
+	 * @param arguments  arguments
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:41:46
 	 */
 	public String getCacheKey(String key, String targetName, String methodName,
 		Object[] arguments) {

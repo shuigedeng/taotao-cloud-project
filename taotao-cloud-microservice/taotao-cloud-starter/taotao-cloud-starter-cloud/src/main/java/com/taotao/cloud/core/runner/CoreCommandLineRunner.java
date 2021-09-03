@@ -22,11 +22,11 @@ import com.taotao.cloud.core.utils.PropertyUtil;
 import org.springframework.boot.CommandLineRunner;
 
 /**
- * CoreCommandLineRunner
+ * CoreCommandLineRunner 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/06/22 10:53
+ * @version 2021.9
+ * @since 2021-09-02 21:59:18
  */
 public class CoreCommandLineRunner implements CommandLineRunner {
 

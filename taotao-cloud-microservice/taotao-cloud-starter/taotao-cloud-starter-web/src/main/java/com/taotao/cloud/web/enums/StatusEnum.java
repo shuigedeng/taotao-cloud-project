@@ -19,8 +19,8 @@ package com.taotao.cloud.web.enums;
  * StatusEnum
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/07/30 17:58
+ * @version 2021.9
+ * @since 2021-09-02 22:14:53
  */
 public enum StatusEnum {
 

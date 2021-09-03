@@ -22,20 +22,32 @@ import com.taotao.cloud.common.utils.secure.SHAUtil;
 /**
  * Block
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/27 20:55
+ * @version 2021.9
+ * @since 2021-09-02 19:39:21
  */
 public class Block {
 
+	/**
+	 * hash
+	 */
 	public String hash;
+	/**
+	 * previousHash
+	 */
 	public String previousHash;
 
 	/**
 	 * 区块链数据，基本的数据
 	 */
 	private String data;
+	/**
+	 * timestamp
+	 */
 	private long timestamp;
+	/**
+	 * nonce
+	 */
 	private int nonce;
 
 	/**
@@ -51,6 +63,10 @@ public class Block {
 
 	/**
 	 * 使用 sha256 算法让一个输入转变成256位的hash值
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:39:49
 	 */
 	public String calculateHash() {
 		return SHAUtil.encrypt256(previousHash +
@@ -61,6 +77,11 @@ public class Block {
 
 	/**
 	 * Increases nonce value until hash target is reached
+	 *
+	 * @param difficulty difficulty
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:39:56
 	 */
 	public String mineBlock(int difficulty) {
 		// Create a string with difficulty * "0"
@@ -75,6 +96,11 @@ public class Block {
 
 	/**
 	 * Returns difficulty string target, to compare to hash. eg difficulty of 5 will return "00000"
+	 *
+	 * @param difficulty difficulty
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:40:08
 	 */
 	private static String getDificultyString(int difficulty) {
 		return new String(new char[difficulty]).replace('\0', '0');

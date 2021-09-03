@@ -22,14 +22,17 @@ import java.util.stream.Collectors;
 import org.springframework.core.annotation.AnnotationUtils;
 
 /**
- * 业务处理策略选择器
+ * BusinessHandlerChooser
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:17
+ * @version 2021.9
+ * @since 2021-09-02 22:15:43
  */
 public class BusinessHandlerChooser {
 
+	/**
+	 * businessHandlerMap
+	 */
 	private Map<HandlerType, BusinessHandler> businessHandlerMap;
 
 	/**
@@ -37,15 +40,17 @@ public class BusinessHandlerChooser {
 	 *
 	 * @param orderHandlers orderHandlers
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:20
+	 * @since 2021-09-02 22:15:54
 	 */
 	public void setBusinessHandlerMap(List<BusinessHandler> orderHandlers) {
 		// 注入各类型的订单处理类
 		businessHandlerMap = orderHandlers
-			.stream()
-			.filter(Objects::nonNull)
-			.collect(Collectors.toMap(orderHandler -> AnnotationUtils.findAnnotation(orderHandler.getClass(), HandlerType.class),
-					v -> v, (v1, v2) -> v1));
+				.stream()
+				.filter(Objects::nonNull)
+				.collect(Collectors.toMap(
+						orderHandler -> AnnotationUtils.findAnnotation(orderHandler.getClass(),
+								HandlerType.class),
+						v -> v, (v1, v2) -> v1));
 	}
 
 	/**
@@ -53,9 +58,11 @@ public class BusinessHandlerChooser {
 	 *
 	 * @param type   type
 	 * @param source source
-	 * @return com.taotao.cloud.web.strategy.BusinessHandler<R, T>
+	 * @param <T>    T
+	 * @param <R>    R
+	 * @return {@link com.taotao.cloud.web.strategy.BusinessHandler }
 	 * @author shuigedeng
-	 * @since 2021/8/24 23:20
+	 * @since 2021-09-02 22:15:59
 	 */
 	public <R, T> BusinessHandler<R, T> businessHandlerChooser(String type, String source) {
 		HandlerType orderHandlerType = new HandlerTypeImpl(type, source);

@@ -28,23 +28,30 @@ import org.springframework.core.env.Environment;
  * Spring工具类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:52
+ * @version 2021.9
+ * @since 2021-09-02 22:27:12
  */
 public class SpringUtil implements ApplicationContextAware, DisposableBean {
 
+	/**
+	 * applicationContext
+	 */
 	private static ApplicationContext applicationContext = null;
+	/**
+	 * CALL_BACKS
+	 */
 	private static final List<CallBack> CALL_BACKS = new ArrayList<>();
+	/**
+	 * addCallback
+	 */
 	private static boolean addCallback = true;
 
 	/**
-	 * <p>
 	 * 针对 某些初始化方法，在SpringContextHolder 未初始化时 提交回调方法。 在SpringContextHolder 初始化后，进行回调使用
-	 * </p>
 	 *
-	 * @param callBack 回调函数
+	 * @param callBack callBack
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:53
+	 * @since 2021-09-02 22:27:35
 	 */
 	public synchronized static void addCallBacks(CallBack callBack) {
 		if (addCallback) {
@@ -59,9 +66,10 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 *
 	 * @param name name
+	 * @param <T>  T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:53
+	 * @since 2021-09-02 22:27:49
 	 */
 	public static <T> T getBean(String name) {
 		assertContextInjected();
@@ -72,9 +80,10 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 *
 	 * @param requiredType requiredType
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:54
+	 * @since 2021-09-02 22:27:57
 	 */
 	public static <T> T getBean(Class<T> requiredType) {
 		assertContextInjected();
@@ -87,9 +96,10 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * @param property     属性key
 	 * @param defaultValue 默认值
 	 * @param requiredType 返回类型
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:54
+	 * @since 2021-09-02 22:28:17
 	 */
 	public static <T> T getProperties(String property, T defaultValue, Class<T> requiredType) {
 		T result = defaultValue;
@@ -104,9 +114,9 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 获取SpringBoot 配置信息
 	 *
 	 * @param property 属性key
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:54
+	 * @since 2021-09-02 22:28:29
 	 */
 	public static String getProperties(String property) {
 		return getProperties(property, null, String.class);
@@ -117,36 +127,37 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 *
 	 * @param property     属性key
 	 * @param requiredType 返回类型
+	 * @param <T>          T
 	 * @return T
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:55
+	 * @since 2021-09-02 22:28:40
 	 */
 	public static <T> T getProperties(String property, Class<T> requiredType) {
 		return getProperties(property, null, requiredType);
 	}
 
 	/**
-	 * 检查ApplicationContext不为空.
+	 * 检查ApplicationContext不为空
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:55
+	 * @since 2021-09-02 22:28:50
 	 */
 	private static void assertContextInjected() {
 		if (applicationContext == null) {
 			throw new IllegalStateException("applicationContext属性未注入, 请在applicationContext" +
-				".xml中定义SpringContextHolder或在SpringBoot启动类中注册SpringContextHolder.");
+					".xml中定义SpringContextHolder或在SpringBoot启动类中注册SpringContextHolder.");
 		}
 	}
 
 	/**
-	 * 清除SpringContextHolder中的ApplicationContext为Null.
+	 * 清除SpringContextHolder中的ApplicationContext为Null
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:55
+	 * @since 2021-09-02 22:28:55
 	 */
 	private static void clearHolder() {
 		LogUtil.debug("清除SpringContextHolder中的ApplicationContext:"
-			+ applicationContext);
+				+ applicationContext);
 		applicationContext = null;
 	}
 
@@ -159,7 +170,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		if (SpringUtil.applicationContext != null) {
 			LogUtil.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:"
-				+ SpringUtil.applicationContext);
+					+ SpringUtil.applicationContext);
 		}
 		SpringUtil.applicationContext = applicationContext;
 		if (addCallback) {
@@ -174,9 +185,9 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	/**
 	 * 获取ApplicationContext
 	 *
-	 * @return org.springframework.context.ApplicationContext
+	 * @return {@link org.springframework.context.ApplicationContext }
 	 * @author shuigedeng
-	 * @since 2021/8/24 22:55
+	 * @since 2021-09-02 22:29:02
 	 */
 	public static ApplicationContext getApplicationContext() {
 		return SpringUtil.applicationContext;
@@ -186,8 +197,8 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 	 * 回调方法 针对某些初始化方法，在SpringUtil 初始化前时，<br> 可提交一个 提交回调任务。<br> 在SpringUtil 初始化后，进行回调使用
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
-	 * @since 2021/8/24 22:56
+	 * @version 2021.9
+	 * @since 2021-09-02 22:29:11
 	 */
 	public interface CallBack {
 
@@ -195,16 +206,16 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
 		 * 回调执行方法
 		 *
 		 * @author shuigedeng
-		 * @since 2021/8/24 22:56
+		 * @since 2021-09-02 22:29:21
 		 */
 		void executor();
 
 		/**
 		 * 本回调任务名称
 		 *
-		 * @return java.lang.String
+		 * @return {@link java.lang.String }
 		 * @author shuigedeng
-		 * @since 2021/8/24 22:56
+		 * @since 2021-09-02 22:29:27
 		 */
 		default String getCallBackName() {
 			return Thread.currentThread().getId() + ":" + this.getClass().getName();

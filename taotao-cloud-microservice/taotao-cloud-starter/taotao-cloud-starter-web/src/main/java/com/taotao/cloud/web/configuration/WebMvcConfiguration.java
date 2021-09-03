@@ -104,8 +104,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * 自定义mvc配置
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/29 14:30
+ * @version 2021.9
+ * @since 2021-09-02 21:30:20
  */
 @Configuration
 @AutoConfigureBefore({PrometheusConfiguration.class})
@@ -116,22 +116,42 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		LogUtil.started(WebMvcConfiguration.class, StarterName.WEB_STARTER);
 	}
 
+	/**
+	 * redisRepository
+	 */
 	private final RedisRepository redisRepository;
+	/**
+	 * filterProperties
+	 */
 	private final FilterProperties filterProperties;
+	/**
+	 * xssProperties
+	 */
 	private final XssProperties xssProperties;
-
+	/**
+	 * requestCounter
+	 */
 	private final Counter requestCounter;
+	/**
+	 * requestLatency
+	 */
 	private final Summary requestLatency;
+	/**
+	 * inprogressRequests
+	 */
 	private final Gauge inprogressRequests;
+	/**
+	 * requestLatencyHistogram
+	 */
 	private final Histogram requestLatencyHistogram;
 
 	public WebMvcConfiguration(RedisRepository redisRepository,
-		FilterProperties filterProperties,
-		XssProperties xssProperties,
-		Counter requestCounter,
-		Summary requestLatency,
-		Gauge inprogressRequests,
-		Histogram requestLatencyHistogram) {
+			FilterProperties filterProperties,
+			XssProperties xssProperties,
+			Counter requestCounter,
+			Summary requestLatency,
+			Gauge inprogressRequests,
+			Histogram requestLatencyHistogram) {
 		this.redisRepository = redisRepository;
 		this.filterProperties = filterProperties;
 		this.xssProperties = xssProperties;
@@ -151,17 +171,17 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(
-				new PrometheusMetricsInterceptor(
-					requestCounter,
-					requestLatency,
-					inprogressRequests,
-					requestLatencyHistogram))
-			.addPathPatterns("/**");
+						new PrometheusMetricsInterceptor(
+								requestCounter,
+								requestLatency,
+								inprogressRequests,
+								requestLatencyHistogram))
+				.addPathPatterns("/**");
 	}
 
 	@Override
 	public void configureMessageConverters(
-		List<HttpMessageConverter<?>> converters) {
+			List<HttpMessageConverter<?>> converters) {
 
 		WebMvcConfigurer.super.configureMessageConverters(converters);
 	}
@@ -175,12 +195,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**").
-			addResourceLocations("classpath:/imgs/",
-				"classpath:/mystatic/",
-				"classpath:/static/",
-				"classpath:/public/",
-				"classpath:/META-INF/resources",
-				"classpath:/resources");
+				addResourceLocations("classpath:/imgs/",
+						"classpath:/mystatic/",
+						"classpath:/static/",
+						"classpath:/public/",
+						"classpath:/META-INF/resources",
+						"classpath:/resources");
 	}
 
 	@Override
@@ -253,7 +273,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			mapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
 			// 忽略不能转义的字符
 			mapper.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
-				true);
+					true);
 			// 包含null
 			mapper.setSerializationInclusion(Include.ALWAYS);
 			// 使用驼峰式
@@ -262,7 +282,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
 			// 所有日期格式都统一为固定格式
 			mapper.setDateFormat(
-				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
+					new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
 			mapper.registerModule(new Jdk8Module());
 			mapper.registerModule(new JavaTimeModule());
 
@@ -286,10 +306,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		LogUtil.started(Validator.class, StarterName.WEB_STARTER);
 
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
-			.configure()
-			// 快速失败模式
-			.failFast(true)
-			.buildValidatorFactory();
+				.configure()
+				// 快速失败模式
+				.failFast(true)
+				.buildValidatorFactory();
 		return validatorFactory.getValidator();
 	}
 
@@ -348,36 +368,48 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		return registrationBean;
 	}
 
-//	/**
-//	 * 配置跨站攻击过滤器
-//	 */
-//	@Bean
-//	@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-//	public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
-//		FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
-//		filterRegistration.setFilter(new XssFilter());
-//		filterRegistration.setEnabled(xssProperties.getEnabled());
-//		filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
-//		filterRegistration.setOrder(xssProperties.getOrder());
-//
-//		Map<String, String> initParameters = new HashMap<>(4);
-//		initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
-//		initParameters.put(IGNORE_PARAM_VALUE,
-//			CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
-//		filterRegistration.setInitParameters(initParameters);
-//		return filterRegistration;
-//	}
+	///**
+	// * 配置跨站攻击过滤器
+	// */
+	//@Bean
+	//@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+	//public FilterRegistrationBean<XssFilter> filterRegistrationBean() {
+	//	FilterRegistrationBean<XssFilter> filterRegistration = new FilterRegistrationBean<>();
+	//	filterRegistration.setFilter(new XssFilter());
+	//	filterRegistration.setEnabled(xssProperties.getEnabled());
+	//	filterRegistration.addUrlPatterns(xssProperties.getPatterns().toArray(new String[0]));
+	//	filterRegistration.setOrder(xssProperties.getOrder());
+	//
+	//	Map<String, String> initParameters = new HashMap<>(4);
+	//	initParameters.put(IGNORE_PATH, CollUtil.join(xssProperties.getIgnorePaths(), ","));
+	//	initParameters.put(IGNORE_PARAM_VALUE,
+	//		CollUtil.join(xssProperties.getIgnoreParamValues(), ","));
+	//	filterRegistration.setInitParameters(initParameters);
+	//	return filterRegistration;
+	//}
 
 	/**
 	 * 请求资源扫描监听器
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-02 21:31:34
 	 */
 	public static class RequestMappingScanListener implements
-		ApplicationListener<ApplicationReadyEvent> {
+			ApplicationListener<ApplicationReadyEvent> {
 
+		/**
+		 * PATH_MATCH
+		 */
 		private static final AntPathMatcher PATH_MATCH = new AntPathMatcher();
+		/**
+		 * ignoreApi
+		 */
 		private final Set<String> ignoreApi = new HashSet<>();
+		/**
+		 * redisRepository
+		 */
 		private final RedisRepository redisRepository;
-
 
 		public RequestMappingScanListener(RedisRepository redisRepository) {
 			this.redisRepository = redisRepository;
@@ -395,14 +427,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 				// 获取微服务模块名称
 				String microService = env.getProperty("spring.application.name", "application");
 				if (redisRepository == null || applicationContext
-					.containsBean("resourceServerConfiguration")) {
+						.containsBean("resourceServerConfiguration")) {
 					LogUtil.warn("[{}]忽略接口资源扫描", microService);
 					return;
 				}
 
 				// 所有接口映射
 				RequestMappingHandlerMapping mapping = applicationContext
-					.getBean(RequestMappingHandlerMapping.class);
+						.getBean(RequestMappingHandlerMapping.class);
 
 				// 获取url与类和方法的对应信息
 				Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
@@ -430,7 +462,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 					}
 
 					Set<MediaType> mediaTypeSet = info.getProducesCondition()
-						.getProducibleMediaTypes();
+							.getProducibleMediaTypes();
 					for (MethodParameter params : method.getMethodParameters()) {
 						if (params.hasParameterAnnotation(RequestBody.class)) {
 							mediaTypeSet.add(MediaType.APPLICATION_JSON_UTF8);
@@ -463,10 +495,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 					}
 
 					// 判断是否需要权限校验
-//				PreAuth preAuth = method.getMethodAnnotation(PreAuth.class);
-//				if (preAuth != null) {
-//					auth = "1";
-//				}
+					//PreAuth preAuth = method.getMethodAnnotation(PreAuth.class);
+					//if (preAuth != null) {
+					//	auth = "1";
+					//}
 
 					summary = StrUtil.isBlank(summary) ? methodName : summary;
 					api.put("summary", summary);
@@ -489,23 +521,31 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 				res.put("list", list);
 
 				redisRepository.setExpire(
-					CommonConstant.TAOTAO_CLOUD_API_RESOURCE,
-					res,
-					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+						CommonConstant.TAOTAO_CLOUD_API_RESOURCE,
+						res,
+						CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 				redisRepository.setExpire(
-					CommonConstant.TAOTAO_CLOUD_SERVICE_RESOURCE,
-					microService,
-					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+						CommonConstant.TAOTAO_CLOUD_SERVICE_RESOURCE,
+						microService,
+						CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 
 				LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]",
-					microService,
-					list.size(),
-					CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
+						microService,
+						list.size(),
+						CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
 			} catch (Exception e) {
 				LogUtil.error("error: {}", e.getMessage());
 			}
 		}
 
+		/**
+		 * getUrls
+		 *
+		 * @param urls urls
+		 * @return {@link java.lang.String }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:32:06
+		 */
 		private String getUrls(Set<String> urls) {
 			StringBuilder stringBuilder = new StringBuilder();
 			for (String url : urls) {
@@ -523,7 +563,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		 * @param requestPath 请求地址
 		 * @return boolean
 		 * @author shuigedeng
-		 * @since 2021/8/24 23:49
+		 * @since 2021-09-02 21:32:13
 		 */
 		private boolean isIgnore(String requestPath) {
 			for (String path : ignoreApi) {
@@ -538,7 +578,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		 * 获取媒体类型
 		 *
 		 * @param mediaTypes 类型SET集
-		 * @return String
+		 * @return {@link java.lang.String }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:32:23
 		 */
 		private String getMediaTypes(Set<MediaType> mediaTypes) {
 			StringBuilder stringBuilder = new StringBuilder();
@@ -555,7 +597,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		 * 获取方法
 		 *
 		 * @param requestMethods 请求方法
-		 * @return String
+		 * @return {@link java.lang.String }
+		 * @author shuigedeng
+		 * @since 2021-09-02 21:32:30
 		 */
 		private String getMethods(Set<RequestMethod> requestMethods) {
 			StringBuilder stringBuilder = new StringBuilder();
@@ -574,10 +618,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	 * 通过header里的token获取用户信息
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
+	 * @version 2021.9
 	 * @see <a href="https://my.oschina.net/u/4149877/blog/3143391/print">https://my.oschina.net/u/4149877/blog/3143391/print</a>
 	 * @see <a href="https://blog.csdn.net/aiyaya_/article/details/79221733">https://blog.csdn.net/aiyaya_/article/details/79221733</a>
-	 * @since 2021/8/25 08:59
+	 * @since 2021-09-02 21:32:45
 	 */
 	public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -588,23 +632,22 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		public boolean supportsParameter(MethodParameter parameter) {
 			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(EnableUser.class);
 			boolean isHasLoginUserParameter = parameter.getParameterType()
-				.isAssignableFrom(SecurityUser.class);
+					.isAssignableFrom(SecurityUser.class);
 			return isHasEnableUserAnn && isHasLoginUserParameter;
 		}
 
 		@Override
 		public Object resolveArgument(MethodParameter methodParameter,
-			ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
-			WebDataBinderFactory webDataBinderFactory) throws Exception {
+				ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
+				WebDataBinderFactory webDataBinderFactory) throws Exception {
 			EnableUser user = methodParameter.getParameterAnnotation(EnableUser.class);
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(
-				HttpServletRequest.class);
+					HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtil.getUser();
 
 			//根据value状态获取更多用户信息，待实现
 			return loginUser;
 		}
 	}
-
 }

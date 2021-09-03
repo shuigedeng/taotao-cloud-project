@@ -21,25 +21,48 @@ import com.alibaba.ttl.TransmittableThreadLocal;
  * 租户context holder
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/29 17:18
+ * @version 2021.9
+ * @since 2021-09-02 19:33:03
  */
 public class TenantContextHolder {
 
 	private TenantContextHolder() {
 	}
 
-	private static final ThreadLocal<String> CONTEXT = new TransmittableThreadLocal<>();
+	/**
+	 * CONTEXT
+	 */
+	private static final ThreadLocal<String> TENANT_CONTEXT = new TransmittableThreadLocal<>();
 
+	/**
+	 * setTenant
+	 *
+	 * @param tenant tenant
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:33:31
+	 */
 	public static void setTenant(String tenant) {
-		CONTEXT.set(tenant);
+		TENANT_CONTEXT.set(tenant);
 	}
 
+	/**
+	 * getTenant
+	 *
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:33:34
+	 */
 	public static String getTenant() {
-		return CONTEXT.get();
+		return TENANT_CONTEXT.get();
 	}
 
+	/**
+	 * clear
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:33:39
+	 */
 	public static void clear() {
-		CONTEXT.remove();
+		TENANT_CONTEXT.remove();
 	}
 }

@@ -19,11 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * IdempotentProperties
+ * IdempotentProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 23:22
+ * @version 2021.9
+ * @since 2021-09-03 08:04:32
  */
 @RefreshScope
 @ConfigurationProperties(prefix = IdempotentProperties.PREFIX)

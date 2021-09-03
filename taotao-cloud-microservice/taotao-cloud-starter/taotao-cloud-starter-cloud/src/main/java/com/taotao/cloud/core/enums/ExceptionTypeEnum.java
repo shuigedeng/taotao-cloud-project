@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ExceptionTypeEnum 异常级别
+ * ExceptionTypeEnum 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:36
+ * @version 2021.9
+ * @since 2021-09-02 21:14:41
  */
 public enum ExceptionTypeEnum {
 	BE(1, "后端"),

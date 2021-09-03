@@ -23,11 +23,11 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.util.XssUtil;
 
 /**
- * 基于xss的 json 序列化器 在本项目中，没有使用该类
+ * 基于xss的 json 序列化器 在本项目中，没有使用该类 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 22:43
+ * @version 2021.9
+ * @since 2021-09-03 08:05:50
  */
 public class XssStringJsonSerializer extends JsonSerializer<String> {
 

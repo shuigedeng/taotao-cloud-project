@@ -22,11 +22,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 是否启用自动获取用户信息注解 样例：public Object getUser(@EnableUser LoginUser user)
+ * 是否启用自动获取用户信息注解 样例：public Object getUser(@EnableUser LoginUser user) 
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/25 08:48
+ * @version 2021.9
+ * @since 2021-09-02 22:04:48
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
