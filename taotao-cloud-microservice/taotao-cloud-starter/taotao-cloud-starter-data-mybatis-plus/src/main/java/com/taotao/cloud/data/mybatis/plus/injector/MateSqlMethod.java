@@ -22,7 +22,9 @@ package com.taotao.cloud.data.mybatis.plus.injector;
  * <p>
  * AbstractInsertMethod
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:44:14
  */
 public enum MateSqlMethod {
 

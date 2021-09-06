@@ -21,13 +21,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 /**
- * 监听数据库的操作
+ * 监听数据库的操作 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:56
+ * @version 2021.9
+ * @since 2021-09-03 21:06:17
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

@@ -23,8 +23,9 @@ import java.util.function.Consumer;
  * 1, 对nested、eq、ne、gt、ge、lt、le、in、*like*、 等方法 进行条件判断，null 或 "" 字段不加入查询 2，对*like*相关方法的参数 %和_
  * 符号进行转义，便于模糊查询
  *
- * @author zuihou
- * @date Created on 2019/5/27 17:15
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:37:49
  */
 public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	implements Update<LbuWrapper<T>, SFunction<T, ?>> {
@@ -103,9 +104,9 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	public LbuWrapper<T> set(boolean condition,
 		SFunction<T, ?> column, Object val) {
 		//		return maybeDo(condition, () -> {
-//			String sql = formatParam(mapping, val);
-//			sqlSet.add(columnToString(column) + Constants.EQUALS + sql);
-//		});
+		//	String sql = formatParam(mapping, val);
+		//	sqlSet.add(columnToString(column) + Constants.EQUALS + sql);
+		//});
 		return null;
 	}
 
@@ -161,7 +162,7 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 		final LbuWrapper<T> instance = instance();
 		consumer.accept(instance);
 		if (!instance.isEmptyOfWhere()) {
-//			appendSqlSegments(APPLY, instance);
+			//appendSqlSegments(APPLY, instance);
 		}
 		return this;
 	}

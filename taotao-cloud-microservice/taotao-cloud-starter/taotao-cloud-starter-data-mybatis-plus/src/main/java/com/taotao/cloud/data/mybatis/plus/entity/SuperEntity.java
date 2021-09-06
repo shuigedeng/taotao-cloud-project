@@ -11,10 +11,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.Default;
 
 /**
- * 包括id、create_time、created_by字段的表继承的基础实体
+ * SuperEntity 
  *
- * @author zuihou
- * @date 2019/05/05
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:40:46
  */
 public class SuperEntity<T> implements Serializable {
 

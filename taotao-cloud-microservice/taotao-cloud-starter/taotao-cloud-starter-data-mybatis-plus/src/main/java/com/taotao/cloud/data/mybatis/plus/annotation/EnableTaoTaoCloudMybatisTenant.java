@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.data.mybatis.plus.annotation;
 
-import com.taotao.cloud.data.mybatis.plus.configuration.TenantConfiguration;
+import com.taotao.cloud.data.mybatis.plus.configuration.TenantAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,15 +23,15 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启基于mybatis plus 多租户配置
+ * EnableTaoTaoCloudMybatisTenant
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @version 2021.9
+ * @since 2021-09-04 07:45:08
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({TenantConfiguration.class})
+@Import({TenantAutoConfiguration.class})
 public @interface EnableTaoTaoCloudMybatisTenant {
 
 }

@@ -22,11 +22,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 多租户Properties
+ * TenantProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:19
+ * @version 2021.9
+ * @since 2021-09-04 07:44:33
  */
 @RefreshScope
 @ConfigurationProperties(prefix = TenantProperties.PREFIX)

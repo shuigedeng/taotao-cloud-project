@@ -19,11 +19,11 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 
 /**
- * 发送短信异常
+ * CaptchaException 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-04 07:40:07
  */
 public class CaptchaException extends BaseException {
 

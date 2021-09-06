@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.captcha.service;
 
-
 import com.taotao.cloud.captcha.model.Captcha;
 import java.util.Properties;
 
@@ -23,41 +22,65 @@ import java.util.Properties;
  * 验证码服务接口
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:49
+ * @version 2021.9
+ * @since 2021-09-03 20:55:54
  */
 public interface CaptchaService {
 
 	/**
 	 * 配置初始化
+	 *
+	 * @param config config
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:00
 	 */
 	void init(Properties config);
 
 	/**
 	 * 获取验证码
+	 *
+	 * @param captcha captcha
+	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:03
 	 */
 	Captcha get(Captcha captcha);
 
 	/**
 	 * 核对验证码(前端)
+	 *
+	 * @param captcha captcha
+	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:09
 	 */
 	Captcha check(Captcha captcha);
 
 	/**
 	 * 二次校验验证码(后端)
+	 *
+	 * @param captcha captcha
+	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:14
 	 */
 	Captcha verification(Captcha captcha);
 
-	/***
-	 * 验证码类型
-	 * 通过java SPI机制，接入方可自定义实现类，实现新的验证类型
+	/**
+	 * 验证码类型 通过java SPI机制，接入方可自定义实现类，实现新的验证类型
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:21
 	 */
 	String captchaType();
 
 	/**
 	 * 历史资源清除(过期的图片文件，生成的临时图片...)
 	 *
-	 * @param config 配置项 控制资源清理的粒度
+	 * @param config config
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:33
 	 */
 	void destroy(Properties config);
 }

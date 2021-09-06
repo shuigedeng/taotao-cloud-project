@@ -16,11 +16,11 @@
 package com.taotao.cloud.canal.interfaces;
 
 /**
- * 信息转换类继承 runnable，接口层
+ * 信息转换类继承 runnable，接口层 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:31
+ * @version 2021.9
+ * @since 2021-09-04 07:30:12
  */
 public interface MessageTransponder extends Runnable {
 

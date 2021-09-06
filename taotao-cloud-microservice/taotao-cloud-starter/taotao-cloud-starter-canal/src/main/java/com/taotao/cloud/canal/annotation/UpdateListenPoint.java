@@ -16,7 +16,6 @@
 package com.taotao.cloud.canal.annotation;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.annotation.ListenPoint;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -28,8 +27,8 @@ import org.springframework.core.annotation.AliasFor;
  * 更新操作监听器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:59
+ * @version 2021.9
+ * @since 2021-09-03 20:49:53
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

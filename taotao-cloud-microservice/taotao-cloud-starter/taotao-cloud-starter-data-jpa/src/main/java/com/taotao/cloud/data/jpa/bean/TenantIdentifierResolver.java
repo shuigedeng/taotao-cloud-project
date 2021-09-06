@@ -19,13 +19,13 @@
  import org.apache.commons.lang3.StringUtils;
  import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
- /**
-  * jpa 多租户识别解析器
-  *
-  * @author shuigedeng
-  * @version 1.0.0.0
-  * @since 2020/9/28 17:29
-  */
+/**
+ * jpa 多租户识别解析器 
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:31:18
+ */
  public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver {
 
 	 //private final DatabaseManager databaseManager;

@@ -16,11 +16,11 @@
 package com.taotao.cloud.captcha.dto;
 
 /**
- * GetCptchaDTO
+ * CheckCptchaVO 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/08/31 22:10
+ * @version 2021.9
+ * @since 2021-09-04 07:36:54
  */
 public class CheckCptchaVO {
 

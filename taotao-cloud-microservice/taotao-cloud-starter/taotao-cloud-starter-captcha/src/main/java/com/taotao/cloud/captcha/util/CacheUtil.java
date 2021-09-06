@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
  * CacheUtil
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:52
+ * @version 2021.9
+ * @since 2021-09-03 21:03:03
  */
 public final class CacheUtil {
 
@@ -48,6 +48,8 @@ public final class CacheUtil {
 	 *
 	 * @param cacheMaxNumber 缓存最大个数
 	 * @param second         定时任务 秒执行清除过期缓存
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:14
 	 */
 	public static void init(int cacheMaxNumber, long second) {
 		CACHE_MAX_NUMBER = cacheMaxNumber;
@@ -79,6 +81,9 @@ public final class CacheUtil {
 
 	/**
 	 * 缓存刷新,清除过期数据
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:21
 	 */
 	public static void refresh() {
 		logger.debug("local缓存刷新,清除过期数据");
@@ -87,7 +92,15 @@ public final class CacheUtil {
 		}
 	}
 
-
+	/**
+	 * set
+	 *
+	 * @param key              key
+	 * @param value            value
+	 * @param expiresInSeconds expiresInSeconds
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:24
+	 */
 	public static void set(String key, String value, long expiresInSeconds) {
 		//设置阈值，达到即clear缓存
 		if (CACHE_MAP.size() > CACHE_MAX_NUMBER * 2) {
@@ -101,11 +114,26 @@ public final class CacheUtil {
 		}
 	}
 
+	/**
+	 * delete
+	 *
+	 * @param key key
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:27
+	 */
 	public static void delete(String key) {
 		CACHE_MAP.remove(key);
 		CACHE_MAP.remove(key + "_HoldTime");
 	}
 
+	/**
+	 * exists
+	 *
+	 * @param key key
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:30
+	 */
 	public static boolean exists(String key) {
 		Long cacheHoldTime = (Long) CACHE_MAP.get(key + "_HoldTime");
 		if (cacheHoldTime == null || cacheHoldTime == 0L) {
@@ -118,7 +146,14 @@ public final class CacheUtil {
 		return true;
 	}
 
-
+	/**
+	 * get
+	 *
+	 * @param key key
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:33
+	 */
 	public static String get(String key) {
 		if (exists(key)) {
 			return (String) CACHE_MAP.get(key);
@@ -128,6 +163,9 @@ public final class CacheUtil {
 
 	/**
 	 * 删除所有缓存
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:03:39
 	 */
 	public static void clear() {
 		logger.debug("have clean all key !");

@@ -18,11 +18,11 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * 删除表操作
+ * 删除表操作 
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/30 21:51
+ * @version 2021.9
+ * @since 2021-09-03 20:55:49
  */
 public abstract class DropTableOption extends AbstractDBOption {
 	@Override

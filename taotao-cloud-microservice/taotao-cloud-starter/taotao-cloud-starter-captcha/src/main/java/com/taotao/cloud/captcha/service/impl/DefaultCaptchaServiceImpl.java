@@ -25,11 +25,11 @@ import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Properties;
 
 /**
- * DefaultCaptchaServiceImpl
+ * DefaultCaptchaServiceImpl 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:51
+ * @version 2021.9
+ * @since 2021-09-03 21:02:02
  */
 public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 
@@ -58,6 +58,14 @@ public class DefaultCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 	}
 
+	/**
+	 * getService 
+	 *
+	 * @param captchaType captchaType 
+	 * @return {@link com.taotao.cloud.captcha.service.CaptchaService }
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:43:59
+	 */
 	private CaptchaService getService(String captchaType) {
 		return CaptchaServiceFactory.instances.get(captchaType);
 	}

@@ -22,19 +22,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.ServiceLoader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * CaptchaServiceFactory
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:51
+ * @version 2021.9
+ * @since 2021-09-03 21:00:16
  */
 public class CaptchaServiceFactory {
 
+	/**
+	 * instances
+	 */
 	public volatile static Map<String, CaptchaService> instances = new HashMap<>();
+	/**
+	 * cacheService
+	 */
 	public volatile static Map<String, CaptchaCacheService> cacheService = new HashMap<>();
 
 	static {
@@ -50,6 +54,14 @@ public class CaptchaServiceFactory {
 		}
 	}
 
+	/**
+	 * getInstance
+	 *
+	 * @param config config
+	 * @return {@link com.taotao.cloud.captcha.service.CaptchaService }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:00:32
+	 */
 	public static CaptchaService getInstance(Properties config) {
 		//先把所有CaptchaService初始化，通过init方法，实例字体等，add by lide1202@hotmail.com
         /*try{

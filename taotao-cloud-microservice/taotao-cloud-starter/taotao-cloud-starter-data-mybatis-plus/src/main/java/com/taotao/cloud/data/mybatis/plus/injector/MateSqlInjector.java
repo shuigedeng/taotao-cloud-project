@@ -26,11 +26,12 @@ import com.taotao.cloud.data.mybatis.plus.injector.methods.ReplaceBatch;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 /**
- * 自定义的 sql 注入
+ * 自定义的 sql 注入 
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:44:06
  */
 public class MateSqlInjector extends DefaultSqlInjector {
 

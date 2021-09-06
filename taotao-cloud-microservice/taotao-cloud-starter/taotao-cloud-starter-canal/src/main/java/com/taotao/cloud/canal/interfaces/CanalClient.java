@@ -19,8 +19,8 @@ package com.taotao.cloud.canal.interfaces;
  * canal 客户端接口层
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:28
+ * @version 2021.9
+ * @since 2021-09-03 20:49:40
  */
 public interface CanalClient {
 
@@ -28,7 +28,7 @@ public interface CanalClient {
 	 * 开启 canal 客户端，并根绝配置连接到 canal ,然后进行针对性的监听
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:28
+	 * @since 2021-09-03 20:49:48
 	 */
 	void start();
 
@@ -36,15 +36,16 @@ public interface CanalClient {
 	 * 关闭 canal 客户端
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:29
+	 * @since 2021-09-03 20:49:57
 	 */
 	void stop();
 
 	/**
 	 * 判断 canal 客户端是否是开启状态
 	 *
+	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:29
+	 * @since 2021-09-03 20:50:03
 	 */
 	boolean isRunning();
 }

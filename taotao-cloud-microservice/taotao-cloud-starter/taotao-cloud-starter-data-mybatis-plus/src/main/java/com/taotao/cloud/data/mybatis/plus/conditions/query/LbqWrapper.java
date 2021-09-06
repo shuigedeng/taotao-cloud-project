@@ -48,14 +48,15 @@ import java.util.function.Predicate;
  * 符号进行转义，便于模糊查询 5，增加 leFooter 方法， 将日期参数值，强制转换成当天 23：59：59 6，增加 geHeader 方法， 将日期参数值，强制转换成当天
  * 00：00：00
  *
- * @author zuihou
- * @author hubin miemie HCL
- * @date Created on 2019/5/27 17:11
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:36:28
  */
 public class LbqWrapper<T> extends AbstractLambdaWrapper<T, LbqWrapper<T>>
 	implements Query<LbqWrapper<T>, T, SFunction<T, ?>> {
 
 	private static final long serialVersionUID = -6842140106034506889L;
+
 	/**
 	 * 查询字段
 	 */

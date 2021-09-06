@@ -393,6 +393,13 @@ spring:
 
 taotao:
   cloud:
+    dinger:
+      enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
+          secret: ${DINGDING_SECRET:xxxx}
     health:
       enabled: true
       doubtapi:

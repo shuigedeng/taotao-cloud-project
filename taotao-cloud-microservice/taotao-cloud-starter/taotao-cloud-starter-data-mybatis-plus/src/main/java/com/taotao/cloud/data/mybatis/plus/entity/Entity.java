@@ -9,10 +9,11 @@ import jdk.nashorn.internal.objects.annotations.Setter;
 
 
 /**
- * 包括id、create_time、created_by、updated_by、update_time字段的表继承的基础实体
+ * Entity 
  *
- * @author zuihou
- * @date 2019/05/05
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:40:40
  */
 public class Entity<T> extends SuperEntity<T> {
 

@@ -18,10 +18,11 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * 新增数据
- * @version 1.0.0
+ * 新增数据 
+ *
  * @author shuigedeng
- * @since 2021/8/30 21:52
+ * @version 2021.9
+ * @since 2021-09-03 20:56:48
  */
 public abstract class InsertOption extends AbstractDBOption {
 	

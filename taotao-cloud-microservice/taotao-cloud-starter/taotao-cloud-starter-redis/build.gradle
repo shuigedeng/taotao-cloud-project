@@ -1,19 +1,21 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
-    api("org.redisson:redisson-spring-boot-starter:3.15.0") {
+    api("org.redisson:redisson-spring-boot-starter:3.15.6") {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
     }
 
-    api 'org.springframework.boot:spring-boot-starter-data-redis'
     api 'com.zengtengpeng:redisson-spring-boot-starter:1.0.8'
+    api "org.redisson:redisson-spring-data-24:3.15.6"
 
-    // cache starter
+    api 'org.springframework.boot:spring-boot-starter-data-redis'
     api 'org.springframework.boot:spring-boot-starter-cache'
+
     api 'net.sf.ehcache:ehcache:2.10.9.2'
     api('com.github.ben-manes.caffeine:caffeine:2.9.0') {
         exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
     }
+
 //    api 'com.alicp.jetcache:jetcache-starter-redis-lettuce:2.6.0'
 //    api 'com.alicp.jetcache:jetcache-starter-redis-springdata:2.6.0'
 

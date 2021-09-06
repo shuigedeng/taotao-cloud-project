@@ -16,11 +16,11 @@
 package com.taotao.cloud.canal.exception;
 
 /**
- * CanalClientException
+ * CanalClientException 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 22:04
+ * @version 2021.9
+ * @since 2021-09-04 07:29:11
  */
 public class CanalClientException extends RuntimeException {
 

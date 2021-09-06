@@ -19,10 +19,10 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
 import com.taotao.cloud.canal.annotation.ListenPoint;
-import com.taotao.cloud.canal.model.CanalMsg;
-import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.exception.CanalClientException;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
+import com.taotao.cloud.canal.model.CanalMsg;
+import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.lang.reflect.Method;
@@ -36,8 +36,8 @@ import org.springframework.util.CollectionUtils;
  * 消息处理转换类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:36
+ * @version 2021.9
+ * @since 2021-09-03 20:43:11
  */
 public abstract class AbstractBasicMessageTransponder extends AbstractMessageTransponder {
 
@@ -91,7 +91,7 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param tableName   表名称
 	 * @param rowChange   数据
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:39
+	 * @since 2021-09-03 20:43:30
 	 */
 	protected void distributeByAnnotation(String destination,
 		String schemaName,
@@ -136,7 +136,7 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param tableName   表名
 	 * @param rowChange   參數
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:39
+	 * @since 2021-09-03 20:43:40
 	 */
 	protected void distributeByImpl(String destination,
 		String schemaName,
@@ -149,7 +149,6 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 		}
 	}
 
-
 	/**
 	 * 断言注解方式的监听过滤规则
 	 *
@@ -157,8 +156,9 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param schemaName  数据库实例
 	 * @param tableName   表名称
 	 * @param eventType   事件类型
+	 * @return {@link java.util.function.Predicate }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:38
+	 * @since 2021-09-03 20:43:50
 	 */
 	protected abstract Predicate<Map.Entry<Method, ListenPoint>> getAnnotationFilter(
 		String destination, String schemaName, String tableName, CanalEntry.EventType eventType);
@@ -170,8 +170,9 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	 * @param method    委托处理的方法
 	 * @param canalMsg  其他信息
 	 * @param rowChange 处理的数据
+	 * @return java.lang.Object[]
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:38
+	 * @since 2021-09-03 20:43:59
 	 */
 	protected abstract Object[] getInvokeArgs(Method method, CanalMsg canalMsg,
 		CanalEntry.RowChange rowChange);
@@ -180,8 +181,9 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 	/**
 	 * 忽略实体类的类型
 	 *
+	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:37
+	 * @since 2021-09-03 20:44:08
 	 */
 	protected List<CanalEntry.EntryType> getIgnoreEntryTypes() {
 		return Collections.emptyList();

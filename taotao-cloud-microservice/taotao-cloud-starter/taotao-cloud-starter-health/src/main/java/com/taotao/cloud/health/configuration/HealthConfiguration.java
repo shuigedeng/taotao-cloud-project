@@ -2,8 +2,7 @@ package com.taotao.cloud.health.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.configuration.CoreConfiguration;
-import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;
@@ -26,20 +25,18 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.servlet.handler.MappedInterceptor;
 
 @Configuration
-@AutoConfigureAfter({CoreConfiguration.class})
+@AutoConfigureAfter({CoreAutoConfiguration.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthConfiguration implements InitializingBean {
 

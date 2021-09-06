@@ -19,24 +19,69 @@ package com.taotao.cloud.captcha.service;
  * 验证码缓存接口
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:49
+ * @version 2021.9
+ * @since 2021-09-03 20:56:54
  */
 public interface CaptchaCacheService {
 
+	/**
+	 * set
+	 *
+	 * @param key              key
+	 * @param value            value
+	 * @param expiresInSeconds expiresInSeconds
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:56
+	 */
 	void set(String key, String value, long expiresInSeconds);
 
+	/**
+	 * exists
+	 *
+	 * @param key key
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:56:59
+	 */
 	boolean exists(String key);
 
+	/**
+	 * delete
+	 *
+	 * @param key key
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:02
+	 */
 	void delete(String key);
 
+	/**
+	 * get
+	 *
+	 * @param key key
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:04
+	 */
 	String get(String key);
 
 	/**
 	 * 缓存类型-local/redis/memcache/.. 通过java SPI机制，接入方可自定义实现类
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:11
 	 */
 	String type();
 
+	/**
+	 * increment
+	 *
+	 * @param key key
+	 * @param val val
+	 * @return {@link java.lang.Long }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:15
+	 */
 	default Long increment(String key, long val) {
 		return 0L;
 	}

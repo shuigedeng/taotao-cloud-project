@@ -33,11 +33,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * 基础实体类
+ * BaseEntity
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/28 16:28
+ * @version 2021.9
+ * @since 2021-09-04 07:35:39
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)

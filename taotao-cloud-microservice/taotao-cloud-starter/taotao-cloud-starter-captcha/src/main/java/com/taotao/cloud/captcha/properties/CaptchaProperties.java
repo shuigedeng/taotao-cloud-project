@@ -22,8 +22,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * CaptchaProperties
  *
  * @author shuigedeng
- * @verosion 1.0.0
- * @since 2021/8/24 16:49
+ * @version 2021.9
+ * @since 2021-09-03 20:55:35
  */
 @ConfigurationProperties(CaptchaProperties.PREFIX)
 public class CaptchaProperties {
@@ -179,6 +179,13 @@ public class CaptchaProperties {
 		this.reqVerifyMinuteLimit = reqVerifyMinuteLimit;
 	}
 
+	/**
+	 * CaptchaProperties
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-03 20:55:44
+	 */
 	public enum StorageType {
 		/**
 		 * 内存.

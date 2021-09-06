@@ -18,11 +18,11 @@ package com.taotao.cloud.captcha.model;
 import java.text.MessageFormat;
 
 /**
- * 返回应答码
+ * 返回应答码 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:48
+ * @version 2021.9
+ * @since 2021-09-04 07:39:28
  */
 public enum CaptchaCodeEnum {
 

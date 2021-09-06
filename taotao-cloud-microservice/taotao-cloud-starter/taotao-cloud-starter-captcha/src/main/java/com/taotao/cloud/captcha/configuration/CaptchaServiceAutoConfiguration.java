@@ -41,8 +41,8 @@ import org.springframework.util.FileCopyUtils;
  * CaptchaServiceAutoConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:38
+ * @version 2021.9
+ * @since 2021-09-03 20:53:53
  */
 @Configuration
 @ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
@@ -93,6 +93,14 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 		return CaptchaServiceFactory.getInstance(config);
 	}
 
+	/**
+	 * initializeBaseMap
+	 *
+	 * @param jigsaw   jigsaw
+	 * @param picClick picClick
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:54:00
+	 */
 	public static void initializeBaseMap(String jigsaw, String picClick) {
 		ImageUtils.cacheBootImage(
 			getResourcesImagesFile(jigsaw + "/original/*.png"),
@@ -101,6 +109,14 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 		);
 	}
 
+	/**
+	 * getResourcesImagesFile
+	 *
+	 * @param path path
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:54:04
+	 */
 	public static Map<String, String> getResourcesImagesFile(String path) {
 		Map<String, String> imgMap = new HashMap<>();
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();

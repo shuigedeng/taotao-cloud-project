@@ -81,12 +81,7 @@ public class DingerRobot extends AbstractDingerSender {
 		DingerType dingerType = message.getDingerType();
 		String dkid = dingTalkManagerBuilder.getDingerIdGenerator().dingerId();
 		Map<DingerType, DingerProperties.Dinger> dingers = dingerProperties.getDingers();
-		if (!
-			(
-				dingerProperties.isEnabled() &&
-					dingers.containsKey(dingerType)
-			)
-		) {
+		if (!(dingerProperties.isEnabled() && dingers.containsKey(dingerType))) {
 			return DingerResponse.failed(dkid, DingerResponseCodeEnum.DINGER_DISABLED);
 		}
 
@@ -139,8 +134,10 @@ public class DingerRobot extends AbstractDingerSender {
 			String response = dingTalkManagerBuilder.getDingerHttpClient().post(
 				webhook.toString(), headers, message
 			);
+			LogUtil.info(response);
 			return DingerResponse.success(dkid, response);
 		} catch (Exception e) {
+			LogUtil.error(e);
 			exceptionCallback(dkid, message, new SendMsgException(e));
 			return DingerResponse.failed(dkid, DingerResponseCodeEnum.SEND_MESSAGE_FAILED);
 		}

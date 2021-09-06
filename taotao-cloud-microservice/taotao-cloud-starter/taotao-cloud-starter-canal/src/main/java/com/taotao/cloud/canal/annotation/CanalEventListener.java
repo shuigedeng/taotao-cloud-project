@@ -27,8 +27,8 @@ import org.springframework.stereotype.Component;
  * canal 监听器注解，继承 @Component
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:56
+ * @version 2021.9
+ * @since 2021-09-03 20:48:12
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

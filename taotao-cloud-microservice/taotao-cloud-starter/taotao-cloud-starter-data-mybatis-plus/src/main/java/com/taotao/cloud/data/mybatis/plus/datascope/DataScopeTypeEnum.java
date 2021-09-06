@@ -19,11 +19,11 @@ import com.taotao.cloud.common.enums.BaseEnum;
 import java.util.stream.Stream;
 
 /**
- * 数据权限类型
+ * 数据权限类型 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-04 07:40:32
  */
 public enum DataScopeTypeEnum implements BaseEnum {
 

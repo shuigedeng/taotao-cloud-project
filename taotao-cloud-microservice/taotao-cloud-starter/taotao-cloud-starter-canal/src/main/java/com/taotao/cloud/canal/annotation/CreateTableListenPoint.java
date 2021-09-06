@@ -25,11 +25,11 @@ import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * 表结构发生变化，新增时，先判断数据库实例是否存在，不存在则创建
+ * 表结构发生变化，新增时，先判断数据库实例是否存在，不存在则创建 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:58
+ * @version 2021.9
+ * @since 2021-09-03 21:00:37
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

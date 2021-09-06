@@ -25,11 +25,11 @@ import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * 重命名表
+ * 重命名表 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:57
+ * @version 2021.9
+ * @since 2021-09-03 21:07:10
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -16,11 +16,11 @@
 package com.taotao.cloud.captcha.model;
 
 /**
- * 底图类型枚举
+ * CaptchaBaseEnum 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:46
+ * @version 2021.9
+ * @since 2021-09-04 07:39:13
  */
 public enum CaptchaBaseEnum {
 	ORIGINAL("ORIGINAL", "滑动拼图底图"),

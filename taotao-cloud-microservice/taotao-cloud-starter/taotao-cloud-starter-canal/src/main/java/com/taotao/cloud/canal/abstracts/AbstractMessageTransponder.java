@@ -18,9 +18,9 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
-import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.interfaces.MessageTransponder;
+import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ import java.util.Objects;
  * AbstractMessageTransponder
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:32
+ * @version 2021.9
+ * @since 2021-09-03 20:46:33
  */
 public abstract class AbstractMessageTransponder implements MessageTransponder {
 
@@ -156,8 +156,9 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 	/**
 	 * 处理监听的事件
 	 *
+	 * @param message message
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:35
+	 * @since 2021-09-03 20:46:45
 	 */
 	protected abstract void distributeEvent(Message message);
 
@@ -165,7 +166,7 @@ public abstract class AbstractMessageTransponder implements MessageTransponder {
 	 * 停止 canal 客户端
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:35
+	 * @since 2021-09-03 20:46:52
 	 */
 	void stop() {
 		running = false;

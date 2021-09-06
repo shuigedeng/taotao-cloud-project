@@ -396,6 +396,21 @@ spring:
 
 taotao:
   cloud:
+    disruptor:
+      enabled: true
+      multi-producer: false
+      ring-buffer-size: 1024
+      ring-thread-numbers: 4
+      #handler-definitions:
+      # - /Event-DC-Output/TagA-Output/** = emailHandler
+      # - /Event-DC-Output/TagB-Output/** = smsHandler
+    dinger:
+      enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
+          secret: ${DINGDING_SECRET:xxxx}
     health:
       enabled: true
       doubtapi:

@@ -11,7 +11,9 @@ import java.util.stream.Stream;
 /**
  * 字符串帮助类
  *
- * @author zuihou
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:44:45
  */
 public final class StrHelper {
 

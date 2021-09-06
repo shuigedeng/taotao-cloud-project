@@ -21,8 +21,8 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
  * 创建索引操作
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:50
+ * @version 2021.9
+ * @since 2021-09-03 20:55:09
  */
 public abstract class CreateIndexOption extends AbstractDBOption {
 

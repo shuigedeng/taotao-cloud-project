@@ -39,8 +39,8 @@ import java.util.Properties;
  * AbstractCaptchaService
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:50
+ * @version 2021.9
+ * @since 2021-09-03 20:57:31
  */
 public abstract class AbstractCaptchaService implements CaptchaService {
 
@@ -132,6 +132,14 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		}
 	}
 
+	/**
+	 * getCacheService
+	 *
+	 * @param cacheType cacheType
+	 * @return {@link com.taotao.cloud.captcha.service.CaptchaCacheService }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:41
+	 */
 	protected CaptchaCacheService getCacheService(String cacheType) {
 		return CaptchaServiceFactory.getCache(cacheType);
 	}
@@ -182,6 +190,14 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		return captcha;
 	}
 
+	/**
+	 * getValidateClientId
+	 *
+	 * @param req req
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:47
+	 */
 	protected String getValidateClientId(Captcha req) {
 		// 以服务端获取的客户端标识 做识别标志
 		if (StrUtil.isNotEmpty(req.getBrowserInfo())) {
@@ -194,6 +210,13 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		return null;
 	}
 
+	/**
+	 * afterValidateFail
+	 *
+	 * @param data data
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:52
+	 */
 	protected void afterValidateFail(Captcha data) {
 		if (limitHandler != null) {
 			// 验证失败 分钟内计数
@@ -209,6 +232,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	/**
 	 * 加载resources下的font字体 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示， 通过加载resources下的font字体解决，无需在linux中安装字体
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:57:56
 	 */
 	private void loadWaterMarkFont() {
 		try {
@@ -227,6 +253,15 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		}
 	}
 
+	/**
+	 * base64StrToImage
+	 *
+	 * @param imgStr imgStr
+	 * @param path   path
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:58:07
+	 */
 	public static boolean base64StrToImage(String imgStr, String path) {
 		if (imgStr == null) {
 			return false;
@@ -259,11 +294,25 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 	/**
 	 * 解密前端坐标aes加密
+	 *
+	 * @param point point
+	 * @param key   key
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:58:11
 	 */
 	public static String decrypt(String point, String key) throws Exception {
 		return AESUtil.decrypt(point, key);
 	}
 
+	/**
+	 * getEnOrChLength
+	 *
+	 * @param s s
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:58:16
+	 */
 	protected static int getEnOrChLength(String s) {
 		int enCount = 0;
 		int chCount = 0;

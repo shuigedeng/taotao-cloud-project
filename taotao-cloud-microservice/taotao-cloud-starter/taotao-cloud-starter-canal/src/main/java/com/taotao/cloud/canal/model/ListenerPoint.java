@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.canal.model;
 
-
 import com.taotao.cloud.canal.annotation.ListenPoint;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -24,10 +23,9 @@ import java.util.Map;
 /**
  * 监听 canal 操作
  *
- * @author 阿导
- * @CopyRight 萬物皆導
- * @created 2018/5/28 14:47
- * @Modified_By 阿导 2018/5/28 14:47
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-03 20:51:45
  */
 public class ListenerPoint {
 
@@ -49,8 +47,9 @@ public class ListenerPoint {
 	/**
 	 * 返回目标类
 	 *
+	 * @return {@link java.lang.Object }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:42
+	 * @since 2021-09-03 20:51:57
 	 */
 	public Object getTarget() {
 		return target;
@@ -59,8 +58,9 @@ public class ListenerPoint {
 	/**
 	 * 获取监听的操作方法和节点
 	 *
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:42
+	 * @since 2021-09-03 20:52:04
 	 */
 	public Map<Method, ListenPoint> getInvokeMap() {
 		return invokeMap;

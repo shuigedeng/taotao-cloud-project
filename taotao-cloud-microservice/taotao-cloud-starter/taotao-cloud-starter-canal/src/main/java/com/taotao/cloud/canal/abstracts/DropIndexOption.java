@@ -18,11 +18,11 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * 刪除索引操作
+ * 刪除索引操作 
  *
- * @version 1.0.0
  * @author shuigedeng
- * @since 2021/8/30 21:51
+ * @version 2021.9
+ * @since 2021-09-03 20:55:32
  */
 public abstract class DropIndexOption extends AbstractDBOption {
 	@Override

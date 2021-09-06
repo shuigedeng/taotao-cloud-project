@@ -31,6 +31,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * CaptchaController 
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:35:39
+ */
 @RestController
 @RequestMapping("/captcha")
 public class CaptchaController {

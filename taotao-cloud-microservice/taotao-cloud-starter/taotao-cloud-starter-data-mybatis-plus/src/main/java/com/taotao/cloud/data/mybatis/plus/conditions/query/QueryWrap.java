@@ -32,10 +32,11 @@ import java.util.function.Predicate;
  * 符号进行转义，便于模糊查询 5，增加 leFooter 方法， 将日期参数值，强制转换成当天 23：59：59 6，增加 geHeader 方法， 将日期参数值，强制转换成当天
  * 00：00：00
  *
- * @author hubin miemie HCL
- * @since 2018-05-25
+ * @param <T> T
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:37:05
  */
-@SuppressWarnings("serial")
 public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 	implements Query<QueryWrap<T>, T, String> {
 
@@ -140,7 +141,7 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 		final QueryWrap<T> instance = instance();
 		consumer.accept(instance);
 		if (!instance.isEmptyOfWhere()) {
-//			appendSqlSegments(APPLY, instance);
+			//appendSqlSegments(APPLY, instance);
 		}
 		return this;
 	}
@@ -215,22 +216,26 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 
 	@Override
 	public QueryWrap<T> like(String column, Object val) {
-		return super.like(this.checkCondition(val), column, StrHelper.keywordConvert(val.toString()));
+		return super.like(this.checkCondition(val), column,
+			StrHelper.keywordConvert(val.toString()));
 	}
 
 	@Override
 	public QueryWrap<T> notLike(String column, Object val) {
-		return super.notLike(this.checkCondition(val), column, StrHelper.keywordConvert(val.toString()));
+		return super.notLike(this.checkCondition(val), column,
+			StrHelper.keywordConvert(val.toString()));
 	}
 
 	@Override
 	public QueryWrap<T> likeLeft(String column, Object val) {
-		return super.likeLeft(this.checkCondition(val), column, StrHelper.keywordConvert(val.toString()));
+		return super.likeLeft(this.checkCondition(val), column,
+			StrHelper.keywordConvert(val.toString()));
 	}
 
 	@Override
 	public QueryWrap<T> likeRight(String column, Object val) {
-		return super.likeRight(this.checkCondition(val), column, StrHelper.keywordConvert(val.toString()));
+		return super.likeRight(this.checkCondition(val), column,
+			StrHelper.keywordConvert(val.toString()));
 	}
 
 	@Override
@@ -242,8 +247,6 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 	public QueryWrap<T> in(String column, Object... values) {
 		return super.in(values != null && values.length > 0, column, values);
 	}
-
-	//----------------以下为自定义方法---------
 
 	/**
 	 * 取消跳过空的字符串  不允许跳过空的字符串

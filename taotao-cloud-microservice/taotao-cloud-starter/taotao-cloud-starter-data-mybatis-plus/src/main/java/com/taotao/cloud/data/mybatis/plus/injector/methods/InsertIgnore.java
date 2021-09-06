@@ -22,7 +22,9 @@ import com.taotao.cloud.data.mybatis.plus.injector.MateSqlMethod;
 /**
  * 插入一条数据（选择字段插入）插入如果中已经存在相同的记录，则忽略当前新数据
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:41:45
  */
 public class InsertIgnore extends AbstractInsertMethod {
 

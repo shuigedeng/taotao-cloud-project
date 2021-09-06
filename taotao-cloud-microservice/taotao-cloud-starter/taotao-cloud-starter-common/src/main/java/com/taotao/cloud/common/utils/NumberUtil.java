@@ -56,7 +56,9 @@ public class NumberUtil {
 				BigDecimal bg = BigDecimal.valueOf(number.doubleValue());
 				return bg.setScale(scale, RoundingMode.HALF_UP).doubleValue();
 			} catch (Exception e) {
-				LogUtil.error(e);
+				//todo  需要判断NAN
+				//LogUtil.error(e);
+				return 0;
 			}
 		}
 		return 0;

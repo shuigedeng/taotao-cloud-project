@@ -22,10 +22,17 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 /**
- * 容器生命周期监听程序
+ * CanalApplicationRunner
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-03 20:53:00
  */
 public class CanalApplicationRunner implements ApplicationRunner {
 
+	/**
+	 * canalClient
+ 	 */
 	private final CanalClient canalClient;
 
 	public CanalApplicationRunner(CanalClient canalClient) {

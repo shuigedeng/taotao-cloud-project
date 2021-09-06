@@ -28,8 +28,8 @@ import org.springframework.core.annotation.AliasFor;
  * 修改改字段属性监听器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:59
+ * @version 2021.9
+ * @since 2021-09-03 20:49:53
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

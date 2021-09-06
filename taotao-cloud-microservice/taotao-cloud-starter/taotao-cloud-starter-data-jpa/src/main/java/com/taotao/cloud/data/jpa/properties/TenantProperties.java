@@ -22,18 +22,17 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 
 /**
- * 多租户配置
+ * TenantProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/15 10:45
+ * @version 2021.9
+ * @since 2021-09-04 07:32:13
  */
 @RefreshScope
 @ConfigurationProperties(prefix = TenantProperties.PREFIX)
 public class TenantProperties {
 
 	public static final String PREFIX = "taotao.cloud.tenant";
-
 
 	/**
 	 * 是否开启多租户

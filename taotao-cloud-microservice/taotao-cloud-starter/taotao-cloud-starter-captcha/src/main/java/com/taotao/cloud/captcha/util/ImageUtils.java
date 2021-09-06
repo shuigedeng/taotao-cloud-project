@@ -39,16 +39,36 @@ import org.springframework.util.Base64Utils;
  * ImageUtils
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:52
+ * @version 2021.9
+ * @since 2021-09-03 21:05:00
  */
 public class ImageUtils {
 
-	private static Map<String, String> originalCacheMap = new ConcurrentHashMap<>();  //滑块底图
-	private static Map<String, String> slidingBlockCacheMap = new ConcurrentHashMap<>(); //滑块
-	private static Map<String, String> picClickCacheMap = new ConcurrentHashMap<>(); //点选文字
+	/**
+	 * 滑块底图
+	 */
+	private static Map<String, String> originalCacheMap = new ConcurrentHashMap<>();
+	/**
+	 * 滑块
+	 */
+	private static Map<String, String> slidingBlockCacheMap = new ConcurrentHashMap<>();
+	/**
+	 * 点选文字
+	 */
+	private static Map<String, String> picClickCacheMap = new ConcurrentHashMap<>();
+	/**
+	 * fileNameMap
+	 */
 	private static Map<String, String[]> fileNameMap = new ConcurrentHashMap<>();
 
+	/**
+	 * cacheImage
+	 *
+	 * @param captchaOriginalPathJigsaw captchaOriginalPathJigsaw
+	 * @param captchaOriginalPathClick  captchaOriginalPathClick
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:36
+	 */
 	public static void cacheImage(String captchaOriginalPathJigsaw,
 		String captchaOriginalPathClick) {
 		//滑动拼图
@@ -78,6 +98,15 @@ public class ImageUtils {
 		LogUtil.info("初始化底图:{}", JsonUtil.toJSONString(fileNameMap));
 	}
 
+	/**
+	 * cacheBootImage
+	 *
+	 * @param originalMap     originalMap
+	 * @param slidingBlockMap slidingBlockMap
+	 * @param picClickMap     picClickMap
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:40
+	 */
 	public static void cacheBootImage(
 		Map<String, String> originalMap,
 		Map<String, String> slidingBlockMap,
@@ -97,7 +126,13 @@ public class ImageUtils {
 		LogUtil.info("自定义resource底图:{}", JsonUtil.toJSONString(fileNameMap));
 	}
 
-
+	/**
+	 * getOriginal
+	 *
+	 * @return {@link java.awt.image.BufferedImage }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:44
+	 */
 	public static BufferedImage getOriginal() {
 		String[] strings = fileNameMap.get(CaptchaBaseEnum.ORIGINAL.getCodeValue());
 		if (null == strings || strings.length == 0) {
@@ -108,6 +143,13 @@ public class ImageUtils {
 		return getBase64StrToImage(s);
 	}
 
+	/**
+	 * getslidingBlock
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:48
+	 */
 	public static String getslidingBlock() {
 		String[] strings = fileNameMap.get(CaptchaBaseEnum.SLIDING_BLOCK.getCodeValue());
 		if (null == strings || strings.length == 0) {
@@ -117,6 +159,13 @@ public class ImageUtils {
 		return slidingBlockCacheMap.get(strings[randomInt]);
 	}
 
+	/**
+	 * getPicClick
+	 *
+	 * @return {@link java.awt.image.BufferedImage }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:50
+	 */
 	public static BufferedImage getPicClick() {
 		String[] strings = fileNameMap.get(CaptchaBaseEnum.PIC_CLICK.getCodeValue());
 		if (null == strings || strings.length == 0) {
@@ -129,6 +178,11 @@ public class ImageUtils {
 
 	/**
 	 * 图片转base64 字符串
+	 *
+	 * @param templateImage templateImage
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:05:56
 	 */
 	public static String getImageToBase64Str(BufferedImage templateImage) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -146,6 +200,11 @@ public class ImageUtils {
 
 	/**
 	 * base64 字符串转图片
+	 *
+	 * @param base64String base64String
+	 * @return {@link java.awt.image.BufferedImage }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:03
 	 */
 	public static BufferedImage getBase64StrToImage(String base64String) {
 		try {
@@ -159,7 +218,14 @@ public class ImageUtils {
 		return null;
 	}
 
-
+	/**
+	 * getResourcesImagesFile
+	 *
+	 * @param path path
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:07
+	 */
 	private static Map<String, String> getResourcesImagesFile(String path) {
 		//默认提供六张底图
 		Map<String, String> imgMap = new HashMap<>();
@@ -180,6 +246,14 @@ public class ImageUtils {
 		return imgMap;
 	}
 
+	/**
+	 * getImagesFile
+	 *
+	 * @param path path
+	 * @return {@link java.util.Map }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:10
+	 */
 	private static Map<String, String> getImagesFile(String path) {
 		Map<String, String> imgMap = new HashMap<>();
 		File file = new File(path);

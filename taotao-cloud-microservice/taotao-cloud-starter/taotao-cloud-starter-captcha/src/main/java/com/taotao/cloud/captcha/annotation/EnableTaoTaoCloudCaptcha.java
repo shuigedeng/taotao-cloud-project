@@ -24,11 +24,11 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启Captcha
+ * EnableTaoTaoCloudCaptcha 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @version 2021.9
+ * @since 2021-09-04 07:36:02
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

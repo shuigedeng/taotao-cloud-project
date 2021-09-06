@@ -37,11 +37,11 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
- * Mybatis 拦截器 主要用于数据权限拦截
+ * Mybatis 拦截器 主要用于数据权限拦截 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-04 07:40:24
  */
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class,
 	Integer.class})})

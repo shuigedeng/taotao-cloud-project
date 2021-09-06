@@ -19,12 +19,11 @@ import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.util.CacheUtil;
 
 /**
- * 对于分布式部署的应用，我们建议应用自己实现CaptchaCacheService， 比如用Redis，参考service/spring-boot代码示例。
- * 如果应用是单点的，也没有使用redis，那默认使用内存。 内存缓存只适合单节点部署的应用，否则验证码生产与验证在节点之间信息不同步，导致失败
+ * CaptchaCacheServiceMemImpl 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:50
+ * @version 2021.9
+ * @since 2021-09-04 07:41:39
  */
 public class CaptchaCacheServiceMemImpl implements CaptchaCacheService {
 

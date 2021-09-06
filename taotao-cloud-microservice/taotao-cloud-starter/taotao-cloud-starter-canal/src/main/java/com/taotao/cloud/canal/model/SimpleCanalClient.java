@@ -39,8 +39,8 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
  * SimpleCanalClient
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 22:08
+ * @version 2021.9
+ * @since 2021-09-03 20:52:12
  */
 public class SimpleCanalClient extends AbstractCanalClient {
 
@@ -114,13 +114,13 @@ public class SimpleCanalClient extends AbstractCanalClient {
 	 * 初始化监听器
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/30 22:09
+	 * @since 2021-09-03 20:52:24
 	 */
 	private void initListeners() {
 		LogUtil.info("{}: 监听器正在初始化....", Thread.currentThread().getName());
 		//获取监听器
 		List<CanalEventListener> list = ContextUtil.getBeansOfType(CanalEventListener.class);
-		//若没有任何监听的，我也不知道引入这个 jar 干什么，直接返回吧
+		//若没有任何监听的，直接返回
 		if (list != null) {
 			//若存在目标监听，放入 listenerMap
 			listeners.addAll(list);

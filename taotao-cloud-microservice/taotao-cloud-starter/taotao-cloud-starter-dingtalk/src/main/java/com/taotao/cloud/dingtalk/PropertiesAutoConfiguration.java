@@ -27,7 +27,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version v1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({ThreadPoolProperties.class, HttpClientProperties.class,
+@EnableConfigurationProperties({ThreadPoolProperties.class,
+	HttpClientProperties.class,
 	DingerProperties.class})
 public class PropertiesAutoConfiguration {
 

@@ -20,11 +20,11 @@ import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * PropertiesAutoConfiguration
+ * PropertiesAutoConfiguration 
  *
  * @author shuigedeng
- * @version v1.0.0
- * @since 2020/7/29 14:18
+ * @version 2021.9
+ * @since 2021-09-04 07:44:59
  */
 @EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, TenantProperties.class})
 public class PropertiesAutoConfiguration {

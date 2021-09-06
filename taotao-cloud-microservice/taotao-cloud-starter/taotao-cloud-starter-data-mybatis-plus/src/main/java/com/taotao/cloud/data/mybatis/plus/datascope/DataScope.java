@@ -23,11 +23,11 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 数据权限查询参数
+ * 数据权限查询参数 
  *
  * @author shuigedeng
- * @since 2020/5/2 16:40
- * @version 1.0.0
+ * @version 2021.9
+ * @since 2021-09-04 07:40:14
  */
 public class DataScope extends HashMap {
 

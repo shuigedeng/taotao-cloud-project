@@ -34,8 +34,8 @@ import org.apache.commons.lang.StringUtils;
  * Canal 客户端抽象类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:27
+ * @version 2021.9
+ * @since 2021-09-03 20:44:30
  */
 public abstract class AbstractCanalClient implements CanalClient {
 
@@ -76,8 +76,10 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 初始化 canal 连接
 	 *
+	 * @param connector connector
+	 * @param config    config
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:54
+	 * @since 2021-09-03 20:44:39
 	 */
 	protected abstract void process(CanalConnector connector,
 		Map.Entry<String, CanalProperties.Instance> config);
@@ -85,8 +87,10 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 处理 canal 连接实例
 	 *
+	 * @param instanceEntry instanceEntry
+	 * @return {@link com.alibaba.otter.canal.client.CanalConnector }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:54
+	 * @since 2021-09-03 20:44:46
 	 */
 	private CanalConnector processInstanceEntry(
 		Map.Entry<String, CanalProperties.Instance> instanceEntry) {
@@ -140,8 +144,9 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 获取 canal 配置
 	 *
+	 * @return {@link java.util.Map }
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:55
+	 * @since 2021-09-03 20:45:01
 	 */
 	protected Map<String, CanalProperties.Instance> getConfig() {
 		//canal 配置
@@ -168,8 +173,9 @@ public abstract class AbstractCanalClient implements CanalClient {
 	/**
 	 * 设置 canal 客户端状态
 	 *
+	 * @param running running
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:55
+	 * @since 2021-09-03 20:45:13
 	 */
 	private void setRunning(boolean running) {
 		this.running = running;

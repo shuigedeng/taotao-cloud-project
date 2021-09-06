@@ -25,8 +25,8 @@ import java.util.Map;
  * 信息转换工厂类接口层
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 22:05
+ * @version 2021.9
+ * @since 2021-09-03 20:51:05
  */
 @FunctionalInterface
 public interface TransponderFactory {
@@ -38,8 +38,9 @@ public interface TransponderFactory {
 	 * @param config        canal 链接信息
 	 * @param listeners     实现接口的监听器
 	 * @param annoListeners 注解监听拦截
+	 * @return {@link com.taotao.cloud.canal.interfaces.MessageTransponder }
 	 * @author shuigedeng
-	 * @since 2021/8/30 22:05
+	 * @since 2021-09-03 20:51:12
 	 */
 	MessageTransponder newTransponder(CanalConnector connector,
 		Map.Entry<String, CanalProperties.Instance> config, List<CanalEventListener> listeners,

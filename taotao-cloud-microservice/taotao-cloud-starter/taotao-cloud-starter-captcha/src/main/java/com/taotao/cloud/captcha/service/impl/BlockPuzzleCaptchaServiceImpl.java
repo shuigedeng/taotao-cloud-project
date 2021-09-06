@@ -45,8 +45,8 @@ import javax.imageio.ImageIO;
  * 滑动验证码
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:50
+ * @version 2021.9
+ * @since 2021-09-03 20:58:27
  */
 public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
@@ -179,6 +179,13 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 	/**
 	 * 根据模板切图
+	 *
+	 * @param originalImage     originalImage
+	 * @param jigsawImage       jigsawImage
+	 * @param jigsawImageBase64 jigsawImageBase64
+	 * @return {@link com.taotao.cloud.captcha.model.Captcha }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:58:38
 	 */
 	public Captcha pictureTemplatesCut(BufferedImage originalImage, BufferedImage jigsawImage,
 		String jigsawImageBase64) {
@@ -262,13 +269,13 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 				encoder.encodeToString(oriCopyImages).replaceAll("\r|\n", ""));
 
 			//point信息不传到前端，只做后端check校验
-//            dataVO.setPoint(point);
+			//dataVO.setPoint(point);
 			dataVO.setJigsawImageBase64(
 				encoder.encodeToString(jigsawImages).replaceAll("\r|\n", ""));
 			dataVO.setToken(RandomUtil.randomString(16));
 			dataVO.setSecretKey(point.getSecretKey());
-//            base64StrToImage(encoder.encodeToString(oriCopyImages), "D:\\原图.png");
-//            base64StrToImage(encoder.encodeToString(jigsawImages), "D:\\滑动.png");
+			//base64StrToImage(encoder.encodeToString(oriCopyImages), "D:\\原图.png");
+			//base64StrToImage(encoder.encodeToString(jigsawImages), "D:\\滑动.png");
 
 			//将坐标信息存入redis中
 			String codeKey = String.format(REDIS_CAPTCHA_KEY, dataVO.getToken());
@@ -286,11 +293,13 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	/**
 	 * 随机生成拼图坐标
 	 *
-	 * @param originalWidth
-	 * @param originalHeight
-	 * @param jigsawWidth
-	 * @param jigsawHeight
-	 * @return
+	 * @param originalWidth  originalWidth
+	 * @param originalHeight originalHeight
+	 * @param jigsawWidth    jigsawWidth
+	 * @param jigsawHeight   jigsawHeight
+	 * @return {@link com.taotao.cloud.captcha.model.Point }
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:02
 	 */
 	private static Point generateJigsawPoint(int originalWidth, int originalHeight,
 		int jigsawWidth, int jigsawHeight) {
@@ -321,7 +330,8 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param newImage      新抠出的小图
 	 * @param x             随机扣取坐标X
 	 * @param y             随机扣取坐标y
-	 * @throws Exception
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:14
 	 */
 	private static void cutByTemplate(BufferedImage oriImage, BufferedImage templateImage,
 		BufferedImage newImage, int x, int y) {
@@ -363,7 +373,6 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 	}
 
-
 	/**
 	 * 干扰抠图处理
 	 *
@@ -371,7 +380,8 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 	 * @param templateImage 模板图
 	 * @param x             随机扣取坐标X
 	 * @param y             随机扣取坐标y
-	 * @throws Exception
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:25
 	 */
 	private static void interferenceByTemplate(BufferedImage oriImage, BufferedImage templateImage,
 		int x, int y) {
@@ -409,6 +419,16 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 
 	}
 
+	/**
+	 * readPixel
+	 *
+	 * @param img    img
+	 * @param x      x
+	 * @param y      y
+	 * @param pixels pixels
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:30
+	 */
 	private static void readPixel(BufferedImage img, int x, int y, int[] pixels) {
 		int xStart = x - 1;
 		int yStart = y - 1;
@@ -434,6 +454,14 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 	}
 
+	/**
+	 * fillMatrix
+	 *
+	 * @param matrix matrix
+	 * @param values values
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:34
+	 */
 	private static void fillMatrix(int[][] matrix, int[] values) {
 		int filled = 0;
 		for (int i = 0; i < matrix.length; i++) {
@@ -444,6 +472,14 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		}
 	}
 
+	/**
+	 * avgMatrix
+	 *
+	 * @param matrix matrix
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 20:59:37
+	 */
 	private static int avgMatrix(int[][] matrix) {
 		int r = 0;
 		int g = 0;

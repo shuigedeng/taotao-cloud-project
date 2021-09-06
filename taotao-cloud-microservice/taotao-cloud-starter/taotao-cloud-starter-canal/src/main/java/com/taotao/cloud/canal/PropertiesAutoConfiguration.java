@@ -19,11 +19,11 @@ import com.taotao.cloud.canal.properties.CanalProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * PropertiesAutoConfiguration
+ * PropertiesAutoConfiguration 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/08/29 09:06
+ * @version 2021.9
+ * @since 2021-09-04 07:33:49
  */
 @EnableConfigurationProperties({
 	CanalProperties.class

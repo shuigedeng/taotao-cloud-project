@@ -12,10 +12,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * 包括id、create_time、created_by、updated_by、update_time、label、parent_id、sort_value 字段的表继承的树形实体
+ * TreeEntity 
  *
- * @author zuihou
- * @date 2019/05/05
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:40:51
  */
 public class TreeEntity<E, T extends Serializable> extends Entity<T> {
 

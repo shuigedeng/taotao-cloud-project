@@ -30,8 +30,8 @@ import java.nio.file.Files;
  * FileCopyUtils
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:52
+ * @version 2021.9
+ * @since 2021-09-03 21:03:49
  */
 public class FileCopyUtils {
 
@@ -40,19 +40,53 @@ public class FileCopyUtils {
 	public FileCopyUtils() {
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:45
+	 */
 	public static int copy(File in, File out) throws IOException {
 		return copy(Files.newInputStream(in.toPath()), Files.newOutputStream(out.toPath()));
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:39
+	 */
 	public static void copy(byte[] in, File out) throws IOException {
 		copy(new ByteArrayInputStream(in),
 			Files.newOutputStream(out.toPath()));
 	}
 
+	/**
+	 * copyToByteArray
+	 *
+	 * @param in in
+	 * @return byte[]
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:35
+	 */
 	public static byte[] copyToByteArray(File in) throws IOException {
 		return copyToByteArray(Files.newInputStream(in.toPath()));
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:27
+	 */
 	public static int copy(InputStream in, OutputStream out) throws IOException {
 		int var2;
 		try {
@@ -73,6 +107,14 @@ public class FileCopyUtils {
 		return var2;
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:16
+	 */
 	public static void copy(byte[] in, OutputStream out) throws IOException {
 		try {
 			out.write(in);
@@ -84,6 +126,14 @@ public class FileCopyUtils {
 		}
 	}
 
+	/**
+	 * copyToByteArray
+	 *
+	 * @param in in
+	 * @return byte[]
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:12
+	 */
 	public static byte[] copyToByteArray(InputStream in) throws IOException {
 		if (in == null) {
 			return new byte[0];
@@ -94,6 +144,15 @@ public class FileCopyUtils {
 		}
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:08
+	 */
 	public static int copy(Reader in, Writer out) throws IOException {
 		try {
 			int byteCount = 0;
@@ -120,6 +179,14 @@ public class FileCopyUtils {
 		}
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:02
+	 */
 	public static void copy(String in, Writer out) throws IOException {
 		try {
 			out.write(in);
@@ -130,9 +197,16 @@ public class FileCopyUtils {
 			}
 
 		}
-
 	}
 
+	/**
+	 * copyToString
+	 *
+	 * @param in in
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:04:00
+	 */
 	public static String copyToString(Reader in) throws IOException {
 		if (in == null) {
 			return "";

@@ -21,11 +21,11 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * 获取当前审计用户 主要用于CreatedBy LastModifiedBy
+ * 获取当前审计用户 主要用于CreatedBy LastModifiedBy 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/28 16:43
+ * @version 2021.9
+ * @since 2021-09-04 07:30:59
  */
 public class AuditorBean implements AuditorAware<Long> {
 

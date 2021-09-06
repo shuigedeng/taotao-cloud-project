@@ -24,11 +24,11 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * CanalProperties
+ * CanalProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:24
+ * @version 2021.9
+ * @since 2021-09-04 07:32:05
  */
 @RefreshScope
 @ConfigurationProperties(prefix = CanalProperties.PREFIX)

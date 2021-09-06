@@ -21,8 +21,8 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
  * 更新数据
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:52
+ * @version 2021.9
+ * @since 2021-09-03 20:47:52
  */
 public abstract class UpdateOption extends AbstractDBOption {
 

@@ -32,8 +32,8 @@ import java.nio.charset.Charset;
  * StreamUtils
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:53
+ * @version 2021.9
+ * @since 2021-09-03 21:06:23
  */
 public class StreamUtils {
 
@@ -43,6 +43,14 @@ public class StreamUtils {
 	public StreamUtils() {
 	}
 
+	/**
+	 * copyToByteArray
+	 *
+	 * @param in in
+	 * @return byte[]
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:25
+	 */
 	public static byte[] copyToByteArray(InputStream in) throws IOException {
 		if (in == null) {
 			return new byte[0];
@@ -53,6 +61,15 @@ public class StreamUtils {
 		}
 	}
 
+	/**
+	 * copyToString
+	 *
+	 * @param in      in
+	 * @param charset charset
+	 * @return {@link String }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:28
+	 */
 	public static String copyToString(InputStream in, Charset charset) throws IOException {
 		if (in == null) {
 			return "";
@@ -71,16 +88,42 @@ public class StreamUtils {
 		}
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:31
+	 */
 	public static void copy(byte[] in, OutputStream out) throws IOException {
 		out.write(in);
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in      in
+	 * @param charset charset
+	 * @param out     out
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:33
+	 */
 	public static void copy(String in, Charset charset, OutputStream out) throws IOException {
 		Writer writer = new OutputStreamWriter(out, charset);
 		writer.write(in);
 		writer.flush();
 	}
 
+	/**
+	 * copy
+	 *
+	 * @param in  in
+	 * @param out out
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:35
+	 */
 	public static int copy(InputStream in, OutputStream out) throws IOException {
 		int byteCount = 0;
 		byte[] buffer = new byte[4096];
@@ -94,6 +137,17 @@ public class StreamUtils {
 		return byteCount;
 	}
 
+	/**
+	 * copyRange
+	 *
+	 * @param in    in
+	 * @param out   out
+	 * @param start start
+	 * @param end   end
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:37
+	 */
 	public static long copyRange(InputStream in, OutputStream out, long start, long end)
 		throws IOException {
 		long skipped = in.skip(start);
@@ -123,6 +177,14 @@ public class StreamUtils {
 		}
 	}
 
+	/**
+	 * drain
+	 *
+	 * @param in in
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:42
+	 */
 	public static int drain(InputStream in) throws IOException {
 		byte[] buffer = new byte[4096];
 		int byteCount;
@@ -133,18 +195,48 @@ public class StreamUtils {
 		return byteCount;
 	}
 
+	/**
+	 * emptyInput
+	 *
+	 * @return {@link InputStream }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:44
+	 */
 	public static InputStream emptyInput() {
 		return new ByteArrayInputStream(EMPTY_CONTENT);
 	}
 
+	/**
+	 * nonClosing
+	 *
+	 * @param in in
+	 * @return {@link InputStream }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:46
+	 */
 	public static InputStream nonClosing(InputStream in) {
 		return new NonClosingInputStream(in);
 	}
 
+	/**
+	 * nonClosing
+	 *
+	 * @param out out
+	 * @return {@link java.io.OutputStream }
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:06:49
+	 */
 	public static OutputStream nonClosing(OutputStream out) {
 		return new NonClosingOutputStream(out);
 	}
 
+	/**
+	 * NonClosingOutputStream
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-03 21:06:57
+	 */
 	private static class NonClosingOutputStream extends FilterOutputStream {
 
 		public NonClosingOutputStream(OutputStream out) {
@@ -159,6 +251,13 @@ public class StreamUtils {
 		}
 	}
 
+	/**
+	 * NonClosingInputStream
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-03 21:07:04
+	 */
 	private static class NonClosingInputStream extends FilterInputStream {
 
 		public NonClosingInputStream(InputStream in) {

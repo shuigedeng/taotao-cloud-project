@@ -1,9 +1,5 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.dingtalk.config.BeanConfiguration,\
-#com.taotao.cloud.dingtalk.config.DingerAutoConfiguration,\
-#com.taotao.cloud.dingtalk.config.DingerConfiguration,\
-#com.taotao.cloud.dingtalk.config.DingerHttpClientConfig,\
-#com.taotao.cloud.dingtalk.config.DingerThreadPoolConfig
-#
-#org.springframework.context.ApplicationListener=\
-#com.taotao.cloud.dingtalk.listeners.ExitEventListener
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.dingtalk.PropertiesAutoConfiguration
+
+org.springframework.context.ApplicationListener=\
+com.taotao.cloud.dingtalk.listeners.ExitEventListener

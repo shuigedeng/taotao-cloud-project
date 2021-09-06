@@ -21,12 +21,11 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
  * canal 的事件接口层
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:46
+ * @version 2021.9
+ * @since 2021-09-03 20:50:13
  */
 @FunctionalInterface
 public interface CanalEventListener {
-
 
 	/**
 	 * 处理事件 处理数据库的操作
@@ -34,9 +33,9 @@ public interface CanalEventListener {
 	 * @param destination 指令
 	 * @param schemaName  库实例
 	 * @param tableName   表名
-	 * @param rowChange   詳細參數
+	 * @param rowChange   数据
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:46
+	 * @since 2021-09-03 20:50:20
 	 */
 	void onEvent(String destination, String schemaName, String tableName,
 		CanalEntry.RowChange rowChange);

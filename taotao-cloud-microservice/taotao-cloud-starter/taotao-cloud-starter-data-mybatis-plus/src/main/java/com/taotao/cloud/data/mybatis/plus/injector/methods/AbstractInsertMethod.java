@@ -32,9 +32,12 @@ import org.apache.ibatis.mapping.SqlSource;
 /**
  * 抽象的 插入一条数据（选择字段插入）
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:41:29
  */
 public class AbstractInsertMethod extends AbstractMethod {
+
 	private final MateSqlMethod sqlMethod;
 
 	public AbstractInsertMethod(MateSqlMethod sqlMethod) {
@@ -42,11 +45,14 @@ public class AbstractInsertMethod extends AbstractMethod {
 	}
 
 	@Override
-	public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
+	public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass,
+		TableInfo tableInfo) {
 		KeyGenerator keyGenerator = new NoKeyGenerator();
-		String columnScript = SqlScriptUtils.convertTrim(tableInfo.getAllInsertSqlColumnMaybeIf(null),
+		String columnScript = SqlScriptUtils.convertTrim(
+			tableInfo.getAllInsertSqlColumnMaybeIf(null),
 			LEFT_BRACKET, RIGHT_BRACKET, null, COMMA);
-		String valuesScript = SqlScriptUtils.convertTrim(tableInfo.getAllInsertSqlPropertyMaybeIf(null),
+		String valuesScript = SqlScriptUtils.convertTrim(
+			tableInfo.getAllInsertSqlPropertyMaybeIf(null),
 			LEFT_BRACKET, RIGHT_BRACKET, null, COMMA);
 		String keyProperty = null;
 		String keyColumn = null;
@@ -59,14 +65,17 @@ public class AbstractInsertMethod extends AbstractMethod {
 				keyColumn = tableInfo.getKeyColumn();
 			} else {
 				if (null != tableInfo.getKeySequence()) {
-					keyGenerator = TableInfoHelper.genKeyGenerator(sqlMethod.getMethod(), tableInfo, builderAssistant);
+					keyGenerator = TableInfoHelper.genKeyGenerator(sqlMethod.getMethod(), tableInfo,
+						builderAssistant);
 					keyProperty = tableInfo.getKeyProperty();
 					keyColumn = tableInfo.getKeyColumn();
 				}
 			}
 		}
-		String sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), columnScript, valuesScript);
+		String sql = String.format(sqlMethod.getSql(), tableInfo.getTableName(), columnScript,
+			valuesScript);
 		SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-		return this.addInsertMappedStatement(mapperClass, modelClass, sqlMethod.getMethod(), sqlSource, keyGenerator, keyProperty, keyColumn);
+		return this.addInsertMappedStatement(mapperClass, modelClass, sqlMethod.getMethod(),
+			sqlSource, keyGenerator, keyProperty, keyColumn);
 	}
 }

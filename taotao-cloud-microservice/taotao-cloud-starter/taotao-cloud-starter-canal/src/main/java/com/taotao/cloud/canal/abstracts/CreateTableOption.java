@@ -18,11 +18,11 @@ package com.taotao.cloud.canal.abstracts;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
 /**
- * 创建表操作
+ * 创建表操作 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:51
+ * @version 2021.9
+ * @since 2021-09-03 20:55:17
  */
 public abstract class CreateTableOption extends AbstractDBOption {
 

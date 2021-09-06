@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.disruptor.util;
 
 import java.util.ArrayList;
@@ -17,12 +32,18 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.TreeSet;
-
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+/**
+ * StringUtils
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-03 20:25:26
+ */
 public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
-	
+
 	private static final String FOLDER_SEPARATOR = "/";
 
 	private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
@@ -32,25 +53,25 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	private static final String CURRENT_PATH = ".";
 
 	private static final char EXTENSION_SEPARATOR = '.';
-	
+
 	/*
 	 * Any number of these characters are considered delimiters between
 	 * multiple context config paths in a single String value.
 	 */
 	public static String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
-	
-	private static final int[] allChineseScope = { 1601, 1637, 1833, 2078,
-			2274, 2302, 2433, 2594, 2787, 3106, 3212, 3472, 3635, 3722, 3730,
-			3858, 4027, 4086, 4390, 4558, 4684, 4925, 5249, 5600,
-			Integer.MAX_VALUE };
+
+	private static final int[] allChineseScope = {1601, 1637, 1833, 2078,
+		2274, 2302, 2433, 2594, 2787, 3106, 3212, 3472, 3635, 3722, 3730,
+		3858, 4027, 4086, 4390, 4558, 4684, 4925, 5249, 5600,
+		Integer.MAX_VALUE};
 	public static final char unknowChar = '*';
-	private static final char[] allEnglishLetter = { 'A', 'B', 'C', 'D', 'E',
-			'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-			'T', 'W', 'X', 'Y', 'Z', unknowChar };
+	private static final char[] allEnglishLetter = {'A', 'B', 'C', 'D', 'E',
+		'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+		'T', 'W', 'X', 'Y', 'Z', unknowChar};
 
 	/*
 	 * 字串是否为空
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -64,18 +85,18 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		}
 		return false;
 	}
-	
+
 	/*
 	 * 该方法不能被删除；可能引起调用者代码报错
 	 */
 	public static boolean isNotEmpty(String str) {
 		return !isEmpty(str);
 	}
-	
+
 
 	/*
 	 * 判断 Null 或 空字符串
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -455,12 +476,11 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return sb.toString();
 	}
 
-
 	//---------------------------------------------------------------------
 	// Convenience methods for working with formatted Strings
 	//---------------------------------------------------------------------
 
-	 
+
 	/*
 	 * Unqualify a string qualified by a '.' dot character. For example,
 	 * "this.name.is.qualified", returns "qualified".
@@ -509,8 +529,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		StringBuilder sb = new StringBuilder(str.length());
 		if (capitalize) {
 			sb.append(Character.toUpperCase(str.charAt(0)));
-		}
-		else {
+		} else {
 			sb.append(Character.toLowerCase(str.charAt(0)));
 		}
 		sb.append(str.substring(1));
@@ -590,8 +609,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 				newPath += FOLDER_SEPARATOR;
 			}
 			return newPath + relativePath;
-		}
-		else {
+		} else {
 			return relativePath;
 		}
 	}
@@ -620,8 +638,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			prefix = pathToUse.substring(0, prefixIndex + 1);
 			if (prefix.contains("/")) {
 				prefix = "";
-			}
-			else {
+			} else {
 				pathToUse = pathToUse.substring(prefixIndex + 1);
 			}
 		}
@@ -638,17 +655,14 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			String element = pathArray[i];
 			if (CURRENT_PATH.equals(element)) {
 				// Points to current directory - drop it.
-			}
-			else if (TOP_PATH.equals(element)) {
+			} else if (TOP_PATH.equals(element)) {
 				// Registering top path found.
 				tops++;
-			}
-			else {
+			} else {
 				if (tops > 0) {
 					// Merging path element with element corresponding to top path.
 					tops--;
-				}
-				else {
+				} else {
 					// Normal path element found.
 					pathElements.add(0, element);
 				}
@@ -692,7 +706,8 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		if (parts.length > 2) {
 			// There is definitely a variant, and it is everything after the country
 			// code sans the separator between the country code and the variant.
-			int endIndexOfCountryCode = localeString.indexOf(country, language.length()) + country.length();
+			int endIndexOfCountryCode =
+				localeString.indexOf(country, language.length()) + country.length();
 			// Strip off any leading '_' and whitespace, what's left is the variant.
 			variant = trimLeadingWhitespace(localeString.substring(endIndexOfCountryCode));
 			if (variant.startsWith("_")) {
@@ -707,7 +722,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			char ch = localePart.charAt(i);
 			if (ch != '_' && ch != ' ' && !Character.isLetterOrDigit(ch)) {
 				throw new IllegalArgumentException(
-						"Locale part \"" + localePart + "\" contains invalid characters");
+					"Locale part \"" + localePart + "\" contains invalid characters");
 			}
 		}
 	}
@@ -719,7 +734,8 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @return the RFC 3066 compliant language tag as String
 	 */
 	public static String toLanguageTag(Locale locale) {
-		return locale.getLanguage() + (hasText(locale.getCountry()) ? "-" + locale.getCountry() : "");
+		return locale.getLanguage() + (hasText(locale.getCountry()) ? "-" + locale.getCountry()
+			: "");
 	}
 
 	/*
@@ -733,11 +749,11 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		TimeZone timeZone = TimeZone.getTimeZone(timeZoneString);
 		if ("GMT".equals(timeZone.getID()) && !timeZoneString.startsWith("GMT")) {
 			// We don't want that GMT fallback...
-			throw new IllegalArgumentException("Invalid time zone specification '" + timeZoneString + "'");
+			throw new IllegalArgumentException(
+				"Invalid time zone specification '" + timeZoneString + "'");
 		}
 		return timeZone;
 	}
-
 
 	//---------------------------------------------------------------------
 	// Convenience methods for working with String arrays
@@ -752,7 +768,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 */
 	public static String[] addStringToArray(String[] array, String str) {
 		if (ObjectUtils.isEmpty(array)) {
-			return new String[] {str};
+			return new String[]{str};
 		}
 		String[] newArr = new String[array.length + 1];
 		System.arraycopy(array, 0, newArr, 0, array.length);
@@ -915,7 +931,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * or {@code null} if the array to process was {@code null} or empty
 	 */
 	public static Properties splitArrayElementsIntoProperties(
-			String[] array, String delimiter, String charsToDelete) {
+		String[] array, String delimiter, String charsToDelete) {
 
 		if (ObjectUtils.isEmpty(array)) {
 			return null;
@@ -935,7 +951,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @description	：获得以 ",; \t\n"分割的字符数组
 	 * @author 		： hiwepy
 	 * @date 		：Dec 17, 2015 9:07:47 PM
@@ -945,7 +961,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static String[] tokenizeToStringArray(String str) {
 		return tokenizeToStringArray(str, CONFIG_LOCATION_DELIMITERS, true, true);
 	}
-	
+
 	/*
 	 * Tokenize the given String into a String array via a StringTokenizer.
 	 * Trims tokens and omits empty tokens.
@@ -985,7 +1001,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @see #delimitedListToStringArray
 	 */
 	public static String[] tokenizeToStringArray(
-			String str, String delimiters, boolean trimTokens, boolean ignoreEmptyTokens) {
+		String str, String delimiters, boolean trimTokens, boolean ignoreEmptyTokens) {
 
 		if (str == null) {
 			return null;
@@ -1032,20 +1048,20 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @return an array of the tokens in the list
 	 * @see #tokenizeToStringArray
 	 */
-	public static String[] delimitedListToStringArray(String str, String delimiter, String charsToDelete) {
+	public static String[] delimitedListToStringArray(String str, String delimiter,
+		String charsToDelete) {
 		if (str == null) {
 			return new String[0];
 		}
 		if (delimiter == null) {
-			return new String[] {str};
+			return new String[]{str};
 		}
 		List<String> result = new ArrayList<String>();
 		if ("".equals(delimiter)) {
 			for (int i = 0; i < str.length(); i++) {
 				result.add(deleteAny(str.substring(i, i + 1), charsToDelete));
 			}
-		}
-		else {
+		} else {
 			int pos = 0;
 			int delPos;
 			while ((delPos = str.indexOf(delimiter, pos)) != -1) {
@@ -1093,7 +1109,8 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @param suffix the String to end each element with
 	 * @return the delimited String
 	 */
-	public static String collectionToDelimitedString(Collection<?> coll, String delim, String prefix, String suffix) {
+	public static String collectionToDelimitedString(Collection<?> coll, String delim,
+		String prefix, String suffix) {
 		if (CollectionUtils.isEmpty(coll)) {
 			return "";
 		}
@@ -1162,10 +1179,10 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static String arrayToCommaDelimitedString(Object[] arr) {
 		return arrayToDelimitedString(arr, ",");
 	}
-	
+
 	/*
 	 * 生成查询字串Map
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1180,7 +1197,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 全替换
-	 * 
+	 *
 	 * @param src
 	 *            替换字串
 	 * @param tar
@@ -1211,13 +1228,13 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @param bytesSrc
 	 * @param bytesTar
 	 * @return
 	 */
 	private static boolean isStartWith(byte bytesSrc[], int startSrc,
-			byte bytesTar[], int startTar) {
+		byte bytesTar[], int startTar) {
 		for (int j = startTar; j < bytesTar.length; j++) {
 			if (bytesSrc[startSrc + j] != bytesTar[j]) {
 				return false;
@@ -1228,7 +1245,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 取中文拼音首字符
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1253,7 +1270,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 					// +" "+allChineseScope.length);
 				}
 				if (gbkIndex >= allChineseScope[i]
-						&& gbkIndex < allChineseScope[i + 1]) {
+					&& gbkIndex < allChineseScope[i + 1]) {
 					result = allEnglishLetter[i];
 					break;
 				}
@@ -1267,7 +1284,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 字串分割
-	 * 
+	 *
 	 * @param src
 	 * @param letter
 	 * @return
@@ -1287,7 +1304,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			}
 		}
 		if (ret.size() == 0) {
-			return new String[] { src };
+			return new String[]{src};
 		}
 		// ret.add(new String(bytes, curPoint, src.length() - curPoint));
 		String[] retStr = new String[ret.size()];
@@ -1316,19 +1333,19 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		}
 		String beforeDelimiter = toSplit.substring(0, offset);
 		String afterDelimiter = toSplit.substring(offset + delimiter.length());
-		return new String[] {beforeDelimiter, afterDelimiter};
+		return new String[]{beforeDelimiter, afterDelimiter};
 	}
-	
+
 	public static String[] splits(String toSplit, String regex) {
 		if (!hasLength(toSplit) || !hasLength(regex)) {
-			return new String[] {};
+			return new String[]{};
 		}
 		return toSplit.split(regex);
 	}
 
 	/*
 	 * 去除最后一个字符
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1342,7 +1359,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 为字符串的每个元素增加单引号，供sql语句调用 如字符串"123,567"变成"'123','567'"
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -1364,7 +1381,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * list转string数组
-	 * 
+	 *
 	 * @param list
 	 * @return String[]
 	 */
@@ -1375,7 +1392,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * list转string字符串,以符号分隔
-	 * 
+	 *
 	 * @param list
 	 * @param separator
 	 * @return String
@@ -1386,7 +1403,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 生成随即密码
-	 * 
+	 *
 	 * @author 来自网上
 	 * @param pwd_len
 	 *            生成的密码的总长度
@@ -1397,10 +1414,10 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 		final int maxNum = 37;
 		int i; // 生成的随机数
 		int count = 0; // 生成的密码的长度
-		char[] str = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-				'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8',
-				'9', '_' };
+		char[] str = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+			'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+			'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8',
+			'9', '_'};
 		StringBuilder pwd = new StringBuilder("");
 		Random r = new Random();
 		while (count < pwd_len) {
@@ -1416,7 +1433,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * 将传入字符串改为非NULL值.
-	 * 
+	 *
 	 * @param str
 	 * @return 传入NULL,返回空"".
 	 */
@@ -1428,7 +1445,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @description: 圆括号()包裹
 	 * @author : hiwepy
 	 * @date : 2014-4-29
@@ -1441,7 +1458,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @description: 方括号[]包裹
 	 * @author : hiwepy
 	 * @date : 2014-4-29
@@ -1459,7 +1476,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/*
 	 * Quote the given String with single quotes.
-	 * 
+	 *
 	 * @param str
 	 *            the input String (e.g. "myString")
 	 * @return the quoted String (e.g. "'myString'"), or
@@ -1470,7 +1487,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @description: 将String集合元素用'包围，并拼接
 	 * @author : hiwepy
 	 * @date : 2014-4-29
@@ -1495,7 +1512,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	/*
 	 * Turn the given Object into a String with single quotes if it is a String;
 	 * keeping the Object as-is else.
-	 * 
+	 *
 	 * @param obj
 	 *            the input Object (e.g. "myString")
 	 * @return the quoted String (e.g. "'myString'"), or the input object as-is
@@ -1506,7 +1523,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @param string
 	 * @return
 	 * @description： 把一个字符的非Alpha字符都去掉,String string = "1\r\n1\r\n";-->结果："11";
@@ -1523,12 +1540,12 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/*
-	 * 
+	 *
 	 * @param string
 	 * @return
 	 * @description： 把一个字符的非Alpha字符都去掉，并返回每个字符的数组,String string =
 	 *               "1\r\n1\r\n";-->结果：new String[]{"1","1"};
-	 * 
+	 *
 	 * @return: String[]
 	 * @method: trimToAlphaStrings
 	 * @author: hiwepy
@@ -1553,5 +1570,5 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			return str.trim();
 		}
 	}
-	
+
 }

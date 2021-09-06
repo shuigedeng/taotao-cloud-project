@@ -23,11 +23,11 @@
  import org.springframework.context.annotation.Lazy;
 
  /**
-  * jpa 多租户连接提供者
+  * jpa 多租户连接提供者 
   *
   * @author shuigedeng
-  * @version 1.0.0
-  * @since 2020/9/28 17:30
+  * @version 2021.9
+  * @since 2021-09-04 07:31:10
   */
  public class TenantConnectionProvider implements MultiTenantConnectionProvider {
 

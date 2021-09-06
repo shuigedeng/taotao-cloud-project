@@ -17,9 +17,9 @@ package com.taotao.cloud.captcha.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.Captcha;
+import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.Const;
-import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import java.util.Objects;
 import java.util.Properties;
@@ -28,8 +28,8 @@ import java.util.Properties;
  * FrequencyLimitHandler
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:51
+ * @version 2021.9
+ * @since 2021-09-03 21:02:19
  */
 public interface FrequencyLimitHandler {
 
@@ -37,32 +37,41 @@ public interface FrequencyLimitHandler {
 
 	/**
 	 * get 接口限流
+	 *
+	 * @param captcha captcha
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:02:43
 	 */
 	void validateGet(Captcha captcha);
 
 	/**
 	 * check接口限流
+	 *
+	 * @param captcha captcha
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:02:49
 	 */
 	void validateCheck(Captcha captcha);
 
 	/**
 	 * verify接口限流
+	 *
+	 * @param captcha captcha
+	 * @author shuigedeng
+	 * @since 2021-09-03 21:02:53
 	 */
 	void validateVerify(Captcha captcha);
 
 
-	/***
-	 * 验证码接口限流:
-	 *      客户端ClientUid 组件实例化时设置一次，如：场景码+UUID，客户端可以本地缓存,保证一个组件只有一个值
+	/**
+	 * 验证码接口限流: 客户端ClientUid 组件实例化时设置一次，如：场景码+UUID，客户端可以本地缓存,保证一个组件只有一个值
+	 * <p>
+	 * 针对同一个客户端的请求，做如下限制: get 1分钟内check失败5次，锁定5分钟 1分钟内不能超过120次。 check: 1分钟内不超过600次 verify:
+	 * 1分钟内不超过600次
 	 *
-	 * 针对同一个客户端的请求，做如下限制:
-	 * get
-	 * 	 1分钟内check失败5次，锁定5分钟
-	 * 	 1分钟内不能超过120次。
-	 * check:
-	 *   1分钟内不超过600次
-	 * verify:
-	 *   1分钟内不超过600次
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-03 21:02:28
 	 */
 	class DefaultLimitHandler implements FrequencyLimitHandler {
 

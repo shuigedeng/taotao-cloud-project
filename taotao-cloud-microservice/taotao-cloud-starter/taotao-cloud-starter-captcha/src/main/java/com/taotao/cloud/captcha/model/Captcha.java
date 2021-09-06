@@ -19,11 +19,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Captcha
+ * Captcha 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/24 16:47
+ * @version 2021.9
+ * @since 2021-09-04 07:39:08
  */
 public class Captcha implements Serializable {
 

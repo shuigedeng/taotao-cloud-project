@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 package com.taotao.cloud.canal.model;
-
 /**
- * CanalMsg
+ * CanalMsg 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:45
+ * @version 2021.9
+ * @since 2021-09-04 07:31:00
  */
 public class CanalMsg {
 

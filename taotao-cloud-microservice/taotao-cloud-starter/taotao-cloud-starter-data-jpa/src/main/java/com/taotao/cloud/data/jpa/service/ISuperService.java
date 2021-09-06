@@ -22,8 +22,8 @@ import com.taotao.cloud.core.lock.DistributedLock;
  * service接口父类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:27
+ * @version 2021.9
+ * @since 2021-09-04 07:33:18
  */
 public interface ISuperService<T> {
 
@@ -37,7 +37,7 @@ public interface ISuperService<T> {
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 17:18
+	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate,
 		String msg);
@@ -51,7 +51,7 @@ public interface ISuperService<T> {
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 17:18
+	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Predicate predicate);
 
@@ -65,7 +65,7 @@ public interface ISuperService<T> {
 	 * @param msg       对象已存在提示信息
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 17:18
+	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
 		Predicate predicate, String msg);
@@ -79,7 +79,7 @@ public interface ISuperService<T> {
 	 * @param predicate 判断是否存在的条件
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/2/25 17:18
+	 * @since 2021-09-04 07:32:26
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
 		Predicate predicate);

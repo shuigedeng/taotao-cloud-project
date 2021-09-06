@@ -309,6 +309,7 @@ public class ExceptionConfiguration implements InitializingBean {
 	 * @since 2021-09-02 21:27:34
 	 */
 	private void printLog(NativeWebRequest req, Exception e) {
+		LogUtil.error(e);
 		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
 				e.getClass().getName(), uri(req), query(req), e.getMessage());
 //		LogUtil.error(e.getMessage(), e);

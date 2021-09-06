@@ -20,11 +20,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * jpa 属性自动注入配置
+ * PropertiesAutoConfiguration 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/7/29 14:18
+ * @version 2021.9
+ * @since 2021-09-04 07:34:14
  */
 @EnableConfigurationProperties({TenantProperties.class})
 public class PropertiesAutoConfiguration {

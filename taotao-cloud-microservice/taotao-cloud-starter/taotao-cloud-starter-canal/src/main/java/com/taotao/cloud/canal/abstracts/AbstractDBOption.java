@@ -22,8 +22,8 @@ import com.taotao.cloud.canal.interfaces.IDBOption;
  * 数据库操作抽象类
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:49
+ * @version 2021.9
+ * @since 2021-09-03 20:45:44
  */
 public abstract class AbstractDBOption implements IDBOption {
 
@@ -44,7 +44,7 @@ public abstract class AbstractDBOption implements IDBOption {
 	 * 进行类型设置
 	 *
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:48
+	 * @since 2021-09-03 20:45:52
 	 */
 	protected abstract void setEventType();
 
@@ -52,8 +52,9 @@ public abstract class AbstractDBOption implements IDBOption {
 	/**
 	 * 设置下一个节点
 	 *
+	 * @param next next
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:48
+	 * @since 2021-09-03 20:45:58
 	 */
 	public void setNext(AbstractDBOption next) {
 		this.next = next;
@@ -63,8 +64,12 @@ public abstract class AbstractDBOption implements IDBOption {
 	/**
 	 * 责任链处理
 	 *
+	 * @param destination destination
+	 * @param schemaName  schemaName
+	 * @param tableName   tableName
+	 * @param rowChange   rowChange
 	 * @author shuigedeng
-	 * @since 2021/8/30 21:48
+	 * @since 2021-09-03 20:46:05
 	 */
 	public void doChain(String destination, String schemaName, String tableName,
 		CanalEntry.RowChange rowChange) {

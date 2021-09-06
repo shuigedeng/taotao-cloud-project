@@ -38,8 +38,8 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
  * 基础jpa Repository
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/28 16:00
+ * @version 2021.9
+ * @since 2021-09-04 07:32:26
  */
 public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> {
 
@@ -60,6 +60,16 @@ public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID
 		this.querydsl = new Querydsl(em, new PathBuilder<T>(path.getType(), path.getMetadata()));
 	}
 
+	/**
+	 * findAll
+	 *
+	 * @param predicate predicate
+	 * @param pageable  pageable
+	 * @param orders    orders
+	 * @return {@link org.springframework.data.domain.Page }
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:31
+	 */
 	public Page<T> findAll(Predicate predicate, Pageable pageable, OrderSpecifier<?>... orders) {
 		final JPAQuery<T> countQuery = jpaQueryFactory.selectFrom(path);
 		countQuery.where(predicate);
@@ -68,34 +78,84 @@ public abstract class BaseJpaRepository<T, ID> extends SimpleJpaRepository<T, ID
 		return PageableExecutionUtils.getPage(query.fetch(), pageable, countQuery::fetchCount);
 	}
 
+	/**
+	 * count
+	 *
+	 * @param predicate predicate
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:37
+	 */
 	public long count(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
 			.fetchCount();
 	}
 
+	/**
+	 * exists
+	 *
+	 * @param predicate predicate
+	 * @return {@link java.lang.Boolean }
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:40
+	 */
 	public Boolean exists(Predicate predicate) {
 		return jpaPredicateExecutor.exists(predicate);
 	}
 
+	/**
+	 * fetch
+	 *
+	 * @param predicate predicate
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:48
+	 */
 	public List<T> fetch(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
 			.fetch();
 	}
 
+	/**
+	 * fetchOne
+	 *
+	 * @param predicate predicate
+	 * @return T
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:51
+	 */
 	public T fetchOne(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
 			.fetchOne();
 	}
 
+	/**
+	 * fetchCount
+	 *
+	 * @param predicate predicate
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:54
+	 */
 	public long fetchCount(Predicate predicate) {
 		return jpaQueryFactory.selectFrom(path)
 			.where(predicate)
 			.fetchCount();
 	}
 
+	/**
+	 * find
+	 *
+	 * @param predicate predicate
+	 * @param expr      expr
+	 * @param o         o
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-04 07:32:58
+	 */
 	public List<?> find(Predicate predicate, Expression<?> expr, OrderSpecifier<?>... o) {
 		return jpaQueryFactory
 			.select(expr)

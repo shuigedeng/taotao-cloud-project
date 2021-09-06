@@ -1,7 +1,6 @@
 package com.taotao.cloud.data.mybatis.plus.conditions;
 
 
-
 import static com.taotao.cloud.common.constant.StrPool.PERCENT;
 import static com.taotao.cloud.common.constant.StrPool.UNDERSCORE;
 
@@ -11,10 +10,10 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.taotao.cloud.common.utils.DateUtil;
-import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.LbqWrapper;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.data.mybatis.plus.conditions.update.LbuWrapper;
+import com.taotao.cloud.data.mybatis.plus.utils.StrHelper;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
@@ -22,13 +21,13 @@ import java.util.Map;
 /**
  * Wrappers 工具类， 该方法的主要目的是为了 缩短代码长度
  *
- * @author zuihou
- * @date 2019/06/14
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:38:32
  */
 public final class Wraps {
 
 	private Wraps() {
-		// ignore
 	}
 
 	/**
@@ -188,24 +187,24 @@ public final class Wraps {
 	}
 
 	private static boolean replaceByRemoteData(Object target, Field field, Object classValue) {
-//		if (classValue instanceof RemoteData) {
-//			RemoteData rd = (RemoteData) classValue;
-//			Object key = rd.getKey();
-//			if (ObjectUtil.isEmpty(key)) {
-//				ReflectUtil.setFieldValue(target, field, null);
-//				return true;
-//			}
-//			if (!(key instanceof String)) {
-//				return true;
-//			}
-//			String strKey = (String) key;
-//			if (strKey.contains(PERCENT) || strKey.contains(UNDERSCORE)) {
-//				String tarValue = StrHelper.keywordConvert(strKey);
-//				rd.setKey(tarValue);
-//				ReflectUtil.setFieldValue(target, field, rd);
-//			}
-//			return true;
-//		}
+		//if (classValue instanceof RemoteData) {
+		//	RemoteData rd = (RemoteData) classValue;
+		//	Object key = rd.getKey();
+		//	if (ObjectUtil.isEmpty(key)) {
+		//		ReflectUtil.setFieldValue(target, field, null);
+		//		return true;
+		//	}
+		//	if (!(key instanceof String)) {
+		//		return true;
+		//	}
+		//	String strKey = (String) key;
+		//	if (strKey.contains(PERCENT) || strKey.contains(UNDERSCORE)) {
+		//		String tarValue = StrHelper.keywordConvert(strKey);
+		//		rd.setKey(tarValue);
+		//		ReflectUtil.setFieldValue(target, field, rd);
+		//	}
+		//	return true;
+		//}
 		return false;
 	}
 

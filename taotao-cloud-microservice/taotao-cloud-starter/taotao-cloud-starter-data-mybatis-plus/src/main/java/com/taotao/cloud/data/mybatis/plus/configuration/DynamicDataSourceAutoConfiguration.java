@@ -45,10 +45,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 /**
- * <p>
- * 动态数据源切换配置
+ * DynamicDataSourceAutoConfiguration
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-04 07:45:13
  */
 @Configuration
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)

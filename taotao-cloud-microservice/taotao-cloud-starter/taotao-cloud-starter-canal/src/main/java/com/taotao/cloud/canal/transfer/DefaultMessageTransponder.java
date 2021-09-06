@@ -19,9 +19,9 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.taotao.cloud.canal.abstracts.AbstractBasicMessageTransponder;
 import com.taotao.cloud.canal.annotation.ListenPoint;
+import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.model.CanalMsg;
 import com.taotao.cloud.canal.model.ListenerPoint;
-import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -34,8 +34,8 @@ import org.springframework.util.StringUtils;
  * 默认信息转换器
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:30
+ * @version 2021.9
+ * @since 2021-09-03 20:53:20
  */
 public class DefaultMessageTransponder extends AbstractBasicMessageTransponder {
 

@@ -23,13 +23,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
-
 /**
  * 刪除索引操作
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/30 21:58
+ * @version 2021.9
+ * @since 2021-09-03 20:49:53
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
