@@ -38,10 +38,10 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 )
 public interface UserDinger {
 
-	@DingerText(value = "用户${username}注册成功", phones = "111111111111")
+	@DingerText(value = "taotao 用户${username}注册成功", phones = "111111111111")
 	DingerResponse userRegister(String username);
 
-	@DingerMarkdown(value = "用户注销通知 ${userId} , ${username}",
+	@DingerMarkdown(value = "taotao 用户注销通知 ${userId} , ${username}",
 		title = "taotao 测试", phones = "11111111111")
 	DingerResponse userLogout(@Parameter("userId") Long userId, String username);
 

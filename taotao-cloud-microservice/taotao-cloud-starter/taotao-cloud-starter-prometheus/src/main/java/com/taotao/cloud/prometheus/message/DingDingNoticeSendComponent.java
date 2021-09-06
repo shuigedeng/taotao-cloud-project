@@ -1,10 +1,10 @@
 package com.taotao.cloud.prometheus.message;
 
 import com.taotao.cloud.prometheus.httpclient.DingdingHttpClient;
-import com.taotao.cloud.prometheus.pojos.PromethuesNotice;
-import com.taotao.cloud.prometheus.pojos.dingding.DingDingNotice;
-import com.taotao.cloud.prometheus.pojos.dingding.DingDingResult;
-import com.taotao.cloud.prometheus.properties.notice.DingDingNoticeProperty;
+import com.taotao.cloud.prometheus.model.PromethuesNotice;
+import com.taotao.cloud.prometheus.model.DingDingNotice;
+import com.taotao.cloud.prometheus.model.DingDingResult;
+import com.taotao.cloud.prometheus.properties.DingDingNoticeProperty;
 import com.taotao.cloud.prometheus.text.NoticeTextResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

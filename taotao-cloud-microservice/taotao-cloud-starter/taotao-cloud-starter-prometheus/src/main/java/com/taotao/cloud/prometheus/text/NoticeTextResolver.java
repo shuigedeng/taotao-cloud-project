@@ -1,7 +1,7 @@
 package com.taotao.cloud.prometheus.text;
 
 
-import com.taotao.cloud.prometheus.pojos.PromethuesNotice;
+import com.taotao.cloud.prometheus.model.PromethuesNotice;
 
 @FunctionalInterface
 public interface NoticeTextResolver<T extends PromethuesNotice> {

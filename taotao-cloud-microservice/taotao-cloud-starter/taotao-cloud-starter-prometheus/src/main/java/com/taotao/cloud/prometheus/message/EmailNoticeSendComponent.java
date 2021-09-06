@@ -1,7 +1,7 @@
 package com.taotao.cloud.prometheus.message;
 
-import com.taotao.cloud.prometheus.pojos.PromethuesNotice;
-import com.taotao.cloud.prometheus.properties.notice.EmailNoticeProperty;
+import com.taotao.cloud.prometheus.model.PromethuesNotice;
+import com.taotao.cloud.prometheus.properties.EmailNoticeProperty;
 import com.taotao.cloud.prometheus.text.NoticeTextResolver;
 import java.util.regex.Pattern;
 import org.springframework.boot.autoconfigure.mail.MailProperties;

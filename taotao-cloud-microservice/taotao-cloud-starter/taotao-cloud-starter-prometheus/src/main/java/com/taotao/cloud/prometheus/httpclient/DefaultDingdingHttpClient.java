@@ -1,8 +1,8 @@
 package com.taotao.cloud.prometheus.httpclient;
 
-import com.taotao.cloud.prometheus.pojos.dingding.DingDingNotice;
-import com.taotao.cloud.prometheus.pojos.dingding.DingDingResult;
-import com.taotao.cloud.prometheus.properties.notice.DingDingNoticeProperty;
+import com.taotao.cloud.prometheus.model.DingDingNotice;
+import com.taotao.cloud.prometheus.model.DingDingResult;
+import com.taotao.cloud.prometheus.properties.DingDingNoticeProperty;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;

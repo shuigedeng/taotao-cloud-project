@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * @since 2021/09/03 18:02
  */
-@EventRule("/Event-Output/TagA-Output/**")
+@EventRule("/Event-Output/TagB-Output/**")
 @Component("smsHandler")
 public class SmsDisruptorHandler implements DisruptorHandler<DisruptorBindEvent> {
 

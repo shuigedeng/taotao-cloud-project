@@ -21,6 +21,7 @@ import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
 import com.taotao.cloud.dingtalk.multi.RoundRobinHandler;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * GlobalDingerConfigHandler
@@ -34,7 +35,10 @@ public class UserDingerConfigHandler implements DingerConfigHandler {
 	@Override
 	public List<DingerConfig> dingerConfigs() {
 		List<DingerConfig> configs = new ArrayList<>();
-		configs.add(DingerConfig.instance("", ""));
+		String tokenId = System.getenv("DINGDING_TOKEN_ID");
+		String secret = System.getenv("DINGDING_SECRET");
+
+		configs.add(DingerConfig.instance(tokenId, secret));
 		return configs;
 	}
 

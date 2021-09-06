@@ -45,6 +45,8 @@ dubbo:
     base-packages: com.taotao.cloud.*.biz.service.impl
   provider:
     loadbalance: roundrobin
+  consumer:
+    check: false
 
 seata:
   enabled: true

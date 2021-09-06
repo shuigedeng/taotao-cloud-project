@@ -1,6 +1,6 @@
 package com.taotao.cloud.prometheus.web;
 
-import com.taotao.cloud.prometheus.anno.ExceptionListener;
+import com.taotao.cloud.prometheus.annotation.ExceptionListener;
 import java.lang.reflect.Type;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

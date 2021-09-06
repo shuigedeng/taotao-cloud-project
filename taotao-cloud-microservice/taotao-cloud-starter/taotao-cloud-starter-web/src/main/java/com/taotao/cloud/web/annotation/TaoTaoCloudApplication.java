@@ -19,6 +19,7 @@ import com.taotao.cloud.canal.annotation.EnableTaoTaoCloudCanalClient;
 import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
 import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
+import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
 import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
@@ -28,6 +29,7 @@ import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
+import com.taotao.cloud.rxjava.annotation.EnableTaoTaoCloudRxjava;
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2ResourceSecurity;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
@@ -53,6 +55,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableTaoTaoCloudRxjava
+@EnableTaoTaoCloudDisruptor
 @EnableTaoTaoCloudDingtalk
 @EnableTaoTaoCloudCanalClient
 @EnableTaoTaoCloudHealth

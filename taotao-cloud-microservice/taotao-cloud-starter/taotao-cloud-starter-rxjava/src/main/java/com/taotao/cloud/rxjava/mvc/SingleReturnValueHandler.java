@@ -41,7 +41,6 @@ public class SingleReturnValueHandler implements AsyncHandlerMethodReturnValueHa
         return Single.class.isAssignableFrom(returnType.getParameterType());
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
 
