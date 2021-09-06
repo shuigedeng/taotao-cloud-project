@@ -1,8 +1,8 @@
 package com.taotao.cloud.prometheus.configuration;
 
 import com.taotao.cloud.prometheus.annotation.ConditionalOnServiceMonitor;
-import com.taotao.cloud.prometheus.microservice.components.InMemeryServiceNoticeRepository;
-import com.taotao.cloud.prometheus.microservice.interfaces.ServiceNoticeRepository;
+import com.taotao.cloud.prometheus.microservice.InMemeryServiceNoticeRepository;
+import com.taotao.cloud.prometheus.microservice.ServiceNoticeRepository;
 import com.taotao.cloud.prometheus.properties.ServiceMonitorProperties;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
 

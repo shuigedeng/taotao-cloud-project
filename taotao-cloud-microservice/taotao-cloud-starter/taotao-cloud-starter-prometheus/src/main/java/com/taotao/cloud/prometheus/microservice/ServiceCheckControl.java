@@ -1,6 +1,5 @@
 package com.taotao.cloud.prometheus.microservice;
 
-import com.taotao.cloud.prometheus.microservice.interfaces.HealthCheckHandler;
 import com.taotao.cloud.prometheus.properties.ServiceCheck;
 import com.taotao.cloud.prometheus.properties.ServiceMonitorProperties;
 import java.util.Collections;

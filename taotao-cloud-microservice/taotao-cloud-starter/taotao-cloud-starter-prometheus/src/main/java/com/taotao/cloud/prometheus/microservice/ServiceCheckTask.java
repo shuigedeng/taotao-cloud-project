@@ -1,6 +1,5 @@
 package com.taotao.cloud.prometheus.microservice;
 
-import com.taotao.cloud.prometheus.microservice.interfaces.HealthCheckHandler;
 import com.taotao.cloud.prometheus.model.ServiceHealth;
 import com.taotao.cloud.prometheus.model.ServiceStatus;
 import com.taotao.cloud.prometheus.properties.ServiceCheck;

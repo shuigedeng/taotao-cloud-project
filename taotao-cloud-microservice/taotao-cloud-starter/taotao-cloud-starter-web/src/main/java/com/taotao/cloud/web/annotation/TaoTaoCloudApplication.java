@@ -27,6 +27,7 @@ import com.taotao.cloud.file.annotation.EnableTaoTaoCloudUploadFile;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
+import com.taotao.cloud.netty.annotation.EnableTaoTaoCloudWebSocket;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.rxjava.annotation.EnableTaoTaoCloudRxjava;
@@ -55,6 +56,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableTaoTaoCloudWebSocket
 @EnableTaoTaoCloudRxjava
 @EnableTaoTaoCloudDisruptor
 @EnableTaoTaoCloudDingtalk

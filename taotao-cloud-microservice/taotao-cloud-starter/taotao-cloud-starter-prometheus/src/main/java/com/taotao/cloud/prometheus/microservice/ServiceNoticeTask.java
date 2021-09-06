@@ -1,7 +1,6 @@
 package com.taotao.cloud.prometheus.microservice;
 
 import com.taotao.cloud.prometheus.message.INoticeSendComponent;
-import com.taotao.cloud.prometheus.microservice.interfaces.ServiceNoticeRepository;
 import com.taotao.cloud.prometheus.model.MicroServiceReport;
 import com.taotao.cloud.prometheus.model.ServiceCheckNotice;
 import com.taotao.cloud.prometheus.properties.PromethreusNoticeProperties;

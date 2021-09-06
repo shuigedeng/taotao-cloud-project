@@ -1,6 +1,5 @@
 package com.taotao.cloud.prometheus.microservice;
 
-import com.taotao.cloud.prometheus.microservice.interfaces.ServiceNoticeRepository;
 import com.taotao.cloud.prometheus.model.ServiceHealthProblem;
 import org.springframework.context.ApplicationListener;
 

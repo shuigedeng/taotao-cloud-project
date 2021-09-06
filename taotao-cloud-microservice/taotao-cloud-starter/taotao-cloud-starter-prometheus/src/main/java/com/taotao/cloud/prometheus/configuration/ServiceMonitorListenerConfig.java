@@ -6,7 +6,7 @@ import com.taotao.cloud.prometheus.microservice.ServiceDiscoveredListener;
 import com.taotao.cloud.prometheus.microservice.ServiceInstanceLackEventListener;
 import com.taotao.cloud.prometheus.microservice.ServiceInstanceUnhealthyEventListener;
 import com.taotao.cloud.prometheus.microservice.ServiceLostEventListener;
-import com.taotao.cloud.prometheus.microservice.interfaces.ServiceNoticeRepository;
+import com.taotao.cloud.prometheus.microservice.ServiceNoticeRepository;
 import com.taotao.cloud.prometheus.properties.ServiceMonitorProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
