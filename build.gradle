@@ -243,7 +243,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     jar {
         enabled = true
-        classifier = null
+        archiveClassifier = null
     }
 
 //    shadowJar {

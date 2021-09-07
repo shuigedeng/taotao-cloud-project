@@ -215,31 +215,34 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	}
 
 	@Override
-	//@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
+	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
-		//LogUtil.info("1.添加资源信息");
-		//SysResource sysResource = SysResource.builder()
-		// 	.name("资源三")
-		// 	.type((byte) 1)
-		// 	.parentId(0L)
-		// 	.sortNum(2)
-		// 	.build();
-		// saveResource(sysResource);
-		//
-		//String traceId = TraceContext.traceId();
-		//LogUtil.info("skywalking traceid ===> {0}", traceId);
-		//
-		//LogUtil.info("1.远程添加订单信息");
-		//OrderDTO orderDTO = OrderDTO.builder()
-		//	.memberId(2L)
-		//	.code("33333")
-		//	.amount(BigDecimal.ZERO)
-		//	.mainStatus(1)
-		//	.childStatus(1)
-		//	.receiverName("shuigedeng")
-		//	.receiverPhone("15730445330")
-		//	.receiverAddressJson("sjdlasjdfljsldf")
-		//	.build();
+		LogUtil.info("1.添加资源信息");
+		SysResource sysResource = SysResource.builder()
+		 	.name("资源三")
+		 	.type((byte) 1)
+		 	.parentId(0L)
+		 	.sortNum(2)
+		 	.build();
+		 saveResource(sysResource);
+
+		String traceId = TraceContext.traceId();
+		LogUtil.info("skywalking traceid ===> {0}", traceId);
+
+		LogUtil.info("1.远程添加订单信息");
+		OrderDTO orderDTO = OrderDTO.builder()
+			.memberId(2L)
+			.code("33333")
+			.amount(BigDecimal.ZERO)
+			.mainStatus(1)
+			.childStatus(1)
+			.receiverName("shuigedeng")
+			.receiverPhone("15730445330")
+			.receiverAddressJson("sjdlasjdfljsldf")
+			.build();
+
+		OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
+		LogUtil.info("OrderVO ====> {}", orderVO);
 
 		//Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
 		//if(orderVOResult.getCode() != 200){
@@ -247,25 +250,14 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		//}
 		//LogUtil.info("OrderVO ===> {0}", orderVOResult);
 
-//		LogUtil.info("2.远程添加商品信息");
-//		ProductDTO productDTO = ProductDTO.builder()
-//			.name("机器人三")
-//			.supplierId(1L)
-//			.picId(1L)
-//			.videoId(1L)
-//			.detailPicId(1L)
-//			.firstPicId(1L)
-//			.posterPicId(1L)
-//			.remark("备注")
-//			.status(1)
-//			.build();
-//		remoteProductService.saveProduct(productDTO);
-
-		SysResource resourceById = findResourceById(37L);
-		LogUtil.info("resourceById ======> ", resourceById);
-
-		OrderVO orderInfoByCode = iOrderInfoService.findOrderInfoByCode("33333");
-		LogUtil.info("OrderVO ====> {}", orderInfoByCode);
+		//SysResource resourceById = findResourceById(37L);
+		//LogUtil.info("resourceById ======> ", resourceById);
+		//
+		//OrderVO orderInfoByCode = iOrderInfoService.findOrderInfoByCode("33333");
+		//LogUtil.info("OrderVO ====> {}", orderInfoByCode);
+		//
+		//Result<OrderVO> orderInfoByCode1 = remoteOrderService.findOrderInfoByCode("33333");
+		//LogUtil.info("OrderVO ====> {}", orderInfoByCode1);
 
 		return true;
 	}

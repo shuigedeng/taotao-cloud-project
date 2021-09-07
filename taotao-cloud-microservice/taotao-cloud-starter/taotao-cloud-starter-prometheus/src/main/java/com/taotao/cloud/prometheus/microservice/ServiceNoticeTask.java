@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 public class ServiceNoticeTask implements Runnable {
 
 	private final List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents;
@@ -20,6 +21,9 @@ public class ServiceNoticeTask implements Runnable {
 	private final ServiceNoticeRepository serviceNoticeRepository;
 
 	/**
+	 * @param serviceCheckNoticeRepository
+	 * @param noticeSendComponent
+	 * @param reportedFilterHandler
 	 * @param promethreusNoticeProperties
 	 */
 	public ServiceNoticeTask(List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents,

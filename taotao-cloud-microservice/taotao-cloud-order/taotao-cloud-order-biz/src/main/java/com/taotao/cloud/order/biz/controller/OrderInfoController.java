@@ -38,7 +38,7 @@ public class OrderInfoController {
 	@Operation(summary = "获取订单信息", description = "获取订单信息", method = CommonConstant.GET)
 	@GetMapping("/info/{code}")
 	@RequestOperateLog(description = "获取订单信息")
-	@PreAuthorize("hasAuthority('order:info:code')")
+	//@PreAuthorize("hasAuthority('order:info:code')")
 	public Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code) {
 		OrderVO vo = orderInfoService.findOrderInfoByCode(code);
 		return Result.success(vo);

@@ -1,6 +1,5 @@
 package com.taotao.cloud.prometheus.properties;
 
-import com.taotao.cloud.prometheus.enums.ProjectEnviroment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

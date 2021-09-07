@@ -26,10 +26,10 @@ import com.taotao.cloud.netty.annotation.PathVariable;
 import com.taotao.cloud.netty.annotation.RequestParam;
 import com.taotao.cloud.netty.annotation.ServerEndpoint;
 import com.taotao.cloud.netty.pojo.Session;
+import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.timeout.IdleStateEvent;
 import java.io.IOException;
 import java.util.Map;
-import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -39,7 +39,7 @@ import org.springframework.util.MultiValueMap;
  * @version 1.0.0
  * @since 2021/09/06 11:51
  */
-@ServerEndpoint(path = "/ws/{arg}", port = "80", host = "0.0.0.0")
+@ServerEndpoint(path = "/ws/websocket", port = "80", host = "0.0.0.0")
 public class MyWebSocket {
 
 	@BeforeHandshake
@@ -102,5 +102,4 @@ public class MyWebSocket {
 			}
 		}
 	}
-
 }

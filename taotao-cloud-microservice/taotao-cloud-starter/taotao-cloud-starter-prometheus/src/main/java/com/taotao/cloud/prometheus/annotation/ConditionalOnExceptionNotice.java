@@ -1,7 +1,7 @@
 package com.taotao.cloud.prometheus.annotation;
 
-import com.taotao.cloud.prometheus.condition.OnExceptionNoticeContition;
-import com.taotao.cloud.prometheus.condition.PrometheusEnabledCondition;
+import com.taotao.cloud.prometheus.contition.OnExceptionNoticeContition;
+import com.taotao.cloud.prometheus.contition.PrometheusEnabledCondition;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

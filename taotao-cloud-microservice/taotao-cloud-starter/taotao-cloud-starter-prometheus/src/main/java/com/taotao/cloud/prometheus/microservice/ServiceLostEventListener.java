@@ -2,6 +2,7 @@ package com.taotao.cloud.prometheus.microservice;
 
 import org.springframework.context.ApplicationListener;
 
+
 public class ServiceLostEventListener implements ApplicationListener<ServiceLostEvent> {
 
 	private final ServiceNoticeRepository serviceNoticeRepository;

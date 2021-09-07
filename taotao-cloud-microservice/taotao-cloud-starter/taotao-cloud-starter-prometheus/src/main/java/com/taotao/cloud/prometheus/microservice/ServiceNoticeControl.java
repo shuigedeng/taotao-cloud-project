@@ -35,6 +35,10 @@ public class ServiceNoticeControl implements SmartInitializingSingleton, Disposa
 	 * @param serviceMonitorProperties
 	 * @param promethreusNoticeProperties
 	 * @param taskScheduler
+	 * @param serviceCheckNoticeRepository
+	 * @param noticeSendComponent
+	 * @param reportedFilterHandler
+	 * @param result
 	 */
 	public ServiceNoticeControl(ServiceMonitorProperties serviceMonitorProperties,
 			PromethreusNoticeProperties promethreusNoticeProperties, TaskScheduler taskScheduler,

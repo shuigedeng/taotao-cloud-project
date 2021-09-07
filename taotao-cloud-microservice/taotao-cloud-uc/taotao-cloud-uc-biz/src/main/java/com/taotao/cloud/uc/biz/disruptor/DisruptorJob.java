@@ -36,7 +36,7 @@ public class DisruptorJob {
 	@Autowired
 	private DisruptorTemplate disruptorTemplate;
 
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 10000)
 	public void send() {
 		DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
 		envent.setEvent("Event-Output");
@@ -46,7 +46,7 @@ public class DisruptorJob {
 		disruptorTemplate.publishEvent(envent);
 	}
 
-	@Scheduled(fixedDelay = 1000)
+	@Scheduled(fixedDelay = 10000)
 	public void send2() {
 		DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
 		envent.setEvent("Event-Output");

@@ -2,7 +2,7 @@ package com.taotao.cloud.prometheus.microservice;
 
 import com.taotao.cloud.prometheus.model.ServiceHealth;
 import com.taotao.cloud.prometheus.model.ServiceStatus;
-import com.taotao.cloud.prometheus.properties.ServiceCheck;
+import com.taotao.cloud.prometheus.properties.ServiceCheckProperties;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ServiceCheckTask implements Runnable {
 
 	private final String serviceId;
 
-	private final ServiceCheck serviceCheck;
+	private final ServiceCheckProperties serviceCheckProperties;
 
 	private final DiscoveryClient discoveryClient;
 
@@ -27,17 +27,17 @@ public class ServiceCheckTask implements Runnable {
 
 	private Map<String, ServiceInstance> servicesMap = new HashMap<String, ServiceInstance>();
 
-	public ServiceCheckTask(String serviceId, ServiceCheck serviceCheck, DiscoveryClient discoveryClient,
+	public ServiceCheckTask(String serviceId, ServiceCheckProperties serviceCheckProperties, DiscoveryClient discoveryClient,
 			HealthCheckHandler healthCheckHandler, ApplicationEventPublisher applicationEventPublisher) {
 		this.serviceId = serviceId;
-		this.serviceCheck = serviceCheck;
+		this.serviceCheckProperties = serviceCheckProperties;
 		this.discoveryClient = discoveryClient;
 		this.healthCheckHandler = healthCheckHandler;
 		this.applicationEventPublisher = applicationEventPublisher;
 	}
 
-	public ServiceCheck getServiceCheck() {
-		return serviceCheck;
+	public ServiceCheckProperties getServiceCheck() {
+		return serviceCheckProperties;
 	}
 
 	public Map<String, ServiceInstance> getServicesMap() {
@@ -53,7 +53,7 @@ public class ServiceCheckTask implements Runnable {
 		freshInstance();
 		List<ServiceHealth> list = new ArrayList<ServiceHealth>(servicesMap.size());
 		servicesMap.forEach((x, y) -> {
-			if (!healthCheckHandler.isHealthy(y, serviceCheck))
+			if (!healthCheckHandler.isHealthy(y, serviceCheckProperties))
 				list.add(new ServiceHealth(y.getInstanceId(), ServiceStatus.DOWN));
 		});
 		if (list.size() > 0) {
@@ -70,7 +70,7 @@ public class ServiceCheckTask implements Runnable {
 	@Override
 	public String toString() {
 		return new StringBuilder().append("ServiceCheckTask:").append(serviceId).append("-->")
-				.append(serviceCheck.toString()).append("\n").toString();
+				.append(serviceCheckProperties.toString()).append("\n").toString();
 	}
 
 }

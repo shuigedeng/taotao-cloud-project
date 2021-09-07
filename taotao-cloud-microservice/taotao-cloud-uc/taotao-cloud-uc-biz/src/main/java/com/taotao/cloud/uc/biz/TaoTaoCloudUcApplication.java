@@ -1,10 +1,8 @@
 package com.taotao.cloud.uc.biz;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.taotao.cloud.dingtalk.annatations.DingerScan;
 import com.taotao.cloud.dingtalk.annatations.EnableMultiDinger;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.SpringApplication;
 
 /**

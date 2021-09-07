@@ -2,7 +2,7 @@ package com.taotao.cloud.prometheus.httpclient;
 
 import com.taotao.cloud.prometheus.model.DingDingNotice;
 import com.taotao.cloud.prometheus.model.DingDingResult;
-import com.taotao.cloud.prometheus.properties.DingDingNoticeProperty;
+import com.taotao.cloud.prometheus.properties.DingDingNoticeProperties;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -40,7 +40,7 @@ public class DefaultDingdingHttpClient implements DingdingHttpClient {
 
 	private final Gson gson;
 
-	private final DingDingNoticeProperty dingDingNoticeProperty;
+	private final DingDingNoticeProperties dingDingNoticeProperty;
 
 	private final Log logger = LogFactory.getLog(getClass());
 
@@ -48,7 +48,7 @@ public class DefaultDingdingHttpClient implements DingdingHttpClient {
 	 * @param gson
 	 * @param dingDingNoticeProperty
 	 */
-	public DefaultDingdingHttpClient(Gson gson, DingDingNoticeProperty dingDingNoticeProperty) {
+	public DefaultDingdingHttpClient(Gson gson, DingDingNoticeProperties dingDingNoticeProperty) {
 		this.gson = gson;
 		this.dingDingNoticeProperty = dingDingNoticeProperty;
 	}

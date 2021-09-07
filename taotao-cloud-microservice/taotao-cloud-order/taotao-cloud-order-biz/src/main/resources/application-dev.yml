@@ -36,7 +36,7 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
-    serialization: kryo
+    #serialization: kryo
   cloud:
     subscribed-services: taotao-cloud-uc
   scan:
@@ -394,7 +394,7 @@ spring:
 taotao:
   cloud:
     dinger:
-      enabled: true
+      enabled: false
       project-id: ${spring.application.name}
       dingers:
         dingtalk:

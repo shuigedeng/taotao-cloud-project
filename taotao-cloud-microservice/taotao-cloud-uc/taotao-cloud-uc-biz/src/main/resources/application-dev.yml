@@ -38,7 +38,7 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
-    serialization: kryo
+    #serialization: kryo
   cloud:
     subscribed-services: 'taotao-cloud-order'
   scan:
@@ -430,7 +430,7 @@ taotao:
       check:
         enabled: true
     canal:
-      enabled: true
+      enabled: false
       instances:
         example:
           clusterEnabled: false

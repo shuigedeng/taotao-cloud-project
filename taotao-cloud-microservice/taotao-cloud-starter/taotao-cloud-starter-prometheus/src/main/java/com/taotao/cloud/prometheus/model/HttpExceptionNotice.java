@@ -6,7 +6,6 @@ import com.taotao.cloud.prometheus.enums.ProjectEnviroment;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-
 public class HttpExceptionNotice extends ExceptionNotice {
 
 	protected String url;

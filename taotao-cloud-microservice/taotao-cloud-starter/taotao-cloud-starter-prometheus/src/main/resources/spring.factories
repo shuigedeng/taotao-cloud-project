@@ -1,0 +1,17 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.kuding.config.PromethuesConfig,\
+com.kuding.config.PromethuesDingDingNoticeConfig,\
+com.kuding.config.PromethuesEmailNoticeConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeCommonTypeConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeDingdingSendingConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeEmailSendingConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeSendConfig,\
+com.kuding.config.exceptionnotice.ExceptionNoticeWebListenConfig,\
+com.kuding.config.servicemonitor.ServiceMonitorConfig,\
+com.kuding.config.servicemonitor.ConsulHealthCheckHandlerConfig,\
+com.kuding.config.servicemonitor.ExceptionNoticeEmailSendingConfig,\
+com.kuding.config.servicemonitor.ServiceMonitorControlConfig,\
+com.kuding.config.servicemonitor.ServiceMonitorDingdingSendingConfig,\
+com.kuding.config.servicemonitor.ServiceMonitorListenerConfig
+

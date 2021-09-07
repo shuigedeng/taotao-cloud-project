@@ -23,11 +23,13 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.AsyncHandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -63,15 +65,31 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 		return new SingleReturnValueHandler();
 	}
 
+	//@Bean
+	//@ConditionalOnProperty(prefix = RxJavaProperties.PREFIX
+	//	+ ".mvc", name = "enabled", matchIfMissing = true)
+	//public void rxJavaWebMvcConfiguration(WebMvcConfigurer webMvcConfigurer,
+	//	List<HandlerMethodReturnValueHandler> handlers) {
+	//	LogUtil.started(HandlerMethodReturnValueHandler.class, StarterName.RXJAVA_STARTER);
+	//
+	//	webMvcConfigurer.addReturnValueHandlers(handlers);
+	//}
 
-	@Bean
+	@Configuration
 	@ConditionalOnProperty(prefix = RxJavaProperties.PREFIX
 		+ ".mvc", name = "enabled", matchIfMissing = true)
-	public void rxJavaWebMvcConfiguration(WebMvcConfigurer webMvcConfigurer,
-		List<HandlerMethodReturnValueHandler> handlers) {
-		LogUtil.started(HandlerMethodReturnValueHandler.class, StarterName.RXJAVA_STARTER);
+	public static class RxJavaWebConfiguration implements WebMvcConfigurer {
 
-		webMvcConfigurer.addReturnValueHandlers(handlers);
+		@Autowired
+		private List<AsyncHandlerMethodReturnValueHandler> handlers;
+
+		@Override
+		public void addReturnValueHandlers(
+			List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+			if (handlers != null) {
+				returnValueHandlers.addAll(handlers);
+			}
+		}
 	}
 
 	//@Configuration

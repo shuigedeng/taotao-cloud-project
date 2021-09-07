@@ -3,7 +3,6 @@ package com.taotao.cloud.prometheus.properties;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -18,7 +17,7 @@ public class ServiceMonitorProperties implements InitializingBean {
 	/**
 	 * 需要监控的服务
 	 */
-	private Map<String, ServiceCheck> monitorServices = new HashMap<>();
+	private Map<String, ServiceCheckProperties> monitorServices = new HashMap<>();
 
 	/**
 	 * 微服务存在性检查间隔 ， 默认两分钟
@@ -32,7 +31,6 @@ public class ServiceMonitorProperties implements InitializingBean {
 
 	/**
 	 * 刷新全部通知的时间间隔，默认半小时
-	 * 
 	 */
 	private Duration refreshServiceCheckNoticeInterval = Duration.ofMinutes(30);
 
@@ -41,11 +39,11 @@ public class ServiceMonitorProperties implements InitializingBean {
 	 */
 	private boolean autoDiscovery = true;
 
-	public Map<String, ServiceCheck> getMonitorServices() {
+	public Map<String, ServiceCheckProperties> getMonitorServices() {
 		return monitorServices;
 	}
 
-	public void setMonitorServices(Map<String, ServiceCheck> monitorServices) {
+	public void setMonitorServices(Map<String, ServiceCheckProperties> monitorServices) {
 		this.monitorServices = monitorServices;
 	}
 
@@ -89,9 +87,7 @@ public class ServiceMonitorProperties implements InitializingBean {
 	}
 
 	/**
-	 * @param refreshServiceCheckNoticeInterval the
-	 *                                          refreshServiceCheckNoticeInterval to
-	 *                                          set
+	 * @param refreshServiceCheckNoticeInterval the refreshServiceCheckNoticeInterval to set
 	 */
 	public void setRefreshServiceCheckNoticeInterval(Duration refreshServiceCheckNoticeInterval) {
 		this.refreshServiceCheckNoticeInterval = refreshServiceCheckNoticeInterval;
@@ -99,7 +95,7 @@ public class ServiceMonitorProperties implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		monitorServices.putIfAbsent("default", new ServiceCheck());
+		monitorServices.putIfAbsent("default", new ServiceCheckProperties());
 	}
 
 }

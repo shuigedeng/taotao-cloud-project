@@ -5,6 +5,8 @@
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
@@ -45,14 +47,18 @@ public class OrderInfoServiceImpl implements IOrderInfoService {
 		return OrderMapper.INSTANCE.orderToOrderVO(order);
 	}
 
+	//@Transactional(rollbackFor = Exception.class)
 	@Override
-	@Transactional(rollbackFor = Exception.class)
 	public OrderVO saveOrder(OrderDTO orderDTO) {
 		Order order = Order.builder().build();
 		BeanUtil.copyIgnoredNull(orderDTO, order);
 		String traceId = TraceContext.traceId();
 		LogUtil.info("skywalking traceid ===> {0}", traceId);
 		Order order1 = orderInfoRepository.saveAndFlush(order);
+
+		if(orderDTO.getCode().equals("33333")){
+			throw new BusinessException("xxxexception");
+		}
 		return OrderMapper.INSTANCE.orderToOrderVO(order1);
 	}
 }

@@ -1,9 +1,10 @@
 package com.taotao.cloud.prometheus.message;
 
 import com.taotao.cloud.prometheus.model.PromethuesNotice;
-import com.taotao.cloud.prometheus.properties.EmailNoticeProperty;
+import com.taotao.cloud.prometheus.properties.EmailNoticeProperties;
 import com.taotao.cloud.prometheus.text.NoticeTextResolver;
 import java.util.regex.Pattern;
+
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,10 +20,10 @@ public class EmailNoticeSendComponent<T extends PromethuesNotice> implements INo
 
 	private final MailProperties mailProperties;
 
-	private final EmailNoticeProperty emailExceptionNoticeProperty;
+	private final EmailNoticeProperties emailExceptionNoticeProperty;
 
 	public EmailNoticeSendComponent(MailSender mailSender, MailProperties mailProperties,
-			EmailNoticeProperty emailExceptionNoticeProperty, NoticeTextResolver<T> exceptionNoticeResolver) {
+			EmailNoticeProperties emailExceptionNoticeProperty, NoticeTextResolver<T> exceptionNoticeResolver) {
 		this.mailSender = mailSender;
 		this.mailProperties = mailProperties;
 		this.emailExceptionNoticeProperty = emailExceptionNoticeProperty;
@@ -54,7 +55,7 @@ public class EmailNoticeSendComponent<T extends PromethuesNotice> implements INo
 		return false;
 	}
 
-	private void checkAllEmails(EmailNoticeProperty emailExceptionNoticeProperty) {
+	private void checkAllEmails(EmailNoticeProperties emailExceptionNoticeProperty) {
 		String fromEmail = mailProperties.getUsername();
 		if (fromEmail != null && !isEmail(fromEmail))
 			throw new IllegalArgumentException("发件人邮箱错误");
@@ -98,7 +99,7 @@ public class EmailNoticeSendComponent<T extends PromethuesNotice> implements INo
 	/**
 	 * @return the emailExceptionNoticeProperty
 	 */
-	public EmailNoticeProperty getEmailExceptionNoticeProperty() {
+	public EmailNoticeProperties getEmailExceptionNoticeProperty() {
 		return emailExceptionNoticeProperty;
 	}
 

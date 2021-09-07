@@ -2,7 +2,7 @@ package com.taotao.cloud.prometheus.microservice;
 
 import static java.util.stream.Collectors.toSet;
 
-import com.taotao.cloud.prometheus.properties.ServiceCheck;
+import com.taotao.cloud.prometheus.properties.ServiceCheckProperties;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,24 +12,25 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 
+
 public class ServiceDiscoveredListener implements ApplicationListener<ServiceDiscoveredEvent> {
 
 	private final ServiceCheckControl serviceCheckControl;
 
 	private final DiscoveryClient discoveryClient;
 
-	private final Map<String, ServiceCheck> map;
+	private final Map<String, ServiceCheckProperties> map;
 
-	private final ServiceCheck defaultServiceCheck;
+	private final ServiceCheckProperties defaultServiceCheckProperties;
 
 	private final ApplicationEventPublisher applicationEventPublisher;
 
-	public ServiceDiscoveredListener(ServiceCheckControl serviceCheckControl, Map<String, ServiceCheck> map,
+	public ServiceDiscoveredListener(ServiceCheckControl serviceCheckControl, Map<String, ServiceCheckProperties> map,
 			DiscoveryClient discoveryClient, ApplicationEventPublisher applicationEventPublisher) {
 		this.serviceCheckControl = serviceCheckControl;
 		this.discoveryClient = discoveryClient;
 		this.map = map;
-		defaultServiceCheck = map.remove("default");
+		defaultServiceCheckProperties = map.remove("default");
 		this.applicationEventPublisher = applicationEventPublisher;
 	}
 
@@ -45,13 +46,14 @@ public class ServiceDiscoveredListener implements ApplicationListener<ServiceDis
 		applicationEventPublisher.publishEvent(new ServiceLostEvent(this, event.getLackServices()));
 		event.getAllService().forEach(x -> {
 			List<ServiceInstance> list = discoveryClient.getInstances(x);
-			ServiceCheck serviceCheck = map.getOrDefault(x, defaultServiceCheck);
-			int serviceCount = serviceCheck == defaultServiceCheck ? list.size() : serviceCheck.getServiceCount();
+			ServiceCheckProperties serviceCheckProperties = map.getOrDefault(x,
+				defaultServiceCheckProperties);
+			int serviceCount = serviceCheckProperties == defaultServiceCheckProperties ? list.size() : serviceCheckProperties.getServiceCount();
 			if (list.size() < serviceCount)
 				applicationEventPublisher.publishEvent(new ServiceInstanceLackEvent(this, x, serviceCount,
 						list.stream().map(y -> y.getInstanceId()).collect(toSet())));
 			if (event.getAdditionalServices().contains(x)) {
-				serviceCheckControl.add(x, serviceCheck);
+				serviceCheckControl.add(x, serviceCheckProperties);
 			}
 		});
 	}

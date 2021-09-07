@@ -1,6 +1,6 @@
 package com.taotao.cloud.prometheus.microservice;
 
-import com.taotao.cloud.prometheus.properties.ServiceCheck;
+import com.taotao.cloud.prometheus.properties.ServiceCheckProperties;
 import com.taotao.cloud.prometheus.properties.ServiceMonitorProperties;
 import java.util.Collections;
 import java.util.HashSet;
@@ -50,15 +50,15 @@ public class ServiceCheckControl implements DisposableBean {
 		});
 	}
 
-	public synchronized void add(@NonNull String service, @NonNull ServiceCheck serviceCheck) {
+	public synchronized void add(@NonNull String service, @NonNull ServiceCheckProperties serviceCheckProperties) {
 		if (checkServices.contains(service)) {
 			logger.info("there is a task running: " + service);
 			return;
 		}
-		ServiceCheckTask serviceCheckTask = new ServiceCheckTask(service, serviceCheck, discoveryClient,
+		ServiceCheckTask serviceCheckTask = new ServiceCheckTask(service, serviceCheckProperties, discoveryClient,
 				healthCheckHandler, applicationEventPublisher);
 		ScheduledFuture<?> scheduledFuture = taskScheduler.scheduleAtFixedRate(serviceCheckTask,
-				serviceCheck.getCheckInterval());
+				serviceCheckProperties.getCheckInterval());
 		taskResultMap.put(service, scheduledFuture);
 		checkServices.add(service);
 	}

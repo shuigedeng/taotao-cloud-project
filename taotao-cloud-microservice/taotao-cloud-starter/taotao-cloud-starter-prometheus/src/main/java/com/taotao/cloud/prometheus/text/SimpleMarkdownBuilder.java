@@ -15,9 +15,8 @@ public class SimpleMarkdownBuilder {
 
 	public SimpleMarkdownBuilder title(String content, int level) {
 		if (level > 0 && level < 6) {
-			for (int i = 0; i < level; i++) {
+			for (int i = 0; i < level; i++)
 				stringBuilder.append("#");
-			}
 			stringBuilder.append(" ").append(content).append("\n\n");
 		}
 		return this;
@@ -25,9 +24,8 @@ public class SimpleMarkdownBuilder {
 
 	public SimpleMarkdownBuilder text(String content, boolean lineFeed) {
 		stringBuilder.append(content);
-		if (lineFeed) {
+		if (lineFeed)
 			stringBuilder.append("\n\n");
-		}
 		return this;
 	}
 
@@ -41,25 +39,22 @@ public class SimpleMarkdownBuilder {
 
 	public SimpleMarkdownBuilder point(Object... contentList) {
 		if (contentList != null && contentList.length > 0) {
-			Arrays.stream(contentList)
-				.forEach(x -> stringBuilder.append("- ").append(x).append("\n"));
+			Arrays.stream(contentList).forEach(x -> stringBuilder.append("- ").append(x).append("\n"));
 			stringBuilder.append("\n");
 		}
 		return this;
 	}
 
 	public SimpleMarkdownBuilder orderPoint(List<?> list) {
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size(); i++)
 			stringBuilder.append(i + 1).append(". ").append(list.get(i)).append("\n");
-		}
 		stringBuilder.append("\n");
 		return this;
 	}
 
 	public SimpleMarkdownBuilder orderPoint(Object... list) {
-		for (int i = 0; i < list.length; i++) {
+		for (int i = 0; i < list.length; i++)
 			stringBuilder.append(i + 1).append(". ").append(list[i]).append("\n");
-		}
 		stringBuilder.append("\n");
 		return this;
 	}
@@ -67,11 +62,10 @@ public class SimpleMarkdownBuilder {
 	public SimpleMarkdownBuilder code(String content, int level) {
 		if (level > 0 && level < 4) {
 			String str = "`````````".substring(0, level);
-			if (level != 3) {
+			if (level != 3)
 				stringBuilder.append(String.format("%s%s%s", str, content, str));
-			} else {
+			else
 				stringBuilder.append(String.format("%s\n%s\n%s\n", str, content, str));
-			}
 		}
 		return this;
 	}
@@ -81,16 +75,12 @@ public class SimpleMarkdownBuilder {
 		return this;
 	}
 
-	public SimpleMarkdownBuilder keyValue(Map<?, ?> map, String keyName, String valueName,
-		TableAlignment alignment) {
+	public SimpleMarkdownBuilder keyValue(Map<?, ?> map, String keyName, String valueName, TableAlignment alignment) {
 		if (map != null && map.size() > 0) {
-			stringBuilder.append("|").append(keyName).append("|").append(valueName).append("|")
-				.append("\n");
+			stringBuilder.append("|").append(keyName).append("|").append(valueName).append("|").append("\n");
 			String value = alignment.getValue();
 			stringBuilder.append(value).append("|").append(value).append("|").append("\n");
-			map.forEach(
-				(x, y) -> stringBuilder.append("|").append(x).append("|").append(y).append("|")
-					.append("\n"));
+			map.forEach((x, y) -> stringBuilder.append("|").append(x).append("|").append(y).append("|").append("\n"));
 			stringBuilder.append("\n\n");
 		}
 		return this;
