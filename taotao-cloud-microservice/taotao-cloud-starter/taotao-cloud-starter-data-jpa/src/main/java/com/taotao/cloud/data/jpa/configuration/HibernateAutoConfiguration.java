@@ -30,13 +30,16 @@ import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.hibernate.MultiTenancyStrategy;
+import org.hibernate.SessionFactory;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
@@ -47,6 +50,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 /**

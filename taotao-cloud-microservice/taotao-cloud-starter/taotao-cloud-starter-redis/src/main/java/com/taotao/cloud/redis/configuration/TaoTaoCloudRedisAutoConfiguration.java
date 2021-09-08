@@ -40,11 +40,11 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * redis 配置类
+ * TaoTaoCloudRedisAutoConfiguration 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:13
+ * @version 2021.9
+ * @since 2021-09-07 21:17:02
  */
 @Configuration
 public class TaoTaoCloudRedisAutoConfiguration implements InitializingBean {

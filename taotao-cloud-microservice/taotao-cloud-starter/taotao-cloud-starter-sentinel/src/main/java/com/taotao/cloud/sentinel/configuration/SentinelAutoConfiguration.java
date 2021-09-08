@@ -44,11 +44,11 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 /**
- * 限流、熔断统一处理类
+ * SentinelAutoConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/13 17:32
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)

@@ -16,14 +16,16 @@
 package com.taotao.cloud.shardingsphere.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * ShardingJdbcProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/22 17:30
+ * @version 2021.9
+ * @since 2021-09-07 20:45:19
  */
+@RefreshScope
 @ConfigurationProperties(prefix = ShardingJdbcProperties.PREIX)
 public class ShardingJdbcProperties {
 

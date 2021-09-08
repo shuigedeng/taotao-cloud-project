@@ -20,11 +20,11 @@ import java.util.Objects;
 import org.springframework.lang.NonNull;
 
 /**
- * 缓存 key 封装
+ * CacheKey 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:42
+ * @version 2021.9
+ * @since 2021-09-07 21:15:45
  */
 public class CacheKey {
 

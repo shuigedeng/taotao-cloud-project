@@ -23,8 +23,8 @@ import org.apache.shardingsphere.api.sharding.hint.HintShardingValue;
  * 数据库分源算法
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/22 17:30
+ * @version 2021.9
+ * @since 2021-09-07 20:45:49
  */
 public class DataSourceShardingAlgorithm implements HintShardingAlgorithm {
 

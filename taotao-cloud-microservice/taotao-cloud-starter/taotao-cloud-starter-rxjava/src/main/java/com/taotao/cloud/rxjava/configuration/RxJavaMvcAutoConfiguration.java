@@ -34,9 +34,11 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * The RxJava Spring MVC integration auto configuration.
+ * RxJavaMvcAutoConfiguration
  *
- * @author Jakub Narloch
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-07 20:49:34
  */
 @Configuration
 @ConditionalOnProperty(prefix = RxJavaProperties.PREFIX, name = "enabled", matchIfMissing = true)
@@ -65,16 +67,6 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 		return new SingleReturnValueHandler();
 	}
 
-	//@Bean
-	//@ConditionalOnProperty(prefix = RxJavaProperties.PREFIX
-	//	+ ".mvc", name = "enabled", matchIfMissing = true)
-	//public void rxJavaWebMvcConfiguration(WebMvcConfigurer webMvcConfigurer,
-	//	List<HandlerMethodReturnValueHandler> handlers) {
-	//	LogUtil.started(HandlerMethodReturnValueHandler.class, StarterName.RXJAVA_STARTER);
-	//
-	//	webMvcConfigurer.addReturnValueHandlers(handlers);
-	//}
-
 	@Configuration
 	@ConditionalOnProperty(prefix = RxJavaProperties.PREFIX
 		+ ".mvc", name = "enabled", matchIfMissing = true)
@@ -91,23 +83,4 @@ public class RxJavaMvcAutoConfiguration implements InitializingBean {
 			}
 		}
 	}
-
-	//@Configuration
-	//public static class RxJavaWebConfiguration {
-	//
-	//    @Autowired
-	//    private List<AsyncHandlerMethodReturnValueHandler> handlers = new ArrayList<>();
-	//
-	//    @Bean
-	//    public WebMvcConfigurer rxJavaWebMvcConfiguration() {
-	//        return new WebMvcConfigurerAdapter() {
-	//            @Override
-	//            public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
-	//                if (handlers != null) {
-	//                    returnValueHandlers.addAll(handlers);
-	//                }
-	//            }
-	//        };
-	//    }
-	//}
 }

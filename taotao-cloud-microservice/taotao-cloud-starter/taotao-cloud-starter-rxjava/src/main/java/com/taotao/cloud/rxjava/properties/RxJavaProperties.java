@@ -19,11 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * 审计日志配置
+ * RxJavaProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 11:19
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
 @RefreshScope
 @ConfigurationProperties(prefix = RxJavaProperties.PREFIX)

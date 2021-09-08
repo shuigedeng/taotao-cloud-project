@@ -21,7 +21,6 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
-import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
 import java.util.Map;
 import java.util.Objects;
@@ -42,11 +41,11 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * redis 配置类
+ * TaoTaoCloudCacheAutoConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:13
+ * @version 2021.9
+ * @since 2021-09-07 21:17:09
  */
 @Configuration
 @EnableCaching
@@ -60,14 +59,11 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 
 	private final CustomCacheProperties cacheProperties;
 
-	public TaoTaoCloudCacheAutoConfiguration(
-		CustomCacheProperties cacheProperties) {
+	public TaoTaoCloudCacheAutoConfiguration(CustomCacheProperties cacheProperties) {
 		this.cacheProperties = cacheProperties;
 	}
 
-	/**
-	 * key 的生成
-	 */
+
 	@Bean
 	public KeyGenerator keyGenerator() {
 		LogUtil.started(KeyGenerator.class, StarterName.REDIS_STARTER);

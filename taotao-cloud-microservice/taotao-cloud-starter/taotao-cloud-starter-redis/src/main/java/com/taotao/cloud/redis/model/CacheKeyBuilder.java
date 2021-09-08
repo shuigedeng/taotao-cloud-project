@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.redis.model;
 
-
-
 import static com.taotao.cloud.common.constant.StrPool.COLON;
 
 import cn.hutool.core.collection.CollUtil;
@@ -33,8 +31,8 @@ import org.springframework.lang.Nullable;
  * CacheKeyBuilder
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:40
+ * @version 2021.9
+ * @since 2021-09-07 21:15:53
  */
 @FunctionalInterface
 public interface CacheKeyBuilder {

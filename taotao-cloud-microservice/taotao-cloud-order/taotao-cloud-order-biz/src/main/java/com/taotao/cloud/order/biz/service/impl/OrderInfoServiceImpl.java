@@ -47,8 +47,8 @@ public class OrderInfoServiceImpl implements IOrderInfoService {
 		return OrderMapper.INSTANCE.orderToOrderVO(order);
 	}
 
-	//@Transactional(rollbackFor = Exception.class)
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public OrderVO saveOrder(OrderDTO orderDTO) {
 		Order order = Order.builder().build();
 		BeanUtil.copyIgnoredNull(orderDTO, order);

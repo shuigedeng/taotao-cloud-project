@@ -22,8 +22,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * SentinelProperties
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2017/11/17
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
 @RefreshScope
 @ConfigurationProperties(prefix = SentinelProperties.PREFIX)

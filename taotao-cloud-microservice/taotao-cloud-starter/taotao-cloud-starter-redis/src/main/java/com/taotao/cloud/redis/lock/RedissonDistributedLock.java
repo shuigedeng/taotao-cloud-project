@@ -27,8 +27,8 @@ import org.redisson.api.RedissonClient;
  * redisson分布式锁实现，基本锁功能的抽象实现
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @version 2021.9
+ * @since 2021-09-07 21:16:33
  */
 public class RedissonDistributedLock implements DistributedLock {
 

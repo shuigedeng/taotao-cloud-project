@@ -21,9 +21,11 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * A qualifier annotation used for registering beans within this component.
+ * RxJava
  *
- * @author Jakub Narloch
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
 @Target({ElementType.TYPE, ElementType.PARAMETER, ElementType.METHOD, ElementType.CONSTRUCTOR,
 	ElementType.FIELD})

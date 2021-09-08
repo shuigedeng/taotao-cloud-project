@@ -31,11 +31,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 短信配置
+ * SmsConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 09:19
+ * @version 2021.9
+ * @since 2021-09-07 20:45:25
  */
 @Configuration
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")

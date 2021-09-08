@@ -1,7 +1,6 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -25,7 +24,10 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
+import io.seata.core.context.RootContext;
+import io.seata.core.exception.TransactionException;
 import io.seata.spring.annotation.GlobalTransactional;
+import io.seata.tm.api.GlobalTransactionContext;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -60,6 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @DubboService
 public class SysResourceServiceImpl implements ISysResourceService {
+
 	private final SysResourceRepository sysResourceRepository;
 	private final ISysRoleService sysRoleService;
 	private final RemoteOrderItemService remoteOrderItemService;
@@ -110,13 +113,15 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	@Override
 	public SysResource findResourceById(Long id) {
 		Optional<SysResource> optionalSysResource = sysResourceRepository.findById(id);
-		return optionalSysResource.orElseThrow(() -> new BusinessException(ResultEnum.RESOURCE_NOT_EXIST));
+		return optionalSysResource.orElseThrow(
+			() -> new BusinessException(ResultEnum.RESOURCE_NOT_EXIST));
 	}
 
 	@Override
 	public SysResource findResourceByName(String name) {
 		Optional<SysResource> optionalSysResource = sysResourceRepository.findResourceByName(name);
-		return optionalSysResource.orElseThrow(() -> new BusinessException(ResultEnum.RESOURCE_NOT_EXIST));
+		return optionalSysResource.orElseThrow(
+			() -> new BusinessException(ResultEnum.RESOURCE_NOT_EXIST));
 	}
 
 	@Override
@@ -182,8 +187,8 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	 * @param sumList 保存的全部ID
 	 * @return java.util.List<java.lang.Long>
 	 * @author shuigedeng
-	 * @since 2020/11/11 16:48
 	 * @version 1.0.0
+	 * @since 2020/11/11 16:48
 	 */
 	public List<Long> recursion(List<Long> pidList, List<Long> sumList) {
 		List<Long> sonIdList = sysResourceRepository.selectIdList(pidList);
@@ -207,48 +212,62 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	}
 
 	@Override
-	public List<ResourceTree> findCurrentUserResourceTree(List<ResourceVO> resourceVOList, Long parentId) {
-		List<ResourceTree> menuTreeList = resourceVOList.stream().filter(vo -> ResourceTypeEnum.LEFT_MENU.getValue().equals(vo.getType()))
-			.map(ResourceTree::new).sorted(Comparator.comparingInt(ResourceTree::getSort)).collect(Collectors.toList());
+	public List<ResourceTree> findCurrentUserResourceTree(List<ResourceVO> resourceVOList,
+		Long parentId) {
+		List<ResourceTree> menuTreeList = resourceVOList.stream()
+			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getValue().equals(vo.getType()))
+			.map(ResourceTree::new).sorted(Comparator.comparingInt(ResourceTree::getSort))
+			.collect(Collectors.toList());
 		Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;
 		return TreeUtil.build(menuTreeList, parent);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
-		LogUtil.info("1.添加资源信息");
-		SysResource sysResource = SysResource.builder()
-		 	.name("资源三")
-		 	.type((byte) 1)
-		 	.parentId(0L)
-		 	.sortNum(2)
-		 	.build();
-		 saveResource(sysResource);
+		//try {
+			LogUtil.info("1.添加资源信息");
+			SysResource sysResource = SysResource.builder()
+				.name("资源三")
+				.type((byte) 1)
+				.parentId(0L)
+				.sortNum(2)
+				.build();
+			saveResource(sysResource);
 
-		String traceId = TraceContext.traceId();
-		LogUtil.info("skywalking traceid ===> {0}", traceId);
+			String traceId = TraceContext.traceId();
+			LogUtil.info("skywalking traceid ===> {0}", traceId);
 
-		LogUtil.info("1.远程添加订单信息");
-		OrderDTO orderDTO = OrderDTO.builder()
-			.memberId(2L)
-			.code("33333")
-			.amount(BigDecimal.ZERO)
-			.mainStatus(1)
-			.childStatus(1)
-			.receiverName("shuigedeng")
-			.receiverPhone("15730445330")
-			.receiverAddressJson("sjdlasjdfljsldf")
-			.build();
-
-		OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
-		LogUtil.info("OrderVO ====> {}", orderVO);
+			LogUtil.info("1.远程添加订单信息");
+			OrderDTO orderDTO = OrderDTO.builder()
+				.memberId(2L)
+				.code("33332")
+				.amount(BigDecimal.ZERO)
+				.mainStatus(1)
+				.childStatus(1)
+				.receiverName("shuigedeng")
+				.receiverPhone("15730445330")
+				.receiverAddressJson("sjdlasjdfljsldf")
+				.build();
 
 		//Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
 		//if(orderVOResult.getCode() != 200){
 		//	throw new BusinessException("创建订单失败");
 		//}
 		//LogUtil.info("OrderVO ===> {0}", orderVOResult);
+
+
+		OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
+			LogUtil.info("OrderVO ====> {}", orderVO);
+
+		//} catch (Exception e) {
+		//	try {
+		//		GlobalTransactionContext.reload(RootContext.getXID()).rollback();
+		//	} catch (TransactionException ex) {
+		//		ex.printStackTrace();
+		//	}
+		//}
 
 		//SysResource resourceById = findResourceById(37L);
 		//LogUtil.info("resourceById ======> ", resourceById);

@@ -19,11 +19,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * RedisLockProperties
+ * RedisLockProperties 
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/4/30 10:16
+ * @version 2021.9
+ * @since 2021-09-07 21:15:27
  */
 @RefreshScope
 @ConfigurationProperties(prefix = RedisLockProperties.PREFIX)

@@ -24,11 +24,11 @@ import java.util.Objects;
 import org.springframework.lang.NonNull;
 
 /**
- * hash 缓存 key 封装
+ * CacheHashKey
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/2 16:56
+ * @version 2021.9
+ * @since 2021-09-07 21:15:35
  */
 public class CacheHashKey extends CacheKey {
 

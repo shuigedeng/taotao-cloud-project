@@ -36,9 +36,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import javax.sql.DataSource;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -54,6 +56,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
+@AutoConfigureBefore(name = "io.seata.spring.boot.autoconfigure.SeataAutoConfiguration")
 @EnableConfigurationProperties(DataSourceProperties.class)
 @ConditionalOnProperty(prefix = "taotao.cloud.data.dynamic.datasource", name = "enabled",havingValue = "true")
 public class DynamicDataSourceAutoConfiguration implements InitializingBean {
@@ -161,9 +164,10 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 			DataSourceProperty property = new DataSourceProperty();
 			property.setUsername(properties.getUsername());
 			property.setPassword(properties.getPassword());
+			property.setType(properties.getType());
 			property.setUrl(properties.getUrl());
 			property.setLazy(true);
-			property.setDriverClassName(DataSourceConstants.DS_DRIVER);
+			property.setDriverClassName(properties.getDriverClassName());
 			map.put(DataSourceConstants.DS_MASTER, property);
 			return map;
 		}
@@ -221,6 +225,8 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 		 * 用户名
 		 */
 		private String username;
+
+		private Class<? extends DataSource> type;
 
 		/**
 		 * 密码
@@ -280,6 +286,14 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 
 		public void setQueryDsSql(String queryDsSql) {
 			this.queryDsSql = queryDsSql;
+		}
+
+		public Class<? extends DataSource> getType() {
+			return type;
+		}
+
+		public void setType(Class<? extends DataSource> type) {
+			this.type = type;
 		}
 	}
 

@@ -16,6 +16,8 @@
 package com.taotao.cloud.redis.lock;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.data.redis.connection.RedisStringCommands;
@@ -24,15 +26,12 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
 
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 /**
  * redis分布式锁实现
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/5/3 07:47
+ * @version 2021.9
+ * @since 2021-09-07 21:16:14
  * @deprecated 建议使用Redisson的实现方式 {@link RedissonDistributedLock}
  */
 @ConditionalOnClass(RedisTemplate.class)

@@ -38,8 +38,8 @@ import org.springframework.context.annotation.Configuration;
  * ShardingJdbcConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/22 17:30
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
 @Configuration
 @ConditionalOnProperty(prefix = ShardingJdbcProperties.PREIX, name = "enabled", havingValue = "true")

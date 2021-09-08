@@ -33,24 +33,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
- * DataSourceConfiguration
+ * SeataDataSourceConfiguration
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/22 14:48
+ * @version 2021.9
+ * @since 2021-09-07 20:54:47
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableAutoDataSourceProxy
 @ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SeataDataSourceConfiguration implements InitializingBean {
@@ -60,18 +66,33 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 		LogUtil.started(SeataDataSourceConfiguration.class, StarterName.SEATA_STARTER);
 	}
 
-	@Primary
-	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource dataSource(DataSourceProperties properties) {
-		LogUtil.started(DataSourceProxy.class, StarterName.SEATA_STARTER);
+	//@Primary
+	//@Bean
+	//@ConditionalOnClass(HikariDataSource.class)
+	//@ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.zaxxer.hikari.HikariDataSource",
+	//	matchIfMissing = true)
+	//@ConfigurationProperties(prefix = "spring.datasource.hikari")
+	//public DataSource dataSource(DataSourceProperties properties) {
+	//	LogUtil.started(HikariDataSource.class, StarterName.SEATA_STARTER);
+	//
+	//	HikariDataSource dataSource = properties
+	//		.initializeDataSourceBuilder()
+	//		.type(HikariDataSource.class)
+	//		.build();
+	//
+	//	if (StringUtils.hasText(properties.getName())) {
+	//		dataSource.setPoolName(properties.getName());
+	//	}
+	//
+	//	return dataSource;
+	//}
 
-		HikariDataSource hikariDataSource = properties
-				.initializeDataSourceBuilder()
-				.type(HikariDataSource.class)
-				.build();
-		return new DataSourceProxy(hikariDataSource);
-	}
+	//@Primary
+	//@Bean
+	//public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+	//	LogUtil.started(DataSourceProxy.class, StarterName.SEATA_STARTER);
+	//	return new DataSourceProxy(dataSource);
+	//}
 
 	@Bean
 	public SeataXidFilter seataXidFilter() {
@@ -94,18 +115,18 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 	public static class DetectTable implements ApplicationRunner {
 
 		public static final String undoLogSql = "CREATE TABLE IF NOT EXISTS undo_log(" +
-				"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
-				"`branch_id` bigint(20) NOT NULL," +
-				"`xid` varchar(100) NOT NULL," +
-				"`context` varchar(128) NOT NULL," +
-				"`rollback_info` longblob NOT NULL," +
-				"`log_status` int(11) NOT NULL," +
-				"`log_created` datetime NOT NULL," +
-				"`log_modified` datetime NOT NULL," +
-				"`ext` varchar(100) DEFAULT NULL," +
-				"PRIMARY KEY (`id`)," +
-				"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
-				")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+			"`id` bigint(20) NOT NULL AUTO_INCREMENT," +
+			"`branch_id` bigint(20) NOT NULL," +
+			"`xid` varchar(100) NOT NULL," +
+			"`context` varchar(128) NOT NULL," +
+			"`rollback_info` longblob NOT NULL," +
+			"`log_status` int(11) NOT NULL," +
+			"`log_created` datetime NOT NULL," +
+			"`log_modified` datetime NOT NULL," +
+			"`ext` varchar(100) DEFAULT NULL," +
+			"PRIMARY KEY (`id`)," +
+			"UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)" +
+			")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
 		private final DataSource dataSource;
 
@@ -136,7 +157,7 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-				FilterChain filterChain) throws ServletException, IOException {
+			FilterChain filterChain) throws ServletException, IOException {
 			String restXid = request.getHeader("xid");
 			if (StrUtil.isNotBlank(restXid)) {
 				RootContext.bind(restXid);

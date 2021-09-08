@@ -18,11 +18,11 @@ package com.taotao.cloud.sms.service;
 import org.springframework.lang.NonNull;
 
 /**
- * 短信通用操作
+ * SmsService
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 09:18
+ * @version 2021.9
+ * @since 2021-09-07 20:43:37
  */
 public interface SmsService {
 
@@ -35,7 +35,7 @@ public interface SmsService {
 	 * @param templateParam JSON模板参数字符串
 	 * @return boolean
 	 * @author shuigedeng
-	 * @since 2021/8/25 09:17
+	 * @since 2021-09-07 20:43:46
 	 */
 	boolean sendSms(@NonNull String phoneNumber, @NonNull String signName,
 		@NonNull String templateCode, @NonNull String templateParam);
@@ -44,9 +44,9 @@ public interface SmsService {
 	 * 发送验证码
 	 *
 	 * @param digits 位数
-	 * @return java.lang.String
+	 * @return {@link java.lang.String }
 	 * @author shuigedeng
-	 * @since 2021/8/25 09:18
+	 * @since 2021-09-07 20:43:58
 	 */
 	String sendRandCode(int digits);
 }

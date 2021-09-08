@@ -33,8 +33,8 @@ import org.springframework.lang.NonNull;
  * AliSmsServiceImpl
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/8/25 09:20
+ * @version 2021.9
+ * @since 2021-09-07 20:44:10
  */
 public class AliSmsServiceImpl implements SmsService {
 
@@ -44,21 +44,6 @@ public class AliSmsServiceImpl implements SmsService {
 	public AliSmsServiceImpl(AliSmsProperties aliSmsProperties, IAcsClient iAcsClient) {
 		this.aliSmsProperties = aliSmsProperties;
 		this.iAcsClient = iAcsClient;
-	}
-
-	/**
-	 * 封装公共的request
-	 *
-	 * @return
-	 */
-	private CommonRequest request() {
-		CommonRequest request = new CommonRequest();
-		request.setSysMethod(MethodType.POST);
-		request.setSysDomain(aliSmsProperties.getDomain());
-		request.setSysVersion(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-		request.setSysAction("SendSms");
-		request.putQueryParameter("RegionId", aliSmsProperties.getRegionId());
-		return request;
 	}
 
 	@Override
@@ -88,5 +73,22 @@ public class AliSmsServiceImpl implements SmsService {
 			sBuilder.append(rd.nextInt(9));
 		}
 		return sBuilder.toString();
+	}
+
+	/**
+	 * request
+	 *
+	 * @return {@link com.aliyuncs.CommonRequest }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:44:27
+	 */
+	private CommonRequest request() {
+		CommonRequest request = new CommonRequest();
+		request.setSysMethod(MethodType.POST);
+		request.setSysDomain(aliSmsProperties.getDomain());
+		request.setSysVersion(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		request.setSysAction("SendSms");
+		request.putQueryParameter("RegionId", aliSmsProperties.getRegionId());
+		return request;
 	}
 }

@@ -38,8 +38,8 @@ import org.springframework.util.StringUtils;
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelFeign}
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/6/15 11:31
+ * @version 2021.9
+ * @since 2021-09-07 20:46:19
  */
 public final class SentinelFeign {
 
@@ -137,6 +137,15 @@ public final class SentinelFeign {
 			return super.build();
 		}
 
+		/**
+		 * getFieldValue
+		 *
+		 * @param instance  instance
+		 * @param fieldName fieldName
+		 * @return {@link java.lang.Object }
+		 * @author shuigedeng
+		 * @since 2021-09-07 20:46:29
+		 */
 		private Object getFieldValue(Object instance, String fieldName) {
 			Field field = ReflectionUtils.findField(instance.getClass(), fieldName);
 			field.setAccessible(true);

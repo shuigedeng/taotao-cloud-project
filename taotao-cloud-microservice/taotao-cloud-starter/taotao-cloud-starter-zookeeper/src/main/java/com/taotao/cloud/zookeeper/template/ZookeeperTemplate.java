@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.zookeeper.template;
 
 import cn.hutool.core.collection.CollUtil;
@@ -14,7 +29,11 @@ import org.apache.zookeeper.CreateMode;
 import org.springframework.util.Assert;
 
 /**
- * zookeeper模板类
+ * ZookeeperTemplate
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-07 20:39:37
  */
 public class ZookeeperTemplate {
 
@@ -29,7 +48,9 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 节点路径
 	 * @param node 节点名称
-	 * @return 完整路径
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:39:47
 	 */
 	public String createNode(String path, String node) throws Exception {
 		return createNode(path, node, CreateMode.PERSISTENT);
@@ -41,7 +62,9 @@ public class ZookeeperTemplate {
 	 * @param path       节点路径
 	 * @param node       节点名称
 	 * @param createMode 类型
-	 * @return 完整路径
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:39:57
 	 */
 	public String createNode(String path, String node, CreateMode createMode) throws Exception {
 		path = buildPath(path, node);
@@ -60,7 +83,9 @@ public class ZookeeperTemplate {
 	 * @param path  节点路径
 	 * @param node  节点名称
 	 * @param value 节点值
-	 * @return 完整路径
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:07
 	 */
 	public String createNode(String path, String node, String value) throws Exception {
 		return createNode(path, node, value, CreateMode.PERSISTENT);
@@ -73,7 +98,9 @@ public class ZookeeperTemplate {
 	 * @param node       节点名称
 	 * @param value      节点值
 	 * @param createMode 节点类型
-	 * @return 完整路径
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:15
 	 */
 	public String createNode(String path, String node, String value, CreateMode createMode)
 		throws Exception {
@@ -93,7 +120,9 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 路径
 	 * @param node 节点名称
-	 * @return 节点值
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:25
 	 */
 	public String get(String path, String node) throws Exception {
 		path = buildPath(path, node);
@@ -110,7 +139,9 @@ public class ZookeeperTemplate {
 	 * @param path  节点路径
 	 * @param node  节点名称
 	 * @param value 更新值
-	 * @return 完整路径
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:33
 	 */
 	public String update(String path, String node, String value) throws Exception {
 		Assert.isTrue(StrUtil.isNotEmpty(value), "zookeeper节点值不能为空!");
@@ -125,6 +156,8 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 路径
 	 * @param node 节点名称
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:41
 	 */
 	public void delete(String path, String node) throws Exception {
 		path = buildPath(path, node);
@@ -135,7 +168,9 @@ public class ZookeeperTemplate {
 	 * 获取子节点
 	 *
 	 * @param path 节点路径
-	 * @return 子节点集合
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:48
 	 */
 	public List<String> getChildren(String path) throws Exception {
 		if (StrUtil.isEmpty(path)) {
@@ -153,7 +188,9 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 路径
 	 * @param node 节点名称
-	 * @return 结果
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:40:56
 	 */
 	public boolean exists(String path, String node) throws Exception {
 		List<String> list = getChildren(path);
@@ -165,6 +202,8 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path     节点路径
 	 * @param listener 回调方法
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:41:03
 	 */
 	public void watchNode(String path, NodeCacheListener listener) {
 		CuratorCacheListener curatorCacheListener = CuratorCacheListener.builder()
@@ -181,6 +220,8 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path     节点路径
 	 * @param listener 回调方法
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:41:10
 	 */
 	public void watchChildren(String path, PathChildrenCacheListener listener) {
 		CuratorCacheListener curatorCacheListener = CuratorCacheListener.builder()
@@ -197,6 +238,8 @@ public class ZookeeperTemplate {
 	 * @param path     节点路径
 	 * @param maxDepth 回调方法
 	 * @param listener 监听
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:41:17
 	 */
 	public void watchTree(String path, int maxDepth, TreeCacheListener listener) {
 		CuratorCacheListener curatorCacheListener = CuratorCacheListener.builder()
@@ -212,6 +255,9 @@ public class ZookeeperTemplate {
 	 *
 	 * @param path 路径
 	 * @param node 节点名
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:41:26
 	 */
 	private String buildPath(String path, String node) {
 		Assert.isTrue(StrUtil.isNotEmpty(path) && StrUtil.isNotEmpty(node)
