@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web;
 
-import com.taotao.cloud.core.properties.AsyncProperties;
+import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
 import com.taotao.cloud.web.properties.DozerProperties;
 import com.taotao.cloud.web.properties.EncryptProperties;
 import com.taotao.cloud.web.properties.FilterProperties;
@@ -33,7 +33,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  */
 @EnableConfigurationProperties({
 		FilterProperties.class,
-		AsyncProperties.class,
+		CoreThreadPoolProperties.class,
 		DozerProperties.class,
 		IdempotentProperties.class,
 		XssProperties.class,

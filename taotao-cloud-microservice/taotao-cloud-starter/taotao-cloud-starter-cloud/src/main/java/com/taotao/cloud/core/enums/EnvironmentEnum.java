@@ -23,12 +23,9 @@ package com.taotao.cloud.core.enums;
  * @since 2021-09-02 20:23:43
  */
 public enum EnvironmentEnum {
-	//开发环境
 	DEV("开发"),
 	TEST("测试"),
-	//预生产
 	PRE("预生产"),
-	//生产环境
 	PRD("生产"),
 	DOCKER("docker");
 

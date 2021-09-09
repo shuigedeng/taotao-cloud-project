@@ -59,13 +59,6 @@ public class SecurityConstant {
 	 */
 	public static final String DEFAULT_SELECT = BASE_FIND + " where client_id = ?";
 
-	public static final String NORMAL = "normal";
-	public static final String SMS = "sms";
-	public static final String LOGIN_QQ = "qq";
-	public static final String LOGIN_WEIXIN = "weixin";
-	public static final String LOGIN_GITEE = "gitee";
-	public static final String LOGIN_GITHUB = "github";
-
 	/**
 	 * 基础角色
 	 */

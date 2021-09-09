@@ -52,8 +52,9 @@ public class EnumSerializer extends StdSerializer<BaseEnum> {
 		throws IOException {
 		generator.writeStartObject();
 		generator.writeFieldName(ALL_ENUM_KEY_FIELD);
-		generator.writeString(distance.getCode().toString());
+		generator.writeNumber(distance.getCode());
 		generator.writeFieldName(ALL_ENUM_DESC_FIELD);
+		generator.writeString(distance.getDesc());
 		generator.writeEndObject();
 	}
 }

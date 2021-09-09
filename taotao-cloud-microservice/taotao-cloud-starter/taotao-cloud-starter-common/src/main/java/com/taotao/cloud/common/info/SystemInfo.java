@@ -26,6 +26,15 @@ import java.io.Serializable;
  */
 public class SystemInfo implements Serializable {
 
+	private SystemInfo() {
+	}
+
+	public static final UserInfo userInfo = new UserInfo();
+	public static final OsInfo osInfo = new OsInfo();
+	public static final JavaInfo javaInfo = new JavaInfo();
+	public static final JvmInfo jvmInfo = new JvmInfo();
+	public static final RuntimeInfo runtimeInfo = new RuntimeInfo();
+
 	/**
 	 * info
 	 *
@@ -34,12 +43,6 @@ public class SystemInfo implements Serializable {
 	 * @since 2021-09-02 19:26:58
 	 */
 	public static String info() {
-		UserInfo userInfo = new UserInfo();
-		OsInfo osInfo = new OsInfo();
-		JavaInfo javaInfo = new JavaInfo();
-		JvmInfo jvmInfo = new JvmInfo();
-		RuntimeInfo runtimeInfo = new RuntimeInfo();
-
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[UserInfo]\n").append(userInfo.toString()).append("\n")
 			.append("\n[OsInfo]\n").append(osInfo.toString()).append("\n")

@@ -35,6 +35,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class SecurityUser implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = -3685249101751401211L;
+
 	/**
 	 * ROLE_PREFIX
 	 */

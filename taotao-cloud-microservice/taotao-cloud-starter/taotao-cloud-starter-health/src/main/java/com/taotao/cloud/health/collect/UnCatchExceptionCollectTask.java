@@ -1,7 +1,6 @@
 package com.taotao.cloud.health.collect;
 
 
-import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;

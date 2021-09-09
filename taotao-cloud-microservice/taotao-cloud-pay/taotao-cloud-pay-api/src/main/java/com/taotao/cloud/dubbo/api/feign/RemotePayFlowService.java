@@ -1,6 +1,6 @@
 package com.taotao.cloud.dubbo.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.dubbo.api.feign.fallback.RemotePayFlowFallbackImpl;
 import com.taotao.cloud.dubbo.api.vo.PayFlowVO;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "RemotePayFlowService", value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemotePayFlowFallbackImpl.class)
+@FeignClient(contextId = "RemotePayFlowService", value = ServiceNameConstant.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemotePayFlowFallbackImpl.class)
 public interface RemotePayFlowService {
 
 	/**

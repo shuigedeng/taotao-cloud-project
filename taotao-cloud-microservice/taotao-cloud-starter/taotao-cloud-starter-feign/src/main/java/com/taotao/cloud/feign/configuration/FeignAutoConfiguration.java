@@ -17,7 +17,7 @@ package com.taotao.cloud.feign.configuration;
 
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -50,31 +50,31 @@ public class FeignAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(FeignAutoConfiguration.class, StarterNameConstant.FEIGN_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public RequestOriginParser requestOriginParser() {
-		LogUtil.started(RequestOriginParser.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(RequestOriginParser.class, StarterNameConstant.FEIGN_STARTER);
 		return new HeaderRequestOriginParser();
 	}
 
 	@Bean
 	public Logger.Level feignLoggerLevel() {
-		LogUtil.started(Logger.Level.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(Logger.Level.class, StarterNameConstant.FEIGN_STARTER);
 		return Logger.Level.FULL;
 	}
 
 	@Bean
 	public Retryer retryer() {
-		LogUtil.started(Retryer.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(Retryer.class, StarterNameConstant.FEIGN_STARTER);
 		return new Retryer.Default();
 	}
 
 	@Bean
 	public FeignClientErrorDecoder feignClientErrorDecoder() {
-		LogUtil.started(FeignClientErrorDecoder.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(FeignClientErrorDecoder.class, StarterNameConstant.FEIGN_STARTER);
 		return new FeignClientErrorDecoder();
 	}
 

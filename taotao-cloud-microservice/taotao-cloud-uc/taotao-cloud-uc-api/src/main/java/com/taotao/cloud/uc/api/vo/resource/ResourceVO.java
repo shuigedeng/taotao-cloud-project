@@ -17,13 +17,13 @@ public class ResourceVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "id")
-	private Long id;
+	private long id;
 
 	@Schema(description = "资源名称")
 	private String name;
 
 	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮")
-	private Byte type;
+	private int type;
 
 	@Schema(description = "权限标识")
 	private String perms;
@@ -35,28 +35,28 @@ public class ResourceVO implements Serializable {
 	private String component;
 
 	@Schema(description = "父菜单ID")
-	private Long parentId;
+	private long parentId;
 
 	@Schema(description = "图标")
 	private String icon;
 
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
-	private Boolean keepAlive;
+	private boolean keepAlive;
 
 	@Schema(description = "是否隐藏路由菜单: 0否,1是（默认值0）")
-	private Boolean hidden;
+	private boolean hidden;
 
 	@Schema(description = "聚合路由 0否,1是（默认值0）")
-	private Boolean alwaysShow;
+	private boolean alwaysShow;
 
 	@Schema(description = "重定向")
 	private String redirect;
 
 	@Schema(description = "是否为外链 0否,1是（默认值0）")
-	private Boolean isFrame;
+	private boolean isFrame;
 
 	@Schema(description = "排序值")
-	private Integer sortNum;
+	private int sortNum;
 
 	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
@@ -67,9 +67,9 @@ public class ResourceVO implements Serializable {
 	public ResourceVO() {
 	}
 
-	public ResourceVO(Long id, String name, Byte type, String perms, String path,
-		String component, Long parentId, String icon, Boolean keepAlive, Boolean hidden,
-		Boolean alwaysShow, String redirect, Boolean isFrame, Integer sortNum,
+	public ResourceVO(long id, String name, int type, String perms, String path,
+		String component, long parentId, String icon, boolean keepAlive, boolean hidden,
+		boolean alwaysShow, String redirect, boolean isFrame, int sortNum,
 		LocalDateTime createTime, LocalDateTime lastModifiedTime) {
 		this.id = id;
 		this.name = name;
@@ -156,12 +156,52 @@ public class ResourceVO implements Serializable {
 		this.name = name;
 	}
 
-	public Byte getType() {
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getType() {
 		return type;
 	}
 
-	public void setType(Byte type) {
+	public void setType(int type) {
 		this.type = type;
+	}
+
+	public boolean isKeepAlive() {
+		return keepAlive;
+	}
+
+	public void setKeepAlive(boolean keepAlive) {
+		this.keepAlive = keepAlive;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public boolean isAlwaysShow() {
+		return alwaysShow;
+	}
+
+	public void setAlwaysShow(boolean alwaysShow) {
+		this.alwaysShow = alwaysShow;
+	}
+
+	public boolean isFrame() {
+		return isFrame;
+	}
+
+	public void setFrame(boolean frame) {
+		isFrame = frame;
+	}
+
+	public void setSortNum(int sortNum) {
+		this.sortNum = sortNum;
 	}
 
 	public String getPerms() {
@@ -275,20 +315,20 @@ public class ResourceVO implements Serializable {
 
 	public static final class ResourceVOBuilder {
 
-		private Long id;
+		private long id;
 		private String name;
-		private Byte type;
+		private int type;
 		private String perms;
 		private String path;
 		private String component;
-		private Long parentId;
+		private long parentId;
 		private String icon;
-		private Boolean keepAlive;
-		private Boolean hidden;
-		private Boolean alwaysShow;
+		private boolean keepAlive;
+		private boolean hidden;
+		private boolean alwaysShow;
 		private String redirect;
-		private Boolean isFrame;
-		private Integer sortNum;
+		private boolean isFrame;
+		private int sortNum;
 		private LocalDateTime createTime;
 		private LocalDateTime lastModifiedTime;
 

@@ -17,7 +17,7 @@ package com.taotao.cloud.feign.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
 import feign.RequestInterceptor;
@@ -47,7 +47,7 @@ public class FeignHttpInterceptorConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignHttpInterceptorConfiguration.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(FeignHttpInterceptorConfiguration.class, StarterNameConstant.FEIGN_STARTER);
 	}
 
 	protected List<String> requestHeaders = new ArrayList<>();
@@ -65,7 +65,7 @@ public class FeignHttpInterceptorConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public RequestInterceptor httpFeignInterceptor() {
-		LogUtil.started(RequestInterceptor.class, StarterName.FEIGN_STARTER);
+		LogUtil.started(RequestInterceptor.class, StarterNameConstant.FEIGN_STARTER);
 
 		return template -> {
 			RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();

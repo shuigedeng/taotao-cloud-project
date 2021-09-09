@@ -7,7 +7,6 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResourceTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.dto.OrderDTO;
 import com.taotao.cloud.order.api.feign.RemoteOrderItemService;
@@ -24,10 +23,7 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
-import io.seata.core.context.RootContext;
-import io.seata.core.exception.TransactionException;
 import io.seata.spring.annotation.GlobalTransactional;
-import io.seata.tm.api.GlobalTransactionContext;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -215,7 +211,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	public List<ResourceTree> findCurrentUserResourceTree(List<ResourceVO> resourceVOList,
 		Long parentId) {
 		List<ResourceTree> menuTreeList = resourceVOList.stream()
-			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getValue().equals(vo.getType()))
+			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getCode() == vo.getType())
 			.map(ResourceTree::new).sorted(Comparator.comparingInt(ResourceTree::getSort))
 			.collect(Collectors.toList());
 		Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;

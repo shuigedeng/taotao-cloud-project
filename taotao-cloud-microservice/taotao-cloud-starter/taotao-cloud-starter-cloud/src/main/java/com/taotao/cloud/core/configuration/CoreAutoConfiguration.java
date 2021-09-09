@@ -17,7 +17,7 @@ package com.taotao.cloud.core.configuration;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
@@ -44,12 +44,12 @@ public class CoreAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CoreAutoConfiguration.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(CoreAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
 
 	@Bean(value = "meterRegistryCustomizer")
 	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
-		LogUtil.started(MeterRegistryCustomizer.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(MeterRegistryCustomizer.class, StarterNameConstant.CLOUD_STARTER);
 
 		return meterRegistry -> meterRegistry
 			.config()
@@ -58,8 +58,7 @@ public class CoreAutoConfiguration implements InitializingBean {
 
 	@Bean(destroyMethod = "shutdown")
 	public ThreadPool getSystemThreadPool() {
-		LogUtil.started(ThreadPool.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(ThreadPool.class, StarterNameConstant.CLOUD_STARTER);
 		if (ThreadPool.DEFAULT == null || ThreadPool.DEFAULT.isShutdown()) {
 			ThreadPool.initSystem();
 		}
@@ -69,30 +68,26 @@ public class CoreAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnBean(ThreadPool.class)
 	public ThreadMonitor getSystemThreadPoolMonitor() {
-		LogUtil.started(ThreadMonitor.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(ThreadMonitor.class, StarterNameConstant.CLOUD_STARTER);
 		return ThreadPool.DEFAULT.getThreadMonitor();
 	}
 
 	@Bean
 	public PropertyCache getPropertyCache() {
-		LogUtil.started(PropertyCache.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(PropertyCache.class, StarterNameConstant.CLOUD_STARTER);
 		PropertyCache.DEFAULT.clear();
 		return PropertyCache.DEFAULT;
 	}
 
 	@Bean
 	public CoreApplicationRunner coreApplicationRunner() {
-		LogUtil.started(CoreApplicationRunner.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(CoreApplicationRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreApplicationRunner();
 	}
 
 	@Bean
 	public CoreCommandLineRunner coreCommandLineRunner() {
-		LogUtil.started(CoreCommandLineRunner.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(CoreCommandLineRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreCommandLineRunner();
 	}
 }

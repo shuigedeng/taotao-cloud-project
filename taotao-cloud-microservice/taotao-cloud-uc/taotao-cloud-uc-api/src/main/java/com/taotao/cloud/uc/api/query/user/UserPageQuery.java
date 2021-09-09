@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.query.user;
 
-import com.taotao.cloud.common.model.BasePageQuery;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  * @since 2020/5/14 10:44
  */
 @Schema(name = "UserPageQuery", description = "用户分页查询query")
-public class UserPageQuery extends BasePageQuery {
+public class UserPageQuery extends PageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 

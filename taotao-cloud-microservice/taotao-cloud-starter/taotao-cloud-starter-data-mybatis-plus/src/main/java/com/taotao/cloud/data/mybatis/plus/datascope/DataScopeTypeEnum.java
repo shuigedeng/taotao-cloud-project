@@ -78,7 +78,7 @@ public enum DataScopeTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
+	public int getCode() {
 		return this.val;
 	}
 

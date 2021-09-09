@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.AntiSqlFilterUtils;
 import com.taotao.cloud.data.mybatis.plus.entity.Entity;
 import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
@@ -106,8 +106,8 @@ public class PageParams<T> {
 		Page<E> page = new Page(params.getCurrent(), params.getSize());
 
 		List<OrderItem> orders = new ArrayList<>();
-		String[] sortArr = StrUtil.splitToArray(params.getSort(), StrPool.COMMA.charAt(0));
-		String[] orderArr = StrUtil.splitToArray(params.getOrder(), StrPool.COMMA.charAt(0));
+		String[] sortArr = StrUtil.splitToArray(params.getSort(), StrPoolConstant.COMMA.charAt(0));
+		String[] orderArr = StrUtil.splitToArray(params.getOrder(), StrPoolConstant.COMMA.charAt(0));
 
 		int len = Math.min(sortArr.length, orderArr.length);
 		for (int i = 0; i < len; i++) {

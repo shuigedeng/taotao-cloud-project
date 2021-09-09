@@ -94,12 +94,6 @@ public class UserInfo implements Serializable {
 		return USER_COUNTRY;
 	}
 
-	/**
-	 * 将当前用户的信息转换成字符串。
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-02 19:27:12
-	 */
 	@Override
 	public final String toString() {
 

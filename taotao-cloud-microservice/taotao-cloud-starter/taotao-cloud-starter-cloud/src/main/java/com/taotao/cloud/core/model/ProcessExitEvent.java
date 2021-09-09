@@ -46,13 +46,13 @@ public class ProcessExitEvent {
 	 *
 	 * @param action0 action0
 	 * @param order   order
-	 * @param asynch  asynch
+	 * @param async  async
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:37:02
 	 */
-	public static void register(Callable.Action0 action0, int order, Boolean asynch) {
+	public static void register(Callable.Action0 action0, int order, Boolean async) {
 		synchronized (lock) {
-			callBackList.add(new ExitCallback(action0, Math.abs(order), asynch));
+			callBackList.add(new ExitCallback(action0, Math.abs(order), async));
 		}
 	}
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 目录类型 
+ * 目录类型
  *
  * @author shuigedeng
  * @version 2021.9
@@ -26,30 +26,27 @@ public enum ResourceTypeEnum implements BaseEnum {
 	/**
 	 * 一级(左侧)菜单
 	 */
-	LEFT_MENU((byte) 1, "一级(左侧)菜单"),
+	LEFT_MENU(1, "一级(左侧)菜单"),
 	/**
 	 * 二级(顶部)菜单
 	 */
-	TOP_MENU((byte) 2, "二级(顶部)菜单"),
+	TOP_MENU(2, "二级(顶部)菜单"),
 	/**
 	 * 按钮
 	 */
-	BUTTON((byte) 3, "按钮");
+	BUTTON(3, "按钮");
 
-	private final Byte value;
-	private final String description;
+	private final int code;
+	private final String desc;
 
-	ResourceTypeEnum(Byte value, String description) {
-		this.value = value;
-		this.description = description;
+	ResourceTypeEnum(int code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public Byte getValue() {
-		return value;
-	}
-
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public enum ResourceTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return (int) value;
+	public int getCode() {
+		return code;
 	}
 }

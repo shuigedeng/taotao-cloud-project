@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
@@ -38,14 +38,14 @@ public class LimitConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LimitConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(LimitConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnBean({RedisRepository.class})
 	@ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true")
 	public LimitAspect limitAspect(RedisRepository redisRepository) {
-		LogUtil.started(LimitAspect.class, StarterName.WEB_STARTER);
+		LogUtil.started(LimitAspect.class, StarterNameConstant.WEB_STARTER);
 
 		return new LimitAspect(redisRepository);
 	}

@@ -166,7 +166,7 @@ public class Result<T> implements Serializable {
 	 * @since 2021-09-02 19:13:07
 	 */
 	public static Result<String> success(String data, ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), resultEnum.getData(), CommonConstant.SUCCESS, "");
+		return of(resultEnum.getCode(), resultEnum.getDesc(), CommonConstant.SUCCESS, "");
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class Result<T> implements Serializable {
 	 */
 	public static Result<String> fail() {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR,
-			ResultEnum.ERROR.getData());
+			ResultEnum.ERROR.getDesc());
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class Result<T> implements Serializable {
 	 * @since 2021-09-02 19:14:32
 	 */
 	public static Result<String> fail(ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
+		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getDesc());
 	}
 
 	/**
@@ -243,7 +243,7 @@ public class Result<T> implements Serializable {
 	 * @since 2021-09-02 19:14:18
 	 */
 	public static <T> Result<T> validFail(ResultEnum resultEnum) {
-		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getData());
+		return of(resultEnum.getCode(), null, CommonConstant.ERROR, resultEnum.getDesc());
 	}
 
 

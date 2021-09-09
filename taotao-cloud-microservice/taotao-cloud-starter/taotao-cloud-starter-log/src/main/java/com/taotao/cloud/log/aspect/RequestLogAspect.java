@@ -22,7 +22,7 @@ import cn.hutool.core.util.URLUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.utils.DateUtil;
@@ -162,16 +162,16 @@ public class RequestLogAspect {
 			RequestLog requestLog = get();
 			R r = Convert.convert(R.class, ret);
 			if (r.getCode() == HttpStatus.OK.value()) {
-				requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getValue());
+				requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
 			} else {
-				requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getValue());
+				requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
 				requestLog.setExDetail(r.getMsg());
 			}
 			requestLog.setTenantId(TenantContextHolder.getTenant());
 			requestLog.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			long endTime = Instant.now().toEpochMilli();
 			requestLog.setRequestConsumingTime(endTime - requestLog.getRequestStartTime());
-			requestLog.setResult(getText(String.valueOf(ret == null ? StrPool.EMPTY : ret)));
+			requestLog.setResult(getText(String.valueOf(ret == null ? StrPoolConstant.EMPTY : ret)));
 			if (requestOperateLog.response()) {
 				requestLog.setResult(getText(r.toString()));
 			}
@@ -188,7 +188,7 @@ public class RequestLogAspect {
 				return;
 			}
 			RequestLog requestLog = get();
-			requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getValue());
+			requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
 			String stackTrace = LogUtil.getStackTrace(e);
 			requestLog.setExDetail(stackTrace.replaceAll("\"", "'")
 				.replace("\n", ""));
@@ -210,7 +210,7 @@ public class RequestLogAspect {
 	}
 
 	private String getArgs(Object[] args, HttpServletRequest request) {
-		String strArgs = StrPool.EMPTY;
+		String strArgs = StrPoolConstant.EMPTY;
 		Object[] params = Arrays.stream(args)
 			.filter(item -> !(item instanceof ServletRequest || item instanceof ServletResponse))
 			.toArray();
@@ -352,7 +352,7 @@ public class RequestLogAspect {
 		String controllerMethodDescription = getDescribe(sysLog);
 
 		if (StrUtil.isNotEmpty(controllerMethodDescription) && StrUtil.contains(
-			controllerMethodDescription, StrPool.HASH)) {
+			controllerMethodDescription, StrPoolConstant.HASH)) {
 			//获取方法参数值
 			Object[] args = joinPoint.getArgs();
 
@@ -401,14 +401,14 @@ public class RequestLogAspect {
 	public static String getDescribe(JoinPoint point) {
 		RequestOperateLog annotation = getTargetAnnotation(point);
 		if (annotation == null) {
-			return StrPool.EMPTY;
+			return StrPoolConstant.EMPTY;
 		}
 		return annotation.value();
 	}
 
 	public static String getDescribe(RequestOperateLog annotation) {
 		if (annotation == null) {
-			return StrPool.EMPTY;
+			return StrPoolConstant.EMPTY;
 		}
 		return annotation.value();
 	}

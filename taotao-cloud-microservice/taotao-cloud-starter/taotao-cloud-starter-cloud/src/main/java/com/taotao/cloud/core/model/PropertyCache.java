@@ -72,6 +72,7 @@ public class PropertyCache implements CommandLineRunner {
 				return (T) BeanUtil.convert(v, defaultValue.getClass());
 			}
 		}
+
 		Object value = cache.get(key);
 		if (value == null) {
 			String v = PropertyUtil.getProperty(key);
@@ -81,6 +82,7 @@ public class PropertyCache implements CommandLineRunner {
 				cache.put(key, PropertyUtil.NULL);
 			}
 		}
+
 		value = cache.get(key);
 		if (PropertyUtil.NULL.equals(value)) {
 			return defaultValue;
@@ -101,6 +103,7 @@ public class PropertyCache implements CommandLineRunner {
 		if (!isStart) {
 			return;
 		}
+
 		if (cache.containsKey(key)) {
 			if (value == null) {
 				cache.put(key, PropertyUtil.NULL);
@@ -108,6 +111,7 @@ public class PropertyCache implements CommandLineRunner {
 				cache.put(key, value);
 			}
 		}
+
 		Pubsub.DEFAULT.pub(EventEnum.PropertyCacheUpdateEvent.toString(), new HashMap(1) {
 			{
 				put(key, value);

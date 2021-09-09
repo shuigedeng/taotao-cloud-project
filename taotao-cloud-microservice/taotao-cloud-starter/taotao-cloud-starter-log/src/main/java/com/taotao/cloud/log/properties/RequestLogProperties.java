@@ -40,7 +40,7 @@ public class RequestLogProperties {
 	/**
 	 * 日志记录类型(logger/redis/kafka)
 	 */
-	private String[] types = new String[]{LogTypeEnum.LOGGER.getName()};
+	private LogTypeEnum[] types = new LogTypeEnum[]{LogTypeEnum.LOGGER};
 
 	public RequestLogProperties() {
 	}
@@ -53,11 +53,11 @@ public class RequestLogProperties {
 		this.enabled = enabled;
 	}
 
-	public String[] getTypes() {
+	public LogTypeEnum[] getTypes() {
 		return types;
 	}
 
-	public void setTypes(String[] types) {
+	public void setTypes(LogTypeEnum[] types) {
 		this.types = types;
 	}
 

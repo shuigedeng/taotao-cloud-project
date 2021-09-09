@@ -16,7 +16,7 @@ public class DoubtApiProperties {
 	private boolean enabled = true;
 
 	//增长内存统计阈值，默认3M
-	private  int threshold = 3 * 1024 * 1024;
+	private int threshold = 3 * 1024 * 1024;
 
 	public boolean isEnabled() {
 		return enabled;

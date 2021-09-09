@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.oauth2.api.query;
 
-import com.taotao.cloud.common.model.BasePageQuery;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.common.model.PageQuery;
 
 /**
  * 客户端分页查询Query
@@ -27,7 +25,7 @@ import groovy.transform.ToString;
  * @version 1.0.0
  */
 @ApiModel(value = "客户端分页查询Query")
-public class ClientPageQuery extends BasePageQuery {
+public class ClientPageQuery extends PageQuery {
     private static final long serialVersionUID = 5953949488238258726L;
     @ApiModelProperty(value = "应用标识")
     private String clientId;

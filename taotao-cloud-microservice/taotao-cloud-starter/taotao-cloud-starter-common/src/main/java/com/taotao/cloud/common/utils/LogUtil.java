@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -110,7 +110,7 @@ public class LogUtil {
 			sb.append(Arrays.toString(message) + " ");
 		}
 
-		sb.append(StarterName.STARTED);
+		sb.append(StarterNameConstant.STARTED);
 		info(sb.toString());
 	}
 

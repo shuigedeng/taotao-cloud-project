@@ -18,7 +18,7 @@
  import cn.hutool.core.util.StrUtil;
  import com.alibaba.cloud.nacos.NacosServiceInstance;
  import com.taotao.cloud.common.constant.CommonConstant;
- import com.taotao.cloud.common.constant.StarterName;
+ import com.taotao.cloud.common.constant.StarterNameConstant;
  import com.taotao.cloud.common.context.VersionContextHolder;
  import com.taotao.cloud.common.utils.LogUtil;
  import com.taotao.cloud.feign.properties.LbIsolationProperties;
@@ -63,7 +63,7 @@
 
 	 @Override
 	 public void afterPropertiesSet() throws Exception {
-		 LogUtil.started(VersionLoadbalancerAutoConfiguration.class, StarterName.FEIGN_STARTER);
+		 LogUtil.started(VersionLoadbalancerAutoConfiguration.class, StarterNameConstant.FEIGN_STARTER);
 	 }
 
 	 @Bean
@@ -71,7 +71,7 @@
 	 public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
 		 Environment environment,
 		 LoadBalancerClientFactory loadBalancerClientFactory) {
-		 LogUtil.started(ReactorLoadBalancer.class, StarterName.FEIGN_STARTER);
+		 LogUtil.started(ReactorLoadBalancer.class, StarterNameConstant.FEIGN_STARTER);
 
 		 String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
 		 return new VersionLoadBalancer(

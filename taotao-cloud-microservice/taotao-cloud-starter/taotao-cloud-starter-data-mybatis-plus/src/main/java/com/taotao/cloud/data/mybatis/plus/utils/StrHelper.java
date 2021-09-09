@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.core.toolkit.sql.SqlUtils;
-import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.constant.StrPoolConstant;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
@@ -55,10 +55,10 @@ public final class StrHelper {
 	 */
 	public static String keywordConvert(String value) {
 		if (StrUtil.isBlank(value)) {
-			return StrPool.EMPTY;
+			return StrPoolConstant.EMPTY;
 		}
-		value = value.replaceAll(StrPool.PERCENT, "\\\\%");
-		value = value.replaceAll(StrPool.UNDERSCORE, "\\\\_");
+		value = value.replaceAll(StrPoolConstant.PERCENT, "\\\\%");
+		value = value.replaceAll(StrPoolConstant.UNDERSCORE, "\\\\_");
 		return value;
 	}
 

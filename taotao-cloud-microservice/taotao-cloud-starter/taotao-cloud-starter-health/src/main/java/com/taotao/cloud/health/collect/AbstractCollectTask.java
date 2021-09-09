@@ -1,7 +1,7 @@
 package com.taotao.cloud.health.collect;
 
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.model.EnumWarnType;
@@ -62,7 +62,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	}
 
 	public static void notifyMessage(EnumWarnType type, String subject, String content) {
-		LogUtil.warn(StarterName.HEALTH_STARTER, "【报警】" + subject + "\r\n" + content, null);
+		LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "【报警】" + subject + "\r\n" + content, null);
 		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
 			Message message = new Message();

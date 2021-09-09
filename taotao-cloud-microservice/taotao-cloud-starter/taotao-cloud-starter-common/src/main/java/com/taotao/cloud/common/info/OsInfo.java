@@ -63,7 +63,6 @@ public class OsInfo implements Serializable {
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:24:22
 	 */
-
 	public final String getArch() {
 		return OS_ARCH;
 	}
@@ -345,12 +344,6 @@ public class OsInfo implements Serializable {
 		return PATH_SEPARATOR;
 	}
 
-	/**
-	 * 将OS的信息转换成字符串
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-02 19:25:43
-	 */
 	@Override
 	public final String toString() {
 

@@ -17,7 +17,7 @@ package com.taotao.cloud.job.elastic.configuration;
 
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.job.elastic.model.JobController;
 import com.taotao.cloud.job.elastic.model.JobService;
@@ -42,13 +42,13 @@ public class JobParserConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(JobParserConfiguration.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtil.started(JobParserConfiguration.class, StarterNameConstant.JOB_ELASTIC_STARTER);
 	}
 
 	@Bean(initMethod = "init")
 	@ConditionalOnProperty(prefix = ElasticJobProperties.PREFIX, name = "enabled", havingValue = "true")
 	public ZookeeperRegistryCenter registryCenter(ZookeeperProperties properties) {
-		LogUtil.started(ZookeeperRegistryCenter.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtil.started(ZookeeperRegistryCenter.class, StarterNameConstant.JOB_ELASTIC_STARTER);
 
 		ZookeeperConfiguration zkConfig = new ZookeeperConfiguration(
 			properties.getServerLists(),
@@ -67,14 +67,14 @@ public class JobParserConfiguration implements InitializingBean {
 
 	@Bean
 	public JobService jobService(ZookeeperRegistryCenter zookeeperRegistryCenter) {
-		LogUtil.started(JobService.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtil.started(JobService.class, StarterNameConstant.JOB_ELASTIC_STARTER);
 
 		return new JobService(zookeeperRegistryCenter);
 	}
 
 	@Bean
 	public JobController jobController(JobService jobService) {
-		LogUtil.started(JobController.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtil.started(JobController.class, StarterNameConstant.JOB_ELASTIC_STARTER);
 
 		return new JobController(jobService);
 	}
@@ -83,7 +83,7 @@ public class JobParserConfiguration implements InitializingBean {
 	@ConditionalOnBean(JobService.class)
 	public JobConfParser jobConfParser(ZookeeperRegistryCenter zookeeperRegistryCenter,
 		JobService jobService) {
-		LogUtil.started(JobConfParser.class, StarterName.JOB_ELASTIC_STARTER);
+		LogUtil.started(JobConfParser.class, StarterNameConstant.JOB_ELASTIC_STARTER);
 
 		return new JobConfParser(zookeeperRegistryCenter, jobService);
 	}

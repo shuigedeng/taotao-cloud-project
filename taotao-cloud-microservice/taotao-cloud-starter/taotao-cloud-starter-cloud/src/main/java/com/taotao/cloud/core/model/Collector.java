@@ -69,8 +69,8 @@ public class Collector {
 		if (!map.containsKey(key)) {
 			synchronized (lock) {
 				if (!map.containsKey(key)) {
-					Object create = createFactory(key, type);
-					map.put(key, create);
+					Object obj = createFactory(key, type);
+					map.put(key, obj);
 				}
 			}
 		}
@@ -324,7 +324,7 @@ public class Collector {
 		public Object run(String tag, Object obj, String methodName, Object[] params) {
 			if (method == null) {
 				Optional<Method> find = Arrays.stream(obj.getClass().getMethods())
-						.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
+					.filter(c -> methodName.equalsIgnoreCase(c.getName())).findFirst();
 				if (!find.isPresent()) {
 					throw new BaseException("未找到方法:" + obj.getClass().getName() + "下" + methodName);
 				}
@@ -383,6 +383,7 @@ public class Collector {
 						sortListPerMinute.removeMore(0);
 					}
 				}
+
 				long start = System.currentTimeMillis();
 				T result = func.invoke();
 				long timeSpan = System.currentTimeMillis() - start;
@@ -621,7 +622,7 @@ public class Collector {
 		}
 
 		public SortInfo(Object tag, double time, double maxTime,
-				AtomicLong count) {
+			AtomicLong count) {
 			this.tag = tag;
 			this.time = time;
 			this.maxTime = maxTime;
@@ -717,9 +718,11 @@ public class Collector {
 				}
 				return false;
 			}
+
 			if (tagCache.size() > super.size()) {
 				LogUtil.info("tag cache 缓存存在溢出风险");
 			}
+
 			if (super.add(sortInfo)) {
 				tagCache.put(hash, sortInfo);
 			}
@@ -767,7 +770,7 @@ public class Collector {
 				}
 				if (count < -10) {
 					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString()
-							: " 长时间无法移除导致死循环"));
+						: " 长时间无法移除导致死循环"));
 					break;
 				}
 			}
@@ -784,8 +787,8 @@ public class Collector {
 			StringBuilder sb = new StringBuilder();
 			for (SortInfo o : this) {
 				sb.append(String.format("[耗时ms]%s[tag]%s[次数]%s[最大耗时ms]%s\r\n",
-						NumberUtil.scale(o.time, 2), o.tag.toString(), o.count,
-						NumberUtil.scale(o.maxTime, 2)));
+					NumberUtil.scale(o.time, 2), o.tag.toString(), o.count,
+					NumberUtil.scale(o.maxTime, 2)));
 			}
 			return sb.toString();
 		}

@@ -3,6 +3,7 @@ dependencies {
 
 //    api 'com.dianping.cat:cat-client:3.0.0'
     api 'net.logstash.logback:logstash-logback-encoder'
+    api 'org.hibernate:hibernate-core:5.4.32.Final'
 
     api 'org.apache.httpcomponents:httpclient'
     api 'org.apache.httpcomponents:httpmime'

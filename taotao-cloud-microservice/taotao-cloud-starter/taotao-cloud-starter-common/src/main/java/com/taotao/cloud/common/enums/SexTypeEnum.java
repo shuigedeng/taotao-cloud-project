@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 用户性别类型 
+ * 用户性别类型
  *
  * @author shuigedeng
  * @version 2021.9
@@ -26,26 +26,27 @@ public enum SexTypeEnum implements BaseEnum {
 	/**
 	 * 未知
 	 */
-	UNKNOWN((byte) 0, "未知"),
+	UNKNOWN(0, "未知"),
 	/**
 	 * 男
 	 */
-	MALE((byte) 1, "男"),
+	MALE(1, "男"),
 	/**
 	 * 女
 	 */
-	FEMALE((byte) 2, "女");
+	FEMALE(2, "女");
 
-	private final byte code;
-	private final String description;
+	private final int code;
+	private final String desc;
 
-	SexTypeEnum(byte code, String description) {
+	SexTypeEnum(int code, String desc) {
 		this.code = code;
-		this.description = description;
+		this.desc = desc;
 	}
 
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public enum SexTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return (int) code;
+	public int getCode() {
+		return code;
 	}
 }

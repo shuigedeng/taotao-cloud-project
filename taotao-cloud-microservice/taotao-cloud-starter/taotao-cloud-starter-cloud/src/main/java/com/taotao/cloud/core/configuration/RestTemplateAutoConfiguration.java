@@ -13,7 +13,7 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import org.apache.http.client.HttpClient;
@@ -36,7 +36,7 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RestTemplateAutoConfiguration.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(RestTemplateAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Bean(destroyMethod = "close")
 	public DefaultHttpClient getDefaultHttpClient() {
-		LogUtil.started(DefaultHttpClient.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(DefaultHttpClient.class, StarterNameConstant.CLOUD_STARTER);
 
 		if (DefaultHttpClient.DEFAULT == null || DefaultHttpClient.DEFAULT.isClose()) {
 			DefaultHttpClient.initDefault();
@@ -66,15 +66,14 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public HttpClient httpClient(DefaultHttpClient defaultHttpClient) {
-		LogUtil.started(HttpClient.class, StarterName.CLOUD_STARTER);
-
+		LogUtil.started(HttpClient.class, StarterNameConstant.CLOUD_STARTER);
 		return defaultHttpClient.getClient();
 	}
 
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate(HttpClient httpClient) {
-		LogUtil.started(RestTemplate.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(RestTemplate.class, StarterNameConstant.CLOUD_STARTER);
 
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
 		factory.setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT);

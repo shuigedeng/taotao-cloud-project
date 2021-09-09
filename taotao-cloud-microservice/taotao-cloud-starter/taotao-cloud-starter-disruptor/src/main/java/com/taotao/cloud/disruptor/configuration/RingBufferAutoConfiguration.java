@@ -21,7 +21,7 @@ import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.handler.DisruptorEventDispatcher;
@@ -52,7 +52,7 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware, Ini
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RingBufferAutoConfiguration.class, StarterName.DISRUPTOR_STARTER);
+		LogUtil.started(RingBufferAutoConfiguration.class, StarterNameConstant.DISRUPTOR_STARTER);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware, Ini
 		EventFactory<DisruptorEvent> eventFactory,
 		@Autowired(required = false) DisruptorEventDispatcher preEventHandler,
 		@Autowired(required = false) DisruptorEventDispatcher postEventHandler) {
-		LogUtil.started(RingBuffer.class, StarterName.DISRUPTOR_STARTER);
+		LogUtil.started(RingBuffer.class, StarterNameConstant.DISRUPTOR_STARTER);
 
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
 		// 创建线程池

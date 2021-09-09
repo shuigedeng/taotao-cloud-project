@@ -54,7 +54,7 @@ public class BaseException extends RuntimeException implements Serializable {
 	public BaseException(Throwable e) {
 		super(e);
 		this.code = ResultEnum.ERROR.getCode();
-		this.message = ResultEnum.ERROR.getData();
+		this.message = ResultEnum.ERROR.getDesc();
 	}
 
 	public BaseException(String message, Throwable e) {
@@ -70,14 +70,14 @@ public class BaseException extends RuntimeException implements Serializable {
 	}
 
 	public BaseException(ResultEnum result) {
-		super(result.getData());
-		this.message = result.getData();
+		super(result.getDesc());
+		this.message = result.getDesc();
 		this.code = result.getCode();
 	}
 
 	public BaseException(ResultEnum result, Throwable e) {
-		super(result.getData(), e);
-		this.message = result.getData();
+		super(result.getDesc(), e);
+		this.message = result.getDesc();
 		this.code = result.getCode();
 	}
 

@@ -17,7 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.properties.DozerProperties;
 import java.io.IOException;
@@ -50,19 +50,19 @@ public class DozerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DozerConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(DozerConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
 	@Bean
 	public DozerHelper getDozerUtil(Mapper mapper) {
-		LogUtil.started(DozerHelper.class, StarterName.WEB_STARTER);
+		LogUtil.started(DozerHelper.class, StarterNameConstant.WEB_STARTER);
 
 		return new DozerHelper(mapper);
 	}
 
 	@Bean
 	public DozerBeanMapperFactoryBean dozerMapper(DozerProperties properties) throws IOException {
-		LogUtil.started(DozerBeanMapperFactoryBean.class, StarterName.WEB_STARTER);
+		LogUtil.started(DozerBeanMapperFactoryBean.class, StarterNameConstant.WEB_STARTER);
 
 		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
 		// 官方这样子写，没法用 匹配符！

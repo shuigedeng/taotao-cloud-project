@@ -19,12 +19,10 @@ import com.taotao.cloud.captcha.controller.CaptchaController;
 import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,12 +43,12 @@ public class CaptchaStorageAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CaptchaStorageAutoConfiguration.class, StarterName.CAPTCHA_STARTER);
+		LogUtil.started(CaptchaStorageAutoConfiguration.class, StarterNameConstant.CAPTCHA_STARTER);
 	}
 
 	@Bean
 	public CaptchaCacheService captchaCacheService(CaptchaProperties captchaProperties) {
-		LogUtil.started(CaptchaCacheService.class, StarterName.CAPTCHA_STARTER);
+		LogUtil.started(CaptchaCacheService.class, StarterNameConstant.CAPTCHA_STARTER);
 
 		return CaptchaServiceFactory.getCache(captchaProperties.getCacheType().name());
 	}

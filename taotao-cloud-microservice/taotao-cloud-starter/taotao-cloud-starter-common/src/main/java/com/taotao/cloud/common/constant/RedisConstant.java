@@ -24,6 +24,10 @@ package com.taotao.cloud.common.constant;
  */
 public class RedisConstant {
 
+	private RedisConstant() {
+
+	}
+
 	/**
 	 * 图形验证码
 	 */

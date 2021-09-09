@@ -1,11 +1,11 @@
 package com.taotao.cloud.health.export;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.thread.ThreadPool;
-import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
+import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.ExportProperties;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,6 @@ public class ExportProvider {
 
 	public void start() {
 		isClose = false;
-		//if (ExportProperties.Default().isCatEnabled()) {
-		//	registerCollectTask(new CatExport());
-		//}
 
 		if (ExportProperties.Default().isElkEnabled()) {
 			registerCollectTask(new ElkExport());
@@ -38,8 +35,9 @@ public class ExportProvider {
 				try {
 					run();
 				} catch (Exception e) {
-					LogUtil.error(StarterName.HEALTH_STARTER, "run 循环上传报表出错", e);
+					LogUtil.error(StarterNameConstant.HEALTH_STARTER, "run 循环上传报表出错", e);
 				}
+
 				try {
 					Thread.sleep(ExportProperties.Default().getExportTimeSpan() * 1000L);
 				} catch (Exception e) {
@@ -51,7 +49,7 @@ public class ExportProvider {
 			try {
 				e.start();
 			} catch (Exception ex) {
-				LogUtil.error(StarterName.HEALTH_STARTER,
+				LogUtil.error(StarterNameConstant.HEALTH_STARTER,
 					e.getClass().getName() + "启动出错", ex);
 			}
 		}
@@ -73,7 +71,7 @@ public class ExportProvider {
 			try {
 				e.close();
 			} catch (Exception ex) {
-				LogUtil.error(StarterName.HEALTH_STARTER,
+				LogUtil.error(StarterNameConstant.HEALTH_STARTER,
 					e.getClass().getName() + "关闭出错", ex);
 			}
 		}

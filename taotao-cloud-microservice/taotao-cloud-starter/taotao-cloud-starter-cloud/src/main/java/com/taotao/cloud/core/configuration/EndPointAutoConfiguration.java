@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.endpoint.CustomEndPoint;
 import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
@@ -39,7 +39,7 @@ public class EndPointAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EndPointAutoConfiguration.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(EndPointAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
 
 	@Bean

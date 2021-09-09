@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * DelFlagEnum 
+ * DelFlagEnum
  *
  * @author shuigedeng
  * @version 2021.9
@@ -24,28 +24,25 @@ package com.taotao.cloud.common.enums;
  */
 public enum DelFlagEnum implements BaseEnum {
 	/**
-	 * 正常
-	 */
-	NORMAL(1, "正常"),
-	/**
 	 * 删除
 	 */
-	DELETE(2, "删除");
+	DELETE(0, "删除"),
+	/**
+	 * 正常
+	 */
+	NORMAL(1, "正常");
 
-	private final Integer value;
-	private final String description;
+	private final int code;
+	private final String desc;
 
-	DelFlagEnum(Integer value, String description) {
-		this.value = value;
-		this.description = description;
+	DelFlagEnum(int code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -59,7 +56,7 @@ public enum DelFlagEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return value;
+	public int getCode() {
+		return code;
 	}
 }

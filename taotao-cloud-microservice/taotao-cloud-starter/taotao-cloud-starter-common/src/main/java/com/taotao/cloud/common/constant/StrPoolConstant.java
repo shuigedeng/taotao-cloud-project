@@ -22,7 +22,10 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 19:39:05
  */
-public class StrPool {
+public class StrPoolConstant {
+
+	private StrPoolConstant() {
+	}
 
 	public static final String AMPERSAND = "&";
 	public static final String AND = "and";
@@ -96,7 +99,7 @@ public class StrPool {
 
 	public static final String[] EMPTY_ARRAY = new String[0];
 
-	public static final byte[] BYTES_NEW_LINE = StrPool.NEWLINE.getBytes();
+	public static final byte[] BYTES_NEW_LINE = StrPoolConstant.NEWLINE.getBytes();
 
 	public static final String BRACE = "{}";
 	public static final String GBK = "GBK";

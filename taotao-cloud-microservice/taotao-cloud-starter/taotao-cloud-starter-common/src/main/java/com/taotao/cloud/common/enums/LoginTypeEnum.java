@@ -15,10 +15,8 @@
  */
 package com.taotao.cloud.common.enums;
 
-import com.taotao.cloud.common.constant.SecurityConstant;
-
 /**
- * 用户登录类型 
+ * 用户登录类型
  *
  * @author shuigedeng
  * @version 2021.9
@@ -28,44 +26,45 @@ public enum LoginTypeEnum implements BaseEnum {
 	/**
 	 * 用户密码登录
 	 */
-	NORMAL(1, SecurityConstant.NORMAL, "用户密码登录"),
+	LOGIN_USER_PASSWORD(1, "user_password", "用户密码登录"),
 	/**
 	 * 短信密码登录
 	 */
-	SMS(2, SecurityConstant.SMS, "短信密码登录"),
+	LOGIN_SMS(2, "sms", "短信密码登录"),
 	/**
 	 * qq登录
 	 */
-	LOGIN_QQ(3, SecurityConstant.LOGIN_QQ, "qq登录"),
+	LOGIN_QQ(3, "qq", "qq登录"),
 	/**
 	 * 微信登录
 	 */
-	LOGIN_WEIXIN(4, SecurityConstant.LOGIN_WEIXIN, "微信登录"),
+	LOGIN_WEIXIN(4, "weixin", "微信登录"),
 	/**
 	 * gitee登录
 	 */
-	LOGIN_GITEE(5, SecurityConstant.LOGIN_GITEE, "gitee登录"),
+	LOGIN_GITEE(5, "gitee", "gitee登录"),
 	/**
 	 * github登录
 	 */
-	LOGIN_GITHUB(6, SecurityConstant.LOGIN_GITHUB, "github登录");
+	LOGIN_GITHUB(6, "github", "github登录");
 
-	private final Integer value;
+	private final int code;
 	private final String type;
-	private final String description;
+	private final String desc;
 
-	LoginTypeEnum(Integer value, String type, String description) {
-		this.value = value;
+	LoginTypeEnum(int code, String type, String description) {
+		this.code = code;
 		this.type = type;
-		this.description = description;
+		this.desc = description;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -79,7 +78,7 @@ public enum LoginTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return this.value;
+	public int getCode() {
+		return this.code;
 	}
 }

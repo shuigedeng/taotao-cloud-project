@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 package com.taotao.cloud.common.enums;
+
 /**
- * 返回结果枚举 code规则 500 + 自增三位数 
+ * 返回结果枚举 code规则 500 + 自增三位数
  *
  * @author shuigedeng
  * @version 2021.9
@@ -219,11 +220,11 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 描述
 	 */
-	private final String data;
+	private final String desc;
 
-	ResultEnum(Integer code, String data) {
+	ResultEnum(Integer code, String desc) {
 		this.code = code;
-		this.data = data;
+		this.desc = desc;
 	}
 
 	/**
@@ -237,7 +238,7 @@ public enum ResultEnum implements BaseEnum {
 	public static String getMessageByCode(int code) {
 		for (ResultEnum result : ResultEnum.values()) {
 			if (result.getCode() == code) {
-				return result.getData();
+				return result.getDesc();
 			}
 		}
 		return null;
@@ -254,12 +255,13 @@ public enum ResultEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public String getData() {
-		return data;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 }

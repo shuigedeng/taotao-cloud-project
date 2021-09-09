@@ -2,7 +2,7 @@ package com.taotao.cloud.security.jwt.utils;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -64,7 +64,7 @@ public final class JwtUtil {
 	 */
 	public static String[] extractClient(String client) {
 		String token = base64Decoder(client);
-		int index = token.indexOf(StrPool.COLON);
+		int index = token.indexOf(StrPoolConstant.COLON);
 		if (index == -1) {
 			//throw BizException.wrap(ExceptionCode.JWT_BASIC_INVALID);
 			throw new BusinessException(ExceptionCode.JWT_BASIC_INVALID.name());

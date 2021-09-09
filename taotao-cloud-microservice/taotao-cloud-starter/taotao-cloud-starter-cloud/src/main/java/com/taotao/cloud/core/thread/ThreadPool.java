@@ -22,13 +22,12 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Callable.Action1;
 import com.taotao.cloud.core.model.ProcessExitEvent;
 import com.taotao.cloud.core.model.Ref;
-import com.taotao.cloud.core.properties.ThreadPoolProperties;
+import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -38,7 +37,6 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * 自定义线程池及关键方法包装实现 装饰
@@ -90,31 +88,32 @@ public class ThreadPool {
 	 * @since 2021-09-02 20:46:54
 	 */
 	public static void initSystem() {
-		ThreadPoolProperties threadPoolProperties = ContextUtil.getBean(ThreadPoolProperties.class,
-				true);
-		DEFAULT = new ThreadPool("taotao.cloud.core.threadPool",
-				threadPoolProperties.getThreadPoolMinSize(),
-				threadPoolProperties.getThreadPoolMaxSiz());
+		MonitorThreadPoolProperties monitorThreadPoolProperties = ContextUtil.getBean(
+			MonitorThreadPoolProperties.class,
+			true);
+
+		DEFAULT = new ThreadPool(
+			monitorThreadPoolProperties.getThreadNamePrefix(),
+			monitorThreadPoolProperties.getCorePoolSize(),
+			monitorThreadPoolProperties.getMaximumPoolSize(),
+			monitorThreadPoolProperties.getKeepAliveTime());
 	}
 
-	public ThreadPool(String name, int threadPoolMinSize, int threadPoolMaxSize) {
+	public ThreadPool(String name, int corePoolSize, int maximumPoolSize, long keepAliveTime) {
 		this.name = name;
 
-		ThreadPoolTaskExecutor threadPoolTaskExecutor = ContextUtil.getBean(
-				ThreadPoolTaskExecutor.class, true);
-		if (Objects.isNull(threadPoolTaskExecutor)) {
-			threadPoolExecutor = new ThreadPoolExecutor(
-					threadPoolMinSize,
-					threadPoolMaxSize,
-					60L,
-					TimeUnit.SECONDS,
-					new SynchronousQueue<>(),
-					new CoreThreadPoolFactory());
-		} else {
-			threadPoolExecutor = threadPoolTaskExecutor.getThreadPoolExecutor();
-		}
+		this.threadPoolExecutor = new ThreadPoolExecutor(
+			corePoolSize,
+			maximumPoolSize,
+			keepAliveTime,
+			TimeUnit.SECONDS,
+			new SynchronousQueue<>(),
+			new CoreThreadPoolFactory());
 
-		threadMonitor = new ThreadMonitor(this.name, threadPoolExecutor);
+		this.threadPoolExecutor.setRejectedExecutionHandler(
+			new ThreadPoolExecutor.CallerRunsPolicy());
+
+		this.threadMonitor = new ThreadMonitor(this.name, threadPoolExecutor);
 	}
 
 	/**
@@ -125,11 +124,11 @@ public class ThreadPool {
 	 */
 	private void checkHealth() {
 		if (checkHealth
-				&& threadPoolExecutor.getMaximumPoolSize() <= threadPoolExecutor.getPoolSize()
-				&& threadPoolExecutor.getQueue().size() > 0) {
+			&& threadPoolExecutor.getMaximumPoolSize() <= threadPoolExecutor.getPoolSize()
+			&& threadPoolExecutor.getQueue().size() > 0) {
 			LogUtil.warn(
-					"线程池已满,任务开始出现排队,taotao.cloud.core.threadpool.threadPoolMaxSiz,当前: {}"
-					, threadPoolExecutor.getMaximumPoolSize());
+				"线程池已满,任务开始出现排队,taotao.cloud.core.monitor.threadpool.threadPoolMaxSiz,当前: {}"
+				, threadPoolExecutor.getMaximumPoolSize());
 		}
 	}
 
@@ -196,7 +195,7 @@ public class ThreadPool {
 	 * @since 2021-09-02 20:48:09
 	 */
 	public <T> void parallelFor(String taskName, int parallelCount, List<T> array,
-			final Action1<T> action) {
+		final Action1<T> action) {
 		checkHealth();
 
 		threadMonitor.hook().run(taskName, () -> {
@@ -269,7 +268,7 @@ public class ThreadPool {
 	 * @since 2021-09-02 20:48:25
 	 */
 	public <T> void parallelFor2(String taskName, int parallelCount, Collection<T> array,
-			final Action1<T> action) {
+		final Action1<T> action) {
 		checkHealth();
 		threadMonitor.hook().run(taskName, () -> {
 			int parallelCount2 = parallelCount;
@@ -291,6 +290,7 @@ public class ThreadPool {
 							synchronized (lock) {
 								task = queueTasks.poll();
 							}
+
 							if (task != null && exceptionRef.isNull()) {
 								try {
 									action.invoke(task);
@@ -329,20 +329,16 @@ public class ThreadPool {
 	 */
 	public static class CoreThreadPoolFactory implements ThreadFactory {
 
-		/**
-		 * factory
-		 */
 		private final ThreadFactory factory = Executors.defaultThreadFactory();
 
 		@Override
 		public Thread newThread(Runnable r) {
 			Thread t = factory.newThread(r);
-			t.setName("taotao-cloud-core-thread-" + t.getName());
 
 			UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
 			if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
-						new DefaultThreadPoolUncaughtExceptionHandler(handler));
+					new DefaultThreadPoolUncaughtExceptionHandler(handler));
 			}
 
 			//后台线程模式
@@ -359,19 +355,19 @@ public class ThreadPool {
 	 * @since 2021-09-02 20:48:50
 	 */
 	public static class DefaultThreadPoolUncaughtExceptionHandler implements
-			Thread.UncaughtExceptionHandler {
+		Thread.UncaughtExceptionHandler {
 
 		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
 
 		public DefaultThreadPoolUncaughtExceptionHandler(
-				Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
+			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
 		}
 
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] TheadPool 未捕获错误");
+				LogUtil.error(e, "[警告] [taotao-cloud-core-monitor-threadpool] 未捕获错误");
 			}
 
 			if (lastUncaughtExceptionHandler != null) {

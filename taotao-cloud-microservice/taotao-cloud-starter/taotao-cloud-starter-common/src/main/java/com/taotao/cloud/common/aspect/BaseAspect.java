@@ -52,30 +52,4 @@ public abstract class BaseAspect {
 		}
 		return null;
 	}
-
-	/**
-	 * 默认key策略
-	 *
-	 * @param key        key
-	 * @param targetName targetName
-	 * @param methodName methodName
-	 * @param arguments  arguments
-	 * @return {@link String }
-	 * @author shuigedeng
-	 * @since 2021-09-02 19:41:46
-	 */
-	public String getCacheKey(String key, String targetName, String methodName,
-		Object[] arguments) {
-		StringBuilder sb = new StringBuilder();
-		if (key != null && key.length() > 0) {
-			sb.append(key);
-		} else {
-			sb.append(targetName).append(".").append(methodName);
-		}
-		if (arguments != null && (arguments.length != 0)) {
-			sb.append("#").append(JsonUtil.toJSONString(arguments));
-		}
-		return sb.toString().replace("[", "").replace("\"", "").replace("]", "")
-			.replace("com.gofun.", "");
-	}
 }

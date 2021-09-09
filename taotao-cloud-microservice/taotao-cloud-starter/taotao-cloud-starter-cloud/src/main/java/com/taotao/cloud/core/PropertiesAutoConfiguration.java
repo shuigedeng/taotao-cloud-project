@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.core;
 
-import com.taotao.cloud.core.properties.AsyncProperties;
+import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.properties.IpRegexProperties;
-import com.taotao.cloud.core.properties.ThreadPoolProperties;
+import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -30,11 +30,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2021-09-02 21:05:48
  */
 @EnableConfigurationProperties({
-	AsyncProperties.class,
+	CoreThreadPoolProperties.class,
 	CoreProperties.class,
 	HttpClientProperties.class,
 	IpRegexProperties.class,
-	ThreadPoolProperties.class,
+	MonitorThreadPoolProperties.class,
 })
 public class PropertiesAutoConfiguration {
 

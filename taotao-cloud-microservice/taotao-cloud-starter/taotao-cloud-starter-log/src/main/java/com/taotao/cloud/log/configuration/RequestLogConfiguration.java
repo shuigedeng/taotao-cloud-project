@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.log.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.enums.LogTypeEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
@@ -46,7 +47,7 @@ public class RequestLogConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RequestLogConfiguration.class, StarterName.LOG_STARTER);
+		LogUtil.started(RequestLogConfiguration.class, StarterNameConstant.LOG_STARTER);
 	}
 
 	private final RequestLogProperties requestLogProperties;
@@ -57,14 +58,14 @@ public class RequestLogConfiguration implements InitializingBean {
 
 	@Bean
 	public RequestLogListener sysLogListener() {
-		LogUtil.started(RequestLogListener.class, StarterName.LOG_STARTER);
+		LogUtil.started(RequestLogListener.class, StarterNameConstant.LOG_STARTER);
 
 		return new RequestLogListener();
 	}
 
 	@Bean
 	public RequestLogAspect sysLogAspect(ApplicationEventPublisher publisher) {
-		LogUtil.started(RequestLogAspect.class, StarterName.LOG_STARTER);
+		LogUtil.started(RequestLogAspect.class, StarterNameConstant.LOG_STARTER);
 
 		return new RequestLogAspect(requestLogProperties, publisher);
 	}
@@ -72,7 +73,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	@Bean
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "logger", matchIfMissing = true)
 	public LoggerRequestLogServiceImpl loggerSysLogService() {
-		LogUtil.started(LoggerRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+		LogUtil.started(LoggerRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 
 		if (determineLogType()) {
 			if (determineLogType("logger")) {
@@ -87,7 +88,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "redis")
 	@ConditionalOnBean(value = {RedisRepository.class})
 	public RedisRequestLogServiceImpl redisSysLogService() {
-		LogUtil.started(RedisRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+		LogUtil.started(RedisRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 
 		if (determineLogType()) {
 			if (determineLogType("redis")) {
@@ -101,7 +102,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "kafka")
 	@ConditionalOnClass({KafkaTemplate.class})
 	public KafkaRequestLogServiceImpl kafkaSysLogService() {
-		LogUtil.started(KafkaRequestLogServiceImpl.class, StarterName.LOG_STARTER);
+		LogUtil.started(KafkaRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 
 		if (determineLogType()) {
 			if (determineLogType("kafka")) {
@@ -113,14 +114,14 @@ public class RequestLogConfiguration implements InitializingBean {
 	}
 
 	private boolean determineLogType() {
-		String[] types = requestLogProperties.getTypes();
+		LogTypeEnum[] types = requestLogProperties.getTypes();
 		return types.length != 0;
 	}
 
 	private boolean determineLogType(String type) {
-		String[] types = requestLogProperties.getTypes();
-		for (String s : types) {
-			if (type.equals(s)) {
+		LogTypeEnum[] types = requestLogProperties.getTypes();
+		for (LogTypeEnum s : types) {
+			if (type.equals(s.name())) {
 				return true;
 			}
 		}

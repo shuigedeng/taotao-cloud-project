@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 用户锁定类型 
+ * 用户锁定类型
  *
  * @author shuigedeng
  * @version 2021.9
@@ -24,28 +24,25 @@ package com.taotao.cloud.common.enums;
  */
 public enum LockFlagEnum implements BaseEnum {
 	/**
-	 * 正常
-	 */
-	NORMAL(1, "正常"),
-	/**
 	 * 锁定
 	 */
-	LOCKED(2, "锁定");
+	LOCKED(0, "锁定"),
+	/**
+	 * 正常
+	 */
+	NORMAL(1, "正常");
 
-	private final Integer value;
-	private final String description;
+	private final int code;
+	private final String desc;
 
-	LockFlagEnum(Integer value, String description) {
-		this.value = value;
-		this.description = description;
+	LockFlagEnum(int code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -59,7 +56,7 @@ public enum LockFlagEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return this.value;
+	public int getCode() {
+		return this.code;
 	}
 }

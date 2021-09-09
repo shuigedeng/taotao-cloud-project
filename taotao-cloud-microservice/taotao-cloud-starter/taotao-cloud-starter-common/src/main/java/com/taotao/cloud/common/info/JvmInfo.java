@@ -71,9 +71,6 @@ public class JvmInfo implements Serializable {
 		return JAVA_VM_INFO;
 	}
 
-	/**
-	 * 将Java Virutal Machine Implementation的信息转换成字符串。
-	 */
 	@Override
 	public final String toString() {
 

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.core.properties;
 
-import java.util.Objects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,69 +26,49 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2021-09-02 20:44:31
  */
 @RefreshScope
-@ConfigurationProperties(prefix = AsyncProperties.PREFIX)
-public class AsyncProperties {
+@ConfigurationProperties(prefix = CoreThreadPoolProperties.PREFIX)
+public class CoreThreadPoolProperties {
 
-	public static final String PREFIX = "taotao.cloud.core.async";
+	public static final String PREFIX = "taotao.cloud.core.threadpool";
+
+	private boolean enabled = true;
 
 	/**
-	 * 线程池维护线程的最小数量
+	 * 异步核心线程数，默认：10
 	 */
 	private int corePoolSize = 10;
 
 	/**
-	 * 线程池维护线程的最大数量
+	 * 异步最大线程数，默认：50
 	 */
-	private int maxPoolSiz = 200;
+	private int maxPoolSiz = 50;
 
 	/**
-	 * 队列最大长度
+	 * 队列容量，默认：10000
 	 */
-	private int queueCapacity = 300;
+	private int queueCapacity = 10000;
+
+	/**
+	 * 线程存活时间，默认：300
+	 */
+	private int keepAliveSeconds = 300;
 
 	/**
 	 * 线程池前缀
 	 */
 	private String threadNamePrefix = "taotao-cloud-core-threadpool-";
 
-	public AsyncProperties() {
+	public CoreThreadPoolProperties() {
 	}
 
-	public AsyncProperties(int corePoolSize, int maxPoolSiz, int queueCapacity,
-		String threadNamePrefix) {
+	public CoreThreadPoolProperties(boolean enabled, int corePoolSize, int maxPoolSiz,
+		int queueCapacity, int keepAliveSeconds, String threadNamePrefix) {
+		this.enabled = enabled;
 		this.corePoolSize = corePoolSize;
 		this.maxPoolSiz = maxPoolSiz;
 		this.queueCapacity = queueCapacity;
+		this.keepAliveSeconds = keepAliveSeconds;
 		this.threadNamePrefix = threadNamePrefix;
-	}
-
-	@Override
-	public String toString() {
-		return "AsyncTaskProperties{" +
-			"corePoolSize=" + corePoolSize +
-			", maxPoolSiz=" + maxPoolSiz +
-			", queueCapacity=" + queueCapacity +
-			", threadNamePrefix='" + threadNamePrefix + '\'' +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		AsyncProperties that = (AsyncProperties) o;
-		return corePoolSize == that.corePoolSize && maxPoolSiz == that.maxPoolSiz
-			&& queueCapacity == that.queueCapacity && Objects.equals(threadNamePrefix,
-			that.threadNamePrefix);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(corePoolSize, maxPoolSiz, queueCapacity, threadNamePrefix);
 	}
 
 	public int getCorePoolSize() {
@@ -124,4 +103,19 @@ public class AsyncProperties {
 		this.threadNamePrefix = threadNamePrefix;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public int getKeepAliveSeconds() {
+		return keepAliveSeconds;
+	}
+
+	public void setKeepAliveSeconds(int keepAliveSeconds) {
+		this.keepAliveSeconds = keepAliveSeconds;
+	}
 }

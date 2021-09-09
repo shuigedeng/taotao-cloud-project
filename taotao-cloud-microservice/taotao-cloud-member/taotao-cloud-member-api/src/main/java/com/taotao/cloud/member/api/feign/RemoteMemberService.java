@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.fallback.RemoteMemberFallbackImpl;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteMemberService", value = ServiceName.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteMemberFallbackImpl.class)
+@FeignClient(contextId = "remoteMemberService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteMemberFallbackImpl.class)
 public interface RemoteMemberService {
 
 	/**

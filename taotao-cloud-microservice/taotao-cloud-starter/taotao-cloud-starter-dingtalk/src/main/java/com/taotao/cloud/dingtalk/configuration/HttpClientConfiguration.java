@@ -17,7 +17,7 @@ package com.taotao.cloud.dingtalk.configuration;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIES_PREFIX;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
@@ -65,7 +65,7 @@ public class HttpClientConfiguration {
 	@Bean
 	public DingerHttpClient dingerHttpClient(@Autowired
 	@Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate) {
-		LogUtil.started(DingerHttpClient.class, StarterName.DINGTALK_STARTER);
+		LogUtil.started(DingerHttpClient.class, StarterNameConstant.DINGTALK_STARTER);
 		return new DingerHttpTemplate(restTemplate);
 	}
 }

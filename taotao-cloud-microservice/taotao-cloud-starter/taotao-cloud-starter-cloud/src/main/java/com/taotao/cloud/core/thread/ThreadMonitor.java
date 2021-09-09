@@ -32,6 +32,7 @@ public class ThreadMonitor {
 	 * threadPoolExecutor
 	 */
 	private ThreadPoolExecutor threadPoolExecutor;
+
 	/**
 	 * name
 	 */
@@ -42,22 +43,21 @@ public class ThreadMonitor {
 		this.name = name;
 
 		Collector.DEFAULT.call(name + ".active.count").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getActiveCount());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getActiveCount());
 		Collector.DEFAULT.call(name + ".core.poolSize").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getCorePoolSize());
-		Collector.DEFAULT.call(name + ".poolSize.largest")
-				.set(() -> threadPoolExecutor == null ? 0
-						: threadPoolExecutor.getLargestPoolSize());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getCorePoolSize());
+		Collector.DEFAULT.call(name + ".poolSize.largest").set(() ->
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getLargestPoolSize());
 		Collector.DEFAULT.call(name + ".poolSize.max").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getMaximumPoolSize());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getMaximumPoolSize());
 		Collector.DEFAULT.call(name + ".poolSize.count").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getPoolSize());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getPoolSize());
 		Collector.DEFAULT.call(name + ".queue.size").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getQueue().size());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getQueue().size());
 		Collector.DEFAULT.call(name + ".task.count").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getTaskCount());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getTaskCount());
 		Collector.DEFAULT.call(name + ".task.completed").set(() ->
-				threadPoolExecutor == null ? 0 : threadPoolExecutor.getCompletedTaskCount());
+			threadPoolExecutor == null ? 0 : this.threadPoolExecutor.getCompletedTaskCount());
 	}
 
 	/**

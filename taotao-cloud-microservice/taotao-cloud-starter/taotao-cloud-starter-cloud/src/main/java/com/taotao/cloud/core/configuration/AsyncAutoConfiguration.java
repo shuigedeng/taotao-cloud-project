@@ -15,23 +15,20 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.alibaba.ttl.TtlCallable;
-import com.alibaba.ttl.TtlRunnable;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.properties.AsyncProperties;
-import com.taotao.cloud.core.thread.ThreadPool;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
+import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
+import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * 异步任务配置
@@ -42,11 +39,12 @@ import org.springframework.util.concurrent.ListenableFuture;
  */
 @Configuration
 @EnableAsync(proxyTargetClass = true)
+@ConditionalOnProperty(prefix = CoreThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(AsyncAutoConfiguration.class, StarterName.CLOUD_STARTER);
+		LogUtil.started(AsyncAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
 
 	@Override
@@ -57,91 +55,24 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	}
 
 	@Bean
-	public ThreadPoolTaskExecutor threadPoolTaskExecutor(AsyncProperties asyncProperties) {
-		LogUtil.started(ThreadPoolTaskExecutor.class, StarterName.CLOUD_STARTER);
+	public TaskExecutor threadPoolTaskExecutor(
+		CoreThreadPoolProperties coreThreadPoolProperties) {
+		LogUtil.started(ThreadPoolTaskExecutor.class, StarterNameConstant.CLOUD_STARTER);
 
 		ThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
-		executor.setCorePoolSize(asyncProperties.getCorePoolSize());
-		executor.setMaxPoolSize(asyncProperties.getMaxPoolSiz());
-		executor.setQueueCapacity(asyncProperties.getQueueCapacity());
-		executor.setThreadNamePrefix(asyncProperties.getThreadNamePrefix());
+		executor.setCorePoolSize(coreThreadPoolProperties.getCorePoolSize());
+		executor.setMaxPoolSize(coreThreadPoolProperties.getMaxPoolSiz());
+		executor.setQueueCapacity(coreThreadPoolProperties.getQueueCapacity());
+		executor.setThreadNamePrefix(coreThreadPoolProperties.getThreadNamePrefix());
+		executor.setKeepAliveSeconds(coreThreadPoolProperties.getKeepAliveSeconds());
 
-		executor.setThreadFactory(new ThreadPool.CoreThreadPoolFactory());
+		/*
+		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
+		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+		 */
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 		executor.initialize();
 
 		return executor;
-	}
-
-	/**
-	 * 这是{@link ThreadPoolTaskExecutor}的一个简单替换，可搭配TransmittableThreadLocal实现父子线程之间的数据传递
-	 *
-	 * @author shuigedeng
-	 * @version 2021.9
-	 * @since 2021-09-02 20:02:27
-	 */
-	public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
-
-		private static final long serialVersionUID = -5887035957049288777L;
-
-		@Override
-		public void execute(Runnable runnable) {
-			Runnable ttlRunnable = TtlRunnable.get(runnable);
-			showThreadPoolInfo("execute(Runnable task)");
-			super.execute(ttlRunnable);
-		}
-
-		@Override
-		public void execute(Runnable task, long startTimeout) {
-			showThreadPoolInfo("execute(Runnable task, long startTimeout)");
-			super.execute(task, startTimeout);
-		}
-
-		@Override
-		public <T> Future<T> submit(Callable<T> task) {
-			Callable ttlCallable = TtlCallable.get(task);
-			showThreadPoolInfo("submit(Callable<T> task)");
-			return super.submit(ttlCallable);
-		}
-
-		@Override
-		public Future<?> submit(Runnable task) {
-			Runnable ttlRunnable = TtlRunnable.get(task);
-			showThreadPoolInfo("submit(Runnable task)");
-			return super.submit(ttlRunnable);
-		}
-
-		@Override
-		public ListenableFuture<?> submitListenable(Runnable task) {
-			Runnable ttlRunnable = TtlRunnable.get(task);
-			showThreadPoolInfo("submitListenable(Runnable task)");
-			return super.submitListenable(ttlRunnable);
-		}
-
-		@Override
-		public <T> ListenableFuture<T> submitListenable(Callable<T> task) {
-			Callable ttlCallable = TtlCallable.get(task);
-			showThreadPoolInfo("submitListenable(Callable<T> task)");
-			return super.submitListenable(ttlCallable);
-		}
-
-		/**
-		 * 每次执行任务时输出当前线程池状态
-		 *
-		 * @param method method
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:03:15
-		 */
-		private void showThreadPoolInfo(String method) {
-			ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-			LogUtil.info(
-				"threadNamePrefix[{}], method[{}], taskCount[{}], completedTaskCount[{}], activeCount[{}], queueSize[{}]",
-				this.getThreadNamePrefix(),
-				method,
-				threadPoolExecutor.getTaskCount(),
-				threadPoolExecutor.getCompletedTaskCount(),
-				threadPoolExecutor.getActiveCount(),
-				threadPoolExecutor.getQueue().size());
-		}
 	}
 }

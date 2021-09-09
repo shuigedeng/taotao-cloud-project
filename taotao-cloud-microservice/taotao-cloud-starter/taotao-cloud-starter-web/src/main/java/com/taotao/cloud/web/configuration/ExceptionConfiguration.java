@@ -16,7 +16,7 @@
 package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -78,7 +78,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ExceptionConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(ExceptionConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
 	@ExceptionHandler({BaseException.class})

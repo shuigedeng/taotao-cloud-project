@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,7 +35,7 @@ public class ServletConfiguration implements WebApplicationInitializer, Initiali
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ServletConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(ServletConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
 	@Override

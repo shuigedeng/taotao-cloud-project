@@ -27,26 +27,22 @@ public enum LogOperateTypeEnum implements BaseEnum {
 	 * 操作记录
 	 */
 	OPERATE_RECORD(1, "操作记录"),
-
 	/**
 	 * 异常记录
 	 */
 	EXCEPTION_RECORD(2, "异常记录");
 
-	private final Integer value;
-	private final String description;
+	private final Integer code;
+	private final String desc;
 
-	LogOperateTypeEnum(Integer value, String description) {
-		this.value = value;
-		this.description = description;
+	LogOperateTypeEnum(Integer code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -60,7 +56,7 @@ public enum LogOperateTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return value;
+	public int getCode() {
+		return code;
 	}
 }

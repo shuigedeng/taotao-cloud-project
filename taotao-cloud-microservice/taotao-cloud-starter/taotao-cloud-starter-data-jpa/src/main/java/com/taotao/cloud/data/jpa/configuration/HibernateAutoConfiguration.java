@@ -23,23 +23,20 @@ import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_CONNECTION_PROVID
 import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER;
 import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.hibernate.MultiTenancyStrategy;
-import org.hibernate.SessionFactory;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
@@ -50,7 +47,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 /**
@@ -66,7 +62,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HibernateAutoConfiguration.class, StarterName.JPA_STARTER);
+		LogUtil.started(HibernateAutoConfiguration.class, StarterNameConstant.JPA_STARTER);
 	}
 
 	private final JpaProperties jpaProperties;
@@ -77,26 +73,26 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public AuditorBean auditorBean(){
-		LogUtil.started(AuditorBean.class, StarterName.JPA_STARTER);
+		LogUtil.started(AuditorBean.class, StarterNameConstant.JPA_STARTER);
 		return new AuditorBean();
 	}
 
 	@Bean
 	@ConditionalOnBean(DataSource.class)
 	public TenantConnectionProvider tenantConnectionProvider(DataSource dataSource){
-		LogUtil.started(TenantConnectionProvider.class, StarterName.JPA_STARTER);
+		LogUtil.started(TenantConnectionProvider.class, StarterNameConstant.JPA_STARTER);
 		return new TenantConnectionProvider(dataSource);
 	}
 
 	@Bean
 	public TenantIdentifierResolver tenantIdentifierResolver(){
-		LogUtil.started(TenantIdentifierResolver.class, StarterName.JPA_STARTER);
+		LogUtil.started(TenantIdentifierResolver.class, StarterNameConstant.JPA_STARTER);
 		return new TenantIdentifierResolver();
 	}
 
 	@Bean
 	JpaVendorAdapter jpaVendorAdapter() {
-		LogUtil.started(JpaVendorAdapter.class, StarterName.JPA_STARTER);
+		LogUtil.started(JpaVendorAdapter.class, StarterNameConstant.JPA_STARTER);
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(true);
 		hibernateJpaVendorAdapter.setGenerateDdl(true);
@@ -111,7 +107,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		final JpaVendorAdapter jpaVendorAdapter,
 		final MultiTenantConnectionProvider multiTenantConnectionProvider,
 		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
-		LogUtil.started(LocalContainerEntityManagerFactoryBean.class, StarterName.JPA_STARTER);
+		LogUtil.started(LocalContainerEntityManagerFactoryBean.class, StarterNameConstant.JPA_STARTER);
 
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 

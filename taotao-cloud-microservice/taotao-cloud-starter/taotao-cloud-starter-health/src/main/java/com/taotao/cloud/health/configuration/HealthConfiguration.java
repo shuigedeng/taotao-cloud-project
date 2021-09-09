@@ -1,6 +1,6 @@
 package com.taotao.cloud.health.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.utils.RequestUtil;
@@ -42,34 +42,34 @@ public class HealthConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HealthConfiguration.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(HealthConfiguration.class, StarterNameConstant.HEALTH_STARTER);
 	}
 
 	@Bean(destroyMethod = "close")
 	@ConditionalOnProperty(prefix = WarnProperties.PREFIX, name = "enabled", havingValue = "true")
 	public WarnProvider getWarnProvider() {
-		LogUtil.started(WarnProvider.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(WarnProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new WarnProvider();
 	}
 
 	@Bean(destroyMethod = "close")
 	@ConditionalOnProperty(prefix = CheckProperties.PREFIX, name = "enabled", havingValue = "true")
 	public HealthCheckProvider getHealthCheckProvider(CollectTaskProperties properties) {
-		LogUtil.started(HealthCheckProvider.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(HealthCheckProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new HealthCheckProvider(properties);
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")
 	@ConditionalOnProperty(prefix = ExportProperties.PREFIX, name = "enabled", havingValue = "true")
 	public ExportProvider getExportProvider() {
-		LogUtil.started(ExportProvider.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(ExportProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new ExportProvider();
 	}
 
 	@Bean
 	@ConditionalOnProperty(prefix = DumpProperties.PREFIX, name = "enabled", havingValue = "true")
 	public DumpProvider dumpProvider() {
-		LogUtil.started(DumpProvider.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(DumpProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new DumpProvider();
 	}
 
@@ -78,7 +78,7 @@ public class HealthConfiguration implements InitializingBean {
 	@ConditionalOnBean(HealthCheckProvider.class)
 	@ConditionalOnProperty(prefix = ReportProperties.PREFIX, name = "enabled", havingValue = "true")
 	public FilterRegistrationBean healthReportFilter(HealthCheckProvider healthProvider) {
-		LogUtil.started(HealthReportFilter.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(HealthReportFilter.class, StarterNameConstant.HEALTH_STARTER);
 
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
@@ -95,7 +95,7 @@ public class HealthConfiguration implements InitializingBean {
 	@ConditionalOnBean(DumpProvider.class)
 	@ConditionalOnProperty(prefix = DumpProperties.PREFIX, name = "enabled", havingValue = "true")
 	public FilterRegistrationBean dumpFilter(DumpProvider dumpProvider) {
-		LogUtil.started(DumpFilter.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(DumpFilter.class, StarterNameConstant.HEALTH_STARTER);
 
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
@@ -111,7 +111,7 @@ public class HealthConfiguration implements InitializingBean {
 	@ConditionalOnWebApplication
 	@ConditionalOnProperty(prefix = PingProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 	public FilterRegistrationBean pingFilter() {
-		LogUtil.started(PingFilter.class, StarterName.HEALTH_STARTER);
+		LogUtil.started(PingFilter.class, StarterNameConstant.HEALTH_STARTER);
 
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 		filterRegistrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);

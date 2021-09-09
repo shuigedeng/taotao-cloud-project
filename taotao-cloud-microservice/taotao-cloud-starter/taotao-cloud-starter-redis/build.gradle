@@ -5,7 +5,9 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
     }
 
-    api 'com.zengtengpeng:redisson-spring-boot-starter:1.0.8'
+    api ('com.zengtengpeng:redisson-spring-boot-starter:1.0.8') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+    }
     api "org.redisson:redisson-spring-data-24:3.15.6"
 
     api 'org.springframework.boot:spring-boot-starter-data-redis'

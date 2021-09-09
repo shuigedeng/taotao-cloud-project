@@ -21,7 +21,7 @@ import com.taotao.cloud.captcha.properties.CaptchaProperties;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
 import com.taotao.cloud.captcha.util.ImageUtils;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,13 +50,13 @@ public class CaptchaServiceAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CaptchaServiceAutoConfiguration.class, StarterName.CAPTCHA_STARTER);
+		LogUtil.started(CaptchaServiceAutoConfiguration.class, StarterNameConstant.CAPTCHA_STARTER);
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public CaptchaService captchaService(CaptchaProperties prop) {
-		LogUtil.started(CaptchaService.class, StarterName.CAPTCHA_STARTER);
+		LogUtil.started(CaptchaService.class, StarterNameConstant.CAPTCHA_STARTER);
 
 		Properties config = new Properties();
 

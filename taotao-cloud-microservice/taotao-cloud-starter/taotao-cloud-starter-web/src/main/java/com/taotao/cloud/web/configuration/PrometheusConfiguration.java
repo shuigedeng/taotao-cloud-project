@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.Counter;
@@ -38,7 +38,7 @@ public class PrometheusConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PrometheusConfiguration.class, StarterName.PROMETHEUS_STARTER);
+		LogUtil.started(PrometheusConfiguration.class, StarterNameConstant.PROMETHEUS_STARTER);
 	}
 
 	private PrometheusMeterRegistry prometheusMeterRegistry;
@@ -53,7 +53,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Counter requestCounter() {
-		LogUtil.started(Counter.class, StarterName.WEB_STARTER);
+		LogUtil.started(Counter.class, StarterNameConstant.WEB_STARTER);
 
 		return Counter.build()
 				.name("order_requests_total")
@@ -68,7 +68,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Gauge getInprogressRequests() {
-		LogUtil.started(Gauge.class, StarterName.WEB_STARTER);
+		LogUtil.started(Gauge.class, StarterNameConstant.WEB_STARTER);
 
 		return Gauge.build()
 				.name("io_namespace_http_inprogress_requests")
@@ -82,7 +82,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Histogram getRequestLatencyHistogram() {
-		LogUtil.started(Histogram.class, StarterName.WEB_STARTER);
+		LogUtil.started(Histogram.class, StarterNameConstant.WEB_STARTER);
 
 		return Histogram.build()
 				.name("io_namespace_http_requests_latency_seconds_histogram")
@@ -99,7 +99,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Summary requestLatency() {
-		LogUtil.started(Summary.class, StarterName.WEB_STARTER);
+		LogUtil.started(Summary.class, StarterNameConstant.WEB_STARTER);
 
 		return Summary.build()
 				.name("requestLatency")

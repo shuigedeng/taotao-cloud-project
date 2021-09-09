@@ -64,12 +64,6 @@ public class JavaInfo implements Serializable {
 		return JAVA_VENDOR_URL;
 	}
 
-	/**
-	 * 将Java Implementation的信息转换成字符串
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-02 19:22:49
-	 */
 	@Override
 	public final String toString() {
 

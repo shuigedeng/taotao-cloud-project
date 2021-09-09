@@ -1,6 +1,6 @@
 package com.taotao.cloud.health.warn;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
@@ -44,8 +44,9 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 				try {
 					notifyRunning();
 				} catch (Exception exp) {
-					LogUtil.warn(StarterName.HEALTH_STARTER, "WarnProvider 消息循环异常");
+					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "WarnProvider 消息循环异常");
 				}
+
 				try {
 					Thread.sleep(WarnProperties.Default().getTimeSpan() * 1000);
 				} catch (Exception e) {
@@ -73,8 +74,8 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		Message temp = new Message();
 		List<Message> allmsgs = getAllmessage();
 		int msgscount = atomicInteger.getAndSet(0);
-		temp.setWarnType(
-			EnumWarnType.WARN);
+		temp.setWarnType(EnumWarnType.WARN);
+
 		if (msgscount > 0) {
 			StringBuilder content = new StringBuilder();
 			content.append(String.format("最新报警累计:%s条,详情请查看日志系统,最后%s条报警内容如下:\n", msgscount,
@@ -108,14 +109,14 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 
 	private void addMessage(Message msg) {
 		atomicInteger.getAndIncrement();
+
+		//加锁
 		synchronized (lock) {
-			//加锁
 			messages.add(msg);
 			//清理多余
 			if (messages.size() > WarnProperties.Default().getCacheCount()) {
-				for (int i = 0;
-					i < messages.size() - WarnProperties.Default().getCacheCount();
-					i++) {
+				int cacheCount = WarnProperties.Default().getCacheCount();
+				for (int i = 0; i < messages.size() - cacheCount; i++) {
 					if (!messages.isEmpty()) {
 						messages.removeFirst();
 					}
@@ -155,6 +156,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			if (message != null && EnumWarnType.ERROR == message.getWarnType()) {
 				ExceptionUtils.reportException(message);
 			}
+
 			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 			for (AbstractWarn warn : warns) {
 				message.setTitle(String.format("[%s][%s][%s][%s]%s",
@@ -177,7 +179,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	@Override
 	public void run(ApplicationArguments args) {
 		atomicChannel.getAndSet(true);
-		LogUtil.info(StarterName.HEALTH_STARTER, "开启消息通道");
+		LogUtil.info(StarterNameConstant.HEALTH_STARTER, "开启消息通道");
 	}
 
 	/**

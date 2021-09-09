@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.query.role;
 
-import com.taotao.cloud.common.model.BasePageQuery;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @since 2020/5/14 10:44
  */
 @Schema(name = "RolePageQuery", description = "角色查询query")
-public class RolePageQuery extends BasePageQuery {
+public class RolePageQuery extends PageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 

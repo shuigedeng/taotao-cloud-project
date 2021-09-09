@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import io.swagger.v3.oas.models.Components;
@@ -73,12 +73,12 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(OpenapiAutoConfiguration.class, StarterName.OPENAPI_STARTER);
+		LogUtil.started(OpenapiAutoConfiguration.class, StarterNameConstant.OPENAPI_STARTER);
 	}
 
 	@Bean
 	public GroupedOpenApi groupedOpenApi() {
-		LogUtil.started(GroupedOpenApi.class, StarterName.OPENAPI_STARTER);
+		LogUtil.started(GroupedOpenApi.class, StarterNameConstant.OPENAPI_STARTER);
 
 		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 
@@ -91,7 +91,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
-		LogUtil.started(OpenApiCustomiser.class, StarterName.OPENAPI_STARTER);
+		LogUtil.started(OpenApiCustomiser.class, StarterNameConstant.OPENAPI_STARTER);
 
 		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
 		String[] split = applicationName.split("-");
@@ -117,7 +117,7 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 
 	@Bean
 	public OpenAPI openApi() {
-		LogUtil.started(OpenAPI.class, StarterName.OPENAPI_STARTER);
+		LogUtil.started(OpenAPI.class, StarterNameConstant.OPENAPI_STARTER);
 
 		Components components = new Components();
 		// 添加auth认证header

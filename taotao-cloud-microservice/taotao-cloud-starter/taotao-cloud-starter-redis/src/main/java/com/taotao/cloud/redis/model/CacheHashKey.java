@@ -16,7 +16,7 @@
 package com.taotao.cloud.redis.model;
 
 
-import static com.taotao.cloud.common.constant.StrPool.COLON;
+import static com.taotao.cloud.common.constant.StrPoolConstant.COLON;
 
 import cn.hutool.core.util.StrUtil;
 import java.time.Duration;

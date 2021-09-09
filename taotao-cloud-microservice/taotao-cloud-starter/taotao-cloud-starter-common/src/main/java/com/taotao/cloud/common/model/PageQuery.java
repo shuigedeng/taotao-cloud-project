@@ -29,8 +29,8 @@ import javax.validation.constraints.NotNull;
  * @version 2021.9
  * @since 2021-09-02 19:09:09
  */
-@Schema(name = "BasePageQuery", description = "基础分页查询对象")
-public class BasePageQuery implements Serializable {
+@Schema(name = "PageQuery", description = "基础分页查询对象")
+public class PageQuery implements Serializable {
 
 	private static final long serialVersionUID = -2483306509077581330L;
 
@@ -52,10 +52,10 @@ public class BasePageQuery implements Serializable {
 	@Max(value = 100)
 	private Integer pageSize = 10;
 
-	public BasePageQuery() {
+	public PageQuery() {
 	}
 
-	public BasePageQuery(Integer currentPage, Integer pageSize) {
+	public PageQuery(Integer currentPage, Integer pageSize) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 	}
@@ -77,7 +77,7 @@ public class BasePageQuery implements Serializable {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		BasePageQuery that = (BasePageQuery) o;
+		PageQuery that = (PageQuery) o;
 		return Objects.equals(currentPage, that.currentPage) && Objects.equals(
 			pageSize, that.pageSize);
 	}

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.shardingsphere.configuration;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.shardingsphere.algorithm.DataSourceShardingAlgorithm;
 import com.taotao.cloud.shardingsphere.properties.ShardingJdbcProperties;
@@ -48,7 +48,7 @@ public class ShardingJdbcConfiguration extends SpringBootConfiguration implement
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ShardingJdbcConfiguration.class, StarterName.SHARDINGSPHERE_STARTER);
+		LogUtil.started(ShardingJdbcConfiguration.class, StarterNameConstant.SHARDINGSPHERE_STARTER);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ShardingJdbcConfiguration extends SpringBootConfiguration implement
 
 	@Bean
 	public DataSourceShardingAlgorithm dataSourceShardingAlgorithm() {
-		LogUtil.started(DataSourceShardingAlgorithm.class, StarterName.SHARDINGSPHERE_STARTER);
+		LogUtil.started(DataSourceShardingAlgorithm.class, StarterNameConstant.SHARDINGSPHERE_STARTER);
 
 		return new DataSourceShardingAlgorithm();
 	}

@@ -42,6 +42,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class JacksonModule extends SimpleModule {
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * JacksonModule
 	 *

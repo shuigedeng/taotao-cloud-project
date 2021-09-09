@@ -22,9 +22,9 @@ package com.taotao.cloud.common.constant;
  * @version 2021.9
  * @since 2021-09-02 20:42:22
  */
-public class ServiceName {
+public class ServiceNameConstant {
 
-	private ServiceName() {
+	private ServiceNameConstant() {
 	}
 
 	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth";

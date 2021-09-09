@@ -16,7 +16,7 @@
 package com.taotao.cloud.oauth2.api.feign;
 
 import com.taotao.cloud.oauth2.api.feign.fallback.RemoteClientFallbackImpl;
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.constant.ServiceNameConstant;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -26,7 +26,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @since 2020/5/2 16:42
  * @version 1.0.0
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteClientFallbackImpl.class)
+@FeignClient(contextId = "remoteUserService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteClientFallbackImpl.class)
 public interface RemoteClientService {
 }
 

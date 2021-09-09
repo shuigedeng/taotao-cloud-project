@@ -28,7 +28,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -113,7 +113,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(WebMvcConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(WebMvcConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class, StarterName.WEB_STARTER);
+		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class, StarterNameConstant.WEB_STARTER);
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();
@@ -303,7 +303,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public Validator validator() {
-		LogUtil.started(Validator.class, StarterName.WEB_STARTER);
+		LogUtil.started(Validator.class, StarterNameConstant.WEB_STARTER);
 
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
 				.configure()
@@ -315,14 +315,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public RequestContextListener requestContextListener() {
-		LogUtil.started(RequestContextListener.class, StarterName.WEB_STARTER);
+		LogUtil.started(RequestContextListener.class, StarterNameConstant.WEB_STARTER);
 
 		return new RequestContextListener();
 	}
 
 	@Bean
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilterFilterRegistrationBean() {
-		LogUtil.started(VersionFilter.class, StarterName.WEB_STARTER);
+		LogUtil.started(VersionFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new VersionFilter(filterProperties));
@@ -334,7 +334,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public FilterRegistrationBean<TenantFilter> tenantFilterFilterRegistrationBean() {
-		LogUtil.started(TenantFilter.class, StarterName.WEB_STARTER);
+		LogUtil.started(TenantFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TenantFilter(filterProperties));
@@ -346,7 +346,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public FilterRegistrationBean<TraceFilter> traceFilterFilterRegistrationBean() {
-		LogUtil.started(TraceFilter.class, StarterName.WEB_STARTER);
+		LogUtil.started(TraceFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TraceFilter(filterProperties));
@@ -358,7 +358,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public FilterRegistrationBean<WebContextFilter> webContextFilterFilterRegistrationBean() {
-		LogUtil.started(WebContextFilter.class, StarterName.WEB_STARTER);
+		LogUtil.started(WebContextFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new WebContextFilter(filterProperties));

@@ -31,7 +31,16 @@ public interface BaseEnum {
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:30:35
 	 */
-	Integer getCode();
+	int getCode();
+
+	/**
+	 * 获取枚举描述
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-02 19:30:35
+	 */
+	String getDesc();
 
 	/**
 	 * 通过code获取枚举名称

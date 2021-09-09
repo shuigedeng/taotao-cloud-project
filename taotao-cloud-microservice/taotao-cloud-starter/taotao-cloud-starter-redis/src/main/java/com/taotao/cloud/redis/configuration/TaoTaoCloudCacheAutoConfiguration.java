@@ -17,8 +17,8 @@ package com.taotao.cloud.redis.configuration;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.constant.StrPool;
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
@@ -54,7 +54,7 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(TaoTaoCloudCacheAutoConfiguration.class, StarterName.REDIS_STARTER);
+		LogUtil.started(TaoTaoCloudCacheAutoConfiguration.class, StarterNameConstant.REDIS_STARTER);
 	}
 
 	private final CustomCacheProperties cacheProperties;
@@ -66,16 +66,16 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public KeyGenerator keyGenerator() {
-		LogUtil.started(KeyGenerator.class, StarterName.REDIS_STARTER);
+		LogUtil.started(KeyGenerator.class, StarterNameConstant.REDIS_STARTER);
 
 		return (target, method, objects) -> {
 			StringBuilder sb = new StringBuilder();
 			sb.append(target.getClass().getName());
-			sb.append(StrPool.COLON);
+			sb.append(StrPoolConstant.COLON);
 			sb.append(method.getName());
 			for (Object obj : objects) {
 				if (obj != null) {
-					sb.append(StrPool.COLON);
+					sb.append(StrPoolConstant.COLON);
 					sb.append(obj.toString());
 				}
 			}
@@ -87,7 +87,7 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 	@Primary
 	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "REDIS")
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-		LogUtil.started(CacheManager.class, StarterName.REDIS_STARTER);
+		LogUtil.started(CacheManager.class, StarterNameConstant.REDIS_STARTER);
 
 		RedisCacheConfiguration defConfig = getDefConf();
 		defConfig.entryTtl(cacheProperties.getDef().getTimeToLive());
@@ -133,9 +133,9 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 		}
 		if (redisProperties.getKeyPrefix() != null) {
 			config = config.computePrefixWith(cacheName -> redisProperties.getKeyPrefix().concat(
-				StrPool.COLON).concat(cacheName).concat(StrPool.COLON));
+				StrPoolConstant.COLON).concat(cacheName).concat(StrPoolConstant.COLON));
 		} else {
-			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPool.COLON));
+			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPoolConstant.COLON));
 		}
 		if (!redisProperties.isCacheNullValues()) {
 			config = config.disableCachingNullValues();
@@ -150,7 +150,7 @@ public class TaoTaoCloudCacheAutoConfiguration implements InitializingBean {
 	@Bean("caffeineCacheManager")
 	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "CAFFEINE")
 	public CacheManager caffeineCacheManager() {
-		LogUtil.started(CaffeineCacheManager.class, StarterName.REDIS_STARTER);
+		LogUtil.started(CaffeineCacheManager.class, StarterNameConstant.REDIS_STARTER);
 
 		CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 

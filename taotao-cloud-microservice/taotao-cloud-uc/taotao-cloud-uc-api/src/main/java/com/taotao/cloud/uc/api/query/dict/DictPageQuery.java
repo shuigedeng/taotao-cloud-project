@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.uc.api.query.dict;
 
-import com.taotao.cloud.common.model.BasePageQuery;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 
@@ -27,7 +27,7 @@ import java.util.Objects;
  * @since 2020/9/30 08:49
  */
 @Schema(name = "DictPageQuery", description = "字典分页查询query")
-public class DictPageQuery extends BasePageQuery {
+public class DictPageQuery extends PageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 

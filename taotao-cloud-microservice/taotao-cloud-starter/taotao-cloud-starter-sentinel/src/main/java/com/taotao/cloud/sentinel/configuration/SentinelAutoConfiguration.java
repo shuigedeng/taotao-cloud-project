@@ -22,7 +22,7 @@ import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
@@ -57,7 +57,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SentinelAutoConfiguration.class, StarterName.SENTINEL_STARTER);
+		LogUtil.started(SentinelAutoConfiguration.class, StarterNameConstant.SENTINEL_STARTER);
 	}
 
 	@Bean
@@ -65,7 +65,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(name = "feign.sentinel.enabled")
 	public Feign.Builder feignSentinelBuilder() {
-		LogUtil.started(Feign.Builder.class, StarterName.SENTINEL_STARTER);
+		LogUtil.started(Feign.Builder.class, StarterNameConstant.SENTINEL_STARTER);
 
 		return SentinelFeign.builder();
 	}
@@ -74,7 +74,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(HttpServletRequest.class)
 	public BlockExceptionHandler blockExceptionHandler() {
-		LogUtil.started(BlockExceptionHandler.class, StarterName.SENTINEL_STARTER);
+		LogUtil.started(BlockExceptionHandler.class, StarterNameConstant.SENTINEL_STARTER);
 
 		return (request, response, e) -> {
 			LogUtil.error("WebmvcHandler sentinel 降级 资源名称{}", e, e.getRule().getResource());
@@ -99,7 +99,7 @@ public class SentinelAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnClass(ServerResponse.class)
 	public BlockRequestHandler blockRequestHandler() {
-		LogUtil.started(BlockRequestHandler.class, StarterName.SENTINEL_STARTER);
+		LogUtil.started(BlockRequestHandler.class, StarterNameConstant.SENTINEL_STARTER);
 
 		return (exchange, e) -> {
 			LogUtil.error("ServerResponse sentinel 降级 资源名称{}",e, e.getCause());

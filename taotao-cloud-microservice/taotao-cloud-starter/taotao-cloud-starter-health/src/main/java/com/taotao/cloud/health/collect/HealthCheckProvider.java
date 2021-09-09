@@ -1,6 +1,6 @@
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.thread.ThreadPool;
@@ -56,10 +56,16 @@ public class HealthCheckProvider implements AutoCloseable {
 		ThreadPool.DEFAULT.submit("系统任务:HealthCheckProvider采集任务", () -> {
 			while (!ThreadPool.DEFAULT.isShutdown() && !isclose) {
 				try {
-					run();
+					Report report = getReport(false);
+					String text = strategy.analyseText(report);
+					if (StringUtil.isEmpty(text)) {
+						return;
+					}
+					AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "健康检查", text);
 				} catch (Exception e) {
-					LogUtil.warn(StarterName.HEALTH_STARTER, "run 循环采集出错", e);
+					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "run 循环采集出错", e);
 				}
+
 				try {
 					Thread.sleep(HealthProperties.Default().getHealthTimeSpan() * 1000);
 				} catch (Exception e) {
@@ -80,26 +86,18 @@ public class HealthCheckProvider implements AutoCloseable {
 							report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
-					LogUtil.error(StarterName.HEALTH_STARTER,
+					LogUtil.error(StarterNameConstant.HEALTH_STARTER,
 						task.getName() + "采集获取报表出错", e);
 				}
 
 			}
 		}
+
 		if (isAnalyse) {
 			report = strategy.analyse(report);
 		}
+
 		return report;
-	}
-
-	public void run() {
-		Report report = getReport(false);
-		String text = strategy.analyseText(report);
-		if (StringUtil.isEmpty(text)) {
-			return;
-		}
-		AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "健康检查", text);
-
 	}
 
 	@Override
@@ -109,7 +107,7 @@ public class HealthCheckProvider implements AutoCloseable {
 			try {
 				task.close();
 			} catch (Exception exp) {
-				LogUtil.warn(StarterName.HEALTH_STARTER, "close资源释放出错",
+				LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "close资源释放出错",
 					exp);
 			}
 		}

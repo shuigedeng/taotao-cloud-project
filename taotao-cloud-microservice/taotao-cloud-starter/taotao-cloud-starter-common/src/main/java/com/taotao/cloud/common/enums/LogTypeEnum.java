@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.enums;
 
 /**
- * 日志类型 
+ * 日志类型
  *
  * @author shuigedeng
  * @version 2021.9
@@ -24,34 +24,29 @@ package com.taotao.cloud.common.enums;
  */
 public enum LogTypeEnum implements BaseEnum {
 	/**
-	 * redis
+	 * logger
 	 */
-	LOGGER(1, "logger", "logger"),
+	LOGGER(1, "logger"),
 	/**
 	 * redis
 	 */
-	REDIS(2, "redis", "redis"),
+	REDIS(2, "redis"),
 	/**
 	 * kafka
 	 */
-	KAFKA(3, "kafka", "kafka");
+	KAFKA(3, "kafka");
 
-	private final Integer value;
-	private final String name;
-	private final String description;
+	private final int code;
+	private final String desc;
 
-	LogTypeEnum(Integer value, String name, String description) {
-		this.value = value;
-		this.name = name;
-		this.description = description;
+	LogTypeEnum(int code, String desc) {
+		this.code = code;
+		this.desc = desc;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
+	@Override
+	public String getDesc() {
+		return desc;
 	}
 
 	@Override
@@ -65,7 +60,7 @@ public enum LogTypeEnum implements BaseEnum {
 	}
 
 	@Override
-	public Integer getCode() {
-		return value;
+	public int getCode() {
+		return code;
 	}
 }
