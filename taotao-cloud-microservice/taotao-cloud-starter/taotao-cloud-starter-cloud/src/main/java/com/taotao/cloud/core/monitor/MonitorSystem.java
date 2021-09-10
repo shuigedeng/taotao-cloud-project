@@ -30,18 +30,24 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class MonitorSystem {
 
 	/**
-	 * threadPoolExecutor
+	 * monitorThreadPoolExecutor
 	 */
 	private ThreadPoolExecutor monitorThreadPoolExecutor;
-
-	private ThreadPoolTaskExecutor coreThreadPoolExecutor;
-
 	/**
-	 * name
+	 * coreThreadPoolExecutor
+	 */
+	private ThreadPoolTaskExecutor coreThreadPoolExecutor;
+	/**
+	 * monitorThreadName
 	 */
 	private final String monitorThreadName;
+	/**
+	 * coreThreadName
+	 */
 	private final String coreThreadName;
-
+	/**
+	 * collector
+	 */
 	private Collector collector;
 
 	public MonitorSystem(
@@ -82,9 +88,11 @@ public class MonitorSystem {
 			this.collector.call(this.coreThreadName + ".core.poolSize")
 				.set(() -> this.coreThreadPoolExecutor.getCorePoolSize());
 			this.collector.call(this.coreThreadName + ".poolSize.largest")
-				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getLargestPoolSize());
+				.set(
+					() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getLargestPoolSize());
 			this.collector.call(this.coreThreadName + ".poolSize.max")
-				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getMaximumPoolSize());
+				.set(
+					() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getMaximumPoolSize());
 			this.collector.call(this.coreThreadName + ".poolSize.count")
 				.set(() -> this.coreThreadPoolExecutor.getPoolSize());
 			this.collector.call(this.coreThreadName + ".queue.size")
@@ -92,7 +100,8 @@ public class MonitorSystem {
 			this.collector.call(this.coreThreadName + ".task.count")
 				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getTaskCount());
 			this.collector.call(this.coreThreadName + ".task.completed")
-				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getCompletedTaskCount());
+				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor()
+					.getCompletedTaskCount());
 		}
 	}
 

@@ -16,7 +16,6 @@
 package com.taotao.cloud.core.model;
 
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.NumberUtil;
 import com.taotao.cloud.core.model.Callable.Func0;
@@ -26,6 +25,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -40,6 +40,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 2021-09-02 20:30:39
  */
 public class Collector {
+
+	private CoreProperties coreProperties;
 	/**
 	 * map
 	 */
@@ -49,6 +51,10 @@ public class Collector {
 	 * lock
 	 */
 	private final Object lock = new Object();
+
+	public Collector(CoreProperties coreProperties) {
+		this.coreProperties = coreProperties;
+	}
 
 	/**
 	 * get
@@ -84,12 +90,14 @@ public class Collector {
 		try {
 			Object obj = type.newInstance();
 			if (type == Hook.class) {
-				Hook o = (Hook) obj;
-				o.setKey(key);
-				o.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
+				Hook hook = (Hook) obj;
+				hook.setCoreProperties(coreProperties);
+				hook.setKey(key);
+				hook.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
 			}
 			return obj;
 		} catch (Exception e) {
+			LogUtil.error(e);
 			throw new BaseException(e);
 		}
 	}
@@ -222,6 +230,8 @@ public class Collector {
 	 */
 	public static class Hook {
 
+		private CoreProperties coreProperties;
+
 		/**
 		 * 当前正在处理数
 		 */
@@ -324,6 +334,7 @@ public class Collector {
 				}
 				method = find.get();
 			}
+
 			return run(tag, () -> {
 				try {
 					return method.invoke(obj, params);
@@ -360,8 +371,7 @@ public class Collector {
 		 */
 		public <T> T run(String tag, Callable.Func0<T> func) {
 			try {
-				CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
-				if (!coreProperties.isCollectHookEnabled()) {
+				if (Objects.isNull(coreProperties) || !coreProperties.isCollectHookEnabled()) {
 					return func.invoke();
 				}
 
@@ -405,6 +415,7 @@ public class Collector {
 			if (info == null || timeSpan < lastMinTimeSpan) {
 				return;
 			}
+
 			try {
 				sortList.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
 				sortList.removeMore(this.maxLength);
@@ -429,6 +440,7 @@ public class Collector {
 			if (info == null || timeSpan < lastMinTimeSpanPerMinute) {
 				return;
 			}
+
 			try {
 				sortListPerMinute.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
 				sortListPerMinute.removeMore(this.maxLength);
@@ -546,6 +558,14 @@ public class Collector {
 
 		public void setKey(String key) {
 			this.key = key;
+		}
+
+		public CoreProperties getCoreProperties() {
+			return coreProperties;
+		}
+
+		public void setCoreProperties(CoreProperties coreProperties) {
+			this.coreProperties = coreProperties;
 		}
 	}
 
@@ -695,7 +715,7 @@ public class Collector {
 		/**
 		 * tagCache
 		 */
-		protected Map tagCache = new ConcurrentHashMap<Integer, Object>();
+		protected Map<Integer, Object> tagCache = new ConcurrentHashMap<>();
 
 		@Override
 		public boolean add(SortInfo sortInfo) {
@@ -779,10 +799,12 @@ public class Collector {
 		 */
 		public String toText() {
 			StringBuilder sb = new StringBuilder();
-			for (SortInfo o : this) {
-				sb.append(String.format("[耗时ms]%s[tag]%s[次数]%s[最大耗时ms]%s\r\n",
-					NumberUtil.scale(o.time, 2), o.tag.toString(), o.count,
-					NumberUtil.scale(o.maxTime, 2)));
+			for (SortInfo sortInfo : this) {
+				sb.append(String.format(" [耗时ms]%s [tag]%s [次数]%s [最大耗时ms]%s\r\n",
+					NumberUtil.scale(sortInfo.time, 2),
+					sortInfo.tag.toString(),
+					sortInfo.count,
+					NumberUtil.scale(sortInfo.maxTime, 2)));
 			}
 			return sb.toString();
 		}

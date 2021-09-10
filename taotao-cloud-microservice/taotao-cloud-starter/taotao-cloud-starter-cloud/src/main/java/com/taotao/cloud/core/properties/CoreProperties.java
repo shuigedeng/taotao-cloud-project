@@ -33,6 +33,7 @@ public class CoreProperties {
 	public static final String PREFIX = "taotao.cloud.core";
 
 	public static String SpringApplicationName = "spring.application.name";
+	public static String SpringProfilesActive = "spring.profiles.active";
 
 	public static String ServerTomcatMaxThreads = "server.tomcat.max-threads";
 	public static String ServerTomcatMaxConnections = "server.tomcat.max-connections";

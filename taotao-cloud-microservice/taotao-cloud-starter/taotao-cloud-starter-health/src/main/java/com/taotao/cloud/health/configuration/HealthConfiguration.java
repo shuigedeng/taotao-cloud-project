@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
@@ -41,6 +56,13 @@ import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * HealthConfiguration
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:22:15
+ */
 @Configuration
 @AutoConfigureAfter({CoreAutoConfiguration.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
@@ -58,7 +80,9 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public DefaultWarnStrategy defaultWarnStrategy(WarnTemplate warnTemplate,
+	@ConditionalOnBean(PropertyCache.class)
+	public DefaultWarnStrategy defaultWarnStrategy(
+		WarnTemplate warnTemplate,
 		PropertyCache propertyCache) {
 		return new DefaultWarnStrategy(warnTemplate, new Rule.RulesAnalyzer(propertyCache));
 	}
@@ -77,7 +101,6 @@ public class HealthConfiguration implements InitializingBean {
 	public HealthCheckProvider getHealthCheckProvider(
 		DefaultWarnStrategy strategy,
 		DefaultHttpClient defaultHttpClient,
-		HttpClientManager httpClientManager,
 		Collector collector,
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
@@ -86,7 +109,6 @@ public class HealthConfiguration implements InitializingBean {
 		return new HealthCheckProvider(
 			strategy,
 			defaultHttpClient,
-			httpClientManager,
 			collector,
 			collectTaskProperties,
 			healthProperties,

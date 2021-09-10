@@ -2,7 +2,7 @@ package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;

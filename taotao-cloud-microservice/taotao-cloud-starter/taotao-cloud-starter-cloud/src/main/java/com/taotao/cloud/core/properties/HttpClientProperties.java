@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.core.properties;
 
-import com.taotao.cloud.core.http.HttpClient;
-import com.taotao.cloud.core.http.HttpClient.EnumHttpConnectParam;
-import java.lang.reflect.Method;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -37,86 +34,63 @@ public class HttpClientProperties {
 	/**
 	 * Tcp是否粘包(批量封包发送)
 	 */
-	private boolean tcpNoDelay = (boolean) HttpClient.EnumHttpConnectParam.TcpNoDelay.getDefaultValue();
+	private boolean tcpNoDelay = true;
 
 	/**
 	 * 总连接池大小
 	 */
-	private int maxTotal = (int) HttpClient.EnumHttpConnectParam.MaxTotal.getDefaultValue();
+	private int maxTotal = 500;
 
 
 	/**
 	 * 单个host连接池大小
 	 */
-	private int defaultMaxPerRoute = (int) HttpClient.EnumHttpConnectParam.DefaultMaxPerRoute.getDefaultValue();
+	private int defaultMaxPerRoute = 500;
 
 	/**
 	 * 连接是否需要验证有效时间
 	 */
-	private int validateAfterInactivity = (int) HttpClient.EnumHttpConnectParam.ValidateAfterInactivity.getDefaultValue();
+	private int validateAfterInactivity = 10000;
 
 	/**
 	 * 连接超时时间 【常用】
 	 */
-	private int connectTimeout = (int) HttpClient.EnumHttpConnectParam.ConnectTimeout.getDefaultValue();
+	private int connectTimeout = 10000;
 
 	/**
 	 * socket通讯超时时间 【常用】
 	 */
-	private int socketTimeout = (int) HttpClient.EnumHttpConnectParam.SocketTimeout.getDefaultValue();
+	private int socketTimeout = 15000;
 
 	/**
 	 * 请求从连接池获取超时时间
 	 */
-	private int connectionRequestTimeout = (int) HttpClient.EnumHttpConnectParam.ConnectionRequestTimeout.getDefaultValue();
+	private int connectionRequestTimeout = 2000;
 
 	/**
 	 * 连接池共享
 	 */
-	private boolean connectionManagerShared = (boolean) HttpClient.EnumHttpConnectParam.ConnectionManagerShared.getDefaultValue();
+	private boolean connectionManagerShared = true;
 
 	/**
 	 * 回收时间间隔 s
 	 */
-	private int evictIdleConnectionsTime = (int) HttpClient.EnumHttpConnectParam.EvictIdleConnectionsTime.getDefaultValue();
+	private int evictIdleConnectionsTime = 60;
 
 	/**
 	 * 是否回收
 	 */
-	private boolean isEvictExpiredConnections = (boolean) HttpClient.EnumHttpConnectParam.IsEvictExpiredConnections.getDefaultValue();
+	private boolean isEvictExpiredConnections = true;
 
 	/**
 	 * 长连接保持时间 s
 	 */
-	private int connectionTimeToLive = (int) HttpClient.EnumHttpConnectParam.ConnectionTimeToLive.getDefaultValue();
+	private int connectionTimeToLive = -1;
 
 	/**
 	 * 重试次数 【常用】
 	 */
-	private int retryCount = (int) HttpClient.EnumHttpConnectParam.RetryCount.getDefaultValue();
-
-	/**
-	 * toMap
-	 *
-	 * @return {@link com.taotao.cloud.core.http.HttpClient.InitMap }
-	 * @author shuigedeng
-	 * @since 2021-09-02 20:43:21
-	 */
-	public static HttpClient.InitMap toMap() {
-		HttpClient.InitMap initMap = new HttpClient.InitMap();
-		for (Method m : HttpClientProperties.class.getMethods()) {
-			try {
-				EnumHttpConnectParam en = HttpClient.EnumHttpConnectParam.get(m.getName());
-				if (en != null) {
-					initMap.trySetDefaultParams(en, m.invoke(null));
-				}
-			} catch (Exception e) {
-
-			}
-		}
-		return initMap;
-	}
-
+	private int retryCount = 3;
 
 	public boolean isTcpNoDelay() {
 		return tcpNoDelay;

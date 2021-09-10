@@ -26,10 +26,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2021-09-02 20:44:31
  */
 @RefreshScope
-@ConfigurationProperties(prefix = CoreThreadPoolProperties.PREFIX)
-public class CoreThreadPoolProperties {
+@ConfigurationProperties(prefix = AsyncThreadPoolProperties.PREFIX)
+public class AsyncThreadPoolProperties {
 
-	public static final String PREFIX = "taotao.cloud.core.threadpool";
+	public static final String PREFIX = "taotao.cloud.core.threadpool.async";
 
 	private boolean enabled = true;
 
@@ -56,12 +56,12 @@ public class CoreThreadPoolProperties {
 	/**
 	 * 线程池前缀
 	 */
-	private String threadNamePrefix = "taotao-cloud-core-threadpool";
+	private String threadNamePrefix = "taotao-cloud-async-executor";
 
-	public CoreThreadPoolProperties() {
+	public AsyncThreadPoolProperties() {
 	}
 
-	public CoreThreadPoolProperties(boolean enabled, int corePoolSize, int maxPoolSiz,
+	public AsyncThreadPoolProperties(boolean enabled, int corePoolSize, int maxPoolSiz,
 		int queueCapacity, int keepAliveSeconds, String threadNamePrefix) {
 		this.enabled = enabled;
 		this.corePoolSize = corePoolSize;

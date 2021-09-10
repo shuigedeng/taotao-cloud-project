@@ -62,12 +62,13 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean(destroyMethod = "close")
-	public DefaultHttpClient getDefaultHttpClient(HttpClientManager httpClientManager) {
+	public DefaultHttpClient getDefaultHttpClient(
+		HttpClientProperties httpClientProperties,
+		HttpClientManager httpClientManager) {
 		LogUtil.started(DefaultHttpClient.class, StarterNameConstant.CLOUD_STARTER);
-
-		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(HttpClientProperties.toMap(),
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(httpClientProperties,
 			httpClientManager);
-		return httpClientManager.register("taotao.cloud.core.http.httpclient", defaultHttpClient);
+		return httpClientManager.register("taotao.cloud.core.httpclient", defaultHttpClient);
 	}
 
 	@Bean

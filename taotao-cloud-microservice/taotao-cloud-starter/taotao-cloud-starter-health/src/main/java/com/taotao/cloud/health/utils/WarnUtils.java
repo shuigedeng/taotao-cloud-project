@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.utils;
+package com.taotao.cloud.health.utils;
 
 
 import com.taotao.cloud.common.utils.ContextUtil;
@@ -83,12 +83,12 @@ public class WarnUtils {
 		if (bean != null) {
 			if (isNow) {
 				ReflectionUtil.callMethodWithParams(bean, "notifynow",
-						new String[]{alarm_type, title, content}, String.class, String.class,
-						String.class);
+					new String[]{alarm_type, title, content}, String.class, String.class,
+					String.class);
 			} else {
 				ReflectionUtil.callMethodWithParams(bean, "notify",
-						new String[]{alarm_type, title, content}, String.class, String.class,
-						String.class);
+					new String[]{alarm_type, title, content}, String.class, String.class,
+					String.class);
 			}
 		}
 	}

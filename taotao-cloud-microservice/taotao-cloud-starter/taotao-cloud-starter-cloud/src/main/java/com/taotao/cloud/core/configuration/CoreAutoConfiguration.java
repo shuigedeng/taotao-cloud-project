@@ -25,8 +25,8 @@ import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.model.Pubsub;
 import com.taotao.cloud.core.monitor.MonitorSystem;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
@@ -37,12 +37,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * CoreConfiguration
@@ -71,8 +69,21 @@ public class CoreAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public Collector collector() {
-		return new Collector();
+	public Pubsub pubsub() {
+		LogUtil.started(Pubsub.class, StarterNameConstant.CLOUD_STARTER);
+		return new Pubsub();
+	}
+
+	@Bean
+	public Collector collector(CoreProperties coreProperties) {
+		LogUtil.started(Collector.class, StarterNameConstant.CLOUD_STARTER);
+		return new Collector(coreProperties);
+	}
+
+	@Bean
+	public PropertyCache propertyCache(Pubsub pubsub) {
+		LogUtil.started(PropertyCache.class, StarterNameConstant.CLOUD_STARTER);
+		return new PropertyCache(pubsub);
 	}
 
 	@Bean(destroyMethod = "monitorShutdown")
@@ -80,33 +91,22 @@ public class CoreAutoConfiguration implements InitializingBean {
 	public MonitorThreadPool coreMonitorThreadPool(
 		Collector collector,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
-		CoreThreadPoolProperties coreThreadPoolProperties,
+		AsyncThreadPoolProperties asyncThreadPoolProperties,
 		@Qualifier("taskExecutor") AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
+		LogUtil.started(MonitorThreadPool.class, StarterNameConstant.CLOUD_STARTER);
 
 		return new MonitorThreadPool(
 			collector,
 			monitorThreadPoolProperties,
-			coreThreadPoolProperties,
+			asyncThreadPoolProperties,
 			coreThreadPoolTaskExecutor
 		);
 	}
 
 	@Bean
-	@ConditionalOnBean(MonitorThreadPool.class)
 	public MonitorSystem monitorThread(MonitorThreadPool monitorThreadPool) {
 		LogUtil.started(MonitorSystem.class, StarterNameConstant.CLOUD_STARTER);
 		return monitorThreadPool.getMonitorSystem();
-	}
-
-	@Bean
-	public Pubsub pubsub() {
-		return new Pubsub();
-	}
-
-	@Bean
-	public PropertyCache propertyCache(Pubsub pubsub) {
-		LogUtil.started(PropertyCache.class, StarterNameConstant.CLOUD_STARTER);
-		return new PropertyCache(pubsub);
 	}
 
 	@Bean

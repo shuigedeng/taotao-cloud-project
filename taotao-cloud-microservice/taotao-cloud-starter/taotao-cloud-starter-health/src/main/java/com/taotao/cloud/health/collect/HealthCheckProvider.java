@@ -1,13 +1,27 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
-import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
@@ -16,9 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: chejiangyi
- * @version: 2019-07-23 18:47
- **/
+ * HealthCheckProvider
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:42:25
+ */
 public class HealthCheckProvider implements AutoCloseable {
 
 	protected List<AbstractCollectTask> checkTasks = new ArrayList<>();
@@ -37,7 +54,6 @@ public class HealthCheckProvider implements AutoCloseable {
 	public HealthCheckProvider(
 		DefaultWarnStrategy strategy,
 		DefaultHttpClient defaultHttpClient,
-		HttpClientManager httpClientManager,
 		Collector collector,
 		CollectTaskProperties properties,
 		HealthProperties healthProperties,
@@ -65,31 +81,29 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new XxlJobCollectTask(properties));
 		//registerCollectTask(new FileCollectTask());
 		//registerCollectTask(new RocketMQCollectTask());
-		registerCollectTask(new HttpPoolCollectTask(httpClientManager,properties));
+		registerCollectTask(new HttpPoolCollectTask(properties));
 		//registerCollectTask(new CatCollectTask());
 		//registerCollectTask(new ElasticSearchCollectTask());
 		registerCollectTask(new ElkCollectTask(properties));
 		registerCollectTask(new DoubtApiCollectTask(collector, properties));
-		registerCollectTask(new LogStatisticCollectTask(collector,properties));
+		registerCollectTask(new LogStatisticCollectTask(collector, properties));
+		registerCollectTask(new NacosCollectTask(collector, properties));
 
-		this.monitorThreadPool.monitorSubmit("系统任务:HealthCheckProvider采集任务", () -> {
-			while (!this.monitorThreadPool.monitorIsShutdown() && !isclose) {
-				LogUtil.info(
-					Thread.currentThread().getName() + " =========> 系统任务:HealthCheckProvider采集任务");
-
+		monitorThreadPool.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
+			while (!monitorThreadPool.monitorIsShutdown() && !isclose) {
 				try {
 					Report report = getReport(false);
 					String text = strategy.analyseText(report);
 					if (StringUtil.isEmpty(text)) {
 						return;
 					}
-					AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "健康检查", text);
+					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "健康检查", text);
 				} catch (Exception e) {
 					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "run 循环采集出错", e);
 				}
 
 				try {
-					Thread.sleep(this.healthProperties.getHealthTimeSpan() * 1000L);
+					Thread.sleep(healthProperties.getHealthTimeSpan() * 1000L);
 				} catch (Exception e) {
 					LogUtil.error(e);
 				}
@@ -98,21 +112,32 @@ public class HealthCheckProvider implements AutoCloseable {
 	}
 
 
+	/**
+	 * getReport
+	 *
+	 * @param isAnalyse isAnalyse
+	 * @return {@link com.taotao.cloud.health.model.Report }
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:42:55
+	 */
 	public Report getReport(boolean isAnalyse) {
-		Report report = new Report().setDesc("健康检查报表").setName("taotao.cloud.health.report");
+		Report report = new Report()
+			.setDesc("健康检查报表")
+			.setName("taotao.cloud.health.report");
+
 		for (AbstractCollectTask task : checkTasks) {
 			if (task.getEnabled()) {
 				try {
 					Report report2 = task.getReport();
 					if (report2 != null) {
 						report.put(task.getName(),
-							report2.setDesc(task.getDesc()).setName(task.getName()));
+							report2.setDesc(task.getDesc())
+								.setName(task.getName()));
 					}
 				} catch (Exception e) {
-					LogUtil.error(StarterNameConstant.HEALTH_STARTER,
-						task.getName() + "采集获取报表出错", e);
+					LogUtil.error(e,
+						StarterNameConstant.HEALTH_STARTER + task.getName() + "采集获取报表出错");
 				}
-
 			}
 		}
 
@@ -191,5 +216,14 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	public void setCollector(Collector collector) {
 		this.collector = collector;
+	}
+
+
+	public DefaultHttpClient getDefaultHttpClient() {
+		return defaultHttpClient;
+	}
+
+	public void setDefaultHttpClient(DefaultHttpClient defaultHttpClient) {
+		this.defaultHttpClient = defaultHttpClient;
 	}
 }

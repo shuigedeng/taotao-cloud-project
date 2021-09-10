@@ -1,8 +1,24 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.model;
 
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.NumberUtil;
 import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.strategy.Rule;
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -13,54 +29,49 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author: chejiangyi
- * @version: 2019-07-28 08:26 采集报表
- **/
+ * 采集报表
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 10:44:01
+ */
 public class Report extends LinkedHashMap<String, Object> implements Serializable {
 
+	/**
+	 * 描述
+	 */
 	private String desc;
 
-	public String getDesc() {
-		return desc;
-	}
-
-	public Report setDesc(String desc) {
-		this.desc =
-			desc;
-		return this;
-	}
-
+	/**
+	 * 名称
+	 */
 	private String name;
 
-	public String getName() {
-		return name;
-	}
-
-	public Report setName(String name) {
-		this.name = name;
-		return this;
-	}
-
 	/**
-	 * 求平均的报表
+	 * 求平均报表
 	 *
-	 * @param reportList
-	 * @return
+	 * @param reportList reportList
+	 * @return {@link com.taotao.cloud.health.model.Report }
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:45:16
 	 */
 	public Report avgReport(List<Report> reportList) {
-		Map<String, Object> sums = new HashMap();
+		Map<String, Object> sums = new HashMap<>();
+
 		//累加
 		for (Report r : reportList) {
-			eachReport(r, (fieldname, item) -> {
-				if (sums.containsKey(fieldname)) {
-					if (item.value != null && sums.get(fieldname) != null && sums.get(
-						fieldname) instanceof Number && item.value instanceof Number) {
-						sums.replace(fieldname, ((Number) sums.get(fieldname)).doubleValue()
-							+ ((Number) item.value).doubleValue());
+			eachReport(r, (fieldName, item) -> {
+				Object value = item.value;
+				if (sums.containsKey(fieldName)) {
+					Object fieldValue = sums.get(fieldName);
+
+					if (fieldValue instanceof Number && value instanceof Number) {
+						sums.replace(fieldName,
+							((Number) fieldValue).doubleValue() + ((Number) value).doubleValue());
 					}
 				} else {
-					if (item.value instanceof Number) {
-						sums.put(fieldname, ((Number) item.value).doubleValue());
+					if (value instanceof Number) {
+						sums.put(fieldName, ((Number) value).doubleValue());
 					}
 				}
 				return item;
@@ -69,8 +80,8 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 
 		//求平均
 		for (Map.Entry<String, Object> item : sums.entrySet()) {
-			if (item.getValue() instanceof Number) {
-				Object value = item.getValue();
+			Object value = item.getValue();
+			if (value instanceof Number) {
 				if (!reportList.isEmpty()) {
 					sums.replace(item.getKey(),
 						NumberUtil.scale(((Number) value).doubleValue() / reportList.size(), 2));
@@ -80,9 +91,9 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 
 		//生成平均报表
 		Report report = reportList.get(reportList.size() - 1).clone();
-		eachReport(report, (fieldname, item) -> {
+		eachReport(report, (fieldName, item) -> {
 			if (item.value instanceof Number) {
-				item.setValue(sums.get(fieldname));
+				item.setValue(sums.get(fieldName));
 			}
 			return item;
 		});
@@ -92,27 +103,39 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 	public String toHtml() {
 		StringBuilder stringBuilder = new StringBuilder(
 			String.format("<b>[%s(%s)]</b>\r\n", this.getName(), this.getDesc()));
+
 		for (Map.Entry<String, Object> item : this.entrySet()) {
-			if (item.getValue() instanceof ReportItem) {
-				ReportItem reportItem = (ReportItem) item.getValue();
-				Object value = reportItem.getValue();
-				if (reportItem.getValue() != null && reportItem.getValue() instanceof Number) {
-					value = NumberUtil.scale((Number) reportItem.getValue(), 2);
-				} else if (reportItem.getValue() != null
-					&& reportItem.getValue() instanceof String) {
-					String text = StringUtil.nullToEmpty((String) reportItem.getValue());
-					if ((item.getKey()).contains(".detail") && !text.isEmpty()) {
-						value = "<span style='color:blue;cursor:pointer' title='{title}' onclick='this.innerHTML=(this.textContent==\"显示详情\"?this.title.replace(/\\r/g,\"\").replace(/\\n/g,\"<br/>\"):\"显示详情\");'>显示详情</span>"
-							.replace("{title}",
-								htmlEncode(text).replace("\r", "/r").replace("\n", "/n"));
-						//.replace("{title2}",htmlEncode(text).replace("\r","").replace("\n","<br/>"));
+			Object value = item.getValue();
+			if (value instanceof ReportItem) {
+				ReportItem reportItem = (ReportItem) value;
+				Object itemValue = reportItem.getValue();
+
+				if (Objects.nonNull(itemValue)) {
+					if (itemValue instanceof Number) {
+						itemValue = NumberUtil.scale((Number) itemValue, 2);
+					} else if (itemValue instanceof String) {
+						String text = StringUtil.nullToEmpty(itemValue);
+						if ((item.getKey()).contains(".detail") && !text.isEmpty()) {
+							itemValue = ("<span style='color:blue;cursor:pointer' title='{title}' "
+								+ "onclick='this.innerHTML=(this.textContent==\"显示详情\"?"
+								+ "this.title.replace(/\\r/g,\"\").replace(/\\n/g,\"<br/>\"):\"显示详情\");'>显示详情</span>")
+								.replace("{title}",
+									htmlEncode(text)
+										.replace("\r", "/r")
+										.replace("\n", "/n"));
+							//.replace("{title2}",htmlEncode(text).replace("\r","").replace("\n","<br/>"));
+						}
 					}
 				}
+
 				stringBuilder.append(
-					String.format("%s(%s):%s%s\r\n", item.getKey(), reportItem.getDesc(), value,
+					String.format("%s(%s):%s%s\r\n",
+						item.getKey(),
+						reportItem.getDesc(),
+						JsonUtil.toJSONString(itemValue),
 						reportItem.isWarn() ? "<font color=\"#FF0000\">[报警]</font>" : ""));
-			} else if (item.getValue() instanceof Report) {
-				stringBuilder.append(((Report) item.getValue()).toHtml());
+			} else if (value instanceof Report) {
+				stringBuilder.append(((Report) value).toHtml());
 			}
 		}
 		stringBuilder.append("\r\n");
@@ -123,7 +146,8 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		if (source == null) {
 			return "";
 		}
-		StringBuffer buffer = new StringBuffer();
+
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < source.length(); i++) {
 			char c = source.charAt(i);
 			switch (c) {
@@ -162,10 +186,12 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 
 	private void eachReport(Report report, ReportItemEachCallBack callBack) {
 		for (Map.Entry<String, Object> item : report.entrySet()) {
-			if (item.getValue() instanceof ReportItem) {
-				callBack.run(item.getKey(), (ReportItem) item.getValue());
+			Object value = item.getValue();
+
+			if (value instanceof ReportItem) {
+				callBack.run(item.getKey(), (ReportItem) value);
 			} else if (item.getValue() instanceof Report) {
-				eachReport((Report) item.getValue(), callBack);
+				eachReport((Report) value, callBack);
 			}
 		}
 	}
@@ -186,14 +212,15 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 					report.put(fieldReport.name(),
 						new ReportItem(fieldReport.desc(), value, "", null));
 				} else {
-					Report report2 = new Report().setDesc(fieldReport.desc())
+					Report report2 = new Report()
+						.setDesc(fieldReport.desc())
 						.setName(fieldReport.name());
+
 					report.put(fieldReport.name(), report2);
 					parseObject(report2, value);
 				}
 			}
 		}
-
 	}
 
 	private Object tryGet(Field field, Object obj) {
@@ -208,36 +235,69 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 	public Report() {
 	}
 
+	/**
+	 * ReportItemEachCallBack
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 10:47:02
+	 */
 	public interface ReportItemEachCallBack {
 
+		/**
+		 * run
+		 *
+		 * @param field      field
+		 * @param reportItem reportItem
+		 * @return {@link com.taotao.cloud.health.model.Report.ReportItem }
+		 * @author shuigedeng
+		 * @since 2021-09-10 10:47:06
+		 */
 		ReportItem run(String field, ReportItem reportItem);
 	}
 
-
-	/**
-	 * 深拷贝
-	 *
-	 * @return
-	 */
 	@Override
 	public Report clone() {
-		Report report = new Report().setName(this.name).setDesc(this.desc);
+		Report report = new Report()
+			.setName(this.name)
+			.setDesc(this.desc);
+
 		for (Map.Entry<String, Object> item : this.entrySet()) {
-			if (item.getValue() instanceof ReportItem) {
-				report.put(item.getKey(), (((ReportItem) item.getValue()).clone()));
-			} else if (item.getValue() instanceof Report) {
-				report.put(item.getKey(), (((Report) item.getValue()).clone()));
+			Object value = item.getValue();
+
+			if (value instanceof ReportItem) {
+				report.put(item.getKey(), (((ReportItem) value).clone()));
+			} else if (value instanceof Report) {
+				report.put(item.getKey(), (((Report) value).clone()));
 			}
 		}
 		return report;
 	}
 
-
+	/**
+	 * ReportItem
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 10:45:55
+	 */
 	public static class ReportItem implements Serializable {
 
+		/**
+		 * 描述
+		 */
 		private String desc;
+		/**
+		 * 值
+		 */
 		private Object value;
+		/**
+		 * warn
+		 */
 		private String warn;
+		/**
+		 * 规则
+		 */
 		private transient Rule.RuleInfo rule;
 
 		public ReportItem(String desc, Object value, String warn, Rule.RuleInfo rule) {
@@ -287,5 +347,23 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		public void setRule(Rule.RuleInfo rule) {
 			this.rule = rule;
 		}
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public Report setDesc(String desc) {
+		this.desc = desc;
+		return this;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Report setName(String name) {
+		this.name = name;
+		return this;
 	}
 }

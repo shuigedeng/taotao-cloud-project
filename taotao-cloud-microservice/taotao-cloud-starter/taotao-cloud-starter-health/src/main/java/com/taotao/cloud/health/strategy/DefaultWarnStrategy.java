@@ -1,19 +1,35 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.strategy;
 
+import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.health.collect.IOCollectTask;
 import com.taotao.cloud.health.model.Report;
-import com.taotao.cloud.health.strategy.Rule.RulesAnalyzer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 默认报警策略
+ * DefaultWarnStrategy
  *
- * @author: chejiangyi
- * @version: 2019-07-28 08:24
- **/
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:02:08
+ */
 public class DefaultWarnStrategy {
 
 	protected static int maxCacheSize = 3;
@@ -34,73 +50,98 @@ public class DefaultWarnStrategy {
 		this.warnTemplate = warnTemplate;
 		this.rulesAnalyzer = rulesAnalyzer;
 
-		this.setDefaultStrategy();
+		setDefaultStrategy();
 	}
 
+	/**
+	 * setDefaultStrategy
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:02:40
+	 */
 	public void setDefaultStrategy() {
-		this.rulesAnalyzer.registerRules("cpu.process",
+		rulesAnalyzer.registerRules("cpu.process",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.process", "[>0.7]"));
-		this.rulesAnalyzer.registerRules("cpu.system",
+		rulesAnalyzer.registerRules("cpu.system",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.cpu.system", "[>0.7]"));
-		this.rulesAnalyzer.registerRules("io.current.dir.usable.size",
+		rulesAnalyzer.registerRules("io.current.dir.usable.size",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.io.current.dir.usable.size",
 				"[<500]"));
-		this.rulesAnalyzer.registerRules("memery.jvm.max",
+		rulesAnalyzer.registerRules("memery.jvm.max",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.jvm.max", "[<256]"));
-		this.rulesAnalyzer.registerRules("memery.system.free",
+		rulesAnalyzer.registerRules("memery.system.free",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.memery.system.free",
 				"[<256]"));
-		this.rulesAnalyzer.registerRules("thread.deadlocked.count",
+		rulesAnalyzer.registerRules("thread.deadlocked.count",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.deadlocked.count",
 				"[>10]"));
-		this.rulesAnalyzer.registerRules("thread.total",
+		rulesAnalyzer.registerRules("thread.total",
 			PropertyUtil.getPropertyCache("taotao.cloud.health.strategy.thread.total", "[>1000]"));
-		this.rulesAnalyzer.registerRules("tomcat.threadPool.poolSize.count",
+		rulesAnalyzer.registerRules("tomcat.threadPool.poolSize.count",
 			PropertyUtil.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.poolSize.count",
 				"[>1000]"));
-		this.rulesAnalyzer.registerRules("tomcat.threadPool.active.count",
+		rulesAnalyzer.registerRules("tomcat.threadPool.active.count",
 			PropertyUtil.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.active.count",
 				"[>200]"));
-		this.rulesAnalyzer.registerRules("tomcat.threadPool.queue.size",
+		rulesAnalyzer.registerRules("tomcat.threadPool.queue.size",
 			PropertyUtil.getPropertyCache(
 				"taotao.cloud.health.strategy.tomcat.threadPool.queue.size",
 				"[>50]"));
-		if (this.rulesAnalyzer.getRules("io.current.dir.usable.size") != null) {
+
+		if (rulesAnalyzer.getRules("io.current.dir.usable.size") != null) {
 			//设置报警回调
-			this.rulesAnalyzer.getRules("io.current.dir.usable.size").forEach(c -> {
+			rulesAnalyzer.getRules("io.current.dir.usable.size").forEach(c -> {
 				if (c.getType() == Rule.RuleType.less) {
-					c.setHitCallBack((value) -> IOCollectTask.clearlog());
+					c.setHitCallBack((value) -> IOCollectTask.clearLog());
 				}
 			});
 		}
 	}
 
+	/**
+	 * analyse
+	 *
+	 * @param report report
+	 * @return {@link com.taotao.cloud.health.model.Report }
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:02:44
+	 */
 	public Report analyse(Report report) {
 		while (cacheReports.size() > maxCacheSize) {
 			cacheReports.remove(0);
 		}
+
 		cacheReports.add(report);
 		Report avgReport = report.avgReport(cacheReports);
-		return this.rulesAnalyzer.analyse(avgReport);
+		return rulesAnalyzer.analyse(avgReport);
 	}
 
+	/**
+	 * analyseText
+	 *
+	 * @param report report
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:02:49
+	 */
 	public String analyseText(Report report) {
 		Report r = analyse(report);
 		StringBuilder warn = new StringBuilder();
 		r.eachReport((filed, item) -> {
 			if (item.isWarn()) {
-				warn.append(warnTemplate.getWarnConent(filed, item.getDesc(), item.getValue(),
+				warn.append(warnTemplate.getWarnContent(filed, item.getDesc(), item.getValue(),
 					item.getRule()));
 			}
 			return item;
 		});
-		String warninfo = warn.toString();
-		if (warninfo == null || warninfo.isEmpty()) {
+
+		String warnInfo = warn.toString();
+		if (StringUtil.isEmpty(warnInfo)) {
 			return "";
 		}
-		return warninfo;
+		return warnInfo;
 	}
 
 }

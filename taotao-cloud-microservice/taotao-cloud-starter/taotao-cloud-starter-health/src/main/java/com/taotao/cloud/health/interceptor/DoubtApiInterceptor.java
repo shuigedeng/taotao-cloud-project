@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.interceptor;
 
 import com.taotao.cloud.core.model.Collector;
@@ -12,8 +27,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 /**
  * 拦截器，统计接口内存增长
  *
- * @author Robin.Wang
- * @date 2019-09-28
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:06:43
  */
 public class DoubtApiInterceptor implements HandlerInterceptor {
 
@@ -22,7 +38,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 	private DoubtApiProperties properties;
 	private Collector collector;
 
-	public DoubtApiInterceptor(Collector collector,DoubtApiProperties properties) {
+	public DoubtApiInterceptor(Collector collector, DoubtApiProperties properties) {
 		this.collector = collector;
 		this.properties = properties;
 	}
@@ -30,9 +46,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 		Object handler) throws Exception {
-
 		beforeMem.set(getJVMUsed());
-
 		return true;
 	}
 
@@ -48,15 +62,15 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 				method.getBean().getClass().getName() + "." + method.getMethod().getName();
 			String url = request.getRequestURI();
 
-			long increMem = getJVMUsed() - data;
-			if (increMem > properties.getThreshold()) {
+			long incrMem = getJVMUsed() - data;
+			if (incrMem > properties.getThreshold()) {
 				if (statisticMap.containsKey(methodPath)) {
 					DoubtApiInfo staticInfo = statisticMap.get(methodPath);
 					staticInfo.uri = url;
 					staticInfo.count += 1;
-					staticInfo.totalIncreMem += increMem;
+					staticInfo.totalIncreMem += incrMem;
 					if (staticInfo.totalIncreMem <= 0) {
-						staticInfo.totalIncreMem = increMem;
+						staticInfo.totalIncreMem = incrMem;
 						staticInfo.count = 1;
 					}
 				} else {
@@ -76,12 +90,23 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 
 	/**
 	 * 获取JVM内存
+	 *
+	 * @return long
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:08:03
 	 */
 	private long getJVMUsed() {
 		Runtime rt = Runtime.getRuntime();
 		return (rt.totalMemory() - rt.freeMemory());
 	}
 
+	/**
+	 * DoubtApiInfo
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 17:08:13
+	 */
 	public static class DoubtApiInfo implements Comparable<DoubtApiInfo> {
 
 		/**
@@ -115,13 +140,14 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 		 * 倒序
 		 */
 		@Override
-		public int compareTo(DoubtApiInfo o) {
-			if (o == null) {
+		public int compareTo(DoubtApiInfo doubtApiInfo) {
+			if (doubtApiInfo == null) {
 				return -1;
 			}
-			long cha = o.getCount() > 0 ? o.getTotalIncreMem() / o.getCount()
-				: o.getTotalIncreMem() - this.count > 0 ? this.totalIncreMem / this.count
-					: this.totalIncreMem;
+			long cha = doubtApiInfo.count > 0 ?
+				doubtApiInfo.totalIncreMem / doubtApiInfo.count
+				: doubtApiInfo.totalIncreMem - this.count > 0 ?
+					this.totalIncreMem / this.count : this.totalIncreMem;
 
 			if (cha > 0) {
 				return 1;
@@ -131,7 +157,6 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 				return 0;
 			}
 		}
-
 
 		public String getUri() {
 			return uri;
@@ -165,6 +190,4 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 			this.count = count;
 		}
 	}
-
-
 }

@@ -63,7 +63,7 @@ public class TimeWatchUtil {
 			T t = action0.invoke();
 			long e = System.currentTimeMillis();
 			LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "--" + msg + " 耗时: {}, ",
-					(e - b) + "毫秒");
+				(e - b) + "毫秒");
 			return t;
 		} else {
 			return action0.invoke();

@@ -16,7 +16,6 @@
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import java.io.Closeable;
 import java.lang.reflect.Field;
@@ -38,7 +37,6 @@ import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.springframework.util.StringUtils;
 
 /**
  * HttpClient
@@ -188,168 +186,6 @@ public interface HttpClient extends Closeable {
 	 * @since 2021-09-02 20:17:25
 	 */
 	<T> T delete(String url, Params params, TypeReference<T> tTypeReference);
-
-	/**
-	 * EnumHttpConnectParam
-	 *
-	 * @author shuigedeng
-	 * @version 2021.9
-	 * @since 2021-09-02 20:17:38
-	 */
-	public static enum EnumHttpConnectParam {
-		/**
-		 * Tcp是否粘包(批量封包发送)
-		 */
-		TcpNoDelay(true),
-		/**
-		 * 总连接池大小
-		 */
-		MaxTotal(500),
-		/**
-		 * 单个host连接池大小
-		 */
-		DefaultMaxPerRoute(500),
-		/**
-		 * 连接是否需要验证有效时间
-		 */
-		ValidateAfterInactivity(10000),
-		/**
-		 * 连接超时时间 【常用】
-		 */
-		ConnectTimeout(10000),
-		/**
-		 * socket通讯超时时间 【常用】
-		 */
-		SocketTimeout(15000),
-		/**
-		 * 请求从连接池获取超时时间
-		 */
-		ConnectionRequestTimeout(2000),
-		/**
-		 * 连接池共享
-		 */
-		ConnectionManagerShared(true),
-		/**
-		 * 回收时间间隔 s
-		 */
-		EvictIdleConnectionsTime(60),
-		/**
-		 * 是否回收
-		 */
-		IsEvictExpiredConnections(true),
-		/**
-		 * 长连接保持时间 s
-		 */
-		ConnectionTimeToLive(-1),
-		/**
-		 * 重试次数 【常用】
-		 */
-		RetryCount(3);
-
-		private Object defaultvalue;
-
-		public Object getDefaultValue() {
-			return defaultvalue;
-		}
-
-		EnumHttpConnectParam(Object defaultvalue) {
-			this.defaultvalue = defaultvalue;
-		}
-
-		/**
-		 * get
-		 *
-		 * @param value value
-		 * @return {@link com.taotao.cloud.core.http.HttpClient.EnumHttpConnectParam }
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:17:44
-		 */
-		public static EnumHttpConnectParam get(String value) {
-			for (EnumHttpConnectParam v : EnumHttpConnectParam.values()) {
-				if (v.name().equalsIgnoreCase(value)) {
-					return v;
-				}
-			}
-			return null;
-		}
-	}
-
-	/**
-	 * 初始化参数
-	 *
-	 * @author shuigedeng
-	 * @version 2021.9
-	 * @since 2021-09-02 20:17:50
-	 */
-	public static class InitMap extends HashMap<EnumHttpConnectParam, Object> {
-
-		@Override
-		public String toString() {
-			StringBuilder stringBuilder = new StringBuilder();
-			for (Entry entry : this.entrySet()) {
-				stringBuilder.append(entry.getKey() + ":" + entry.getValue() + ",");
-			}
-			return StringUtils.trimTrailingCharacter(stringBuilder.toString(), ',');
-		}
-
-		/**
-		 * trySetDefaultParams
-		 *
-		 * @param key          key
-		 * @param defaultValue defaultValue
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:17:56
-		 */
-		public void trySetDefaultParams(EnumHttpConnectParam key, Object defaultValue) {
-			if (this.containsKey(key)) {
-				return;
-			}
-			this.put(key, defaultValue);
-		}
-
-		/**
-		 * trySetDefaultParams
-		 *
-		 * @param key          key
-		 * @param defaultValue defaultValue
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:17:59
-		 */
-		public void trySetDefaultParams(String key, Object defaultValue) {
-			this.trySetDefaultParams(EnumHttpConnectParam.valueOf(key), defaultValue);
-		}
-
-		/**
-		 * getParams
-		 *
-		 * @param key  key
-		 * @param type type
-		 * @param <T>  T
-		 * @return T
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:18:01
-		 */
-		public <T> T getParams(EnumHttpConnectParam key, Class<T> type) {
-			Object value = this.get(key);
-			if (value == null) {
-				return null;
-			}
-			return BeanUtil.convert(value, type);
-		}
-
-		/**
-		 * getParams
-		 *
-		 * @param key  key
-		 * @param type type
-		 * @return T
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:18:08
-		 */
-		public <T> T getParams(String key, Class<T> type) {
-			return getParams(EnumHttpConnectParam.valueOf(key), type);
-		}
-	}
 
 	/**
 	 * 请求参数

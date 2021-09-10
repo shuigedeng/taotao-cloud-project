@@ -1,19 +1,35 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.health.interceptor.DoubtApiInterceptor.DoubtApiInfo;
-import com.taotao.cloud.health.model.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Arrays;
 import java.util.Map;
 
 /**
- * 收集使用内存最大的前五个接口及内存使用情况
+ * 可疑API采集
  *
- * @author Robin.Wang
- * @version 1.0.0
- * @date 2019-10-23
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:34:39
  */
 public class DoubtApiCollectTask extends AbstractCollectTask {
 
@@ -37,26 +53,27 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "可疑API采集";
+		return "DoubtApiCollectTask";
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.doubtapi.info";
+		return "taotao.cloud.health.collect.doubtapi";
 	}
 
 	@Override
 	protected Object getData() {
-		ApiUsedMemoryTopInfo info = new ApiUsedMemoryTopInfo();
 		try {
-			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) this.collector.value(
+			ApiUsedMemoryTopInfo info = new ApiUsedMemoryTopInfo();
+			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) collector.value(
 				"taotao.cloud.health.doubtapi.info").get();
 			if (map != null && map.size() > 0) {
-				DoubtApiInfo[] copy = map.values()
-					.toArray(new DoubtApiInfo[map.values().size()]);
+				DoubtApiInfo[] copy = map.values().toArray(new DoubtApiInfo[map.values().size()]);
 				Arrays.sort(copy);
+
 				int detailLen = Math.min(copy.length, 5);
 				StringBuilder sb = new StringBuilder();
+
 				for (int i = 0; i < detailLen; i++) {
 					DoubtApiInfo o = copy[i];
 
@@ -73,9 +90,9 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 				info.detail = sb.toString();
 			}
 		} catch (Exception exp) {
+			LogUtil.error(exp);
 		}
-		return info;
-
+		return null;
 	}
 
 	public static class ApiUsedMemoryTopInfo {

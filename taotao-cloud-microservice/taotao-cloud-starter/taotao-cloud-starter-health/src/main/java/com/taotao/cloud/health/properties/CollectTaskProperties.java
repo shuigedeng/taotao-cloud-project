@@ -1,9 +1,30 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-
+/**
+ * CollectTaskProperties
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:03:40
+ */
 @RefreshScope
 @ConfigurationProperties(prefix = CollectTaskProperties.PREFIX)
 public class CollectTaskProperties {
@@ -65,6 +86,9 @@ public class CollectTaskProperties {
 
 	private boolean cpuEnabled = true;
 	private int cpuTimeSpan = 20;
+
+	private boolean nacosEnabled = true;
+	private int nacosTimeSpan = 20;
 
 
 	public boolean isThreadPollEnabled() {
@@ -314,5 +338,21 @@ public class CollectTaskProperties {
 
 	public void setTomcatTimeSpan(int tomcatTimeSpan) {
 		this.tomcatTimeSpan = tomcatTimeSpan;
+	}
+
+	public boolean isNacosEnabled() {
+		return nacosEnabled;
+	}
+
+	public void setNacosEnabled(boolean nacosEnabled) {
+		this.nacosEnabled = nacosEnabled;
+	}
+
+	public int getNacosTimeSpan() {
+		return nacosTimeSpan;
+	}
+
+	public void setNacosTimeSpan(int nacosTimeSpan) {
+		this.nacosTimeSpan = nacosTimeSpan;
 	}
 }

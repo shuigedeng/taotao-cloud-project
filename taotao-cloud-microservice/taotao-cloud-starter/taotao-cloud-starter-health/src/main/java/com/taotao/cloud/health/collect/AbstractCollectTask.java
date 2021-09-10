@@ -1,25 +1,44 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
-
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.warn.WarnProvider;
 
 /**
- * @author: chejiangyi
- * @version: 2019-07-23 18:47
- **/
+ * AbstractCollectTask
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 10:40:17
+ */
 public abstract class AbstractCollectTask implements AutoCloseable {
 
-	protected int byteToMb = 1024 * 1024;
+	protected long byteToMb = 1024 * 1024L;
+
 	/**
 	 * 上次采集的信息
 	 */
 	private Object lastCollectInfo = null;
+
 	/**
 	 * 上次运行时间
 	 */
@@ -27,50 +46,81 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 
 	/**
 	 * 时间间隔:秒
+	 *
+	 * @return int
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:53:05
 	 */
 	public abstract int getTimeSpan();
 
 	/**
 	 * 开关
+	 *
+	 * @return boolean
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:52:59
 	 */
 	public abstract boolean getEnabled();
 
 	/**
 	 * 描述
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:52:56
 	 */
 	public abstract String getDesc();
 
 	/**
 	 * 唯一命名
+	 *
+	 * @return {@link java.lang.String }
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:52:52
 	 */
 	public abstract String getName();
 
-
 	/**
 	 * 报告
+	 *
+	 * @return {@link com.taotao.cloud.health.model.Report }
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:52:45
 	 */
 	public Report getReport() {
 		if (getTimeSpan() > 0
-			&& (System.currentTimeMillis() - lastRunTime) > getTimeSpan() * 1000) {
+			&& (System.currentTimeMillis() - lastRunTime) > getTimeSpan() * 1000L) {
 			lastRunTime = System.currentTimeMillis();
 			lastCollectInfo = getData();
 		}
+
 		if (lastCollectInfo == null) {
 			return null;
 		}
+
 		return new Report(lastCollectInfo);
 	}
 
-	public static void notifyMessage(EnumWarnType type, String subject, String content) {
-		LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "【报警】" + subject + "\r\n" + content, null);
+	/**
+	 * notifyMessage
+	 *
+	 * @param type    type
+	 * @param subject subject
+	 * @param content content
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:42:24
+	 */
+	public static void notifyMessage(WarnTypeEnum type, String subject, String content) {
+		LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "[warn]" + subject + "\r\n" + content,
+			null);
 		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
 			Message message = new Message();
 			message.setWarnType(type);
 			message.setTitle(subject);
 			message.setContent(content);
-			if (type == EnumWarnType.ERROR) {
-				warnProvider.notifynow(message);
+			if (type == WarnTypeEnum.ERROR) {
+				warnProvider.notifyNow(message);
 			} else {
 				warnProvider.notify(message);
 			}
@@ -78,24 +128,30 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	}
 
 	/**
-	 * @描述 增加自定义发送消息
-	 * @参数 [message]
-	 * @返回值 void
-	 * @创建人 霍钧城
-	 * @创建时间 2020/12/30
-	 * @修改历史：
+	 * notifyMessage
+	 *
+	 * @param message message
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:41:04
 	 */
 	public static void notifyMessage(Message message) {
 		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
-			if (message.getWarnType() == EnumWarnType.ERROR) {
-				warnProvider.notifynow(message);
+			if (message.getWarnType() == WarnTypeEnum.ERROR) {
+				warnProvider.notifyNow(message);
 			} else {
 				warnProvider.notify(message);
 			}
 		}
 	}
 
+	/**
+	 * getData
+	 *
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-10 10:41:38
+	 */
 	protected Object getData() {
 		return null;
 	}

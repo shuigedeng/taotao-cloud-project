@@ -60,18 +60,18 @@ public class FailOverUtil {
 					result.throwable = e;
 					if (i > 0) {
 						LogUtil.error(name.concat("-失败-补偿次数 {}") + " error info {}", i,
-								ExceptionUtil.getFullStackTrace(e));
+							ExceptionUtil.getFullStackTrace(e));
 					} else {
 						LogUtil.error(
-								ExceptionUtil.getFullStackTrace(e));
+							ExceptionUtil.getFullStackTrace(e));
 					}
 				}
 				times = i + 1;
 			}
 			if (result.success && times > 0) {
 				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + " {} 补偿成功, 补偿次数：{}",
-						name,
-						times);
+					name,
+					times);
 			}
 		} finally {
 			consumer.accept(result);

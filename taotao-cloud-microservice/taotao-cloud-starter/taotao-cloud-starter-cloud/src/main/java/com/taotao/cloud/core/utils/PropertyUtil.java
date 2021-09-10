@@ -182,7 +182,7 @@ public class PropertyUtil {
 		}
 	}
 
-	public static void setProperty(String key, String propertyValue, String message){
+	public static void setProperty(String key, String propertyValue, String message) {
 		System.setProperty(key, propertyValue);
 		LogUtil.info(" set default init property key: {}, value: {}, message: {}",
 			key, propertyValue, message);

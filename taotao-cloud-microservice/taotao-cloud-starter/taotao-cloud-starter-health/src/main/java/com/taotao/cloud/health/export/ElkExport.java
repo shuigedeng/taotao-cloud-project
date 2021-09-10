@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.export;
 
 import ch.qos.logback.classic.Level;
@@ -18,9 +33,12 @@ import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author: chejiangyi
- * @version: 2019-08-13 19:48
- **/
+ * ElkExport
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:14:04
+ */
 public class ElkExport extends AbstractExport {
 
 	private ExportProperties exportProperties;
@@ -40,10 +58,10 @@ public class ElkExport extends AbstractExport {
 			appender.setContext((Context) log);
 
 			LogstashEncoder encoder = new LogstashEncoder();
-			String appname =
+			String appName =
 				"Report-" + PropertyUtil.getPropertyCache(CoreProperties.SpringApplicationName,
 					"");
-			encoder.setCustomFields("{\"appname\":\"" + appname + "\",\"appindex\":\"Report\"}");
+			encoder.setCustomFields("{\"appname\":\"" + appName + "\",\"appindex\":\"Report\"}");
 			encoder.setEncoding("UTF-8");
 			appender.setEncoder(encoder);
 			appender.start();
@@ -55,6 +73,7 @@ public class ElkExport extends AbstractExport {
 		if (appender == null || !this.exportProperties.isElkEnabled()) {
 			return;
 		}
+
 		Map<String, Object> map = new LinkedHashMap<>();
 		report.eachReport((String field, Report.ReportItem reportItem) -> {
 			if (reportItem != null && reportItem.getValue() instanceof Number) {
@@ -64,7 +83,7 @@ public class ElkExport extends AbstractExport {
 		});
 
 		LoggingEvent event = createLoggerEvent(map,
-			"taotao cloud Report:" + DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			"taotao cloud report:" + DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		appender.doAppend(event);
 	}
 

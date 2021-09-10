@@ -13,42 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.export;
+package com.taotao.cloud.health.exception;
 
-import com.taotao.cloud.health.model.Report;
+
+import com.taotao.cloud.common.exception.BaseException;
 
 /**
- * AbstractExport
+ * HealthException
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-10 17:13:39
+ * @since 2021-09-10 17:27:32
  */
-public class AbstractExport implements AutoCloseable {
+public class HealthException extends BaseException {
 
-	/**
-	 * start
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:43
-	 */
-	public void start() {
-
+	public HealthException(Throwable exp) {
+		super(exp);
 	}
 
-	/**
-	 * run
-	 *
-	 * @param report report
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:46
-	 */
-	public void run(Report report) {
-
+	public HealthException(String message) {
+		super(message);
 	}
 
-	@Override
-	public void close() {
-
+	public HealthException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

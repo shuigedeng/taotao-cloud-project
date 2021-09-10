@@ -13,42 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.export;
-
-import com.taotao.cloud.health.model.Report;
+package com.taotao.cloud.health.enums;
 
 /**
- * AbstractExport
+ * 报警级别
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-10 17:13:39
+ * @since 2021-09-10 16:06:42
  */
-public class AbstractExport implements AutoCloseable {
+public enum WarnTypeEnum {
+	ERROR(2, "错误"),
+	WARN(1, "告警"),
+	INFO(0, "通知");
 
-	/**
-	 * start
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:43
-	 */
-	public void start() {
+	private int level;
+	private String description;
 
+	public String getDescription() {
+		return description;
 	}
 
-	/**
-	 * run
-	 *
-	 * @param report report
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:46
-	 */
-	public void run(Report report) {
-
+	public int getLevel() {
+		return level;
 	}
 
-	@Override
-	public void close() {
-
+	WarnTypeEnum(int level, String description) {
+		this.description = description;
+		this.level = level;
 	}
 }

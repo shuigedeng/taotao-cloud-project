@@ -18,7 +18,7 @@ package com.taotao.cloud.core.configuration;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
-import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -41,13 +41,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  */
 @Configuration
 @EnableAsync(proxyTargetClass = true)
-@ConditionalOnProperty(prefix = CoreThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = AsyncThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 
-	private CoreThreadPoolProperties coreThreadPoolProperties;
+	private AsyncThreadPoolProperties asyncThreadPoolProperties;
 
-	public AsyncAutoConfiguration(CoreThreadPoolProperties coreThreadPoolProperties) {
-		this.coreThreadPoolProperties = coreThreadPoolProperties;
+	public AsyncAutoConfiguration(AsyncThreadPoolProperties asyncThreadPoolProperties) {
+		this.asyncThreadPoolProperties = asyncThreadPoolProperties;
 	}
 
 	@Override
@@ -58,8 +58,11 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		return (ex, method, params) -> LogUtil
-			.error("class#method: " + method.getDeclaringClass().getName() + "#" + method
-				.getName(), ex);
+			.error(ex, "AsyncUncaughtExceptionHandler {} class: {} method: {} params: {}",
+				asyncThreadPoolProperties.getThreadNamePrefix(),
+				method.getDeclaringClass().getName(),
+				method.getName(),
+				params);
 	}
 
 	@Override
@@ -68,14 +71,13 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		LogUtil.started(ThreadPoolTaskExecutor.class, StarterNameConstant.CLOUD_STARTER);
 
 		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
-		executor.setCorePoolSize(coreThreadPoolProperties.getCorePoolSize());
-		executor.setMaxPoolSize(coreThreadPoolProperties.getMaxPoolSiz());
-		executor.setQueueCapacity(coreThreadPoolProperties.getQueueCapacity());
-		executor.setKeepAliveSeconds(coreThreadPoolProperties.getKeepAliveSeconds());
-		executor.setThreadNamePrefix(coreThreadPoolProperties.getThreadNamePrefix());
+		executor.setCorePoolSize(asyncThreadPoolProperties.getCorePoolSize());
+		executor.setMaxPoolSize(asyncThreadPoolProperties.getMaxPoolSiz());
+		executor.setQueueCapacity(asyncThreadPoolProperties.getQueueCapacity());
+		executor.setKeepAliveSeconds(asyncThreadPoolProperties.getKeepAliveSeconds());
+		executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
 
-		executor.setThreadFactory(
-			new CoreThreadPoolFactory(coreThreadPoolProperties.getThreadNamePrefix(), executor));
+		executor.setThreadFactory(new CoreThreadPoolFactory(asyncThreadPoolProperties, executor));
 
 		/*
 		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
@@ -92,11 +94,15 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		private static final AtomicInteger poolNumber = new AtomicInteger(1);
 		private final AtomicInteger threadNumber = new AtomicInteger(1);
 		private final String namePrefix;
+		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
 		private ThreadPoolTaskExecutor executor;
 
-		public CoreThreadPoolFactory(String namePrefix, ThreadPoolTaskExecutor executor) {
+		public CoreThreadPoolFactory(AsyncThreadPoolProperties asyncThreadPoolProperties,
+			ThreadPoolTaskExecutor executor) {
+			this.asyncThreadPoolProperties = asyncThreadPoolProperties;
 			this.executor = executor;
-			this.namePrefix = namePrefix + "-pool-" + poolNumber.getAndIncrement();
+			this.namePrefix = asyncThreadPoolProperties.getThreadNamePrefix() + "-pool-"
+				+ poolNumber.getAndIncrement();
 		}
 
 		@Override
@@ -108,7 +114,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
 			if (!(handler instanceof CoreThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
-					new CoreThreadPoolUncaughtExceptionHandler(handler));
+					new CoreThreadPoolUncaughtExceptionHandler(handler, asyncThreadPoolProperties));
 			}
 
 			t.setPriority(executor.getThreadPriority());
@@ -122,16 +128,19 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		Thread.UncaughtExceptionHandler {
 
 		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
+		private AsyncThreadPoolProperties asyncThreadPoolProperties;
 
 		public CoreThreadPoolUncaughtExceptionHandler(
-			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler) {
+			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler,
+			AsyncThreadPoolProperties asyncThreadPoolProperties) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
+			this.asyncThreadPoolProperties = asyncThreadPoolProperties;
 		}
 
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] [taotao-cloud-core-threadpool] 未捕获错误");
+				LogUtil.error(e, "[警告] [{}] 捕获错误", asyncThreadPoolProperties.getThreadNamePrefix());
 			}
 
 			if (lastUncaughtExceptionHandler != null) {

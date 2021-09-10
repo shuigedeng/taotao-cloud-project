@@ -4,8 +4,8 @@ package com.taotao.cloud.health.collect;
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.model.EnumWarnType;
-import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.enums.WarnTypeEnum;
+import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -73,7 +73,7 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 			try {
 				if (e != null) {
 					this.unCatchExceptionCheckTask.lastException = e;
-					AbstractCollectTask.notifyMessage(EnumWarnType.ERROR, "未捕获错误",
+					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "未捕获错误",
 						ExceptionUtil.trace2String(e));
 					LogUtil.error( e, "未捕获错误");
 				}

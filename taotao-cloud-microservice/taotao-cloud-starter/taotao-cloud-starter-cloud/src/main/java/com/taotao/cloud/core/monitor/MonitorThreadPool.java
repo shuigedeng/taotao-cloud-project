@@ -24,7 +24,7 @@ import com.taotao.cloud.core.model.Callable.Action1;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.ProcessExitEvent;
 import com.taotao.cloud.core.model.Ref;
-import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
@@ -53,30 +53,38 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class MonitorThreadPool {
 
 	/**
-	 * threadPoolExecutor
+	 * monitorThreadPoolExecutor
 	 */
 	private final ThreadPoolExecutor monitorThreadPoolExecutor;
+	/**
+	 * coreThreadPoolExecutor
+	 */
 	private final ThreadPoolTaskExecutor coreThreadPoolExecutor;
 	/**
-	 * checkHealth
+	 * monitorCheckHealth
 	 */
 	private boolean monitorCheckHealth = true;
+	/**
+	 * coreCheckHealth
+	 */
 	private boolean coreCheckHealth = true;
 	/**
-	 * threadMonitor
+	 * monitorSystem
 	 */
 	private MonitorSystem monitorSystem;
 	/**
-	 * name
+	 * monitorThreadName
 	 */
 	private String monitorThreadName;
-
+	/**
+	 * collector
+	 */
 	private Collector collector;
 
 	public MonitorThreadPool(
 		Collector collector,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
-		CoreThreadPoolProperties coreThreadPoolProperties,
+		AsyncThreadPoolProperties asyncThreadPoolProperties,
 		AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
 		this.collector = collector;
 
@@ -101,7 +109,7 @@ public class MonitorThreadPool {
 		this.monitorSystem = new MonitorSystem(
 			this.collector,
 			this.monitorThreadName,
-			coreThreadPoolProperties.getThreadNamePrefix(),
+			asyncThreadPoolProperties.getThreadNamePrefix(),
 			monitorThreadPoolExecutor,
 			coreThreadPoolTaskExecutor);
 
@@ -128,7 +136,7 @@ public class MonitorThreadPool {
 			<= monitorThreadPoolExecutor.getPoolSize()
 			&& monitorThreadPoolExecutor.getQueue().size() > 0) {
 			LogUtil.warn(
-				"监控线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.monitor.threadpool.threadPoolMaxSiz] 当前活动线程数: {}"
+				"监控线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.threadpool.monitor.maximumPoolSize] 当前活动线程数: {}"
 				, monitorThreadPoolExecutor.getActiveCount());
 		}
 	}
@@ -144,7 +152,7 @@ public class MonitorThreadPool {
 			&& coreThreadPoolExecutor.getMaxPoolSize() <= coreThreadPoolExecutor.getPoolSize()
 			&& coreThreadPoolExecutor.getThreadPoolExecutor().getQueue().size() > 0) {
 			LogUtil.warn(
-				"核心线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.threadpool.threadPoolMaxSiz] 当前活动线程数: {}"
+				"核心线程池已满 任务开始出现排队 请修改配置 [taotao.cloud.core.threadpool.async.threadPoolMaxSiz] 当前活动线程数: {}"
 				, coreThreadPoolExecutor.getActiveCount());
 		}
 	}
@@ -247,7 +255,6 @@ public class MonitorThreadPool {
 
 		return coreThreadPoolExecutor.getThreadPoolExecutor().isShutdown();
 	}
-
 
 	/**
 	 * shutdown
@@ -486,7 +493,7 @@ public class MonitorThreadPool {
 		@Override
 		public void uncaughtException(Thread t, Throwable e) {
 			if (e != null) {
-				LogUtil.error(e, "[警告] [taotao-cloud-core-monitor-threadpool] 未捕获错误");
+				LogUtil.error(e, "[警告] [taotao-cloud-monitor-executor] 未捕获错误");
 			}
 
 			if (lastUncaughtExceptionHandler != null) {

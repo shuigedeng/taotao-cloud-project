@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.export;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
@@ -13,9 +28,12 @@ import java.util.Objects;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 
 /**
- * @author: chejiangyi
- * @version: 2019-08-14 11:01
- **/
+ * ExportProvider
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:15:21
+ */
 public class ExportProvider {
 
 	private boolean isClose = true;
@@ -32,10 +50,23 @@ public class ExportProvider {
 		this.healthCheckProvider = healthCheckProvider;
 	}
 
+	/**
+	 * registerCollectTask
+	 *
+	 * @param export export
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:15:27
+	 */
 	public void registerCollectTask(AbstractExport export) {
 		this.exports.add(export);
 	}
 
+	/**
+	 * start
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:15:34
+	 */
 	public void start() {
 		this.isClose = false;
 
@@ -49,11 +80,8 @@ public class ExportProvider {
 			}
 		}
 
-		this.monitorThreadPool.monitorSubmit("系统任务:ExportProvider采集上传任务", () -> {
+		this.monitorThreadPool.monitorSubmit("系统任务: ExportProvider 采集上传任务", () -> {
 			while (!this.monitorThreadPool.monitorIsShutdown() && !isClose) {
-				LogUtil.info(
-					Thread.currentThread().getName() + " =========> 系统任务:ExportProvider采集上传任务");
-
 				try {
 					run();
 				} catch (Exception e) {
@@ -78,6 +106,12 @@ public class ExportProvider {
 		}
 	}
 
+	/**
+	 * run
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:16:38
+	 */
 	public void run() {
 		if (this.healthCheckProvider != null) {
 			Report report = healthCheckProvider.getReport(false);
@@ -87,14 +121,20 @@ public class ExportProvider {
 		}
 	}
 
+	/**
+	 * close
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 17:16:35
+	 */
 	public void close() {
 		this.isClose = true;
 		for (AbstractExport e : this.exports) {
 			try {
 				e.close();
 			} catch (Exception ex) {
-				LogUtil.error(StarterNameConstant.HEALTH_STARTER,
-					e.getClass().getName() + "关闭出错", ex);
+				LogUtil.error(ex, StarterNameConstant.HEALTH_STARTER,
+					e.getClass().getName() + "关闭出错");
 			}
 		}
 	}

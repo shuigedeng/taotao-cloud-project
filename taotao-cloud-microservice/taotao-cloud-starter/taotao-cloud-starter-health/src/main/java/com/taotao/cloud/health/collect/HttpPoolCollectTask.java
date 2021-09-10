@@ -1,9 +1,26 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
+import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
-import com.taotao.cloud.health.model.FieldReport;
+import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -12,16 +29,15 @@ import org.apache.http.pool.PoolStats;
 /**
  * HTTP连接池性能采集
  *
- * @author Huang Zhaoping
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 17:44:20
  */
 public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
-	private HttpClientManager httpClientManager;
 
-	public HttpPoolCollectTask(HttpClientManager httpClientManager,
-		CollectTaskProperties properties) {
-		this.httpClientManager = httpClientManager;
+	public HttpPoolCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
 	}
 
@@ -37,40 +53,49 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "Http连接池性能采集";
+		return "HttpPoolCollectTask";
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.httpPool.info";
+		return "taotao.cloud.health.collect.httppool";
 	}
 
 	@Override
 	protected Object getData() {
-		ConcurrentHashMap<String, DefaultHttpClient> pool = httpClientManager.getPool();
-		if (pool == null && pool.isEmpty()) {
-			return null;
-		}
+		try {
+			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class,
+				false);
 
-		HttpPoolInfo data = new HttpPoolInfo();
-		StringBuilder detail = new StringBuilder();
-		pool.forEach((id, client) -> {
-			PoolingHttpClientConnectionManager manager = ReflectionUtil.getFieldValue(client,
-				"manager");
-			PoolStats stats = manager.getTotalStats();
-			data.availableCount += stats.getAvailable();
-			data.pendingCount += stats.getPending();
-			data.leasedCount += stats.getLeased();
-			detail.append(String.format("[Client连接池:%s]\r\n", id));
-			detail.append(String.format("路由数:%s\r\n", manager.getRoutes()));
-			detail.append(String.format("路由连接数:%s\r\n", manager.getDefaultMaxPerRoute()));
-			detail.append(String.format("最大的连接数:%s\r\n", manager.getMaxTotal()));
-			detail.append(String.format("可用的连接数:%s\r\n", stats.getAvailable()));
-			detail.append(String.format("等待的连接数:%s\r\n", stats.getPending()));
-			detail.append(String.format("使用中的连接数:%s\r\n", stats.getLeased()));
-		});
-		data.poolDetail = detail.toString();
-		return data;
+			ConcurrentHashMap<String, DefaultHttpClient> pool = httpClientManager.getPool();
+			if (pool == null || pool.isEmpty()) {
+				return null;
+			}
+
+			HttpPoolInfo data = new HttpPoolInfo();
+			StringBuilder detail = new StringBuilder();
+			pool.forEach((id, client) -> {
+				PoolingHttpClientConnectionManager manager = ReflectionUtil.getFieldValue(client,
+					"manager");
+				PoolStats stats = manager.getTotalStats();
+				data.availableCount += stats.getAvailable();
+				data.pendingCount += stats.getPending();
+				data.leasedCount += stats.getLeased();
+
+				detail.append(String.format("[Client连接池:%s]\r\n", id));
+				detail.append(String.format("路由数:%s\r\n", manager.getRoutes()));
+				detail.append(String.format("路由连接数:%s\r\n", manager.getDefaultMaxPerRoute()));
+				detail.append(String.format("最大的连接数:%s\r\n", manager.getMaxTotal()));
+				detail.append(String.format("可用的连接数:%s\r\n", stats.getAvailable()));
+				detail.append(String.format("等待的连接数:%s\r\n", stats.getPending()));
+				detail.append(String.format("使用中的连接数:%s\r\n", stats.getLeased()));
+			});
+			data.poolDetail = detail.toString();
+			return data;
+		} catch (Exception e) {
+			LogUtil.error(e);
+		}
+		return null;
 	}
 
 	private static class HttpPoolInfo {
@@ -83,48 +108,5 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 		private Integer leasedCount = 0;
 		@FieldReport(name = "taotao.cloud.health.collect.httpPool.detail", desc = "HttpPool详情")
 		private String poolDetail;
-
-		public HttpPoolInfo() {
-		}
-
-		public HttpPoolInfo(Integer availableCount, Integer pendingCount, Integer leasedCount,
-			String poolDetail) {
-			this.availableCount = availableCount;
-			this.pendingCount = pendingCount;
-			this.leasedCount = leasedCount;
-			this.poolDetail = poolDetail;
-		}
-
-		public Integer getAvailableCount() {
-			return availableCount;
-		}
-
-		public void setAvailableCount(Integer availableCount) {
-			this.availableCount = availableCount;
-		}
-
-		public Integer getPendingCount() {
-			return pendingCount;
-		}
-
-		public void setPendingCount(Integer pendingCount) {
-			this.pendingCount = pendingCount;
-		}
-
-		public Integer getLeasedCount() {
-			return leasedCount;
-		}
-
-		public void setLeasedCount(Integer leasedCount) {
-			this.leasedCount = leasedCount;
-		}
-
-		public String getPoolDetail() {
-			return poolDetail;
-		}
-
-		public void setPoolDetail(String poolDetail) {
-			this.poolDetail = poolDetail;
-		}
 	}
 }

@@ -286,6 +286,9 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		long start = System.currentTimeMillis();
 
 		try {
+			SysResource resourceById = findResourceById(51L);
+			LogUtil.info("resourceById ======> ", resourceById);
+
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

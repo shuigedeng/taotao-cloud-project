@@ -115,10 +115,12 @@ public class AsyncThreadPoolExecutor extends ThreadPoolExecutor {
 			monitorThreadPoolFactory = (MonitorThreadPoolFactory) threadFactory;
 		}
 
+		String threadNamePrefix = Objects.nonNull(monitorThreadPoolFactory) ?
+			monitorThreadPoolFactory.getNamePrefix() : getNamePrefix();
+
 		LogUtil.info(
 			"threadNamePrefix[{}], method[{}], taskCount[{}], completedTaskCount[{}], activeCount[{}], queueSize[{}]",
-			Objects.nonNull(monitorThreadPoolFactory) ? monitorThreadPoolFactory.getNamePrefix()
-				: getNamePrefix(),
+			threadNamePrefix,
 			method,
 			this.getTaskCount(),
 			this.getCompletedTaskCount(),

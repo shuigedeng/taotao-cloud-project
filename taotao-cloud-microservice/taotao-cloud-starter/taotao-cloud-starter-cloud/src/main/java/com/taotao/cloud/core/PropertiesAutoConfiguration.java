@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.core;
 
-import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.properties.IpRegexProperties;
@@ -30,7 +30,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2021-09-02 21:05:48
  */
 @EnableConfigurationProperties({
-	CoreThreadPoolProperties.class,
+	AsyncThreadPoolProperties.class,
 	CoreProperties.class,
 	HttpClientProperties.class,
 	IpRegexProperties.class,

@@ -23,12 +23,10 @@ import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
-import com.taotao.cloud.dingtalk.model.DingerRobot;
-import com.taotao.cloud.health.model.EnumWarnType;
+import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
 import com.taotao.cloud.health.utils.ExceptionUtils;
-import com.taotao.cloud.mail.template.MailTemplate;
 import com.taotao.cloud.sms.service.SmsService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 
 	private ConcurrentLinkedDeque<Message> messages = new ConcurrentLinkedDeque<>();
 	private AtomicInteger atomicInteger = new AtomicInteger(0);
-	private Object lock = new Object();
+	private final Object lock = new Object();
 	private List<AbstractWarn> warns = new ArrayList<>();
 	private boolean isClose;
 	private DuplicateFilter duplicateFilter;
@@ -72,11 +70,8 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 
 		registerWarn();
 
-		this.monitorThreadPool.monitorSubmit("系统任务:WarnProvider 实时报警任务", () -> {
+		this.monitorThreadPool.monitorSubmit("系统任务: WarnProvider 实时报警任务", () -> {
 			while (!this.monitorThreadPool.monitorIsShutdown() && !isClose) {
-				LogUtil.info(
-					Thread.currentThread().getName() + " =========> 系统任务:WarnProvider 实时报警任务");
-
 				try {
 					notifyRunning();
 				} catch (Exception exp) {
@@ -92,48 +87,69 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		});
 	}
 
+	/**
+	 * registerWarn
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:18:47
+	 */
 	public void registerWarn() {
-		DingerRobot dingerRobot = ContextUtil.getBean(DingerRobot.class, true);
-		if (this.warnProperties.isDingDingWarnEnabled() && Objects.nonNull(dingerRobot)) {
-			warns.add(new DingdingWarn(this.warnProperties, dingerRobot));
+		if (warnProperties.isDingDingWarnEnabled()) {
+			warns.add(new DingdingWarn(warnProperties));
 		}
 
-		MailTemplate mailTemplate = ContextUtil.getBean(MailTemplate.class, false);
-		if (warnProperties.isEmailWarnEnabled() && Objects.nonNull(mailTemplate)) {
-			warns.add(new MailWarn(this.warnProperties, mailTemplate));
+		if (warnProperties.isEmailWarnEnabled()) {
+			warns.add(new MailWarn(warnProperties));
 		}
 
-		SmsService smsService = ContextUtil.getBean(SmsService.class, false);
-		if (warnProperties.isSmsWarnEnabled() && Objects.nonNull(smsService)) {
-			warns.add(new SmsWarn(this.warnProperties, smsService));
+
+		if (warnProperties.isSmsWarnEnabled()) {
+			warns.add(new SmsWarn(warnProperties));
 		}
 	}
 
+	/**
+	 * clearWarn
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:19:01
+	 */
 	public void clearWarn() {
 		warns.clear();
 	}
 
+	/**
+	 * notifyRunning
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:19:04
+	 */
 	private void notifyRunning() {
-		Message temp = new Message();
-		List<Message> allmsgs = getAllmessage();
-		int msgscount = atomicInteger.getAndSet(0);
-		temp.setWarnType(EnumWarnType.WARN);
+		Message msg = new Message();
+		msg.setWarnType(WarnTypeEnum.WARN);
 
-		if (msgscount > 0) {
+		List<Message> msgs = getAllMessage();
+		int msgCount = atomicInteger.getAndSet(0);
+		if (msgCount > 0) {
 			StringBuilder content = new StringBuilder();
-			content.append(String.format("最新报警累计:%s条,详情请查看日志系统,最后%s条报警内容如下:\n", msgscount,
-				this.warnProperties.getCacheCount()));
-			allmsgs.forEach(c -> {
-				if (c.getWarnType().getLevel() > (temp.getWarnType()).getLevel()) {
-					temp.setWarnType(c.getWarnType());
+			content.append(String.format("最新报警累计:%s条,详情请查看日志系统,最后%s条报警内容如下:\n",
+				msgCount,
+				warnProperties.getCacheCount()));
+
+			msgs.forEach(c -> {
+				if (c.getWarnType().getLevel() > (msg.getWarnType()).getLevel()) {
+					msg.setWarnType(c.getWarnType());
 				}
 				content.append(
-					String.format("[%s][%s]内容%s\n", c.getWarnType().getDescription(), c.getTitle(),
+					String.format("[%s][%s]内容%s\n",
+						c.getWarnType().getDescription(),
+						c.getTitle(),
 						c.getContent()));
 			});
-			temp.setTitle(String.format("收到%s条报警", msgscount));
-			temp.setContent(content.toString());
-			notifynow(temp);
+
+			msg.setTitle(String.format("收到%s条报警", msgCount));
+			msg.setContent(content.toString());
+			notifyNow(msg);
 		}
 	}
 
@@ -143,13 +159,26 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	}
 
 	/**
-	 * 方法重载
+	 * notify
+	 *
+	 * @param warnType warnType
+	 * @param title    title
+	 * @param content  content
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:19:41
 	 */
 	public void notify(String warnType, String title, String content) {
-		Message message = new Message(EnumWarnType.valueOf(warnType), title, content);
+		Message message = new Message(WarnTypeEnum.valueOf(warnType), title, content);
 		addMessage(message);
 	}
 
+	/**
+	 * addMessage
+	 *
+	 * @param msg msg
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:19:44
+	 */
 	private void addMessage(Message msg) {
 		atomicInteger.getAndIncrement();
 
@@ -168,46 +197,66 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		}
 	}
 
-	private List<Message> getAllmessage() {
-		List<Message> msgs = new ArrayList<>();
+	/**
+	 * getAllMessage
+	 *
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:20:17
+	 */
+	private List<Message> getAllMessage() {
+		List<Message> msgs = new ArrayList<>(messages.size());
 		synchronized (lock) {
-			messages.forEach(c -> {
-				msgs.add(c);
-			});
+			msgs.addAll(messages);
 			messages.clear();
 		}
 		return msgs;
 	}
 
-	public void notifynow(Message message) {
+	/**
+	 * notifyNow
+	 *
+	 * @param message message
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:20:33
+	 */
+	public void notifyNow(Message message) {
 		notifyMessage0(message);
 	}
 
 	/**
-	 * 方法重载
+	 * notifyNow
+	 *
+	 * @param warnType warnType
+	 * @param title    title
+	 * @param content  content
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:20:38
 	 */
-	public void notifynow(String warnType, String title, String content) {
-		Message message = new Message(EnumWarnType.valueOf(warnType), title, content);
+	public void notifyNow(String warnType, String title, String content) {
+		Message message = new Message(WarnTypeEnum.valueOf(warnType), title, content);
 		notifyMessage0(message);
 	}
 
 	/**
 	 * 方法私有化，避免重载方法循环调用
+	 *
+	 * @param message message
+	 * @author shuigedeng
+	 * @since 2021-09-10 16:20:48
 	 */
 	private void notifyMessage0(Message message) {
-		if (!duplicateFilter.ifDuplicat(message.getContent()) && atomicChannel.get()) {
-			if (message != null && EnumWarnType.ERROR == message.getWarnType()) {
+		if (!duplicateFilter.ifDuplicate(message.getContent()) && atomicChannel.get()) {
+			if (WarnTypeEnum.ERROR == message.getWarnType()) {
 				ExceptionUtils.reportException(message);
 			}
 
-			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 			for (AbstractWarn warn : warns) {
 				message.setTitle(String.format("[%s][%s][%s][%s]%s",
 					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
 					RequestUtil.getIpAddress(),
-					PropertyUtil.getPropertyCache(coreProperties.getEnv().getName(), ""),
-					StringUtil.nullToEmpty(
-						PropertyUtil.getPropertyCache(CoreProperties.SpringApplicationName, "")),
+					PropertyUtil.getProperty(CoreProperties.SpringApplicationName),
+					PropertyUtil.getProperty(CoreProperties.SpringProfilesActive),
 					StringUtil.nullToEmpty(message.getTitle())));
 				warn.notify(message);
 			}
@@ -227,20 +276,34 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 
 	/**
 	 * 简单重复过滤算法 去除数值并hash
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:21:09
 	 */
-	private class DuplicateFilter {
+	private static class DuplicateFilter {
 
 		private WarnProperties warnProperties;
 		private int cacheMax = 100;
-		private volatile List<Integer> cacheTag = new ArrayList(cacheMax + 5);
+		private volatile List<Integer> cacheTag = new ArrayList<>(cacheMax + 5);
 		private long lastClearTime = System.currentTimeMillis();
 
 		public DuplicateFilter(WarnProperties warnProperties) {
 			this.warnProperties = warnProperties;
 		}
 
-		public boolean ifDuplicat(String message) {
-			int hash = StringUtil.nullToEmpty(message).replaceAll("\\d+", "").hashCode();
+		/**
+		 * ifDuplicate
+		 *
+		 * @param message message
+		 * @return boolean
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:21:52
+		 */
+		public boolean ifDuplicate(String message) {
+			int hash = StringUtil.nullToEmpty(message)
+				.replaceAll("\\d+", "")
+				.hashCode();
 
 			//超过1分钟清理
 			if (System.currentTimeMillis() - lastClearTime > TimeUnit.MINUTES.toMillis(
@@ -253,6 +316,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			if (cacheTag.size() >= cacheMax) {
 				cacheTag.clear();
 			}
+
 			if (!cacheTag.contains(hash)) {
 				cacheTag.add(hash);
 				return false;

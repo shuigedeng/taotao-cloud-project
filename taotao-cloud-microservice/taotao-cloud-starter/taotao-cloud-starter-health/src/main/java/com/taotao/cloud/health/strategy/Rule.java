@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.strategy;
 
 import com.taotao.cloud.common.utils.BeanUtil;
@@ -11,57 +26,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.springframework.util.StringUtils;
 
 /**
- * @author: chejiangyi
- * @version: 2019-07-28 11:48 规则引擎
- **/
+ * 规则引擎
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 16:54:40
+ */
 public class Rule {
 
 	/**
 	 * 规则
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:54:58
 	 */
 	public static class RuleInfo implements Serializable {
 
 		private RuleType type;
 		private Object value;
 		private HitCallBack hitCallBack;
-
-		@Override
-		public String toString() {
-			return type.tag + value.toString();
-		}
-
-		public boolean check(Object checkvalue) {
-			if (checkvalue == null) {
-				return false;
-			}
-			try {
-				if (checkvalue instanceof Number) {
-					double checkvaluevalue2 = ((Number) checkvalue).doubleValue();
-					double warnvalue = (BeanUtil.convert(value, Number.class)).doubleValue();
-					if (type == RuleType.less && checkvaluevalue2 < warnvalue) {
-						return true;
-					} else if (type == RuleType.more && checkvaluevalue2 > warnvalue) {
-						return true;
-					} else if (type == RuleType.equal && checkvaluevalue2 == warnvalue) {
-						return true;
-					}
-				} else {
-					String checkvaluevalue2 = checkvalue.toString();
-					String warnvalue = value.toString();
-					if (type == RuleType.equal && checkvaluevalue2 == warnvalue) {
-						return true;
-					} else if (type == RuleType.contain && checkvaluevalue2.contains(warnvalue)) {
-						return true;
-					}
-				}
-			} catch (Exception exp) {
-				LogUtil.error("health", "check 规则检查出错", exp);
-			}
-			return false;
-		}
 
 		public RuleInfo() {
 		}
@@ -71,6 +59,46 @@ public class Rule {
 			this.type = type;
 			this.value = value;
 			this.hitCallBack = hitCallBack;
+		}
+
+		/**
+		 * check
+		 *
+		 * @param checkValue checkValue
+		 * @return boolean
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:04
+		 */
+		public boolean check(Object checkValue) {
+			if (checkValue == null) {
+				return false;
+			}
+
+			try {
+				if (checkValue instanceof Number) {
+					double checkValue2 = ((Number) checkValue).doubleValue();
+					double warnValue = (BeanUtil.convert(value, Number.class)).doubleValue();
+
+					if (type == RuleType.less && checkValue2 < warnValue) {
+						return true;
+					} else if (type == RuleType.more && checkValue2 > warnValue) {
+						return true;
+					} else if (type == RuleType.equal && checkValue2 == warnValue) {
+						return true;
+					}
+				} else {
+					String checkValue2 = checkValue.toString();
+					String warnValue = value.toString();
+					if (type == RuleType.equal && Objects.equals(checkValue2, warnValue)) {
+						return true;
+					} else if (type == RuleType.contain && checkValue2.contains(warnValue)) {
+						return true;
+					}
+				}
+			} catch (Exception exp) {
+				LogUtil.error("health", "check 规则检查出错", exp);
+			}
+			return false;
 		}
 
 		public RuleType getType() {
@@ -100,6 +128,10 @@ public class Rule {
 
 	/**
 	 * 规则分析器
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:55:37
 	 */
 	static public class RulesAnalyzer {
 
@@ -112,22 +144,38 @@ public class Rule {
 			propertyCache.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
 				for (Map.Entry<String, Object> e : map.entrySet()) {
 					String key = e.getKey();
+
 					if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
 						key = key.replace("taotao.cloud.health.strategy.", "");
 						Object rule = rules.get(key);
 						if (rule != null) {
-							registerRules(key,
-								StringUtil.nullToEmpty(e.getValue()));
+							registerRules(key, StringUtil.nullToEmpty(e.getValue()));
 						}
 					}
 				}
 			});
 		}
 
+		/**
+		 * parserRules
+		 *
+		 * @param rules rules
+		 * @return {@link java.util.List }
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:42
+		 */
 		public List<RuleInfo> parserRules(String rules) {
 			return ruleParser.parser(rules);
 		}
 
+		/**
+		 * getRules
+		 *
+		 * @param field field
+		 * @return {@link java.util.List }
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:45
+		 */
 		public List<RuleInfo> getRules(String field) {
 			List<RuleInfo> item = rules.get(field);
 			if (item == null) {
@@ -136,32 +184,65 @@ public class Rule {
 			return rules.get(field);
 		}
 
+		/**
+		 * registerRules
+		 *
+		 * @param field field
+		 * @param rules rules
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:48
+		 */
 		public void registerRules(String field, List<RuleInfo> rules) {
-//            if(this.rules.containsKey(field)) {
-//                this.rules.get(field).addAll(rules);
-//
-//            }else{
+			//if(this.rules.containsKey(field)) {
+			//    this.rules.get(field).addAll(rules);
+			//
+			//}else{
+			//
+			//}
 			this.rules.put(field, rules);
-//            }
 		}
 
+		/**
+		 * registerRules
+		 *
+		 * @param field field
+		 * @param rules rules
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:50
+		 */
 		public void registerRules(String field, String rules) {
 			registerRules(field, ruleParser.parser(rules));
 		}
 
+		/**
+		 * registerRulesByProperties
+		 *
+		 * @param field field
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:53
+		 */
 		public void registerRulesByProperties(String field) {
 			String value = PropertyUtil.getPropertyCache("taotao.cloud.health.strategy." + field,
 				"");
 			registerRules(field, value);
 		}
 
+		/**
+		 * analyse
+		 *
+		 * @param report report
+		 * @return {@link com.taotao.cloud.health.model.Report }
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:55:56
+		 */
 		public Report analyse(Report report) {
-			report.eachReport((fieldname, item) -> {
-				List<RuleInfo> rules = this.getRules(fieldname);
-				if (rules != null) {
+			report.eachReport((fieldName, item) -> {
+				List<RuleInfo> rules = this.getRules(fieldName);
+				if (rules != null && !rules.isEmpty()) {
 					for (RuleInfo ruleInfo : rules) {
 						boolean isWarn = ruleInfo.check(item.getValue());
-						if (isWarn == true) {
+
+						if (isWarn) {
 							item.setWarn("报警");
 							item.setRule(ruleInfo);
 							if (ruleInfo.getHitCallBack() != null) {
@@ -181,14 +262,21 @@ public class Rule {
 		}
 	}
 
+	/**
+	 * RuleType
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:56:05
+	 */
 	public static enum RuleType {
 		more(">", "大于"),
 		less("<", "小于"),
 		equal("=", "等于"),
 		contain("%", "包含");
 
-		private String desc;
-		private String tag;
+		private final String desc;
+		private final String tag;
 
 		RuleType(String tag, String desc) {
 			this.desc = desc;
@@ -207,14 +295,29 @@ public class Rule {
 
 	/**
 	 * 规则解析器
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:56:13
 	 */
 	public static class RuleParser {
 
+		/**
+		 * parser
+		 *
+		 * @param text text
+		 * @return {@link java.util.List }
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:56:27
+		 */
 		public List<RuleInfo> parser(String text) {
 			List<RuleInfo> result = new ArrayList<>();
 			try {
 				if (text.startsWith("[") && text.endsWith("]")) {
-					text = text.replace("[", "").replace("]", "");
+					text = text
+						.replace("[", "")
+						.replace("]", "");
+
 					String[] rules = text.split(";");
 					for (String r : rules) {
 						RuleType type = RuleType.getRuleType(r.charAt(0) + "");
@@ -234,9 +337,20 @@ public class Rule {
 
 	/**
 	 * 命中回调
+	 *
+	 * @author shuigedeng
+	 * @version 2021.9
+	 * @since 2021-09-10 16:56:20
 	 */
 	public interface HitCallBack {
 
+		/**
+		 * run
+		 *
+		 * @param value value
+		 * @author shuigedeng
+		 * @since 2021-09-10 16:56:24
+		 */
 		void run(Object value);
 	}
 }

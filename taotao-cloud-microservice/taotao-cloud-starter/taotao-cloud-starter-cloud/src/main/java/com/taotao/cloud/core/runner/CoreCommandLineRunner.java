@@ -58,7 +58,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 
 		String strArgs = String.join("|", args);
 		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)
-			+ "-- started with arguments length: {}, args: {}", args.length, strArgs);
+			+ " -- started with arguments length: {}, args: {}", args.length, strArgs);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 				}
 			});
 
-			thread.setName("taotao-cloud-core-context-refresh-thread");
+			thread.setName("taotao-cloud-context-refresh-thread");
 			thread.setDaemon(false);
 			thread.start();
 		}

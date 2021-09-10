@@ -5,8 +5,8 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
-import com.taotao.cloud.health.model.FieldReport;
-import com.taotao.cloud.health.model.HealthException;
+import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.exception.HealthException;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**

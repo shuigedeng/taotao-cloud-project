@@ -13,42 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.export;
+package com.taotao.cloud.health.annotation;
 
-import com.taotao.cloud.health.model.Report;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * AbstractExport
+ * FieldReport
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-10 17:13:39
+ * @since 2021-09-10 16:06:35
  */
-public class AbstractExport implements AutoCloseable {
+@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface FieldReport {
 
 	/**
-	 * start
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:43
+	 * 唯一名称
 	 */
-	public void start() {
-
-	}
+	String name() default "";
 
 	/**
-	 * run
-	 *
-	 * @param report report
-	 * @author shuigedeng
-	 * @since 2021-09-10 17:13:46
+	 * 描述
 	 */
-	public void run(Report report) {
-
-	}
-
-	@Override
-	public void close() {
-
-	}
+	String desc() default "";
 }
