@@ -1,4 +1,4 @@
-package com.taotao.cloud.health.filter;
+package com.taotao.cloud.health.interceptor;
 
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.properties.DoubtApiProperties;
@@ -17,11 +17,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
  */
 public class DoubtApiInterceptor implements HandlerInterceptor {
 
-	ThreadLocal<Long> beforeMem = new ThreadLocal<>();
-	Map<String, DoubtApiInfo> statisticMap = new ConcurrentHashMap<>();
-	DoubtApiProperties properties;
+	private ThreadLocal<Long> beforeMem = new ThreadLocal<>();
+	private Map<String, DoubtApiInfo> statisticMap = new ConcurrentHashMap<>();
+	private DoubtApiProperties properties;
+	private Collector collector;
 
-	public DoubtApiInterceptor(DoubtApiProperties properties) {
+	public DoubtApiInterceptor(Collector collector,DoubtApiProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -67,7 +69,7 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 					statisticMap.put(methodPath, staticInfo);
 				}
 
-				Collector.DEFAULT.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
+				this.collector.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
 			}
 		}
 	}

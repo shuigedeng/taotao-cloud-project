@@ -16,6 +16,8 @@ package com.taotao.cloud.core.configuration;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.core.http.HttpClientManager;
+import com.taotao.cloud.core.properties.HttpClientProperties;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -54,14 +56,18 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 	 */
 	private static final int READ_TIMEOUT = 90 * 1000;
 
+	@Bean
+	public HttpClientManager httpClientManager() {
+		return new HttpClientManager();
+	}
+
 	@Bean(destroyMethod = "close")
-	public DefaultHttpClient getDefaultHttpClient() {
+	public DefaultHttpClient getDefaultHttpClient(HttpClientManager httpClientManager) {
 		LogUtil.started(DefaultHttpClient.class, StarterNameConstant.CLOUD_STARTER);
 
-		if (DefaultHttpClient.DEFAULT == null || DefaultHttpClient.DEFAULT.isClose()) {
-			DefaultHttpClient.initDefault();
-		}
-		return DefaultHttpClient.DEFAULT;
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(HttpClientProperties.toMap(),
+			httpClientManager);
+		return httpClientManager.register("taotao.cloud.core.http.httpclient", defaultHttpClient);
 	}
 
 	@Bean

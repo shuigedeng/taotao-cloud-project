@@ -1,6 +1,5 @@
 package com.taotao.cloud.health.properties;
 
-import com.taotao.cloud.common.utils.ContextUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -9,10 +8,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 public class WarnProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.warn";
-
-	public static WarnProperties Default() {
-		return ContextUtil.getApplicationContext().getBean(WarnProperties.class);
-	}
 
 	/**
 	 * 报警是否开启
@@ -34,30 +29,14 @@ public class WarnProperties {
 	 */
 	private int duplicateTimeSpan = 2;
 
-	/**
-	 * 钉钉报警系统token
-	 */
-	private String dingdingSystemAccessToken;
-
-	/**
-	 * 钉钉报警项目token
-	 */
-	private String dingdingProjectAccessToken;
+	private boolean dingDingWarnEnabled = true;
+	private boolean smsWarnEnabled = true;
+	private boolean emailWarnEnabled = true;
 
 	/**
 	 * 钉钉报警过滤ip
 	 */
 	private String dingdingFilterIP;
-
-	/**
-	 * 飞书报警系统token
-	 */
-	private String flybookSystemAccessToken;
-
-	/**
-	 * 飞书报警项目token
-	 */
-	private String flybookProjectAccessToken;
 
 	/**
 	 * 飞书报警过滤ip
@@ -96,22 +75,6 @@ public class WarnProperties {
 		this.duplicateTimeSpan = duplicateTimeSpan;
 	}
 
-	public String getDingdingSystemAccessToken() {
-		return dingdingSystemAccessToken;
-	}
-
-	public void setDingdingSystemAccessToken(String dingdingSystemAccessToken) {
-		this.dingdingSystemAccessToken = dingdingSystemAccessToken;
-	}
-
-	public String getDingdingProjectAccessToken() {
-		return dingdingProjectAccessToken;
-	}
-
-	public void setDingdingProjectAccessToken(String dingdingProjectAccessToken) {
-		this.dingdingProjectAccessToken = dingdingProjectAccessToken;
-	}
-
 	public String getDingdingFilterIP() {
 		return dingdingFilterIP;
 	}
@@ -120,27 +83,35 @@ public class WarnProperties {
 		this.dingdingFilterIP = dingdingFilterIP;
 	}
 
-	public String getFlybookSystemAccessToken() {
-		return flybookSystemAccessToken;
-	}
-
-	public void setFlybookSystemAccessToken(String flybookSystemAccessToken) {
-		this.flybookSystemAccessToken = flybookSystemAccessToken;
-	}
-
-	public String getFlybookProjectAccessToken() {
-		return flybookProjectAccessToken;
-	}
-
-	public void setFlybookProjectAccessToken(String flybookProjectAccessToken) {
-		this.flybookProjectAccessToken = flybookProjectAccessToken;
-	}
-
 	public String getFlybookFilterIP() {
 		return flybookFilterIP;
 	}
 
 	public void setFlybookFilterIP(String flybookFilterIP) {
 		this.flybookFilterIP = flybookFilterIP;
+	}
+
+	public boolean isDingDingWarnEnabled() {
+		return dingDingWarnEnabled;
+	}
+
+	public void setDingDingWarnEnabled(boolean dingDingWarnEnabled) {
+		this.dingDingWarnEnabled = dingDingWarnEnabled;
+	}
+
+	public boolean isSmsWarnEnabled() {
+		return smsWarnEnabled;
+	}
+
+	public void setSmsWarnEnabled(boolean smsWarnEnabled) {
+		this.smsWarnEnabled = smsWarnEnabled;
+	}
+
+	public boolean isEmailWarnEnabled() {
+		return emailWarnEnabled;
+	}
+
+	public void setEmailWarnEnabled(boolean emailWarnEnabled) {
+		this.emailWarnEnabled = emailWarnEnabled;
 	}
 }

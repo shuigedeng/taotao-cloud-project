@@ -1,4 +1,4 @@
-package com.taotao.cloud.health.filter;
+package com.taotao.cloud.health.interceptor;
 
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.model.Collector;
@@ -24,6 +24,11 @@ import org.apache.ibatis.session.RowBounds;
 	@Signature(method = "update", type = Executor.class, args = {MappedStatement.class,
 		Object.class})})
 public class SqlMybatisInterceptor implements Interceptor {
+	private Collector collector;
+
+	public SqlMybatisInterceptor(Collector collector) {
+		this.collector = collector;
+	}
 
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
@@ -38,7 +43,7 @@ public class SqlMybatisInterceptor implements Interceptor {
 		String sql = boundSql.getSql();
 
 		try {
-			Object returnObj = Collector.DEFAULT.hook("taotao.cloud.health.mybatis.sql.hook").run(
+			Object returnObj = this.collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
 				StringUtil.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
 					try {
 						return invocation.proceed();

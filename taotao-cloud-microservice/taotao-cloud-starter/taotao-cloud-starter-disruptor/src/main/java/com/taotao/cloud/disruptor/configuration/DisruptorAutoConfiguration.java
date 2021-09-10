@@ -53,10 +53,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ThreadFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -106,12 +106,12 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 		return WaitStrategys.YIELDING_WAIT;
 	}
 
-	@Bean("disruptorThreadFactory")
-	@ConditionalOnMissingBean
-	public ThreadFactory threadFactory() {
-		LogUtil.started(DisruptorEventThreadFactory.class, StarterNameConstant.DISRUPTOR_STARTER);
-		return new DisruptorEventThreadFactory();
-	}
+	//@Bean("disruptorThreadFactory")
+	//@ConditionalOnMissingBean(name = "disruptorThreadFactory")
+	//public ThreadFactory threadFactory() {
+	//	LogUtil.started(DisruptorEventThreadFactory.class, StarterNameConstant.DISRUPTOR_STARTER);
+	//	return new DisruptorEventThreadFactory();
+	//}
 
 	@Bean
 	@ConditionalOnMissingBean
@@ -298,12 +298,13 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	public Disruptor<DisruptorEvent> disruptor(
 		DisruptorProperties properties,
 		WaitStrategy waitStrategy,
-		@Qualifier("disruptorThreadFactory") ThreadFactory threadFactory,
 		EventFactory<DisruptorEvent> eventFactory,
 		@Qualifier("disruptorEventHandlers") List<DisruptorEventDispatcher> disruptorEventHandlers) {
 
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
 		LogUtil.started(Disruptor.class, StarterNameConstant.DISRUPTOR_STARTER);
+
+		DisruptorEventThreadFactory threadFactory = new DisruptorEventThreadFactory();
 
 		Disruptor<DisruptorEvent> disruptor;
 		if (properties.isMultiProducer()) {

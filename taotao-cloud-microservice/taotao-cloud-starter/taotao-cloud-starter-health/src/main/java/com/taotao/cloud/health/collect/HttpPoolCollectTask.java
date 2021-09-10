@@ -17,8 +17,11 @@ import org.apache.http.pool.PoolStats;
 public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
+	private HttpClientManager httpClientManager;
 
-	public HttpPoolCollectTask(CollectTaskProperties properties) {
+	public HttpPoolCollectTask(HttpClientManager httpClientManager,
+		CollectTaskProperties properties) {
+		this.httpClientManager = httpClientManager;
 		this.properties = properties;
 	}
 
@@ -44,9 +47,8 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		ConcurrentHashMap<String, DefaultHttpClient> pool = ReflectionUtil.getFieldValue(
-			HttpClientManager.DEFAULT, "pool");
-		if (pool == null) {
+		ConcurrentHashMap<String, DefaultHttpClient> pool = httpClientManager.getPool();
+		if (pool == null && pool.isEmpty()) {
 			return null;
 		}
 

@@ -12,9 +12,6 @@ import java.util.HashMap;
  */
 public class WarnTemplate extends HashMap<String, String> {
 
-	public static WarnTemplate Default = new WarnTemplate()
-		.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
-
 	public WarnTemplate register(String filed, String template) {
 		if (!this.containsKey(filed)) {
 			this.put(filed, template);

@@ -1,4 +1,4 @@
-package com.taotao.cloud.health.filter;
+package com.taotao.cloud.health.interceptor;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.Serializable;

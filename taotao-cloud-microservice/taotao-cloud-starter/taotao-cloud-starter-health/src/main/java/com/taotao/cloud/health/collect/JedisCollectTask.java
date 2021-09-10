@@ -18,8 +18,10 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
 public class JedisCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
+	private Collector collector;
 
-	public JedisCollectTask(CollectTaskProperties properties) {
+	public JedisCollectTask(Collector collector, CollectTaskProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -53,12 +55,12 @@ public class JedisCollectTask extends AbstractCollectTask {
 
 				JedisInfo info = new JedisInfo();
 				String name = "jedis.cluster";
-				info.detail = (String) Collector.DEFAULT.value(name + ".pool.detail").get();
-				info.wait = (Integer) Collector.DEFAULT.value(name + ".pool.wait").get();
-				info.active = (Integer) Collector.DEFAULT.value(name + ".pool.active").get();
-				info.idle = (Integer) Collector.DEFAULT.value(name + ".pool.idle").get();
-				info.lockInfo = (String) Collector.DEFAULT.value(name + ".lock.error.detail").get();
-				Hook hook = Collector.DEFAULT.hook(name + ".hook");
+				info.detail = (String) this.collector.value(name + ".pool.detail").get();
+				info.wait = (Integer) this.collector.value(name + ".pool.wait").get();
+				info.active = (Integer) this.collector.value(name + ".pool.active").get();
+				info.idle = (Integer) this.collector.value(name + ".pool.idle").get();
+				info.lockInfo = (String) this.collector.value(name + ".lock.error.detail").get();
+				Hook hook = this.collector.hook(name + ".hook");
 				if (hook != null) {
 					info.hookCurrent = hook.getCurrent();
 					info.hookError = hook.getLastErrorPerSecond();

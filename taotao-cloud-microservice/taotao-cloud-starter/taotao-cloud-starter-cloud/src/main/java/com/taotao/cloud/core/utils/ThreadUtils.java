@@ -15,8 +15,9 @@
  */
 package com.taotao.cloud.core.utils;
 
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.core.model.Callable;
-import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import java.util.Collection;
 
 /**
@@ -39,13 +40,15 @@ public class ThreadUtils {
 	 * @since 2021-09-02 20:57:35
 	 */
 	public static <T> void parallelFor(String taskName, int parallelCount, Collection<T> taskList,
-			final Callable.Action1<T> action) {
+		final Callable.Action1<T> action) {
 		if (parallelCount < 2) {
 			for (T t : taskList) {
 				action.invoke(t);
 			}
 		} else {
-			ThreadPool.DEFAULT.parallelFor2(taskName, parallelCount, taskList, action);
+			MonitorThreadPool monitorThreadPool = ContextUtil.getBean(MonitorThreadPool.class,
+				false);
+			monitorThreadPool.monitorParallelFor2(taskName, parallelCount, taskList, action);
 		}
 	}
 }

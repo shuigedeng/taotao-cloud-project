@@ -17,23 +17,115 @@ package com.taotao.cloud.core.runner;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+import org.springframework.beans.BeansException;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.util.ReflectionUtils;
 
 /**
- * CoreCommandLineRunner 
+ * CoreCommandLineRunner
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:59:18
  */
-public class CoreCommandLineRunner implements CommandLineRunner {
+public class CoreCommandLineRunner implements CommandLineRunner, ApplicationContextAware {
+
+	private PropertyCache propertyCache;
+	private CoreProperties coreProperties;
+	private ApplicationContext applicationContext;
+
+	public CoreCommandLineRunner(PropertyCache propertyCache,
+		CoreProperties coreProperties) {
+		this.propertyCache = propertyCache;
+		this.coreProperties = coreProperties;
+	}
 
 	@Override
 	public void run(String... args) {
+		registerContextRefreshEvent();
+
 		String strArgs = String.join("|", args);
 		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName)
 			+ "-- started with arguments length: {}, args: {}", args.length, strArgs);
+	}
+
+	/**
+	 * registerContextRefreshEvent
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:23:36
+	 */
+	private void registerContextRefreshEvent() {
+		propertyCache.listenUpdateCache("通过配置刷新上下文监听", (data) -> {
+			if (data != null && data.size() > 0) {
+
+				for (Map.Entry<String, Object> e : data.entrySet()) {
+					if (!coreProperties.isContextRestartEnabled()) {
+						return;
+					}
+
+					if (e.getKey().equalsIgnoreCase(CoreProperties.ContextRestartText)) {
+						refreshContext();
+						return;
+					}
+				}
+			}
+		});
+	}
+
+	/**
+	 * refreshContext
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-02 20:23:39
+	 */
+	private void refreshContext() {
+		if (ContextUtil.getApplicationContext() != null) {
+			if (ContextUtil.mainClass == null) {
+				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
+					+ " 检测到重启上下文事件,因无法找到启动类，重启失败!!!");
+				return;
+			}
+
+			ConfigurableApplicationContext context = (ConfigurableApplicationContext) applicationContext;
+			ApplicationArguments args = context.getBean(ApplicationArguments.class);
+
+			int waitTime = new Random(UUID.randomUUID().getMostSignificantBits()).nextInt(
+				coreProperties.getContextRestartTimespan());
+
+			Thread thread = new Thread(() -> {
+				try {
+					Thread.sleep(waitTime);
+					context.stop();
+					context.close();
+					ReflectionUtils.findMethod(ContextUtil.mainClass, "main")
+						.invoke(null, new Object[]{args.getSourceArgs()});
+				} catch (Exception exp) {
+					LogUtil.error(PropertyUtil.getProperty(SpringApplicationName) + "根据启动类"
+						+ ContextUtil.mainClass.getName() + "动态启动main失败");
+				}
+			});
+
+			thread.setName("taotao-cloud-core-context-refresh-thread");
+			thread.setDaemon(false);
+			thread.start();
+		}
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 }

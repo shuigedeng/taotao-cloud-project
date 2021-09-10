@@ -13,8 +13,10 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
 public class MybatisCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
+	private Collector collector;
 
-	public MybatisCollectTask(CollectTaskProperties properties) {
+	public MybatisCollectTask(Collector collector,CollectTaskProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -42,7 +44,7 @@ public class MybatisCollectTask extends AbstractCollectTask {
 	protected Object getData() {
 		SqlMybatisInfo info = new SqlMybatisInfo();
 
-		Hook hook = Collector.DEFAULT.hook("taotao.cloud.health.collect.mybatis.sql.hook");
+		Hook hook = this.collector.hook("taotao.cloud.health.collect.mybatis.sql.hook");
 		if (hook != null) {
 			info.hookCurrent = hook.getCurrent();
 			info.hookError = hook.getLastErrorPerSecond();

@@ -1,5 +1,23 @@
-package com.taotao.cloud.mail.core;
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.taotao.cloud.mail.template;
 
+import java.io.File;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -7,15 +25,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.util.ObjectUtils;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.File;
-
-
 /**
- * JavaMail邮件发送者实现类
+ * JavaMailTemplate
  *
- * @author xuzhanfu
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-09 11:41:05
  */
 public class JavaMailTemplate implements MailTemplate {
 
@@ -43,14 +58,16 @@ public class JavaMailTemplate implements MailTemplate {
 	}
 
 	@Override
-	public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException {
+	public void sendHtmlMail(String to, String subject, String content, String... cc)
+		throws MessagingException {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = buildHelper(to, subject, content, message, cc);
 		mailSender.send(message);
 	}
 
 	@Override
-	public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc) throws MessagingException {
+	public void sendAttachmentsMail(String to, String subject, String content, String filePath,
+		String... cc) throws MessagingException {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = buildHelper(to, subject, content, message, cc);
 		FileSystemResource file = new FileSystemResource(new File(filePath));
@@ -60,7 +77,8 @@ public class JavaMailTemplate implements MailTemplate {
 	}
 
 	@Override
-	public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc) throws MessagingException {
+	public void sendResourceMail(String to, String subject, String content, String rscPath,
+		String rscId, String... cc) throws MessagingException {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = buildHelper(to, subject, content, message, cc);
 		FileSystemResource res = new FileSystemResource(new File(rscPath));
@@ -70,6 +88,7 @@ public class JavaMailTemplate implements MailTemplate {
 
 	/**
 	 * 统一封装MimeMessageHelper
+	 *
 	 * @param to      收件人地址
 	 * @param subject 邮件主题
 	 * @param content 邮件内容
@@ -78,7 +97,8 @@ public class JavaMailTemplate implements MailTemplate {
 	 * @return MimeMessageHelper
 	 * @throws MessagingException 异常
 	 */
-	private MimeMessageHelper buildHelper(String to, String subject, String content, MimeMessage message, String... cc) throws MessagingException {
+	private MimeMessageHelper buildHelper(String to, String subject, String content,
+		MimeMessage message, String... cc) throws MessagingException {
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 		helper.setFrom(mailProperties.getUsername());
 		helper.setTo(to);

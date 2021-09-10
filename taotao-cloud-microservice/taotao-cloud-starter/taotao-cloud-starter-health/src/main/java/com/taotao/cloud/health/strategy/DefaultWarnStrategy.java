@@ -3,6 +3,7 @@ package com.taotao.cloud.health.strategy;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.health.collect.IOCollectTask;
 import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.health.strategy.Rule.RulesAnalyzer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,12 +16,11 @@ import java.util.List;
  **/
 public class DefaultWarnStrategy {
 
-	public static DefaultWarnStrategy Default = new DefaultWarnStrategy(new Rule.RulesAnalyzer());
 	protected static int maxCacheSize = 3;
 	protected static List<Report> cacheReports = Collections.synchronizedList(
 		new ArrayList<>(maxCacheSize + 2));
 	protected Rule.RulesAnalyzer rulesAnalyzer;
-	protected WarnTemplate warnTemplate = WarnTemplate.Default;
+	protected WarnTemplate warnTemplate;
 
 	public Rule.RulesAnalyzer getRulesAnalyzer() {
 		return rulesAnalyzer;
@@ -30,7 +30,8 @@ public class DefaultWarnStrategy {
 		return warnTemplate;
 	}
 
-	public DefaultWarnStrategy(Rule.RulesAnalyzer rulesAnalyzer) {
+	public DefaultWarnStrategy(WarnTemplate warnTemplate, Rule.RulesAnalyzer rulesAnalyzer) {
+		this.warnTemplate = warnTemplate;
 		this.rulesAnalyzer = rulesAnalyzer;
 
 		this.setDefaultStrategy();

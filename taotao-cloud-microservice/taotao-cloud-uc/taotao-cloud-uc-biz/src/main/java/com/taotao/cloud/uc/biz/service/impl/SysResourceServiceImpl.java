@@ -33,12 +33,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -132,6 +135,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		return sysResourceRepository.exists(predicate);
 	}
 
+
 	@Override
 	public List<SysResource> findResourceByIdList(List<Long> idList) {
 		return sysResourceRepository.findResourceByIdList(idList);
@@ -223,29 +227,29 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
 		//try {
-			LogUtil.info("1.添加资源信息");
-			SysResource sysResource = SysResource.builder()
-				.name("资源三")
-				.type((byte) 1)
-				.parentId(0L)
-				.sortNum(2)
-				.build();
-			saveResource(sysResource);
+		LogUtil.info("1.添加资源信息");
+		SysResource sysResource = SysResource.builder()
+			.name("资源三")
+			.type((byte) 1)
+			.parentId(0L)
+			.sortNum(2)
+			.build();
+		saveResource(sysResource);
 
-			String traceId = TraceContext.traceId();
-			LogUtil.info("skywalking traceid ===> {0}", traceId);
+		String traceId = TraceContext.traceId();
+		LogUtil.info("skywalking traceid ===> {0}", traceId);
 
-			LogUtil.info("1.远程添加订单信息");
-			OrderDTO orderDTO = OrderDTO.builder()
-				.memberId(2L)
-				.code("33332")
-				.amount(BigDecimal.ZERO)
-				.mainStatus(1)
-				.childStatus(1)
-				.receiverName("shuigedeng")
-				.receiverPhone("15730445330")
-				.receiverAddressJson("sjdlasjdfljsldf")
-				.build();
+		LogUtil.info("1.远程添加订单信息");
+		OrderDTO orderDTO = OrderDTO.builder()
+			.memberId(2L)
+			.code("33332")
+			.amount(BigDecimal.ZERO)
+			.mainStatus(1)
+			.childStatus(1)
+			.receiverName("shuigedeng")
+			.receiverPhone("15730445330")
+			.receiverAddressJson("sjdlasjdfljsldf")
+			.build();
 
 		//Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
 		//if(orderVOResult.getCode() != 200){
@@ -253,9 +257,8 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		//}
 		//LogUtil.info("OrderVO ===> {0}", orderVOResult);
 
-
 		OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
-			LogUtil.info("OrderVO ====> {}", orderVO);
+		LogUtil.info("OrderVO ====> {}", orderVO);
 
 		//} catch (Exception e) {
 		//	try {
@@ -275,5 +278,22 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		//LogUtil.info("OrderVO ====> {}", orderInfoByCode1);
 
 		return true;
+	}
+
+	@Async
+	@Override
+	public Future<Boolean> testAsync() {
+		long start = System.currentTimeMillis();
+
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		long end = System.currentTimeMillis();
+
+		LogUtil.info(Thread.currentThread().getName() + "======" + (end - start));
+		return AsyncResult.forValue(true);
 	}
 }

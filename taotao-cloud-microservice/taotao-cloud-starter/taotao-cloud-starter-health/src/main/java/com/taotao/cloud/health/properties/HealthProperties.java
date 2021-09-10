@@ -10,10 +10,6 @@ public class HealthProperties {
 
 	public static final String PREFIX = "taotao.cloud.health";
 
-	public static HealthProperties Default() {
-		return ContextUtil.getApplicationContext().getBean(HealthProperties.class);
-	}
-
 	/**
 	 * 是否开启健康检查
 	 */

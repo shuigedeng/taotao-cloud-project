@@ -40,12 +40,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * @since 2021-09-02 20:30:39
  */
 public class Collector {
-
-	/**
-	 * 默认实例
-	 */
-	public static Collector DEFAULT = new Collector();
-
 	/**
 	 * map
 	 */
@@ -792,5 +786,13 @@ public class Collector {
 			}
 			return sb.toString();
 		}
+	}
+
+	public Map<String, Object> getMap() {
+		return map;
+	}
+
+	public Object getLock() {
+		return lock;
 	}
 }

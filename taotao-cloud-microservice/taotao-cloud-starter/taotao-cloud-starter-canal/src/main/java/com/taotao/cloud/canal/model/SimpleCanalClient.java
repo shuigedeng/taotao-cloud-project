@@ -22,7 +22,7 @@ import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.thread.ThreadPool.DefaultThreadPoolUncaughtExceptionHandler;
+import com.taotao.cloud.core.monitor.MonitorThreadPool.MonitorThreadPoolUncaughtExceptionHandler;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -79,9 +79,9 @@ public class SimpleCanalClient extends AbstractCanalClient {
 					t.setName("taotao-cloud-canal-thread-" + t.getName());
 
 					UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
-					if (!(handler instanceof DefaultThreadPoolUncaughtExceptionHandler)) {
+					if (!(handler instanceof MonitorThreadPoolUncaughtExceptionHandler)) {
 						t.setUncaughtExceptionHandler(
-							new DefaultThreadPoolUncaughtExceptionHandler(handler));
+							new MonitorThreadPoolUncaughtExceptionHandler(handler));
 					}
 
 					//后台线程模式

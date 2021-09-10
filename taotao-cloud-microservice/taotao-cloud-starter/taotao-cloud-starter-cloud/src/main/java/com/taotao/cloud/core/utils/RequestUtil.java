@@ -259,10 +259,10 @@ public class RequestUtil {
 	 */
 	public static String getBodyString(ServerHttpRequest serverHttpRequest) {
 		HttpMessageReader<byte[]> httpMessageReader = new DecoderHttpMessageReader(
-				new ByteArrayDecoder());
+			new ByteArrayDecoder());
 		ResolvableType resolvableType = ResolvableType.forClass(byte[].class);
 		Mono<byte[]> mono = httpMessageReader
-				.readMono(resolvableType, serverHttpRequest, Collections.emptyMap());
+			.readMono(resolvableType, serverHttpRequest, Collections.emptyMap());
 		return mono.map(String::new).block();
 	}
 
@@ -317,7 +317,7 @@ public class RequestUtil {
 	public static HttpServletRequest getHttpServletRequest() {
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 		return (requestAttributes == null) ? null
-				: ((ServletRequestAttributes) requestAttributes).getRequest();
+			: ((ServletRequestAttributes) requestAttributes).getRequest();
 	}
 
 	/**
@@ -498,12 +498,12 @@ public class RequestUtil {
 	public static String getIpAddress0() {
 		try {
 			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
-					.getNetworkInterfaces();
+				.getNetworkInterfaces();
 			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
 				NetworkInterface netInterface = allNetInterfaces.nextElement();
 				if (netInterface.isLoopback() || netInterface.isVirtual() || !netInterface.isUp()
-						|| netInterface.isPointToPoint()) {
+					|| netInterface.isPointToPoint()) {
 				} else {
 					Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
 					while (addresses.hasMoreElements()) {
@@ -531,7 +531,7 @@ public class RequestUtil {
 	public static String getIpAddressMatched(String regex) {
 		try {
 			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
-					.getNetworkInterfaces();
+				.getNetworkInterfaces();
 			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
 				NetworkInterface netInterface = allNetInterfaces.nextElement();
@@ -568,7 +568,7 @@ public class RequestUtil {
 	public static String getIpAddressExMatched(String regex) {
 		try {
 			Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface
-					.getNetworkInterfaces();
+				.getNetworkInterfaces();
 			InetAddress ip;
 			while (allNetInterfaces.hasMoreElements()) {
 				NetworkInterface netInterface = allNetInterfaces.nextElement();

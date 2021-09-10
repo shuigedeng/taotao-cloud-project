@@ -13,9 +13,12 @@ import java.util.concurrent.atomic.AtomicLong;
  * @date 2019-10-23
  */
 public class LogStatisticCollectTask extends AbstractCollectTask {
-	private CollectTaskProperties properties;
 
-	public LogStatisticCollectTask(CollectTaskProperties properties) {
+	private CollectTaskProperties properties;
+	private Collector collector;
+
+	public LogStatisticCollectTask(Collector collector, CollectTaskProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -42,12 +45,14 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 	@Override
 	protected Object getData() {
 		LogErrorInfo data = new LogErrorInfo();
-		data.logerrorCount = Collector.DEFAULT.value("taotao.cloud.health.collect.log.error.count").get() == null ? 0
-			: ((AtomicLong) (Collector.DEFAULT.value("taotao.cloud.health.collect.log.error.count")
-				.get())).intValue();
-		data.logIncreCount = Collector.DEFAULT.value("taotao.cloud.health.collect.log.incre.count").get() == null ? 0
-			: ((AtomicLong) (Collector.DEFAULT.value("taotao.cloud.health.collect.log.incre.count")
-				.get())).intValue();
+		data.logerrorCount =
+			this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null ? 0
+				: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.error.count")
+					.get())).intValue();
+		data.logIncreCount =
+			this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null ? 0
+				: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.incre.count")
+					.get())).intValue();
 		return data;
 	}
 

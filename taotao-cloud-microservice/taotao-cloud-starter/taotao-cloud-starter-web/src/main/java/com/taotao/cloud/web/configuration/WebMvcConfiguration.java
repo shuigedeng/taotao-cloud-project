@@ -321,7 +321,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Bean
-	public FilterRegistrationBean<VersionFilter> lbIsolationFilterFilterRegistrationBean() {
+	public FilterRegistrationBean<VersionFilter> lbIsolationFilter() {
 		LogUtil.started(VersionFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
@@ -333,7 +333,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Bean
-	public FilterRegistrationBean<TenantFilter> tenantFilterFilterRegistrationBean() {
+	public FilterRegistrationBean<TenantFilter> tenantFilter() {
 		LogUtil.started(TenantFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
@@ -345,7 +345,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Bean
-	public FilterRegistrationBean<TraceFilter> traceFilterFilterRegistrationBean() {
+	public FilterRegistrationBean<TraceFilter> traceFilter() {
 		LogUtil.started(TraceFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
@@ -357,7 +357,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Bean
-	public FilterRegistrationBean<WebContextFilter> webContextFilterFilterRegistrationBean() {
+	public FilterRegistrationBean<WebContextFilter> webContextFilter() {
 		LogUtil.started(WebContextFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();

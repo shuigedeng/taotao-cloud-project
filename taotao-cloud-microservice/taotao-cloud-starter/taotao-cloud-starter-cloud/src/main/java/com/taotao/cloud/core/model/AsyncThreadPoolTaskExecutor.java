@@ -58,7 +58,7 @@ public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
 	@Override
 	public <T> Future<T> submit(Callable<T> task) {
-		Callable ttlCallable = TtlCallable.get(task);
+		Callable<T> ttlCallable = TtlCallable.get(task);
 		showThreadPoolInfo("submit(Callable<T> task)");
 		return super.submit(ttlCallable);
 	}
@@ -79,7 +79,7 @@ public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
 	@Override
 	public <T> ListenableFuture<T> submitListenable(Callable<T> task) {
-		Callable ttlCallable = TtlCallable.get(task);
+		Callable<T> ttlCallable = TtlCallable.get(task);
 		showThreadPoolInfo("submitListenable(Callable<T> task)");
 		return super.submitListenable(ttlCallable);
 	}

@@ -13,26 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.annotation;
+package com.taotao.cloud.mail.properties;
 
-import com.taotao.cloud.health.configuration.HealthConfiguration;
-import com.taotao.cloud.health.configuration.HealthSqlMybatisConfiguration;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
- * EnableTaoTaoCloudHealth
+ * RedisLockProperties
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-09 11:04:13
+ * @since 2021-09-07 21:15:27
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Import({HealthSqlMybatisConfiguration.class, HealthConfiguration.class})
-public @interface EnableTaoTaoCloudHealth {
+@RefreshScope
+@ConfigurationProperties(prefix = MailProperties.PREFIX)
+public class MailProperties {
 
+	public static final String PREFIX = "taotao.cloud.mail";
+
+	private boolean enabled = true;
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

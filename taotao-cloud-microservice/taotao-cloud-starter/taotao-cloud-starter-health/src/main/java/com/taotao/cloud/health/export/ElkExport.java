@@ -23,24 +23,21 @@ import org.slf4j.LoggerFactory;
  **/
 public class ElkExport extends AbstractExport {
 
+	private ExportProperties exportProperties;
 	private LogstashTcpSocketAppender appender;
 
+	public ElkExport(ExportProperties exportProperties,
+		LogstashTcpSocketAppender appender) {
+		this.exportProperties = exportProperties;
+		this.appender = appender;
+	}
 
 	@Override
 	public void start() {
 		super.start();
 		ILoggerFactory log = LoggerFactory.getILoggerFactory();
 		if (log instanceof Context) {
-			appender = new LogstashTcpSocketAppender();
 			appender.setContext((Context) log);
-			String[] destinations = ExportProperties.Default().getElkDestinations();
-			if (destinations == null || destinations.length == 0) {
-				return;
-			}
-
-			for (String destination : destinations) {
-				appender.addDestination(destination);
-			}
 
 			LogstashEncoder encoder = new LogstashEncoder();
 			String appname =
@@ -55,7 +52,7 @@ public class ElkExport extends AbstractExport {
 
 	@Override
 	public void run(Report report) {
-		if (appender == null || !ExportProperties.Default().isElkEnabled()) {
+		if (appender == null || !this.exportProperties.isElkEnabled()) {
 			return;
 		}
 		Map<String, Object> map = new LinkedHashMap<>();

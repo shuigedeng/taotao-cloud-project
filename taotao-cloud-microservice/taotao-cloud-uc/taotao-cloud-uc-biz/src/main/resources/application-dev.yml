@@ -26,6 +26,7 @@ redisson:
   single-server-config:
     address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
+
 dubbo:
   application:
     id: ${spring.application.name}

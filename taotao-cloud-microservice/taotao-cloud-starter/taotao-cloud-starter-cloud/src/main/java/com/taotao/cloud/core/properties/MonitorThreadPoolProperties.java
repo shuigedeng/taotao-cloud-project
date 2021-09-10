@@ -49,7 +49,7 @@ public class MonitorThreadPoolProperties {
 	/**
 	 * 线程池前缀
 	 */
-	private String threadNamePrefix = "taotao-cloud-core-monitor-threadpool-";
+	private String threadNamePrefix = "taotao-cloud-core-monitor-threadpool";
 
 	public int getCorePoolSize() {
 		return corePoolSize;

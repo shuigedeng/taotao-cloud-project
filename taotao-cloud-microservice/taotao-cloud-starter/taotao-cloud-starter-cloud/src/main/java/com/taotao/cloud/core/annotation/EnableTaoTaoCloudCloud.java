@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.annotation;
+package com.taotao.cloud.core.annotation;
 
-import com.taotao.cloud.health.configuration.HealthConfiguration;
-import com.taotao.cloud.health.configuration.HealthSqlMybatisConfiguration;
+import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
+import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
+import com.taotao.cloud.core.configuration.EndPointAutoConfiguration;
+import com.taotao.cloud.core.configuration.GradleAutoConfiguration;
+import com.taotao.cloud.core.configuration.RestTemplateAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,7 +35,13 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({HealthSqlMybatisConfiguration.class, HealthConfiguration.class})
-public @interface EnableTaoTaoCloudHealth {
+@Import({
+	EndPointAutoConfiguration.class,
+	GradleAutoConfiguration.class,
+	CoreAutoConfiguration.class,
+	AsyncAutoConfiguration.class,
+	RestTemplateAutoConfiguration.class
+})
+public @interface EnableTaoTaoCloudCloud {
 
 }

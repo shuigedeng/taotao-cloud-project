@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
@@ -314,6 +316,14 @@ public class SysResourceController {
 	public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
 		Boolean result = resourceService.testSeata();
 		return Result.success(result);
+	}
+
+	@Operation(summary = "测试异步", description = "测试异步", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	@RequestOperateLog(description = "测试异步")
+	@GetMapping("/test/async")
+	public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
+		Future<Boolean> result = resourceService.testAsync();
+		return Result.success(result.get());
 	}
 
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))

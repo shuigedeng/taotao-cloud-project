@@ -56,7 +56,7 @@ public class CoreThreadPoolProperties {
 	/**
 	 * 线程池前缀
 	 */
-	private String threadNamePrefix = "taotao-cloud-core-threadpool-";
+	private String threadNamePrefix = "taotao-cloud-core-threadpool";
 
 	public CoreThreadPoolProperties() {
 	}

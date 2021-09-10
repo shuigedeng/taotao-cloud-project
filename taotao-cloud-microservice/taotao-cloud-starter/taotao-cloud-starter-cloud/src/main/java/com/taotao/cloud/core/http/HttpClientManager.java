@@ -31,10 +31,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class HttpClientManager {
 
 	/**
-	 * DEFAULT
-	 */
-	public static HttpClientManager DEFAULT = new HttpClientManager();
-	/**
 	 * pool
 	 */
 	private ConcurrentHashMap<String, DefaultHttpClient> pool = new ConcurrentHashMap<>();
@@ -43,10 +39,10 @@ public class HttpClientManager {
 	 */
 	private Object lock = new Object();
 
-	static {
+	public HttpClientManager() {
 		ProcessExitEvent.register(() -> {
 			try {
-				DEFAULT.closeAll();
+				this.closeAll();
 			} catch (Exception e) {
 				LogUtil.error(e, "关闭httpclient时出错");
 			}
@@ -162,5 +158,22 @@ public class HttpClientManager {
 		if (exception != null) {
 			throw exception;
 		}
+	}
+
+	public ConcurrentHashMap<String, DefaultHttpClient> getPool() {
+		return pool;
+	}
+
+	public void setPool(
+		ConcurrentHashMap<String, DefaultHttpClient> pool) {
+		this.pool = pool;
+	}
+
+	public Object getLock() {
+		return lock;
+	}
+
+	public void setLock(Object lock) {
+		this.lock = lock;
 	}
 }

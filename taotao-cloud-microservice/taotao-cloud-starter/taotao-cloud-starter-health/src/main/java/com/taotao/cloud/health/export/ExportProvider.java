@@ -3,12 +3,14 @@ package com.taotao.cloud.health.export;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.thread.ThreadPool;
+import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.ExportProperties;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import net.logstash.logback.appender.LogstashTcpSocketAppender;
 
 /**
  * @author: chejiangyi
@@ -17,21 +19,41 @@ import java.util.List;
 public class ExportProvider {
 
 	private boolean isClose = true;
+	private MonitorThreadPool monitorThreadPool;
+	private ExportProperties exportProperties;
+	private HealthCheckProvider healthCheckProvider;
 	protected List<AbstractExport> exports = new ArrayList<>();
 
+	public ExportProvider(MonitorThreadPool monitorThreadPool,
+		ExportProperties exportProperties,
+		HealthCheckProvider healthCheckProvider) {
+		this.monitorThreadPool = monitorThreadPool;
+		this.exportProperties = exportProperties;
+		this.healthCheckProvider = healthCheckProvider;
+	}
+
 	public void registerCollectTask(AbstractExport export) {
-		exports.add(export);
+		this.exports.add(export);
 	}
 
 	public void start() {
-		isClose = false;
+		this.isClose = false;
 
-		if (ExportProperties.Default().isElkEnabled()) {
-			registerCollectTask(new ElkExport());
+		if (this.exportProperties.isElkEnabled()) {
+			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtil.getBean(
+				LogstashTcpSocketAppender.class,
+				false);
+			if (Objects.nonNull(logstashTcpSocketAppender)) {
+				registerCollectTask(
+					new ElkExport(this.exportProperties, logstashTcpSocketAppender));
+			}
 		}
 
-		ThreadPool.DEFAULT.submit("系统任务:ExportProvider采集上传任务", () -> {
-			while (!ThreadPool.DEFAULT.isShutdown() && !isClose) {
+		this.monitorThreadPool.monitorSubmit("系统任务:ExportProvider采集上传任务", () -> {
+			while (!this.monitorThreadPool.monitorIsShutdown() && !isClose) {
+				LogUtil.info(
+					Thread.currentThread().getName() + " =========> 系统任务:ExportProvider采集上传任务");
+
 				try {
 					run();
 				} catch (Exception e) {
@@ -39,8 +61,9 @@ public class ExportProvider {
 				}
 
 				try {
-					Thread.sleep(ExportProperties.Default().getExportTimeSpan() * 1000L);
+					Thread.sleep(this.exportProperties.getExportTimeSpan() * 1000L);
 				} catch (Exception e) {
+					LogUtil.error(e);
 				}
 			}
 		});
@@ -56,9 +79,8 @@ public class ExportProvider {
 	}
 
 	public void run() {
-		HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class, false);
-		if (healthProvider != null) {
-			Report report = healthProvider.getReport(false);
+		if (this.healthCheckProvider != null) {
+			Report report = healthCheckProvider.getReport(false);
 			for (AbstractExport e : exports) {
 				e.run(report);
 			}
@@ -66,8 +88,8 @@ public class ExportProvider {
 	}
 
 	public void close() {
-		isClose = true;
-		for (AbstractExport e : exports) {
+		this.isClose = true;
+		for (AbstractExport e : this.exports) {
 			try {
 				e.close();
 			} catch (Exception ex) {

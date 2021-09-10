@@ -105,10 +105,11 @@ public class Rule {
 
 		private Map<String, List<RuleInfo>> rules = new HashMap<>();
 		private RuleParser ruleParser = new RuleParser();
+		private PropertyCache propertyCache;
 
-		public RulesAnalyzer() {
+		public RulesAnalyzer(PropertyCache propertyCache) {
 			//订阅配置改变，重新注册规则
-			PropertyCache.DEFAULT.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
+			propertyCache.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
 				for (Map.Entry<String, Object> e : map.entrySet()) {
 					String key = e.getKey();
 					if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
@@ -149,7 +150,8 @@ public class Rule {
 		}
 
 		public void registerRulesByProperties(String field) {
-			String value = PropertyUtil.getPropertyCache("taotao.cloud.health.strategy." + field, "");
+			String value = PropertyUtil.getPropertyCache("taotao.cloud.health.strategy." + field,
+				"");
 			registerRules(field, value);
 		}
 

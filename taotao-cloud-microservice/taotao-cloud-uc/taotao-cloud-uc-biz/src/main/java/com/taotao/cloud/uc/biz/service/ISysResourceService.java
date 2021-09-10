@@ -5,11 +5,13 @@ import com.taotao.cloud.uc.api.query.resource.ResourcePageQuery;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
 import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
+import java.util.concurrent.Future;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Set;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 /**
  * 资源表服务接口
@@ -191,4 +193,6 @@ public interface ISysResourceService {
 	 * @version 1.0.0
 	 */
 	Boolean existsByName(String name);
+
+	Future<Boolean> testAsync();
 }

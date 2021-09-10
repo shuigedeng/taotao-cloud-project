@@ -33,14 +33,16 @@ import org.springframework.core.annotation.Order;
 @Order(200000000)
 public class PropertyCache implements CommandLineRunner {
 
-	/**
-	 * DEFAULT
-	 */
-	public static PropertyCache DEFAULT = new PropertyCache();
+	private Pubsub pubsub;
+
+	public PropertyCache(Pubsub pubsub) {
+		this.pubsub = pubsub;
+	}
+
 	/**
 	 * cache
 	 */
-	private ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<>();
 	/**
 	 * isStart
 	 */
@@ -112,7 +114,7 @@ public class PropertyCache implements CommandLineRunner {
 			}
 		}
 
-		Pubsub.DEFAULT.pub(EventEnum.PropertyCacheUpdateEvent.toString(), new HashMap(1) {
+		pubsub.pub(EventEnum.PropertyCacheUpdateEvent.toString(), new HashMap(1) {
 			{
 				put(key, value);
 			}
@@ -128,7 +130,7 @@ public class PropertyCache implements CommandLineRunner {
 	 * @since 2021-09-02 20:38:14
 	 */
 	public void listenUpdateCache(String name, Callable.Action1<HashMap<String, Object>> action) {
-		Pubsub.DEFAULT.sub(EventEnum.PropertyCacheUpdateEvent, new Pubsub.Sub(name, action));
+		pubsub.sub(EventEnum.PropertyCacheUpdateEvent, new Pubsub.Sub(name, action));
 	}
 
 	/**
@@ -140,4 +142,6 @@ public class PropertyCache implements CommandLineRunner {
 	public void clear() {
 		cache.clear();
 	}
+
+
 }

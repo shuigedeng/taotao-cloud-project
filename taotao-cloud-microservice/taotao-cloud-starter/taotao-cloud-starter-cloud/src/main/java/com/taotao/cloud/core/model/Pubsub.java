@@ -32,11 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Pubsub {
 
 	/**
-	 * DEFAULT
-	 */
-	public static Pubsub DEFAULT = new Pubsub();
-
-	/**
 	 * subscribeList
 	 */
 	private Map<String, ConcurrentHashMap<String, Sub>> subscribeList = new ConcurrentHashMap<>();
@@ -163,4 +158,13 @@ public class Pubsub {
 			this.action = action;
 		}
 	}
+
+	public Map<String, ConcurrentHashMap<String, Sub>> getSubscribeList() {
+		return subscribeList;
+	}
+
+	public Object getLock() {
+		return lock;
+	}
+
 }

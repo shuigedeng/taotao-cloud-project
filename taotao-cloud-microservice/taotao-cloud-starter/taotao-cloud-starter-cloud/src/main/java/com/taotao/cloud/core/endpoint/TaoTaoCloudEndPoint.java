@@ -30,7 +30,7 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
  * @version 2021.9
  * @since 2021-09-02 20:08:52
  */
-@Endpoint(id = "taotao-cloud")
+@Endpoint(id = "taotaocloud")
 public class TaoTaoCloudEndPoint {
 
 	private String STATUS = "up";

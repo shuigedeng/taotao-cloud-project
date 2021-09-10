@@ -22,6 +22,7 @@ import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.model.Callable;
 import com.taotao.cloud.core.model.PropertyCache;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * PropertyUtil
@@ -146,7 +147,7 @@ public class PropertyUtil {
 	 * @since 2021-09-02 20:52:16
 	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
-			String propertyValue) {
+		String propertyValue) {
 		setDefaultInitProperty(cls, module, key, propertyValue, "");
 	}
 
@@ -162,20 +163,29 @@ public class PropertyUtil {
 	 * @since 2021-09-02 20:52:19
 	 */
 	public static void setDefaultInitProperty(Class<?> cls, String module, String key,
-			String propertyValue, String message) {
+		String propertyValue, String message) {
 		if (StringUtil.isEmpty(PropertyUtil.getPropertyCache(key, ""))) {
 			if (!StringUtil.isEmpty(propertyValue)) {
 				System.setProperty(key, propertyValue);
-				PropertyCache.DEFAULT.tryUpdateCache(key, propertyValue);
+				PropertyCache propertyCache = ContextUtil.getBean(PropertyCache.class, false);
+				if (Objects.nonNull(propertyCache)) {
+					propertyCache.tryUpdateCache(key, propertyValue);
+				}
 
 				LogUtil.info(" set default init property key: {}, value: {}, message: {}",
-						key, propertyValue, message);
+					key, propertyValue, message);
 			}
 		} else {
 			if (StringUtil.isEmpty(getSystemProperty(key, ""))) {
 				System.setProperty(key, PropertyUtil.getPropertyCache(key, ""));
 			}
 		}
+	}
+
+	public static void setProperty(String key, String propertyValue, String message){
+		System.setProperty(key, propertyValue);
+		LogUtil.info(" set default init property key: {}, value: {}, message: {}",
+			key, propertyValue, message);
 	}
 
 	/**
@@ -189,7 +199,11 @@ public class PropertyUtil {
 	 * @since 2021-09-02 20:52:22
 	 */
 	public static <T> T getPropertyCache(String key, T defaultvalue) {
-		return PropertyCache.DEFAULT.get(key, defaultvalue);
+		PropertyCache propertyCache = ContextUtil.getBean(PropertyCache.class, false);
+		if (Objects.nonNull(propertyCache)) {
+			return propertyCache.get(key, defaultvalue);
+		}
+		return null;
 	}
 
 }

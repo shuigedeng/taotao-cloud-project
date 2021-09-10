@@ -1,42 +1,39 @@
 package com.taotao.cloud.health.warn;
 
+
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
-import com.taotao.cloud.dingtalk.entity.DingerRequest;
-import com.taotao.cloud.dingtalk.enums.MessageSubType;
-import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
+import com.taotao.cloud.sms.service.SmsService;
 
-public class DingdingWarn extends AbstractWarn {
+public class SmsWarn extends AbstractWarn {
 
-	private DingerRobot dingerRobot;
 	private WarnProperties warnProperties;
+	private SmsService smsService;
 
-	public DingdingWarn(WarnProperties warnProperties, DingerRobot dingerRobot) {
+	public SmsWarn(WarnProperties warnProperties, SmsService smsService) {
 		this.warnProperties = warnProperties;
-		this.dingerRobot = dingerRobot;
+		this.smsService = smsService;
 	}
 
 	@Override
 	public void notify(Message message) {
-		if (this.dingerRobot != null) {
+		if (this.smsService != null) {
 			String ip = RequestUtil.getIpAddress();
+
 			String dingDingFilterIP = this.warnProperties.getDingdingFilterIP();
 			if (!StringUtil.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
-
-				String title =
-					"[" + message.getWarnType().getDescription() + "]" + StringUtil.subString3(
-						message.getTitle(), 100);
-
 				String context = StringUtil.subString3(message.getTitle(), 100) + "\n" +
 					"详情: " + RequestUtil.getBaseUrl() + "/taotao/cloud/health/\n" +
 					StringUtil.subString3(message.getContent(), 500);
 
-				MessageSubType messageSubType = MessageSubType.TEXT;
-				DingerRequest request = DingerRequest.request(context, title);
-
-				dingerRobot.send(messageSubType, request);
+				try {
+					smsService.sendSms("", "", "", "");
+				} catch (Exception e) {
+					LogUtil.error(e);
+				}
 			}
 		}
 	}

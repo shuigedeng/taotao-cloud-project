@@ -61,10 +61,6 @@ import org.apache.http.util.EntityUtils;
 public class DefaultHttpClient implements HttpClient {
 
 	/**
-	 * DEFAULT
-	 */
-	public static DefaultHttpClient DEFAULT;
-	/**
 	 * initParams
 	 */
 	private InitMap initParams;
@@ -77,38 +73,16 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private CloseableHttpClient client;
 
-	static {
-		initDefault();
+	private HttpClientManager httpClientManager;
+
+	public DefaultHttpClient() {
+
 	}
 
-	private DefaultHttpClient(InitMap initParams) {
+	public DefaultHttpClient(InitMap initParams, HttpClientManager httpClientManager) {
 		this.initParams = this.initDefaultParams(initParams);
+		this.httpClientManager = httpClientManager;
 	}
-
-	/**
-	 * initDefault
-	 *
-	 * @author shuigedeng
-	 * @since 2021-09-02 20:10:22
-	 */
-	public static void initDefault() {
-		DEFAULT = DefaultHttpClient.create("taotao.cloud.core.http.httpclient",
-			HttpClientProperties.toMap());
-	}
-
-	/**
-	 * create
-	 *
-	 * @param httpClientId httpClientId
-	 * @param initParams   initParams
-	 * @return {@link DefaultHttpClient }
-	 * @author shuigedeng
-	 * @since 2021-09-02 20:11:08
-	 */
-	public static DefaultHttpClient create(String httpClientId, InitMap initParams) {
-		return HttpClientManager.DEFAULT.register(httpClientId, new DefaultHttpClient(initParams));
-	}
-
 
 	/**
 	 * initDefaultParams
@@ -700,7 +674,7 @@ public class DefaultHttpClient implements HttpClient {
 		}
 		//从连接管理中移除
 		try {
-			HttpClientManager.DEFAULT.remove(this);
+			this.httpClientManager.remove(this);
 		} catch (Exception e) {
 			exception = e;
 		}
@@ -725,12 +699,19 @@ public class DefaultHttpClient implements HttpClient {
 		this.client = client;
 	}
 
-
 	public InitMap getInitParams() {
 		return initParams;
 	}
 
 	public void setInitParams(InitMap initParams) {
 		this.initParams = initParams;
+	}
+
+	public HttpClientManager getHttpClientManager() {
+		return httpClientManager;
+	}
+
+	public void setHttpClientManager(HttpClientManager httpClientManager) {
+		this.httpClientManager = httpClientManager;
 	}
 }

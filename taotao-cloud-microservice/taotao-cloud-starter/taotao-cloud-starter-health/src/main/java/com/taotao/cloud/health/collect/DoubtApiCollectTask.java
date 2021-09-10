@@ -1,9 +1,9 @@
 package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.core.model.Collector;
+import com.taotao.cloud.health.interceptor.DoubtApiInterceptor;
+import com.taotao.cloud.health.interceptor.DoubtApiInterceptor.DoubtApiInfo;
 import com.taotao.cloud.health.model.FieldReport;
-import com.taotao.cloud.health.filter.DoubtApiInterceptor;
-import com.taotao.cloud.health.filter.DoubtApiInterceptor.DoubtApiInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Arrays;
 import java.util.Map;
@@ -18,8 +18,10 @@ import java.util.Map;
 public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
+	private Collector collector;
 
-	public DoubtApiCollectTask(CollectTaskProperties properties) {
+	public DoubtApiCollectTask(Collector collector, CollectTaskProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -45,10 +47,9 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-
 		ApiUsedMemoryTopInfo info = new ApiUsedMemoryTopInfo();
 		try {
-			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) Collector.DEFAULT.value(
+			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) this.collector.value(
 				"taotao.cloud.health.doubtapi.info").get();
 			if (map != null && map.size() > 0) {
 				DoubtApiInfo[] copy = map.values()

@@ -22,16 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  **/
 public class DumpProvider {
 
+	private static Long lastDumpTime = 0L;
+
 	public File[] getList() {
 		File file = new File(".");
-		File[] fs = file.listFiles((dir, name) -> {
-			if (name.contains(".hprof")) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-		return fs;
+		return file.listFiles((dir, name) -> name.contains(".hprof"));
 	}
 
 	public void list() {
@@ -65,8 +60,6 @@ public class DumpProvider {
 			}
 		}
 	}
-
-	private static Long lastDumpTime = 0L;
 
 	public void dump() {
 		try {
@@ -106,7 +99,6 @@ public class DumpProvider {
 								}
 								fis.close();
 								out.flush();
-								out.close();
 							}
 						}
 					}
@@ -129,6 +121,7 @@ public class DumpProvider {
 			response.getWriter().flush();
 			response.getWriter().close();
 		} catch (Exception e) {
+			LogUtil.error(e);
 		}
 	}
 }

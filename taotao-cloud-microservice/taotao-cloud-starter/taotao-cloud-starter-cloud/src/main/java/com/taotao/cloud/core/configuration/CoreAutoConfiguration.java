@@ -19,18 +19,30 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
+import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.core.model.Pubsub;
+import com.taotao.cloud.core.monitor.MonitorSystem;
+import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.properties.CoreThreadPoolProperties;
+import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
-import com.taotao.cloud.core.thread.ThreadMonitor;
-import com.taotao.cloud.core.thread.ThreadPool;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * CoreConfiguration
@@ -40,6 +52,8 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 20:05:41
  */
 @Configuration
+@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
+@AutoConfigureAfter(AsyncAutoConfiguration.class)
 public class CoreAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -56,27 +70,43 @@ public class CoreAutoConfiguration implements InitializingBean {
 			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
 	}
 
-	@Bean(destroyMethod = "shutdown")
-	public ThreadPool getSystemThreadPool() {
-		LogUtil.started(ThreadPool.class, StarterNameConstant.CLOUD_STARTER);
-		if (ThreadPool.DEFAULT == null || ThreadPool.DEFAULT.isShutdown()) {
-			ThreadPool.initSystem();
-		}
-		return ThreadPool.DEFAULT;
+	@Bean
+	public Collector collector() {
+		return new Collector();
+	}
+
+	@Bean(destroyMethod = "monitorShutdown")
+	@ConditionalOnMissingBean(MonitorThreadPool.class)
+	public MonitorThreadPool coreMonitorThreadPool(
+		Collector collector,
+		MonitorThreadPoolProperties monitorThreadPoolProperties,
+		CoreThreadPoolProperties coreThreadPoolProperties,
+		@Qualifier("taskExecutor") AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
+
+		return new MonitorThreadPool(
+			collector,
+			monitorThreadPoolProperties,
+			coreThreadPoolProperties,
+			coreThreadPoolTaskExecutor
+		);
 	}
 
 	@Bean
-	@ConditionalOnBean(ThreadPool.class)
-	public ThreadMonitor getSystemThreadPoolMonitor() {
-		LogUtil.started(ThreadMonitor.class, StarterNameConstant.CLOUD_STARTER);
-		return ThreadPool.DEFAULT.getThreadMonitor();
+	@ConditionalOnBean(MonitorThreadPool.class)
+	public MonitorSystem monitorThread(MonitorThreadPool monitorThreadPool) {
+		LogUtil.started(MonitorSystem.class, StarterNameConstant.CLOUD_STARTER);
+		return monitorThreadPool.getMonitorSystem();
 	}
 
 	@Bean
-	public PropertyCache getPropertyCache() {
+	public Pubsub pubsub() {
+		return new Pubsub();
+	}
+
+	@Bean
+	public PropertyCache propertyCache(Pubsub pubsub) {
 		LogUtil.started(PropertyCache.class, StarterNameConstant.CLOUD_STARTER);
-		PropertyCache.DEFAULT.clear();
-		return PropertyCache.DEFAULT;
+		return new PropertyCache(pubsub);
 	}
 
 	@Bean
@@ -86,8 +116,9 @@ public class CoreAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public CoreCommandLineRunner coreCommandLineRunner() {
+	public CoreCommandLineRunner coreCommandLineRunner(PropertyCache propertyCache,
+		CoreProperties coreProperties) {
 		LogUtil.started(CoreCommandLineRunner.class, StarterNameConstant.CLOUD_STARTER);
-		return new CoreCommandLineRunner();
+		return new CoreCommandLineRunner(propertyCache, coreProperties);
 	}
 }

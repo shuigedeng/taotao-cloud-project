@@ -49,16 +49,16 @@ public class ResourceTree extends TreeNode implements Serializable {
 	private String path;
 
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
-	private Boolean keepAlive;
+	private boolean keepAlive;
 
 	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮")
-	private Byte type;
+	private int type;
 
 	@Schema(description = "菜单标签")
 	private String label;
 
 	@Schema(description = "排序值")
-	private Integer sort;
+	private int sort;
 
 	public ResourceTree() {
 	}
@@ -207,7 +207,7 @@ public class ResourceTree extends TreeNode implements Serializable {
 		this.keepAlive = keepAlive;
 	}
 
-	public Byte getType() {
+	public int getType() {
 		return type;
 	}
 

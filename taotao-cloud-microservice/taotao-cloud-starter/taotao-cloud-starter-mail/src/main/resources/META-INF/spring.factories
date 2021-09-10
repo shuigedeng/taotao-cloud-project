@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.mail.configuration.MailConfiguration
+com.taotao.cloud.mail.PropertiesAutoConfiguration

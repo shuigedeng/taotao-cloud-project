@@ -1,24 +1,24 @@
 package com.taotao.cloud.health.collect;
 
 
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.model.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
- *  系统连接池采集任务
+ * 系统连接池采集任务
  *
  * @author: chejiangyi
  * @version: 2019-07-30 21:14
  **/
-public class ThreadPoolSystemCollectTask extends AbstractCollectTask {
+public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
+	private Collector collector;
 
-	public ThreadPoolSystemCollectTask(CollectTaskProperties properties) {
+	public MonitorThreadPoolCollectTask(Collector collector, CollectTaskProperties properties) {
+		this.collector = collector;
 		this.properties = properties;
 	}
 
@@ -29,12 +29,12 @@ public class ThreadPoolSystemCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "系统线程池采集";
+		return "监控线程池采集";
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.threadPool.info";
+		return "taotao.cloud.health.collect.threadpool.info";
 	}
 
 	@Override
@@ -44,30 +44,32 @@ public class ThreadPoolSystemCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		if (ContextUtil.getBean(
-			ReflectionUtil.classForName("com.taotao.cloud.core.thread.ThreadMonitor"), false)
-			== null) {
-			return null;
-		}
-		SystemThreadPoolInfo info = new SystemThreadPoolInfo();
+		//if (ContextUtil.getBean(
+		//	ReflectionUtil.classForName("com.taotao.cloud.core.monitor.MonitorSystem"), false)
+		//	== null) {
+		//	return null;
+		//}
+
+		MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
 		info.setSystemActiveCount(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.active.count").run());
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.active.count").run());
 		info.setSystemCorePoolSize(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.core.poolSize").run());
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.core.poolSize").run());
 		info.setSystemPoolSizeLargest(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.poolSize.largest")
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.largest")
 				.run());
 		info.setSystemPoolSizeMax(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.poolSize.max").run());
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.max").run());
 		info.setSystemPoolSizeCount(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.poolSize.count").run());
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.count").run());
 		info.setSystemQueueSize(
-			(Integer) Collector.DEFAULT.call("taotao.cloud.core.threadPool.queue.size").run());
+			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.queue.size").run());
 		info.setSystemTaskCount(
-			(Long) Collector.DEFAULT.call("taotao.cloud.core.threadPool.task.count").run());
+			(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.count").run());
 		info.setSystemTaskCompleted(
-			(Long) Collector.DEFAULT.call("taotao.cloud.core.threadPool.task.completed").run());
-		Hook hook = Collector.DEFAULT.hook("taotao.cloud.core.threadPool.hook");
+			(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.completed").run());
+
+		Hook hook = this.collector.hook("taotao.cloud.core.monitor.threadpool.hook");
 		info.setSystemTaskHookCurrent(hook.getCurrent());
 		info.setSystemTaskHookError(hook.getLastErrorPerSecond());
 		info.setSystemTaskHookSuccess(hook.getLastSuccessPerSecond());
@@ -77,8 +79,7 @@ public class ThreadPoolSystemCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class SystemThreadPoolInfo {
-
+	private static class MonitorThreadPoolInfo {
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.active.count", desc = "系统线程池活动线程数")
 		private Integer systemActiveCount;
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.core.poolSize", desc = "系统线程池核心线程数")
@@ -106,10 +107,10 @@ public class ThreadPoolSystemCollectTask extends AbstractCollectTask {
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.task.hook.list.minute.detail", desc = "线程池拦截历史最大耗时任务列表(每分钟)")
 		private String systemTaskHookListPerMinute;
 
-		public SystemThreadPoolInfo() {
+		public MonitorThreadPoolInfo() {
 		}
 
-		public SystemThreadPoolInfo(Integer systemActiveCount, Integer systemCorePoolSize,
+		public MonitorThreadPoolInfo(Integer systemActiveCount, Integer systemCorePoolSize,
 			Integer systemPoolSizeLargest, Integer systemPoolSizeMax,
 			Integer systemPoolSizeCount, Integer systemQueueSize, Long systemTaskCount,
 			Long systemTaskCompleted, Long systemTaskHookError, Long systemTaskHookSuccess,

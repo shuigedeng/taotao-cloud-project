@@ -14,10 +14,6 @@ public class ExportProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.export";
 
-	public static ExportProperties Default() {
-		return ContextUtil.getApplicationContext().getBean(ExportProperties.class);
-	}
-
 	private boolean enabled = true;
 
 	//上传报表循环间隔时间 秒
