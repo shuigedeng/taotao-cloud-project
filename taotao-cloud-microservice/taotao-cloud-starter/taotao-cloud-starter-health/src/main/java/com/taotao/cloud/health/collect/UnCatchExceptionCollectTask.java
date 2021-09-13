@@ -1,19 +1,36 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
-
 
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 /**
- * @author: chejiangyi
- * @version: 2019-07-26 13:36
- **/
+ * UnCatchExceptionCollectTask
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 19:17:37
+ */
 public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	private Throwable lastException = null;
@@ -52,8 +69,13 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	@Override
 	public Report getReport() {
-		return new Report(
-			new UnCatchInfo(StringUtil.nullToEmpty(ExceptionUtil.trace2String(lastException))));
+		try {
+			return new Report(
+				new UnCatchInfo(StringUtil.nullToEmpty(ExceptionUtil.trace2String(lastException))));
+		} catch (Exception e) {
+			LogUtil.error(e);
+		}
+		return null;
 	}
 
 	public static class DefaultUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
@@ -75,9 +97,10 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 					this.unCatchExceptionCheckTask.lastException = e;
 					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "未捕获错误",
 						ExceptionUtil.trace2String(e));
-					LogUtil.error( e, "未捕获错误");
+					LogUtil.error(e, "未捕获错误");
 				}
 			} catch (Exception e2) {
+
 
 			}
 			if (lastUncaughtExceptionHandler != null) {

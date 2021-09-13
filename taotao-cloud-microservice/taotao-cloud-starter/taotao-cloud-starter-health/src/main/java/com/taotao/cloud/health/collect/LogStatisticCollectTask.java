@@ -44,16 +44,21 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		LogErrorInfo data = new LogErrorInfo();
-		data.logerrorCount =
-			this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null ? 0
-				: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.error.count")
-					.get())).intValue();
-		data.logIncreCount =
-			this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null ? 0
-				: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.incre.count")
-					.get())).intValue();
-		return data;
+		try {
+			LogErrorInfo data = new LogErrorInfo();
+			data.logerrorCount =
+				this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null ? 0
+					: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.error.count")
+						.get())).intValue();
+			data.logIncreCount =
+				this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null ? 0
+					: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.incre.count")
+						.get())).intValue();
+			return data;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private static class LogErrorInfo {
@@ -62,29 +67,5 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 		private Integer logerrorCount;
 		@FieldReport(name = "taotao.cloud.health.collect.log.incre.count", desc = "最近1分钟日志条数增量")
 		private Integer logIncreCount;
-
-		public LogErrorInfo() {
-		}
-
-		public LogErrorInfo(Integer logerrorCount, Integer logIncreCount) {
-			this.logerrorCount = logerrorCount;
-			this.logIncreCount = logIncreCount;
-		}
-
-		public Integer getLogerrorCount() {
-			return logerrorCount;
-		}
-
-		public void setLogerrorCount(Integer logerrorCount) {
-			this.logerrorCount = logerrorCount;
-		}
-
-		public Integer getLogIncreCount() {
-			return logIncreCount;
-		}
-
-		public void setLogIncreCount(Integer logIncreCount) {
-			this.logIncreCount = logIncreCount;
-		}
 	}
 }

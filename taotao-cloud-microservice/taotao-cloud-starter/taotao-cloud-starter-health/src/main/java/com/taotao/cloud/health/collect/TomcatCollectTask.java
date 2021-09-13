@@ -1,6 +1,22 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
@@ -9,11 +25,13 @@ import org.springframework.boot.web.context.ConfigurableWebServerApplicationCont
 import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.boot.web.server.WebServer;
 
-
 /**
- * @author: chejiangyi
- * @version: 2019-08-03 11:59
- **/
+ * TomcatCollectTask
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 19:17:03
+ */
 public class TomcatCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties collectTaskProperties;
@@ -44,39 +62,44 @@ public class TomcatCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		ConfigurableWebServerApplicationContext context = ContextUtil.getConfigurableWebServerApplicationContext();
-		if (context != null) {
-			WebServer webServer = context.getWebServer();
-			if (webServer instanceof TomcatWebServer) {
+		try {
+			ConfigurableWebServerApplicationContext context = ContextUtil.getConfigurableWebServerApplicationContext();
+			if (context != null) {
+				WebServer webServer = context.getWebServer();
+				if (webServer instanceof TomcatWebServer) {
 
-				Object getTomcat = ReflectionUtil.callMethod(webServer, "getTomcat", null);
-				Object getConnector = ReflectionUtil.callMethod(getTomcat, "getConnector", null);
-				Object getProtocolHandler = ReflectionUtil.callMethod(getConnector,
-					"getProtocolHandler", null);
-				Object executor = ReflectionUtil.callMethod(getProtocolHandler, "getExecutor",
-					null);
+					Object getTomcat = ReflectionUtil.callMethod(webServer, "getTomcat", null);
+					Object getConnector = ReflectionUtil.callMethod(getTomcat, "getConnector",
+						null);
+					Object getProtocolHandler = ReflectionUtil.callMethod(getConnector,
+						"getProtocolHandler", null);
+					Object executor = ReflectionUtil.callMethod(getProtocolHandler, "getExecutor",
+						null);
 
-				Class<?> poolCls = ReflectionUtil.tryClassForName(
-					"org.apache.tomcat.util.threads.ThreadPoolExecutor");
+					Class<?> poolCls = ReflectionUtil.tryClassForName(
+						"org.apache.tomcat.util.threads.ThreadPoolExecutor");
 
-				if (executor != null && poolCls.isAssignableFrom(executor.getClass())) {
-					if (executor instanceof ThreadPoolExecutor) {
-						TomcatInfo tomcatInfo = new TomcatInfo();
-						ThreadPoolExecutor pool = (ThreadPoolExecutor) executor;
+					if (executor != null && poolCls.isAssignableFrom(executor.getClass())) {
+						if (executor instanceof ThreadPoolExecutor) {
+							TomcatInfo tomcatInfo = new TomcatInfo();
+							ThreadPoolExecutor pool = (ThreadPoolExecutor) executor;
 
-						tomcatInfo.activeCount = pool.getActiveCount();
-						tomcatInfo.corePoolSize = pool.getCorePoolSize();
-						tomcatInfo.poolSizeCount = pool.getPoolSize();
-						tomcatInfo.poolSizeMax = pool.getMaximumPoolSize();
-						tomcatInfo.poolSizeLargest = pool.getLargestPoolSize();
-						tomcatInfo.queueSize = pool.getQueue().size();
-						tomcatInfo.taskCount = pool.getTaskCount();
-						tomcatInfo.taskCompleted = pool.getCompletedTaskCount();
-						return tomcatInfo;
+							tomcatInfo.activeCount = pool.getActiveCount();
+							tomcatInfo.corePoolSize = pool.getCorePoolSize();
+							tomcatInfo.poolSizeCount = pool.getPoolSize();
+							tomcatInfo.poolSizeMax = pool.getMaximumPoolSize();
+							tomcatInfo.poolSizeLargest = pool.getLargestPoolSize();
+							tomcatInfo.queueSize = pool.getQueue().size();
+							tomcatInfo.taskCount = pool.getTaskCount();
+							tomcatInfo.taskCompleted = pool.getCompletedTaskCount();
+							return tomcatInfo;
+						}
 					}
 				}
-			}
 
+			}
+		} catch (Exception e) {
+			LogUtil.error(e);
 		}
 		return null;
 	}
@@ -108,85 +131,5 @@ public class TomcatCollectTask extends AbstractCollectTask {
 //        private Integer taskHookCurrent;
 //        @FieldReport(name = "tomcat.threadPool.task.hook.list", desc = "tomcat 线程池拦截历史最大耗时任务列表")
 //        private String taskHookList;
-
-		public TomcatInfo() {
-		}
-
-		public TomcatInfo(Integer activeCount, Integer corePoolSize, Integer poolSizeLargest,
-			Integer poolSizeMax, Integer poolSizeCount, Integer queueSize, Long taskCount,
-			Long taskCompleted) {
-			this.activeCount = activeCount;
-			this.corePoolSize = corePoolSize;
-			this.poolSizeLargest = poolSizeLargest;
-			this.poolSizeMax = poolSizeMax;
-			this.poolSizeCount = poolSizeCount;
-			this.queueSize = queueSize;
-			this.taskCount = taskCount;
-			this.taskCompleted = taskCompleted;
-		}
-
-		public Integer getActiveCount() {
-			return activeCount;
-		}
-
-		public void setActiveCount(Integer activeCount) {
-			this.activeCount = activeCount;
-		}
-
-		public Integer getCorePoolSize() {
-			return corePoolSize;
-		}
-
-		public void setCorePoolSize(Integer corePoolSize) {
-			this.corePoolSize = corePoolSize;
-		}
-
-		public Integer getPoolSizeLargest() {
-			return poolSizeLargest;
-		}
-
-		public void setPoolSizeLargest(Integer poolSizeLargest) {
-			this.poolSizeLargest = poolSizeLargest;
-		}
-
-		public Integer getPoolSizeMax() {
-			return poolSizeMax;
-		}
-
-		public void setPoolSizeMax(Integer poolSizeMax) {
-			this.poolSizeMax = poolSizeMax;
-		}
-
-		public Integer getPoolSizeCount() {
-			return poolSizeCount;
-		}
-
-		public void setPoolSizeCount(Integer poolSizeCount) {
-			this.poolSizeCount = poolSizeCount;
-		}
-
-		public Integer getQueueSize() {
-			return queueSize;
-		}
-
-		public void setQueueSize(Integer queueSize) {
-			this.queueSize = queueSize;
-		}
-
-		public Long getTaskCount() {
-			return taskCount;
-		}
-
-		public void setTaskCount(Long taskCount) {
-			this.taskCount = taskCount;
-		}
-
-		public Long getTaskCompleted() {
-			return taskCompleted;
-		}
-
-		public void setTaskCompleted(Long taskCompleted) {
-			this.taskCompleted = taskCompleted;
-		}
 	}
 }

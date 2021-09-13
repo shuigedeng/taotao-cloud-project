@@ -8,6 +8,7 @@ import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.exception.HealthException;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
+import java.util.Objects;
 
 /**
  * Redis性能参数收集
@@ -47,10 +48,11 @@ public class JedisCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		Object item = ContextUtil.getBean(
-			ReflectionUtil.classForName("com.yh.csx.bsf.redis.impl.RedisClusterMonitor"), false);
-		if (item != null) {
-			try {
+		try {
+			Object item = ContextUtil.getBean(
+				ReflectionUtil.classForName("com.yh.csx.bsf.redis.impl.RedisClusterMonitor"),
+				false);
+			if (Objects.nonNull(item)) {
 				ReflectionUtil.callMethod(item, "collect", null);
 
 				JedisInfo info = new JedisInfo();
@@ -69,9 +71,9 @@ public class JedisCollectTask extends AbstractCollectTask {
 					info.hookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
 				}
 				return info;
-			} catch (Exception exp) {
-				throw new HealthException(exp);
 			}
+		} catch (Exception exp) {
+			throw new HealthException(exp);
 		}
 		return null;
 	}

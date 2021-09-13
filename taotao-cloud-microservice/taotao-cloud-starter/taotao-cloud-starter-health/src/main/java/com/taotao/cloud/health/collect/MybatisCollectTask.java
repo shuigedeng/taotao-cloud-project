@@ -1,21 +1,40 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
- * @author: chejiangyi
- * @version: 2019-08-02 09:41
- **/
+ * MybatisCollectTask
+ *
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 19:15:21
+ */
 public class MybatisCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
 	private Collector collector;
 
-	public MybatisCollectTask(Collector collector,CollectTaskProperties properties) {
+	public MybatisCollectTask(Collector collector, CollectTaskProperties properties) {
 		this.collector = collector;
 		this.properties = properties;
 	}
@@ -42,17 +61,22 @@ public class MybatisCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		SqlMybatisInfo info = new SqlMybatisInfo();
+		try {
+			SqlMybatisInfo info = new SqlMybatisInfo();
 
-		Hook hook = this.collector.hook("taotao.cloud.health.collect.mybatis.sql.hook");
-		if (hook != null) {
-			info.hookCurrent = hook.getCurrent();
-			info.hookError = hook.getLastErrorPerSecond();
-			info.hookSuccess = hook.getLastSuccessPerSecond();
-			info.hookList = hook.getMaxTimeSpanList().toText();
-			info.hookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
+			Hook hook = this.collector.hook("taotao.cloud.health.collect.mybatis.sql.hook");
+			if (hook != null) {
+				info.hookCurrent = hook.getCurrent();
+				info.hookError = hook.getLastErrorPerSecond();
+				info.hookSuccess = hook.getLastSuccessPerSecond();
+				info.hookList = hook.getMaxTimeSpanList().toText();
+				info.hookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
+			}
+			return info;
+		} catch (Exception e) {
+			LogUtil.error(e);
 		}
-		return info;
+		return null;
 	}
 
 	private static class SqlMybatisInfo {
@@ -68,56 +92,5 @@ public class MybatisCollectTask extends AbstractCollectTask {
 		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
 		private String hookListPerMinute;
 
-		public SqlMybatisInfo() {
-		}
-
-		public SqlMybatisInfo(Long hookError, Long hookSuccess, Long hookCurrent, String hookList,
-			String hookListPerMinute) {
-			this.hookError = hookError;
-			this.hookSuccess = hookSuccess;
-			this.hookCurrent = hookCurrent;
-			this.hookList = hookList;
-			this.hookListPerMinute = hookListPerMinute;
-		}
-
-		public Long getHookError() {
-			return hookError;
-		}
-
-		public void setHookError(Long hookError) {
-			this.hookError = hookError;
-		}
-
-		public Long getHookSuccess() {
-			return hookSuccess;
-		}
-
-		public void setHookSuccess(Long hookSuccess) {
-			this.hookSuccess = hookSuccess;
-		}
-
-		public Long getHookCurrent() {
-			return hookCurrent;
-		}
-
-		public void setHookCurrent(Long hookCurrent) {
-			this.hookCurrent = hookCurrent;
-		}
-
-		public String getHookList() {
-			return hookList;
-		}
-
-		public void setHookList(String hookList) {
-			this.hookList = hookList;
-		}
-
-		public String getHookListPerMinute() {
-			return hookListPerMinute;
-		}
-
-		public void setHookListPerMinute(String hookListPerMinute) {
-			this.hookListPerMinute = hookListPerMinute;
-		}
 	}
 }

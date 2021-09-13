@@ -1,17 +1,34 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.health.collect;
 
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
- * 系统连接池采集任务
+ * MonitorThreadPoolCollectTask
  *
- * @author: chejiangyi
- * @version: 2019-07-30 21:14
- **/
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-10 19:14:28
+ */
 public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 
 	private CollectTaskProperties properties;
@@ -44,42 +61,56 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	protected Object getData() {
-		//if (ContextUtil.getBean(
-		//	ReflectionUtil.classForName("com.taotao.cloud.core.monitor.MonitorSystem"), false)
-		//	== null) {
-		//	return null;
-		//}
+		try {
+			//if (ContextUtil.getBean(
+			//	ReflectionUtil.classForName("com.taotao.cloud.core.monitor.MonitorSystem"), false)
+			//	== null) {
+			//	return null;
+			//}
 
-		MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
-		info.setSystemActiveCount(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.active.count").run());
-		info.setSystemCorePoolSize(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.core.poolSize").run());
-		info.setSystemPoolSizeLargest(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.largest")
-				.run());
-		info.setSystemPoolSizeMax(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.max").run());
-		info.setSystemPoolSizeCount(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.count").run());
-		info.setSystemQueueSize(
-			(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.queue.size").run());
-		info.setSystemTaskCount(
-			(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.count").run());
-		info.setSystemTaskCompleted(
-			(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.completed").run());
+			MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
+			info.systemActiveCount =
+				(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.active.count")
+					.run();
+			info.systemCorePoolSize =
+				(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.core.poolSize")
+					.run();
+			info.systemPoolSizeLargest =
+				(Integer) this.collector.call(
+						"taotao.cloud.core.monitor.threadpool.poolSize.largest")
+					.run();
+			info.systemPoolSizeMax =
+				(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.max")
+					.run();
+			info.systemPoolSizeCount =
+				(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.poolSize.count")
+					.run();
+			info.systemQueueSize =
+				(Integer) this.collector.call("taotao.cloud.core.monitor.threadpool.queue.size")
+					.run();
+			info.systemTaskCount =
+				(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.count")
+					.run();
+			info.systemTaskCompleted =
+				(Long) this.collector.call("taotao.cloud.core.monitor.threadpool.task.completed")
+					.run();
 
-		Hook hook = this.collector.hook("taotao.cloud.core.monitor.threadpool.hook");
-		info.setSystemTaskHookCurrent(hook.getCurrent());
-		info.setSystemTaskHookError(hook.getLastErrorPerSecond());
-		info.setSystemTaskHookSuccess(hook.getLastSuccessPerSecond());
-		info.setSystemTaskHookList(hook.getMaxTimeSpanList().toText());
-		info.setSystemTaskHookListPerMinute(hook.getMaxTimeSpanListPerMinute().toText());
-		return info;
+			Hook hook = this.collector.hook("taotao.cloud.core.monitor.threadpool.hook");
+			info.systemTaskHookCurrent = hook.getCurrent();
+			info.systemTaskHookError = hook.getLastErrorPerSecond();
+			info.systemTaskHookSuccess = hook.getLastSuccessPerSecond();
+			info.systemTaskHookList = hook.getMaxTimeSpanList().toText();
+			info.systemTaskHookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
+			return info;
+		} catch (Exception e) {
+			LogUtil.error(e);
+		}
+		return null;
 	}
 
 
 	private static class MonitorThreadPoolInfo {
+
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.active.count", desc = "系统线程池活动线程数")
 		private Integer systemActiveCount;
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.core.poolSize", desc = "系统线程池核心线程数")
@@ -106,133 +137,5 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 		private String systemTaskHookList;
 		@FieldReport(name = "taotao.cloud.health.collect.threadPool.system.task.hook.list.minute.detail", desc = "线程池拦截历史最大耗时任务列表(每分钟)")
 		private String systemTaskHookListPerMinute;
-
-		public MonitorThreadPoolInfo() {
-		}
-
-		public MonitorThreadPoolInfo(Integer systemActiveCount, Integer systemCorePoolSize,
-			Integer systemPoolSizeLargest, Integer systemPoolSizeMax,
-			Integer systemPoolSizeCount, Integer systemQueueSize, Long systemTaskCount,
-			Long systemTaskCompleted, Long systemTaskHookError, Long systemTaskHookSuccess,
-			Long systemTaskHookCurrent, String systemTaskHookList,
-			String systemTaskHookListPerMinute) {
-			this.systemActiveCount = systemActiveCount;
-			this.systemCorePoolSize = systemCorePoolSize;
-			this.systemPoolSizeLargest = systemPoolSizeLargest;
-			this.systemPoolSizeMax = systemPoolSizeMax;
-			this.systemPoolSizeCount = systemPoolSizeCount;
-			this.systemQueueSize = systemQueueSize;
-			this.systemTaskCount = systemTaskCount;
-			this.systemTaskCompleted = systemTaskCompleted;
-			this.systemTaskHookError = systemTaskHookError;
-			this.systemTaskHookSuccess = systemTaskHookSuccess;
-			this.systemTaskHookCurrent = systemTaskHookCurrent;
-			this.systemTaskHookList = systemTaskHookList;
-			this.systemTaskHookListPerMinute = systemTaskHookListPerMinute;
-		}
-
-		public Integer getSystemActiveCount() {
-			return systemActiveCount;
-		}
-
-		public void setSystemActiveCount(Integer systemActiveCount) {
-			this.systemActiveCount = systemActiveCount;
-		}
-
-		public Integer getSystemCorePoolSize() {
-			return systemCorePoolSize;
-		}
-
-		public void setSystemCorePoolSize(Integer systemCorePoolSize) {
-			this.systemCorePoolSize = systemCorePoolSize;
-		}
-
-		public Integer getSystemPoolSizeLargest() {
-			return systemPoolSizeLargest;
-		}
-
-		public void setSystemPoolSizeLargest(Integer systemPoolSizeLargest) {
-			this.systemPoolSizeLargest = systemPoolSizeLargest;
-		}
-
-		public Integer getSystemPoolSizeMax() {
-			return systemPoolSizeMax;
-		}
-
-		public void setSystemPoolSizeMax(Integer systemPoolSizeMax) {
-			this.systemPoolSizeMax = systemPoolSizeMax;
-		}
-
-		public Integer getSystemPoolSizeCount() {
-			return systemPoolSizeCount;
-		}
-
-		public void setSystemPoolSizeCount(Integer systemPoolSizeCount) {
-			this.systemPoolSizeCount = systemPoolSizeCount;
-		}
-
-		public Integer getSystemQueueSize() {
-			return systemQueueSize;
-		}
-
-		public void setSystemQueueSize(Integer systemQueueSize) {
-			this.systemQueueSize = systemQueueSize;
-		}
-
-		public Long getSystemTaskCount() {
-			return systemTaskCount;
-		}
-
-		public void setSystemTaskCount(Long systemTaskCount) {
-			this.systemTaskCount = systemTaskCount;
-		}
-
-		public Long getSystemTaskCompleted() {
-			return systemTaskCompleted;
-		}
-
-		public void setSystemTaskCompleted(Long systemTaskCompleted) {
-			this.systemTaskCompleted = systemTaskCompleted;
-		}
-
-		public Long getSystemTaskHookError() {
-			return systemTaskHookError;
-		}
-
-		public void setSystemTaskHookError(Long systemTaskHookError) {
-			this.systemTaskHookError = systemTaskHookError;
-		}
-
-		public Long getSystemTaskHookSuccess() {
-			return systemTaskHookSuccess;
-		}
-
-		public void setSystemTaskHookSuccess(Long systemTaskHookSuccess) {
-			this.systemTaskHookSuccess = systemTaskHookSuccess;
-		}
-
-		public Long getSystemTaskHookCurrent() {
-			return systemTaskHookCurrent;
-		}
-
-		public void setSystemTaskHookCurrent(Long systemTaskHookCurrent) {
-			this.systemTaskHookCurrent = systemTaskHookCurrent;
-		}
-
-		public String getSystemTaskHookList() {
-			return systemTaskHookList;
-		}
-
-		public void setSystemTaskHookList(String systemTaskHookList) {
-			this.systemTaskHookList = systemTaskHookList;
-		}
-
-		public String getSystemTaskHookListPerMinute() {
-			return systemTaskHookListPerMinute;
-		}
-
-		public void setSystemTaskHookListPerMinute(String systemTaskHookListPerMinute) {
-			this.systemTaskHookListPerMinute = systemTaskHookListPerMinute;
-		}
 	}
 }

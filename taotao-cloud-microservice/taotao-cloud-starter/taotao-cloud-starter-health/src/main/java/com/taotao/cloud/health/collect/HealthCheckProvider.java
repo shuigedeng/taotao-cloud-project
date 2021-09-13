@@ -68,7 +68,7 @@ public class HealthCheckProvider implements AutoCloseable {
 
 		registerCollectTask(new CpuCollectTask(properties));
 		//registerCollectTask(new IOCollectTask(properties));
-		registerCollectTask(new MemeryCollectTask(properties));
+		registerCollectTask(new MemoryCollectTask(properties));
 		registerCollectTask(new ThreadCollectTask(properties));
 		registerCollectTask(new UnCatchExceptionCollectTask(properties));
 		registerCollectTask(new MonitorThreadPoolCollectTask(collector, properties));
