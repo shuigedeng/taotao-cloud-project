@@ -1,6 +1,6 @@
 [comment]: <> (<p align="center"><font size=120><strong>taotao-cloud-project</strong></font></p>)
 
-# taotao-cloud-project
+# **taotao-cloud-project**
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
