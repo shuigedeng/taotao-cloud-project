@@ -29,6 +29,9 @@ public class TaoTaoCloudPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		System.out.println(project.getName());
+		String name = project.getName();
+		if (name.contains("starter")) {
+			//System.out.println(project.getName());
+		}
 	}
 }

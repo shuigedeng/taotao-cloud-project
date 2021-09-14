@@ -1,4 +1,4 @@
-# <p align="center">**taotao-cloud-project**</p>
+<p align="center"><font size="70" ><strong>taotao-cloud-project</strong></font></p>
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
@@ -13,7 +13,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-taotao cloud project 创建这个仓库的目的就是工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
+**taotao cloud project** 创建这个仓库的目的就是工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
 
 - **大数据模块** 集成日志数据处理和分析、用户行为分析、推荐系统、离线/流式计算、数据仓库、数据湖等大数据处理
   
@@ -38,7 +38,7 @@ taotao cloud project 创建这个仓库的目的就是工作以来的技术总�
 ![mark](./snapshot/springcloud微服务分层图.png)
 
 
-## 4. starter dependencies
+## 4. dependencies
 Gradle:
 ```
 dependencyManagement{
@@ -78,13 +78,12 @@ Maven:
 依赖 | 版本
 ---|---
 Spring |  5.3.4 
-Spring Boot |  2.5.1
+Spring Boot |  2.5.4
 Spring Cloud | 2020.0.3
-Spring Cloud alibaba | 2.2.5.RELEASE  
+Spring Cloud alibaba | 2021.1  
 Spring Security OAuth2 | 5.4.5
 Mybatis Plus | 3.4.2
 Hutool | 5.5.9
-Lombok | 1.18.18
 Mysql | 8.0.20
 Querydsl | 4.4.0
 Swagger | 3.3.0

@@ -189,7 +189,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "org.springdoc.openapi-gradle-plugin"
 
 //    apply plugin: "com.github.johnrengelman.shadow"
-//    apply plugin: "com.taotao.cloud.plugin"
+    apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")

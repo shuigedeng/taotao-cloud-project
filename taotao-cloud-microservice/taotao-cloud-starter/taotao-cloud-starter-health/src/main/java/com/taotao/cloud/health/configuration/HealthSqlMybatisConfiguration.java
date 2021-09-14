@@ -18,7 +18,6 @@ package com.taotao.cloud.health.configuration;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.health.interceptor.HibernateInterceptor;
 import com.taotao.cloud.health.interceptor.SqlMybatisInterceptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
