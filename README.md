@@ -37,6 +37,43 @@ taotao cloud project 创建这个仓库的目的就是工作以来的技术总�
 ## 3. springcloud微服务分层图
 ![mark](./snapshot/springcloud微服务分层图.png)
 
+
+## 4. starter dependencies
+Gradle:
+```
+dependencyManagement{
+  imports {
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2021.9.1"
+  }
+}
+
+api "io.github.shuigedeng:taotao-cloud-starter-web"
+```
+
+Maven:
+```
+<dependentyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.shuigedeng</groupId>
+      <artifactId>taotao-cloud-dependencies</artifactId>
+      <version>2021.9.1</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependentyManagement>
+
+
+<dependencies>
+    <dependency>
+      <groupId>io.github.shuigedeng</groupId>
+      <artifactId>taotao-cloud-starter-web</artifactId>
+    </dependency>
+</dependencies>
+```
+
+
 ## 4. 核心依赖 
 依赖 | 版本
 ---|---
