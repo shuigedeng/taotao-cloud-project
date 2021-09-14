@@ -16,6 +16,7 @@ import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,8 @@ import java.util.Objects;
  * @version: 2019-07-31 16:32
  **/
 public class NacosCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.nacos";
 
 	private Collector collector;
 	private CollectTaskProperties collectTaskProperties;
@@ -46,12 +49,12 @@ public class NacosCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "nacos性能采集";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "nacosInfo";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class NacosCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			NacosServiceManager nacosServiceManager = ContextUtil.getBean(NacosServiceManager.class,
 				false);
@@ -101,27 +104,27 @@ public class NacosCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class NacosClientInfo {
+	private static class NacosClientInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.namespace", desc = "nacos namespace")
+		@FieldReport(name = TASK_NAME + ".namespace", desc = "nacos namespace")
 		private String namespace;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.endpoint", desc = "nacos endpoint")
+		@FieldReport(name = TASK_NAME + ".endpoint", desc = "nacos endpoint")
 		private String endpoint;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.serverList", desc = "nacos serverList")
+		@FieldReport(name = TASK_NAME + ".serverList", desc = "nacos serverList")
 		private String serverList;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.cacheDir", desc = "nacos cacheDir")
+		@FieldReport(name = TASK_NAME + ".cacheDir", desc = "nacos cacheDir")
 		private String cacheDir;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.logName", desc = "nacos logName")
+		@FieldReport(name = TASK_NAME + ".logName", desc = "nacos logName")
 		private String logName;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.serverStatus", desc = "nacos serverStatus")
+		@FieldReport(name = TASK_NAME + ".serverStatus", desc = "nacos serverStatus")
 		private String serverStatus;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.instances", desc = "nacos instances")
+		@FieldReport(name = TASK_NAME + ".instances", desc = "nacos instances")
 		private List<Instance> instances;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.serviceInfoMap", desc = "nacos serviceInfoMap")
+		@FieldReport(name = TASK_NAME + ".serviceInfoMap", desc = "nacos serviceInfoMap")
 		private Map<String, ServiceInfo> serviceInfoMap;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.servicesOfServer", desc = "nacos servicesOfServer")
+		@FieldReport(name = TASK_NAME + ".servicesOfServer", desc = "nacos servicesOfServer")
 		private ListView<String> servicesOfServer;
-		@FieldReport(name = "taotao.cloud.health.collect.nacos.subscribeServices", desc = "nacos subscribeServices")
+		@FieldReport(name = TASK_NAME + ".subscribeServices", desc = "nacos subscribeServices")
 		private List<ServiceInfo> subscribeServices;
 	}
 }

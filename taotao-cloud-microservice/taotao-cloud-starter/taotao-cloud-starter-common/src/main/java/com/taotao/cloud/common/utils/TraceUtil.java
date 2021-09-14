@@ -44,10 +44,10 @@ public class TraceUtil {
 	public static String getTraceId(HttpServletRequest request) {
 		String traceId = request.getParameter(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
 		if (StrUtil.isBlank(traceId)) {
-			final Enumeration<String> headerNames = request.getHeaderNames();
-			while (headerNames.hasMoreElements()) {
-				System.out.println(headerNames.nextElement());
-			}
+			//final Enumeration<String> headerNames = request.getHeaderNames();
+			//while (headerNames.hasMoreElements()) {
+			//	System.out.println(headerNames.nextElement());
+			//}
 			traceId = request.getHeader(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER);
 		}
 		return traceId;
@@ -114,10 +114,10 @@ public class TraceUtil {
 	public static String getZipkinTraceId(HttpServletRequest request) {
 		String zipkinTraceId = request.getParameter(CommonConstant.ZIPKIN_TRACE_ID);
 		if (StrUtil.isBlank(zipkinTraceId)) {
-			final Enumeration<String> headerNames = request.getHeaderNames();
-			while (headerNames.hasMoreElements()) {
-				System.out.println(headerNames.nextElement());
-			}
+			//final Enumeration<String> headerNames = request.getHeaderNames();
+			//while (headerNames.hasMoreElements()) {
+			//	System.out.println(headerNames.nextElement());
+			//}
 			zipkinTraceId = request.getHeader(CommonConstant.ZIPKIN_TRACE_ID);
 		}
 		return zipkinTraceId;
@@ -134,10 +134,10 @@ public class TraceUtil {
 	public static String getZipkinSpanId(HttpServletRequest request) {
 		String zipkinSpanId = request.getParameter(CommonConstant.ZIPKIN_SPANE_ID);
 		if (StrUtil.isBlank(zipkinSpanId)) {
-			final Enumeration<String> headerNames = request.getHeaderNames();
-			while (headerNames.hasMoreElements()) {
-				System.out.println(headerNames.nextElement());
-			}
+			//final Enumeration<String> headerNames = request.getHeaderNames();
+			//while (headerNames.hasMoreElements()) {
+			//	System.out.println(headerNames.nextElement());
+			//}
 			zipkinSpanId = request.getHeader(CommonConstant.ZIPKIN_SPANE_ID);
 		}
 		return zipkinSpanId;

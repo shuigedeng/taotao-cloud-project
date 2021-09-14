@@ -262,9 +262,9 @@ public class PackageUtils {
 		List<Class<?>> classNames = new ArrayList<>();
 		classNames("com.jaemon.dinger", classNames, false);
 
-		classNames.forEach(e -> System.out.println(e.getName()));
+		classNames.forEach(e -> LogUtil.info(e.getName()));
 
-		System.out.println(classNames.size());
+		LogUtil.info(String.valueOf(classNames.size()));
 	}
 
 }

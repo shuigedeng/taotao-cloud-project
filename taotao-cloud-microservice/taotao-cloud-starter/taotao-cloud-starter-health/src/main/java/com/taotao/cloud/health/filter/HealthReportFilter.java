@@ -16,6 +16,7 @@
 package com.taotao.cloud.health.filter;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
@@ -31,7 +32,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * HealthReportFilter
@@ -42,19 +42,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class HealthReportFilter implements Filter {
 
-	@Autowired
-	private HealthCheckProvider healthProvider;
-	@Autowired
-	private DumpProperties dumpProperties;
-
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		//ServletContext servletContext = filterConfig.getServletContext();
-		//WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(
-		//	servletContext);
-		//if (Objects.nonNull(webApplicationContext)) {
-		//	healthProvider = webApplicationContext.getBean(HealthCheckProvider.class);
-		//}
 	}
 
 	@Override
@@ -67,7 +56,10 @@ public class HealthReportFilter implements Filter {
 			request.getContextPath(), '/');
 		String uri = request.getRequestURI();
 
-		if (uri.startsWith(contextPath + "/health/report")) {
+		HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class, true);
+		DumpProperties dumpProperties = ContextUtil.getBean(DumpProperties.class, true);
+		if (Objects.nonNull(healthProvider) && Objects.nonNull(dumpProperties) && uri.startsWith(
+			contextPath + "/health/report")) {
 			try {
 				String html;
 

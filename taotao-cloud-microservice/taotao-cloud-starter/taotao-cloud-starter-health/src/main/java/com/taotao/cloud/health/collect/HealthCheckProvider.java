@@ -72,6 +72,7 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new ThreadCollectTask(properties));
 		registerCollectTask(new UnCatchExceptionCollectTask(properties));
 		registerCollectTask(new MonitorThreadPoolCollectTask(collector, properties));
+		registerCollectTask(new AsyncThreadPoolCollectTask(collector, properties));
 		//registerCollectTask(new BsfEurekaCollectTask());
 		registerCollectTask(new MybatisCollectTask(collector, properties));
 		registerCollectTask(new DataSourceCollectTask(properties));
@@ -97,6 +98,7 @@ public class HealthCheckProvider implements AutoCloseable {
 					if (StringUtil.isEmpty(text)) {
 						return;
 					}
+
 					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "健康检查", text);
 				} catch (Exception e) {
 					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "run 循环采集出错", e);

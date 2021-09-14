@@ -19,10 +19,11 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;
@@ -44,7 +45,9 @@ import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
 import com.taotao.cloud.health.strategy.Rule;
 import com.taotao.cloud.health.strategy.WarnTemplate;
 import com.taotao.cloud.health.warn.WarnProvider;
+import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -142,7 +145,7 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
 		filterRegistrationBean.setFilter(new HealthReportFilter());
 		filterRegistrationBean.setName("taotao-cloud-report-filter");
-		filterRegistrationBean.addUrlPatterns("/taotao/cloud/health/report/*");
+		filterRegistrationBean.addUrlPatterns("/health/report/*");
 		LogUtil.info(
 			"health报表注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/");
 		return filterRegistrationBean;
@@ -158,7 +161,7 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		filterRegistrationBean.setFilter(new DumpFilter());
 		filterRegistrationBean.setName("taotao-cloud-dump-filter");
-		filterRegistrationBean.addUrlPatterns("/taotao/cloud/health/dump/*");
+		filterRegistrationBean.addUrlPatterns("/health/dump/*");
 		LogUtil.info(
 			"health dump注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/dump/");
 		return filterRegistrationBean;
@@ -174,7 +177,7 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
 		filterRegistrationBean.setFilter(new PingFilter());
 		filterRegistrationBean.setName("taotao-cloud-ping-filter");
-		filterRegistrationBean.addUrlPatterns("/taotao/cloud/health/ping/");
+		filterRegistrationBean.addUrlPatterns("/health/ping/");
 		LogUtil.info(
 			"health ping注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/ping/");
 		return filterRegistrationBean;

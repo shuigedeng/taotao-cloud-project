@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
@@ -30,6 +31,8 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
  * @since 2021-09-10 17:38:09
  */
 public class ElkCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.elk";
 
 	private CollectTaskProperties properties;
 
@@ -49,16 +52,16 @@ public class ElkCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "ElkCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.elk";
+		return TASK_NAME;
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			Object appender = ContextUtil.getBean(ReflectionUtil.tryClassForName(
 				"net.logstash.logback.appender.LogstashTcpSocketAppender"), false);
@@ -77,11 +80,11 @@ public class ElkCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class ElkInfo {
+	private static class ElkInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.elk.queue.size", desc = "ELK消息队列大小")
+		@FieldReport(name = TASK_NAME + ".queue.size", desc = "ELK消息队列大小")
 		private Integer queueSize;
-		@FieldReport(name = "taotao.cloud.health.collect.elk.consecutiveDropped", desc = "ELK消息连续丢弃数量")
+		@FieldReport(name = TASK_NAME + ".consecutiveDropped", desc = "ELK消息连续丢弃数量")
 		private Long consecutiveDropped;
 	}
 }

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -33,8 +34,10 @@ import java.lang.Thread.UncaughtExceptionHandler;
  */
 public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
+	private static final String TASK_NAME = "taotao.cloud.health.collect.unCatchException";
+
 	private Throwable lastException = null;
-	private CollectTaskProperties properties;
+	private final CollectTaskProperties properties;
 
 	public UnCatchExceptionCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
@@ -54,12 +57,12 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "全局未捕获异常拦截监测";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.uncatch.info";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -68,14 +71,8 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	public Report getReport() {
-		try {
-			return new Report(
-				new UnCatchInfo(StringUtil.nullToEmpty(ExceptionUtil.trace2String(lastException))));
-		} catch (Exception e) {
-			LogUtil.error(e);
-		}
-		return null;
+	protected CollectInfo getData() {
+		return new UnCatchInfo(StringUtil.nullToEmpty(ExceptionUtil.trace2String(lastException)));
 	}
 
 	public static class DefaultUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
@@ -101,7 +98,6 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 				}
 			} catch (Exception e2) {
 
-
 			}
 			if (lastUncaughtExceptionHandler != null) {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);
@@ -111,7 +107,6 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	@Override
 	public void close() throws Exception {
-		//解除异常处理
 		UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
 		if (handler instanceof DefaultUncaughtExceptionHandler) {
 			Thread.setDefaultUncaughtExceptionHandler(
@@ -119,23 +114,12 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 		}
 	}
 
-	private static class UnCatchInfo {
+	private static class UnCatchInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.uncatch.trace", desc = "未捕获错误堆栈")
+		@FieldReport(name = TASK_NAME + ".trace", desc = "未捕获错误堆栈")
 		private String trace;
 
-		public UnCatchInfo() {
-		}
-
 		public UnCatchInfo(String trace) {
-			this.trace = trace;
-		}
-
-		public String getTrace() {
-			return trace;
-		}
-
-		public void setTrace(String trace) {
 			this.trace = trace;
 		}
 	}

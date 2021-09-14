@@ -20,6 +20,7 @@ import com.sun.management.OperatingSystemMXBean;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
@@ -33,6 +34,8 @@ import java.util.List;
  * @since 2021-09-10 19:09:07
  */
 public class MemoryCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.memory";
 
 	private OperatingSystemMXBean systemMXBean;
 	private CollectTaskProperties properties;
@@ -49,12 +52,12 @@ public class MemoryCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "MemoryCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.memery";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class MemoryCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			JvmInfo jvmInfo = new JvmInfo();
 
@@ -142,53 +145,53 @@ public class MemoryCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class JvmInfo {
+	private static class JvmInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.total.info", desc = "JVM 内存统计")
+		@FieldReport(name = TASK_NAME + ".jvm.total.info", desc = "JVM 内存统计")
 		private JvmTotalInfo totalInfo;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.eden.info", desc = "JVM Eden 年轻代内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.eden.info", desc = "JVM Eden 年轻代内存(M)")
 		private JVMEdenInfo edenInfo;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.survivor.info", desc = "JVM Survivor 年轻代内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.survivor.info", desc = "JVM Survivor 年轻代内存(M)")
 		private JVMSurvivorInfo survivorInfo;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.old.info", desc = "JVM Old 老年代内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.old.info", desc = "JVM Old 老年代内存(M)")
 		private JVMOldInfo genOldInfo;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.perm.info", desc = "JVM Perm 永久代内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.perm.info", desc = "JVM Perm 永久代内存(M)")
 		private JVMPermInfo genPermInfo;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.codeCache.info", desc = "JVM CodeCache 编译码缓存内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.codeCache.info", desc = "JVM CodeCache 编译码缓存内存(M)")
 		private JVMCodeCacheInfo genCodeCache;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.metaspace.info", desc = "JVM metaspace 元数据缓存内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.metaspace.info", desc = "JVM metaspace 元数据缓存内存(M)")
 		private JVMMetaspaceInfo genMetaspace;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.compressedClassSpace.info", desc = "JVM CompressedClassSpace 缓存内存(M)")
+		@FieldReport(name = TASK_NAME + ".jvm.compressedClassSpace.info", desc = "JVM CompressedClassSpace 缓存内存(M)")
 		private JVMCompressedClassSpaceInfo genCompressedClassSpace;
 	}
 
-	private static class JvmTotalInfo {
+	private static class JvmTotalInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.use", desc = "JVM内存已用空间(M)")
-		private double use;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.free", desc = "JVM内存可用空间(M)")
-		private double free;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.max", desc = "JVM内存最大可用空间(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.total", desc = "JVM内存总空间(M)")
-		private double total;
+		@FieldReport(name = TASK_NAME + ".jvm.use", desc = "JVM内存已用空间(M)")
+		private Long use;
+		@FieldReport(name = TASK_NAME + ".jvm.free", desc = "JVM内存可用空间(M)")
+		private Long free;
+		@FieldReport(name = TASK_NAME + ".jvm.max", desc = "JVM内存最大可用空间(M)")
+		private Long max;
+		@FieldReport(name = TASK_NAME + ".jvm.total", desc = "JVM内存总空间(M)")
+		private Long total;
 	}
 
-	private static class SystemInfo {
+	private static class SystemInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.os.use", desc = "Os内存已用空间(M)")
-		private double use;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.os.free", desc = "Os内存可用空间(M)")
-		private double free;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.os.total", desc = "Os内存总空间(M)")
-		private double total;
+		@FieldReport(name = TASK_NAME + ".os.use", desc = "Os内存已用空间(M)")
+		private Long use;
+		@FieldReport(name = TASK_NAME + ".os.free", desc = "Os内存可用空间(M)")
+		private Long free;
+		@FieldReport(name = TASK_NAME + ".os.total", desc = "Os内存总空间(M)")
+		private Long total;
 	}
 
-	private static class MemeryInfo {
+	private static class MemeryInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm", desc = "JVM内存空间(M)")
+		@FieldReport(name = TASK_NAME + ".jvm", desc = "JVM内存空间(M)")
 		private JvmInfo jvmInfo = new JvmInfo();
-		@FieldReport(name = "taotao.cloud.health.collect.memery.system", desc = "Os内存空间(M)")
+		@FieldReport(name = TASK_NAME + ".system", desc = "Os内存空间(M)")
 		private SystemInfo systemInfo = new SystemInfo();
 
 		public MemeryInfo(JvmInfo jvmInfo,
@@ -198,104 +201,104 @@ public class MemoryCollectTask extends AbstractCollectTask {
 		}
 	}
 
-	private static class JVMPermInfo {
+	private static class JVMPermInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.perm.init", desc = "perm 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.perm.max", desc = "perm 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.perm.used", desc = "perm 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.perm.committed", desc = "perm 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.perm.usedRate", desc = "perm 使用率 %")
-		private double usedRate;
-
-	}
-
-	private static class JVMOldInfo {
-
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.old.init", desc = "old 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.old.max", desc = "old 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.old.used", desc = "old 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.old.committed", desc = "old 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.old.usedRate", desc = "old 使用率 %")
-		private double usedRate;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.init", desc = "perm 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.max", desc = "perm 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.used", desc = "perm 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.committed", desc = "perm 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.usedRate", desc = "perm 使用率 %")
+		private Double usedRate;
 
 	}
 
-	private static class JVMSurvivorInfo {
+	private static class JVMOldInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.survivor.init", desc = "survivor 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.survivor.max", desc = "survivor 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.survivor.used", desc = "survivor 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.survivor.committed", desc = "survivor 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.survivor.usedRate", desc = "survivor 使用率 %")
-		private double usedRate;
-	}
-
-	private static class JVMEdenInfo {
-
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.eden.init", desc = "eden 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.eden.max", desc = "eden 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.eden.used", desc = "eden 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.eden.committed", desc = "eden 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.eden.usedRate", desc = "eden 使用率 %")
-		private double usedRate;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.old.init", desc = "old 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.old.max", desc = "old 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.old.used", desc = "old 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.old.committed", desc = "old 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.old.usedRate", desc = "old 使用率 %")
+		private Double usedRate;
 
 	}
 
-	private static class JVMCodeCacheInfo {
+	private static class JVMSurvivorInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.codeCache.init", desc = "codeCache 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.codeCache.max", desc = "codeCache 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.codeCache.used", desc = "codeCache 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.codeCache.committed", desc = "codeCache 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.codeCache.usedRate", desc = "codeCache 使用率 %")
-		private double usedRate;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.init", desc = "survivor 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.max", desc = "survivor 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.used", desc = "survivor 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.committed", desc = "survivor 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.usedRate", desc = "survivor 使用率 %")
+		private Double usedRate;
 	}
 
-	private static class JVMMetaspaceInfo {
+	private static class JVMEdenInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.metaspace.init", desc = "metaspace 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.metaspace.max", desc = "metaspace 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.metaspace.used", desc = "metaspace 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.metaspace.committed", desc = "metaspace 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.metaspace.usedRate", desc = "metaspace 使用率 %")
-		private double usedRate;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.init", desc = "eden 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.max", desc = "eden 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.used", desc = "eden 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.committed", desc = "eden 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.usedRate", desc = "eden 使用率 %")
+		private Double usedRate;
+
 	}
 
-	private static class JVMCompressedClassSpaceInfo {
+	private static class JVMCodeCacheInfo  implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.compressedClassSpace.init", desc = "Compressed Class Space 初始内存大小(M)")
-		private double init;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.compressedClassSpace.max", desc = "Compressed Class Space 最大内存大小(M)")
-		private double max;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.compressedClassSpace.used", desc = "Compressed Class Space 已使用内存大小(M)")
-		private double used;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.compressedClassSpace.committed", desc = "Compressed Class Space 已申请内存大小(M)")
-		private double committed;
-		@FieldReport(name = "taotao.cloud.health.collect.memery.jvm.gen.compressedClassSpace.usedRate", desc = "Compressed Class Space 使用率 %")
-		private double usedRate;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.init", desc = "codeCache 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.max", desc = "codeCache 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.used", desc = "codeCache 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.committed", desc = "codeCache 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.usedRate", desc = "codeCache 使用率 %")
+		private Double usedRate;
+	}
+
+	private static class JVMMetaspaceInfo  implements CollectInfo{
+
+		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.init", desc = "metaspace 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.max", desc = "metaspace 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.used", desc = "metaspace 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.committed", desc = "metaspace 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.usedRate", desc = "metaspace 使用率 %")
+		private Double usedRate;
+	}
+
+	private static class JVMCompressedClassSpaceInfo  implements CollectInfo{
+
+		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.init", desc = "Compressed Class Space 初始内存大小(M)")
+		private Double init;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.max", desc = "Compressed Class Space 最大内存大小(M)")
+		private Double max;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.used", desc = "Compressed Class Space 已使用内存大小(M)")
+		private Double used;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.committed", desc = "Compressed Class Space 已申请内存大小(M)")
+		private Double committed;
+		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.usedRate", desc = "Compressed Class Space 使用率 %")
+		private Double usedRate;
 	}
 }

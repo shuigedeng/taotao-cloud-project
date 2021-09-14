@@ -19,6 +19,7 @@ package com.taotao.cloud.health.collect;
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
@@ -33,6 +34,8 @@ import java.util.HashMap;
  */
 public class ThreadCollectTask extends AbstractCollectTask {
 
+	private static final String TASK_NAME = "taotao.cloud.health.collect.thread";
+
 	private ThreadMXBean threadMXBean;
 	private CollectTaskProperties properties;
 	private HashMap<Long, Long> lastThreadUserTime = new HashMap<>();
@@ -44,27 +47,27 @@ public class ThreadCollectTask extends AbstractCollectTask {
 
 	@Override
 	public int getTimeSpan() {
-		return properties.getThreadTimeSpan();
+		return properties.getMonitorThreadTimeSpan();
 	}
 
 	@Override
 	public String getDesc() {
-		return "线程监测";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.thread.info";
+		return TASK_NAME;
 	}
 
 	@Override
 	public boolean getEnabled() {
-		return properties.isThreadEnabled();
+		return properties.isMonitorThreadEnabled();
 	}
 
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			ThreadInfo threadInfo = new ThreadInfo();
 			long[] deadlockedThreads = threadMXBean.findDeadlockedThreads();
@@ -112,13 +115,13 @@ public class ThreadCollectTask extends AbstractCollectTask {
 			}
 			lastThreadUserTime = treadUserTime;
 			if (runable != null) {
-				threadInfo.setMaxRunableDetail(ExceptionUtil.trace2String(runable.getStackTrace()));
+				threadInfo.maxRunableDetail = ExceptionUtil.trace2String(runable.getStackTrace());
 			}
 			if (wait != null) {
-				threadInfo.setMaxWaitingDetail(ExceptionUtil.trace2String(wait.getStackTrace()));
+				threadInfo.maxWaitingDetail = ExceptionUtil.trace2String(wait.getStackTrace());
 			}
 			if (block != null) {
-				threadInfo.setMaxBlockedDetail(ExceptionUtil.trace2String(block.getStackTrace()));
+				threadInfo.maxBlockedDetail = ExceptionUtil.trace2String(block.getStackTrace());
 			}
 			return threadInfo;
 		} catch (Exception e) {
@@ -128,23 +131,23 @@ public class ThreadCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class ThreadInfo {
+	private static class ThreadInfo implements CollectInfo {
 
-		@FieldReport(name = "taotao.cloud.health.collect.thread.deadlocked.count", desc = "死锁线程数")
-		private double deadlockedThreadCount;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.total", desc = "线程总数")
-		private double threadCount;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.runable.count", desc = "运行线程总数")
-		private double runableThreadCount;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.blocked.count", desc = "阻塞线程总数")
-		private double blockedThreadCount;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.waiting.count", desc = "等待线程总数")
-		private double waitingThreadCount;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.runable.max.detail", desc = "最近运行最耗时的线程详情")
+		@FieldReport(name = TASK_NAME + ".deadlocked.count", desc = "死锁线程数")
+		private Integer deadlockedThreadCount;
+		@FieldReport(name = TASK_NAME + ".total", desc = "线程总数")
+		private Integer threadCount;
+		@FieldReport(name = TASK_NAME + ".runable.count", desc = "运行线程总数")
+		private Integer runableThreadCount;
+		@FieldReport(name = TASK_NAME + ".blocked.count", desc = "阻塞线程总数")
+		private Integer blockedThreadCount;
+		@FieldReport(name = TASK_NAME + ".waiting.count", desc = "等待线程总数")
+		private Integer waitingThreadCount;
+		@FieldReport(name = TASK_NAME + ".runable.max.detail", desc = "最近运行最耗时的线程详情")
 		private String maxRunableDetail;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.blocked.max.detail", desc = "阻塞最耗时的线程详情")
+		@FieldReport(name = TASK_NAME + ".blocked.max.detail", desc = "阻塞最耗时的线程详情")
 		private String maxBlockedDetail;
-		@FieldReport(name = "taotao.cloud.health.collect.thread.waiting.max.detail", desc = "等待最耗时的线程详情")
+		@FieldReport(name = TASK_NAME + ".waiting.max.detail", desc = "等待最耗时的线程详情")
 		private String maxWaitingDetail;
 	}
 }

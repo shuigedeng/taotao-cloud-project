@@ -21,6 +21,7 @@ import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -34,6 +35,7 @@ import org.apache.http.pool.PoolStats;
  * @since 2021-09-10 17:44:20
  */
 public class HttpPoolCollectTask extends AbstractCollectTask {
+	private static final String TASK_NAME = "taotao.cloud.health.collect.httpPool";
 
 	private CollectTaskProperties properties;
 
@@ -53,16 +55,16 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "HttpPoolCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.httppool";
+		return TASK_NAME;
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class,
 				false);
@@ -98,15 +100,15 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class HttpPoolInfo {
+	private static class HttpPoolInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.httpPool.available", desc = "HttpPool可用的连接数")
+		@FieldReport(name = TASK_NAME + ".available", desc = "HttpPool可用的连接数")
 		private Integer availableCount = 0;
-		@FieldReport(name = "taotao.cloud.health.collect.httpPool.pending", desc = "HttpPool等待的连接数")
+		@FieldReport(name = TASK_NAME + ".pending", desc = "HttpPool等待的连接数")
 		private Integer pendingCount = 0;
-		@FieldReport(name = "taotao.cloud.health.collect.httpPool.leased", desc = "HttpPool使用中的连接数")
+		@FieldReport(name = TASK_NAME + ".leased", desc = "HttpPool使用中的连接数")
 		private Integer leasedCount = 0;
-		@FieldReport(name = "taotao.cloud.health.collect.httpPool.detail", desc = "HttpPool详情")
+		@FieldReport(name = TASK_NAME + ".detail", desc = "HttpPool详情")
 		private String poolDetail;
 	}
 }

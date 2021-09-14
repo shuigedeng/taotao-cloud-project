@@ -47,10 +47,12 @@ public class HealthSqlMybatisConfiguration implements InitializingBean {
 		return new SqlMybatisInterceptor(collector);
 	}
 
-	@Bean
-	@ConditionalOnClass(name = "org.hibernate.Interceptor")
-	public HibernateInterceptor hibernateInterceptor() {
-		LogUtil.started(HibernateInterceptor.class, StarterNameConstant.HEALTH_STARTER);
-		return new HibernateInterceptor();
-	}
+	//@Bean
+	//@ConditionalOnClass(name = "org.hibernate.Interceptor")
+	//public HibernateInterceptor hibernateInterceptor() {
+	//	LogUtil.started(HibernateInterceptor.class, StarterNameConstant.HEALTH_STARTER);
+	//	return new HibernateInterceptor();
+	//}
+
+
 }

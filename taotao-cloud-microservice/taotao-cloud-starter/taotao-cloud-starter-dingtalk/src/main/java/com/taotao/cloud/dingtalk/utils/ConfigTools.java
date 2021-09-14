@@ -18,6 +18,7 @@ package com.taotao.cloud.dingtalk.utils;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.base64ToByteArray;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.byteArrayToBase64;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyFactory;
@@ -59,12 +60,12 @@ public class ConfigTools {
 
 		String password = args[0];
 		String[] arr = genKeyPair(1024);
-		System.out.println("privateKey: " + arr[0]);
-		System.out.println("decryptKey: " + arr[1]);
+		LogUtil.info("privateKey: " + arr[0]);
+		LogUtil.info("decryptKey: " + arr[1]);
 		String encrypt = encrypt(arr[0], password);
-		System.out.println("encrypt tokenId: " + encrypt);
+		LogUtil.info("encrypt tokenId: " + encrypt);
 		String decrypt = decrypt(arr[1], encrypt);
-		System.out.println("decrypt tokenId:" + decrypt);
+		LogUtil.info("decrypt tokenId:" + decrypt);
 	}
 
 	public static String decrypt(String cipherText) throws Exception {

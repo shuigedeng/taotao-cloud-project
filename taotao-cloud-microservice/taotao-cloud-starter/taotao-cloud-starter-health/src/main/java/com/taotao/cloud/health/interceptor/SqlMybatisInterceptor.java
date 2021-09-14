@@ -66,7 +66,7 @@ public class SqlMybatisInterceptor implements Interceptor {
 		String sql = boundSql.getSql();
 
 		try {
-			Object returnObj = this.collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
+			Object returnObj = collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
 				StringUtil.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
 					try {
 						return invocation.proceed();

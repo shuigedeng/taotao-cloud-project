@@ -22,6 +22,7 @@ import org.hibernate.CallbackException;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.EntityMode;
 import org.hibernate.Transaction;
+import org.hibernate.resource.jdbc.spi.StatementInspector;
 import org.hibernate.type.Type;
 
 /**

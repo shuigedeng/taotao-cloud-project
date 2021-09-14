@@ -41,7 +41,7 @@ public class JasyptUtil {
 		if (stringEncryptor == null) {
 			try {
 				String password = ContextUtil.getApplicationContext().getEnvironment()
-						.getProperty("jasypt.encryptor.password", "taotao-cloud");
+					.getProperty("jasypt.encryptor.password", "taotao-cloud");
 				stringEncryptor = getInstance(password);
 			} catch (Exception e) {
 				LogUtil.error(e);
@@ -83,7 +83,7 @@ public class JasyptUtil {
 	 */
 	public static StringEncryptor getInstance(String password) throws Exception {
 		if (password == null || password.trim().equals("")) {
-			System.out.println("秘钥不能为空！");
+			LogUtil.error("秘钥不能为空！");
 			throw new Exception("org.jasypt.encryption.StringEncryptor秘钥不能为空！");
 		}
 

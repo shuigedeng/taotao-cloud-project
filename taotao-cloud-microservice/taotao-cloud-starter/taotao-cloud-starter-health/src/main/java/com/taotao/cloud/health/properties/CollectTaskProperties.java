@@ -41,9 +41,13 @@ public class CollectTaskProperties {
 
 	private int tomcatTimeSpan = 20;
 
-	private boolean threadEnabled = true;
+	private boolean monitorThreadEnabled = true;
 
-	private int threadTimeSpan = 20;
+	private int monitorThreadTimeSpan = 20;
+
+	private boolean asyncThreadEnabled = true;
+
+	private int asyncThreadTimeSpan = 20;
 
 	private boolean threadPollEnabled = true;
 
@@ -284,20 +288,20 @@ public class CollectTaskProperties {
 		this.networkTimeSpan = networkTimeSpan;
 	}
 
-	public boolean isThreadEnabled() {
-		return threadEnabled;
+	public boolean isMonitorThreadEnabled() {
+		return monitorThreadEnabled;
 	}
 
-	public void setThreadEnabled(boolean threadEnabled) {
-		this.threadEnabled = threadEnabled;
+	public void setMonitorThreadEnabled(boolean monitorThreadEnabled) {
+		this.monitorThreadEnabled = monitorThreadEnabled;
 	}
 
-	public int getThreadTimeSpan() {
-		return threadTimeSpan;
+	public int getMonitorThreadTimeSpan() {
+		return monitorThreadTimeSpan;
 	}
 
-	public void setThreadTimeSpan(int threadTimeSpan) {
-		this.threadTimeSpan = threadTimeSpan;
+	public void setMonitorThreadTimeSpan(int monitorThreadTimeSpan) {
+		this.monitorThreadTimeSpan = monitorThreadTimeSpan;
 	}
 
 	public boolean isUncatchEnabled() {
@@ -354,5 +358,21 @@ public class CollectTaskProperties {
 
 	public void setNacosTimeSpan(int nacosTimeSpan) {
 		this.nacosTimeSpan = nacosTimeSpan;
+	}
+
+	public boolean isAsyncThreadEnabled() {
+		return asyncThreadEnabled;
+	}
+
+	public void setAsyncThreadEnabled(boolean asyncThreadEnabled) {
+		this.asyncThreadEnabled = asyncThreadEnabled;
+	}
+
+	public int getAsyncThreadTimeSpan() {
+		return asyncThreadTimeSpan;
+	}
+
+	public void setAsyncThreadTimeSpan(int asyncThreadTimeSpan) {
+		this.asyncThreadTimeSpan = asyncThreadTimeSpan;
 	}
 }

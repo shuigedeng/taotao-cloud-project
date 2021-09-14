@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class Collector {
 
 	private CoreProperties coreProperties;
+
 	/**
 	 * map
 	 */
@@ -249,13 +250,13 @@ public class Collector {
 		 */
 		protected SortList sortList = new SortList();
 		/**
-		 * lastMinTimeSpan
-		 */
-		protected double lastMinTimeSpan = 0;
-		/**
 		 * sortListPerMinute
 		 */
 		protected SortList sortListPerMinute = new SortList();
+		/**
+		 * lastMinTimeSpan
+		 */
+		protected double lastMinTimeSpan = 0;
 		/**
 		 * lastMinTimeSpanPerMinute
 		 */
@@ -280,39 +281,6 @@ public class Collector {
 		 * key
 		 */
 		private String key;
-
-		/**
-		 * getCurrent
-		 *
-		 * @return {@link java.lang.Long }
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:34:05
-		 */
-		public Long getCurrent() {
-			return current.get();
-		}
-
-		/**
-		 * getLastErrorPerSecond
-		 *
-		 * @return {@link java.lang.Long }
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:34:08
-		 */
-		public Long getLastErrorPerSecond() {
-			return lastErrorPerSecond.get();
-		}
-
-		/**
-		 * getLastSuccessPerSecond
-		 *
-		 * @return {@link java.lang.Long }
-		 * @author shuigedeng
-		 * @since 2021-09-02 20:34:12
-		 */
-		public Long getLastSuccessPerSecond() {
-			return lastSuccessPerSecond.get();
-		}
 
 		/**
 		 * run
@@ -376,12 +344,14 @@ public class Collector {
 				}
 
 				current.getAndIncrement();
+
 				//每秒重新计数,不用保证十分精确
 				long second = System.currentTimeMillis() / 1000;
 				if (second != lastSecond) {
 					lastSecond = second;
 					lastErrorPerSecond.set(0);
 					lastSuccessPerSecond.set(0);
+
 					if (lastSecond / 60 != lastMinute) {
 						lastMinute = lastSecond / 60;
 						sortListPerMinute.removeMore(0);
@@ -391,9 +361,11 @@ public class Collector {
 				long start = System.currentTimeMillis();
 				T result = func.invoke();
 				long timeSpan = System.currentTimeMillis() - start;
+
 				insertOrUpdate(tag, timeSpan);
 				insertOrUpdatePerMinute(tag, timeSpan);
 				lastSuccessPerSecond.getAndIncrement();
+
 				return result;
 			} catch (Exception exp) {
 				lastErrorPerSecond.getAndIncrement();
@@ -418,7 +390,8 @@ public class Collector {
 
 			try {
 				sortList.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
-				sortList.removeMore(this.maxLength);
+				sortList.removeMore(maxLength);
+
 				SortInfo last = sortList.getLast();
 				if (last != null) {
 					lastMinTimeSpan = last.getTime();
@@ -444,6 +417,7 @@ public class Collector {
 			try {
 				sortListPerMinute.add(new SortInfo(info, timeSpan, timeSpan, new AtomicLong(1)));
 				sortListPerMinute.removeMore(this.maxLength);
+
 				SortInfo last = sortListPerMinute.getLast();
 				if (last != null) {
 					lastMinTimeSpanPerMinute = last.getTime();
@@ -462,6 +436,39 @@ public class Collector {
 		 */
 		public SortList getMaxTimeSpanList() {
 			return sortList;
+		}
+
+		/**
+		 * getCurrent
+		 *
+		 * @return long
+		 * @author shuigedeng
+		 * @since 2021-09-13 21:22:01
+		 */
+		public long getCurrent() {
+			return current.get();
+		}
+
+		/**
+		 * getLastErrorPerSecond
+		 *
+		 * @return long
+		 * @author shuigedeng
+		 * @since 2021-09-13 21:21:57
+		 */
+		public long getLastErrorPerSecond() {
+			return lastErrorPerSecond.get();
+		}
+
+		/**
+		 * getLastSuccessPerSecond
+		 *
+		 * @return long
+		 * @author shuigedeng
+		 * @since 2021-09-13 21:21:53
+		 */
+		public long getLastSuccessPerSecond() {
+			return lastSuccessPerSecond.get();
 		}
 
 		/**
@@ -715,17 +722,16 @@ public class Collector {
 		/**
 		 * tagCache
 		 */
-		protected Map<Integer, Object> tagCache = new ConcurrentHashMap<>();
+		protected Map<Integer, SortInfo> tagCache = new ConcurrentHashMap<>();
 
 		@Override
 		public boolean add(SortInfo sortInfo) {
 			Integer hash = sortInfo.tag.hashCode();
 			if (tagCache.containsKey(hash)) {
-				Object value = tagCache.get(hash);
-				if (value != null) {
+				SortInfo sort = tagCache.get(hash);
+				if (sort != null) {
 					//累加
-					SortInfo sort = ((SortInfo) value);
-					sort.getCount().getAndIncrement();
+					sort.count.getAndIncrement();
 					if (sort.time < sortInfo.time) {
 						sort.maxTime = sortInfo.time;
 					}
@@ -740,6 +746,7 @@ public class Collector {
 			if (super.add(sortInfo)) {
 				tagCache.put(hash, sortInfo);
 			}
+
 			return true;
 		}
 
@@ -759,10 +766,11 @@ public class Collector {
 		 */
 		public SortInfo getLast() {
 			try {
-				if (!this.isEmpty()) {
-					return this.last();
+				if (!isEmpty()) {
+					return last();
 				}
 			} catch (NoSuchElementException e) {
+				LogUtil.error(e);
 			}
 			return null;
 		}
@@ -775,12 +783,12 @@ public class Collector {
 		 * @since 2021-09-02 20:36:05
 		 */
 		public void removeMore(int maxLength) {
-			int count = this.size();
-			while (this.size() > maxLength) {
+			int count = size();
+			while (size() > maxLength) {
 				count--;
-				SortInfo last = this.pollLast();
+				SortInfo last = pollLast();
 				if (last != null) {
-					this.remove(last);
+					remove(last);
 				}
 				if (count < -10) {
 					LogUtil.error("[严重bug] remove more,item:" + (last != null ? last.toString()

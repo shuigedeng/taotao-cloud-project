@@ -16,6 +16,8 @@
 package com.taotao.cloud.health.filter;
 
 
+import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;
 import java.io.IOException;
 import java.util.Objects;
@@ -37,18 +39,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2021-09-10 17:11:05
  */
 public class DumpFilter implements Filter {
-
-	@Autowired
-	private DumpProvider dumpProvider;
-
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		//ServletContext servletContext = filterConfig.getServletContext();
-		//WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(
-		//	servletContext);
-		//if (Objects.nonNull(webApplicationContext)) {
-		//	dumpProvider = webApplicationContext.getBean(DumpProvider.class);
-		//}
 	}
 
 	@Override
@@ -61,6 +53,8 @@ public class DumpFilter implements Filter {
 			request.getContextPath(), '/');
 
 		String uri = request.getRequestURI();
+		DumpProvider dumpProvider = ContextUtil.getBean(DumpProvider.class, true);
+
 		if (uri.startsWith(contextPath + "/health/dump")) {
 			if (Objects.nonNull(dumpProvider)) {
 				if (uri.startsWith(contextPath + "/health/dump/zip/")) {

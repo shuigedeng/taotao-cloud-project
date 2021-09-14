@@ -161,7 +161,7 @@ public class CompressUtil {
 						}
 					}
 				} else {
-					System.out.println(entry.getName());
+					LogUtil.info(entry.getName());
 				}
 			}
 		} catch (Exception exp) {

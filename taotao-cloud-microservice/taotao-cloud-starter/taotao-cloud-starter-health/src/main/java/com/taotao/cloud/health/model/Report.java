@@ -119,20 +119,22 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 							itemValue = ("<span style='color:blue;cursor:pointer' title='{title}' "
 								+ "onclick='this.innerHTML=(this.textContent==\"显示详情\"?"
 								+ "this.title.replace(/\\r/g,\"\").replace(/\\n/g,\"<br/>\"):\"显示详情\");'>显示详情</span>")
-								.replace("{title}",
-									htmlEncode(text)
-										.replace("\r", "/r")
-										.replace("\n", "/n"));
-							//.replace("{title2}",htmlEncode(text).replace("\r","").replace("\n","<br/>"));
+								.replace("{title}", htmlEncode(text)
+									.replace("\r", "/r")
+									.replace("\n", "/n"));
 						}
+					} else {
+						itemValue = JsonUtil.toJSONString(itemValue);
 					}
+				} else {
+					itemValue = "NULL";
 				}
 
 				stringBuilder.append(
 					String.format("%s(%s):%s%s\r\n",
 						item.getKey(),
 						reportItem.getDesc(),
-						JsonUtil.toJSONString(itemValue),
+						itemValue,
 						reportItem.isWarn() ? "<font color=\"#FF0000\">[报警]</font>" : ""));
 			} else if (value instanceof Report) {
 				stringBuilder.append(((Report) value).toHtml());
@@ -196,11 +198,11 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		}
 	}
 
-	public Report(Object info) {
+	public Report(CollectInfo info) {
 		parseObject(this, info);
 	}
 
-	private void parseObject(Report report, Object obj) {
+	private void parseObject(Report report, CollectInfo obj) {
 		for (Field field : obj.getClass().getDeclaredFields()) {
 			FieldReport fieldReport = field.getAnnotation(FieldReport.class);
 			if (fieldReport != null) {
@@ -208,16 +210,19 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 				//null 不生成报表
 				if (value == null) {
 
-				} else if (value instanceof Number || value instanceof String) {
+				} else if (value instanceof Number) {
 					report.put(fieldReport.name(),
 						new ReportItem(fieldReport.desc(), value, "", null));
-				} else {
+				} else if (value instanceof CollectInfo) {
 					Report report2 = new Report()
 						.setDesc(fieldReport.desc())
 						.setName(fieldReport.name());
 
 					report.put(fieldReport.name(), report2);
-					parseObject(report2, value);
+					parseObject(report2, (CollectInfo) value);
+				} else {
+					report.put(fieldReport.name(),
+						new ReportItem(fieldReport.desc(), JsonUtil.toJSONString(value), "", null));
 				}
 			}
 		}
@@ -312,6 +317,16 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		}
 
 		@Override
+		public String toString() {
+			return "ReportItem{" +
+				"desc='" + desc + '\'' +
+				", value=" + value +
+				", warn='" + warn + '\'' +
+				", rule=" + rule +
+				'}';
+		}
+
+		@Override
 		public ReportItem clone() {
 			return new ReportItem(desc, value, warn, rule);
 		}
@@ -366,4 +381,6 @@ public class Report extends LinkedHashMap<String, Object> implements Serializabl
 		this.name = name;
 		return this;
 	}
+
+
 }

@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.annotation.Annotation;
 
@@ -31,7 +32,9 @@ import java.lang.annotation.Annotation;
  */
 public class XxlJobCollectTask extends AbstractCollectTask {
 
-	private CollectTaskProperties properties;
+	private static final String TASK_NAME = "taotao.cloud.health.collect.xxljob";
+
+	private final CollectTaskProperties properties;
 
 	public XxlJobCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
@@ -49,16 +52,16 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "定时任务性能采集";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.xxljob.info";
+		return TASK_NAME;
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			if (ContextUtil.getBean(
 				ReflectionUtil.tryClassForName(
@@ -80,9 +83,9 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class JobInfo {
+	private static class JobInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.xxljob.count", desc = "xxljob任务数量")
+		@FieldReport(name = TASK_NAME + ".count", desc = "xxljob任务数量")
 		private Integer count;
 	}
 }

@@ -17,6 +17,7 @@ package com.taotao.cloud.data.jpa.configuration;
 
 import static org.hibernate.cfg.AvailableSettings.DIALECT;
 import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
+import static org.hibernate.cfg.AvailableSettings.INTERCEPTOR;
 import static org.hibernate.cfg.AvailableSettings.JDBC_TIME_ZONE;
 import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT;
 import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER;
@@ -28,16 +29,23 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
+import com.taotao.cloud.data.jpa.listener.HibernateInspector;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
+import org.hibernate.HibernateException;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.hibernate.event.internal.DefaultLoadEventListener;
+import org.hibernate.event.service.spi.EventListenerRegistry;
+import org.hibernate.event.spi.EventType;
+import org.hibernate.event.spi.LoadEvent;
+import org.hibernate.event.spi.LoadEventListener;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
@@ -72,20 +80,19 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public AuditorBean auditorBean(){
+	public AuditorBean auditorBean() {
 		LogUtil.started(AuditorBean.class, StarterNameConstant.JPA_STARTER);
 		return new AuditorBean();
 	}
 
 	@Bean
-	@ConditionalOnBean(DataSource.class)
-	public TenantConnectionProvider tenantConnectionProvider(DataSource dataSource){
+	public MultiTenantConnectionProvider tenantConnectionProvider(DataSource dataSource) {
 		LogUtil.started(TenantConnectionProvider.class, StarterNameConstant.JPA_STARTER);
 		return new TenantConnectionProvider(dataSource);
 	}
 
 	@Bean
-	public TenantIdentifierResolver tenantIdentifierResolver(){
+	public CurrentTenantIdentifierResolver tenantIdentifierResolver() {
 		LogUtil.started(TenantIdentifierResolver.class, StarterNameConstant.JPA_STARTER);
 		return new TenantIdentifierResolver();
 	}
@@ -101,13 +108,19 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean(DataSource.class)
+	public HibernateInspector hibernateListener() {
+		return new HibernateInspector();
+	}
+
+	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory(
 		final DataSource dataSource,
 		final JpaVendorAdapter jpaVendorAdapter,
 		final MultiTenantConnectionProvider multiTenantConnectionProvider,
-		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
-		LogUtil.started(LocalContainerEntityManagerFactoryBean.class, StarterNameConstant.JPA_STARTER);
+		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver,
+		HibernateInspector hibernateInspector) {
+		LogUtil.started(LocalContainerEntityManagerFactoryBean.class,
+			StarterNameConstant.JPA_STARTER);
 
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 
@@ -123,6 +136,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 			PHYSICAL_NAMING_STRATEGY, SpringPhysicalNamingStrategy.class.getName());
 		newJpaProperties.put(DIALECT, MySQL8Dialect.class.getName());
 		newJpaProperties.put(JDBC_TIME_ZONE, "Asia/Shanghai");
+		newJpaProperties.put(INTERCEPTOR, hibernateInspector);
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 			new LocalContainerEntityManagerFactoryBean();
@@ -134,6 +148,17 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		entityManagerFactoryBean
 			.setPackagesToScan("com.taotao.cloud.*.biz.entity", "com.taotao.cloud.*.entity");
 		entityManagerFactoryBean.setPersistenceUnitName("default");
+
+		SessionFactoryImpl sessionFactory = entityManagerFactoryBean.getNativeEntityManagerFactory()
+			.unwrap(SessionFactoryImpl.class);
+		EventListenerRegistry registry = sessionFactory.getServiceRegistry()
+			.getService(EventListenerRegistry.class);
+		registry.getEventListenerGroup(EventType.SAVE_UPDATE).appendListener(
+			new HibernateInspector.SaveOrUpdateListener(hibernateInspector));
+		registry.getEventListenerGroup(EventType.DELETE)
+			.appendListener(new HibernateInspector.DeleteListener(hibernateInspector));
+		registry.getEventListenerGroup(EventType.LOAD)
+			.appendListener(new HibernateInspector.LoadListener(hibernateInspector));
 
 		return entityManagerFactoryBean;
 	}

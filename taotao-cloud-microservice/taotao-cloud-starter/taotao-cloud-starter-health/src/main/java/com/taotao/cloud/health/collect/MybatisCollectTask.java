@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 
 /**
@@ -30,6 +31,8 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
  * @since 2021-09-10 19:15:21
  */
 public class MybatisCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.mybatis";
 
 	private CollectTaskProperties properties;
 	private Collector collector;
@@ -46,12 +49,12 @@ public class MybatisCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "mybatis性能采集";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.mybatis.info";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class MybatisCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			SqlMybatisInfo info = new SqlMybatisInfo();
 
@@ -79,17 +82,17 @@ public class MybatisCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class SqlMybatisInfo {
+	private static class SqlMybatisInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.error", desc = "mybatis 拦截上一次每秒出错次数")
+		@FieldReport(name = TASK_NAME + ".sql.hook.error", desc = "mybatis 拦截上一次每秒出错次数")
 		private Long hookError;
-		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.success", desc = "mybatis 拦截上一次每秒成功次数")
+		@FieldReport(name = TASK_NAME + ".sql.hook.success", desc = "mybatis 拦截上一次每秒成功次数")
 		private Long hookSuccess;
-		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.current", desc = "mybatis 拦截当前执行任务数")
+		@FieldReport(name = TASK_NAME + ".sql.hook.current", desc = "mybatis 拦截当前执行任务数")
 		private Long hookCurrent;
-		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.list.detail", desc = "mybatis 拦截历史最大耗时任务列表")
+		@FieldReport(name = TASK_NAME + ".sql.hook.list.detail", desc = "mybatis 拦截历史最大耗时任务列表")
 		private String hookList;
-		@FieldReport(name = "taotao.cloud.health.collect.mybatis.sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
+		@FieldReport(name = TASK_NAME + ".sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
 		private String hookListPerMinute;
 
 	}

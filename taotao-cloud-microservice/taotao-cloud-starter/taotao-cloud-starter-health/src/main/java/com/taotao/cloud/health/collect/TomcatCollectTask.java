@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.boot.web.context.ConfigurableWebServerApplicationContext;
@@ -34,6 +35,8 @@ import org.springframework.boot.web.server.WebServer;
  */
 public class TomcatCollectTask extends AbstractCollectTask {
 
+	private static final String TASK_NAME = "taotao.cloud.health.collect.tomcat";
+
 	private CollectTaskProperties collectTaskProperties;
 
 	public TomcatCollectTask(CollectTaskProperties collectTaskProperties) {
@@ -47,12 +50,12 @@ public class TomcatCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "tomcat性能采集";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.tomcat.info";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -61,7 +64,7 @@ public class TomcatCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			ConfigurableWebServerApplicationContext context = ContextUtil.getConfigurableWebServerApplicationContext();
 			if (context != null) {
@@ -104,23 +107,23 @@ public class TomcatCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class TomcatInfo {
+	private static class TomcatInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.active.count", desc = "tomcat 线程池活动线程数")
+		@FieldReport(name = TASK_NAME + ".active.count", desc = "tomcat 线程池活动线程数")
 		private Integer activeCount;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.core.poolSize", desc = "tomcat 线程池核心线程数")
+		@FieldReport(name = TASK_NAME + ".core.poolSize", desc = "tomcat 线程池核心线程数")
 		private Integer corePoolSize;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.poolSize.largest", desc = "tomcat 线程池历史最大线程数")
+		@FieldReport(name = TASK_NAME + ".poolSize.largest", desc = "tomcat 线程池历史最大线程数")
 		private Integer poolSizeLargest;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.poolSize.max", desc = "tomcat 线程池最大线程数")
+		@FieldReport(name = TASK_NAME + ".poolSize.max", desc = "tomcat 线程池最大线程数")
 		private Integer poolSizeMax;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.poolSize.count", desc = "tomcat 线程池当前线程数")
+		@FieldReport(name = TASK_NAME + ".poolSize.count", desc = "tomcat 线程池当前线程数")
 		private Integer poolSizeCount;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.queue.size", desc = "tomcat 线程池当前排队等待任务数")
+		@FieldReport(name = TASK_NAME + ".queue.size", desc = "tomcat 线程池当前排队等待任务数")
 		private Integer queueSize;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.task.count", desc = "tomcat 线程池历史任务数")
+		@FieldReport(name = TASK_NAME + ".task.count", desc = "tomcat 线程池历史任务数")
 		private Long taskCount;
-		@FieldReport(name = "taotao.cloud.health.collect.tomcat.threadPool.task.completed", desc = "tomcat 线程池已完成任务数")
+		@FieldReport(name = TASK_NAME + ".task.completed", desc = "tomcat 线程池已完成任务数")
 		private Long taskCompleted;
 
 //        @FieldReport(name = "tomcat.threadPool.task.hook.error", desc = "tomcat 线程池拦截上一次每秒出错次数")

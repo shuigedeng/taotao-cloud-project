@@ -2,6 +2,7 @@ package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * @date 2019-10-23
  */
 public class LogStatisticCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.logStatistic";
 
 	private CollectTaskProperties properties;
 	private Collector collector;
@@ -34,25 +37,29 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "最近1分钟日志统计";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.log.info";
+		return TASK_NAME;
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			LogErrorInfo data = new LogErrorInfo();
 			data.logerrorCount =
-				this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null ? 0
-					: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.error.count")
+				this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null
+					? 0
+					: ((AtomicLong) (this.collector.value(
+							"taotao.cloud.health.collect.log.error.count")
 						.get())).intValue();
 			data.logIncreCount =
-				this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null ? 0
-					: ((AtomicLong) (this.collector.value("taotao.cloud.health.collect.log.incre.count")
+				this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null
+					? 0
+					: ((AtomicLong) (this.collector.value(
+							"taotao.cloud.health.collect.log.incre.count")
 						.get())).intValue();
 			return data;
 		} catch (Exception e) {
@@ -61,11 +68,11 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class LogErrorInfo {
+	private static class LogErrorInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.log.error.count", desc = "最近1分钟错误日志数量")
+		@FieldReport(name = TASK_NAME + ".error.count", desc = "最近1分钟错误日志数量")
 		private Integer logerrorCount;
-		@FieldReport(name = "taotao.cloud.health.collect.log.incre.count", desc = "最近1分钟日志条数增量")
+		@FieldReport(name = TASK_NAME + ".incre.count", desc = "最近1分钟日志条数增量")
 		private Integer logIncreCount;
 	}
 }

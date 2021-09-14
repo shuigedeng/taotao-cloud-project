@@ -19,6 +19,7 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.warn.WarnProvider;
@@ -37,7 +38,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	/**
 	 * 上次采集的信息
 	 */
-	private Object lastCollectInfo = null;
+	private CollectInfo lastCollectInfo = null;
 
 	/**
 	 * 上次运行时间
@@ -88,8 +89,8 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @since 2021-09-10 10:52:45
 	 */
 	public Report getReport() {
-		if (getTimeSpan() > 0
-			&& (System.currentTimeMillis() - lastRunTime) > getTimeSpan() * 1000L) {
+		long time = System.currentTimeMillis() - lastRunTime;
+		if (getTimeSpan() > 0 && time > getTimeSpan() * 1000L) {
 			lastRunTime = System.currentTimeMillis();
 			lastCollectInfo = getData();
 		}
@@ -152,7 +153,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @author shuigedeng
 	 * @since 2021-09-10 10:41:38
 	 */
-	protected Object getData() {
+	protected CollectInfo getData() {
 		return null;
 	}
 

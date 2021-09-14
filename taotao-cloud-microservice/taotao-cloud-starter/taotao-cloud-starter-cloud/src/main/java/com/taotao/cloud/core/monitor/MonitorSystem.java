@@ -64,42 +64,40 @@ public class MonitorSystem {
 		this.coreThreadName = coreThreadName.replace("-", ".");
 
 		if (Objects.nonNull(this.monitorThreadPoolExecutor)) {
-			this.collector.call(this.monitorThreadName + ".active.count")
-				.set(() -> this.monitorThreadPoolExecutor.getActiveCount());
-			this.collector.call(this.monitorThreadName + ".core.poolSize")
-				.set(() -> this.monitorThreadPoolExecutor.getCorePoolSize());
-			this.collector.call(this.monitorThreadName + ".poolSize.largest")
-				.set(() -> this.monitorThreadPoolExecutor.getLargestPoolSize());
-			this.collector.call(this.monitorThreadName + ".poolSize.max")
-				.set(() -> this.monitorThreadPoolExecutor.getMaximumPoolSize());
-			this.collector.call(this.monitorThreadName + ".poolSize.count")
-				.set(() -> this.monitorThreadPoolExecutor.getPoolSize());
-			this.collector.call(this.monitorThreadName + ".queue.size")
-				.set(() -> this.monitorThreadPoolExecutor.getQueue().size());
-			this.collector.call(this.monitorThreadName + ".task.count")
-				.set(() -> this.monitorThreadPoolExecutor.getTaskCount());
-			this.collector.call(this.monitorThreadName + ".task.completed")
-				.set(() -> this.monitorThreadPoolExecutor.getCompletedTaskCount());
+			collector.call(monitorThreadName + ".active.count")
+				.set(monitorThreadPoolExecutor::getActiveCount);
+			collector.call(monitorThreadName + ".core.poolSize")
+				.set(monitorThreadPoolExecutor::getCorePoolSize);
+			collector.call(monitorThreadName + ".poolSize.largest")
+				.set(monitorThreadPoolExecutor::getLargestPoolSize);
+			collector.call(monitorThreadName + ".poolSize.max")
+				.set(monitorThreadPoolExecutor::getMaximumPoolSize);
+			collector.call(monitorThreadName + ".poolSize.count")
+				.set(monitorThreadPoolExecutor::getPoolSize);
+			collector.call(monitorThreadName + ".queue.size")
+				.set(() -> monitorThreadPoolExecutor.getQueue().size());
+			collector.call(monitorThreadName + ".task.count")
+				.set(monitorThreadPoolExecutor::getTaskCount);
+			collector.call(monitorThreadName + ".task.completed")
+				.set(monitorThreadPoolExecutor::getCompletedTaskCount);
 		}
 
-		if (Objects.nonNull(this.coreThreadPoolExecutor)) {
-			this.collector.call(this.coreThreadName + ".active.count")
-				.set(() -> this.coreThreadPoolExecutor.getActiveCount());
-			this.collector.call(this.coreThreadName + ".core.poolSize")
-				.set(() -> this.coreThreadPoolExecutor.getCorePoolSize());
-			this.collector.call(this.coreThreadName + ".poolSize.largest")
-				.set(
-					() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getLargestPoolSize());
-			this.collector.call(this.coreThreadName + ".poolSize.max")
-				.set(
-					() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getMaximumPoolSize());
-			this.collector.call(this.coreThreadName + ".poolSize.count")
-				.set(() -> this.coreThreadPoolExecutor.getPoolSize());
-			this.collector.call(this.coreThreadName + ".queue.size")
-				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getQueue().size());
-			this.collector.call(this.coreThreadName + ".task.count")
-				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor().getTaskCount());
-			this.collector.call(this.coreThreadName + ".task.completed")
+		if (Objects.nonNull(coreThreadPoolExecutor)) {
+			collector.call(coreThreadName + ".active.count")
+				.set(coreThreadPoolExecutor::getActiveCount);
+			collector.call(coreThreadName + ".core.poolSize")
+				.set(coreThreadPoolExecutor::getCorePoolSize);
+			collector.call(coreThreadName + ".poolSize.largest")
+				.set(() -> coreThreadPoolExecutor.getThreadPoolExecutor().getLargestPoolSize());
+			collector.call(coreThreadName + ".poolSize.max")
+				.set(() -> coreThreadPoolExecutor.getThreadPoolExecutor().getMaximumPoolSize());
+			collector.call(coreThreadName + ".poolSize.count")
+				.set(coreThreadPoolExecutor::getPoolSize);
+			collector.call(coreThreadName + ".queue.size")
+				.set(() -> coreThreadPoolExecutor.getThreadPoolExecutor().getQueue().size());
+			collector.call(coreThreadName + ".task.count")
+				.set(() -> coreThreadPoolExecutor.getThreadPoolExecutor().getTaskCount());
+			collector.call(coreThreadName + ".task.completed")
 				.set(() -> this.coreThreadPoolExecutor.getThreadPoolExecutor()
 					.getCompletedTaskCount());
 		}
@@ -113,7 +111,7 @@ public class MonitorSystem {
 	 * @since 2021-09-02 20:46:19
 	 */
 	public Collector.Hook monitorHook() {
-		return this.collector.hook(this.monitorThreadName + ".hook");
+		return collector.hook(monitorThreadName + ".hook");
 	}
 
 	/**
@@ -124,15 +122,14 @@ public class MonitorSystem {
 	 * @since 2021-09-02 20:46:19
 	 */
 	public Collector.Hook coreHook() {
-		return this.collector.hook(this.coreThreadName + ".hook");
+		return collector.hook(coreThreadName + ".hook");
 	}
 
 	public ThreadPoolExecutor getMonitorThreadPoolExecutor() {
 		return monitorThreadPoolExecutor;
 	}
 
-	public void setMonitorThreadPoolExecutor(
-		ThreadPoolExecutor monitorThreadPoolExecutor) {
+	public void setMonitorThreadPoolExecutor(ThreadPoolExecutor monitorThreadPoolExecutor) {
 		this.monitorThreadPoolExecutor = monitorThreadPoolExecutor;
 	}
 

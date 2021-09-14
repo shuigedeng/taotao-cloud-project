@@ -20,7 +20,7 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.Collector.Hook;
-import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
@@ -32,21 +32,21 @@ import com.taotao.cloud.health.properties.CollectTaskProperties;
  * @version 2021.9
  * @since 2021-09-10 19:14:28
  */
-public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
+public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 
-	private static final String TASK_NAME = "taotao.cloud.health.collect.executor.monitor";
+	private static final String TASK_NAME = "taotao.cloud.health.collect.executor.async";
 
 	private CollectTaskProperties properties;
 	private Collector collector;
 
-	public MonitorThreadPoolCollectTask(Collector collector, CollectTaskProperties properties) {
+	public AsyncThreadPoolCollectTask(Collector collector, CollectTaskProperties properties) {
 		this.collector = collector;
 		this.properties = properties;
 	}
 
 	@Override
 	public int getTimeSpan() {
-		return properties.getThreadPollTimeSpan();
+		return properties.getAsyncThreadTimeSpan();
 	}
 
 	@Override
@@ -61,36 +61,36 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	public boolean getEnabled() {
-		return properties.isThreadPollEnabled();
+		return properties.isAsyncThreadEnabled();
 	}
 
 	@Override
 	protected CollectInfo getData() {
 		try {
-			MonitorThreadPoolProperties monitorThreadPoolProperties = ContextUtil.getBean(
-				MonitorThreadPoolProperties.class, false);
-			String threadNamePrefix = monitorThreadPoolProperties.getThreadNamePrefix();
-			String monitorThreadName = threadNamePrefix.replace("-", ".");
+			AsyncThreadPoolProperties asyncThreadPoolProperties = ContextUtil.getBean(
+				AsyncThreadPoolProperties.class, false);
+			String threadNamePrefix = asyncThreadPoolProperties.getThreadNamePrefix();
+			String asyncThreadName = threadNamePrefix.replace("-", ".");
 
-			MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
+			AsyncThreadPoolInfo info = new AsyncThreadPoolInfo();
 			info.systemActiveCount =
-				(Integer) this.collector.call(monitorThreadName + ".active.count").run();
+				(Integer) this.collector.call(asyncThreadName + ".active.count").run();
 			info.systemCorePoolSize =
-				(Integer) this.collector.call(monitorThreadName + ".core.poolSize").run();
+				(Integer) this.collector.call(asyncThreadName + ".core.poolSize").run();
 			info.systemPoolSizeLargest =
-				(Integer) this.collector.call(monitorThreadName + ".poolSize.largest").run();
+				(Integer) this.collector.call(asyncThreadName + ".poolSize.largest").run();
 			info.systemPoolSizeMax =
-				(Integer) this.collector.call(monitorThreadName + ".poolSize.max").run();
+				(Integer) this.collector.call(asyncThreadName + ".poolSize.max").run();
 			info.systemPoolSizeCount =
-				(Integer) this.collector.call(monitorThreadName + ".poolSize.count").run();
+				(Integer) this.collector.call(asyncThreadName + ".poolSize.count").run();
 			info.systemQueueSize =
-				(Integer) this.collector.call(monitorThreadName + ".queue.size").run();
+				(Integer) this.collector.call(asyncThreadName + ".queue.size").run();
 			info.systemTaskCount =
-				(Long) this.collector.call(monitorThreadName + ".task.count").run();
+				(Long) this.collector.call(asyncThreadName + ".task.count").run();
 			info.systemTaskCompleted =
-				(Long) this.collector.call(monitorThreadName + ".task.completed").run();
+				(Long) this.collector.call(asyncThreadName + ".task.completed").run();
 
-			Hook hook = this.collector.hook(monitorThreadName + ".hook");
+			Hook hook = this.collector.hook(asyncThreadName + ".hook");
 			info.systemTaskHookCurrent = hook.getCurrent();
 			info.systemTaskHookError = hook.getLastErrorPerSecond();
 			info.systemTaskHookSuccess = hook.getLastSuccessPerSecond();
@@ -104,7 +104,7 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class MonitorThreadPoolInfo implements CollectInfo{
+	private static class AsyncThreadPoolInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".active.count", desc = "系统线程池活动线程数")
 		private Integer systemActiveCount;
@@ -130,7 +130,8 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 		private Long systemTaskHookCurrent;
 		@FieldReport(name = TASK_NAME + ".task.hook.list.detail", desc = "线程池拦截历史最大耗时任务列表")
 		private String systemTaskHookList;
-		@FieldReport(name = TASK_NAME + ".task.hook.list.minute.detail", desc = "线程池拦截历史最大耗时任务列表(每分钟)")
+		@FieldReport(name = TASK_NAME
+			+ ".task.hook.list.minute.detail", desc = "线程池拦截历史最大耗时任务列表(每分钟)")
 		private String systemTaskHookListPerMinute;
 	}
 }

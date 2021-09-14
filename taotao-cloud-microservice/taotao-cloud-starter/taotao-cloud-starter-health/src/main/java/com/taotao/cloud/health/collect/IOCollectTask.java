@@ -21,6 +21,7 @@ import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.utils.ProcessUtils;
 import java.io.File;
@@ -33,7 +34,10 @@ import java.io.FileOutputStream;
  * @version 2021.9
  * @since 2021-09-10 17:47:39
  */
+
 public class IOCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.io";
 
 	private final CollectTaskProperties properties;
 
@@ -48,12 +52,12 @@ public class IOCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "IOCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.io";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -62,7 +66,7 @@ public class IOCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			IoInfo ioInfo = new IoInfo();
 			File file = new File(".");
@@ -143,19 +147,19 @@ public class IOCollectTask extends AbstractCollectTask {
 		}
 	}
 
-	private static class IoInfo {
+	private static class IoInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.usable.size", desc = "当前目录可用大小(M)")
-		private double currentDirUsableSize;
-		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.total.size", desc = "当前目录总大小(M)")
-		private double currentDirTotalSize;
-		@FieldReport(name = "taotao.cloud.health.collect.io.current.dir.path", desc = "当前目录路径")
+		@FieldReport(name = TASK_NAME + ".current.dir.usable.size", desc = "当前目录可用大小(M)")
+		private Long currentDirUsableSize;
+		@FieldReport(name = TASK_NAME + ".current.dir.total.size", desc = "当前目录总大小(M)")
+		private Long currentDirTotalSize;
+		@FieldReport(name = TASK_NAME + ".current.dir.path", desc = "当前目录路径")
 		private String currentDir;
-		@FieldReport(name = "taotao.cloud.health.collect.io.process.read.size", desc = "当前进程的读io(B)")
-		private long processReadSize;
-		@FieldReport(name = "taotao.cloud.health.collect.io.process.write.size", desc = "当前进程的写io(B)")
-		private long processWriteSize;
-		@FieldReport(name = "taotao.cloud.health.collect.io.process.wa", desc = "磁盘wa百分比")
-		private double processWa;
+		@FieldReport(name = TASK_NAME + ".process.read.size", desc = "当前进程的读io(B)")
+		private Long processReadSize;
+		@FieldReport(name = TASK_NAME + ".process.write.size", desc = "当前进程的写io(B)")
+		private Long processWriteSize;
+		@FieldReport(name = TASK_NAME + ".process.wa", desc = "磁盘wa百分比")
+		private Double processWa;
 	}
 }

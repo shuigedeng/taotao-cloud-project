@@ -18,6 +18,7 @@ package com.taotao.cloud.health.collect;
 import com.sun.management.OperatingSystemMXBean;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.management.ManagementFactory;
 
@@ -29,6 +30,8 @@ import java.lang.management.ManagementFactory;
  * @since 2021-09-10 17:23:08
  */
 public class CpuCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.cpu";
 
 	private OperatingSystemMXBean sysembean;
 	private CollectTaskProperties properties;
@@ -45,12 +48,12 @@ public class CpuCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "CpuCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.cpu";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class CpuCollectTask extends AbstractCollectTask {
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			CpuInfo info = new CpuInfo();
 			info.processCpuLoad = sysembean.getProcessCpuLoad();
@@ -80,25 +83,25 @@ public class CpuCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class CpuInfo {
+	private static class CpuInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.process", desc = "进程cpu负载")
-		private double processCpuLoad;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.system", desc = "系统cpu负载")
-		private double systemCpuLoad;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.committed.virtual.memory.size", desc = "已提交的虚拟内存大小")
-		private long committedVirtualMemorySize;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.total.swap.space.size", desc = "总交换空间大小")
-		private long totalSwapSpaceSize;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.free.swap.space.size", desc = "空闲交换空间大小")
-		private long freeSwapSpaceSize;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.process.cpu.time", desc = "处理cpu时间")
-		private long processCpuTime;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.free.physical.memory.size", desc = "空闲的物理内存空间")
-		private long freePhysicalMemorySize;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.total.physical.memory.size", desc = "总的物理内存空间")
-		private long totalPhysicalMemorySize;
-		@FieldReport(name = "taotao.cloud.health.collect.cpu.core.num", desc = "系统cpu核心数")
+		@FieldReport(name = TASK_NAME + ".process", desc = "进程cpu负载")
+		private Double processCpuLoad;
+		@FieldReport(name = TASK_NAME + ".system", desc = "系统cpu负载")
+		private Double systemCpuLoad;
+		@FieldReport(name = TASK_NAME + ".committed.virtual.memory.size", desc = "已提交的虚拟内存大小")
+		private Long committedVirtualMemorySize;
+		@FieldReport(name = TASK_NAME + ".total.swap.space.size", desc = "总交换空间大小")
+		private Long totalSwapSpaceSize;
+		@FieldReport(name = TASK_NAME + ".free.swap.space.size", desc = "空闲交换空间大小")
+		private Long freeSwapSpaceSize;
+		@FieldReport(name = TASK_NAME + ".process.cpu.time", desc = "处理cpu时间")
+		private Long processCpuTime;
+		@FieldReport(name = TASK_NAME + ".free.physical.memory.size", desc = "空闲的物理内存空间")
+		private Long freePhysicalMemorySize;
+		@FieldReport(name = TASK_NAME + ".total.physical.memory.size", desc = "总的物理内存空间")
+		private Long totalPhysicalMemorySize;
+		@FieldReport(name = TASK_NAME + ".core.num", desc = "系统cpu核心数")
 		private Integer cpuCoreNumber;
 	}
 

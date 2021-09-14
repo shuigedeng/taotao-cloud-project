@@ -20,6 +20,7 @@ import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.health.interceptor.DoubtApiInterceptor.DoubtApiInfo;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Arrays;
 import java.util.Map;
@@ -32,6 +33,8 @@ import java.util.Map;
  * @since 2021-09-10 17:34:39
  */
 public class DoubtApiCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.doubtApi";
 
 	private CollectTaskProperties properties;
 	private Collector collector;
@@ -53,16 +56,16 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "DoubtApiCollectTask";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.doubtapi";
+		return TASK_NAME;
 	}
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			ApiUsedMemoryTopInfo info = new ApiUsedMemoryTopInfo();
 			Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) collector.value(
@@ -89,31 +92,17 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 				}
 				info.detail = sb.toString();
 			}
+			return info;
 		} catch (Exception exp) {
 			LogUtil.error(exp);
 		}
 		return null;
 	}
 
-	public static class ApiUsedMemoryTopInfo {
+	public static class ApiUsedMemoryTopInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.doubt.api.detail", desc = "可疑内存增长api分析报告")
+		@FieldReport(name = TASK_NAME + ".detail", desc = "可疑内存增长api分析报告")
 		String detail;
-
-		public ApiUsedMemoryTopInfo() {
-		}
-
-		public ApiUsedMemoryTopInfo(String detail) {
-			this.detail = detail;
-		}
-
-		public String getDetail() {
-			return detail;
-		}
-
-		public void setDetail(String detail) {
-			this.detail = detail;
-		}
 	}
 
 }

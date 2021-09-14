@@ -84,7 +84,7 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 			"/actuator/**",
 			"/order/**",
 			"/captcha/**",
-			"/taotao/cloud/health/**",
+			"/health/**",
 			"/resource/**"));
 
 		RequestMappingHandlerMapping mapping = ac.getBean(RequestMappingHandlerMapping.class);

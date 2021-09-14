@@ -21,6 +21,7 @@ import static com.taotao.cloud.health.utils.ProcessUtils.getProcessID;
 import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
+import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.utils.ProcessUtils;
 
@@ -32,6 +33,8 @@ import com.taotao.cloud.health.utils.ProcessUtils;
  * @since 2021-09-10 19:15:42
  */
 public class NetworkCollectTask extends AbstractCollectTask {
+
+	private static final String TASK_NAME = "taotao.cloud.health.collect.network";
 
 	private CollectTaskProperties properties;
 
@@ -46,12 +49,12 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return "network采集";
+		return this.getClass().getName();
 	}
 
 	@Override
 	public String getName() {
-		return "taotao.cloud.health.collect.network.info";
+		return TASK_NAME;
 	}
 
 	@Override
@@ -61,7 +64,7 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 
 	@Override
-	protected Object getData() {
+	protected CollectInfo getData() {
 		try {
 			NetworkInfo ioInfo = new NetworkInfo();
 			ioInfo.processSysTcpListenNum = BeanUtil.convert(ProcessUtils.execCmd(
@@ -90,20 +93,20 @@ public class NetworkCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class NetworkInfo {
+	private static class NetworkInfo implements CollectInfo{
 
-		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
-		private long processTcpListenNum;
-		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
-		private long processTcpEstablishedNum;
-		@FieldReport(name = "taotao.cloud.health.collect.network.process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
-		private long processTcpTimeWaitNum;
-		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
-		private long processSysTcpListenNum;
-		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
-		private long processSysTcpEstablishedNum;
-		@FieldReport(name = "taotao.cloud.health.collect.network.sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
-		private long processSysTcpTimeWaitNum;
+		@FieldReport(name = TASK_NAME + ".process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
+		private Long processTcpListenNum;
+		@FieldReport(name = TASK_NAME + ".process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
+		private Long processTcpEstablishedNum;
+		@FieldReport(name = TASK_NAME + ".process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
+		private Long processTcpTimeWaitNum;
+		@FieldReport(name = TASK_NAME + ".sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
+		private Long processSysTcpListenNum;
+		@FieldReport(name = TASK_NAME + ".sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
+		private Long processSysTcpEstablishedNum;
+		@FieldReport(name = TASK_NAME + ".sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
+		private Long processSysTcpTimeWaitNum;
 	}
 
 }
