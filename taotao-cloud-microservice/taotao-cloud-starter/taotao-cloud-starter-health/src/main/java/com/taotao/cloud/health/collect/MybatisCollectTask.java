@@ -85,15 +85,15 @@ public class MybatisCollectTask extends AbstractCollectTask {
 	private static class SqlMybatisInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".sql.hook.error", desc = "mybatis 拦截上一次每秒出错次数")
-		private Long hookError;
+		private Long hookError = 0L;
 		@FieldReport(name = TASK_NAME + ".sql.hook.success", desc = "mybatis 拦截上一次每秒成功次数")
-		private Long hookSuccess;
+		private Long hookSuccess = 0L;
 		@FieldReport(name = TASK_NAME + ".sql.hook.current", desc = "mybatis 拦截当前执行任务数")
-		private Long hookCurrent;
+		private Long hookCurrent = 0L;
 		@FieldReport(name = TASK_NAME + ".sql.hook.list.detail", desc = "mybatis 拦截历史最大耗时任务列表")
-		private String hookList;
+		private String hookList = "";
 		@FieldReport(name = TASK_NAME + ".sql.hook.list.minute.detail", desc = "mybatis 拦截历史最大耗时任务列表(每分钟)")
-		private String hookListPerMinute;
+		private String hookListPerMinute = "";
 
 	}
 }

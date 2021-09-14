@@ -117,7 +117,7 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 	private static class UnCatchInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".trace", desc = "未捕获错误堆栈")
-		private String trace;
+		private String trace = "";
 
 		public UnCatchInfo(String trace) {
 			this.trace = trace;

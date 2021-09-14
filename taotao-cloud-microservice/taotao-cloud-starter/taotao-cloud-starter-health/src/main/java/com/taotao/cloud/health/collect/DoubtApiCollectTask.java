@@ -102,7 +102,7 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 	public static class ApiUsedMemoryTopInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".detail", desc = "可疑内存增长api分析报告")
-		String detail;
+		String detail = "";
 	}
 
 }

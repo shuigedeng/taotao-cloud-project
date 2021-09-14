@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.health.interceptor;
+package com.taotao.cloud.data.jpa.listener;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.Serializable;

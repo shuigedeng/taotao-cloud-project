@@ -107,17 +107,17 @@ public class NacosCollectTask extends AbstractCollectTask {
 	private static class NacosClientInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".namespace", desc = "nacos namespace")
-		private String namespace;
+		private String namespace = "";
 		@FieldReport(name = TASK_NAME + ".endpoint", desc = "nacos endpoint")
-		private String endpoint;
+		private String endpoint = "";
 		@FieldReport(name = TASK_NAME + ".serverList", desc = "nacos serverList")
-		private String serverList;
+		private String serverList = "";
 		@FieldReport(name = TASK_NAME + ".cacheDir", desc = "nacos cacheDir")
-		private String cacheDir;
+		private String cacheDir = "";
 		@FieldReport(name = TASK_NAME + ".logName", desc = "nacos logName")
-		private String logName;
+		private String logName = "";
 		@FieldReport(name = TASK_NAME + ".serverStatus", desc = "nacos serverStatus")
-		private String serverStatus;
+		private String serverStatus = "";
 		@FieldReport(name = TASK_NAME + ".instances", desc = "nacos instances")
 		private List<Instance> instances;
 		@FieldReport(name = TASK_NAME + ".serviceInfoMap", desc = "nacos serviceInfoMap")

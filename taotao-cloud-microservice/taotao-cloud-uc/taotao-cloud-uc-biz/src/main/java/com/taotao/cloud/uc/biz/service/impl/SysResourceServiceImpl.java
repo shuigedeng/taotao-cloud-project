@@ -236,20 +236,20 @@ public class SysResourceServiceImpl implements ISysResourceService {
 			.build();
 		saveResource(sysResource);
 
-		String traceId = TraceContext.traceId();
-		LogUtil.info("skywalking traceid ===> {0}", traceId);
-
-		LogUtil.info("1.远程添加订单信息");
-		OrderDTO orderDTO = OrderDTO.builder()
-			.memberId(2L)
-			.code("33332")
-			.amount(BigDecimal.ZERO)
-			.mainStatus(1)
-			.childStatus(1)
-			.receiverName("shuigedeng")
-			.receiverPhone("15730445330")
-			.receiverAddressJson("sjdlasjdfljsldf")
-			.build();
+		//String traceId = TraceContext.traceId();
+		//LogUtil.info("skywalking traceid ===> {0}", traceId);
+		//
+		//LogUtil.info("1.远程添加订单信息");
+		//OrderDTO orderDTO = OrderDTO.builder()
+		//	.memberId(2L)
+		//	.code("33332")
+		//	.amount(BigDecimal.ZERO)
+		//	.mainStatus(1)
+		//	.childStatus(1)
+		//	.receiverName("shuigedeng")
+		//	.receiverPhone("15730445330")
+		//	.receiverAddressJson("sjdlasjdfljsldf")
+		//	.build();
 
 		//Result<OrderVO> orderVOResult = remoteOrderService.saveOrder(orderDTO);
 		//if(orderVOResult.getCode() != 200){
@@ -257,8 +257,8 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		//}
 		//LogUtil.info("OrderVO ===> {0}", orderVOResult);
 
-		OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
-		LogUtil.info("OrderVO ====> {}", orderVO);
+		//OrderVO orderVO = iOrderInfoService.saveOrder(orderDTO);
+		//LogUtil.info("OrderVO ====> {}", orderVO);
 
 		//} catch (Exception e) {
 		//	try {

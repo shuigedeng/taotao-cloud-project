@@ -82,7 +82,7 @@ public class ThreadCollectTask extends AbstractCollectTask {
 				treadUserTime.put(info.getThreadId(),
 					threadMXBean.getThreadUserTime(info.getThreadId()));
 				if (info.getThreadState() == Thread.State.RUNNABLE) {
-					threadInfo.runableThreadCount += 1;
+					threadInfo.runnableThreadCount += 1;
 					if (runable == null) {
 						runable = info;
 					} else {
@@ -115,7 +115,7 @@ public class ThreadCollectTask extends AbstractCollectTask {
 			}
 			lastThreadUserTime = treadUserTime;
 			if (runable != null) {
-				threadInfo.maxRunableDetail = ExceptionUtil.trace2String(runable.getStackTrace());
+				threadInfo.maxRunnableDetail = ExceptionUtil.trace2String(runable.getStackTrace());
 			}
 			if (wait != null) {
 				threadInfo.maxWaitingDetail = ExceptionUtil.trace2String(wait.getStackTrace());
@@ -134,20 +134,20 @@ public class ThreadCollectTask extends AbstractCollectTask {
 	private static class ThreadInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".deadlocked.count", desc = "死锁线程数")
-		private Integer deadlockedThreadCount;
+		private Integer deadlockedThreadCount = 0;
 		@FieldReport(name = TASK_NAME + ".total", desc = "线程总数")
-		private Integer threadCount;
-		@FieldReport(name = TASK_NAME + ".runable.count", desc = "运行线程总数")
-		private Integer runableThreadCount;
+		private Integer threadCount = 0;
+		@FieldReport(name = TASK_NAME + ".runnable.count", desc = "运行线程总数")
+		private Integer runnableThreadCount = 0;
 		@FieldReport(name = TASK_NAME + ".blocked.count", desc = "阻塞线程总数")
-		private Integer blockedThreadCount;
+		private Integer blockedThreadCount = 0;
 		@FieldReport(name = TASK_NAME + ".waiting.count", desc = "等待线程总数")
-		private Integer waitingThreadCount;
-		@FieldReport(name = TASK_NAME + ".runable.max.detail", desc = "最近运行最耗时的线程详情")
-		private String maxRunableDetail;
+		private Integer waitingThreadCount = 0;
+		@FieldReport(name = TASK_NAME + ".runnable.max.detail", desc = "最近运行最耗时的线程详情")
+		private String maxRunnableDetail = "";
 		@FieldReport(name = TASK_NAME + ".blocked.max.detail", desc = "阻塞最耗时的线程详情")
-		private String maxBlockedDetail;
+		private String maxBlockedDetail = "";
 		@FieldReport(name = TASK_NAME + ".waiting.max.detail", desc = "等待最耗时的线程详情")
-		private String maxWaitingDetail;
+		private String maxWaitingDetail = "";
 	}
 }

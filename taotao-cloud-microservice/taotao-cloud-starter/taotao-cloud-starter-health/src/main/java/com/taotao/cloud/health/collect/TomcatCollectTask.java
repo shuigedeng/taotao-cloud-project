@@ -110,21 +110,21 @@ public class TomcatCollectTask extends AbstractCollectTask {
 	private static class TomcatInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".active.count", desc = "tomcat 线程池活动线程数")
-		private Integer activeCount;
+		private Integer activeCount = 0;
 		@FieldReport(name = TASK_NAME + ".core.poolSize", desc = "tomcat 线程池核心线程数")
-		private Integer corePoolSize;
+		private Integer corePoolSize = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.largest", desc = "tomcat 线程池历史最大线程数")
-		private Integer poolSizeLargest;
+		private Integer poolSizeLargest = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.max", desc = "tomcat 线程池最大线程数")
-		private Integer poolSizeMax;
+		private Integer poolSizeMax = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.count", desc = "tomcat 线程池当前线程数")
-		private Integer poolSizeCount;
+		private Integer poolSizeCount = 0;
 		@FieldReport(name = TASK_NAME + ".queue.size", desc = "tomcat 线程池当前排队等待任务数")
-		private Integer queueSize;
+		private Integer queueSize = 0;
 		@FieldReport(name = TASK_NAME + ".task.count", desc = "tomcat 线程池历史任务数")
-		private Long taskCount;
+		private Long taskCount = 0L;
 		@FieldReport(name = TASK_NAME + ".task.completed", desc = "tomcat 线程池已完成任务数")
-		private Long taskCompleted;
+		private Long taskCompleted = 0L;
 
 //        @FieldReport(name = "tomcat.threadPool.task.hook.error", desc = "tomcat 线程池拦截上一次每秒出错次数")
 //        private Integer taskHookError;

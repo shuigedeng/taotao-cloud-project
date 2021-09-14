@@ -109,6 +109,6 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 		@FieldReport(name = TASK_NAME + ".leased", desc = "HttpPool使用中的连接数")
 		private Integer leasedCount = 0;
 		@FieldReport(name = TASK_NAME + ".detail", desc = "HttpPool详情")
-		private String poolDetail;
+		private String poolDetail = "";
 	}
 }

@@ -107,31 +107,31 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 	private static class AsyncThreadPoolInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".active.count", desc = "系统线程池活动线程数")
-		private Integer systemActiveCount;
+		private Integer systemActiveCount = 0;
 		@FieldReport(name = TASK_NAME + ".core.poolSize", desc = "系统线程池核心线程数")
-		private Integer systemCorePoolSize;
+		private Integer systemCorePoolSize = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.largest", desc = "线程池历史最大线程数")
-		private Integer systemPoolSizeLargest;
+		private Integer systemPoolSizeLargest = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.max", desc = "线程池最大线程数")
-		private Integer systemPoolSizeMax;
+		private Integer systemPoolSizeMax = 0;
 		@FieldReport(name = TASK_NAME + ".poolSize.count", desc = "线程池当前线程数")
-		private Integer systemPoolSizeCount;
+		private Integer systemPoolSizeCount = 0;
 		@FieldReport(name = TASK_NAME + ".queue.size", desc = "线程池当前排队等待任务数")
-		private Integer systemQueueSize;
+		private Integer systemQueueSize = 0;
 		@FieldReport(name = TASK_NAME + ".task.count", desc = "线程池历史任务数")
-		private Long systemTaskCount;
+		private Long systemTaskCount = 0L;
 		@FieldReport(name = TASK_NAME + ".task.completed", desc = "线程池已完成任务数")
-		private Long systemTaskCompleted;
+		private Long systemTaskCompleted = 0L;
 		@FieldReport(name = TASK_NAME + ".task.hook.error", desc = "线程池拦截上一次每秒出错次数")
-		private Long systemTaskHookError;
+		private Long systemTaskHookError = 0L;
 		@FieldReport(name = TASK_NAME + ".task.hook.success", desc = "线程池拦截上一次每秒成功次数")
-		private Long systemTaskHookSuccess;
+		private Long systemTaskHookSuccess = 0L;
 		@FieldReport(name = TASK_NAME + ".task.hook.current", desc = "线程池拦截当前执行任务数")
-		private Long systemTaskHookCurrent;
+		private Long systemTaskHookCurrent = 0L;
 		@FieldReport(name = TASK_NAME + ".task.hook.list.detail", desc = "线程池拦截历史最大耗时任务列表")
-		private String systemTaskHookList;
+		private String systemTaskHookList = "";
 		@FieldReport(name = TASK_NAME
 			+ ".task.hook.list.minute.detail", desc = "线程池拦截历史最大耗时任务列表(每分钟)")
-		private String systemTaskHookListPerMinute;
+		private String systemTaskHookListPerMinute = "";
 	}
 }

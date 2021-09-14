@@ -168,23 +168,23 @@ public class MemoryCollectTask extends AbstractCollectTask {
 	private static class JvmTotalInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.use", desc = "JVM内存已用空间(M)")
-		private Long use;
+		private Long use = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.free", desc = "JVM内存可用空间(M)")
-		private Long free;
+		private Long free = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.max", desc = "JVM内存最大可用空间(M)")
-		private Long max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.total", desc = "JVM内存总空间(M)")
-		private Long total;
+		private Long total = 0L;
 	}
 
 	private static class SystemInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".os.use", desc = "Os内存已用空间(M)")
-		private Long use;
+		private Long use = 0L;
 		@FieldReport(name = TASK_NAME + ".os.free", desc = "Os内存可用空间(M)")
-		private Long free;
+		private Long free = 0L;
 		@FieldReport(name = TASK_NAME + ".os.total", desc = "Os内存总空间(M)")
-		private Long total;
+		private Long total = 0L;
 	}
 
 	private static class MemeryInfo implements CollectInfo{
@@ -204,101 +204,101 @@ public class MemoryCollectTask extends AbstractCollectTask {
 	private static class JVMPermInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.init", desc = "perm 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.max", desc = "perm 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.used", desc = "perm 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.committed", desc = "perm 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.perm.usedRate", desc = "perm 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 
 	}
 
 	private static class JVMOldInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.old.init", desc = "old 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.old.max", desc = "old 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.old.used", desc = "old 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.old.committed", desc = "old 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.old.usedRate", desc = "old 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 
 	}
 
 	private static class JVMSurvivorInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.init", desc = "survivor 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.max", desc = "survivor 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.used", desc = "survivor 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.committed", desc = "survivor 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.survivor.usedRate", desc = "survivor 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 	}
 
 	private static class JVMEdenInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.init", desc = "eden 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.max", desc = "eden 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.used", desc = "eden 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.committed", desc = "eden 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.eden.usedRate", desc = "eden 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 
 	}
 
 	private static class JVMCodeCacheInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.init", desc = "codeCache 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.max", desc = "codeCache 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.used", desc = "codeCache 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.committed", desc = "codeCache 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.codeCache.usedRate", desc = "codeCache 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 	}
 
 	private static class JVMMetaspaceInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.init", desc = "metaspace 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.max", desc = "metaspace 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.used", desc = "metaspace 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.committed", desc = "metaspace 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.metaspace.usedRate", desc = "metaspace 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 	}
 
 	private static class JVMCompressedClassSpaceInfo  implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.init", desc = "Compressed Class Space 初始内存大小(M)")
-		private Double init;
+		private Long init = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.max", desc = "Compressed Class Space 最大内存大小(M)")
-		private Double max;
+		private Long max = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.used", desc = "Compressed Class Space 已使用内存大小(M)")
-		private Double used;
+		private Long used = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.committed", desc = "Compressed Class Space 已申请内存大小(M)")
-		private Double committed;
+		private Long committed = 0L;
 		@FieldReport(name = TASK_NAME + ".jvm.gen.compressedClassSpace.usedRate", desc = "Compressed Class Space 使用率 %")
-		private Double usedRate;
+		private Long usedRate = 0L;
 	}
 }

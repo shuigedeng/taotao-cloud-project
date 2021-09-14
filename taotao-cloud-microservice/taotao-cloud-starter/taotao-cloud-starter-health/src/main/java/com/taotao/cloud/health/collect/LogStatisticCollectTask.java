@@ -71,8 +71,8 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 	private static class LogErrorInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".error.count", desc = "最近1分钟错误日志数量")
-		private Integer logerrorCount;
+		private Integer logerrorCount  = 0;
 		@FieldReport(name = TASK_NAME + ".incre.count", desc = "最近1分钟日志条数增量")
-		private Integer logIncreCount;
+		private Integer logIncreCount = 0;
 	}
 }

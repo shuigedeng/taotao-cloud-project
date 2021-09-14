@@ -23,7 +23,6 @@ import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import javax.sql.DataSource;
 
 /**
@@ -69,8 +68,6 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 			DataSourceInfo info = new DataSourceInfo();
 			String[] names = ContextUtil.getApplicationContext()
 				.getBeanNamesForType(DataSource.class);
-
-			LogUtil.info("DataSourceCollectTask names : {}", Arrays.toString(names));
 
 			int index = 0;
 			for (String name : names) {
@@ -142,7 +139,7 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class DataSourceInfo implements CollectInfo{
+	private static class DataSourceInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".druid0.info", desc = "druid0信息")
 		private DruidDataSourceInfo druid0;
@@ -166,51 +163,51 @@ public class DataSourceCollectTask extends AbstractCollectTask {
 		private DruidDataSourceInfo druid9;
 	}
 
-	private static class DruidDataSourceInfo  implements CollectInfo{
+	private static class DruidDataSourceInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME
 			+ ".druid.pool.startTransaction.count", desc = "druid sql 开启事务次数")
-		private Long startTransactionCount;
+		private Long startTransactionCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.commit.count", desc = "druid sql commit次数")
-		private Long commitCount;
+		private Long commitCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.rollback.count", desc = "druid sql回滚次数")
-		private Long rollbackCount;
+		private Long rollbackCount = 0L;
 		@FieldReport(name = TASK_NAME
 			+ ".druid.pool.removeAbandoned.count", desc = "druid 连接超时回收次数")
-		private Long removeAbandonedCount;
+		private Long removeAbandonedCount = 0L;
 		@FieldReport(name = TASK_NAME
 			+ ".druid.pool.removeAbandoned.timeout", desc = "druid 连接超时回收周期（秒）")
-		private Integer removeAbandonedTimeout;
+		private Integer removeAbandonedTimeout = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.isRemoveAbandoned", desc = "druid 是否开启连接超时回收")
-		private String isRemoveAbandoned;
+		private String isRemoveAbandoned = "";
 		@FieldReport(name = TASK_NAME
 			+ ".druid.pool.isSharePreparedStatements", desc = "druid preparedStatement是否缓存")
-		private String isSharePreparedStatements;
+		private String isSharePreparedStatements = "";
 		@FieldReport(name = TASK_NAME + ".druid.pool.destroy.count", desc = "druid销毁连接次数")
-		private Long destroyCount;
+		private Long destroyCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.create.count", desc = "druid创建连接次数")
-		private Long createCount;
+		private Long createCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.close.count", desc = "druid关闭连接次数")
-		private Long closeCount;
+		private Long closeCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.create.timeSpan", desc = "druid物理连接创建耗时(毫秒)")
-		private Long createTimeSpan;
+		private Long createTimeSpan = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.connect.errorCount", desc = "druid物理连接错误数")
-		private Long connectErrorCount;
+		private Long connectErrorCount = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.idle.min", desc = "druid连接池最小值")
-		private Integer minIdle;
+		private Integer minIdle = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.active.max", desc = "druid连接池最大值")
-		private Integer maxActive;
+		private Integer maxActive = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.initial.size", desc = "druid连接池初始化长度")
-		private Integer initialSize;
+		private Integer initialSize = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.waitThread.count", desc = "druid获取连接时等待线程数")
-		private Integer waitThreadCount;
+		private Integer waitThreadCount = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.lockQueue.length", desc = "druid获取连接等待队列长度")
-		private Integer lockQueueLength;
+		private Integer lockQueueLength = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.active", desc = "druid正在打开的连接数")
-		private Integer active;
+		private Integer active = 0;
 		@FieldReport(name = TASK_NAME + ".druid.pool.connect", desc = "druid申请连接的次数")
-		private Long connect;
+		private Long connect = 0L;
 		@FieldReport(name = TASK_NAME + ".druid.pool.poolingCount", desc = "druid连接池空闲连接数")
-		private Integer poolingCount;
+		private Integer poolingCount = 0;
 	}
 }

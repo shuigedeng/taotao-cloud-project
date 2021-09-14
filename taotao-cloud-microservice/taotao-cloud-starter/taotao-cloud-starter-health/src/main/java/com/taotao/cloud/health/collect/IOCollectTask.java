@@ -150,16 +150,16 @@ public class IOCollectTask extends AbstractCollectTask {
 	private static class IoInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".current.dir.usable.size", desc = "当前目录可用大小(M)")
-		private Long currentDirUsableSize;
+		private Long currentDirUsableSize = 0L;
 		@FieldReport(name = TASK_NAME + ".current.dir.total.size", desc = "当前目录总大小(M)")
-		private Long currentDirTotalSize;
+		private Long currentDirTotalSize = 0L;
 		@FieldReport(name = TASK_NAME + ".current.dir.path", desc = "当前目录路径")
-		private String currentDir;
+		private String currentDir ="";
 		@FieldReport(name = TASK_NAME + ".process.read.size", desc = "当前进程的读io(B)")
-		private Long processReadSize;
+		private Long processReadSize = 0L;
 		@FieldReport(name = TASK_NAME + ".process.write.size", desc = "当前进程的写io(B)")
-		private Long processWriteSize;
+		private Long processWriteSize = 0L;
 		@FieldReport(name = TASK_NAME + ".process.wa", desc = "磁盘wa百分比")
-		private Double processWa;
+		private Double processWa = 0.0;
 	}
 }

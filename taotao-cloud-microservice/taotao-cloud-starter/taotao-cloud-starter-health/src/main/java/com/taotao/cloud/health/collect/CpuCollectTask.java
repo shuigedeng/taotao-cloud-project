@@ -86,23 +86,23 @@ public class CpuCollectTask extends AbstractCollectTask {
 	private static class CpuInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".process", desc = "进程cpu负载")
-		private Double processCpuLoad;
+		private Double processCpuLoad=0.0;
 		@FieldReport(name = TASK_NAME + ".system", desc = "系统cpu负载")
-		private Double systemCpuLoad;
+		private Double systemCpuLoad = 0.0;
 		@FieldReport(name = TASK_NAME + ".committed.virtual.memory.size", desc = "已提交的虚拟内存大小")
-		private Long committedVirtualMemorySize;
+		private Long committedVirtualMemorySize = 0L;
 		@FieldReport(name = TASK_NAME + ".total.swap.space.size", desc = "总交换空间大小")
-		private Long totalSwapSpaceSize;
+		private Long totalSwapSpaceSize = 0L;
 		@FieldReport(name = TASK_NAME + ".free.swap.space.size", desc = "空闲交换空间大小")
-		private Long freeSwapSpaceSize;
+		private Long freeSwapSpaceSize = 0L;
 		@FieldReport(name = TASK_NAME + ".process.cpu.time", desc = "处理cpu时间")
-		private Long processCpuTime;
+		private Long processCpuTime = 0L;
 		@FieldReport(name = TASK_NAME + ".free.physical.memory.size", desc = "空闲的物理内存空间")
-		private Long freePhysicalMemorySize;
+		private Long freePhysicalMemorySize = 0L;
 		@FieldReport(name = TASK_NAME + ".total.physical.memory.size", desc = "总的物理内存空间")
-		private Long totalPhysicalMemorySize;
+		private Long totalPhysicalMemorySize = 0L;
 		@FieldReport(name = TASK_NAME + ".core.num", desc = "系统cpu核心数")
-		private Integer cpuCoreNumber;
+		private Integer cpuCoreNumber = 0;
 	}
 
 }

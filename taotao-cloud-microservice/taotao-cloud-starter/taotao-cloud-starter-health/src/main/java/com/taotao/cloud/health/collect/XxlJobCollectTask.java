@@ -86,6 +86,6 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 	private static class JobInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".count", desc = "xxljob任务数量")
-		private Integer count;
+		private Integer count = 0;
 	}
 }

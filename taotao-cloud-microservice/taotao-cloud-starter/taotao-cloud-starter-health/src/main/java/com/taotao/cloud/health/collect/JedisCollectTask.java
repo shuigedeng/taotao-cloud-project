@@ -101,25 +101,24 @@ public class JedisCollectTask extends AbstractCollectTask {
 	private static class JedisInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".cluster.pool.wait", desc = "jedis集群排队等待的请求数")
-		private Integer wait;
+		private Integer wait = 0;
 		@FieldReport(name = TASK_NAME + ".cluster.pool.active", desc = "jedis集群活动使用的请求数")
-		private Integer active;
+		private Integer active = 0;
 		@FieldReport(name = TASK_NAME + ".cluster.pool.idle", desc = "jedis集群空闲的请求数")
-		private Integer idle;
+		private Integer idle = 0;
 		@FieldReport(name = TASK_NAME + ".cluster.pool.detail", desc = "jedis集群连接池详情")
-		private String detail;
+		private String detail =" = 0L";
 		@FieldReport(name = TASK_NAME + ".cluster.hook.error", desc = "jedis集群拦截上一次每秒出错次数")
-		private Long hookError;
+		private Long hookError  = 0L;
 		@FieldReport(name = TASK_NAME + ".cluster.hook.success", desc = "jedis集群拦截上一次每秒成功次数")
-		private Long hookSuccess;
+		private Long hookSuccess = 0L;
 		@FieldReport(name = TASK_NAME + ".cluster.hook.current", desc = "jedis集群拦截当前执行任务数")
-		private Long hookCurrent;
+		private Long hookCurrent = 0L;
 		@FieldReport(name = TASK_NAME + ".cluster.hook.list.detail", desc = "jedis集群拦截历史最大耗时任务列表")
-		private String hookList;
-		@FieldReport(name = TASK_NAME
-			+ ".cluster.hook.list.minute.detail", desc = "jedis集群拦截历史最大耗时任务列表(每分钟)")
-		private String hookListPerMinute;
+		private String hookList = "";
+		@FieldReport(name = TASK_NAME + ".cluster.hook.list.minute.detail", desc = "jedis集群拦截历史最大耗时任务列表(每分钟)")
+		private String hookListPerMinute = "";
 		@FieldReport(name = TASK_NAME + ".cluster.lock.error.detail", desc = "jedis集群分布式锁异常信息")
-		private String lockInfo;
+		private String lockInfo = "";
 	}
 }

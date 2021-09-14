@@ -40,73 +40,68 @@ public class HibernateInspector implements StatementInspector {
 	private String sql;
 
 	public static class SaveOrUpdateListener extends DefaultSaveOrUpdateEventListener {
-		private HibernateInspector hibernateInspector;
-
-		public SaveOrUpdateListener(HibernateInspector hibernateInspector) {
-			this.hibernateInspector = hibernateInspector;
-		}
-
 		@Override
 		public void onSaveOrUpdate(SaveOrUpdateEvent event) {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
 			if (Objects.nonNull(collector)) {
-				String replace = StringUtil.nullToEmpty(hibernateInspector.getSql()).replace("\r", "").replace("\n", "");
-				collector.hook("taotao.cloud.health.jpa.onSaveOrUpdate.sql.hook")
-					.run(replace, () -> {
-						try {
-							super.onSaveOrUpdate(event);
-						} catch (Exception e) {
-							throw new RuntimeException(e);
-						}
-					});
+				try {
+					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					collector.hook("taotao.cloud.health.jpa.onSaveOrUpdate.sql.hook")
+						.run(replace, () -> {
+							try {
+								super.onSaveOrUpdate(event);
+							} catch (Exception e) {
+								throw new RuntimeException(e);
+							}
+						});
+				} finally {
+					SqlContextHolder.clear();
+				}
 			}
 		}
 	}
 
 	public static class DeleteListener extends DefaultDeleteEventListener {
-		private HibernateInspector hibernateInspector;
-
-		public DeleteListener(HibernateInspector hibernateInspector) {
-			this.hibernateInspector = hibernateInspector;
-		}
 		@Override
 		public void onDelete(DeleteEvent event) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
 			if (Objects.nonNull(collector)) {
-				String replace = StringUtil.nullToEmpty(hibernateInspector.getSql()).replace("\r", "").replace("\n", "");
-				collector.hook("taotao.cloud.health.jpa.delete.sql.hook")
-					.run(replace, () -> {
-						try {
-							super.onDelete(event);
-						} catch (Exception e) {
-							throw new RuntimeException(e);
-						}
-					});
+				try {
+					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					collector.hook("taotao.cloud.health.jpa.delete.sql.hook")
+						.run(replace, () -> {
+							try {
+								super.onDelete(event);
+							} catch (Exception e) {
+								throw new RuntimeException(e);
+							}
+						});
+				} finally {
+					SqlContextHolder.clear();
+				}
 			}
 		}
 	}
 
 	public static class LoadListener extends DefaultLoadEventListener {
-		private HibernateInspector hibernateInspector;
-
-		public LoadListener(HibernateInspector hibernateInspector) {
-			this.hibernateInspector = hibernateInspector;
-		}
-
 		@Override
 		public void onLoad(LoadEvent event,
 			LoadType loadType) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
 			if (Objects.nonNull(collector)) {
-				String replace = StringUtil.nullToEmpty(hibernateInspector.getSql()).replace("\r", "").replace("\n", "");
-				collector.hook("taotao.cloud.health.jpa.load.sql.hook")
-					.run(replace, () -> {
-						try {
-							super.onLoad(event, loadType);
-						} catch (Exception e) {
-							throw new RuntimeException(e);
-						}
-					});
+				try {
+					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					collector.hook("taotao.cloud.health.jpa.load.sql.hook")
+						.run(replace, () -> {
+							try {
+								super.onLoad(event, loadType);
+							} catch (Exception e) {
+								throw new RuntimeException(e);
+							}
+						});
+				} finally {
+					SqlContextHolder.clear();
+				}
 			}
 		}
 	}
@@ -115,6 +110,7 @@ public class HibernateInspector implements StatementInspector {
 	@Override
 	public String inspect(String sql) {
 		this.sql = sql;
+		SqlContextHolder.setSql(sql);
 		return sql;
 	}
 

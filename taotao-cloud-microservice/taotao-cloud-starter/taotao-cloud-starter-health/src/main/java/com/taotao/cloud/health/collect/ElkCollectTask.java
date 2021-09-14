@@ -83,8 +83,8 @@ public class ElkCollectTask extends AbstractCollectTask {
 	private static class ElkInfo implements CollectInfo{
 
 		@FieldReport(name = TASK_NAME + ".queue.size", desc = "ELK消息队列大小")
-		private Integer queueSize;
+		private Integer queueSize  = 0;
 		@FieldReport(name = TASK_NAME + ".consecutiveDropped", desc = "ELK消息连续丢弃数量")
-		private Long consecutiveDropped;
+		private Long consecutiveDropped = 0L;
 	}
 }
