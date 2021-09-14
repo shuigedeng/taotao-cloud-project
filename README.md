@@ -1,4 +1,4 @@
-<p align="center"><font size="70"><strong>taotao-cloud-project</strong></font></p>
+<p align="center"><font size="120"><strong>taotao-cloud-project</strong></font></p>
 
 [comment]: <> (# <p align="center"><strong>taotao-cloud-project</strong></p>)
 
