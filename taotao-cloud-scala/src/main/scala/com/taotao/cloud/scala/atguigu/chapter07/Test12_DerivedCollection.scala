@@ -2,8 +2,8 @@ package com.taotao.cloud.scala.atguigu.chapter07
 
 object Test12_DerivedCollection {
   def main(args: Array[String]): Unit = {
-    val list1 = List(1,3,5,7,2,89)
-    val list2 = List(3,7,2,45,4,8,19)
+    val list1 = List(1, 3, 5, 7, 2, 89)
+    val list2 = List(3, 7, 2, 45, 4, 8, 19)
 
     //    （1）获取集合的头
     println(list1.head)
@@ -35,8 +35,8 @@ object Test12_DerivedCollection {
     println(list1 ::: list2)
 
     // 如果是set做并集，会去重
-    val set1 = Set(1,3,5,7,2,89)
-    val set2 = Set(3,7,2,45,4,8,19)
+    val set1 = Set(1, 3, 5, 7, 2, 89)
+    val set2 = Set(3, 7, 2, 45, 4, 8, 19)
 
     val union2 = set1.union(set2)
     println("union2: " + union2)

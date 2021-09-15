@@ -40,7 +40,7 @@ object Test09_MutableMap {
 
     // 5. 合并两个Map
     val map2: Map[String, Int] = Map("aaa" -> 11, "b" -> 29, "hello" -> 5)
-//    map1 ++= map2
+    //    map1 ++= map2
     println(map1)
     println(map2)
 

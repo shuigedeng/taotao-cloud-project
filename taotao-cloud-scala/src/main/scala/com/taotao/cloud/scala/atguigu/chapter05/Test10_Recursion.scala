@@ -21,6 +21,7 @@ object Test10_Recursion {
       if (n == 0) return currRes
       loop(n - 1, currRes * n)
     }
+
     loop(n, 1)
   }
 }

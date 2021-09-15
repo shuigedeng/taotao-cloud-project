@@ -8,14 +8,14 @@ object Test01_IfElse {
     val age: Int = StdIn.readInt()
 
     // 1. 单分支
-    if (age >= 18){
+    if (age >= 18) {
       println("成年")
     }
 
     println("===================")
 
     // 2. 双分支
-    if (age >= 18){
+    if (age >= 18) {
       println("成年")
     } else {
       println("未成年")
@@ -24,13 +24,13 @@ object Test01_IfElse {
     println("===================")
 
     // 3. 多分支
-    if (age <= 6){
+    if (age <= 6) {
       println("童年")
-    } else if(age < 18){
+    } else if (age < 18) {
       println("青少年")
-    } else if(age < 35){
+    } else if (age < 35) {
       println("青年")
-    } else if(age < 60){
+    } else if (age < 60) {
       println("中年")
     } else {
       println("老年")
@@ -38,16 +38,16 @@ object Test01_IfElse {
     println("===================")
 
     // 4. 分支语句的返回值
-    val result: Any = if (age <= 6){
+    val result: Any = if (age <= 6) {
       println("童年")
       "童年"
-    } else if(age < 18){
+    } else if (age < 18) {
       println("青少年")
       "青少年"
-    } else if(age < 35){
+    } else if (age < 35) {
       println("青年")
       age
-    } else if(age < 60){
+    } else if (age < 60) {
       println("中年")
       age
     } else {
@@ -58,7 +58,7 @@ object Test01_IfElse {
 
     // java中三元运算符 String res = (age >= 18)?"成年":"未成年"
 
-    val res: String = if (age >= 18){
+    val res: String = if (age >= 18) {
       "成年"
     } else {
       "未成年"
@@ -69,10 +69,10 @@ object Test01_IfElse {
     println("===================")
 
     // 5. 嵌套分支
-    if (age >= 18){
+    if (age >= 18) {
       println("成年")
-      if (age >= 35){
-        if (age >= 60){
+      if (age >= 35) {
+        if (age >= 60) {
           println("老年")
         } else {
           println("中年")
@@ -82,7 +82,7 @@ object Test01_IfElse {
       }
     } else {
       println("未成年")
-      if (age <= 6){
+      if (age <= 6) {
         println("童年")
       } else {
         println("青少年")

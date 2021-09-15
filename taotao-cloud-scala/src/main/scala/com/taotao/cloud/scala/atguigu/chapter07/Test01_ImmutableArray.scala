@@ -12,7 +12,7 @@ object Test01_ImmutableArray {
     println(arr(0))
     println(arr(1))
     println(arr(4))
-//    println(arr(5))
+    //    println(arr(5))
 
     arr(0) = 12
     arr(4) = 57
@@ -24,7 +24,7 @@ object Test01_ImmutableArray {
 
     // 3. 数组的遍历
     // 1) 普通for循环
-    for (i <- 0 until arr.length){
+    for (i <- 0 until arr.length) {
       println(arr(i))
     }
 
@@ -46,9 +46,9 @@ object Test01_ImmutableArray {
     println("---------------------")
 
     // 4) 调用foreach方法
-    arr2.foreach( (elem: Int) => println(elem) )
+    arr2.foreach((elem: Int) => println(elem))
 
-    arr.foreach( println )
+    arr.foreach(println)
 
     println(arr2.mkString("--"))
 

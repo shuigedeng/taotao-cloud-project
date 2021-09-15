@@ -15,40 +15,47 @@
  */
 package com.taotao.cloud.captcha.configuration;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.controller.CaptchaController;
+import com.taotao.cloud.captcha.model.Const;
 import com.taotao.cloud.captcha.properties.CaptchaProperties;
-import com.taotao.cloud.captcha.service.CaptchaCacheService;
+import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.service.impl.CaptchaServiceFactory;
+import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.util.Base64Utils;
+import org.springframework.util.FileCopyUtils;
 
 /**
- * CaptchaStorageAutoConfiguration 
+ * CaptchaServiceAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-04 07:35:39
+ * @since 2021-09-03 20:53:53
  */
 @Configuration
-@AutoConfigureAfter(CaptchaServiceAutoConfiguration.class)
-@ConditionalOnProperty(prefix = CaptchaProperties.PREFIX, name = "enabled", havingValue = "true")
-public class CaptchaStorageAutoConfiguration implements InitializingBean {
+@Import(CaptchaController.class)
+@ConditionalOnWebApplication
+public class CaptchaControllerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CaptchaStorageAutoConfiguration.class, StarterNameConstant.CAPTCHA_STARTER);
+		LogUtil.started(CaptchaControllerAutoConfiguration.class, StarterNameConstant.CAPTCHA_STARTER);
 	}
 
-	@Bean
-	public CaptchaCacheService captchaCacheService(CaptchaProperties captchaProperties) {
-		LogUtil.started(CaptchaCacheService.class, StarterNameConstant.CAPTCHA_STARTER);
 
-		return CaptchaServiceFactory.getCache(captchaProperties.getCacheType().name());
-	}
 }

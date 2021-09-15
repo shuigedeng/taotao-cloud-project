@@ -10,12 +10,12 @@ object Test08_ImmutableMap {
     println("==========================")
     // 2. 遍历元素
     map1.foreach(println)
-    map1.foreach( (kv: (String, Int)) => println(kv) )
+    map1.foreach((kv: (String, Int)) => println(kv))
 
     println("============================")
 
     // 3. 取map中所有的key 或者 value
-    for (key <- map1.keys){
+    for (key <- map1.keys) {
       println(s"$key ---> ${map1.get(key)}")
     }
 

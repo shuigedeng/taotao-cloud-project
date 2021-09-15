@@ -19,7 +19,7 @@ object Test17_Extends {
     println("person2 is Student17: " + person2.isInstanceOf[Student17])
 
     // 类型转换
-    if (person.isInstanceOf[Student17]){
+    if (person.isInstanceOf[Student17]) {
       val newStudent = person.asInstanceOf[Student17]
       newStudent.study()
     }
@@ -31,16 +31,17 @@ object Test17_Extends {
   }
 }
 
-class Person17(val name: String, val age: Int){
+class Person17(val name: String, val age: Int) {
   def sayHi(): Unit = {
     println("hi from person " + name)
   }
 }
 
-class Student17(name: String, age: Int) extends Person17(name, age){
+class Student17(name: String, age: Int) extends Person17(name, age) {
   override def sayHi(): Unit = {
     println("hi from student " + name)
   }
+
   def study(): Unit = {
     println("student study")
   }

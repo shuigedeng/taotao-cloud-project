@@ -1,6 +1,5 @@
 package com.taotao.cloud.scala.atguigu.chapter02
 
-import chapter01.Student
 
 /*
    这是一个简单的测试程序

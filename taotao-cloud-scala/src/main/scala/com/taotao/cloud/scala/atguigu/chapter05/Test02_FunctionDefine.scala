@@ -6,6 +6,7 @@ object Test02_FunctionDefine {
     def f1(): Unit = {
       println("1. 无参，无返回值")
     }
+
     f1()
     println(f1())
 
@@ -16,6 +17,7 @@ object Test02_FunctionDefine {
       println("2. 无参，有返回值")
       return 12
     }
+
     println(f2())
 
     println("=========================")
@@ -45,7 +47,7 @@ object Test02_FunctionDefine {
       println(s"${name1}和${name2}都是我的好朋友")
     }
 
-    f5("alice","bob")
+    f5("alice", "bob")
 
     println("=========================")
 

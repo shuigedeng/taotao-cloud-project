@@ -5,7 +5,7 @@ object Test07_Practice_CollectionOperation {
     val arr: Array[Int] = Array(12, 45, 75, 98)
 
     // 对数组进行处理，将操作抽象出来，处理完毕之后的结果返回一个新的数组
-    def arrayOperation(array: Array[Int], op: Int=>Int): Array[Int] = {
+    def arrayOperation(array: Array[Int], op: Int => Int): Array[Int] = {
       for (elem <- array) yield op(elem)
     }
 

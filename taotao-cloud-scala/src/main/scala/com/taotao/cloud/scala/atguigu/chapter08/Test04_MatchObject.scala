@@ -20,9 +20,10 @@ class Student(val name: String, val age: Int)
 // 定义伴生对象
 object Student {
   def apply(name: String, age: Int): Student = new Student(name, age)
+
   // 必须实现一个unapply方法，用来对对象属性进行拆解
   def unapply(student: Student): Option[(String, Int)] = {
-    if (student == null){
+    if (student == null) {
       None
     } else {
       Some((student.name, student.age))

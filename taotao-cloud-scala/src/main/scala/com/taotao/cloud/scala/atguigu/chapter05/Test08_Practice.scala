@@ -3,7 +3,7 @@ package com.taotao.cloud.scala.atguigu.chapter05
 object Test08_Practice {
   def main(args: Array[String]): Unit = {
     // 1. 练习1
-    val fun = (i: Int, s: String, c: Char) => {
+    val fun: (Int, String, Char) => Boolean = (i: Int, s: String, c: Char) => {
       if (i == 0 && s == "" && c == '0') false else true
     }
 
@@ -15,8 +15,8 @@ object Test08_Practice {
     println("===========================")
 
     // 2. 练习2
-    def func(i: Int): String=>(Char=>Boolean) = {
-      def f1(s: String): Char=>Boolean = {
+    def func(i: Int): String => (Char => Boolean) = {
+      def f1(s: String): Char => Boolean = {
         def f2(c: Char): Boolean = {
           if (i == 0 && s == "" && c == '0') false else true
         }
@@ -31,7 +31,7 @@ object Test08_Practice {
     println(func(0)("hello")('0'))
 
     // 匿名函数简写
-    def func1(i: Int): String=>(Char=>Boolean) = {
+    def func1(i: Int): String => (Char => Boolean) = {
       s => c => if (i == 0 && s == "" && c == '0') false else true
     }
 
@@ -44,6 +44,7 @@ object Test08_Practice {
     def func2(i: Int)(s: String)(c: Char): Boolean = {
       if (i == 0 && s == "" && c == '0') false else true
     }
+
     println(func2(0)("")('0'))
     println(func2(0)("")('1'))
     println(func2(23)("")('0'))

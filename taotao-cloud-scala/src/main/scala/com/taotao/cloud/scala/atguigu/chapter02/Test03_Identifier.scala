@@ -7,8 +7,8 @@ object Test03_Identifier {
     var Hello123 = ""
     val _abc = 123
 
-//    val h-b = ""
-//    val 123abc = 234
+    //    val h-b = ""
+    //    val 123abc = 234
 
     //（2）以操作符开头，且只包含操作符（+ - * / # !等）
     val -+/% = "hello"

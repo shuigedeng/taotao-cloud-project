@@ -20,9 +20,9 @@ object Test18_ComplexWordCount {
 
     // 接下来操作与普通版本完全一致
     val wordCountList: List[(String, Int)] = newStringList
-      .flatMap(_.split(" "))    // 空格分词
-      .groupBy( word => word )     // 按照单词分组
-      .map( kv => (kv._1, kv._2.size) )     // 统计出每个单词的个数
+      .flatMap(_.split(" ")) // 空格分词
+      .groupBy(word => word) // 按照单词分组
+      .map(kv => (kv._1, kv._2.size)) // 统计出每个单词的个数
       .toList
       .sortBy(_._2)(Ordering[Int].reverse)
       .take(3)
@@ -36,13 +36,13 @@ object Test18_ComplexWordCount {
     val preCountList: List[(String, Int)] = tupleList.flatMap(
       tuple => {
         val strings: Array[String] = tuple._1.split(" ")
-        strings.map( word => (word, tuple._2) )
+        strings.map(word => (word, tuple._2))
       }
     )
     println(preCountList)
 
     // 2. 对二元组按照单词进行分组
-    val preCountMap: Map[String, List[(String, Int)]] = preCountList.groupBy( _._1 )
+    val preCountMap: Map[String, List[(String, Int)]] = preCountList.groupBy(_._1)
     println(preCountMap)
 
     // 3. 叠加每个单词预统计的个数值

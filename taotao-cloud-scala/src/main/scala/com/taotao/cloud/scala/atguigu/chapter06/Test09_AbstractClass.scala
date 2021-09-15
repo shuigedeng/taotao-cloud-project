@@ -9,7 +9,7 @@ object Test09_AbstractClass {
 }
 
 // 定义抽象类
-abstract class Person9{
+abstract class Person9 {
   // 非抽象属性
   var name: String = "person"
 
@@ -35,7 +35,7 @@ class Student9 extends Person9 {
   }
 
   // 重写非抽象属性和方法
-//  override val name: String = "student"
+  //  override val name: String = "student"
   name = "student"
 
   override def eat(): Unit = {

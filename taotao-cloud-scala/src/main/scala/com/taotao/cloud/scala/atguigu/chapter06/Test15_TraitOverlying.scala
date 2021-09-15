@@ -19,12 +19,14 @@ trait Ball {
 // 定义颜色特征
 trait ColorBall extends Ball {
   var color: String = "red"
+
   override def describe(): String = color + "-" + super.describe()
 }
 
 // 定义种类特征
 trait CategoryBall extends Ball {
   var category: String = "foot"
+
   override def describe(): String = category + "-" + super.describe()
 }
 
@@ -35,6 +37,7 @@ class MyFootBall extends CategoryBall with ColorBall {
 
 trait Knowledge15 {
   var amount: Int = 0
+
   def increase(): Unit = {
     println("knowledge increased")
   }
@@ -42,7 +45,9 @@ trait Knowledge15 {
 
 trait Talent15 {
   def singing(): Unit
+
   def dancing(): Unit
+
   def increase(): Unit = {
     println("talent increased")
   }

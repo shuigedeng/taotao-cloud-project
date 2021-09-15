@@ -1,6 +1,7 @@
 package com.taotao.cloud.scala.atguigu.chapter02
 
-import chapter01.Student
+import com.taotao.cloud.scala.atguigu.chapter01.Student
+
 
 object Test02_Variable {
   def main(args: Array[String]): Unit = {

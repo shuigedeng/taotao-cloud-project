@@ -14,6 +14,7 @@ object Test03_FunctionParameter {
     def f2(str1: String, str2: String*): Unit = {
       println("str1: " + str1 + " str2: " + str2)
     }
+
     f2("alice")
     f2("aaa", "bbb", "ccc")
 

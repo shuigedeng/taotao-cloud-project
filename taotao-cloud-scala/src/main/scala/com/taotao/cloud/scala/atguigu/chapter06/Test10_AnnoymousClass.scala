@@ -15,5 +15,6 @@ object Test10_AnnoymousClass {
 // 定义抽象类
 abstract class Person10 {
   var name: String
+
   def eat(): Unit
 }

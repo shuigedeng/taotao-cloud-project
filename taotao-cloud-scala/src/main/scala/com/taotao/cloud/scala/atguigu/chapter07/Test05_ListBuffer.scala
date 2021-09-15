@@ -17,7 +17,7 @@ object Test05_ListBuffer {
     list1.append(15, 62)
     list2.prepend(20)
 
-    list1.insert(1, 19, 22)
+    list1.insert(1, 19)
 
     println(list1)
     println(list2)

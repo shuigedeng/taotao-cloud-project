@@ -13,8 +13,8 @@ object Test12_Singleton {
   }
 }
 
-class Student12 private(val name: String, val age: Int){
-  def printInfo(){
+class Student12 private(val name: String, val age: Int) {
+  def printInfo() {
     println(s"student: name = ${name}, age = $age, school = ${Student11.school}")
   }
 }
@@ -28,8 +28,9 @@ class Student12 private(val name: String, val age: Int){
 // 懒汉式
 object Student12 {
   private var student: Student12 = _
+
   def getInstance(): Student12 = {
-    if (student == null){
+    if (student == null) {
       // 如果没有对象实例的话，就创建一个
       student = new Student12("alice", 18)
     }

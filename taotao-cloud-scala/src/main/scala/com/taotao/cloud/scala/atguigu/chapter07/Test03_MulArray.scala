@@ -10,10 +10,10 @@ object Test03_MulArray {
     array(1)(0) = 25
 
     println(array.mkString(", "))
-    for (i <- 0 until array.length; j <- 0 until array(i).length){
+    for (i <- 0 until array.length; j <- 0 until array(i).length) {
       println(array(i)(j))
     }
-    for (i <- array.indices; j <- array(i).indices){
+    for (i <- array.indices; j <- array(i).indices) {
       print(array(i)(j) + "\t")
       if (j == array(i).length - 1) println()
     }

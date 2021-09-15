@@ -45,7 +45,7 @@ object Test02_MatchTypes {
       val result = arr match {
         case Array(0) => "0"
         case Array(1, 0) => "Array(1, 0)"
-        case Array(x, y) => "Array: " + x + ", " + y    // 匹配两元素数组
+        case Array(x, y) => "Array: " + x + ", " + y // 匹配两元素数组
         case Array(0, _*) => "以0开头的数组"
         case Array(x, 1, z) => "中间为1的三元素数组"
         case _ => "something else"
@@ -95,7 +95,7 @@ object Test02_MatchTypes {
       (0, 1, 1),
       (1, 23, 56),
       ("hello", true, 0.5)
-    )){
+    )) {
       val result = tuple match {
         case (a, b) => "" + a + ", " + b
         case (0, _) => "(0, _)"

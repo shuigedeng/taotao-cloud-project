@@ -17,42 +17,47 @@ object Test09_ClosureAndCurrying {
     }
 
     // 3. 将固定加数作为另一个参数传入，但是是作为”第一层参数“传入
-    def addByFour1(): Int=>Int = {
+    def addByFour1(): Int => Int = {
       val a = 4
+
       def addB(b: Int): Int = {
         a + b
       }
+
       addB
     }
 
-    def addByA(a: Int): Int=>Int = {
+    def addByA(a: Int): Int => Int = {
       def addB(b: Int): Int = {
         a + b
       }
+
       addB
     }
 
     println(addByA(35)(24))
 
-    val addByFour2 = addByA(4)
-    val addByFive2 = addByA(5)
+    val addByFour2: Int => Int = addByA(4)
+    val addByFive2: Int => Int = addByA(5)
 
     println(addByFour2(13))
     println(addByFive2(25))
 
     // 4. lambda表达式简写
-    def addByA1(a: Int): Int=>Int = {
+    def addByA1(a: Int): Int => Int = {
       (b: Int) => {
         a + b
       }
     }
-    def addByA2(a: Int): Int=>Int = {
+
+    def addByA2(a: Int): Int => Int = {
       b => a + b
     }
 
-    def addByA3(a: Int): Int=>Int = a + _
-    val addByFour3 = addByA3(4)
-    val addByFive3 = addByA3(5)
+    def addByA3(a: Int): Int => Int = a + _
+
+    val addByFour3: Int => Int = addByA3(4)
+    val addByFive3: Int => Int = addByA3(5)
 
     println(addByFour3(13))
     println(addByFive3(25))

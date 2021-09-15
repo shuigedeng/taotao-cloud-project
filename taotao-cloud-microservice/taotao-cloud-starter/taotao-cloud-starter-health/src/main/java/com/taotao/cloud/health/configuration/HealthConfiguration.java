@@ -76,17 +76,18 @@ public class HealthConfiguration implements InitializingBean {
 		LogUtil.started(HealthConfiguration.class, StarterNameConstant.HEALTH_STARTER);
 	}
 
-	@Bean
-	public WarnTemplate warnTemplate() {
-		return new WarnTemplate()
-			.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
-	}
+	//@Bean
+	//public WarnTemplate warnTemplate() {
+	//	return new WarnTemplate()
+	//		.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
+	//}
 
 	@Bean
 	@ConditionalOnBean(PropertyCache.class)
 	public DefaultWarnStrategy defaultWarnStrategy(
-		WarnTemplate warnTemplate,
 		PropertyCache propertyCache) {
+		WarnTemplate warnTemplate = new WarnTemplate()
+			.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
 		return new DefaultWarnStrategy(warnTemplate, new Rule.RulesAnalyzer(propertyCache));
 	}
 

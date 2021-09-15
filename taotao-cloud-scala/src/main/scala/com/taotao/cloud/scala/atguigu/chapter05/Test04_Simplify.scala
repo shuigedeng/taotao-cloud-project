@@ -16,28 +16,31 @@ object Test04_Simplify {
     def f1(name: String): String = {
       name
     }
+
     println(f1("atguigu"))
 
     println("==========================")
 
     //    （2）如果函数体只有一行代码，可以省略花括号
     def f2(name: String): String = name
+
     println(f2("atguigu"))
 
     println("==========================")
 
     //    （3）返回值类型如果能够推断出来，那么可以省略（:和返回值类型一起省略）
     def f3(name: String) = name
+
     println(f3("atguigu"))
 
     println("==========================")
 
     //    （4）如果有return，则不能省略返回值类型，必须指定
-//    def f4(name: String) = {
-//      return name
-//    }
-//
-//    println(f4("atguigu"))
+    //    def f4(name: String) = {
+    //      return name
+    //    }
+    //
+    //    println(f4("atguigu"))
 
     println("==========================")
 
@@ -74,7 +77,7 @@ object Test04_Simplify {
       println("atguigu")
     }
 
-//    f8()
+    //    f8()
     f8
 
     println("==========================")
@@ -85,9 +88,11 @@ object Test04_Simplify {
     }
 
     // 匿名函数，lambda表达式
-    (name: String) => { println(name) }
+    (name: String) => {
+      println(name)
+    }
 
-    println("==========================")
+      println("==========================")
 
   }
 }

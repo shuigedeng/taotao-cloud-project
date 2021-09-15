@@ -13,7 +13,7 @@ object Test02_ArrayBuffer {
     println(arr2)
 
     // 2. 访问元素
-//    println(arr1(0))     // error
+    //    println(arr1(0))     // error
     println(arr2(1))
     arr2(1) = 39
     println(arr2(1))
@@ -38,7 +38,7 @@ object Test02_ArrayBuffer {
 
     arr1.append(36)
     arr1.prepend(11, 76)
-    arr1.insert(1, 13, 59)
+    arr1.insert(1, 13)
     println(arr1)
 
     arr1.insertAll(2, newArr1)

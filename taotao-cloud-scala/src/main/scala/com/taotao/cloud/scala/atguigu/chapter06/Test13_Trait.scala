@@ -14,9 +14,11 @@ object Test13_Trait {
 class Person13 {
   val name: String = "person"
   var age: Int = 18
+
   def sayHello(): Unit = {
     println("hello from: " + name)
   }
+
   def increase(): Unit = {
     println("person increase")
   }

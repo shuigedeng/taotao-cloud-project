@@ -8,7 +8,7 @@ object Test04_List {
 
     // 2. 访问和遍历元素
     println(list1(1))
-//    list1(1) = 12
+    //    list1(1) = 12
     list1.foreach(println)
 
     // 3. 添加元素

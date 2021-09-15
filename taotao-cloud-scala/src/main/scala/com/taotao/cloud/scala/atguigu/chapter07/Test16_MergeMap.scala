@@ -7,7 +7,7 @@ object Test16_MergeMap {
     val map1 = Map("a" -> 1, "b" -> 3, "c" -> 6)
     val map2 = mutable.Map("a" -> 6, "b" -> 2, "c" -> 9, "d" -> 3)
 
-//    println(map1 ++ map2)
+    //    println(map1 ++ map2)
 
     val map3 = map1.foldLeft(map2)(
       (mergedMap, kv) => {

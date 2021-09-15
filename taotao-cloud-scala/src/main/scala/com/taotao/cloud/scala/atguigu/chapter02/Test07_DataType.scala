@@ -1,6 +1,7 @@
 package com.taotao.cloud.scala.atguigu.chapter02
 
-import chapter01.Student
+import com.taotao.cloud.scala.atguigu.chapter01.Student
+
 
 object Test07_DataType {
   def main(args: Array[String]): Unit = {
@@ -8,16 +9,16 @@ object Test07_DataType {
     val a1: Byte = 127
     val a2: Byte = -128
 
-//    val a2: Byte = 128    // error
+    //    val a2: Byte = 128    // error
 
-    val a3 = 12    // 整数默认类型为Int
-    val a4: Long = 1324135436436L    // 长整型数值定义
+    val a3 = 12 // 整数默认类型为Int
+    val a4: Long = 1324135436436L // 长整型数值定义
 
     val b1: Byte = 10
     val b2: Byte = 10 + 20
     println(b2)
 
-//    val b3: Byte = b1 + 20
+    //    val b3: Byte = b1 + 20
     val b3: Byte = (b1 + 20).toByte
     println(b3)
 
@@ -33,14 +34,14 @@ object Test07_DataType {
     println(c2)
 
     // 控制字符
-    val c3: Char = '\t'    // 制表符
-    val c4: Char = '\n'    // 换行符
+    val c3: Char = '\t' // 制表符
+    val c4: Char = '\n' // 换行符
     println("abc" + c3 + "def")
     println("abc" + c4 + "def")
 
     // 转义字符
-    val c5 = '\\'    // 表示\自身
-    val c6 = '\"'    // 表示"
+    val c5 = '\\' // 表示\自身
+    val c6 = '\"' // 表示"
     println("abc" + c5 + "def")
     println("abc" + c6 + "def")
 
@@ -69,7 +70,7 @@ object Test07_DataType {
     println("a: " + a)
 
     // 5.2 空引用Null
-//    val n: Int = null    // error
+    //    val n: Int = null    // error
     var student: Student = new Student("alice", 20)
     student = null
     println(student)
@@ -79,7 +80,7 @@ object Test07_DataType {
       if (n == 0)
         throw new NullPointerException
       else
-        return n
+        n
     }
 
 

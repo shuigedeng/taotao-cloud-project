@@ -14,8 +14,9 @@ object Test14_TraitMixin {
 
     println("===========================")
     // 动态混入
-    val studentWithTalent = new Student14 with Talent {
+    val studentWithTalent: Student14 with Talent = new Student14 with Talent {
       override def dancing(): Unit = println("student is good at dancing")
+
       override def singing(): Unit = println("student is good at singing")
     }
 
@@ -31,11 +32,13 @@ object Test14_TraitMixin {
 // 再定义一个特质
 trait Knowledge {
   var amount: Int = 0
+
   def increase(): Unit
 }
 
 trait Talent {
   def singing(): Unit
+
   def dancing(): Unit
 }
 

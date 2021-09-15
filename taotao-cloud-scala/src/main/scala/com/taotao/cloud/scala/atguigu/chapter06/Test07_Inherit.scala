@@ -31,7 +31,7 @@ class Person7() {
 
   println("1. 父类的主构造器调用")
 
-  def this(name: String, age: Int){
+  def this(name: String, age: Int) {
     this()
     println("2. 父类的辅助构造器调用")
     this.name = name
@@ -49,7 +49,7 @@ class Student7(name: String, age: Int) extends Person7(name, age) {
 
   println("3. 子类的主构造器调用")
 
-  def this(name: String, age: Int, stdNo: String){
+  def this(name: String, age: Int, stdNo: String) {
     this(name, age)
     println("4. 子类的辅助构造器调用")
     this.stdNo = stdNo

@@ -2,7 +2,6 @@ package com.taotao.cloud.scala.atguigu.chapter07
 
 import scala.collection.immutable.Queue
 import scala.collection.mutable
-import scala.collection.parallel.immutable
 
 object Test19_Queue {
   def main(args: Array[String]): Unit = {

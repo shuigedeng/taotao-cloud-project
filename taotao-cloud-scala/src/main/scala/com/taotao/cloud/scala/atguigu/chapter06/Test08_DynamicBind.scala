@@ -10,6 +10,7 @@ object Test08_DynamicBind {
 
 class Person8 {
   val name: String = "person"
+
   def hello(): Unit = {
     println("hello person")
   }
@@ -17,6 +18,7 @@ class Person8 {
 
 class Student8 extends Person8 {
   override val name: String = "student"
+
   override def hello(): Unit = {
     println("hello student")
   }
