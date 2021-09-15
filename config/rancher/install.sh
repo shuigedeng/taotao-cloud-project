@@ -19,7 +19,8 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
   "registry-mirrors": ["https://sef9c1bz.mirror.aliyuncs.com"],
   "dns": ["8.8.8.8", "8.8.4.4"],
   "debug": true,
-  "experimental": false
+  "experimental": false,
+#  "exec-opts": ["native.cgroupdriver=systemd"]
 
 #    "max-concurrent-downloads": 3,
 #    "max-concurrent-uploads": 5,
@@ -48,3 +49,10 @@ https://127.0.0.1:2443
 
 ### docker rm `docker ps -a -q`
 ###  docker rmi $(docker images -q)
+
+
+swapoff -a
+kubeadm reset
+systemctl daemon-reload
+systemctl restart kubelet
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X

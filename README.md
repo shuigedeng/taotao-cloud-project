@@ -45,7 +45,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2021.9.1"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2021.9.2"
   }
 }
 
@@ -59,7 +59,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2021.9.1</version>
+      <version>2021.9.2</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -111,7 +111,7 @@ Guava | 29.0-jre
 ## 7. 功能特点
 
 * 微服务技术框架: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
-* 主体框架：采用最新的Spring Boot 2.5.1、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2.2.5.RELEASE版本进行设计
+* 主体框架：采用最新的Spring Boot 2.5.4、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1版本进行设计
 * 统一注册：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * 统一认证：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * 业务监控：利用Spring Boot Admin 监控各个独立服务的运行状态
