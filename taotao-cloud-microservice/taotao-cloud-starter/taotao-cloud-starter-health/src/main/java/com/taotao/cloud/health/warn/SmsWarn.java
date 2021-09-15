@@ -15,14 +15,16 @@
  */
 package com.taotao.cloud.health.warn;
 
-
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
-import com.taotao.cloud.sms.service.SmsService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * SmsWarn
@@ -33,30 +35,50 @@ import com.taotao.cloud.sms.service.SmsService;
  */
 public class SmsWarn extends AbstractWarn {
 
-	private final WarnProperties warnProperties;
+	private final static String CLASS = "com.taotao.cloud.sms.service.SmsService";
 
-	public SmsWarn(WarnProperties warnProperties) {
-		this.warnProperties = warnProperties;
+	private final boolean driverExist;
+
+	public SmsWarn() {
+		this.driverExist = ReflectionUtil.tryClassForName(CLASS) != null;
 	}
 
 	@Override
 	public void notify(Message message) {
-		SmsService smsService = ContextUtil.getBean(SmsService.class, false);
-		if (smsService != null) {
+		if (!driverExist) {
+			LogUtil.error("未找到SmsService, 不支持短信预警");
+			return;
+		}
+
+		WarnProperties warnProperties = ContextUtil.getBean(WarnProperties.class, true);
+		Object smsService = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+
+		if (Objects.nonNull(warnProperties) && Objects.nonNull(smsService)) {
 			String ip = RequestUtil.getIpAddress();
 
 			String dingDingFilterIP = warnProperties.getDingdingFilterIP();
 			if (!StringUtil.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
-				String context = StringUtil.subString3(message.getTitle(), 100) + "\n" +
-					"详情: " + RequestUtil.getBaseUrl() + "/taotao/cloud/health/\n" +
-					StringUtil.subString3(message.getContent(), 500);
+				String context = StringUtil.subString3(message.getTitle(), 100)
+					+ "\n"
+					+ "详情: "
+					+ RequestUtil.getBaseUrl()
+					+ "/taotao/cloud/health/\n"
+					+ StringUtil.subString3(message.getContent(), 500);
 
 				try {
-					smsService.sendSms("", "", "", "");
+					List<Object> param = new ArrayList<>();
+					param.add("phoneNumber");
+					param.add("signName");
+					param.add("templateCode");
+					// templateParam
+					param.add(context);
+					ReflectionUtil.callMethod(smsService, "sendSms", param.toArray());
 				} catch (Exception e) {
 					LogUtil.error(e);
 				}
 			}
 		}
 	}
+
+
 }

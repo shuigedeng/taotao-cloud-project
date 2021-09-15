@@ -16,7 +16,6 @@
 package com.taotao.cloud.health.warn;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
@@ -27,12 +26,10 @@ import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
 import com.taotao.cloud.health.utils.ExceptionUtils;
-import com.taotao.cloud.sms.service.SmsService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -95,16 +92,15 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	 */
 	public void registerWarn() {
 		if (warnProperties.isDingDingWarnEnabled()) {
-			warns.add(new DingdingWarn(warnProperties));
+			warns.add(new DingdingWarn());
 		}
 
 		if (warnProperties.isEmailWarnEnabled()) {
-			warns.add(new MailWarn(warnProperties));
+			warns.add(new MailWarn());
 		}
 
-
 		if (warnProperties.isSmsWarnEnabled()) {
-			warns.add(new SmsWarn(warnProperties));
+			warns.add(new SmsWarn());
 		}
 	}
 

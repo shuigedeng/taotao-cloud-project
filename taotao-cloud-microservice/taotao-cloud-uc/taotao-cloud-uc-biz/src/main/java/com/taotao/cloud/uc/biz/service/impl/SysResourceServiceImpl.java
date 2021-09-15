@@ -23,6 +23,7 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
+import com.zaxxer.hikari.HikariDataSource;
 import io.seata.spring.annotation.GlobalTransactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
+import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
@@ -226,6 +228,10 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	@Transactional(rollbackFor = Exception.class)
 	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
+		LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
+		appender.getWriteBufferSize()
+
+
 		//try {
 		LogUtil.info("1.添加资源信息");
 		SysResource sysResource = SysResource.builder()

@@ -74,9 +74,6 @@ public class RouterFunctionConfiguration {
 				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler);
 	}
 
-	public class HealthReport(){
-
-	}
 
 	/**
 	 * Hystrix 降级处理

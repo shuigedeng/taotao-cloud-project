@@ -4,6 +4,7 @@ import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -17,11 +18,9 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.logStatistic";
 
-	private CollectTaskProperties properties;
-	private Collector collector;
+	private final CollectTaskProperties properties;
 
-	public LogStatisticCollectTask(Collector collector, CollectTaskProperties properties) {
-		this.collector = collector;
+	public LogStatisticCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
 	}
 
@@ -48,30 +47,35 @@ public class LogStatisticCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			LogErrorInfo data = new LogErrorInfo();
-			data.logerrorCount =
-				this.collector.value("taotao.cloud.health.collect.log.error.count").get() == null
-					? 0
-					: ((AtomicLong) (this.collector.value(
-							"taotao.cloud.health.collect.log.error.count")
-						.get())).intValue();
-			data.logIncreCount =
-				this.collector.value("taotao.cloud.health.collect.log.incre.count").get() == null
-					? 0
-					: ((AtomicLong) (this.collector.value(
-							"taotao.cloud.health.collect.log.incre.count")
-						.get())).intValue();
-			return data;
+			LogErrorInfo info = new LogErrorInfo();
+			Collector collector = Collector.getCollector();
+			if (Objects.nonNull(collector)) {
+				info.logerrorCount =
+					collector.value("taotao.cloud.health.collect.log.error.count").get()
+						== null
+						? 0
+						: ((AtomicLong) (collector.value(
+								"taotao.cloud.health.collect.log.error.count")
+							.get())).intValue();
+				info.logIncreCount =
+					collector.value("taotao.cloud.health.collect.log.incre.count").get()
+						== null
+						? 0
+						: ((AtomicLong) (collector.value(
+								"taotao.cloud.health.collect.log.incre.count")
+							.get())).intValue();
+				return info;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	private static class LogErrorInfo implements CollectInfo{
+	private static class LogErrorInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".error.count", desc = "最近1分钟错误日志数量")
-		private Integer logerrorCount  = 0;
+		private Integer logerrorCount = 0;
 		@FieldReport(name = TASK_NAME + ".incre.count", desc = "最近1分钟日志条数增量")
 		private Integer logIncreCount = 0;
 	}

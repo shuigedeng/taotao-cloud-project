@@ -19,7 +19,6 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Report;
@@ -40,11 +39,10 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	protected List<AbstractCollectTask> checkTasks = new ArrayList<>();
 	protected DefaultWarnStrategy strategy;
-	private boolean isclose;
+	private boolean close;
 	private CollectTaskProperties properties;
 	private HealthProperties healthProperties;
 	private MonitorThreadPool monitorThreadPool;
-	private Collector collector;
 	private DefaultHttpClient defaultHttpClient;
 
 	public void registerCollectTask(AbstractCollectTask task) {
@@ -54,13 +52,11 @@ public class HealthCheckProvider implements AutoCloseable {
 	public HealthCheckProvider(
 		DefaultWarnStrategy strategy,
 		DefaultHttpClient defaultHttpClient,
-		Collector collector,
 		CollectTaskProperties properties,
 		HealthProperties healthProperties,
 		MonitorThreadPool monitorThreadPool) {
 		this.strategy = strategy;
-		this.collector = collector;
-		this.isclose = false;
+		this.close = false;
 		this.properties = properties;
 		this.healthProperties = healthProperties;
 		this.monitorThreadPool = monitorThreadPool;
@@ -71,10 +67,10 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new MemoryCollectTask(properties));
 		registerCollectTask(new ThreadCollectTask(properties));
 		registerCollectTask(new UnCatchExceptionCollectTask(properties));
-		registerCollectTask(new MonitorThreadPoolCollectTask(collector, properties));
-		registerCollectTask(new AsyncThreadPoolCollectTask(collector, properties));
+		registerCollectTask(new MonitorThreadPoolCollectTask(properties));
+		registerCollectTask(new AsyncThreadPoolCollectTask(properties));
 		//registerCollectTask(new BsfEurekaCollectTask());
-		registerCollectTask(new MybatisCollectTask(collector, properties));
+		registerCollectTask(new MybatisCollectTask(properties));
 		registerCollectTask(new DataSourceCollectTask(properties));
 		registerCollectTask(new TomcatCollectTask(properties));
 		//registerCollectTask(new JedisCollectTask(properties));
@@ -86,12 +82,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		//registerCollectTask(new CatCollectTask());
 		//registerCollectTask(new ElasticSearchCollectTask());
 		registerCollectTask(new ElkCollectTask(properties));
-		registerCollectTask(new DoubtApiCollectTask(collector, properties));
-		registerCollectTask(new LogStatisticCollectTask(collector, properties));
-		registerCollectTask(new NacosCollectTask(collector, properties));
+		registerCollectTask(new DoubtApiCollectTask(properties));
+		registerCollectTask(new LogStatisticCollectTask(properties));
+		registerCollectTask(new NacosCollectTask(properties));
 
 		monitorThreadPool.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
-			while (!monitorThreadPool.monitorIsShutdown() && !isclose) {
+			while (!monitorThreadPool.monitorIsShutdown() && !close) {
 				try {
 					Report report = getReport(false);
 					String text = strategy.analyseText(report);
@@ -152,7 +148,7 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	@Override
 	public void close() {
-		isclose = true;
+		close = true;
 		for (AbstractCollectTask task : checkTasks) {
 			try {
 				task.close();
@@ -180,12 +176,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.strategy = strategy;
 	}
 
-	public boolean isIsclose() {
-		return isclose;
+	public boolean isClose() {
+		return close;
 	}
 
-	public void setIsclose(boolean isclose) {
-		this.isclose = isclose;
+	public void setClose(boolean close) {
+		this.close = close;
 	}
 
 	public CollectTaskProperties getProperties() {
@@ -211,15 +207,6 @@ public class HealthCheckProvider implements AutoCloseable {
 	public void setMonitorThreadPool(MonitorThreadPool monitorThreadPool) {
 		this.monitorThreadPool = monitorThreadPool;
 	}
-
-	public Collector getCollector() {
-		return collector;
-	}
-
-	public void setCollector(Collector collector) {
-		this.collector = collector;
-	}
-
 
 	public DefaultHttpClient getDefaultHttpClient() {
 		return defaultHttpClient;

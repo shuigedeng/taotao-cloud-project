@@ -17,6 +17,7 @@ package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.exception.BaseException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -89,6 +90,30 @@ public class ReflectionUtil {
 		}
 		return find;
 	}
+
+	/**
+	 * 通过枚举名称获取枚举对象
+	 *
+	 * @param cls        枚举类
+	 * @param methodName 方法名称
+	 * @param name       name  枚举名称 区分大小写 必须完全一样
+	 * @return {@link java.lang.Object }
+	 * @author shuigedeng
+	 * @since 2021-09-15 15:56:01
+	 */
+	public static Object findEnumObjByName(Class<?> cls, String methodName, String name)
+		throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		Object[] objects = cls.getEnumConstants();
+		Method method = cls.getMethod(methodName);
+		for (Object object : objects) {
+			Object invoke = method.invoke(object);
+			if (invoke.equals(name)) {
+				return object;
+			}
+		}
+		return null;
+	}
+
 
 	/**
 	 * 获取类中方法

@@ -16,6 +16,7 @@
 package com.taotao.cloud.core.model;
 
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.NumberUtil;
 import com.taotao.cloud.core.model.Callable.Func0;
@@ -41,7 +42,11 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class Collector {
 
-	private CoreProperties coreProperties;
+	private final CoreProperties coreProperties;
+
+	public static Collector getCollector() {
+		return ContextUtil.getBean(Collector.class, true);
+	}
 
 	/**
 	 * map

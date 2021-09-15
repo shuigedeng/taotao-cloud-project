@@ -33,11 +33,11 @@ public class CpuCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.cpu";
 
-	private OperatingSystemMXBean sysembean;
-	private CollectTaskProperties properties;
+	private final OperatingSystemMXBean systemBean;
+	private final CollectTaskProperties properties;
 
 	public CpuCollectTask(CollectTaskProperties properties) {
-		this.sysembean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+		this.systemBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		this.properties = properties;
 	}
 
@@ -65,15 +65,15 @@ public class CpuCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			CpuInfo info = new CpuInfo();
-			info.processCpuLoad = sysembean.getProcessCpuLoad();
-			info.systemCpuLoad = sysembean.getSystemCpuLoad();
+			info.processCpuLoad = systemBean.getProcessCpuLoad();
+			info.systemCpuLoad = systemBean.getSystemCpuLoad();
 
-			info.committedVirtualMemorySize = sysembean.getCommittedVirtualMemorySize();
-			info.totalSwapSpaceSize = sysembean.getTotalSwapSpaceSize();
-			info.freeSwapSpaceSize = sysembean.getFreeSwapSpaceSize();
-			info.processCpuTime = sysembean.getProcessCpuTime();
-			info.freePhysicalMemorySize = sysembean.getFreePhysicalMemorySize();
-			info.totalPhysicalMemorySize = sysembean.getTotalPhysicalMemorySize();
+			info.committedVirtualMemorySize = systemBean.getCommittedVirtualMemorySize();
+			info.totalSwapSpaceSize = systemBean.getTotalSwapSpaceSize();
+			info.freeSwapSpaceSize = systemBean.getFreeSwapSpaceSize();
+			info.processCpuTime = systemBean.getProcessCpuTime();
+			info.freePhysicalMemorySize = systemBean.getFreePhysicalMemorySize();
+			info.totalPhysicalMemorySize = systemBean.getTotalPhysicalMemorySize();
 
 			info.cpuCoreNumber = Runtime.getRuntime().availableProcessors();
 			return info;
@@ -83,10 +83,10 @@ public class CpuCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class CpuInfo implements CollectInfo{
+	private static class CpuInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".process", desc = "进程cpu负载")
-		private Double processCpuLoad=0.0;
+		private Double processCpuLoad = 0.0;
 		@FieldReport(name = TASK_NAME + ".system", desc = "系统cpu负载")
 		private Double systemCpuLoad = 0.0;
 		@FieldReport(name = TASK_NAME + ".committed.virtual.memory.size", desc = "已提交的虚拟内存大小")

@@ -37,7 +37,7 @@ public class TomcatCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.tomcat";
 
-	private CollectTaskProperties collectTaskProperties;
+	private final CollectTaskProperties collectTaskProperties;
 
 	public TomcatCollectTask(CollectTaskProperties collectTaskProperties) {
 		this.collectTaskProperties = collectTaskProperties;

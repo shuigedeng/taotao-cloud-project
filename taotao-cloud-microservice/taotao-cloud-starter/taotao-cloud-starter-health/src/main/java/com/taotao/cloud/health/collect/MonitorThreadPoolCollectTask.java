@@ -24,6 +24,7 @@ import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
+import java.util.Objects;
 
 /**
  * MonitorThreadPoolCollectTask
@@ -36,11 +37,9 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.executor.monitor";
 
-	private CollectTaskProperties properties;
-	private Collector collector;
+	private final CollectTaskProperties properties;
 
-	public MonitorThreadPoolCollectTask(Collector collector, CollectTaskProperties properties) {
-		this.collector = collector;
+	public MonitorThreadPoolCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
 	}
 
@@ -67,36 +66,40 @@ public class MonitorThreadPoolCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
+			Collector collector = Collector.getCollector();
 			MonitorThreadPoolProperties monitorThreadPoolProperties = ContextUtil.getBean(
 				MonitorThreadPoolProperties.class, false);
-			String threadNamePrefix = monitorThreadPoolProperties.getThreadNamePrefix();
-			String monitorThreadName = threadNamePrefix.replace("-", ".");
 
-			MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
-			info.systemActiveCount =
-				(Integer) collector.call(monitorThreadName + ".active.count").run();
-			info.systemCorePoolSize =
-				(Integer) collector.call(monitorThreadName + ".core.poolSize").run();
-			info.systemPoolSizeLargest =
-				(Integer) collector.call(monitorThreadName + ".poolSize.largest").run();
-			info.systemPoolSizeMax =
-				(Integer) collector.call(monitorThreadName + ".poolSize.max").run();
-			info.systemPoolSizeCount =
-				(Integer) collector.call(monitorThreadName + ".poolSize.count").run();
-			info.systemQueueSize =
-				(Integer) collector.call(monitorThreadName + ".queue.size").run();
-			info.systemTaskCount =
-				(Long) collector.call(monitorThreadName + ".task.count").run();
-			info.systemTaskCompleted =
-				(Long) collector.call(monitorThreadName + ".task.completed").run();
+			if(Objects.nonNull(collector) && Objects.nonNull(monitorThreadPoolProperties)){
+				String threadNamePrefix = monitorThreadPoolProperties.getThreadNamePrefix();
+				String monitorThreadName = threadNamePrefix.replace("-", ".");
 
-			Hook hook = this.collector.hook(monitorThreadName + ".hook");
-			info.systemTaskHookCurrent = hook.getCurrent();
-			info.systemTaskHookError = hook.getLastErrorPerSecond();
-			info.systemTaskHookSuccess = hook.getLastSuccessPerSecond();
-			info.systemTaskHookList = hook.getMaxTimeSpanList().toText();
-			info.systemTaskHookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
-			return info;
+				MonitorThreadPoolInfo info = new MonitorThreadPoolInfo();
+				info.systemActiveCount =
+					(Integer) collector.call(monitorThreadName + ".active.count").run();
+				info.systemCorePoolSize =
+					(Integer) collector.call(monitorThreadName + ".core.poolSize").run();
+				info.systemPoolSizeLargest =
+					(Integer) collector.call(monitorThreadName + ".poolSize.largest").run();
+				info.systemPoolSizeMax =
+					(Integer) collector.call(monitorThreadName + ".poolSize.max").run();
+				info.systemPoolSizeCount =
+					(Integer) collector.call(monitorThreadName + ".poolSize.count").run();
+				info.systemQueueSize =
+					(Integer) collector.call(monitorThreadName + ".queue.size").run();
+				info.systemTaskCount =
+					(Long) collector.call(monitorThreadName + ".task.count").run();
+				info.systemTaskCompleted =
+					(Long) collector.call(monitorThreadName + ".task.completed").run();
+
+				Hook hook = collector.hook(monitorThreadName + ".hook");
+				info.systemTaskHookCurrent = hook.getCurrent();
+				info.systemTaskHookError = hook.getLastErrorPerSecond();
+				info.systemTaskHookSuccess = hook.getLastSuccessPerSecond();
+				info.systemTaskHookList = hook.getMaxTimeSpanList().toText();
+				info.systemTaskHookListPerMinute = hook.getMaxTimeSpanListPerMinute().toText();
+				return info;
+			}
 		} catch (Exception e) {
 			LogUtil.error(e);
 		}

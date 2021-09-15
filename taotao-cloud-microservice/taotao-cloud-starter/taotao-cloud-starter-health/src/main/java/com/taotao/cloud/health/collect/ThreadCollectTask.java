@@ -36,8 +36,8 @@ public class ThreadCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.thread";
 
-	private ThreadMXBean threadMXBean;
-	private CollectTaskProperties properties;
+	private final ThreadMXBean threadMXBean;
+	private final CollectTaskProperties properties;
 	private HashMap<Long, Long> lastThreadUserTime = new HashMap<>();
 
 	public ThreadCollectTask(CollectTaskProperties properties) {

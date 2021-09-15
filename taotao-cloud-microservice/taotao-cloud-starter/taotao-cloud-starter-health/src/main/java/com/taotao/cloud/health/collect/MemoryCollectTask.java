@@ -37,8 +37,8 @@ public class MemoryCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.memory";
 
-	private OperatingSystemMXBean systemMXBean;
-	private CollectTaskProperties properties;
+	private final OperatingSystemMXBean systemMXBean;
+	private final CollectTaskProperties properties;
 
 	public MemoryCollectTask(CollectTaskProperties properties) {
 		this.systemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();

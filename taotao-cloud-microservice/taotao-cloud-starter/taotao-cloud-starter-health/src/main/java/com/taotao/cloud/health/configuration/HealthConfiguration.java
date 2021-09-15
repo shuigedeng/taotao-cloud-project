@@ -105,7 +105,6 @@ public class HealthConfiguration implements InitializingBean {
 	public HealthCheckProvider getHealthCheckProvider(
 		DefaultWarnStrategy strategy,
 		DefaultHttpClient defaultHttpClient,
-		Collector collector,
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
 		MonitorThreadPool monitorThreadPool) {
@@ -113,7 +112,6 @@ public class HealthConfiguration implements InitializingBean {
 		return new HealthCheckProvider(
 			strategy,
 			defaultHttpClient,
-			collector,
 			collectTaskProperties,
 			healthProperties,
 			monitorThreadPool);

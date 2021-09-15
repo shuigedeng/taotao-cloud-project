@@ -15,14 +15,16 @@
  */
 package com.taotao.cloud.health.warn;
 
-
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
-import com.taotao.cloud.mail.template.MailTemplate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * MailWarn
@@ -33,16 +35,25 @@ import com.taotao.cloud.mail.template.MailTemplate;
  */
 public class MailWarn extends AbstractWarn {
 
-	private final WarnProperties warnProperties;
+	private final static String CLASS = "com.taotao.cloud.mail.template.MailTemplate";
 
-	public MailWarn(WarnProperties warnProperties) {
-		this.warnProperties = warnProperties;
+	private final boolean driverExist;
+
+	public MailWarn() {
+		this.driverExist = ReflectionUtil.tryClassForName(CLASS) != null;
 	}
 
 	@Override
 	public void notify(Message message) {
-		MailTemplate mailTemplate = ContextUtil.getBean(MailTemplate.class, false);
-		if (mailTemplate != null) {
+		if (!driverExist) {
+			LogUtil.error("未找到MailTemplate, 不支持邮件预警");
+			return;
+		}
+
+		WarnProperties warnProperties = ContextUtil.getBean(WarnProperties.class, true);
+		Object mailTemplate = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+
+		if (Objects.nonNull(mailTemplate) && Objects.nonNull(warnProperties)) {
 			String ip = RequestUtil.getIpAddress();
 
 			String dingDingFilterIP = warnProperties.getDingdingFilterIP();
@@ -55,7 +66,11 @@ public class MailWarn extends AbstractWarn {
 					+ StringUtil.subString3(message.getContent(), 500);
 
 				try {
-					mailTemplate.sendSimpleMail("981376577@qq.com", "服务状态预警", context);
+					List<Object> param = new ArrayList<>();
+					param.add("981376577@qq.com");
+					param.add("服务状态预警");
+					param.add(context);
+					ReflectionUtil.callMethod(mailTemplate, "sendSimpleMail", param.toArray());
 				} catch (Exception e) {
 					LogUtil.error(e);
 				}

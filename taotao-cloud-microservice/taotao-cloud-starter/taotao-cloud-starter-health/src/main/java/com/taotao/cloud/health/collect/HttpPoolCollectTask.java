@@ -35,9 +35,10 @@ import org.apache.http.pool.PoolStats;
  * @since 2021-09-10 17:44:20
  */
 public class HttpPoolCollectTask extends AbstractCollectTask {
+
 	private static final String TASK_NAME = "taotao.cloud.health.collect.httpPool";
 
-	private CollectTaskProperties properties;
+	private final CollectTaskProperties properties;
 
 	public HttpPoolCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
@@ -67,22 +68,22 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 	protected CollectInfo getData() {
 		try {
 			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class,
-				false);
+				true);
 
 			ConcurrentHashMap<String, DefaultHttpClient> pool = httpClientManager.getPool();
 			if (pool == null || pool.isEmpty()) {
 				return null;
 			}
 
-			HttpPoolInfo data = new HttpPoolInfo();
+			HttpPoolInfo info = new HttpPoolInfo();
 			StringBuilder detail = new StringBuilder();
 			pool.forEach((id, client) -> {
 				PoolingHttpClientConnectionManager manager = ReflectionUtil.getFieldValue(client,
 					"manager");
 				PoolStats stats = manager.getTotalStats();
-				data.availableCount += stats.getAvailable();
-				data.pendingCount += stats.getPending();
-				data.leasedCount += stats.getLeased();
+				info.availableCount += stats.getAvailable();
+				info.pendingCount += stats.getPending();
+				info.leasedCount += stats.getLeased();
 
 				detail.append(String.format("[Client连接池:%s]\r\n", id));
 				detail.append(String.format("路由数:%s\r\n", manager.getRoutes()));
@@ -92,15 +93,15 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 				detail.append(String.format("等待的连接数:%s\r\n", stats.getPending()));
 				detail.append(String.format("使用中的连接数:%s\r\n", stats.getLeased()));
 			});
-			data.poolDetail = detail.toString();
-			return data;
+			info.poolDetail = detail.toString();
+			return info;
 		} catch (Exception e) {
 			LogUtil.error(e);
 		}
 		return null;
 	}
 
-	private static class HttpPoolInfo implements CollectInfo{
+	private static class HttpPoolInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".available", desc = "HttpPool可用的连接数")
 		private Integer availableCount = 0;

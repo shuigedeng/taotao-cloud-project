@@ -50,7 +50,6 @@ https://127.0.0.1:2443
 ### docker rm `docker ps -a -q`
 ###  docker rmi $(docker images -q)
 
-
 swapoff -a
 kubeadm reset
 systemctl daemon-reload

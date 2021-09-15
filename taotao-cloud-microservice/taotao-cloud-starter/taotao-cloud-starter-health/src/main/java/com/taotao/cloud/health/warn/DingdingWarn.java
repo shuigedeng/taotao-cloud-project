@@ -16,13 +16,15 @@
 package com.taotao.cloud.health.warn;
 
 import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
-import com.taotao.cloud.dingtalk.entity.DingerRequest;
-import com.taotao.cloud.dingtalk.enums.MessageSubType;
-import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * DingdingWarn
@@ -33,31 +35,60 @@ import com.taotao.cloud.health.properties.WarnProperties;
  */
 public class DingdingWarn extends AbstractWarn {
 
-	private final WarnProperties warnProperties;
+	private final static String CLASS = "com.taotao.cloud.dingtalk.model.DingerRobot";
+	private final static String MESSAGE_SUB_TYPE = "com.taotao.cloud.dingtalk.enums.MessageSubType";
+	private final static String DINGER_REQUEST = "com.taotao.cloud.dingtalk.entity.DingerRequest";
 
-	public DingdingWarn(WarnProperties warnProperties) {
-		this.warnProperties = warnProperties;
+	private final boolean driverExist;
+
+	public DingdingWarn() {
+		this.driverExist = ReflectionUtil.tryClassForName(CLASS) != null;
 	}
 
 	@Override
 	public void notify(Message message) {
-		DingerRobot dingerRobot = ContextUtil.getBean(DingerRobot.class, true);
+		if (!driverExist) {
+			LogUtil.error("未找到DingerRobot, 不支持钉钉预警");
+			return;
+		}
+
+		WarnProperties warnProperties = ContextUtil.getBean(WarnProperties.class, true);
+		Object dingerRobot = ContextUtil.getBean(ReflectionUtil.tryClassForName(CLASS), true);
+
 		if (dingerRobot != null) {
 			String ip = RequestUtil.getIpAddress();
 			String dingDingFilterIP = warnProperties.getDingdingFilterIP();
 			if (!StringUtil.isEmpty(ip) && !dingDingFilterIP.contains(ip)) {
-				String title =
-					"[" + message.getWarnType().getDescription() + "]" + StringUtil.subString3(
-						message.getTitle(), 100);
+				String title = "["
+					+ message.getWarnType().getDescription()
+					+ "]"
+					+ StringUtil.subString3(message.getTitle(), 100);
 
-				String context = StringUtil.subString3(message.getTitle(), 100) + "\n" +
-					"详情: " + RequestUtil.getBaseUrl() + "/health/\n" +
-					StringUtil.subString3(message.getContent(), 500);
+				String context = StringUtil.subString3(message.getTitle(), 100)
+					+ "\n"
+					+ "详情: "
+					+ RequestUtil.getBaseUrl() + "/health/\n"
+					+ StringUtil.subString3(message.getContent(), 500);
 
-				MessageSubType messageSubType = MessageSubType.TEXT;
-				DingerRequest request = DingerRequest.request(context, title);
+				try {
+					Object messageSubType = ReflectionUtil.findEnumObjByName(
+						Objects.requireNonNull(ReflectionUtil.tryClassForName(MESSAGE_SUB_TYPE)),
+						"name", "TEXT");
 
-				dingerRobot.send(messageSubType, request);
+					List<Object> requestParam = new ArrayList<>();
+					requestParam.add(context);
+					requestParam.add(title);
+					Object request = ReflectionUtil.callMethod(
+						ReflectionUtil.tryClassForName(DINGER_REQUEST), "request",
+						requestParam.toArray());
+
+					List<Object> param = new ArrayList<>();
+					param.add(messageSubType);
+					param.add(request);
+					ReflectionUtil.callMethod(dingerRobot, "send", param.toArray());
+				} catch (Exception e) {
+					LogUtil.error(e);
+				}
 			}
 		}
 	}

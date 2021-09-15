@@ -32,13 +32,9 @@ public class NacosCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.nacos";
 
-	private Collector collector;
-	private CollectTaskProperties collectTaskProperties;
+	private final CollectTaskProperties collectTaskProperties;
 
-	public NacosCollectTask(
-		Collector collector,
-		CollectTaskProperties collectTaskProperties) {
-		this.collector = collector;
+	public NacosCollectTask(CollectTaskProperties collectTaskProperties) {
 		this.collectTaskProperties = collectTaskProperties;
 	}
 
@@ -65,9 +61,10 @@ public class NacosCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
+			Collector collector = Collector.getCollector();
 			NacosServiceManager nacosServiceManager = ContextUtil.getBean(NacosServiceManager.class,
 				false);
-			if (Objects.nonNull(nacosServiceManager)) {
+			if (Objects.nonNull(collector) && Objects.nonNull(nacosServiceManager)) {
 				NacosClientInfo info = new NacosClientInfo();
 
 				NamingService namingService = ReflectionUtil.getFieldValue(nacosServiceManager,

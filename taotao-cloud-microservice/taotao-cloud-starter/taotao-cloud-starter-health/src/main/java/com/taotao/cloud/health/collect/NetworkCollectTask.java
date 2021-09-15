@@ -36,7 +36,7 @@ public class NetworkCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.network";
 
-	private CollectTaskProperties properties;
+	private final CollectTaskProperties properties;
 
 	public NetworkCollectTask(CollectTaskProperties properties) {
 		this.properties = properties;
