@@ -22,11 +22,13 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.github.danielwegener.logback.kafka.KafkaAppenderConfig;
 import com.github.danielwegener.logback.kafka.delivery.FailedDeliveryCallback;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicLong;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -48,14 +50,22 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 	 * Kafka logs since it could cause harmful infinite recursion/self feeding effects.
 	 */
 	private static final String KAFKA_LOGGER_PREFIX = "org.apache.kafka.clients";
+	private static final long currentTime = System.currentTimeMillis();
+	private static final int ERROR_THRESHOLD = 1000;
+
+	private final AtomicLong sendErrorNum = new AtomicLong(0L);
+	private final AtomicLong msgErrorNum = new AtomicLong(0L);
+	private final AtomicLong sendSuccessNum = new AtomicLong(0L);
 
 	private LazyProducer lazyProducer = null;
 	private final AppenderAttachableImpl<E> aai = new AppenderAttachableImpl<E>();
 	private final ConcurrentLinkedQueue<E> queue = new ConcurrentLinkedQueue<E>();
-	private final FailedDeliveryCallback<E> failedDeliveryCallback = new FailedDeliveryCallback<E>() {
-		@Override
-		public void onFailedDelivery(E evt, Throwable throwable) {
-			aai.appendLoopOnAppenders(evt);
+	private final FailedDeliveryCallback<E> failedDeliveryCallback = (evt, throwable) -> {
+		aai.appendLoopOnAppenders(evt);
+
+		long andIncrement = sendErrorNum.getAndIncrement();
+		if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+			errorLog(andIncrement, "消息发送失败");
 		}
 	};
 
@@ -155,6 +165,11 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 				.replace("\n", "")
 			);
 		} catch (Exception exception) {
+			long andIncrement = msgErrorNum.getAndIncrement();
+			if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+				errorLog(andIncrement, "消息处理失败");
+			}
+
 			return;
 		}
 
@@ -169,10 +184,44 @@ public class TaoTaoCloudKafkaAppender<E> extends KafkaAppenderConfig<E> {
 
 		final Producer<byte[], String> producer = lazyProducer.get();
 		if (producer != null) {
-			deliveryStrategy.send(producer, record, e, failedDeliveryCallback);
+			try {
+				deliveryStrategy.send(producer, record, e, failedDeliveryCallback);
+
+				long andIncrement = sendSuccessNum.getAndIncrement();
+				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+					successLog(andIncrement, "消息发送成功");
+				}
+			} catch (Exception ex) {
+				long andIncrement = sendErrorNum.getAndIncrement();
+				if (andIncrement > 0 && andIncrement % ERROR_THRESHOLD == 0) {
+					errorLog(andIncrement, "消息发送失败");
+				}
+			}
 		} else {
+			sendErrorNum.getAndIncrement();
+			LogUtil.error("kafka producer not init");
 			failedDeliveryCallback.onFailedDelivery(e, null);
 		}
+	}
+
+	protected void errorLog(long num, String msg) {
+		long milliseconds = System.currentTimeMillis();
+		long seconds = (milliseconds - currentTime) / 1000;
+		long minute = seconds / 60;
+		long hour = minute / 24;
+
+		LogUtil.error("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时]", msg, num, seconds, minute,
+			hour);
+	}
+
+	protected void successLog(long num, String msg) {
+		long milliseconds = System.currentTimeMillis();
+		long seconds = (milliseconds - currentTime) / 1000;
+		long minute = seconds / 60;
+		long hour = minute / 24;
+
+		LogUtil.info("KafkaAppender [{}已达 {}条 共用时{}秒 {}分 {}小时]", msg, num, seconds, minute,
+			hour);
 	}
 
 	protected Long getTimestamp(E e) {

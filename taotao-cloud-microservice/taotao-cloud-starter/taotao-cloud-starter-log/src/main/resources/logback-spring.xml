@@ -13,7 +13,7 @@
 
 	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
 
-	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue="--"/>
+	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue=""/>
 	<springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="taotao-cloud-sys-log"/>
 	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
 	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/application/${APP_NAME}"/>
@@ -26,10 +26,10 @@
 
 	<!--	see ch.qos.logback.classic.PatternLayout-->
 	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
-		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%thread]){orange} %clr([${SPRING_PROFILES_ACTIVE:-}]){cyan} %clr([%level]){blue} %clr([${PID}]){magenta} %clr([${OS_NAME:-}]){yellow} %clr([${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} %clr(Version:[${TAOTAO_CLOUD_VERSION:-}]){yellow} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){yellow} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){yellow} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr(SkywalkingTraceId:[%tid]){blue} %clr(%logger{360}){cyan} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="[%clr(${APP_NAME}){green}:%clr(${SERVER_IP}){green}:%clr(${SERVER_PORT}){green}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){green} %clr([%thread]){red} %clr([${SPRING_PROFILES_ACTIVE:-}]){green} %clr([%level]){blue} %clr([${PID}]){magenta} %clr([${OS_NAME:-}:${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} %clr(Version:[${TAOTAO_CLOUD_VERSION}]){green} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){blue} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){cyan} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr([%tid]){blue} %clr(%logger{360}){cyan} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"
-		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${SPRING_PROFILES_ACTIVE:-}] [%level] [${PID}] [${OS_NAME:-}] [${OS_VERSION:-}] [${USER_TIMEZONE:-}] [${JAVA_VERSION:-}] Version:[${TAOTAO_CLOUD_VERSION:-}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] SkywalkingTraceId:[%tid] %logger{360} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${SPRING_PROFILES_ACTIVE:-}] [%level] [${PID}] [${OS_NAME:-}:${OS_VERSION:-}] [${USER_TIMEZONE:-}] [${JAVA_VERSION:-}] Version:[${TAOTAO_CLOUD_VERSION}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] [%tid] %logger{360} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
 	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
 	<conversionRule conversionWord="wex"

@@ -228,10 +228,6 @@ public class SysResourceServiceImpl implements ISysResourceService {
 	@Transactional(rollbackFor = Exception.class)
 	@GlobalTransactional(name = "testSeata", rollbackFor = Exception.class)
 	public Boolean testSeata() {
-		LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
-		appender.getWriteBufferSize()
-
-
 		//try {
 		LogUtil.info("1.添加资源信息");
 		SysResource sysResource = SysResource.builder()
