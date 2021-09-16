@@ -72,7 +72,7 @@ public class HealthCheckProvider implements AutoCloseable {
 		//registerCollectTask(new BsfEurekaCollectTask());
 		registerCollectTask(new MybatisCollectTask(properties));
 		registerCollectTask(new DataSourceCollectTask(properties));
-		registerCollectTask(new TomcatCollectTask(properties));
+		registerCollectTask(new WebServerCollectTask(properties));
 		//registerCollectTask(new JedisCollectTask(properties));
 		registerCollectTask(new NetworkCollectTask(properties));
 		registerCollectTask(new XxlJobCollectTask(properties));

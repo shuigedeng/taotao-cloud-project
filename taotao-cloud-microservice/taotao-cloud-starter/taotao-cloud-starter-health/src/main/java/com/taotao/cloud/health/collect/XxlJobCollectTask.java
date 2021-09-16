@@ -22,6 +22,7 @@ import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.lang.annotation.Annotation;
+import java.util.Objects;
 
 /**
  * XxlJobCollectTask
@@ -31,6 +32,9 @@ import java.lang.annotation.Annotation;
  * @since 2021-09-10 19:18:16
  */
 public class XxlJobCollectTask extends AbstractCollectTask {
+
+	private static final String XXL_JOB_SPRING_EXECUTOR_CLASS = "com.xxl.job.core.executor.impl.XxlJobSpringExecutor";
+	private static final String XXL_JOB_CLASS = "com.xxl.job.core.handler.annotation.XxlJob";
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.xxljob";
 
@@ -63,18 +67,39 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 	@Override
 	protected CollectInfo getData() {
 		try {
-			if (ContextUtil.getBean(
-				ReflectionUtil.tryClassForName(
-					"com.xxl.job.core.executor.impl.XxlJobSpringExecutor"),
-				false) == null) {
+			Class<?> xxlJobSpringExecutorClass = ReflectionUtil.tryClassForName(XXL_JOB_SPRING_EXECUTOR_CLASS);
+			Object xxlJobSpringExecutor = ContextUtil.getBean(xxlJobSpringExecutorClass, false);
+			if (Objects.isNull(xxlJobSpringExecutor)) {
 				return null;
 			}
 
 			JobInfo data = new JobInfo();
-			Class<?> aClass = ReflectionUtil.classForName(
-				"com.xxl.job.core.handler.annotation.XxlJob");
-			data.count = ContextUtil.getApplicationContext().getBeanNamesForAnnotation(
-				(Class<? extends Annotation>) aClass).length;
+			Class<?> xxlJobClass = ReflectionUtil.classForName(XXL_JOB_CLASS);
+			data.count = ContextUtil.getApplicationContext()
+				.getBeanNamesForAnnotation((Class<? extends Annotation>) xxlJobClass).length;
+
+			Object jobThreadRepository = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
+				"jobThreadRepository", null);
+			if (Objects.isNull(jobThreadRepository)) {
+				data.jobThreadRepository = (Integer) ReflectionUtil.callMethod(jobThreadRepository,
+					"size", null);
+			}
+
+			Object jobHandlerRepository = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
+				"jobHandlerRepository", null);
+			if (Objects.isNull(jobThreadRepository)) {
+				data.jobHandlerRepository = (Integer) ReflectionUtil.callMethod(jobHandlerRepository,
+					"size", null);
+			}
+
+			Object adminBizList = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
+				"adminBizList", null);
+			if (Objects.isNull(adminBizList)) {
+				data.adminBizList = (Integer) ReflectionUtil.callMethod(adminBizList,
+					"size", null);
+			}
+
+			data.logRetentionDays = ReflectionUtil.tryGetValue(xxlJobSpringExecutorClass, "logRetentionDays");
 
 			return data;
 		} catch (Exception e) {
@@ -83,9 +108,21 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 		return null;
 	}
 
-	private static class JobInfo implements CollectInfo{
+	private static class JobInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".count", desc = "xxljob任务数量")
 		private Integer count = 0;
+
+		@FieldReport(name = TASK_NAME + ".job.thread.repository", desc = "xxljob thread repository数量")
+		private Integer jobThreadRepository = 0;
+
+		@FieldReport(name = TASK_NAME + ".job.handler.repository", desc = "xxljob handler repository 数量")
+		private Integer jobHandlerRepository = 0;
+
+		@FieldReport(name = TASK_NAME + ".admin.biz.list", desc = "xxljob admin biz 数量")
+		private Integer adminBizList = 0;
+
+		@FieldReport(name = TASK_NAME + ".log.retention.days", desc = "xxljob日志保留天数")
+		private Integer logRetentionDays = 0;
 	}
 }

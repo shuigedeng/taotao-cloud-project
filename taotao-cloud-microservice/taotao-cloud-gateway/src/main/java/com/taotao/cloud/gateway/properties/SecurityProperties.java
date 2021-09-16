@@ -40,6 +40,7 @@ public class SecurityProperties {
 		"/*.html",
 		"/*/favicon.ico",
 		"/*/api-docs",
+		"/health/**",
 		"/css/**",
 		"/js/**",
 		"/images/**"

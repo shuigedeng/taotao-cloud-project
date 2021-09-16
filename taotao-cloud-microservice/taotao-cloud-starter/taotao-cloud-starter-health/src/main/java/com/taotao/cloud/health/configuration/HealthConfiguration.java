@@ -52,6 +52,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -136,7 +137,7 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnWebApplication
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	@ConditionalOnProperty(prefix = ReportProperties.PREFIX, name = "enabled", havingValue = "true")
 	public FilterRegistrationBean healthReportFilter() {
 		LogUtil.started(HealthReportFilter.class, StarterNameConstant.HEALTH_STARTER);
@@ -146,12 +147,12 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setName("taotao-cloud-report-filter");
 		filterRegistrationBean.addUrlPatterns("/health/report/*");
 		LogUtil.info(
-			"health报表注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/");
+			"health报表注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/report/*");
 		return filterRegistrationBean;
 	}
 
 	@Bean
-	@ConditionalOnWebApplication
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	@ConditionalOnProperty(prefix = DumpProperties.PREFIX, name = "enabled", havingValue = "true")
 	public FilterRegistrationBean dumpFilter() {
 		LogUtil.started(DumpFilter.class, StarterNameConstant.HEALTH_STARTER);
@@ -162,12 +163,12 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setName("taotao-cloud-dump-filter");
 		filterRegistrationBean.addUrlPatterns("/health/dump/*");
 		LogUtil.info(
-			"health dump注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/dump/");
+			"health dump注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/dump/*");
 		return filterRegistrationBean;
 	}
 
 	@Bean
-	@ConditionalOnWebApplication
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	@ConditionalOnProperty(prefix = PingProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 	public FilterRegistrationBean pingFilter() {
 		LogUtil.started(PingFilter.class, StarterNameConstant.HEALTH_STARTER);
@@ -178,12 +179,12 @@ public class HealthConfiguration implements InitializingBean {
 		filterRegistrationBean.setName("taotao-cloud-ping-filter");
 		filterRegistrationBean.addUrlPatterns("/health/ping/");
 		LogUtil.info(
-			"health ping注册成功,访问:" + RequestUtil.getBaseUrl() + "/taotao/cloud/health/ping/");
+			"health ping注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/ping/");
 		return filterRegistrationBean;
 	}
 
 	@Configuration
-	@ConditionalOnWebApplication
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	@ConditionalOnProperty(prefix = DoubtApiProperties.PREFIX, name = "enabled", havingValue = "true")
 	public static class DoubtApiConfiguration implements WebMvcConfigurer {
 

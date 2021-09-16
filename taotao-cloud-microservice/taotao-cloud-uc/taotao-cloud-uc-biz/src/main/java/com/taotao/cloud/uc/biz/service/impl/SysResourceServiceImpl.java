@@ -23,8 +23,11 @@ import com.taotao.cloud.uc.biz.repository.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
+import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import com.xxl.job.core.handler.IJobHandler;
 import com.zaxxer.hikari.HikariDataSource;
 import io.seata.spring.annotation.GlobalTransactional;
+import io.undertow.Undertow;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,18 +37,24 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
+import org.springframework.boot.web.embedded.jetty.JettyWebServer;
+import org.springframework.boot.web.embedded.netty.NettyWebServer;
+import org.springframework.boot.web.embedded.undertow.UndertowWebServer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.xnio.OptionMap;
+import org.xnio.management.XnioWorkerMXBean;
 
 //import com.taotao.cloud.order.api.dto.OrderDTO;
 //import com.taotao.cloud.order.api.feign.RemoteOrderService;
@@ -81,6 +90,9 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		this.sysRoleService = sysRoleService;
 		this.remoteOrderItemService = remoteOrderItemService;
 		this.remoteOrderService = remoteOrderService;
+
+		NettyWebServer server = new NettyWebServer(null,null,null,null);
+
 	}
 
 	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;

@@ -21,6 +21,8 @@ import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.interceptor.SqlMybatisInterceptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,6 +34,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-10 17:22:35
  */
 @Configuration
+@ConditionalOnWebApplication(type = Type.SERVLET)
 public class HealthSqlMybatisConfiguration implements InitializingBean {
 
 	@Override

@@ -343,6 +343,22 @@ spring:
 
 taotao:
   cloud:
+    health:
+      enabled: true
+      doubtapi:
+        enabled: true
+      dump:
+        enabled: true
+      export:
+        enabled: true
+      ping:
+        enabled: true
+      report:
+        enabled: true
+      warn:
+        enabled: true
+      check:
+        enabled: true
     log:
       request-log:
         enabled: false
@@ -367,6 +383,7 @@ taotao:
         ignore-url: >
           /uc/resource/**,
           /order/order/**,
+          /health/**,
           /auth/code
       api:
         prefix: /api

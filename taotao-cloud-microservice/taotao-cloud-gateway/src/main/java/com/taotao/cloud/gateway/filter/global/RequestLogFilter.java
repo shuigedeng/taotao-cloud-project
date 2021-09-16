@@ -42,7 +42,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 
 		List<Object> beforeReqArgs = new ArrayList<>();
 		beforeReqLog.append("\n\n================ TaoTao Cloud Request Start  ================\n");
-		beforeReqLog.append("===> requestMethod: {0}, requestUrl: {1}, traceId: {2}\n");
+		beforeReqLog.append("===> requestMethod: {}, requestUrl: {}, traceId: {}\n");
 		String requestMethod = exchange.getRequest().getMethodValue();
 		beforeReqArgs.add(requestMethod);
 		beforeReqArgs.add(requestUrl);
@@ -50,7 +50,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 
 		HttpHeaders headers = exchange.getRequest().getHeaders();
 		String header = JsonUtil.toJSONString(headers);
-		beforeReqLog.append("===Headers=== : {3}\n");
+		beforeReqLog.append("===Headers=== : {}\n");
 		beforeReqArgs.add(header);
 		beforeReqLog.append("================ TaoTao Cloud Request End =================\n");
 		LogUtil.info(beforeReqLog.toString(), beforeReqArgs.toArray());
@@ -71,7 +71,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
 				.append("\n\n================ TaoTao Cloud Response Start  ================\n");
 			responseLog
 				.append(
-					"<=== requestMethod: {0}, requestUrl: {1}, traceId: {2}, executeTime: {3}\n");
+					"<=== requestMethod: {}, requestUrl: {}, traceId: {}, executeTime: {}\n");
 			responseArgs.add(requestMethod);
 			responseArgs.add(requestUrl);
 			responseArgs.add(TraceUtil.getTraceId());

@@ -65,8 +65,7 @@ public class OpenApiConfiguration {
 		assert definitions != null;
 
 		for (RouteDefinition definition : definitions) {
-			LogUtil
-					.info("spring cloud gateway route definition : {0}, uri: {1}",
+			LogUtil.info("spring cloud gateway route definition : {}, uri: {}",
 							definition.getId(),
 							definition.getUri().toString());
 		}

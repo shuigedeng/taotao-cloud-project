@@ -77,6 +77,7 @@ public class ThreadCollectTask extends AbstractCollectTask {
 			java.lang.management.ThreadInfo runable = null;
 			java.lang.management.ThreadInfo wait = null;
 			java.lang.management.ThreadInfo block = null;
+
 			HashMap<Long, Long> treadUserTime = new HashMap<>();
 			for (java.lang.management.ThreadInfo info : threadMXBean.dumpAllThreads(false, false)) {
 				treadUserTime.put(info.getThreadId(),

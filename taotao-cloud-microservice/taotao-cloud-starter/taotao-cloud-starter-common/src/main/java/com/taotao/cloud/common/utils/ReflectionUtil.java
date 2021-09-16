@@ -44,7 +44,6 @@ public class ReflectionUtil {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
-			LogUtil.error(exp);
 			throw new BaseException(exp.getMessage());
 		}
 	}
@@ -61,7 +60,6 @@ public class ReflectionUtil {
 		try {
 			return Class.forName(type);
 		} catch (Exception exp) {
-			LogUtil.error(exp);
 			return null;
 		}
 	}

@@ -35,7 +35,7 @@ public class CustomReactiveAuthenticationManager implements ReactiveAuthenticati
 
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
-		LogUtil.info("taotao cloud user authentication info : {0}", authentication.toString());
+		LogUtil.info("taotao cloud user authentication info : {}", authentication.toString());
 
 		return Mono.justOrEmpty(authentication);
 

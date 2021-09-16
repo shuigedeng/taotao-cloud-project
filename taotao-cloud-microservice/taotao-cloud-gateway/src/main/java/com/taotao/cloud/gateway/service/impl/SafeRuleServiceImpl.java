@@ -53,13 +53,13 @@ public class SafeRuleServiceImpl implements ISafeRuleService {
 			blackLists.addAll(ruleCacheService.getBlackList());
 			// 检查是否在黑名单中
 			checkBlackLists(forbid, blackLists, originUri, requestMethod);
-			LogUtil.debug("黑名单检查完成 - {0}", stopwatch.stop());
+			LogUtil.debug("黑名单检查完成 - {}", stopwatch.stop());
 			if (forbid.get()) {
-				LogUtil.info("属于黑名单地址 - {0}", originUri.getPath());
+				LogUtil.info("属于黑名单地址 - {}", originUri.getPath());
 				return ResponseUtil.fail(exchange, "已列入黑名单，访问受限");
 			}
 		} catch (Exception e) {
-			LogUtil.error("黑名单检查异常: {0} - {1}", e.getMessage(), stopwatch.stop());
+			LogUtil.error("黑名单检查异常: {} - {}", e.getMessage(), stopwatch.stop());
 		}
 		return null;
 	}

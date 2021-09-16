@@ -64,11 +64,11 @@ public class ResourceServerConfiguration {
 		serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
 
 		ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
-			LogUtil.error("user authentication error : {0}", e, e.getMessage());
+			LogUtil.error(e,"user authentication error : {}", e.getMessage());
 			return ResponseUtil.fail(exchange, ResultEnum.UNAUTHORIZED);
 		};
 		ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
-			LogUtil.error("user access denied error : {0}", e, e.getMessage());
+			LogUtil.error(e,"user access denied error : {}", e.getMessage());
 			return ResponseUtil.fail(exchange, ResultEnum.FORBIDDEN);
 		};
 

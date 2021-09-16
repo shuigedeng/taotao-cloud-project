@@ -20,13 +20,13 @@ public class RemoteMemberFallbackImpl implements FallbackFactory<RemoteMemberSer
 		return new RemoteMemberService() {
 			@Override
 			public Result<SecurityUser> getMemberSecurityUser(String getMemberSecurityUser) {
-				LogUtil.error("调用getMemberSecurityUser异常：{0}", throwable, getMemberSecurityUser);
+				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, getMemberSecurityUser);
 				return Result.fail(null, 500);
 			}
 
 			@Override
 			public Result<MemberVO> findMemberById(Long id) {
-				LogUtil.error("调用findMemberById异常：{0}", throwable, id);
+				LogUtil.error("调用findMemberById异常：{}", throwable, id);
 				return Result.fail(null, 500);
 			}
 		};

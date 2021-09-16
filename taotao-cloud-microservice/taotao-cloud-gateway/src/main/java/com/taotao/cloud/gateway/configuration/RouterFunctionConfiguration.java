@@ -19,13 +19,19 @@ import cn.hutool.http.HttpStatus;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.CaptchaUtil;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.properties.ApiProperties;
+import com.taotao.cloud.health.collect.HealthCheckProvider;
+import com.taotao.cloud.health.model.Report;
+import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -58,20 +64,26 @@ public class RouterFunctionConfiguration {
 
 	private static final String FALLBACK = "/fallback";
 	private static final String CODE = "/code";
+	private static final String FAVICON = "/favicon.ico";
+	private static final String HEALTH_REPORT = "/health/report";
 
 	@Bean
 	public RouterFunction<ServerResponse> routerFunction(
 		HystrixFallbackHandler hystrixFallbackHandler,
 		ImageCodeHandler imageCodeWebHandler,
 		FaviconHandler faviconHandler,
+		HealthReportHandler healthReportHandler,
 		ApiProperties apiProperties) {
 		return RouterFunctions
 			.route(RequestPredicates.path(FALLBACK)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), hystrixFallbackHandler)
 			.andRoute(RequestPredicates.GET(apiProperties.getBaseUri() + CODE)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), imageCodeWebHandler)
-			.andRoute(RequestPredicates.GET("/favicon.ico")
-				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler);
+			.andRoute(RequestPredicates.GET(FAVICON)
+				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler)
+			.andRoute(RequestPredicates.GET(HEALTH_REPORT)
+					.and(RequestPredicates.accept(MediaType.ALL)),
+				healthReportHandler);
 	}
 
 
@@ -94,7 +106,7 @@ public class RouterFunctionConfiguration {
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
 			originalUris.ifPresent(originalUri -> LogUtil
-				.error("网关执行请求:{0}失败,请求主机: {1},请求数据:{2} hystrix服务降级处理", null,
+				.error("网关执行请求:{}失败,请求主机: {},请求数据:{} hystrix服务降级处理",
 					originalUri,
 					socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
 					buildMessage(serverRequest)));
@@ -200,4 +212,60 @@ public class RouterFunctionConfiguration {
 			}
 		}
 	}
+
+	@Component
+	public class HealthReportHandler implements HandlerFunction<ServerResponse> {
+
+		@Override
+		public Mono<ServerResponse> handle(ServerRequest request) {
+			try {
+				String uri = request.uri().getPath();
+
+				String html;
+				HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class,
+					true);
+				DumpProperties dumpProperties = ContextUtil.getBean(DumpProperties.class, true);
+				if (Objects.nonNull(healthProvider) && Objects.nonNull(dumpProperties)
+					&& uri.startsWith(HEALTH_REPORT)) {
+
+					boolean isAnalyse = !"false".equalsIgnoreCase(
+						request.queryParam("isAnalyse").orElse("false"));
+
+					Report report = healthProvider.getReport(isAnalyse);
+					MediaType mediaType = request.headers().contentType()
+						.orElse(MediaType.TEXT_PLAIN);
+					if (mediaType.includes(MediaType.APPLICATION_JSON)) {
+						return ServerResponse
+							.status(HttpStatus.HTTP_OK)
+							.contentType(MediaType.APPLICATION_JSON)
+							.bodyValue(Result.success(report.toJson()));
+					} else {
+						html = report
+							.toHtml()
+							.replace("\r\n", "<br/>")
+							.replace("\n", "<br/>")
+							.replace("/n", "\n")
+							.replace("/r", "\r");
+						if (dumpProperties.isEnabled()) {
+							html = "dump信息:<a href='/health/dump/'>查看</a><br/>" + html;
+						}
+					}
+				} else {
+					html = "请配置taotao.cloud.health.enabled=true,taotao.cloud.health.check.enabled=true";
+				}
+
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.TEXT_HTML)
+					.header("content-type", "text/html;charset=UTF-8")
+					.bodyValue(html.getBytes(StandardCharsets.UTF_8));
+			} catch (Exception e) {
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
+			}
+		}
+	}
+
 }

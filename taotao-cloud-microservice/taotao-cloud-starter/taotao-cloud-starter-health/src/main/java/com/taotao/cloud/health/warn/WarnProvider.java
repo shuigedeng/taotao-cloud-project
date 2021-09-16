@@ -102,6 +102,8 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		if (warnProperties.isSmsWarnEnabled()) {
 			warns.add(new SmsWarn());
 		}
+
+		warns.add(new LoggerWarn());
 	}
 
 	/**

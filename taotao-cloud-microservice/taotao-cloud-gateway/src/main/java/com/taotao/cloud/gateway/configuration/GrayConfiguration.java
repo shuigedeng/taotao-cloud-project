@@ -119,7 +119,7 @@ public class GrayConfiguration {
 			ServerWebExchangeUtils.addOriginalRequestUrl(exchange, url);
 
 			LogUtil
-				.info(ReactiveLoadBalancerClientFilter.class.getSimpleName() + " url before: {0}",
+				.info(ReactiveLoadBalancerClientFilter.class.getSimpleName() + " url before: {}",
 					url);
 
 			return choose(exchange).doOnNext(response -> {
@@ -239,7 +239,7 @@ public class GrayConfiguration {
 			Map<ServiceInstance, Integer> weightMap = new HashMap<>();
 			for (ServiceInstance instance : instances) {
 				Map<String, String> metadata = instance.getMetadata();
-				LogUtil.info("taotao cloud gray loadbalancer nacos version: {0} , weight: {1}",
+				LogUtil.info("taotao cloud gray loadbalancer nacos version: {} , weight: {}",
 					metadata.get("version"), metadata.get("weight"));
 
 				if (metadata.containsKey("weight")) {

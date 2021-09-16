@@ -18,7 +18,7 @@ public class RemoteFileFallbackImpl implements FallbackFactory<RemoteFileService
 		return new RemoteFileService() {
 			@Override
 			public Result<FileVO> findFileById(Long id) {
-				LogUtil.error("调用findFileById异常：{0}", throwable, id);
+				LogUtil.error("调用findFileById异常：{}", throwable, id);
 				return Result.failed(null, 500);
 			}
 		};

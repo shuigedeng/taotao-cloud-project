@@ -77,8 +77,8 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 
 	public static class DefaultUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
-		private UnCatchExceptionCollectTask unCatchExceptionCheckTask;
+		private final Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
+		private final UnCatchExceptionCollectTask unCatchExceptionCheckTask;
 
 		public DefaultUncaughtExceptionHandler(
 			UnCatchExceptionCollectTask unCatchExceptionCheckTask,
@@ -91,7 +91,8 @@ public class UnCatchExceptionCollectTask extends AbstractCollectTask {
 		public void uncaughtException(Thread t, Throwable e) {
 			try {
 				if (e != null) {
-					this.unCatchExceptionCheckTask.lastException = e;
+					unCatchExceptionCheckTask.lastException = e;
+
 					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "未捕获错误",
 						ExceptionUtil.trace2String(e));
 					LogUtil.error(e, "未捕获错误");

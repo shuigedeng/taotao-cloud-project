@@ -105,8 +105,8 @@ public class DynamicRouteConfiguration {
 				List<RouteDefinition> routeDefinitions = getListByStr(content);
 				return Flux.fromIterable(routeDefinitions);
 			} catch (NacosException e) {
-				LogUtil.error(PropertyUtil.getProperty(SpringApplicationName)
-					+ "get route definitions from nacos error info: {0}", e, e.getErrMsg());
+				LogUtil.error(e,PropertyUtil.getProperty(SpringApplicationName)
+					+ "get route definitions from nacos error info: {}", e.getErrMsg());
 			}
 			return Flux.fromIterable(CollUtil.newArrayList());
 		}

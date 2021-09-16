@@ -37,9 +37,9 @@ public class CollectTaskProperties {
 
 	private int xxljobTimeSpan = 20;
 
-	private boolean tomcatEnabled = true;
+	private boolean webServerEnabled = true;
 
-	private int tomcatTimeSpan = 20;
+	private int webServerTimeSpan = 20;
 
 	private boolean monitorThreadEnabled = true;
 
@@ -328,20 +328,20 @@ public class CollectTaskProperties {
 		this.xxljobTimeSpan = xxljobTimeSpan;
 	}
 
-	public boolean isTomcatEnabled() {
-		return tomcatEnabled;
+	public boolean isWebServerEnabled() {
+		return webServerEnabled;
 	}
 
-	public void setTomcatEnabled(boolean tomcatEnabled) {
-		this.tomcatEnabled = tomcatEnabled;
+	public void setWebServerEnabled(boolean webServerEnabled) {
+		this.webServerEnabled = webServerEnabled;
 	}
 
-	public int getTomcatTimeSpan() {
-		return tomcatTimeSpan;
+	public int getWebServerTimeSpan() {
+		return webServerTimeSpan;
 	}
 
-	public void setTomcatTimeSpan(int tomcatTimeSpan) {
-		this.tomcatTimeSpan = tomcatTimeSpan;
+	public void setWebServerTimeSpan(int webServerTimeSpan) {
+		this.webServerTimeSpan = webServerTimeSpan;
 	}
 
 	public boolean isNacosEnabled() {

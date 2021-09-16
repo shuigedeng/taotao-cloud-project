@@ -68,7 +68,7 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 		Throwable error = super.getError(request);
 
 		LogUtil.error(
-			"请求发生异常，请求URI：{0}，请求方法：{1}，异常信息：{2}",
+			"请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}",
 			request.path(), request.methodName(), error.getMessage()
 		);
 		LogUtil.error(error.getMessage(), error);
