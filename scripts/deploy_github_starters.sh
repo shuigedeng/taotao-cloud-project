@@ -2,7 +2,7 @@
 
 function deploy_dependencies() {
     cd $1
-    gradle publishMavenJavaPublicationToGitHubRepository -Dorg.gradle.java.home='/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home'
+    gradle publishMavenJavaPublicationToGitHubRepository -Dorg.gradle.java.home='/Users/dengtao/software/jdk-11.0.7/Contents/Home'
 }
 
 function deploy_starters() {
@@ -10,7 +10,7 @@ function deploy_starters() {
     do
       if [ -d $1"/"$file ];then
         cd $1"/"$file
-        gradle publishMavenJavaPublicationToGitHubRepository -Dorg.gradle.java.home='/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home'
+        gradle publishMavenJavaPublicationToGitHubRepository -Dorg.gradle.java.home='/Users/dengtao/software/jdk-11.0.7/Contents/Home'
       fi
     done
 }

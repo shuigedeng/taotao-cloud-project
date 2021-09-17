@@ -29,13 +29,16 @@ import org.apache.spark.{SparkConf, SparkContext}
  * 3.上传jar包提交集群运行
  * <p>
  * ./spark-submit \
- * --master spark://127.0.0.1:7077 \
+ * --master local[2] \
+ * --deploy-mode cluster \
  * --class com.taotao.cloud.spark.ScalaWordCount \
- * --executor-memory 512m \
- * --total-executor-cores 2 \
- * /root/spark/jar/taotao-cloud-spark-1.0-all.jar \
- * hdfs://127.0.0.1/spark/wordcount/input \
- * hdfs://127.0.0.1/spark/wordcount/output
+ * --driver-memory 2g \
+ * --executor-memory 1g \
+ * --executor-cores 2 \
+ * --queue default \
+ * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/jar/taotao-cloud-spark-1.0-all.jar \
+ * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/input \
+ * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/output
  * <p>
  *
  * @author shuigedeng
@@ -47,14 +50,11 @@ object ScalaWordCount {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
       .setAppName("WordCountApp")
-      .setMaster("local[1]")
+//      .setMaster("local[1]")
 
     val context = new SparkContext(conf)
 
-
-    val value = context.textFile("/")
-
-    context.textFile("/Users/shuigedeng/spark/input")
+    context.textFile(args(0))
       .flatMap(_.split(" "))
       .map((_, 1))
       .reduceByKey(_ + _)

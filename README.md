@@ -20,23 +20,23 @@
 - **大数据模块** 集成日志数据处理和分析、用户行为分析、推荐系统、离线/流式计算、数据仓库、数据湖等大数据处理
   
 
-- **微服务模块** 基于spring cloud alibab微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
-  提供大量的starter作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
+- **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
+  提供大量的**starters**作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
   
 
-- **前端模块** 主要使用react进行前端开发、集成以taro为主的多端合一框架。以react antd 框架进行快速后台管理平台开发
+- **前端模块** 主要使用**react**进行前端开发、集成以**taro**为主的多端合一框架。以**react antd**框架进行快速后台管理平台开发
   
 
-- **python模块** 主要是集成了Django的web开发、家庭自动化框架原理的分析
+- **python模块** 主要是集成了**Django**的web开发、**homeassistant**家庭自动化框架原理的分析
 
-总之基于Spring Cloud Alibaba的微服务架构。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
+总之基于**spring cloud alibaba**的微服务架构。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
-## 2. springcloud微服务架构图
+## 2. spring cloud 微服务架构图
 ![mark](./snapshot/springcloud微服务架构图.jpeg)
 
 
-## 3. springcloud微服务分层图
+## 3. spring cloud 微服务分层图
 ![mark](./snapshot/springcloud微服务分层图.png)
 
 
@@ -45,7 +45,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2021.9.2"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2021.9.3"
   }
 }
 
@@ -59,7 +59,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2021.9.2</version>
+      <version>2021.9.3</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -110,27 +110,27 @@ Guava | 29.0-jre
 
 ## 7. 功能特点
 
-* 微服务技术框架: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
-* 主体框架：采用最新的Spring Boot 2.5.4、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1版本进行设计
-* 统一注册：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
-* 统一认证：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
-* 业务监控：利用Spring Boot Admin 监控各个独立服务的运行状态
-* 日志分析：集成kafka、ELK、prometheus实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
-* 分布式事务：集成spring cloud alibaba seata分布式事务处理
-* 业务熔断：采用spring cloud alibaba Sentinel实现业务熔断处理，避免服务之间出现雪崩
-* 链路追踪：自定义traceId的方式，实现简单的链路追踪功能、集成skywalking、sleuth、zipkin链路监控
-* 分布式任务：集成xxl-job分布式定时任务处理
-* 内部调用：集成了Feign和Dubbo两种模式支持内部调用，并且可以实现无缝切换
-* 身份注入：通过注解的方式，实现用户登录信息的快速注入
-* 在线文档：通过接入Knife4j，实现在线API文档的查看与调试
-* 消息中心：集成消息中间件RocketMQ、kafka，对业务进行异步处理
-* 业务分离：采用前后端分离的框架设计，前端采用react antd脚手架快速开放
-* 多租户功能：集成Mybatis Plus、jpa,实现saas多租户功能  
-* 容器化支持: Docker、Kubernetes、Rancher2 支持  
-* webflux支持: lambda、stream api、webflux 的生产实践
-* 开放平台: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
-* 组件化: 引入组件化的思想实现高内聚低耦合并且高度可配置化
-* 代码规范: 注重代码规范，严格控制包依赖
+* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
+* **主体框架**：采用最新的Spring Boot 2.5.4、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1版本进行设计
+* **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
+* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
+* **业务监控**：利用Spring Boot Admin 监控各个独立服务的运行状态
+* **日志分析**：集成kafka、ELK、prometheus实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
+* **分布式事务**：集成spring cloud alibaba seata分布式事务处理
+* **业务熔断**：采用spring cloud alibaba Sentinel实现业务熔断处理，避免服务之间出现雪崩
+* **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成skywalking、sleuth、zipkin链路监控
+* **分布式任务**：集成xxl-job分布式定时任务处理
+* **内部调用**：集成了Feign和Dubbo两种模式支持内部调用，并且可以实现无缝切换
+* **身份注入**：通过注解的方式，实现用户登录信息的快速注入
+* **在线文档**：通过接入Knife4j，实现在线API文档的查看与调试
+* **消息中心**：集成消息中间件RocketMQ、kafka，对业务进行异步处理
+* **业务分离**：采用前后端分离的框架设计，前端采用react antd脚手架快速开放
+* **多租户功能**：集成Mybatis Plus、jpa,实现saas多租户功能  
+* **容器化支持**: Docker、Kubernetes、Rancher2 支持  
+* **webflux**支持: lambda、stream api、webflux 的生产实践
+* **开放平台**: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
+* **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
+* **代码规范**: 注重代码规范，严格控制包依赖
 
 > PS: 借鉴了其他开源项目
 

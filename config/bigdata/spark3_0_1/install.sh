@@ -35,14 +35,22 @@ spark.master.taotaocloud.com:8080
 spark.worker.taotaocloud.com:8080
 spark.task.taotaocloud.com:8080
 
+
 #########  测试
+-- master local[2]
+-- master spark://172.16.6.151:7077
+-- master yarn
+
+--deploy-mode client
+--deploy-mode cluster
+
 ./bin/spark-submit \
     --class org.apache.spark.examples.SparkPi \
     --master yarn \
     --deploy-mode cluster \
     --driver-memory 4g \
     --executor-memory 2g \
-    --executor-cores 1 \
+    --executor-cores 2 \
     --queue default \
     examples/jars/spark-examples*.jar \
     10

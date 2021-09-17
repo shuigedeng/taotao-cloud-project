@@ -5,7 +5,7 @@ function clean_starters() {
     do
       if [ -d $1"/"$file ];then
         cd $1"/"$file
-        gradle clean
+        gradle clean -Dorg.gradle.java.home='/Users/dengtao/software/jdk-11.0.7/Contents/Home'
       fi
     done
 }
