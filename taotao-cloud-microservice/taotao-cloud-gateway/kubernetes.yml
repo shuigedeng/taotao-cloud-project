@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: taotao-cloud-gateway
-  namespace: dev
+  namespace: default
   labels:
     app: taotao-cloud-gateway
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: taotao-cloud-gateway
@@ -17,17 +17,18 @@ spec:
     spec:
       containers:
         - name: taotao-cloud-gateway
-          image: 192.168.99.240:8443/taotao-cloud/taotao-cloud-gateway:${CICD_EXECUTION_SEQUENCE}
-          imagePullPolicy: Always
+          #image: 192.168.99.240:8443/taotao-cloud/taotao-cloud-gateway:${CICD_EXECUTION_SEQUENCE}
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2021.9.3
+          imagePullPolicy: IfNotPresent
           ports:
             - name: gateway-port
-              containerPort: 9900
+              containerPort: 9999
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: taotao-cloud-gateway-service
-  namespace: dev
+  namespace: default
   labels:
     app: taotao-cloud-gateway-service
 spec:
@@ -37,6 +38,6 @@ spec:
   ports:
     - name: gateway-service-port
       protocol: TCP
-      port: 9900
-      targetPort: 9900
+      port: 9999
+      targetPort: 9999
       nodePort: 30000

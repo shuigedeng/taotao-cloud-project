@@ -1,27 +1,20 @@
-#FROM anapsix/alpine-java:8_server-jre_unlimited
-
-FROM openjdk:8-jdk-alpine
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk11:alpine
 
 MAINTAINER 981376577@qq.com
 
-ARG APP_NAME=taotao-cloud-uc-biz
-
-ARG workdir=/application/${APP_NAME}
-
-LABEL app_name=${APP_NAME}
-
-RUN mkdir -p ${workdir}
-
-VOLUME ${workdir}
-
-WORKDIR ${workdir}
-
 ENV TZ=Asia/Shanghai
+
+ENV DINGDING_TOKEN_ID = xxxxx
+ENV DINGDING_SECRET = xxxxx
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-EXPOSE 9800
+RUN mkdir -p /taotao-cloud-uc
 
-ADD ./taotao-cloud-uc-biz/build/libs/taotao-cloud-uc-biz-1.6.0.jar ./
+WORKDIR /taotao-cloud-uc
 
-CMD sleep 30; java -Djava.security.egd=file:/dev/./urandom -jar taotao-cloud-uc-biz-1.6.0.jar
+EXPOSE 9996
+
+ADD ./taotao-cloud-uc-biz/build/libs/taotao-cloud-uc-biz-2021.9.3.jar ./
+
+CMD sleep 30; java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev -jar taotao-cloud-uc-biz-2021.9.3.jar

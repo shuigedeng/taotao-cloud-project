@@ -47,12 +47,12 @@ public class JavaWordCount {
 
 	public static void main(String[] args) throws InterruptedException {
 		SparkConf javaWordCount = new SparkConf()
-			.setAppName("JavaWordCount")
-			.setMaster("local[1]");
+			.setAppName("JavaWordCount");
+			//.setMaster("local[1]");
 
 		JavaSparkContext jsc = new JavaSparkContext(javaWordCount);
 
-		JavaPairRDD<String, Integer> counts = jsc.textFile("/Users/shuigedeng/spark/input")
+		JavaPairRDD<String, Integer> counts = jsc.textFile(args[0])
 			.flatMap(lines -> Arrays.asList(lines.split(" ")).iterator())
 			.mapToPair(new PairFunction<String, String, Integer>() {
 				@Override
@@ -73,9 +73,7 @@ public class JavaWordCount {
 			})
 			.sortByKey(false);
 
-		sorts.saveAsTextFile("/Users/shuigedeng/spark/output");
-
-		Thread.sleep(Long.MAX_VALUE);
+		sorts.saveAsTextFile(args[1]);
 
 		jsc.stop();
 	}

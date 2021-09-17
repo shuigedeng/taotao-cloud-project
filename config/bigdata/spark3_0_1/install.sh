@@ -7,6 +7,10 @@ mv spark-3.0.0-bin-hadoop3.2 spark3.0.0
 
 cp spark-env.sh.template spark-env.sh
 
+# 环境变量配置
+export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
 vim spark-env.sh
 export JAVA_HOME="/opt/common/jdk1.8.0_211"
 export SCALA_HOME="/opt/common/scala-2.12.14"
@@ -17,24 +21,30 @@ export SPARK_MASTER_HOST=172.16.6.151
 export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
 export SPARK_LOG_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/logs"
 export SPARK_PID_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/pid"
+# 该目录需要事先在hdfs上创建好
+export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://172.16.6.151:8020/spark/historylog"
+
+# history server 配置
+vim spark-default.conf
+spark.eventLog.enabled true
+spark.eventLog.compress true
+# 该目录需要事先在hdfs上创建好
+spark.eventLog.dir hdfs://172.16.6.151:8020/spark/historylog
 
 cp slaves.template slaves && vim slaves && 172.16.6.151
-
+# 日志配置
 cp log4j.properties.template log4j.properties
 
-export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
-export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
-
+# 测试
 spark-shell --master spark://172.16.6.151:7077
-
 spark-shell \
   --jars /opt/github/hudi-release-0.8.0/packaging/hudi-spark-bundle/target/hudi-spark3-bundle_2.12-0.8.0.jar \
   --conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer'
 
-spark.master.taotaocloud.com:8080
-spark.worker.taotaocloud.com:8080
-spark.task.taotaocloud.com:8080
-
+172.16.6.151.:8080
+172.16.6.151.:18080
+172.16.6.151.:8088
+172.16.6.151.:4040
 
 #########  测试
 -- master local[2]
@@ -46,14 +56,25 @@ spark.task.taotaocloud.com:8080
 
 ./bin/spark-submit \
     --class org.apache.spark.examples.SparkPi \
-    --master yarn \
-    --deploy-mode cluster \
+    --master spark://172.16.6.151:7077 \
+    --deploy-mode client \
     --driver-memory 4g \
     --executor-memory 2g \
     --executor-cores 2 \
     --queue default \
     examples/jars/spark-examples*.jar \
     10
+
+./bin/spark-submit \
+  --class com.taotao.cloud.bigdata.spark.JavaWordCount \
+  --master yarn \
+  --deploy-mode cluster \
+  --driver-memory 2g \
+  --executor-memory 1g \
+  --executor-cores 2 \
+  --queue default \
+  /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2021.9.3.jar \
+  /opt/spark/input /opt/spark/output
 
 ################################################
 #!/bin/bash

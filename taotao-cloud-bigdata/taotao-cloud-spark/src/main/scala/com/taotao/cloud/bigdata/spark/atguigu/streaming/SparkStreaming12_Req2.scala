@@ -1,9 +1,8 @@
 package com.taotao.cloud.bigdata.spark.atguigu.streaming
 
-import java.text.SimpleDateFormat
+import com.taotao.cloud.bigdata.spark.atguigu.util.JDBCUtil
 
-import com.atguigu.bigdata.spark.streaming.SparkStreaming11_Req1_BlackList.AdClickData
-import com.atguigu.bigdata.spark.util.JDBCUtil
+import java.text.SimpleDateFormat
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.InputDStream

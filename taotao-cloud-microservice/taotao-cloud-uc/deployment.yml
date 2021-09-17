@@ -1,14 +1,14 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: taotao-cloud-uc-biz
-  namespace: taotao-cloud-prod
+  namespace: defalult
   labels:
     app: taotao-cloud-uc-biz
-    version: 1.0
+    version: 2021.9.3
     kubernetes.io/cluster-service: "true"
 spec:
-  replicas: 3
+  replicas: 1
   progressDeadlineSeconds: 600
   revisionHistoryLimit: 10
   selector:

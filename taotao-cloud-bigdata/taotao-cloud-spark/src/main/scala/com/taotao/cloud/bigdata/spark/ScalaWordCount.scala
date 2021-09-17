@@ -28,17 +28,16 @@ import org.apache.spark.{SparkConf, SparkContext}
  * <p>
  * 3.上传jar包提交集群运行
  * <p>
- * ./spark-submit \
- * --master local[2] \
- * --deploy-mode cluster \
- * --class com.taotao.cloud.spark.ScalaWordCount \
- * --driver-memory 2g \
- * --executor-memory 1g \
- * --executor-cores 2 \
- * --queue default \
- * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/jar/taotao-cloud-spark-1.0-all.jar \
- * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/input \
- * /opt/bigdata/spark-3.0.0-bin-hadoop3.2/test/output
+./bin/spark-submit \
+  --class com.taotao.cloud.bigdata.spark.ScalaWordCount \
+  --master spark://172.16.6.151:7077 \
+  --deploy-mode client \
+  --driver-memory 2g \
+  --executor-memory 1g \
+  --executor-cores 2 \
+  --queue default \
+  /opt/bigdata/spark-3.0.0-bin-hadoop3.2/jar/taotao-cloud-spark-2021.9.3.jar \
+  /opt/spark/input /opt/spark/output
  * <p>
  *
  * @author shuigedeng

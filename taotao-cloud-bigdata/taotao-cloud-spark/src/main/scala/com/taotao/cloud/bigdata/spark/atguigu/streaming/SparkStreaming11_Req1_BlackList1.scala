@@ -1,9 +1,9 @@
 package com.taotao.cloud.bigdata.spark.atguigu.streaming
 
+import com.taotao.cloud.bigdata.spark.atguigu.util.JDBCUtil
+
 import java.sql.ResultSet
 import java.text.SimpleDateFormat
-
-import com.atguigu.bigdata.spark.util.JDBCUtil
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.InputDStream

@@ -24,6 +24,7 @@ object Driver {
     objOut1.close()
     client1.close()
 
+    //*****************************
 
     val out2: OutputStream = client2.getOutputStream
     val objOut2 = new ObjectOutputStream(out2)

@@ -1,7 +1,7 @@
 # 此处不能用openjdk 验证码接口会报空指针异常
 #FROM anapsix/alpine-java:8_server-jre_unlimited
 
-FROM 192.168.99.240:8443/taotao-cloud/taotao-cloud-java:latest
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk11:alpine
 
 MAINTAINER 981376577@qq.com
 
@@ -13,9 +13,9 @@ RUN mkdir -p /taotao-cloud-gateway
 
 WORKDIR /taotao-cloud-gateway
 
-EXPOSE 9900
+EXPOSE 9999
 
-ADD ./target/taotao-cloud-gateway-1.0.jar ./
+ADD ./build/libs/taotao-cloud-gateway-2021.9.3.jar ./
 
-CMD sleep 30; java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev -jar taotao-cloud-gateway-1.0.jar
+CMD sleep 30; java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=dev -jar taotao-cloud-gateway-2021.9.3.jar
 

@@ -154,29 +154,6 @@ allprojects {
     }
 }
 
-configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
-    task createProperties(dependsOn: processResources) {
-        doLast {
-            def fileDir = new File("$buildDir/resources/main");
-            if (fileDir.exists() && fileDir.isDirectory()) {
-                new File("$buildDir/resources/main/application.properties").withWriter { w ->
-                    def projectProperties = project.properties
-                    Properties p = new Properties()
-                    projectProperties.each { entry ->
-                        p[entry.key.toString()] = entry.value.toString()
-                    }
-
-                    p.store w, null
-                }
-            }
-        }
-    }
-
-    classes {
-        dependsOn createProperties
-    }
-}
-
 configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { project ->
     apply plugin: 'java'
     apply plugin: 'java-library'
@@ -341,6 +318,29 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     signing {
         sign publishing.publications.mavenJava
+    }
+}
+
+configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) }) { project ->
+    task createProperties(dependsOn: processResources) {
+        doLast {
+            def fileDir = new File("$buildDir/resources/main");
+            if (fileDir.exists() && fileDir.isDirectory()) {
+                new File("$buildDir/resources/main/application.properties").withWriter { w ->
+                    def projectProperties = project.properties
+                    Properties p = new Properties()
+                    projectProperties.each { entry ->
+                        p[entry.key.toString()] = entry.value.toString()
+                    }
+
+                    p.store w, null
+                }
+            }
+        }
+    }
+
+    classes {
+        dependsOn createProperties
     }
 }
 

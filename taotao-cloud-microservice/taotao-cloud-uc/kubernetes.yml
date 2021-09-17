@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taotao-cloud-uc
+  namespace: default
+  labels:
+    app: taotao-cloud-uc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taotao-cloud-uc
+  template:
+    metadata:
+      labels:
+        app: taotao-cloud-uc
+    spec:
+      containers:
+        - name: taotao-cloud-uc
+          #image: 192.168.99.240:8443/taotao-cloud/taotao-cloud-uc:${CICD_EXECUTION_SEQUENCE}
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: uc-port
+              containerPort: 9996
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: taotao-cloud-uc-service
+  namespace: default
+  labels:
+    app: taotao-cloud-uc-service
+spec:
+  type: NodePort
+  selector:
+    app: taotao-cloud-uc
+  ports:
+    - name: uc-service-port
+      protocol: TCP
+      port: 9996
+      targetPort: 9996
+      nodePort: 30001
