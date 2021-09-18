@@ -94,7 +94,7 @@ public class XxlJobCollectTask extends AbstractCollectTask {
 
 			Object adminBizList = ReflectionUtil.tryGetStaticFieldValue(xxlJobSpringExecutorClass,
 				"adminBizList", null);
-			if (Objects.isNull(adminBizList)) {
+			if (Objects.nonNull(adminBizList)) {
 				data.adminBizList = (Integer) ReflectionUtil.callMethod(adminBizList,
 					"size", null);
 			}

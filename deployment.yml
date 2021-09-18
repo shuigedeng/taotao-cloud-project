@@ -36,7 +36,7 @@ spec: # 资源描述字段
       terminationGracePeriodSeconds: 30 #优雅关闭时间，这个时间内优雅关闭未结束，k8s 强制 kill
       dnsPolicy: ClusterFirst
       imagePullSecrets: ##在 Pod 中设置 ImagePullSecrets 只有提供本身密钥的 Pod 才能访问私有仓库
-          - name: ali #镜像Secrets须要在集群中手动建立
+        - name: ali #镜像Secrets须要在集群中手动建立
       restartPolicy: Always # Pod的重启策略
       schedulerName: default-scheduler
       securityContext: { }
@@ -66,25 +66,30 @@ spec: # 资源描述字段
           image: breaklinux/sidecar-sre:201210129  #docker hup仓库镜像
           imagePullPolicy: IfNotPresent  #镜像拉取策略 1.IfNotPresent若是本地存在镜像就优先使用本地镜像。2.Never直接再也不去拉取镜像了,使用本地的.若是本地不存在就报异常了。
           #3.imagePullPolicy 未被定义为特定的值，默认值设置为 Always 本地是否存在都会去仓库拉取镜像.
-          command: [ "/bin/sh","-c" ]  #shell 执行
-          args: [ "mkdir -p /scratch/.sidecar-sre && cp /sidecar/post-start.sh /scratch/.sidecar-sre/post-start.sh && /scratch/.sidecar-sre/post-start.sh" ]
           env:
             #Downward API官网示例 https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/
             - name: CHJ_NODE_IP
               valueFrom:
                 fieldRef: #这两种呈现 Pod 和 Container 字段的方式统称为 Downward API。
                   fieldPath: status.hostIP #获取pod 所在node IP地址设置为CHJ_NODE_IP
+
             - name: CHJ_POD_IP  #变量名称
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP #获取pod自身ip地址设置为CHJ_POD_IP变量名称
+
             - name: CHJ_APP_NAME   #应用名称EVN
               value: 'ops-nginx-api' #环境变量值
+
+          command: [ "/bin/sh","-c" ]  #shell 执行
+          args: [ "mkdir -p /scratch/.sidecar-sre && cp /sidecar/post-start.sh /scratch/.sidecar-sre/post-start.sh && /scratch/.sidecar-sre/post-start.sh" ]
+
           volumeMounts: #挂载日志卷和存在的空镜像
             - name: log-volume
               mountPath: /tmp/data/log/ops-nginx-api  #容器内挂载镜像路径
             - name: sidecar-sre
               mountPath: /scratch  #空镜像
+
           resources: #qos 设置
             limits:
               cpu: 100m #pod 占单核cpu 1/10

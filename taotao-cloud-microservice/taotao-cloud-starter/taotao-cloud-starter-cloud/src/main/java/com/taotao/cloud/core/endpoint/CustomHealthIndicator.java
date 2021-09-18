@@ -32,10 +32,9 @@ public class CustomHealthIndicator implements HealthIndicator {
 
 	@Override
 	public Health health() {
-		List<GarbageCollectorMXBean> gge = ManagementFactory.getGarbageCollectorMXBeans();
 		Health.Builder builder = new Health.Builder();
-		builder.status("run");
-		builder.withDetail("garbage", gge);
+		builder.status("health");
+		builder.withDetail("health", "up");
 		return builder.build();
 	}
 

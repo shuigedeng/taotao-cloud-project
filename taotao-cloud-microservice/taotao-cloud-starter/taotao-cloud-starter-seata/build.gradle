@@ -3,22 +3,14 @@ dependencies {
 
     api('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'
+        exclude group: 'cglib', module: 'cglib'
     }
     api 'io.seata:seata-spring-boot-starter:1.4.1'
+    api 'cglib:cglib:3.3.0'
 
     api "com.zaxxer:HikariCP"
-//    api ("org.springframework.cloud:spring-cloud-starter-openfeign"){
-//        exclude group: 'org.springframework.cloud', module: 'spring-cloud-openfeign-core'
-//    }
-//    api group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.6.RELEASE'
 
     api 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
-
-//configurations.all {
-//    resolutionStrategy {
-//        force 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.6.RELEASE'
-//    }
-//}
