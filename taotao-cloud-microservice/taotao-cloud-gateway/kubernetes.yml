@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - name: gateway-port
-              containerPort: 9999
+              containerPort: 33333
 ---
 apiVersion: v1
 kind: Service
@@ -38,6 +38,6 @@ spec:
   ports:
     - name: gateway-service-port
       protocol: TCP
-      port: 9999
-      targetPort: 9999
-      nodePort: 30000
+      port: 33333
+      targetPort: 33333
+      nodePort: 33333

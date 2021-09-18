@@ -32,7 +32,7 @@ jib {
         jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Dspring.profiles.active=dev', '-Dfile.encoding=utf-8', '-Duser.timezone=Asia/Shanghai']
         mainClass = 'com.taotao.cloud.uc.biz.TaoTaoCloudUcApplication'
         args = ['some', 'args']
-        ports = ['9996']
-        labels = ['app_name': 'taotao-cloud-uc-biz', 'port': '9996']
+        ports = ['33337']
+        labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 9996
+  port: 33337
   http2:
     enabled: true
   undertow:
@@ -25,7 +25,6 @@ jasypt:
 redisson:
   single-server-config:
     address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
-
 
 dubbo:
   application:
@@ -178,7 +177,7 @@ spring:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
-    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     lettuce:
       pool:
         max-active: 1500

@@ -16,6 +16,7 @@
 
 # https://docs.travis-ci.com/user/reference/overview/
 # trusty - 7.5GB memory and 2 cores
+
 dist: bionic
 
 # travis performs a shallow clone by default, in case of any issues

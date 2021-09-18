@@ -290,6 +290,9 @@ public class SysResourceServiceImpl implements ISysResourceService {
 			e.printStackTrace();
 		}
 
+
+		LogUtil.info("resourceById *********************************");
+
 		long end = System.currentTimeMillis();
 
 		LogUtil.info(Thread.currentThread().getName() + "======" + (end - start));

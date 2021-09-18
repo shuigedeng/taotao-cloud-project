@@ -1,5 +1,5 @@
 server:
-  port: 10001
+  port: 33335
   http2:
     enabled: true
   undertow:
@@ -7,6 +7,10 @@ server:
     direct-buffers: true
 #  servlet:
 #    context-path: /xxl-job-admin
+
+redisson:
+  single-server-config:
+    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -43,13 +47,14 @@ spring:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
-    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     lettuce:
       pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
+        max-active: 1500
+        max-wait: 5000
+        max-idle: 500
+        min-idle: 100
+    connect-timeout: 60000
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai

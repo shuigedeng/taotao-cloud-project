@@ -1,5 +1,5 @@
 server:
-  port: 9998
+  port: 33336
   http2:
     enabled: true
   undertow:
@@ -27,6 +27,45 @@ spring:
   cloud:
     loadbalancer:
       enabled: true
+    stream:
+      bindings:
+        sms-output:
+          destination: sms-topic
+          content-type: application/json
+        sms-input:
+          destination: sms-topic
+          content-type: text/plain
+          group: sms-group
+        email-output:
+          destination: email-topic
+          content-type: application/json
+        email-input:
+          destination: email-topic
+          content-type: text/plain
+          group: email-group
+        order-output:
+          destination: order-topic
+          content-type: application/json
+        order-input:
+          destination: order-topic
+          content-type: text/plain
+          group: order-binder-group
+      rocketmq:
+        binder:
+          name-server:
+      rabbit:
+        binder:
+          admin-addresses:
+      kafka:
+        binder:
+          brokers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+          producer-properties:
+            retries: 0
+            batch-size: 16384
+            buffer-memory: 33554432
+            key-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+            value-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+            acks: 1
   sleuth:
     enabled: true
     web:
@@ -83,12 +122,14 @@ spring:
         min-idle: 0
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    admin:
+      client-id:
     producer:
       retries: 0
       batch-size: 16384
       buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
       acks: 1
       properties:
         linger.ms: 500
@@ -96,8 +137,8 @@ spring:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
       enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteBufferSerializer
     listener:
       concurrency: 5
       ack-mode: manual_immediate
@@ -167,8 +208,7 @@ spring:
         #          client-id: abc
         #          client-secret: abc
         jwt:
-          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
-
+          jwk-set-uri: http://172.16.6.151:33336/oauth2/jwks
 taotao:
   cloud:
     log:

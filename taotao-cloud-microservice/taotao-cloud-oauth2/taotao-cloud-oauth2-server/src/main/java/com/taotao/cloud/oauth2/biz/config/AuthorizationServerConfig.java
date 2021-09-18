@@ -132,10 +132,10 @@ public class AuthorizationServerConfig {
 	@Bean
 	public ProviderSettings providerSettings() {
 		return ProviderSettings.builder()
-			.authorizationEndpoint("http://127.0.0.1:9998/oauth2/authorize")
-			.tokenEndpoint("http://127.0.0.1:9998/oauth2/token")
-			.jwkSetEndpoint("http://127.0.0.1:9998/oauth2/jwks")
-			.issuer("http://127.0.0.1:9998")
+			.authorizationEndpoint("http://172.16.6.151:33336/oauth2/authorize")
+			.tokenEndpoint("http://172.16.6.151:33336/oauth2/token")
+			.jwkSetEndpoint("http://172.16.6.151:33336/oauth2/jwks")
+			.issuer("http://172.16.6.151:33336")
 			.build();
 	}
 

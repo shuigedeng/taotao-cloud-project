@@ -1,5 +1,5 @@
 server:
-  port: 9999
+  port: 33333
   shutdown: graceful
   http2:
     enabled: true
@@ -14,6 +14,10 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+
+redisson:
+  single-server-config:
+    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -60,7 +64,6 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   redis:
-    client-name: taotao-cloud-gateway-redis-client
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 0

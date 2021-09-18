@@ -13,7 +13,7 @@ RUN mkdir -p /taotao-cloud-gateway
 
 WORKDIR /taotao-cloud-gateway
 
-EXPOSE 9999
+EXPOSE 33333
 
 ADD ./build/libs/taotao-cloud-gateway-2021.9.3.jar ./
 
