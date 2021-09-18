@@ -51,7 +51,7 @@ spec:
               memory: 2048Mi
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/ping
               port: 9999
               scheme: HTTP
             initialDelaySeconds: 120
@@ -61,7 +61,7 @@ spec:
             failureThreshold: 5
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/ping
               port: 9999
             initialDelaySeconds: 120
             timeoutSeconds: 5
@@ -99,7 +99,7 @@ spec:
               memory: 2048Mi
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/ping
               port: 9996
               scheme: HTTP
             initialDelaySeconds: 360
@@ -109,7 +109,7 @@ spec:
             failureThreshold: 5
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/ping
               port: 9996
             initialDelaySeconds: 360
             timeoutSeconds: 5
