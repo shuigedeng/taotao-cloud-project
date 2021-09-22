@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-function clean_starters() {
+function build_starters() {
     for file in `ls $1`
     do
       if [ -d $1"/"$file ];then
@@ -10,4 +10,4 @@ function clean_starters() {
     done
 }
 
-clean_starters $(dirname $(pwd))/taotao-cloud-microservice/taotao-cloud-starter
+build_starters $(dirname $(pwd))/taotao-cloud-microservice/taotao-cloud-starter
