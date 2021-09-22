@@ -9,6 +9,7 @@ server:
 #    context-path: /xxl-job-admin
 
 redisson:
+  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
   single-server-config:
     address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
@@ -46,7 +47,7 @@ spring:
   redis:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    database: 1
+    database: 0
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     lettuce:
       pool:

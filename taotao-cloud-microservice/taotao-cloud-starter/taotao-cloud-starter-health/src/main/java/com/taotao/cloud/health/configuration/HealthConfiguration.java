@@ -84,7 +84,7 @@ public class HealthConfiguration implements InitializingBean {
 	//}
 
 	@Bean
-	@ConditionalOnBean(PropertyCache.class)
+	//@ConditionalOnBean(PropertyCache.class)
 	public DefaultWarnStrategy defaultWarnStrategy(
 		PropertyCache propertyCache) {
 		WarnTemplate warnTemplate = new WarnTemplate()
@@ -101,7 +101,7 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean(destroyMethod = "close")
-	@ConditionalOnBean(MonitorThreadPool.class)
+	//@ConditionalOnBean(MonitorThreadPool.class)
 	@ConditionalOnProperty(prefix = CheckProperties.PREFIX, name = "enabled", havingValue = "true")
 	public HealthCheckProvider getHealthCheckProvider(
 		DefaultWarnStrategy strategy,
@@ -119,7 +119,7 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")
-	@ConditionalOnBean(HealthCheckProvider.class)
+	//@ConditionalOnBean(HealthCheckProvider.class)
 	@ConditionalOnProperty(prefix = ExportProperties.PREFIX, name = "enabled", havingValue = "true")
 	public ExportProvider getExportProvider(
 		MonitorThreadPool monitorThreadPool,

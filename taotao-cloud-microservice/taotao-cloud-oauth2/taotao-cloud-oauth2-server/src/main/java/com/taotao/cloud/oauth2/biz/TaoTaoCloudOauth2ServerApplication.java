@@ -27,8 +27,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * TaoTaoCloudOauth2ServerApplication
  *
  * @author shuigedeng
- * @since 2020/4/29 15:13
  * @version 1.0.0
+ * @since 2020/4/29 15:13
  */
 @EnableTaoTaoCloudLoadbalancer
 @EnableTaoTaoCloudFeign
@@ -38,7 +38,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(TaoTaoCloudOauth2ServerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(TaoTaoCloudOauth2ServerApplication.class, args);
+	}
 }

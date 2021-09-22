@@ -32,6 +32,8 @@ import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tags;
+import java.util.function.Function;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
@@ -41,6 +43,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.server.ServerWebExchange;
 
 /**
  * CoreConfiguration
@@ -120,5 +123,14 @@ public class CoreAutoConfiguration implements InitializingBean {
 		CoreProperties coreProperties) {
 		LogUtil.started(CoreCommandLineRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreCommandLineRunner(propertyCache, coreProperties);
+	}
+
+	@Configuration
+	public static class CoreFunction implements Function<String, String>{
+
+		@Override
+		public String apply(String s) {
+			return s;
+		}
 	}
 }

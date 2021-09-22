@@ -17,7 +17,6 @@ package com.taotao.cloud.web.annotation;
 
 import com.taotao.cloud.canal.annotation.EnableTaoTaoCloudCanalClient;
 import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
-import com.taotao.cloud.core.annotation.EnableTaoTaoCloudCloud;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
 import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
 import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
@@ -58,7 +57,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableTaoTaoCloudCloud
 @EnableTaoTaoCloudWebSocket
 @EnableTaoTaoCloudMail
 @EnableTaoTaoCloudRxjava

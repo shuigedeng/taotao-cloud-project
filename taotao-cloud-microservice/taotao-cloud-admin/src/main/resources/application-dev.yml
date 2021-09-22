@@ -6,6 +6,11 @@ server:
     buffer-size: 2048
     direct-buffers: true
 
+redisson:
+  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+  single-server-config:
+    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
   # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。

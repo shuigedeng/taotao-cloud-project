@@ -16,7 +16,6 @@
 package com.taotao.cloud.gateway;
 
 import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
-import com.taotao.cloud.core.annotation.EnableTaoTaoCloudCloud;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +28,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 1.0.0
  * @since 2020/10/10 09:06
  */
-@EnableTaoTaoCloudCloud
 @EnableTaoTaoCloudCaptcha
 @EnableTaoTaoCloudHealth
 @SpringBootApplication

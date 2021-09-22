@@ -75,6 +75,7 @@ public class SysResourceServiceImpl implements ISysResourceService {
 		this.sysRoleService = sysRoleService;
 		this.remoteOrderItemService = remoteOrderItemService;
 		this.remoteOrderService = remoteOrderService;
+
 	}
 
 	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;
