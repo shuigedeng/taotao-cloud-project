@@ -46,7 +46,7 @@ spring:
       discovery:
         server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.6.151}:${TAOTAO-CLOUD-NACOS-PORT:8848}
         metadata:
-          version: 5
+          version: ${taotaoCloudVersion}
       config:
         enabled: false
         server-addr: ${TAOTAO-CLOUD-NACOS-HOST:172.16.6.151}:${TAOTAO-CLOUD-NACOS-PORT:8848}
@@ -298,7 +298,7 @@ taotao:
       enabled: true
       title: 文件中心
       description: 文件中心接口文档
-      version: 1.0
+      version: ${taotaoCloudVersion}
       license: Apache
       license-url: https://opensource.org/licenses/Apache-2.0Url
       contact:

@@ -5,7 +5,7 @@ metadata:
   namespace: taotao-cloud-prod
   labels:
     app: taotao-cloud-product-biz
-    version: 1.0
+    version: ${taotaoCloudVersion}
     kubernetes.io/cluster-service: "true"
 spec:
   replicas: 3
@@ -123,7 +123,7 @@ matadata:
   namespace: taotao-cloud-prod
   labels:
     app: taotao-cloud-product-biz-service
-    version: 1.0
+    version: ${taotaoCloudVersion}
     kubernetes.io/cluster-service: "true"
   annotations:
     app: taotao-cloud-product-biz-service
