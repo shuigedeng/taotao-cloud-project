@@ -9,9 +9,15 @@ ENV APP_NAME=taotao-cloud-uc
 
 ENV VERSION=2021.9.3
 
-ENV DINGDING_TOKEN_ID = xxxxx
+ENV DINGDING_TOKEN_ID=xxxxx
 
-ENV DINGDING_SECRET = xxxxx
+ENV DINGDING_SECRET=xxxxx
+
+ENV JAR_NAME=${APP_NAME}-biz-${VERSION}.jar
+
+ENV BACKEND_SERVICE=172.16.6.151:11800
+
+ENV AGENT_AUTHENTICATION=taotao-cloud
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -19,7 +25,7 @@ WORKDIR /root
 
 EXPOSE 33337
 
-ADD ./taotao-cloud-uc-biz/build/libs/${APP_NAME}-${VERSION}.jar ./
+ADD ./taotao-cloud-uc-biz/build/libs/${JAR_NAME} ./
 
 CMD sleep 10; java \
     -Xms512m \
@@ -31,11 +37,11 @@ CMD sleep 10; java \
     -Dfile.encoding=utf-8 \
     -javaagent:/skywalking/agent/skywalking-agent.jar \
     -Dskywalking.agent.service_name=${APP_NAME} \
-    -Dskywalking.agent.authentication=taotao-cloud \
+    -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
     -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
     -Dskywalking.logging.level=INFO \
     -Dskywalking.logging.dir=/root/logs \
-    -Dskywalking.collector.backend_service=172.16.6.151:11800 \
+    -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
     -Djava.security.egd=file:/dev/./urandom \
     -Dspring.profiles.active=dev \
-    -jar ${APP_NAME}-${VERSION}.jar
+    -jar ${JAR_NAME}
