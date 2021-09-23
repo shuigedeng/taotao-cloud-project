@@ -58,11 +58,11 @@ spec:
               value: taotao-cloud-gateway
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -106,17 +106,17 @@ spec:
               value: taotao-cloud-admin
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 33334
               scheme: HTTP
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -125,7 +125,7 @@ spec:
             httpGet:
               path: /actuator/health
               port: 33334
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -143,28 +143,28 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-xxl-job
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job:2021.9.3
+        - name: taotao-cloud-xxl-job-admin
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
             - name: admin-port
               containerPort: 33335
           env:
             - name: applicationName
-              value: taotao-cloud-xxl-job
+              value: taotao-cloud-xxl-job-admin
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 33335
               scheme: HTTP
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -173,7 +173,7 @@ spec:
             httpGet:
               path: /actuator/health
               port: 33335
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -202,17 +202,17 @@ spec:
               value: taotao-cloud-oauth2
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 33336
               scheme: HTTP
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -221,7 +221,7 @@ spec:
             httpGet:
               path: /actuator/health
               port: 33336
-            initialDelaySeconds: 360
+            initialDelaySeconds: 180
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -250,11 +250,11 @@ spec:
               value: taotao-cloud-uc
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -298,11 +298,11 @@ spec:
               value: taotao-cloud-order
           resources:
             requests:
-              cpu: 0.3
-              memory: 1024Mi
+              cpu: 0.1
+              memory: 512Mi
             limits:
-              cpu: 0.5
-              memory: 2048Mi
+              cpu: 0.1
+              memory: 1024Mi
           livenessProbe:
             httpGet:
               path: /actuator/health

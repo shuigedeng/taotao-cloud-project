@@ -1,5 +1,4 @@
-
-FROM 192.168.99.240:8443/taotao-cloud/taotao-cloud-node:latest as build-stage
+FROM node:14-alpine AS build
 
 #RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 
@@ -7,21 +6,19 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install
-
-RUN npm run taotao-cloud-backend-react:build:start
+RUN npm install && npm run build
 
 ARG TAOTAO_CLOUD_HOST_ADDRESS
 ARG TAOTAO_CLOUD_HOST_PREFIX
 ARG TAOTAO_CLOUD_HOST_VERSION
 
-ENV TAOTAO_CLOUD_HOST_ADDRESS $TAOTAO_CLOUD_HOST_ADDRESS
-ENV TAOTAO_CLOUD_HOST_PREFIX $TAOTAO_CLOUD_HOST_PREFIX
-ENV TAOTAO_CLOUD_HOST_VERSION $TAOTAO_CLOUD_HOST_VERSION
+ENV TAOTAO_CLOUD_HOST_ADDRESS ${TAOTAO_CLOUD_HOST_ADDRESS:''}
+ENV TAOTAO_CLOUD_HOST_PREFIX ${TAOTAO_CLOUD_HOST_PREFIX:''}
+ENV TAOTAO_CLOUD_HOST_VERSION ${TAOTAO_CLOUD_HOST_VERSION:''}
 
-FROM nginx:stable-alpine as production-stage
+FROM nginx:stable-alpine
 
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
