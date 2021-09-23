@@ -9,6 +9,8 @@ projects=("taotao-cloud-gateway"
 
 current_dir=`dirname $(pwd)`
 
+JAVA_HOME="/opt/common/jdk-11.0.2"
+
 function build_dockerfile() {
     for file in ${projects[@]}
     do
@@ -24,7 +26,7 @@ function build_biz() {
     do
       if [ -d $1"/"$file ];then
         cd $1"/"$file
-        gradle build -Dorg.gradle.java.home='/opt/common/jdk-11.0.2'
+        gradle build -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
 }
@@ -34,7 +36,7 @@ function clean_starters() {
     do
       if [ -d $1"/"$file ];then
         cd $1"/"$file
-        gradle clean -Dorg.gradle.java.home='/opt/common/jdk-11.0.2'
+        gradle clean -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
 }
@@ -44,7 +46,7 @@ function build_starters() {
     do
       if [ -d $1"/"$file ];then
         cd $1"/"$file
-        gradle build -Dorg.gradle.java.home='/opt/common/jdk-11.0.2'
+        gradle build -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
 }

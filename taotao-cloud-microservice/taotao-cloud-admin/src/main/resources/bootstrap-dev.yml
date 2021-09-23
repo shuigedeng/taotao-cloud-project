@@ -13,7 +13,7 @@ spring:
       discovery:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
-          version: 1.8.0
+          version: ${taotaoCloudVersion}
           user.name: "admin"
           user.password: "123456"
         group: TAOTAO_CLOUD_GROUP

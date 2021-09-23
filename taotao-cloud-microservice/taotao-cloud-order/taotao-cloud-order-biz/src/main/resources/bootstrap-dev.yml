@@ -18,7 +18,7 @@ spring:
       discovery:
         server-addr: ${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
         metadata:
-          version: 1.8.0
+          version: ${taotaoCloudVersion}
           user.name: "admin"
           user.password: "123456"
         group: TAOTAO_CLOUD_GROUP
@@ -33,50 +33,6 @@ spring:
     sentinel:
       enabled: true
       eager: true
-#      datasource:
-#        #流控 名称随意
-#        flow:
-#          nacos:
-#            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
-#            dataId: ${spring.application.name}-flow-rules
-#            namespace:
-#            groupId: SENTINEL_GROUP
-#            data-type: json
-#            # 规则类型，取值见：
-#            # org.springframework.cloud.alibaba.sentinel.datasource.RuleType
-#            rule-type: flow
-#        #熔断降级 名称随意
-#        degrade:
-#          nacos:
-#            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
-#            dataId: ${spring.application.name}-degrade-rules
-#            namespace:
-#            groupId: SENTINEL_GROUP
-#            rule-type: degrade
-#        #系统规则 名称随意
-#        system:
-#          nacos:
-#            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
-#            dataId: ${spring.application.name}-system-rules
-#            namespace:
-#            groupId: SENTINEL_GROUP
-#            rule-type: system
-#        #授权规则 名称随意
-#        authority:
-#          nacos:
-#            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
-#            dataId: ${spring.application.name}-authority-rules
-#            namespace:
-#            groupId: SENTINEL_GROUP
-#            rule-type: authority
-#        #参数规则 名称随意
-#        param-flow:
-#          nacos:
-#            server-addr: ${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_DATASOURCE_NACOS_PORT:8848}
-#            dataId: ${spring.application.name}-param-flow-rules
-#            namespace:
-#            groupId: SENTINEL_GROUP
-#            rule-type: param-flow
       transport:
         dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8712}

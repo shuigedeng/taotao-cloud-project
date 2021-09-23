@@ -341,15 +341,18 @@ configure(subprojects.findAll { (!it.name.startsWith("taotao-cloud-starter")) })
         doLast {
             def fileDir = new File("$buildDir/resources/main");
             if (fileDir.exists() && fileDir.isDirectory()) {
-                new File("$buildDir/resources/main/application.properties").withWriter { w ->
-                    def projectProperties = project.properties
-                    Properties p = new Properties()
-                    projectProperties.each { entry ->
-                        p[entry.key.toString()] = entry.value.toString()
-                    }
+                def pro = ["application.properties", "bootstrap.properties"]
+                pro.forEach(item -> {
+                    new File("$buildDir/resources/main/$item").withWriter { w ->
+                        def projectProperties = project.properties
+                        Properties p = new Properties()
+                        projectProperties.each { entry ->
+                            p[entry.key.toString()] = entry.value.toString()
+                        }
 
-                    p.store w, null
-                }
+                        p.store w, null
+                    }
+                })
             }
         }
     }
