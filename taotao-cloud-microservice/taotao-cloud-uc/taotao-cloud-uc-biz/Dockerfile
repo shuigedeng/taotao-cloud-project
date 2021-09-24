@@ -5,9 +5,13 @@ MAINTAINER 981376577@qq.com
 
 ENV TZ=Asia/Shanghai
 
-ENV APP_NAME=taotao-cloud-order-biz
+ENV APP_NAME=taotao-cloud-uc-biz
 
 ENV VERSION=2021.9.3
+
+ENV DINGDING_TOKEN_ID=xxxxx
+
+ENV DINGDING_SECRET=xxxxx
 
 ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
 
@@ -19,9 +23,9 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /root
 
-EXPOSE 33338
+EXPOSE 33337
 
-ADD ../../taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz/build/libs/${JAR_NAME} ./
+ADD ./build/libs/${JAR_NAME} ./
 
 CMD sleep 10; java \
     -Xms512m \

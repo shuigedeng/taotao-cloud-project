@@ -5,7 +5,7 @@ MAINTAINER 981376577@qq.com
 
 ENV TZ=Asia/Shanghai
 
-ENV APP_NAME=taotao-cloud-admin
+ENV APP_NAME=taotao-cloud-xxl-job-admin
 
 ENV VERSION=2021.9.3
 
@@ -15,15 +15,13 @@ ENV BACKEND_SERVICE=172.16.6.151:11800
 
 ENV AGENT_AUTHENTICATION=taotao-cloud
 
-ENV TAOTAO_CLOUD_MAIL_PASSWORD=xxx
-
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /root
 
-EXPOSE 33334
+EXPOSE 33335
 
-ADD ../../taotao-cloud-microservice/taotao-cloud-admin/build/libs/${JAR_NAME} ./
+ADD ./build/libs/${JAR_NAME} ./
 
 CMD sleep 10; java \
     -Xms512m \
@@ -43,4 +41,3 @@ CMD sleep 10; java \
     -Djava.security.egd=file:/dev/./urandom \
     -Dspring.profiles.active=dev \
     -jar ${JAR_NAME}
-

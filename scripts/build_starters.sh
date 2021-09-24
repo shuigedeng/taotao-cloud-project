@@ -11,6 +11,8 @@ function build_starters() {
         gradle clean build -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
+
+    cd .
 }
 
 build_starters $(dirname $(pwd))/taotao-cloud-microservice/taotao-cloud-starter

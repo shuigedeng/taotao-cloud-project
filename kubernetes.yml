@@ -51,7 +51,7 @@ spec:
           image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: gateway-port
+            - name: taotao-cloud-gateway-port
               containerPort: 33333
           env:
             - name: applicationName
@@ -59,7 +59,7 @@ spec:
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -99,7 +99,7 @@ spec:
           image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: admin-port
+            - name: taotao-cloud-admin-port
               containerPort: 33334
           env:
             - name: applicationName
@@ -107,7 +107,7 @@ spec:
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -147,7 +147,7 @@ spec:
           image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: admin-port
+            - name: taotao-cloud-xxl-job-admin-port
               containerPort: 33335
           env:
             - name: applicationName
@@ -155,7 +155,7 @@ spec:
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -191,19 +191,19 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-oauth2
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2:2021.9.3
+        - name: taotao-cloud-oauth2-server
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: admin-port
+            - name: taotao-cloud-oauth2-server-port
               containerPort: 33336
           env:
             - name: applicationName
-              value: taotao-cloud-oauth2
+              value: taotao-cloud-oauth2-server
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -239,19 +239,19 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-uc
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc:2021.9.3
+        - name: taotao-cloud-uc-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: uc-port
+            - name: taotao-cloud-uc-biz-port
               containerPort: 33337
           env:
             - name: applicationName
-              value: taotao-cloud-uc
+              value: taotao-cloud-uc-biz
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -287,19 +287,19 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-order
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2021.9.3
+        - name: taotao-cloud-order-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.9.3
           imagePullPolicy: IfNotPresent
           ports:
-            - name: order-port
+            - name: taotao-cloud-order-biz-port
               containerPort: 33338
           env:
             - name: applicationName
-              value: taotao-cloud-order
+              value: taotao-cloud-order-biz
           resources:
             requests:
               cpu: 1
-              memory: 1024Mi
+              memory: 512Mi
             limits:
               cpu: 2
               memory: 2048Mi
@@ -351,32 +351,32 @@ spec:
     app: taotao-cloud
     version: 2021.9.3
   ports:
-    - name: gateway-port
+    - name: taotao-cloud-gateway-port
       protocol: TCP
       port: 33333
       targetPort: 33333
       nodePort: 33333
-    - name: admin-port
+    - name: taotao-cloud-admin-port
       protocol: TCP
       port: 33334
       targetPort: 33334
       nodePort: 33334
-    - name: xxl-job-port
+    - name: taotao-cloud-xxl-job-admin-port
       protocol: TCP
       port: 33335
       targetPort: 33335
       nodePort: 33335
-    - name: oauth2-port
+    - name: taotao-cloud-oauth2-server-port
       protocol: TCP
       port: 33336
       targetPort: 33336
       nodePort: 33336
-    - name: uc-port
+    - name: taotao-cloud-uc-biz-port
       protocol: TCP
       port: 33337
       targetPort: 33337
       nodePort: 33337
-    - name: order-port
+    - name: taotao-cloud-order-biz-port
       protocol: TCP
       port: 33338
       targetPort: 33338
