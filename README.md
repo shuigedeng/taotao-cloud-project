@@ -5,12 +5,15 @@
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
   <img src="https://img.shields.io/badge/Spring-5.3.4-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Boot-2.4.3-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.1-yellowgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Spring%20Cloud%20alibaba-2.2.5.RELEASE-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Boot-2.5.5-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.4-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Spring%20Cloud%20alibaba-2021.1-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Elasticsearch-6.8.7-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Mybatis%20Plus-3.4.2-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Knife4j-3.0.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Swagger-3.0.0-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Redisson-3.15.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/Hutool-5.5.9-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -111,7 +114,7 @@ Guava | 29.0-jre
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**非功能性需求** 
-* **主体框架**：采用最新的Spring Boot 2.5.4、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1版本进行设计
+* **主体框架**：采用最新的Spring Boot 2.5.5、Spring Cloud 2020.0.4、Spring Cloud Alibaba 2021.1版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot Admin 监控各个独立服务的运行状态
