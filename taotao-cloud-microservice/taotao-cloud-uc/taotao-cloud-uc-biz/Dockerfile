@@ -29,11 +29,23 @@ ADD ./build/libs/${JAR_NAME} ./
 
 CMD sleep 10; java \
     -Xms512m \
-    -Xmx512m \
-    -XX:MetaspaceSize=512m \
-    -XX:MaxMetaspaceSize=1024m \
-    -XX:ParallelGCThreads=4 \
+    -Xmx2g \
+    -Xss256k \
+    -XX:MaxDirectMemorySize=256m \
+    -XX:SurvivorRatio=8 \
+    -XX:+UseCompressedOops \
+    -XX:+UseCompressedClassPointers \
+    -XX:+SegmentedCodeCache \
+    -XX:+PrintCommandLineFlags \
+    -XX:+ExplicitGCInvokesConcurrent \
     -XX:+HeapDumpOnOutOfMemoryError \
+    -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
+    -Xlog:jit+compilation=debug:file=/root/log/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+    -XX:MetaspaceSize=256m \
+    -XX:MaxMetaspaceSize=256m \
+    -verbose:gc \
+    -XX:ParallelGCThreads=4 \
+    -Djava.security.egd=file:/dev/./urandom \
     -Dfile.encoding=utf-8 \
     -javaagent:/skywalking/agent/skywalking-agent.jar \
     -Dskywalking.agent.service_name=${APP_NAME} \
@@ -42,6 +54,5 @@ CMD sleep 10; java \
     -Dskywalking.logging.level=INFO \
     -Dskywalking.logging.dir=/root/logs \
     -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
-    -Djava.security.egd=file:/dev/./urandom \
     -Dspring.profiles.active=dev \
     -jar ${JAR_NAME}

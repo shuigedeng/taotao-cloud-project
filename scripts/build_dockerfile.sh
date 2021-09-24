@@ -15,7 +15,7 @@ function build_dockerfile() {
         gradle clean bootJar -Dorg.gradle.java.home=$JAVA_HOME
 
         val=`ls . | grep Dockerfile | wc -w`
-		if [ $val -eq 1]; then
+		if [[ $val -eq 1 ]]; then
 		  docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$microservice:$VERSION .
 		fi
 
@@ -26,7 +26,7 @@ function build_dockerfile() {
           	gradle clean bootJar -Dorg.gradle.java.home=$JAVA_HOME
 
           	v=`ls . | grep Dockerfile | wc -w`
-		  	if [ $v -eq 1]; then
+		  	if [[ $v -eq 1 ]]; then
 		  	  docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$item:$VERSION .
 		  	fi
           fi
