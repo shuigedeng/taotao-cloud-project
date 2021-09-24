@@ -1,12 +1,19 @@
 package com.taotao.cloud.dfs.biz.controller;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.dfs.api.vo.FileVO;
 import com.taotao.cloud.dfs.api.vo.UploadFileVO;
 import com.taotao.cloud.dfs.biz.entity.File;
 import com.taotao.cloud.dfs.biz.mapper.FileMapper;
-import com.taotao.cloud.dfs.biz.service.FileService;
+import com.taotao.cloud.dfs.biz.service.IFileService;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -18,30 +25,26 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * 文件管理API
  *
  * @author shuigedeng
- * @since 2020/11/12 17:42
  * @version 1.0.0
+ * @since 2020/11/12 17:42
  */
 @Validated
 @RestController
 @RequestMapping("/file")
-@Api(value = "文件管理API", tags = {"文件管理API"})
+@Tag(name = "文件管理API", description = "文件管理API")
 public class FileController {
 
-	private final FileService fileService;
+	private final IFileService IFileService;
 
-	public FileController(FileService fileService) {
-		this.fileService = fileService;
+	public FileController(IFileService IFileService) {
+		this.IFileService = IFileService;
 	}
 
-	@ApiOperation("上传单个文件")
+	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
 	@RequestOperateLog(description = "上传单个文件")
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
@@ -49,38 +52,42 @@ public class FileController {
 		if (file.isEmpty()) {
 			throw new BusinessException("文件不能为空");
 		}
-		File upload = fileService.upload(file);
-		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build();
-		return Result.success(result);
+		File upload = IFileService.upload(file);
+		//UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
+		//	.build();
+		return Result.success(null);
 	}
 
-	@ApiOperation("上传多个文件")
+	@Operation(summary = "上传多个文件", description = "上传多个文件", method = CommonConstant.POST)
 	@RequestOperateLog(description = "上传多个文件")
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
-	public Result<List<UploadFileVO>> uploadMultipleFiles(@RequestPart("files") MultipartFile[] files) {
+	public Result<List<UploadFileVO>> uploadMultipleFiles(
+		@RequestPart("files") MultipartFile[] files) {
 		if (files.length == 0) {
 			throw new BusinessException("文件不能为空");
 		}
 
 		List<File> uploads = Arrays.stream(files)
-			.map(fileService::upload)
+			.map(IFileService::upload)
 			.collect(Collectors.toList());
 
 		if (!CollectionUtils.isEmpty(uploads)) {
-			List<UploadFileVO> result = uploads.stream().map(upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build()).collect(Collectors.toList());
-			return Result.success(result);
+			//List<UploadFileVO> result = uploads.stream().map(
+			//		upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build())
+			//	.collect(Collectors.toList());
+			return Result.success(null);
 		}
 
 		throw new BusinessException("文件上传失败");
 	}
 
-	@ApiOperation("根据id查询文件信息")
+	@Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息", method = CommonConstant.GET)
 	@RequestOperateLog(description = "根据id查询文件信息")
 	@PreAuthorize("hasAuthority('file:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
-		File file = fileService.findFileById(id);
+		File file = IFileService.findFileById(id);
 		FileVO vo = FileMapper.INSTANCE.fileToFileVO(file);
 		return Result.success(vo);
 	}

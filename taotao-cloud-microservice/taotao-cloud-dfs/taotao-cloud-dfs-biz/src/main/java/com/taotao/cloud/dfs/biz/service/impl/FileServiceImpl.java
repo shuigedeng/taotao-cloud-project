@@ -4,7 +4,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dfs.biz.entity.File;
 import com.taotao.cloud.dfs.biz.repository.FileRepository;
-import com.taotao.cloud.dfs.biz.service.FileService;
+import com.taotao.cloud.dfs.biz.service.IFileService;
 import com.taotao.cloud.file.service.UploadFileService;
 import com.taotao.cloud.file.exception.UploadFileException;
 import com.taotao.cloud.file.model.UploadFileInfo;
@@ -22,7 +22,7 @@ import java.util.Optional;
  * @version 1.0.0
  */
 @Service
-public class FileServiceImpl implements FileService {
+public class FileServiceImpl implements IFileService {
 	@Autowired
 	private FileRepository fileRepository;
 	@Autowired

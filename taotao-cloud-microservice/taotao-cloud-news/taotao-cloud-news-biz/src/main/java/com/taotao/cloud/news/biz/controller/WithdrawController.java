@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/withdraw")
-@Api(value = "提现申请管理API", tags = {"提现申请管理API"})
+@Tag(name = "提现申请管理API", description = "提现申请管理API")
 public class WithdrawController {
 
 	private final IWithdrawService withdrawService;
@@ -48,6 +48,7 @@ public class WithdrawController {
 		this.withdrawService = withdrawService;
 	}
 
+	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.POST)
 	@ApiOperation("根据id查询提现申请信息")
 	@RequestOperateLog(description = "根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")

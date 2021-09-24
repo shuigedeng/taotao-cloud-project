@@ -30,10 +30,13 @@ import java.util.Optional;
  * @version 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class ExpressCompanyServiceImpl implements IExpressCompanyService {
 
 	private final ExpressCompanyRepository expressCompanyRepository;
+
+	public ExpressCompanyServiceImpl(ExpressCompanyRepository expressCompanyRepository) {
+		this.expressCompanyRepository = expressCompanyRepository;
+	}
 
 	@Override
 	public ExpressCompany findExpressCompanyById(Long id) {

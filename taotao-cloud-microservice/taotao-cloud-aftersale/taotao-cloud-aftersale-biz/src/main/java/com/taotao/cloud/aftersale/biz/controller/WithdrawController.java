@@ -15,13 +15,15 @@
  */
 package com.taotao.cloud.aftersale.biz.controller;
 
-import com.taotao.cloud.aftersale.biz.entity.Withdraw;
 import com.taotao.cloud.aftersale.api.vo.WithdrawVO;
+import com.taotao.cloud.aftersale.biz.entity.Withdraw;
 import com.taotao.cloud.aftersale.biz.mapper.WithdrawMapper;
 import com.taotao.cloud.aftersale.biz.service.IWithdrawService;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +35,13 @@ import org.springframework.web.bind.annotation.RestController;
  * 提现申请管理API
  *
  * @author shuigedeng
- * @since 2020/11/13 09:58
  * @version 1.0.0
+ * @since 2020/11/13 09:58
  */
 @Validated
 @RestController
 @RequestMapping("/withdraw")
-@Api(value = "提现申请管理API", tags = {"提现申请管理API"})
+@Tag(name = "提现申请管理API", description = "提现申请管理API")
 public class WithdrawController {
 
 	private final IWithdrawService withdrawService;
@@ -48,7 +50,7 @@ public class WithdrawController {
 		this.withdrawService = withdrawService;
 	}
 
-	@ApiOperation("根据id查询提现申请信息")
+	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.GET)
 	@RequestOperateLog(description = "根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

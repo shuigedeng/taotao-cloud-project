@@ -1,5 +1,4 @@
 dependencies {
-
     implementation project(':taotao-cloud-microservice:taotao-cloud-log:taotao-cloud-log-api')
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

@@ -15,39 +15,94 @@
  */
 package com.taotao.cloud.logistics.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @author shuigedeng
- * @since 2020/11/20 上午9:42
  * @version 1.0.0
+ * @since 2020/11/20 上午9:42
  */
-@ApiModel(value = "物流公司信息VO", description = "物流公司信息VO")
+@Schema(name = "ExpressCompanyVO", description = "物流公司信息VO")
 public class ExpressCompanyVO implements Serializable {
+
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@ApiModelProperty(value = "物流公司名称")
+	@Schema(description = "物流公司名称")
 	private String name;
 
-	@ApiModelProperty(value = "物流公司编码")
+	@Schema(description = "物流公司编码")
 	private String code;
 
-	@ApiModelProperty(value = "物流公司联系人")
+	@Schema(description = "物流公司联系人")
 	private String contactName;
 
-	@ApiModelProperty(value = "物流公司联系电话")
+	@Schema(description = "物流公司联系电话")
 	private String contactMobile;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
 }

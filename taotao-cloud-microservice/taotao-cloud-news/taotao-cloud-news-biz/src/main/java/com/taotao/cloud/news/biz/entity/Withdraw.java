@@ -57,15 +57,52 @@ public class Withdraw extends BaseEntity {
 	/**
 	 * 提现金额
 	 */
-	@Builder.Default
 	@Column(name = "amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '提现金额'")
 	private BigDecimal amount = BigDecimal.ZERO;
 
 	/**
 	 * 钱包余额
 	 */
-	@Builder.Default
 	@Column(name = "balance_amount", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
 	private BigDecimal balanceAmount = BigDecimal.ZERO;
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Long getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(Long mallId) {
+		this.mallId = mallId;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(BigDecimal balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
 }

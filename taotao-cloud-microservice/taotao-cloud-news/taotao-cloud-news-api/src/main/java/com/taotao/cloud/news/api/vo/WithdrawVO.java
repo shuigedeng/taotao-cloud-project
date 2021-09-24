@@ -18,6 +18,7 @@ package com.taotao.cloud.news.api.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,31 +28,95 @@ import java.time.LocalDateTime;
  * @since 2020/11/20 上午9:42
  * @version 1.0.0
  */
-@ApiModel(value = "提现申请VO", description = "提现申请VO")
+@Schema(name = "WithdrawVO", description = "提现申请VO")
 public class WithdrawVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@ApiModelProperty(value = "申请单号")
+	@Schema(description = "申请单号")
 	private String code;
 
-	@ApiModelProperty(value = "公司ID")
+	@Schema(description = "公司ID")
 	private Long companyId;
 
-	@ApiModelProperty(value = "商城ID")
+	@Schema(description = "商城ID")
 	private Long mallId;
 
-	@ApiModelProperty(value = "提现金额")
+	@Schema(description = "提现金额")
 	private BigDecimal amount;
 
-	@ApiModelProperty(value = "钱包余额")
+	@Schema(description = "钱包余额")
 	private BigDecimal balanceAmount;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Long getMallId() {
+		return mallId;
+	}
+
+	public void setMallId(Long mallId) {
+		this.mallId = mallId;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(BigDecimal balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
 }

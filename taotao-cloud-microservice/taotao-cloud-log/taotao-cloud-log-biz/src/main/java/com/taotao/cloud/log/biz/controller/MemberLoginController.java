@@ -20,6 +20,7 @@ import com.taotao.cloud.log.api.vo.MemberLoginVO;
 import com.taotao.cloud.log.biz.entity.MemberLogin;
 import com.taotao.cloud.log.biz.mapper.MemberLoginMapper;
 import com.taotao.cloud.log.biz.service.IMemberLoginService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/member/login")
-@Api(value = "会员登录日志管理API", tags = {"会员登录日志管理API"})
+@Tag(name = "会员登录日志管理API", description = "会员登录日志管理API")
 public class MemberLoginController {
 
 	private final IMemberLoginService memberLoginService;
@@ -47,6 +48,7 @@ public class MemberLoginController {
 		this.memberLoginService = memberLoginService;
 	}
 
+	@Operation(summary = "根据id查询会员登录日志信息", description = "根据id查询会员登录日志信息", method = CommonConstant.GET)
 	@RequestOperateLog(description = "根据id查询会员登录日志信息")
 	@PreAuthorize("hasAuthority('member:login:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

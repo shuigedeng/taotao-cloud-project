@@ -28,12 +28,14 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
+import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -61,17 +63,17 @@ public class DefaultReviewsService implements ReviewsService {
 
 	@PostConstruct
 	private void createReviews() {
-		Faker faker = new Faker();
+		//Faker faker = new Faker();
 
 		//For each show we generate a random set of reviews.
 		showsService.shows().forEach(show -> {
-			List<Review> generatedReviews = IntStream.range(0, faker.number().numberBetween(1, 20)).mapToObj(number -> {
-				LocalDateTime date = faker.date().past(300, TimeUnit.DAYS).toInstant().atZone(
-					ZoneId.systemDefault()).toLocalDateTime();
-				return Review.newBuilder().submittedDate(OffsetDateTime.of(date, ZoneOffset.UTC)).username(faker.name().username()).starScore(faker.number().numberBetween(0, 6)).build();
-			}).collect(Collectors.toList());
+			//List<Review> generatedReviews = IntStream.range(0, faker.number().numberBetween(1, 20)).mapToObj(number -> {
+			//	LocalDateTime date = faker.date().past(300, TimeUnit.DAYS).toInstant().atZone(
+			//		ZoneId.systemDefault()).toLocalDateTime();
+			//	return Review.newBuilder().submittedDate(OffsetDateTime.of(date, ZoneOffset.UTC)).username(faker.name().username()).starScore(faker.number().numberBetween(0, 6)).build();
+			//}).collect(Collectors.toList());
 
-			reviews.put(show.getId(), generatedReviews);
+			reviews.put(1, null);
 		});
 
 
@@ -103,31 +105,31 @@ public class DefaultReviewsService implements ReviewsService {
 	}
 
 	public void saveReview(SubmittedReview reviewInput) {
-		var reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
-		var review = Review.newBuilder()
-			.username(reviewInput.getUsername())
-			.starScore(reviewInput.getStarScore())
-			.submittedDate(OffsetDateTime.now()).build();
-
-		reviewsForShow.add(review);
-		reviewsStream.next(review);
-
-		logger.info("Review added {}", review);
+		//var reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
+		//var review = Review.newBuilder()
+		//	.username(reviewInput.getUsername())
+		//	.starScore(reviewInput.getStarScore())
+		//	.submittedDate(OffsetDateTime.now()).build();
+		//
+		//reviewsForShow.add(review);
+		//reviewsStream.next(review);
+		//
+		//logger.info("Review added {}", review);
 	}
 
 	public void saveReviews(List<SubmittedReview> reviewsInput) {
-		reviewsInput.forEach(reviewInput -> {
-			var reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
-			var review = Review.newBuilder()
-				.username(reviewInput.getUsername())
-				.starScore(reviewInput.getStarScore())
-				.submittedDate(OffsetDateTime.now()).build();
-
-			reviewsForShow.add(review);
-			reviewsStream.next(review);
-
-			logger.info("Review added {}", review);
-		});
+		//reviewsInput.forEach(reviewInput -> {
+		//	var reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
+		//	var review = Review.newBuilder()
+		//		.username(reviewInput.getUsername())
+		//		.starScore(reviewInput.getStarScore())
+		//		.submittedDate(OffsetDateTime.now()).build();
+		//
+		//	reviewsForShow.add(review);
+		//	reviewsStream.next(review);
+		//
+		//	logger.info("Review added {}", review);
+		//});
 	}
 
 	public Publisher<Review> getReviewsPublisher() {

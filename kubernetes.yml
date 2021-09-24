@@ -58,11 +58,11 @@ spec:
               value: taotao-cloud-gateway
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -106,11 +106,11 @@ spec:
               value: taotao-cloud-admin
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -154,11 +154,11 @@ spec:
               value: taotao-cloud-xxl-job-admin
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -202,11 +202,11 @@ spec:
               value: taotao-cloud-oauth2
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -250,11 +250,11 @@ spec:
               value: taotao-cloud-uc
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -298,11 +298,11 @@ spec:
               value: taotao-cloud-order
           resources:
             requests:
-              cpu: 0.1
-              memory: 512Mi
-            limits:
-              cpu: 0.1
+              cpu: 1
               memory: 1024Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
           livenessProbe:
             httpGet:
               path: /actuator/health

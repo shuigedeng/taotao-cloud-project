@@ -1,7 +1,7 @@
 package com.taotao.cloud.customer.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.customer.api.feign.fallback.RemoteChatbotFallbackImpl;
 import com.taotao.cloud.customer.api.vo.ChatbotVO;
 import org.springframework.cloud.openfeign.FeignClient;

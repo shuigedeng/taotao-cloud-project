@@ -43,4 +43,36 @@ public class ExpressCompany extends BaseEntity {
 	 */
 	@Column(name = "contact_mobile", nullable = false, columnDefinition = "varchar(32) not null COMMENT '物流公司联系电话'")
 	private String contactMobile;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
 }

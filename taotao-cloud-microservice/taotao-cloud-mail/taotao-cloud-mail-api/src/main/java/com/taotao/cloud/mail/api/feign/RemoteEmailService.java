@@ -1,7 +1,7 @@
 package com.taotao.cloud.mail.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.mail.api.feign.fallback.RemoteEmailFallbackImpl;
 import com.taotao.cloud.mail.api.vo.EmailVO;
 import org.springframework.cloud.openfeign.FeignClient;

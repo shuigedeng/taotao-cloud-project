@@ -15,51 +15,138 @@
  */
 package com.taotao.cloud.customer.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @author shuigedeng
- * @since 2020/11/20 上午9:42
  * @version 1.0.0
+ * @since 2020/11/20 上午9:42
  */
-@ApiModel(value = "机器人客服VO", description = "机器人客服VO")
-public class ChatbotVO  implements Serializable {
+@Schema(name = "机器人客服VO", description = "机器人客服VO")
+public class ChatbotVO implements Serializable {
+
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "机器人名称")
+	@Schema(description = "机器人名称")
 	private String name;
 
-	@ApiModelProperty(value = "基础url")
+	@Schema(description = "基础url")
 	private String baseUrl;
 
-	@ApiModelProperty(value = "首选语言")
+	@Schema(description = "首选语言")
 	private String primaryLanguage;
 
-	@ApiModelProperty(value = "兜底回复")
+	@Schema(description = "兜底回复")
 	private String fallback;
 
-	@ApiModelProperty(value = "欢迎语")
+	@Schema(description = "欢迎语")
 	private String welcome;
 
-	@ApiModelProperty(value = "渠道类型")
+	@Schema(description = "渠道类型")
 	private String channel;
 
-	@ApiModelProperty(value = "渠道标识")
+	@Schema(description = "渠道标识")
 	private String channelMark;
 
-	@ApiModelProperty(value = "是否开启 0-未开启，1-开启")
+	@Schema(description = "是否开启 0-未开启，1-开启")
 	private Boolean enabled;
 
-	@ApiModelProperty(value = "工作模式")
+	@Schema(description = "工作模式")
 	private Integer workMode;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
+	public String getPrimaryLanguage() {
+		return primaryLanguage;
+	}
+
+	public void setPrimaryLanguage(String primaryLanguage) {
+		this.primaryLanguage = primaryLanguage;
+	}
+
+	public String getFallback() {
+		return fallback;
+	}
+
+	public void setFallback(String fallback) {
+		this.fallback = fallback;
+	}
+
+	public String getWelcome() {
+		return welcome;
+	}
+
+	public void setWelcome(String welcome) {
+		this.welcome = welcome;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	public String getChannelMark() {
+		return channelMark;
+	}
+
+	public void setChannelMark(String channelMark) {
+		this.channelMark = channelMark;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Integer getWorkMode() {
+		return workMode;
+	}
+
+	public void setWorkMode(Integer workMode) {
+		this.workMode = workMode;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
 }

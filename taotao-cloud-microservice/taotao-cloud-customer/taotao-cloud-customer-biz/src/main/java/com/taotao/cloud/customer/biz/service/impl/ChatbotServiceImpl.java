@@ -30,6 +30,11 @@ public class ChatbotServiceImpl implements IChatbotService {
 
 	private final ChatbotRepository chatbotRepository;
 
+	public ChatbotServiceImpl(
+		ChatbotRepository chatbotRepository) {
+		this.chatbotRepository = chatbotRepository;
+	}
+
 	@Override
 	public Chatbot findChatbotById(Long id) {
 		return chatbotRepository.getOne(id);

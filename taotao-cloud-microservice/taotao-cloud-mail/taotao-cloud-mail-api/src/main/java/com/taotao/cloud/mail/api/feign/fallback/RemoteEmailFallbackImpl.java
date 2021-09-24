@@ -1,7 +1,7 @@
 package com.taotao.cloud.mail.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.mail.api.feign.RemoteEmailService;
 import com.taotao.cloud.mail.api.vo.EmailVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -19,7 +19,7 @@ public class RemoteEmailFallbackImpl implements FallbackFactory<RemoteEmailServi
 			@Override
 			public Result<EmailVO> findEmailById(Long id) {
 				LogUtil.error("调用findEmailById异常：{}", throwable, id);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 		};
 	}

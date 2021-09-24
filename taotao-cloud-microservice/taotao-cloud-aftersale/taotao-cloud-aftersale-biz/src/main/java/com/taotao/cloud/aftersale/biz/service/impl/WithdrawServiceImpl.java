@@ -32,6 +32,10 @@ public class WithdrawServiceImpl implements IWithdrawService {
 
 	private final WithdrawRepository withdrawRepository;
 
+	public WithdrawServiceImpl(WithdrawRepository withdrawRepository) {
+		this.withdrawRepository = withdrawRepository;
+	}
+
 	@Override
 	public Withdraw findWithdrawById(Long id) {
 		return withdrawRepository.getOne(id);

@@ -18,7 +18,7 @@ package com.taotao.cloud.aftersale.api.feign;
 import com.taotao.cloud.aftersale.api.feign.fallback.RemoteWithdrawFallbackImpl;
 import com.taotao.cloud.aftersale.api.vo.WithdrawVO;
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

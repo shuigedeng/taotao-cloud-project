@@ -18,11 +18,14 @@ package com.taotao.cloud.front.graphql.datafetchers;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.InputArgument;
+import java.awt.Image;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,15 +38,19 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @DgsComponent
 public class ArtworkUploadDataFetcher {
-	@DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.AddArtwork)
-	public List<Image> uploadArtwork(@InputArgument("showId") Integer showId, @InputArgument("upload") MultipartFile multipartFile) throws IOException {
+
+	@DgsData(parentType = "", field = "")
+	public List<Image> uploadArtwork(@InputArgument("showId") Integer showId,
+		@InputArgument("upload") MultipartFile multipartFile) throws IOException {
 		Path uploadDir = Paths.get("uploaded-images");
-		if(!Files.exists(uploadDir)) {
+		if (!Files.exists(uploadDir)) {
 			Files.createDirectories(uploadDir);
 		}
 
-		Path newFile = uploadDir.resolve("show-" + showId + "-" + UUID.randomUUID() + multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf(".")));
-		try(OutputStream outputStream = Files.newOutputStream(newFile)) {
+		Path newFile = uploadDir.resolve(
+			"show-" + showId + "-" + UUID.randomUUID() + multipartFile.getOriginalFilename()
+				.substring(multipartFile.getOriginalFilename().lastIndexOf(".")));
+		try (OutputStream outputStream = Files.newOutputStream(newFile)) {
 			outputStream.write(multipartFile.getBytes());
 		}
 

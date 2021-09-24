@@ -1,4 +1,3 @@
-
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
@@ -31,11 +30,10 @@ dependencies {
 
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
 
-//    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:8.0.0'
-//    implementation 'com.graphql-java-kickstart:graphql-java-tools:6.2.0'
-//    implementationOnly 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
-//    implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.5.1"
-
+    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:8.0.0'
+    implementation 'com.graphql-java-kickstart:graphql-java-tools:6.2.0'
+	implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:8.0.0'
+    implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.5.1"
 
     implementation "org.mapstruct:mapstruct"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
@@ -43,38 +41,9 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-context'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
 
-
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 //    implementation 'io.micrometer:micrometer-registry-prometheus'
 }
-
-//shadowJar {
-//    zip64 true
-//    mergeServiceFiles()
-//    classifier = null
-//    version = 1.0
-//    manifest {
-//        attributes(
-//                'Main-Class': "com.taotao.cloud.uc.biz.TaoTaoCloudUcBizApplication"
-//        )
-//    }
-//
-//    dependencies {
-//        // exclude(dependency('xml-apis:xml-apis:.*'))
-//        // exclude(dependency('xerces:xercesImpl:.*'))
-//        // exclude(dependency { it.moduleGroup == 'xml-apis' })
-//        // exclude(dependency { it.moduleGroup == 'org.apache.spark' })
-//        // exclude(dependency { it.moduleGroup == 'org.scala-lang' })
-//    }
-//
-//    //append 'META-INF/spring.handlers'
-//    //append 'META-INF/spring.schemas'
-//    //append 'META-INF/spring.tooling'
-//    //transform(PropertiesFileTransformer) {
-//    //    paths = ['META-INF/spring.factories' ]
-//    //    mergeStrategy = "append"
-//    //}
-//}
 
 configurations {
     compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"

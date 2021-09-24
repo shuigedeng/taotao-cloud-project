@@ -1,7 +1,6 @@
 package com.taotao.cloud.customer.biz.entity;
 
 import com.taotao.cloud.data.jpa.entity.BaseEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,8 +9,8 @@ import javax.persistence.Table;
  * 机器人客服表
  *
  * @author shuigedeng
- * @since 2020/11/13 09:46
  * @version 1.0.0
+ * @since 2020/11/13 09:46
  */
 @Entity
 @Table(name = "tt_chatbot")
@@ -65,17 +64,85 @@ public class Chatbot extends BaseEntity {
 	/**
 	 * 是否开启 0-未开启，1-开启
 	 */
-	@Builder.Default
 	@Column(name = "enabled", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否开启 0-未开启 1-开启'")
-	private Boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * 工作模式
-	 *
 	 * @see WorkModeEnum
 	 */
 	@Column(name = "work_mode", nullable = false, columnDefinition = "int not null default 0 comment '工作模式'")
-	@Builder.Default
-	private Integer workMode = 0;
+	private int workMode;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
+	public String getPrimaryLanguage() {
+		return primaryLanguage;
+	}
+
+	public void setPrimaryLanguage(String primaryLanguage) {
+		this.primaryLanguage = primaryLanguage;
+	}
+
+	public String getFallback() {
+		return fallback;
+	}
+
+	public void setFallback(String fallback) {
+		this.fallback = fallback;
+	}
+
+	public String getWelcome() {
+		return welcome;
+	}
+
+	public void setWelcome(String welcome) {
+		this.welcome = welcome;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+
+	public String getChannelMark() {
+		return channelMark;
+	}
+
+	public void setChannelMark(String channelMark) {
+		this.channelMark = channelMark;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public int getWorkMode() {
+		return workMode;
+	}
+
+	public void setWorkMode(int workMode) {
+		this.workMode = workMode;
+	}
 }

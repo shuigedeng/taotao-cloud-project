@@ -83,4 +83,84 @@ public class File extends BaseEntity {
 	 */
 	@Column(name = "size", nullable = false, columnDefinition = "bigint not null comment '大小'")
 	private Long size;
+
+	public Long getBizId() {
+		return bizId;
+	}
+
+	public void setBizId(Long bizId) {
+		this.bizId = bizId;
+	}
+
+	public String getBizType() {
+		return bizType;
+	}
+
+	public void setBizType(String bizType) {
+		this.bizType = bizType;
+	}
+
+	public String getDataType() {
+		return dataType;
+	}
+
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getFileMd5() {
+		return fileMd5;
+	}
+
+	public void setFileMd5(String fileMd5) {
+		this.fileMd5 = fileMd5;
+	}
+
+	public String getContextType() {
+		return contextType;
+	}
+
+	public void setContextType(String contextType) {
+		this.contextType = contextType;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getExt() {
+		return ext;
+	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+	public Long getSize() {
+		return size;
+	}
+
+	public void setSize(Long size) {
+		this.size = size;
+	}
 }

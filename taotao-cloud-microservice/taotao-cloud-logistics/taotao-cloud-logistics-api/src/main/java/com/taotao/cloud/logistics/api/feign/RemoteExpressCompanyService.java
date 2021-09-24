@@ -1,7 +1,7 @@
 package com.taotao.cloud.logistics.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logistics.api.feign.fallback.RemoteExpressCompanyFallbackImpl;
 import com.taotao.cloud.logistics.api.vo.ExpressCompanyVO;
 import org.springframework.cloud.openfeign.FeignClient;

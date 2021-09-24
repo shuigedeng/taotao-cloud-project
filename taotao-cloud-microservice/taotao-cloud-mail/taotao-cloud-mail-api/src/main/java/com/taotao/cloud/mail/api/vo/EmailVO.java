@@ -16,6 +16,7 @@
 package com.taotao.cloud.mail.api.vo;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -24,31 +25,95 @@ import java.time.LocalDateTime;
  * @since 2020/11/20 上午9:42
  * @version 1.0.0
  */
-@ApiModel(value = "邮件信息VO", description = "邮件信息VO")
+@Schema(name = "EmailVO", description = "邮件信息VO")
 public class EmailVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@ApiModelProperty(value = " 接收人邮箱(多个逗号分开)")
+	@Schema(description = " 接收人邮箱(多个逗号分开)")
 	private String receiveEmail;
 
-	@ApiModelProperty(value = "主题")
+	@Schema(description = "主题")
 	private String subject;
 
-	@ApiModelProperty(value = "发送内容")
+	@Schema(description = "发送内容")
 	private String content;
 
-	@ApiModelProperty(value = "模板")
+	@Schema(description = "模板")
 	private String template;
 
-	@ApiModelProperty(value = "发送时间")
+	@Schema(description = "发送时间")
 	private LocalDateTime sendTime;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "最后修改时间")
+	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getReceiveEmail() {
+		return receiveEmail;
+	}
+
+	public void setReceiveEmail(String receiveEmail) {
+		this.receiveEmail = receiveEmail;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	public LocalDateTime getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(LocalDateTime sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
 }

@@ -52,4 +52,43 @@ public class Email extends BaseEntity {
 	@Column(name = "send_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '发送时间'")
 	private LocalDateTime sendTime;
 
+	public String getReceiveEmail() {
+		return receiveEmail;
+	}
+
+	public void setReceiveEmail(String receiveEmail) {
+		this.receiveEmail = receiveEmail;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	public LocalDateTime getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(LocalDateTime sendTime) {
+		this.sendTime = sendTime;
+	}
 }

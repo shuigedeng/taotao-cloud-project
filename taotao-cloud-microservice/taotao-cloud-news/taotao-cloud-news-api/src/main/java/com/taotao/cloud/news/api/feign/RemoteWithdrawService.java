@@ -16,7 +16,7 @@
 package com.taotao.cloud.news.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.news.api.feign.fallback.RemoteWithdrawFallbackImpl;
 import com.taotao.cloud.news.api.vo.WithdrawVO;
 import org.springframework.cloud.openfeign.FeignClient;

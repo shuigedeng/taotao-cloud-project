@@ -6,6 +6,16 @@ WORKDIR /app
 
 COPY . /app
 
+RUN apk add --no-cache \
+            binutils-gold \
+            g++ \
+            gcc \
+            gnupg \
+            libgcc \
+            linux-headers \
+            make \
+            python3
+
 RUN npm install && npm run build
 
 ARG TAOTAO_CLOUD_HOST_ADDRESS

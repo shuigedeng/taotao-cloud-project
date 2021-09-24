@@ -1,8 +1,3 @@
-server:
-  port: 8800
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  application:
-    name: taotao-cloud-mail-service
+  profiles:
+    active: dev

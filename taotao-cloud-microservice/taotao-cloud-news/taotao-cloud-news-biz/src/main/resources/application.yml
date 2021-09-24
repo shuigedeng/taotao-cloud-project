@@ -1,8 +1,3 @@
-server:
-  port:7700
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  application:
-    name: taotao-cloud-news-service
+  profiles:
+    active: dev

@@ -17,6 +17,7 @@ package com.taotao.cloud.front.graphql.dataloaders;
 
 import com.netflix.graphql.dgs.DgsDataLoader;
 import com.taotao.cloud.front.graphql.services.DefaultReviewsService;
+import com.taotao.cloud.front.graphql.services.Review;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,7 @@ import org.dataloader.MappedBatchLoader;
  */
 @DgsDataLoader(name = "reviews")
 public class ReviewsDataLoader implements MappedBatchLoader<Integer, List<Review>> {
+
 	private final DefaultReviewsService reviewsService;
 
 	public ReviewsDataLoader(DefaultReviewsService reviewsService) {
@@ -41,12 +43,14 @@ public class ReviewsDataLoader implements MappedBatchLoader<Integer, List<Review
 	}
 
 	/**
-	 * This method will be called once, even if multiple datafetchers use the load() method on the DataLoader.
-	 * This way reviews can be loaded for all the Shows in a single call instead of per individual Show.
+	 * This method will be called once, even if multiple datafetchers use the load() method on the
+	 * DataLoader. This way reviews can be loaded for all the Shows in a single call instead of per
+	 * individual Show.
 	 */
 	@Override
 	public CompletionStage<Map<Integer, List<Review>>> load(Set<Integer> keys) {
 
-		return CompletableFuture.supplyAsync(() -> reviewsService.reviewsForShows(new ArrayList<>(keys)));
+		return CompletableFuture.supplyAsync(
+			() -> reviewsService.reviewsForShows(new ArrayList<>(keys)));
 	}
 }

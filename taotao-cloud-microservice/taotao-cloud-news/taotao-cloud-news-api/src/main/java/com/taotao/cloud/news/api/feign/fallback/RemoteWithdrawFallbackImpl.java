@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.news.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.news.api.feign.RemoteWithdrawService;
 import com.taotao.cloud.news.api.vo.WithdrawVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -34,7 +34,7 @@ public class RemoteWithdrawFallbackImpl implements FallbackFactory<RemoteWithdra
 			@Override
 			public Result<WithdrawVO> getMemberSecurityUser(Long id) {
 				LogUtil.error("调用getMemberSecurityUser异常：{}", throwable, id);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 		};
 	}

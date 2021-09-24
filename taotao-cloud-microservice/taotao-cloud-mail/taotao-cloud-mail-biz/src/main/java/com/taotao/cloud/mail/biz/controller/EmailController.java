@@ -23,6 +23,7 @@ import com.taotao.cloud.mail.biz.mapper.EmailMapper;
 import com.taotao.cloud.mail.biz.service.IEmailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/email")
-@Api(value = "物流公司管理API", tags = {"物流公司管理API"})
+@Tag(name = "物流公司管理API", description = "物流公司管理API")
 public class EmailController {
 
 	private final IEmailService emailService;
@@ -49,7 +50,7 @@ public class EmailController {
 		this.emailService = emailService;
 	}
 
-	@ApiOperation("根据id查询邮件信息")
+	@Operation(summary = "根据id查询邮件信息", description = "根据id查询邮件信息", method = CommonConstant.GET)
 	@RequestOperateLog(description = "根据id查询邮件信息")
 	@PreAuthorize("hasAuthority('email:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

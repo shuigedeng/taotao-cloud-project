@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.api.vo;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,120 +12,118 @@ import java.time.LocalDateTime;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-//@ApiModel(value = "订单VO", description = "订单VO")
+@Schema(name = "OrderVO", description = "订单VO")
 public class OrderVO implements Serializable {
 
-    private static final long serialVersionUID = 5126530068827085130L;
+	private static final long serialVersionUID = 5126530068827085130L;
 
-//    @ApiModelProperty(value = "id")
-    private Long id;
+	@Schema(description = "id")
+	private Long id;
 
-//    @ApiModelProperty(value = "买家ID")
-    private Long memberId;
+	@Schema(description = "买家ID")
+	private Long memberId;
 
-	// @ApiModelProperty(value = "优惠券id")
-    private Long couponId;
+	@Schema(description = "优惠券id")
+	private Long couponId;
 
-	//@ApiModelProperty(value = "秒杀活动id")
-    private Long seckillId;
+	@Schema(description = "秒杀活动id")
+	private Long seckillId;
 
-	// @ApiModelProperty(value = "订单编码")
-    private String code;
+	@Schema(description = "订单编码")
+	private String code;
 
-	//@ApiModelProperty(value = "订单金额")
-    private BigDecimal amount;
+	@Schema(description = "订单金额")
+	private BigDecimal amount;
 
-	// @ApiModelProperty(value = "优惠金额")
-    private BigDecimal discountAmount;
+	@Schema(description = "优惠金额")
+	private BigDecimal discountAmount;
 
-	//  @ApiModelProperty(value = "实际支付金额")
-    private BigDecimal actualAmount;
+	@Schema(description = "实际支付金额")
+	private BigDecimal actualAmount;
 
-	// @ApiModelProperty(value = "支付时间")
-    private LocalDateTime paySuccessTime;
+	@Schema(description = "支付时间")
+	private LocalDateTime paySuccessTime;
 
-	// @ApiModelProperty(value = "订单主状态")
-    private Integer mainStatus;
+	@Schema(description = "订单主状态")
+	private Integer mainStatus;
 
-	// @ApiModelProperty(value = "订单子状态")
-    private Integer childStatus;
+	@Schema(description = "订单子状态")
+	private Integer childStatus;
 
-	//  @ApiModelProperty(value = "售后主状态")
-    private Integer refundMainStatus;
+	@Schema(description = "售后主状态")
+	private Integer refundMainStatus;
 
-	//  @ApiModelProperty(value = "售后子状态")
-    private Integer refundChildStatus;
+	@Schema(description = "售后子状态")
+	private Integer refundChildStatus;
 
-    /**
-     * 是否可评价
-     * <br/>不可评价 --0
-     * <br/>可评价 --1
-     * <br/>可追评 --2
-     */
-    //@ApiModelProperty(value = "是否可评价")
-    private Integer evaluateStatus;
+	/**
+	 * 是否可评价 <br/>不可评价 --0 <br/>可评价 --1 <br/>可追评 --2
+	 */
+	@Schema(description = "是否可评价")
+	private Integer evaluateStatus;
 
-	// @ApiModelProperty(value = "申请售后code")
-    private String refundCode;
+	@Schema(description = "申请售后code")
+	private String refundCode;
 
-	// @ApiModelProperty(value = "申请售后是否撤销")
-    private Boolean hasCancel;
+	@Schema(description = "申请售后是否撤销")
+	private Boolean hasCancel;
 
-	// @ApiModelProperty(value = "发货时间")
-    private LocalDateTime shipTime;
+	@Schema(description = "发货时间")
+	private LocalDateTime shipTime;
 
-	// @ApiModelProperty(value = "收货时间")
-    private LocalDateTime receiptTime;
+	@Schema(description = "收货时间")
+	private LocalDateTime receiptTime;
 
-	// @ApiModelProperty(value = "交易结束时间")
-    private LocalDateTime tradeEndTime;
+	@Schema(description = "交易结束时间")
+	private LocalDateTime tradeEndTime;
 
-	// @ApiModelProperty(value = "交易结束时间")
-    private String receiverName;
+	@Schema(description = "交易结束时间")
+	private String receiverName;
 
-	// @ApiModelProperty(value = "收货人电话")
-    private String receiverPhone;
+	@Schema(description = "收货人电话")
+	private String receiverPhone;
 
-	// @ApiModelProperty(value = "收货地址:json的形式存储")
-    private String receiverAddressJson;
+	@Schema(description = "收货地址:json的形式存储")
+	private String receiverAddressJson;
 
-	//@ApiModelProperty(value = "冗余收货地址字符串")
-    private String receiverAddress;
+	@Schema(description = "冗余收货地址字符串")
+	private String receiverAddress;
 
-	// @ApiModelProperty(value = "买家留言")
-    private String memberMsg;
+	@Schema(description = "买家留言")
+	private String memberMsg;
 
-	// @ApiModelProperty(value = "取消订单说明")
-    private String cancelMsg;
+	@Schema(description = "取消订单说明")
+	private String cancelMsg;
 
-	// @ApiModelProperty(value = "物流公司code")
-    private String expressCode;
+	@Schema(description = "物流公司code")
+	private String expressCode;
 
-	// @ApiModelProperty(value = "物流公司名称")
-    private String expressName;
+	@Schema(description = "物流公司名称")
+	private String expressName;
 
-	// @ApiModelProperty(value = "物流单号")
-    private String expressNumber;
+	@Schema(description = "物流单号")
+	private String expressNumber;
 
-	// @ApiModelProperty(value = "买家IP")
-    private String memberIp;
+	@Schema(description = "买家IP")
+	private String memberIp;
 
-	// @ApiModelProperty(value = "是否结算")
-    private Boolean hasSettlement;
+	@Schema(description = "是否结算")
+	private Boolean hasSettlement;
 
-	//@ApiModelProperty(value = "订单类型")
-    private Integer type;
+	@Schema(description = "订单类型")
+	private Integer type;
 
-	// @ApiModelProperty(value = "条形码")
-    private String barCode;
+	@Schema(description = "条形码")
+	private String barCode;
 
-	//@ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+	@Schema(description = "创建时间")
+	private LocalDateTime createTime;
 
-	// @ApiModelProperty(value = "最后修改时间")
-    private LocalDateTime lastModifiedTime;
+	@Schema(description = "最后修改时间")
+	private LocalDateTime lastModifiedTime;
 
-    public OrderVO(){}
+	public OrderVO() {
+	}
 
 	public Long getId() {
 		return id;

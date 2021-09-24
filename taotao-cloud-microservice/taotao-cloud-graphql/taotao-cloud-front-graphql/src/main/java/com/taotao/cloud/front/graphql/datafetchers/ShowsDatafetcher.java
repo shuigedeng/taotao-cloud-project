@@ -18,10 +18,10 @@ package com.taotao.cloud.front.graphql.datafetchers;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.InputArgument;
+import com.taotao.cloud.front.graphql.services.Show;
 import com.taotao.cloud.front.graphql.services.ShowsService;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.boot.actuate.autoconfigure.health.HealthProperties.Show;
 
 /**
  * ShowsDatafetcher
@@ -32,6 +32,7 @@ import org.springframework.boot.actuate.autoconfigure.health.HealthProperties.Sh
  */
 @DgsComponent
 public class ShowsDatafetcher {
+
 	private final ShowsService showsService;
 
 	public ShowsDatafetcher(ShowsService showsService) {
@@ -39,16 +40,18 @@ public class ShowsDatafetcher {
 	}
 
 	/**
-	 * This datafetcher resolves the shows field on Query.
-	 * It uses an @InputArgument to get the titleFilter from the Query if one is defined.
+	 * This datafetcher resolves the shows field on Query. It uses an @InputArgument to get the
+	 * titleFilter from the Query if one is defined.
 	 */
-	@DgsData(parentType = DgsConstants.QUERY_TYPE, field = DgsConstants.QUERY.Shows)
+	@DgsData(parentType = "", field = "SubmittedReview")
 	public List<Show> shows(@InputArgument("titleFilter") String titleFilter) {
 		if (titleFilter == null) {
 			return showsService.shows();
 		}
 
-		return showsService.shows().stream().filter(s -> s.getTitle().contains(titleFilter)).collect(
-			Collectors.toList());
+		//return showsService.shows().stream().filter(s -> s.getTitle().contains(titleFilter))
+		//	.collect(
+		//		Collectors.toList());
+		return null;
 	}
 }

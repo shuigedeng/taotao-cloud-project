@@ -16,9 +16,9 @@
 package com.taotao.cloud.backend.graphql.resolver;
 
 import com.taotao.cloud.backend.graphql.entity.AddUserInput;
+import com.taotao.cloud.backend.graphql.entity.Article;
 import com.taotao.cloud.backend.graphql.entity.Result;
 import com.taotao.cloud.backend.graphql.entity.User;
-import com.taotao.cloud.backend.graphql.entity.Article;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.apache.logging.log4j.LogManager;
@@ -29,8 +29,8 @@ import org.springframework.stereotype.Component;
  * Resolver中的方法，入参及返回值类型，必须和graphqls文件中定义的一致，否则启动报错
  *
  * @author shuigedeng
- * @since 2020/11/9 09:55
  * @version 1.0.0
+ * @since 2020/11/9 09:55
  */
 @Component
 public class MutationResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
@@ -79,7 +79,7 @@ public class MutationResolver implements GraphQLQueryResolver, GraphQLMutationRe
 		//return userService.addUserInput(addUserInput);
 	}
 
-	public User registerUser(String mail, String nickname, String password){
+	public User registerUser(String mail, String nickname, String password) {
 		return new User();
 	}
 

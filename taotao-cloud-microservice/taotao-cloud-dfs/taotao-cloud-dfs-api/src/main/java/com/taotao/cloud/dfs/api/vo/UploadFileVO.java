@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.dfs.api.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 /**
@@ -25,13 +23,29 @@ import java.io.Serializable;
  * @since 2020/11/12 17:10
  * @version 1.0.0
  */
-@ApiModel(value = "上传文件VO", description = "上传文件VO")
+@Schema(name = "UploadFileVO", description = "上传文件VO")
 public class UploadFileVO implements Serializable {
 	private static final long serialVersionUID = 5126530068827085130L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(description = "id")
 	private Long id;
 
-	@ApiModelProperty(value = "文件路径")
+	@Schema(description = "文件路径")
 	private String url;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

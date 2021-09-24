@@ -15,14 +15,15 @@
  */
 package com.taotao.cloud.customer.biz.controller;
 
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.customer.api.vo.ChatbotVO;
 import com.taotao.cloud.customer.biz.entity.Chatbot;
 import com.taotao.cloud.customer.biz.mapper.ChatbotMapper;
 import com.taotao.cloud.customer.biz.service.IChatbotService;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,18 +35,22 @@ import org.springframework.web.bind.annotation.RestController;
  * 机器人客服管理API
  *
  * @author shuigedeng
- * @since 2020/11/13 09:58
  * @version 1.0.0
+ * @since 2020/11/13 09:58
  */
 @Validated
 @RestController
 @RequestMapping("/chatbot")
-@Api(value = "机器人客服管理API", tags = {"机器人客服管理API"})
+@Tag(name = "机器人客服管理API", description = "机器人客服管理API")
 public class ChatbotController {
 
 	private final IChatbotService chatbotService;
 
-	@ApiOperation("根据id查询机器人客服信息")
+	public ChatbotController(IChatbotService chatbotService) {
+		this.chatbotService = chatbotService;
+	}
+
+	@Operation(summary = "根据id查询机器人客服信息", description = "根据id查询机器人客服信息", method = CommonConstant.GET)
 	@RequestOperateLog(description = "根据id查询机器人客服信息")
 	@PreAuthorize("hasAuthority('chatbot:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")

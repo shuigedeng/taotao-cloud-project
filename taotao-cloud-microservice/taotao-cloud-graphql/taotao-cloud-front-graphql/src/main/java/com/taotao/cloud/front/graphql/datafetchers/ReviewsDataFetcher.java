@@ -19,16 +19,17 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import com.netflix.graphql.dgs.InputArgument;
-import com.sun.tools.javac.util.List;
 import com.taotao.cloud.front.graphql.dataloaders.ReviewsDataLoader;
 import com.taotao.cloud.front.graphql.services.DefaultReviewsService;
 import com.taotao.cloud.front.graphql.services.Review;
 import com.taotao.cloud.front.graphql.services.Show;
+import com.taotao.cloud.front.graphql.services.SubmittedReview;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 import org.dataloader.DataLoader;
 import org.reactivestreams.Publisher;
 
@@ -49,45 +50,50 @@ public class ReviewsDataFetcher {
 	}
 
 	/**
-	 * This datafetcher will be called to resolve the "reviews" field on a Show.
-	 * It's invoked for each individual Show, so if we would load 10 shows, this method gets called 10 times.
-	 * To avoid the N+1 problem this datafetcher uses a DataLoader.
-	 * Although the DataLoader is called for each individual show ID, it will batch up the actual loading to a single method call to the "load" method in the ReviewsDataLoader.
-	 * For this to work correctly, the datafetcher needs to return a CompletableFuture.
+	 * This datafetcher will be called to resolve the "reviews" field on a Show. It's invoked for
+	 * each individual Show, so if we would load 10 shows, this method gets called 10 times. To
+	 * avoid the N+1 problem this datafetcher uses a DataLoader. Although the DataLoader is called
+	 * for each individual show ID, it will batch up the actual loading to a single method call to
+	 * the "load" method in the ReviewsDataLoader. For this to work correctly, the datafetcher needs
+	 * to return a CompletableFuture.
 	 */
-	@DgsData(parentType = DgsConstants.SHOW.TYPE_NAME, field = DgsConstants.SHOW.Reviews)
+	@DgsData(parentType = "", field = "")
 	public CompletableFuture<List<Review>> reviews(DgsDataFetchingEnvironment dfe) {
 		//Instead of loading a DataLoader by name, we can use the DgsDataFetchingEnvironment and pass in the DataLoader classname.
-		DataLoader<Integer, List<Review>> reviewsDataLoader = dfe.getDataLoader(ReviewsDataLoader.class);
+		DataLoader<Integer, List<Review>> reviewsDataLoader = dfe.getDataLoader(
+			ReviewsDataLoader.class);
 
 		//Because the reviews field is on Show, the getSource() method will return the Show instance.
 		Show show = dfe.getSource();
 
 		//Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
-		return reviewsDataLoader.load(show.getId());
+		return reviewsDataLoader.load(1);
 	}
 
-	@DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.AddReview)
-	public List<Review> addReview(@InputArgument("review")SubmittedReview reviewInput) {
+	@DgsData(parentType = "", field = "")
+	public List<Review> addReview(@InputArgument("review") SubmittedReview reviewInput) {
 		reviewsService.saveReview(reviewInput);
 
-		List<Review> reviews = reviewsService.reviewsForShow(reviewInput.getShowId());
+		//List<Review> reviews = reviewsService.reviewsForShow(reviewInput.getShowId());
+		List<Review> reviews = reviewsService.reviewsForShow(1);
 
 		return Objects.requireNonNullElseGet(reviews, List::of);
 	}
 
-	@DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.AddReviews)
-	public List<Review> addReviews(@InputArgument(value = "reviews", collectionType=SubmittedReview.class) List<SubmittedReview> reviewsInput) {
+	@DgsData(parentType = "", field = "")
+	public List<Review> addReviews(
+		@InputArgument(value = "reviews", collectionType = SubmittedReview.class) List<SubmittedReview> reviewsInput) {
 		reviewsService.saveReviews(reviewsInput);
 
-		List<Integer> showIds = reviewsInput.stream().map( review -> review.getShowId() ).collect(
-			Collectors.toList());
-		Map<Integer, List<Review>> reviews = reviewsService.reviewsForShows(showIds);
+		//List<Integer> showIds = reviewsInput.stream().map(review -> review.getShowId()).collect(
+		//	Collectors.toList());
+		//Map<Integer, List<Review>> reviews = reviewsService.reviewsForShows(showIds);
+		Map<Integer, List<Review>> reviews = new HashMap<>();
 
 		return new ArrayList(reviews.values());
 	}
 
-	@DgsData(parentType = DgsConstants.SUBSCRIPTION_TYPE, field = DgsConstants.SUBSCRIPTION.ReviewAdded)
+	@DgsData(parentType = "", field = "")
 	public Publisher<Review> reviewAddedSubscription(@InputArgument("showId") Integer showId) {
 		return reviewsService.getReviewsPublisher();
 	}

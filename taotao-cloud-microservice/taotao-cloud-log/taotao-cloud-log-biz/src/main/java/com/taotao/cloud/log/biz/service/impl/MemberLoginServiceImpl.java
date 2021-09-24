@@ -34,8 +34,7 @@ public class MemberLoginServiceImpl implements IMemberLoginService {
 
 	private final MemberLoginRepository memberLoginRepository;
 
-	public MemberLoginServiceImpl(
-		MemberLoginRepository memberLoginRepository) {
+	public MemberLoginServiceImpl(MemberLoginRepository memberLoginRepository) {
 		this.memberLoginRepository = memberLoginRepository;
 	}
 

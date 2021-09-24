@@ -1,7 +1,7 @@
 package com.taotao.cloud.logistics.api.feign.fallback;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.logistics.api.feign.RemoteExpressCompanyService;
 import com.taotao.cloud.logistics.api.vo.ExpressCompanyVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -19,7 +19,7 @@ public class RemoteExpressCompanyFallbackImpl implements FallbackFactory<RemoteE
 			@Override
 			public Result<ExpressCompanyVO> findExpressCompanyById(Long id) {
 				LogUtil.error("调用findExpressCompanyById异常：{}", throwable, id);
-				return Result.failed(null, 500);
+				return Result.fail(null, 500);
 			}
 		};
 	}

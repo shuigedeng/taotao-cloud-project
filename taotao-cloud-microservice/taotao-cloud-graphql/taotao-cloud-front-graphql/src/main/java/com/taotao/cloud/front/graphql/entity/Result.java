@@ -24,4 +24,9 @@ package com.taotao.cloud.front.graphql.entity;
 public class Result {
 	private Integer respCode;
 	private String msg;
+
+	public Result(Integer respCode, String msg) {
+		this.respCode = respCode;
+		this.msg = msg;
+	}
 }

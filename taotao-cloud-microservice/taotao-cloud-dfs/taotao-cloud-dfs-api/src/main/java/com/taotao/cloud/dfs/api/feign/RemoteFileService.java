@@ -1,7 +1,7 @@
 package com.taotao.cloud.dfs.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
-import com.taotao.cloud.core.model.Result;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.dfs.api.feign.fallback.RemoteFileFallbackImpl;
 import com.taotao.cloud.dfs.api.vo.FileVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,8 +23,8 @@ public interface RemoteFileService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.dfs.api.vo.FileVO>
 	 * @author shuigedeng
-	 * @since 2020/11/20 上午11:17
 	 * @version 1.0.0
+	 * @since 2020/11/20 上午11:17
 	 */
 	@GetMapping("/file/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id);
