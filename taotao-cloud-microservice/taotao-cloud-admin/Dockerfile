@@ -19,6 +19,10 @@ ENV TAOTAO_CLOUD_MAIL_PASSWORD=xxx
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN mkdir -p /root/logs/${APP_NAME}
+
+RUN touch /root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log
+
 WORKDIR /root
 
 EXPOSE 33334
@@ -38,7 +42,7 @@ CMD sleep 10; java \
     -XX:+ExplicitGCInvokesConcurrent \
     -XX:+HeapDumpOnOutOfMemoryError \
     -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
-    -Xlog:jit+compilation=debug:file=/root/log/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+    -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
     -XX:MetaspaceSize=256m \
     -XX:MaxMetaspaceSize=256m \
     -verbose:gc \
@@ -50,7 +54,7 @@ CMD sleep 10; java \
     -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
     -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
     -Dskywalking.logging.level=INFO \
-    -Dskywalking.logging.dir=/root/logs \
+    -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
     -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
     -Dspring.profiles.active=dev \
     -jar ${JAR_NAME}

@@ -13,14 +13,14 @@
 
 	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
 
-	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue=""/>
-	<springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="taotao-cloud-sys-log"/>
+	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue="--"/>
+	<springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="--"/>
 	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
-	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/application/${APP_NAME}"/>
+	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/${APP_NAME}"/>
 	<springProperty name="LOG_MAX_FILE_SIZE" scope="context" source="logback.filesize" defaultValue="2GB"/>
 	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
 	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
-	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="0000"/>
+	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="--"/>
 	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="172.16.6.151:9092"/>
 	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="172.16.6.151:9601"/>
 
