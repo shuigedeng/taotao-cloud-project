@@ -1,10 +1,11 @@
 server:
-  port: 33334
+    port: 33334
   http2:
     enabled: true
   undertow:
     buffer-size: 2048
     direct-buffers: true
+  shutdown: graceful
 
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -24,6 +25,8 @@ arthas:
   tunnel-server: ws://172.16.6.151:7777/ws
 
 spring:
+  lifecycle:
+      timeout-per-shutdown-phase: 30s
   main:
     allow-bean-definition-overriding: true
     banner-mode: off

@@ -1,24 +1,187 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
 
-    implementation 'de.codecentric:spring-boot-admin-starter-server:2.4.0'
+	implementation 'de.codecentric:spring-boot-admin-starter-server:2.4.0'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-    // spring boot
-    implementation('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+	implementation('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+	implementation 'org.springframework.boot:spring-boot-autoconfigure'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    // spring cloud alibaba
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+bootBuildImage {
+	//builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:base"
+	//runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"
+	builder = "paketobuildpacks/builder:latest"
+	runImage = "paketobuildpacks/run:base-cnb"
+	imageName = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:${project.version}"
+	pullPolicy = "IF_NOT_PRESENT"
+	environment = [
+				   'BPL_SPRING_CLOUD_BINDINGS_ENABLED': 'true',
+
+				   'BP_IMAGE_LABELS': 'application_name=taotao-cloud-admin application_version=2021.9.3',
+				   'BP_OCI_AUTHORS': '981376577@qq.com',
+				   //'BP_OCI_CREATED': ' ',
+				   //'BP_OCI_DESCRIPTION': ' ',
+				   //'BP_OCI_DOCUMENTATION': ' ',
+				   //'BP_OCI_LICENSES': ' ',
+				   //'BP_OCI_REF_NAME': ' ',
+				   //'BP_OCI_REVISION': ' ',
+				   //'BP_OCI_SOURCE': ' ',
+				   //'BP_OCI_TITLE': ' ',
+				   //'BP_OCI_URL': ' ',
+				   //'BP_OCI_VENDOR': ' ',
+				   //'BP_OCI_VERSION': ' ',
+
+				   'BPE_APPLICATION_NAME': 'taotao-cloud-admin',
+				   'BPE_APPLICATION_VERSION': '2021.9.3',
+				   'BPE_JMX_ENABLED': "true",
+				   'BPE_LANG': "zh_CN.UTF-8",
+				   'BPE_JMX_PORT': "5000",
+				   'BPE_DEBUG_ENABLED': "true",
+				   'BPE_DEBUG_PORT': "8000",
+				   'BPE_DEBUG_SUSPEND': "true",
+				   'BPE_APPEND_JAVA_TOOL_OPTIONS': " -Xms512m " +
+						   "-Xmx2g " +
+						   "-Xss256k " +
+						   "-XX:MaxDirectMemorySize=256m " +
+						   "-XX:SurvivorRatio=8 " +
+						   "-XX:+UseCompressedOops " +
+						   "-XX:+UseCompressedClassPointers " +
+						   "-XX:+SegmentedCodeCache " +
+						   "-XX:+PrintCommandLineFlags " +
+						   "-XX:+ExplicitGCInvokesConcurrent " +
+						   "-XX:+HeapDumpOnOutOfMemoryError " +
+						   "-XX:MetaspaceSize=256m " +
+						   "-XX:MaxMetaspaceSize=256m " +
+						   "-verbose:gc " +
+						   "-XX:ParallelGCThreads=4 " +
+						   "-Djava.security.egd=file:/dev/./urandom " +
+						   "-Dfile.encoding=utf-8 " +
+						   "-javaagent:/skywalking/agent/skywalking-agent.jar " +
+						   "-Dskywalking.agent.service_name=taotao-cloud-admin " +
+						   "-Dskywalking.agent.authentication=taotao-cloud " +
+						   "-Dskywalking.logging.file_name=taotao-cloud-admin.skywalking.log " +
+						   "-Dskywalking.logging.level=INFO " +
+						   "-Dskywalking.logging.dir=/root/logs/taotao-cloud-admin " +
+						   "-Dskywalking.collector.backend_service=172.16.6.151:11800 " +
+						   "-Dspring.profiles.active=dev ",
+
+				   'BP_JVM_VERSION': '11.*',
+				   'BP_JVM_TYPE': 'JRE',
+				   'BPL_JMX_ENABLED': "true",
+				   'BPL_JMX_PORT': "5000",
+
+				   'BP_DEBUG_ENABLED': "true",
+				   'BPL_DEBUG_ENABLED': "true",
+				   'BPL_DEBUG_PORT': "8000",
+				   'BPL_DEBUG_SUSPEND': "true",
+
+				   //'HTTP_PROXY': 'http://proxy.example.com',
+				   //'HTTPS_PROXY': 'http://proxy.example.com',
+	 			  ]
+	//buildpacks = [""]
+	bindings = ["/tmp/logs/taotao-cloud-admin:/root/logs", "/opt/cloud/apache-skywalking-apm-bin/agent/:/skywalking/agent"]
+	cleanCache = false
+	verboseLogging = true
+	publish = true
+
+	docker {
+		//host = "tcp://127.0.0.1:2376"
+		//tlsVerify = true
+		//certPath = "/home/users/.minikube/certs"
+
+		builderRegistry {
+			username = System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+			password = System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+			url = "registry.cn-hangzhou.aliyuncs.com"
+		}
+
+		publishRegistry {
+			username = System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+			password = System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+			url = "registry.cn-hangzhou.aliyuncs.com"
+		}
+	}
+}
+
+jib {
+	//https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
+	allowInsecureRegistries = true
+	from {
+		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.7.0-es7'
+		auth {
+			username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+			password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+		}
+	}
+	to {
+		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin'
+		tags = ["${project.name}-${project.version}"]
+		auth {
+			username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+			password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+		}
+	}
+	container {
+		creationTime = 'USE_CURRENT_TIMESTAMP'
+		jvmFlags = ['-Djava.security.egd=file:/dev/./urandom',
+					'-Dspring.profiles.active=dev',
+					'-Dfile.encoding=utf-8',
+					'-Duser.timezone=Asia/Shanghai']
+		mainClass = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
+		args = ['some', 'args']
+		ports = ['33337']
+		labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
+		environment = ['app_name': 'taotao-cloud-uc', 'port': '33337']
+		format = 'OCI'
+		user = 'root'
+		volumes = ['/root/logs']
+		workingDirectory = '/root'
+	}
+//	extraDirectories { it ->
+//		it.pathStrings
+//	}
+//	dockerClient { it ->
+//		it.environment
+//	}
+//	outputPaths { it ->
+//		it.digest
+//	}
+//	skaffold { it ->
+//		it.sync( a -> {
+//			a.excludes
+//		})
+//	}
+//	pluginExtensions { it ->
+//		it.pluginExtension( a -> {
+//			a.implementation
+//		})
+//	}
+}
+
+shadowJar {
+    zip64 true
+    mergeServiceFiles()
+    classifier = null
+	mainClassName = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
+//    manifest {
+//        attributes(
+//                'Main-Class': "com.taotao.cloud.admin.TaoTaoCloudAdminApplication"
+//        )
+//    }
+}
+
+

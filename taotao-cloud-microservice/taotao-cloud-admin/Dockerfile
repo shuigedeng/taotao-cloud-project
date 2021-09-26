@@ -1,33 +1,60 @@
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk11:alpine
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.7.0-es7
+ARG BACKEND_SERVICE=172.16.6.151:11800
+ARG AGENT_AUTHENTICATION=taotao-cloud
+ARG TAOTAO_CLOUD_MAIL_PASSWORD=vwdrmsvmevosbeed
+ARG APP_NAME='taotao-cloud-admin'
+ARG APP_VERSION='2021.9.3'
+ARG JAR=${APP_NAME}-${VERSION}
+ARG JAR_NAME=${JAR}.jar
+ARG APP_PORT=33334
 
-MAINTAINER 981376577@qq.com
-
-ENV TZ=Asia/Shanghai
-
-ENV APP_NAME=taotao-cloud-admin
-
-ENV VERSION=2021.9.3
-
-ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
-
-ENV BACKEND_SERVICE=172.16.6.151:11800
-
-ENV AGENT_AUTHENTICATION=taotao-cloud
-
-ENV TAOTAO_CLOUD_MAIL_PASSWORD=xxx
-
-RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN mkdir -p /root/logs/${APP_NAME}
-
-RUN touch /root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log
+#FROM openjdk:11.0.6-jdk-stretch as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.6.0 as builder
 
 WORKDIR /root
 
-EXPOSE 33334
+ADD ./build/libs/taotao-cloud-admin-2021.9.3.jar ./
 
-ADD ./build/libs/${JAR_NAME} ./
+RUN java -Djarmode=layertools -jar taotao-cloud-admin-2021.9.3.jar extract
+
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.7.0-es7
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.6.0
+
+LABEL application_name=${APP_NAME}
+LABEL application_version=${APP_VERSION}
+LABEL org.opencontainers.image.authors='981376577@qq.com'
+
+ENV TZ=Asia/Shanghai
+ENV APP_NAME=${APP_NAME}
+ENV VERSION=${APP_VERSION}
+ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
+ENV BACKEND_SERVICE=${BACKEND_SERVICE}
+ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
+ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
+ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport"
+
+USER root
+
+WORKDIR /root
+
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+	  && echo $TZ > /etc/timezone \
+    && mkdir -p /root/logs/${APP_NAME} \
+	  && touch /root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log /root/logs/${APP_NAME}/${APP_NAME}.gc.log \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+    && apk add curl
+
+VOLUME /root/logs
+
+EXPOSE ${APP_PORT}
+
+COPY --from=builder /root/dependencies/ ./
+COPY --from=builder /root/spring-boot-loader/ ./
+COPY --from=builder /root/snapshot-dependencies/ ./
+COPY --from=builder /root/application/ ./
+
+HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+
+#ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 
 CMD sleep 10; java \
     -Xms512m \
@@ -57,5 +84,6 @@ CMD sleep 10; java \
     -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
     -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
     -Dspring.profiles.active=dev \
-    -jar ${JAR_NAME}
+    org.springframework.boot.loader.JarLauncher
+#    -jar ${JAR_NAME}
 

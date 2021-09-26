@@ -107,9 +107,9 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.8'
-        classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:2.8.0"
+        classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:3.1.4"
 
-//        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
     }
 }
 
@@ -119,7 +119,7 @@ plugins {
     id 'idea'
     id 'signing'
     id 'maven-publish'
-    id "com.google.cloud.tools.jib" version "2.8.0"
+    id "com.google.cloud.tools.jib" version "3.1.4"
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id "com.github.johnrengelman.processes" version "0.5.0"
     id "org.springdoc.openapi-gradle-plugin" version "1.3.0"
@@ -176,11 +176,13 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'signing'
     apply plugin: 'checkstyle'
     apply plugin: 'maven-publish'
+	apply plugin: 'application'
     apply plugin: 'org.springframework.boot'
-    apply plugin: "com.google.cloud.tools.jib"
     apply plugin: "org.springdoc.openapi-gradle-plugin"
 
-//    apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "com.google.cloud.tools.jib"
+    apply plugin: "com.github.johnrengelman.shadow"
+
     apply plugin: "com.taotao.cloud.plugin"
 
     dependencies {
