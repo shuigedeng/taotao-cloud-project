@@ -22,7 +22,7 @@ dependencies {
 }
 
 bootBuildImage {
-	//builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:base"
+	//builder = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-builder:latest"
 	//runImage = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-run:base-cnb"
 	builder = "paketobuildpacks/builder:latest"
 	runImage = "paketobuildpacks/run:base-cnb"
