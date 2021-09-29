@@ -29,6 +29,7 @@ import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -73,6 +74,7 @@ public class RouterFunctionConfiguration {
 		ImageCodeHandler imageCodeWebHandler,
 		FaviconHandler faviconHandler,
 		HealthReportHandler healthReportHandler,
+		K8sHandler k8sHandler,
 		ApiProperties apiProperties) {
 		return RouterFunctions
 			.route(RequestPredicates.path(FALLBACK)
@@ -82,8 +84,9 @@ public class RouterFunctionConfiguration {
 			.andRoute(RequestPredicates.GET(FAVICON)
 				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler)
 			.andRoute(RequestPredicates.GET(HEALTH_REPORT)
-					.and(RequestPredicates.accept(MediaType.ALL)),
-				healthReportHandler);
+					.and(RequestPredicates.accept(MediaType.ALL)), healthReportHandler)
+			.andRoute(RequestPredicates.GET("/k8s")
+				.and(RequestPredicates.accept(MediaType.ALL)), k8sHandler);
 	}
 
 
@@ -137,6 +140,34 @@ public class RouterFunctionConfiguration {
 			}
 			message.append("]");
 			return message.toString();
+		}
+	}
+
+	/**
+	 * 图形验证码处理器
+	 *
+	 * @author shuigedeng
+	 * @version 1.0.0
+	 * @since 2020/4/29 22:11
+	 */
+	@Component
+	public class K8sHandler implements HandlerFunction<ServerResponse> {
+
+		@Override
+		public Mono<ServerResponse> handle(ServerRequest request) {
+			try {
+				String hostName = InetAddress.getLoopbackAddress().getHostAddress();
+
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.bodyValue(hostName);
+			} catch (Exception e) {
+				return ServerResponse
+					.status(HttpStatus.HTTP_OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
+			}
 		}
 	}
 

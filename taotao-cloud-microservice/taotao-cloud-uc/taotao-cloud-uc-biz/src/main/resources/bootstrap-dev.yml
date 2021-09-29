@@ -10,7 +10,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-uc
+    name: taotao-cloud-uc-biz
   cloud:
     loadbalancer:
       enabled: true

@@ -50,6 +50,10 @@ spec:
         - name: taotao-cloud-gateway
           image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2021.9.3
           imagePullPolicy: IfNotPresent
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
           ports:
             - name: taotao-cloud-gateway-port
               containerPort: 33333
@@ -85,6 +89,7 @@ spec:
           lifecycle:
             postStart:
               exec:
+                #command: [ "/bin/sh", "-c", "until curl 127.0.0.0:33334/actuator/health;; do echo waiting for admin; sleep 20; done;" ]
                 command:
                   - /bin/sh
                   - -c
@@ -113,19 +118,19 @@ spec:
               memory: 2048Mi
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: 33334
               scheme: HTTP
-            initialDelaySeconds: 180
+            initialDelaySeconds: 120
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
             failureThreshold: 5
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/readiness
               port: 33334
-            initialDelaySeconds: 180
+            initialDelaySeconds: 120
             timeoutSeconds: 5
             periodSeconds: 60
             successThreshold: 1
@@ -335,6 +340,340 @@ spec:
                   - sh
                   - -c
                   - sleep 30
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taotao-cloud
+  namespace: taotao-cloud-dev
+  labels:
+    app: taotao-cloud
+    version: 2021.9.3
+    kubernetes.io/cluster-service: "true"
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: taotao-cloud
+      version: 2021.9.3
+      kubernetes.io/cluster-service: "true"
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: taotao-cloud
+        version: 2021.9.3
+        kubernetes.io/cluster-service: "true"
+    spec:
+      terminationGracePeriodSeconds: 30
+        #initContainers:
+        #- name: taotao-cloud-gateway-init
+        #image: yauritux/busybox-curl:latest
+        #imagePullPolicy: IfNotPresent
+        #command: [ "/bin/sh", "-c", "until curl 127.0.0.0:33334/actuator/health;; do echo waiting for admin; sleep 20; done;" ]
+      #args: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != '200' ]]; do echo Waiting for springboot;sleep 5; done; echo springboot available
+      containers:
+        - name: taotao-cloud-gateway
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-gateway-port
+              containerPort: 33333
+          env:
+            - name: applicationName
+              value: taotao-cloud-gateway
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33333
+              scheme: HTTP
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33333
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                #command: [ "/bin/sh", "-c", "until curl 127.0.0.0:33334/actuator/health;; do echo waiting for admin; sleep 20; done;" ]
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud gateway postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+        - name: taotao-cloud-admin
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-admin-port
+              containerPort: 33334
+          env:
+            - name: applicationName
+              value: taotao-cloud-admin
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 33334
+              scheme: HTTP
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 33334
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud admin postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+        - name: taotao-cloud-xxl-job-admin
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-xxl-job-admin-port
+              containerPort: 33335
+          env:
+            - name: applicationName
+              value: taotao-cloud-xxl-job-admin
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33335
+              scheme: HTTP
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33335
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud xxl job postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+        - name: taotao-cloud-oauth2-server
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-oauth2-server-port
+              containerPort: 33336
+          env:
+            - name: applicationName
+              value: taotao-cloud-oauth2-server
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33336
+              scheme: HTTP
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33336
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud oauth2 postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+        - name: taotao-cloud-uc-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-uc-biz-port
+              containerPort: 33337
+          env:
+            - name: applicationName
+              value: taotao-cloud-uc-biz
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33337
+              scheme: HTTP
+            initialDelaySeconds: 360
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33337
+            initialDelaySeconds: 360
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud uc postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+        - name: taotao-cloud-order-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.9.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: taotao-cloud-order-biz-port
+              containerPort: 33338
+          env:
+            - name: applicationName
+              value: taotao-cloud-order-biz
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 2
+              memory: 2048Mi
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33338
+              scheme: HTTP
+            initialDelaySeconds: 360
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 33338
+            initialDelaySeconds: 360
+            timeoutSeconds: 5
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 5
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - echo 'taotao cloud order postStart success' >> /root/postStart
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - sleep 30
+
 ---
 
 apiVersion: v1

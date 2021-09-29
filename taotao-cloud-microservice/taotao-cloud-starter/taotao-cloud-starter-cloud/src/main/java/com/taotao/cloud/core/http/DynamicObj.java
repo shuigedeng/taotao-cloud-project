@@ -104,11 +104,11 @@ public class DynamicObj {
 		} else if ("Object".equals(name)) {
 			return (T) jsonNode;
 		} else if ("Long".equals(name)) {
-			return (T) new Long(jsonNode.asLong());
+			return (T) Long.valueOf(jsonNode.asLong());
 		} else if ("Int".equals(name)) {
-			return (T) new Integer(jsonNode.asInt());
+			return (T) Integer.valueOf(jsonNode.asInt());
 		} else if ("Boolean".equals(name)) {
-			return (T) new Boolean(jsonNode.asBoolean());
+			return (T) Boolean.valueOf(jsonNode.asBoolean());
 		}
 		return null;
 	}

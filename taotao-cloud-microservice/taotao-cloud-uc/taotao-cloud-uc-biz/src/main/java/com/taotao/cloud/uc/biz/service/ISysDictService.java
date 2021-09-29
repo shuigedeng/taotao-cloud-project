@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 字典表 服务类
  *
- * @author shuigedeng
+ 
  * @since 2020/4/30 11:18
  */
 public interface ISysDictService {
@@ -21,9 +21,9 @@ public interface ISysDictService {
      * @param sysDict
      *        sysDict
      * @return com.taotao.cloud.uc.biz.entity.SysDict
-     * @author shuigedeng
+     
      * @since 2020/10/15 09:35
-     * @version 1.0.0
+     
      */
     SysDict save(SysDict sysDict);
 
@@ -31,9 +31,9 @@ public interface ISysDictService {
      * 查询所有字典集合
      *
      * @return java.util.List<com.taotao.cloud.uc.biz.entity.SysDict>
-     * @author shuigedeng
+     
      * @since 2020/10/15 09:36
-     * @version 1.0.0
+     
      */
     List<SysDict> getAll();
 
@@ -43,9 +43,9 @@ public interface ISysDictService {
      * @param page          page
      * @param dictPageQuery dictPageQuery
      * @return org.springframework.data.domain.Page<com.taotao.cloud.uc.biz.entity.SysDict>
-     * @author shuigedeng
+     
      * @since 2020/10/15 09:36
-     * @version 1.0.0
+     
      */
     Page<SysDict> getPage(Pageable page, DictPageQuery dictPageQuery);
 
@@ -54,9 +54,9 @@ public interface ISysDictService {
      *
      * @param id id
      * @return java.lang.Boolean
-     * @author shuigedeng
+     
      * @since 2020/10/15 09:36
-     * @version 1.0.0
+     
      */
     Boolean removeById(Long id);
 
@@ -65,9 +65,9 @@ public interface ISysDictService {
      *
      * @param code code
      * @return java.lang.Boolean
-     * @author shuigedeng
+     
      * @since 2020/10/15 09:36
-     * @version 1.0.0
+     
      */
     Boolean deleteByCode(String code);
 

@@ -43,6 +43,8 @@ public class SecurityProperties {
 		"/health/**",
 		"/css/**",
 		"/js/**",
+		"/k8s/**",
+		"/k8s",
 		"/images/**"
 	};
 

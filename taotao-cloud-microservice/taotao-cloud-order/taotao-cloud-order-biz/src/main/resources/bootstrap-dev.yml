@@ -1,11 +1,16 @@
 server:
-  port: 33334
+  port: 33338
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
 
 spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: taotao-cloud-admin
+    name: taotao-cloud-order-biz
   cloud:
     loadbalancer:
       enabled: true
@@ -25,3 +30,9 @@ spring:
         server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml
+    sentinel:
+      enabled: true
+      eager: true
+      transport:
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8712}

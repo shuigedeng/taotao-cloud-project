@@ -2,7 +2,7 @@
 
 current_dir=`dirname $(pwd)`
 
-JAVA_HOME="/opt/common/jdk-11.0.2"
+JAVA_HOME="/opt/common/jdk-17"
 
 VERSION="2021.9.3"
 
@@ -14,10 +14,14 @@ function build_dockerfile() {
         cd $microservice_dir"/"$microservice
         gradle clean bootJar -Dorg.gradle.java.home=$JAVA_HOME
 
-        val=`ls . | grep Dockerfile | wc -w`
-		if [[ $val -eq 1 ]]; then
-		  docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$microservice:$VERSION .
-		fi
+        dockerfile=`ls . | grep Dockerfile | wc -w`
+        if [[ $dockerfile -eq 1 ]]; then
+          docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$microservice:$VERSION .
+        fi
+        kubernetes=`ls . | grep kubernetes | wc -w`
+        if [[ $kubernetes -eq 1 ]]; then
+          kubectl apply -f  kubernetes.yml
+        fi
 
         for item in $(ls $microservice_dir"/"$microservice)
         do
@@ -25,10 +29,14 @@ function build_dockerfile() {
           	cd $microservice_dir"/"$microservice"/"$item
           	gradle clean bootJar -Dorg.gradle.java.home=$JAVA_HOME
 
-          	v=`ls . | grep Dockerfile | wc -w`
-		  	if [[ $v -eq 1 ]]; then
-		  	  docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$item:$VERSION .
-		  	fi
+          	biz_dockerfile=`ls . | grep Dockerfile | wc -w`
+            if [[ $biz_dockerfile -eq 1 ]]; then
+              docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$item:$VERSION .
+            fi
+            biz_kubernetes=`ls . | grep kubernetes | wc -w`
+            if [[ $biz_kubernetes -eq 1 ]]; then
+              kubectl apply -f  kubernetes.yml
+            fi
           fi
         done
       fi

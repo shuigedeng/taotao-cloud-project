@@ -1,11 +1,26 @@
 server:
-    port: 33334
+  port: 33334
   http2:
     enabled: true
   undertow:
     buffer-size: 2048
     direct-buffers: true
-  shutdown: graceful
+    threads:
+      io: 16
+      worker: 256
+    accesslog:
+      dir: ${user.home}/logs/undertow
+      enabled: true
+  servlet:
+    application-display-name: ${spring.application.name}
+
+jasypt:
+  encryptor:
+    password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    property:
+      prefix: "ENC@["
+      suffix: "]"
 
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -26,7 +41,7 @@ arthas:
 
 spring:
   lifecycle:
-      timeout-per-shutdown-phase: 30s
+    timeout-per-shutdown-phase: 30s
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
@@ -68,23 +83,34 @@ spring:
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    connect-timeout: 60000
     lettuce:
       pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
+        max-active: 1500
+        max-wait: 5000
+        max-idle: 500
+        min-idle: 100
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
-      retries: 0
+      retries: 1
       batch-size: 16384
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       acks: 0
       properties:
-        linger.ms: 500
+        linger.ms: 100
+    consumer:
+      auto-commit-interval: 1S
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 5
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
 
 taotao:
   cloud:

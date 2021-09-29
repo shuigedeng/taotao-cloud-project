@@ -44,6 +44,13 @@
 
 
 ## 4. dependencies
+Requires:
+```
+JAVA_VERSION >= 17
+GRALE_VERSION >= 7.2
+IDEA_VERSION >= 2021.2.1
+```
+
 Gradle:
 ```
 dependencyManagement{

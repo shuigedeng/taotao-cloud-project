@@ -2,7 +2,7 @@
 
 current_dir=`dirname $(pwd)`
 
-JAVA_HOME="/opt/common/jdk-11.0.2"
+JAVA_HOME="/opt/common/jdk-17"
 #JAVA_HOME="/Users/dengtao/software/jdk-11.0.7/Contents/Home"
 
 function deploy_dependencies() {

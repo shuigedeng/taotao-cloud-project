@@ -431,9 +431,7 @@ public class MonitorThreadPool {
 		private final String namePrefix;
 
 		public MonitorThreadPoolFactory(String namePrefix) {
-			SecurityManager s = System.getSecurityManager();
-			group = (s != null) ? s.getThreadGroup() :
-				Thread.currentThread().getThreadGroup();
+			this.group = Thread.currentThread().getThreadGroup();
 
 			this.namePrefix = namePrefix + "-pool-" + poolNumber.getAndIncrement();
 		}

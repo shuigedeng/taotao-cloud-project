@@ -1,5 +1,5 @@
 server:
-  port: 33337
+  port: 33338
   http2:
     enabled: true
   undertow:
@@ -9,7 +9,7 @@ server:
       io: 16
       worker: 256
     accesslog:
-      dir: ${user.home}/logs/undertow
+      dir: ${user.home}/logs/undertow/${spring.application.name}
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}
@@ -27,18 +27,6 @@ redisson:
   single-server-config:
     address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
-arthas:
-  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
-  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
-  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
-  telnetPort: -1
-  httpPort: -1
-  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
-  ip: 0.0.0.0
-  agent-id: ${spring.application.name}
-  app-name: ${spring.application.name}
-  tunnel-server: ws://172.16.6.151:7777/ws
-
 dubbo:
   application:
     id: ${spring.application.name}
@@ -53,7 +41,7 @@ dubbo:
     port: -1
     #serialization: kryo
   cloud:
-    subscribed-services: 'taotao-cloud-order'
+    subscribed-services: 'taotao-cloud-order-biz'
   scan:
     base-packages: com.taotao.cloud.*.biz.service.impl
   provider:
@@ -90,14 +78,24 @@ seata:
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: default
 
+arthas:
+  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+  telnetPort: -1
+  httpPort: -1
+  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0
+  agent-id: ${spring.application.name}
+  app-name: ${spring.application.name}
+  tunnel-server: ws://172.16.6.151:7777/ws
+
 spring:
-  lifecycle:
-    timeout-per-shutdown-phase: 30s
+  application:
+    name: taotao-cloud-order-biz
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
-  application:
-    name: taotao-cloud-uc-biz
   mvc:
     servlet:
       load-on-startup: 1
@@ -181,13 +179,13 @@ spring:
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-    connect-timeout: 60000
     lettuce:
       pool:
         max-active: 1500
         max-wait: 5000
         max-idle: 500
         min-idle: 100
+    connect-timeout: 60000
   data:
     elasticsearch:
       repositories:
@@ -427,7 +425,7 @@ spring:
 taotao:
   cloud:
     disruptor:
-      enabled: true
+      enabled: false
       multi-producer: false
       ring-buffer-size: 1024
       ring-thread-numbers: 4
@@ -435,7 +433,7 @@ taotao:
       # - /Event-DC-Output/TagA-Output/** = emailHandler
       # - /Event-DC-Output/TagB-Output/** = smsHandler
     dinger:
-      enabled: true
+      enabled: false
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
@@ -528,7 +526,7 @@ taotao:
           ip:
           port: 1113
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/xxl-job
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
     feign:
       enabled: true
       loadbalancer:
