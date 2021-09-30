@@ -173,7 +173,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - echo 'taotao cloud admin postStart success' >> /root/postStart
+                  - mkdir -p /root/logs/taotao-cloud-uc-biz && touch /root/logs/taotao-cloud-uc-biz/jit.compile.log /root/logs/taotao-cloud-uc-biz/gc.log
             preStop:
               exec:
                 command:

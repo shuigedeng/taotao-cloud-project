@@ -698,19 +698,53 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k8s-ingress
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
+  name: k8s-ingress-gateway
 spec:
   ingressClassName: nginx-default
   rules:
-    - host: www.taotaocloud.com
+    - host: gateway.taotaocloud.com
       http:
         paths:
-          - path: /gateway
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: taotao-cloud-gateway
                 port:
                   number: 33333
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-ingress-admin
+spec:
+  ingressClassName: nginx-default
+  rules:
+    - host: admin.taotaocloud.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: taotao-cloud-admin
+                port:
+                  number: 33334
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-ingress-xxljob
+spec:
+  ingressClassName: nginx-default
+  rules:
+    - host: xxljob.taotaocloud.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: taotao-cloud-xxl-job-admin
+                port:
+                  number: 33335

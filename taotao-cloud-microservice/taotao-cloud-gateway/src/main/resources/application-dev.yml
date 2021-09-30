@@ -113,8 +113,8 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
-        - id: taotao-cloud-uc
-          uri: lb://taotao-cloud-uc
+        - id: taotao-cloud-uc-biz
+          uri: lb://taotao-cloud-uc-biz
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/uc/**
           filters:
@@ -128,8 +128,8 @@ spring:
                 key-resolver: '#{@remoteAddrKeyResolver}'
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
-        - id: taotao-cloud-order
-          uri: lb://taotao-cloud-order
+        - id: taotao-cloud-order-biz
+          uri: lb://taotao-cloud-order-biz
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
@@ -180,7 +180,7 @@ spring:
       #            - PreserveHostHeader
       #        # 数据重复校验要做接口限制
       #        - id: uc-repeact-check
-      #          uri: lb://taotao-cloud-uc
+      #          uri: lb://taotao-cloud-uc-biz
       #          predicates:
       #            - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
       #          filters:
@@ -193,8 +193,8 @@ spring:
       #            - Path=/v3/api-docs/**
       #          filters:
       #            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-      #        - id: taotao-cloud-uc-service
-      #          uri: lb://taotao-cloud-uc-service
+      #        - id: taotao-cloud-uc-biz-service
+      #          uri: lb://taotao-cloud-uc-biz-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/user/**
       #          filters:
@@ -218,8 +218,8 @@ spring:
       #                key-resolver: '#{@remoteAddrKeyResolver}'
       #                redis-rate-limiter.replenishRate: 10
       #                redis-rate-limiter.burstCapacity: 20
-      #        - id: taotao-cloud-order-service
-      #          uri: lb://taotao-cloud-order-service
+      #        - id: taotao-cloud-order-biz-service
+      #          uri: lb://taotao-cloud-order-biz-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/order/**
       #          filters:

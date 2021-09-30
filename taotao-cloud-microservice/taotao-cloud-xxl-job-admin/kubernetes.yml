@@ -150,13 +150,13 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - echo 'taotao cloud admin postStart success' >> /root/postStart
+                  - mkdir -p /root/logs/taotao-cloud-xxl-job-admin && touch /root/logs/taotao-cloud-xxl-job-admin/jit.compile.log /root/logs/taotao-cloud-xxl-job-admin/gc.log
             preStop:
               exec:
                 command:
                   - sh
                   - -c
-                  - sleep 30
+                  - sleep 10
 ---
 apiVersion: v1
 kind: Service

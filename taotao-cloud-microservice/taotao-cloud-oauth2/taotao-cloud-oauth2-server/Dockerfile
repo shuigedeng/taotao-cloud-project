@@ -15,6 +15,7 @@ ARG APP_VERSION=2021.9.3
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33336
+ARG PRROFILES=dev
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -27,6 +28,7 @@ ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
 ENV BACKEND_SERVICE=${BACKEND_SERVICE}
 ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
 ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
+ENV PRROFILES=${PRROFILES}
 ENV JAVA_OPTIONS="-Xms512m \
                   -Xmx2g \
                   -Xss256k \
@@ -38,8 +40,8 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -XX:+PrintCommandLineFlags \
                   -XX:+ExplicitGCInvokesConcurrent \
                   -XX:+HeapDumpOnOutOfMemoryError \
-                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
-                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
+                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=256m \
                   -verbose:gc \
@@ -49,11 +51,11 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
+                  -Dskywalking.logging.file_name=skywalking.log \
                   -Dskywalking.logging.level=INFO \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
-                  -Dspring.profiles.active=dev"
+                  -Dspring.profiles.active=${PRROFILES}"
 
 USER root
 
@@ -62,7 +64,7 @@ WORKDIR /root
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 	  && echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log /root/logs/${APP_NAME}/${APP_NAME}.gc.log \
+	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
     && apk add curl
 
@@ -75,6 +77,6 @@ COPY --from=builder /root/spring-boot-loader/ ./
 COPY --from=builder /root/snapshot-dependencies/ ./
 COPY --from=builder /root/application/ ./
 
-HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
