@@ -18,10 +18,10 @@ function build_dockerfile() {
         if [[ $dockerfile -eq 1 ]]; then
           docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$microservice:$VERSION .
         fi
-        kubernetes=`ls . | grep kubernetes | wc -w`
-        if [[ $kubernetes -eq 1 ]]; then
-          kubectl apply -f  kubernetes.yml
-        fi
+        #kubernetes=`ls . | grep kubernetes | wc -w`
+        #if [[ $kubernetes -eq 1 ]]; then
+        #  kubectl apply -f  kubernetes.yml
+        #fi
 
         for item in $(ls $microservice_dir"/"$microservice)
         do
@@ -33,10 +33,10 @@ function build_dockerfile() {
             if [[ $biz_dockerfile -eq 1 ]]; then
               docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/$item:$VERSION .
             fi
-            biz_kubernetes=`ls . | grep kubernetes | wc -w`
-            if [[ $biz_kubernetes -eq 1 ]]; then
-              kubectl apply -f  kubernetes.yml
-            fi
+            #biz_kubernetes=`ls . | grep kubernetes | wc -w`
+            #if [[ $biz_kubernetes -eq 1 ]]; then
+            #  kubectl apply -f  kubernetes.yml
+            #fi
           fi
         done
       fi

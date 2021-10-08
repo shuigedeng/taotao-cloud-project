@@ -1,18 +1,26 @@
 #!/bin/bash
 
+current_dir=`dirname $(pwd)`
+
 JAVA_HOME="/opt/common/jdk-17"
 #JAVA_HOME="/Users/dengtao/software/jdk-11.0.7/Contents/Home"
 
+function install_dependencies() {
+    cd $current_dir/taotao-cloud-dependencies
+    gradle publishToMavenLocal -Dorg.gradle.java.home=$JAVA_HOME
+}
+
 function build_starters() {
-    for file in `ls $1`
+    starter_dir=$current_dir/taotao-cloud-microservice/taotao-cloud-starter
+    for starter in `ls $starter_dir`
     do
-      if [ -d $1"/"$file ];then
-        cd $1"/"$file
+      if [ -d $starter_dir"/"$starter ];then
+        cd $starter_dir"/"$starter
         gradle clean build -Dorg.gradle.java.home=$JAVA_HOME
       fi
     done
-
-    cd .
 }
 
-build_starters $(dirname $(pwd))/taotao-cloud-microservice/taotao-cloud-starter
+install_dependencies
+
+build_starters

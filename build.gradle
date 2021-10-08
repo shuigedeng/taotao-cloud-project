@@ -124,7 +124,7 @@ plugins {
     id "com.github.johnrengelman.processes" version "0.5.0"
     id "org.springdoc.openapi-gradle-plugin" version "1.3.0"
     id "com.github.shalousun.smart-doc" version "2.2.7"
-//    id "org.jetbrains.intellij" version "0.6.5"
+    //id "org.jetbrains.intellij" version "0.6.5"
 }
 
 allprojects {
@@ -182,7 +182,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "com.github.shalousun.smart-doc"
 
     apply plugin: "com.google.cloud.tools.jib"
-    apply plugin: "com.github.johnrengelman.shadow"
+    //apply plugin: "com.github.johnrengelman.shadow"
 
     apply plugin: "com.taotao.cloud.plugin"
 
@@ -196,7 +196,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
         toolVersion = "8.14"
         configFile = file("${rootDir}/checkstyle/google_checks.xml")
-//        configFile = rootProject.file('quality/google_checks.xml')
+        //configFile = rootProject.file('quality/google_checks.xml')
 
         // The source sets to be analyzed as part of the check and build tasks.
         // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
@@ -225,7 +225,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     }
 
     task sourcesJar(type: Jar) {
-//        from sourceSets.main.allJava
+        //from sourceSets.main.allJava
         from sourceSets.main.allSource
 
         archiveClassifier = 'sources'
@@ -241,18 +241,18 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         classifier = null
     }
 
-//    shadowJar {
-//        zip64 true
-//        mergeServiceFiles()
-//        classifier = null
-//
-////        finalizedBy(javadocJar, sourcesJar)
-//    }
+    //shadowJar {
+    //    zip64 true
+    //    mergeServiceFiles()
+    //    classifier = null
+    //
+    //      finalizedBy(javadocJar, sourcesJar)
+    //}
 
     publishing {
         repositories {
             maven {
-//                https://repomanage.rdc.aliyun.com/
+                //https://repomanage.rdc.aliyun.com/
                 name = "Aliyun"
                 if (project.version.endsWith('-SNAPSHOT')) {
                     url = "https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/"
@@ -300,7 +300,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
                 //打包类型 war: components.web jar: components.java
                 from components.java
 
-//                artifact shadowJar
+                // artifact shadowJar
                 artifact sourcesJar
                 artifact javadocJar
 

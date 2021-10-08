@@ -21,6 +21,8 @@ function deploy_starters() {
     done
 }
 
+./build_starters.sh
+
 deploy_dependencies publishAllPublicationsToSonatypeRepository 
 deploy_starters publishAllPublicationsToSonatypeRepository
 
