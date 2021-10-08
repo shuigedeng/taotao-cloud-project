@@ -70,7 +70,7 @@
 		<appender-ref ref="FILE_ALL_ASYNC"/>
 		<appender-ref ref="FILE_WARN_ASYNC"/>
 		<appender-ref ref="FILE_ERROR_ASYNC"/>
-<!--		<appender-ref ref="KAFKA"/>-->
+		<appender-ref ref="KAFKA"/>
 <!--		<appender-ref ref="LOGSTASH_ASYNC"/>-->
 	</root>
 
@@ -80,7 +80,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-<!--			<appender-ref ref="KAFKA"/>-->
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -90,7 +90,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-<!--			<appender-ref ref="KAFKA"/>-->
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -100,7 +100,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-<!--			<appender-ref ref="KAFKA"/>-->
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
@@ -110,7 +110,7 @@
 			<appender-ref ref="FILE_ALL_ASYNC"/>
 			<appender-ref ref="FILE_WARN_ASYNC"/>
 			<appender-ref ref="FILE_ERROR_ASYNC"/>
-<!--			<appender-ref ref="KAFKA"/>-->
+			<appender-ref ref="KAFKA"/>
 <!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
 		</root>
 	</springProfile>
