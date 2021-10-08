@@ -18,7 +18,7 @@ spec:
       containers:
         - name: taotao-cloud-order-biz
           #image: 192.168.99.240:8443/taotao-cloud/taotao-cloud-order-biz:${CICD_EXECUTION_SEQUENCE}
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.9.3
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.10.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: taotao-cloud-order-biz-port

@@ -87,7 +87,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.9.3
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: admin-port
