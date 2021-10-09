@@ -93,11 +93,22 @@ seata:
 spring:
   lifecycle:
     timeout-per-shutdown-phase: 30s
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/static/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    enabled: true
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
   application:
     name: taotao-cloud-uc-biz
+  web:
+    resources:
+      # pro环境关闭
+      add-mappings: true
   mvc:
     servlet:
       load-on-startup: 1

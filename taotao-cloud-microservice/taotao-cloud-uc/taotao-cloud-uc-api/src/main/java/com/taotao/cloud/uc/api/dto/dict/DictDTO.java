@@ -33,22 +33,37 @@ public class DictDTO implements Serializable {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	/**
+	 * 字典名称
+	 */
 	@Schema(description = "字典名称", required = true)
 	@NotBlank(message = "字典名称不能为空")
 	@Size(max = 10, message = "字典名称不能超过10个字符")
 	private String dictName;
 
+	/**
+	 * 字典编码
+	 */
 	@Schema(description = "字典编码", required = true)
 	@NotBlank(message = "字典编码不能为空")
 	@Size(max = 10, message = "字典编码不能超过10个字符")
 	private String dictCode;
 
+	/**
+	 * 描述
+	 */
 	@Schema(description = "描述")
 	private String description;
 
+	/**
+	 * 排序值
+	 */
 	@Schema(description = "排序值")
 	private Integer dictSort;
 
+	/**
+	 * 备注信息
+	 */
 	@Schema(description = "备注信息")
 	private String remark;
 

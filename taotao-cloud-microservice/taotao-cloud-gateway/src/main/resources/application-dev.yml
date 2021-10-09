@@ -388,7 +388,21 @@ taotao:
           /uc/resource/**,
           /order/order/**,
           /health/**,
-          /auth/code
+          /auth/code,
+          /uc/index,
+          /uc/index.html,
+          /uc/*.js,
+          /uc/*.css,
+          /uc/*.json,
+          /uc/*.min.js,
+          /uc/*.min.css,
+          /order/index,
+          /order/index.html,
+          /order/*.js,
+          /order/*.css,
+          /order/*.json,
+          /order/*.min.js,
+          /order/*.min.css
       api:
         prefix: /api
         version: v${taotaoCloudVersion}

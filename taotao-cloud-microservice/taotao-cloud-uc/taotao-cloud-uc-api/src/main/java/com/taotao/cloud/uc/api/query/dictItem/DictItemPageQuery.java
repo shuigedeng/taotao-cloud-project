@@ -23,22 +23,37 @@ import java.util.Objects;
  * 字典项分页查询query
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/9/30 08:49
+ * @version 2021.10
+ * @since 2021-10-09 15:33:15
  */
 @Schema(name = "DictItemPageQuery", description = "字典项分页查询query")
 public class DictItemPageQuery extends PageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	/**
+	 * 字典id
+	 */
 	@Schema(description = "字典id")
 	private Long dictId;
+	/**
+	 * 字典项文本
+	 */
 	@Schema(description = "字典项文本")
 	private String itemText;
+	/**
+	 * 字典项值
+	 */
 	@Schema(description = "字典项值")
 	private String itemValue;
+	/**
+	 * 描述
+	 */
 	@Schema(description = "描述")
 	private String description;
+	/**
+	 * 状态(1不启用 2启用)
+	 */
 	@Schema(description = "状态(1不启用 2启用)")
 	private Boolean status;
 

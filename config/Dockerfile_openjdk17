@@ -1,0 +1,11 @@
+# docker tag isahl/openjdk17:amd64 registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+
+USER root
+
+RUN mkdir /skywalking
+
+COPY ./agent /skywalking/agent
+
+

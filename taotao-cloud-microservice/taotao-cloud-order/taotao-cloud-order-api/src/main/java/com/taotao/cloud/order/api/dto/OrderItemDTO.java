@@ -21,42 +21,89 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
+ * 订单项dto
+ *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/22 12:29
+ * @version 2021.10
+ * @since 2021-10-09 16:32:51
  */
 @Schema(name = "OrderItemDTO", description = "订单项DTO")
 public class OrderItemDTO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;
+	/**
+	 * 订单子编码
+	 */
 	@Schema(description = "订单子编码")
 	private String itemCode;
+	/**
+	 * 商品SPU ID
+	 */
 	@Schema(description = "商品SPU ID")
 	private Long productSpuId;
+	/**
+	 * 商品SPU_CODE
+	 */
 	@Schema(description = "商品SPU_CODE")
 	private String productSpuCode;
+	/**
+	 * 商品SPU名称
+	 */
 	@Schema(description = "商品SPU名称")
 	private String productSpuName;
+	/**
+	 * 商品SKU ID
+	 */
 	@Schema(description = "商品SKU ID")
 	private Long productSkuId;
+	/**
+	 * 商品SKU 规格名称
+	 */
 	@Schema(description = "商品SKU 规格名称")
 	private String productSkuName;
+	/**
+	 * 商品单价
+	 */
 	@Schema(description = "商品单价")
 	private BigDecimal productPrice = BigDecimal.ZERO;
+	/**
+	 * 购买数量
+	 */
 	@Schema(description = "购买数量")
 	private Integer num = 1;
+	/**
+	 * 合计金额
+	 */
 	@Schema(description = "合计金额")
 	private BigDecimal sumAmount = BigDecimal.ZERO;
+	/**
+	 * 商品主图
+	 */
 	@Schema(description = "商品主图")
 	private String productPicUrl;
+	/**
+	 * 供应商id
+	 */
 	@Schema(description = "供应商id")
 	private Long supplierId;
+	/**
+	 * 供应商名称
+	 */
 	@Schema(description = "供应商名称")
 	private String supplierName;
+	/**
+	 * 超时退货期限
+	 */
 	@Schema(description = "超时退货期限")
 	private Integer refundTime;
+	/**
+	 * 退货数量
+	 */
 	@Schema(description = "退货数量")
 	private Integer rejectCount = 0;
+	/**
+	 * 商品类型 0 普通商品 1 秒杀商品
+	 */
 	@Schema(description = "商品类型 0 普通商品 1 秒杀商品")
 	private Integer type = 0;
 
@@ -205,7 +252,6 @@ public class OrderItemDTO implements Serializable {
 
 		private OrderItemDTOBuilder() {
 		}
-
 
 
 		public OrderItemDTOBuilder itemCode(String itemCode) {

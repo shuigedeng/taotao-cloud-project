@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.controller;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -5,6 +20,7 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.dict.DictDTO;
 import com.taotao.cloud.uc.api.query.dict.DictPageQuery;
@@ -40,11 +56,12 @@ import org.springframework.web.bind.annotation.RestController;
  * 字典管理API
  *
  * @author shuigedeng
- * @since 2020/4/30 11:13
+ * @version 2021.9
+ * @since 2021-10-09 14:24:19
  */
 @Validated
 @RestController
-@RequestMapping("/dict")
+@RequestMapping("/uc/dict")
 @Tag(name = "字典管理API", description = "字典管理API")
 public class SysDictController {
 
@@ -54,6 +71,14 @@ public class SysDictController {
 		this.dictService = dictService;
 	}
 
+	/**
+	 * 添加字典信息
+	 *
+	 * @param dictDTO 添加字典对象DTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:50:19
+	 */
 	@Operation(summary = "添加字典信息", description = "添加字典信息", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加字典信息")
 	@PreAuthorize("hasAuthority('sys:dict:save')")
@@ -66,7 +91,18 @@ public class SysDictController {
 		return Result.success(Objects.nonNull(sysDict));
 	}
 
-	@Operation(summary = "根据id更新字典信息", description = "根据id更新字典信息", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+
+	/**
+	 * 根据id更新字典信息
+	 *
+	 * @param id      字典id
+	 * @param dictDTO dictD更新字典对象DTOTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:53:49
+	 */
+	@Operation(summary = "根据id更新字典信息", description = "根据id更新字典信息", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id更新字典信息")
 	@PreAuthorize("hasAuthority('sys:dict:update')")
 	@PutMapping("/{id:[0-9]*}")
@@ -75,12 +111,23 @@ public class SysDictController {
 		@PathVariable(value = "id") Long id,
 		@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "更新字典对象DTO", required = true)
 		@Validated @RequestBody DictDTO dictDTO) {
+		LogUtil.info("xxxxx={}", id);
 		SysDict dict = DictMapper.INSTANCE.dictDTOToSysDict(dictDTO);
 		SysDict sysDict = dictService.update(dict);
 		return Result.success(Objects.nonNull(sysDict));
 	}
 
-	@Operation(summary = "根据code更新字典信息", description = "根据code更新字典信息", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据code更新字典信息
+	 *
+	 * @param code    字典code
+	 * @param dictDTO 更新字典对象DTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:55:16
+	 */
+	@Operation(summary = "根据code更新字典信息", description = "根据code更新字典信息", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据code更新字典信息")
 	@PreAuthorize("hasAuthority('sys:dict:update')")
 	@PutMapping("/code/{code}")
@@ -96,7 +143,15 @@ public class SysDictController {
 		return Result.success(Objects.nonNull(sysDict));
 	}
 
-	@Operation(summary = "查询所有字典集合", description = "查询所有字典集合", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 查询所有字典集合
+	 *
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.dict.DictVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:56:06
+	 */
+	@Operation(summary = "查询所有字典集合", description = "查询所有字典集合", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "查询所有字典集合")
 	@PreAuthorize("hasAuthority('sys:dipt:view')")
 	@GetMapping
@@ -106,7 +161,16 @@ public class SysDictController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "分页查询字典集合", description = "分页查询字典集合", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 分页查询字典集合
+	 *
+	 * @param dictPageQuery 分页查询字典集合DTO
+	 * @return {@link Result&lt;PageModel&lt;com.taotao.cloud.uc.api.vo.dict.DictVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:56:36
+	 */
+	@Operation(summary = "分页查询字典集合", description = "分页查询字典集合", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "分页查询字典集合")
 	@PreAuthorize("hasAuthority('sys:dict:view')")
 	@GetMapping("/page")
@@ -132,7 +196,16 @@ public class SysDictController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据id删除字典", description = "根据id删除字典", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据id删除字典
+	 *
+	 * @param id 字典id
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:57:42
+	 */
+	@Operation(summary = "根据id删除字典", description = "根据id删除字典", method = CommonConstant.DELETE,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id删除字典")
 	@PreAuthorize("hasAuthority('sys:dict:del')")
 	@DeleteMapping("/{id:[0-9]*}")
@@ -143,7 +216,16 @@ public class SysDictController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据code删除字典", description = "根据code删除字典", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据code删除字典
+	 *
+	 * @param code 字典code
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:58:06
+	 */
+	@Operation(summary = "根据code删除字典", description = "根据code删除字典", method = CommonConstant.DELETE,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据code删除字典")
 	@PreAuthorize("hasAuthority('sys:dict:del')")
 	@DeleteMapping("/code/{code}")
@@ -153,5 +235,6 @@ public class SysDictController {
 		Boolean result = dictService.deleteByCode(code);
 		return Result.success(result);
 	}
+
 }
 

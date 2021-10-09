@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(contextId = "remoteOrderService", value = ServiceNameConstant.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderItemFallbackImpl.class)
 public interface RemoteOrderItemService {
 
-	@PostMapping(value = "/orderItem/save")
+	@PostMapping(value = "/order/item/save")
 	Result<Boolean> saveOrderItem(@RequestBody OrderItemDTO orderItemDTO);
 }
 

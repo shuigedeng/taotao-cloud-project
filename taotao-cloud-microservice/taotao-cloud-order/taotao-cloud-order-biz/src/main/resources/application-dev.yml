@@ -96,6 +96,10 @@ spring:
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
+  web:
+    resources:
+      # pro环境关闭
+      add-mappings: true
   mvc:
     servlet:
       load-on-startup: 1

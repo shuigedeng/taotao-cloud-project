@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.controller;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -40,11 +55,12 @@ import org.springframework.web.bind.annotation.RestController;
  * 字典项管理API
  *
  * @author shuigedeng
- * @since 2020/4/30 11:21
+ * @version 2021.9
+ * @since 2021-10-09 14:58:55
  */
 @Validated
 @RestController
-@RequestMapping("/dict/item")
+@RequestMapping("/uc/dict/item")
 @Tag(name = "字典项管理API", description = "字典项管理API")
 public class SysDictItemController {
 
@@ -54,7 +70,16 @@ public class SysDictItemController {
 		this.dictItemService = dictItemService;
 	}
 
-	@Operation(summary = "添加字典项详情", description = "添加字典项详情", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 添加字典项详情
+	 *
+	 * @param dictItemDTO 添加字典项详情DTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 14:59:07
+	 */
+	@Operation(summary = "添加字典项详情", description = "添加字典项详情", method = CommonConstant.POST,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "添加字典项详情")
 	@PreAuthorize("hasAuthority('sys:dictItem:add')")
 	@PostMapping
@@ -65,7 +90,17 @@ public class SysDictItemController {
 		return Result.success(Objects.nonNull(item));
 	}
 
-	@Operation(summary = "更新字典项详情", description = "更新字典项详情", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 更新字典项详情
+	 *
+	 * @param id          字典项id
+	 * @param dictItemDTO 更新字典项详情DTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:00:19
+	 */
+	@Operation(summary = "更新字典项详情", description = "更新字典项详情", method = CommonConstant.POST,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "更新字典项详情")
 	@PreAuthorize("hasAuthority('sys:dictItem:edit')")
 	@PutMapping("/{id}")
@@ -78,6 +113,14 @@ public class SysDictItemController {
 		return Result.success(Objects.nonNull(item));
 	}
 
+	/**
+	 * 删除字典项详情
+	 *
+	 * @param id 字典项id
+	 * @return {@link Result&lt;java.lang.Boolean&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:00:40
+	 */
 	@Operation(summary = "删除字典项详情", description = "删除字典项详情", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id删除字典项详情")
 	@PreAuthorize("hasAuthority('sys:dictItem:del')")
@@ -89,12 +132,21 @@ public class SysDictItemController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "分页查询字典详情", description = "分页查询字典详情", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 分页查询字典详情
+	 *
+	 * @param dictItemPageQuery 查询对象
+	 * @return {@link Result&lt;PageModel&lt;com.taotao.cloud.uc.api.vo.dictItem.DictItemVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:00:50
+	 */
+	@Operation(summary = "分页查询字典详情", description = "分页查询字典详情", method = CommonConstant.GET,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "分页查询字典详情")
 	@PreAuthorize("hasAuthority('sys:user:add')")
 	@GetMapping("/page")
 	public Result<PageModel<DictItemVO>> getPage(
-		 DictItemPageQuery dictItemPageQuery) {
+		DictItemPageQuery dictItemPageQuery) {
 		Pageable pageable = PageRequest
 			.of(dictItemPageQuery.getCurrentPage(), dictItemPageQuery.getPageSize());
 		Page<SysDictItem> page = dictItemService.getPage(pageable, dictItemPageQuery);
@@ -109,6 +161,14 @@ public class SysDictItemController {
 		return Result.success(PageModel.convertJpaPage(result));
 	}
 
+	/**
+	 * 查询字典详情
+	 *
+	 * @param dictItemQuery 查询对象
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.dictItem.DictItemVO&gt;&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:01:07
+	 */
 	@Operation(summary = "查询字典详情", description = "查询字典详情", method = "POST",
 		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "查询字典详情")

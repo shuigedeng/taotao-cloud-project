@@ -1,6 +1,7 @@
 package com.taotao.cloud.uc.api.vo.dict;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,20 +17,44 @@ public class DictVO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;
 
+	/**
+	 * id
+	 */
 	@Schema(description = "id")
 	private Long id;
+	/**
+	 * 字典名称
+	 */
 	@Schema(description = "字典名称")
 	private String dictName;
+	/**
+	 * 字典编码
+	 */
 	@Schema(description = "字典编码")
 	private String dictCode;
+	/**
+	 * 描述
+	 */
 	@Schema(description = "描述")
 	private String description;
+	/**
+	 * 排序值
+	 */
 	@Schema(description = "排序值")
 	private Integer dictSort;
+	/**
+	 * 备注信息
+	 */
 	@Schema(description = "备注信息")
 	private String remark;
+	/**
+	 * 创建时间
+	 */
 	@Schema(description = "创建时间")
 	private LocalDateTime createTime;
+	/**
+	 * 最后修改时间
+	 */
 	@Schema(description = "最后修改时间")
 	private LocalDateTime lastModifiedTime;
 

@@ -93,18 +93,13 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
 		LogUtil.started(OpenApiCustomiser.class, StarterNameConstant.OPENAPI_STARTER);
 
-		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
-		String[] split = applicationName.split("-");
-		String name = split[split.length - 1];
-
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
 			String taotaoCloudVersion = PropertyUtil.getProperty("taotaoCloudVersion");
 			Paths newPaths = new Paths();
 			paths.keySet()
-				.forEach(e -> newPaths.put("/api/v" + taotaoCloudVersion + "/" + name + e,
-					paths.get(e)));
+				.forEach(e -> newPaths.put("/api/v" + taotaoCloudVersion + e, paths.get(e)));
 			openApi.setPaths(newPaths);
 
 			openApi.getPaths().values().stream()
@@ -153,20 +148,20 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		String ip = environment.getProperty("spring.cloud.client.ip-address",
 			"0.0.0.0");
 		List<Server> servers = new ArrayList<>();
-		Server s1 = new Server();
-		s1.setUrl("http://" + ip + ":9999/");
-		s1.setDescription("本地地址");
-		servers.add(s1);
+		//Server s1 = new Server();
+		//s1.setUrl("http://" + ip + ":9999/");
+		//s1.setDescription("本地地址");
+		//servers.add(s1);
 		Server s2 = new Server();
-		s2.setUrl("http://dev.taotaocloud.top/");
+		s2.setUrl("http://dev.taotaocloud.com/");
 		s2.setDescription("测试环境地址");
 		servers.add(s2);
 		Server s3 = new Server();
-		s3.setUrl("http://pre.taotaocloud.top/");
+		s3.setUrl("http://pre.taotaocloud.com/");
 		s3.setDescription("预上线环境地址");
 		servers.add(s3);
 		Server s4 = new Server();
-		s4.setUrl("http://pro.taotaocloud.top/");
+		s4.setUrl("http://pro.taotaocloud.com/");
 		s4.setDescription("生产环境地址");
 		servers.add(s4);
 
@@ -175,15 +170,14 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 			.description("TAOTAO CLOUD 电商及大数据平台")
 			.version(taotaoCloudVersion)
 			.contact(new Contact()
-				.name("dengtao")
+				.name("shuigedeng")
 				.email("981376577@qq.com")
 				.url("https://github.com/shuigedeng/taotao-cloud-project")
 			)
-			.termsOfService(applicationName)
+			.termsOfService("http://taotaocloud.com/terms/")
 			.license(new License()
 				.name("Apache 2.0")
-				.url(
-					"https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
+				.url("https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
 			);
 
 		ExternalDocumentation externalDocumentation = new ExternalDocumentation()

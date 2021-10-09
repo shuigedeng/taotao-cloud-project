@@ -150,11 +150,11 @@ jib {
 	}
 }
 
-shadowJar {
-    zip64 true
-    mergeServiceFiles()
-    classifier = null
-	mainClassName = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
-}
+//shadowJar {
+//    zip64 true
+//    mergeServiceFiles()
+//    classifier = null
+//	mainClassName = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
+//}
 
 

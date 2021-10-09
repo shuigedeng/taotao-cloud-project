@@ -94,6 +94,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
@@ -146,12 +147,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	private final Histogram requestLatencyHistogram;
 
 	public WebMvcConfiguration(RedisRepository redisRepository,
-			FilterProperties filterProperties,
-			XssProperties xssProperties,
-			Counter requestCounter,
-			Summary requestLatency,
-			Gauge inprogressRequests,
-			Histogram requestLatencyHistogram) {
+		FilterProperties filterProperties,
+		XssProperties xssProperties,
+		Counter requestCounter,
+		Summary requestLatency,
+		Gauge inprogressRequests,
+		Histogram requestLatencyHistogram) {
 		this.redisRepository = redisRepository;
 		this.filterProperties = filterProperties;
 		this.xssProperties = xssProperties;
@@ -162,6 +163,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		this.requestLatencyHistogram = requestLatencyHistogram;
 	}
 
+
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(new LoginUserArgumentResolver());
@@ -171,19 +173,24 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(
-						new PrometheusMetricsInterceptor(
-								requestCounter,
-								requestLatency,
-								inprogressRequests,
-								requestLatencyHistogram))
-				.addPathPatterns("/**");
+				new PrometheusMetricsInterceptor(
+					requestCounter,
+					requestLatency,
+					inprogressRequests,
+					requestLatencyHistogram))
+			.addPathPatterns("/**");
 	}
 
 	@Override
 	public void configureMessageConverters(
-			List<HttpMessageConverter<?>> converters) {
+		List<HttpMessageConverter<?>> converters) {
 
 		WebMvcConfigurer.super.configureMessageConverters(converters);
+	}
+
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+
 	}
 
 	@Override
@@ -194,18 +201,16 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**").
-				addResourceLocations("classpath:/imgs/",
-						"classpath:/mystatic/",
-						"classpath:/static/",
-						"classpath:/public/",
-						"classpath:/META-INF/resources",
-						"classpath:/resources");
+		registry.addResourceHandler("/**")
+			.addResourceLocations("classpath:/static/");
 	}
 
 	@Override
-	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/index")
+			.setViewName("index");
 
+		WebMvcConfigurer.super.addViewControllers(registry);
 	}
 
 	@Override
@@ -223,7 +228,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class,
+			StarterNameConstant.WEB_STARTER);
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();
@@ -273,7 +279,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			mapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
 			// 忽略不能转义的字符
 			mapper.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
-					true);
+				true);
 			// 包含null
 			mapper.setSerializationInclusion(Include.ALWAYS);
 			// 使用驼峰式
@@ -282,7 +288,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
 			// 所有日期格式都统一为固定格式
 			mapper.setDateFormat(
-					new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
+				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
 			mapper.registerModule(new Jdk8Module());
 			mapper.registerModule(new JavaTimeModule());
 
@@ -306,10 +312,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		LogUtil.started(Validator.class, StarterNameConstant.WEB_STARTER);
 
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
-				.configure()
-				// 快速失败模式
-				.failFast(true)
-				.buildValidatorFactory();
+			.configure()
+			// 快速失败模式
+			.failFast(true)
+			.buildValidatorFactory();
 		return validatorFactory.getValidator();
 	}
 
@@ -396,7 +402,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	 * @since 2021-09-02 21:31:34
 	 */
 	public static class RequestMappingScanListener implements
-			ApplicationListener<ApplicationReadyEvent> {
+		ApplicationListener<ApplicationReadyEvent> {
 
 		/**
 		 * PATH_MATCH
@@ -427,14 +433,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 				// 获取微服务模块名称
 				String microService = env.getProperty("spring.application.name", "application");
 				if (redisRepository == null || applicationContext
-						.containsBean("resourceServerConfiguration")) {
+					.containsBean("resourceServerConfiguration")) {
 					LogUtil.warn("[{}]忽略接口资源扫描", microService);
 					return;
 				}
 
 				// 所有接口映射
 				RequestMappingHandlerMapping mapping = applicationContext
-						.getBean(RequestMappingHandlerMapping.class);
+					.getBean(RequestMappingHandlerMapping.class);
 
 				// 获取url与类和方法的对应信息
 				Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
@@ -462,7 +468,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 					}
 
 					Set<MediaType> mediaTypeSet = info.getProducesCondition()
-							.getProducibleMediaTypes();
+						.getProducibleMediaTypes();
 					for (MethodParameter params : method.getMethodParameters()) {
 						if (params.hasParameterAnnotation(RequestBody.class)) {
 							mediaTypeSet.add(MediaType.APPLICATION_JSON_UTF8);
@@ -521,18 +527,18 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 				res.put("list", list);
 
 				redisRepository.setExpire(
-						CommonConstant.TAOTAO_CLOUD_API_RESOURCE,
-						res,
-						CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+					CommonConstant.TAOTAO_CLOUD_API_RESOURCE,
+					res,
+					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 				redisRepository.setExpire(
-						CommonConstant.TAOTAO_CLOUD_SERVICE_RESOURCE,
-						microService,
-						CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
+					CommonConstant.TAOTAO_CLOUD_SERVICE_RESOURCE,
+					microService,
+					CommonConstant.TAOTAO_CLOUD_RESOURCE_EXPIRE);
 
 				LogUtil.info("资源扫描结果:serviceId=[{}] size=[{}] redis缓存key=[{}]",
-						microService,
-						list.size(),
-						CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
+					microService,
+					list.size(),
+					CommonConstant.TAOTAO_CLOUD_API_RESOURCE);
 			} catch (Exception e) {
 				LogUtil.error("error: {}", e.getMessage());
 			}
@@ -632,18 +638,18 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		public boolean supportsParameter(MethodParameter parameter) {
 			boolean isHasEnableUserAnn = parameter.hasParameterAnnotation(EnableUser.class);
 			boolean isHasLoginUserParameter = parameter.getParameterType()
-					.isAssignableFrom(SecurityUser.class);
+				.isAssignableFrom(SecurityUser.class);
 			return isHasEnableUserAnn && isHasLoginUserParameter;
 		}
 
 		@Override
 		public Object resolveArgument(MethodParameter methodParameter,
-				ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
-				WebDataBinderFactory webDataBinderFactory) throws Exception {
+			ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest,
+			WebDataBinderFactory webDataBinderFactory) throws Exception {
 			EnableUser user = methodParameter.getParameterAnnotation(EnableUser.class);
 			boolean value = user.value();
 			HttpServletRequest request = nativeWebRequest.getNativeRequest(
-					HttpServletRequest.class);
+				HttpServletRequest.class);
 			SecurityUser loginUser = SecurityUtil.getUser();
 
 			//根据value状态获取更多用户信息，待实现

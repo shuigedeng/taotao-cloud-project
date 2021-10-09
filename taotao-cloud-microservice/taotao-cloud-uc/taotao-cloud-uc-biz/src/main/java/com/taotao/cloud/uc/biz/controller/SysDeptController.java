@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.uc.biz.service.ISysDeptService;
@@ -7,15 +22,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 部门管理API {@link String} {@code String}
+ * 部门管理API
  *
  * @author shuigedeng
- * @version 1.0
- * @since 2020/10/16 15:54:05
+ * @version 2021.9
+ * @since 2021-10-09 14:19:11
  */
 @Validated
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/uc/dept")
 @Tag(name = "部门管理API", description = "部门管理API")
 public class SysDeptController {
 
@@ -24,4 +39,6 @@ public class SysDeptController {
 	public SysDeptController(ISysDeptService deptService) {
 		this.deptService = deptService;
 	}
+
+
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.api.dto.resource;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,53 +25,81 @@ import org.hibernate.validator.constraints.Length;
  * 资源DTO
  *
  * @author shuigedeng
- * @since 2020/5/14 10:44
+ * @version 2021.10
+ * @since 2021-10-09 15:26:19
  */
 @Schema(name = "ResourceDTO", description = "添加资源对象DTO")
 public class ResourceDTO implements Serializable {
 
 	private static final long serialVersionUID = -1972549738577159538L;
 
+	/**
+	 * 资源名称
+	 */
 	@Schema(description = "资源名称", required = true)
 	@NotBlank(message = "资源名称不能超过为空")
 	@Length(max = 20, message = "资源名称不能超过20个字符")
 	private String name;
-
+	/**
+	 * 资源类型 1：目录 2：菜单 3：按钮
+	 */
 	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮", required = true)
 	@NotBlank(message = "资源类型不能超过为空")
-//	@IntEnums(value = {1, 2, 3})
+	//@IntEnums(value = {1, 2, 3})
 	private Byte type;
-
+	/**
+	 * 权限标识
+	 */
 	@Schema(description = "权限标识")
 	private String perms;
-
+	/**
+	 * 前端path / 即跳转路由
+	 */
 	@Schema(description = "前端path / 即跳转路由")
 	private String path;
-
+	/**
+	 * 菜单组件
+	 */
 	@Schema(description = "菜单组件")
 	private String component;
-
+	/**
+	 * 父菜单ID
+	 */
 	@Schema(description = "父菜单ID")
 	private Long parentId;
-
+	/**
+	 * 图标
+	 */
 	@Schema(description = "图标")
 	private String icon;
-
+	/**
+	 * 是否缓存页面: 0:否 1:是 (默认值0)
+	 */
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
 	private Boolean keepAlive;
-
+	/**
+	 * 是否隐藏路由菜单: 0否,1是（默认值0
+	 */
 	@Schema(description = "是否隐藏路由菜单: 0否,1是（默认值0）")
 	private Boolean hidden;
-
+	/**
+	 * 聚合路由 0否,1是（默认值0）
+	 */
 	@Schema(description = "聚合路由 0否,1是（默认值0）")
 	private Boolean alwaysShow;
-
+	/**
+	 * 重定向
+	 */
 	@Schema(description = "重定向")
 	private String redirect;
-
+	/**
+	 * 是否为外链 0否,1是（默认值0）
+	 */
 	@Schema(description = "是否为外链 0否,1是（默认值0）")
 	private Boolean isFrame;
-
+	/**
+	 * 排序值
+	 */
 	@Schema(description = "排序值")
 	private Integer sortNum;
 

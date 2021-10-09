@@ -82,10 +82,17 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 			"/swagger-resources/**",
 			"/webjars/**",
 			"/actuator/**",
+			"/index",
+			"/index.html",
+			"/*.js",
+			"/*.css",
+			"/*.json",
+			"/*.min.js",
+			"/*.min.css",
+			"/doc/**",
 			"/order/**",
-			"/captcha/**",
-			"/health/**",
-			"/resource/**"));
+			"/uc/**",
+			"/health/**"));
 
 		RequestMappingHandlerMapping mapping = ac.getBean(RequestMappingHandlerMapping.class);
 		Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();

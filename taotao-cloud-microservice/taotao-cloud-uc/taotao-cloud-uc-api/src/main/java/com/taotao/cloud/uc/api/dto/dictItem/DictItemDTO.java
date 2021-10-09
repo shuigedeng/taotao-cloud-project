@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.api.dto.dictItem;
 
-import com.taotao.cloud.uc.api.vo.DeptTreeVo.DeptTreeVoBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
@@ -35,25 +34,37 @@ public class DictItemDTO implements Serializable {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	/**
+	 * 字典id
+	 */
 	@Schema(description = "字典id", required = true)
 	@NotNull(message = "字典id不能为空")
 	private Long dictId;
-
+	/**
+	 * 字典项文本
+	 */
 	@Schema(description = "字典项文本", required = true)
 	@NotBlank(message = "字典项文本不能为空")
 	@Size(max = 1000, message = "字典项文本不能超过1000个字符")
 	private String itemText;
-
+	/**
+	 * 字典项值
+	 */
 	@Schema(description = "字典项值", required = true)
 	@NotBlank(message = "字典项值不能为空")
 	private String itemValue;
-
+	/**
+	 * 描述
+	 */
 	@Schema(description = "描述")
 	private String description;
 
-	@Schema(description = "状态 1不启用 2启用", required = true)
+	/**
+	 * 字典状态 1不启用 2启用
+	 */
+	@Schema(description = "字典状态 1不启用 2启用", required = true)
 	@NotBlank(message = "字典状态不能为空")
-//	@IntEnums(value = {1, 2})
+	//@IntEnums(value = {1, 2})
 	private Integer status;
 
 	@Override
@@ -142,7 +153,6 @@ public class DictItemDTO implements Serializable {
 	public static DictItemDTOBuilder builder() {
 		return new DictItemDTOBuilder();
 	}
-
 
 
 	public static final class DictItemDTOBuilder {

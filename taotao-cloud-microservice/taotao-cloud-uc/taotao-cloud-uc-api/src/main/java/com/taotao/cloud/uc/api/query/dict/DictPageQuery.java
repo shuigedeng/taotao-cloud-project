@@ -31,15 +31,27 @@ public class DictPageQuery extends PageQuery {
 
 	private static final long serialVersionUID = -7605952923416404638L;
 
+	/**
+	 * 字典名称
+	 */
 	@Schema(description = "字典名称")
 	private String dictName;
 
+	/**
+	 * 字典编码
+	 */
 	@Schema(description = "字典编码")
 	private String dictCode;
 
+	/**
+	 * 描述
+	 */
 	@Schema(description = "描述")
 	private String description;
 
+	/**
+	 * 备注信息
+	 */
 	@Schema(description = "备注信息")
 	private String remark;
 

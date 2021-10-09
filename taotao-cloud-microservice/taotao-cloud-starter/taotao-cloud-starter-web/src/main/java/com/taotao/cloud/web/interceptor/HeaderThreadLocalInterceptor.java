@@ -36,9 +36,9 @@ public class HeaderThreadLocalInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 		Object handler) throws Exception {
-		if (!(handler instanceof HandlerMethod)) {
-			return false;
-		}
+		//if (!(handler instanceof HandlerMethod)) {
+		//	return false;
+		//}
 
         //if (!ContextUtil.getBoot()) {
         //    ContextUtil.setUserId(getHeader(request, ContextConstants.JWT_KEY_USER_ID));

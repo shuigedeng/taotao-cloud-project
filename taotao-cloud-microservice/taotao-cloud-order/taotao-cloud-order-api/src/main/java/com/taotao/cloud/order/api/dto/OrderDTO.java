@@ -21,36 +21,55 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
+ * 订单dto
+ *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/22 12:29
+ * @version 2021.10
+ * @since 2021-10-09 16:31:52
  */
 @Schema(name = "OrderDTO", description = "订单DTO")
 public class OrderDTO implements Serializable {
 
 	private static final long serialVersionUID = 5126530068827085130L;
 
+	/**
+	 * 买家ID
+	 */
 	@Schema(description = "买家ID")
 	private Long memberId;
-
+	/**
+	 * 订单编码
+	 */
 	@Schema(description = "订单编码")
 	private String code;
-
+	/**
+	 * 订单金额
+	 */
 	@Schema(description = "订单金额")
 	private BigDecimal amount;
-
+	/**
+	 * 订单主状态
+	 */
 	@Schema(description = "订单主状态")
 	private Integer mainStatus;
-
+	/**
+	 * 订单子状态
+	 */
 	@Schema(description = "订单子状态")
 	private Integer childStatus;
-
+	/**
+	 * 收货人姓名
+	 */
 	@Schema(description = "收货人姓名")
 	private String receiverName;
-
+	/**
+	 * 收货人电话
+	 */
 	@Schema(description = "收货人电话")
 	private String receiverPhone;
-
+	/**
+	 * 收货地址:json的形式存储
+	 */
 	@Schema(description = "收货地址:json的形式存储")
 	private String receiverAddressJson;
 

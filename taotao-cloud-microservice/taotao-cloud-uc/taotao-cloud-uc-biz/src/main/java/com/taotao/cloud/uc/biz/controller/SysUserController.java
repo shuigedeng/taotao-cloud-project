@@ -1,3 +1,18 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -47,12 +62,13 @@ import org.springframework.web.bind.annotation.RestController;
  * 后台用户管理API
  *
  * @author shuigedeng
- * @since 2020/4/30 13:12
+ * @version 2021.10
+ * @since 2021-10-09 15:13:54
  */
 @Validated
 @RestController
-@RequestMapping("/user")
-@Tag(name = "用户管理API", description = "用户管理API")
+@RequestMapping("/uc/user")
+@Tag(name = "后台用户管理API", description = "后台用户管理API")
 public class SysUserController {
 
 	private final ISysUserService sysUserService;
@@ -61,7 +77,16 @@ public class SysUserController {
 		this.sysUserService = sysUserService;
 	}
 
-	@Operation(summary = "保存(添加)用户", description = "保存(添加)用户", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 保存(添加)用户
+	 *
+	 * @param userDTO 保存(添加)用户DTO
+	 * @return {@link Result&lt;com.taotao.cloud.uc.api.vo.user.AddUserVO&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:14:06
+	 */
+	@Operation(summary = "保存(添加)用户", description = "保存(添加)用户", method = CommonConstant.POST,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "保存(添加)用户")
 	@PreAuthorize("hasAuthority('sys:user:add')")
 	@PostMapping
@@ -74,7 +99,17 @@ public class SysUserController {
 		return Result.success(addUserVO);
 	}
 
-	@Operation(summary = "更新用户", description = "更新用户", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 更新用户
+	 *
+	 * @param id      用户id
+	 * @param userDTO 更新用户对象DTO
+	 * @return {@link Result&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:14:24
+	 */
+	@Operation(summary = "更新用户", description = "更新用户", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "更新用户")
 	@PreAuthorize("hasAuthority('sys:user:update')")
 	@PutMapping("/{id:[0-9]*}")
@@ -90,7 +125,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据手机号码查询用户是否存在
+	 *
+	 * @param phone 手机号码
+	 * @return {@link Result&lt;java.lang.Boolean&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:14:58
+	 */
+	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据手机号码查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone")
@@ -102,7 +146,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据用户id查询用户是否存在
+	 *
+	 * @param id 用户id
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:15:05
+	 */
+	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据用户id查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
 	@GetMapping("/exists/id")
@@ -114,7 +167,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据用户id删除用户", description = "根据用户id删除用户", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据用户id删除用户
+	 *
+	 * @param id 用户id
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:15:12
+	 */
+	@Operation(summary = "根据用户id删除用户", description = "根据用户id删除用户", method = CommonConstant.DELETE,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据用户id删除用户")
 	@PreAuthorize("hasAuthority('sys:user:delete')")
 	@DeleteMapping("/{id:[0-9]*}")
@@ -126,7 +188,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "分页查询用户集合", description = "分页查询用户集合", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 分页查询用户集合
+	 *
+	 * @param userQuery 分页查询用户集合DTO
+	 * @return {@link Result&lt;PageModel&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:15:19
+	 */
+	@Operation(summary = "分页查询用户集合", description = "分页查询用户集合", method = CommonConstant.GET,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "分页查询用户集合")
 	@PreAuthorize("hasAuthority('sys:user:view:page')")
 	@GetMapping(value = "/page")
@@ -135,8 +206,7 @@ public class SysUserController {
 		@Validated UserPageQuery userQuery) {
 		Pageable pageable = PageRequest.of(userQuery.getCurrentPage(), userQuery.getPageSize());
 		Page<SysUser> page = sysUserService.findUserPage(pageable, userQuery);
-		return Result.success(PageModel
-			.convertJpaPage(new PageImpl<>(
+		return Result.success(PageModel.convertJpaPage(new PageImpl<>(
 				UserMapper.INSTANCE.sysUserToUserVO(page.getContent()),
 				pageable,
 				page.getTotalElements())
@@ -144,7 +214,17 @@ public class SysUserController {
 		);
 	}
 
-	@Operation(summary = "重置密码", description = "重置密码", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 重置密码
+	 *
+	 * @param id              用户id
+	 * @param restPasswordDTO 重置密码DTO
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:15:57
+	 */
+	@Operation(summary = "重置密码", description = "重置密码", method = CommonConstant.PUT,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "重置密码")
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PutMapping("/rest/password/{id:[0-9]*}")
@@ -158,7 +238,15 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 获取当前登录人信息
+	 *
+	 * @return {@link Result&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:16:08
+	 */
+	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "获取当前登录人信息")
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current/info")
@@ -173,7 +261,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据id获取用户信息", description = "根据id获取用户信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据id获取用户信息 
+	 *
+	 * @param id 用户id 
+	 * @return {@link Result&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 16:42:03
+	 */
+	@Operation(summary = "根据id获取用户信息", description = "根据id获取用户信息",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据id获取用户信息")
 	//@PreAuthorize("hasAuthority('sys:user:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
@@ -186,7 +283,17 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据username获取用户信息", description = "根据username获取用户信息", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	
+	/**
+	 * 根据username获取用户信息 
+	 *
+	 * @param username 用户名称 
+	 * @return {@link Result&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 16:41:53
+	 */
+	@Operation(summary = "根据username获取用户信息", description = "根据username获取用户信息",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据username获取用户信息")
 	@PreAuthorize("hasAuthority('sys:user:info:username')")
 	@GetMapping("/info/username")
@@ -199,7 +306,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "查询用户集合", description = "查询用户集合", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 查询用户集合 
+	 *
+	 * @param userQuery 查询用户集合DTO 
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.user.UserVO&gt;&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 16:41:25
+	 */
+	@Operation(summary = "查询用户集合", description = "查询用户集合", method = CommonConstant.GET,
+		security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "查询用户集合")
 	@PreAuthorize("hasAuthority('sys:user:info:list')")
 	@GetMapping("/info")
@@ -211,7 +327,16 @@ public class SysUserController {
 		return Result.success(result);
 	}
 
-	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
+	/**
+	 * 根据用户id更新角色信息(用户分配角色) 
+	 *
+	 * @param userRoleDTO 用户分配角色DTO 
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 16:41:06
+	 */
+	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)",
+		method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
 	@RequestOperateLog(description = "根据用户id更新角色信息(用户分配角色)")
 	@PreAuthorize("hasAuthority('sys:user:role')")
 	@PutMapping("/role")

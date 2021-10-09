@@ -48,6 +48,8 @@ dependencies {
 //    api "org.springframework.boot:spring-boot-devtools"
     api "org.springframework.boot:spring-boot-starter-test"
 
+    api 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     api "org.mapstruct:mapstruct"
     api 'cn.afterturn:easypoi-spring-boot-starter:4.4.0'
     api 'com.github.dozermapper:dozer-spring-boot-starter:6.5.2'

@@ -20,24 +20,33 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ApplicationDTO
+ * QueryRegionByParentIdVO
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2021/03/12 16:31
+ * @version 2021.10
+ * @since 2021-10-09 15:31:45
  */
 @Schema(name = "QueryRegionByParentIdVO", description = "查询应用列表数据VO")
 public class QueryRegionByParentIdVO {
 
+	/**
+	 * 主键ID
+	 */
 	@Schema(description = "主键ID")
 	private String id;
-
+	/**
+	 *名称
+	 */
 	@Schema(description = "名称")
 	private String label;
-
+	/**
+	 *应用名称
+	 */
 	@Schema(description = "应用名称")
 	private String value;
-
+	/**
+	 *子数据
+	 */
 	@Schema(description = "子数据")
 	private List<QueryRegionByParentIdVO> children;
 
