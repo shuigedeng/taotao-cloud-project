@@ -1,6 +1,7 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     api 'org.springframework.boot:spring-boot-starter-data-jdbc'

@@ -19,9 +19,8 @@ import com.taotao.cloud.auth.api.dto.ClientDTO;
 import com.taotao.cloud.auth.api.query.ClientPageQuery;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.oauth2.api.server.entity.Client;
-import com.taotao.cloud.oauth2.api.server.repository.ClientRepository;
+import com.taotao.cloud.oauth2.api.server.repository.ClientSuperRepository;
 import com.taotao.cloud.oauth2.api.server.service.IClientService;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -50,7 +49,7 @@ public class ClientServiceImpl implements IClientService {
     @Autowired
     private RedisRepository redisRepository;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientSuperRepository clientRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 

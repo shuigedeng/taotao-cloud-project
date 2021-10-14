@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -15,9 +17,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:49
  */
 @Entity
-@Table(name = "tt_order_refund_req_record")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_refund_req_record", comment = "售后退款操作记录表")
-public class OrderRefundReqRecord extends BaseEntity {
+@TableName(OrderRefundReqRecord.TABLE_NAME)
+@Table(name = OrderRefundReqRecord.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderRefundReqRecord.TABLE_NAME, comment = "售后退款操作记录表")
+public class OrderRefundReqRecord extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_refund_req_record";
 
 	@Column(name = "order_code", columnDefinition = "varchar(32) not null comment '订单编码'")
 	private String orderCode;
@@ -210,23 +215,6 @@ public class OrderRefundReqRecord extends BaseEntity {
 		this.createDate = createDate;
 	}
 
-	public OrderRefundReqRecord(Long id, Long createBy, Long lastModifiedBy,
-		LocalDateTime createTime, LocalDateTime lastModifiedTime, int version,
-		Boolean delFlag, String orderCode, String itemCode, String title, String remark,
-		String createName, String createId, String createNick, String ext,
-		Integer reqRecordType, LocalDateTime createDate) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.orderCode = orderCode;
-		this.itemCode = itemCode;
-		this.title = title;
-		this.remark = remark;
-		this.createName = createName;
-		this.createId = createId;
-		this.createNick = createNick;
-		this.ext = ext;
-		this.reqRecordType = reqRecordType;
-		this.createDate = createDate;
-	}
 	public static OrderRefundReqRecordBuilder builder() {
 		return new OrderRefundReqRecordBuilder();
 	}
@@ -353,7 +341,7 @@ public class OrderRefundReqRecord extends BaseEntity {
 			orderRefundReqRecord.setReqRecordType(reqRecordType);
 			orderRefundReqRecord.setCreateDate(createDate);
 			orderRefundReqRecord.setId(id);
-			orderRefundReqRecord.setCreateBy(createBy);
+			orderRefundReqRecord.setCreatedBy(createBy);
 			orderRefundReqRecord.setLastModifiedBy(lastModifiedBy);
 			orderRefundReqRecord.setCreateTime(createTime);
 			orderRefundReqRecord.setLastModifiedTime(lastModifiedTime);

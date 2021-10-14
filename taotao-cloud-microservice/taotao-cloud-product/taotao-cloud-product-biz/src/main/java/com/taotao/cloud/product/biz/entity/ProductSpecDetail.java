@@ -1,8 +1,6 @@
 package com.taotao.cloud.product.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.math.BigDecimal;
 import javax.persistence.Table;
 
@@ -12,7 +10,7 @@ import javax.persistence.Table;
 //@Entity
 @Table(name = "tt_product_spec_detail")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_spec_detail", comment = "商品信息扩展表")
-public class ProductSpecDetail extends BaseEntity {
+public class ProductSpecDetail extends JpaSuperEntity {
 
     private Product product;
 

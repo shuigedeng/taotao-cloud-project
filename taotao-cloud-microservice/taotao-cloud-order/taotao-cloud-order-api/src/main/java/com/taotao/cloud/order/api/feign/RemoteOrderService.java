@@ -2,9 +2,9 @@ package com.taotao.cloud.order.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.api.dto.OrderDTO;
+import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.feign.fallback.RemoteOrderFallbackImpl;
-import com.taotao.cloud.order.api.vo.OrderVO;
+import com.taotao.cloud.order.api.vo.order_info.OrderVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +24,7 @@ public interface RemoteOrderService {
     Result<OrderVO> findOrderInfoByCode(@PathVariable("code") String code);
 
     @PostMapping(value = "/order")
-    Result<OrderVO> saveOrder(@RequestBody OrderDTO orderDTO);
+    Result<OrderVO> saveOrder(@RequestBody OrderSaveDTO orderDTO);
 
 }
 

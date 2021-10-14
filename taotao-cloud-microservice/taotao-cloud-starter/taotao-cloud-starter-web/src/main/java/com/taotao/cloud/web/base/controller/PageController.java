@@ -15,22 +15,63 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
-import com.taotao.cloud.web.base.request.PageParams;
+import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.web.base.entity.SuperEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * PageController
  *
- * @param <Entity>    Entity
- * @param <PageQuery> PageQuery
+ * @param <T>        实体
+ * @param <I>        id
+ * @param <QueryDTO> 查询参数
+ * @param <QueryVO>  查询返回参数
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:06:58
  */
-public interface PageController<Entity, PageQuery> extends BaseController<Entity> {
+public interface PageController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+	BaseController<T, I> {
+
+	/**
+	 * 通用分页查询
+	 *
+	 * @param params 分页参数
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:11:55
+	 */
+	@Operation(summary = "通用分页查询", description = "通用分页查询", method = CommonConstant.POST)
+	@PostMapping("/page")
+	@RequestOperateLog(value = "通用分页查询")
+	@PreAuthorize("@permissionVerifier.hasPermission('page')")
+	default Result<PageModel<QueryVO>> page(
+		@Parameter(description = "分页查询DTO", required = true)
+		@RequestBody @Validated PageQuery<QueryDTO> params) {
+		IPage<T> page = pageQuery(params);
+		PageModel<QueryVO> tPageModel = PageModel.convertMybatisPage(page, getQueryVOClass());
+		return Result.success(tPageModel);
+	}
 
 	/**
 	 * 处理查询参数
@@ -39,8 +80,9 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:14
 	 */
-	default void handlerQueryParams(PageParams<PageQuery> params) {
+	default void handlerQueryParams(PageQuery<QueryDTO> params) {
 	}
+
 
 	/**
 	 * 执行分页查询
@@ -52,15 +94,12 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:20
 	 */
-	default IPage<Entity> query(PageParams<PageQuery> params) {
+	default IPage<T> pageQuery(PageQuery<QueryDTO> params) {
 		handlerQueryParams(params);
 
-		IPage<Entity> page = params.buildPage();
-		Entity model = BeanUtil.toBean(params.getModel(), getEntityClass());
-
-		QueryWrap<Entity> wrapper = handlerWrapper(model, params);
+		IPage<T> page = params.buildMpPage();
+		QueryWrap<T> wrapper = handlerWrapper(params);
 		getBaseService().page(page, wrapper);
-		// 处理结果
 		handlerResult(page);
 		return page;
 	}
@@ -68,14 +107,69 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	/**
 	 * 处理对象中的非空参数和扩展字段中的区间参数，可以覆盖后处理组装查询条件
 	 *
-	 * @param model  实体类
 	 * @param params 分页参数
 	 * @return {@link com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:30
 	 */
-	default QueryWrap<Entity> handlerWrapper(Entity model, PageParams<PageQuery> params) {
-		return Wraps.q(model, params.getExtra(), getEntityClass());
+	default QueryWrap<T> handlerWrapper(PageQuery<QueryDTO> params) {
+		QueryWrap<T> wrapper = Wraps.q(getEntityClass());
+		QueryDTO eqQuery = params.getEqQuery();
+		if (Objects.nonNull(eqQuery)) {
+			if (checkField(eqQuery.getClass())) {
+				Class<?> aClass = eqQuery.getClass();
+				for (Field field : aClass.getDeclaredFields()) {
+					if (!StrUtil.equals(field.getName(), "serialVersionUID")) {
+						Object fieldValue = ReflectionUtil.getFieldValue(eqQuery, field.getName());
+						if (Objects.nonNull(fieldValue)) {
+							wrapper.eq(StrUtil.toUnderlineCase(field.getName()), fieldValue);
+						}
+					}
+				}
+			}
+		}
+
+		Optional.ofNullable(params.getDateTimeBetweenQuery())
+			.orElse(new ArrayList<>())
+			.stream()
+			.filter(Objects::nonNull)
+			.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.getFiled()))
+			.forEach(dateTimeBetweenDTO -> {
+				wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.getFiled()),
+					dateTimeBetweenDTO.getStartTime(),
+					dateTimeBetweenDTO.getEndTime());
+			});
+
+		Optional.ofNullable(params.getLikeQuery())
+			.orElse(new ArrayList<>())
+			.stream()
+			.filter(Objects::nonNull)
+			.filter(likeDTO -> checkField(likeDTO.getFiled()))
+			.forEach(likeDTO -> {
+				wrapper.like(StrUtil.toUnderlineCase(likeDTO.getFiled()), likeDTO.getValue());
+			});
+
+		Optional.ofNullable(params.getInQuery())
+			.orElse(new ArrayList<>())
+			.stream()
+			.filter(Objects::nonNull)
+			.filter(inDTO -> checkField(inDTO.getFiled()))
+			.forEach(inDTO -> {
+				wrapper.in(StrUtil.toUnderlineCase(inDTO.getFiled()), inDTO.getValues());
+			});
+
+		Optional.ofNullable(params.getNotInQuery())
+			.orElse(new ArrayList<>())
+			.stream()
+			.filter(Objects::nonNull)
+			.filter(notInDTO -> checkField(notInDTO.getFiled()))
+			.forEach(notInDTO -> {
+				wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.getFiled()),
+					notInDTO.getValues());
+			});
+
+		wrapper.isNotNull("id");
+		return wrapper;
 	}
 
 	/**
@@ -86,6 +180,11 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:37
 	 */
-	default void handlerResult(IPage<Entity> page) {
+	default void handlerResult(IPage<T> page) {
+	}
+
+	default Class<QueryVO> getQueryVOClass() {
+		return (Class<QueryVO>) ((ParameterizedType) this.getClass()
+			.getGenericSuperclass()).getActualTypeArguments()[4];
 	}
 }

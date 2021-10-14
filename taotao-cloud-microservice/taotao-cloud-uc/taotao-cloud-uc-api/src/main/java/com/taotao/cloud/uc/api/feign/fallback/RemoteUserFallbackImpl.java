@@ -4,7 +4,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.uc.api.feign.RemoteUserService;
-import com.taotao.cloud.uc.api.vo.user.UserVO;
+import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -18,7 +18,7 @@ public class RemoteUserFallbackImpl implements FallbackFactory<RemoteUserService
     public RemoteUserService create(Throwable throwable) {
         return new RemoteUserService() {
             @Override
-            public Result<UserVO> findUserInfoByUsername(String username) {
+            public Result<UserQueryVO> findUserInfoByUsername(String username) {
                 LogUtil.error("调用findUserInfoByUsername异常：{}", throwable, username);
                 return Result.fail(null, 500);
             }

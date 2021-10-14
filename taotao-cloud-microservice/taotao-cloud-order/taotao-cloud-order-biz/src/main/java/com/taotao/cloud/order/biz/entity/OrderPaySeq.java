@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,9 +18,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:45
  */
 @Entity
-@Table(name = "tt_order_pay_seq")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_pay_seq", comment = "订单支付流水表")
-public class OrderPaySeq extends BaseEntity {
+@TableName(OrderPaySeq.TABLE_NAME)
+@Table(name = OrderPaySeq.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderPaySeq.TABLE_NAME, comment = "订单支付流水表")
+public class OrderPaySeq extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_pay_seq";
 
 	/**
 	 * 支付流水编码--需要与微信的预支付ID进行关联
@@ -98,22 +103,6 @@ public class OrderPaySeq extends BaseEntity {
 		this.remark = remark;
 	}
 
-	public OrderPaySeq(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag, String payCode,
-		Long customerId, String payerBankCode, BigDecimal actualAmount, String prepayId,
-		String transactionId, String mchId, String appId, Integer status, String remark) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.payCode = payCode;
-		this.customerId = customerId;
-		this.payerBankCode = payerBankCode;
-		this.actualAmount = actualAmount;
-		this.prepayId = prepayId;
-		this.transactionId = transactionId;
-		this.mchId = mchId;
-		this.appId = appId;
-		this.status = status;
-		this.remark = remark;
-	}
 
 	@Override
 	public String toString() {
@@ -368,7 +357,7 @@ public class OrderPaySeq extends BaseEntity {
 			orderPaySeq.setStatus(status);
 			orderPaySeq.setRemark(remark);
 			orderPaySeq.setId(id);
-			orderPaySeq.setCreateBy(createBy);
+			orderPaySeq.setCreatedBy(createBy);
 			orderPaySeq.setLastModifiedBy(lastModifiedBy);
 			orderPaySeq.setCreateTime(createTime);
 			orderPaySeq.setLastModifiedTime(lastModifiedTime);

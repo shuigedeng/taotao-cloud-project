@@ -15,7 +15,14 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.uc.biz.service.ISysDeptService;
+import com.taotao.cloud.uc.api.dto.dept.DeptQueryDTO;
+import com.taotao.cloud.uc.api.dto.dept.DeptSaveDTO;
+import com.taotao.cloud.uc.api.dto.dept.DeptUpdateDTO;
+import com.taotao.cloud.uc.api.service.ISysDeptService;
+import com.taotao.cloud.uc.api.vo.dept.DeptQueryVO;
+import com.taotao.cloud.uc.biz.entity.SysCompany;
+import com.taotao.cloud.uc.biz.entity.SysDept;
+import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,13 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/uc/dept")
 @Tag(name = "部门管理API", description = "部门管理API")
-public class SysDeptController {
-
-	private final ISysDeptService deptService;
-
-	public SysDeptController(ISysDeptService deptService) {
-		this.deptService = deptService;
-	}
+public class SysDeptController extends
+	SuperController<ISysDeptService<SysDept, Long>, SysDept, Long, DeptQueryDTO, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
 
 }

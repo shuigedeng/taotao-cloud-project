@@ -3,7 +3,7 @@ package com.taotao.cloud.uc.api.feign;
 import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl;
-import com.taotao.cloud.uc.api.vo.resource.ResourceVO;
+import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import java.util.List;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -28,6 +28,6 @@ public interface RemoteResourceService {
      * @version 1.0.0
      */
     @GetMapping("/resource/info/codes")
-    Result<List<ResourceVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
+    Result<List<ResourceQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 
 }

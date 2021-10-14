@@ -1,6 +1,7 @@
 package com.taotao.cloud.order.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -14,9 +15,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:53
  */
 @Entity
-@Table(name = "tt_order_wait_event")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_wait_event", comment = "订单定时任务处理表")
-public class OrderWaitEvent extends BaseEntity {
+@TableName(OrderWaitEvent.TABLE_NAME)
+@Table(name = OrderWaitEvent.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderWaitEvent.TABLE_NAME, comment = "订单定时任务处理表")
+public class OrderWaitEvent extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_wait_event";
 
 	/**
 	 * 事件类型
@@ -132,18 +136,6 @@ public class OrderWaitEvent extends BaseEntity {
 		this.refundCode = refundCode;
 	}
 
-	public OrderWaitEvent(Long id, Long createBy, Long lastModifiedBy,
-		LocalDateTime createTime, LocalDateTime lastModifiedTime, int version,
-		Boolean delFlag, Integer eventType, Integer eventStatus,
-		LocalDateTime triggerTime, String eventResult, String refundCode) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.eventType = eventType;
-		this.eventStatus = eventStatus;
-		this.triggerTime = triggerTime;
-		this.eventResult = eventResult;
-		this.refundCode = refundCode;
-	}
-
 	public static OrderWaitEventBuilder builder() {
 		return new OrderWaitEventBuilder();
 	}
@@ -235,7 +227,7 @@ public class OrderWaitEvent extends BaseEntity {
 			orderWaitEvent.setEventResult(eventResult);
 			orderWaitEvent.setRefundCode(refundCode);
 			orderWaitEvent.setId(id);
-			orderWaitEvent.setCreateBy(createBy);
+			orderWaitEvent.setCreatedBy(createBy);
 			orderWaitEvent.setLastModifiedBy(lastModifiedBy);
 			orderWaitEvent.setCreateTime(createTime);
 			orderWaitEvent.setLastModifiedTime(lastModifiedTime);

@@ -16,7 +16,7 @@
 package com.taotao.cloud.coupon.biz.service.impl;
 
 import com.taotao.cloud.coupon.biz.entity.Coupon;
-import com.taotao.cloud.coupon.biz.repository.CouponRepository;
+import com.taotao.cloud.coupon.biz.repository.CouponSuperRepository;
 import com.taotao.cloud.coupon.biz.service.ICouponService;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +30,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CouponServiceImpl implements ICouponService {
 
-	private final CouponRepository couponRepository;
+	private final CouponSuperRepository couponRepository;
 
-	public CouponServiceImpl(CouponRepository couponRepository) {
+	public CouponServiceImpl(CouponSuperRepository couponRepository) {
 		this.couponRepository = couponRepository;
 	}
 

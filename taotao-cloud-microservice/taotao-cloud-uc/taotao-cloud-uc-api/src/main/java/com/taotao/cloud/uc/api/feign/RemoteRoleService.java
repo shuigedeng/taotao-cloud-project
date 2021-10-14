@@ -3,7 +3,7 @@ package com.taotao.cloud.uc.api.feign;
 import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl;
-import com.taotao.cloud.uc.api.vo.role.RoleVO;
+import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +28,6 @@ public interface RemoteRoleService {
      * @version 1.0.0
      */
     @GetMapping("/role/info/userId")
-    Result<List<RoleVO>> findRoleByUserId(@RequestParam(value = "userId") Long userId);
+    Result<List<RoleQueryVO>> findRoleByUserId(@RequestParam(value = "userId") Long userId);
 }
 

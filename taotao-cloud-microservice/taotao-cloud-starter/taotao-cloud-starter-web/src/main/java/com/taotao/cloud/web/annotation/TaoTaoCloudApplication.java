@@ -18,6 +18,7 @@ package com.taotao.cloud.web.annotation;
 import com.taotao.cloud.canal.annotation.EnableTaoTaoCloudCanalClient;
 import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
+import com.taotao.cloud.data.mybatis.plus.annotation.EnableTaoTaoCloudMybatisPlus;
 import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
 import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
 import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
@@ -79,6 +80,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableTaoTaoCloudOpenapi
 @EnableTaoTaoCloudSeata
 @EnableTaoTaoCloudJPA
+@EnableTaoTaoCloudMybatisPlus
 @EnableTaoTaoCloudOauth2ResourceSecurity
 @EnableEncryptableProperties
 @EnableDiscoveryClient

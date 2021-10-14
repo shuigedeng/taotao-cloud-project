@@ -1,8 +1,22 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,12 +25,16 @@ import javax.persistence.Table;
  * 资源表
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:08:15
  */
 @Entity
-@Table(name = "tt_sys_resource")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_resource", comment = "资源表")
-public class SysResource extends BaseEntity {
+@Table(name = SysResource.TABLE_NAME)
+@TableName(SysResource.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysResource.TABLE_NAME, comment = "资源表")
+public class SysResource extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_resource";
 
 	/**
 	 * 资源名称
@@ -91,6 +109,8 @@ public class SysResource extends BaseEntity {
 	private Integer sortNum = 0;
 
 	/**
+	 * 资源类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)
+	 *
 	 * @see com.taotao.cloud.common.enums.ResourceTypeEnum
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "tinyint(1) unsigned not null default 1 comment '资源类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)'")
@@ -101,57 +121,6 @@ public class SysResource extends BaseEntity {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
-
-
-	@Override
-	public String toString() {
-		return "SysResource{" +
-			"name='" + name + '\'' +
-			", perms='" + perms + '\'' +
-			", path='" + path + '\'' +
-			", component='" + component + '\'' +
-			", parentId=" + parentId +
-			", icon='" + icon + '\'' +
-			", keepAlive=" + keepAlive +
-			", hidden=" + hidden +
-			", alwaysShow=" + alwaysShow +
-			", redirect='" + redirect + '\'' +
-			", isFrame=" + isFrame +
-			", sortNum=" + sortNum +
-			", type=" + type +
-			", tenantId='" + tenantId + '\'' +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		SysResource that = (SysResource) o;
-		return type == that.type && Objects.equals(name, that.name)
-			&& Objects.equals(perms, that.perms) && Objects.equals(path,
-			that.path) && Objects.equals(component, that.component)
-			&& Objects.equals(parentId, that.parentId) && Objects.equals(icon,
-			that.icon) && Objects.equals(keepAlive, that.keepAlive)
-			&& Objects.equals(hidden, that.hidden) && Objects.equals(alwaysShow,
-			that.alwaysShow) && Objects.equals(redirect, that.redirect)
-			&& Objects.equals(isFrame, that.isFrame) && Objects.equals(sortNum,
-			that.sortNum) && Objects.equals(tenantId, that.tenantId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), name, perms, path, component, parentId, icon,
-			keepAlive,
-			hidden, alwaysShow, redirect, isFrame, sortNum, type, tenantId);
-	}
 
 	public String getName() {
 		return name;
@@ -286,180 +255,5 @@ public class SysResource extends BaseEntity {
 		this.type = type;
 		this.tenantId = tenantId;
 	}
-
-	public SysResource(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		String name, String perms, String path, String component, Long parentId,
-		String icon, Boolean keepAlive, Boolean hidden, Boolean alwaysShow,
-		String redirect, Boolean isFrame, Integer sortNum, byte type, String tenantId) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.name = name;
-		this.perms = perms;
-		this.path = path;
-		this.component = component;
-		this.parentId = parentId;
-		this.icon = icon;
-		this.keepAlive = keepAlive;
-		this.hidden = hidden;
-		this.alwaysShow = alwaysShow;
-		this.redirect = redirect;
-		this.isFrame = isFrame;
-		this.sortNum = sortNum;
-		this.type = type;
-		this.tenantId = tenantId;
-	}
-
-	public static SysResourceBuilder builder() {
-		return new SysResourceBuilder();
-	}
-
-	public static final class SysResourceBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private String name;
-		private String perms;
-		private String path;
-		private String component;
-		private Long parentId = 0L;
-		private String icon;
-		private Boolean keepAlive = false;
-		private Boolean hidden = false;
-		private Boolean alwaysShow = false;
-		private String redirect;
-		private Boolean isFrame = false;
-		private Integer sortNum = 0;
-		private byte type = 1;
-		private String tenantId;
-
-		private SysResourceBuilder() {
-		}
-
-		public static SysResourceBuilder aSysResource() {
-			return new SysResourceBuilder();
-		}
-
-		public SysResourceBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysResourceBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysResourceBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysResourceBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysResourceBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysResourceBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysResourceBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysResourceBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public SysResourceBuilder perms(String perms) {
-			this.perms = perms;
-			return this;
-		}
-
-		public SysResourceBuilder path(String path) {
-			this.path = path;
-			return this;
-		}
-
-		public SysResourceBuilder component(String component) {
-			this.component = component;
-			return this;
-		}
-
-		public SysResourceBuilder parentId(Long parentId) {
-			this.parentId = parentId;
-			return this;
-		}
-
-		public SysResourceBuilder icon(String icon) {
-			this.icon = icon;
-			return this;
-		}
-
-		public SysResourceBuilder keepAlive(Boolean keepAlive) {
-			this.keepAlive = keepAlive;
-			return this;
-		}
-
-		public SysResourceBuilder hidden(Boolean hidden) {
-			this.hidden = hidden;
-			return this;
-		}
-
-		public SysResourceBuilder alwaysShow(Boolean alwaysShow) {
-			this.alwaysShow = alwaysShow;
-			return this;
-		}
-
-		public SysResourceBuilder redirect(String redirect) {
-			this.redirect = redirect;
-			return this;
-		}
-
-		public SysResourceBuilder isFrame(Boolean isFrame) {
-			this.isFrame = isFrame;
-			return this;
-		}
-
-		public SysResourceBuilder sortNum(Integer sortNum) {
-			this.sortNum = sortNum;
-			return this;
-		}
-
-		public SysResourceBuilder type(byte type) {
-			this.type = type;
-			return this;
-		}
-
-		public SysResourceBuilder tenantId(String tenantId) {
-			this.tenantId = tenantId;
-			return this;
-		}
-
-		public SysResource build() {
-			SysResource sysResource = new SysResource(name, perms, path, component, parentId, icon,
-				keepAlive, hidden, alwaysShow, redirect, isFrame, sortNum, type, tenantId);
-			sysResource.setId(id);
-			sysResource.setCreateBy(createBy);
-			sysResource.setLastModifiedBy(lastModifiedBy);
-			sysResource.setCreateTime(createTime);
-			sysResource.setLastModifiedTime(lastModifiedTime);
-			sysResource.setVersion(version);
-			sysResource.setDelFlag(delFlag);
-			return sysResource;
-		}
-	}
 }
+

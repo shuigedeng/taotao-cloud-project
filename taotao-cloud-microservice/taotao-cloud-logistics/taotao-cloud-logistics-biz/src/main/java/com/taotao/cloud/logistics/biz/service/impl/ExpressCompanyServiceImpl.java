@@ -18,7 +18,7 @@ package com.taotao.cloud.logistics.biz.service.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.logistics.biz.entity.ExpressCompany;
-import com.taotao.cloud.logistics.biz.repository.ExpressCompanyRepository;
+import com.taotao.cloud.logistics.biz.repository.ExpressCompanySuperRepository;
 import com.taotao.cloud.logistics.biz.service.IExpressCompanyService;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +32,9 @@ import java.util.Optional;
 @Service
 public class ExpressCompanyServiceImpl implements IExpressCompanyService {
 
-	private final ExpressCompanyRepository expressCompanyRepository;
+	private final ExpressCompanySuperRepository expressCompanyRepository;
 
-	public ExpressCompanyServiceImpl(ExpressCompanyRepository expressCompanyRepository) {
+	public ExpressCompanyServiceImpl(ExpressCompanySuperRepository expressCompanyRepository) {
 		this.expressCompanyRepository = expressCompanyRepository;
 	}
 

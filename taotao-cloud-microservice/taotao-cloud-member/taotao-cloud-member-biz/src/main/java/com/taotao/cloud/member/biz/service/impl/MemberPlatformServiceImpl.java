@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import com.taotao.cloud.member.biz.repository.MemberPlatformRepository;
+import com.taotao.cloud.member.biz.repository.MemberPlatformSuperRepository;
 import com.taotao.cloud.member.biz.service.IMemberPlatformService;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberPlatformServiceImpl implements IMemberPlatformService {
-    private final MemberPlatformRepository memberPlatformRepository;
+    private final MemberPlatformSuperRepository memberPlatformRepository;
 
 	public MemberPlatformServiceImpl(
-		MemberPlatformRepository memberPlatformRepository) {
+		MemberPlatformSuperRepository memberPlatformRepository) {
 		this.memberPlatformRepository = memberPlatformRepository;
 	}
 }

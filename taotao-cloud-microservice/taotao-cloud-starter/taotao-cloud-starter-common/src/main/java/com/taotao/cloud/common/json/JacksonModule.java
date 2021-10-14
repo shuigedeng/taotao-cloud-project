@@ -16,6 +16,8 @@
 package com.taotao.cloud.common.json;
 
 
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.PackageVersion;
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.taotao.cloud.common.enums.BaseEnum;
 import com.taotao.cloud.common.utils.DateUtil;
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -42,6 +45,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class JacksonModule extends SimpleModule {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -52,18 +56,17 @@ public class JacksonModule extends SimpleModule {
 	 */
 	public JacksonModule() {
 		super(PackageVersion.VERSION);
-		this.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
-		this.addDeserializer(LocalDate.class,
-			new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
-		this.addDeserializer(LocalTime.class,
-			new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
-		this.addSerializer(LocalDateTime.class,
-			new LocalDateTimeSerializer(
-				DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_TIME_FORMAT)));
-		this.addSerializer(LocalDate.class,
-			new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
-		this.addSerializer(LocalTime.class,
-			new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+
+		this.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+		this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT);
+		this.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
+		this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_TIME_FORMAT)));
+
+		this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
+		this.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)));
+
 		this.addSerializer(Long.class, ToStringSerializer.instance);
 		this.addSerializer(Long.TYPE, ToStringSerializer.instance);
 		this.addSerializer(BigInteger.class, ToStringSerializer.instance);

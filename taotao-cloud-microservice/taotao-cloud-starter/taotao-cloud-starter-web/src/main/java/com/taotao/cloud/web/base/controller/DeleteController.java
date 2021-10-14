@@ -15,59 +15,119 @@
  */
 package com.taotao.cloud.web.base.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
+import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
-import java.util.List;
-import org.springframework.http.HttpHeaders;
+import java.util.Objects;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * DeleteController
  *
- * @param <Id>     Id
- * @param <Entity> Entity
+ * @param <T> 实体
+ * @param <I> id
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:05:45
  */
-public interface DeleteController<Entity, Id extends Serializable> extends BaseController<Entity> {
+public interface DeleteController<T extends SuperEntity<I>, I extends Serializable> extends
+	BaseController<T, I> {
 
 	/**
-	 * 删除方法
+	 * 通用单体id删除
 	 *
-	 * @param ids ids
+	 * @param id id
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:06:18
 	 */
-	@Operation(summary = "删除", description = "删除", method = CommonConstant.DELETE, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@DeleteMapping
-	@RequestOperateLog(description = "删除数据")
-	@PreAuthorize("hasAnyPermission('{}delete')")
-	default Result<Boolean> delete(@RequestBody List<Id> ids) {
-		Result<Boolean> result = handlerDelete(ids);
-		if (result.getData()) {
-			getBaseService().removeByIds(ids);
+	@Operation(summary = "通用单体id删除", description = "通用单体id删除", method = CommonConstant.DELETE)
+	@DeleteMapping("/{id:[0-9]*}")
+	@RequestOperateLog(description = "通用单体id删除")
+	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	default Result<Boolean> deleteById(
+		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
+		@PathVariable(value = "id") I id) {
+		if (handlerDeleteById(id)) {
+			return success(getBaseService().removeById(id));
 		}
-		return result;
+
+		throw new BusinessException(ResultEnum.ERROR);
 	}
 
 	/**
-	 * 自定义删除
+	 * 删除
 	 *
-	 * @param ids ids
+	 * @param id id
 	 * @return {@link com.taotao.cloud.common.model.Result } 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:06:27
 	 */
-	default Result<Boolean> handlerDelete(List<Id> ids) {
-		return Result.success(true);
+	default Boolean handlerDeleteById(I id) {
+		if (Objects.isNull(id)) {
+			throw new BusinessException("id不能为空");
+		}
+		return true;
 	}
 
+
+	/**
+	 * 通用单体字段删除
+	 *
+	 * @param filedName  字段名称
+	 * @param filedValue 字段值
+	 * @return {@link Result&lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-11 15:04:58
+	 */
+	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
+	@DeleteMapping("/{filedName}/{filedValue}")
+	@RequestOperateLog(description = "通用单体字段删除")
+	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	default Result<Boolean> deleteByFiled(
+		@Parameter(description = "字段名称", required = true)
+		@NotEmpty(message = "字段名称不能为空")
+		@PathVariable(value = "filedName") String filedName,
+		@Parameter(description = "字段值", required = true)
+		@NotNull(message = "字段值不能为空")
+		@PathVariable(value = "filedValue") Object filedValue) {
+		if (handlerDeleteByFiled(filedName, filedValue)) {
+			if (checkField(filedName)) {
+				QueryWrap<T> wrapper = Wraps.q();
+				wrapper.eq(StrUtil.toUnderlineCase(filedName), filedValue);
+				return success(getBaseService().remove(wrapper));
+			}
+		}
+
+		throw new BusinessException(ResultEnum.ERROR);
+	}
+
+	/**
+	 * 通用单体字段删除
+	 *
+	 * @param filedName  字段名称
+	 * @param filedValue 字段值
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-11 15:03:39
+	 */
+	default Boolean handlerDeleteByFiled(String filedName, Object filedValue) {
+		if (Objects.isNull(filedName) || Objects.isNull(filedValue)) {
+			throw new BusinessException("字段数据不能为空");
+		}
+		return true;
+	}
 }

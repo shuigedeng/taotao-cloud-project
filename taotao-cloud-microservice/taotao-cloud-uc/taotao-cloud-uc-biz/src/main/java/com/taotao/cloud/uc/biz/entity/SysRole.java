@@ -1,6 +1,23 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -8,15 +25,19 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 角色表
+ * 角色表 
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:52:30
  */
 @Entity
-@Table(name = "tt_sys_role")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_role", comment = "角色表")
-public class SysRole extends BaseEntity {
+@Table(name = SysRole.TABLE_NAME)
+@TableName(SysRole.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysRole.TABLE_NAME, comment = "角色表")
+public class SysRole extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_role";
 
 	/**
 	 * 角色名称
@@ -42,37 +63,6 @@ public class SysRole extends BaseEntity {
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
 
-	@Override
-	public String toString() {
-		return "SysRole{" +
-			"name='" + name + '\'' +
-			", code='" + code + '\'' +
-			", remark='" + remark + '\'' +
-			", tenantId='" + tenantId + '\'' +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		SysRole sysRole = (SysRole) o;
-		return Objects.equals(name, sysRole.name) && Objects.equals(code,
-			sysRole.code) && Objects.equals(remark, sysRole.remark)
-			&& Objects.equals(tenantId, sysRole.tenantId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), name, code, remark, tenantId);
-	}
 
 	public String getName() {
 		return name;
@@ -114,112 +104,5 @@ public class SysRole extends BaseEntity {
 		this.code = code;
 		this.remark = remark;
 		this.tenantId = tenantId;
-	}
-
-	public SysRole(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag, String name,
-		String code, String remark, String tenantId) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.name = name;
-		this.code = code;
-		this.remark = remark;
-		this.tenantId = tenantId;
-	}
-
-	public static SysRoleBuilder builder() {
-		return new SysRoleBuilder();
-	}
-
-	public static final class SysRoleBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private String name;
-		private String code;
-		private String remark;
-		private String tenantId;
-
-		private SysRoleBuilder() {
-		}
-
-		public static SysRoleBuilder aSysRole() {
-			return new SysRoleBuilder();
-		}
-
-		public SysRoleBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysRoleBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysRoleBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysRoleBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysRoleBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysRoleBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysRoleBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysRoleBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public SysRoleBuilder code(String code) {
-			this.code = code;
-			return this;
-		}
-
-		public SysRoleBuilder remark(String remark) {
-			this.remark = remark;
-			return this;
-		}
-
-		public SysRoleBuilder tenantId(String tenantId) {
-			this.tenantId = tenantId;
-			return this;
-		}
-
-		public SysRole build() {
-			SysRole sysRole = new SysRole();
-			sysRole.setId(id);
-			sysRole.setCreateBy(createBy);
-			sysRole.setLastModifiedBy(lastModifiedBy);
-			sysRole.setCreateTime(createTime);
-			sysRole.setLastModifiedTime(lastModifiedTime);
-			sysRole.setVersion(version);
-			sysRole.setDelFlag(delFlag);
-			sysRole.name = this.name;
-			sysRole.tenantId = this.tenantId;
-			sysRole.code = this.code;
-			sysRole.remark = this.remark;
-			return sysRole;
-		}
 	}
 }

@@ -18,18 +18,20 @@ package com.taotao.cloud.uc.biz;
 import com.taotao.cloud.dingtalk.annatations.DingerScan;
 import com.taotao.cloud.dingtalk.annatations.EnableMultiDinger;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 
 /**
  * TaoTaoCloudUcApplication
  * 抑制java9 module 报错
- * --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
  *
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/11/30 下午3:33
  */
 @DingerScan(basePackages = "com.taotao.cloud.uc.biz.dingtalk")
+@MapperScan(basePackages = "com.taotao.cloud.uc.biz.mapper")
 @EnableMultiDinger
 @TaoTaoCloudApplication
 public class TaoTaoCloudUcApplication {

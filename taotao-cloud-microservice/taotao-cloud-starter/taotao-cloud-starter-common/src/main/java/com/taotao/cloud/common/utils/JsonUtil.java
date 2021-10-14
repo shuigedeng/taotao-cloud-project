@@ -92,7 +92,6 @@ public class JsonUtil {
 		// 所有日期格式都统一为固定格式
 		MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
 		MAPPER.registerModule(new Jdk8Module());
-		MAPPER.registerModule(new JavaTimeModule());
 
 		// 注册自定义模块
 		MAPPER.registerModule(new JacksonModule());

@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,9 +18,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:51
  */
 @Entity
-@Table(name = "tt_order_refund_request")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_refund_request", comment = "售后申请表")
-public class OrderRefundRequest extends BaseEntity {
+@TableName(OrderRefundRequest.TABLE_NAME)
+@Table(name = OrderRefundRequest.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderRefundRequest.TABLE_NAME, comment = "售后申请表")
+public class OrderRefundRequest extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_refund_request";
 
 	/**
 	 * 退款编号
@@ -1304,7 +1309,7 @@ public class OrderRefundRequest extends BaseEntity {
 			orderRefundRequest.setMainCode(mainCode);
 			orderRefundRequest.setHasApply(hasApply);
 			orderRefundRequest.setId(id);
-			orderRefundRequest.setCreateBy(createBy);
+			orderRefundRequest.setCreatedBy(createBy);
 			orderRefundRequest.setLastModifiedBy(lastModifiedBy);
 			orderRefundRequest.setCreateTime(createTime);
 			orderRefundRequest.setLastModifiedTime(lastModifiedTime);

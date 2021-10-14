@@ -4,44 +4,25 @@
  */
 package com.taotao.cloud.order.biz.service.impl;
 
-import com.taotao.cloud.common.utils.BeanUtil;
-import com.taotao.cloud.order.api.dto.OrderItemDTO;
 import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.order.biz.entity.QOrderItem;
+import com.taotao.cloud.order.biz.mapper.OrderItemMapper;
 import com.taotao.cloud.order.biz.repository.OrderItemRepository;
-import com.taotao.cloud.order.biz.service.IOrderItemService;
+import com.taotao.cloud.order.api.service.IOrderItemService;
+import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <br>
+ * OrderItemServiceImpl
  *
  * @author shuigedeng
- * @version v1.0.0
- * @create 2020/6/10 16:55
+ * @version 2021.10
+ * @since 2021-10-13 21:42:00
  */
 @Service
-public class OrderItemServiceImpl implements IOrderItemService {
+public class OrderItemServiceImpl extends
+	BaseSuperServiceImpl<OrderItemMapper, OrderItem, OrderItemRepository, Long>
+	implements IOrderItemService<OrderItem, Long> {
 
-	private final OrderItemRepository orderItemRepository;
-
-	public OrderItemServiceImpl(
-		OrderItemRepository orderItemRepository) {
-		this.orderItemRepository = orderItemRepository;
-	}
-
-
-	@Override
-	public OrderItem findOrderItemByCode(String code) {
-		return null;
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public OrderItem saveOrderItem(OrderItemDTO orderItemDTO) {
-		OrderItem orderItem = new OrderItem();
-		BeanUtil.copyIgnoredNull(orderItemDTO, orderItem);
-		orderItemRepository.save(orderItem);
-
-		return orderItem;
-	}
+	private final static QOrderItem ORDER_ITEM = QOrderItem.orderItem;
 }

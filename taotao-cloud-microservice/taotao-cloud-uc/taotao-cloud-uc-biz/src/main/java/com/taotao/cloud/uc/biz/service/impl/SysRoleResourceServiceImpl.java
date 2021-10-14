@@ -15,49 +15,46 @@
  */
 package com.taotao.cloud.uc.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.uc.biz.entity.QSysRoleResource;
+import com.taotao.cloud.uc.api.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.entity.SysRoleResource;
+import com.taotao.cloud.uc.biz.mapper.SysRoleResourceMapper;
 import com.taotao.cloud.uc.biz.repository.SysRoleResourceRepository;
-import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
+import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author shuigedeng
- * @since 2020/10/21 09:48
  * @version 1.0.0
+ * @since 2020/10/21 09:48
  */
 @Service
-public class SysRoleResourceServiceImpl implements ISysRoleResourceService {
+public class SysRoleResourceServiceImpl extends
+	BaseSuperServiceImpl<SysRoleResourceMapper, SysRoleResource, SysRoleResourceRepository, Long>
+	implements ISysRoleResourceService<SysRoleResource, Long> {
 
-    private final SysRoleResourceRepository roleResourceRepository;
-
-	public SysRoleResourceServiceImpl(
-		SysRoleResourceRepository roleResourceRepository) {
-		this.roleResourceRepository = roleResourceRepository;
-	}
-
-	private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
-
-    @Override
-    public Boolean saveRoleResource(Long roleId, Set<Long> resourceIds) {
-        BooleanExpression expression = SYS_ROLE_RESOURCE.roleId.eq(roleId);
-        List<SysRoleResource> roleResources = roleResourceRepository.fetch(expression);
-        if (CollUtil.isNotEmpty(roleResources)) {
-            // 删除数据
-            roleResourceRepository.deleteAll(roleResources);
-        }
-        // 批量添加数据
-        List<SysRoleResource> collect = resourceIds.stream().map(resourceId -> SysRoleResource.builder()
-                .roleId(roleId)
-                .resourceId(resourceId)
-                .build()).collect(Collectors.toList());
-        roleResourceRepository.saveAll(collect);
-        return true;
-    }
+	//private final SysRoleResourceRepository roleResourceRepository;
+	//
+	//public SysRoleResourceServiceImpl(
+	//	SysRoleResourceRepository roleResourceRepository) {
+	//	this.roleResourceRepository = roleResourceRepository;
+	//}
+	//
+	//private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
+	//
+	//@Override
+	//public Boolean saveRoleResource(Long roleId, Set<Long> resourceIds) {
+	//    BooleanExpression expression = SYS_ROLE_RESOURCE.roleId.eq(roleId);
+	//    List<SysRoleResource> roleResources = roleResourceRepository.fetch(expression);
+	//    if (CollUtil.isNotEmpty(roleResources)) {
+	//        // 删除数据
+	//        roleResourceRepository.deleteAll(roleResources);
+	//    }
+	//    // 批量添加数据
+	//    List<SysRoleResource> collect = resourceIds.stream().map(resourceId -> SysRoleResource.builder()
+	//            .roleId(roleId)
+	//            .resourceId(resourceId)
+	//            .build()).collect(Collectors.toList());
+	//    roleResourceRepository.saveAll(collect);
+	//    return true;
+	//}
 }

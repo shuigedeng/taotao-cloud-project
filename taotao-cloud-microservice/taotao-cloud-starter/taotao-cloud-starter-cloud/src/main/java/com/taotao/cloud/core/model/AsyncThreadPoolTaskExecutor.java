@@ -29,6 +29,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
 
@@ -44,41 +45,41 @@ public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 	private static final long serialVersionUID = -5887035957049288777L;
 
 	@Override
-	public void execute(Runnable runnable) {
+	public void execute(@NotNull Runnable runnable) {
 		Runnable ttlRunnable = TtlRunnable.get(runnable);
 		showThreadPoolInfo("execute(Runnable task)");
 		super.execute(ttlRunnable);
 	}
 
 	@Override
-	public void execute(Runnable task, long startTimeout) {
+	public void execute(@NotNull Runnable task, long startTimeout) {
 		showThreadPoolInfo("execute(Runnable task, long startTimeout)");
 		super.execute(task, startTimeout);
 	}
 
 	@Override
-	public <T> Future<T> submit(Callable<T> task) {
+	public <T> Future<T> submit(@NotNull Callable<T> task) {
 		Callable<T> ttlCallable = TtlCallable.get(task);
 		showThreadPoolInfo("submit(Callable<T> task)");
 		return super.submit(ttlCallable);
 	}
 
 	@Override
-	public Future<?> submit(Runnable task) {
+	public Future<?> submit(@NotNull Runnable task) {
 		Runnable ttlRunnable = TtlRunnable.get(task);
 		showThreadPoolInfo("submit(Runnable task)");
 		return super.submit(ttlRunnable);
 	}
 
 	@Override
-	public ListenableFuture<?> submitListenable(Runnable task) {
+	public ListenableFuture<?> submitListenable(@NotNull Runnable task) {
 		Runnable ttlRunnable = TtlRunnable.get(task);
 		showThreadPoolInfo("submitListenable(Runnable task)");
 		return super.submitListenable(ttlRunnable);
 	}
 
 	@Override
-	public <T> ListenableFuture<T> submitListenable(Callable<T> task) {
+	public <T> ListenableFuture<T> submitListenable(@NotNull Callable<T> task) {
 		Callable<T> ttlCallable = TtlCallable.get(task);
 		showThreadPoolInfo("submitListenable(Callable<T> task)");
 		return super.submitListenable(ttlCallable);
@@ -93,8 +94,14 @@ public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 	 */
 	private void showThreadPoolInfo(String method) {
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 2];
+
 		LogUtil.info(
-			"threadNamePrefix[{}], method[{}], taskCount[{}], completedTaskCount[{}], activeCount[{}], queueSize[{}]",
+			"className[{}] methodName[{}] lineNumber[{}] threadNamePrefix[{}] method[{}]  taskCount[{}] completedTaskCount[{}] activeCount[{}] queueSize[{}]",
+			stackTraceElement.getClassName(),
+			stackTraceElement.getMethodName(),
+			stackTraceElement.getLineNumber(),
 			this.getThreadNamePrefix(),
 			method,
 			threadPoolExecutor.getTaskCount(),

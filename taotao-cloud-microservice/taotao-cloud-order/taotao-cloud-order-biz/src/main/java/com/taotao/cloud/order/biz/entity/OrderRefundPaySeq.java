@@ -1,7 +1,9 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,9 +18,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:46
  */
 @Entity
-@Table(name = "tt_order_refund_pay_seq")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_refund_pay_seq", comment = "退款流水表")
-public class OrderRefundPaySeq extends BaseEntity {
+@TableName(OrderRefundPaySeq.TABLE_NAME)
+@Table(name = OrderRefundPaySeq.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderRefundPaySeq.TABLE_NAME, comment = "退款流水表")
+public class OrderRefundPaySeq  extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_refund_pay_seq";
 
 	/**
 	 * 售后申请ID
@@ -79,50 +84,6 @@ public class OrderRefundPaySeq extends BaseEntity {
 	 */
 	@Column(name = "create_date", columnDefinition = "TIMESTAMP comment '创建日期'")
 	private LocalDateTime createDate;
-
-	@Override
-	public String toString() {
-		return "OrderRefundPaySeq{" +
-			"refundCode='" + refundCode + '\'' +
-			", stewardAuditDate=" + stewardAuditDate +
-			", stewardId='" + stewardId + '\'' +
-			", amount=" + amount +
-			", wxRefundId='" + wxRefundId + '\'' +
-			", wxRefundChanel='" + wxRefundChanel + '\'' +
-			", wxRefundStatus=" + wxRefundStatus +
-			", wxRefundTarget='" + wxRefundTarget + '\'' +
-			", refundDate=" + refundDate +
-			", createDate=" + createDate +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		OrderRefundPaySeq that = (OrderRefundPaySeq) o;
-		return Objects.equals(refundCode, that.refundCode) && Objects.equals(
-			stewardAuditDate, that.stewardAuditDate) && Objects.equals(stewardId,
-			that.stewardId) && Objects.equals(amount, that.amount)
-			&& Objects.equals(wxRefundId, that.wxRefundId) && Objects.equals(
-			wxRefundChanel, that.wxRefundChanel) && Objects.equals(wxRefundStatus,
-			that.wxRefundStatus) && Objects.equals(wxRefundTarget, that.wxRefundTarget)
-			&& Objects.equals(refundDate, that.refundDate) && Objects.equals(
-			createDate, that.createDate);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), refundCode, stewardAuditDate, stewardId, amount,
-			wxRefundId, wxRefundChanel, wxRefundStatus, wxRefundTarget, refundDate, createDate);
-	}
 
 	public String getRefundCode() {
 		return refundCode;
@@ -211,25 +172,6 @@ public class OrderRefundPaySeq extends BaseEntity {
 		String stewardId, BigDecimal amount, String wxRefundId, String wxRefundChanel,
 		Integer wxRefundStatus, String wxRefundTarget, LocalDateTime refundDate,
 		LocalDateTime createDate) {
-		this.refundCode = refundCode;
-		this.stewardAuditDate = stewardAuditDate;
-		this.stewardId = stewardId;
-		this.amount = amount;
-		this.wxRefundId = wxRefundId;
-		this.wxRefundChanel = wxRefundChanel;
-		this.wxRefundStatus = wxRefundStatus;
-		this.wxRefundTarget = wxRefundTarget;
-		this.refundDate = refundDate;
-		this.createDate = createDate;
-	}
-
-	public OrderRefundPaySeq(Long id, Long createBy, Long lastModifiedBy,
-		LocalDateTime createTime, LocalDateTime lastModifiedTime, int version,
-		Boolean delFlag, String refundCode, LocalDateTime stewardAuditDate,
-		String stewardId, BigDecimal amount, String wxRefundId, String wxRefundChanel,
-		Integer wxRefundStatus, String wxRefundTarget, LocalDateTime refundDate,
-		LocalDateTime createDate) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
 		this.refundCode = refundCode;
 		this.stewardAuditDate = stewardAuditDate;
 		this.stewardId = stewardId;
@@ -368,7 +310,7 @@ public class OrderRefundPaySeq extends BaseEntity {
 			orderRefundPaySeq.setRefundDate(refundDate);
 			orderRefundPaySeq.setCreateDate(createDate);
 			orderRefundPaySeq.setId(id);
-			orderRefundPaySeq.setCreateBy(createBy);
+			orderRefundPaySeq.setCreatedBy(createBy);
 			orderRefundPaySeq.setLastModifiedBy(lastModifiedBy);
 			orderRefundPaySeq.setCreateTime(createTime);
 			orderRefundPaySeq.setLastModifiedTime(lastModifiedTime);

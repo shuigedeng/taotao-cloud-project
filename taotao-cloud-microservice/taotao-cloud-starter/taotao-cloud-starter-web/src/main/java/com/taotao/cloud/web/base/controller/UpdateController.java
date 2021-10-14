@@ -16,79 +16,80 @@
 package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.http.HttpHeaders;
+import io.swagger.v3.oas.annotations.Parameter;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * UpdateController
  *
- * @param <Entity>    实体
+ * @param <T>         实体
+ * @param <I>         id
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:15:51
  */
-public interface UpdateController<Entity, UpdateDTO> extends BaseController<Entity> {
+public interface UpdateController<T extends SuperEntity<I>, I extends Serializable, UpdateDTO> extends
+	BaseController<T, I> {
 
 	/**
-	 * 修改
+	 * 通用单体更新
 	 *
-	 * @param updateDTO 修改DTO
-	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @param id        id
+	 * @param updateDTO 更新DTO
+	 * @return {@link Result&lt;T&gt; }
 	 * @author shuigedeng
-	 * @since 2021-09-02 21:16:08
+	 * @since 2021-10-11 17:00:12
 	 */
-	@Operation(summary = "修改", description = "修改UpdateDTO中不为空的字段", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@PutMapping
-	@RequestOperateLog(value = "'修改:' + #updateDTO?.id", request = false)
-	@PreAuthorize("hasAnyPermission('{}edit')")
-	default Result<Entity> update(
-			@RequestBody @Validated(SuperEntity.Update.class) UpdateDTO updateDTO) {
-		Result<Entity> result = handlerUpdate(updateDTO);
-		if (result.getData() != null) {
-			Entity model = BeanUtil.toBean(updateDTO, getEntityClass());
-			getBaseService().updateById(model);
-			result.setData(model);
+	@Operation(summary = "通用单体更新", description = "通用单体更新", method = CommonConstant.PUT)
+	@PutMapping("/{id:[0-9]*}")
+	@RequestOperateLog(value = "'通用单体更新:' + #id", request = false)
+	@PreAuthorize("@permissionVerifier.hasPermission('update')")
+	default Result<Boolean> update(
+		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
+		@PathVariable(value = "id") I id,
+		@Parameter(description = "通用单体更新DTO", required = true)
+		@RequestBody @Validated UpdateDTO updateDTO) {
+		if (handlerUpdate(updateDTO)) {
+			T t = getBaseService().getById(id);
+			if (Objects.isNull(t)) {
+				throw new BusinessException("未查询到数据");
+			}
+
+			if (checkField(updateDTO.getClass())) {
+				BeanUtil.copyProperties(updateDTO, t, CopyOptions.create().ignoreNullValue());
+				getBaseService().updateById(t);
+			}
 		}
-		return result;
-	}
-
-	/**
-	 * 修改所有字段
-	 *
-	 * @param entity entity
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:16:16
-	 */
-	@Operation(summary = "修改所有字段", description = "修改所有字段，没有传递的字段会被置空", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@PutMapping("/all")
-	@RequestOperateLog(value = "'修改所有字段:' + #entity?.id", request = false)
-	@PreAuthorize("hasAnyPermission('{}edit')")
-	default Result<Entity> updateAll(
-			@RequestBody @Validated(SuperEntity.Update.class) Entity entity) {
-		getBaseService().updateAllById(entity);
-		return Result.success(entity);
+		return success(true);
 	}
 
 	/**
 	 * 自定义更新
 	 *
-	 * @param model 修改DTO
+	 * @param model 更新DTO
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:16:25
 	 */
-	default Result<Entity> handlerUpdate(UpdateDTO model) {
-		return Result.success();
+	default Boolean handlerUpdate(UpdateDTO model) {
+		if (Objects.isNull(model)) {
+			throw new BusinessException("更新DTO不能为空");
+		}
+		return true;
 	}
 }

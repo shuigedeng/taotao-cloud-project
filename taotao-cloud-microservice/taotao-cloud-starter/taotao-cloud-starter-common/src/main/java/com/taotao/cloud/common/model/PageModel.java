@@ -9,17 +9,23 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WIRHOUR WARRANRIES OR CONDIRIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package com.taotao.cloud.common.model;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 
 /**
@@ -30,8 +36,9 @@ import org.springframework.data.domain.Page;
  * @since 2021-09-02 19:09:19
  */
 @Schema(description = "分页结果对象")
-public class PageModel<T> implements Serializable {
+public class PageModel<R> implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -275582248840137389L;
 	/**
 	 * 总条数
@@ -57,13 +64,13 @@ public class PageModel<T> implements Serializable {
 	 * 返回数据
 	 */
 	@Schema(description = "返回数据")
-	private List<T> data;
+	private List<R> data;
 
 	public PageModel() {
 	}
 
 	public PageModel(long totalSize, int totalPage, int currentPage, int pageSize,
-		List<T> data) {
+		List<R> data) {
 		this.totalSize = totalSize;
 		this.totalPage = totalPage;
 		this.currentPage = currentPage;
@@ -75,18 +82,24 @@ public class PageModel<T> implements Serializable {
 	 * convertJpaPage
 	 *
 	 * @param page page
-	 * @param <T>  T
+	 * @param <R>  R
 	 * @return {@link PageModel }
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:10:45
 	 */
-	public static <T> PageModel<T> convertJpaPage(Page<T> page) {
+	public static <R, T> PageModel<R> convertJpaPage(Page<T> page ,Class<R> r) {
+		List<T> records = page.getContent();
+		List<R> collect = Optional.ofNullable(records)
+			.orElse(new ArrayList<>())
+			.stream().filter(Objects::nonNull)
+			.map(t -> BeanUtil.toBean(t, r)).collect(Collectors.toList());
+
 		return of(
 			page.getTotalElements(),
 			page.getTotalPages(),
 			page.getNumber(),
 			page.getSize(),
-			page.getContent()
+			collect
 		);
 	}
 
@@ -94,18 +107,24 @@ public class PageModel<T> implements Serializable {
 	 * convertMybatisPage
 	 *
 	 * @param page page
-	 * @param <T>  T
+	 * @param <R>  R
 	 * @return {@link PageModel }
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:10:49
 	 */
-	public static <T> PageModel<T> convertMybatisPage(IPage<T> page) {
+	public static <R, T> PageModel<R> convertMybatisPage(IPage<T> page, Class<R> r) {
+		List<T> records = page.getRecords();
+		List<R> collect = Optional.ofNullable(records)
+			.orElse(new ArrayList<>())
+			.stream().filter(Objects::nonNull)
+			.map(t -> BeanUtil.toBean(t, r)).collect(Collectors.toList());
+
 		return of(
 			page.getTotal(),
 			(int) page.getPages(),
 			(int) page.getCurrent(),
 			(int) page.getSize(),
-			page.getRecords()
+			collect
 		);
 	}
 
@@ -117,18 +136,18 @@ public class PageModel<T> implements Serializable {
 	 * @param currentPage currentPage
 	 * @param pageSize    pageSize
 	 * @param data        data
-	 * @param <T>         T
+	 * @param <R>         R
 	 * @return {@link com.taotao.cloud.common.model.PageModel }
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:11:10
 	 */
-	public static <T> PageModel<T> of(
+	public static <R> PageModel<R> of(
 		long totalSize,
 		int totalPage,
 		int currentPage,
 		int pageSize,
-		List<T> data) {
-		return PageModel.<T>builder()
+		List<R> data) {
+		return PageModel.<R>builder()
 			.totalSize(totalSize)
 			.totalPage(totalPage)
 			.currentPage(currentPage)
@@ -169,55 +188,25 @@ public class PageModel<T> implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public List<T> getData() {
+	public List<R> getData() {
 		return data;
 	}
 
-	public void setData(List<T> data) {
+	public void setData(List<R> data) {
 		this.data = data;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		PageModel<?> pageModel = (PageModel<?>) o;
-		return totalSize == pageModel.totalSize && totalPage == pageModel.totalPage
-			&& currentPage == pageModel.currentPage && pageSize == pageModel.pageSize
-			&& Objects.equals(data, pageModel.data);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(totalSize, totalPage, currentPage, pageSize, data);
-	}
-
-	@Override
-	public String toString() {
-		return "PageModel{" +
-			"totalSize=" + totalSize +
-			", totalPage=" + totalPage +
-			", currentPage=" + currentPage +
-			", pageSize=" + pageSize +
-			", data=" + data +
-			'}';
-	}
-
-	public static <T> PageModelBuilder<T> builder() {
+	public static <R> PageModelBuilder<R> builder() {
 		return new PageModelBuilder<>();
 	}
 
-	public static final class PageModelBuilder<T> {
+	public static final class PageModelBuilder<R> {
 
 		private long totalSize;
 		private int totalPage;
 		private int currentPage;
 		private int pageSize;
-		private List<T> data;
+		private List<R> data;
 
 		private PageModelBuilder() {
 		}
@@ -242,7 +231,7 @@ public class PageModel<T> implements Serializable {
 			return this;
 		}
 
-		public PageModelBuilder data(List<T> data) {
+		public PageModelBuilder data(List<R> data) {
 			this.data = data;
 			return this;
 		}

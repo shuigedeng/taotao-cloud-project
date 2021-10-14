@@ -16,7 +16,7 @@
 package com.taotao.cloud.bulletin.biz.service.impl;
 
 import com.taotao.cloud.bulletin.biz.entity.Bulletin;
-import com.taotao.cloud.bulletin.biz.repository.BulletinRepository;
+import com.taotao.cloud.bulletin.biz.repository.BulletinSuperRepository;
 import com.taotao.cloud.bulletin.biz.service.IBulletinService;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +30,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BulletinServiceImpl implements IBulletinService {
 
-	private final BulletinRepository bulletinRepository;
+	private final BulletinSuperRepository bulletinRepository;
 
 	public BulletinServiceImpl(
-		BulletinRepository bulletinRepository) {
+		BulletinSuperRepository bulletinRepository) {
 		this.bulletinRepository = bulletinRepository;
 	}
 

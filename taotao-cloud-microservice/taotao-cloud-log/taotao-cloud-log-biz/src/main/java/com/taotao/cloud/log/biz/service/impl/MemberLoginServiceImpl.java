@@ -18,7 +18,7 @@ package com.taotao.cloud.log.biz.service.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.log.biz.entity.MemberLogin;
-import com.taotao.cloud.log.biz.repository.MemberLoginRepository;
+import com.taotao.cloud.log.biz.repository.MemberLoginSuperRepository;
 import com.taotao.cloud.log.biz.service.IMemberLoginService;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +32,9 @@ import java.util.Optional;
 @Service
 public class MemberLoginServiceImpl implements IMemberLoginService {
 
-	private final MemberLoginRepository memberLoginRepository;
+	private final MemberLoginSuperRepository memberLoginRepository;
 
-	public MemberLoginServiceImpl(MemberLoginRepository memberLoginRepository) {
+	public MemberLoginServiceImpl(MemberLoginSuperRepository memberLoginRepository) {
 		this.memberLoginRepository = memberLoginRepository;
 	}
 

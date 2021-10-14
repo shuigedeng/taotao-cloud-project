@@ -1,0 +1,229 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.taotao.cloud.web.base.controller;
+
+import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.ExcelXorHtmlUtil;
+import cn.afterturn.easypoi.excel.entity.ExcelToHtmlParams;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.view.PoiBaseView;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
+import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.web.base.entity.SuperEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * PoiController
+ *
+ * @param <T>        实体
+ * @param <I>        id
+ * @param <QueryDTO> 查询参数
+ * @param <QueryVO>  查询返回参数
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 21:07:59
+ */
+public interface ExcelController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+	PageController<T, I, QueryDTO, QueryVO> {
+
+	/**
+	 * 通用导出Excel
+	 *
+	 * @param params   参数
+	 * @param request  请求
+	 * @param response 响应
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:22
+	 */
+	@Operation(summary = "通用导出Excel", description = "通用导出Excel", method = CommonConstant.POST)
+	@PostMapping(value = "/excel/export", produces = "application/octet-stream")
+	@RequestOperateLog("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
+	@PreAuthorize("@permissionVerifier.hasPermission('export')")
+	default void export(
+		@Parameter(description = "分页查询DTO", required = true)
+		@RequestBody @Validated PageQuery<QueryDTO> params,
+		HttpServletRequest request, HttpServletResponse response) {
+		ExportParams exportParams = getExportParams(params);
+
+		List<T> list = findExportList(params);
+
+		Map<String, Object> map = new HashMap<>(7);
+		map.put(NormalExcelConstants.DATA_LIST, list);
+		map.put(NormalExcelConstants.CLASS, getExcelClass());
+		map.put(NormalExcelConstants.PARAMS, exportParams);
+		String fileName = params.getExeclQuery().getFileName();
+		map.put(NormalExcelConstants.FILE_NAME, fileName);
+
+		PoiBaseView.render(map, request, response, NormalExcelConstants.EASYPOI_EXCEL_VIEW);
+	}
+
+
+	/**
+	 * 通用预览Excel
+	 *
+	 * @param params 预览参数
+	 * @return {@link com.taotao.cloud.common.model.Result } 预览html
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:45
+	 */
+	@Operation(summary = "通用预览Excel", description = "通用预览Excel", method = CommonConstant.POST)
+	@PostMapping(value = "/excel/preview")
+	@RequestOperateLog("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
+	@PreAuthorize("@permissionVerifier.hasPermission('preview')")
+	default Result<String> preview(
+		@Parameter(description = "分页查询DTO", required = true)
+		@RequestBody @Validated PageQuery<QueryDTO> params) {
+		ExportParams exportParams = getExportParams(params);
+		List<T> list = findExportList(params);
+		Workbook workbook = ExcelExportUtil.exportExcel(exportParams, getExcelClass(), list);
+		return success(ExcelXorHtmlUtil.excelToHtml(new ExcelToHtmlParams(workbook)));
+	}
+
+	/**
+	 * 通用导入Excel
+	 *
+	 * @param file     上传文件
+	 * @param request  请求
+	 * @param response 响应
+	 * @return {@link com.taotao.cloud.common.model.Result } 是否导入成功
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:09
+	 */
+	@Operation(summary = "通用导入Excel", description = "通用导入Excel", method = CommonConstant.POST)
+	@PostMapping(value = "/excel/import", headers = "content-type=multipart/form-data")
+	@RequestOperateLog(value = "'通用导入Excel:' + #file?.originalFilename")
+	@PreAuthorize("@permissionVerifier.hasPermission('import')")
+	default Result<Boolean> importExcel(
+		@Parameter(description = "文件", required = true) @NotNull(message = "文件不能为空")
+		@RequestPart("file") MultipartFile file,
+		HttpServletRequest request, HttpServletResponse response) {
+		ImportParams params = new ImportParams();
+
+		params.setTitleRows(StrUtil.isEmpty(request.getParameter("titleRows")) ? 0
+			: Convert.toInt(request.getParameter("titleRows")));
+		params.setHeadRows(StrUtil.isEmpty(request.getParameter("headRows")) ? 1
+			: Convert.toInt(request.getParameter("headRows")));
+
+		try {
+			List<Map<String, String>> list = ExcelImportUtil.importExcel(
+				file.getInputStream(), Map.class, params);
+
+			if (list != null && !list.isEmpty()) {
+				return handlerImport(list);
+			}
+		} catch (Exception e) {
+			LogUtil.error(e);
+		}
+
+		throw new BusinessException("导入Excel失败");
+	}
+
+	/**
+	 * 转换后保存
+	 *
+	 * @param list 集合
+	 * @return {@link com.taotao.cloud.common.model.Result }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:35
+	 */
+	default Result<Boolean> handlerImport(List<Map<String, String>> list) {
+		return Result.success();
+	}
+
+	/**
+	 * 构建导出参数 子类可以重写
+	 *
+	 * @param params 分页参数
+	 * @return {@link cn.afterturn.easypoi.excel.entity.ExportParams }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:45
+	 */
+	default ExportParams getExportParams(PageQuery<QueryDTO> params) {
+		if (Objects.isNull(params.getExeclQuery())) {
+			throw new BusinessException("execl参数不能为空");
+		}
+		String title = params.getExeclQuery().getTitle();
+		String type = params.getExeclQuery().getType();
+		String sheetName = params.getExeclQuery().getSheetName();
+
+		ExcelType excelType = ExcelType.XSSF.name().equals(type) ? ExcelType.XSSF : ExcelType.HSSF;
+		ExportParams ep = new ExportParams(title, sheetName, excelType);
+		enhanceExportParams(ep);
+		return ep;
+	}
+
+	/**
+	 * 子类增强ExportParams
+	 *
+	 * @param ep ep
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:09:51
+	 */
+	default void enhanceExportParams(ExportParams ep) {
+	}
+
+	/**
+	 * 查询待导出的数据， 子类可以重写
+	 *
+	 * @param params params
+	 * @return {@link java.util.List }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:33
+	 */
+	default List<T> findExportList(PageQuery<QueryDTO> params) {
+		QueryWrap<T> tQueryWrap = handlerWrapper(params);
+		return getBaseService().list(tQueryWrap);
+	}
+
+	/**
+	 * 获取实体的类型
+	 *
+	 * @return {@link java.lang.Class }
+	 * @author shuigedeng
+	 * @since 2021-09-02 21:08:15
+	 */
+	default Class<T> getExcelClass() {
+		return getEntityClass();
+	}
+}

@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_member_platform")
 @org.hibernate.annotations.Table(appliesTo = "tt_member_platform", comment = "第三方登录信息")
-public class MemberPlatform extends BaseEntity {
+public class MemberPlatform extends JpaSuperEntity {
 
 	/**
 	 * 会员id

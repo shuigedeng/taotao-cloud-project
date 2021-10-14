@@ -12,18 +12,6 @@ api[0].list.push({
     desc: '订单管理API',
     list: []
 })
-api[0].list[0].list.push({
-    order: '1',
-    deprecated: 'false',
-    url: 'http://gateway.taotaocloud.com/api/v2021.10.1/order/info/{code}',
-    desc: '获取订单信息',
-});
-api[0].list[0].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://gateway.taotaocloud.com/api/v2021.10.1/order/',
-    desc: '添加订单信息',
-});
 api[0].list.push({
     alias: 'OrderItemController',
     order: '2',
@@ -34,24 +22,49 @@ api[0].list.push({
 api[0].list[1].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://gateway.taotaocloud.com/api/v2021.10.1/order/item/save',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/order/item/save',
     desc: '添加订单项信息',
 });
 api[0].list.push({
-    alias: 'error',
+    alias: 'ExcelController',
     order: '3',
+    link: 'poicontroller',
+    desc: 'PoiController',
+    list: []
+})
+api[0].list[2].list.push({
+    order: '1',
+    deprecated: 'false',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/export',
+    desc: '通用导出Excel',
+});
+api[0].list[2].list.push({
+    order: '2',
+    deprecated: 'false',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/preview',
+    desc: '通用预览Excel',
+});
+api[0].list[2].list.push({
+    order: '3',
+    deprecated: 'false',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/import',
+    desc: '通用导入Excel使用自动生成的实体+注解方式导入对RemoteData类型的字段不支持，建议自建实体使用',
+});
+api[0].list.push({
+    alias: 'error',
+    order: '4',
     link: 'error_code_list',
     desc: '错误码列表',
     list: []
 })
 api[0].list.push({
     alias: 'dict',
-    order: '4',
+    order: '5',
     link: 'dict_list',
     desc: '数据字典',
     list: []
 })
-api[0].list[3].list.push({
+api[0].list[4].list.push({
     order: '1',
     deprecated: 'false',
     url: '',
@@ -183,7 +196,7 @@ function buildAccordion(apiGroups, liClass, display) {
                 let apiData = apiGroup.list;
                 for (let j = 0; j < apiData.length; j++) {
                     html += '<li class="'+liClass+'">';
-                    html += '<a class="dd" href="#_' + apiData[j].link + '">' +apiGroup.order+'.'+ apiData[j].order + '.&nbsp;' + apiData[j].desc + '</a>';
+                    html += '<a class="dd" href="#_'+apiGroup.order+'_'+ apiData[j].order + '_'+ apiData[j].link + '">' +apiGroup.order+'.'+ apiData[j].order + '.&nbsp;' + apiData[j].desc + '</a>';
                     html += '<ul class="sectlevel2" style="'+display+'">';
                     doc = apiData[j].list;
                     for (let m = 0; m < doc.length; m++) {
@@ -193,7 +206,7 @@ function buildAccordion(apiGroups, liClass, display) {
                        } else {
                            spanString='<span>';
                        }
-                       html += '<li><a href="#_' + apiData[j].order + '_' + doc[m].order + '_' + doc[m].href + '">' + apiData[j].order + '.' + doc[m].order + '.&nbsp;' + spanString + doc[m].desc + '<span></a> </li>';
+                       html += '<li><a href="#_'+apiGroup.order+'_' + apiData[j].order + '_' + doc[m].order + '_' + doc[m].desc + '">'+apiGroup.order+'.' + apiData[j].order + '.' + doc[m].order + '.&nbsp;' + spanString + doc[m].desc + '<span></a> </li>';
                    }
                     html += '</ul>';
                     html += '</li>';

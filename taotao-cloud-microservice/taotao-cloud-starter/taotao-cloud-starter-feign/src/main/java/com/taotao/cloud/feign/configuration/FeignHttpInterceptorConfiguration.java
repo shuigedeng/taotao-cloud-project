@@ -17,11 +17,13 @@ package com.taotao.cloud.feign.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
 import feign.RequestInterceptor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
@@ -51,6 +53,18 @@ public class FeignHttpInterceptorConfiguration implements InitializingBean {
 	}
 
 	protected List<String> requestHeaders = new ArrayList<>();
+
+	public static final List<String> HEADER_NAME_LIST = Arrays.asList(
+		ContextConstant.JWT_KEY_TENANT,
+		ContextConstant.JWT_KEY_SUB_TENANT,
+		ContextConstant.JWT_KEY_USER_ID,
+		ContextConstant.JWT_KEY_ACCOUNT,
+		ContextConstant.JWT_KEY_NAME,
+		ContextConstant.GRAY_VERSION,
+		ContextConstant.TRACE_ID_HEADER,
+		"X-Real-IP",
+		"x-forwarded-for"
+	);
 
 	@PostConstruct
 	public void initialize() {

@@ -9,7 +9,7 @@ import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
 import com.taotao.cloud.member.biz.entity.Member;
 import com.taotao.cloud.member.biz.entity.QMember;
-import com.taotao.cloud.member.biz.repository.MemberRepository;
+import com.taotao.cloud.member.biz.repository.MemberSuperRepository;
 import com.taotao.cloud.member.biz.service.IMemberService;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +29,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Service
 public class MemberServiceImpl implements IMemberService {
 
-	private final MemberRepository memberUserRepository;
+	private final MemberSuperRepository memberUserRepository;
 
 	public MemberServiceImpl(
-		MemberRepository memberUserRepository) {
+		MemberSuperRepository memberUserRepository) {
 		this.memberUserRepository = memberUserRepository;
 	}
 

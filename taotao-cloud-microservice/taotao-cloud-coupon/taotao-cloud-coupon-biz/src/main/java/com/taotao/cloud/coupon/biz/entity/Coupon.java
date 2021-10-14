@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.coupon.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "tt_coupon")
 @org.hibernate.annotations.Table(appliesTo = "tt_coupon", comment = "提现申请表")
-public class Coupon extends BaseEntity {
+public class Coupon extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

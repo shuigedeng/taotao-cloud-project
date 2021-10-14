@@ -1,10 +1,10 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,9 +16,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:42
  */
 @Entity
-@Table(name = "tt_order_item")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_item", comment = "订单明细表")
-public class OrderItem extends BaseEntity {
+@TableName(OrderItem.TABLE_NAME)
+@Table(name = OrderItem.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderItem.TABLE_NAME, comment = "订单明细表")
+public class OrderItem extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_item";
 
 	/**
 	 * 订单子编码
@@ -109,62 +112,6 @@ public class OrderItem extends BaseEntity {
 	 */
 	@Column(name = "type", columnDefinition = "int not null default 0 comment '0-普通商品 1-秒杀商品'")
 	private Integer type = 0;
-
-	@Override
-	public String toString() {
-		return "OrderItem{" +
-			"itemCode='" + itemCode + '\'' +
-			", productSpuId=" + productSpuId +
-			", productSpuCode='" + productSpuCode + '\'' +
-			", productSpuName='" + productSpuName + '\'' +
-			", productSkuId=" + productSkuId +
-			", productSkuName='" + productSkuName + '\'' +
-			", productPrice=" + productPrice +
-			", num=" + num +
-			", sumAmount=" + sumAmount +
-			", productPicUrl='" + productPicUrl + '\'' +
-			", supplierId=" + supplierId +
-			", supplierName='" + supplierName + '\'' +
-			", refundTime=" + refundTime +
-			", rejectCount=" + rejectCount +
-			", type=" + type +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		OrderItem orderItem = (OrderItem) o;
-		return Objects.equals(itemCode, orderItem.itemCode) && Objects.equals(
-			productSpuId, orderItem.productSpuId) && Objects.equals(productSpuCode,
-			orderItem.productSpuCode) && Objects.equals(productSpuName,
-			orderItem.productSpuName) && Objects.equals(productSkuId,
-			orderItem.productSkuId) && Objects.equals(productSkuName,
-			orderItem.productSkuName) && Objects.equals(productPrice,
-			orderItem.productPrice) && Objects.equals(num, orderItem.num)
-			&& Objects.equals(sumAmount, orderItem.sumAmount) && Objects.equals(
-			productPicUrl, orderItem.productPicUrl) && Objects.equals(supplierId,
-			orderItem.supplierId) && Objects.equals(supplierName, orderItem.supplierName)
-			&& Objects.equals(refundTime, orderItem.refundTime)
-			&& Objects.equals(rejectCount, orderItem.rejectCount)
-			&& Objects.equals(type, orderItem.type);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), itemCode, productSpuId, productSpuCode,
-			productSpuName,
-			productSkuId, productSkuName, productPrice, num, sumAmount, productPicUrl, supplierId,
-			supplierName, refundTime, rejectCount, type);
-	}
 
 	public String getItemCode() {
 		return itemCode;
@@ -286,7 +233,9 @@ public class OrderItem extends BaseEntity {
 		this.type = type;
 	}
 
-	public OrderItem(){}
+	public OrderItem() {
+	}
+
 	public OrderItem(String itemCode, Long productSpuId, String productSpuCode,
 		String productSpuName, Long productSkuId, String productSkuName,
 		BigDecimal productPrice, Integer num, BigDecimal sumAmount, String productPicUrl,
@@ -309,31 +258,7 @@ public class OrderItem extends BaseEntity {
 		this.type = type;
 	}
 
-	public OrderItem(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		String itemCode, Long productSpuId, String productSpuCode, String productSpuName,
-		Long productSkuId, String productSkuName, BigDecimal productPrice, Integer num,
-		BigDecimal sumAmount, String productPicUrl, Long supplierId, String supplierName,
-		Integer refundTime, Integer rejectCount, Integer type) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.itemCode = itemCode;
-		this.productSpuId = productSpuId;
-		this.productSpuCode = productSpuCode;
-		this.productSpuName = productSpuName;
-		this.productSkuId = productSkuId;
-		this.productSkuName = productSkuName;
-		this.productPrice = productPrice;
-		this.num = num;
-		this.sumAmount = sumAmount;
-		this.productPicUrl = productPicUrl;
-		this.supplierId = supplierId;
-		this.supplierName = supplierName;
-		this.refundTime = refundTime;
-		this.rejectCount = rejectCount;
-		this.type = type;
-	}
-
-	public static OrderItemBuilder builder(){
+	public static OrderItemBuilder builder() {
 		return new OrderItemBuilder();
 	}
 
@@ -497,7 +422,7 @@ public class OrderItem extends BaseEntity {
 			orderItem.setRejectCount(rejectCount);
 			orderItem.setType(type);
 			orderItem.setId(id);
-			orderItem.setCreateBy(createBy);
+			orderItem.setCreatedBy(createBy);
 			orderItem.setLastModifiedBy(lastModifiedBy);
 			orderItem.setCreateTime(createTime);
 			orderItem.setLastModifiedTime(lastModifiedTime);

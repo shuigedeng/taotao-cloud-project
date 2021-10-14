@@ -15,11 +15,14 @@
  */
 package com.taotao.cloud.security.component;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.SecurityUtil;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletException;
@@ -28,12 +31,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.stereotype.Component;
 
 /**
  * SecurityHandlerComponent
@@ -55,6 +61,7 @@ public class SecurityHandlerComponent {
 	public AuthenticationEntryPoint authenticationEntryPoint() {
 		return new AuthenticationEntryPointComponent();
 	}
+
 
 //	/**
 //	 * OAuth2AccessDeniedHandler 用来解决认证过的用户访问无权限资源时的异常

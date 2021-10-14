@@ -1,7 +1,23 @@
-package com.taotao.cloud.uc.biz.entity;// package com.taotao.cloud.uc.biz.entity;
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.taotao.cloud.uc.biz.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +28,19 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 /**
- * 字典表
+ * SysDict
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:10:04
  */
 @Entity
-@Table(name = "tt_sys_dict")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_dict", comment = "字典表")
-public class SysDict {
+@Table(name = SysDict.TABLE_NAME)
+@TableName(SysDict.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysDict.TABLE_NAME, comment = "字典表")
+public class SysDict extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_dict";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +77,6 @@ public class SysDict {
 	@Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
 	private String remark;
 
-
 	@CreatedDate
 	@Column(name = "create_time", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
 	private LocalDateTime createTime;
@@ -65,43 +84,6 @@ public class SysDict {
 	@LastModifiedDate
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP comment '最后修改时间'")
 	private LocalDateTime lastModifiedTime;
-
-	@Override
-	public String toString() {
-		return "SysDict{" +
-			"id=" + id +
-			", dictName='" + dictName + '\'' +
-			", dictCode='" + dictCode + '\'' +
-			", description='" + description + '\'' +
-			", sortNum=" + sortNum +
-			", remark='" + remark + '\'' +
-			", createTime=" + createTime +
-			", lastModifiedTime=" + lastModifiedTime +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SysDict sysDict = (SysDict) o;
-		return Objects.equals(id, sysDict.id) && Objects.equals(dictName,
-			sysDict.dictName) && Objects.equals(dictCode, sysDict.dictCode)
-			&& Objects.equals(description, sysDict.description)
-			&& Objects.equals(sortNum, sysDict.sortNum) && Objects.equals(
-			remark, sysDict.remark) && Objects.equals(createTime, sysDict.createTime)
-			&& Objects.equals(lastModifiedTime, sysDict.lastModifiedTime);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, dictName, dictCode, description, sortNum, remark, createTime,
-			lastModifiedTime);
-	}
 
 	public Long getId() {
 		return id;
@@ -181,81 +163,5 @@ public class SysDict {
 		this.remark = remark;
 		this.createTime = createTime;
 		this.lastModifiedTime = lastModifiedTime;
-	}
-
-	public static SysDictBuilder builder() {
-		return new SysDictBuilder();
-	}
-
-	public static final class SysDictBuilder {
-
-		private Long id;
-		private String dictName;
-		private String dictCode;
-		private String description;
-		private Integer sortNum = 0;
-		private String remark;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-
-		private SysDictBuilder() {
-		}
-
-		public static SysDictBuilder aSysDict() {
-			return new SysDictBuilder();
-		}
-
-		public SysDictBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysDictBuilder dictName(String dictName) {
-			this.dictName = dictName;
-			return this;
-		}
-
-		public SysDictBuilder dictCode(String dictCode) {
-			this.dictCode = dictCode;
-			return this;
-		}
-
-		public SysDictBuilder description(String description) {
-			this.description = description;
-			return this;
-		}
-
-		public SysDictBuilder sortNum(Integer sortNum) {
-			this.sortNum = sortNum;
-			return this;
-		}
-
-		public SysDictBuilder remark(String remark) {
-			this.remark = remark;
-			return this;
-		}
-
-		public SysDictBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysDictBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysDict build() {
-			SysDict sysDict = new SysDict();
-			sysDict.setId(id);
-			sysDict.setDictName(dictName);
-			sysDict.setDictCode(dictCode);
-			sysDict.setDescription(description);
-			sysDict.setSortNum(sortNum);
-			sysDict.setRemark(remark);
-			sysDict.setCreateTime(createTime);
-			sysDict.setLastModifiedTime(lastModifiedTime);
-			return sysDict;
-		}
 	}
 }

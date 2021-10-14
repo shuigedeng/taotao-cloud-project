@@ -44,29 +44,21 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 	/**
 	 * 查询字段
 	 */
-	private SharedString sqlSelect = new SharedString();
+	private final SharedString sqlSelect = new SharedString();
 
 	public QueryWrap() {
 		this(null);
 	}
 
-	public QueryWrap(T entity) {
-		super.setEntity(entity);
+	public QueryWrap(Class<T> entityClass) {
+		super.setEntityClass(entityClass);
 		super.initNeed();
-		//覆盖之前的entity
-		if (entity != null) {
-			super.setEntity(replace(BeanUtil.toBean(entity, getEntityClass())));
-		}
 	}
 
-	public QueryWrap(T entity, String... columns) {
-		super.setEntity(entity);
+	public QueryWrap(Class<T> entityClass, String... columns) {
+		super.setEntityClass(entityClass);
 		super.initNeed();
 		this.select(columns);
-		//覆盖之前的entity
-		if (entity != null) {
-			super.setEntity(replace(BeanUtil.toBean(entity, getEntityClass())));
-		}
 	}
 
 	/**
@@ -74,10 +66,9 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 	 *
 	 * @param entityClass 本不应该需要的
 	 */
-	private QueryWrap(T entity, Class<T> entityClass, AtomicInteger paramNameSeq,
+	private QueryWrap(Class<T> entityClass, AtomicInteger paramNameSeq,
 		Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments,
 		SharedString lastSql, SharedString sqlComment, SharedString sqlFirst) {
-		super.setEntity(entity);
 		super.setEntityClass(entityClass);
 		this.paramNameSeq = paramNameSeq;
 		this.paramNameValuePairs = paramNameValuePairs;
@@ -125,7 +116,7 @@ public class QueryWrap<T> extends AbstractWrapper<T, String, QueryWrap<T>>
 	 */
 	@Override
 	protected QueryWrap<T> instance() {
-		return new QueryWrap<>(getEntity(), getEntityClass(), paramNameSeq, paramNameValuePairs,
+		return new QueryWrap<>(getEntityClass(), paramNameSeq, paramNameValuePairs,
 			new MergeSegments(),
 			SharedString.emptyString(), SharedString.emptyString(), SharedString.emptyString());
 	}

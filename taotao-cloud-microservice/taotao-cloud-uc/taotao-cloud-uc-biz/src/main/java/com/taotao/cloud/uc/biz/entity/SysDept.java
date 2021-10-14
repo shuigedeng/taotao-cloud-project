@@ -1,8 +1,23 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,12 +26,16 @@ import javax.persistence.Table;
  * 部门表
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:10:22
  */
 @Entity
-@Table(name = "tt_sys_dept")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_dept", comment = "后台部门表")
-public class SysDept extends BaseEntity {
+@Table(name = SysDept.TABLE_NAME)
+@TableName(SysDept.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysDept.TABLE_NAME, comment = "后台部门表")
+public class SysDept extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_dept";
 
 	/**
 	 * 部门名称
@@ -47,38 +66,6 @@ public class SysDept extends BaseEntity {
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
-
-	@Override
-	public String toString() {
-		return "SysDept{" +
-			"name='" + name + '\'' +
-			", parentId=" + parentId +
-			", remark='" + remark + '\'' +
-			", sortNum=" + sortNum +
-			", tenantId='" + tenantId + '\'' +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SysDept sysDept = (SysDept) o;
-		return Objects.equals(name, sysDept.name) && Objects.equals(parentId,
-			sysDept.parentId) && Objects.equals(remark, sysDept.remark)
-			&& Objects.equals(sortNum, sysDept.sortNum) && Objects.equals(
-			tenantId, sysDept.tenantId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, parentId, remark, sortNum, tenantId);
-	}
 
 	public String getName() {
 		return name;
@@ -130,120 +117,5 @@ public class SysDept extends BaseEntity {
 		this.remark = remark;
 		this.sortNum = sortNum;
 		this.tenantId = tenantId;
-	}
-
-	public SysDept(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		String name, Long parentId, String remark, Integer sortNum, String tenantId) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.name = name;
-		this.parentId = parentId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
-
-	public static SysDeptBuilder builder() {
-		return new SysDeptBuilder();
-	}
-
-	public static final class SysDeptBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private String name;
-		private Long parentId = 0L;
-		private String remark;
-		private Integer sortNum = 0;
-		private String tenantId;
-
-		private SysDeptBuilder() {
-		}
-
-		public static SysDeptBuilder aSysDept() {
-			return new SysDeptBuilder();
-		}
-
-		public SysDeptBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysDeptBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysDeptBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysDeptBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysDeptBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysDeptBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysDeptBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysDeptBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public SysDeptBuilder parentId(Long parentId) {
-			this.parentId = parentId;
-			return this;
-		}
-
-		public SysDeptBuilder remark(String remark) {
-			this.remark = remark;
-			return this;
-		}
-
-		public SysDeptBuilder sortNum(Integer sortNum) {
-			this.sortNum = sortNum;
-			return this;
-		}
-
-		public SysDeptBuilder tenantId(String tenantId) {
-			this.tenantId = tenantId;
-			return this;
-		}
-
-		public SysDept build() {
-			SysDept sysDept = new SysDept();
-			sysDept.setId(id);
-			sysDept.setCreateBy(createBy);
-			sysDept.setLastModifiedBy(lastModifiedBy);
-			sysDept.setCreateTime(createTime);
-			sysDept.setLastModifiedTime(lastModifiedTime);
-			sysDept.setVersion(version);
-			sysDept.setDelFlag(delFlag);
-			sysDept.setName(name);
-			sysDept.setParentId(parentId);
-			sysDept.setRemark(remark);
-			sysDept.setSortNum(sortNum);
-			sysDept.setTenantId(tenantId);
-			return sysDept;
-		}
 	}
 }

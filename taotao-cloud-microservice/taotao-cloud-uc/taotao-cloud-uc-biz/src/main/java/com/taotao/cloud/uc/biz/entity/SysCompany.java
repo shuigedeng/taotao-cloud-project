@@ -1,8 +1,23 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,15 +27,16 @@ import javax.validation.constraints.Pattern;
  * 公司表
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/16 13:43
+ * @version 2021.10
+ * @since 2021-10-09 21:11:38
  */
 @Entity
-@Table(name = "tt_sys_company")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_company", comment = "公司表")
-public class SysCompany extends BaseEntity {
+@TableName(SysCompany.TABLE_NAME)
+@Table(name = SysCompany.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysCompany.TABLE_NAME, comment = "公司表")
+public class SysCompany extends BaseSuperEntity<Long> {
 
-	private static final long serialVersionUID = -8206387430513096669L;
+	public static final String TABLE_NAME = "uc_sys_company";
 
 	/**
 	 * 租户id
@@ -100,52 +116,6 @@ public class SysCompany extends BaseEntity {
 	 */
 	@Column(name = "type", nullable = false, columnDefinition = "tinyint(1) unsigned not null default 1 comment '公司类型 1运营商 2供应商'")
 	private byte type = 1;
-
-	@Override
-	public String toString() {
-		return "Company{" +
-			"tenantId='" + tenantId + '\'' +
-			", tenantSecret='" + tenantSecret + '\'' +
-			", name='" + name + '\'' +
-			", fullName='" + fullName + '\'' +
-			", creditCode='" + creditCode + '\'' +
-			", email='" + email + '\'' +
-			", username='" + username + '\'' +
-			", phone='" + phone + '\'' +
-			", address='" + address + '\'' +
-			", domain='" + domain + '\'' +
-			", webSite='" + webSite + '\'' +
-			", regionInfo='" + regionInfo + '\'' +
-			", type=" + type +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SysCompany sysCompany = (SysCompany) o;
-		return type == sysCompany.type && Objects.equals(tenantId, sysCompany.tenantId)
-			&& Objects.equals(tenantSecret, sysCompany.tenantSecret)
-			&& Objects.equals(name, sysCompany.name) && Objects.equals(fullName,
-			sysCompany.fullName) && Objects.equals(creditCode, sysCompany.creditCode)
-			&& Objects.equals(email, sysCompany.email) && Objects.equals(username,
-			sysCompany.username) && Objects.equals(phone, sysCompany.phone)
-			&& Objects.equals(address, sysCompany.address) && Objects.equals(
-			domain, sysCompany.domain) && Objects.equals(webSite, sysCompany.webSite)
-			&& Objects.equals(regionInfo, sysCompany.regionInfo);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(tenantId, tenantSecret, name, fullName, creditCode, email, username,
-			phone,
-			address, domain, webSite, regionInfo, type);
-	}
 
 	public String getTenantId() {
 		return tenantId;
@@ -272,184 +242,4 @@ public class SysCompany extends BaseEntity {
 		this.type = type;
 	}
 
-	public SysCompany(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		String tenantId, String tenantSecret, String name, String fullName,
-		String creditCode, String email, String username, String phone, String address,
-		String domain, String webSite, String regionInfo, byte type) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.tenantId = tenantId;
-		this.tenantSecret = tenantSecret;
-		this.name = name;
-		this.fullName = fullName;
-		this.creditCode = creditCode;
-		this.email = email;
-		this.username = username;
-		this.phone = phone;
-		this.address = address;
-		this.domain = domain;
-		this.webSite = webSite;
-		this.regionInfo = regionInfo;
-		this.type = type;
-	}
-
-	public static SysCompanyBuilder builder() {
-		return new SysCompanyBuilder();
-	}
-
-	public static final class SysCompanyBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private String tenantId;
-		private String tenantSecret;
-		private String name;
-		private String fullName;
-		private String creditCode;
-		private String email;
-		private String username;
-		private String phone;
-		private String address;
-		private String domain;
-		private String webSite;
-		private String regionInfo;
-		private byte type = 1;
-
-		private SysCompanyBuilder() {
-		}
-
-		public static SysCompanyBuilder aSysCompany() {
-			return new SysCompanyBuilder();
-		}
-
-		public SysCompanyBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysCompanyBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysCompanyBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysCompanyBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysCompanyBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysCompanyBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysCompanyBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysCompanyBuilder tenantId(String tenantId) {
-			this.tenantId = tenantId;
-			return this;
-		}
-
-		public SysCompanyBuilder tenantSecret(String tenantSecret) {
-			this.tenantSecret = tenantSecret;
-			return this;
-		}
-
-		public SysCompanyBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public SysCompanyBuilder fullName(String fullName) {
-			this.fullName = fullName;
-			return this;
-		}
-
-		public SysCompanyBuilder creditCode(String creditCode) {
-			this.creditCode = creditCode;
-			return this;
-		}
-
-		public SysCompanyBuilder email(String email) {
-			this.email = email;
-			return this;
-		}
-
-		public SysCompanyBuilder username(String username) {
-			this.username = username;
-			return this;
-		}
-
-		public SysCompanyBuilder phone(String phone) {
-			this.phone = phone;
-			return this;
-		}
-
-		public SysCompanyBuilder address(String address) {
-			this.address = address;
-			return this;
-		}
-
-		public SysCompanyBuilder domain(String domain) {
-			this.domain = domain;
-			return this;
-		}
-
-		public SysCompanyBuilder webSite(String webSite) {
-			this.webSite = webSite;
-			return this;
-		}
-
-		public SysCompanyBuilder regionInfo(String regionInfo) {
-			this.regionInfo = regionInfo;
-			return this;
-		}
-
-		public SysCompanyBuilder type(byte type) {
-			this.type = type;
-			return this;
-		}
-
-		public SysCompany build() {
-			SysCompany sysCompany = new SysCompany();
-			sysCompany.setId(id);
-			sysCompany.setCreateBy(createBy);
-			sysCompany.setLastModifiedBy(lastModifiedBy);
-			sysCompany.setCreateTime(createTime);
-			sysCompany.setLastModifiedTime(lastModifiedTime);
-			sysCompany.setVersion(version);
-			sysCompany.setDelFlag(delFlag);
-			sysCompany.setTenantId(tenantId);
-			sysCompany.setTenantSecret(tenantSecret);
-			sysCompany.setName(name);
-			sysCompany.setFullName(fullName);
-			sysCompany.setCreditCode(creditCode);
-			sysCompany.setEmail(email);
-			sysCompany.setUsername(username);
-			sysCompany.setPhone(phone);
-			sysCompany.setAddress(address);
-			sysCompany.setDomain(domain);
-			sysCompany.setWebSite(webSite);
-			sysCompany.setRegionInfo(regionInfo);
-			sysCompany.setType(type);
-			return sysCompany;
-		}
-	}
 }

@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import com.taotao.cloud.member.biz.repository.MemberAddressRepository;
+import com.taotao.cloud.member.biz.repository.MemberAddressSuperRepository;
 import com.taotao.cloud.member.biz.service.IMemberAddressService;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberAddressServiceImpl implements IMemberAddressService {
-    private final MemberAddressRepository memberAddressRepository;
+    private final MemberAddressSuperRepository memberAddressRepository;
 
 	public MemberAddressServiceImpl(
-		MemberAddressRepository memberAddressRepository) {
+		MemberAddressSuperRepository memberAddressRepository) {
 		this.memberAddressRepository = memberAddressRepository;
 	}
 }

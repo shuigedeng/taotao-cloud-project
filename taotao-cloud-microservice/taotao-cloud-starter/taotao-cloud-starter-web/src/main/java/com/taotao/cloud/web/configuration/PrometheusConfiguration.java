@@ -89,8 +89,7 @@ public class PrometheusConfiguration implements InitializingBean {
 							return null;
 						});
 					} catch (Exception e) {
-						LogUtil.warn(StarterNameConstant.HEALTH_STARTER,
-							"HealthCheck Prometheus error ", e);
+						LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "HealthCheck Prometheus error ", e);
 					}
 
 					try {

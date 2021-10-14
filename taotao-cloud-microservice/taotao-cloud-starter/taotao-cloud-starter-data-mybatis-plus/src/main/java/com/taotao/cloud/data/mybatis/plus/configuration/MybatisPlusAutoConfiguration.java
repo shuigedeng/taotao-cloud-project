@@ -39,8 +39,7 @@ import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
-import com.taotao.cloud.data.mybatis.plus.entity.Entity;
-import com.taotao.cloud.data.mybatis.plus.entity.SuperEntity;
+import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatis.plus.injector.MateSqlInjector;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
@@ -53,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -66,6 +66,8 @@ import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -73,18 +75,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
- * MybatisPlusAutoConfiguration 
+ * MybatisPlusAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:40:02
  */
 @Configuration
+@AutoConfigureAfter(TenantAutoConfiguration.class)
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
 	private final MybatisPlusAutoFillProperties autoFillProperties;
-	private final TenantLineInnerInterceptor tenantLineInnerInterceptor;
+	@Autowired(required = false)
+	private TenantLineInnerInterceptor tenantLineInnerInterceptor;
 
 	/**
 	 * 单页分页条数限制(默认无限制,参见 插件#handlerLimit 方法)
@@ -93,16 +97,15 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	public MybatisPlusAutoConfiguration(
 		TenantProperties tenantProperties,
-		MybatisPlusAutoFillProperties autoFillProperties,
-		TenantLineInnerInterceptor tenantLineInnerInterceptor) {
+		MybatisPlusAutoFillProperties autoFillProperties) {
 		this.tenantProperties = tenantProperties;
 		this.autoFillProperties = autoFillProperties;
-		this.tenantLineInnerInterceptor = tenantLineInnerInterceptor;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MybatisPlusAutoConfiguration.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(MybatisPlusAutoConfiguration.class,
+			StarterNameConstant.MYBATIS_PLUS_STARTER);
 	}
 
 	/**
@@ -142,7 +145,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		paginationInnerInterceptor.setDbType(DbType.MYSQL);
 		paginationInnerInterceptor.setOverflow(true);
 
-		if (enableTenant) {
+		if (enableTenant && Objects.nonNull(tenantLineInnerInterceptor)) {
 			// 多租户插件
 			interceptor.addInnerInterceptor(tenantLineInnerInterceptor);
 		}
@@ -248,8 +251,8 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			Long id = IdGeneratorUtil.getId();
 
 			//1. 继承了SuperEntity 若 ID 中有值，就不设置
-			if (metaObject.getOriginalObject() instanceof SuperEntity) {
-				Object oldId = ((SuperEntity) metaObject.getOriginalObject()).getId();
+			if (metaObject.getOriginalObject() instanceof MpSuperEntity) {
+				Object oldId = ((MpSuperEntity) metaObject.getOriginalObject()).getId();
 				if (oldId != null) {
 					return;
 				}
@@ -304,22 +307,24 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 				return;
 			}
 			Object idVal =
-				keyType.getName().equalsIgnoreCase(StrPoolConstant.STRING_TYPE_NAME) ? String.valueOf(id)
+				keyType.getName().equalsIgnoreCase(StrPoolConstant.STRING_TYPE_NAME)
+					? String.valueOf(id)
 					: id;
 			this.setFieldValByName(keyProperty, idVal, metaObject);
 		}
 
 		private void fillCreated(MetaObject metaObject) {
 			// 设置创建时间和创建人
-			if (metaObject.getOriginalObject() instanceof SuperEntity) {
+			if (metaObject.getOriginalObject() instanceof MpSuperEntity) {
 				created(metaObject);
 				return;
 			}
 
-			if (metaObject.hasGetter(Entity.CREATED_BY)) {
-				Object oldVal = metaObject.getValue(Entity.CREATED_BY);
+			if (metaObject.hasGetter(MpSuperEntity.CREATED_BY)) {
+				Object oldVal = metaObject.getValue(MpSuperEntity.CREATED_BY);
 				if (oldVal == null) {
-					this.setFieldValByName(Entity.CREATED_BY, SecurityUtil.getUserId(), metaObject);
+					this.setFieldValByName(MpSuperEntity.CREATED_BY, SecurityUtil.getUserId(),
+						metaObject);
 				}
 			}
 			if (metaObject.hasGetter(autoFillProperties.getCreateTimeField())) {
@@ -332,7 +337,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		}
 
 		private void created(MetaObject metaObject) {
-			SuperEntity entity = (SuperEntity) metaObject.getOriginalObject();
+			MpSuperEntity entity = (MpSuperEntity) metaObject.getOriginalObject();
 			if (entity.getCreateTime() == null) {
 				this.setFieldValByName(autoFillProperties.getCreateTimeField(), LocalDateTime.now(),
 					metaObject);
@@ -340,23 +345,24 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 			if (entity.getCreatedBy() == null || entity.getCreatedBy().equals(0)) {
 				Object userIdVal = StrPoolConstant.STRING_TYPE_NAME.equals(
-					metaObject.getGetterType(SuperEntity.CREATED_BY).getName()) ? String.valueOf(
+					metaObject.getGetterType(MpSuperEntity.CREATED_BY).getName()) ? String.valueOf(
 					SecurityUtil.getUserId()) : SecurityUtil.getUserId();
-				this.setFieldValByName(Entity.CREATED_BY, userIdVal, metaObject);
+				this.setFieldValByName(MpSuperEntity.CREATED_BY, userIdVal, metaObject);
 			}
 		}
 
 		private void fillUpdated(MetaObject metaObject) {
 			// 修改人 修改时间
-			if (metaObject.getOriginalObject() instanceof Entity) {
+			if (metaObject.getOriginalObject() instanceof MpSuperEntity) {
 				update(metaObject);
 				return;
 			}
 
-			if (metaObject.hasGetter(Entity.UPDATED_BY)) {
-				Object oldVal = metaObject.getValue(Entity.UPDATED_BY);
+			if (metaObject.hasGetter(MpSuperEntity.UPDATED_BY)) {
+				Object oldVal = metaObject.getValue(MpSuperEntity.UPDATED_BY);
 				if (oldVal == null) {
-					this.setFieldValByName(Entity.UPDATED_BY, SecurityUtil.getUserId(), metaObject);
+					this.setFieldValByName(MpSuperEntity.UPDATED_BY, SecurityUtil.getUserId(),
+						metaObject);
 				}
 			}
 			if (metaObject.hasGetter(autoFillProperties.getUpdateTimeField())) {
@@ -369,12 +375,12 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		}
 
 		private void update(MetaObject metaObject) {
-			Entity entity = (Entity) metaObject.getOriginalObject();
+			MpSuperEntity entity = (MpSuperEntity) metaObject.getOriginalObject();
 			if (entity.getUpdatedBy() == null || entity.getUpdatedBy().equals(0)) {
 				Object userIdVal = StrPoolConstant.STRING_TYPE_NAME.equals(
-					metaObject.getGetterType(Entity.UPDATED_BY).getName()) ? String.valueOf(
+					metaObject.getGetterType(MpSuperEntity.UPDATED_BY).getName()) ? String.valueOf(
 					SecurityUtil.getUserId()) : SecurityUtil.getUserId();
-				this.setFieldValByName(Entity.UPDATED_BY, userIdVal, metaObject);
+				this.setFieldValByName(MpSuperEntity.UPDATED_BY, userIdVal, metaObject);
 			}
 
 			if (entity.getUpdateTime() == null) {

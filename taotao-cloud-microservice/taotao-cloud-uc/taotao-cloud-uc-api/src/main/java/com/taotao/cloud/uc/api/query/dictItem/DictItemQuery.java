@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.uc.api.query.dictItem;
 
-import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO.QueryRegionByParentIdVOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * 字典查询query
@@ -30,7 +29,9 @@ import java.util.Objects;
 @Schema(name = "DictItemQuery", description = "字典查询query")
 public class DictItemQuery implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
+
 	@Schema(description = "字典id")
 	private Long dictId;
 	@Schema(description = "字典项文本")
@@ -91,93 +92,5 @@ public class DictItemQuery implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "DictItemQuery{" +
-			"dictId=" + dictId +
-			", itemText='" + itemText + '\'' +
-			", itemValue='" + itemValue + '\'' +
-			", description='" + description + '\'' +
-			", status=" + status +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		DictItemQuery that = (DictItemQuery) o;
-		return Objects.equals(dictId, that.dictId) && Objects.equals(itemText,
-			that.itemText) && Objects.equals(itemValue, that.itemValue)
-			&& Objects.equals(description, that.description) && Objects.equals(
-			status, that.status);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(dictId, itemText, itemValue, description, status);
-	}
-
-	public static DictItemQueryBuilder builder() {
-		return new DictItemQueryBuilder();
-	}
-
-
-	public static final class DictItemQueryBuilder {
-
-		private Long dictId;
-		private String itemText;
-		private String itemValue;
-		private String description;
-		private Boolean status;
-
-		private DictItemQueryBuilder() {
-		}
-
-		public static DictItemQueryBuilder aDictItemQuery() {
-			return new DictItemQueryBuilder();
-		}
-
-		public DictItemQueryBuilder dictId(Long dictId) {
-			this.dictId = dictId;
-			return this;
-		}
-
-		public DictItemQueryBuilder itemText(String itemText) {
-			this.itemText = itemText;
-			return this;
-		}
-
-		public DictItemQueryBuilder itemValue(String itemValue) {
-			this.itemValue = itemValue;
-			return this;
-		}
-
-		public DictItemQueryBuilder description(String description) {
-			this.description = description;
-			return this;
-		}
-
-		public DictItemQueryBuilder status(Boolean status) {
-			this.status = status;
-			return this;
-		}
-
-		public DictItemQuery build() {
-			DictItemQuery dictItemQuery = new DictItemQuery();
-			dictItemQuery.setDictId(dictId);
-			dictItemQuery.setItemText(itemText);
-			dictItemQuery.setItemValue(itemValue);
-			dictItemQuery.setDescription(description);
-			dictItemQuery.setStatus(status);
-			return dictItemQuery;
-		}
 	}
 }

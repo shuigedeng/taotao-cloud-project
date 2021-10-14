@@ -3775,4 +3775,8 @@ public class RedisRepository {
 		return valueSerializer.deserialize(value);
 	}
 
+	public Object findByListCacheKey(List<CacheKey> ks) {
+
+		return null;
+	}
 }

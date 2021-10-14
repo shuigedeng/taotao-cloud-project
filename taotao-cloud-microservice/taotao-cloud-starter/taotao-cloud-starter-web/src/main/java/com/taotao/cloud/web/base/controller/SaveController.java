@@ -17,59 +17,70 @@ package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.http.HttpHeaders;
+import io.swagger.v3.oas.annotations.Parameter;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * SaveController
  *
- * @param <Entity>  Entity
- * @param <SaveDTO> SaveDTO
+ * @param <T>       实体
+ * @param <I>       id
+ * @param <SaveDTO> 添加参数
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:12:22
  */
-public interface SaveController<Entity, SaveDTO> extends BaseController<Entity> {
+public interface SaveController<T extends SuperEntity<I>, I extends Serializable, SaveDTO> extends
+	BaseController<T, I> {
 
 	/**
-	 * 新增
+	 * 通用单体新增
 	 *
 	 * @param saveDTO 保存参数
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:12:44
 	 */
-	@Operation(summary = "新增", description = "新增", method = CommonConstant.POST, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@PutMapping("/all")
-	@RequestOperateLog(value = "新增", request = false)
-	@PreAuthorize("hasAnyPermission('{}add')")
-	default Result<Entity> save(@RequestBody @Validated SaveDTO saveDTO) {
-		Result<Entity> result = handlerSave(saveDTO);
-		if (result.getData() != null) {
-			Entity model = BeanUtil.toBean(saveDTO, getEntityClass());
-			getBaseService().save(model);
-			result.setData(model);
+	@Operation(summary = "通用单体新增", description = "通用单体新增", method = CommonConstant.POST)
+	@PostMapping
+	@RequestOperateLog(value = "通用单体新增", request = false)
+	@PreAuthorize("@permissionVerifier.hasPermission('save')")
+	default Result<Boolean> save(
+		@Parameter(description = "新增DTO", required = true)
+		@RequestBody @Validated SaveDTO saveDTO) {
+		if (handlerSave(saveDTO)) {
+			if (checkField(saveDTO.getClass())) {
+				T model = BeanUtil.toBean(saveDTO, getEntityClass());
+				getBaseService().save(model);
+			}
 		}
-		return result;
+		return success(true);
 	}
 
 	/**
 	 * 自定义新增
 	 *
-	 * @param model 保存对象
-	 * @return {@link com.taotao.cloud.common.model.Result } 返回SUCCESS_RESPONSE, 调用默认更新, 返回其他不调用默认更新
+	 * @param model model
+	 * @return {@link java.lang.Boolean }
 	 * @author shuigedeng
-	 * @since 2021-09-02 21:12:52
+	 * @since 2021-10-11 17:06:06
 	 */
-	default Result<Entity> handlerSave(SaveDTO model) {
-		return Result.success();
+	default Boolean handlerSave(SaveDTO model) {
+		if (Objects.isNull(model)) {
+			throw new BusinessException("新增DTO不能为空");
+		}
+		return true;
 	}
 
 }

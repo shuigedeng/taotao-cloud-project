@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.uc.api.query.dict;
 
-import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO.QueryRegionByParentIdVOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -30,6 +30,7 @@ import java.util.Objects;
 @Schema(name = "DictQuery", description = "字典查询query")
 public class DictQuery implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -7605952923416404638L;
 
 	@Schema(description = "字典名称")

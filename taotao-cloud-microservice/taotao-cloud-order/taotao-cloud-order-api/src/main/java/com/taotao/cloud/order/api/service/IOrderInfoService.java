@@ -1,8 +1,9 @@
 package com.taotao.cloud.order.api.service;
 
 
-import com.taotao.cloud.order.api.dto.OrderDTO;
-import com.taotao.cloud.order.api.vo.OrderVO;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.service.BaseSuperService;
+import java.io.Serializable;
 
 /**
  * 订单管理service
@@ -10,10 +11,8 @@ import com.taotao.cloud.order.api.vo.OrderVO;
  * @author shuigedeng
  * @since 2020/4/30 11:03
  */
-public interface IOrderInfoService {
+public interface IOrderInfoService<T extends BaseSuperEntity<I>, I extends Serializable> extends
+	BaseSuperService<T, I> {
 
-	OrderVO findOrderInfoByCode(String code);
-
-	OrderVO saveOrder(OrderDTO orderDTO);
 }
 

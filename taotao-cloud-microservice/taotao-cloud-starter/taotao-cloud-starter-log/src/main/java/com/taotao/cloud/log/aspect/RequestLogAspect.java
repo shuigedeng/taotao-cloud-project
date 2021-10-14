@@ -160,21 +160,24 @@ public class RequestLogAspect {
 			}
 
 			RequestLog requestLog = get();
-			R r = Convert.convert(R.class, ret);
-			if (r.getCode() == HttpStatus.OK.value()) {
-				requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
-			} else {
-				requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
-				requestLog.setExDetail(r.getMsg());
+			if(Objects.nonNull(ret)){
+				R r = Convert.convert(R.class, ret);
+				if (r.getCode() == HttpStatus.OK.value()) {
+					requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
+				} else {
+					requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
+					requestLog.setExDetail(r.getMsg());
+				}
+				if (requestOperateLog.response()) {
+					requestLog.setResult(getText(r.toString()));
+				}
 			}
 			requestLog.setTenantId(TenantContextHolder.getTenant());
 			requestLog.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			long endTime = Instant.now().toEpochMilli();
 			requestLog.setRequestConsumingTime(endTime - requestLog.getRequestStartTime());
 			requestLog.setResult(getText(String.valueOf(ret == null ? StrPoolConstant.EMPTY : ret)));
-			if (requestOperateLog.response()) {
-				requestLog.setResult(getText(r.toString()));
-			}
+
 			publisher.publishEvent(new RequestLogEvent(requestLog));
 			SYS_LOG_THREAD_LOCAL.remove();
 		});

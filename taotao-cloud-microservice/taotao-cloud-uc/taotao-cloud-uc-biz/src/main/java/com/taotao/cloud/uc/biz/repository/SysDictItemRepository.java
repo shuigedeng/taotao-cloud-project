@@ -16,40 +16,59 @@
 package com.taotao.cloud.uc.biz.repository;
 
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.enums.DelFlagEnum;
-import com.taotao.cloud.data.jpa.repository.BaseJpaRepository;
-import com.taotao.cloud.uc.biz.entity.QSysDictItem;
+import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+import com.taotao.cloud.uc.biz.entity.SysDept;
 import com.taotao.cloud.uc.biz.entity.SysDictItem;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
 /**
- * 字典Repository
+ * SysDictItemRepository
  *
  * @author shuigedeng
- * @since 2020/9/29 18:02
- * @version 1.0.0
+ * @version 2021.10
+ * @since 2021-10-09 20:35:25
  */
 @Repository
-public class SysDictItemRepository extends BaseJpaRepository<SysDictItem, Long> {
-    public SysDictItemRepository(EntityManager em) {
-        super(SysDictItem.class, em);
-    }
+public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long> {
 
-    private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
+	public SysDictItemRepository(EntityManager em) {
+		super(SysDictItem.class, em);
+	}
 
-    public void deleteByDictId(Long dictId) {
-        jpaQueryFactory.update(SYS_DICT_ITEM)
-                .set(SYS_DICT_ITEM.delFlag, true)
-                .where(SYS_DICT_ITEM.dictId.eq(dictId))
-                .execute();
-    }
+	//private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
 
-    public List<SysDictItem> getInfo(Predicate predicate) {
-        return jpaQueryFactory.selectFrom(SYS_DICT_ITEM)
-                .where(predicate)
-                .fetch();
-    }
+	/**
+	 * deleteByDictId
+	 *
+	 * @param dictId dictId
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:35:28
+	 */
+	public Boolean deleteByDictId(Long dictId) {
+		//return jpaQueryFactory
+		//	.update(SYS_DICT_ITEM)
+		//	.set(SYS_DICT_ITEM.delFlag, true)
+		//	.where(SYS_DICT_ITEM.dictId.eq(dictId))
+		//	.execute() > 0;
+		return null;
+	}
+
+	/**
+	 * getInfo
+	 *
+	 * @param predicate predicate
+	 * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysDictItem&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:35:31
+	 */
+	public List<SysDictItem> getInfo(Predicate predicate) {
+		//return jpaQueryFactory
+		//	.selectFrom(SYS_DICT_ITEM)
+		//	.where(predicate)
+		//	.fetch();
+		return null;
+	}
 }

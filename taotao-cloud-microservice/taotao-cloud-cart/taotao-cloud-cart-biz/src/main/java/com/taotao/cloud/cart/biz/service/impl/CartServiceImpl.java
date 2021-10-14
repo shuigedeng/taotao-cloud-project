@@ -16,7 +16,7 @@
 package com.taotao.cloud.cart.biz.service.impl;
 
 import com.taotao.cloud.cart.biz.entity.Cart;
-import com.taotao.cloud.cart.biz.repository.CartRepository;
+import com.taotao.cloud.cart.biz.repository.CartSuperRepository;
 import com.taotao.cloud.cart.biz.service.ICartService;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +30,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartServiceImpl implements ICartService {
 
-	private final CartRepository cartRepository;
+	private final CartSuperRepository cartRepository;
 
 	public CartServiceImpl(
-		CartRepository cartRepository) {
+		CartSuperRepository cartRepository) {
 		this.cartRepository = cartRepository;
 	}
 

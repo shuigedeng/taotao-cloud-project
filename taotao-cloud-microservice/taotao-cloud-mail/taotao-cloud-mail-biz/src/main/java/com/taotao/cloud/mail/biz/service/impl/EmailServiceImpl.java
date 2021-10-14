@@ -18,7 +18,7 @@ package com.taotao.cloud.mail.biz.service.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.mail.biz.entity.Email;
-import com.taotao.cloud.mail.biz.repository.EmailRepository;
+import com.taotao.cloud.mail.biz.repository.EmailSuperRepository;
 import com.taotao.cloud.mail.biz.service.IEmailService;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +32,9 @@ import java.util.Optional;
 @Service
 public class EmailServiceImpl implements IEmailService {
 
-	private final EmailRepository emailRepository;
+	private final EmailSuperRepository emailRepository;
 
-	public EmailServiceImpl(EmailRepository emailRepository) {
+	public EmailServiceImpl(EmailSuperRepository emailRepository) {
 		this.emailRepository = emailRepository;
 	}
 

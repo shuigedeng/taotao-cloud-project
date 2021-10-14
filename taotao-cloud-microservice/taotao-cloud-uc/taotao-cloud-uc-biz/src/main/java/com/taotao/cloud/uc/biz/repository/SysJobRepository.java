@@ -1,7 +1,9 @@
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.BaseJpaRepository;
+import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+import com.taotao.cloud.uc.biz.entity.SysDict;
 import com.taotao.cloud.uc.biz.entity.SysJob;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,7 +16,7 @@ import javax.persistence.EntityManager;
  * @version 1.0.0
  */
 @Repository
-public class SysJobRepository extends BaseJpaRepository<SysJob, Long> {
+public class SysJobRepository extends BaseSuperRepository<SysJob, Long> {
     public SysJobRepository(EntityManager em) {
         super(SysJob.class, em);
     }

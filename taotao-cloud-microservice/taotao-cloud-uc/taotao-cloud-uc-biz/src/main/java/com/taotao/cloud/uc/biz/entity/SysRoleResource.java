@@ -1,29 +1,40 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import java.util.Objects;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * 角色-资源第三方表
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:07:31
  */
-
 @Entity
-@Table(name = "tt_sys_role_resource")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_role_resource", comment = "角色-资源第三方表")
-public class SysRoleResource {
+@Table(name = SysRoleResource.TABLE_NAME)
+@TableName(SysRoleResource.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysRoleResource.TABLE_NAME, comment = "角色-资源第三方表")
+public class SysRoleResource extends SuperEntity<Long> {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", columnDefinition = "bigint not null comment 'id'")
-	private Long id;
+	public static final String TABLE_NAME = "uc_sys_role_resource";
 
 	/**
 	 * 角色ID
@@ -36,41 +47,6 @@ public class SysRoleResource {
 	 */
 	@Column(name = "resource_id", nullable = false, columnDefinition = "bigint not null comment '资源ID'")
 	private Long resourceId;
-
-	@Override
-	public String toString() {
-		return "SysRoleResource{" +
-			"id=" + id +
-			", roleId=" + roleId +
-			", resourceId=" + resourceId +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SysRoleResource that = (SysRoleResource) o;
-		return Objects.equals(id, that.id) && Objects.equals(roleId, that.roleId)
-			&& Objects.equals(resourceId, that.resourceId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, roleId, resourceId);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getRoleId() {
 		return roleId;
@@ -91,50 +67,8 @@ public class SysRoleResource {
 	public SysRoleResource() {
 	}
 
-	public SysRoleResource(Long id, Long roleId, Long resourceId) {
-		this.id = id;
+	public SysRoleResource(Long roleId, Long resourceId) {
 		this.roleId = roleId;
 		this.resourceId = resourceId;
-	}
-
-	public static SysRoleResourceBuilder builder() {
-		return new SysRoleResourceBuilder();
-	}
-
-	public static final class SysRoleResourceBuilder {
-
-		private Long id;
-		private Long roleId;
-		private Long resourceId;
-
-		private SysRoleResourceBuilder() {
-		}
-
-		public static SysRoleResourceBuilder aSysRoleResource() {
-			return new SysRoleResourceBuilder();
-		}
-
-		public SysRoleResourceBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysRoleResourceBuilder roleId(Long roleId) {
-			this.roleId = roleId;
-			return this;
-		}
-
-		public SysRoleResourceBuilder resourceId(Long resourceId) {
-			this.resourceId = resourceId;
-			return this;
-		}
-
-		public SysRoleResource build() {
-			SysRoleResource sysRoleResource = new SysRoleResource();
-			sysRoleResource.resourceId = this.resourceId;
-			sysRoleResource.roleId = this.roleId;
-			sysRoleResource.id = this.id;
-			return sysRoleResource;
-		}
 	}
 }

@@ -118,7 +118,7 @@ spring:
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/uc/**
           filters:
-            - RewritePath=/uc/(?<path>.*), /$\{path}
+            - RewritePath=/uc/(?<path>.*), /uc/$\{path}
             - StripPrefix=2
             - RequestTime=true
             - PreserveHostHeader
@@ -133,7 +133,7 @@ spring:
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
-            - RewritePath=/order/(?<path>.*), /$\{path}
+            - RewritePath=/order/(?<path>.*), /order/$\{path}
             - StripPrefix=2
             - RequestTime=true
             - PreserveHostHeader
@@ -343,7 +343,7 @@ spring:
       #                #令牌桶的容量，允许在一秒钟内完成的最大请求数
       #                redis-rate-limiter.burstCapacity: 5
       default-filters:
-        - AddRequestHeader=X-Request-taotao-cloud, 1.0
+        - AddRequestHeader=X-Request-taotao-cloud, ${taotaoCloudVersion}
 
 taotao:
   cloud:
@@ -385,8 +385,8 @@ taotao:
       security:
         enabled: true
         ignore-url: >
-          /uc/resource/**,
-          /order/order/**,
+          /uc/**,
+          /order/**,
           /health/**,
           /auth/code,
           /uc/index,

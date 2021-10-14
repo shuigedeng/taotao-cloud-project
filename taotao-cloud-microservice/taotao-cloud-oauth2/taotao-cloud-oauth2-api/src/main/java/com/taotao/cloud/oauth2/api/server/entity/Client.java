@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.oauth2.api.server.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
@@ -30,7 +28,7 @@ import javax.persistence.Table;
  */
 @Table(name = "oauth_client_details")
 @org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")
-public class Client extends BaseEntity {
+public class Client extends JpaSuperEntity {
     /**
      * 用于唯一标识每一个客户端(client)
      */

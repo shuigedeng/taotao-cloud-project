@@ -1,9 +1,7 @@
 package com.taotao.cloud.dfs.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -18,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_file")
 @org.hibernate.annotations.Table(appliesTo = "tt_file", comment = "文件表")
-public class File extends BaseEntity {
+public class File extends JpaSuperEntity {
 
 	/**
 	 * 业务ID

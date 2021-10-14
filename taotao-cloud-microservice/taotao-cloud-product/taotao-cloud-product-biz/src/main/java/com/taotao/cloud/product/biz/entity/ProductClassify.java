@@ -1,9 +1,8 @@
 package com.taotao.cloud.product.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 
-import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 //@Entity
 @Table(name = "tt_product_classify")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_classify", comment = "商品分类表")
-public class ProductClassify extends BaseEntity {
+public class ProductClassify extends JpaSuperEntity {
 
     private static final long serialVersionUID = 4623225062695180820L;
 

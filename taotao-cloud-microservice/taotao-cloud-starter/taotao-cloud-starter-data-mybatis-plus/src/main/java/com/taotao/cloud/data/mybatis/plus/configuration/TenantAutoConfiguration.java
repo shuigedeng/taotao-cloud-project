@@ -26,8 +26,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureBefore(MybatisPlusAutoConfiguration.class)
-@ConditionalOnProperty(prefix = TenantProperties.PREFIX,
-	name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = TenantProperties.PREFIX, name = "enabled", havingValue = "true")
 public class TenantAutoConfiguration implements InitializingBean {
 
 	@Override

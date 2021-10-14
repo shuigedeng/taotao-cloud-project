@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.operation.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "tt_withdraw")
 @org.hibernate.annotations.Table(appliesTo = "tt_withdraw", comment = "提现申请表")
-public class Withdraw extends BaseEntity {
+public class Withdraw extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

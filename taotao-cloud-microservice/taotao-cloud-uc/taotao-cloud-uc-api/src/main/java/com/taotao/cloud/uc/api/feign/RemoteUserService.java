@@ -4,7 +4,7 @@ import com.taotao.cloud.common.constant.ServiceNameConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.uc.api.feign.fallback.RemoteUserFallbackImpl;
-import com.taotao.cloud.uc.api.vo.user.UserVO;
+import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +28,7 @@ public interface RemoteUserService {
      * @version 1.0.0
      */
     @GetMapping(value = "/user/info/username")
-    Result<UserVO> findUserInfoByUsername(@RequestParam(value = "username") String username);
+    Result<UserQueryVO> findUserInfoByUsername(@RequestParam(value = "username") String username);
 
     /**
      * 通过第三方查询用户包括角色权限等

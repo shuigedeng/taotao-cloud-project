@@ -3,9 +3,9 @@ package com.taotao.cloud.order.api.feign.fallback;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.order.api.dto.OrderDTO;
+import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.feign.RemoteOrderService;
-import com.taotao.cloud.order.api.vo.OrderVO;
+import com.taotao.cloud.order.api.vo.order_info.OrderVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -26,7 +26,7 @@ public class RemoteOrderFallbackImpl implements FallbackFactory<RemoteOrderServi
 			}
 
 			@Override
-			public Result<OrderVO> saveOrder(OrderDTO orderDTO) {
+			public Result<OrderVO> saveOrder(OrderSaveDTO orderDTO) {
 				LogUtil.error("调用saveOrder异常：{}", throwable, orderDTO);
 				return Result.fail(null, ResultEnum.ERROR.getCode());
 			}

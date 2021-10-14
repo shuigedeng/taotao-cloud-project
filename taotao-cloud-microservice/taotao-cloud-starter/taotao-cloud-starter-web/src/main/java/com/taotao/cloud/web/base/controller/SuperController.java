@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import com.taotao.cloud.web.base.service.SuperService;
+import com.taotao.cloud.web.base.entity.SuperEntity;
+import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
@@ -42,18 +43,27 @@ import java.lang.reflect.ParameterizedType;
  * @version 2021.9
  * @since 2021-09-02 21:14:54
  */
-public abstract class SuperController<S extends SuperService<Entity>, Id extends Serializable, Entity, PageQuery, SaveDTO, UpdateDTO> extends
-		SuperSimpleController<S, Entity>
-		implements SaveController<Entity, SaveDTO>, UpdateController<Entity, UpdateDTO>,
-		DeleteController<Entity, Id>, PoiController<Entity, PageQuery>,
-		QueryController<Entity, Id, PageQuery> {
+public abstract class SuperController<S extends BaseSuperService<T, I>, T extends SuperEntity<I>, I extends Serializable, QueryDTO, SaveDTO, UpdateDTO, QueryVO>
+	extends SimpleController<S, T, I> implements
+	QueryController<T, I, QueryDTO, QueryVO>,
+	SaveController<T, I, SaveDTO>,
+	UpdateController<T, I, UpdateDTO>,
+	DeleteController<T, I>,
+	BatchController<T, I, SaveDTO, UpdateDTO>,
+	ExcelController<T, I, QueryDTO, QueryVO> {
 
 	@Override
-	public Class<Entity> getEntityClass() {
+	public Class<T> getEntityClass() {
 		if (entityClass == null) {
-			this.entityClass = (Class<Entity>) ((ParameterizedType) this.getClass()
-					.getGenericSuperclass()).getActualTypeArguments()[2];
+			this.entityClass = (Class<T>) ((ParameterizedType) this.getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[1];
 		}
 		return this.entityClass;
+	}
+
+	@Override
+	public Class<QueryVO> getQueryVOClass() {
+		return (Class<QueryVO>) ((ParameterizedType) this.getClass()
+			.getGenericSuperclass()).getActualTypeArguments()[6];
 	}
 }

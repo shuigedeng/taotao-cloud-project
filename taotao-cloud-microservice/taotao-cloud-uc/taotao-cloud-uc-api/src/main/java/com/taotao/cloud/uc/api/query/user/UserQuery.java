@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.api.query.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -29,6 +30,7 @@ import java.util.Objects;
 @Schema(name = "UserQuery", description = "用户查询query")
 public class UserQuery implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -6200931899296559445L;
 
 	/**

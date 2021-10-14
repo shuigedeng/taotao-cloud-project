@@ -81,21 +81,21 @@ public class AsyncThreadPoolExecutor extends ThreadPoolExecutor {
 	}
 
 	@Override
-	public void execute(Runnable runnable) {
+	public void execute(@NotNull Runnable runnable) {
 		Runnable ttlRunnable = TtlRunnable.get(runnable);
 		showThreadPoolInfo("execute(Runnable task)");
 		super.execute(ttlRunnable);
 	}
 
 	@Override
-	public <T> Future<T> submit(Callable<T> task) {
-		Callable ttlCallable = TtlCallable.get(task);
+	public <T> Future<T> submit(@NotNull Callable<T> task) {
+		Callable<T> ttlCallable = TtlCallable.get(task);
 		showThreadPoolInfo("submit(Callable<T> task)");
 		return super.submit(ttlCallable);
 	}
 
 	@Override
-	public Future<?> submit(Runnable task) {
+	public Future<?> submit(@NotNull Runnable task) {
 		Runnable ttlRunnable = TtlRunnable.get(task);
 		showThreadPoolInfo("submit(Runnable task)");
 		return super.submit(ttlRunnable);
@@ -118,8 +118,14 @@ public class AsyncThreadPoolExecutor extends ThreadPoolExecutor {
 		String threadNamePrefix = Objects.nonNull(monitorThreadPoolFactory) ?
 			monitorThreadPoolFactory.getNamePrefix() : getNamePrefix();
 
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 2];
+
 		LogUtil.info(
-			"threadNamePrefix[{}], method[{}], taskCount[{}], completedTaskCount[{}], activeCount[{}], queueSize[{}]",
+			"className[{}] methodName[{}] lineNumber[{}] threadNamePrefix[{}] method[{}]  taskCount[{}] completedTaskCount[{}] activeCount[{}] queueSize[{}]",
+			stackTraceElement.getClassName(),
+			stackTraceElement.getMethodName(),
+			stackTraceElement.getLineNumber(),
 			threadNamePrefix,
 			method,
 			this.getTaskCount(),

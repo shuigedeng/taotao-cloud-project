@@ -1,6 +1,5 @@
 package com.taotao.cloud.uc.api.query.user;
 
-import com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO.QueryRegionByParentIdVOBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;

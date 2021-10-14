@@ -551,7 +551,6 @@ taotao:
       enabled: false
 
 mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.taotao.cloud.*.biz.entity
   global-config:
     db-config:

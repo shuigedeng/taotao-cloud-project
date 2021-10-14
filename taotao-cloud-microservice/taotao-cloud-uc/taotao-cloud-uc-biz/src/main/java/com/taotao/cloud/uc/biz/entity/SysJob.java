@@ -1,9 +1,22 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import com.taotao.cloud.uc.biz.entity.SysDictItem.SysDictItemBuilder;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,12 +25,16 @@ import javax.persistence.Table;
  * 岗位表
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:52:30
  */
 @Entity
-@Table(name = "tt_sys_job")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_job", comment = "岗位表")
-public class SysJob extends BaseEntity {
+@Table(name = SysJob.TABLE_NAME)
+@TableName(SysJob.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysJob.TABLE_NAME, comment = "岗位表")
+public class SysJob extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_job";
 
 	/**
 	 * 岗位名称
@@ -60,53 +77,6 @@ public class SysJob extends BaseEntity {
 		this.tenantId = tenantId;
 	}
 
-	public SysJob(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		String name, Long deptId, String remark, Integer sortNum, String tenantId) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.name = name;
-		this.deptId = deptId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
-
-	@Override
-	public String
-	toString() {
-		return "SysJob{" +
-			"name='" + name + '\'' +
-			", deptId=" + deptId +
-			", remark='" + remark + '\'' +
-			", sortNum=" + sortNum +
-			", tenantId='" + tenantId + '\'' +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		SysJob sysJob = (SysJob) o;
-		return Objects.equals(name, sysJob.name) && Objects.equals(deptId,
-			sysJob.deptId) && Objects.equals(remark, sysJob.remark)
-			&& Objects.equals(sortNum, sysJob.sortNum) && Objects.equals(
-			tenantId, sysJob.tenantId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), name, deptId, remark, sortNum, tenantId);
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -147,106 +117,4 @@ public class SysJob extends BaseEntity {
 		this.tenantId = tenantId;
 	}
 
-	public static SysJobBuilder builder() {
-		return new SysJobBuilder();
-	}
-	public static final class SysJobBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private String name;
-		private Long deptId;
-		private String remark;
-		private Integer sortNum = 0;
-		private String tenantId;
-
-		private SysJobBuilder() {
-		}
-
-		public static SysJobBuilder aSysJob() {
-			return new SysJobBuilder();
-		}
-
-		public SysJobBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysJobBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysJobBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysJobBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysJobBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysJobBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysJobBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysJobBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public SysJobBuilder deptId(Long deptId) {
-			this.deptId = deptId;
-			return this;
-		}
-
-		public SysJobBuilder remark(String remark) {
-			this.remark = remark;
-			return this;
-		}
-
-		public SysJobBuilder sortNum(Integer sortNum) {
-			this.sortNum = sortNum;
-			return this;
-		}
-
-		public SysJobBuilder tenantId(String tenantId) {
-			this.tenantId = tenantId;
-			return this;
-		}
-
-		public SysJob build() {
-			SysJob sysJob = new SysJob();
-			sysJob.setId(id);
-			sysJob.setCreateBy(createBy);
-			sysJob.setLastModifiedBy(lastModifiedBy);
-			sysJob.setCreateTime(createTime);
-			sysJob.setLastModifiedTime(lastModifiedTime);
-			sysJob.setVersion(version);
-			sysJob.setDelFlag(delFlag);
-			sysJob.setName(name);
-			sysJob.setDeptId(deptId);
-			sysJob.setRemark(remark);
-			sysJob.setSortNum(sortNum);
-			sysJob.setTenantId(tenantId);
-			return sysJob;
-		}
-	}
 }

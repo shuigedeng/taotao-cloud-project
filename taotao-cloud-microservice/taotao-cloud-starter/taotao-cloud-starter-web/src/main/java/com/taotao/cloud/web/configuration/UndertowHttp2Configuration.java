@@ -73,16 +73,16 @@ public class UndertowHttp2Configuration implements InitializingBean {
 	 * @since 2021-09-02 21:30:01
 	 */
 	public class UndertowServerFactoryCustomizer implements
-			WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+		WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
 		@Override
 		public void customize(UndertowServletWebServerFactory factory) {
 			UndertowDeploymentInfoCustomizer undertowDeploymentInfoCustomizer = deploymentInfo -> {
 				WebSocketDeploymentInfo info = (WebSocketDeploymentInfo) deploymentInfo.getServletContextAttributes()
-						.get(WebSocketDeploymentInfo.ATTRIBUTE_NAME);
+					.get(WebSocketDeploymentInfo.ATTRIBUTE_NAME);
 				XnioWorker worker = getXnioWorker();
 				ByteBufferPool buffers = new DefaultByteBufferPool(
-						Boolean.getBoolean("io.undertow.websockets.direct-buffers"), 1024, 100, 12);
+					Boolean.getBoolean("io.undertow.websockets.direct-buffers"), 1024, 100, 12);
 				info.setWorker(worker);
 				info.setBuffers(buffers);
 			};
@@ -93,15 +93,15 @@ public class UndertowHttp2Configuration implements InitializingBean {
 		/**
 		 * getXnioWorker
 		 *
-		 * @return {@link org.xnio.XnioWorker }
+		 * @return {@link XnioWorker }
 		 * @author shuigedeng
-		 * @since 2021-09-02 21:30:08
+		 * @since 2021-10-10 09:08:51
 		 */
 		private XnioWorker getXnioWorker() {
 			XnioWorker worker = null;
 			try {
 				worker = Xnio.getInstance()
-						.createWorker(OptionMap.create(Options.THREAD_DAEMON, true));
+					.createWorker(OptionMap.create(Options.THREAD_DAEMON, true));
 			} catch (IOException ignored) {
 			}
 			return worker;

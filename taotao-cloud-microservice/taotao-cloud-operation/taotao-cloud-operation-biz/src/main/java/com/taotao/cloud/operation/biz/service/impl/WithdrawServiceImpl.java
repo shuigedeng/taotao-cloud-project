@@ -16,7 +16,7 @@
 package com.taotao.cloud.operation.biz.service.impl;
 
 import com.taotao.cloud.operation.biz.entity.Withdraw;
-import com.taotao.cloud.operation.biz.repository.WithdrawRepository;
+import com.taotao.cloud.operation.biz.repository.WithdrawSuperRepository;
 import com.taotao.cloud.operation.biz.service.IWithdrawService;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class WithdrawServiceImpl implements IWithdrawService {
 
-	private final WithdrawRepository withdrawRepository;
+	private final WithdrawSuperRepository withdrawRepository;
 
 	@Override
 	public Withdraw findWithdrawById(Long id) {

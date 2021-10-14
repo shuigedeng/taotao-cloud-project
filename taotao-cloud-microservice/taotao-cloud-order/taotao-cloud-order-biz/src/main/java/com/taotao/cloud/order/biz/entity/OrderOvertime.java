@@ -1,9 +1,9 @@
 package com.taotao.cloud.order.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -17,9 +17,12 @@ import javax.persistence.Table;
  * @since 2020/4/30 15:44
  */
 @Entity
-@Table(name = "tt_order_overtime")
-@org.hibernate.annotations.Table(appliesTo = "tt_order_overtime", comment = "订单超时信息表")
-public class OrderOvertime extends BaseEntity {
+@TableName(OrderOvertime.TABLE_NAME)
+@Table(name = OrderOvertime.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = OrderOvertime.TABLE_NAME, comment = "订单超时信息表")
+public class OrderOvertime extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "order_overtime";
 
     /**
      * 收货人姓名
@@ -127,20 +130,9 @@ public class OrderOvertime extends BaseEntity {
 	}
 
 	public  OrderOvertime(){}
+
 	public OrderOvertime(String receiverName, String receiverPhone,
 		LocalDateTime paySuccessTime, Integer type, LocalDateTime overTime) {
-		this.receiverName = receiverName;
-		this.receiverPhone = receiverPhone;
-		this.paySuccessTime = paySuccessTime;
-		this.type = type;
-		this.overTime = overTime;
-	}
-
-	public OrderOvertime(Long id, Long createBy, Long lastModifiedBy,
-		LocalDateTime createTime, LocalDateTime lastModifiedTime, int version,
-		Boolean delFlag, String receiverName, String receiverPhone,
-		LocalDateTime paySuccessTime, Integer type, LocalDateTime overTime) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
 		this.receiverName = receiverName;
 		this.receiverPhone = receiverPhone;
 		this.paySuccessTime = paySuccessTime;
@@ -240,7 +232,7 @@ public class OrderOvertime extends BaseEntity {
 			orderOvertime.setType(type);
 			orderOvertime.setOverTime(overTime);
 			orderOvertime.setId(id);
-			orderOvertime.setCreateBy(createBy);
+			orderOvertime.setCreatedBy(createBy);
 			orderOvertime.setLastModifiedBy(lastModifiedBy);
 			orderOvertime.setCreateTime(createTime);
 			orderOvertime.setLastModifiedTime(lastModifiedTime);

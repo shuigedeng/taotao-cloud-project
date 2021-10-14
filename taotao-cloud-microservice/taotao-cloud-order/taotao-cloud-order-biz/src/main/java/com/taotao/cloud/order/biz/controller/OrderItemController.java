@@ -15,18 +15,15 @@
  */
 package com.taotao.cloud.order.biz.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
-import com.taotao.cloud.order.api.dto.OrderItemDTO;
+import com.taotao.cloud.order.api.dto.order_item.OrderItemQueryDTO;
+import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
+import com.taotao.cloud.order.api.dto.order_item.OrderItemUpdateDTO;
+import com.taotao.cloud.order.api.vo.order_item.OrderItemVO;
 import com.taotao.cloud.order.biz.entity.OrderItem;
-import com.taotao.cloud.order.biz.service.IOrderItemService;
-import io.swagger.v3.oas.annotations.Operation;
+import com.taotao.cloud.order.api.service.IOrderItemService;
+import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,29 +38,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order/item")
 @Tag(name = "订单项管理API", description = "订单项管理API")
-public class OrderItemController {
+public class OrderItemController extends
+	SuperController<IOrderItemService<OrderItem, Long>, OrderItem, Long, OrderItemQueryDTO, OrderItemSaveDTO, OrderItemUpdateDTO, OrderItemVO> {
 
-	private final IOrderItemService orderItemService;
 
-	public OrderItemController(IOrderItemService orderItemService) {
-		this.orderItemService = orderItemService;
-	}
-
-	/**
-	 * 添加订单项信息
-	 *
-	 * @param orderItemDTO 订单项DTO
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 16:26:27
-	 */
-	@Operation(summary = "添加订单项信息", description = "添加订单项信息", method = CommonConstant.POST)
-	@RequestOperateLog(description = "添加订单项信息")
-	@PostMapping("/save")
-	@SentinelResource(value = "saveOrderItem")
-	Result<Boolean> saveOrderItem(@Validated @RequestBody OrderItemDTO orderItemDTO) {
-		OrderItem orderItem = orderItemService.saveOrderItem(orderItemDTO);
-		return Result.success(null != orderItem);
-	}
 }
 

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.utils;
 
-import com.taotao.cloud.uc.api.vo.TreeNode;
+import com.taotao.cloud.uc.api.vo.resource.TreeNode;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 import java.util.ArrayList;

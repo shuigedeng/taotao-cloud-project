@@ -1,7 +1,23 @@
-package com.taotao.cloud.uc.biz.entity;// package com.taotao.cloud.uc.biz.entity;
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.taotao.cloud.uc.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import com.taotao.cloud.uc.biz.entity.SysDict.SysDictBuilder;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -10,17 +26,20 @@ import javax.persistence.Table;
 
 /**
  * 字典项表
- *
  * // @SQLDelete(sql = "update sys_dict_item set del_flag = 1 where id = ?")
- * // @Where(clause = "del_flag = 1")
+ * // @Where(clause ="del_flag = 1")
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2021.10
+ * @since 2021-10-09 21:09:21
  */
 @Entity
-@Table(name = "tt_sys_dict_item")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_dict_item", comment = "字典项表")
-public class SysDictItem extends BaseEntity {
+@Table(name = SysDictItem.TABLE_NAME)
+@TableName(SysDictItem.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysDictItem.TABLE_NAME, comment = "字典项表")
+public class SysDictItem extends BaseSuperEntity<Long> {
+
+	public static final String TABLE_NAME = "uc_sys_dict_item";
 
 	/**
 	 * 字典id
@@ -73,56 +92,6 @@ public class SysDictItem extends BaseEntity {
 		this.sortNum = sortNum;
 	}
 
-	public SysDictItem(Long id, Long createBy, Long lastModifiedBy, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime, int version, Boolean delFlag,
-		Long dictId, String itemText, String itemValue, String description,
-		Boolean status, Integer sortNum) {
-		super(id, createBy, lastModifiedBy, createTime, lastModifiedTime, version, delFlag);
-		this.dictId = dictId;
-		this.itemText = itemText;
-		this.itemValue = itemValue;
-		this.description = description;
-		this.status = status;
-		this.sortNum = sortNum;
-	}
-
-	@Override
-	public String toString() {
-		return "SysDictItem{" +
-			"dictId=" + dictId +
-			", itemText='" + itemText + '\'' +
-			", itemValue='" + itemValue + '\'' +
-			", description='" + description + '\'' +
-			", status=" + status +
-			", sortNum=" + sortNum +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		SysDictItem that = (SysDictItem) o;
-		return Objects.equals(dictId, that.dictId) && Objects.equals(itemText,
-			that.itemText) && Objects.equals(itemValue, that.itemValue)
-			&& Objects.equals(description, that.description) && Objects.equals(
-			status, that.status) && Objects.equals(sortNum, that.sortNum);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), dictId, itemText, itemValue, description, status,
-			sortNum);
-	}
-
 	public Long getDictId() {
 		return dictId;
 	}
@@ -169,115 +138,5 @@ public class SysDictItem extends BaseEntity {
 
 	public void setSortNum(Integer sortNum) {
 		this.sortNum = sortNum;
-	}
-
-	public static SysDictItemBuilder builder() {
-		return new SysDictItemBuilder();
-	}
-	public static final class SysDictItemBuilder {
-
-		private Long id;
-		private Long createBy;
-		private Long lastModifiedBy;
-		private LocalDateTime createTime;
-		private LocalDateTime lastModifiedTime;
-		private int version = 1;
-		private Boolean delFlag = false;
-		private Long dictId;
-		private String itemText;
-		private String itemValue;
-		private String description;
-		private Boolean status = true;
-		private Integer sortNum = 0;
-
-		private SysDictItemBuilder() {
-		}
-
-		public static SysDictItemBuilder aSysDictItem() {
-			return new SysDictItemBuilder();
-		}
-
-		public SysDictItemBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysDictItemBuilder createBy(Long createBy) {
-			this.createBy = createBy;
-			return this;
-		}
-
-		public SysDictItemBuilder lastModifiedBy(Long lastModifiedBy) {
-			this.lastModifiedBy = lastModifiedBy;
-			return this;
-		}
-
-		public SysDictItemBuilder createTime(LocalDateTime createTime) {
-			this.createTime = createTime;
-			return this;
-		}
-
-		public SysDictItemBuilder lastModifiedTime(LocalDateTime lastModifiedTime) {
-			this.lastModifiedTime = lastModifiedTime;
-			return this;
-		}
-
-		public SysDictItemBuilder version(int version) {
-			this.version = version;
-			return this;
-		}
-
-		public SysDictItemBuilder delFlag(Boolean delFlag) {
-			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SysDictItemBuilder dictId(Long dictId) {
-			this.dictId = dictId;
-			return this;
-		}
-
-		public SysDictItemBuilder itemText(String itemText) {
-			this.itemText = itemText;
-			return this;
-		}
-
-		public SysDictItemBuilder itemValue(String itemValue) {
-			this.itemValue = itemValue;
-			return this;
-		}
-
-		public SysDictItemBuilder description(String description) {
-			this.description = description;
-			return this;
-		}
-
-		public SysDictItemBuilder status(Boolean status) {
-			this.status = status;
-			return this;
-		}
-
-		public SysDictItemBuilder sortNum(Integer sortNum) {
-			this.sortNum = sortNum;
-			return this;
-		}
-
-		public SysDictItem build() {
-			SysDictItem sysDictItem = new SysDictItem();
-			sysDictItem.setId(id);
-			sysDictItem.setCreateBy(createBy);
-			sysDictItem.setLastModifiedBy(lastModifiedBy);
-			sysDictItem.setCreateTime(createTime);
-			sysDictItem.setLastModifiedTime(lastModifiedTime);
-			sysDictItem.setVersion(version);
-			sysDictItem.setDelFlag(delFlag);
-			sysDictItem.setDictId(dictId);
-			sysDictItem.setItemText(itemText);
-			sysDictItem.setItemValue(itemValue);
-			sysDictItem.setDescription(description);
-			sysDictItem.setStatus(status);
-			sysDictItem.setSortNum(sortNum);
-			return sysDictItem;
-		}
 	}
 }

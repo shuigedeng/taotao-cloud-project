@@ -1,9 +1,7 @@
 package com.taotao.cloud.product.biz.entity;
 
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Table;
 
@@ -16,7 +14,7 @@ import javax.persistence.Table;
 //@Entity
 @Table(name = "tt_product_comment")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_comment", comment = "商品评论表")
-public class ProductComment extends BaseEntity {
+public class ProductComment extends JpaSuperEntity {
 
     private String productSpecName;
 

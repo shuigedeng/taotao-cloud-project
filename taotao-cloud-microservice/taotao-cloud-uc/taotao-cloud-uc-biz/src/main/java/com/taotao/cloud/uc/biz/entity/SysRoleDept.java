@@ -1,29 +1,40 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.uc.biz.entity;
 
-import java.util.Objects;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * 角色-部门第三方表
  *
  * @author shuigedeng
- * @since 2020/6/15 11:00
+ * @version 2021.10
+ * @since 2021-10-09 21:50:39
  */
-
 @Entity
-@Table(name = "tt_sys_role_dept")
-@org.hibernate.annotations.Table(appliesTo = "tt_sys_role_dept", comment = "角色-部门第三方表")
-public class SysRoleDept {
+@Table(name = SysRoleDept.TABLE_NAME)
+@TableName(SysRoleDept.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysRoleDept.TABLE_NAME, comment = "角色-部门第三方表")
+public class SysRoleDept extends SuperEntity<Long> {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", columnDefinition = "bigint not null comment 'id'")
-	private Long id;
+	public static final String TABLE_NAME = "uc_sys_role_dept";
 
 	/**
 	 * 角色ID
@@ -36,41 +47,6 @@ public class SysRoleDept {
 	 */
 	@Column(name = "dept_id", nullable = false, columnDefinition = "bigint not null comment '部门ID'")
 	private Long deptId;
-
-	@Override
-	public String toString() {
-		return "SysRoleDept{" +
-			"id=" + id +
-			", roleId=" + roleId +
-			", deptId=" + deptId +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SysRoleDept that = (SysRoleDept) o;
-		return Objects.equals(id, that.id) && Objects.equals(roleId, that.roleId)
-			&& Objects.equals(deptId, that.deptId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, roleId, deptId);
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getRoleId() {
 		return roleId;
@@ -91,50 +67,8 @@ public class SysRoleDept {
 	public SysRoleDept() {
 	}
 
-	public SysRoleDept(Long id, Long roleId, Long deptId) {
-		this.id = id;
+	public SysRoleDept(Long roleId, Long deptId) {
 		this.roleId = roleId;
 		this.deptId = deptId;
-	}
-
-	public static SysRoleDeptBuilder builder() {
-		return new SysRoleDeptBuilder();
-	}
-
-	public static final class SysRoleDeptBuilder {
-
-		private Long id;
-		private Long roleId;
-		private Long deptId;
-
-		private SysRoleDeptBuilder() {
-		}
-
-		public static SysRoleDeptBuilder aSysRoleDept() {
-			return new SysRoleDeptBuilder();
-		}
-
-		public SysRoleDeptBuilder id(Long id) {
-			this.id = id;
-			return this;
-		}
-
-		public SysRoleDeptBuilder roleId(Long roleId) {
-			this.roleId = roleId;
-			return this;
-		}
-
-		public SysRoleDeptBuilder deptId(Long deptId) {
-			this.deptId = deptId;
-			return this;
-		}
-
-		public SysRoleDept build() {
-			SysRoleDept sysRoleDept = new SysRoleDept();
-			sysRoleDept.id = this.id;
-			sysRoleDept.deptId = this.deptId;
-			sysRoleDept.roleId = this.roleId;
-			return sysRoleDept;
-		}
 	}
 }

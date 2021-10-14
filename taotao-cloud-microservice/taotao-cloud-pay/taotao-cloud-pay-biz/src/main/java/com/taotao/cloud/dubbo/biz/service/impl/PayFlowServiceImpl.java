@@ -18,7 +18,7 @@ package com.taotao.cloud.dubbo.biz.service.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
-import com.taotao.cloud.dubbo.biz.repository.PayFlowRepository;
+import com.taotao.cloud.dubbo.biz.repository.PayFlowSuperRepository;
 import com.taotao.cloud.dubbo.biz.service.IPayFlowService;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +32,9 @@ import java.util.Optional;
 @Service
 public class PayFlowServiceImpl implements IPayFlowService {
 
-	private final PayFlowRepository payFlowRepository;
+	private final PayFlowSuperRepository payFlowRepository;
 
-	public PayFlowServiceImpl(PayFlowRepository payFlowRepository) {
+	public PayFlowServiceImpl(PayFlowSuperRepository payFlowRepository) {
 		this.payFlowRepository = payFlowRepository;
 	}
 

@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.api.vo.resource;
 
-import com.taotao.cloud.uc.api.vo.TreeNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;
@@ -108,18 +107,18 @@ public class ResourceTree extends TreeNode implements Serializable {
 		this.label = name;
 	}
 
-	public ResourceTree(ResourceVO resourceVO) {
+	public ResourceTree(ResourceQueryVO resourceQueryVO) {
 		super();
-		super.setId(resourceVO.getId());
-		super.setParentId(resourceVO.getParentId());
-		this.icon = resourceVO.getIcon();
-		this.name = resourceVO.getName();
-		this.path = resourceVO.getPath();
-		this.type = resourceVO.getType();
-		this.perms = resourceVO.getPerms();
-		this.label = resourceVO.getName();
-		this.sort = resourceVO.getSortNum();
-		this.keepAlive = resourceVO.getKeepAlive();
+		super.setId(resourceQueryVO.getId());
+		super.setParentId(resourceQueryVO.getParentId());
+		this.icon = resourceQueryVO.getIcon();
+		this.name = resourceQueryVO.getName();
+		this.path = resourceQueryVO.getPath();
+		this.type = resourceQueryVO.getType();
+		this.perms = resourceQueryVO.getPerms();
+		this.label = resourceQueryVO.getName();
+		this.sort = resourceQueryVO.getSortNum();
+		this.keepAlive = resourceQueryVO.getKeepAlive();
 	}
 
 	@Override

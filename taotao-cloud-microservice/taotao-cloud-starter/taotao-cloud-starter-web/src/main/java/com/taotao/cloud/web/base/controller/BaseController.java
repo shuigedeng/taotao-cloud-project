@@ -19,16 +19,24 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.SecurityUtil;
-import com.taotao.cloud.web.base.service.SuperService;
+import com.taotao.cloud.web.base.entity.SuperEntity;
+import com.taotao.cloud.web.base.service.BaseSuperService;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * BaseController
  *
+ * @param <T> Entity
+ * @param <I> Id
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:03:10
  */
-public interface BaseController<Entity> {
+public interface BaseController<T extends SuperEntity<I>, I extends Serializable> {
 
 	/**
 	 * 获取实体的类型
@@ -37,27 +45,27 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:03:20
 	 */
-	Class<Entity> getEntityClass();
+	Class<T> getEntityClass();
 
 	/**
-	 * 获取Service
+	 * 获取BaseSuperService
 	 *
-	 * @return {@link com.taotao.cloud.web.base.service.SuperService }
+	 * @return {@link  com.taotao.cloud.web.base.service.BaseSuperService }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:03:26
 	 */
-	SuperService<Entity> getBaseService();
+	BaseSuperService<T, I> getBaseService();
 
 	/**
 	 * 成功返回
 	 *
 	 * @param data 返回内容
-	 * @param <T>  返回类型
+	 * @param <R>  返回类型
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:03:37
 	 */
-	default <T> Result<T> success(T data) {
+	default <R> Result<R> success(R data) {
 		return Result.success(data);
 	}
 
@@ -106,7 +114,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:04:19
 	 */
-	default <T> Result<T> fail(BusinessException exception) {
+	default <R> Result<R> fail(BusinessException exception) {
 		return Result.fail(exception);
 	}
 
@@ -118,7 +126,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:04:28
 	 */
-	default <T> Result<T> fail(Throwable throwable) {
+	default <R> Result<R> fail(Throwable throwable) {
 		return Result.fail(throwable);
 	}
 
@@ -130,7 +138,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:04:35
 	 */
-	default <T> Result<T> validFail(String msg) {
+	default <R> Result<R> validFail(String msg) {
 		return Result.validFail(msg);
 	}
 
@@ -143,7 +151,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:04:42
 	 */
-	default <T> Result<T> validFail(String msg, Object... args) {
+	default <R> Result<R> validFail(String msg, Object... args) {
 		return Result.validFail(msg, args);
 	}
 
@@ -155,7 +163,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:04:50
 	 */
-	default <T> Result<T> validFail(ResultEnum resultEnum) {
+	default <R> Result<R> validFail(ResultEnum resultEnum) {
 		return Result.validFail(resultEnum);
 	}
 
@@ -188,7 +196,7 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:05:12
 	 */
-	default String getAccount() {
+	default String getNickname() {
 		return SecurityUtil.getUser().getNickname();
 	}
 
@@ -199,7 +207,57 @@ public interface BaseController<Entity> {
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:05:17
 	 */
-	default String getName() {
+	default String getUsername() {
 		return SecurityUtil.getUsername();
+	}
+
+	/**
+	 * 校验字段
+	 *
+	 * @param clazz clazz
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-13 17:36:08
+	 */
+	default Boolean checkField(Class<?> clazz) {
+		Class<T> entityClass = getEntityClass();
+		Field[] fields = entityClass.getFields();
+		List<String> filedList = Arrays.stream(fields).map(Field::getName)
+			.collect(Collectors.toList());
+
+		Field[] declaredFields = clazz.getDeclaredFields();
+		if(declaredFields.length == 0){
+			throw new BusinessException("字段参数不存在");
+		}
+
+		for (Field declaredField : declaredFields) {
+			String filedName = declaredField.getName();
+			if (!filedList.contains(filedName)) {
+				throw new BusinessException(filedName + "字段值错误");
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * 校验字段
+	 *
+	 * @param filedName 字段名称
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-13 17:36:08
+	 */
+	default Boolean checkField(String filedName) {
+		Class<T> entityClass = getEntityClass();
+		Field[] fields = entityClass.getFields();
+		List<String> filedList = Arrays.stream(fields).map(Field::getName)
+			.collect(Collectors.toList());
+
+		if (!filedList.contains(filedName)) {
+			throw new BusinessException(filedName + ":字段值错误");
+		}
+
+		return true;
 	}
 }

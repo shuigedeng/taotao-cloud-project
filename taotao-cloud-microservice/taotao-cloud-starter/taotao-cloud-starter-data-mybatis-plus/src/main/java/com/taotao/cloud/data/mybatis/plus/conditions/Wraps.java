@@ -47,8 +47,8 @@ public final class Wraps {
 	 * @param <T>    实体类泛型
 	 * @return QueryWrapper&lt;T&gt;
 	 */
-	public static <T> QueryWrap<T> q(T entity) {
-		return new QueryWrap<>(entity);
+	public static <T> QueryWrap<T> q(Class<T> entityClass) {
+		return new QueryWrap<>(entityClass);
 	}
 
 	/**
@@ -94,14 +94,13 @@ public final class Wraps {
 	}
 
 
-	public static <Entity> LbqWrapper<Entity> lbq(Entity model, Map<String, Object> extra,
-		Class<Entity> modelClazz) {
-		return q(model, extra, modelClazz).lambda();
+	public static <T> LbqWrapper<T> lbq(Class<T> entityClass, Map<String, Object> extra,
+		Class<T> modelClazz) {
+		return q(entityClass, extra, modelClazz).lambda();
 	}
 
-	public static <Entity> QueryWrap<Entity> q(Entity model, Map<String, Object> extra,
-		Class<Entity> modelClazz) {
-		QueryWrap<Entity> wrapper = model != null ? Wraps.q(model) : Wraps.q();
+	public static <T> QueryWrap<T> q(Class<T> entityClass, Map<String, Object> extra, Class<T> modelClazz) {
+		QueryWrap<T> wrapper = entityClass != null ? Wraps.q(entityClass) : Wraps.q();
 
 		if (MapUtil.isNotEmpty(extra)) {
 			//拼装区间
@@ -113,8 +112,7 @@ public final class Wraps {
 				}
 				if (key.endsWith("_st")) {
 					String beanField = StrUtil.subBefore(key, "_st", true);
-					wrapper.ge(getDbField(beanField, modelClazz),
-						DateUtil.getStartTime(value.toString()));
+					wrapper.ge(getDbField(beanField, modelClazz), DateUtil.getStartTime(value.toString()));
 				}
 				if (key.endsWith("_ed")) {
 					String beanField = StrUtil.subBefore(key, "_ed", true);
@@ -123,6 +121,7 @@ public final class Wraps {
 				}
 			}
 		}
+		wrapper.isNotNull("id");
 		return wrapper;
 	}
 

@@ -16,13 +16,13 @@
 package com.taotao.cloud.common.model;
 
 import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -39,6 +39,7 @@ import org.slf4j.MDC;
 @JsonInclude(Include.ALWAYS)
 public class Result<T> implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -3685249101751401211L;
 
 	/**
@@ -75,7 +76,6 @@ public class Result<T> implements Serializable {
 	 * 请求结束时间
 	 */
 	@Schema(description = "请求结束时间")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime timestamp;
 
 	public Result() {
@@ -133,13 +133,12 @@ public class Result<T> implements Serializable {
 	/**
 	 * success
 	 *
-	 * @param <T> T
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:15:07
 	 */
-	public static <T> Result<T> success() {
-		return of(ResultEnum.SUCCESS.getCode(), null, CommonConstant.SUCCESS, "");
+	public static Result<Boolean> success() {
+		return success(true);
 	}
 
 	/**

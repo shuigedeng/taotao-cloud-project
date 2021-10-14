@@ -1,7 +1,14 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
+import com.taotao.cloud.uc.api.service.ISysDictService;
+import com.taotao.cloud.uc.biz.entity.SysDict;
+import com.taotao.cloud.uc.biz.entity.SysJob;
+import com.taotao.cloud.uc.biz.mapper.SysDictMapper;
+import com.taotao.cloud.uc.biz.mapper.SysJobMapper;
+import com.taotao.cloud.uc.biz.repository.SysDictRepository;
 import com.taotao.cloud.uc.biz.repository.SysJobRepository;
-import com.taotao.cloud.uc.biz.service.ISysJobService;
+import com.taotao.cloud.uc.api.service.ISysJobService;
+import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,10 +19,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class SysJobServiceImpl  implements ISysJobService {
-    private final SysJobRepository sysJobRepository;
-
-	public SysJobServiceImpl(SysJobRepository sysJobRepository) {
-		this.sysJobRepository = sysJobRepository;
-	}
+public class SysJobServiceImpl  extends
+	BaseSuperServiceImpl<SysJobMapper, SysJob,SysJobRepository, Long>
+	implements ISysJobService<SysJob, Long> {
 }

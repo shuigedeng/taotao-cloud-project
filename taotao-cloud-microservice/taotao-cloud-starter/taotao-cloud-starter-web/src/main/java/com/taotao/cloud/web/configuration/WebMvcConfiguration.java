@@ -16,6 +16,10 @@
 package com.taotao.cloud.web.configuration;
 
 
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_TIME_FORMAT;
+
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -26,11 +30,18 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.json.JacksonModule;
+import com.taotao.cloud.common.json.LocalDateTimeDeserializer;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -42,6 +53,10 @@ import com.taotao.cloud.web.filter.WebContextFilter;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
+import com.taotao.cloud.web.mvc.converter.String2DateConverter;
+import com.taotao.cloud.web.mvc.converter.String2LocalDateConverter;
+import com.taotao.cloud.web.mvc.converter.String2LocalDateTimeConverter;
+import com.taotao.cloud.web.mvc.converter.String2LocalTimeConverter;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.properties.XssProperties;
@@ -52,7 +67,11 @@ import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
 import io.swagger.v3.oas.annotations.Operation;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -182,10 +201,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Override
-	public void configureMessageConverters(
-		List<HttpMessageConverter<?>> converters) {
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 
-		WebMvcConfigurer.super.configureMessageConverters(converters);
 	}
 
 	@Override
@@ -197,25 +214,31 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverterFactory(new IntegerToEnumConverterFactory());
 		registry.addConverterFactory(new StringToEnumConverterFactory());
+
+		registry.addConverter(new String2DateConverter());
+		registry.addConverter(new String2LocalDateConverter());
+		registry.addConverter(new String2LocalDateTimeConverter());
+		registry.addConverter(new String2LocalTimeConverter());
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**")
+		registry
+			.addResourceHandler("/**")
 			.addResourceLocations("classpath:/static/");
 	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/index")
+		registry
+			.addViewController("/index")
 			.setViewName("index");
 
-		WebMvcConfigurer.super.addViewControllers(registry);
 	}
 
 	@Override
 	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-		WebMvcConfigurer.super.configureAsyncSupport(configurer);
+
 	}
 
 //	@Bean
@@ -233,28 +256,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();
-			//objectMapper
-			//	.setLocale(Locale.CHINA)
-			//	//去掉默认的时间戳格式
-			//	.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-			//	// 时区
-			//	.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()))
-			//	//Date参数日期格式
-			//	.setDateFormat(new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT, Locale.CHINA))
-			//	// 包含null
-			//	.setSerializationInclusion(Include.ALWAYS)
-			//	//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
-			//	.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true)
-			//	// 忽略不能转义的字符
-			//	.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
-			//		true)
-			//	//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
-			//	.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-			//	//忽略未知字段
-			//	.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			//	//DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES相当于配置，JSON串含有未知字段时，反序列化依旧可以成功
-			//	//单引号处理
-			//	.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
 
 			mapper.findAndRegisterModules();
 			mapper.setLocale(Locale.CHINA);
@@ -287,18 +288,25 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 			// 使用bean名称
 			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
 			// 所有日期格式都统一为固定格式
-			mapper.setDateFormat(
-				new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
+			mapper.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
 			mapper.registerModule(new Jdk8Module());
-			mapper.registerModule(new JavaTimeModule());
 
 			// 注册自定义模块
 			mapper.registerModule(new JacksonModule());
 
-			// 注册自定义模块
-			mapper.registerModule(new JacksonModule()).findAndRegisterModules();
-
 			customizer.configure(mapper);
+
+			customizer.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
+			customizer.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
+
+			customizer.deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
+			customizer.serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
+
+			customizer.deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+			customizer.serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
+
+			customizer.failOnEmptyBeans(false);
+			customizer.failOnUnknownProperties(false);
 
 			// 配置跨站攻击 反序列化处理器
 			if (xssProperties.getRequestBodyEnabled()) {
@@ -629,7 +637,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	 * @see <a href="https://blog.csdn.net/aiyaya_/article/details/79221733">https://blog.csdn.net/aiyaya_/article/details/79221733</a>
 	 * @since 2021-09-02 21:32:45
 	 */
-	public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
+	public static class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
 		public LoginUserArgumentResolver() {
 		}

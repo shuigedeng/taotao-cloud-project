@@ -1,8 +1,6 @@
 package com.taotao.cloud.dubbo.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -19,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_pay_flow")
 @org.hibernate.annotations.Table(appliesTo = "tt_pay_flow", comment = "支付流水表")
-public class PayFlow extends BaseEntity {
+public class PayFlow extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

@@ -15,40 +15,59 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.BaseJpaRepository;
-import com.taotao.cloud.uc.biz.entity.QSysDict;
+import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 import com.taotao.cloud.uc.biz.entity.SysDict;
-import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
+import com.taotao.cloud.uc.biz.entity.SysDictItem;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.Optional;
+import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 /**
  * 字典Repository
  *
  * @author shuigedeng
- * @since 2020/9/29 18:02
- * @version 1.0.0
+ * @version 2021.10
+ * @since 2021-10-09 20:27:37
  */
 @Repository
-public class SysDictRepository extends BaseJpaRepository<SysDict, Long> {
-    public SysDictRepository(EntityManager em) {
-        super(SysDict.class, em);
-    }
+public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 
-    private final static QSysDict SYS_DICT = QSysDict.sysDict;
+	public SysDictRepository(EntityManager em) {
+		super(SysDict.class, em);
+	}
 
-    public Boolean existsByDictCode(String dictCode) {
-        long count = jpaQueryFactory.selectFrom(SYS_DICT)
-                .where(SYS_DICT.dictCode.eq(dictCode))
-                .fetchCount();
-        return count > 0;
-    }
+	//private final static QSysDict SYS_DICT = QSysDict.sysDict;
 
-    public Optional<SysDict> findByCode(String code) {
-        SysDict dict = jpaQueryFactory.selectFrom(SYS_DICT)
-                .where(SYS_DICT.dictCode.eq(code))
-                .fetchOne();
-        return Optional.ofNullable(dict);
-    }
+	/**
+	 * existsByDictCode
+	 *
+	 * @param dictCode dictCode
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:27:59
+	 */
+	public Boolean existsByDictCode(String dictCode) {
+		//long count = jpaQueryFactory.selectFrom(SYS_DICT)
+		//	.where(SYS_DICT.dictCode.eq(dictCode))
+		//	.fetchCount();
+		//return count > 0;
+		return null;
+	}
+
+	/**
+	 * findByCode
+	 *
+	 * @param code code
+	 * @return {@link Optional&lt;com.taotao.cloud.uc.biz.entity.SysDict&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:28:08
+	 */
+	public Optional<SysDict> findByCode(String code) {
+		//SysDict dict = jpaQueryFactory.selectFrom(SYS_DICT)
+		//	.where(SYS_DICT.dictCode.eq(code))
+		//	.fetchOne();
+		//return Optional.ofNullable(dict);
+		return null;
+	}
 }

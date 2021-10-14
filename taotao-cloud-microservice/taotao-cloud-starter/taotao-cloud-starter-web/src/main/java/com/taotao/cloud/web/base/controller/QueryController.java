@@ -15,85 +15,106 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
-import com.taotao.cloud.web.base.request.PageParams;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
-import org.springframework.http.HttpHeaders;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.constraints.NotNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * QueryController
  *
- * @param <Entity>    Entity
- * @param <PageQuery> PageQuery
- * @param <Id>        Id
+ * @param <T>        实体
+ * @param <I>        id
+ * @param <QueryDTO> 查询参数
+ * @param <QueryVO>  查询返回参数
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:11:18
  */
-public interface QueryController<Entity, Id extends Serializable, PageQuery> extends
-		PageController<Entity, PageQuery> {
+public interface QueryController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+	PageController<T, I, QueryDTO, QueryVO> {
 
 	/**
-	 * 查询
+	 * 通用单体查询
 	 *
 	 * @param id 主键id
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:11:48
 	 */
-	@Operation(summary = "单体查询", description = "单体查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@GetMapping("/{id}")
+	@Operation(summary = "通用单体查询", description = "通用单体查询", method = CommonConstant.GET)
+	@GetMapping("/{id:[0-9]*}")
 	@RequestOperateLog("'查询:' + #id")
-	@PreAuthorize("hasAnyPermission('{}view')")
-	default Result<Entity> get(@PathVariable Id id) {
-		return success(getBaseService().getById(id));
+	@PreAuthorize("@permissionVerifier.hasPermission('get')")
+	default Result<QueryVO> get(
+		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
+		@PathVariable(value = "id") I id) {
+		T data = getBaseService().getById(id);
+		if (Objects.isNull(data)) {
+			throw new BusinessException("未查询到数据");
+		}
+		QueryVO queryVO = BeanUtil.toBean(data, getQueryVOClass());
+		return success(queryVO);
 	}
 
 	/**
-	 * 分页查询
+	 * 通用批量查询
 	 *
-	 * @param params 分页参数
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:11:55
-	 */
-	@Operation(summary = "分页列表查询", description = "分页列表查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@PutMapping("/page")
-	@RequestOperateLog(value = "'分页列表查询:第' + #params?.current + '页, 显示' + #params?.size + '行'", response = false)
-	@PreAuthorize("hasAnyPermission('{}view')")
-	default Result<IPage<Entity>> page(@RequestBody @Validated PageParams<PageQuery> params) {
-		return success(query(params));
-	}
-
-	/**
-	 * 批量查询
-	 *
-	 * @param data 批量查询
+	 * @param queryDTO 通用批量查询
 	 * @return {@link com.taotao.cloud.common.model.Result }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:12:04
 	 */
-	@Operation(summary = "批量查询", description = "批量查询", method = CommonConstant.PUT, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	@PutMapping("/query")
-	@RequestOperateLog(value = "批量查询")
-	@PreAuthorize("hasAnyPermission('{}view')")
-	default Result<List<Entity>> query(@RequestBody Entity data) {
-		QueryWrap<Entity> wrapper = Wraps.q(data);
-		return success(getBaseService().list(wrapper));
-	}
+	@Operation(summary = "通用批量查询", description = "通用批量查询", method = CommonConstant.POST)
+	@PostMapping("/query")
+	@RequestOperateLog(value = "通用批量查询")
+	@PreAuthorize("@permissionVerifier.hasPermission('query')")
+	default Result<List<QueryVO>> query(
+		@Parameter(description = "查询对象", required = true)
+		@RequestBody @Validated QueryDTO queryDTO) {
+		if (checkField(queryDTO.getClass())) {
+			QueryWrap<T> wrapper = Wraps.q(getEntityClass());
+			Class<?> aClass = queryDTO.getClass();
+			for (Field field : aClass.getDeclaredFields()) {
+				if (!StrUtil.equals(field.getName(), "serialVersionUID")) {
+					Object fieldValue = ReflectionUtil.getFieldValue(queryDTO, field.getName());
+					if (Objects.nonNull(fieldValue)) {
+						wrapper.eq(StrUtil.toUnderlineCase(field.getName()), fieldValue);
+					}
+				}
+			}
+			wrapper.isNotNull("id");
 
+			List<T> data = getBaseService().list(wrapper);
+			List<QueryVO> result = Optional.ofNullable(data)
+				.orElse(new ArrayList<>())
+				.stream().filter(Objects::nonNull)
+				.map(t -> BeanUtil.toBean(t, getQueryVOClass())).collect(Collectors.toList());
+			return success(result);
+		}
+		throw new BusinessException(ResultEnum.ERROR);
+	}
 }

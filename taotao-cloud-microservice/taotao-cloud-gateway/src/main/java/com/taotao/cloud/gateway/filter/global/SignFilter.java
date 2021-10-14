@@ -120,73 +120,75 @@ public class SignFilter implements GlobalFilter {
 		return chain.filter(exchange);
 	}
 
-	@SuppressWarnings("unchecked")
 	private Mono<Void> cacheBody(ServerWebExchange exchange, GatewayFilterChain chain,
 		Map<String, String> params) {
+
 		final HttpHeaders headers = exchange.getRequest().getHeaders();
 		if (headers.getContentLength() == 0) {
 			return chain.filter(exchange);
 		}
-		final ResolvableType resolvableType;
-		if (MediaType.MULTIPART_FORM_DATA.isCompatibleWith(headers.getContentType())) {
-			resolvableType = ResolvableType
-				.forClassWithGenerics(MultiValueMap.class, String.class, Part.class);
-		} else {
-			resolvableType = ResolvableType.forClass(String.class);
-		}
 
-		return MESSAGE_READERS.stream()
-			.filter(reader -> reader
-				.canRead(resolvableType, exchange.getRequest().getHeaders().getContentType()))
-			.findFirst()
-			.orElseThrow(() -> new IllegalStateException("no suitable HttpMessageReader."))
-			.readMono(resolvableType, exchange.getRequest(), Collections.emptyMap())
-			.flatMap(resolvedBody -> {
-				if (resolvedBody instanceof MultiValueMap) {
-					@SuppressWarnings("rawtypes")
-					MultiValueMap<String, Object> map = (MultiValueMap) resolvedBody;
-					map.keySet().forEach(key -> {
-//                            SynchronossPartHttpMessageReader
-						Object obj = map.get(key);
-						List<Object> list = (List<Object>) obj;
-						for (Object object : list) {
-							if ("class org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader$SynchronossFilePart"
-								.equals(object.getClass().toString())) {
-								continue;
-							}
-							Field[] fields = object.getClass().getDeclaredFields();
-							try {
-								for (Field field : fields) {
-									field.setAccessible(true);
-									params.put(key, field.get(object) + "");
-								}
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-								LogUtil.info(e.getLocalizedMessage());
-							}
-						}
-					});
-				} else {
-					if (null != resolvedBody) {
-						String path = null;
-						try {
-							path = URLDecoder.decode(resolvedBody.toString(), "UTF-8");
-						} catch (UnsupportedEncodingException e) {
-							e.printStackTrace();
-							LogUtil.error(e.getLocalizedMessage());
-						}
-						if (null != path) {
-							String[] items = path.split("&");
-							for (String item : items) {
-								String[] subItems = item.split("=");
-								if (subItems.length == 2) {
-									params.put(subItems[0], subItems[1]);
-								}
-							}
-						}
-					}
-				}
-				return this.checkSign(params, chain, exchange);
-			});
+		return chain.filter(exchange);
+
+//		final ResolvableType resolvableType;
+//		if (MediaType.MULTIPART_FORM_DATA.isCompatibleWith(headers.getContentType())) {
+//			resolvableType = ResolvableType
+//				.forClassWithGenerics(MultiValueMap.class, String.class, Part.class);
+//		} else {
+//			resolvableType = ResolvableType.forClass(String.class);
+//		}
+//
+//		return MESSAGE_READERS.stream()
+//			.filter(reader -> reader.canRead(resolvableType, exchange.getRequest().getHeaders().getContentType()))
+//			.findFirst()
+//			.orElseThrow(() -> new IllegalStateException("no suitable HttpMessageReader."))
+//			.readMono(resolvableType, exchange.getRequest(), Collections.emptyMap())
+//			.flatMap(resolvedBody -> {
+//				if (resolvedBody instanceof MultiValueMap) {
+//					@SuppressWarnings("rawtypes")
+//					MultiValueMap<String, Object> map = (MultiValueMap) resolvedBody;
+//					map.keySet().forEach(key -> {
+////                            SynchronossPartHttpMessageReader
+//						Object obj = map.get(key);
+//						List<Object> list = (List<Object>) obj;
+//						for (Object object : list) {
+//							if ("class org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader$SynchronossFilePart"
+//								.equals(object.getClass().toString())) {
+//								continue;
+//							}
+//							Field[] fields = object.getClass().getDeclaredFields();
+//							try {
+//								for (Field field : fields) {
+//									field.setAccessible(true);
+//									params.put(key, field.get(object) + "");
+//								}
+//							} catch (IllegalAccessException e) {
+//								e.printStackTrace();
+//								LogUtil.info(e.getLocalizedMessage());
+//							}
+//						}
+//					});
+//				} else {
+//					if (null != resolvedBody) {
+//						String path = null;
+//						try {
+//							path = URLDecoder.decode(resolvedBody.toString(), "UTF-8");
+//						} catch (UnsupportedEncodingException e) {
+//							e.printStackTrace();
+//							LogUtil.error(e.getLocalizedMessage());
+//						}
+//						if (null != path) {
+//							String[] items = path.split("&");
+//							for (String item : items) {
+//								String[] subItems = item.split("=");
+//								if (subItems.length == 2) {
+//									params.put(subItems[0], subItems[1]);
+//								}
+//							}
+//						}
+//					}
+//				}
+//				return this.checkSign(params, chain, exchange);
+//			});
 	}
 }

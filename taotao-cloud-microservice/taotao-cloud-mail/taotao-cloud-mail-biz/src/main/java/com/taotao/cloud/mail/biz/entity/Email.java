@@ -1,8 +1,6 @@
 package com.taotao.cloud.mail.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
-import groovy.transform.EqualsAndHashCode;
-import groovy.transform.ToString;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_email")
 @org.hibernate.annotations.Table(appliesTo = "tt_email", comment = "邮件信息表")
-public class Email extends BaseEntity {
+public class Email extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

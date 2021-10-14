@@ -25,6 +25,7 @@ import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.exception.MessageException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -278,7 +279,7 @@ public class ExceptionConfiguration implements InitializingBean {
 		for (FieldError error : list) {
 			map.put(error.getField(), error.getDefaultMessage());
 		}
-		return map.toString();
+		return JsonUtil.toJSONString(map);
 	}
 
 	/**
@@ -297,7 +298,7 @@ public class ExceptionConfiguration implements InitializingBean {
 			String message = constraintViolation.getMessage();
 			map.put(property, message);
 		}
-		return map.toString();
+		return JsonUtil.toJSONString(map);
 	}
 
 	/**

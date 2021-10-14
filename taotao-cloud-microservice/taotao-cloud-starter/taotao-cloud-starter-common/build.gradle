@@ -20,6 +20,7 @@ dependencies {
     api 'com.nepxion:banner'
     api 'com.github.xkzhangsan:xk-time:3.1.0'
     api 'com.baomidou:mybatis-plus-core:3.4.2'
+    api 'com.baomidou:mybatis-plus-extension:3.4.2'
     api 'com.squareup.okhttp3:okhttp'
 
     api 'org.apache.httpcomponents:httpclient'

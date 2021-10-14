@@ -1,6 +1,6 @@
 package com.taotao.cloud.member.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_member_address")
 @org.hibernate.annotations.Table(appliesTo = "tt_member_address", comment = "会员收货地址")
-public class MemberAddress extends BaseEntity {
+public class MemberAddress extends JpaSuperEntity {
 
 	/**
 	 * 会员id

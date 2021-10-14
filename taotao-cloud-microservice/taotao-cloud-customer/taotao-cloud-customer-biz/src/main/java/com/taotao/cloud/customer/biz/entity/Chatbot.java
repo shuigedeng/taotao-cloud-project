@@ -1,6 +1,6 @@
 package com.taotao.cloud.customer.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_chatbot")
 @org.hibernate.annotations.Table(appliesTo = "tt_chatbot", comment = "机器人客服表")
-public class Chatbot extends BaseEntity {
+public class Chatbot extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.log.biz.entity;
 
-import com.taotao.cloud.data.jpa.entity.BaseEntity;
+import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tt_member_login")
 @org.hibernate.annotations.Table(appliesTo = "tt_member_login", comment = "会员登录日志表")
-public class MemberLogin extends BaseEntity {
+public class MemberLogin extends JpaSuperEntity {
 
 	private static final long serialVersionUID = 6887296988458221221L;
 
