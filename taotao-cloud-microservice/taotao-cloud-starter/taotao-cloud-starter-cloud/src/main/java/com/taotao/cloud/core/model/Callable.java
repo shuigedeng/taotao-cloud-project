@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.core.model;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Callable
  *

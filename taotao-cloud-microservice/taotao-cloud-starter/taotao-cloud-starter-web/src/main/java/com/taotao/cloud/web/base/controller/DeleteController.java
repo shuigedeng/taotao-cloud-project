@@ -30,7 +30,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -57,12 +56,12 @@ public interface DeleteController<T extends SuperEntity<I>, I extends Serializab
 	@Operation(summary = "通用单体id删除", description = "通用单体id删除", method = CommonConstant.DELETE)
 	@DeleteMapping("/{id:[0-9]*}")
 	@RequestOperateLog(description = "通用单体id删除")
-	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteById(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {
 		if (handlerDeleteById(id)) {
-			return success(getBaseService().removeById(id));
+			return success(service().removeById(id));
 		}
 
 		throw new BusinessException(ResultEnum.ERROR);
@@ -96,19 +95,17 @@ public interface DeleteController<T extends SuperEntity<I>, I extends Serializab
 	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
 	@DeleteMapping("/{filedName}/{filedValue}")
 	@RequestOperateLog(description = "通用单体字段删除")
-	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteByFiled(
-		@Parameter(description = "字段名称", required = true)
-		@NotEmpty(message = "字段名称不能为空")
+		@Parameter(description = "字段名称", required = true) @NotEmpty(message = "字段名称不能为空")
 		@PathVariable(value = "filedName") String filedName,
-		@Parameter(description = "字段值", required = true)
-		@NotNull(message = "字段值不能为空")
+		@Parameter(description = "字段值", required = true) @NotNull(message = "字段值不能为空")
 		@PathVariable(value = "filedValue") Object filedValue) {
 		if (handlerDeleteByFiled(filedName, filedValue)) {
 			if (checkField(filedName)) {
 				QueryWrap<T> wrapper = Wraps.q();
 				wrapper.eq(StrUtil.toUnderlineCase(filedName), filedValue);
-				return success(getBaseService().remove(wrapper));
+				return success(service().remove(wrapper));
 			}
 		}
 

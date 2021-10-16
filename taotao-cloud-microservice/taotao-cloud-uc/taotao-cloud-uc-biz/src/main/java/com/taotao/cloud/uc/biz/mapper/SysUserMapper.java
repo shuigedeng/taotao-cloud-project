@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.mapper;
 
-import com.taotao.cloud.uc.biz.entity.SysUser;
+import com.taotao.cloud.uc.api.entity.SysUser;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

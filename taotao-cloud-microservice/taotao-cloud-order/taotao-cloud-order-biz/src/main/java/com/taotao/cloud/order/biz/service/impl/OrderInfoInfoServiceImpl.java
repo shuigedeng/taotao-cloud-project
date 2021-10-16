@@ -5,8 +5,8 @@
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.taotao.cloud.order.api.service.IOrderInfoService;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.api.entity.OrderInfo;
+import com.taotao.cloud.order.api.entity.QOrderInfo;
 import com.taotao.cloud.order.biz.mapper.OrderInfoMapper;
 import com.taotao.cloud.order.biz.repository.OrderInfoRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;

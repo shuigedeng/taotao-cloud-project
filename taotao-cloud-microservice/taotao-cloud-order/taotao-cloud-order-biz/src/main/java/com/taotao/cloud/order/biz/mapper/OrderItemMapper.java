@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.biz.mapper;
 
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.order.api.entity.OrderItem;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

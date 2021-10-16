@@ -13,43 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.biz.entity;
+package com.taotao.cloud.uc.api.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 角色表 
+ * 岗位表
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 21:52:30
  */
 @Entity
-@Table(name = SysRole.TABLE_NAME)
-@TableName(SysRole.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = SysRole.TABLE_NAME, comment = "角色表")
-public class SysRole extends BaseSuperEntity<Long> {
+@Table(name = SysJob.TABLE_NAME)
+@TableName(SysJob.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SysJob.TABLE_NAME, comment = "岗位表")
+public class SysJob extends BaseSuperEntity<Long> {
 
-	public static final String TABLE_NAME = "uc_sys_role";
+	public static final String TABLE_NAME = "uc_sys_job";
 
 	/**
-	 * 角色名称
+	 * 岗位名称
 	 */
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '角色名称'")
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '岗位名称'")
 	private String name;
 
 	/**
-	 * 角色标识
+	 * 部门id
 	 */
-	@Column(name = "code", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '角色标识'")
-	private String code;
+	@Column(name = "dept_id", columnDefinition = "bigint not null comment '部门id'")
+	private Long deptId;
 
 	/**
 	 * 备注
@@ -58,11 +55,27 @@ public class SysRole extends BaseSuperEntity<Long> {
 	private String remark;
 
 	/**
+	 * 排序值
+	 */
+	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
+	private Integer sortNum = 0;
+
+	/**
 	 * 租户id
 	 */
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
 
+	public SysJob() {
+	}
+
+	public SysJob(String name, Long deptId, String remark, Integer sortNum, String tenantId) {
+		this.name = name;
+		this.deptId = deptId;
+		this.remark = remark;
+		this.sortNum = sortNum;
+		this.tenantId = tenantId;
+	}
 
 	public String getName() {
 		return name;
@@ -72,12 +85,12 @@ public class SysRole extends BaseSuperEntity<Long> {
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
+	public Long getDeptId() {
+		return deptId;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setDeptId(Long deptId) {
+		this.deptId = deptId;
 	}
 
 	public String getRemark() {
@@ -88,6 +101,14 @@ public class SysRole extends BaseSuperEntity<Long> {
 		this.remark = remark;
 	}
 
+	public Integer getSortNum() {
+		return sortNum;
+	}
+
+	public void setSortNum(Integer sortNum) {
+		this.sortNum = sortNum;
+	}
+
 	public String getTenantId() {
 		return tenantId;
 	}
@@ -96,13 +117,4 @@ public class SysRole extends BaseSuperEntity<Long> {
 		this.tenantId = tenantId;
 	}
 
-	public SysRole() {
-	}
-
-	public SysRole(String name, String code, String remark, String tenantId) {
-		this.name = name;
-		this.code = code;
-		this.remark = remark;
-		this.tenantId = tenantId;
-	}
 }

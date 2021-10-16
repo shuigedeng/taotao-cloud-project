@@ -1,8 +1,6 @@
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.uc.biz.entity.SysCompany;
-import com.taotao.cloud.uc.biz.entity.SysDept;
+import com.taotao.cloud.uc.api.entity.SysDept;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import org.springframework.stereotype.Repository;
 

@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.health.interceptor;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.health.exception.HealthException;
 import java.util.Properties;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -65,19 +65,16 @@ public class SqlMybatisInterceptor implements Interceptor {
 		BoundSql boundSql = mappedStatement.getBoundSql(parameter);
 		String sql = boundSql.getSql();
 
-		try {
-			Object returnObj = collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
-				StringUtil.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
-					try {
-						return invocation.proceed();
-					} catch (Exception e) {
-						throw new HealthException(e);
-					}
-				});
-			return returnObj;
-		} catch (HealthException exp) {
-			throw exp;
-		}
+		return collector.hook("taotao.cloud.health.mybatis.sql.hook").run(
+			StringUtil.nullToEmpty(sql).replace("\r", "").replace("\n", ""), () -> {
+				try {
+					return invocation.proceed();
+				} catch (Exception e) {
+					LogUtil.error(e);
+					throw new RuntimeException(e);
+				}
+			});
+
 	}
 
 	@Override

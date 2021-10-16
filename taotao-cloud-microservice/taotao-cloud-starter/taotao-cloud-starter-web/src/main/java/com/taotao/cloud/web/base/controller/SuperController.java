@@ -53,15 +53,6 @@ public abstract class SuperController<S extends BaseSuperService<T, I>, T extend
 	ExcelController<T, I, QueryDTO, QueryVO> {
 
 	@Override
-	public Class<T> getEntityClass() {
-		if (entityClass == null) {
-			this.entityClass = (Class<T>) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1];
-		}
-		return this.entityClass;
-	}
-
-	@Override
 	public Class<QueryVO> getQueryVOClass() {
 		return (Class<QueryVO>) ((ParameterizedType) this.getClass()
 			.getGenericSuperclass()).getActualTypeArguments()[6];

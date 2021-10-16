@@ -28,7 +28,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
@@ -45,12 +45,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -79,21 +77,23 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	@Operation(summary = "通用导出Excel", description = "通用导出Excel", method = CommonConstant.POST)
 	@PostMapping(value = "/excel/export", produces = "application/octet-stream")
 	@RequestOperateLog("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
-	@PreAuthorize("@permissionVerifier.hasPermission('export')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('export')")
 	default void export(
 		@Parameter(description = "分页查询DTO", required = true)
-		@RequestBody @Validated PageQuery<QueryDTO> params,
+		@RequestBody @Validated QueryDTO params,
 		HttpServletRequest request, HttpServletResponse response) {
 		ExportParams exportParams = getExportParams(params);
 
 		List<T> list = findExportList(params);
 
 		Map<String, Object> map = new HashMap<>(7);
+		if (params instanceof BaseQuery baseQuery) {
+			String fileName = baseQuery.getExeclQuery().getFileName();
+			map.put(NormalExcelConstants.FILE_NAME, fileName);
+		}
 		map.put(NormalExcelConstants.DATA_LIST, list);
 		map.put(NormalExcelConstants.CLASS, getExcelClass());
 		map.put(NormalExcelConstants.PARAMS, exportParams);
-		String fileName = params.getExeclQuery().getFileName();
-		map.put(NormalExcelConstants.FILE_NAME, fileName);
 
 		PoiBaseView.render(map, request, response, NormalExcelConstants.EASYPOI_EXCEL_VIEW);
 	}
@@ -110,10 +110,10 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	@Operation(summary = "通用预览Excel", description = "通用预览Excel", method = CommonConstant.POST)
 	@PostMapping(value = "/excel/preview")
 	@RequestOperateLog("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
-	@PreAuthorize("@permissionVerifier.hasPermission('preview')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('preview')")
 	default Result<String> preview(
 		@Parameter(description = "分页查询DTO", required = true)
-		@RequestBody @Validated PageQuery<QueryDTO> params) {
+		@RequestBody @Validated QueryDTO params) {
 		ExportParams exportParams = getExportParams(params);
 		List<T> list = findExportList(params);
 		Workbook workbook = ExcelExportUtil.exportExcel(exportParams, getExcelClass(), list);
@@ -133,7 +133,7 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	@Operation(summary = "通用导入Excel", description = "通用导入Excel", method = CommonConstant.POST)
 	@PostMapping(value = "/excel/import", headers = "content-type=multipart/form-data")
 	@RequestOperateLog(value = "'通用导入Excel:' + #file?.originalFilename")
-	@PreAuthorize("@permissionVerifier.hasPermission('import')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('import')")
 	default Result<Boolean> importExcel(
 		@Parameter(description = "文件", required = true) @NotNull(message = "文件不能为空")
 		@RequestPart("file") MultipartFile file,
@@ -150,7 +150,7 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 				file.getInputStream(), Map.class, params);
 
 			if (list != null && !list.isEmpty()) {
-				return handlerImport(list);
+				return success(handlerImport(list));
 			}
 		} catch (Exception e) {
 			LogUtil.error(e);
@@ -167,8 +167,8 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:09:35
 	 */
-	default Result<Boolean> handlerImport(List<Map<String, String>> list) {
-		return Result.success();
+	default Boolean handlerImport(List<Map<String, String>> list) {
+		return true;
 	}
 
 	/**
@@ -179,13 +179,19 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:09:45
 	 */
-	default ExportParams getExportParams(PageQuery<QueryDTO> params) {
-		if (Objects.isNull(params.getExeclQuery())) {
-			throw new BusinessException("execl参数不能为空");
+	default ExportParams getExportParams(QueryDTO params) {
+		String title = "title";
+		String type = "HSSF";
+		String sheetName = "sheetName";
+
+		if (params instanceof BaseQuery baseQuery) {
+			if (Objects.isNull(baseQuery.getExeclQuery())) {
+				throw new BusinessException("execl参数不能为空");
+			}
+			title = baseQuery.getExeclQuery().getTitle();
+			type = baseQuery.getExeclQuery().getType();
+			sheetName = baseQuery.getExeclQuery().getSheetName();
 		}
-		String title = params.getExeclQuery().getTitle();
-		String type = params.getExeclQuery().getType();
-		String sheetName = params.getExeclQuery().getSheetName();
 
 		ExcelType excelType = ExcelType.XSSF.name().equals(type) ? ExcelType.XSSF : ExcelType.HSSF;
 		ExportParams ep = new ExportParams(title, sheetName, excelType);
@@ -211,9 +217,9 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:08:33
 	 */
-	default List<T> findExportList(PageQuery<QueryDTO> params) {
+	default List<T> findExportList(QueryDTO params) {
 		QueryWrap<T> tQueryWrap = handlerWrapper(params);
-		return getBaseService().list(tQueryWrap);
+		return service().list(tQueryWrap);
 	}
 
 	/**

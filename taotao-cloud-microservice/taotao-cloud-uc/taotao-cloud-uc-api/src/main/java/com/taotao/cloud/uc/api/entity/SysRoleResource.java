@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.biz.entity;
+package com.taotao.cloud.uc.api.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -70,5 +70,42 @@ public class SysRoleResource extends SuperEntity<Long> {
 	public SysRoleResource(Long roleId, Long resourceId) {
 		this.roleId = roleId;
 		this.resourceId = resourceId;
+	}
+
+	public static SysRoleResourceBuilder builder() {
+		return new SysRoleResourceBuilder();
+	}
+
+	public static final class SysRoleResourceBuilder {
+
+		private Long id;
+		private Long roleId;
+		private Long resourceId;
+
+		private SysRoleResourceBuilder() {
+		}
+
+		public SysRoleResourceBuilder id(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public SysRoleResourceBuilder roleId(Long roleId) {
+			this.roleId = roleId;
+			return this;
+		}
+
+		public SysRoleResourceBuilder resourceId(Long resourceId) {
+			this.resourceId = resourceId;
+			return this;
+		}
+
+		public SysRoleResource build() {
+			SysRoleResource sysRoleResource = new SysRoleResource();
+			sysRoleResource.setId(id);
+			sysRoleResource.setRoleId(roleId);
+			sysRoleResource.setResourceId(resourceId);
+			return sysRoleResource;
+		}
 	}
 }

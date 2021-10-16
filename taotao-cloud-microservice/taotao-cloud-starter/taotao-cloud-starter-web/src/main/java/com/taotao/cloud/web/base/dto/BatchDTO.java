@@ -62,7 +62,6 @@ public class BatchDTO<SaveDTO, UpdateDTO, I extends Serializable> implements
 	@Schema(description = "批量删除数据DTO")
 	private List<I> batchDelete;
 
-
 	/**
 	 * BatchUpdate
 	 *

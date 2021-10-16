@@ -18,10 +18,10 @@ package com.taotao.cloud.web.base.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -29,12 +29,9 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,7 +61,7 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 	@Operation(summary = "通用分页查询", description = "通用分页查询", method = CommonConstant.POST)
 	@PostMapping("/page")
 	@RequestOperateLog(value = "通用分页查询")
-	@PreAuthorize("@permissionVerifier.hasPermission('page')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('page')")
 	default Result<PageModel<QueryVO>> page(
 		@Parameter(description = "分页查询DTO", required = true)
 		@RequestBody @Validated PageQuery<QueryDTO> params) {
@@ -83,7 +80,6 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 	default void handlerQueryParams(PageQuery<QueryDTO> params) {
 	}
 
-
 	/**
 	 * 执行分页查询
 	 * <p>
@@ -98,10 +94,10 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 		handlerQueryParams(params);
 
 		IPage<T> page = params.buildMpPage();
-		QueryWrap<T> wrapper = handlerWrapper(params);
-		getBaseService().page(page, wrapper);
-		handlerResult(page);
-		return page;
+		QueryWrap<T> wrapper = handlerWrapper(params.getQuery());
+		IPage<T> data = service().page(page, wrapper);
+		handlerResult(data);
+		return data;
 	}
 
 	/**
@@ -112,70 +108,69 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:30
 	 */
-	default QueryWrap<T> handlerWrapper(PageQuery<QueryDTO> params) {
+	default QueryWrap<T> handlerWrapper(QueryDTO params) {
 		QueryWrap<T> wrapper = Wraps.q(getEntityClass());
-		QueryDTO eqQuery = params.getEqQuery();
-		if (Objects.nonNull(eqQuery)) {
-			if (checkField(eqQuery.getClass())) {
-				Class<?> aClass = eqQuery.getClass();
-				for (Field field : aClass.getDeclaredFields()) {
-					if (!StrUtil.equals(field.getName(), "serialVersionUID")) {
-						Object fieldValue = ReflectionUtil.getFieldValue(eqQuery, field.getName());
-						if (Objects.nonNull(fieldValue)) {
-							wrapper.eq(StrUtil.toUnderlineCase(field.getName()), fieldValue);
-						}
-					}
-				}
-			}
+
+		if (params instanceof BaseQuery baseQuery) {
+			Optional.ofNullable(baseQuery.getEqQuery())
+				.orElse(new ArrayList<>())
+				.stream()
+				.filter(Objects::nonNull)
+				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.getFiled()))
+				.filter(eqDTO -> checkField(eqDTO.getFiled()))
+				.forEach(eqDTO -> {
+					wrapper.eq(StrUtil.toUnderlineCase(eqDTO.getFiled()), eqDTO.getValue());
+				});
+
+			Optional.ofNullable(baseQuery.getDateTimeBetweenQuery())
+				.orElse(new ArrayList<>())
+				.stream()
+				.filter(Objects::nonNull)
+				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.getFiled()))
+				.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.getFiled()))
+				.forEach(dateTimeBetweenDTO -> {
+					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.getFiled()),
+						dateTimeBetweenDTO.getStartTime(),
+						dateTimeBetweenDTO.getEndTime());
+				});
+
+			Optional.ofNullable(baseQuery.getLikeQuery())
+				.orElse(new ArrayList<>())
+				.stream()
+				.filter(Objects::nonNull)
+				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.getFiled()))
+				.filter(likeDTO -> checkField(likeDTO.getFiled()))
+				.forEach(likeDTO -> {
+					wrapper.like(StrUtil.toUnderlineCase(likeDTO.getFiled()), likeDTO.getValue());
+				});
+
+			Optional.ofNullable(baseQuery.getInQuery())
+				.orElse(new ArrayList<>())
+				.stream()
+				.filter(Objects::nonNull)
+				.filter(inDTO -> StrUtil.isNotBlank(inDTO.getFiled()))
+				.filter(inDTO -> checkField(inDTO.getFiled()))
+				.forEach(inDTO -> {
+					wrapper.in(StrUtil.toUnderlineCase(inDTO.getFiled()), inDTO.getValues());
+				});
+
+			Optional.ofNullable(baseQuery.getNotInQuery())
+				.orElse(new ArrayList<>())
+				.stream()
+				.filter(Objects::nonNull)
+				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.getFiled()))
+				.filter(notInDTO -> checkField(notInDTO.getFiled()))
+				.forEach(notInDTO -> {
+					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.getFiled()),
+						notInDTO.getValues());
+				});
 		}
-
-		Optional.ofNullable(params.getDateTimeBetweenQuery())
-			.orElse(new ArrayList<>())
-			.stream()
-			.filter(Objects::nonNull)
-			.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.getFiled()))
-			.forEach(dateTimeBetweenDTO -> {
-				wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.getFiled()),
-					dateTimeBetweenDTO.getStartTime(),
-					dateTimeBetweenDTO.getEndTime());
-			});
-
-		Optional.ofNullable(params.getLikeQuery())
-			.orElse(new ArrayList<>())
-			.stream()
-			.filter(Objects::nonNull)
-			.filter(likeDTO -> checkField(likeDTO.getFiled()))
-			.forEach(likeDTO -> {
-				wrapper.like(StrUtil.toUnderlineCase(likeDTO.getFiled()), likeDTO.getValue());
-			});
-
-		Optional.ofNullable(params.getInQuery())
-			.orElse(new ArrayList<>())
-			.stream()
-			.filter(Objects::nonNull)
-			.filter(inDTO -> checkField(inDTO.getFiled()))
-			.forEach(inDTO -> {
-				wrapper.in(StrUtil.toUnderlineCase(inDTO.getFiled()), inDTO.getValues());
-			});
-
-		Optional.ofNullable(params.getNotInQuery())
-			.orElse(new ArrayList<>())
-			.stream()
-			.filter(Objects::nonNull)
-			.filter(notInDTO -> checkField(notInDTO.getFiled()))
-			.forEach(notInDTO -> {
-				wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.getFiled()),
-					notInDTO.getValues());
-			});
-
 		wrapper.isNotNull("id");
 		return wrapper;
 	}
 
 	/**
 	 * 处理查询后的数据
-	 * <p>
-	 * 如：执行@Echo回显
 	 *
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:07:37
@@ -183,8 +178,5 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 	default void handlerResult(IPage<T> page) {
 	}
 
-	default Class<QueryVO> getQueryVOClass() {
-		return (Class<QueryVO>) ((ParameterizedType) this.getClass()
-			.getGenericSuperclass()).getActualTypeArguments()[4];
-	}
+	Class<QueryVO> getQueryVOClass();
 }

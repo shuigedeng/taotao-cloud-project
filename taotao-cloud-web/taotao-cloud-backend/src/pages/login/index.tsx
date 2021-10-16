@@ -41,6 +41,7 @@ import { LocaleEnum } from '/@/enums/localeEnum'
 import { localeToggle } from '/@/store/locale'
 import Loading from '/@/components/loading'
 import { MenuInfo } from 'rc-menu/es/interface'
+import { getFetch, postFetch } from '/@/http'
 
 interface Lang {
   [key: string]: string
@@ -140,20 +141,22 @@ const Login: React.FC = () => {
   }, [])
 
   const refreshCaptcha = async () => {
-    setBasicState(pr => {
-      return { ...pr, imgCodeLoading: true }
-    })
-    const time = new Date().getTime()
-    const data = await api.auth.getCaptcha({ t: time })
-    if (data) {
-      setLoginForm(prevState => {
-        return { ...prevState, t: time }
-      })
-
-      setBasicState(pr => {
-        return { ...pr, codeSrc: data.data, imgCodeLoading: false }
-      })
-    }
+    const  aa = ["qqq", "ccc"]
+    const data = await postFetch("/order/roles/333", aa)
+    // setBasicState(pr => {
+    //   return { ...pr, imgCodeLoading: true }
+    // })
+    // const time = new Date().getTime()
+    // const data = await api.auth.getCaptcha({ t: time })
+    // if (data) {
+    //   setLoginForm(prevState => {
+    //     return { ...prevState, t: time }
+    //   })
+    //
+    //   setBasicState(pr => {
+    //     return { ...pr, codeSrc: data.data, imgCodeLoading: false }
+    //   })
+    // }
   }
 
   const socialLogin = () => {

@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.uc.biz.entity.SysRegion;
-import com.taotao.cloud.uc.biz.entity.SysRole;
+import com.taotao.cloud.uc.api.entity.QSysRole;
+import com.taotao.cloud.uc.api.entity.QSysUserRole;
+import com.taotao.cloud.uc.api.entity.SysRole;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +38,8 @@ public class SysRoleRepository extends BaseSuperRepository<SysRole, Long> {
 		super(SysRole.class, em);
 	}
 
-	//private final static QSysRole SYS_ROLE = QSysRole.sysRole;
-	//private final static QSysUserRole SYS_USER_ROLE = QSysUserRole.sysUserRole;
+	private final static QSysRole SYS_ROLE = QSysRole.sysRole;
+	private final static QSysUserRole SYS_USER_ROLE = QSysUserRole.sysUserRole;
 
 	/**
 	 * findRoleByUserIds
@@ -50,14 +50,13 @@ public class SysRoleRepository extends BaseSuperRepository<SysRole, Long> {
 	 * @since 2021-10-09 20:47:10
 	 */
 	public List<SysRole> findRoleByUserIds(Set<Long> userIds) {
-		//return jpaQueryFactory
-		//	.select(SYS_ROLE)
-		//	.from(SYS_ROLE)
-		//	.innerJoin(SYS_USER_ROLE)
-		//	.on(SYS_ROLE.id.eq(SYS_USER_ROLE.roleId))
-		//	.where(SYS_USER_ROLE.userId.in(userIds))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory
+			.select(SYS_ROLE)
+			.from(SYS_ROLE)
+			.innerJoin(SYS_USER_ROLE)
+			.on(SYS_ROLE.id.eq(SYS_USER_ROLE.roleId))
+			.where(SYS_USER_ROLE.userId.in(userIds))
+			.fetch();
 	}
 
 	/**
@@ -69,10 +68,9 @@ public class SysRoleRepository extends BaseSuperRepository<SysRole, Long> {
 	 * @since 2021-10-09 20:47:14
 	 */
 	public List<SysRole> findRoleByCodes(Set<String> codes) {
-		//return jpaQueryFactory
-		//	.selectFrom(SYS_ROLE)
-		//	.where(SYS_ROLE.code.in(codes))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory
+			.selectFrom(SYS_ROLE)
+			.where(SYS_ROLE.code.in(codes))
+			.fetch();
 	}
 }

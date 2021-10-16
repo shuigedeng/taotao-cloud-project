@@ -15,10 +15,8 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.uc.biz.entity.QSysUser;
-import com.taotao.cloud.uc.biz.entity.SysRole;
-import com.taotao.cloud.uc.biz.entity.SysUser;
+import com.taotao.cloud.uc.api.entity.QSysUser;
+import com.taotao.cloud.uc.api.entity.SysUser;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

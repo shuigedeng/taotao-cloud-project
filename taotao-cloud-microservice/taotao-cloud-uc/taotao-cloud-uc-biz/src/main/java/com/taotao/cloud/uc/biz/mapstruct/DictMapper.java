@@ -17,7 +17,7 @@ package com.taotao.cloud.uc.biz.mapstruct;
 
 import com.taotao.cloud.uc.api.dto.dict.DictSaveDTO;
 import com.taotao.cloud.uc.api.vo.dict.DictQueryVO;
-import com.taotao.cloud.uc.biz.entity.SysDict;
+import com.taotao.cloud.uc.api.entity.SysDict;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -64,7 +64,7 @@ public interface DictMapper {
 	 
 	 * @since 2020/11/11 14:47
 	 */
-	DictQueryVO SysDictToDictVO(SysDict sysDict);
+	DictQueryVO sysDictToDictVO(SysDict sysDict);
 
 	/**
 	 * 拷贝 DictDTO 到SysUser

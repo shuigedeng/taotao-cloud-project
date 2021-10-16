@@ -18,16 +18,14 @@ package com.taotao.cloud.web.base.service;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.core.lock.DistributedLock;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -39,81 +37,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class BaseSuperServiceImpl<
 	M extends BaseSuperMapper<T, I>,
-	T extends SuperEntity<I> ,
+	T extends SuperEntity<I>,
 	R extends BaseSuperRepository<T, I>,
 	I extends Serializable> extends ServiceImpl<M, T> implements BaseSuperService<T, I> {
 
 	@Autowired
-	public R jpaRepository;
-
-	private Class<T> entityClass = null;
+	private R repository;
 
 	@Override
-	public BaseSuperMapper<T, I> getSuperMapper() {
-		if (baseMapper != null) {
-			return baseMapper;
-		}
-		throw new BusinessException("未查询到mapper");
+	public M mapper() {
+		return super.getBaseMapper();
 	}
 
 	@Override
-	public Class<T> getEntityClass() {
-		if (entityClass == null) {
-			this.entityClass = (Class) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1];
-		}
-		return this.entityClass;
-	}
-
-	@Override
-	public BaseSuperRepository<T,I> getSuperRepository() {
-		return jpaRepository;
-	}
-
-	/**
-	 * 处理新增相关处理
-	 *
-	 * @param model 实体
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:22:52
-	 */
-	protected Result<T> handlerSave(T model) {
-		return Result.success(model);
-	}
-
-	/**
-	 * 处理修改相关处理
-	 *
-	 * @param model 实体
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:23:00
-	 */
-	protected Result<T> handlerUpdateAllById(T model) {
-		return Result.success(model);
-	}
-
-	/**
-	 * 处理修改相关处理
-	 *
-	 * @param model 实体
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:23:06
-	 */
-	protected Result<T> handlerUpdateById(T model) {
-		return Result.success(model);
-	}
-
-	@Override
-	public boolean updateAllById(T entity) {
-		return false;
-	}
-
-	@Override
-	public boolean deleteById(I id) {
-		return false;
+	public R repository() {
+		return repository;
 	}
 
 	@Override

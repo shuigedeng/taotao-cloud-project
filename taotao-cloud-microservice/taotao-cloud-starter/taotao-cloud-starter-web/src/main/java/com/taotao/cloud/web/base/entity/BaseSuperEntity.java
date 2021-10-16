@@ -39,30 +39,30 @@ public class BaseSuperEntity<I extends Serializable> extends SuperEntity<I> impl
 	@CreatedDate
 	@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	protected LocalDateTime createTime;
+	private LocalDateTime createTime;
 
 	@CreatedBy
 	@Column(name = "create_by", columnDefinition = "bigint comment '创建人'")
 	@TableField(value = "create_by", fill = FieldFill.INSERT)
-	protected I createdBy;
+	private I createdBy;
 
 	@CreatedDate
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
-	protected LocalDateTime lastModifiedTime;;
+	private LocalDateTime lastModifiedTime;;
 
 	@LastModifiedBy
 	@Column(name = "last_modified_by", columnDefinition = "bigint comment '最后修改人'")
 	@TableField(value = "last_modified_by", fill = FieldFill.INSERT_UPDATE)
-	protected I lastModifiedBy;
+	private I lastModifiedBy;
 
 	@Version
 	@com.baomidou.mybatisplus.annotation.Version
 	@Column(name = "version", nullable = false, columnDefinition = "int not null default 1 comment '版本号'")
-	protected int version = 1;
+	private int version = 1;
 
 	@Column(name = "del_flag", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否删除 0-正常 1-删除'")
-	protected boolean delFlag;
+	private boolean delFlag;
 
 	/**
 	 * 保存和缺省验证组

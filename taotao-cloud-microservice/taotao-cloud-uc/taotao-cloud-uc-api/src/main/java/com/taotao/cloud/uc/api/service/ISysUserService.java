@@ -15,9 +15,12 @@
  */
 package com.taotao.cloud.uc.api.service;
 
+import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
+import com.taotao.cloud.uc.api.entity.SysUser;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * ISysUserService
@@ -27,117 +30,49 @@ import java.io.Serializable;
  * @since 2021-10-09 20:48:28
  */
 public interface ISysUserService<T extends SuperEntity<I>, I extends Serializable> extends
-	BaseSuperService<T, I>  {
+	BaseSuperService<T, I> {
 
-	///**
-	// * 添加用户
-	// *
-	// * @param sysUser sysUser
-	// * @return {@link SysUser }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:48:34
-	// */
-	//SysUser saveUser(SysUser sysUser);
-	//
-	///**
-	// * 更新用户
-	// *
-	// * @param sysUser sysUser
-	// * @return {@link SysUser }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:48:44
-	// */
-	//SysUser updateUser(SysUser sysUser);
-	//
-	///**
-	// * 根据用户id删除用户
-	// *
-	// * @param id id
-	// * @return {@link Boolean }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:48:50
-	// */
-	//Boolean removeUser(Long id);
-	//
-	///**
-	// * 查询用户集合
-	// *
-	// * @param page      page
-	// * @param userQuery userQuery
-	// * @return {@link Page&lt;com.taotao.cloud.uc.biz.entity.SysUser&gt; }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:48:56
-	// */
-	//Page<SysUser> findUserPage(Pageable page, UserPageQuery userQuery);
-	//
-	///**
-	// * 重置密码
-	// *
-	// * @param id              id
-	// * @param restPasswordDTO restPasswordDTO
-	// * @return {@link Boolean }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:02
-	// */
-	//Boolean restPass(Long id, RestPasswordUserDTO restPasswordDTO);
-	//
-	///**
-	// * 根据用户id查询用户信息
-	// *
-	// * @param userId userId
-	// * @return {@link SysUser }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:07
-	// */
-	//SysUser findUserInfoById(Long userId);
-	//
-	///**
-	// * 查询用户集合
-	// *
-	// * @param userQuery userQuery
-	// * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysUser&gt; }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:13
-	// */
-	//List<SysUser> findUserList(UserQuery userQuery);
-	//
-	///**
-	// * 更新角色信息
-	// *
-	// * @param userRoleDTO userRoleDTO
-	// * @return {@link Boolean }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:19
-	// */
-	//Boolean updateUserRoles(UserRoleDTO userRoleDTO);
-	//
-	///**
-	// * 根据username获取用户信息
-	// *
-	// * @param username username
-	// * @return {@link SysUser }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:25
-	// */
-	//SysUser findUserInfoByUsername(String username);
-	//
-	///**
-	// * 根据手机号码查询用户是否存在
-	// *
-	// * @param phone phone
-	// * @return {@link Boolean }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:35
-	// */
-	//Boolean existsByPhone(String phone);
-	//
-	///**
-	// * 根据用户id查询用户是否存在
-	// *
-	// * @param id id
-	// * @return {@link Boolean }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:49:40
-	// */
-	//Boolean existsById(Long id);
+	SysUser saveUser(SysUser sysUser);
+	SysUser updateUser(SysUser sysUser);
+	/**
+	 * 重置密码
+	 *
+	 * @param id              id
+	 * @param restPasswordDTO restPasswordDTO
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:49:02
+	 */
+	Boolean restPass(Long userId, RestPasswordUserDTO restPasswordDTO);
+
+	/**
+	 * 更新用户角色信息
+	 *
+	 * @param userId  userId
+	 * @param roleIds roleIds
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:49:19
+	 */
+	Boolean updateUserRoles(Long userId, Set<Long> roleIds);
+
+	/**
+	 * 根据手机号码查询用户是否存在
+	 *
+	 * @param phone phone
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:49:35
+	 */
+	Boolean existsByPhone(String phone);
+
+	/**
+	 * 根据用户id查询用户是否存在
+	 *
+	 * @param id id
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:49:40
+	 */
+	Boolean existsById(Long id);
 }

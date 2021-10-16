@@ -16,13 +16,9 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.api.service.ISysRoleDeptService;
-import com.taotao.cloud.uc.api.service.ISysRoleResourceService;
-import com.taotao.cloud.uc.biz.entity.SysRoleDept;
-import com.taotao.cloud.uc.biz.entity.SysRoleResource;
+import com.taotao.cloud.uc.api.entity.SysRoleDept;
 import com.taotao.cloud.uc.biz.mapper.SysRoleDeptMapper;
-import com.taotao.cloud.uc.biz.mapper.SysRoleResourceMapper;
 import com.taotao.cloud.uc.biz.repository.SysRoleDeptRepository;
-import com.taotao.cloud.uc.biz.repository.SysRoleResourceRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 

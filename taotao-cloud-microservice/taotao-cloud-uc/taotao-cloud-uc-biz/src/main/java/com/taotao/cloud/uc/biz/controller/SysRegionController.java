@@ -15,15 +15,27 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.uc.api.dto.region.RegionQueryDTO;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.BaseQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.region.RegionSaveDTO;
 import com.taotao.cloud.uc.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysRegionService;
+import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.uc.api.vo.region.RegionQueryVO;
-import com.taotao.cloud.uc.biz.entity.SysRegion;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.taotao.cloud.uc.api.entity.SysRegion;
 import com.taotao.cloud.web.base.controller.SuperController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import javax.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,47 +49,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/region")
 @Tag(name = "地区管理API", description = "地区管理API")
 public class SysRegionController extends
-	SuperController<ISysRegionService<SysRegion, Long>, SysRegion, Long, RegionQueryDTO, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+	SuperController<ISysRegionService<SysRegion, Long>, SysRegion, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 
-	//private final SysRegionService sysRegionService;
-	//
-	//public SysRegionController(SysRegionService sysRegionService) {
-	//	this.sysRegionService = sysRegionService;
-	//}
-	//
-	///**
-	// * 根据父id查询
-	// *
-	// * @param parentId 父id
-	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt;&gt;
-	// * }
-	// * @author shuigedeng
-	// * @since 2021-10-09 15:02:04
-	// */
-	//@Operation(summary = "根据父id查询", description = "根据父id查询", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	//@RequestOperateLog(description = "根据父id查询")
-	//@GetMapping("/parentId")
-	//public Result<List<QueryRegionByParentIdVO>> queryRegionByParentId(
-	//	@Parameter(name = "parentId", description = "父id", required = true, in = ParameterIn.QUERY)
-	//	@RequestParam(value = "parentId", defaultValue = "1") Long parentId) {
-	//	List<QueryRegionByParentIdVO> result = sysRegionService.queryRegionByParentId(parentId);
-	//	return Result.success(result);
-	//}
-	//
-	///**
-	// * 树形结构查询
-	// *
-	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt;&gt;
-	// * }
-	// * @author shuigedeng
-	// * @since 2021-10-09 15:02:13
-	// */
-	//@Operation(summary = "树形结构查询", description = "树形结构查询", method = CommonConstant.GET, security = @SecurityRequirement(name = HttpHeaders.AUTHORIZATION))
-	//@RequestOperateLog(description = "根据父id查询")
-	//@GetMapping(value = "/tree")
-	//public Result<List<QueryRegionByParentIdVO>> tree() {
-	//	List<QueryRegionByParentIdVO> result = sysRegionService.tree();
-	//	return Result.success(result);
-	//}
+	/**
+	 * 根据父id查询地区数据
+	 *
+	 * @param parentId 父id
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
+	 * }
+	 * @author shuigedeng
+	 * @since 2021-10-14 11:30:36
+	 */
+	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据", method = CommonConstant.GET)
+	@RequestOperateLog(description = "根据父id查询")
+	@GetMapping("/parentId/{parentId}")
+	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
+	public Result<List<RegionParentVO>> queryRegionByParentId(
+		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
+		@PathVariable(name = "parentId") Long parentId) {
+		List<RegionParentVO> result = service().queryRegionByParentId(parentId);
+		return Result.success(result);
+	}
+
+	/**
+	 * 树形结构查询
+	 *
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
+	 * }
+	 * @author shuigedeng
+	 * @since 2021-10-14 11:32:28
+	 */
+	@Operation(summary = "树形结构查询", description = "树形结构查询", method = CommonConstant.GET)
+	@RequestOperateLog(description = "根据父id查询")
+	@GetMapping(value = "/tree")
+	@PreAuthorize("hasAuthority('sys:region:info:true')")
+	public Result<List<RegionParentVO>> tree() {
+		List<RegionParentVO> result = service().tree();
+		return Result.success(result);
+	}
 }

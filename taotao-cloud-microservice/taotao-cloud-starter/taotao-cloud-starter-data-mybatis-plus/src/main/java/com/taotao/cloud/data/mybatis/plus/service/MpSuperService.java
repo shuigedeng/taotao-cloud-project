@@ -35,16 +35,6 @@ import org.apache.poi.ss.formula.functions.T;
 public interface MpSuperService<T extends MpSuperEntity<I>, I extends Serializable> extends IService<T> {
 
 	/**
-	 * getEntityClass
-	 *
-	 * @return {@link Class }
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:21:58
-	 */
-	@Override
-	Class<T> getEntityClass();
-
-	/**
 	 * 批量保存数据
 	 * <p>
 	 * 注意：该方法仅仅测试过mysql

@@ -1,8 +1,7 @@
-package com.taotao.cloud.order.biz.entity;
+package com.taotao.cloud.order.api.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import java.util.Objects;

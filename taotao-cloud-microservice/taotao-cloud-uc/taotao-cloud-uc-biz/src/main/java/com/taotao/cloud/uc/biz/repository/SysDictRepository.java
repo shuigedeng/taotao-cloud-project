@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.uc.biz.entity.SysDict;
-import com.taotao.cloud.uc.biz.entity.SysDictItem;
+import com.taotao.cloud.uc.api.entity.SysDict;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.Optional;
 import javax.persistence.EntityManager;

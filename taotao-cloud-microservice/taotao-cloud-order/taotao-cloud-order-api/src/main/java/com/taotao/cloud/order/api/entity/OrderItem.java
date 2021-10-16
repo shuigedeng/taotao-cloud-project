@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.entity;
+package com.taotao.cloud.order.api.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;

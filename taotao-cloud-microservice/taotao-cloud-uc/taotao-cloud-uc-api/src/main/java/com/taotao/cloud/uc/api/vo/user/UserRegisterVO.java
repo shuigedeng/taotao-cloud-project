@@ -1,6 +1,7 @@
 package com.taotao.cloud.uc.api.vo.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,9 +11,10 @@ import java.util.Objects;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Schema(description = "用户注册VO")
-public class AddUserVO implements Serializable {
+@Schema(name = "UserRegisterVO", description = "用户注册VO")
+public class UserRegisterVO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 5126530068827085130L;
 
 	@Schema(description = "真实用户名")
@@ -24,10 +26,10 @@ public class AddUserVO implements Serializable {
 	@Schema(description = "密码")
 	private String password;
 
-	public AddUserVO() {
+	public UserRegisterVO() {
 	}
 
-	public AddUserVO(String username, String phone, String password) {
+	public UserRegisterVO(String username, String phone, String password) {
 		this.username = username;
 		this.phone = phone;
 		this.password = password;
@@ -51,9 +53,9 @@ public class AddUserVO implements Serializable {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		AddUserVO addUserVO = (AddUserVO) o;
-		return Objects.equals(username, addUserVO.username) && Objects.equals(phone,
-			addUserVO.phone) && Objects.equals(password, addUserVO.password);
+		UserRegisterVO userRegisterVO = (UserRegisterVO) o;
+		return Objects.equals(username, userRegisterVO.username) && Objects.equals(phone,
+			userRegisterVO.phone) && Objects.equals(password, userRegisterVO.password);
 	}
 
 	@Override
@@ -117,12 +119,12 @@ public class AddUserVO implements Serializable {
 			return this;
 		}
 
-		public AddUserVO build() {
-			AddUserVO addUserVO = new AddUserVO();
-			addUserVO.setUsername(username);
-			addUserVO.setPhone(phone);
-			addUserVO.setPassword(password);
-			return addUserVO;
+		public UserRegisterVO build() {
+			UserRegisterVO userRegisterVO = new UserRegisterVO();
+			userRegisterVO.setUsername(username);
+			userRegisterVO.setPhone(phone);
+			userRegisterVO.setPassword(password);
+			return userRegisterVO;
 		}
 	}
 }

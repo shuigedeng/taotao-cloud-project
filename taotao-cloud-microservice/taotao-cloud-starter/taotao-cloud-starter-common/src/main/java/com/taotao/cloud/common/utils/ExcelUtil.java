@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -159,7 +160,7 @@ public class ExcelUtil {
 			response.setCharacterEncoding("UTF-8");
 			response.setHeader("content-Type", "application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder
-				.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(), "UTF-8"));
+				.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(), StandardCharsets.UTF_8));
 			workbook.write(response.getOutputStream());
 		} catch (Exception e) {
 			throw new IOException(e.getMessage());

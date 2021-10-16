@@ -25,8 +25,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,14 +53,14 @@ public interface SaveController<T extends SuperEntity<I>, I extends Serializable
 	@Operation(summary = "通用单体新增", description = "通用单体新增", method = CommonConstant.POST)
 	@PostMapping
 	@RequestOperateLog(value = "通用单体新增", request = false)
-	@PreAuthorize("@permissionVerifier.hasPermission('save')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('save')")
 	default Result<Boolean> save(
 		@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated SaveDTO saveDTO) {
 		if (handlerSave(saveDTO)) {
 			if (checkField(saveDTO.getClass())) {
 				T model = BeanUtil.toBean(saveDTO, getEntityClass());
-				getBaseService().save(model);
+				service().save(model);
 			}
 		}
 		return success(true);

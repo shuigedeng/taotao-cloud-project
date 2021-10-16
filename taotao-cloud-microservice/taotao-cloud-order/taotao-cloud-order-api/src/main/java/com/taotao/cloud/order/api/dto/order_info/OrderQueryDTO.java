@@ -75,19 +75,6 @@ public class OrderQueryDTO implements Serializable {
 	 */
 	@Schema(description = "收货地址:json的形式存储")
 	private String receiverAddressJson;
-	/**
-	 * 测试时间
-	 */
-	@Schema(description = "测试时间")
-	private LocalDateTime test;
-
-	public LocalDateTime getTest() {
-		return test;
-	}
-
-	public void setTest(LocalDateTime test) {
-		this.test = test;
-	}
 
 	public Long getMemberId() {
 		return memberId;

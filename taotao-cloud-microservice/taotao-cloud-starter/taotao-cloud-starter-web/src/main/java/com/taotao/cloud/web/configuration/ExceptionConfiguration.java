@@ -28,6 +28,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -154,6 +156,18 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({SQLException.class})
 	public Result<String> handleSqlException(NativeWebRequest req, SQLException e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
+	}
+
+	@ExceptionHandler({SQLIntegrityConstraintViolationException.class})
+	public Result<String> handleSqlException(NativeWebRequest req, SQLIntegrityConstraintViolationException e) {
+		printLog(req, e);
+		return Result.fail(ResultEnum.ERROR);
+	}
+
+	@ExceptionHandler({PersistenceException.class})
+	public Result<String> handleSqlException(NativeWebRequest req, PersistenceException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}

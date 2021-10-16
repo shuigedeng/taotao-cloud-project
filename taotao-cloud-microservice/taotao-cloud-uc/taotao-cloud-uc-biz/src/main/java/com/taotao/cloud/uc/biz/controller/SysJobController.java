@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.uc.api.dto.job.JobQueryDTO;
+import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.uc.api.dto.job.JobSaveDTO;
 import com.taotao.cloud.uc.api.dto.job.JobUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysJobService;
 import com.taotao.cloud.uc.api.vo.job.JobQueryVO;
-import com.taotao.cloud.uc.biz.entity.SysDict;
-import com.taotao.cloud.uc.biz.entity.SysJob;
+import com.taotao.cloud.uc.api.entity.SysJob;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
@@ -40,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/job")
 @Tag(name = "岗位管理API", description = "岗位管理API")
 public class SysJobController extends
-	SuperController<ISysJobService<SysJob, Long>, SysJob, Long, JobQueryDTO, JobSaveDTO, JobUpdateDTO, JobQueryVO> {
+	SuperController<ISysJobService<SysJob, Long>, SysJob, Long, BaseQuery, JobSaveDTO, JobUpdateDTO, JobQueryVO> {
 
 
 }

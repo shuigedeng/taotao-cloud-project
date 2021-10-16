@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +61,7 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 	@PostMapping("/batch")
 	@RequestOperateLog(description = "通用批量操作")
 	//@PreAuthorize("hasPermission(#batchDTO, 'batch')")
-	@PreAuthorize("@permissionVerifier.hasPermission('batch')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('batch')")
 	default Result<Boolean> batch(
 		@Parameter(description = "通用批量操作", required = true)
 		@RequestBody @Validated BatchDTO<SaveDTO, UpdateDTO, I> batchDTO) {
@@ -75,6 +74,14 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 		};
 	}
 
+	/**
+	 * batchCreate
+	 *
+	 * @param saveDTOList saveDTOList
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-15 16:37:10
+	 */
 	default Boolean batchCreate(List<SaveDTO> saveDTOList) {
 		if (saveDTOList.isEmpty()) {
 			throw new BusinessException("添加数据不能为空");
@@ -84,9 +91,17 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 			.map(saveDTO -> BeanUtil.toBean(saveDTO, getEntityClass()))
 			.collect(Collectors.toList());
 
-		return getBaseService().saveBatch(entityList);
+		return service().saveBatch(entityList);
 	}
 
+	/**
+	 * batchUpdate
+	 *
+	 * @param updateDTOList updateDTOList
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-15 16:37:15
+	 */
 	default Boolean batchUpdate(List<BatchUpdate<UpdateDTO, I>> updateDTOList) {
 		if (updateDTOList.isEmpty()) {
 			throw new BusinessException("更新数据不能为空");
@@ -99,27 +114,34 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 		});
 
 		List<I> ids = updateDTOList.stream().map(BatchUpdate::getId).collect(Collectors.toList());
-		List<T> ts = getBaseService().listByIds(ids);
+		List<T> ts = service().listByIds(ids);
 		if (ts.isEmpty()) {
 			throw new BusinessException("未查询到数据");
 		}
 
 		List<T> entityList = ts.stream()
 			.filter(updateDTO -> checkField(updateDTO.getClass()))
-			.map(t -> {
+			.peek(t -> {
 				UpdateDTO updateDTO = updateDTOMap.get(t.getId());
 				BeanUtil.copyProperties(updateDTO, t, CopyOptions.create().ignoreNullValue());
-				return t;
 			}).collect(Collectors.toList());
 
-		return getBaseService().updateBatchById(entityList);
+		return service().updateBatchById(entityList);
 	}
 
+	/**
+	 * batchDelete
+	 *
+	 * @param batchDelete batchDelete
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-15 16:37:21
+	 */
 	default Boolean batchDelete(List<I> batchDelete) {
 		if (batchDelete.isEmpty()) {
 			throw new BusinessException("删除数据不能为空");
 		}
-		return getBaseService().removeByIds(batchDelete);
+		return service().removeByIds(batchDelete);
 	}
 
 }

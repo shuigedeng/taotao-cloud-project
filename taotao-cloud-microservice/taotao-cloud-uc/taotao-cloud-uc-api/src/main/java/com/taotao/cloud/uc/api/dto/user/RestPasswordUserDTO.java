@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.api.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
@@ -32,6 +33,7 @@ import org.hibernate.validator.constraints.Length;
 @Schema(name = "RestPasswordUserDTO", description = "用户重置密码DTO")
 public class RestPasswordUserDTO implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -5002412807608124376L;
 
 	/**

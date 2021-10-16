@@ -68,7 +68,7 @@ public class MybatisCollectTask extends AbstractCollectTask {
 
 			Collector collector = Collector.getCollector();
 			if (Objects.nonNull(collector)) {
-				Hook hook = collector.hook("taotao.cloud.health.collect.mybatis.sql.hook");
+				Hook hook = collector.hook("taotao.cloud.health.mybatis.sql.hook");
 				info.hookCurrent = hook.getCurrent();
 				info.hookError = hook.getLastErrorPerSecond();
 				info.hookSuccess = hook.getLastSuccessPerSecond();

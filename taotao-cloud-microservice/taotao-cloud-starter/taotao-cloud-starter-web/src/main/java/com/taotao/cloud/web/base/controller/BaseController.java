@@ -18,6 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
@@ -25,6 +26,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -54,7 +56,7 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:03:26
 	 */
-	BaseSuperService<T, I> getBaseService();
+	BaseSuperService<T, I> service();
 
 	/**
 	 * 成功返回
@@ -91,7 +93,6 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	default Result<String> fail(String msg) {
 		return Result.fail(msg);
 	}
-
 
 	/**
 	 * 失败返回
@@ -220,20 +221,18 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 * @since 2021-10-13 17:36:08
 	 */
 	default Boolean checkField(Class<?> clazz) {
-		Class<T> entityClass = getEntityClass();
-		Field[] fields = entityClass.getFields();
-		List<String> filedList = Arrays.stream(fields).map(Field::getName)
-			.collect(Collectors.toList());
-
 		Field[] declaredFields = clazz.getDeclaredFields();
-		if(declaredFields.length == 0){
+		if (declaredFields.length == 0) {
 			throw new BusinessException("字段参数不存在");
 		}
 
 		for (Field declaredField : declaredFields) {
 			String filedName = declaredField.getName();
-			if (!filedList.contains(filedName)) {
-				throw new BusinessException(filedName + "字段值错误");
+			if(!filedName.equals("serialVersionUID")){
+				Field field = ReflectionUtil.findField(getEntityClass(), filedName);
+				if(Objects.isNull(field)){
+					throw new BusinessException(filedName + "字段值错误");
+				}
 			}
 		}
 
@@ -249,13 +248,11 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 * @since 2021-10-13 17:36:08
 	 */
 	default Boolean checkField(String filedName) {
-		Class<T> entityClass = getEntityClass();
-		Field[] fields = entityClass.getFields();
-		List<String> filedList = Arrays.stream(fields).map(Field::getName)
-			.collect(Collectors.toList());
-
-		if (!filedList.contains(filedName)) {
-			throw new BusinessException(filedName + ":字段值错误");
+		if(!filedName.equals("serialVersionUID")){
+			Field field = ReflectionUtil.findField(getEntityClass(), filedName);
+			if(Objects.isNull(field)){
+				throw new BusinessException(filedName + "字段值错误");
+			}
 		}
 
 		return true;

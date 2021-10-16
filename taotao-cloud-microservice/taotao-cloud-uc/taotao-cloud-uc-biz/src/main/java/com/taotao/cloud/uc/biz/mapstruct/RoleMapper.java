@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.uc.biz.mapstruct;
 
-import com.taotao.cloud.uc.api.dto.user.UserQueryDTO;
-import com.taotao.cloud.uc.api.entity.SysUser;
+import com.taotao.cloud.uc.api.dto.role.RoleQueryDTO;
+import com.taotao.cloud.uc.api.entity.SysRole;
+import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
-import com.taotao.cloud.uc.api.vo.user.UserRegisterVO;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -36,47 +36,37 @@ import org.mapstruct.factory.Mappers;
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserMapper {
+public interface RoleMapper {
 
-	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+	RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
 
 	/**
-	 * SysUser转UserQueryVO
+	 * SysRole转RoleQueryVO
 	 *
-	 * @param sysUser sysUser
+	 * @param SysRole sysRole
 	 * @return {@link UserQueryVO }
 	 * @author shuigedeng
 	 * @since 2021-10-15 17:47:46
 	 */
-	UserQueryVO sysUserToUserQueryVO(SysUser sysUser);
+	RoleQueryVO sysUserToUserQueryVO(SysRole sysRole);
 
 	/**
-	 * SysUser转UserRegisterVO
+	 * list -> SysRole转RoleQueryVO
 	 *
-	 * @param sysUser sysUser
-	 * @return {@link UserRegisterVO }
-	 * @author shuigedeng
-	 * @since 2021-10-15 17:51:49
-	 */
-	UserRegisterVO sysUserToAddUserVO(SysUser sysUser);
-
-	/**
-	 * list -> SysUser转UserVO
-	 *
-	 * @param userList userList
+	 * @param roleList roleList
 	 * @return {@link List&lt;com.taotao.cloud.uc.api.vo.user.UserQueryVO&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-15 17:52:04
 	 */
-	List<UserQueryVO> sysUserToUserQueryVO(List<SysUser> userList);
+	List<RoleQueryVO> sysUserToUserQueryVO(List<SysRole> roleList);
 
 	/**
 	 * copyUserDtoToSysUser
 	 *
-	 * @param userQueryDTO userQueryDTO
-	 * @param user         user
+	 * @param roleQueryDTO roleQueryDTO
+	 * @param sysRole      sysRole
 	 * @author shuigedeng
-	 * @since 2021-10-15 17:53:08
+	 * @since 2021-10-15 17:54:47
 	 */
-	void copyUserDtoToSysUser(UserQueryDTO userQueryDTO, @MappingTarget SysUser user);
+	void copyUserDtoToSysUser(RoleQueryDTO roleQueryDTO, @MappingTarget SysRole sysRole);
 }

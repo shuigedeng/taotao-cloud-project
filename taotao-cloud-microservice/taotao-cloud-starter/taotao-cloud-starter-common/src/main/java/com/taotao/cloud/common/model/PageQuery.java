@@ -16,24 +16,16 @@
 package com.taotao.cloud.common.model;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.AntiSqlFilterUtils;
-import com.taotao.cloud.common.utils.DateUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -77,272 +69,7 @@ public class PageQuery<QueryDTO> implements Serializable {
 	 * 查询参数
 	 */
 	@Schema(description = "查询参数")
-	private QueryDTO eqQuery;
-
-	/**
-	 * 时间范围查询参数
-	 */
-	@Schema(description = "时间范围查询参数")
-	private List<DateTimeBetweenDTO> dateTimeBetweenQuery;
-
-	/**
-	 * 排序查询参数
-	 */
-	@Schema(description = "排序查询参数")
-	private List<SortDTO> sortQuery;
-
-	/**
-	 * execl查询参数
-	 */
-	@Schema(description = "execl查询参数")
-	private ExeclDTO execlQuery;
-
-	/**
-	 * 模糊查询参数
-	 */
-	@Schema(description = "模糊查询参数")
-	private List<LikeDTO> likeQuery;
-
-	/**
-	 * 包含查询参数
-	 */
-	@Schema(description = "包含查询参数")
-	private List<InDTO> inQuery;
-
-	/**
-	 * 不包含查询参数
-	 */
-	@Schema(description = "不包含查询参数")
-	private List<NotInDTO> notInQuery;
-
-	@Schema(name = "NotInDTO", description = "不包含查询DTO")
-	public static class NotInDTO {
-		/**
-		 * 字段名称
-		 */
-		@Schema(description = "字段名称")
-		private String filed;
-
-		/**
-		 * 字段值
-		 */
-		@Schema(description = "字段值")
-		private Object[] values ;
-
-		public String getFiled() {
-			return filed;
-		}
-
-		public void setFiled(String filed) {
-			this.filed = filed;
-		}
-
-		public Object[] getValues() {
-			return values;
-		}
-
-		public void setValues(Object[] values) {
-			this.values = values;
-		}
-	}
-
-	@Schema(name = "InDTO", description = "包含查询DTO")
-	public static class InDTO {
-		/**
-		 * 字段名称
-		 */
-		@Schema(description = "字段名称")
-		private String filed;
-
-		/**
-		 * 字段值
-		 */
-		@Schema(description = "字段值")
-		private Object[] values ;
-
-		public String getFiled() {
-			return filed;
-		}
-
-		public void setFiled(String filed) {
-			this.filed = filed;
-		}
-
-		public Object[] getValues() {
-			return values;
-		}
-
-		public void setValues(Object[] values) {
-			this.values = values;
-		}
-	}
-
-	@Schema(name = "LikeDTO", description = "模糊查询DTO")
-	public static class LikeDTO {
-		/**
-		 * 字段名称
-		 */
-		@Schema(description = "字段名称")
-		private String filed;
-
-		/**
-		 * 字段值
-		 */
-		@Schema(description = "字段值")
-		private String value ;
-
-		public String getFiled() {
-			return filed;
-		}
-
-		public void setFiled(String filed) {
-			this.filed = filed;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public void setValue(String value) {
-			this.value = value;
-		}
-	}
-
-
-	@Schema(name = "ExeclDTO", description = "ExeclDTO")
-	public static class ExeclDTO {
-		/**
-		 * 下载文件名称
-		 */
-		@Schema(description = "下载文件名称")
-		private String fileName = "临时文件";
-
-		/**
-		 * 标题
-		 */
-		@Schema(description = "标题")
-		private String title = "title";
-
-		/**
-		 * 排序
-		 */
-		@Schema(description = "类型,默认HSSF", allowableValues = "HSSF,XSSF", example = "createTime")
-		private String type = "HSSF";
-
-		/**
-		 * sheetName
-		 */
-		@Schema(description = "sheetName")
-		private String sheetName = "sheetName";
-
-		public String getFileName() {
-			return fileName;
-		}
-
-		public void setFileName(String fileName) {
-			this.fileName = fileName;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public void setType(String type) {
-			this.type = type;
-		}
-
-		public String getSheetName() {
-			return sheetName;
-		}
-
-		public void setSheetName(String sheetName) {
-			this.sheetName = sheetName;
-		}
-	}
-
-	@Schema(name = "SortDTO", description = "排序DTO")
-	public static class SortDTO {
-		/**
-		 * 排序
-		 */
-		@Schema(description = "排序字段名称,默认createTime", allowableValues = "id,createTime,updateTime", example = "createTime")
-		private String filed = "createTime";
-
-		/**
-		 * 排序规则
-		 */
-		@Schema(description = "排序规则, 默认desc", allowableValues = "desc,asc", example = "desc")
-		private String order = "desc";
-
-		public String getFiled() {
-			return filed;
-		}
-
-		public void setFiled(String filed) {
-			this.filed = filed;
-		}
-
-		public String getOrder() {
-			return order;
-		}
-
-		public void setOrder(String order) {
-			this.order = order;
-		}
-	}
-
-	@Schema(name = "DateTimeBetweenDTO", description = "时间范围DTO")
-	public static class DateTimeBetweenDTO {
-		/**
-		 * 字段名称
-		 */
-		@Schema(description = "字段名称")
-		private String filed;
-
-		/**
-		 * 开始时间
-		 */
-		@Schema(description = "开始时间 时间格式:yyyy-MM-dd HH:mm:ss")
-		private LocalDateTime startTime;
-
-		/**
-		 * 结束时间
-		 */
-		@Schema(description = "结束时间 时间格式:yyyy-MM-dd HH:mm:ss")
-		private LocalDateTime endTime;
-
-		public String getFiled() {
-			return filed;
-		}
-
-		public void setFiled(String filed) {
-			this.filed = filed;
-		}
-
-		public LocalDateTime getStartTime() {
-			return startTime;
-		}
-
-		public void setStartTime(LocalDateTime startTime) {
-			this.startTime = startTime;
-		}
-
-		public LocalDateTime getEndTime() {
-			return endTime;
-		}
-
-		public void setEndTime(LocalDateTime endTime) {
-			this.endTime = endTime;
-		}
-	}
+	private QueryDTO query;
 
 	/**
 	 * 支持多个字段排序，用法： eg.1, 参数：{order:"name,id", order:"desc,asc" }。 排序： name desc, id asc eg.2,
@@ -356,32 +83,35 @@ public class PageQuery<QueryDTO> implements Serializable {
 	@JsonIgnore
 	public <T> IPage<T> buildMpPage() {
 		PageQuery<QueryDTO> params = this;
+		QueryDTO query = params.getQuery();
+
 		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(
 			params.getCurrentPage(), params.getPageSize());
+		if (query instanceof BaseQuery baseQuery) {
+			//没有排序参数
+			if (CollectionUtil.isEmpty(baseQuery.getSortQuery())) {
+				return page;
+			}
 
-		//没有排序参数
-		if (CollectionUtil.isEmpty(params.getSortQuery())) {
-			return page;
+			List<OrderItem> orders = new ArrayList<>();
+			baseQuery.getSortQuery().forEach(sortDTO -> {
+				String filed = sortDTO.getFiled();
+				String order = sortDTO.getOrder();
+				// 驼峰转下划线
+				String underlineSort = StrUtil.toUnderlineCase(filed);
+				// 除了 createTime 和 updateTime 都过滤sql关键字
+				if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
+					underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
+				}
+
+				if (StrUtil.equalsAny(order, "asc")) {
+					orders.add(OrderItem.asc(underlineSort));
+				} else {
+					orders.add(OrderItem.desc(underlineSort));
+				}
+			});
+			page.setOrders(orders);
 		}
-
-		List<OrderItem> orders = new ArrayList<>();
-		params.getSortQuery().forEach(sortDTO ->  {
-			String filed = sortDTO.getFiled();
-			String order = sortDTO.getOrder();
-			// 驼峰转下划线
-			String underlineSort = StrUtil.toUnderlineCase(filed);
-			// 除了 createTime 和 updateTime 都过滤sql关键字
-			if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
-				underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
-			}
-
-			if (StrUtil.equalsAny(order, "asc")) {
-				orders.add(OrderItem.asc(underlineSort));
-			} else {
-				orders.add(OrderItem.desc(underlineSort));
-			}
-		});
-		page.setOrders(orders);
 
 		return page;
 	}
@@ -389,33 +119,33 @@ public class PageQuery<QueryDTO> implements Serializable {
 	@JsonIgnore
 	public Pageable buildJpaPage() {
 		PageQuery<QueryDTO> params = this;
-		//没有排序参数
+		QueryDTO query = params.getQuery();
+		if (query instanceof BaseQuery baseQuery) {
+			if (CollectionUtil.isEmpty(baseQuery.getSortQuery())) {
+				return PageRequest.of(params.getCurrentPage(), params.getPageSize());
+			}
 
-		if (CollectionUtil.isEmpty(params.getSortQuery())) {
-			return PageRequest.of(params.getCurrentPage(), params.getPageSize());
+			List<Order> orders = new ArrayList<>();
+			baseQuery.getSortQuery().forEach(sortDTO -> {
+				String filed = sortDTO.getFiled();
+				String order = sortDTO.getOrder();
+				// 驼峰转下划线
+				String underlineSort = StrUtil.toUnderlineCase(filed);
+				// 除了 createTime 和 updateTime 都过滤sql关键字
+				if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
+					underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
+				}
+
+				if (StrUtil.equalsAny(order, "asc")) {
+					orders.add(Order.asc(underlineSort));
+				} else {
+					orders.add(Order.desc(underlineSort));
+				}
+			});
+			return PageRequest.of(params.getCurrentPage(), params.getPageSize(), Sort.by(orders));
 		}
-
-		List<Order> orders = new ArrayList<>();
-		params.getSortQuery().forEach(sortDTO ->  {
-			String filed = sortDTO.getFiled();
-			String order = sortDTO.getOrder();
-			// 驼峰转下划线
-			String underlineSort = StrUtil.toUnderlineCase(filed);
-			// 除了 createTime 和 updateTime 都过滤sql关键字
-			if (!StrUtil.equalsAny(filed, "createTime", "updateTime")) {
-				underlineSort = AntiSqlFilterUtils.getSafeValue(underlineSort);
-			}
-
-			if (StrUtil.equalsAny(order, "asc")) {
-				orders.add(Order.asc(underlineSort));
-			} else {
-				orders.add(Order.desc(underlineSort));
-			}
-		});
-		return PageRequest.of(params.getCurrentPage(), params.getPageSize(), Sort.by(orders));
+		return PageRequest.of(params.getCurrentPage(), params.getPageSize());
 	}
-
-
 
 	@JsonIgnore
 	public long offset() {
@@ -425,7 +155,6 @@ public class PageQuery<QueryDTO> implements Serializable {
 		}
 		return (current - 1) * this.pageSize;
 	}
-
 
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -443,60 +172,11 @@ public class PageQuery<QueryDTO> implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public QueryDTO getEqQuery() {
-		return eqQuery;
+	public QueryDTO getQuery() {
+		return query;
 	}
 
-	public void setEqQuery(QueryDTO eqQuery) {
-		this.eqQuery = eqQuery;
-	}
-
-	public List<DateTimeBetweenDTO> getDateTimeBetweenQuery() {
-		return dateTimeBetweenQuery;
-	}
-
-	public void setDateTimeBetweenQuery(
-		List<DateTimeBetweenDTO> dateTimeBetweenQuery) {
-		this.dateTimeBetweenQuery = dateTimeBetweenQuery;
-	}
-
-	public List<SortDTO> getSortQuery() {
-		return sortQuery;
-	}
-
-	public void setSortQuery(List<SortDTO> sortQuery) {
-		this.sortQuery = sortQuery;
-	}
-
-	public ExeclDTO getExeclQuery() {
-		return execlQuery;
-	}
-
-	public void setExeclQuery(ExeclDTO execlQuery) {
-		this.execlQuery = execlQuery;
-	}
-
-	public List<LikeDTO> getLikeQuery() {
-		return likeQuery;
-	}
-
-	public void setLikeQuery(List<LikeDTO> likeQuery) {
-		this.likeQuery = likeQuery;
-	}
-
-	public List<InDTO> getInQuery() {
-		return inQuery;
-	}
-
-	public void setInQuery(List<InDTO> inQuery) {
-		this.inQuery = inQuery;
-	}
-
-	public List<NotInDTO> getNotInQuery() {
-		return notInQuery;
-	}
-
-	public void setNotInQuery(List<NotInDTO> notInQuery) {
-		this.notInQuery = notInQuery;
+	public void setQuery(QueryDTO query) {
+		this.query = query;
 	}
 }

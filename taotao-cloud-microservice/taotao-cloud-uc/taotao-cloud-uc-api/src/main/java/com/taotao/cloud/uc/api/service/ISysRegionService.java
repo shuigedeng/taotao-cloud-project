@@ -15,9 +15,11 @@
  */
 package com.taotao.cloud.uc.api.service;
 
+import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * SysRegionService
@@ -29,23 +31,23 @@ import java.io.Serializable;
 public interface ISysRegionService<T extends SuperEntity<I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
-	///**
-	// * queryRegionByParentId
-	// *
-	// * @param parentId parentId
-	// * @return {@link List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt; }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:37:32
-	// */
-	//List<QueryRegionByParentIdVO> queryRegionByParentId(Long parentId);
-	//
-	///**
-	// * tree
-	// *
-	// * @return {@link List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt; }
-	// * @author shuigedeng
-	// * @since 2021-10-09 20:37:36
-	// */
-	//List<QueryRegionByParentIdVO> tree();
+	/**
+	 * queryRegionByParentId
+	 *
+	 * @param parentId parentId
+	 * @return {@link List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:37:32
+	 */
+	List<RegionParentVO> queryRegionByParentId(Long parentId);
+
+	/**
+	 * tree
+	 *
+	 * @return {@link List&lt;com.taotao.cloud.uc.api.vo.QueryRegionByParentIdVO&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 20:37:36
+	 */
+	List<RegionParentVO> tree();
 
 }

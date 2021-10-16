@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.order.biz.repository;
 
-import com.taotao.cloud.order.biz.entity.OrderInfo;
+import com.taotao.cloud.order.api.entity.OrderInfo;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import org.springframework.stereotype.Repository;
 

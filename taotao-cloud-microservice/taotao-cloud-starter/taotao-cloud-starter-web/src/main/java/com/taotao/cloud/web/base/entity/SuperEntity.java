@@ -27,7 +27,7 @@ public class SuperEntity<I extends Serializable> implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigint comment 'id'")
 	@TableId(value = "id", type = IdType.INPUT)
-	protected I id;
+	private I id;
 
 	public I getId() {
 		return id;

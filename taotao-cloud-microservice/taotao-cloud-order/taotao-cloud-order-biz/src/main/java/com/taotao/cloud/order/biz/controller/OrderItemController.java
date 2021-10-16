@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.order.biz.controller;
 
-import com.taotao.cloud.order.api.dto.order_item.OrderItemQueryDTO;
+import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemUpdateDTO;
 import com.taotao.cloud.order.api.vo.order_item.OrderItemVO;
-import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.order.api.entity.OrderItem;
 import com.taotao.cloud.order.api.service.IOrderItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/item")
 @Tag(name = "订单项管理API", description = "订单项管理API")
 public class OrderItemController extends
-	SuperController<IOrderItemService<OrderItem, Long>, OrderItem, Long, OrderItemQueryDTO, OrderItemSaveDTO, OrderItemUpdateDTO, OrderItemVO> {
+	SuperController<IOrderItemService<OrderItem, Long>, OrderItem, Long, BaseQuery, OrderItemSaveDTO, OrderItemUpdateDTO, OrderItemVO> {
 
 
 }

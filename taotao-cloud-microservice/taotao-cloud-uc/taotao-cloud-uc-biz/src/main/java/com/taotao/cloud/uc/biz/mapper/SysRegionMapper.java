@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.mapper;
 
-import com.taotao.cloud.uc.biz.entity.SysJob;
-import com.taotao.cloud.uc.biz.entity.SysRegion;
+import com.taotao.cloud.uc.api.entity.SysRegion;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

@@ -15,14 +15,16 @@
  */
 package com.taotao.cloud.web.base.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.core.lock.DistributedLock;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * BaseSuperService
@@ -31,37 +33,26 @@ import java.io.Serializable;
  * @version v1.0
  * @since 2021/10/10 12:53
  */
-public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializable> extends IService<T> {
+public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializable> extends
+	IService<T> {
 
 	/**
-	 * getSuperMapper
+	 * mapper
 	 *
 	 * @return {@link BaseSuperMapper&lt;T,I&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-11 15:50:43
 	 */
-	BaseSuperMapper<T, I> getSuperMapper();
+	BaseSuperMapper<T, I> mapper();
 
 	/**
-	 * getSuperRepository
+	 * repository
 	 *
 	 * @return {@link com.taotao.cloud.web.base.repository.BaseSuperRepository&lt;T,I&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-11 18:54:30
 	 */
-	BaseSuperRepository<T, I> getSuperRepository();
-
-	/**
-	 * 根据id修改 entity 的所有字段
-	 *
-	 * @param entity entity
-	 * @return boolean
-	 * @author shuigedeng
-	 * @since 2021-09-02 21:22:14
-	 */
-	boolean updateAllById(T entity);
-
-	boolean deleteById(I id);
+	BaseSuperRepository<T, I> repository();
 
 	/**
 	 * 刷新缓存
@@ -79,8 +70,15 @@ public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializab
 	 */
 	void clearCache();
 
+	/**
+	 * getByIdCache
+	 *
+	 * @param id id
+	 * @return {@link T }
+	 * @author shuigedeng
+	 * @since 2021-10-15 16:51:28
+	 */
 	T getByIdCache(I id);
-
 
 	/**
 	 * 幂等性新增记录
@@ -138,4 +136,5 @@ public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializab
 	 */
 	boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
 		Predicate predicate);
+
 }

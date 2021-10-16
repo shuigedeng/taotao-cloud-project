@@ -19,6 +19,7 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -26,8 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <p>
  * 基类该类后，没有任何方法。 可以让业务Controller继承 SuperSimpleController 后，按需实现 *Controller 接口
  *
- * @param <S>      Service
- * @param <Entity> 实体
+ * @param <S> Service
+ * @param <T> 实体
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 21:15:37
@@ -37,22 +38,24 @@ public abstract class SimpleController<S extends BaseSuperService<T, I>,
 	I extends Serializable>
 	implements BaseController<T, I> {
 
-	protected Class<T> entityClass = null;
+	private Class<T> entityClass;
 
 	@Autowired
-	protected S baseService;
+	private S service;
 
 	@Override
 	public Class<T> getEntityClass() {
 		if (entityClass == null) {
-			this.entityClass = (Class<T>) ((ParameterizedType) this.getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[1];
+			Type genericSuperclass = this.getClass().getGenericSuperclass();
+			if (genericSuperclass instanceof ParameterizedType parameterizedType) {
+				this.entityClass = (Class<T>) parameterizedType.getActualTypeArguments()[1];
+			}
 		}
-		return this.entityClass;
+		return entityClass;
 	}
 
 	@Override
-	public BaseSuperService<T, I> getBaseService() {
-		return baseService;
+	public S service() {
+		return service;
 	}
 }

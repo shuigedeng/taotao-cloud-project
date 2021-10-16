@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.mapper;
 
-import com.taotao.cloud.uc.biz.entity.SysRole;
-import com.taotao.cloud.uc.biz.entity.SysRoleDept;
+import com.taotao.cloud.uc.api.entity.SysRoleDept;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

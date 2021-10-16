@@ -27,7 +27,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -58,21 +57,21 @@ public interface UpdateController<T extends SuperEntity<I>, I extends Serializab
 	@Operation(summary = "通用单体更新", description = "通用单体更新", method = CommonConstant.PUT)
 	@PutMapping("/{id:[0-9]*}")
 	@RequestOperateLog(value = "'通用单体更新:' + #id", request = false)
-	@PreAuthorize("@permissionVerifier.hasPermission('update')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('update')")
 	default Result<Boolean> update(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id,
 		@Parameter(description = "通用单体更新DTO", required = true)
 		@RequestBody @Validated UpdateDTO updateDTO) {
 		if (handlerUpdate(updateDTO)) {
-			T t = getBaseService().getById(id);
+			T t = service().getById(id);
 			if (Objects.isNull(t)) {
 				throw new BusinessException("未查询到数据");
 			}
 
 			if (checkField(updateDTO.getClass())) {
 				BeanUtil.copyProperties(updateDTO, t, CopyOptions.create().ignoreNullValue());
-				getBaseService().updateById(t);
+				service().updateById(t);
 			}
 		}
 		return success(true);

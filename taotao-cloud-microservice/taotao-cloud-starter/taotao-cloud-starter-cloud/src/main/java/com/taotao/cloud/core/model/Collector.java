@@ -22,6 +22,7 @@ import com.taotao.cloud.common.utils.NumberUtil;
 import com.taotao.cloud.core.model.Callable.Func0;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
@@ -374,7 +375,8 @@ public class Collector {
 				return result;
 			} catch (Exception exp) {
 				lastErrorPerSecond.getAndIncrement();
-				throw exp;
+				LogUtil.error(exp);
+				throw new RuntimeException(exp);
 			} finally {
 				current.getAndDecrement();
 			}

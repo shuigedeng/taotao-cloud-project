@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.uc.api.dto.company.CompanyQueryDTO;
+import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.uc.api.dto.company.CompanySaveDTO;
 import com.taotao.cloud.uc.api.dto.company.CompanyUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysCompanyService;
 import com.taotao.cloud.uc.api.vo.company.CompanyQueryVO;
-import com.taotao.cloud.uc.biz.entity.SysCompany;
+import com.taotao.cloud.uc.api.entity.SysCompany;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
@@ -39,6 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/company")
 @Tag(name = "公司管理API", description = "公司管理API")
 public class SysCompanyController extends
-	SuperController<ISysCompanyService<SysCompany, Long>, SysCompany, Long, CompanyQueryDTO, CompanySaveDTO, CompanyUpdateDTO, CompanyQueryVO> {
+	SuperController<ISysCompanyService<SysCompany, Long>, SysCompany, Long, BaseQuery, CompanySaveDTO, CompanyUpdateDTO, CompanyQueryVO> {
 
 }

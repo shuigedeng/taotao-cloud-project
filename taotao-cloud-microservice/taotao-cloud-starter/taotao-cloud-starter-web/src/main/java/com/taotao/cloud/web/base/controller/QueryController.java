@@ -16,27 +16,21 @@
 package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,11 +62,11 @@ public interface QueryController<T extends SuperEntity<I>, I extends Serializabl
 	@Operation(summary = "通用单体查询", description = "通用单体查询", method = CommonConstant.GET)
 	@GetMapping("/{id:[0-9]*}")
 	@RequestOperateLog("'查询:' + #id")
-	@PreAuthorize("@permissionVerifier.hasPermission('get')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('get')")
 	default Result<QueryVO> get(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {
-		T data = getBaseService().getById(id);
+		T data = service().getById(id);
 		if (Objects.isNull(data)) {
 			throw new BusinessException("未查询到数据");
 		}
@@ -91,30 +85,17 @@ public interface QueryController<T extends SuperEntity<I>, I extends Serializabl
 	@Operation(summary = "通用批量查询", description = "通用批量查询", method = CommonConstant.POST)
 	@PostMapping("/query")
 	@RequestOperateLog(value = "通用批量查询")
-	@PreAuthorize("@permissionVerifier.hasPermission('query')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('query')")
 	default Result<List<QueryVO>> query(
 		@Parameter(description = "查询对象", required = true)
 		@RequestBody @Validated QueryDTO queryDTO) {
-		if (checkField(queryDTO.getClass())) {
-			QueryWrap<T> wrapper = Wraps.q(getEntityClass());
-			Class<?> aClass = queryDTO.getClass();
-			for (Field field : aClass.getDeclaredFields()) {
-				if (!StrUtil.equals(field.getName(), "serialVersionUID")) {
-					Object fieldValue = ReflectionUtil.getFieldValue(queryDTO, field.getName());
-					if (Objects.nonNull(fieldValue)) {
-						wrapper.eq(StrUtil.toUnderlineCase(field.getName()), fieldValue);
-					}
-				}
-			}
-			wrapper.isNotNull("id");
-
-			List<T> data = getBaseService().list(wrapper);
-			List<QueryVO> result = Optional.ofNullable(data)
-				.orElse(new ArrayList<>())
-				.stream().filter(Objects::nonNull)
-				.map(t -> BeanUtil.toBean(t, getQueryVOClass())).collect(Collectors.toList());
-			return success(result);
-		}
-		throw new BusinessException(ResultEnum.ERROR);
+		QueryWrap<T> wrapper = handlerWrapper(queryDTO);
+		List<T> data = service().list(wrapper);
+		List<QueryVO> result = Optional
+			.ofNullable(data)
+			.orElse(new ArrayList<>())
+			.stream().filter(Objects::nonNull)
+			.map(t -> BeanUtil.toBean(t, getQueryVOClass())).collect(Collectors.toList());
+		return success(result);
 	}
 }

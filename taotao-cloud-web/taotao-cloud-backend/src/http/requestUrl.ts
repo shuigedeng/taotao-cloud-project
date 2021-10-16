@@ -3,7 +3,7 @@ const getRequestUrl = (url: string) => {
   const prefix = process.env.TAOTAO_CLOUD_HOST_PREFIX || 'api'
   const version = process.env.TAOTAO_CLOUD_HOST_VERSION || 'v1.0'
 
-  let requestUrl: string = `https://taotaocloud.top${url}`;
+  let requestUrl: string = `http://127.0.0.1:8080${url}`;
   // let requestUrl: string = `http://127.0.0.1:8443${url}`;
   // if (env === 'production') {
   //   requestUrl = `https://api.taotaocloud.top/${prefix}/${version}${url}`

@@ -41,61 +41,50 @@ public class UserQueryDTO implements Serializable {
 	/**
 	 * 用户昵称
 	 */
-	@Schema(description = "用户昵称", required = true)
-	@NotBlank(message = "用户名不能超过为空")
-	@Length(max = 20, message = "用户名不能超过20个字符")
-	@Pattern(regexp = "^[0-9a-zA-Z_]+$", message = "用户昵称限制格式错误：最多20字符，包含文字、字母和数字")
+	@Schema(description = "用户昵称")
 	private String nickname;
 	/**
 	 * 用户真实姓名
 	 */
-	@Schema(description = "用户真实姓名", required = true)
-	@NotBlank(message = "用户真实姓名不能超过为空")
-	@Length(max = 20, message = "用户真实姓名不能超过20个字符")
-	@Pattern(regexp = "^[0-9a-zA-Z_]+$", message = "用户真实姓名格式错误：最多20字符，包含文字、字母和数字")
+	@Schema(description = "用户真实姓名")
 	private String username;
+	/**
+	 * 电话
+	 */
+	@Schema(description = "电话")
+	private String phone;
+	/**
+	 * email
+	 */
+	@Schema(description = "email")
+	private String email;
 	/**
 	 * 用户类型 1前端用户 2商户用户 3后台管理用户
 	 */
-	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户", required = true)
-	@NotNull(message = "用户类型不能为空")
-	@IntEnums(value = {1, 2, 3})
+	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户")
+//	@IntEnums(value = {1, 2, 3})
 	private Integer type;
 	/**
 	 * 性别 1男 2女 0未知
 	 */
-	@Schema(description = "性别 1男 2女 0未知", required = true)
-	@NotNull(message = "用户性别不能为空")
-	@IntEnums(value = {0, 1, 2})
+	@Schema(description = "性别 1男 2女 0未知")
+//	@IntEnums(value = {0, 1, 2})
 	private Integer sex;
 	/**
-	 * 手机号
+	 * 部门id
 	 */
-	@Schema(description = "手机号", required = true)
-	@NotBlank(message = "手机号不能为空")
-	@Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码格式错误")
-	private String phone;
+	@Schema(description = "部门id")
+	private Long deptId;
 	/**
-	 * 邮箱
+	 * 岗位id
 	 */
-	@Schema(description = "邮箱")
-	@Email(message = "邮箱格式错误")
-	private String email;
-	/**
-	 * 部门ID
-	 */
-	@Schema(description = "部门ID")
-	private Integer deptId;
-	/**
-	 * 岗位ID
-	 */
-	@Schema(description = "岗位ID")
-	private Integer jobId;
-	/**
-	 * 头像
-	 */
-	@Schema(description = "头像")
-	private String avatar;
+	@Schema(description = "岗位id")
+	private Long jobId;
+
+	public UserQueryDTO() {
+
+	}
+
 
 	public String getNickname() {
 		return nickname;
@@ -111,22 +100,6 @@ public class UserQueryDTO implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public Integer getSex() {
-		return sex;
-	}
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
 	}
 
 	public String getPhone() {
@@ -145,44 +118,36 @@ public class UserQueryDTO implements Serializable {
 		this.email = email;
 	}
 
-	public Integer getDeptId() {
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+
+	public Long getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId(Integer deptId) {
+	public void setDeptId(Long deptId) {
 		this.deptId = deptId;
 	}
 
-	public Integer getJobId() {
+	public Long getJobId() {
 		return jobId;
 	}
 
-	public void setJobId(Integer jobId) {
+	public void setJobId(Long jobId) {
 		this.jobId = jobId;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-	public UserQueryDTO() {
-	}
-
-	public UserQueryDTO(String nickname, String username, Integer type, Integer sex, String phone,
-		String email, Integer deptId, Integer jobId, String avatar) {
-		this.nickname = nickname;
-		this.username = username;
-		this.type = type;
-		this.sex = sex;
-		this.phone = phone;
-		this.email = email;
-		this.deptId = deptId;
-		this.jobId = jobId;
-		this.avatar = avatar;
 	}
 
 }
