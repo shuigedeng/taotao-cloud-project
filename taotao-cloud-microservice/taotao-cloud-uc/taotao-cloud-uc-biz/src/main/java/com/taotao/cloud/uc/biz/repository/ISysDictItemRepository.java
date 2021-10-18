@@ -13,36 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.biz.repository;
+package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.querydsl.core.types.Predicate;
+import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
+ * SysDictItemRepository
+ *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/22 12:46
+ * @version 2021.10
+ * @since 2021-10-09 20:35:25
  */
 @Repository
-public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
-
-	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
-
-	public OrderInfoRepository(EntityManager em) {
-		super(OrderInfo.class, em);
-	}
-
-	public List<OrderInfo> findOrderInfoById(Long id) {
-		List<OrderInfo> fetch = jpaQueryFactory.selectFrom(ORDER_INFO)
-			.where(ORDER_INFO.id.eq(id))
-			.fetch();
-		LogUtil.info(fetch.toString());
-		return fetch;
-	}
+public interface ISysDictItemRepository extends JpaRepository<SysDictItem, Long> {
 
 }

@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.biz.repository;
+package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import java.util.List;
-import javax.persistence.EntityManager;
+import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
+ * SysUserRepository
+ *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2020/10/22 12:46
+ * @version 2021.10
+ * @since 2021-10-09 20:51:18
  */
 @Repository
-public interface IOrderInfoRepository extends JpaRepository<OrderInfo, Long> {
+public interface ISysUserRoleRepository extends JpaRepository<SysUserRole, Long> {
 
-	@Query(value = """
-			select u from OrderInfo u where u.id = ?#{[0]}
-		""")
-	List<OrderInfo> findOrderInfoById(Long id);
 
-	OrderInfo findByCode(String code);
 }

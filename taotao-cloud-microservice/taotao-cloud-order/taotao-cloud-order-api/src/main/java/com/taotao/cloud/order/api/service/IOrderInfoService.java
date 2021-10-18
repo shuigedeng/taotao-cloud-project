@@ -14,5 +14,7 @@ import java.io.Serializable;
 public interface IOrderInfoService<T extends BaseSuperEntity<I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 	Boolean existByCode(String code);
+
+
 }
 
