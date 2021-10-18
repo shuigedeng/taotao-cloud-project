@@ -24,7 +24,7 @@ import com.taotao.cloud.uc.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysRegionService;
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.uc.api.vo.region.RegionQueryVO;
-import com.taotao.cloud.uc.api.entity.SysRegion;
+import com.taotao.cloud.uc.biz.entity.SysRegion;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +35,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

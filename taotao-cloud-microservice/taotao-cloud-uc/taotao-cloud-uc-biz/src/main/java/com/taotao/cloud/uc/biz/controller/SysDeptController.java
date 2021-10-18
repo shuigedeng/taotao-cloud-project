@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.uc.api.dto.dept.DeptUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysDeptService;
 import com.taotao.cloud.uc.api.vo.dept.DeptQueryVO;
-import com.taotao.cloud.uc.api.entity.SysDept;
+import com.taotao.cloud.uc.biz.entity.SysDept;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;

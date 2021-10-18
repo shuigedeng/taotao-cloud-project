@@ -15,7 +15,8 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.uc.api.entity.SysDict;
+import com.taotao.cloud.uc.biz.entity.QSysDict;
+import com.taotao.cloud.uc.biz.entity.SysDict;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.Optional;
 import javax.persistence.EntityManager;
@@ -35,7 +36,7 @@ public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 		super(SysDict.class, em);
 	}
 
-	//private final static QSysDict SYS_DICT = QSysDict.sysDict;
+	private final static QSysDict SYS_DICT = QSysDict.sysDict;
 
 	/**
 	 * existsByDictCode
@@ -46,11 +47,10 @@ public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 	 * @since 2021-10-09 20:27:59
 	 */
 	public Boolean existsByDictCode(String dictCode) {
-		//long count = jpaQueryFactory.selectFrom(SYS_DICT)
-		//	.where(SYS_DICT.dictCode.eq(dictCode))
-		//	.fetchCount();
-		//return count > 0;
-		return null;
+		long count = jpaQueryFactory.selectFrom(SYS_DICT)
+			.where(SYS_DICT.dictCode.eq(dictCode))
+			.fetchCount();
+		return count > 0;
 	}
 
 	/**

@@ -25,6 +25,7 @@ import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * BaseSuperService
@@ -43,7 +44,7 @@ public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializab
 	 * @author shuigedeng
 	 * @since 2021-10-11 15:50:43
 	 */
-	BaseSuperMapper<T, I> mapper();
+	BaseSuperMapper<T, I> im();
 
 	/**
 	 * repository
@@ -52,7 +53,16 @@ public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializab
 	 * @author shuigedeng
 	 * @since 2021-10-11 18:54:30
 	 */
-	BaseSuperRepository<T, I> repository();
+	BaseSuperRepository<T, I> cr();
+
+	/**
+	 * repository
+	 *
+	 * @return {@link com.taotao.cloud.web.base.repository.BaseSuperRepository&lt;T,I&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-11 18:54:30
+	 */
+	JpaRepository<T, I> ir();
 
 	/**
 	 * 刷新缓存

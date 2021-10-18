@@ -15,22 +15,35 @@
  */
 package com.taotao.cloud.order.biz.repository;
 
-import com.taotao.cloud.order.api.entity.OrderInfo;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.order.biz.entity.OrderInfo;
+import com.taotao.cloud.order.biz.entity.QOrderInfo;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author shuigedeng
- * @since 2020/10/22 12:46
  * @version 1.0.0
+ * @since 2020/10/22 12:46
  */
 @Repository
 public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
-    public OrderInfoRepository(EntityManager em) {
-        super(OrderInfo.class, em);
-    }
 
+	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
+	public OrderInfoRepository(EntityManager em) {
+		super(OrderInfo.class, em);
+	}
+
+	public List<OrderInfo> findOrderInfoById(Long id){
+		List<OrderInfo> fetch = jpaQueryFactory.selectFrom(ORDER_INFO)
+			.where(ORDER_INFO.id.eq(id))
+			.fetch();
+		LogUtil.info(fetch.toString());
+		return fetch;
+	}
 
 }

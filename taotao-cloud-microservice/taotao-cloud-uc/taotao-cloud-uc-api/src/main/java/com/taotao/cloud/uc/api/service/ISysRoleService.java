@@ -15,11 +15,9 @@
  */
 package com.taotao.cloud.uc.api.service;
 
-import com.taotao.cloud.uc.api.entity.SysRole;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,15 +30,34 @@ import java.util.Set;
 public interface ISysRoleService<T extends SuperEntity<I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
-	/**
-	 * 根据用户id列表获取角色列表
-	 *
-	 * @param userIds userIds
-	 * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 20:43:25
-	 */
-	List<SysRole> findRoleByUserIds(Set<Long> userIds);
+	///**
+	// * 根据用户id列表获取角色列表
+	// *
+	// * @param userIds userIds
+	// * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
+	// * @author shuigedeng
+	// * @since 2021-10-09 20:43:25
+	// */
+	//List<SysRole> findRoleByUserIds(Set<Long> userIds);
+	///**
+	// * 查询所有角色列表
+	// *
+	// * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
+	// * @author shuigedeng
+	// * @since 2021-10-09 20:45:23
+	// */
+	//List<SysRole> findAllRoles();
+	//
+	//
+	///**
+	// * 根据code列表获取角色信息
+	// *
+	// * @param codes codes
+	// * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
+	// * @author shuigedeng
+	// * @since 2021-10-09 20:45:41
+	// */
+	//List<SysRole> findRoleByCodes(Set<String> codes);
 
 	/**
 	 * 根据code查询角色是否存在
@@ -51,15 +68,6 @@ public interface ISysRoleService<T extends SuperEntity<I>, I extends Serializabl
 	 * @since 2021-10-09 20:43:33
 	 */
 	Boolean existRoleByCode(String code);
-
-	/**
-	 * 查询所有角色列表
-	 *
-	 * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 20:45:23
-	 */
-	List<SysRole> findAllRoles();
 
 
 	/**
@@ -73,15 +81,6 @@ public interface ISysRoleService<T extends SuperEntity<I>, I extends Serializabl
 	 */
 	Boolean saveRoleResources(Long roleId, Set<Long> resourceIds);
 
-	/**
-	 * 根据code列表获取角色信息
-	 *
-	 * @param codes codes
-	 * @return {@link List&lt;com.taotao.cloud.uc.biz.entity.SysRole&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 20:45:41
-	 */
-	List<SysRole> findRoleByCodes(Set<String> codes);
 
 
 }

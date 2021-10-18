@@ -16,15 +16,14 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.uc.api.entity.QSysRole;
-import com.taotao.cloud.uc.api.entity.SysRole;
-import com.taotao.cloud.uc.api.entity.SysRoleResource;
 import com.taotao.cloud.uc.api.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.api.service.ISysRoleService;
+import com.taotao.cloud.uc.biz.entity.QSysRole;
+import com.taotao.cloud.uc.biz.entity.SysRole;
+import com.taotao.cloud.uc.biz.entity.SysRoleResource;
 import com.taotao.cloud.uc.biz.mapper.SysRoleMapper;
 import com.taotao.cloud.uc.biz.repository.SysRoleRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,20 +49,11 @@ public class SysRoleServiceImpl extends
 		this.sysRoleResourceService = sysRoleResourceService;
 	}
 
-	@Override
-	public List<SysRole> findRoleByUserIds(Set<Long> userIds) {
-		return repository().findRoleByUserIds(userIds);
-	}
 
 	@Override
 	public Boolean existRoleByCode(String code) {
 		BooleanExpression predicate = SYS_ROLE.code.eq(code);
-		return repository().exists(predicate);
-	}
-
-	@Override
-	public List<SysRole> findAllRoles() {
-		return repository().findAll();
+		return cr().exists(predicate);
 	}
 
 	@Override
@@ -72,9 +62,19 @@ public class SysRoleServiceImpl extends
 		return sysRoleResourceService.saveRoleResource(roleId, resourceIds);
 	}
 
-	@Override
-	public List<SysRole> findRoleByCodes(Set<String> codes) {
-		return repository().findRoleByCodes(codes);
-	}
+	//@Override
+	//public List<SysRole> findAllRoles() {
+	//	return repository().findAll();
+	//}
+	//
+	//@Override
+	//public List<SysRole> findRoleByUserIds(Set<Long> userIds) {
+	//	return repository().findRoleByUserIds(userIds);
+	//}
+	//
+	//@Override
+	//public List<SysRole> findRoleByCodes(Set<String> codes) {
+	//	return repository().findRoleByCodes(codes);
+	//}
 
 }

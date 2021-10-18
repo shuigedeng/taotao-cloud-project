@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.api.entity;
+package com.taotao.cloud.uc.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -38,14 +35,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = SysDict.TABLE_NAME)
 @TableName(SysDict.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysDict.TABLE_NAME, comment = "字典表")
-public class SysDict extends BaseSuperEntity<Long> {
+public class SysDict extends SuperEntity<Long> {
 
 	public static final String TABLE_NAME = "uc_sys_dict";
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", columnDefinition = "bigint not null comment 'id'")
-	private Long id;
 
 	/**
 	 * 字典名称
@@ -84,14 +76,6 @@ public class SysDict extends BaseSuperEntity<Long> {
 	@LastModifiedDate
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP comment '最后修改时间'")
 	private LocalDateTime lastModifiedTime;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getDictName() {
 		return dictName;
@@ -152,10 +136,9 @@ public class SysDict extends BaseSuperEntity<Long> {
 	public SysDict() {
 	}
 
-	public SysDict(Long id, String dictName, String dictCode, String description,
+	public SysDict(String dictName, String dictCode, String description,
 		Integer sortNum, String remark, LocalDateTime createTime,
 		LocalDateTime lastModifiedTime) {
-		this.id = id;
 		this.dictName = dictName;
 		this.dictCode = dictCode;
 		this.description = description;

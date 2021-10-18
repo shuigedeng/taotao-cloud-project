@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteOrderService", value = ServiceNameConstant.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderItemFallbackImpl.class)
+@FeignClient(contextId = "RemoteOrderItemService", value = ServiceNameConstant.TAOTAO_CLOUD_ORDER_CENTER, fallbackFactory = RemoteOrderItemFallbackImpl.class)
 public interface RemoteOrderItemService {
 
 	@PostMapping(value = "/order/item/save")

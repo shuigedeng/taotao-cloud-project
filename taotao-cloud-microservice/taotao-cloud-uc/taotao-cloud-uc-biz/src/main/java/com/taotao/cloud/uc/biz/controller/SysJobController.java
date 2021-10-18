@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.dto.job.JobSaveDTO;
 import com.taotao.cloud.uc.api.dto.job.JobUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysJobService;
 import com.taotao.cloud.uc.api.vo.job.JobQueryVO;
-import com.taotao.cloud.uc.api.entity.SysJob;
+import com.taotao.cloud.uc.biz.entity.SysJob;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;

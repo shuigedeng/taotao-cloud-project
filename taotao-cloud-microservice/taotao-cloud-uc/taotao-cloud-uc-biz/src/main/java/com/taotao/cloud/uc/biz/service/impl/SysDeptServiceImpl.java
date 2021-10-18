@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.api.service.ISysDeptService;
-import com.taotao.cloud.uc.api.entity.SysDept;
+import com.taotao.cloud.uc.biz.entity.SysDept;
 import com.taotao.cloud.uc.biz.mapper.SysDeptMapper;
 import com.taotao.cloud.uc.biz.repository.SysDeptRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;

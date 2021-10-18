@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.uc.api.entity.SysRoleResource;
+import com.taotao.cloud.uc.biz.entity.SysRoleResource;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

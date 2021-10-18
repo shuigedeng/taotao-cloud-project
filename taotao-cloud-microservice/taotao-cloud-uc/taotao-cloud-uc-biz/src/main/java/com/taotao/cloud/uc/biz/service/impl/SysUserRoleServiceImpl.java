@@ -17,8 +17,8 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.uc.api.entity.QSysUserRole;
-import com.taotao.cloud.uc.api.entity.SysUserRole;
+import com.taotao.cloud.uc.biz.entity.QSysUserRole;
+import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.api.service.ISysUserRoleService;
 import com.taotao.cloud.uc.biz.mapper.SysUserRoleMapper;
 import com.taotao.cloud.uc.biz.repository.SysUserRoleRepository;
@@ -45,9 +45,9 @@ public class SysUserRoleServiceImpl extends
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
 		BooleanExpression expression = SYS_USER_ROLE.userId.eq(userId);
-		List<SysUserRole> userRoles = repository().fetch(expression);
+		List<SysUserRole> userRoles = cr().fetch(expression);
 		if (CollUtil.isNotEmpty(userRoles)) {
-			repository().deleteAll(userRoles);
+			cr().deleteAll(userRoles);
 		}
 
 		// 批量添加数据
@@ -58,7 +58,7 @@ public class SysUserRoleServiceImpl extends
 				.build()
 			)
 			.collect(Collectors.toList());
-		repository().saveAll(collect);
+		cr().saveAll(collect);
 		return true;
 	}
 }

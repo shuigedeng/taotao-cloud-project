@@ -84,6 +84,7 @@ public class Oauth2ResourceSecurityConfigurer extends WebSecurityConfigurerAdapt
 			"/actuator/**",
 			"/index",
 			"/index.html",
+			"/doc.html",
 			"/*.js",
 			"/*.css",
 			"/*.json",

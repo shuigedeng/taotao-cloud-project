@@ -15,22 +15,17 @@
  */
 package com.taotao.cloud.uc.biz.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
-import com.taotao.cloud.uc.api.entity.QSysUser;
-import com.taotao.cloud.uc.api.entity.SysUser;
-import com.taotao.cloud.uc.api.entity.SysUserRole;
 import com.taotao.cloud.uc.api.service.ISysUserRoleService;
 import com.taotao.cloud.uc.api.service.ISysUserService;
+import com.taotao.cloud.uc.biz.entity.QSysUser;
+import com.taotao.cloud.uc.biz.entity.SysUser;
+import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.biz.mapper.SysUserMapper;
 import com.taotao.cloud.uc.biz.repository.SysUserRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import java.util.Objects;
 import java.util.Set;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,50 +52,50 @@ public class SysUserServiceImpl extends
 		this.sysUserRoleService = sysUserRoleService;
 	}
 
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public SysUser saveUser(SysUser sysUser) {
-		if (Objects.nonNull(sysUser.getId())) {
-			throw new BusinessException("不允许存在id值");
-		}
-		String phone = sysUser.getPhone();
-		Boolean isExists = existsByPhone(phone);
-		if (isExists) {
-			throw new BusinessException(ResultEnum.USER_PHONE_EXISTS_ERROR);
-		}
-		String nickname = sysUser.getNickname();
-		if (StrUtil.isBlank(nickname)) {
-			sysUser.setNickname(DEFAULT_USERNAME);
-		}
-		String username = sysUser.getUsername();
-		if (StrUtil.isBlank(username)) {
-			sysUser.setUsername(DEFAULT_USERNAME);
-		}
+	//@Override
+	//@Transactional(rollbackFor = Exception.class)
+	//public SysUser saveUser(SysUser sysUser) {
+	//	if (Objects.nonNull(sysUser.getId())) {
+	//		throw new BusinessException("不允许存在id值");
+	//	}
+	//	String phone = sysUser.getPhone();
+	//	Boolean isExists = existsByPhone(phone);
+	//	if (isExists) {
+	//		throw new BusinessException(ResultEnum.USER_PHONE_EXISTS_ERROR);
+	//	}
+	//	String nickname = sysUser.getNickname();
+	//	if (StrUtil.isBlank(nickname)) {
+	//		sysUser.setNickname(DEFAULT_USERNAME);
+	//	}
+	//	String username = sysUser.getUsername();
+	//	if (StrUtil.isBlank(username)) {
+	//		sysUser.setUsername(DEFAULT_USERNAME);
+	//	}
+	//
+	//	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	//	sysUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
+	//	return repository().save(sysUser);
+	//}
 
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		sysUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
-		return repository().save(sysUser);
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public SysUser updateUser(SysUser sysUser) {
-		if (Objects.isNull(sysUser.getId())) {
-			throw new BusinessException("id不能为空");
-		}
-		return repository().save(sysUser);
-
-		// 此处修改用户角色
-		// userRoleService.remove(Wrappers.<SysUserRole>lambdaQuery().eq(SysUserRole::getId, sysUser.getId()));
-		// List<SysUserRole> userRoles = userAddDto.getRoleList().stream().map(item -> {
-		//     SysUserRole sysUserRole = new SysUserRole();
-		//     sysUserRole.setRoleId(item);
-		//     sysUserRole.setUserId(sysUser.getId());
-		//     return sysUserRole;
-		// }).collect(Collectors.toList());
-		//
-		// return userRoleService.saveBatch(userRoles);
-	}
+	//@Override
+	//@Transactional(rollbackFor = Exception.class)
+	//public SysUser updateUser(SysUser sysUser) {
+	//	if (Objects.isNull(sysUser.getId())) {
+	//		throw new BusinessException("id不能为空");
+	//	}
+	//	return repository().save(sysUser);
+	//
+	//	 此处修改用户角色
+	//	 userRoleService.remove(Wrappers.<SysUserRole>lambdaQuery().eq(SysUserRole::getId, sysUser.getId()));
+	//	 List<SysUserRole> userRoles = userAddDto.getRoleList().stream().map(item -> {
+	//	     SysUserRole sysUserRole = new SysUserRole();
+	//	     sysUserRole.setRoleId(item);
+	//	     sysUserRole.setUserId(sysUser.getId());
+	//	     return sysUserRole;
+	//	 }).collect(Collectors.toList());
+	//
+	//	 return userRoleService.saveBatch(userRoles);
+	//}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -108,10 +103,10 @@ public class SysUserServiceImpl extends
 		String restPasswordPhone = restPasswordDTO.getPhone();
 		SysUser sysUser = getById(userId);
 
-		String phone = sysUser.getPhone();
-		if (!Objects.equals(restPasswordPhone, phone)) {
-			throw new BusinessException(ResultEnum.USER_PHONE_INCONSISTENT_ERROR);
-		}
+		//String phone = sysUser.getPhone();
+		//if (!Objects.equals(restPasswordPhone, phone)) {
+		//	throw new BusinessException(ResultEnum.USER_PHONE_INCONSISTENT_ERROR);
+		//}
 		//BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
 		//BCryptPasswordEncoder passwordEncoder = AuthUtil.getPasswordEncoder();
 		//
@@ -120,8 +115,8 @@ public class SysUserServiceImpl extends
 		//if (!AuthUtil.validatePass(oldPassword, password)) {
 		//	throw new BusinessException(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 		//}
-
-		String newPassword = restPasswordDTO.getNewPassword();
+		//
+		//String newPassword = restPasswordDTO.getNewPassword();
 		//return sysUserRepository.updatePassword(id, passwordEncoder.encode(newPassword));
 		return true;
 	}
@@ -130,13 +125,13 @@ public class SysUserServiceImpl extends
 	@Override
 	public Boolean existsByPhone(String phone) {
 		BooleanExpression phonePredicate = SYS_USER.phone.eq(phone);
-		return repository().exists(phonePredicate);
+		return cr().exists(phonePredicate);
 	}
 
 	@Override
 	public Boolean existsById(Long id) {
 		BooleanExpression phonePredicate = SYS_USER.id.eq(id);
-		return repository().exists(phonePredicate);
+		return cr().exists(phonePredicate);
 	}
 
 	@Override

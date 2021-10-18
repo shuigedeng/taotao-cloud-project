@@ -16,7 +16,7 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.api.service.ISysDictService;
-import com.taotao.cloud.uc.api.entity.SysDict;
+import com.taotao.cloud.uc.biz.entity.SysDict;
 import com.taotao.cloud.uc.biz.mapper.SysDictMapper;
 import com.taotao.cloud.uc.biz.repository.SysDictRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;

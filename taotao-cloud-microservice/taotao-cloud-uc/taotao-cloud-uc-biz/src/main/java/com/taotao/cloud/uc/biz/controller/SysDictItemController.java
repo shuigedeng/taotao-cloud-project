@@ -20,7 +20,7 @@ import com.taotao.cloud.uc.api.dto.dict_item.DictItemSaveDTO;
 import com.taotao.cloud.uc.api.dto.dict_item.DictItemUpdateDTO;
 import com.taotao.cloud.uc.api.service.ISysDictItemService;
 import com.taotao.cloud.uc.api.vo.dict_item.DictItemQueryVO;
-import com.taotao.cloud.uc.api.entity.SysDictItem;
+import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;

@@ -19,7 +19,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.uc.api.service.ISysRegionService;
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
-import com.taotao.cloud.uc.api.entity.SysRegion;
+import com.taotao.cloud.uc.biz.entity.SysRegion;
 import com.taotao.cloud.uc.biz.mapper.SysRegionMapper;
 import com.taotao.cloud.uc.biz.repository.SysRegionRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;

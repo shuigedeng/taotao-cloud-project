@@ -16,7 +16,7 @@
 package com.taotao.cloud.uc.biz.repository;
 
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.uc.api.entity.SysDictItem;
+import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import javax.persistence.EntityManager;

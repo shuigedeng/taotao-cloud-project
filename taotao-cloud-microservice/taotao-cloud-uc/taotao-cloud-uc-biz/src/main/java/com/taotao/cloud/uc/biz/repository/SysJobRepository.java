@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.uc.api.entity.SysJob;
+import com.taotao.cloud.uc.biz.entity.SysJob;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import org.springframework.stereotype.Repository;
 

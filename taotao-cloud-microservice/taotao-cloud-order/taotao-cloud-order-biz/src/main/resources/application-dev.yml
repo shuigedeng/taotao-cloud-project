@@ -616,3 +616,9 @@ logging:
 springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
+    - com.taotao.cloud.captcha.controller
+
+ydoc:
+  token: 43a5452cbdaf55d66566119d5e5a263eb938aed0c6ddfc813a606d9f1688e289
+  enable: true
+  host: http://172.16.6.151:9009

@@ -26,7 +26,7 @@ import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceUpdateDTO;
-import com.taotao.cloud.uc.api.entity.SysResource;
+import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.uc.api.service.ISysResourceService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
@@ -68,87 +68,87 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysResourceController extends
 	SuperController<ISysResourceService<SysResource, Long>, SysResource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, ResourceQueryVO> {
 
-	/**
-	 * 根据角色id获取资源列表
-	 *
-	 * @param roleId 角色id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:45
-	 */
-	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据角色id获取资源列表")
-	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
-	@GetMapping("/roleId/{roleId}")
-	public Result<List<ResourceQueryVO>> findResourceByRoleId(
-		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
-		@PathVariable(value = "roleId") Long roleId) {
-		List<SysResource> resources = service().findResourceByRoleIds(Set.of(roleId));
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return success(result);
-	}
+	///**
+	// * 根据角色id获取资源列表
+	// *
+	// * @param roleId 角色id
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:04:45
+	// */
+	//@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "根据角色id获取资源列表")
+	//@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	//@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
+	//@GetMapping("/roleId/{roleId}")
+	//public Result<List<ResourceQueryVO>> findResourceByRoleId(
+	//	@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
+	//	@PathVariable(value = "roleId") Long roleId) {
+	//	List<SysResource> resources = service().findResourceByRoleIds(Set.of(roleId));
+	//	List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
+	//	return success(result);
+	//}
 
-	/**
-	 * 根据角色id列表获取角色列表
-	 *
-	 * @param roleIds 用户id列表
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:52
-	 */
-	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据角色id列表获取角色列表")
-	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
-	@GetMapping("/roleIds")
-	public Result<List<ResourceQueryVO>> findResourceByRoleIds(
-		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
-		@RequestParam(value = "roleIds") Set<Long> roleIds) {
-		List<SysResource> resources = service().findResourceByRoleIds(roleIds);
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.success(result);
-	}
+	///**
+	// * 根据角色id列表获取角色列表
+	// *
+	// * @param roleIds 用户id列表
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:04:52
+	// */
+	//@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "根据角色id列表获取角色列表")
+	//@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
+	//@GetMapping("/roleIds")
+	//public Result<List<ResourceQueryVO>> findResourceByRoleIds(
+	//	@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
+	//	@RequestParam(value = "roleIds") Set<Long> roleIds) {
+	//	List<SysResource> resources = service().findResourceByRoleIds(roleIds);
+	//	List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
+	//	return Result.success(result);
+	//}
 
-	/**
-	 * 根据角色code获取资源列表
-	 *
-	 * @param code 角色code
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:59
-	 */
-	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据角色code获取资源列表")
-	@PreAuthorize("hasAuthority('sys:resource:info:code')")
-	@GetMapping("/code/{code}")
-	public Result<List<ResourceQueryVO>> findResourceByCode(
-		@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
-		@PathVariable(value = "code") String code) {
-		List<SysResource> resources = service().findResourceByCodes(Set.of(code));
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return Result.success(result);
-	}
+	///**
+	// * 根据角色code获取资源列表
+	// *
+	// * @param code 角色code
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:04:59
+	// */
+	//@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "根据角色code获取资源列表")
+	//@PreAuthorize("hasAuthority('sys:resource:info:code')")
+	//@GetMapping("/code/{code}")
+	//public Result<List<ResourceQueryVO>> findResourceByCode(
+	//	@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
+	//	@PathVariable(value = "code") String code) {
+	//	List<SysResource> resources = service().findResourceByCodes(Set.of(code));
+	//	List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
+	//	return Result.success(result);
+	//}
 
 
-	/**
-	 * 根据角色code列表获取角色列表
-	 *
-	 * @param codes 角色cde列表
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:06
-	 */
-	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据角色cde列表获取角色列表")
-	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
-	@GetMapping("/codes")
-	public Result<List<ResourceQueryVO>> findResourceByCodes(
-		@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
-		@RequestParam(value = "codes") Set<String> codes) {
-		List<SysResource> resources = service().findResourceByCodes(codes);
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
-		return success(result);
-	}
+	///**
+	// * 根据角色code列表获取角色列表
+	// *
+	// * @param codes 角色cde列表
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:05:06
+	// */
+	//@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "根据角色cde列表获取角色列表")
+	//@PreAuthorize("hasAuthority('sys:resource:info:codes')")
+	//@GetMapping("/codes")
+	//public Result<List<ResourceQueryVO>> findResourceByCodes(
+	//	@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
+	//	@RequestParam(value = "codes") Set<String> codes) {
+	//	List<SysResource> resources = service().findResourceByCodes(codes);
+	//	List<ResourceQueryVO> result = ResourceMapper.INSTANCE.sysResourceToResourceVo(resources);
+	//	return success(result);
+	//}
 
 	// @ApiOperation("根据parentId获取角色列表")
 	// @SysOperateLog(description = "根据parentId获取角色列表")
@@ -162,48 +162,48 @@ public class SysResourceController extends
 	// 	return Result.succeed(collect);
 	// }
 
-	/**
-	 * 获取当前用户菜单列表
-	 *
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:16
-	 */
-	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "获取当前用户菜单列表")
-	@PreAuthorize("hasAuthority('sys:resource:current:user')")
-	@GetMapping("/current/user")
-	public Result<List<ResourceQueryVO>> findCurrentUserResource() {
-		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
-		if (CollUtil.isEmpty(roleCodes)) {
-			return success(new ArrayList<>());
-		}
-		return findResourceByCodes(roleCodes);
-	}
+	///**
+	// * 获取当前用户菜单列表
+	// *
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceVO&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:05:16
+	// */
+	//@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "获取当前用户菜单列表")
+	//@PreAuthorize("hasAuthority('sys:resource:current:user')")
+	//@GetMapping("/current/user")
+	//public Result<List<ResourceQueryVO>> findCurrentUserResource() {
+	//	Set<String> roleCodes = SecurityUtil.getUser().getRoles();
+	//	if (CollUtil.isEmpty(roleCodes)) {
+	//		return success(new ArrayList<>());
+	//	}
+	//	return findResourceByCodes(roleCodes);
+	//}
 
-	/**
-	 * 获取当前用户树形菜单列表
-	 *
-	 * @param parentId 父id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceTree&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:20
-	 */
-	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表", method = CommonConstant.GET)
-	@RequestOperateLog(description = "获取当前用户树形菜单列表")
-	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
-	@GetMapping("/current/user/tree")
-	public Result<List<ResourceTree>> findCurrentUserResourceTree(
-		@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
-		if (CollUtil.isEmpty(roleCodes)) {
-			return Result.success(Collections.emptyList());
-		}
-		Result<List<ResourceQueryVO>> result = findResourceByCodes(roleCodes);
-		List<ResourceQueryVO> resourceVOList = result.getData();
-		List<ResourceTree> trees = service().findCurrentUserResourceTree(resourceVOList, parentId);
-		return Result.success(trees);
-	}
+	///**
+	// * 获取当前用户树形菜单列表
+	// *
+	// * @param parentId 父id
+	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.resource.ResourceTree&gt;&gt;}
+	// * @author shuigedeng
+	// * @since 2021-10-09 15:05:20
+	// */
+	//@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表", method = CommonConstant.GET)
+	//@RequestOperateLog(description = "获取当前用户树形菜单列表")
+	//@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
+	//@GetMapping("/current/user/tree")
+	//public Result<List<ResourceTree>> findCurrentUserResourceTree(
+	//	@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
+	//	Set<String> roleCodes = SecurityUtil.getUser().getRoles();
+	//	if (CollUtil.isEmpty(roleCodes)) {
+	//		return Result.success(Collections.emptyList());
+	//	}
+	//	Result<List<ResourceQueryVO>> result = findResourceByCodes(roleCodes);
+	//	List<ResourceQueryVO> resourceVOList = result.getData();
+	//	List<ResourceTree> trees = service().findCurrentUserResourceTree(resourceVOList, parentId);
+	//	return Result.success(trees);
+	//}
 
 	/**
 	 * 获取树形菜单集合 1.false-非懒加载，查询全部 2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0

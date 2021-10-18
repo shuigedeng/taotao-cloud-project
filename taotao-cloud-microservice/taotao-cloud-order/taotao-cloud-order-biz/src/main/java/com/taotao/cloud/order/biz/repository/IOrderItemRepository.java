@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.biz.mapper;
+package com.taotao.cloud.order.biz.repository;
 
-import com.taotao.cloud.uc.biz.entity.SysDictItem;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import javax.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * CompanyMapper
- *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2021/10/13 22:50
+ * @since 2020/10/22 12:46
  */
-public interface SysDictItemMapper extends BaseSuperMapper<SysDictItem, Long> {
-
+@Repository
+public interface IOrderItemRepository extends JpaRepository<OrderItem, Long> {
 }

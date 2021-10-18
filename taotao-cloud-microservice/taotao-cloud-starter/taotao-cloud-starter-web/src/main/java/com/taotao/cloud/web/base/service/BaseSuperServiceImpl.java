@@ -24,9 +24,8 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * BaseService
@@ -38,20 +37,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BaseSuperServiceImpl<
 	M extends BaseSuperMapper<T, I>,
 	T extends SuperEntity<I>,
-	R extends BaseSuperRepository<T, I>,
+	CR extends BaseSuperRepository<T, I>,
+	IR extends JpaRepository<T, I>,
 	I extends Serializable> extends ServiceImpl<M, T> implements BaseSuperService<T, I> {
 
 	@Autowired
-	private R repository;
+	private CR classRepository;
+
+	@Autowired
+	private IR interfaceRepository;
 
 	@Override
-	public M mapper() {
+	public M im() {
 		return super.getBaseMapper();
 	}
 
 	@Override
-	public R repository() {
-		return repository;
+	public CR cr() {
+		return classRepository;
+	}
+
+	@Override
+	public IR ir() {
+		return interfaceRepository;
 	}
 
 	@Override

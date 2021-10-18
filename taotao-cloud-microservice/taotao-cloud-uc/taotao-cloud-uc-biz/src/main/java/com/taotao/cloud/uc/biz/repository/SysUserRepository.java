@@ -15,10 +15,18 @@
  */
 package com.taotao.cloud.uc.biz.repository;
 
-import com.taotao.cloud.uc.api.entity.QSysUser;
-import com.taotao.cloud.uc.api.entity.SysUser;
+import com.taotao.cloud.uc.biz.entity.QSysUser;
+import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,7 +37,7 @@ import org.springframework.stereotype.Repository;
  * @since 2021-10-09 20:51:18
  */
 @Repository
-public class SysUserRepository extends BaseSuperRepository<SysUser, Long> {
+public abstract class SysUserRepository extends BaseSuperRepository<SysUser, Long> {
 
 	public SysUserRepository(EntityManager em) {
 		super(SysUser.class, em);
@@ -54,4 +62,95 @@ public class SysUserRepository extends BaseSuperRepository<SysUser, Long> {
 		//	.execute() > 0;
 		return null;
 	}
+
+	@Query(value = """
+		select u from User u where u.age = ?#{[0]}
+		""")
+	abstract List<SysUser> findUsersByAge(int age);
+
+	//@Query(value = """
+	//	select u from User u where u.firstname = :#{#customer.firstname
+	//	""")
+	//abstract List<SysUser> findUsersByCustomersFirstname(@Param("customer") Customer customer);
+
+	@Query(value = """
+		      select o from BusinessObject as o 
+		      where o.owner.emailAddress like ?#{hasRole('ROLE_ADMIN') ? '%' : principal.emailAddress}
+		""")
+	abstract List<SysUser> findBusinessObjectsForCurrentUser();
+
+	@Query(value = """
+		select u from User u where u.emailAddress = ?#{principal.emailAddress}
+		""")
+	abstract List<SysUser> findCurrentUserWithCustomQuery();
+
+	@Query(value = """
+		select u.id, u.name from SysUser u where u.id=?1
+		""")
+	abstract List<SysUser> getUserById(Integer id);
+
+	//@Query(value = """
+	//	select u.id, u.name from SysUser u where u.id=?1
+	//	""", nativeQuery = true)
+	//abstract List<SysUser> getUserById(Integer id);
+	//
+	//@Query(value = """
+	//	     select u.id, u.name from  #{#entityName} u where u.id=?1
+	//	""", nativeQuery = true)
+	//abstract List<SysUser> getUserById(Integer id);
+
+	@Query(
+		value = """
+			SELECT * FROM SysUser ORDER BY id
+			""",
+		countQuery = """
+			SELECT count(*) FROM SysUser
+			""",
+		nativeQuery = true)
+	abstract Page<SysUser> findAllUsersWithPagination(Pageable pageable);
+
+	@Modifying
+	@Query(value = """
+		insert into SysUser (name, age, email, status) values (:name, :age, :email, :status)
+		""", nativeQuery = true)
+	abstract void insertUser(@Param("name") String name,
+		@Param("age") Integer age,
+		@Param("status") Integer status,
+		@Param("email") String email);
+
+	@Modifying
+	@Query(value = """
+		update SysUser u set u.name = :name where u.id = :id
+		""")
+	abstract boolean update(@Param("id") Integer id, @Param("name") String name);
+
+	@Modifying
+	@Query(value = """
+		delete from  SysUser u where u.id = :id
+		""")
+	abstract void update(@Param("id") Integer id);
+
+	@Query(value = """
+		select t from Task t where t.taskName = ? and t.createTime = ?
+		""")
+	abstract SysUser findByTaskName(String taskName, Date createTime);
+
+	@Query(value = """
+		select * from SysUser t where t.task_name = ?1
+		""", nativeQuery = true)
+	abstract SysUser findByTaskName(String taskName);
+
+	//@Query(value = """
+	//	select new com.ljw.test.pojo.domain.UserDept(u.id, u.name, d.id, d.name )
+	//	from User u, Dept d
+	//	where u.deptId=d.id
+	//	""")
+	//abstract List<UserDept> findAllForUserDept();
+
+	@Query(value = """
+		select new map(u.id as user_id, u.name as user_name, d.id as dept_id, d.name as dept_name)
+		from SysUser as u, SysDept as d 
+		where u.deptId=d.id
+		""")
+	abstract List<Map<String, Object>> findAllForMap();
 }

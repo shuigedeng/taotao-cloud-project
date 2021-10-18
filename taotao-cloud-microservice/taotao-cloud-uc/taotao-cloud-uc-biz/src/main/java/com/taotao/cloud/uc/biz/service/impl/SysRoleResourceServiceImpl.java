@@ -17,8 +17,8 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.uc.api.entity.QSysRoleResource;
-import com.taotao.cloud.uc.api.entity.SysRoleResource;
+import com.taotao.cloud.uc.biz.entity.QSysRoleResource;
+import com.taotao.cloud.uc.biz.entity.SysRoleResource;
 import com.taotao.cloud.uc.api.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.mapper.SysRoleResourceMapper;
 import com.taotao.cloud.uc.biz.repository.SysRoleResourceRepository;
@@ -43,9 +43,9 @@ public class SysRoleResourceServiceImpl extends
 	@Override
 	public Boolean saveRoleResource(Long roleId, Set<Long> resourceIds) {
 		BooleanExpression expression = SYS_ROLE_RESOURCE.roleId.eq(roleId);
-		List<SysRoleResource> roleResources = repository().fetch(expression);
+		List<SysRoleResource> roleResources = cr().fetch(expression);
 		if (CollUtil.isNotEmpty(roleResources)) {
-			repository().deleteAll(roleResources);
+			cr().deleteAll(roleResources);
 		}
 
 		// 批量添加数据
@@ -55,7 +55,7 @@ public class SysRoleResourceServiceImpl extends
 				.resourceId(resourceId)
 				.build())
 			.collect(Collectors.toList());
-		repository().saveAll(collect);
+		cr().saveAll(collect);
 		return true;
 	}
 }

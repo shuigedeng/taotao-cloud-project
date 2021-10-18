@@ -4,6 +4,8 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
@@ -14,7 +16,6 @@ import org.springframework.boot.SpringApplication;
  * @since 2021-10-12 10:45:43
  */
 @TaoTaoCloudApplication
-@MapperScan("com.taotao.cloud.order.biz.mapper")
 public class TaoTaoCloudOrderApplication {
 
 	public static void main(String[] args) {

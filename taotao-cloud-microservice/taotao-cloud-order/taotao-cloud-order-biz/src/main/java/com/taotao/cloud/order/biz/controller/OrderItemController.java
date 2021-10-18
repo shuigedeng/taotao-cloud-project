@@ -19,7 +19,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemUpdateDTO;
 import com.taotao.cloud.order.api.vo.order_item.OrderItemVO;
-import com.taotao.cloud.order.api.entity.OrderItem;
+import com.taotao.cloud.order.biz.entity.OrderItem;
 import com.taotao.cloud.order.api.service.IOrderItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;

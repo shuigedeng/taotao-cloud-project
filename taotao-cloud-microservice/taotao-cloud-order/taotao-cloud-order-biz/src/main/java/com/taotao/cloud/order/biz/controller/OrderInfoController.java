@@ -16,14 +16,22 @@
 package com.taotao.cloud.order.biz.controller;
 
 import com.taotao.cloud.common.model.BaseQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
 import com.taotao.cloud.order.api.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.api.entity.OrderInfo;
+import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.web.base.controller.SuperController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +50,22 @@ public class OrderInfoController
 	extends
 	SuperController<IOrderInfoService<OrderInfo, Long>, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
 
-
+	/**
+	 * 根据用户id查询用户是否存在
+	 *
+	 * @param userId 用户id
+	 * @return {@link Result &lt;java.lang.Boolean&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:15:05
+	 */
+	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
+	@RequestOperateLog(description = "根据用户id查询用户是否存在")
+	//@PreAuthorize("hasAuthority('sys:user:exists:id')")
+	@GetMapping("/exists/id/{code}")
+	public Result<Boolean> existsByUserId(
+		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+		@PathVariable(name = "code") String code) {
+		return success(service().existByCode(code));
+	}
 }
 

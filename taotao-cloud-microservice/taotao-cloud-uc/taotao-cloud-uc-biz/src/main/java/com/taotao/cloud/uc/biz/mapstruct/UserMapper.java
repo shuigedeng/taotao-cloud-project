@@ -16,7 +16,7 @@
 package com.taotao.cloud.uc.biz.mapstruct;
 
 import com.taotao.cloud.uc.api.dto.user.UserQueryDTO;
-import com.taotao.cloud.uc.api.entity.SysUser;
+import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
 import com.taotao.cloud.uc.api.vo.user.UserRegisterVO;
 import java.util.List;

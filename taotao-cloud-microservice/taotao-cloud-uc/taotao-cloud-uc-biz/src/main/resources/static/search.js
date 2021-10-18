@@ -12,48 +12,6 @@ api[0].list.push({
     desc: '字典管理API',
     list: []
 })
-api[0].list[0].list.push({
-    order: '1',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/',
-    desc: '添加字典信息',
-});
-api[0].list[0].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/{id:[0-9]*}',
-    desc: '根据id更新字典信息',
-});
-api[0].list[0].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/code/{code}',
-    desc: '根据code更新字典信息',
-});
-api[0].list[0].list.push({
-    order: '4',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/',
-    desc: '查询所有字典集合',
-});
-api[0].list[0].list.push({
-    order: '5',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/page',
-    desc: '分页查询字典集合',
-});
-api[0].list[0].list.push({
-    order: '6',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/{id:[0-9]*}',
-    desc: '根据id删除字典',
-});
-api[0].list[0].list.push({
-    order: '7',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/code/{code}',
-    desc: '根据code删除字典',
-});
 api[0].list.push({
     alias: 'SysJobController',
     order: '2',
@@ -62,232 +20,143 @@ api[0].list.push({
     list: []
 })
 api[0].list.push({
-    alias: 'SysUserController',
+    alias: 'SysCompanyController',
     order: '3',
+    link: '公司管理api',
+    desc: '公司管理API',
+    list: []
+})
+api[0].list.push({
+    alias: 'SysUserController',
+    order: '4',
     link: '后台用户管理api',
     desc: '后台用户管理API',
     list: []
 })
-api[0].list[2].list.push({
+api[0].list[3].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/',
-    desc: '保存(添加)用户',
-});
-api[0].list[2].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/{id:[0-9]*}',
-    desc: '更新用户',
-});
-api[0].list[2].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/exists/phone',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/exists/phone/{phone}',
     desc: '根据手机号码查询用户是否存在',
 });
-api[0].list[2].list.push({
-    order: '4',
+api[0].list[3].list.push({
+    order: '2',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/exists/id',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/exists/id/{userId}',
     desc: '根据用户id查询用户是否存在',
 });
-api[0].list[2].list.push({
-    order: '5',
+api[0].list[3].list.push({
+    order: '3',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/{id:[0-9]*}',
-    desc: '根据用户id删除用户',
-});
-api[0].list[2].list.push({
-    order: '6',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/page',
-    desc: '分页查询用户集合',
-});
-api[0].list[2].list.push({
-    order: '7',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/rest/password/{id:[0-9]*}',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/rest/password/{userId}',
     desc: '重置密码',
 });
-api[0].list[2].list.push({
-    order: '8',
+api[0].list[3].list.push({
+    order: '4',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/current/info',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/current',
     desc: '获取当前登录人信息',
 });
-api[0].list[2].list.push({
-    order: '9',
+api[0].list[3].list.push({
+    order: '5',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/info/id/{id:[0-9]*}',
-    desc: '根据id获取用户信息',
-});
-api[0].list[2].list.push({
-    order: '10',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/info/username',
-    desc: '根据username获取用户信息',
-});
-api[0].list[2].list.push({
-    order: '11',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/info',
-    desc: '查询用户集合',
-});
-api[0].list[2].list.push({
-    order: '12',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/role',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/user/roles/{userId}',
     desc: '根据用户id更新角色信息(用户分配角色)',
 });
 api[0].list.push({
     alias: 'SysResourceController',
-    order: '4',
+    order: '5',
     link: '资源管理api',
     desc: '资源管理API',
     list: []
 })
-api[0].list[3].list.push({
+api[0].list[4].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/',
-    desc: '添加资源',
-});
-api[0].list[3].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/{id:[0-9]*}',
-    desc: '根据id删除资源',
-});
-api[0].list[3].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/{id:[0-9]*}',
-    desc: '修改资源',
-});
-api[0].list[3].list.push({
-    order: '4',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/exists/id',
-    desc: '根据id查询资源是否存在',
-});
-api[0].list[3].list.push({
-    order: '5',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/exists/name',
-    desc: '根据名称查询资源是否存在',
-});
-api[0].list[3].list.push({
-    order: '6',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/id',
-    desc: '根据id获取资源信息',
-});
-api[0].list[3].list.push({
-    order: '7',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/name',
-    desc: '根据名称获取资源信息',
-});
-api[0].list[3].list.push({
-    order: '8',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/page',
-    desc: '分页查询资源集合',
-});
-api[0].list[3].list.push({
-    order: '9',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/',
-    desc: '查询所有资源列表',
-});
-api[0].list[3].list.push({
-    order: '10',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/roleId',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/roleId/{roleId}',
     desc: '根据角色id获取资源列表',
 });
-api[0].list[3].list.push({
-    order: '11',
+api[0].list[4].list.push({
+    order: '2',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/roleIds',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/roleIds',
     desc: '根据角色id列表获取角色列表',
 });
-api[0].list[3].list.push({
-    order: '12',
+api[0].list[4].list.push({
+    order: '3',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/code',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/code/{code}',
     desc: '根据角色code获取资源列表',
 });
-api[0].list[3].list.push({
-    order: '13',
+api[0].list[4].list.push({
+    order: '4',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/codes',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/codes',
     desc: '根据角色code列表获取角色列表',
 });
-api[0].list[3].list.push({
-    order: '14',
+api[0].list[4].list.push({
+    order: '5',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/current/user',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/current/user',
     desc: '获取当前用户菜单列表',
 });
-api[0].list[3].list.push({
-    order: '15',
+api[0].list[4].list.push({
+    order: '6',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/current/user/tree',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/current/user/tree',
     desc: '获取当前用户树形菜单列表',
 });
-api[0].list[3].list.push({
-    order: '16',
+api[0].list[4].list.push({
+    order: '7',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/info/tree',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/tree',
     desc: '获取树形菜单集合1.false-非懒加载，查询全部2.true-懒加载，根据parentId查询2.1父节点为空，则查询parentId=0',
 });
-api[0].list[3].list.push({
-    order: '17',
+api[0].list[4].list.push({
+    order: '8',
     deprecated: 'false',
     url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/test/se',
-    desc: '测试分布式事务',
+    desc: '',
 });
-api[0].list[3].list.push({
-    order: '18',
+api[0].list[4].list.push({
+    order: '9',
     deprecated: 'false',
     url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/test/async',
-    desc: '测试异步',
+    desc: '',
 });
-api[0].list[3].list.push({
-    order: '19',
+api[0].list[4].list.push({
+    order: '10',
     deprecated: 'false',
     url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/test/async/future',
-    desc: '测试异步结果',
+    desc: '',
 });
-api[0].list[3].list.push({
-    order: '20',
+api[0].list[4].list.push({
+    order: '11',
     deprecated: 'false',
     url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/resource/test/seata',
-    desc: '测试分布式事务',
+    desc: '',
 });
 api[0].list.push({
     alias: 'SysDeptController',
-    order: '5',
+    order: '6',
     link: '部门管理api',
     desc: '部门管理API',
     list: []
 })
 api[0].list.push({
     alias: 'SysRegionController',
-    order: '6',
+    order: '7',
     link: '地区管理api',
     desc: '地区管理API',
     list: []
 })
-api[0].list[5].list.push({
+api[0].list[6].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/region/parentId',
-    desc: '根据父id查询',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/region/parentId/{parentId}',
+    desc: '根据父id查询地区数据',
 });
-api[0].list[5].list.push({
+api[0].list[6].list.push({
     order: '2',
     deprecated: 'false',
     url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/region/tree',
@@ -295,135 +164,51 @@ api[0].list[5].list.push({
 });
 api[0].list.push({
     alias: 'SysDictItemController',
-    order: '7',
+    order: '8',
     link: '字典项管理api',
     desc: '字典项管理API',
     list: []
 })
-api[0].list[6].list.push({
-    order: '1',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/item/',
-    desc: '添加字典项详情',
-});
-api[0].list[6].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/item/{id}',
-    desc: '更新字典项详情',
-});
-api[0].list[6].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/item/{id:[0-9]*}',
-    desc: '删除字典项详情',
-});
-api[0].list[6].list.push({
-    order: '4',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/item/page',
-    desc: '分页查询字典详情',
-});
-api[0].list[6].list.push({
-    order: '5',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/dict/item/info',
-    desc: '查询字典详情',
-});
 api[0].list.push({
     alias: 'SysRoleController',
-    order: '8',
+    order: '9',
     link: '角色管理api',
     desc: '角色管理API',
     list: []
 })
-api[0].list[7].list.push({
+api[0].list[8].list.push({
     order: '1',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/info/id/{id:[0-9]*}',
-    desc: '根据角色id获取角色信息',
-});
-api[0].list[7].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/exist/code/{code}',
-    desc: '根据code查询角色是否存在',
-});
-api[0].list[7].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/info/code',
-    desc: '根据code获取角色信息',
-});
-api[0].list[7].list.push({
-    order: '4',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/info/codes',
-    desc: '根据code列表获取角色信息',
-});
-api[0].list[7].list.push({
-    order: '5',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/',
-    desc: '添加角色',
-});
-api[0].list[7].list.push({
-    order: '6',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/{id:[0-9]*}',
-    desc: '修改角色',
-});
-api[0].list[7].list.push({
-    order: '7',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/{id:[0-9]*}',
-    desc: '根据id删除角色',
-});
-api[0].list[7].list.push({
-    order: '8',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/page',
-    desc: '分页查询角色集合',
-});
-api[0].list[7].list.push({
-    order: '9',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/',
-    desc: '查询所有角色列表',
-});
-api[0].list[7].list.push({
-    order: '10',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/info/userId',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/userId/{userId}',
     desc: '根据用户id获取角色列表',
 });
-api[0].list[7].list.push({
-    order: '11',
+api[0].list[8].list.push({
+    order: '2',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/info/userIds',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/userId',
     desc: '根据用户id列表获取角色列表',
 });
-api[0].list[7].list.push({
-    order: '12',
+api[0].list[8].list.push({
+    order: '3',
     deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/resource',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/uc/role/resources/{roleId}',
     desc: '根据角色id更新资源信息(角色分配资源)',
 });
 api[0].list.push({
     alias: 'error',
-    order: '9',
+    order: '10',
     link: 'error_code_list',
     desc: '错误码列表',
     list: []
 })
 api[0].list.push({
     alias: 'dict',
-    order: '10',
+    order: '11',
     link: 'dict_list',
     desc: '数据字典',
     list: []
 })
-api[0].list[9].list.push({
+api[0].list[10].list.push({
     order: '1',
     deprecated: 'false',
     url: '',

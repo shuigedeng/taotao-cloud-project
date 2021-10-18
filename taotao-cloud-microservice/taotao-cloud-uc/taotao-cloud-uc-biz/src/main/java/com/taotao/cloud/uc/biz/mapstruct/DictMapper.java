@@ -17,7 +17,7 @@ package com.taotao.cloud.uc.biz.mapstruct;
 
 import com.taotao.cloud.uc.api.dto.dict.DictSaveDTO;
 import com.taotao.cloud.uc.api.vo.dict.DictQueryVO;
-import com.taotao.cloud.uc.api.entity.SysDict;
+import com.taotao.cloud.uc.biz.entity.SysDict;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;

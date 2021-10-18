@@ -16,7 +16,7 @@
 package com.taotao.cloud.uc.biz.mapstruct;
 
 import com.taotao.cloud.uc.api.dto.role.RoleQueryDTO;
-import com.taotao.cloud.uc.api.entity.SysRole;
+import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
 import java.util.List;
