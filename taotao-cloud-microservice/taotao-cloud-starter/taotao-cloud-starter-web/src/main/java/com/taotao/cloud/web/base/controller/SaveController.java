@@ -25,6 +25,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
 import java.util.Objects;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:12:22
  */
-public interface SaveController<T extends SuperEntity<I>, I extends Serializable, SaveDTO> extends
+public interface SaveController<T extends SuperEntity<T,I>, I extends Serializable, SaveDTO> extends
 	BaseController<T, I> {
 
 	/**
@@ -50,7 +51,7 @@ public interface SaveController<T extends SuperEntity<I>, I extends Serializable
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:12:44
 	 */
-	@Operation(summary = "通用单体新增", description = "通用单体新增", method = CommonConstant.POST)
+	@Operation(summary = "通用单体新增", description = "通用单体新增")
 	@PostMapping
 	@RequestOperateLog(value = "通用单体新增", request = false)
 	//@PreAuthorize("@permissionVerifier.hasPermission('save')")

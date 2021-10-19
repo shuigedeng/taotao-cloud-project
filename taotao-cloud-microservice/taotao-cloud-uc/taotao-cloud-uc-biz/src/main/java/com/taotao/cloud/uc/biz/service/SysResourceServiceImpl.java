@@ -15,26 +15,36 @@
  */
 package com.taotao.cloud.uc.biz.service;
 
+import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResourceTypeEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.feign.RemoteOrderItemService;
 import com.taotao.cloud.order.api.feign.RemoteOrderService;
 import com.taotao.cloud.order.api.service.IOrderInfoService;
-import com.taotao.cloud.uc.biz.entity.QSysResource;
-import com.taotao.cloud.uc.biz.entity.SysResource;
+import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
+import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.service.ISysResourceService;
 import com.taotao.cloud.uc.api.service.ISysRoleService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
-import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
+import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
+import com.taotao.cloud.uc.biz.entity.QSysResource;
+import com.taotao.cloud.uc.biz.entity.SysResource;
+import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.biz.mapper.SysResourceMapper;
+import com.taotao.cloud.uc.biz.mapstruct.ResourceMapper;
 import com.taotao.cloud.uc.biz.repository.ISysResourceRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysResourceRepository;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -71,57 +81,45 @@ public class SysResourceServiceImpl extends
 
 	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;
 
-	//@Override
-	//public List<SysResource> findResourceByIdList(List<Long> idList) {
-	//	return repository().findResourceByIdList(idList);
-	//}
-	//
-	//@Override
-	//public SysResource findResourceByName(String name) {
-	//	return null;
-	//}
-
 	@Override
-	public Boolean existsById(Long id) {
-		return null;
+	public List<ResourceBO> findResourceByIdList(List<Long> idList) {
+		List<SysResource> resources = cr().findResourceByIdList(idList);
+		return ResourceMapper.INSTANCE.resourcesToBos(resources);
 	}
 
 	@Override
-	public Boolean existsByName(String name) {
-		return null;
+	public List<ResourceBO> findAllResources() {
+		List<SysResource> resources = ir().findAll();
+		return ResourceMapper.INSTANCE.resourcesToBos(resources);
 	}
 
-	//@Override
-	//public List<SysResource> findAllResources() {
-	//	return repository().findAll();
-	//}
-	//
-	//@Override
-	//public List<SysResource> findResourceByRoleIds(Set<Long> roleIds) {
-	//	List<SysResource> sysResources = repository().findResourceByRoleIds(roleIds);
-	//	return sysResources.stream().collect(Collectors.collectingAndThen(
-	//		Collectors.toCollection(
-	//			() -> new TreeSet<>(Comparator.comparing(SysResource::getId))), ArrayList::new));
-	//}
-	//
-	//@Override
-	//public List<SysResource> findResourceByCodes(Set<String> codes) {
-	//	List<SysRole> sysRoles = sysRoleService.findRoleByCodes(codes);
-	//	if (CollUtil.isEmpty(sysRoles)) {
-	//		throw new BusinessException("未查询到角色信息");
-	//	}
-	//	List<Long> roleIds = sysRoles.stream().map(SysRole::getId).collect(Collectors.toList());
-	//	return findResourceByRoleIds(new HashSet<>(roleIds));
-	//}
-	//
-	//@Override
-	//public List<SysResource> findResourceByParentId(Long parentId) {
-	//	List<Long> pidList = new ArrayList<>();
-	//	pidList.add(parentId);
-	//	List<Long> sumList = new ArrayList<>();
-	//	List<Long> allChildrenIdList = recursion(pidList, sumList);
-	//	return findResourceByIdList(allChildrenIdList);
-	//}
+	@Override
+	public List<ResourceBO> findResourceByRoleIds(Set<Long> roleIds) {
+		List<SysResource> resources = cr().findResourceByRoleIds(roleIds);
+		return ResourceMapper.INSTANCE.resourcesToBos(resources)
+			.stream()
+			.sorted(Comparator.comparing(ResourceBO::getId))
+			.toList();
+	}
+
+	@Override
+	public List<ResourceBO> findResourceByCodes(Set<String> codes) {
+		List<RoleBO> sysRoles = sysRoleService.findRoleByCodes(codes);
+		if (CollUtil.isEmpty(sysRoles)) {
+			throw new BusinessException("未查询到角色信息");
+		}
+		List<Long> roleIds = sysRoles.stream().map(RoleBO::getId).toList();
+		return findResourceByRoleIds(new HashSet<>(roleIds));
+	}
+
+	@Override
+	public List<ResourceBO> findResourceByParentId(Long parentId) {
+		List<Long> pidList = new ArrayList<>();
+		pidList.add(parentId);
+		List<Long> sumList = new ArrayList<>();
+		List<Long> allChildrenIdList = recursion(pidList, sumList);
+		return findResourceByIdList(allChildrenIdList);
+	}
 
 	/**
 	 * 根据parentId递归查询
@@ -142,24 +140,23 @@ public class SysResourceServiceImpl extends
 	}
 
 	@Override
-	public List<ResourceTree> findResourceTree(boolean lazy, Long parentId) {
-		//if (!lazy) {
-		//	List<SysResource> resources = findAllResources();
-		//	return TreeUtil.buildTree(resources, CommonConstant.RESOURCE_TREE_ROOT_ID);
-		//}
-		//
-		//Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;
-		//List<SysResource> resources = findResourceByParentId(parent);
-		//return TreeUtil.buildTree(resources, parent);
-		return null;
+	public List<ResourceTreeVO> findResourceTree(boolean lazy, Long parentId) {
+		if (!lazy) {
+			List<ResourceBO> resources = findAllResources();
+			return TreeUtil.buildTree(resources, CommonConstant.RESOURCE_TREE_ROOT_ID);
+		}
+
+		Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;
+		List<ResourceBO> resources = findResourceByParentId(parent);
+		return TreeUtil.buildTree(resources, parent);
 	}
 
 	@Override
-	public List<ResourceTree> findCurrentUserResourceTree(List<ResourceQueryVO> resourceVOList,
+	public List<ResourceTreeVO> findCurrentUserResourceTree(List<ResourceQueryVO> resourceVOList,
 		Long parentId) {
-		List<ResourceTree> menuTreeList = resourceVOList.stream()
+		List<ResourceTreeVO> menuTreeList = resourceVOList.stream()
 			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getCode() == vo.getType())
-			.map(ResourceTree::new).sorted(Comparator.comparingInt(ResourceTree::getSort))
+			.map(ResourceTreeVO::new).sorted(Comparator.comparingInt(ResourceTreeVO::getSort))
 			.collect(Collectors.toList());
 		Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;
 		return TreeUtil.build(menuTreeList, parent);

@@ -17,6 +17,7 @@ package com.taotao.cloud.common.model;
 
 import cn.hutool.core.collection.CollUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,6 +35,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class SecurityUser implements UserDetails, Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -3685249101751401211L;
 
 	/**

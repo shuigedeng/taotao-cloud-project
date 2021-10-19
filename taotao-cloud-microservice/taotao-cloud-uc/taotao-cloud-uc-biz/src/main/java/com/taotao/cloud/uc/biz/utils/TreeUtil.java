@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.uc.biz.utils;
 
+import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
+import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.api.vo.resource.TreeNode;
-import com.taotao.cloud.uc.api.vo.resource.ResourceTree;
-import com.taotao.cloud.uc.biz.entity.SysResource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,11 +110,11 @@ public class TreeUtil {
 	 * @version 1.0.0
 	 * @since 2020/10/21 11:23
 	 */
-	public static List<ResourceTree> buildTree(List<SysResource> resources, Long parentId) {
-		List<ResourceTree> trees = new ArrayList<>();
-		ResourceTree node;
-		for (SysResource resource : resources) {
-			node = new ResourceTree();
+	public static List<ResourceTreeVO> buildTree(List<ResourceBO> resources, Long parentId) {
+		List<ResourceTreeVO> trees = new ArrayList<>();
+		ResourceTreeVO node;
+		for (ResourceBO resource : resources) {
+			node = new ResourceTreeVO();
 			node.setId(resource.getId());
 			node.setParentId(resource.getParentId());
 			node.setName(resource.getName());

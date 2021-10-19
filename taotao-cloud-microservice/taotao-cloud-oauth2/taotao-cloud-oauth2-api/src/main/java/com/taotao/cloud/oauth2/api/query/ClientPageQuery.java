@@ -25,7 +25,7 @@ import com.taotao.cloud.common.model.PageQuery;
  * @version 1.0.0
  */
 @ApiModel(value = "客户端分页查询Query")
-public class ClientPageQuery extends PageQuery {
+public class ClientPageQuery {
     private static final long serialVersionUID = 5953949488238258726L;
     @ApiModelProperty(value = "应用标识")
     private String clientId;

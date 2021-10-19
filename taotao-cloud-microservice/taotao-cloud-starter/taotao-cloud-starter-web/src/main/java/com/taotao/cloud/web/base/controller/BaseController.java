@@ -24,10 +24,8 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.RecordComponent;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * BaseController
@@ -38,7 +36,7 @@ import java.util.stream.Collectors;
  * @version 2021.9
  * @since 2021-09-02 21:03:10
  */
-public interface BaseController<T extends SuperEntity<I>, I extends Serializable> {
+public interface BaseController<T extends SuperEntity<T, I>, I extends Serializable> {
 
 	/**
 	 * 获取实体的类型
@@ -79,7 +77,7 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 * @since 2021-09-02 21:03:51
 	 */
 	default Result<Boolean> success() {
-		return Result.success();
+		return Result.success(true);
 	}
 
 	/**
@@ -222,16 +220,33 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 */
 	default Boolean checkField(Class<?> clazz) {
 		Field[] declaredFields = clazz.getDeclaredFields();
-		if (declaredFields.length == 0) {
+		RecordComponent[] recordComponents = clazz.getRecordComponents();
+
+		if (declaredFields.length == 0 && recordComponents.length == 0) {
 			throw new BusinessException("字段参数不存在");
 		}
 
-		for (Field declaredField : declaredFields) {
-			String filedName = declaredField.getName();
-			if(!filedName.equals("serialVersionUID")){
-				Field field = ReflectionUtil.findField(getEntityClass(), filedName);
-				if(Objects.isNull(field)){
-					throw new BusinessException(filedName + "字段值错误");
+		if (declaredFields.length != 0) {
+			for (Field declaredField : declaredFields) {
+				String filedName = declaredField.getName();
+
+				if (!filedName.equals("serialVersionUID")) {
+					Field field = ReflectionUtil.findField(getEntityClass(), filedName);
+					if (Objects.isNull(field)) {
+						throw new BusinessException(filedName + "字段值错误");
+					}
+				}
+			}
+		}
+
+		if (recordComponents.length != 0) {
+			for (RecordComponent recordComponent : recordComponents) {
+				String filedName = recordComponent.getName();
+				if (!filedName.equals("serialVersionUID")) {
+					Field field = ReflectionUtil.findField(getEntityClass(), filedName);
+					if (Objects.isNull(field)) {
+						throw new BusinessException(filedName + "字段值错误");
+					}
 				}
 			}
 		}
@@ -248,9 +263,9 @@ public interface BaseController<T extends SuperEntity<I>, I extends Serializable
 	 * @since 2021-10-13 17:36:08
 	 */
 	default Boolean checkField(String filedName) {
-		if(!filedName.equals("serialVersionUID")){
+		if (!filedName.equals("serialVersionUID")) {
 			Field field = ReflectionUtil.findField(getEntityClass(), filedName);
-			if(Objects.isNull(field)){
+			if (Objects.isNull(field)) {
 				throw new BusinessException(filedName + "字段值错误");
 			}
 		}

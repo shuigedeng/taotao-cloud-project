@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.mapstruct;
 
+import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
@@ -38,16 +39,13 @@ public interface ResourceMapper {
 
 	ResourceMapper INSTANCE = Mappers.getMapper(ResourceMapper.class);
 
-	/**
-	 * ResourceDTO转SysResource
-	 *
-	 * @param resourceSaveDTO resourceDTO
-	 * @return com.taotao.cloud.uc.biz.entity.SysResource
-	 * @author shuigedeng
-	 * @since 2020/11/11 17:21
-	 * @version 1.0.0
-	 */
-	SysResource resourceDtoToSysResource(ResourceSaveDTO resourceSaveDTO);
+	List<ResourceQueryVO> resourceBosToVos(List<ResourceBO> bos);
+	ResourceQueryVO resourceBoToVo(ResourceBO bo);
+
+	ResourceBO resourceToBo(SysResource resource);
+	List<ResourceBO> resourcesToBos(List<SysResource> resources);
+
+	SysResource dtoToResource(ResourceSaveDTO resourceSaveDTO);
 
 	/**
 	 * SysResource转ResourceVO

@@ -19,6 +19,7 @@ import com.taotao.cloud.common.exception.BaseException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.RecordComponent;
 
 /**
  * ReflectionUtil
@@ -276,7 +277,23 @@ public class ReflectionUtil {
 					if (field.getName().equalsIgnoreCase(name)) {
 						find = field;
 						return find;
-						//break;
+					}
+				}
+			}
+			cls = cls.getSuperclass();
+		}
+		return find;
+	}
+
+	public static RecordComponent findRecord(Class<?> cls, String name) {
+		RecordComponent find = null;
+		while (cls != null) {
+			RecordComponent[] recordComponents = cls.getRecordComponents();
+			if (recordComponents.length != 0) {
+				for (RecordComponent recordComponent : recordComponents) {
+					if (recordComponent.getName().equalsIgnoreCase(name)) {
+						find = recordComponent;
+						return find;
 					}
 				}
 			}

@@ -41,9 +41,9 @@ import java.lang.reflect.ParameterizedType;
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 21:14:54
+ * @since 2021-09-02 21:14:54¬
  */
-public abstract class SuperController<S extends BaseSuperService<T, I>, T extends SuperEntity<I>, I extends Serializable, QueryDTO, SaveDTO, UpdateDTO, QueryVO>
+public abstract class SuperController<S extends BaseSuperService<T, I>, T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, SaveDTO, UpdateDTO, QueryVO>
 	extends SimpleController<S, T, I> implements
 	QueryController<T, I, QueryDTO, QueryVO>,
 	SaveController<T, I, SaveDTO>,

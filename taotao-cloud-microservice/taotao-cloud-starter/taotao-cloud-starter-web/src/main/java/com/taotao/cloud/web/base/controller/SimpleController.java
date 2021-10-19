@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2021-09-02 21:15:37
  */
 public abstract class SimpleController<S extends BaseSuperService<T, I>,
-	T extends SuperEntity<I>,
+	T extends SuperEntity<T,I>,
 	I extends Serializable>
 	implements BaseController<T, I> {
 

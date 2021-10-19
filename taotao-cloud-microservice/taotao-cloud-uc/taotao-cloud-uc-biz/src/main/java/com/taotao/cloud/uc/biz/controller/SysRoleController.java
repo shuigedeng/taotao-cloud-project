@@ -20,6 +20,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.netty.annotation.PathVariable;
+import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.dto.role.RoleSaveDTO;
 import com.taotao.cloud.uc.api.dto.role.RoleUpdateDTO;
 import com.taotao.cloud.uc.biz.entity.SysRole;
@@ -57,45 +58,45 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysRoleController extends
 	SuperController<ISysRoleService<SysRole, Long>, SysRole, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
-	///**
-	// * 根据用户id获取角色列表
-	// *
-	// * @param userId 用户id
-	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.role.RoleVO&gt;&gt;}
-	// * @author shuigedeng
-	// * @since 2021-10-09 15:12:23
-	// */
-	//@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表", method = CommonConstant.GET)
-	//@RequestOperateLog(description = "根据用户id获取角色列表")
-	//@PreAuthorize("hasAuthority('sys:role:info:userId')")
-	//@GetMapping("/userId/{userId}")
-	//public Result<List<RoleQueryVO>> findRoleByUserId(
-	//	@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
-	//	@PathVariable(name = "userId") Long userId) {
-	//	List<SysRole> roles = service().findRoleByUserIds(Set.of(userId));
-	//	List<RoleQueryVO> result = RoleMapper.INSTANCE.sysUserToUserQueryVO(roles);
-	//	return success(result);
-	//}
+	/**
+	 * 根据用户id获取角色列表
+	 *
+	 * @param userId 用户id
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.role.RoleVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:12:23
+	 */
+	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表", method = CommonConstant.GET)
+	@RequestOperateLog(description = "根据用户id获取角色列表")
+	@PreAuthorize("hasAuthority('sys:role:info:userId')")
+	@GetMapping("/userId/{userId}")
+	public Result<List<RoleQueryVO>> findRoleByUserId(
+		@Parameter(description = "用户id", required = true) @NotNull(message = "用户id不能为空")
+		@PathVariable(name = "userId") Long userId) {
+		List<RoleBO> roles = service().findRoleByUserIds(Set.of(userId));
+		List<RoleQueryVO> result = RoleMapper.INSTANCE.bosToVos(roles);
+		return success(result);
+	}
 
-	///**
-	// * 根据用户id列表获取角色列表
-	// *
-	// * @param userIds 用户id列表
-	// * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.role.RoleVO&gt;&gt;}
-	// * @author shuigedeng
-	// * @since 2021-10-09 15:12:32
-	// */
-	//@Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表", method = CommonConstant.GET)
-	//@RequestOperateLog(description = "根据用户id列表获取角色列表")
-	//@PreAuthorize("hasAuthority('sys:role:info:userIds')")
-	//@GetMapping("/userId")
-	//public Result<List<RoleQueryVO>> findRoleByUserIds(
-	//	@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
-	//	@RequestParam Set<Long> userIds) {
-	//	List<SysRole> roles = service().findRoleByUserIds(userIds);
-	//	List<RoleQueryVO> result = RoleMapper.INSTANCE.sysUserToUserQueryVO(roles);
-	//	return success(result);
-	//}
+	/**
+	 * 根据用户id列表获取角色列表
+	 *
+	 * @param userIds 用户id列表
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.role.RoleVO&gt;&gt;}
+	 * @author shuigedeng
+	 * @since 2021-10-09 15:12:32
+	 */
+	@Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表", method = CommonConstant.GET)
+	@RequestOperateLog(description = "根据用户id列表获取角色列表")
+	@PreAuthorize("hasAuthority('sys:role:info:userIds')")
+	@GetMapping("/userId")
+	public Result<List<RoleQueryVO>> findRoleByUserIds(
+		@Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空")
+		@RequestParam Set<Long> userIds) {
+		List<RoleBO> roles = service().findRoleByUserIds(userIds);
+		List<RoleQueryVO> result = RoleMapper.INSTANCE.bosToVos(roles);
+		return success(result);
+	}
 
 	/**
 	 * 根据角色id更新资源信息(角色分配资源)

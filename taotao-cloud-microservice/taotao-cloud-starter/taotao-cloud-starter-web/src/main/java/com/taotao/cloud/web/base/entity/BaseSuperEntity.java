@@ -1,22 +1,15 @@
 package com.taotao.cloud.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.taotao.cloud.common.utils.SecurityUtil;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import javax.validation.groups.Default;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -31,7 +24,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseSuperEntity<I extends Serializable> extends SuperEntity<I> implements Serializable {
+public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable> extends
+	SuperEntity<T, I> implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4603650115461757622L;
@@ -49,7 +43,8 @@ public class BaseSuperEntity<I extends Serializable> extends SuperEntity<I> impl
 	@CreatedDate
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
-	private LocalDateTime lastModifiedTime;;
+	private LocalDateTime lastModifiedTime;
+	;
 
 	@LastModifiedBy
 	@Column(name = "last_modified_by", columnDefinition = "bigint comment '最后修改人'")
@@ -78,7 +73,8 @@ public class BaseSuperEntity<I extends Serializable> extends SuperEntity<I> impl
 
 	}
 
-	public BaseSuperEntity(){}
+	public BaseSuperEntity() {
+	}
 
 	public LocalDateTime getCreateTime() {
 		return createTime;

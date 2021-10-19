@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:05:45
  */
-public interface BatchController<T extends SuperEntity<I>, I extends Serializable, SaveDTO, UpdateDTO> extends
+public interface BatchController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO, UpdateDTO> extends
 	BaseController<T, I> {
 
 	/**
@@ -57,11 +58,11 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-10-11 15:32:22
 	 */
-	@Operation(summary = "通用批量操作", description = "通用批量操作", method = CommonConstant.POST)
+	@Operation(summary = "通用批量操作", description = "通用批量操作")
 	@PostMapping("/batch")
 	@RequestOperateLog(description = "通用批量操作")
 	//@PreAuthorize("hasPermission(#batchDTO, 'batch')")
-	//@PreAuthorize("@permissionVerifier.hasPermission('batch')")
+	@PreAuthorize("@permissionVerifier.hasPermission('batch')")
 	default Result<Boolean> batch(
 		@Parameter(description = "通用批量操作", required = true)
 		@RequestBody @Validated BatchDTO<SaveDTO, UpdateDTO, I> batchDTO) {
@@ -107,7 +108,7 @@ public interface BatchController<T extends SuperEntity<I>, I extends Serializabl
 			throw new BusinessException("更新数据不能为空");
 		}
 		Map<I, UpdateDTO> updateDTOMap = new HashMap<>();
-		updateDTOList.stream().forEach(updateDTO -> {
+		updateDTOList.forEach(updateDTO -> {
 			I id = updateDTO.getId();
 			UpdateDTO updateDTO1 = updateDTO.getUpdateDTO();
 			updateDTOMap.put(id, updateDTO1);

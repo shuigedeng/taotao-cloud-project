@@ -17,8 +17,6 @@ package com.taotao.cloud.web.base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 import java.util.List;
@@ -31,7 +29,8 @@ import org.apache.ibatis.annotations.Param;
  * @version 2021.9
  * @since 2021-09-02 21:17:15
  */
-public interface BaseSuperMapper<T extends SuperEntity<I>, I extends Serializable> extends BaseMapper<T> {
+public interface BaseSuperMapper<T extends SuperEntity<T, I>, I extends Serializable> extends
+	BaseMapper<T> {
 
 	/**
 	 * 全量修改所有字段

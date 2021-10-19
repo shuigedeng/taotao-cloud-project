@@ -26,7 +26,6 @@ import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
@@ -45,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +62,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 2021.9
  * @since 2021-09-02 21:07:59
  */
-public interface ExcelController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
 	PageController<T, I, QueryDTO, QueryVO> {
 
 	/**
@@ -74,12 +74,12 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:08:22
 	 */
-	@Operation(summary = "通用导出Excel", description = "通用导出Excel", method = CommonConstant.POST)
+	@Operation(summary = "通用导出Excel", description = "通用导出Excel")
 	@PostMapping(value = "/excel/export", produces = "application/octet-stream")
 	@RequestOperateLog("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
 	//@PreAuthorize("@permissionVerifier.hasPermission('export')")
 	default void export(
-		@Parameter(description = "分页查询DTO", required = true)
+		@Parameter(description = "查询DTO", required = true)
 		@RequestBody @Validated QueryDTO params,
 		HttpServletRequest request, HttpServletResponse response) {
 		ExportParams exportParams = getExportParams(params);
@@ -88,7 +88,7 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 
 		Map<String, Object> map = new HashMap<>(7);
 		if (params instanceof BaseQuery baseQuery) {
-			String fileName = baseQuery.getExeclQuery().getFileName();
+			String fileName = baseQuery.execlQuery().fileName();
 			map.put(NormalExcelConstants.FILE_NAME, fileName);
 		}
 		map.put(NormalExcelConstants.DATA_LIST, list);
@@ -107,12 +107,12 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:08:45
 	 */
-	@Operation(summary = "通用预览Excel", description = "通用预览Excel", method = CommonConstant.POST)
+	@Operation(summary = "通用预览Excel", description = "通用预览Excel")
 	@PostMapping(value = "/excel/preview")
 	@RequestOperateLog("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
 	//@PreAuthorize("@permissionVerifier.hasPermission('preview')")
 	default Result<String> preview(
-		@Parameter(description = "分页查询DTO", required = true)
+		@Parameter(description = "查询DTO", required = true)
 		@RequestBody @Validated QueryDTO params) {
 		ExportParams exportParams = getExportParams(params);
 		List<T> list = findExportList(params);
@@ -130,9 +130,9 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:09:09
 	 */
-	@Operation(summary = "通用导入Excel", description = "通用导入Excel", method = CommonConstant.POST)
+	@Operation(summary = "通用导入Excel", description = "通用导入Excel")
 	@PostMapping(value = "/excel/import", headers = "content-type=multipart/form-data")
-	@RequestOperateLog(value = "'通用导入Excel:' + #file?.originalFilename")
+	@RequestOperateLog(value = "通用导入Excel")
 	//@PreAuthorize("@permissionVerifier.hasPermission('import')")
 	default Result<Boolean> importExcel(
 		@Parameter(description = "文件", required = true) @NotNull(message = "文件不能为空")
@@ -185,12 +185,12 @@ public interface ExcelController<T extends SuperEntity<I>, I extends Serializabl
 		String sheetName = "sheetName";
 
 		if (params instanceof BaseQuery baseQuery) {
-			if (Objects.isNull(baseQuery.getExeclQuery())) {
+			if (Objects.isNull(baseQuery.execlQuery())) {
 				throw new BusinessException("execl参数不能为空");
 			}
-			title = baseQuery.getExeclQuery().getTitle();
-			type = baseQuery.getExeclQuery().getType();
-			sheetName = baseQuery.getExeclQuery().getSheetName();
+			title = baseQuery.execlQuery().title();
+			type = baseQuery.execlQuery().type();
+			sheetName = baseQuery.execlQuery().sheetName();
 		}
 
 		ExcelType excelType = ExcelType.XSSF.name().equals(type) ? ExcelType.XSSF : ExcelType.HSSF;

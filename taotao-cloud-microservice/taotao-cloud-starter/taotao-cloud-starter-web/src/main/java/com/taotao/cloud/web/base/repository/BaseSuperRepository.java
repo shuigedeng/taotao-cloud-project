@@ -23,7 +23,6 @@ import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 import java.util.List;
@@ -40,13 +39,14 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 /**
  * 基础jpa Repository
  *
- * @param <T>  the type of the entity to handle
+ * @param <T> the type of the entity to handle
  * @param <I> the type of the entity's identifier
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:32:26
  */
-public abstract class BaseSuperRepository<T extends SuperEntity<I>, I extends Serializable> extends SimpleJpaRepository<T, I> {
+public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends Serializable> extends
+	SimpleJpaRepository<T, I> {
 
 	protected final JPAQueryFactory jpaQueryFactory;
 	protected final QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor;

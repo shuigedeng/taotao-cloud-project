@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.uc.biz.repository.impl;
 
+import com.taotao.cloud.uc.biz.entity.QSysResource;
+import com.taotao.cloud.uc.biz.entity.QSysRoleResource;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
@@ -37,8 +39,8 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 		super(SysResource.class, em);
 	}
 
-	//private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;
-	//private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
+	private final static QSysResource SYS_RESOURCE = QSysResource.sysResource;
+	private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
 
 	/**
 	 * findResourceByRoleIds
@@ -49,13 +51,12 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 	 * @since 2021-10-09 20:42:23
 	 */
 	public List<SysResource> findResourceByRoleIds(Set<Long> roleIds) {
-		//return jpaQueryFactory.select(SYS_RESOURCE)
-		//	.from(SYS_RESOURCE)
-		//	.innerJoin(SYS_ROLE_RESOURCE)
-		//	.on(SYS_RESOURCE.id.eq(SYS_ROLE_RESOURCE.resourceId))
-		//	.where(SYS_ROLE_RESOURCE.roleId.in(roleIds))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory.select(SYS_RESOURCE)
+			.from(SYS_RESOURCE)
+			.innerJoin(SYS_ROLE_RESOURCE)
+			.on(SYS_RESOURCE.id.eq(SYS_ROLE_RESOURCE.resourceId))
+			.where(SYS_ROLE_RESOURCE.roleId.in(roleIds))
+			.fetch();
 	}
 
 	/**
@@ -67,10 +68,9 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 	 * @since 2021-10-09 20:42:27
 	 */
 	public List<SysResource> findResourceByParentId(Long parentId) {
-		//return jpaQueryFactory.selectFrom(SYS_RESOURCE)
-		//	.where(SYS_RESOURCE.parentId.eq(parentId))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory.selectFrom(SYS_RESOURCE)
+			.where(SYS_RESOURCE.parentId.eq(parentId))
+			.fetch();
 	}
 
 	/**
@@ -82,11 +82,10 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 	 * @since 2021-10-09 20:42:31
 	 */
 	public List<Long> selectIdList(List<Long> pidList) {
-		//return jpaQueryFactory.select(SYS_RESOURCE.id)
-		//	.from(SYS_RESOURCE)
-		//	.where(SYS_RESOURCE.parentId.in(pidList))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory.select(SYS_RESOURCE.id)
+			.from(SYS_RESOURCE)
+			.where(SYS_RESOURCE.parentId.in(pidList))
+			.fetch();
 	}
 
 	/**
@@ -98,11 +97,10 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 	 * @since 2021-10-09 20:42:35
 	 */
 	public List<SysResource> findResourceByIdList(List<Long> idList) {
-		//return jpaQueryFactory
-		//	.selectFrom(SYS_RESOURCE)
-		//	.where(SYS_RESOURCE.id.in(idList))
-		//	.fetch();
-		return null;
+		return jpaQueryFactory
+			.selectFrom(SYS_RESOURCE)
+			.where(SYS_RESOURCE.id.in(idList))
+			.fetch();
 	}
 
 	/**
@@ -113,12 +111,10 @@ public class SysResourceRepository extends BaseSuperRepository<SysResource, Long
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:42:39
 	 */
-	public Optional<SysResource> findResourceByName(String name) {
-		//SysResource resource = jpaQueryFactory
-		//	.selectFrom(SYS_RESOURCE)
-		//	.where(SYS_RESOURCE.name.eq(name))
-		//	.fetchOne();
-		//return Optional.ofNullable(resource);
-		return null;
+	public SysResource findResourceByName(String name) {
+		return jpaQueryFactory
+			.selectFrom(SYS_RESOURCE)
+			.where(SYS_RESOURCE.name.eq(name))
+			.fetchOne();
 	}
 }

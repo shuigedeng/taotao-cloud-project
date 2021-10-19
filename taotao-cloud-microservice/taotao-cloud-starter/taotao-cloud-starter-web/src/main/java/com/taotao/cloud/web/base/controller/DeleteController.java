@@ -30,6 +30,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -42,7 +43,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @version 2021.9
  * @since 2021-09-02 21:05:45
  */
-public interface DeleteController<T extends SuperEntity<I>, I extends Serializable> extends
+public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseController<T, I> {
 
 	/**
@@ -53,10 +54,10 @@ public interface DeleteController<T extends SuperEntity<I>, I extends Serializab
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:06:18
 	 */
-	@Operation(summary = "通用单体id删除", description = "通用单体id删除", method = CommonConstant.DELETE)
+	@Operation(summary = "通用单体id删除", description = "通用单体id删除")
 	@DeleteMapping("/{id:[0-9]*}")
 	@RequestOperateLog(description = "通用单体id删除")
-	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteById(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {

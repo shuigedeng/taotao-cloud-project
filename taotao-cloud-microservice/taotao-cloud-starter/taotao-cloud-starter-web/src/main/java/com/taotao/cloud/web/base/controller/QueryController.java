@@ -31,6 +31,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +49,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:11:18
  */
-public interface QueryController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+public interface QueryController<T extends SuperEntity<T,I>, I extends Serializable, QueryDTO, QueryVO> extends
 	PageController<T, I, QueryDTO, QueryVO> {
 
 	/**
@@ -59,9 +60,9 @@ public interface QueryController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:11:48
 	 */
-	@Operation(summary = "通用单体查询", description = "通用单体查询", method = CommonConstant.GET)
+	@Operation(summary = "通用单体查询", description = "通用单体查询")
 	@GetMapping("/{id:[0-9]*}")
-	@RequestOperateLog("'查询:' + #id")
+	@RequestOperateLog("通用单体查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('get')")
 	default Result<QueryVO> get(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
@@ -82,7 +83,7 @@ public interface QueryController<T extends SuperEntity<I>, I extends Serializabl
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:12:04
 	 */
-	@Operation(summary = "通用批量查询", description = "通用批量查询", method = CommonConstant.POST)
+	@Operation(summary = "通用批量查询", description = "通用批量查询")
 	@PostMapping("/query")
 	@RequestOperateLog(value = "通用批量查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('query')")

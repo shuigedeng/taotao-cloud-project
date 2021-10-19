@@ -15,8 +15,14 @@
  */
 package com.taotao.cloud.order.biz.mapstruct;
 
+import com.taotao.cloud.order.api.OrderDO;
+import com.taotao.cloud.order.api.OrderQueryBO;
+import com.taotao.cloud.order.api.OrderReponseVO;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
+import com.taotao.cloud.order.api.OrderBO;
+import com.taotao.cloud.order.api.OrderDTO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
+import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -33,6 +39,11 @@ import org.mapstruct.factory.Mappers;
 public interface OrderMapStruct {
 
 	OrderMapStruct INSTANCE = Mappers.getMapper(OrderMapStruct.class);
+
+	OrderBO dtoToBo(OrderDTO dto);
+	List<OrderQueryBO> dosToBos(List<OrderDO> dos);
+	List<OrderReponseVO> bosToVos(List<OrderQueryBO> bos);
+	List<OrderDO> entitysToDos(List<OrderInfo> entitys);
 
 	/**
 	 * order转OrderVO

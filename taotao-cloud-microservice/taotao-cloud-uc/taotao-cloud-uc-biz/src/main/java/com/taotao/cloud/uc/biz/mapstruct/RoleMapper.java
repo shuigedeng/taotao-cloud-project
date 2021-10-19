@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.uc.biz.mapstruct;
 
+import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
+import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.dto.role.RoleQueryDTO;
+import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
+import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
@@ -39,6 +43,15 @@ import org.mapstruct.factory.Mappers;
 public interface RoleMapper {
 
 	RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
+
+	List<RoleQueryVO> bosToVos(List<RoleBO> bos);
+	RoleQueryVO boToVo(RoleBO bo);
+
+	RoleBO roleToBo(SysRole role);
+	List<RoleBO> rolesToBos(List<SysRole> roles);
+
+	RoleBO roToBo(Ro role);
+	Ro roleToRo(SysRole role);
 
 	/**
 	 * SysRole转RoleQueryVO

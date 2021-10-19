@@ -16,6 +16,7 @@
 package com.taotao.cloud.log.aspect;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
@@ -25,6 +26,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -161,15 +163,19 @@ public class RequestLogAspect {
 
 			RequestLog requestLog = get();
 			if(Objects.nonNull(ret)){
-				R r = Convert.convert(R.class, ret);
-				if (r.getCode() == HttpStatus.OK.value()) {
-					requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
-				} else {
-					requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
-					requestLog.setExDetail(r.getMsg());
-				}
-				if (requestOperateLog.response()) {
-					requestLog.setResult(getText(r.toString()));
+				try {
+					Result<?> r = Convert.convert(Result.class, ret);
+					if (r.code() == HttpStatus.OK.value()) {
+						requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
+					} else {
+						requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
+						requestLog.setExDetail(r.errorMsg());
+					}
+					if (requestOperateLog.response()) {
+						requestLog.setResult(getText(r.toString()));
+					}
+				} catch (ConvertException e) {
+					LogUtil.error(e);
 				}
 			}
 			requestLog.setTenantId(TenantContextHolder.getTenant());

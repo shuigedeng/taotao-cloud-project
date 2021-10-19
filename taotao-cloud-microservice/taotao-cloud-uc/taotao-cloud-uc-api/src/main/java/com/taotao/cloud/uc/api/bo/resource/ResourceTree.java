@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.api.vo.resource;
+package com.taotao.cloud.uc.api.bo.resource;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -107,7 +107,7 @@ public class ResourceTree extends TreeNode implements Serializable {
 		this.label = name;
 	}
 
-	public ResourceTree(ResourceQueryVO resourceQueryVO) {
+	public ResourceTree(ResourceBO resourceQueryVO) {
 		super();
 		super.setId(resourceQueryVO.getId());
 		super.setParentId(resourceQueryVO.getParentId());

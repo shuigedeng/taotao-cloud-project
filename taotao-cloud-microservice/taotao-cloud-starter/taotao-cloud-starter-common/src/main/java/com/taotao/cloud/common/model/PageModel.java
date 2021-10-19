@@ -20,7 +20,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,47 +35,35 @@ import org.springframework.data.domain.Page;
  * @since 2021-09-02 19:09:19
  */
 @Schema(description = "分页结果对象")
-public class PageModel<R> implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -275582248840137389L;
+public record PageModel<R>(
 	/**
 	 * 总条数
 	 */
 	@Schema(description = "总条数")
-	private long totalSize;
+	long totalSize,
 	/**
 	 * 总页数
 	 */
 	@Schema(description = "总页数")
-	private int totalPage;
+	int totalPage,
 	/**
 	 * 当前第几页
 	 */
 	@Schema(description = "当前第几页")
-	private int currentPage;
+	int currentPage,
 	/**
 	 * 每页显示条数
 	 */
 	@Schema(description = "每页显示条数")
-	private int pageSize;
+	int pageSize,
 	/**
 	 * 返回数据
 	 */
 	@Schema(description = "返回数据")
-	private List<R> data;
+	List<R> data) implements Serializable {
 
-	public PageModel() {
-	}
-
-	public PageModel(long totalSize, int totalPage, int currentPage, int pageSize,
-		List<R> data) {
-		this.totalSize = totalSize;
-		this.totalPage = totalPage;
-		this.currentPage = currentPage;
-		this.pageSize = pageSize;
-		this.data = data;
-	}
+	@Serial
+	private static final long serialVersionUID = -275582248840137389L;
 
 	/**
 	 * convertJpaPage
@@ -87,9 +74,9 @@ public class PageModel<R> implements Serializable {
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:10:45
 	 */
-	public static <R, T> PageModel<R> convertJpaPage(Page<T> page ,Class<R> r) {
+	public static <R, T> PageModel<R> convertJpaPage(Page<T> page, Class<R> r) {
 		List<T> records = page.getContent();
-		List<R> collect = Optional.ofNullable(records)
+		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
 			.map(t -> BeanUtil.toBean(t, r)).collect(Collectors.toList());
@@ -147,103 +134,6 @@ public class PageModel<R> implements Serializable {
 		int currentPage,
 		int pageSize,
 		List<R> data) {
-		return PageModel.<R>builder()
-			.totalSize(totalSize)
-			.totalPage(totalPage)
-			.currentPage(currentPage)
-			.pageSize(pageSize)
-			.data(data)
-			.build();
-	}
-
-	public long getTotalSize() {
-		return totalSize;
-	}
-
-	public void setTotalSize(long totalSize) {
-		this.totalSize = totalSize;
-	}
-
-	public int getTotalPage() {
-		return totalPage;
-	}
-
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public List<R> getData() {
-		return data;
-	}
-
-	public void setData(List<R> data) {
-		this.data = data;
-	}
-
-	public static <R> PageModelBuilder<R> builder() {
-		return new PageModelBuilder<>();
-	}
-
-	public static final class PageModelBuilder<R> {
-
-		private long totalSize;
-		private int totalPage;
-		private int currentPage;
-		private int pageSize;
-		private List<R> data;
-
-		private PageModelBuilder() {
-		}
-
-		public PageModelBuilder totalSize(long totalSize) {
-			this.totalSize = totalSize;
-			return this;
-		}
-
-		public PageModelBuilder totalPage(int totalPage) {
-			this.totalPage = totalPage;
-			return this;
-		}
-
-		public PageModelBuilder currentPage(int currentPage) {
-			this.currentPage = currentPage;
-			return this;
-		}
-
-		public PageModelBuilder pageSize(int pageSize) {
-			this.pageSize = pageSize;
-			return this;
-		}
-
-		public PageModelBuilder data(List<R> data) {
-			this.data = data;
-			return this;
-		}
-
-		public PageModel build() {
-			PageModel pageModel = new PageModel();
-			pageModel.setTotalSize(totalSize);
-			pageModel.setTotalPage(totalPage);
-			pageModel.setCurrentPage(currentPage);
-			pageModel.setPageSize(pageSize);
-			pageModel.setData(data);
-			return pageModel;
-		}
+		return new PageModel<>(totalSize, totalPage, currentPage, pageSize, data);
 	}
 }

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @TableName(OrderPaySeq.TABLE_NAME)
 @Table(name = OrderPaySeq.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderPaySeq.TABLE_NAME, comment = "订单支付流水表")
-public class OrderPaySeq extends BaseSuperEntity<Long> {
+public class OrderPaySeq extends BaseSuperEntity<OrderPaySeq, Long> {
 
 	public static final String TABLE_NAME = "order_pay_seq";
 

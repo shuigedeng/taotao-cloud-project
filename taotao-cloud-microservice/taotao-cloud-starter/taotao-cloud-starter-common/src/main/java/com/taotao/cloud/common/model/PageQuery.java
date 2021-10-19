@@ -42,11 +42,7 @@ import org.springframework.data.domain.Sort.Order;
  * @since 2021-09-02 19:09:09
  */
 @Schema(name = "PageQuery", description = "通用分页查询Query")
-public class PageQuery<QueryDTO> implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -2483306509077581330L;
-
+public record PageQuery<QueryDTO>(
 	/**
 	 * 当前第几页
 	 */
@@ -54,8 +50,7 @@ public class PageQuery<QueryDTO> implements Serializable {
 	@NotNull(message = "当前页显示数量不能为空")
 	@Min(value = 0)
 	@Max(value = Integer.MAX_VALUE)
-	private Integer currentPage = 1;
-
+	Integer currentPage,
 	/**
 	 * 每页显示条数
 	 */
@@ -63,40 +58,42 @@ public class PageQuery<QueryDTO> implements Serializable {
 	@NotNull(message = "每页数据显示数量不能为空")
 	@Min(value = 5)
 	@Max(value = 100)
-	private Integer pageSize = 10;
-
+	Integer pageSize,
 	/**
 	 * 查询参数
 	 */
-	@Schema(description = "查询参数")
-	private QueryDTO query;
+	@Schema(description = "查询参数对象")
+	QueryDTO query) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = -2483306509077581330L;
 
 	/**
 	 * 支持多个字段排序，用法： eg.1, 参数：{order:"name,id", order:"desc,asc" }。 排序： name desc, id asc eg.2,
 	 * 参数：{order:"name", order:"desc,asc" }。 排序： name desc eg.3, 参数：{order:"name,id", order:"desc"
 	 * }。 排序： name desc
 	 *
-	 * @return {@link com.baomidou.mybatisplus.core.metadata.IPage }
+	 * @return {@link IPage }
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:19:05
 	 */
 	@JsonIgnore
 	public <T> IPage<T> buildMpPage() {
 		PageQuery<QueryDTO> params = this;
-		QueryDTO query = params.getQuery();
+		QueryDTO query = params.query();
 
 		com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(
-			params.getCurrentPage(), params.getPageSize());
+			params.currentPage(), params.pageSize());
 		if (query instanceof BaseQuery baseQuery) {
 			//没有排序参数
-			if (CollectionUtil.isEmpty(baseQuery.getSortQuery())) {
+			if (CollectionUtil.isEmpty(baseQuery.sortQuery())) {
 				return page;
 			}
 
 			List<OrderItem> orders = new ArrayList<>();
-			baseQuery.getSortQuery().forEach(sortDTO -> {
-				String filed = sortDTO.getFiled();
-				String order = sortDTO.getOrder();
+			baseQuery.sortQuery().forEach(sortDTO -> {
+				String filed = sortDTO.filed();
+				String order = sortDTO.order();
 				// 驼峰转下划线
 				String underlineSort = StrUtil.toUnderlineCase(filed);
 				// 除了 createTime 和 updateTime 都过滤sql关键字
@@ -119,16 +116,16 @@ public class PageQuery<QueryDTO> implements Serializable {
 	@JsonIgnore
 	public Pageable buildJpaPage() {
 		PageQuery<QueryDTO> params = this;
-		QueryDTO query = params.getQuery();
+		QueryDTO query = params.query();
 		if (query instanceof BaseQuery baseQuery) {
-			if (CollectionUtil.isEmpty(baseQuery.getSortQuery())) {
-				return PageRequest.of(params.getCurrentPage(), params.getPageSize());
+			if (CollectionUtil.isEmpty(baseQuery.sortQuery())) {
+				return PageRequest.of(params.currentPage(), params.pageSize());
 			}
 
 			List<Order> orders = new ArrayList<>();
-			baseQuery.getSortQuery().forEach(sortDTO -> {
-				String filed = sortDTO.getFiled();
-				String order = sortDTO.getOrder();
+			baseQuery.sortQuery().forEach(sortDTO -> {
+				String filed = sortDTO.filed();
+				String order = sortDTO.order();
 				// 驼峰转下划线
 				String underlineSort = StrUtil.toUnderlineCase(filed);
 				// 除了 createTime 和 updateTime 都过滤sql关键字
@@ -142,9 +139,9 @@ public class PageQuery<QueryDTO> implements Serializable {
 					orders.add(Order.desc(underlineSort));
 				}
 			});
-			return PageRequest.of(params.getCurrentPage(), params.getPageSize(), Sort.by(orders));
+			return PageRequest.of(params.currentPage(), params.pageSize(), Sort.by(orders));
 		}
-		return PageRequest.of(params.getCurrentPage(), params.getPageSize());
+		return PageRequest.of(params.currentPage(), params.pageSize());
 	}
 
 	@JsonIgnore
@@ -154,29 +151,5 @@ public class PageQuery<QueryDTO> implements Serializable {
 			return 0L;
 		}
 		return (current - 1) * this.pageSize;
-	}
-
-	public Integer getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public Integer getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(Integer pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public QueryDTO getQuery() {
-		return query;
-	}
-
-	public void setQuery(QueryDTO query) {
-		this.query = query;
 	}
 }

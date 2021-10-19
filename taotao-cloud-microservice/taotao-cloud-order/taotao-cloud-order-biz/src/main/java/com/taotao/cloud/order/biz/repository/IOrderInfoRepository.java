@@ -15,12 +15,15 @@
  */
 package com.taotao.cloud.order.biz.repository;
 
+import com.taotao.cloud.order.api.OrderDO;
+import com.taotao.cloud.order.api.OrderQueryDO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -37,4 +40,18 @@ public interface IOrderInfoRepository extends JpaRepository<OrderInfo, Long> {
 	List<OrderInfo> findOrderInfoById(Long id);
 
 	OrderInfo findByCode(String code);
+
+	@Query(value = """
+            select new com.taotao.cloud.order.api.OrderDO(
+				u.memberId,
+				u.code,
+				u.mainStatus,
+				u.childStatus,
+				u.amount,
+				u.receiverName
+			)
+			from OrderInfo u 
+			where u.code = :code
+		""")
+	List<OrderDO> findOrderInfoByBo(@Param("code") String code);
 }

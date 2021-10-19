@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.base.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.core.lock.DistributedLock;
@@ -23,8 +22,6 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Map;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -34,7 +31,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version v1.0
  * @since 2021/10/10 12:53
  */
-public interface BaseSuperService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface BaseSuperService<T extends SuperEntity<T, I>, I extends Serializable> extends
 	IService<T> {
 
 	/**

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author shuigedeng
  * @since 2020/4/30 11:03
  */
-public interface IOrderItemService<T extends BaseSuperEntity<I>, I extends Serializable> extends
+public interface IOrderItemService<T extends BaseSuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 }

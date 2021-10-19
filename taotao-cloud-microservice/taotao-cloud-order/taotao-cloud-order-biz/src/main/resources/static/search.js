@@ -12,6 +12,12 @@ api[0].list.push({
     desc: '订单管理API',
     list: []
 })
+api[0].list[0].list.push({
+    order: '1',
+    deprecated: 'false',
+    url: 'http://dev.taotaocloud.com/api/v2021.10.1/order/exists/id',
+    desc: '根据用户id查询用户是否存在',
+});
 api[0].list.push({
     alias: 'OrderItemController',
     order: '2',
@@ -19,52 +25,21 @@ api[0].list.push({
     desc: '订单项管理API',
     list: []
 })
-api[0].list[1].list.push({
-    order: '1',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/order/item/save',
-    desc: '添加订单项信息',
-});
-api[0].list.push({
-    alias: 'ExcelController',
-    order: '3',
-    link: 'poicontroller',
-    desc: 'PoiController',
-    list: []
-})
-api[0].list[2].list.push({
-    order: '1',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/export',
-    desc: '通用导出Excel',
-});
-api[0].list[2].list.push({
-    order: '2',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/preview',
-    desc: '通用预览Excel',
-});
-api[0].list[2].list.push({
-    order: '3',
-    deprecated: 'false',
-    url: 'http://dev.taotaocloud.com/api/v2021.10.1/excel/import',
-    desc: '通用导入Excel使用自动生成的实体+注解方式导入对RemoteData类型的字段不支持，建议自建实体使用',
-});
 api[0].list.push({
     alias: 'error',
-    order: '4',
+    order: '3',
     link: 'error_code_list',
     desc: '错误码列表',
     list: []
 })
 api[0].list.push({
     alias: 'dict',
-    order: '5',
+    order: '4',
     link: 'dict_list',
     desc: '数据字典',
     list: []
 })
-api[0].list[4].list.push({
+api[0].list[3].list.push({
     order: '1',
     deprecated: 'false',
     url: '',

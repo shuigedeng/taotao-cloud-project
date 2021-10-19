@@ -17,7 +17,6 @@ package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageQuery;
@@ -47,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:06:58
  */
-public interface PageController<T extends SuperEntity<I>, I extends Serializable, QueryDTO, QueryVO> extends
+public interface PageController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
 	BaseController<T, I> {
 
 	/**
@@ -58,7 +57,7 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 	 * @author shuigedeng
 	 * @since 2021-09-02 21:11:55
 	 */
-	@Operation(summary = "通用分页查询", description = "通用分页查询", method = CommonConstant.POST)
+	@Operation(summary = "通用分页查询", description = "通用分页查询")
 	@PostMapping("/page")
 	@RequestOperateLog(value = "通用分页查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('page')")
@@ -94,7 +93,7 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 		handlerQueryParams(params);
 
 		IPage<T> page = params.buildMpPage();
-		QueryWrap<T> wrapper = handlerWrapper(params.getQuery());
+		QueryWrap<T> wrapper = handlerWrapper(params.query());
 		IPage<T> data = service().page(page, wrapper);
 		handlerResult(data);
 		return data;
@@ -112,57 +111,57 @@ public interface PageController<T extends SuperEntity<I>, I extends Serializable
 		QueryWrap<T> wrapper = Wraps.q(getEntityClass());
 
 		if (params instanceof BaseQuery baseQuery) {
-			Optional.ofNullable(baseQuery.getEqQuery())
+			Optional.ofNullable(baseQuery.eqQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
-				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.getFiled()))
-				.filter(eqDTO -> checkField(eqDTO.getFiled()))
+				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.filed()))
+				.filter(eqDTO -> checkField(eqDTO.filed()))
 				.forEach(eqDTO -> {
-					wrapper.eq(StrUtil.toUnderlineCase(eqDTO.getFiled()), eqDTO.getValue());
+					wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value());
 				});
 
-			Optional.ofNullable(baseQuery.getDateTimeBetweenQuery())
+			Optional.ofNullable(baseQuery.dateTimeBetweenQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
-				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.getFiled()))
-				.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.getFiled()))
+				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.filed()))
+				.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.filed()))
 				.forEach(dateTimeBetweenDTO -> {
-					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.getFiled()),
-						dateTimeBetweenDTO.getStartTime(),
-						dateTimeBetweenDTO.getEndTime());
+					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
+						dateTimeBetweenDTO.startTime(),
+						dateTimeBetweenDTO.endTime());
 				});
 
-			Optional.ofNullable(baseQuery.getLikeQuery())
+			Optional.ofNullable(baseQuery.likeQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
-				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.getFiled()))
-				.filter(likeDTO -> checkField(likeDTO.getFiled()))
+				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.filed()))
+				.filter(likeDTO -> checkField(likeDTO.filed()))
 				.forEach(likeDTO -> {
-					wrapper.like(StrUtil.toUnderlineCase(likeDTO.getFiled()), likeDTO.getValue());
+					wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()), likeDTO.value());
 				});
 
-			Optional.ofNullable(baseQuery.getInQuery())
+			Optional.ofNullable(baseQuery.inQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
-				.filter(inDTO -> StrUtil.isNotBlank(inDTO.getFiled()))
-				.filter(inDTO -> checkField(inDTO.getFiled()))
+				.filter(inDTO -> StrUtil.isNotBlank(inDTO.filed()))
+				.filter(inDTO -> checkField(inDTO.filed()))
 				.forEach(inDTO -> {
-					wrapper.in(StrUtil.toUnderlineCase(inDTO.getFiled()), inDTO.getValues());
+					wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values());
 				});
 
-			Optional.ofNullable(baseQuery.getNotInQuery())
+			Optional.ofNullable(baseQuery.notInQuery())
 				.orElse(new ArrayList<>())
 				.stream()
 				.filter(Objects::nonNull)
-				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.getFiled()))
-				.filter(notInDTO -> checkField(notInDTO.getFiled()))
+				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.filed()))
+				.filter(notInDTO -> checkField(notInDTO.filed()))
 				.forEach(notInDTO -> {
-					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.getFiled()),
-						notInDTO.getValues());
+					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
+						notInDTO.values());
 				});
 		}
 		wrapper.isNotNull("id");

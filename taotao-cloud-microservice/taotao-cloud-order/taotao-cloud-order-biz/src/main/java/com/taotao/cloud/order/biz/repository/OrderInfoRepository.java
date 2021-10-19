@@ -16,8 +16,10 @@
 package com.taotao.cloud.order.biz.repository;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.order.api.OrderDO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.biz.mapstruct.OrderMapStruct;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -45,4 +47,11 @@ public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
 		return fetch;
 	}
 
+	public List<OrderDO> findOrderInfoByBo(String code) {
+		List<OrderInfo> fetch = jpaQueryFactory.selectFrom(ORDER_INFO)
+			.where(ORDER_INFO.code.eq(code))
+			.fetch();
+		List<OrderDO> orderDOS = OrderMapStruct.INSTANCE.entitysToDos(fetch);
+		return orderDOS;
+	}
 }

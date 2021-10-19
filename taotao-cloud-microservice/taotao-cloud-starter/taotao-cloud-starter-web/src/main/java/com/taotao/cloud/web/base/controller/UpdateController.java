@@ -17,7 +17,6 @@ package com.taotao.cloud.web.base.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -42,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:15:51
  */
-public interface UpdateController<T extends SuperEntity<I>, I extends Serializable, UpdateDTO> extends
+public interface UpdateController<T extends SuperEntity<T, I>, I extends Serializable, UpdateDTO> extends
 	BaseController<T, I> {
 
 	/**
@@ -54,9 +53,9 @@ public interface UpdateController<T extends SuperEntity<I>, I extends Serializab
 	 * @author shuigedeng
 	 * @since 2021-10-11 17:00:12
 	 */
-	@Operation(summary = "通用单体更新", description = "通用单体更新", method = CommonConstant.PUT)
+	@Operation(summary = "通用单体更新", description = "通用单体更新")
 	@PutMapping("/{id:[0-9]*}")
-	@RequestOperateLog(value = "'通用单体更新:' + #id", request = false)
+	@RequestOperateLog(value = "通用单体更新", request = false)
 	//@PreAuthorize("@permissionVerifier.hasPermission('update')")
 	default Result<Boolean> update(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")

@@ -36,7 +36,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public class BaseSuperServiceImpl<
 	M extends BaseSuperMapper<T, I>,
-	T extends SuperEntity<I>,
+	T extends SuperEntity<T, I>,
 	CR extends BaseSuperRepository<T, I>,
 	IR extends JpaRepository<T, I>,
 	I extends Serializable> extends ServiceImpl<M, T> implements BaseSuperService<T, I> {

@@ -16,8 +16,6 @@
 package com.taotao.cloud.common.model;
 
 import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
@@ -25,7 +23,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import org.slf4j.MDC;
 
 /**
@@ -36,61 +33,40 @@ import org.slf4j.MDC;
  * @since 2020/4/29 15:15
  */
 @Schema(description = "返回结果对象")
-@JsonInclude(Include.ALWAYS)
-public class Result<T> implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -3685249101751401211L;
-
+public record Result<T>(
 	/**
 	 * 状态码
 	 */
-	@Schema(description = "状态码", required = true)
-	private int code;
-
+	@Schema(description = "状态码")
+	int code,
 	/**
 	 * 返回数据
 	 */
-	@Schema(description = "返回数据")
-	private T data;
-
+	@Schema(name = "data", title = "返回数据xxxxx", description = "返回数据")
+	T data,
 	/**
 	 * 是否成功
 	 */
 	@Schema(description = "是否成功")
-	private boolean success;
-
+	boolean success,
 	/**
 	 * 异常消息体
 	 */
 	@Schema(description = "异常消息体")
-	private String errorMsg;
-
+	String errorMsg,
 	/**
 	 * 请求id
 	 */
 	@Schema(description = "请求id")
-	private String requestId;
-
+	String requestId,
 	/**
 	 * 请求结束时间
 	 */
 	@Schema(description = "请求结束时间")
-	private LocalDateTime timestamp;
+	LocalDateTime timestamp) implements Serializable {
 
-	public Result() {
-	}
-
-	public Result(int code, T data, boolean success, String errorMsg, String requestId,
-		LocalDateTime timestamp) {
-		this.code = code;
-		this.data = data;
-		this.success = success;
-		this.errorMsg = errorMsg;
-		this.requestId = requestId;
-		this.timestamp = timestamp;
-	}
-
+	@Serial
+	private static final long serialVersionUID = -3685249101751401211L;
 
 	/**
 	 * of
@@ -105,16 +81,13 @@ public class Result<T> implements Serializable {
 	 * @since 2021-09-02 19:12:35
 	 */
 	public static <T> Result<T> of(int code, T data, boolean success, String errorMsg) {
-		return Result
-			.<T>builder()
-			.code(code)
-			.data(data)
-			.success(success)
-			.errorMsg(errorMsg)
-			.timestamp(LocalDateTime.now())
-			.requestId(StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC
-				.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr())
-			.build();
+		return new Result<>(code,
+			data,
+			success,
+			errorMsg
+			, StrUtil.isNotBlank(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID)) ? MDC.get(
+			CommonConstant.TAOTAO_CLOUD_TRACE_ID) : IdGeneratorUtil.getIdStr(),
+			LocalDateTime.now());
 	}
 
 	/**
@@ -128,17 +101,6 @@ public class Result<T> implements Serializable {
 	 */
 	public static <T> Result<T> success(T data) {
 		return of(ResultEnum.SUCCESS.getCode(), data, CommonConstant.SUCCESS, "");
-	}
-
-	/**
-	 * success
-	 *
-	 * @return {@link com.taotao.cloud.common.model.Result }
-	 * @author shuigedeng
-	 * @since 2021-09-02 19:15:07
-	 */
-	public static Result<Boolean> success() {
-		return success(true);
 	}
 
 	/**
@@ -273,141 +235,4 @@ public class Result<T> implements Serializable {
 		return of(ResultEnum.ERROR.getCode(), null, CommonConstant.ERROR, errorMsg);
 	}
 
-	@Override
-	public String toString() {
-		return "Result{" +
-			"code=" + code +
-			", data=" + data +
-			", success=" + success +
-			", errorMsg='" + errorMsg + '\'' +
-			", requestId='" + requestId + '\'' +
-			", timestamp=" + timestamp +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Result<?> result = (Result<?>) o;
-		return code == result.code && success == result.success && Objects.equals(data,
-			result.data) && Objects.equals(errorMsg, result.errorMsg)
-			&& Objects.equals(requestId, result.requestId) && Objects.equals(
-			timestamp, result.timestamp);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(code, data, success, errorMsg, requestId, timestamp);
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
-	}
-
-	public boolean isSuccess() {
-		return success;
-	}
-
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
-
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
-
-	public String getRequestId() {
-		return requestId;
-	}
-
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
-	}
-
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	public static ResultBuilder builder() {
-		return new ResultBuilder();
-	}
-
-	public static final class ResultBuilder<T> {
-
-		private int code;
-		private T data;
-		private boolean success;
-		private String errorMsg;
-		private String requestId;
-		private LocalDateTime timestamp;
-
-		private ResultBuilder() {
-		}
-
-		public ResultBuilder<T> code(int code) {
-			this.code = code;
-			return this;
-		}
-
-		public ResultBuilder data(T data) {
-			this.data = data;
-			return this;
-		}
-
-		public ResultBuilder success(boolean success) {
-			this.success = success;
-			return this;
-		}
-
-		public ResultBuilder errorMsg(String errorMsg) {
-			this.errorMsg = errorMsg;
-			return this;
-		}
-
-		public ResultBuilder requestId(String requestId) {
-			this.requestId = requestId;
-			return this;
-		}
-
-		public ResultBuilder timestamp(LocalDateTime timestamp) {
-			this.timestamp = timestamp;
-			return this;
-		}
-
-		public Result build() {
-			Result result = new Result();
-			result.setCode(code);
-			result.setData(data);
-			result.setSuccess(success);
-			result.setErrorMsg(errorMsg);
-			result.setRequestId(requestId);
-			result.setTimestamp(timestamp);
-			return result;
-		}
-	}
 }

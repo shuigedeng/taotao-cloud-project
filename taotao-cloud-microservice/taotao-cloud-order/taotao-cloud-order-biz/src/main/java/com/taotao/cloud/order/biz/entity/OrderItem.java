@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @TableName(OrderItem.TABLE_NAME)
 @Table(name = OrderItem.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderItem.TABLE_NAME, comment = "订单明细表")
-public class OrderItem extends BaseSuperEntity<Long> {
+public class OrderItem extends BaseSuperEntity<OrderItem,Long> {
 
 	public static final String TABLE_NAME = "order_item";
 

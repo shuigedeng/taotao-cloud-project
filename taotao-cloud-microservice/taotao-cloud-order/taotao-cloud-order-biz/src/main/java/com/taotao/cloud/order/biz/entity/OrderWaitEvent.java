@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @TableName(OrderWaitEvent.TABLE_NAME)
 @Table(name = OrderWaitEvent.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = OrderWaitEvent.TABLE_NAME, comment = "订单定时任务处理表")
-public class OrderWaitEvent extends BaseSuperEntity<Long> {
+public class OrderWaitEvent extends BaseSuperEntity<OrderWaitEvent, Long> {
 
 	public static final String TABLE_NAME = "order_wait_event";
 
@@ -40,17 +40,6 @@ public class OrderWaitEvent extends BaseSuperEntity<Long> {
 	@Column(name = "trigger_time", columnDefinition = "TIMESTAMP comment '触发时间'")
 	private LocalDateTime triggerTime;
 
-	@Override
-	public String toString() {
-		return "OrderWaitEvent{" +
-			"eventType=" + eventType +
-			", eventStatus=" + eventStatus +
-			", triggerTime=" + triggerTime +
-			", eventResult='" + eventResult + '\'' +
-			", refundCode='" + refundCode + '\'' +
-			"} " + super.toString();
-	}
-
 	/**
 	 * 事件处理结果
 	 */
@@ -59,30 +48,6 @@ public class OrderWaitEvent extends BaseSuperEntity<Long> {
 
 	@Column(name = "refund_code", columnDefinition = "varchar(256) not null comment 'refundCode'")
 	private String refundCode;
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		if (!super.equals(o)) {
-			return false;
-		}
-		OrderWaitEvent that = (OrderWaitEvent) o;
-		return Objects.equals(eventType, that.eventType) && Objects.equals(
-			eventStatus, that.eventStatus) && Objects.equals(triggerTime,
-			that.triggerTime) && Objects.equals(eventResult, that.eventResult)
-			&& Objects.equals(refundCode, that.refundCode);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), eventType, eventStatus, triggerTime, eventResult,
-			refundCode);
-	}
 
 	public Integer getEventType() {
 		return eventType;
