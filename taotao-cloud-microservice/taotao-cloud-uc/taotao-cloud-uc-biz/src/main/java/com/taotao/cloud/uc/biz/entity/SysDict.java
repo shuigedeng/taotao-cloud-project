@@ -35,7 +35,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = SysDict.TABLE_NAME)
 @TableName(SysDict.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysDict.TABLE_NAME, comment = "字典表")
-public class SysDict extends SuperEntity<Long> {
+public class SysDict extends SuperEntity<SysDict,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_dict";
 

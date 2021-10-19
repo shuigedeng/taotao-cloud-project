@@ -33,7 +33,7 @@ import javax.validation.constraints.Pattern;
 @TableName(SysCompany.TABLE_NAME)
 @Table(name = SysCompany.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysCompany.TABLE_NAME, comment = "公司表")
-public class SysCompany extends BaseSuperEntity<Long> {
+public class SysCompany extends BaseSuperEntity<SysCompany,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_company";
 

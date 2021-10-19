@@ -33,7 +33,7 @@ import javax.persistence.Table;
 @Table(name = SysUser.TABLE_NAME)
 @TableName(SysUser.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysUser.TABLE_NAME, comment = "后台管理用户表")
-public class SysUser extends BaseSuperEntity<Long> {
+public class SysUser extends BaseSuperEntity<SysUser,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_user";
 

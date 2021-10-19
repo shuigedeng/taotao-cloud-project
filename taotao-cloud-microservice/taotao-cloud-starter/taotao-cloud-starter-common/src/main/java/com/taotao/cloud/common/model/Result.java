@@ -42,7 +42,7 @@ public record Result<T>(
 	/**
 	 * 返回数据
 	 */
-	@Schema(name = "data", title = "返回数据xxxxx", description = "返回数据")
+	@Schema(description = "返回数据")
 	T data,
 	/**
 	 * 是否成功

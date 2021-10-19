@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 2020-10-16 15:54:05
  * @since 1.0
  */
-public interface ISysCompanyService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysCompanyService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 }

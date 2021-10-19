@@ -15,11 +15,10 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
-import com.taotao.cloud.common.constant.CommonConstant;
+import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.web.base.dto.BatchDTO;
 import com.taotao.cloud.web.base.dto.BatchDTO.BatchUpdate;
@@ -66,11 +65,11 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	default Result<Boolean> batch(
 		@Parameter(description = "通用批量操作", required = true)
 		@RequestBody @Validated BatchDTO<SaveDTO, UpdateDTO, I> batchDTO) {
-		String method = batchDTO.getMethod();
+		String method = batchDTO.method();
 		return switch (method) {
-			case "create" -> success(batchCreate(batchDTO.getBatchCreate()));
-			case "update" -> success(batchUpdate(batchDTO.getBatchUpdate()));
-			case "delete" -> success(batchDelete(batchDTO.getBatchDelete()));
+			case "create" -> success(batchCreate(batchDTO.batchCreate()));
+			case "update" -> success(batchUpdate(batchDTO.batchUpdate()));
+			case "delete" -> success(batchDelete(batchDTO.batchDelete()));
 			default -> throw new BusinessException("操作方式错误");
 		};
 	}
@@ -88,9 +87,12 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 			throw new BusinessException("添加数据不能为空");
 		}
 		List<T> entityList = saveDTOList.stream()
-			.filter(saveDTO -> checkField(saveDTO.getClass()))
-			.map(saveDTO -> BeanUtil.toBean(saveDTO, getEntityClass()))
-			.collect(Collectors.toList());
+			.filter(saveDTO -> ReflectionUtil.checkField(saveDTO.getClass(), getEntityClass()))
+			.map(saveDTO -> {
+				T t = ReflectUtil.newInstanceIfPossible(getEntityClass());
+				return ReflectionUtil.copyPropertiesIfRecord(t, saveDTO);
+			})
+			.toList();
 
 		return service().saveBatch(entityList);
 	}
@@ -109,23 +111,23 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 		}
 		Map<I, UpdateDTO> updateDTOMap = new HashMap<>();
 		updateDTOList.forEach(updateDTO -> {
-			I id = updateDTO.getId();
-			UpdateDTO updateDTO1 = updateDTO.getUpdateDTO();
+			I id = updateDTO.id();
+			UpdateDTO updateDTO1 = updateDTO.updateDTO();
 			updateDTOMap.put(id, updateDTO1);
 		});
 
-		List<I> ids = updateDTOList.stream().map(BatchUpdate::getId).collect(Collectors.toList());
+		List<I> ids = updateDTOList.stream().map(BatchUpdate::id).collect(Collectors.toList());
 		List<T> ts = service().listByIds(ids);
 		if (ts.isEmpty()) {
 			throw new BusinessException("未查询到数据");
 		}
 
 		List<T> entityList = ts.stream()
-			.filter(updateDTO -> checkField(updateDTO.getClass()))
-			.peek(t -> {
+			.filter(updateDTO -> ReflectionUtil.checkField(updateDTO.getClass(), getEntityClass()))
+			.map(t -> {
 				UpdateDTO updateDTO = updateDTOMap.get(t.getId());
-				BeanUtil.copyProperties(updateDTO, t, CopyOptions.create().ignoreNullValue());
-			}).collect(Collectors.toList());
+				return ReflectionUtil.copyPropertiesIfRecord(t, updateDTO);
+			}).toList();
 
 		return service().updateBatchById(entityList);
 	}

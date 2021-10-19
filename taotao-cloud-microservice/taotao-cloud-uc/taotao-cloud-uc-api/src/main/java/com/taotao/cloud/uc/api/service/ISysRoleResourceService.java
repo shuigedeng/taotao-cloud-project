@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * @since 2020/4/30 13:20
  */
-public interface ISysRoleResourceService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysRoleResourceService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	/**

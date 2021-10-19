@@ -21,6 +21,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -116,7 +117,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(eqDTO -> StrUtil.isNotBlank(eqDTO.filed()))
-				.filter(eqDTO -> checkField(eqDTO.filed()))
+				.filter(eqDTO -> ReflectionUtil.checkField(eqDTO.filed(), getEntityClass()))
 				.forEach(eqDTO -> {
 					wrapper.eq(StrUtil.toUnderlineCase(eqDTO.filed()), eqDTO.value());
 				});
@@ -126,7 +127,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.filed()))
-				.filter(dateTimeBetweenDTO -> checkField(dateTimeBetweenDTO.filed()))
+				.filter(dateTimeBetweenDTO -> ReflectionUtil.checkField(dateTimeBetweenDTO.getClass(), getEntityClass()))
 				.forEach(dateTimeBetweenDTO -> {
 					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
 						dateTimeBetweenDTO.startTime(),
@@ -138,7 +139,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(likeDTO -> StrUtil.isNotBlank(likeDTO.filed()))
-				.filter(likeDTO -> checkField(likeDTO.filed()))
+				.filter(likeDTO -> ReflectionUtil.checkField(likeDTO.getClass(), getEntityClass()))
 				.forEach(likeDTO -> {
 					wrapper.like(StrUtil.toUnderlineCase(likeDTO.filed()), likeDTO.value());
 				});
@@ -148,7 +149,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(inDTO -> StrUtil.isNotBlank(inDTO.filed()))
-				.filter(inDTO -> checkField(inDTO.filed()))
+				.filter(inDTO -> ReflectionUtil.checkField(inDTO.getClass(), getEntityClass()))
 				.forEach(inDTO -> {
 					wrapper.in(StrUtil.toUnderlineCase(inDTO.filed()), inDTO.values());
 				});
@@ -158,7 +159,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.filed()))
-				.filter(notInDTO -> checkField(notInDTO.filed()))
+				.filter(notInDTO ->ReflectionUtil.checkField(notInDTO.getClass(), getEntityClass()))
 				.forEach(notInDTO -> {
 					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
 						notInDTO.values());

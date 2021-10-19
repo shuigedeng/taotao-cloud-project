@@ -32,7 +32,7 @@ import javax.persistence.Table;
 @Table(name = SysResource.TABLE_NAME)
 @TableName(SysResource.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysResource.TABLE_NAME, comment = "资源表")
-public class SysResource extends BaseSuperEntity<Long> {
+public class SysResource extends BaseSuperEntity<SysResource,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_resource";
 

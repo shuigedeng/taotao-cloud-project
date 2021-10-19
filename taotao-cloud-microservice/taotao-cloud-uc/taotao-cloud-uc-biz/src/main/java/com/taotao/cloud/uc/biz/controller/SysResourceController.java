@@ -204,7 +204,7 @@ public class SysResourceController extends
 			return Result.success(Collections.emptyList());
 		}
 		Result<List<ResourceQueryVO>> result = findResourceByCodes(roleCodes);
-		List<ResourceQueryVO> resourceVOList = result.getData();
+		List<ResourceQueryVO> resourceVOList = result.data();
 		List<ResourceTreeVO> trees = service().findCurrentUserResourceTree(resourceVOList, parentId);
 		return Result.success(trees);
 	}

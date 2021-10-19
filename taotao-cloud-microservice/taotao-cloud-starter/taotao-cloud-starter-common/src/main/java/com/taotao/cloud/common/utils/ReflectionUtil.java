@@ -15,11 +15,15 @@
  */
 package com.taotao.cloud.common.utils;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.exception.BusinessException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.RecordComponent;
+import java.util.Objects;
 
 /**
  * ReflectionUtil
@@ -425,6 +429,91 @@ public class ReflectionUtil {
 			LogUtil.error(exp);
 			throw new BaseException(exp.getMessage());
 		}
+	}
+
+	public static <T, DTO> T copyPropertiesIfRecord(T t, DTO dto) {
+		if (dto.getClass().isRecord()) {
+			if (checkField(dto.getClass(), t.getClass())) {
+				Field[] fields = dto.getClass().getDeclaredFields();
+				for (Field field : fields) {
+					if (!field.getName().equals("serialVersionUID")) {
+						Object value = ReflectionUtil.tryGetValue(dto, field.getName());
+						Field field1 = ReflectionUtil.findField(t.getClass(), field.getName());
+						if (Objects.nonNull(field1) && Objects.nonNull(value)) {
+							ReflectionUtil.setFieldValue(field1, t, value);
+						}
+					}
+				}
+			}
+		} else {
+			BeanUtil.copyProperties(dto, t, CopyOptions.create().ignoreNullValue());
+		}
+		return t;
+	}
+
+	/**
+	 * 校验字段是否存在
+	 *
+	 * @param clazz clazz
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-13 17:36:08
+	 */
+	public static Boolean checkField(Class<?> dtoClass, Class<?> entityClass) {
+		Field[] declaredFields = dtoClass.getDeclaredFields();
+		RecordComponent[] recordComponents = dtoClass.getRecordComponents();
+
+		if (declaredFields.length == 0) {
+			if (Objects.isNull(recordComponents) || recordComponents.length == 0) {
+				throw new BusinessException("字段参数不存在");
+			}
+		}
+
+		if (declaredFields.length != 0) {
+			for (Field declaredField : declaredFields) {
+				String filedName = declaredField.getName();
+
+				if (!filedName.equals("serialVersionUID")) {
+					Field field = ReflectionUtil.findField(entityClass, filedName);
+					if (Objects.isNull(field)) {
+						throw new BusinessException(filedName + "字段值错误");
+					}
+				}
+			}
+		}
+
+		if (Objects.nonNull(recordComponents) && recordComponents.length != 0) {
+			for (RecordComponent recordComponent : recordComponents) {
+				String filedName = recordComponent.getName();
+				if (!filedName.equals("serialVersionUID")) {
+					Field field = ReflectionUtil.findField(entityClass, filedName);
+					if (Objects.isNull(field)) {
+						throw new BusinessException(filedName + "字段值错误");
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * 校验字段
+	 *
+	 * @param filedName 字段名称
+	 * @return {@link Boolean }
+	 * @author shuigedeng
+	 * @since 2021-10-13 17:36:08
+	 */
+	public static Boolean checkField(String filedName, Class<?> entityClass) {
+		if (!filedName.equals("serialVersionUID")) {
+			Field field = ReflectionUtil.findField(entityClass, filedName);
+			if (Objects.isNull(field)) {
+				throw new BusinessException(filedName + "字段值错误");
+			}
+		}
+
+		return true;
 	}
 
 	/**

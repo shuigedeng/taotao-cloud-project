@@ -34,7 +34,7 @@ import javax.persistence.Table;
 @Table(name = SysDictItem.TABLE_NAME)
 @TableName(SysDictItem.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysDictItem.TABLE_NAME, comment = "字典项表")
-public class SysDictItem extends BaseSuperEntity<Long> {
+public class SysDictItem extends BaseSuperEntity<SysDictItem,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_dict_item";
 

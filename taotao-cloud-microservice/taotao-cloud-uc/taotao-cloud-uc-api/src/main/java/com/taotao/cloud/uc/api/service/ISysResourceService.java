@@ -32,7 +32,7 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:38:19
  */
-public interface ISysResourceService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysResourceService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	/**

@@ -28,7 +28,7 @@ import java.io.Serializable;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface ISysDictItemService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysDictItemService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	///**

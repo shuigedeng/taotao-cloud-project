@@ -35,7 +35,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Table(name = SysRegion.TABLE_NAME)
 @TableName(SysRegion.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysRegion.TABLE_NAME, comment = "地区表")
-public class SysRegion extends SuperEntity<Long> {
+public class SysRegion extends SuperEntity<SysRegion,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_region";
 

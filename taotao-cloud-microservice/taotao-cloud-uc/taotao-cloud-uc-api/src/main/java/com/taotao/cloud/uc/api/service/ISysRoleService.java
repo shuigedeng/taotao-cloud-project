@@ -29,7 +29,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:42:57
  */
-public interface ISysRoleService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysRoleService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	/**

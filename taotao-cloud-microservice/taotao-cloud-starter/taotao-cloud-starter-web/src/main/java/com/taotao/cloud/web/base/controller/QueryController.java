@@ -96,7 +96,8 @@ public interface QueryController<T extends SuperEntity<T,I>, I extends Serializa
 			.ofNullable(data)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> BeanUtil.toBean(t, getQueryVOClass())).collect(Collectors.toList());
+			.map(t -> BeanUtil.toBean(t, getQueryVOClass()))
+			.toList();
 		return success(result);
 	}
 }

@@ -9,6 +9,6 @@ import java.io.Serializable;
  *
  * @since 2020/4/30 13:20
  */
-public interface ISysRoleDeptService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysRoleDeptService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 }

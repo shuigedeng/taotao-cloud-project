@@ -32,7 +32,7 @@ import javax.persistence.Table;
 @Table(name = SysRoleDept.TABLE_NAME)
 @TableName(SysRoleDept.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = SysRoleDept.TABLE_NAME, comment = "角色-部门第三方表")
-public class SysRoleDept extends SuperEntity<Long> {
+public class SysRoleDept extends SuperEntity<SysRoleDept,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_role_dept";
 

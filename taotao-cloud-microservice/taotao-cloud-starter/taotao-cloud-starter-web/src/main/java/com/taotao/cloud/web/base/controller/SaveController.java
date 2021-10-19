@@ -15,17 +15,16 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.taotao.cloud.common.constant.CommonConstant;
+import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.io.Serializable;
 import java.util.Objects;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:12:22
  */
-public interface SaveController<T extends SuperEntity<T,I>, I extends Serializable, SaveDTO> extends
+public interface SaveController<T extends SuperEntity<T, I>, I extends Serializable, SaveDTO> extends
 	BaseController<T, I> {
 
 	/**
@@ -59,12 +58,12 @@ public interface SaveController<T extends SuperEntity<T,I>, I extends Serializab
 		@Parameter(description = "新增DTO", required = true)
 		@RequestBody @Validated SaveDTO saveDTO) {
 		if (handlerSave(saveDTO)) {
-			if (checkField(saveDTO.getClass())) {
-				T model = BeanUtil.toBean(saveDTO, getEntityClass());
-				service().save(model);
+			if (ReflectionUtil.checkField(saveDTO.getClass(), getEntityClass())) {
+				T t = ReflectUtil.newInstanceIfPossible(getEntityClass());
+				return success(service().save(ReflectionUtil.copyPropertiesIfRecord(t, saveDTO)));
 			}
 		}
-		return success(true);
+		throw new BusinessException("通用单体新增失败");
 	}
 
 	/**

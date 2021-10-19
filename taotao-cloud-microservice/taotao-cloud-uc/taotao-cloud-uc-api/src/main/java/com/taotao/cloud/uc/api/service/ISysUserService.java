@@ -28,7 +28,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:48:28
  */
-public interface ISysUserService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysUserService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	//SysUser saveUser(SysUser sysUser);

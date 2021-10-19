@@ -28,7 +28,7 @@ import java.util.List;
  * @version 2021.10
  * @since 2021-10-09 20:37:26
  */
-public interface ISysRegionService<T extends SuperEntity<I>, I extends Serializable> extends
+public interface ISysRegionService<T extends SuperEntity<T,I>, I extends Serializable> extends
 	BaseSuperService<T, I> {
 
 	/**

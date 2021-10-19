@@ -20,6 +20,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -57,7 +58,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	@Operation(summary = "通用单体id删除", description = "通用单体id删除")
 	@DeleteMapping("/{id:[0-9]*}")
 	@RequestOperateLog(description = "通用单体id删除")
-	@PreAuthorize("@permissionVerifier.hasPermission('delete')")
+	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteById(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {
@@ -103,7 +104,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 		@Parameter(description = "字段值", required = true) @NotNull(message = "字段值不能为空")
 		@PathVariable(value = "filedValue") Object filedValue) {
 		if (handlerDeleteByFiled(filedName, filedValue)) {
-			if (checkField(filedName)) {
+			if (ReflectionUtil.checkField(filedName, getEntityClass())) {
 				QueryWrap<T> wrapper = Wraps.q();
 				wrapper.eq(StrUtil.toUnderlineCase(filedName), filedValue);
 				return success(service().remove(wrapper));
