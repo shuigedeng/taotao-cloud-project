@@ -6,7 +6,8 @@ ADD ./build/libs/taotao-cloud-order-biz-2021.10.1.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-order-biz-2021.10.1.jar extract
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -43,7 +44,7 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -XX:+ShowCodeDetailsInExceptionMessages \
                   -XX:ParallelGCThreads=4 \
                   -Xlog:async \
-                  -XX:AsyncLogBufferSize=1024*1024*5 \
+                  -XX:AsyncLogBufferSize=409600 \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
                   -XX:MetaspaceSize=256m \

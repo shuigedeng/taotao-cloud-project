@@ -6,7 +6,8 @@ ADD ./build/libs/taotao-cloud-xxl-job-admin-2021.10.1.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-xxl-job-admin-2021.10.1.jar extract
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -45,17 +46,23 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=256m \
                   -verbose:gc \
+                  -Xlog:async \
+                  -XX:AsyncLogBufferSize=409600 \
                   -XX:ParallelGCThreads=4 \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
-                  -Dskywalking.logging.file_name=skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
                   -Dspring.profiles.active=${PRROFILES}"
+                  #-javaagent:/skywalking/agent/skywalking-agent.jar \
+                  #-Dskywalking.agent.service_name=${APP_NAME} \
+                  #-Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  #-Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
+                  #-Dskywalking.logging.file_name=skywalking.log \
+                  #-Dskywalking.logging.level=INFO \
+                  #-Dskywalking.logging.dir=/root/logs/${APP_NAME} \
 
 USER root
 
