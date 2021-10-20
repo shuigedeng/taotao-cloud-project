@@ -16,7 +16,6 @@
 package com.taotao.cloud.uc.api.dto.dict_item;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,36 +28,32 @@ import javax.validation.constraints.Size;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Schema(name = "DictItemUpdateDTO", description = "字典项更新对象")
-public class DictItemUpdateDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
-
+@Schema(description = "字典项更新对象")
+public record DictItemUpdateDTO(
 	/**
 	 * 字典id
 	 */
 	@Schema(description = "字典id", required = true)
 	@NotNull(message = "字典id不能为空")
-	private Long dictId;
+	Long dictId,
 	/**
 	 * 字典项文本
 	 */
 	@Schema(description = "字典项文本", required = true)
 	@NotBlank(message = "字典项文本不能为空")
 	@Size(max = 1000, message = "字典项文本不能超过1000个字符")
-	private String itemText;
+	String itemText,
 	/**
 	 * 字典项值
 	 */
 	@Schema(description = "字典项值", required = true)
 	@NotBlank(message = "字典项值不能为空")
-	private String itemValue;
+	String itemValue,
 	/**
 	 * 描述
 	 */
 	@Schema(description = "描述")
-	private String description;
+	String description,
 
 	/**
 	 * 字典状态 1不启用 2启用
@@ -66,54 +61,8 @@ public class DictItemUpdateDTO implements Serializable {
 	@Schema(description = "字典状态 1不启用 2启用", required = true)
 	@NotBlank(message = "字典状态不能为空")
 	//@IntEnums(value = {1, 2})
-	private Integer status;
+	Integer status) implements Serializable {
 
-	public void setDictId(Long dictId) {
-		this.dictId = dictId;
-	}
-
-	public String getItemText() {
-		return itemText;
-	}
-
-	public void setItemText(String itemText) {
-		this.itemText = itemText;
-	}
-
-	public String getItemValue() {
-		return itemValue;
-	}
-
-	public void setItemValue(String itemValue) {
-		this.itemValue = itemValue;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public DictItemUpdateDTO() {
-	}
-
-	public DictItemUpdateDTO(Long dictId, String itemText, String itemValue, String description,
-		Integer status) {
-		this.dictId = dictId;
-		this.itemText = itemText;
-		this.itemValue = itemValue;
-		this.description = description;
-		this.status = status;
-	}
+	static final long serialVersionUID = -7605952923416404638L;
 
 }

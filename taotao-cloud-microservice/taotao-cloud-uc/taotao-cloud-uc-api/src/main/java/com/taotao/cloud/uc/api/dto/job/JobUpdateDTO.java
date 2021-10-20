@@ -16,7 +16,6 @@
 package com.taotao.cloud.uc.api.dto.job;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -26,91 +25,40 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Schema(name = "JobUpdateDTO", description = "岗位更新对象")
-public class JobUpdateDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
+@Schema(description = "岗位更新对象")
+public record JobUpdateDTO(
 
 	/**
 	 * 岗位名称
 	 */
 	@Schema(description = "岗位名称")
-	private String name;
+	String name,
 
 	/**
 	 * 部门id
 	 */
 	@Schema(description = "部门id")
-	private Long deptId;
+	Long deptId,
 
 	/**
 	 * 备注
 	 */
 	@Schema(description = "备注")
-	private String remark;
+	String remark,
 
 	/**
 	 * 排序值
 	 */
 	@Schema(description = "排序值")
-	private Integer sortNum = 0;
+	Integer sortNum,
 
 	/**
 	 * 租户id
 	 */
 	@Schema(description = "租户id")
-	private String tenantId;
+	String tenantId) implements Serializable {
 
-	public JobUpdateDTO() {
-	}
+	static final long serialVersionUID = -7605952923416404638L;
 
-	public JobUpdateDTO(String name, Long deptId, String remark, Integer sortNum,
-		String tenantId) {
-		this.name = name;
-		this.deptId = deptId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Long getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(Long deptId) {
-		this.deptId = deptId;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public Integer getSortNum() {
-		return sortNum;
-	}
-
-	public void setSortNum(Integer sortNum) {
-		this.sortNum = sortNum;
-	}
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
 }

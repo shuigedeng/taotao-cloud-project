@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.uc.api.bo.role;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -27,94 +25,33 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:23:58
  */
-public class RoleBO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
-
+public record RoleBO(
 	/**
 	 * id
 	 */
-	private Long id;
+	Long id,
 	/**
 	 * 角色名称
 	 */
-	private String name;
+	String name,
 	/**
 	 * 角色code
 	 */
-	private String code;
+	String code,
 	/**
 	 * 备注
 	 */
-	private String remark;
+	String remark,
 	/**
 	 * 创建时间
 	 */
-	private LocalDateTime createTime;
+	LocalDateTime createTime,
 	/**
 	 * 最后修改时间
 	 */
-	private LocalDateTime lastModifiedTime;
+	LocalDateTime lastModifiedTime) implements Serializable {
 
-	public RoleBO() {
-	}
+	static final long serialVersionUID = 5126530068827085130L;
 
-	public RoleBO(Long id, String name, String code, String remark, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime) {
-		this.id = id;
-		this.name = name;
-		this.code = code;
-		this.remark = remark;
-		this.createTime = createTime;
-		this.lastModifiedTime = lastModifiedTime;
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }

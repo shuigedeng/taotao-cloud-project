@@ -13,40 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.api.vo.region;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
+package com.taotao.cloud.uc.biz.domain;
 
 /**
- * QueryRegionByParentIdVO
+ * UserParam
  *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 15:31:45
+ * @version 1.0.0
+ * @since 2021/10/19 21:07
  */
-@Schema( description = "查询应用列表数据VO")
-public record RegionParentVO(
-	/**
-	 * 主键ID
-	 */
-	@Schema(description = "主键ID")
-	Long id,
-	/**
-	 * 名称
-	 */
-	@Schema(description = "名称")
-	String label,
-	/**
-	 * 应用名称
-	 */
-	@Schema(description = "应用名称")
-	String value,
-	/**
-	 * 子数据
-	 */
-	@Schema(description = "子数据")
-	List<RegionParentVO> children) {
-
+public class UserParam {
 
 }

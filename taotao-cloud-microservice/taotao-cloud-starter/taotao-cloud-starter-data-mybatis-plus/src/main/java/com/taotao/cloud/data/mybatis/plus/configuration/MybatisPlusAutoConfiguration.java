@@ -144,6 +144,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		paginationInnerInterceptor.setMaxLimit(MAX_LIMIT);
 		paginationInnerInterceptor.setDbType(DbType.MYSQL);
 		paginationInnerInterceptor.setOverflow(true);
+		interceptor.addInnerInterceptor(paginationInnerInterceptor);
 
 		if (enableTenant && Objects.nonNull(tenantLineInnerInterceptor)) {
 			// 多租户插件
@@ -157,16 +158,16 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 		//防止全表更新与删除插件: BlockAttackInnerInterceptor
 		BlockAttackInnerInterceptor blockAttackInnerInterceptor = new BlockAttackInnerInterceptor();
+		interceptor.addInnerInterceptor(blockAttackInnerInterceptor);
 
 		//乐观锁插件
 		OptimisticLockerInnerInterceptor optimisticLockerInnerInterceptor = new OptimisticLockerInnerInterceptor();
+		interceptor.addInnerInterceptor(optimisticLockerInnerInterceptor);
 
 		//sql规范插件
-		IllegalSQLInnerInterceptor illegalSQLInnerInterceptor = new IllegalSQLInnerInterceptor();
-		interceptor.addInnerInterceptor(paginationInnerInterceptor);
-		interceptor.addInnerInterceptor(blockAttackInnerInterceptor);
-		interceptor.addInnerInterceptor(optimisticLockerInnerInterceptor);
-		interceptor.addInnerInterceptor(illegalSQLInnerInterceptor);
+		//IllegalSQLInnerInterceptor illegalSQLInnerInterceptor = new IllegalSQLInnerInterceptor();
+		//interceptor.addInnerInterceptor(illegalSQLInnerInterceptor);
+
 		return interceptor;
 	}
 

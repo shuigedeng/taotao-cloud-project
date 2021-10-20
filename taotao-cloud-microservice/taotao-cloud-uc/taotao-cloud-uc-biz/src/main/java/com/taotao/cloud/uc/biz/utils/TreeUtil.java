@@ -115,18 +115,18 @@ public class TreeUtil {
 		ResourceTreeVO node;
 		for (ResourceBO resource : resources) {
 			node = new ResourceTreeVO();
-			node.setId(resource.getId());
-			node.setParentId(resource.getParentId());
-			node.setName(resource.getName());
-			node.setPath(resource.getPath());
-			node.setPerms(resource.getPerms());
-			node.setLabel(resource.getName());
-			node.setIcon(resource.getIcon());
-			node.setType(resource.getType());
-			node.setSort(resource.getSortNum());
+			node.setId(resource.id());
+			node.setParentId(resource.parentId());
+			node.setName(resource.name());
+			node.setPath(resource.path());
+			node.setPerms(resource.perms());
+			node.setLabel(resource.name());
+			node.setIcon(resource.icon());
+			node.setType(resource.type());
+			node.setSort(resource.sortNum());
 			node.setHasChildren(false);
 			node.setChildren(new ArrayList<>());
-			node.setKeepAlive(resource.getKeepAlive());
+			node.setKeepAlive(resource.keepAlive());
 			trees.add(node);
 		}
 		return TreeUtil.build(trees, parentId);

@@ -47,7 +47,8 @@ public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 	 * @since 2021-10-09 20:27:59
 	 */
 	public Boolean existsByDictCode(String dictCode) {
-		long count = jpaQueryFactory.selectFrom(SYS_DICT)
+		long count = jpaQueryFactory()
+			.selectFrom(SYS_DICT)
 			.where(SYS_DICT.dictCode.eq(dictCode))
 			.fetchCount();
 		return count > 0;
@@ -62,10 +63,10 @@ public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 	 * @since 2021-10-09 20:28:08
 	 */
 	public Optional<SysDict> findByCode(String code) {
-		//SysDict dict = jpaQueryFactory.selectFrom(SYS_DICT)
-		//	.where(SYS_DICT.dictCode.eq(code))
-		//	.fetchOne();
-		//return Optional.ofNullable(dict);
-		return null;
+		SysDict dict = jpaQueryFactory()
+			.selectFrom(SYS_DICT)
+			.where(SYS_DICT.dictCode.eq(code))
+			.fetchOne();
+		return Optional.ofNullable(dict);
 	}
 }

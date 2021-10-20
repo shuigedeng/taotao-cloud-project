@@ -15,15 +15,8 @@
  */
 package com.taotao.cloud.uc.api.dto.user;
 
-import com.taotao.cloud.web.mvc.constraints.IntEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.Length;
 
 /**
  * 用户查询对象
@@ -32,122 +25,52 @@ import org.hibernate.validator.constraints.Length;
  * @version 2021.10
  * @since 2021-10-09 15:18:07
  */
-@Schema(name = "UserQueryDTO", description = "用户查询对象")
-public class UserQueryDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -1972549738577159538L;
-
+@Schema(description = "用户查询对象")
+public record UserQueryDTO(
 	/**
 	 * 用户昵称
 	 */
 	@Schema(description = "用户昵称")
-	private String nickname;
+	String nickname,
 	/**
 	 * 用户真实姓名
 	 */
 	@Schema(description = "用户真实姓名")
-	private String username;
+	String username,
 	/**
 	 * 电话
 	 */
 	@Schema(description = "电话")
-	private String phone;
+	String phone,
 	/**
 	 * email
 	 */
 	@Schema(description = "email")
-	private String email;
+	String email,
 	/**
 	 * 用户类型 1前端用户 2商户用户 3后台管理用户
 	 */
 	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户")
 //	@IntEnums(value = {1, 2, 3})
-	private Integer type;
+	Integer type,
 	/**
 	 * 性别 1男 2女 0未知
 	 */
 	@Schema(description = "性别 1男 2女 0未知")
 //	@IntEnums(value = {0, 1, 2})
-	private Integer sex;
+	Integer sex,
 	/**
 	 * 部门id
 	 */
 	@Schema(description = "部门id")
-	private Long deptId;
+	Long deptId,
 	/**
 	 * 岗位id
 	 */
 	@Schema(description = "岗位id")
-	private Long jobId;
+	Long jobId) implements Serializable {
 
-	public UserQueryDTO() {
+	static final long serialVersionUID = -1972549738577159538L;
 
-	}
-
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public Integer getSex() {
-		return sex;
-	}
-
-	public void setSex(Integer sex) {
-		this.sex = sex;
-	}
-
-	public Long getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(Long deptId) {
-		this.deptId = deptId;
-	}
-
-	public Long getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(Long jobId) {
-		this.jobId = jobId;
-	}
 
 }

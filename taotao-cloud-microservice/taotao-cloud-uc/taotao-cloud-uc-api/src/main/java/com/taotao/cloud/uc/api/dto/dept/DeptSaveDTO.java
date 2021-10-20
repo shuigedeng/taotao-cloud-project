@@ -1,9 +1,7 @@
 package com.taotao.cloud.uc.api.dto.dept;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * 部门添加对象
@@ -11,76 +9,24 @@ import java.util.Objects;
  * @author shuigedeng
  * @since 2020/6/15 11:00
  */
-@Schema(name = "DeptSaveDTO", description = "部门添加对象")
-public class DeptSaveDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 1L;
+@Schema( description = "部门添加对象")
+public record DeptSaveDTO(
 
 	@Schema(description = "部门id", required = true)
-	private Integer deptId;
+	Integer deptId,
 
 	@Schema(description = "部门名称")
-	private String name;
+	String name,
 
 	@Schema(description = "上级部门id")
-	private Integer parentId;
+	Integer parentId,
 
 	@Schema(description = "排序")
-	private Integer sort;
+	Integer sort,
 
 	@Schema(description = "备注")
-	private String remark;
+	String remark) implements Serializable {
 
-	public DeptSaveDTO() {
-	}
+	static final long serialVersionUID = 1L;
 
-	public DeptSaveDTO(Integer deptId, String name, Integer parentId, Integer sort,
-		String remark) {
-		this.deptId = deptId;
-		this.name = name;
-		this.parentId = parentId;
-		this.sort = sort;
-		this.remark = remark;
-	}
-
-	public Integer getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
 }

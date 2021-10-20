@@ -48,11 +48,11 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends Serializable> extends
 	SimpleJpaRepository<T, I> {
 
-	protected final JPAQueryFactory jpaQueryFactory;
-	protected final QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor;
-	protected final EntityManager em;
+	private final JPAQueryFactory jpaQueryFactory;
+	private final QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor;
+	private final EntityManager em;
 	private final EntityPath<T> path;
-	protected final Querydsl querydsl;
+	private final Querydsl querydsl;
 
 	public BaseSuperRepository(Class<T> domainClass, EntityManager em) {
 		super(domainClass, em);
@@ -169,5 +169,25 @@ public abstract class BaseSuperRepository<T extends SuperEntity<T, I>, I extends
 			.where(predicate)
 			.orderBy(o)
 			.fetch();
+	}
+
+	public JPAQueryFactory jpaQueryFactory() {
+		return jpaQueryFactory;
+	}
+
+	public QuerydslJpaPredicateExecutor<T> jpaPredicateExecutor() {
+		return jpaPredicateExecutor;
+	}
+
+	public EntityManager entityManager() {
+		return em;
+	}
+
+	public EntityPath<T> path() {
+		return path;
+	}
+
+	public Querydsl querydsl() {
+		return querydsl;
 	}
 }

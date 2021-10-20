@@ -48,11 +48,10 @@ public class SysRegionServiceImpl extends
 		List<RegionParentVO> result = new ArrayList<>();
 		if (CollectionUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
-				RegionParentVO vo = new RegionParentVO();
-				vo.setId(sysRegion.getId());
-				vo.setLabel(sysRegion.getName());
-				vo.setValue(sysRegion.getCode());
-				vo.setChildren(new ArrayList<>());
+				RegionParentVO vo = new RegionParentVO(sysRegion.getId(),
+					sysRegion.getName(),
+					sysRegion.getCode(),
+					new ArrayList<>());
 				result.add(vo);
 			});
 		}
@@ -69,11 +68,10 @@ public class SysRegionServiceImpl extends
 		List<RegionParentVO> vos = new ArrayList<>();
 		if (CollectionUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
-				RegionParentVO vo = new RegionParentVO();
-				vo.setId(sysRegion.getId());
-				vo.setLabel(sysRegion.getName());
-				vo.setValue(sysRegion.getCode());
-				vo.setChildren(new ArrayList<>());
+				RegionParentVO vo = new RegionParentVO(sysRegion.getId(),
+					sysRegion.getName(),
+					sysRegion.getCode(),
+					new ArrayList<>());
 				vos.add(vo);
 			});
 		}
@@ -86,21 +84,20 @@ public class SysRegionServiceImpl extends
 
 	public void findAllChild(RegionParentVO vo) {
 		LambdaQueryWrapper<SysRegion> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(SysRegion::getParentId, vo.getId());
+		wrapper.eq(SysRegion::getParentId, vo.id());
 		List<SysRegion> sysRegions = getBaseMapper().selectList(wrapper);
 		List<RegionParentVO> regions = new ArrayList<>();
 		if (CollectionUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
-				RegionParentVO region = new RegionParentVO();
-				region.setId(sysRegion.getId());
-				region.setLabel(sysRegion.getName());
-				region.setValue(sysRegion.getCode());
-				region.setChildren(new ArrayList<>());
+				RegionParentVO region = new RegionParentVO(sysRegion.getId(),
+					sysRegion.getName(),
+					sysRegion.getCode(),
+					new ArrayList<>());
 				regions.add(region);
 			});
 		}
 
-		vo.setChildren(regions);
+		//vo.children(regions);
 		if (regions.size() > 0) {
 			regions.forEach(this::findAllChild);
 		}

@@ -27,129 +27,51 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 15:32:25
  */
-@Schema(name = "DictItemQueryVO", description = "字典项查询对象")
-public class DictItemQueryVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
+@Schema( description = "字典项查询对象")
+public record DictItemQueryVO(
 	/**
 	 * id
 	 */
 	@Schema(description = "id")
-	private Long id;
+	Long id,
 	/**
 	 * 字典id
 	 */
 	@Schema(description = "字典id")
-	private Long dictId;
+	Long dictId,
 	/**
 	 * 字典项文本
 	 */
 	@Schema(description = "字典项文本")
-	private String itemText;
+	String itemText,
 	/**
 	 * 字典项值
 	 */
 	@Schema(description = "字典项值")
-	private String itemValue;
+	String itemValue,
 	/**
 	 * 描述
 	 */
 	@Schema(description = "描述")
-	private String description;
+	String description,
 	/**
 	 * 状态(1不启用 2启用)
 	 */
 	@Schema(description = "状态(1不启用 2启用)")
-	private Integer status;
+	Integer status,
 	/**
 	 * 创建时间
 	 */
 	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+	LocalDateTime createTime,
 	/**
 	 * 最后修改时间
 	 */
 	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
+	LocalDateTime lastModifiedTime) implements Serializable {
 
-	public DictItemQueryVO() {
-	}
+	@Serial
+	static final long serialVersionUID = 5126530068827085130L;
 
-	public DictItemQueryVO(Long id, Long dictId, String itemText, String itemValue,
-		String description, Integer status, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime) {
-		this.id = id;
-		this.dictId = dictId;
-		this.itemText = itemText;
-		this.itemValue = itemValue;
-		this.description = description;
-		this.status = status;
-		this.createTime = createTime;
-		this.lastModifiedTime = lastModifiedTime;
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getDictId() {
-		return dictId;
-	}
-
-	public void setDictId(Long dictId) {
-		this.dictId = dictId;
-	}
-
-	public String getItemText() {
-		return itemText;
-	}
-
-	public void setItemText(String itemText) {
-		this.itemText = itemText;
-	}
-
-	public String getItemValue() {
-		return itemValue;
-	}
-
-	public void setItemValue(String itemValue) {
-		this.itemValue = itemValue;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }

@@ -101,7 +101,7 @@ public class SysUserServiceImpl extends
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean restPass(Long userId, RestPasswordUserDTO restPasswordDTO) {
-		String restPasswordPhone = restPasswordDTO.getPhone();
+		String restPasswordPhone = restPasswordDTO.phone();
 		SysUser sysUser = getById(userId);
 
 		//String phone = sysUser.getPhone();

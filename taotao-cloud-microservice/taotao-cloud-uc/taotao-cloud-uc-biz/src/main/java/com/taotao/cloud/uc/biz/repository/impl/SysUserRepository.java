@@ -55,7 +55,7 @@ public class SysUserRepository extends BaseSuperRepository<SysUser, Long> {
 	 * @since 2021-10-09 20:51:23
 	 */
 	public Boolean updatePassword(Long id, String newPassword) {
-		return jpaQueryFactory
+		return jpaQueryFactory()
 			.update(SYS_USER)
 			.set(SYS_USER.password, newPassword)
 			.where(SYS_USER.id.eq(id))

@@ -18,7 +18,6 @@ package com.taotao.cloud.uc.api.dto.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
@@ -30,132 +29,30 @@ import org.hibernate.validator.constraints.Length;
  * @version 2021.10
  * @since 2021-10-09 15:21:15
  */
-@Schema(name = "RestPasswordUserDTO", description = "用户重置密码DTO")
-public class RestPasswordUserDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -5002412807608124376L;
-
+@Schema(description = "用户重置密码DTO")
+public record RestPasswordUserDTO(
 	/**
 	 * 手机号
 	 */
 	@Schema(description = "手机号", required = true)
 	@NotBlank(message = "手机号不能为空")
 	@Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码不正确")
-	private String phone;
+	String phone,
 	/**
 	 * 原密码
 	 */
 	@Schema(description = "原密码", required = true)
 	@NotBlank(message = "原密码不能为空")
-	private String oldPassword;
+	String oldPassword,
 	/**
 	 * 新密码
 	 */
 	@Schema(description = "新密码", required = true)
 	@NotBlank(message = "新密码不能为空")
 	@Length(min = 6, max = 128, message = "密码长度不能小于6位")
-	private String newPassword;
+	String newPassword) implements Serializable {
 
-	public RestPasswordUserDTO() {
-	}
+	@Serial
+	private static final long serialVersionUID = -5002412807608124376L;
 
-	public RestPasswordUserDTO(String phone, String oldPassword, String newPassword) {
-		this.phone = phone;
-		this.oldPassword = oldPassword;
-		this.newPassword = newPassword;
-	}
-
-	@Override
-	public String toString() {
-		return "RestPasswordUserDTO{" +
-			"phone='" + phone + '\'' +
-			", oldPassword='" + oldPassword + '\'' +
-			", newPassword='" + newPassword + '\'' +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		RestPasswordUserDTO that = (RestPasswordUserDTO) o;
-		return Objects.equals(phone, that.phone) && Objects.equals(oldPassword,
-			that.oldPassword) && Objects.equals(newPassword, that.newPassword);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(phone, oldPassword, newPassword);
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getOldPassword() {
-		return oldPassword;
-	}
-
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
-
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-
-	public static RestPasswordUserDTOBuilder builder() {
-		return new RestPasswordUserDTOBuilder();
-	}
-
-
-	public static final class RestPasswordUserDTOBuilder {
-
-		private String phone;
-		private String oldPassword;
-		private String newPassword;
-
-		private RestPasswordUserDTOBuilder() {
-		}
-
-		public static RestPasswordUserDTOBuilder aRestPasswordUserDTO() {
-			return new RestPasswordUserDTOBuilder();
-		}
-
-		public RestPasswordUserDTOBuilder phone(String phone) {
-			this.phone = phone;
-			return this;
-		}
-
-		public RestPasswordUserDTOBuilder oldPassword(String oldPassword) {
-			this.oldPassword = oldPassword;
-			return this;
-		}
-
-		public RestPasswordUserDTOBuilder newPassword(String newPassword) {
-			this.newPassword = newPassword;
-			return this;
-		}
-
-		public RestPasswordUserDTO build() {
-			RestPasswordUserDTO restPasswordUserDTO = new RestPasswordUserDTO();
-			restPasswordUserDTO.setPhone(phone);
-			restPasswordUserDTO.setOldPassword(oldPassword);
-			restPasswordUserDTO.setNewPassword(newPassword);
-			return restPasswordUserDTO;
-		}
-	}
 }

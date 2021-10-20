@@ -16,7 +16,6 @@
 package com.taotao.cloud.uc.api.dto.dict;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -28,19 +27,15 @@ import javax.validation.constraints.Size;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Schema(name = "DictQueryDTO", description = "字典查询对象")
-public class DictQueryDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
-
+@Schema(description = "字典查询对象")
+public record DictQueryDTO(
 	/**
 	 * 字典名称
 	 */
 	@Schema(description = "字典名称", required = true)
 	@NotBlank(message = "字典名称不能为空")
 	@Size(max = 10, message = "字典名称不能超过10个字符")
-	private String dictName;
+	String dictName,
 
 	/**
 	 * 字典编码
@@ -48,75 +43,27 @@ public class DictQueryDTO implements Serializable {
 	@Schema(description = "字典编码", required = true)
 	@NotBlank(message = "字典编码不能为空")
 	@Size(max = 10, message = "字典编码不能超过10个字符")
-	private String dictCode;
+	String dictCode,
 
 	/**
 	 * 描述
 	 */
 	@Schema(description = "描述")
-	private String description;
+	String description,
 
 	/**
 	 * 排序值
 	 */
 	@Schema(description = "排序值")
-	private Integer dictSort;
+	Integer dictSort,
 
 	/**
 	 * 备注信息
 	 */
 	@Schema(description = "备注信息")
-	private String remark;
+	String remark) implements Serializable {
 
-	public String getDictName() {
-		return dictName;
-	}
+	public static final long serialVersionUID = -7605952923416404638L;
 
-	public void setDictName(String dictName) {
-		this.dictName = dictName;
-	}
 
-	public String getDictCode() {
-		return dictCode;
-	}
-
-	public void setDictCode(String dictCode) {
-		this.dictCode = dictCode;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getDictSort() {
-		return dictSort;
-	}
-
-	public void setDictSort(Integer dictSort) {
-		this.dictSort = dictSort;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public DictQueryDTO() {
-	}
-
-	public DictQueryDTO(String dictName, String dictCode, String description, Integer dictSort,
-		String remark) {
-		this.dictName = dictName;
-		this.dictCode = dictCode;
-		this.description = description;
-		this.dictSort = dictSort;
-		this.remark = remark;
-	}
 }

@@ -16,7 +16,6 @@
 package com.taotao.cloud.uc.api.dto.region;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -26,121 +25,51 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Schema(name = "RegionQueryDTO", description = "地区查询对象")
-public class RegionQueryDTO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = -7605952923416404638L;
-
+@Schema(description = "地区查询对象")
+public record RegionQueryDTO(
 	/**
 	 * 地区编码
 	 */
 	@Schema(description = "地区编码")
-	private String code;
+	String code,
 
 	/**
 	 * 地区名称
 	 */
 	@Schema(description = "地区名称")
-	private String name;
+	String name,
 
 	/**
 	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
 	 */
 	@Schema(description = "地区级别（1:省份province,2:市city,3:区县district,4:街道street）")
-	private Integer level;
+	Integer level,
 
 	/**
 	 * 城市编码
 	 */
 	@Schema(description = "城市编码")
-	private String cityCode;
+	String cityCode,
 
 	/**
 	 * 城市中心经度
 	 */
 	@Schema(description = "城市中心经度")
-	private String lng;
+	String lng,
 
 	/**
 	 * 城市中心纬度
 	 */
 	@Schema(description = "城市中心纬度")
-	private String lat;
+	String lat,
 
 	/**
 	 * 地区父节点
 	 */
 	@Schema(description = "地区父节点")
-	private Long parentId;
+	Long parentId) implements Serializable {
 
-	public RegionQueryDTO() {
-	}
+	static final long serialVersionUID = -7605952923416404638L;
 
-	public RegionQueryDTO(String code, String name, Integer level, String cityCode,
-		String lng, String lat, Long parentId) {
-		this.code = code;
-		this.name = name;
-		this.level = level;
-		this.cityCode = cityCode;
-		this.lng = lng;
-		this.lat = lat;
-		this.parentId = parentId;
-	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public String getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-
-	public String getLng() {
-		return lng;
-	}
-
-	public void setLng(String lng) {
-		this.lng = lng;
-	}
-
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
 }

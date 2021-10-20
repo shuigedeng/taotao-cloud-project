@@ -19,7 +19,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 树形菜单列表
@@ -111,54 +110,18 @@ public class ResourceTreeVO extends TreeNode implements Serializable {
 
 	public ResourceTreeVO(ResourceQueryVO resourceQueryVO) {
 		super();
-		super.setId(resourceQueryVO.getId());
-		super.setParentId(resourceQueryVO.getParentId());
-		this.icon = resourceQueryVO.getIcon();
-		this.name = resourceQueryVO.getName();
-		this.path = resourceQueryVO.getPath();
-		this.type = resourceQueryVO.getType();
-		this.perms = resourceQueryVO.getPerms();
-		this.label = resourceQueryVO.getName();
-		this.sort = resourceQueryVO.getSortNum();
-		this.keepAlive = resourceQueryVO.getKeepAlive();
+		super.setId(resourceQueryVO.id());
+		super.setParentId(resourceQueryVO.parentId());
+		this.icon = resourceQueryVO.icon();
+		this.name = resourceQueryVO.name();
+		this.path = resourceQueryVO.path();
+		this.type = resourceQueryVO.type();
+		this.perms = resourceQueryVO.perms();
+		this.label = resourceQueryVO.name();
+		this.sort = resourceQueryVO.sortNum();
+		this.keepAlive = resourceQueryVO.keepAlive();
 	}
 
-	@Override
-	public String toString() {
-		return "ResourceTree{" +
-			"icon='" + icon + '\'' +
-			", name='" + name + '\'' +
-			", perms='" + perms + '\'' +
-			", spread=" + spread +
-			", path='" + path + '\'' +
-			", keepAlive=" + keepAlive +
-			", type=" + type +
-			", label='" + label + '\'' +
-			", sort=" + sort +
-			"} " + super.toString();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		ResourceTreeVO that = (ResourceTreeVO) o;
-		return spread == that.spread && Objects.equals(icon, that.icon)
-			&& Objects.equals(name, that.name) && Objects.equals(perms,
-			that.perms) && Objects.equals(path, that.path) && Objects.equals(
-			keepAlive, that.keepAlive) && Objects.equals(type, that.type)
-			&& Objects.equals(label, that.label) && Objects.equals(sort,
-			that.sort);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(icon, name, perms, spread, path, keepAlive, type, label, sort);
-	}
 
 	public String getIcon() {
 		return icon;

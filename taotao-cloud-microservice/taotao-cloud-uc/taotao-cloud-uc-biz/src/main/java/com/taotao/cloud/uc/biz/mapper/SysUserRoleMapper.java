@@ -17,6 +17,7 @@ package com.taotao.cloud.uc.biz.mapper;
 
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * CompanyMapper
@@ -25,6 +26,7 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 1.0.0
  * @since 2021/10/13 22:50
  */
+@Mapper
 public interface SysUserRoleMapper extends BaseSuperMapper<SysUserRole, Long> {
 
 }

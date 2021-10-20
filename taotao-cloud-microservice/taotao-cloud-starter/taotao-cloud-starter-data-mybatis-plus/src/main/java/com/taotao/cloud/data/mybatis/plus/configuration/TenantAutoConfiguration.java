@@ -36,8 +36,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
 
-	public TenantAutoConfiguration(
-		TenantProperties tenantProperties) {
+	public TenantAutoConfiguration(TenantProperties tenantProperties) {
 		this.tenantProperties = tenantProperties;
 	}
 

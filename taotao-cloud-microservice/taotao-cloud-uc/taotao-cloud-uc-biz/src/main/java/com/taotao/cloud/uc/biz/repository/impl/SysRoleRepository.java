@@ -50,7 +50,7 @@ public class SysRoleRepository extends BaseSuperRepository<SysRole, Long> {
 	 * @since 2021-10-09 20:47:10
 	 */
 	public List<SysRole> findRoleByUserIds(Set<Long> userIds) {
-		return jpaQueryFactory
+		return jpaQueryFactory()
 			.select(SYS_ROLE)
 			.from(SYS_ROLE)
 			.innerJoin(SYS_USER_ROLE)
@@ -68,7 +68,7 @@ public class SysRoleRepository extends BaseSuperRepository<SysRole, Long> {
 	 * @since 2021-10-09 20:47:14
 	 */
 	public List<SysRole> findRoleByCodes(Set<String> codes) {
-		return jpaQueryFactory
+		return jpaQueryFactory()
 			.selectFrom(SYS_ROLE)
 			.where(SYS_ROLE.code.in(codes))
 			.fetch();

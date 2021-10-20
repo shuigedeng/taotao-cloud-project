@@ -40,7 +40,8 @@ public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
 	}
 
 	public List<OrderInfo> findOrderInfoById(Long id) {
-		List<OrderInfo> fetch = jpaQueryFactory.selectFrom(ORDER_INFO)
+		List<OrderInfo> fetch = jpaQueryFactory()
+			.selectFrom(ORDER_INFO)
 			.where(ORDER_INFO.id.eq(id))
 			.fetch();
 		LogUtil.info(fetch.toString());
@@ -48,7 +49,8 @@ public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
 	}
 
 	public List<OrderDO> findOrderInfoByBo(String code) {
-		List<OrderInfo> fetch = jpaQueryFactory.selectFrom(ORDER_INFO)
+		List<OrderInfo> fetch = jpaQueryFactory()
+			.selectFrom(ORDER_INFO)
 			.where(ORDER_INFO.code.eq(code))
 			.fetch();
 		List<OrderDO> orderDOS = OrderMapStruct.INSTANCE.entitysToDos(fetch);

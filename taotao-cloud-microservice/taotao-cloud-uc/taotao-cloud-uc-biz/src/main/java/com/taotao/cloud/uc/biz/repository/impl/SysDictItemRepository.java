@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.biz.repository.impl;
 
 import com.querydsl.core.types.Predicate;
+import com.taotao.cloud.uc.biz.entity.QSysDictItem;
 import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
@@ -36,7 +37,7 @@ public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long
 		super(SysDictItem.class, em);
 	}
 
-	//private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
+	private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
 
 	/**
 	 * deleteByDictId
@@ -46,12 +47,11 @@ public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long
 	 * @since 2021-10-09 20:35:28
 	 */
 	public Boolean deleteByDictId(Long dictId) {
-		//return jpaQueryFactory
-		//	.update(SYS_DICT_ITEM)
-		//	.set(SYS_DICT_ITEM.delFlag, true)
-		//	.where(SYS_DICT_ITEM.dictId.eq(dictId))
-		//	.execute() > 0;
-		return null;
+		return jpaQueryFactory()
+			.update(SYS_DICT_ITEM)
+			.set(SYS_DICT_ITEM.delFlag, true)
+			.where(SYS_DICT_ITEM.dictId.eq(dictId))
+			.execute() > 0;
 	}
 
 	/**
@@ -63,10 +63,9 @@ public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long
 	 * @since 2021-10-09 20:35:31
 	 */
 	public List<SysDictItem> getInfo(Predicate predicate) {
-		//return jpaQueryFactory
-		//	.selectFrom(SYS_DICT_ITEM)
-		//	.where(predicate)
-		//	.fetch();
-		return null;
+		return jpaQueryFactory()
+			.selectFrom(SYS_DICT_ITEM)
+			.where(predicate)
+			.fetch();
 	}
 }

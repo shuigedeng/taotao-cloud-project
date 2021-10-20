@@ -98,7 +98,7 @@ public class SysResourceServiceImpl extends
 		List<SysResource> resources = cr().findResourceByRoleIds(roleIds);
 		return ResourceMapper.INSTANCE.resourcesToBos(resources)
 			.stream()
-			.sorted(Comparator.comparing(ResourceBO::getId))
+			.sorted(Comparator.comparing(ResourceBO::id))
 			.toList();
 	}
 
@@ -108,7 +108,7 @@ public class SysResourceServiceImpl extends
 		if (CollUtil.isEmpty(sysRoles)) {
 			throw new BusinessException("未查询到角色信息");
 		}
-		List<Long> roleIds = sysRoles.stream().map(RoleBO::getId).toList();
+		List<Long> roleIds = sysRoles.stream().map(RoleBO::id).toList();
 		return findResourceByRoleIds(new HashSet<>(roleIds));
 	}
 
@@ -155,7 +155,7 @@ public class SysResourceServiceImpl extends
 	public List<ResourceTreeVO> findCurrentUserResourceTree(List<ResourceQueryVO> resourceVOList,
 		Long parentId) {
 		List<ResourceTreeVO> menuTreeList = resourceVOList.stream()
-			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getCode() == vo.getType())
+			.filter(vo -> ResourceTypeEnum.LEFT_MENU.getCode() == vo.type())
 			.map(ResourceTreeVO::new).sorted(Comparator.comparingInt(ResourceTreeVO::getSort))
 			.collect(Collectors.toList());
 		Long parent = parentId == null ? CommonConstant.RESOURCE_TREE_ROOT_ID : parentId;
