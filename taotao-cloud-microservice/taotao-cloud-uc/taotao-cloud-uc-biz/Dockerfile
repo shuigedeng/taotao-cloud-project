@@ -54,16 +54,17 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
                   --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
                   --add-opens java.base/java.util=ALL-UNNAMED \
                   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
                   -Dspring.profiles.active=${PRROFILES}"
+                  # -javaagent:/skywalking/agent/skywalking-agent.jar \
+                  # -Dskywalking.agent.service_name=${APP_NAME} \
+                  # -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  # -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  # -Dskywalking.logging.level=INFO \
+                  # -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                  # -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
 
 USER root
 

@@ -15,6 +15,7 @@ ARG APP_VERSION=2021.10.1
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
 ARG APP_PORT=33338
+ARG PRROFILES=dev
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -27,6 +28,7 @@ ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
 ENV BACKEND_SERVICE=${BACKEND_SERVICE}
 ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
 ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
+ENV PRROFILES=${PRROFILES}
 ENV JAVA_OPTIONS="-Xms512m \
                   -Xmx2g \
                   -Xss256k \
@@ -49,14 +51,18 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -verbose:gc \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
-                  -Dspring.profiles.active=dev"
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  -Dspring.profiles.active=${PRROFILES}"
+                  # -javaagent:/skywalking/agent/skywalking-agent.jar \
+                  # -Dskywalking.agent.service_name=${APP_NAME} \
+                  # -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  # -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  # -Dskywalking.logging.level=INFO \
+                  # -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                  # -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
 
 USER root
 
