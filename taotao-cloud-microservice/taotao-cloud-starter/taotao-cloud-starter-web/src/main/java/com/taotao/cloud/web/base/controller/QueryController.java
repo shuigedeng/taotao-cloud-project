@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.web.base.controller;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -29,9 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @version 2021.9
  * @since 2021-09-02 21:11:18
  */
-public interface QueryController<T extends SuperEntity<T,I>, I extends Serializable, QueryDTO, QueryVO> extends
+public interface QueryController<T extends SuperEntity<T, I>, I extends Serializable, QueryDTO, QueryVO> extends
 	PageController<T, I, QueryDTO, QueryVO> {
 
 	/**
@@ -67,12 +64,12 @@ public interface QueryController<T extends SuperEntity<T,I>, I extends Serializa
 	default Result<QueryVO> get(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
 		@PathVariable(value = "id") I id) {
-		T data = service().getById(id);
-		if (Objects.isNull(data)) {
+		T t = service().getById(id);
+		if (Objects.isNull(t)) {
 			throw new BusinessException("未查询到数据");
 		}
-		QueryVO queryVO = BeanUtil.toBean(data, getQueryVOClass());
-		return success(queryVO);
+
+		return success(ReflectionUtil.copyPropertiesIfRecord(getQueryVOClass(), t));
 	}
 
 	/**
@@ -96,7 +93,7 @@ public interface QueryController<T extends SuperEntity<T,I>, I extends Serializa
 			.ofNullable(data)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> BeanUtil.toBean(t, getQueryVOClass()))
+			.map(t -> ReflectionUtil.copyPropertiesIfRecord(getQueryVOClass(), t))
 			.toList();
 		return success(result);
 	}

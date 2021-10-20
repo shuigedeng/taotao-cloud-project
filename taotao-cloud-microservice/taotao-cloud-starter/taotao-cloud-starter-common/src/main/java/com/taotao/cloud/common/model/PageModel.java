@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.common.model;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 
 /**
@@ -79,7 +78,8 @@ public record PageModel<R>(
 		List<R> collect = Optional.of(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> BeanUtil.toBean(t, r)).collect(Collectors.toList());
+			.map(t -> ReflectionUtil.copyPropertiesIfRecord(r, t))
+			.toList();
 
 		return of(
 			page.getTotalElements(),
@@ -104,7 +104,8 @@ public record PageModel<R>(
 		List<R> collect = Optional.ofNullable(records)
 			.orElse(new ArrayList<>())
 			.stream().filter(Objects::nonNull)
-			.map(t -> BeanUtil.toBean(t, r)).collect(Collectors.toList());
+			.map(t -> ReflectionUtil.copyPropertiesIfRecord(r, t))
+			.toList();
 
 		return of(
 			page.getTotal(),

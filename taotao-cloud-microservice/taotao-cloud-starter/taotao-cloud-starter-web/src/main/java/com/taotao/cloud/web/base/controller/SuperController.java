@@ -19,6 +19,7 @@ import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * SuperController
@@ -52,9 +53,17 @@ public abstract class SuperController<S extends BaseSuperService<T, I>, T extend
 	BatchController<T, I, SaveDTO, UpdateDTO>,
 	ExcelController<T, I, QueryDTO, QueryVO> {
 
+	private Class<QueryVO> queryVOClass;
+
 	@Override
 	public Class<QueryVO> getQueryVOClass() {
-		return (Class<QueryVO>) ((ParameterizedType) this.getClass()
-			.getGenericSuperclass()).getActualTypeArguments()[6];
+		if (queryVOClass == null) {
+			Type genericSuperclass = this.getClass().getGenericSuperclass();
+			if (genericSuperclass instanceof ParameterizedType parameterizedType) {
+				this.queryVOClass = (Class<QueryVO>) parameterizedType.getActualTypeArguments()[6];
+			}
+		}
+
+		return queryVOClass;
 	}
 }

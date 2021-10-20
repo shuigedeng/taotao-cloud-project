@@ -71,7 +71,7 @@ public class SysUserController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:14:58
 	 */
-	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在", method = CommonConstant.GET)
+	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
 	@RequestOperateLog(description = "根据手机号码查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone/{phone}")
@@ -108,7 +108,7 @@ public class SysUserController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:15:57
 	 */
-	@Operation(summary = "重置密码", description = "重置密码", method = CommonConstant.POST)
+	@Operation(summary = "重置密码", description = "重置密码")
 	@RequestOperateLog(description = "重置密码")
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PostMapping("/rest/password/{userId}")
@@ -127,7 +127,7 @@ public class SysUserController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:16:08
 	 */
-	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息", method = CommonConstant.GET)
+	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
 	@RequestOperateLog(description = "获取当前登录人信息")
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current")
@@ -150,7 +150,7 @@ public class SysUserController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 16:41:06
 	 */
-	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)", method = CommonConstant.PUT)
+	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
 	@RequestOperateLog(description = "根据用户id更新角色信息(用户分配角色)")
 	@PreAuthorize("hasAuthority('sys:user:role')")
 	@PutMapping("/roles/{userId}")

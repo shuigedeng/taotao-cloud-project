@@ -13,47 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.api;
+package com.taotao.cloud.order.biz.repository.impl;
 
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import javax.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
 /**
- * 订单查询对象
- *
  * @author shuigedeng
- * @version 2021.10
- * @since 2021-10-09 16:31:52
+ * @version 1.0.0
+ * @since 2020/10/22 12:46
  */
-public record OrderDO(
-	/**
-	 * 买家ID
-	 */
-	Long memberId,
-	/**
-	 * 订单编码
-	 */
-	String code,
-	/**
-	 * 订单主状态
-	 */
-	Integer mainStatus,
-	/**
-	 * 订单子状态
-	 */
-	Integer childStatus,
-	/**
-	 * 订单金额
-	 */
-	BigDecimal amount,
-	/**
-	 * 收货人姓名
-	 */
-	String receiverName) implements Serializable {
+@Repository
+public class OrderItemRepository extends BaseSuperRepository<OrderItem, Long> {
 
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
-
+	public OrderItemRepository(EntityManager em) {
+		super(OrderItem.class, em);
+	}
 }

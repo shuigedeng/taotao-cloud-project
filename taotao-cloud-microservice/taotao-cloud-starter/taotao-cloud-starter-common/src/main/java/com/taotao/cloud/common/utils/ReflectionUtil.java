@@ -17,12 +17,18 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.exceptions.UtilException;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.exception.BusinessException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.RecordComponent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -431,17 +437,26 @@ public class ReflectionUtil {
 		}
 	}
 
+	/**
+	 * copyPropertiesIfRecord
+	 * <p>
+	 * 主要用于 复制dto对象到t对象中
+	 *
+	 * @param t   实体
+	 * @param dto dto
+	 * @return {@link T }
+	 * @author shuigedeng
+	 * @since 2021-10-20 09:19:45
+	 */
 	public static <T, DTO> T copyPropertiesIfRecord(T t, DTO dto) {
 		if (dto.getClass().isRecord()) {
-			if (checkField(dto.getClass(), t.getClass())) {
-				Field[] fields = dto.getClass().getDeclaredFields();
-				for (Field field : fields) {
-					if (!field.getName().equals("serialVersionUID")) {
-						Object value = ReflectionUtil.tryGetValue(dto, field.getName());
-						Field field1 = ReflectionUtil.findField(t.getClass(), field.getName());
-						if (Objects.nonNull(field1) && Objects.nonNull(value)) {
-							ReflectionUtil.setFieldValue(field1, t, value);
-						}
+			Field[] fields = dto.getClass().getDeclaredFields();
+			for (Field field : fields) {
+				if (!field.getName().equals("serialVersionUID")) {
+					Object value = ReflectionUtil.tryGetValue(dto, field.getName());
+					Field field1 = ReflectionUtil.findField(t.getClass(), field.getName());
+					if (Objects.nonNull(field1) && Objects.nonNull(value)) {
+						ReflectionUtil.setFieldValue(field1, t, value);
 					}
 				}
 			}
@@ -452,9 +467,77 @@ public class ReflectionUtil {
 	}
 
 	/**
+	 * copyDataIfRecord
+	 * <p>
+	 * 主要用于 复制t对象到vo对象中
+	 *
+	 * @param clazz vo对象class
+	 * @param t     t
+	 * @return {@link VO }
+	 * @author shuigedeng
+	 * @since 2021-10-20 10:42:23
+	 */
+	public static <T, VO> VO copyPropertiesIfRecord(Class<VO> clazz, T t) {
+		VO vo;
+		if (clazz.isRecord()) {
+			Field[] fields = clazz.getDeclaredFields();
+			List<Object> params = new ArrayList<>();
+			List<Field> fieldList = new ArrayList<>();
+
+			for (Field field : fields) {
+				if (!field.getName().equals("serialVersionUID")) {
+					Object value = ReflectionUtil.tryGetValue(t, field.getName());
+					params.add(value);
+					fieldList.add(field);
+				}
+			}
+
+			vo = newInstance(fieldList, clazz, params.toArray());
+		} else {
+			vo = ReflectUtil.newInstanceIfPossible(clazz);
+			BeanUtil.copyProperties(t, vo, CopyOptions.create().ignoreNullValue());
+		}
+		return vo;
+	}
+
+	public static <T> T newInstance(List<Field> fields, Class<T> clazz, Object... params)
+		throws UtilException {
+		if (ArrayUtil.isEmpty(params)) {
+			final Constructor<T> constructor = ReflectUtil.getConstructor(clazz);
+			try {
+				return constructor.newInstance();
+			} catch (Exception e) {
+				throw new UtilException(e, "Instance class [{}] error!", clazz);
+			}
+		}
+
+		final Class<?>[] paramTypes = getClasses(fields);
+		final Constructor<T> constructor = ReflectUtil.getConstructor(clazz, paramTypes);
+		if (null == constructor) {
+			throw new UtilException("No Constructor matched for parameter types: [{}]",
+				new Object[]{paramTypes});
+		}
+		try {
+			return constructor.newInstance(params);
+		} catch (Exception e) {
+			throw new UtilException(e, "Instance class [{}] error!", clazz);
+		}
+	}
+
+	public static Class<?>[] getClasses(List<Field> fields) {
+		Class<?>[] classes = new Class<?>[fields.size()];
+		for (int i = 0; i < fields.size(); i++) {
+			Field field = fields.get(i);
+			classes[i] = field.getType();
+		}
+		return classes;
+	}
+
+	/**
 	 * 校验字段是否存在
 	 *
-	 * @param clazz clazz
+	 * @param dtoClass    dtoClass
+	 * @param entityClass entityClass
 	 * @return {@link Boolean }
 	 * @author shuigedeng
 	 * @since 2021-10-13 17:36:08
@@ -500,7 +583,8 @@ public class ReflectionUtil {
 	/**
 	 * 校验字段
 	 *
-	 * @param filedName 字段名称
+	 * @param filedName   字段名称
+	 * @param entityClass entityClass
 	 * @return {@link Boolean }
 	 * @author shuigedeng
 	 * @since 2021-10-13 17:36:08

@@ -18,7 +18,6 @@ package com.taotao.cloud.uc.biz.controller;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -39,11 +38,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
@@ -79,7 +76,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:04:45
 	 */
-	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表", method = CommonConstant.GET)
+	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表")
 	@RequestOperateLog(description = "根据角色id获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
@@ -100,7 +97,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:04:52
 	 */
-	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表", method = CommonConstant.GET)
+	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
 	@RequestOperateLog(description = "根据角色id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/roleIds")
@@ -120,7 +117,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:04:59
 	 */
-	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表", method = CommonConstant.GET)
+	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表")
 	@RequestOperateLog(description = "根据角色code获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/code/{code}")
@@ -140,7 +137,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:05:06
 	 */
-	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表", method = CommonConstant.GET)
+	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
 	@RequestOperateLog(description = "根据角色cde列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/codes")
@@ -173,7 +170,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:05:16
 	 */
-	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表", method = CommonConstant.GET)
+	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
 	@RequestOperateLog(description = "获取当前用户菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
@@ -193,7 +190,7 @@ public class SysResourceController extends
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:05:20
 	 */
-	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表", method = CommonConstant.GET)
+	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
 	@RequestOperateLog(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/current/user/tree")
@@ -205,7 +202,8 @@ public class SysResourceController extends
 		}
 		Result<List<ResourceQueryVO>> result = findResourceByCodes(roleCodes);
 		List<ResourceQueryVO> resourceVOList = result.data();
-		List<ResourceTreeVO> trees = service().findCurrentUserResourceTree(resourceVOList, parentId);
+		List<ResourceTreeVO> trees = service().findCurrentUserResourceTree(resourceVOList,
+			parentId);
 		return Result.success(trees);
 	}
 
@@ -219,7 +217,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:05:42
 	 */
 	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
-		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0", method = CommonConstant.GET)
+		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
 	@RequestOperateLog(description = "获取树形菜单集合")
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/tree")
@@ -232,7 +230,7 @@ public class SysResourceController extends
 	}
 
 
-	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET)
+	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
 	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/se")
 	@SentinelResource(value = "se")
@@ -241,7 +239,7 @@ public class SysResourceController extends
 		return Result.success(result);
 	}
 
-	@Operation(summary = "测试异步", description = "测试异步", method = CommonConstant.GET)
+	@Operation(summary = "测试异步", description = "测试异步")
 	@RequestOperateLog(description = "测试异步")
 	@GetMapping("/test/async")
 	public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
@@ -249,14 +247,14 @@ public class SysResourceController extends
 		return Result.success(result.get());
 	}
 
-	@Operation(summary = "测试异步结果", description = "测试异步结果", method = CommonConstant.GET)
+	@Operation(summary = "测试异步结果", description = "测试异步结果")
 	@RequestOperateLog(description = "测试异步结果")
 	@GetMapping("/test/async/future")
 	public Future<Boolean> testAsyncFuture() {
 		return service().testAsync();
 	}
 
-	@Operation(summary = "测试分布式事务", description = "测试分布式事务", method = CommonConstant.GET)
+	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
 	@RequestOperateLog(description = "测试分布式事务")
 	@GetMapping("/test/seata")
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")

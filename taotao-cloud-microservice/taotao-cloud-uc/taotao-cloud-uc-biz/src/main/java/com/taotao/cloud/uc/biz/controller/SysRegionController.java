@@ -60,7 +60,7 @@ public class SysRegionController extends
 	 * @author shuigedeng
 	 * @since 2021-10-14 11:30:36
 	 */
-	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据", method = CommonConstant.GET)
+	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestOperateLog(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
@@ -79,7 +79,7 @@ public class SysRegionController extends
 	 * @author shuigedeng
 	 * @since 2021-10-14 11:32:28
 	 */
-	@Operation(summary = "树形结构查询", description = "树形结构查询", method = CommonConstant.GET)
+	@Operation(summary = "树形结构查询", description = "树形结构查询")
 	@RequestOperateLog(description = "根据父id查询")
 	@GetMapping(value = "/tree")
 	@PreAuthorize("hasAuthority('sys:region:info:true')")

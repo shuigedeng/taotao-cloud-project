@@ -127,7 +127,9 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(dateTimeBetweenDTO -> StrUtil.isNotBlank(dateTimeBetweenDTO.filed()))
-				.filter(dateTimeBetweenDTO -> ReflectionUtil.checkField(dateTimeBetweenDTO.getClass(), getEntityClass()))
+				.filter(
+					dateTimeBetweenDTO -> ReflectionUtil.checkField(dateTimeBetweenDTO.getClass(),
+						getEntityClass()))
 				.forEach(dateTimeBetweenDTO -> {
 					wrapper.between(StrUtil.toUnderlineCase(dateTimeBetweenDTO.filed()),
 						dateTimeBetweenDTO.startTime(),
@@ -159,7 +161,8 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 				.stream()
 				.filter(Objects::nonNull)
 				.filter(notInDTO -> StrUtil.isNotBlank(notInDTO.filed()))
-				.filter(notInDTO ->ReflectionUtil.checkField(notInDTO.getClass(), getEntityClass()))
+				.filter(
+					notInDTO -> ReflectionUtil.checkField(notInDTO.getClass(), getEntityClass()))
 				.forEach(notInDTO -> {
 					wrapper.notIn(StrUtil.toUnderlineCase(notInDTO.filed()),
 						notInDTO.values());
@@ -178,5 +181,12 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	default void handlerResult(IPage<T> page) {
 	}
 
+	/**
+	 * getQueryVOClass
+	 *
+	 * @return {@link Class&lt;QueryVO&gt; }
+	 * @author shuigedeng
+	 * @since 2021-10-20 08:47:25
+	 */
 	Class<QueryVO> getQueryVOClass();
 }

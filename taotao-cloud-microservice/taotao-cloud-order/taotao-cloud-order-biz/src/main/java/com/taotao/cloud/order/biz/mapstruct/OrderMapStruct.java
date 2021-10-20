@@ -15,14 +15,8 @@
  */
 package com.taotao.cloud.order.biz.mapstruct;
 
-import com.taotao.cloud.order.api.OrderDO;
-import com.taotao.cloud.order.api.OrderQueryBO;
-import com.taotao.cloud.order.api.OrderReponseVO;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.api.OrderBO;
-import com.taotao.cloud.order.api.OrderDTO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
-import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -30,8 +24,8 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author shuigedeng
- * @since 2020/11/11 14:42
  * @version 1.0.0
+ * @since 2020/11/11 14:42
  */
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -40,10 +34,6 @@ public interface OrderMapStruct {
 
 	OrderMapStruct INSTANCE = Mappers.getMapper(OrderMapStruct.class);
 
-	OrderBO dtoToBo(OrderDTO dto);
-	List<OrderQueryBO> dosToBos(List<OrderDO> dos);
-	List<OrderReponseVO> bosToVos(List<OrderQueryBO> bos);
-	List<OrderDO> entitysToDos(List<OrderInfo> entitys);
 
 	/**
 	 * order转OrderVO
@@ -51,8 +41,8 @@ public interface OrderMapStruct {
 	 * @param orderInfo order
 	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
 	 * @author shuigedeng
-	 * @since 2020/11/11 14:47
 	 * @version 1.0.0
+	 * @since 2020/11/11 14:47
 	 */
 	OrderVO orderToOrderVO(OrderInfo orderInfo);
 

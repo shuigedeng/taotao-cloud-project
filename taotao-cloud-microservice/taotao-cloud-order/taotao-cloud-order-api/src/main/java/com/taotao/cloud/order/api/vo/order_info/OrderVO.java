@@ -29,455 +29,179 @@ import java.time.LocalDateTime;
  * @version 2021.10
  * @since 2021-10-09 16:29:13
  */
-@Schema(name = "OrderVO", description = "订单VO")
-public class OrderVO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
-
+@Schema(description = "订单VO")
+public record OrderVO(
 	/**
 	 * id
 	 */
 	@Schema(description = "id")
-	private Long id;
+	Long id,
 	/**
 	 * 买家ID
 	 */
 	@Schema(description = "买家ID")
-	private Long memberId;
+	Long memberId,
 	/**
 	 * 优惠券id
 	 */
 	@Schema(description = "优惠券id")
-	private Long couponId;
+	Long couponId,
 	/**
 	 * 秒杀活动id
 	 */
 	@Schema(description = "秒杀活动id")
-	private Long seckillId;
+	Long seckillId,
 	/**
 	 * 订单编码
 	 */
 	@Schema(description = "订单编码")
-	private String code;
+	String code,
 	/**
 	 * 订单金额
 	 */
 	@Schema(description = "订单金额")
-	private BigDecimal amount;
+	BigDecimal amount,
 	/**
 	 * 优惠金额
 	 */
 	@Schema(description = "优惠金额")
-	private BigDecimal discountAmount;
+	BigDecimal discountAmount,
 	/**
 	 * 实际支付金额
 	 */
 	@Schema(description = "实际支付金额")
-	private BigDecimal actualAmount;
+	BigDecimal actualAmount,
 	/**
 	 * 支付时间
 	 */
 	@Schema(description = "支付时间")
-	private LocalDateTime paySuccessTime;
+	LocalDateTime paySuccessTime,
 	/**
 	 * 订单主状态
 	 */
 	@Schema(description = "订单主状态")
-	private Integer mainStatus;
+	Integer mainStatus,
 	/**
 	 * 订单子状态
 	 */
 	@Schema(description = "订单子状态")
-	private Integer childStatus;
+	Integer childStatus,
 	/**
 	 * 售后主状态
 	 */
 	@Schema(description = "售后主状态")
-	private Integer refundMainStatus;
+	Integer refundMainStatus,
 	/**
 	 * 售后子状态
 	 */
 	@Schema(description = "售后子状态")
-	private Integer refundChildStatus;
+	Integer refundChildStatus,
 	/**
 	 * 是否可评价 0-不可评价 1-可评价 2-可追评
 	 */
 	@Schema(description = "是否可评价")
-	private Integer evaluateStatus;
+	Integer evaluateStatus,
 	/**
 	 * 申请售后code
 	 */
 	@Schema(description = "申请售后code")
-	private String refundCode;
+	String refundCode,
 	/**
 	 * 申请售后是否撤销
 	 */
 	@Schema(description = "申请售后是否撤销")
-	private Boolean hasCancel;
+	Boolean hasCancel,
 	/**
 	 * 发货时间
 	 */
 	@Schema(description = "发货时间")
-	private LocalDateTime shipTime;
+	LocalDateTime shipTime,
 	/**
 	 * 收货时间
 	 */
 	@Schema(description = "收货时间")
-	private LocalDateTime receiptTime;
+	LocalDateTime receiptTime,
 	/**
 	 * 交易结束时间
 	 */
 	@Schema(description = "交易结束时间")
-	private LocalDateTime tradeEndTime;
+	LocalDateTime tradeEndTime,
 	/**
 	 * 交易结束时间
 	 */
 	@Schema(description = "交易结束时间")
-	private String receiverName;
+	String receiverName,
 	/**
 	 * 收货人电话
 	 */
 	@Schema(description = "收货人电话")
-	private String receiverPhone;
+	String receiverPhone,
 	/**
 	 * 收货地址:json的形式存储
 	 */
 	@Schema(description = "收货地址:json的形式存储")
-	private String receiverAddressJson;
+	String receiverAddressJson,
 	/**
 	 * 冗余收货地址字符串
 	 */
 	@Schema(description = "冗余收货地址字符串")
-	private String receiverAddress;
+	String receiverAddress,
 	/**
 	 * 买家留言
 	 */
 	@Schema(description = "买家留言")
-	private String memberMsg;
+	String memberMsg,
 	/**
 	 * 取消订单说明
 	 */
 	@Schema(description = "取消订单说明")
-	private String cancelMsg;
+	String cancelMsg,
 	/**
 	 * 物流公司code
 	 */
 	@Schema(description = "物流公司code")
-	private String expressCode;
+	String expressCode,
 	/**
 	 * 物流公司名称
 	 */
 	@Schema(description = "物流公司名称")
-	private String expressName;
+	String expressName,
 	/**
 	 * 物流单号
 	 */
 	@Schema(description = "物流单号")
-	private String expressNumber;
+	String expressNumber,
 	/**
 	 * 买家IP
 	 */
 	@Schema(description = "买家IP")
-	private String memberIp;
+	String memberIp,
 	/**
 	 * 是否结算
 	 */
 	@Schema(description = "是否结算")
-	private Boolean hasSettlement;
+	Boolean hasSettlement,
 	/**
 	 * 订单类型
 	 */
 	@Schema(description = "订单类型")
-	private Integer type;
+	Integer type,
 	/**
 	 * 条形码
 	 */
 	@Schema(description = "条形码")
-	private String barCode;
+	String barCode,
 	/**
 	 * 创建时间
 	 */
 	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
+	LocalDateTime createTime,
 	/**
 	 * 最后修改时间
 	 */
 	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
+	LocalDateTime lastModifiedTime) implements Serializable {
 
-	public OrderVO() {
-	}
+	static final long serialVersionUID = 5126530068827085130L;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
-	}
-
-	public Long getCouponId() {
-		return couponId;
-	}
-
-	public void setCouponId(Long couponId) {
-		this.couponId = couponId;
-	}
-
-	public Long getSeckillId() {
-		return seckillId;
-	}
-
-	public void setSeckillId(Long seckillId) {
-		this.seckillId = seckillId;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public BigDecimal getDiscountAmount() {
-		return discountAmount;
-	}
-
-	public void setDiscountAmount(BigDecimal discountAmount) {
-		this.discountAmount = discountAmount;
-	}
-
-	public BigDecimal getActualAmount() {
-		return actualAmount;
-	}
-
-	public void setActualAmount(BigDecimal actualAmount) {
-		this.actualAmount = actualAmount;
-	}
-
-	public LocalDateTime getPaySuccessTime() {
-		return paySuccessTime;
-	}
-
-	public void setPaySuccessTime(LocalDateTime paySuccessTime) {
-		this.paySuccessTime = paySuccessTime;
-	}
-
-	public Integer getMainStatus() {
-		return mainStatus;
-	}
-
-	public void setMainStatus(Integer mainStatus) {
-		this.mainStatus = mainStatus;
-	}
-
-	public Integer getChildStatus() {
-		return childStatus;
-	}
-
-	public void setChildStatus(Integer childStatus) {
-		this.childStatus = childStatus;
-	}
-
-	public Integer getRefundMainStatus() {
-		return refundMainStatus;
-	}
-
-	public void setRefundMainStatus(Integer refundMainStatus) {
-		this.refundMainStatus = refundMainStatus;
-	}
-
-	public Integer getRefundChildStatus() {
-		return refundChildStatus;
-	}
-
-	public void setRefundChildStatus(Integer refundChildStatus) {
-		this.refundChildStatus = refundChildStatus;
-	}
-
-	public Integer getEvaluateStatus() {
-		return evaluateStatus;
-	}
-
-	public void setEvaluateStatus(Integer evaluateStatus) {
-		this.evaluateStatus = evaluateStatus;
-	}
-
-	public String getRefundCode() {
-		return refundCode;
-	}
-
-	public void setRefundCode(String refundCode) {
-		this.refundCode = refundCode;
-	}
-
-	public Boolean getHasCancel() {
-		return hasCancel;
-	}
-
-	public void setHasCancel(Boolean hasCancel) {
-		this.hasCancel = hasCancel;
-	}
-
-	public LocalDateTime getShipTime() {
-		return shipTime;
-	}
-
-	public void setShipTime(LocalDateTime shipTime) {
-		this.shipTime = shipTime;
-	}
-
-	public LocalDateTime getReceiptTime() {
-		return receiptTime;
-	}
-
-	public void setReceiptTime(LocalDateTime receiptTime) {
-		this.receiptTime = receiptTime;
-	}
-
-	public LocalDateTime getTradeEndTime() {
-		return tradeEndTime;
-	}
-
-	public void setTradeEndTime(LocalDateTime tradeEndTime) {
-		this.tradeEndTime = tradeEndTime;
-	}
-
-	public String getReceiverName() {
-		return receiverName;
-	}
-
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
-	}
-
-	public String getReceiverPhone() {
-		return receiverPhone;
-	}
-
-	public void setReceiverPhone(String receiverPhone) {
-		this.receiverPhone = receiverPhone;
-	}
-
-	public String getReceiverAddressJson() {
-		return receiverAddressJson;
-	}
-
-	public void setReceiverAddressJson(String receiverAddressJson) {
-		this.receiverAddressJson = receiverAddressJson;
-	}
-
-	public String getReceiverAddress() {
-		return receiverAddress;
-	}
-
-	public void setReceiverAddress(String receiverAddress) {
-		this.receiverAddress = receiverAddress;
-	}
-
-	public String getMemberMsg() {
-		return memberMsg;
-	}
-
-	public void setMemberMsg(String memberMsg) {
-		this.memberMsg = memberMsg;
-	}
-
-	public String getCancelMsg() {
-		return cancelMsg;
-	}
-
-	public void setCancelMsg(String cancelMsg) {
-		this.cancelMsg = cancelMsg;
-	}
-
-	public String getExpressCode() {
-		return expressCode;
-	}
-
-	public void setExpressCode(String expressCode) {
-		this.expressCode = expressCode;
-	}
-
-	public String getExpressName() {
-		return expressName;
-	}
-
-	public void setExpressName(String expressName) {
-		this.expressName = expressName;
-	}
-
-	public String getExpressNumber() {
-		return expressNumber;
-	}
-
-	public void setExpressNumber(String expressNumber) {
-		this.expressNumber = expressNumber;
-	}
-
-	public String getMemberIp() {
-		return memberIp;
-	}
-
-	public void setMemberIp(String memberIp) {
-		this.memberIp = memberIp;
-	}
-
-	public Boolean getHasSettlement() {
-		return hasSettlement;
-	}
-
-	public void setHasSettlement(Boolean hasSettlement) {
-		this.hasSettlement = hasSettlement;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public String getBarCode() {
-		return barCode;
-	}
-
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
 }

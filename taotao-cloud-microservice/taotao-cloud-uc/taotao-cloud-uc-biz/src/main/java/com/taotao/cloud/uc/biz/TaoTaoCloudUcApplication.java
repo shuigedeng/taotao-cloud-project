@@ -31,7 +31,6 @@ import org.springframework.boot.SpringApplication;
  * @since 2020/11/30 下午3:33
  */
 @DingerScan(basePackages = "com.taotao.cloud.uc.biz.dingtalk")
-@MapperScan(basePackages = "com.taotao.cloud.uc.biz.mapper")
 @EnableMultiDinger
 @TaoTaoCloudApplication
 public class TaoTaoCloudUcApplication {

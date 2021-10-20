@@ -1,8 +1,6 @@
 package com.taotao.cloud.order.api.service;
 
 
-import com.taotao.cloud.order.api.OrderBO;
-import com.taotao.cloud.order.api.OrderQueryBO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -19,7 +17,5 @@ public interface IOrderInfoService<T extends BaseSuperEntity<T, I>, I extends Se
 
 	Boolean existByCode(String code);
 
-
-	List<OrderQueryBO> findOrderInfoByBo(OrderBO orderBO);
 }
 

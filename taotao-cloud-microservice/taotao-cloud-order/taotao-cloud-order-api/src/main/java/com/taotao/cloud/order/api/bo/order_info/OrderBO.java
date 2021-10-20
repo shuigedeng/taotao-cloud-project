@@ -16,8 +16,6 @@
 package com.taotao.cloud.order.api.bo.order_info;
 
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -28,187 +26,41 @@ import java.math.BigDecimal;
  * @version 2021.10
  * @since 2021-10-09 16:31:52
  */
-@Schema(name = "OrderQueryDTO", description = "订单查询对象")
-public class OrderBO implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 5126530068827085130L;
-
+public record OrderBO(
 	/**
 	 * 买家ID
 	 */
-	@Schema(description = "买家ID")
-	private Long memberId;
+	Long memberId,
 	/**
 	 * 订单编码
 	 */
-	@Schema(description = "订单编码")
-	private String code;
+	String code,
 	/**
 	 * 订单金额
 	 */
-	@Schema(description = "订单金额")
-	private BigDecimal amount;
+	BigDecimal amount,
 	/**
 	 * 订单主状态
 	 */
-	@Schema(description = "订单主状态")
-	private Integer mainStatus;
+	Integer mainStatus,
 	/**
 	 * 订单子状态
 	 */
-	@Schema(description = "订单子状态")
-	private Integer childStatus;
+	Integer childStatus,
 	/**
 	 * 收货人姓名
 	 */
-	@Schema(description = "收货人姓名")
-	private String receiverName;
+	String receiverName,
 	/**
 	 * 收货人电话
 	 */
-	@Schema(description = "收货人电话")
-	private String receiverPhone;
+	String receiverPhone,
 	/**
 	 * 收货地址:json的形式存储
 	 */
-	@Schema(description = "收货地址:json的形式存储")
-	private String receiverAddressJson;
+	String receiverAddressJson) implements Serializable {
 
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public Integer getMainStatus() {
-		return mainStatus;
-	}
-
-	public void setMainStatus(Integer mainStatus) {
-		this.mainStatus = mainStatus;
-	}
-
-	public Integer getChildStatus() {
-		return childStatus;
-	}
-
-	public void setChildStatus(Integer childStatus) {
-		this.childStatus = childStatus;
-	}
-
-	public String getReceiverName() {
-		return receiverName;
-	}
-
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
-	}
-
-	public String getReceiverPhone() {
-		return receiverPhone;
-	}
-
-	public void setReceiverPhone(String receiverPhone) {
-		this.receiverPhone = receiverPhone;
-	}
-
-	public String getReceiverAddressJson() {
-		return receiverAddressJson;
-	}
-
-	public void setReceiverAddressJson(String receiverAddressJson) {
-		this.receiverAddressJson = receiverAddressJson;
-	}
-
-	public static OrderDTOBuilder builder() {
-		return new OrderDTOBuilder();
-	}
-
-	public static final class OrderDTOBuilder {
-
-		private Long memberId;
-		private String code;
-		private BigDecimal amount;
-		private Integer mainStatus;
-		private Integer childStatus;
-		private String receiverName;
-		private String receiverPhone;
-		private String receiverAddressJson;
-
-		private OrderDTOBuilder() {
-		}
+	static final long serialVersionUID = 5126530068827085130L;
 
 
-		public OrderDTOBuilder memberId(Long memberId) {
-			this.memberId = memberId;
-			return this;
-		}
-
-		public OrderDTOBuilder code(String code) {
-			this.code = code;
-			return this;
-		}
-
-		public OrderDTOBuilder amount(BigDecimal amount) {
-			this.amount = amount;
-			return this;
-		}
-
-		public OrderDTOBuilder mainStatus(Integer mainStatus) {
-			this.mainStatus = mainStatus;
-			return this;
-		}
-
-		public OrderDTOBuilder childStatus(Integer childStatus) {
-			this.childStatus = childStatus;
-			return this;
-		}
-
-		public OrderDTOBuilder receiverName(String receiverName) {
-			this.receiverName = receiverName;
-			return this;
-		}
-
-		public OrderDTOBuilder receiverPhone(String receiverPhone) {
-			this.receiverPhone = receiverPhone;
-			return this;
-		}
-
-		public OrderDTOBuilder receiverAddressJson(String receiverAddressJson) {
-			this.receiverAddressJson = receiverAddressJson;
-			return this;
-		}
-
-		public OrderBO build() {
-			OrderBO orderDTO = new OrderBO();
-			orderDTO.setMemberId(memberId);
-			orderDTO.setCode(code);
-			orderDTO.setAmount(amount);
-			orderDTO.setMainStatus(mainStatus);
-			orderDTO.setChildStatus(childStatus);
-			orderDTO.setReceiverName(receiverName);
-			orderDTO.setReceiverPhone(receiverPhone);
-			orderDTO.setReceiverAddressJson(receiverAddressJson);
-			return orderDTO;
-		}
-	}
 }

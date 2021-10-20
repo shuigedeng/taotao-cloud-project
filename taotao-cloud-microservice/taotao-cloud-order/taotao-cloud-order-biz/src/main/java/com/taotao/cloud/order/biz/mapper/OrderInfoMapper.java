@@ -1,7 +1,6 @@
 package com.taotao.cloud.order.biz.mapper;
 
-import com.taotao.cloud.order.api.OrderDO;
-import com.taotao.cloud.order.api.OrderQueryDO;
+import com.taotao.cloud.order.biz.domain.order_info.OrderDO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
@@ -23,14 +22,14 @@ public interface OrderInfoMapper extends BaseSuperMapper<OrderInfo, Long> {
 		"""})
 	OrderInfo getUserById(@Param("id") Long id);
 
-	@Select({"""
-		select o.member_id as memberId,
-			   o.code as code,
-			   o.main_status as mainStatus,
-			   o.child_status as childStatus,
-			   o.amount as amount,
-			   o.receiver_name as receiverName
-		from order_info o where o.code = #{code}
-		"""})
-	List<OrderDO> findOrderInfoByBo(@Param("code") String code);
+	//@Select({"""
+	//	select o.member_id as memberId,
+	//		   o.code as code,
+	//		   o.main_status as mainStatus,
+	//		   o.child_status as childStatus,
+	//		   o.amount as amount,
+	//		   o.receiver_name as receiverName
+	//	from order_info o where o.code = #{code}
+	//	"""})
+	//List<OrderDO> findOrderInfoByBo(@Param("code") String code);
 }
