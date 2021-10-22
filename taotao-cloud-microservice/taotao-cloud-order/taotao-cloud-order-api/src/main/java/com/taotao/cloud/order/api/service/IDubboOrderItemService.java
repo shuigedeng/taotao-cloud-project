@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.data.jpa;
+package com.taotao.cloud.order.api.service;
 
-import com.taotao.cloud.data.jpa.properties.HibernateProperties;
-import com.taotao.cloud.data.jpa.properties.TenantProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 
 /**
- * PropertiesAutoConfiguration 
+ * IDubboOrderService
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-04 07:34:14
+ * @version v1.0
+ * @since 2021/10/20 22:25
  */
-@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class})
-public class PropertiesAutoConfiguration {
+public interface IDubboOrderItemService {
 
+	OrderBO query(Long id);
 }

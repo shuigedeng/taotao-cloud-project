@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
-    //implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
 
     implementation "com.github.nobugboy:ydoc-spring-boot-starter:1.0.8"
 

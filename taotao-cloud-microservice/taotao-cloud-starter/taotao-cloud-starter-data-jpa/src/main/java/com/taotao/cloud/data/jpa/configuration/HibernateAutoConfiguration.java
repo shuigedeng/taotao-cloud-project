@@ -31,6 +31,7 @@ import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import com.taotao.cloud.data.jpa.listener.HibernateInspector;
+import com.taotao.cloud.data.jpa.properties.HibernateProperties;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -78,8 +79,11 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	private final JpaProperties jpaProperties;
+	private HibernateProperties hibernateProperties;
 
-	public HibernateAutoConfiguration(@Autowired final JpaProperties jpaProperties) {
+	public HibernateAutoConfiguration(@Autowired final JpaProperties jpaProperties,
+		HibernateProperties hibernateProperties) {
+		this.hibernateProperties = hibernateProperties;
 		this.jpaProperties = jpaProperties;
 	}
 
@@ -145,8 +149,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		entityManagerFactoryBean.setJpaPropertyMap(newJpaProperties);
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
 
-		entityManagerFactoryBean
-			.setPackagesToScan("com.taotao.cloud.*.biz.entity", "com.taotao.cloud.*.entity");
+		entityManagerFactoryBean.setPackagesToScan(hibernateProperties.getPackages());
 		entityManagerFactoryBean.setPersistenceUnitName("default");
 
 		return entityManagerFactoryBean;

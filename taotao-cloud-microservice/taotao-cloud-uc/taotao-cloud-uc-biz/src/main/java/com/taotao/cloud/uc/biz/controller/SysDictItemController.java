@@ -18,7 +18,7 @@ package com.taotao.cloud.uc.biz.controller;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.uc.api.dto.dict_item.DictItemSaveDTO;
 import com.taotao.cloud.uc.api.dto.dict_item.DictItemUpdateDTO;
-import com.taotao.cloud.uc.api.service.ISysDictItemService;
+import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import com.taotao.cloud.uc.api.vo.dict_item.DictItemQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.web.base.controller.SuperController;

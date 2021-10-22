@@ -16,14 +16,23 @@
 package com.taotao.cloud.order.biz.controller;
 
 import com.taotao.cloud.common.model.BaseQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
-import com.taotao.cloud.order.api.service.IOrderInfoService;
+import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.web.base.controller.SuperController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +50,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderInfoController
 	extends
 	SuperController<IOrderInfoService<OrderInfo, Long>, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
-
+	/**
+	 * 根据父id查询地区数据
+	 *
+	 * @param parentId 父id
+	 * @return {@link Result &lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
+	 * }
+	 * @author shuigedeng
+	 * @since 2021-10-14 11:30:36
+	 */
+	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
+	@RequestOperateLog(description = "根据父id查询")
+	@GetMapping("/parentId/{parentId}")
+	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
+	public Result<List<OrderBO>> queryRegionByParentId(
+		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
+		@PathVariable(name = "parentId") Long parentId) {
+		List<OrderBO> result = service().queryRegionByParentId(parentId);
+		return Result.success(result);
+	}
 }
 

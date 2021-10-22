@@ -18,7 +18,7 @@ package com.taotao.cloud.uc.biz.controller;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.uc.api.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.uc.api.dto.dept.DeptUpdateDTO;
-import com.taotao.cloud.uc.api.service.ISysDeptService;
+import com.taotao.cloud.uc.biz.service.ISysDeptService;
 import com.taotao.cloud.uc.api.vo.dept.DeptQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysDept;
 import com.taotao.cloud.web.base.controller.SuperController;

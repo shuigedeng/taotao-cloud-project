@@ -16,8 +16,6 @@
 package com.taotao.cloud.dingtalk.listeners;
 
 import com.taotao.cloud.dingtalk.multi.MultiDingerRefresh;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextClosedEvent;
 
@@ -27,9 +25,8 @@ import org.springframework.context.event.ContextClosedEvent;
  * @author Jaemon
  * @since 1.0
  */
-public class ExitEventListener
-	extends MultiDingerRefresh
-	implements ApplicationListener<ContextClosedEvent> {
+public class ExitEventListener extends MultiDingerRefresh implements
+	ApplicationListener<ContextClosedEvent> {
 
 	@Override
 	public void onApplicationEvent(ContextClosedEvent event) {

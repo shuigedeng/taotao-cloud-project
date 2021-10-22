@@ -34,19 +34,22 @@ dubbo:
     qos-enable: false
     qos-accept-foreign-ip: false
   registry:
-    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
   protocol:
     name: dubbo
     port: -1
     #serialization: kryo
   cloud:
-    subscribed-services: 'taotao-cloud-order-biz'
+    subscribed-services: 'taotao-cloud-uc-biz'
   scan:
-    base-packages: com.taotao.cloud.*.biz.service.impl
+    base-packages: com.taotao.cloud.order.biz.service.impl
   provider:
     loadbalance: roundrobin
   consumer:
+    check: false
+    loadbalance: roundrobin
+  config-center:
     check: false
 
 seata:
@@ -459,6 +462,9 @@ taotao:
         enabled: true
       check:
         enabled: true
+    hibernate:
+      enabled: true
+      packages: com.taotao.cloud.order.biz.entity
     canal:
       enabled: false
       instances:

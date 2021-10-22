@@ -15,16 +15,29 @@
  */
 package com.taotao.cloud.admin;
 
+import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
+import com.taotao.cloud.dingtalk.entity.DingerRequest;
+import com.taotao.cloud.dingtalk.enums.MessageSubType;
+import com.taotao.cloud.dingtalk.model.DingerSender;
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
+import de.codecentric.boot.admin.server.domain.entities.Instance;
+import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
+import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
+import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import reactor.core.publisher.Mono;
 
 /**
  * TaoTaoCloudAdminServerApplication
@@ -35,12 +48,48 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
  */
 @EnableDiscoveryClient
 @EnableAdminServer
+@EnableTaoTaoCloudDingtalk
 @SpringBootApplication
 public class TaoTaoCloudAdminApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TaoTaoCloudAdminApplication.class, args);
 	}
+
+	@Bean
+	public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
+		return new DingDingNotifier(repository);
+	}
+
+	public static class DingDingNotifier extends AbstractStatusChangeNotifier {
+
+		@Autowired
+		private DingerSender sender;
+
+		public DingDingNotifier(InstanceRepository repository) {
+			super(repository);
+		}
+
+		@Override
+		protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
+			String serviceName = instance.getRegistration().getName();
+			String serviceUrl = instance.getRegistration().getServiceUrl();
+			String status = instance.getStatusInfo().getStatus();
+			Map<String, Object> details = instance.getStatusInfo().getDetails();
+			StringBuilder str = new StringBuilder();
+			str.append("taotao \n");
+			str.append("[监控报警] : ").append(serviceName).append("\n");
+			str.append("[服务地址]: ").append(serviceUrl).append("\n");
+			str.append("[状态]: ").append(status).append("\n");
+			str.append("[详情]: ").append(JsonUtil.toJSONString(details));
+			return Mono.fromRunnable(() -> {
+				sender.send(
+					MessageSubType.TEXT,
+					DingerRequest.request(str.toString()));
+			});
+		}
+	}
+
 
 	@Configuration
 	public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
@@ -82,4 +131,6 @@ public class TaoTaoCloudAdminApplication {
 				);
 		}
 	}
+
+
 }

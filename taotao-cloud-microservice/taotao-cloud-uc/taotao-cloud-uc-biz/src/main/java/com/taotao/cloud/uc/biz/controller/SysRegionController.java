@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.dto.region.RegionSaveDTO;
 import com.taotao.cloud.uc.api.dto.region.RegionUpdateDTO;
-import com.taotao.cloud.uc.api.service.ISysRegionService;
+import com.taotao.cloud.uc.biz.service.ISysRegionService;
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.uc.api.vo.region.RegionQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysRegion;
@@ -63,7 +62,7 @@ public class SysRegionController extends
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestOperateLog(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
-	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
+	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
 		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
 		@PathVariable(name = "parentId") Long parentId) {

@@ -7,10 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
 /**
- * --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
- *
+ * --add-opens java.base/java.lang=ALL-UNNAMED
+ * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+ * --add-opens java.base/java.util=ALL-UNNAMED
+ * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-opens java.base/java.math=ALL-UNNAMED
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-12 10:45:43

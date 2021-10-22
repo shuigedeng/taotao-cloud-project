@@ -29,17 +29,17 @@ public class ServiceNameConstant {
 
 	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth";
 
-	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc";
+	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-biz";
 
 	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file";
 
-	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order";
+	public static final String TAOTAO_CLOUD_ORDER_CENTER = "taotao-cloud-order-biz";
 
-	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product";
+	public static final String TAOTAO_CLOUD_PRODUCT_CENTER = "taotao-cloud-product-biz";
 
 	public static final String TAOTAO_CLOUD_AFTERSALE_CENTER = "taotao-cloud-aftersale";
 
-	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer";
+	public static final String TAOTAO_CLOUD_CUSTOMER_CENTER = "taotao-cloud-customer-biz";
 
 	public static final String TAOTAO_CLOUD_LOGISTICS_CENTER = "taotao-cloud-logistics";
 

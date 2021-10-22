@@ -26,7 +26,7 @@ import com.taotao.cloud.log.annotation.RequestOperateLog;
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceUpdateDTO;
-import com.taotao.cloud.uc.api.service.ISysResourceService;
+import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;

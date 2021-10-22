@@ -46,19 +46,22 @@ dubbo:
     qos-enable: false
     qos-accept-foreign-ip: false
   registry:
-    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
   protocol:
     name: dubbo
     port: -1
     #serialization: kryo
   cloud:
-    subscribed-services: 'taotao-cloud-order'
+    subscribed-services: 'taotao-cloud-order-biz'
   scan:
-    base-packages: com.taotao.cloud.*.biz.service.impl
+    base-packages: com.taotao.cloud.uc.biz.service
   provider:
     loadbalance: roundrobin
   consumer:
+    check: false
+    loadbalance: roundrobin
+  config-center:
     check: false
 
 seata:
@@ -243,20 +246,20 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
-  mail:
-    host: smtp.qq.com
-    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
-    username: 981376577@qq.com
-    port: 465
-    protocol: smtps
-    properties:
-      smtp:
-        auth: true
-        timeout: 2500
-      mail:
-        smtp:
-          ssl:
-            enable: true
+  #mail:
+  #  host: smtp.qq.com
+  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+  #  username: 981376577@qq.com
+  #  port: 465
+  #  protocol: smtps
+  #  properties:
+  #    smtp:
+  #      auth: true
+  #      timeout: 2500
+  #    mail:
+  #      smtp:
+  #        ssl:
+  #          enable: true
   shardingsphere:
     enabled: false
     # 分库分表 + 读写分离
@@ -549,6 +552,9 @@ taotao:
       type: redis
     rabbitmq:
       enabled: false
+    hibernate:
+      enabled: true
+      packages: com.taotao.cloud.uc.biz.entity
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.*.biz.entity

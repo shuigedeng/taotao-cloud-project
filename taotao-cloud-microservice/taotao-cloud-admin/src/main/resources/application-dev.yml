@@ -68,12 +68,12 @@ spring:
           to: 981376577@qq.com
           cc: 981376577@qq.com
           from: Spring Boot Admin <981376577@qq.com>
-  mail:
-    host: smtp.qq.com
-    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
-    port: 465
-    username: 981376577@qq.com
-    protocol: smtps
+  #mail:
+  #  host: smtp.qq.com
+  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+  #  port: 465
+  #  username: 981376577@qq.com
+  #  protocol: smtps
   security:
     user:
       name: admin
@@ -114,6 +114,13 @@ spring:
 
 taotao:
   cloud:
+    dinger:
+      enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:2f81a18fd235ffbecc00519d53bb8054a7ff3e50f3287e3e4c5fef6e5c8e1016}
+          secret: ${DINGDING_SECRET:SEC2ec149b6eaab26a16b3d6c78845848251d0667fb8aa288b0e79d8675e4608d80}
     core:
       enabled: true
       env: dev

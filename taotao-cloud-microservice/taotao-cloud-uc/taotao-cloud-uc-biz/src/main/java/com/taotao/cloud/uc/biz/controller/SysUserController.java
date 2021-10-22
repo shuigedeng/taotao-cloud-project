@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
@@ -26,7 +25,7 @@ import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.uc.api.dto.user.UserSaveDTO;
 import com.taotao.cloud.uc.api.dto.user.UserUpdateDTO;
 import com.taotao.cloud.uc.biz.entity.SysUser;
-import com.taotao.cloud.uc.api.service.ISysUserService;
+import com.taotao.cloud.uc.biz.service.ISysUserService;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
 import com.taotao.cloud.uc.biz.mapstruct.UserMapper;
 import com.taotao.cloud.web.base.controller.SuperController;

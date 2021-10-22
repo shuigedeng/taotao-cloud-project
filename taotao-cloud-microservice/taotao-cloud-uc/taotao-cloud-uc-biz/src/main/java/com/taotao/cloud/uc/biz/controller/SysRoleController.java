@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.uc.biz.controller;
 
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.log.annotation.RequestOperateLog;
@@ -24,7 +23,7 @@ import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.dto.role.RoleSaveDTO;
 import com.taotao.cloud.uc.api.dto.role.RoleUpdateDTO;
 import com.taotao.cloud.uc.biz.entity.SysRole;
-import com.taotao.cloud.uc.api.service.ISysRoleService;
+import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
 import com.taotao.cloud.uc.biz.mapstruct.RoleMapper;
 import com.taotao.cloud.web.base.controller.SuperController;
