@@ -20,7 +20,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.biz.entity.QSysUserRole;
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
-import com.taotao.cloud.uc.biz.mapper.SysUserRoleMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysUserRoleMapper;
 import com.taotao.cloud.uc.biz.repository.ISysUserRoleRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysUserRoleRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @DubboService
 public class SysUserRoleServiceImpl extends
-	BaseSuperServiceImpl<SysUserRoleMapper, SysUserRole, SysUserRoleRepository, ISysUserRoleRepository, Long>
+	BaseSuperServiceImpl<ISysUserRoleMapper, SysUserRole, SysUserRoleRepository, ISysUserRoleRepository, Long>
 	implements ISysUserRoleService<SysUserRole, Long> {
 
 	private final static QSysUserRole SYS_USER_ROLE = QSysUserRole.sysUserRole;

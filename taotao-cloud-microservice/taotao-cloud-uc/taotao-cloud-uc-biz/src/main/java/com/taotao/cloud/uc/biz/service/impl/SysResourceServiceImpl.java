@@ -20,20 +20,20 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResourceTypeEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.order.api.feign.RemoteOrderItemService;
-import com.taotao.cloud.order.api.feign.RemoteOrderService;
-import com.taotao.cloud.order.api.service.IDubboOrderService;
+import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
+import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
-import com.taotao.cloud.uc.api.service.IDubboResourceService;
+import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.biz.entity.QSysResource;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.uc.biz.entity.SysRole;
-import com.taotao.cloud.uc.biz.mapper.SysResourceMapper;
-import com.taotao.cloud.uc.biz.mapstruct.ResourceMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysResourceMapper;
+import com.taotao.cloud.uc.biz.mapstruct.IResourceMapStruct;
 import com.taotao.cloud.uc.biz.repository.ISysResourceRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
@@ -65,22 +65,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @DubboService
 public class SysResourceServiceImpl extends
-	BaseSuperServiceImpl<SysResourceMapper, SysResource, SysResourceRepository, ISysResourceRepository, Long>
+	BaseSuperServiceImpl<ISysResourceMapper, SysResource, SysResourceRepository, ISysResourceRepository, Long>
 	implements IDubboResourceService, ISysResourceService<SysResource, Long> {
 
 	private final ISysRoleService<SysRole, Long> sysRoleService;
 
-	private final RemoteOrderItemService remoteOrderItemService;
-	private final RemoteOrderService remoteOrderService;
+	private final IFeignOrderItemService IFeignOrderItemService;
+	private final IFeignOrderService IFeignOrderService;
 
 	@DubboReference
 	private IDubboOrderService dubboOrderService;
 
 	public SysResourceServiceImpl(ISysRoleService<SysRole, Long> sysRoleService,
-		RemoteOrderItemService remoteOrderItemService,
-		RemoteOrderService remoteOrderService) {
-		this.remoteOrderItemService = remoteOrderItemService;
-		this.remoteOrderService = remoteOrderService;
+		IFeignOrderItemService IFeignOrderItemService,
+		IFeignOrderService IFeignOrderService) {
+		this.IFeignOrderItemService = IFeignOrderItemService;
+		this.IFeignOrderService = IFeignOrderService;
 		this.sysRoleService = sysRoleService;
 	}
 
@@ -90,25 +90,25 @@ public class SysResourceServiceImpl extends
 	public List<ResourceBO> findResourceByIdList(List<Long> idList) {
 
 		List<SysResource> resources = cr().findResourceByIdList(idList);
-		return ResourceMapper.INSTANCE.resourcesToBos(resources);
+		return IResourceMapStruct.INSTANCE.resourcesToBos(resources);
 	}
 
 	@Override
 	public List<ResourceBO> findAllResources() {
 		List<SysResource> resources = ir().findAll();
-		return ResourceMapper.INSTANCE.resourcesToBos(resources);
+		return IResourceMapStruct.INSTANCE.resourcesToBos(resources);
 	}
 
 	@Override
 	public List<ResourceQueryBO> findAllById(Long id) {
 		List<SysResource> resources = ir().findAll();
-		return ResourceMapper.INSTANCE.entitysToQueryBOs(resources);
+		return IResourceMapStruct.INSTANCE.entitysToQueryBOs(resources);
 	}
 
 	@Override
 	public List<ResourceBO> findResourceByRoleIds(Set<Long> roleIds) {
 		List<SysResource> resources = cr().findResourceByRoleIds(roleIds);
-		return ResourceMapper.INSTANCE.resourcesToBos(resources)
+		return IResourceMapStruct.INSTANCE.resourcesToBos(resources)
 			.stream()
 			.sorted(Comparator.comparing(ResourceBO::id))
 			.toList();

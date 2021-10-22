@@ -1,10 +1,10 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.uc.api.service.IDubboCompanyService;
+import com.taotao.cloud.uc.api.dubbo.IDubboCompanyService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.biz.entity.SysCompany;
-import com.taotao.cloud.uc.biz.mapper.SysCompanyMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysCompanyMapper;
 import com.taotao.cloud.uc.biz.repository.ISysCompanyRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysCompanyRepository;
 import com.taotao.cloud.uc.biz.service.ISysCompanyService;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService
 public class SysCompanyServiceImpl extends
-	BaseSuperServiceImpl<SysCompanyMapper, SysCompany, SysCompanyRepository, ISysCompanyRepository, Long>
+	BaseSuperServiceImpl<ISysCompanyMapper, SysCompany, SysCompanyRepository, ISysCompanyRepository, Long>
 	implements IDubboCompanyService, ISysCompanyService<SysCompany, Long> {
 
 	@Override

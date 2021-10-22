@@ -7,15 +7,15 @@ package com.taotao.cloud.order.biz.service.impl;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
-import com.taotao.cloud.order.api.service.IDubboOrderService;
+import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
-import com.taotao.cloud.order.biz.mapper.OrderInfoMapper;
-import com.taotao.cloud.order.biz.mapstruct.OrderMapStruct;
+import com.taotao.cloud.order.biz.mapper.IOrderInfoMapper;
+import com.taotao.cloud.order.biz.mapstruct.IOrderMapStruct;
 import com.taotao.cloud.order.biz.repository.IOrderInfoRepository;
 import com.taotao.cloud.order.biz.repository.impl.OrderInfoRepository;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
-import com.taotao.cloud.uc.api.service.IDubboResourceService;
+import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 @DubboService
 public class OrderInfoServiceImpl
 	extends
-	BaseSuperServiceImpl<OrderInfoMapper, OrderInfo, OrderInfoRepository, IOrderInfoRepository, Long>
+	BaseSuperServiceImpl<IOrderInfoMapper, OrderInfo, OrderInfoRepository, IOrderInfoRepository, Long>
 	implements IDubboOrderService, IOrderInfoService<OrderInfo, Long> {
 
 	private final static QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
@@ -65,6 +65,6 @@ public class OrderInfoServiceImpl
 	@Override
 	public OrderBO query(Long id) {
 		OrderInfo orderInfo = getById(id);
-		return OrderMapStruct.INSTANCE.entityToBo(orderInfo);
+		return IOrderMapStruct.INSTANCE.entityToBo(orderInfo);
 	}
 }

@@ -27,7 +27,7 @@ import com.taotao.cloud.uc.api.dto.user.UserUpdateDTO;
 import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.biz.service.ISysUserService;
 import com.taotao.cloud.uc.api.vo.user.UserQueryVO;
-import com.taotao.cloud.uc.biz.mapstruct.UserMapper;
+import com.taotao.cloud.uc.biz.mapstruct.IUserMapStruct;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -137,7 +137,7 @@ public class SysUserController extends
 		}
 		Long userId = securityUser.getUserId();
 		SysUser sysUser = service().getById(userId);
-		return success(UserMapper.INSTANCE.sysUserToUserQueryVO(sysUser));
+		return success(IUserMapStruct.INSTANCE.sysUserToUserQueryVO(sysUser));
 	}
 
 

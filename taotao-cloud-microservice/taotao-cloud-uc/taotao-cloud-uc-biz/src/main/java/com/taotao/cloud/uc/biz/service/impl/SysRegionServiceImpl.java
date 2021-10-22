@@ -17,10 +17,10 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.order.api.service.IDubboOrderService;
+import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.uc.biz.entity.SysRegion;
-import com.taotao.cloud.uc.biz.mapper.SysRegionMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysRegionMapper;
 import com.taotao.cloud.uc.biz.repository.ISysRegionRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysRegionRepository;
 import com.taotao.cloud.uc.biz.service.ISysRegionService;
@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService
 public class SysRegionServiceImpl extends
-	BaseSuperServiceImpl<SysRegionMapper, SysRegion, SysRegionRepository, ISysRegionRepository, Long>
+	BaseSuperServiceImpl<ISysRegionMapper, SysRegion, SysRegionRepository, ISysRegionRepository, Long>
 	implements ISysRegionService<SysRegion, Long> {
 
 	@DubboReference

@@ -30,7 +30,7 @@ import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
-import com.taotao.cloud.uc.biz.mapstruct.ResourceMapper;
+import com.taotao.cloud.uc.biz.mapstruct.IResourceMapStruct;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -85,7 +85,7 @@ public class SysResourceController extends
 		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
 		@PathVariable(value = "roleId") Long roleId) {
 		List<ResourceBO> resources = service().findResourceByRoleIds(Set.of(roleId));
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.resourceBosToVos(resources);
+		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
 		return success(result);
 	}
 
@@ -105,7 +105,7 @@ public class SysResourceController extends
 		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
 		@RequestParam(value = "roleIds") Set<Long> roleIds) {
 		List<ResourceBO> resources = service().findResourceByRoleIds(roleIds);
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.resourceBosToVos(resources);
+		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
 		return Result.success(result);
 	}
 
@@ -125,7 +125,7 @@ public class SysResourceController extends
 		@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
 		@PathVariable(value = "code") String code) {
 		List<ResourceBO> resources = service().findResourceByCodes(Set.of(code));
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.resourceBosToVos(resources);
+		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
 		return Result.success(result);
 	}
 
@@ -145,7 +145,7 @@ public class SysResourceController extends
 		@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
 		@RequestParam(value = "codes") Set<String> codes) {
 		List<ResourceBO> resources = service().findResourceByCodes(codes);
-		List<ResourceQueryVO> result = ResourceMapper.INSTANCE.resourceBosToVos(resources);
+		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
 		return success(result);
 	}
 

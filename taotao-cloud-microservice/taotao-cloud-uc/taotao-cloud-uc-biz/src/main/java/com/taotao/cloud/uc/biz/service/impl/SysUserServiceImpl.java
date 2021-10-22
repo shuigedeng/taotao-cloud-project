@@ -22,7 +22,7 @@ import com.taotao.cloud.uc.biz.service.ISysUserService;
 import com.taotao.cloud.uc.biz.entity.QSysUser;
 import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
-import com.taotao.cloud.uc.biz.mapper.SysUserMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysUserMapper;
 import com.taotao.cloud.uc.biz.repository.ISysUserRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysUserRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @DubboService
 public class SysUserServiceImpl extends
-	BaseSuperServiceImpl<SysUserMapper, SysUser, SysUserRepository, ISysUserRepository, Long>
+	BaseSuperServiceImpl<ISysUserMapper, SysUser, SysUserRepository, ISysUserRepository, Long>
 	implements ISysUserService<SysUser, Long> {
 
 	private final static QSysUser SYS_USER = QSysUser.sysUser;

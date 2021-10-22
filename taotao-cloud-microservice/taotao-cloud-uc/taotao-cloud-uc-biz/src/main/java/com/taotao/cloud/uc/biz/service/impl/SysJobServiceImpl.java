@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.entity.SysJob;
-import com.taotao.cloud.uc.biz.mapper.SysJobMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysJobMapper;
 import com.taotao.cloud.uc.biz.repository.ISysJobRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysJobRepository;
 import com.taotao.cloud.uc.biz.service.ISysJobService;
@@ -19,6 +19,6 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService
 public class SysJobServiceImpl  extends
-	BaseSuperServiceImpl<SysJobMapper, SysJob,SysJobRepository, ISysJobRepository, Long>
+	BaseSuperServiceImpl<ISysJobMapper, SysJob,SysJobRepository, ISysJobRepository, Long>
 	implements ISysJobService<SysJob, Long> {
 }

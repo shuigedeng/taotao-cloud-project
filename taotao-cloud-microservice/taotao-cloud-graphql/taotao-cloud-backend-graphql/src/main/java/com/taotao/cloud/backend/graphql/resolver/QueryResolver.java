@@ -18,9 +18,9 @@ package com.taotao.cloud.backend.graphql.resolver;
 import com.taotao.cloud.backend.graphql.entity.User;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.backend.graphql.entity.Article;
-import com.taotao.cloud.order.api.feign.RemoteOrderService;
+import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.product.api.feign.RemoteProductService;
-import com.taotao.cloud.uc.api.feign.RemoteUserService;
+import com.taotao.cloud.uc.api.feign.IFeignUserService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,11 +39,11 @@ import java.util.List;
 public class QueryResolver implements GraphQLQueryResolver {
 
 	@Autowired
-	private RemoteUserService remoteUserService;
+	private IFeignUserService IFeignUserService;
 	@Autowired
 	private RemoteProductService remoteProductService;
 	@Autowired
-	private RemoteOrderService remoteOrderService;
+	private IFeignOrderService IFeignOrderService;
 
 	public User user(String nickname) {
 		LogUtil.info("Query Resolver ==> user");

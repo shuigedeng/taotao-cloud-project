@@ -17,13 +17,13 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
+import com.taotao.cloud.uc.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.entity.QSysRole;
 import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.biz.entity.SysRoleResource;
-import com.taotao.cloud.uc.biz.mapper.SysRoleMapper;
-import com.taotao.cloud.uc.biz.mapstruct.RoleMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysRoleMapper;
 import com.taotao.cloud.uc.biz.repository.ISysRoleRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysRoleRepository;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @DubboService
 public class SysRoleServiceImpl extends
-	BaseSuperServiceImpl<SysRoleMapper, SysRole, SysRoleRepository, ISysRoleRepository, Long>
+	BaseSuperServiceImpl<ISysRoleMapper, SysRole, SysRoleRepository, ISysRoleRepository, Long>
 	implements ISysRoleService<SysRole, Long> {
 
 	private final static QSysRole SYS_ROLE = QSysRole.sysRole;
@@ -70,19 +70,19 @@ public class SysRoleServiceImpl extends
 	@Override
 	public List<RoleBO> findAllRoles() {
 		List<SysRole> roles = ir().findAll();
-		return RoleMapper.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
 		List<SysRole> roles = cr().findRoleByUserIds(userIds);
-		return RoleMapper.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByCodes(Set<String> codes) {
 		List<SysRole> roles = cr().findRoleByCodes(codes);
-		return RoleMapper.INSTANCE.rolesToBos(roles);
+		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 }

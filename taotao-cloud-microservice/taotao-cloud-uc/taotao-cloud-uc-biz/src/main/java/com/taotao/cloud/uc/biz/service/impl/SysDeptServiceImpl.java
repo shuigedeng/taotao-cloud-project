@@ -1,7 +1,7 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.entity.SysDept;
-import com.taotao.cloud.uc.biz.mapper.SysDeptMapper;
+import com.taotao.cloud.uc.biz.mapper.ISysDeptMapper;
 import com.taotao.cloud.uc.biz.repository.ISysDeptRepository;
 import com.taotao.cloud.uc.biz.repository.impl.SysDeptRepository;
 import com.taotao.cloud.uc.biz.service.ISysDeptService;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService
 public class SysDeptServiceImpl extends
-	BaseSuperServiceImpl<SysDeptMapper, SysDept, SysDeptRepository, ISysDeptRepository, Long>
+	BaseSuperServiceImpl<ISysDeptMapper, SysDept, SysDeptRepository, ISysDeptRepository, Long>
 	implements ISysDeptService<SysDept, Long> {
 
 }

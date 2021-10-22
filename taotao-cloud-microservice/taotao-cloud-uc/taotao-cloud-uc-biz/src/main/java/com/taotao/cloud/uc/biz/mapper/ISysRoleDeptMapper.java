@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.biz.service.impl;
+package com.taotao.cloud.uc.biz.mapper;
 
-import com.taotao.cloud.uc.biz.service.ISysRoleDeptService;
 import com.taotao.cloud.uc.biz.entity.SysRoleDept;
-import com.taotao.cloud.uc.biz.mapper.ISysRoleDeptMapper;
-import com.taotao.cloud.uc.biz.repository.ISysRoleDeptRepository;
-import com.taotao.cloud.uc.biz.repository.impl.SysRoleDeptRepository;
-import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.stereotype.Service;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
+ * CompanyMapper
+ *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/10/21 09:48
+ * @since 2021/10/13 22:50
  */
-@Service
-@DubboService
-public class SysRoleDeptServiceImpl extends
-	BaseSuperServiceImpl<ISysRoleDeptMapper, SysRoleDept, SysRoleDeptRepository, ISysRoleDeptRepository, Long>
-	implements ISysRoleDeptService<SysRoleDept, Long> {
-
+@Mapper
+public interface ISysRoleDeptMapper extends BaseSuperMapper<SysRoleDept, Long> {
 
 }
