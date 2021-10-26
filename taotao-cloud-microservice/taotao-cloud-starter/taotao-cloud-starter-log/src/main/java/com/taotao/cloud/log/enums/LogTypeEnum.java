@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.enums;
+package com.taotao.cloud.log.enums;
+
+import com.taotao.cloud.common.enums.BaseEnum;
 
 /**
  * 日志类型

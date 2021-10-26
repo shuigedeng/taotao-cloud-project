@@ -5,6 +5,7 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -18,6 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @since 2021-10-12 10:45:43
  */
 @TaoTaoCloudApplication
+@MapperScan(basePackages = "com.taotao.cloud.order.biz.mapper")
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.order.biz.repository.inf")
 public class TaoTaoCloudOrderApplication {
 
 	public static void main(String[] args) {

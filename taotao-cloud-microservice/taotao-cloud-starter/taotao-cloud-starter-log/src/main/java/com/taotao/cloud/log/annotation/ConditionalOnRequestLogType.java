@@ -13,19 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.biz.repository;
+package com.taotao.cloud.log.annotation;
 
-import com.taotao.cloud.order.biz.entity.OrderItem;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import javax.persistence.EntityManager;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.taotao.cloud.log.enums.LogTypeEnum;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.context.annotation.Conditional;
 
 /**
+ * 系统操作记录
+ *
  * @author shuigedeng
  * @version 1.0.0
- * @since 2020/10/22 12:46
+ * @since 2020/6/3 13:32
  */
-@Repository
-public interface IOrderItemRepository extends JpaRepository<OrderItem, Long> {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Documented
+@Conditional(RequestLogTypeCondition.class)
+public @interface ConditionalOnRequestLogType {
+
+	LogTypeEnum logType() default LogTypeEnum.LOGGER;
+
 }

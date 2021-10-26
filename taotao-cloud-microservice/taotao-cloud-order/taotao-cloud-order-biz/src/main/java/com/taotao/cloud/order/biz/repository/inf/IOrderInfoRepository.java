@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.biz.repository;
+package com.taotao.cloud.order.biz.repository.inf;
 
 import com.taotao.cloud.order.biz.domain.order_info.OrderDO;
 import com.taotao.cloud.order.biz.entity.OrderInfo;

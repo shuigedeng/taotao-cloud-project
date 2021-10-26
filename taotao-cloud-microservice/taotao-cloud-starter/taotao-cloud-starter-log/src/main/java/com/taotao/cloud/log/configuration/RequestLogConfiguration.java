@@ -16,21 +16,20 @@
 package com.taotao.cloud.log.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.enums.LogTypeEnum;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.utils.PropertyUtil;
 import com.taotao.cloud.log.aspect.RequestLogAspect;
+import com.taotao.cloud.log.enums.LogTypeEnum;
 import com.taotao.cloud.log.listener.RequestLogListener;
 import com.taotao.cloud.log.properties.RequestLogProperties;
 import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -43,6 +42,7 @@ import org.springframework.kafka.core.KafkaTemplate;
  * @since 2020/4/30 10:21
  */
 @Configuration
+@ConditionalOnProperty(prefix = RequestLogProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RequestLogConfiguration implements InitializingBean {
 
 	@Override
@@ -50,82 +50,53 @@ public class RequestLogConfiguration implements InitializingBean {
 		LogUtil.started(RequestLogConfiguration.class, StarterNameConstant.LOG_STARTER);
 	}
 
-	private final RequestLogProperties requestLogProperties;
-
-	public RequestLogConfiguration(RequestLogProperties requestLogProperties) {
-		this.requestLogProperties = requestLogProperties;
-	}
+	@Autowired
+	private RequestLogProperties properties;
 
 	@Bean
 	public RequestLogListener sysLogListener() {
 		LogUtil.started(RequestLogListener.class, StarterNameConstant.LOG_STARTER);
-
 		return new RequestLogListener();
 	}
 
 	@Bean
-	public RequestLogAspect sysLogAspect(ApplicationEventPublisher publisher) {
+	public RequestLogAspect sysLogAspect() {
 		LogUtil.started(RequestLogAspect.class, StarterNameConstant.LOG_STARTER);
-
-		return new RequestLogAspect(requestLogProperties, publisher);
+		return new RequestLogAspect();
 	}
 
 	@Bean
-	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "logger", matchIfMissing = true)
 	public LoggerRequestLogServiceImpl loggerSysLogService() {
 		LogUtil.started(LoggerRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
-
-		if (determineLogType()) {
-			if (determineLogType("logger")) {
-				return new LoggerRequestLogServiceImpl();
-			}
+		if (determineLogType(LogTypeEnum.LOGGER)) {
+			return new LoggerRequestLogServiceImpl();
 		}
 		return null;
 	}
 
-
 	@Bean
-	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "redis")
-	@ConditionalOnBean(value = {RedisRepository.class})
-	public RedisRequestLogServiceImpl redisSysLogService() {
+	public RedisRequestLogServiceImpl redisSysLogService(RedisRepository redisRepository) {
 		LogUtil.started(RedisRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
-
-		if (determineLogType()) {
-			if (determineLogType("redis")) {
-				return new RedisRequestLogServiceImpl();
-			}
+		if (determineLogType(LogTypeEnum.REDIS)) {
+			return new RedisRequestLogServiceImpl(redisRepository);
 		}
 		return null;
 	}
 
 	@Bean
-	//@ConditionalOnProperty(prefix = "taotao.cloud.log", name = "type", havingValue = "kafka")
-	@ConditionalOnClass({KafkaTemplate.class})
-	public KafkaRequestLogServiceImpl kafkaSysLogService() {
+	public KafkaRequestLogServiceImpl kafkaSysLogService(KafkaTemplate<String, String> kafkaTemplate) {
 		LogUtil.started(KafkaRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
-
-		if (determineLogType()) {
-			if (determineLogType("kafka")) {
-				return new KafkaRequestLogServiceImpl(
-					PropertyUtil.getProperty(CoreProperties.SpringApplicationName));
-			}
+		if (determineLogType(LogTypeEnum.KAFKA)) {
+			return new KafkaRequestLogServiceImpl(kafkaTemplate);
 		}
 		return null;
 	}
 
-	private boolean determineLogType() {
-		LogTypeEnum[] types = requestLogProperties.getTypes();
-		return types.length != 0;
-	}
-
-	private boolean determineLogType(String type) {
-		LogTypeEnum[] types = requestLogProperties.getTypes();
-		for (LogTypeEnum s : types) {
-			if (type.equals(s.name())) {
-				return true;
-			}
-		}
-		return false;
+	private boolean determineLogType(LogTypeEnum logTypeEnum) {
+		LogTypeEnum[] types = properties.getTypes();
+		assert types != null;
+		return Arrays.stream(types)
+			.anyMatch(type -> type.getCode() == logTypeEnum.getCode());
 	}
 }
 

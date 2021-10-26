@@ -34,18 +34,22 @@ import javax.annotation.Resource;
  */
 public class RedisRequestLogServiceImpl implements IRequestLogService {
 
-	private static final String SYS_LOG = "sys:log:request:";
+	private static final String SYS_LOG = "sys:request:log:";
 
-	@Resource
-	private RedisRepository redisRepository;
+	private final RedisRepository redisRepository;
+
+	public RedisRequestLogServiceImpl(RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
+	}
 
 	@Override
 	public void save(RequestLog requestLog) {
 		String date = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
 			.format(Instant.now());
+
 		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(requestLog));
 		if (index > 0) {
-			LogUtil.info("redis远程日志记录成功：{}", requestLog);
+			//LogUtil.info("redis远程日志记录成功：{}", requestLog);
 		} else {
 			LogUtil.error("redis远程日志记录失败：{}", requestLog);
 		}

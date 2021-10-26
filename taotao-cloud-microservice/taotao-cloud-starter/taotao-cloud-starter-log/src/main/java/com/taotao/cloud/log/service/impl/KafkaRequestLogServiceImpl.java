@@ -20,6 +20,8 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.log.model.RequestLog;
 import com.taotao.cloud.log.service.IRequestLogService;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -36,13 +38,13 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
 	public static final String REQUEST_LOG_TOPIC = "request-log-";
 
-	private final String appName;
+	@Value("${spring.application.name}")
+	private  String appName;
 
-	@Resource
-	private KafkaTemplate<String, String> kafkaTemplate;
+	private final KafkaTemplate<String, String> kafkaTemplate;
 
-	public KafkaRequestLogServiceImpl(String appName) {
-		this.appName = appName;
+	public KafkaRequestLogServiceImpl(KafkaTemplate<String, String> kafkaTemplate) {
+		this.kafkaTemplate = kafkaTemplate;
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 
 			@Override
 			public void onSuccess(SendResult<String, String> stringObjectSendResult) {
-//				log.info("远程日志记录成功：{}", requestLog);
+				//log.info("远程日志记录成功：{}", requestLog);
 			}
 		});
 	}

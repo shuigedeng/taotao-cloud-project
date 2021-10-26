@@ -22,9 +22,7 @@ import com.taotao.cloud.data.mybatis.plus.annotation.EnableTaoTaoCloudMybatisPlu
 import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
 import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
 import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
-import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeignClients;
-import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudLoadbalancer;
 import com.taotao.cloud.file.annotation.EnableTaoTaoCloudUploadFile;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;

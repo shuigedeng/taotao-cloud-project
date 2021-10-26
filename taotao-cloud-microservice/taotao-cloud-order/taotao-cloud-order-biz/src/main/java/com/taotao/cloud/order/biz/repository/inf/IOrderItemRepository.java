@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.order.biz.repository.impl;
+package com.taotao.cloud.order.biz.repository.inf;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.biz.entity.OrderItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
-import java.util.List;
 import javax.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,21 +27,5 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
-
-	public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
-
-	public OrderInfoRepository(EntityManager em) {
-		super(OrderInfo.class, em);
-	}
-
-	public List<OrderInfo> findOrderInfoById(Long id) {
-		List<OrderInfo> fetch = jpaQueryFactory()
-			.selectFrom(ORDER_INFO)
-			.where(ORDER_INFO.id.eq(id))
-			.fetch();
-		LogUtil.info(fetch.toString());
-		return fetch;
-	}
-
+public interface IOrderItemRepository extends JpaRepository<OrderItem, Long> {
 }

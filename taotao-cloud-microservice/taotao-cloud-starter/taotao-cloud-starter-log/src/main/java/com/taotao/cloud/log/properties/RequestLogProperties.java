@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.log.properties;
 
-import com.taotao.cloud.common.enums.LogTypeEnum;
-import java.util.Arrays;
-import java.util.Objects;
+import com.taotao.cloud.log.enums.LogTypeEnum;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -29,8 +28,11 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/5/2 11:19
  */
 @RefreshScope
-@ConfigurationProperties(prefix = "taotao.cloud.log.request-log")
+@ConfigurationProperties(prefix = RequestLogProperties.PREFIX)
 public class RequestLogProperties {
+
+	public static final String PREFIX = "taotao.cloud.log.request-log";
+
 
 	/**
 	 * 是否开启审计日志
@@ -61,31 +63,4 @@ public class RequestLogProperties {
 		this.types = types;
 	}
 
-	@Override
-	public String toString() {
-		return "RequestLogProperties{" +
-			"enabled=" + enabled +
-			", types=" + Arrays.toString(types) +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		RequestLogProperties that = (RequestLogProperties) o;
-		return Objects.equals(enabled, that.enabled) && Arrays.equals(types,
-			that.types);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = Objects.hash(enabled);
-		result = 31 * result + Arrays.hashCode(types);
-		return result;
-	}
 }
