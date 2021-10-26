@@ -78,12 +78,10 @@ public class DubboFeignProviderBeanPostProcessor implements BeanDefinitionRegist
         this(new LinkedHashSet<String>(packagesToScan));
     }
 
-    public DubboFeignProviderBeanPostProcessor(Set<String> packagesToScan) {
-        this.packagesToScan = packagesToScan;
+    public DubboFeignProviderBeanPostProcessor(Set<String> packagesToScan) {this.packagesToScan = packagesToScan;
         @DubboService
-        final class DefaultServiceClass {
-        }
-        ;
+        final class DefaultServiceClass { }
+
         this.defaultService = DefaultServiceClass.class.getAnnotation(DubboService.class);
     }
 

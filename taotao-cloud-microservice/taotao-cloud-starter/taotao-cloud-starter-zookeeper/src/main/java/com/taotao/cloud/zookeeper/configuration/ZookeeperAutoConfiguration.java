@@ -31,6 +31,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 /**
  * ZookeeperAutoConfiguration
  *
@@ -39,6 +40,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-07 20:37:49
  */
 @Configuration
+@ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ZookeeperAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -48,7 +50,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 
 	@Bean(initMethod = "start", destroyMethod = "close")
 	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "enabled", havingValue = "true")
 	public CuratorFramework curatorFramework(ZookeeperProperties property) {
 		LogUtil.started(CuratorFramework.class, StarterNameConstant.ZOOKEEPER_STARTER);
 
@@ -64,7 +65,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean({CuratorFramework.class})
 	public ZookeeperTemplate zookeeperTemplate(CuratorFramework curatorFramework) {
 		LogUtil.started(ZookeeperTemplate.class, StarterNameConstant.ZOOKEEPER_STARTER);
 
@@ -72,7 +72,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean(name = "zookeeperDistributedLock")
-	@ConditionalOnBean({CuratorFramework.class})
 	@ConditionalOnProperty(prefix = ZookeeperLockProperties.PREFIX, name = "enabled", havingValue = "true")
 	public ZookeeperDistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
 		LogUtil.started(ZookeeperDistributedLock.class, StarterNameConstant.ZOOKEEPER_STARTER);

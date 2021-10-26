@@ -36,9 +36,9 @@ public class DubboFeignConfiguration implements InitializingBean {
 		LogUtil.started(DubboFeignConfiguration.class, StarterNameConstant.DUBBO_STARTER);
 	}
 
-    @ConditionalOnProperty(prefix = DUBBO_SCAN_PREFIX, name = BASE_PACKAGES_PROPERTY_NAME)
-    @ConditionalOnClass(ConfigurationPropertySources.class)
     @Bean
+    @ConditionalOnClass(ConfigurationPropertySources.class)
+    @ConditionalOnProperty(prefix = DUBBO_SCAN_PREFIX, name = BASE_PACKAGES_PROPERTY_NAME)
     public DubboFeignProviderBeanPostProcessor dubboFeignProviderBeanPostProcessor(Environment environment) {
 	    LogUtil.started(DubboFeignProviderBeanPostProcessor.class, StarterNameConstant.DUBBO_STARTER);
 
@@ -46,8 +46,8 @@ public class DubboFeignConfiguration implements InitializingBean {
         return new DubboFeignProviderBeanPostProcessor(packagesToScan);
     }
 
-    @Primary
     @Bean
+    @Primary
     public Feign.Builder feignDubboBuilder() {
 	    LogUtil.started(DubboFeignBuilder.class, StarterNameConstant.DUBBO_STARTER);
 

@@ -59,15 +59,16 @@
   * @since 2020/6/15 11:31
   */
  @Configuration
+ @ConditionalOnProperty(prefix = LbIsolationProperties.PREFIX, name = "enabled", havingValue = "true")
  public class VersionLoadbalancerAutoConfiguration implements InitializingBean {
 
 	 @Override
 	 public void afterPropertiesSet() throws Exception {
-		 LogUtil.started(VersionLoadbalancerAutoConfiguration.class, StarterNameConstant.FEIGN_STARTER);
+		 LogUtil.started(VersionLoadbalancerAutoConfiguration.class,
+			 StarterNameConstant.FEIGN_STARTER);
 	 }
 
 	 @Bean
-	 @ConditionalOnProperty(prefix = LbIsolationProperties.PREFIX, name = "enabled", havingValue = "true")
 	 public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
 		 Environment environment,
 		 LoadBalancerClientFactory loadBalancerClientFactory) {

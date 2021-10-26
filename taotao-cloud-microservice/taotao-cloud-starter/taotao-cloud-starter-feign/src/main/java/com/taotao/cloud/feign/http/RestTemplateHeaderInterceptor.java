@@ -1,9 +1,8 @@
 package com.taotao.cloud.feign.http;
 
-import static com.taotao.cloud.feign.configuration.FeignHttpInterceptorConfiguration.HEADER_NAME_LIST;
+import static com.taotao.cloud.feign.configuration.FeignInterceptorConfiguration.HEADER_NAME_LIST;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;

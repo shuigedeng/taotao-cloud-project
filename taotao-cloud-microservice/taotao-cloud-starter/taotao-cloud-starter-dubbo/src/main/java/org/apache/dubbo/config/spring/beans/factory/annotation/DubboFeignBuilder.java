@@ -19,7 +19,6 @@ import org.springframework.util.ReflectionUtils;
 public class DubboFeignBuilder extends Feign.Builder {
 
     @Autowired
-    @SuppressWarnings("all")
     private ApplicationContext applicationContext;
 
     public DubboReference defaultReference;

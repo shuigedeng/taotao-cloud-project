@@ -45,11 +45,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @since 2020/4/5 13:33
  */
 @Configuration
-public class FeignHttpInterceptorConfiguration implements InitializingBean {
+public class FeignInterceptorConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(FeignHttpInterceptorConfiguration.class, StarterNameConstant.FEIGN_STARTER);
+		LogUtil.started(FeignInterceptorConfiguration.class, StarterNameConstant.FEIGN_STARTER);
 	}
 
 	protected List<String> requestHeaders = new ArrayList<>();

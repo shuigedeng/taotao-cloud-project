@@ -88,7 +88,6 @@ public class FeignAutoConfiguration implements InitializingBean {
 		return new DateFormatRegister();
 	}
 
-
 	@Bean
 	public Retryer retryer() {
 		LogUtil.started(Retryer.class, StarterNameConstant.FEIGN_STARTER);
@@ -110,7 +109,6 @@ public class FeignAutoConfiguration implements InitializingBean {
 		LogUtil.started(FeignClientErrorDecoder.class, StarterNameConstant.FEIGN_STARTER);
 		return new FeignClientErrorDecoder();
 	}
-
 
 	public static class FeignClientErrorDecoder implements feign.codec.ErrorDecoder {
 

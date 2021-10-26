@@ -22,10 +22,7 @@ public class MyEventListenerimpl extends DealCanalEventListener {
 	public MyEventListenerimpl(
 		@Qualifier("realInsertOptoin") InsertOption insertOption,
 		@Qualifier("realDeleteOption") DeleteOption deleteOption,
-		@Qualifier("realUpdateOption") UpdateOption updateOption
-	) {
-
+		@Qualifier("realUpdateOption") UpdateOption updateOption) {
 		super(insertOption, deleteOption, updateOption);
 	}
-
 }
