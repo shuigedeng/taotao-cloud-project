@@ -23,7 +23,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,7 +31,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -57,7 +56,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 */
 	@Operation(summary = "通用单体id删除", description = "通用单体id删除")
 	@DeleteMapping("/{id:[0-9]*}")
-	@RequestOperateLog(description = "通用单体id删除")
+	@RequestLog(description = "通用单体id删除")
 	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteById(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
@@ -96,7 +95,7 @@ public interface DeleteController<T extends SuperEntity<T,I>, I extends Serializ
 	 */
 	@Operation(summary = "通用单体字段删除", description = "通用单体字段删除", method = CommonConstant.DELETE)
 	@DeleteMapping("/{filedName}/{filedValue}")
-	@RequestOperateLog(description = "通用单体字段删除")
+	@RequestLog(description = "通用单体字段删除")
 	//@PreAuthorize("@permissionVerifier.hasPermission('delete')")
 	default Result<Boolean> deleteByFiled(
 		@Parameter(description = "字段名称", required = true) @NotEmpty(message = "字段名称不能为空")

@@ -14,7 +14,6 @@ public class EventMethodArgumentResolver implements MethodArgumentResolver {
 		this.beanFactory = beanFactory;
 	}
 
-
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		return parameter.getMethod().isAnnotationPresent(OnEvent.class);

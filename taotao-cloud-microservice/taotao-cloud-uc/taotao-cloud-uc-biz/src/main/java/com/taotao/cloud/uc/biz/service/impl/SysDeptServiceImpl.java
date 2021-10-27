@@ -2,8 +2,8 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.entity.SysDept;
 import com.taotao.cloud.uc.biz.mapper.ISysDeptMapper;
-import com.taotao.cloud.uc.biz.repository.ISysDeptRepository;
-import com.taotao.cloud.uc.biz.repository.impl.SysDeptRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysDeptRepository;
+import com.taotao.cloud.uc.biz.repository.cls.SysDeptRepository;
 import com.taotao.cloud.uc.biz.service.ISysDeptService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;

@@ -33,6 +33,7 @@ import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.log.event.RequestLogEvent;
+import com.taotao.cloud.log.model.Log;
 import com.taotao.cloud.log.properties.RequestLogProperties;
 import io.swagger.v3.oas.annotations.Operation;
 import java.lang.reflect.Method;
@@ -105,7 +106,7 @@ public class RequestLogAspect {
 	/**
 	 * log实体类
 	 **/
-	private final TransmittableThreadLocal<com.taotao.cloud.log.model.RequestLog> SYS_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
+	private final TransmittableThreadLocal<Log> SYS_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
 
 	public RequestLogAspect() {
 	}
@@ -137,9 +138,9 @@ public class RequestLogAspect {
 					return;
 				}
 
-				com.taotao.cloud.log.model.RequestLog requestLog = buildRequestLog(joinPoint,
+				Log log = buildRequestLog(joinPoint,
 					requestOperateLog);
-				SYS_LOG_THREAD_LOCAL.set(requestLog);
+				SYS_LOG_THREAD_LOCAL.set(log);
 			});
 		}
 
@@ -156,31 +157,31 @@ public class RequestLogAspect {
 				return;
 			}
 
-			com.taotao.cloud.log.model.RequestLog requestLog = get();
+			Log log = get();
 			if (Objects.nonNull(ret)) {
 				try {
 					Result<?> r = Convert.convert(Result.class, ret);
 					if (r.code() == HttpStatus.OK.value()) {
-						requestLog.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
+						log.setOperateType(LogOperateTypeEnum.OPERATE_RECORD.getCode());
 					} else {
-						requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
-						requestLog.setExDetail(r.errorMsg());
+						log.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
+						log.setExDetail(r.errorMsg());
 					}
 					if (requestOperateLog.response()) {
-						requestLog.setResult(getText(r.toString()));
+						log.setResult(getText(r.toString()));
 					}
 				} catch (ConvertException e) {
 					LogUtil.error(e);
 				}
 			}
-			requestLog.setTenantId(TenantContextHolder.getTenant());
-			requestLog.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+			log.setTenantId(TenantContextHolder.getTenant());
+			log.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			long endTime = Instant.now().toEpochMilli();
-			requestLog.setRequestConsumingTime(endTime - requestLog.getRequestStartTime());
-			requestLog.setResult(
+			log.setRequestConsumingTime(endTime - log.getRequestStartTime());
+			log.setResult(
 				getText(String.valueOf(ret == null ? StrPoolConstant.EMPTY : ret)));
 
-			publisher.publishEvent(new RequestLogEvent(requestLog));
+			publisher.publishEvent(new RequestLogEvent(log));
 			SYS_LOG_THREAD_LOCAL.remove();
 		});
 	}
@@ -192,24 +193,24 @@ public class RequestLogAspect {
 			if (check(joinPoint, requestOperateLog)) {
 				return;
 			}
-			com.taotao.cloud.log.model.RequestLog requestLog = get();
-			requestLog.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
+			Log log = get();
+			log.setOperateType(LogOperateTypeEnum.EXCEPTION_RECORD.getCode());
 			String stackTrace = LogUtil.getStackTrace(e);
-			requestLog.setExDetail(stackTrace.replaceAll("\"", "'")
+			log.setExDetail(stackTrace.replaceAll("\"", "'")
 				.replace("\n", ""));
-			requestLog.setExDesc(e.getMessage().replaceAll("\"", "'")
+			log.setExDesc(e.getMessage().replaceAll("\"", "'")
 				.replace("\n", ""));
 
 			if (!requestOperateLog.request() && requestOperateLog.requestByError()
-				&& StrUtil.isEmpty(requestLog.getRequestParams())) {
+				&& StrUtil.isEmpty(log.getRequestParams())) {
 				Object[] args = joinPoint.getArgs();
 				HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(
 					RequestContextHolder.getRequestAttributes())).getRequest();
 				String strArgs = getArgs(args, request);
-				requestLog.setRequestParams(getText(strArgs));
+				log.setRequestParams(getText(strArgs));
 			}
 
-			publisher.publishEvent(new RequestLogEvent(requestLog));
+			publisher.publishEvent(new RequestLogEvent(log));
 			SYS_LOG_THREAD_LOCAL.remove();
 		});
 	}
@@ -235,46 +236,46 @@ public class RequestLogAspect {
 	}
 
 	@NonNull
-	private com.taotao.cloud.log.model.RequestLog buildRequestLog(JoinPoint joinPoint,
+	private Log buildRequestLog(JoinPoint joinPoint,
 		RequestLog requestOperateLog) {
-		com.taotao.cloud.log.model.RequestLog requestLog = new com.taotao.cloud.log.model.RequestLog();
+		Log log = new Log();
 		ServletRequestAttributes attributes = (ServletRequestAttributes) Objects
 			.requireNonNull(RequestContextHolder.getRequestAttributes());
 		RequestContextHolder.setRequestAttributes(attributes, true);
 		HttpServletRequest request = attributes.getRequest();
-		requestLog.setApplicationName(applicationName);
-		requestLog.setRequestStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
-		requestLog.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
-		requestLog.setRequestIp(RequestUtil.getRemoteAddr(request));
-		requestLog.setClientId(SecurityUtil.getClientId());
-		requestLog.setUserId(SecurityUtil.getUserId());
-		requestLog.setUsername(SecurityUtil.getUsername());
-		requestLog.setRequestUrl(URLUtil.getPath(request.getRequestURI()));
-		requestLog.setRequestMethod(request.getMethod());
+		log.setApplicationName(applicationName);
+		log.setRequestStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+		log.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
+		log.setRequestIp(RequestUtil.getRemoteAddr(request));
+		log.setClientId(SecurityUtil.getClientId());
+		log.setUserId(SecurityUtil.getUserId());
+		log.setUsername(SecurityUtil.getUsername());
+		log.setRequestUrl(URLUtil.getPath(request.getRequestURI()));
+		log.setRequestMethod(request.getMethod());
 		Object[] args = joinPoint.getArgs();
-		requestLog.setRequestArgs(Arrays.toString(args).replaceAll("\"", "'")
+		log.setRequestArgs(Arrays.toString(args).replaceAll("\"", "'")
 			.replace("\n", ""));
-		requestLog.setRequestUa(request.getHeader("user-agent").replaceAll("\"", "'")
+		log.setRequestUa(request.getHeader("user-agent").replaceAll("\"", "'")
 			.replace("\n", ""));
-		requestLog.setClasspath(joinPoint.getTarget().getClass().getName().replaceAll("\"", "'")
+		log.setClasspath(joinPoint.getTarget().getClass().getName().replaceAll("\"", "'")
 			.replace("\n", ""));
 		String name = joinPoint.getSignature().getName();
-		requestLog.setRequestMethodName(name);
-		requestLog
+		log.setRequestMethodName(name);
+		log
 			.setRequestParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request))
 				.replaceAll("\"", "'")
 				.replace("\n", ""));
-		requestLog
+		log
 			.setRequestHeaders(
 				JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
-		requestLog.setRequestType(LogUtil.getOperateType(name));
-		requestLog.setSource(DEFAULT_SOURCE);
-		requestLog.setCtime(
+		log.setRequestType(LogUtil.getOperateType(name));
+		log.setSource(DEFAULT_SOURCE);
+		log.setCtime(
 			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
-		requestLog.setLogday(DateUtil.getCurrentDate());
+		log.setLogday(DateUtil.getCurrentDate());
 
-		setDescription(joinPoint, requestOperateLog, requestLog);
-		return requestLog;
+		setDescription(joinPoint, requestOperateLog, log);
+		return log;
 	}
 
 	/**
@@ -326,12 +327,12 @@ public class RequestLogAspect {
 		}
 	}
 
-	private com.taotao.cloud.log.model.RequestLog get() {
-		com.taotao.cloud.log.model.RequestLog requestLog = SYS_LOG_THREAD_LOCAL.get();
-		if (requestLog == null) {
-			return new com.taotao.cloud.log.model.RequestLog();
+	private Log get() {
+		Log log = SYS_LOG_THREAD_LOCAL.get();
+		if (log == null) {
+			return new Log();
 		}
-		return requestLog;
+		return log;
 	}
 
 	/**
@@ -345,7 +346,7 @@ public class RequestLogAspect {
 	}
 
 	private void setDescription(JoinPoint joinPoint, RequestLog sysLog,
-		com.taotao.cloud.log.model.RequestLog requestLog) {
+		Log log) {
 		String controllerDescription = "";
 		Operation api = joinPoint.getTarget().getClass().getAnnotation(Operation.class);
 		if (api != null) {
@@ -368,13 +369,13 @@ public class RequestLogAspect {
 		}
 
 		if (StrUtil.isEmpty(controllerDescription)) {
-			requestLog.setDescription(controllerMethodDescription);
+			log.setDescription(controllerMethodDescription);
 		} else {
 			if (sysLog.controllerApiValue()) {
-				requestLog.setDescription(
+				log.setDescription(
 					controllerDescription + "-" + controllerMethodDescription);
 			} else {
-				requestLog.setDescription(controllerMethodDescription);
+				log.setDescription(controllerMethodDescription);
 			}
 		}
 	}

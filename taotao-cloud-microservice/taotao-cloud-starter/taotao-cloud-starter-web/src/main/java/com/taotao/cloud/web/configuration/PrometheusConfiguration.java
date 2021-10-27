@@ -51,9 +51,9 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(HealthConfiguration.class)
 public class PrometheusConfiguration implements InitializingBean {
 
-	@Autowired
+	@Autowired(required = false)
 	private HealthCheckProvider healthCheckProvider;
-	private Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
+	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -102,7 +102,7 @@ public class PrometheusConfiguration implements InitializingBean {
 		}
 	}
 
-	private PrometheusMeterRegistry prometheusMeterRegistry;
+	private final PrometheusMeterRegistry prometheusMeterRegistry;
 
 	public PrometheusConfiguration(PrometheusMeterRegistry prometheusMeterRegistry) {
 		this.prometheusMeterRegistry = prometheusMeterRegistry;

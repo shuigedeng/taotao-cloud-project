@@ -18,7 +18,6 @@ package com.taotao.cloud.health.collect;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.health.annotation.FieldReport;
-import com.taotao.cloud.health.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import java.util.Arrays;
@@ -70,30 +69,30 @@ public class DoubtApiCollectTask extends AbstractCollectTask {
 			if (Objects.nonNull(collector)) {
 				Object doubtApiInfo = collector.value("taotao.cloud.health.doubtapi.info").get();
 
-				Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) doubtApiInfo;
-				if (map != null && map.size() > 0) {
-					DoubtApiInterceptor.DoubtApiInfo[] copy = map.values().toArray(new DoubtApiInterceptor.DoubtApiInfo[map.values().size()]);
-					Arrays.sort(copy);
-
-					int detailLen = Math.min(copy.length, 5);
-					StringBuilder sb = new StringBuilder();
-
-					for (int i = 0; i < detailLen; i++) {
-						DoubtApiInterceptor.DoubtApiInfo o = copy[i];
-
-						long avg;
-						if (o.getCount() > 0) {
-							avg = o.getTotalIncreMem() / 1024 / 1024 / o.getCount();
-						} else {
-							avg = o.getTotalIncreMem() / 1024 / 1024;
-						}
-						sb.append(String.format("url:%s,方法:%s,平均内存增量:%s(M),调用次数:%s\r\n",
-							o.getUri(),
-							o.getMethod(),
-							avg, o.getCount()));
-					}
-					info.detail = sb.toString();
-				}
+				//Map<String, DoubtApiInterceptor.DoubtApiInfo> map = (Map<String, DoubtApiInterceptor.DoubtApiInfo>) doubtApiInfo;
+				//if (map != null && map.size() > 0) {
+				//	DoubtApiInterceptor.DoubtApiInfo[] copy = map.values().toArray(new DoubtApiInterceptor.DoubtApiInfo[map.values().size()]);
+				//	Arrays.sort(copy);
+				//
+				//	int detailLen = Math.min(copy.length, 5);
+				//	StringBuilder sb = new StringBuilder();
+				//
+				//	for (int i = 0; i < detailLen; i++) {
+				//		DoubtApiInterceptor.DoubtApiInfo o = copy[i];
+				//
+				//		long avg;
+				//		if (o.getCount() > 0) {
+				//			avg = o.getTotalIncreMem() / 1024 / 1024 / o.getCount();
+				//		} else {
+				//			avg = o.getTotalIncreMem() / 1024 / 1024;
+				//		}
+				//		sb.append(String.format("url:%s,方法:%s,平均内存增量:%s(M),调用次数:%s\r\n",
+				//			o.getUri(),
+				//			o.getMethod(),
+				//			avg, o.getCount()));
+				//	}
+				//	info.detail = sb.toString();
+				//}
 				return info;
 			}
 		} catch (Exception exp) {

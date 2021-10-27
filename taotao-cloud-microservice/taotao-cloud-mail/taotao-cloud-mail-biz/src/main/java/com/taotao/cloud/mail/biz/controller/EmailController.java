@@ -16,7 +16,7 @@
 package com.taotao.cloud.mail.biz.controller;
 
 import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.mail.api.vo.EmailVO;
 import com.taotao.cloud.mail.biz.entity.Email;
 import com.taotao.cloud.mail.biz.mapper.EmailMapper;
@@ -51,7 +51,7 @@ public class EmailController {
 	}
 
 	@Operation(summary = "根据id查询邮件信息", description = "根据id查询邮件信息", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据id查询邮件信息")
+	@RequestLog(description = "根据id查询邮件信息")
 	@PreAuthorize("hasAuthority('email:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<EmailVO> findEmailById(@PathVariable(value = "id") Long id) {

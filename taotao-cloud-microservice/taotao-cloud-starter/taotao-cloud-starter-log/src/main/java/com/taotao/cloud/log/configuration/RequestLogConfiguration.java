@@ -54,19 +54,19 @@ public class RequestLogConfiguration implements InitializingBean {
 	private RequestLogProperties properties;
 
 	@Bean
-	public RequestLogListener sysLogListener() {
+	public RequestLogListener requestLogListener() {
 		LogUtil.started(RequestLogListener.class, StarterNameConstant.LOG_STARTER);
 		return new RequestLogListener();
 	}
 
 	@Bean
-	public RequestLogAspect sysLogAspect() {
+	public RequestLogAspect requestLogAspect() {
 		LogUtil.started(RequestLogAspect.class, StarterNameConstant.LOG_STARTER);
 		return new RequestLogAspect();
 	}
 
 	@Bean
-	public LoggerRequestLogServiceImpl loggerSysLogService() {
+	public LoggerRequestLogServiceImpl loggerRequestLogService() {
 		LogUtil.started(LoggerRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 		if (determineLogType(LogTypeEnum.LOGGER)) {
 			return new LoggerRequestLogServiceImpl();
@@ -75,7 +75,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public RedisRequestLogServiceImpl redisSysLogService(RedisRepository redisRepository) {
+	public RedisRequestLogServiceImpl redisRequestLogService(RedisRepository redisRepository) {
 		LogUtil.started(RedisRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 		if (determineLogType(LogTypeEnum.REDIS)) {
 			return new RedisRequestLogServiceImpl(redisRepository);
@@ -84,7 +84,7 @@ public class RequestLogConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public KafkaRequestLogServiceImpl kafkaSysLogService(KafkaTemplate<String, String> kafkaTemplate) {
+	public KafkaRequestLogServiceImpl kafkaRequestLogService(KafkaTemplate<String, String> kafkaTemplate) {
 		LogUtil.started(KafkaRequestLogServiceImpl.class, StarterNameConstant.LOG_STARTER);
 		if (determineLogType(LogTypeEnum.KAFKA)) {
 			return new KafkaRequestLogServiceImpl(kafkaTemplate);

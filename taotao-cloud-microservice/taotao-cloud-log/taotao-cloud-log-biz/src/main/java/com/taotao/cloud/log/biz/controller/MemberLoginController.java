@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.biz.controller;
 
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.log.api.vo.MemberLoginVO;
 import com.taotao.cloud.log.biz.entity.MemberLogin;
 import com.taotao.cloud.log.biz.mapper.MemberLoginMapper;
@@ -49,7 +49,7 @@ public class MemberLoginController {
 	}
 
 	@Operation(summary = "根据id查询会员登录日志信息", description = "根据id查询会员登录日志信息", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据id查询会员登录日志信息")
+	@RequestLog(description = "根据id查询会员登录日志信息")
 	@PreAuthorize("hasAuthority('member:login:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<MemberLoginVO> findMemberLoginById(@PathVariable(value = "id") Long id) {

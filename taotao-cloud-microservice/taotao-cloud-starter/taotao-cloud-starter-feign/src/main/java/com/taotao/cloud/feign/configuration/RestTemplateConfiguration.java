@@ -34,6 +34,7 @@ import java.util.List;
  */
 @ConditionalOnClass(okhttp3.OkHttpClient.class)
 public class RestTemplateConfiguration {
+
     private static final Charset UTF_8 = StandardCharsets.UTF_8;
     private final ObjectMapper objectMapper;
 

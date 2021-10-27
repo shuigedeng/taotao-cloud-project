@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.core.model;
 
+import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -22,7 +23,6 @@ import com.taotao.cloud.common.utils.NumberUtil;
 import com.taotao.cloud.core.model.Callable.Func0;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.utils.PropertyUtil;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
@@ -43,12 +43,6 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class Collector {
 
-	private final CoreProperties coreProperties;
-
-	public static Collector getCollector() {
-		return ContextUtil.getBean(Collector.class, true);
-	}
-
 	/**
 	 * map
 	 */
@@ -59,8 +53,14 @@ public class Collector {
 	 */
 	private final Object lock = new Object();
 
+	private final CoreProperties coreProperties;
+
 	public Collector(CoreProperties coreProperties) {
 		this.coreProperties = coreProperties;
+	}
+
+	public static Collector getCollector() {
+		return ContextUtil.getBean(Collector.class, true);
 	}
 
 	/**
@@ -72,20 +72,19 @@ public class Collector {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:00
 	 */
-	protected Object get(String key, Class type) {
+	protected <T> T get(String key, Class<T> type) {
 		if (!map.containsKey(key)) {
 			synchronized (lock) {
 				if (!map.containsKey(key)) {
-					Object obj = createFactory(key, type);
-					map.put(key, obj);
+					map.put(key, createInstance(key, type));
 				}
 			}
 		}
-		return map.get(key);
+		return (T) map.get(key);
 	}
 
 	/**
-	 * createFactory
+	 * createInstance
 	 *
 	 * @param key  key
 	 * @param type type
@@ -93,11 +92,11 @@ public class Collector {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:31:04
 	 */
-	private Object createFactory(String key, Class type) {
+	private Object createInstance(String key, Class<?> type) {
 		try {
-			Object obj = type.newInstance();
-			if (type == Hook.class) {
-				Hook hook = (Hook) obj;
+			Object obj = ReflectUtil.newInstanceIfPossible(type);
+
+			if (obj instanceof Hook hook) {
 				hook.setCoreProperties(coreProperties);
 				hook.setKey(key);
 				hook.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
@@ -118,7 +117,7 @@ public class Collector {
 	 * @since 2021-09-02 20:31:08
 	 */
 	public Sum sum(String key) {
-		return (Sum) get(key, Sum.class);
+		return get(key, Sum.class);
 	}
 
 	/**
@@ -130,7 +129,7 @@ public class Collector {
 	 * @since 2021-09-02 20:31:13
 	 */
 	public Hook hook(String key) {
-		return (Hook) get(key, Hook.class);
+		return get(key, Hook.class);
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class Collector {
 	 * @since 2021-09-02 20:31:16
 	 */
 	public Call call(String key) {
-		return (Call) get(key, Call.class);
+		return get(key, Call.class);
 	}
 
 	/**
@@ -154,7 +153,7 @@ public class Collector {
 	 * @since 2021-09-02 20:31:18
 	 */
 	public Value value(String key) {
-		return (Value) get(key, Value.class);
+		return get(key, Value.class);
 	}
 
 	/**

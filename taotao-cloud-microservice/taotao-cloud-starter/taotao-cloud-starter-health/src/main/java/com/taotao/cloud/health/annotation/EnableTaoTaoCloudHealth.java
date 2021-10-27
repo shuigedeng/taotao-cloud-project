@@ -16,7 +16,6 @@
 package com.taotao.cloud.health.annotation;
 
 import com.taotao.cloud.health.configuration.HealthConfiguration;
-import com.taotao.cloud.health.configuration.HealthSqlMybatisConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({HealthSqlMybatisConfiguration.class, HealthConfiguration.class})
+@Import({HealthConfiguration.class})
 public @interface EnableTaoTaoCloudHealth {
 
 }

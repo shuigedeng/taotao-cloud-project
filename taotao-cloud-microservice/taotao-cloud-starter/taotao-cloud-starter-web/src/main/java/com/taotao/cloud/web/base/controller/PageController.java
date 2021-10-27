@@ -24,7 +24,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.Wraps;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -60,7 +60,7 @@ public interface PageController<T extends SuperEntity<T, I>, I extends Serializa
 	 */
 	@Operation(summary = "通用分页查询", description = "通用分页查询")
 	@PostMapping("/page")
-	@RequestOperateLog(value = "通用分页查询")
+	@RequestLog(value = "通用分页查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('page')")
 	default Result<PageModel<QueryVO>> page(
 		@Parameter(description = "分页查询DTO", required = true)

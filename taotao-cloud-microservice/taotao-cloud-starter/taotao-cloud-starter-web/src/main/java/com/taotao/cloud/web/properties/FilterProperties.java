@@ -51,45 +51,20 @@ public class FilterProperties {
 	 */
 	private Boolean webContext = true;
 
+	/**
+	 * 开启监控报表
+	 */
+	private Boolean report = true;
+	/**
+	 * 开启ping
+	 */
+	private Boolean ping = true;
+	/**
+	 * 开启监控下载
+	 */
+	private Boolean dump = true;
+
 	public FilterProperties() {
-	}
-
-	public FilterProperties(Boolean version, Boolean tenant, Boolean trace,
-		Boolean webContext) {
-		this.version = version;
-		this.tenant = tenant;
-		this.trace = trace;
-		this.webContext = webContext;
-	}
-
-	@Override
-	public String toString() {
-		return "FilterProperties{" +
-			"version=" + version +
-			", tenant=" + tenant +
-			", trace=" + trace +
-			", webContext=" + webContext +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		FilterProperties that = (FilterProperties) o;
-		return Objects.equals(version, that.version) && Objects.equals(tenant,
-			that.tenant) && Objects.equals(trace, that.trace) && Objects.equals(
-			webContext, that.webContext);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(version, tenant, trace, webContext);
 	}
 
 	public Boolean getVersion() {
@@ -122,5 +97,29 @@ public class FilterProperties {
 
 	public void setWebContext(Boolean webContext) {
 		this.webContext = webContext;
+	}
+
+	public Boolean getReport() {
+		return report;
+	}
+
+	public void setReport(Boolean report) {
+		this.report = report;
+	}
+
+	public Boolean getPing() {
+		return ping;
+	}
+
+	public void setPing(Boolean ping) {
+		this.ping = ping;
+	}
+
+	public Boolean getDump() {
+		return dump;
+	}
+
+	public void setDump(Boolean dump) {
+		this.dump = dump;
 	}
 }

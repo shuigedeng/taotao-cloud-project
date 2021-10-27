@@ -17,7 +17,7 @@ package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.netty.annotation.PathVariable;
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.dto.role.RoleSaveDTO;
@@ -66,7 +66,7 @@ public class SysRoleController extends
 	 * @since 2021-10-09 15:12:23
 	 */
 	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
-	@RequestOperateLog(description = "根据用户id获取角色列表")
+	@RequestLog(description = "根据用户id获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userId')")
 	@GetMapping("/userId/{userId}")
 	public Result<List<RoleQueryVO>> findRoleByUserId(
@@ -86,7 +86,7 @@ public class SysRoleController extends
 	 * @since 2021-10-09 15:12:32
 	 */
 	@Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表")
-	@RequestOperateLog(description = "根据用户id列表获取角色列表")
+	@RequestLog(description = "根据用户id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userIds')")
 	@GetMapping("/userId")
 	public Result<List<RoleQueryVO>> findRoleByUserIds(
@@ -107,7 +107,7 @@ public class SysRoleController extends
 	 * @since 2021-10-09 15:12:46
 	 */
 	@Operation(summary = "根据角色id更新资源信息(角色分配资源)", description = "根据角色id更新资源信息(角色分配资源)")
-	@RequestOperateLog(description = "根据角色id更新资源信息(角色分配资源)")
+	@RequestLog(description = "根据角色id更新资源信息(角色分配资源)")
 	@PreAuthorize("hasAuthority('sys:role:resource')")
 	@PutMapping("/resources/{roleId}")
 	public Result<Boolean> saveRoleResources(

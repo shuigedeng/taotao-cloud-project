@@ -65,6 +65,7 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 	protected void registerEndpoints() {
 		ApplicationContext context = getApplicationContext();
 
+		assert context != null;
 		scanPackage(context);
 
 		String[] endpointBeanNames = context.getBeanNamesForAnnotation(ServerEndpoint.class);
@@ -94,9 +95,10 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 				Object enableWebSocketBean = context.getBean(enableWebSocketBeanName);
 				EnableTaoTaoCloudWebSocket enableTaoTaoCloudWebSocket = AnnotationUtils.findAnnotation(
 					enableWebSocketBean.getClass(), EnableTaoTaoCloudWebSocket.class);
+
 				assert enableTaoTaoCloudWebSocket != null;
-				if (enableTaoTaoCloudWebSocket.scanBasePackages().length != 0) {
-					basePackages = enableTaoTaoCloudWebSocket.scanBasePackages();
+				if (enableTaoTaoCloudWebSocket.basePackages().length != 0) {
+					basePackages = enableTaoTaoCloudWebSocket.basePackages();
 					break;
 				}
 			}
@@ -109,6 +111,7 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 			Object springBootApplicationBean = context.getBean(springBootApplicationBeanName[0]);
 			SpringBootApplication springBootApplication = AnnotationUtils.findAnnotation(
 				springBootApplicationBean.getClass(), SpringBootApplication.class);
+
 			assert springBootApplication != null;
 			if (springBootApplication.scanBasePackages().length != 0) {
 				basePackages = springBootApplication.scanBasePackages();

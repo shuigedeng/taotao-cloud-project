@@ -53,7 +53,6 @@ import org.springframework.web.server.ServerWebExchange;
  * @since 2021-09-02 20:05:41
  */
 @Configuration
-@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 @AutoConfigureAfter(AsyncAutoConfiguration.class)
 public class CoreAutoConfiguration implements InitializingBean {
 
@@ -97,7 +96,6 @@ public class CoreAutoConfiguration implements InitializingBean {
 		AsyncThreadPoolProperties asyncThreadPoolProperties,
 		@Qualifier("taskExecutor") AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
 		LogUtil.started(MonitorThreadPool.class, StarterNameConstant.CLOUD_STARTER);
-
 		return new MonitorThreadPool(
 			collector,
 			monitorThreadPoolProperties,

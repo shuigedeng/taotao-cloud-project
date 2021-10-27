@@ -15,13 +15,23 @@
  */
 package com.taotao.cloud.log.annotation;
 
+import com.taotao.cloud.log.annotation.ConditionalOnRequestLogType.RequestLogTypeCondition;
 import com.taotao.cloud.log.enums.LogTypeEnum;
+import com.taotao.cloud.log.properties.RequestLogProperties;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
+import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
+import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * 系统操作记录
@@ -37,5 +47,30 @@ import org.springframework.context.annotation.Conditional;
 public @interface ConditionalOnRequestLogType {
 
 	LogTypeEnum logType() default LogTypeEnum.LOGGER;
+
+
+	public static class RequestLogTypeCondition extends SpringBootCondition {
+
+		@Autowired
+		private RequestLogProperties properties;
+
+		@Override
+		public ConditionOutcome getMatchOutcome(ConditionContext context,
+			AnnotatedTypeMetadata metadata) {
+			Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(
+				ConditionalOnRequestLogType.class.getName());
+
+			assert annotationAttributes != null;
+			LogTypeEnum logTypeEnum = (LogTypeEnum) annotationAttributes.get("logType");
+
+			if (Objects.nonNull(properties)) {
+				LogTypeEnum[] types = properties.getTypes();
+				boolean b = Arrays.stream(types)
+					.anyMatch(type -> type.getCode() == logTypeEnum.getCode());
+				return new ConditionOutcome(b, "");
+			}
+			return new ConditionOutcome(false, "");
+		}
+	}
 
 }

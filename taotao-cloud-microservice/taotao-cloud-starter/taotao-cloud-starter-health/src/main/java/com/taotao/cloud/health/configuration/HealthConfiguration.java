@@ -19,46 +19,24 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.PropertyCache;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
-import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
-import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;
 import com.taotao.cloud.health.export.ExportProvider;
-import com.taotao.cloud.health.filter.DumpFilter;
-import com.taotao.cloud.health.filter.HealthReportFilter;
-import com.taotao.cloud.health.filter.PingFilter;
-import com.taotao.cloud.health.interceptor.DoubtApiInterceptor;
-import com.taotao.cloud.health.properties.CheckProperties;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
-import com.taotao.cloud.health.properties.DoubtApiProperties;
-import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.health.properties.ExportProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
-import com.taotao.cloud.health.properties.PingProperties;
-import com.taotao.cloud.health.properties.ReportProperties;
 import com.taotao.cloud.health.properties.WarnProperties;
 import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
 import com.taotao.cloud.health.strategy.Rule;
 import com.taotao.cloud.health.strategy.WarnTemplate;
 import com.taotao.cloud.health.warn.WarnProvider;
-import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * HealthConfiguration
@@ -77,32 +55,22 @@ public class HealthConfiguration implements InitializingBean {
 		LogUtil.started(HealthConfiguration.class, StarterNameConstant.HEALTH_STARTER);
 	}
 
-	//@Bean
-	//public WarnTemplate warnTemplate() {
-	//	return new WarnTemplate()
-	//		.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
-	//}
-
 	@Bean
-	//@ConditionalOnBean(PropertyCache.class)
-	public DefaultWarnStrategy defaultWarnStrategy(
-		PropertyCache propertyCache) {
+	public DefaultWarnStrategy defaultWarnStrategy(PropertyCache propertyCache) {
 		WarnTemplate warnTemplate = new WarnTemplate()
 			.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
 		return new DefaultWarnStrategy(warnTemplate, new Rule.RulesAnalyzer(propertyCache));
 	}
 
 	@Bean(destroyMethod = "close")
-	@ConditionalOnProperty(prefix = WarnProperties.PREFIX, name = "enabled", havingValue = "true")
-	public WarnProvider getWarnProvider(WarnProperties warnProperties,
-		MonitorThreadPool monitorThreadPool) {
+	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "warn", havingValue = "true")
+	public WarnProvider getWarnProvider(WarnProperties warnProperties, MonitorThreadPool monitorThreadPool) {
 		LogUtil.started(WarnProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new WarnProvider(warnProperties, monitorThreadPool);
 	}
 
 	@Bean(destroyMethod = "close")
-	//@ConditionalOnBean(MonitorThreadPool.class)
-	@ConditionalOnProperty(prefix = CheckProperties.PREFIX, name = "enabled", havingValue = "true")
+	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "check", havingValue = "true")
 	public HealthCheckProvider getHealthCheckProvider(
 		DefaultWarnStrategy strategy,
 		DefaultHttpClient defaultHttpClient,
@@ -119,8 +87,7 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")
-	//@ConditionalOnBean(HealthCheckProvider.class)
-	@ConditionalOnProperty(prefix = ExportProperties.PREFIX, name = "enabled", havingValue = "true")
+	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "export", havingValue = "true")
 	public ExportProvider getExportProvider(
 		MonitorThreadPool monitorThreadPool,
 		ExportProperties exportProperties,
@@ -130,77 +97,10 @@ public class HealthConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = DumpProperties.PREFIX, name = "enabled", havingValue = "true")
+	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "dump", havingValue = "true")
 	public DumpProvider dumpProvider() {
 		LogUtil.started(DumpProvider.class, StarterNameConstant.HEALTH_STARTER);
 		return new DumpProvider();
 	}
 
-	@Bean
-	@ConditionalOnWebApplication(type = Type.SERVLET)
-	@ConditionalOnProperty(prefix = ReportProperties.PREFIX, name = "enabled", havingValue = "true")
-	public FilterRegistrationBean healthReportFilter() {
-		LogUtil.started(HealthReportFilter.class, StarterNameConstant.HEALTH_STARTER);
-		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
-		filterRegistrationBean.setFilter(new HealthReportFilter());
-		filterRegistrationBean.setName("taotao-cloud-report-filter");
-		filterRegistrationBean.addUrlPatterns("/health/report/*");
-		LogUtil.info(
-			"health报表注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/report/*");
-		return filterRegistrationBean;
-	}
-
-	@Bean
-	@ConditionalOnWebApplication(type = Type.SERVLET)
-	@ConditionalOnProperty(prefix = DumpProperties.PREFIX, name = "enabled", havingValue = "true")
-	public FilterRegistrationBean dumpFilter() {
-		LogUtil.started(DumpFilter.class, StarterNameConstant.HEALTH_STARTER);
-
-		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		filterRegistrationBean.setFilter(new DumpFilter());
-		filterRegistrationBean.setName("taotao-cloud-dump-filter");
-		filterRegistrationBean.addUrlPatterns("/health/dump/*");
-		LogUtil.info(
-			"health dump注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/dump/*");
-		return filterRegistrationBean;
-	}
-
-	@Bean
-	@ConditionalOnWebApplication(type = Type.SERVLET)
-	@ConditionalOnProperty(prefix = PingProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-	public FilterRegistrationBean pingFilter() {
-		LogUtil.started(PingFilter.class, StarterNameConstant.HEALTH_STARTER);
-
-		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-		filterRegistrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
-		filterRegistrationBean.setFilter(new PingFilter());
-		filterRegistrationBean.setName("taotao-cloud-ping-filter");
-		filterRegistrationBean.addUrlPatterns("/health/ping/");
-		LogUtil.info(
-			"health ping注册成功,访问:" + RequestUtil.getBaseUrl() + "/health/ping/");
-		return filterRegistrationBean;
-	}
-
-	@Configuration
-	@ConditionalOnWebApplication(type = Type.SERVLET)
-	@ConditionalOnProperty(prefix = DoubtApiProperties.PREFIX, name = "enabled", havingValue = "true")
-	public static class DoubtApiConfiguration implements WebMvcConfigurer {
-
-		private DoubtApiProperties properties;
-		private Collector collector;
-
-		public DoubtApiConfiguration(Collector collector, DoubtApiProperties properties) {
-			this.collector = collector;
-			this.properties = properties;
-		}
-
-		@Override
-		public void addInterceptors(InterceptorRegistry registry) {
-			registry.addInterceptor(new DoubtApiInterceptor(collector, properties))
-				.addPathPatterns("/**")
-				.excludePathPatterns("/actuator/**");
-		}
-	}
 }

@@ -38,9 +38,11 @@ import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
 import com.taotao.cloud.data.mybatis.plus.injector.MateSqlInjector;
+import com.taotao.cloud.data.mybatis.plus.interceptor.SqlMybatisInterceptor;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
@@ -68,6 +70,7 @@ import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -126,6 +129,13 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	public SqlLogInterceptor sqlLogInterceptor() {
 		LogUtil.started(SqlLogInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
 		return new SqlLogInterceptor();
+	}
+
+	@Bean
+	@ConditionalOnClass(name = "org.apache.ibatis.plugin.Interceptor")
+	public SqlMybatisInterceptor sqlMybatisInterceptor(Collector collector) {
+		LogUtil.started(SqlMybatisInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		return new SqlMybatisInterceptor(collector);
 	}
 
 	/**
@@ -190,6 +200,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		LogUtil.started(ConfigurationCustomizer.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
 		return configuration -> {
 			configuration.setDefaultEnumTypeHandler(EnumTypeHandler.class);
+
 			// 关闭 mybatis 默认的日志
 			configuration.setLogPrefix("log.mybatis");
 		};

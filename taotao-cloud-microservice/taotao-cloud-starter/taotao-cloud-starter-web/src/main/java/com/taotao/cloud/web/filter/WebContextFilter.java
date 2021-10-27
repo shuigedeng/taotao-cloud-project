@@ -32,15 +32,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class WebContextFilter extends OncePerRequestFilter {
 
-	private final FilterProperties filterProperties;
-
-	public WebContextFilter(FilterProperties filterProperties) {
-		this.filterProperties = filterProperties;
-	}
-
 	@Override
-	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return !filterProperties.getWebContext();
+	protected void initFilterBean() throws ServletException {
+		super.initFilterBean();
 	}
 
 	@Override

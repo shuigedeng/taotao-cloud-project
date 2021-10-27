@@ -17,8 +17,8 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.uc.biz.mapper.ISysDictItemMapper;
-import com.taotao.cloud.uc.biz.repository.ISysDictItemRepository;
-import com.taotao.cloud.uc.biz.repository.impl.SysDictItemRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysDictItemRepository;
+import com.taotao.cloud.uc.biz.repository.cls.SysDictItemRepository;
 import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;

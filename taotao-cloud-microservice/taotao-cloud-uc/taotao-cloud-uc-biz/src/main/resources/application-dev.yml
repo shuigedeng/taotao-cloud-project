@@ -457,20 +457,10 @@ taotao:
           secret: ${DINGDING_SECRET:xxxx}
     health:
       enabled: true
-      doubtapi:
-        enabled: true
-      dump:
-        enabled: true
-      export:
-        enabled: true
-      ping:
-        enabled: true
-      report:
-        enabled: true
-      warn:
-        enabled: true
-      check:
-        enabled: true
+      dump: true
+      export: true
+      warn: true
+      check: true
     canal:
       enabled: false
       instances:
@@ -499,11 +489,18 @@ taotao:
         enabled: true
       encrypt:
         enabled: true
+      interceptor:
+        doubt-api: true
+        header: true
+        prometheus: true
       filter:
         version: true
         tenant: true
         trace: true
         web-context: true
+        report: true
+        ping: true
+        dump: true
       limit:
         enabled: true
       idempotent:
@@ -523,6 +520,7 @@ taotao:
         enabled: true
         types:
           - kafka
+          - logger
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -550,11 +548,13 @@ taotao:
     cache:
       enabled: true
       type: redis
-    rabbitmq:
-      enabled: false
     hibernate:
       enabled: true
       packages: com.taotao.cloud.uc.biz.entity
+    springdoc:
+      enabled: true
+      group: ${spring.application.name}
+      version: ${taotaoCloudVersion}
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.*.biz.entity
@@ -630,3 +630,4 @@ logging:
 springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
+    - com.taotao.cloud.captcha.controller

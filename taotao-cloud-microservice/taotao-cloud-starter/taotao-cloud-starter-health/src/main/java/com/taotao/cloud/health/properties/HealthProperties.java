@@ -37,9 +37,29 @@ public class HealthProperties {
 	private boolean enabled = true;
 
 	/**
-	 * 健康检查时间间隔 秒
+	 *是否开启checkProvider
 	 */
-	private int healthTimeSpan = 10;
+	private boolean check = true;
+
+	/**
+	 *是否开启warnProvider
+	 */
+	private boolean warn = true;
+
+	/**
+	 *是否开启exportProvider
+	 */
+	private boolean export = true;
+
+	/**
+	 *是否开启dumpProvider
+	 */
+	private boolean dump = true;
+
+	/**
+	 * 健康检查时间间隔 单位:秒
+	 */
+	private int timeSpan = 10;
 
 	public boolean isEnabled() {
 		return enabled;
@@ -49,11 +69,43 @@ public class HealthProperties {
 		this.enabled = enabled;
 	}
 
-	public int getHealthTimeSpan() {
-		return healthTimeSpan;
+	public boolean isCheck() {
+		return check;
 	}
 
-	public void setHealthTimeSpan(int healthTimeSpan) {
-		this.healthTimeSpan = healthTimeSpan;
+	public void setCheck(boolean check) {
+		this.check = check;
+	}
+
+	public boolean isWarn() {
+		return warn;
+	}
+
+	public void setWarn(boolean warn) {
+		this.warn = warn;
+	}
+
+	public boolean isExport() {
+		return export;
+	}
+
+	public void setExport(boolean export) {
+		this.export = export;
+	}
+
+	public boolean isDump() {
+		return dump;
+	}
+
+	public void setDump(boolean dump) {
+		this.dump = dump;
+	}
+
+	public int getTimeSpan() {
+		return timeSpan;
+	}
+
+	public void setTimeSpan(int timeSpan) {
+		this.timeSpan = timeSpan;
 	}
 }

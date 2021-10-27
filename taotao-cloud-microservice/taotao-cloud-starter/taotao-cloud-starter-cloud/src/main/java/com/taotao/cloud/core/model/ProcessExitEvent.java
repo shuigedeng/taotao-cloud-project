@@ -35,7 +35,7 @@ public class ProcessExitEvent {
 	/**
 	 * callBackList
 	 */
-	private static ArrayList<ExitCallback> callBackList = new ArrayList<>();
+	private static final ArrayList<ExitCallback> callBackList = new ArrayList<>();
 	/**
 	 * lock
 	 */

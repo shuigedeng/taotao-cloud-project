@@ -16,40 +16,24 @@
 package com.taotao.cloud.web.configuration;
 
 
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_TIME_FORMAT;
-
 import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.json.JsonReadFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.json.JacksonModule;
-import com.taotao.cloud.common.json.LocalDateTimeDeserializer;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.annotation.EnableUser;
+import com.taotao.cloud.web.filter.DumpFilter;
+import com.taotao.cloud.web.filter.HealthReportFilter;
+import com.taotao.cloud.web.filter.PingFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.VersionFilter;
 import com.taotao.cloud.web.filter.WebContextFilter;
+import com.taotao.cloud.web.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.mvc.converter.IntegerToEnumConverterFactory;
@@ -59,27 +43,19 @@ import com.taotao.cloud.web.mvc.converter.String2LocalDateTimeConverter;
 import com.taotao.cloud.web.mvc.converter.String2LocalTimeConverter;
 import com.taotao.cloud.web.mvc.converter.StringToEnumConverterFactory;
 import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.properties.InterceptorProperties;
 import com.taotao.cloud.web.properties.XssProperties;
-import com.taotao.cloud.web.xss.XssStringJsonDeserializer;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
 import io.swagger.v3.oas.annotations.Operation;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TimeZone;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -87,8 +63,8 @@ import javax.validation.ValidatorFactory;
 import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
@@ -96,6 +72,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
@@ -128,7 +105,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @since 2021-09-02 21:30:20
  */
 @Configuration
-@AutoConfigureBefore({PrometheusConfiguration.class})
 public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
@@ -136,51 +112,46 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		LogUtil.started(WebMvcConfiguration.class, StarterNameConstant.WEB_STARTER);
 	}
 
+	@Autowired
+	private Collector collector;
+
 	/**
 	 * redisRepository
 	 */
-	private final RedisRepository redisRepository;
+	@Autowired
+	private RedisRepository redisRepository;
 	/**
 	 * filterProperties
 	 */
-	private final FilterProperties filterProperties;
+	@Autowired
+	private FilterProperties filterProperties;
+	@Autowired
+	private InterceptorProperties interceptorProperties;
 	/**
 	 * xssProperties
 	 */
-	private final XssProperties xssProperties;
+	@Autowired
+	private XssProperties xssProperties;
 	/**
 	 * requestCounter
 	 */
-	private final Counter requestCounter;
+	@Autowired
+	private Counter requestCounter;
 	/**
 	 * requestLatency
 	 */
-	private final Summary requestLatency;
+	@Autowired
+	private Summary requestLatency;
 	/**
 	 * inprogressRequests
 	 */
-	private final Gauge inprogressRequests;
+	@Autowired
+	private Gauge inprogressRequests;
 	/**
 	 * requestLatencyHistogram
 	 */
-	private final Histogram requestLatencyHistogram;
-
-	public WebMvcConfiguration(RedisRepository redisRepository,
-		FilterProperties filterProperties,
-		XssProperties xssProperties,
-		Counter requestCounter,
-		Summary requestLatency,
-		Gauge inprogressRequests,
-		Histogram requestLatencyHistogram) {
-		this.redisRepository = redisRepository;
-		this.filterProperties = filterProperties;
-		this.xssProperties = xssProperties;
-
-		this.requestCounter = requestCounter;
-		this.requestLatency = requestLatency;
-		this.inprogressRequests = inprogressRequests;
-		this.requestLatencyHistogram = requestLatencyHistogram;
-	}
+	@Autowired
+	private Histogram requestLatencyHistogram;
 
 
 	@Override
@@ -190,14 +161,26 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new HeaderThreadLocalInterceptor()).addPathPatterns("/**");
-		registry.addInterceptor(
-				new PrometheusMetricsInterceptor(
+		if (interceptorProperties.getHeader()) {
+			registry.addInterceptor(new HeaderThreadLocalInterceptor())
+				.addPathPatterns("/**");
+		}
+
+		if (interceptorProperties.getPrometheus()) {
+			registry.addInterceptor(new PrometheusMetricsInterceptor(
 					requestCounter,
 					requestLatency,
 					inprogressRequests,
 					requestLatencyHistogram))
-			.addPathPatterns("/**");
+				.addPathPatterns("/**");
+		}
+
+		if (interceptorProperties.getDoubtApi()) {
+			registry.addInterceptor(new DoubtApiInterceptor(collector, interceptorProperties))
+				.addPathPatterns("/**")
+				.excludePathPatterns("/actuator/**");
+		}
+
 	}
 
 	@Override
@@ -233,7 +216,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		registry
 			.addViewController("/index")
 			.setViewName("index");
-
 	}
 
 	@Override
@@ -248,72 +230,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 //		LogUtil.info("资源扫描类.[{}]", scan);
 //		return scan;
 //	}
-
-	@Bean
-	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class,
-			StarterNameConstant.WEB_STARTER);
-
-		return customizer -> {
-			ObjectMapper mapper = customizer.createXmlMapper(true).build();
-
-			mapper.findAndRegisterModules();
-			mapper.setLocale(Locale.CHINA);
-			// 时区
-			mapper.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-			//去掉默认的时间戳格式
-			mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-			// 忽略在json字符串中存在，但是在java对象中不存在对应属性的情况
-			//忽略未知字段
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			// 忽略空Bean转json的错误
-			//在使用spring boot + jpa/hibernate，如果实体字段上加有FetchType.LAZY，并使用jackson序列化为json串时，会遇到SerializationFeature.FAIL_ON_EMPTY_BEANS异常
-			mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-			// 允许不带引号的字段名称
-			mapper.configure(JsonReadFeature.ALLOW_UNQUOTED_FIELD_NAMES.mappedFeature(), true);
-			// 允许单引号
-			mapper.configure(JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true);
-			// allow int startWith 0
-			mapper.configure(JsonReadFeature.ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature(), true);
-			// 允许字符串存在转义字符：\r \n \t
-			//该特性决定parser是否允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）。 如果该属性关闭，则如果遇到这些字符，则会抛出异常。JSON标准说明书要求所有控制符必须使用引号，因此这是一个非标准的特性
-			mapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
-			// 忽略不能转义的字符
-			mapper.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(),
-				true);
-			// 包含null
-			mapper.setSerializationInclusion(Include.ALWAYS);
-			// 使用驼峰式
-			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
-			// 使用bean名称
-			mapper.enable(MapperFeature.USE_STD_BEAN_NAMING);
-			// 所有日期格式都统一为固定格式
-			mapper.setDateFormat(new SimpleDateFormat(CommonConstant.DATETIME_FORMAT, Locale.CHINA));
-			mapper.registerModule(new Jdk8Module());
-
-			// 注册自定义模块
-			mapper.registerModule(new JacksonModule());
-
-			customizer.configure(mapper);
-
-			customizer.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
-			customizer.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
-
-			customizer.deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
-			customizer.serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
-
-			customizer.deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
-			customizer.serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
-
-			customizer.failOnEmptyBeans(false);
-			customizer.failOnUnknownProperties(false);
-
-			// 配置跨站攻击 反序列化处理器
-			if (xssProperties.getRequestBodyEnabled()) {
-				customizer.deserializerByType(String.class, new XssStringJsonDeserializer());
-			}
-		};
-	}
 
 	@Bean
 	public Validator validator() {
@@ -335,26 +251,28 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "version", havingValue = "true")
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilter() {
 		LogUtil.started(VersionFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter(new VersionFilter(filterProperties));
+		registrationBean.setFilter(new VersionFilter());
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(VersionFilter.class.getName());
-		registrationBean.setOrder(1);
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 6);
 		return registrationBean;
 	}
 
 	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "tenant", havingValue = "true")
 	public FilterRegistrationBean<TenantFilter> tenantFilter() {
 		LogUtil.started(TenantFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter(new TenantFilter(filterProperties));
+		registrationBean.setFilter(new TenantFilter());
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(TenantFilter.class.getName());
-		registrationBean.setOrder(2);
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 5);
 		return registrationBean;
 	}
 
@@ -366,20 +284,59 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		registrationBean.setFilter(new TraceFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(TraceFilter.class.getName());
-		registrationBean.setOrder(3);
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 4);
 		return registrationBean;
 	}
 
 	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "webContext", havingValue = "true")
 	public FilterRegistrationBean<WebContextFilter> webContextFilter() {
 		LogUtil.started(WebContextFilter.class, StarterNameConstant.WEB_STARTER);
 
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter(new WebContextFilter(filterProperties));
+		registrationBean.setFilter(new WebContextFilter());
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName(WebContextFilter.class.getName());
-		registrationBean.setOrder(4);
+		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 3);
 		return registrationBean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "report", havingValue = "true")
+	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
+		LogUtil.started(HealthReportFilter.class, StarterNameConstant.HEALTH_STARTER);
+		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
+		filterRegistrationBean.setFilter(new HealthReportFilter());
+		filterRegistrationBean.setName(HealthReportFilter.class.getName());
+		filterRegistrationBean.addUrlPatterns("/health/report/*");
+		return filterRegistrationBean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "dump", havingValue = "true")
+	public FilterRegistrationBean<DumpFilter> dumpFilter() {
+		LogUtil.started(DumpFilter.class, StarterNameConstant.HEALTH_STARTER);
+
+		FilterRegistrationBean<DumpFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+		filterRegistrationBean.setFilter(new DumpFilter());
+		filterRegistrationBean.setName(DumpFilter.class.getName());
+		filterRegistrationBean.addUrlPatterns("/health/dump/*");
+		return filterRegistrationBean;
+	}
+
+	@Bean
+	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "ping", havingValue = "true")
+	public FilterRegistrationBean<PingFilter> pingFilter() {
+		LogUtil.started(PingFilter.class, StarterNameConstant.HEALTH_STARTER);
+
+		FilterRegistrationBean<PingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		filterRegistrationBean.setFilter(new PingFilter());
+		filterRegistrationBean.setName(PingFilter.class.getName());
+		filterRegistrationBean.addUrlPatterns("/health/ping");
+		return filterRegistrationBean;
 	}
 
 	///**

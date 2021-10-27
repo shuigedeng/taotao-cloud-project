@@ -2,8 +2,8 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.uc.biz.entity.SysJob;
 import com.taotao.cloud.uc.biz.mapper.ISysJobMapper;
-import com.taotao.cloud.uc.biz.repository.ISysJobRepository;
-import com.taotao.cloud.uc.biz.repository.impl.SysJobRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysJobRepository;
+import com.taotao.cloud.uc.biz.repository.cls.SysJobRepository;
 import com.taotao.cloud.uc.biz.service.ISysJobService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;

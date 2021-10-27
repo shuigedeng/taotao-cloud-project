@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.service;
 
-import com.taotao.cloud.log.model.RequestLog;
+import com.taotao.cloud.log.model.Log;
 
 /**
  * 日志接口
@@ -29,9 +29,9 @@ public interface IRequestLogService {
 	/**
 	 * 添加日志
 	 *
-	 * @param requestLog sysLog
+	 * @param log sysLog
 	 * @author shuigedeng
 	 * @since 2020/4/27 16:52
 	 */
-	void save(RequestLog requestLog);
+	void save(Log log);
 }

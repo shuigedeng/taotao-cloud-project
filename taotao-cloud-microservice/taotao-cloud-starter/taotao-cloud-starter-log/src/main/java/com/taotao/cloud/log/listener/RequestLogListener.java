@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.log.listener;
 
-import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.log.event.RequestLogEvent;
-import com.taotao.cloud.log.model.RequestLog;
+import com.taotao.cloud.log.model.Log;
 import com.taotao.cloud.log.service.impl.KafkaRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.LoggerRequestLogServiceImpl;
 import com.taotao.cloud.log.service.impl.RedisRequestLogServiceImpl;
@@ -37,23 +36,23 @@ public class RequestLogListener {
 	@Async
 	@EventListener(RequestLogEvent.class)
 	public void saveRequestLog(RequestLogEvent event) {
-		RequestLog requestLog = (RequestLog) event.getSource();
+		Log log = (Log) event.getSource();
 		KafkaRequestLogServiceImpl kafkaRequestLogService = ContextUtil
 			.getBean(KafkaRequestLogServiceImpl.class, true);
 		if (null != kafkaRequestLogService) {
-			kafkaRequestLogService.save(requestLog);
+			kafkaRequestLogService.save(log);
 		}
 
 		LoggerRequestLogServiceImpl loggerRequestLogService = ContextUtil
 			.getBean(LoggerRequestLogServiceImpl.class, true);
 		if (null != loggerRequestLogService) {
-			loggerRequestLogService.save(requestLog);
+			loggerRequestLogService.save(log);
 		}
 
 		RedisRequestLogServiceImpl redisRequestLogService = ContextUtil
 			.getBean(RedisRequestLogServiceImpl.class, true);
 		if (null != redisRequestLogService) {
-			redisRequestLogService.save(requestLog);
+			redisRequestLogService.save(log);
 		}
 
 		//sysLogService.save(requestLog);

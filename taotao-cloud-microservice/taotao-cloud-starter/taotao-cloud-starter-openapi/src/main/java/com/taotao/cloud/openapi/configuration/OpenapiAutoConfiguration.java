@@ -15,9 +15,10 @@
  */
 package com.taotao.cloud.openapi.configuration;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.openapi.properties.SpringdocProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -31,14 +32,17 @@ import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import io.swagger.v3.oas.models.servers.Server;
-import java.util.ArrayList;
 import java.util.List;
-import com.taotao.cloud.core.properties.CoreProperties;
+import java.util.Map;
+import java.util.Objects;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,23 +57,14 @@ import org.springframework.http.HttpHeaders;
  * @since 2020/4/30 10:10
  */
 @Configuration
-public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingBean,
-	EnvironmentAware {
+@ConditionalOnProperty(prefix = SpringdocProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+public class OpenapiAutoConfiguration implements InitializingBean{
 
-	private static final String AUTH_KEY = "Authorization";
+	@Value("${spring.cloud.client.ip-address}")
+	private String ip;
 
-	private BeanFactory beanFactory;
-	private Environment environment;
-
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) {
-		this.beanFactory = beanFactory;
-	}
-
-	@Override
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
-	}
+	@Autowired
+	private SpringdocProperties properties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -80,12 +75,10 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 	public GroupedOpenApi groupedOpenApi() {
 		LogUtil.started(GroupedOpenApi.class, StarterNameConstant.OPENAPI_STARTER);
 
-		String applicationName = environment.getProperty(CoreProperties.SpringApplicationName, "");
-
 		return GroupedOpenApi
 			.builder()
-			.group(applicationName)
-			.pathsToMatch("/**")
+			.group(properties.getGroup())
+			.pathsToMatch(properties.getPathsToMatch())
 			.build();
 	}
 
@@ -96,10 +89,9 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
-			String taotaoCloudVersion = PropertyUtil.getProperty("taotaoCloudVersion");
 			Paths newPaths = new Paths();
 			paths.keySet()
-				.forEach(e -> newPaths.put("/api/v" + taotaoCloudVersion + e, paths.get(e)));
+				.forEach(e -> newPaths.put("/api/v" + properties.getVersion() + e, paths.get(e)));
 			openApi.setPaths(newPaths);
 
 			openApi.getPaths().values().stream()
@@ -115,78 +107,90 @@ public class OpenapiAutoConfiguration implements BeanFactoryAware, InitializingB
 		LogUtil.started(OpenAPI.class, StarterNameConstant.OPENAPI_STARTER);
 
 		Components components = new Components();
-		// 添加auth认证header
-		components.addSecuritySchemes("token",
-			new SecurityScheme()
-				.description("token")
-				.type(SecurityScheme.Type.HTTP)
-				.name("token")
-				.in(In.HEADER)
-				.scheme("basic")
-		);
-		components.addSecuritySchemes("bearer",
-			new SecurityScheme()
-				.name(HttpHeaders.AUTHORIZATION)
-				.type(SecurityScheme.Type.HTTP)
-				.in(In.HEADER)
-				.scheme("bearer")
-				.bearerFormat("JWT")
-		);
-		// 添加全局header
-		components.addHeaders("taotao-cloud-request-version-header",
-			new Header()
-				.description("版本号")
-				.schema(new StringSchema())
-		);
-		components.addHeaders("taotao-cloud-request-weight-header",
-			new Header()
-				.description("权重")
-				.schema(new IntegerSchema())
-		);
-		String applicationName = environment.getProperty("spring.application.name", "");
-		String taotaoCloudVersion = environment.getProperty("taotaoCloudVersion");
-		String ip = environment.getProperty("spring.cloud.client.ip-address",
-			"0.0.0.0");
-		List<Server> servers = new ArrayList<>();
-		//Server s1 = new Server();
-		//s1.setUrl("http://" + ip + ":9999/");
-		//s1.setDescription("本地地址");
-		//servers.add(s1);
-		Server s2 = new Server();
-		s2.setUrl("http://dev.taotaocloud.com/");
-		s2.setDescription("测试环境地址");
-		servers.add(s2);
-		Server s3 = new Server();
-		s3.setUrl("http://pre.taotaocloud.com/");
-		s3.setDescription("预上线环境地址");
-		servers.add(s3);
-		Server s4 = new Server();
-		s4.setUrl("http://pro.taotaocloud.com/");
-		s4.setDescription("生产环境地址");
-		servers.add(s4);
+
+		Map<String, SecurityScheme> securitySchemes = properties.getSecuritySchemes();
+		if (CollectionUtil.isEmpty(securitySchemes)) {
+			// 添加auth认证header
+			components.addSecuritySchemes("token",
+				new SecurityScheme()
+					.description("token")
+					.type(SecurityScheme.Type.HTTP)
+					.name("token")
+					.in(In.HEADER)
+					.scheme("basic")
+			);
+			components.addSecuritySchemes("bearer",
+				new SecurityScheme()
+					.name(HttpHeaders.AUTHORIZATION)
+					.type(SecurityScheme.Type.HTTP)
+					.in(In.HEADER)
+					.scheme("bearer")
+					.bearerFormat("JWT")
+			);
+		} else {
+			securitySchemes.forEach(components::addSecuritySchemes);
+		}
+
+		Map<String, Header> headers = properties.getHeaders();
+		if (CollectionUtil.isEmpty(headers)) {
+			// 添加全局header
+			components.addHeaders("taotao-cloud-request-version-header",
+				new Header()
+					.description("版本号")
+					.schema(new StringSchema())
+			);
+			components.addHeaders("taotao-cloud-request-weight-header",
+				new Header()
+					.description("权重")
+					.schema(new IntegerSchema())
+			);
+		} else {
+			headers.forEach(components::addHeaders);
+		}
+
+		List<Server> servers = properties.getServers();
+		if (CollectionUtil.isEmpty(servers)) {
+			Server s1 = new Server();
+			s1.setUrl("http://" + ip + ":9999/");
+			s1.setDescription("本地地址");
+			servers.add(s1);
+			Server s2 = new Server();
+			s2.setUrl("http://dev.taotaocloud.com/");
+			s2.setDescription("测试环境地址");
+			servers.add(s2);
+			Server s3 = new Server();
+			s3.setUrl("http://pre.taotaocloud.com/");
+			s3.setDescription("预上线环境地址");
+			servers.add(s3);
+			Server s4 = new Server();
+			s4.setUrl("http://pro.taotaocloud.com/");
+			s4.setDescription("生产环境地址");
+			servers.add(s4);
+		}
+
+		Contact contact = new Contact()
+			.name("shuigedeng")
+			.email("981376577@qq.com")
+			.url("https://github.com/shuigedeng/taotao-cloud-project");
+		License license = new License()
+			.name("Apache 2.0")
+			.url("https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt");
 
 		Info info = new Info()
-			.title(applicationName.toUpperCase() + " API")
-			.description("TAOTAO CLOUD 电商及大数据平台")
-			.version(taotaoCloudVersion)
-			.contact(new Contact()
-				.name("shuigedeng")
-				.email("981376577@qq.com")
-				.url("https://github.com/shuigedeng/taotao-cloud-project")
-			)
-			.termsOfService("http://taotaocloud.com/terms/")
-			.license(new License()
-				.name("Apache 2.0")
-				.url("https://github.com/shuigedeng/taotao-cloud-project/blob/master/LICENSE.txt")
-			);
+			.title(properties.getTitle())
+			.description(properties.getDescription())
+			.version(properties.getVersion())
+			.contact(Objects.isNull(properties.getContact()) ? contact : properties.getContact())
+			.termsOfService(properties.getTermsOfService())
+			.license(Objects.isNull(properties.getLicense()) ? license : properties.getLicense());
 
 		ExternalDocumentation externalDocumentation = new ExternalDocumentation()
-			.description("TaoTao Cloud Wiki Documentation")
-			.url("https://github.com/shuigedeng/taotao-cloud-project/wiki");
+			.description(properties.getExternalDescription())
+			.url(properties.getExternalUrl());
 
 		return new OpenAPI()
 			.components(components)
-			.openapi("3.0.1")
+			.openapi(properties.getOpenapi())
 			.info(info)
 			.servers(servers)
 			.externalDocs(externalDocumentation);

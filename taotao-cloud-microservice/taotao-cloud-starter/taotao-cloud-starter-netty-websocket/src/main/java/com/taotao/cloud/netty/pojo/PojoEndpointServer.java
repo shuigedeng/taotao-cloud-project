@@ -48,7 +48,7 @@ public class PojoEndpointServer {
 
 	private final ServerEndpointConfig config;
 
-	private Set<WsPathMatcher> pathMatchers = new HashSet<>();
+	private final Set<WsPathMatcher> pathMatchers = new HashSet<>();
 
 	private static final InternalLogger logger = InternalLoggerFactory.getInstance(
 		PojoEndpointServer.class);

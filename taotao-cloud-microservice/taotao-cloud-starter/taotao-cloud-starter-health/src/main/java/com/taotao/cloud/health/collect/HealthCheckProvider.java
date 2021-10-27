@@ -101,7 +101,7 @@ public class HealthCheckProvider implements AutoCloseable {
 				}
 
 				try {
-					Thread.sleep(healthProperties.getHealthTimeSpan() * 1000L);
+					Thread.sleep(healthProperties.getTimeSpan() * 1000L);
 				} catch (Exception e) {
 					LogUtil.error(e);
 				}
@@ -129,8 +129,7 @@ public class HealthCheckProvider implements AutoCloseable {
 					Report report2 = task.getReport();
 					if (report2 != null) {
 						report.put(task.getName(),
-							report2.setDesc(task.getDesc())
-								.setName(task.getName()));
+							report2.setDesc(task.getDesc()).setName(task.getName()));
 					}
 				} catch (Exception e) {
 					LogUtil.error(e,

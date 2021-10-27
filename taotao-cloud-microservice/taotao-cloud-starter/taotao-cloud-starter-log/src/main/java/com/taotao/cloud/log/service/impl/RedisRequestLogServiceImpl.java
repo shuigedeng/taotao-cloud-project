@@ -17,13 +17,12 @@ package com.taotao.cloud.log.service.impl;
 
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.log.model.RequestLog;
+import com.taotao.cloud.log.model.Log;
 import com.taotao.cloud.log.service.IRequestLogService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import javax.annotation.Resource;
 
 /**
  * 审计日志实现类-redis
@@ -43,15 +42,15 @@ public class RedisRequestLogServiceImpl implements IRequestLogService {
 	}
 
 	@Override
-	public void save(RequestLog requestLog) {
+	public void save(Log log) {
 		String date = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
 			.format(Instant.now());
 
-		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(requestLog));
+		Long index = redisRepository.leftPush(SYS_LOG + date, JsonUtil.toJSONString(log));
 		if (index > 0) {
 			//LogUtil.info("redis远程日志记录成功：{}", requestLog);
 		} else {
-			LogUtil.error("redis远程日志记录失败：{}", requestLog);
+			LogUtil.error("redis远程日志记录失败：{}", log);
 		}
 	}
 }

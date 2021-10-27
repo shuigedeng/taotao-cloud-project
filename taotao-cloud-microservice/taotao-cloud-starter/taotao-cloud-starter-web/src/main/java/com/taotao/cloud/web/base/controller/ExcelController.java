@@ -31,7 +31,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -44,7 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,7 +75,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用导出Excel", description = "通用导出Excel")
 	@PostMapping(value = "/excel/export", produces = "application/octet-stream")
-	@RequestOperateLog("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
+	@RequestLog("'导出Excel:'.concat([" + NormalExcelConstants.FILE_NAME + "]?:'')")
 	//@PreAuthorize("@permissionVerifier.hasPermission('export')")
 	default void export(
 		@Parameter(description = "查询DTO", required = true)
@@ -109,7 +108,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用预览Excel", description = "通用预览Excel")
 	@PostMapping(value = "/excel/preview")
-	@RequestOperateLog("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
+	@RequestLog("'通用预览Excel:' + ([" + NormalExcelConstants.FILE_NAME + "]?:'')")
 	//@PreAuthorize("@permissionVerifier.hasPermission('preview')")
 	default Result<String> preview(
 		@Parameter(description = "查询DTO", required = true)
@@ -132,7 +131,7 @@ public interface ExcelController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用导入Excel", description = "通用导入Excel")
 	@PostMapping(value = "/excel/import", headers = "content-type=multipart/form-data")
-	@RequestOperateLog(value = "通用导入Excel")
+	@RequestLog(value = "通用导入Excel")
 	//@PreAuthorize("@permissionVerifier.hasPermission('import')")
 	default Result<Boolean> importExcel(
 		@Parameter(description = "文件", required = true) @NotNull(message = "文件不能为空")

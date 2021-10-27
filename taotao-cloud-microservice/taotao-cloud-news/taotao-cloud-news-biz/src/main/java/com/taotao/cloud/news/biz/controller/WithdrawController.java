@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.news.biz.controller;
 
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.news.api.vo.WithdrawVO;
 import com.taotao.cloud.news.biz.entity.Withdraw;
 import com.taotao.cloud.news.biz.mapper.WithdrawMapper;
@@ -50,7 +50,7 @@ public class WithdrawController {
 
 	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.POST)
 	@ApiOperation("根据id查询提现申请信息")
-	@RequestOperateLog(description = "根据id查询提现申请信息")
+	@RequestLog(description = "根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<WithdrawVO> findWithdrawById(@PathVariable(value = "id") Long id) {

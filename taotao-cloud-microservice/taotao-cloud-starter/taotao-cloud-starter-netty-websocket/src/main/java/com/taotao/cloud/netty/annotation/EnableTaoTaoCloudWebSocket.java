@@ -12,6 +12,6 @@ import org.springframework.context.annotation.Import;
 @Import(NettyWebSocketAutoConfiguration.class)
 public @interface EnableTaoTaoCloudWebSocket {
 
-	String[] scanBasePackages() default {};
+	String[] basePackages() default {};
 
 }

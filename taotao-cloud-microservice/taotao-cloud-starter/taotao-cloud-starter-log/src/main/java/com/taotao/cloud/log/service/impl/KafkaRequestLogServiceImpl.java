@@ -17,10 +17,8 @@ package com.taotao.cloud.log.service.impl;
 
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.log.model.RequestLog;
+import com.taotao.cloud.log.model.Log;
 import com.taotao.cloud.log.service.IRequestLogService;
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -48,8 +46,8 @@ public class KafkaRequestLogServiceImpl implements IRequestLogService {
 	}
 
 	@Override
-	public void save(RequestLog requestLog) {
-		String request = JsonUtil.toJSONString(requestLog);
+	public void save(Log log) {
+		String request = JsonUtil.toJSONString(log);
 
 		ListenableFuture<SendResult<String, String>> future = kafkaTemplate
 			.send(REQUEST_LOG_TOPIC + appName, request);

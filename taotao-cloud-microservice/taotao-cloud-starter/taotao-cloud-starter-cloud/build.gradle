@@ -15,8 +15,7 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 
     api 'com.taobao.arthas:arthas-spring-boot-starter:3.4.5'
-
-//    api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
+    //api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 
     api "io.micrometer:micrometer-registry-prometheus"
     api "de.codecentric:spring-boot-admin-starter-client:2.4.0"

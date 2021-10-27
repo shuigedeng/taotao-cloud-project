@@ -20,7 +20,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.SecurityUtil;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.uc.api.dto.user.UserSaveDTO;
 import com.taotao.cloud.uc.api.dto.user.UserUpdateDTO;
@@ -71,7 +71,7 @@ public class SysUserController extends
 	 * @since 2021-10-09 15:14:58
 	 */
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
-	@RequestOperateLog(description = "根据手机号码查询用户是否存在")
+	@RequestLog(description = "根据手机号码查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone/{phone}")
 	public Result<Boolean> existsByPhone(
@@ -89,7 +89,7 @@ public class SysUserController extends
 	 * @since 2021-10-09 15:15:05
 	 */
 	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
-	@RequestOperateLog(description = "根据用户id查询用户是否存在")
+	@RequestLog(description = "根据用户id查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
 	@GetMapping("/exists/id/{userId}")
 	public Result<Boolean> existsByUserId(
@@ -108,7 +108,7 @@ public class SysUserController extends
 	 * @since 2021-10-09 15:15:57
 	 */
 	@Operation(summary = "重置密码", description = "重置密码")
-	@RequestOperateLog(description = "重置密码")
+	@RequestLog(description = "重置密码")
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PostMapping("/rest/password/{userId}")
 	public Result<Boolean> restPass(
@@ -127,7 +127,7 @@ public class SysUserController extends
 	 * @since 2021-10-09 15:16:08
 	 */
 	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
-	@RequestOperateLog(description = "获取当前登录人信息")
+	@RequestLog(description = "获取当前登录人信息")
 	@PreAuthorize("hasAuthority('sys:user:info:current')")
 	@GetMapping("/current")
 	public Result<UserQueryVO> getCurrentUser() {
@@ -150,7 +150,7 @@ public class SysUserController extends
 	 * @since 2021-10-09 16:41:06
 	 */
 	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
-	@RequestOperateLog(description = "根据用户id更新角色信息(用户分配角色)")
+	@RequestLog(description = "根据用户id更新角色信息(用户分配角色)")
 	@PreAuthorize("hasAuthority('sys:user:role')")
 	@PutMapping("/roles/{userId}")
 	public Result<Boolean> updateUserRoles(

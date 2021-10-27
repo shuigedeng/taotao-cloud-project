@@ -34,12 +34,12 @@ public class Pubsub {
 	/**
 	 * subscribeList
 	 */
-	private Map<String, ConcurrentHashMap<String, Sub>> subscribeList = new ConcurrentHashMap<>();
+	private final Map<String, ConcurrentHashMap<String, Sub>> subscribeList = new ConcurrentHashMap<>();
 
 	/**
 	 * lock
 	 */
-	private Object lock = new Object();
+	private final Object lock = new Object();
 
 	/**
 	 * pub

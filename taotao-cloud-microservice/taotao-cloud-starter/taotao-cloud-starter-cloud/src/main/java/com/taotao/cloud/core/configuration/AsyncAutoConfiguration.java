@@ -25,6 +25,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,11 +45,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @ConditionalOnProperty(prefix = AsyncThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 
+	@Autowired
 	private AsyncThreadPoolProperties asyncThreadPoolProperties;
-
-	public AsyncAutoConfiguration(AsyncThreadPoolProperties asyncThreadPoolProperties) {
-		this.asyncThreadPoolProperties = asyncThreadPoolProperties;
-	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -95,7 +93,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		private final AtomicInteger threadNumber = new AtomicInteger(1);
 		private final String namePrefix;
 		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
-		private ThreadPoolTaskExecutor executor;
+		private final ThreadPoolTaskExecutor executor;
 
 		public CoreThreadPoolFactory(AsyncThreadPoolProperties asyncThreadPoolProperties,
 			ThreadPoolTaskExecutor executor) {
@@ -127,8 +125,8 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	public static class CoreThreadPoolUncaughtExceptionHandler implements
 		Thread.UncaughtExceptionHandler {
 
-		private Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
-		private AsyncThreadPoolProperties asyncThreadPoolProperties;
+		private final Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
+		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
 
 		public CoreThreadPoolUncaughtExceptionHandler(
 			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler,

@@ -21,7 +21,7 @@ import com.taotao.cloud.coupon.api.vo.CouponVO;
 import com.taotao.cloud.coupon.biz.entity.Coupon;
 import com.taotao.cloud.coupon.biz.mapper.CouponMapper;
 import com.taotao.cloud.coupon.biz.service.ICouponService;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +51,7 @@ public class CouponController {
 	}
 
 	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据id查询提现申请信息")
+	@RequestLog(description = "根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<CouponVO> findWithdrawById(@PathVariable(value = "id") Long id) {

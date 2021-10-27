@@ -42,8 +42,6 @@ import org.springframework.util.concurrent.ListenableFuture;
  */
 public class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
-	private static final long serialVersionUID = -5887035957049288777L;
-
 	@Override
 	public void execute(@NotNull Runnable runnable) {
 		Runnable ttlRunnable = TtlRunnable.get(runnable);

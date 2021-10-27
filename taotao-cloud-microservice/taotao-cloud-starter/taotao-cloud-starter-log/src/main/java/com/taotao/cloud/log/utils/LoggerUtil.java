@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.utils;
 
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 
@@ -52,7 +52,7 @@ public class LoggerUtil {
 			if (method.getName().equals(methodName)) {
 				Class<?>[] clazzs = method.getParameterTypes();
 				if (clazzs.length == args.length) {
-					description = method.getAnnotation(RequestOperateLog.class).description();
+					description = method.getAnnotation(RequestLog.class).description();
 					break;
 				}
 			}

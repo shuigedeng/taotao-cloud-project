@@ -33,7 +33,7 @@ import org.springframework.core.annotation.Order;
 @Order(200000000)
 public class PropertyCache implements CommandLineRunner {
 
-	private Pubsub pubsub;
+	private final Pubsub pubsub;
 
 	public PropertyCache(Pubsub pubsub) {
 		this.pubsub = pubsub;

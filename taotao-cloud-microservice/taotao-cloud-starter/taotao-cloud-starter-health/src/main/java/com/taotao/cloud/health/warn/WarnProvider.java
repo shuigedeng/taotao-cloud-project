@@ -47,19 +47,17 @@ import org.springframework.boot.ApplicationRunner;
 public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	ApplicationRunner {
 
-	private ConcurrentLinkedDeque<Message> messages = new ConcurrentLinkedDeque<>();
-	private AtomicInteger atomicInteger = new AtomicInteger(0);
+	private final ConcurrentLinkedDeque<Message> messages = new ConcurrentLinkedDeque<>();
+	private final AtomicInteger atomicInteger = new AtomicInteger(0);
 	private final Object lock = new Object();
-	private List<AbstractWarn> warns = new ArrayList<>();
+	private final List<AbstractWarn> warns = new ArrayList<>();
 	private boolean isClose;
-	private DuplicateFilter duplicateFilter;
-	private AtomicBoolean atomicChannel = new AtomicBoolean(false);
-	private WarnProperties warnProperties;
-	private MonitorThreadPool monitorThreadPool;
+	private final DuplicateFilter duplicateFilter;
+	private final AtomicBoolean atomicChannel = new AtomicBoolean(false);
+	private final WarnProperties warnProperties;
+	private final MonitorThreadPool monitorThreadPool;
 
-	public WarnProvider(
-		WarnProperties warnProperties,
-		MonitorThreadPool monitorThreadPool) {
+	public WarnProvider(WarnProperties warnProperties, MonitorThreadPool monitorThreadPool) {
 		this.warnProperties = warnProperties;
 		this.monitorThreadPool = monitorThreadPool;
 		this.duplicateFilter = new DuplicateFilter(warnProperties);

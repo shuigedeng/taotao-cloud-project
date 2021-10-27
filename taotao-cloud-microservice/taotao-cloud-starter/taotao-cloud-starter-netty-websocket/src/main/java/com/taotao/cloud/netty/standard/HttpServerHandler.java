@@ -51,11 +51,11 @@ class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 	private final EventExecutorGroup eventExecutorGroup;
 	private final boolean isCors;
 
-	private static ByteBuf faviconByteBuf = null;
-	private static ByteBuf notFoundByteBuf = null;
-	private static ByteBuf badRequestByteBuf = null;
-	private static ByteBuf forbiddenByteBuf = null;
-	private static ByteBuf internalServerErrorByteBuf = null;
+	private static ByteBuf faviconByteBuf;
+	private static ByteBuf notFoundByteBuf;
+	private static ByteBuf badRequestByteBuf;
+	private static ByteBuf forbiddenByteBuf;
+	private static ByteBuf internalServerErrorByteBuf;
 
 	static {
 		faviconByteBuf = buildStaticRes("/favicon.ico");

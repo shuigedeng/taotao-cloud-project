@@ -58,20 +58,20 @@ public class ConfigService {
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			nacosConfigManager.getConfigService()
-					.addListener(appName + ".yaml", configProperties.getGroup(),
-							new Listener() {
-								@Override
-								public Executor getExecutor() {
-									return null;
-								}
+				.addListener(appName + ".yaml", configProperties.getGroup(),
+					new Listener() {
+						@Override
+						public Executor getExecutor() {
+							return null;
+						}
 
-								@Override
-								public void receiveConfigInfo(String configInfo) {
-									LogUtil.info(
-											"taotao cloud on received from nacos config info : {}",
-											configInfo);
-								}
-							});
+						@Override
+						public void receiveConfigInfo(String configInfo) {
+							LogUtil.info(
+								"taotao cloud on received from nacos config info : {}",
+								configInfo);
+						}
+					});
 		}
 	}
 }

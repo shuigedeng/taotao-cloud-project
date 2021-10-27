@@ -71,12 +71,10 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @since 2021-09-02 21:26:19
  */
 @Configuration
-@ConditionalOnClass({Servlet.class, DispatcherServlet.class})
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
-		RestController.class, Controller.class})
+//@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
+//		RestController.class, Controller.class})
 //@ConditionalOnExpression("!'${security.oauth2.client.clientId}'.isEmpty()")
-//@RestControllerAdvice
+@RestControllerAdvice
 public class ExceptionConfiguration implements InitializingBean {
 
 	@Override

@@ -65,6 +65,7 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnMissingBean
 	public ZookeeperTemplate zookeeperTemplate(CuratorFramework curatorFramework) {
 		LogUtil.started(ZookeeperTemplate.class, StarterNameConstant.ZOOKEEPER_STARTER);
 

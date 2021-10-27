@@ -20,6 +20,7 @@ import com.taotao.cloud.dingtalk.annatations.EnableMultiDinger;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudUcApplication
@@ -31,6 +32,8 @@ import org.springframework.boot.SpringApplication;
  * @since 2020/11/30 下午3:33
  */
 @DingerScan(basePackages = "com.taotao.cloud.uc.biz.dingtalk")
+@MapperScan(basePackages = "com.taotao.cloud.uc.biz.mapper")
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.uc.biz.repository.inf")
 @EnableMultiDinger
 @TaoTaoCloudApplication
 public class TaoTaoCloudUcApplication {

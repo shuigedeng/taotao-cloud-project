@@ -8,7 +8,7 @@ import com.taotao.cloud.dfs.api.vo.UploadFileVO;
 import com.taotao.cloud.dfs.biz.entity.File;
 import com.taotao.cloud.dfs.biz.mapper.FileMapper;
 import com.taotao.cloud.dfs.biz.service.IFileService;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -45,7 +45,7 @@ public class FileController {
 	}
 
 	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
-	@RequestOperateLog(description = "上传单个文件")
+	@RequestLog(description = "上传单个文件")
 	@PreAuthorize("hasAuthority('file:upload')")
 	@PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
 	public Result<UploadFileVO> upload(@RequestPart("file") MultipartFile file) {
@@ -59,7 +59,7 @@ public class FileController {
 	}
 
 	@Operation(summary = "上传多个文件", description = "上传多个文件", method = CommonConstant.POST)
-	@RequestOperateLog(description = "上传多个文件")
+	@RequestLog(description = "上传多个文件")
 	@PreAuthorize("hasAuthority('file:multiple:upload')")
 	@PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
 	public Result<List<UploadFileVO>> uploadMultipleFiles(
@@ -83,7 +83,7 @@ public class FileController {
 	}
 
 	@Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据id查询文件信息")
+	@RequestLog(description = "根据id查询文件信息")
 	@PreAuthorize("hasAuthority('file:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {

@@ -39,17 +39,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class VersionFilter extends OncePerRequestFilter {
 
-	private final FilterProperties filterProperties;
-
-	public VersionFilter(FilterProperties filterProperties) {
-		this.filterProperties = filterProperties;
-	}
-
-	@Override
-	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return !filterProperties.getVersion();
-	}
-
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {

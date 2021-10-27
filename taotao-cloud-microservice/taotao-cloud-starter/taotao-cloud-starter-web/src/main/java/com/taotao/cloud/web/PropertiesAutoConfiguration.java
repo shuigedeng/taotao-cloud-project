@@ -20,6 +20,7 @@ import com.taotao.cloud.web.properties.DozerProperties;
 import com.taotao.cloud.web.properties.EncryptProperties;
 import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.properties.IdempotentProperties;
+import com.taotao.cloud.web.properties.InterceptorProperties;
 import com.taotao.cloud.web.properties.LimitProperties;
 import com.taotao.cloud.web.properties.XssProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -32,13 +33,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2021-09-03 08:03:14
  */
 @EnableConfigurationProperties({
-		FilterProperties.class,
-		AsyncThreadPoolProperties.class,
-		DozerProperties.class,
-		IdempotentProperties.class,
-		XssProperties.class,
-		LimitProperties.class,
-		EncryptProperties.class
+	FilterProperties.class,
+	InterceptorProperties.class,
+	AsyncThreadPoolProperties.class,
+	DozerProperties.class,
+	IdempotentProperties.class,
+	XssProperties.class,
+	LimitProperties.class,
+	EncryptProperties.class
 })
 public class PropertiesAutoConfiguration {
 

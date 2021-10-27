@@ -32,6 +32,7 @@ import java.lang.management.ManagementFactory;
 public class CpuCollectTask extends AbstractCollectTask {
 
 	private static final String TASK_NAME = "taotao.cloud.health.collect.cpu";
+	private static final String TASK_DESC = "CPU检查报表";
 
 	private final OperatingSystemMXBean systemBean;
 	private final CollectTaskProperties properties;
@@ -48,7 +49,7 @@ public class CpuCollectTask extends AbstractCollectTask {
 
 	@Override
 	public String getDesc() {
-		return this.getClass().getName();
+		return TASK_DESC;
 	}
 
 	@Override

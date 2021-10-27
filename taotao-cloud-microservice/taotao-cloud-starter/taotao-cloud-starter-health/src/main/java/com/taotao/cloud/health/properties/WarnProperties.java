@@ -32,11 +32,6 @@ public class WarnProperties {
 	public static final String PREFIX = "taotao.cloud.health.warn";
 
 	/**
-	 * 报警是否开启
-	 */
-	private boolean enabled = true;
-
-	/**
 	 * 报警消息缓存数量
 	 */
 	private int cacheCount = 3;
@@ -65,13 +60,6 @@ public class WarnProperties {
 	 */
 	private String flybookFilterIP;
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 
 	public int getCacheCount() {
 		return cacheCount;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.log.event;
 
-import com.taotao.cloud.log.model.RequestLog;
+import com.taotao.cloud.log.model.Log;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -27,7 +27,7 @@ import org.springframework.context.ApplicationEvent;
  */
 public class RequestLogEvent extends ApplicationEvent {
 
-	public RequestLogEvent(RequestLog requestLog) {
-		super(requestLog);
+	public RequestLogEvent(Log log) {
+		super(log);
 	}
 }

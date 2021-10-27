@@ -18,7 +18,7 @@ package com.taotao.cloud.web.base.controller;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -54,7 +54,7 @@ public interface UpdateController<T extends SuperEntity<T, I>, I extends Seriali
 	 */
 	@Operation(summary = "通用单体更新", description = "通用单体更新")
 	@PutMapping("/{id:[0-9]*}")
-	@RequestOperateLog(value = "通用单体更新", request = false)
+	@RequestLog(value = "通用单体更新", request = false)
 	//@PreAuthorize("@permissionVerifier.hasPermission('update')")
 	default Result<Boolean> update(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")

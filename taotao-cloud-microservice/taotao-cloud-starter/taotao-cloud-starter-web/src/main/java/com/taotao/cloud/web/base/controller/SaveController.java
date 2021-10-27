@@ -19,7 +19,7 @@ import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,7 +52,7 @@ public interface SaveController<T extends SuperEntity<T, I>, I extends Serializa
 	 */
 	@Operation(summary = "通用单体新增", description = "通用单体新增")
 	@PostMapping
-	@RequestOperateLog(value = "通用单体新增", request = false)
+	@RequestLog(value = "通用单体新增", request = false)
 	//@PreAuthorize("@permissionVerifier.hasPermission('save')")
 	default Result<Boolean> save(
 		@Parameter(description = "新增DTO", required = true)

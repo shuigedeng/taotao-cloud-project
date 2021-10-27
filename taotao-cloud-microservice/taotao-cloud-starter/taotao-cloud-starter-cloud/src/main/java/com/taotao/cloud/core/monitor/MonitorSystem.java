@@ -57,6 +57,7 @@ public class MonitorSystem {
 		ThreadPoolExecutor monitorThreadPoolExecutor,
 		ThreadPoolTaskExecutor coreThreadPoolExecutor) {
 		this.collector = collector;
+
 		this.monitorThreadPoolExecutor = monitorThreadPoolExecutor;
 		this.monitorThreadName = monitorThreadName.replace("-", ".");
 

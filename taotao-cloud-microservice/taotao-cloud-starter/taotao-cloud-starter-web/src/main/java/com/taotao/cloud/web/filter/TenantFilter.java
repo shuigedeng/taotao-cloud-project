@@ -38,17 +38,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class TenantFilter extends OncePerRequestFilter {
 
-	private final FilterProperties filterProperties;
-
-	public TenantFilter(FilterProperties filterProperties) {
-		this.filterProperties = filterProperties;
-	}
-
-	@Override
-	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		return !filterProperties.getTenant();
-	}
-
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 		FilterChain filterChain) throws IOException, ServletException {

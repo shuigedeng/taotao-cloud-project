@@ -15,14 +15,9 @@
  */
 package com.taotao.cloud.health;
 
-import com.taotao.cloud.health.properties.CheckProperties;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
-import com.taotao.cloud.health.properties.DoubtApiProperties;
-import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.health.properties.ExportProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
-import com.taotao.cloud.health.properties.PingProperties;
-import com.taotao.cloud.health.properties.ReportProperties;
 import com.taotao.cloud.health.properties.WarnProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -37,11 +32,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 	ExportProperties.class,
 	HealthProperties.class,
 	WarnProperties.class,
-	CheckProperties.class,
-	DumpProperties.class,
-	DoubtApiProperties.class,
-	PingProperties.class,
-	ReportProperties.class,
 	CollectTaskProperties.class,
 })
 public class PropertiesAutoConfiguration {

@@ -25,13 +25,11 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.model.Report;
-import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
@@ -84,7 +82,7 @@ public class RouterFunctionConfiguration {
 			.andRoute(RequestPredicates.GET(FAVICON)
 				.and(RequestPredicates.accept(MediaType.IMAGE_PNG)), faviconHandler)
 			.andRoute(RequestPredicates.GET(HEALTH_REPORT)
-					.and(RequestPredicates.accept(MediaType.ALL)), healthReportHandler)
+				.and(RequestPredicates.accept(MediaType.ALL)), healthReportHandler)
 			.andRoute(RequestPredicates.GET("/k8s")
 				.and(RequestPredicates.accept(MediaType.ALL)), k8sHandler);
 	}
@@ -98,7 +96,7 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
+	public static class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
 
 		private static final int DEFAULT_PORT = 9700;
 
@@ -151,7 +149,7 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	public class K8sHandler implements HandlerFunction<ServerResponse> {
+	public static class K8sHandler implements HandlerFunction<ServerResponse> {
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
@@ -180,7 +178,7 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
+	public static class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 
 		private static final String PARAM_T = "t";
 		private final RedisRepository redisRepository;
@@ -221,7 +219,7 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	public class FaviconHandler implements HandlerFunction<ServerResponse> {
+	public static class FaviconHandler implements HandlerFunction<ServerResponse> {
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
@@ -245,7 +243,7 @@ public class RouterFunctionConfiguration {
 	}
 
 	@Component
-	public class HealthReportHandler implements HandlerFunction<ServerResponse> {
+	public static class HealthReportHandler implements HandlerFunction<ServerResponse> {
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
@@ -255,9 +253,7 @@ public class RouterFunctionConfiguration {
 				String html;
 				HealthCheckProvider healthProvider = ContextUtil.getBean(HealthCheckProvider.class,
 					true);
-				DumpProperties dumpProperties = ContextUtil.getBean(DumpProperties.class, true);
-				if (Objects.nonNull(healthProvider) && Objects.nonNull(dumpProperties)
-					&& uri.startsWith(HEALTH_REPORT)) {
+				if (Objects.nonNull(healthProvider) && uri.startsWith(HEALTH_REPORT)) {
 
 					boolean isAnalyse = !"false".equalsIgnoreCase(
 						request.queryParam("isAnalyse").orElse("false"));
@@ -277,9 +273,7 @@ public class RouterFunctionConfiguration {
 							.replace("\n", "<br/>")
 							.replace("/n", "\n")
 							.replace("/r", "\r");
-						if (dumpProperties.isEnabled()) {
-							html = "dump信息:<a href='/health/dump/'>查看</a><br/>" + html;
-						}
+						html = "dump信息:<a href='/health/dump/'>查看</a><br/>" + html;
 					}
 				} else {
 					html = "请配置taotao.cloud.health.enabled=true,taotao.cloud.health.check.enabled=true";

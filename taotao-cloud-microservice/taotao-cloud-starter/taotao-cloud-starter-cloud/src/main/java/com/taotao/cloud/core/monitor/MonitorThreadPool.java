@@ -97,6 +97,7 @@ public class MonitorThreadPool {
 			TimeUnit.SECONDS,
 			new SynchronousQueue<>(),
 			new MonitorThreadPoolFactory(this.monitorThreadName));
+
 		monitorThreadPoolExecutor.setNamePrefix(this.monitorThreadName);
 		this.monitorThreadPoolExecutor = monitorThreadPoolExecutor;
 

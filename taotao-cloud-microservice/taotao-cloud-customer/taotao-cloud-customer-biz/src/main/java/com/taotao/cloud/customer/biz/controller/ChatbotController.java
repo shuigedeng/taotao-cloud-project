@@ -21,7 +21,7 @@ import com.taotao.cloud.customer.api.vo.ChatbotVO;
 import com.taotao.cloud.customer.biz.entity.Chatbot;
 import com.taotao.cloud.customer.biz.mapper.ChatbotMapper;
 import com.taotao.cloud.customer.biz.service.IChatbotService;
-import com.taotao.cloud.log.annotation.RequestOperateLog;
+import com.taotao.cloud.log.annotation.RequestLog;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +51,7 @@ public class ChatbotController {
 	}
 
 	@Operation(summary = "根据id查询机器人客服信息", description = "根据id查询机器人客服信息", method = CommonConstant.GET)
-	@RequestOperateLog(description = "根据id查询机器人客服信息")
+	@RequestLog(description = "根据id查询机器人客服信息")
 	@PreAuthorize("hasAuthority('chatbot:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<ChatbotVO> findChatbotById(@PathVariable(value = "id") Long id) {
