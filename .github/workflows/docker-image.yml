@@ -19,6 +19,7 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Build with Gradle And Build the Docker image
+      working-directory: .
       run: |
         cd ../../taotao-cloud-microservice/taotao-cloud-admin,
         gradle clean bootJar,
