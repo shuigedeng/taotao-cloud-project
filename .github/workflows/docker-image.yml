@@ -25,5 +25,6 @@ jobs:
     - name: Build with Gradle And Build the Docker image
       working-directory: .
       run: |
-        ls -la $PWD,
+        ls -la $PWD
         ls -la $GITHUB_WORKSPACE
+
