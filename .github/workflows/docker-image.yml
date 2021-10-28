@@ -20,6 +20,9 @@ jobs:
         #settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Build with Gradle And Build the Docker image
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+      env:
+        ossrhUsername: ${{secrets.ossrhUsername}}
+        ossrhPassword: ${{secrets.ossrhPassword}}
       run: |
         ls -la $PWD
         gradle clean bootJar
