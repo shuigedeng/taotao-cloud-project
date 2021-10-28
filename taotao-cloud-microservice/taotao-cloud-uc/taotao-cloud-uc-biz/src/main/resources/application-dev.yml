@@ -449,7 +449,7 @@ taotao:
       # - /Event-DC-Output/TagA-Output/** = emailHandler
       # - /Event-DC-Output/TagB-Output/** = smsHandler
     dinger:
-      enabled: true
+      enabled: false
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
@@ -570,7 +570,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: com.taotao.cloud.data.mybatis.plus.log.CustomStdOutImpl
 
 feign:
   sentinel:

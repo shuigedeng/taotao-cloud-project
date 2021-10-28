@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-uc-biz-configmap
 data:
   APPLICATION_NAME: taotao-cloud-uc-biz
-  APPLICATION_VERSION: 20201.9.3
+  APPLICATION_VERSION: 20201.10.1
 ---
 apiVersion: v1
 kind: Secret
