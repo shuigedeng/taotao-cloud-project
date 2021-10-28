@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ v1 ]
 
-defaults:
-  run:
-    working-directory: .
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,4 +22,8 @@ jobs:
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       run: |
         ls -la $PWD
-        ls -la $GITHUB_WORKSPACE
+        gradle clean bootJar
+        docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+        docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
+
