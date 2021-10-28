@@ -16,6 +16,8 @@
 package com.taotao.cloud.data.jpa.configuration;
 
 import static org.hibernate.cfg.AvailableSettings.DIALECT;
+import static org.hibernate.cfg.AvailableSettings.FORMAT_SQL;
+import static org.hibernate.cfg.AvailableSettings.HIGHLIGHT_SQL;
 import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
 import static org.hibernate.cfg.AvailableSettings.INTERCEPTOR;
 import static org.hibernate.cfg.AvailableSettings.JDBC_TIME_ZONE;
@@ -39,10 +41,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.sql.DataSource;
 import org.hibernate.MultiTenancyStrategy;
-import org.hibernate.SessionFactory;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.dialect.MySQL8Dialect;
-import org.hibernate.jpa.HibernateEntityManagerFactory;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
@@ -52,10 +52,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -127,6 +125,8 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 
 		newJpaProperties.put(MULTI_TENANT, MultiTenancyStrategy.DISCRIMINATOR);
+		newJpaProperties.put(FORMAT_SQL, true);
+		newJpaProperties.put(HIGHLIGHT_SQL, true);
 		newJpaProperties.put(
 			MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
 		newJpaProperties.put(
@@ -139,8 +139,10 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		newJpaProperties.put(DIALECT, MySQL8Dialect.class.getName());
 		newJpaProperties.put(JDBC_TIME_ZONE, "Asia/Shanghai");
 
-		newJpaProperties.put(STATEMENT_INSPECTOR, "com.taotao.cloud.data.jpa.listener.HibernateInspector");
-		newJpaProperties.put(INTERCEPTOR, "com.taotao.cloud.data.jpa.listener.HibernateInterceptor");
+		newJpaProperties.put(STATEMENT_INSPECTOR,
+			"com.taotao.cloud.data.jpa.listener.HibernateInspector");
+		newJpaProperties.put(INTERCEPTOR,
+			"com.taotao.cloud.data.jpa.listener.HibernateInterceptor");
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 			new LocalContainerEntityManagerFactoryBean();
@@ -162,17 +164,23 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Configuration
 	public static class HibernateListener {
+
 		@PersistenceUnit
 		private EntityManagerFactory entityManagerFactory;
 
 		@PostConstruct
-		public void registerListener(){
-			if(entityManagerFactory != null){
-				SessionFactoryImpl sessionFactory = entityManagerFactory.unwrap(SessionFactoryImpl.class);
-				EventListenerRegistry registry = sessionFactory.getServiceRegistry().getService(EventListenerRegistry.class);
-				registry.getEventListenerGroup(EventType.SAVE_UPDATE).appendListener(new HibernateInspector.SaveOrUpdateListener());
-				registry.getEventListenerGroup(EventType.DELETE).appendListener(new HibernateInspector.DeleteListener());
-				registry.getEventListenerGroup(EventType.LOAD).appendListener(new HibernateInspector.LoadListener());
+		public void registerListener() {
+			if (entityManagerFactory != null) {
+				SessionFactoryImpl sessionFactory = entityManagerFactory.unwrap(
+					SessionFactoryImpl.class);
+				EventListenerRegistry registry = sessionFactory.getServiceRegistry()
+					.getService(EventListenerRegistry.class);
+				registry.getEventListenerGroup(EventType.SAVE_UPDATE)
+					.appendListener(new HibernateInspector.SaveOrUpdateListener());
+				registry.getEventListenerGroup(EventType.DELETE)
+					.appendListener(new HibernateInspector.DeleteListener());
+				registry.getEventListenerGroup(EventType.LOAD)
+					.appendListener(new HibernateInspector.LoadListener());
 			}
 		}
 	}

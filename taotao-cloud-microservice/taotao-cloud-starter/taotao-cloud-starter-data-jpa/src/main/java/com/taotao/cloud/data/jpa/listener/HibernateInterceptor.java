@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.data.jpa.listener;
 
+import cn.hutool.db.sql.SqlFormatter;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -127,6 +128,8 @@ public class HibernateInterceptor extends EmptyInterceptor {
 	@Override
 	public String onPrepareStatement(String sql) {
 		LogUtil.info("HibernateInterceptor >>>>>>>>>>>>>>>>>>>>>>>>> onPrepareStatement");
+		LogUtil.info(SqlFormatter.format(sql));
+
 		return super.onPrepareStatement(sql);
 	}
 

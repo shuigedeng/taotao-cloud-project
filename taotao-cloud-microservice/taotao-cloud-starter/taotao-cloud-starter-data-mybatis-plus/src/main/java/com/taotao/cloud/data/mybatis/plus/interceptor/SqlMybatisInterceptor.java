@@ -74,7 +74,6 @@ public class SqlMybatisInterceptor implements Interceptor {
 					throw new RuntimeException(e);
 				}
 			});
-
 	}
 
 	@Override

@@ -37,12 +37,14 @@ public class OrderInfoRepository extends BaseSuperRepository<OrderInfo, Long> {
 		super(OrderInfo.class, em);
 	}
 
-	public List<OrderInfo> findOrderInfoById(Long id) {
-		List<OrderInfo> fetch = jpaQueryFactory()
+	public OrderInfo findOrderInfoById(Long id) {
+		OrderInfo fetch = jpaQueryFactory()
 			.selectFrom(ORDER_INFO)
 			.where(ORDER_INFO.id.eq(id))
-			.fetch();
-		LogUtil.info(fetch.toString());
+			.fetchOne();
+
+		OrderInfo t = getById(id);
+
 		return fetch;
 	}
 

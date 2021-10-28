@@ -15,10 +15,8 @@
  */
 package com.taotao.cloud.p6spy.logger;
 
+import cn.hutool.db.sql.SqlFormatter;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
-import com.taotao.cloud.common.constant.CommonConstant;
-import java.time.LocalDateTime;
-import com.p6spy.engine.spy.appender.SingleLineFormat;
 
 /**
  * P6spy SQL 日志格式化
@@ -32,8 +30,19 @@ public class P6spyLogFormat implements MessageFormattingStrategy {
 	@Override
 	public String formatMessage(final int connectionId, final String now, final long elapsed,
 		final String category, final String prepared, final String sql, final String url) {
-		return !"".equals(sql.trim()) ?
-			LocalDateTime.now().format(CommonConstant.DATETIME_FORMATTER) + " | took " + elapsed
-				+ "ms | " + category + " | connection " + connectionId + "\n " + sql + ";" : "";
+
+		return """
+			    Consume Time: %s  Now: %s connectionId: %s category: %s
+			    Execute SQL：%s
+			""".formatted(elapsed, now, connectionId, category,
+			SqlFormatter.format(sql.replaceAll("[\\s]+", " ")));
+
+		//return StringUtils.isNotBlank(sql) ? " Consume Time：" + elapsed
+		//	+ " ms " + now +
+		//	"\n Execute SQL：" + SqlFormatter.format(sql.replaceAll("[\\s]+", " ")) + "\n" : "";
+		//
+		//return !"".equals(sql.trim()) ?
+		//	LocalDateTime.now().format(CommonConstant.DATETIME_FORMATTER) + " | took " + elapsed
+		//		+ "ms | " + category + " | connection " + connectionId + "\n " + sql + ";" : "";
 	}
 }

@@ -180,6 +180,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
@@ -562,7 +563,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: com.taotao.cloud.data.mybatis.plus.log.CustomStdOutImpl
 
 feign:
   sentinel:

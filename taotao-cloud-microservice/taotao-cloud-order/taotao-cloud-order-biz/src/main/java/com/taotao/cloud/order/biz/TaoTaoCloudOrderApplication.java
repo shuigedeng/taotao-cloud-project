@@ -22,7 +22,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @MapperScan(basePackages = "com.taotao.cloud.order.biz.mapper")
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.order.biz.repository.inf")
 public class TaoTaoCloudOrderApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(TaoTaoCloudOrderApplication.class, args);
 	}

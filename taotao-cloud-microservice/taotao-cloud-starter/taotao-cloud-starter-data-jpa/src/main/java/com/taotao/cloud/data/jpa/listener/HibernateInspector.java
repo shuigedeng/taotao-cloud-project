@@ -15,7 +15,10 @@
  */
 package com.taotao.cloud.data.jpa.listener;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.sql.SqlFormatter;
 import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.model.Collector;
 import java.util.Objects;
@@ -40,12 +43,18 @@ public class HibernateInspector implements StatementInspector {
 	private String sql;
 
 	public static class SaveOrUpdateListener extends DefaultSaveOrUpdateEventListener {
+
 		@Override
 		public void onSaveOrUpdate(SaveOrUpdateEvent event) {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
+			String sql = SqlContextHolder.getSql();
+			if (StrUtil.isNotBlank(sql)) {
+				LogUtil.info(SqlFormatter.format(sql));
+			}
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql())
+						.replace("\r", "").replace("\n", "");
 					collector.hook("taotao.cloud.health.jpa.onSaveOrUpdate.sql.hook")
 						.run(replace, () -> {
 							try {
@@ -62,12 +71,18 @@ public class HibernateInspector implements StatementInspector {
 	}
 
 	public static class DeleteListener extends DefaultDeleteEventListener {
+
 		@Override
 		public void onDelete(DeleteEvent event) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
+			String sql = SqlContextHolder.getSql();
+			if (StrUtil.isNotBlank(sql)) {
+				LogUtil.info(SqlFormatter.format(sql));
+			}
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					String replace = StringUtil.nullToEmpty(sql)
+						.replace("\r", "").replace("\n", "");
 					collector.hook("taotao.cloud.health.jpa.delete.sql.hook")
 						.run(replace, () -> {
 							try {
@@ -84,13 +99,21 @@ public class HibernateInspector implements StatementInspector {
 	}
 
 	public static class LoadListener extends DefaultLoadEventListener {
+
 		@Override
 		public void onLoad(LoadEvent event,
 			LoadType loadType) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
+
+			String sql = SqlContextHolder.getSql();
+			if (StrUtil.isNotBlank(sql)) {
+				LogUtil.info(SqlFormatter.format(sql));
+			}
+
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql()).replace("\r", "").replace("\n", "");
+					String replace = StringUtil.nullToEmpty(sql).replace("\r", "")
+						.replace("\n", "");
 					collector.hook("taotao.cloud.health.jpa.load.sql.hook")
 						.run(replace, () -> {
 							try {
@@ -105,7 +128,6 @@ public class HibernateInspector implements StatementInspector {
 			}
 		}
 	}
-
 
 	@Override
 	public String inspect(String sql) {
