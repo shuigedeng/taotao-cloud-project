@@ -201,14 +201,12 @@ public class MonitorThreadPool {
 	 *
 	 * @param taskName taskName
 	 * @param task     task
-	 * @return {@link java.util.concurrent.Future }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:47:41
 	 */
-	public Future<?> monitorSubmit(String taskName, Runnable task) {
+	public void monitorSubmit(String taskName, Runnable task) {
 		monitorThreadPoolCheckHealth();
-		return monitorSystem.monitorHook()
-			.run(taskName, () -> monitorThreadPoolExecutor.submit(task));
+		monitorSystem.monitorHook().run(taskName, () -> monitorThreadPoolExecutor.submit(task));
 	}
 
 	/**

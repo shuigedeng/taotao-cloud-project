@@ -15,15 +15,20 @@
  */
 package com.taotao.cloud.p6spy.configuration;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.p6spy.engine.spy.P6ModuleManager;
 import com.p6spy.engine.spy.P6SpyDriver;
 import com.p6spy.engine.spy.P6SpyOptions;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.p6spy.properties.P6spyProperties;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -48,30 +53,23 @@ public class P6spyConfiguration implements ApplicationRunner , InitializingBean 
 		LogUtil.started(P6spyConfiguration.class, StarterNameConstant.P6SPY_STARTER);
 	}
 
-	private final Environment environment;
-
-	public P6spyConfiguration(Environment environment) {
-		this.environment = environment;
-	}
+	@Autowired
+	private P6spyProperties p6spyProperties;
 
 	@Override
 	public void run(ApplicationArguments args) {
-		P6spyConfiguration.p6spyReload(environment);
-	}
-
-	public static void p6spyReload(Environment p6spyProperties) {
 		Map<String, String> defaults = P6SpyOptions.getActiveInstance().getDefaults();
-		Field[] fields = P6spyProperties.class.getDeclaredFields();
-		for (Field field : fields) {
-			String fieldName = field.getName();
-			String propertiesName = P6spyProperties.PREFIX.concat(".").concat(fieldName);
-			if (p6spyProperties.containsProperty(propertiesName)) {
-				String systemPropertyValue = p6spyProperties
-					.getProperty(propertiesName, defaults.get(fieldName));
-				defaults.put(fieldName, systemPropertyValue);
+		Map<String, String> options = new HashMap<>();
+		defaults.forEach((k,v)->{
+			Object value = ReflectionUtil.tryGetValue(p6spyProperties, k);
+			if(Objects.nonNull(value)){
+				options.put(k, value.toString());
+			}else {
+				options.put(k,v);
 			}
-		}
-		P6SpyOptions.getActiveInstance().load(defaults);
+		});
+
+		P6SpyOptions.getActiveInstance().load(options);
 		P6ModuleManager.getInstance().reload();
 	}
 }

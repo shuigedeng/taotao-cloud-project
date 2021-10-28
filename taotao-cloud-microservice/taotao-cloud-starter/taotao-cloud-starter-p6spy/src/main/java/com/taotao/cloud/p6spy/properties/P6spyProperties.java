@@ -106,7 +106,7 @@ public class P6spyProperties {
 	 * com.p6spy.engine.spy.appender.FileLogger only) # (default is spy.log)
 	 */
 	private String logfile =
-		System.getenv("user.home") + File.separator + "logs" + File.separator + "p6spy"
+		System.getProperty("user.home") + File.separator + "logs" + File.separator + "p6spy"
 			+ File.separator + PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
 			+ File.separator + "spy.log";
 

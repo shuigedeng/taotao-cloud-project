@@ -59,7 +59,7 @@ public class HealthProperties {
 	/**
 	 * 健康检查时间间隔 单位:秒
 	 */
-	private int timeSpan = 10;
+	private int timeSpan = 100;
 
 	public boolean isEnabled() {
 		return enabled;

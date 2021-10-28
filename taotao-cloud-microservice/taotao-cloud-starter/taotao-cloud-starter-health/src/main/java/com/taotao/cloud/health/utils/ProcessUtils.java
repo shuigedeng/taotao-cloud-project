@@ -106,7 +106,7 @@ public class ProcessUtils {
 				StandardCharsets.UTF_8));
 
 			// 读取输出
-			String line = null;
+			String line;
 			while ((line = bufferIn.readLine()) != null) {
 				result.append(line).append('\n');
 			}

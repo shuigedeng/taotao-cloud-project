@@ -112,8 +112,7 @@ public abstract class AbstractCollectTask implements AutoCloseable {
 	 * @since 2021-09-10 10:42:24
 	 */
 	public static void notifyMessage(WarnTypeEnum type, String subject, String content) {
-		LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "[warn]" + subject + "\r\n" + content,
-			null);
+		LogUtil.warn("[warn]" + subject + "\r\n" + content);
 		WarnProvider warnProvider = ContextUtil.getBean(WarnProvider.class, false);
 		if (warnProvider != null) {
 			Message message = new Message();

@@ -62,7 +62,6 @@ public class NetworkCollectTask extends AbstractCollectTask {
 		return properties.isNetworkEnabled();
 	}
 
-
 	@Override
 	protected CollectInfo getData() {
 		try {
@@ -93,17 +92,20 @@ public class NetworkCollectTask extends AbstractCollectTask {
 	}
 
 
-	private static class NetworkInfo implements CollectInfo{
+	private static class NetworkInfo implements CollectInfo {
 
 		@FieldReport(name = TASK_NAME + ".process.tcp.listen.number", desc = "当前进程TCP LISTEN状态连接数")
 		private Long processTcpListenNum = 0L;
-		@FieldReport(name = TASK_NAME + ".process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
+		@FieldReport(name = TASK_NAME
+			+ ".process.tcp.established.number", desc = "当前进程TCP ESTABLISHED状态连接数")
 		private Long processTcpEstablishedNum = 0L;
-		@FieldReport(name = TASK_NAME + ".process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
+		@FieldReport(name = TASK_NAME
+			+ ".process.tcp.time_wait.number", desc = "当前进程TCP TIME_WAIT连接数")
 		private Long processTcpTimeWaitNum = 0L;
 		@FieldReport(name = TASK_NAME + ".sys.tcp.listen.number", desc = "系统TCP LISTEN状态连接数")
 		private Long processSysTcpListenNum = 0L;
-		@FieldReport(name = TASK_NAME + ".sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
+		@FieldReport(name = TASK_NAME
+			+ ".sys.tcp.established.number", desc = "系统TCP ESTABLISHED状态连接数")
 		private Long processSysTcpEstablishedNum = 0L;
 		@FieldReport(name = TASK_NAME + ".sys.tcp.time_wait.number", desc = "系统TCP TIME_WAIT连接数")
 		private Long processSysTcpTimeWaitNum = 0L;

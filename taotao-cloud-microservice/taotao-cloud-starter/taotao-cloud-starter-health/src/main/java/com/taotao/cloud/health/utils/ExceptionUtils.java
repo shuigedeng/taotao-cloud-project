@@ -117,34 +117,37 @@ public class ExceptionUtils {
 	/**
 	 * 上报异常
 	 *
-	 * @param warnLevelEnumType levelEnumType
+	 * @param warnLevelEnum warnLevelEnum
 	 * @param title         title
 	 * @param content       content
 	 * @author shuigedeng
 	 * @since 2021-09-10 16:36:09
 	 */
-	public static void reportException(WarnLevelEnum warnLevelEnumType, String title, String content) {
+	public static void reportException(WarnLevelEnum warnLevelEnum, String title,
+		String content) {
 		reportException(new Message(
-			WarnTypeEnum.ERROR,
-			title,
-			content,
-			warnLevelEnumType,
-			ExceptionTypeEnum.BE,
-			null,
-			null), null);
+				WarnTypeEnum.ERROR,
+				title,
+				content,
+				warnLevelEnum,
+				ExceptionTypeEnum.BE,
+				null,
+				null),
+			null);
 	}
 
 	/**
 	 * 上报异常
 	 *
-	 * @param warnLevelEnumType   levelEnumType
-	 * @param title           title
-	 * @param content         content
-	 * @param applicationName applicationName
+	 * @param warnLevelEnumType levelEnumType
+	 * @param title             title
+	 * @param content           content
+	 * @param applicationName   applicationName
 	 * @author shuigedeng
 	 * @since 2021-09-10 16:36:15
 	 */
-	public static void reportException(WarnLevelEnum warnLevelEnumType, String title, String content,
+	public static void reportException(WarnLevelEnum warnLevelEnumType, String title,
+		String content,
 		String applicationName) {
 		reportException(new Message(WarnTypeEnum.ERROR,
 			title,

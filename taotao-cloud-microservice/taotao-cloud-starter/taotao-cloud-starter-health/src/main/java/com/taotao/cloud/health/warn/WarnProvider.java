@@ -181,9 +181,10 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 		//加锁
 		synchronized (lock) {
 			messages.add(msg);
+
 			//清理多余
-			if (messages.size() > this.warnProperties.getCacheCount()) {
-				int cacheCount = this.warnProperties.getCacheCount();
+			if (messages.size() > warnProperties.getCacheCount()) {
+				int cacheCount = warnProperties.getCacheCount();
 				for (int i = 0; i < messages.size() - cacheCount; i++) {
 					if (!messages.isEmpty()) {
 						messages.removeFirst();
