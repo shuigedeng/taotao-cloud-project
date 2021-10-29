@@ -6,6 +6,14 @@ on:
   pull_request:
     branches: [ v1 ]
 
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,17 +24,30 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        #settings-path: ${{ github.workspace }} # location for the settings.xml file
+        server-id: github
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle And Build the Docker image
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
-      env:
-        ossrhUsername: ${{secrets.ossrhUsername}}
-        ossrhPassword: ${{secrets.ossrhPassword}}
       run: |
-        ls -la $PWD
-        gradle clean bootJar
-        docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
-
+        echo $TAOTAO_CLOUD_OSSRH_USERNAME
+      # gradle clean bootJar
+      # docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+      # docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
+      # docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
+      # 发布 base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
+      #- name: Decode signing secret key ring file
+      #  working-directory: ./taotao-cloud-microservice/taotao-cloud-starter
+      #  run: |
+      #    echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.b64
+      #    base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
+      #- name: Publish
+      #  working-directory: ./taotao-cloud-microservice/taotao-cloud-starter
+      #  run: gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
+      #  env:
+      #    OSSRH_USERNAME: ${{secrets.OSSRH_USERNAME}}
+      #    OSSRH_PASSWORD: ${{secrets.OSSRH_PASSWORD}}

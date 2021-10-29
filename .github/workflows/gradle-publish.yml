@@ -28,7 +28,7 @@ jobs:
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Publish to GitHub Packages
-      run: gradle publish
+      run: gradle publish -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password= -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}

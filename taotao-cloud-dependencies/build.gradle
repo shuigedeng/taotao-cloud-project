@@ -135,8 +135,8 @@ publishing {
 
             allowInsecureProtocol = true
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
         }
 
@@ -144,8 +144,8 @@ publishing {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
+                username = findProperty("githubUsername") ?: System.getenv("TAOTAO_CLOUD_GITHUB_USERNAME")
+                password = findProperty("githubPassword") ?: System.getenv("TAOTAO_CLOUD_GITHUB_TOKEN")
             }
         }
 
@@ -158,8 +158,8 @@ publishing {
             }
             allowInsecureProtocol = true
             credentials {
-                username = "${ossrhUsername}"
-                password = "${ossrhPassword}"
+                username = findProperty("ossrhUsername") ?: System.getenv("TAOTAO_CLOUD_OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("TAOTAO_CLOUD_OSSRH_PASSWORD")
             }
         }
     }
