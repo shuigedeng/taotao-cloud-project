@@ -44,6 +44,7 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJSON(github) }}
         MESSAGE_IS_TRUE: ${{ contains(github.event.message, 'taotao-cloud-admin') }}
+        MESSAGES: ${{ github.event.message }}
 
     - name: Build Docker Image taotao-cloud-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
