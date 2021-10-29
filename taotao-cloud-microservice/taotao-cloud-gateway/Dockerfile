@@ -6,7 +6,7 @@ ADD ./build/libs/taotao-cloud-gateway-2021.10.1.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-gateway-2021.10.1.jar extract
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -73,9 +73,13 @@ VOLUME /root/logs
 EXPOSE ${APP_PORT}
 
 COPY --from=builder /root/dependencies/ ./
+RUN true
 COPY --from=builder /root/spring-boot-loader/ ./
+RUN true
 COPY --from=builder /root/snapshot-dependencies/ ./
+RUN true
 COPY --from=builder /root/application/ ./
+RUN true
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
