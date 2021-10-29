@@ -39,9 +39,8 @@ jobs:
         echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/secring.gpg.b64
         base64 -d ~/secring.gpg.b64 > ~/secring.gpg
     - name: Build Publish with Gradle
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-starter/taotao-cloud-starter-cloud
       run: |
-        current_dir=`dirname $(pwd)`
+        current_dir=`$(pwd)`
         starter_dir=$current_dir/taotao-cloud-microservice/taotao-cloud-starter
         for starter in `ls $starter_dir`
         do
@@ -50,5 +49,5 @@ jobs:
             ls $PWD
           fi
         done
-      #gradle clean build -Dorg.gradle.java.home=$JAVA_HOME
+      #gradle clean build --warning-mode all -Dorg.gradle.java.home=$JAVA_HOME
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
