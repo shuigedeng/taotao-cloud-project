@@ -86,9 +86,13 @@ VOLUME /root/logs
 EXPOSE ${APP_PORT}
 
 COPY --from=builder /root/dependencies/ ./
+RUN true
 COPY --from=builder /root/spring-boot-loader/ ./
+RUN true
 COPY --from=builder /root/snapshot-dependencies/ ./
+RUN true
 COPY --from=builder /root/application/ ./
+RUN true
 
 HEALTHCHECK --interval=120s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
