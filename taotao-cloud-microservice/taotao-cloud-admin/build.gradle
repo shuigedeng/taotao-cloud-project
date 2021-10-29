@@ -125,7 +125,6 @@ jib {
 			password System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
 		}
 	}
-
 	to {
 		image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin'
 		tags = ["${project.name}-${project.version}"]
