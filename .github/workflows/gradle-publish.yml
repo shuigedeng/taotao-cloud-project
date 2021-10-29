@@ -44,15 +44,17 @@ jobs:
     #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
     - name: Decode signing secret key ring file
       run: |
-        echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/secring.gpg.b64
-        base64 -d ~/secring.gpg.b64 > ~/secring.gpg
+        echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
+        echo "signing.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}}" >> gradle.properties
+        echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
+        echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
     - name: Build Publish dependencies with Gradle
       run: |
-        ls -l $HOME/secring.gpg
+        cat gradle.properties
         cd $PWD/taotao-cloud-dependencies
-        gradle publishMavenJavaPublicationToGitHubRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
-        gradle publishMavenJavaPublicationToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$HOME/secring.gpg
+        gradle publishMavenJavaPublicationToGitHubRepository
+        gradle publishMavenJavaPublicationToSonatypeRepository
 
     - name: Build Publish starter with Gradle
       run: |
