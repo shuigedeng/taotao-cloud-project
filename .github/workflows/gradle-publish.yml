@@ -40,8 +40,7 @@ jobs:
         base64 -d ~/secring.gpg.b64 > ~/secring.gpg
     - name: Build Publish with Gradle
       run: |
-        current_dir=`$(pwd)`
-        starter_dir=$current_dir/taotao-cloud-microservice/taotao-cloud-starter
+        starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
         for starter in `ls $starter_dir`
         do
           if [ -d $starter_dir"/"$starter ];then
