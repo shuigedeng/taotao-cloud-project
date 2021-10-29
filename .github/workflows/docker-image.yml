@@ -43,12 +43,12 @@ jobs:
       run: echo "$GITHUB_CONTEXT"
       env:
         GITHUB_CONTEXT: ${{ toJSON(github) }}
-        MESSAGE_IS_TRUE: ${{ contains(github.event.message, 'taotao-cloud-admin') }}
-        MESSAGES: ${{ github.event.message }}
+        MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
+        MESSAGES: ${{ github.event.head_commit.message }}
 
     - name: Build Docker Image taotao-cloud-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
-      if: ${{ contains(github.event.message, 'taotao-cloud-admin') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
@@ -57,7 +57,7 @@ jobs:
 
     - name: Build Docker Image taotao-cloud-gateway
       working-directory: ./taotao-cloud-microservice/taotao-cloud-gateway
-      if: ${{ contains(github.event.message, 'taotao-cloud-gateway') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
@@ -66,7 +66,7 @@ jobs:
 
     - name: Build Docker Image taotao-cloud-oauth2-server
       working-directory: ./taotao-cloud-microservice/taotao-cloud-oauth2/taotao-cloud-oauth2-server
-      if: ${{ contains(github.event.message, 'taotao-cloud-oauth2-server') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-oauth2-server') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
@@ -75,7 +75,7 @@ jobs:
 
     - name: Build Docker Image taotao-cloud-xxl-job-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-xxl-job-admin
-      if: ${{ contains(github.event.message, 'taotao-cloud-xxl-job-admin') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxl-job-admin') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
@@ -84,7 +84,7 @@ jobs:
 
     - name: Build Docker Image taotao-cloud-order-biz
       working-directory: ./taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
-      if: ${{ contains(github.event.message, 'taotao-cloud-order-biz') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order-biz') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
@@ -93,7 +93,7 @@ jobs:
 
     - name: Build Docker Image taotao-cloud-uc-biz
       working-directory: ./taotao-cloud-microservice/taotao-cloud-uc/taotao-cloud-uc-biz
-      if: ${{ contains(github.event.message, 'taotao-cloud-uc-biz') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-uc-biz') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
