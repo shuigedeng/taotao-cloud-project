@@ -49,10 +49,9 @@ jobs:
 
     - name: Build Publish dependencies with Gradle
       run: |
-        ls -l $HOME/.gradle
         ls -l $HOME/secring.gpg
         cd $PWD/taotao-cloud-dependencies
-        gradle publishMavenJavaPublicationToGitHubRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$HOME/secring.gpg
+        gradle publishMavenJavaPublicationToGitHubRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
         gradle publishMavenJavaPublicationToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$HOME/secring.gpg
 
     - name: Build Publish starter with Gradle
