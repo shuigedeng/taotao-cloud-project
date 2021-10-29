@@ -59,6 +59,7 @@ jobs:
     - name: Build Publish starter with Gradle
       run: |
         ls $PWD
+
       #starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
       #for starter in `ls $starter_dir`
       #do
