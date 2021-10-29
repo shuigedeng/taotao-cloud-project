@@ -39,6 +39,12 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
 
+    - name: Show Github
+      run: echo "$GITHUB_CONTEXT"
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+        MESSAGE_IS_TRUE: ${{ contains(github.event.message, 'taotao-cloud-admin') }}
+
     - name: Build Docker Image taotao-cloud-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       if: ${{ contains(github.event.message, 'taotao-cloud-admin') }}
