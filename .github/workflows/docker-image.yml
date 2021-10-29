@@ -21,19 +21,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
         java-version: '17'
         distribution: 'adopt'
         server-id: github
+
     - name: Cache Gradle packages
       uses: actions/cache@v2
       with:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
-    - name: Build with Gradle And Build the Docker image
+
+    - name: Build Docker Image taotao-cloud-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       run: |
         gradle clean bootJar
