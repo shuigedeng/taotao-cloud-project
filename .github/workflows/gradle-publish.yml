@@ -49,23 +49,19 @@ jobs:
         echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
         echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-    - name: Build Publish dependencies with Gradle
+    - name: Build Publish Dependencies With Gradle
       run: |
-        cat gradle.properties
         cd $PWD/taotao-cloud-dependencies
         gradle publishMavenJavaPublicationToSonatypeRepository
 
-    - name: Build Publish starter with Gradle
+    - name: Build Publish Starter With Gradle
       run: |
-        ls $PWD
-
-      #starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
-      #for starter in `ls $starter_dir`
-      #do
-      #  if [ -d $starter_dir"/"$starter ];then
-      #    ls $PWD
-      #    cd $starter_dir"/"$starter
-      #    gradle --continue clean build publishMavenJavaPublicationToGitHubRepository
-      #    gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
-      #  fi
-      #done
+        starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
+        for starter in `ls $starter_dir`
+        do
+          if [ -d $starter_dir"/"$starter ];then
+            cd $starter_dir"/"$starter
+            gradle --continue clean build publishAllPublicationsToSonatypeRepository
+          fi
+        done
+      #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
