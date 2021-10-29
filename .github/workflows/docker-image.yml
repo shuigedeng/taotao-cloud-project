@@ -3,10 +3,7 @@ name: Docker Image CI
 on:
   push:
     paths:
-      - "scripts/**"
-    branches: [ v1 ]
-  pull_request:
-    branches: [ v1 ]
+      - 'taotao-cloud-bigdata/**'
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
