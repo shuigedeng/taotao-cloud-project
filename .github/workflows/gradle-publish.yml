@@ -61,7 +61,7 @@ jobs:
         do
           if [ -d $starter_dir"/"$starter ];then
             cd $starter_dir"/"$starter
-            gradle --continue clean build publishAllPublicationsToSonatypeRepository
+            gradle --continue clean build publishMavenJavaPublicationToSonatypeRepository
           fi
         done
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
