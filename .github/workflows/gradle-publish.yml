@@ -41,5 +41,14 @@ jobs:
     - name: Build Publish with Gradle
       working-directory: ./taotao-cloud-microservice/taotao-cloud-starter/taotao-cloud-starter-cloud
       run: |
-        gradle build
-        gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
+        current_dir=`dirname $(pwd)`
+        starter_dir=$current_dir/taotao-cloud-microservice/taotao-cloud-starter
+        for starter in `ls $starter_dir`
+        do
+          if [ -d $starter_dir"/"$starter ];then
+            cd $starter_dir"/"$starter
+            ls $PWD
+          fi
+        done
+      #gradle clean build -Dorg.gradle.java.home=$JAVA_HOME
+      #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
