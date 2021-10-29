@@ -23,8 +23,8 @@ function deploy_starters() {
 
 ./build_starters.sh
 
-deploy_dependencies publishAllPublicationsToSonatypeRepository 
-deploy_starters publishAllPublicationsToSonatypeRepository
+deploy_dependencies publishMavenJavaPublicationToSonatypeRepository
+deploy_starters publishMavenJavaPublicationToSonatypeRepository
 
 deploy_dependencies publishMavenJavaPublicationToGitHubRepository
 deploy_starters publishMavenJavaPublicationToGitHubRepository
