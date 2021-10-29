@@ -4,8 +4,20 @@
 name: Gradle Package
 
 on:
+  push:
+    branches: [ master ]
   release:
     types: [created]
+
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
 
 jobs:
   build:
@@ -15,19 +27,19 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'adopt'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Build with Gradle
-      run: gradle build
-    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
-    # the publishing section of your build.gradle
-    - name: Publish to GitHub Packages
-      run: gradle publish -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password= -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        server-id: github
+    # 发布 base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
+    - name: Decode signing secret key ring file
+      run: |
+        echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.b64
+        base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
+    - name: Build Publish with Gradle
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-starter/taotao-cloud-starter-cloud
+      run: |
+        gradle build
+        gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
