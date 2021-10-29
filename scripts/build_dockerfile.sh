@@ -4,6 +4,7 @@ current_dir=`dirname $(pwd)`
 
 JAVA_HOME="/opt/common/jdk-17"
 
+
 VERSION="2021.10.1"
 
 function build_dockerfile() {
