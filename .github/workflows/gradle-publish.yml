@@ -45,8 +45,7 @@ jobs:
         do
           if [ -d $starter_dir"/"$starter ];then
             cd $starter_dir"/"$starter
-            ls $PWD
+            gradle clean build --warning-mode all
           fi
         done
-      #gradle clean build --warning-mode all -Dorg.gradle.java.home=$JAVA_HOME
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
