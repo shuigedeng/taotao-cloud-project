@@ -38,7 +38,7 @@ jobs:
       run: |
         gradle clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1 .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:2021.10.1
       # 发布 base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
       #- name: Decode signing secret key ring file
