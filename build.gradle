@@ -174,7 +174,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'java-library'
     apply plugin: 'idea'
     apply plugin: 'signing'
-    apply plugin: 'checkstyle'
+    //apply plugin: 'checkstyle'
     apply plugin: 'maven-publish'
 	apply plugin: 'application'
     apply plugin: 'org.springframework.boot'
@@ -190,24 +190,24 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
     }
 
-    checkstyle {
-        project.ext.checkstyleVersion = '8.14'
-        // The version of the code quality tool to be used.
-        // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
-        toolVersion = "8.14"
-        configFile = file("${rootDir}/checkstyle/google_checks.xml")
-        //configFile = rootProject.file('quality/google_checks.xml')
-
-        // The source sets to be analyzed as part of the check and build tasks.
-        // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
-        // sourceSets = [project.sourceSets.main, project.sourceSets.test]
-
-        // Whether or not to allow the build to continue if there are warnings.
-        ignoreFailures = false
-
-        // Whether or not rule violations are to be displayed on the console.
-        showViolations = true
-    }
+    //checkstyle {
+    //    project.ext.checkstyleVersion = '8.14'
+    //    // The version of the code quality tool to be used.
+    //    // The most recent version of Checkstyle can be found at https://github.com/checkstyle/checkstyle/releases
+    //    toolVersion = "8.14"
+    //    configFile = file("${rootDir}/checkstyle/google_checks.xml")
+    //    //configFile = rootProject.file('quality/google_checks.xml')
+    //
+    //    // The source sets to be analyzed as part of the check and build tasks.
+    //    // Use 'sourceSets = []' to remove Checkstyle from the check and build tasks.
+    //    // sourceSets = [project.sourceSets.main, project.sourceSets.test]
+    //
+    //    // Whether or not to allow the build to continue if there are warnings.
+    //    ignoreFailures = false
+    //
+    //    // Whether or not rule violations are to be displayed on the console.
+    //    showViolations = true
+    //}
 
     configurations.all {
         resolutionStrategy {
