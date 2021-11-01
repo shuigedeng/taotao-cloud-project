@@ -6,7 +6,7 @@
   "templateInfo": {
     "name": "react-native",
     "typescript": true,
-    "css": "less"
+    "css": "sass"
   },
   "scripts": {
     "build:weapp": "taro build --type weapp",
@@ -46,7 +46,6 @@
     "@tarojs/runtime": "3.3.9",
     "@tarojs/taro": "3.3.9",
     "@tarojs/taro-rn": "3.3.9",
-    "expo-image-picker": "^11.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "^0.66.0"
@@ -59,8 +58,6 @@
     "@tarojs/webpack-runner": "3.3.9",
     "@types/react": "^17.0.2",
     "@types/webpack-env": "^1.13.6",
-    "@typescript-eslint/eslint-plugin": "^4.15.1",
-    "@typescript-eslint/parser": "^4.15.1",
     "babel-preset-taro": "3.3.9",
     "eslint": "^6.8.0",
     "eslint-config-taro": "3.3.9",
@@ -70,6 +67,8 @@
     "install-peerdeps": "^3.0.3",
     "pod-install": "^0.1.23",
     "stylelint": "9.3.0",
+    "@typescript-eslint/parser": "^4.15.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
     "typescript": "^4.1.0"
   }
 }
