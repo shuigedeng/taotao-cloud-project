@@ -92,7 +92,7 @@ jobs:
       - name: Assemble Android
         run: |
           cd ./android && \
-          ./gradlew build assemble${{ env.BUILD_TYPE }} \
+          ./gradlew assemble${{ env.BUILD_TYPE }} \
             -Papp_id=${{ env.APP_ID }} \
             -Papp_name='${{ env.APP_NAME }}' \
             -Papp_icon=${{env.APP_ICON}} \
