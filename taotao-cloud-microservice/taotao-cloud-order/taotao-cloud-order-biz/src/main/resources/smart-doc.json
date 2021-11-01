@@ -1,6 +1,6 @@
 {
   "serverUrl": "http://dev.taotaocloud.com", //服务器地址,非必须。导出postman建议设置成http://{{server}}方便直接在postman直接设置环境变量
-  "pathPrefix": "/api/v2021.10.1", //设置path前缀,非必须。如配置Servlet ContextPath 。@since 2.2.3
+  "pathPrefix": "/api/v2021.11", //设置path前缀,非必须。如配置Servlet ContextPath 。@since 2.2.3
   "isStrict": false, //是否开启严格模式
   "allInOne": true,  //是否将文档合并到一个文件中，一般推荐为true
   "outPath": "src/main/resources/static", //指定文档的输出路径
@@ -48,7 +48,7 @@
     "descField": "desc"//错误码的描述信息对应的字段名
   }],
   "revisionLogs": [{ //文档变更记录，非必须
-      "version": "2021.10.1", //文档版本号
+      "version": "2021.11", //文档版本号
       "revisionTime": "2021-10-08 10:30", //文档修订时间
       "status": "update", //变更操作状态，一般为：创建、更新等
       "author": "dengtao", //文档变更作者
