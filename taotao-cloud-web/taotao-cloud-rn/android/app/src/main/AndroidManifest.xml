@@ -14,7 +14,6 @@
       android:icon="${appIcon}"
       android:roundIcon="${appRoundIcon}"
       android:allowBackup="false"
-      android:value="25.3.1"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="${usesCleartextTraffic}"
       android:requestLegacyExternalStorage="true">
