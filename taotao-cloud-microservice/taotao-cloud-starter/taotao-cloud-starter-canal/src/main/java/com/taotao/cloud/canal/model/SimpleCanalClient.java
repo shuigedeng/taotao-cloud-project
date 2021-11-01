@@ -126,7 +126,7 @@ public class SimpleCanalClient extends AbstractCanalClient {
 			listeners.addAll(list);
 		}
 
-		//若是你喜欢通过注解的方式去监听的话。。
+		//通过注解的方式去监听的话。。
 		Map<String, Object> listenerMap = ContextUtil.getBeansWithAnnotation(
 			com.taotao.cloud.canal.annotation.CanalEventListener.class);
 

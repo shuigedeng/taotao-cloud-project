@@ -85,7 +85,7 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	 * <p>
 	 * 参数数据源解析 @DS("#last)
 	 */
-	public class LastParamDsProcessor extends DsProcessor {
+	public static class LastParamDsProcessor extends DsProcessor {
 
 		private static final String LAST_PREFIX = "#last";
 
@@ -123,7 +123,7 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	 * <p>
 	 * 从数据源中获取 配置信息
 	 */
-	public class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvider {
+	public static class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvider {
 
 		private final DataSourceProperties properties;
 

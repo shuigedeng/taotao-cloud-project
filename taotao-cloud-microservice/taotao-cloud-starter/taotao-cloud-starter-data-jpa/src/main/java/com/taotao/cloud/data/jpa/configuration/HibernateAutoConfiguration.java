@@ -29,6 +29,7 @@ import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
@@ -40,24 +41,19 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.sql.DataSource;
-import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
-import org.hibernate.dialect.MySQL8Dialect;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
-import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 /**
@@ -69,6 +65,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @Configuration
 @EnableJpaAuditing
+@ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -77,9 +74,9 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	private final JpaProperties jpaProperties;
-	private HibernateProperties hibernateProperties;
+	private final HibernateProperties hibernateProperties;
 
-	public HibernateAutoConfiguration(@Autowired final JpaProperties jpaProperties,
+	public HibernateAutoConfiguration(JpaProperties jpaProperties,
 		HibernateProperties hibernateProperties) {
 		this.hibernateProperties = hibernateProperties;
 		this.jpaProperties = jpaProperties;
@@ -107,9 +104,9 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	JpaVendorAdapter jpaVendorAdapter() {
 		LogUtil.started(JpaVendorAdapter.class, StarterNameConstant.JPA_STARTER);
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-		hibernateJpaVendorAdapter.setShowSql(true);
-		hibernateJpaVendorAdapter.setGenerateDdl(true);
-		hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+		hibernateJpaVendorAdapter.setShowSql(hibernateProperties.isShowSql());
+		hibernateJpaVendorAdapter.setGenerateDdl(hibernateProperties.isGenerateDdl());
+		hibernateJpaVendorAdapter.setDatabase(hibernateProperties.getDatabase());
 		return hibernateJpaVendorAdapter;
 	}
 
@@ -124,25 +121,21 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 
-		newJpaProperties.put(MULTI_TENANT, MultiTenancyStrategy.DISCRIMINATOR);
-		newJpaProperties.put(FORMAT_SQL, true);
-		newJpaProperties.put(HIGHLIGHT_SQL, true);
-		newJpaProperties.put(
-			MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
-		newJpaProperties.put(
-			MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
+		newJpaProperties.put(MULTI_TENANT, hibernateProperties.getMultiTenancy());
+		newJpaProperties.put(FORMAT_SQL, hibernateProperties.isFormatSql());
+		newJpaProperties.put(HIGHLIGHT_SQL, hibernateProperties.isHighlightSql());
+		newJpaProperties.put(MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
+		newJpaProperties.put(MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
 
+		newJpaProperties.put(IMPLICIT_NAMING_STRATEGY,
+			hibernateProperties.getImplicitNamingStrategy());
 		newJpaProperties.put(
-			IMPLICIT_NAMING_STRATEGY, SpringImplicitNamingStrategy.class.getName());
-		newJpaProperties.put(
-			PHYSICAL_NAMING_STRATEGY, SpringPhysicalNamingStrategy.class.getName());
-		newJpaProperties.put(DIALECT, MySQL8Dialect.class.getName());
-		newJpaProperties.put(JDBC_TIME_ZONE, "Asia/Shanghai");
+			PHYSICAL_NAMING_STRATEGY, hibernateProperties.getPhysicalNamingStrategy());
+		newJpaProperties.put(DIALECT, hibernateProperties.getDialect());
+		newJpaProperties.put(JDBC_TIME_ZONE, hibernateProperties.getTimeZone());
 
-		newJpaProperties.put(STATEMENT_INSPECTOR,
-			"com.taotao.cloud.data.jpa.listener.HibernateInspector");
-		newJpaProperties.put(INTERCEPTOR,
-			"com.taotao.cloud.data.jpa.listener.HibernateInterceptor");
+		newJpaProperties.put(STATEMENT_INSPECTOR, hibernateProperties.getStatementInspector());
+		newJpaProperties.put(INTERCEPTOR, hibernateProperties.getInterceptor());
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 			new LocalContainerEntityManagerFactoryBean();
@@ -152,15 +145,11 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
 
 		entityManagerFactoryBean.setPackagesToScan(hibernateProperties.getPackages());
-		entityManagerFactoryBean.setPersistenceUnitName("default");
+		entityManagerFactoryBean.setPersistenceUnitName(
+			hibernateProperties.getPersistenceUnitName());
 
 		return entityManagerFactoryBean;
 	}
-
-	//@Bean
-	//public HibernateListener hibernateListener(){
-	//	return new HibernateListener();
-	//}
 
 	@Configuration
 	public static class HibernateListener {

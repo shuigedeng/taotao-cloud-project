@@ -1,6 +1,7 @@
 package com.taotao.cloud.prometheus.config;
 
 import com.taotao.cloud.prometheus.annotation.ConditionalOnExceptionNotice;
+import com.taotao.cloud.prometheus.exceptionhandle.ExceptionHandler;
 import com.taotao.cloud.prometheus.properties.ExceptionNoticeProperties;
 import com.taotao.cloud.prometheus.web.ClearBodyInterceptor;
 import com.taotao.cloud.prometheus.web.CurrentRequestHeaderResolver;

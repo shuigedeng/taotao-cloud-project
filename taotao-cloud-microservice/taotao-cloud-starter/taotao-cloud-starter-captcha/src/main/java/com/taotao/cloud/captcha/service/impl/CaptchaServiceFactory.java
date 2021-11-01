@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.captcha.service.impl;
 
-import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.CaptchaConst;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import java.util.HashMap;
@@ -72,7 +72,7 @@ public class CaptchaServiceFactory {
             logger.warn("init captchaService fail:{}", e);
         }*/
 
-		String captchaType = config.getProperty(Const.CAPTCHA_TYPE, "default");
+		String captchaType = config.getProperty(CaptchaConst.CAPTCHA_TYPE, "default");
 		CaptchaService ret = instances.get(captchaType);
 		if (ret == null) {
 			throw new RuntimeException("unsupported-[captcha.type]=" + captchaType);

@@ -1,6 +1,7 @@
 package com.taotao.cloud.prometheus.config;
 
 import com.taotao.cloud.prometheus.annotation.ConditionalOnServiceMonitor;
+import com.taotao.cloud.prometheus.message.INoticeSendComponent;
 import com.taotao.cloud.prometheus.microservice.HealthCheckHandler;
 import com.taotao.cloud.prometheus.microservice.ServiceCheckControl;
 import com.taotao.cloud.prometheus.microservice.ServiceExistControl;

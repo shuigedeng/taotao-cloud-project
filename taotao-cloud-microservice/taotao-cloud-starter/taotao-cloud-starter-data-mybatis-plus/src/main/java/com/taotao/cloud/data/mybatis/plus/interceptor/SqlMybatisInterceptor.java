@@ -47,7 +47,7 @@ import org.apache.ibatis.session.RowBounds;
 		Object.class})})
 public class SqlMybatisInterceptor implements Interceptor {
 
-	private Collector collector;
+	private final Collector collector;
 
 	public SqlMybatisInterceptor(Collector collector) {
 		this.collector = collector;

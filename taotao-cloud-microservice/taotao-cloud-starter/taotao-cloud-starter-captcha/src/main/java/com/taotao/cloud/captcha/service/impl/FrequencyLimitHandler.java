@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.model.CaptchaException;
-import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.CaptchaConst;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import java.util.Objects;
 import java.util.Properties;
@@ -110,7 +110,7 @@ public interface FrequencyLimitHandler {
 
 			// 1分钟内请求次数过多
 			if (Long.parseLong(getCnts) > Long.parseLong(
-				config.getProperty(Const.REQ_GET_MINUTE_LIMIT, "120"))) {
+				config.getProperty(CaptchaConst.REQ_GET_MINUTE_LIMIT, "120"))) {
 				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_GET_ERROR);
 			}
 
@@ -124,10 +124,10 @@ public interface FrequencyLimitHandler {
 
 			// 1分钟内失败5次
 			if (Long.parseLong(failCnts) > Long.parseLong(
-				config.getProperty(Const.REQ_GET_LOCK_LIMIT, "5"))) {
+				config.getProperty(CaptchaConst.REQ_GET_LOCK_LIMIT, "5"))) {
 				// get接口锁定5分钟
 				cacheService.set(lockKey, "1",
-					Long.parseLong(config.getProperty(Const.REQ_GET_LOCK_SECONDS, "300")));
+					Long.parseLong(config.getProperty(CaptchaConst.REQ_GET_LOCK_SECONDS, "300")));
 				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LOCK_GET_ERROR);
 			}
 		}
@@ -151,7 +151,7 @@ public interface FrequencyLimitHandler {
 			}
 			cacheService.increment(key, 1);
 			if (Long.parseLong(v) > Long.parseLong(
-				config.getProperty(Const.REQ_CHECK_MINUTE_LIMIT, "600"))) {
+				config.getProperty(CaptchaConst.REQ_CHECK_MINUTE_LIMIT, "600"))) {
 				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_CHECK_ERROR);
 			}
 		}
@@ -171,7 +171,7 @@ public interface FrequencyLimitHandler {
 
 			cacheService.increment(key, 1);
 			if (Long.parseLong(v) > Long.parseLong(
-				config.getProperty(Const.REQ_VALIDATE_MINUTE_LIMIT, "600"))) {
+				config.getProperty(CaptchaConst.REQ_VALIDATE_MINUTE_LIMIT, "600"))) {
 				throw new CaptchaException(CaptchaCodeEnum.API_REQ_LIMIT_VERIFY_ERROR);
 			}
 		}

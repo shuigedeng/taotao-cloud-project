@@ -22,7 +22,7 @@ import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaTypeEnum;
-import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.CaptchaConst;
 import com.taotao.cloud.captcha.model.Point;
 import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.common.utils.JsonUtil;
@@ -72,7 +72,7 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 	public void init(Properties config) {
 		super.init(config);
 
-		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE,
+		clickWordFontStr = config.getProperty(CaptchaConst.CAPTCHA_FONT_TYPE,
 			"SourceHanSansCN-Normal.otf");
 
 		try {

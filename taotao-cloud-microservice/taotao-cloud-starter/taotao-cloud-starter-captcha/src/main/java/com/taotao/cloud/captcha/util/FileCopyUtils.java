@@ -89,19 +89,8 @@ public class FileCopyUtils {
 	 */
 	public static int copy(InputStream in, OutputStream out) throws IOException {
 		int var2;
-		try {
+		try (in; out) {
 			var2 = StreamUtils.copy(in, out);
-		} finally {
-			try {
-				in.close();
-			} catch (IOException var12) {
-			}
-
-			try {
-				out.close();
-			} catch (IOException var11) {
-			}
-
 		}
 
 		return var2;
@@ -116,13 +105,8 @@ public class FileCopyUtils {
 	 * @since 2021-09-03 21:04:16
 	 */
 	public static void copy(byte[] in, OutputStream out) throws IOException {
-		try {
+		try (out) {
 			out.write(in);
-		} finally {
-			try {
-				out.close();
-			} catch (IOException var8) {
-			}
 		}
 	}
 
@@ -154,7 +138,7 @@ public class FileCopyUtils {
 	 * @since 2021-09-03 21:04:08
 	 */
 	public static int copy(Reader in, Writer out) throws IOException {
-		try {
+		try (in; out) {
 			int byteCount = 0;
 			char[] buffer = new char[4096];
 
@@ -165,17 +149,6 @@ public class FileCopyUtils {
 
 			out.flush();
 			return byteCount;
-		} finally {
-			try {
-				in.close();
-			} catch (IOException var15) {
-			}
-
-			try {
-				out.close();
-			} catch (IOException var14) {
-			}
-
 		}
 	}
 
@@ -188,14 +161,8 @@ public class FileCopyUtils {
 	 * @since 2021-09-03 21:04:02
 	 */
 	public static void copy(String in, Writer out) throws IOException {
-		try {
+		try (out) {
 			out.write(in);
-		} finally {
-			try {
-				out.close();
-			} catch (IOException var8) {
-			}
-
 		}
 	}
 

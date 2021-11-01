@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.model.CaptchaException;
-import com.taotao.cloud.captcha.model.Const;
+import com.taotao.cloud.captcha.model.CaptchaConst;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
 import com.taotao.cloud.captcha.service.CaptchaService;
 import com.taotao.cloud.captcha.util.CacheUtil;
@@ -84,23 +84,23 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 	@Override
 	public void init(final Properties config) {
 		//初始化底图
-		boolean aBoolean = Boolean.parseBoolean(config.getProperty(Const.CAPTCHA_INIT_ORIGINAL));
+		boolean aBoolean = Boolean.parseBoolean(config.getProperty(CaptchaConst.CAPTCHA_INIT_ORIGINAL));
 		if (!aBoolean) {
-			ImageUtils.cacheImage(config.getProperty(Const.ORIGINAL_PATH_JIGSAW),
-				config.getProperty(Const.ORIGINAL_PATH_PIC_CLICK));
+			ImageUtils.cacheImage(config.getProperty(CaptchaConst.ORIGINAL_PATH_JIGSAW),
+				config.getProperty(CaptchaConst.ORIGINAL_PATH_PIC_CLICK));
 		}
 
 		LogUtil.info("--->>>初始化验证码底图<<<---" + captchaType());
-		waterMark = config.getProperty(Const.CAPTCHA_WATER_MARK, "我的水印");
-		slipOffset = config.getProperty(Const.CAPTCHA_SLIP_OFFSET, "5");
-		waterMarkFontStr = config.getProperty(Const.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
+		waterMark = config.getProperty(CaptchaConst.CAPTCHA_WATER_MARK, "我的水印");
+		slipOffset = config.getProperty(CaptchaConst.CAPTCHA_SLIP_OFFSET, "5");
+		waterMarkFontStr = config.getProperty(CaptchaConst.CAPTCHA_WATER_FONT, "WenQuanZhengHei.ttf");
 		captchaAesStatus = Boolean.parseBoolean(
-			config.getProperty(Const.CAPTCHA_AES_STATUS, "true"));
-		clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "WenQuanZhengHei.ttf");
+			config.getProperty(CaptchaConst.CAPTCHA_AES_STATUS, "true"));
+		clickWordFontStr = config.getProperty(CaptchaConst.CAPTCHA_FONT_TYPE, "WenQuanZhengHei.ttf");
 		//clickWordFontStr = config.getProperty(Const.CAPTCHA_FONT_TYPE, "SourceHanSansCN-Normal.otf");
-		cacheType = config.getProperty(Const.CAPTCHA_CACHETYPE, "local");
+		cacheType = config.getProperty(CaptchaConst.CAPTCHA_CACHETYPE, "local");
 		captchaInterferenceOptions = Integer.parseInt(
-			config.getProperty(Const.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
+			config.getProperty(CaptchaConst.CAPTCHA_INTERFERENCE_OPTIONS, "0"));
 
 		// 部署在linux中，如果没有安装中文字段，水印和点选文字，中文无法显示，
 		// 通过加载resources下的font字体解决，无需在linux中安装字体
@@ -109,11 +109,11 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 		if (cacheType.equals("local")) {
 			LogUtil.info("初始化local缓存...");
 			CacheUtil.init(
-				Integer.parseInt(config.getProperty(Const.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
-				Long.parseLong(config.getProperty(Const.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
+				Integer.parseInt(config.getProperty(CaptchaConst.CAPTCHA_CACAHE_MAX_NUMBER, "1000")),
+				Long.parseLong(config.getProperty(CaptchaConst.CAPTCHA_TIMING_CLEAR_SECOND, "180")));
 		}
 
-		if (config.getProperty(Const.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
+		if (config.getProperty(CaptchaConst.HISTORY_DATA_CLEAR_ENABLE, "0").equals("1")) {
 			LogUtil.info("历史资源清除开关...开启..." + captchaType());
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 				@Override
@@ -123,7 +123,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 			}));
 		}
 
-		if (config.getProperty(Const.REQ_FREQUENCY_LIMIT_ENABLE, "0").equals("1")) {
+		if (config.getProperty(CaptchaConst.REQ_FREQUENCY_LIMIT_ENABLE, "0").equals("1")) {
 			if (limitHandler == null) {
 				LogUtil.info("接口分钟内限流开关...开启...");
 				limitHandler = new FrequencyLimitHandler.DefaultLimitHandler(config,

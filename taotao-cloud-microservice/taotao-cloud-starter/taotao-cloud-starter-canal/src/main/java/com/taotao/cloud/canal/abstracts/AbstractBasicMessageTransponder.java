@@ -74,11 +74,13 @@ public abstract class AbstractBasicMessageTransponder extends AbstractMessageTra
 
 			distributeByAnnotation(destination,
 				entry.getHeader().getSchemaName(),
-				entry.getHeader().getTableName(), rowChange);
+				entry.getHeader().getTableName(),
+				rowChange);
 
 			distributeByImpl(destination,
 				entry.getHeader().getSchemaName(),
-				entry.getHeader().getTableName(), rowChange);
+				entry.getHeader().getTableName(),
+				rowChange);
 
 		}
 	}

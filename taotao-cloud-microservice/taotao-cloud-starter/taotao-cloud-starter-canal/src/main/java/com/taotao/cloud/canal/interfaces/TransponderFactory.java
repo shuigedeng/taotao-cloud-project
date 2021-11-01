@@ -43,6 +43,7 @@ public interface TransponderFactory {
 	 * @since 2021-09-03 20:51:12
 	 */
 	MessageTransponder newTransponder(CanalConnector connector,
-		Map.Entry<String, CanalProperties.Instance> config, List<CanalEventListener> listeners,
+		Map.Entry<String, CanalProperties.Instance> config,
+		List<CanalEventListener> listeners,
 		List<ListenerPoint> annoListeners);
 }
