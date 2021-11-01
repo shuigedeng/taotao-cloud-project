@@ -74,6 +74,7 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn
+          yarn add expo-image-picker --latest
 
       - name: Build Taro React Native Bundle
         run: |
