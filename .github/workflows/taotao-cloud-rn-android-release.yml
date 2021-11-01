@@ -1,10 +1,10 @@
 # 工作流名称
-name: Tao Tao Cloud Rn Assemble Android Release
+name: TaoTao Cloud Rn Android Release
 
 # 触发工作流程的事件
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]

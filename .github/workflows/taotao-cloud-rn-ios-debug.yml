@@ -1,10 +1,10 @@
 # 工作流名称
-name: Tao Tao Cloud Rn Cloud Ios Debug
+name: TaoTao Cloud Rn Cloud Ios Debug
 
 # 触发工作流程的事件
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]

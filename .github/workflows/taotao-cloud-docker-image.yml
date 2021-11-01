@@ -1,4 +1,4 @@
-name: Tao Tao Cloud Microservice docker image
+name: TaoTao Cloud docker image
 
 on:
   push:
