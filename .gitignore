@@ -2,8 +2,6 @@ node_modules/
 target/
 /*/target/
 /*/out/
-.gradle
-/gradle
 /out
 /vendor
 
@@ -47,9 +45,6 @@ help.md
 /*/build/
 **/build
 **/.idea
-**/.gradle
-**/gradle
 **/out
-.gradle
 
 **/vendor/
