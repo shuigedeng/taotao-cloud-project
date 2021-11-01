@@ -38,7 +38,7 @@ env:
   # 密钥库别名口令
   KEYSTORE_KEY_PASSWORD: android
 
-default:
+defaults:
   run:
     working-directory: ./taotao-cloud-web/taotao-cloud-rn
 
