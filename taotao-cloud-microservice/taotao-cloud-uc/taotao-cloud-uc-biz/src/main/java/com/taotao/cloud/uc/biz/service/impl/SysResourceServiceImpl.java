@@ -36,6 +36,7 @@ import com.taotao.cloud.uc.biz.mapper.ISysResourceMapper;
 import com.taotao.cloud.uc.biz.mapstruct.IResourceMapStruct;
 import com.taotao.cloud.uc.biz.repository.inf.ISysResourceRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysResourceRepository;
+import com.taotao.cloud.uc.api.dubbo.IDubboRoleService;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
@@ -63,7 +64,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2021-10-09 20:41:23
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboResourceService.class)
 public class SysResourceServiceImpl extends
 	BaseSuperServiceImpl<ISysResourceMapper, SysResource, SysResourceRepository, ISysResourceRepository, Long>
 	implements IDubboResourceService, ISysResourceService<SysResource, Long> {

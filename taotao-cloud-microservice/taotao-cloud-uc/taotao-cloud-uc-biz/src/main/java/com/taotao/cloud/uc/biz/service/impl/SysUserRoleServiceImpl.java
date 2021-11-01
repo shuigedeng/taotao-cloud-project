@@ -19,15 +19,14 @@ import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.biz.entity.QSysUserRole;
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
-import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
 import com.taotao.cloud.uc.biz.mapper.ISysUserRoleMapper;
-import com.taotao.cloud.uc.biz.repository.inf.ISysUserRoleRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysUserRoleRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysUserRoleRepository;
+import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +36,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/10/21 09:20
  */
 @Service
-@DubboService
 public class SysUserRoleServiceImpl extends
 	BaseSuperServiceImpl<ISysUserRoleMapper, SysUserRole, SysUserRoleRepository, ISysUserRoleRepository, Long>
 	implements ISysUserRoleService<SysUserRole, Long> {

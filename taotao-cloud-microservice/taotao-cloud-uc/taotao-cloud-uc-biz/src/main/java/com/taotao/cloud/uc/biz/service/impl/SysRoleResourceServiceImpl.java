@@ -19,10 +19,10 @@ import cn.hutool.core.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.biz.entity.QSysRoleResource;
 import com.taotao.cloud.uc.biz.entity.SysRoleResource;
-import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.mapper.ISysRoleResourceMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysRoleResourceRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysRoleResourceRepository;
+import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +36,6 @@ import org.springframework.stereotype.Service;
  * @since 2020/10/21 09:48
  */
 @Service
-@DubboService
 public class SysRoleResourceServiceImpl extends
 	BaseSuperServiceImpl<ISysRoleResourceMapper, SysRoleResource, SysRoleResourceRepository, ISysRoleResourceRepository, Long>
 	implements ISysRoleResourceService<SysRoleResource, Long> {

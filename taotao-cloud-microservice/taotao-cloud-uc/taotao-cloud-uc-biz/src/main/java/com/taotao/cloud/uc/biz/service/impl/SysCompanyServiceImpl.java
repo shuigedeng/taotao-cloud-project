@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboCompanyService.class)
 public class SysCompanyServiceImpl extends
 	BaseSuperServiceImpl<ISysCompanyMapper, SysCompany, SysCompanyRepository, ISysCompanyRepository, Long>
 	implements IDubboCompanyService, ISysCompanyService<SysCompany, Long> {

@@ -19,6 +19,7 @@ import com.taotao.cloud.uc.biz.entity.SysDictItem;
 import com.taotao.cloud.uc.biz.mapper.ISysDictItemMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysDictItemRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysDictItemRepository;
+import com.taotao.cloud.uc.api.dubbo.IDubboDictItemService;
 import com.taotao.cloud.uc.biz.service.ISysDictItemService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -32,10 +33,10 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:34:52
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboDictItemService.class)
 public class SysDictItemServiceImpl extends
 	BaseSuperServiceImpl<ISysDictItemMapper, SysDictItem, SysDictItemRepository, ISysDictItemRepository, Long>
-	implements ISysDictItemService<SysDictItem, Long> {
+	implements IDubboDictItemService, ISysDictItemService<SysDictItem, Long> {
 
 	//private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
 	//private final static BooleanExpression PREDICATE = SYS_DICT_ITEM.delFlag.eq(false);

@@ -19,6 +19,7 @@ import com.taotao.cloud.uc.biz.entity.SysDict;
 import com.taotao.cloud.uc.biz.mapper.ISysDictMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysDictRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysDictRepository;
+import com.taotao.cloud.uc.api.dubbo.IDubboDictService;
 import com.taotao.cloud.uc.biz.service.ISysDictService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -32,10 +33,10 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:26:36
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboDictService.class)
 public class SysDictServiceImpl extends
 	BaseSuperServiceImpl<ISysDictMapper, SysDict, SysDictRepository, ISysDictRepository, Long>
-	implements ISysDictService<SysDict, Long> {
+	implements IDubboDictService, ISysDictService<SysDict, Long> {
 
 	//private final SysDictRepository sysDictRepository;
 	//private final ISysDictItemService sysDictItemService;

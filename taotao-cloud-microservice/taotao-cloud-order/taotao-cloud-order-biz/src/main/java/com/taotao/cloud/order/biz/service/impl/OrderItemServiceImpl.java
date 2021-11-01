@@ -1,7 +1,3 @@
-/**
- * Project Name: my-projects Package Name: com.taotao.cloud.order.biz.service.impl Date: 2020/6/10
- * 16:55 Author: shuigedeng
- */
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
@@ -24,9 +20,9 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-13 21:42:00
  */
 @Service
-@DubboService
-public class OrderItemServiceImpl extends
-	BaseSuperServiceImpl<IOrderItemMapper, OrderItem, OrderItemRepository, IOrderItemRepository, Long>
+@DubboService(interfaceClass = IDubboOrderItemService.class)
+public class OrderItemServiceImpl
+	extends BaseSuperServiceImpl<IOrderItemMapper, OrderItem, OrderItemRepository, IOrderItemRepository, Long>
 	implements IDubboOrderItemService, IOrderItemService<OrderItem, Long> {
 
 	private final static QOrderItem ORDER_ITEM = QOrderItem.orderItem;
