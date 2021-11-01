@@ -104,7 +104,8 @@ jobs:
             -Pkeystore_file='${{ env.KEYSTORE_FILE }}' \
             -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
             -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
-            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
+            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}' \
+            --stacktrace
 
       - name: Upload Android Products
         uses: actions/upload-artifact@v2
