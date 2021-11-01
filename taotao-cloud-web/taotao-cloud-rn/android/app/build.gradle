@@ -287,14 +287,3 @@ android.applicationVariants.all {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-configurations.all {
-  resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-    def requested = details.requested
-    if (requested.group == 'com.android.support') {
-      if (!requested.name.startsWith("multidex")) {
-        details.useVersion '25.3.0'
-      }
-    }
-  }
-}
