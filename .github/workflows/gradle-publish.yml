@@ -4,6 +4,8 @@
 name: Gradle Package
 
 on:
+  push:
+    branches: [ master ]
   release:
     types: [created]
 
@@ -50,9 +52,7 @@ jobs:
     - name: Build Publish Dependencies With Gradle
       run: |
         cd $PWD/taotao-cloud-dependencies
-        gradle publishToMavenLocal
-        gradle publishMavenJavaPublicationToSonatypeRepository
-        gradle publishMavenJavaPublicationToGitHubRepository
+        gradle publishToMavenLocal publishMavenJavaPublicationToSonatypeRepository publishMavenJavaPublicationToGitHubRepository
 
     - name: Build Publish Starter With Gradle
       run: |
@@ -61,9 +61,7 @@ jobs:
         do
           if [ -d $starter_dir"/"$starter ];then
             cd $starter_dir"/"$starter
-            gradle --continue clean build -x bootJar
-            gradle publishMavenJavaPublicationToSonatypeRepository
-            gradle publishMavenJavaPublicationToGitHubRepository
+            gradle --continue clean build -x bootJar publishMavenJavaPublicationToSonatypeRepository publishMavenJavaPublicationToGitHubRepository
           fi
         done
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
