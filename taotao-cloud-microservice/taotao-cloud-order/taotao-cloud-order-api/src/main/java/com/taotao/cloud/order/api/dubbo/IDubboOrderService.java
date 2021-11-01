@@ -26,6 +26,5 @@ import com.taotao.cloud.order.api.bo.order_info.OrderBO;
  */
 public interface IDubboOrderService {
 
-
 	OrderBO query(Long id);
 }
