@@ -89,24 +89,29 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
-      - name: Assemble Android ${{ env.BUILD_TYPE }}
+      - name: Assemble Android
         run: |
-          cd ./android && \
-          ./gradlew assemble${{ env.BUILD_TYPE }} \
-            -Papp_id=${{ env.APP_ID }} \
-            -Papp_name='${{ env.APP_NAME }}' \
-            -Papp_icon=${{env.APP_ICON}} \
-            -Papp_round_icon=${{env.APP_ROUND_ICON}} \
-            -Pversion_code=${{ env.VERSION_CODE }} \
-            -Pversion_name=${{ env.VERSION_NAME }} \
-            -Pabi_filters='${{ env.APP_ABI_FILTERS }}' \
-            -Pkeystore_file='${{ env.KEYSTORE_FILE }}' \
-            -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
-            -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
-            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
+          cd ./android
+          ls $PWD
 
-      - name: Upload Android Products
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-${{ env.BUILD_TYPE }}
-          path: ./android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+#      - name: Assemble Android
+#        run: |
+#          cd ./android && \
+#          ./gradlew assemble${{ env.BUILD_TYPE }} \
+#            -Papp_id=${{ env.APP_ID }} \
+#            -Papp_name='${{ env.APP_NAME }}' \
+#            -Papp_icon=${{env.APP_ICON}} \
+#            -Papp_round_icon=${{env.APP_ROUND_ICON}} \
+#            -Pversion_code=${{ env.VERSION_CODE }} \
+#            -Pversion_name=${{ env.VERSION_NAME }} \
+#            -Pabi_filters='${{ env.APP_ABI_FILTERS }}' \
+#            -Pkeystore_file='${{ env.KEYSTORE_FILE }}' \
+#            -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
+#            -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
+#            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
+#
+#      - name: Upload Android Products
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-${{ env.BUILD_TYPE }}
+#          path: ./android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
