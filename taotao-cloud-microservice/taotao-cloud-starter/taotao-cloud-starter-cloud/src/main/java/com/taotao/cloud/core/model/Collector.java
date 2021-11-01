@@ -96,10 +96,12 @@ public class Collector {
 		try {
 			Object obj = ReflectUtil.newInstanceIfPossible(type);
 
-			if (obj instanceof Hook hook) {
-				hook.setCoreProperties(coreProperties);
-				hook.setKey(key);
-				hook.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
+			if (obj instanceof Hook hookObj) {
+				hookObj.setCoreProperties(coreProperties);
+				hookObj.setKey(key);
+				hookObj.setMaxLength(PropertyUtil.getPropertyCache(key + ".length", 10));
+
+				return hookObj;
 			}
 			return obj;
 		} catch (Exception e) {

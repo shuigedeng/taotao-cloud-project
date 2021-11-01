@@ -20,12 +20,6 @@ public class ServiceNoticeTask implements Runnable {
 
 	private final ServiceNoticeRepository serviceNoticeRepository;
 
-	/**
-	 * @param serviceCheckNoticeRepository
-	 * @param noticeSendComponent
-	 * @param reportedFilterHandler
-	 * @param promethreusNoticeProperties
-	 */
 	public ServiceNoticeTask(List<INoticeSendComponent<ServiceCheckNotice>> noticeSendComponents,
 			PromethreusNoticeProperties promethreusNoticeProperties, ServiceNoticeRepository serviceNoticeRepository) {
 		this.noticeSendComponents = noticeSendComponents;

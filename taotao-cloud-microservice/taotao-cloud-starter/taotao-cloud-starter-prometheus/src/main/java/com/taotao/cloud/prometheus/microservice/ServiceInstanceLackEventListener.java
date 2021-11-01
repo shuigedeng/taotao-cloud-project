@@ -1,11 +1,10 @@
 package com.taotao.cloud.prometheus.microservice;
 
+import com.taotao.cloud.prometheus.model.ServiceInstanceLackProblem;
 import java.util.Set;
 
 import org.springframework.context.ApplicationListener;
 
-import com.kuding.microservice.interfaces.ServiceNoticeRepository;
-import com.kuding.pojos.servicemonitor.ServiceInstanceLackProblem;
 
 public class ServiceInstanceLackEventListener implements ApplicationListener<ServiceInstanceLackEvent> {
 

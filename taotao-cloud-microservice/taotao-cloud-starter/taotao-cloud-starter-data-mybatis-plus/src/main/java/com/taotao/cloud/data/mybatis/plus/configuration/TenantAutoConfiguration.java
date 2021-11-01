@@ -48,8 +48,9 @@ public class TenantAutoConfiguration implements InitializingBean {
 		LogUtil.started(ISqlParserFilter.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
 		return metaObject -> {
 			MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
-			return tenantProperties.getIgnoreSqlList().stream().anyMatch(
-				(e) -> e.equalsIgnoreCase(ms.getId())
+			return tenantProperties.getIgnoreSqlList()
+				.stream()
+				.anyMatch(e -> e.equalsIgnoreCase(ms.getId())
 			);
 		};
 	}

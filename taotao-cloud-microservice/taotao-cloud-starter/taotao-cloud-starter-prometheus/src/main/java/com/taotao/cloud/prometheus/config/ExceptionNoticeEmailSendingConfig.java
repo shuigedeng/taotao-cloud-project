@@ -1,7 +1,11 @@
 package com.taotao.cloud.prometheus.config;
 
 import com.taotao.cloud.prometheus.annotation.ConditionalOnExceptionNotice;
+import com.taotao.cloud.prometheus.message.EmailNoticeSendComponent;
+import com.taotao.cloud.prometheus.message.INoticeSendComponent;
+import com.taotao.cloud.prometheus.model.ExceptionNotice;
 import com.taotao.cloud.prometheus.properties.EmailNoticeProperties;
+import com.taotao.cloud.prometheus.text.NoticeTextResolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

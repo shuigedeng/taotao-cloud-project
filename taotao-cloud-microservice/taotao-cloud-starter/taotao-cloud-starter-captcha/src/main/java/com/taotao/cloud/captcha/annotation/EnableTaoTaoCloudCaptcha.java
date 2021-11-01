@@ -15,9 +15,7 @@
  */
 package com.taotao.cloud.captcha.annotation;
 
-import com.taotao.cloud.captcha.configuration.CaptchaControllerAutoConfiguration;
-import com.taotao.cloud.captcha.configuration.CaptchaServiceAutoConfiguration;
-import com.taotao.cloud.captcha.configuration.CaptchaStorageAutoConfiguration;
+import com.taotao.cloud.captcha.configuration.CaptchaAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -33,8 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({CaptchaServiceAutoConfiguration.class, CaptchaStorageAutoConfiguration.class,
-	CaptchaControllerAutoConfiguration.class})
+@Import({CaptchaAutoConfiguration.class})
 public @interface EnableTaoTaoCloudCaptcha {
 
 }

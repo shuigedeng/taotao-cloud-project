@@ -17,8 +17,13 @@ package com.taotao.cloud.data.jpa.properties;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.MultiTenancyStrategy;
+import org.hibernate.dialect.MySQL8Dialect;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.orm.jpa.vendor.Database;
 
 
 /**
@@ -35,9 +40,25 @@ public class HibernateProperties {
 	public static final String PREFIX = "taotao.cloud.hibernate";
 
 	/**
-	 * 是否开启多租户
+	 * 是否开启Hibernate
 	 */
 	private Boolean enabled = true;
+
+	private boolean showSql = true;
+	private boolean generateDdl = true;
+	private Database database = Database.MYSQL;
+
+	private MultiTenancyStrategy multiTenancy = MultiTenancyStrategy.DISCRIMINATOR;
+	private boolean formatSql = true;
+	private boolean highlightSql = true;
+	private String implicitNamingStrategy = SpringImplicitNamingStrategy.class.getName();
+	private String physicalNamingStrategy = SpringPhysicalNamingStrategy.class.getName();
+	private String dialect = MySQL8Dialect.class.getName();
+	private String timeZone = "Asia/Shanghai";
+	private String statementInspector = "com.taotao.cloud.data.jpa.listener.HibernateInspector";
+	private String interceptor = "com.taotao.cloud.data.jpa.listener.HibernateInterceptor";
+	private String persistenceUnitName = "default";
+
 
 	/**
 	 * basePackages
@@ -58,5 +79,109 @@ public class HibernateProperties {
 
 	public void setPackages(String packages) {
 		this.packages = packages;
+	}
+
+	public boolean isShowSql() {
+		return showSql;
+	}
+
+	public void setShowSql(boolean showSql) {
+		this.showSql = showSql;
+	}
+
+	public boolean isGenerateDdl() {
+		return generateDdl;
+	}
+
+	public void setGenerateDdl(boolean generateDdl) {
+		this.generateDdl = generateDdl;
+	}
+
+	public Database getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(Database database) {
+		this.database = database;
+	}
+
+	public MultiTenancyStrategy getMultiTenancy() {
+		return multiTenancy;
+	}
+
+	public void setMultiTenancy(MultiTenancyStrategy multiTenancy) {
+		this.multiTenancy = multiTenancy;
+	}
+
+	public boolean isFormatSql() {
+		return formatSql;
+	}
+
+	public void setFormatSql(boolean formatSql) {
+		this.formatSql = formatSql;
+	}
+
+	public boolean isHighlightSql() {
+		return highlightSql;
+	}
+
+	public void setHighlightSql(boolean highlightSql) {
+		this.highlightSql = highlightSql;
+	}
+
+	public String getImplicitNamingStrategy() {
+		return implicitNamingStrategy;
+	}
+
+	public void setImplicitNamingStrategy(String implicitNamingStrategy) {
+		this.implicitNamingStrategy = implicitNamingStrategy;
+	}
+
+	public String getPhysicalNamingStrategy() {
+		return physicalNamingStrategy;
+	}
+
+	public void setPhysicalNamingStrategy(String physicalNamingStrategy) {
+		this.physicalNamingStrategy = physicalNamingStrategy;
+	}
+
+	public String getDialect() {
+		return dialect;
+	}
+
+	public void setDialect(String dialect) {
+		this.dialect = dialect;
+	}
+
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
+	}
+
+	public String getStatementInspector() {
+		return statementInspector;
+	}
+
+	public void setStatementInspector(String statementInspector) {
+		this.statementInspector = statementInspector;
+	}
+
+	public String getInterceptor() {
+		return interceptor;
+	}
+
+	public void setInterceptor(String interceptor) {
+		this.interceptor = interceptor;
+	}
+
+	public String getPersistenceUnitName() {
+		return persistenceUnitName;
+	}
+
+	public void setPersistenceUnitName(String persistenceUnitName) {
+		this.persistenceUnitName = persistenceUnitName;
 	}
 }

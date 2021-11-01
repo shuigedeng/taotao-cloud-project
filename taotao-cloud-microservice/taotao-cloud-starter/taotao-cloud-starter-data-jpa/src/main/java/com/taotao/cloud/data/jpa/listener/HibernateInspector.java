@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.data.jpa.listener;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.db.sql.SqlFormatter;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -48,13 +47,13 @@ public class HibernateInspector implements StatementInspector {
 		public void onSaveOrUpdate(SaveOrUpdateEvent event) {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
 			String sql = SqlContextHolder.getSql();
-			if (StrUtil.isNotBlank(sql)) {
-				LogUtil.info(SqlFormatter.format(sql));
-			}
 			if (Objects.nonNull(collector)) {
 				try {
-					String replace = StringUtil.nullToEmpty(SqlContextHolder.getSql())
-						.replace("\r", "").replace("\n", "");
+					String replace = StringUtil
+						.nullToEmpty(SqlContextHolder.getSql())
+						.replace("\r", "")
+						.replace("\n", "");
+
 					collector.hook("taotao.cloud.health.jpa.onSaveOrUpdate.sql.hook")
 						.run(replace, () -> {
 							try {
@@ -76,9 +75,6 @@ public class HibernateInspector implements StatementInspector {
 		public void onDelete(DeleteEvent event) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
 			String sql = SqlContextHolder.getSql();
-			if (StrUtil.isNotBlank(sql)) {
-				LogUtil.info(SqlFormatter.format(sql));
-			}
 			if (Objects.nonNull(collector)) {
 				try {
 					String replace = StringUtil.nullToEmpty(sql)
@@ -104,12 +100,7 @@ public class HibernateInspector implements StatementInspector {
 		public void onLoad(LoadEvent event,
 			LoadType loadType) throws HibernateException {
 			Collector collector = ContextUtil.getBean(Collector.class, true);
-
 			String sql = SqlContextHolder.getSql();
-			if (StrUtil.isNotBlank(sql)) {
-				LogUtil.info(SqlFormatter.format(sql));
-			}
-
 			if (Objects.nonNull(collector)) {
 				try {
 					String replace = StringUtil.nullToEmpty(sql).replace("\r", "")
@@ -132,6 +123,9 @@ public class HibernateInspector implements StatementInspector {
 	@Override
 	public String inspect(String sql) {
 		this.sql = sql;
+
+		LogUtil.info(SqlFormatter.format(sql));
+
 		SqlContextHolder.setSql(sql);
 		return sql;
 	}
