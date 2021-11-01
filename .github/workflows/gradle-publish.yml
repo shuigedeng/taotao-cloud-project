@@ -52,6 +52,7 @@ jobs:
         cd $PWD/taotao-cloud-dependencies
         gradle publishToMavenLocal
         gradle publishMavenJavaPublicationToSonatypeRepository
+        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: Build Publish Starter With Gradle
       run: |
