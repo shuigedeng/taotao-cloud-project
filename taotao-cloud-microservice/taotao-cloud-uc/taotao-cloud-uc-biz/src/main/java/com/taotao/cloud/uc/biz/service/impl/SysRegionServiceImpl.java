@@ -23,6 +23,7 @@ import com.taotao.cloud.uc.biz.entity.SysRegion;
 import com.taotao.cloud.uc.biz.mapper.ISysRegionMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysRegionRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysRegionRepository;
+import com.taotao.cloud.uc.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.uc.biz.service.ISysRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.ArrayList;
@@ -39,10 +40,10 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-09 20:37:52
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboRegionService.class)
 public class SysRegionServiceImpl extends
 	BaseSuperServiceImpl<ISysRegionMapper, SysRegion, SysRegionRepository, ISysRegionRepository, Long>
-	implements ISysRegionService<SysRegion, Long> {
+	implements IDubboRegionService, ISysRegionService<SysRegion, Long> {
 
 	@DubboReference
 	private IDubboOrderService dubboOrderService;

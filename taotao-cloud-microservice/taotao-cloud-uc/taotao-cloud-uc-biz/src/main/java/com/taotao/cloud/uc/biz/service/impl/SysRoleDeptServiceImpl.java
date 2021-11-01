@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.uc.biz.service.impl;
 
-import com.taotao.cloud.uc.biz.service.ISysRoleDeptService;
 import com.taotao.cloud.uc.biz.entity.SysRoleDept;
 import com.taotao.cloud.uc.biz.mapper.ISysRoleDeptMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysRoleDeptRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysRoleDeptRepository;
+import com.taotao.cloud.uc.biz.service.ISysRoleDeptService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,6 @@ import org.springframework.stereotype.Service;
  * @since 2020/10/21 09:48
  */
 @Service
-@DubboService
 public class SysRoleDeptServiceImpl extends
 	BaseSuperServiceImpl<ISysRoleDeptMapper, SysRoleDept, SysRoleDeptRepository, ISysRoleDeptRepository, Long>
 	implements ISysRoleDeptService<SysRoleDept, Long> {

@@ -4,7 +4,7 @@ name: TaoTao Cloud Rn Android Debug
 # 触发工作流程的事件
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]

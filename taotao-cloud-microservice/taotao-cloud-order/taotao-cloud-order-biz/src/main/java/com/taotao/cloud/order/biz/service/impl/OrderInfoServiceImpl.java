@@ -1,7 +1,3 @@
-/**
- * Project Name: my-projects Package Name: com.taotao.cloud.order.biz.service.impl Date: 2020/6/10
- * 16:55 Author: shuigedeng
- */
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -35,10 +31,9 @@ import org.springframework.stereotype.Service;
  * @create 2020/6/10 16:55
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboOrderService.class)
 public class OrderInfoServiceImpl
-	extends
-	BaseSuperServiceImpl<IOrderInfoMapper, OrderInfo, OrderInfoRepository, IOrderInfoRepository, Long>
+	extends BaseSuperServiceImpl<IOrderInfoMapper, OrderInfo, OrderInfoRepository, IOrderInfoRepository, Long>
 	implements IDubboOrderService, IOrderInfoService<OrderInfo, Long> {
 
 	private final static QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;

@@ -17,14 +17,15 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
-import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
-import com.taotao.cloud.uc.biz.service.ISysUserService;
+import com.taotao.cloud.uc.api.dubbo.IDubboUserService;
 import com.taotao.cloud.uc.biz.entity.QSysUser;
 import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.biz.mapper.ISysUserMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysUserRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysUserRepository;
+import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
+import com.taotao.cloud.uc.biz.service.ISysUserService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.Set;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -39,10 +40,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2021-10-09 20:50:41
  */
 @Service
-@DubboService
+@DubboService(interfaceClass = IDubboUserService.class)
 public class SysUserServiceImpl extends
 	BaseSuperServiceImpl<ISysUserMapper, SysUser, SysUserRepository, ISysUserRepository, Long>
-	implements ISysUserService<SysUser, Long> {
+	implements IDubboUserService, ISysUserService<SysUser, Long> {
 
 	private final static QSysUser SYS_USER = QSysUser.sysUser;
 

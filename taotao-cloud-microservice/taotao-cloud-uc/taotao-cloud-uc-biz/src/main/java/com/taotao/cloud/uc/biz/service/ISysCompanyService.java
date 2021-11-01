@@ -1,6 +1,5 @@
 package com.taotao.cloud.uc.biz.service;
 
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
