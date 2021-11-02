@@ -73,6 +73,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		if(Objects.nonNull(taskExecutor)){
 			return taskExecutor;
 		}
+
 		return null;
 	}
 
