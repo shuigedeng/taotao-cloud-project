@@ -1,6 +1,7 @@
 package com.taotao.cloud.mongodb.service;
 
 import com.taotao.cloud.mongodb.vo.Page;
+import java.util.Set;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -122,4 +123,6 @@ public interface BaseMongoDAO<T> {
 	 * @return
 	 */
 	public MongoTemplate getMongoTemplate();
+
+	public Set<String> getCollectionNames();
 }

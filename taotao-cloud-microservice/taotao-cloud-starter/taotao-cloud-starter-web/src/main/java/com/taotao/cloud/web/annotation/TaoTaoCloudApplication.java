@@ -69,6 +69,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableTaoTaoCloudElasticsearch
 @EnableTaoTaoCloudUploadFile
 @EnableTaoTaoCloudZookeeper
+@EnableTaoTaoCloudMongodb
 @EnableTaoTaoCloudShardingsphere
 @EnableTaoTaoCloudRequestLog
 @EnableTaoTaoCloudJobXxl

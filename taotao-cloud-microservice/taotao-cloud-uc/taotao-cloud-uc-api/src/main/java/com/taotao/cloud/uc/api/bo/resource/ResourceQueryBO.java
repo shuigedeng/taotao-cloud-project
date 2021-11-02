@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.uc.api.vo.resource;
+package com.taotao.cloud.uc.api.bo.resource;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

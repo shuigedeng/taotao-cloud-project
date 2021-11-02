@@ -16,7 +16,7 @@
 package com.taotao.cloud.uc.biz.service;
 
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.web.base.entity.SuperEntity;

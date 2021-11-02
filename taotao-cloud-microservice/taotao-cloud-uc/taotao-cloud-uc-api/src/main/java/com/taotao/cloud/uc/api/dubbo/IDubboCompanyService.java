@@ -1,6 +1,7 @@
 package com.taotao.cloud.uc.api.dubbo;
 
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
+
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 
 /**
  * 后台部门表服务接口

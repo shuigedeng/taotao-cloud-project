@@ -1,6 +1,8 @@
 package com.taotao.cloud.uc.api.dubbo;
 
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
+
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
+import java.util.List;
 
 /**
  * 后台部门表服务接口
@@ -10,5 +12,5 @@ import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
  * @since 1.0
  */
 public interface IDubboResourceService {
-	ResourceQueryBO queryAllId(Long id);
+	List<ResourceQueryBO> queryAllId(Long id);
 }

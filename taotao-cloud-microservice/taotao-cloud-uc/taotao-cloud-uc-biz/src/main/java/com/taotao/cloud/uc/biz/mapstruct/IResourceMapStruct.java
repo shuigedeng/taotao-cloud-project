@@ -16,8 +16,8 @@
 package com.taotao.cloud.uc.biz.mapstruct;
 
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceSaveDTO;
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysResource;
 import org.mapstruct.Builder;
