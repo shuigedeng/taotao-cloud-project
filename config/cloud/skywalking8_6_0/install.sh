@@ -6,12 +6,12 @@ cd /opt/soft/
 
 
 # 1、官网下载skywalking服务端
-wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.7.0/apache-skywalking-apm-es7-8.7.0.tar.gz
+wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.8.1/apache-skywalking-apm-8.8.1.tar.gz
 
 # 2、上传解压 3、重命名文件夹
-tar -zxvf apache-skywalking-apm-es7-8.7.0.tar.gz -C /opt/cloud
+tar -zxvf apache-skywalking-apm-8.8.1.tar.gz -C /opt/cloud
 
-cd /opt/cloud/apache-skywalking-apm-bin-es7
+cd /opt/cloud/apache-skywalking-apm-bin
 
 # 4、修改配置文件
 vim config/application.yml
@@ -22,7 +22,7 @@ storage:
   mysql:
     properties:
       #修改jdbcUrl
-      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/taotao-cloud-skywalking"}
+      jdbcUrl: ${SW_JDBC_URL:"jdbc:mysql://127.0.0.1:3306/taotao-cloud-skywalking?rewriteBatchedStatements=true"}
       #修改user
       dataSource.user: ${SW_DATA_SOURCE_USER:root}
       #修改password
@@ -61,7 +61,7 @@ receiver-sharing-server:
     authentication: ${SW_AUTHENTICATION:"taotao-cloud"}
 
 # 5、下载mysql驱动包到 /opt/skywalking/oap-libs 目录下
-cp mysql-connector-java-8.0.20.jar /opt/cloud/apache-skywalking-apm-bin-es7/oap-libs
+cp mysql-connector-java-8.0.20.jar /opt/cloud/apache-skywalking-apm-bin/oap-libs
 
 # 6、进入mysql 创建 cloud-skywalking 数据库
 mysql –uroot –p
@@ -69,21 +69,22 @@ create database `taotao-cloud-skywalking`;
 
 # 7、启动collector服务
 #初始化
-/opt/cloud/apache-skywalking-apm-bin-es7/bin/oapServiceInit.sh
+/opt/cloud/apache-skywalking-apm-bin/bin/oapServiceInit.sh
 
 #启动collector服务
-/opt/cloud/apache-skywalking-apm-bin-es7/bin/oapService.sh
+/opt/cloud/apache-skywalking-apm-bin/bin/oapService.sh
 
 # 8、配置 Skywalking Web服务
-vim /opt/cloud/apache-skywalking-apm-bin-es7/webapp/webapp.yml
+vim /opt/cloud/apache-skywalking-apm-bin/webapp/webapp.yml
 # 修改webapp.yml 文件配置如下
-#默认的8080容易与其他软件冲突，建议改一下比如28080
+#默认的8080容易与其他软件冲突，建议改一下比如 8085
 
 # 9、启动web服务
-/opt/cloud/apache-skywalking-apm-bin-es7/bin/webappService.sh
+/opt/cloud/apache-skywalking-apm-bin/bin/webappService.sh
 
 启动bin目录下的startup.sh可以将collector和Web模块一起启动起来。
-http://172.16.6.151.:28080进入SkyWalking UI
+http://172.16.6.151:8085进入SkyWalking UI
+
 
 # 9、探针配置（Agent）
 vim skywalking8.6.0/agent/config/agent.config

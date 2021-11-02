@@ -6,7 +6,7 @@ ADD ./build/libs/taotao-cloud-gateway-2021.11.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-gateway-2021.11.jar extract
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -48,14 +48,14 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -XX:ParallelGCThreads=4 \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
+                  -Dspring.profiles.active=${PRROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
                   -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
                   -Dskywalking.logging.file_name=skywalking.log \
                   -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dspring.profiles.active=${PRROFILES}"
+                  -Dskywalking.logging.dir=/root/logs/${APP_NAME}"
 
 USER root
 

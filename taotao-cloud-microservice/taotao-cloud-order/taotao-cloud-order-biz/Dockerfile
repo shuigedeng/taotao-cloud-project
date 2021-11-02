@@ -7,7 +7,8 @@ ADD ./build/libs/taotao-cloud-order-biz-2021.11.jar ./
 RUN java -Djarmode=layertools -jar taotao-cloud-order-biz-2021.11.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -56,14 +57,14 @@ ENV JAVA_OPTIONS="-Xms512m \
                   --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
                   --add-opens java.base/java.util=ALL-UNNAMED \
                   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
-                  -Dspring.profiles.active=${PRROFILES}"
-                  # -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  # -Dskywalking.agent.service_name=${APP_NAME} \
-                  # -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  # -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
-                  # -Dskywalking.logging.level=INFO \
-                  # -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  # -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
+                  -Dspring.profiles.active=${PRROFILES} \
+                  -javaagent:/skywalking/agent/skywalking-agent.jar \
+                  -Dskywalking.agent.service_name=${APP_NAME} \
+                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  -Dskywalking.logging.level=INFO \
+                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
 
 USER root
 
