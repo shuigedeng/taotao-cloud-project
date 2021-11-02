@@ -34,7 +34,7 @@ public class ElasticsearchProperties {
 	/**
 	 * Elasticsearch 总开关
 	 */
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	public boolean isEnabled() {
 		return enabled;

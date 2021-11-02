@@ -15,11 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.annotation;
 
-import com.taotao.cloud.elasticsearch.component.ElasticsearchComponent;
-import com.taotao.cloud.elasticsearch.service.impl.AggregationServiceImpl;
-import com.taotao.cloud.elasticsearch.service.impl.IndexServiceImpl;
-import com.taotao.cloud.elasticsearch.service.impl.QueryServiceImpl;
-import com.taotao.cloud.elasticsearch.service.impl.SearchServiceImpl;
+import com.taotao.cloud.elasticsearch.configuration.ElasticsearchAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -36,11 +32,7 @@ import org.springframework.context.annotation.Import;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Import({
-	ElasticsearchComponent.class,
-	QueryServiceImpl.class,
-	SearchServiceImpl.class,
-	AggregationServiceImpl.class,
-	IndexServiceImpl.class
+	ElasticsearchAutoConfiguration.class,
 })
 public @interface EnableTaoTaoCloudElasticsearch {
 

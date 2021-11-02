@@ -1,7 +1,10 @@
 package com.taotao.cloud.order.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.elasticsearch.service.IIndexService;
+import com.taotao.cloud.mongodb.service.BaseMongoDAO;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
@@ -13,11 +16,15 @@ import com.taotao.cloud.order.biz.repository.cls.OrderInfoRepository;
 import com.taotao.cloud.order.biz.repository.inf.IOrderInfoRepository;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.biz.service.IOrderItemService;
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +48,15 @@ public class OrderInfoServiceImpl
 	@Autowired
 	private IOrderItemService<OrderItem, Long> orderItemService;
 
+	@Autowired
+	private IIndexService indexService;
+
+	@Autowired
+	private BaseMongoDAO baseMongoDAO;
+
+	@Autowired
+	private ZookeeperTemplate zookeeperTemplate;
+
 	@DubboReference
 	private IDubboResourceService dubboResourceService;
 
@@ -58,7 +74,23 @@ public class OrderInfoServiceImpl
 
 		orderItemService.getById(2L);
 
-		ResourceQueryBO allById = dubboResourceService.queryAllId(1L);
+		try {
+			PageModel<HashMap<String, String>> list = indexService.list("", "");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Set<String> collectionNames = baseMongoDAO.getCollectionNames();
+
+		try {
+			List<String> children = zookeeperTemplate.getChildren("/");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		List<ResourceQueryBO> allById = dubboResourceService.queryAllId(1L);
+
+
 		LogUtil.info(allById.toString());
 
 		return new ArrayList<>();

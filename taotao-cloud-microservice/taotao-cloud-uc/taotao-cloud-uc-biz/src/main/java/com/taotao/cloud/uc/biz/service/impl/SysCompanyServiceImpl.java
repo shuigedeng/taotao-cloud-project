@@ -1,8 +1,8 @@
 package com.taotao.cloud.uc.biz.service.impl;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.dubbo.IDubboCompanyService;
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.biz.entity.SysCompany;
 import com.taotao.cloud.uc.biz.mapper.ISysCompanyMapper;
 import com.taotao.cloud.uc.biz.repository.inf.ISysCompanyRepository;

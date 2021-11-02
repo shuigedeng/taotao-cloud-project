@@ -20,13 +20,13 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResourceTypeEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
-import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
+import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
 import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
-import com.taotao.cloud.uc.api.vo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.biz.entity.QSysResource;
@@ -34,9 +34,8 @@ import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.biz.mapper.ISysResourceMapper;
 import com.taotao.cloud.uc.biz.mapstruct.IResourceMapStruct;
-import com.taotao.cloud.uc.biz.repository.inf.ISysResourceRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysResourceRepository;
-import com.taotao.cloud.uc.api.dubbo.IDubboRoleService;
+import com.taotao.cloud.uc.biz.repository.inf.ISysResourceRepository;
 import com.taotao.cloud.uc.biz.service.ISysResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.uc.biz.utils.TreeUtil;
@@ -256,7 +255,9 @@ public class SysResourceServiceImpl extends
 	}
 
 	@Override
-	public ResourceQueryBO queryAllId(Long id) {
-		return null;
+	public List<ResourceQueryBO> queryAllId(Long id) {
+		List<SysResource> all = ir().findAll();
+
+		return IResourceMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}
 }

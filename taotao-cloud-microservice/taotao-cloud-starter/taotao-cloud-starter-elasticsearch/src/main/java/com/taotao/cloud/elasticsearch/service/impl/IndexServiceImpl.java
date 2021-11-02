@@ -99,8 +99,7 @@ public class IndexServiceImpl implements IIndexService {
 			};
 			listOfIndicesFromEs = mapper.readValue(rawBody, typeRef);
 		}
-		return null;
-//		return PageModel.PageModelBuilder(100, 1, 10, listOfIndicesFromEs);
+		return PageModel.of(100, 1, 10,  30, listOfIndicesFromEs);
 	}
 
 	/**

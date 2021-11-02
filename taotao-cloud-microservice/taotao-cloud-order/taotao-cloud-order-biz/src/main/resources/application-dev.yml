@@ -194,21 +194,29 @@ spring:
         max-idle: 500
         min-idle: 100
     connect-timeout: 60000
+  elasticsearch:
+    rest:
+      uris:
+        - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+      username:
+      password:
   data:
     elasticsearch:
       repositories:
-        enabled: false
+        enabled: true
       client:
         reactive:
           endpoints:
             - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
           connection-timeout: 5
-          username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
-          password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
+          username:
+          password:
     mongodb:
-
-      database:
-      host:
+      database: yapi
+      host: 172.16.6.151
+      port: 27017
+      username:
+      password:
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
@@ -432,6 +440,10 @@ spring:
 
 taotao:
   cloud:
+    elasticsearch:
+      enabled: true
+    mongodb:
+      enabled: true
     disruptor:
       enabled: false
       multi-producer: false
@@ -476,7 +488,8 @@ taotao:
     captcha:
       enabled: true
     zookeeper:
-      enabled: false
+      enabled: true
+      connectString: 172.16.6.151:2181
       lock:
         enabled: false
     web:

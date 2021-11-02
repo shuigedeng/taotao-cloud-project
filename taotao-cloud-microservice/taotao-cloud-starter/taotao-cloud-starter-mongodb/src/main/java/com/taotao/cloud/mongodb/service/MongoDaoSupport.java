@@ -1,10 +1,12 @@
 package com.taotao.cloud.mongodb.service;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.mongodb.annotation.QueryField;
 import com.taotao.cloud.mongodb.util.ReflectionUtil;
 import com.taotao.cloud.mongodb.vo.Page;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,11 +20,11 @@ import org.springframework.data.mongodb.core.query.Update;
  * @param <T>
  * @date 2020-10-20
  */
-public abstract class MongoDaoSupport<T> implements BaseMongoDAO<T> {
+public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 
 	@Autowired
 	@Qualifier("mongoTemplate")
-	protected MongoTemplate mongoTemplate;
+	private MongoTemplate mongoTemplate;
 
 	/**
 	 * 保存一个对象到mongodb
@@ -137,7 +139,15 @@ public abstract class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 */
 	@Override
 	public T findById(String id, String collectionName) {
+		Set<String> collectionNames = mongoTemplate.getCollectionNames();
 		return mongoTemplate.findById(id, this.getEntityClass(), collectionName);
+	}
+
+	@Override
+	public Set<String> getCollectionNames() {
+		Set<String> collectionNames = mongoTemplate.getCollectionNames();
+		LogUtil.info(collectionNames.toString());
+		return collectionNames;
 	}
 
 	/**
@@ -190,7 +200,8 @@ public abstract class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 				if (value != null) {
 					QueryField queryField = field.getAnnotation(QueryField.class);
 					if (queryField != null) {
-						query.addCriteria(queryField.type().buildCriteria(queryField, field, value));
+						query.addCriteria(
+							queryField.type().buildCriteria(queryField, field, value));
 					}
 				}
 			} catch (IllegalArgumentException e) {
