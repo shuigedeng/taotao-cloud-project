@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-xxl-job-admin-configmap
 data:
   APPLICATION_NAME: taotao-cloud-xxl-job-admin
-  APPLICATION_VERSION: 20201.9.3
+  APPLICATION_VERSION: 2021.11
 ---
 apiVersion: v1
 kind: Secret

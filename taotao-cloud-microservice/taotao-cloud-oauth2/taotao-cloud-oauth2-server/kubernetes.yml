@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-oauth2-server-configmap
 data:
   APPLICATION_NAME: taotao-cloud-oauth2-server
-  APPLICATION_VERSION: 20201.9.3
+  APPLICATION_VERSION: 2021.11
 ---
 apiVersion: v1
 kind: Secret

@@ -19,6 +19,7 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.CoreThreadPoolFactory;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.PropertyCache;
@@ -33,8 +34,10 @@ import com.taotao.cloud.core.runner.CoreCommandLineRunner;
 import com.taotao.cloud.core.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -43,6 +46,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.server.ServerWebExchange;
 
 /**
@@ -53,13 +57,15 @@ import org.springframework.web.server.ServerWebExchange;
  * @since 2021-09-02 20:05:41
  */
 @Configuration
-@AutoConfigureAfter(AsyncAutoConfiguration.class)
 public class CoreAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(CoreAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
+
+	@Autowired
+	private AsyncThreadPoolProperties asyncThreadPoolProperties;
 
 	@Bean(value = "meterRegistryCustomizer")
 	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
@@ -88,13 +94,35 @@ public class CoreAutoConfiguration implements InitializingBean {
 		return new PropertyCache(pubsub);
 	}
 
+	@Bean
+	public AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor(){
+		LogUtil.started(ThreadPoolTaskExecutor.class, StarterNameConstant.CLOUD_STARTER);
+
+		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
+		executor.setCorePoolSize(asyncThreadPoolProperties.getCorePoolSize());
+		executor.setMaxPoolSize(asyncThreadPoolProperties.getMaxPoolSiz());
+		executor.setQueueCapacity(asyncThreadPoolProperties.getQueueCapacity());
+		executor.setKeepAliveSeconds(asyncThreadPoolProperties.getKeepAliveSeconds());
+		executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
+
+		executor.setThreadFactory(new CoreThreadPoolFactory(asyncThreadPoolProperties, executor));
+
+		/*
+		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
+		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+		 */
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		executor.initialize();
+
+		return executor;
+	}
+
 	@Bean(destroyMethod = "monitorShutdown")
-	@ConditionalOnMissingBean(MonitorThreadPool.class)
 	public MonitorThreadPool coreMonitorThreadPool(
 		Collector collector,
 		MonitorThreadPoolProperties monitorThreadPoolProperties,
 		AsyncThreadPoolProperties asyncThreadPoolProperties,
-		@Qualifier("taskExecutor") AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
+		AsyncThreadPoolTaskExecutor coreThreadPoolTaskExecutor) {
 		LogUtil.started(MonitorThreadPool.class, StarterNameConstant.CLOUD_STARTER);
 		return new MonitorThreadPool(
 			collector,
