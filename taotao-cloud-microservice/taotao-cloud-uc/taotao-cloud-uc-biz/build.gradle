@@ -7,7 +7,6 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-
 jib {
 //  https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
     allowInsecureRegistries = true
