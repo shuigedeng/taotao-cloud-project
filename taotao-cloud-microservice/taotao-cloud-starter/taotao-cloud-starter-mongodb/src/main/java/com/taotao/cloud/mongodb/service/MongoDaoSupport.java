@@ -1,10 +1,10 @@
 package com.taotao.cloud.mongodb.service;
 
+import com.taotao.cloud.common.model.PageModel;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.mongodb.annotation.QueryField;
-import com.taotao.cloud.mongodb.util.ReflectionUtil;
-import com.taotao.cloud.mongodb.vo.Page;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,28 +155,27 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 *
 	 * @param page
 	 * @param query
-	 * @return
 	 */
 	@Override
-	public Page<T> findPage(Page<T> page, Query query) {
+	public PageModel<T> findPage(PageModel<T> page, Query query) {
 		//如果没有条件 则所有全部
 		query = query == null ? new Query(Criteria.where("_id").exists(true)) : query;
 		long count = this.count(query);
-		// 总数
-		page.setTotalCount((int) count);
-		int currentPage = page.getCurrentPage();
-		int pageSize = page.getPageSize();
-		query.skip((currentPage - 1) * pageSize).limit(pageSize);
+
+		query.skip((long) (page.currentPage() - 1) * page.pageSize()).limit(page.pageSize());
 		List<T> rows = this.find(query);
-		page.build(rows);
-		return page;
+
+		int divisor = (int) count / page.pageSize();
+		int remainder = (int) count % page.pageSize();
+
+		return new PageModel<>(count, remainder == 0 ? divisor == 0 ? 1 : divisor : divisor + 1,
+			page.currentPage(), page.pageSize(), rows);
 	}
 
 	/**
 	 * 求数据总和
 	 *
 	 * @param query
-	 * @return
 	 */
 	@Override
 	public long count(Query query) {
@@ -187,7 +186,6 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * 根据vo构建查询条件Query
 	 *
 	 * @param t
-	 * @return
 	 */
 	private Query buildBaseQuery(T t) {
 		Query query = new Query();
@@ -204,9 +202,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 							queryField.type().buildCriteria(queryField, field, value));
 					}
 				}
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
+			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
@@ -217,7 +213,6 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * 根据vo构建更新条件Query
 	 *
 	 * @param t
-	 * @return
 	 */
 	private Update buildBaseUpdate(T t) {
 		Update update = new Update();
@@ -239,19 +234,15 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 
 	/**
 	 * 获取需要操作的实体类class
-	 *
-	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	protected Class<T> getEntityClass() {
-		// TODO 这种方式也可以 return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-		return ReflectionUtil.getSuperClassGenricType(getClass());
+		return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 	}
 
 	/**
 	 * 获取MongoDB模板操作
 	 *
-	 * @return
+	 * @return MongoTemplate
 	 */
 	@Override
 	public MongoTemplate getMongoTemplate() {
