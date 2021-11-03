@@ -28,6 +28,7 @@ import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
 import com.taotao.cloud.mail.annotation.EnableTaoTaoCloudMail;
+import com.taotao.cloud.mongodb.annotation.EnableTaoTaoCloudMongodb;
 import com.taotao.cloud.netty.annotation.EnableTaoTaoCloudWebSocket;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;

@@ -67,3 +67,33 @@ case $1 in
     ;;
 esac
 
+
+
+1:Dokcer搜索RocketMq
+        docker search rocketmq
+
+2:查看某一个镜像里面的所有版本（如foxiswho/rocketmq）
+        curl https://registry.hub.docker.com/v1/repositories/foxiswho/rocketmq/tags\
+        | tr -d '[\[\]" ]' | tr '}' '\n'\
+        | awk -F: -v image='foxiswho/rocketmq' '{if(NR!=NF && $3 != ""){printf("%s:%s\n",image,$3)}}'
+
+3:启动NameServer
+        docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server-4.5.1
+
+4:启动Broker
+        docker run -d -p 10911:10911 -p 10909:10909\
+        --name rmqbroker --link rmqserver:namesrv\
+        -e "NAMESRV_ADDR=namesrv:9876" -e "JAVA_OPTS=-Duser.home=/opt"\
+        -e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m"\
+        foxiswho/rocketmq:broker-4.5.1
+
+5:安装Console
+        docker run -d --name rmqconsole -p 8180:8080 --link rmqserver:namesrv\
+        -e "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
+        -Dcom.rocketmq.sendMessageWithVIPChannel=false"\
+        -t styletang/rocketmq-console-ng
+
+6:查看是否安装成功
+         docker ps|grep rocketmq
+
+http://172.16.6.151:8180/

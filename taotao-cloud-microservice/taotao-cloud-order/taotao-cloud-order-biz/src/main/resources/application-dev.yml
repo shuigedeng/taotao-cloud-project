@@ -215,8 +215,8 @@ spring:
       database: yapi
       host: 172.16.6.151
       port: 27017
-      username:
-      password:
+      #username:
+      #password:
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
@@ -238,9 +238,6 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
-  rabbitmq:
-    host:
-    port:
   security:
     oauth2:
       resourceserver:
@@ -401,7 +398,12 @@ spring:
         table:
           metadata:
             enabled:
-
+  rabbitmq:
+    host: 172.16.6.151
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
   cloud:
     loadbalancer:
       enabled: true
@@ -410,10 +412,12 @@ spring:
         sms-output:
           destination: sms-topic
           content-type: application/json
+          binder: rabbit
         sms-input:
           destination: sms-topic
           content-type: text/plain
           group: sms-group
+          binder: rabbit
         email-output:
           destination: email-topic
           content-type: application/json
@@ -421,22 +425,25 @@ spring:
           destination: email-topic
           content-type: text/plain
           group: email-group
+          binder: rabbit
         order-output:
           destination: order-topic
           content-type: application/json
+          binder: rabbit
         order-input:
           destination: order-topic
           content-type: text/plain
           group: order-binder-group
+          binder: rabbit
       rocketmq:
         binder:
-          name-server:
+          name-server: 172.16.6.151:9876
       rabbit:
         binder:
-          admin-addresses:
+          admin-addresses: 172.16.6.151:5672
       kafka:
         binder:
-          brokers:
+          brokers: 172.16.6.151:9092
 
 taotao:
   cloud:

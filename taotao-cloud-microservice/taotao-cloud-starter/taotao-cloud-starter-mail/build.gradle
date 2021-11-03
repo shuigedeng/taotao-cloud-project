@@ -2,4 +2,6 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
     api 'org.springframework.boot:spring-boot-starter-mail'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
