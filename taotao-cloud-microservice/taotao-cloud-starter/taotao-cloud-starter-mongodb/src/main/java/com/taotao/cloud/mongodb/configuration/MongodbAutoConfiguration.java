@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.mongodb.configuration;
 
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.mongodb.converter.DBObjectToJsonNodeConverter;
 import com.taotao.cloud.mongodb.converter.JsonNodeToDocumentConverter;
 import com.taotao.cloud.mongodb.properties.MongodbProperties;
@@ -42,7 +44,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-
+		LogUtil.started(MongodbAutoConfiguration.class, StarterNameConstant.MONGODB_STARTER);
 	}
 
 	@Bean

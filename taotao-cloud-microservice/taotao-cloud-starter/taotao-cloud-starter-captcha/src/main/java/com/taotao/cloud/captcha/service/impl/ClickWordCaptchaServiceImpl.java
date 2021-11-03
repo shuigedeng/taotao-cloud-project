@@ -35,6 +35,7 @@ import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -170,8 +171,8 @@ public class ClickWordCaptchaServiceImpl extends AbstractCaptchaService {
 		String secretKey = point.get(0).getSecretKey();
 		String value;
 		try {
-			value = AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
-				secretKey);
+			value = Base64.getEncoder().encodeToString(AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
+				secretKey));
 		} catch (Exception e) {
 			LogUtil.error("AES加密失败", e);
 			afterValidateFail(captcha);
