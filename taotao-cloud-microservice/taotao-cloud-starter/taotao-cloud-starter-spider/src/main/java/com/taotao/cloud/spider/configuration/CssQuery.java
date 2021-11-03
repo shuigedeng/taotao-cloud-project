@@ -26,7 +26,9 @@ import java.lang.annotation.Target;
 /**
  * xml CssQuery
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

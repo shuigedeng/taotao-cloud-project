@@ -25,7 +25,9 @@ import java.lang.annotation.Target;
 /**
  * 忽略 xss
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

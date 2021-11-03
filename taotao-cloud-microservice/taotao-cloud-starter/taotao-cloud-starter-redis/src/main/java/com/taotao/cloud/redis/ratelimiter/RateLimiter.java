@@ -26,7 +26,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分布式 限流注解，默认速率为 600/ms
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

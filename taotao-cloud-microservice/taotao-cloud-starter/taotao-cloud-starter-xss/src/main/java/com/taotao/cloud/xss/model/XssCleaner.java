@@ -19,7 +19,9 @@ package com.taotao.cloud.xss.model;
 /**
  * xss 清理器
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public interface XssCleaner {
 

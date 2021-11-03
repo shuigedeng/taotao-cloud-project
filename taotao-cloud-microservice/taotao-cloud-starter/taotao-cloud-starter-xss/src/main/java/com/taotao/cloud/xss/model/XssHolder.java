@@ -19,7 +19,9 @@ package com.taotao.cloud.xss.model;
 /**
  * 利用 ThreadLocal 缓存线程间的数据
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 class XssHolder {
 

@@ -31,7 +31,9 @@ import org.springframework.util.StringUtils;
 /**
  * 项目启动事件通知
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Configuration(proxyBeanMethods = false)
 public class StartedEventListener {

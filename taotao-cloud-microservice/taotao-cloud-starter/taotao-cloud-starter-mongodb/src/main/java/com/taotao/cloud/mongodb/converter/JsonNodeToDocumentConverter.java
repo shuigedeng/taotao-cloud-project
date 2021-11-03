@@ -25,7 +25,9 @@ import org.springframework.lang.Nullable;
 /**
  * JsonNode 转 mongo Document
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @WritingConverter
 public enum JsonNodeToDocumentConverter implements Converter<ObjectNode, Document> {

@@ -26,7 +26,9 @@ import org.springframework.context.annotation.Configuration;
 /**
  * laytpl 自动化配置
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Configuration
 @ConditionalOnProperty(prefix = LayTplProperties.PREFIX, name = "enabled", havingValue = "true")

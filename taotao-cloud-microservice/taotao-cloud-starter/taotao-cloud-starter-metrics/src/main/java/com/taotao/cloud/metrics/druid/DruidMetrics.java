@@ -30,7 +30,9 @@ import java.util.Map;
 /**
  * druid Metrics
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class DruidMetrics implements MeterBinder {
 

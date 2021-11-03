@@ -23,7 +23,9 @@ import java.util.Map;
 /**
  * prometheus http sd 模型
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class TargetGroup {
 

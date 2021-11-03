@@ -32,7 +32,9 @@ import org.springframework.cglib.proxy.Enhancer;
 /**
  * 爬虫 xml 转 bean 基于 jsoup
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class DomMapper {
 

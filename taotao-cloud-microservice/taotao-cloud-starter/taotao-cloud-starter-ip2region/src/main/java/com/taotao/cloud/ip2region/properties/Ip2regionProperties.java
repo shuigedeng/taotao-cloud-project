@@ -22,7 +22,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * ip2region 配置类
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @RefreshScope
 @ConfigurationProperties(Ip2regionProperties.PREFIX)
