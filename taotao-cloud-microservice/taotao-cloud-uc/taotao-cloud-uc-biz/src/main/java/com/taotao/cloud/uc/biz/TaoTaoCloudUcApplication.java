@@ -25,7 +25,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 /**
  * TaoTaoCloudUcApplication
  * 抑制java9 module 报错
- * --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-opens java.base/java.lang=ALL-UNNAMED
+ * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+ * --add-opens java.base/java.util=ALL-UNNAMED
+ * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-opens java.base/java.math=ALL-UNNAMED
  *
  * @author shuigedeng
  * @version 1.0.0
