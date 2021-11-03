@@ -1,0 +1,10 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+
+    implementation "io.micrometer:micrometer-core"
+    implementation "com.alibaba:druid:1.2.8"
+    implementation "com.alibaba.csp:sentinel-core:1.7.2"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

@@ -20,6 +20,7 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.CoreThreadPoolFactory;
+import com.taotao.cloud.core.launch.StartedEventListener;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.PropertyCache;
@@ -149,6 +150,11 @@ public class CoreAutoConfiguration implements InitializingBean {
 		CoreProperties coreProperties) {
 		LogUtil.started(CoreCommandLineRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreCommandLineRunner(propertyCache, coreProperties);
+	}
+
+	@Bean
+	public StartedEventListener startedEventListener(){
+		return new StartedEventListener();
 	}
 
 	@Configuration

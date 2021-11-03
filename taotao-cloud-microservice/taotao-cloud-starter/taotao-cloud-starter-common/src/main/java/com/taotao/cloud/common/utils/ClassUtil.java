@@ -26,6 +26,7 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.SynthesizingMethodParameter;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
+import org.springframework.web.method.HandlerMethod;
 
 /**
  * 类操作工具类
@@ -115,6 +116,26 @@ public class ClassUtil extends ClassUtils {
 		MethodParameter methodParameter = new SynthesizingMethodParameter(method, parameterIndex);
 		methodParameter.initParameterNameDiscovery(PARAMETER_NAME_DISCOVERER);
 		return methodParameter;
+	}
+
+	/**
+	 * 获取Annotation
+	 *
+	 * @param handlerMethod  HandlerMethod
+	 * @param annotationType 注解类
+	 * @param <A>            泛型标记
+	 * @return {Annotation}
+	 */
+	@Nullable
+	public static <A extends Annotation> A getAnnotation(HandlerMethod handlerMethod, Class<A> annotationType) {
+		// 先找方法，再找方法上的类
+		A annotation = handlerMethod.getMethodAnnotation(annotationType);
+		if (null != annotation) {
+			return annotation;
+		}
+		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+		Class<?> beanType = handlerMethod.getBeanType();
+		return AnnotatedElementUtils.findMergedAnnotation(beanType, annotationType);
 	}
 
 	///**

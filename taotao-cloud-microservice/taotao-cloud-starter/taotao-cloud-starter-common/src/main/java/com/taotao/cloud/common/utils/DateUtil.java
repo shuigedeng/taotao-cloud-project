@@ -58,6 +58,15 @@ public class DateUtil {
 
 	private DateUtil() {
 	}
+	public static final String PATTERN_DATETIME = DatePattern.NORM_DATETIME_PATTERN;
+	public static final String PATTERN_DATE = DatePattern.NORM_DATE_PATTERN;
+	public static final String PATTERN_TIME = DatePattern.NORM_TIME_PATTERN;
+	/**
+	 * java 8 时间格式化
+	 */
+	public static final DateTimeFormatter DATETIME_FORMATTER = DatePattern.NORM_DATETIME_FORMAT;
+	public static final DateTimeFormatter DATE_FORMATTER = DatePattern.NORM_DATE_FORMAT;
+	public static final DateTimeFormatter TIME_FORMATTER = DatePattern.NORM_TIME_FORMAT;
 
 	/**
 	 * 24小时时间正则表达式
