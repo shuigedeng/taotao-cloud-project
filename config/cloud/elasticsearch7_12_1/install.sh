@@ -3,11 +3,11 @@
 
 cd /opt/soft
 
-wget https://mirrors.huaweicloud.com/elasticsearch/7.8.0/elasticsearch-7.8.0-linux-x86_64.tar.gz
+wget https://mirrors.huaweicloud.com/elasticsearch/7.12.1/elasticsearch-7.12.1-linux-x86_64.tar.gz
 
-tar -zxvf elasticsearch-7.8.0-linux-x86_64.tar.gz -C /opt/cloud
+tar -zxvf elasticsearch-7.12.1-linux-x86_64.tar.gz -C /opt/cloud
 
-cd /opt/cloud/elasticsearch-7.8.0
+cd /opt/cloud/elasticsearch-7.12.1
 
 # 修改配置文件
 vim config/elasticsearch.yml
@@ -16,11 +16,15 @@ node.name: node-1 # 设置节点名
 network.host: 0.0.0.0 # 允许外部 ip 访问
 cluster.initial_master_nodes: ["node-1"] # 设置集群初始主节点
 
+vim config/jvm.options
+-Xms1g
+-Xmx1g
+
 #新建用户并赋权
 adduser elasticsearch
 passwd elasticsearch
 
-chown -R elasticsearch elasticsearch-7.8.0
+chown -R elasticsearch elasticsearch-7.12.1
 
 elasticsearch/jvm.options
 -Xms [SIZE] g -Xmx [SIZE] g
@@ -56,15 +60,15 @@ su root
 #!/bin/bash
 
 function start_elasticsearch() {
-  nohup /opt/cloud/elasticsearch-7.8.0/bin/elasticsearch \
-  -d >/opt/cloud/elasticsearch-7.8.0/start.out 2>&1 &
+  nohup /opt/cloud/elasticsearch-7.12.1/bin/elasticsearch \
+  -d >/opt/cloud/elasticsearch-7.12.1/start.out 2>&1 &
   sleep 10
   echo "elasticsearch started"
 }
 
 function stop_elasticsearch() {
    sleep 5
-   ps -ef | grep elasticsearch-7.8.0|grep -v grep|awk '{print $2}' |xargs kill -9
+   ps -ef | grep elasticsearch-7.12.1|grep -v grep|awk '{print $2}' |xargs kill -9
 
    sleep 10
    echo "elasticsearch stoped"
