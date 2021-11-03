@@ -141,8 +141,8 @@ public class BlockPuzzleCaptchaServiceImpl extends AbstractCaptchaService {
 		String secretKey = point.getSecretKey();
 		String value;
 		try {
-			value = AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
-				secretKey);
+			value = Base64.getEncoder().encodeToString(AESUtil.encrypt(captcha.getToken().concat("---").concat(pointJson),
+				secretKey));
 		} catch (Exception e) {
 			LogUtil.error("AES加密失败", e);
 			afterValidateFail(captcha);

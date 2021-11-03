@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Set;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -20,7 +21,7 @@ import org.springframework.data.mongodb.core.query.Update;
  * @param <T>
  * @date 2020-10-20
  */
-public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
+public class MongoDaoSupport implements BaseMongoDAO {
 
 	@Autowired
 	@Qualifier("mongoTemplate")
@@ -33,7 +34,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @return
 	 */
 	@Override
-	public T save(T bean) {
+	public <T> T save(T bean) {
 		mongoTemplate.save(bean);
 		return bean;
 	}
@@ -44,7 +45,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @param t
 	 */
 	@Override
-	public void deleteById(T t) {
+	public <T> void deleteById(T t) {
 		mongoTemplate.remove(t);
 	}
 
@@ -55,7 +56,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @param t
 	 */
 	@Override
-	public void deleteByCondition(T t) {
+	public <T> void deleteByCondition(T t) {
 		Query query = buildBaseQuery(t);
 		mongoTemplate.remove(query, getEntityClass());
 	}
@@ -67,7 +68,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @param t
 	 */
 	@Override
-	public void updateById(String id, T t) {
+	public <T> void updateById(String id, T t) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("id").is(id));
 		Update update = buildBaseUpdate(t);
@@ -81,7 +82,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @return
 	 */
 	@Override
-	public List<T> findByCondition(T t) {
+	public <T> List<T> findByCondition(T t) {
 		Query query = buildBaseQuery(t);
 		return mongoTemplate.find(query, getEntityClass());
 	}
@@ -93,7 +94,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @return
 	 */
 	@Override
-	public List<T> find(Query query) {
+	public <T> List<T> find(Query query) {
 		return mongoTemplate.find(query, this.getEntityClass());
 	}
 
@@ -104,7 +105,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @return
 	 */
 	@Override
-	public T findOne(Query query) {
+	public <T> T findOne(Query query) {
 		return mongoTemplate.findOne(query, this.getEntityClass());
 	}
 
@@ -126,7 +127,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @return
 	 */
 	@Override
-	public T findById(String id) {
+	public <T> T findById(String id) {
 		return mongoTemplate.findById(id, this.getEntityClass());
 	}
 
@@ -135,7 +136,6 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 *
 	 * @param id
 	 * @param collectionName
-	 * @return
 	 */
 	@Override
 	public T findById(String id, String collectionName) {
@@ -157,7 +157,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 * @param query
 	 */
 	@Override
-	public PageModel<T> findPage(PageModel<T> page, Query query) {
+	public <T> PageModel<T> findPage(PageModel<T> page, Query query) {
 		//如果没有条件 则所有全部
 		query = query == null ? new Query(Criteria.where("_id").exists(true)) : query;
 		long count = this.count(query);
@@ -187,7 +187,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 *
 	 * @param t
 	 */
-	private Query buildBaseQuery(T t) {
+	private <T> Query buildBaseQuery(T t) {
 		Query query = new Query();
 
 		Field[] fields = t.getClass().getDeclaredFields();
@@ -214,7 +214,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	 *
 	 * @param t
 	 */
-	private Update buildBaseUpdate(T t) {
+	private <T> Update buildBaseUpdate(T t) {
 		Update update = new Update();
 
 		Field[] fields = t.getClass().getDeclaredFields();
@@ -235,7 +235,7 @@ public class MongoDaoSupport<T> implements BaseMongoDAO<T> {
 	/**
 	 * 获取需要操作的实体类class
 	 */
-	protected Class<T> getEntityClass() {
+	protected <T> Class<T> getEntityClass() {
 		return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
 	}
 

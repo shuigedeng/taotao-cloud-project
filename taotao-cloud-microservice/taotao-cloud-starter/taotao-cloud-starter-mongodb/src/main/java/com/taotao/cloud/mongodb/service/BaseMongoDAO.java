@@ -7,29 +7,28 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-public interface BaseMongoDAO<T> {
+public interface BaseMongoDAO {
 
 	/**
 	 * 保存一个对象到mongodb
 	 *
 	 * @param entity
-	 * @return
 	 */
-	public T save(T entity);
+	public <T> T save(T entity);
 
 	/**
 	 * 根据id删除对象
 	 *
 	 * @param t
 	 */
-	public void deleteById(T t);
+	public <T> void deleteById(T t);
 
 	/**
 	 * 根据对象的属性删除
 	 *
 	 * @param t
 	 */
-	public void deleteByCondition(T t);
+	public <T> void deleteByCondition(T t);
 
 
 	/**
@@ -38,7 +37,7 @@ public interface BaseMongoDAO<T> {
 	 * @param id
 	 * @param t
 	 */
-	public void updateById(String id, T t);
+	public <T> void updateById(String id, T t);
 
 
 	/**
@@ -47,7 +46,7 @@ public interface BaseMongoDAO<T> {
 	 * @param t
 	 * @return
 	 */
-	public List<T> findByCondition(T t);
+	public <T> List<T> findByCondition(T t);
 
 
 	/**
@@ -55,7 +54,7 @@ public interface BaseMongoDAO<T> {
 	 *
 	 * @param query
 	 */
-	public List<T> find(Query query);
+	public <T> List<T> find(Query query);
 
 	/**
 	 * 通过一定的条件查询一个实体
@@ -63,7 +62,7 @@ public interface BaseMongoDAO<T> {
 	 * @param query
 	 * @return
 	 */
-	public T findOne(Query query);
+	public <T> T findOne(Query query);
 
 	/**
 	 * 通过条件查询更新数据
@@ -80,38 +79,33 @@ public interface BaseMongoDAO<T> {
 	 * @param id
 	 * @return
 	 */
-	public T findById(String id);
+	public <T> T findById(String id);
 
 	/**
 	 * 通过ID获取记录,并且指定了集合名(表的意思)
 	 *
 	 * @param id
 	 * @param collectionName 集合名
-	 * @return
 	 */
-	public T findById(String id, String collectionName);
+	public <T> T findById(String id, String collectionName);
 
 	/**
 	 * 通过条件查询,查询分页结果
 	 *
 	 * @param page
 	 * @param query
-	 * @return
 	 */
-	public PageModel<T> findPage(PageModel<T> page, Query query);
+	public <T> PageModel<T> findPage(PageModel<T> page, Query query);
 
 	/**
 	 * 求数据总和
 	 *
 	 * @param query
-	 * @return
 	 */
 	public long count(Query query);
 
 	/**
 	 * 获取MongoDB模板操作
-	 *
-	 * @return
 	 */
 	public MongoTemplate getMongoTemplate();
 

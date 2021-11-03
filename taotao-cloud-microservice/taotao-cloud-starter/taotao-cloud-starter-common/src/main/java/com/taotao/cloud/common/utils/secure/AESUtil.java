@@ -15,12 +15,21 @@
  */
 package com.taotao.cloud.common.utils.secure;
 
+import cn.hutool.core.lang.Assert;
+import com.taotao.cloud.common.utils.Exceptions;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.Pkcs7Encoder;
+import com.taotao.cloud.common.utils.StringUtil;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Objects;
+import javax.annotation.Nullable;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -64,7 +73,7 @@ public class AESUtil {
 	 * @since 2021-09-02 17:51:25
 	 */
 	public static String encrypt(String text) {
-		return encrypt(text, DEFAULT_KEY);
+		return Base64.getEncoder().encodeToString(encrypt(text, DEFAULT_KEY));
 	}
 
 	/**
@@ -76,26 +85,26 @@ public class AESUtil {
 	 * @author shuigedeng
 	 * @since 2021-09-02 17:51:25
 	 */
-	public static String encrypt(String text, String key) {
-		if (StringUtils.isAnyBlank(text, key) || 16 != key.length()) {
-			return null;
-		}
-		try {
-			byte[] byteContent = text.getBytes(StandardCharsets.UTF_8);
-			byte[] enCodeFormat = key.getBytes();
-			// 注意，为了能与 iOS 统一这里的 key 不可以使用 KeyGenerator、SecureRandom、SecretKey 生成
-			SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, AES);
-			byte[] initParam = IV_STRING.getBytes();
-			IvParameterSpec ivParameterSpec = new IvParameterSpec(initParam);
-			Cipher cipher = Cipher.getInstance(CIPHER);
-			cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
-			byte[] encryptedBytes = cipher.doFinal(byteContent);
-			return Base64.getEncoder().encodeToString(encryptedBytes);
-		} catch (Exception e) {
-			LogUtil.error(e.getMessage(), e);
-		}
-		return null;
-	}
+	//public static String encrypt(String text, String key) {
+	//	if (StringUtils.isAnyBlank(text, key) || 16 != key.length()) {
+	//		return null;
+	//	}
+	//	try {
+	//		byte[] byteContent = text.getBytes(StandardCharsets.UTF_8);
+	//		byte[] enCodeFormat = key.getBytes();
+	//		// 注意，为了能与 iOS 统一这里的 key 不可以使用 KeyGenerator、SecureRandom、SecretKey 生成
+	//		SecretKeySpec secretKeySpec = new SecretKeySpec(enCodeFormat, AES);
+	//		byte[] initParam = IV_STRING.getBytes();
+	//		IvParameterSpec ivParameterSpec = new IvParameterSpec(initParam);
+	//		Cipher cipher = Cipher.getInstance(CIPHER);
+	//		cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
+	//		byte[] encryptedBytes = cipher.doFinal(byteContent);
+	//		return Base64.getEncoder().encodeToString(encryptedBytes);
+	//	} catch (Exception e) {
+	//		LogUtil.error(e.getMessage(), e);
+	//	}
+	//	return null;
+	//}
 
 	/**
 	 * AES 默认秘钥解密
@@ -136,5 +145,110 @@ public class AESUtil {
 			LogUtil.error(e.getMessage(), e);
 		}
 		return null;
+	}
+
+	public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
+
+	public static String genAesKey() {
+		return StringUtil.random(32);
+	}
+
+	public static String encryptToHex(String content, String aesTextKey) {
+		return HexUtil.encodeToString(encrypt(content, aesTextKey));
+	}
+
+	public static String encryptToHex(byte[] content, String aesTextKey) {
+		return HexUtil.encodeToString(encrypt(content, aesTextKey));
+	}
+
+	public static String encryptToBase64(String content, String aesTextKey) {
+		return Base64Util.encodeToString(encrypt(content, aesTextKey));
+	}
+
+	public static String encryptToBase64(byte[] content, String aesTextKey) {
+		return Base64Util.encodeToString(encrypt(content, aesTextKey));
+	}
+
+	public static byte[] encrypt(String content, String aesTextKey) {
+		return encrypt(content.getBytes(DEFAULT_CHARSET), aesTextKey);
+	}
+
+	public static byte[] encrypt(String content, Charset charset, String aesTextKey) {
+		return encrypt(content.getBytes(charset), aesTextKey);
+	}
+
+	public static byte[] encrypt(byte[] content, String aesTextKey) {
+		return encrypt(content, Objects.requireNonNull(aesTextKey).getBytes(DEFAULT_CHARSET));
+	}
+
+	@Nullable
+	public static String decryptFormHexToString(@Nullable String content, String aesTextKey) {
+		byte[] hexBytes = decryptFormHex(content, aesTextKey);
+		if (hexBytes == null) {
+			return null;
+		}
+		return new String(hexBytes, DEFAULT_CHARSET);
+	}
+
+	@Nullable
+	public static byte[] decryptFormHex(@Nullable String content, String aesTextKey) {
+		if (StringUtil.isBlank(content)) {
+			return null;
+		}
+		return decryptFormHex(content.getBytes(DEFAULT_CHARSET), aesTextKey);
+	}
+
+	public static byte[] decryptFormHex(byte[] content, String aesTextKey) {
+		return decrypt(HexUtil.decode(content), aesTextKey);
+	}
+
+	@Nullable
+	public static String decryptFormBase64ToString(@Nullable String content, String aesTextKey) {
+		byte[] hexBytes = decryptFormBase64(content, aesTextKey);
+		if (hexBytes == null) {
+			return null;
+		}
+		return new String(hexBytes, DEFAULT_CHARSET);
+	}
+
+	@Nullable
+	public static byte[] decryptFormBase64(@Nullable String content, String aesTextKey) {
+		if (StringUtil.isBlank(content)) {
+			return null;
+		}
+		return decryptFormBase64(content.getBytes(DEFAULT_CHARSET), aesTextKey);
+	}
+
+	public static byte[] decryptFormBase64(byte[] content, String aesTextKey) {
+		return decrypt(Base64Util.decode(content), aesTextKey);
+	}
+
+	public static String decryptToString(byte[] content, String aesTextKey) {
+		return new String(decrypt(content, aesTextKey), DEFAULT_CHARSET);
+	}
+
+	public static byte[] decrypt(byte[] content, String aesTextKey) {
+		return decrypt(content, Objects.requireNonNull(aesTextKey).getBytes(DEFAULT_CHARSET));
+	}
+
+	public static byte[] encrypt(byte[] content, byte[] aesKey) {
+		return aes(Pkcs7Encoder.encode(content), aesKey, Cipher.ENCRYPT_MODE);
+	}
+
+	public static byte[] decrypt(byte[] encrypted, byte[] aesKey) {
+		return Pkcs7Encoder.decode(aes(encrypted, aesKey, Cipher.DECRYPT_MODE));
+	}
+
+	private static byte[] aes(byte[] encrypted, byte[] aesKey, int mode) {
+		Assert.isTrue(aesKey.length == 32, "IllegalAesKey, aesKey's length must be 32");
+		try {
+			Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+			SecretKeySpec keySpec = new SecretKeySpec(aesKey, "AES");
+			IvParameterSpec iv = new IvParameterSpec(Arrays.copyOfRange(aesKey, 0, 16));
+			cipher.init(mode, keySpec, iv);
+			return cipher.doFinal(encrypted);
+		} catch (Exception e) {
+			throw Exceptions.unchecked(e);
+		}
 	}
 }
