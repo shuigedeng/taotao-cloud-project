@@ -413,7 +413,6 @@ spring:
     password: guest
     virtual-host: /
   cloud:
-    .
     loadbalancer:
       enabled: true
     stream:
