@@ -29,7 +29,9 @@ import org.springframework.core.io.ResourceLoader;
 /**
  * ip2region 自动化配置
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(Ip2regionProperties.class)

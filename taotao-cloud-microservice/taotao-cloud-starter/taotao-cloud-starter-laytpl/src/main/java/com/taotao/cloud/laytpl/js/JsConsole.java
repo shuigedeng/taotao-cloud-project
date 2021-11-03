@@ -23,7 +23,9 @@ import org.slf4j.LoggerFactory;
 /**
  * 映射 js 中的 console
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class JsConsole {
 

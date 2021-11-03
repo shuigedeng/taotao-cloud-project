@@ -26,7 +26,9 @@ import org.springframework.web.servlet.AsyncHandlerInterceptor;
 /**
  * xss 处理拦截器
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class XssCleanInterceptor implements AsyncHandlerInterceptor {
 

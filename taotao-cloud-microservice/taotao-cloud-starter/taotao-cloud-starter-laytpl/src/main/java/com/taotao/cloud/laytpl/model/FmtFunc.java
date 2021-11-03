@@ -32,7 +32,9 @@ import java.util.Date;
  * <p>
  * 提供给 tpl 和 Thymeleaf 使用
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class FmtFunc {
 

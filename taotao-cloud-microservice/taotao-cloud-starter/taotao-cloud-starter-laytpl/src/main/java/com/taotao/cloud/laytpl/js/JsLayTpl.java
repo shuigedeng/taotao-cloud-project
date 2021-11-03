@@ -25,7 +25,9 @@ package com.taotao.cloud.laytpl.js;
  * 震惊，java8 Nashorn和laytpl居然能擦出这样火花！：https://my.oschina.net/qq596392912/blog/872813
  * </p>
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 public class JsLayTpl {
 

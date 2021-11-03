@@ -36,7 +36,9 @@ import org.springframework.util.Assert;
 /**
  * redis 限流
  *
- * @author L.cm
+ * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
  */
 @Aspect
 public class RedisRateLimiterAspect implements ApplicationContextAware {

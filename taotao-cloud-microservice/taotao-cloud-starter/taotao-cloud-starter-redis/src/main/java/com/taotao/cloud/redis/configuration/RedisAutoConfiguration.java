@@ -266,7 +266,9 @@ public class RedisAutoConfiguration implements InitializingBean {
 	/**
 	 * caffeine 缓存自动配置超时时间
 	 *
-	 * @author L.cm
+	 * @author shuigedeng
+ * @version 2021.9
+ * @since 2021-09-02 20:01:42
 	 */
 	public static class CaffeineAutoCacheManager extends CaffeineCacheManager {
 		private static final Field CACHE_LOADER_FIELD;
