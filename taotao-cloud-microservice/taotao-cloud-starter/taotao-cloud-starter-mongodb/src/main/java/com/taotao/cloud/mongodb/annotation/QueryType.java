@@ -1,18 +1,12 @@
 package com.taotao.cloud.mongodb.annotation;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-
 import java.lang.reflect.Field;
-
+import java.util.List;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
-
 /**
- * 查询媒介
- * 1. equals：相等
- * 2. like:mongodb的like查询
- * 3. in:用于列表的in类型查询
+ * 查询媒介 1. equals：相等 2. like:mongodb的like查询 3. in:用于列表的in类型查询
  *
  * @author LaoWang
  * @date 2020-10-20
@@ -65,7 +59,8 @@ public enum QueryType {
 		return !(queryField == null || field == null || value == null);
 	}
 
-	public abstract Criteria buildCriteria(QueryField queryFieldAnnotation, Field field, Object value);
+	public abstract Criteria buildCriteria(QueryField queryFieldAnnotation, Field field,
+		Object value);
 
 
 	/**

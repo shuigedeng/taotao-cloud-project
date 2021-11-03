@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.mongodb.configuration;
 
+import com.taotao.cloud.mongodb.converter.DBObjectToJsonNodeConverter;
+import com.taotao.cloud.mongodb.converter.JsonNodeToDocumentConverter;
 import com.taotao.cloud.mongodb.properties.MongodbProperties;
 import com.taotao.cloud.mongodb.service.BaseMongoDAO;
 import com.taotao.cloud.mongodb.service.MongoDaoSupport;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,9 +27,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.ReadingConverter;
-import org.springframework.data.convert.WritingConverter;
-import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
 /**
@@ -48,34 +45,13 @@ public class MongodbAutoConfiguration implements InitializingBean {
 
 	}
 
-	@WritingConverter
-	public static class DateToString implements Converter<LocalDateTime, String> {
-
-		@Override
-		public String convert(LocalDateTime source) {
-			return source.toString() + 'Z';
-		}
-	}
-
-	// Direction: MongoDB -> Java
-	@ReadingConverter
-	public static class StringToDate implements Converter<String, LocalDateTime> {
-
-		@Override
-		public LocalDateTime convert(String source) {
-			return LocalDateTime.parse(source,
-				DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-		}
-	}
-
 	@Bean
 	public MongoCustomConversions customConversions() {
-		List<Converter<?, ?>> converterList = new ArrayList<>();
-		converterList.add(new DateToString());
-		converterList.add(new StringToDate());
-		return new CustomConversions(converterList);
+		List<Converter<?, ?>> converters = new ArrayList<>(2);
+		converters.add(DBObjectToJsonNodeConverter.INSTANCE);
+		converters.add(JsonNodeToDocumentConverter.INSTANCE);
+		return new MongoCustomConversions(converters);
 	}
-
 
 	@Bean
 	public BaseMongoDAO baseMongoDAO() {

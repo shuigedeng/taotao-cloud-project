@@ -1,20 +1,12 @@
 package com.taotao.cloud.mongodb.service;
 
-import com.taotao.cloud.mongodb.vo.Page;
+import com.taotao.cloud.common.model.PageModel;
+import java.util.List;
 import java.util.Set;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import java.util.List;
-
-/**
- * MongoDB通用Dao
- *
- * @param <T>
- * @author LaoWang
- * @date 2020-10-20
- */
 public interface BaseMongoDAO<T> {
 
 	/**
@@ -106,7 +98,7 @@ public interface BaseMongoDAO<T> {
 	 * @param query
 	 * @return
 	 */
-	public Page<T> findPage(Page<T> page, Query query);
+	public PageModel<T> findPage(PageModel<T> page, Query query);
 
 	/**
 	 * 求数据总和
@@ -115,7 +107,6 @@ public interface BaseMongoDAO<T> {
 	 * @return
 	 */
 	public long count(Query query);
-
 
 	/**
 	 * 获取MongoDB模板操作
