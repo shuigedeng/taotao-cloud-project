@@ -54,6 +54,8 @@ function start_cloud() {
   # tcp/http -> 8089 http://172.16.6.151:8089
   /root/script/canal.sh start
 
+  pm2 start /opt/cloud/yapi/vendors/server/app.js -n yapi --max-memory-restart 500M
+
   docker start rabbitmq
 
   docker start rmqserver
@@ -74,6 +76,8 @@ function stop_cloud() {
   docker stop rmqserver
   docker stop rmqbroker
   docker stop rmqconsole
+
+  pm2 stop yapi
 
   #root/script/logstash.sh stop
 
