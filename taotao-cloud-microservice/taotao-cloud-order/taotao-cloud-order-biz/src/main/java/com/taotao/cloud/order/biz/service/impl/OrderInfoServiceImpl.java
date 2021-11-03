@@ -69,29 +69,21 @@ public class OrderInfoServiceImpl
 
 	@Override
 	public List<OrderBO> queryRegionByParentId(Long parentId) {
-
-		OrderInfo orderInfoById1 = cr().findOrderInfoById(2L);
-
-		orderItemService.getById(2L);
-
 		try {
+			OrderInfo orderInfoById1 = cr().findOrderInfoById(2L);
+
+			orderItemService.getById(2L);
+
 			PageModel<HashMap<String, String>> list = indexService.list("", "");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		Set<String> collectionNames = baseMongoDAO.getCollectionNames();
+			Set<String> collectionNames = baseMongoDAO.getCollectionNames();
 
-		try {
 			List<String> children = zookeeperTemplate.getChildren("/");
+
+			List<ResourceQueryBO> allById = dubboResourceService.queryAllId(1L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		List<ResourceQueryBO> allById = dubboResourceService.queryAllId(1L);
-
-
-		LogUtil.info(allById.toString());
 
 		return new ArrayList<>();
 	}

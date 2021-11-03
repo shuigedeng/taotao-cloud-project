@@ -53,6 +53,13 @@ function start_cloud() {
 
   # tcp/http -> 8089 http://172.16.6.151:8089
   /root/script/canal.sh start
+
+  docker start rabbitmq
+
+  docker start rmqserver
+  sleep 10
+  docker start rmqbroker
+  docker start rmqconsole
   
   # tcp/http -> 9601 input port
   #/root/script/logstash.sh start
@@ -62,6 +69,12 @@ function start_cloud() {
 }
 
 function stop_cloud() {
+  docker stop rabbitmq
+
+  docker stop rmqserver
+  docker stop rmqbroker
+  docker stop rmqconsole
+
   #root/script/logstash.sh stop
 
   #/root/script/node_exporter.sh stop
