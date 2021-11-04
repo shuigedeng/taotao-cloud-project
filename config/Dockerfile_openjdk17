@@ -1,6 +1,5 @@
 # docker tag isahl/openjdk17:amd64 registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 
-#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1 .
 
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 
@@ -12,4 +11,5 @@ COPY ./skywalking-agent /skywalking/agent
 
 
 
+#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1 .
 
