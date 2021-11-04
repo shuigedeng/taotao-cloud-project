@@ -120,10 +120,10 @@ spec:
                   key: ADMIN_PASSWORD
           resources:
             requests:
-              cpu: 1
+              cpu: '1'
               memory: 512Mi
             limits:
-              cpu: 2
+              cpu: '2'
               memory: 2048Mi
           livenessProbe:
             httpGet:
