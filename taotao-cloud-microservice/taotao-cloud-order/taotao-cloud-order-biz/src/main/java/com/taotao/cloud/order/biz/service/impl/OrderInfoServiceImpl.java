@@ -10,10 +10,14 @@ import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.order.biz.entity.OrderItem;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.biz.kafka.OrderProvider;
 import com.taotao.cloud.order.biz.mapper.IOrderInfoMapper;
 import com.taotao.cloud.order.biz.mapstruct.IOrderMapStruct;
+import com.taotao.cloud.order.biz.rabbitmq.SmsProvider;
 import com.taotao.cloud.order.biz.repository.cls.OrderInfoRepository;
 import com.taotao.cloud.order.biz.repository.inf.IOrderInfoRepository;
+import com.taotao.cloud.order.biz.rocketmq.EmailConsumer;
+import com.taotao.cloud.order.biz.rocketmq.EmailProvider;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.biz.service.IOrderItemService;
 import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
@@ -60,6 +64,13 @@ public class OrderInfoServiceImpl
 	@DubboReference
 	private IDubboResourceService dubboResourceService;
 
+	@Autowired
+	private OrderProvider orderProvider;
+	@Autowired
+	private SmsProvider smsProvider;
+	@Autowired
+	private EmailProvider emailProvider;
+
 	@Override
 	public Boolean existByCode(String code) {
 		BooleanExpression predicate = ORDER_INFO.code.eq(code);
@@ -70,17 +81,20 @@ public class OrderInfoServiceImpl
 	@Override
 	public List<OrderBO> queryRegionByParentId(Long parentId) {
 		try {
-			OrderInfo orderInfoById1 = cr().findOrderInfoById(2L);
+			//OrderInfo orderInfoById1 = cr().findOrderInfoById(2L);
+			smsProvider.send("我是sms");
+			emailProvider.send("我是email");
+			orderProvider.send("我是order");
 
-			orderItemService.getById(2L);
-
-			PageModel<HashMap<String, String>> list = indexService.list("", "");
-
-			Set<String> collectionNames = baseMongoDAO.getCollectionNames();
-
-			List<String> children = zookeeperTemplate.getChildren("/");
-
-			List<ResourceQueryBO> allById = dubboResourceService.queryAllId(1L);
+			//orderItemService.getById(2L);
+			//
+			//PageModel<HashMap<String, String>> list = indexService.list("", "");
+			//
+			//Set<String> collectionNames = baseMongoDAO.getCollectionNames();
+			//
+			//List<String> children = zookeeperTemplate.getChildren("/");
+			//
+			//List<ResourceQueryBO> allById = dubboResourceService.queryAllId(1L);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

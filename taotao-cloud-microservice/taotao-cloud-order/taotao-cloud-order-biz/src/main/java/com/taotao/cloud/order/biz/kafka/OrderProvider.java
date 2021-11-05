@@ -14,11 +14,11 @@ public class OrderProvider {
 	@Resource
 	private TaoTaoCloudSource source;
 
-	public String send() {
-		source.orderOutput().send(MessageBuilder.withPayload(UUID.randomUUID().toString())
-			.setHeader("routingKey", "login.user.succeed")
-			.setHeader("version", "1.0")
-			.setHeader("x-delay", 5000)
+	public String send(String content) {
+		source.orderOutput().send(MessageBuilder.withPayload(content)
+			//.setHeader("routingKey", "login.user.succeed")
+			//.setHeader("version", "1.0")
+			//.setHeader("x-delay", 5000)
 			.build());
 		return "success";
 	}

@@ -2,7 +2,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
 
     // https://mvnrepository.com/artifact/org.springframework.experimental/spring-native
-    implementation group: 'org.springframework.experimental', name: 'spring-native', version: '0.10.5'
+    //implementation group: 'org.springframework.experimental', name: 'spring-native', version: '0.10.5'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

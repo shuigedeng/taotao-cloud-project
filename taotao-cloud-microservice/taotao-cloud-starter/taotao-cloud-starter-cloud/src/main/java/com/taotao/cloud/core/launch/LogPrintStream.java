@@ -18,6 +18,7 @@ package com.taotao.cloud.core.launch;
 
 
 import com.taotao.cloud.common.utils.Exceptions;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
@@ -47,9 +48,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public void print(String s) {
 		if (error) {
-			log.error(s);
+			LogUtil.error(s);
 		} else {
-			log.info(s);
+			LogUtil.info(s);
 		}
 	}
 
@@ -63,18 +64,18 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public void println(String x) {
 		if (error) {
-			log.error(x);
+			LogUtil.error(x);
 		} else {
-			log.info(x);
+			LogUtil.info(x);
 		}
 	}
 
 	@Override
 	public PrintStream printf(String format, Object... args) {
 		if (error) {
-			log.error(String.format(format, args));
+			LogUtil.error(String.format(format, args));
 		} else {
-			log.info(String.format(format, args));
+			LogUtil.info(String.format(format, args));
 		}
 		return this;
 	}
@@ -82,9 +83,9 @@ public class LogPrintStream extends PrintStream {
 	@Override
 	public PrintStream printf(Locale l, String format, Object... args) {
 		if (error) {
-			log.error(String.format(l, format, args));
+			LogUtil.error(String.format(l, format, args));
 		} else {
-			log.info(String.format(l, format, args));
+			LogUtil.info(String.format(l, format, args));
 		}
 		return this;
 	}

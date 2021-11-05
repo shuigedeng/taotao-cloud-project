@@ -1,5 +1,4 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
 
-
 }
