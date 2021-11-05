@@ -13,12 +13,13 @@ import org.springframework.util.MimeTypeUtils;
 public class EmailProvider {
 
     @Autowired
-    private TaoTaoCloudSource msgSource;
+    private TaoTaoCloudSource source;
 
     //普通发送
-    public void sendNormal(String content) {
+    public void send(String content) {
         Message<String> msg = MessageBuilder.withPayload(content).build();
-        msgSource.smsOutput().send(msg);
+	    source.emailOutput().send(MessageBuilder.withPayload(content)
+		    .build());
     }
 
     ////顺序发送

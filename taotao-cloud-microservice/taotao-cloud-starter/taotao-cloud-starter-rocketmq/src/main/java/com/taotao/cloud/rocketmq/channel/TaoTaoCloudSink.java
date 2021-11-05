@@ -63,4 +63,6 @@ public interface TaoTaoCloudSink {
 	 */
 	@Input(ORDER_MESSAGE_INPUT)
 	SubscribableChannel orderInput();
+
+
 }

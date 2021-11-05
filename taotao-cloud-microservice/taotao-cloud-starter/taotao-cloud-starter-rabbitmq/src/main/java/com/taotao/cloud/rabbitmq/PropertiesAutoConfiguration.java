@@ -16,7 +16,9 @@
 package com.taotao.cloud.rabbitmq;
 
 import com.taotao.cloud.rabbitmq.properties.RabbitMQProperties;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 /**
  * PropertiesAutoConfiguration
