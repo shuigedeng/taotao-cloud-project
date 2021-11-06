@@ -429,6 +429,9 @@ spring:
           destination: email-topic
           group: email-group
           binder: rocketmq
+          consumer:
+            #并发消费线程数
+            concurrency: 20
         order-output:
           destination: order-topic
           #content-type: application/json
@@ -661,6 +664,13 @@ logging:
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
     org.springframework.cloud.openfeign: off
+
+    org:
+      springframework:
+        cloud:
+          stream:
+            binder:
+              rocketmq: DEBUG
 
 springdoc:
   packages-to-exclude:

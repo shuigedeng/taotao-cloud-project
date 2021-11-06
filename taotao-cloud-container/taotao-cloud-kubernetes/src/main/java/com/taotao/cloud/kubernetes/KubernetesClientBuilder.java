@@ -144,7 +144,7 @@ public class KubernetesClientBuilder {
 		//查看Pod
 		MixedOperation<Pod, PodList, PodResource<Pod>> operation = createKubernetesClient().pods();
 		//创建Pod，获取资源处理类，在传入组装号的Pod类
-		NonNamespaceOperation pods = createKubernetesClient().pods().inNamespace("default");
+		NonNamespaceOperation<Pod, PodList, PodResource<Pod>> pods = createKubernetesClient().pods().inNamespace("default");
 		//配置Pod，还可以通过 pod 类组装，想要运行 这里的参数是不够的，仅作演示
 		Pod pod1 = new PodBuilder().withNewMetadata().withName("pod1").withNamespace("default")
 			.and().build();

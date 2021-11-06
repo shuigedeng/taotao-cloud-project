@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.demo.rocketmq.transactional.service.impl;
+package com.taotao.cloud.order.biz.rocketmq;
 
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.Message;
