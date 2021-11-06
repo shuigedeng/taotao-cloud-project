@@ -47,7 +47,7 @@ for (project in twoLayerProjects) {
     }
 }
 
-def threeLayerProjects = ['microservice', 'demo', 'realtime']
+def threeLayerProjects = ['microservice', 'realtime']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->

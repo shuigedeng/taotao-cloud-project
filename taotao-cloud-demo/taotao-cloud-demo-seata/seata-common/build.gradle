@@ -1,6 +1,0 @@
-dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
-    implementation 'mysql:mysql-connector-java'
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-seata'
-}

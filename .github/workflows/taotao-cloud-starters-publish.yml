@@ -4,8 +4,8 @@
 name: TaoTao Cloud Starters Publish
 
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   release:
     types: [created]
 
