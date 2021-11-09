@@ -1,9 +1,6 @@
 package com.taotao.cloud.order.biz.service.impl;
 
-import cn.hutool.core.date.DateUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elasticsearch.service.IIndexService;
 import com.taotao.cloud.mongodb.service.BaseMongoDAO;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
@@ -11,25 +8,22 @@ import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.biz.entity.OrderInfo;
 import com.taotao.cloud.order.biz.entity.OrderItem;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.biz.function.StreamFunctionService;
 import com.taotao.cloud.order.biz.kafka.OrderProvider;
 import com.taotao.cloud.order.biz.mapper.IOrderInfoMapper;
 import com.taotao.cloud.order.biz.mapstruct.IOrderMapStruct;
+import com.taotao.cloud.order.biz.pulsar.ProductProducer;
 import com.taotao.cloud.order.biz.rabbitmq.SmsProvider;
 import com.taotao.cloud.order.biz.repository.cls.OrderInfoRepository;
 import com.taotao.cloud.order.biz.repository.inf.IOrderInfoRepository;
-import com.taotao.cloud.order.biz.rocketmq.EmailConsumer;
 import com.taotao.cloud.order.biz.rocketmq.EmailProvider;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.biz.service.IOrderItemService;
-import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.dubbo.IDubboResourceService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +66,11 @@ public class OrderInfoServiceImpl
 	@Autowired
 	private EmailProvider emailProvider;
 
+	@Autowired
+	private ProductProducer productProducer;
+	@Autowired
+	private StreamFunctionService streamFunctionService;
+
 	@Override
 	public Boolean existByCode(String code) {
 		BooleanExpression predicate = ORDER_INFO.code.eq(code);
@@ -83,9 +82,17 @@ public class OrderInfoServiceImpl
 	public List<OrderBO> queryRegionByParentId(Long parentId) {
 		try {
 			//OrderInfo orderInfoById1 = cr().findOrderInfoById(2L);
+
+			streamFunctionService.sendRabbit("streamFunctionService send");
+
+			//streamFunctionService.sendKafka("kafkaFunctionService sned");
+
+			productProducer.send();
+
 			smsProvider.send("我是sms");
-			emailProvider.send("我是email");
-			orderProvider.send("我是order");
+
+			//emailProvider.send("我是email");
+			//orderProvider.send("我是order");
 
 			//orderItemService.getById(2L);
 			//
