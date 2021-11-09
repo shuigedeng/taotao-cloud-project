@@ -5,6 +5,8 @@ dependencies {
     implementation "com.github.nobugboy:ydoc-spring-boot-starter:1.0.8"
     implementation "org.springframework.amqp:spring-amqp:2.3.10"
 
+    implementation 'io.github.majusko:pulsar-java-spring-boot-starter:1.0.7'
+
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"

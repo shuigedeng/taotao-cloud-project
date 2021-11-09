@@ -412,6 +412,9 @@ spring:
   cloud:
     loadbalancer:
       enabled: true
+    function:
+      # functionName对应服务中的Bean
+      definition: inputKafka1;inputKafka2;inputRabbit1;inputRabbit2
     stream:
       bindings:
         sms-output:
@@ -440,6 +443,31 @@ spring:
           destination: order-topic
           group: order-group
           binder: kafka
+
+        # function kafka binding
+        outputKafka-out-0:
+          binder: kafka
+          destination: destination-test-kafka
+        inputKafka1-in-0:
+          binder: kafka
+          destination: destination-test-kafka
+          group: group1
+        inputKafka2-in-0:
+          binder: kafka
+          destination: destination-test-kafka
+          group: group2
+        # function rabbit binding
+        outputRabbit-out-0:
+          binder: rabbit
+          destination: destination-test-rabbit
+        inputRabbit1-in-0:
+          binder: rabbit
+          destination: destination-test-rabbit
+          group: group1
+        inputRabbit2-in-0:
+          binder: rabbit
+          destination: destination-test-rabbit
+          group: group2
       rocketmq:
         binder:
           name-server: 172.16.6.151:9876
@@ -664,7 +692,6 @@ logging:
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
     org.springframework.cloud.openfeign: off
-
     org:
       springframework:
         cloud:
@@ -681,3 +708,19 @@ ydoc:
   token: 43a5452cbdaf55d66566119d5e5a263eb938aed0c6ddfc813a606d9f1688e289
   enable: true
   host: http://172.16.6.151:9009
+
+pulsar:
+  service-url: pulsar://172.16.6.151:6650
+  io-threads: 10
+  listener-threads: 10
+  enable-tcp-no-delay: false
+  keep-alive-interval-sec: 20
+  connection-timeout-sec: 10
+  operation-timeout-sec: 15
+  starting-backoff-interval-ms: 100
+  max-backoff-interval-sec: 10
+  consumer-name-delimiter:
+  namespace: default
+  tenant: public
+  consumer.default.dead-letter-policy-max-redeliver-count: -1
+  consumer.default.ack-timeout-ms: 3000
