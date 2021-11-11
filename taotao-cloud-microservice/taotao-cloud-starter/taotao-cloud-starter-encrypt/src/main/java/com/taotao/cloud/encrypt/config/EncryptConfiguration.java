@@ -21,7 +21,6 @@ import org.springframework.core.env.Environment;
 /**
  * 加密配置
  *
- * @author gaoyang
  */
 @Configuration
 @EnableAutoConfiguration

@@ -24,8 +24,6 @@ import java.util.Map;
 /**
  * FeedCard类型
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingFeedCard extends DingTalkMessage {
 

@@ -21,7 +21,6 @@ import com.taotao.cloud.dingtalk.enums.DingerResponseCodeEnum;
 /**
  * Dinger响应体
  *
- * @author Jaemon
  * @since 1.0
  */
 public class DingerResponse {

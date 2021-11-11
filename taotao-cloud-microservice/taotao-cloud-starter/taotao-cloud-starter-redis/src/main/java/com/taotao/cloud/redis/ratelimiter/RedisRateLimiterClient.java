@@ -27,7 +27,7 @@ import org.springframework.data.redis.core.script.RedisScript;
 /**
  * redis 限流服务
  *
- * @author dream.lu
+
  */
 public class RedisRateLimiterClient implements RateLimiterClient {
 

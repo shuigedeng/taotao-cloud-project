@@ -3,7 +3,6 @@ package com.taotao.cloud.ip2region.utils;
 /**
  * util class
  *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class Ip2regionUtil {
 

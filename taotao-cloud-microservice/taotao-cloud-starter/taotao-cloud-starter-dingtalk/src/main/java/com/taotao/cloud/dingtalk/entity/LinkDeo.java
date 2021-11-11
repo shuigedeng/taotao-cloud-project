@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * Dinger图文类型实体对象
  *
- * @author Jaemon
- * @since 1.0
  */
 public class LinkDeo {
 

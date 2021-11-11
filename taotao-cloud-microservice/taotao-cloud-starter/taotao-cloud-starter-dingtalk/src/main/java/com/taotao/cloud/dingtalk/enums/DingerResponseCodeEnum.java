@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * Dinger响应码
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public enum DingerResponseCodeEnum {

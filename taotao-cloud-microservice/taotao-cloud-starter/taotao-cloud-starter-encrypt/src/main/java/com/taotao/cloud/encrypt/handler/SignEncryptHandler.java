@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * 签名加密处理类
  *
- * @author gaoyang
- * @author shuigedeng
  */
 public interface SignEncryptHandler {
 

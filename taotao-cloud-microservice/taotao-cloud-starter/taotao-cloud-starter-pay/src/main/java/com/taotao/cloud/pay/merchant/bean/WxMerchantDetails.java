@@ -14,11 +14,6 @@ import com.taotao.cloud.pay.provider.merchant.platform.WxPaymentPlatform;
 /**
  * 支付宝商户信息列表
  *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date   2019/4/6 20:10.
- *                 </pre>
  */
 public class WxMerchantDetails extends WxPayConfigStorage implements PaymentPlatformMerchantDetails,
 	PaymentPlatformServiceAdapter, PayConfigurerAdapter<InMemoryMerchantDetailsServiceBuilder> {

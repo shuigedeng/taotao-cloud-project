@@ -10,7 +10,6 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 /**
  * web配置
  *
- * @author gaoyang
  */
 @Configuration
 public class WebConfiguration {

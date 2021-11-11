@@ -41,8 +41,6 @@ import javax.crypto.Cipher;
 /**
  * Config Tools
  *
- * @author Jaemon
- * @since 1.0
  */
 public class ConfigTools {
 

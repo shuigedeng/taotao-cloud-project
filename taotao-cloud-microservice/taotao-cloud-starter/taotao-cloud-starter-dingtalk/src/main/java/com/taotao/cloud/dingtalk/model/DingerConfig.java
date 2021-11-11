@@ -23,8 +23,6 @@ import com.taotao.cloud.dingtalk.utils.DingerUtils;
 /**
  * DingerConfig
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingerConfig {
 

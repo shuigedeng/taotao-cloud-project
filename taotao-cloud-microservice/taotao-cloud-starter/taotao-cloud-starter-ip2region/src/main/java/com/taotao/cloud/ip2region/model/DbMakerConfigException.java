@@ -2,8 +2,6 @@ package com.taotao.cloud.ip2region.model;
 
 /**
  * configuration exception
- *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class DbMakerConfigException extends Exception {
 

@@ -24,8 +24,6 @@ import java.lang.annotation.Target;
 /**
  * AsyncExecute(xml and annotation)
  *
- * @author Jaemon
- * @since 1.0
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

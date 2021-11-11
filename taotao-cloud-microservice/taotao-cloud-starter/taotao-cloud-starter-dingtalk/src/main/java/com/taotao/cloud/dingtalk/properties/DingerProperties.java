@@ -31,8 +31,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * 属性配置类
  *
- * @author Jaemon
- * @since 1.0
  */
 @RefreshScope
 @ConfigurationProperties(prefix = DingerProperties.PREFIX)

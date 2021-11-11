@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.client.web.reactive.function.client.S
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * @author Joe Grandja
+
  * @since 0.0.1
  */
 @Configuration

@@ -175,9 +175,6 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * @author lengleng
-	 * @date 2019-04-01
-	 * <p>
 	 * 数据源相关常量
 	 */
 	public interface DataSourceConstants {
@@ -214,9 +211,6 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	}
 
 	/**
-	 * @author lengleng
-	 * @date 2019-05-14
-	 * <p>
 	 */
 	@ConfigurationProperties("spring.datasource")
 	public static class DataSourceProperties {

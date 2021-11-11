@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * 签名返回体基础类
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public abstract class SignBase {

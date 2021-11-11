@@ -11,8 +11,6 @@ import java.util.List;
  * 角色菜单表 Mapper 接口
  * </p>
  *
- * @author lihaodong
- * @since 2019-04-21
  */
 public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 

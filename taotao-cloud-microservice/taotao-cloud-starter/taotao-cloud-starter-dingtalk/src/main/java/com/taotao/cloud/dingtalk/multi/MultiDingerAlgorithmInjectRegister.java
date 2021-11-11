@@ -56,7 +56,7 @@ import org.springframework.context.ApplicationContextAware;
  *     <span style="color:green"> }</span>
  * </pre>
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class MultiDingerAlgorithmInjectRegister implements ApplicationContextAware,

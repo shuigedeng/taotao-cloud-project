@@ -19,12 +19,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 微信支付平台
- *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date  2019/4/4 14:35.
- *                 </pre>
  */
 @Configuration(WxPaymentPlatform.platformName)
 @ConditionalOnMissingBean(WxPaymentPlatform.class)

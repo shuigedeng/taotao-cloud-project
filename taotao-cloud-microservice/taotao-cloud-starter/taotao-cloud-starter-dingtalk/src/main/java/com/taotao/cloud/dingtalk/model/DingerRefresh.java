@@ -17,9 +17,6 @@ package com.taotao.cloud.dingtalk.model;
 
 /**
  * DingerRefresh
- *
- * @author Jaemon
- * @since 1.0
  */
 public class DingerRefresh {
 

@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * PhoneTag
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @XmlRootElement(name = "phone")

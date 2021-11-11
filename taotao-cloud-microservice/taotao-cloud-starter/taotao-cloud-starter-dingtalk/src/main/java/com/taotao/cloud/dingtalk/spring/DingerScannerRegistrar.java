@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
 /**
  * DingerScannerRegistrar
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerScannerRegistrar extends DefaultDingerDefinitionResolver implements ImportBeanDefinitionRegistrar {

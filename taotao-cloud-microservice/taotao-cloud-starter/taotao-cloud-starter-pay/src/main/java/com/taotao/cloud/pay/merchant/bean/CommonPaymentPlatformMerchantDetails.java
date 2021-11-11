@@ -16,11 +16,6 @@ import java.io.InputStream;
 /**
  * 公共的支付商户信息列表
  *
- * @author egan
- * <pre>
- * email egzosn@gmail.com
- * date   2019/4/9 19:39.
- * </pre>
  */
 public class CommonPaymentPlatformMerchantDetails extends BasePayConfigStorage implements
 	PaymentPlatformMerchantDetails, PaymentPlatformServiceAdapter,

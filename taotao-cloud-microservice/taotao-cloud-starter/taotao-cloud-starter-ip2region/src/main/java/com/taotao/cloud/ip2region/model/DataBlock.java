@@ -3,7 +3,6 @@ package com.taotao.cloud.ip2region.model;
 /**
  * data block class
  *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class DataBlock {
 

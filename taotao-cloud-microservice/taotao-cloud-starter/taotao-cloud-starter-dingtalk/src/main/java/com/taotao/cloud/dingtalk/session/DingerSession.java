@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.session;
 /**
  * DingerSession
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public interface DingerSession {

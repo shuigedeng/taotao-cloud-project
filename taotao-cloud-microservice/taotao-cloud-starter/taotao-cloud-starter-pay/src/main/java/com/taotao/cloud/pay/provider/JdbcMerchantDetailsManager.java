@@ -23,12 +23,6 @@ import org.springframework.util.Assert;
 
 /**
  * JDBC支付账户(商户)存储器
- *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date 2018-11-22 17:18:03
- *                 </pre>
  */
 public class JdbcMerchantDetailsManager implements
 	MerchantDetailsManager<CommonPaymentPlatformMerchantDetails> {

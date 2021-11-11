@@ -20,7 +20,7 @@ import java.lang.reflect.InvocationHandler;
 /**
  * Dinger Invocation Handler
  *
- * @author Jaemon
+
  * @since 1.2
  */
 public abstract class DingerInvocationHandler extends DingerMessageHandler implements

@@ -33,8 +33,6 @@ import javax.servlet.http.HttpServletRequest;
  * 用户表 前端控制器
  * </p>
  *
- * @author lihaodong
- * @since 2019-04-21
  */
 @RestController
 @RequestMapping("/user")

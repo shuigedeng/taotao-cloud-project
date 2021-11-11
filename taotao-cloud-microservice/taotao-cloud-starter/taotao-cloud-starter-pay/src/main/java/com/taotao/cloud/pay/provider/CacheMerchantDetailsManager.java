@@ -12,11 +12,6 @@ import org.springframework.util.Assert;
 /**
  * 缓存支付账户(商户)存储器
  *
- * @author egan
- * <pre>
- * email egzosn@gmail.com
- * date 2021/1/7
- * </pre>
  */
 public class CacheMerchantDetailsManager implements
 	MerchantDetailsManager<PaymentPlatformMerchantDetails> {

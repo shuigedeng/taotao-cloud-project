@@ -17,14 +17,6 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @ClassName MyBatisPlusConfig
- * @Author lihaodong
- * @since 2019/1/10 18:02
- * @Mail lihaodongmail@163.com
- * @Description Mybatis-Plus配置
- * @Version 1.0
- **/
 
 @EnableTransactionManagement
 @Configuration

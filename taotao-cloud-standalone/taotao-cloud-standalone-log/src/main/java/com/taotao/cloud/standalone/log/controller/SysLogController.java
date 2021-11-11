@@ -19,7 +19,6 @@ import javax.annotation.Resource;
  * 系统日志 前端控制器
  * </p>
  *
- * @author lihaodong
  * @since 2019-04-27
  */
 @RestController

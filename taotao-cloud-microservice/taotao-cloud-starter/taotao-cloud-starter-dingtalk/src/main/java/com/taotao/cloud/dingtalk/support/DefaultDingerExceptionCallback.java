@@ -22,8 +22,6 @@ import com.taotao.cloud.dingtalk.exception.DingerException;
 /**
  * 默认消息通知
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DefaultDingerExceptionCallback implements DingerExceptionCallback {
 

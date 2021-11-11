@@ -27,8 +27,6 @@ import javax.xml.bind.JAXB;
 /**
  * XML字符串JavaBean对象互转工具类
  *
- * @author Jaemon
- * @since 1.0
  */
 public class XmlUtils {
 

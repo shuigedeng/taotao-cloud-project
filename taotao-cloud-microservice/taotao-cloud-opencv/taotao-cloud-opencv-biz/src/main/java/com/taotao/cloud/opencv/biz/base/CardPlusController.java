@@ -219,12 +219,6 @@ public class CardPlusController extends BaseController {
 
 	/**
 	 * 绘制灰度直方图用于调整识别区域阈值判断
-	 * @Author 王嵩
-	 * @return Mat
-	 * @Date 2018年3月28日
-	 * 更新日志
-	 * 2018年3月28日 王嵩  首次创建
-	 *
 	 */
 	public Mat getGrayHistogram(Mat img) {
 		List<Mat> images = new ArrayList<Mat>();

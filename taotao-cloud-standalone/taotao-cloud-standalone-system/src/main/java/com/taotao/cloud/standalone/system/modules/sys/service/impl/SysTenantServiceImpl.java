@@ -36,8 +36,6 @@ import java.util.stream.Collectors;
  * 租户表 服务实现类
  * </p>
  *
- * @author lihaodong
- * @since 2019-08-10
  */
 @Service
 public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant> implements ISysTenantService {

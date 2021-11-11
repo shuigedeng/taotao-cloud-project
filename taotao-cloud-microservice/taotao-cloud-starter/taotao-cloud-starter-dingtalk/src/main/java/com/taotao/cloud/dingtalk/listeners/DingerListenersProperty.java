@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 /**
  * ApplicationEventTimeTable
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingerListenersProperty {
 

@@ -15,11 +15,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 富友支付平台
  *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date  2019/4/4 14:35.
- *                 </pre>
  */
 @Configuration(FuiouPaymentPlatform.platformName)
 @ConditionalOnMissingBean(FuiouPaymentPlatform.class)

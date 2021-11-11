@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * Dinger图文类型实体
  *
- * @author Jaemon
- * @since 1.0
  */
 public class ImageTextDeo {
 

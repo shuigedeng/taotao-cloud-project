@@ -24,8 +24,6 @@ import java.util.List;
 /**
  * MultiDingerAlgorithmDefinition
  *
- * @author Jaemon
- * @since 1.0
  */
 public class MultiDingerAlgorithmDefinition {
 

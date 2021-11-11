@@ -22,8 +22,6 @@ import java.util.List;
 /**
  * AlgorithmHandler
  *
- * @author Jaemon
- * @since 1.0
  */
 public interface AlgorithmHandler {
 

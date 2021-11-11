@@ -27,8 +27,6 @@ import java.util.UUID;
 /**
  * DingTalk Utils
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingerUtils {
 

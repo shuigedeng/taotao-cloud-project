@@ -24,8 +24,6 @@ import org.springframework.core.ParameterNameDiscoverer;
 /**
  * 注解参数名称解析
  *
- * @author Jaemon
- * @since 1.2
  */
 public class AnnotationParameterNameDiscoverer implements ParameterNameDiscoverer {
 

@@ -22,13 +22,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
 
-/**
- * @Author 小东啊
- * @Description token过滤器来验证token有效性
- * @since 00:32 2019-03-17
- * @Param
- * @return
- **/
 @Slf4j
 @Component
 public class PreJwtAuthenticationTokenFilter extends OncePerRequestFilter {

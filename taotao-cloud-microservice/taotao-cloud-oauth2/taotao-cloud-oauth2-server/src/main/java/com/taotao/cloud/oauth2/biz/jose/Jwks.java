@@ -30,7 +30,6 @@ import com.nimbusds.jose.jwk.OctetSequenceKey;
 import com.nimbusds.jose.jwk.RSAKey;
 
 /**
- * @author Joe Grandja
  */
 public final class Jwks {
 

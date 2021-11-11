@@ -4,12 +4,6 @@ package com.taotao.cloud.pay;
  * 用于构建对象的接口
  *
  * @param <O> 正在构建的对象的类型
- * @author egan
- * <pre>
- *              email egzosn@gmail.com
- *
- *              date 2019/05/06 19:27.
- *         </pre>
  */
 public interface PayBuilder<O> {
 

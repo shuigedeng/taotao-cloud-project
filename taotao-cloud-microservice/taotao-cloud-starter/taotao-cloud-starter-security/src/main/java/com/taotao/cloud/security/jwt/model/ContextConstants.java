@@ -3,7 +3,7 @@ package com.taotao.cloud.security.jwt.model;
 /**
  * 跟上下文常量工具类
  *
- * @author zuihou
+ 
  * @date 2018/12/21
  */
 public final class ContextConstants {

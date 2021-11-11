@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * job info
- * @author xuxueli 2016-1-12 18:03:45
  */
 @Mapper
 public interface XxlJobInfoDao {

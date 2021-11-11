@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
  * 字典表 前端控制器
  * </p>
  *
- * @author lihaodong
- * @since 2019-05-17
  */
 @RestController
 @RequestMapping("/dict")

@@ -5,7 +5,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 /**
  * 生产者
- * @author 科帮网 By https://blog.52itstyle.com
  */
 @Service
 public class RedisSender {

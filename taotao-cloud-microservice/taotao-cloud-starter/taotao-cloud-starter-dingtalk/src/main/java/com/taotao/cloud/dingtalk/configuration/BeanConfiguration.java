@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 实例化bean配置
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Configuration

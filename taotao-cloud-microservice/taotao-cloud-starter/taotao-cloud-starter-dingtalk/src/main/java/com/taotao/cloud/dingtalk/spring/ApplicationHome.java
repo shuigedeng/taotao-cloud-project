@@ -32,8 +32,6 @@ import org.springframework.util.StringUtils;
 /**
  * ApplicationHome
  *
- * @author Jaemon
- * @since 1.0
  */
 public class ApplicationHome {
 

@@ -22,7 +22,6 @@ import java.util.Date;
  * 3. @RequestParam("date") LocalDate date
  * 4. @RequestParam("date") LocalTime date
  *
- * @author zuihou
  */
 public class DateFormatRegister implements FeignFormatterRegistrar {
 

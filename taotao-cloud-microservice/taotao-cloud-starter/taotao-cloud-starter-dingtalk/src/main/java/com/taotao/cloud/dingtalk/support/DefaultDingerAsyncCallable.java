@@ -21,8 +21,6 @@ import com.taotao.cloud.common.utils.LogUtil;
 /**
  * 默认异步执行回调
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DefaultDingerAsyncCallable implements DingerAsyncCallback {
 

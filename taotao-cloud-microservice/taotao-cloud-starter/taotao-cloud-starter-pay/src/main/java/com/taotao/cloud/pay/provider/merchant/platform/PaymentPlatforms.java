@@ -7,12 +7,6 @@ import java.util.Map;
 
 /**
  * 支付平台集
- *
- * @author egan
- * <pre>
- * email egzosn@gmail.com
- * date  2019/4/9 15:57.
- * </pre>
  */
 public final class PaymentPlatforms {
 

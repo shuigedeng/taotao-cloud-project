@@ -25,7 +25,6 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Secure工具类
  *
- * @author zuihou
  */
 public final class JwtUtil {
 

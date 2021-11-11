@@ -2,8 +2,6 @@ package com.taotao.cloud.encrypt.exception;
 
 /**
  * 加密自定义异常
- *
- * @author gaoyang
  */
 public class EncryptException extends RuntimeException {
 

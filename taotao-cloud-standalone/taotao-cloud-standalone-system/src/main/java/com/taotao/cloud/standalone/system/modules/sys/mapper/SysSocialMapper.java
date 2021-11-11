@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
  * 系统日志 Mapper 接口
  * </p>
  *
- * @author lihaodong
+
  * @since 2019-04-27
  */
 public interface SysSocialMapper extends BaseMapper<SysSocial> {

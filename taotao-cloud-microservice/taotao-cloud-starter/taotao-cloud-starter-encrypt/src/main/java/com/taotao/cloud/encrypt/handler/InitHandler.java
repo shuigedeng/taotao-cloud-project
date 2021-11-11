@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 /**
  * 初始化处理器
  *
- * @author gaoyang
  */
 public class InitHandler {
 

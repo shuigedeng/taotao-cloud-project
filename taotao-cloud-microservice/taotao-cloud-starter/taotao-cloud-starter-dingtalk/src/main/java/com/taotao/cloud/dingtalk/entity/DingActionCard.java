@@ -23,8 +23,6 @@ import java.util.List;
 /**
  * 独立跳转ActionCard类型
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingActionCard extends DingTalkMessage {
 

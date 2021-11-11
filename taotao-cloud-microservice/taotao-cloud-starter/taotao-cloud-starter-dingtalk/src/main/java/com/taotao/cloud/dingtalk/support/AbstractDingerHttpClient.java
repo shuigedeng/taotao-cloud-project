@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * AbstractDingerHttpClient
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public abstract class AbstractDingerHttpClient implements DingerHttpClient {

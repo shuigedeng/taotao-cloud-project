@@ -3,7 +3,6 @@ package com.taotao.cloud.ip2region.model;
 /**
  * database configuration class
  *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class DbConfig {
 

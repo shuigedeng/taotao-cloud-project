@@ -21,7 +21,7 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 /**
  * DingerHelper
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public abstract class DingerHelper {

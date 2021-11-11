@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  *     void method(@Keyword String keyword, String date) {...}
  * </pre>
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)

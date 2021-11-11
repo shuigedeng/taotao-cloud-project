@@ -94,15 +94,10 @@ public class RectificationController extends BaseController {
 	/**
 	 * 获得锚点(定位点)
 	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
-	 * @Author 王嵩
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
 	 * @param anchor04 void
-	 * @Date 2018年2月7日
-	 * 更新日志
-	 * 2018年2月7日 王嵩  首次创建
-	 *
 	 */
 	public static void fetchAnchorPoints1(String sourcePath, String matchPath, Point anchor01, Point anchor02,
 			Point anchor03,
@@ -170,15 +165,11 @@ public class RectificationController extends BaseController {
 	/**
 	 * 获得锚点(定位点)
 	 * 方法2，霍夫曼圆变换查找定位点
-	 * @Author 王嵩
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
 	 * @param anchor04 void
 	 * @Date 2018年2月7日
-	 * 更新日志
-	 * 2018年2月7日 王嵩  首次创建
-	 *
 	 */
 	public static void fetchAnchorPoints2(String sourcePath, Point anchor01, Point anchor02, Point anchor03,
 			Point anchor04) {

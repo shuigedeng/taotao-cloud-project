@@ -27,8 +27,6 @@ import java.lang.annotation.Target;
 /**
  * DingerImageText
  *
- * @author Jaemon
- * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

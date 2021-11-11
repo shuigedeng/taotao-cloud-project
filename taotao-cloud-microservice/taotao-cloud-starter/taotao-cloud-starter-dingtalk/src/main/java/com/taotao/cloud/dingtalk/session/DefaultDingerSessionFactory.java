@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.session;
 /**
  * DefaultDingerSessionFactory
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public class DefaultDingerSessionFactory implements DingerSessionFactory {

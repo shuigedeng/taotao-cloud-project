@@ -34,8 +34,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * PackageUtils
  *
- * @author Jaemon
- * @since 1.0
  */
 public class PackageUtils {
 

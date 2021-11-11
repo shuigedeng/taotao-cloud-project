@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
 /**
  * DefinitionGenerator
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerDefinitionHandler {

@@ -3,7 +3,6 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * DingerMethod
  *
- * @author Jaemon
  * @version 1.0
  */
 public class DingerMethod {

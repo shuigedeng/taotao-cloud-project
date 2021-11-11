@@ -28,10 +28,6 @@ import org.springframework.util.StringUtils;
  * 参考自 jpress：https://gitee.com/fuhai/jpress
  * </p>
  *
- * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:01:42
- * @author michael
  */
 public class XssUtil {
 
@@ -63,7 +59,6 @@ public class XssUtil {
 	/**
 	 * 做自己的白名单，允许base64的图片通过等
 	 *
-	 * @author michael
 	 */
 	public static class HtmlSafeList extends org.jsoup.safety.Safelist {
 

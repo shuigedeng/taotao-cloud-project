@@ -56,8 +56,6 @@ import org.springframework.objenesis.instantiator.util.ClassUtils;
 /**
  * MultiDingerScannerRegistrar
  *
- * @author Jaemon
- * @since 1.0
  */
 public class MultiDingerScannerRegistrar
 	extends DingerListenersProperty

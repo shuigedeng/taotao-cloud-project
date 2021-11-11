@@ -131,8 +131,6 @@ public class BaseMethodController extends BaseController {
 	 * @param binaryType 二值化类型
 	 * @param blockSize  附近区域面积
 	 * @param constantC  它只是一个常数，从平均值或加权平均值中减去的常数
-	 * @Author 王嵩
-	 * @Date 2018年4月9日 更新日志 2018年4月9日 王嵩  首次创建
 	 */
 	@RequestMapping(value = "adaptiveBinary")
 	public void adaptiveBinary(HttpServletResponse response, String imagefile,
@@ -200,8 +198,6 @@ public class BaseMethodController extends BaseController {
 	 * @param binaryType 二值化类型
 	 * @param blockSize  附近区域面积
 	 * @param constantC  它只是一个常数，从平均值或加权平均值中减去的常数
-	 * @Author 王嵩
-	 * @Date 2018年5月17日 更新日志 2018年5月17日 王嵩  首次创建
 	 */
 	@RequestMapping(value = "zxing")
 	public void zxing(HttpServletResponse response, String imagefile, Integer adaptiveMethod,
@@ -320,8 +316,6 @@ public class BaseMethodController extends BaseController {
 	 * @param alpha     控制图层src1的透明度
 	 * @param beta      控制图层src2的透明度
 	 * @param gamma     gamma越大合并的影像越明亮 void
-	 * @Author 王嵩
-	 * @Date 2018年5月18日 更新日志 2018年5月18日 王嵩  首次创建
 	 */
 	@RequestMapping(value = "sharpness")
 	public void sharpness(HttpServletResponse response, String imagefile, int ksize, double alpha,
@@ -353,8 +347,6 @@ public class BaseMethodController extends BaseController {
 	 *
 	 * @param response
 	 * @param imagefile
-	 * @Author 王嵩
-	 * @Date 2018年5月24日 更新日志 2018年5月24日 王嵩  首次创建
 	 */
 	@RequestMapping(value = "floodfill")
 	public void floodfill(HttpServletResponse response, String imagefile, double graysize,
@@ -891,8 +883,6 @@ public class BaseMethodController extends BaseController {
 	 * @param imagefile
 	 * @param cols
 	 * @return Mat
-	 * @Author 王嵩
-	 * @Date 2018年4月2日 更新日志 2018年4月2日 王嵩  首次创建
 	 */
 	@RequestMapping(value = "grayHistogram")
 	public void grayHistogram(HttpServletResponse response, String imagefile, Integer cols,
@@ -1179,9 +1169,6 @@ public class BaseMethodController extends BaseController {
 	 * @param listPoint
 	 * @return Mat
 	 * <p>
-	 * 更新日志 2019年8月20日 song.wang 首次创建
-	 * @author song.wang
-	 * @date 2019年8月20日
 	 */
 	private static Mat fourPointTransform(Mat source, List<Point> listPoint) {
 		//获得点的顺序
@@ -1238,9 +1225,6 @@ public class BaseMethodController extends BaseController {
 	 * @param listPoint
 	 * @return List<Point>
 	 * <p>
-	 * 更新日志 2019年8月16日 song.wang 首次创建
-	 * @author song.wang
-	 * @date 2019年8月16日
 	 */
 	private static List<Point> orderPoints(List<Point> listPoint) {
 		//python中有很多关于数组的函数处理如排序、比较、加减乘除等，在这里我们使用List进行操作

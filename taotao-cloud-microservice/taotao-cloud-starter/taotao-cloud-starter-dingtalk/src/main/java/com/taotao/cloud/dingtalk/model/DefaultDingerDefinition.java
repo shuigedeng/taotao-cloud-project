@@ -24,8 +24,6 @@ import com.taotao.cloud.dingtalk.enums.MessageSubType;
 /**
  * DefaultDingerDefinition
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DefaultDingerDefinition implements DingerDefinition {
 

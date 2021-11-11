@@ -22,8 +22,6 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 /**
  * DingTalk请求体
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingTalkMessage extends MsgType {
 

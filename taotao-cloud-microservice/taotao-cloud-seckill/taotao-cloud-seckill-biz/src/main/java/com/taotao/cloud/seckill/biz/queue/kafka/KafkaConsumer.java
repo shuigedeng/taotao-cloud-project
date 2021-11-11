@@ -1,5 +1,6 @@
 package com.taotao.cloud.seckill.biz.queue.kafka;
 
+import com.taotao.cloud.seckill.biz.common.entity.Result;
 import com.taotao.cloud.seckill.biz.common.redis.RedisUtil;
 import com.taotao.cloud.seckill.biz.service.ISeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 消费者 spring-kafka 2.0 + 依赖JDK8
- * @author 科帮网 By https://blog.52itstyle.com
  */
 @Component
 public class KafkaConsumer {

@@ -12,12 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 /**
  * 商户列表服务配置
  *
- * @author egan
- * <pre>
- *      email egzosn@gmail.com
- *
- *      date 2019/5/8 19:54.
- * </pre>
  */
 public class MerchantDetailsServiceConfigurer implements
 	PayConfigurerAdapter<MerchantDetailsServiceBuilder> {

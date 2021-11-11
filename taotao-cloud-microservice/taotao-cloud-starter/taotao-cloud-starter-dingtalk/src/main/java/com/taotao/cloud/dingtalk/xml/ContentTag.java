@@ -25,8 +25,6 @@ import javax.xml.bind.annotation.XmlValue;
 /**
  * ContentTag
  *
- * @author Jaemon
- * @since 1.0
  */
 @XmlRootElement(name = "content")
 public class ContentTag {

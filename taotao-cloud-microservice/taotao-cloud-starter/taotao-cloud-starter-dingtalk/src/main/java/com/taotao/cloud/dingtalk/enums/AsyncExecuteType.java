@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * AsyncExecuteType
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public enum AsyncExecuteType {

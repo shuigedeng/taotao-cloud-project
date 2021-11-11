@@ -28,9 +28,6 @@ import org.springframework.core.ParameterNameDiscoverer;
  *
  * <p>The default behavior is to return {@code null} if no discoverer matches.
  *
- * @author Jaemon
- * @see org.springframework.core.PrioritizedParameterNameDiscoverer
- * @since 1.2
  */
 public class PrioritizedParameterNameDiscoverer implements ParameterNameDiscoverer {
 

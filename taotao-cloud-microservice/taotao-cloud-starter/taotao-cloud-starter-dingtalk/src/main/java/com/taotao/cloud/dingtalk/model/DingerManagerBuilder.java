@@ -28,7 +28,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * DingTalk Manager Builder
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerManagerBuilder {

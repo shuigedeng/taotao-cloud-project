@@ -34,7 +34,6 @@ package com.taotao.cloud.xxl.job.admin.core.old;//package com.xxl.job.admin.core
 //
 ///**
 // * base quartz scheduler util
-// * @author xuxueli 2015-12-19 16:13:53
 // */
 //public final class XxlJobDynamicScheduler {
 //    private static final Logger logger = LoggerFactory.getLogger(XxlJobDynamicScheduler_old.class);

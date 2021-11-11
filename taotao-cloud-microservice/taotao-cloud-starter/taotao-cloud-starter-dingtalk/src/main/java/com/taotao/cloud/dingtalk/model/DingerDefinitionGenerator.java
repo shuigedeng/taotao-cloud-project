@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * Diner消息体定义生成
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public abstract class DingerDefinitionGenerator<T> {

@@ -21,8 +21,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 /**
  * DINGTALK线程池参数配置-用于异步处理
  *
- * @author Jaemon
- * @since 1.0
  */
 @RefreshScope
 @ConfigurationProperties(prefix = ThreadPoolProperties.PREFIX)

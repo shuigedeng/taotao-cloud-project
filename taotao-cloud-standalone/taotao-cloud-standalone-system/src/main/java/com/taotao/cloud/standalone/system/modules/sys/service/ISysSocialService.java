@@ -10,7 +10,7 @@ import com.taotao.cloud.standalone.system.modules.sys.domain.SysSocial;
  * 社交登录 服务类
  * </p>
  *
- * @author lihaodong
+
  * @since 2019-04-27
  */
 public interface ISysSocialService extends IService<SysSocial> {

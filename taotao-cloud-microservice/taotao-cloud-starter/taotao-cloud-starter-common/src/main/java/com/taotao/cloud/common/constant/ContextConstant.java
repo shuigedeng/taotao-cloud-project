@@ -3,8 +3,6 @@ package com.taotao.cloud.common.constant;
 /**
  * 跟上下文常量工具类
  *
- * @author zuihou
- * @date 2018/12/21
  */
 public final class ContextConstant {
     private ContextConstant() {

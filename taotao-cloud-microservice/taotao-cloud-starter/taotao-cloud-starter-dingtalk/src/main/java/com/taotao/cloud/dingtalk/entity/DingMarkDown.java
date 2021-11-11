@@ -23,8 +23,6 @@ import java.util.Map;
 /**
  * Markdown 消息格式实体
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingMarkDown extends Message {
 

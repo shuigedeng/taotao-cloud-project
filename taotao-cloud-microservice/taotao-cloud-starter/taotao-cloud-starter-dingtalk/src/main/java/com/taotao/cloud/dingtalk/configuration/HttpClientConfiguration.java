@@ -37,8 +37,6 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Dinger默认Http客户端配置
  *
- * @author Jaemon
- * @since 1.0
  */
 @Configuration
 @ConditionalOnMissingBean(name = DingerConstant.DINGER_REST_TEMPLATE)

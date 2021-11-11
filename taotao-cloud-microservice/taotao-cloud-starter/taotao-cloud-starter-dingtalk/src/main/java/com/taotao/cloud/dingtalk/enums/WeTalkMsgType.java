@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * WeTalk支持的消息类型
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public enum WeTalkMsgType {

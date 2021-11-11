@@ -24,8 +24,6 @@ import com.taotao.cloud.dingtalk.enums.MessageSubType;
 /**
  * DingerDefinition
  *
- * @author Jaemon
- * @since 1.0
  */
 public interface DingerDefinition {
 

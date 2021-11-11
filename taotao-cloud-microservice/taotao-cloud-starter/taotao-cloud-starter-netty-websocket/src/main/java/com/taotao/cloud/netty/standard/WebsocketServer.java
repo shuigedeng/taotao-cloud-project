@@ -31,7 +31,7 @@ import javax.net.ssl.SSLException;
 import org.springframework.util.StringUtils;
 
 /**
- * @author Yeauty
+
  * @version 1.0
  */
 public class WebsocketServer {

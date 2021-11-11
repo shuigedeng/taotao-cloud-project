@@ -90,7 +90,7 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	 * 空值校验 传入空字符串("")时， 视为： 字段名 = ""
 	 *
 	 * @param val 参数值
-	 * @author zuihou
+	 
 	 */
 	private static boolean checkCondition(Object val) {
 		return val != null;

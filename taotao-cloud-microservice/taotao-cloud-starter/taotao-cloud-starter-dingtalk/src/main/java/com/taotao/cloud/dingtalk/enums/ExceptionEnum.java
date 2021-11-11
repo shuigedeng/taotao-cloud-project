@@ -21,7 +21,7 @@ import com.taotao.cloud.dingtalk.entity.ExceptionPairs;
 /**
  * 异常枚举
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public enum ExceptionEnum implements ExceptionPairs {

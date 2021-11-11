@@ -9,7 +9,7 @@ import com.taotao.cloud.standalone.log.domain.SysLog;
  * 系统日志 服务类
  * </p>
  *
- * @author lihaodong
+
  * @since 2019-04-27
  */
 public interface ISysLogService extends IService<SysLog> {

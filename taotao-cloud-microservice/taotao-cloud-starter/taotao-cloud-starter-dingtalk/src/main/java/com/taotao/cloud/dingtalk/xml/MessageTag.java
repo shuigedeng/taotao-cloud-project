@@ -23,8 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * MessageTag
  *
- * @author Jaemon
- * @since 1.0
  */
 @XmlRootElement(name = "message")
 public class MessageTag {

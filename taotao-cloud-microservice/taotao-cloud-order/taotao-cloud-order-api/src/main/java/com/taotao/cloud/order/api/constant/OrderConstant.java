@@ -5,8 +5,6 @@ package com.taotao.cloud.order.api.constant;
  * 说明：订单的状态常量池
  * </p >
  *
- * @author miaoxiao
- * @since 2019-04-28
  */
 public interface OrderConstant {
     /**

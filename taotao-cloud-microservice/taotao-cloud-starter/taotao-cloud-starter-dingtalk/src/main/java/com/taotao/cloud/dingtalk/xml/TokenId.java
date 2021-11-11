@@ -25,8 +25,6 @@ import javax.xml.bind.annotation.XmlValue;
 /**
  * TokenId
  *
- * @author Jaemon
- * @since 1.0
  */
 @XmlRootElement(name = "token-id")
 public class TokenId {

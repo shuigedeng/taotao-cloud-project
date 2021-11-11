@@ -23,9 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author zyc
- */
 @RequestMapping("/oath2")
 @RestController
 public class Oath2Controller {

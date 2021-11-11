@@ -22,7 +22,7 @@ import com.taotao.cloud.dingtalk.session.DingerSessionFactory;
 /**
  * DingerSessionSupport
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public abstract class DingerSessionSupport {

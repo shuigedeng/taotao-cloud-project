@@ -6,7 +6,6 @@ import com.taotao.cloud.ip2region.utils.Ip2regionUtil;
 /**
  * item index class
  *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class IndexBlock {
 

@@ -30,7 +30,6 @@ import java.util.List;
 /**
  * RestTemplate 相关的配置
  *
- * @author zuihou
  */
 @ConditionalOnClass(okhttp3.OkHttpClient.class)
 public class RestTemplateConfiguration {

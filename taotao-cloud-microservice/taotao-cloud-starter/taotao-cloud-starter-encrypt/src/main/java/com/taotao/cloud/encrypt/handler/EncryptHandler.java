@@ -3,7 +3,6 @@ package com.taotao.cloud.encrypt.handler;
 /**
  * 加密业务接口
  *
- * @author gaoyang
  */
 public interface EncryptHandler {
 

@@ -33,7 +33,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ClassUtils;
 
 /**
- * @author Yeauty
+
  */
 public class ServerEndpointExporter extends ApplicationObjectSupport implements
 	SmartInitializingSingleton, BeanFactoryAware, ResourceLoaderAware {
