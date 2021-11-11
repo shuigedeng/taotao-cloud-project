@@ -47,8 +47,8 @@
 Requires:
 ```
 JAVA_VERSION >= 17
-GRALE_VERSION >= 7.2
-IDEA_VERSION >= 2021.2.1
+GRALE_VERSION >= 7.3
+IDEA_VERSION >= 2021.2.3
 ```
 
 Gradle:
