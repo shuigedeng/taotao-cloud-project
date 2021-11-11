@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 /**
  * xxl-job config
  *
- * @author xuxueli 2017-04-28
  */
 
 @Component

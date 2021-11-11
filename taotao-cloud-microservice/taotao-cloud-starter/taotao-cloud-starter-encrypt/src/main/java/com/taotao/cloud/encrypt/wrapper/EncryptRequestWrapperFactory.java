@@ -9,8 +9,6 @@ import java.io.IOException;
 
 /**
  * 请求加密包装器工厂
- *
- * @author gaoyang
  */
 public class EncryptRequestWrapperFactory {
 

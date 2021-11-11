@@ -22,9 +22,6 @@ import java.util.Random;
  * {@link Random} methods via the {@link Math#random()} method and its system-wide
  * <code>Random</code> object.
  *
- * @author Gary D. Gregory
- * @version $Id: RandomUtils.java 471626 2006-11-06 04:02:09Z bayard $
- * @since 1.0
  */
 public class RandomUtils {
 
