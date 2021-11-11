@@ -46,7 +46,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * DingerAutoConfiguration
  *
- * @author Jaemon
+
  * @since 1.2
  */
 @Configuration

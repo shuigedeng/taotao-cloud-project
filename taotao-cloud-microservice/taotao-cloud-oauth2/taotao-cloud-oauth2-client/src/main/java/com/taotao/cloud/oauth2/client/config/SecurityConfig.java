@@ -24,7 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * @author Joe Grandja
+
  * @since 0.0.1
  */
 @EnableWebSecurity

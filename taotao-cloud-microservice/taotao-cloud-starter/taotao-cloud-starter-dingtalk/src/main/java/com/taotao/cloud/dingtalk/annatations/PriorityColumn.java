@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * PriorityColumn
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Documented

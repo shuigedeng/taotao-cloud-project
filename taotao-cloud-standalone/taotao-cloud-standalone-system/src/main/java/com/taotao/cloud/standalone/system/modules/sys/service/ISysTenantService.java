@@ -11,7 +11,7 @@ import java.util.List;
  * 租户表 服务类
  * </p>
  *
- * @author lihaodong
+
  * @since 2019-08-10
  */
 public interface ISysTenantService extends IService<SysTenant> {

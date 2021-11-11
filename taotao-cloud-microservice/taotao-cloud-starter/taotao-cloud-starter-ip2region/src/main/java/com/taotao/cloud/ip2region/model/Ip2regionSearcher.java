@@ -23,7 +23,6 @@ import org.springframework.lang.Nullable;
 /**
  * ip 搜索器
  *
- * @author dream.lu
  */
 public interface Ip2regionSearcher {
 

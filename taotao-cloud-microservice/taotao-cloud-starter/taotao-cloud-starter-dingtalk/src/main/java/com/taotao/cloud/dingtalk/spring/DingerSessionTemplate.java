@@ -23,7 +23,7 @@ import org.springframework.beans.factory.DisposableBean;
 /**
  * DingerSessionTemplate
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public class DingerSessionTemplate implements DingerSession, DisposableBean {

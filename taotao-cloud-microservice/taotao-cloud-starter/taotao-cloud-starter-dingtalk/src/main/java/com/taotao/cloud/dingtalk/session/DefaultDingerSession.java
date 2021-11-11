@@ -22,7 +22,7 @@ import java.lang.reflect.Proxy;
 /**
  * DefaultDingerSession
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public class DefaultDingerSession implements DingerSession {

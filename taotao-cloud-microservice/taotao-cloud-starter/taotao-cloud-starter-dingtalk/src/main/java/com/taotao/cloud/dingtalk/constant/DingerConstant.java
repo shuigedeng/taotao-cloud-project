@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.constant;
 /**
  * 常量类
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public interface DingerConstant {

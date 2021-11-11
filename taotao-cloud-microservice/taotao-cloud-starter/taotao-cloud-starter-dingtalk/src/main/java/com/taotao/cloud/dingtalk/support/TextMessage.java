@@ -22,8 +22,6 @@ import java.text.MessageFormat;
 /**
  * 默认Text消息格式
  *
- * @author Jaemon
- * @since 1.0
  */
 public class TextMessage implements CustomMessage {
 

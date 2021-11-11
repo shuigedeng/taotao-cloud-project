@@ -17,8 +17,6 @@ import java.util.List;
  * 菜单权限表
  * </p>
  *
- * @author lihaodong
- * @since 2019-04-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

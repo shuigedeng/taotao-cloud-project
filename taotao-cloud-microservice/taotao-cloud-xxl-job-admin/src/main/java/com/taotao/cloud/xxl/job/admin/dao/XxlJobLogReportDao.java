@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * job log
- * @author xuxueli 2019-11-22
  */
 @Mapper
 public interface XxlJobLogReportDao {

@@ -20,7 +20,6 @@ import java.io.IOException;
 /**
  * 通过 RestTemplate 调用时，传递请求头和线程变量
  *
- * @author zuihou
  */
 public class RestTemplateHeaderInterceptor implements ClientHttpRequestInterceptor {
 

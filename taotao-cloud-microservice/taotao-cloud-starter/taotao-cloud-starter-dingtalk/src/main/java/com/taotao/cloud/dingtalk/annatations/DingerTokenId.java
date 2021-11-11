@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * DingerTokenId
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)

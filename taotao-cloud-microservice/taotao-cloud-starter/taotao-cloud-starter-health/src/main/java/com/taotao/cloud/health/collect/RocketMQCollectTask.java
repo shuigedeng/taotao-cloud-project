@@ -9,9 +9,6 @@
 //import com.taotao.cloud.health.base.FieldReport;
 //import org.springframework.util.ReflectionUtils;
 //
-///**
-// * @author Huang Zhaoping
-// */
 //public class RocketMQCollectTask extends AbstractCollectTask {
 //
 //	@Override

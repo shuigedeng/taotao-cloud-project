@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * @author xuxueli 2019-05-04 16:44:59
  */
 @Mapper
 public interface XxlJobUserDao {

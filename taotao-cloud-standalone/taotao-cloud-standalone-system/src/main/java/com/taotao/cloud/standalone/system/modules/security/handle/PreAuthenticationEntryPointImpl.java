@@ -14,7 +14,6 @@ import java.io.Serializable;
 
 /**
  * 用来解决认证过的用户访问无权限资源时的异常
- * @author lihaodong
  */
 @Slf4j
 public class PreAuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable {

@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.enums;
 /**
  * Dinger类型
  *
- * @author Jaemon
- * @since 1.0
  */
 public enum DingerType {
 	DINGTALK("钉钉", "https://oapi.dingtalk.com/robot/send?access_token", true),

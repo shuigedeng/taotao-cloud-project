@@ -10,7 +10,6 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 
 /**
  * zookeeper 分布式锁
- * @author 科帮网 By https://blog.52itstyle.com
  */
 public class ZkLockUtil{
 	

@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
  * 部门管理 前端控制器
  * </p>
  *
- * @author lihaodong
- * @since 2019-04-21
  */
 @RestController
 @RequestMapping("/dept")

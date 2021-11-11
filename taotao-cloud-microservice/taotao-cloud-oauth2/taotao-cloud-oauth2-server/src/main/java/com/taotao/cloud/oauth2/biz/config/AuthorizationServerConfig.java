@@ -48,8 +48,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 /**
- * @author Joe Grandja
- * @author Daniel Garnier-Moiroux
  */
 @EnableJpaAuditing
 //@EnableJpaRepositories(basePackages = "com.example.springjdbcdemo.infrastruction")

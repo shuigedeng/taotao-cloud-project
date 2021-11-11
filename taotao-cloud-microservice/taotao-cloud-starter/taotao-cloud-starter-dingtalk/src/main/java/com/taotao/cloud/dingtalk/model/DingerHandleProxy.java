@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * Dinger Handle Proxy
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerHandleProxy extends DingerInvocationHandler {

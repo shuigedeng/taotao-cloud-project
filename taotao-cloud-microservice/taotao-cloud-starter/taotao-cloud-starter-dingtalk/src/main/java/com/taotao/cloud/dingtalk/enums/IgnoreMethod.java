@@ -21,7 +21,7 @@ import com.taotao.cloud.dingtalk.model.DingerInvocationHandler;
 /**
  * Ignore Method
  *
- * @author Jaemon
+
  * @since 1.2
  */
 public enum IgnoreMethod {

@@ -37,8 +37,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     </pre>
  * </blockquote>
  *
- * @author Jaemon
- * @since 1.0
  */
 public class DingerHandler implements AlgorithmHandler {
 

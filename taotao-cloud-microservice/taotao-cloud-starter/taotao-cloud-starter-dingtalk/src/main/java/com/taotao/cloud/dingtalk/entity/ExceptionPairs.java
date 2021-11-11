@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * 异常对
  *
- * @author Jaemon
- * @since 1.0
  */
 public interface ExceptionPairs extends Pairs<Integer, String> {
 

@@ -26,7 +26,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 
 /**
- * @author Joe Grandja
+
  * @since 0.0.1
  */
 @Configuration(proxyBeanMethods = false)

@@ -16,11 +16,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 支付宝支付平台
  *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date  2019/4/4 14:35.
- *                 </pre>
  */
 @Configuration(AliPaymentPlatform.platformName)
 @ConditionalOnMissingBean(AliPaymentPlatform.class)

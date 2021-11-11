@@ -23,7 +23,6 @@ import java.util.Map;
 /**
  * 消息类型实体
  *
- * @author Jaemon
  * @since 1.0
  */
 public class MsgType implements Serializable {

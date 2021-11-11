@@ -6,8 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 认证服务端 属性
  *
- * @author zuihou
- * @date 2018/11/20
  */
 @ConfigurationProperties(prefix = JwtProperties.PREFIX)
 public class JwtProperties {

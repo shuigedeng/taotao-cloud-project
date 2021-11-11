@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * MultiDingerConfigContainer
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public enum MultiDingerConfigContainer {

@@ -25,7 +25,7 @@ import java.util.Set;
 import org.springframework.beans.TypeMismatchException;
 
 /**
- * @author Yeauty
+
  * @version 1.0
  */
 public class PojoEndpointServer {

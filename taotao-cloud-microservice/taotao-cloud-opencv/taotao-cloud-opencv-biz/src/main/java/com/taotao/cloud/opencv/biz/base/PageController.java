@@ -75,8 +75,6 @@ public class PageController extends BaseController {
 	 *
 	 * @param filePath
 	 * @return String
-	 * @Author 王嵩
-	 * @Date 2018年4月4日 更新日志 2018年4月4日 王嵩  首次创建
 	 */
 	public String getPageNoByTesseract(String filePath) {
 		String result = "";
@@ -97,8 +95,6 @@ public class PageController extends BaseController {
 	 *
 	 * @param filePath
 	 * @return String
-	 * @Author 王嵩
-	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public String getPageNoByContours(String filePath) {
 		Mat source = Highgui.imread(filePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
@@ -141,8 +137,6 @@ public class PageController extends BaseController {
 	 *
 	 * @param filePath
 	 * @return String
-	 * @Author 王嵩
-	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public String getPageNoByTemplate(String filePath) {
 		String pageSize = "";
@@ -183,8 +177,6 @@ public class PageController extends BaseController {
 	 *
 	 * @param x
 	 * @return int
-	 * @Author 王嵩
-	 * @Date 2018年4月8日 更新日志 2018年4月8日 王嵩  首次创建
 	 */
 	public int getPage(double x) {
 		// 减去2像素，是因为shuzi.png外边框是预留了2像素的，因此匹配结果坐标为：2,2;72,2;142,2

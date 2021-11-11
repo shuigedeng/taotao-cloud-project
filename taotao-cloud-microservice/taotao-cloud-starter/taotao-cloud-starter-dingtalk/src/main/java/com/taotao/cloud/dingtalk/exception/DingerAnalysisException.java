@@ -21,7 +21,7 @@ import com.taotao.cloud.dingtalk.entity.ExceptionPairs;
 /**
  * Dinger解析异常
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerAnalysisException extends DingerException {

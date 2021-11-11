@@ -36,8 +36,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * Default DingerDefinition Resolver
  *
- * @author Jaemon
- * @since 1.2
  */
 public class DefaultDingerDefinitionResolver extends DingerListenersProperty implements
 	EnvironmentAware {

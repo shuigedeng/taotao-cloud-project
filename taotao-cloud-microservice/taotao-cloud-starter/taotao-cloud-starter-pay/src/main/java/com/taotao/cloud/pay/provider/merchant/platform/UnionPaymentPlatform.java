@@ -20,11 +20,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 银联支付平台
  *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *                 date  2019/4/4 14:35.
- *                 </pre>
  */
 @Configuration(UnionPaymentPlatform.platformName)
 @ConditionalOnMissingBean(UnionPaymentPlatform.class)

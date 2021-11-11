@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 消费者
- * @author 科帮网 By https://blog.52itstyle.vip
  */
 @Service
 public class RedisConsumer {

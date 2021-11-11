@@ -5,8 +5,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 秒杀队列(固定长度为100)
- * @author 科帮网 By https://blog.52itstyle.com
- * 创建时间   2018年5月10日
  */
 public class SeckillQueue {
 	 //队列大小

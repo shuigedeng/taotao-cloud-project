@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * @author Joe Grandja
+
  * @since 0.0.1
  */
 @Controller

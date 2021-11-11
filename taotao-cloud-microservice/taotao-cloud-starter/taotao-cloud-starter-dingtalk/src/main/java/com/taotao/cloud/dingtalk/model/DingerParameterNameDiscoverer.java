@@ -32,7 +32,7 @@ import org.springframework.core.StandardReflectionParameterNameDiscoverer;
  *
  * <p>Further discoverers may be added through {@link #addDiscoverer(ParameterNameDiscoverer)}.
  *
- * @author Jaemon
+
  * @see StandardReflectionParameterNameDiscoverer
  * @see LocalVariableTableParameterNameDiscoverer
  * @see KotlinReflectionParameterNameDiscoverer

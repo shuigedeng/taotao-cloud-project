@@ -5,8 +5,6 @@
 //import java.util.List;
 //
 ///**
-// * @author : zhiyi
-// * Date: 2020/2/11
 // */
 //public interface UserMapper extends BaseMapper<AuthUser> {
 //

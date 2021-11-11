@@ -5,8 +5,6 @@ import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 
 /**
  * 构建QQ登录的 ConnectionFactory
- * 由 ServiceProvider 和 ApiAdapter 组成
- * @author lihaodong
  */
 public class QQConnectionFactory extends OAuth2ConnectionFactory<QQ> {
 

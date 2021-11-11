@@ -26,8 +26,6 @@ import java.lang.annotation.Target;
 /**
  * 指定当前 <code>***Dinger</code> 使用的 Dinger 类型
  *
- * @author Jaemon
- * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

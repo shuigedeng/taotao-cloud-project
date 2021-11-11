@@ -6,12 +6,6 @@ import com.egzosn.pay.common.http.HttpConfigStorage;
 /**
  * 支付商户服务适配器
  *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *
- *                 date 2019/5/9 19:28.
- *                 </pre>
  */
 public interface PaymentPlatformServiceAdapter<S extends PayService> {
 

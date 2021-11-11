@@ -34,7 +34,7 @@ import org.springframework.util.ClassUtils;
 /**
  * ClassPathScanForResources
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public final class ClassPathScanForResources {

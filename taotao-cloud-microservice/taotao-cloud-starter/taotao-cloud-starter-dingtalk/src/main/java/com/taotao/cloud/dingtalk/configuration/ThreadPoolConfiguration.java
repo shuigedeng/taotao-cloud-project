@@ -30,8 +30,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 /**
  * DINGTALK线程池配置类
  *
- * @author Jaemon
- * @since 1.0
  */
 @Configuration
 @ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)

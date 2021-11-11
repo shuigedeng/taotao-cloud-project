@@ -12,12 +12,6 @@ import java.util.Map;
 
 /**
  * 支付回调配置中心
- *
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date 2019/9/7.22:08
- * </pre>
  */
 public class DefalutPayMessageConfigurer implements PayMessageConfigurer {
 

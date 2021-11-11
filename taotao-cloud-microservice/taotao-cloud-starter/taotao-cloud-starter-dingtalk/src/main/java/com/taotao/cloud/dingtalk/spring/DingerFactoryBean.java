@@ -20,7 +20,7 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * DingerFactoryBean
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerFactoryBean<T> extends DingerSessionSupport implements FactoryBean<T> {

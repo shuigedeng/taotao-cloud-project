@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * dinger定义-注解方式
  *
- * @author Jaemon
+
  * @since 1.2
  */
 public class AnnotationDingerDefinitionResolver extends

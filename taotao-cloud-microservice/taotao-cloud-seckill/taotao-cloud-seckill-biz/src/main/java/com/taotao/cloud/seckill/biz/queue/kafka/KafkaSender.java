@@ -5,7 +5,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 /**
  * 生产者
- * @author 科帮网 By https://blog.52itstyle.com
  */
 @Component
 public class KafkaSender {

@@ -6,7 +6,6 @@ import org.springframework.util.Base64Utils;
 /**
  * Base64加密处理器
  *
- * @author gaoyang
  */
 public class Base64EncryptHandler implements EncryptHandler {
 

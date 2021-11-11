@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
  * 租户表
  * </p>
  *
- * @author lihaodong
- * @since 2019-08-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

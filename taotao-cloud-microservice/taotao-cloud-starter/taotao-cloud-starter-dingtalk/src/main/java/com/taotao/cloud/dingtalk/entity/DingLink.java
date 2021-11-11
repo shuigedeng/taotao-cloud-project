@@ -24,7 +24,6 @@ import java.util.Map;
 /**
  * Link类型
  *
- * @author Jaemon
  * @since 1.0
  */
 public class DingLink extends DingTalkMessage {

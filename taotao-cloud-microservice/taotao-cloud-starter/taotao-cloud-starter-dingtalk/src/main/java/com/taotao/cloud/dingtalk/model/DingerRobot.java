@@ -37,7 +37,7 @@ import org.springframework.beans.BeanUtils;
 /**
  * DingTalk Robot
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerRobot extends AbstractDingerSender {

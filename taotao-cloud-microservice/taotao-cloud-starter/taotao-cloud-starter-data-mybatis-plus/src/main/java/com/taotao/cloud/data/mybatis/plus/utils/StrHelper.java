@@ -110,7 +110,6 @@ public final class StrHelper {
 	/**
 	 * 默认值
 	 *
-	 * @author zuihou
 	 */
 	public static final class DefValueHelper {
 

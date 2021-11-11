@@ -9,11 +9,6 @@ import java.util.Collection;
 /**
  * 商户列表管理器
  *
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date  2019/4/2 14:44.
- *         </pre>
  */
 public interface MerchantDetailsManager<T extends MerchantDetails> extends
 	MerchantDetailsService<T> {

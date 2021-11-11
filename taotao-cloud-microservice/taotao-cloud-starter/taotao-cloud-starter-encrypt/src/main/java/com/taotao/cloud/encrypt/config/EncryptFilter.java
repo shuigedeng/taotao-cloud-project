@@ -22,7 +22,6 @@ import org.springframework.http.MediaType;
 /**
  * 加密过滤器
  *
- * @author gaoyang
  */
 public class EncryptFilter implements Filter {
 

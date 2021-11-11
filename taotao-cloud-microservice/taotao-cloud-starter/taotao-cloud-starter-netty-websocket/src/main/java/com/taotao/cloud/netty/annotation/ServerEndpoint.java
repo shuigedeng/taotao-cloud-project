@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * @author Yeauty
+
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

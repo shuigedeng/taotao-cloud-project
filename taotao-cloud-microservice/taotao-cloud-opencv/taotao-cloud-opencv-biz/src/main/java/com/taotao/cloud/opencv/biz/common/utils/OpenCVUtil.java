@@ -90,14 +90,9 @@ public class OpenCVUtil {
 
 	/**
 	 * 腐蚀膨胀是针对于白色区域来说的，膨胀是膨胀白色区域
-	 * @Author 王嵩
 	 * @param source
 	 * @param dilationSize 膨胀因子2*x+1 里的x
 	 * @return Mat
-	 * @Date 2018年2月5日
-	 * 更新日志
-	 * 2018年2月5日 王嵩  首次创建
-	 *
 	 */
 	public static Mat dilation(Mat source, double dilation_size) {
 		Mat resultMat = new Mat(source.rows(), source.cols(), source.type());

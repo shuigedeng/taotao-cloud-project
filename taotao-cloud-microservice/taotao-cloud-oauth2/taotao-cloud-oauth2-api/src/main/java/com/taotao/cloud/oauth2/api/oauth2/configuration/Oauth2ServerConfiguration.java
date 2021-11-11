@@ -41,7 +41,7 @@ import org.springframework.security.oauth2.server.authorization.config.ProviderS
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
- * @author Joe Grandja
+
  * @since 0.0.1
  */
 @Configuration(proxyBeanMethods = false)

@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 /**
  * 签名加密配置
  *
- * @author gaoyang
  */
 @ConditionalOnExpression(value = "environment.getProperty('encrypt.signSecret')!=null && " +
 		"environment.getProperty('encrypt.signSecret').trim()!=''")

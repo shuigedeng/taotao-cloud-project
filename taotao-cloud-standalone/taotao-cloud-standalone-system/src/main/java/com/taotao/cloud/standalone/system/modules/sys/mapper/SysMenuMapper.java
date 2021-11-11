@@ -13,7 +13,7 @@ import java.util.List;
  *
  select m.perms from sys_menu m LEFT JOIN sys_role_menu rm ON rm.menu_id = m.menu_id
  LEFT JOIN sys_user_role ur ON ur.role_id = rm.role_id LEFT JOIN sys_user u ON u.user_id = ur.user_id where u.user_id = 4
- * @author lihaodong
+
  * @since 2019-04-21
  */
 public interface SysMenuMapper extends BaseMapper<SysMenu> {

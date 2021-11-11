@@ -147,13 +147,8 @@ public class CommonUtil {
 
 	/**
 	 * 获取配置文件参数
-	 * @Author	Songer
 	 * @param key
 	 * @return  String
-	 * @Date	2017-11-12
-	 * 更新日志
-	 * 2015年3月3日 张志朋  首次创建
-	 *
 	 */
 	public static String getPropertiesValue(String key){
 	   ResourceBundle resource = ResourceBundle.getBundle("config");
@@ -165,13 +160,8 @@ public class CommonUtil {
 	}
 
 	/**
-	 *@Function: 判断字符串是否是整数
-	 *@Author: Songer
 	 *@param value
 	 *@return  boolean
-	 *@Date: 2017-11-12
-	 *@Modifications:
-	 *@Modifier Name; Date; The Reason for Modifying
 	 *
 	 */
 	public static boolean isInteger(String value){
@@ -186,11 +176,6 @@ public class CommonUtil {
 
 	/**
 	 * 去除小数末尾可删除的0    1.0->1   1.50->1.5
-	 * @Author Songer
-	 * @return  String
-	 * @Date	2017-5-12
-	 * 更新日志
-	 * 2017-12-1 Songer  首次创建
 	 */
 	private static NumberFormat removeZero = NumberFormat.getInstance();
 	public static String removeZero(String num){

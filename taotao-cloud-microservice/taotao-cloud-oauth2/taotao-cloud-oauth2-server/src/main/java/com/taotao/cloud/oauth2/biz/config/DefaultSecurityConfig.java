@@ -27,9 +27,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * @author Joe Grandja
- */
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 

@@ -28,8 +28,6 @@ import org.springframework.context.annotation.Import;
 /**
  * DingerScan
  *
- * @author Jaemon
- * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

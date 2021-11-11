@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * DingerDefinitionGeneratorContext
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerDefinitionGeneratorContext<T> {

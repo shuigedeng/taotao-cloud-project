@@ -22,8 +22,6 @@ import java.util.List;
 /**
  * 轮询算法
  *
- * @author Jaemon
- * @since 1.0
  */
 public class RoundRobinHandler implements AlgorithmHandler {
 

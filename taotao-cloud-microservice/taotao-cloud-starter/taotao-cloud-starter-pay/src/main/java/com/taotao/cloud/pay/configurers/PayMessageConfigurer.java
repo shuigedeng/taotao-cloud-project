@@ -8,11 +8,6 @@ import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import java.util.List;
 
 /**
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date 2019/9/7.23:54
- * </pre>
  */
 public interface PayMessageConfigurer {
 

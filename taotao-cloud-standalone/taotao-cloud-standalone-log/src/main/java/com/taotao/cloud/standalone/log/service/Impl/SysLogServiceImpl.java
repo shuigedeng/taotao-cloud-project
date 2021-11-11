@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * 系统日志 服务实现类
  * </p>
  *
- * @author lihaodong
+
  * @since 2019-04-27
  */
 @Service

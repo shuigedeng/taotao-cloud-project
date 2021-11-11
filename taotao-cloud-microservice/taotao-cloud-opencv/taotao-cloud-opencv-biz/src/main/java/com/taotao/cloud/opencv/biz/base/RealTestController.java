@@ -94,16 +94,12 @@ public class RealTestController extends BaseController {
 	/**
 	 * 获得锚点(定位点)
 	 * 方法1，通过模板匹配圆心，应该换成正方形也可以，之前模板匹配不行是因为模板图形不是最小的
-	 * @Author 王嵩
 	 * @param mattmp
 	 * @param anchor01
 	 * @param anchor02
 	 * @param anchor03
 	 * @param anchor04 void
 	 * @Date 2018年2月7日
-	 * 更新日志
-	 * 2018年2月7日 王嵩  首次创建
-	 *
 	 */
 	public static void fetchAnchorPoints1(Mat grayImage, Mat mattmp, Point anchor01, Point anchor02,
 			Point anchor03,

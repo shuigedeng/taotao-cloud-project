@@ -15,11 +15,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 友店支付平台
  *
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date  2019/4/4 14:35.
- *         </pre>
  */
 @Configuration(YoudianPaymentPlatform.platformName)
 @ConditionalOnMissingBean(YoudianPaymentPlatform.class)

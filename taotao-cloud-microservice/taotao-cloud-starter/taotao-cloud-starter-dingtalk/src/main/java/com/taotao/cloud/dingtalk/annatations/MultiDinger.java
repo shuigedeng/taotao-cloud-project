@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 /**
  * MultiDinger
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Target(ElementType.ANNOTATION_TYPE)

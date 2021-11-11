@@ -22,7 +22,7 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 /**
  * WeTalk请求体
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class WeTalkMessage extends MsgType {

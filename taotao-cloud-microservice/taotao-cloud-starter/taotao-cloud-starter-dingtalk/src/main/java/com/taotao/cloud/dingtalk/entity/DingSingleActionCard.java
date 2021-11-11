@@ -22,7 +22,7 @@ import java.io.Serializable;
 /**
  * 整体跳转ActionCard类型
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingSingleActionCard extends DingTalkMessage {

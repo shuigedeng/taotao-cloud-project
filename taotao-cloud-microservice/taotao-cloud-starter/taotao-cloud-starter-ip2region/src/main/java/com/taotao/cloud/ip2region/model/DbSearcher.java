@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 /**
  * ip db searcher class (Not thread safe)
  *
- * @author chenxin<chenxin619315 @ gmail.com>
  */
 public class DbSearcher {
 

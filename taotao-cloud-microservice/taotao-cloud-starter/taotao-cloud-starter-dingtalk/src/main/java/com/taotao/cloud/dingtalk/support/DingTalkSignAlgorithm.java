@@ -21,7 +21,7 @@ import com.taotao.cloud.dingtalk.enums.DingerType;
 /**
  * 默认签名算法 {@link DingerType#DINGTALK}
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingTalkSignAlgorithm implements DingerSignAlgorithm<SignResult> {

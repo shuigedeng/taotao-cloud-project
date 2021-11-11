@@ -5,7 +5,6 @@ package com.taotao.cloud.encrypt.enums;
 /**
  * 加密类型枚举类
  *
- * @author gaoyang
  */
 public enum EncryptType {
 

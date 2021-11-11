@@ -8,8 +8,6 @@ import org.springframework.util.StringUtils;
 /**
  * 查询媒介 1. equals：相等 2. like:mongodb的like查询 3. in:用于列表的in类型查询
  *
- * @author LaoWang
- * @date 2020-10-20
  */
 public enum QueryType {
 	/**

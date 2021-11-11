@@ -30,8 +30,6 @@ import com.taotao.cloud.dingtalk.xml.MessageTag;
 /**
  * 企业微信消息体定义生成类
  *
- * @author Jaemon
- * @since 1.0
  */
 public class WeTalkDefinitionGenerator extends DingerDefinitionHandler {
 

@@ -41,7 +41,7 @@ import java.util.Optional;
 /**
  * DingerMessageHandler
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class DingerMessageHandler extends MultiDingerProperty

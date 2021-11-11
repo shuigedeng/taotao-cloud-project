@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * job log for glue
- * @author xuxueli 2016-5-19 18:04:56
  */
 @Mapper
 public interface XxlJobLogGlueDao {

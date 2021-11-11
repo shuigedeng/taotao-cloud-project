@@ -21,8 +21,6 @@ import java.util.List;
 /**
  * 请求体实体对象
  *
- * @author Jaemon
- * @since 1.0
  */
 public class Message extends DingTalkMessage implements Serializable {
 

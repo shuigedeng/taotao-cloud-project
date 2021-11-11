@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.session;
 /**
  * DingerSessionFactory
  *
- * @author Jaemon
- * @version 1.2
  */
 public interface DingerSessionFactory {
 

@@ -33,7 +33,7 @@ import org.springframework.util.StreamUtils;
 /**
  * ip2region 初始化
  *
- * @author dream.lu
+
  */
 public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearcher {
 

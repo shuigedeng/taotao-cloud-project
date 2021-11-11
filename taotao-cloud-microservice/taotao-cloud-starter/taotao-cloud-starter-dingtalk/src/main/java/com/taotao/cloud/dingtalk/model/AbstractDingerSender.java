@@ -24,8 +24,6 @@ import com.taotao.cloud.dingtalk.support.CustomMessage;
 /**
  * AbstractDingTalkSender
  *
- * @author Jaemon
- * @since 1.0
  */
 public abstract class AbstractDingerSender extends DingerHelper implements DingerSender {
 

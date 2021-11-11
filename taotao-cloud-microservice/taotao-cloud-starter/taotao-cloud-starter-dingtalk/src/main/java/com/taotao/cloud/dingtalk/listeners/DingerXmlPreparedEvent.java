@@ -29,8 +29,6 @@ import org.springframework.context.ApplicationListener;
 /**
  * DingerXmlPreparedEvent
  *
- * @author Jaemon
- * @since 1.0
  */
 @Deprecated
 public class DingerXmlPreparedEvent

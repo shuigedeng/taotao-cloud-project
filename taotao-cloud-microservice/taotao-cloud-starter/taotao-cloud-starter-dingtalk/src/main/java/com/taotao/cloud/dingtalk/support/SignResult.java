@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * 签名返回体
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public class SignResult extends SignBase {

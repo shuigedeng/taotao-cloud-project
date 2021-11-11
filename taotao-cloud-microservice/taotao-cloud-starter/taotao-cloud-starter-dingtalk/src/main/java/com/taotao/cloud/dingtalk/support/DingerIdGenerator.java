@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.support;
 /**
  * dkid 生成接口
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public interface DingerIdGenerator {

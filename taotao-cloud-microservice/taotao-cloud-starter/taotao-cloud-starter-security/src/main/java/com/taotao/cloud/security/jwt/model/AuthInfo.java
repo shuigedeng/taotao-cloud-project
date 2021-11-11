@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 /**
  * 认证信息
  *
- * @author zuihou
- * @date 2020年03月31日21:43:31
  */
 public class AuthInfo {
 

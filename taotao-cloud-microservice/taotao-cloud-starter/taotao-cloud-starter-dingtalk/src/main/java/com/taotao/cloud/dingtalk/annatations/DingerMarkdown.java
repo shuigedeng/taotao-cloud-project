@@ -38,8 +38,6 @@ import java.lang.annotation.Target;
  *     void method(@Keyword String keyword, String orderNo, int num, boolean flag) {...}
  * </pre>
  *
- * @author Jaemon
- * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

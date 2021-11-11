@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.model;
 /**
  * ResultHandler
  *
- * @author Jaemon
+
  * @since 1.0
  */
 public interface ResultHandler<T> {

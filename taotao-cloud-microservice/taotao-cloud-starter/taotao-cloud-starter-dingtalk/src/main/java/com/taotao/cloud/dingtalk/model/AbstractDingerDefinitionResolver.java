@@ -36,7 +36,7 @@ import org.springframework.core.ParameterNameDiscoverer;
 /**
  * AbsDingerDefinitionResolver
  *
- * @author Jaemon
+
  * @version 1.0
  */
 public abstract class AbstractDingerDefinitionResolver<T> extends DingerListenersProperty implements

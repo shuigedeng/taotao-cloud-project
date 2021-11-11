@@ -21,8 +21,6 @@ import com.taotao.cloud.dingtalk.entity.DingerCallback;
 /**
  * 发送异常回调接口
  *
- * @author Jaemon
- * @since 1.0
  */
 public interface DingerExceptionCallback {
 

@@ -22,7 +22,7 @@ import com.taotao.cloud.dingtalk.properties.DingerProperties;
 /**
  * Configuration
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public class SessionConfiguration {

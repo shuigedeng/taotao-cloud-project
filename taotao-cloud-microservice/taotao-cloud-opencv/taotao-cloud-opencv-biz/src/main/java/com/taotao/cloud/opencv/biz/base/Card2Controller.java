@@ -39,8 +39,6 @@ public class Card2Controller extends BaseController {
 	 *
 	 * @param response
 	 * @param imagefile void
-	 * @Author Songer
-	 * @Date 2018年10月22日 更新日志 2018年10月22日 Songer  首次创建
 	 */
 	@RequestMapping(value = "cardMarking")
 	public void cardMarking(HttpServletResponse response, String imagefile, Integer picno) {
@@ -71,8 +69,6 @@ public class Card2Controller extends BaseController {
 	/**
 	 * 此方法主要是通过边缘检测凸包，查找识别区域。即客观题的框
 	 *
-	 * @Author Songer
-	 * @Date 2018年9月21日 更新日志 2018年9月21日 Songer  首次创建
 	 */
 	public static Mat markingArea(String path) {
 		Mat source = Highgui.imread(path, Highgui.CV_LOAD_IMAGE_COLOR);
@@ -356,8 +352,6 @@ public class Card2Controller extends BaseController {
 	 *
 	 * @param mat
 	 * @return String
-	 * @Author Songer
-	 * @Date 2018年12月19日 更新日志 2018年12月19日 王嵩  首次创建
 	 */
 	public String cardResult(Mat mat) {
 		//设置剪切的边距，目的是裁剪表格边框，防止边框影响轮廓查找，这里设置为20像素
@@ -448,8 +442,6 @@ public class Card2Controller extends BaseController {
 	 * @param cut_gray 传入的答案列未处理过
 	 * @param temp     表格范围mat
 	 * @param answerCols  列答案数，即每几个答案一组
-	 * @Author Songer
-	 * @Date 2018年9月20日 更新日志 2018年9月20日 Songer  首次创建
 	 */
 	private static List<String> processByCol(Mat cut1, Mat cut_gray, Mat temp, int answerCols) {
 		List<String> result = new ArrayList<String>();
@@ -600,8 +592,6 @@ public class Card2Controller extends BaseController {
 	 *
 	 * @param resultList
 	 * @return String
-	 * @Author Songer
-	 * @Date 2018年9月20日 更新日志 2018年9月20日 Songer  首次创建
 	 */
 	public static String getStudentNo(List<String> resultList) {
 		int studentNo = 0;

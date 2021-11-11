@@ -14,8 +14,6 @@ import java.util.Map;
 /**
  * 认证工具类
  *
- * @author zuihou
- * @date 2020年03月31日19:03:47
  */
 public class TokenUtil {
 

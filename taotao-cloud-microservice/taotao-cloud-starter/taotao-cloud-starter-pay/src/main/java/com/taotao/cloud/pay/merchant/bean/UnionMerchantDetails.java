@@ -16,11 +16,6 @@ import java.io.InputStream;
 /**
  * 银联商户信息列表
  *
- * @author egan
- * <pre>
- *                         email egzosn@gmail.com
- *                         date   2019/4/6 14:30.
- *                         </pre>
  */
 public class UnionMerchantDetails extends UnionPayConfigStorage implements
 	PaymentPlatformMerchantDetails, PaymentPlatformServiceAdapter,

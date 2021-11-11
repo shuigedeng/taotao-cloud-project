@@ -10,7 +10,7 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * DingerSessionFactoryBean
  *
- * @author Jaemon
+
  * @version 1.2
  */
 public class DingerSessionFactoryBean implements FactoryBean<DingerSessionFactory>,

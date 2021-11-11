@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * MultiHandler, 作用于 XXXDinger层，标识当前Dinger为多Dinger接口
  *
- * @author Jaemon
+
  * @since 1.0
  */
 @Target(ElementType.TYPE)

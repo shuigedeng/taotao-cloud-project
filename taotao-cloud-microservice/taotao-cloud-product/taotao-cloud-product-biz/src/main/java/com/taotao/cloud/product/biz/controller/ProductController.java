@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 商品管理API
  *
- * @author shuigedeng
- * @since 2020/4/30 11:03
  */
 @Validated
 @RestController

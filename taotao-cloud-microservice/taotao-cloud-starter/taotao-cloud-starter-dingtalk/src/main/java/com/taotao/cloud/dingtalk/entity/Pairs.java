@@ -18,8 +18,6 @@ package com.taotao.cloud.dingtalk.entity;
 /**
  * K-V对
  *
- * @author Jaemon
- * @since 1.0
  */
 public interface Pairs<K, V> {
 
