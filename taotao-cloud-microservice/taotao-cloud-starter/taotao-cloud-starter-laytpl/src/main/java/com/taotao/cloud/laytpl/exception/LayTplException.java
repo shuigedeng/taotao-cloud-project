@@ -18,8 +18,6 @@ package com.taotao.cloud.laytpl.exception;
 
 /**
  * 异常
- *
- * @author lcm
  */
 public class LayTplException extends RuntimeException {
 
