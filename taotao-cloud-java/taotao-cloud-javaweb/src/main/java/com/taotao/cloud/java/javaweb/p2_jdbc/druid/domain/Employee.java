@@ -2,11 +2,6 @@ package com.taotao.cloud.java.javaweb.p2_jdbc.druid.domain;
 
 import java.sql.Date;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description 员工类
- */
 public class Employee {
     private int empno;
     private String ename;

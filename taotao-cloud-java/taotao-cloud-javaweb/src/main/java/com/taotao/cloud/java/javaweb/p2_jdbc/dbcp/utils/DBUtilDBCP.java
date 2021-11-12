@@ -9,11 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description 使用dbcp的数据库封装类
- */
+
 public class DBUtilDBCP {
 	private static String driver;
 	private static String url;

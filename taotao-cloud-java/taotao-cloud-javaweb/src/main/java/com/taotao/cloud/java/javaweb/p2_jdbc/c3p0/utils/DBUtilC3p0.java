@@ -7,11 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description 使用c3p0连接池的工具类
- */
 public class DBUtilC3p0 {
 
     private static ComboPooledDataSource dataSource=new ComboPooledDataSource("c3p0-config");
