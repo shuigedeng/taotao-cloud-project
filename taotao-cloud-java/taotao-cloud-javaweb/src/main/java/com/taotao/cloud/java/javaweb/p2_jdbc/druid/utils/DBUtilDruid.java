@@ -11,11 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description 使用druid连接池的工具类
- */
+
 public class DBUtilDruid {
 
     private static DataSource dataSource;

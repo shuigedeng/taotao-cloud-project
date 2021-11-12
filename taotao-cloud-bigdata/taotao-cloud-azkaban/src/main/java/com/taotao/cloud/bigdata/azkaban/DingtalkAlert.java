@@ -18,7 +18,7 @@ package com.taotao.cloud.bigdata.azkaban;
 import azkaban.alert.Alerter;
 import azkaban.executor.ExecutableFlow;
 import azkaban.sla.SlaOption;
-import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.apis.DefaultDingTalkClient;
 import com.dingtalk.api.request.OapiRobotSendRequest;
 import java.text.SimpleDateFormat;
 import java.util.Map;

@@ -8,11 +8,7 @@ import com.taotao.cloud.java.javaweb.p2_jdbc.druid.dao.impl.EmployeeDaoImpl;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description 测试dao
- */
+
 public class Demo2 {
 
     public static void main(String[] args) throws SQLException {

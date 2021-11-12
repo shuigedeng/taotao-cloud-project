@@ -10,11 +10,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * @Author 千锋大数据教学团队
- * @Company 千锋好程序员大数据
- * @Description dao实现类
- */
+
 public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public void addEmployee(Employee emp) throws SQLException {
