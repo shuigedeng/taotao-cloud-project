@@ -42,7 +42,7 @@ public class StarterNameConstant {
 	public static final String ELK_STARTER = "taotao-cloud-starter-elk";
 	public static final String ENCRYPT_STARTER = "taotao-cloud-starter-encrypt";
 	public static final String FEIGN_STARTER = "taotao-cloud-starter-feign";
-	public static final String FILE_STARTER = "taotao-cloud-starter-file";
+	public static final String OSS_STARTER = "taotao-cloud-starter-oss";
 	public static final String HEALTH_STARTER = "taotao-cloud-starter-health";
 	public static final String JOB_ELASTIC_STARTER = "taotao-cloud-starter-job-elastic";
 	public static final String JOB_XXL_STARTER = "taotao-cloud-starter-job-xxl";

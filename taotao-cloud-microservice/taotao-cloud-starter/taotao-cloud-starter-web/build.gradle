@@ -12,7 +12,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-elk')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-encrypt')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-file')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-oss')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl')
