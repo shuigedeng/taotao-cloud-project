@@ -119,8 +119,10 @@ public class TaoTaoCloudAdminApplication {
 						// 服务未知异常
 						case "UNKNOWN" -> str.append("[服务状态]: ").append(status).append("(")
 							.append("服务未知异常").append(")").append("\n");
+
 						default -> {
 						}
+
 					}
 
 					Map<String, Object> details = ((InstanceStatusChangedEvent) event).getStatusInfo()
