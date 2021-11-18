@@ -23,7 +23,6 @@ import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
 import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
 import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeignClients;
-import com.taotao.cloud.file.annotation.EnableTaoTaoCloudUploadFile;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
 import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
@@ -31,6 +30,7 @@ import com.taotao.cloud.mail.annotation.EnableTaoTaoCloudMail;
 import com.taotao.cloud.mongodb.annotation.EnableTaoTaoCloudMongodb;
 import com.taotao.cloud.netty.annotation.EnableTaoTaoCloudWebSocket;
 import com.taotao.cloud.openapi.annotation.EnableTaoTaoCloudOpenapi;
+import com.taotao.cloud.oss.annotation.EnableTaoTaoCloudUploadOss;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.rxjava.annotation.EnableTaoTaoCloudRxjava;
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
@@ -68,7 +68,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableTaoTaoCloudSms
 @EnableTaoTaoCloudCaptcha
 @EnableTaoTaoCloudElasticsearch
-@EnableTaoTaoCloudUploadFile
+@EnableTaoTaoCloudUploadOss
 @EnableTaoTaoCloudZookeeper
 @EnableTaoTaoCloudMongodb
 @EnableTaoTaoCloudShardingsphere

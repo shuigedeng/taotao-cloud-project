@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.metrics.annotation;
-
-import com.taotao.cloud.metrics.configuration.DruidMetricsConfiguration;
-import com.taotao.cloud.metrics.configuration.SentinelMetricsConfiguration;
-import com.taotao.cloud.metrics.configuration.UndertowMetricsConfiguration;
+package com.taotao.cloud.oss.annotation;
+import com.taotao.cloud.oss.configuration.FileAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,17 +22,15 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启qrcode
+ * EnableTaoTaoCloudUploadFile
  *
  * @author shuigedeng
- * @version 1.0.0ø
+ * @version 1.0.0
  * @since 2020/5/3 07:47
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({DruidMetricsConfiguration.class,
-	UndertowMetricsConfiguration.class,
-	SentinelMetricsConfiguration.class})
-public @interface EnableTaoTaoCloudMetrics {
+@Import({FileAutoConfiguration.class})
+public @interface EnableTaoTaoCloudUploadOss {
 
 }
