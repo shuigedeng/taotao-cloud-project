@@ -17,7 +17,7 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-elastic')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-job-xxl')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mongodb')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')

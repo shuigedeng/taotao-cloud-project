@@ -19,7 +19,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -59,7 +59,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用单体查询", description = "通用单体查询")
 	@GetMapping("/{id:[0-9]*}")
-	@RequestLog("通用单体查询")
+	@RequestLogger("通用单体查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('get')")
 	default Result<QueryVO> get(
 		@Parameter(description = "id", required = true) @NotNull(message = "id不能为空")
@@ -82,7 +82,7 @@ public interface QueryController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用批量查询", description = "通用批量查询")
 	@PostMapping("/query")
-	@RequestLog(value = "通用批量查询")
+	@RequestLogger(value = "通用批量查询")
 	//@PreAuthorize("@permissionVerifier.hasPermission('query')")
 	default Result<List<QueryVO>> query(
 		@Parameter(description = "查询对象", required = true)

@@ -47,7 +47,7 @@ public class StarterNameConstant {
 	public static final String JOB_ELASTIC_STARTER = "taotao-cloud-starter-job-elastic";
 	public static final String JOB_XXL_STARTER = "taotao-cloud-starter-job-xxl";
 	public static final String KAFKA_STARTER = "taotao-cloud-starter-kafka";
-	public static final String LOG_STARTER = "taotao-cloud-starter-log";
+	public static final String LOG_STARTER = "taotao-cloud-starter-logger";
 	public static final String MAIL_STARTER = "taotao-cloud-starter-mail";
 	public static final String MONGODB_STARTER = "taotao-cloud-starter-mongodb";
 	public static final String NETTY_WEBSOCKET_STARTER = "taotao-cloud-starter-netty-websocket";

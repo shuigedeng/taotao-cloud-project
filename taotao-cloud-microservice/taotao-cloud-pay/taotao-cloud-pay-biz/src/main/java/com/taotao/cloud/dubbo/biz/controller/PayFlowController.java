@@ -16,7 +16,7 @@
 package com.taotao.cloud.dubbo.biz.controller;
 
 import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.dubbo.api.vo.PayFlowVO;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.dubbo.biz.mapper.PayFlowMapper;
@@ -50,7 +50,7 @@ public class PayFlowController {
 	}
 
 	@ApiOperation("根据id查询支付信息")
-	@RequestLog(description = "根据id查询支付信息")
+	@RequestLogger(description = "根据id查询支付信息")
 	@PreAuthorize("hasAuthority('pag:flow:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<PayFlowVO> findPayFlowById(@PathVariable(value = "id") Long id) {

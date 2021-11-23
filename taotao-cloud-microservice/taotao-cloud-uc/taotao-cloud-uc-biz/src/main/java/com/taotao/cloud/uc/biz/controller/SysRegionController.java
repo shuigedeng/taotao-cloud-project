@@ -17,10 +17,9 @@ package com.taotao.cloud.uc.biz.controller;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.uc.api.dto.region.RegionSaveDTO;
 import com.taotao.cloud.uc.api.dto.region.RegionUpdateDTO;
-import com.taotao.cloud.uc.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
 import com.taotao.cloud.uc.api.vo.region.RegionQueryVO;
 import com.taotao.cloud.uc.biz.entity.SysRegion;
@@ -61,7 +60,7 @@ public class SysRegionController extends
 	 * @since 2021-10-14 11:30:36
 	 */
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
-	@RequestLog(description = "根据父id查询")
+	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
@@ -80,7 +79,7 @@ public class SysRegionController extends
 	 * @since 2021-10-14 11:32:28
 	 */
 	@Operation(summary = "树形结构查询", description = "树形结构查询")
-	@RequestLog(description = "根据父id查询")
+	@RequestLogger(description = "根据父id查询")
 	@GetMapping(value = "/tree")
 	@PreAuthorize("hasAuthority('sys:region:info:true')")
 	public Result<List<RegionParentVO>> tree() {

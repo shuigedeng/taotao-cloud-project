@@ -21,7 +21,7 @@ import com.taotao.cloud.cart.biz.mapper.CartMapper;
 import com.taotao.cloud.cart.biz.service.ICartService;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +51,7 @@ public class CartController {
 	}
 
 	@Operation(summary = "根据id查询提现申请信息", description = "根据id查询提现申请信息", method = CommonConstant.GET)
-	@RequestLog(description = "根据id查询提现申请信息")
+	@RequestLogger(description = "根据id查询提现申请信息")
 	@PreAuthorize("hasAuthority('withdraw:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<CartVO> findWithdrawById(@PathVariable(value = "id") Long id) {

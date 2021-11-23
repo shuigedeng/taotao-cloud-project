@@ -25,7 +25,7 @@ import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeignClients;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
-import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
+import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudRequestLogger;
 import com.taotao.cloud.mail.annotation.EnableTaoTaoCloudMail;
 import com.taotao.cloud.mongodb.annotation.EnableTaoTaoCloudMongodb;
 import com.taotao.cloud.netty.annotation.EnableTaoTaoCloudWebSocket;
@@ -72,7 +72,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableTaoTaoCloudZookeeper
 @EnableTaoTaoCloudMongodb
 @EnableTaoTaoCloudShardingsphere
-@EnableTaoTaoCloudRequestLog
+@EnableTaoTaoCloudRequestLogger
 @EnableTaoTaoCloudJobXxl
 @EnableTaoTaoCloudP6spy
 @EnableTaoTaoCloudFeignClients

@@ -17,7 +17,7 @@ package com.taotao.cloud.order.biz.controller;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
@@ -60,7 +60,7 @@ public class OrderInfoController
 	 * @since 2021-10-14 11:30:36
 	 */
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
-	@RequestLog(description = "根据父id查询")
+	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<OrderBO>> queryRegionByParentId(
