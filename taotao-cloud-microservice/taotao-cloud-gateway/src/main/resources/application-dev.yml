@@ -128,6 +128,10 @@ spring:
                 key-resolver: '#{@remoteAddrKeyResolver}'
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
         - id: taotao-cloud-order-biz
           uri: lb://taotao-cloud-order-biz
           predicates:
