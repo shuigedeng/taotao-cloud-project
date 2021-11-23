@@ -25,6 +25,8 @@ dependencies {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
+
     implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.9'
     implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.9'
     implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.3'

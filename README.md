@@ -90,7 +90,7 @@ Maven:
 依赖 | 版本
 ---|---
 Spring |  5.3.4 
-Spring Boot |  2.5.4
+Spring Boot |  2.6.0
 Spring Cloud | 2020.0.3
 Spring Cloud alibaba | 2021.1  
 Spring Security OAuth2 | 5.4.5

@@ -18,8 +18,8 @@ buildscript {
         taotaoCloudVersion = version
         taotaoCloudGroup = "io.github.shuigedeng"
 
-        springVersion = '5.3.4'
-        springBootVersion = '2.5.5'
+        springVersion = '5.3.13'
+        springBootVersion = '2.6.0'
         springCloudVersion = '2020.0.4'
         springCloudAlibabaVersion = '2021.1'
 
