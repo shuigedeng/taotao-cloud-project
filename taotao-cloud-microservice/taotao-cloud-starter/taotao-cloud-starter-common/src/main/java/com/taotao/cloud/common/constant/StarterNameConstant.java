@@ -53,6 +53,7 @@ public class StarterNameConstant {
 	public static final String NETTY_WEBSOCKET_STARTER = "taotao-cloud-starter-netty-websocket";
 	public static final String OPENAPI_STARTER = "taotao-cloud-starter-openapi";
 	public static final String P6SPY_STARTER = "taotao-cloud-starter-p6spy";
+	public static final String PULSAR_STARTER = "taotao-cloud-starter-pulsar";
 	public static final String PAY_STARTER = "taotao-cloud-starter-pay";
 	public static final String PROMETHEUS_STARTER = "taotao-cloud-starter-prometheus";
 	public static final String RABBITMQ_STARTER = "taotao-cloud-starter-rabbitmq";

@@ -32,9 +32,13 @@ public class MetricsProperties {
 
 	public static final String PREFIX = "taotao.cloud.metrics";
 
-	/**
-	 * 开启xss
-	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

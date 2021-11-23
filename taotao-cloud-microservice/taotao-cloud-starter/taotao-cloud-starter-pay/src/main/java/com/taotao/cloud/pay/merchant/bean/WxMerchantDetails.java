@@ -3,13 +3,13 @@ package com.taotao.cloud.pay.merchant.bean;
 import com.egzosn.pay.common.api.PayService;
 import com.egzosn.pay.common.http.HttpConfigStorage;
 import com.egzosn.pay.wx.api.WxPayConfigStorage;
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.InMemoryMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import com.taotao.cloud.pay.merchant.PaymentPlatformMerchantDetails;
 import com.taotao.cloud.pay.merchant.PaymentPlatformServiceAdapter;
-import com.taotao.cloud.pay.provider.merchant.platform.PaymentPlatforms;
-import com.taotao.cloud.pay.provider.merchant.platform.WxPaymentPlatform;
+import com.taotao.cloud.pay.provider.PaymentPlatforms;
+import com.taotao.cloud.pay.configuration.WxPaymentPlatform;
 
 /**
  * 支付宝商户信息列表

@@ -1,19 +1,13 @@
 package com.taotao.cloud.pay.builders;
 
 
-import com.taotao.cloud.pay.PayBuilder;
+import com.taotao.cloud.pay.model.PayBuilder;
 import com.taotao.cloud.pay.configurers.PayMessageConfigurer;
 import com.taotao.cloud.pay.merchant.MerchantDetailsService;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date  2019/5/6 19:36.
- *         </pre>
- */
+
 public class MerchantDetailsServiceBuilder implements PayBuilder<MerchantDetailsService> {
 
 	protected PayMessageConfigurer configurer;

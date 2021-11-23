@@ -31,9 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({
-	MongodbAutoConfiguration.class,
-})
+@Import({MongodbAutoConfiguration.class})
 public @interface EnableTaoTaoCloudMongodb {
 
 }

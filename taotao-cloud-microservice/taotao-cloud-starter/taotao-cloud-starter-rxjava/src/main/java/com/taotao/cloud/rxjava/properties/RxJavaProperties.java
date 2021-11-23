@@ -31,7 +31,7 @@ public class RxJavaProperties {
 
 	public static final String PREFIX = "taotao.cloud.rxjava";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	private Mvc mvc;
 

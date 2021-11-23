@@ -31,7 +31,7 @@ public class QrCodeProperties {
 
 	public static final String PREFIX = "taotao.cloud.qrcode";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public boolean isEnabled() {
 		return enabled;

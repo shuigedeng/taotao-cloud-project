@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.oss.configuration;
 
-import com.taotao.cloud.oss.propeties.FileProperties;
+import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.NginxProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.NginxUploadFileServiceImpl;
@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "NGINX")
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "NGINX")
 public class NginxAutoConfiguration {
 
 	@Bean

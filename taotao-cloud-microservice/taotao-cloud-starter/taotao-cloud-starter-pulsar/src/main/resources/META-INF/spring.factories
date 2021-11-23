@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.pulsar.configuration.PulsarConfiguration
+com.taotao.cloud.pulsar.PropertiesAutoConfiguration

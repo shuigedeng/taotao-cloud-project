@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.rocketmq.configuration;
 
+import com.taotao.cloud.rocketmq.properties.RocketmqProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -26,7 +28,7 @@ import org.springframework.context.annotation.PropertySource;
  * @since 2021-09-07 20:54:47
  */
 @Configuration
-//@PropertySource(value = "classpath:mate-rocketmq.yml")
+@ConditionalOnProperty(prefix = RocketmqProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RocketMQConfiguration {
 
 }

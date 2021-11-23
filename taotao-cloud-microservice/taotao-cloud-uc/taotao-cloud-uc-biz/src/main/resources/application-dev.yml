@@ -196,6 +196,7 @@ spring:
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
+    client-type: lettuce
     lettuce:
       pool:
         max-active: 1500

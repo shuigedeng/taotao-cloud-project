@@ -18,7 +18,7 @@ package com.taotao.cloud.oss.configuration;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.taotao.cloud.oss.propeties.AliyunOssProperties;
-import com.taotao.cloud.oss.propeties.FileProperties;
+import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.AliossUploadFileServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/10/26 10:49
  */
-@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "ALIYUN")
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "ALIYUN")
 public class AliyunOssAutoConfiguration {
 
 	private final AliyunOssProperties properties;

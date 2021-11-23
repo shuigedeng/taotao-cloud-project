@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PrometheusAutoConfiguration {
 

@@ -3,16 +3,7 @@ package com.taotao.cloud.pay.bean;
 import com.egzosn.pay.common.bean.PayOrder;
 import java.math.BigDecimal;
 
-/**
- * 商户支付订单
- *
- * @author egan
- * <pre>
- *                 email egzosn@gmail.com
- *
- *                 date 2019/5/9 19:43.
- *                 </pre>
- */
+
 public class MerchantPayOrder extends PayOrder {
 
 	/**

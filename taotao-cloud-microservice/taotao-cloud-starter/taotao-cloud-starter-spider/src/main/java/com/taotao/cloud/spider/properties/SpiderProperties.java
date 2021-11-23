@@ -31,7 +31,7 @@ public class SpiderProperties {
 
 	public static final String PREFIX = "taotao.cloud.spider";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public boolean isEnabled() {
 		return enabled;

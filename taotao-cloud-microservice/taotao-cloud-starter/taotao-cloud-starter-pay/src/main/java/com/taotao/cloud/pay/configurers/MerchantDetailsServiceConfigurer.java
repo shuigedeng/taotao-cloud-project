@@ -1,7 +1,7 @@
 package com.taotao.cloud.pay.configurers;
 
 
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.InMemoryMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.builders.JdbcMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.builders.MerchantDetailsServiceBuilder;

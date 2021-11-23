@@ -17,7 +17,7 @@ package com.taotao.cloud.oss;
 
 import com.taotao.cloud.oss.propeties.AliyunOssProperties;
 import com.taotao.cloud.oss.propeties.FastdfsProperties;
-import com.taotao.cloud.oss.propeties.FileProperties;
+import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.FtpProperties;
 import com.taotao.cloud.oss.propeties.LocalProperties;
 import com.taotao.cloud.oss.propeties.NginxProperties;
@@ -34,7 +34,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2020/7/29 14:18
  */
 @EnableConfigurationProperties({
-	FileProperties.class,
+	OssProperties.class,
 	AliyunOssProperties.class,
 	FastdfsProperties.class,
 	LocalProperties.class,

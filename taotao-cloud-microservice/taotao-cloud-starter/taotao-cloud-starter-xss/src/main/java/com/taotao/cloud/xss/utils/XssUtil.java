@@ -27,7 +27,6 @@ import org.springframework.util.StringUtils;
  * <p>
  * 参考自 jpress：https://gitee.com/fuhai/jpress
  * </p>
- *
  */
 public class XssUtil {
 
@@ -58,7 +57,6 @@ public class XssUtil {
 
 	/**
 	 * 做自己的白名单，允许base64的图片通过等
-	 *
 	 */
 	public static class HtmlSafeList extends org.jsoup.safety.Safelist {
 

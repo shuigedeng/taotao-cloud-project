@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  * @since 2020/10/14 09:18
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @ConditionalOnProperty(prefix = QrCodeProperties.PREFIX, name = "enabled", havingValue = "true")
 public class QrCodeAutoConfiguration implements InitializingBean {
 

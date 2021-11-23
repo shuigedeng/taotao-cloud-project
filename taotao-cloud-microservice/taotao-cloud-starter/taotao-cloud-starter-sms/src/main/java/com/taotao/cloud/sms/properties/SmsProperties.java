@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sms.properties;
 
+import com.taotao.cloud.sms.enums.SmsType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -34,11 +35,6 @@ public class SmsProperties {
 	private boolean enabled = false;
 
 	private SmsType type = SmsType.ALIYUN;
-
-	public static enum SmsType {
-		ALIYUN,
-		QCLOUD,
-	}
 
 	public boolean isEnabled() {
 		return enabled;

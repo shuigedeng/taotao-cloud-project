@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * 开启qrcode
+ * EnableTaoTaoCloudPrometheus
  *
  * @author shuigedeng
  * @version 1.0.0
