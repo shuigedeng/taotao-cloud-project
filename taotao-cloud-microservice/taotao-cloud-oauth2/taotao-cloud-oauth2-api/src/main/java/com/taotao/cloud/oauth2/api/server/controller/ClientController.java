@@ -23,7 +23,7 @@ import com.taotao.cloud.core.model.PageResult;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.core.utils.SecurityUtil;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class ClientController {
     private IClientService clientService;
 
     @ApiOperation(value = "应用列表")
-    @RequestLog(description = "应用列表")
+    @RequestLogger(description = "应用列表")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @GetMapping("/page")
     public PageResult<Client> list(@Validated ClientPageQuery clientPageQuery) {
@@ -60,7 +60,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "根据id获取应用")
-    @RequestLog(description = "根据id获取应用")
+    @RequestLogger(description = "根据id获取应用")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @GetMapping("/{clientId}")
     public Result<Client> getByClientId(@PathVariable(value = "clientId") String clientId) {
@@ -69,7 +69,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "获取所有应用")
-    @RequestLog(description = "获取所有应用")
+    @RequestLogger(description = "获取所有应用")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @GetMapping
     public Result<List<Client>> getAllClient() {
@@ -79,7 +79,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "删除应用")
-    @RequestLog(description = "删除应用")
+    @RequestLogger(description = "删除应用")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @DeleteMapping("/{clientId}")
     public Result<Boolean> delete(@PathVariable(value = "clientId") String clientId) {
@@ -88,7 +88,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "保存应用")
-    @RequestLog(description = "保存应用")
+    @RequestLogger(description = "保存应用")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @PostMapping
     public Result<Boolean> save(@Validated @RequestBody ClientDTO clientDto) {
@@ -97,7 +97,7 @@ public class ClientController {
     }
 
     @ApiOperation(value = "修改应用")
-    @RequestLog(description = "修改应用")
+    @RequestLogger(description = "修改应用")
     @PreAuthorize("hasAuthority('sys:dict:update')")
     @PutMapping("/{clientId}")
     public Result<Boolean> update(@PathVariable(value = "clientId") String clientId,

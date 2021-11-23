@@ -2,7 +2,7 @@ dependencies {
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha'))
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger'))
 
     implementation 'org.springframework.security:spring-security-core:5.4.2'
     implementation 'org.springframework.security:spring-security-config'

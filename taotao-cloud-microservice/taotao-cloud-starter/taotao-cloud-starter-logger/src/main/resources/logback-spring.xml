@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<!-- Context listeners -->
+	<contextName>${APP_NAME}</contextName>
+
+<!--	<contextListener class=" com.taotao.cloud.log.listener.SystemPropertyLoggerContextListener"/>-->
+
+	<property name="LOG_PATH" value="${user.home}"/>
+	<property name="OS_NAME" value="${os.name}"/>
+	<property name="OS_VERSION" value="${os.version}"/>
+	<property name="USER_TIMEZONE" value="${user.timezone}"/>
+	<property name="JAVA_VERSION" value="${java.version}"/>
+
+	<property name="CURRENT_DATE" value="%d{yyyy-MM-dd}"/>
+
+	<springProperty name="TAOTAO_CLOUD_VERSION" scope="context" source="taotaoCloudVersion" defaultValue="--"/>
+	<springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="--"/>
+	<springProperty name="SPRING_PROFILES_ACTIVE" scope="context" source="spring.profiles.active"/>
+	<springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="${LOG_PATH}/logs/${APP_NAME}"/>
+	<springProperty name="LOG_MAX_FILE_SIZE" scope="context" source="logback.filesize" defaultValue="2GB"/>
+	<springProperty name="LOG_FILE_MAX_DAY" scope="context" source="logback.filemaxday" defaultValue="15"/>
+	<springProperty name="SERVER_IP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
+	<springProperty name="SERVER_PORT" scope="context" source="server.port" defaultValue="--"/>
+	<springProperty name="BOOTSTRAP_SERVERS" scope="context" source="spring.kafka.bootstrap-servers" defaultValue="172.16.6.151:9092"/>
+	<springProperty name="LOGSTASH_DESTINATION" scope="context" source="logging.extend.logstash-appender.destination" defaultValue="172.16.6.151:9601"/>
+
+	<!--	see ch.qos.logback.classic.PatternLayout-->
+	<springProperty name="CONSOLE_LOG_PATTERN" source="logging.pattern.console"
+		defaultValue="[%clr(${APP_NAME}){green}:%clr(${SERVER_IP}){green}:%clr(${SERVER_PORT}){green}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){green} %clr([%thread]){red} %clr([${SPRING_PROFILES_ACTIVE:-}]){green} %clr([%level]){blue} %clr([${PID}]){magenta} %clr([${OS_NAME:-}:${OS_VERSION:-}]){yellow} %clr([${USER_TIMEZONE:-}]){yellow} %clr([${JAVA_VERSION:-}]){yellow} %clr(Version:[${TAOTAO_CLOUD_VERSION}]){green} %clr(TraceId:[%X{taotao-cloud-trace-id:-}]){blue} %clr(TenantId:[%X{taotao-cloud-tenant-id:-}]){cyan} %clr(RequestVersion:[%X{taotao-cloud-request-version:-}]){yellow} %clr(ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}]){magenta} %clr([%tid]){blue} %clr(%logger{360}){cyan} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<springProperty name="CONSOLE_LOG_PATTERN_NO_COLOR" source="logging.pattern.console.no.color"
+		defaultValue="[${APP_NAME}:${SERVER_IP}:${SERVER_PORT}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${SPRING_PROFILES_ACTIVE:-}] [%level] [${PID}] [${OS_NAME:-}:${OS_VERSION:-}] [${USER_TIMEZONE:-}] [${JAVA_VERSION:-}] Version:[${TAOTAO_CLOUD_VERSION}] TraceId:[%X{taotao-cloud-trace-id:-}] TenantId:[%X{taotao-cloud-tenant-id:-}] RequestVersion:[%X{taotao-cloud-request-version:-}] ZipkinTraceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}] [%tid] %logger{360} %clr([%F:%M:%L]){orange} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex"
+					converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx"
+					converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx2" converterClass="com.taotao.cloud.logger.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+	
+	<include resource="logback/console-appender.xml"/>
+	
+	<include resource="logback/file-appender.xml"/>
+	
+	<include resource="logback/kafka-appender.xml"/>
+	
+<!--	<include resource="logback/logstash-appender.xml"/>-->
+
+	<!--为某个包单独配置logger
+    比如定时任务，写代码的包名为：net.add1s.slf4j-logback
+    步骤如下：
+    1、定义一个appender，取名为task（随意，只要下面logger引用就行了）
+    appender的配置按照需要即可
+
+    2、定义一个logger:
+    <logger name="net.add1s.slf4j-logback" level="DEBUG" additivity="false">
+      <appender-ref ref="task" />
+    </logger>
+    注意：additivity必须设置为false，这样只会交给task这个appender，否则其他appender也会打印net.add1s.slf4j-logback里的log信息。
+
+    3、这样，在net.add1s.slf4j-logback的logger就会是上面定义的logger了。
+    private static Logger logger = LoggerFactory.getLogger(Class1.class);
+    -->
+
+	<logger name="org.springframework.cloud.openfeign" level="DEBUG"/>
+	<logger name="org.apache.kafka" level="OFF"/>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE_ASYNC"/>
+		<appender-ref ref="FILE_ALL_ASYNC"/>
+		<appender-ref ref="FILE_WARN_ASYNC"/>
+		<appender-ref ref="FILE_ERROR_ASYNC"/>
+		<appender-ref ref="KAFKA"/>
+<!--		<appender-ref ref="LOGSTASH_ASYNC"/>-->
+	</root>
+
+	<springProfile name="dev">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE_ASYNC"/>
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
+		</root>
+	</springProfile>
+
+	<springProfile name="test">
+		<root level="INFO">
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
+		</root>
+	</springProfile>
+
+	<springProfile name="pre">
+		<root level="INFO">
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
+		</root>
+	</springProfile>
+
+	<springProfile name="pro">
+		<root level="INFO">
+			<appender-ref ref="FILE_ALL_ASYNC"/>
+			<appender-ref ref="FILE_WARN_ASYNC"/>
+			<appender-ref ref="FILE_ERROR_ASYNC"/>
+			<appender-ref ref="KAFKA"/>
+<!--			<appender-ref ref="LOGSTASH_ASYNC"/>-->
+		</root>
+	</springProfile>
+</configuration>

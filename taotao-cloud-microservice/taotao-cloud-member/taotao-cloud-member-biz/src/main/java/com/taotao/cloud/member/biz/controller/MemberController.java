@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.controller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
 import com.taotao.cloud.member.api.vo.MemberVO;
@@ -39,7 +39,7 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 
-	@RequestLog(description = "根据id查询会员信息")
+	@RequestLogger(description = "根据id查询会员信息")
 	@PreAuthorize("hasAuthority('member:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id) {
@@ -48,14 +48,14 @@ public class MemberController {
 		return Result.success(vo);
 	}
 
-	@RequestLog(description = "查询会员是否已(注册)存在")
+	@RequestLogger(description = "查询会员是否已(注册)存在")
 	@GetMapping("/exist")
 	public Result<Boolean> existMember(@Validated @NotNull(message = "查询条件不能为空") MemberQuery memberQuery) {
 		Boolean result = memberService.existMember(memberQuery);
 		return Result.success(result);
 	}
 
-	@RequestLog(description = "注册新会员用户")
+	@RequestLogger(description = "注册新会员用户")
 	@PostMapping
 	public Result<Boolean> registerUser(@Validated @RequestBody MemberDTO memberDTO) {
 		Member result = memberService.registerUser(memberDTO);
@@ -64,7 +64,7 @@ public class MemberController {
 
 	// **********************内部微服务接口*****************************
 
-	@RequestLog(description = "查询会员用户")
+	@RequestLogger(description = "查询会员用户")
 	@GetMapping("/info/security")
 	public Result<Member> findMember(@Validated @NotBlank(message = "查询条件不能为空")
 									 @RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {

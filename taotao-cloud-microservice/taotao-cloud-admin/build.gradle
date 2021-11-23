@@ -1,6 +1,6 @@
 dependencies {
 	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
-	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+	implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
 
 	api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
 	implementation 'de.codecentric:spring-boot-admin-starter-server:2.4.0'

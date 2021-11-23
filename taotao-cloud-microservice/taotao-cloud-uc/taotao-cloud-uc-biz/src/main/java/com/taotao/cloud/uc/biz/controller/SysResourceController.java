@@ -22,7 +22,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.uc.api.dto.resource.ResourceUpdateDTO;
@@ -77,7 +77,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:04:45
 	 */
 	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表")
-	@RequestLog(description = "根据角色id获取资源列表")
+	@RequestLogger(description = "根据角色id获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/roleId/{roleId}")
@@ -98,7 +98,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:04:52
 	 */
 	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
-	@RequestLog(description = "根据角色id列表获取角色列表")
+	@RequestLogger(description = "根据角色id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/roleIds")
 	public Result<List<ResourceQueryVO>> findResourceByRoleIds(
@@ -118,7 +118,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:04:59
 	 */
 	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表")
-	@RequestLog(description = "根据角色code获取资源列表")
+	@RequestLogger(description = "根据角色code获取资源列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/code/{code}")
 	public Result<List<ResourceQueryVO>> findResourceByCode(
@@ -138,7 +138,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:05:06
 	 */
 	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
-	@RequestLog(description = "根据角色cde列表获取角色列表")
+	@RequestLogger(description = "根据角色cde列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/codes")
 	public Result<List<ResourceQueryVO>> findResourceByCodes(
@@ -171,7 +171,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:05:16
 	 */
 	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
-	@RequestLog(description = "获取当前用户菜单列表")
+	@RequestLogger(description = "获取当前用户菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
 	public Result<List<ResourceQueryVO>> findCurrentUserResource() {
@@ -191,7 +191,7 @@ public class SysResourceController extends
 	 * @since 2021-10-09 15:05:20
 	 */
 	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
-	@RequestLog(description = "获取当前用户树形菜单列表")
+	@RequestLogger(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/current/user/tree")
 	public Result<List<ResourceTreeVO>> findCurrentUserResourceTree(
@@ -218,7 +218,7 @@ public class SysResourceController extends
 	 */
 	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
 		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
-	@RequestLog(description = "获取树形菜单集合")
+	@RequestLogger(description = "获取树形菜单集合")
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
@@ -231,7 +231,7 @@ public class SysResourceController extends
 
 
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLog(description = "测试分布式事务")
+	@RequestLogger(description = "测试分布式事务")
 	@GetMapping("/test/se")
 	@SentinelResource(value = "se")
 	public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
@@ -240,7 +240,7 @@ public class SysResourceController extends
 	}
 
 	@Operation(summary = "测试异步", description = "测试异步")
-	@RequestLog(description = "测试异步")
+	@RequestLogger(description = "测试异步")
 	@GetMapping("/test/async")
 	public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
 		Future<Boolean> result = service().testAsync();
@@ -248,14 +248,14 @@ public class SysResourceController extends
 	}
 
 	@Operation(summary = "测试异步结果", description = "测试异步结果")
-	@RequestLog(description = "测试异步结果")
+	@RequestLogger(description = "测试异步结果")
 	@GetMapping("/test/async/future")
 	public Future<Boolean> testAsyncFuture() {
 		return service().testAsync();
 	}
 
 	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLog(description = "测试分布式事务")
+	@RequestLogger(description = "测试分布式事务")
 	@GetMapping("/test/seata")
 	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
 	public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {

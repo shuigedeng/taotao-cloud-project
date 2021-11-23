@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.logistics.biz.controller;
 
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logistics.api.vo.ExpressCompanyVO;
 import com.taotao.cloud.logistics.biz.entity.ExpressCompany;
 import com.taotao.cloud.logistics.biz.mapper.ExpressCompanyMapper;
@@ -51,7 +51,7 @@ public class ExpressCompanyController {
 	}
 
 	@Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息", method = CommonConstant.GET)
-	@RequestLog(description = "根据id查询物流公司信息")
+	@RequestLogger(description = "根据id查询物流公司信息")
 	@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<ExpressCompanyVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {

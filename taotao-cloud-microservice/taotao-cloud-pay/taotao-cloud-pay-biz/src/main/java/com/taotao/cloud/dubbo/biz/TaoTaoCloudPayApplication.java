@@ -3,7 +3,7 @@ package com.taotao.cloud.dubbo.biz;
 import com.taotao.cloud.core.annotation.EnableTaoTaoCloudMVC;
 import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
-import com.taotao.cloud.log.annotation.EnableTaoTaoCloudRequestLog;
+import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudRequestLogger;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.redis.annotation.EnableTaoTaoCloudRedis;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTaoTaoCloudFeign
 @EnableTaoTaoCloudMVC
 @EnableTaoTaoCloudJobXxl
-@EnableTaoTaoCloudRequestLog
+@EnableTaoTaoCloudRequestLogger
 @EnableTaoTaoCloudRedis
 @EnableTaoTaoCloudSeata
 @EnableTaoTaoCloudSentinel

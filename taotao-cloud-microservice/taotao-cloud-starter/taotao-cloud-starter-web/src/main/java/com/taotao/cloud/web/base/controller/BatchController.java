@@ -19,7 +19,7 @@ import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.log.annotation.RequestLog;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.dto.BatchDTO;
 import com.taotao.cloud.web.base.dto.BatchDTO.BatchUpdate;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -59,7 +59,7 @@ public interface BatchController<T extends SuperEntity<T, I>, I extends Serializ
 	 */
 	@Operation(summary = "通用批量操作", description = "通用批量操作")
 	@PostMapping("/batch")
-	@RequestLog(description = "通用批量操作")
+	@RequestLogger(description = "通用批量操作")
 	//@PreAuthorize("hasPermission(#batchDTO, 'batch')")
 	@PreAuthorize("@permissionVerifier.hasPermission('batch')")
 	default Result<Boolean> batch(

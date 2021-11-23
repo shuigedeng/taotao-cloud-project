@@ -3,7 +3,7 @@ dependencies {
 
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-security')
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-log')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-feign')
