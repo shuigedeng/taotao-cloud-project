@@ -3,22 +3,18 @@ package com.taotao.cloud.pay.merchant.bean;
 import com.egzosn.pay.common.api.PayService;
 import com.egzosn.pay.common.http.HttpConfigStorage;
 import com.egzosn.pay.fuiou.api.FuiouPayConfigStorage;
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.InMemoryMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import com.taotao.cloud.pay.merchant.PaymentPlatformMerchantDetails;
 import com.taotao.cloud.pay.merchant.PaymentPlatformServiceAdapter;
-import com.taotao.cloud.pay.provider.merchant.platform.FuiouPaymentPlatform;
-import com.taotao.cloud.pay.provider.merchant.platform.PaymentPlatforms;
+import com.taotao.cloud.pay.configuration.FuiouPaymentPlatform;
+import com.taotao.cloud.pay.provider.PaymentPlatforms;
 
 /**
  * 富友商户信息列表
  *
- * @author egan
- * <pre>
- *                         email egzosn@gmail.com
- *                         date   2019/4/6 14:30.
- *                         </pre>
+ *
  */
 public class FuiouMerchantDetails extends FuiouPayConfigStorage implements
 	PaymentPlatformMerchantDetails, PaymentPlatformServiceAdapter,

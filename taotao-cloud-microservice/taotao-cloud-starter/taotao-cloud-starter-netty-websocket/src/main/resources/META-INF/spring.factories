@@ -1,2 +1,2 @@
-#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#com.taotao.cloud.netty.autoconfigure.NettyWebSocketAutoConfigure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.netty.PropertiesAutoConfiguration

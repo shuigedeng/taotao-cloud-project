@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.openapi;
 
-import com.taotao.cloud.openapi.properties.SpringdocProperties;
+import com.taotao.cloud.openapi.properties.OpenApiProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({SpringdocProperties.class})
+@EnableConfigurationProperties({OpenApiProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

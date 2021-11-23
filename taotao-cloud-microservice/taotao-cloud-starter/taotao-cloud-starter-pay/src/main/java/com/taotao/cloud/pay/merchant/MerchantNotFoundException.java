@@ -3,11 +3,6 @@ package com.taotao.cloud.pay.merchant;
 /**
  * 商户不存在异常
  *
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date  2019/4/6 16:43.
- *         </pre>
  */
 
 public class MerchantNotFoundException extends RuntimeException {

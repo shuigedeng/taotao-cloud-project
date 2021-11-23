@@ -8,7 +8,7 @@ import com.egzosn.pay.common.util.str.StringUtils;
 import com.taotao.cloud.pay.configurers.PayMessageConfigurer;
 import com.taotao.cloud.pay.merchant.MerchantNotFoundException;
 import com.taotao.cloud.pay.merchant.bean.CommonPaymentPlatformMerchantDetails;
-import com.taotao.cloud.pay.provider.merchant.platform.UnionPaymentPlatform;
+import com.taotao.cloud.pay.configuration.UnionPaymentPlatform;
 import com.taotao.cloud.pay.utils.SqlTools;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(FastBuildRabbitMqProducer.class)
-@ConditionalOnProperty(prefix = "taotao.cloud.rabbitmq", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = RabbitMQProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RabbitMqConfiguration implements InitializingBean {
 
 	@Override

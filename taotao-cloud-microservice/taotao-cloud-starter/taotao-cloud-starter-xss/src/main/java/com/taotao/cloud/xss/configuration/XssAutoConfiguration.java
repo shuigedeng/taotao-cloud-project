@@ -41,13 +41,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
-@ConditionalOnProperty(
-	prefix = XssProperties.PREFIX,
-	name = "enabled",
-	havingValue = "true",
-	matchIfMissing = true
-)
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true")
 public class XssAutoConfiguration implements WebMvcConfigurer {
 
 	private final XssProperties xssProperties;

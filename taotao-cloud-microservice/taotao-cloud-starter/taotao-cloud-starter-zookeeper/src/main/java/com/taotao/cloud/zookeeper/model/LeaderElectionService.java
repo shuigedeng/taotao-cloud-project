@@ -120,7 +120,7 @@ public class LeaderElectionService {
 		}
 	}
 
-	static class ConnListener implements ConnectionStateListener {
+	public static class ConnListener implements ConnectionStateListener {
 
 		private final String path;
 

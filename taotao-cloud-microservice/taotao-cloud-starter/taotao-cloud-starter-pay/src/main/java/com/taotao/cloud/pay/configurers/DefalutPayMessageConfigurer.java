@@ -35,6 +35,7 @@ public class DefalutPayMessageConfigurer implements PayMessageConfigurer {
 	 * @param platform 商户平台，渠道
 	 * @param handler  处理器
 	 */
+	@Override
 	public void addHandler(PaymentPlatform platform, PayMessageHandler handler) {
 		if (handlers.containsKey(platform)) {
 			throw new IllegalArgumentException(platform.getPlatform() + "已存在，请勿重复设置");
@@ -48,6 +49,7 @@ public class DefalutPayMessageConfigurer implements PayMessageConfigurer {
 	 * @param platform 商户平台，渠道
 	 * @return 处理器
 	 */
+	@Override
 	public PayMessageHandler<PayMessage, PayService> getHandler(PaymentPlatform platform) {
 		return handlers.get(platform);
 	}

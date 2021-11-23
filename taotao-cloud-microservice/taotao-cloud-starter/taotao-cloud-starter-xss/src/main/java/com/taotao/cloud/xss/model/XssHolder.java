@@ -23,7 +23,7 @@ package com.taotao.cloud.xss.model;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-class XssHolder {
+public class XssHolder {
 
 	private static final ThreadLocal<Boolean> TL = new ThreadLocal<>();
 

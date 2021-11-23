@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 /**
  * jdbc sql生成语句生产
- *
- * @author ZaoSheng Wed Nov 162 17:31:32 CST 2015
  */
 public class SqlTools {
 

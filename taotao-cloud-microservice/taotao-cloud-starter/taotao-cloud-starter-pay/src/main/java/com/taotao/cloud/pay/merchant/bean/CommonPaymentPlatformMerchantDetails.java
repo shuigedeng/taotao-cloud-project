@@ -4,12 +4,12 @@ import com.egzosn.pay.common.api.BasePayConfigStorage;
 import com.egzosn.pay.common.api.PayService;
 import com.egzosn.pay.common.bean.CertStoreType;
 import com.egzosn.pay.common.http.HttpConfigStorage;
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.MerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import com.taotao.cloud.pay.merchant.PaymentPlatformMerchantDetails;
 import com.taotao.cloud.pay.merchant.PaymentPlatformServiceAdapter;
-import com.taotao.cloud.pay.provider.merchant.platform.PaymentPlatforms;
+import com.taotao.cloud.pay.provider.PaymentPlatforms;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -31,8 +31,6 @@ public class CommonPaymentPlatformMerchantDetails extends BasePayConfigStorage i
 	 * 证书（PKCS12）
 	 */
 	private Object keystore;
-
-
 	/**
 	 * 公钥证书
 	 */

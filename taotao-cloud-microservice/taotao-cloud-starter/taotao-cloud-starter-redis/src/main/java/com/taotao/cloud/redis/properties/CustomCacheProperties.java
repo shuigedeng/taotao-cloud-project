@@ -33,7 +33,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = CustomCacheProperties.PREFIX)
 public class CustomCacheProperties {
 
-	public static final String PREFIX = "taotao.cloud.cache";
+	public static final String PREFIX = "taotao.cloud.redis.cache";
 
 	private boolean enabled = true;
 

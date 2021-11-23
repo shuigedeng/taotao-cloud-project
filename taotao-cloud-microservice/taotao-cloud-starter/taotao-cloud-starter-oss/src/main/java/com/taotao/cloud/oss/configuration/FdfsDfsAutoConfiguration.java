@@ -16,7 +16,7 @@
 package com.taotao.cloud.oss.configuration;
 
 import com.taotao.cloud.oss.propeties.FastdfsProperties;
-import com.taotao.cloud.oss.propeties.FileProperties;
+import com.taotao.cloud.oss.propeties.OssProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
@@ -24,7 +24,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "FASTDFS")
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "FASTDFS")
 public class FdfsDfsAutoConfiguration {
 
 	private final FastdfsProperties properties;

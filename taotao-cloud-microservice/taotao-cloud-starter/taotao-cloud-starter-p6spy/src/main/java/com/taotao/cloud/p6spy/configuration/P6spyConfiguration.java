@@ -45,7 +45,7 @@ import org.springframework.core.env.Environment;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)
-@ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true")
 public class P6spyConfiguration implements ApplicationRunner , InitializingBean {
 
 	@Override

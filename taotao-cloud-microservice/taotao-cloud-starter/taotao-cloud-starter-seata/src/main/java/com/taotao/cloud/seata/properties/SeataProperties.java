@@ -31,7 +31,7 @@ public class SeataProperties {
 
 	public static final String PREFIX = "taotao.cloud.seata";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public boolean isEnabled() {
 		return enabled;

@@ -4,13 +4,13 @@ import com.egzosn.pay.common.api.PayService;
 import com.egzosn.pay.common.bean.CertStoreType;
 import com.egzosn.pay.common.http.HttpConfigStorage;
 import com.egzosn.pay.union.api.UnionPayConfigStorage;
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.InMemoryMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import com.taotao.cloud.pay.merchant.PaymentPlatformMerchantDetails;
 import com.taotao.cloud.pay.merchant.PaymentPlatformServiceAdapter;
-import com.taotao.cloud.pay.provider.merchant.platform.PaymentPlatforms;
-import com.taotao.cloud.pay.provider.merchant.platform.UnionPaymentPlatform;
+import com.taotao.cloud.pay.provider.PaymentPlatforms;
+import com.taotao.cloud.pay.configuration.UnionPaymentPlatform;
 import java.io.InputStream;
 
 /**

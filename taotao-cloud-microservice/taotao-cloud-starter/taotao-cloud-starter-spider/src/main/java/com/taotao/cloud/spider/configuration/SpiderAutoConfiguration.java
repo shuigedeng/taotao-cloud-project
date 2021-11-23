@@ -37,5 +37,4 @@ public class SpiderAutoConfiguration implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(SpiderAutoConfiguration.class, StarterNameConstant.P6SPY_STARTER);
 	}
-
 }

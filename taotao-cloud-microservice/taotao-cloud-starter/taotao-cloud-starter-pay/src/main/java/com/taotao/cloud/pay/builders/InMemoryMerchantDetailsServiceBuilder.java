@@ -13,15 +13,7 @@ import com.taotao.cloud.pay.provider.InMemoryMerchantDetailsManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 内存型商户列表服务构建器
- *
- * @author egan
- * <pre>
- *         email egzosn@gmail.com
- *         date  2019/5/6 19:36.
- *         </pre>
- */
+
 public class InMemoryMerchantDetailsServiceBuilder extends MerchantDetailsServiceBuilder {
 
 	private List<PaymentPlatformMerchantDetails> merchantDetails = new ArrayList<PaymentPlatformMerchantDetails>();

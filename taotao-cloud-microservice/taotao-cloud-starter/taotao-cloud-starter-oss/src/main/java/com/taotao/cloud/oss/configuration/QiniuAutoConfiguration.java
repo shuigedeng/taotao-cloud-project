@@ -19,7 +19,7 @@ import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.taotao.cloud.oss.propeties.FileProperties;
+import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.QiniuProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.QiniuUploadFileServiceImpl;
@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Bean;
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
-@ConditionalOnProperty(prefix = FileProperties.PREFIX, name = "type", havingValue = "QINIU")
+@ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "QINIU")
 public class QiniuAutoConfiguration {
 
 	private final QiniuProperties properties;

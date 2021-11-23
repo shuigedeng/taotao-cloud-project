@@ -18,7 +18,7 @@ package com.taotao.cloud.openapi.configuration;
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.openapi.properties.SpringdocProperties;
+import com.taotao.cloud.openapi.properties.OpenApiProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -37,16 +37,12 @@ import java.util.Map;
 import java.util.Objects;
 import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 
 /**
@@ -57,14 +53,14 @@ import org.springframework.http.HttpHeaders;
  * @since 2020/4/30 10:10
  */
 @Configuration
-@ConditionalOnProperty(prefix = SpringdocProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = OpenApiProperties.PREFIX, name = "enabled", havingValue = "true")
 public class OpenapiAutoConfiguration implements InitializingBean{
 
 	@Value("${spring.cloud.client.ip-address}")
 	private String ip;
 
 	@Autowired
-	private SpringdocProperties properties;
+	private OpenApiProperties properties;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

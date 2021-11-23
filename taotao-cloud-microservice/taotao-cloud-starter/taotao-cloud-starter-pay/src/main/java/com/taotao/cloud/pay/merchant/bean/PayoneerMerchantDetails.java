@@ -3,22 +3,17 @@ package com.taotao.cloud.pay.merchant.bean;
 import com.egzosn.pay.common.api.PayService;
 import com.egzosn.pay.common.http.HttpConfigStorage;
 import com.egzosn.pay.payoneer.api.PayoneerConfigStorage;
-import com.taotao.cloud.pay.PayConfigurerAdapter;
+import com.taotao.cloud.pay.model.PayConfigurerAdapter;
 import com.taotao.cloud.pay.builders.InMemoryMerchantDetailsServiceBuilder;
 import com.taotao.cloud.pay.merchant.PaymentPlatform;
 import com.taotao.cloud.pay.merchant.PaymentPlatformMerchantDetails;
 import com.taotao.cloud.pay.merchant.PaymentPlatformServiceAdapter;
-import com.taotao.cloud.pay.provider.merchant.platform.PaymentPlatforms;
-import com.taotao.cloud.pay.provider.merchant.platform.PayoneerPaymentPlatform;
+import com.taotao.cloud.pay.provider.PaymentPlatforms;
+import com.taotao.cloud.pay.configuration.PayoneerPaymentPlatform;
 
 /**
  * P卡(派安盈)商户信息列表
  *
- * @author egan
- * <pre>
- *                         email egzosn@gmail.com
- *                         date   2019/4/6 14:30.
- *                         </pre>
  */
 public class PayoneerMerchantDetails extends PayoneerConfigStorage implements
 	PaymentPlatformMerchantDetails, PaymentPlatformServiceAdapter,
