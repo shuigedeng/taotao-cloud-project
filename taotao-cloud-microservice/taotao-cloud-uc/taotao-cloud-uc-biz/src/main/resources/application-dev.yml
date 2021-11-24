@@ -473,55 +473,13 @@ spring:
 
 taotao:
   cloud:
-    elasticsearch:
-      enabled: true
-    mongodb:
-      enabled: true
-    disruptor:
-      enabled: true
-      multi-producer: false
-      ring-buffer-size: 1024
-      ring-thread-numbers: 4
-      #handler-definitions:
-      # - /Event-DC-Output/TagA-Output/** = emailHandler
-      # - /Event-DC-Output/TagB-Output/** = smsHandler
-    dinger:
-      enabled: false
-      project-id: ${spring.application.name}
-      dingers:
-        dingtalk:
-          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
-          secret: ${DINGDING_SECRET:xxxx}
-    health:
-      enabled: true
-      dump: true
-      export: true
-      warn: true
-      check: true
-    canal:
-      enabled: false
-      instances:
-        example:
-          clusterEnabled: false
-          zookeeperAddress: 172.16.6.151:2181
-          host: 172.16.6.151
-          port: 11111
-          userName: canal
-          password: 123456
-          batchSize: 1000
-          filter:
-          retryCount: 3
-          acquireInterval: 3000
-    core:
-      env: dev
-      enabled: true
-    captcha:
-      enabled: true
     zookeeper:
       enabled: true
       connectString: 172.16.6.151:2181
       lock:
         enabled: false
+    xss:
+      enabled: false
     web:
       dozer:
         enabled: true
@@ -545,6 +503,8 @@ taotao:
         enabled: true
       xss:
         enabled: true
+    spider:
+      enabled: false
     sms:
       enabled: false
     shardingsphere:
@@ -553,21 +513,66 @@ taotao:
       enabled: true
     seata:
       enabled: true
-    log:
-      request-log:
+    rxjava:
+      enabled: false
+    rocketmq:
+      enabled: false
+    redis:
+      lock:
         enabled: true
-        types:
-          - kafka
-          - logger
+      cache:
+        enabled: true
+        type: redis
+    rabbitmq:
+      enabled: false
+    qrcode:
+      enabled: false
+    pulsar:
+      enabled: false
+    prometheus:
+      enabled: false
+    process:
+      enabled: false
+    pay:
+      enabled: false
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-    redis:
-      lock:
+    oss:
+      enabled: false
+    openapi:
+      enabled: true
+      group: ${spring.application.name}
+      version: ${taotaoCloudVersion}
+    netty:
+      socket:
+        enabled: false
+    mongodb:
+      enabled: true
+    metrics:
+      enabled: false
+      druid:
+        enabled: false
+      sentinel:
+        enabled: false
+      undertow:
+        enabled: false
+    mail:
+      enabled: false
+    logger:
+      enabled: true
+      request:
         enabled: true
+        types:
+          - kafka
+          - logger
+    laytpl:
+      enabled: true
+    kafka:
+      enabled: true
     job:
       xxl:
         enabled: true
@@ -579,20 +584,79 @@ taotao:
           port: 1113
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${user.home}/logs/xxl-job
+      elastic:
+        enabled: false
+    ip2region:
+      enabled: true
+    health:
+      enabled: true
+      dump: true
+      export: true
+      warn: true
+      check: true
     feign:
       enabled: true
       loadbalancer:
         enabled: true
-    cache:
+    encrypt:
       enabled: true
-      type: redis
-    hibernate:
+      filter:
+        enabled: false
+    elk:
+      enabled: false
+    elasticsearch:
       enabled: true
-      packages: com.taotao.cloud.uc.biz.entity
-    springdoc:
+    dubbo:
       enabled: true
-      group: ${spring.application.name}
-      version: ${taotaoCloudVersion}
+    disruptor:
+      enabled: true
+      multi-producer: false
+      ring-buffer-size: 1024
+      ring-thread-numbers: 4
+      #handler-definitions:
+      # - /Event-DC-Output/TagA-Output/** = emailHandler
+      # - /Event-DC-Output/TagB-Output/** = smsHandler
+    dinger:
+      enabled: false
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
+          secret: ${DINGDING_SECRET:xxxx}
+    data:
+      mybatis-plus:
+        enabled: true
+        auto-fill:
+          enabled: false
+        dynamic:
+          datasource:
+            enabled: false
+        tenant:
+          enabled: false
+      jpa:
+        enabled: true
+        packages: com.taotao.cloud.uc.biz.entity
+        tenant:
+          enabled: false
+    core:
+      env: dev
+      enabled: true
+    captcha:
+      enabled: true
+    canal:
+      enabled: false
+      instances:
+        example:
+          clusterEnabled: false
+          zookeeperAddress: 172.16.6.151:2181
+          host: 172.16.6.151
+          port: 11111
+          userName: canal
+          password: 123456
+          batchSize: 1000
+          filter:
+          retryCount: 3
+          acquireInterval: 3000
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.*.biz.entity

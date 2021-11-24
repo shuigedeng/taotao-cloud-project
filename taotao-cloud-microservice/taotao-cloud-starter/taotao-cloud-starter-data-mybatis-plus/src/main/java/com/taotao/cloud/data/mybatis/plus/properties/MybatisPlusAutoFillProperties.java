@@ -33,7 +33,7 @@ public class MybatisPlusAutoFillProperties {
 	/**
 	 * 是否开启自动填充字段
 	 */
-	private Boolean enabled = true;
+	private Boolean enabled = false;
 	/**
 	 * 是否开启了插入填充
 	 */
