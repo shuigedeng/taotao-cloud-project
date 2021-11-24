@@ -41,7 +41,7 @@ public class CanalProperties {
 	// 配置信息
 	private Map<String, Instance> instances = new LinkedHashMap<>();
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -115,7 +115,7 @@ public class CanalProperties {
 		public Instance() {
 		}
 
-		public boolean isClusterEnabled() {
+		public boolean getClusterEnabled() {
 			return clusterEnabled;
 		}
 

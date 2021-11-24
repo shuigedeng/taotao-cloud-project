@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.canal.configuration;
 
-import com.taotao.cloud.canal.model.SimpleCanalClient;
 import com.taotao.cloud.canal.interfaces.CanalClient;
+import com.taotao.cloud.canal.model.SimpleCanalClient;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.canal.runner.CanalApplicationRunner;
 import com.taotao.cloud.common.constant.StarterNameConstant;
@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * CanalClientConfiguration 
+ * CanalClientConfiguration
  *
  * @author shuigedeng
  * @version 2021.9

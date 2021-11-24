@@ -74,7 +74,7 @@ public class XssProperties {
 		escape;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -82,7 +82,7 @@ public class XssProperties {
 		this.enabled = enabled;
 	}
 
-	public boolean isTrimText() {
+	public boolean getTrimText() {
 		return trimText;
 	}
 
@@ -98,7 +98,7 @@ public class XssProperties {
 		this.mode = mode;
 	}
 
-	public boolean isPrettyPrint() {
+	public boolean getPrettyPrint() {
 		return prettyPrint;
 	}
 
@@ -106,7 +106,7 @@ public class XssProperties {
 		this.prettyPrint = prettyPrint;
 	}
 
-	public boolean isEnableEscape() {
+	public boolean getEnableEscape() {
 		return enableEscape;
 	}
 

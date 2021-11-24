@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.elk.properties;
 
-import com.taotao.cloud.elk.constant.ElkConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -27,8 +26,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2020/5/3 16:18
  */
 @RefreshScope
-@ConfigurationProperties(prefix = ElkConstant.BASE_ELK_PREFIX)
+@ConfigurationProperties(prefix = ElkProperties.PREFIX)
 public class ElkProperties {
+
+	public static final String PREFIX = "taotao.cloud.elk";
 
 	private boolean enabled = false;
 
@@ -38,7 +39,7 @@ public class ElkProperties {
 
 	private String[] destinations = {"127.0.0.1:4560"};
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

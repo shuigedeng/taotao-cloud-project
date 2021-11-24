@@ -36,10 +36,7 @@ import org.springframework.context.annotation.Import;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import({
-	DisruptorAutoConfiguration.class,
-	RingBufferAutoConfiguration.class
-})
+@Import({DisruptorAutoConfiguration.class, RingBufferAutoConfiguration.class})
 public @interface EnableTaoTaoCloudDisruptor {
 
 }

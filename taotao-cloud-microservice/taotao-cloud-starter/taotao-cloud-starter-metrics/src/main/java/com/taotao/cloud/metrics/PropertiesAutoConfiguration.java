@@ -15,7 +15,10 @@
  */
 package com.taotao.cloud.metrics;
 
+import com.taotao.cloud.metrics.properties.DruidMetricsProperties;
 import com.taotao.cloud.metrics.properties.MetricsProperties;
+import com.taotao.cloud.metrics.properties.SentinelMetricsProperties;
+import com.taotao.cloud.metrics.properties.UndertowMetricsProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
@@ -25,7 +28,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/7/29 14:18
  */
-@EnableConfigurationProperties({MetricsProperties.class})
+@EnableConfigurationProperties({MetricsProperties.class,
+	DruidMetricsProperties.class,
+	SentinelMetricsProperties.class,
+	UndertowMetricsProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

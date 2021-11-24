@@ -32,6 +32,8 @@ public class Ip2regionProperties {
 
 	public static final String PREFIX = "taotao.cloud.ip2region";
 
+	private boolean enabled = false;
+
 	/**
 	 * ip2region.db 文件路径
 	 */
@@ -43,5 +45,13 @@ public class Ip2regionProperties {
 
 	public void setDbFileLocation(String dbFileLocation) {
 		this.dbFileLocation = dbFileLocation;
+	}
+
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 }

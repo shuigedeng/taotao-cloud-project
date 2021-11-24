@@ -92,7 +92,7 @@ public class HttpClientProperties {
 	 */
 	private int retryCount = 3;
 
-	public boolean isTcpNoDelay() {
+	public boolean getTcpNoDelay() {
 		return tcpNoDelay;
 	}
 

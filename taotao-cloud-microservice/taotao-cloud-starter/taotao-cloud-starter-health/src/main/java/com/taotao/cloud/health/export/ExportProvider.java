@@ -70,7 +70,7 @@ public class ExportProvider {
 	public void start() {
 		this.isClose = false;
 
-		if (this.exportProperties.isElkEnabled()) {
+		if (this.exportProperties.getElkEnabled()) {
 			LogstashTcpSocketAppender logstashTcpSocketAppender = ContextUtil.getBean(
 				LogstashTcpSocketAppender.class,
 				false);

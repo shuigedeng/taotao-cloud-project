@@ -11,7 +11,6 @@ import java.io.IOException;
 /**
  * 请求缓存包装器
  *
- * @author gaoyang
  */
 public class CacheRequestWrapper extends HttpServletRequestWrapper {
 

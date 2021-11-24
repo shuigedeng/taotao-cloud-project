@@ -29,7 +29,7 @@ public class LayTplProperties {
 
 	public static final String PREFIX = "taotao.cloud.laytpl";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 * 模板分隔符开始，默认：{{
@@ -140,7 +140,7 @@ public class LayTplProperties {
 		this.localDateTimePattern = localDateTimePattern;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

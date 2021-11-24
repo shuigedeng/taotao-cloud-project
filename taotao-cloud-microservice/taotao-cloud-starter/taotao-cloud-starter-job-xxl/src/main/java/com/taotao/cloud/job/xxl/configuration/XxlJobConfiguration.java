@@ -27,6 +27,7 @@ import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,14 +41,14 @@ import org.springframework.util.StringUtils;
  * @version 1.0.0
  * @since 2021/8/30 20:29
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
+@ConditionalOnProperty(prefix = XxlJobProperties.PREFIX, name = "enabled", havingValue = "true")
 public class XxlJobConfiguration implements InitializingBean {
 
 	/**
 	 * 服务名称 包含 XXL_JOB_ADMIN 则说明是 Admin
 	 */
 	private static final String TAO_TAO_CLOUD_XXL_JOB_ADMIN = "taotao-cloud-xxl-job-admin";
-
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

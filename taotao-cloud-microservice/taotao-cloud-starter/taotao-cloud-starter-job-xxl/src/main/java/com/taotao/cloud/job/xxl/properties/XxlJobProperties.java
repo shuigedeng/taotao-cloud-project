@@ -40,7 +40,7 @@ public class XxlJobProperties {
 	@NestedConfigurationProperty
 	private XxlExecutorProperties executor = new XxlExecutorProperties();
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

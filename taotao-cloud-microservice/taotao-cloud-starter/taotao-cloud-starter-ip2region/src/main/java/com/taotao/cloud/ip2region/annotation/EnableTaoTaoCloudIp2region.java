@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.ip2region.annotation;
 
-import com.taotao.cloud.ip2region.configuration.Ip2regionConfiguration;
+import com.taotao.cloud.ip2region.configuration.Ip2regionAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({Ip2regionConfiguration.class})
+@Import({Ip2regionAutoConfiguration.class})
 public @interface EnableTaoTaoCloudIp2region {
 
 }

@@ -40,8 +40,8 @@ public class StarterNameConstant {
 	public static final String DUBBO_STARTER = "taotao-cloud-starter-dubbo";
 	public static final String ELASTICSEARCH_STARTER = "taotao-cloud-starter-elasticsearch";
 	public static final String ELK_STARTER = "taotao-cloud-starter-elk";
-	public static final String ENCRYPT_STARTER = "taotao-cloud-starter-encrypt";
 	public static final String FEIGN_STARTER = "taotao-cloud-starter-feign";
+	public static final String ENCRYPT_STARTER = "taotao-cloud-starter-encrypt";
 	public static final String OSS_STARTER = "taotao-cloud-starter-oss";
 	public static final String HEALTH_STARTER = "taotao-cloud-starter-health";
 	public static final String JOB_ELASTIC_STARTER = "taotao-cloud-starter-job-elastic";
@@ -49,6 +49,7 @@ public class StarterNameConstant {
 	public static final String KAFKA_STARTER = "taotao-cloud-starter-kafka";
 	public static final String LOG_STARTER = "taotao-cloud-starter-logger";
 	public static final String MAIL_STARTER = "taotao-cloud-starter-mail";
+	public static final String LAYTPL_STARTER = "taotao-cloud-starter-laytpl";
 	public static final String MONGODB_STARTER = "taotao-cloud-starter-mongodb";
 	public static final String NETTY_WEBSOCKET_STARTER = "taotao-cloud-starter-netty-websocket";
 	public static final String OPENAPI_STARTER = "taotao-cloud-starter-openapi";

@@ -30,11 +30,10 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = RequestLoggerProperties.PREFIX)
 public class RequestLoggerProperties {
 
-	public static final String PREFIX = "taotao.cloud.log.request-logger";
-
+	public static final String PREFIX = "taotao.cloud.logger.request";
 
 	/**
-	 * 是否开启审计日志
+	 * 是否开启请求日志
 	 */
 	private Boolean enabled = false;
 

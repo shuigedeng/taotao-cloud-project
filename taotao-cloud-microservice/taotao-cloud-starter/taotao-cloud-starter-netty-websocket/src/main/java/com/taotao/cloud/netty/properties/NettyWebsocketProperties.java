@@ -33,7 +33,7 @@ public class NettyWebsocketProperties {
 
 	private boolean enabled = false;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

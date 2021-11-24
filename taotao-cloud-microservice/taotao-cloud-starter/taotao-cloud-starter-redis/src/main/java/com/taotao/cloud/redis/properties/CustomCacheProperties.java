@@ -35,7 +35,7 @@ public class CustomCacheProperties {
 
 	public static final String PREFIX = "taotao.cloud.redis.cache";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 * 目前只支持 REDIS 和 CAFFEINE ！ CAFFEINE 只用于项目的开发环境或者演示环境使用，  生产环境请用redis！！！
@@ -172,7 +172,7 @@ public class CustomCacheProperties {
 		this.configs = configs;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

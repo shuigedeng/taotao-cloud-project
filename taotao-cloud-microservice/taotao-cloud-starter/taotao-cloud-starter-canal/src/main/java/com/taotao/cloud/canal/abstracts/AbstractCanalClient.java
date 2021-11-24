@@ -101,7 +101,7 @@ public abstract class AbstractCanalClient implements CanalClient {
 		CanalConnector connector;
 
 		//是否是集群模式
-		if (instance.isClusterEnabled()) {
+		if (instance.getClusterEnabled()) {
 			//zookeeper 连接集合
 			List<SocketAddress> addresses = new ArrayList<>();
 			for (String s : instance.getZookeeperAddress()) {

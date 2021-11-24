@@ -307,7 +307,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 		DisruptorEventThreadFactory threadFactory = new DisruptorEventThreadFactory();
 
 		Disruptor<DisruptorEvent> disruptor;
-		if (properties.isMultiProducer()) {
+		if (properties.getMultiProducer()) {
 			disruptor = new Disruptor<>(eventFactory, properties.getRingBufferSize(), threadFactory,
 				ProducerType.MULTI, waitStrategy);
 		} else {

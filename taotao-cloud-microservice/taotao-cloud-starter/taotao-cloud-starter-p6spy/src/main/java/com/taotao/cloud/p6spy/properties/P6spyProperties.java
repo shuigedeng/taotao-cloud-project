@@ -346,7 +346,7 @@ public class P6spyProperties {
 	private String jndicontextcustom;
 
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

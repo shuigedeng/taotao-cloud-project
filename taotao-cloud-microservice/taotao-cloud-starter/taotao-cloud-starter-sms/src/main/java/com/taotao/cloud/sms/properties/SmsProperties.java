@@ -36,7 +36,7 @@ public class SmsProperties {
 
 	private SmsType type = SmsType.ALIYUN;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

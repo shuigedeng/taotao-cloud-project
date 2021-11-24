@@ -15,6 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.configuration;
 
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
 import com.taotao.cloud.dingtalk.model.DingerManagerBuilder;
@@ -35,6 +37,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -50,9 +53,8 @@ import org.springframework.web.client.RestTemplate;
  * @since 1.2
  */
 @Configuration
-@AutoConfigureAfter({BeanConfiguration.class,
-	HttpClientConfiguration.class,
-	ThreadPoolConfiguration.class})
+@AutoConfigureAfter({BeanConfiguration.class, HttpClientConfiguration.class, ThreadPoolConfiguration.class})
+@ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DingtalkConfiguration implements InitializingBean {
 
 	private final DingerProperties properties;
@@ -111,6 +113,8 @@ public class DingtalkConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DingtalkConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+
 		checkConfigFileExists();
 	}
 

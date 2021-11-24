@@ -31,6 +31,7 @@ import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.configuration.DynamicDataSourceAutoConfiguration.DataSourceProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,7 +59,7 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @AutoConfigureBefore(name = "io.seata.spring.boot.autoconfigure.SeataAutoConfiguration")
 @EnableConfigurationProperties(DataSourceProperties.class)
-@ConditionalOnProperty(prefix = "taotao.cloud.data.dynamic.datasource", name = "enabled",havingValue = "true")
+@ConditionalOnProperty(prefix = MybatisPlusDynamicDataSourceProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 
 	@Override

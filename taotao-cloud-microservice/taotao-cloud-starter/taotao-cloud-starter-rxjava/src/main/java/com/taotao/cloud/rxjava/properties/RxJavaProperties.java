@@ -39,7 +39,7 @@ public class RxJavaProperties {
 
 		private boolean enabled = true;
 
-		public boolean isEnabled() {
+		public boolean getEnabled() {
 			return enabled;
 		}
 
@@ -49,7 +49,7 @@ public class RxJavaProperties {
 	}
 
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

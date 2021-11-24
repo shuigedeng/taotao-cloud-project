@@ -35,7 +35,7 @@ public class DisruptorProperties {
 	/**
 	 * Enable Disruptor.
 	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 	/**
 	 * 是否自动创建RingBuffer对象
 	 */
@@ -58,7 +58,7 @@ public class DisruptorProperties {
 	 */
 	private List<EventHandlerDefinition> handlerDefinitions = new ArrayList<>();
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -66,7 +66,7 @@ public class DisruptorProperties {
 		this.enabled = enabled;
 	}
 
-	public boolean isRingBuffer() {
+	public boolean getRingBuffer() {
 		return ringBuffer;
 	}
 
@@ -74,7 +74,7 @@ public class DisruptorProperties {
 		this.ringBuffer = ringBuffer;
 	}
 
-	public boolean isMultiProducer() {
+	public boolean getMultiProducer() {
 		return multiProducer;
 	}
 

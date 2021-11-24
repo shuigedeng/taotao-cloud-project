@@ -85,7 +85,7 @@ public class CoreProperties {
 		this.env = env;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -93,7 +93,7 @@ public class CoreProperties {
 		this.enabled = enabled;
 	}
 
-	public boolean isDbPrintSqlEnabled() {
+	public boolean getDbPrintSqlEnabled() {
 		return dbPrintSqlEnabled;
 	}
 
@@ -101,7 +101,7 @@ public class CoreProperties {
 		this.dbPrintSqlEnabled = dbPrintSqlEnabled;
 	}
 
-	public boolean isCollectHookEnabled() {
+	public boolean getCollectHookEnabled() {
 		return collectHookEnabled;
 	}
 
@@ -109,7 +109,7 @@ public class CoreProperties {
 		this.collectHookEnabled = collectHookEnabled;
 	}
 
-	public boolean isContextRestartEnabled() {
+	public boolean getContextRestartEnabled() {
 		return contextRestartEnabled;
 	}
 
@@ -125,7 +125,7 @@ public class CoreProperties {
 		this.contextRestartTimespan = contextRestartTimespan;
 	}
 
-	public boolean isPrintSqlError() {
+	public boolean getPrintSqlError() {
 		return isPrintSqlError;
 	}
 

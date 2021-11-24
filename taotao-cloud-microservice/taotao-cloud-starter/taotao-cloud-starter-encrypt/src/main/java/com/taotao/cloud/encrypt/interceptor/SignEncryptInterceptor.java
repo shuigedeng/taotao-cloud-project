@@ -40,7 +40,7 @@ public class SignEncryptInterceptor implements MethodInterceptor {
 		SignEncrypt annotation = methodInvocation.getMethod().getAnnotation(SignEncrypt.class);
 		long timeout = annotation.timeout();
 		TimeUnit timeUnit = annotation.timeUnit();
-		if (((CacheRequestWrapper) request).getBody().length < 1) {
+		if (request.getBody().length < 1) {
 			return proceed;
 		}
 		Map<Object, Object> jsonMap = new ObjectMapper().readValue(request.getBody(), Map.class);

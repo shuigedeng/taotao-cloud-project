@@ -34,34 +34,34 @@ public class HealthProperties {
 	/**
 	 * 是否开启健康检查
 	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 *是否开启checkProvider
 	 */
-	private boolean check = true;
+	private boolean check = false;
 
 	/**
 	 *是否开启warnProvider
 	 */
-	private boolean warn = true;
+	private boolean warn = false;
 
 	/**
 	 *是否开启exportProvider
 	 */
-	private boolean export = true;
+	private boolean export = false;
 
 	/**
 	 *是否开启dumpProvider
 	 */
-	private boolean dump = true;
+	private boolean dump = false;
 
 	/**
 	 * 健康检查时间间隔 单位:秒
 	 */
 	private int timeSpan = 100;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -69,7 +69,7 @@ public class HealthProperties {
 		this.enabled = enabled;
 	}
 
-	public boolean isCheck() {
+	public boolean getCheck() {
 		return check;
 	}
 
@@ -77,7 +77,7 @@ public class HealthProperties {
 		this.check = check;
 	}
 
-	public boolean isWarn() {
+	public boolean getWarn() {
 		return warn;
 	}
 
@@ -85,7 +85,7 @@ public class HealthProperties {
 		this.warn = warn;
 	}
 
-	public boolean isExport() {
+	public boolean getExport() {
 		return export;
 	}
 
@@ -93,7 +93,7 @@ public class HealthProperties {
 		this.export = export;
 	}
 
-	public boolean isDump() {
+	public boolean getDump() {
 		return dump;
 	}
 

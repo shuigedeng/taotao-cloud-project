@@ -17,15 +17,22 @@ package com.taotao.cloud.web.annotation;
 
 import com.taotao.cloud.canal.annotation.EnableTaoTaoCloudCanalClient;
 import com.taotao.cloud.captcha.annotation.EnableTaoTaoCloudCaptcha;
-import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
+import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJpa;
 import com.taotao.cloud.data.mybatis.plus.annotation.EnableTaoTaoCloudMybatisPlus;
 import com.taotao.cloud.dingtalk.annatations.EnableTaoTaoCloudDingtalk;
 import com.taotao.cloud.disruptor.annotation.EnableTaoTaoCloudDisruptor;
+import com.taotao.cloud.dubbo.annotation.EnableTaoTaoCloudDubbo;
 import com.taotao.cloud.elasticsearch.annotation.EnableTaoTaoCloudElasticsearch;
+import com.taotao.cloud.elk.annotation.EnableTaoTaoCloudElk;
+import com.taotao.cloud.encrypt.annotation.EnableTaoTaoCloudEncrypt;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeignClients;
 import com.taotao.cloud.health.annotation.EnableTaoTaoCloudHealth;
+import com.taotao.cloud.ip2region.annotation.EnableTaoTaoCloudIp2region;
+import com.taotao.cloud.job.elastic.annotation.EnableTaoTaoCloudJobElastic;
 import com.taotao.cloud.job.xxl.annotation.EnableTaoTaoCloudJobXxl;
-import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudRequestLogger;
+import com.taotao.cloud.kafka.annotation.EnableTaoTaoCloudKafka;
+import com.taotao.cloud.laytpl.annotation.EnableTaoTaoCloudLayTpl;
+import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudLogger;
 import com.taotao.cloud.mail.annotation.EnableTaoTaoCloudMail;
 import com.taotao.cloud.metrics.annotation.EnableTaoTaoCloudMetrics;
 import com.taotao.cloud.mongodb.annotation.EnableTaoTaoCloudMongodb;
@@ -69,19 +76,25 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableTaoTaoCloudMail
-@EnableTaoTaoCloudDisruptor
-@EnableTaoTaoCloudDingtalk
 @EnableTaoTaoCloudCanalClient
-@EnableTaoTaoCloudHealth
 @EnableTaoTaoCloudCaptcha
-@EnableTaoTaoCloudElasticsearch
-@EnableTaoTaoCloudRequestLogger
-@EnableTaoTaoCloudJobXxl
-@EnableTaoTaoCloudFeignClients
-@EnableTaoTaoCloudJPA
+@EnableTaoTaoCloudJpa
 @EnableTaoTaoCloudMybatisPlus
-
+@EnableTaoTaoCloudDingtalk
+@EnableTaoTaoCloudDisruptor
+@EnableTaoTaoCloudDubbo
+@EnableTaoTaoCloudElasticsearch
+@EnableTaoTaoCloudElk
+@EnableTaoTaoCloudEncrypt
+@EnableTaoTaoCloudFeignClients
+@EnableTaoTaoCloudHealth
+@EnableTaoTaoCloudIp2region
+@EnableTaoTaoCloudJobElastic
+@EnableTaoTaoCloudJobXxl
+@EnableTaoTaoCloudKafka
+@EnableTaoTaoCloudLayTpl
+@EnableTaoTaoCloudLogger
+@EnableTaoTaoCloudMail
 @EnableTaoTaoCloudMetrics
 @EnableTaoTaoCloudMongodb
 @EnableTaoTaoCloudWebSocket

@@ -64,7 +64,7 @@ public class WebServerCollectTask extends AbstractCollectTask {
 
 	@Override
 	public boolean getEnabled() {
-		return collectTaskProperties.isWebServerEnabled();
+		return collectTaskProperties.getWebServerEnabled();
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ZookeeperProperties {
 	/**
 	 * 连接Zookeeper服务器的列表. 包括IP地址和端口号. 多个地址用逗号分隔. 如: host1:2181,host2:2181
 	 */
-	private String serverLists;
+	private String serverList;
 
 	/**
 	 * 命名空间.
@@ -71,12 +71,12 @@ public class ZookeeperProperties {
 	 */
 	private String digest;
 
-	public String getServerLists() {
-		return serverLists;
+	public String getServerList() {
+		return serverList;
 	}
 
-	public void setServerLists(String serverLists) {
-		this.serverLists = serverLists;
+	public void setServerList(String serverList) {
+		this.serverList = serverList;
 	}
 
 	public String getNamespace() {
