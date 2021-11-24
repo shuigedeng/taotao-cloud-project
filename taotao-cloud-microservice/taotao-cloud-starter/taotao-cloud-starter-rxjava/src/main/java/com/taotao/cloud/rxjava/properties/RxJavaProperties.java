@@ -37,7 +37,7 @@ public class RxJavaProperties {
 
 	public static class Mvc {
 
-		private boolean enabled = true;
+		private boolean enabled = false;
 
 		public boolean getEnabled() {
 			return enabled;

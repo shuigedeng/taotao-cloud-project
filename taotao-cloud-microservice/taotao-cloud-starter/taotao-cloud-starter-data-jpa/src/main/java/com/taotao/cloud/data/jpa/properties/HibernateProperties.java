@@ -37,7 +37,7 @@ import org.springframework.orm.jpa.vendor.Database;
 @ConfigurationProperties(prefix = HibernateProperties.PREFIX)
 public class HibernateProperties {
 
-	public static final String PREFIX = "taotao.cloud.hibernate";
+	public static final String PREFIX = "taotao.cloud.data.jpa";
 
 	/**
 	 * 是否开启Hibernate
