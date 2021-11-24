@@ -20,13 +20,16 @@ import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIE
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.DingerHttpTemplate;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,10 +43,14 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 @ConditionalOnMissingBean(name = DingerConstant.DINGER_REST_TEMPLATE)
-@ConfigurationProperties(prefix = DINGER_PROPERTIES_PREFIX + "http-client")
 @AutoConfigureAfter(BeanConfiguration.class)
-public class HttpClientConfiguration {
+@ConditionalOnProperty(prefix = HttpClientProperties.PREFIX, value = "enabled", havingValue = "true")
+public class HttpClientConfiguration implements InitializingBean {
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(HttpClientConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+	}
 
 	@Bean(name = "dingerClientHttpRequestFactory")
 	public ClientHttpRequestFactory dingerClientHttpRequestFactory(

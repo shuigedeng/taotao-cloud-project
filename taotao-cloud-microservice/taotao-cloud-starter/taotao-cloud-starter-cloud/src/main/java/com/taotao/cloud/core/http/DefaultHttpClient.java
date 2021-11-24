@@ -107,7 +107,7 @@ public class DefaultHttpClient implements HttpClient {
 		//默认为Socket配置
 		SocketConfig defaultSocketConfig = SocketConfig.custom()
 			//tcp 包延迟优化,true
-			.setTcpNoDelay(httpClientProperties.isTcpNoDelay())
+			.setTcpNoDelay(httpClientProperties.getTcpNoDelay())
 			.build();
 
 		manager.setDefaultSocketConfig(defaultSocketConfig);

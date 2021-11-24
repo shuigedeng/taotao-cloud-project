@@ -30,7 +30,7 @@ public class CaptchaProperties {
 
 	public static final String PREFIX = "taotao.cloud.captcha";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 * 验证码类型.
@@ -119,16 +119,12 @@ public class CaptchaProperties {
 	private int reqVerifyMinuteLimit = 100;
 
 
-	public boolean isHistoryDataClearEnable() {
+	public boolean getHistoryDataClearEnable() {
 		return historyDataClearEnable;
 	}
 
 	public void setHistoryDataClearEnable(boolean historyDataClearEnable) {
 		this.historyDataClearEnable = historyDataClearEnable;
-	}
-
-	public boolean isReqFrequencyLimitEnable() {
-		return reqFrequencyLimitEnable;
 	}
 
 	public boolean getReqFrequencyLimitEnable() {
@@ -301,7 +297,7 @@ public class CaptchaProperties {
 		this.timingClear = timingClear;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

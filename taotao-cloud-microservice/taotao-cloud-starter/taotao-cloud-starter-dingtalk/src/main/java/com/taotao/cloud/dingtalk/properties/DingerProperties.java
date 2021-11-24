@@ -41,7 +41,7 @@ public class DingerProperties implements InitializingBean {
 	/**
 	 * 是否启用DingTalk, 默认true, 选填
 	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 * dinger类型 <code>key={@link DingerType}, value={@link Dinger}</code>, 必填
@@ -68,7 +68,7 @@ public class DingerProperties implements InitializingBean {
 	 */
 	private DingerType defaultDinger;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

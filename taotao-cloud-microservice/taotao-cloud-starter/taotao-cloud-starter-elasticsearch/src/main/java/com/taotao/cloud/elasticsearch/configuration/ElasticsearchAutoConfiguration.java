@@ -134,13 +134,13 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 				.setMaxConnPerRoute(poolProperties.getMaxConnectPerRoute());
 
 			PropertyMapper map = PropertyMapper.get().alwaysApplyingWhenNonNull();
-			map.from(restProperties::getUsername).to(username -> {
-				CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-				credentialsProvider
-					.setCredentials(AuthScope.ANY,
-						new UsernamePasswordCredentials(username, restProperties.getPassword()));
-				httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-			});
+			//map.from(restProperties::getUsername).to(username -> {
+			//	CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+			//	credentialsProvider
+			//		.setCredentials(AuthScope.ANY,
+			//			new UsernamePasswordCredentials(username, restProperties.getPassword()));
+			//	httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+			//});
 			return httpClientBuilder;
 		});
 	}

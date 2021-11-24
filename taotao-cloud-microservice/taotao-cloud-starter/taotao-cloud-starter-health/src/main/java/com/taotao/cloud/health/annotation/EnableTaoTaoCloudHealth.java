@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.health.annotation;
 
-import com.taotao.cloud.health.configuration.HealthConfiguration;
+import com.taotao.cloud.health.configuration.HealthAutoConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Import;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({HealthConfiguration.class})
+@Import({HealthAutoConfiguration.class})
 public @interface EnableTaoTaoCloudHealth {
 
 }

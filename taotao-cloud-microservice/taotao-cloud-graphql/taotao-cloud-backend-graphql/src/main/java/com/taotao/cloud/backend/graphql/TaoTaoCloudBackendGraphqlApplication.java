@@ -1,8 +1,8 @@
 package com.taotao.cloud.backend.graphql;
 
-import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJPA;
+import com.taotao.cloud.data.jpa.annotation.EnableTaoTaoCloudJpa;
 import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeign;
-import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudRequestLogger;
+import com.taotao.cloud.logger.annotation.EnableTaoTaoCloudLogger;
 import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
 import com.taotao.cloud.seata.annotation.EnableTaoTaoCloudSeata;
 import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
@@ -12,10 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableTaoTaoCloudJPA
+@EnableTaoTaoCloudJpa
 @EnableTaoTaoCloudP6spy
 @EnableTaoTaoCloudFeign
-@EnableTaoTaoCloudRequestLogger
+@EnableTaoTaoCloudLogger
 @EnableTaoTaoCloudSeata
 @EnableTaoTaoCloudSentinel
 @EnableEncryptableProperties

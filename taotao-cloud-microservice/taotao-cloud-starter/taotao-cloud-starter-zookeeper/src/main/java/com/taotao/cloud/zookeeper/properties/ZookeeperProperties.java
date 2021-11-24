@@ -99,7 +99,7 @@ public class ZookeeperProperties {
 		this.maxRetries = maxRetries;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

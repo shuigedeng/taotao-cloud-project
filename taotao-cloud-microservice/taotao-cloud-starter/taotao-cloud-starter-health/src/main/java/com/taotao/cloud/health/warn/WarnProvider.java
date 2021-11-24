@@ -93,11 +93,11 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 			warns.add(new DingdingWarn());
 		}
 
-		if (warnProperties.isEmailWarnEnabled()) {
+		if (warnProperties.getEmailWarnEnabled()) {
 			warns.add(new MailWarn());
 		}
 
-		if (warnProperties.isSmsWarnEnabled()) {
+		if (warnProperties.getSmsWarnEnabled()) {
 			warns.add(new SmsWarn());
 		}
 

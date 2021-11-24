@@ -346,7 +346,7 @@ public class Collector {
 		 */
 		public <T> T run(String tag, Callable.Func0<T> func) {
 			try {
-				if (Objects.isNull(coreProperties) || !coreProperties.isCollectHookEnabled()) {
+				if (Objects.isNull(coreProperties) || !coreProperties.getCollectHookEnabled()) {
 					return func.invoke();
 				}
 

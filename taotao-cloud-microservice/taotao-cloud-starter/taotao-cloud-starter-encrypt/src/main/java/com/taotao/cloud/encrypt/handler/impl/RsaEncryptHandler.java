@@ -20,8 +20,6 @@ import java.util.Map;
 
 /**
  * RSA加密处理器
- *
- * @author gaoyang
  */
 public class RsaEncryptHandler implements EncryptHandler {
 

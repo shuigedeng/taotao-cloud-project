@@ -328,7 +328,7 @@ public class CollectTaskProperties {
 		this.xxljobTimeSpan = xxljobTimeSpan;
 	}
 
-	public boolean isWebServerEnabled() {
+	public boolean getWebServerEnabled() {
 		return webServerEnabled;
 	}
 
@@ -360,7 +360,7 @@ public class CollectTaskProperties {
 		this.nacosTimeSpan = nacosTimeSpan;
 	}
 
-	public boolean isAsyncThreadEnabled() {
+	public boolean getAsyncThreadEnabled() {
 		return asyncThreadEnabled;
 	}
 

@@ -31,9 +31,9 @@ public class MailProperties {
 
 	public static final String PREFIX = "taotao.cloud.mail";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

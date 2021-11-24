@@ -33,9 +33,9 @@ public class FeignProperties {
 
 	public static final String PREFIX = "taotao.cloud.feign";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

@@ -71,7 +71,7 @@ public final class DbConn implements AutoCloseable {
 	 */
 	private boolean getPrintSql() {
 		CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
-		return coreProperties.isDbPrintSqlEnabled();
+		return coreProperties.getDbPrintSqlEnabled();
 	}
 
 	/**
@@ -332,7 +332,7 @@ public final class DbConn implements AutoCloseable {
 			super(message, exp);
 			CoreProperties coreProperties = ContextUtil.getBean(CoreProperties.class, true);
 
-			if (coreProperties.isPrintSqlError() && !StringUtil.isEmpty(sql)) {
+			if (coreProperties.getPrintSqlError() && !StringUtil.isEmpty(sql)) {
 				LogUtil.error("错误sql:" + sql);
 			}
 		}

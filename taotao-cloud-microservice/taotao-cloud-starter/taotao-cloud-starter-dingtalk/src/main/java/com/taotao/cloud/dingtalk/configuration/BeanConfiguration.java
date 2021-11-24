@@ -18,7 +18,10 @@ package com.taotao.cloud.dingtalk.configuration;
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.MARKDOWN_MESSAGE;
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.TEXT_MESSAGE;
 
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.multi.MultiDingerAlgorithmInjectRegister;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
 import com.taotao.cloud.dingtalk.support.DefaultDingerAsyncCallable;
 import com.taotao.cloud.dingtalk.support.DefaultDingerExceptionCallback;
@@ -29,19 +32,24 @@ import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
 import com.taotao.cloud.dingtalk.support.MarkDownMessage;
 import com.taotao.cloud.dingtalk.support.TextMessage;
 import com.taotao.cloud.dingtalk.support.DingTalkSignAlgorithm;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
 /**
  * 实例化bean配置
- *
-
- * @since 1.0
  */
 @Configuration
-public class BeanConfiguration {
+@ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
+public class BeanConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(BeanConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+	}
 
 	/**
 	 * 默认Text消息格式配置

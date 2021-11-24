@@ -21,6 +21,7 @@ import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import feign.RequestInterceptor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestAttributes;
@@ -45,6 +47,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @since 2020/4/5 13:33
  */
 @Configuration
+@ConditionalOnProperty(prefix = FeignInterceptorProperties.PREFIX, name = "enabled", havingValue = "true")
 public class FeignInterceptorConfiguration implements InitializingBean {
 
 	@Override

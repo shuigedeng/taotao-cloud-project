@@ -9,13 +9,14 @@ public class AuthUtils {
         if (user == null) {
             return null;
         }
-        AuthUserDetails userDetails = new AuthUserDetails(user.getId(),
-                user.getPassword(),
-                user.getEnabled(),
-                AuthorityUtils.commaSeparatedStringToAuthorityList("USER"));
-        userDetails.setLogin(user.getUsername());
-        userDetails.setNickname(user.getNickname());
-        userDetails.setPhone(user.getPhone());
-        return userDetails;
+        //AuthUserDetails userDetails = new AuthUserDetails(user.getId(),
+        //        user.getPassword(),
+        //        user.getEnabled(),
+        //        AuthorityUtils.commaSeparatedStringToAuthorityList("USER"));
+        //userDetails.setLogin(user.getUsername());
+        //userDetails.setNickname(user.getNickname());
+        //userDetails.setPhone(user.getPhone());
+        //return userDetails;
+	    return null;
     }
 }

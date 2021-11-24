@@ -60,7 +60,7 @@ public class AsyncThreadPoolCollectTask extends AbstractCollectTask {
 
 	@Override
 	public boolean getEnabled() {
-		return properties.isAsyncThreadEnabled();
+		return properties.getAsyncThreadEnabled();
 	}
 
 	@Override

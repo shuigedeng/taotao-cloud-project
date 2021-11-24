@@ -72,7 +72,7 @@ public class CoreCommandLineRunner implements CommandLineRunner, ApplicationCont
 			if (data != null && data.size() > 0) {
 
 				for (Map.Entry<String, Object> e : data.entrySet()) {
-					if (!coreProperties.isContextRestartEnabled()) {
+					if (!coreProperties.getContextRestartEnabled()) {
 						return;
 					}
 

@@ -13,7 +13,6 @@ import java.io.IOException;
 /**
  * 主体请求加密包装器
  *
- * @author gaoyang
  */
 public class EncryptBodyRequestWrapper extends HttpServletRequestWrapper {
 

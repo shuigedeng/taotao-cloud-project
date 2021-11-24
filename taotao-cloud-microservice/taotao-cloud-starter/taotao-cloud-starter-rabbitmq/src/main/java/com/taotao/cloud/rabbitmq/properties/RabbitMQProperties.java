@@ -43,7 +43,7 @@ public class RabbitMQProperties {
 
 	private boolean publisherConfirms = true;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

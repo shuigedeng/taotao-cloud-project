@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 签名实现处理类
- *
- * @author gaoyang
  */
 public class SignEncryptHandlerImpl implements SignEncryptHandler {
 	@Override

@@ -16,9 +16,12 @@
 
 package com.taotao.cloud.laytpl.configuration;
 
+import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.laytpl.model.FmtFunc;
 import com.taotao.cloud.laytpl.model.LayTplTemplate;
 import com.taotao.cloud.laytpl.properties.LayTplProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +35,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(prefix = LayTplProperties.PREFIX, name = "enabled", havingValue = "true")
-public class LayTplAutoConfiguration {
+public class LayTplAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(LayTplAutoConfiguration.class, StarterNameConstant.LAYTPL_STARTER);
+	}
 
 	@Bean("fmt")
 	public FmtFunc fmtFunc(LayTplProperties properties) {

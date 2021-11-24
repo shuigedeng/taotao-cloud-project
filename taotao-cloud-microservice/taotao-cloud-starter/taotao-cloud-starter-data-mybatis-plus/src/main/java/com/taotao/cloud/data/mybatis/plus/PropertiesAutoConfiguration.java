@@ -16,17 +16,20 @@
 package com.taotao.cloud.data.mybatis.plus;
 
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * PropertiesAutoConfiguration 
+ * PropertiesAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-04 07:44:59
  */
-@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, TenantProperties.class})
+@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, TenantProperties.class,
+	MybatisPlusProperties.class, MybatisPlusDynamicDataSourceProperties.class})
 public class PropertiesAutoConfiguration {
 
 }

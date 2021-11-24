@@ -85,7 +85,7 @@ public class MonitorThreadPoolProperties {
 		this.threadNamePrefix = threadNamePrefix;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

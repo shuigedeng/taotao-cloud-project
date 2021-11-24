@@ -70,7 +70,7 @@ public class ElkExport extends AbstractExport {
 
 	@Override
 	public void run(Report report) {
-		if (appender == null || !this.exportProperties.isElkEnabled()) {
+		if (appender == null || !this.exportProperties.getElkEnabled()) {
 			return;
 		}
 

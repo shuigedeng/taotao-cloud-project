@@ -32,11 +32,11 @@ public class LbIsolationProperties {
 	public static final String PREFIX = "taotao.cloud.feign.loadbalancer";
 
 	/**
-	 * 是否开启ribbon自定义隔离规则
+	 * 是否开启自定义隔离规则
 	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

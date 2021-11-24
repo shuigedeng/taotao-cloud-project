@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.job.elastic.annotation;
 
-import com.taotao.cloud.job.elastic.configuration.JobParserConfiguration;
+import com.taotao.cloud.job.elastic.configuration.ElasticJobConfiguration;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Import;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import({JobParserConfiguration.class})
+@Import({ElasticJobConfiguration.class})
 public @interface EnableTaoTaoCloudJobElastic {
 
 }

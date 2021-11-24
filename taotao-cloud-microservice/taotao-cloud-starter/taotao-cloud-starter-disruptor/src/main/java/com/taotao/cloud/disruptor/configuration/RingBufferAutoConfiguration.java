@@ -97,7 +97,7 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware, Ini
 		 * 第三个参数是RingBuffer的生产都在没有可用区块的时候(可能是消费者（或者说是事件处理器） 太慢了)的等待策略
 		 */
 		RingBuffer<DisruptorEvent> ringBuffer;
-		if (properties.isMultiProducer()) {
+		if (properties.getMultiProducer()) {
 			// RingBuffer.createMultiProducer创建一个多生产者的RingBuffer
 			ringBuffer = RingBuffer.createMultiProducer(eventFactory,
 				properties.getRingBufferSize(), waitStrategy);

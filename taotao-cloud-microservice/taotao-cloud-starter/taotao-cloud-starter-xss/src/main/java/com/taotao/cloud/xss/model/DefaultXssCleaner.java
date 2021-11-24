@@ -58,14 +58,14 @@ public class DefaultXssCleaner implements XssCleaner {
 				// 2. 转义，没找到关闭的方法，目前这个规则最少
 				.escapeMode(Entities.EscapeMode.xhtml)
 				// 3. 保留换行
-				.prettyPrint(properties.isPrettyPrint());
+				.prettyPrint(properties.getPrettyPrint());
 			Document dirty = Jsoup.parseBodyFragment(bodyHtml, "");
 			Cleaner cleaner = new Cleaner(XssUtil.WHITE_LIST);
 			Document clean = cleaner.clean(dirty);
 			clean.outputSettings(outputSettings);
 			// 4. 清理后的 html
 			String escapedHtml = clean.body().html();
-			if (properties.isEnableEscape()) {
+			if (properties.getEnableEscape()) {
 				return escapedHtml;
 			}
 			// 5. 反转义

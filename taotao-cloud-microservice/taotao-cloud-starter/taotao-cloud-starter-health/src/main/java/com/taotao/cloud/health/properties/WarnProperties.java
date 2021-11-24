@@ -109,7 +109,7 @@ public class WarnProperties {
 		this.dingDingWarnEnabled = dingDingWarnEnabled;
 	}
 
-	public boolean isSmsWarnEnabled() {
+	public boolean getSmsWarnEnabled() {
 		return smsWarnEnabled;
 	}
 
@@ -117,7 +117,7 @@ public class WarnProperties {
 		this.smsWarnEnabled = smsWarnEnabled;
 	}
 
-	public boolean isEmailWarnEnabled() {
+	public boolean getEmailWarnEnabled() {
 		return emailWarnEnabled;
 	}
 

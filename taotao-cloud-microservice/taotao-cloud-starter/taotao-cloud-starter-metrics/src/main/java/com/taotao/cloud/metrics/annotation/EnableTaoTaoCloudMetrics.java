@@ -15,10 +15,7 @@
  */
 package com.taotao.cloud.metrics.annotation;
 
-import com.taotao.cloud.metrics.configuration.DruidMetricsConfiguration;
 import com.taotao.cloud.metrics.configuration.MetricsAutoConfiguration;
-import com.taotao.cloud.metrics.configuration.SentinelMetricsConfiguration;
-import com.taotao.cloud.metrics.configuration.UndertowMetricsConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

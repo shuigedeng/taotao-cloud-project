@@ -31,7 +31,7 @@ public class HttpClientProperties {
 
 	public static final String PREFIX = "taotao.cloud.dinger.httpclient";
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/**
 	 * 连接超时时间
@@ -45,7 +45,7 @@ public class HttpClientProperties {
 	@DurationUnit(ChronoUnit.SECONDS)
 	private Duration readTimeout = Duration.ofSeconds(30);
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

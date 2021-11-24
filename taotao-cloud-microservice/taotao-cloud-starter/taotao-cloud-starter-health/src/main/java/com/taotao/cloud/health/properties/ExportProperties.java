@@ -59,7 +59,7 @@ public class ExportProperties {
 		this.elkDestinations = elkDestinations;
 	}
 
-	public boolean isElkEnabled() {
+	public boolean getElkEnabled() {
 		return elkEnabled;
 	}
 

@@ -20,16 +20,13 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
-import com.taotao.cloud.health.configuration.HealthConfiguration;
+import com.taotao.cloud.health.configuration.HealthAutoConfiguration;
 import com.taotao.cloud.health.model.Report;
-import com.taotao.cloud.health.model.Report.ReportItem;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,7 +45,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 21:28:17
  */
 @Configuration
-@AutoConfigureAfter(HealthConfiguration.class)
+@AutoConfigureAfter(HealthAutoConfiguration.class)
 public class PrometheusConfiguration implements InitializingBean {
 
 	@Autowired(required = false)

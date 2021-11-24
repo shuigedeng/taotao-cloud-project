@@ -33,7 +33,7 @@ public class SentinelProperties {
 
 	private boolean enabled = true;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

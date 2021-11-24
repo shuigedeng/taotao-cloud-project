@@ -81,7 +81,7 @@ public class DingerRobot extends AbstractDingerSender {
 		DingerType dingerType = message.getDingerType();
 		String dkid = dingTalkManagerBuilder.getDingerIdGenerator().dingerId();
 		Map<DingerType, DingerProperties.Dinger> dingers = dingerProperties.getDingers();
-		if (!(dingerProperties.isEnabled() && dingers.containsKey(dingerType))) {
+		if (!(dingerProperties.getEnabled() && dingers.containsKey(dingerType))) {
 			return DingerResponse.failed(dkid, DingerResponseCodeEnum.DINGER_DISABLED);
 		}
 

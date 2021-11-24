@@ -30,6 +30,13 @@ import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Import;
 
 
+/**
+ * EnableTaoTaoCloudFeignClients
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-11-24 09:58:01
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

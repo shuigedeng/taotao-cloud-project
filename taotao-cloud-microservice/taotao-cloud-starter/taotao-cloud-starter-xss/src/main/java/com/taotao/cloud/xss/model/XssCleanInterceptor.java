@@ -46,7 +46,7 @@ public class XssCleanInterceptor implements AsyncHandlerInterceptor {
 			return true;
 		}
 		// 2. 没有开启
-		if (!xssProperties.isEnabled()) {
+		if (!xssProperties.getEnabled()) {
 			return true;
 		}
 		// 3. 处理 XssIgnore 注解

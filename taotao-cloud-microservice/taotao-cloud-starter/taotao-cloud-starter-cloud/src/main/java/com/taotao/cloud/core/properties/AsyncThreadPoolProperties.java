@@ -103,7 +103,7 @@ public class AsyncThreadPoolProperties {
 		this.threadNamePrefix = threadNamePrefix;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 

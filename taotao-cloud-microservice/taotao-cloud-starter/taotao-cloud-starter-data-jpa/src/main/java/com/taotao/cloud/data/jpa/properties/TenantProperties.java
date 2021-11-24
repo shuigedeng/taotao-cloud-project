@@ -32,7 +32,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = TenantProperties.PREFIX)
 public class TenantProperties {
 
-	public static final String PREFIX = "taotao.cloud.tenant";
+	public static final String PREFIX = "taotao.cloud.hibernate.tenant";
 
 	/**
 	 * 是否开启多租户

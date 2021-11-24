@@ -45,6 +45,7 @@ import com.taotao.cloud.data.mybatis.plus.injector.MateSqlInjector;
 import com.taotao.cloud.data.mybatis.plus.interceptor.SqlLogInterceptor;
 import com.taotao.cloud.data.mybatis.plus.interceptor.SqlMybatisInterceptor;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -87,6 +88,7 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @AutoConfigureAfter(TenantAutoConfiguration.class)
+@ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
