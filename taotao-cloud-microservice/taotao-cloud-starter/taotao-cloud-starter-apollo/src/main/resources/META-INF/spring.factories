@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.taotao.cloud.apollo.PropertiesAutoConfiguration
+
+org.springframework.context.ApplicationContextInitializer=\
+com.taotao.cloud.apollo.configuration.ApolloApplicationContextInitializer

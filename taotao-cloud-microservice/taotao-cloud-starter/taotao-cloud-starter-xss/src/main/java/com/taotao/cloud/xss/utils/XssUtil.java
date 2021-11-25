@@ -110,6 +110,7 @@ public class XssUtil {
 					return false;
 				}
 			}
+
 			//允许 base64 的图片内容
 			if ("img".equals(tagName) && "src".equals(attr.getKey()) && attr.getValue()
 				.startsWith("data:;base64")) {

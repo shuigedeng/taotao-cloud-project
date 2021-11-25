@@ -125,6 +125,20 @@ public class ContextUtil {
 		return null;
 	}
 
+	public static <T> T getBean(Class<T> type, String name, boolean required) {
+		if (type != null && applicationContext != null) {
+			if (required) {
+				return applicationContext.getBean(name, type);
+			} else {
+				if (applicationContext.getBeansOfType(type).size() > 0) {
+					return applicationContext.getBean(name, type);
+				}
+
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * 获取bean
 	 *

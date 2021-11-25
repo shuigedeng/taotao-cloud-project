@@ -54,7 +54,7 @@ public class DozerConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public DozerHelper getDozerUtil(Mapper mapper) {
+	public DozerHelper dozerHelper(Mapper mapper) {
 		LogUtil.started(DozerHelper.class, StarterNameConstant.WEB_STARTER);
 
 		return new DozerHelper(mapper);

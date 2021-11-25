@@ -74,6 +74,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	public ElasticsearchRestTemplate elasticsearchRestTemplate(
 		RestHighLevelClient restHighLevelClient) {
+		PreBuiltTransportClient client
 		return new ElasticsearchRestTemplate(restHighLevelClient);
 	}
 

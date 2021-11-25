@@ -51,14 +51,12 @@ public class XssAutoConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public XssCleaner xssCleaner(XssProperties properties) {
 		return new DefaultXssCleaner(properties);
 	}
 
 	@Bean
-	public FormXssClean formXssClean(XssProperties properties,
-		XssCleaner xssCleaner) {
+	public FormXssClean formXssClean(XssProperties properties, XssCleaner xssCleaner) {
 		return new FormXssClean(properties, xssCleaner);
 	}
 
