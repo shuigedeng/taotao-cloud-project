@@ -14,9 +14,9 @@ import javax.sql.DataSource;
 public class DbHelper {
 
 	/**
-	 * connTransactionTheadLocal
+	 * CONN_TRANSACTION_THEAD_LOCAL
 	 */
-	private static final ThreadLocal<HashMap<DataSource, DbConn>> connTransactionTheadLocal = new ThreadLocal<>();
+	private static final ThreadLocal<HashMap<DataSource, DbConn>> CONN_TRANSACTION_THEAD_LOCAL = new ThreadLocal<>();
 
 	/**
 	 * transactionGet
@@ -30,9 +30,9 @@ public class DbHelper {
 	 */
 	public static <T> T transactionGet(DataSource dataSource, Callable.Func1<T, DbConn> action0) {
 		//若有线程同一个数据源事务,则使用事务
-		if (connTransactionTheadLocal.get() != null && connTransactionTheadLocal.get()
+		if (CONN_TRANSACTION_THEAD_LOCAL.get() != null && CONN_TRANSACTION_THEAD_LOCAL.get()
 			.containsKey(dataSource)) {
-			return action0.invoke(connTransactionTheadLocal.get().get(dataSource));
+			return action0.invoke(CONN_TRANSACTION_THEAD_LOCAL.get().get(dataSource));
 		} else {
 			return get(dataSource, action0);
 		}
@@ -95,7 +95,7 @@ public class DbHelper {
 	 */
 	public static void transaction(DataSource dataSource, int level, Callable.Action0 action0) {
 		//事务嵌套,则以最外层事务优先（事务仅对同一个数据源有效,不同数据源不互相影响）
-		if (connTransactionTheadLocal.get() != null && connTransactionTheadLocal.get()
+		if (CONN_TRANSACTION_THEAD_LOCAL.get() != null && CONN_TRANSACTION_THEAD_LOCAL.get()
 			.containsKey(dataSource)) {
 			action0.invoke();
 		} else {
@@ -103,11 +103,11 @@ public class DbHelper {
 			try {
 				//如果设置事务隔离级别,则开启事务;否则不使用事务。
 				if (level > 0) {
-					if (connTransactionTheadLocal.get() == null) {
-						connTransactionTheadLocal.set(new HashMap<DataSource, DbConn>());
+					if (CONN_TRANSACTION_THEAD_LOCAL.get() == null) {
+						CONN_TRANSACTION_THEAD_LOCAL.set(new HashMap<>(16));
 					}
-					connTransactionTheadLocal.get().put(dataSource, new DbConn(dataSource));
-					db = connTransactionTheadLocal.get().get(dataSource);
+					CONN_TRANSACTION_THEAD_LOCAL.get().put(dataSource, new DbConn(dataSource));
+					db = CONN_TRANSACTION_THEAD_LOCAL.get().get(dataSource);
 					db.beginTransaction(level);
 				}
 				action0.invoke();
@@ -122,7 +122,7 @@ public class DbHelper {
 			} finally {
 				if (db != null) {
 					db.close();
-					connTransactionTheadLocal.set(null);
+					CONN_TRANSACTION_THEAD_LOCAL.set(null);
 				}
 			}
 		}

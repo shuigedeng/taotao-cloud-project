@@ -312,11 +312,7 @@ public final class DbConn implements AutoCloseable {
 	public boolean tableIsExist(String tablename) {
 		List<Map<String, Object>> ds = executeList("Select name from sysobjects where Name=?",
 			new Object[]{tablename});
-		if (ds == null || ds.size() == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return ds != null && ds.size() != 0;
 	}
 
 	/**

@@ -33,7 +33,6 @@ import org.springframework.core.annotation.Order;
  * @version 2021.9
  * @since 2021-09-02 20:45:34
  */
-@Order
 public class CoreApplicationRunner implements ApplicationRunner {
 
 	@Override
