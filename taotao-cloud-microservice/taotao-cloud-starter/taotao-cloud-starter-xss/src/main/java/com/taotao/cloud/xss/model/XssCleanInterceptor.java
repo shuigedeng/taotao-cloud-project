@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.ClassUtil;
 import com.taotao.cloud.xss.properties.XssProperties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
@@ -39,23 +40,24 @@ public class XssCleanInterceptor implements AsyncHandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-		Object handler) throws Exception {
+	public boolean preHandle(@NotNull HttpServletRequest request,
+		@NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
 		// 1. 非控制器请求直接跳出
-		if (!(handler instanceof HandlerMethod)) {
+		if (!(handler instanceof HandlerMethod handlerMethod)) {
 			return true;
 		}
+
 		// 2. 没有开启
 		if (!xssProperties.getEnabled()) {
 			return true;
 		}
+
 		// 3. 处理 XssIgnore 注解
-		HandlerMethod handlerMethod = (HandlerMethod) handler;
-		XssCleanIgnore xssCleanIgnore = ClassUtil.getAnnotation(handlerMethod,
-			XssCleanIgnore.class);
+		XssCleanIgnore xssCleanIgnore = ClassUtil.getAnnotation(handlerMethod, XssCleanIgnore.class);
 		if (xssCleanIgnore == null) {
 			XssHolder.setEnable();
 		}
+
 		return true;
 	}
 

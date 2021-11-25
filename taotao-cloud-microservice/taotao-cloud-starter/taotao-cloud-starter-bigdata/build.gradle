@@ -1,0 +1,8 @@
+dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+
+    api 'ru.yandex.clickhouse:clickhouse-jdbc:0.3.1'
+    api 'com.alibaba:druid:1.2.8'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+}

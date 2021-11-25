@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.InitBinder;
  * @version 2021.9
  * @since 2021-09-02 20:01:42
  */
-@ControllerAdvice
 public class FormXssClean {
 
 	private final XssProperties properties;
@@ -46,8 +45,7 @@ public class FormXssClean {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		// 处理前端传来的表单字符串
-		binder.registerCustomEditor(String.class,
-			new StringPropertiesEditor(xssCleaner, properties));
+		binder.registerCustomEditor(String.class, new StringPropertiesEditor(xssCleaner, properties));
 	}
 
 	public static class StringPropertiesEditor extends PropertyEditorSupport {
@@ -64,6 +62,7 @@ public class FormXssClean {
 		public StringPropertiesEditor(Object source, XssCleaner xssCleaner,
 			XssProperties properties) {
 			super(source);
+
 			this.xssCleaner = xssCleaner;
 			this.properties = properties;
 		}
