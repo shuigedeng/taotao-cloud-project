@@ -43,24 +43,47 @@ dubbo:
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
+    version: ${taotaoCloudVersion}
+    owner: taotao-cloud
+    organization: taotao-cloud
+    metadata-type: local
+    environment: dev
     qos-enable: false
     qos-accept-foreign-ip: false
+  cloud:
+    subscribed-services: '*'
+    registry-type: dubbo-cloud
   registry:
     address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
+    username:
+    password:
+    port:
+    protocol:
+    version: ${taotaoCloudVersion}
+    check: true
+    register: true
+    weight: 10
   protocol:
     name: dubbo
     port: -1
+    ssl-enabled: false
     #serialization: kryo
-  cloud:
-    subscribed-services: 'taotao-cloud-order-biz'
   scan:
     base-packages: com.taotao.cloud.uc.biz.service
   provider:
     loadbalance: roundrobin
+    version: ${taotaoCloudVersion}
   consumer:
     check: false
     loadbalance: roundrobin
+    version: ${taotaoCloudVersion}
+  module:
+    name: ${spring.application.name}
+  monitor:
+    id: ${spring.application.name}
+  metadata-report:
+    id: ${spring.application.name}
   config-center:
     check: false
 
@@ -92,8 +115,29 @@ seata:
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PASSWORD:nacos}
       cluster: default
+  client:
+    rm:
+      async-commit-buffer-limit: 10000
+      report-retry-count: 5
+      table-meta-check-enable: false
+      report-success-enable: false
+      lock:
+        retry-interval: 10
+        retry-times: 30
+        retry-policy-branch-rollback-on-conflict: true
+    tm:
+      commit-retry-count: 5
+      rollback-retry-count: 5
+    undo:
+      data-validation: true
+      log-serialization: jackson
+      log-table: undo_log
+  log:
+    exception-rate: 100
 
 spring:
+  profiles:
+    active: dev
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
@@ -104,10 +148,18 @@ spring:
     cache: false
     enabled: true
   main:
+    allow-circular-references: false
     allow-bean-definition-overriding: true
     banner-mode: off
+    register-shutdown-hook: true
+    cloud-platform: kubernetes
+    web-application-type: servlet
   application:
     name: taotao-cloud-uc-biz
+    admin:
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
   web:
     resources:
       # pro环境关闭
@@ -115,6 +167,13 @@ spring:
   mvc:
     servlet:
       load-on-startup: 1
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+    dispatch-trace-request: true
+    dispatch-options-request: true
+    log-request-details: true
+    log-resolved-exception: true
   servlet:
     multipart:
       enabled: true
@@ -128,12 +187,19 @@ spring:
         enabled: true
     sampler:
       probability: 1.0
+      refresh:
+        enabled: true
   zipkin:
     enabled: true
     base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
+    service:
+      name: ${spring.application.name}
+    compression:
+      enabled: true
+    encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -187,9 +253,13 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
+      naming:
+        implicit-strategy:
+        physical-strategy:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
   redis:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
@@ -209,6 +279,9 @@ spring:
         - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
       username:
       password:
+    uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+    password:
+    username:
   data:
     elasticsearch:
       repositories:
@@ -406,7 +479,8 @@ spring:
       check:
         table:
           metadata:
-            enabled:
+            enabled: false
+
   rabbitmq:
     host: 172.16.6.151
     port: 5672
@@ -470,7 +544,6 @@ spring:
           order-input:
             consumer:
               txCommitRecovered: true
-
 taotao:
   cloud:
     zookeeper:
@@ -697,6 +770,11 @@ feign:
       enabled: true
 
 management:
+  info:
+    java:
+      enabled: true
+    env:
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -718,6 +796,8 @@ management:
       application: ${spring.application.name}
   health:
     elasticsearch:
+      enabled: true
+    rabbit:
       enabled: false
 
 logging:
