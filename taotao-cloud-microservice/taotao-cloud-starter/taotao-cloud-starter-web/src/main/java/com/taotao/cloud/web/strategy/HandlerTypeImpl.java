@@ -44,10 +44,9 @@ public class HandlerTypeImpl implements HandlerType {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof HandlerType)) {
+		if (!(obj instanceof HandlerType other)) {
 			return false;
 		}
-		HandlerType other = (HandlerType) obj;
 		return type.equals(other.type()) && source.equals(other.source());
 	}
 

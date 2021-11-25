@@ -16,7 +16,7 @@ package com.taotao.cloud.web.configuration;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
-import com.taotao.cloud.web.util.SpringUtil;
+import com.taotao.cloud.web.utils.SpringUtil;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.base.dto;
 
-import com.taotao.cloud.web.mvc.constraints.StringEnums;
+import com.taotao.cloud.web.validation.constraints.StringEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.List;

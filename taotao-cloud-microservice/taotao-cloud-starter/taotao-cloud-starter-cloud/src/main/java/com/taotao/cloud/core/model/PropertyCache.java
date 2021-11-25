@@ -30,7 +30,6 @@ import org.springframework.core.annotation.Order;
  * @version 2021.9
  * @since 2021-09-02 20:37:32
  */
-@Order(200000000)
 public class PropertyCache implements CommandLineRunner {
 
 	private final Pubsub pubsub;

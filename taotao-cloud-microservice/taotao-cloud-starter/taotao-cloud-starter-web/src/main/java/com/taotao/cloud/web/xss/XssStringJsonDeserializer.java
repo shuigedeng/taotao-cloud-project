@@ -20,13 +20,13 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.taotao.cloud.web.util.XssUtil;
+import com.taotao.cloud.web.utils.XssUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  过滤跨站脚本的 反序列化工具 
+ * 过滤跨站脚本的 反序列化工具
  *
  * @author shuigedeng
  * @version 2021.9
@@ -61,8 +61,8 @@ public class XssStringJsonDeserializer extends JsonDeserializer<String> {
 		list.add("</embed>");
 		list.add("<object>");
 		list.add("</object>");
-//            list.add("<style>");
-//            list.add("</style>");
+		//list.add("<style>");
+		//list.add("</style>");
 		list.add("<meta>");
 		list.add("</meta>");
 		list.add("<link>");

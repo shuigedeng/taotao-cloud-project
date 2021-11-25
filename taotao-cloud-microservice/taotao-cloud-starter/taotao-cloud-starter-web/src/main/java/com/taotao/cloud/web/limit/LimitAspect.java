@@ -15,8 +15,10 @@
  */
 package com.taotao.cloud.web.limit;
 
+import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.common.utils.StringUtils;
 import com.google.common.collect.ImmutableList;
+import com.taotao.cloud.core.utils.RequestUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
@@ -73,30 +75,24 @@ public class LimitAspect {
 		Limit limitAnnotation = method.getAnnotation(Limit.class);
 		LimitType limitType = limitAnnotation.limitType();
 		String name = limitAnnotation.name();
-		String key;
 		int limitPeriod = limitAnnotation.period();
 		int limitCount = limitAnnotation.count();
 
 		//根据限流类型获取不同的key ,如果不传我们会以方法名作为key
-		switch (limitType) {
-			case IP:
-				key = getIpAddress();
-				break;
-			case CUSTOMER:
-				key = limitAnnotation.key();
-				break;
-			default:
-				key = StringUtils.upperCase(method.getName());
-		}
+		String key = switch (limitType) {
+			case IP -> RequestUtil.getHttpServletRequestIpAddress();
+			case CUSTOMER -> StrUtil.isBlank(limitAnnotation.key()) ? StringUtils.upperCase(
+				method.getName()) : limitAnnotation.key();
+		};
 
 		ImmutableList<String> keys = ImmutableList.of(
-				StringUtils.join(limitAnnotation.prefix(), key));
+			StringUtils.join(limitAnnotation.prefix(), key));
 
 		try {
 			String luaScript = buildLuaScript();
 			RedisScript<Number> redisScript = new DefaultRedisScript<>(luaScript, Number.class);
 			Number count = redisRepository.getRedisTemplate()
-					.execute(redisScript, keys, limitCount, limitPeriod);
+				.execute(redisScript, keys, limitCount, limitPeriod);
 			if (count != null && count.intValue() <= limitCount) {
 				return pjp.proceed();
 			} else {
@@ -118,42 +114,23 @@ public class LimitAspect {
 	 * @since 2021-09-02 22:06:58
 	 */
 	public String buildLuaScript() {
-		StringBuilder lua = new StringBuilder();
-		lua.append("local c");
-		lua.append("\nc = redis.call('get',KEYS[1])");
-		// 调用不超过最大值，则直接返回
-		lua.append("\nif c and tonumber(c) > tonumber(ARGV[1]) then");
-		lua.append("\nreturn c;");
-		lua.append("\nend");
-		// 执行计算器自加
-		lua.append("\nc = redis.call('incr',KEYS[1])");
-		lua.append("\nif tonumber(c) == 1 then");
-		// 从第一次调用开始限流，设置对应键值的过期
-		lua.append("\nredis.call('expire',KEYS[1],ARGV[2])");
-		lua.append("\nend");
-		lua.append("\nreturn c;");
-		return lua.toString();
-	}
-
-	/**
-	 * 获取ip地址
-	 *
-	 * @return {@link java.lang.String }
-	 * @author shuigedeng
-	 * @since 2021-09-02 22:07:08
-	 */
-	public String getIpAddress() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
+		return """
+			local c
+			c = redis.call('get',KEYS[1])
+						
+			-- 调用不超过最大值，则直接返回
+			if c and tonumber(c) > tonumber(ARGV[1]) then
+				return c;
+			end
+						
+			-- 执行计算器自加
+			c = redis.call('incr',KEYS[1])
+			if tonumber(c) == 1 then
+			-- 从第一次调用开始限流，设置对应键值的过期
+				redis.call('expire',KEYS[1],ARGV[2])
+			end
+						
+			return c;
+			""";
 	}
 }

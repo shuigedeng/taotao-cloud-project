@@ -20,6 +20,7 @@ import com.taotao.cloud.core.utils.RequestUtil;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,7 +65,7 @@ public class TemplateProvider {
 	 * @since 2021-09-02 22:19:25
 	 */
 	public HttpSession session() {
-		return RequestUtil.getRequest().getSession();
+		return Objects.requireNonNull(RequestUtil.getRequest()).getSession();
 	}
 
 	/**
