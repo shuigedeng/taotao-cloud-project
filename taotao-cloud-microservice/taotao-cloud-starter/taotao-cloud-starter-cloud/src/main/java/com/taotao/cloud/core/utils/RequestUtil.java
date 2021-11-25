@@ -329,6 +329,7 @@ public class RequestUtil {
 	 */
 	public static String getHttpServletRequestIpAddress() {
 		HttpServletRequest request = getHttpServletRequest();
+		assert request != null;
 		return getHttpServletRequestIpAddress(request);
 	}
 

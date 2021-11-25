@@ -23,6 +23,7 @@ import io.prometheus.client.Summary;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
@@ -67,7 +68,7 @@ public class PrometheusMetricsInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-		Object handler, Exception ex) throws Exception {
+		@NotNull Object handler, Exception ex) throws Exception {
 		String requestURI = request.getRequestURI();
 		String method = request.getMethod();
 		int status = response.getStatus();

@@ -13,27 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.strategy;
 
-import org.apache.poi.ss.formula.functions.T;
+package com.taotao.cloud.web.validation.group;
+
+import javax.validation.groups.Default;
 
 /**
- * 业务处理策略接口
+ * Validated Delete group.
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 22:15:21
+ * @since 2021-09-02 20:01:42
  */
-@FunctionalInterface
-public interface BusinessHandler {
+public interface DeleteGroup extends Default {
 
-	/**
-	 * 业务处理
-	 *
-	 * @param t 业务实体返回参数
-	 * @return R
-	 * @author shuigedeng
-	 * @since 2021-09-02 22:15:31
-	 */
-	<R> R businessHandler(T t);
 }

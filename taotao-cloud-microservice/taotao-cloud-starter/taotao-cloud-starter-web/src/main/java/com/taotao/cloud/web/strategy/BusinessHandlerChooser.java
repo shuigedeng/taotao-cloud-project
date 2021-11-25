@@ -64,7 +64,7 @@ public class BusinessHandlerChooser {
 	 * @author shuigedeng
 	 * @since 2021-09-02 22:15:59
 	 */
-	public <R, T> BusinessHandler<R, T> businessHandlerChooser(String type, String source) {
+	public <R, T> BusinessHandler businessHandlerChooser(String type, String source) {
 		HandlerType orderHandlerType = new HandlerTypeImpl(type, source);
 		return businessHandlerMap.get(orderHandlerType);
 	}

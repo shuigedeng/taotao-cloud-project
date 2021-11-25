@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.web.util.XssUtil;
+import com.taotao.cloud.web.utils.XssUtil;
 
 /**
  * 基于xss的 json 序列化器 在本项目中，没有使用该类 

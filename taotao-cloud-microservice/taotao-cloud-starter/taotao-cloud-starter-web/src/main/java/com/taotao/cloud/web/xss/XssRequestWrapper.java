@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.xss;
 
-import static com.taotao.cloud.web.util.XssUtil.xssClean;
+import static com.taotao.cloud.web.utils.XssUtil.xssClean;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.UnsupportedEncodingException;

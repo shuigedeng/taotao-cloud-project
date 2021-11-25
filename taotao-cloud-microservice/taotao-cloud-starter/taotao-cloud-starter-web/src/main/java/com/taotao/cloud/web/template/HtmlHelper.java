@@ -18,6 +18,7 @@ package com.taotao.cloud.web.template;
 import com.taotao.cloud.common.utils.JsonUtil;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -129,7 +130,7 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 */
 	public Object w2(String condition, Object data1, Object data2, Object trueObj,
 			Object falseObj) {
-		if (condition.equals("==")) {
+		if ("==".equals(condition)) {
 			if (data1 == data2) {
 				return trueObj;
 			}
@@ -138,14 +139,14 @@ public class HtmlHelper extends SimpleTemplateProvider {
 			}
 			return falseObj;
 		}
-		if (condition.equals(">")) {
+		if (">".equals(condition)) {
 			if (((Number) data1).doubleValue() > ((Number) data2).doubleValue()) {
 				return trueObj;
 			} else {
 				return falseObj;
 			}
 		}
-		if (condition.equals("<")) {
+		if ("<".equals(condition)) {
 			if (((Number) data1).doubleValue() < ((Number) data2).doubleValue()) {
 				return trueObj;
 			} else {
@@ -188,10 +189,8 @@ public class HtmlHelper extends SimpleTemplateProvider {
 	 */
 	public List<Object> enums(String enumClass) {
 		try {
-			List<Object> objs = new ArrayList<Object>();
-			for (Object item : Class.forName(enumClass).getEnumConstants()) {
-				objs.add(item);
-			}
+			List<Object> objs = new ArrayList<>();
+			objs.addAll(Arrays.asList(Class.forName(enumClass).getEnumConstants()));
 			return objs;
 		} catch (Exception e) {
 			return new ArrayList<>();

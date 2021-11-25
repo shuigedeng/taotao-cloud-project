@@ -112,7 +112,7 @@ public class EncryptAspect {
 			Object obj = joinPoint.proceed();
 			if (obj != null) {
 				if (obj instanceof String) {
-					decryptValue(obj);
+					result = decryptValue(obj);
 				} else {
 					result = handler(obj, DECRYPT);
 				}
