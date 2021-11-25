@@ -20,6 +20,9 @@ import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.owasp.validator.html.AntiSamy;
@@ -227,13 +230,10 @@ public class XssUtil {
 		return false;
 	}
 
-	//public static void main(String[] args) {
-	//    System.out.println(stripXSSAndSql("<span style=\"background&#45;color&#58; &#35;e67e23\">减肥啦</span>"));
-	//    try {
-	//        String url = URLDecoder.decode("<img src=\"http://112.30.98.118:9025/file/1/image/public/202012/20201204160811_mxsroqyxdk.jpg\">", "UTF-8");
-	//        System.out.println(url);
-	//    } catch (UnsupportedEncodingException e) {
-	//        e.printStackTrace();
-	//    }
-	//}
+	public static void main(String[] args) {
+	    System.out.println(stripXSSAndSql("<span style=\"background&#45;color&#58; &#35;e67e23\">减肥啦</span>"));
+		String url = URLDecoder.decode("<img src=\"http://112.30.98.118:9025/file/1/image/public/202012/20201204160811_mxsroqyxdk.jpg\">",
+			StandardCharsets.UTF_8);
+		System.out.println(url);
+	}
 }

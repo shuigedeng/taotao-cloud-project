@@ -37,7 +37,7 @@ public class HttpClientManager {
 	/**
 	 * lock
 	 */
-	private Object lock = new Object();
+	private final Object lock = new Object();
 
 	public HttpClientManager() {
 		ProcessExitEvent.register(() -> {
@@ -74,6 +74,7 @@ public class HttpClientManager {
 			try {
 				client.close();
 			} catch (Exception e) {
+				LogUtil.error(e);
 			}
 			throw exp;
 		}
@@ -103,7 +104,7 @@ public class HttpClientManager {
 		DefaultHttpClient httpClient = pool.get(httpClientId);
 		if (httpClient != null) {
 			synchronized (lock) {
-				pool.remove(httpClient);
+				pool.remove(httpClientId);
 			}
 			httpClient.close();
 			return true;
@@ -140,10 +141,10 @@ public class HttpClientManager {
 	 * @since 2021-09-02 20:21:25
 	 */
 	public void closeAll() {
-		ConcurrentHashMap<String, DefaultHttpClient> temp = new ConcurrentHashMap<>();
+		ConcurrentHashMap<String, DefaultHttpClient> temp;
 
 		synchronized (lock) {
-			temp.putAll(pool);
+			temp = new ConcurrentHashMap<>(pool);
 			pool.clear();
 		}
 
@@ -171,9 +172,5 @@ public class HttpClientManager {
 
 	public Object getLock() {
 		return lock;
-	}
-
-	public void setLock(Object lock) {
-		this.lock = lock;
 	}
 }

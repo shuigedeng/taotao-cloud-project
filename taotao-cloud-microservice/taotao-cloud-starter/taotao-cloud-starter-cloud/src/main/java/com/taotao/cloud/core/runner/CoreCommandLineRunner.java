@@ -42,12 +42,11 @@ import org.springframework.util.ReflectionUtils;
  */
 public class CoreCommandLineRunner implements CommandLineRunner, ApplicationContextAware {
 
-	private PropertyCache propertyCache;
-	private CoreProperties coreProperties;
+	private final PropertyCache propertyCache;
+	private final CoreProperties coreProperties;
 	private ApplicationContext applicationContext;
 
-	public CoreCommandLineRunner(PropertyCache propertyCache,
-		CoreProperties coreProperties) {
+	public CoreCommandLineRunner(PropertyCache propertyCache, CoreProperties coreProperties) {
 		this.propertyCache = propertyCache;
 		this.coreProperties = coreProperties;
 	}
