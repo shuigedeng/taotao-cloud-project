@@ -17,7 +17,9 @@ package com.taotao.cloud.zookeeper.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.lock.DistributedLock;
 import com.taotao.cloud.zookeeper.lock.ZookeeperDistributedLock;
+import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
 import com.taotao.cloud.zookeeper.properties.ZookeeperLockProperties;
 import com.taotao.cloud.zookeeper.properties.ZookeeperProperties;
 import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
@@ -65,18 +67,25 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public ZookeeperTemplate zookeeperTemplate(CuratorFramework curatorFramework) {
 		LogUtil.started(ZookeeperTemplate.class, StarterNameConstant.ZOOKEEPER_STARTER);
 
 		return new ZookeeperTemplate(curatorFramework);
 	}
 
-	@Bean(name = "zookeeperDistributedLock")
+	@Bean
+	public ZkIdGenerator zkIdGenerator(CuratorFramework curatorFramework) {
+		return new ZkIdGenerator(curatorFramework);
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = ZookeeperLockProperties.PREFIX, name = "enabled", havingValue = "true")
-	public ZookeeperDistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
+	public DistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
 		LogUtil.started(ZookeeperDistributedLock.class, StarterNameConstant.ZOOKEEPER_STARTER);
 
 		return new ZookeeperDistributedLock(curatorFramework);
 	}
+
+
 }
