@@ -152,6 +152,7 @@ public class CustomRedisAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnMissingBean
 	@ConditionalOnBean(RedissonClient.class)
 	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
 	public DistributedLock redissonDistributedLock() {

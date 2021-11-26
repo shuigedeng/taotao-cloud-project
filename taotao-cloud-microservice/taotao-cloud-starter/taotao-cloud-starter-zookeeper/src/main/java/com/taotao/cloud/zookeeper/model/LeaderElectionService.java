@@ -3,6 +3,7 @@ package com.taotao.cloud.zookeeper.model;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
@@ -16,13 +17,16 @@ import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 
+
 /**
+ * LeaderElectionService 使用ZooKeeper做主备选举，商用代码和demo的主要差距就在能否正确处理SessionTimeout，如果不能正确处理SessionTimeout，主备选举的代码难以自愈。LeaderElectionService接收三个输入参数：
+ * <p>
+ * scene为场景，用来防止不同场景下主备选举zkPath冲突 serverId serverId用来区分主备不同实例，通常使用ip地址或hostname LeaderLatchListener
+ * 主备回调函数
  *
- * 使用ZooKeeper做主备选举，商用代码和demo的主要差距就在能否正确处理SessionTimeout，如果不能正确处理SessionTimeout，主备选举的代码难以自愈。LeaderElectionService接收三个输入参数：
- *
- * scene为场景，用来防止不同场景下主备选举zkPath冲突
- * serverId serverId用来区分主备不同实例，通常使用ip地址或hostname
- * LeaderLatchListener 主备回调函数
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-11-26 08:56:36
  */
 public class LeaderElectionService {
 
@@ -32,17 +36,24 @@ public class LeaderElectionService {
 	private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1,
 		threadFactory);
 
-	private final CuratorFramework framework;
+	private final CuratorFramework curatorFramework;
 
 	private final LeaderLatch leaderLatch;
 
 	private final String zkPath;
 
-	public LeaderElectionService(String scene, String serverId, LeaderLatchListener listener) {
-		this.framework = CuratorFrameworkFactory.newClient(ZooKeeperConstant.SERVERS,
-			new ExponentialBackoffRetry(1000, 3));
+	public LeaderElectionService(String scene, String serverId, LeaderLatchListener listener,
+		CuratorFramework curatorFramework) {
+		if (Objects.isNull(curatorFramework)) {
+			this.curatorFramework = CuratorFrameworkFactory.newClient("localhost:2181",
+				new ExponentialBackoffRetry(1000, 3));
+		} else {
+			this.curatorFramework = curatorFramework;
+		}
+
 		this.zkPath = String.format("/election/%s", scene);
-		this.leaderLatch = new LeaderLatch(framework, zkPath, serverId);
+		this.leaderLatch = new LeaderLatch(curatorFramework, zkPath, serverId);
+
 		leaderLatch.addListener(listener);
 		executorService.execute(this::init);
 	}
@@ -57,7 +68,7 @@ public class LeaderElectionService {
 	private void initStep1() {
 		while (true) {
 			try {
-				this.framework.create().creatingParentsIfNeeded()
+				curatorFramework.create().creatingParentsIfNeeded()
 					.withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(zkPath);
 				break;
 			} catch (Exception e) {
@@ -74,7 +85,7 @@ public class LeaderElectionService {
 	private void initStep2() {
 		while (true) {
 			try {
-				this.framework.start();
+				curatorFramework.start();
 				break;
 			} catch (Exception e) {
 				LogUtil.error("create parent path exception is ", e);
@@ -111,9 +122,10 @@ public class LeaderElectionService {
 				LogUtil.error("leader latch close exception ", e);
 			}
 		}
-		if (framework != null) {
+
+		if (curatorFramework != null) {
 			try {
-				framework.close();
+				curatorFramework.close();
 			} catch (Exception e) {
 				LogUtil.error("frame close exception ", e);
 			}
@@ -130,7 +142,6 @@ public class LeaderElectionService {
 			this.path = path;
 			this.serverId = serverId;
 		}
-
 
 		@Override
 		public void stateChanged(CuratorFramework client, ConnectionState newState) {
@@ -150,5 +161,4 @@ public class LeaderElectionService {
 			}
 		}
 	}
-
 }
