@@ -20,6 +20,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import java.io.BufferedReader;
 import java.io.IOException;

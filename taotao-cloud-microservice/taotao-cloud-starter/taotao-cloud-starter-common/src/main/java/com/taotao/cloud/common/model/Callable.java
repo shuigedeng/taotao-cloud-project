@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.model;
+package com.taotao.cloud.common.model;
 
 import java.lang.reflect.InvocationTargetException;
 

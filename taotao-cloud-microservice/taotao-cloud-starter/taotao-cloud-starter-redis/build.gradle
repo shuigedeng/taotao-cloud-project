@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api("org.redisson:redisson-spring-boot-starter:3.15.6") {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'

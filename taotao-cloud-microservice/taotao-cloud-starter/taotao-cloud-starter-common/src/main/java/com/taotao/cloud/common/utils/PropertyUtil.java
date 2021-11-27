@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.utils;
+package com.taotao.cloud.common.utils;
 
-import com.taotao.cloud.common.utils.BeanUtil;
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.core.model.Callable;
-import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.common.model.Callable;
+import com.taotao.cloud.common.model.PropertyCache;
 import java.util.Map;
 import java.util.Objects;
 

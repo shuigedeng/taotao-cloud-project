@@ -148,6 +148,7 @@ public class LeaderElectionService {
 			if (newState != ConnectionState.LOST) {
 				return;
 			}
+
 			while (true) {
 				try {
 					client.getZookeeperClient().blockUntilConnectedOrTimedOut();

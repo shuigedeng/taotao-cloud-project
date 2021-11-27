@@ -32,7 +32,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.enums.EnvironmentEnum;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.io.File;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;

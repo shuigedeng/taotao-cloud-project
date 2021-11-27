@@ -20,7 +20,7 @@ import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.AsyncThreadPoolExecutor;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
-import com.taotao.cloud.core.model.Callable.Action1;
+import com.taotao.cloud.common.model.Callable.Action1;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.model.ProcessExitEvent;
 import com.taotao.cloud.core.model.Ref;

@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.utils;
 
 import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.core.model.Callable;
+import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import java.util.Collection;
 

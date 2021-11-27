@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.core.lock.DistributedLock;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;

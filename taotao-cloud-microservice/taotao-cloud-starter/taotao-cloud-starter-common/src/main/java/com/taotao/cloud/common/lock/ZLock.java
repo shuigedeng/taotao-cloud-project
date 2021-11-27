@@ -13,41 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.enums;
-
-import java.util.HashMap;
+package com.taotao.cloud.common.lock;
 
 /**
- * EventEnum
+ * 锁对象抽象
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 21:13:18
+ * @since 2021-09-02 20:28:36
  */
-public enum EventEnum {
+public class ZLock implements AutoCloseable {
 
 	/**
-	 * 属性缓存更新事件
+	 * lock
 	 */
-	PropertyCacheUpdateEvent(new HashMap<String, Object>().getClass(), "属性缓存更新事件");
+	private final Object lock;
 
 	/**
-	 * 类
+	 * locker
 	 */
-	Class dataClass;
+	private final DistributedLock locker;
 
-	/**
-	 * 描述
-	 */
-	String desc;
-
-
-	public Class getDataClass() {
-		return dataClass;
+	public ZLock(Object lock, DistributedLock locker) {
+		this.lock = lock;
+		this.locker = locker;
 	}
 
-	EventEnum(Class dataClass, String desc) {
-		this.desc = desc;
-		this.dataClass = dataClass;
+	@Override
+	public void close() throws Exception {
+		locker.unlock(lock);
+	}
+
+	public Object getLock() {
+		return lock;
 	}
 }

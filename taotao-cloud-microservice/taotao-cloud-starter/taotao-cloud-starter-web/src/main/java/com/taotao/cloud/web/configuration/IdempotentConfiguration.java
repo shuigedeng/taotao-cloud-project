@@ -17,7 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.lock.DistributedLock;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.web.idempotent.IdempotentAspect;
 import com.taotao.cloud.web.properties.IdempotentProperties;
 import org.springframework.beans.factory.InitializingBean;
