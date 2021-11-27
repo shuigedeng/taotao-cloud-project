@@ -23,8 +23,8 @@ import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.CoreThreadPool
 import com.taotao.cloud.core.launch.StartedEventListener;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.core.model.PropertyCache;
-import com.taotao.cloud.core.model.Pubsub;
+import com.taotao.cloud.common.model.PropertyCache;
+import com.taotao.cloud.common.model.Pubsub;
 import com.taotao.cloud.core.monitor.MonitorSystem;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
@@ -32,23 +32,16 @@ import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Tags;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.server.ServerWebExchange;
 
 /**
  * CoreConfiguration

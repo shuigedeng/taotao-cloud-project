@@ -17,12 +17,13 @@ package com.taotao.cloud.core.model;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.NumberUtil;
-import com.taotao.cloud.core.model.Callable.Func0;
+import com.taotao.cloud.common.model.Callable.Func0;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;

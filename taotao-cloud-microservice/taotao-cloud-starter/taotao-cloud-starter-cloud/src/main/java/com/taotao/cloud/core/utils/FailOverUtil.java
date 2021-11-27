@@ -19,6 +19,7 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 
 import com.taotao.cloud.common.utils.ExceptionUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 

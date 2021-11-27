@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     api 'io.reactivex.rxjava2:rxjava:2.0.0'
     testImplementation 'org.mockito:mockito-all:1.10.19'

@@ -17,8 +17,8 @@ package com.taotao.cloud.redis.lock;
 
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.core.lock.DistributedLock;
-import com.taotao.cloud.core.lock.ZLock;
+import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.lock.ZLock;
 import java.util.concurrent.TimeUnit;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;

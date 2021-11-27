@@ -19,7 +19,7 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.model.PropertyCache;
+import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;

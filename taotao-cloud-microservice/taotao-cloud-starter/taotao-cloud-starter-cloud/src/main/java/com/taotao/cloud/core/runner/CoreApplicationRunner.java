@@ -18,13 +18,12 @@ package com.taotao.cloud.core.runner;
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.core.annotation.Order;
 
 /**
  * CoreApplicationRunner

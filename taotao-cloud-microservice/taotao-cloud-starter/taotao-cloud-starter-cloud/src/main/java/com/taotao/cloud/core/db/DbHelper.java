@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.db;
 
-import com.taotao.cloud.core.model.Callable;
+import com.taotao.cloud.common.model.Callable;
 import java.util.HashMap;
 import javax.sql.DataSource;
 

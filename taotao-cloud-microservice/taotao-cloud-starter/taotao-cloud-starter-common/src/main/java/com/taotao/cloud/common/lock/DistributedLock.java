@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.lock;
+package com.taotao.cloud.common.lock;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +33,7 @@ public interface DistributedLock {
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
 	 * @param unit      {@code leaseTime} 参数的时间单位
 	 * @param isFair    是否公平锁
-	 * @return {@link com.taotao.cloud.core.lock.ZLock }
+	 * @return {@link com.taotao.cloud.common.lock.ZLock }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:19
 	 */
@@ -45,7 +45,7 @@ public interface DistributedLock {
 	 * @param key       key
 	 * @param leaseTime leaseTime
 	 * @param unit      unit
-	 * @return {@link com.taotao.cloud.core.lock.ZLock }
+	 * @return {@link com.taotao.cloud.common.lock.ZLock }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:36
 	 */
@@ -58,7 +58,7 @@ public interface DistributedLock {
 	 *
 	 * @param key    key
 	 * @param isFair isFair
-	 * @return {@link com.taotao.cloud.core.lock.ZLock }
+	 * @return {@link com.taotao.cloud.common.lock.ZLock }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:39
 	 */
@@ -70,7 +70,7 @@ public interface DistributedLock {
 	 * lock
 	 *
 	 * @param key key
-	 * @return {@link com.taotao.cloud.core.lock.ZLock }
+	 * @return {@link com.taotao.cloud.common.lock.ZLock }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:25:46
 	 */
@@ -85,7 +85,7 @@ public interface DistributedLock {
 	 * @param waitTime  获取锁的最大尝试时间(单位 {@code unit})
 	 * @param leaseTime 加锁的时间，超过这个时间后锁便自动解锁； 如果leaseTime为-1，则保持锁定直到显式解锁
 	 * @param unit      {@code waitTime} 和 {@code leaseTime} 参数的时间单位
-	 * @return {@link com.taotao.cloud.core.lock.ZLock }
+	 * @return {@link com.taotao.cloud.common.lock.ZLock }
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:26:06
 	 */

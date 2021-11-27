@@ -18,7 +18,8 @@ package com.taotao.cloud.core.utils;
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.Callable;
+import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.model.Callable;
 
 
 /**

@@ -15,8 +15,6 @@
  */
 package com.taotao.cloud.p6spy.properties;
 
-import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.utils.PropertyUtil;
 import java.io.File;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -107,7 +105,7 @@ public class P6spyProperties {
 	 */
 	private String logfile =
 		System.getProperty("user.home") + File.separator + "logs" + File.separator + "p6spy"
-			+ File.separator + PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
+			//+ File.separator + PropertyUtil.getProperty(CoreProperties.SpringApplicationName)
 			+ File.separator + "spy.log";
 
 	/**

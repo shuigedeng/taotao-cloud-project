@@ -20,7 +20,7 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.Context;
 import cn.hutool.core.date.DateUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.ExportProperties;
 import java.util.Date;

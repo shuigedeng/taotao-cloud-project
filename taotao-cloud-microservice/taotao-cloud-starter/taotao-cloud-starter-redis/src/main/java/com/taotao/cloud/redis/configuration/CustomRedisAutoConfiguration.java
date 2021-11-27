@@ -23,7 +23,7 @@ import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.lock.DistributedLock;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterAspect;

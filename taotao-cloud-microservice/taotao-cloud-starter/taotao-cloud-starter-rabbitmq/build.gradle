@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
 

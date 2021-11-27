@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.model;
+package com.taotao.cloud.common.model;
 
+import com.taotao.cloud.common.enums.EventEnum;
+import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.utils.BeanUtil;
-import com.taotao.cloud.core.enums.EventEnum;
-import com.taotao.cloud.core.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
 
 /**
  * 属性缓存层

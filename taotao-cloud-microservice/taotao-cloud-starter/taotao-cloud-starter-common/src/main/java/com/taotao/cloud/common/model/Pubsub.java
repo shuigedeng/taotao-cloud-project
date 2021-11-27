@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.core.model;
+package com.taotao.cloud.common.model;
 
+import com.taotao.cloud.common.enums.EventEnum;
+import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.enums.EventEnum;
-import com.taotao.cloud.core.model.Callable.Action1;
+import com.taotao.cloud.common.model.Callable.Action1;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
