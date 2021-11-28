@@ -7,10 +7,12 @@ import com.taotao.cloud.netty.standard.ServerEndpointExporter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties({NettyWebsocketProperties.class})
 @ConditionalOnMissingBean(ServerEndpointExporter.class)
 @ConditionalOnProperty(prefix = NettyWebsocketProperties.PREFIX, name = "enabled", havingValue = "true")
 public class NettyWebSocketAutoConfiguration implements InitializingBean {

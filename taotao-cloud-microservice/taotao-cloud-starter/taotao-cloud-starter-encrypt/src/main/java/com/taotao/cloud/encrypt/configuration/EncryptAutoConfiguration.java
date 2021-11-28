@@ -12,6 +12,7 @@ import com.taotao.cloud.encrypt.handler.impl.Base64EncryptHandler;
 import com.taotao.cloud.encrypt.handler.impl.RsaEncryptHandler;
 import com.taotao.cloud.encrypt.handler.impl.SignEncryptHandlerImpl;
 import com.taotao.cloud.encrypt.interceptor.SignEncryptInterceptor;
+import com.taotao.cloud.encrypt.properties.EncryptFilterProperties;
 import com.taotao.cloud.encrypt.properties.EncryptProperties;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
@@ -27,6 +28,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
@@ -39,6 +41,7 @@ import org.springframework.core.env.Environment;
  *
  */
 @Configuration
+@EnableConfigurationProperties({EncryptProperties.class, EncryptFilterProperties.class})
 @ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFactoryPostProcessor,
 		EnvironmentAware , InitializingBean {

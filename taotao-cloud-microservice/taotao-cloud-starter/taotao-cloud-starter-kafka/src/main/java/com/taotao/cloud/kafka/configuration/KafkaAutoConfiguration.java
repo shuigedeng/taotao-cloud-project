@@ -21,6 +21,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.kafka.properties.KafkaProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,6 +33,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
+@EnableConfigurationProperties(KafkaProperties.class)
 @ConditionalOnProperty(prefix = KafkaProperties.PREFIX, name = "enabled", havingValue = "true")
 public class KafkaAutoConfiguration implements InitializingBean {
 

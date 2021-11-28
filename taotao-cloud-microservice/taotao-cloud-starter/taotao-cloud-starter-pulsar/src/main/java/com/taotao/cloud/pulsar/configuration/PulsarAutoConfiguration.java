@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.pulsar.properties.PulsarProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -30,6 +31,7 @@ import org.springframework.context.annotation.PropertySource;
  * @since 2021-09-07 20:54:47
  */
 @Configuration
+@EnableConfigurationProperties({PulsarProperties.class})
 @ConditionalOnProperty(prefix = PulsarProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PulsarAutoConfiguration implements InitializingBean {
 

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.health.PropertiesAutoConfiguration
+com.taotao.cloud.health.configuration.HealthAutoConfiguration

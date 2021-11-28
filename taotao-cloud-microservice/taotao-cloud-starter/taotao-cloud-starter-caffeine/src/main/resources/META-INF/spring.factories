@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.caffeine.PropertiesAutoConfiguration
+com.taotao.cloud.caffeine.configuration.CaffeineAutoCacheConfiguration

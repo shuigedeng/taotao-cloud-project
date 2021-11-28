@@ -27,6 +27,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -41,6 +42,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
+@EnableConfigurationProperties({XssProperties.class})
 @ConditionalOnProperty(prefix = XssProperties.PREFIX, name = "enabled", havingValue = "true")
 public class XssAutoConfiguration implements WebMvcConfigurer {
 

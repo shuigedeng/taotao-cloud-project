@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.bigdata.PropertiesAutoConfiguration
+com.taotao.cloud.bigdata.configuration.ClickHouseConfiguration, \
+com.taotao.cloud.bigdata.configuration.TidbConfiguration

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.laytpl.PropertiesAutoConfiguration
+com.taotao.cloud.laytpl.configuration.LayTplAutoConfiguration

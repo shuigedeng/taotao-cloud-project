@@ -35,6 +35,7 @@ import com.taotao.cloud.health.warn.WarnProvider;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -46,6 +47,12 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-10 17:22:15
  */
 @Configuration
+@EnableConfigurationProperties({
+	ExportProperties.class,
+	HealthProperties.class,
+	WarnProperties.class,
+	CollectTaskProperties.class,
+})
 @AutoConfigureAfter({CoreAutoConfiguration.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthAutoConfiguration implements InitializingBean {

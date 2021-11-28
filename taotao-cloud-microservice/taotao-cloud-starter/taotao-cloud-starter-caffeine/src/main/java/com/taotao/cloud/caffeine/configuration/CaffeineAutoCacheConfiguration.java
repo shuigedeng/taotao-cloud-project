@@ -19,6 +19,7 @@ package com.taotao.cloud.caffeine.configuration;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
+import com.taotao.cloud.caffeine.properties.CaffeineProperties;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
@@ -46,7 +47,7 @@ import java.util.stream.Collectors;
  */
 @EnableCaching
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(CacheProperties.class)
+@EnableConfigurationProperties({CacheProperties.class, CaffeineProperties.class})
 @ConditionalOnMissingBean(CacheManager.class)
 @ConditionalOnClass({Caffeine.class, CaffeineCacheManager.class})
 @AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")

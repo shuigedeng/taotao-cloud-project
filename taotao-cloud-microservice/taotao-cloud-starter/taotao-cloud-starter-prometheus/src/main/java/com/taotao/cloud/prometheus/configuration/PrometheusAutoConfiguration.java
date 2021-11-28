@@ -21,6 +21,7 @@ import com.taotao.cloud.prometheus.api.ReactivePrometheusApi;
 import com.taotao.cloud.prometheus.properties.PrometheusProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.ConditionalOnDiscoveryEnabled;
 import org.springframework.cloud.client.ConditionalOnReactiveDiscoveryEnabled;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -37,6 +38,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
+@EnableConfigurationProperties({PrometheusProperties.class})
 @ConditionalOnProperty(prefix = PrometheusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class PrometheusAutoConfiguration {
 

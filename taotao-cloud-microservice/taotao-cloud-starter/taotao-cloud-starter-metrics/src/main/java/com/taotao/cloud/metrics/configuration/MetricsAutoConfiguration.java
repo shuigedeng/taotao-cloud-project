@@ -38,6 +38,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceUnwrapper;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
@@ -53,6 +54,10 @@ import org.springframework.util.StringUtils;
  * @since 2021-09-07 20:54:47
  */
 @Configuration
+@EnableConfigurationProperties({MetricsProperties.class,
+	DruidMetricsProperties.class,
+	SentinelMetricsProperties.class,
+	UndertowMetricsProperties.class})
 @ConditionalOnProperty(prefix = MetricsProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MetricsAutoConfiguration implements InitializingBean {
 

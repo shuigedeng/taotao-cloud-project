@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -39,6 +40,7 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
  * @since 2020/5/3 06:47
  */
 @Configuration
+@EnableConfigurationProperties({MongodbProperties.class})
 @ConditionalOnProperty(prefix = MongodbProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MongodbAutoConfiguration implements InitializingBean {
 

@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  * @since 2021-09-09 11:38:47
  */
 @Configuration
+@EnableConfigurationProperties({com.taotao.cloud.mail.properties.MailProperties.class})
 @AutoConfigureAfter(MailSenderAutoConfiguration.class)
 @ConditionalOnProperty(prefix = com.taotao.cloud.mail.properties.MailProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MailAutoConfiguration implements InitializingBean {
