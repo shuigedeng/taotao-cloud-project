@@ -25,6 +25,8 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elk.filter.LogStatisticsFilter;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import com.taotao.cloud.elk.properties.ElkProperties;
+import com.taotao.cloud.elk.properties.ElkWebAspectProperties;
+import com.taotao.cloud.elk.properties.ElkWebProperties;
 import javax.annotation.Resource;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
@@ -32,6 +34,7 @@ import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,6 +46,12 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/6/3 10:43
  */
 @Configuration
+@EnableConfigurationProperties({
+	ElkProperties.class,
+	ElkWebAspectProperties.class,
+	ElkHealthLogStatisticProperties.class,
+	ElkWebProperties.class
+})
 @ConditionalOnProperty(prefix = ElkProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElkAutoConfiguration implements InitializingBean {
 

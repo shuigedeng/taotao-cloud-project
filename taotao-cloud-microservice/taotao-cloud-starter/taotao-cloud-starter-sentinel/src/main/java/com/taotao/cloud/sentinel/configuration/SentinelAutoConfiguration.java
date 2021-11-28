@@ -35,6 +35,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -51,6 +52,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  * @since 2021-09-07 20:54:47
  */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({SentinelProperties.class})
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
 @ConditionalOnProperty(prefix = SentinelProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SentinelAutoConfiguration implements InitializingBean {

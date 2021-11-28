@@ -26,7 +26,9 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.feign.formatter.DateFormatRegister;
 import com.taotao.cloud.feign.http.InfoFeignLoggerFactory;
 import com.taotao.cloud.feign.http.RestTemplateHeaderInterceptor;
+import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import com.taotao.cloud.feign.properties.FeignProperties;
+import com.taotao.cloud.feign.properties.LbIsolationProperties;
 import feign.Logger;
 import feign.Response;
 import feign.Retryer;
@@ -43,10 +45,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.commons.httpclient.OkHttpClientConnectionPoolFactory;
 import org.springframework.cloud.commons.httpclient.OkHttpClientFactory;
@@ -71,7 +75,10 @@ import org.springframework.web.client.RestTemplate;
  * @since 2020/6/15 11:31
  */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({LbIsolationProperties.class, FeignProperties.class,
+	FeignInterceptorProperties.class})
 @AutoConfigureBefore(SentinelFeignAutoConfiguration.class)
+@EnableAutoConfiguration(excludeName = "org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration")
 @ConditionalOnProperty(prefix = FeignProperties.PREFIX, name = "enabled", havingValue = "true")
 public class FeignAutoConfiguration implements InitializingBean {
 

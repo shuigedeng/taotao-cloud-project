@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.rocketmq.PropertiesAutoConfiguration
+com.taotao.cloud.rocketmq.configuration.RocketMQConfiguration

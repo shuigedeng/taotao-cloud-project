@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.logger.PropertiesAutoConfiguration
+com.taotao.cloud.logger.configuration.LoggerConfiguration

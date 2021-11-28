@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.qrcode.properties.QrCodeProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -30,6 +31,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/10/14 09:18
  */
 @Configuration
+@EnableConfigurationProperties({QrCodeProperties.class})
 @ConditionalOnProperty(prefix = QrCodeProperties.PREFIX, name = "enabled", havingValue = "true")
 public class QrCodeAutoConfiguration implements InitializingBean {
 

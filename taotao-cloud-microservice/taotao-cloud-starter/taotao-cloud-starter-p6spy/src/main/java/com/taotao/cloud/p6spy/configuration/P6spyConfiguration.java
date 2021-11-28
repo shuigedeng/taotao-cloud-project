@@ -33,6 +33,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
@@ -45,6 +46,7 @@ import org.springframework.core.env.Environment;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(P6SpyDriver.class)
+@EnableConfigurationProperties({P6spyProperties.class})
 @ConditionalOnProperty(prefix = P6spyProperties.PREFIX, name = "enabled", havingValue = "true")
 public class P6spyConfiguration implements ApplicationRunner , InitializingBean {
 

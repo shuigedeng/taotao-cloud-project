@@ -15,9 +15,18 @@
  */
 package com.taotao.cloud.oss.configuration;
 
+import com.taotao.cloud.oss.propeties.AliyunOssProperties;
+import com.taotao.cloud.oss.propeties.FastdfsProperties;
+import com.taotao.cloud.oss.propeties.FtpProperties;
+import com.taotao.cloud.oss.propeties.LocalProperties;
+import com.taotao.cloud.oss.propeties.NginxProperties;
 import com.taotao.cloud.oss.propeties.OssProperties;
+import com.taotao.cloud.oss.propeties.QCloudProperties;
+import com.taotao.cloud.oss.propeties.QiniuProperties;
+import com.taotao.cloud.oss.propeties.UpYunProperties;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * OssAutoConfiguration
@@ -26,6 +35,17 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  * @version 1.0.0
  * @since 2020/10/26 10:49
  */
+@EnableConfigurationProperties({
+	OssProperties.class,
+	AliyunOssProperties.class,
+	FastdfsProperties.class,
+	LocalProperties.class,
+	NginxProperties.class,
+	QCloudProperties.class,
+	QiniuProperties.class,
+	FtpProperties.class,
+	UpYunProperties.class
+})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "enabled", havingValue = "true")
 @ImportAutoConfiguration({
 	AliyunOssAutoConfiguration.class,

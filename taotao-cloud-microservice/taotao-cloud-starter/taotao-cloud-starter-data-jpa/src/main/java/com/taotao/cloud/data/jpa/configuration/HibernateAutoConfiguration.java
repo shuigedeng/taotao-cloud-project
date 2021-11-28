@@ -35,6 +35,7 @@ import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import com.taotao.cloud.data.jpa.listener.HibernateInspector;
 import com.taotao.cloud.data.jpa.properties.HibernateProperties;
+import com.taotao.cloud.data.jpa.properties.TenantProperties;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -49,6 +50,7 @@ import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -65,6 +67,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @Configuration
 @EnableJpaAuditing
+@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class})
 @ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HibernateAutoConfiguration implements InitializingBean {
 

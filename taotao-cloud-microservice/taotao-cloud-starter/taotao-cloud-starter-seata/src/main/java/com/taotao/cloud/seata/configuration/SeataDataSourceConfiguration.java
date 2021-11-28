@@ -34,6 +34,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -47,6 +48,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableAutoDataSourceProxy
+@EnableConfigurationProperties({SeataProperties.class})
 @ConditionalOnProperty(prefix = SeataProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SeataDataSourceConfiguration implements InitializingBean {
 

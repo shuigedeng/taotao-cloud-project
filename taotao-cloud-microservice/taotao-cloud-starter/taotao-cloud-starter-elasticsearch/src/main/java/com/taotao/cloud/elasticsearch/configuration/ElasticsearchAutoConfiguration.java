@@ -38,6 +38,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.autoconfigure.elasticsearch.RestClientBuilderCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +52,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  * @since 2020/5/3 06:47
  */
 @Configuration
+@EnableConfigurationProperties({
+	RestClientPoolProperties.class,
+	ElasticsearchProperties.class
+})
 @ConditionalOnProperty(prefix = ElasticsearchProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElasticsearchAutoConfiguration implements InitializingBean {
 

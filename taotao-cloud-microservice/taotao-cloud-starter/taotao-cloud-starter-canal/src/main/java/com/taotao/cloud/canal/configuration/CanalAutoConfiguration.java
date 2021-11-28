@@ -23,6 +23,7 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,6 +35,9 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-04 07:28:42
  */
 @Configuration
+@EnableConfigurationProperties({
+	CanalProperties.class
+})
 @ConditionalOnProperty(prefix = CanalProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CanalAutoConfiguration implements InitializingBean {
 

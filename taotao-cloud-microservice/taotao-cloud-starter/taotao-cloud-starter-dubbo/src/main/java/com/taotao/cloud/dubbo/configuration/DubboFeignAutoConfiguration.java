@@ -15,6 +15,7 @@ import org.apache.dubbo.config.spring.beans.factory.annotation.DubboFeignProvide
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ import org.springframework.core.env.Environment;
  * @author shuigedeng
  */
 @Configuration
+@EnableConfigurationProperties({DubboProperties.class})
 @ConditionalOnProperty(prefix = DubboProperties.PREFIX, name = "enabled", matchIfMissing = true)
 @ConditionalOnClass(AbstractConfig.class)
 public class DubboFeignAutoConfiguration implements InitializingBean {

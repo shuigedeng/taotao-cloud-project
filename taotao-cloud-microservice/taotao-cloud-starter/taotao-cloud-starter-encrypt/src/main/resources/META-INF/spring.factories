@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.encrypt.PropertiesAutoConfiguration
+com.taotao.cloud.encrypt.configuration.EncryptAutoConfiguration, \
+com.taotao.cloud.encrypt.configuration.EncryptFilterAutoConfiguration

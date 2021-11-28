@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.spider.properties.SpiderProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -29,7 +30,8 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  * @since 2020/10/14 09:18
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
+@EnableConfigurationProperties({SpiderProperties.class})
 @ConditionalOnProperty(prefix = SpiderProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SpiderAutoConfiguration implements InitializingBean {
 

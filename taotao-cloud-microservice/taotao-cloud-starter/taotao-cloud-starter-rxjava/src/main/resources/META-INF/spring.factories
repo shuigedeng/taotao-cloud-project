@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.rxjava.PropertiesAutoConfiguration
+com.taotao.cloud.rxjava.configuration.RxJavaMvcAutoConfiguration

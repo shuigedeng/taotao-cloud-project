@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.ip2region.PropertiesAutoConfiguration
+com.taotao.cloud.ip2region.configuration.Ip2regionAutoConfiguration

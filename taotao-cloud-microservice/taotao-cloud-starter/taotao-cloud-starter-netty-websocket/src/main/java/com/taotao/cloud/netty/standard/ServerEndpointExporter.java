@@ -1,6 +1,5 @@
 package com.taotao.cloud.netty.standard;
 
-import com.taotao.cloud.netty.annotation.EnableTaoTaoCloudWebSocket;
 import com.taotao.cloud.netty.annotation.ServerEndpoint;
 import com.taotao.cloud.netty.exception.DeploymentException;
 import com.taotao.cloud.netty.pojo.PojoEndpointServer;
@@ -88,21 +87,21 @@ public class ServerEndpointExporter extends ApplicationObjectSupport implements
 	private void scanPackage(ApplicationContext context) {
 		String[] basePackages = null;
 
-		String[] enableWebSocketBeanNames = context.getBeanNamesForAnnotation(
-			EnableTaoTaoCloudWebSocket.class);
-		if (enableWebSocketBeanNames.length != 0) {
-			for (String enableWebSocketBeanName : enableWebSocketBeanNames) {
-				Object enableWebSocketBean = context.getBean(enableWebSocketBeanName);
-				EnableTaoTaoCloudWebSocket enableTaoTaoCloudWebSocket = AnnotationUtils.findAnnotation(
-					enableWebSocketBean.getClass(), EnableTaoTaoCloudWebSocket.class);
-
-				assert enableTaoTaoCloudWebSocket != null;
-				if (enableTaoTaoCloudWebSocket.basePackages().length != 0) {
-					basePackages = enableTaoTaoCloudWebSocket.basePackages();
-					break;
-				}
-			}
-		}
+		//String[] enableWebSocketBeanNames = context.getBeanNamesForAnnotation(
+		//	EnableTaoTaoCloudWebSocket.class);
+		//if (enableWebSocketBeanNames.length != 0) {
+		//	for (String enableWebSocketBeanName : enableWebSocketBeanNames) {
+		//		Object enableWebSocketBean = context.getBean(enableWebSocketBeanName);
+		//		EnableTaoTaoCloudWebSocket enableTaoTaoCloudWebSocket = AnnotationUtils.findAnnotation(
+		//			enableWebSocketBean.getClass(), EnableTaoTaoCloudWebSocket.class);
+		//
+		//		assert enableTaoTaoCloudWebSocket != null;
+		//		if (enableTaoTaoCloudWebSocket.basePackages().length != 0) {
+		//			basePackages = enableTaoTaoCloudWebSocket.basePackages();
+		//			break;
+		//		}
+		//	}
+		//}
 
 		// use @SpringBootApplication package
 		if (basePackages == null) {

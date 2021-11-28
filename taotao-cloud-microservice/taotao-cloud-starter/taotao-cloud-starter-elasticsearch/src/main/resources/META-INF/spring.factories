@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.elasticsearch.PropertiesAutoConfiguration
+com.taotao.cloud.elasticsearch.configuration.ElasticsearchAutoConfiguration

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.processor.properties.ProcessProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -30,6 +31,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-07 20:54:47
  */
 @Configuration
+@EnableConfigurationProperties({ProcessProperties.class})
 @ConditionalOnProperty(prefix = ProcessProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ProcessorAutoConfiguration implements InitializingBean {
 

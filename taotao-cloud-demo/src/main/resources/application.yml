@@ -1,0 +1,77 @@
+server:
+  port: 33337
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+    accesslog:
+      dir: ${user.home}/logs/undertow
+      enabled: true
+  servlet:
+    application-display-name: ${spring.application.name}
+
+taotao:
+  cloud:
+    zookeeper:
+      enabled: true
+      connectString: 172.16.6.151:2181
+      lock:
+        enabled: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: off
+    org.apache.zookeeper: debug
+    org.springframework.security: off
+    org.springframework.security.oauth2: off
+    org.springframework.boot.autoconfigure: off
+    org.springframework.cloud.openfeign: off
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/static/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+    enabled: true
+  main:
+    allow-circular-references: false
+    allow-bean-definition-overriding: true
+    banner-mode: off
+    register-shutdown-hook: true
+    cloud-platform: kubernetes
+    web-application-type: servlet
+  application:
+    name: taotao-cloud-uc-biz
+    admin:
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  web:
+    resources:
+      # pro环境关闭
+      add-mappings: true
+  mvc:
+    servlet:
+      load-on-startup: 1
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+    dispatch-trace-request: true
+    dispatch-options-request: true
+    log-request-details: true
+    log-resolved-exception: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB

@@ -30,6 +30,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,6 +42,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-07 20:37:49
  */
 @Configuration
+@EnableConfigurationProperties({ZookeeperProperties.class, ZookeeperLockProperties.class})
 @ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ZookeeperAutoConfiguration implements InitializingBean {
 

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.kafka.PropertiesAutoConfiguration
+com.taotao.cloud.kafka.configuration.KafkaAutoConfiguration

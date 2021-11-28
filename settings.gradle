@@ -30,7 +30,7 @@ pluginManagement {
 
 rootProject.name = 'taotao-cloud-project'
 
-def oneLayerProjects = ['dependencies', 'scala', 'netty', 'node', 'plugin', 'python', 'web', 'go']
+def oneLayerProjects = ['dependencies', 'scala', 'netty', 'node', 'plugin', 'python', 'web', 'go','demo']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }

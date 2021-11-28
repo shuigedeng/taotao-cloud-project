@@ -119,6 +119,7 @@ plugins {
     id 'idea'
     id 'signing'
     id 'maven-publish'
+    //id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "com.google.cloud.tools.jib" version "3.1.4"
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id "com.github.johnrengelman.processes" version "0.5.0"
@@ -180,6 +181,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: 'org.springframework.boot'
     apply plugin: "org.springdoc.openapi-gradle-plugin"
     apply plugin: "com.github.shalousun.smart-doc"
+    //apply plugin: 'io.spring.dependency-management'
 
     apply plugin: "com.google.cloud.tools.jib"
     //apply plugin: "com.github.johnrengelman.shadow"

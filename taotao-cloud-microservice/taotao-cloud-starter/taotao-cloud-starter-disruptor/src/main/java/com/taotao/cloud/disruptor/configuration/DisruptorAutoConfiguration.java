@@ -60,6 +60,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
@@ -77,6 +78,7 @@ import org.springframework.util.ObjectUtils;
  * @since 2021-09-03 19:58:30
  */
 @Configuration
+@EnableConfigurationProperties({DisruptorProperties.class})
 @ConditionalOnClass({Disruptor.class})
 @ConditionalOnProperty(prefix = DisruptorProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DisruptorAutoConfiguration implements ApplicationContextAware, InitializingBean {

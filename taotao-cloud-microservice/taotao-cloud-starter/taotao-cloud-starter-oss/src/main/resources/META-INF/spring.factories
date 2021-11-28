@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.oss.PropertiesAutoConfiguration
+com.taotao.cloud.oss.configuration.OssAutoConfiguration

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.metrics.PropertiesAutoConfiguration
+com.taotao.cloud.metrics.configuration.MetricsAutoConfiguration

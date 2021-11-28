@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.p6spy.PropertiesAutoConfiguration
+com.taotao.cloud.p6spy.configuration.P6spyConfiguration

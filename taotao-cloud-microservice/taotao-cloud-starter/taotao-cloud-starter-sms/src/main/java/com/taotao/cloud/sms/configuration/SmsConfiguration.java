@@ -27,6 +27,7 @@ import com.taotao.cloud.sms.service.impl.AliSmsServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,6 +39,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-07 20:45:25
  */
 @Configuration
+@EnableConfigurationProperties({SmsProperties.class, AliSmsProperties.class})
 @ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "enabled", havingValue = "true")
 public class SmsConfiguration implements InitializingBean {
 
