@@ -274,11 +274,6 @@ spring:
         max-idle: 500
         min-idle: 100
   elasticsearch:
-    rest:
-      uris:
-        - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
-      username:
-      password:
     uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
     password:
     username:
@@ -286,13 +281,6 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
-      client:
-        reactive:
-          endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
-          connection-timeout: 5
-          username:
-          password:
     mongodb:
       database: yapi
       host: 172.16.6.151
