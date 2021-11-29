@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.common.beans;
+package com.taotao.cloud.common.bean;
 
 import org.springframework.asm.ClassVisitor;
 import org.springframework.cglib.core.AbstractClassGenerator;

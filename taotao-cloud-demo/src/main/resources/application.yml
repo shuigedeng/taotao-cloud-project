@@ -20,7 +20,7 @@ taotao:
       enabled: true
       connectString: 172.16.6.151:2181
       lock:
-        enabled: false
+        enabled: true
 
 logging:
   level:

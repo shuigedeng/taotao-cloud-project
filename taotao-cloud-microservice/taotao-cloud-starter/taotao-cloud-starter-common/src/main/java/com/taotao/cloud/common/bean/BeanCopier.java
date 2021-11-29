@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.common.beans;
+package com.taotao.cloud.common.bean;
 
 import com.taotao.cloud.common.utils.BeanUtil;
 import com.taotao.cloud.common.utils.ClassUtil;

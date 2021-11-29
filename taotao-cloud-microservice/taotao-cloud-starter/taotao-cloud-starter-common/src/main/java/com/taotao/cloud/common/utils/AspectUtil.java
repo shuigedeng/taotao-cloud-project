@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.aspect;
+package com.taotao.cloud.common.utils;
 
 import com.taotao.cloud.common.utils.JsonUtil;
 import java.lang.annotation.Annotation;
@@ -27,7 +27,7 @@ import org.aspectj.lang.JoinPoint;
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
-public abstract class BaseAspect {
+public class AspectUtil {
 
 	/**
 	 * 获取切面方法上包含的指定注解
@@ -39,7 +39,7 @@ public abstract class BaseAspect {
 	 * @author shuigedeng
 	 * @since 2021-09-02 19:41:20
 	 */
-	public <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
+	public static <T extends Annotation> T getAnnotation(JoinPoint joinPoint, Class<T> annotationClass) {
 		String methodName = joinPoint.getSignature().getName();
 		Object[] arguments = joinPoint.getArgs();
 		Method[] methods = joinPoint.getSignature().getDeclaringType().getMethods();

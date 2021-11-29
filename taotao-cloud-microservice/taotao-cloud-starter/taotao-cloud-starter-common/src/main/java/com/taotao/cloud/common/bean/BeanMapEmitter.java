@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.common.beans;
+package com.taotao.cloud.common.bean;
 
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import java.beans.PropertyDescriptor;

@@ -32,7 +32,6 @@ import org.springframework.stereotype.Service;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Service
 public @interface HandlerType {
 
 	/**
