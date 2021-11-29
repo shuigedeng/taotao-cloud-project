@@ -25,6 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * TaoTaoCloudApplication
@@ -36,6 +37,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableTaoTaoCloudPay
 @EnableTaoTaoCloudOauth2Resource
 @EnableEncryptableProperties

@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.lock;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.aspect.BaseAspect;
+import com.taotao.cloud.common.utils.AspectUtil;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Objects;
@@ -39,7 +39,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * @since 2021-09-02 20:27:36
  */
 @Aspect
-public class LockAspect extends BaseAspect {
+public class LockAspectUtil extends AspectUtil {
 
 	@Autowired(required = false)
 	private DistributedLock distributedLock;
@@ -61,9 +61,11 @@ public class LockAspect extends BaseAspect {
 			lock = point.getTarget().getClass().getDeclaredAnnotation(Lock.class);
 		}
 		String lockKey = lock.key();
+
 		if (distributedLock == null) {
 			throw new LockException("DistributedLock is null");
 		}
+
 		if (StrUtil.isEmpty(lockKey)) {
 			throw new LockException("lockKey is null");
 		}

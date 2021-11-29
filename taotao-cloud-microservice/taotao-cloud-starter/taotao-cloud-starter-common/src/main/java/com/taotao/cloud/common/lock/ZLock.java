@@ -47,4 +47,8 @@ public class ZLock implements AutoCloseable {
 	public Object getLock() {
 		return lock;
 	}
+
+	public DistributedLock getLocker() {
+		return locker;
+	}
 }

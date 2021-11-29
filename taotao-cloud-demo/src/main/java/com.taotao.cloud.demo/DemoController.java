@@ -15,9 +15,15 @@
  */
 package com.taotao.cloud.demo;
 
+import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.lock.ZLock;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
+import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,9 +38,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/demo")
 public class DemoController {
+	@Autowired
+	private ZookeeperTemplate zookeeperTemplate;
+	@Autowired
+	private ZkIdGenerator zkIdGenerator;
+	@Autowired
+	private DistributedLock distributedLock;
 
 	@GetMapping("/demo1")
 	public Result<List<String>> getClassification() {
+		try {
+			String hello = zookeeperTemplate.createNode("/test", "hello");
+
+			String s = zkIdGenerator.genId().get();
+
+			ZLock lock = distributedLock.lock("lock", 3000L, TimeUnit.SECONDS);
+
+			System.out.println("///////////");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		List<String> result = new ArrayList<>();
 		return Result.success(result);
 	}

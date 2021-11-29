@@ -18,7 +18,7 @@ package com.taotao.cloud.web.idempotent;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.aspect.BaseAspect;
+import com.taotao.cloud.common.utils.AspectUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
@@ -45,12 +45,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @since 2021-09-02 22:00:21
  */
 @Aspect
-public class IdempotentAspect extends BaseAspect {
+public class IdempotentAspect {
 
 	/**
 	 * PER_FIX_KEY
 	 */
-	private final ThreadLocal<String> PER_FIX_KEY = new ThreadLocal<String>();
+	private final ThreadLocal<String> PER_FIX_KEY = new ThreadLocal<>();
 
 	/**
 	 * 配置注解后 默认开启
@@ -85,7 +85,7 @@ public class IdempotentAspect extends BaseAspect {
 
 	@Before("watchIde()")
 	public void doBefore(JoinPoint joinPoint) throws Exception {
-		Idempotent idempotent = getAnnotation(joinPoint, Idempotent.class);
+		Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
 
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
@@ -181,7 +181,7 @@ public class IdempotentAspect extends BaseAspect {
 	@After("watchIde()")
 	public void doAfter(JoinPoint joinPoint) throws Throwable {
 		try {
-			Idempotent idempotent = getAnnotation(joinPoint, Idempotent.class);
+			Idempotent idempotent = AspectUtil.getAnnotation(joinPoint, Idempotent.class);
 			if (enable && null != idempotent) {
 
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL

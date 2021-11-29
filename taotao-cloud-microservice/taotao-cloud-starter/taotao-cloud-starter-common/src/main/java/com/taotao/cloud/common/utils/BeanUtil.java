@@ -17,8 +17,8 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.lang.Assert;
-import com.taotao.cloud.common.beans.BeanCopier;
-import com.taotao.cloud.common.beans.BeanMap;
+import com.taotao.cloud.common.bean.BeanCopier;
+import com.taotao.cloud.common.bean.BeanMap;
 import com.taotao.cloud.common.convert.Converter;
 import com.taotao.cloud.common.exception.BaseException;
 import java.io.IOException;
