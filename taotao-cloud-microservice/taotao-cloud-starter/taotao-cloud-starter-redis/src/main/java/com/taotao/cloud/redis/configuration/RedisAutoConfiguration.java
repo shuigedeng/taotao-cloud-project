@@ -21,9 +21,9 @@ import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
@@ -160,13 +160,12 @@ public class RedisAutoConfiguration implements InitializingBean {
 	@ConditionalOnBean(RedissonClient.class)
 	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
 	public DistributedLock redissonDistributedLock() {
-		LogUtil.started(DistributedLock.class, StarterNameConstant.REDIS_STARTER);
-
 		return new RedissonDistributedLock(redissonClient);
 	}
 
+	@Configuration
 	@ConditionalOnProperty(value = "taotao.cloud.redis.key-expired-event.enable")
-	public class RedisKeyExpiredEventConfiguration {
+	public static class RedisKeyExpiredEventConfiguration {
 
 		@Bean
 		@ConditionalOnMissingBean
@@ -187,9 +186,8 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Configuration(proxyBeanMethods = false)
 	@ConditionalOnProperty(value = "taotao.cloud.redis.rate-limiter.enable")
-	public class RateLimiterAutoConfiguration {
+	public static class RateLimiterAutoConfiguration {
 
-		@SuppressWarnings("unchecked")
 		private RedisScript<List<Long>> redisRateLimiterScript() {
 			DefaultRedisScript redisScript = new DefaultRedisScript<>();
 			redisScript.setScriptSource(new ResourceScriptSource(
@@ -225,7 +223,8 @@ public class RedisAutoConfiguration implements InitializingBean {
 		@ConditionalOnMissingBean
 		public CacheManagerCustomizers cacheManagerCustomizers(
 			ObjectProvider<CacheManagerCustomizer<?>> customizers) {
-			return new CacheManagerCustomizers(customizers.orderedStream().collect(Collectors.toList()));
+			return new CacheManagerCustomizers(
+				customizers.orderedStream().collect(Collectors.toList()));
 		}
 
 		@Bean
@@ -234,7 +233,8 @@ public class RedisAutoConfiguration implements InitializingBean {
 			ObjectProvider<Caffeine<Object, Object>> caffeine,
 			ObjectProvider<CaffeineSpec> caffeineSpec,
 			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-			CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine, caffeineSpec, cacheLoader);
+			CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine,
+				caffeineSpec, cacheLoader);
 			List<String> cacheNames = cacheProperties.getCacheNames();
 			if (!CollectionUtils.isEmpty(cacheNames)) {
 				cacheManager.setCacheNames(cacheNames);
@@ -243,10 +243,12 @@ public class RedisAutoConfiguration implements InitializingBean {
 		}
 
 		private static CaffeineAutoCacheManager createCacheManager(CacheProperties cacheProperties,
-			ObjectProvider<Caffeine<Object, Object>> caffeine, ObjectProvider<CaffeineSpec> caffeineSpec,
+			ObjectProvider<Caffeine<Object, Object>> caffeine,
+			ObjectProvider<CaffeineSpec> caffeineSpec,
 			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
 			CaffeineAutoCacheManager cacheManager = new CaffeineAutoCacheManager();
-			setCacheBuilder(cacheProperties, caffeineSpec.getIfAvailable(), caffeine.getIfAvailable(), cacheManager);
+			setCacheBuilder(cacheProperties, caffeineSpec.getIfAvailable(),
+				caffeine.getIfAvailable(), cacheManager);
 			cacheLoader.ifAvailable(cacheManager::setCacheLoader);
 			return cacheManager;
 		}
@@ -271,10 +273,11 @@ public class RedisAutoConfiguration implements InitializingBean {
 	 * caffeine 缓存自动配置超时时间
 	 *
 	 * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:01:42
+	 * @version 2021.9
+	 * @since 2021-09-02 20:01:42
 	 */
 	public static class CaffeineAutoCacheManager extends CaffeineCacheManager {
+
 		private static final Field CACHE_LOADER_FIELD;
 
 		static {
@@ -302,7 +305,8 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void setCaffeine(Caffeine<Object, Object> caffeine) {
-			throw new IllegalArgumentException("mica-caffeine not support customization Caffeine bean，you can customize CaffeineSpec bean.");
+			throw new IllegalArgumentException(
+				"mica-caffeine not support customization Caffeine bean，you can customize CaffeineSpec bean.");
 		}
 
 		@Override
@@ -318,15 +322,16 @@ public class RedisAutoConfiguration implements InitializingBean {
 		}
 
 		/**
-		 * Build a common Caffeine Cache instance for the specified cache name,
-		 * using the common Caffeine configuration specified on this cache manager.
+		 * Build a common Caffeine Cache instance for the specified cache name, using the common
+		 * Caffeine configuration specified on this cache manager.
 		 *
 		 * @param name the name of the cache
 		 * @return the native Caffeine Cache instance
 		 * @see #createCaffeineCache
 		 */
 		@Override
-		protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(String name) {
+		protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(
+			String name) {
 			String[] cacheArray = name.split(StringPool.HASH);
 			if (cacheArray.length < 2) {
 				return super.createNativeCaffeineCache(name);

@@ -14,13 +14,6 @@ server:
   servlet:
     application-display-name: ${spring.application.name}
 
-taotao:
-  cloud:
-    zookeeper:
-      enabled: true
-      connectString: 172.16.6.151:2181
-      lock:
-        enabled: true
 
 logging:
   level:
@@ -50,7 +43,7 @@ spring:
     cloud-platform: kubernetes
     web-application-type: servlet
   application:
-    name: taotao-cloud-uc-biz
+    name: taotao-cloud-demo
     admin:
       enabled: true
   jackson:
@@ -75,3 +68,28 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
+
+taotao:
+  cloud:
+    zookeeper:
+      enabled: true
+      connectString: 172.16.6.151:2181
+      lock:
+        enabled: true
+
+
+#Apollo 配置
+app:
+  id: taotao-cloud-demo                          #应用ID
+apollo:
+  cacheDir: ${user.dir}/logs/apolloconfig/                       #配置本地配置缓存目录
+  cluster: default                           #指定使用哪个集群的配置
+  meta: http://172.16.6.151:8080            #DEV环境配置中心地址
+  autoUpdateInjectedSpringProperties: true   #是否开启 Spring 参数自动更新
+  bootstrap:
+    enabled: true                            #是否开启 Apollo
+    namespaces: application                  #设置 Namespace
+    eagerLoad:
+      enabled: false                         #将 Apollo 加载提到初始化日志系统之前
+
+

@@ -113,7 +113,7 @@ public class PropertyCache implements CommandLineRunner {
 			}
 		}
 
-		pubsub.pub(EventEnum.PropertyCacheUpdateEvent.toString(), new HashMap(1) {
+		pubsub.pub(EventEnum.PropertyCacheUpdateEvent.toString(), new HashMap<>(1) {
 			{
 				put(key, value);
 			}

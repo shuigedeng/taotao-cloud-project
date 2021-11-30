@@ -136,8 +136,6 @@ seata:
     exception-rate: 100
 
 spring:
-  profiles:
-    active: dev
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
@@ -148,7 +146,7 @@ spring:
     cache: false
     enabled: true
   main:
-    allow-circular-references: false
+    allow-circular-references: true
     allow-bean-definition-overriding: true
     banner-mode: off
     register-shutdown-hook: true
@@ -539,13 +537,11 @@ taotao:
       connectString: 172.16.6.151:2181
       lock:
         enabled: false
-    xss:
-      enabled: false
     web:
       dozer:
         enabled: true
       encrypt:
-        enabled: true
+        enabled: false
       interceptor:
         doubt-api: true
         header: true
@@ -660,7 +656,7 @@ taotao:
       loadbalancer:
         enabled: true
     encrypt:
-      enabled: true
+      enabled: false
       filter:
         enabled: false
     elk:

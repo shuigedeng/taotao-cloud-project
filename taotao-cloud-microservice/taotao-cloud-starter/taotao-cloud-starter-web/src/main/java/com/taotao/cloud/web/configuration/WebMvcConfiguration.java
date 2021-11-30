@@ -153,7 +153,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Autowired
 	private Histogram requestLatencyHistogram;
 
-
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(new LoginUserArgumentResolver());
