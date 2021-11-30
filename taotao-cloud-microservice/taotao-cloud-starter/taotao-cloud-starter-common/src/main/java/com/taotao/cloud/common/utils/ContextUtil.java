@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -58,7 +60,9 @@ public class ContextUtil {
 	 * @since 2021-09-02 17:37:28
 	 */
 	public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
-		ContextUtil.applicationContext = applicationContext;
+		if(Objects.nonNull(applicationContext)){
+			ContextUtil.applicationContext = applicationContext;
+		}
 	}
 
 	/**
@@ -109,32 +113,39 @@ public class ContextUtil {
 	 */
 	public static <T> T getBean(Class<T> type, boolean required) {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
-		if (type != null && applicationContext != null) {
-			try {
-				if (required) {
-					return applicationContext.getBean(type);
-				} else {
-					if (applicationContext.getBeansOfType(type).size() > 0) {
+
+		try {
+			if (type != null && applicationContext != null) {
+				try {
+					if (required) {
 						return applicationContext.getBean(type);
+					} else {
+						if (applicationContext.getBeansOfType(type).size() > 0) {
+							return applicationContext.getBean(type);
+						}
 					}
+				} catch (NoSuchBeanDefinitionException e) {
+					return null;
 				}
-			} catch (NoSuchBeanDefinitionException e) {
-				return null;
 			}
+		} catch (BeansException e) {
 		}
+
 		return null;
 	}
 
 	public static <T> T getBean(Class<T> type, String name, boolean required) {
-		if (type != null && applicationContext != null) {
-			if (required) {
-				return applicationContext.getBean(name, type);
-			} else {
-				if (applicationContext.getBeansOfType(type).size() > 0) {
+		try {
+			if (type != null && applicationContext != null) {
+				if (required) {
 					return applicationContext.getBean(name, type);
+				} else {
+					if (applicationContext.getBeansOfType(type).size() > 0) {
+						return applicationContext.getBean(name, type);
+					}
 				}
-
 			}
+		} catch (BeansException e) {
 		}
 		return null;
 	}
@@ -149,15 +160,18 @@ public class ContextUtil {
 	 * @since 2021-09-02 17:37:57
 	 */
 	public static Object getBean(String type, boolean required) {
-		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
-		if (type != null && applicationContext != null) {
-			if (required) {
-				return applicationContext.getBean(type);
-			} else {
-				if (applicationContext.containsBean(type)) {
+		try {
+			ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
+			if (type != null && applicationContext != null) {
+				if (required) {
 					return applicationContext.getBean(type);
+				} else {
+					if (applicationContext.containsBean(type)) {
+						return applicationContext.getBean(type);
+					}
 				}
 			}
+		} catch (BeansException e) {
 		}
 		return null;
 	}
@@ -171,12 +185,17 @@ public class ContextUtil {
 	 */
 	public static String getBeanDefinitionText() {
 		ConfigurableApplicationContext applicationContext = ContextUtil.getApplicationContext();
-		String[] beans = applicationContext.getBeanDefinitionNames();
-		Arrays.sort(beans);
 		StringBuilder sb = new StringBuilder();
-		for (String bean : beans) {
-			sb.append(bean).append(" -> ")
-				.append(ContextUtil.getApplicationContext().getBean(bean).getClass());
+		try {
+			String[] beans = applicationContext.getBeanDefinitionNames();
+			Arrays.sort(beans);
+			sb = new StringBuilder();
+			for (String bean : beans) {
+				sb.append(bean).append(" -> ")
+					.append(ContextUtil.getApplicationContext().getBean(bean).getClass());
+			}
+		} catch (BeansException e) {
+			e.printStackTrace();
 		}
 		return sb.toString();
 	}

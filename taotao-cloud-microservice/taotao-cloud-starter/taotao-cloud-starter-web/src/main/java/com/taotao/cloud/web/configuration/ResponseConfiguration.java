@@ -20,6 +20,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.annotation.IgnoreResponseBodyAdvice;
 import javax.servlet.Servlet;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -45,7 +46,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 //@RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"}, annotations = {
 //	RestController.class, Controller.class})
 @RestControllerAdvice(basePackages = {"com.taotao.cloud.*.biz.controller"})
-public class ResponseConfiguration implements ResponseBodyAdvice, InitializingBean {
+public class ResponseConfiguration implements ResponseBodyAdvice<Object>, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -53,10 +54,10 @@ public class ResponseConfiguration implements ResponseBodyAdvice, InitializingBe
 	}
 
 	@Override
-	public boolean supports(MethodParameter methodParameter, Class aClass) {
+	public boolean supports(MethodParameter methodParameter, @NotNull Class aClass) {
 		// 类上如果被 IgnoreResponseBodyAdvice 标识就不拦截
 		if (methodParameter.getDeclaringClass()
-				.isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
+			.isAnnotationPresent(IgnoreResponseBodyAdvice.class)) {
 			return false;
 		}
 
@@ -65,9 +66,12 @@ public class ResponseConfiguration implements ResponseBodyAdvice, InitializingBe
 	}
 
 	@Override
-	public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType,
-			Class aClass, ServerHttpRequest serverHttpRequest,
-			ServerHttpResponse serverHttpResponse) {
+	public Object beforeBodyWrite(Object o,
+		@NotNull MethodParameter methodParameter,
+		@NotNull MediaType mediaType,
+		@NotNull Class aClass,
+		@NotNull ServerHttpRequest serverHttpRequest,
+		@NotNull ServerHttpResponse serverHttpResponse) {
 		if (o == null) {
 			return null;
 		}

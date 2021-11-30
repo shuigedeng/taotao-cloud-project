@@ -2,10 +2,10 @@
 from werobot import WeRoBot
 from werobot.replies import ImageReply
 
-APP_ID = os.environ.get('APP_ID')
-APP_SECRET = os.environ.get('APP_SECRET')
-APP_TOKEN = os.environ.get('APP_TOKEN')
-ENCODING_AES_KEY = os.environ.get('ENCODING_AES_KEY')
+APP_ID = os.environ.get('MP_APP_ID')
+APP_SECRET = os.environ.get('MP_APP_SECRET')
+APP_TOKEN = os.environ.get('MP_APP_TOKEN')
+ENCODING_AES_KEY = os.environ.get('MP_ENCODING_AES_KEY')
 
 robot = WeRoBot(token=APP_TOKEN)
 robot.config["APP_ID"] = APP_ID

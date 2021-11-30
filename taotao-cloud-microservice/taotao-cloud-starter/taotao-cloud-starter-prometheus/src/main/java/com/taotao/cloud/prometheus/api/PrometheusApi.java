@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.prometheus.api;
 
-import com.taotao.cloud.prometheus.pojo.AlertMessage;
-import com.taotao.cloud.prometheus.pojo.TargetGroup;
+import com.taotao.cloud.prometheus.model.AlertMessage;
+import com.taotao.cloud.prometheus.model.TargetGroup;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

@@ -26,7 +26,16 @@ import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.listen.StandardListenerManager;
+import org.apache.curator.framework.listen.UnaryListenerManager;
+import org.apache.curator.framework.recipes.cache.ChildData;
+import org.apache.curator.framework.recipes.cache.CuratorCacheListenerBuilder;
+import org.apache.curator.framework.recipes.cache.CuratorCacheListenerBuilder.ChangeListener;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
+import org.apache.curator.framework.state.ConnectionStateListener;
+import org.apache.curator.framework.state.ConnectionStateListenerManagerFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.poi.ss.formula.functions.Odd;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -54,8 +63,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	@Bean(initMethod = "start", destroyMethod = "close")
 	@ConditionalOnMissingBean
 	public CuratorFramework curatorFramework(ZookeeperProperties property) {
-		LogUtil.started(CuratorFramework.class, StarterNameConstant.ZOOKEEPER_STARTER);
-
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(property.getBaseSleepTime(),
 			property.getMaxRetries());
 
@@ -69,8 +76,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public ZookeeperTemplate zookeeperTemplate(CuratorFramework curatorFramework) {
-		LogUtil.started(ZookeeperTemplate.class, StarterNameConstant.ZOOKEEPER_STARTER);
-
 		return new ZookeeperTemplate(curatorFramework);
 	}
 
@@ -83,8 +88,6 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = ZookeeperLockProperties.PREFIX, name = "enabled", havingValue = "true")
 	public DistributedLock zookeeperDistributedLock(CuratorFramework curatorFramework) {
-		LogUtil.started(ZookeeperDistributedLock.class, StarterNameConstant.ZOOKEEPER_STARTER);
-
 		return new ZookeeperDistributedLock(curatorFramework);
 	}
 

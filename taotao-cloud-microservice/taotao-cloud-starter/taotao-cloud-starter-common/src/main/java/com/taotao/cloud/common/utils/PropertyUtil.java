@@ -88,9 +88,11 @@ public class PropertyUtil {
 		if (value == null) {
 			value = System.getenv(key);
 		}
+
 		if (value == null && ContextUtil.getApplicationContext() != null) {
 			value = ContextUtil.getApplicationContext().getEnvironment().getProperty(key);
 		}
+
 		return value;
 	}
 
@@ -173,7 +175,8 @@ public class PropertyUtil {
 			}
 		} else {
 			if (StringUtil.isEmpty(getSystemProperty(key, ""))) {
-				System.setProperty(key, PropertyUtil.getPropertyCache(key, ""));
+				System.setProperty(key,
+					Objects.requireNonNull(PropertyUtil.getPropertyCache(key, "")));
 			}
 		}
 	}
