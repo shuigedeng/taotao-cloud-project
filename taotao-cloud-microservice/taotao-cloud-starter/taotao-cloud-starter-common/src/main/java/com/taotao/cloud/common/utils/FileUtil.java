@@ -18,6 +18,7 @@ package com.taotao.cloud.common.utils;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.model.CharPool;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;

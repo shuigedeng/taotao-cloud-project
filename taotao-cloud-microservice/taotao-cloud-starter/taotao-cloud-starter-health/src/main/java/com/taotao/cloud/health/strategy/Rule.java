@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.utils.BeanUtil;
+import com.taotao.cloud.common.bean.BeanUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.common.model.PropertyCache;

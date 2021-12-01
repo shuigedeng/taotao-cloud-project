@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.Version;
+import com.taotao.cloud.common.model.Version;
 import org.junit.Test;
 
 public class VersionTest {

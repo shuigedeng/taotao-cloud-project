@@ -18,7 +18,6 @@ package com.taotao.cloud.common.utils;
 
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-
 import com.taotao.cloud.common.constant.StrPoolConstant;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
@@ -28,11 +27,12 @@ import java.util.List;
 /**
  * 运行时工具类
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
 public class RuntimeUtil {
+
 	private static volatile int pId = -1;
 	private static final int CPU_NUM = Runtime.getRuntime().availableProcessors();
 

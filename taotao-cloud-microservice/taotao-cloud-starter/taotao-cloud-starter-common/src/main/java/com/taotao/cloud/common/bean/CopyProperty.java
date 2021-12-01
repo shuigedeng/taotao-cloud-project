@@ -16,12 +16,16 @@
 
 package com.taotao.cloud.common.bean;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * copy 字段 配置
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
@@ -32,12 +36,14 @@ public @interface CopyProperty {
 
 	/**
 	 * 属性名，用于指定别名，默认使用：field name
+	 *
 	 * @return 属性名
 	 */
 	String value() default "";
 
 	/**
 	 * 忽略：默认为 false
+	 *
 	 * @return 是否忽略
 	 */
 	boolean ignore() default false;

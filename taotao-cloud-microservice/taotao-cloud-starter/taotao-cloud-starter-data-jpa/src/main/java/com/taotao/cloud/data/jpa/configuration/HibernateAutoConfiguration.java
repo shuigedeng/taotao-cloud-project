@@ -29,7 +29,6 @@ import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
 import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;

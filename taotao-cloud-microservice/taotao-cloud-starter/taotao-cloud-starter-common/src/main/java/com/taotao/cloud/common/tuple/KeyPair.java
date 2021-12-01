@@ -17,7 +17,7 @@
 package com.taotao.cloud.common.tuple;
 
 
-import com.taotao.cloud.common.utils.secure.RSAUtil;
+import com.taotao.cloud.common.secure.RSAUtil;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 

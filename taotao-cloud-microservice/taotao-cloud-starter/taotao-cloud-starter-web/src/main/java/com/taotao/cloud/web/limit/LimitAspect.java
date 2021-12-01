@@ -18,18 +18,15 @@ package com.taotao.cloud.web.limit;
 import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.common.utils.StringUtils;
 import com.google.common.collect.ImmutableList;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Method;
-import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * LimitAspect

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.common.utils;
 
+import com.taotao.cloud.common.bean.BeanUtil;
 import com.taotao.cloud.common.model.Callable;
 import com.taotao.cloud.common.model.PropertyCache;
 import java.util.Map;

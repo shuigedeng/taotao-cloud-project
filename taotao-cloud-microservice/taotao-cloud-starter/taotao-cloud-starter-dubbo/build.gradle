@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     api 'com.alibaba.cloud:spring-cloud-starter-dubbo'
     //api 'com.esotericsoftware.kryo:kryo:5.1.1'

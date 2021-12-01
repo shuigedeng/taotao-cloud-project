@@ -18,6 +18,7 @@ package com.taotao.cloud.common.utils;
 
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.model.CharPool;
 import java.util.Arrays;
 import org.springframework.lang.Nullable;
 

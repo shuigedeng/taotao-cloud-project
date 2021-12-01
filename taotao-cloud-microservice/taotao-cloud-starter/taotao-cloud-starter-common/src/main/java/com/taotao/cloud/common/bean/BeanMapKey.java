@@ -21,21 +21,21 @@ import java.util.Objects;
 /**
  * bean map key，提高性能
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
 public class BeanMapKey {
 
-	private final Class type;
+	private final Class<?> type;
 	private final int require;
 
-	public BeanMapKey(Class type, int require) {
+	public BeanMapKey(Class<?> type, int require) {
 		this.type = type;
 		this.require = require;
 	}
 
-	public Class getType() {
+	public Class<?> getType() {
 		return type;
 	}
 

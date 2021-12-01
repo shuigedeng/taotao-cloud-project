@@ -22,7 +22,7 @@ import com.taotao.cloud.common.retry.SimpleRetry;
 import com.taotao.cloud.common.ssl.DisableValidationTrustManager;
 import com.taotao.cloud.common.ssl.TrustAllHostNames;
 import com.taotao.cloud.common.utils.Exceptions;
-import com.taotao.cloud.common.utils.Holder;
+import com.taotao.cloud.common.model.Holder;
 import com.taotao.cloud.common.utils.JsonUtil;
 import okhttp3.*;
 import okhttp3.internal.Util;

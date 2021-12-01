@@ -21,7 +21,7 @@ import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;

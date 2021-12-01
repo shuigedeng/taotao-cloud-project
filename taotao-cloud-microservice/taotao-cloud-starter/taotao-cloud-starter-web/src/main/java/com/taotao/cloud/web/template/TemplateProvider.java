@@ -16,7 +16,7 @@
 package com.taotao.cloud.web.template;
 
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;

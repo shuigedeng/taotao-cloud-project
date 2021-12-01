@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.job.xxl.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;

@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-dingtalk')
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
 //    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')

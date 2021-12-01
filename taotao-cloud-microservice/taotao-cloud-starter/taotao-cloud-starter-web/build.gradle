@@ -1,7 +1,7 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-canal')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-jpa')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-data-mybatis-plus')
@@ -28,7 +28,6 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-processor')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pulsar')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-qrcode')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rocketmq')
@@ -38,7 +37,6 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sentinel')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-shardingsphere')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-sms')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-spider')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-zookeeper')
 
     api('org.springframework.boot:spring-boot-starter-web') {
@@ -64,8 +62,6 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.slf4j', module: 'slf4j-simple'
     }
-
-    api  "org.jsoup:jsoup:1.14.2"
 
     annotationProcessor "com.querydsl:querydsl-apt:4.3.1:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"

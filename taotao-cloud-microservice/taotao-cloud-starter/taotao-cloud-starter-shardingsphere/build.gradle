@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     api "org.apache.shardingsphere:sharding-jdbc-spring-namespace"
     api "org.apache.shardingsphere:sharding-jdbc-spring-boot-starter"

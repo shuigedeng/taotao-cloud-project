@@ -16,22 +16,24 @@
 
 package com.taotao.cloud.common.bean;
 
+import java.security.ProtectionDomain;
 import org.springframework.asm.ClassVisitor;
 import org.springframework.cglib.core.AbstractClassGenerator;
 import org.springframework.cglib.core.ReflectUtils;
 
-import java.security.ProtectionDomain;
-
 /**
  * 重写 cglib BeanMap，支持链式bean
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
 public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
+
 	private static final String BEAN_NAME_PREFIX = BeanMap.class.getName();
-	protected BeanMap() {}
+
+	protected BeanMap() {
+	}
 
 	protected BeanMap(Object bean) {
 		super(bean);
@@ -56,6 +58,7 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 	public abstract BeanMap newInstance(Object o);
 
 	public static class MicaGenerator extends AbstractClassGenerator {
+
 		private static final Source SOURCE = new Source(BeanMap.class.getName());
 
 		private Object bean;
@@ -67,10 +70,11 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 		}
 
 		/**
-		 * Set the bean that the generated map should reflect. The bean may be swapped
-		 * out for another bean of the same type using {@link #setBean}.
-		 * Calling this method overrides any value previously set using {@link #setBeanClass}.
-		 * You must call either this method or {@link #setBeanClass} before {@link #create}.
+		 * Set the bean that the generated map should reflect. The bean may be swapped out for
+		 * another bean of the same type using {@link #setBean}. Calling this method overrides any
+		 * value previously set using {@link #setBeanClass}. You must call either this method or
+		 * {@link #setBeanClass} before {@link #create}.
+		 *
 		 * @param bean the initial bean
 		 */
 		public void setBean(Object bean) {
@@ -81,8 +85,9 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 		}
 
 		/**
-		 * Set the class of the bean that the generated map should support.
-		 * You must call either this method or {@link #setBeanClass} before {@link #create}.
+		 * Set the class of the bean that the generated map should support. You must call either
+		 * this method or {@link #setBeanClass} before {@link #create}.
+		 *
 		 * @param beanClass the class of the bean
 		 */
 		public void setBeanClass(Class beanClass) {
@@ -91,8 +96,9 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 
 		/**
 		 * Limit the properties reflected by the generated map.
-		 * @param require any combination of {@link #REQUIRE_GETTER} and
-		 * {@link #REQUIRE_SETTER}; default is zero (any property allowed)
+		 *
+		 * @param require any combination of {@link #REQUIRE_GETTER} and {@link #REQUIRE_SETTER};
+		 *                default is zero (any property allowed)
 		 */
 		public void setRequire(int require) {
 			this.require = require;
@@ -109,8 +115,9 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 		}
 
 		/**
-		 * Create a new instance of the <code>BeanMap</code>. An existing
-		 * generated class will be reused if possible.
+		 * Create a new instance of the <code>BeanMap</code>. An existing generated class will be
+		 * reused if possible.
+		 *
 		 * @return {MicaBeanMap}
 		 */
 		public BeanMap create() {
@@ -118,7 +125,7 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 				throw new IllegalArgumentException("Class of bean unknown");
 			}
 			BeanMapKey key = new BeanMapKey(beanClass, require);
-			return (BeanMap)super.create(key);
+			return (BeanMap) super.create(key);
 		}
 
 		@Override
@@ -133,12 +140,13 @@ public abstract class BeanMap extends org.springframework.cglib.beans.BeanMap {
 
 		@Override
 		protected Object firstInstance(Class type) {
-			return ((org.springframework.cglib.beans.BeanMap)ReflectUtils.newInstance(type)).newInstance(bean);
+			return ((org.springframework.cglib.beans.BeanMap) ReflectUtils.newInstance(
+				type)).newInstance(bean);
 		}
 
 		@Override
 		protected Object nextInstance(Object instance) {
-			return ((org.springframework.cglib.beans.BeanMap)instance).newInstance(bean);
+			return ((org.springframework.cglib.beans.BeanMap) instance).newInstance(bean);
 		}
 	}
 

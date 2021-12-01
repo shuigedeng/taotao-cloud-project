@@ -23,14 +23,13 @@ import java.math.RoundingMode;
 /**
  * 浮点型数据计算
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */
 public class DecimalNum extends Number {
 
 	private BigDecimal value;
-
 
 	public BigDecimal getValue() {
 		return value;
