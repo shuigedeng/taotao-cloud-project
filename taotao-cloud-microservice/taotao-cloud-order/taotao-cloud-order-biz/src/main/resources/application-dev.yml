@@ -97,6 +97,7 @@ spring:
   application:
     name: taotao-cloud-order-biz
   main:
+    allow-circular-references: true
     allow-bean-definition-overriding: true
     banner-mode: off
   web:
@@ -410,6 +411,8 @@ spring:
         #自动签收auto  手动 manual
         acknowledge-mode: manual
   cloud:
+    compatibility-verifier:
+      enabled: false
     loadbalancer:
       enabled: true
     function:
