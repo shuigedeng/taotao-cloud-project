@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.health.export;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.ExportProperties;
@@ -37,12 +37,12 @@ import net.logstash.logback.appender.LogstashTcpSocketAppender;
 public class ExportProvider {
 
 	private boolean isClose = true;
-	private MonitorThreadPool monitorThreadPool;
+	private Monitor monitorThreadPool;
 	private ExportProperties exportProperties;
 	private HealthCheckProvider healthCheckProvider;
 	protected List<AbstractExport> exports = new ArrayList<>();
 
-	public ExportProvider(MonitorThreadPool monitorThreadPool,
+	public ExportProvider(Monitor monitorThreadPool,
 		ExportProperties exportProperties,
 		HealthCheckProvider healthCheckProvider) {
 		this.monitorThreadPool = monitorThreadPool;
@@ -85,7 +85,7 @@ public class ExportProvider {
 				try {
 					run();
 				} catch (Exception e) {
-					LogUtil.error(StarterNameConstant.HEALTH_STARTER, "run 循环上传报表出错", e);
+					LogUtil.error(StarterName.HEALTH_STARTER, "run 循环上传报表出错", e);
 				}
 
 				try {
@@ -100,7 +100,7 @@ public class ExportProvider {
 			try {
 				e.start();
 			} catch (Exception ex) {
-				LogUtil.error(StarterNameConstant.HEALTH_STARTER,
+				LogUtil.error(StarterName.HEALTH_STARTER,
 					e.getClass().getName() + "启动出错", ex);
 			}
 		}
@@ -133,7 +133,7 @@ public class ExportProvider {
 			try {
 				e.close();
 			} catch (Exception ex) {
-				LogUtil.error(ex, StarterNameConstant.HEALTH_STARTER,
+				LogUtil.error(ex, StarterName.HEALTH_STARTER,
 					e.getClass().getName() + "关闭出错");
 			}
 		}

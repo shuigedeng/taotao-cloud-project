@@ -35,17 +35,8 @@ public class CoreProperties {
 	public static String SpringApplicationName = "spring.application.name";
 	public static String SpringProfilesActive = "spring.profiles.active";
 
-	public static String ServerTomcatMaxThreads = "server.tomcat.max-threads";
-	public static String ServerTomcatMaxConnections = "server.tomcat.max-connections";
-	public static String ServerTomcatMinSpaceThreads = "server.tomcat.min-spare-threads";
-	public static String ServeCompressionEnabled = "server.compression.enabled";
-	public static String ServeCompressionMimeTypes = "server.compression.mime-types";
-	public static String LoggingFile = "logging.file";
-	public static String LoggingFileMaxHistory = "logging.file.max-history";
-	public static String LoggingFileMaxSize = "logging.file.max-size";
 	public static String LoggingFileTotalSize = "logging.file.total-size";
 	public static String ContextRestartText = "taotao.cloud.core.context.restart.text";
-	public static String IsPrintSqlError = "taotao.cloud.core.dbPrintSqlErrorEnabled";
 
 	/**
 	 * env
@@ -56,10 +47,6 @@ public class CoreProperties {
 	 */
 	private boolean enabled = true;
 	/**
-	 * dbPrintSqlEnabled
-	 */
-	private boolean dbPrintSqlEnabled = true;
-	/**
 	 * collectHookEnabled
 	 */
 	private boolean collectHookEnabled = true;
@@ -67,10 +54,6 @@ public class CoreProperties {
 	 * contextRestartEnabled
 	 */
 	private boolean contextRestartEnabled = false;
-	/**
-	 * isPrintSqlError
-	 */
-	private boolean isPrintSqlError = true;
 	/**
 	 * contextRestartTimespan
 	 */
@@ -91,14 +74,6 @@ public class CoreProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public boolean getDbPrintSqlEnabled() {
-		return dbPrintSqlEnabled;
-	}
-
-	public void setDbPrintSqlEnabled(boolean dbPrintSqlEnabled) {
-		this.dbPrintSqlEnabled = dbPrintSqlEnabled;
 	}
 
 	public boolean getCollectHookEnabled() {
@@ -123,13 +98,5 @@ public class CoreProperties {
 
 	public void setContextRestartTimespan(int contextRestartTimespan) {
 		this.contextRestartTimespan = contextRestartTimespan;
-	}
-
-	public boolean getPrintSqlError() {
-		return isPrintSqlError;
-	}
-
-	public void setPrintSqlError(boolean printSqlError) {
-		isPrintSqlError = printSqlError;
 	}
 }

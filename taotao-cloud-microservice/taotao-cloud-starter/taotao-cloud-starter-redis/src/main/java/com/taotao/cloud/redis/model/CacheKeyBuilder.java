@@ -15,13 +15,13 @@
  */
 package com.taotao.cloud.redis.model;
 
-import static com.taotao.cloud.common.constant.StrPoolConstant.COLON;
+import static com.taotao.cloud.common.constant.StrPool.COLON;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StrPool;
 import java.time.Duration;
 import java.util.ArrayList;
 import org.springframework.lang.NonNull;
@@ -75,7 +75,7 @@ public interface CacheKeyBuilder {
 	 * @return cache key
 	 */
 	default CacheKey key(Object... suffix) {
-		String field = suffix.length > 0 ? Convert.toStr(suffix[0], StrPoolConstant.EMPTY) : StrPoolConstant.EMPTY;
+		String field = suffix.length > 0 ? Convert.toStr(suffix[0], StrPool.EMPTY) : StrPool.EMPTY;
 		return hashFieldKey(field, suffix);
 	}
 

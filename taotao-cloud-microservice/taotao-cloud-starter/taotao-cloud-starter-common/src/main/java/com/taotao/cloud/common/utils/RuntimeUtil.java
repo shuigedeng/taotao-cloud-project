@@ -18,7 +18,7 @@ package com.taotao.cloud.common.utils;
 
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StrPool;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
 import java.time.Instant;
@@ -49,7 +49,7 @@ public class RuntimeUtil {
 		}
 		// something like '<pid>@<hostname>', at least in SUN / Oracle JVMs
 		final String jvmName = ManagementFactory.getRuntimeMXBean().getName();
-		final int index = jvmName.indexOf(StrPoolConstant.AT);
+		final int index = jvmName.indexOf(StrPool.AT);
 		if (index > 0) {
 			pId = NumberUtil.toInt(jvmName.substring(0, index), -1);
 			return pId;

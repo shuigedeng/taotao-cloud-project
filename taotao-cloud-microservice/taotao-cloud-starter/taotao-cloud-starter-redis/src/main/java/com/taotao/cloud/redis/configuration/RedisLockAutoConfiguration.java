@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
@@ -46,7 +46,7 @@ public class RedisLockAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisLockAutoConfiguration.class, StarterNameConstant.REDIS_STARTER);
+		LogUtil.started(RedisLockAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean

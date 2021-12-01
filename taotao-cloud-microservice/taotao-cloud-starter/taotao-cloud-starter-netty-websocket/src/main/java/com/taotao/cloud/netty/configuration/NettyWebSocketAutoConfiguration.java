@@ -1,6 +1,6 @@
 package com.taotao.cloud.netty.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.netty.properties.NettyWebsocketProperties;
 import com.taotao.cloud.netty.standard.ServerEndpointExporter;
@@ -19,7 +19,7 @@ public class NettyWebSocketAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(NettyWebSocketAutoConfiguration.class, StarterNameConstant.NETTY_WEBSOCKET_STARTER);
+		LogUtil.started(NettyWebSocketAutoConfiguration.class, StarterName.NETTY_WEBSOCKET_STARTER);
 	}
 
 	@Bean

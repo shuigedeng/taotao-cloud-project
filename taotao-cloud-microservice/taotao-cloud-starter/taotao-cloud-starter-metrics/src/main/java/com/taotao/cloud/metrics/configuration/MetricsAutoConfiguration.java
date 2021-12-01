@@ -17,7 +17,7 @@ package com.taotao.cloud.metrics.configuration;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.metrics.druid.DruidDataSourcePoolMetadata;
 import com.taotao.cloud.metrics.druid.DruidMetrics;
@@ -63,7 +63,7 @@ public class MetricsAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MetricsAutoConfiguration.class, StarterNameConstant.PULSAR_STARTER);
+		LogUtil.started(MetricsAutoConfiguration.class, StarterName.PULSAR_STARTER);
 	}
 
 	@Configuration

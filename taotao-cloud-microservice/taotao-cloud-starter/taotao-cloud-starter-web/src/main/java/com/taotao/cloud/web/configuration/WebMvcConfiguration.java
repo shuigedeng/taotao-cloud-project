@@ -19,7 +19,7 @@ package com.taotao.cloud.web.configuration;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
@@ -109,7 +109,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(WebMvcConfiguration.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(WebMvcConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Autowired
@@ -232,7 +232,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public Validator validator() {
-		LogUtil.started(Validator.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Validator.class, StarterName.WEB_STARTER);
 
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
 			.configure()
@@ -244,7 +244,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public RequestContextListener requestContextListener() {
-		LogUtil.started(RequestContextListener.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(RequestContextListener.class, StarterName.WEB_STARTER);
 
 		return new RequestContextListener();
 	}
@@ -252,7 +252,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "version", havingValue = "true")
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilter() {
-		LogUtil.started(VersionFilter.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(VersionFilter.class, StarterName.WEB_STARTER);
 
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new VersionFilter());
@@ -265,7 +265,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "tenant", havingValue = "true")
 	public FilterRegistrationBean<TenantFilter> tenantFilter() {
-		LogUtil.started(TenantFilter.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(TenantFilter.class, StarterName.WEB_STARTER);
 
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TenantFilter());
@@ -277,7 +277,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public FilterRegistrationBean<TraceFilter> traceFilter() {
-		LogUtil.started(TraceFilter.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(TraceFilter.class, StarterName.WEB_STARTER);
 
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TraceFilter(filterProperties));
@@ -290,7 +290,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "webContext", havingValue = "true")
 	public FilterRegistrationBean<WebContextFilter> webContextFilter() {
-		LogUtil.started(WebContextFilter.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(WebContextFilter.class, StarterName.WEB_STARTER);
 
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new WebContextFilter());
@@ -303,7 +303,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "report", havingValue = "true")
 	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
-		LogUtil.started(HealthReportFilter.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(HealthReportFilter.class, StarterName.HEALTH_STARTER);
 		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
 		filterRegistrationBean.setFilter(new HealthReportFilter());
@@ -315,7 +315,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "dump", havingValue = "true")
 	public FilterRegistrationBean<DumpFilter> dumpFilter() {
-		LogUtil.started(DumpFilter.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(DumpFilter.class, StarterName.HEALTH_STARTER);
 
 		FilterRegistrationBean<DumpFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
@@ -328,7 +328,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "ping", havingValue = "true")
 	public FilterRegistrationBean<PingFilter> pingFilter() {
-		LogUtil.started(PingFilter.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(PingFilter.class, StarterName.HEALTH_STARTER);
 
 		FilterRegistrationBean<PingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);

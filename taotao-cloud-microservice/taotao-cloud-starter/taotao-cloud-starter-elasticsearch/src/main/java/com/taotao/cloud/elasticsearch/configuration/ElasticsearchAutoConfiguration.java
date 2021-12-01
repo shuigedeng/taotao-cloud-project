@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.elasticsearch.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
@@ -27,10 +27,6 @@ import com.taotao.cloud.elasticsearch.service.impl.AggregationServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.IndexServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.QueryServiceImpl;
 import com.taotao.cloud.elasticsearch.service.impl.SearchServiceImpl;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.InitializingBean;
@@ -62,7 +58,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(ElasticsearchAutoConfiguration.class,
-			StarterNameConstant.ELASTICSEARCH_STARTER);
+			StarterName.ELASTICSEARCH_STARTER);
 	}
 
 	@Bean

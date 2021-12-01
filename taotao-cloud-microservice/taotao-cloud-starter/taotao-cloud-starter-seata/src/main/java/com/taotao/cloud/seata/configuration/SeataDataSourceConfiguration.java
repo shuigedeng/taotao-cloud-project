@@ -16,7 +16,7 @@
 package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.seata.properties.SeataProperties;
 import feign.RequestInterceptor;
@@ -54,7 +54,7 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(SeataDataSourceConfiguration.class, StarterNameConstant.SEATA_STARTER);
+		LogUtil.started(SeataDataSourceConfiguration.class, StarterName.SEATA_STARTER);
 	}
 
 	//@Primary
@@ -87,19 +87,19 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 	@Bean
 	public SeataXidFilter seataXidFilter() {
-		LogUtil.started(SeataXidFilter.class, StarterNameConstant.SEATA_STARTER);
+		LogUtil.started(SeataXidFilter.class, StarterName.SEATA_STARTER);
 		return new SeataXidFilter();
 	}
 
 	@Bean
 	public SeataInterceptor seataInterceptor() {
-		LogUtil.started(SeataInterceptor.class, StarterNameConstant.SEATA_STARTER);
+		LogUtil.started(SeataInterceptor.class, StarterName.SEATA_STARTER);
 		return new SeataInterceptor();
 	}
 
 	@Bean
 	public DetectTable detectTable(DataSource dataSource) {
-		LogUtil.started(DetectTable.class, StarterNameConstant.SEATA_STARTER);
+		LogUtil.started(DetectTable.class, StarterName.SEATA_STARTER);
 		return new DetectTable(dataSource);
 	}
 

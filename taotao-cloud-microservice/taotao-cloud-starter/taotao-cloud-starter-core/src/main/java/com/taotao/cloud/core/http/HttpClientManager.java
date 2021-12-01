@@ -18,6 +18,7 @@ package com.taotao.cloud.core.http;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.ProcessExitEvent;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +34,7 @@ public class HttpClientManager {
 	/**
 	 * pool
 	 */
-	private ConcurrentHashMap<String, DefaultHttpClient> pool = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, HttpClient> pool = new ConcurrentHashMap<>();
 	/**
 	 * lock
 	 */
@@ -42,7 +43,7 @@ public class HttpClientManager {
 	public HttpClientManager() {
 		ProcessExitEvent.register(() -> {
 			try {
-				this.closeAll();
+				closeAll();
 			} catch (Exception e) {
 				LogUtil.error(e, "关闭httpclient时出错");
 			}
@@ -58,7 +59,7 @@ public class HttpClientManager {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:12
 	 */
-	public DefaultHttpClient register(String httpClientId, DefaultHttpClient client) {
+	public HttpClient register(String httpClientId, HttpClient client) {
 		try {
 			client.open();
 
@@ -88,7 +89,7 @@ public class HttpClientManager {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:16
 	 */
-	public DefaultHttpClient get(String httpClientId) {
+	public HttpClient get(String httpClientId) {
 		return pool.get(httpClientId);
 	}
 
@@ -101,12 +102,17 @@ public class HttpClientManager {
 	 * @since 2021-09-02 20:21:20
 	 */
 	public boolean remove(String httpClientId) {
-		DefaultHttpClient httpClient = pool.get(httpClientId);
+		HttpClient httpClient = pool.get(httpClientId);
 		if (httpClient != null) {
 			synchronized (lock) {
 				pool.remove(httpClientId);
 			}
-			httpClient.close();
+
+			try {
+				httpClient.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		return false;
@@ -120,14 +126,15 @@ public class HttpClientManager {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:21:23
 	 */
-	public boolean remove(DefaultHttpClient httpClient) {
+	public boolean remove(HttpClient httpClient) {
 		String httpClientId = null;
-		for (Map.Entry<String, DefaultHttpClient> e : pool.entrySet()) {
+		for (Map.Entry<String, HttpClient> e : pool.entrySet()) {
 			if (e.getValue() == httpClient) {
 				httpClientId = e.getKey();
 				break;
 			}
 		}
+
 		if (httpClientId != null) {
 			return remove(httpClientId);
 		}
@@ -141,32 +148,27 @@ public class HttpClientManager {
 	 * @since 2021-09-02 20:21:25
 	 */
 	public void closeAll() {
-		ConcurrentHashMap<String, DefaultHttpClient> temp;
+		ConcurrentHashMap<String, HttpClient> temp;
 
 		synchronized (lock) {
 			temp = new ConcurrentHashMap<>(pool);
 			pool.clear();
 		}
 
-		RuntimeException exception = null;
-		for (Map.Entry<String, DefaultHttpClient> e : temp.entrySet()) {
+		for (Map.Entry<String, HttpClient> entry : temp.entrySet()) {
 			try {
-				e.getValue().close();
-			} catch (RuntimeException ex) {
-				exception = ex;
+				entry.getValue().close();
+			} catch (IOException e) {
+				LogUtil.error(e);
 			}
-		}
-		if (exception != null) {
-			throw exception;
 		}
 	}
 
-	public ConcurrentHashMap<String, DefaultHttpClient> getPool() {
+	public ConcurrentHashMap<String, HttpClient> getPool() {
 		return pool;
 	}
 
-	public void setPool(
-		ConcurrentHashMap<String, DefaultHttpClient> pool) {
+	public void setPool(ConcurrentHashMap<String, HttpClient> pool) {
 		this.pool = pool;
 	}
 

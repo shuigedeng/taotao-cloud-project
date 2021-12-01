@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
@@ -42,7 +42,7 @@ public class HealthCheckProvider implements AutoCloseable {
 	private boolean close;
 	private CollectTaskProperties properties;
 	private HealthProperties healthProperties;
-	private MonitorThreadPool monitorThreadPool;
+	private Monitor monitor;
 	private DefaultHttpClient defaultHttpClient;
 
 	public void registerCollectTask(AbstractCollectTask task) {
@@ -54,12 +54,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		DefaultHttpClient defaultHttpClient,
 		CollectTaskProperties properties,
 		HealthProperties healthProperties,
-		MonitorThreadPool monitorThreadPool) {
+		Monitor monitor) {
 		this.strategy = strategy;
 		this.close = false;
 		this.properties = properties;
 		this.healthProperties = healthProperties;
-		this.monitorThreadPool = monitorThreadPool;
+		this.monitor = monitor;
 		this.defaultHttpClient = defaultHttpClient;
 
 		registerCollectTask(new CpuCollectTask(properties));
@@ -86,8 +86,8 @@ public class HealthCheckProvider implements AutoCloseable {
 		registerCollectTask(new LogStatisticCollectTask(properties));
 		registerCollectTask(new NacosCollectTask(properties));
 
-		monitorThreadPool.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
-			while (!monitorThreadPool.monitorIsShutdown() && !close) {
+		monitor.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
+			while (!monitor.monitorIsShutdown() && !close) {
 				try {
 					Report report = getReport(false);
 					String text = strategy.analyseText(report);
@@ -97,7 +97,7 @@ public class HealthCheckProvider implements AutoCloseable {
 
 					AbstractCollectTask.notifyMessage(WarnTypeEnum.ERROR, "健康检查", text);
 				} catch (Exception e) {
-					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "run 循环采集出错", e);
+					LogUtil.warn(StarterName.HEALTH_STARTER, "run 循环采集出错", e);
 				}
 
 				try {
@@ -133,7 +133,7 @@ public class HealthCheckProvider implements AutoCloseable {
 					}
 				} catch (Exception e) {
 					LogUtil.error(e,
-						StarterNameConstant.HEALTH_STARTER + task.getName() + "采集获取报表出错");
+						StarterName.HEALTH_STARTER + task.getName() + "采集获取报表出错");
 				}
 			}
 		}
@@ -152,7 +152,7 @@ public class HealthCheckProvider implements AutoCloseable {
 			try {
 				task.close();
 			} catch (Exception exp) {
-				LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "close资源释放出错",
+				LogUtil.warn(StarterName.HEALTH_STARTER, "close资源释放出错",
 					exp);
 			}
 		}
@@ -199,12 +199,12 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.healthProperties = healthProperties;
 	}
 
-	public MonitorThreadPool getMonitorThreadPool() {
-		return monitorThreadPool;
+	public Monitor getMonitor() {
+		return monitor;
 	}
 
-	public void setMonitorThreadPool(MonitorThreadPool monitorThreadPool) {
-		this.monitorThreadPool = monitorThreadPool;
+	public void setMonitor(Monitor monitor) {
+		this.monitor = monitor;
 	}
 
 	public DefaultHttpClient getDefaultHttpClient() {

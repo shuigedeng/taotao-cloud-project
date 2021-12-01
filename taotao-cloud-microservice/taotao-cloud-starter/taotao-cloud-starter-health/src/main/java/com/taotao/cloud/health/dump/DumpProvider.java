@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.health.dump;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.health.exception.HealthException;
@@ -93,7 +93,7 @@ public class DumpProvider {
 						name, name));
 					response("压缩成功,请等待耐心等待,不要重复执行!");
 				} catch (Exception exp) {
-					LogUtil.error(StarterNameConstant.HEALTH_STARTER, "zip 出错", exp);
+					LogUtil.error(StarterName.HEALTH_STARTER, "zip 出错", exp);
 					response("压缩出错:" + exp.getMessage());
 				}
 			}
@@ -119,7 +119,7 @@ public class DumpProvider {
 			lastDumpTime = System.currentTimeMillis();
 			response("dump成功,请等待耐心等待,不要重复执行!");
 		} catch (Exception exp) {
-			LogUtil.error(StarterNameConstant.HEALTH_STARTER, "dump 出错", exp);
+			LogUtil.error(StarterName.HEALTH_STARTER, "dump 出错", exp);
 			response("dump出错:" + exp.getMessage());
 		}
 	}
@@ -157,7 +157,7 @@ public class DumpProvider {
 						}
 					}
 				} catch (Exception exp) {
-					LogUtil.error(StarterNameConstant.HEALTH_STARTER, "download 出错",
+					LogUtil.error(StarterName.HEALTH_STARTER, "download 出错",
 						exp);
 					response("下载出错:" + exp.getMessage());
 				}

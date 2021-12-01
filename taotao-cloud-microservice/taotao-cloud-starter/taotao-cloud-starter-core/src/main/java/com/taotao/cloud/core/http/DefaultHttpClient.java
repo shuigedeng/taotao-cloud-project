@@ -16,13 +16,12 @@
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.model.Callable;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.codec.Charsets;
@@ -39,6 +38,11 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.config.SocketConfig;
+import org.apache.http.conn.DnsResolver;
+import org.apache.http.conn.HttpConnectionFactory;
+import org.apache.http.conn.ManagedHttpClientConnection;
+import org.apache.http.conn.routing.HttpRoute;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
@@ -48,7 +52,11 @@ import org.apache.http.impl.client.DefaultConnectionKeepAliveStrategy;
 import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultHttpResponseParserFactory;
+import org.apache.http.impl.conn.ManagedHttpClientConnectionFactory;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.impl.conn.SystemDefaultDnsResolver;
+import org.apache.http.impl.io.DefaultHttpRequestWriterFactory;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -91,18 +99,20 @@ public class DefaultHttpClient implements HttpClient {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:11:38
 	 */
+	@Override
 	public void open() {
-		Registry registry = RegistryBuilder
-			.create()
+		RegistryBuilder<ConnectionSocketFactory> builder = RegistryBuilder.create();
+		Registry<ConnectionSocketFactory> registry = builder
 			.register("http", PlainConnectionSocketFactory.INSTANCE)
 			.register("https", SSLConnectionSocketFactory.getSystemSocketFactory())
 			.build();
 
-		//HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connectionFactory =
-		//        new ManagedHttpClientConnectionFactory(DefaultHttpRequestWriterFactory.INSTANCE, DefaultHttpResponseParserFactory.INSTANCE);
-		//DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
+		HttpConnectionFactory<HttpRoute, ManagedHttpClientConnection> connectionFactory =
+			new ManagedHttpClientConnectionFactory(DefaultHttpRequestWriterFactory.INSTANCE,
+				DefaultHttpResponseParserFactory.INSTANCE);
+		DnsResolver dnsResolver = SystemDefaultDnsResolver.INSTANCE;
 
-		manager = new PoolingHttpClientConnectionManager(registry);
+		manager = new PoolingHttpClientConnectionManager(registry, connectionFactory, dnsResolver);
 
 		//默认为Socket配置
 		SocketConfig defaultSocketConfig = SocketConfig.custom()
@@ -137,22 +147,22 @@ public class DefaultHttpClient implements HttpClient {
 			.setConnectionManagerShared(httpClientProperties.isConnectionManagerShared());
 
 		//定期回收空闲连接 60
-		httpClientBuilder = httpClientBuilder.evictIdleConnections(
+		httpClientBuilder.evictIdleConnections(
 			httpClientProperties.getEvictIdleConnectionsTime(), TimeUnit.SECONDS);
 		if (httpClientProperties.isEvictExpiredConnections()) {
 			//定期回收过期连接 true
-			httpClientBuilder = httpClientBuilder.evictExpiredConnections();
+			httpClientBuilder.evictExpiredConnections();
 		}
 
 		if (httpClientProperties.getConnectionTimeToLive() > 0) {
 			//连接存活时间，如果不设置，则根据长连接信息决定 60
-			httpClientBuilder = httpClientBuilder.setConnectionTimeToLive(
+			httpClientBuilder.setConnectionTimeToLive(
 				httpClientProperties.getConnectionTimeToLive(), TimeUnit.SECONDS);
 		}
 
 		if (httpClientProperties.getRetryCount() > 0) {
 			//设置重试次数，默认是3次，当前是禁用掉（根据需要开启） 0
-			httpClientBuilder = httpClientBuilder.setRetryHandler(
+			httpClientBuilder.setRetryHandler(
 				new DefaultHttpRequestRetryHandler(httpClientProperties.getRetryCount(), false));
 		}
 
@@ -263,6 +273,7 @@ public class DefaultHttpClient implements HttpClient {
 		} else {
 			httpPost = new HttpPost(uri);
 		}
+
 		try {
 			CloseableHttpResponse response = this.client.execute(httpPost);
 			return action.invoke(response);
@@ -310,12 +321,10 @@ public class DefaultHttpClient implements HttpClient {
 		}
 	}
 
-	//@Override
 	public String patch(String uri, Params params) {
 		return toString(patch(uri, params, response -> response));
 	}
 
-	//@Override
 	public <T> T patch(String uri, Params params, TypeReference<T> ref) {
 		String rsp = this.put(uri, params);
 		return JsonUtil.toObject(rsp, ref);
@@ -421,10 +430,8 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private HttpGet getGet(String uri, Params params) {
 		HttpGet httpGet = new HttpGet(uri);
-		Iterator headers = params.getHeaders().iterator();
 
-		while (headers.hasNext()) {
-			Header header = (Header) headers.next();
+		for (Header header : params.getHeaders()) {
 			httpGet.setHeader(header);
 		}
 
@@ -434,7 +441,7 @@ public class DefaultHttpClient implements HttpClient {
 			pairs = URLEncodedUtils.parse(query, Charsets.UTF_8);
 		}
 
-		if (((List) pairs).size() == 0) {
+		if (((List<?>) pairs).size() == 0) {
 			uri = uri + "?";
 		} else {
 			uri = uri + "&";
@@ -460,10 +467,8 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private HttpPost getPost(String uri, Params params) {
 		HttpPost httpPost = new HttpPost(uri);
-		Iterator headers = params.getHeaders().iterator();
 
-		while (headers.hasNext()) {
-			Header header = (Header) headers.next();
+		for (Header header : params.getHeaders()) {
 			httpPost.setHeader(header);
 		}
 
@@ -489,10 +494,8 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private HttpPut getPut(String uri, Params params) {
 		HttpPut httpPut = new HttpPut(uri);
-		Iterator headers = params.getHeaders().iterator();
 
-		while (headers.hasNext()) {
-			Header header = (Header) headers.next();
+		for (Header header : params.getHeaders()) {
 			httpPut.addHeader(header);
 		}
 
@@ -518,10 +521,8 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private HttpPatch getPatch(String uri, Params params) {
 		HttpPatch httpPatch = new HttpPatch(uri);
-		Iterator headers = params.getHeaders().iterator();
 
-		while (headers.hasNext()) {
-			Header header = (Header) headers.next();
+		for (Header header : params.getHeaders()) {
 			httpPatch.addHeader(header);
 		}
 
@@ -548,10 +549,8 @@ public class DefaultHttpClient implements HttpClient {
 	 */
 	private HttpDelete getDelete(String uri, Params params) {
 		HttpDelete httpDelete = new HttpDelete(uri);
-		Iterator headers = params.getHeaders().iterator();
 
-		while (headers.hasNext()) {
-			Header header = (Header) headers.next();
+		for (Header header : params.getHeaders()) {
 			httpDelete.addHeader(header);
 		}
 
@@ -561,7 +560,7 @@ public class DefaultHttpClient implements HttpClient {
 			pairs = URLEncodedUtils.parse(query, Charsets.UTF_8);
 		}
 
-		if (((List) pairs).size() == 0) {
+		if (((List<?>) pairs).size() == 0) {
 			uri = uri + "?";
 		} else {
 			uri = uri + "&";
@@ -585,15 +584,10 @@ public class DefaultHttpClient implements HttpClient {
 	 * @since 2021-09-02 20:12:44
 	 */
 	public String toString(CloseableHttpResponse response) {
-		try {
+		try (response) {
 			return EntityUtils.toString(response.getEntity());
 		} catch (IOException e) {
 			throw new HttpException(e);
-		} finally {
-			try {
-				response.close();
-			} catch (IOException e) {
-			}
 		}
 	}
 
@@ -605,17 +599,12 @@ public class DefaultHttpClient implements HttpClient {
 	 * @since 2021-09-02 20:12:46
 	 */
 	public void endStream(CloseableHttpResponse response) {
-		try {
+		try (response) {
 			if (response.getEntity() != null) {
 				response.getEntity().getContent().close();
 			}
 		} catch (IOException e) {
 			throw new HttpException(e);
-		} finally {
-			try {
-				response.close();
-			} catch (IOException e) {
-			}
 		}
 	}
 
@@ -642,6 +631,7 @@ public class DefaultHttpClient implements HttpClient {
 		} catch (Exception e) {
 			exception = e;
 		}
+
 		//释放client
 		try {
 			if (this.client != null) {
@@ -652,17 +642,20 @@ public class DefaultHttpClient implements HttpClient {
 		} catch (Exception e) {
 			exception = e;
 		}
+
 		//从连接管理中移除
 		try {
 			this.httpClientManager.remove(this);
 		} catch (Exception e) {
 			exception = e;
 		}
+
 		if (exception != null) {
 			throw new HttpException(exception);
 		}
 	}
 
+	@Override
 	public PoolingHttpClientConnectionManager getManager() {
 		return manager;
 	}
@@ -671,6 +664,7 @@ public class DefaultHttpClient implements HttpClient {
 		this.manager = manager;
 	}
 
+	@Override
 	public CloseableHttpClient getClient() {
 		return client;
 	}
@@ -679,11 +673,4 @@ public class DefaultHttpClient implements HttpClient {
 		this.client = client;
 	}
 
-	public HttpClientManager getHttpClientManager() {
-		return httpClientManager;
-	}
-
-	public void setHttpClientManager(HttpClientManager httpClientManager) {
-		this.httpClientManager = httpClientManager;
-	}
 }

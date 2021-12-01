@@ -4,7 +4,7 @@ import static java.util.Collections.emptySet;
 import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERTY_NAME;
 import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dubbo.properties.DubboProperties;
 import feign.Feign;
@@ -35,14 +35,14 @@ public class DubboFeignAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DubboFeignAutoConfiguration.class, StarterNameConstant.DUBBO_STARTER);
+		LogUtil.started(DubboFeignAutoConfiguration.class, StarterName.DUBBO_STARTER);
 	}
 
     @Bean
     @ConditionalOnClass(ConfigurationPropertySources.class)
     @ConditionalOnProperty(prefix = DUBBO_SCAN_PREFIX, name = BASE_PACKAGES_PROPERTY_NAME)
     public DubboFeignProviderBeanPostProcessor dubboFeignProviderBeanPostProcessor(Environment environment) {
-	    LogUtil.started(DubboFeignProviderBeanPostProcessor.class, StarterNameConstant.DUBBO_STARTER);
+	    LogUtil.started(DubboFeignProviderBeanPostProcessor.class, StarterName.DUBBO_STARTER);
 
         Set<String> packagesToScan = environment.getProperty(DUBBO_SCAN_PREFIX + BASE_PACKAGES_PROPERTY_NAME, Set.class, emptySet());
         return new DubboFeignProviderBeanPostProcessor(packagesToScan);
@@ -51,7 +51,7 @@ public class DubboFeignAutoConfiguration implements InitializingBean {
     @Bean
     @Primary
     public Feign.Builder feignDubboBuilder() {
-	    LogUtil.started(DubboFeignBuilder.class, StarterNameConstant.DUBBO_STARTER);
+	    LogUtil.started(DubboFeignBuilder.class, StarterName.DUBBO_STARTER);
 
         return new DubboFeignBuilder();
     }

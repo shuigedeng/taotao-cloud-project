@@ -1,6 +1,6 @@
 package com.taotao.cloud.customer.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.customer.api.feign.fallback.RemoteChatbotFallbackImpl;
 import com.taotao.cloud.customer.api.vo.ChatbotVO;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteChatbotService", value = ServiceNameConstant.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteChatbotFallbackImpl.class)
+@FeignClient(contextId = "remoteChatbotService", value = ServiceName.TAOTAO_CLOUD_AFTERSALE_CENTER, fallbackFactory = RemoteChatbotFallbackImpl.class)
 public interface RemoteChatbotService {
 
 	/**

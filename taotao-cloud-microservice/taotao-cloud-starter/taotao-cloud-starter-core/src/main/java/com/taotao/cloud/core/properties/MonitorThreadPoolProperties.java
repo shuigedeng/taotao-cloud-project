@@ -29,9 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = MonitorThreadPoolProperties.PREFIX)
 public class MonitorThreadPoolProperties {
 
-	public static final String PREFIX = "taotao.cloud.core.threadpool.monitor";
-
-	private boolean enabled = true;
+	public static final String PREFIX = "taotao.cloud.core.monitor.threadpool";
 
 	/**
 	 * 监控核心线程数，默认：10
@@ -52,6 +50,8 @@ public class MonitorThreadPoolProperties {
 	 * 线程池前缀
 	 */
 	private String threadNamePrefix = "taotao-cloud-monitor-executor";
+
+	private boolean checkHealth = true;
 
 	public int getCorePoolSize() {
 		return corePoolSize;
@@ -85,11 +85,11 @@ public class MonitorThreadPoolProperties {
 		this.threadNamePrefix = threadNamePrefix;
 	}
 
-	public boolean getEnabled() {
-		return enabled;
+	public boolean isCheckHealth() {
+		return checkHealth;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setCheckHealth(boolean checkHealth) {
+		this.checkHealth = checkHealth;
 	}
 }

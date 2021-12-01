@@ -19,7 +19,7 @@ import com.taotao.cloud.canal.interfaces.CanalClient;
 import com.taotao.cloud.canal.model.SimpleCanalClient;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.canal.runner.CanalApplicationRunner;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,12 +43,12 @@ public class CanalAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CanalAutoConfiguration.class, StarterNameConstant.CANAL_STARTER);
+		LogUtil.started(CanalAutoConfiguration.class, StarterName.CANAL_STARTER);
 	}
 
 	@Bean
 	public CanalClient canalClient(CanalProperties properties) {
-		LogUtil.started(CanalClient.class, StarterNameConstant.CANAL_STARTER);
+		LogUtil.started(CanalClient.class, StarterName.CANAL_STARTER);
 
 		// CanalClient canalClient = new SimpleCanalClient(canalConfig, MessageTransponders.defaultMessageTransponder());
 		return new SimpleCanalClient(properties);

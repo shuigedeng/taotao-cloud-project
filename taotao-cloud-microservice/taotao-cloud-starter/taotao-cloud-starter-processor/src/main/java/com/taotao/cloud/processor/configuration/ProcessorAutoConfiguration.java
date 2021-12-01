@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.processor.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.processor.properties.ProcessProperties;
 import org.springframework.beans.factory.InitializingBean;
@@ -37,7 +37,7 @@ public class ProcessorAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ProcessorAutoConfiguration.class, StarterNameConstant.PULSAR_STARTER);
+		LogUtil.started(ProcessorAutoConfiguration.class, StarterName.PULSAR_STARTER);
 	}
 
 }

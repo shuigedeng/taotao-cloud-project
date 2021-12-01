@@ -31,6 +31,9 @@ public class HttpClientProperties {
 
 	public static final String PREFIX = "taotao.cloud.core.httpclient";
 
+
+	private boolean enabled = true;
+
 	/**
 	 * Tcp是否粘包(批量封包发送)
 	 */
@@ -186,5 +189,17 @@ public class HttpClientProperties {
 
 	public void setRetryCount(int retryCount) {
 		this.retryCount = retryCount;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isTcpNoDelay() {
+		return tcpNoDelay;
 	}
 }

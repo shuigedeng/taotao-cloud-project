@@ -15,15 +15,18 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.endpoint.CustomEndPoint;
+import com.taotao.cloud.core.endpoint.CustomHealthIndicator;
 import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;
 import com.taotao.cloud.core.endpoint.MBeanDemo;
 import com.taotao.cloud.core.endpoint.TaoTaoCloudEndPoint;
-import com.taotao.cloud.core.endpoint.CustomHealthIndicator;
+import com.taotao.cloud.core.properties.EndpointProperties;
 import javax.management.MalformedObjectNameException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,11 +38,13 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/04/02 10:25
  */
 @Configuration
+@EnableConfigurationProperties({EndpointProperties.class})
+@ConditionalOnProperty(prefix = EndpointProperties.PREFIX, name = "enabled", havingValue = "true")
 public class EndPointAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EndPointAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(EndPointAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean
@@ -53,12 +58,12 @@ public class EndPointAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public TaoTaoCloudEndPoint taoTaoCloudEndPoint(){
+	public TaoTaoCloudEndPoint taoTaoCloudEndPoint() {
 		return new TaoTaoCloudEndPoint();
 	}
 
 	@Bean
-	public MBeanDemo mBeanDemo(){
+	public MBeanDemo mBeanDemo() {
 		return new MBeanDemo();
 	}
 

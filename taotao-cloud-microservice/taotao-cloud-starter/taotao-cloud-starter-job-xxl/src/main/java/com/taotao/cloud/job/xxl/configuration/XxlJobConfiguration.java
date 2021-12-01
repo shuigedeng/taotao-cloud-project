@@ -16,7 +16,7 @@
 package com.taotao.cloud.job.xxl.configuration;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
@@ -53,7 +53,7 @@ public class XxlJobConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(XxlJobConfiguration.class, StarterNameConstant.JOB_XXL_STARTER);
+		LogUtil.started(XxlJobConfiguration.class, StarterName.JOB_XXL_STARTER);
 	}
 
 	@Bean
@@ -61,7 +61,7 @@ public class XxlJobConfiguration implements InitializingBean {
 	public XxlJobSpringExecutor xxlJobSpringExecutor(XxlJobProperties xxlJobProperties,
 		Environment environment,
 		DiscoveryClient discoveryClient) {
-		LogUtil.started(XxlJobSpringExecutor.class, StarterNameConstant.JOB_XXL_STARTER);
+		LogUtil.started(XxlJobSpringExecutor.class, StarterName.JOB_XXL_STARTER);
 
 		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 		XxlExecutorProperties executor = xxlJobProperties.getExecutor();

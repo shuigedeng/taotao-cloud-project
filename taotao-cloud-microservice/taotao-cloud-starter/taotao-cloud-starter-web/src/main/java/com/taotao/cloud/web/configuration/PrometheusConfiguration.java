@@ -16,9 +16,9 @@
 package com.taotao.cloud.web.configuration;
 
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.configuration.HealthAutoConfiguration;
 import com.taotao.cloud.health.model.Report;
@@ -54,9 +54,9 @@ public class PrometheusConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(PrometheusConfiguration.class, StarterNameConstant.PROMETHEUS_STARTER);
+		LogUtil.started(PrometheusConfiguration.class, StarterName.PROMETHEUS_STARTER);
 		if (Objects.nonNull(healthCheckProvider)) {
-			MonitorThreadPool monitorThreadPool = healthCheckProvider.getMonitorThreadPool();
+			Monitor monitorThreadPool = healthCheckProvider.getMonitor();
 			ThreadPoolExecutor monitorThreadPoolExecutor = monitorThreadPool.getMonitorThreadPoolExecutor();
 			monitorThreadPoolExecutor.submit(() -> {
 				while (!monitorThreadPool.monitorIsShutdown()) {
@@ -86,7 +86,7 @@ public class PrometheusConfiguration implements InitializingBean {
 							return null;
 						});
 					} catch (Exception e) {
-						LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "HealthCheck Prometheus error ", e);
+						LogUtil.warn(StarterName.HEALTH_STARTER, "HealthCheck Prometheus error ", e);
 					}
 
 					try {
@@ -111,7 +111,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Counter requestCounter() {
-		LogUtil.started(Counter.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Counter.class, StarterName.WEB_STARTER);
 
 		return Counter.build()
 			.name("order_requests_total")
@@ -126,7 +126,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Gauge getInprogressRequests() {
-		LogUtil.started(Gauge.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Gauge.class, StarterName.WEB_STARTER);
 
 		return Gauge.build()
 			.name("io_namespace_http_inprogress_requests")
@@ -140,7 +140,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Histogram getRequestLatencyHistogram() {
-		LogUtil.started(Histogram.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Histogram.class, StarterName.WEB_STARTER);
 
 		return Histogram.build()
 			.name("io_namespace_http_requests_latency_seconds_histogram")
@@ -157,7 +157,7 @@ public class PrometheusConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public Summary requestLatency() {
-		LogUtil.started(Summary.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(Summary.class, StarterName.WEB_STARTER);
 
 		return Summary.build()
 			.name("requestLatency")

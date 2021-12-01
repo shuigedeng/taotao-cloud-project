@@ -19,9 +19,6 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
@@ -36,21 +33,7 @@ public class CoreApplicationRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments var1) throws Exception {
-		saveStatus("STARTED");
+		LogUtil.info("------- 应用[{}]已正常启动 -------",
+			PropertyUtil.getProperty(SpringApplicationName));
 	}
-
-	/**
-	 * saveStatus
-	 *
-	 * @param status status
-	 * @author shuigedeng
-	 * @since 2021-09-02 20:45:44
-	 */
-	private void saveStatus(String status) {
-		HashMap<String, Object> map = new HashMap<>(2);
-		map.put("data", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-		map.put("state", status);
-		LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + "-- 应用已正常启动!");
-	}
-
 }

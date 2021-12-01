@@ -17,7 +17,7 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StrPool;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -368,8 +368,8 @@ public class RequestUtil {
 		HttpHeaders headers = request.getHeaders();
 		String ip = headers.getFirst("x-forwarded-for");
 		if (ip != null && ip.length() != 0 && !UNKNOWN.equalsIgnoreCase(ip)) {
-			if (ip.contains(StrPoolConstant.COMMA)) {
-				ip = ip.split(StrPoolConstant.COMMA)[0];
+			if (ip.contains(StrPool.COMMA)) {
+				ip = ip.split(StrPool.COMMA)[0];
 			}
 		}
 		if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {

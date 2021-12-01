@@ -1,6 +1,6 @@
 package com.taotao.cloud.uc.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.uc.api.feign.fallback.FeignUserFallbackImpl;
 import com.taotao.cloud.uc.api.vo.role.RoleQueryVO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteRoleService", value = ServiceNameConstant.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = FeignUserFallbackImpl.class)
+@FeignClient(contextId = "remoteRoleService", value = ServiceName.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = FeignUserFallbackImpl.class)
 public interface IFeignRoleService {
 
     /**

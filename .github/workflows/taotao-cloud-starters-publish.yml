@@ -4,8 +4,8 @@
 name: TaoTao Cloud Starters Publish
 
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   release:
     types: [created]
 
@@ -52,7 +52,7 @@ jobs:
     - name: Build Publish Dependencies With Gradle
       run: |
         cd $PWD/taotao-cloud-dependencies
-        gradle publishToMavenLocal publishMavenJavaPublicationToGitHubRepository
+        gradle publishToMavenLocal publishAllPublicationsToSonatypeRepository
    #publishMavenJavaPublicationToGitHubRepository
 
     - name: Build Publish Starter With Gradle
@@ -62,7 +62,7 @@ jobs:
         do
           if [ -d $starter_dir"/"$starter ];then
             cd $starter_dir"/"$starter
-            gradle --continue clean build -x test -x bootJar publishMavenJavaPublicationToGitHubRepository
+            gradle --continue clean build -x test -x bootJar publishAllPublicationsToSonatypeRepository
           fi
         done
       #publishMavenJavaPublicationToGitHubRepository

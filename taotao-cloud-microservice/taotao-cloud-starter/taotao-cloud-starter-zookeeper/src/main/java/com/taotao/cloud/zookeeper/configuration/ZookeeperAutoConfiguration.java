@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.zookeeper.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.zookeeper.lock.ZookeeperDistributedLock;
@@ -26,16 +26,7 @@ import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.listen.StandardListenerManager;
-import org.apache.curator.framework.listen.UnaryListenerManager;
-import org.apache.curator.framework.recipes.cache.ChildData;
-import org.apache.curator.framework.recipes.cache.CuratorCacheListenerBuilder;
-import org.apache.curator.framework.recipes.cache.CuratorCacheListenerBuilder.ChangeListener;
-import org.apache.curator.framework.recipes.cache.NodeCacheListener;
-import org.apache.curator.framework.state.ConnectionStateListener;
-import org.apache.curator.framework.state.ConnectionStateListenerManagerFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.apache.poi.ss.formula.functions.Odd;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -57,7 +48,7 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ZookeeperAutoConfiguration.class, StarterNameConstant.ZOOKEEPER_STARTER);
+		LogUtil.started(ZookeeperAutoConfiguration.class, StarterName.ZOOKEEPER_STARTER);
 	}
 
 	@Bean(initMethod = "start", destroyMethod = "close")

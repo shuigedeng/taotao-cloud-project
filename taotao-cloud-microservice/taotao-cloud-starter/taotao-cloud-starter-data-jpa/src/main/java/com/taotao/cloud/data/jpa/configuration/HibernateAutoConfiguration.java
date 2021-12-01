@@ -27,7 +27,7 @@ import static org.hibernate.cfg.AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLV
 import static org.hibernate.cfg.AvailableSettings.PHYSICAL_NAMING_STRATEGY;
 import static org.hibernate.cfg.AvailableSettings.STATEMENT_INSPECTOR;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.jpa.bean.AuditorBean;
 import com.taotao.cloud.data.jpa.bean.TenantConnectionProvider;
@@ -72,7 +72,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HibernateAutoConfiguration.class, StarterNameConstant.JPA_STARTER);
+		LogUtil.started(HibernateAutoConfiguration.class, StarterName.JPA_STARTER);
 	}
 
 	private final JpaProperties jpaProperties;
@@ -86,25 +86,25 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public AuditorBean auditorBean() {
-		LogUtil.started(AuditorBean.class, StarterNameConstant.JPA_STARTER);
+		LogUtil.started(AuditorBean.class, StarterName.JPA_STARTER);
 		return new AuditorBean();
 	}
 
 	@Bean
 	public MultiTenantConnectionProvider tenantConnectionProvider(DataSource dataSource) {
-		LogUtil.started(TenantConnectionProvider.class, StarterNameConstant.JPA_STARTER);
+		LogUtil.started(TenantConnectionProvider.class, StarterName.JPA_STARTER);
 		return new TenantConnectionProvider(dataSource);
 	}
 
 	@Bean
 	public CurrentTenantIdentifierResolver tenantIdentifierResolver() {
-		LogUtil.started(TenantIdentifierResolver.class, StarterNameConstant.JPA_STARTER);
+		LogUtil.started(TenantIdentifierResolver.class, StarterName.JPA_STARTER);
 		return new TenantIdentifierResolver();
 	}
 
 	@Bean
 	JpaVendorAdapter jpaVendorAdapter() {
-		LogUtil.started(JpaVendorAdapter.class, StarterNameConstant.JPA_STARTER);
+		LogUtil.started(JpaVendorAdapter.class, StarterName.JPA_STARTER);
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(hibernateProperties.isShowSql());
 		hibernateJpaVendorAdapter.setGenerateDdl(hibernateProperties.isGenerateDdl());
@@ -119,7 +119,7 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		final MultiTenantConnectionProvider multiTenantConnectionProvider,
 		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
 		LogUtil.started(LocalContainerEntityManagerFactoryBean.class,
-			StarterNameConstant.JPA_STARTER);
+			StarterName.JPA_STARTER);
 
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 
