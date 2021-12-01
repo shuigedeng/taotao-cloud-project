@@ -30,6 +30,7 @@ public class SystemInfo implements SystemInfoMBean {
 	public int getCpuCore() {
 		return Runtime.getRuntime().availableProcessors();
 	}
+
 	@Override
 	public long getTotalMemory() {
 		return Runtime.getRuntime().totalMemory();

@@ -20,7 +20,6 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-kafka')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-laytpl')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mail')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-metrics')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-mongodb')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-netty-websocket')
@@ -28,7 +27,6 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-p6spy')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pay')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-processor')
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-prometheus')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-pulsar')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-qrcode')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-rabbitmq')
@@ -54,6 +52,7 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-validation"
     //api "org.springframework.boot:spring-boot-devtools"
     api "org.springframework.boot:spring-boot-starter-test"
+    api 'org.springframework.boot:spring-boot-starter-mail'
 
     api 'org.springframework.boot:spring-boot-starter-thymeleaf'
 

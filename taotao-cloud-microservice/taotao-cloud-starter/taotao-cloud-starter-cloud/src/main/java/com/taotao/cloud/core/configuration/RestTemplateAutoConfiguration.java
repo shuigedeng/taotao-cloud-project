@@ -22,6 +22,7 @@ import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,9 @@ import org.springframework.web.client.RestTemplate;
  * @since 2021/8/24 23:48
  */
 @Configuration
+@EnableConfigurationProperties({
+	HttpClientProperties.class,
+})
 public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -75,15 +79,12 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public HttpClient httpClient(DefaultHttpClient defaultHttpClient) {
-		LogUtil.started(HttpClient.class, StarterNameConstant.CLOUD_STARTER);
 		return defaultHttpClient.getClient();
 	}
 
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate(HttpClient httpClient) {
-		LogUtil.started(RestTemplate.class, StarterNameConstant.CLOUD_STARTER);
-
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
 		factory.setConnectionRequestTimeout(CONNECTION_REQUEST_TIMEOUT);
 		factory.setConnectTimeout(CONNECT_TIMEOUT);

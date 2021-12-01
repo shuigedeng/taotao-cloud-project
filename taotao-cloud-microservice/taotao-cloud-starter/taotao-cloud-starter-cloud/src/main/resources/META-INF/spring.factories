@@ -4,7 +4,6 @@ com.taotao.cloud.core.initializer.CoreApplicationContextInitializer, \
 com.taotao.cloud.core.initializer.BannerInitializer
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.core.PropertiesAutoConfiguration, \
 com.taotao.cloud.core.configuration.EndPointAutoConfiguration, \
 com.taotao.cloud.core.configuration.GradleAutoConfiguration, \
 com.taotao.cloud.core.configuration.AsyncAutoConfiguration,\

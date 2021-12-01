@@ -23,8 +23,7 @@ import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.constant.StrPoolConstant;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.redis.configuration.RedisAutoConfiguration.CaffeineAutoCacheManager;
-import com.taotao.cloud.redis.properties.CustomCacheProperties;
+import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
 import java.lang.reflect.Field;
 import java.time.Duration;
@@ -36,11 +35,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -71,7 +69,9 @@ import org.springframework.util.StringUtils;
  */
 @Configuration
 @EnableCaching
-@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "enabled", havingValue = "true")
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+@EnableConfigurationProperties({CacheProperties.class})
+@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "enabled", havingValue = "true")
 public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -79,12 +79,11 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		LogUtil.started(CacheManagerAutoConfiguration.class, StarterNameConstant.REDIS_STARTER);
 	}
 
-	private final CustomCacheProperties cacheProperties;
+	private final CacheProperties cacheProperties;
 
-	public CacheManagerAutoConfiguration(CustomCacheProperties cacheProperties) {
+	public CacheManagerAutoConfiguration(CacheProperties cacheProperties) {
 		this.cacheProperties = cacheProperties;
 	}
-
 
 	@Bean
 	public KeyGenerator keyGenerator() {
@@ -107,14 +106,12 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Primary
 	@Bean(name = "redisCacheManager")
-	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "REDIS")
+	@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "REDIS")
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-		LogUtil.started(CacheManager.class, StarterNameConstant.REDIS_STARTER);
-
 		RedisCacheConfiguration defConfig = getDefConf();
 		defConfig.entryTtl(cacheProperties.getDef().getTimeToLive());
 
-		Map<String, CustomCacheProperties.Cache> configs = cacheProperties.getConfigs();
+		Map<String, CacheProperties.Cache> configs = cacheProperties.getConfigs();
 		Map<String, RedisCacheConfiguration> map = Maps.newHashMap();
 
 		//自定义的缓存过期时间配置
@@ -134,90 +131,59 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 			.build();
 	}
 
-	private RedisCacheConfiguration getDefConf() {
-		RedisCacheConfiguration def = RedisCacheConfiguration
-			.defaultCacheConfig()
-			.disableCachingNullValues()
-			.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(
-				new StringRedisSerializer()))
-			.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
-				new RedisObjectSerializer()));
-		return handleRedisCacheConfiguration(cacheProperties.getDef(), def);
-	}
-
-	private RedisCacheConfiguration handleRedisCacheConfiguration(
-		CustomCacheProperties.Cache redisProperties, RedisCacheConfiguration config) {
-		if (Objects.isNull(redisProperties)) {
-			return config;
-		}
-		if (redisProperties.getTimeToLive() != null) {
-			config = config.entryTtl(redisProperties.getTimeToLive());
-		}
-		if (redisProperties.getKeyPrefix() != null) {
-			config = config.computePrefixWith(cacheName -> redisProperties.getKeyPrefix().concat(
-				StrPoolConstant.COLON).concat(cacheName).concat(StrPoolConstant.COLON));
-		} else {
-			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPoolConstant.COLON));
-		}
-		if (!redisProperties.isCacheNullValues()) {
-			config = config.disableCachingNullValues();
-		}
-		if (!redisProperties.isUseKeyPrefix()) {
-			config = config.disableKeyPrefix();
-		}
-
-		return config;
-	}
-
-	@Bean("caffeineCacheManager")
-	@ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "CAFFEINE")
-	public CacheManager caffeineCacheManager() {
-		LogUtil.started(CaffeineCacheManager.class, StarterNameConstant.REDIS_STARTER);
-
-		CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-
-		Caffeine caffeine = Caffeine
-			.newBuilder()
-			.recordStats()
-			.initialCapacity(500)
-			.expireAfterWrite(cacheProperties.getDef().getTimeToLive())
-			.maximumSize(cacheProperties.getDef().getMaxSize());
-
-		cacheManager.setAllowNullValues(cacheProperties.getDef().isCacheNullValues());
-		cacheManager.setCaffeine(caffeine);
-
-		//配置了这里，就必须事先在配置文件中指定key 缓存才生效
-        Map<String, CustomCacheProperties.Cache> configs = cacheProperties.getConfigs();
-        Optional.ofNullable(configs).ifPresent((config)->{
-            cacheManager.setCacheNames(config.keySet());
-        });
-		return cacheManager;
-	}
-
+	//@Bean("caffeineCacheManager")
+	//@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "CAFFEINE")
+	//public CacheManager caffeineCacheManager() {
+	//	LogUtil.started(CaffeineCacheManager.class, StarterNameConstant.REDIS_STARTER);
+	//
+	//	CaffeineCacheManager cacheManager = new CaffeineCacheManager();
+	//
+	//	Caffeine caffeine = Caffeine
+	//		.newBuilder()
+	//		.recordStats()
+	//		.initialCapacity(500)
+	//		.expireAfterWrite(cacheProperties.getDef().getTimeToLive())
+	//		.maximumSize(cacheProperties.getDef().getMaxSize());
+	//
+	//	cacheManager.setAllowNullValues(cacheProperties.getDef().isCacheNullValues());
+	//	cacheManager.setCaffeine(caffeine);
+	//
+	//	//配置了这里，就必须事先在配置文件中指定key 缓存才生效
+	//    Map<String, CacheProperties.Cache> configs = cacheProperties.getConfigs();
+	//    Optional.ofNullable(configs).ifPresent((config)->{
+	//        cacheManager.setCacheNames(config.keySet());
+	//    });
+	//	return cacheManager;
+	//}
 
 	/**
 	 * Caffeine auto cache configuration.
 	 */
 	@Configuration
-	@EnableConfigurationProperties({CacheProperties.class})
+	@EnableConfigurationProperties({
+		org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 	@ConditionalOnMissingBean(CacheManager.class)
-	@ConditionalOnClass({Caffeine.class, CaffeineCacheManager.class})
 	@AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
 	public static class CaffeineAutoCacheConfiguration {
 
 		@Bean
 		@ConditionalOnMissingBean
-		public CacheManagerCustomizers cacheManagerCustomizers(ObjectProvider<CacheManagerCustomizer<?>> customizers) {
-			return new CacheManagerCustomizers(customizers.orderedStream().collect(Collectors.toList()));
+		public CacheManagerCustomizers cacheManagerCustomizers(
+			ObjectProvider<CacheManagerCustomizer<?>> customizers) {
+			return new CacheManagerCustomizers(
+				customizers.orderedStream().collect(Collectors.toList()));
 		}
 
-		@Bean
-		public CacheManager cacheManager(CacheProperties cacheProperties,
+		@Bean("caffeineCacheManager")
+		@ConditionalOnProperty(prefix = CacheProperties.PREFIX, name = "type", havingValue = "CAFFEINE")
+		public CacheManager cacheManager(
+			org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
 			CacheManagerCustomizers customizers,
 			ObjectProvider<Caffeine<Object, Object>> caffeine,
 			ObjectProvider<CaffeineSpec> caffeineSpec,
 			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-			CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine, caffeineSpec, cacheLoader);
+			CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine,
+				caffeineSpec, cacheLoader);
 			List<String> cacheNames = cacheProperties.getCacheNames();
 			if (!CollectionUtils.isEmpty(cacheNames)) {
 				cacheManager.setCacheNames(cacheNames);
@@ -225,16 +191,20 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 			return customizers.customize(cacheManager);
 		}
 
-		private static CaffeineAutoCacheManager createCacheManager(CacheProperties cacheProperties,
-			ObjectProvider<Caffeine<Object, Object>> caffeine, ObjectProvider<CaffeineSpec> caffeineSpec,
+		private static CaffeineAutoCacheManager createCacheManager(
+			org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
+			ObjectProvider<Caffeine<Object, Object>> caffeine,
+			ObjectProvider<CaffeineSpec> caffeineSpec,
 			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
 			CaffeineAutoCacheManager cacheManager = new CaffeineAutoCacheManager();
-			setCacheBuilder(cacheProperties, caffeineSpec.getIfAvailable(), caffeine.getIfAvailable(), cacheManager);
+			setCacheBuilder(cacheProperties, caffeineSpec.getIfAvailable(),
+				caffeine.getIfAvailable(), cacheManager);
 			cacheLoader.ifAvailable(cacheManager::setCacheLoader);
 			return cacheManager;
 		}
 
-		private static void setCacheBuilder(CacheProperties cacheProperties,
+		private static void setCacheBuilder(
+			org.springframework.boot.autoconfigure.cache.CacheProperties cacheProperties,
 			@Nullable CaffeineSpec caffeineSpec,
 			@Nullable Caffeine<Object, Object> caffeine,
 			CaffeineCacheManager cacheManager) {
@@ -293,6 +263,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 	 * caffeine 缓存自动配置超时时间
 	 */
 	public static class CaffeineAutoCacheManager extends CaffeineCacheManager {
+
 		private static final Field CACHE_LOADER_FIELD;
 
 		static {
@@ -319,7 +290,8 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 		@Override
 		public void setCaffeine(Caffeine<Object, Object> caffeine) {
-			throw new IllegalArgumentException("mica-caffeine not support customization Caffeine bean，you can customize CaffeineSpec bean.");
+			throw new IllegalArgumentException(
+				"mica-caffeine not support customization Caffeine bean，you can customize CaffeineSpec bean.");
 		}
 
 		@Override
@@ -335,15 +307,16 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		}
 
 		/**
-		 * Build a common Caffeine Cache instance for the specified cache name,
-		 * using the common Caffeine configuration specified on this cache manager.
+		 * Build a common Caffeine Cache instance for the specified cache name, using the common
+		 * Caffeine configuration specified on this cache manager.
 		 *
 		 * @param name the name of the cache
 		 * @return the native Caffeine Cache instance
 		 * @see #createCaffeineCache
 		 */
 		@Override
-		protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(String name) {
+		protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(
+			String name) {
 			String[] cacheArray = name.split(StringPool.HASH);
 			if (cacheArray.length < 2) {
 				return super.createNativeCaffeineCache(name);
@@ -365,5 +338,40 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 			}
 		}
 
+	}
+
+	private RedisCacheConfiguration getDefConf() {
+		RedisCacheConfiguration def = RedisCacheConfiguration
+			.defaultCacheConfig()
+			.disableCachingNullValues()
+			.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(
+				new StringRedisSerializer()))
+			.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
+				new RedisObjectSerializer()));
+		return handleRedisCacheConfiguration(cacheProperties.getDef(), def);
+	}
+
+	private RedisCacheConfiguration handleRedisCacheConfiguration(
+		CacheProperties.Cache redisProperties, RedisCacheConfiguration config) {
+		if (Objects.isNull(redisProperties)) {
+			return config;
+		}
+		if (redisProperties.getTimeToLive() != null) {
+			config = config.entryTtl(redisProperties.getTimeToLive());
+		}
+		if (redisProperties.getKeyPrefix() != null) {
+			config = config.computePrefixWith(cacheName -> redisProperties.getKeyPrefix().concat(
+				StrPoolConstant.COLON).concat(cacheName).concat(StrPoolConstant.COLON));
+		} else {
+			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPoolConstant.COLON));
+		}
+		if (!redisProperties.isCacheNullValues()) {
+			config = config.disableCachingNullValues();
+		}
+		if (!redisProperties.isUseKeyPrefix()) {
+			config = config.disableKeyPrefix();
+		}
+
+		return config;
 	}
 }

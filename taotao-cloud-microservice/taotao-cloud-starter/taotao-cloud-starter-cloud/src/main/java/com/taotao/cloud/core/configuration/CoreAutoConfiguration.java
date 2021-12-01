@@ -18,27 +18,29 @@ package com.taotao.cloud.core.configuration;
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
 import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.model.PropertyCache;
+import com.taotao.cloud.common.model.Pubsub;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.CoreThreadPoolFactory;
 import com.taotao.cloud.core.launch.StartedEventListener;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.model.Collector;
-import com.taotao.cloud.common.model.PropertyCache;
-import com.taotao.cloud.common.model.Pubsub;
 import com.taotao.cloud.core.monitor.MonitorSystem;
 import com.taotao.cloud.core.monitor.MonitorThreadPool;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.properties.HttpClientProperties;
+import com.taotao.cloud.core.properties.IpRegexProperties;
 import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import com.taotao.cloud.core.runner.CoreApplicationRunner;
 import com.taotao.cloud.core.runner.CoreCommandLineRunner;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -51,6 +53,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @since 2021-09-02 20:05:41
  */
 @Configuration
+@EnableConfigurationProperties({
+	AsyncThreadPoolProperties.class,
+	CoreProperties.class,
+	HttpClientProperties.class,
+	IpRegexProperties.class,
+	MonitorThreadPoolProperties.class,
+})
 public class CoreAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -58,13 +67,8 @@ public class CoreAutoConfiguration implements InitializingBean {
 		LogUtil.started(CoreAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
 	}
 
-	@Autowired
-	private AsyncThreadPoolProperties asyncThreadPoolProperties;
-
 	@Bean(value = "meterRegistryCustomizer")
 	MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer() {
-		LogUtil.started(MeterRegistryCustomizer.class, StarterNameConstant.CLOUD_STARTER);
-
 		return meterRegistry -> meterRegistry
 			.config()
 			.commonTags("application", PropertyUtil.getProperty(SpringApplicationName));
@@ -72,24 +76,22 @@ public class CoreAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public Pubsub pubsub() {
-		LogUtil.started(Pubsub.class, StarterNameConstant.CLOUD_STARTER);
 		return new Pubsub();
 	}
 
 	@Bean
 	public Collector collector(CoreProperties coreProperties) {
-		LogUtil.started(Collector.class, StarterNameConstant.CLOUD_STARTER);
 		return new Collector(coreProperties);
 	}
 
 	@Bean
 	public PropertyCache propertyCache(Pubsub pubsub) {
-		LogUtil.started(PropertyCache.class, StarterNameConstant.CLOUD_STARTER);
 		return new PropertyCache(pubsub);
 	}
 
 	@Bean
-	public AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor(){
+	public AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor(
+		AsyncThreadPoolProperties asyncThreadPoolProperties) {
 		LogUtil.started(ThreadPoolTaskExecutor.class, StarterNameConstant.CLOUD_STARTER);
 
 		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
@@ -128,30 +130,27 @@ public class CoreAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public MonitorSystem monitorThread(MonitorThreadPool monitorThreadPool) {
-		LogUtil.started(MonitorSystem.class, StarterNameConstant.CLOUD_STARTER);
 		return monitorThreadPool.getMonitorSystem();
 	}
 
 	@Bean
 	public CoreApplicationRunner coreApplicationRunner() {
-		LogUtil.started(CoreApplicationRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreApplicationRunner();
 	}
 
 	@Bean
 	public CoreCommandLineRunner coreCommandLineRunner(PropertyCache propertyCache,
 		CoreProperties coreProperties) {
-		LogUtil.started(CoreCommandLineRunner.class, StarterNameConstant.CLOUD_STARTER);
 		return new CoreCommandLineRunner(propertyCache, coreProperties);
 	}
 
 	@Bean
-	public StartedEventListener startedEventListener(){
+	public StartedEventListener startedEventListener() {
 		return new StartedEventListener();
 	}
 
 	@Configuration
-	public static class CoreFunction implements Function<String, String>{
+	public static class CoreFunction implements Function<String, String> {
 
 		@Override
 		public String apply(String s) {

@@ -20,6 +20,10 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
+import com.taotao.cloud.core.properties.CoreProperties;
+import com.taotao.cloud.core.properties.HttpClientProperties;
+import com.taotao.cloud.core.properties.IpRegexProperties;
+import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Objects;
 import java.util.concurrent.ThreadFactory;
@@ -31,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -45,6 +50,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
+@EnableConfigurationProperties({
+	AsyncThreadPoolProperties.class,
+})
 @EnableAsync(proxyTargetClass = true)
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 

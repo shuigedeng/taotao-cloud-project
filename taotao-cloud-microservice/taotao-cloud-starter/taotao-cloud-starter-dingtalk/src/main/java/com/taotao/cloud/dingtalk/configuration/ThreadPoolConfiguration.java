@@ -36,7 +36,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  */
 @Configuration
 @ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true")
-@ConditionalOnBean(DingerRobot.class)
+//@ConditionalOnBean(DingerRobot.class)
 @ConditionalOnMissingBean(name = DingerConstant.DINGER_EXECUTOR)
 public class ThreadPoolConfiguration implements InitializingBean {
 

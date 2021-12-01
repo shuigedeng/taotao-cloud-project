@@ -25,7 +25,6 @@ import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
-import com.taotao.cloud.redis.properties.CustomCacheProperties;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterAspect;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterClient;
@@ -44,7 +43,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -56,9 +54,11 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisKeyExpiredEvent;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -69,6 +69,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
@@ -81,15 +82,9 @@ import org.springframework.util.StringUtils;
  * @since 2021-09-07 21:17:02
  */
 @Configuration
-@EnableConfigurationProperties({RedisProperties.class, RedisLockProperties.class,
-	CustomCacheProperties.class})
+@ConditionalOnBean(RedissonClient.class)
+@EnableConfigurationProperties({RedisProperties.class})
 public class RedisAutoConfiguration implements InitializingBean {
-
-	private final RedissonClient redissonClient;
-
-	public RedisAutoConfiguration(RedissonClient redissonClient) {
-		this.redissonClient = redissonClient;
-	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -97,28 +92,23 @@ public class RedisAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redisson) {
-		LogUtil.started(RedisConnectionFactory.class, StarterNameConstant.REDIS_STARTER);
-		return new RedissonConnectionFactory(redisson);
+	public RedisConnectionFactory redissonConnectionFactory(RedissonClient redissonClient) {
+		return new RedissonConnectionFactory(redissonClient);
 	}
 
 	@Bean
 	public RedisSerializer<String> redisKeySerializer() {
-		LogUtil.started(RedisSerializer.class, StarterNameConstant.REDIS_STARTER);
 		return RedisSerializer.string();
 	}
 
 	@Bean
 	public RedisSerializer<Object> redisValueSerializer() {
-		LogUtil.started(RedisSerializer.class, StarterNameConstant.REDIS_STARTER);
 		return RedisSerializer.json();
 	}
 
 	@Bean
 	@ConditionalOnClass(RedisOperations.class)
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-		LogUtil.started(RedisTemplate.class, StarterNameConstant.REDIS_STARTER);
-
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(factory);
 
@@ -141,8 +131,6 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public RedisRepository redisRepository(RedisTemplate<String, Object> redisTemplate) {
-		LogUtil.started(RedisRepository.class, StarterNameConstant.REDIS_STARTER);
-
 		return new RedisRepository(redisTemplate, false);
 	}
 
@@ -153,14 +141,6 @@ public class RedisAutoConfiguration implements InitializingBean {
 		StringRedisTemplate template = new StringRedisTemplate();
 		template.setConnectionFactory(factory);
 		return template;
-	}
-
-	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnBean(RedissonClient.class)
-	@ConditionalOnProperty(prefix = RedisLockProperties.PREFIX, name = "enabled", havingValue = "true")
-	public DistributedLock redissonDistributedLock() {
-		return new RedissonDistributedLock(redissonClient);
 	}
 
 	@Configuration
@@ -182,6 +162,13 @@ public class RedisAutoConfiguration implements InitializingBean {
 			RedisMessageListenerContainer listenerContainer) {
 			return new KeyExpirationEventMessageListener(listenerContainer);
 		}
+
+		@Async
+		@EventListener
+		public void onRedisKeyExpiredEvent(RedisKeyExpiredEvent<Object> event) {
+			LogUtil.info(event.toString());
+		}
+
 	}
 
 	@Configuration(proxyBeanMethods = false)
@@ -210,147 +197,5 @@ public class RedisAutoConfiguration implements InitializingBean {
 			RedisRateLimiterClient rateLimiterClient) {
 			return new RedisRateLimiterAspect(rateLimiterClient);
 		}
-	}
-
-	@Configuration(proxyBeanMethods = false)
-	@EnableConfigurationProperties(CacheProperties.class)
-	@ConditionalOnMissingBean(CacheManager.class)
-	@ConditionalOnClass({Caffeine.class, CaffeineCacheManager.class})
-	@AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
-	public class CaffeineAutoCacheConfiguration {
-
-		@Bean
-		@ConditionalOnMissingBean
-		public CacheManagerCustomizers cacheManagerCustomizers(
-			ObjectProvider<CacheManagerCustomizer<?>> customizers) {
-			return new CacheManagerCustomizers(
-				customizers.orderedStream().collect(Collectors.toList()));
-		}
-
-		@Bean
-		public CacheManager cacheManager(CacheProperties cacheProperties,
-			CacheManagerCustomizers customizers,
-			ObjectProvider<Caffeine<Object, Object>> caffeine,
-			ObjectProvider<CaffeineSpec> caffeineSpec,
-			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-			CaffeineAutoCacheManager cacheManager = createCacheManager(cacheProperties, caffeine,
-				caffeineSpec, cacheLoader);
-			List<String> cacheNames = cacheProperties.getCacheNames();
-			if (!CollectionUtils.isEmpty(cacheNames)) {
-				cacheManager.setCacheNames(cacheNames);
-			}
-			return customizers.customize(cacheManager);
-		}
-
-		private static CaffeineAutoCacheManager createCacheManager(CacheProperties cacheProperties,
-			ObjectProvider<Caffeine<Object, Object>> caffeine,
-			ObjectProvider<CaffeineSpec> caffeineSpec,
-			ObjectProvider<CacheLoader<Object, Object>> cacheLoader) {
-			CaffeineAutoCacheManager cacheManager = new CaffeineAutoCacheManager();
-			setCacheBuilder(cacheProperties, caffeineSpec.getIfAvailable(),
-				caffeine.getIfAvailable(), cacheManager);
-			cacheLoader.ifAvailable(cacheManager::setCacheLoader);
-			return cacheManager;
-		}
-
-		private static void setCacheBuilder(CacheProperties cacheProperties,
-			@Nullable CaffeineSpec caffeineSpec,
-			@Nullable Caffeine<Object, Object> caffeine,
-			CaffeineCacheManager cacheManager) {
-			String specification = cacheProperties.getCaffeine().getSpec();
-			if (StringUtils.hasText(specification)) {
-				cacheManager.setCacheSpecification(specification);
-			} else if (caffeineSpec != null) {
-				cacheManager.setCaffeineSpec(caffeineSpec);
-			} else if (caffeine != null) {
-				cacheManager.setCaffeine(caffeine);
-			}
-		}
-
-	}
-
-	/**
-	 * caffeine 缓存自动配置超时时间
-	 *
-	 * @author shuigedeng
-	 * @version 2021.9
-	 * @since 2021-09-02 20:01:42
-	 */
-	public static class CaffeineAutoCacheManager extends CaffeineCacheManager {
-
-		private static final Field CACHE_LOADER_FIELD;
-
-		static {
-			CACHE_LOADER_FIELD = Objects.requireNonNull(
-				ReflectionUtils.findField(CaffeineCacheManager.class, "cacheLoader"));
-			CACHE_LOADER_FIELD.setAccessible(true);
-		}
-
-		@Nullable
-		private CaffeineSpec caffeineSpec = null;
-
-		public CaffeineAutoCacheManager() {
-			super();
-		}
-
-		public CaffeineAutoCacheManager(String... cacheNames) {
-			super(cacheNames);
-		}
-
-		@Nullable
-		@SuppressWarnings("unchecked")
-		protected CacheLoader<Object, Object> getCacheLoader() {
-			return (CacheLoader<Object, Object>) ReflectionUtils.getField(CACHE_LOADER_FIELD, this);
-		}
-
-		@Override
-		public void setCaffeine(Caffeine<Object, Object> caffeine) {
-			throw new IllegalArgumentException(
-				"mica-caffeine not support customization Caffeine bean，you can customize CaffeineSpec bean.");
-		}
-
-		@Override
-		public void setCaffeineSpec(CaffeineSpec caffeineSpec) {
-			super.setCaffeineSpec(caffeineSpec);
-			this.caffeineSpec = caffeineSpec;
-		}
-
-		@Override
-		public void setCacheSpecification(String cacheSpecification) {
-			super.setCacheSpecification(cacheSpecification);
-			this.caffeineSpec = CaffeineSpec.parse(cacheSpecification);
-		}
-
-		/**
-		 * Build a common Caffeine Cache instance for the specified cache name, using the common
-		 * Caffeine configuration specified on this cache manager.
-		 *
-		 * @param name the name of the cache
-		 * @return the native Caffeine Cache instance
-		 * @see #createCaffeineCache
-		 */
-		@Override
-		protected com.github.benmanes.caffeine.cache.Cache<Object, Object> createNativeCaffeineCache(
-			String name) {
-			String[] cacheArray = name.split(StringPool.HASH);
-			if (cacheArray.length < 2) {
-				return super.createNativeCaffeineCache(name);
-			}
-			// 转换时间，支持时间单位例如：300ms，第二个参数是默认单位
-			Duration duration = DurationStyle.detectAndParse(cacheArray[1], ChronoUnit.SECONDS);
-			Caffeine<Object, Object> cacheBuilder;
-			if (this.caffeineSpec != null) {
-				cacheBuilder = Caffeine.from(caffeineSpec);
-			} else {
-				cacheBuilder = Caffeine.newBuilder();
-			}
-			CacheLoader<Object, Object> cacheLoader = getCacheLoader();
-			if (cacheLoader == null) {
-				return cacheBuilder.expireAfterAccess(duration).build();
-			} else {
-				return cacheBuilder.expireAfterAccess(duration).build(cacheLoader);
-			}
-		}
-
 	}
 }
