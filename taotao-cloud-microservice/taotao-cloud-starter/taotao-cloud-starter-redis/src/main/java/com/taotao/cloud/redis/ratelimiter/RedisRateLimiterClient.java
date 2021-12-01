@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.redis.ratelimiter;
 
-import com.taotao.cloud.common.utils.CharPool;
+import com.taotao.cloud.common.model.CharPool;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

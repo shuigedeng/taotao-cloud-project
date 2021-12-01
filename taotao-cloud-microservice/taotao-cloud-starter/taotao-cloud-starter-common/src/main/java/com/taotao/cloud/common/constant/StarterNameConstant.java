@@ -31,7 +31,7 @@ public class StarterNameConstant {
 
 	public static final String CANAL_STARTER = "taotao-cloud-starter-canal";
 	public static final String CAPTCHA_STARTER = "taotao-cloud-starter-captcha";
-	public static final String CLOUD_STARTER = "taotao-cloud-starter-cloud";
+	public static final String CLOUD_STARTER = "taotao-cloud-starter-core";
 	public static final String COMMON_STARTER = "taotao-cloud-starter-common";
 	public static final String JPA_STARTER = "taotao-cloud-starter-data-jpa";
 	public static final String MYBATIS_PLUS_STARTER = "taotao-cloud-starter-data-mybatis-plus";

@@ -30,7 +30,7 @@ import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;

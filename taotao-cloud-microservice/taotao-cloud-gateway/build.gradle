@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud'))
+    implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-health'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-captcha'))
     implementation(project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-logger'))

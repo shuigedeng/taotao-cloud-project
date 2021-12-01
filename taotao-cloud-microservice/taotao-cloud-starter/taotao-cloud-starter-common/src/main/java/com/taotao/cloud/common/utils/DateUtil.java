@@ -22,6 +22,7 @@ import static cn.hutool.core.date.DatePattern.NORM_TIME_PATTERN;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.common.model.DatePattern;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -58,6 +59,7 @@ public class DateUtil {
 
 	private DateUtil() {
 	}
+
 	public static final String PATTERN_DATETIME = DatePattern.NORM_DATETIME_PATTERN;
 	public static final String PATTERN_DATE = DatePattern.NORM_DATE_PATTERN;
 	public static final String PATTERN_TIME = DatePattern.NORM_TIME_PATTERN;

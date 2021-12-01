@@ -6,7 +6,7 @@ import com.google.common.base.Stopwatch;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.utils.RequestUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.gateway.rule.BlackList;
 import com.taotao.cloud.gateway.rule.RuleConstant;

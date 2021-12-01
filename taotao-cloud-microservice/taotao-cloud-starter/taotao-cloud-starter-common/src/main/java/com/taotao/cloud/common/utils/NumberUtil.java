@@ -298,22 +298,22 @@ public class NumberUtil extends org.springframework.util.NumberUtils {
 	 */
 	public static String toChineseNum(int number) {
 		String numStr = String.valueOf(number);
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		int numLen = numStr.length();
 		for (int i = 0; i < numLen; i++) {
 			int num = numStr.charAt(i) - 48;
 			if (i != numLen - 1 && num != 0) {
-				result += hanArr[num] + unitArr[numLen - 2 - i];
+				result.append(hanArr[num]).append(unitArr[numLen - 2 - i]);
 				if (number >= 10 && number < 20) {
-					result = result.substring(1);
+					result = new StringBuilder(result.substring(1));
 				}
 			} else {
 				if (!(number >= 10 && number % 10 == 0)) {
-					result += hanArr[num];
+					result.append(hanArr[num]);
 				}
 			}
 		}
-		return result;
+		return result.toString();
 	}
 
 

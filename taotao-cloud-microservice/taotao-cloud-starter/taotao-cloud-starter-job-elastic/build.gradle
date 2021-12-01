@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
     api "com.dangdang:elastic-job-lite-core:2.1.5"
     api "com.dangdang:elastic-job-lite-spring:2.1.5"

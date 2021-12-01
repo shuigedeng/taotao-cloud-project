@@ -32,6 +32,9 @@ dependencies {
 
     api 'com.thoughtworks.xstream:xstream:1.4.17'
 
+    api  "org.jsoup:jsoup:1.14.2"
+    api "com.google.zxing:javase:3.4.1"
+
     api 'org.springframework:spring-core'
     api 'org.springframework:spring-tx'
     api 'org.springframework:spring-context'

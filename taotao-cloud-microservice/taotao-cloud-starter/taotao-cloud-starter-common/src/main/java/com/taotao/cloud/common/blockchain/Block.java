@@ -17,7 +17,7 @@ package com.taotao.cloud.common.blockchain;
 
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.secure.SHAUtil;
+import com.taotao.cloud.common.secure.SHAUtil;
 
 /**
  * Block

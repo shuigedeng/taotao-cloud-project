@@ -28,7 +28,7 @@ import com.taotao.cloud.captcha.util.ImageUtils;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.RandomUtil;
-import com.taotao.cloud.common.utils.secure.AESUtil;
+import com.taotao.cloud.common.secure.AESUtil;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

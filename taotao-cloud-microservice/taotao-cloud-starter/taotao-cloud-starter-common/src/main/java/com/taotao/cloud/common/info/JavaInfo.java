@@ -31,7 +31,7 @@ public class JavaInfo implements Serializable {
 	private final String JAVA_VENDOR_URL = System.getProperty("java.vendor.url", null);
 
 	/**
-	 * 取得当前Java impl.的版本
+	 * 取得当前Java impl的版本
 	 *
 	 * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回null
 	 * @author shuigedeng

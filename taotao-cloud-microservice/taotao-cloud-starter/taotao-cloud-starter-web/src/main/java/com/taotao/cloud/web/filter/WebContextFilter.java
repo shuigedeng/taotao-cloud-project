@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.web.filter;
 
-import com.taotao.cloud.core.utils.RequestUtil;
-import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.common.utils.RequestUtil;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

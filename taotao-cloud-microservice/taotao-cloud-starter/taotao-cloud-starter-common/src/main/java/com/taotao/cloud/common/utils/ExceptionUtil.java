@@ -30,9 +30,6 @@ import java.io.StringWriter;
  */
 public class ExceptionUtil {
 
-	private ExceptionUtil() {
-	}
-
 	/**
 	 * trace2String
 	 *

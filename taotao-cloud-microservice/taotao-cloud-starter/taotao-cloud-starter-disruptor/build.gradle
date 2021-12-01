@@ -1,5 +1,5 @@
 dependencies {
-    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-cloud')
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
 //    Disruptor它是一个开源的并发框架,并获得2011 Duke’s 程序框架创新奖,能够在无锁的情况下实现网络的Queue并发操作。
     implementation "com.lmax:disruptor:3.4.3"

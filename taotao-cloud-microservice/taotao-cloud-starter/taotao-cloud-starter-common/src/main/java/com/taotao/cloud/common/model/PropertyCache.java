@@ -16,8 +16,7 @@
 package com.taotao.cloud.common.model;
 
 import com.taotao.cloud.common.enums.EventEnum;
-import com.taotao.cloud.common.model.Callable;
-import com.taotao.cloud.common.utils.BeanUtil;
+import com.taotao.cloud.common.bean.BeanUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;

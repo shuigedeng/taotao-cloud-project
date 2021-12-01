@@ -17,7 +17,7 @@
 package com.taotao.cloud.redis.ratelimiter;
 
 import com.taotao.cloud.common.spel.ExpressionEvaluator;
-import com.taotao.cloud.common.utils.CharPool;
+import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.utils.StringUtil;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;

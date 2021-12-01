@@ -36,11 +36,10 @@ import java.util.function.Supplier;
  * Lambda 受检异常处理
  *
  * <p>
- * https://segmentfault.com/a/1190000007832130
- * https://github.com/jOOQ/jOOL
+ * https://segmentfault.com/a/1190000007832130 https://github.com/jOOQ/jOOL
  * </p>
  *
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

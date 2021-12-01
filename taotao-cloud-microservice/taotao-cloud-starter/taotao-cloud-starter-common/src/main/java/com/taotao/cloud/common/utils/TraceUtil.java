@@ -17,7 +17,6 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 
