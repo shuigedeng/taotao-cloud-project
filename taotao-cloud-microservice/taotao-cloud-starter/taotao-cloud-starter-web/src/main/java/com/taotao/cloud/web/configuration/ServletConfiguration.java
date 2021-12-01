@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 /**
- * ServletConfiguration 
+ * ServletConfiguration
  *
  * @author shuigedeng
  * @version 2021.9

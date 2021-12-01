@@ -36,15 +36,15 @@ import com.taotao.cloud.web.filter.WebContextFilter;
 import com.taotao.cloud.web.interceptor.DoubtApiInterceptor;
 import com.taotao.cloud.web.interceptor.HeaderThreadLocalInterceptor;
 import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
+import com.taotao.cloud.web.properties.FilterProperties;
+import com.taotao.cloud.web.properties.InterceptorProperties;
+import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.validation.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.validation.converter.String2DateConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalDateConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalDateTimeConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalTimeConverter;
 import com.taotao.cloud.web.validation.converter.StringToEnumConverterFactory;
-import com.taotao.cloud.web.properties.FilterProperties;
-import com.taotao.cloud.web.properties.InterceptorProperties;
-import com.taotao.cloud.web.properties.XssProperties;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
@@ -66,6 +66,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -105,6 +106,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @since 2021-09-02 21:30:20
  */
 @Configuration
+@EnableConfigurationProperties({
+	FilterProperties.class,
+	InterceptorProperties.class,
+})
 public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Override
@@ -232,8 +237,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public Validator validator() {
-		LogUtil.started(Validator.class, StarterName.WEB_STARTER);
-
 		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
 			.configure()
 			// 快速失败模式
@@ -244,16 +247,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public RequestContextListener requestContextListener() {
-		LogUtil.started(RequestContextListener.class, StarterName.WEB_STARTER);
-
 		return new RequestContextListener();
 	}
 
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "version", havingValue = "true")
 	public FilterRegistrationBean<VersionFilter> lbIsolationFilter() {
-		LogUtil.started(VersionFilter.class, StarterName.WEB_STARTER);
-
 		FilterRegistrationBean<VersionFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new VersionFilter());
 		registrationBean.addUrlPatterns("/*");
@@ -265,8 +264,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "tenant", havingValue = "true")
 	public FilterRegistrationBean<TenantFilter> tenantFilter() {
-		LogUtil.started(TenantFilter.class, StarterName.WEB_STARTER);
-
 		FilterRegistrationBean<TenantFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TenantFilter());
 		registrationBean.addUrlPatterns("/*");
@@ -277,8 +274,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 
 	@Bean
 	public FilterRegistrationBean<TraceFilter> traceFilter() {
-		LogUtil.started(TraceFilter.class, StarterName.WEB_STARTER);
-
 		FilterRegistrationBean<TraceFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new TraceFilter(filterProperties));
 		registrationBean.addUrlPatterns("/*");
@@ -290,8 +285,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "webContext", havingValue = "true")
 	public FilterRegistrationBean<WebContextFilter> webContextFilter() {
-		LogUtil.started(WebContextFilter.class, StarterName.WEB_STARTER);
-
 		FilterRegistrationBean<WebContextFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new WebContextFilter());
 		registrationBean.addUrlPatterns("/*");
@@ -303,7 +296,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "report", havingValue = "true")
 	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
-		LogUtil.started(HealthReportFilter.class, StarterName.HEALTH_STARTER);
 		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
 		filterRegistrationBean.setFilter(new HealthReportFilter());
@@ -315,8 +307,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "dump", havingValue = "true")
 	public FilterRegistrationBean<DumpFilter> dumpFilter() {
-		LogUtil.started(DumpFilter.class, StarterName.HEALTH_STARTER);
-
 		FilterRegistrationBean<DumpFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
 		filterRegistrationBean.setFilter(new DumpFilter());
@@ -328,8 +318,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "ping", havingValue = "true")
 	public FilterRegistrationBean<PingFilter> pingFilter() {
-		LogUtil.started(PingFilter.class, StarterName.HEALTH_STARTER);
-
 		FilterRegistrationBean<PingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		filterRegistrationBean.setFilter(new PingFilter());

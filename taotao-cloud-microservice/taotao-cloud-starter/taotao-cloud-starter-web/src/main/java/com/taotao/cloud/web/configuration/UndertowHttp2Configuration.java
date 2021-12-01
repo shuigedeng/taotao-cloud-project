@@ -45,8 +45,8 @@ import org.xnio.XnioWorker;
  * @version 2021.9
  * @since 2021-09-02 21:29:52
  */
-@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(Undertow.class)
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 public class UndertowHttp2Configuration implements InitializingBean {
 

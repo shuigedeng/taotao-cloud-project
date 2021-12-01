@@ -31,6 +31,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,8 +44,9 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 21:24:03
  */
 @Configuration
-@ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
 @ConditionalOnMissingBean(Mapper.class)
+@EnableConfigurationProperties({DozerProperties.class})
+@ConditionalOnClass({DozerBeanMapperFactoryBean.class, Mapper.class})
 @ConditionalOnProperty(prefix = DozerProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DozerConfiguration implements InitializingBean {
 
@@ -55,15 +57,11 @@ public class DozerConfiguration implements InitializingBean {
 
 	@Bean
 	public DozerHelper dozerHelper(Mapper mapper) {
-		LogUtil.started(DozerHelper.class, StarterName.WEB_STARTER);
-
 		return new DozerHelper(mapper);
 	}
 
 	@Bean
 	public DozerBeanMapperFactoryBean dozerMapper(DozerProperties properties) throws IOException {
-		LogUtil.started(DozerBeanMapperFactoryBean.class, StarterName.WEB_STARTER);
-
 		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
 		// 官方这样子写，没法用 匹配符！
 		// factoryBean.setMappingFiles(properties.getMappingFiles());
@@ -208,9 +206,9 @@ public class DozerConfiguration implements InitializingBean {
 			}
 
 			return sourceList.parallelStream()
-					.filter(Objects::nonNull)
-					.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
-					.collect(Collectors.toList());
+				.filter(Objects::nonNull)
+				.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
+				.collect(Collectors.toList());
 		}
 
 		/**
@@ -227,8 +225,8 @@ public class DozerConfiguration implements InitializingBean {
 				return Collections.emptySet();
 			}
 			return sourceList.parallelStream()
-					.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
-					.collect(Collectors.toSet());
+				.map((sourceObject) -> mapper.map(sourceObject, destinationClass))
+				.collect(Collectors.toSet());
 		}
 	}
 }

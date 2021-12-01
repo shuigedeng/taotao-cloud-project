@@ -57,11 +57,11 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
 
 		final List<Schedule> scheduleList = scheduleMapper.getScheduleListByAppName(
-				applicationName);
+			applicationName);
 
 		if (CollectionUtils.isNotEmpty(scheduleList)) {
 			LogUtil.info("定时任务即将启动，预计启动任务数量[" + scheduleList.size() + "]，时间："
-					+ DateUtil.getCurrentDateTime());
+				+ DateUtil.getCurrentDateTime());
 			for (Schedule schedule : scheduleList) {
 				// 判断任务是否有效
 				if (schedule.getValid()) {
@@ -71,7 +71,7 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 				}
 			}
 			LogUtil.info(
-					"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
+				"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
 		}
 	}
 
@@ -88,7 +88,7 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 			try {
 				final Object bean = SpringUtil.getBean(schedule.getClassName());
 				final Method method = bean.getClass()
-						.getMethod(schedule.getMethod(), (Class<?>[]) null);
+					.getMethod(schedule.getMethod(), (Class<?>[]) null);
 				method.invoke(bean);
 			} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
 				LogUtil.error("定时任务调度失败", e);
