@@ -77,8 +77,8 @@ public class DozerProperties {
 	 */
 	public Resource[] resolveMapperLocations() {
 		return Stream.of(Optional.ofNullable(this.mappingFiles).orElse(new String[0]))
-				.flatMap(location -> Stream.of(getResources(location)))
-				.toArray(Resource[]::new);
+			.flatMap(location -> Stream.of(getResources(location)))
+			.toArray(Resource[]::new);
 	}
 
 	/**

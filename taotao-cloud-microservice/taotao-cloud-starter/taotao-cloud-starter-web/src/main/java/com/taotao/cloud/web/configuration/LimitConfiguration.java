@@ -19,10 +19,12 @@ import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
+import com.taotao.cloud.web.properties.EncryptProperties;
 import com.taotao.cloud.web.properties.LimitProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,6 +36,8 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 21:28:08
  */
 @Configuration
+@EnableConfigurationProperties({LimitProperties.class})
+@ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true")
 public class LimitConfiguration implements InitializingBean {
 
 	@Override
@@ -43,10 +47,7 @@ public class LimitConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean({RedisRepository.class})
-	@ConditionalOnProperty(prefix = LimitProperties.PREFIX, name = "enabled", havingValue = "true")
 	public LimitAspect limitAspect(RedisRepository redisRepository) {
-		LogUtil.started(LimitAspect.class, StarterName.WEB_STARTER);
-
 		return new LimitAspect(redisRepository);
 	}
 }

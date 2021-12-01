@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 策略模式自动注入配置 
+ * 策略模式自动注入配置
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 22:13:57
  */
 @Configuration
-public class StrategyConfiguration  implements InitializingBean {
+public class StrategyConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

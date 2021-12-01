@@ -108,7 +108,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({IllegalArgumentException.class})
 	public Result<String> illegalArgumentException(NativeWebRequest req,
-			IllegalArgumentException e) {
+		IllegalArgumentException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
 	}
@@ -127,21 +127,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({UsernameNotFoundException.class})
 	public Result<String> badUsernameNotFoundException(NativeWebRequest req,
-			UsernameNotFoundException e) {
+		UsernameNotFoundException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	public Result<String> handleHttpRequestMethodNotSupportedException(NativeWebRequest req,
-			HttpRequestMethodNotSupportedException e) {
+		HttpRequestMethodNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_NOT_SUPPORTED_ERROR);
 	}
 
 	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
 	public Result<String> handleHttpMediaTypeNotSupportedException(NativeWebRequest req,
-			HttpMediaTypeNotSupportedException e) {
+		HttpMediaTypeNotSupportedException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MEDIA_TYPE_NOT_SUPPORTED_ERROR);
 	}
@@ -153,7 +153,8 @@ public class ExceptionConfiguration implements InitializingBean {
 	}
 
 	@ExceptionHandler({SQLIntegrityConstraintViolationException.class})
-	public Result<String> handleSqlException(NativeWebRequest req, SQLIntegrityConstraintViolationException e) {
+	public Result<String> handleSqlException(NativeWebRequest req,
+		SQLIntegrityConstraintViolationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -166,7 +167,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({DataIntegrityViolationException.class})
 	public Result<String> handleDataIntegrityViolationException(NativeWebRequest req,
-			DataIntegrityViolationException e) {
+		DataIntegrityViolationException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.ERROR);
 	}
@@ -186,7 +187,7 @@ public class ExceptionConfiguration implements InitializingBean {
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result<Map<String, String>> handleMethodArgumentNotValidException(NativeWebRequest req,
-			MethodArgumentNotValidException e) {
+		MethodArgumentNotValidException e) {
 		printLog(req, e);
 		BindingResult bindingResult = e.getBindingResult();
 		return Result.fail(getErrors(bindingResult));
@@ -194,21 +195,21 @@ public class ExceptionConfiguration implements InitializingBean {
 
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class})
 	public Result<String> requestTypeMismatch(NativeWebRequest req,
-			MethodArgumentTypeMismatchException e) {
+		MethodArgumentTypeMismatchException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
 	}
 
 	@ExceptionHandler({MissingServletRequestParameterException.class})
 	public Result<String> requestMissingServletRequest(NativeWebRequest req,
-			MissingServletRequestParameterException e) {
+		MissingServletRequestParameterException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
 	}
 
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	public Result<String> httpMessageNotReadableException(NativeWebRequest req,
-			HttpMessageNotReadableException e) {
+		HttpMessageNotReadableException e) {
 		printLog(req, e);
 		return Result.fail(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
 	}
@@ -224,7 +225,7 @@ public class ExceptionConfiguration implements InitializingBean {
 	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	public Result<Map<String, String>> handleException(NativeWebRequest req,
-			ConstraintViolationException e) {
+		ConstraintViolationException e) {
 		printLog(req, e);
 		return Result.fail(getErrors(e));
 	}
@@ -318,7 +319,7 @@ public class ExceptionConfiguration implements InitializingBean {
 	private void printLog(NativeWebRequest req, Exception e) {
 		LogUtil.error(e);
 		LogUtil.error("【全局异常拦截】{}: 请求路径: {}, 请求参数: {}, 异常信息 {} ", e,
-				e.getClass().getName(), uri(req), query(req), e.getMessage());
+			e.getClass().getName(), uri(req), query(req), e.getMessage());
 //		LogUtil.error(e.getMessage(), e);
 	}
 }

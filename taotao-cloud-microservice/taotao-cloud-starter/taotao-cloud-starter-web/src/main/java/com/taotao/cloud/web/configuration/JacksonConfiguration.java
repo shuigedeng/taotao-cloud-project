@@ -49,6 +49,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -60,6 +61,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-02 21:28:08
  */
 @Configuration
+@EnableConfigurationProperties({XssProperties.class})
 public class JacksonConfiguration implements InitializingBean {
 
 	@Override
@@ -70,8 +72,6 @@ public class JacksonConfiguration implements InitializingBean {
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(
 		XssProperties xssProperties) {
-		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class,
-			StarterName.WEB_STARTER);
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();

@@ -50,6 +50,7 @@ public class PrometheusConfiguration implements InitializingBean {
 
 	@Autowired(required = false)
 	private HealthCheckProvider healthCheckProvider;
+
 	private final Map<String, Gauge> gaugeMap = new ConcurrentHashMap<>();
 
 	@Override
@@ -79,14 +80,15 @@ public class PrometheusConfiguration implements InitializingBean {
 									gaugeMap.put(field, gauge);
 								}
 								Number number = (Number) value;
-								if(Objects.nonNull(number)){
+								if (Objects.nonNull(number)) {
 									gauge.labels(labelNames).set(number.doubleValue());
 								}
 							}
 							return null;
 						});
 					} catch (Exception e) {
-						LogUtil.warn(StarterName.HEALTH_STARTER, "HealthCheck Prometheus error ", e);
+						LogUtil.warn(StarterName.HEALTH_STARTER, "HealthCheck Prometheus error ",
+							e);
 					}
 
 					try {

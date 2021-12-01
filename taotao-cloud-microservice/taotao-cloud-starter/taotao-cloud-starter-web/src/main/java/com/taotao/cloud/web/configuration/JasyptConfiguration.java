@@ -23,17 +23,20 @@ import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * JasyptConfiguration 
+ * JasyptConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 22:13:23
  */
 @Configuration
+@EnableConfigurationProperties({EncryptProperties.class})
+@ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 public class JasyptConfiguration implements InitializingBean {
 
 	@Override
@@ -43,7 +46,6 @@ public class JasyptConfiguration implements InitializingBean {
 
 	@Bean
 	@ConditionalOnBean({StringEncryptor.class})
-	@ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 	public EncryptAspect encryptAspect(StringEncryptor stringEncryptor) {
 		LogUtil.started(EncryptAspect.class, StarterName.WEB_STARTER);
 
