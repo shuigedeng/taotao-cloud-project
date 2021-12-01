@@ -28,7 +28,7 @@ import com.baomidou.dynamic.datasource.provider.AbstractJdbcDataSourceProvider;
 import com.baomidou.dynamic.datasource.provider.DynamicDataSourceProvider;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.configuration.DynamicDataSourceAutoConfiguration.DataSourceProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
@@ -64,20 +64,20 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DynamicDataSourceAutoConfiguration.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(DynamicDataSourceAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	@Bean
 	public DynamicDataSourceProvider dynamicDataSourceProvider(
 		DataSourceProperties properties) {
-		LogUtil.started(JdbcDynamicDataSourceProvider.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(JdbcDynamicDataSourceProvider.class, StarterName.MYBATIS_PLUS_STARTER);
 
 		return new JdbcDynamicDataSourceProvider(properties);
 	}
 
 	@Bean
 	public DsProcessor dsProcessor() {
-		LogUtil.started(DsProcessor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(DsProcessor.class, StarterName.MYBATIS_PLUS_STARTER);
 
 		return new LastParamDsProcessor();
 	}

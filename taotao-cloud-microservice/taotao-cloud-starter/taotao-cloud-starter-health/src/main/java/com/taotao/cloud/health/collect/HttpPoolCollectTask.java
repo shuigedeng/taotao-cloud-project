@@ -19,10 +19,12 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.pool.PoolStats;
@@ -69,8 +71,11 @@ public class HttpPoolCollectTask extends AbstractCollectTask {
 		try {
 			HttpClientManager httpClientManager = ContextUtil.getBean(HttpClientManager.class,
 				true);
+			if(Objects.isNull(httpClientManager)){
+				return null;
+			}
 
-			ConcurrentHashMap<String, DefaultHttpClient> pool = httpClientManager.getPool();
+			ConcurrentHashMap<String, HttpClient> pool = httpClientManager.getPool();
 			if (pool == null || pool.isEmpty()) {
 				return null;
 			}

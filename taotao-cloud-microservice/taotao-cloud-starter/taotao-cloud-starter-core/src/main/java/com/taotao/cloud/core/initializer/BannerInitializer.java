@@ -43,7 +43,7 @@ import com.nepxion.banner.Description;
 import com.nepxion.banner.DescriptionBanner;
 import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,7 +70,7 @@ public class BannerInitializer implements
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		LogUtil.started(BannerInitializer.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(BannerInitializer.class, StarterName.CORE_STARTER);
 
 		if (!(applicationContext instanceof AnnotationConfigApplicationContext)) {
 			ConfigurableEnvironment environment = applicationContext.getEnvironment();

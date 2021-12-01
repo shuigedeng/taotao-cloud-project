@@ -15,15 +15,17 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.properties.OkHttpProperties;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.SSLContext;
@@ -39,6 +41,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,16 +54,20 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/06/17 17:21
  */
 @Configuration
+@EnableConfigurationProperties({OkHttpProperties.class})
+@ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, name = "enabled", havingValue = "true")
 public class OkhttpAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(OkhttpAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(OkhttpAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Bean
-	public OkHttpService okHttpService() {
-		return OkHttpService.builder();
+	public OkHttpService okHttpService(OkHttpProperties okHttpProperties) {
+		OkHttpService okHttpService = OkHttpService.builder();
+		okHttpService.setOkHttpProperties(okHttpProperties);
+		return okHttpService;
 	}
 
 	/**
@@ -96,6 +104,12 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 */
 		private Request.Builder request;
 
+		private OkHttpProperties okHttpProperties;
+
+		public void setOkHttpProperties(OkHttpProperties okHttpProperties) {
+			this.okHttpProperties = okHttpProperties;
+		}
+
 		/**
 		 * 初始化okHttpClient，并且允许https访问
 		 *
@@ -108,9 +122,9 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 					if (okHttpClient == null) {
 						TrustManager[] trustManagers = buildTrustManagers();
 						okHttpClient = new OkHttpClient.Builder()
-							.connectTimeout(15, TimeUnit.SECONDS)
-							.writeTimeout(20, TimeUnit.SECONDS)
-							.readTimeout(20, TimeUnit.SECONDS)
+							.connectTimeout(okHttpProperties.getConnectTimeout(), TimeUnit.SECONDS)
+							.writeTimeout(okHttpProperties.getWriteTimeout(), TimeUnit.SECONDS)
+							.readTimeout(okHttpProperties.getReadTimeout(), TimeUnit.SECONDS)
 							.sslSocketFactory(createSSLSocketFactory(trustManagers),
 								(X509TrustManager) trustManagers[0])
 							.hostnameVerifier((hostName, session) -> true)
@@ -203,7 +217,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * "参数值") .addParam("参数名", "参数值") // 也可以添加多个 .addHeader("Content-Type", "application/json;
 		 * charset=utf-8") .get() // 可选择是同步请求还是异步请求 //.async(); .sync();
 		 *
-		 * @return {@link com.taotao.cloud.common.utils.OkHttpService }
 		 * @author shuigedeng
 		 * @since 2021-09-02 16:28:38
 		 */
@@ -244,7 +257,6 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * </p>
 		 *
 		 * @param isJsonPost true等于json的方式提交数据，类似postman里post方法的raw false等于普通的表单提交
-		 * @return {@link com.taotao.cloud.common.utils.OkHttpService }
 		 * @author shuigedeng
 		 * @since 2021-09-02 16:29:02
 		 */
@@ -280,8 +292,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 			setHeader(request);
 			try {
 				Response response = okHttpClient.newCall(request.build()).execute();
-				assert response.body() != null;
-				return response.body().string();
+				return Objects.requireNonNull(response.body()).string();
 			} catch (IOException e) {
 				LogUtil.error(e);
 				return "请求失败：" + e.getMessage();
@@ -330,6 +341,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 */
 		public void async(ICallBack callBack) {
 			setHeader(request);
+
 			okHttpClient.newCall(request.build()).enqueue(new Callback() {
 				@Override
 				public void onFailure(Call call, IOException e) {
@@ -419,8 +431,24 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 */
 		public interface ICallBack {
 
+			/**
+			 * onSuccessful
+			 *
+			 * @param call call
+			 * @param data data
+			 * @author shuigedeng
+			 * @since 2021-12-01 15:21:47
+			 */
 			void onSuccessful(Call call, String data);
 
+			/**
+			 * onFailure
+			 *
+			 * @param call     call
+			 * @param errorMsg errorMsg
+			 * @author shuigedeng
+			 * @since 2021-12-01 15:21:52
+			 */
 			void onFailure(Call call, String errorMsg);
 
 		}

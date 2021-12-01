@@ -17,7 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import static io.undertow.UndertowOptions.ENABLE_HTTP2;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import io.undertow.Undertow;
 import io.undertow.connector.ByteBufferPool;
@@ -52,7 +52,7 @@ public class UndertowHttp2Configuration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(UndertowHttp2Configuration.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(UndertowHttp2Configuration.class, StarterName.WEB_STARTER);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class UndertowHttp2Configuration implements InitializingBean {
 	 */
 	@Bean
 	public UndertowServerFactoryCustomizer undertowServerFactoryCustomizer() {
-		LogUtil.started(UndertowServerFactoryCustomizer.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(UndertowServerFactoryCustomizer.class, StarterName.WEB_STARTER);
 
 		return new UndertowServerFactoryCustomizer();
 	}

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.core.launch;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SystemUtil;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
@@ -46,22 +47,9 @@ public class StartedEventListener {
 		String appName = environment.getRequiredProperty("spring.application.name");
 		int localPort = event.getWebServer().getPort();
 		String profile = StringUtils.arrayToCommaDelimitedString(environment.getActiveProfiles());
-		System.err.printf("---[%s]---启动完成，当前使用的端口:[%d]，环境变量:[%s]---%n", appName, localPort,
+
+		LogUtil.info("---[{}]---启动完成，当前使用的端口:[{}]，环境变量:[{}]---", appName, localPort,
 			profile);
-
-		// 如果有 swagger，打印开发阶段的 swagger ui 地址
-		if (ClassUtils.isPresent("springfox.documentation.spring.web.plugins.Docket", null)) {
-			System.out.printf("http://localhost:%s/doc.html%n", localPort);
-		} else {
-			System.out.printf("http://localhost:%s%n", localPort);
-		}
-
-		// linux 上将全部的 System.err 和 System.out 替换为log
-		if (SystemUtil.isLinux()) {
-			System.setOut(LogPrintStream.log(false));
-			// 去除 error 的转换，因为 error 会打印成很 N 条
-			// System.setErr(LogPrintStream.log(true));
-		}
 	}
 
 }

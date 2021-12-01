@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.common.model;
 
-import com.taotao.cloud.common.enums.EventEnum;
 import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.enums.EventEnum;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,9 +31,9 @@ import org.springframework.boot.CommandLineRunner;
  */
 public class PropertyCache implements CommandLineRunner {
 
-	private final Pubsub pubsub;
+	private final Pubsub<HashMap<String, Object>> pubsub;
 
-	public PropertyCache(Pubsub pubsub) {
+	public PropertyCache(Pubsub<HashMap<String, Object>> pubsub) {
 		this.pubsub = pubsub;
 	}
 
@@ -41,6 +41,7 @@ public class PropertyCache implements CommandLineRunner {
 	 * cache
 	 */
 	private final ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<>();
+
 	/**
 	 * isStart
 	 */
@@ -128,7 +129,7 @@ public class PropertyCache implements CommandLineRunner {
 	 * @since 2021-09-02 20:38:14
 	 */
 	public void listenUpdateCache(String name, Callable.Action1<HashMap<String, Object>> action) {
-		pubsub.sub(EventEnum.PropertyCacheUpdateEvent, new Pubsub.Sub(name, action));
+		pubsub.sub(EventEnum.PropertyCacheUpdateEvent, new Pubsub.Sub<>(name, action));
 	}
 
 	/**

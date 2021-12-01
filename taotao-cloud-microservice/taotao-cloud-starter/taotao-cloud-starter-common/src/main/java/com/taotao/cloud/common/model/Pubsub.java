@@ -16,9 +16,8 @@
 package com.taotao.cloud.common.model;
 
 import com.taotao.cloud.common.enums.EventEnum;
-import com.taotao.cloud.common.model.Callable;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.model.Callable.Action1;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,12 +29,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 2021.9
  * @since 2021-09-02 20:38:42
  */
-public class Pubsub {
+public class Pubsub<T> {
 
 	/**
 	 * subscribeList
 	 */
-	private final Map<String, ConcurrentHashMap<String, Sub>> subscribeList = new ConcurrentHashMap<>();
+	private final Map<String, ConcurrentHashMap<String, Sub<T>>> subscribeList = new ConcurrentHashMap<>();
 
 	/**
 	 * lock
@@ -47,14 +46,13 @@ public class Pubsub {
 	 *
 	 * @param event event
 	 * @param data  data
-	 * @param <T>   T
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:39:11
 	 */
-	public <T> void pub(String event, T data) {
-		ConcurrentHashMap<String, Sub> subs = subscribeList.get(event);
+	public void pub(String event, T data) {
+		ConcurrentHashMap<String, Sub<T>> subs = subscribeList.get(event);
 		if (subs != null) {
-			for (Map.Entry<String, Sub> sub : subs.entrySet()) {
+			for (Map.Entry<String, Sub<T>> sub : subs.entrySet()) {
 				try {
 					sub.getValue().action.invoke(data);
 				} catch (Exception e) {
@@ -69,15 +67,14 @@ public class Pubsub {
 	 *
 	 * @param event  event
 	 * @param action action
-	 * @param <T>    T
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:39:20
 	 */
-	private <T> void sub(String event, Sub<T> action) {
+	private void sub(String event, Sub<T> action) {
 		if (!subscribeList.containsKey(event)) {
 			synchronized (lock) {
 				if (!subscribeList.containsKey(event)) {
-					subscribeList.putIfAbsent(event, new ConcurrentHashMap());
+					subscribeList.putIfAbsent(event, new ConcurrentHashMap<>(1));
 				}
 			}
 		}
@@ -89,11 +86,10 @@ public class Pubsub {
 	 *
 	 * @param event  event
 	 * @param action action
-	 * @param <T>    T
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:39:29
 	 */
-	public <T> void sub(EventEnum event, Sub<T> action) {
+	public void sub(EventEnum event, Sub<T> action) {
 		sub(event.toString(), action);
 	}
 
@@ -107,7 +103,7 @@ public class Pubsub {
 	 * @since 2021-09-02 20:39:38
 	 */
 	public boolean removeSub(String event, String subName) {
-		ConcurrentHashMap<String, Sub> subs = subscribeList.get(event);
+		ConcurrentHashMap<String, Sub<T>> subs = subscribeList.get(event);
 		if (subs != null) {
 			subs.remove(subName);
 			if (subs.size() == 0) {
@@ -160,7 +156,7 @@ public class Pubsub {
 		}
 	}
 
-	public Map<String, ConcurrentHashMap<String, Sub>> getSubscribeList() {
+	public Map<String, ConcurrentHashMap<String, Sub<T>>> getSubscribeList() {
 		return subscribeList;
 	}
 

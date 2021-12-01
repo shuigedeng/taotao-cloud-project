@@ -1,11 +1,10 @@
 package com.taotao.cloud.encrypt.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.filter.EncryptFilter;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.properties.EncryptFilterProperties;
-import com.taotao.cloud.encrypt.properties.EncryptProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -23,7 +22,7 @@ public class EncryptFilterAutoConfiguration  implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EncryptFilterAutoConfiguration.class, StarterNameConstant.ENCRYPT_STARTER);
+		LogUtil.started(EncryptFilterAutoConfiguration.class, StarterName.ENCRYPT_STARTER);
 	}
 
 	private final EncryptHandler encryptHandler;

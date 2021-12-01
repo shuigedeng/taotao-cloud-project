@@ -22,7 +22,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.model.Result;
@@ -178,7 +178,7 @@ public class RequestLoggerAspect {
 			long endTime = Instant.now().toEpochMilli();
 			requestLogger.setRequestConsumingTime(endTime - requestLogger.getRequestStartTime());
 			requestLogger.setResult(
-				getText(String.valueOf(ret == null ? StrPoolConstant.EMPTY : ret)));
+				getText(String.valueOf(ret == null ? StrPool.EMPTY : ret)));
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
 			SYS_LOG_THREAD_LOCAL.remove();
@@ -215,7 +215,7 @@ public class RequestLoggerAspect {
 	}
 
 	private String getArgs(Object[] args, HttpServletRequest request) {
-		String strArgs = StrPoolConstant.EMPTY;
+		String strArgs = StrPool.EMPTY;
 		Object[] params = Arrays.stream(args)
 			.filter(item -> !(item instanceof ServletRequest || item instanceof ServletResponse))
 			.toArray();
@@ -358,7 +358,7 @@ public class RequestLoggerAspect {
 		String controllerMethodDescription = getDescribe(sysLog);
 
 		if (StrUtil.isNotEmpty(controllerMethodDescription) && StrUtil.contains(
-			controllerMethodDescription, StrPoolConstant.HASH)) {
+			controllerMethodDescription, StrPool.HASH)) {
 			//获取方法参数值
 			Object[] args = joinPoint.getArgs();
 
@@ -407,14 +407,14 @@ public class RequestLoggerAspect {
 	public static String getDescribe(JoinPoint point) {
 		RequestLogger annotation = getTargetAnnotation(point);
 		if (annotation == null) {
-			return StrPoolConstant.EMPTY;
+			return StrPool.EMPTY;
 		}
 		return annotation.value();
 	}
 
 	public static String getDescribe(RequestLogger annotation) {
 		if (annotation == null) {
-			return StrPoolConstant.EMPTY;
+			return StrPool.EMPTY;
 		}
 		return annotation.value();
 	}

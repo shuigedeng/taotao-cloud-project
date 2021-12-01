@@ -66,7 +66,7 @@
 <!--	<logger name="org.apache.kafka" level="OFF"/>-->
 <!--	<logger name="org.apache.kafka" level="OFF"/>-->
 
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="CONSOLE_ASYNC"/>
 		<appender-ref ref="FILE_ALL_ASYNC"/>
 		<appender-ref ref="FILE_WARN_ASYNC"/>

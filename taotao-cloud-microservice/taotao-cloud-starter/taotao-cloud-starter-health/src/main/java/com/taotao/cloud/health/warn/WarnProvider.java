@@ -15,10 +15,10 @@
  */
 package com.taotao.cloud.health.warn;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
@@ -55,9 +55,9 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	private final DuplicateFilter duplicateFilter;
 	private final AtomicBoolean atomicChannel = new AtomicBoolean(false);
 	private final WarnProperties warnProperties;
-	private final MonitorThreadPool monitorThreadPool;
+	private final Monitor monitorThreadPool;
 
-	public WarnProvider(WarnProperties warnProperties, MonitorThreadPool monitorThreadPool) {
+	public WarnProvider(WarnProperties warnProperties, Monitor monitorThreadPool) {
 		this.warnProperties = warnProperties;
 		this.monitorThreadPool = monitorThreadPool;
 		this.duplicateFilter = new DuplicateFilter(warnProperties);
@@ -70,7 +70,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 				try {
 					notifyRunning();
 				} catch (Exception exp) {
-					LogUtil.warn(StarterNameConstant.HEALTH_STARTER, "WarnProvider 消息循环异常");
+					LogUtil.warn(StarterName.HEALTH_STARTER, "WarnProvider 消息循环异常");
 				}
 
 				try {
@@ -268,7 +268,7 @@ public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	@Override
 	public void run(ApplicationArguments args) {
 		atomicChannel.getAndSet(true);
-		LogUtil.info(StarterNameConstant.HEALTH_STARTER, "开启消息通道");
+		LogUtil.info(StarterName.HEALTH_STARTER, "开启消息通道");
 	}
 
 	/**

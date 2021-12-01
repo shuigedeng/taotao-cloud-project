@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
@@ -75,7 +75,7 @@ public class DingtalkConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DingtalkConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+		LogUtil.started(DingtalkConfiguration.class, StarterName.DINGTALK_STARTER);
 
 		checkConfigFileExists();
 	}

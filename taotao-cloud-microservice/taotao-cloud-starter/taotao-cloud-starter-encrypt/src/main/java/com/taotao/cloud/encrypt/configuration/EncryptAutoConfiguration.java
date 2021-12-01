@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.encrypt.annotation.SignEncrypt;
 import com.taotao.cloud.encrypt.enums.EncryptType;
@@ -24,7 +24,6 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -48,7 +47,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(EncryptAutoConfiguration.class, StarterNameConstant.ENCRYPT_STARTER);
+		LogUtil.started(EncryptAutoConfiguration.class, StarterName.ENCRYPT_STARTER);
 	}
 
 	private ApplicationContext applicationContext;

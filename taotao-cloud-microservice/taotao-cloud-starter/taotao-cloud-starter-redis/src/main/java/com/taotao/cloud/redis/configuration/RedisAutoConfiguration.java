@@ -15,43 +15,22 @@
  */
 package com.taotao.cloud.redis.configuration;
 
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.github.benmanes.caffeine.cache.CacheLoader;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.benmanes.caffeine.cache.CaffeineSpec;
-import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.redis.lock.RedissonDistributedLock;
-import com.taotao.cloud.redis.properties.RedisLockProperties;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterAspect;
 import com.taotao.cloud.redis.ratelimiter.RedisRateLimiterClient;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.lang.reflect.Field;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import org.redisson.api.RedissonClient;
 import org.redisson.spring.data.connection.RedissonConnectionFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.convert.DurationStyle;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -71,8 +50,6 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scripting.support.ResourceScriptSource;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.util.StringUtils;
 
 /**
  * TaoTaoCloudRedisAutoConfiguration
@@ -88,7 +65,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RedisAutoConfiguration.class, StarterNameConstant.REDIS_STARTER);
+		LogUtil.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	@Bean
@@ -136,7 +113,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Bean("stringRedisTemplate")
 	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
-		LogUtil.started(StringRedisTemplate.class, StarterNameConstant.REDIS_STARTER);
+		LogUtil.started(StringRedisTemplate.class, StarterName.REDIS_STARTER);
 
 		StringRedisTemplate template = new StringRedisTemplate();
 		template.setConnectionFactory(factory);

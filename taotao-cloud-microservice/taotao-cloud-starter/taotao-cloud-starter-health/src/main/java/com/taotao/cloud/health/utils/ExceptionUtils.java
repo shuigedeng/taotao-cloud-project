@@ -19,7 +19,7 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.core.enums.ExceptionTypeEnum;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClient;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.core.properties.CoreProperties;
 import com.taotao.cloud.common.utils.PropertyUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
@@ -55,7 +55,7 @@ public class ExceptionUtils {
 	public static void reportException(Message message, String applicationName) {
 		if (message.getWarnType() == WarnTypeEnum.ERROR) {
 			AtomicReference<String> title = new AtomicReference<>(message.getTitle());
-			MonitorThreadPool monitorThreadPool = ContextUtil.getBean(MonitorThreadPool.class,
+			Monitor monitorThreadPool = ContextUtil.getBean(Monitor.class,
 				false);
 
 			if (Objects.nonNull(monitorThreadPool)) {

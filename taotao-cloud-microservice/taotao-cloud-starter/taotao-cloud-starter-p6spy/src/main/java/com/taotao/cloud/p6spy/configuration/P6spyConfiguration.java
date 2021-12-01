@@ -15,15 +15,13 @@
  */
 package com.taotao.cloud.p6spy.configuration;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.p6spy.engine.spy.P6ModuleManager;
 import com.p6spy.engine.spy.P6SpyDriver;
 import com.p6spy.engine.spy.P6SpyOptions;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.p6spy.properties.P6spyProperties;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,7 +33,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 
 /**
  * P6spyAutoConfiguration
@@ -52,7 +49,7 @@ public class P6spyConfiguration implements ApplicationRunner , InitializingBean 
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(P6spyConfiguration.class, StarterNameConstant.P6SPY_STARTER);
+		LogUtil.started(P6spyConfiguration.class, StarterName.P6SPY_STARTER);
 	}
 
 	@Autowired

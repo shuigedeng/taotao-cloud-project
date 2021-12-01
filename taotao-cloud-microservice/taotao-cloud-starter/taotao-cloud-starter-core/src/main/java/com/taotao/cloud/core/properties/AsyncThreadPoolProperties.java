@@ -29,9 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = AsyncThreadPoolProperties.PREFIX)
 public class AsyncThreadPoolProperties {
 
-	public static final String PREFIX = "taotao.cloud.core.threadpool.async";
-
-	private boolean enabled = true;
+	public static final String PREFIX = "taotao.cloud.core.async.threadpool";
 
 	/**
 	 * 异步核心线程数，默认：10
@@ -58,17 +56,9 @@ public class AsyncThreadPoolProperties {
 	 */
 	private String threadNamePrefix = "taotao-cloud-async-executor";
 
-	public AsyncThreadPoolProperties() {
-	}
+	private boolean checkHealth = true;
 
-	public AsyncThreadPoolProperties(boolean enabled, int corePoolSize, int maxPoolSiz,
-		int queueCapacity, int keepAliveSeconds, String threadNamePrefix) {
-		this.enabled = enabled;
-		this.corePoolSize = corePoolSize;
-		this.maxPoolSiz = maxPoolSiz;
-		this.queueCapacity = queueCapacity;
-		this.keepAliveSeconds = keepAliveSeconds;
-		this.threadNamePrefix = threadNamePrefix;
+	public AsyncThreadPoolProperties() {
 	}
 
 	public int getCorePoolSize() {
@@ -103,19 +93,20 @@ public class AsyncThreadPoolProperties {
 		this.threadNamePrefix = threadNamePrefix;
 	}
 
-	public boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	public int getKeepAliveSeconds() {
 		return keepAliveSeconds;
 	}
 
 	public void setKeepAliveSeconds(int keepAliveSeconds) {
 		this.keepAliveSeconds = keepAliveSeconds;
+	}
+
+
+	public boolean isCheckHealth() {
+		return checkHealth;
+	}
+
+	public void setCheckHealth(boolean checkHealth) {
+		this.checkHealth = checkHealth;
 	}
 }

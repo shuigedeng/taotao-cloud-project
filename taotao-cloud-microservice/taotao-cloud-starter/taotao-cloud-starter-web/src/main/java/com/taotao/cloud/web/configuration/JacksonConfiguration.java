@@ -32,14 +32,11 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.json.JacksonModule;
 import com.taotao.cloud.common.json.LocalDateTimeDeserializer;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.web.limit.LimitAspect;
-import com.taotao.cloud.web.properties.LimitProperties;
 import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.xss.XssStringJsonDeserializer;
 import java.text.SimpleDateFormat;
@@ -51,8 +48,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,14 +64,14 @@ public class JacksonConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(JacksonConfiguration.class, StarterNameConstant.WEB_STARTER);
+		LogUtil.started(JacksonConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(
 		XssProperties xssProperties) {
 		LogUtil.started(Jackson2ObjectMapperBuilderCustomizer.class,
-			StarterNameConstant.WEB_STARTER);
+			StarterName.WEB_STARTER);
 
 		return customizer -> {
 			ObjectMapper mapper = customizer.createXmlMapper(true).build();

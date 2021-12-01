@@ -26,7 +26,7 @@ import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
@@ -55,7 +55,7 @@ public class CoreApplicationContextInitializer implements
 
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
-		LogUtil.started(CoreApplicationContextInitializer.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(CoreApplicationContextInitializer.class, StarterName.CORE_STARTER);
 
 		if (context instanceof AnnotationConfigApplicationContext) {
 			//AnnotationConfigApplicationContext annotationConfigApplicationContext = (AnnotationConfigApplicationContext) context;

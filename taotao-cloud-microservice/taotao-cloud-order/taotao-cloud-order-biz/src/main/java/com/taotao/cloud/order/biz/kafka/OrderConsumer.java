@@ -40,11 +40,11 @@ public class OrderConsumer {
 			.build();
 	}
 
-	@StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
-	public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
-		System.out.println(in);
-		consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
-	}
+	//@StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
+	//public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
+	//	System.out.println(in);
+	//	consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
+	//}
 
 	@Bean
 	public ApplicationListener<ListenerContainerIdleEvent> idleListener() {
@@ -68,6 +68,7 @@ public class OrderConsumer {
 	public DlqPartitionFunction partitionFunction() {
 		return (group, record, ex) -> 0;
 	}
+
 	@Bean
 	public DlqDestinationResolver dlqDestinationResolver() {
 		return (rec, ex) -> {

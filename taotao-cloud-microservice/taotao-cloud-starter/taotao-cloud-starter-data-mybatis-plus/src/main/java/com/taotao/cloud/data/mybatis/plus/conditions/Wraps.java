@@ -1,8 +1,8 @@
 package com.taotao.cloud.data.mybatis.plus.conditions;
 
 
-import static com.taotao.cloud.common.constant.StrPoolConstant.PERCENT;
-import static com.taotao.cloud.common.constant.StrPoolConstant.UNDERSCORE;
+import static com.taotao.cloud.common.constant.StrPool.PERCENT;
+import static com.taotao.cloud.common.constant.StrPool.UNDERSCORE;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;

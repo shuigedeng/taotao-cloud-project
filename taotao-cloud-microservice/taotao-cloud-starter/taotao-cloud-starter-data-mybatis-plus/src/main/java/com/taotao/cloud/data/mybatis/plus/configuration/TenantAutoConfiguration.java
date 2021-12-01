@@ -3,7 +3,7 @@ package com.taotao.cloud.data.mybatis.plus.configuration;
 import com.baomidou.mybatisplus.core.parser.ISqlParserFilter;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
@@ -31,7 +31,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(TenantAutoConfiguration.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(TenantAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	private final TenantProperties tenantProperties;
@@ -45,7 +45,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlParserFilter sqlParserFilter() {
-		LogUtil.started(ISqlParserFilter.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(ISqlParserFilter.class, StarterName.MYBATIS_PLUS_STARTER);
 		return metaObject -> {
 			MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
 			return tenantProperties.getIgnoreSqlList()
@@ -61,7 +61,7 @@ public class TenantAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
-		LogUtil.started(TenantLineInnerInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(TenantLineInnerInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new TenantLineInnerInterceptor(new TenantLineHandler() {
 			/**
 			 * 获取租户ID

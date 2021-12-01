@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.filter;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
@@ -90,7 +90,7 @@ public class HealthReportFilter implements Filter {
 				response.getWriter().flush();
 				response.getWriter().close();
 			} catch (Exception e) {
-				LogUtil.error(e, StarterNameConstant.HEALTH_STARTER, "/health/report打开出错");
+				LogUtil.error(e, StarterName.HEALTH_STARTER, "/health/report打开出错");
 				response.getWriter().close();
 			}
 		}

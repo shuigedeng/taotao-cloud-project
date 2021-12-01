@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.laytpl.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.laytpl.model.FmtFunc;
 import com.taotao.cloud.laytpl.model.LayTplTemplate;
@@ -41,7 +41,7 @@ public class LayTplAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LayTplAutoConfiguration.class, StarterNameConstant.LAYTPL_STARTER);
+		LogUtil.started(LayTplAutoConfiguration.class, StarterName.LAYTPL_STARTER);
 	}
 
 	@Bean("fmt")

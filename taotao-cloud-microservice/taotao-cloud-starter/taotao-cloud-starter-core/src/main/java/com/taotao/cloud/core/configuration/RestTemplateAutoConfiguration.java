@@ -15,13 +15,14 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.core.properties.HttpClientProperties;
 import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -37,14 +38,15 @@ import org.springframework.web.client.RestTemplate;
  * @since 2021/8/24 23:48
  */
 @Configuration
-@EnableConfigurationProperties({
-	HttpClientProperties.class,
-})
+@EnableConfigurationProperties({HttpClientProperties.class})
+@ConditionalOnProperty(prefix = HttpClientProperties.PREFIX, name = "enabled", havingValue = "true")
 public class RestTemplateAutoConfiguration implements InitializingBean {
+
+	private static final String DEFAULT_HTTP_CLIENT_ID = "taotao.cloud.core.httpclient";
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(RestTemplateAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(RestTemplateAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	/**
@@ -67,19 +69,13 @@ public class RestTemplateAutoConfiguration implements InitializingBean {
 		return new HttpClientManager();
 	}
 
-	@Bean(destroyMethod = "close")
-	public DefaultHttpClient getDefaultHttpClient(
-		HttpClientProperties httpClientProperties,
+	@Bean
+	public HttpClient httpClient(HttpClientProperties httpClientProperties,
 		HttpClientManager httpClientManager) {
-		LogUtil.started(DefaultHttpClient.class, StarterNameConstant.CLOUD_STARTER);
 		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(httpClientProperties,
 			httpClientManager);
-		return httpClientManager.register("taotao.cloud.core.httpclient", defaultHttpClient);
-	}
 
-	@Bean
-	public HttpClient httpClient(DefaultHttpClient defaultHttpClient) {
-		return defaultHttpClient.getClient();
+		return httpClientManager.register(DEFAULT_HTTP_CLIENT_ID, defaultHttpClient).getClient();
 	}
 
 	@Bean

@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.logger.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
@@ -49,7 +49,7 @@ public class LoggerConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(LoggerConfiguration.class, StarterNameConstant.LOG_STARTER);
+		LogUtil.started(LoggerConfiguration.class, StarterName.LOG_STARTER);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class LoggerConfiguration implements InitializingBean {
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
-			LogUtil.started(RequestLoggerConfiguration.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(RequestLoggerConfiguration.class, StarterName.LOG_STARTER);
 		}
 
 		@Autowired
@@ -73,19 +73,19 @@ public class LoggerConfiguration implements InitializingBean {
 
 		@Bean
 		public RequestLoggerListener requestLogListener() {
-			LogUtil.started(RequestLoggerListener.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(RequestLoggerListener.class, StarterName.LOG_STARTER);
 			return new RequestLoggerListener();
 		}
 
 		@Bean
 		public RequestLoggerAspect requestLogAspect() {
-			LogUtil.started(RequestLoggerAspect.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(RequestLoggerAspect.class, StarterName.LOG_STARTER);
 			return new RequestLoggerAspect();
 		}
 
 		@Bean
 		public LoggerRequestLoggerServiceImpl loggerRequestLogService() {
-			LogUtil.started(LoggerRequestLoggerServiceImpl.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(LoggerRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.LOGGER)) {
 				return new LoggerRequestLoggerServiceImpl();
 			}
@@ -95,7 +95,7 @@ public class LoggerConfiguration implements InitializingBean {
 		@Bean
 		public RedisRequestLoggerServiceImpl redisRequestLogService(
 			RedisRepository redisRepository) {
-			LogUtil.started(RedisRequestLoggerServiceImpl.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(RedisRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.REDIS)) {
 				return new RedisRequestLoggerServiceImpl(redisRepository);
 			}
@@ -105,7 +105,7 @@ public class LoggerConfiguration implements InitializingBean {
 		@Bean
 		public KafkaRequestLoggerServiceImpl kafkaRequestLogService(
 			KafkaTemplate<String, String> kafkaTemplate) {
-			LogUtil.started(KafkaRequestLoggerServiceImpl.class, StarterNameConstant.LOG_STARTER);
+			LogUtil.started(KafkaRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.KAFKA)) {
 				return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
 			}

@@ -19,7 +19,7 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.encoder.Encoder;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.elk.filter.LogStatisticsFilter;
@@ -57,7 +57,7 @@ public class ElkAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ElkAutoConfiguration.class, StarterNameConstant.ELK_STARTER);
+		LogUtil.started(ElkAutoConfiguration.class, StarterName.ELK_STARTER);
 	}
 
 	@Resource

@@ -15,15 +15,13 @@
  */
 package com.taotao.cloud.dingtalk.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +40,7 @@ public class ThreadPoolConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ThreadPoolConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+		LogUtil.started(ThreadPoolConfiguration.class, StarterName.DINGTALK_STARTER);
 	}
 
 	@Bean(name = DingerConstant.DINGER_EXECUTOR)

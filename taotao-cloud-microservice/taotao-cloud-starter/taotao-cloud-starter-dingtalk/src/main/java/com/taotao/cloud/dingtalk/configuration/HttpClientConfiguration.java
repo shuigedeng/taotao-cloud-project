@@ -15,12 +15,9 @@
  */
 package com.taotao.cloud.dingtalk.configuration;
 
-import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIES_PREFIX;
-
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.DingerHttpTemplate;
@@ -30,7 +27,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -49,7 +45,7 @@ public class HttpClientConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HttpClientConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+		LogUtil.started(HttpClientConfiguration.class, StarterName.DINGTALK_STARTER);
 	}
 
 	@Bean(name = "dingerClientHttpRequestFactory")
@@ -70,7 +66,7 @@ public class HttpClientConfiguration implements InitializingBean {
 	@Bean
 	public DingerHttpClient dingerHttpClient(@Autowired
 	@Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate) {
-		LogUtil.started(DingerHttpClient.class, StarterNameConstant.DINGTALK_STARTER);
+		LogUtil.started(DingerHttpClient.class, StarterName.DINGTALK_STARTER);
 		return new DingerHttpTemplate(restTemplate);
 	}
 }

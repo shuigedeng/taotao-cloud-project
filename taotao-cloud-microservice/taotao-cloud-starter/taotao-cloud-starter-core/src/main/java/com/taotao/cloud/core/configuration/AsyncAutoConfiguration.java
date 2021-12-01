@@ -15,25 +15,22 @@
  */
 package com.taotao.cloud.core.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.alibaba.ttl.TtlCallable;
+import com.alibaba.ttl.TtlRunnable;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.model.AsyncThreadPoolTaskExecutor;
+import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
-import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.core.properties.HttpClientProperties;
-import com.taotao.cloud.core.properties.IpRegexProperties;
-import com.taotao.cloud.core.properties.MonitorThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +38,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * 异步任务配置
@@ -50,10 +48,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @since 2021-09-02 20:01:42
  */
 @Configuration
-@EnableConfigurationProperties({
-	AsyncThreadPoolProperties.class,
-})
 @EnableAsync(proxyTargetClass = true)
+@EnableConfigurationProperties({AsyncProperties.class, AsyncThreadPoolProperties.class})
+@ConditionalOnProperty(prefix = AsyncProperties.PREFIX, name = "enabled", havingValue = "true")
 public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean {
 
 	@Autowired
@@ -61,7 +58,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(AsyncAutoConfiguration.class, StarterNameConstant.CLOUD_STARTER);
+		LogUtil.started(AsyncAutoConfiguration.class, StarterName.CORE_STARTER);
 	}
 
 	@Override
@@ -76,15 +73,41 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 
 	@Override
 	public AsyncThreadPoolTaskExecutor getAsyncExecutor() {
-		AsyncThreadPoolTaskExecutor taskExecutor = ContextUtil.getBean(AsyncThreadPoolTaskExecutor.class, true);
-		if(Objects.nonNull(taskExecutor)){
-			return taskExecutor;
-		}
+		//AsyncThreadPoolTaskExecutor taskExecutor = ContextUtil.getBean(
+		//	AsyncThreadPoolTaskExecutor.class, true);
+		//if (Objects.nonNull(taskExecutor)) {
+		//	return taskExecutor;
+		//}
+		//
+		//return null;
 
-		return null;
+		return asyncThreadPoolTaskExecutor(asyncThreadPoolProperties);
 	}
 
-	public static class CoreThreadPoolFactory implements ThreadFactory {
+	@Bean
+	public AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor(
+		AsyncThreadPoolProperties asyncThreadPoolProperties) {
+
+		AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
+		executor.setCorePoolSize(asyncThreadPoolProperties.getCorePoolSize());
+		executor.setMaxPoolSize(asyncThreadPoolProperties.getMaxPoolSiz());
+		executor.setQueueCapacity(asyncThreadPoolProperties.getQueueCapacity());
+		executor.setKeepAliveSeconds(asyncThreadPoolProperties.getKeepAliveSeconds());
+		executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
+
+		executor.setThreadFactory(new AsyncThreadPoolFactory(asyncThreadPoolProperties, executor));
+
+		/*
+		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
+		 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+		 */
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		executor.initialize();
+
+		return executor;
+	}
+
+	public static class AsyncThreadPoolFactory implements ThreadFactory {
 
 		private static final AtomicInteger poolNumber = new AtomicInteger(1);
 		private final AtomicInteger threadNumber = new AtomicInteger(1);
@@ -92,7 +115,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
 		private final ThreadPoolTaskExecutor executor;
 
-		public CoreThreadPoolFactory(AsyncThreadPoolProperties asyncThreadPoolProperties,
+		public AsyncThreadPoolFactory(AsyncThreadPoolProperties asyncThreadPoolProperties,
 			ThreadPoolTaskExecutor executor) {
 			this.asyncThreadPoolProperties = asyncThreadPoolProperties;
 			this.executor = executor;
@@ -107,9 +130,10 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 				0);
 
 			UncaughtExceptionHandler handler = t.getUncaughtExceptionHandler();
-			if (!(handler instanceof CoreThreadPoolUncaughtExceptionHandler)) {
+			if (!(handler instanceof AsyncThreadPoolUncaughtExceptionHandler)) {
 				t.setUncaughtExceptionHandler(
-					new CoreThreadPoolUncaughtExceptionHandler(handler, asyncThreadPoolProperties));
+					new AsyncThreadPoolUncaughtExceptionHandler(handler,
+						asyncThreadPoolProperties));
 			}
 
 			t.setPriority(executor.getThreadPriority());
@@ -119,13 +143,13 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		}
 	}
 
-	public static class CoreThreadPoolUncaughtExceptionHandler implements
+	public static class AsyncThreadPoolUncaughtExceptionHandler implements
 		Thread.UncaughtExceptionHandler {
 
 		private final Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler;
 		private final AsyncThreadPoolProperties asyncThreadPoolProperties;
 
-		public CoreThreadPoolUncaughtExceptionHandler(
+		public AsyncThreadPoolUncaughtExceptionHandler(
 			Thread.UncaughtExceptionHandler lastUncaughtExceptionHandler,
 			AsyncThreadPoolProperties asyncThreadPoolProperties) {
 			this.lastUncaughtExceptionHandler = lastUncaughtExceptionHandler;
@@ -141,6 +165,75 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 			if (lastUncaughtExceptionHandler != null) {
 				lastUncaughtExceptionHandler.uncaughtException(t, e);
 			}
+		}
+	}
+
+	public static class AsyncThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
+
+		@Override
+		public void execute(@NotNull Runnable runnable) {
+			Runnable ttlRunnable = TtlRunnable.get(runnable);
+			showThreadPoolInfo("execute(Runnable task)");
+			super.execute(ttlRunnable);
+		}
+
+		@Override
+		public void execute(@NotNull Runnable task, long startTimeout) {
+			showThreadPoolInfo("execute(Runnable task, long startTimeout)");
+			super.execute(task, startTimeout);
+		}
+
+		@Override
+		public <T> Future<T> submit(@NotNull Callable<T> task) {
+			Callable<T> ttlCallable = TtlCallable.get(task);
+			showThreadPoolInfo("submit(Callable<T> task)");
+			return super.submit(ttlCallable);
+		}
+
+		@Override
+		public Future<?> submit(@NotNull Runnable task) {
+			Runnable ttlRunnable = TtlRunnable.get(task);
+			showThreadPoolInfo("submit(Runnable task)");
+			return super.submit(ttlRunnable);
+		}
+
+		@Override
+		public ListenableFuture<?> submitListenable(@NotNull Runnable task) {
+			Runnable ttlRunnable = TtlRunnable.get(task);
+			showThreadPoolInfo("submitListenable(Runnable task)");
+			return super.submitListenable(ttlRunnable);
+		}
+
+		@Override
+		public <T> ListenableFuture<T> submitListenable(@NotNull Callable<T> task) {
+			Callable<T> ttlCallable = TtlCallable.get(task);
+			showThreadPoolInfo("submitListenable(Callable<T> task)");
+			return super.submitListenable(ttlCallable);
+		}
+
+		/**
+		 * 每次执行任务时输出当前线程池状态
+		 *
+		 * @param method method
+		 * @author shuigedeng
+		 * @since 2021-09-02 20:03:15
+		 */
+		private void showThreadPoolInfo(String method) {
+			ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+			StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+			StackTraceElement stackTraceElement = stackTrace[stackTrace.length - 2];
+
+			LogUtil.info(
+				"className[{}] methodName[{}] lineNumber[{}] threadNamePrefix[{}] method[{}]  taskCount[{}] completedTaskCount[{}] activeCount[{}] queueSize[{}]",
+				stackTraceElement.getClassName(),
+				stackTraceElement.getMethodName(),
+				stackTraceElement.getLineNumber(),
+				this.getThreadNamePrefix(),
+				method,
+				threadPoolExecutor.getTaskCount(),
+				threadPoolExecutor.getCompletedTaskCount(),
+				threadPoolExecutor.getActiveCount(),
+				threadPoolExecutor.getQueue().size());
 		}
 	}
 }

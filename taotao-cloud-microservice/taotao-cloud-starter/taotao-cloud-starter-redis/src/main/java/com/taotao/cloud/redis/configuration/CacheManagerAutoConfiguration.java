@@ -20,8 +20,8 @@ import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.google.common.collect.Maps;
-import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
@@ -76,7 +76,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(CacheManagerAutoConfiguration.class, StarterNameConstant.REDIS_STARTER);
+		LogUtil.started(CacheManagerAutoConfiguration.class, StarterName.REDIS_STARTER);
 	}
 
 	private final CacheProperties cacheProperties;
@@ -87,16 +87,16 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public KeyGenerator keyGenerator() {
-		LogUtil.started(KeyGenerator.class, StarterNameConstant.REDIS_STARTER);
+		LogUtil.started(KeyGenerator.class, StarterName.REDIS_STARTER);
 
 		return (target, method, objects) -> {
 			StringBuilder sb = new StringBuilder();
 			sb.append(target.getClass().getName());
-			sb.append(StrPoolConstant.COLON);
+			sb.append(StrPool.COLON);
 			sb.append(method.getName());
 			for (Object obj : objects) {
 				if (obj != null) {
-					sb.append(StrPoolConstant.COLON);
+					sb.append(StrPool.COLON);
 					sb.append(obj);
 				}
 			}
@@ -361,9 +361,9 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 		}
 		if (redisProperties.getKeyPrefix() != null) {
 			config = config.computePrefixWith(cacheName -> redisProperties.getKeyPrefix().concat(
-				StrPoolConstant.COLON).concat(cacheName).concat(StrPoolConstant.COLON));
+				StrPool.COLON).concat(cacheName).concat(StrPool.COLON));
 		} else {
-			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPoolConstant.COLON));
+			config = config.computePrefixWith(cacheName -> cacheName.concat(StrPool.COLON));
 		}
 		if (!redisProperties.isCacheNullValues()) {
 			config = config.disableCachingNullValues();

@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.health.configuration;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.common.model.PropertyCache;
-import com.taotao.cloud.core.monitor.MonitorThreadPool;
+import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.dump.DumpProvider;
 import com.taotao.cloud.health.export.ExportProvider;
@@ -59,7 +59,7 @@ public class HealthAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(HealthAutoConfiguration.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(HealthAutoConfiguration.class, StarterName.HEALTH_STARTER);
 	}
 
 	@Bean
@@ -71,8 +71,8 @@ public class HealthAutoConfiguration implements InitializingBean {
 
 	@Bean(destroyMethod = "close")
 	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "warn", havingValue = "true")
-	public WarnProvider getWarnProvider(WarnProperties warnProperties, MonitorThreadPool monitorThreadPool) {
-		LogUtil.started(WarnProvider.class, StarterNameConstant.HEALTH_STARTER);
+	public WarnProvider getWarnProvider(WarnProperties warnProperties, Monitor monitorThreadPool) {
+		LogUtil.started(WarnProvider.class, StarterName.HEALTH_STARTER);
 		return new WarnProvider(warnProperties, monitorThreadPool);
 	}
 
@@ -83,8 +83,8 @@ public class HealthAutoConfiguration implements InitializingBean {
 		DefaultHttpClient defaultHttpClient,
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
-		MonitorThreadPool monitorThreadPool) {
-		LogUtil.started(HealthCheckProvider.class, StarterNameConstant.HEALTH_STARTER);
+		Monitor monitorThreadPool) {
+		LogUtil.started(HealthCheckProvider.class, StarterName.HEALTH_STARTER);
 		return new HealthCheckProvider(
 			strategy,
 			defaultHttpClient,
@@ -96,17 +96,17 @@ public class HealthAutoConfiguration implements InitializingBean {
 	@Bean(initMethod = "start", destroyMethod = "close")
 	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "export", havingValue = "true")
 	public ExportProvider getExportProvider(
-		MonitorThreadPool monitorThreadPool,
+		Monitor monitorThreadPool,
 		ExportProperties exportProperties,
 		HealthCheckProvider healthCheckProvider) {
-		LogUtil.started(ExportProvider.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(ExportProvider.class, StarterName.HEALTH_STARTER);
 		return new ExportProvider(monitorThreadPool, exportProperties, healthCheckProvider);
 	}
 
 	@Bean
 	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "dump", havingValue = "true")
 	public DumpProvider dumpProvider() {
-		LogUtil.started(DumpProvider.class, StarterNameConstant.HEALTH_STARTER);
+		LogUtil.started(DumpProvider.class, StarterName.HEALTH_STARTER);
 		return new DumpProvider();
 	}
 

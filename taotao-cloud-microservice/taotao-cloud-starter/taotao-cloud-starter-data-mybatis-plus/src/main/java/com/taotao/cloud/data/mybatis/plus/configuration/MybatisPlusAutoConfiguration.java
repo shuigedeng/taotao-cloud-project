@@ -23,18 +23,13 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.SystemClock;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.taotao.cloud.common.constant.StarterNameConstant;
-import com.taotao.cloud.common.constant.StrPoolConstant;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
@@ -49,26 +44,9 @@ import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourc
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import org.apache.ibatis.executor.statement.StatementHandler;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
-import org.apache.ibatis.reflection.SystemMetaObject;
-import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +57,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 /**
  * MybatisPlusAutoConfiguration
@@ -115,7 +92,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(MybatisPlusAutoConfiguration.class,
-			StarterNameConstant.MYBATIS_PLUS_STARTER);
+			StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	/**
@@ -123,7 +100,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlInjector sqlInjector() {
-		LogUtil.started(MateSqlInjector.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(MateSqlInjector.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new MateSqlInjector();
 	}
 
@@ -131,14 +108,14 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnProperty(value = "mybatis-plus.sql-log.enable", matchIfMissing = true)
 	public SqlLogInterceptor sqlLogInterceptor() {
-		LogUtil.started(SqlLogInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(SqlLogInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new SqlLogInterceptor();
 	}
 
 	@Bean
 	@ConditionalOnClass(name = "org.apache.ibatis.plugin.Interceptor")
 	public SqlMybatisInterceptor sqlMybatisInterceptor(Collector collector) {
-		LogUtil.started(SqlMybatisInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(SqlMybatisInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new SqlMybatisInterceptor(collector);
 	}
 
@@ -148,7 +125,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public MybatisPlusInterceptor mybatisPlusInterceptor() {
-		LogUtil.started(MybatisPlusInterceptor.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(MybatisPlusInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 
 		boolean enableTenant = tenantProperties.getEnabled();
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
@@ -192,7 +169,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
 	public MetaObjectHandler metaObjectHandler() {
-		LogUtil.started(MetaObjectHandler.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(MetaObjectHandler.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new DateMetaObjectHandler(autoFillProperties);
 	}
 
@@ -201,7 +178,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ConfigurationCustomizer configurationCustomizer() {
-		LogUtil.started(ConfigurationCustomizer.class, StarterNameConstant.MYBATIS_PLUS_STARTER);
+		LogUtil.started(ConfigurationCustomizer.class, StarterName.MYBATIS_PLUS_STARTER);
 		return configuration -> {
 			configuration.setDefaultEnumTypeHandler(EnumTypeHandler.class);
 			// 关闭 mybatis 默认的日志
@@ -271,7 +248,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 				if (oldId != null) {
 					return;
 				}
-				Object idVal = StrPoolConstant.STRING_TYPE_NAME.equals(
+				Object idVal = StrPool.STRING_TYPE_NAME.equals(
 					metaObject.getGetterType(autoFillProperties.getIdField()).getName())
 					? String.valueOf(id)
 					: id;
@@ -286,7 +263,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 					return;
 				}
 
-				Object idVal = StrPoolConstant.STRING_TYPE_NAME.equals(
+				Object idVal = StrPool.STRING_TYPE_NAME.equals(
 					metaObject.getGetterType(autoFillProperties.getIdField()).getName())
 					? String.valueOf(id)
 					: id;
@@ -322,7 +299,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 				return;
 			}
 			Object idVal =
-				keyType.getName().equalsIgnoreCase(StrPoolConstant.STRING_TYPE_NAME)
+				keyType.getName().equalsIgnoreCase(StrPool.STRING_TYPE_NAME)
 					? String.valueOf(id)
 					: id;
 			this.setFieldValByName(keyProperty, idVal, metaObject);
@@ -359,7 +336,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			}
 
 			if (entity.getCreatedBy() == null || entity.getCreatedBy().equals(0)) {
-				Object userIdVal = StrPoolConstant.STRING_TYPE_NAME.equals(
+				Object userIdVal = StrPool.STRING_TYPE_NAME.equals(
 					metaObject.getGetterType(MpSuperEntity.CREATED_BY).getName()) ? String.valueOf(
 					SecurityUtil.getUserId()) : SecurityUtil.getUserId();
 				this.setFieldValByName(MpSuperEntity.CREATED_BY, userIdVal, metaObject);
@@ -392,7 +369,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		private void update(MetaObject metaObject) {
 			MpSuperEntity entity = (MpSuperEntity) metaObject.getOriginalObject();
 			if (entity.getUpdatedBy() == null || entity.getUpdatedBy().equals(0)) {
-				Object userIdVal = StrPoolConstant.STRING_TYPE_NAME.equals(
+				Object userIdVal = StrPool.STRING_TYPE_NAME.equals(
 					metaObject.getGetterType(MpSuperEntity.UPDATED_BY).getName()) ? String.valueOf(
 					SecurityUtil.getUserId()) : SecurityUtil.getUserId();
 				this.setFieldValByName(MpSuperEntity.UPDATED_BY, userIdVal, metaObject);

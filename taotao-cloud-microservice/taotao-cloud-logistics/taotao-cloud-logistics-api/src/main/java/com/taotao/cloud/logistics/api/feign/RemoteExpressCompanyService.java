@@ -1,6 +1,6 @@
 package com.taotao.cloud.logistics.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceNameConstant;
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logistics.api.feign.fallback.RemoteExpressCompanyFallbackImpl;
 import com.taotao.cloud.logistics.api.vo.ExpressCompanyVO;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteExpressCompanyService", value = ServiceNameConstant.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemoteExpressCompanyFallbackImpl.class)
+@FeignClient(contextId = "remoteExpressCompanyService", value = ServiceName.TAOTAO_CLOUD_LOGISTICS_CENTER, fallbackFactory = RemoteExpressCompanyFallbackImpl.class)
 public interface RemoteExpressCompanyService {
 
 	/**

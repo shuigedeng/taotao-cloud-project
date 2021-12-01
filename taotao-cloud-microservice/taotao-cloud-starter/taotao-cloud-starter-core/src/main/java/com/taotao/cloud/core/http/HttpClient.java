@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.codec.Charsets;
@@ -35,6 +34,8 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -188,6 +189,32 @@ public interface HttpClient extends Closeable {
 	<T> T delete(String url, Params params, TypeReference<T> tTypeReference);
 
 	/**
+	 * getClient
+	 *
+	 * @return {@link CloseableHttpClient }
+	 * @author shuigedeng
+	 * @since 2021-12-01 15:09:44
+	 */
+	CloseableHttpClient getClient();
+
+	/**
+	 * getManager
+	 *
+	 * @return {@link PoolingHttpClientConnectionManager }
+	 * @author shuigedeng
+	 * @since 2021-12-01 15:10:12
+	 */
+	PoolingHttpClientConnectionManager getManager();
+
+	/**
+	 * open
+	 *
+	 * @author shuigedeng
+	 * @since 2021-12-01 15:11:45
+	 */
+	public void open();
+
+	/**
 	 * 请求参数
 	 *
 	 * @author shuigedeng
@@ -244,11 +271,9 @@ public interface HttpClient extends Closeable {
 				return JsonUtil.toJSONString(this.data);
 			} else {
 				List<NameValuePair> tmp = new ArrayList<>();
-				Iterator var2 = this.data.entrySet().iterator();
 
-				while (var2.hasNext()) {
-					Map.Entry<String, Object> entry = (Map.Entry) var2.next();
-					tmp.add(new BasicNameValuePair((String) entry.getKey(),
+				for (Map.Entry<String, Object> entry : this.data.entrySet()) {
+					tmp.add(new BasicNameValuePair(entry.getKey(),
 						entry.getValue().toString()));
 				}
 
@@ -269,10 +294,8 @@ public interface HttpClient extends Closeable {
 					.setContentEncoding("utf-8").setText(this.toString()).build();
 			} else {
 				MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-				Iterator var2 = this.data.keySet().iterator();
 
-				while (var2.hasNext()) {
-					String key = (String) var2.next();
+				for (String key : this.data.keySet()) {
 					Object value = this.data.get(key);
 
 					try {
@@ -284,15 +307,11 @@ public interface HttpClient extends Closeable {
 				}
 
 				Map<String, Collection<ContentBody>> items = this.bodyMultimap;
-				Iterator url0 = items.keySet().iterator();
 
-				while (url0.hasNext()) {
-					String key = (String) url0.next();
-					Collection<ContentBody> value = (Collection) items.get(key);
-					Iterator var6 = value.iterator();
+				for (String key : items.keySet()) {
+					Collection<ContentBody> value = items.get(key);
 
-					while (var6.hasNext()) {
-						ContentBody contentBody = (ContentBody) var6.next();
+					for (ContentBody contentBody : value) {
 						builder.addPart(key, contentBody);
 					}
 				}
@@ -303,9 +322,9 @@ public interface HttpClient extends Closeable {
 
 		public static class Builder {
 
-			private Map<String, Object> data = new HashMap<>();
-			private Map<String, Collection<ContentBody>> bodyMultimap = new HashMap<>();
-			private List<Header> headers = new ArrayList<>();
+			private final Map<String, Object> data = new HashMap<>();
+			private final Map<String, Collection<ContentBody>> bodyMultimap = new HashMap<>();
+			private final List<Header> headers = new ArrayList<>();
 			private ContentType contentType;
 
 			public Builder() {

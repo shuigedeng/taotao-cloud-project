@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.constant.StarterNameConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
