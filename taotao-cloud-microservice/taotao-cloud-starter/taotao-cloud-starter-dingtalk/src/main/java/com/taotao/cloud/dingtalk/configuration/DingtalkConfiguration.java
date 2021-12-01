@@ -73,6 +73,13 @@ public class DingtalkConfiguration implements InitializingBean {
 		this.resourceLoader = resourceLoader;
 	}
 
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(DingtalkConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
+
+		checkConfigFileExists();
+	}
+
 	@Bean
 	@ConditionalOnMissingBean(DingerConfigurerAdapter.class)
 	public DingerConfigurerAdapter dingerConfigurerAdapter() {
@@ -117,12 +124,7 @@ public class DingtalkConfiguration implements InitializingBean {
 	}
 
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(DingtalkConfiguration.class, StarterNameConstant.DINGTALK_STARTER);
 
-		checkConfigFileExists();
-	}
 
 	private void checkConfigFileExists() {
 		if (StringUtils.hasText(this.properties.getDingerLocations())) {

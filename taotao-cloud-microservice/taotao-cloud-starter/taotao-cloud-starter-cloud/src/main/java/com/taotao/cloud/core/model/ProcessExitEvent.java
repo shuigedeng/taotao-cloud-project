@@ -36,11 +36,11 @@ public class ProcessExitEvent {
 	/**
 	 * callBackList
 	 */
-	private static final ArrayList<ExitCallback> callBackList = new ArrayList<>();
+	private static final ArrayList<ExitCallback> CALL_BACK_LIST = new ArrayList<>();
 	/**
 	 * lock
 	 */
-	private static final Object lock = new Object();
+	private static final Object LOCK = new Object();
 
 	/**
 	 * 越大越晚 必须大于0
@@ -52,8 +52,8 @@ public class ProcessExitEvent {
 	 * @since 2021-09-02 20:37:02
 	 */
 	public static void register(Callable.Action0 action0, int order, Boolean async) {
-		synchronized (lock) {
-			callBackList.add(new ExitCallback(action0, Math.abs(order), async));
+		synchronized (LOCK) {
+			CALL_BACK_LIST.add(new ExitCallback(action0, Math.abs(order), async));
 		}
 	}
 
@@ -61,10 +61,10 @@ public class ProcessExitEvent {
 		//JVM 停止或重启时
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			try {
-				synchronized (lock) {
-					callBackList.sort(Comparator.comparingInt(c -> c.order));
+				synchronized (LOCK) {
+					CALL_BACK_LIST.sort(Comparator.comparingInt(c -> c.order));
 
-					for (ExitCallback a : callBackList) {
+					for (ExitCallback a : CALL_BACK_LIST) {
 						Callable.Action0 method = () -> {
 							try {
 								a.action0.invoke();

@@ -474,6 +474,8 @@ spring:
     password: guest
     virtual-host: /
   cloud:
+    compatibility-verifier:
+      enabled: false
     loadbalancer:
       enabled: true
     stream:

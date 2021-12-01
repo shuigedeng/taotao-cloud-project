@@ -35,7 +35,7 @@ public class FailOverUtil {
 	/**
 	 * name
 	 */
-	private final static String name = "补偿工具";
+	private final static String NAME = "补偿工具";
 
 	/**
 	 * invoke
@@ -47,6 +47,7 @@ public class FailOverUtil {
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:50:56
 	 */
+	@SafeVarargs
 	public static <T> T invoke(Consumer<Result<T>> consumer, Callable<T>... c1) {
 		Result<T> result = new Result<>();
 		try {
@@ -60,7 +61,7 @@ public class FailOverUtil {
 				} catch (Exception e) {
 					result.throwable = e;
 					if (i > 0) {
-						LogUtil.error(name.concat("-失败-补偿次数 {}") + " error info {}", i,
+						LogUtil.error(NAME.concat("-失败-补偿次数 {}") + " error info {}", i,
 							ExceptionUtil.getFullStackTrace(e));
 					} else {
 						LogUtil.error(
@@ -71,7 +72,7 @@ public class FailOverUtil {
 			}
 			if (result.success && times > 0) {
 				LogUtil.info(PropertyUtil.getProperty(SpringApplicationName) + " {} 补偿成功, 补偿次数：{}",
-					name,
+					NAME,
 					times);
 			}
 		} finally {

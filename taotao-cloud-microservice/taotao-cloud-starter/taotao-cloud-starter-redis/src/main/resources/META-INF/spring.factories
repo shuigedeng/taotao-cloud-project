@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.taotao.cloud.redis.configuration.RedisAutoConfiguration, \
-com.taotao.cloud.redis.configuration.CacheManagerAutoConfiguration
+com.taotao.cloud.redis.configuration.CacheManagerAutoConfiguration, \
+com.taotao.cloud.redis.configuration.RedisLockAutoConfiguration
 

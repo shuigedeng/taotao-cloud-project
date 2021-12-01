@@ -31,7 +31,6 @@ public class CacheKey {
 	/**
 	 * redis key
 	 */
-	@NonNull
 	private String key;
 
 	/**

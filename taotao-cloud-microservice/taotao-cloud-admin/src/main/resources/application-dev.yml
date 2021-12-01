@@ -40,6 +40,9 @@ arthas:
   tunnel-server: ws://172.16.6.151:7777/ws
 
 spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
   lifecycle:
     timeout-per-shutdown-phase: 30s
   main:
@@ -114,8 +117,14 @@ spring:
 
 taotao:
   cloud:
+    prometheus:
+      enabled: true
     dinger:
       enabled: true
+      httpclient:
+        enabled: true
+      threadpool:
+        enabled: true
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
