@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
@@ -49,6 +50,7 @@ public class MongodbAutoConfiguration implements InitializingBean {
 		LogUtil.started(MongodbAutoConfiguration.class, StarterNameConstant.MONGODB_STARTER);
 	}
 
+	@Primary
 	@Bean
 	public MongoCustomConversions customConversions() {
 		List<Converter<?, ?>> converters = new ArrayList<>(2);
