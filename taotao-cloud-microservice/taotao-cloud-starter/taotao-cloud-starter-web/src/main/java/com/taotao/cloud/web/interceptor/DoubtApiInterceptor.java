@@ -15,9 +15,11 @@
  */
 package com.taotao.cloud.web.interceptor;
 
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.web.properties.InterceptorProperties;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,10 +38,8 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 	private final ThreadLocal<Long> beforeMem = new ThreadLocal<>();
 	private final Map<String, DoubtApiInfo> statisticMap = new ConcurrentHashMap<>();
 	private final InterceptorProperties properties;
-	private final Collector collector;
 
-	public DoubtApiInterceptor(Collector collector, InterceptorProperties properties) {
-		this.collector = collector;
+	public DoubtApiInterceptor(InterceptorProperties properties) {
 		this.properties = properties;
 	}
 
@@ -82,7 +82,10 @@ public class DoubtApiInterceptor implements HandlerInterceptor {
 					statisticMap.put(methodPath, staticInfo);
 				}
 
-				this.collector.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
+				Collector collector = ContextUtil.getBean(Collector.class, true);
+				if (Objects.nonNull(collector)) {
+					collector.value("taotao.cloud.health.doubtapi.info").set(statisticMap);
+				}
 			}
 		}
 	}

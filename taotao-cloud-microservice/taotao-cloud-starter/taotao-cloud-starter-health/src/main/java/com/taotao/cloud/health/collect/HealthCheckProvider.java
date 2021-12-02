@@ -18,13 +18,14 @@ package com.taotao.cloud.health.collect;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
-import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
 import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
+import com.taotao.cloud.health.strategy.WarnStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,54 +38,55 @@ import java.util.List;
  */
 public class HealthCheckProvider implements AutoCloseable {
 
-	protected List<AbstractCollectTask> checkTasks = new ArrayList<>();
-	protected DefaultWarnStrategy strategy;
+	private List<AbstractCollectTask> checkTasks = new ArrayList<>();
 	private boolean close;
-	private CollectTaskProperties properties;
-	private HealthProperties healthProperties;
+
 	private Monitor monitor;
-	private DefaultHttpClient defaultHttpClient;
+	private HttpClient httpClient;
+	private WarnStrategy strategy;
+	private HealthProperties healthProperties;
+	private CollectTaskProperties collectTaskProperties;
 
 	public void registerCollectTask(AbstractCollectTask task) {
 		checkTasks.add(task);
 	}
 
 	public HealthCheckProvider(
-		DefaultWarnStrategy strategy,
-		DefaultHttpClient defaultHttpClient,
-		CollectTaskProperties properties,
+		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
+		WarnStrategy strategy,
+		HttpClient httpClient,
 		Monitor monitor) {
 		this.strategy = strategy;
 		this.close = false;
-		this.properties = properties;
+		this.collectTaskProperties = collectTaskProperties;
 		this.healthProperties = healthProperties;
 		this.monitor = monitor;
-		this.defaultHttpClient = defaultHttpClient;
+		this.httpClient = httpClient;
 
-		registerCollectTask(new CpuCollectTask(properties));
-		//registerCollectTask(new IOCollectTask(properties));
-		registerCollectTask(new MemoryCollectTask(properties));
-		registerCollectTask(new ThreadCollectTask(properties));
-		registerCollectTask(new UnCatchExceptionCollectTask(properties));
-		registerCollectTask(new MonitorThreadPoolCollectTask(properties));
-		registerCollectTask(new AsyncThreadPoolCollectTask(properties));
+		registerCollectTask(new CpuCollectTask(collectTaskProperties));
+		//registerCollectTask(new IOCollectTask(collectTaskProperties));
+		registerCollectTask(new MemoryCollectTask(collectTaskProperties));
+		registerCollectTask(new ThreadCollectTask(collectTaskProperties));
+		registerCollectTask(new UnCatchExceptionCollectTask(collectTaskProperties));
+		registerCollectTask(new MonitorThreadPoolCollectTask(collectTaskProperties));
+		registerCollectTask(new AsyncThreadPoolCollectTask(collectTaskProperties));
 		//registerCollectTask(new BsfEurekaCollectTask());
-		registerCollectTask(new MybatisCollectTask(properties));
-		registerCollectTask(new DataSourceCollectTask(properties));
-		registerCollectTask(new WebServerCollectTask(properties));
-		//registerCollectTask(new JedisCollectTask(properties));
-		registerCollectTask(new NetworkCollectTask(properties));
-		registerCollectTask(new XxlJobCollectTask(properties));
+		registerCollectTask(new MybatisCollectTask(collectTaskProperties));
+		registerCollectTask(new DataSourceCollectTask(collectTaskProperties));
+		registerCollectTask(new WebServerCollectTask(collectTaskProperties));
+		//registerCollectTask(new JedisCollectTask(collectTaskProperties));
+		registerCollectTask(new NetworkCollectTask(collectTaskProperties));
+		registerCollectTask(new XxlJobCollectTask(collectTaskProperties));
 		//registerCollectTask(new FileCollectTask());
 		//registerCollectTask(new RocketMQCollectTask());
-		registerCollectTask(new HttpPoolCollectTask(properties));
+		registerCollectTask(new HttpPoolCollectTask(collectTaskProperties));
 		//registerCollectTask(new CatCollectTask());
 		//registerCollectTask(new ElasticSearchCollectTask());
-		registerCollectTask(new ElkCollectTask(properties));
-		registerCollectTask(new DoubtApiCollectTask(properties));
-		registerCollectTask(new LogStatisticCollectTask(properties));
-		registerCollectTask(new NacosCollectTask(properties));
+		registerCollectTask(new ElkCollectTask(collectTaskProperties));
+		registerCollectTask(new DoubtApiCollectTask(collectTaskProperties));
+		registerCollectTask(new LogStatisticCollectTask(collectTaskProperties));
+		registerCollectTask(new NacosCollectTask(collectTaskProperties));
 
 		monitor.monitorSubmit("系统任务: HealthCheckProvider 采集任务", () -> {
 			while (!monitor.monitorIsShutdown() && !close) {
@@ -167,7 +169,7 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.checkTasks = checkTasks;
 	}
 
-	public DefaultWarnStrategy getStrategy() {
+	public WarnStrategy getStrategy() {
 		return strategy;
 	}
 
@@ -181,14 +183,6 @@ public class HealthCheckProvider implements AutoCloseable {
 
 	public void setClose(boolean close) {
 		this.close = close;
-	}
-
-	public CollectTaskProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(CollectTaskProperties properties) {
-		this.properties = properties;
 	}
 
 	public HealthProperties getHealthProperties() {
@@ -207,11 +201,24 @@ public class HealthCheckProvider implements AutoCloseable {
 		this.monitor = monitor;
 	}
 
-	public DefaultHttpClient getDefaultHttpClient() {
-		return defaultHttpClient;
+	public HttpClient getHttpClient() {
+		return httpClient;
 	}
 
-	public void setDefaultHttpClient(DefaultHttpClient defaultHttpClient) {
-		this.defaultHttpClient = defaultHttpClient;
+	public void setHttpClient(HttpClient httpClient) {
+		this.httpClient = httpClient;
+	}
+
+	public void setStrategy(WarnStrategy strategy) {
+		this.strategy = strategy;
+	}
+
+	public CollectTaskProperties getCollectTaskProperties() {
+		return collectTaskProperties;
+	}
+
+	public void setCollectTaskProperties(
+		CollectTaskProperties collectTaskProperties) {
+		this.collectTaskProperties = collectTaskProperties;
 	}
 }

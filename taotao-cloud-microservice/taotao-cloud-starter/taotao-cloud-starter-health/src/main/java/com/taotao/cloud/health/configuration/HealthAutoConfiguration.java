@@ -20,8 +20,10 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.common.model.PropertyCache;
+import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
+import com.taotao.cloud.health.collect.HealthReportFilter;
 import com.taotao.cloud.health.dump.DumpProvider;
 import com.taotao.cloud.health.export.ExportProvider;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
@@ -30,14 +32,18 @@ import com.taotao.cloud.health.properties.HealthProperties;
 import com.taotao.cloud.health.properties.WarnProperties;
 import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
 import com.taotao.cloud.health.strategy.Rule;
+import com.taotao.cloud.health.strategy.WarnStrategy;
 import com.taotao.cloud.health.strategy.WarnTemplate;
 import com.taotao.cloud.health.warn.WarnProvider;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 
 /**
  * HealthConfiguration
@@ -48,9 +54,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties({
-	ExportProperties.class,
 	HealthProperties.class,
-	WarnProperties.class,
 	CollectTaskProperties.class,
 })
 @AutoConfigureAfter({CoreAutoConfiguration.class})
@@ -62,52 +66,31 @@ public class HealthAutoConfiguration implements InitializingBean {
 		LogUtil.started(HealthAutoConfiguration.class, StarterName.HEALTH_STARTER);
 	}
 
-	@Bean
-	public DefaultWarnStrategy defaultWarnStrategy(PropertyCache propertyCache) {
-		WarnTemplate warnTemplate = new WarnTemplate()
-			.register("", "参数:{name}({desc}),命中规则:{rule},当前值：{value}");
-		return new DefaultWarnStrategy(warnTemplate, new Rule.RulesAnalyzer(propertyCache));
-	}
-
 	@Bean(destroyMethod = "close")
-	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "warn", havingValue = "true")
-	public WarnProvider getWarnProvider(WarnProperties warnProperties, Monitor monitorThreadPool) {
-		LogUtil.started(WarnProvider.class, StarterName.HEALTH_STARTER);
-		return new WarnProvider(warnProperties, monitorThreadPool);
-	}
-
-	@Bean(destroyMethod = "close")
-	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "check", havingValue = "true")
+	@ConditionalOnBean
 	public HealthCheckProvider getHealthCheckProvider(
-		DefaultWarnStrategy strategy,
-		DefaultHttpClient defaultHttpClient,
+		WarnStrategy strategy,
+		HttpClient httpClient,
 		CollectTaskProperties collectTaskProperties,
 		HealthProperties healthProperties,
-		Monitor monitorThreadPool) {
-		LogUtil.started(HealthCheckProvider.class, StarterName.HEALTH_STARTER);
+		Monitor monitor) {
+
 		return new HealthCheckProvider(
-			strategy,
-			defaultHttpClient,
 			collectTaskProperties,
 			healthProperties,
-			monitorThreadPool);
-	}
-
-	@Bean(initMethod = "start", destroyMethod = "close")
-	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "export", havingValue = "true")
-	public ExportProvider getExportProvider(
-		Monitor monitorThreadPool,
-		ExportProperties exportProperties,
-		HealthCheckProvider healthCheckProvider) {
-		LogUtil.started(ExportProvider.class, StarterName.HEALTH_STARTER);
-		return new ExportProvider(monitorThreadPool, exportProperties, healthCheckProvider);
+			strategy,
+			httpClient,
+			monitor);
 	}
 
 	@Bean
-	@ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "dump", havingValue = "true")
-	public DumpProvider dumpProvider() {
-		LogUtil.started(DumpProvider.class, StarterName.HEALTH_STARTER);
-		return new DumpProvider();
+	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
+		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
+		filterRegistrationBean.setFilter(new HealthReportFilter());
+		filterRegistrationBean.setName(HealthReportFilter.class.getName());
+		filterRegistrationBean.addUrlPatterns("/health/report/*");
+		return filterRegistrationBean;
 	}
 
 }

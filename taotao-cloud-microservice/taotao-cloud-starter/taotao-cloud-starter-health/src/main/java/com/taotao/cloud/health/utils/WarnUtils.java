@@ -70,24 +70,24 @@ public class WarnUtils {
 	/**
 	 * 发送报警
 	 *
-	 * @param alarm_type 告警类型
+	 * @param alarmType 告警类型
 	 * @param title      告警标题
 	 * @param content    告警内容
 	 * @param isNow      是否即时发送
 	 * @author shuigedeng
 	 * @since 2021-09-02 20:59:11
 	 */
-	public static void notify(String alarm_type, String title, String content, boolean isNow) {
+	public static void notify(String alarmType, String title, String content, boolean isNow) {
 		Class<?> clazz = ReflectionUtil.classForName("com.taotao.cloud.health.warn.WarnProvider");
 		Object bean = ContextUtil.getBean(clazz, false);
 		if (bean != null) {
 			if (isNow) {
 				ReflectionUtil.callMethodWithParams(bean, "notifynow",
-					new String[]{alarm_type, title, content}, String.class, String.class,
+					new String[]{alarmType, title, content}, String.class, String.class,
 					String.class);
 			} else {
 				ReflectionUtil.callMethodWithParams(bean, "notify",
-					new String[]{alarm_type, title, content}, String.class, String.class,
+					new String[]{alarmType, title, content}, String.class, String.class,
 					String.class);
 			}
 		}

@@ -31,6 +31,8 @@ public class WarnProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.warn";
 
+	private boolean enabled = true;
+
 	/**
 	 * 报警消息缓存数量
 	 */
@@ -123,5 +125,21 @@ public class WarnProperties {
 
 	public void setEmailWarnEnabled(boolean emailWarnEnabled) {
 		this.emailWarnEnabled = emailWarnEnabled;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isSmsWarnEnabled() {
+		return smsWarnEnabled;
+	}
+
+	public boolean isEmailWarnEnabled() {
+		return emailWarnEnabled;
 	}
 }

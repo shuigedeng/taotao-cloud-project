@@ -26,9 +26,7 @@ import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.annotation.EnableUser;
-import com.taotao.cloud.web.filter.DumpFilter;
-import com.taotao.cloud.web.filter.HealthReportFilter;
-import com.taotao.cloud.web.filter.PingFilter;
+import com.taotao.cloud.health.ping.PingFilter;
 import com.taotao.cloud.web.filter.TenantFilter;
 import com.taotao.cloud.web.filter.TraceFilter;
 import com.taotao.cloud.web.filter.VersionFilter;
@@ -117,9 +115,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		LogUtil.started(WebMvcConfiguration.class, StarterName.WEB_STARTER);
 	}
 
-	@Autowired
-	private Collector collector;
-
 	/**
 	 * redisRepository
 	 */
@@ -180,7 +175,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		}
 
 		if (interceptorProperties.getDoubtApi()) {
-			registry.addInterceptor(new DoubtApiInterceptor(collector, interceptorProperties))
+			registry.addInterceptor(new DoubtApiInterceptor(interceptorProperties))
 				.addPathPatterns("/**")
 				.excludePathPatterns("/actuator/**");
 		}
@@ -293,38 +288,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 		return registrationBean;
 	}
 
-	@Bean
-	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "report", havingValue = "true")
-	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
-		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);
-		filterRegistrationBean.setFilter(new HealthReportFilter());
-		filterRegistrationBean.setName(HealthReportFilter.class.getName());
-		filterRegistrationBean.addUrlPatterns("/health/report/*");
-		return filterRegistrationBean;
-	}
-
-	@Bean
-	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "dump", havingValue = "true")
-	public FilterRegistrationBean<DumpFilter> dumpFilter() {
-		FilterRegistrationBean<DumpFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
-		filterRegistrationBean.setFilter(new DumpFilter());
-		filterRegistrationBean.setName(DumpFilter.class.getName());
-		filterRegistrationBean.addUrlPatterns("/health/dump/*");
-		return filterRegistrationBean;
-	}
-
-	@Bean
-	@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "ping", havingValue = "true")
-	public FilterRegistrationBean<PingFilter> pingFilter() {
-		FilterRegistrationBean<PingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		filterRegistrationBean.setFilter(new PingFilter());
-		filterRegistrationBean.setName(PingFilter.class.getName());
-		filterRegistrationBean.addUrlPatterns("/health/ping");
-		return filterRegistrationBean;
-	}
 
 	///**
 	// * 配置跨站攻击过滤器

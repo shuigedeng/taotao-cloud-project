@@ -20,6 +20,7 @@ import com.taotao.cloud.web.utils.SpringUtil;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 	@Value("${spring.application.name}")
 	private String applicationName;
 
-	@Autowired
+	@Autowired(required = false)
 	private ScheduleMapper scheduleMapper;
 
 	/**
@@ -55,23 +56,25 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 
 	@Override
 	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+		if (Objects.nonNull(scheduleMapper)) {
+			final List<Schedule> scheduleList = scheduleMapper.getScheduleListByAppName(
+				applicationName);
 
-		final List<Schedule> scheduleList = scheduleMapper.getScheduleListByAppName(
-			applicationName);
+			if (CollectionUtils.isNotEmpty(scheduleList)) {
+				LogUtil.info("定时任务即将启动，预计启动任务数量[" + scheduleList.size() + "]，时间："
+					+ DateUtil.getCurrentDateTime());
 
-		if (CollectionUtils.isNotEmpty(scheduleList)) {
-			LogUtil.info("定时任务即将启动，预计启动任务数量[" + scheduleList.size() + "]，时间："
-				+ DateUtil.getCurrentDateTime());
-			for (Schedule schedule : scheduleList) {
-				// 判断任务是否有效
-				if (schedule.getValid()) {
-					// 执行定时任务
-					taskRegistrar.addTriggerTask(getRunnable(schedule), getTrigger(schedule));
-					scheduleTaskCount++;
+				for (Schedule schedule : scheduleList) {
+					// 判断任务是否有效
+					if (schedule.getValid()) {
+						// 执行定时任务
+						taskRegistrar.addTriggerTask(getRunnable(schedule), getTrigger(schedule));
+						scheduleTaskCount++;
+					}
 				}
+				LogUtil.info(
+					"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
 			}
-			LogUtil.info(
-				"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
 		}
 	}
 
@@ -120,9 +123,7 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 	 * @version 2021.9
 	 * @since 2021-09-02 21:29:23
 	 */
-	public class Schedule extends JpaSuperEntity {
-
-		private static final long serialVersionUID = 1L;
+	public static class Schedule extends JpaSuperEntity<Integer> {
 
 		/**
 		 * 任务名称
