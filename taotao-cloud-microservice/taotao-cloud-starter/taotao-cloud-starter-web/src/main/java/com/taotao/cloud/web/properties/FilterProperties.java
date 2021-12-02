@@ -59,10 +59,6 @@ public class FilterProperties {
 	 * 开启ping
 	 */
 	private Boolean ping = true;
-	/**
-	 * 开启监控下载
-	 */
-	private Boolean dump = true;
 
 	public FilterProperties() {
 	}
@@ -113,13 +109,5 @@ public class FilterProperties {
 
 	public void setPing(Boolean ping) {
 		this.ping = ping;
-	}
-
-	public Boolean getDump() {
-		return dump;
-	}
-
-	public void setDump(Boolean dump) {
-		this.dump = dump;
 	}
 }

@@ -34,27 +34,22 @@ public class HealthProperties {
 	/**
 	 * 是否开启健康检查
 	 */
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
-	 *是否开启checkProvider
+	 * 是否开启checkProvider
 	 */
 	private boolean check = false;
 
 	/**
-	 *是否开启warnProvider
+	 * 是否开启warnProvider
 	 */
 	private boolean warn = false;
 
 	/**
-	 *是否开启exportProvider
+	 * 是否开启exportProvider
 	 */
 	private boolean export = false;
-
-	/**
-	 *是否开启dumpProvider
-	 */
-	private boolean dump = false;
 
 	/**
 	 * 健康检查时间间隔 单位:秒
@@ -91,14 +86,6 @@ public class HealthProperties {
 
 	public void setExport(boolean export) {
 		this.export = export;
-	}
-
-	public boolean getDump() {
-		return dump;
-	}
-
-	public void setDump(boolean dump) {
-		this.dump = dump;
 	}
 
 	public int getTimeSpan() {

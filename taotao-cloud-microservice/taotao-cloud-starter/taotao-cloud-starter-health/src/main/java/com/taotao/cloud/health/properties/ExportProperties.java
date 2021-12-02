@@ -31,6 +31,8 @@ public class ExportProperties {
 
 	public static final String PREFIX = "taotao.cloud.health.export";
 
+	private boolean enabled = true;
+
 	//上传报表循环间隔时间 秒
 	private int exportTimeSpan = 30;
 
@@ -83,4 +85,12 @@ public class ExportProperties {
 		this.catServerUrl = catServerUrl;
 	}
 
+	public boolean isEnabled() {
+
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

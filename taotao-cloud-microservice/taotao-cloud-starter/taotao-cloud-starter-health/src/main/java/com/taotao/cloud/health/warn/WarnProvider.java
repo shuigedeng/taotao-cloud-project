@@ -17,11 +17,11 @@ package com.taotao.cloud.health.warn;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
@@ -47,15 +47,15 @@ import org.springframework.boot.ApplicationRunner;
 public class WarnProvider extends AbstractWarn implements AutoCloseable,
 	ApplicationRunner {
 
-	private final ConcurrentLinkedDeque<Message> messages = new ConcurrentLinkedDeque<>();
-	private final AtomicInteger atomicInteger = new AtomicInteger(0);
+	private boolean isClose;
+	private final Monitor monitorThreadPool;
+	private final WarnProperties warnProperties;
+	private final DuplicateFilter duplicateFilter;
 	private final Object lock = new Object();
 	private final List<AbstractWarn> warns = new ArrayList<>();
-	private boolean isClose;
-	private final DuplicateFilter duplicateFilter;
+	private final ConcurrentLinkedDeque<Message> messages = new ConcurrentLinkedDeque<>();
+	private final AtomicInteger atomicInteger = new AtomicInteger(0);
 	private final AtomicBoolean atomicChannel = new AtomicBoolean(false);
-	private final WarnProperties warnProperties;
-	private final Monitor monitorThreadPool;
 
 	public WarnProvider(WarnProperties warnProperties, Monitor monitorThreadPool) {
 		this.warnProperties = warnProperties;

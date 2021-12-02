@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.health.collect.IOCollectTask;
 import com.taotao.cloud.health.model.Report;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
  * @version 2021.9
  * @since 2021-09-10 17:02:08
  */
-public class DefaultWarnStrategy {
+public class DefaultWarnStrategy implements WarnStrategy{
 
 	protected static int maxCacheSize = 3;
 	protected static List<Report> cacheReports = Collections.synchronizedList(
@@ -108,6 +108,7 @@ public class DefaultWarnStrategy {
 	 * @author shuigedeng
 	 * @since 2021-09-10 17:02:44
 	 */
+	@Override
 	public Report analyse(Report report) {
 		while (cacheReports.size() > maxCacheSize) {
 			cacheReports.remove(0);
@@ -126,9 +127,11 @@ public class DefaultWarnStrategy {
 	 * @author shuigedeng
 	 * @since 2021-09-10 17:02:49
 	 */
+	@Override
 	public String analyseText(Report report) {
 		Report r = analyse(report);
 		StringBuilder warn = new StringBuilder();
+
 		r.eachReport((filed, item) -> {
 			if (item.isWarn()) {
 				warn.append(warnTemplate.getWarnContent(filed, item.getDesc(), item.getValue(),

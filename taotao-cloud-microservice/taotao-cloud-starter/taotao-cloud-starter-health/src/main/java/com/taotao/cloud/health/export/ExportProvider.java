@@ -37,9 +37,9 @@ import net.logstash.logback.appender.LogstashTcpSocketAppender;
 public class ExportProvider {
 
 	private boolean isClose = true;
-	private Monitor monitorThreadPool;
-	private ExportProperties exportProperties;
-	private HealthCheckProvider healthCheckProvider;
+	private final Monitor monitorThreadPool;
+	private final ExportProperties exportProperties;
+	private final HealthCheckProvider healthCheckProvider;
 	protected List<AbstractExport> exports = new ArrayList<>();
 
 	public ExportProvider(Monitor monitorThreadPool,

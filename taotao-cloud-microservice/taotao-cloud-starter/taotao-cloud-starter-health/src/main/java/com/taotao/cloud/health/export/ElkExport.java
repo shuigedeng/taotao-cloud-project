@@ -41,8 +41,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ElkExport extends AbstractExport {
 
-	private ExportProperties exportProperties;
-	private LogstashTcpSocketAppender appender;
+	private final ExportProperties exportProperties;
+	private final LogstashTcpSocketAppender appender;
 
 	public ElkExport(ExportProperties exportProperties,
 		LogstashTcpSocketAppender appender) {

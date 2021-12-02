@@ -16,10 +16,11 @@
 package com.taotao.cloud.health.strategy;
 
 import com.taotao.cloud.common.bean.BeanUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.common.model.PropertyCache;
+import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.health.model.Report;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -135,25 +136,27 @@ public class Rule {
 	 */
 	static public class RulesAnalyzer {
 
-		private Map<String, List<RuleInfo>> rules = new HashMap<>();
-		private RuleParser ruleParser = new RuleParser();
-		private PropertyCache propertyCache;
+		private final Map<String, List<RuleInfo>> rules = new HashMap<>();
+		private final RuleParser ruleParser = new RuleParser();
 
-		public RulesAnalyzer(PropertyCache propertyCache) {
-			//订阅配置改变，重新注册规则
-			propertyCache.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
-				for (Map.Entry<String, Object> e : map.entrySet()) {
-					String key = e.getKey();
+		public RulesAnalyzer() {
+			PropertyCache propertyCache = ContextUtil.getBean(PropertyCache.class, false);
+			if (Objects.nonNull(propertyCache)) {
+				//订阅配置改变，重新注册规则
+				propertyCache.listenUpdateCache("RulesAnalyzer 动态规则订阅", (map) -> {
+					for (Map.Entry<String, Object> e : map.entrySet()) {
+						String key = e.getKey();
 
-					if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
-						key = key.replace("taotao.cloud.health.strategy.", "");
-						Object rule = rules.get(key);
-						if (rule != null) {
-							registerRules(key, StringUtil.nullToEmpty(e.getValue()));
+						if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
+							key = key.replace("taotao.cloud.health.strategy.", "");
+							Object rule = rules.get(key);
+							if (rule != null) {
+								registerRules(key, StringUtil.nullToEmpty(e.getValue()));
+							}
 						}
 					}
-				}
-			});
+				});
+			}
 		}
 
 		/**
