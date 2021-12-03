@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerIntercept
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
+import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
@@ -14,6 +17,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +29,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-04 07:39:51
  */
 @Configuration
+@EnableConfigurationProperties({TenantProperties.class})
 @AutoConfigureBefore(MybatisPlusAutoConfiguration.class)
 @ConditionalOnProperty(prefix = TenantProperties.PREFIX, name = "enabled", havingValue = "true")
 public class TenantAutoConfiguration implements InitializingBean {
@@ -45,7 +50,6 @@ public class TenantAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlParserFilter sqlParserFilter() {
-		LogUtil.started(ISqlParserFilter.class, StarterName.MYBATIS_PLUS_STARTER);
 		return metaObject -> {
 			MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
 			return tenantProperties.getIgnoreSqlList()
@@ -61,7 +65,6 @@ public class TenantAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public TenantLineInnerInterceptor tenantLineInnerInterceptor() {
-		LogUtil.started(TenantLineInnerInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new TenantLineInnerInterceptor(new TenantLineHandler() {
 			/**
 			 * 获取租户ID

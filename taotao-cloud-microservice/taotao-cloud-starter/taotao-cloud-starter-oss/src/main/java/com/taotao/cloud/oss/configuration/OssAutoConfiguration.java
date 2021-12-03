@@ -15,15 +15,10 @@
  */
 package com.taotao.cloud.oss.configuration;
 
-import com.taotao.cloud.oss.propeties.AliyunOssProperties;
-import com.taotao.cloud.oss.propeties.FastdfsProperties;
-import com.taotao.cloud.oss.propeties.FtpProperties;
-import com.taotao.cloud.oss.propeties.LocalProperties;
-import com.taotao.cloud.oss.propeties.NginxProperties;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
-import com.taotao.cloud.oss.propeties.QCloudProperties;
-import com.taotao.cloud.oss.propeties.QiniuProperties;
-import com.taotao.cloud.oss.propeties.UpYunProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,28 +30,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @since 2020/10/26 10:49
  */
-@EnableConfigurationProperties({
-	OssProperties.class,
-	AliyunOssProperties.class,
-	FastdfsProperties.class,
-	LocalProperties.class,
-	NginxProperties.class,
-	QCloudProperties.class,
-	QiniuProperties.class,
-	FtpProperties.class,
-	UpYunProperties.class
-})
+@EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "enabled", havingValue = "true")
-@ImportAutoConfiguration({
-	AliyunOssAutoConfiguration.class,
-	FdfsDfsAutoConfiguration.class,
-	FtpAutoConfiguration.class,
-	LocalAutoConfiguration.class,
-	NginxAutoConfiguration.class,
-	QCloudAutoConfiguration.class,
-	QiniuAutoConfiguration.class,
-	UpYunAutoConfiguration.class
-})
-public class OssAutoConfiguration {
+public class OssAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(OssAutoConfiguration.class, StarterName.OSS_STARTER);
+	}
 
 }

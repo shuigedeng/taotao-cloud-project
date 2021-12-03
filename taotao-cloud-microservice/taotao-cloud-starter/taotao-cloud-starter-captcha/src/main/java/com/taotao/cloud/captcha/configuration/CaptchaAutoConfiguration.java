@@ -59,8 +59,6 @@ public class CaptchaAutoConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnMissingBean
 	public CaptchaService captchaService(CaptchaProperties prop) {
-		LogUtil.started(CaptchaService.class, StarterName.CAPTCHA_STARTER);
-
 		Properties config = new Properties();
 
 		config.put(CaptchaConst.CAPTCHA_CACHETYPE, prop.getCacheType().name());
@@ -99,7 +97,6 @@ public class CaptchaAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public CaptchaCacheService captchaCacheService(CaptchaProperties captchaProperties) {
-		LogUtil.started(CaptchaCacheService.class, StarterName.CAPTCHA_STARTER);
 		return CaptchaServiceFactory.getCache(captchaProperties.getCacheType().name());
 	}
 

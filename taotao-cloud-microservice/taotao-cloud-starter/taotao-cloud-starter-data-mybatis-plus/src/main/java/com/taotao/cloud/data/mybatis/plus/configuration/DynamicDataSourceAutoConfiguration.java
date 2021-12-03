@@ -48,6 +48,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 /**
  * DynamicDataSourceAutoConfiguration
  *
@@ -58,7 +59,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 @AutoConfigureBefore(name = "io.seata.spring.boot.autoconfigure.SeataAutoConfiguration")
-@EnableConfigurationProperties(DataSourceProperties.class)
+@EnableConfigurationProperties({DataSourceProperties.class,
+	MybatisPlusDynamicDataSourceProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusDynamicDataSourceProperties.PREFIX, name = "enabled", havingValue = "true")
 public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 
@@ -68,17 +70,12 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public DynamicDataSourceProvider dynamicDataSourceProvider(
-		DataSourceProperties properties) {
-		LogUtil.started(JdbcDynamicDataSourceProvider.class, StarterName.MYBATIS_PLUS_STARTER);
-
+	public DynamicDataSourceProvider dynamicDataSourceProvider(DataSourceProperties properties) {
 		return new JdbcDynamicDataSourceProvider(properties);
 	}
 
 	@Bean
 	public DsProcessor dsProcessor() {
-		LogUtil.started(DsProcessor.class, StarterName.MYBATIS_PLUS_STARTER);
-
 		return new LastParamDsProcessor();
 	}
 
@@ -212,6 +209,7 @@ public class DynamicDataSourceAutoConfiguration implements InitializingBean {
 	}
 
 	/**
+	 *
 	 */
 	@ConfigurationProperties("spring.datasource")
 	public static class DataSourceProperties {

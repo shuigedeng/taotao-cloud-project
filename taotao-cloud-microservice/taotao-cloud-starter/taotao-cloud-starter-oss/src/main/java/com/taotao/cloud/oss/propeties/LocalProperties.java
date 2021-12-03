@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = LocalProperties.PREFIX)
 public class LocalProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.local";
+	public static final String PREFIX = "taotao.cloud.oss.local";
 
 	public static String sysPath = System.getProperty("user.dir");
 

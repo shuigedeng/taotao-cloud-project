@@ -87,19 +87,16 @@ public class SeataDataSourceConfiguration implements InitializingBean {
 
 	@Bean
 	public SeataXidFilter seataXidFilter() {
-		LogUtil.started(SeataXidFilter.class, StarterName.SEATA_STARTER);
 		return new SeataXidFilter();
 	}
 
 	@Bean
 	public SeataInterceptor seataInterceptor() {
-		LogUtil.started(SeataInterceptor.class, StarterName.SEATA_STARTER);
 		return new SeataInterceptor();
 	}
 
 	@Bean
 	public DetectTable detectTable(DataSource dataSource) {
-		LogUtil.started(DetectTable.class, StarterName.SEATA_STARTER);
 		return new DetectTable(dataSource);
 	}
 

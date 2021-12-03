@@ -61,7 +61,6 @@ public class XxlJobConfiguration implements InitializingBean {
 	public XxlJobSpringExecutor xxlJobSpringExecutor(XxlJobProperties xxlJobProperties,
 		Environment environment,
 		DiscoveryClient discoveryClient) {
-		LogUtil.started(XxlJobSpringExecutor.class, StarterName.JOB_XXL_STARTER);
 
 		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 		XxlExecutorProperties executor = xxlJobProperties.getExecutor();

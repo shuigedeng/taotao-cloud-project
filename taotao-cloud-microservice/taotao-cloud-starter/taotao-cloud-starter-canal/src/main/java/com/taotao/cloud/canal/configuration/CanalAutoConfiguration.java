@@ -48,8 +48,6 @@ public class CanalAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public CanalClient canalClient(CanalProperties properties) {
-		LogUtil.started(CanalClient.class, StarterName.CANAL_STARTER);
-
 		// CanalClient canalClient = new SimpleCanalClient(canalConfig, MessageTransponders.defaultMessageTransponder());
 		return new SimpleCanalClient(properties);
 	}

@@ -52,8 +52,6 @@ public class SmsConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "ALIYUN")
 	public IAcsClient iAcsClient(AliSmsProperties aliSmsProperties) {
-		LogUtil.started(IAcsClient.class, StarterName.SMS_STARTER);
-
 		DefaultProfile profile = DefaultProfile.getProfile(
 			aliSmsProperties.getRegionId(),
 			aliSmsProperties.getAccessKey(),
@@ -73,8 +71,6 @@ public class SmsConfiguration implements InitializingBean {
 	@Bean
 	@ConditionalOnProperty(prefix = SmsProperties.PREFIX, name = "type", havingValue = "ALIYUN")
 	public SmsService aliSmsTemplate(AliSmsProperties smsProperties, IAcsClient iAcsClient) {
-		LogUtil.started(SmsService.class, StarterName.SMS_STARTER);
-
 		return new AliSmsServiceImpl(smsProperties, iAcsClient);
 	}
 }

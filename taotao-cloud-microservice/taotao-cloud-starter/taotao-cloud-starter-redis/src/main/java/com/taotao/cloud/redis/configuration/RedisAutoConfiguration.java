@@ -113,8 +113,6 @@ public class RedisAutoConfiguration implements InitializingBean {
 
 	@Bean("stringRedisTemplate")
 	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
-		LogUtil.started(StringRedisTemplate.class, StarterName.REDIS_STARTER);
-
 		StringRedisTemplate template = new StringRedisTemplate();
 		template.setConnectionFactory(factory);
 		return template;

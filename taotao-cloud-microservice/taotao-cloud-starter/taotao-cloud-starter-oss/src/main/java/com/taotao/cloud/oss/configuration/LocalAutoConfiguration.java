@@ -15,20 +15,36 @@
  */
 package com.taotao.cloud.oss.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.oss.propeties.NginxProperties;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.LocalProperties;
+import com.taotao.cloud.oss.propeties.QCloudProperties;
+import com.taotao.cloud.oss.propeties.QiniuProperties;
+import com.taotao.cloud.oss.propeties.UpYunProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.LocalUploadFileServiceImpl;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
+@Configuration
+@EnableConfigurationProperties({LocalProperties.class,})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "LOCAL")
-public class LocalAutoConfiguration {
+public class LocalAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(LocalAutoConfiguration.class, StarterName.OSS_STARTER);
+	}
 
 	@Bean
 	public UploadFileService fileUpload(LocalProperties properties) {

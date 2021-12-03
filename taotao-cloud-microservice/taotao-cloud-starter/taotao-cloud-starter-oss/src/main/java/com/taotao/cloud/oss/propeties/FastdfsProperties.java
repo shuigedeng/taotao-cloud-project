@@ -31,7 +31,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = FastdfsProperties.PREFIX)
 public class FastdfsProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.fastdfs";
+	public static final String PREFIX = "taotao.cloud.oss.fastdfs";
 
 	/**
 	 * 读取时间

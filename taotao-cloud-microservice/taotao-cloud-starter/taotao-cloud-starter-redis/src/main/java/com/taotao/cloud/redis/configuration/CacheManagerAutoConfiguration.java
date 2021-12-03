@@ -87,8 +87,6 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public KeyGenerator keyGenerator() {
-		LogUtil.started(KeyGenerator.class, StarterName.REDIS_STARTER);
-
 		return (target, method, objects) -> {
 			StringBuilder sb = new StringBuilder();
 			sb.append(target.getClass().getName());
@@ -160,8 +158,7 @@ public class CacheManagerAutoConfiguration implements InitializingBean {
 	 * Caffeine auto cache configuration.
 	 */
 	@Configuration
-	@EnableConfigurationProperties({
-		org.springframework.boot.autoconfigure.cache.CacheProperties.class})
+	@EnableConfigurationProperties({org.springframework.boot.autoconfigure.cache.CacheProperties.class})
 	@ConditionalOnMissingBean(CacheManager.class)
 	@AutoConfigureBefore(name = "org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration")
 	public static class CaffeineAutoCacheConfiguration {

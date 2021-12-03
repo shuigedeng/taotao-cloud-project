@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = QiniuProperties.PREFIX)
 public class QiniuProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.qiniu";
+	public static final String PREFIX = "taotao.cloud.oss.qiniu";
 
 	/**
 	 * 七牛绑定的域名

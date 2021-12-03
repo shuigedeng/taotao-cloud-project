@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = UpYunProperties.PREFIX)
 public class UpYunProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.upyun";
+	public static final String PREFIX = "taotao.cloud.oss.upyun";
 
 	/**
 	 * 服务名

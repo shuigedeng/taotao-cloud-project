@@ -28,9 +28,9 @@ import org.springframework.core.env.Environment;
  * @author shuigedeng
  */
 @Configuration
+@ConditionalOnClass(AbstractConfig.class)
 @EnableConfigurationProperties({DubboProperties.class})
 @ConditionalOnProperty(prefix = DubboProperties.PREFIX, name = "enabled", matchIfMissing = true)
-@ConditionalOnClass(AbstractConfig.class)
 public class DubboFeignAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -42,8 +42,6 @@ public class DubboFeignAutoConfiguration implements InitializingBean {
     @ConditionalOnClass(ConfigurationPropertySources.class)
     @ConditionalOnProperty(prefix = DUBBO_SCAN_PREFIX, name = BASE_PACKAGES_PROPERTY_NAME)
     public DubboFeignProviderBeanPostProcessor dubboFeignProviderBeanPostProcessor(Environment environment) {
-	    LogUtil.started(DubboFeignProviderBeanPostProcessor.class, StarterName.DUBBO_STARTER);
-
         Set<String> packagesToScan = environment.getProperty(DUBBO_SCAN_PREFIX + BASE_PACKAGES_PROPERTY_NAME, Set.class, emptySet());
         return new DubboFeignProviderBeanPostProcessor(packagesToScan);
     }
@@ -51,8 +49,6 @@ public class DubboFeignAutoConfiguration implements InitializingBean {
     @Bean
     @Primary
     public Feign.Builder feignDubboBuilder() {
-	    LogUtil.started(DubboFeignBuilder.class, StarterName.DUBBO_STARTER);
-
         return new DubboFeignBuilder();
     }
 }

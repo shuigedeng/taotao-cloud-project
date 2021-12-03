@@ -82,5 +82,4 @@ public class ZookeeperAutoConfiguration implements InitializingBean {
 		return new ZookeeperDistributedLock(curatorFramework);
 	}
 
-
 }

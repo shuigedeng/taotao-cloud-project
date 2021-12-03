@@ -18,26 +18,27 @@ package com.taotao.cloud.dingtalk.configuration;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
+import com.taotao.cloud.dingtalk.exception.ConfigurationException;
 import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
 import com.taotao.cloud.dingtalk.model.DingerManagerBuilder;
 import com.taotao.cloud.dingtalk.model.DingerRobot;
+import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
 import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import com.taotao.cloud.dingtalk.session.DingerSessionFactory;
 import com.taotao.cloud.dingtalk.session.SessionConfiguration;
 import com.taotao.cloud.dingtalk.spring.DingerSessionFactoryBean;
-import com.taotao.cloud.dingtalk.exception.ConfigurationException;
-import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
 import com.taotao.cloud.dingtalk.support.DingerAsyncCallback;
 import com.taotao.cloud.dingtalk.support.DingerExceptionCallback;
-import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
+import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
 import com.taotao.cloud.dingtalk.support.DingerSignAlgorithm;
 import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -52,23 +53,23 @@ import org.springframework.web.client.RestTemplate;
 /**
  * DingerAutoConfiguration
  *
-
  * @since 1.2
  */
 @Configuration
-@EnableConfigurationProperties({ThreadPoolProperties.class,
+@EnableConfigurationProperties({
+	ThreadPoolProperties.class,
 	HttpClientProperties.class,
 	DingerProperties.class})
-@AutoConfigureAfter({BeanConfiguration.class, HttpClientConfiguration.class, ThreadPoolConfiguration.class})
+@AutoConfigureAfter({BeanConfiguration.class,
+	HttpClientConfiguration.class,
+	ThreadPoolConfiguration.class})
 @ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DingtalkConfiguration implements InitializingBean {
 
 	private final DingerProperties properties;
 	private final ResourceLoader resourceLoader;
 
-	public DingtalkConfiguration(
-		DingerProperties dingerProperties,
-		ResourceLoader resourceLoader) {
+	public DingtalkConfiguration(DingerProperties dingerProperties, ResourceLoader resourceLoader) {
 		this.properties = dingerProperties;
 		this.resourceLoader = resourceLoader;
 	}
@@ -87,6 +88,7 @@ public class DingtalkConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnBean
 	public DingerManagerBuilder dingerManagerBuilder(
 		@Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate,
 		DingerExceptionCallback dingerExceptionCallback,
@@ -118,13 +120,9 @@ public class DingtalkConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	public DingerSessionFactory dingerSessionFactory(DingerRobot dingerRobot) throws Exception {
 		DingerSessionFactoryBean factory = new DingerSessionFactoryBean();
-		factory.setConfiguration(
-			SessionConfiguration.of(properties, dingerRobot));
+		factory.setConfiguration(SessionConfiguration.of(properties, dingerRobot));
 		return factory.getObject();
 	}
-
-
-
 
 	private void checkConfigFileExists() {
 		if (StringUtils.hasText(this.properties.getDingerLocations())) {

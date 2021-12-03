@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = NginxProperties.PREFIX)
 public class NginxProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.nginx";
+	public static final String PREFIX = "taotao.cloud.oss.nginx";
 
 	/**
 	 * nginx上传路径
