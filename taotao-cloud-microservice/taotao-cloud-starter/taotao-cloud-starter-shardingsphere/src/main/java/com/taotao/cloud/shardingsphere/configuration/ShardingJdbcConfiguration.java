@@ -46,6 +46,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({ShardingJdbcProperties.class,
 	SpringBootShardingRuleConfigurationProperties.class,
 	SpringBootMasterSlaveRuleConfigurationProperties.class,
+	SpringBootShadowRuleConfigurationProperties.class,
 	SpringBootEncryptRuleConfigurationProperties.class,
 	SpringBootPropertiesConfigurationProperties.class})
 @ConditionalOnProperty(prefix = ShardingJdbcProperties.PREIX, name = "enabled", havingValue = "true")
@@ -80,8 +81,6 @@ public class ShardingJdbcConfiguration extends SpringBootConfiguration implement
 
 	@Bean
 	public DataSourceShardingAlgorithm dataSourceShardingAlgorithm() {
-		LogUtil.started(DataSourceShardingAlgorithm.class, StarterName.SHARDINGSPHERE_STARTER);
-
 		return new DataSourceShardingAlgorithm();
 	}
 

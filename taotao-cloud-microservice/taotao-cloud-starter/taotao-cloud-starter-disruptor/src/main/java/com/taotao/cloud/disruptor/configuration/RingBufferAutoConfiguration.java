@@ -85,8 +85,6 @@ public class RingBufferAutoConfiguration implements ApplicationContextAware, Ini
 		EventFactory<DisruptorEvent> eventFactory,
 		@Autowired(required = false) DisruptorEventDispatcher preEventHandler,
 		@Autowired(required = false) DisruptorEventDispatcher postEventHandler) {
-		LogUtil.started(RingBuffer.class, StarterName.DISRUPTOR_STARTER);
-
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
 		// 创建线程池
 		ExecutorService executor = Executors.newFixedThreadPool(properties.getRingThreadNumbers());

@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = FtpProperties.PREFIX)
 public class FtpProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.ftp";
+	public static final String PREFIX = "taotao.cloud.oss.ftp";
 
 	private String host;
 

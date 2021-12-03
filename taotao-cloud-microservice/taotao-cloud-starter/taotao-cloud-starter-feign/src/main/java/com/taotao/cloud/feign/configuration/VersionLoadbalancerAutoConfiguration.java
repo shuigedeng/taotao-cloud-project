@@ -71,7 +71,6 @@
 	 @Bean
 	 public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
 		 Environment environment, LoadBalancerClientFactory loadBalancerClientFactory) {
-		 LogUtil.started(ReactorLoadBalancer.class, StarterName.FEIGN_STARTER);
 
 		 String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
 		 return new VersionLoadBalancer(

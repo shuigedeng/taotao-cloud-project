@@ -35,11 +35,10 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Dinger默认Http客户端配置
- *
  */
 @Configuration
-@ConditionalOnMissingBean(name = DingerConstant.DINGER_REST_TEMPLATE)
 @AutoConfigureAfter(BeanConfiguration.class)
+@ConditionalOnMissingBean(name = DingerConstant.DINGER_REST_TEMPLATE)
 @ConditionalOnProperty(prefix = HttpClientProperties.PREFIX, value = "enabled", havingValue = "true")
 public class HttpClientConfiguration implements InitializingBean {
 
@@ -58,15 +57,13 @@ public class HttpClientConfiguration implements InitializingBean {
 	}
 
 	@Bean(name = DingerConstant.DINGER_REST_TEMPLATE)
-	public RestTemplate restTemplate(
-		ClientHttpRequestFactory dingerClientHttpRequestFactory) {
+	public RestTemplate restTemplate(ClientHttpRequestFactory dingerClientHttpRequestFactory) {
 		return new RestTemplate(dingerClientHttpRequestFactory);
 	}
 
 	@Bean
-	public DingerHttpClient dingerHttpClient(@Autowired
-	@Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate) {
-		LogUtil.started(DingerHttpClient.class, StarterName.DINGTALK_STARTER);
+	public DingerHttpClient dingerHttpClient(
+		@Autowired @Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate) {
 		return new DingerHttpTemplate(restTemplate);
 	}
 }

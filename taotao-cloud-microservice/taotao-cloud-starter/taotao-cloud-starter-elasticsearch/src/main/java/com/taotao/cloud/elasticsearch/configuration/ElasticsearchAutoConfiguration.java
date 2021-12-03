@@ -57,8 +57,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(ElasticsearchAutoConfiguration.class,
-			StarterName.ELASTICSEARCH_STARTER);
+		LogUtil.started(ElasticsearchAutoConfiguration.class, StarterName.ELASTICSEARCH_STARTER);
 	}
 
 	@Bean
@@ -75,7 +74,6 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	public ElasticsearchRestTemplate elasticsearchRestTemplate(
 		RestHighLevelClient restHighLevelClient) {
-
 		return new ElasticsearchRestTemplate(restHighLevelClient);
 	}
 

@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = QCloudProperties.PREFIX)
 public class QCloudProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.qcloud";
+	public static final String PREFIX = "taotao.cloud.oss.qcloud";
 
 	/**
 	 * 腾讯云绑定的域名

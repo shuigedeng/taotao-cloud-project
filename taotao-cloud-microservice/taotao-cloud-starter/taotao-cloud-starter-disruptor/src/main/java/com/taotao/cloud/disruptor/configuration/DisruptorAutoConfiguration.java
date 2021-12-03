@@ -77,8 +77,8 @@ import org.springframework.util.ObjectUtils;
  * @since 2021-09-03 19:58:30
  */
 @Configuration
-@EnableConfigurationProperties({DisruptorProperties.class})
 @ConditionalOnClass({Disruptor.class})
+@EnableConfigurationProperties({DisruptorProperties.class})
 @ConditionalOnProperty(prefix = DisruptorProperties.PREFIX, value = "enabled", havingValue = "true")
 public class DisruptorAutoConfiguration implements ApplicationContextAware, InitializingBean {
 
@@ -94,7 +94,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	/**
 	 * 处理器链定义
 	 */
-	private Map<String, String> handlerChainDefinitionMap = new HashMap<>();
+	private final Map<String, String> handlerChainDefinitionMap = new HashMap<>();
 
 	/**
 	 * 决定一个消费者将如何等待生产者将Event置入Disruptor的策略。 用来权衡当生产者无法将新的事件放进RingBuffer时的处理策略。
@@ -103,7 +103,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	@Bean
 	@ConditionalOnMissingBean
 	public WaitStrategy waitStrategy() {
-		LogUtil.started(WaitStrategy.class, StarterName.DISRUPTOR_STARTER);
 		return WaitStrategys.YIELDING_WAIT;
 	}
 
@@ -117,7 +116,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	@Bean
 	@ConditionalOnMissingBean
 	public EventFactory<DisruptorEvent> eventFactory() {
-		LogUtil.started(DisruptorBindEventFactory.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorBindEventFactory();
 	}
 
@@ -126,7 +124,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	 */
 	@Bean("disruptorHandlers")
 	public Map<String, DisruptorHandler<DisruptorEvent>> disruptorHandlers() {
-		LogUtil.started(DisruptorEvent.class, StarterName.DISRUPTOR_STARTER);
 
 		Map<String, DisruptorHandler<DisruptorEvent>> disruptorPreHandlers = new LinkedHashMap<>();
 		Map<String, DisruptorHandler> beansOfType = getApplicationContext().getBeansOfType(
@@ -164,7 +161,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	@Bean("disruptorEventHandlers")
 	public List<DisruptorEventDispatcher> disruptorEventHandlers(DisruptorProperties properties,
 		@Qualifier("disruptorHandlers") Map<String, DisruptorHandler<DisruptorEvent>> eventHandlers) {
-		LogUtil.started(DisruptorEventDispatcher.class, StarterName.DISRUPTOR_STARTER);
 
 		// 获取定义 拦截链规则
 		List<EventHandlerDefinition> handlerDefinitions = properties.getHandlerDefinitions();
@@ -288,7 +284,7 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	 *
 	 * @param properties             : 配置参数
 	 * @param waitStrategy           : 一种策略，用来均衡数据生产者和消费者之间的处理效率，默认提供了3个实现类
-	 * @param threadFactory          : 线程工厂
+	 * @param eventFactory          : 线程工厂
 	 * @param eventFactory           : 工厂类对象，用于创建一个个的LongEvent， LongEvent是实际的消费数据，初始化启动Disruptor的时候，Disruptor会调用该工厂方法创建一个个的消费数据实例存放到RingBuffer缓冲区里面去，创建的对象个数为ringBufferSize指定的
 	 * @param disruptorEventHandlers : 事件分发器
 	 * @return {@link Disruptor} instance
@@ -303,8 +299,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 		@Qualifier("disruptorEventHandlers") List<DisruptorEventDispatcher> disruptorEventHandlers) {
 
 		// http://blog.csdn.net/a314368439/article/details/72642653?utm_source=itdadao&utm_medium=referral
-		LogUtil.started(Disruptor.class, StarterName.DISRUPTOR_STARTER);
-
 		DisruptorEventThreadFactory threadFactory = new DisruptorEventThreadFactory();
 
 		Disruptor<DisruptorEvent> disruptor;
@@ -346,28 +340,24 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> oneArgEventTranslator() {
-		LogUtil.started(EventTranslatorOneArg.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorEventOneArgTranslator();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorTwoArg<DisruptorEvent, String, String> twoArgEventTranslator() {
-		LogUtil.started(EventTranslatorTwoArg.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorEventTwoArgTranslator();
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public EventTranslatorThreeArg<DisruptorEvent, String, String, String> threeArgEventTranslator() {
-		LogUtil.started(EventTranslatorThreeArg.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorEventThreeArgTranslator();
 	}
 
 	@Bean
 	public DisruptorTemplate disruptorTemplate(Disruptor<DisruptorEvent> disruptor,
 		EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> oneArgEventTranslator) {
-		LogUtil.started(DisruptorTemplate.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorTemplate(disruptor, oneArgEventTranslator);
 	}
 
@@ -375,8 +365,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 	public ApplicationListener<DisruptorApplicationEvent> disruptorEventListener(
 		Disruptor<DisruptorEvent> disruptor,
 		EventTranslatorOneArg<DisruptorEvent, DisruptorEvent> oneArgEventTranslator) {
-		LogUtil.started(DisruptorApplicationEvent.class, StarterName.DISRUPTOR_STARTER);
-
 		return appEvent -> {
 			DisruptorEvent event = (DisruptorEvent) appEvent.getSource();
 			disruptor.publishEvent(oneArgEventTranslator, event);
@@ -385,7 +373,6 @@ public class DisruptorAutoConfiguration implements ApplicationContextAware, Init
 
 	@Bean
 	public DisruptorEventAwareProcessor disruptorEventAwareProcessor() {
-		LogUtil.started(DisruptorEventAwareProcessor.class, StarterName.DISRUPTOR_STARTER);
 		return new DisruptorEventAwareProcessor();
 	}
 

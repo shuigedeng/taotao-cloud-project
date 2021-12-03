@@ -29,6 +29,7 @@ import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Arrays;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -73,19 +74,16 @@ public class LoggerConfiguration implements InitializingBean {
 
 		@Bean
 		public RequestLoggerListener requestLogListener() {
-			LogUtil.started(RequestLoggerListener.class, StarterName.LOG_STARTER);
 			return new RequestLoggerListener();
 		}
 
 		@Bean
 		public RequestLoggerAspect requestLogAspect() {
-			LogUtil.started(RequestLoggerAspect.class, StarterName.LOG_STARTER);
 			return new RequestLoggerAspect();
 		}
 
 		@Bean
 		public LoggerRequestLoggerServiceImpl loggerRequestLogService() {
-			LogUtil.started(LoggerRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.LOGGER)) {
 				return new LoggerRequestLoggerServiceImpl();
 			}
@@ -93,9 +91,9 @@ public class LoggerConfiguration implements InitializingBean {
 		}
 
 		@Bean
+		@ConditionalOnBean
 		public RedisRequestLoggerServiceImpl redisRequestLogService(
 			RedisRepository redisRepository) {
-			LogUtil.started(RedisRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.REDIS)) {
 				return new RedisRequestLoggerServiceImpl(redisRepository);
 			}
@@ -103,9 +101,9 @@ public class LoggerConfiguration implements InitializingBean {
 		}
 
 		@Bean
+		@ConditionalOnBean
 		public KafkaRequestLoggerServiceImpl kafkaRequestLogService(
 			KafkaTemplate<String, String> kafkaTemplate) {
-			LogUtil.started(KafkaRequestLoggerServiceImpl.class, StarterName.LOG_STARTER);
 			if (determineLogType(RequestLoggerTypeEnum.KAFKA)) {
 				return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
 			}

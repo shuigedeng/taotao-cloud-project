@@ -47,6 +47,7 @@ import org.hibernate.event.service.spi.EventListenerRegistry;
 import org.hibernate.event.spi.EventType;
 import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -66,7 +67,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @Configuration
 @EnableJpaAuditing
-@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class})
+@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class,JpaProperties.class})
 @ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HibernateAutoConfiguration implements InitializingBean {
 
@@ -86,25 +87,22 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public AuditorBean auditorBean() {
-		LogUtil.started(AuditorBean.class, StarterName.JPA_STARTER);
 		return new AuditorBean();
 	}
 
 	@Bean
+	@ConditionalOnBean
 	public MultiTenantConnectionProvider tenantConnectionProvider(DataSource dataSource) {
-		LogUtil.started(TenantConnectionProvider.class, StarterName.JPA_STARTER);
 		return new TenantConnectionProvider(dataSource);
 	}
 
 	@Bean
 	public CurrentTenantIdentifierResolver tenantIdentifierResolver() {
-		LogUtil.started(TenantIdentifierResolver.class, StarterName.JPA_STARTER);
 		return new TenantIdentifierResolver();
 	}
 
 	@Bean
 	JpaVendorAdapter jpaVendorAdapter() {
-		LogUtil.started(JpaVendorAdapter.class, StarterName.JPA_STARTER);
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
 		hibernateJpaVendorAdapter.setShowSql(hibernateProperties.isShowSql());
 		hibernateJpaVendorAdapter.setGenerateDdl(hibernateProperties.isGenerateDdl());
@@ -113,13 +111,12 @@ public class HibernateAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnBean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory(
 		final DataSource dataSource,
 		final JpaVendorAdapter jpaVendorAdapter,
 		final MultiTenantConnectionProvider multiTenantConnectionProvider,
 		final CurrentTenantIdentifierResolver currentTenantIdentifierResolver) {
-		LogUtil.started(LocalContainerEntityManagerFactoryBean.class,
-			StarterName.JPA_STARTER);
 
 		final Map<String, Object> newJpaProperties = new HashMap<>(jpaProperties.getProperties());
 

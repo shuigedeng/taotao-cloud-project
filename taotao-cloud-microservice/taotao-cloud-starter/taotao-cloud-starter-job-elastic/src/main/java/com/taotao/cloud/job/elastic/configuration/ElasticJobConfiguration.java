@@ -51,7 +51,6 @@ public class ElasticJobConfiguration implements InitializingBean {
 	@Bean(initMethod = "init")
 	@ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "serverList")
 	public ZookeeperRegistryCenter registryCenter(ZookeeperProperties properties) {
-		LogUtil.started(ZookeeperRegistryCenter.class, StarterName.JOB_ELASTIC_STARTER);
 
 		ZookeeperConfiguration zkConfig = new ZookeeperConfiguration(
 			properties.getServerList(),
@@ -70,15 +69,11 @@ public class ElasticJobConfiguration implements InitializingBean {
 
 	@Bean
 	public JobService jobService(ZookeeperRegistryCenter zookeeperRegistryCenter) {
-		LogUtil.started(JobService.class, StarterName.JOB_ELASTIC_STARTER);
-
 		return new JobService(zookeeperRegistryCenter);
 	}
 
 	@Bean
 	public JobController jobController(JobService jobService) {
-		LogUtil.started(JobController.class, StarterName.JOB_ELASTIC_STARTER);
-
 		return new JobController(jobService);
 	}
 
@@ -86,8 +81,6 @@ public class ElasticJobConfiguration implements InitializingBean {
 	@ConditionalOnBean(JobService.class)
 	public JobConfParser jobConfParser(ZookeeperRegistryCenter zookeeperRegistryCenter,
 		JobService jobService) {
-		LogUtil.started(JobConfParser.class, StarterName.JOB_ELASTIC_STARTER);
-
 		return new JobConfParser(zookeeperRegistryCenter, jobService);
 	}
 

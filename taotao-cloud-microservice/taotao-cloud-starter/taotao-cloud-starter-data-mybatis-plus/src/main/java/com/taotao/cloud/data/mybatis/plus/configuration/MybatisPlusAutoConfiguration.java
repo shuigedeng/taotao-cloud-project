@@ -40,7 +40,6 @@ import com.taotao.cloud.data.mybatis.plus.injector.MateSqlInjector;
 import com.taotao.cloud.data.mybatis.plus.interceptor.SqlLogInterceptor;
 import com.taotao.cloud.data.mybatis.plus.interceptor.SqlMybatisInterceptor;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
-import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
@@ -66,14 +65,14 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-09-04 07:40:02
  */
 @Configuration
-@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, TenantProperties.class,
-	MybatisPlusProperties.class, MybatisPlusDynamicDataSourceProperties.class})
 @AutoConfigureAfter(TenantAutoConfiguration.class)
+@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	private final TenantProperties tenantProperties;
 	private final MybatisPlusAutoFillProperties autoFillProperties;
+
 	@Autowired(required = false)
 	private TenantLineInnerInterceptor tenantLineInnerInterceptor;
 
@@ -91,8 +90,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(MybatisPlusAutoConfiguration.class,
-			StarterName.MYBATIS_PLUS_STARTER);
+		LogUtil.started(MybatisPlusAutoConfiguration.class, StarterName.MYBATIS_PLUS_STARTER);
 	}
 
 	/**
@@ -100,22 +98,18 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ISqlInjector sqlInjector() {
-		LogUtil.started(MateSqlInjector.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new MateSqlInjector();
 	}
-
 
 	@Bean
 	@ConditionalOnProperty(value = "mybatis-plus.sql-log.enable", matchIfMissing = true)
 	public SqlLogInterceptor sqlLogInterceptor() {
-		LogUtil.started(SqlLogInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new SqlLogInterceptor();
 	}
 
 	@Bean
 	@ConditionalOnClass(name = "org.apache.ibatis.plugin.Interceptor")
 	public SqlMybatisInterceptor sqlMybatisInterceptor(Collector collector) {
-		LogUtil.started(SqlMybatisInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new SqlMybatisInterceptor(collector);
 	}
 
@@ -125,9 +119,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public MybatisPlusInterceptor mybatisPlusInterceptor() {
-		LogUtil.started(MybatisPlusInterceptor.class, StarterName.MYBATIS_PLUS_STARTER);
-
-		boolean enableTenant = tenantProperties.getEnabled();
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
 		//分页插件
@@ -137,7 +128,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 		paginationInnerInterceptor.setOverflow(true);
 		interceptor.addInnerInterceptor(paginationInnerInterceptor);
 
-		if (enableTenant && Objects.nonNull(tenantLineInnerInterceptor)) {
+		if (tenantProperties.getEnabled() && Objects.nonNull(tenantLineInnerInterceptor)) {
 			// 多租户插件
 			interceptor.addInnerInterceptor(tenantLineInnerInterceptor);
 		}
@@ -169,7 +160,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
 	public MetaObjectHandler metaObjectHandler() {
-		LogUtil.started(MetaObjectHandler.class, StarterName.MYBATIS_PLUS_STARTER);
 		return new DateMetaObjectHandler(autoFillProperties);
 	}
 
@@ -178,7 +168,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 */
 	@Bean
 	public ConfigurationCustomizer configurationCustomizer() {
-		LogUtil.started(ConfigurationCustomizer.class, StarterName.MYBATIS_PLUS_STARTER);
 		return configuration -> {
 			configuration.setDefaultEnumTypeHandler(EnumTypeHandler.class);
 			// 关闭 mybatis 默认的日志

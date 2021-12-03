@@ -50,7 +50,7 @@ public class LayTplAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean("layTpl")
-	public LayTplTemplate micaTemplate(FmtFunc fmtFunc, LayTplProperties properties) {
+	public LayTplTemplate layTplTemplate(FmtFunc fmtFunc, LayTplProperties properties) {
 		return new LayTplTemplate(properties, fmtFunc);
 	}
 }

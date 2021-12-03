@@ -71,8 +71,6 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 
 	@Bean
 	public GroupedOpenApi groupedOpenApi() {
-		LogUtil.started(GroupedOpenApi.class, StarterName.OPENAPI_STARTER);
-
 		return GroupedOpenApi
 			.builder()
 			.group(properties.getGroup())
@@ -82,8 +80,6 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 
 	@Bean
 	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
-		LogUtil.started(OpenApiCustomiser.class, StarterName.OPENAPI_STARTER);
-
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 
@@ -102,8 +98,6 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 
 	@Bean
 	public OpenAPI openApi() {
-		LogUtil.started(OpenAPI.class, StarterName.OPENAPI_STARTER);
-
 		Components components = new Components();
 
 		Map<String, SecurityScheme> securitySchemes = properties.getSecuritySchemes();

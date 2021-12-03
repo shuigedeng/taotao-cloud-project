@@ -29,7 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = AliyunOssProperties.PREFIX)
 public class AliyunOssProperties {
 
-	public static final String PREFIX = "taotao.cloud.file.aliyun";
+	public static final String PREFIX = "taotao.cloud.oss.aliyun";
 
 	/**
 	 * 阿里云绑定的域名

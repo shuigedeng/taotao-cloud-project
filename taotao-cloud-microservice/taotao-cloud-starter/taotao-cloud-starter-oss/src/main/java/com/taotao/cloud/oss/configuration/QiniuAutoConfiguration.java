@@ -19,22 +19,34 @@ import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.QiniuProperties;
 import com.taotao.cloud.oss.service.UploadFileService;
 import com.taotao.cloud.oss.service.impl.QiniuUploadFileServiceImpl;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
+@Configuration
+@EnableConfigurationProperties({QiniuProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "QINIU")
-public class QiniuAutoConfiguration {
+public class QiniuAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(QiniuAutoConfiguration.class, StarterName.OSS_STARTER);
+	}
 
 	private final QiniuProperties properties;
 
@@ -45,23 +57,12 @@ public class QiniuAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public Zone zone() {
-		Zone zone;
-		switch (properties.getZone()) {
-			case "zone0":
-				zone = Zone.zone0();
-				break;
-			case "zone1":
-				zone = Zone.zone1();
-				break;
-			case "zone2":
-				zone = Zone.zone2();
-				break;
-			default:
-				zone = Zone.autoZone();
-				break;
-		}
-
-		return zone;
+		return switch (properties.getZone()) {
+			case "zone0" -> Zone.zone0();
+			case "zone1" -> Zone.zone1();
+			case "zone2" -> Zone.zone2();
+			default -> Zone.autoZone();
+		};
 	}
 
 	/**
@@ -76,7 +77,6 @@ public class QiniuAutoConfiguration {
 	 * 构建一个七牛上传工具实例
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/10/26 11:36
 	 */
 	@Bean
@@ -100,7 +100,6 @@ public class QiniuAutoConfiguration {
 	 * 构建七牛空间管理实例
 	 *
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/10/26 11:36
 	 */
 	@Bean

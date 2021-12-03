@@ -37,13 +37,12 @@ import org.springframework.core.env.Environment;
 
 /**
  * 加密配置
- *
  */
 @Configuration
 @EnableConfigurationProperties({EncryptProperties.class, EncryptFilterProperties.class})
 @ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
 public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFactoryPostProcessor,
-		EnvironmentAware , InitializingBean {
+	EnvironmentAware, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -58,7 +57,7 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 
 	@Override
 	public void postProcessBeanFactory(
-			ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
+		ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
 		DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) configurableListableBeanFactory;
 		GenericBeanDefinition bean = new GenericBeanDefinition();
 		EncryptType type = environment.getProperty("encrypt.type", EncryptType.class);
@@ -137,9 +136,12 @@ public class EncryptAutoConfiguration implements ApplicationContextAware, BeanFa
 		private SignEncryptHandler signEncryptHandler;
 
 		@Bean
-		public DefaultPointcutAdvisor sortSignEncryptAdvisor(@Value("${encrypt.signSecret}") String sortSignSecret) {
-			SignEncryptInterceptor interceptor = new SignEncryptInterceptor(sortSignSecret, signEncryptHandler);
-			AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null, SignEncrypt.class);
+		public DefaultPointcutAdvisor sortSignEncryptAdvisor(
+			@Value("${encrypt.signSecret}") String sortSignSecret) {
+			SignEncryptInterceptor interceptor = new SignEncryptInterceptor(sortSignSecret,
+				signEncryptHandler);
+			AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null,
+				SignEncrypt.class);
 			DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
 			advisor.setPointcut(pointcut);
 			advisor.setAdvice(interceptor);

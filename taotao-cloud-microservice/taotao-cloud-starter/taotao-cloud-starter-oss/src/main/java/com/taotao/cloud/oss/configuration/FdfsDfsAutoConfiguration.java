@@ -15,17 +15,35 @@
  */
 package com.taotao.cloud.oss.configuration;
 
+import com.taotao.cloud.common.constant.StarterName;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.oss.propeties.FastdfsProperties;
+import com.taotao.cloud.oss.propeties.FtpProperties;
+import com.taotao.cloud.oss.propeties.LocalProperties;
+import com.taotao.cloud.oss.propeties.NginxProperties;
 import com.taotao.cloud.oss.propeties.OssProperties;
+import com.taotao.cloud.oss.propeties.QCloudProperties;
+import com.taotao.cloud.oss.propeties.QiniuProperties;
+import com.taotao.cloud.oss.propeties.UpYunProperties;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/10/26 10:28
  */
+@Configuration
+@EnableConfigurationProperties({FastdfsProperties.class})
 @ConditionalOnProperty(prefix = OssProperties.PREFIX, name = "type", havingValue = "FASTDFS")
-public class FdfsDfsAutoConfiguration {
+public class FdfsDfsAutoConfiguration implements InitializingBean {
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		LogUtil.started(FdfsDfsAutoConfiguration.class, StarterName.OSS_STARTER);
+	}
 
 	private final FastdfsProperties properties;
 

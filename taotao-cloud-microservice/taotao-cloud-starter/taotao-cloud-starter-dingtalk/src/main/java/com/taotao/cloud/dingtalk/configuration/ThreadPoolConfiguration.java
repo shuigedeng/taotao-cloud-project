@@ -30,12 +30,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * DINGTALK线程池配置类
- *
  */
 @Configuration
-@ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true")
-//@ConditionalOnBean(DingerRobot.class)
 @ConditionalOnMissingBean(name = DingerConstant.DINGER_EXECUTOR)
+@ConditionalOnProperty(prefix = ThreadPoolProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ThreadPoolConfiguration implements InitializingBean {
 
 	@Override
