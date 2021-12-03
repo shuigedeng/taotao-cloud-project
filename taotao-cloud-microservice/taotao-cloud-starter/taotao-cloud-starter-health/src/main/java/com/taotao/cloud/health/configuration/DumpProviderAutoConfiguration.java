@@ -22,6 +22,8 @@ import com.taotao.cloud.health.dump.DumpProvider;
 import com.taotao.cloud.health.properties.DumpProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +53,7 @@ public class DumpProviderAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	public FilterRegistrationBean<DumpFilter> dumpFilter() {
 		FilterRegistrationBean<DumpFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);

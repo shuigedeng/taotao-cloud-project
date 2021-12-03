@@ -21,6 +21,8 @@ import com.taotao.cloud.health.ping.PingFilter;
 import com.taotao.cloud.health.properties.PingProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +47,7 @@ public class PingProviderAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	public FilterRegistrationBean<PingFilter> pingFilter() {
 		FilterRegistrationBean<PingFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -61,6 +62,7 @@ public class DynamicRouteConfiguration {
 	public class NacosDynamicRoute {
 
 		@Bean
+		@ConditionalOnBean
 		public NacosRouteDefinitionRepository nacosRouteDefinitionRepository(
 			ApplicationEventPublisher publisher,
 			NacosConfigProperties nacosConfigProperties,
@@ -220,7 +222,6 @@ public class DynamicRouteConfiguration {
 		 * 更新路由
 		 *
 		 * @param definition
-		 * @return
 		 */
 		public String updateById(RouteDefinition definition) {
 			try {

@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,7 @@ public class RouterFunctionConfiguration {
 	private static final String HEALTH_REPORT = "/health/report";
 
 	@Bean
+	@ConditionalOnBean
 	public RouterFunction<ServerResponse> routerFunction(
 		HystrixFallbackHandler hystrixFallbackHandler,
 		ImageCodeHandler imageCodeWebHandler,

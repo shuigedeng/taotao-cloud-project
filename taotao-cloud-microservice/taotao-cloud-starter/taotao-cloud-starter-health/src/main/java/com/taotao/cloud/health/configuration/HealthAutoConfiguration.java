@@ -39,6 +39,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -53,10 +55,7 @@ import org.springframework.core.Ordered;
  * @since 2021-09-10 17:22:15
  */
 @Configuration
-@EnableConfigurationProperties({
-	HealthProperties.class,
-	CollectTaskProperties.class,
-})
+@EnableConfigurationProperties({HealthProperties.class, CollectTaskProperties.class})
 @AutoConfigureAfter({CoreAutoConfiguration.class})
 @ConditionalOnProperty(prefix = HealthProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HealthAutoConfiguration implements InitializingBean {
@@ -84,6 +83,7 @@ public class HealthAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnWebApplication(type = Type.SERVLET)
 	public FilterRegistrationBean<HealthReportFilter> healthReportFilter() {
 		FilterRegistrationBean<HealthReportFilter> filterRegistrationBean = new FilterRegistrationBean<>();
 		filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 2);

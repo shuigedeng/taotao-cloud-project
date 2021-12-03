@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,21 +34,16 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 @Configuration
 public class SentinelConfiguration {
 
-	private final List<ViewResolver> viewResolvers;
-
-	private final ServerCodecConfigurer serverCodecConfigurer;
-
-	public SentinelConfiguration(ObjectProvider<List<ViewResolver>> viewResolversProvider,
-		ServerCodecConfigurer serverCodecConfigurer) {
-		this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
-		this.serverCodecConfigurer = serverCodecConfigurer;
-	}
-
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
+	@ConditionalOnBean
+	public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler(
+		ObjectProvider<List<ViewResolver>> viewResolversProvider,
+		ServerCodecConfigurer serverCodecConfigurer) {
+
 		// Register the block exception handler for Spring Cloud Gateway.
-		return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
+		return new SentinelGatewayBlockExceptionHandler(
+			viewResolversProvider.getIfAvailable(Collections::emptyList), serverCodecConfigurer);
 	}
 
 	@Bean
@@ -89,6 +85,7 @@ public class SentinelConfiguration {
 			.setCount(10)
 			.setIntervalSec(1)
 		);
+
 		rules.add(new GatewayFlowRule("aliyun_route")
 			.setCount(2)
 			.setIntervalSec(2)
@@ -97,6 +94,7 @@ public class SentinelConfiguration {
 				.setParseStrategy(SentinelGatewayConstants.PARAM_PARSE_STRATEGY_CLIENT_IP)
 			)
 		);
+
 		rules.add(new GatewayFlowRule("httpbin_route")
 			.setCount(10)
 			.setIntervalSec(1)
@@ -107,6 +105,7 @@ public class SentinelConfiguration {
 				.setFieldName("X-Sentinel-Flag")
 			)
 		);
+
 		rules.add(new GatewayFlowRule("httpbin_route")
 			.setCount(1)
 			.setIntervalSec(1)
@@ -115,6 +114,7 @@ public class SentinelConfiguration {
 				.setFieldName("pa")
 			)
 		);
+
 		rules.add(new GatewayFlowRule("httpbin_route")
 			.setCount(2)
 			.setIntervalSec(30)
@@ -132,6 +132,7 @@ public class SentinelConfiguration {
 			.setGrade(RuleConstant.FLOW_GRADE_QPS)
 			.setIntervalSec(1)
 		);
+
 		GatewayRuleManager.loadRules(rules);
 	}
 

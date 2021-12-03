@@ -17,6 +17,7 @@ import java.util.Set;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -61,6 +62,7 @@ import reactor.core.publisher.Mono;
 public class GrayConfiguration {
 
 	@Bean
+	@ConditionalOnBean
 	public ReactiveLoadBalancerClientFilter gatewayLoadBalancerClientFilter(
 		LoadBalancerClientFactory clientFactory,
 		LoadBalancerProperties loadBalancerProperties,
