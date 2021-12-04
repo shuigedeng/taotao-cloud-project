@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import {Text, View} from '@tarojs/components'
 
-import "taro-ui/dist/style/components/button.scss"
 import './index.less'
 import {eventCenter, getCurrentInstance, useDidHide, useDidShow, useReady} from "@tarojs/taro";
 import {AtButton} from 'taro-ui';
