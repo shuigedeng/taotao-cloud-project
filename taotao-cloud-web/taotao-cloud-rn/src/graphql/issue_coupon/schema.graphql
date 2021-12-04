@@ -1,0 +1,60 @@
+type IssueCoupon {
+  # id
+  id: ID
+
+  # 优惠券面额
+  amount: Int
+
+  # 要求（满减）
+  require: Int
+
+  # 过期日期
+  expiredDate: String
+
+  # 数量
+  number: Int
+
+  # 需求积分
+  requirePoint: Int
+
+  # 类型
+  type: CouponType
+
+  # 状态
+  status: ItemStatus
+
+  # 是否已领取
+  draw: Boolean
+}
+
+input CreateIssueCouponInput {
+  # id(更新时传递)
+  id: ID
+
+  # 优惠券面额
+  amount: Int
+
+  # 要求（满减）
+  require: Int
+
+  # 过期日期
+  expiredDate: String
+
+  # 数量
+  number: Int
+
+  #类型
+  type: CouponType
+
+  # 需求积分
+  requirePoint: Int
+}
+
+
+enum CouponType {
+  # 普通
+  ordinary
+
+  # 会员专属
+  special
+}

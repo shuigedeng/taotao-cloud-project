@@ -1,0 +1,48 @@
+type TopUp {
+  # id
+  id: ID!
+
+  # 价格
+  price: Int
+
+  # 赠送的积分
+  givePoint: Int
+}
+
+input TopUpInput {
+  # id ( 更新时传递)
+  id: ID
+
+  # 价格
+  price: Int
+
+  # 赠送的积分
+  givePoint: Int
+}
+
+type TopUpOrder {
+  # id
+  id: ID!
+
+  # 价格
+  amount: Int
+
+  # 赠送的积分
+  givePoint: Int
+
+  # 状态
+  status: TopUpOrderStatus
+
+  # 创建时间
+  createdAt: Date
+
+  # 更新时间
+  updatedAt: Date
+}
+
+enum TopUpOrderStatus {
+  # 未支付
+  unpaid
+  # 已完成
+  completed
+}

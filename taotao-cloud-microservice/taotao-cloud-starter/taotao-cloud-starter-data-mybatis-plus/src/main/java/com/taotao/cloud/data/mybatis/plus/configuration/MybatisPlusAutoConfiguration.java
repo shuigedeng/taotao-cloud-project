@@ -66,7 +66,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(TenantAutoConfiguration.class)
-@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class})
+@EnableConfigurationProperties({MybatisPlusAutoFillProperties.class, MybatisPlusProperties.class, TenantProperties.class})
 @ConditionalOnProperty(prefix = MybatisPlusProperties.PREFIX, name = "enabled", havingValue = "true")
 public class MybatisPlusAutoConfiguration implements InitializingBean {
 

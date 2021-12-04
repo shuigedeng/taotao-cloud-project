@@ -160,8 +160,7 @@ public class PackageUtils {
 		Class<? extends Annotation>... filterAnnotations) {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		// 处理过滤掉dingerScan和Dinger解析时重复的类
-		List<String> repeatCheck = classNames.stream().map(e -> e.getName())
-			.collect(Collectors.toList());
+		List<String> repeatCheck = classNames.stream().map(Class::getName).toList();
 		packageName = packageName.replace(SPOT, SLANT);
 		try {
 			JarFile jarFile = new JarFile(jarPath);
@@ -256,13 +255,13 @@ public class PackageUtils {
 	}
 
 
-	public static void main(String[] args) {
-		List<Class<?>> classNames = new ArrayList<>();
-		classNames("com.jaemon.dinger", classNames, false);
-
-		classNames.forEach(e -> LogUtil.info(e.getName()));
-
-		LogUtil.info(String.valueOf(classNames.size()));
-	}
+	//public static void main(String[] args) {
+	//	List<Class<?>> classNames = new ArrayList<>();
+	//	classNames("com.jaemon.dinger", classNames, false);
+	//
+	//	classNames.forEach(e -> LogUtil.info(e.getName()));
+	//
+	//	LogUtil.info(String.valueOf(classNames.size()));
+	//}
 
 }

@@ -30,7 +30,7 @@ public class ThreadPoolProperties {
 
 	private static final int DEFAULT_CORE_SIZE = Runtime.getRuntime().availableProcessors() + 1;
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * 线程池维护线程的最小数量, 选填

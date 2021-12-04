@@ -1,0 +1,33 @@
+type Account {
+  # 收款人姓名
+  name: String
+
+  # 手机号码
+  phone: String
+
+  # 账户
+  account: String
+
+  # 银行卡号
+  card: String
+
+  # 微信id
+  openId: String
+}
+
+input AccountInput {
+  # 收款人姓名
+  name: String
+
+  # 手机号码
+  phone: String
+
+  # 账户
+  account: String
+
+  # 银行卡号
+  card: String
+
+  # 微信id
+  openId: String
+}

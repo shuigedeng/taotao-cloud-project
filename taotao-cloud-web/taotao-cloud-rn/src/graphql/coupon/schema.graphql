@@ -1,0 +1,49 @@
+# 优惠券详细信息
+type Coupon {
+  # id
+  id: ID
+
+  # 优惠价格
+  amount: Int
+
+  # 需求价格
+  require: Int
+
+  # 使用时间
+  usedAt: Date
+
+  # 过期时间
+  expiredDate: String
+
+  # 类型
+  type: CouponType
+}
+
+# 优惠券列表
+type CouponPagination {
+  list: [Coupon]!
+  pagination: PageInfo
+}
+
+input fetchCouponInput {
+  # 状态
+  status: Priority
+
+  # 页码信息
+  pageSize: Int
+
+  # 当前页码
+  currentPage: Int
+}
+
+# 优惠券的状态
+enum Priority {
+  # 未使用
+  useable
+
+  # 已使用
+  used
+
+  # 已过期
+  expired
+}

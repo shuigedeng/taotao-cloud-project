@@ -1,0 +1,14 @@
+type Point {
+  point: Int
+  price: Int
+  add: Boolean
+  remark: String
+  order: Order
+  topUpOrder: TopUpOrder
+  createdAt: Date
+  updatedAt: Date
+}
+type PointPagination {
+  list: [Point]!
+  pagination: PageInfo
+}

@@ -65,3 +65,6 @@ buck-out/
 /ios/Pods/
 
 /android/app/src/main/java/com/tarodemo/generated
+
+## taro-react-native-release
+!release/** 

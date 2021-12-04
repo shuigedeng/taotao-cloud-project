@@ -1,0 +1,431 @@
+@import '../../app.less';
+
+.firstLineLeft {
+  display: flex;
+  align-items: center;
+}
+
+.storeIcon {
+  width: 36px;
+  height: 36px;
+}
+
+.scanIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.chooseStore {
+  width: 190px;
+  font-size: 25px;
+  margin-left: 20px;
+  padding: 10px 1px 10px 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 40px;
+  color: #fff;
+}
+
+.sweep {
+  font-size: 35px;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.searchImg {
+  width: 35px;
+  height: 35px;
+  margin: 0 15px;
+}
+
+.input {
+  width: 62%;
+  font-size: 25px;
+  color: #747474;
+  margin-right: 20px;
+}
+
+.rightSearchBox {
+  display: flex;
+  height: 60px;
+  margin-left: 20px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.banner {
+  width: 100%;
+  height: 200PX;
+  z-index: 0;
+}
+
+.boldLine {
+  width: 100%;
+  height: 22px;
+  background-color: #f5f5f5;
+}
+
+.SpecialZone {
+  display: flex;
+}
+
+.WithinSpecialZone {
+  width: 45%;
+  border-right: 2PX solid #f5f5f5;
+  padding: 0 20px;
+}
+
+.WithinSpecialZone2 {
+  width: 60%;
+}
+
+.divider {
+  height: 2PX;
+  background-color: #f5f5f5;
+}
+
+.leftSpecial {
+  border-radius: 5px;
+  margin-right: 5px;
+  width: 280px;
+  height: 280px;
+  align-self: center;
+}
+
+.leftSpecial1 {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  align-self: center;
+  border-radius: 5px;
+}
+
+.specialLeftBox {
+  display: flex;
+  width: 100%;
+  margin: 50px 10px 10px;
+  box-sizing: border-box;
+}
+
+.specialLeftBox1 {
+  box-sizing: border-box;
+  margin: 20px;
+  margin-bottom: 0;
+}
+
+.specialLeftBox2 {
+  box-sizing: border-box;
+  margin: 20px;
+}
+
+.daySpecial {
+  font-size: 30px;
+  font-weight: 700;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+// 为你优选
+.optimizationBox {
+  background-color: #fff;
+}
+
+.items_box {
+  display: flex;
+  margin: 0px 20px 20px 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.item_box {
+  width: 320px;
+  min-height: auto;
+  border: 1px solid #f5f5f5;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.image {
+  width: 320px;
+  height: 320px;
+}
+
+.title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+  font-size: 28px;
+  color: #6a6a6a;
+}
+
+.title1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+  font-size: 20px;
+  color: #6a6a6a;
+}
+
+.price {
+  font-size: 34px;
+  color: #ff464d;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  font-size: 26px;
+  color: #b4b4b4;
+  margin-left: 10px;
+}
+
+.shoppingCart {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  background-color: @mainColor;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.priceBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.item_right_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gird {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.gird_img {
+  width: 108px;
+  height: 108px;
+  margin-bottom: 7px;
+}
+
+.grid_title {
+  text-align: center;
+  font-size: 25px;
+}
+
+.line {
+  width: 150px;
+  height: 1PX;
+  background-color: #d5d5d5;
+}
+
+.optimizationText {
+  font-size: 36px;
+  display: block;
+  margin: 30px 20px 30px 20px;
+  font-weight: 600;
+}
+
+//优选商家
+.optimization {
+  margin: 20px;
+}
+
+.optimizationLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line {
+  width: 150px;
+  height: 1PX;
+  background-color: #d5d5d5;
+}
+
+// 特色专区
+.TodaySpecial {
+  display: block;
+
+  text {
+    display: block;
+  }
+}
+
+.TodaySpecialCode {
+  display: flex;
+  margin-top: 20px;
+}
+
+.TodaySpecialTitle {
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.TodaySpecialLittle {
+  height: 28px;
+  margin-top: 9px;
+  margin-left: 10px;
+  padding: 3px 5px;
+  font-size: 18px;
+  vertical-align: middle;
+  color: #FFFFFF;
+  border: 1px solid #FF6E40;
+  border-radius: 10px;
+  background-color: #FF6E40;
+}
+
+.TodaySpecialCon {
+  color: #E02020;
+  font-size: 30px
+}
+
+.TodaySpecialBrand {
+  color: #002329;
+  font-size: 30px
+}
+
+.SpecialCoupon {
+  background-color: @mainColor;
+  border: 1px solid @mainColor;
+}
+
+.SpecialZoneImg {
+  display: flex;
+}
+
+// 五折开卡
+
+.bg_f5 {
+  background-color: #f5f5f5;
+}
+
+.TopUP {
+  display: flex;
+  height: 90px;
+  margin: 0 20px;
+  font-size: 30px;
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 10px;
+  background-color: @mainColor;
+  // background-image: linear-gradient(to right, #007D87 , #00474F);
+}
+
+.diamondImg {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+}
+
+.leftTopUp {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: row;
+}
+
+.rightTopUp {
+  display: flex;
+  margin-right: 15px;
+}
+
+.firstViewBox {
+  width: 100%;
+  position: absolute;
+}
+
+.searchAscan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.index {
+  height: 101%;
+}
+
+.absorption {
+  width: 100%;
+  position: fixed;
+  background-color: @mainColor;
+}
+
+.memberPrice {
+  background-color: @mainColor;
+  border-radius: 60px;
+  padding: 5px 10px;
+  font-size: 25px;
+  color: #fff;
+}
+
+.youDiDaoTitle {
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+
+.youDiDaoName {
+  width: 530px;
+  font-size: 30px;
+  margin-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #fff;
+}
+
+.shoppingScan {
+  position: fixed;
+  align-items: center;
+  bottom: 50px;
+  right: 10px;
+  padding: 20px;
+  font-size: 30px;
+  background-color: @mainColor;
+  border-radius: 15px;
+
+  image {
+    width: 50px;
+    height: 50px;
+    margin-left: 12px;
+  }
+
+  Text {
+    display: block;
+    color: #fff;
+  }
+}
+
+.shoppingScanTxt1 {
+  text-align-last: justify;
+  font-size: 25px;
+}
+
+.shoppingScanTxt2 {
+  font-size: 15px;
+}
+
+.titleBg {
+  width: 100%;
+  background-color: @mainColor;
+  position: fixed;
+}

@@ -1,0 +1,248 @@
+type Order {
+  # id
+  id: ID
+
+  # 价格
+  price: Int
+
+  # 优惠金额
+  discount: Int
+
+  # 总计
+  amount: Int
+
+  # 取货码
+  code: String
+
+  # 二维码
+  qrCode: String
+
+  # 配送时间
+  time: String
+
+  # 创建时间
+  createdAt: String
+
+  # 订单内的商品
+  orderItem: [OrderItem]
+
+  # 支付单号
+  trade: Trade
+
+  # 用户
+  user: UserInfo
+
+  # 支付的店铺
+  store: Store
+
+  # 使用的优惠券
+  coupon: Coupon
+
+  # 收货地址
+  address: Address
+
+  # 订单状态
+  status: String
+
+  # 购买方式
+  type: OrderType
+
+  # 积分抵扣金额
+  pointDiscountPrice: Int
+
+  # 支付方式
+  payment: OrderPayment
+
+  # 配送人员信息
+  distributionUser: DistributionUser
+}
+
+input CreateOrderInput {
+  # 优惠券id
+  couponId: ID
+
+  # 店铺 ID
+  storeId: ID!
+
+  # 商品列表
+  itemIds: [itemIds]!
+
+  # 地址
+  address: AddressInput
+
+  # 配送时间
+  time: String
+
+  # 购买方式
+  type: OrderType!
+
+  # 积分抵扣开关
+  pointDiscount: Boolean!
+
+  # 支付方式
+  payment: OrderPayment
+}
+
+input AddressInput {
+  # 收货人名称
+  receiverName: String
+
+  # 收货手机号
+  receiverPhone: String
+
+  # 收货地址
+  receiverAddress: String
+}
+
+input itemIds {
+  # 商品的 id
+  itemId: ID
+
+  #数量
+  number: Int
+}
+
+# 返回支付信息
+type Payment {
+  appId: String
+  timeStamp: String
+  nonceStr: String
+  signType: String
+  package: String
+  paySign: String
+  timestamp: String
+}
+
+type OrderPagination {
+  list: [Order]!
+  pagination: PageInfo
+}
+
+input QueryOrderInput {
+  # 一页加载最大数量
+  pageSize: Int
+
+  # 当前页码
+  currentPage: Int
+
+  # 用户 ID
+  userId: ID
+
+  # 店铺 ID
+  storeId: ID
+
+  # 积分抵扣开关
+  pointDiscount: Boolean
+
+  # 订单状态
+  status: OrderStatus
+
+  # 配送类型
+  type: OrderType
+}
+
+input Calculation {
+  # 起始地
+  from: From
+
+  # 目的地
+  to: From
+}
+
+input From {
+  # 经度
+  lng: String
+
+  # 纬度
+  lat: String
+}
+
+type CalculationPayload {
+  # 起点到终点的距离，单位：米，
+  distance: Int
+
+  # 表示从起点到终点的结合路况的时间，秒为单位
+  duration: Int
+}
+
+type MerchantOrder {
+  # 总销售额
+  totalMerchantSales: Int
+
+  # 月销售额 周销售额 日销售额
+  merchantSales: Int
+
+  # 订单详情
+  timeOrder: [TimeOrder]
+}
+
+type TimeOrder {
+  # id
+  id: ID
+
+  # 金额
+  price: Int
+
+  # 抵扣金额
+  discount: Int
+
+  # 实付金额
+  amount: Int
+
+  # 创建时间
+  createdAt: String
+
+  # 配送时间
+  time: String
+}
+
+type OrderManagePayload {
+  # 配送订单
+  distribution: Int
+
+  # 自提订单
+  unmanned: Int
+
+  # 直购订单
+  storeBuy: Int
+}
+
+enum OrderStatus {
+  # 已支付
+  paid
+
+  # 待取货
+  fetch
+
+  # 已完成
+  completed
+}
+
+enum OrderType {
+  # 配送类型
+  distribution
+
+  # 自提类型
+  unmanned
+
+  # 店铺直购
+  storeBuy
+
+  # 合并类型
+  merge
+}
+
+enum OrderPayment {
+  # 微信支付
+  wechatPay
+
+  # 余额支付
+  balance
+}
+
+type DistributionUser {
+  # 配送人姓名
+  name: String
+  # 配送人号码
+  phone: String
+}

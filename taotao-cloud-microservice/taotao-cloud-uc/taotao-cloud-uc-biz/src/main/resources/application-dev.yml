@@ -43,27 +43,27 @@ dubbo:
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
-    version: ${taotaoCloudVersion}
-    owner: taotao-cloud
-    organization: taotao-cloud
-    metadata-type: local
-    environment: dev
-    qos-enable: false
-    qos-accept-foreign-ip: false
+    #version: ${taotaoCloudVersion}
+    #owner: taotao-cloud
+    #organization: taotao-cloud
+    #metadata-type: local
+    #environment: dev
+    #qos-enable: false
+    #qos-accept-foreign-ip: false
   cloud:
     subscribed-services: '*'
     registry-type: dubbo-cloud
   registry:
     address: nacos://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
-    username:
-    password:
-    port:
-    protocol:
-    version: ${taotaoCloudVersion}
-    check: true
-    register: true
-    weight: 10
+    #username:
+    #password:
+    #port:
+    #protocol:
+    #version: ${taotaoCloudVersion}
+    #check: true
+    #register: true
+    #weight: 10
   protocol:
     name: dubbo
     port: -1
@@ -78,12 +78,12 @@ dubbo:
     check: false
     loadbalance: roundrobin
     version: ${taotaoCloudVersion}
-  module:
-    name: ${spring.application.name}
-  monitor:
-    id: ${spring.application.name}
-  metadata-report:
-    id: ${spring.application.name}
+  #module:
+  #  name: ${spring.application.name}
+  #monitor:
+  #  id: ${spring.application.name}
+  #metadata-report:
+  #  id: ${spring.application.name}
   config-center:
     check: false
 
@@ -251,9 +251,9 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
-      naming:
-        implicit-strategy:
-        physical-strategy:
+      #naming:
+      #  implicit-strategy:
+      #  physical-strategy:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -676,12 +676,16 @@ taotao:
       # - /Event-DC-Output/TagA-Output/** = emailHandler
       # - /Event-DC-Output/TagB-Output/** = smsHandler
     dinger:
-      enabled: false
+      enabled: true
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
           tokenId: ${DINGDING_TOKEN_ID:xxxxx}
           secret: ${DINGDING_SECRET:xxxx}
+      httpclient:
+        enabled: true
+      threadpool:
+        enabled: true
     data:
       mybatis-plus:
         enabled: true

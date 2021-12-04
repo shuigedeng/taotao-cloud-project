@@ -49,7 +49,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
  */
 public class IndexServiceImpl implements IIndexService {
 
-	@Autowired
+	@Autowired(required = false)
 	private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
 	private final ObjectMapper mapper = new ObjectMapper();

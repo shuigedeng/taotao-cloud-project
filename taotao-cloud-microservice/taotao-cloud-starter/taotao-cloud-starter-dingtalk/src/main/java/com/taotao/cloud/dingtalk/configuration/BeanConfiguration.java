@@ -73,7 +73,6 @@ public class BeanConfiguration implements InitializingBean {
 	 * 默认签名算法
 	 */
 	@Bean
-	@ConditionalOnMissingBean(DingTalkSignAlgorithm.class)
 	public DingTalkSignAlgorithm dingerSignAlgorithm() {
 		return new DingTalkSignAlgorithm();
 	}
@@ -82,7 +81,6 @@ public class BeanConfiguration implements InitializingBean {
 	 * 默认dkid生成配置
 	 */
 	@Bean
-	@ConditionalOnMissingBean(DingerIdGenerator.class)
 	public DingerIdGenerator dingerIdGenerator() {
 		return new DefaultDingerIdGenerator();
 	}
@@ -91,13 +89,11 @@ public class BeanConfiguration implements InitializingBean {
 	 * 默认异步执行回调实例
 	 */
 	@Bean
-	@ConditionalOnMissingBean(DingerAsyncCallback.class)
 	public DingerAsyncCallback dingerAsyncCallback() {
 		return new DefaultDingerAsyncCallable();
 	}
 
 	@Bean
-	@ConditionalOnMissingBean(DingerExceptionCallback.class)
 	public DingerExceptionCallback dingerExceptionCallback() {
 		return new DefaultDingerExceptionCallback();
 	}
