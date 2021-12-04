@@ -5,7 +5,6 @@ import { useEnv, useNavigationBar, useModal, useToast } from "taro-hooks";
 import logo from "./hook.png";
 import { AtButton } from 'taro-ui';
 
-import "taro-ui/dist/style/components/button.scss"
 import './index.less'
 
 const Index = () => {

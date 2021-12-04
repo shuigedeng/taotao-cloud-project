@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import configStore from './store'
 import React from 'react'
 
-import 'taro-ui/dist/style/index.scss'
+// import 'taro-ui/dist/style/index.scss'
 
 /**
  * 有数埋点SDK 默认配置
