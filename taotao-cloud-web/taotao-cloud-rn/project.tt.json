@@ -3,7 +3,10 @@
   "projectname": "taotao-cloud-rn",
   "appid": "touristappid",
   "setting": {
-    "es6": false,
-    "minified": false
-  }
+      "urlCheck": true,
+      "es6": false,
+      "postcss": false,
+      "minified": false
+    },
+  "compileType": "miniprogram"
 }

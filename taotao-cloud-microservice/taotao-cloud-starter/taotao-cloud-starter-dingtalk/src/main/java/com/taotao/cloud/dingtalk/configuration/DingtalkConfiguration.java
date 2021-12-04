@@ -23,12 +23,11 @@ import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
 import com.taotao.cloud.dingtalk.model.DingerManagerBuilder;
 import com.taotao.cloud.dingtalk.model.DingerRobot;
 import com.taotao.cloud.dingtalk.properties.DingerProperties;
-import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
-import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import com.taotao.cloud.dingtalk.session.DingerSessionFactory;
 import com.taotao.cloud.dingtalk.session.SessionConfiguration;
 import com.taotao.cloud.dingtalk.spring.DingerSessionFactoryBean;
 import com.taotao.cloud.dingtalk.support.CustomMessage;
+import com.taotao.cloud.dingtalk.support.DingTalkSignAlgorithm;
 import com.taotao.cloud.dingtalk.support.DingerAsyncCallback;
 import com.taotao.cloud.dingtalk.support.DingerExceptionCallback;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
@@ -36,6 +35,7 @@ import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
 import com.taotao.cloud.dingtalk.support.DingerSignAlgorithm;
 import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -56,11 +56,9 @@ import org.springframework.web.client.RestTemplate;
  * @since 1.2
  */
 @Configuration
-@EnableConfigurationProperties({
-	ThreadPoolProperties.class,
-	HttpClientProperties.class,
-	DingerProperties.class})
-@AutoConfigureAfter({BeanConfiguration.class,
+@EnableConfigurationProperties({DingerProperties.class})
+@AutoConfigureAfter({
+	BeanConfiguration.class,
 	HttpClientConfiguration.class,
 	ThreadPoolConfiguration.class})
 @ConditionalOnProperty(prefix = DingerProperties.PREFIX, value = "enabled", havingValue = "true")
@@ -88,15 +86,14 @@ public class DingtalkConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
 	public DingerManagerBuilder dingerManagerBuilder(
-		@Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate,
+		@Autowired @Qualifier(DingerConstant.DINGER_REST_TEMPLATE) RestTemplate restTemplate,
 		DingerExceptionCallback dingerExceptionCallback,
-		@Qualifier(DingerConstant.TEXT_MESSAGE) CustomMessage textMessage,
-		@Qualifier(DingerConstant.MARKDOWN_MESSAGE) CustomMessage markDownMessage,
-		DingerSignAlgorithm dingerSignAlgorithm,
+		@Autowired @Qualifier(DingerConstant.TEXT_MESSAGE) CustomMessage textMessage,
+		@Autowired @Qualifier(DingerConstant.MARKDOWN_MESSAGE) CustomMessage markDownMessage,
+		DingTalkSignAlgorithm dingerSignAlgorithm,
 		DingerIdGenerator dingerIdGenerator,
-		@Qualifier(DingerConstant.DINGER_EXECUTOR) Executor dingTalkExecutor,
+		@Autowired @Qualifier(DingerConstant.DINGER_EXECUTOR) Executor dingTalkExecutor,
 		DingerAsyncCallback dingerAsyncCallback,
 		DingerHttpClient dingerHttpClient) {
 

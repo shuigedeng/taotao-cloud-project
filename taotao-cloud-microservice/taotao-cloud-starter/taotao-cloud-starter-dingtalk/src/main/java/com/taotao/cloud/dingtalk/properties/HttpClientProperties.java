@@ -31,7 +31,7 @@ public class HttpClientProperties {
 
 	public static final String PREFIX = "taotao.cloud.dinger.httpclient";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * 连接超时时间

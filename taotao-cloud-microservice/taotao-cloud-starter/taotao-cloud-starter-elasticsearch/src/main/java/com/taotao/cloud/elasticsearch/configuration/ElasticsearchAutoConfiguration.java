@@ -30,6 +30,7 @@ import com.taotao.cloud.elasticsearch.service.impl.SearchServiceImpl;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
@@ -62,18 +63,16 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public RestClientBuilderCustomizer restClientBuilderCustomizer(
-		RestClientPoolProperties poolProperties,
-		ElasticsearchRestClientProperties restProperties) {
+		RestClientPoolProperties poolProperties) {
 		return (builder) -> {
 			setRequestConfig(builder, poolProperties);
-			setHttpClientConfig(builder, poolProperties, restProperties);
+			setHttpClientConfig(builder, poolProperties, null);
 		};
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	public ElasticsearchRestTemplate elasticsearchRestTemplate(
-		RestHighLevelClient restHighLevelClient) {
+	@ConditionalOnBean
+	public ElasticsearchRestTemplate elasticsearchRestTemplate(RestHighLevelClient restHighLevelClient) {
 		return new ElasticsearchRestTemplate(restHighLevelClient);
 	}
 
@@ -83,6 +82,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
+	@ConditionalOnBean
 	public ISearchService searchService(ElasticsearchRestTemplate elasticsearchRestTemplate) {
 		return new SearchServiceImpl(elasticsearchRestTemplate);
 	}

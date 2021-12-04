@@ -50,21 +50,21 @@ public class ConfigTools {
 	private static final String DEFAULT_PRIVATE_KEY_STRING = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAK3UkOuP3zsAHap4ImPXuhVskiKGm3PXcM/Xo02CbrmBYHMb0bGuByesSpXhep6OPWGdrIW6LvDnS6ivyVrsDeBd82QS6KmfEMRVJoqeqVZy3mphstAOtHK4OGtABFogXw2RfDRunGq5GW9shF4DWFhrWWsBK/UGs7kJrVir6v77AgMBAAECgYEApnOMTbSXmmSTA6BDtf1ll4w+JsdkZbmfsbYYDmleY03KsI6r7grpmQi25uxhQSCNEEMuZ2MP/ehNH3ssQV8WLPU/wobm/2qaRALtD02sQRefhP95SVvOrgry+ElxawWQyUoyLSyH1bpoCI9J2orx/tnrQQi9nYDeR2+aH4S7JpkCQQDZDr/1dvTqX+ZOmlBF3lI6P0xKLklHinSp3anmW4tRyxA/W9gguZ9JlGFVKP9Ml2YxH3dBVktkfPITloj0smltAkEAzQRtpyUPx3HqjnveZ0CIDeI7j6hbLGGANZ5Gm99lWPVzNMPv6bFcJ2TEXzNq3fqE3Dmv6veSxV3eUOrzHOVxBwJBAKTpD+7u8iUft1sA4vwybUbT0KKLiCFSkFB+mRbrdm4uWanJnes/HEZK9ag9/bmzTXEE9xYs+hre0w0O0f8XjgECQCckEUs36CtLtFw/idZsm40LBBQJMF7ovnF+JjzcCZ1SPwxz2/nhwpZCxrrmNiDrEzJ4UP2rBnpn0WnhcUizBUECQFSU/s7cLaMSjlGmacDDf1r+u8cD2rKyWQWmEiXI155L4gSz2s/Pu5u1X8fcKqlGvtJFfSUP68w1e0x7mPGFohc=";
 	public static final String DEFAULT_PUBLIC_KEY_STRING = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCt1JDrj987AB2qeCJj17oVbJIihptz13DP16NNgm65gWBzG9GxrgcnrEqV4Xqejj1hnayFui7w50uor8la7A3gXfNkEuipnxDEVSaKnqlWct5qYbLQDrRyuDhrQARaIF8NkXw0bpxquRlvbIReA1hYa1lrASv1BrO5Ca1Yq+r++wIDAQAB";
 
-	public static void main(String[] args) throws Exception {
-		if (args.length == 0) {
-			System.out.println("secret is empty");
-			return;
-		}
-
-		String password = args[0];
-		String[] arr = genKeyPair(1024);
-		LogUtil.info("privateKey: " + arr[0]);
-		LogUtil.info("decryptKey: " + arr[1]);
-		String encrypt = encrypt(arr[0], password);
-		LogUtil.info("encrypt tokenId: " + encrypt);
-		String decrypt = decrypt(arr[1], encrypt);
-		LogUtil.info("decrypt tokenId:" + decrypt);
-	}
+	//public static void main(String[] args) throws Exception {
+	//	if (args.length == 0) {
+	//		System.out.println("secret is empty");
+	//		return;
+	//	}
+	//
+	//	String password = args[0];
+	//	String[] arr = genKeyPair(1024);
+	//	LogUtil.info("privateKey: " + arr[0]);
+	//	LogUtil.info("decryptKey: " + arr[1]);
+	//	String encrypt = encrypt(arr[0], password);
+	//	LogUtil.info("encrypt tokenId: " + encrypt);
+	//	String decrypt = decrypt(arr[1], encrypt);
+	//	LogUtil.info("decrypt tokenId:" + decrypt);
+	//}
 
 	public static String decrypt(String cipherText) throws Exception {
 		return decrypt((String) null, cipherText);

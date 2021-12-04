@@ -42,7 +42,7 @@ public class HibernateProperties {
 	/**
 	 * 是否开启Hibernate
 	 */
-	private Boolean enabled = false;
+	private Boolean enabled = true;
 
 	private boolean showSql = true;
 	private boolean generateDdl = true;

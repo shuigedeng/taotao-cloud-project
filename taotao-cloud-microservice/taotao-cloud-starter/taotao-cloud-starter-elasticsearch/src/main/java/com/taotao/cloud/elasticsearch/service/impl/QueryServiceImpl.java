@@ -25,6 +25,7 @@ import com.taotao.cloud.elasticsearch.service.ISearchService;
 import java.io.IOException;
 import java.util.Map;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 查询服务实现
@@ -35,7 +36,7 @@ import javax.annotation.Resource;
  */
 public class QueryServiceImpl implements IQueryService {
 
-	@Resource
+	@Autowired(required = false)
 	private ISearchService searchService;
 
 	@Resource

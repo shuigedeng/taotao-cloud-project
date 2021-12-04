@@ -98,3 +98,8 @@ jobs:
         with:
           name: app-${{ env.BUILD_TYPE }}
           path: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: readme.md
+          files: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk

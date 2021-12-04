@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.dingtalk;
 
+import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,11 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DingtalkInit implements InitializingBean {
 
-	@Autowired
+	@Autowired(required = false)
 	private UserDinger dingerSender;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		dingerSender.userRegister("你好");
+		if (Objects.nonNull(dingerSender)) {
+			dingerSender.userRegister("你好");
+		}
 	}
 }

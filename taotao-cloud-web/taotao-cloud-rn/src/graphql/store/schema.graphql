@@ -1,0 +1,123 @@
+type Store {
+  # id
+  id: ID
+
+  # 主图
+  imageUrl: String
+
+  # 名称
+  name: String
+
+  # 类型
+  type: ItemType
+
+  # 地址
+  address: String
+
+  # 经度
+  longitude: String
+
+  # 纬度
+  latitude: String
+
+  # 距离(单位 米) 仅在传经纬度时会有
+  distance: Int
+
+  # 总销售额
+  sales: Int
+
+  # 可用余额
+  balance: Int
+
+  # 状态
+  status: String
+}
+
+type StorePagination {
+  list: [Store]!
+  pagination: PageInfo
+}
+
+input NearbyStoreInput {
+  # 经度
+  longitude: String!
+
+  # 纬度
+  latitude: String!
+
+  # 显示条数
+  pageSize: Int
+
+  # 当前页数
+  currentPage: Int
+}
+
+input StoreInput {
+  # id(更新时为必传参数)
+  id: ID
+
+  # 封面主图
+  imageKey: String
+
+  # 名称
+  name: String
+
+  # 地址
+  address: String
+
+  # 类型
+  type: ItemType
+
+  # 经度
+  longitude: String
+
+  # 纬度
+  latitude: String
+
+  # 号码(更新时不传递)
+  phone: String
+}
+
+input UpdateStoreStatusInput {
+  # id(店铺的 ID)
+  id: ID!
+
+  # 店铺的状态
+  status: StoreStatus
+}
+
+type AddressToLngAndLatPayload {
+  # 经度
+  lng: String
+
+  # 纬度
+  lat: String
+}
+
+enum StoreStatus {
+  # 下架
+  draft
+
+  # 上架
+  published
+}
+
+type AppHomeDataPayload {
+  # 总销售额
+  allAmount: Int
+  # 新增销售额
+  newAmount: Int
+  # 总订单数
+  total: Int
+}
+
+type FinancialPayload {
+  # 总销售额
+  sales: Int
+
+  # 可用余额
+  balance: Int
+
+  # 今日销售额
+  newAmount: Int
+}

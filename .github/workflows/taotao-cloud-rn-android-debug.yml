@@ -1,10 +1,10 @@
 # 工作流名称
-name: TaoTao Cloud Rn Android Debug
+name: Assemble Android Debug
 
 # 触发工作流程的事件
 on:
   push:
-    branches: [ v1 ]
+    branches: [ master ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]
@@ -49,18 +49,15 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
-
       - name: Cache node_modules Folder
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules
           restore-keys: ${{ runner.os }}-node_modules
-
       - name: Get Yarn Cache Directory Path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Cache Yarn
         uses: actions/cache@v2
         env:
@@ -70,16 +67,12 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       - name: Install Dependencies
         run: |
           yarn
-          yarn add expo-image-picker --latest
-
       - name: Build Taro React Native Bundle
         run: |
           yarn build:rn --platform android
-
       - name: Cache Gradle
         uses: actions/cache@v2
         env:
@@ -89,8 +82,7 @@ jobs:
           key: ${{ runner.os }}-gradle
           restore-keys: |
             ${{ runner.os }}-gradle
-
-      - name: Assemble Android
+      - name: Assemble Android ${{ env.BUILD_TYPE }}
         run: |
           cd ./android && \
           ./gradlew assemble${{ env.BUILD_TYPE }} \
@@ -104,11 +96,15 @@ jobs:
             -Pkeystore_file='${{ env.KEYSTORE_FILE }}' \
             -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
             -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
-            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}' \
-            --stacktrace
-
+            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
       - name: Upload Android Products
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ env.BUILD_TYPE }}
-          path: ./android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+          path: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: readme.md
+          files: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
