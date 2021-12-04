@@ -292,8 +292,8 @@ const Index: Taro.FC = () => {
                           onClick={changeCheck}>全选</Checkbox>
               </View>
               <View className='rightfk'>
-                <View className='YH'>
-                  <Text className='yh'>合计：</Text>
+                <View >
+                  <Text >合计：</Text>
                   <Text
                     className='hj'>￥{(state.totalPrice.total || 0) / 100 - (state.discount)}/元</Text>
                 </View>
