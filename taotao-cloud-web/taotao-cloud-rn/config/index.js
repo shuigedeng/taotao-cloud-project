@@ -12,9 +12,9 @@ const config = {
   outputRoot: 'dist',
   plugins: [
     ['taro-plugin-tailwind'],
-    ["@tarojs/plugin-mock", {
-      host: "0.0.0.0"
-    }],
+    // ["@tarojs/plugin-mock", {
+    //   host: "0.0.0.0"
+    // }],
   ],
   defineConstants: {
     IS_H5: process.env.TARO_ENV === "h5",
