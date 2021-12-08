@@ -251,9 +251,9 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: update
-      #naming:
-      #  implicit-strategy:
-      #  physical-strategy:
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect

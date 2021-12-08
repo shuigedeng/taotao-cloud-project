@@ -15,9 +15,6 @@
  */
 package com.taotao.cloud.oauth2.biz;
 
-import com.taotao.cloud.feign.annotation.EnableTaoTaoCloudFeignClients;
-import com.taotao.cloud.p6spy.annotation.EnableTaoTaoCloudP6spy;
-import com.taotao.cloud.sentinel.annotation.EnableTaoTaoCloudSentinel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -29,9 +26,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 1.0.0
  * @since 2020/4/29 15:13
  */
-@EnableTaoTaoCloudFeignClients
-@EnableTaoTaoCloudP6spy
-@EnableTaoTaoCloudSentinel
 @SpringBootApplication
 @EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {

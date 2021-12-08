@@ -27,51 +27,12 @@ spring:
   main:
     allow-bean-definition-overriding: true
     banner-mode: off
+    allow-circular-references: true
   application:
     name: taotao-cloud-oauth2-server
   cloud:
     loadbalancer:
       enabled: true
-    stream:
-      bindings:
-        sms-output:
-          destination: sms-topic
-          content-type: application/json
-        sms-input:
-          destination: sms-topic
-          content-type: text/plain
-          group: sms-group
-        email-output:
-          destination: email-topic
-          content-type: application/json
-        email-input:
-          destination: email-topic
-          content-type: text/plain
-          group: email-group
-        order-output:
-          destination: order-topic
-          content-type: application/json
-        order-input:
-          destination: order-topic
-          content-type: text/plain
-          group: order-binder-group
-      rocketmq:
-        binder:
-          name-server:
-      rabbit:
-        binder:
-          admin-addresses:
-      kafka:
-        binder:
-          brokers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
-          producer-properties:
-            retries: 0
-            batch-size: 16384
-            buffer-memory: 33554432
-            key-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
-            value-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
-            acks: 1
-          auto-create-topics: true
   sleuth:
     enabled: true
     web:
@@ -87,10 +48,10 @@ spring:
       type: WEB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       auto-commit: true
       connection-timeout: 30000
@@ -102,7 +63,7 @@ spring:
       connection-test-query: SELECT 1
       maximum-pool-size: 15
       minimum-idle: 10
-      pool-name: DatebookHikariCP
+      pool-name: MyHikariCP
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
@@ -128,14 +89,12 @@ spring:
         min-idle: 0
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
-    admin:
-      client-id:
     producer:
       retries: 0
       batch-size: 16384
       buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.taotao.cloud.logger.serialization.ObjectSerializer
       acks: 1
       properties:
         linger.ms: 500
@@ -143,68 +102,69 @@ spring:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
       enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.ByteBufferSerializer
-      value-deserializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: com.taotao.cloud.logger.serialization.ObjectSerializer
     listener:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
   security:
     oauth2:
-      client:
-        registration:
-          mall:
-            provider: mall
-            client-id: mall
-            client-secret: secret
-            authorization-grant-type: authorization_code
-            # 必须和auth-server中设置 一模一样!!
-            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
-            scope: mall.read,mall.write
-          github:
-            client-id: xxxx
-            client-secret: xxxx
-          gitee:
-            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
-            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
-            authorization-grant-type: authorization_code
-            redirect-uri: http://aa3b168ab0f3.ngrok.io/login/oauth2/code/gitee
-          wechat:
-            client-id: xxx
-            client-secret: xxxx
-            authorization-grant-type: authorization_code
-            redirect-uri: https://xxx/login/oauth2/code/wx
-            scope: snsapi_login
-            client-authentication-method: post
-          qq:
-            client-id: xxx
-            client-secret: xxxx
-            authorization-grant-type: authorization_code
-            redirect-uri: https://xxx/login/oauth2/code/qq
-            scope: get_user_info
-            client-authentication-method: post
-        provider:
-          mall:
-            # 对外的授权服务中心地址
-            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
-            token-uri: http://127.0.0.1:6628/oauth2/token
-            # 写网关下的暴露地址
-            user-info-uri: http://localhost:8008/upms/check_token
-            user-name-attribute: name
-          gitee:
-            authorization-uri: https://gitee.com/oauth/authorize
-            token-uri: https://gitee.com/oauth/token
-            user-info-uri: https://gitee.com/api/v5/user
-          wechat:
-            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
-            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
-            user-info-uri: https://api.weixin.qq.com/sns/userinfo
-            user-info-authentication-method: form
-          qq:
-            authorization-uri: https://graph.qq.com/oauth2.0/authorize
-            token-uri: https://graph.qq.com/oauth2.0/token
-            user-info-uri: https://graph.qq.com/oauth2.0/me
-            user-info-authentication-method: form
+#      client:
+#        registration:
+#          mall:
+#            provider: mall
+#            client-id: mall
+#            client-secret: secret
+#            authorization-grant-type: authorization_code
+#            # 必须和auth-server中设置 一模一样!!
+#            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
+#            scope: mall.read,mall.write
+#          github:
+#            client-id: xxxx
+#            client-secret: xxxx
+#          gitee:
+#            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+#            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://aa3b168ab0f3.ngrok.io/login/oauth2/code/gitee
+#          wechat:
+#            client-id: xxx
+#            client-secret: xxxx
+#            authorization-grant-type: authorization_code
+#            redirect-uri: https://xxx/login/oauth2/code/wx
+#            scope: snsapi_login
+#            client-authentication-method: post
+#          qq:
+#            client-id: xxx
+#            client-secret: xxxx
+#            authorization-grant-type: authorization_code
+#            redirect-uri: https://xxx/login/oauth2/code/qq
+#            scope: get_user_info
+#            client-authentication-method: post
+#        provider:
+#          mall:
+#            # 对外的授权服务中心地址
+#            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
+#            token-uri: http://127.0.0.1:6628/oauth2/token
+#            # 写网关下的暴露地址
+#            user-info-uri: http://localhost:8008/upms/check_token
+#            user-name-attribute: name
+#          gitee:
+#            authorization-uri: https://gitee.com/oauth/authorize
+#            token-uri: https://gitee.com/oauth/token
+#            user-info-uri: https://gitee.com/api/v5/user
+#          wechat:
+#            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+#            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+#            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+#            user-info-authentication-method: form
+#          qq:
+#            authorization-uri: https://graph.qq.com/oauth2.0/authorize
+#            token-uri: https://graph.qq.com/oauth2.0/token
+#            user-info-uri: https://graph.qq.com/oauth2.0/me
+#            user-info-authentication-method: form
+
       resourceserver:
         #        jwt:
         #          public-key-location: classpath:key.public
@@ -215,13 +175,9 @@ spring:
         #          client-secret: abc
         jwt:
           jwk-set-uri: http://172.16.6.151:33336/oauth2/jwks
+
 taotao:
   cloud:
-    log:
-      request-log:
-        enabled: true
-        types:
-          - kafka
     p6spy:
       enabled: true
       dateformat: yyyy-MM-dd HH:mm:ss
@@ -229,6 +185,22 @@ taotao:
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
       appender: com.taotao.cloud.p6spy.logger.P6spyLogger
       log-message-format: com.taotao.cloud.p6spy.logger.P6spyLogFormat
+    data:
+      jpa:
+        enabled: true
+        tenant:
+          enabled: false
+    logger:
+      enabled: true
+    feign:
+      enabled: true
+    redis:
+      cache:
+        enabled: true
+    sentinel:
+      enabled: true
+    core:
+      env: dev
 
 feign:
   sentinel:
@@ -281,13 +253,21 @@ management:
       enabled: false
     elasticsearch:
       enabled: false
+    kafka:
+      enabled: false
 
 logging:
   level:
     root: INFO
     org.springframework.web: off
-    org.springframework.security: off
-    org.springframework.security.oauth2: off
+    org.springframework.security: debug
+    org.springframework.security.oauth2: debug
     org.springframework.boot.autoconfigure: off
 
+oauth2:
+  token:
+    issuer: http://127.0.0.1:9000/springauthserver
 
+jwk:
+  set:
+    uri: http://127.0.0.1:33336/oauth2/jwks

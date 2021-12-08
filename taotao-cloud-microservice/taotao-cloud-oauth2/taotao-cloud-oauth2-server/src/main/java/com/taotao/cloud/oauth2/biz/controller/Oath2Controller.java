@@ -45,9 +45,9 @@ public class Oath2Controller {
 	 * @param oAuth2AuthorizedClient OAuth2客户端信息
 	 * @return OAuth2客户端信息
 	 */
-//	@GetMapping("/client")
-//	public OAuth2AuthorizedClient user(
-//		@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-//		return oAuth2AuthorizedClient;
-//	}
+	//@GetMapping("/client")
+	//public OAuth2AuthorizedClient user(
+	//	@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+	//	return oAuth2AuthorizedClient;
+	//}
 }
