@@ -574,13 +574,12 @@ public class RedisRepository {
 	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:46
 	 */
-	public void setExpire(final String key, final Object value, final long time) {
-		redisTemplate.execute((RedisCallback<Long>) connection -> {
+	public boolean setExpire(final String key, final Object value, final long time) {
+		return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
 			RedisSerializer<String> serializer = getRedisSerializer();
 			byte[] keys = serializer.serialize(key);
 			byte[] values = OBJECT_SERIALIZER.serialize(value);
-			connection.setEx(keys, time, values);
-			return 1L;
+			return connection.setEx(keys, time, values);
 		});
 	}
 
