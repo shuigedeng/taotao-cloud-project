@@ -209,6 +209,8 @@ public class OAuth2RegisteredClientConfiguration {
 				case "WEEKS":
 					duration = Duration.of(tokenTime, ChronoUnit.WEEKS);
 					break;
+				default:
+					duration = Duration.of(tokenTime, ChronoUnit.WEEKS);
 			}
 		}
 
