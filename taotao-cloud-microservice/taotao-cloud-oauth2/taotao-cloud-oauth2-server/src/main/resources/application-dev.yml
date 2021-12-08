@@ -110,61 +110,60 @@ spring:
       missing-topics-fatal: false
   security:
     oauth2:
-#      client:
-#        registration:
-#          mall:
-#            provider: mall
-#            client-id: mall
-#            client-secret: secret
-#            authorization-grant-type: authorization_code
-#            # 必须和auth-server中设置 一模一样!!
-#            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
-#            scope: mall.read,mall.write
-#          github:
-#            client-id: xxxx
-#            client-secret: xxxx
-#          gitee:
-#            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
-#            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
-#            authorization-grant-type: authorization_code
-#            redirect-uri: http://aa3b168ab0f3.ngrok.io/login/oauth2/code/gitee
-#          wechat:
-#            client-id: xxx
-#            client-secret: xxxx
-#            authorization-grant-type: authorization_code
-#            redirect-uri: https://xxx/login/oauth2/code/wx
-#            scope: snsapi_login
-#            client-authentication-method: post
-#          qq:
-#            client-id: xxx
-#            client-secret: xxxx
-#            authorization-grant-type: authorization_code
-#            redirect-uri: https://xxx/login/oauth2/code/qq
-#            scope: get_user_info
-#            client-authentication-method: post
-#        provider:
-#          mall:
-#            # 对外的授权服务中心地址
-#            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
-#            token-uri: http://127.0.0.1:6628/oauth2/token
-#            # 写网关下的暴露地址
-#            user-info-uri: http://localhost:8008/upms/check_token
-#            user-name-attribute: name
-#          gitee:
-#            authorization-uri: https://gitee.com/oauth/authorize
-#            token-uri: https://gitee.com/oauth/token
-#            user-info-uri: https://gitee.com/api/v5/user
-#          wechat:
-#            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
-#            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
-#            user-info-uri: https://api.weixin.qq.com/sns/userinfo
-#            user-info-authentication-method: form
-#          qq:
-#            authorization-uri: https://graph.qq.com/oauth2.0/authorize
-#            token-uri: https://graph.qq.com/oauth2.0/token
-#            user-info-uri: https://graph.qq.com/oauth2.0/me
-#            user-info-authentication-method: form
-
+      client:
+        registration:
+          mall:
+            provider: mall
+            client-id: mall
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            # 必须和auth-server中设置 一模一样!!
+            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
+            scope: mall.read,mall.write
+          github:
+            client-id: xxxx
+            client-secret: xxxx
+          gitee:
+            client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+            client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+            authorization-grant-type: authorization_code
+            redirect-uri: http://aa3b168ab0f3.ngrok.io/login/oauth2/code/gitee
+          wechat:
+            client-id: xxx
+            client-secret: xxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: https://xxx/login/oauth2/code/wx
+            scope: snsapi_login
+            client-authentication-method: post
+          qq:
+            client-id: xxx
+            client-secret: xxxx
+            authorization-grant-type: authorization_code
+            redirect-uri: https://xxx/login/oauth2/code/qq
+            scope: get_user_info
+            client-authentication-method: post
+        provider:
+          mall:
+            # 对外的授权服务中心地址
+            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
+            token-uri: http://127.0.0.1:6628/oauth2/token
+            # 写网关下的暴露地址
+            user-info-uri: http://localhost:8008/upms/check_token
+            user-name-attribute: name
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+          wechat:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
+            user-info-authentication-method: form
+          qq:
+            authorization-uri: https://graph.qq.com/oauth2.0/authorize
+            token-uri: https://graph.qq.com/oauth2.0/token
+            user-info-uri: https://graph.qq.com/oauth2.0/me
+            user-info-authentication-method: form
       resourceserver:
         #        jwt:
         #          public-key-location: classpath:key.public

@@ -62,21 +62,6 @@ public class AuthorizationServerConfiguration {
 
 		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
-		/**
-		 http.apply(authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<OAuth2TokenEndpointFilter>() {
-		@Override public <O extends OAuth2TokenEndpointFilter> O postProcess(O oauth2TokenEndpointFilter) {
-		oauth2TokenEndpointFilter.setAuthenticationConverter(new DelegatingAuthenticationConverter(
-		Arrays.asList(
-		new OAuth2AuthorizationCodeAuthenticationConverter(),
-		new OAuth2RefreshTokenAuthenticationConverter(),
-		new OAuth2ClientCredentialsAuthenticationConverter(),
-		new OAuth2ResourceOwnerPasswordAuthenticationConverter())));
-		return oauth2TokenEndpointFilter;
-		}
-		})
-		 );
-		 */
-
 		http.apply(authorizationServerConfigurer.tokenEndpoint(
 			(tokenEndpoint) -> tokenEndpoint.accessTokenRequestConverter(
 				new DelegatingAuthenticationConverter(Arrays.asList(
