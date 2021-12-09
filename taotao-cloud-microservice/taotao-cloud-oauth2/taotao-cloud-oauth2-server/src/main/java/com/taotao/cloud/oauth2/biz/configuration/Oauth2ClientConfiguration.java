@@ -1,7 +1,8 @@
 package com.taotao.cloud.oauth2.biz.configuration;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.oauth2.biz.service.CloudOauth2UserService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +26,19 @@ import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationManagerResolver;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
@@ -41,6 +47,7 @@ import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtIssuerValidator;
 import org.springframework.security.oauth2.jwt.JwtTimestampValidator;
@@ -51,13 +58,13 @@ import org.springframework.security.oauth2.server.resource.authentication.Opaque
 import org.springframework.security.oauth2.server.resource.introspection.NimbusOpaqueTokenIntrospector;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@EnableWebSecurity
 public class Oauth2ClientConfiguration {
 
 	@Autowired
@@ -69,49 +76,79 @@ public class Oauth2ClientConfiguration {
 	}
 
 	@Bean
+	public ClientRegistrationRepository clientRegistrationRepository() {
+		return new InMemoryClientRegistrationRepository(this.googleClientRegistration());
+	}
+
+	private ClientRegistration googleClientRegistration() {
+		return ClientRegistration.withRegistrationId("google")
+			.clientId("google-client-id")
+			.clientSecret("google-client-secret")
+			.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+			.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+			.redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
+			.scope("openid", "profile", "email", "address", "phone")
+			.authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
+			.tokenUri("https://www.googleapis.com/oauth2/v4/token")
+			.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
+			.userNameAttributeName(IdTokenClaimNames.SUB)
+			.jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
+			.clientName("Google")
+			.build();
+	}
+
+	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests(
-				authorizeRequests -> authorizeRequests
-					.requestMatchers(EndpointRequest.toAnyEndpoint())
-					.permitAll()
-					.anyRequest().authenticated()
-			).formLogin(formLogin -> {
-					//.loginPage("/auth/login")
-					//.loginProcessingUrl("/auth/authorize")
-				}
-			)
-			// 通过httpSession保存认证信息
-			.addFilter(new SecurityContextPersistenceFilter())
-			// 配置OAuth2登录认证
-			.oauth2Login(oauth2LoginConfigurer -> oauth2LoginConfigurer
-				// 认证成功后的处理器
-				.successHandler((request, response, authentication) -> {
-					LogUtil.info("用户认证成功");
-				})
-				// 认证失败后的处理器
-				.failureHandler((request, response, exception) -> {
-					LogUtil.info("用户认证失败");
-				})
-				// 登录请求url
-				.loginProcessingUrl("/api/login/oauth2/code/*")
-				// 配置授权服务器端点信息
-				.authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
-					// 授权端点的前缀基础url
-					.baseUri("/api/oauth2/authorization")
-				)
-				// 配置获取access_token的端点信息
-				.tokenEndpoint(tokenEndpointConfig -> tokenEndpointConfig
-					.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-				)
-				// 配置获取userInfo的端点信息
-				.userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-					.userService(new CloudOauth2UserService())
-				)
-			)
-			// 配置匿名用户过滤器
-			.anonymous()
+		http
+			.authorizeRequests()
+			.anyRequest().authenticated()
 			.and()
-			.csrf(Customizer.withDefaults()).headers().frameOptions().sameOrigin();
+			//.authorizeRequests(
+			//	authorizeRequests -> authorizeRequests
+			//		.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+			//		.anyRequest().authenticated()
+			//).formLogin(formLogin -> {
+			//		//.loginPage("/auth/login")
+			//		//.loginProcessingUrl("/auth/authorize")
+			//	}
+			//)
+			//// 通过httpSession保存认证信息
+			//.addFilter(new SecurityContextPersistenceFilter())
+			// 配置OAuth2登录认证
+			.oauth2Login(
+				//oauth2LoginConfigurer -> oauth2LoginConfigurer
+				//// 认证成功后的处理器
+				//.successHandler((request, response, authentication) -> {
+				//	LogUtil.info("用户认证成功");
+				//})
+				//// 认证失败后的处理器
+				//.failureHandler((request, response, exception) -> {
+				//	LogUtil.info("用户认证失败");
+				//})
+				//// 登录请求url
+				//.loginProcessingUrl("/api/login/oauth2/code/*")
+				//// 配置授权服务器端点信息
+				//.authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
+				//	// 授权端点的前缀基础url
+				//	.baseUri("/api/oauth2/authorization")
+				//)
+				//// 配置获取access_token的端点信息
+				//.tokenEndpoint(tokenEndpointConfig -> tokenEndpointConfig
+				//	.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+				//)
+				// 配置获取userInfo的端点信息
+				//.userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
+				//	.userService(new CloudOauth2UserService())
+				//)
+			)
+			.and()
+			//.oauth2Client(withDefaults())
+			// 配置匿名用户过滤器
+			.csrf().disable()
+			.logout()      // (2)
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 		//.and()
 		// 配置认证端点和未授权的请求处理器
 		//.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer

@@ -194,7 +194,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 	@Override
 	public boolean supports(Class<?> authentication) {
 		boolean supports = OAuth2ResourceOwnerPasswordAuthenticationToken.class.isAssignableFrom(authentication);
-		LOGGER.debug("supports authentication=" + authentication + " returning " + supports);
+		LOGGER.info("supports authentication=" + authentication + " returning " + supports);
 		return supports;
 	}
 	
