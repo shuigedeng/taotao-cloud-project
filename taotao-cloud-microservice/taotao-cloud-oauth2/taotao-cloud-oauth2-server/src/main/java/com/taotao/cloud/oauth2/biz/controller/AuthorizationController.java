@@ -1,6 +1,8 @@
 package com.taotao.cloud.oauth2.biz.controller;
 
+import java.util.HashMap;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,8 +20,8 @@ public class AuthorizationController {
 //
 //
 ////        Map<String, AuthUserOauth2> socials = socialDetailsService.getSocials(true);
-//        Map<String, AuthUserOauth2> socials = new HashMap<>();
-//        model.addAttribute("AuthUserOauth2", socials);
+////        Map<String, AuthUserOauth2> socials = new HashMap<>();
+////        model.addAttribute("AuthUserOauth2", socials);
 //        return "login";
 //    }
 

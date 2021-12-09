@@ -1,6 +1,5 @@
 package com.taotao.cloud.oauth2.biz.configuration;
 
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.oauth2.biz.models.CustomJwtGrantedAuthoritiesConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -38,22 +37,15 @@ public class Oauth2ResourceServerConfiguration {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests(authorizeRequests -> authorizeRequests
-				.mvcMatchers("/messages/**").access("hasAuthority('SCOPE_message.read')")
-				.antMatchers("/favicon.ico ").permitAll()
-				.anyRequest().authenticated()
+		http.mvcMatcher("/messages/**").authorizeRequests()
+			.anyRequest().authenticated()
+			//.mvcMatchers("/messages/**").access("hasAuthority('USER')")
+			.and()
+			.oauth2ResourceServer(oauth2 -> oauth2
+				.jwt(jwt -> jwt.decoder(jwtDecoder()).jwtAuthenticationConverter(jwtAuthenticationConverter()))
 			)
 			.anonymous().disable()
-			.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer
-				.accessDeniedHandler((request, response, accessDeniedException) -> {
-					LogUtil.info("认证失败");
-				})
-				.authenticationEntryPoint((request, reponse, ex) -> {
-					LogUtil.info("认证失败---------------");
-				})
-				.jwt(jwt -> jwt.decoder(jwtDecoder())
-					.jwtAuthenticationConverter(jwtAuthenticationConverter()))
-			);
+			.csrf().disable().headers().frameOptions().sameOrigin();
 
 		return http.build();
 	}

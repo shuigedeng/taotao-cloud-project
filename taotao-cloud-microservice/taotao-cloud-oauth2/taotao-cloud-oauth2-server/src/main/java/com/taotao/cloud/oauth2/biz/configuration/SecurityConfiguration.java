@@ -54,18 +54,13 @@ public class SecurityConfiguration {
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests(
 				authorizeRequests -> authorizeRequests
-					.requestMatchers(EndpointRequest.toAnyEndpoint())
-					.permitAll()
+					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
 					.anyRequest().authenticated()
 			)
+			.oauth2Login()
+			.and()
 			.formLogin(withDefaults())
-			.csrf(Customizer.withDefaults())
-			.headers()
-			.frameOptions()
-			.sameOrigin();
-		//.and()
-		//.oauth2ResourceServer()
-		//.jwt();
+			.csrf().disable().headers().frameOptions().sameOrigin();
 
 		return http.build();
 	}

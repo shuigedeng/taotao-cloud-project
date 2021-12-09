@@ -25,14 +25,18 @@ dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.0'
+
     implementation 'com.nimbusds:nimbus-jose-jwt:9.7'
     implementation 'com.nimbusds:oauth2-oidc-sdk:9.3'
 
     implementation 'org.apache.commons:commons-collections4'
 
-    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'io.projectreactor.netty:reactor-netty-http'
+    implementation 'org.springframework:spring-webflux'
+    implementation 'io.projectreactor.netty:reactor-netty'
+
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 }
