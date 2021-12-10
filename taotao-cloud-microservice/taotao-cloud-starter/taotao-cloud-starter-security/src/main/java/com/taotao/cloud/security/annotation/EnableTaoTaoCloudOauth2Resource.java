@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.security.annotation;
 
-import com.taotao.cloud.security.component.MethodSecurityConfig;
-import com.taotao.cloud.security.resource.Oauth2ResourceSecurityConfigurer;
+import com.taotao.cloud.security.configuration.MethodSecurityConfiguration;
+import com.taotao.cloud.security.configuration.Oauth2ResourceConfiguration;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -27,7 +27,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Target(value = {java.lang.annotation.ElementType.TYPE})
 @Documented
 @EnableWebSecurity
-@Import({Oauth2ResourceSecurityConfigurer.class, MethodSecurityConfig.class})
+@Import({Oauth2ResourceConfiguration.class, MethodSecurityConfiguration.class})
 public @interface EnableTaoTaoCloudOauth2Resource {
 
 

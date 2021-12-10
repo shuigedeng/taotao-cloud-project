@@ -21,7 +21,7 @@ import com.taotao.cloud.oauth2.api.server.component.UserAuthenticationConverterC
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.core.model.SecurityUser;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import com.taotao.cloud.security.component.WebResponseExceptionTranslatorComponent;
+import com.taotao.cloud.security.configuration.WebResponseExceptionTranslatorComponent;
 import com.taotao.cloud.security.service.IUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

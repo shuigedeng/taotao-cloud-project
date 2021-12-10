@@ -49,6 +49,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtIssuerValidator;
 import org.springframework.security.oauth2.jwt.JwtTimestampValidator;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -70,97 +71,97 @@ public class Oauth2ClientConfiguration {
 	@Autowired
 	private OAuth2ClientProperties oAuth2ClientProperties;
 
-	@Bean
-	WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers("/webjars/**");
-	}
+	//@Bean
+	//WebSecurityCustomizer webSecurityCustomizer() {
+	//	return (web) -> web.ignoring().antMatchers("/webjars/**");
+	//}
 
-	@Bean
-	public ClientRegistrationRepository clientRegistrationRepository() {
-		return new InMemoryClientRegistrationRepository(this.googleClientRegistration());
-	}
+	//@Bean
+	//public ClientRegistrationRepository clientRegistrationRepository() {
+	//	return new InMemoryClientRegistrationRepository(this.googleClientRegistration());
+	//}
+	//
+	//private ClientRegistration googleClientRegistration() {
+	//	return ClientRegistration.withRegistrationId("google")
+	//		.clientId("google-client-id")
+	//		.clientSecret("google-client-secret")
+	//		.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+	//		.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+	//		.redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
+	//		.scope("openid", "profile", "email", "address", "phone")
+	//		.authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
+	//		.tokenUri("https://www.googleapis.com/oauth2/v4/token")
+	//		.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
+	//		.userNameAttributeName(IdTokenClaimNames.SUB)
+	//		.jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
+	//		.clientName("Google")
+	//		.build();
+	//}
 
-	private ClientRegistration googleClientRegistration() {
-		return ClientRegistration.withRegistrationId("google")
-			.clientId("google-client-id")
-			.clientSecret("google-client-secret")
-			.clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-			.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-			.redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
-			.scope("openid", "profile", "email", "address", "phone")
-			.authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
-			.tokenUri("https://www.googleapis.com/oauth2/v4/token")
-			.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-			.userNameAttributeName(IdTokenClaimNames.SUB)
-			.jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
-			.clientName("Google")
-			.build();
-	}
-
-	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-			.anyRequest().authenticated()
-			.and()
-			//.authorizeRequests(
-			//	authorizeRequests -> authorizeRequests
-			//		.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-			//		.anyRequest().authenticated()
-			//).formLogin(formLogin -> {
-			//		//.loginPage("/auth/login")
-			//		//.loginProcessingUrl("/auth/authorize")
-			//	}
-			//)
-			//// 通过httpSession保存认证信息
-			//.addFilter(new SecurityContextPersistenceFilter())
-			// 配置OAuth2登录认证
-			.oauth2Login(
-				//oauth2LoginConfigurer -> oauth2LoginConfigurer
-				//// 认证成功后的处理器
-				//.successHandler((request, response, authentication) -> {
-				//	LogUtil.info("用户认证成功");
-				//})
-				//// 认证失败后的处理器
-				//.failureHandler((request, response, exception) -> {
-				//	LogUtil.info("用户认证失败");
-				//})
-				//// 登录请求url
-				//.loginProcessingUrl("/api/login/oauth2/code/*")
-				//// 配置授权服务器端点信息
-				//.authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
-				//	// 授权端点的前缀基础url
-				//	.baseUri("/api/oauth2/authorization")
-				//)
-				//// 配置获取access_token的端点信息
-				//.tokenEndpoint(tokenEndpointConfig -> tokenEndpointConfig
-				//	.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
-				//)
-				// 配置获取userInfo的端点信息
-				//.userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-				//	.userService(new CloudOauth2UserService())
-				//)
-			)
-			.and()
-			//.oauth2Client(withDefaults())
-			// 配置匿名用户过滤器
-			.csrf().disable()
-			.logout()      // (2)
-			.and()
-			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-		//.and()
-		// 配置认证端点和未授权的请求处理器
-		//.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
-		//	.authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
-		//	.accessDeniedHandler(new CustomizedAccessDeniedHandler())
-		//)
-		//.oauth2ResourceServer()
-		//.authenticationManagerResolver(customAuthenticationManager())
-		//.jwt();
-
-		return http.build();
-	}
+	//@Bean
+	//SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	//	http
+	//		.authorizeRequests()
+	//		.anyRequest().authenticated()
+	//		.and()
+	//		//.authorizeRequests(
+	//		//	authorizeRequests -> authorizeRequests
+	//		//		.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+	//		//		.anyRequest().authenticated()
+	//		//).formLogin(formLogin -> {
+	//		//		//.loginPage("/auth/login")
+	//		//		//.loginProcessingUrl("/auth/authorize")
+	//		//	}
+	//		//)
+	//		//// 通过httpSession保存认证信息
+	//		//.addFilter(new SecurityContextPersistenceFilter())
+	//		// 配置OAuth2登录认证
+	//		.oauth2Login(
+	//			//oauth2LoginConfigurer -> oauth2LoginConfigurer
+	//			//// 认证成功后的处理器
+	//			//.successHandler((request, response, authentication) -> {
+	//			//	LogUtil.info("用户认证成功");
+	//			//})
+	//			//// 认证失败后的处理器
+	//			//.failureHandler((request, response, exception) -> {
+	//			//	LogUtil.info("用户认证失败");
+	//			//})
+	//			//// 登录请求url
+	//			//.loginProcessingUrl("/api/login/oauth2/code/*")
+	//			//// 配置授权服务器端点信息
+	//			//.authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
+	//			//	// 授权端点的前缀基础url
+	//			//	.baseUri("/api/oauth2/authorization")
+	//			//)
+	//			//// 配置获取access_token的端点信息
+	//			//.tokenEndpoint(tokenEndpointConfig -> tokenEndpointConfig
+	//			//	.accessTokenResponseClient(oAuth2AccessTokenResponseClient())
+	//			//)
+	//			// 配置获取userInfo的端点信息
+	//			//.userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
+	//			//	.userService(new CloudOauth2UserService())
+	//			//)
+	//		)
+	//		.and()
+	//		//.oauth2Client(withDefaults())
+	//		// 配置匿名用户过滤器
+	//		.csrf().disable()
+	//		.logout()      // (2)
+	//		.and()
+	//		.sessionManagement()
+	//		.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+	//	//.and()
+	//	// 配置认证端点和未授权的请求处理器
+	//	//.exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
+	//	//	.authenticationEntryPoint(new CustomizedAuthenticationEntryPoint())
+	//	//	.accessDeniedHandler(new CustomizedAccessDeniedHandler())
+	//	//)
+	//	//.oauth2ResourceServer()
+	//	//.authenticationManagerResolver(customAuthenticationManager())
+	//	//.jwt();
+	//
+	//	return http.build();
+	//}
 
 
 	/**
@@ -173,7 +174,7 @@ public class Oauth2ClientConfiguration {
 	 * @see <a href="https://www.oauth.com/oauth2-servers/access-tokens/access-token-response">access-token-response规范</a>
 	 * @see <a href="https://wiki.connect.qq.com/%E5%BC%80%E5%8F%91%E6%94%BB%E7%95%A5_server-side">qq开发文档</a>
 	 */
-	private OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> oAuth2AccessTokenResponseClient() {
+	public static OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> oAuth2AccessTokenResponseClient() {
 		DefaultAuthorizationCodeTokenResponseClient client = new DefaultAuthorizationCodeTokenResponseClient();
 		RestTemplate restTemplate = new RestTemplate(Arrays.asList(
 			new FormHttpMessageConverter(),
@@ -250,17 +251,17 @@ public class Oauth2ClientConfiguration {
 	}
 
 	// Mimic the default configuration for JWT validation.
-//	AuthenticationManager jwt() {
-//		// this is the keys endpoint for okta
-//		String issuer = oAuth2ClientProperties.getProvider().get("okta").getIssuerUri();
-//		String jwkSetUri = issuer + "/v1/keys";
-//
-//		// This is basically the default jwt logic
-//		JwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-//		JwtAuthenticationProvider authenticationProvider = new JwtAuthenticationProvider(jwtDecoder);
-//		authenticationProvider.setJwtAuthenticationConverter(new JwtBearerTokenAuthenticationConverter());
-//		return authenticationProvider::authenticate;
-//	}
+	AuthenticationManager defaultJwt() {
+		// this is the keys endpoint for okta
+		String issuer = oAuth2ClientProperties.getProvider().get("okta").getIssuerUri();
+		String jwkSetUri = issuer + "/v1/keys";
+
+		// This is basically the default jwt logic
+		JwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+		JwtAuthenticationProvider authenticationProvider = new JwtAuthenticationProvider(jwtDecoder);
+		authenticationProvider.setJwtAuthenticationConverter(new JwtBearerTokenAuthenticationConverter());
+		return authenticationProvider::authenticate;
+	}
 
 	AuthenticationManager jwt() {
 		// this is the keys endpoint for okta
@@ -288,6 +289,8 @@ public class Oauth2ClientConfiguration {
 					"This aud claim is not equal to the configured audience",
 					"https://tools.ietf.org/html/rfc6750#section-3.1"));
 		});
+
+
 		OAuth2TokenValidator<Jwt> validator = new DelegatingOAuth2TokenValidator<>(validators);
 		jwtDecoder.setJwtValidator(validator);
 
@@ -323,8 +326,8 @@ public class Oauth2ClientConfiguration {
 			throw new AuthenticationServiceException("Cannot authenticate " + authentication);
 		};
 
-		public RequestMatchingAuthenticationManagerResolver
-			(LinkedHashMap<RequestMatcher, AuthenticationManager> authenticationManagers) {
+		public RequestMatchingAuthenticationManagerResolver(
+			LinkedHashMap<RequestMatcher, AuthenticationManager> authenticationManagers) {
 			Assert.notEmpty(authenticationManagers, "authenticationManagers cannot be empty");
 			this.authenticationManagers = authenticationManagers;
 		}

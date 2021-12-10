@@ -1,6 +1,5 @@
 package com.taotao.cloud.oauth2.biz.controller;
 
-import java.util.HashMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,22 +13,36 @@ public class AuthorizationController {
 
 //    private final OAuth2AuthorizedClientService authorizedClientService;
 
-//    @GetMapping(value = "/login")
-//    public String login(Model model) {
-//        // 已经登录不能再进入登录界面
-//
-//
-////        Map<String, AuthUserOauth2> socials = socialDetailsService.getSocials(true);
-////        Map<String, AuthUserOauth2> socials = new HashMap<>();
-////        model.addAttribute("AuthUserOauth2", socials);
-//        return "login";
-//    }
+	//@GetMapping(value = "/form/login")
+	//public String login(Model model) {
+	//	// 已经登录不能再进入登录界面
+	//
+	//	//Map<String, AuthUserOauth2> socials = socialDetailsService.getSocials(true);
+	//	//Map<String, AuthUserOauth2> socials = new HashMap<>();
+	//	//model.addAttribute("AuthUserOauth2", socials);
+	//	return "login";
+	//}
 
-    @GetMapping(value = "/resource/ids")
-    @ResponseBody
-    public String[] getClients() {
-        return new String[]{"mall"};
-    }
+	//@GetMapping(value = "/login.html")
+	//public String oauth2(Model model) {
+	//	// 已经登录不能再进入登录界面
+	//
+	//	//Map<String, AuthUserOauth2> socials = socialDetailsService.getSocials(true);
+	//	//Map<String, AuthUserOauth2> socials = new HashMap<>();
+	//	//model.addAttribute("AuthUserOauth2", socials);
+	//	return "login";
+	//}
+
+	@GetMapping(value = "/form/login/success")
+	public String success(Model model) {
+		return "success";
+	}
+
+	@GetMapping(value = "/resource/ids")
+	@ResponseBody
+	public String[] getClients() {
+		return new String[]{"mall"};
+	}
 
 //	@GetMapping(value = "/test")
 //	@ResponseBody

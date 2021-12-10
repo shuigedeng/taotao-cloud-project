@@ -34,7 +34,6 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException {
-//		response.sendRedirect("/index.html");
 
 		LogUtil.info("用户认证成功");
 	}
