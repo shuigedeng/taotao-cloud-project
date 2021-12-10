@@ -317,6 +317,12 @@ public class RequestUtil {
 			: ((ServletRequestAttributes) requestAttributes).getRequest();
 	}
 
+	public static HttpServletResponse getHttpServletResponse() {
+		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		return (requestAttributes == null) ? null
+			: ((ServletRequestAttributes) requestAttributes).getResponse();
+	}
+
 	/**
 	 * getHttpServletRequestIpAddress
 	 *

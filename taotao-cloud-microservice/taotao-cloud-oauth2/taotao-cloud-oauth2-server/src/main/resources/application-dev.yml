@@ -114,12 +114,11 @@ spring:
         registration:
           mall:
             provider: mall
-            client-id: mall
-            client-secret: secret
+            client-id: authorization-code-messaging-client
+            client-secret: secret2
             authorization-grant-type: authorization_code
             # 必须和auth-server中设置 一模一样!!
-            redirect-uri: "http://localhost:6628/login/oauth2/code/mall"
-            scope: mall.read,mall.write
+            redirect-uri: "http://127.0.0.1:8080/springauthserverclient/authorized"
           github:
             client-id: xxxx
             client-secret: xxxx
@@ -145,8 +144,8 @@ spring:
         provider:
           mall:
             # 对外的授权服务中心地址
-            authorization-uri: http://127.0.0.1:6628/oauth2/authorize
-            token-uri: http://127.0.0.1:6628/oauth2/token
+            authorization-uri: http://127.0.0.1:33336/oauth2/authorize
+            token-uri: http://127.0.0.1:33336/oauth2/token
             # 写网关下的暴露地址
             user-info-uri: http://localhost:8008/upms/check_token
             user-name-attribute: name

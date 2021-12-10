@@ -163,6 +163,18 @@ public class SecurityConfiguration {
 			//		.passwordParameter("password");
 			//})
 			//.formLogin(form -> form.loginPage("/user/login").failureUrl("/login-error").permitAll())
+			//.exceptionHandling(exceptionHandlingCustomizer-> {
+			//	exceptionHandlingCustomizer
+			//		.accessDeniedHandler((request, response, accessDeniedException) -> {
+			//			LogUtil.error("用户权限不足********", accessDeniedException);
+			//			ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
+			//		})
+			//		.authenticationEntryPoint((request, response, authException) -> {
+			//			LogUtil.error("认证失败111111111111", authException);
+			//			authException.printStackTrace();
+			//			ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
+			//		});
+			//})
 			.anonymous().disable()
 			.csrf().disable()
 			.logout()
