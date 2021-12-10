@@ -15,8 +15,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-public class CustomJwtGrantedAuthoritiesConverter implements
-	Converter<Jwt, Collection<GrantedAuthority>> {
+public class CustomJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
 	private final Log logger = LogFactory.getLog(getClass());
 
@@ -103,7 +102,6 @@ public class CustomJwtGrantedAuthoritiesConverter implements
 		return Collections.emptyList();
 	}
 
-	@SuppressWarnings("unchecked")
 	private Collection<String> castAuthoritiesToCollection(Object authorities) {
 		return (Collection<String>) authorities;
 	}
