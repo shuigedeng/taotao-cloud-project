@@ -63,9 +63,15 @@ public class ResponseUtil {
 	 * @author shuigedeng
 	 * @since 2021-09-02 15:00:41
 	 */
-	public static void fail(HttpServletResponse response, Object data) throws IOException {
+	public static void fail(HttpServletResponse response, Object data) {
 		Result<?> result = Result.fail(data.toString());
-		writeResponse(response, result);
+
+		try {
+			writeResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+			LogUtil.error(e);
+		}
 	}
 
 	/**
