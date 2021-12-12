@@ -56,7 +56,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 	private final OAuth2AuthorizationService authorizationService;
 	private final JwtEncoder jwtEncoder;
 	private OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = (context) -> {};
-	private Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
+	private final Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
 	private ProviderSettings providerSettings;
 	
 	/**
@@ -155,8 +155,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 			OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
 					.principalName(usernamePasswordAuthentication.getName())
 					.authorizationGrantType(AuthorizationGrantType.PASSWORD)
-					.token(accessToken,
-							(metadata) ->
+					.token(accessToken, (metadata) ->
 									metadata.put(OAuth2Authorization.Token.CLAIMS_METADATA_NAME, jwtAccessToken.getClaims()))
 					.attribute(OAuth2Authorization.AUTHORIZED_SCOPE_ATTRIBUTE_NAME, authorizedScopes)
 					.attribute(Principal.class.getName(), usernamePasswordAuthentication);
