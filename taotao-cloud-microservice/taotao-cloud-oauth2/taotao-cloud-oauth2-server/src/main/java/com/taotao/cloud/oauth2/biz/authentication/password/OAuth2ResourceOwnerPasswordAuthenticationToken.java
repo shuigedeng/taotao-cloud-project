@@ -13,8 +13,6 @@ import org.springframework.util.Assert;
 
 public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuthenticationToken {
 
-	private static final long serialVersionUID = -6067207202119450764L;
-
 	private final AuthorizationGrantType authorizationGrantType;
 	private final Authentication clientPrincipal;
 	private final Set<String> scopes;

@@ -1,26 +1,19 @@
 package com.taotao.cloud.standalone.system.modules.security.code.sms;
 
+import java.util.ArrayList;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
 import java.util.Collection;
 
-/**
- * @Classname SmsCodeAuthenticationToken
- * @Description
- * @Author shuigedeng
- * @since 2019-07-08 11:49
- * @Version 1.0
- */
-public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 
-    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 
     private final Object principal;
 
     public SmsCodeAuthenticationToken(String mobile) {
-        super((Collection) null);
+        super(new ArrayList<>());
         this.principal = mobile;
         setAuthenticated(false);
     }
