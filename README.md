@@ -20,7 +20,7 @@
 
 **taotao cloud project** 创建这个仓库的目的就是工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
 
-- **大数据模块** 集成日志数据处理和分析、用户行为分析、推荐系统、离线/流式计算、数据仓库、数据湖等大数据处理
+- **大数据模块** 集成基于**spark的日志数据处理和分析、用户行为分析、推荐系统**、**flink\spark streaming离线/流式计算**、**hive数据仓库**、**apache hudi数据湖**等大数据处理
   
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
@@ -28,10 +28,10 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
   
 
-- **前端模块** 主要使用**react**进行前端开发、集成以**taro**为主的多端合一框架。以**react antd**框架进行快速后台管理平台开发
+- **前端模块** 主要使用**react antd**进行前后端分离开发、集成以**taro, taro-ui, react native**为主的多端合一框架。
   
 
-- **python模块** 主要是集成了**Django**的web开发、**homeassistant**家庭自动化框架原理的分析
+- **python模块** 主要是集成了**基于django**的web开发、**基于scrapy爬虫开发**、**homeassistant**家庭自动化框架原理的分析
 
 总之基于**spring cloud alibaba**的微服务架构。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
@@ -124,8 +124,8 @@ Guava | 29.0-jre
 * **主体框架**：采用最新的Spring Boot 2.5.5、Spring Cloud 2020.0.4、Spring Cloud Alibaba 2021.1版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
-* **业务监控**：利用Spring Boot Admin 监控各个独立服务的运行状态
-* **日志分析**：集成kafka、ELK、prometheus实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
+* **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
+* **日志分析**：集成kafka、elk、prometheus实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
 * **分布式事务**：集成spring cloud alibaba seata分布式事务处理
 * **业务熔断**：采用spring cloud alibaba Sentinel实现业务熔断处理，避免服务之间出现雪崩
 * **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成skywalking、sleuth、zipkin链路监控
@@ -148,70 +148,21 @@ Guava | 29.0-jre
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
-│  │  ├─taotao-cloud-bigdata-azkaban -- azkaban模块
-│  │  ├─taotao-cloud-bigdata-clickhouse -- clickhouse模块
-│  │  ├─taotao-cloud-bigdata-datax -- datax模块
-│  │  ├─taotao-cloud-bigdata-elasticsearch -- elasticsearch模块
-│  │  ├─taotao-cloud-bigdata-flink -- flink模块
-│  │  ├─taotao-cloud-bigdata-flum -- flum模块
-│  │  ├─taotao-cloud-bigdata-hadoop -- hadoop模块
-│  │  ├─taotao-cloud-bigdata-hbase -- hbase模块
-│  │  ├─taotao-cloud-bigdata-hive -- hive模块
-│  │  ├─taotao-cloud-bigdata-hudi -- hudi模块
-│  │  ├─taotao-cloud-bigdata-impala -- impala模块
-│  │  ├─taotao-cloud-bigdata-kafka -- kafka模块
-│  │  ├─taotao-cloud-bigdata-kudu -- kudu模块
-│  │  ├─taotao-cloud-bigdata-openresty -- openresty模块
-│  │  ├─taotao-cloud-bigdata-phoenix -- phoenix模块
-│  │  ├─taotao-cloud-bigdata-spark -- spark模块
-│  │  ├─taotao-cloud-bigdata-storm -- storm模块
-│  │  ├─taotao-cloud-bigdata-tez -- tez模块
-│  │  ├─taotao-cloud-bigdata-trino -- trino模块
-│  │  ├─taotao-cloud-bigdata-zookeeper -- zookeeper模块
 │  ├─taotao-cloud-container -- 容器模块
 │  │  ├─taotao-cloud-docker -- docker模块
 │  │  ├─taotao-cloud-kubernetes -- kubernetes模块
-│  ├─taotao-cloud-demo -- demo模块
-│  │  ├─taotao-cloud-demo-kafka -- kafka模块
-│  │  ├─taotao-cloud-demo-mqtt -- mqtt模块
-│  │  ├─taotao-cloud-demo-rocketmq -- rocketmq模块
-│  │  ├─taotao-cloud-demo-seata -- seata模块
-│  │  ├─taotao-cloud-demo-sharding-jdbc -- sharding-jdbc模块
-│  │  ├─taotao-cloud-demo-sso -- sso模块
-│  │  ├─taotao-cloud-demo-transaction -- transaction模块
-│  │  ├─taotao-cloud-demo-youzan -- youzan模块
 │  ├─taotao-cloud-dependencies -- 全局公共依赖模块
 │  ├─taotao-cloud-java -- java模块
 │  │  ├─taotao-cloud-concurrent  -- concurrent模块
 │  │  ├─taotao-cloud-javaee -- javaee模块
 │  │  ├─taotao-cloud-javase -- javase模块
 │  │  ├─taotao-cloud-javaweb -- javaweb模块
-│  ├─taotao-cloud-microservice -- 微服务模块
-│  │  ├─taotao-cloud-aftersale  -- aftersale模块
-│  │  ├─taotao-cloud-bulletin  -- bulletin模块
-│  │  ├─taotao-cloud-cart  -- cart模块
-│  │  ├─taotao-cloud-coupon  -- coupon模块
-│  │  ├─taotao-cloud-customer  -- customer模块
-│  │  ├─taotao-cloud-dfs  -- dfs模块
+│  ├─taotao-cloud-microservice -- 微服务业务模块
 │  │  ├─taotao-cloud-backend  -- backend模块
 │  │  ├─taotao-cloud-front  -- front模块
-│  │  ├─taotao-cloud-log -- log模块
-│  │  ├─taotao-cloud-logistics  -- logistics模块
-│  │  ├─taotao-cloud-mail  -- mail模块
-│  │  ├─taotao-cloud-member  -- member模块
-│  │  ├─taotao-cloud-news  -- news模块
-│  │  ├─taotao-cloud-oauth2  -- oauth2模块
-│  │  ├─taotao-cloud-operation  -- operation模块
 │  │  ├─taotao-cloud-order  -- order模块
 │  │  ├─taotao-cloud-pay -- pay模块
 │  │  ├─taotao-cloud-product  -- product模块
-│  │  ├─taotao-cloud-recommend  -- recommend模块
-│  │  ├─taotao-cloud-report  -- report模块
-│  │  ├─taotao-cloud-search  -- search模块
-│  │  ├─taotao-cloud-seckill   -- seckill模块
-│  │  ├─taotao-cloud-settlement  -- settlement模块
-│  │  ├─taotao-cloud-sms  -- sms模块
-│  │  ├─taotao-cloud-stock  -- stock模块
 │  │  ├─taotao-cloud-uc  -- uc模块
 │  │  ├─taotao-cloud-starter  -- starter模块
 │  ├─taotao-cloud-netty -- netty模块
