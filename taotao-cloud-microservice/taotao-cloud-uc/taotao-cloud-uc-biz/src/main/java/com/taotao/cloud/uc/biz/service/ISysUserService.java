@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.biz.service;
 
 import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
+import com.taotao.cloud.uc.biz.entity.SysUser;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -28,8 +29,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:48:28
  */
-public interface ISysUserService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysUserService extends BaseSuperService<SysUser, Long> {
 
 	//SysUser saveUser(SysUser sysUser);
 	//SysUser updateUser(SysUser sysUser);

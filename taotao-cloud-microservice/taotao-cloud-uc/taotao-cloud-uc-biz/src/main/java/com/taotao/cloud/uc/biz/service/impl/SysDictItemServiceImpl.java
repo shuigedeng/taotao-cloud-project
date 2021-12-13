@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboDictItemService.class)
 public class SysDictItemServiceImpl extends
 	BaseSuperServiceImpl<ISysDictItemMapper, SysDictItem, SysDictItemRepository, ISysDictItemRepository, Long>
-	implements IDubboDictItemService, ISysDictItemService<SysDictItem, Long> {
+	implements IDubboDictItemService, ISysDictItemService {
 
 	//private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
 	//private final static BooleanExpression PREDICATE = SYS_DICT_ITEM.delFlag.eq(false);

@@ -80,4 +80,13 @@ export default {
     // ]
     //},
   ],
+  rn: {
+    screenOptions:{
+      shadowOffset: {width: 0, height: 0},
+      borderWidth:0,
+      elevation: 0,
+      shadowOpacity: 1,
+      borderBottomWidth: 0
+    }
+  }
 }

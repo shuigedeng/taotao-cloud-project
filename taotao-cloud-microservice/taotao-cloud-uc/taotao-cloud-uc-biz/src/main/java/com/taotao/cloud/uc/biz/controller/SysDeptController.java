@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/dept")
 @Tag(name = "部门管理API", description = "部门管理API")
 public class SysDeptController extends
-	SuperController<ISysDeptService<SysDept, Long>, SysDept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
+	SuperController<ISysDeptService, SysDept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
 
 }

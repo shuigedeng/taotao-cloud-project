@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SysUserRoleServiceImpl extends
 	BaseSuperServiceImpl<ISysUserRoleMapper, SysUserRole, SysUserRoleRepository, ISysUserRoleRepository, Long>
-	implements ISysUserRoleService<SysUserRole, Long> {
+	implements ISysUserRoleService {
 
 	private final static QSysUserRole SYS_USER_ROLE = QSysUserRole.sysUserRole;
 

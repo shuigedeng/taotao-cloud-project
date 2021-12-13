@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRoleDeptServiceImpl extends
 	BaseSuperServiceImpl<ISysRoleDeptMapper, SysRoleDept, SysRoleDeptRepository, ISysRoleDeptRepository, Long>
-	implements ISysRoleDeptService<SysRoleDept, Long> {
+	implements ISysRoleDeptService {
 
 
 }

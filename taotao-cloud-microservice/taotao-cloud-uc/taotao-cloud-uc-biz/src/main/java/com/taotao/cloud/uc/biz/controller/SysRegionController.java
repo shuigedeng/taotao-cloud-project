@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/region")
 @Tag(name = "地区管理API", description = "地区管理API")
 public class SysRegionController extends
-	SuperController<ISysRegionService<SysRegion, Long>, SysRegion, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+	SuperController<ISysRegionService, SysRegion, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 
 	/**

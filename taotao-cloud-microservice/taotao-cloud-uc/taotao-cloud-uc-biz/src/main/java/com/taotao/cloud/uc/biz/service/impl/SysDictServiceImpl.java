@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboDictService.class)
 public class SysDictServiceImpl extends
 	BaseSuperServiceImpl<ISysDictMapper, SysDict, SysDictRepository, ISysDictRepository, Long>
-	implements IDubboDictService, ISysDictService<SysDict, Long> {
+	implements IDubboDictService, ISysDictService{
 
 	//private final SysDictRepository sysDictRepository;
 	//private final ISysDictItemService sysDictItemService;

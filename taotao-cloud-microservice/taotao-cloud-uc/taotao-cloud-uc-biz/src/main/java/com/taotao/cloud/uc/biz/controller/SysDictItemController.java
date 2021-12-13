@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/dict/item")
 @Tag(name = "字典项管理API", description = "字典项管理API")
 public class SysDictItemController extends
-	SuperController<ISysDictItemService<SysDictItem, Long>, SysDictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
+	SuperController<ISysDictItemService, SysDictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
 
 }

@@ -66,7 +66,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/resource")
 @Tag(name = "资源管理API", description = "资源管理API")
 public class SysResourceController extends
-	SuperController<ISysResourceService<SysResource, Long>, SysResource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, ResourceQueryVO> {
+	SuperController<ISysResourceService, SysResource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, ResourceQueryVO> {
 
 	/**
 	 * 根据角色id获取资源列表

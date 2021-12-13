@@ -38,7 +38,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRoleResourceServiceImpl extends
 	BaseSuperServiceImpl<ISysRoleResourceMapper, SysRoleResource, SysRoleResourceRepository, ISysRoleResourceRepository, Long>
-	implements ISysRoleResourceService<SysRoleResource, Long> {
+	implements ISysRoleResourceService {
 
 	private final static QSysRoleResource SYS_ROLE_RESOURCE = QSysRoleResource.sysRoleResource;
 

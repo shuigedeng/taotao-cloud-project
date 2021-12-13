@@ -20,10 +20,9 @@ import com.taotao.cloud.uc.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.uc.api.dubbo.IDubboUserService;
 import com.taotao.cloud.uc.biz.entity.QSysUser;
 import com.taotao.cloud.uc.biz.entity.SysUser;
-import com.taotao.cloud.uc.biz.entity.SysUserRole;
 import com.taotao.cloud.uc.biz.mapper.ISysUserMapper;
-import com.taotao.cloud.uc.biz.repository.inf.ISysUserRepository;
 import com.taotao.cloud.uc.biz.repository.cls.SysUserRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysUserRepository;
 import com.taotao.cloud.uc.biz.service.ISysUserRoleService;
 import com.taotao.cloud.uc.biz.service.ISysUserService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
@@ -43,16 +42,16 @@ import org.springframework.transaction.annotation.Transactional;
 @DubboService(interfaceClass = IDubboUserService.class)
 public class SysUserServiceImpl extends
 	BaseSuperServiceImpl<ISysUserMapper, SysUser, SysUserRepository, ISysUserRepository, Long>
-	implements IDubboUserService, ISysUserService<SysUser, Long> {
+	implements IDubboUserService, ISysUserService {
 
 	private final static QSysUser SYS_USER = QSysUser.sysUser;
 
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";
 
-	private final ISysUserRoleService<SysUserRole, Long> sysUserRoleService;
+	private final ISysUserRoleService sysUserRoleService;
 
-	public SysUserServiceImpl(ISysUserRoleService<SysUserRole, Long> sysUserRoleService) {
+	public SysUserServiceImpl(ISysUserRoleService sysUserRoleService) {
 		this.sysUserRoleService = sysUserRoleService;
 	}
 

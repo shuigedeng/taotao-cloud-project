@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.uc.biz.service;
 
+import com.taotao.cloud.uc.biz.entity.SysDict;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
@@ -27,8 +28,7 @@ import java.io.Serializable;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface ISysDictService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysDictService extends BaseSuperService<SysDict,Long> {
 
 	///**
 	// * 添加字典
