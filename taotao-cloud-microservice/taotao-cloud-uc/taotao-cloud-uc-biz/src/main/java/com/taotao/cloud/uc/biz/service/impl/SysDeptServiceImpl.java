@@ -22,6 +22,6 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboCompanyService.class)
 public class SysDeptServiceImpl extends
 	BaseSuperServiceImpl<ISysDeptMapper, SysDept, SysDeptRepository, ISysDeptRepository, Long>
-	implements IDubboDeptService, ISysDeptService<SysDept, Long> {
+	implements IDubboDeptService, ISysDeptService {
 
 }

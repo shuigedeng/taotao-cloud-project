@@ -31,7 +31,6 @@ import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
 import com.taotao.cloud.uc.biz.entity.QSysResource;
 import com.taotao.cloud.uc.biz.entity.SysResource;
-import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.uc.biz.mapper.ISysResourceMapper;
 import com.taotao.cloud.uc.biz.mapstruct.IResourceMapStruct;
 import com.taotao.cloud.uc.biz.repository.cls.SysResourceRepository;
@@ -66,9 +65,9 @@ import org.springframework.transaction.annotation.Transactional;
 @DubboService(interfaceClass = IDubboResourceService.class)
 public class SysResourceServiceImpl extends
 	BaseSuperServiceImpl<ISysResourceMapper, SysResource, SysResourceRepository, ISysResourceRepository, Long>
-	implements IDubboResourceService, ISysResourceService<SysResource, Long> {
+	implements IDubboResourceService, ISysResourceService {
 
-	private final ISysRoleService<SysRole, Long> sysRoleService;
+	private final ISysRoleService sysRoleService;
 
 	private final IFeignOrderItemService IFeignOrderItemService;
 	private final IFeignOrderService IFeignOrderService;
@@ -76,7 +75,7 @@ public class SysResourceServiceImpl extends
 	@DubboReference
 	private IDubboOrderService dubboOrderService;
 
-	public SysResourceServiceImpl(ISysRoleService<SysRole, Long> sysRoleService,
+	public SysResourceServiceImpl(ISysRoleService sysRoleService,
 		IFeignOrderItemService IFeignOrderItemService,
 		IFeignOrderService IFeignOrderService) {
 		this.IFeignOrderItemService = IFeignOrderItemService;

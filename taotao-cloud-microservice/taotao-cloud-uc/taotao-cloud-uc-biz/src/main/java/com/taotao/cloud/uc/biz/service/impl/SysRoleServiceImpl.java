@@ -17,14 +17,13 @@ package com.taotao.cloud.uc.biz.service.impl;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
-import com.taotao.cloud.uc.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.uc.api.dubbo.IDubboRoleService;
 import com.taotao.cloud.uc.biz.entity.QSysRole;
 import com.taotao.cloud.uc.biz.entity.SysRole;
-import com.taotao.cloud.uc.biz.entity.SysRoleResource;
 import com.taotao.cloud.uc.biz.mapper.ISysRoleMapper;
-import com.taotao.cloud.uc.biz.repository.inf.ISysRoleRepository;
+import com.taotao.cloud.uc.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.uc.biz.repository.cls.SysRoleRepository;
+import com.taotao.cloud.uc.biz.repository.inf.ISysRoleRepository;
 import com.taotao.cloud.uc.biz.service.ISysRoleResourceService;
 import com.taotao.cloud.uc.biz.service.ISysRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
@@ -45,14 +44,13 @@ import org.springframework.transaction.annotation.Transactional;
 @DubboService(interfaceClass = IDubboRoleService.class)
 public class SysRoleServiceImpl extends
 	BaseSuperServiceImpl<ISysRoleMapper, SysRole, SysRoleRepository, ISysRoleRepository, Long>
-	implements IDubboRoleService, ISysRoleService<SysRole, Long> {
+	implements IDubboRoleService, ISysRoleService {
 
 	private final static QSysRole SYS_ROLE = QSysRole.sysRole;
 
-	private final ISysRoleResourceService<SysRoleResource, Long> sysRoleResourceService;
+	private final ISysRoleResourceService sysRoleResourceService;
 
-	public SysRoleServiceImpl(
-		ISysRoleResourceService<SysRoleResource, Long> sysRoleResourceService) {
+	public SysRoleServiceImpl(ISysRoleResourceService sysRoleResourceService) {
 		this.sysRoleResourceService = sysRoleResourceService;
 	}
 

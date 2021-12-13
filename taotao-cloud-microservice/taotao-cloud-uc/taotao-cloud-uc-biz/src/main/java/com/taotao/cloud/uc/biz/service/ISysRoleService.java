@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.biz.service;
 
 import com.taotao.cloud.uc.api.bo.role.RoleBO;
+import com.taotao.cloud.uc.biz.entity.SysRole;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -29,8 +30,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:42:57
  */
-public interface ISysRoleService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysRoleService extends BaseSuperService<SysRole, Long> {
 
 	/**
 	 * 根据用户id列表获取角色列表

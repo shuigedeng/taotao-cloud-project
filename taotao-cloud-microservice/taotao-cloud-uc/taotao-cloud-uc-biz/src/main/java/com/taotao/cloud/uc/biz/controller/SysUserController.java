@@ -59,7 +59,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/user")
 @Tag(name = "后台用户管理API", description = "后台用户管理API")
 public class SysUserController extends
-	SuperController<ISysUserService<SysUser, Long>, SysUser, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+	SuperController<ISysUserService, SysUser, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
 
 	/**

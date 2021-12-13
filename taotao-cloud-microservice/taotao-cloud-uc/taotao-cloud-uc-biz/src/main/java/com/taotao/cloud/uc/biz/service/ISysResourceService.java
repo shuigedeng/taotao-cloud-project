@@ -19,6 +19,7 @@ import com.taotao.cloud.uc.api.bo.resource.ResourceBO;
 import com.taotao.cloud.uc.api.bo.resource.ResourceQueryBO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceQueryVO;
 import com.taotao.cloud.uc.api.vo.resource.ResourceTreeVO;
+import com.taotao.cloud.uc.biz.entity.SysResource;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -33,8 +34,7 @@ import java.util.concurrent.Future;
  * @version 2021.10
  * @since 2021-10-09 20:38:19
  */
-public interface ISysResourceService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysResourceService extends BaseSuperService<SysResource, Long> {
 
 	/**
 	 * 查询所有资源列表

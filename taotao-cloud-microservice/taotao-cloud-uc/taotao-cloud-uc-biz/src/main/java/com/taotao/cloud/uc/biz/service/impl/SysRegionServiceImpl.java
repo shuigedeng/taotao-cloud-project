@@ -43,7 +43,7 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboRegionService.class)
 public class SysRegionServiceImpl extends
 	BaseSuperServiceImpl<ISysRegionMapper, SysRegion, SysRegionRepository, ISysRegionRepository, Long>
-	implements IDubboRegionService, ISysRegionService<SysRegion, Long> {
+	implements IDubboRegionService, ISysRegionService {
 
 	@DubboReference
 	private IDubboOrderService dubboOrderService;

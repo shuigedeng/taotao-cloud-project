@@ -55,7 +55,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/role")
 @Tag(name = "角色管理API", description = "角色管理API")
 public class SysRoleController extends
-	SuperController<ISysRoleService<SysRole, Long>, SysRole, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
+	SuperController<ISysRoleService, SysRole, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
 	/**
 	 * 根据用户id获取角色列表

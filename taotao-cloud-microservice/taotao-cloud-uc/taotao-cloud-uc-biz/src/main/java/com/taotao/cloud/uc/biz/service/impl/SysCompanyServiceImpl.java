@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboCompanyService.class)
 public class SysCompanyServiceImpl extends
 	BaseSuperServiceImpl<ISysCompanyMapper, SysCompany, SysCompanyRepository, ISysCompanyRepository, Long>
-	implements IDubboCompanyService, ISysCompanyService<SysCompany, Long> {
+	implements IDubboCompanyService, ISysCompanyService {
 
 	@Override
 	public ResourceQueryBO queryAllId(Long id) {

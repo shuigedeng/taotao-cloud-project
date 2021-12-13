@@ -39,6 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/company")
 @Tag(name = "公司管理API", description = "公司管理API")
 public class SysCompanyController extends
-	SuperController<ISysCompanyService<SysCompany, Long>, SysCompany, Long, BaseQuery, CompanySaveDTO, CompanyUpdateDTO, CompanyQueryVO> {
+	SuperController<ISysCompanyService, SysCompany, Long, BaseQuery, CompanySaveDTO, CompanyUpdateDTO, CompanyQueryVO> {
 
 }

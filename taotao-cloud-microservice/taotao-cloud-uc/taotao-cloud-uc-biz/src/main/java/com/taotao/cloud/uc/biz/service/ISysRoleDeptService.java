@@ -1,5 +1,6 @@
 package com.taotao.cloud.uc.biz.service;
 
+import com.taotao.cloud.uc.biz.entity.SysRoleDept;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -9,6 +10,5 @@ import java.io.Serializable;
  *
  * @since 2020/4/30 13:20
  */
-public interface ISysRoleDeptService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysRoleDeptService extends BaseSuperService<SysRoleDept, Long> {
 }

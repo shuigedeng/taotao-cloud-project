@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uc/job")
 @Tag(name = "岗位管理API", description = "岗位管理API")
 public class SysJobController extends
-	SuperController<ISysJobService<SysJob, Long>, SysJob, Long, BaseQuery, JobSaveDTO, JobUpdateDTO, JobQueryVO> {
+	SuperController<ISysJobService, SysJob, Long, BaseQuery, JobSaveDTO, JobUpdateDTO, JobQueryVO> {
 
 
 }

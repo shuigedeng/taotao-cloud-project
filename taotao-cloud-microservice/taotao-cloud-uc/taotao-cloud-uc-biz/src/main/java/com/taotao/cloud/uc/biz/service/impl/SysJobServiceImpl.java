@@ -8,6 +8,7 @@ import com.taotao.cloud.uc.api.dubbo.IDubboJobService;
 import com.taotao.cloud.uc.biz.service.ISysJobService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,5 +22,10 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass =IDubboJobService.class )
 public class SysJobServiceImpl  extends
 	BaseSuperServiceImpl<ISysJobMapper, SysJob,SysJobRepository, ISysJobRepository, Long>
-	implements IDubboJobService, ISysJobService<SysJob, Long> {
+	implements IDubboJobService, ISysJobService {
+
+	@Autowired
+	private ISysJobService sysJobService;
+
+
 }

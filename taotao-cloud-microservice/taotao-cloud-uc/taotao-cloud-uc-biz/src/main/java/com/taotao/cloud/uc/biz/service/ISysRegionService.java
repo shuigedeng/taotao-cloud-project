@@ -16,6 +16,7 @@
 package com.taotao.cloud.uc.biz.service;
 
 import com.taotao.cloud.uc.api.vo.region.RegionParentVO;
+import com.taotao.cloud.uc.biz.entity.SysRegion;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
@@ -28,8 +29,7 @@ import java.util.List;
  * @version 2021.10
  * @since 2021-10-09 20:37:26
  */
-public interface ISysRegionService<T extends SuperEntity<T,I>, I extends Serializable> extends
-	BaseSuperService<T, I> {
+public interface ISysRegionService extends BaseSuperService<SysRegion, Long> {
 
 	/**
 	 * queryRegionByParentId
