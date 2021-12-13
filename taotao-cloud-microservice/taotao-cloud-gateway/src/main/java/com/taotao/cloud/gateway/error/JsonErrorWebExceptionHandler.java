@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties.Resources;
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -48,10 +48,10 @@ import org.springframework.web.server.ResponseStatusException;
 public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandler {
 
 	public JsonErrorWebExceptionHandler(ErrorAttributes errorAttributes,
-		ResourceProperties resourceProperties,
+		Resources resources,
 		ErrorProperties errorProperties,
 		ApplicationContext applicationContext) {
-		super(errorAttributes, resourceProperties, errorProperties, applicationContext);
+		super(errorAttributes, resources, errorProperties, applicationContext);
 	}
 
 	@Override
