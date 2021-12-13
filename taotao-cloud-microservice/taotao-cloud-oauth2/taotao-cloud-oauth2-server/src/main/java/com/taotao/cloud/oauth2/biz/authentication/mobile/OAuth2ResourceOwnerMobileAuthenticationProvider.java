@@ -3,6 +3,7 @@ package com.taotao.cloud.oauth2.biz.authentication.mobile;
 import static com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
 
 import com.taotao.cloud.oauth2.biz.authentication.JwtUtils;
+import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
 import java.security.Principal;
 import java.time.Duration;
 import java.time.Instant;
@@ -58,9 +59,9 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 	private final AuthenticationManager authenticationManager;
 	private final OAuth2AuthorizationService authorizationService;
 	private final JwtEncoder jwtEncoder;
-	private OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = (context) -> {
-	};
-	private Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
+	private OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = context -> new JwtCustomizerServiceImpl().customizeToken(
+		context);
+	private final Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
 	private ProviderSettings providerSettings;
 	private UserDetailsService userDetailService;
 
