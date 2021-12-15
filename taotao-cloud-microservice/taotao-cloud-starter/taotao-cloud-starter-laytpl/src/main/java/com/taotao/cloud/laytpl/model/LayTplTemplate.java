@@ -129,7 +129,7 @@ public class LayTplTemplate implements ApplicationContextAware, InitializingBean
 		config.put("close", tplProperties.getClose());
 		bindings.put("console", console);
 		bindings.put("fmt", fmtFunc);
-		bindings.put("mica", new JsContext(applicationContext));
+		bindings.put("cloud", new JsContext(applicationContext));
 		bindings.put("_config", config);
 		engine.setBindings(bindings, ScriptContext.GLOBAL_SCOPE);
 		engine.eval(JsLayTpl.LAY_TPL_JS, bindings);

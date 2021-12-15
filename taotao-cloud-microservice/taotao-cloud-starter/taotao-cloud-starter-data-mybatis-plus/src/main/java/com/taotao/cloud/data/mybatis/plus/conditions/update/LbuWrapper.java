@@ -113,6 +113,17 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	}
 
 	@Override
+	public LbuWrapper<T> set(SFunction<T, ?> column, Object val, String mapping) {
+		return Update.super.set(column, val, mapping);
+	}
+
+	@Override
+	public LbuWrapper<T> set(boolean condition,
+		SFunction<T, ?> column, Object val, String mapping) {
+		return null;
+	}
+
+	@Override
 	public LbuWrapper<T> setSql(String sql) {
 		return Update.super.setSql(sql);
 	}
@@ -323,8 +334,7 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	}
 
 	@Override
-	public LbuWrapper<T> groupBy(
-		SFunction<T, ?>... columns) {
+	public LbuWrapper<T> groupBy(List<SFunction<T, ?>> columns) {
 		return super.groupBy(columns);
 	}
 
@@ -336,13 +346,13 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 
 	@Override
 	public LbuWrapper<T> orderByAsc(
-		SFunction<T, ?>... columns) {
+		List<SFunction<T, ?>> columns) {
 		return super.orderByAsc(columns);
 	}
 
 	@Override
 	public LbuWrapper<T> orderByAsc(boolean condition,
-		SFunction<T, ?>... columns) {
+		List<SFunction<T, ?>> columns) {
 		return super.orderByAsc(condition, columns);
 	}
 
@@ -353,14 +363,13 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	}
 
 	@Override
-	public LbuWrapper<T> orderByDesc(
-		SFunction<T, ?>... columns) {
+	public LbuWrapper<T> orderByDesc(List<SFunction<T, ?>> columns) {
 		return super.orderByDesc(columns);
 	}
 
 	@Override
 	public LbuWrapper<T> orderByDesc(boolean condition,
-		SFunction<T, ?>... columns) {
+		List<SFunction<T, ?>> columns) {
 		return super.orderByDesc(condition, columns);
 	}
 
@@ -401,12 +410,12 @@ public class LbuWrapper<T> extends AbstractLambdaWrapper<T, LbuWrapper<T>>
 	}
 
 	@Override
-	public LbuWrapper<T> exists(String existsSql) {
-		return super.exists(existsSql);
+	public LbuWrapper<T> exists(String existsSql, Object... values) {
+		return super.exists(existsSql, values);
 	}
 
 	@Override
-	public LbuWrapper<T> notExists(String existsSql) {
-		return super.notExists(existsSql);
+	public LbuWrapper<T> notExists(String existsSql, Object... values) {
+		return super.notExists(existsSql,values);
 	}
 }

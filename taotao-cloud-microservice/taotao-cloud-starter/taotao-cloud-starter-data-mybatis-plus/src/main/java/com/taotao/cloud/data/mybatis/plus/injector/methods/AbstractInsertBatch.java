@@ -96,7 +96,7 @@ public class AbstractInsertBatch extends AbstractMethod {
 	 */
 	private static String getAllInsertSqlColumnMaybeIf(TableInfo tableInfo) {
 		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
-		return tableInfo.getKeyInsertSqlColumn(true) + fieldList.stream()
+		return tableInfo.getKeyInsertSqlColumn(true, true) + fieldList.stream()
 			.map(AbstractInsertBatch::getInsertSqlColumnMaybeIf)
 			.collect(Collectors.joining(NEWLINE));
 	}
@@ -125,7 +125,7 @@ public class AbstractInsertBatch extends AbstractMethod {
 	 */
 	private static String getAllInsertSqlPropertyMaybeIf(final TableInfo tableInfo) {
 		List<TableFieldInfo> fieldList = tableInfo.getFieldList();
-		return tableInfo.getKeyInsertSqlProperty(ENTITY_DOT, true) + fieldList.stream()
+		return tableInfo.getKeyInsertSqlProperty(true, ENTITY_DOT, true) + fieldList.stream()
 			.map(AbstractInsertBatch::getInsertSqlPropertyMaybeIf)
 			.collect(Collectors.joining(NEWLINE));
 	}

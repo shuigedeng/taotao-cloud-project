@@ -10,8 +10,8 @@ dependencies {
 
     api "com.github.danielwegener:logback-kafka-appender:0.2.0-RC2"
     api "net.logstash.logback:logstash-logback-encoder"
-    api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.6.0'
-    api 'org.apache.skywalking:apm-toolkit-trace:8.6.0'
+    api 'org.apache.skywalking:apm-toolkit-logback-1.x:8.8.0'
+    api 'org.apache.skywalking:apm-toolkit-trace:8.8.0'
 
     implementation 'com.baomidou:mybatis-plus-extension'
 

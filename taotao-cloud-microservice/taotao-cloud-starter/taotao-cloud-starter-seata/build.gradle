@@ -5,7 +5,7 @@ dependencies {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'
         exclude group: 'cglib', module: 'cglib'
     }
-    api 'io.seata:seata-spring-boot-starter:1.4.1'
+    api 'io.seata:seata-spring-boot-starter:1.4.2'
     api 'cglib:cglib:3.3.0'
 
     api "com.zaxxer:HikariCP"

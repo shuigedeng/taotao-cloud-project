@@ -14,11 +14,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-undertow'
 	implementation 'org.springframework.boot:spring-boot-autoconfigure'
-	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
@@ -142,7 +142,7 @@ jib {
 		mainClass = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
 		args = ['some', 'args']
 		ports = ['33337']
-		labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
+		//labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
 		environment = ['app_name': 'taotao-cloud-uc', 'port': '33337']
 		format = 'OCI'
 		user = 'root'

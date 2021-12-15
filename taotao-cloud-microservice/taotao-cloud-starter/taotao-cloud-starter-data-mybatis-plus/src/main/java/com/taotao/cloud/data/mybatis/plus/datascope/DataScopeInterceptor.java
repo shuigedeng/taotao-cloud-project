@@ -19,7 +19,6 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.extension.handlers.AbstractSqlParserHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import java.sql.Connection;
@@ -45,7 +44,7 @@ import org.apache.ibatis.session.RowBounds;
  */
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class,
 	Integer.class})})
-public class DataScopeInterceptor extends AbstractSqlParserHandler implements InnerInterceptor {
+public class DataScopeInterceptor  implements InnerInterceptor {
 
 
 	public DataScopeInterceptor() {

@@ -200,10 +200,12 @@ spring:
     encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    #url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:172.16.6.151}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     hikari:
       auto-commit: true
       connection-timeout: 30000
@@ -555,15 +557,12 @@ taotao:
         web-context: true
         report: true
         ping: true
-        dump: true
       limit:
         enabled: true
       idempotent:
         enabled: true
       xss:
         enabled: true
-    spider:
-      enabled: false
     sms:
       enabled: false
     shardingsphere:
@@ -584,11 +583,7 @@ taotao:
         type: redis
     rabbitmq:
       enabled: false
-    qrcode:
-      enabled: false
     pulsar:
-      enabled: false
-    prometheus:
       enabled: false
     process:
       enabled: false
@@ -649,7 +644,6 @@ taotao:
       enabled: true
     health:
       enabled: true
-      dump: true
       export: true
       warn: true
       check: true
