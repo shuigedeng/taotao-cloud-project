@@ -153,7 +153,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 		private RedisScript<List<Long>> redisRateLimiterScript() {
 			DefaultRedisScript redisScript = new DefaultRedisScript<>();
 			redisScript.setScriptSource(new ResourceScriptSource(
-				new ClassPathResource("META-INF/scripts/mica_rate_limiter.lua")));
+				new ClassPathResource("META-INF/scripts/rate_limiter.lua")));
 			redisScript.setResultType(List.class);
 			return redisScript;
 		}

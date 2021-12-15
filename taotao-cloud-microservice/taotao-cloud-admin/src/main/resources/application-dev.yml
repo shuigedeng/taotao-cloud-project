@@ -133,25 +133,6 @@ taotao:
     core:
       enabled: true
       env: dev
-      logging:
-        file:
-          total-size: 10GB
-      context:
-        restart:
-          enabled: false
-          text:
-          timespan:
-      collect:
-        hook:
-          enabled: true
-      db:
-        printSql:
-          enabled: true
-        printSqlError:
-          enabled: true
-    log:
-      request-log:
-        enabled: false
 
 management:
   endpoints:

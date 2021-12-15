@@ -1,19 +1,14 @@
 package com.taotao.cloud.data.mybatis.plus.configuration;
 
-import com.baomidou.mybatisplus.core.parser.ISqlParserFilter;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusAutoFillProperties;
-import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusDynamicDataSourceProperties;
-import com.taotao.cloud.data.mybatis.plus.properties.MybatisPlusProperties;
 import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.StringValue;
-import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * TenantAutoConfiguration 
+ * TenantAutoConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
@@ -48,16 +43,17 @@ public class TenantAutoConfiguration implements InitializingBean {
 	/**
 	 * 过滤不需要根据租户隔离的MappedStatement
 	 */
-	@Bean
-	public ISqlParserFilter sqlParserFilter() {
-		return metaObject -> {
-			MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
-			return tenantProperties.getIgnoreSqlList()
-				.stream()
-				.anyMatch(e -> e.equalsIgnoreCase(ms.getId())
-			);
-		};
-	}
+	//@Bean
+	//public ISqlParser sqlParserFilter() {
+	//	return metaObject -> {
+	//		MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
+	//		return new SqlInfo();
+	//		return tenantProperties.getIgnoreSqlList()
+	//			.stream()
+	//			.anyMatch(e -> e.equalsIgnoreCase(ms.getId())
+	//		);
+	//	};
+	//}
 
 	/**
 	 * 新多租户插件配置,一缓和二缓遵循mybatis的规则, 需要设置 MybatisConfiguration#useDeprecatedExecutor = false

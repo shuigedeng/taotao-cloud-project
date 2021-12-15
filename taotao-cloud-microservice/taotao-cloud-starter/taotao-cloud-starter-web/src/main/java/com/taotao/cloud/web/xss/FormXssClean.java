@@ -80,7 +80,7 @@ public class FormXssClean {
 				String value = xssCleaner.clean(XssUtil.trim(text, properties.getTrimText()));
 				setValue(value);
 				LogUtil.debug(
-					"Request parameter value:{} cleaned up by mica-xss, current value is:{}.",
+					"Request parameter value:{} cleaned up by xss, current value is:{}.",
 					text, value);
 			} else {
 				setValue(XssUtil.trim(text, properties.getTrimText()));

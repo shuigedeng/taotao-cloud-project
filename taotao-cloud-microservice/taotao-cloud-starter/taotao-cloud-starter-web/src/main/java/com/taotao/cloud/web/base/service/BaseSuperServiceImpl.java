@@ -16,8 +16,14 @@
 package com.taotao.cloud.web.base.service;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
+import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.querydsl.core.types.Predicate;
+import com.taotao.cloud.common.exception.IdempotencyException;
 import com.taotao.cloud.common.exception.LockException;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.web.base.entity.SuperEntity;
@@ -154,20 +160,20 @@ public class BaseSuperServiceImpl<
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
 		Predicate predicate, String msg) {
-		// if (null != entity) {
-		// 	Class<?> cls = entity.getClass();
-		// 	TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
-		// 	if (null != tableInfo && StrUtil.isNotEmpty(tableInfo.getKeyProperty())) {
-		// 		Object idVal = ReflectionKit.getFieldValue(entity, tableInfo.getKeyProperty());
-		// 		if (StringUtils.checkValNull(idVal) || Objects.isNull(getById((Serializable) idVal))) {
-		// 			return this.saveIdempotency(entity, lock, lockKey, countWrapper, StrUtil.isEmpty(msg) ? "数据已存在" : msg);
-		// 		} else {
-		// 			return updateById(entity);
-		// 		}
-		// 	} else {
-		// 		throw ExceptionUtils.mpe("执行错误,未找到@TableId.");
-		// 	}
-		// }
+		 //if (null != entity) {
+		 //	Class<?> cls = entity.getClass();
+		 //	TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
+		 //	if (null != tableInfo && StrUtil.isNotEmpty(tableInfo.getKeyProperty())) {
+		 //		Object idVal = ReflectionKit.getFieldValue(entity, tableInfo.getKeyProperty());
+		 //		if (StringUtils.checkValNull(idVal) || Objects.isNull(getById((Serializable) idVal))) {
+		 //			return this.saveIdempotency(entity, lock, lockKey, countWrapper, StrUtil.isEmpty(msg) ? "数据已存在" : msg);
+		 //		} else {
+		 //			return updateById(entity);
+		 //		}
+		 //	} else {
+		 //		throw ExceptionUtils.mpe("执行错误,未找到@TableId.");
+		 //	}
+		 //}
 		return false;
 	}
 
@@ -184,6 +190,6 @@ public class BaseSuperServiceImpl<
 	@Override
 	public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey,
 		Predicate predicate) {
-		return this.saveOrUpdateIdempotency(entity, lock, lockKey, predicate, null);
+		return saveOrUpdateIdempotency(entity, lock, lockKey, predicate, null);
 	}
 }

@@ -3,7 +3,7 @@ dependencies {
 
     api "io.micrometer:micrometer-core"
     api "com.alibaba:druid:1.2.8"
-    api "com.alibaba.csp:sentinel-core:1.7.2"
+    api "com.alibaba.csp:sentinel-core:1.8.2"
     api "org.springframework.boot:spring-boot-starter-undertow"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"

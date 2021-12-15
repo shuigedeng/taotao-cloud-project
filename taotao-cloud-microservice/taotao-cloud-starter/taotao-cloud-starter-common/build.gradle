@@ -16,23 +16,23 @@ dependencies {
     api 'com.github.whvcse:easy-captcha'
     api 'javax.validation:validation-api'
     api 'io.projectreactor:reactor-core'
-    api 'cn.afterturn:easypoi-base:4.3.0'
+    api 'cn.afterturn:easypoi-base:4.4.0'
     api 'com.nepxion:banner'
-    api 'com.github.xkzhangsan:xk-time:3.1.0'
-    api 'com.baomidou:mybatis-plus-core:3.4.2'
-    api 'com.baomidou:mybatis-plus-extension:3.4.2'
+    api 'com.github.xkzhangsan:xk-time:3.2.2'
+    api 'com.baomidou:mybatis-plus-core:3.4.3.4'
+    api 'com.baomidou:mybatis-plus-extension:3.4.3.4'
     api 'com.squareup.okhttp3:okhttp'
     api "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     api 'org.apache.httpcomponents:httpclient'
     api 'org.apache.httpcomponents:httpmime'
     
-    api "io.swagger.core.v3:swagger-models:2.1.7"
-    api 'io.swagger.core.v3:swagger-annotations:2.1.7'
+    api "io.swagger.core.v3:swagger-models:2.1.11"
+    api 'io.swagger.core.v3:swagger-annotations:2.1.11'
 
-    api 'com.thoughtworks.xstream:xstream:1.4.17'
+    api 'com.thoughtworks.xstream:xstream:1.4.18'
 
-    api  "org.jsoup:jsoup:1.14.2"
+    api  "org.jsoup:jsoup:1.14.3"
     api "com.google.zxing:javase:3.4.1"
 
     api 'org.springframework:spring-core'
