@@ -201,49 +201,49 @@ const Index: Taro.FC = () => {
           onConfirm={clickSearch}
         />
       </View>
-      {/*<AtTabs*/}
-      {/*  current={state.current}*/}
-      {/*  className="attab"*/}
-      {/*  height="95vh;"*/}
-      {/*  tabDirection="vertical"*/}
-      {/*  tabList={tabList}*/}
-      {/*  onClick={handleClick}*/}
-      {/*>*/}
-      {/*  {tabList.map((currentValue, index) => (*/}
-      {/*    <AtTabsPane*/}
-      {/*      tabDirection="vertical"*/}
-      {/*      current={state.current}*/}
-      {/*      index={index}*/}
-      {/*      key={currentValue.id}*/}
-      {/*    >*/}
-      {/*      {state.list.map(item => (*/}
-      {/*        <View key={item.code} className="goodBox">*/}
-      {/*          <Image src={item.imageUrl} className="img"*/}
-      {/*                 onClick={() => handleDetails(item.code)}/>*/}
-      {/*          <View className='rightBox'>*/}
-      {/*            <View className='topText' onClick={() => handleDetails(item.code)}>*/}
-      {/*              <Text className='goodName'>{item.name}</Text>*/}
-      {/*            </View>*/}
-      {/*            <Text className="goodName">{item.number}</Text>*/}
-      {/*            <View className="item_right_box">*/}
-      {/*              <View className="priceBox">*/}
-      {/*                <Text className="price" onClick={() => handleDetails(item.code)}>*/}
-      {/*                  ￥{(item.price / 100).toFixed(2)}/{item.unit}*/}
-      {/*                </Text>*/}
-      {/*                <Text className="originalPrice">*/}
-      {/*                  ￥{(item.originalPrice / 100).toFixed(2)}*/}
-      {/*                </Text>*/}
-      {/*              </View>*/}
-      {/*              <View className="shoppingCart" onClick={() => onOpenDoor(item)}>*/}
-      {/*                <AtIcon value='shopping-cart' size='20' color='#fff'/>*/}
-      {/*              </View>*/}
-      {/*            </View>*/}
-      {/*          </View>*/}
-      {/*        </View>*/}
-      {/*      ))}*/}
-      {/*    </AtTabsPane>*/}
-      {/*  ))}*/}
-      {/*</AtTabs>*/}
+      <AtTabs
+        current={state.current}
+        className="attab"
+        height="95vh;"
+        tabDirection="vertical"
+        tabList={tabList}
+        onClick={handleClick}
+      >
+        {tabList.map((currentValue, index) => (
+          <AtTabsPane
+            tabDirection="vertical"
+            current={state.current}
+            index={index}
+            key={currentValue.id}
+          >
+            {state.list.map(item => (
+              <View key={item.code} className="goodBox">
+                <Image src={item.imageUrl} className="img"
+                       onClick={() => handleDetails(item.code)}/>
+                <View className='rightBox'>
+                  <View className='topText' onClick={() => handleDetails(item.code)}>
+                    <Text className='goodName'>{item.name}</Text>
+                  </View>
+                  <Text className="goodName">{item.number}</Text>
+                  <View className="item_right_box">
+                    <View className="priceBox">
+                      <Text className="price" onClick={() => handleDetails(item.code)}>
+                        ￥{(item.price / 100).toFixed(2)}/{item.unit}
+                      </Text>
+                      <Text className="originalPrice">
+                        ￥{(item.originalPrice / 100).toFixed(2)}
+                      </Text>
+                    </View>
+                    <View className="shoppingCart" onClick={() => onOpenDoor(item)}>
+                      <AtIcon value='shopping-cart' size='20' color='#fff'/>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </AtTabsPane>
+        ))}
+      </AtTabs>
     </View>
   );
 }

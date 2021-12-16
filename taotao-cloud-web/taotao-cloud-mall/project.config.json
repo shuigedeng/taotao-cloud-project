@@ -1,23 +1,23 @@
 {
-	"miniprogramRoot": "dist/",
-	"projectname": "taotao-cloud-mall",
-	"description": "taotao-cloud-mall",
-	"appid": "touristappid",
-	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
-		"preloadBackgroundData": false,
-		"minified": false,
-		"newFeature": true,
-		"autoAudits": false,
-		"coverView": true,
-		"showShadowRootInWxmlPanel": false,
-		"scopeDataCheck": false,
-		"useCompilerModule": false
-	},
-	"compileType": "miniprogram",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {}
+  "miniprogramRoot": "./dist",
+  "projectname": "taotao-cloud-rn",
+  "description": "taotao-cloud-rn",
+  "appid": "touristappid",
+  	"setting": {
+  		"urlCheck": true,
+  		"es6": false,
+  		"postcss": false,
+  		"preloadBackgroundData": false,
+  		"minified": false,
+  		"newFeature": true,
+  		"autoAudits": false,
+  		"coverView": true,
+  		"showShadowRootInWxmlPanel": false,
+  		"scopeDataCheck": false,
+  		"useCompilerModule": false
+  	},
+  	"compileType": "miniprogram",
+  	"simulatorType": "wechat",
+  	"simulatorPluginLibVersion": {},
+  	"condition": {}
 }

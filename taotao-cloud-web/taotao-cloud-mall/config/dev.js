@@ -6,14 +6,6 @@ module.exports = {
   },
   mini: {},
   h5: {
-    esnextModules: ['taro-ui'],
-    devServer: {
-      proxy: {
-        '/': {
-          target: "http://192.168.99.37:9527",
-          changeOrigin: true
-        },
-      }
-    },
+    esnextModules: ['taro-ui']
   }
 }

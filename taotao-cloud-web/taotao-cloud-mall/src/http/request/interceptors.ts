@@ -91,8 +91,8 @@ const reduceRequest = () => {
 // timeoutInterceptor - 在请求超时时抛出错误。
 const interceptors = [
   taotaoCloudInterceptor,
-  Taro.interceptors.logInterceptor,
-  Taro.interceptors.timeoutInterceptor
+  // Taro.interceptors.logInterceptor,
+  // Taro.interceptors.timeoutInterceptor
 ]
 
 export default interceptors

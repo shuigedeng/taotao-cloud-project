@@ -1,27 +1,19 @@
-import {useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {Text, View} from '@tarojs/components'
-import {AtButton} from 'taro-ui'
 
-import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.less'
-import {
-  eventCenter,
-  getCurrentInstance,
-  getSystemInfo,
-  useDidHide,
-  useDidShow,
-  useReady
-} from "@tarojs/taro";
-import React from 'react'
+import {eventCenter, getCurrentInstance, useDidHide, useDidShow, useReady} from "@tarojs/taro";
+import {AtButton} from 'taro-ui';
 
-
-const Index: Taro.FC = (props) => {
+const Index: Taro.FC = () => {
   let currentInstance = getCurrentInstance();
+  // @ts-ignore
   const onShowEventId = currentInstance.router.onShow;
 
   useReady(() => {
     console.log("useReady-----------")
 
+    // @ts-ignore
     const onReadyEventId = currentInstance.router.onReady
     eventCenter.once(onReadyEventId, () => {
       console.log(`${onReadyEventId}++++++++++++`)
@@ -47,12 +39,12 @@ const Index: Taro.FC = (props) => {
 
   return (
     <View className='index'>
-      {/*<Text>Hello world!</Text>*/}
-      {/*<AtButton type='primary'>I need Taro UI</AtButton>*/}
-      {/*<Text>我的    我的</Text>*/}
-      {/*<AtButton type='primary' circle={true}>我的</AtButton>*/}
-      {/*<Text>我的？</Text>*/}
-      {/*<AtButton type='secondary' circle={true}>我的</AtButton>*/}
+      <Text>Hello world!</Text>
+      <AtButton type='primary'>I need Taro UI</AtButton>
+      <Text>我的 我的</Text>
+      <AtButton type='primary' circle={true}>我的</AtButton>
+      <Text>我的？</Text>
+      <AtButton type='secondary' circle={true}>我的</AtButton>
     </View>
   )
 };

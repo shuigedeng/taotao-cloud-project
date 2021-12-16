@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboOrderService.class)
 public class OrderInfoServiceImpl
 	extends BaseSuperServiceImpl<IOrderInfoMapper, OrderInfo, OrderInfoRepository, IOrderInfoRepository, Long>
-	implements IDubboOrderService, IOrderInfoService<OrderInfo, Long> {
+	implements IDubboOrderService, IOrderInfoService {
 
 	private final static QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 

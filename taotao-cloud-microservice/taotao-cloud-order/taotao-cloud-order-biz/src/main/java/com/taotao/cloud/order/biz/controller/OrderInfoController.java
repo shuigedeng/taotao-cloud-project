@@ -49,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "订单管理API", description = "订单管理API")
 public class OrderInfoController
 	extends
-	SuperController<IOrderInfoService<OrderInfo, Long>, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
+	SuperController<IOrderInfoService, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
 	/**
 	 * 根据父id查询地区数据
 	 *

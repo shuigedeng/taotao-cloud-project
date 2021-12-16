@@ -1,26 +1,24 @@
 import Taro, {useDidShow, usePageScroll, usePullDownRefresh} from "@tarojs/taro";
-import {Image, Text, View,} from "@tarojs/components";
-import {invitedUsers, singleItem} from "./service";
+import {View,} from "@tarojs/components";
 // import {userInfo} from "../orderDetails/service";
 import "./index.less";
 
-import diamond from "@/assets/img/diamond.png";
 
-import * as moment from "moment";
+// import * as moment from "moment";
 import React, {useEffect, useState} from "react";
-import CustomSwiper from "@/pages/home/components/CustomSwiper";
-import ChooseStore from "@/pages/home/components/ChooseStore";
-import ShoppingScan from "@/pages/home/components/ShoppingScan";
-import OptimizationBox from "@/pages/home/components/OptimizationBox";
-import SpecialZone from "@/pages/home/components/SpecialZone";
-import {CartActionType} from "@/store/action/cartAction";
+// import diamond from "@/assets/img/diamond.png";
+// import CustomSwiper from "@/pages/home/components/CustomSwiper";
+// import ChooseStore from "@/pages/home/components/ChooseStore";
+// import ShoppingScan from "@/pages/home/components/ShoppingScan";
+// import OptimizationBox from "@/pages/home/components/OptimizationBox";
+// import SpecialZone from "@/pages/home/components/SpecialZone";
 import api from "@/api/index"
 import {Banner} from "@/api/banner/model";
 import {Classify, Item} from "@/api/product/model";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {cartTabBarBadge} from "@/utils/cart";
 
-moment.locale("zh-cn");
+// moment.locale("zh-cn");
 
 interface IState {
   tabbarFix: boolean;
@@ -114,11 +112,11 @@ const Index: Taro.FC = () => {
 
   // @ts-ignore
   const cartItems = useSelector(({cart}) => cart.cartItems);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const getData = async () => {
     // 首页banners
-    const banners = await api.banner.getBanners()
+    const banners = await api.banner.getBanners({})
     if (banners) {
       setState(prevState => {
         return {...prevState, banners: {data: banners.data, loading: false}}
@@ -277,80 +275,80 @@ const Index: Taro.FC = () => {
     })
   })
 
-  const lookForward = async () => {
-    const {result} = await Taro.scanCode({});
-    console.log('扫码result', result);
-
-    const obj = JSON.parse(result);
-    if (obj.userId) {
-      console.log('扫码邀请');
-      const {data} = await invitedUsers(obj.userId);
-      console.log('lookForward data', data);
-
-      if (data) {
-        Taro.showToast({
-          title: "绑定成功",
-          icon: "success"
-        })
-      }
-    } else {
-      console.log('扫码加购');
-      const itemResult = await singleItem(result);
-      console.log('扫码加入购物车itemResult', itemResult);
-      const data: any = {};
-      data.itemId = itemResult.data.item.code;
-      data.name = itemResult.data.item.name;
-      data.number = 1;
-      data.price = itemResult.data.item.price;
-      data.unit = itemResult.data.item.unit;
-      data.imageUrl = itemResult.data.item.imageUrl;
-      data.pointDiscountPrice = itemResult.data.item.pointDiscountPrice;
-      data.originalPrice = itemResult.data.item.originalPrice;
-      data.memberPrice = itemResult.data.item.memberPrice;
-
-      dispatch({
-        type: CartActionType.ADD_TO_CART_BY_CODE,
-        payload: data
-      });
-    }
-  }
+  // const lookForward = async () => {
+  //   const {result} = await Taro.scanCode({});
+  //   console.log('扫码result', result);
+  //
+  //   const obj = JSON.parse(result);
+  //   if (obj.userId) {
+  //     console.log('扫码邀请');
+  //     const {data} = await invitedUsers(obj.userId);
+  //     console.log('lookForward data', data);
+  //
+  //     if (data) {
+  //       Taro.showToast({
+  //         title: "绑定成功",
+  //         icon: "success"
+  //       })
+  //     }
+  //   } else {
+  //     console.log('扫码加购');
+  //     const itemResult = await singleItem(result);
+  //     console.log('扫码加入购物车itemResult', itemResult);
+  //     const data: any = {};
+  //     data.itemId = itemResult.data.item.code;
+  //     data.name = itemResult.data.item.name;
+  //     data.number = 1;
+  //     data.price = itemResult.data.item.price;
+  //     data.unit = itemResult.data.item.unit;
+  //     data.imageUrl = itemResult.data.item.imageUrl;
+  //     data.pointDiscountPrice = itemResult.data.item.pointDiscountPrice;
+  //     data.originalPrice = itemResult.data.item.originalPrice;
+  //     data.memberPrice = itemResult.data.item.memberPrice;
+  //
+  //     dispatch({
+  //       type: CartActionType.ADD_TO_CART_BY_CODE,
+  //       payload: data
+  //     });
+  //   }
+  // }
 
   // 跳转取货码
-  const itemDetails = () => {
-    Taro.switchTab({
-      url: "../certificates/index"
-    });
-  }
-
-//分类跳转
-  const handleItemLists = (id, title) => {
-    Taro.navigateTo({
-      url: `../itemLists/index?id=${id}&title=${title}`
-    });
-  }
-
-// 会员活动
-  const topUPGetMember = () => {
-    Taro.checkSession({
-      success() {
-        // if (state.userDetail.role === 'member') {
-        //   Taro.navigateTo({
-        //     url: "../theMemberCenter/index"
-        //   });
-        // } else {
-        //   Taro.navigateTo({
-        //     url: '../../packageA/pages/topup/index'
-        //   });
-        // }
-      },
-      fail() {
-        Taro.showToast({
-          title: "请跳转我的界面进行登录",
-          icon: "none"
-        });
-      }
-    })
-  }
+//   const itemDetails = () => {
+//     Taro.switchTab({
+//       url: "../certificates/index"
+//     });
+//   }
+//
+// //分类跳转
+//   const handleItemLists = (id, title) => {
+//     Taro.navigateTo({
+//       url: `../itemLists/index?id=${id}&title=${title}`
+//     });
+//   }
+//
+// // 会员活动
+//   const topUPGetMember = () => {
+//     Taro.checkSession({
+//       success() {
+//         // if (state.userDetail.role === 'member') {
+//         //   Taro.navigateTo({
+//         //     url: "../theMemberCenter/index"
+//         //   });
+//         // } else {
+//         //   Taro.navigateTo({
+//         //     url: '../../packageA/pages/topup/index'
+//         //   });
+//         // }
+//       },
+//       fail() {
+//         Taro.showToast({
+//           title: "请跳转我的界面进行登录",
+//           icon: "none"
+//         });
+//       }
+//     })
+//   }
 
 // 手势触摸开始
 // onTouchStart(e){

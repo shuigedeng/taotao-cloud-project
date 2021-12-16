@@ -11,11 +11,11 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:roundIcon="@mipmap/ic_launcher_round"
+      android:icon="${appIcon}"
+      android:roundIcon="${appRoundIcon}"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-	  android:usesCleartextTraffic="${usesCleartextTraffic}"
+      android:usesCleartextTraffic="${usesCleartextTraffic}"
       android:requestLegacyExternalStorage="true">
       <activity
         android:name=".MainActivity"
@@ -28,7 +28,6 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
 </manifest>

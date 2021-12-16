@@ -10,7 +10,7 @@ export default {
     return request.get<Result<Page<Item>>, BasicPageParams>("/items", data);
   },
   getProjectItems({projectId, pageSize}): Promise<Result<Item[]>> {
-    return request.get<Result<Item[]>, {}>("/items/project", {});
+    return request.get<Result<Item[]>, {}>("/items/project", {projectId, pageSize});
   },
   getItemsByClassId(data: { currentPage: number, pageSize: number }, classId: number): Promise<Result<Page<Item>>> {
     return request.get<Result<Page<Item>>, {}>("/items/" + classId, data);

@@ -1,23 +1,12 @@
 export default {
   pages: [
-    // 首页
-    "pages/home/index",
-    // 分类
+    'pages/index/index',
     "pages/classify/index",
-    // 购物车
     "pages/cart/index",
-    "pages/home_bak/index",
+    "pages/home/index",
     "pages/ucenter/index",
     "pages/lifeCircle/index",
   ],
-  // window: {
-  //   backgroundTextStyle: "dark",
-  //   navigationBarBackgroundColor: "#d43c33",
-  //   navigationBarTitleText: "滔滔商城",
-  //   navigationBarTextStyle: "black",
-  //   backgroundColor: '#b6a7a6',
-  //   enablePullDownRefresh: true
-  // },
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#fff",
@@ -47,7 +36,7 @@ export default {
     list: [
       {
         text: "首页",
-        pagePath: "pages/home/index",
+        pagePath: "pages/index/index",
         selectedIconPath: "./assets/images/tab-home-current.png",
         iconPath: "./assets/images/tab-home.png",
       },
@@ -88,7 +77,16 @@ export default {
     //  "root": "pages/auth",
     //  "pages": [
     //    "login/index",
-     // ]
+    // ]
     //},
   ],
-};
+  rn: {
+    screenOptions:{
+      shadowOffset: {width: 0, height: 0},
+      borderWidth:0,
+      elevation: 0,
+      shadowOpacity: 1,
+      borderBottomWidth: 0
+    }
+  }
+}

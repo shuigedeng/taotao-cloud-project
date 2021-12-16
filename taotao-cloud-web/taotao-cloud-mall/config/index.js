@@ -1,8 +1,7 @@
-const path = require('path')
-
+const path = require("path");
 const config = {
-  projectName: 'taotao-cloud-mall',
-  date: '2021-4-14',
+  projectName: 'taotao-cloud-rn',
+  date: '2021-12-3',
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,
@@ -10,26 +9,12 @@ const config = {
     828: 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: `dist/${process.env.TARO_ENV}`,
+  outputRoot: 'dist',
   plugins: [
-    [
-      path.resolve(__dirname, "..", "src/plugin").concat("/taro/index.ts"),
-      {
-        sever: {
-          url: "http://baidu.com",
-          ip: "127.0.0.1",
-          port: 3306,
-        },
-      },
-    ],
     ['taro-plugin-tailwind'],
-    ["@tarojs/plugin-mock", {
-      host: "0.0.0.0"
-    }],
-    ['tarojs-plugin-generator', {
-      css: 'less',  //可配置css编译器： 支持 none sass less stylus
-      cssModules: 'none',      //开启页面的CssModule化
-    }]
+    // ["@tarojs/plugin-mock", {
+    //   host: "0.0.0.0"
+    // }],
   ],
   defineConstants: {
     IS_H5: process.env.TARO_ENV === "h5",
@@ -51,70 +36,19 @@ const config = {
     "@/project": path.resolve(__dirname, "..", "project.config.json"),
   },
   copy: {
-    patterns: [],
-    options: {}
-  },
-  terser: {
-    enable: true,
-    config: {
-      // 配置项同 https://github.com/terser/terser#minify-options
-    }
-  },
-  csso: {
-    enable: true,
-    config: {
-      // 配置项同 https://github.com/css/csso#minifysource-options
+    patterns: [
+    ],
+    options: {
     }
   },
   framework: 'react',
   mini: {
-    mediaUrlLoaderOption: {
-      limit: 8192
-    },
-    // miniCssExtractPluginOption: {
-    //   filename: '[name].css',
-    //   chunkFilename: '[name].css'
-    // },
-    // lessLoaderOption: {
-    //   lessOptions: { // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
-    //     strictMath: true,
-    //     noIeCompat: true
-    //   }
-    // },
-    webpackChain(chain, webpack) {
-      chain.merge({
-        plugin: {
-          // install: {
-          //   plugin: require('npm-install-webpack-plugin'),
-          //   args: [{
-          //     // Use --save or --save-dev
-          //     dev: false,
-          //     // Install missing peerDependencies
-          //     peerDependencies: true,
-          //     // Reduce amount of console logging
-          //     quiet: false,
-          //     // npm command used inside company, yarn is not supported yet
-          //     npm: 'cnpm'
-          //   }]
-          // }
-        },
-        module: {
-          rule: {
-            myloader: {
-              test: /\.md$/,
-              use: [{
-                loader: 'raw-loader',
-                options: {}
-              }]
-            }
-          }
-        }
-      })
-    },
     postcss: {
       pxtransform: {
         enable: true,
-        config: {}
+        config: {
+
+        }
       },
       url: {
         enable: true,
@@ -179,25 +113,25 @@ const config = {
     }
   },
   rn: {
-    appName: "taotao-cloud-mall",
-    // output: {
-    //   ios: "./ios/main.jsbundle",
-    //   iosAssetsDest: "./ios",
-    //   android: "./android/app/src/main/assets/index.android.bundle",
-    //   androidAssetsDest: "./android/app/src/main/res",
-    // },
-    // plugins: [
-    //   [
-    //     "module-resolver",
-    //     {
-    //       alias: {
-    //         "@tarojs/components": "@tarojs/components-rn",
-    //         "@tarojs/taro": "@tarojs/taro-rn",
-    //       },
-    //     },
-    //   ],
-    // ],
-  },
+    appName: 'taroDemo',
+    output: {
+      ios: './ios/main.jsbundle',
+      iosAssetsDest: './ios',
+      android: './android/app/src/main/assets/index.android.bundle',
+      androidAssetsDest: './android/app/src/main/res',
+      // iosSourceMapUrl: '',
+      iosSourcemapOutput: './ios/main.map',
+      // iosSourcemapSourcesRoot: '',
+      // androidSourceMapUrl: '',
+      androidSourcemapOutput: './android/app/src/main/assets/index.android.map',
+      // androidSourcemapSourcesRoot: '',
+    },
+    postcss: {
+      cssModules: {
+        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+      }
+    }
+  }
 }
 
 module.exports = function (merge) {

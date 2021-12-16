@@ -32,6 +32,7 @@ const Index: Taro.FC = () => {
       const {deleteItem} = state;
       for (const iterator of cartItems) {
         if (iterator.checked) {
+          // @ts-ignore
           deleteItem.push(iterator);
         }
       }
@@ -49,6 +50,7 @@ const Index: Taro.FC = () => {
     const {deleteItem} = state;
     for (const iterator of cartItems) {
       if (iterator.checked) {
+        // @ts-ignore
         deleteItem.push(iterator);
       }
     }
@@ -64,33 +66,33 @@ const Index: Taro.FC = () => {
     })
   }
 
-  const choose = (activiId, amount, require, totalPrice) => {
-    if (totalPrice >= require) {
-      setState(prevState => {
-        return {...prevState, discount: amount, couponId: activiId}
-      })
-    } else {
-      setState(prevState => {
-        return {...prevState, discount: 0, couponId: ''}
-      })
-    }
-    setState(prevState => {
-      return {...prevState, activiId: activiId}
-    })
-  }
-
-  const open = () => {
-    setState(prevState => {
-      return {...prevState, modal: 'block'}
-    })
-  }
-
-  const prompt = () => {
-    Taro.showToast({
-      title: '敬请期待',
-      icon: 'none'
-    })
-  }
+  // const choose = (activiId, amount, require, totalPrice) => {
+  //   if (totalPrice >= require) {
+  //     setState(prevState => {
+  //       return {...prevState, discount: amount, couponId: activiId}
+  //     })
+  //   } else {
+  //     setState(prevState => {
+  //       return {...prevState, discount: 0, couponId: ''}
+  //     })
+  //   }
+  //   setState(prevState => {
+  //     return {...prevState, activiId: activiId}
+  //   })
+  // }
+  //
+  // const open = () => {
+  //   setState(prevState => {
+  //     return {...prevState, modal: 'block'}
+  //   })
+  // }
+  //
+  // const prompt = () => {
+  //   Taro.showToast({
+  //     title: '敬请期待',
+  //     icon: 'none'
+  //   })
+  // }
 
   //跳转确认订单
   const handlePay = async (couponId) => {
@@ -290,8 +292,8 @@ const Index: Taro.FC = () => {
                           onClick={changeCheck}>全选</Checkbox>
               </View>
               <View className='rightfk'>
-                <View className='YH'>
-                  <Text className='yh'>合计：</Text>
+                <View >
+                  <Text >合计：</Text>
                   <Text
                     className='hj'>￥{(state.totalPrice.total || 0) / 100 - (state.discount)}/元</Text>
                 </View>

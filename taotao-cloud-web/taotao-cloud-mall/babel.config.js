@@ -5,27 +5,6 @@ module.exports = {
     ['taro', {
       framework: 'react',
       ts: true
-      // 以下参数为 @babel/preset-env 的参数：
-      // https://babeljs.io/docs/en/babel-preset-env
-      // loose: true,
-      // useBuiltIns: true,
-      // esmodules: true,
-      // modules: "commonjs",
-      // targets: {
-      //   ios: '9',
-      //   android: '5'
-      // }
     }]
-  ],
-  plugins: [
-    // [
-    //   'module-resolver',
-    //   {
-    //     alias: {
-    //       '@tarojs/components': '@tarojs/components-rn',
-    //       '@tarojs/taro': '@tarojs/taro-rn',
-    //     },
-    //   },
-    // ]
   ]
 }
