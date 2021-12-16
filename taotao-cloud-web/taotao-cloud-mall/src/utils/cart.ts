@@ -12,6 +12,7 @@ export function cartTabBarBadge(cartItems: Item[]) {
     let i;
     for (i in cartItems) {
       if (cartItems[i].checked) {
+        // @ts-ignore
         sum += parseInt(cartItems[i].number);
       }
     }

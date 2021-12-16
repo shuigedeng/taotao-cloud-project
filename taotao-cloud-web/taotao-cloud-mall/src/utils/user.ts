@@ -42,8 +42,12 @@ function login() {
  * 调用微信登录
  */
 export function loginByWeixin(userInfo) {
+  console.log(userInfo)
+
   return new Promise(function (resolve, reject) {
     return login().then((res) => {
+      console.log(res)
+
       //登录远程服务器
       // loginByWeXin({
       //   code: res.code,

@@ -1,9 +1,7 @@
 import Taro, {request as TaroRequest} from '@tarojs/taro'
 import getRequestUrl from './requestUrl'
 import interceptors from './interceptors'
-import {ContentTypeEnum, HTTP_STATUS, RequestEnum} from "@/enums/httpEnum";
-import {Result} from "@/api/model/baseModel";
-import {error} from "@/utils/tool";
+import {ContentTypeEnum, RequestEnum} from "@/enums/httpEnum";
 
 interface options<P> {
   url: string,

@@ -1,6 +1,7 @@
 import {CartActionType, ICartAction} from "@/store/action/cartAction";
 import {ICartState, initCartState} from "@/store/state/cartState";
 
+// @ts-ignore
 export default function index(state: ICartState = initCartState, action: ICartAction): ICartState {
   let {cartItems} = state
 
@@ -136,6 +137,7 @@ const cartItemsAppend = (state: ICartState, item) => {
 
 const addOneToCartItemNumerByIndex = (state: ICartState, index) => {
   const {cartItems} = state;
+  // @ts-ignore
   cartItems[index].number += 1;
   return {
     ...state,

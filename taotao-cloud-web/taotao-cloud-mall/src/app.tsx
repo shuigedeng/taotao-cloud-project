@@ -1,69 +1,76 @@
-import React, {useEffect} from 'react'
-import Taro, {useDidShow,} from "@tarojs/taro";
-import {Provider} from "react-redux";
-import configStore from "./store";
+import { Component } from 'react'
+import './app.less'
+import sr from 'sr-sdk-wxapp'
+import { Provider } from 'react-redux'
+import configStore from './store'
+import React from 'react'
 
-import './windi.css';
 // import 'taro-ui/dist/style/index.scss'
-import {checkLogin} from "@/utils/user";
-import {setGlobalData} from "@/utils/global";
-import * as weappSensors from './http/sa/miniSensors';
 
-const store = configStore();
+/**
+ * 有数埋点SDK 默认配置
+ * 使用方法请参考文档 https://mp.zhls.qq.com/youshu-docs/develop/sdk/Taro.html
+ * 如对有数SDK埋点接入有任何疑问，请联系微信：sr_data_service
+ */
+sr.init({
+  /**
+   * 有数 - ka‘接入测试用’ 分配的 app_id，对应的业务接口人负责
+   */
+  token: 'bi6cdbda95ae2640ec',
 
-const App: Taro.FC = (props) => {
-  useDidShow(() => {
-    Taro.getSystemInfo({
-      success: (res) => {
-        let {safeArea, ...obj} = res;
-        let assign = Object.assign({}, safeArea, obj);
-        console.log(assign)
-        weappSensors.default.registerApp(assign)
-        weappSensors.default.init()
-      },
-    });
+  /**
+   * 微信小程序appID，以wx开头
+   */
+  appid: 'touristappid',
 
-    checkLogin().then(res => {
-      setGlobalData('hasLogin', true);
-    }).catch(() => {
-      setGlobalData('hasLogin', false);
-    });
-  })
+  /**
+   * 如果使用了小程序插件，需要设置为 true
+   */
+  usePlugin: false,
 
-  useEffect(() => {
-    const update = () => {
-      if (Taro.canIUse("getUpdateManager")) {
-        const updateManager = Taro.getUpdateManager();
-        updateManager.onCheckForUpdate(res => {
-          if (res.hasUpdate) {
-            updateManager.onUpdateReady(function () {
-              Taro.showModal({
-                title: "更新提示",
-                content: "新版本已经准备好，是否重启应用？",
-                success: function (successRes) {
-                  // res: {errMsg: "showModal: ok", cancel: false, confirm: true}
-                  if (successRes.confirm) {
-                    // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                    updateManager.applyUpdate();
-                  }
-                }
-              });
-            });
-            updateManager.onUpdateFailed(function () {
-              // 新的版本下载失败
-              Taro.showModal({
-                title: "已经有新版本了哟~",
-                content: "新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~"
-              });
-            });
-          }
-        });
-      }
-    }
-    update()
-  }, []);
+  /**
+   * 开启打印调试信息， 默认 false
+   */
+  debug: true,
 
-  return <Provider store={store}>{props.children}</Provider>;
-};
+  /**
+   * 建议开启-开启自动代理 Page， 默认 false
+   * sdk 负责上报页面的 browse 、leave、share 等事件
+   * 可以使用 sr.page 代替 Page(sr.page(options))
+   * 元素事件跟踪，需要配合 autoTrack: true
+   */
+  proxyPage: true,
+  /**
+   * 建议开启-开启组件自动代理， 默认 false
+   * sdk 负责上报页面的 browse 、leave、share 等事件
+   */
+  proxyComponent: true,
+  // 建议开启-是否开启页面分享链路自动跟踪
+  openSdkShareDepth: true,
+  // 建议开启-元素事件跟踪，自动上报元素事件，入tap、change、longpress、confirm
+  autoTrack: true,
+  installFrom: 'Taro@v3'
+})
 
+const store = configStore()
+
+class App extends Component {
+
+  componentDidMount () {}
+
+  componentDidShow () {}
+
+  componentDidHide () {}
+
+  componentDidCatchError () {}
+
+  // this.props.children 是将要会渲染的页面
+  render () {
+    return (
+      <Provider store={store}>
+        {this.props.children}
+        </Provider>
+    )
+  }
+}
 export default App

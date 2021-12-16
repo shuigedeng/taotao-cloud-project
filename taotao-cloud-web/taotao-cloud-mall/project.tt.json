@@ -1,13 +1,12 @@
 {
   "miniprogramRoot": "./",
-  "projectname": "taotao-cloud-mall",
-  "description": "taotao-cloud-mall",
+  "projectname": "taotao-cloud-rn",
   "appid": "touristappid",
   "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false
-  },
+      "urlCheck": true,
+      "es6": false,
+      "postcss": false,
+      "minified": false
+    },
   "compileType": "miniprogram"
 }
