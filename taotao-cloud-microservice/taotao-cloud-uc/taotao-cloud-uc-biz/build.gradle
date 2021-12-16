@@ -2,9 +2,9 @@ dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
 
-    compileOnly 'io.soabase.record-builder:record-builder-core:v29'
+    compileOnly 'io.soabase.record-builder:record-builder-core:29'
 
-    annotationProcessor 'io.soabase.record-builder:record-builder-processor:v29'
+    annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
