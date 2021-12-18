@@ -2,7 +2,7 @@ package com.taotao.cloud.order.biz.service;
 
 
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
+import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 

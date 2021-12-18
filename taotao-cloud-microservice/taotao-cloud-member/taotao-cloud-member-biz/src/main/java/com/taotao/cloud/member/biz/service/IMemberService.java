@@ -2,7 +2,7 @@ package com.taotao.cloud.member.biz.service;
 
 import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberBack;
 
 /**
  * 会员(c端用户)表服务接口
@@ -33,7 +33,7 @@ public interface IMemberService {
 	 * @since 2020/10/19 09:01
 	 * @version 1.0.0
 	 */
-	Member registerUser(MemberDTO memberDTO);
+	MemberBack registerUser(MemberDTO memberDTO);
 
 	/**
 	 * 查询会员用户
@@ -44,7 +44,7 @@ public interface IMemberService {
 	 * @since 2020/10/19 09:15
 	 * @version 1.0.0
 	 */
-	Member findMember(String nicknameOrUserNameOrPhoneOrEmail);
+	MemberBack findMember(String nicknameOrUserNameOrPhoneOrEmail);
 
 	/**
 	 * 根据id查询会员信息
@@ -55,5 +55,5 @@ public interface IMemberService {
 	 * @since 2020/11/20 下午4:17
 	 * @version 1.0.0
 	 */
-	Member findMemberById(Long id);
+	MemberBack findMemberById(Long id);
 }

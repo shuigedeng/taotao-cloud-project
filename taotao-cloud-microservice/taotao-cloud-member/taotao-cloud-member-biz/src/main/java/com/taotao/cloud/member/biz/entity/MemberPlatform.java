@@ -21,7 +21,7 @@ public class MemberPlatform extends JpaSuperEntity {
 	/**
 	 * 会员id
 	 *
-	 * @see Member
+	 * @see MemberBack
 	 */
 	@Column(name = "member_user_id", nullable = false, columnDefinition = "int(11) not null comment '会员id'")
 	private Long memberUserId;

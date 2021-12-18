@@ -5,7 +5,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
 import com.taotao.cloud.member.api.vo.MemberVO;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberBack;
 import com.taotao.cloud.member.biz.mapper.MemberMapper;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
@@ -43,7 +43,7 @@ public class MemberController {
 	@PreAuthorize("hasAuthority('member:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<MemberVO> findMemberById(@PathVariable(value = "id") Long id) {
-		Member member = memberService.findMemberById(id);
+		MemberBack member = memberService.findMemberById(id);
 		MemberVO vo = MemberMapper.INSTANCE.memberToMemberVO(member);
 		return Result.success(vo);
 	}
@@ -58,7 +58,7 @@ public class MemberController {
 	@RequestLogger(description = "注册新会员用户")
 	@PostMapping
 	public Result<Boolean> registerUser(@Validated @RequestBody MemberDTO memberDTO) {
-		Member result = memberService.registerUser(memberDTO);
+		MemberBack result = memberService.registerUser(memberDTO);
 		return Result.success(Objects.nonNull(result));
 	}
 
@@ -66,9 +66,9 @@ public class MemberController {
 
 	@RequestLogger(description = "查询会员用户")
 	@GetMapping("/info/security")
-	public Result<Member> findMember(@Validated @NotBlank(message = "查询条件不能为空")
+	public Result<MemberBack> findMember(@Validated @NotBlank(message = "查询条件不能为空")
 									 @RequestParam(value = "nicknameOrUserNameOrPhoneOrEmail") String nicknameOrUserNameOrPhoneOrEmail) {
-		Member result = memberService.findMember(nicknameOrUserNameOrPhoneOrEmail);
+		MemberBack result = memberService.findMember(nicknameOrUserNameOrPhoneOrEmail);
 		return Result.success(result);
 	}
 }

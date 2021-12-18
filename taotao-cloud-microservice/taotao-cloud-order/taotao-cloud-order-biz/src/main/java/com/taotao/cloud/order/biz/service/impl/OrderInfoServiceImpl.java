@@ -5,8 +5,8 @@ import com.taotao.cloud.elasticsearch.service.IIndexService;
 import com.taotao.cloud.mongodb.service.BaseMongoDAO;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.order.biz.entity.OrderItem;
+import com.taotao.cloud.order.biz.entity.order.OrderInfo;
+import com.taotao.cloud.order.biz.entity.order.OrderItemBack;
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
 import com.taotao.cloud.order.biz.function.StreamFunctionService;
 import com.taotao.cloud.order.biz.kafka.OrderProvider;
@@ -45,7 +45,7 @@ public class OrderInfoServiceImpl
 	private final static QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 
 	@Autowired
-	private IOrderItemService<OrderItem, Long> orderItemService;
+	private IOrderItemService<OrderItemBack, Long> orderItemService;
 
 	@Autowired
 	private IIndexService indexService;
