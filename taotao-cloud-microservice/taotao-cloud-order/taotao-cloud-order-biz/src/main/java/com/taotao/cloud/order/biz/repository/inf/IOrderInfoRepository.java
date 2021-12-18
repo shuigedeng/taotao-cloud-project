@@ -15,14 +15,10 @@
  */
 package com.taotao.cloud.order.biz.repository.inf;
 
-import com.taotao.cloud.order.biz.domain.order_info.OrderDO;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
-import com.taotao.cloud.web.base.repository.BaseSuperRepository;
+import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 import java.util.List;
-import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**

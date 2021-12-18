@@ -7,7 +7,7 @@ import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.member.api.dto.member.MemberDTO;
 import com.taotao.cloud.member.api.query.member.MemberQuery;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberBack;
 import com.taotao.cloud.member.biz.entity.QMember;
 import com.taotao.cloud.member.biz.repository.MemberSuperRepository;
 import com.taotao.cloud.member.biz.service.IMemberService;
@@ -56,7 +56,7 @@ public class MemberServiceImpl implements IMemberService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Member registerUser(MemberDTO memberDTO) {
+	public MemberBack registerUser(MemberDTO memberDTO) {
 		String nickname = memberDTO.getNickname();
 		MemberQuery nicknameQuery = MemberQuery.builder().nickname(nickname).build();
 		if (existMember(nicknameQuery)) {
@@ -69,7 +69,7 @@ public class MemberServiceImpl implements IMemberService {
 		}
 		HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
 		BCryptPasswordEncoder passwordEncoder = SecurityUtil.getPasswordEncoder();
-		Member member = Member.builder()
+		MemberBack member = MemberBack.builder()
 			.nickname(nickname)
 			.phone(phone)
 			.password(passwordEncoder.encode(memberDTO.getPassword()))
@@ -79,7 +79,7 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public Member findMember(String nicknameOrUserNameOrPhoneOrEmail) {
+	public MemberBack findMember(String nicknameOrUserNameOrPhoneOrEmail) {
 		BooleanExpression predicate = MEMBER.delFlag.eq(false);
 		predicate.eq(MEMBER.username.eq(nicknameOrUserNameOrPhoneOrEmail))
 			.or(MEMBER.nickname.eq(nicknameOrUserNameOrPhoneOrEmail))
@@ -89,8 +89,8 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public Member findMemberById(Long id) {
-		Optional<Member> optionalMember = memberUserRepository.findById(id);
+	public MemberBack findMemberById(Long id) {
+		Optional<MemberBack> optionalMember = memberUserRepository.findById(id);
 		return optionalMember.orElseThrow(() -> new BusinessException(ResultEnum.MEMBER_NOT_EXIST));
 
 	}

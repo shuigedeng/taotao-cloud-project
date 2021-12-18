@@ -23,7 +23,7 @@ import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
 import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
+import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

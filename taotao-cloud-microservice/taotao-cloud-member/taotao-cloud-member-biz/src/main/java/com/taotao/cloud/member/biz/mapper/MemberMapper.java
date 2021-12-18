@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.api.vo.MemberVO;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberBack;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -43,7 +43,7 @@ public interface MemberMapper {
 	 * @since 2020/11/11 14:47
 	 * @version 1.0.0
 	 */
-	MemberVO memberToMemberVO(Member member);
+	MemberVO memberToMemberVO(MemberBack member);
 
 	// /**
 	//  * SysUser转AddUserVO

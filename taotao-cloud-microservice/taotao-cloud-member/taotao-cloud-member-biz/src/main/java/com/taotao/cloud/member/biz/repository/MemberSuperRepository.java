@@ -16,7 +16,7 @@
 package com.taotao.cloud.member.biz.repository;
 
 import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberBack;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -27,8 +27,8 @@ import javax.persistence.EntityManager;
  * @version 1.0.0
  */
 @Repository
-public class MemberSuperRepository extends JpaSuperRepository<Member, Long> {
+public class MemberSuperRepository extends JpaSuperRepository<MemberBack, Long> {
 	public MemberSuperRepository(EntityManager em) {
-		super(Member.class, em);
+		super(MemberBack.class, em);
 	}
 }

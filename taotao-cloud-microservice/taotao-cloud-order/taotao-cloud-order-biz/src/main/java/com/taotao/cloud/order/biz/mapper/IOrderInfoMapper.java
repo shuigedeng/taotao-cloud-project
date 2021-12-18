@@ -1,9 +1,7 @@
 package com.taotao.cloud.order.biz.mapper;
 
-import com.taotao.cloud.order.biz.domain.order_info.OrderDO;
-import com.taotao.cloud.order.biz.entity.OrderInfo;
+import com.taotao.cloud.order.biz.entity.order.OrderInfo;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
