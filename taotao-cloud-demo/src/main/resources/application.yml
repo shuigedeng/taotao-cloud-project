@@ -71,6 +71,44 @@ spring:
 
 taotao:
   cloud:
+    netty:
+      socket:
+        enabled: false
+    rxjava:
+      enabled: false
+    disruptor:
+      enabled: true
+      multi-producer: false
+      ring-buffer-size: 1024
+      ring-thread-numbers: 4
+      #handler-definitions:
+      # - /Event-DC-Output/TagA-Output/** = emailHandler
+      # - /Event-DC-Output/TagB-Output/** = smsHandler
+    dinger:
+      enabled: true
+      project-id: ${spring.application.name}
+      dingers:
+        dingtalk:
+          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
+          secret: ${DINGDING_SECRET:xxxx}
+      httpclient:
+        enabled: true
+      threadpool:
+        enabled: true
+    canal:
+      enabled: false
+      instances:
+        example:
+          clusterEnabled: false
+          zookeeperAddress: 172.16.6.151:2181
+          host: 172.16.6.151
+          port: 11111
+          userName: canal
+          password: 123456
+          batchSize: 1000
+          filter:
+          retryCount: 3
+          acquireInterval: 3000
     zookeeper:
       enabled: true
       connectString: 172.16.6.151:2181

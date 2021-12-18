@@ -34,7 +34,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = RoleResource.TABLE_NAME, comment = "角色-资源第三方表")
 public class RoleResource extends SuperEntity<RoleResource,Long> {
 
-	public static final String TABLE_NAME = "uc_sys_role_resource";
+	public static final String TABLE_NAME = "tt_sys_role_resource";
 
 	/**
 	 * 角色ID

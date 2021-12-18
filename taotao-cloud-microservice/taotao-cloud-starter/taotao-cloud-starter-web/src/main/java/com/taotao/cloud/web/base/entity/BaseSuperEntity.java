@@ -44,7 +44,6 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
 	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
 	private LocalDateTime lastModifiedTime;
-	;
 
 	@LastModifiedBy
 	@Column(name = "last_modified_by", columnDefinition = "bigint comment '最后修改人'")

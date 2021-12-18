@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service;
 
 
-import com.taotao.cloud.sys.biz.entity.SysDictItem;
+import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**
@@ -27,7 +27,7 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @since 2021-10-09 20:32:47
  */
 public interface ISysDictItemService extends
-	BaseSuperService<SysDictItem, Long> {
+	BaseSuperService<DictItem, Long> {
 
 	///**
 	// * 根据字典id删除字典项

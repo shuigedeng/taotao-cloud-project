@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.entity.QSysDict;
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.Optional;
 import javax.persistence.EntityManager;
@@ -30,10 +30,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021-10-09 20:27:37
  */
 @Repository
-public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
+public class SysDictRepository extends BaseSuperRepository<Dict, Long> {
 
 	public SysDictRepository(EntityManager em) {
-		super(SysDict.class, em);
+		super(Dict.class, em);
 	}
 
 	private final static QSysDict SYS_DICT = QSysDict.sysDict;
@@ -62,8 +62,8 @@ public class SysDictRepository extends BaseSuperRepository<SysDict, Long> {
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:28:08
 	 */
-	public Optional<SysDict> findByCode(String code) {
-		SysDict dict = jpaQueryFactory()
+	public Optional<Dict> findByCode(String code) {
+		Dict dict = jpaQueryFactory()
 			.selectFrom(SYS_DICT)
 			.where(SYS_DICT.dictCode.eq(code))
 			.fetchOne();

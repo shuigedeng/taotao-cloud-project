@@ -1,7 +1,9 @@
 package com.taotao.cloud.sys.biz.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,11 +15,16 @@ import javax.persistence.Table;
  * @since 2020/11/12 15:33
  * @version 1.0.0
  */
-@Entity
-@Table(name = "tt_file")
-@org.hibernate.annotations.Table(appliesTo = "tt_file", comment = "文件表")
-public class File extends JpaSuperEntity {
 
+
+@Entity
+@Table(name = File.TABLE_NAME)
+@TableName(File.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = File.TABLE_NAME, comment = "文件表")
+public class File extends BaseSuperEntity<File, Long> {
+
+	public static final String TABLE_NAME = "tt_sys_file";
+	
 	/**
 	 * 业务ID
 	 */

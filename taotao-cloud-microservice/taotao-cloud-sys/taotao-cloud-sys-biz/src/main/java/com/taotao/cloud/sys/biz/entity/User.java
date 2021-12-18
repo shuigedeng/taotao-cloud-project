@@ -32,10 +32,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = User.TABLE_NAME)
 @TableName(User.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = User.TABLE_NAME, comment = "后台管理用户表")
+@org.hibernate.annotations.Table(appliesTo = User.TABLE_NAME, comment = "用户表")
 public class User extends BaseSuperEntity<User,Long> {
 
-	public static final String TABLE_NAME = "uc_sys_user";
+	public static final String TABLE_NAME = "tt_sys_user";
 
 	/**
 	 * 昵称
@@ -62,18 +62,12 @@ public class User extends BaseSuperEntity<User,Long> {
 	private String password;
 
 	/**
-	 * 用户类型 1前端用户 2商户用户 3后台管理用户
-	 */
-	@Column(name = "type", nullable = false, columnDefinition = "int not null default 3 comment '用户类型 1前端用户 2商户用户 3后台管理用户'")
-	private int type = 3;
-
-	/**
 	 * 性别 1男 2女 0未知
 	 *
 	 * @see SexTypeEnum
 	 */
 	@Column(name = "sex", nullable = false, columnDefinition = "int not null default 0 comment '性别 1男 2女 0未知'")
-	private int sex = 0;
+	private Integer sex = 0;
 
 	/**
 	 * 邮箱
@@ -143,13 +137,6 @@ public class User extends BaseSuperEntity<User,Long> {
 		this.password = password;
 	}
 
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
 
 	public int getSex() {
 		return sex;
@@ -210,7 +197,7 @@ public class User extends BaseSuperEntity<User,Long> {
 	public User() {
 	}
 
-	public User(String nickname, String username, String phone, String password, int type,
+	public User(String nickname, String username, String phone, String password,
 		int sex,
 		String email, Long deptId, Long jobId, String avatar, Boolean isLock,
 		String tenantId) {
@@ -218,7 +205,6 @@ public class User extends BaseSuperEntity<User,Long> {
 		this.username = username;
 		this.phone = phone;
 		this.password = password;
-		this.type = type;
 		this.sex = sex;
 		this.email = email;
 		this.deptId = deptId;

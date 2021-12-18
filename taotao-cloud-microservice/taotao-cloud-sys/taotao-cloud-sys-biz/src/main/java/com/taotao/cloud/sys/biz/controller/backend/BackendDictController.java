@@ -19,7 +19,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.api.dto.dict.DictUpdateDTO;
 import com.taotao.cloud.sys.api.vo.dict.DictQueryVO;
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.sys.biz.service.ISysDictService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/backend/dict")
 @Tag(name = "后台管理-字典管理API", description = "后台管理-字典管理API")
 public class BackendDictController extends
-	SuperController<ISysDictService, SysDict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
+	SuperController<ISysDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
 
 }
 

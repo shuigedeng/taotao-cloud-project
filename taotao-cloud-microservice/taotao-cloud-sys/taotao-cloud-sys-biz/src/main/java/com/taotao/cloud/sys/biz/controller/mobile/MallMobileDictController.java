@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.controller.mobile;
 
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.sys.biz.service.ISysDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mall/mobile/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class MallMobileDictController extends SimpleController<ISysDictService, SysDict, Long> {
+public class MallMobileDictController extends SimpleController<ISysDictService, Dict, Long> {
 
 }
 
