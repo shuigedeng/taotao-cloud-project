@@ -31,6 +31,7 @@ public enum ResourceTypeEnum implements BaseEnum {
 	 * 二级(顶部)菜单
 	 */
 	TOP_MENU(2, "二级(顶部)菜单"),
+
 	/**
 	 * 按钮
 	 */
