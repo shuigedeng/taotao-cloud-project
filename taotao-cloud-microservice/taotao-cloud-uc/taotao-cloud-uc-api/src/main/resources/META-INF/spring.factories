@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.taotao.cloud.uc.api.feign.fallback.FeignUserFallbackImpl, \
-com.taotao.cloud.uc.api.feign.fallback.FeignRoleFallbackImpl, \
-com.taotao.cloud.uc.api.feign.fallback.FeignResourceFallbackImpl
