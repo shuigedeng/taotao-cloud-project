@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.controller.merchant;
 
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.sys.biz.service.ISysDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/merchant/dict")
 @Tag(name = "商户管理-字典管理API", description = "商户管理-字典管理API")
-public class MerchantDictController extends SimpleController<ISysDictService, SysDict, Long> {
+public class MerchantDictController extends SimpleController<ISysDictService, Dict, Long> {
 
 }
 

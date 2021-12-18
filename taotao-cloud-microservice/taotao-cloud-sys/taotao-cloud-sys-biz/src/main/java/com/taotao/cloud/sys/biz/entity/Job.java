@@ -34,7 +34,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = Job.TABLE_NAME, comment = "岗位表")
 public class Job extends BaseSuperEntity<Job,Long> {
 
-	public static final String TABLE_NAME = "tt_uc_job";
+	public static final String TABLE_NAME = "tt_sys_job";
 
 	/**
 	 * 岗位名称

@@ -1,60 +1,198 @@
+/*
+ * Copyright 2002-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.taotao.cloud.web.base.entity.SuperEntity;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import lombok.Data;
+import org.apache.pulsar.shade.io.swagger.annotations.ApiModelProperty;
+import org.springframework.data.annotation.CreatedDate;
 
 /**
- * 行政地区
- * @author Chopper
- * @since 2020-02-25 14:10:16
+ * 地区表
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-10-09 21:52:30
  */
-@Data
-@TableName("li_region")
-@ApiModel(value = "行政地区")
-public class Region extends BaseEntity {
+@Entity
+@Table(name = Region.TABLE_NAME)
+@TableName(Region.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Region.TABLE_NAME, comment = "地区表")
+public class Region extends SuperEntity<Region,Long> {
 
-    private static final long serialVersionUID = 418341656517240988L;
+	public static final String TABLE_NAME = "tt_sys_region";
 
-    @NotEmpty(message = "父id不能为空")
-    @ApiModelProperty(value = "父id")
-    private String parentId;
+	/**
+	 * 地区父节点
+	 */
+	@Column(name = "parent_id", columnDefinition = "bigint comment '地区父节点'")
+	private Long parentId;
 
-    @NotEmpty(message = "区域编码不能为空")
-    @ApiModelProperty(value = "区域编码")
-    private String adCode;
+	/**
+	 * 地区编码
+	 */
+	@Column(name = "code", unique = true, nullable = false, columnDefinition = "varchar(255) not null comment '地区编码'")
+	private String code;
 
-    @ApiModelProperty(value = "城市代码")
-    private String cityCode;
+	/**
+	 * 地区名称
+	 */
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(255) not null default '' comment '地区名称'")
+	private String name;
 
-    @NotEmpty(message = "区域中心点经纬度不能为空")
-    @ApiModelProperty(value = "区域中心点经纬度")
-    private String center;
+	/**
+	 * 地区级别（1:省份province,2:市city,3:区县district,4:街道street）
+	 * "行政区划级别" +
+	 *  "country:国家" +
+	 *  "province:省份（直辖市会在province和city显示）" +
+	 *  "city:市（直辖市会在province和city显示）" +
+	 *  "district:区县" +
+	 *  "street:街道"
+	 */
+	@Column(name = "level", nullable = false, columnDefinition = "int not null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
+	private Integer level;
 
-    @ApiModelProperty(value =
-            "行政区划级别" +
-                    "country:国家" +
-                    "province:省份（直辖市会在province和city显示）" +
-                    "city:市（直辖市会在province和city显示）" +
-                    "district:区县" +
-                    "street:街道")
-    @NotEmpty(message = "品牌名称不能为空")
-    private String level;
+	/**
+	 * 城市编码
+	 */
+	@Column(name = "city_code", columnDefinition = "varchar(255) null comment '城市编码'")
+	private String cityCode;
 
-    @NotEmpty(message = "名称不能为空")
-    @ApiModelProperty(value = "名称")
-    private String name;
+	/**
+	 * 城市中心经度
+	 */
+	@Column(name = "lng", columnDefinition = "varchar(255) null comment '城市中心经度'")
+	private String lng;
 
-    @NotEmpty(message = "行政地区路径不能为空")
-    @ApiModelProperty(value = "行政地区路径，类似：1，2，3 ")
-    private String path;
+	/**
+	 * 城市中心纬度
+	 */
+	@Column(name = "lat", columnDefinition = "varchar(255) null comment '城市中心经度'")
+	private String lat;
 
-    @NotNull(message = "排序不能为空")
-    @ApiModelProperty(value = "排序")
-    private Integer orderNum;
+	@Column(name = "path", columnDefinition = "varchar(255) null comment '行政地区路径，类似：1，2，3'")
+	private String path;
 
+	@Column(name = "order_num", columnDefinition = "int not null default 1 comment '排序'")
+	private Integer orderNum = 1;
+
+	@CreatedDate
+	@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
+	@TableField(value = "create_time", fill = FieldFill.INSERT)
+	private LocalDateTime createTime;
+
+	@CreatedDate
+	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
+	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
+	private LocalDateTime lastModifiedTime;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public LocalDateTime getLastModifiedTime() {
+		return lastModifiedTime;
+	}
+
+	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
+		this.lastModifiedTime = lastModifiedTime;
+	}
+
+	public Region() {
+	}
+
+	public Region(String code, String name, Integer level, String cityCode, String lng,
+		String lat, Long parentId, LocalDateTime createTime,
+		LocalDateTime lastModifiedTime) {
+		this.code = code;
+		this.name = name;
+		this.level = level;
+		this.cityCode = cityCode;
+		this.lng = lng;
+		this.lat = lat;
+		this.parentId = parentId;
+		this.createTime = createTime;
+		this.lastModifiedTime = lastModifiedTime;
+	}
 }

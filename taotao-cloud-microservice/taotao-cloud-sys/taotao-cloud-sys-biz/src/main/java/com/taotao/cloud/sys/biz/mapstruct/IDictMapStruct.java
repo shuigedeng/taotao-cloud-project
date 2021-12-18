@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.api.vo.dict.DictQueryVO;
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -44,7 +44,7 @@ public interface IDictMapStruct {
 	 * @return com.taotao.cloud.sys.biz.entity.SysDict
 	 * @since 2020/11/11 14:52
 	 */
-	SysDict dictDTOToSysDict(DictSaveDTO dictSaveDTO);
+	Dict dictDTOToSysDict(DictSaveDTO dictSaveDTO);
 
 	/**
 	 * list -> SysUser转UserVO
@@ -54,7 +54,7 @@ public interface IDictMapStruct {
 	 
 	 * @since 2020/11/11 15:00
 	 */
-	List<DictQueryVO> sysDictToDictVO(List<SysDict> dictList);
+	List<DictQueryVO> sysDictToDictVO(List<Dict> dictList);
 
 	/**
 	 * sysDict转UserVO
@@ -64,7 +64,7 @@ public interface IDictMapStruct {
 	 
 	 * @since 2020/11/11 14:47
 	 */
-	DictQueryVO sysDictToDictVO(SysDict sysDict);
+	DictQueryVO sysDictToDictVO(Dict sysDict);
 
 	/**
 	 * 拷贝 DictDTO 到SysUser
@@ -74,5 +74,5 @@ public interface IDictMapStruct {
 	 
 	 * @since 2020/11/11 16:59
 	 */
-	void copyDictDtoToSysDict(DictSaveDTO dictSaveDTO, @MappingTarget SysDict dict);
+	void copyDictDtoToSysDict(DictSaveDTO dictSaveDTO, @MappingTarget Dict dict);
 }

@@ -19,7 +19,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.sys.api.dto.dict_item.DictItemSaveDTO;
 import com.taotao.cloud.sys.api.dto.dict_item.DictItemUpdateDTO;
 import com.taotao.cloud.sys.api.vo.dict_item.DictItemQueryVO;
-import com.taotao.cloud.sys.biz.entity.SysDictItem;
+import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.sys.biz.service.ISysDictItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/backend/dict/item")
 @Tag(name = "后台管理-字典项管理API", description = "后台管理-字典项管理API")
 public class BackendDictItemController extends
-	SuperController<ISysDictItemService, SysDictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
+	SuperController<ISysDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
 
 }

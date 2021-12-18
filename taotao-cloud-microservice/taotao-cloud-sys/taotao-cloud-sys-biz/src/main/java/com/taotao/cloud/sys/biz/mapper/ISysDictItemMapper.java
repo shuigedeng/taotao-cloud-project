@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.entity.SysDictItem;
+import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,6 +27,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2021/10/13 22:50
  */
 @Mapper
-public interface ISysDictItemMapper extends BaseSuperMapper<SysDictItem, Long> {
+public interface ISysDictItemMapper extends BaseSuperMapper<DictItem, Long> {
 
 }

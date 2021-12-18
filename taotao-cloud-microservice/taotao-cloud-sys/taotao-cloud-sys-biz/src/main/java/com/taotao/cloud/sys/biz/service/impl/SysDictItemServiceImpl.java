@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboDictItemService;
-import com.taotao.cloud.sys.biz.entity.SysDictItem;
+import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.sys.biz.mapper.ISysDictItemMapper;
 import com.taotao.cloud.sys.biz.repository.cls.SysDictItemRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISysDictItemRepository;
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 @DubboService(interfaceClass = IDubboDictItemService.class)
 public class SysDictItemServiceImpl extends
-	BaseSuperServiceImpl<ISysDictItemMapper, SysDictItem, SysDictItemRepository, ISysDictItemRepository, Long>
+	BaseSuperServiceImpl<ISysDictItemMapper, DictItem, SysDictItemRepository, ISysDictItemRepository, Long>
 	implements IDubboDictItemService, ISysDictItemService {
 
 	//private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;

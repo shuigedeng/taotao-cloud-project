@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +27,5 @@ import org.springframework.stereotype.Repository;
  * @since 2021-10-09 20:27:37
  */
 @Repository
-public interface ISysDictRepository extends JpaRepository<SysDict, Long> {
+public interface ISysDictRepository extends JpaRepository<Dict, Long> {
 }

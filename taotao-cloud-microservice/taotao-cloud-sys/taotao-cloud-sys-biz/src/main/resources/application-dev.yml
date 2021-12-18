@@ -571,8 +571,7 @@ taotao:
       enabled: true
     seata:
       enabled: true
-    rxjava:
-      enabled: false
+
     rocketmq:
       enabled: false
     redis:
@@ -601,9 +600,7 @@ taotao:
       enabled: true
       group: ${spring.application.name}
       version: ${taotaoCloudVersion}
-    netty:
-      socket:
-        enabled: false
+
     mongodb:
       enabled: true
     metrics:
@@ -661,25 +658,7 @@ taotao:
       enabled: true
     dubbo:
       enabled: true
-    disruptor:
-      enabled: true
-      multi-producer: false
-      ring-buffer-size: 1024
-      ring-thread-numbers: 4
-      #handler-definitions:
-      # - /Event-DC-Output/TagA-Output/** = emailHandler
-      # - /Event-DC-Output/TagB-Output/** = smsHandler
-    dinger:
-      enabled: true
-      project-id: ${spring.application.name}
-      dingers:
-        dingtalk:
-          tokenId: ${DINGDING_TOKEN_ID:xxxxx}
-          secret: ${DINGDING_SECRET:xxxx}
-      httpclient:
-        enabled: true
-      threadpool:
-        enabled: true
+
     data:
       mybatis-plus:
         enabled: true
@@ -700,20 +679,7 @@ taotao:
       enabled: true
     captcha:
       enabled: true
-    canal:
-      enabled: false
-      instances:
-        example:
-          clusterEnabled: false
-          zookeeperAddress: 172.16.6.151:2181
-          host: 172.16.6.151
-          port: 11111
-          userName: canal
-          password: 123456
-          batchSize: 1000
-          filter:
-          retryCount: 3
-          acquireInterval: 3000
+
 
 mybatis-plus:
   typeAliasesPackage: com.taotao.cloud.*.biz.entity

@@ -34,7 +34,7 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = Resource.TABLE_NAME, comment = "资源表")
 public class Resource extends BaseSuperEntity<Resource,Long> {
 
-	public static final String TABLE_NAME = "tt_uc_resource";
+	public static final String TABLE_NAME = "tt_sys_resource";
 
 	/**
 	 * 资源名称

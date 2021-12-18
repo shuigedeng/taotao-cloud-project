@@ -17,7 +17,7 @@ package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.sys.biz.entity.QSysDictItem;
-import com.taotao.cloud.sys.biz.entity.SysDictItem;
+import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,10 +31,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021-10-09 20:35:25
  */
 @Repository
-public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long> {
+public class SysDictItemRepository extends BaseSuperRepository<DictItem, Long> {
 
 	public SysDictItemRepository(EntityManager em) {
-		super(SysDictItem.class, em);
+		super(DictItem.class, em);
 	}
 
 	private final static QSysDictItem SYS_DICT_ITEM = QSysDictItem.sysDictItem;
@@ -62,7 +62,7 @@ public class SysDictItemRepository extends BaseSuperRepository<SysDictItem, Long
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:35:31
 	 */
-	public List<SysDictItem> getInfo(Predicate predicate) {
+	public List<DictItem> getInfo(Predicate predicate) {
 		return jpaQueryFactory()
 			.selectFrom(SYS_DICT_ITEM)
 			.where(predicate)

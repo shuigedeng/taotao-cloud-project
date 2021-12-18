@@ -1,27 +1,25 @@
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
  * 设置
- * @author Chopper
- * @since 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_setting")
-@ApiModel(value = "配置")
-@NoArgsConstructor
-public class Setting extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = Setting.TABLE_NAME)
+@TableName(Setting.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Setting.TABLE_NAME, comment = "设置表")
+public class Setting extends BaseSuperEntity<Setting, Long> {
 
-    @ApiModelProperty(value = "配置值value")
-    private String settingValue;
+	public static final String TABLE_NAME = "tt_sys_setting";
+
+	@Column(name = "setting_value", nullable = false, columnDefinition = "varchar(3660) not null comment '值'")
+	private String settingValue;
 
 }

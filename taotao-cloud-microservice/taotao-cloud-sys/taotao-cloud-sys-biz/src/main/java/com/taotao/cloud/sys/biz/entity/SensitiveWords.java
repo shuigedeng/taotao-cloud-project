@@ -1,29 +1,33 @@
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import lombok.Data;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 敏感词实体
- * @author Bulbasaur
- * 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_sensitive_words")
-@ApiModel(value = "敏感词")
-public class SensitiveWords extends BaseEntity {
+@Entity
+@Table(name = SensitiveWords.TABLE_NAME)
+@TableName(SensitiveWords.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SensitiveWords.TABLE_NAME, comment = "敏感词表")
+public class SensitiveWords extends BaseSuperEntity<SensitiveWords, Long> {
 
-    /**
-     * 敏感词名称
-     */
-    @ApiModelProperty(value = "敏感词名称")
-    @NotEmpty(message = "敏感词必填")
-    @Size(min = 2, max = 20)
-    private String sensitiveWord;
+	public static final String TABLE_NAME = "tt_sys_sensitive_words";
 
+	/**
+	 * 敏感词名称
+	 */
+	@Column(name = "sensitive_word", nullable = false, columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
+	private String sensitiveWord;
+
+	public String getSensitiveWord() {
+		return sensitiveWord;
+	}
+
+	public void setSensitiveWord(String sensitiveWord) {
+		this.sensitiveWord = sensitiveWord;
+	}
 }

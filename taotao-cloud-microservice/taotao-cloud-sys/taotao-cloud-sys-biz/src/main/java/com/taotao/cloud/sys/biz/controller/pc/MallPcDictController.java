@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.controller.pc;
 
-import com.taotao.cloud.sys.biz.entity.SysDict;
+import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.sys.biz.service.ISysDictService;
 import com.taotao.cloud.web.base.controller.SimpleController;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mall/pc/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
-public class MallPcDictController extends SimpleController<ISysDictService, SysDict, Long> {
+public class MallPcDictController extends SimpleController<ISysDictService, Dict, Long> {
 
 }
 
