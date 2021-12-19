@@ -35,9 +35,6 @@ import java.lang.reflect.Type;
  * 若重写扩展方法无法满足，则可以重写page、save等方法，但切记不要修改 @RequestMapping 参数
  *
  * @param <S>         Service
- * @param <Id>        主键
- * @param <Entity>    实体
- * @param <PageQuery> 分页参数
  * @param <SaveDTO>   保存参数
  * @param <UpdateDTO> 修改参数
  * @author shuigedeng

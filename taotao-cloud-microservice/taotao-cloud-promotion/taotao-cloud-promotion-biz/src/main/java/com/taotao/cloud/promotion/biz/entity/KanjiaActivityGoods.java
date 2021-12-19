@@ -2,8 +2,11 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import cn.lili.modules.promotion.entity.dto.BasePromotions;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,13 +18,13 @@ import javax.validation.constraints.NotEmpty;
  * @author qiuqiu
  * @date 2020-7-1 10:44 上午
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_kanjia_activity_goods")
-@ApiModel(value = "砍价活动商品对象")
-public class KanjiaActivityGoods extends BasePromotions {
+@Entity
+@Table(name = KanjiaActivityGoods.TABLE_NAME)
+@TableName(KanjiaActivityGoods.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = KanjiaActivityGoods.TABLE_NAME, comment = "砍价活动商品对象")
+public class KanjiaActivityGoods extends BaseSuperEntity<KanjiaActivityGoods, Long> {
 
-    private static final long serialVersionUID = 6694714877345423488L;
+	public static final String TABLE_NAME = "li_kanjia_activity_goods";
 
     @ApiModelProperty(value = "结算价格")
     @NotEmpty(message = "结算价格不能为空")

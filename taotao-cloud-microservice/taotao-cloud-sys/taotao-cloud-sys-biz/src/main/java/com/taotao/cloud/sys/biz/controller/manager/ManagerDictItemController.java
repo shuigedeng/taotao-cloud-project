@@ -22,8 +22,11 @@ import com.taotao.cloud.sys.api.vo.dict_item.DictItemQueryVO;
 import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.sys.biz.service.IDictItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
+import groovy.util.logging.Log;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +44,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerDictItemController extends
 	SuperController<IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
-
+	///**
+	// * 根据code查询字典项列表
+	// *
+	// * @param code 字典码
+	// * @return Result<List < SysDict>>
+	// */
+	//@PreAuth
+	//@Log(value = "字典项列表", exception = "字典项列表异常")
+	//@GetMapping("list-value")
+	//@ApiOperation(value = "字典项列表", notes = "字典项列表")
+	//public Result<?> listValue(@RequestParam String code) {
+	//	return Result.data(sysDictService.list(new LambdaQueryWrapper<SysDict>()
+	//		.eq(SysDict::getCode, code)
+	//		.ne(SysDict::getParentId, 0)
+	//		.orderByAsc(SysDict::getSort)));
+	//}
 }

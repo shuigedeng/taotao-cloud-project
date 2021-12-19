@@ -1,115 +1,109 @@
 package com.taotao.cloud.promotion.biz.entity;
 
-import cn.lili.modules.promotion.entity.dto.BasePromotions;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * 满优惠活动实体类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_full_discount")
-@ApiModel(value = "满优惠活动")
-public class FullDiscount extends BasePromotions {
+@Entity
+@Table(name = FullDiscount.TABLE_NAME)
+@TableName(FullDiscount.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = FullDiscount.TABLE_NAME, comment = "满优惠活动实体类")
+public class FullDiscount extends BaseSuperEntity<FullDiscount, Long> {
 
-    private static final long serialVersionUID = 430433787214894166L;
+	public static final String TABLE_NAME = "li_full_discount";
 
-    @NotNull(message = "请填写优惠门槛")
-    @DecimalMax(value = "99999999.00", message = "优惠券门槛金额超出限制")
-    @ApiModelProperty(value = "优惠门槛金额", required = true)
-    private Double fullMoney;
+	@DecimalMax(value = "99999999.00", message = "优惠券门槛金额超出限制")
+	@Column(name = "full_money", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '优惠门槛金额'")
+	private BigDecimal fullMoney;
 
-    @ApiModelProperty(value = "活动是否减现金")
-    private Boolean isFullMinus;
+	@Column(name = "is_full_minus", nullable = false, columnDefinition = "boolean not null default false comment '活动是否减现金'")
+	private Boolean isFullMinus;
 
-    @ApiModelProperty(value = "减现金")
-    private Double fullMinus;
+	@Column(name = "full_minus", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '减现金'")
+	private BigDecimal fullMinus;
 
-    @ApiModelProperty(value = "是否打折")
-    private Boolean isFullRate;
+	@Column(name = "is_full_rate", nullable = false, columnDefinition = "boolean not null default false  comment '是否打折'")
+	private Boolean isFullRate;
 
-    @ApiModelProperty(value = "打折")
-    private Double fullRate;
+	@Column(name = "full_rate", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '打折'")
+	private BigDecimal fullRate;
 
-    @ApiModelProperty(value = "是否赠送积分")
-    private Boolean isPoint;
+	@Column(name = "is_point", nullable = false, columnDefinition = "boolean not null default false comment '是否赠送积分'")
+	private Boolean isPoint;
 
-    @ApiModelProperty(value = "赠送多少积分")
-    private Integer point;
+	@Column(name = "point", nullable = false, columnDefinition = "int not null default 0 comment '赠送多少积分'")
+	private Integer point;
 
-    @ApiModelProperty(value = "是否包邮")
-    private Boolean isFreeFreight;
+	@Column(name = "is_free_freight", nullable = false, columnDefinition = "boolean not null default false comment '是否包邮'")
+	private Boolean isFreeFreight;
 
-    @ApiModelProperty(value = "是否有赠品")
-    private Boolean isGift;
+	@Column(name = "is_gift", nullable = false, columnDefinition = "boolean not null default false comment '是否有赠品'")
+	private Boolean isGift;
 
-    @ApiModelProperty(value = "赠品id")
-    private String giftId;
+	@Column(name = "gift_id", nullable = false, columnDefinition = "varchar(64) not null comment '赠品id'")
+	private String giftId;
 
-    @ApiModelProperty(value = "是否赠优惠券")
-    private Boolean isCoupon;
+	@Column(name = "is_coupon", nullable = false, columnDefinition = "varchar(64) not null comment '是否赠优惠券'")
+	private Boolean isCoupon;
 
-    @ApiModelProperty(value = "优惠券id")
-    private String couponId;
+	@Column(name = "coupon_id", nullable = false, columnDefinition = "varchar(64) not null comment '优惠券id'")
+	private String couponId;
 
-    @NotEmpty(message = "请填写活动标题")
-    @ApiModelProperty(value = "活动标题", required = true)
-    private String title;
+	@Column(name = "title", nullable = false, columnDefinition = "varchar(64) not null comment '活动标题'")
+	private String title;
 
-    @ApiModelProperty(value = "活动说明")
-    private String description;
+	@Column(name = "description", nullable = false, columnDefinition = "varchar(64) not null comment '活动说明'")
+	private String description;
 
-
-    public Boolean getIsFullMinus() {
-        if (isFullMinus == null) {
-            return false;
-        }
-        return isFullMinus;
-    }
-
-    public Boolean getIsFullRate() {
-        if (isFullRate == null) {
-            return false;
-        }
-        return isFullRate;
-    }
-
-    public Boolean getIsPoint() {
-        if (isPoint == null) {
-            return false;
-        }
-        return isPoint;
-    }
-
-    public Boolean getIsFreeFreight() {
-        if (isFreeFreight == null) {
-            return false;
-        }
-        return isFreeFreight;
-    }
-
-    public Boolean getIsGift() {
-        if (isGift == null) {
-            return false;
-        }
-        return isGift;
-    }
-
-    public Boolean getIsCoupon() {
-        if (isCoupon == null) {
-            return false;
-        }
-        return isCoupon;
-    }
+	//public Boolean getIsFullMinus() {
+	//    if (isFullMinus == null) {
+	//        return false;
+	//    }
+	//    return isFullMinus;
+	//}
+	//
+	//public Boolean getIsFullRate() {
+	//    if (isFullRate == null) {
+	//        return false;
+	//    }
+	//    return isFullRate;
+	//}
+	//
+	//public Boolean getIsPoint() {
+	//    if (isPoint == null) {
+	//        return false;
+	//    }
+	//    return isPoint;
+	//}
+	//
+	//public Boolean getIsFreeFreight() {
+	//    if (isFreeFreight == null) {
+	//        return false;
+	//    }
+	//    return isFreeFreight;
+	//}
+	//
+	//public Boolean getIsGift() {
+	//    if (isGift == null) {
+	//        return false;
+	//    }
+	//    return isGift;
+	//}
+	//
+	//public Boolean getIsCoupon() {
+	//    if (isCoupon == null) {
+	//        return false;
+	//    }
+	//    return isCoupon;
+	//}
 }

@@ -15,19 +15,29 @@
  */
 package com.taotao.cloud.sys.biz.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.dubbo.IDubboUserService;
 import com.taotao.cloud.sys.biz.entity.QUser;
 import com.taotao.cloud.sys.biz.entity.User;
+import com.taotao.cloud.sys.biz.entity.UserRole;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
 import com.taotao.cloud.sys.biz.service.IUserRoleService;
 import com.taotao.cloud.sys.biz.service.IUserService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,61 +54,63 @@ public class UserServiceImpl extends
 	BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
 	implements IDubboUserService, IUserService {
 
-	private final static QUser SYS_USER = QUser.sysUser;
+	private final static QUser USER = QUser.user;
 
 	private final static String DEFAULT_PASSWORD = "123456";
 	private final static String DEFAULT_USERNAME = "admin";
 
-	private final IUserRoleService sysUserRoleService;
+	private final IUserRoleService userRoleService;
 
-	public UserServiceImpl(IUserRoleService sysUserRoleService) {
-		this.sysUserRoleService = sysUserRoleService;
+	public UserServiceImpl(IUserRoleService userRoleService) {
+		this.userRoleService = userRoleService;
 	}
 
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public User saveUser(User sysUser) {
-	//	if (Objects.nonNull(sysUser.getId())) {
-	//		throw new BusinessException("不允许存在id值");
-	//	}
-	//	String phone = sysUser.getPhone();
-	//	Boolean isExists = existsByPhone(phone);
-	//	if (isExists) {
-	//		throw new BusinessException(ResultEnum.USER_PHONE_EXISTS_ERROR);
-	//	}
-	//	String nickname = sysUser.getNickname();
-	//	if (StrUtil.isBlank(nickname)) {
-	//		sysUser.setNickname(DEFAULT_USERNAME);
-	//	}
-	//	String username = sysUser.getUsername();
-	//	if (StrUtil.isBlank(username)) {
-	//		sysUser.setUsername(DEFAULT_USERNAME);
-	//	}
-	//
-	//	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	//	sysUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
-	//	return repository().save(sysUser);
-	//}
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public User saveUser(User sysUser) {
+		if (Objects.nonNull(sysUser.getId())) {
+			throw new BusinessException("不允许存在id值");
+		}
+		String phone = sysUser.getPhone();
+		Boolean isExists = existsByPhone(phone);
+		if (isExists) {
+			throw new BusinessException(ResultEnum.USER_PHONE_EXISTS_ERROR);
+		}
+		String nickname = sysUser.getNickname();
+		if (StrUtil.isBlank(nickname)) {
+			sysUser.setNickname(DEFAULT_USERNAME);
+		}
+		String username = sysUser.getUsername();
+		if (StrUtil.isBlank(username)) {
+			sysUser.setUsername(DEFAULT_USERNAME);
+		}
 
-	//@Override
-	//@Transactional(rollbackFor = Exception.class)
-	//public User updateUser(User sysUser) {
-	//	if (Objects.isNull(sysUser.getId())) {
-	//		throw new BusinessException("id不能为空");
-	//	}
-	//	return repository().save(sysUser);
-	//
-	//	 此处修改用户角色
-	//	 userRoleService.remove(Wrappers.<UserRole>lambdaQuery().eq(UserRole::getId, sysUser.getId()));
-	//	 List<UserRole> userRoles = userAddDto.getRoleList().stream().map(item -> {
-	//	     UserRole sysUserRole = new UserRole();
-	//	     sysUserRole.setRoleId(item);
-	//	     sysUserRole.setUserId(sysUser.getId());
-	//	     return sysUserRole;
-	//	 }).collect(Collectors.toList());
-	//
-	//	 return userRoleService.saveBatch(userRoles);
-	//}
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		sysUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
+		return ir().save(sysUser);
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public User updateUser(User user) {
+		if (Objects.isNull(user.getId())) {
+			throw new BusinessException("id不能为空");
+		}
+
+		//此处修改用户角色
+		userRoleService.remove(
+			Wrappers.<UserRole>lambdaQuery().eq(UserRole::getId, user.getId()));
+		List<UserRole> userRoles = new ArrayList<Long>().stream()
+			.map(item -> {
+				UserRole sysUserRole = new UserRole();
+				sysUserRole.setRoleId(item);
+				sysUserRole.setUserId(user.getId());
+				return sysUserRole;
+			}).collect(Collectors.toList());
+
+		userRoleService.saveBatch(userRoles);
+		return user;
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -127,20 +139,20 @@ public class UserServiceImpl extends
 
 	@Override
 	public Boolean existsByPhone(String phone) {
-		BooleanExpression phonePredicate = SYS_USER.phone.eq(phone);
+		BooleanExpression phonePredicate = USER.phone.eq(phone);
 		return cr().exists(phonePredicate);
 	}
 
 	@Override
 	public Boolean existsById(Long id) {
-		BooleanExpression phonePredicate = SYS_USER.id.eq(id);
+		BooleanExpression phonePredicate = USER.id.eq(id);
 		return cr().exists(phonePredicate);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateUserRoles(Long userId, Set<Long> roleIds) {
-		return sysUserRoleService.saveUserRoles(userId, roleIds);
+		return userRoleService.saveUserRoles(userId, roleIds);
 	}
 
 	//@Override

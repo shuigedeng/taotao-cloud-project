@@ -29,13 +29,13 @@ import java.util.Set;
  */
 public interface IUserService extends BaseSuperService<User, Long> {
 
-	//SysUser saveUser(SysUser sysUser);
-	//SysUser updateUser(SysUser sysUser);
+	User saveUser(User user);
+
+	User updateUser(User user);
 
 	/**
 	 * 重置密码
 	 *
-	 * @param id              id
 	 * @param restPasswordDTO restPasswordDTO
 	 * @return {@link Boolean }
 	 * @author shuigedeng

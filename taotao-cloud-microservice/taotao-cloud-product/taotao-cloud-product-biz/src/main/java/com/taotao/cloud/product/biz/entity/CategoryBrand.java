@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -19,17 +22,16 @@ import java.util.Date;
 /**
  * 分类品牌关联
  *
- * @author pikachu
+ * 
  * @since 2020-03-02 09:34:02
  */
-@Data
-@TableName("li_category_brand")
-@ApiModel(value = "商品分类品牌关联")
-@NoArgsConstructor
-public class CategoryBrand extends BaseIdEntity {
+@Entity
+@Table(name = CategoryBrand.TABLE_NAME)
+@TableName(CategoryBrand.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = CategoryBrand.TABLE_NAME, comment = "商品分类品牌关联")
+public class CategoryBrand extends BaseSuperEntity<CategoryBrand, Long> {
 
-    private static final long serialVersionUID = 3315719881926878L;
-
+	public static final String TABLE_NAME = "li_category_brand";
 
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)

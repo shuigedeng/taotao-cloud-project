@@ -1,38 +1,36 @@
 package com.taotao.cloud.store.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
-import cn.lili.modules.store.entity.enums.FreightTemplateEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
-import javax.validation.constraints.NotEmpty;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 运费模板
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 4:27 下午
  */
-@Data
-@TableName("li_freight_template")
-@ApiModel(value = "运费模板")
-public class FreightTemplate extends BaseEntity {
+@Entity
+@Table(name = FreightTemplate.TABLE_NAME)
+@TableName(FreightTemplate.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = FreightTemplate.TABLE_NAME, comment = "运费模板表")
+public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 
-    @ApiModelProperty(value = "店铺ID", hidden = true)
-    private String storeId;
+	public static final String TABLE_NAME = "li_freight_template";
 
-    @NotEmpty(message = "模板名称不能为空")
-    @ApiModelProperty(value = "模板名称")
-    private String name;
+	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺ID'")
+	private String storeId;
 
-    /**
-     * @see FreightTemplateEnum
-     */
-    @NotEmpty(message = "计价方式不能为空")
-    @ApiModelProperty(value = "计价方式：按件、按重量", allowableValues = "WEIGHT,NUM,FREE")
-    private String pricingMethod;
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '模板名称'")
+	private String name;
+
+	/**
+	 * @see FreightTemplateEnum
+	 */
+	@Column(name = "pricing_method", nullable = false, columnDefinition = "varchar(32) not null comment '计价方式：按件、按重量 WEIGHT,NUM,FREE'")
+	private String pricingMethod;
 
 
 }

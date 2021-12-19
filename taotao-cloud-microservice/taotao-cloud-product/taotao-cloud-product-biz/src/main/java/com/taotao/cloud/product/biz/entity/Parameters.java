@@ -2,8 +2,11 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -16,17 +19,16 @@ import javax.validation.constraints.NotNull;
 /**
  * 商品参数
  *
- * @author pikachu
+ * 
  * @since 2020-02-23 9:14:33
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_parameters")
-@ApiModel(value = "商品参数")
-public class Parameters extends BaseIdEntity {
+@Entity
+@Table(name = Parameters.TABLE_NAME)
+@TableName(Parameters.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Parameters.TABLE_NAME, comment = "商品参数")
+public class Parameters extends BaseSuperEntity<Parameters, Long> {
 
-
-    private static final long serialVersionUID = -566510714456317006L;
+	public static final String TABLE_NAME = "li_parameters";
 
     @ApiModelProperty(value = "参数名称", required = true)
     @NotEmpty(message = "参数名称必填")

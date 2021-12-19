@@ -24,9 +24,10 @@ import com.taotao.cloud.sys.biz.mapper.IRoleMapper;
 import com.taotao.cloud.sys.biz.mapstruct.IRoleMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RoleRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleRepository;
-import com.taotao.cloud.sys.biz.service.IRoleResourceService;
+import com.taotao.cloud.sys.biz.service.IRoleMenuService;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -48,9 +49,9 @@ public class RoleServiceImpl extends
 
 	private final static QRole SYS_ROLE = QRole.role;
 
-	private final IRoleResourceService sysRoleResourceService;
+	private final IRoleMenuService sysRoleResourceService;
 
-	public RoleServiceImpl(IRoleResourceService sysRoleResourceService) {
+	public RoleServiceImpl(IRoleMenuService sysRoleResourceService) {
 		this.sysRoleResourceService = sysRoleResourceService;
 	}
 
@@ -62,8 +63,8 @@ public class RoleServiceImpl extends
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean saveRoleResources(Long roleId, Set<Long> resourceIds) {
-		return sysRoleResourceService.saveRoleResource(roleId, resourceIds);
+	public Boolean saveRoleMenus(Long roleId, Set<Long> menuIds) {
+		return sysRoleResourceService.saveRoleMenu(roleId, menuIds);
 	}
 
 	@Override
@@ -74,13 +75,15 @@ public class RoleServiceImpl extends
 
 	@Override
 	public List<RoleBO> findRoleByUserIds(Set<Long> userIds) {
-		List<Role> roles = cr().findRoleByUserIds(userIds);
+		//List<Role> roles = cr().findRoleByUserIds(userIds);
+		List<Role> roles = new ArrayList<>();
 		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 
 	@Override
 	public List<RoleBO> findRoleByCodes(Set<String> codes) {
-		List<Role> roles = cr().findRoleByCodes(codes);
+		//List<Role> roles = cr().findRoleByCodes(codes);
+		List<Role> roles = new ArrayList<>();
 		return IRoleMapStruct.INSTANCE.rolesToBos(roles);
 	}
 

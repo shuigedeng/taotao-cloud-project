@@ -3,8 +3,11 @@ package com.taotao.cloud.product.biz.entity;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,18 +15,17 @@ import lombok.NoArgsConstructor;
 /**
  * 分类参数组关联
  *
- * @author pikachu
+ * 
  * @since 2020-02-26 10:34:02
  */
-@Data
-@TableName("li_category_specification")
-@NoArgsConstructor
-@AllArgsConstructor
-@ApiModel(value = "商品分类规格")
-public class CategorySpecification extends BaseEntity {
+@Entity
+@Table(name = CategorySpecification.TABLE_NAME)
+@TableName(CategorySpecification.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = CategorySpecification.TABLE_NAME, comment = "商品分类规格")
+public class CategorySpecification extends BaseSuperEntity<CategorySpecification, Long> {
 
+	public static final String TABLE_NAME = "li_category_specification";
 
-    private static final long serialVersionUID = -4041367493342243147L;
     /**
      * 分类id
      */

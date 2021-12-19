@@ -29,9 +29,10 @@ import java.util.Optional;
 /**
  * 订单
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:30 下午
  */
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("li_order")

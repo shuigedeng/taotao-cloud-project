@@ -16,7 +16,6 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.entity.Region;
-import com.taotao.cloud.sys.biz.entity.Resource;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 

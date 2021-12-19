@@ -3,8 +3,11 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,15 +16,16 @@ import java.util.Date;
 /**
  * 售后
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:30 下午
  */
-@Data
-@TableName("li_after_sale")
-@ApiModel(value = "售后")
-public class AfterSale extends BaseEntity {
+@Entity
+@Table(name = AfterSale.TABLE_NAME)
+@TableName(AfterSale.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = AfterSale.TABLE_NAME, comment = "售后")
+public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
 
-    private static final long serialVersionUID = -5339221840646353416L;
+	public static final String TABLE_NAME = "li_after_sale";
 
     //基础信息
 

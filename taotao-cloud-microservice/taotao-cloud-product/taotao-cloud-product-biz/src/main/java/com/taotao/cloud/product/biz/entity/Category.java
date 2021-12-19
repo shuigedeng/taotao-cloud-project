@@ -2,8 +2,11 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,17 +18,16 @@ import java.util.Date;
 /**
  * 商品分类
  *
- * @author pikachu
+ * 
  * @since 2020-02-18 15:18:56
  */
-@Data
-@TableName("li_category")
-@ApiModel(value = "商品分类")
-@AllArgsConstructor
-@NoArgsConstructor
-public class Category extends BaseEntity {
+@Entity
+@Table(name = Category.TABLE_NAME)
+@TableName(Category.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Category.TABLE_NAME, comment = "商品分类")
+public class Category extends BaseSuperEntity<Category, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "li_category";
 
     @NotEmpty(message = "分类名称不能为空")
     @Size(max = 20)

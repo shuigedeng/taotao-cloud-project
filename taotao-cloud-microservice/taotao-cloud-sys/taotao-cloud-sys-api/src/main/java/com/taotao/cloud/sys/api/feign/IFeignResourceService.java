@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserFallbackImpl;
-import com.taotao.cloud.sys.api.vo.resource.ResourceQueryVO;
+import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import java.util.List;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 远程调用后台资源模块
+ * 远程调用后台菜单模块
  *
  * @author shuigedeng
  * @since 2020/5/2 16:42
@@ -28,6 +28,6 @@ public interface IFeignResourceService {
      * @version 1.0.0
      */
     @GetMapping("/resource/info/codes")
-    Result<List<ResourceQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
+    Result<List<MenuQueryVO>> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 
 }

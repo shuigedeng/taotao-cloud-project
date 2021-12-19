@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * 通知类站内信模版对象
  *
- * @author Bulbasaur
+ * 
  * @version v4.1
  * @since 2020/12/8 9:46
  */

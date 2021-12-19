@@ -71,15 +71,15 @@ public interface IRoleService extends BaseSuperService<Role, Long> {
 
 
 	/**
-	 * 根据角色id更新资源信息(角色分配资源)
+	 * 根据角色id更新菜单信息(角色分配菜单)
 	 *
 	 * @param roleId      roleId
-	 * @param resourceIds resourceIds
+	 * @param menuIds resourceIds
 	 * @return {@link Boolean }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:45:35
 	 */
-	Boolean saveRoleResources(Long roleId, Set<Long> resourceIds);
+	Boolean saveRoleMenus(Long roleId, Set<Long> menuIds);
 
 
 

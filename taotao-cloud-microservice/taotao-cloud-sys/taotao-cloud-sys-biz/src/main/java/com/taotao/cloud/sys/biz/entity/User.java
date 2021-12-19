@@ -38,28 +38,40 @@ public class User extends BaseSuperEntity<User,Long> {
 	public static final String TABLE_NAME = "tt_sys_user";
 
 	/**
+	 * 账号
+	 */
+	@Column(name = "account", nullable = false, columnDefinition = "varchar(255) not null comment '账号'")
+	private String account;
+
+	/**
 	 * 昵称
 	 */
 	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(255) not null comment '昵称'")
 	private String nickname;
 
 	/**
-	 * 真实用户名
+	 * 姓名
 	 */
 	@Column(name = "username", nullable = false, columnDefinition = "varchar(255) not null comment '真实用户名'")
 	private String username;
-
-	/**
-	 * 手机号
-	 */
-	@Column(name = "phone", unique = true, nullable = false, columnDefinition = "varchar(11) not null comment '手机号'")
-	private String phone;
 
 	/**
 	 * 密码
 	 */
 	@Column(name = "password", nullable = false, columnDefinition = "varchar(255) not null comment '密码'")
 	private String password;
+
+	/**
+	 * 手机号
+	 */
+	@Column(name = "mobile", unique = true, nullable = false, columnDefinition = "varchar(11) not null comment '手机号'")
+	private String mobile;
+
+	/**
+	 * 电话号码
+	 */
+	@Column(name = "phone", columnDefinition = "varchar(11) comment '电话号码'")
+	private String phone;
 
 	/**
 	 * 性别 1男 2女 0未知
@@ -76,15 +88,21 @@ public class User extends BaseSuperEntity<User,Long> {
 	private String email;
 
 	/**
+	 * 生日
+	 */
+	@Column(name = "birthday", columnDefinition = "varchar(50) not null comment '生日'")
+	private String birthday;
+
+	/**
 	 * 部门ID
 	 */
-	@Column(name = "dept_id", columnDefinition = "bigint comment '部门ID'")
+	@Column(name = "dept_id", columnDefinition = "bigint not null comment '部门ID'")
 	private Long deptId;
 
 	/**
 	 * 岗位ID
 	 */
-	@Column(name = "job_id", columnDefinition = "bigint comment '岗位ID'")
+	@Column(name = "job_id", columnDefinition = "bigint not null comment '岗位ID'")
 	private Long jobId;
 
 	/**
@@ -94,10 +112,10 @@ public class User extends BaseSuperEntity<User,Long> {
 	private String avatar;
 
 	/**
-	 * 是否锁定 0-正常，1-锁定
+	 * 状态 1-启用，2-禁用
 	 */
-	@Column(name = "is_lock", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否锁定 0-正常，1-锁定'")
-	private Boolean isLock = false;
+	@Column(name = "status", nullable = false, columnDefinition = "int NOT NULL DEFAULT 1 comment '状态 1-启用，2-禁用'")
+	private Integer status;
 
 	/**
 	 * 租户id
@@ -178,14 +196,6 @@ public class User extends BaseSuperEntity<User,Long> {
 		this.avatar = avatar;
 	}
 
-	public Boolean getLock() {
-		return isLock;
-	}
-
-	public void setLock(Boolean lock) {
-		isLock = lock;
-	}
-
 	public String getTenantId() {
 		return tenantId;
 	}
@@ -194,23 +204,39 @@ public class User extends BaseSuperEntity<User,Long> {
 		this.tenantId = tenantId;
 	}
 
-	public User() {
+	public String getAccount() {
+		return account;
 	}
 
-	public User(String nickname, String username, String phone, String password,
-		int sex,
-		String email, Long deptId, Long jobId, String avatar, Boolean isLock,
-		String tenantId) {
-		this.nickname = nickname;
-		this.username = username;
-		this.phone = phone;
-		this.password = password;
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setSex(Integer sex) {
 		this.sex = sex;
-		this.email = email;
-		this.deptId = deptId;
-		this.jobId = jobId;
-		this.avatar = avatar;
-		this.isLock = isLock;
-		this.tenantId = tenantId;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

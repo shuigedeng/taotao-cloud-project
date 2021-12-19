@@ -2,8 +2,11 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,14 +20,13 @@ import java.math.BigDecimal;
  * @author paulG
  * @since 2020-03-19 10:44 上午
  **/
-@Data
-@TableName("li_points_goods_category")
-@ApiModel(value = "积分商品分类")
-@AllArgsConstructor
-@NoArgsConstructor
-public class PointsGoodsCategory extends BaseEntity {
+@Entity
+@Table(name = PointsGoodsCategory.TABLE_NAME)
+@TableName(PointsGoodsCategory.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = PointsGoodsCategory.TABLE_NAME, comment = "积分商品分类")
+public class PointsGoodsCategory extends BaseSuperEntity<PointsGoodsCategory, Long> {
 
-    private static final long serialVersionUID = 4689246801280318515L;
+	public static final String TABLE_NAME = "li_points_goods_category";
 
     @NotEmpty(message = "分类名称不能为空")
     @ApiModelProperty(value = "分类名称")

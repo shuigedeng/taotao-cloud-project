@@ -98,23 +98,23 @@ public class ManagerRoleController extends
 	}
 
 	/**
-	 * 根据角色id更新资源信息(角色分配资源)
+	 * 根据角色id更新菜单信息(角色分配菜单)
 	 *
 	 * @param roleId      角色id
-	 * @param resourceIds 资源id列表
+	 * @param menuIds 菜单id列表
 	 * @return {@link Result&lt;java.lang.Boolean&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:12:46
 	 */
-	@Operation(summary = "根据角色id更新资源信息(角色分配资源)", description = "根据角色id更新资源信息(角色分配资源)")
-	@RequestLogger(description = "根据角色id更新资源信息(角色分配资源)")
-	@PreAuthorize("hasAuthority('sys:role:resource')")
+	@Operation(summary = "根据角色id更新菜单信息(角色分配菜单)", description = "根据角色id更新菜单信息(角色分配菜单)")
+	@RequestLogger(description = "根据角色id更新菜单信息(角色分配菜单)")
+	@PreAuthorize("hasAuthority('sys:role:menu')")
 	@PutMapping("/resources/{roleId}")
-	public Result<Boolean> saveRoleResources(
+	public Result<Boolean> saveRoleMenus(
 		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
 		@PathVariable(name = "roleId") Long roleId,
-		@Parameter(description = "资源id列表", required = true) @NotEmpty(message = "资源id列表不能为空")
-		@RequestBody Set<Long> resourceIds) {
-		return success(service().saveRoleResources(roleId, resourceIds));
+		@Parameter(description = "菜单id列表", required = true) @NotEmpty(message = "菜单id列表不能为空")
+		@RequestBody Set<Long> menuIds) {
+		return success(service().saveRoleMenus(roleId, menuIds));
 	}
 }

@@ -31,11 +31,14 @@ public enum ResourceTypeEnum implements BaseEnum {
 	 * 二级(顶部)菜单
 	 */
 	TOP_MENU(2, "二级(顶部)菜单"),
-
+	/**
+	 * 三级菜单
+	 */
+	THREE_MENU(3, "二级(顶部)菜单"),
 	/**
 	 * 按钮
 	 */
-	BUTTON(3, "按钮");
+	BUTTON(4, "按钮");
 
 	private final int code;
 	private final String desc;

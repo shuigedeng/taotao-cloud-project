@@ -2,8 +2,11 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import cn.lili.modules.promotion.entity.dto.BasePromotions;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 import javax.validation.constraints.Max;
@@ -13,17 +16,16 @@ import javax.validation.constraints.NotNull;
 /**
  * 拼团活动实体类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
-@Data
-@TableName("li_pintuan")
-@ApiModel(value = "拼团")
-public class Pintuan extends BasePromotions {
+@Entity
+@Table(name = Pintuan.TABLE_NAME)
+@TableName(Pintuan.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Pintuan.TABLE_NAME, comment = "拼团活动实体类")
+public class Pintuan extends BaseSuperEntity<Pintuan, Long> {
 
-
-    private static final long serialVersionUID = -8465716592648602604L;
-
+	public static final String TABLE_NAME = "li_pintuan";
 
     @Min(message = "成团人数需大于等于2", value = 2)
     @Max(message = "成团人数最多10人", value = 10)

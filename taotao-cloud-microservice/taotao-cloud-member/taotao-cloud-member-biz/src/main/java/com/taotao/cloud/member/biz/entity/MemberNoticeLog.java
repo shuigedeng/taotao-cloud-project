@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * 会员消息
  *
- * @author Chopper
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Data

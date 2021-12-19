@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 /**
  * 页面数据DO
  *
- * @author Bulbasaur
+ * 
  * @since 2020/12/10 17:42
  */
 @Data

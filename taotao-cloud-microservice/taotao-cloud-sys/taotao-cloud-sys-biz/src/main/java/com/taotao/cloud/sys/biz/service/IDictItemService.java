@@ -26,8 +26,7 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface IDictItemService extends
-	BaseSuperService<DictItem, Long> {
+public interface IDictItemService extends BaseSuperService<DictItem, Long> {
 
 	///**
 	// * 根据字典id删除字典项

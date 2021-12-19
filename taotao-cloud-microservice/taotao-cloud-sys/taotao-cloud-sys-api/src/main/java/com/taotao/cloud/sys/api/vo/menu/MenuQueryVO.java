@@ -13,37 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dto.resource;
+package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serial;
 import java.io.Serializable;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
+import java.time.LocalDateTime;
 
 /**
- * 资源添加对象
+ * 菜单查询对象
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2021-10-09 15:26:19
+ * @since 2021-10-09 15:27:42
  */
-@Schema(description = "资源添加对象")
-public record ResourceSaveDTO(
+@Schema( description = "菜单查询对象")
+public record MenuQueryVO(
 
 	/**
-	 * 资源名称
+	 * id
 	 */
-	@Schema(description = "资源名称", required = true)
-	@NotBlank(message = "资源名称不能超过为空")
-	@Length(max = 20, message = "资源名称不能超过20个字符")
+	@Schema(description = "id")
+	Long id,
+	/**
+	 * 菜单名称
+	 */
+	@Schema(description = "菜单名称")
 	String name,
 	/**
-	 * 资源类型 1：目录 2：菜单 3：按钮
+	 * 菜单类型 1：目录 2：菜单 3：按钮
 	 */
-	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮", required = true)
-	@NotBlank(message = "资源类型不能超过为空")
-	//@IntEnums(value = {1, 2, 3})
-	Byte type,
+	@Schema(description = "菜单类型 1：目录 2：菜单 3：按钮")
+	int type,
 	/**
 	 * 权限标识
 	 */
@@ -63,7 +64,7 @@ public record ResourceSaveDTO(
 	 * 父菜单ID
 	 */
 	@Schema(description = "父菜单ID")
-	Long parentId,
+	long parentId,
 	/**
 	 * 图标
 	 */
@@ -73,17 +74,17 @@ public record ResourceSaveDTO(
 	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
-	Boolean keepAlive,
+	boolean keepAlive,
 	/**
-	 * 是否隐藏路由菜单: 0否,1是（默认值0
+	 * 是否隐藏路由菜单: 0否,1是（默认值0）
 	 */
 	@Schema(description = "是否隐藏路由菜单: 0否,1是（默认值0）")
-	Boolean hidden,
+	boolean hidden,
 	/**
 	 * 聚合路由 0否,1是（默认值0）
 	 */
 	@Schema(description = "聚合路由 0否,1是（默认值0）")
-	Boolean alwaysShow,
+	boolean alwaysShow,
 	/**
 	 * 重定向
 	 */
@@ -93,14 +94,26 @@ public record ResourceSaveDTO(
 	 * 是否为外链 0否,1是（默认值0）
 	 */
 	@Schema(description = "是否为外链 0否,1是（默认值0）")
-	Boolean isFrame,
+	boolean isFrame,
 	/**
 	 * 排序值
 	 */
-	@Schema(description = "排序值")
-	Integer sortNum) implements Serializable {
+	@Schema(description = "排序ø值")
+	int sortNum,
+	/**
+	 * 创建时间
+	 */
+	@Schema(description = "创建时间")
+	LocalDateTime createTime,
+	/**
+	 * 最后修改时间
+	 */
+	@Schema(description = "最后修改时间")
+	LocalDateTime lastModifiedTime) implements Serializable {
 
-	static final long serialVersionUID = -1972549738577159538L;
+	@Serial
+	static final long serialVersionUID = 5126530068827085130L;
+
 
 }
 

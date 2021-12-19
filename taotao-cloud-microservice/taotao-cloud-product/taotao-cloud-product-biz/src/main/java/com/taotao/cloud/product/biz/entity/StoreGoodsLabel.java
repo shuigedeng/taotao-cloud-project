@@ -2,8 +2,11 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,15 +18,16 @@ import java.math.BigDecimal;
 /**
  * 店铺商品分类
  *
- * @author pikachu
+ * 
  * @since 2020-02-18 15:18:56
  */
-@Data
-@TableName("li_store_goods_label")
-@ApiModel(value = "店铺商品分类")
-public class StoreGoodsLabel extends BaseEntity {
+@Entity
+@Table(name = StoreGoodsLabel.TABLE_NAME)
+@TableName(StoreGoodsLabel.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = StoreGoodsLabel.TABLE_NAME, comment = "店铺商品分类")
+public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 
-    private static final long serialVersionUID = -5292518678940634419L;
+	public static final String TABLE_NAME = "li_store_goods_label";
 
     @ApiModelProperty("店铺ID")
     private String storeId;

@@ -63,7 +63,7 @@ public class ManagerRegionController extends
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
-	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
+	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
 		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
 		@PathVariable(name = "parentId") Long parentId) {

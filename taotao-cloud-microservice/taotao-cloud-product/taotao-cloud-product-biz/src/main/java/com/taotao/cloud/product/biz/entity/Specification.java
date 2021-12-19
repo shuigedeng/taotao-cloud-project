@@ -3,8 +3,11 @@ package com.taotao.cloud.product.biz.entity;
 import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,15 +17,16 @@ import javax.validation.constraints.Size;
 /**
  * 商品规格项
  *
- * @author pikachu
+ * 
  * @since 2020-02-18 15:18:56
  */
-@Data
-@TableName("li_specification")
-@ApiModel(value = "规格项")
-public class Specification extends BaseIdEntity {
+@Entity
+@Table(name = Specification.TABLE_NAME)
+@TableName(Specification.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Specification.TABLE_NAME, comment = "规格项")
+public class Specification extends BaseSuperEntity<Specification, Long> {
 
-    private static final long serialVersionUID = 147792597901239486L;
+	public static final String TABLE_NAME = "li_specification";
 
     /**
      * 规格名称

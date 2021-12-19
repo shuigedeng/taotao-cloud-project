@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.utils;
 
-import com.taotao.cloud.sys.api.bo.resource.ResourceBO;
-import com.taotao.cloud.sys.api.vo.resource.ResourceTreeVO;
-import com.taotao.cloud.sys.api.vo.resource.TreeNode;
+import com.taotao.cloud.sys.api.bo.menu.MenuBO;
+import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.api.vo.menu.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,20 +101,20 @@ public class TreeUtil {
 	}
 
 	/**
-	 * 通过SysResource创建树形节点
+	 * 通过SysMenu创建树形节点
 	 *
-	 * @param resources 资源列表
+	 * @param resources 菜单列表
 	 * @param parentId  父id
-	 * @return java.util.List<ResourceTree>
+	 * @return java.util.List<MenuTree>
 	 * @author shuigedeng
 	 * @version 1.0.0
 	 * @since 2020/10/21 11:23
 	 */
-	public static List<ResourceTreeVO> buildTree(List<ResourceBO> resources, Long parentId) {
-		List<ResourceTreeVO> trees = new ArrayList<>();
-		ResourceTreeVO node;
-		for (ResourceBO resource : resources) {
-			node = new ResourceTreeVO();
+	public static List<MenuTreeVO> buildTree(List<MenuBO> resources, Long parentId) {
+		List<MenuTreeVO> trees = new ArrayList<>();
+		MenuTreeVO node;
+		for (MenuBO resource : resources) {
+			node = new MenuTreeVO();
 			node.setId(resource.id());
 			node.setParentId(resource.parentId());
 			node.setName(resource.name());

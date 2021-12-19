@@ -3,8 +3,11 @@ package com.taotao.cloud.promotion.biz.entity;
 import cn.lili.modules.promotion.entity.enums.PromotionsApplyStatusEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -14,16 +17,17 @@ import javax.validation.constraints.NotNull;
 /**
  * 秒杀活动申请实体类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
-@Data
-@TableName("li_seckill_apply")
-@ApiModel(value = "秒杀活动申请")
-public class SeckillApply extends BaseEntity {
+@Entity
+@Table(name = SeckillApply.TABLE_NAME)
+@TableName(SeckillApply.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = SeckillApply.TABLE_NAME, comment = "秒杀活动申请实体类")
+public class SeckillApply extends BaseSuperEntity<SeckillApply, Long> {
 
-    private static final long serialVersionUID = 5440164641970820989L;
-
+	public static final String TABLE_NAME = "li_seckill_apply";
+	
     @ApiModelProperty(value = "活动id", required = true)
     @NotNull(message = "活动id参数不能为空")
     @Min(value = 0, message = "活动id参数异常")

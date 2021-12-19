@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.sys.api.bo.resource.ResourceQueryBO;
+import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import java.util.List;
 
 /**
@@ -11,6 +11,6 @@ import java.util.List;
  * @since 2020-10-16 15:54:05
  * @since 1.0
  */
-public interface IDubboResourceService {
-	List<ResourceQueryBO> queryAllId(Long id);
+public interface IDubboMenuService {
+	List<MenuQueryBO> queryAllId(Long id);
 }

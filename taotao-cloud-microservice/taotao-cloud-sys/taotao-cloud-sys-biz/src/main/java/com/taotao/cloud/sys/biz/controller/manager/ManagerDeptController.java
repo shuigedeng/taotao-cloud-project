@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
+import cn.hutool.core.util.PageUtil;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.sys.api.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.sys.api.dto.dept.DeptUpdateDTO;
@@ -22,8 +23,12 @@ import com.taotao.cloud.sys.api.vo.dept.DeptQueryVO;
 import com.taotao.cloud.sys.biz.entity.Dept;
 import com.taotao.cloud.sys.biz.service.IDeptService;
 import com.taotao.cloud.web.base.controller.SuperController;
+import com.taotao.cloud.web.tree.ForestNodeMerger;
+import groovy.util.logging.Log;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +46,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerDeptController extends
 	SuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
-
+	///**
+	// * 部门树
+	// *
+	// * @return Result
+	// */
+	//@PreAuth
+	//@Log(value = "部门树", exception = "部门树请求异常")
+	//@GetMapping("/tree")
+	//@ApiOperation(value = "部门树", notes = "部门树")
+	//public Result<?> tree() {
+	//	return Result.data(ForestNodeMerger.merge(sysDepartService.tree()));
+	//}
+	//
+	//@GetMapping
+	//@ApiOperation(value = "获取树状结构")
+	//public ResultMessage<List<DepartmentVO>> getByPage(Department entity,
+	//	SearchVO searchVo) {
+	//	return ResultUtil.data(departmentService.tree(PageUtil.initWrapper(entity, searchVo)));
+	//
+	//}
 }

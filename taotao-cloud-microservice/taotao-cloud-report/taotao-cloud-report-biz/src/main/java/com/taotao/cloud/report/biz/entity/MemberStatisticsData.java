@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 会员统计
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:34 下午
  */
 @Data

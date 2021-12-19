@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 /**
  * 文章分类
  *
- * @author pikachu
- * @author Bulbasaur
+ * 
+ * 
  * @since 2020/12/10 17:42
  */
 @Data

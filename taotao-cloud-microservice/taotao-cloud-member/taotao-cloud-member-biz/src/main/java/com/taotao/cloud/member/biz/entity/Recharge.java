@@ -21,7 +21,7 @@ import java.util.Date;
 /**
  * 预存款充值记录
  *
- * @author pikachu
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Data

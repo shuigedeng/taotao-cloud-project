@@ -15,103 +15,102 @@
  */
 package com.taotao.cloud.sys.biz.service;
 
-import com.taotao.cloud.sys.api.bo.resource.ResourceBO;
-import com.taotao.cloud.sys.api.bo.resource.ResourceQueryBO;
-import com.taotao.cloud.sys.api.vo.resource.ResourceQueryVO;
-import com.taotao.cloud.sys.api.vo.resource.ResourceTreeVO;
-import com.taotao.cloud.sys.biz.entity.Resource;
+import com.taotao.cloud.sys.api.bo.menu.MenuBO;
+import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
+import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.entity.Menu;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
 /**
- * ISysResourceService
+ * ISysMenuService
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 20:38:19
  */
-public interface IResourceService extends BaseSuperService<Resource, Long> {
+public interface IMenuService extends BaseSuperService<Menu, Long> {
 
 	/**
-	 * 查询所有资源列表
+	 * 查询所有菜单列表
 	 *
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysResource&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysMenu&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:01
 	 */
-	List<ResourceBO> findAllResources();
+	List<MenuBO> findAllMenus();
 
-	List<ResourceQueryBO> findAllById(Long id);
+	List<MenuQueryBO> findAllById(Long id);
 
 	/**
 	 * 根据角色id列表获取角色列表
 	 *
 	 * @param roleIds roleIds
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysResource&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysMenu&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:07
 	 */
-	List<ResourceBO> findResourceByRoleIds(Set<Long> roleIds);
+	List<MenuBO> findMenuByRoleIds(Set<Long> roleIds);
 
 	/**
 	 * 根据角色cde列表获取角色列表
 	 *
 	 * @param codes codes
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysResource&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysMenu&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:14
 	 */
-	List<ResourceBO> findResourceByCodes(Set<String> codes);
+	List<MenuBO> findMenuByCodes(Set<String> codes);
 
 	/**
 	 * 根据parentId获取角色列表
 	 *
 	 * @param parentId parentId
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysResource&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysMenu&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:19
 	 */
-	List<ResourceBO> findResourceByParentId(Long parentId);
+	List<MenuBO> findMenuByParentId(Long parentId);
 
 
 	/**
-	 * 根据id列表查询资源信息
+	 * 根据id列表查询菜单信息
 	 *
 	 * @param idList idList
-	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysResource&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.SysMenu&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:48
 	 */
-	List<ResourceBO> findResourceByIdList(List<Long> idList);
+	List<MenuBO> findMenuByIdList(List<Long> idList);
 
 	/**
 	 * 获取树形菜单集合 1.false-非懒加载，查询全部 " + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0
 	 *
 	 * @param lazy     lazy
 	 * @param parentId parentId
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceTree&gt; }
+	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.Menu.MenuTree&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:29
 	 */
-	List<ResourceTreeVO> findResourceTree(boolean lazy, Long parentId);
+	List<MenuTreeVO> findMenuTree(boolean lazy, Long parentId);
 
 	/**
 	 * 获取当前用户树形菜单列表
 	 *
-	 * @param resourceVOList resourceVOList
-	 * @param parentId       parentId
-	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceTree&gt; }
+	 * @param MenuVOList MenuVOList
+	 * @param parentId   parentId
+	 * @return {@link List&lt;com.taotao.cloud.sys.api.vo.Menu.MenuTree&gt; }
 	 * @author shuigedeng
 	 * @since 2021-10-09 20:39:41
 	 */
-	List<ResourceTreeVO> findCurrentUserResourceTree(List<ResourceQueryVO> resourceVOList,
+	List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> MenuVOList,
 		Long parentId);
 
 
-
-	Future<Boolean> testAsync();
-
-	Boolean testSeata();
+	//Future<Boolean> testAsync();
+	//
+	//Boolean testSeata();
 }

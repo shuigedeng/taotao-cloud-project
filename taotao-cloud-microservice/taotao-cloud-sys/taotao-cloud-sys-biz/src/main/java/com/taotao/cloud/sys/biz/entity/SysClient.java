@@ -48,9 +48,9 @@
 //	@ApiModelProperty(value = "客户端密钥")
 //	private String clientSecret;
 //	/**
-//	* 资源集合
+//	* 菜单集合
 //	*/
-//	@ApiModelProperty(value = "资源集合")
+//	@ApiModelProperty(value = "菜单集合")
 //	private String resourceIds;
 //	/**
 //	* 授权范围

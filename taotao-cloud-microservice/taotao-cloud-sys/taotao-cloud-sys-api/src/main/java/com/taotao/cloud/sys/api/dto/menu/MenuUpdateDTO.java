@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.dto.resource;
+package com.taotao.cloud.sys.api.dto.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -21,27 +21,27 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * 资源查询对象
+ * 菜单更新对象
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 15:26:19
  */
-@Schema(description = "资源查询对象")
-public record ResourceQueryDTO(
+@Schema(description = "菜单更新对象")
+public record MenuUpdateDTO(
 
 	/**
-	 * 资源名称
+	 * 菜单名称
 	 */
-	@Schema(description = "资源名称", required = true)
-	@NotBlank(message = "资源名称不能超过为空")
-	@Length(max = 20, message = "资源名称不能超过20个字符")
+	@Schema(description = "菜单名称", required = true)
+	@NotBlank(message = "菜单名称不能超过为空")
+	@Length(max = 20, message = "菜单名称不能超过20个字符")
 	String name,
 	/**
-	 * 资源类型 1：目录 2：菜单 3：按钮
+	 * 菜单类型 1：目录 2：菜单 3：按钮
 	 */
-	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮", required = true)
-	@NotBlank(message = "资源类型不能超过为空")
+	@Schema(description = "菜单类型 1：目录 2：菜单 3：按钮", required = true)
+	@NotBlank(message = "菜单类型不能超过为空")
 	//@IntEnums(value = {1, 2, 3})
 	Byte type,
 	/**
