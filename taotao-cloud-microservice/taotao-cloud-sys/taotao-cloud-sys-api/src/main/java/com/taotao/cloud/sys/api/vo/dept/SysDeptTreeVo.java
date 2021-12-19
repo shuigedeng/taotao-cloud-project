@@ -55,7 +55,6 @@ public record SysDeptTreeVo(
 	List<SysDeptTreeVo> children
 ) implements Serializable {
 
-	@Serial
 	static final long serialVersionUID = -4546704465269983480L;
 
 
