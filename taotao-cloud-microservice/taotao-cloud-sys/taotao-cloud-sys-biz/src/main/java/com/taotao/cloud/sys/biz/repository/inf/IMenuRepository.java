@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.mapper;
+package com.taotao.cloud.sys.biz.repository.inf;
 
-import com.taotao.cloud.sys.biz.entity.RoleResource;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.taotao.cloud.sys.biz.entity.Menu;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * CompanyMapper
@@ -26,7 +26,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 1.0.0
  * @since 2021/10/13 22:50
  */
-@Mapper
-public interface IRoleResourceMapper extends BaseSuperMapper<RoleResource, Long> {
+@Repository
+public interface IMenuRepository extends JpaRepository<Menu, Long> {
 
 }

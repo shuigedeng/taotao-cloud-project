@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 会员提现申请
  *
- * @author pikachu
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Data

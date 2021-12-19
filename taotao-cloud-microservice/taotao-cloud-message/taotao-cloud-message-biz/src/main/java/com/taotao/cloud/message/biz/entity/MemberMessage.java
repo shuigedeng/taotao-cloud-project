@@ -11,7 +11,7 @@ import lombok.Data;
 /**
  * 会员接受消息对象
  *
- * @author Chopper
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Data

@@ -23,14 +23,15 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.api.bo.resource.ResourceBO;
-import com.taotao.cloud.sys.api.dto.resource.ResourceSaveDTO;
-import com.taotao.cloud.sys.api.dto.resource.ResourceUpdateDTO;
-import com.taotao.cloud.sys.api.vo.resource.ResourceQueryVO;
-import com.taotao.cloud.sys.api.vo.resource.ResourceTreeVO;
-import com.taotao.cloud.sys.biz.entity.Resource;
-import com.taotao.cloud.sys.biz.mapstruct.IResourceMapStruct;
-import com.taotao.cloud.sys.biz.service.IResourceService;
+import com.taotao.cloud.sys.api.bo.menu.MenuBO;
+import com.taotao.cloud.sys.api.dto.menu.MenuSaveDTO;
+import com.taotao.cloud.sys.api.dto.menu.MenuUpdateDTO;
+import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.api.vo.menu.ResourceTreeVO;
+import com.taotao.cloud.sys.biz.entity.Menu;
+import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
+import com.taotao.cloud.sys.biz.service.IMenuService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -55,7 +56,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 资源管理API
+ * 菜单管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -63,29 +64,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/resource")
-@Tag(name = "资源管理API", description = "资源管理API")
-public class ManagerResourceController extends
-	SuperController<IResourceService, Resource, Long, BaseQuery, ResourceSaveDTO, ResourceUpdateDTO, ResourceQueryVO> {
+@RequestMapping("/manager/menu")
+@Tag(name = "菜单管理API", description = "菜单管理API")
+public class ManagerMenuController extends
+	SuperController<IMenuService, Menu, Long, BaseQuery, MenuSaveDTO, MenuUpdateDTO, MenuQueryVO> {
 
 	/**
-	 * 根据角色id获取资源列表
+	 * 根据角色id获取菜单列表
 	 *
 	 * @param roleId 角色id
 	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:04:45
 	 */
-	@Operation(summary = "根据角色id获取资源列表", description = "根据角色id获取资源列表")
-	@RequestLogger(description = "根据角色id获取资源列表")
+	@Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
+	@RequestLogger(description = "根据角色id获取菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
 	@SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
 	@GetMapping("/roleId/{roleId}")
-	public Result<List<ResourceQueryVO>> findResourceByRoleId(
+	public Result<List<MenuQueryVO>> findResourceByRoleId(
 		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
 		@PathVariable(value = "roleId") Long roleId) {
-		List<ResourceBO> resources = service().findResourceByRoleIds(Set.of(roleId));
-		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
+		List<MenuBO> resources = service().findMenuByRoleIds(Set.of(roleId));
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return success(result);
 	}
 
@@ -101,31 +102,31 @@ public class ManagerResourceController extends
 	@RequestLogger(description = "根据角色id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
 	@GetMapping("/roleIds")
-	public Result<List<ResourceQueryVO>> findResourceByRoleIds(
+	public Result<List<MenuQueryVO>> findResourceByRoleIds(
 		@Parameter(description = "角色id列表", required = true) @NotEmpty(message = "角色id列表不能为空")
 		@RequestParam(value = "roleIds") Set<Long> roleIds) {
-		List<ResourceBO> resources = service().findResourceByRoleIds(roleIds);
-		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
+		List<MenuBO> resources = service().findMenuByRoleIds(roleIds);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return Result.success(result);
 	}
 
 	/**
-	 * 根据角色code获取资源列表
+	 * 根据角色code获取菜单列表
 	 *
 	 * @param code 角色code
 	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
 	 * @author shuigedeng
 	 * @since 2021-10-09 15:04:59
 	 */
-	@Operation(summary = "根据角色code获取资源列表", description = "根据角色code获取资源列表")
-	@RequestLogger(description = "根据角色code获取资源列表")
+	@Operation(summary = "根据角色code获取菜单列表", description = "根据角色code获取菜单列表")
+	@RequestLogger(description = "根据角色code获取菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
 	@GetMapping("/code/{code}")
-	public Result<List<ResourceQueryVO>> findResourceByCode(
+	public Result<List<MenuQueryVO>> findResourceByCode(
 		@Parameter(description = "角色code", required = true) @NotBlank(message = "角色code不能为空")
 		@PathVariable(value = "code") String code) {
-		List<ResourceBO> resources = service().findResourceByCodes(Set.of(code));
-		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
+		List<MenuBO> resources = service().findMenuByCodes(Set.of(code));
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return Result.success(result);
 	}
 
@@ -141,11 +142,11 @@ public class ManagerResourceController extends
 	@RequestLogger(description = "根据角色cde列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
 	@GetMapping("/codes")
-	public Result<List<ResourceQueryVO>> findResourceByCodes(
+	public Result<List<MenuQueryVO>> findResourceByCodes(
 		@Parameter(description = "角色cde列表", required = true) @NotNull(message = "角色cde列表不能为空")
 		@RequestParam(value = "codes") Set<String> codes) {
-		List<ResourceBO> resources = service().findResourceByCodes(codes);
-		List<ResourceQueryVO> result = IResourceMapStruct.INSTANCE.resourceBosToVos(resources);
+		List<MenuBO> resources = service().findMenuByCodes(codes);
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
 		return success(result);
 	}
 
@@ -174,7 +175,7 @@ public class ManagerResourceController extends
 	@RequestLogger(description = "获取当前用户菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
 	@GetMapping("/current/user")
-	public Result<List<ResourceQueryVO>> findCurrentUserResource() {
+	public Result<List<MenuQueryVO>> findCurrentUserResource() {
 		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return success(new ArrayList<>());
@@ -194,15 +195,15 @@ public class ManagerResourceController extends
 	@RequestLogger(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
 	@GetMapping("/current/user/tree")
-	public Result<List<ResourceTreeVO>> findCurrentUserResourceTree(
+	public Result<List<MenuTreeVO>> findCurrentUserResourceTree(
 		@Parameter(description = "父id") @RequestParam(value = "parentId") Long parentId) {
 		Set<String> roleCodes = SecurityUtil.getUser().getRoles();
 		if (CollUtil.isEmpty(roleCodes)) {
 			return Result.success(Collections.emptyList());
 		}
-		Result<List<ResourceQueryVO>> result = findResourceByCodes(roleCodes);
-		List<ResourceQueryVO> resourceVOList = result.data();
-		List<ResourceTreeVO> trees = service().findCurrentUserResourceTree(resourceVOList,
+		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
+		List<MenuQueryVO> resourceVOList = result.data();
+		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
 			parentId);
 		return Result.success(trees);
 	}
@@ -222,46 +223,45 @@ public class ManagerResourceController extends
 	@PreAuthorize("hasAuthority('sys:resource:info:tree')")
 	@GetMapping("/tree")
 	@SentinelResource(value = "findResourceTree", blockHandler = "testSeataException")
-	public Result<List<ResourceTreeVO>> findResourceTree(
+	public Result<List<MenuTreeVO>> findResourceTree(
 		@Parameter(name = "lazy", description = "是否是延迟查询") @RequestParam(value = "lazy") boolean lazy,
 		@Parameter(name = "parentId", description = "父id") @RequestParam(value = "parentId") Long parentId) {
-		List<ResourceTreeVO> trees = service().findResourceTree(lazy, parentId);
+		List<MenuTreeVO> trees = service().findMenuTree(lazy, parentId);
 		return success(trees);
 	}
 
-
-	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLogger(description = "测试分布式事务")
-	@GetMapping("/test/se")
-	@SentinelResource(value = "se")
-	public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
-		Boolean result = service().testSeata();
-		return Result.success(result);
-	}
-
-	@Operation(summary = "测试异步", description = "测试异步")
-	@RequestLogger(description = "测试异步")
-	@GetMapping("/test/async")
-	public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
-		Future<Boolean> result = service().testAsync();
-		return Result.success(result.get());
-	}
-
-	@Operation(summary = "测试异步结果", description = "测试异步结果")
-	@RequestLogger(description = "测试异步结果")
-	@GetMapping("/test/async/future")
-	public Future<Boolean> testAsyncFuture() {
-		return service().testAsync();
-	}
-
-	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	@RequestLogger(description = "测试分布式事务")
-	@GetMapping("/test/seata")
-	@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
-	public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {
-		Boolean result = service().testSeata();
-		return Result.success(result);
-	}
+	//@Operation(summary = "测试分布式事务", description = "测试分布式事务")
+	//@RequestLogger(description = "测试分布式事务")
+	//@GetMapping("/test/se")
+	//@SentinelResource(value = "se")
+	//public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
+	//	Boolean result = service().testSeata();
+	//	return Result.success(result);
+	//}
+	//
+	//@Operation(summary = "测试异步", description = "测试异步")
+	//@RequestLogger(description = "测试异步")
+	//@GetMapping("/test/async")
+	//public Result<Boolean> testAsync() throws ExecutionException, InterruptedException {
+	//	Future<Boolean> result = service().testAsync();
+	//	return Result.success(result.get());
+	//}
+	//
+	//@Operation(summary = "测试异步结果", description = "测试异步结果")
+	//@RequestLogger(description = "测试异步结果")
+	//@GetMapping("/test/async/future")
+	//public Future<Boolean> testAsyncFuture() {
+	//	return service().testAsync();
+	//}
+	//
+	//@Operation(summary = "测试分布式事务", description = "测试分布式事务")
+	//@RequestLogger(description = "测试分布式事务")
+	//@GetMapping("/test/seata")
+	//@SentinelResource(value = "testSeata", blockHandler = "testSeataException")
+	//public Result<Boolean> testSeata(HttpServletRequest request, HttpServletResponse response) {
+	//	Boolean result = service().testSeata();
+	//	return Result.success(result);
+	//}
 
 	public Result<Boolean> testSeataException(BlockException e) {
 		e.printStackTrace();

@@ -6,8 +6,11 @@ import cn.lili.modules.goods.entity.enums.DraftGoodsSaveType;
 import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,18 +22,16 @@ import javax.validation.constraints.Max;
 /**
  * 草稿商品
  *
- * @author pikachu
+ * 
  * @since 2020-02-23 9:14:33
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_draft_goods")
-@ApiModel(value = "草稿商品")
-@AllArgsConstructor
-@NoArgsConstructor
-public class DraftGoods extends BaseEntity {
+@Entity
+@Table(name = DraftGoods.TABLE_NAME)
+@TableName(DraftGoods.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = DraftGoods.TABLE_NAME, comment = "草稿商品")
+public class DraftGoods extends BaseSuperEntity<DraftGoods, Long> {
 
-    private static final long serialVersionUID = 370683495251252601L;
+	public static final String TABLE_NAME = "li_draft_goods";
 
     @ApiModelProperty(value = "商品名称")
     private String goodsName;

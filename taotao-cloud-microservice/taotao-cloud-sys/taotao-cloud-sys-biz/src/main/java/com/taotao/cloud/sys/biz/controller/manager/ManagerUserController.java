@@ -24,8 +24,8 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.dto.user.UserSaveDTO;
 import com.taotao.cloud.sys.api.dto.user.UserUpdateDTO;
-import com.taotao.cloud.sys.biz.entity.User;
 import com.taotao.cloud.sys.api.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.biz.entity.User;
 import com.taotao.cloud.sys.biz.mapstruct.IUserMapStruct;
 import com.taotao.cloud.sys.biz.service.IUserService;
 import com.taotao.cloud.web.base.controller.SuperController;
@@ -60,7 +60,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "后台用户管理API", description = "后台用户管理API")
 public class ManagerUserController extends
 	SuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
-
 
 	/**
 	 * 根据手机号码查询用户是否存在

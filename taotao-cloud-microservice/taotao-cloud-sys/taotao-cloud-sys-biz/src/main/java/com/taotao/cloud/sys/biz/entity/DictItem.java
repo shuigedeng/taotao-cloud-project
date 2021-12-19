@@ -65,29 +65,20 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 	private String description;
 
 	/**
-	 * 状态 0不启用 1启用 默认值(1)
+	 * 状态 0不启用 1启用
 	 */
-	@Column(name = "status", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '状态 0不启用 1启用 默认值(1)'")
-	private Boolean status = true;
+	@Column(name = "status", nullable = false, columnDefinition = "int NOT NULL DEFAULT 1 comment ' 状态 0不启用 1启用'")
+	private Integer status;
 
 	/**
 	 * 排序值
 	 */
-	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum = 0;
+	@Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
+	private Integer sortNum = 1;
 
 	public DictItem() {
 	}
 
-	public DictItem(Long dictId, String itemText, String itemValue, String description,
-		Boolean status, Integer sortNum) {
-		this.dictId = dictId;
-		this.itemText = itemText;
-		this.itemValue = itemValue;
-		this.description = description;
-		this.status = status;
-		this.sortNum = sortNum;
-	}
 
 	public Long getDictId() {
 		return dictId;
@@ -121,11 +112,11 @@ public class DictItem extends BaseSuperEntity<DictItem,Long> {
 		this.description = description;
 	}
 
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

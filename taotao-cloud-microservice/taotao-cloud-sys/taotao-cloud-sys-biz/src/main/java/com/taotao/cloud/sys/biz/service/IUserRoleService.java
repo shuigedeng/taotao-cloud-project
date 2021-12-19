@@ -18,8 +18,6 @@ public interface IUserRoleService extends
 	 * @param userId
 	 * @param roleIds
 	 * @return java.lang.Boolean
-	 * @version 1.0.0
-	 * @since 2020/10/21 09:20
 	 */
 	Boolean saveUserRoles(Long userId, Set<Long> roleIds);
 }

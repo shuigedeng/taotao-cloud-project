@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 会员等级
  *
- * @author Bulbasaur
+ * 
  * @since 2021/5/14 5:43 下午
  */
 @Data

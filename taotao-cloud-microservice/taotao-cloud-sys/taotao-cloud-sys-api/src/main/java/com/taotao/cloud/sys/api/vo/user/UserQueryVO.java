@@ -51,11 +51,6 @@ public record UserQueryVO(
 	@Schema(description = "手机号")
 	String phone,
 	/**
-	 * 用户类型 1前端用户 2商户用户 3后台管理用户
-	 */
-	@Schema(description = "用户类型 1前端用户 2商户用户 3后台管理用户")
-	Integer type,
-	/**
 	 * 性别 1男 2女 0未知
 	 */
 	@Schema(description = "性别 1男 2女 0未知")

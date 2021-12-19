@@ -2,8 +2,11 @@ package com.taotao.cloud.order.biz.entity.aftersale;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -11,20 +14,23 @@ import javax.validation.constraints.NotNull;
 /**
  * 售后原因
  *
- * @author Bulbasaur
+ * 
  * @since 2021/7/9 1:39 上午
  */
-@Data
-@TableName("li_after_sale_reason")
-@ApiModel(value = "售后原因")
-public class AfterSaleReason extends BaseEntity {
+@Entity
+@Table(name = AfterSaleReason.TABLE_NAME)
+@TableName(AfterSaleReason.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = AfterSaleReason.TABLE_NAME, comment = "售后原因")
+public class AfterSaleReason extends BaseSuperEntity<AfterSaleReason, Long> {
+
+	public static final String TABLE_NAME = "li_after_sale_reason";
 
     @NotNull
     @ApiModelProperty(value = "售后原因")
     private String reason;
 
     /**
-     * @see cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum
+     * @see AfterSaleTypeEnum
      */
     @ApiModelProperty(value = "原因类型", allowableValues = "CANCEL,RETURN_GOODS,RETURN_MONEY,COMPLAIN")
     @NotNull

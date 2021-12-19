@@ -22,8 +22,7 @@ import com.taotao.cloud.logistics.biz.entity.ExpressCompany;
  * @since 2020/11/13 09:59
  * @version 1.0.0
  */
-public interface
-IExpressCompanyService {
+public interface IExpressCompanyService {
 
 	/**
 	 * 根据id查询物流公司信息

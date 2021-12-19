@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.bo.resource;
+package com.taotao.cloud.sys.api.bo.menu;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
- * 资源查询对象
+ * 菜单查询对象
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 15:27:42
  */
-public class ResourceQueryBO implements Serializable {
+public class MenuQueryBO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 5126530068827085130L;
@@ -38,11 +36,11 @@ public class ResourceQueryBO implements Serializable {
 	 */
 	private Long id;
 	/**
-	 * 资源名称
+	 * 菜单名称
 	 */
 	private String name;
 	/**
-	 * 资源类型 1：目录 2：菜单 3：按钮
+	 * 菜单类型 1：目录 2：菜单 3：按钮
 	 */
 	private int type;
 	/**
@@ -98,10 +96,10 @@ public class ResourceQueryBO implements Serializable {
 	 */
 	private LocalDateTime lastModifiedTime;
 
-	public ResourceQueryBO() {
+	public MenuQueryBO() {
 	}
 
-	public ResourceQueryBO(long id, String name, int type, String perms, String path,
+	public MenuQueryBO(long id, String name, int type, String perms, String path,
 		String component, long parentId, String icon, boolean keepAlive, boolean hidden,
 		boolean alwaysShow, String redirect, boolean isFrame, int sortNum,
 		LocalDateTime createTime, LocalDateTime lastModifiedTime) {

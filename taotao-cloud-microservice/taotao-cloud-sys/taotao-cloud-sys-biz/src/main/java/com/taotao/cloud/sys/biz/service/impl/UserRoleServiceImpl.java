@@ -40,12 +40,12 @@ public class UserRoleServiceImpl extends
 	BaseSuperServiceImpl<IUserRoleMapper, UserRole, UserRoleRepository, IUserRoleRepository, Long>
 	implements IUserRoleService {
 
-	private final static QUserRole SYS_USER_ROLE = QUserRole.sysUserRole;
+	private final static QUserRole USER_ROLE = QUserRole.userRole;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean saveUserRoles(Long userId, Set<Long> roleIds) {
-		BooleanExpression expression = SYS_USER_ROLE.userId.eq(userId);
+		BooleanExpression expression = USER_ROLE.userId.eq(userId);
 		List<UserRole> userRoles = cr().fetch(expression);
 		if (CollUtil.isNotEmpty(userRoles)) {
 			cr().deleteAll(userRoles);

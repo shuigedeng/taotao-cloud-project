@@ -4,21 +4,27 @@ import cn.lili.mybatis.BaseIdEntity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 
 /**
  * 商品相册
  *
- * @author pikachu
+ * 
  * @since 2020-02-23 9:14:33
  */
-@Data
-@TableName("li_goods_gallery")
-@ApiModel(value = "商品相册")
-public class GoodsGallery extends BaseIdEntity {
+@Entity
+@Table(name = GoodsGallery.TABLE_NAME)
+@TableName(GoodsGallery.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = GoodsGallery.TABLE_NAME, comment = "商品相册")
+public class GoodsGallery extends BaseSuperEntity<GoodsGallery, Long> {
+
+	public static final String TABLE_NAME = "li_goods_gallery";
 
 
     @CreatedBy

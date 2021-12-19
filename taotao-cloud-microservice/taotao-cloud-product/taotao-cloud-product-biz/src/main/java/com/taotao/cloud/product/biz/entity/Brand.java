@@ -2,8 +2,11 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -13,16 +16,16 @@ import javax.validation.constraints.Size;
 /**
  * 商品品牌
  *
- * @author pikachu
+ * 
  * @since 2020-02-18 15:18:56
  */
-@Data
-@TableName("li_brand")
-@ApiModel(value = "商品品牌")
-public class Brand extends BaseEntity {
+@Entity
+@Table(name = Brand.TABLE_NAME)
+@TableName(Brand.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Brand.TABLE_NAME, comment = "商品品牌")
+public class Brand extends BaseSuperEntity<Brand, Long> {
 
-
-    private static final long serialVersionUID = -8236865838438521426L;
+	public static final String TABLE_NAME = "li_brand";
 
     @NotEmpty(message = "品牌名称不能为空")
     @Length(max = 20, message = "品牌名称应该小于20长度字符")

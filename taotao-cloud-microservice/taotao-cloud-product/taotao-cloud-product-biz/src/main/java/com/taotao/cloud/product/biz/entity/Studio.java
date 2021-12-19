@@ -2,21 +2,27 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 
 /**
  * 小程序直播间
  *
- * @author Bulbasaur
+ * 
  * @since 2021/5/17 9:47 上午
  */
-@Data
-@ApiModel(value = "直播间")
-@TableName("li_studio")
-public class Studio extends BaseEntity {
+@Entity
+@Table(name = Studio.TABLE_NAME)
+@TableName(Studio.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Studio.TABLE_NAME, comment = "直播间")
+public class Studio extends BaseSuperEntity<Studio, Long> {
+
+	public static final String TABLE_NAME = "li_studio";
 
     /**
      * 直播间名字，最短3个汉字，最长17个汉字，1个汉字相当于2个字符
@@ -65,7 +71,6 @@ public class Studio extends BaseEntity {
      */
     @ApiModelProperty(value = "封面图")
     private String feedsImg;
-
 
     @ApiModelProperty(value = "回放视频链接")
     private String mediaUrl;

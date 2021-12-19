@@ -5,8 +5,11 @@ import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -17,16 +20,16 @@ import java.util.Date;
 /**
  * 商品sku
  *
- * @author pikachu
+ * 
  * @since 2020-02-23 9:14:33
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_goods_sku")
-@ApiModel(value = "商品sku对象")
-public class GoodsSku extends BaseEntity {
+@Entity
+@Table(name = GoodsSku.TABLE_NAME)
+@TableName(GoodsSku.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = GoodsSku.TABLE_NAME, comment = "商品sku对象")
+public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
 
-    private static final long serialVersionUID = 4865908658161118934L;
+	public static final String TABLE_NAME = "li_goods_sku";
 
     @ApiModelProperty(value = "商品id")
     private String goodsId;

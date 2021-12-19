@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.api.vo.resource;
+package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2020/5/14 10:44
  */
 @Schema( description = "菜单VO")
-public record MenuVo(
+public record MenuVO(
 	@Schema(description = "菜单名称")
 	String name,
 
@@ -31,7 +31,7 @@ public record MenuVo(
 	MenuMetaVo meta,
 
 	@Schema(description = "菜单children")
-	List<MenuVo> children) implements Serializable {
+	List<MenuVO> children) implements Serializable {
 
 
 }

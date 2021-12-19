@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.vo.resource;
+package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -36,7 +36,7 @@ public class ResourceTreeVO extends TreeNode implements Serializable {
 	@Schema(description = "图标")
 	private String icon;
 
-	@Schema(description = "资源名称")
+	@Schema(description = "菜单名称")
 	private String name;
 
 	@Schema(description = "权限标识")
@@ -51,7 +51,7 @@ public class ResourceTreeVO extends TreeNode implements Serializable {
 	@Schema(description = "是否缓存页面: 0:否 1:是 (默认值0)")
 	private boolean keepAlive;
 
-	@Schema(description = "资源类型 1：目录 2：菜单 3：按钮")
+	@Schema(description = "菜单类型 1：目录 2：菜单 3：按钮")
 	private int type;
 
 	@Schema(description = "菜单标签")
@@ -108,18 +108,18 @@ public class ResourceTreeVO extends TreeNode implements Serializable {
 		this.label = name;
 	}
 
-	public ResourceTreeVO(ResourceQueryVO resourceQueryVO) {
+	public ResourceTreeVO(MenuQueryVO menuQueryVO) {
 		super();
-		super.setId(resourceQueryVO.id());
-		super.setParentId(resourceQueryVO.parentId());
-		this.icon = resourceQueryVO.icon();
-		this.name = resourceQueryVO.name();
-		this.path = resourceQueryVO.path();
-		this.type = resourceQueryVO.type();
-		this.perms = resourceQueryVO.perms();
-		this.label = resourceQueryVO.name();
-		this.sort = resourceQueryVO.sortNum();
-		this.keepAlive = resourceQueryVO.keepAlive();
+		super.setId(menuQueryVO.id());
+		super.setParentId(menuQueryVO.parentId());
+		this.icon = menuQueryVO.icon();
+		this.name = menuQueryVO.name();
+		this.path = menuQueryVO.path();
+		this.type = menuQueryVO.type();
+		this.perms = menuQueryVO.perms();
+		this.label = menuQueryVO.name();
+		this.sort = menuQueryVO.sortNum();
+		this.keepAlive = menuQueryVO.keepAlive();
 	}
 
 

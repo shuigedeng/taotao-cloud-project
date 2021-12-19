@@ -2,8 +2,11 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import cn.lili.modules.promotion.entity.dto.BasePromotions;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,15 +19,13 @@ import lombok.NoArgsConstructor;
  * @author paulG
  * @since 2020-03-19 10:44 上午
  **/
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_points_goods")
-@ApiModel(value = "积分商品")
-@AllArgsConstructor
-@NoArgsConstructor
-public class PointsGoods extends BasePromotions {
+@Entity
+@Table(name = PointsGoods.TABLE_NAME)
+@TableName(PointsGoods.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = PointsGoods.TABLE_NAME, comment = "积分商品实体类")
+public class PointsGoods extends BaseSuperEntity<PointsGoods, Long> {
 
-    private static final long serialVersionUID = 1313207311581661571L;
+	public static final String TABLE_NAME = "li_points_goods";
 
     @ApiModelProperty(value = "商品编号")
     private String goodsId;

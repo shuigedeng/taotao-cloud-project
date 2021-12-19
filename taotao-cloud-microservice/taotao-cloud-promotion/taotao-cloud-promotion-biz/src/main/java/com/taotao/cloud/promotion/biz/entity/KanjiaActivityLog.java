@@ -2,8 +2,11 @@ package com.taotao.cloud.promotion.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 
@@ -13,13 +16,13 @@ import lombok.Data;
  * @author qiuqiu
  * @date 2020-7-1 10:44 上午
  */
-@Data
-@TableName("li_kanjia_activity_log")
-@ApiModel(value = "砍价活动日志对象")
-public class KanjiaActivityLog extends BaseEntity {
+@Entity
+@Table(name = KanjiaActivityLog.TABLE_NAME)
+@TableName(KanjiaActivityLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = KanjiaActivityLog.TABLE_NAME, comment = "砍价活动日志对象")
+public class KanjiaActivityLog extends BaseSuperEntity<KanjiaActivityLog, Long> {
 
-
-    private static final long serialVersionUID = 3977352717995562783L;
+	public static final String TABLE_NAME = "li_kanjia_activity_log";
 
     @ApiModelProperty(value = "砍价活动参与记录id")
     private String kanjiaActivityId;

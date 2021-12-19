@@ -11,7 +11,7 @@ import lombok.Data;
 /**
  * 专题活动
  *
- * @author Bulbasaur
+ * 
  * @since 2020/12/10 17:42
  */
 @Data

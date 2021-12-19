@@ -8,8 +8,12 @@ import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory.PromotionGoods;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,18 +23,17 @@ import java.util.Date;
 /**
  * 促销活动商品实体类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_promotion_goods")
-@ApiModel(value = "促销商品")
-@NoArgsConstructor
-public class PromotionGoods extends BaseEntity {
+@Entity
+@Table(name = PromotionGoods.TABLE_NAME)
+@TableName(PromotionGoods.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = PromotionGoods.TABLE_NAME, comment = "促销商品")
+public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
-    private static final long serialVersionUID = 4150737500248136108L;
-
+	public static final String TABLE_NAME = "li_promotion_goods";
+	
     @ApiModelProperty(value = "商家ID")
     private String storeId;
 

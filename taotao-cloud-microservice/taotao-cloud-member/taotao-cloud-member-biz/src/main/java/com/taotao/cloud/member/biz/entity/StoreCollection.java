@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  * 会员店铺收藏
  *
- * @author Chopper
+ * 
  * @since 2020/11/18 3:32 下午
  */
 @Data

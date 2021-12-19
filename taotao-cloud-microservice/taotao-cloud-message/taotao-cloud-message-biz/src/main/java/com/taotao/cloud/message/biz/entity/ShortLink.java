@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * 短链接/暂时只用于小程序二维码业务
- * @author Chopper
+ * 
  */
 @Data
 @TableName("li_short_link")

@@ -15,12 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.repository.cls;
 
-import com.taotao.cloud.sys.biz.entity.Resource;
-import com.taotao.cloud.sys.biz.entity.UserRole;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.cloud.sys.biz.entity.RoleMenu;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;
 import javax.persistence.EntityManager;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -31,10 +28,10 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class ResourceRepository extends BaseSuperRepository<Resource, Long> {
+public class RoleMenuRepository extends BaseSuperRepository<RoleMenu, Long> {
 
-	public ResourceRepository(EntityManager em) {
-		super(Resource.class, em);
+	public RoleMenuRepository(EntityManager em) {
+		super(RoleMenu.class, em);
 	}
 
 }

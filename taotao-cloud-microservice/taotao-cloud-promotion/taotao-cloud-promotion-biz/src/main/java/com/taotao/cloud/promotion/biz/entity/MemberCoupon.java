@@ -9,8 +9,11 @@ import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,17 +22,17 @@ import java.util.Date;
 /**
  * 会员优惠券实体类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_member_coupon")
-@ApiModel(value = "会员优惠券")
-public class MemberCoupon extends BaseEntity {
+@Entity
+@Table(name = MemberCoupon.TABLE_NAME)
+@TableName(MemberCoupon.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberCoupon.TABLE_NAME, comment = "会员优惠券")
+public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
 
-    private static final long serialVersionUID = -7290310311125273760L;
-
+	public static final String TABLE_NAME = "li_member_coupon";
+	
     @ApiModelProperty(value = "从哪个模版领取的优惠券")
     private String couponId;
 

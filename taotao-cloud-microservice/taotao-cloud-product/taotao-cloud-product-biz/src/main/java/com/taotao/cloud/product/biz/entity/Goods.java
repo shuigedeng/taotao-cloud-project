@@ -11,9 +11,12 @@ import cn.lili.modules.goods.entity.enums.GoodsStatusEnum;
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.xkcoding.http.util.StringUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
@@ -27,16 +30,16 @@ import java.util.Map;
 /**
  * 商品
  *
- * @author pikachu
+ * 
  * @since 2020-02-23 9:14:33
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@TableName("li_goods")
-@ApiModel(value = "商品")
-public class Goods extends BaseEntity {
+@Entity
+@Table(name = Goods.TABLE_NAME)
+@TableName(Goods.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Goods.TABLE_NAME, comment = "商品")
+public class Goods extends BaseSuperEntity<Goods, Long> {
 
-    private static final long serialVersionUID = 370683495251252601L;
+	public static final String TABLE_NAME = "li_goods";
 
     @ApiModelProperty(value = "商品名称")
     @NotEmpty(message = "商品名称不能为空")

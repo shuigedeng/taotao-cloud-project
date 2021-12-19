@@ -13,29 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.api.bo.resource;
+package com.taotao.cloud.sys.api.bo.menu;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 资源查询对象
+ * 菜单查询对象
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 15:27:42
  */
-public record ResourceBO(
+public record MenuBO(
 	/**
 	 * id
 	 */
 	Long id,
 	/**
-	 * 资源名称
+	 * 菜单名称
 	 */
 	String name,
 	/**
-	 * 资源类型 1：目录 2：菜单 3：按钮
+	 * 菜单类型 1：目录 2：菜单 3：按钮
 	 */
 	int type,
 	/**

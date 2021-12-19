@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.api.dto.resource;
+package com.taotao.cloud.sys.api.dto.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

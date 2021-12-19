@@ -1,131 +1,115 @@
 package com.taotao.cloud.store.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.store.entity.dto.AdminStoreApplyDTO;
-import cn.lili.modules.store.entity.enums.StoreStatusEnum;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 店铺
  *
- * @author pikachu
+ * 
  * @since 2020-02-18 15:18:56
  */
-@Data
-@TableName("li_store")
-@ApiModel(value = "店铺")
-@NoArgsConstructor
-public class Store extends BaseEntity {
+@Entity
+@Table(name = Store.TABLE_NAME)
+@TableName(Store.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Store.TABLE_NAME, comment = "店铺表")
+public class Store extends BaseSuperEntity<Store, Long> {
 
-    private static final long serialVersionUID = -5861767726387892272L;
+	public static final String TABLE_NAME = "li_store";
 
-    @ApiModelProperty(value = "会员Id")
-    private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员Id'")
+	private String memberId;
 
-    @ApiModelProperty(value = "会员名称")
-    private String memberName;
+	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(64) not null comment '会员名称'")
+	private String memberName;
 
-    @ApiModelProperty(value = "店铺名称")
-    private String storeName;
+	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(64) not null comment '店铺名称'")
+	private String storeName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "店铺关闭时间")
-    private Date storeEndTime;
+	@Column(name = "store_end_time", columnDefinition = "TIMESTAMP comment '店铺关闭时间'")
+	private LocalDateTime storeEndTime;
 
-    /**
-     * @see StoreStatusEnum
-     */
-    @ApiModelProperty(value = "店铺状态")
-    private String storeDisable;
+	/**
+	 * @see StoreStatusEnum
+	 */
+	@Column(name = "store_disable", nullable = false, columnDefinition = "varchar(64) not null comment '店铺状态'")
+	private String storeDisable;
 
-    @ApiModelProperty(value = "是否自营")
-    private Boolean selfOperated;
+	@Column(name = "self_operated", nullable = false, columnDefinition = "boolean not null default true comment '是否自营'")
+	private Boolean selfOperated;
 
-    @ApiModelProperty(value = "店铺logo")
-    private String storeLogo;
+	@Column(name = "store_logo", nullable = false, columnDefinition = "varchar(64) not null comment '店铺logo'")
+	private String storeLogo;
 
-    @ApiModelProperty(value = "经纬度")
-    @NotEmpty
-    private String storeCenter;
+	@Column(name = "store_center", nullable = false, columnDefinition = "varchar(64) not null comment '经纬度'")
+	private String storeCenter;
 
-    @Size(min = 6, max = 200, message = "店铺简介需在6-200字符之间")
-    @NotBlank(message = "店铺简介不能为空")
-    @ApiModelProperty(value = "店铺简介")
-    private String storeDesc;
+	@Column(name = "store_desc", nullable = false, columnDefinition = "varchar(64) not null comment '店铺简介'")
+	private String storeDesc;
 
-    @ApiModelProperty(value = "地址名称， '，'分割")
-    private String storeAddressPath;
+	@Column(name = "store_address_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+	private String storeAddressPath;
 
-    @ApiModelProperty(value = "地址id，'，'分割 ")
-    private String storeAddressIdPath;
+	@Column(name = "store_address_id_path", nullable = false, columnDefinition = "varchar(64) not null comment '地址id 逗号分割 '")
+	private String storeAddressIdPath;
 
-    @ApiModelProperty(value = "详细地址")
-    private String storeAddressDetail;
+	@Column(name = "store_address_detail", nullable = false, columnDefinition = "varchar(64) not null comment '详细地址'")
+	private String storeAddressDetail;
 
-    @ApiModelProperty(value = "描述评分")
-    private Double descriptionScore;
+	@Column(name = "description_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '描述评分'")
+	private BigDecimal descriptionScore;
 
-    @ApiModelProperty(value = "服务评分")
-    private Double serviceScore;
+	@Column(name = "service_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '服务评分'")
+	private BigDecimal serviceScore;
 
-    @ApiModelProperty(value = "物流描述")
-    private Double deliveryScore;
+	@Column(name = "delivery_score", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '交付分数'")
+	private BigDecimal deliveryScore;
 
-    @ApiModelProperty(value = "商品数量")
-    private Integer goodsNum;
+	@Column(name = "goods_num", nullable = false, columnDefinition = "int not null default 0 comment '商品数量'")
+	private Integer goodsNum;
 
-    @ApiModelProperty(value = "收藏数量")
-    private Integer collectionNum;
+	@Column(name = "collection_num", nullable = false, columnDefinition = "int not null default 0 comment '收藏数量'")
+	private Integer collectionNum;
 
-    @ApiModelProperty(value = "腾讯云智服唯一标识")
-    private String yzfSign;
+	@Column(name = "yzf_sign", nullable = false, columnDefinition = "varchar(64) not null comment '腾讯云智服唯一标识'")
+	private String yzfSign;
 
-    @ApiModelProperty(value = "腾讯云智服小程序唯一标识")
-    private String yzfMpSign;
+	@Column(name = "yzf_mp_sign", nullable = false, columnDefinition = "varchar(64) not null comment '腾讯云智服小程序唯一标识'")
+	private String yzfMpSign;
 
 
-    @ApiModelProperty(value = "udesk IM标识")
-    private String merchantEuid;
+	@Column(name = "merchant_euid", nullable = false, columnDefinition = "varchar(64) not null comment 'udesk IM标识'")
+	private String merchantEuid;
 
-
-    public Store(Member member) {
-        this.memberId = member.getId();
-        this.memberName = member.getUsername();
-        storeDisable = StoreStatusEnum.APPLY.value();
-        selfOperated = false;
-        deliveryScore = 5.0;
-        serviceScore = 5.0;
-        descriptionScore = 5.0;
-        goodsNum = 0;
-        collectionNum = 0;
-    }
-
-    public Store(Member member, AdminStoreApplyDTO adminStoreApplyDTO) {
-        BeanUtil.copyProperties(adminStoreApplyDTO, this);
-
-        this.memberId = member.getId();
-        this.memberName = member.getUsername();
-        storeDisable = StoreStatusEnum.APPLYING.value();
-        selfOperated = false;
-        deliveryScore = 5.0;
-        serviceScore = 5.0;
-        descriptionScore = 5.0;
-        goodsNum = 0;
-        collectionNum = 0;
-    }
+	//public Store(Member member) {
+	//    this.memberId = member.getId();
+	//    this.memberName = member.getUsername();
+	//    storeDisable = StoreStatusEnum.APPLY.value();
+	//    selfOperated = false;
+	//    deliveryScore = 5.0;
+	//    serviceScore = 5.0;
+	//    descriptionScore = 5.0;
+	//    goodsNum = 0;
+	//    collectionNum = 0;
+	//}
+	//
+	//public Store(Member member, AdminStoreApplyDTO adminStoreApplyDTO) {
+	//    BeanUtil.copyProperties(adminStoreApplyDTO, this);
+	//
+	//    this.memberId = member.getId();
+	//    this.memberName = member.getUsername();
+	//    storeDisable = StoreStatusEnum.APPLYING.value();
+	//    selfOperated = false;
+	//    deliveryScore = 5.0;
+	//    serviceScore = 5.0;
+	//    descriptionScore = 5.0;
+	//    goodsNum = 0;
+	//    collectionNum = 0;
+	//}
 
 }

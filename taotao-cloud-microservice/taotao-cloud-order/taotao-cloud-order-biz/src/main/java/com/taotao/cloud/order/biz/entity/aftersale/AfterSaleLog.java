@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -19,14 +22,16 @@ import java.util.Date;
 /**
  * 售后日志
  *
- * @author Bulbasaur
+ * 
  * @since 2020-03-25 2:30 下午
  */
-@Data
-@TableName("li_after_sale_log")
-@ApiModel(value = "售后日志")
-@NoArgsConstructor
-public class AfterSaleLog extends BaseIdEntity {
+@Entity
+@Table(name = AfterSaleLog.TABLE_NAME)
+@TableName(AfterSaleLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = AfterSaleLog.TABLE_NAME, comment = "售后日志")
+public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
+
+	public static final String TABLE_NAME = "li_after_sale_log";
 
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)

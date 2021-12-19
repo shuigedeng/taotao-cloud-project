@@ -2,21 +2,27 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 
 
 /**
  * 小程序直播商品
- * @author Bulbasaur
+ * 
  * @since 2021/5/17 9:34 上午
  *
  */
-@Data
-@ApiModel(value = "Commodity", description = "直播商品")
-@TableName("li_commodity")
-public class Commodity extends BaseEntity {
+@Entity
+@Table(name = Commodity.TABLE_NAME)
+@TableName(Commodity.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Commodity.TABLE_NAME, comment = "小程序直播商品")
+public class Commodity extends BaseSuperEntity<Commodity, Long> {
+
+	public static final String TABLE_NAME = "li_commodity";
 
     @ApiModelProperty(value = "图片")
     private String goodsImage;

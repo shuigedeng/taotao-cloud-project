@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 /**
  * 交易
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:34 下午
  */
 @Data

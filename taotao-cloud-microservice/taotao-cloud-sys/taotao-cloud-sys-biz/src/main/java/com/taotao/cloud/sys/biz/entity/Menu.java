@@ -22,31 +22,31 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 资源表
+ * 菜单表
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 21:08:15
  */
 @Entity
-@Table(name = Resource.TABLE_NAME)
-@TableName(Resource.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Resource.TABLE_NAME, comment = "资源表")
-public class Resource extends BaseSuperEntity<Resource,Long> {
+@Table(name = Menu.TABLE_NAME)
+@TableName(Menu.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Menu.TABLE_NAME, comment = "菜单表")
+public class Menu extends BaseSuperEntity<Menu, Long> {
 
-	public static final String TABLE_NAME = "tt_sys_resource";
+	public static final String TABLE_NAME = "tt_sys_menu";
 
 	/**
-	 * 资源名称
+	 * 菜单标题
 	 */
-	@Column(name = "name", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '资源名称'")
+	@Column(name = "name", unique = true, nullable = false, columnDefinition = "varchar(32) not null comment '菜单名称'")
 	private String name;
 
 	/**
 	 * 权限标识
 	 */
-	@Column(name = "perms", columnDefinition = "varchar(255) comment '权限标识'")
-	private String perms;
+	@Column(name = "permission", columnDefinition = "varchar(255) comment '权限标识'")
+	private String permission;
 
 	/**
 	 * 前端path / 即跳转路由
@@ -73,22 +73,30 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 	private String icon;
 
 	/**
+	 * 排序值
+	 */
+	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
+	private Integer sortNum = 0;
+
+	/**
 	 * 是否缓存页面: 0:否 1:是 (默认值0)
 	 */
 	@Column(name = "keep_alive", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
 	private Boolean keepAlive = false;
 
 	/**
-	 * 是否隐藏路由菜单: 0否,1是（默认值0）
+	 * 菜单类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3:三级菜单 4：按钮)
+	 *
+	 * @see com.taotao.cloud.common.enums.ResourceTypeEnum
 	 */
-	@Column(name = "hidden", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
-	private Boolean hidden = false;
+	@Column(name = "type", nullable = false, columnDefinition = "int not null comment '菜单类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)'")
+	private Integer type = 1;
 
 	/**
-	 * 聚合路由 0否,1是（默认值0）
+	 * 是否隐藏路由菜单: 0否,1是（默认值0）
 	 */
-	@Column(name = "always_show", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '聚合路由 0否,1是（默认值0)'")
-	private Boolean alwaysShow = false;
+	@Column(name = "hidden", nullable = false, columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
+	private Boolean hidden = false;
 
 	/**
 	 * 重定向
@@ -97,24 +105,10 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 	private String redirect;
 
 	/**
-	 * 是否为外链 0否,1是（默认值0）
+	 * 是否为外链
 	 */
-	@Column(name = "is_frame", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否为外链 0否,1是（默认值0)'")
-	private Boolean isFrame = false;
-
-	/**
-	 * 排序值
-	 */
-	@Column(name = "sort_num", columnDefinition = "int(11) not null default 0 comment '排序值'")
-	private Integer sortNum = 0;
-
-	/**
-	 * 资源类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)
-	 *
-	 * @see com.taotao.cloud.common.enums.ResourceTypeEnum
-	 */
-	@Column(name = "type", nullable = false, columnDefinition = "tinyint(1) unsigned not null default 1 comment '资源类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)'")
-	private byte type = 1;
+	@Column(name = "target", nullable = false, columnDefinition = "varchar(32) comment '是否为外链'")
+	private String target;
 
 	/**
 	 * 租户id
@@ -130,13 +124,6 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 		this.name = name;
 	}
 
-	public String getPerms() {
-		return perms;
-	}
-
-	public void setPerms(String perms) {
-		this.perms = perms;
-	}
 
 	public String getPath() {
 		return path;
@@ -186,13 +173,6 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 		this.hidden = hidden;
 	}
 
-	public Boolean getAlwaysShow() {
-		return alwaysShow;
-	}
-
-	public void setAlwaysShow(Boolean alwaysShow) {
-		this.alwaysShow = alwaysShow;
-	}
 
 	public String getRedirect() {
 		return redirect;
@@ -202,13 +182,6 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 		this.redirect = redirect;
 	}
 
-	public Boolean getFrame() {
-		return isFrame;
-	}
-
-	public void setFrame(Boolean frame) {
-		isFrame = frame;
-	}
 
 	public Integer getSortNum() {
 		return sortNum;
@@ -218,13 +191,6 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 		this.sortNum = sortNum;
 	}
 
-	public byte getType() {
-		return type;
-	}
-
-	public void setType(byte type) {
-		this.type = type;
-	}
 
 	public String getTenantId() {
 		return tenantId;
@@ -234,26 +200,29 @@ public class Resource extends BaseSuperEntity<Resource,Long> {
 		this.tenantId = tenantId;
 	}
 
-	public Resource() {
+	public String getPermission() {
+		return permission;
 	}
 
-	public Resource(String name, String perms, String path, String component,
-		Long parentId, String icon, Boolean keepAlive, Boolean hidden, Boolean alwaysShow,
-		String redirect, Boolean isFrame, Integer sortNum, byte type, String tenantId) {
-		this.name = name;
-		this.perms = perms;
-		this.path = path;
-		this.component = component;
-		this.parentId = parentId;
-		this.icon = icon;
-		this.keepAlive = keepAlive;
-		this.hidden = hidden;
-		this.alwaysShow = alwaysShow;
-		this.redirect = redirect;
-		this.isFrame = isFrame;
-		this.sortNum = sortNum;
-		this.type = type;
-		this.tenantId = tenantId;
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
 }
 

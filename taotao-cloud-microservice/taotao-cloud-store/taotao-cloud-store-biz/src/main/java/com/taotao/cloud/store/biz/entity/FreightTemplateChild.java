@@ -1,44 +1,46 @@
 package com.taotao.cloud.store.biz.entity;
 
-import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
  * 运费模板子配置
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 4:27 下午
  */
-@Data
-@TableName("li_freight_template_child")
-@ApiModel(value = "运费模板子配置")
-public class FreightTemplateChild extends BaseEntity {
+@Entity
+@Table(name = FreightTemplateChild.TABLE_NAME)
+@TableName(FreightTemplateChild.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = FreightTemplateChild.TABLE_NAME, comment = "运费模板子配置表")
+public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, Long> {
 
-    private static final long serialVersionUID = -5043707833032504674L;
+	public static final String TABLE_NAME = "li_freight_template_child";
 
-    @ApiModelProperty(value = "店铺模板ID")
-    private String freightTemplateId;
+	@Column(name = "freight_template_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺模板ID'")
+	private String freightTemplateId;
 
-    @ApiModelProperty(value = "首重/首件")
-    private Double firstCompany;
+	@Column(name = "first_company", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '首重/首件'")
+	private BigDecimal firstCompany;
 
-    @ApiModelProperty(value = "运费")
-    private Double firstPrice;
+	@Column(name = "first_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '运费'")
+	private BigDecimal firstPrice;
 
-    @ApiModelProperty(value = "续重/续件")
-    private Double continuedCompany;
+	@Column(name = "continued_company", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '续重/续件'")
+	private BigDecimal continuedCompany;
 
-    @ApiModelProperty(value = "续费")
-    private Double continuedPrice;
+	@Column(name = "continued_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '续费'")
+	private BigDecimal continuedPrice;
 
-    @ApiModelProperty(value = "地址，示例参数：上海,江苏,浙江")
-    private String area;
+	@Column(name = "area", nullable = false, columnDefinition = "varchar(32) not null comment '地址，示例参数：上海,江苏,浙江'")
+	private String area;
 
-    @ApiModelProperty(value = "地区ID，示例参数：1,2,3,4")
-    private String areaId;
+	@Column(name = "area_id", nullable = false, columnDefinition = "varchar(32) not null comment '地区ID，示例参数：1,2,3,4'")
+	private String areaId;
 
 }

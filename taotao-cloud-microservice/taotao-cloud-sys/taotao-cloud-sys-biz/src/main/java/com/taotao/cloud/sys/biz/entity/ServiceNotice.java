@@ -10,7 +10,7 @@ import javax.persistence.Table;
 /**
  * 服务订阅消息
  *
- * @author Chopper
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Entity

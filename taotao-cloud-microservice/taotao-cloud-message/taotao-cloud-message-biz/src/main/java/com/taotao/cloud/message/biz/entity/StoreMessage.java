@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * 店铺接收消息对象
  *
- * @author Chopper
+ * 
  * @since 2021/1/30 4:13 下午
  */
 @Data

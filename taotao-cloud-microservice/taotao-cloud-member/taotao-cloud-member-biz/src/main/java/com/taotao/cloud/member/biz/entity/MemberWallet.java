@@ -10,7 +10,7 @@ import lombok.Data;
 /**
  * 会员预存款
  *
- * @author pikachu
+ * 
  * @since 2020-02-25 14:10:16
  */
 @Data

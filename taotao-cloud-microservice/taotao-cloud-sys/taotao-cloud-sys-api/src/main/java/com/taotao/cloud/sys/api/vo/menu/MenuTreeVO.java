@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.api.vo.resource;
+package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2020/5/14 10:44
  */
 @Schema(description = "菜单树VO")
-public record MenuTreeVo(
+public record MenuTreeVO(
 	@Schema(description = "对应SysDepart中的id字段,前端数据树中的key")
 	Long key,
 
@@ -43,7 +43,7 @@ public record MenuTreeVo(
 	Integer level,
 
 	@Schema(description = "children")
-	List<MenuTreeVo> children) {
+	List<MenuTreeVO> children) {
 
 	static final long serialVersionUID = 1L;
 

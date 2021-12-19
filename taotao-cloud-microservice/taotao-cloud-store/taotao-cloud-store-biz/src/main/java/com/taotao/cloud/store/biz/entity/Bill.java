@@ -1,121 +1,99 @@
 package com.taotao.cloud.store.biz.entity;
 
-import cn.lili.modules.store.entity.enums.BillStatusEnum;
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 结算单
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 4:27 下午
  */
-@Data
-@TableName("li_bill")
-@ApiModel(value = "结算单")
-public class Bill extends BaseIdEntity {
+@Entity
+@Table(name = Bill.TABLE_NAME)
+@TableName(Bill.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Bill.TABLE_NAME, comment = "结算清单表")
+public class Bill extends BaseSuperEntity<Bill, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "tt_sys_bill";
 
+	@Column(name = "sn", nullable = false, columnDefinition = "varchar(64) not null comment '账单号'")
+	private String sn;
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	@Column(name = "create_time", columnDefinition = "TIMESTAMP comment '结算开始时间'")
+	private LocalDateTime startTime;
 
-    @ApiModelProperty(value = "账单号")
-    private String sn;
+	@Column(name = "end_time", columnDefinition = "TIMESTAMP comment '结算结束时间'")
+	private LocalDateTime endTime;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "结算开始时间")
-    private Date startTime;
+	/**
+	 * @see BillStatusEnum
+	 */
+	@Column(name = "bill_status", nullable = false, columnDefinition = "varchar(32) not null comment '状态：OUT(已出账),CHECK(已对账),EXAMINE(已审核),PAY(已付款)'")
+	private String billStatus;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "结算结束时间")
-    private Date endTime;
+	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺id'")
+	private String storeId;
 
+	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(32) not null comment '店铺名称'")
+	private String storeName;
 
-    /**
-     * @see BillStatusEnum
-     */
-    @ApiModelProperty(value = "状态：OUT(已出账),CHECK(已对账),EXAMINE(已审核),PAY(已付款)")
-    private String billStatus;
+	@Column(name = "pay_time", columnDefinition = "TIMESTAMP comment '平台付款时间'")
+	private LocalDateTime payTime;
 
-    @ApiModelProperty(value = "店铺id")
-    private String storeId;
+	@Column(name = "bank_account_name", nullable = false, columnDefinition = "varchar(32) not null comment '银行开户名'")
+	private String bankAccountName;
 
-    @ApiModelProperty(value = "店铺名称")
-    private String storeName;
+	@Column(name = "bank_account_number", nullable = false, columnDefinition = "varchar(32) not null comment '公司银行账号'")
+	private String bankAccountNumber;
 
-    @ApiModelProperty(value = "平台付款时间")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date payTime;
+	@Column(name = "bank_name", nullable = false, columnDefinition = "varchar(32) not null comment '开户银行支行名称'")
+	private String bankName;
 
-    @ApiModelProperty(value = "银行开户名")
-    private String bankAccountName;
+	@Column(name = "bank_code", nullable = false, columnDefinition = "varchar(32) not null comment '支行联行号'")
+	private String bankCode;
 
-    @ApiModelProperty(value = "公司银行账号")
-    private String bankAccountNumber;
+	/**
+	 * 算钱规则 billPrice=orderPrice-refundPrice -commissionPrice+refundCommissionPrice
+	 * -distributionCommission+distributionRefundCommission +siteCouponCommission-siteCouponRefundCommission
+	 * +kanjiaSettlementPrice+pointSettlementPrice
+	 */
+	@Column(name = "order_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '结算周期内订单付款总金额'")
+	private BigDecimal orderPrice;
 
-    @ApiModelProperty(value = "开户银行支行名称")
-    private String bankName;
+	@Column(name = "refund_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '退单金额'")
+	private BigDecimal refundPrice;
 
-    @ApiModelProperty(value = "支行联行号")
-    private String bankCode;
+	@Column(name = "commission_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '平台收取佣金'")
+	private BigDecimal commissionPrice;
 
-    /**
-     * 开始算钱啦
-     * billPrice=orderPrice-refundPrice
-     * -commissionPrice+refundCommissionPrice
-     * -distributionCommission+distributionRefundCommission
-     * +siteCouponCommission-siteCouponRefundCommission
-     * +kanjiaSettlementPrice+pointSettlementPrice
-     */
-    @ApiModelProperty(value = "结算周期内订单付款总金额")
-    private Double orderPrice;
+	@Column(name = "refund_commission_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '退单产生退还佣金金额'")
+	private BigDecimal refundCommissionPrice;
 
-    @ApiModelProperty(value = "退单金额")
-    private Double refundPrice;
+	@Column(name = "distribution_commission", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '分销返现支出'")
+	private BigDecimal distributionCommission;
 
-    @ApiModelProperty(value = "平台收取佣金")
-    private Double commissionPrice;
+	@Column(name = "distribution_refund_commission", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '分销订单退还，返现佣金返还'")
+	private BigDecimal distributionRefundCommission;
 
-    @ApiModelProperty(value = "退单产生退还佣金金额")
-    private Double refundCommissionPrice;
+	@Column(name = "site_coupon_commission", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '平台优惠券补贴'")
+	private BigDecimal siteCouponCommission;
 
-    @ApiModelProperty(value = "分销返现支出")
-    private Double distributionCommission;
+	@Column(name = "site_coupon_refund_commission", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '退货平台优惠券补贴返还'")
+	private BigDecimal siteCouponRefundCommission;
 
-    @ApiModelProperty(value = "分销订单退还，返现佣金返还")
-    private Double distributionRefundCommission;
+	@Column(name = "point_settlement_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '积分商品结算价格'")
+	private BigDecimal pointSettlementPrice;
 
-    @ApiModelProperty(value = "平台优惠券补贴")
-    private Double siteCouponCommission;
+	@Column(name = "kanjia_settlement_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '砍价商品结算价格'")
+	private BigDecimal kanjiaSettlementPrice;
 
-    @ApiModelProperty(value = "退货平台优惠券补贴返还")
-    private Double siteCouponRefundCommission;
-
-    @ApiModelProperty(value = "积分商品结算价格")
-    private Double pointSettlementPrice;
-
-    @ApiModelProperty(value = "砍价商品结算价格")
-    private Double kanjiaSettlementPrice;
-
-    @ApiModelProperty(value = "最终结算金额")
-    private Double billPrice;
-
+	@Column(name = "bill_price", nullable = false, columnDefinition = "decimal(10,2) not null default 0 comment '最终结算金额'")
+	private BigDecimal billPrice;
 
 }

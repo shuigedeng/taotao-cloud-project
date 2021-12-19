@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * 采购单子内容
  *
- * @author Bulbasaur
+ * 
  * @since 2020/11/26 19:32
  */
 @Data

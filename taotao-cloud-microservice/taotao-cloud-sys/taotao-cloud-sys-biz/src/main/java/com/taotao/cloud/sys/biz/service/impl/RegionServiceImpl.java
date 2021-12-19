@@ -71,7 +71,7 @@ public class RegionServiceImpl extends
 		LambdaQueryWrapper<Region> wrapper = new LambdaQueryWrapper<>();
 		wrapper.eq(Region::getParentId, 1);
 
-		// 得到一级节点资源列表
+		// 得到一级节点菜单列表
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
 		List<RegionParentVO> vos = new ArrayList<>();
 		if (CollectionUtil.isNotEmpty(sysRegions)) {

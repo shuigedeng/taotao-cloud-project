@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.sys.api.bo.resource.ResourceQueryBO;
+import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 
 /**
  * 后台部门表服务接口
@@ -11,5 +11,5 @@ import com.taotao.cloud.sys.api.bo.resource.ResourceQueryBO;
  * @since 1.0
  */
 public interface IDubboCompanyService {
-	ResourceQueryBO queryAllId(Long id);
+	MenuQueryBO queryAllId(Long id);
 }

@@ -2,8 +2,11 @@ package com.taotao.cloud.product.biz.entity;
 
 import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,13 +17,14 @@ import lombok.NoArgsConstructor;
  * @author paulG
  * @since 2020/10/15
  */
-@Data
-@TableName("li_goods_words")
-@ApiModel(value = "商品关键字")
-@NoArgsConstructor
-public class GoodsWords extends BaseEntity {
+@Entity
+@Table(name = GoodsWords.TABLE_NAME)
+@TableName(GoodsWords.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = GoodsWords.TABLE_NAME, comment = "商品关键字")
+public class GoodsWords extends BaseSuperEntity<GoodsWords, Long> {
 
-    private static final long serialVersionUID = 5709806638518675229L;
+	public static final String TABLE_NAME = "li_goods_words";
+
 
     /**
      * 商品关键字

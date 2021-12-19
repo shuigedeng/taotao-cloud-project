@@ -20,7 +20,7 @@
  * @ Apache-2.0
  */
 
-package com.taotao.cloud.sys.api.vo.resource;
+package com.taotao.cloud.sys.api.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
