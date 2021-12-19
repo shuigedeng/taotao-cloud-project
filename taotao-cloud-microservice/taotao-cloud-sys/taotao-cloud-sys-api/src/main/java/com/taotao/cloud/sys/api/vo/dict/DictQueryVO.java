@@ -54,7 +54,6 @@ public record DictQueryVO(
 	@Schema(description = "最后修改时间")
 	LocalDateTime lastModifiedTime) implements Serializable {
 
-	@Serial
 	static final long serialVersionUID = 5126530068827085130L;
 
 
