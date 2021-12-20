@@ -85,11 +85,11 @@ public class Menu extends BaseSuperEntity<Menu, Long> {
 	private Boolean keepAlive = false;
 
 	/**
-	 * 菜单类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3:三级菜单 4：按钮)
+	 * 菜单类型 (1:目录 2:菜单 3：按钮)
 	 *
-	 * @see com.taotao.cloud.common.enums.ResourceTypeEnum
+	 * @see com.taotao.cloud.sys.api.enums.MenuTypeEnum
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "int not null comment '菜单类型 (1:一级(左侧)菜单 2:二级(顶部)菜单 3：按钮)'")
+	@Column(name = "type", nullable = false, columnDefinition = "int not null comment '菜单类型 (1:目录 2:菜单 3：按钮)'")
 	private Integer type = 1;
 
 	/**

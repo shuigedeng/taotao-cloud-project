@@ -66,17 +66,6 @@ public class Job extends BaseSuperEntity<Job,Long> {
 	@Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
 	private String tenantId;
 
-	public Job() {
-	}
-
-	public Job(String name, Long deptId, String remark, Integer sortNum, String tenantId) {
-		this.name = name;
-		this.deptId = deptId;
-		this.remark = remark;
-		this.sortNum = sortNum;
-		this.tenantId = tenantId;
-	}
-
 	public String getName() {
 		return name;
 	}

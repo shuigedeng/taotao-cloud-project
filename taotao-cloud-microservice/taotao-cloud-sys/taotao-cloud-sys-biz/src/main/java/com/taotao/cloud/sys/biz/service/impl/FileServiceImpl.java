@@ -2,29 +2,32 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.dfs.biz.entity.File;
-import com.taotao.cloud.dfs.biz.repository.FileSuperRepository;
-import com.taotao.cloud.dfs.biz.service.IFileService;
-import com.taotao.cloud.file.service.UploadFileService;
-import com.taotao.cloud.file.exception.UploadFileException;
-import com.taotao.cloud.file.model.UploadFileInfo;
+import com.taotao.cloud.oss.exception.UploadFileException;
+import com.taotao.cloud.oss.model.UploadFileInfo;
+import com.taotao.cloud.oss.service.UploadFileService;
+import com.taotao.cloud.sys.biz.entity.File;
+import com.taotao.cloud.sys.biz.mapper.IFileMapper;
+import com.taotao.cloud.sys.biz.repository.cls.FileRepository;
+import com.taotao.cloud.sys.biz.repository.inf.IFileRepository;
+import com.taotao.cloud.sys.biz.service.IFileService;
+import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Optional;
 
 /**
  * 文件上传服务
  *
  * @author shuigedeng
- * @since 2020/11/12 17:43
  * @version 1.0.0
+ * @since 2020/11/12 17:43
  */
 @Service
-public class FileServiceImpl implements IFileService {
-	@Autowired
-	private FileSuperRepository fileRepository;
+public class FileServiceImpl extends
+	BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
+	implements IFileService {
+
 	@Autowired
 	private UploadFileService uploadFileService;
 
@@ -42,7 +45,7 @@ public class FileServiceImpl implements IFileService {
 
 	@Override
 	public File findFileById(Long id) {
-		Optional<File> optionalFile = fileRepository.findById(id);
+		Optional<File> optionalFile = ir().findById(id);
 		return optionalFile.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
 	}
 	//
