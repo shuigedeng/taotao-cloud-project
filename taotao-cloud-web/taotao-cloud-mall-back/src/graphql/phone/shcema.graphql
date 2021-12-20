@@ -1,5 +1,0 @@
-type Phone {
-
-  # 号码
-  number: ID
-}
