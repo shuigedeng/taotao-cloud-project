@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.api.vo.menu;
 
+import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
+@RecordBuilder
 @Schema(description = "菜单树VO")
 public record MenuTreeVO(
 	@Schema(description = "对应SysDepart中的id字段,前端数据树中的key")
@@ -41,6 +43,17 @@ public record MenuTreeVO(
 
 	@Schema(description = "菜单等级")
 	Integer level,
+
+	String label,
+	String perms,
+	String icon,
+	Boolean hasChildren,
+	Boolean keepAlive,
+
+
+
+	@Schema(description = "前端path / 即跳转路由")
+	String path,
 
 	@Schema(description = "children")
 	List<MenuTreeVO> children) {

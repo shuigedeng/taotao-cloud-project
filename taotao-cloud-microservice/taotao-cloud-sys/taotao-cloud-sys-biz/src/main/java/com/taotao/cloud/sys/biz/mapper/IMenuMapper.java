@@ -17,6 +17,8 @@ package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.entity.Menu;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import java.util.List;
+import java.util.Set;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -29,4 +31,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IMenuMapper extends BaseSuperMapper<Menu, Long> {
 
+	List<Menu> findMenuByRoleIds(Set<Long> roleIds);
+
+	List<Long> selectIdList(List<Long> pidList);
 }

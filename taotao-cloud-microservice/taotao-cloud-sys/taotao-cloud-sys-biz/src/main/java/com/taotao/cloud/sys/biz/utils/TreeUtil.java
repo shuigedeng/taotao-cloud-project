@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.utils;
 
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.api.vo.menu.MenuTreeVOBuilder;
 import com.taotao.cloud.sys.api.vo.menu.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,26 +111,29 @@ public class TreeUtil {
 	 * @version 1.0.0
 	 * @since 2020/10/21 11:23
 	 */
-	public static List<MenuTreeVO> buildTree(List<MenuBO> resources, Long parentId) {
+	public static List<MenuTreeVO> buildTree(List<MenuBO> menus, Long parentId) {
 		List<MenuTreeVO> trees = new ArrayList<>();
 		MenuTreeVO node;
-		for (MenuBO resource : resources) {
-			node = new MenuTreeVO();
-			node.setId(resource.id());
-			node.setParentId(resource.parentId());
-			node.setName(resource.name());
-			node.setPath(resource.path());
-			node.setPerms(resource.perms());
-			node.setLabel(resource.name());
-			node.setIcon(resource.icon());
-			node.setType(resource.type());
-			node.setSort(resource.sortNum());
-			node.setHasChildren(false);
-			node.setChildren(new ArrayList<>());
-			node.setKeepAlive(resource.keepAlive());
+		for (MenuBO menu : menus) {
+			node = MenuTreeVOBuilder.builder()
+				.menuId(menu.id().intValue())
+				.parentMenuId(menu.parentId().intValue())
+				.name(menu.name())
+				.type(menu.type())
+				.sort(menu.sortNum())
+				.children(new ArrayList<>())
+				.keepAlive(menu.keepAlive())
+				.hasChildren(false)
+				.path(menu.path())
+				.perms(menu.perms())
+				.label(menu.name())
+				.icon(menu.icon())
+				.build();
+
 			trees.add(node);
 		}
-		return TreeUtil.build(trees, parentId);
+		return null;
+		//return TreeUtil.build(trees, parentId);
 	}
 
 }

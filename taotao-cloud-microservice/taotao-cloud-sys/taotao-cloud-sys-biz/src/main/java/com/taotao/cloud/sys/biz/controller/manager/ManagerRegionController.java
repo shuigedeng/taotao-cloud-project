@@ -23,7 +23,6 @@ import com.taotao.cloud.sys.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionQueryVO;
 import com.taotao.cloud.sys.biz.entity.Region;
-import com.taotao.cloud.sys.biz.entity.SysRegion;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +64,7 @@ public class ManagerRegionController extends
 	@GetMapping("/parentId/{parentId}")
 	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
-		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
+		@Parameter(description = "父id") @NotNull(message = "父id不能为空")
 		@PathVariable(name = "parentId") Long parentId) {
 		List<RegionParentVO> result = service().queryRegionByParentId(parentId);
 		return Result.success(result);

@@ -3,12 +3,12 @@ package com.taotao.cloud.sys.biz.controller.manager;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.dfs.api.vo.FileVO;
-import com.taotao.cloud.dfs.api.vo.UploadFileVO;
-import com.taotao.cloud.dfs.biz.entity.File;
-import com.taotao.cloud.dfs.biz.mapper.FileMapper;
-import com.taotao.cloud.dfs.biz.service.IFileService;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.sys.api.vo.file.FileVO;
+import com.taotao.cloud.sys.api.vo.file.UploadFileVO;
+import com.taotao.cloud.sys.biz.entity.File;
+import com.taotao.cloud.sys.biz.mapstruct.IFileMapStruct;
+import com.taotao.cloud.sys.biz.service.IFileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
@@ -34,14 +34,14 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Validated
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/general/file")
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
-	private final IFileService IFileService;
+	private final IFileService fileService;
 
-	public ManagerFileController(IFileService IFileService) {
-		this.IFileService = IFileService;
+	public ManagerFileController(IFileService fileService) {
+		this.fileService = fileService;
 	}
 
 	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
@@ -52,10 +52,10 @@ public class ManagerFileController {
 		if (file.isEmpty()) {
 			throw new BusinessException("文件不能为空");
 		}
-		File upload = IFileService.upload(file);
-		//UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
-		//	.build();
-		return Result.success(null);
+		File upload = fileService.upload(file);
+		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
+			.build();
+		return Result.success(result);
 	}
 
 	@Operation(summary = "上传多个文件", description = "上传多个文件", method = CommonConstant.POST)
@@ -69,7 +69,7 @@ public class ManagerFileController {
 		}
 
 		List<File> uploads = Arrays.stream(files)
-			.map(IFileService::upload)
+			.map(fileService::upload)
 			.collect(Collectors.toList());
 
 		if (!CollectionUtils.isEmpty(uploads)) {
@@ -87,8 +87,8 @@ public class ManagerFileController {
 	@PreAuthorize("hasAuthority('file:info:id')")
 	@GetMapping("/info/id/{id:[0-9]*}")
 	public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
-		File file = IFileService.findFileById(id);
-		FileVO vo = FileMapper.INSTANCE.fileToFileVO(file);
+		File file = fileService.findFileById(id);
+		FileVO vo = IFileMapStruct.INSTANCE.fileToFileVO(file);
 		return Result.success(vo);
 	}
 

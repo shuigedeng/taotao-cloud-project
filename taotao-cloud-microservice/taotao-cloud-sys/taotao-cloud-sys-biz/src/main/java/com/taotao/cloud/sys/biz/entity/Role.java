@@ -96,10 +96,5 @@ public class Role extends BaseSuperEntity<Role,Long> {
 	public Role() {
 	}
 
-	public Role(String name, String code, String remark, String tenantId) {
-		this.name = name;
-		this.code = code;
-		this.remark = remark;
-		this.tenantId = tenantId;
-	}
+
 }

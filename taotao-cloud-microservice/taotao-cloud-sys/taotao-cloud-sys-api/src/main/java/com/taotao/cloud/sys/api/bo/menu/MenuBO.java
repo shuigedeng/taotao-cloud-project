@@ -53,7 +53,7 @@ public record MenuBO(
 	/**
 	 * 父菜单ID
 	 */
-	long parentId,
+	Long parentId,
 	/**
 	 * 图标
 	 */

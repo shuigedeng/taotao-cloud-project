@@ -22,4 +22,11 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 	@Column(name = "setting_value", nullable = false, columnDefinition = "varchar(3660) not null comment '值'")
 	private String settingValue;
 
+	public String getSettingValue() {
+		return settingValue;
+	}
+
+	public void setSettingValue(String settingValue) {
+		this.settingValue = settingValue;
+	}
 }

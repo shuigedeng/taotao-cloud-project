@@ -2,7 +2,6 @@ package com.taotao.cloud.sys.biz.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +11,9 @@ import javax.persistence.Table;
  * 文件表
  *
  * @author shuigedeng
- * @since 2020/11/12 15:33
  * @version 1.0.0
+ * @since 2020/11/12 15:33
  */
-
-
 @Entity
 @Table(name = File.TABLE_NAME)
 @TableName(File.TABLE_NAME)
@@ -24,7 +21,7 @@ import javax.persistence.Table;
 public class File extends BaseSuperEntity<File, Long> {
 
 	public static final String TABLE_NAME = "tt_sys_file";
-	
+
 	/**
 	 * 业务ID
 	 */

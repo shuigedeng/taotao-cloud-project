@@ -37,13 +37,11 @@ import com.taotao.cloud.sys.biz.service.IMenuService;
 import com.taotao.cloud.sys.biz.service.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
-import com.taotao.cloud.web.enums.MenuTypeEnum;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -81,7 +79,7 @@ public class MenuServiceImpl extends
 
 	@Override
 	public List<MenuBO> findMenuByIdList(List<Long> idList) {
-		List<Menu> menus = cr().findMenuByIdList(idList);
+		List<Menu> menus = cr().findAllById(idList);
 		return IMenuMapStruct.INSTANCE.menusToBos(menus);
 	}
 
@@ -99,7 +97,7 @@ public class MenuServiceImpl extends
 
 	@Override
 	public List<MenuBO> findMenuByRoleIds(Set<Long> roleIds) {
-		List<Menu> menus = cr().findMenuByRoleIds(roleIds);
+		List<Menu> menus = im().findMenuByRoleIds(roleIds);
 		return IMenuMapStruct.INSTANCE.menusToBos(menus)
 			.stream()
 			.sorted(Comparator.comparing(MenuBO::id))
@@ -135,7 +133,7 @@ public class MenuServiceImpl extends
 	 * @since 2021-10-09 20:41:41
 	 */
 	public List<Long> recursion(List<Long> pidList, List<Long> sumList) {
-		List<Long> sonIdList = cr().selectIdList(pidList);
+		List<Long> sonIdList = im().selectIdList(pidList);
 		if (sonIdList.size() == 0) {
 			return sumList;
 		}
@@ -147,10 +145,10 @@ public class MenuServiceImpl extends
 	public List<MenuTreeVO> findMenuTree(boolean lazy, Long parentId) {
 		if (!lazy) {
 			List<MenuBO> Menus = findAllMenus();
-			return TreeUtil.buildTree(Menus, CommonConstant.Menu_TREE_ROOT_ID);
+			return TreeUtil.buildTree(Menus, CommonConstant.MENU_TREE_ROOT_ID);
 		}
 
-		Long parent = parentId == null ? CommonConstant.Menu_TREE_ROOT_ID : parentId;
+		Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
 		List<MenuBO> Menus = findMenuByParentId(parent);
 		return TreeUtil.buildTree(Menus, parent);
 	}
@@ -158,12 +156,13 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> MenuVOList,
 		Long parentId) {
-		List<MenuTreeVO> menuTreeList = MenuVOList.stream()
-			.filter(vo -> MenuTypeEnum.LEFT_MENU.getCode() == vo.type())
-			.map(MenuTreeVO::new).sorted(Comparator.comparingInt(MenuTreeVO::getSort))
-			.collect(Collectors.toList());
-		Long parent = parentId == null ? CommonConstant.Menu_TREE_ROOT_ID : parentId;
-		return TreeUtil.build(menuTreeList, parent);
+		//List<MenuTreeVO> menuTreeList = MenuVOList.stream()
+		//	.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
+		//	.map(MenuTreeVO::new).sorted(Comparator.comparingInt(MenuTreeVO::getSort))
+		//	.collect(Collectors.toList());
+		//Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
+		//return TreeUtil.build(menuTreeList, parent);
+		return null;
 	}
 
 	@Override
