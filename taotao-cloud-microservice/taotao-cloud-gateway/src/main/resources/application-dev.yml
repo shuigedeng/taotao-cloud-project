@@ -113,12 +113,12 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
-        - id: taotao-cloud-uc-biz
-          uri: lb://taotao-cloud-uc-biz
+        - id: taotao-cloud-sys-biz
+          uri: lb://taotao-cloud-sys-biz
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/uc/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
           filters:
-            - RewritePath=/uc/(?<path>.*), /uc/$\{path}
+            - RewritePath=/sys/(?<path>.*), /sys/$\{path}
             - StripPrefix=2
             - RequestTime=true
             - PreserveHostHeader
@@ -184,7 +184,7 @@ spring:
       #            - PreserveHostHeader
       #        # 数据重复校验要做接口限制
       #        - id: uc-repeact-check
-      #          uri: lb://taotao-cloud-uc-biz
+      #          uri: lb://taotao-cloud-sys-biz
       #          predicates:
       #            - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
       #          filters:
@@ -197,8 +197,8 @@ spring:
       #            - Path=/v3/api-docs/**
       #          filters:
       #            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-      #        - id: taotao-cloud-uc-biz-service
-      #          uri: lb://taotao-cloud-uc-biz-service
+      #        - id: taotao-cloud-sys-biz-service
+      #          uri: lb://taotao-cloud-sys-biz-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/user/**
       #          filters:

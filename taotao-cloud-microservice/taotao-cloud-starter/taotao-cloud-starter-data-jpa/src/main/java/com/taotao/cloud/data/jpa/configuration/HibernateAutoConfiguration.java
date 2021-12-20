@@ -35,7 +35,6 @@ import com.taotao.cloud.data.jpa.bean.TenantIdentifierResolver;
 import com.taotao.cloud.data.jpa.listener.HibernateInspector;
 import com.taotao.cloud.data.jpa.properties.HibernateProperties;
 import com.taotao.cloud.data.jpa.properties.TenantProperties;
-import com.ulisesbocchio.jasyptspringboot.annotation.ConditionalOnMissingBean;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -54,8 +53,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -69,7 +68,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  */
 @Configuration
 @EnableJpaAuditing
-@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class,JpaProperties.class})
+@EnableConfigurationProperties({TenantProperties.class, HibernateProperties.class,
+	JpaProperties.class})
 @ConditionalOnProperty(prefix = HibernateProperties.PREFIX, name = "enabled", havingValue = "true")
 public class HibernateAutoConfiguration implements InitializingBean {
 
@@ -111,6 +111,12 @@ public class HibernateAutoConfiguration implements InitializingBean {
 		hibernateJpaVendorAdapter.setDatabase(hibernateProperties.getDatabase());
 		return hibernateJpaVendorAdapter;
 	}
+
+	//@Bean
+	//@ConditionalOnBean
+	//public JdbcTemplate jdbcTemplate(final DataSource dataSource) {
+	//	return new JdbcTemplate(dataSource);
+	//}
 
 	@Bean
 	@ConditionalOnBean

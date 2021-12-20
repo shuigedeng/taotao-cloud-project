@@ -2,6 +2,7 @@ package com.taotao.cloud.oauth2.biz.configuration;
 
 import static com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
 
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -11,11 +12,11 @@ import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
+import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
+import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.oauth2.biz.jwt.Jwks;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizer;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
-import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.oauth2.biz.models.CloudUserDetails;
 import com.taotao.cloud.oauth2.biz.models.CloudUserDetailsMixin;
 import com.taotao.cloud.oauth2.biz.models.LongMixin;
@@ -24,7 +25,6 @@ import com.taotao.cloud.oauth2.biz.service.CloudOAuth2AuthorizationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Arrays;
 import java.util.List;
-import com.fasterxml.jackson.databind.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -38,8 +38,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
@@ -185,8 +183,10 @@ public class AuthorizationServerConfiguration {
 		OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();
 
 		OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-			new OAuth2ResourceOwnerPasswordAuthenticationProvider(authenticationManager,
-				authorizationService, jwtEncoder);
+			new OAuth2ResourceOwnerPasswordAuthenticationProvider(
+				authenticationManager,
+				authorizationService,
+				jwtEncoder);
 
 		if (jwtCustomizer != null) {
 			resourceOwnerPasswordAuthenticationProvider.setJwtCustomizer(jwtCustomizer);
@@ -201,23 +201,26 @@ public class AuthorizationServerConfiguration {
 	private void addCustomOAuth2ResourceOwnerMobileAuthenticationProvider(HttpSecurity http) {
 		AuthenticationManager authenticationManager = authentication -> {
 			OAuth2ResourceOwnerMobileAuthenticationToken authenticationToken = (OAuth2ResourceOwnerMobileAuthenticationToken) authentication;
-			String mobile =  authenticationToken.getMobile();
-			Authentication clientPrincipal = (Authentication)authenticationToken.getPrincipal();
+			String mobile = authenticationToken.getMobile();
+			Authentication clientPrincipal = (Authentication) authenticationToken.getPrincipal();
 
 			//调用自定义的userDetailsService认证
-			UserDetailsService userDetailsService = ContextUtil.getBean(UserDetailsService.class, true);
+			UserDetailsService userDetailsService = ContextUtil.getBean(UserDetailsService.class,
+				true);
 			UserDetails userDetails = userDetailsService.loadUserByUsername(mobile);
 
 			OAuth2ResourceOwnerMobileAuthenticationToken authenticationResult
-			 = new OAuth2ResourceOwnerMobileAuthenticationToken(mobile, MOBILE,
-				clientPrincipal, authenticationToken.getScopes(), authenticationToken.getAdditionalParameters(), clientPrincipal.getAuthorities());
+				= new OAuth2ResourceOwnerMobileAuthenticationToken(mobile, MOBILE,
+				clientPrincipal, authenticationToken.getScopes(),
+				authenticationToken.getAdditionalParameters(), clientPrincipal.getAuthorities());
 
 			authenticationResult.setDetails(authenticationToken.getDetails());
 			return authenticationResult;
 		};
 
 		ProviderSettings providerSettings = http.getSharedObject(ProviderSettings.class);
-		OAuth2AuthorizationService authorizationService = http.getSharedObject(OAuth2AuthorizationService.class);
+		OAuth2AuthorizationService authorizationService = http.getSharedObject(
+			OAuth2AuthorizationService.class);
 		JwtEncoder jwtEncoder = http.getSharedObject(JwtEncoder.class);
 
 		OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = buildCustomizer();

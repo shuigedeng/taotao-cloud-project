@@ -11,23 +11,35 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+
+/**
+ * CloudUserDetailsService
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-12-20 16:20:24
+ */
 public class CloudUserDetailsService implements UserDetailsService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CloudUserDetailsService.class);
 
-	@Autowired
-	private CloudAuthAccountRepository cloudAuthAccountRepository;
+	//@Autowired
+	//private CloudAuthAccountRepository cloudAuthAccountRepository;
+
+	//@Autowired
+	//private IFeignMemberService IFeignMemberService;
+	//@Autowired
+	//private IFeignUserService feignUserService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		CloudAuthAccount account = cloudAuthAccountRepository.findFirstByUsername(username);
-
+		//CloudAuthAccount account = cloudAuthAccountRepository.findFirstByUsername(username);
+		CloudAuthAccount account = new CloudAuthAccount();
 		if (Objects.isNull(account)) {
 			LOGGER.debug("Account [{}] not found.", username);
 			throw new UsernameNotFoundException(
 				String.format("Account: [%s] not found.", username));
 		}
-
 
 		return CloudUserDetails.withId(account.getId())
 			.username(account.getUsername())

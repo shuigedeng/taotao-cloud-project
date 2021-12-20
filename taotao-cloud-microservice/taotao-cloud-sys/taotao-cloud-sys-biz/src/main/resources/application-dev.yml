@@ -621,7 +621,7 @@ taotao:
           - kafka
           - logger
     laytpl:
-      enabled: true
+      enabled: false
     kafka:
       enabled: true
     job:

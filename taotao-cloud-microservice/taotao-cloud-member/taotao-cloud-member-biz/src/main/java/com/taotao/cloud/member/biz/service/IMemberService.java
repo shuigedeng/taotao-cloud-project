@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.service;
 
-import com.taotao.cloud.member.api.dto.member.MemberDTO;
-import com.taotao.cloud.member.api.query.member.MemberQuery;
+import com.taotao.cloud.member.api.dto.MemberDTO;
+import com.taotao.cloud.member.api.query.MemberQuery;
 import com.taotao.cloud.member.biz.entity.MemberBack;
 
 /**

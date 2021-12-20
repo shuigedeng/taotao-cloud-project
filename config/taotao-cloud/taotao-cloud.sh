@@ -6,7 +6,7 @@ function start_taotao_cloud() {
 
   /opt/taotao-cloud/script/taotao-cloud-oauth2-server.sh start
   /opt/taotao-cloud/script/taotao-cloud-gateway.sh start
-  /opt/taotao-cloud/script/taotao-cloud-uc.sh start
+  /opt/taotao-cloud/script/taotao-cloud-sys.sh start
   /opt/taotao-cloud/script/taotao-cloud-order.sh start
   /opt/taotao-cloud/script/taotao-cloud-product.sh start
 }

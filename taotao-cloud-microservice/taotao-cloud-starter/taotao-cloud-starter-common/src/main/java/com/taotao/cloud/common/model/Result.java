@@ -16,6 +16,7 @@
 package com.taotao.cloud.common.model;
 
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.IdGeneratorUtil;
@@ -63,6 +64,7 @@ public record Result<T>(
 	 * 请求结束时间
 	 */
 	@Schema(description = "请求结束时间")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	LocalDateTime timestamp) implements Serializable {
 
 	@Serial

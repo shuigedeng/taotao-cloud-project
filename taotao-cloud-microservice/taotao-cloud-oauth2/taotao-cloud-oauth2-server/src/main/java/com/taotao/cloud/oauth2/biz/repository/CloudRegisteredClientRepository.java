@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CloudRegisteredClientRepository extends
-	JpaRepository<CloudRegisteredClient, Long> {
+public interface CloudRegisteredClientRepository extends JpaRepository<CloudRegisteredClient, Long> {
 
 	CloudRegisteredClient findFirstByClientId(String clientId);
 }

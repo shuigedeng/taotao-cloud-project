@@ -142,8 +142,8 @@ jib {
 		mainClass = 'com.taotao.cloud.admin.TaoTaoCloudAdminApplication'
 		args = ['some', 'args']
 		ports = ['33337']
-		//labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
-		environment = ['app_name': 'taotao-cloud-uc', 'port': '33337']
+		//labels = ['app_name': 'taotao-cloud-sys', 'port': '33337']
+		environment = ['app_name': 'taotao-cloud-sys', 'port': '33337']
 		format = 'OCI'
 		user = 'root'
 		volumes = ['/root/logs']

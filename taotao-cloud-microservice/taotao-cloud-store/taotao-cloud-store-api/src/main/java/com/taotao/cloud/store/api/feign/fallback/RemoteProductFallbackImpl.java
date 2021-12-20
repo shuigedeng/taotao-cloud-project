@@ -1,10 +1,10 @@
-package com.taotao.cloud.product.api.feign.fallback;
+package com.taotao.cloud.store.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.product.api.dto.ProductDTO;
-import com.taotao.cloud.product.api.feign.RemoteProductService;
 import com.taotao.cloud.product.api.vo.ProductVO;
+import com.taotao.cloud.store.api.feign.RemoteProductService;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

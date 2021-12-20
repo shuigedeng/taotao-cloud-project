@@ -63,7 +63,6 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 		context);
 	private final Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
 	private ProviderSettings providerSettings;
-	private UserDetailsService userDetailService;
 
 	/**
 	 * Constructs an {@code OAuth2ClientCredentialsAuthenticationProvider} using the provided
@@ -87,14 +86,6 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 	public final void setJwtCustomizer(OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer) {
 		Assert.notNull(jwtCustomizer, "jwtCustomizer cannot be null");
 		this.jwtCustomizer = jwtCustomizer;
-	}
-
-	public UserDetailsService getUserDetailService() {
-		return userDetailService;
-	}
-
-	public void setUserDetailService(UserDetailsService userDetailService) {
-		this.userDetailService = userDetailService;
 	}
 
 	@Autowired(required = false)

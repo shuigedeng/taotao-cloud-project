@@ -16,11 +16,6 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-
 /**
  * ISysDictItemService
  *
@@ -28,5 +23,6 @@ import java.io.Serializable;
  * @version 2021.10
  * @since 2021-10-09 20:32:47
  */
-public interface IDubboDictItemService{
+public interface IDubboDictItemService {
+
 }

@@ -1,6 +1,7 @@
 package com.taotao.cloud.store.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,6 @@ import javax.persistence.Table;
 /**
  * 运费模板
  *
- * 
  * @since 2020/11/17 4:27 下午
  */
 @Entity
@@ -33,4 +33,27 @@ public class FreightTemplate extends BaseSuperEntity<FreightTemplate, Long> {
 	private String pricingMethod;
 
 
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPricingMethod() {
+		return pricingMethod;
+	}
+
+	public void setPricingMethod(String pricingMethod) {
+		this.pricingMethod = pricingMethod;
+	}
 }

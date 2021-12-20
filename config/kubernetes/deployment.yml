@@ -15,10 +15,10 @@
 apiVersion: apps/v1 #版本号 kubectl api-versions
 kind: Deployment #类型 Deployment Service ...
 metadata: # 资源的元数据/属性
-  name: taotao-cloud-uc # 资源的名字，在同一个namespace中必须唯一
+  name: taotao-cloud-sys # 资源的名字，在同一个namespace中必须唯一
   namespace: defalult # 部署在哪个namespace中
   labels: # 设定资源的标签
-    app: taotao-cloud-uc
+    app: taotao-cloud-sys
     version: 2021.12
     kubernetes.io/cluster-service: "true"
 spec: # 资源描述字段
@@ -28,8 +28,8 @@ spec: # 资源描述字段
   revisionHistoryLimit: 10 # 保留历史版本
   selector: # 选择器
     matchLabels: # 匹配标签
-      workload.user.cattle.io/workloadselector: deployment-taotao-cloud-uc
-      app: taotao-cloud-uc
+      workload.user.cattle.io/workloadselector: deployment-taotao-cloud-sys
+      app: taotao-cloud-sys
       version: 2021.12
       kubernetes.io/cluster-service: "true"
   strategy: # 更新策略 更多策略 1.https://www.qikqiak.com/post/k8s-deployment-strategies/
@@ -42,8 +42,8 @@ spec: # 资源描述字段
       annotations: # 自定义注解列表
         sidecar.istio.io/inject: "false" # 自定义注解名字
       labels: # 设定资源的标签
-        workload.user.cattle.io/workloadselector: deployment-taotao-cloud-uc
-        app: taotao-cloud-uc
+        workload.user.cattle.io/workloadselector: deployment-taotao-cloud-sys
+        app: taotao-cloud-sys
         version: 2021.12
         kubernetes.io/cluster-service: "true"
     spec: # 资源规范字段
@@ -118,9 +118,9 @@ spec: # 资源描述字段
             emptyDir: { } #emptyDir 卷的存储介质（磁盘、SSD 等）是由保存 kubelet 数据的根目录 （一般是 /var/lib/kubelet）的文件系统的介质肯定。
 
       containers:
-        - name: taotao-cloud-uc # 容器的名字
+        - name: taotao-cloud-sys # 容器的名字
           # 容器使用的镜像地址
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:taotao-cloud-uc-1.6.0:${CICD_EXECUTION_SEQUENCE}
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-decenter/taotao-cloud:taotao-cloud-sys-1.6.0:${CICD_EXECUTION_SEQUENCE}
           # 每次Pod启动拉取镜像策略，三个选择 Always、Never、IfNotPresent
           # Always，每次都检查；Never，每次都不检查（不管本地是否有）；IfNotPresent，如果本地有就不检查，如果没有就拉取
           imagePullPolicy: Always
@@ -188,9 +188,9 @@ spec: # 资源描述字段
               mount: /tmp/log
             - name: sdb
               mountPath: /data/media
-            - name: taotao-cloud-uc-nfs-client
+            - name: taotao-cloud-sys-nfs-client
               mountPath: /mnt/nfs
-            - name: taotao-cloud-uc-volume-config
+            - name: taotao-cloud-sys-volume-config
               mountPath: /etc/config
             - name: rbd-pvc
           securityContext:
@@ -212,11 +212,11 @@ spec: # 资源描述字段
         path: /opt/taotao/cloud/uc/data
     - name: taotao-cloud-auth-volume-config
       configMap:
-        name: taotao-cloud-uc-volume-config
+        name: taotao-cloud-sys-volume-config
         items:
           - key: log-script
             path: path/to/log-script
-    - name: taotao-cloud-uc-nfs-client
+    - name: taotao-cloud-sys-nfs-client
       nfs:
         server: 10.42.0.55
         path: /opt/public
@@ -229,19 +229,19 @@ spec: # 资源描述字段
 apiVersion: v1
 kind: Service
 matadata:
-  name: taotao-cloud-uc-service
+  name: taotao-cloud-sys-service
   namespace: taotao-cloud-prod
   labels:
-    app: taotao-cloud-uc-service
+    app: taotao-cloud-sys-service
     version: 1.0
     kubernetes.io/cluster-service: "true"
   annotations:
-    app: taotao-cloud-uc-service
+    app: taotao-cloud-sys-service
 spec:
   selector:
-    app: taotao-cloud-uc
+    app: taotao-cloud-sys
   ports:
-    - name: taotao-cloud-uc-service-port
+    - name: taotao-cloud-sys-service-port
       protocol: TCP
       port: 9800
       targetPort: 9800
@@ -258,7 +258,7 @@ spec:
   scaleTargetRef: # 指定需要管理的 Deployment/ReplicaSet 的名字
     apiVersion: apps/v1
     kind: Deployment
-    name: taotao-cloud-uc
+    name: taotao-cloud-sys
   minReplicas: 3  # pod可伸缩最小范围
   maxReplicas: 10 # pod可伸缩最大范围
   metrics:

@@ -12,5 +12,6 @@ import java.util.List;
  * @since 1.0
  */
 public interface IDubboMenuService {
+
 	List<MenuQueryBO> queryAllId(Long id);
 }

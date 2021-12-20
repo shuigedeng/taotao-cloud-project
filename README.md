@@ -166,7 +166,7 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-order  -- order模块
 │  │  ├─taotao-cloud-pay -- pay模块
 │  │  ├─taotao-cloud-product  -- product模块
-│  │  ├─taotao-cloud-uc  -- uc模块
+│  │  ├─taotao-cloud-sys  -- uc模块
 │  │  ├─taotao-cloud-starter  -- starter模块
 │  ├─taotao-cloud-netty -- netty模块
 │  ├─taotao-cloud-offline -- 离线数据分析模块

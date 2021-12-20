@@ -1,121 +1,42 @@
-/*
- * Copyright 2002-2021 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.taotao.cloud.coupon.api.vo;
+package com.taotao.cloud.promotion.api.vo;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import cn.lili.modules.promotion.entity.dos.Coupon;
+import cn.lili.modules.promotion.entity.dos.PromotionGoods;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 /**
- * @author shuigedeng
- * @version 1.0.0
- * @since 2020/11/20 上午9:42
+ * 优惠券视图对象
+ *
+ * @author Chopper
+ * @since 2020/8/14
  */
-@Schema(name = "WithdrawVO", description = "提现申请VO")
-public class CouponVO implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@Data
+@ApiModel(value = "优惠券")
+@ToString(callSuper = true)
+@NoArgsConstructor
+public class CouponVO extends Coupon {
 
-	private static final long serialVersionUID = 5126530068827085130L;
+    private static final long serialVersionUID = 8372420376262437018L;
 
-	@Schema(name = "id")
-	private Long id;
+    /**
+     * 促销关联的商品
+     */
+    @ApiModelProperty(value = "优惠券关联商品集合")
+    private List<PromotionGoods> promotionGoodsList;
 
-	@Schema(description = "申请单号")
-	private String code;
-
-	@Schema(description = "公司ID")
-	private Long companyId;
-
-	@Schema(description = "商城ID")
-	private Long mallId;
-
-	@Schema(description = "提现金额")
-	private BigDecimal amount;
-
-	@Schema(description = "钱包余额")
-	private BigDecimal balanceAmount;
-
-	@Schema(description = "创建时间")
-	private LocalDateTime createTime;
-
-	@Schema(description = "最后修改时间")
-	private LocalDateTime lastModifiedTime;
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public Long getMallId() {
-		return mallId;
-	}
-
-	public void setMallId(Long mallId) {
-		this.mallId = mallId;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public BigDecimal getBalanceAmount() {
-		return balanceAmount;
-	}
-
-	public void setBalanceAmount(BigDecimal balanceAmount) {
-		this.balanceAmount = balanceAmount;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
-	}
+    public CouponVO(Coupon coupon) {
+        if (coupon == null) {
+            return;
+        }
+        BeanUtils.copyProperties(coupon, this);
+    }
 }

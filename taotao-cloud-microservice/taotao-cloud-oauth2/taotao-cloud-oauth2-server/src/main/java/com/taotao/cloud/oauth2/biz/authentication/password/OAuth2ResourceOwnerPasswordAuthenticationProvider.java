@@ -1,5 +1,9 @@
 package com.taotao.cloud.oauth2.biz.authentication.password;
 
+import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.TYPE;
+
+import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.authentication.JwtUtils;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
 import java.security.Principal;
@@ -9,9 +13,11 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +62,11 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
 	private final AuthenticationManager authenticationManager;
 	private final OAuth2AuthorizationService authorizationService;
+
 	private final JwtEncoder jwtEncoder;
 	private OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = context -> new JwtCustomizerServiceImpl().customizeToken(
 		context);
+
 	private final Supplier<String> refreshTokenGenerator = DEFAULT_REFRESH_TOKEN_GENERATOR::generateKey;
 	private ProviderSettings providerSettings;
 
@@ -75,6 +83,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 		JwtEncoder jwtEncoder) {
 		Assert.notNull(authorizationService, "authorizationService cannot be null");
 		Assert.notNull(jwtEncoder, "jwtEncoder cannot be null");
+
 		this.authenticationManager = authenticationManager;
 		this.authorizationService = authorizationService;
 		this.jwtEncoder = jwtEncoder;
@@ -93,28 +102,28 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 	@Override
 	public Authentication authenticate(Authentication authentication)
 		throws AuthenticationException {
-
+		HttpServletResponse response = RequestUtil.getHttpServletResponse();
 		OAuth2ResourceOwnerPasswordAuthenticationToken resouceOwnerPasswordAuthentication = (OAuth2ResourceOwnerPasswordAuthenticationToken) authentication;
 
 		OAuth2ClientAuthenticationToken clientPrincipal = getAuthenticatedClientElseThrowInvalidClient(
 			resouceOwnerPasswordAuthentication);
-
 		RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-		if (!registeredClient.getAuthorizationGrantTypes()
+		if (Objects.isNull(registeredClient) || !registeredClient.getAuthorizationGrantTypes()
 			.contains(AuthorizationGrantType.PASSWORD)) {
-			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
+			ResponseUtil.fail(response, "客户端类型认证错误");
+			//throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
 		}
 
 		Map<String, Object> additionalParameters = resouceOwnerPasswordAuthentication.getAdditionalParameters();
 		String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
 		String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
+		// 用户类型
+		String type = (String) additionalParameters.get(TYPE);
 
 		try {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 				username, password);
-			LOGGER.debug(
-				"got usernamePasswordAuthenticationToken=" + usernamePasswordAuthenticationToken);
 
 			Authentication usernamePasswordAuthentication = authenticationManager.authenticate(
 				usernamePasswordAuthenticationToken);
@@ -123,8 +132,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 			if (!CollectionUtils.isEmpty(resouceOwnerPasswordAuthentication.getScopes())) {
 				Set<String> unauthorizedScopes = resouceOwnerPasswordAuthentication.getScopes()
 					.stream()
-					.filter(
-						requestedScope -> !registeredClient.getScopes().contains(requestedScope))
+					.filter(requestedScope -> !registeredClient.getScopes().contains(requestedScope))
 					.collect(Collectors.toSet());
 				if (!CollectionUtils.isEmpty(unauthorizedScopes)) {
 					throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_SCOPE);

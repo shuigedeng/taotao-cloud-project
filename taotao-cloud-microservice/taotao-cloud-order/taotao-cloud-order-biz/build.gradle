@@ -1,9 +1,10 @@
 dependencies {
+    api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
-//    implementation project(':taotao-cloud-microservice:taotao-cloud-uc:taotao-cloud-uc-api')
+    implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
 
     implementation "org.springframework.amqp:spring-amqp:2.3.10"
-
     implementation 'io.github.majusko:pulsar-java-spring-boot-starter:1.0.7'
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

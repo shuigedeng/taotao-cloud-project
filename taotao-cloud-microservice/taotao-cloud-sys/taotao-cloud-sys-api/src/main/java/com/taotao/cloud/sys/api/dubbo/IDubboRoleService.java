@@ -15,13 +15,6 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.sys.api.bo.role.RoleBO;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-
 /**
  * ISysRoleService
  *
@@ -29,7 +22,7 @@ import java.util.Set;
  * @version 2021.10
  * @since 2021-10-09 20:42:57
  */
-public interface IDubboRoleService{
+public interface IDubboRoleService {
 
 
 }

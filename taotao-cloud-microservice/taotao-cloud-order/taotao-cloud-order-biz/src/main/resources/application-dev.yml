@@ -41,7 +41,7 @@ dubbo:
     port: -1
     #serialization: kryo
   cloud:
-    subscribed-services: 'taotao-cloud-uc-biz'
+    subscribed-services: 'taotao-cloud-sys-biz'
   scan:
     base-packages: com.taotao.cloud.order.biz.service.impl
   provider:

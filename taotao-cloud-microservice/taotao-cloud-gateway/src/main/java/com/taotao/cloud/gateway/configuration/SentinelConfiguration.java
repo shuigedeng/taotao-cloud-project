@@ -126,7 +126,7 @@ public class SentinelConfiguration {
 			)
 		);
 
-		rules.add(new GatewayFlowRule("taotao-cloud-uc")
+		rules.add(new GatewayFlowRule("taotao-cloud-sys")
 			.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_ROUTE_ID)
 			.setCount(3)
 			.setGrade(RuleConstant.FLOW_GRADE_QPS)

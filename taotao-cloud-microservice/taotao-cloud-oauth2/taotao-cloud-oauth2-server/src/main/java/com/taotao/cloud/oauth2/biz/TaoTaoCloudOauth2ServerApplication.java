@@ -18,15 +18,22 @@ package com.taotao.cloud.oauth2.biz;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * TaoTaoCloudOauth2ServerApplication
- *
+ * 抑制java9 module 报错
+ * --add-opens java.base/java.lang=ALL-UNNAMED
+ * --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+ * --add-opens java.base/java.util=ALL-UNNAMED
+ * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+ * --add-opens java.base/java.math=ALL-UNNAMED
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 15:13
  */
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.taotao.cloud.oauth2.biz.repository")
 @EnableDiscoveryClient
 public class TaoTaoCloudOauth2ServerApplication {
 

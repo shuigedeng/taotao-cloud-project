@@ -1,4 +1,4 @@
-package com.taotao.cloud.product.api.feign;
+package com.taotao.cloud.store.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;

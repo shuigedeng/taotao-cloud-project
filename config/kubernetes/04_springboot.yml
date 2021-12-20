@@ -244,15 +244,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-uc-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:2021.12
+        - name: taotao-cloud-sys-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-uc-biz-port
+            - name: taotao-cloud-sys-biz-port
               containerPort: 33337
           env:
             - name: applicationName
-              value: taotao-cloud-uc-biz
+              value: taotao-cloud-sys-biz
           resources:
             requests:
               cpu: 1
@@ -577,15 +577,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-uc-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:2021.12
+        - name: taotao-cloud-sys-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-uc-biz-port
+            - name: taotao-cloud-sys-biz-port
               containerPort: 33337
           env:
             - name: applicationName
-              value: taotao-cloud-uc-biz
+              value: taotao-cloud-sys-biz
           resources:
             requests:
               cpu: 1
@@ -710,7 +710,7 @@ spec:
       port: 33336
       targetPort: 33336
       nodePort: 33336
-    - name: taotao-cloud-uc-biz-port
+    - name: taotao-cloud-sys-biz-port
       protocol: TCP
       port: 33337
       targetPort: 33337

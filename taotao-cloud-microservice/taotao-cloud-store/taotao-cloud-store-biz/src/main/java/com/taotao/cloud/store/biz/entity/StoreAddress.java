@@ -9,7 +9,6 @@ import javax.persistence.Table;
 /**
  * 店铺自提点
  *
- * 
  * @since 2020/12/7 15:09
  */
 @Entity
@@ -35,4 +34,43 @@ public class StoreAddress extends BaseSuperEntity<StoreAddress, Long> {
 	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(64) not null comment '电话'")
 	private String mobile;
 
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getAddressName() {
+		return addressName;
+	}
+
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
+
+	public String getCenter() {
+		return center;
+	}
+
+	public void setCenter(String center) {
+		this.center = center;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 }

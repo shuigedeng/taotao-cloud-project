@@ -186,6 +186,7 @@ taotao:
     data:
       jpa:
         enabled: true
+        packages: com.taotao.cloud.oauth2.biz.models
         tenant:
           enabled: false
     logger:
