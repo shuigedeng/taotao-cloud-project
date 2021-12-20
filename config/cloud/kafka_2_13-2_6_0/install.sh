@@ -35,9 +35,9 @@ bin/kafka-console-producer.sh --broker-list HOST:9092 --topic TOPIC
 /opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh --zookeeper 172.16.6.151:2181 --list
 
 # 1. 通过命令行删除topic
-/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh  --delete --zookeeper 172.16.6.151:2181 --topic request-log-taotao-cloud-uc
+/opt/cloud/kafka_2.12-2.8.0/bin/kafka-topics.sh  --delete --zookeeper 172.16.6.151:2181 --topic request-log-taotao-cloud-sys
 # 2. 删除kafka存储目录
-rm -rf /opt/cloud/kafka_2.12-2.8.0/logs/request-log-taotao-cloud-uc-0
+rm -rf /opt/cloud/kafka_2.12-2.8.0/logs/request-log-taotao-cloud-sys-0
 # 3.zookeeper客户端删除
 /opt/cloud/apache-zookeeper-3.6.3-bin/bin/zkCli.sh
 deleteall /brokers/topics/request-log-taotao-cloud-order

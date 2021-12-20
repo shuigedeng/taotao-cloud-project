@@ -26,7 +26,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @since 2020/5/2 16:42
  * @version 1.0.0
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_UC_CENTER, fallbackFactory = RemoteClientFallbackImpl.class)
+@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_SYS_CENTER, fallbackFactory = RemoteClientFallbackImpl.class)
 public interface RemoteClientService {
 }
 

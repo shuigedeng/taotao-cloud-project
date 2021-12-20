@@ -44,6 +44,10 @@ dependencies {
     api 'org.springframework:spring-aop'
     api 'org.springframework:spring-aspects'
 
+    api "io.github.openfeign:feign-okhttp"
+    api "com.squareup.okhttp3:okhttp"
+    api "org.springframework.cloud:spring-cloud-openfeign-core"
+
     api 'org.springframework.data:spring-data-commons'
     api 'org.springframework.security:spring-security-core'
     api 'org.springframework.security:spring-security-oauth2-core'

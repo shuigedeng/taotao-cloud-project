@@ -15,12 +15,6 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-import java.util.Set;
-
 /**
  * ISysUserService
  *

@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +34,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @version 2021.9
  * @since 2021-09-02 19:17:12
  */
-public class SecurityUser implements UserDetails, Serializable {
+public class SecurityUser implements UserDetails, CredentialsContainer, Serializable, Cloneable {
 
 	@Serial
 	private static final long serialVersionUID = -3685249101751401211L;
@@ -42,24 +43,41 @@ public class SecurityUser implements UserDetails, Serializable {
 	 * ROLE_PREFIX
 	 */
 	private static final String ROLE_PREFIX = "ROLE_";
+
 	/**
 	 * userId
 	 */
 	private Long userId;
 	/**
-	 * username
+	 * 账号
+	 */
+	private String account;
+	/**
+	 * 用户名
 	 */
 	private String username;
 	/**
-	 * password
+	 * 昵称
+	 */
+	private String nickname;
+	/**
+	 * 密码
 	 */
 	private String password;
 	/**
-	 * deptId
+	 * 电话号码
+	 */
+	private String phone;
+	/**
+	 * 手机号
+	 */
+	private String mobile;
+	/**
+	 * 部门id
 	 */
 	private String deptId;
 	/**
-	 * jobId
+	 * 岗位id
 	 */
 	private String jobId;
 	/**
@@ -67,13 +85,21 @@ public class SecurityUser implements UserDetails, Serializable {
 	 */
 	private String email;
 	/**
-	 * phone
+	 * 性别
 	 */
-	private String phone;
+	private Integer sex;
+	/**
+	 * 生日
+	 */
+	private String birthday;
 	/**
 	 * avatar
 	 */
 	private String avatar;
+	/**
+	 * 状态 1-启用，2-禁用
+	 */
+	private Integer status;
 	/**
 	 * lockFlag
 	 */
@@ -83,23 +109,16 @@ public class SecurityUser implements UserDetails, Serializable {
 	 */
 	private String delFlag;
 	/**
-	 * nickname
-	 */
-	private String nickname;
-	/**
-	 * sex
-	 */
-	private Integer sex;
-	/**
-	 * type
+	 * type 1.平台用户 2.商户用户(个人用户/企业用户)
 	 */
 	private Integer type;
+
 	/**
-	 * permissions
+	 * 权限列表
 	 */
 	private Set<String> permissions;
 	/**
-	 * roles
+	 * 角色列表
 	 */
 	private Set<String> roles;
 
@@ -141,6 +160,7 @@ public class SecurityUser implements UserDetails, Serializable {
 			roles.parallelStream()
 				.forEach(role -> authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + role)));
 		}
+
 		if (!CollUtil.isEmpty(permissions)) {
 			permissions.parallelStream()
 				.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission)));
@@ -306,8 +326,54 @@ public class SecurityUser implements UserDetails, Serializable {
 		this.roles = roles;
 	}
 
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public static SecurityUserBuilder builder() {
 		return new SecurityUserBuilder();
+	}
+
+	@Override
+	public void eraseCredentials() {
+		this.password = null;
+	}
+
+	@Override
+	public SecurityUser clone() {
+		try {
+			return (SecurityUser) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError();
+		}
 	}
 
 	public static final class SecurityUserBuilder {

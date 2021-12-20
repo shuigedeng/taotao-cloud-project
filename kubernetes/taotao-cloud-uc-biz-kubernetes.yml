@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: taotao-cloud-uc-biz-configmap
+  name: taotao-cloud-sys-biz-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-uc-biz
+  APPLICATION_NAME: taotao-cloud-sys-biz
   APPLICATION_VERSION: '2021.12'
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: taotao-cloud-uc-biz-secret
+  name: taotao-cloud-sys-biz-secret
 type: Opaque
 data:
   ADMIN_USERNAME: YWRtaW4=
@@ -21,9 +21,9 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taotao-cloud-uc-biz
+  name: taotao-cloud-sys-biz
   labels:
-    app: taotao-cloud-uc-biz
+    app: taotao-cloud-sys-biz
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -31,7 +31,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: taotao-cloud-uc-biz
+      app: taotao-cloud-sys-biz
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -42,7 +42,7 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
-        app: taotao-cloud-uc-biz
+        app: taotao-cloud-sys-biz
     spec:
       terminationGracePeriodSeconds: 30
       schedulerName: default-scheduler
@@ -70,20 +70,20 @@ spec:
                       values:
                         - ops-nginx-api
       volumes:
-        - name: taotao-cloud-uc-biz-hostpath
+        - name: taotao-cloud-sys-biz-hostpath
           hostPath:
-            path: /tmp/logs/taotao-cloud-uc-biz
+            path: /tmp/logs/taotao-cloud-sys-biz
             type: Directory
-        - name: taotao-cloud-uc-biz-secret
+        - name: taotao-cloud-sys-biz-secret
           secret:
-            secretName: taotao-cloud-uc-biz-secret
+            secretName: taotao-cloud-sys-biz-secret
       initContainers:
-        - name: taotao-cloud-uc-biz-init
+        - name: taotao-cloud-sys-biz-init
           image: yauritux/busybox-curl:latest
           imagePullPolicy: IfNotPresent
           command: [ "/bin/sh", "-c", "until curl taotao-cloud-xxl-job-admin.default:33335/actuator/health; do echo waiting for admin; sleep 10; done;" ]
       containers:
-        - name: taotao-cloud-uc-biz
+        - name: taotao-cloud-sys-biz
           stdin: true
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -94,52 +94,52 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:2021.12
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:2021.12
           imagePullPolicy: Always
           ports:
             - name: uc-port
               containerPort: 33337
           volumeMounts:
-            - name: taotao-cloud-uc-biz-hostpath
+            - name: taotao-cloud-sys-biz-hostpath
               mountPath: /root/logs
-            - name: taotao-cloud-uc-biz-secret
+            - name: taotao-cloud-sys-biz-secret
               mountPath: /etc/secret
               readOnly: true
           env:
             - name: APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-uc-biz-configmap
+                  name: taotao-cloud-sys-biz-configmap
                   key: APPLICATION_NAME
             - name: APPLICATION_VERSION
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-uc-biz-configmap
+                  name: taotao-cloud-sys-biz-configmap
                   key: APPLICATION_VERSION
             - name: ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-uc-biz-secret
+                  name: taotao-cloud-sys-biz-secret
                   key: ADMIN_USERNAME
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-uc-biz-secret
+                  name: taotao-cloud-sys-biz-secret
                   key: ADMIN_PASSWORD
             - name: DINGDING_TOKEN_ID
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-uc-biz-secret
+                  name: taotao-cloud-sys-biz-secret
                   key: DINGDING_TOKEN_ID
             - name: DINGDING_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-uc-biz-secret
+                  name: taotao-cloud-sys-biz-secret
                   key: DINGDING_SECRET
             - name: TAOTAO_CLOUD_MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-uc-biz-secret
+                  name: taotao-cloud-sys-biz-secret
                   key: TAOTAO_CLOUD_MAIL_PASSWORD
           resources:
             requests:
@@ -173,7 +173,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - mkdir -p /root/logs/taotao-cloud-uc-biz && touch /root/logs/taotao-cloud-uc-biz/jit.compile.log /root/logs/taotao-cloud-uc-biz/gc.log
+                  - mkdir -p /root/logs/taotao-cloud-sys-biz && touch /root/logs/taotao-cloud-sys-biz/jit.compile.log /root/logs/taotao-cloud-sys-biz/gc.log
             preStop:
               exec:
                 command:
@@ -184,13 +184,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: taotao-cloud-uc-biz
+  name: taotao-cloud-sys-biz
   labels:
-    app: taotao-cloud-uc-biz
+    app: taotao-cloud-sys-biz
 spec:
   type: NodePort
   selector:
-    app: taotao-cloud-uc-biz
+    app: taotao-cloud-sys-biz
   ports:
     - name: uc-port
       protocol: TCP

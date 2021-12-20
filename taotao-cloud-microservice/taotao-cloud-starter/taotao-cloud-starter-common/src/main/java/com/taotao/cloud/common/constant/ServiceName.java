@@ -29,7 +29,9 @@ public class ServiceName {
 
 	public static final String TAOTAO_CLOUD_AUTH_CENTER = "taotao-cloud-auth";
 
-	public static final String TAOTAO_CLOUD_UC_CENTER = "taotao-cloud-uc-biz";
+	public static final String TAOTAO_CLOUD_SYS_CENTER = "taotao-cloud-sys-biz";
+
+	public static final String TAOTAO_CLOUD_MEMBER_CENTER = "taotao-cloud-member-biz";
 
 	public static final String TAOTAO_CLOUD_FILE_CENTER = "taotao-cloud-file";
 

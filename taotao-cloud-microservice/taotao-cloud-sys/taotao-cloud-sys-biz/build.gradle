@@ -1,4 +1,6 @@
 dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+
     implementation project(':taotao-cloud-microservice:taotao-cloud-sys:taotao-cloud-sys-api')
     implementation project(':taotao-cloud-microservice:taotao-cloud-order:taotao-cloud-order-api')
 
@@ -22,7 +24,7 @@ jib {
         }
     }
     to {
-        image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc'
+        image = 'registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys'
         tags = ["${project.name}-${project.version}"]
         auth {
             username System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
@@ -35,7 +37,7 @@ jib {
         mainClass = 'com.taotao.cloud.uc.biz.TaoTaoCloudUcApplication'
         args = ['some', 'args']
         ports = ['33337']
-        //labels = ['app_name': 'taotao-cloud-uc', 'port': '33337']
+        //labels = ['app_name': 'taotao-cloud-sys', 'port': '33337']
     }
 }
 

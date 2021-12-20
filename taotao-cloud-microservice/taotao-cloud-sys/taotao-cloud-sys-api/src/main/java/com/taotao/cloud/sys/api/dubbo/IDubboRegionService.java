@@ -15,12 +15,6 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * SysRegionService
  *
@@ -28,6 +22,6 @@ import java.util.List;
  * @version 2021.10
  * @since 2021-10-09 20:37:26
  */
-public interface IDubboRegionService{
+public interface IDubboRegionService {
 
 }

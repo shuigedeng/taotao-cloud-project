@@ -1,10 +1,5 @@
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-
 /**
  * 后台部门表服务接口
  *

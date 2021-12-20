@@ -28,7 +28,7 @@ public class FileServiceImpl extends
 	BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
 	implements IFileService {
 
-	@Autowired
+	@Autowired(required = false)
 	private UploadFileService uploadFileService;
 
 	@Override

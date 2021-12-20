@@ -121,17 +121,17 @@ spring:
 security:
   oauth2:
     client:
-      clientId: taotao-cloud-uc-service
-      clientSecret: taotao-cloud-uc-service
-      userAuthorizationUri: http://taotao-cloud-uc-service/oauth/authorize
-      access-token-uri: http://taotao-cloud-uc-service/oauth/token
+      clientId: taotao-cloud-sys-service
+      clientSecret: taotao-cloud-sys-service
+      userAuthorizationUri: http://taotao-cloud-sys-service/oauth/authorize
+      access-token-uri: http://taotao-cloud-sys-service/oauth/token
     resource:
-      id: taotao-cloud-uc-service
+      id: taotao-cloud-sys-service
       prefer-token-info: false
-      token-info-uri: http://taotao-cloud-uc-service/oauth/check_token
-      user-info-uri: http://taotao-cloud-uc-service/oauth/user
+      token-info-uri: http://taotao-cloud-sys-service/oauth/check_token
+      user-info-uri: http://taotao-cloud-sys-service/oauth/user
     authorization:
-      check-token-access: http://taotao-cloud-uc-service/oauth/check_token
+      check-token-access: http://taotao-cloud-sys-service/oauth/check_token
 
 
 taotao:

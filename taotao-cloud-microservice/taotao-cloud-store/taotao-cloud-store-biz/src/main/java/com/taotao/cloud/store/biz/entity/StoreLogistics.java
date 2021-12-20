@@ -9,7 +9,6 @@ import javax.persistence.Table;
 /**
  * 店铺-物流公司设置
  *
- * 
  * @since 2020/11/17 8:01 下午
  */
 @Entity
@@ -26,4 +25,19 @@ public class StoreLogistics extends BaseSuperEntity<StoreLogistics, Long> {
 	@Column(name = "logistics_id", nullable = false, columnDefinition = "varchar(64) not null comment '物流公司ID'")
 	private String logisticsId;
 
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+
+	public String getLogisticsId() {
+		return logisticsId;
+	}
+
+	public void setLogisticsId(String logisticsId) {
+		this.logisticsId = logisticsId;
+	}
 }

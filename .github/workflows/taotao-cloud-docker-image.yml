@@ -91,11 +91,11 @@ jobs:
         docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:${{env.TAOTAO_CLOUD_VERSION}} .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: Build Docker Image taotao-cloud-uc-biz
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-uc/taotao-cloud-uc-biz
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-uc-biz') }}
+    - name: Build Docker Image taotao-cloud-sys-biz
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys-biz') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-uc-biz:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:${{env.TAOTAO_CLOUD_VERSION}}

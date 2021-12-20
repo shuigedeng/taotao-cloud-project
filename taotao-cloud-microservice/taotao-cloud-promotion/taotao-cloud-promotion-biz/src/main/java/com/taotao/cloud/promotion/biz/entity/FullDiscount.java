@@ -11,7 +11,6 @@ import javax.validation.constraints.DecimalMax;
 /**
  * 满优惠活动实体类
  *
- * 
  * @since 2020-03-19 10:44 上午
  */
 @Entity
@@ -65,45 +64,145 @@ public class FullDiscount extends BaseSuperEntity<FullDiscount, Long> {
 	@Column(name = "description", nullable = false, columnDefinition = "varchar(64) not null comment '活动说明'")
 	private String description;
 
-	//public Boolean getIsFullMinus() {
-	//    if (isFullMinus == null) {
-	//        return false;
-	//    }
-	//    return isFullMinus;
-	//}
-	//
-	//public Boolean getIsFullRate() {
-	//    if (isFullRate == null) {
-	//        return false;
-	//    }
-	//    return isFullRate;
-	//}
-	//
-	//public Boolean getIsPoint() {
-	//    if (isPoint == null) {
-	//        return false;
-	//    }
-	//    return isPoint;
-	//}
-	//
-	//public Boolean getIsFreeFreight() {
-	//    if (isFreeFreight == null) {
-	//        return false;
-	//    }
-	//    return isFreeFreight;
-	//}
-	//
-	//public Boolean getIsGift() {
-	//    if (isGift == null) {
-	//        return false;
-	//    }
-	//    return isGift;
-	//}
-	//
-	//public Boolean getIsCoupon() {
-	//    if (isCoupon == null) {
-	//        return false;
-	//    }
-	//    return isCoupon;
-	//}
+	public BigDecimal getFullMoney() {
+		return fullMoney;
+	}
+
+	public void setFullMoney(BigDecimal fullMoney) {
+		this.fullMoney = fullMoney;
+	}
+
+	public Boolean getFullMinus() {
+		return isFullMinus;
+	}
+
+	public void setFullMinus(BigDecimal fullMinus) {
+		this.fullMinus = fullMinus;
+	}
+
+	public Boolean getFullRate() {
+		return isFullRate;
+	}
+
+	public void setFullRate(BigDecimal fullRate) {
+		this.fullRate = fullRate;
+	}
+
+	public Boolean getPoint() {
+		return isPoint;
+	}
+
+	public void setPoint(Integer point) {
+		this.point = point;
+	}
+
+	public Boolean getFreeFreight() {
+		return isFreeFreight;
+	}
+
+	public void setFreeFreight(Boolean freeFreight) {
+		isFreeFreight = freeFreight;
+	}
+
+	public Boolean getGift() {
+		return isGift;
+	}
+
+	public void setGift(Boolean gift) {
+		isGift = gift;
+	}
+
+	public String getGiftId() {
+		return giftId;
+	}
+
+	public void setGiftId(String giftId) {
+		this.giftId = giftId;
+	}
+
+	public Boolean getCoupon() {
+		return isCoupon;
+	}
+
+	public void setCoupon(Boolean coupon) {
+		isCoupon = coupon;
+	}
+
+	public String getCouponId() {
+		return couponId;
+	}
+
+	public void setCouponId(String couponId) {
+		this.couponId = couponId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPoint(Boolean point) {
+		isPoint = point;
+	}
+
+	public void setFullRate(Boolean fullRate) {
+		isFullRate = fullRate;
+	}
+
+	public void setFullMinus(Boolean fullMinus) {
+		isFullMinus = fullMinus;
+	}
+
+	public Boolean getIsFullMinus() {
+	    if (isFullMinus == null) {
+	        return false;
+	    }
+	    return isFullMinus;
+	}
+
+	public Boolean getIsFullRate() {
+	    if (isFullRate == null) {
+	        return false;
+	    }
+	    return isFullRate;
+	}
+
+	public Boolean getIsPoint() {
+	    if (isPoint == null) {
+	        return false;
+	    }
+	    return isPoint;
+	}
+
+	public Boolean getIsFreeFreight() {
+	    if (isFreeFreight == null) {
+	        return false;
+	    }
+	    return isFreeFreight;
+	}
+
+	public Boolean getIsGift() {
+	    if (isGift == null) {
+	        return false;
+	    }
+	    return isGift;
+	}
+
+	public Boolean getIsCoupon() {
+	    if (isCoupon == null) {
+	        return false;
+	    }
+	    return isCoupon;
+	}
 }

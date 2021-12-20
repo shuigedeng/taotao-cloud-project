@@ -54,7 +54,7 @@ object TaoTaoCloudLogHudi {
       .readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "172.16.6.151:9092")
-      .option("subscribe", "sys-log-taotao-cloud-uc")
+      .option("subscribe", "sys-log-taotao-cloud-sys")
       //      .option("subscribe", "*-taotao-cloud-*")
       //      .option("subscribePattern", "sys-log-*")
       .option("staringOffsets", "earliest")

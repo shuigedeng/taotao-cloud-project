@@ -15,12 +15,6 @@
  */
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
-import java.io.Serializable;
-import org.apache.poi.ss.formula.functions.T;
-
 /**
  * ISysDictService
  *
@@ -29,4 +23,5 @@ import org.apache.poi.ss.formula.functions.T;
  * @since 2021-10-09 20:32:36
  */
 public interface IDubboDictService {
+
 }
