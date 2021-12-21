@@ -376,20 +376,26 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		}
 	}
 
+
 	public static final class SecurityUserBuilder {
 
+		private static String ROLE_PREFIX = "ROLE_";
 		private Long userId;
+		private String account;
 		private String username;
+		private String nickname;
 		private String password;
+		private String phone;
+		private String mobile;
 		private String deptId;
 		private String jobId;
 		private String email;
-		private String phone;
+		private Integer sex;
+		private String birthday;
 		private String avatar;
+		private Integer status;
 		private String lockFlag;
 		private String delFlag;
-		private String nickname;
-		private Integer sex;
 		private Integer type;
 		private Set<String> permissions;
 		private Set<String> roles;
@@ -397,12 +403,13 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		private SecurityUserBuilder() {
 		}
 
-		public static SecurityUserBuilder aSecurityUser() {
-			return new SecurityUserBuilder();
-		}
-
 		public SecurityUserBuilder userId(Long userId) {
 			this.userId = userId;
+			return this;
+		}
+
+		public SecurityUserBuilder account(String account) {
+			this.account = account;
 			return this;
 		}
 
@@ -411,8 +418,23 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 			return this;
 		}
 
+		public SecurityUserBuilder nickname(String nickname) {
+			this.nickname = nickname;
+			return this;
+		}
+
 		public SecurityUserBuilder password(String password) {
 			this.password = password;
+			return this;
+		}
+
+		public SecurityUserBuilder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+
+		public SecurityUserBuilder mobile(String mobile) {
+			this.mobile = mobile;
 			return this;
 		}
 
@@ -431,13 +453,23 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 			return this;
 		}
 
-		public SecurityUserBuilder phone(String phone) {
-			this.phone = phone;
+		public SecurityUserBuilder sex(Integer sex) {
+			this.sex = sex;
+			return this;
+		}
+
+		public SecurityUserBuilder birthday(String birthday) {
+			this.birthday = birthday;
 			return this;
 		}
 
 		public SecurityUserBuilder avatar(String avatar) {
 			this.avatar = avatar;
+			return this;
+		}
+
+		public SecurityUserBuilder status(Integer status) {
+			this.status = status;
 			return this;
 		}
 
@@ -448,16 +480,6 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 
 		public SecurityUserBuilder delFlag(String delFlag) {
 			this.delFlag = delFlag;
-			return this;
-		}
-
-		public SecurityUserBuilder nickname(String nickname) {
-			this.nickname = nickname;
-			return this;
-		}
-
-		public SecurityUserBuilder sex(Integer sex) {
-			this.sex = sex;
 			return this;
 		}
 
@@ -479,17 +501,21 @@ public class SecurityUser implements UserDetails, CredentialsContainer, Serializ
 		public SecurityUser build() {
 			SecurityUser securityUser = new SecurityUser();
 			securityUser.setUserId(userId);
+			securityUser.setAccount(account);
 			securityUser.setUsername(username);
+			securityUser.setNickname(nickname);
 			securityUser.setPassword(password);
+			securityUser.setPhone(phone);
+			securityUser.setMobile(mobile);
 			securityUser.setDeptId(deptId);
 			securityUser.setJobId(jobId);
 			securityUser.setEmail(email);
-			securityUser.setPhone(phone);
+			securityUser.setSex(sex);
+			securityUser.setBirthday(birthday);
 			securityUser.setAvatar(avatar);
+			securityUser.setStatus(status);
 			securityUser.setLockFlag(lockFlag);
 			securityUser.setDelFlag(delFlag);
-			securityUser.setNickname(nickname);
-			securityUser.setSex(sex);
 			securityUser.setType(type);
 			securityUser.setPermissions(permissions);
 			securityUser.setRoles(roles);
