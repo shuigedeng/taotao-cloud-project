@@ -1,16 +1,12 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.enums.SwitchEnum;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dos.MemberEvaluation;
-import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
-import cn.lili.modules.member.entity.dto.MemberEvaluationDTO;
-import cn.lili.modules.member.entity.vo.EvaluationNumberVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
-import cn.lili.modules.member.service.MemberEvaluationService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.entity.MemberEvaluation;
+import com.taotao.cloud.member.biz.service.MemberEvaluationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -53,7 +49,8 @@ public class MemberEvaluationBuyerController {
 
     @ApiOperation(value = "查看当前会员评价列表")
     @GetMapping
-    public ResultMessage<IPage<MemberEvaluation>> queryMineEvaluation(EvaluationQueryParams evaluationQueryParams) {
+    public ResultMessage<IPage<MemberEvaluation>> queryMineEvaluation(
+	    EvaluationQueryParams evaluationQueryParams) {
         //设置当前登录会员
         evaluationQueryParams.setMemberId(UserContext.getCurrentUser().getId());
         return ResultUtil.data(memberEvaluationService.managerQuery(evaluationQueryParams));

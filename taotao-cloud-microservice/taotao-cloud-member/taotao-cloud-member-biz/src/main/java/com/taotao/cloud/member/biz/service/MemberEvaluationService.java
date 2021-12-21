@@ -1,13 +1,13 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.modules.member.entity.dos.MemberEvaluation;
-import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
-import cn.lili.modules.member.entity.dto.MemberEvaluationDTO;
-import cn.lili.modules.member.entity.vo.EvaluationNumberVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationListVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 
 /**
  * 会员商品评价业务层

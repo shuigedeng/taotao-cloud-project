@@ -1,7 +1,5 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.modules.store.entity.dos.StoreLogistics;
-import cn.lili.modules.system.entity.vo.StoreLogisticsVO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

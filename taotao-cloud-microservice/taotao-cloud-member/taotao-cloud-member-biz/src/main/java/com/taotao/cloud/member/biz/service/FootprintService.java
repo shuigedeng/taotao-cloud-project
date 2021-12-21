@@ -1,10 +1,8 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.FootPrint;
-import cn.lili.modules.search.entity.dos.EsGoodsIndex;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.member.biz.entity.FootPrint;
 import java.util.List;
 
 /**

@@ -1,67 +1,113 @@
 package com.taotao.cloud.member.biz.entity;
 
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 会员积分历史
  *
- * 
  * @since 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_member_points_history")
-@ApiModel(value = "会员积分历史")
-public class MemberPointsHistory extends BaseIdEntity {
+@Entity
+@Table(name = MemberPointsHistory.TABLE_NAME)
+@TableName(MemberPointsHistory.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberPointsHistory.TABLE_NAME, comment = "会员积分历史表")
+public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "li_member_points_history";
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    private String createBy;
+	@Column(name = "create_by", nullable = false, columnDefinition = "varchar(32) not null comment '创建者'")
+	private String createBy;
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员ID'")
+	private String memberId;
 
-    @ApiModelProperty(value = "会员ID")
-    private String memberId;
+	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(32) not null comment '会员名称'")
+	private String memberName;
 
-    @ApiModelProperty(value = "会员名称")
-    private String memberName;
+	@Column(name = "point", nullable = false, columnDefinition = "bigint not null default 0 comment '当前积分'")
+	private Long point;
 
-    @ApiModelProperty(value = "当前积分")
-    private Long point;
+	@Column(name = "before_point", nullable = false, columnDefinition = "bigint not null default 0 comment '消费之前积分'")
+	private Long beforePoint;
 
-    @ApiModelProperty(value = "消费之前积分")
-    private Long beforePoint;
+	@Column(name = "variable_point", nullable = false, columnDefinition = "bigint not null default 0 comment '变动积分'")
+	private Long variablePoint;
 
-    @ApiModelProperty(value = "变动积分")
-    private Long variablePoint;
+	@Column(name = "content", nullable = false, columnDefinition = "varchar(32) not null comment 'content'")
+	private String content;
 
-    @ApiModelProperty(value = "content")
-    private String content;
+	/**
+	 * @see cn.lili.modules.member.entity.enums.PointTypeEnum
+	 */
+	@Column(name = "point_type", nullable = false, columnDefinition = "varchar(32) not null comment '积分类型'")
+	private String pointType;
 
-    /**
-     * @see cn.lili.modules.member.entity.enums.PointTypeEnum
-     */
-    @ApiModelProperty(value = "积分类型")
-    private String pointType;
+	public String getCreateBy() {
+		return createBy;
+	}
 
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public Long getPoint() {
+		return point;
+	}
+
+	public void setPoint(Long point) {
+		this.point = point;
+	}
+
+	public Long getBeforePoint() {
+		return beforePoint;
+	}
+
+	public void setBeforePoint(Long beforePoint) {
+		this.beforePoint = beforePoint;
+	}
+
+	public Long getVariablePoint() {
+		return variablePoint;
+	}
+
+	public void setVariablePoint(Long variablePoint) {
+		this.variablePoint = variablePoint;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getPointType() {
+		return pointType;
+	}
+
+	public void setPointType(String pointType) {
+		this.pointType = pointType;
+	}
 }

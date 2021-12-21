@@ -1,94 +1,100 @@
 package com.taotao.cloud.member.biz.entity;
 
-import cn.lili.modules.wallet.entity.dto.MemberWalletUpdateDTO;
-import cn.lili.modules.wallet.entity.enums.DepositServiceTypeEnum;
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 预存款日志实体
  *
- * 
  * @since 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_wallet_log")
-@ApiModel(value = "钱包变动日志")
-@NoArgsConstructor
-public class WalletLog extends BaseIdEntity {
+@Entity
+@Table(name = WalletLog.TABLE_NAME)
+@TableName(WalletLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = WalletLog.TABLE_NAME, comment = "钱包变动日志")
+public class WalletLog extends BaseSuperEntity<WalletLog, Long> {
 
-    private static final long serialVersionUID = -1599270544927161096L;
+	public static final String TABLE_NAME = "li_wallet_log";
 
-    @ApiModelProperty(value = "会员id")
-    private String memberId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
+	private String memberId;
 
-    @ApiModelProperty(value = "会员名称")
-    private String memberName;
+	@Column(name = "money", nullable = false, columnDefinition = "decimal(10,2) not null comment '金额'")
+	private BigDecimal money;
 
-    @ApiModelProperty(value = "金额")
-    private Double money;
+	/**
+	 * @see DepositServiceTypeEnum
+	 */
+	@Column(name = "service_type", nullable = false, columnDefinition = "varchar(32) not null comment '业务类型'")
+	private String serviceType;
 
-    /**
-     * @see DepositServiceTypeEnum
-     */
-    @ApiModelProperty(value = "业务类型")
-    private String serviceType;
+	@Column(name = "detail", nullable = false, columnDefinition = "varchar(32) not null comment '日志明细'")
+	private String detail;
 
-    @ApiModelProperty(value = "日志明细")
-    private String detail;
+	///**
+	// * 构建新的预存款日志对象
+	// *
+	// * @param memberName            会员名称
+	// * @param memberWalletUpdateDTO 变动模型
+	// */
+	//public WalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO) {
+	//	this.setMemberId(memberWalletUpdateDTO.getMemberId());
+	//	this.setMemberName(memberName);
+	//	this.setMoney(memberWalletUpdateDTO.getMoney());
+	//	this.setDetail(memberWalletUpdateDTO.getDetail());
+	//	this.setServiceType(memberWalletUpdateDTO.getServiceType());
+	//}
+	//
+	///**
+	// * 构建新的预存款日志对象
+	// *
+	// * @param memberName            会员名称
+	// * @param memberWalletUpdateDTO 变动模型
+	// * @param isReduce              是否是消费
+	// */
+	//public WalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO,
+	//	boolean isReduce) {
+	//	this.setMemberId(memberWalletUpdateDTO.getMemberId());
+	//	this.setMemberName(memberName);
+	//	this.setMoney(
+	//		isReduce ? -memberWalletUpdateDTO.getMoney() : memberWalletUpdateDTO.getMoney());
+	//	this.setDetail(memberWalletUpdateDTO.getDetail());
+	//	this.setServiceType(memberWalletUpdateDTO.getServiceType());
+	//}
 
+	public String getMemberId() {
+		return memberId;
+	}
 
-    @CreatedBy
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建者", hidden = true)
-    private String createBy;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	public BigDecimal getMoney() {
+		return money;
+	}
 
-    /**
-     * 构建新的预存款日志对象
-     *
-     * @param memberName            会员名称
-     * @param memberWalletUpdateDTO 变动模型
-     */
-    public WalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO) {
-        this.setMemberId(memberWalletUpdateDTO.getMemberId());
-        this.setMemberName(memberName);
-        this.setMoney(memberWalletUpdateDTO.getMoney());
-        this.setDetail(memberWalletUpdateDTO.getDetail());
-        this.setServiceType(memberWalletUpdateDTO.getServiceType());
-    }
+	public void setMoney(BigDecimal money) {
+		this.money = money;
+	}
 
-    /**
-     * 构建新的预存款日志对象
-     *
-     * @param memberName            会员名称
-     * @param memberWalletUpdateDTO 变动模型
-     * @param isReduce              是否是消费
-     */
-    public WalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO, boolean isReduce) {
-        this.setMemberId(memberWalletUpdateDTO.getMemberId());
-        this.setMemberName(memberName);
-        this.setMoney(isReduce ? -memberWalletUpdateDTO.getMoney() : memberWalletUpdateDTO.getMoney());
-        this.setDetail(memberWalletUpdateDTO.getDetail());
-        this.setServiceType(memberWalletUpdateDTO.getServiceType());
-    }
+	public String getServiceType() {
+		return serviceType;
+	}
 
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 }

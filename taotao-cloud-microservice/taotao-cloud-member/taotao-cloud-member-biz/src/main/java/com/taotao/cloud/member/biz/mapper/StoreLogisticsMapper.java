@@ -1,7 +1,5 @@
 package com.taotao.cloud.member.biz.mapper;
 
-import cn.lili.modules.store.entity.dos.StoreLogistics;
-import cn.lili.modules.system.entity.vo.StoreLogisticsVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 

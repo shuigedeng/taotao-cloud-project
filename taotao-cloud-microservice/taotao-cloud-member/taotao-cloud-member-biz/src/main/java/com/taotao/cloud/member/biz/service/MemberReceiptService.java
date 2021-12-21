@@ -1,12 +1,11 @@
 package com.taotao.cloud.member.biz.service;
 
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.MemberReceipt;
-import cn.lili.modules.member.entity.vo.MemberReceiptAddVO;
-import cn.lili.modules.member.entity.vo.MemberReceiptVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.api.vo.MemberReceiptAddVO;
+import com.taotao.cloud.member.api.vo.MemberReceiptVO;
+import com.taotao.cloud.member.biz.entity.MemberReceipt;
 
 
 /**

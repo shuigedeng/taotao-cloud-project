@@ -1,47 +1,45 @@
 package com.taotao.cloud.member.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 会员商品收藏
  *
- * 
  * @since 2020/11/18 3:31 下午
  */
-@Data
-@NoArgsConstructor
-@ApiModel(value = "会员商品收藏")
-@TableName("li_goods_collection")
-public class GoodsCollection extends BaseIdEntity {
+@Entity
+@Table(name = GoodsCollection.TABLE_NAME)
+@TableName(GoodsCollection.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = GoodsCollection.TABLE_NAME, comment = "会员商品收藏表")
+public class GoodsCollection extends BaseSuperEntity<GoodsCollection, Long> {
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	public static final String TABLE_NAME = "li_goods_collection";
 
-    @ApiModelProperty(value = "会员id")
-    private String memberId;
+	@Schema(description = "会员id")
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员id'")
+	private String memberId;
 
-    @ApiModelProperty(value = "商品id")
-    private String skuId;
+	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment '商品id'")
+	private String skuId;
 
-    public GoodsCollection(String memberId, String goodsId) {
-        this.memberId = memberId;
-        this.skuId = goodsId;
-    }
+	public String getMemberId() {
+		return memberId;
+	}
 
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getSkuId() {
+		return skuId;
+	}
+
+	public void setSkuId(String skuId) {
+		this.skuId = skuId;
+	}
 }

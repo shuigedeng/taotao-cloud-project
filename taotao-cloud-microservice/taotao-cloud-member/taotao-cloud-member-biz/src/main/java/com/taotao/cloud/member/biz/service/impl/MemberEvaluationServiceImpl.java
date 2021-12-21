@@ -1,40 +1,25 @@
 package com.taotao.cloud.member.biz.service.impl;
 
+import cn.hutool.core.util.PageUtil;
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.enums.SwitchEnum;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.sensitive.SensitiveWordsFilter;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.goods.service.GoodsSkuService;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.dos.MemberEvaluation;
-import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
-import cn.lili.modules.member.entity.dto.MemberEvaluationDTO;
-import cn.lili.modules.member.entity.enums.EvaluationGradeEnum;
-import cn.lili.modules.member.entity.vo.EvaluationNumberVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationListVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
-import cn.lili.modules.member.mapper.MemberEvaluationMapper;
-import cn.lili.modules.member.service.MemberEvaluationService;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.enums.CommentStatusEnum;
-import cn.lili.modules.order.order.service.OrderItemService;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.mybatis.util.PageUtil;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.GoodsTagsEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
+import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
+import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
+import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberEvaluation;
+import com.taotao.cloud.member.biz.mapper.MemberEvaluationMapper;
+import com.taotao.cloud.member.biz.service.MemberEvaluationService;
+import com.taotao.cloud.member.biz.service.MemberService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +37,8 @@ import java.util.Map;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberEvaluationServiceImpl extends ServiceImpl<MemberEvaluationMapper, MemberEvaluation> implements MemberEvaluationService {
+public class MemberEvaluationServiceImpl extends ServiceImpl<MemberEvaluationMapper, MemberEvaluation> implements
+	MemberEvaluationService {
 
     /**
      * 会员评价数据层

@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.modules.member.entity.dos.MemberGrade;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.biz.entity.MemberGrade;
 
 /**
  * 会员等级业务层

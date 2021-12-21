@@ -1,8 +1,8 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.modules.member.entity.dos.MemberSign;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.member.biz.entity.MemberSign;
 import java.util.List;
 
 /**

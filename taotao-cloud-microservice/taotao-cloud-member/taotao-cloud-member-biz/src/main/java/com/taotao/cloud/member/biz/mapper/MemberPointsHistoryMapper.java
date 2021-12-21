@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
-import cn.lili.modules.member.entity.dos.MemberPointsHistory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 import org.apache.ibatis.annotations.Select;
 
 /**

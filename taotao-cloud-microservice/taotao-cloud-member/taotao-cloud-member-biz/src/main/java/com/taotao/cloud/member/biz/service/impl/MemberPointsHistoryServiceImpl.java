@@ -1,21 +1,17 @@
 package com.taotao.cloud.member.biz.service.impl;
 
 
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.enums.PointTypeEnum;
-import cn.lili.modules.member.mapper.MemberMapper;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.mybatis.util.PageUtil;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.MemberPointsHistory;
-import cn.lili.modules.member.entity.vo.MemberPointsHistoryVO;
-import cn.lili.modules.member.mapper.MemberPointsHistoryMapper;
-import cn.lili.modules.member.service.MemberPointsHistoryService;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
+import com.taotao.cloud.member.biz.mapper.MemberPointsHistoryMapper;
+import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
+import com.taotao.cloud.member.biz.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +25,8 @@ import java.util.List;
  * @since 2020-02-25 14:10:16
  */
 @Service
-public class MemberPointsHistoryServiceImpl extends ServiceImpl<MemberPointsHistoryMapper, MemberPointsHistory> implements MemberPointsHistoryService {
+public class MemberPointsHistoryServiceImpl extends ServiceImpl<MemberPointsHistoryMapper, MemberPointsHistory> implements
+	MemberPointsHistoryService {
 
 
     @Autowired

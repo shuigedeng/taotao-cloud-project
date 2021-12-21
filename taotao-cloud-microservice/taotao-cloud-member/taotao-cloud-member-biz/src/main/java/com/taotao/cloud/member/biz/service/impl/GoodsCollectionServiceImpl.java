@@ -1,18 +1,14 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.GoodsCollection;
-import cn.lili.modules.member.entity.vo.GoodsCollectionVO;
-import cn.lili.modules.member.mapper.GoodsCollectionMapper;
-import cn.lili.modules.member.service.GoodsCollectionService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.biz.entity.GoodsCollection;
+import com.taotao.cloud.member.biz.mapper.GoodsCollectionMapper;
+import com.taotao.cloud.member.biz.service.GoodsCollectionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +23,8 @@ import java.util.Optional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMapper, GoodsCollection> implements GoodsCollectionService {
+public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMapper, GoodsCollection> implements
+	GoodsCollectionService {
 
 
     @Override

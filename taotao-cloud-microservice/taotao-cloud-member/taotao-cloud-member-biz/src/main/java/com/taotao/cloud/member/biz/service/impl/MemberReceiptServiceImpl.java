@@ -1,22 +1,18 @@
 package com.taotao.cloud.member.biz.service.impl;
 
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.mybatis.util.PageUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.dos.MemberReceipt;
-import cn.lili.modules.member.entity.vo.MemberReceiptAddVO;
-import cn.lili.modules.member.entity.vo.MemberReceiptVO;
-import cn.lili.modules.member.mapper.MemberReceiptMapper;
-import cn.lili.modules.member.service.MemberReceiptService;
-import cn.lili.modules.member.service.MemberService;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.vo.MemberReceiptAddVO;
+import com.taotao.cloud.member.api.vo.MemberReceiptVO;
+import com.taotao.cloud.member.biz.entity.Member;
+import com.taotao.cloud.member.biz.entity.MemberReceipt;
+import com.taotao.cloud.member.biz.mapper.MemberReceiptMapper;
+import com.taotao.cloud.member.biz.service.MemberReceiptService;
+import com.taotao.cloud.member.biz.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +26,8 @@ import java.util.List;
  * @since 2021-03-29 14:10:16
  */
 @Service
-public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, MemberReceipt> implements MemberReceiptService {
+public class MemberReceiptServiceImpl extends ServiceImpl<MemberReceiptMapper, MemberReceipt> implements
+	MemberReceiptService {
     @Autowired
     private MemberService memberService;
 

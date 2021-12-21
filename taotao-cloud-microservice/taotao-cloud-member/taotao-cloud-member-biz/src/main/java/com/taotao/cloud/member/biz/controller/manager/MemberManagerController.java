@@ -1,16 +1,11 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
-import cn.lili.common.aop.annotation.DemoSite;
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.dto.ManagerMemberEditDTO;
-import cn.lili.modules.member.entity.dto.MemberAddDTO;
-import cn.lili.modules.member.entity.vo.MemberSearchVO;
-import cn.lili.modules.member.entity.vo.MemberVO;
-import cn.lili.modules.member.service.MemberService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
+import com.taotao.cloud.member.api.dto.MemberAddDTO;
+import com.taotao.cloud.member.api.vo.MemberSearchVO;
+import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.member.biz.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
