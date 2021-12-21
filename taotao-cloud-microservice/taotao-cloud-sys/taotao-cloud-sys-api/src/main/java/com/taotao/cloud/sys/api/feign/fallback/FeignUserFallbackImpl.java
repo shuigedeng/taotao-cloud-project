@@ -14,20 +14,30 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @since 2020/4/29 21:43
  */
 public class FeignUserFallbackImpl implements FallbackFactory<IFeignUserService> {
-    @Override
-    public IFeignUserService create(Throwable throwable) {
-        return new IFeignUserService() {
-            @Override
-            public Result<UserQueryVO> findUserInfoByUsername(String username) {
-                LogUtil.error("调用findUserInfoByUsername异常：{}", throwable, username);
-                return Result.fail(null, 500);
-            }
 
-            @Override
-            public Result<SecurityUser> getUserInfoBySocial(String providerId, int providerUserId) {
-                LogUtil.error("调用getUserInfoBySocial异常：providerId: {}, providerUserId: {}", throwable, providerId, providerUserId);
-                return Result.fail(null, 500);
-            }
-        };
-    }
+	@Override
+	public IFeignUserService create(Throwable throwable) {
+		return new IFeignUserService() {
+			@Override
+			public Result<UserQueryVO> findUserInfoByUsername(String username) {
+				LogUtil.error("调用findUserInfoByUsername异常：{}", throwable, username);
+				return Result.fail(null, 500);
+			}
+
+			@Override
+			public Result<SecurityUser> getUserInfoBySocial(String providerId, int providerUserId) {
+				LogUtil.error("调用getUserInfoBySocial异常：providerId: {}, providerUserId: {}",
+					throwable, providerId, providerUserId);
+				return Result.fail(null, 500);
+			}
+
+			@Override
+			public Result<SecurityUser> getSysSecurityUser(
+				String nicknameOrUserNameOrPhoneOrEmail) {
+				LogUtil.error("调用getUserInfoBySocial异常：nicknameOrUserNameOrPhoneOrEmail: {}",
+					nicknameOrUserNameOrPhoneOrEmail);
+				return Result.fail(null, 500);
+			}
+		};
+	}
 }

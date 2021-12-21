@@ -15,7 +15,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-public class CustomJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+public class CustomJwtGrantedAuthoritiesConverter implements
+	Converter<Jwt, Collection<GrantedAuthority>> {
 
 	private final Log logger = LogFactory.getLog(getClass());
 

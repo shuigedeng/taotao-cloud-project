@@ -15,9 +15,11 @@
  */
 package com.taotao.cloud.oauth2.biz;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -32,9 +34,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 1.0.0
  * @since 2020/4/29 15:13
  */
-@SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.oauth2.biz.repository")
+@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
+@EnableEncryptableProperties
 @EnableDiscoveryClient
+@SpringBootApplication
 public class TaoTaoCloudOauth2BizApplication {
 
 	public static void main(String[] args) {

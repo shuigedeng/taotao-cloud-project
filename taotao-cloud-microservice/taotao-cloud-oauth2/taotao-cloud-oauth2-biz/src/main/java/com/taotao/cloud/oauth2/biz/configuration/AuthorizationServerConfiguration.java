@@ -17,9 +17,6 @@ import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPa
 import com.taotao.cloud.oauth2.biz.jwt.Jwks;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizer;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
-import com.taotao.cloud.oauth2.biz.models.CloudUserDetails;
-import com.taotao.cloud.oauth2.biz.models.CloudUserDetailsMixin;
-import com.taotao.cloud.oauth2.biz.models.LongMixin;
 import com.taotao.cloud.oauth2.biz.service.CloudJdbcOAuth2AuthorizationConsentService;
 import com.taotao.cloud.oauth2.biz.service.CloudOAuth2AuthorizationService;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -59,6 +56,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 
+/**
+ * AuthorizationServerConfiguration
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-12-21 10:24:33
+ */
 @Configuration
 public class AuthorizationServerConfiguration {
 
@@ -123,7 +127,8 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate,
+	public OAuth2AuthorizationService authorizationService(
+		JdbcTemplate jdbcTemplate,
 		RegisteredClientRepository registeredClientRepository,
 		RedisRepository redisRepository,
 		JwtDecoder jwtDecoder) {
@@ -142,10 +147,10 @@ public class AuthorizationServerConfiguration {
 
 		//// You will need to write the Mixin for your class so Jackson can marshall it.
 		//objectMapper.addMixIn(UserAuthority.class, UserAuthorityMixin.class);
-		objectMapper.addMixIn(CloudUserDetails.class, CloudUserDetailsMixin.class);
+		//objectMapper.addMixIn(CloudUserDetails.class, CloudUserDetailsMixin.class);
 		//objectMapper.addMixIn(AuditDeletedDate.class, AuditDeletedDateMixin.class);
-		objectMapper.addMixIn(Long.class, LongMixin.class);
-		//
+		//objectMapper.addMixIn(Long.class, LongMixin.class);
+
 		rowMapper.setObjectMapper(objectMapper);
 		service.setAuthorizationRowMapper(rowMapper);
 
@@ -153,7 +158,8 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate,
+	public OAuth2AuthorizationConsentService authorizationConsentService(
+		JdbcTemplate jdbcTemplate,
 		RegisteredClientRepository registeredClientRepository) {
 
 		return new CloudJdbcOAuth2AuthorizationConsentService(jdbcTemplate,

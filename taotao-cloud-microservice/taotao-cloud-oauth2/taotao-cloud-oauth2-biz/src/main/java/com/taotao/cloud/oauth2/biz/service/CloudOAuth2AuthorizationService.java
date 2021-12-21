@@ -4,11 +4,10 @@ import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.COL
 import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.PREFIX_AUTHORIZATION;
 import static org.springframework.security.oauth2.jwt.JwtClaimNames.EXP;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.time.Instant;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.oauth2.core.OAuth2TokenType;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -18,9 +17,6 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
 public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationService {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(
-		CloudOAuth2AuthorizationService.class);
 
 	private final RedisRepository redisRepository;
 	private final JwtDecoder jwtDecoder;
@@ -53,7 +49,7 @@ public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationServ
 		boolean res = redisRepository.set(PREFIX_AUTHORIZATION + clientId + COLON + username,
 			authorization, 10000L);
 		if (!res) {
-			LOGGER.debug("OAuth2Authorization saved failed...");
+			LogUtil.info("OAuth2Authorization saved failed...");
 		}
 	}
 
@@ -77,21 +73,19 @@ public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationServ
 
 	@Override
 	public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
+		//return super.findByToken(token, tokenType);
 
-		return super.findByToken(token, tokenType);
+		Jwt jwt = jwtDecoder.decode(token);
+		String username = jwt.getSubject();
+		String client = jwt.getAudience().get(0);
 
-		//Jwt jwt = jwtDecoder.decode(token);
-		//String username = jwt.getSubject();
-		//String client = jwt.getAudience().get(0);
-		//
-		//OAuth2Authorization oAuth2Authorization = (OAuth2Authorization) redisRepository.get(
-		//	PREFIX_AUTHORIZATION + client + COLON + username);
-		//
-		//if (Objects.isNull(oAuth2Authorization)) {
-		//	return super.findByToken(token, tokenType);
-		//
-		//}
-		//
-		//return oAuth2Authorization;
+		OAuth2Authorization oAuth2Authorization = (OAuth2Authorization) redisRepository.get(
+			PREFIX_AUTHORIZATION + client + COLON + username);
+
+		if (Objects.isNull(oAuth2Authorization)) {
+			return super.findByToken(token, tokenType);
+		}
+
+		return oAuth2Authorization;
 	}
 }

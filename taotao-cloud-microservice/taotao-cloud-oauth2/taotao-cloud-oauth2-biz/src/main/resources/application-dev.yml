@@ -193,6 +193,8 @@ taotao:
       enabled: true
     feign:
       enabled: true
+      loadbalancer:
+        enabled: true
     redis:
       cache:
         enabled: true

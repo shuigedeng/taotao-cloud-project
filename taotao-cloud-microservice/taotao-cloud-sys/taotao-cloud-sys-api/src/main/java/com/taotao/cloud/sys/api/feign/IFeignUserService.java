@@ -43,5 +43,16 @@ public interface IFeignUserService {
     Result<SecurityUser> getUserInfoBySocial(@RequestParam("providerId") String providerId,
                                              @RequestParam("providerUserId") int providerUserId);
 
+	/**
+	 * 通过用户名查询用户包括角色权限等o
+	 *
+	 * @param nicknameOrUserNameOrPhoneOrEmail 用户名
+	 * @return com.taotao.cloud.common.model.Result<com.taotao.cloud.uc.api.dto.UserDetailsInfo>
+	 * @author shuigedeng
+	 * @since 2020/4/29 17:48
+	 */
+	@GetMapping(value = "/sys/info/security")
+	Result<SecurityUser> getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
+
 }
 
