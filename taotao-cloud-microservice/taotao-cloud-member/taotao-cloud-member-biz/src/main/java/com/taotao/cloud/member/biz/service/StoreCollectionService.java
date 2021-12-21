@@ -1,10 +1,9 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.StoreCollection;
-import cn.lili.modules.member.entity.vo.StoreCollectionVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.api.vo.StoreCollectionVO;
+import com.taotao.cloud.member.biz.entity.StoreCollection;
 
 /**
  * 店铺收藏业务层

@@ -1,16 +1,12 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.FootPrint;
-import cn.lili.modules.member.mapper.FootprintMapper;
-import cn.lili.modules.member.service.FootprintService;
-import cn.lili.modules.search.entity.dos.EsGoodsIndex;
-import cn.lili.modules.search.service.EsGoodsSearchService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.biz.entity.FootPrint;
+import com.taotao.cloud.member.biz.mapper.FootprintMapper;
+import com.taotao.cloud.member.biz.service.FootprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +24,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint> implements FootprintService {
+public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint> implements
+	FootprintService {
 
     /**
      * es商品业务层

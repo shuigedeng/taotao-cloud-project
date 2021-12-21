@@ -1,19 +1,15 @@
 package com.taotao.cloud.member.biz.service;
 
 
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.security.token.Token;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.connect.entity.dto.ConnectAuthUser;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.dto.ManagerMemberEditDTO;
-import cn.lili.modules.member.entity.dto.MemberAddDTO;
-import cn.lili.modules.member.entity.dto.MemberEditDTO;
-import cn.lili.modules.member.entity.vo.MemberSearchVO;
-import cn.lili.modules.member.entity.vo.MemberVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.member.api.dto.ManagerMemberEditDTO;
+import com.taotao.cloud.member.api.dto.MemberAddDTO;
+import com.taotao.cloud.member.api.dto.MemberEditDTO;
+import com.taotao.cloud.member.api.vo.MemberSearchVO;
+import com.taotao.cloud.member.api.vo.MemberVO;
+import com.taotao.cloud.member.biz.entity.Member;
 import java.util.List;
 import java.util.Map;
 

@@ -1,12 +1,5 @@
 package com.taotao.cloud.member.biz.controller.manager;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dto.EvaluationQueryParams;
-import cn.lili.modules.member.entity.vo.MemberEvaluationListVO;
-import cn.lili.modules.member.entity.vo.MemberEvaluationVO;
-import cn.lili.modules.member.service.MemberEvaluationService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

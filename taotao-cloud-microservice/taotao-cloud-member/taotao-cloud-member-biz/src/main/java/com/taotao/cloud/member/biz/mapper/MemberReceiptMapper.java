@@ -1,7 +1,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
-import cn.lili.modules.member.entity.dos.MemberReceipt;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.member.biz.entity.MemberReceipt;
 
 
 /**

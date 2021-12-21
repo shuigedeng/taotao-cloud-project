@@ -1,9 +1,9 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.modules.member.entity.dos.MemberGrade;
-import cn.lili.modules.member.mapper.MemberGradeMapper;
-import cn.lili.modules.member.service.MemberGradeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.biz.entity.MemberGrade;
+import com.taotao.cloud.member.biz.mapper.MemberGradeMapper;
+import com.taotao.cloud.member.biz.service.MemberGradeService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @since 2021/5/14 5:58 下午
  */
 @Service
-public class MemberGradeServiceImpl extends ServiceImpl<MemberGradeMapper, MemberGrade> implements MemberGradeService {
+public class MemberGradeServiceImpl extends ServiceImpl<MemberGradeMapper, MemberGrade> implements
+	MemberGradeService {
 
 }

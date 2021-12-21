@@ -1,11 +1,10 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.GoodsCollection;
-import cn.lili.modules.member.entity.vo.GoodsCollectionVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.biz.entity.GoodsCollection;
 import java.util.List;
 
 /**

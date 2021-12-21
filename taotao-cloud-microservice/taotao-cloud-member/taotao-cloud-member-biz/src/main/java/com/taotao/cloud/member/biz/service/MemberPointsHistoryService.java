@@ -1,10 +1,9 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.MemberPointsHistory;
-import cn.lili.modules.member.entity.vo.MemberPointsHistoryVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
 
 /**
  * 会员积分历史业务层

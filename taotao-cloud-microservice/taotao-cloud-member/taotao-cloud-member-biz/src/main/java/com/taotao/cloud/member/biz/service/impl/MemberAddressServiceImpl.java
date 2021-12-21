@@ -1,16 +1,14 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.MemberAddress;
-import cn.lili.modules.member.mapper.MemberAddressMapper;
-import cn.lili.modules.member.service.MemberAddressService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.biz.entity.MemberAddress;
+import com.taotao.cloud.member.biz.mapper.MemberAddressMapper;
+import com.taotao.cloud.member.biz.service.MemberAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +22,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberAddressServiceImpl extends ServiceImpl<MemberAddressMapper, MemberAddress> implements MemberAddressService {
+public class MemberAddressServiceImpl extends ServiceImpl<MemberAddressMapper, MemberAddress> implements
+	MemberAddressService {
 
     @Override
     public IPage<MemberAddress> getAddressByMember(PageVO page, String memberId) {

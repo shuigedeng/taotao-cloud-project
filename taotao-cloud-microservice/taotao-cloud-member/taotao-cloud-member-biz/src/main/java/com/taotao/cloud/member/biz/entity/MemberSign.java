@@ -1,45 +1,54 @@
 package com.taotao.cloud.member.biz.entity;
 
-import cn.lili.mybatis.BaseIdEntity;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 会员签到
  *
- * 
  * @since 2020-02-25 14:10:16
  */
-@Data
-@TableName("li_member_sign")
-@ApiModel(value = "会员签到")
-public class MemberSign extends BaseIdEntity {
+@Entity
+@Table(name = MemberSign.TABLE_NAME)
+@TableName(MemberSign.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberSign.TABLE_NAME, comment = "会员签到表")
+public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 
-    private static final long serialVersionUID = 1L;
+	public static final String TABLE_NAME = "li_member_sign";
 
-    @CreatedDate
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", hidden = true)
-    private Date createTime;
+	@Column(name = "member_ame", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户名'")
+	private String memberName;
 
-    @ApiModelProperty(value = "会员用户名")
-    private String memberName;
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户ID'")
+	private String memberId;
 
-    @ApiModelProperty(value = "会员用户ID")
-    private String memberId;
+	@Column(name = "sign_day", nullable = false, columnDefinition = "int not null default 0 comment '连续签到天数'")
+	private Integer signDay;
 
-    @ApiModelProperty(value = "连续签到天数")
-    private Integer signDay;
+	public String getMemberName() {
+		return memberName;
+	}
 
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public Integer getSignDay() {
+		return signDay;
+	}
+
+	public void setSignDay(Integer signDay) {
+		this.signDay = signDay;
+	}
 }

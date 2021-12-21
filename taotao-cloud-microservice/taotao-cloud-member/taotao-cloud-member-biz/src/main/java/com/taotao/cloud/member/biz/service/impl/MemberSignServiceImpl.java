@@ -1,28 +1,12 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.member.entity.enums.PointTypeEnum;
-import cn.lili.modules.system.entity.dto.PointSettingItem;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.MemberTagsEnum;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.DateUtil;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.modules.member.entity.dos.MemberSign;
-import cn.lili.modules.member.mapper.MemberSignMapper;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.modules.member.service.MemberSignService;
-import cn.lili.modules.system.entity.dos.Setting;
-import cn.lili.modules.system.entity.dto.PointSetting;
-import cn.lili.modules.system.entity.enums.SettingEnum;
-import cn.lili.modules.system.service.SettingService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
+import com.taotao.cloud.member.biz.entity.MemberSign;
+import com.taotao.cloud.member.biz.mapper.MemberSignMapper;
+import com.taotao.cloud.member.biz.service.MemberService;
+import com.taotao.cloud.member.biz.service.MemberSignService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +22,8 @@ import java.util.Map;
  * @since 2020-02-25 14:10:16
  */
 @Service
-public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberSign> implements MemberSignService {
+public class MemberSignServiceImpl extends ServiceImpl<MemberSignMapper, MemberSign> implements
+	MemberSignService {
 
     /**
      * RocketMQ

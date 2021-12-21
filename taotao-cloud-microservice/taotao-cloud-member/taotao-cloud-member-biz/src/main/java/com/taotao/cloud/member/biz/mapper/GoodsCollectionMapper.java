@@ -1,11 +1,11 @@
 package com.taotao.cloud.member.biz.mapper;
 
-import cn.lili.modules.member.entity.dos.GoodsCollection;
-import cn.lili.modules.member.entity.vo.GoodsCollectionVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.biz.entity.GoodsCollection;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

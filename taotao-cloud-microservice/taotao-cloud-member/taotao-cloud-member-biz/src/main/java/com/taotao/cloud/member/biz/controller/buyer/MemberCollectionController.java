@@ -1,10 +1,7 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.service.GoodsCollectionService;
-import cn.lili.modules.member.service.StoreCollectionService;
+import com.taotao.cloud.member.biz.service.GoodsCollectionService;
+import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

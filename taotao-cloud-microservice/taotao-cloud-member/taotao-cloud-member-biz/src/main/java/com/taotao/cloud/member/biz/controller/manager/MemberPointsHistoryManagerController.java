@@ -1,12 +1,9 @@
 package com.taotao.cloud.member.biz.controller.manager;
  
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dos.MemberPointsHistory;
-import cn.lili.modules.member.entity.vo.MemberPointsHistoryVO;
-import cn.lili.modules.member.service.MemberPointsHistoryService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.member.api.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.biz.entity.MemberPointsHistory;
+import com.taotao.cloud.member.biz.service.MemberPointsHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

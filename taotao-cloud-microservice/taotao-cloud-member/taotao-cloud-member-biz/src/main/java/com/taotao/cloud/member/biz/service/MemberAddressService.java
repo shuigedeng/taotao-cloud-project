@@ -1,9 +1,8 @@
 package com.taotao.cloud.member.biz.service;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.MemberAddress;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.member.biz.entity.MemberAddress;
 
 /**
  * 收货地址业务层

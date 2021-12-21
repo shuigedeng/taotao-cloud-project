@@ -1,17 +1,13 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.member.entity.dos.Member;
-import cn.lili.modules.member.entity.dos.MemberNotice;
-import cn.lili.modules.member.entity.dos.MemberNoticeSenter;
-import cn.lili.modules.member.entity.enums.SendTypeEnum;
-import cn.lili.modules.member.mapper.MemberNoticeSenterMapper;
-import cn.lili.modules.member.service.MemberNoticeSenterService;
-import cn.lili.modules.member.service.MemberNoticeService;
-import cn.lili.modules.member.service.MemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.enums.SendTypeEnum;
+import com.taotao.cloud.member.biz.entity.MemberNotice;
+import com.taotao.cloud.member.biz.entity.MemberNoticeSenter;
+import com.taotao.cloud.member.biz.mapper.MemberNoticeSenterMapper;
+import com.taotao.cloud.member.biz.service.MemberNoticeSenterService;
+import com.taotao.cloud.member.biz.service.MemberNoticeService;
+import com.taotao.cloud.member.biz.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,7 +24,8 @@ import java.util.List;
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSenterMapper, MemberNoticeSenter> implements MemberNoticeSenterService {
+public class MemberNoticeSenterServiceImpl extends ServiceImpl<MemberNoticeSenterMapper, MemberNoticeSenter> implements
+	MemberNoticeSenterService {
 
     /**
      * 会员

@@ -1,12 +1,10 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.modules.member.mapper.StoreLogisticsMapper;
-import cn.lili.modules.member.service.StoreLogisticsService;
-import cn.lili.modules.store.entity.dos.StoreLogistics;
-import cn.lili.modules.system.entity.vo.StoreLogisticsVO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.biz.mapper.StoreLogisticsMapper;
+import com.taotao.cloud.member.biz.service.StoreLogisticsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +16,8 @@ import java.util.List;
  * @since 2020/11/17 8:02 下午
  */
 @Service
-public class StoreLogisticsServiceImpl extends ServiceImpl<StoreLogisticsMapper, StoreLogistics> implements StoreLogisticsService {
+public class StoreLogisticsServiceImpl extends ServiceImpl<StoreLogisticsMapper, StoreLogistics> implements
+	StoreLogisticsService {
 
     @Override
     public List<StoreLogisticsVO> getStoreLogistics(String storeId) {

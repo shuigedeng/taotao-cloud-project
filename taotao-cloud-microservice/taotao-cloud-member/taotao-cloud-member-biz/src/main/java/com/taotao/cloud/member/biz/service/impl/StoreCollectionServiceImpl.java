@@ -1,20 +1,15 @@
 package com.taotao.cloud.member.biz.service.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.member.entity.dos.StoreCollection;
-import cn.lili.modules.member.entity.dto.CollectionDTO;
-import cn.lili.modules.member.entity.vo.StoreCollectionVO;
-import cn.lili.modules.member.mapper.StoreCollectionMapper;
-import cn.lili.modules.member.service.StoreCollectionService;
-import cn.lili.modules.store.service.StoreService;
-import cn.lili.mybatis.util.PageUtil;
+import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.member.api.dto.CollectionDTO;
+import com.taotao.cloud.member.api.vo.StoreCollectionVO;
+import com.taotao.cloud.member.biz.entity.StoreCollection;
+import com.taotao.cloud.member.biz.mapper.StoreCollectionMapper;
+import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +22,8 @@ import java.util.Optional;
  * @since 2020/11/18 2:52 下午
  */
 @Service
-public class StoreCollectionServiceImpl extends ServiceImpl<StoreCollectionMapper, StoreCollection> implements StoreCollectionService {
+public class StoreCollectionServiceImpl extends ServiceImpl<StoreCollectionMapper, StoreCollection> implements
+	StoreCollectionService {
 
 
     @Autowired

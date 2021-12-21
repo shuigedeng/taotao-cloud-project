@@ -23,17 +23,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 /**
- * 公司表
+ * 会员公司表
  *
  * @author shuigedeng
  * @version 2021.10
  * @since 2021-10-09 21:11:38
  */
 @Entity
-@TableName(SysCompany.TABLE_NAME)
-@Table(name = SysCompany.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = SysCompany.TABLE_NAME, comment = "公司表")
-public class SysCompany extends BaseSuperEntity<SysCompany,Long> {
+@TableName(MemberCompany.TABLE_NAME)
+@Table(name = MemberCompany.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = MemberCompany.TABLE_NAME, comment = "会员公司表")
+public class MemberCompany extends BaseSuperEntity<MemberCompany,Long> {
 
 	public static final String TABLE_NAME = "uc_sys_company";
 
@@ -113,8 +113,8 @@ public class SysCompany extends BaseSuperEntity<SysCompany,Long> {
 	/**
 	 * 公司类型
 	 */
-	@Column(name = "type", nullable = false, columnDefinition = "tinyint(1) unsigned not null default 1 comment '公司类型 1运营商 2供应商'")
-	private byte type = 1;
+	@Column(name = "type", nullable = false, columnDefinition = "int not null default 1 comment '公司类型 1运营商 2供应商'")
+	private Integer type = 1;
 
 	public String getTenantId() {
 		return tenantId;
@@ -212,33 +212,11 @@ public class SysCompany extends BaseSuperEntity<SysCompany,Long> {
 		this.regionInfo = regionInfo;
 	}
 
-	public byte getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(byte type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
-
-	public SysCompany() {
-	}
-
-	public SysCompany(String tenantId, String tenantSecret, String name, String fullName,
-		String creditCode, String email, String username, String phone, String address,
-		String domain, String webSite, String regionInfo, byte type) {
-		this.tenantId = tenantId;
-		this.tenantSecret = tenantSecret;
-		this.name = name;
-		this.fullName = fullName;
-		this.creditCode = creditCode;
-		this.email = email;
-		this.username = username;
-		this.phone = phone;
-		this.address = address;
-		this.domain = domain;
-		this.webSite = webSite;
-		this.regionInfo = regionInfo;
-		this.type = type;
-	}
-
 }
