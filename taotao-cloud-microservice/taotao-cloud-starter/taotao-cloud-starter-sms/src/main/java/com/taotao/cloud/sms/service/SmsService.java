@@ -37,7 +37,7 @@ public interface SmsService {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:43:46
 	 */
-	boolean sendSms(@NonNull String phoneNumber, @NonNull String signName,
+	String sendSms(@NonNull String phoneNumber, @NonNull String signName,
 		@NonNull String templateCode, @NonNull String templateParam);
 
 	/**

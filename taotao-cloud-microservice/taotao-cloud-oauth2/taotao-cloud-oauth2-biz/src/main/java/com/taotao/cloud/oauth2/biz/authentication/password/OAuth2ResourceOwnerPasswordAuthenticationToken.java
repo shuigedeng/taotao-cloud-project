@@ -1,5 +1,6 @@
 package com.taotao.cloud.oauth2.biz.authentication.password;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.util.Assert;
 
@@ -30,6 +32,27 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 		@Nullable Set<String> scopes,
 		@Nullable Map<String, Object> additionalParameters) {
 		super(Collections.emptyList());
+
+		Assert.notNull(authorizationGrantType, "authorizationGrantType cannot be null");
+		Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
+
+		this.authorizationGrantType = authorizationGrantType;
+		this.clientPrincipal = clientPrincipal;
+		this.scopes = Collections.unmodifiableSet(
+			scopes != null ? new HashSet<>(scopes) : Collections.emptySet());
+		this.additionalParameters = Collections.unmodifiableMap(
+			additionalParameters != null ? new HashMap<>(additionalParameters)
+				: Collections.emptyMap());
+	}
+
+	public OAuth2ResourceOwnerPasswordAuthenticationToken(
+		AuthorizationGrantType authorizationGrantType,
+		Authentication clientPrincipal,
+		@Nullable Set<String> scopes,
+		@Nullable Map<String, Object> additionalParameters,
+		Collection<? extends GrantedAuthority> authorities) {
+
+		super(authorities);
 
 		Assert.notNull(authorizationGrantType, "authorizationGrantType cannot be null");
 		Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");

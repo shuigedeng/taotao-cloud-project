@@ -1,13 +1,13 @@
-package com.taotao.cloud.seckill.biz.service.impl;
+package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.seckill.biz.common.dynamicquery.DynamicQuery;
-import com.taotao.cloud.seckill.biz.common.entity.Result;
-import com.taotao.cloud.seckill.biz.common.entity.SuccessKilled;
-import com.taotao.cloud.seckill.biz.common.enums.SeckillStatEnum;
-import com.taotao.cloud.seckill.biz.common.exception.RrException;
-import com.taotao.cloud.seckill.biz.distributedlock.redis.RedissLockUtil;
-import com.taotao.cloud.seckill.biz.distributedlock.zookeeper.ZkLockUtil;
-import com.taotao.cloud.seckill.biz.service.ISeckillDistributedService;
+import com.taotao.cloud.distribution.biz.common.dynamicquery.DynamicQuery;
+import com.taotao.cloud.distribution.biz.common.entity.Result;
+import com.taotao.cloud.distribution.biz.common.entity.SuccessKilled;
+import com.taotao.cloud.distribution.biz.common.enums.distributionStatEnum;
+import com.taotao.cloud.distribution.biz.common.exception.RrException;
+import com.taotao.cloud.distribution.biz.distributedlock.redis.RedissLockUtil;
+import com.taotao.cloud.distribution.biz.distributedlock.zookeeper.ZkLockUtil;
+import com.taotao.cloud.distribution.biz.service.ISeckillDistributedService;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.news.biz.entity;
+package com.taotao.cloud.message.biz.entity;
 
 import cn.lili.modules.message.entity.enums.MessageStatusEnum;
 import cn.lili.mybatis.BaseIdEntity;

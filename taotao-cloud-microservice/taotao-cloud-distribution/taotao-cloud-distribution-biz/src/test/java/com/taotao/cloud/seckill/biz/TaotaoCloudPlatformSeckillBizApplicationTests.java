@@ -1,4 +1,4 @@
-package com.taotao.cloud.seckill.biz;
+package com.taotao.cloud.distribution.biz;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

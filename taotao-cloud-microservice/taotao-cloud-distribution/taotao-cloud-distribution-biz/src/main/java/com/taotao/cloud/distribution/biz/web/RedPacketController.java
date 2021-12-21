@@ -1,12 +1,12 @@
-package com.taotao.cloud.seckill.biz.web;
+package com.taotao.cloud.distribution.biz.web;
 
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.redis.RedisUtil;
-import com.itstyle.seckill.common.utils.DoubleUtil;
-import com.itstyle.seckill.queue.delay.jvm.RedPacketMessage;
-import com.itstyle.seckill.queue.delay.jvm.RedPacketQueue;
-import com.itstyle.seckill.service.IRedPacketService;
+import com.itstyle.distribution.common.entity.Result;
+import com.itstyle.distribution.common.redis.RedisUtil;
+import com.itstyle.distribution.common.utils.DoubleUtil;
+import com.itstyle.distribution.queue.delay.jvm.RedPacketMessage;
+import com.itstyle.distribution.queue.delay.jvm.RedPacketQueue;
+import com.itstyle.distribution.service.IRedPacketService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.concurrent.CountDownLatch;

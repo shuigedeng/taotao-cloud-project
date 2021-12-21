@@ -24,22 +24,18 @@ package com.taotao.cloud.common.constant;
  */
 public class RedisConstant {
 
-	private RedisConstant() {
-
-	}
-
 	/**
 	 * 图形验证码
 	 */
-	public static final String TAOTAO_CLOUD_CAPTCHA_KEY = "taotao_cloud_captcha_key:";
+	public static final String CAPTCHA_KEY_PREFIX = "CAPTCHA:KEY:";
 
 	/**
 	 * 短信验证码
 	 */
-	public static final String TAOTAO_CLOUD_SMS_KEY = "taotao_cloud_sms_key:";
+	public static final String SMS_KEY_PREFIX = "SMS:KEY:";
 
 	/**
 	 * 分布式锁key
 	 */
-	public static final String LOCK_KEY_PREFIX = "LOCK_KEY:";
+	public static final String LOCK_KEY_PREFIX = "LOCK:KEY:";
 }

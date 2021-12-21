@@ -1,13 +1,13 @@
-package com.taotao.cloud.seckill.biz;
+package com.taotao.cloud.distribution.biz;
 
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 @TaoTaoCloudApplication
-public class TaoTaoCloudSeckillApplication {
+public class TaoTaoCloudDistributionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TaoTaoCloudSeckillApplication.class, args);
+		SpringApplication.run(TaoTaoCloudDistributionApplication.class, args);
 	}
 
 }

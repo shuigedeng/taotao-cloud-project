@@ -1,13 +1,13 @@
-package com.taotao.cloud.seckill.biz.web;
+package com.taotao.cloud.distribution.biz.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.entity.Seckill;
-import com.itstyle.seckill.common.redis.RedisUtil;
-import com.itstyle.seckill.common.utils.HttpClient;
-import com.itstyle.seckill.common.utils.IPUtils;
-import com.itstyle.seckill.queue.activemq.ActiveMQSender;
-import com.itstyle.seckill.service.ISeckillService;
+import com.itstyle.distribution.common.entity.Result;
+import com.itstyle.distribution.common.entity.distribution;
+import com.itstyle.distribution.common.redis.RedisUtil;
+import com.itstyle.distribution.common.utils.HttpClient;
+import com.itstyle.distribution.common.utils.IPUtils;
+import com.itstyle.distribution.queue.activemq.ActiveMQSender;
+import com.itstyle.distribution.service.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;

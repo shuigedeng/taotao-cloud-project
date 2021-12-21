@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.biz.mapper;
+package com.taotao.cloud.message.biz.mapper;
 
-import com.taotao.cloud.news.api.vo.WithdrawVO;
-import com.taotao.cloud.news.biz.entity.Withdraw;
+import com.taotao.cloud.message.api.vo.WithdrawVO;
+import com.taotao.cloud.message.biz.entity.Withdraw;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -126,7 +126,7 @@ spring:
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
-            redirect-uri:  http://cf4b-183-67-94-181.ngrok.io/login/oauth2/code/gitee
+            redirect-uri: http://cf4b-183-67-94-181.ngrok.io/login/oauth2/code/gitee
           wechat:
             client-id: xxx
             client-secret: xxxx
@@ -202,6 +202,15 @@ taotao:
       enabled: true
     core:
       env: dev
+    sms:
+      enabled: true
+      type: aliyun
+      aliyun:
+        access-key: asf23r
+        secret-key: sldflasdf
+        sign-name: ""
+        template-id: slfsdf
+        product: sdfa
 
 feign:
   sentinel:
@@ -253,8 +262,6 @@ management:
     mail:
       enabled: false
     elasticsearch:
-      enabled: false
-    kafka:
       enabled: false
 
 logging:
