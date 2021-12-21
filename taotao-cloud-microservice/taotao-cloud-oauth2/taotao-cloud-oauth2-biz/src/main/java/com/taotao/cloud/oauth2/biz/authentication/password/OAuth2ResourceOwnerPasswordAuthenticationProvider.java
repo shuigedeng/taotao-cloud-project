@@ -1,14 +1,14 @@
 package com.taotao.cloud.oauth2.biz.authentication.password;
 
 import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.TYPE;
+import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.VERIFICATION_CODE;
 
 import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.authentication.JwtUtils;
+import com.taotao.cloud.oauth2.biz.authentication.OAuth2EndpointUtils;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
 import java.security.Principal;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -18,8 +18,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -53,9 +51,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements AuthenticationProvider {
-
-	private static final Logger LOGGER = LogManager.getLogger(
-		OAuth2ResourceOwnerPasswordAuthenticationProvider.class);
 
 	private static final StringKeyGenerator DEFAULT_REFRESH_TOKEN_GENERATOR = new Base64StringKeyGenerator(
 		Base64.getUrlEncoder().withoutPadding(), 96);
@@ -105,7 +100,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 		HttpServletResponse response = RequestUtil.getHttpServletResponse();
 		OAuth2ResourceOwnerPasswordAuthenticationToken resouceOwnerPasswordAuthentication = (OAuth2ResourceOwnerPasswordAuthenticationToken) authentication;
 
-		OAuth2ClientAuthenticationToken clientPrincipal = getAuthenticatedClientElseThrowInvalidClient(
+		OAuth2ClientAuthenticationToken clientPrincipal = OAuth2EndpointUtils.getAuthenticatedClientElseThrowInvalidClient(
 			resouceOwnerPasswordAuthentication);
 		RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
@@ -120,6 +115,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 		String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
 		// 用户类型
 		String type = (String) additionalParameters.get(TYPE);
+		// 验证码
+		String code = (String) additionalParameters.get(VERIFICATION_CODE);
 
 		try {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -132,7 +129,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 			if (!CollectionUtils.isEmpty(resouceOwnerPasswordAuthentication.getScopes())) {
 				Set<String> unauthorizedScopes = resouceOwnerPasswordAuthentication.getScopes()
 					.stream()
-					.filter(requestedScope -> !registeredClient.getScopes().contains(requestedScope))
+					.filter(
+						requestedScope -> !registeredClient.getScopes().contains(requestedScope))
 					.collect(Collectors.toSet());
 				if (!CollectionUtils.isEmpty(unauthorizedScopes)) {
 					throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_SCOPE);
@@ -159,7 +157,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 				.authorizationGrant(resouceOwnerPasswordAuthentication)
 				.build();
 
-			this.jwtCustomizer.customize(context);
+			jwtCustomizer.customize(context);
 
 			JoseHeader headers = context.getHeaders().build();
 			JwtClaimsSet claims = context.getClaims().build();
@@ -176,8 +174,9 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 			OAuth2RefreshToken refreshToken = null;
 			if (registeredClient.getAuthorizationGrantTypes()
 				.contains(AuthorizationGrantType.REFRESH_TOKEN)) {
-				refreshToken = generateRefreshToken(
-					registeredClient.getTokenSettings().getRefreshTokenTimeToLive());
+				refreshToken = OAuth2EndpointUtils.generateRefreshToken(
+					registeredClient.getTokenSettings().getRefreshTokenTimeToLive(),
+					refreshTokenGenerator);
 			}
 
 			OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(
@@ -196,9 +195,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
 			OAuth2Authorization authorization = authorizationBuilder.build();
 
-			this.authorizationService.save(authorization);
-
-			LOGGER.debug("OAuth2Authorization saved successfully");
+			authorizationService.save(authorization);
 
 			Map<String, Object> tokenAdditionalParameters = new HashMap<>();
 			claims.getClaims().forEach((key, value) -> {
@@ -210,48 +207,17 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 				}
 			});
 
-			LOGGER.debug("returning OAuth2AccessTokenAuthenticationToken");
-
 			return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal,
 				accessToken, refreshToken, tokenAdditionalParameters);
-
 		} catch (Exception ex) {
-			LOGGER.error("problem in authenticate", ex);
 			throw new OAuth2AuthenticationException(new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR),
 				ex);
 		}
-
 	}
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		boolean supports = OAuth2ResourceOwnerPasswordAuthenticationToken.class.isAssignableFrom(
+		return OAuth2ResourceOwnerPasswordAuthenticationToken.class.isAssignableFrom(
 			authentication);
-		LOGGER.info("supports authentication=" + authentication + " returning " + supports);
-		return supports;
 	}
-
-	private OAuth2ClientAuthenticationToken getAuthenticatedClientElseThrowInvalidClient(
-		Authentication authentication) {
-
-		OAuth2ClientAuthenticationToken clientPrincipal = null;
-
-		if (OAuth2ClientAuthenticationToken.class.isAssignableFrom(
-			authentication.getPrincipal().getClass())) {
-			clientPrincipal = (OAuth2ClientAuthenticationToken) authentication.getPrincipal();
-		}
-
-		if (clientPrincipal != null && clientPrincipal.isAuthenticated()) {
-			return clientPrincipal;
-		}
-
-		throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_CLIENT);
-	}
-
-	private OAuth2RefreshToken generateRefreshToken(Duration tokenTimeToLive) {
-		Instant issuedAt = Instant.now();
-		Instant expiresAt = issuedAt.plus(tokenTimeToLive);
-		return new OAuth2RefreshToken(this.refreshTokenGenerator.get(), issuedAt, expiresAt);
-	}
-
 }
