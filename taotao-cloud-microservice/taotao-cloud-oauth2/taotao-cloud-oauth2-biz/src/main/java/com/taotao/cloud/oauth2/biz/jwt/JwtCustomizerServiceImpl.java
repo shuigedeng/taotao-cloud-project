@@ -69,13 +69,9 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 						if (!CollectionUtils.isEmpty(additionalParameters)) {
 
 						}
-
 					}
-
 				}
 			}
 		}
-
 	}
-
 }

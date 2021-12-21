@@ -1,10 +1,10 @@
-package com.taotao.cloud.product.api.feign;
+package com.taotao.cloud.stock.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.product.api.dto.ProductDTO;
-import com.taotao.cloud.product.api.feign.fallback.RemoteProductFallbackImpl;
-import com.taotao.cloud.product.api.vo.ProductVO;
+import com.taotao.cloud.stock.api.dto.ProductDTO;
+import com.taotao.cloud.stock.api.feign.fallback.RemoteProductFallbackImpl;
+import com.taotao.cloud.stock.api.vo.ProductVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

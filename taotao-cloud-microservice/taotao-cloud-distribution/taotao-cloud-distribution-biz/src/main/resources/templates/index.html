@@ -72,7 +72,7 @@ var tableTitle = [ {
 			},
 			on : {
 				click : function() {
-					window.open(params.row.seckillId+".shtml");     
+					window.open(params.row.distributionId+".shtml");
 				}
 			}
 		}, '购买');
@@ -94,7 +94,7 @@ var vm = new Vue({
 			    data: {},
 			    dataType: "json",
 			    success: function(result){
-					vm.seckillData = result.msg;
+					vm.distributionData = result.msg;
 				}
 			});
 		},

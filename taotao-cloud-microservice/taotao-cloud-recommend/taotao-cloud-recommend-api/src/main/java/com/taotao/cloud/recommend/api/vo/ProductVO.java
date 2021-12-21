@@ -1,4 +1,4 @@
-package com.taotao.cloud.product.api.vo;
+package com.taotao.cloud.recommend.api.vo;
 
 
 import java.io.Serializable;

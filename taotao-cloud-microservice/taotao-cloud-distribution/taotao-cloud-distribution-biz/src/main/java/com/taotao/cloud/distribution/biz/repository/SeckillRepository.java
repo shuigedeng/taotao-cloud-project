@@ -1,6 +1,6 @@
-package com.taotao.cloud.seckill.biz.repository;
+package com.taotao.cloud.distribution.biz.repository;
 
-import com.taotao.cloud.seckill.biz.common.entity.Seckill;
+import com.taotao.cloud.distribution.biz.common.entity.distribution;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

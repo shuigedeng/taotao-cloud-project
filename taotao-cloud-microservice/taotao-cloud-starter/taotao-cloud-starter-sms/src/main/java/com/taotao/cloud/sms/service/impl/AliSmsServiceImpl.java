@@ -47,9 +47,9 @@ public class AliSmsServiceImpl implements SmsService {
 	}
 
 	@Override
-	public boolean sendSms(@NonNull String phoneNumber, @NonNull String signName,
+	public String sendSms(@NonNull String phoneNumber, @NonNull String signName,
 		@NonNull String templateCode, @NonNull String templateParam) {
-		CommonRequest request = this.request();
+		CommonRequest request = request();
 		request.putQueryParameter("PhoneNumbers", phoneNumber);
 		request.putQueryParameter("SignName", signName);
 		request.putQueryParameter("TemplateCode", templateCode);
@@ -58,11 +58,11 @@ public class AliSmsServiceImpl implements SmsService {
 		try {
 			CommonResponse response = iAcsClient.getCommonResponse(request);
 			LogUtil.info(response.getData());
-			return true;
+			return response.getData();
 		} catch (Exception e) {
-			LogUtil.error("异常：{}", e);
+			LogUtil.error("发送短信异常：{}", e);
 		}
-		return false;
+		return null;
 	}
 
 	@Override

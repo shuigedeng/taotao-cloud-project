@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.biz.service;
+package com.taotao.cloud.message.biz.service;
 
 
-import com.taotao.cloud.news.biz.entity.Withdraw;
+import com.taotao.cloud.message.biz.entity.Withdraw;
 
 /**
  * @author shuigedeng

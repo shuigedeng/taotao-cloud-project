@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.biz.controller;
+package com.taotao.cloud.message.biz.controller;
 
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.news.api.vo.WithdrawVO;
-import com.taotao.cloud.news.biz.entity.Withdraw;
-import com.taotao.cloud.news.biz.mapper.WithdrawMapper;
-import com.taotao.cloud.news.biz.service.IWithdrawService;
+import com.taotao.cloud.message.api.vo.WithdrawVO;
+import com.taotao.cloud.message.biz.entity.Withdraw;
+import com.taotao.cloud.message.biz.mapper.WithdrawMapper;
+import com.taotao.cloud.message.biz.service.IWithdrawService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;

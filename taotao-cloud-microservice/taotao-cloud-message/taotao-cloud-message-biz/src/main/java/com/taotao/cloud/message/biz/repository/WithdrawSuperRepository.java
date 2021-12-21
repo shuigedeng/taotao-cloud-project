@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.biz.repository;
+package com.taotao.cloud.message.biz.repository;
 
 import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
-import com.taotao.cloud.news.biz.entity.Withdraw;
+import com.taotao.cloud.message.biz.entity.Withdraw;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

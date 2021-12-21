@@ -1,14 +1,14 @@
-package com.taotao.cloud.seckill.biz.service.impl;
+package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.seckill.biz.common.aop.Servicelock;
-import com.taotao.cloud.seckill.biz.common.dynamicquery.DynamicQuery;
-import com.taotao.cloud.seckill.biz.common.entity.Result;
-import com.taotao.cloud.seckill.biz.common.entity.Seckill;
-import com.taotao.cloud.seckill.biz.common.entity.SuccessKilled;
-import com.taotao.cloud.seckill.biz.common.enums.SeckillStatEnum;
-import com.taotao.cloud.seckill.biz.common.exception.RrException;
-import com.taotao.cloud.seckill.biz.repository.SeckillRepository;
-import com.taotao.cloud.seckill.biz.service.ISeckillService;
+import com.taotao.cloud.distribution.biz.common.aop.Servicelock;
+import com.taotao.cloud.distribution.biz.common.dynamicquery.DynamicQuery;
+import com.taotao.cloud.distribution.biz.common.entity.Result;
+import com.taotao.cloud.distribution.biz.common.entity.distribution;
+import com.taotao.cloud.distribution.biz.common.entity.SuccessKilled;
+import com.taotao.cloud.distribution.biz.common.enums.distributionStatEnum;
+import com.taotao.cloud.distribution.biz.common.exception.RrException;
+import com.taotao.cloud.distribution.biz.repository.distributionRepository;
+import com.taotao.cloud.distribution.biz.service.ISeckillService;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.locks.Lock;

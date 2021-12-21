@@ -1,7 +1,7 @@
-package com.taotao.cloud.seckill.biz.web;
+package com.taotao.cloud.distribution.biz.web;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.service.ICreateHtmlService;
+import com.itstyle.distribution.common.entity.Result;
+import com.itstyle.distribution.service.ICreateHtmlService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

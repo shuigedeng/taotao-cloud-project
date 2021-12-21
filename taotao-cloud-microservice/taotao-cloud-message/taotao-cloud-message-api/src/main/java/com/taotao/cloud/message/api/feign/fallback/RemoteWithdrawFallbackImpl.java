@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.api.feign.fallback;
+package com.taotao.cloud.message.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.news.api.feign.RemoteWithdrawService;
-import com.taotao.cloud.news.api.vo.WithdrawVO;
+import com.taotao.cloud.message.api.feign.RemoteWithdrawService;
+import com.taotao.cloud.message.api.vo.WithdrawVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

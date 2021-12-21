@@ -1,7 +1,7 @@
-package com.taotao.cloud.seckill.biz.service;
+package com.taotao.cloud.distribution.biz.service;
 
 
-import com.taotao.cloud.seckill.biz.common.entity.Result;
+import com.taotao.cloud.distribution.biz.common.entity.Result;
 
 /**
  * 生成商品静态页

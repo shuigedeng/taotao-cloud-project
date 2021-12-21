@@ -1,12 +1,12 @@
-package com.taotao.cloud.seckill.biz.web;
+package com.taotao.cloud.distribution.biz.web;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.redis.RedisUtil;
-import com.itstyle.seckill.queue.activemq.ActiveMQSender;
-import com.itstyle.seckill.queue.kafka.KafkaSender;
-import com.itstyle.seckill.queue.redis.RedisSender;
-import com.itstyle.seckill.service.ISeckillDistributedService;
-import com.itstyle.seckill.service.ISeckillService;
+import com.itstyle.distribution.common.entity.Result;
+import com.itstyle.distribution.common.redis.RedisUtil;
+import com.itstyle.distribution.queue.activemq.ActiveMQSender;
+import com.itstyle.distribution.queue.kafka.KafkaSender;
+import com.itstyle.distribution.queue.redis.RedisSender;
+import com.itstyle.distribution.service.ISeckillDistributedService;
+import com.itstyle.distribution.service.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.concurrent.LinkedBlockingQueue;

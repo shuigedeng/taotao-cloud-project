@@ -71,7 +71,7 @@ public class ImageCodeGatewayFilterFactory extends AbstractGatewayFilterFactory<
 		if (StrUtil.isBlank(code)) {
 			throw new BaseException(NOT_CODE_NULL);
 		}
-		String key = RedisConstant.TAOTAO_CLOUD_CAPTCHA_KEY + t;
+		String key = RedisConstant.CAPTCHA_KEY_PREFIX + t;
 		if (!redisRepository.exists(key)) {
 			throw new BaseException(NOT_LEGAL);
 		}

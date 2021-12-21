@@ -3,8 +3,6 @@ package com.taotao.cloud.oauth2.biz.authentication.password;
 import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.TYPE;
 import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.VERIFICATION_CODE;
 
-import com.taotao.cloud.common.utils.RequestUtil;
-import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.authentication.JwtUtils;
 import com.taotao.cloud.oauth2.biz.authentication.OAuth2EndpointUtils;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
@@ -17,7 +15,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -97,7 +94,6 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 	@Override
 	public Authentication authenticate(Authentication authentication)
 		throws AuthenticationException {
-		HttpServletResponse response = RequestUtil.getHttpServletResponse();
 		OAuth2ResourceOwnerPasswordAuthenticationToken resouceOwnerPasswordAuthentication = (OAuth2ResourceOwnerPasswordAuthenticationToken) authentication;
 
 		OAuth2ClientAuthenticationToken clientPrincipal = OAuth2EndpointUtils.getAuthenticatedClientElseThrowInvalidClient(
@@ -106,25 +102,14 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
 		if (Objects.isNull(registeredClient) || !registeredClient.getAuthorizationGrantTypes()
 			.contains(AuthorizationGrantType.PASSWORD)) {
-			ResponseUtil.fail(response, "客户端类型认证错误");
-			//throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
+			throw new OAuth2AuthenticationException("客户端类型认证错误");
 		}
 
-		Map<String, Object> additionalParameters = resouceOwnerPasswordAuthentication.getAdditionalParameters();
-		String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
-		String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
-		// 用户类型
-		String type = (String) additionalParameters.get(TYPE);
-		// 验证码
-		String code = (String) additionalParameters.get(VERIFICATION_CODE);
-
 		try {
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-				username, password);
-
 			Authentication usernamePasswordAuthentication = authenticationManager.authenticate(
-				usernamePasswordAuthenticationToken);
-			Set<String> authorizedScopes = registeredClient.getScopes();        // Default to configured scopes
+				resouceOwnerPasswordAuthentication);
+
+			Set<String> authorizedScopes = registeredClient.getScopes();
 
 			if (!CollectionUtils.isEmpty(resouceOwnerPasswordAuthentication.getScopes())) {
 				Set<String> unauthorizedScopes = resouceOwnerPasswordAuthentication.getScopes()

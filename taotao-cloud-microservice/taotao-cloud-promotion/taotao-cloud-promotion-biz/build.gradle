@@ -1,4 +1,6 @@
 dependencies {
+    implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-web')
+
     implementation project(':taotao-cloud-microservice:taotao-cloud-promotion:taotao-cloud-promotion-api')
 
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'

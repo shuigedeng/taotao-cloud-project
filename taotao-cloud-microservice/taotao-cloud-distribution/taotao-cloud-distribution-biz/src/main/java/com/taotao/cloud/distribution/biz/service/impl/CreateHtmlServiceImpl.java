@@ -1,9 +1,9 @@
-package com.taotao.cloud.seckill.biz.service.impl;
+package com.taotao.cloud.distribution.biz.service.impl;
 
-import com.taotao.cloud.seckill.biz.common.entity.Result;
-import com.taotao.cloud.seckill.biz.common.entity.Seckill;
-import com.taotao.cloud.seckill.biz.repository.SeckillRepository;
-import com.taotao.cloud.seckill.biz.service.ICreateHtmlService;
+import com.taotao.cloud.distribution.biz.common.entity.Result;
+import com.taotao.cloud.distribution.biz.common.entity.distribution;
+import com.taotao.cloud.distribution.biz.repository.distributionRepository;
+import com.taotao.cloud.distribution.biz.service.ICreateHtmlService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import java.io.File;
@@ -62,7 +62,7 @@ public class CreateHtmlServiceImpl implements ICreateHtmlService {
 		Seckill seckill;
 
 		public createhtml(Seckill seckill) {
-			this.seckill = seckill;
+			this.distribution = seckill;
 		}
 
 		@Override

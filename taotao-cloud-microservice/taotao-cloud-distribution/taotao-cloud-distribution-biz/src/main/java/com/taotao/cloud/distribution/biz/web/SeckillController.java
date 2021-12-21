@@ -1,12 +1,12 @@
-package com.taotao.cloud.seckill.biz.web;
+package com.taotao.cloud.distribution.biz.web;
 
-import com.itstyle.seckill.common.entity.Result;
-import com.itstyle.seckill.common.entity.SuccessKilled;
-import com.itstyle.seckill.common.exception.RrException;
-import com.itstyle.seckill.queue.disruptor.DisruptorUtil;
-import com.itstyle.seckill.queue.disruptor.SeckillEvent;
-import com.itstyle.seckill.queue.jvm.SeckillQueue;
-import com.itstyle.seckill.service.ISeckillService;
+import com.itstyle.distribution.common.entity.Result;
+import com.itstyle.distribution.common.entity.SuccessKilled;
+import com.itstyle.distribution.common.exception.RrException;
+import com.itstyle.distribution.queue.disruptor.DisruptorUtil;
+import com.itstyle.distribution.queue.disruptor.distributionEvent;
+import com.itstyle.distribution.queue.jvm.distributionQueue;
+import com.itstyle.distribution.service.ISeckillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.concurrent.CountDownLatch;

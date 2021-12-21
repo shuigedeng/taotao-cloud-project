@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.news.biz.service.impl;
+package com.taotao.cloud.message.biz.service.impl;
 
-import com.taotao.cloud.news.biz.entity.Withdraw;
-import com.taotao.cloud.news.biz.repository.WithdrawSuperRepository;
-import com.taotao.cloud.news.biz.service.IWithdrawService;
+import com.taotao.cloud.message.biz.entity.Withdraw;
+import com.taotao.cloud.message.biz.repository.WithdrawSuperRepository;
+import com.taotao.cloud.message.biz.service.IWithdrawService;
 import org.springframework.stereotype.Service;
 
 /**

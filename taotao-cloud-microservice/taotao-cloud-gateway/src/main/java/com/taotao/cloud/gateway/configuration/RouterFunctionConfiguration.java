@@ -197,8 +197,9 @@ public class RouterFunctionConfiguration {
 				LogUtil.info(text);
 				MultiValueMap<String, String> params = request.queryParams();
 				String t = params.getFirst(PARAM_T);
+
 				redisRepository
-					.setExpire(RedisConstant.TAOTAO_CLOUD_CAPTCHA_KEY + t, text.toLowerCase(), 120);
+					.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(), 120);
 
 				return ServerResponse
 					.status(HttpStatus.HTTP_OK)
