@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 拼团视图对象
  *
- * @author paulG
+ * 
  * @since 2020/10/28
  **/
 @EqualsAndHashCode(callSuper = true)

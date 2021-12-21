@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 拼图会员分享对象
  *
- * @author paulG
+ * 
  * @since 2021/3/24
  **/
 @Data

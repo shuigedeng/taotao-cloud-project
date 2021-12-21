@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.order;
 /**
  * 订单的操作方式枚举
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:26 下午
  */
 public enum OrderOperateEnum {

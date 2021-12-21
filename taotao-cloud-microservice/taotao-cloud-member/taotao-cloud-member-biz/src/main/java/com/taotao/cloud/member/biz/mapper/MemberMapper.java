@@ -1,92 +1,32 @@
-/*
- * Copyright 2002-2021 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.taotao.cloud.member.biz.mapper;
 
-import com.taotao.cloud.member.api.vo.MemberVO;
-import com.taotao.cloud.member.biz.entity.MemberBack;
-import org.mapstruct.Builder;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
+
+import cn.lili.modules.member.entity.dos.Member;
+import cn.lili.modules.member.entity.vo.MemberVO;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
- * @author shuigedeng
- * @since 2020/11/11 14:42
- * @version 1.0.0
+ * 会员数据处理层
+ *
+ * 
+ * @since 2020-02-25 14:10:16
  */
-@Mapper(builder = @Builder(disableBuilder = true),
-	unmappedSourcePolicy = ReportingPolicy.IGNORE,
-	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface MemberMapper {
+public interface MemberMapper extends BaseMapper<Member> {
 
-	MemberMapper INSTANCE = Mappers.getMapper(MemberMapper.class);
+    /**
+     * 获取所有的会员手机号
+     * @return 会员手机号
+     */
+    @Select("select m.mobile from li_member m")
+    List<String> getAllMemberMobile();
 
-	/**
-	 * member转MemberVO
-	 *
-	 * @param member member
-	 * @return com.taotao.cloud.uc.api.vo.user.UserVO
-	 * @author shuigedeng
-	 * @since 2020/11/11 14:47
-	 * @version 1.0.0
-	 */
-	MemberVO memberToMemberVO(MemberBack member);
-
-	// /**
-	//  * SysUser转AddUserVO
-	//  *
-	//  * @param sysUser sysUser
-	//  * @return com.taotao.cloud.uc.api.vo.user.AddUserVO
-	//  * @author shuigedeng
-	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
-	//  */
-	// AddUserVO sysUserToAddUserVO(SysUser sysUser);
-	//
-	// /**
-	//  * list -> SysUser转UserVO
-	//  *
-	//  * @param userList userList
-	//  * @return java.util.List<com.taotao.cloud.uc.api.vo.user.UserVO>
-	//  * @author shuigedeng
-	//  * @since 2020/11/11 15:00
-	//  * @version 1.0.0
-	//  */
-	// List<UserVO> sysUserToUserVO(List<SysUser> userList);
-	//
-	// /**
-	//  * UserDTO转SysUser
-	//  *
-	//  * @param userDTO userDTO
-	//  * @return com.taotao.cloud.uc.biz.entity.SysUser
-	//  * @author shuigedeng
-	//  * @since 2020/11/11 14:52
-	//  * @version 1.0.0
-	//  */
-	// SysUser userDtoToSysUser(UserDTO userDTO);
-	//
-	// /**
-	//  * 拷贝 UserDTO 到SysUser
-	//  *
-	//  * @param userDTO userDTO
-	//  * @param user    user
-	//  * @return void
-	//  * @author shuigedeng
-	//  * @since 2020/11/11 16:59
-	//  * @version 1.0.0
-	//  */
-	// void copyUserDtoToSysUser(UserDTO userDTO, @MappingTarget SysUser user);
+    @Select("select * from li_member ${ew.customSqlSegment}")
+    IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
 }

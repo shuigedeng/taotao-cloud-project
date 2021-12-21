@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,积分商品接口
  *
- * @author paulG
+ * 
  * @since 2021/1/19
  **/
 @RestController

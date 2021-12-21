@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 秒杀申请业务层
  *
- * @author Chopper
+ *
  * @since 2020/11/18 9:45 上午
  */
 public interface SeckillApplyService extends IService<SeckillApply> {

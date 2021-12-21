@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 管理端,优惠券接口
  *
- * @author paulG
+ * 
  * @since 2020/10/9
  **/
 @RestController

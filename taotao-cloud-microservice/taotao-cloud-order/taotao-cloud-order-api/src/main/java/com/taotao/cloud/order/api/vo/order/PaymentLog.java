@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 订单支付日志：实际为订单部分字段提取过来的一个vo
  *
- * @author Chopper
+ *
  * @since 2020/11/17 7:30 下午
  */
 @Data

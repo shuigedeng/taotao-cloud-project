@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 优惠券视图对象
  *
- * @author Chopper
+ * 
  * @since 2020/8/14
  */
 @EqualsAndHashCode(callSuper = true)

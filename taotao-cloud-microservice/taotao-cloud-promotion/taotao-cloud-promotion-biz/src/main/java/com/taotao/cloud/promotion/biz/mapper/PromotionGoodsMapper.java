@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 促销商品数据处理层
  *
- * @author Chopper
+ * 
  * @since 2020/8/21
  */
 public interface PromotionGoodsMapper extends BaseMapper<PromotionGoods> {

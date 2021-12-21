@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.order;
 /**
  * 投诉角色枚举
  *
- * @author paulG
+ * 
  * @since 2020/12/7
  **/
 public enum CommunicationOwnerEnum {

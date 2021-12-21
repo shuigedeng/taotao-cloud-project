@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.cart;
 /**
  * 配送方式
  *
- * @author paulG
+ * 
  * @since 2020-03-25 2:30 下午
  **/
 public enum DeliveryMethodEnum {

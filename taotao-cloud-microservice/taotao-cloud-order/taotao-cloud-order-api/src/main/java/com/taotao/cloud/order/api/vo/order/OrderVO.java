@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 订单vo
  *
- * @author Bulbasaur
+ * 
  * @since 2020/11/28 11:38
  */
 @Data

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 店铺备注
  *
- * @author Chopper
+ * 
  * @since 2020-03-25 2:30 下午
  */
 @Data

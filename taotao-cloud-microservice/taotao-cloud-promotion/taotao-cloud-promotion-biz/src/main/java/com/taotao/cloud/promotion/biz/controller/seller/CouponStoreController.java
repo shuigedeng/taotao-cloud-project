@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * 店铺端,优惠券接口
  *
- * @author paulG
+ * 
  * @since 2020/8/28
  **/
 @RestController

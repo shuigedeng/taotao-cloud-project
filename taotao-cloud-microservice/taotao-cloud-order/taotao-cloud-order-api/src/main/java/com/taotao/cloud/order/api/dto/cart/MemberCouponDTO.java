@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 用于计算优惠券结算详情
  *
- * @author Chopper
+ *
  * @since 2020-03-25 2:30 下午
  */
 @Data

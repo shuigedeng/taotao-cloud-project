@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 /**
  * 优惠活动通用验证类
  *
- * @author paulG
+ * 
  * @since 2020/8/18
  **/
 public class PromotionTools {

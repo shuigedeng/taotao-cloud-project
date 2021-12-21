@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 /**
  * 积分商品分类
  *
- * @author paulG
+ * 
  * @since 2020-03-19 10:44 上午
  **/
 @Entity

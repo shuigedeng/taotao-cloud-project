@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 促销活动基础类
  *
- * @author Chopper
+ * 
  * @since 2020-03-19 10:44 上午
  */
 @EqualsAndHashCode(callSuper = true)

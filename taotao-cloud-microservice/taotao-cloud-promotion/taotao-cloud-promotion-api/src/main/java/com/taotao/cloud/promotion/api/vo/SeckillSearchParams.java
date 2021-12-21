@@ -13,7 +13,7 @@ import java.util.Arrays;
 /**
  * 秒杀活动查询通用类
  *
- * @author paulG
+ * 
  * @since 2020/8/21
  **/
 @EqualsAndHashCode(callSuper = true)

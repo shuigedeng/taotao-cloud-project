@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.order;
 /**
  * 订单促销类型枚举
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:28 下午
  */
 public enum OrderPromotionTypeEnum {

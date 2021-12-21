@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 商品索引
  *
- * @author paulG
+ * 
  **/
 @Data
 @Document(indexName = "#{@elasticsearchProperties.indexPrefix}_" + EsSuffix.GOODS_INDEX_NAME)

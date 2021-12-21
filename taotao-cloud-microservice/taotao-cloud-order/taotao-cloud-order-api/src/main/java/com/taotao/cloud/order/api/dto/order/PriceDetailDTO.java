@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 商城流水，细节到orderItem
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:25 下午
  */
 @Data

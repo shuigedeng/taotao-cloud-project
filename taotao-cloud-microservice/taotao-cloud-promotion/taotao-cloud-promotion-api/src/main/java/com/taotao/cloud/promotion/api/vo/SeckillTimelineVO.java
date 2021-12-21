@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 秒杀活动时刻视图对象
  *
- * @author paulG
+ * 
  * @since 2020/8/27
  **/
 @Data

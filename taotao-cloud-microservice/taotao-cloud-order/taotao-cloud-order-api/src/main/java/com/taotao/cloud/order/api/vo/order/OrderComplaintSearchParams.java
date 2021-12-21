@@ -10,7 +10,7 @@ import lombok.Data;
 /**
  * 订单投诉查询参数
  *
- * @author paulG
+ * 
  * @since 2020/12/4
  **/
 @Data

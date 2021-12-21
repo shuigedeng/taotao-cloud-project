@@ -19,7 +19,7 @@ import java.util.Date;
 /**
  * 订单查询参数
  *
- * @author Chopper
+ *
  * @since 2020/11/17 4:33 下午
  */
 @EqualsAndHashCode(callSuper = true)

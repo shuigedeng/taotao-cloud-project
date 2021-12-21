@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 商城退款流水
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 7:25 下午
  */
 @Data

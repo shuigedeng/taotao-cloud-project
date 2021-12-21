@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * MemberCouponVO
  *
- * @author Chopper
+ * 
  * @version v1.0
  * 2021-08-24 14:30
  */

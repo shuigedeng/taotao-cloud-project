@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * 发票子内容
  *
- * @author Bulbasaur
+ * 
  * @since 2020/11/28 11:44
  */
 @Data

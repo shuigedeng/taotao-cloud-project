@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.cart;
 /**
  * 活动叠加
  *
- * @author Chopper
+ *
  * @since 2020-03-25 2:30 下午
  */
 public enum SuperpositionPromotionEnum {

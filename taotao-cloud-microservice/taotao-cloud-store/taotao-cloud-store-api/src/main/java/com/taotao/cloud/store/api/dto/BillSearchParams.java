@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * 结算单搜索参数
  *
- * @author Chopper
+ *
  * @since 2021/3/17 6:08 下午
  */
 @Schema(description = "结算单搜索参数")

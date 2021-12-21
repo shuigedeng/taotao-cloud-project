@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * 结算单传输对象
  *
- * @author Chopper
+ * 
  * @since 2020/11/17 4:26 下午
  */
 @Schema(description = "结算单传输对象")
