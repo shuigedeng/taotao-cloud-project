@@ -9,6 +9,8 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationProvider;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
@@ -79,18 +81,26 @@ public class AuthorizationServerConfiguration {
 
 		OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
-		http.apply(authorizationServerConfigurer.tokenEndpoint(
-			(tokenEndpoint) -> tokenEndpoint.accessTokenRequestConverter(
-				new DelegatingAuthenticationConverter(Arrays.asList(
-					new OAuth2AuthorizationCodeAuthenticationConverter(),
-					new OAuth2RefreshTokenAuthenticationConverter(),
-					new OAuth2ClientCredentialsAuthenticationConverter(),
-					new OAuth2ResourceOwnerMobileAuthenticationConverter(redisRepository),
-					new OAuth2ResourceOwnerPasswordAuthenticationConverter()))
-			)));
-
-		authorizationServerConfigurer.authorizationEndpoint(
-			authorizationEndpoint -> authorizationEndpoint.consentPage("/oauth2/consent"));
+		http.apply(
+			authorizationServerConfigurer
+				.tokenEndpoint((tokenEndpoint) -> tokenEndpoint
+					.accessTokenRequestConverter(
+						new DelegatingAuthenticationConverter(Arrays.asList(
+							new OAuth2AuthorizationCodeAuthenticationConverter(),
+							new OAuth2RefreshTokenAuthenticationConverter(),
+							new OAuth2ClientCredentialsAuthenticationConverter(),
+							new OAuth2ResourceOwnerMobileAuthenticationConverter(redisRepository),
+							new OAuth2ResourceOwnerPasswordAuthenticationConverter()))
+					)
+					.errorResponseHandler((request, response, authException) -> {
+						LogUtil.error("用户认证失败", authException);
+						ResponseUtil.fail(response, authException.getMessage());
+					})
+				)
+				.authorizationEndpoint(
+					authorizationEndpoint -> authorizationEndpoint.consentPage("/oauth2/consent")
+				)
+		);
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
@@ -199,12 +209,12 @@ public class AuthorizationServerConfiguration {
 		}
 
 		resourceOwnerPasswordAuthenticationProvider.setProviderSettings(providerSettings);
-
 		// This will add new authentication provider in the list of existing authentication providers.
 		http.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
 	}
 
 	private void addCustomOAuth2ResourceOwnerMobileAuthenticationProvider(HttpSecurity http) {
+
 		AuthenticationManager authenticationManager = authentication -> {
 			OAuth2ResourceOwnerMobileAuthenticationToken authenticationToken = (OAuth2ResourceOwnerMobileAuthenticationToken) authentication;
 			String mobile = authenticationToken.getMobile();
@@ -215,10 +225,13 @@ public class AuthorizationServerConfiguration {
 				true);
 			UserDetails userDetails = userDetailsService.loadUserByUsername(mobile);
 
-			OAuth2ResourceOwnerMobileAuthenticationToken authenticationResult
-				= new OAuth2ResourceOwnerMobileAuthenticationToken(mobile, MOBILE,
-				clientPrincipal, authenticationToken.getScopes(),
-				authenticationToken.getAdditionalParameters(), clientPrincipal.getAuthorities());
+			OAuth2ResourceOwnerMobileAuthenticationToken authenticationResult = new OAuth2ResourceOwnerMobileAuthenticationToken(
+				mobile,
+				MOBILE,
+				clientPrincipal,
+				authenticationToken.getScopes(),
+				authenticationToken.getAdditionalParameters(),
+				clientPrincipal.getAuthorities());
 
 			authenticationResult.setDetails(authenticationToken.getDetails());
 			return authenticationResult;
@@ -241,7 +254,6 @@ public class AuthorizationServerConfiguration {
 
 		resourceOwnerMobileAuthenticationProvider.setProviderSettings(providerSettings);
 
-		// This will add new authentication provider in the list of existing authentication providers.
 		http.authenticationProvider(resourceOwnerMobileAuthenticationProvider);
 	}
 }
