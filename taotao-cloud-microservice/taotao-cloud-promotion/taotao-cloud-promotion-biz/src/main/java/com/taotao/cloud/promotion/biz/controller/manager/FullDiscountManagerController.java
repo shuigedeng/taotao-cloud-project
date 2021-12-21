@@ -16,7 +16,7 @@ import java.util.Collections;
 /**
  * 管理端,满额活动接口
  *
- * @author paulG
+ * 
  * @since 2021/1/12
  **/
 @RestController

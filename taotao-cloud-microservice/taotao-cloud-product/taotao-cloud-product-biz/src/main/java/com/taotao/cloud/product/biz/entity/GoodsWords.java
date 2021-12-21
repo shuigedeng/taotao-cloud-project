@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 /**
  * 商品关键字
  *
- * @author paulG
+ * 
  * @since 2020/10/15
  */
 @Entity

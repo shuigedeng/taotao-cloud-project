@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 订单交易投诉
  *
- * @author paulG
+ * 
  * @since 2020/12/4
  **/
 @EqualsAndHashCode(callSuper = true)

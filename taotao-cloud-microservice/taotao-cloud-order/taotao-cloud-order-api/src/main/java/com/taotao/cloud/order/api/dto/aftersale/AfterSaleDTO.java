@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 售后dto
  *
- * @author Chopper
+ * 
  * @since 2021/3/20 10:48
  */
 @Data

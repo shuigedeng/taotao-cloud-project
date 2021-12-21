@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * 管理端,积分商品接口
  *
- * @author paulG
+ * 
  * @since 2021/1/14
  **/
 @RestController

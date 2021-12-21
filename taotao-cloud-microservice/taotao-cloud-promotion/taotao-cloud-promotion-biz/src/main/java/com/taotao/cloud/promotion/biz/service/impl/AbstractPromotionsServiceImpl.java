@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * @author paulG
+ * 
  * @since 2021/11/30
  **/
 public class AbstractPromotionsServiceImpl<M extends BaseMapper<T>, T extends BasePromotions> extends ServiceImpl<M, T> implements

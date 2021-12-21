@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.api.enums;
 /**
  * 优惠券活动发送类型枚举
  *
- * @author Bulbasaur
+ * 
  * @since 2021/5/20 5:47 下午
  */
 public enum CouponActivitySendTypeEnum {

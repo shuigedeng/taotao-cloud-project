@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 秒杀活动申请视图对象
  *
- * @author paulG
+ * 
  * @since 2020/8/21
  **/
 @Data

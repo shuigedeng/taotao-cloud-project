@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * 砍价商品视图对象
  *
- * @author paulG
+ * 
  * @date 2021/1/13
  **/
 @Data

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 /**
  * 交易投诉通信
  *
- * @author paulG
+ * 
  * @since 2020/12/5
  **/
 @Data

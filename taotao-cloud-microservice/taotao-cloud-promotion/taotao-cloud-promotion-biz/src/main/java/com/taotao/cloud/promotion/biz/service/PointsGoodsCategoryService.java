@@ -7,7 +7,7 @@ import com.taotao.cloud.promotion.biz.entity.PointsGoodsCategory;
 /**
  * 积分商品分类业务层
  *
- * @author paulG
+ * 
  * @since 2020/11/18 9:45 上午
  **/
 public interface PointsGoodsCategoryService extends IService<PointsGoodsCategory> {

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 拼图活动业务层
  *
- * @author Chopper
+ *
  * @since 2020/11/18 9:45 上午
  */
 public interface PintuanService extends AbstractPromotionsService<Pintuan> {

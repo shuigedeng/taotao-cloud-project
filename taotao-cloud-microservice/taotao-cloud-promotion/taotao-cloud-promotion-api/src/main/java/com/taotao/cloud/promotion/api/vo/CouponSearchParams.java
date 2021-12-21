@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * 优惠券查询通用类
  *
- * @author paulG
+ * 
  * @since 2020/8/14
  **/
 @EqualsAndHashCode(callSuper = true)

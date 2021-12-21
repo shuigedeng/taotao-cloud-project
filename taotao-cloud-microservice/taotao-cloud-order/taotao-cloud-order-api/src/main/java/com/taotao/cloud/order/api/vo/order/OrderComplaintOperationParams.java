@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 交易投诉 参数
  *
- * @author paulG
+ * 
  * @since 2020/12/4
  **/
 @Data

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * 秒杀活动业务层实现
  *
- * @author Chopper
+ *
  * @since 2020/8/21
  */
 @Service

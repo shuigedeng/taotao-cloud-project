@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * 拼团查询通用类
  *
- * @author paulG
+ * 
  * @since 2020/10/9
  **/
 @EqualsAndHashCode(callSuper = true)

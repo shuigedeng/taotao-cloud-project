@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.trade;
 /**
  * 售后状态
  *
- * @author Chopper
+ * 
  * @since 2020-08-20 15:39
  */
 public enum AfterSaleStatusEnum {

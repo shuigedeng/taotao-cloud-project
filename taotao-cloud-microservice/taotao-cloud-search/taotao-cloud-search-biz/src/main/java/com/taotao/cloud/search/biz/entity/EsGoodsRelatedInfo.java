@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 搜索相关商品品牌名称，分类名称及属性
  *
- * @author paulG
+ * 
  * @since 2020/10/20
  **/
 @Data

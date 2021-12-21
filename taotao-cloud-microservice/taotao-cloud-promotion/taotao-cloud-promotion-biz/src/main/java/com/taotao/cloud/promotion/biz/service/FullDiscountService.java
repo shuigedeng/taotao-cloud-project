@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 满优惠业务层
  *
- * @author Chopper
+ * 
  * @since 2020/8/21
  */
 public interface FullDiscountService extends AbstractPromotionsService<FullDiscount> {

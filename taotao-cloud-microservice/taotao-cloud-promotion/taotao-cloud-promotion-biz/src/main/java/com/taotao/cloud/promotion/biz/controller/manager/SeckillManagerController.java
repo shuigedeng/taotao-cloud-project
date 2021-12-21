@@ -17,7 +17,7 @@ import java.util.Collections;
 /**
  * 管理端,秒杀活动接口
  *
- * @author paulG
+ * 
  * @since 2020/8/20
  **/
 @RestController

@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * 店铺端,满额活动接口
  *
- * @author paulG
+ * 
  * @since 2020/8/19
  **/
 @RestController

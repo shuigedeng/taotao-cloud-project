@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 /**
  * 积分商品实体类
  *
- * @author paulG
+ * 
  * @since 2020-03-19 10:44 上午
  **/
 @Entity

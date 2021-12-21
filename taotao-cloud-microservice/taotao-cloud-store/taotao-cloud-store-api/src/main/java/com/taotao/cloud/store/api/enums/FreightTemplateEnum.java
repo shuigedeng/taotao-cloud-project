@@ -3,7 +3,7 @@ package com.taotao.cloud.store.api.enums;
 /**
  * 模版枚举
  *
- * @author Chopper
+ *
  * @since 2020/12/23 15:59
  */
 

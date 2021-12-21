@@ -17,7 +17,7 @@ import java.util.List;
  * 订单简略信息
  * 用于订单列表查看
  *
- * @author Chopper
+ *
  * @since 2020-08-17 20:28
  */
 @Data

@@ -3,7 +3,7 @@ package com.taotao.cloud.promotion.api.enums;
 /**
  * 促销状态枚举
  *
- * @author Chopper
+ *
  * @since 2020-03-19 3:53 下午
  */
 public enum PromotionsStatusEnum {

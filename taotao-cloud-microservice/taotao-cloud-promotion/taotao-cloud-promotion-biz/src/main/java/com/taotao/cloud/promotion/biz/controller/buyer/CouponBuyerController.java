@@ -24,7 +24,7 @@ import java.util.Objects;
 /**
  * 买家端,买家优惠券接口
  *
- * @author paulG
+ * 
  * @since 2020/11/17 3:35 下午
  */
 @RestController

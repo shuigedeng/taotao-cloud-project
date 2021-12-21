@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 商品属性索引
  *
- * @author paulG
+ * 
  * @since 2020/10/14
  **/
 @Data

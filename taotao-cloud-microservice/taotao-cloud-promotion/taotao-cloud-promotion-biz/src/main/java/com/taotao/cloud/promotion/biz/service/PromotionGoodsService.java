@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 促销商品业务层
  *
- * @author Chopper
+ * 
  * @since 2020/11/18 9:45 上午
  */
 public interface PromotionGoodsService extends IService<PromotionGoods> {

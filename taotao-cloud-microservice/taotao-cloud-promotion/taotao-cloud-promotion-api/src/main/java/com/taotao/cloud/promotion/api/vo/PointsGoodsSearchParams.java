@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 积分商品查询通用类
  *
- * @author paulG
+ * 
  * @since 2021/1/13
  **/
 @EqualsAndHashCode(callSuper = true)

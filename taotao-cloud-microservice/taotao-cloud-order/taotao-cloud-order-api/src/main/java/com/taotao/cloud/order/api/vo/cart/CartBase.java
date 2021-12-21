@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * 购物车基础
  *
- * @author Chopper
+ * 
  * @since 2020-03-24 10:33 上午
  */
 @Data

@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * 子订单VO
  *
- * @author Chopper
+ * 
  * @since 2020-08-17 20:28
  */
 @Data

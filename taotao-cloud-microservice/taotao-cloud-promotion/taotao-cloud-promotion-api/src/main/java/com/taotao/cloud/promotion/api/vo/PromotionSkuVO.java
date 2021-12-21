@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 促销skuVO
  *
- * @author Chopper
+ *
  * @version v1.0
  * 2021-08-28 03:24
  */

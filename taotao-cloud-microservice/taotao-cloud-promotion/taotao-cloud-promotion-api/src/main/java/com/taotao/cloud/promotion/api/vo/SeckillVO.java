@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 秒杀活动视图对象
  *
- * @author paulG
+ * 
  * @since 2020/8/20
  **/
 @EqualsAndHashCode(callSuper = true)

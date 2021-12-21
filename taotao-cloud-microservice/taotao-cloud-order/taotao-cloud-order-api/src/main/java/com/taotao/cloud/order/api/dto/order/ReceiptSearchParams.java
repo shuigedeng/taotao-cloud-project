@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 发票搜索参数
  *
- * @author paulG
+ * 
  * @since 2021/1/12
  **/
 @Data

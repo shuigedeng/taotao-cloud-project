@@ -3,7 +3,7 @@ package com.taotao.cloud.order.api.enums.aftersale;
 /**
  * 交易投诉状态
  *
- * @author paulG
+ * 
  * @since 2020/12/4
  **/
 public enum ComplaintStatusEnum {
