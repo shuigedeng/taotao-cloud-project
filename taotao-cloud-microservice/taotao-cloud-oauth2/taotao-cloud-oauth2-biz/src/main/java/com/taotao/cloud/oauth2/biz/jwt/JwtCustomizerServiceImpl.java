@@ -1,6 +1,6 @@
 package com.taotao.cloud.oauth2.biz.jwt;
 
-import com.taotao.cloud.oauth2.biz.models.CloudUserDetails;
+import com.taotao.cloud.common.model.SecurityUser;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -39,8 +39,8 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 
 				if (authentication != null) {
 					if (authentication instanceof UsernamePasswordAuthenticationToken) {
-						CloudUserDetails principal = (CloudUserDetails) authentication.getPrincipal();
-						Long userId = principal.getId();
+						SecurityUser principal = (SecurityUser) authentication.getPrincipal();
+						Long userId = principal.getUserId();
 
 						Set<String> authorities = principal
 							.getAuthorities()
@@ -53,8 +53,7 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 
 						JwtClaimsSet.Builder jwtClaimSetBuilder = context.getClaims();
 						jwtClaimSetBuilder.claim(OAuth2ParameterNames.SCOPE, authorities);
-						jwtClaimSetBuilder.claim("USER_ID", principal.getId());
-						jwtClaimSetBuilder.claim("USER_ID", principal.getId());
+						jwtClaimSetBuilder.claim("USER_ID", principal.getUserId());
 						principal.eraseCredentials();
 						jwtClaimSetBuilder.claim("DETAILS", principal);
 						jwtClaimSetBuilder.claims(claims ->

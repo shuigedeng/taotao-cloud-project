@@ -10,14 +10,14 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.models.CustomJwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.oauth2.biz.service.CloudOauth2UserService;
-import com.taotao.cloud.oauth2.biz.service.CloudUserDetailsService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.taotao.cloud.oauth2.biz.service.MemberUserDetailsService;
+import com.taotao.cloud.oauth2.biz.service.SysUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,6 +34,13 @@ import org.springframework.security.oauth2.server.resource.web.DefaultBearerToke
 import org.springframework.security.web.SecurityFilterChain;
 
 
+/**
+ * SecurityConfiguration
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-12-21 10:20:47
+ */
 @EnableGlobalMethodSecurity(
 	prePostEnabled = true,
 	order = 0,
@@ -43,11 +50,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-	private static final Logger LOGGER = LogManager.getLogger(SecurityConfiguration.class);
+	@Value("${jwk.set.uri}")
+	private String jwkSetUri;
 
-	@Bean
-	public UserDetailsService cloudUserDetailsService() {
-		return new CloudUserDetailsService();
+	@Primary
+	@Bean(name = "memberUserDetailsService")
+	public UserDetailsService memberUserDetailsService() {
+		return new MemberUserDetailsService();
+	}
+
+	@Bean(name = "sysUserDetailsService")
+	public UserDetailsService sysUserDetailsService() {
+		return new SysUserDetailsService();
 	}
 
 	@Bean
@@ -57,33 +71,22 @@ public class SecurityConfiguration {
 
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-		builder.userDetailsService(cloudUserDetailsService())
+		builder
+			.userDetailsService(memberUserDetailsService())
 			.passwordEncoder(passwordEncoder())
 			.and()
 			.eraseCredentials(true);
 	}
-
-	@Value("${jwk.set.uri}")
-	private String jwkSetUri;
 
 	@Bean
 	public JwtDecoder jwtDecoder() {
 		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
 	}
 
-	JwtAuthenticationConverter jwtAuthenticationConverter() {
-		CustomJwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new CustomJwtGrantedAuthoritiesConverter();
-		grantedAuthoritiesConverter.setAuthorityPrefix("");
-
-		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-		return jwtAuthenticationConverter;
-	}
-
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().antMatchers(
-			"/webjars/**","/user/login", "/login-error", "/index");
+			"/webjars/**", "/user/login", "/login-error", "/index");
 	}
 
 	@Bean
@@ -93,7 +96,7 @@ public class SecurityConfiguration {
 				authorizeRequests -> authorizeRequests
 					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
 					//.mvcMatchers("/login.html", "/form/login/process", "/signin.css", "/login", "/login-error").permitAll()
-					.mvcMatchers( "/user/login", "/login-error", "/index").permitAll()
+					.mvcMatchers("/user/login", "/login-error", "/index").permitAll()
 					.mvcMatchers("/messages/**").access("hasAuthority('ADMIN')")
 					.anyRequest().authenticated()
 			)
@@ -182,5 +185,14 @@ public class SecurityConfiguration {
 			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 
 		return http.build();
+	}
+
+	JwtAuthenticationConverter jwtAuthenticationConverter() {
+		CustomJwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new CustomJwtGrantedAuthoritiesConverter();
+		grantedAuthoritiesConverter.setAuthorityPrefix("");
+
+		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+		return jwtAuthenticationConverter;
 	}
 }

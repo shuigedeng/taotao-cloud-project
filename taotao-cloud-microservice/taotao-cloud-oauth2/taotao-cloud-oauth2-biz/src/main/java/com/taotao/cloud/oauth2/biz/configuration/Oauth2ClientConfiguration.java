@@ -163,7 +163,6 @@ public class Oauth2ClientConfiguration {
 	//	return http.build();
 	//}
 
-
 	/**
 	 * qq获取access_token返回的结果是类似get请求参数的字符串，无法通过指定Accept请求头来使qq返回特定的响应类型，并且qq返回的access_token
 	 * 也缺少了必须的token_type字段（不符合oauth2标准的授权码认证流程），spring-security默认远程获取 access_token的客户端是{@link

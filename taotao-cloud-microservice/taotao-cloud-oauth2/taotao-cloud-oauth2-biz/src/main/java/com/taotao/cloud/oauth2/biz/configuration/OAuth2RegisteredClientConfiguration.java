@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -23,12 +22,17 @@ import org.springframework.security.oauth2.server.authorization.config.ClientSet
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.util.StringUtils;
 
+/**
+ * OAuth2RegisteredClientConfiguration
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-12-21 10:23:29
+ */
 @Configuration
 @PropertySource("classpath:oauth2-registered-client.properties")
 public class OAuth2RegisteredClientConfiguration {
 
-	private static final Logger LOGGER = LogManager.getLogger(
-		OAuth2RegisteredClientConfiguration.class);
 
 	private static final String OAUTH2_REGISTERD_CLIENT = "oauth2.registered.client";
 	private static final String ID = "id";
@@ -56,8 +60,6 @@ public class OAuth2RegisteredClientConfiguration {
 
 	@Bean
 	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
-		LOGGER.debug("in registeredClientRepository");
-
 		RegisteredClient clientCredentialsRegisteredClient = clientCredentialsClientRegistration();
 		RegisteredClient authorizationCodeRegisteredClient = authorizationCodeClientRegistration();
 		RegisteredClient passwordRegisteredClient = passwordClientRegistration();
@@ -87,14 +89,12 @@ public class OAuth2RegisteredClientConfiguration {
 
 	private RegisteredClient clientCredentialsClientRegistration() {
 
-		LOGGER.debug("in clientCredentialsClientRegistration");
-
 		String clientCredentialsClientId = getClientProperty(CLIENT_CREDENTIALS_CLIENT, ID);
 		String clientCredentialsClientSecret = getClientProperty(CLIENT_CREDENTIALS_CLIENT, SECRET);
 
 		TokenSettings tokenSetting = getTokenSettings();
 
-		RegisteredClient messagingRegisteredClient = RegisteredClient.withId("1")
+		return RegisteredClient.withId("1")
 			.clientId(clientCredentialsClientId)
 			.clientName("client-credentials")
 			.clientSecret(clientCredentialsClientSecret)
@@ -105,13 +105,9 @@ public class OAuth2RegisteredClientConfiguration {
 			.scope("message.read")
 			.scope("message.write")
 			.build();
-
-		return messagingRegisteredClient;
 	}
 
 	private RegisteredClient authorizationCodeClientRegistration() {
-
-		LOGGER.debug("in authorizationCodeClientRegistration");
 
 		String authorizationCodeClientId = getClientProperty(AUTHORIZATION_CODE_CLIENT, ID);
 		String authorizationCodeClientSecret = getClientProperty(AUTHORIZATION_CODE_CLIENT, SECRET);
@@ -123,7 +119,7 @@ public class OAuth2RegisteredClientConfiguration {
 		ClientSettings clientSettings = ClientSettings.builder().requireAuthorizationConsent(false)
 			.build();
 
-		RegisteredClient zapierRegisteredClient = RegisteredClient.withId("2")
+		return RegisteredClient.withId("2")
 			.clientId(authorizationCodeClientId)
 			.clientName("authorization-code")
 			.clientSecret(authorizationCodeClientSecret)
@@ -134,20 +130,16 @@ public class OAuth2RegisteredClientConfiguration {
 			.tokenSettings(tokenSetting)
 			.clientSettings(clientSettings)
 			.build();
-
-		return zapierRegisteredClient;
 	}
 
 	private RegisteredClient passwordClientRegistration() {
-
-		LOGGER.debug("in passwordClientRegistration");
 
 		String passwordClientId = getClientProperty(PASSWORD_CLIENT, ID);
 		String passwordClientSecret = getClientProperty(PASSWORD_CLIENT, SECRET);
 
 		TokenSettings tokenSetting = getTokenSettings();
 
-		RegisteredClient zapierRegisteredClient = RegisteredClient.withId("3")
+		return RegisteredClient.withId("3")
 			.clientId(passwordClientId)
 			.clientName("password")
 			.clientSecret(passwordClientSecret)
@@ -156,18 +148,12 @@ public class OAuth2RegisteredClientConfiguration {
 			.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 			.tokenSettings(tokenSetting)
 			.build();
-
-		return zapierRegisteredClient;
 	}
 
 	private String getClientProperty(String client, String property) {
-
-		LOGGER.debug("in getClientProperty");
-
 		// oauth2.registered.client.authorization.code.id
 		String propertyName = String.format("%s.%s.%s", OAUTH2_REGISTERD_CLIENT, client, property);
-		String propertyValue = env.getProperty(propertyName);
-		return propertyValue;
+		return env.getProperty(propertyName);
 	}
 
 	private TokenSettings getTokenSettings() {
@@ -178,8 +164,7 @@ public class OAuth2RegisteredClientConfiguration {
 		TokenSettings.Builder tokenSettingsBuilder = TokenSettings.builder()
 			.accessTokenTimeToLive(accessTokenDuration)
 			.refreshTokenTimeToLive(refreshTokenDuration);
-		TokenSettings tokenSetting = tokenSettingsBuilder.build();
-		return tokenSetting;
+		return tokenSettingsBuilder.build();
 
 	}
 

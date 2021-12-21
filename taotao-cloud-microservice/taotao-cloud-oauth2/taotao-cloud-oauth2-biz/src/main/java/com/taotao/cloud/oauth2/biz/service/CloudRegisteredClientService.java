@@ -1,13 +1,7 @@
 package com.taotao.cloud.oauth2.biz.service;
 
-import com.taotao.cloud.oauth2.biz.models.CloudRegisteredClient;
-import com.taotao.cloud.oauth2.biz.repository.CloudRegisteredClientRepository;
 import java.time.Duration;
-import java.util.List;
-import java.util.Objects;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -15,21 +9,13 @@ import org.springframework.security.oauth2.server.authorization.config.TokenSett
 
 public class CloudRegisteredClientService extends JdbcRegisteredClientRepository {
 
-	private final CloudRegisteredClientRepository cloudRegisteredClientRepository;
-
-	public CloudRegisteredClientService(
-		JdbcTemplate jdbcTemplate,
-		CloudRegisteredClientRepository cloudRegisteredClientRepository) {
+	public CloudRegisteredClientService(JdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
-
-		this.cloudRegisteredClientRepository = cloudRegisteredClientRepository;
 	}
 
 	@Override
 	public void save(RegisteredClient registeredClient) {
 		super.save(registeredClient);
-
-		// NOOP
 	}
 
 	@Override

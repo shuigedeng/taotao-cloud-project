@@ -35,7 +35,6 @@ public interface IFeignMemberService {
 	 * @param id id
 	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.member.api.vo.MemberVO>
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/11/20 下午4:10
 	 */
 	@GetMapping("/member/info/id/{id:[0-9]*}")
