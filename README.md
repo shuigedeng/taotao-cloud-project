@@ -26,6 +26,9 @@
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
   提供大量的**starters**作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
+
+
+- **滔滔商城模块** 基于**微服务模块**构建前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署，支持Docker，各个API独立、前端使用 VUE3、taro开发，**系统全端全部代码开源**
   
 
 - **前端模块** 主要使用**react antd**进行前后端分离开发、集成以**taro, taro-ui, react native**为主的多端合一框架。
@@ -107,10 +110,10 @@ Xxl-job | 2.2.0
 EasyCaptcha | 1.6.2
 Guava | 29.0-jre
 
-## 6. 演示地址
+## 6. 滔滔商城演示地址
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top) 源码地址: [taotao-cloud-blog](https://github.com/shuigedeng/shuigedeng.git)
 * 商城首页地址: [https://taotaocloud.top](https://taotaocloud.top) 源码地址: [taotao-cloud-front](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-microservice/taotao-cloud-front)
-* 大屏监控地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-datav)
+* 大屏展示地址: [https://datav.taotaocloud.top](https://datav.taotaocloud.top) 源码地址: [taotao-cloud-datav](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-datav)
 * 平台管理地址(开发进度15%): [https://manager.taotaocloud.top](https://manager.taotaocloud.top) (admin/123456) 源码地址: [taotao-cloud-manager](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-manager)
 * 商户管理地址(开发进度5%): [https://merchant.taotaocloud.top](https://merchant.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-merchant](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-merchant)
 * 开放平台地址(开发进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-open)
