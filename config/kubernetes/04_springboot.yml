@@ -196,15 +196,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-oauth2-server
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:2021.12
+        - name: taotao-cloud-oauth2-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-oauth2-server-port
+            - name: taotao-cloud-oauth2-biz-port
               containerPort: 33336
           env:
             - name: applicationName
-              value: taotao-cloud-oauth2-server
+              value: taotao-cloud-oauth2-biz
           resources:
             requests:
               cpu: 1
@@ -529,15 +529,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-oauth2-server
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:2021.12
+        - name: taotao-cloud-oauth2-biz
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-oauth2-server-port
+            - name: taotao-cloud-oauth2-biz-port
               containerPort: 33336
           env:
             - name: applicationName
-              value: taotao-cloud-oauth2-server
+              value: taotao-cloud-oauth2-biz
           resources:
             requests:
               cpu: 1
@@ -705,7 +705,7 @@ spec:
       port: 33335
       targetPort: 33335
       nodePort: 33335
-    - name: taotao-cloud-oauth2-server-port
+    - name: taotao-cloud-oauth2-biz-port
       protocol: TCP
       port: 33336
       targetPort: 33336

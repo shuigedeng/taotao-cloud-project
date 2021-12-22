@@ -20,6 +20,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 	private final Set<String> scopes;
 	private final Map<String, Object> additionalParameters;
 
+	private final Object user;
+
 	/**
 	 * Constructs an {@code OAuth2ClientCredentialsAuthenticationToken} using the provided
 	 * parameters.
@@ -43,6 +45,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 		this.additionalParameters = Collections.unmodifiableMap(
 			additionalParameters != null ? new HashMap<>(additionalParameters)
 				: Collections.emptyMap());
+
+		this.user = null;
 	}
 
 	public OAuth2ResourceOwnerPasswordAuthenticationToken(
@@ -50,6 +54,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 		Authentication clientPrincipal,
 		@Nullable Set<String> scopes,
 		@Nullable Map<String, Object> additionalParameters,
+		Object user,
 		Collection<? extends GrantedAuthority> authorities) {
 
 		super(authorities);
@@ -64,6 +69,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 		this.additionalParameters = Collections.unmodifiableMap(
 			additionalParameters != null ? new HashMap<>(additionalParameters)
 				: Collections.emptyMap());
+
+		this.user = user;
 	}
 
 	/**
@@ -77,7 +84,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 
 	@Override
 	public Object getPrincipal() {
-		return this.clientPrincipal;
+		return this.user;
 	}
 
 	@Override
@@ -103,4 +110,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends AbstractAuth
 		return this.additionalParameters;
 	}
 
+	public Authentication getClientPrincipal() {
+		return clientPrincipal;
+	}
 }

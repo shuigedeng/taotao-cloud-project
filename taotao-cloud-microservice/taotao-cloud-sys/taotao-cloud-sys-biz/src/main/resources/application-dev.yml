@@ -598,7 +598,7 @@ taotao:
       enabled: false
     openapi:
       enabled: true
-      group: ${spring.application.name}
+      group: 系统管理模块
       version: ${taotaoCloudVersion}
 
     mongodb:

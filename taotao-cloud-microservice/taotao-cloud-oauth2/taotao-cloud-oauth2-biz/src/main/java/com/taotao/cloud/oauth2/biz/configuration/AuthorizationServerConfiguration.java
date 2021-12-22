@@ -1,8 +1,9 @@
 package com.taotao.cloud.oauth2.biz.configuration;
 
 import static com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter.MOBILE;
-import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.TYPE;
-import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.VERIFICATION_CODE;
+import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.PARAM_MOBILE;
+import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.PARAM_TYPE;
+import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +11,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.enums.UserTypeEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationConverter;
@@ -22,8 +23,10 @@ import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPa
 import com.taotao.cloud.oauth2.biz.jwt.Jwks;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizer;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
+import com.taotao.cloud.oauth2.biz.service.CaptchaService;
 import com.taotao.cloud.oauth2.biz.service.CloudJdbcOAuth2AuthorizationConsentService;
 import com.taotao.cloud.oauth2.biz.service.CloudOAuth2AuthorizationService;
+import com.taotao.cloud.oauth2.biz.service.SmsService;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +91,12 @@ public class AuthorizationServerConfiguration {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
+	private SmsService smsService;
+
+	@Autowired
+	private CaptchaService captchaService;
+
+	@Autowired
 	@Qualifier("memberUserDetailsService")
 	private UserDetailsService memberUserDetailsService;
 
@@ -110,7 +119,7 @@ public class AuthorizationServerConfiguration {
 							new OAuth2AuthorizationCodeAuthenticationConverter(),
 							new OAuth2RefreshTokenAuthenticationConverter(),
 							new OAuth2ClientCredentialsAuthenticationConverter(),
-							new OAuth2ResourceOwnerMobileAuthenticationConverter(redisRepository),
+							new OAuth2ResourceOwnerMobileAuthenticationConverter(),
 							new OAuth2ResourceOwnerPasswordAuthenticationConverter()))
 					)
 					.errorResponseHandler((request, response, authException) -> {
@@ -240,17 +249,22 @@ public class AuthorizationServerConfiguration {
 			// 密码
 			String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
 			// 用户类型
-			String type = (String) additionalParameters.get(TYPE);
+			Integer type = (Integer) additionalParameters.get(PARAM_TYPE);
 			// 验证码
-			String code = (String) additionalParameters.get(VERIFICATION_CODE);
+			String verificationCode = (String) additionalParameters.get(VERIFICATION_CODE);
+			String t = (String) additionalParameters.get("t");
 
 			// 校验验证码
-			//Object o = redisRepository.get(code);
+			captchaService.checkCaptcha(verificationCode, t);
+			//Object code = redisRepository.get(CAPTCHA_KEY_PREFIX + mobile);
+			//if (!verificationCode.equals(code)) {
+			//	throw new BadCredentialsException("验证码错误");
+			//}
 
-			Authentication clientPrincipal = (Authentication) authenticationToken.getPrincipal();
+			Authentication clientPrincipal = authenticationToken.getClientPrincipal();
 
 			UserDetails userDetails;
-			if ("1".equals(type)) {
+			if (UserTypeEnum.MEMBER.getCode() == type) {
 				userDetails = memberUserDetailsService.loadUserByUsername(username);
 			} else {
 				userDetails = sysUserDetailsService.loadUserByUsername(username);
@@ -265,6 +279,7 @@ public class AuthorizationServerConfiguration {
 				clientPrincipal,
 				authenticationToken.getScopes(),
 				authenticationToken.getAdditionalParameters(),
+				userDetails,
 				new NullAuthoritiesMapper().mapAuthorities(userDetails.getAuthorities()));
 
 			authenticationResult.setDetails(authenticationToken.getDetails());
@@ -298,20 +313,36 @@ public class AuthorizationServerConfiguration {
 	private AuthenticationManager mobileAuthenticationManager() {
 		return authentication -> {
 			OAuth2ResourceOwnerMobileAuthenticationToken authenticationToken = (OAuth2ResourceOwnerMobileAuthenticationToken) authentication;
-			String mobile = authenticationToken.getMobile();
-			Authentication clientPrincipal = (Authentication) authenticationToken.getPrincipal();
+			Authentication clientPrincipal = authenticationToken.getClientPrincipal();
 
-			//调用自定义的userDetailsService认证
-			UserDetailsService userDetailsService = ContextUtil.getBean(UserDetailsService.class,
-				true);
-			UserDetails userDetails = userDetailsService.loadUserByUsername(mobile);
+			Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
+			// 用户类型
+			String type = (String) additionalParameters.get(PARAM_TYPE);
+			// 手机号
+			String mobile = (String) additionalParameters.get(PARAM_MOBILE);
+			// 手机验证码
+			String verificationCode = (String) additionalParameters.get(VERIFICATION_CODE);
+
+			// 校验验证码
+			//Object code = redisRepository.get(SMS_KEY_PREFIX + mobile);
+			//if (!verificationCode.equals(code)) {
+			//	throw new BadCredentialsException("验证码错误");
+			//}
+			smsService.checkSms(verificationCode, mobile);
+
+			UserDetails userDetails;
+			if (UserTypeEnum.MEMBER.getCode() == Integer.valueOf(type)) {
+				userDetails = memberUserDetailsService.loadUserByUsername(mobile);
+			} else {
+				userDetails = sysUserDetailsService.loadUserByUsername(mobile);
+			}
 
 			OAuth2ResourceOwnerMobileAuthenticationToken authenticationResult = new OAuth2ResourceOwnerMobileAuthenticationToken(
-				mobile,
 				MOBILE,
 				clientPrincipal,
 				authenticationToken.getScopes(),
 				authenticationToken.getAdditionalParameters(),
+				userDetails,
 				new NullAuthoritiesMapper().mapAuthorities(userDetails.getAuthorities()));
 
 			authenticationResult.setDetails(authenticationToken.getDetails());

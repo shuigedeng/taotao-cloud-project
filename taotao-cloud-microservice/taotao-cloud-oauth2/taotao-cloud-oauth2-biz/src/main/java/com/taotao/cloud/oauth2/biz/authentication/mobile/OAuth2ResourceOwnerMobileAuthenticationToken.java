@@ -20,7 +20,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 	private final Set<String> scopes;
 	private final Map<String, Object> additionalParameters;
 
-	private final String mobile;
+	private final Object user;
 
 	/**
 	 * Constructs an {@code OAuth2ClientCredentialsAuthenticationToken} using the provided
@@ -30,7 +30,6 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 	 */
 
 	public OAuth2ResourceOwnerMobileAuthenticationToken(
-		String mobile,
 		AuthorizationGrantType authorizationGrantType,
 		Authentication clientPrincipal,
 		@Nullable Set<String> scopes,
@@ -40,7 +39,6 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 		Assert.notNull(authorizationGrantType, "authorizationGrantType cannot be null");
 		Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
 
-		this.mobile = mobile;
 		this.authorizationGrantType = authorizationGrantType;
 		this.clientPrincipal = clientPrincipal;
 		this.scopes = Collections.unmodifiableSet(
@@ -48,21 +46,22 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 		this.additionalParameters = Collections.unmodifiableMap(
 			additionalParameters != null ? new HashMap<>(additionalParameters)
 				: Collections.emptyMap());
+
+		this.user = null;
 	}
 
 	public OAuth2ResourceOwnerMobileAuthenticationToken(
-		String mobile,
 		AuthorizationGrantType authorizationGrantType,
 		Authentication clientPrincipal,
 		@Nullable Set<String> scopes,
 		@Nullable Map<String, Object> additionalParameters,
+		Object user,
 		Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 
 		Assert.notNull(authorizationGrantType, "authorizationGrantType cannot be null");
 		Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
 
-		this.mobile = mobile;
 		this.authorizationGrantType = authorizationGrantType;
 		this.clientPrincipal = clientPrincipal;
 		this.scopes = Collections.unmodifiableSet(
@@ -70,6 +69,8 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 		this.additionalParameters = Collections.unmodifiableMap(
 			additionalParameters != null ? new HashMap<>(additionalParameters)
 				: Collections.emptyMap());
+
+		this.user = user;
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 
 	@Override
 	public Object getPrincipal() {
-		return this.clientPrincipal;
+		return this.user;
 	}
 
 	@Override
@@ -109,7 +110,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationToken extends AbstractAuthen
 		return this.additionalParameters;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public Authentication getClientPrincipal() {
+		return clientPrincipal;
 	}
 }

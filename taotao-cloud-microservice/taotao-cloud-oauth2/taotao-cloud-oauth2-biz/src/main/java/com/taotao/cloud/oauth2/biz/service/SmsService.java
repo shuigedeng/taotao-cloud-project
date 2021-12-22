@@ -16,7 +16,7 @@
 package com.taotao.cloud.oauth2.biz.service;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.cloud.oauth2.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,15 +55,15 @@ public class SmsService {
 	public boolean checkSms(String code, String phoneNumber) {
 		String key = RedisConstant.SMS_KEY_PREFIX + phoneNumber;
 		if (!redisRepository.exists(key)) {
-			throw new BaseException("手机验证码不合法");
+			throw CloudAuthenticationException.throwError("手机验证码不合法");
 		}
 
 		Object captcha = redisRepository.get(key);
 		if (captcha == null) {
-			throw new BaseException("手机验证码已失效");
+			throw CloudAuthenticationException.throwError("手机验证码已失效");
 		}
 		if (!code.toLowerCase().equals(captcha)) {
-			throw new BaseException("手机验证码错误");
+			throw CloudAuthenticationException.throwError("手机验证码错误");
 		}
 
 		return true;
