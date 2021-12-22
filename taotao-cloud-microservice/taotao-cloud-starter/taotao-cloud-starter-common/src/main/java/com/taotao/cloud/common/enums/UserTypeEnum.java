@@ -30,7 +30,7 @@ public enum UserTypeEnum implements BaseEnum {
 	/**
 	 * 后台管理用户
 	 */
-	BACKEND(2, "backend", "后台管理用户");
+	MANAGER(2, "backend", "平台后台管理用户");
 
 	private final int code;
 	private final String value;

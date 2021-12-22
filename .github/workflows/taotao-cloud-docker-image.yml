@@ -64,14 +64,14 @@ jobs:
         docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}} .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: Build Docker Image taotao-cloud-oauth2-server
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-oauth2/taotao-cloud-oauth2-server
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-oauth2-server') }}
+    - name: Build Docker Image taotao-cloud-oauth2-biz
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-oauth2/taotao-cloud-oauth2-biz
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-oauth2-biz') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-server:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:${{env.TAOTAO_CLOUD_VERSION}}
 
     - name: Build Docker Image taotao-cloud-xxl-job-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-xxl-job-admin

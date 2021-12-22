@@ -93,6 +93,23 @@ import org.springframework.web.client.RestTemplate;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+	public static final String[] permitAllUrls = new String[]{
+		"/swagger-ui.html",
+		"/v3/**",
+		"/favicon.ico",
+		"/swagger-resources/**",
+		"/webjars/**",
+		"/actuator/**",
+		"/index",
+		"/index.html",
+		"/doc.html",
+		"/*.js",
+		"/*.css",
+		"/*.json",
+		"/*.min.js",
+		"/*.min.css",
+		"/health/**"};
+
 	@Autowired
 	private OAuth2ClientProperties oAuth2ClientProperties;
 
@@ -131,8 +148,9 @@ public class SecurityConfiguration {
 
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().antMatchers(
-			"/webjars/**", "/user/login", "/login-error", "/index");
+		return (web) -> web.ignoring()
+			.antMatchers(permitAllUrls)
+			.antMatchers("/webjars/**", "/user/login", "/login-error", "/index");
 	}
 
 	@Bean
@@ -141,7 +159,7 @@ public class SecurityConfiguration {
 			.authorizeRequests(
 				authorizeRequests -> authorizeRequests
 					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-					//.mvcMatchers("/login.html", "/form/login/process", "/signin.css", "/login", "/login-error").permitAll()
+					.antMatchers(permitAllUrls).permitAll()
 					.mvcMatchers("/user/login", "/login-error", "/index").permitAll()
 					.mvcMatchers("/messages/**").access("hasAuthority('ADMIN')")
 					.anyRequest().authenticated()

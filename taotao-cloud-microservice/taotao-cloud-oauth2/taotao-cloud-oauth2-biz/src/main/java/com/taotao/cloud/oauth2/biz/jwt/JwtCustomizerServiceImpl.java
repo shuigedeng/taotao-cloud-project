@@ -1,6 +1,8 @@
 package com.taotao.cloud.oauth2.biz.jwt;
 
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
+import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -56,6 +58,27 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
 						jwtClaimSetBuilder.claim("USER_ID", principal.getUserId());
 						principal.eraseCredentials();
 						jwtClaimSetBuilder.claim("DETAILS", principal);
+						jwtClaimSetBuilder.claims(claims ->
+							claims.putAll(userAttributes)
+						);
+					}
+
+					if (authentication instanceof OAuth2ResourceOwnerPasswordAuthenticationToken
+						|| authentication instanceof OAuth2ResourceOwnerMobileAuthenticationToken) {
+						SecurityUser user = (SecurityUser) authentication.getPrincipal();
+						user.eraseCredentials();
+
+						Set<String> authorities = user
+							.getAuthorities()
+							.stream()
+							.map(GrantedAuthority::getAuthority)
+							.collect(Collectors.toSet());
+
+						Map<String, Object> userAttributes = new HashMap<>();
+
+						JwtClaimsSet.Builder jwtClaimSetBuilder = context.getClaims();
+						jwtClaimSetBuilder.claim(OAuth2ParameterNames.SCOPE, authorities);
+						jwtClaimSetBuilder.claim("user", user);
 						jwtClaimSetBuilder.claims(claims ->
 							claims.putAll(userAttributes)
 						);

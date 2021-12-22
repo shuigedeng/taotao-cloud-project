@@ -4,7 +4,7 @@ function start_taotao_cloud() {
   /opt/taotao-cloud/script/taotao-cloud-admin.sh start
   /opt/taotao-cloud/script/taotao-cloud-xxl-job-admin.sh start
 
-  /opt/taotao-cloud/script/taotao-cloud-oauth2-server.sh start
+  /opt/taotao-cloud/script/taotao-cloud-oauth2-biz.sh start
   /opt/taotao-cloud/script/taotao-cloud-gateway.sh start
   /opt/taotao-cloud/script/taotao-cloud-sys.sh start
   /opt/taotao-cloud/script/taotao-cloud-order.sh start
@@ -13,7 +13,7 @@ function start_taotao_cloud() {
 
 function stop_taotao_cloud() {
   /opt/taotao-cloud/script/taotao-cloud-admin.sh stop
-  /opt/taotao-cloud/script/taotao-cloud-oauth2-server.sh stop
+  /opt/taotao-cloud/script/taotao-cloud-oauth2-biz.sh stop
   /opt/taotao-cloud/script/taotao-cloud-xxl-job.sh stop
 }
 

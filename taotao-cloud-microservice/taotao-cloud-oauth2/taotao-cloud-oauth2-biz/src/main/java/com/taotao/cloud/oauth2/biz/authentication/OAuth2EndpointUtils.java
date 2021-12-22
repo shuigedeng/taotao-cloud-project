@@ -1,8 +1,11 @@
 package com.taotao.cloud.oauth2.biz.authentication;
 
+import com.taotao.cloud.oauth2.biz.authentication.mobile.OAuth2ResourceOwnerMobileAuthenticationToken;
+import com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationToken;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
@@ -44,23 +47,43 @@ public class OAuth2EndpointUtils {
 			request.getParameter(PkceParameterNames.CODE_VERIFIER) != null;
 	}
 
-	public static void throwError(String errorCode, String parameterName, String errorUri) {
-		OAuth2Error error = new OAuth2Error(errorCode, parameterName, errorUri);
+	public static void throwError(String errorCode, String description, String errorUri) {
+		OAuth2Error error = new OAuth2Error(errorCode, description, errorUri);
 		throw new OAuth2AuthenticationException(error);
 	}
 
 	public static OAuth2ClientAuthenticationToken getAuthenticatedClientElseThrowInvalidClient(
 		Authentication authentication) {
+		if (Objects.nonNull(authentication)) {
+			if (authentication instanceof OAuth2ResourceOwnerPasswordAuthenticationToken passwordAuthentication) {
 
-		OAuth2ClientAuthenticationToken clientPrincipal = null;
+				OAuth2ClientAuthenticationToken clientPrincipal = null;
 
-		if (OAuth2ClientAuthenticationToken.class.isAssignableFrom(
-			authentication.getPrincipal().getClass())) {
-			clientPrincipal = (OAuth2ClientAuthenticationToken) authentication.getPrincipal();
-		}
+				if (OAuth2ClientAuthenticationToken.class.isAssignableFrom(
+					passwordAuthentication.getClientPrincipal().getClass())) {
+					clientPrincipal = (OAuth2ClientAuthenticationToken) passwordAuthentication.getClientPrincipal();
+				}
 
-		if (clientPrincipal != null && clientPrincipal.isAuthenticated()) {
-			return clientPrincipal;
+				if (clientPrincipal != null && clientPrincipal.isAuthenticated()) {
+					return clientPrincipal;
+				}
+			}
+
+			if (authentication instanceof OAuth2ResourceOwnerMobileAuthenticationToken mobileAuthenticationToken) {
+
+				OAuth2ClientAuthenticationToken clientPrincipal = null;
+
+				if (OAuth2ClientAuthenticationToken.class.isAssignableFrom(
+					mobileAuthenticationToken.getClientPrincipal().getClass())) {
+					clientPrincipal = (OAuth2ClientAuthenticationToken) mobileAuthenticationToken.getClientPrincipal();
+				}
+
+				if (clientPrincipal != null && clientPrincipal.isAuthenticated()) {
+					return clientPrincipal;
+				}
+			}
+
+
 		}
 
 		throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_CLIENT);

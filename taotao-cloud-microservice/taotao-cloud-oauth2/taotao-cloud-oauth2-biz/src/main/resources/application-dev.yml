@@ -29,7 +29,7 @@ spring:
     banner-mode: off
     allow-circular-references: true
   application:
-    name: taotao-cloud-oauth2-server
+    name: taotao-cloud-oauth2-biz
   cloud:
     loadbalancer:
       enabled: true
@@ -211,6 +211,11 @@ taotao:
         sign-name: ""
         template-id: slfsdf
         product: sdfa
+    openapi:
+      enabled: true
+      group: ${spring.application.name}
+      version: ${taotaoCloudVersion}
+      title: 认证中心模块
 
 feign:
   sentinel:

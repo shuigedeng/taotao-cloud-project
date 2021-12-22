@@ -10,6 +10,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -96,24 +97,12 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 
 		RegisteredClient registeredClient = oAuth2ClientAuthenticationToken.getRegisteredClient();
 
-		if (!registeredClient.getAuthorizationGrantTypes().contains(MOBILE)) {
-			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
+		if (Objects.isNull(registeredClient) || !registeredClient.getAuthorizationGrantTypes().contains(MOBILE)) {
+			throw new OAuth2AuthenticationException("客户端类型认证错误");
 		}
 
-		//Map<String, Object> additionalParameters = resouceOwnerMobileAuthentication.getAdditionalParameters();
-		//String mobile = (String) additionalParameters.get(PARAM_MOBILE);
-		//String verificationCode = (String) additionalParameters.get(PARAM_VERIFICATION_CODE);
-
 		try {
-			// todo 此处需要修改
-			//UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-			//	mobile, verificationCode);
-			//
-			//LOGGER.debug(
-			//	"got usernamePasswordAuthenticationToken=" + usernamePasswordAuthenticationToken);
-
-			Authentication mobileAuthentication = authenticationManager.authenticate(
-				oAuth2ResourceOwnerMobileAuthenticationToken);
+			Authentication mobileAuthentication = authenticationManager.authenticate(oAuth2ResourceOwnerMobileAuthenticationToken);
 			Set<String> authorizedScopes = registeredClient.getScopes();
 
 			if (!CollectionUtils.isEmpty(
@@ -125,7 +114,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 					.collect(Collectors.toSet());
 
 				if (!CollectionUtils.isEmpty(unauthorizedScopes)) {
-					throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_SCOPE);
+					throw new OAuth2AuthenticationException("授权范围不足");
 				}
 
 				authorizedScopes = new LinkedHashSet<>(
@@ -151,7 +140,7 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 				.authorizationGrant(oAuth2ResourceOwnerMobileAuthenticationToken)
 				.build();
 
-			this.jwtCustomizer.customize(context);
+			jwtCustomizer.customize(context);
 
 			JoseHeader headers = context.getHeaders().build();
 			JwtClaimsSet claims = context.getClaims().build();

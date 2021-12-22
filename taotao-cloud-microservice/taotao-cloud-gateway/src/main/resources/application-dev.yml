@@ -14,6 +14,7 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+    config-url: /v3/api-docs/swagger-config
 
 redisson:
   password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -44,7 +45,7 @@ spring:
       resourceserver:
         jwt:
           #配置RSA的公钥访问地址
-          #          jwk-set-uri: http://taotao-cloud-oauth2-server/oauth2/jwks
+          #          jwk-set-uri: http://taotao-cloud-oauth2-biz/oauth2/jwks
           jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
   sleuth:
     enabled: true
@@ -113,8 +114,31 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
+        - id: taotao-cloud-oauth2-biz
+          uri: lb://taotao-cloud-oauth2-biz
+          metadata:
+            name: 认证中心模块
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+          filters:
+            - RewritePath=/sys/(?<path>.*), /sys/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
         - id: taotao-cloud-sys-biz
           uri: lb://taotao-cloud-sys-biz
+          metadata:
+            name: 系统管理模块
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
           filters:
@@ -134,6 +158,8 @@ spring:
                 fallbackUri: forward:/myfallback
         - id: taotao-cloud-order-biz
           uri: lb://taotao-cloud-order-biz
+          metadata:
+            name: 订单管理模块
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
@@ -353,23 +379,14 @@ taotao:
   cloud:
     health:
       enabled: true
-      doubtapi:
-        enabled: true
       dump:
         enabled: true
       export:
         enabled: true
       ping:
         enabled: true
-      report:
-        enabled: true
       warn:
         enabled: true
-      check:
-        enabled: true
-    log:
-      request-log:
-        enabled: false
     gateway:
       https:
         enabled: false
@@ -411,6 +428,8 @@ taotao:
         prefix: /api
         version: v${taotaoCloudVersion}
         base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
+    logger:
+      enabled: true
 
 management:
   endpoints:

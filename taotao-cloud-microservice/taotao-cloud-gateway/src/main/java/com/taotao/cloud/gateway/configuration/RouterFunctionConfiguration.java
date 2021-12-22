@@ -68,7 +68,6 @@ public class RouterFunctionConfiguration {
 	private static final String HEALTH_REPORT = "/health/report";
 
 	@Bean
-	@ConditionalOnBean
 	public RouterFunction<ServerResponse> routerFunction(
 		HystrixFallbackHandler hystrixFallbackHandler,
 		ImageCodeHandler imageCodeWebHandler,

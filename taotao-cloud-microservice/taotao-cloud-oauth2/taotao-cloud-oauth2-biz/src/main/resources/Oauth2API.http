@@ -23,7 +23,7 @@ grant_type=password&type=1&verification_code=123&client_id=password-messaging-cl
 POST http://localhost:33336/oauth2/token
 Content-Type:  application/x-www-form-urlencoded
 
-grant_type=mobile&client_id=password-messaging-client&client_secret=secret3&mobile=admin&verification_code=123456788888
+grant_type=mobile&type=2&mobile=15730445330&verification_code=123&client_id=password-messaging-client&client_secret=secret3
 
 ### refresh_token模式
 POST http://localhost:8080/oauth2/token
@@ -53,7 +53,7 @@ grant_type=client_credentials&client_id=client&client_secret=123456
 POST http://localhost:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password&client_id=client&client_secret=123456&username=admin&password=123456
+grant_type=password&type=1&verification_code=123&client_id=client&client_secret=123456&username=admin&password=123456
 
 ### 自定义 refresh_token 认证示例
 POST http://localhost:8080/oauth2/token
@@ -65,8 +65,3 @@ grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-M
 GET http://localhost:33336/messages
 Content-Type: application/json
 Authorization: bearer a7548a98-cab0-470c-9882-55a657dee03e
-
-<> 2021-12-08T175210.200.json
-<> 2021-12-08T172143.200.json
-
-

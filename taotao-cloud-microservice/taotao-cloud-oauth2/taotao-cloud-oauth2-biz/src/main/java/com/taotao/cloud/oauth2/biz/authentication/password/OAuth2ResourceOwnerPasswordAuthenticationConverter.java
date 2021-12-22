@@ -1,5 +1,8 @@
 package com.taotao.cloud.oauth2.biz.authentication.password;
 
+import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.PARAM_TYPE;
+import static com.taotao.cloud.oauth2.biz.models.AuthorizationServerConstant.VERIFICATION_CODE;
+
 import com.taotao.cloud.oauth2.biz.authentication.OAuth2EndpointUtils;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,14 +21,6 @@ import org.springframework.util.StringUtils;
 
 public class OAuth2ResourceOwnerPasswordAuthenticationConverter implements AuthenticationConverter {
 
-	/**
-	 * 用户类型 1.平台管理用户 2.会员用户
-	 */
-	public static final String TYPE = "type";
-	/**
-	 * 验证码
-	 */
-	public static final String VERIFICATION_CODE = "verification_code";
 
 	@Override
 	public Authentication convert(HttpServletRequest request) {
@@ -77,9 +72,9 @@ public class OAuth2ResourceOwnerPasswordAuthenticationConverter implements Authe
 		}
 
 		// 类型 (REQUIRED)
-		String type = parameters.getFirst(TYPE);
+		String type = parameters.getFirst(PARAM_TYPE);
 		if (!StringUtils.hasText(type)
-			|| parameters.get(TYPE).size() != 1) {
+			|| parameters.get(PARAM_TYPE).size() != 1) {
 			OAuth2EndpointUtils.throwError(
 				OAuth2ErrorCodes.INVALID_REQUEST,
 				"登录类型不能为空",

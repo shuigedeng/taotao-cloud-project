@@ -1,8 +1,5 @@
 package com.taotao.cloud.oauth2.biz.authentication.password;
 
-import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.TYPE;
-import static com.taotao.cloud.oauth2.biz.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationConverter.VERIFICATION_CODE;
-
 import com.taotao.cloud.oauth2.biz.authentication.JwtUtils;
 import com.taotao.cloud.oauth2.biz.authentication.OAuth2EndpointUtils;
 import com.taotao.cloud.oauth2.biz.jwt.JwtCustomizerServiceImpl;
@@ -18,7 +15,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
@@ -118,7 +114,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 						requestedScope -> !registeredClient.getScopes().contains(requestedScope))
 					.collect(Collectors.toSet());
 				if (!CollectionUtils.isEmpty(unauthorizedScopes)) {
-					throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_SCOPE);
+					throw new OAuth2AuthenticationException("授权范围不足");
 				}
 
 				authorizedScopes = new LinkedHashSet<>(
@@ -153,8 +149,10 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
 			OAuth2AccessToken accessToken = new OAuth2AccessToken(
 				OAuth2AccessToken.TokenType.BEARER,
-				jwtAccessToken.getTokenValue(), jwtAccessToken.getIssuedAt(),
-				jwtAccessToken.getExpiresAt(), authorizedScopes);
+				jwtAccessToken.getTokenValue(),
+				jwtAccessToken.getIssuedAt(),
+				jwtAccessToken.getExpiresAt(),
+				authorizedScopes);
 
 			OAuth2RefreshToken refreshToken = null;
 			if (registeredClient.getAuthorizationGrantTypes()

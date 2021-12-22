@@ -17,9 +17,9 @@ package com.taotao.cloud.oauth2.biz.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.CaptchaUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.oauth2.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;
 import java.util.Map;
@@ -61,28 +61,22 @@ public class CaptchaService {
 		return captcha;
 	}
 
-	public Boolean checkCaptcha(HttpServletRequest request) {
-		Map<String, String> params = RequestUtil.getAllRequestParam(request);
-		String code = params.get(PARAM_CODE);
-		String t = params.get(PARAM_T);
-
+	public void checkCaptcha(String code, String t) {
 		if (StrUtil.isBlank(code)) {
-			throw new BaseException(NOT_CODE_NULL);
+			throw CloudAuthenticationException.throwError(NOT_CODE_NULL);
 		}
 		String key = RedisConstant.CAPTCHA_KEY_PREFIX + t;
 		if (!redisRepository.exists(key)) {
-			throw new BaseException(NOT_LEGAL);
+			throw CloudAuthenticationException.throwError(NOT_LEGAL);
 		}
 
 		Object captcha = redisRepository.get(key);
 		if (captcha == null) {
-			throw new BaseException(INVALID);
+			throw CloudAuthenticationException.throwError(INVALID);
 		}
 		if (!code.toLowerCase().equals(captcha)) {
-			throw new BaseException(ERROR);
+			throw CloudAuthenticationException.throwError(ERROR);
 		}
-
-		return true;
 	}
 
 }

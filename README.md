@@ -218,12 +218,12 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-spring-source -- spring 源码模块
 │  ├─taotao-cloud-spring-standlone -- 单项目模块
 │  ├─taotao-cloud-web -- 前端模块
-│  │  ├─taotao-cloud-backend  -- 后台管理模块
-│  │  ├─taotao-cloud-datav -- 大屏模块
-│  │  ├─taotao-cloud-electron -- pc端app模块
-│  │  ├─taotao-cloud-front -- 商城前端模块
-│  │  ├─taotao-cloud-mall  -- 商城小程序模块
-│  │  ├─taotao-cloud-music -- 音乐小程序模块
+│  │  ├─taotao-cloud-datav -- 大屏展示模块
+│  │  ├─taotao-cloud-front -- 商城PC端模块
+│  │  ├─taotao-cloud-mall  -- 商城移动端模块
+│  │  ├─taotao-cloud-manager  -- 平台管理端模块
+│  │  ├─taotao-cloud-merchant  -- 商户管理端模块
+│  │  ├─taotao-cloud-open -- 开放平台模块
 ```
 
 ## 9.开源共建
