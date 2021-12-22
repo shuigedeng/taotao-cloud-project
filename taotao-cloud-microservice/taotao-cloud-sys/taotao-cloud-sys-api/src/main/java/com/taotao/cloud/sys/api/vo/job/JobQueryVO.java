@@ -26,7 +26,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 2020/9/30 08:49
  */
-@Schema( description = "岗位查询对象")
+@Schema(description = "岗位查询对象")
 public record JobQueryVO(
 	/**
 	 * 岗位名称
@@ -56,7 +56,8 @@ public record JobQueryVO(
 	 * 租户id
 	 */
 	@Schema(description = "租户id")
-	String tenantId) implements Serializable {
+	String tenantId
+) implements Serializable {
 
 	@Serial
 	static final long serialVersionUID = -7605952923416404638L;

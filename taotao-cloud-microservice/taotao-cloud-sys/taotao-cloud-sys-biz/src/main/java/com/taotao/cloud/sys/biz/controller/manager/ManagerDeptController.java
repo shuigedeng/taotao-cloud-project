@@ -15,25 +15,29 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
-import cn.hutool.core.util.PageUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.BaseQuery;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.tree.ForestNodeMerger;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.dept.DeptSaveDTO;
 import com.taotao.cloud.sys.api.dto.dept.DeptUpdateDTO;
+import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.api.vo.dept.DeptQueryVO;
 import com.taotao.cloud.sys.biz.entity.Dept;
 import com.taotao.cloud.sys.biz.service.IDeptService;
 import com.taotao.cloud.web.base.controller.SuperController;
-import com.taotao.cloud.web.tree.ForestNodeMerger;
-import groovy.util.logging.Log;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
+import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 后台管理-部门管理API
+ * 平台管理端-部门管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -42,28 +46,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/manager/dept")
-@Tag(name = "后台管理-部门管理API", description = "后台管理-部门管理API")
+@Tag(name = "平台管理端-部门管理API", description = "平台管理端-部门管理API")
 public class ManagerDeptController extends
 	SuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
-	///**
-	// * 部门树
-	// *
-	// * @return Result
-	// */
-	//@PreAuth
-	//@Log(value = "部门树", exception = "部门树请求异常")
-	//@GetMapping("/tree")
-	//@ApiOperation(value = "部门树", notes = "部门树")
-	//public Result<?> tree() {
-	//	return Result.data(ForestNodeMerger.merge(sysDepartService.tree()));
-	//}
-	//
-	//@GetMapping
-	//@ApiOperation(value = "获取树状结构")
-	//public ResultMessage<List<DepartmentVO>> getByPage(Department entity,
-	//	SearchVO searchVo) {
-	//	return ResultUtil.data(departmentService.tree(PageUtil.initWrapper(entity, searchVo)));
-	//
-	//}
+	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
+	public Result<List<DeptTreeVO>> tree() {
+		return Result.success(ForestNodeMerger.merge(service().tree()));
+	}
 }

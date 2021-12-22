@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.tree.ForestNodeMerger;
 import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
@@ -25,6 +26,7 @@ import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
 import com.taotao.cloud.sys.api.dubbo.IDubboMenuService;
+import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.Menu;
@@ -42,6 +44,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -154,15 +157,17 @@ public class MenuServiceImpl extends
 	}
 
 	@Override
-	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> MenuVOList,
+	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> menuQueryVOS,
 		Long parentId) {
-		//List<MenuTreeVO> menuTreeList = MenuVOList.stream()
-		//	.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
-		//	.map(MenuTreeVO::new).sorted(Comparator.comparingInt(MenuTreeVO::getSort))
-		//	.collect(Collectors.toList());
-		//Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
-		//return TreeUtil.build(menuTreeList, parent);
-		return null;
+		List<MenuTreeVO> menuTreeList = menuQueryVOS.stream()
+			.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
+			.map(MenuTreeVO::new)
+			.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
+			.collect(Collectors.toList());
+
+		Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
+		return TreeUtil.build(menuTreeList, parent);
+		//return ForestNodeMerger.merge(TreeUtil.buildTree(menus));
 	}
 
 	@Override

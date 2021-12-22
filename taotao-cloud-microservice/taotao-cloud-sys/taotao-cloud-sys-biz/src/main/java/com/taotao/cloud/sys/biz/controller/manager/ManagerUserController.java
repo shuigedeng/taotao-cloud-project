@@ -48,7 +48,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 后台用户管理API
+ * 平台管理端-用户管理API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -57,7 +57,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/manager/user")
-@Tag(name = "后台用户管理API", description = "后台用户管理API")
+@Tag(name = "平台管理端-用户管理API", description = "平台管理端-用户管理API")
 public class ManagerUserController extends
 	SuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
@@ -159,20 +159,6 @@ public class ManagerUserController extends
 		@RequestBody Set<Long> roleIds) {
 		return success(service().updateUserRoles(userId, roleIds));
 	}
-	// **********************内部微服务接口*****************************
-
-	// @ApiIgnore
-	// @ApiOperation("第三方登录调用获取用户信息")
-	// @SysOperateLog(description = "第三方登录调用获取用户信息")
-	// @GetMapping("/info/social")
-	// public Result<SecurityUser> getUserInfoBySocial(@RequestParam(value = "providerId") String providerId,
-	//                                                 @RequestParam(value = "providerUserId") int providerUserId) {
-	//     SysUser sysUser = sysUserService.getUserBySocial(providerId, providerUserId);
-	//     SecurityUser securityUser = new SecurityUser(sysUser.getId(), sysUser.getUsername(),
-	//             sysUser.getPassword(), CollectionUtil.newHashSet(), CollectionUtil.newHashSet());
-	//     BeanUtil.copyIncludeNull(sysUser, securityUser);
-	//     return Result.succeed(securityUser);
-	// }
 
 }
 

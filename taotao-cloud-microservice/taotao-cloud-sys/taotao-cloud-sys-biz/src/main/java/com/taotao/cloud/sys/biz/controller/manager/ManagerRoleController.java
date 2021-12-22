@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 角色管理API
+ * 平台管理端-角色管理API
  *
  * @author shuigedeng
  * @version 2021.10
@@ -53,7 +53,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/manager/role")
-@Tag(name = "角色管理API", description = "角色管理API")
+@Tag(name = "平台管理端-角色管理API", description = "平台管理端-角色管理API")
 public class ManagerRoleController extends
 	SuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 

@@ -28,7 +28,6 @@ import com.taotao.cloud.sys.api.dto.menu.MenuSaveDTO;
 import com.taotao.cloud.sys.api.dto.menu.MenuUpdateDTO;
 import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.api.vo.menu.ResourceTreeVO;
 import com.taotao.cloud.sys.biz.entity.Menu;
 import com.taotao.cloud.sys.biz.mapstruct.IMenuMapStruct;
 import com.taotao.cloud.sys.biz.service.IMenuService;
@@ -40,10 +39,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -56,7 +51,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 菜单管理API
+ * 平台管理端-菜单管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -65,7 +60,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/manager/menu")
-@Tag(name = "菜单管理API", description = "菜单管理API")
+@Tag(name = "平台管理端-菜单管理API", description = "平台管理端-菜单管理API")
 public class ManagerMenuController extends
 	SuperController<IMenuService, Menu, Long, BaseQuery, MenuSaveDTO, MenuUpdateDTO, MenuQueryVO> {
 
@@ -203,6 +198,7 @@ public class ManagerMenuController extends
 		}
 		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
 		List<MenuQueryVO> resourceVOList = result.data();
+		
 		List<MenuTreeVO> trees = service().findCurrentUserMenuTree(resourceVOList,
 			parentId);
 		return Result.success(trees);
