@@ -60,8 +60,7 @@ public class BIOServer {
                 System.out.println("read....");
                int read =  inputStream.read(bytes);
                if(read != -1) {
-                   System.out.println(new String(bytes, 0, read
-                   )); //输出客户端发送的数据
+                   System.out.println(new String(bytes, 0, read)); //输出客户端发送的数据
                } else {
                    break;
                }
