@@ -18,17 +18,17 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao cloud project** 创建这个仓库的目的就是工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
+**taotao cloud project** 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
 
-- **大数据模块** 集成基于**spark的日志数据处理和分析、用户行为分析、推荐系统**、**flink\spark streaming离线/流式计算**、**hive数据仓库**、**apache hudi数据湖**等大数据处理
+- **大数据模块** 集成基于**spark、hive的日志数据处理和分析、用户行为分析、推荐系统**、**flink、spark streaming离线/流式计算**、**hadoop hive tidb 离线数据仓库**、**apache hudi数据湖 presto计算框架**等大数据处理
   
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
-  提供大量的**starters**作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
+  提供**大量的starters组件**作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **滔滔商城模块** 基于**微服务模块**构建前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署，支持Docker，各个API独立、前端使用 VUE3、taro开发，**系统全端全部代码开源**
+- **滔滔商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署，支持Docker，各个API独立、管理前端使用VUE3开发、移动端使用taro开发，**系统全端全部代码开源**
   
 
 - **前端模块** 主要使用**react antd**进行前后端分离开发、集成以**taro, taro-ui, react native**为主的多端合一框架。
@@ -36,7 +36,7 @@
 
 - **python模块** 主要是集成了**基于django**的web开发、**基于scrapy爬虫开发**、**homeassistant**家庭自动化框架原理的分析
 
-总之基于**spring cloud alibaba**的微服务架构。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
+总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink等大数据处理实践**。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
 ## 2. spring cloud 微服务架构图
 ![mark](./snapshot/springcloud微服务架构图.jpeg)
@@ -164,13 +164,33 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-javase -- javase模块
 │  │  ├─taotao-cloud-javaweb -- javaweb模块
 │  ├─taotao-cloud-microservice -- 微服务业务模块
-│  │  ├─taotao-cloud-backend  -- backend模块
-│  │  ├─taotao-cloud-front  -- front模块
-│  │  ├─taotao-cloud-order  -- order模块
-│  │  ├─taotao-cloud-pay -- pay模块
-│  │  ├─taotao-cloud-product  -- product模块
-│  │  ├─taotao-cloud-sys  -- uc模块
-│  │  ├─taotao-cloud-starter  -- starter模块
+│  │  ├─taotao-cloud-admin  -- admin模块
+│  │  ├─taotao-cloud-bullein  -- 公告模块
+│  │  ├─taotao-cloud-config  -- 通用配置模块
+│  │  ├─taotao-cloud-customer  -- 客服模块
+│  │  ├─taotao-cloud-distribution  -- 营销/分销模块
+│  │  ├─taotao-cloud-front  -- 前端pc模块
+│  │  ├─taotao-cloud-gateway  -- 网关模块
+│  │  ├─taotao-cloud-graphql  -- graphql模块
+│  │  ├─taotao-cloud-member  -- 会员模块
+│  │  ├─taotao-cloud-message  -- 消息模块
+│  │  ├─taotao-cloud-oauth2  -- oauth2认证模块
+│  │  ├─taotao-cloud-opencv  -- opencv模块
+│  │  ├─taotao-cloud-operation  -- 运营模块
+│  │  ├─taotao-cloud-order  -- 订单模块
+│  │  ├─taotao-cloud-payment -- 支付模块
+│  │  ├─taotao-cloud-product  -- 商品模块
+│  │  ├─taotao-cloud-promotion  -- 促销模块
+│  │  ├─taotao-cloud-recommend  -- 推荐模块
+│  │  ├─taotao-cloud-report  -- 报表模块
+│  │  ├─taotao-cloud-search  -- 搜索模块
+│  │  ├─taotao-cloud-settlement  -- 售后模块
+│  │  ├─taotao-cloud-starter  -- starter组件模块
+│  │  ├─taotao-cloud-stock  -- 库存模块
+│  │  ├─taotao-cloud-store  -- 店铺模块
+│  │  ├─taotao-cloud-sys  -- 系统模块
+│  │  ├─taotao-cloud-websocket  -- websocket模块
+│  │  ├─taotao-cloud-xxl-job-admin  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
 │  ├─taotao-cloud-offline -- 离线数据分析模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 数据仓库模块
