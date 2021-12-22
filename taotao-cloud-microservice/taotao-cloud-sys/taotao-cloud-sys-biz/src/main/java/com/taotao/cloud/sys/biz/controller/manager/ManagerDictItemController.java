@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 后台管理-字典项管理API
+ * 平台管理端-字典项管理API
  *
  * @author shuigedeng
  * @version 2021.9
@@ -40,24 +40,24 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/manager/dict/item")
-@Tag(name = "后台管理-字典项管理API", description = "后台管理-字典项管理API")
+@Tag(name = "平台管理端-字典项管理API", description = "平台管理端-字典项管理API")
 public class ManagerDictItemController extends
 	SuperController<IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
-	///**
-	// * 根据code查询字典项列表
-	// *
-	// * @param code 字典码
-	// * @return Result<List < SysDict>>
-	// */
-	//@PreAuth
-	//@Log(value = "字典项列表", exception = "字典项列表异常")
-	//@GetMapping("list-value")
-	//@ApiOperation(value = "字典项列表", notes = "字典项列表")
-	//public Result<?> listValue(@RequestParam String code) {
-	//	return Result.data(sysDictService.list(new LambdaQueryWrapper<SysDict>()
-	//		.eq(SysDict::getCode, code)
-	//		.ne(SysDict::getParentId, 0)
-	//		.orderByAsc(SysDict::getSort)));
-	//}
+	/**
+	 * 根据code查询字典项列表
+	 *
+	 * @param code 字典码
+	 * @return Result<List < SysDict>>
+	 */
+	@PreAuth
+	@Log(value = "字典项列表", exception = "字典项列表异常")
+	@GetMapping("list-value")
+	@ApiOperation(value = "字典项列表", notes = "字典项列表")
+	public Result<?> listValue(@RequestParam String code) {
+		return Result.data(sysDictService.list(new LambdaQueryWrapper<SysDict>()
+			.eq(SysDict::getCode, code)
+			.ne(SysDict::getParentId, 0)
+			.orderByAsc(SysDict::getSort)));
+	}
 }

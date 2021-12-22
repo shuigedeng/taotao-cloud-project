@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.tree;
+package com.taotao.cloud.common.tree;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * 森林节点 
+ * 森林节点
  *
  * @author shuigedeng
  * @version 2021.9
@@ -27,18 +27,18 @@ import java.util.Objects;
  */
 public class ForestNode extends TreeNode {
 
-    private static final long serialVersionUID = -5188222097134746118L;
+	private static final long serialVersionUID = -5188222097134746118L;
 
-    /**
-     * 节点内容
-     */
-    private Object content;
+	/**
+	 * 节点内容
+	 */
+	private Object content;
 
-    public ForestNode(Long id, Long parentId, Object content) {
-        this.id = id;
-        this.parentId = parentId;
-        this.content = content;
-    }
+	public ForestNode(Long id, Long parentId, Object content) {
+		this.id = id;
+		this.parentId = parentId;
+		this.content = content;
+	}
 
 	public ForestNode(Object content) {
 		this.content = content;

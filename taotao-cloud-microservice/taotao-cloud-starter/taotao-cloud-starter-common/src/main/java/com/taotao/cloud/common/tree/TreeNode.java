@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.tree;
+package com.taotao.cloud.common.tree;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -117,6 +117,7 @@ public class TreeNode implements INode {
 	public Long getParentId() {
 		return parentId;
 	}
+
 
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;

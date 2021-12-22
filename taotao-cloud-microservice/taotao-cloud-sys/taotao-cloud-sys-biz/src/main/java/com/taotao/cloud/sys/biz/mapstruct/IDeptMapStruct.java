@@ -15,9 +15,8 @@
  */
 package com.taotao.cloud.sys.biz.mapstruct;
 
-import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.api.vo.menu.MenuTreeVOBuilder;
-import com.taotao.cloud.sys.biz.entity.Menu;
+import com.taotao.cloud.sys.api.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.biz.entity.Dept;
 import java.util.List;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -32,9 +31,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper(builder = @Builder(disableBuilder = true),
 	unmappedSourcePolicy = ReportingPolicy.IGNORE,
 	unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IMenuMapStruct {
+public interface IDeptMapStruct {
 
-	IMenuMapStruct INSTANCE = Mappers.getMapper(IMenuMapStruct.class);
+	IDeptMapStruct INSTANCE = Mappers.getMapper(IDeptMapStruct.class);
 
 	/**
 	 * deptListToVoList
@@ -44,7 +43,7 @@ public interface IMenuMapStruct {
 	 * @author shuigedeng
 	 * @since 2021-12-22 21:20:33
 	 */
-	List<MenuTreeVO> menuListToTreeVoList(List<Menu> menuList);
+	List<DeptTreeVO> deptListToVoList(List<Dept> deptList);
 
 
 }

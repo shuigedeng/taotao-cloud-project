@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.tree;
+package com.taotao.cloud.common.tree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class ForestNodeManager<T extends INode> {
 	 * 根据节点ID获取一个节点
 	 *
 	 * @param id 节点ID
-	 * @return {@link com.taotao.cloud.web.tree.INode }
+	 * @return {@link INode }
 	 * @author shuigedeng
 	 * @since 2021-09-02 22:20:56
 	 */

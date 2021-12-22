@@ -15,10 +15,13 @@
  */
 package com.taotao.cloud.sys.biz.utils;
 
+import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.tree.TreeNode;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
+import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
+import com.taotao.cloud.sys.api.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
-import com.taotao.cloud.sys.api.vo.menu.MenuTreeVOBuilder;
-import com.taotao.cloud.sys.api.vo.menu.TreeNode;
+import com.taotao.cloud.sys.biz.entity.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,12 +49,13 @@ public class TreeUtil {
 			if (parentId.equals(treeNode.getParentId())) {
 				trees.add(treeNode);
 			}
+
 			for (T it : treeNodes) {
 				if (it.getParentId().equals(treeNode.getId())) {
 					if (treeNode.getChildren().size() != 0) {
 						treeNode.setHasChildren(true);
 					}
-					treeNode.add(it);
+					trees.add(it);
 				}
 			}
 		}
@@ -66,7 +70,6 @@ public class TreeUtil {
 	 * @param parentId  父节点
 	 * @return java.util.List<T>
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/10/21 11:22
 	 */
 	public static <T extends TreeNode> List<T> recursiveBuild(List<T> treeNodes, Long parentId) {
@@ -86,7 +89,6 @@ public class TreeUtil {
 	 * @param treeNodes 子节点列表
 	 * @return T
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/10/21 11:23
 	 */
 	public static <T extends TreeNode> T findChildren(T treeNode, List<T> treeNodes) {
@@ -95,7 +97,7 @@ public class TreeUtil {
 				if (treeNode.getChildren().size() != 0) {
 					treeNode.setHasChildren(true);
 				}
-				treeNode.add(findChildren(it, treeNodes));
+				treeNodes.add(findChildren(it, treeNodes));
 			}
 		}
 		return treeNode;
@@ -104,20 +106,18 @@ public class TreeUtil {
 	/**
 	 * 通过SysMenu创建树形节点
 	 *
-	 * @param resources 菜单列表
-	 * @param parentId  父id
+	 * @param parentId 父id
 	 * @return java.util.List<MenuTree>
 	 * @author shuigedeng
-	 * @version 1.0.0
 	 * @since 2020/10/21 11:23
 	 */
 	public static List<MenuTreeVO> buildTree(List<MenuBO> menus, Long parentId) {
 		List<MenuTreeVO> trees = new ArrayList<>();
 		MenuTreeVO node;
 		for (MenuBO menu : menus) {
-			node = MenuTreeVOBuilder.builder()
-				.menuId(menu.id().intValue())
-				.parentMenuId(menu.parentId().intValue())
+			node = MenuTreeVO.builder()
+				.id(menu.id())
+				.parentId(menu.parentId())
 				.name(menu.name())
 				.type(menu.type())
 				.sort(menu.sortNum())
@@ -132,8 +132,44 @@ public class TreeUtil {
 
 			trees.add(node);
 		}
-		return null;
-		//return TreeUtil.build(trees, parentId);
+		return TreeUtil.build(trees, parentId);
+	}
+
+	/**
+	 * 对象转树节点
+	 *
+	 * @param menus 系统菜单
+	 * @return List
+	 */
+	public static List<MenuTreeVO> buildTree(List<Menu> menus) {
+		List<MenuTreeVO> trees = new ArrayList<>();
+		menus.forEach(sysMenu -> {
+			MenuTreeVO tree = new MenuTreeVO();
+			BeanUtil.copyProperties(sysMenu, tree);
+			tree.setHidden("1".equals(sysMenu.getHidden()));
+			MenuMetaVO meta = new MenuMetaVO();
+			meta.setIcon(sysMenu.getIcon());
+			meta.setTitle(sysMenu.getName());
+
+			// 只有当菜单类型为目录的时候，如果是顶级，则强制修改为Layout
+			if (sysMenu.getParentId() == -1L && MenuTypeEnum.DIR.getCode()
+				.equals(sysMenu.getType())) {
+				tree.setComponent("Layout");
+				tree.setRedirect("noRedirect");
+				tree.setAlwaysShow(true);
+			}
+			tree.setMeta(meta);
+
+			if (MenuTypeEnum.DIR.getCode().equals(sysMenu.getType())) {
+				tree.setTypeName(MenuTypeEnum.DIR.getMessage());
+			} else if (MenuTypeEnum.MENU.getCode().equals(sysMenu.getType())) {
+				tree.setTypeName(MenuTypeEnum.MENU.getMessage());
+			} else if (MenuTypeEnum.BUTTON.getCode().equals(sysMenu.getType())) {
+				tree.setTypeName(MenuTypeEnum.BUTTON.getMessage());
+			}
+			trees.add(tree);
+		});
+		return trees;
 	}
 
 }

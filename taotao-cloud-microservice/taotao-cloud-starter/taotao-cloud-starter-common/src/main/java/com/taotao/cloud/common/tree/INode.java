@@ -13,39 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.tree;
+package com.taotao.cloud.common.tree;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * 节点归并类
+ * 节点
  *
  * @author shuigedeng
  * @version 2021.9
- * @since 2021-09-02 22:21:27
+ * @since 2021-09-02 22:21:57
  */
-public class ForestNodeMerger {
+public interface INode extends Serializable {
 
 	/**
-	 * 将节点数组归并为一个森林（多棵树）（填充节点的children域） 时间复杂度为O(n^2)
+	 * getId
 	 *
-	 * @param items 节点域
+	 * @return {@link java.lang.Long }
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:22:11
+	 */
+	Long getId();
+
+	/**
+	 * getParentId
+	 *
+	 * @return {@link java.lang.Long }
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:22:18
+	 */
+	Long getParentId();
+
+	/**
+	 * getChildren
+	 *
 	 * @return {@link java.util.List }
 	 * @author shuigedeng
-	 * @since 2021-09-02 22:21:41
+	 * @since 2021-09-02 22:22:22
 	 */
-	public static <T extends INode> List<T> merge(List<T> items) {
-		ForestNodeManager<T> forestNodeManager = new ForestNodeManager<>(items);
-		items.forEach(forestNode -> {
-			if (forestNode.getParentId() != 0) {
-				INode node = forestNodeManager.getTreeNodeAT(forestNode.getParentId());
-				if (node != null) {
-					node.getChildren().add(forestNode);
-				} else {
-					forestNodeManager.addParentId(forestNode.getId());
-				}
-			}
-		});
-		return forestNodeManager.getRoot();
+	List<INode> getChildren();
+
+	/**
+	 * getHasChildren
+	 *
+	 * @return {@link java.lang.Boolean }
+	 * @author shuigedeng
+	 * @since 2021-09-02 22:22:30
+	 */
+	default Boolean getHasChildren() {
+		return false;
 	}
 }

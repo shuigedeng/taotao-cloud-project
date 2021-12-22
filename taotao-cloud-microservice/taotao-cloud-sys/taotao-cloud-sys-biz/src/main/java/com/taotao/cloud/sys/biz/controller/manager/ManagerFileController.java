@@ -52,6 +52,7 @@ public class ManagerFileController {
 		if (file.isEmpty()) {
 			throw new BusinessException("文件不能为空");
 		}
+
 		File upload = fileService.upload(file);
 		UploadFileVO result = UploadFileVO.builder().id(upload.getId()).url(upload.getUrl())
 			.build();

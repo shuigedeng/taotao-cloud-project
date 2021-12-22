@@ -10,7 +10,7 @@ import java.util.List;
  * @author shuigedeng
  * @since 2020/5/14 10:44
  */
-@Schema( description = "菜单VO")
+@Schema(description = "菜单VO")
 public record MenuVO(
 	@Schema(description = "菜单名称")
 	String name,
@@ -28,10 +28,11 @@ public record MenuVO(
 	Boolean alwaysShow,
 
 	@Schema(description = "菜单meta")
-	MenuMetaVo meta,
+	MenuMetaVO meta,
 
 	@Schema(description = "菜单children")
-	List<MenuVO> children) implements Serializable {
+	List<MenuVO> children
+) implements Serializable {
 
 
 }
