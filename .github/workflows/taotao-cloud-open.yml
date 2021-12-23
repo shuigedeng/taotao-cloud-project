@@ -46,14 +46,12 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: yarn install and build
-        working-directory: ./taotao-cloud-microservice/taotao-cloud-open
         run: |
           yarn
           yarn build
 
       - name: deploy to server
         uses: easingthemes/ssh-deploy@main
-        working-directory: ./taotao-cloud-microservice/taotao-cloud-open
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
