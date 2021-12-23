@@ -91,6 +91,8 @@ spring:
       properties:
         linger.ms: 500
   cloud:
+    compatibility-verifier:
+      enabled: false
     loadbalancer:
       enabled: true
     sentinel:
