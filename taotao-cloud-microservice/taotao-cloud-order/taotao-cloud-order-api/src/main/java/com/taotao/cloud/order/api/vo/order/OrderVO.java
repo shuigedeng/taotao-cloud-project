@@ -3,31 +3,27 @@ package com.taotao.cloud.order.api.vo.order;
 import cn.hutool.core.bean.BeanUtil;
 import cn.lili.modules.order.order.entity.dos.Order;
 import cn.lili.modules.order.order.entity.dos.OrderItem;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
  * 订单vo
  *
- * 
  * @since 2020/11/28 11:38
  */
-@Data
-@NoArgsConstructor
+@Schema(description = "订单vo")
 public class OrderVO extends Order {
 
 
-    private static final long serialVersionUID = 5820637554656388777L;
+	private static final long serialVersionUID = 5820637554656388777L;
 
-    @ApiModelProperty(value = "订单商品项目")
-    private List<OrderItem> orderItems;
+	@Schema(description = "订单商品项目")
+	private List<OrderItem> orderItems;
 
 
-    public OrderVO (Order order,List<OrderItem> orderItems){
-        BeanUtil.copyProperties(order, this);
-        this.setOrderItems(orderItems);
-    }
+	public OrderVO(Order order, List<OrderItem> orderItems) {
+		BeanUtil.copyProperties(order, this);
+		this.setOrderItems(orderItems);
+	}
 }

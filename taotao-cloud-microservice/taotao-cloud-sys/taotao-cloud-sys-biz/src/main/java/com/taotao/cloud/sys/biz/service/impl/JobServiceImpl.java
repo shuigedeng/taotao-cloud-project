@@ -24,8 +24,5 @@ public class JobServiceImpl extends
 	BaseSuperServiceImpl<IJobMapper, Job,JobRepository, IJobRepository, Long>
 	implements IDubboJobService, IJobService {
 
-	@Autowired
-	private IJobService sysJobService;
-
 
 }

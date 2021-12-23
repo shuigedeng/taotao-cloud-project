@@ -1,33 +1,31 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 /**
  * 发票子内容
  *
- * 
  * @since 2020/11/28 11:44
  */
-@Data
+@Schema(description = "发票子内容")
 public class ReceiptDTO {
 
-    @ApiModelProperty(value = "发票ID")
-    private String receiptId;
+	@Schema(description = "发票ID")
+	private String receiptId;
 
-    @ApiModelProperty(value = "商品名称")
-    private String goodsName;
+	@Schema(description = "商品名称")
+	private String goodsName;
 
-    @ApiModelProperty(value = "规格")
-    private String specs;
+	@Schema(description = "规格")
+	private String specs;
 
-    @ApiModelProperty(value = "数量")
-    private Integer num;
+	@Schema(description = "数量")
+	private Integer num;
 
-    @ApiModelProperty(value = "单价")
-    private Double goodPrice;
+	@Schema(description = "单价")
+	private Double goodPrice;
 
-    @ApiModelProperty(value = "小计")
-    private Double subtotal;
+	@Schema(description = "小计")
+	private Double subtotal;
 }

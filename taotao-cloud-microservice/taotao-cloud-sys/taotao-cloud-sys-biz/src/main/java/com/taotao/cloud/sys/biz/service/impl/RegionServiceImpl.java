@@ -20,14 +20,18 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
+import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.entity.Region;
 import com.taotao.cloud.sys.biz.mapper.IRegionMapper;
+import com.taotao.cloud.sys.biz.mapstruct.IRegionMapStruct;
 import com.taotao.cloud.sys.biz.repository.cls.RegionRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -88,6 +92,23 @@ public class RegionServiceImpl extends
 			vos.forEach(this::findAllChild);
 		}
 		return vos;
+	}
+
+	@Override
+	public List<RegionTreeVO> treeOther() {
+		LambdaQueryWrapper<Region> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.orderByDesc(Region::getCreateTime);
+		List<Region> list = list(queryWrapper);
+
+		return IRegionMapStruct.INSTANCE.regionListToVoList(list)
+			.stream()
+			.filter(Objects::nonNull)
+			.peek(e -> {
+				e.setKey(e.getId());
+				e.setValue(e.getId());
+				e.setTitle(e.getName());
+			})
+			.collect(Collectors.toList());
 	}
 
 	public void findAllChild(RegionParentVO vo) {

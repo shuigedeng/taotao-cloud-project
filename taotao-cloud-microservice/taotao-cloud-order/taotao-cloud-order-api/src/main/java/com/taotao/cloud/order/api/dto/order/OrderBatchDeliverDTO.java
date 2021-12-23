@@ -1,27 +1,25 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 订单批量发货DTO
- * 
- * @since 2021/5/26 4:21 下午
  *
+ * @since 2021/5/26 4:21 下午
  */
-@Data
+@Schema(description = "订单批量发货DTO")
 public class OrderBatchDeliverDTO {
 
-    @ApiModelProperty(value = "订单SN")
-    private String orderSn;
+	@Schema(description = "订单SN")
+	private String orderSn;
 
-    @ApiModelProperty(value = "物流公司ID")
-    private String logisticsId;
+	@Schema(description = "物流公司ID")
+	private String logisticsId;
 
-    @ApiModelProperty(value = "物流公司名称")
-    private String logisticsName;
+	@Schema(description = "物流公司名称")
+	private String logisticsName;
 
-    @ApiModelProperty(value = "发货单号")
-    private String logisticsNo;
+	@Schema(description = "发货单号")
+	private String logisticsNo;
 
 }

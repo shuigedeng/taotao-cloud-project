@@ -1,26 +1,22 @@
 package com.taotao.cloud.order.api.vo.order;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 发票
  *
- * 
  * @since 2020/11/28 11:38
  */
-@Data
-@ApiModel(value = "发票")
+@Schema(description = "发票")
 public class ReceiptVO {
 
-    @ApiModelProperty(value = "发票抬头")
-    private String receiptTitle;
+	@Schema(description = "发票抬头")
+	private String receiptTitle;
 
-    @ApiModelProperty(value = "纳税人识别号")
-    private String taxpayerId;
+	@Schema(description = "纳税人识别号")
+	private String taxpayerId;
 
-    @ApiModelProperty(value = "发票内容")
-    private String receiptContent;
+	@Schema(description = "发票内容")
+	private String receiptContent;
 
 }

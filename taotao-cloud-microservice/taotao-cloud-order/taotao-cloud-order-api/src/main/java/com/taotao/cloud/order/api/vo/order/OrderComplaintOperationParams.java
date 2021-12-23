@@ -1,33 +1,31 @@
 package com.taotao.cloud.order.api.vo.order;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
  * 交易投诉 参数
  *
- * 
  * @since 2020/12/4
  **/
-@Data
+@Schema(description = "交易投诉 参数")
 public class OrderComplaintOperationParams {
 
 
-    @ApiModelProperty(value = "要更改的状态状态")
-    private String complainStatus;
+	@Schema(description = "要更改的状态状态")
+	private String complainStatus;
 
-    @ApiModelProperty("交易投诉主键")
-    private String complainId;
+	@ApiModelProperty("交易投诉主键")
+	private String complainId;
 
-    @ApiModelProperty("商家申诉内容")
-    private String appealContent;
+	@ApiModelProperty("商家申诉内容")
+	private String appealContent;
 
-    @ApiModelProperty("商家申诉上传的图片")
-    private List<String> images;
+	@ApiModelProperty("商家申诉上传的图片")
+	private List<String> images;
 
-    @ApiModelProperty("仲裁结果")
-    private String arbitrationResult;
+	@ApiModelProperty("仲裁结果")
+	private String arbitrationResult;
 
 }
