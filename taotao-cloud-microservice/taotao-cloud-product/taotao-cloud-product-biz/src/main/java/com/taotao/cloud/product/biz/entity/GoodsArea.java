@@ -13,7 +13,7 @@ import javax.persistence.Table;
 //@Entity
 @Table(name = "tt_product_area")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_area", comment = "商品销售范围表")
-public class ProductArea extends JpaSuperEntity {
+public class GoodsArea extends JpaSuperEntity {
 
     private String regionJson;
 

@@ -79,7 +79,7 @@ public class OpenapiAutoConfiguration implements InitializingBean{
 	}
 
 	@Bean
-	public OpenApiCustomiser consumerTypeHeaderOpenAPICustomiser() {
+	public OpenApiCustomiser openApiCustomiser() {
 		return openApi -> {
 			final Paths paths = openApi.getPaths();
 

@@ -15,6 +15,7 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.xkcoding.http.util.StringUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -134,6 +135,13 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
     @ApiModelProperty(value = "销售模式", required = true)
     private String salesModel;
 
+
+
+	/**
+	 * 商品海报id
+	 */
+	@Column(name = "poster_pic_id", columnDefinition = "bigint default 0 comment '商品海报id'")
+	private Long posterPicId;
 
     /**
      * @see cn.lili.modules.goods.entity.enums.GoodsTypeEnum

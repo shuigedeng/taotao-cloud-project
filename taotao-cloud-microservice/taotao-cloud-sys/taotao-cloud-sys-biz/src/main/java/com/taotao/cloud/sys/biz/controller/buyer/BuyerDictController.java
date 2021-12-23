@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/buyer/dict")
+@RequestMapping("/sys/buyer/dict")
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController extends SimpleController<IDictService, Dict, Long> {
 

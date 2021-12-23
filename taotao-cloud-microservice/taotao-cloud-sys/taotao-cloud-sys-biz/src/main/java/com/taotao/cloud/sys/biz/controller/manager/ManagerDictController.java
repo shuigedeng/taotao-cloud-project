@@ -46,67 +46,67 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/dict")
+@RequestMapping("/sys/manager/dict")
 @Tag(name = "平台管理端-字典管理API", description = "平台管理端-字典管理API")
 public class ManagerDictController extends
 	SuperController<IDictService, Dict, Long, BaseQuery, DictSaveDTO, DictUpdateDTO, DictQueryVO> {
 
-	/**
-	 * 通过code查询所有字典列表
-	 *
-	 * @param code 　code
-	 * @return Result
-	 */
-	@PreAuth
-	@Log(value = "字典列表code查询", exception = "字典列表请求异常")
-	@GetMapping("/list-code")
-	@ApiOperation(value = "字典列表code查询", notes = "字典列表code查询")
-	public Result<?> listCode(String code) {
-		return sysDictService.getList(code);
-	}
-
-	/**
-	 * 根据code和key获取字典value
-	 *
-	 * @param code    code
-	 * @param dictKey key
-	 * @return Result
-	 */
-	@PreAuth
-	@Log(value = "字典列表key查询", exception = "字典列表key查询请求异常")
-	@GetMapping("/get-dict-value")
-	@ApiOperation(value = "字典列表key查询", notes = "字典列表key查询")
-	public Result<?> getDictValue(String code, String dictKey) {
-		return sysDictService.getValue(code, dictKey);
-	}
-
-
-	/**
-	 * 字典删除
-	 *
-	 * @param ids 多个id采用逗号分隔
-	 * @return Result
-	 */
-	@PreAuth
-	@Log(value = "字典删除", exception = "字典删除请求异常")
-	@PostMapping("/del")
-	@ApiOperation(value = "字典删除", notes = "字典删除")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name = "ids", required = true, value = "多个用,号隔开", paramType = "form")
-	})
-	@Transactional(rollbackFor = Exception.class)
-	public Result<?> del(@RequestParam String ids) {
-		Collection idsCollection = CollectionUtil.stringToCollection(ids);
-		if (sysDictService.removeByIds(idsCollection)) {
-			//批量删除字典列表的同时，也要删除字典项的内容
-			for (Object obj : idsCollection) {
-				sysDictService.remove(
-					new LambdaQueryWrapper<SysDict>().eq(SysDict::getParentId, obj));
-			}
-			return Result.success("删除成功");
-		}
-		return Result.fail("删除失败");
-	}
+	///**
+	// * 通过code查询所有字典列表
+	// *
+	// * @param code 　code
+	// * @return Result
+	// */
+	//@PreAuth
+	//@Log(value = "字典列表code查询", exception = "字典列表请求异常")
+	//@GetMapping("/list-code")
+	//@ApiOperation(value = "字典列表code查询", notes = "字典列表code查询")
+	//public Result<?> listCode(String code) {
+	//	return sysDictService.getList(code);
+	//}
+	//
+	///**
+	// * 根据code和key获取字典value
+	// *
+	// * @param code    code
+	// * @param dictKey key
+	// * @return Result
+	// */
+	//@PreAuth
+	//@Log(value = "字典列表key查询", exception = "字典列表key查询请求异常")
+	//@GetMapping("/get-dict-value")
+	//@ApiOperation(value = "字典列表key查询", notes = "字典列表key查询")
+	//public Result<?> getDictValue(String code, String dictKey) {
+	//	return sysDictService.getValue(code, dictKey);
+	//}
+	//
+	//
+	///**
+	// * 字典删除
+	// *
+	// * @param ids 多个id采用逗号分隔
+	// * @return Result
+	// */
+	//@PreAuth
+	//@Log(value = "字典删除", exception = "字典删除请求异常")
+	//@PostMapping("/del")
+	//@ApiOperation(value = "字典删除", notes = "字典删除")
+	//@ApiImplicitParams({
+	//	@ApiImplicitParam(name = "ids", required = true, value = "多个用,号隔开", paramType = "form")
+	//})
+	//@Transactional(rollbackFor = Exception.class)
+	//public Result<?> del(@RequestParam String ids) {
+	//	Collection idsCollection = CollectionUtil.stringToCollection(ids);
+	//	if (sysDictService.removeByIds(idsCollection)) {
+	//		//批量删除字典列表的同时，也要删除字典项的内容
+	//		for (Object obj : idsCollection) {
+	//			sysDictService.remove(
+	//				new LambdaQueryWrapper<SysDict>().eq(SysDict::getParentId, obj));
+	//		}
+	//		return Result.success("删除成功");
+	//	}
+	//	return Result.fail("删除失败");
+	//}
 
 }
 

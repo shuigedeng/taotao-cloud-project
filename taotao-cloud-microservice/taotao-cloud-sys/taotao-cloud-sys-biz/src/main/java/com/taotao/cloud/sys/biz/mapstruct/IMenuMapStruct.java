@@ -17,6 +17,7 @@ package com.taotao.cloud.sys.biz.mapstruct;
 
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
+import com.taotao.cloud.sys.api.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.api.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.entity.Menu;
 import java.util.List;
@@ -42,5 +43,7 @@ public interface IMenuMapStruct {
 	List<MenuQueryBO> entitysToQueryBOs(List<Menu> menus);
 
 	List<MenuBO> menusToBos(List<Menu> menus);
+
+	List<MenuQueryVO> menuBosToVos(List<MenuBO> bos);
 
 }

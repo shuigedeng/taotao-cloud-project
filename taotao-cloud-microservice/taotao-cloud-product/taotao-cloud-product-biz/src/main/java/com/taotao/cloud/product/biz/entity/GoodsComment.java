@@ -14,7 +14,7 @@ import javax.persistence.Table;
 //@Entity
 @Table(name = "tt_product_comment")
 @org.hibernate.annotations.Table(appliesTo = "tt_product_comment", comment = "商品评论表")
-public class ProductComment extends JpaSuperEntity {
+public class GoodsComment extends JpaSuperEntity {
 
     private String productSpecName;
 

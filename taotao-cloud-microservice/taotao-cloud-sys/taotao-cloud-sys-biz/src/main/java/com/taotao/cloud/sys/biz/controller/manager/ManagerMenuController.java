@@ -59,7 +59,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/menu")
+@RequestMapping("/sys/manager/menu")
 @Tag(name = "平台管理端-菜单管理API", description = "平台管理端-菜单管理API")
 public class ManagerMenuController extends
 	SuperController<IMenuService, Menu, Long, BaseQuery, MenuSaveDTO, MenuUpdateDTO, MenuQueryVO> {
@@ -80,8 +80,8 @@ public class ManagerMenuController extends
 	public Result<List<MenuQueryVO>> findResourceByRoleId(
 		@Parameter(description = "角色id", required = true) @NotNull(message = "角色id不能为空")
 		@PathVariable(value = "roleId") Long roleId) {
-		List<MenuBO> resources = service().findMenuByRoleIds(Set.of(roleId));
-		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(resources);
+		List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
+		List<MenuQueryVO> result = IMenuMapStruct.INSTANCE.menuBosToVos(bos);
 		return success(result);
 	}
 

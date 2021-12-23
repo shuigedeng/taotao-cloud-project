@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/mall/dict")
+@RequestMapping("/sys/mall/dict")
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
 public class MallDictController extends SimpleController<IDictService, Dict, Long> {
 
