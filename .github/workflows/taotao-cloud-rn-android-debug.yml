@@ -97,14 +97,24 @@ jobs:
             -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
             -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
             -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
+
       - name: Upload Android Products
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ env.BUILD_TYPE }}
           path: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+
+      - name: Release Taro React Native bundle
+        uses: zhiqingchen/taro-react-native-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          appname: taotao-cloud
+          logo: https://pic3.58cdn.com.cn/nowater/fangfe/n_v25b1523466b894881b9bdeda7618a8af2.png
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: readme.md
           files: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+
