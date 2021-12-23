@@ -1,50 +1,47 @@
 package com.taotao.cloud.order.api.vo.cart;
 
 import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 /**
  * 订单价格详情
  *
- *
  * @since 2020-04-01 10:42 上午
  */
-@Data
+@Schema(description = "订单价格详情")
 public class PriceDetailVO implements Serializable {
 
-    private static final long serialVersionUID = -960537582096338500L;
+	private static final long serialVersionUID = -960537582096338500L;
 
-    @ApiModelProperty(value = "商品原价")
-    private Double originalPrice;
+	@Schema(description = "商品原价")
+	private Double originalPrice;
 
-    @ApiModelProperty(value = "配送费")
-    private Double freight;
+	@Schema(description = "配送费")
+	private Double freight;
 
-    @ApiModelProperty(value = "优惠金额")
-    private Double discountPrice;
+	@Schema(description = "优惠金额")
+	private Double discountPrice;
 
-    @ApiModelProperty(value = "支付积分")
-    private Long payPoint;
+	@Schema(description = "支付积分")
+	private Long payPoint;
 
-    @ApiModelProperty(value = "最终成交金额")
-    private Double finalePrice;
+	@Schema(description = "最终成交金额")
+	private Double finalePrice;
 
 
-    /**
-     * 构造器，初始化默认值
-     */
-    public PriceDetailVO(PriceDetailDTO dto) {
-        this.freight = dto.getFreightPrice();
-        this.finalePrice = dto.getFlowPrice();
-        this.discountPrice = dto.getDiscountPrice();
-        this.payPoint = dto.getPayPoint();
-        this.originalPrice = dto.getGoodsPrice();
-    }
+	/**
+	 * 构造器，初始化默认值
+	 */
+	public PriceDetailVO(PriceDetailDTO dto) {
+		this.freight = dto.getFreightPrice();
+		this.finalePrice = dto.getFlowPrice();
+		this.discountPrice = dto.getDiscountPrice();
+		this.payPoint = dto.getPayPoint();
+		this.originalPrice = dto.getGoodsPrice();
+	}
 
-    public PriceDetailVO(){
+	public PriceDetailVO() {
 
-    }
+	}
 }

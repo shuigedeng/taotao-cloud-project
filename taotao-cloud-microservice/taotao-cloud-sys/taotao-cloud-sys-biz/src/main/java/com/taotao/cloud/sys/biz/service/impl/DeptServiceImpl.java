@@ -37,8 +37,8 @@ public class DeptServiceImpl extends
 			.filter(Objects::nonNull)
 			.peek(e -> {
 				e.setKey(e.getId());
-				e.setTitle(e.getName());
 				e.setValue(e.getId());
+				e.setTitle(e.getName());
 			})
 			.collect(Collectors.toList());
 	}

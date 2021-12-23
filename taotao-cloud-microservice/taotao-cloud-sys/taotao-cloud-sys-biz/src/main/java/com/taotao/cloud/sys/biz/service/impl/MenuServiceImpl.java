@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.tree.ForestNodeMerger;
 import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
@@ -147,21 +146,28 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuTreeVO> findMenuTree(boolean lazy, Long parentId) {
 		if (!lazy) {
-			List<MenuBO> Menus = findAllMenus();
-			return TreeUtil.buildTree(Menus, CommonConstant.MENU_TREE_ROOT_ID);
+			List<MenuBO> bos = findAllMenus();
+			return TreeUtil.buildTree(bos, CommonConstant.MENU_TREE_ROOT_ID);
 		}
 
 		Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
-		List<MenuBO> Menus = findMenuByParentId(parent);
-		return TreeUtil.buildTree(Menus, parent);
+		List<MenuBO> bos = findMenuByParentId(parent);
+		return TreeUtil.buildTree(bos, parent);
 	}
 
 	@Override
-	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> menuQueryVOS,
+	public List<MenuTreeVO> findCurrentUserMenuTree(List<MenuQueryVO> vos,
 		Long parentId) {
-		List<MenuTreeVO> menuTreeList = menuQueryVOS.stream()
+		List<MenuTreeVO> menuTreeList = vos.stream()
 			.filter(vo -> MenuTypeEnum.DIR.getCode() == vo.type())
-			.map(MenuTreeVO::new)
+			.map(e -> MenuTreeVO.builder()
+				.id(e.id())
+				.name(e.name())
+				.title(e.name())
+				.key(e.id())
+				.value(e.id())
+				// 此处还需要设置其他属性
+				.build())
 			.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
 			.collect(Collectors.toList());
 
@@ -173,7 +179,6 @@ public class MenuServiceImpl extends
 	@Override
 	public List<MenuQueryBO> queryAllId(Long id) {
 		List<Menu> all = ir().findAll();
-
 		return IMenuMapStruct.INSTANCE.entitysToQueryBOs(all);
 	}
 

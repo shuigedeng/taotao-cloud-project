@@ -17,11 +17,13 @@ package com.taotao.cloud.sys.biz.controller.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.tree.ForestNodeMerger;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.region.RegionSaveDTO;
 import com.taotao.cloud.sys.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionQueryVO;
+import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.entity.Region;
 import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.web.base.controller.SuperController;
@@ -79,11 +81,29 @@ public class ManagerRegionController extends
 	 * @since 2021-10-14 11:32:28
 	 */
 	@Operation(summary = "树形结构查询", description = "树形结构查询")
-	@RequestLogger(description = "根据父id查询")
+	@RequestLogger(description = "树形结构查询")
 	@GetMapping(value = "/tree")
 	@PreAuthorize("hasAuthority('sys:region:info:true')")
 	public Result<List<RegionParentVO>> tree() {
 		List<RegionParentVO> result = service().tree();
 		return Result.success(result);
 	}
+
+	/**
+	 * 树形结构查询
+	 *
+	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
+	 * }
+	 * @author shuigedeng
+	 * @since 2021-10-14 11:32:28
+	 */
+	@Operation(summary = "另一种树形结构查询", description = "另一种树形结构查询")
+	@RequestLogger(description = "另一种树形结构查询")
+	@GetMapping(value = "/other/tree")
+	@PreAuthorize("hasAuthority('sys:region:info:true')")
+	public Result<List<RegionTreeVO>> treeOther() {
+		List<RegionTreeVO> result = service().treeOther();
+		return Result.success(ForestNodeMerger.merge(result));
+	}
+
 }

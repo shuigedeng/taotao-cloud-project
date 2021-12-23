@@ -1,216 +1,213 @@
 package com.taotao.cloud.order.api.dto.order;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.security.AuthUser;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.DateUtil;
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.enums.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderTagEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 订单查询参数
  *
- *
  * @since 2020/11/17 4:33 下午
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Schema(description = "订单查询参数")
 public class OrderSearchParams extends PageVO {
 
-    private static final long serialVersionUID = -6380573339089959194L;
+	private static final long serialVersionUID = -6380573339089959194L;
 
-    @ApiModelProperty(value = "商品名称")
-    private String goodsName;
+	@Schema(description = "商品名称")
+	private String goodsName;
 
-    @ApiModelProperty(value = "订单编号")
-    private String orderSn;
+	@Schema(description = "订单编号")
+	private String orderSn;
 
-    @ApiModelProperty(value = "页面标签",
-            example = "ALL:全部," +
-                    "WAIT_PAY:待付款," +
-                    "WAIT_ROG:待收货," +
-                    "CANCELLED:已取消," +
-                    "COMPLETE:已完成")
-    private String tag;
+	@Schema(description = "页面标签",
+		example = "ALL:全部," +
+			"WAIT_PAY:待付款," +
+			"WAIT_ROG:待收货," +
+			"CANCELLED:已取消," +
+			"COMPLETE:已完成")
+	private String tag;
 
-    @ApiModelProperty(value = "商家ID")
-    private String storeId;
+	@Schema(description = "商家ID")
+	private String storeId;
 
-    @ApiModelProperty(value = "会员ID")
-    private String memberId;
+	@Schema(description = "会员ID")
+	private String memberId;
 
-    @ApiModelProperty(value = "收货人")
-    private String shipName;
+	@Schema(description = "收货人")
+	private String shipName;
 
-    @ApiModelProperty(value = "买家昵称")
-    private String buyerName;
+	@Schema(description = "买家昵称")
+	private String buyerName;
 
-    @ApiModelProperty(value = "订单状态")
-    private String orderStatus;
+	@Schema(description = "订单状态")
+	private String orderStatus;
 
-    @ApiModelProperty(value = "付款状态")
-    private String payStatus;
+	@Schema(description = "付款状态")
+	private String payStatus;
 
-    @ApiModelProperty(value = "关键字 商品名称/买家名称/店铺名称")
-    private String keywords;
+	@Schema(description = "关键字 商品名称/买家名称/店铺名称")
+	private String keywords;
 
-    @ApiModelProperty(value = "付款方式")
-    private String paymentType;
+	@Schema(description = "付款方式")
+	private String paymentType;
 
-    /**
-     * @see OrderTypeEnum
-     * @see cn.lili.modules.order.order.entity.enums.OrderPromotionTypeEnum
-     */
-    @ApiModelProperty(value = "订单类型", allowableValues = "NORMAL,VIRTUAL,GIFT,PINTUAN,POINT")
-    private String orderType;
+	/**
+	 * @see OrderTypeEnum
+	 * @see cn.lili.modules.order.order.entity.enums.OrderPromotionTypeEnum
+	 */
+	@Schema(description = "订单类型", allowableValues = "NORMAL,VIRTUAL,GIFT,PINTUAN,POINT")
+	private String orderType;
 
-    @ApiModelProperty(value = "支付方式")
-    private String paymentMethod;
+	@Schema(description = "支付方式")
+	private String paymentMethod;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "支付时间")
-    private Date paymentTime;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Schema(description = "支付时间")
+	private Date paymentTime;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "下单开始时间")
-    private Date startDate;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Schema(description = "下单开始时间")
+	private Date startDate;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ApiModelProperty(value = "下单结束时间")
-    private Date endDate;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Schema(description = "下单结束时间")
+	private Date endDate;
 
-    @ApiModelProperty(value = "订单来源")
-    private String clientType;
+	@Schema(description = "订单来源")
+	private String clientType;
 
-    /**
-     * @see CommentStatusEnum
-     */
-    @ApiModelProperty(value = "评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，")
-    private String commentStatus;
+	/**
+	 * @see CommentStatusEnum
+	 */
+	@Schema(description = "评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，")
+	private String commentStatus;
 
-    @ApiModelProperty(value = "是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空")
-    private String parentOrderSn;
+	@Schema(description = "是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空")
+	private String parentOrderSn;
 
-    @ApiModelProperty(value = "是否为某订单类型的订单，如果是则为订单类型的id，否则为空")
-    private String promotionId;
+	@Schema(description = "是否为某订单类型的订单，如果是则为订单类型的id，否则为空")
+	private String promotionId;
 
-    /**
-     * @see OrderPromotionTypeEnum
-     */
-    @ApiModelProperty(value = "订单促销类型")
-    private String orderPromotionType;
+	/**
+	 * @see OrderPromotionTypeEnum
+	 */
+	@Schema(description = "订单促销类型")
+	private String orderPromotionType;
 
-    public <T> QueryWrapper<T> queryWrapper() {
-        AuthUser currentUser = UserContext.getCurrentUser();
-        QueryWrapper<T> wrapper = new QueryWrapper<>();
+	public <T> QueryWrapper<T> queryWrapper() {
+		AuthUser currentUser = UserContext.getCurrentUser();
+		QueryWrapper<T> wrapper = new QueryWrapper<>();
 
-        //关键字查询
-        if (CharSequenceUtil.isNotEmpty(keywords)) {
-            wrapper.like("o.sn", keywords).or().like("oi.goods_name", keywords);
-        }
-        if (currentUser != null) {
-            //按卖家查询
-            wrapper.eq(CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.STORE.name()), "o.store_id", currentUser.getStoreId());
+		//关键字查询
+		if (CharSequenceUtil.isNotEmpty(keywords)) {
+			wrapper.like("o.sn", keywords).or().like("oi.goods_name", keywords);
+		}
+		if (currentUser != null) {
+			//按卖家查询
+			wrapper.eq(
+				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.STORE.name()),
+				"o.store_id", currentUser.getStoreId());
 
-            //店铺查询
-            wrapper.eq(CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MANAGER.name())
-                    && CharSequenceUtil.isNotEmpty(storeId), "o.store_id", storeId);
+			//店铺查询
+			wrapper.eq(
+				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MANAGER.name())
+					&& CharSequenceUtil.isNotEmpty(storeId), "o.store_id", storeId);
 
-            //按买家查询
-            wrapper.eq(CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MEMBER.name()) && memberId == null, "o.member_id", currentUser.getId());
+			//按买家查询
+			wrapper.eq(
+				CharSequenceUtil.equals(currentUser.getRole().name(), UserEnums.MEMBER.name())
+					&& memberId == null, "o.member_id", currentUser.getId());
 
-        }
-        //按照买家查询
-        wrapper.like(CharSequenceUtil.isNotEmpty(memberId), "o.member_id", memberId);
+		}
+		//按照买家查询
+		wrapper.like(CharSequenceUtil.isNotEmpty(memberId), "o.member_id", memberId);
 
-        //按订单编号查询
-        wrapper.like(CharSequenceUtil.isNotEmpty(orderSn), "o.sn", orderSn);
+		//按订单编号查询
+		wrapper.like(CharSequenceUtil.isNotEmpty(orderSn), "o.sn", orderSn);
 
-        //按时间查询
-        wrapper.ge(startDate != null, "o.create_time", startDate);
+		//按时间查询
+		wrapper.ge(startDate != null, "o.create_time", startDate);
 
-        wrapper.le(endDate != null, "o.create_time", DateUtil.endOfDate(endDate));
-        //按购买人用户名
-        wrapper.like(CharSequenceUtil.isNotEmpty(buyerName), "o.member_name", buyerName);
+		wrapper.le(endDate != null, "o.create_time", DateUtil.endOfDate(endDate));
+		//按购买人用户名
+		wrapper.like(CharSequenceUtil.isNotEmpty(buyerName), "o.member_name", buyerName);
 
-        //按订单类型
-        wrapper.eq(CharSequenceUtil.isNotEmpty(orderType), "o.order_type", orderType);
+		//按订单类型
+		wrapper.eq(CharSequenceUtil.isNotEmpty(orderType), "o.order_type", orderType);
 
-        //物流查询
-        wrapper.like(CharSequenceUtil.isNotEmpty(shipName), "o.consignee_name", shipName);
+		//物流查询
+		wrapper.like(CharSequenceUtil.isNotEmpty(shipName), "o.consignee_name", shipName);
 
-        //按商品名称查询
-        wrapper.like(CharSequenceUtil.isNotEmpty(goodsName), "oi.goods_name", goodsName);
+		//按商品名称查询
+		wrapper.like(CharSequenceUtil.isNotEmpty(goodsName), "oi.goods_name", goodsName);
 
-        //付款方式
-        wrapper.like(CharSequenceUtil.isNotEmpty(paymentType), "o.payment_type", paymentType);
+		//付款方式
+		wrapper.like(CharSequenceUtil.isNotEmpty(paymentType), "o.payment_type", paymentType);
 
-        //按支付方式
-        wrapper.eq(CharSequenceUtil.isNotEmpty(paymentMethod), "o.payment_method", paymentMethod);
+		//按支付方式
+		wrapper.eq(CharSequenceUtil.isNotEmpty(paymentMethod), "o.payment_method", paymentMethod);
 
-        //订单状态
-        wrapper.eq(CharSequenceUtil.isNotEmpty(orderStatus), "o.order_status", orderStatus);
+		//订单状态
+		wrapper.eq(CharSequenceUtil.isNotEmpty(orderStatus), "o.order_status", orderStatus);
 
-        //付款状态
-        wrapper.eq(CharSequenceUtil.isNotEmpty(payStatus), "o.pay_status", payStatus);
+		//付款状态
+		wrapper.eq(CharSequenceUtil.isNotEmpty(payStatus), "o.pay_status", payStatus);
 
-        //订单来源
-        wrapper.like(CharSequenceUtil.isNotEmpty(clientType), "o.client_type", clientType);
+		//订单来源
+		wrapper.like(CharSequenceUtil.isNotEmpty(clientType), "o.client_type", clientType);
 
-        //按评价状态
-        wrapper.eq(CharSequenceUtil.isNotEmpty(commentStatus), "oi.comment_status", commentStatus);
+		//按评价状态
+		wrapper.eq(CharSequenceUtil.isNotEmpty(commentStatus), "oi.comment_status", commentStatus);
 
-        //按标签查询
-        if (CharSequenceUtil.isNotEmpty(tag)) {
-            String orderStatusColumn = "o.order_status";
-            OrderTagEnum tagEnum = OrderTagEnum.valueOf(tag);
-            switch (tagEnum) {
-                //待付款
-                case WAIT_PAY:
-                    wrapper.eq(orderStatusColumn, OrderStatusEnum.UNPAID.name());
-                    break;
-                //待发货
-                case WAIT_SHIP:
-                    wrapper.eq(orderStatusColumn, OrderStatusEnum.UNDELIVERED.name());
-                    break;
-                //待收货
-                case WAIT_ROG:
-                    wrapper.eq(orderStatusColumn, OrderStatusEnum.DELIVERED.name());
-                    break;
-                //已取消
-                case CANCELLED:
-                    wrapper.eq(orderStatusColumn, OrderStatusEnum.CANCELLED.name());
-                    break;
-                //已完成
-                case COMPLETE:
-                    wrapper.eq(orderStatusColumn, OrderStatusEnum.COMPLETED.name());
-                    break;
-                default:
-                    break;
-            }
-        }
+		//按标签查询
+		if (CharSequenceUtil.isNotEmpty(tag)) {
+			String orderStatusColumn = "o.order_status";
+			OrderTagEnum tagEnum = OrderTagEnum.valueOf(tag);
+			switch (tagEnum) {
+				//待付款
+				case WAIT_PAY:
+					wrapper.eq(orderStatusColumn, OrderStatusEnum.UNPAID.name());
+					break;
+				//待发货
+				case WAIT_SHIP:
+					wrapper.eq(orderStatusColumn, OrderStatusEnum.UNDELIVERED.name());
+					break;
+				//待收货
+				case WAIT_ROG:
+					wrapper.eq(orderStatusColumn, OrderStatusEnum.DELIVERED.name());
+					break;
+				//已取消
+				case CANCELLED:
+					wrapper.eq(orderStatusColumn, OrderStatusEnum.CANCELLED.name());
+					break;
+				//已完成
+				case COMPLETE:
+					wrapper.eq(orderStatusColumn, OrderStatusEnum.COMPLETED.name());
+					break;
+				default:
+					break;
+			}
+		}
 
-        // 依赖订单
-        wrapper.eq(parentOrderSn != null, "o.parent_order_sn", parentOrderSn);
-        // 促销活动id
-        wrapper.eq(CharSequenceUtil.isNotEmpty(promotionId), "o.promotion_id", promotionId);
+		// 依赖订单
+		wrapper.eq(parentOrderSn != null, "o.parent_order_sn", parentOrderSn);
+		// 促销活动id
+		wrapper.eq(CharSequenceUtil.isNotEmpty(promotionId), "o.promotion_id", promotionId);
 
-        wrapper.eq(CharSequenceUtil.isNotEmpty(orderPromotionType), "o.order_promotion_type", orderPromotionType);
+		wrapper.eq(CharSequenceUtil.isNotEmpty(orderPromotionType), "o.order_promotion_type",
+			orderPromotionType);
 
-        wrapper.eq("o.delete_flag", false);
-        return wrapper;
-    }
+		wrapper.eq("o.delete_flag", false);
+		return wrapper;
+	}
 
 }

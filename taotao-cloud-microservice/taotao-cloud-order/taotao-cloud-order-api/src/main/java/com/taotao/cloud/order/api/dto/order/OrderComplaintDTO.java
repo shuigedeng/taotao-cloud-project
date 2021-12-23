@@ -1,39 +1,36 @@
 package com.taotao.cloud.order.api.dto.order;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 
 /**
  * 交易投诉DTO
  *
- * 
  * @since 2021/1/7 19:39
  */
-@Data
+@Schema(description = "交易投诉DTO")
 public class OrderComplaintDTO {
 
-    @NotBlank
-    @ApiModelProperty(value = "投诉主题")
-    private String complainTopic;
+	@NotBlank
+	@Schema(description = "投诉主题")
+	private String complainTopic;
 
-    @NotBlank
-    @ApiModelProperty(value = "投诉内容")
-    private String content;
+	@NotBlank
+	@Schema(description = "投诉内容")
+	private String content;
 
-    @ApiModelProperty(value = "投诉凭证图片")
-    private String images;
+	@Schema(description = "投诉凭证图片")
+	private String images;
 
-    @NotBlank
-    @ApiModelProperty(value = "订单号")
-    private String orderSn;
+	@NotBlank
+	@Schema(description = "订单号")
+	private String orderSn;
 
-    @NotBlank
-    @ApiModelProperty(value = "商品id")
-    private String goodsId;
+	@NotBlank
+	@Schema(description = "商品id")
+	private String goodsId;
 
-    @NotBlank
-    @ApiModelProperty(value = "sku主键")
-    private String skuId;
+	@NotBlank
+	@Schema(description = "sku主键")
+	private String skuId;
 }
