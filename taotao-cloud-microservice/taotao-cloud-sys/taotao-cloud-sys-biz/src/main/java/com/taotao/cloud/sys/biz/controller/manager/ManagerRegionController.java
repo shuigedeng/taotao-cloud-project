@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-10-09 15:01:59
  */
 @RestController
-@RequestMapping("/manager/region")
+@RequestMapping("/sys/manager/region")
 @Tag(name = "平台管理端-地区管理API", description = "平台管理端-地区管理API")
 public class ManagerRegionController extends
 	SuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {

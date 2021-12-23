@@ -56,7 +56,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/user")
+@RequestMapping("/sys/manager/user")
 @Tag(name = "平台管理端-用户管理API", description = "平台管理端-用户管理API")
 public class ManagerUserController extends
 	SuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {

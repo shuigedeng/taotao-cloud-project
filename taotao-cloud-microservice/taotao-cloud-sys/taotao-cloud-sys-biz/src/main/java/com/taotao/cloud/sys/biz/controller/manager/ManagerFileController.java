@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -34,15 +35,12 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Validated
 @RestController
-@RequestMapping("/general/file")
+@RequestMapping("/sys/general/file")
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
-	private final IFileService fileService;
-
-	public ManagerFileController(IFileService fileService) {
-		this.fileService = fileService;
-	}
+	@Autowired
+	private IFileService fileService;
 
 	@Operation(summary = "上传单个文件", description = "上传单个文件", method = CommonConstant.POST)
 	@RequestLogger(description = "上传单个文件")

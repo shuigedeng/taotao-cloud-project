@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/job")
+@RequestMapping("/sys/manager/job")
 @Tag(name = "平台管理端-岗位管理API", description = "平台管理端-岗位管理API")
 public class ManagerJobController extends
 	SuperController<IJobService, Job, Long, BaseQuery, JobSaveDTO, JobUpdateDTO, JobQueryVO> {

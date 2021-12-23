@@ -60,11 +60,11 @@ public class OpenApiProperties {
 	/**
 	 * SecuritySchemes
 	 **/
-	private Map<String, SecurityScheme> SecuritySchemes = new HashMap<>();
+	private Map<String, SecurityScheme> securitySchemes = new HashMap<>();
 	/**
 	 * Headers
 	 **/
-	private Map<String, Header> Headers = new HashMap<>();
+	private Map<String, Header> headers = new HashMap<>();
 	/**
 	 * Headers
 	 **/
@@ -136,20 +136,20 @@ public class OpenApiProperties {
 	}
 
 	public Map<String, SecurityScheme> getSecuritySchemes() {
-		return SecuritySchemes;
+		return securitySchemes;
 	}
 
 	public void setSecuritySchemes(
 		Map<String, SecurityScheme> securitySchemes) {
-		SecuritySchemes = securitySchemes;
+		this.securitySchemes = securitySchemes;
 	}
 
 	public Map<String, Header> getHeaders() {
-		return Headers;
+		return headers;
 	}
 
 	public void setHeaders(Map<String, Header> headers) {
-		Headers = headers;
+		this.headers = headers;
 	}
 
 	public List<Server> getServers() {

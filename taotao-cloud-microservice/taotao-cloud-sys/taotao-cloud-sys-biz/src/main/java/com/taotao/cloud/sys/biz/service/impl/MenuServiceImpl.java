@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
-import com.taotao.cloud.order.api.feign.IFeignOrderService;
+//import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
+//import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
+//import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.bo.menu.MenuQueryBO;
 import com.taotao.cloud.sys.api.bo.role.RoleBO;
@@ -44,8 +44,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -61,21 +61,22 @@ public class MenuServiceImpl extends
 	BaseSuperServiceImpl<IMenuMapper, Menu, MenuRepository, IMenuRepository, Long>
 	implements IDubboMenuService, IMenuService {
 
-	private final IRoleService sysRoleService;
+	@Autowired
+	private IRoleService sysRoleService;
 
-	private final IFeignOrderItemService IFeignOrderItemService;
-	private final IFeignOrderService IFeignOrderService;
-
-	@DubboReference
-	private IDubboOrderService dubboOrderService;
-
-	public MenuServiceImpl(IRoleService sysRoleService,
-		IFeignOrderItemService IFeignOrderItemService,
-		IFeignOrderService IFeignOrderService) {
-		this.IFeignOrderItemService = IFeignOrderItemService;
-		this.IFeignOrderService = IFeignOrderService;
-		this.sysRoleService = sysRoleService;
-	}
+	//private final IFeignOrderItemService IFeignOrderItemService;
+	//private final IFeignOrderService IFeignOrderService;
+	//
+	//@DubboReference
+	//private IDubboOrderService dubboOrderService;
+	//
+	//public MenuServiceImpl(IRoleService sysRoleService,
+	//	IFeignOrderItemService IFeignOrderItemService,
+	//	IFeignOrderService IFeignOrderService) {
+	//	this.IFeignOrderItemService = IFeignOrderItemService;
+	//	this.IFeignOrderService = IFeignOrderService;
+	//	this.sysRoleService = sysRoleService;
+	//}
 
 	private final static QMenu MENU = QMenu.menu;
 

@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@RequestMapping("/manager/logistics")
+@RequestMapping("/sys/manager/logistics")
 @Tag(name = "平台管理端-物流公司管理API", description = "平台管理端-物流公司管理API")
 public class ManagerLogisticsController {
 

@@ -17,7 +17,6 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.order.api.dubbo.IDubboOrderService;
 import com.taotao.cloud.sys.api.dubbo.IDubboRegionService;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -48,9 +46,6 @@ import org.springframework.stereotype.Service;
 public class RegionServiceImpl extends
 	BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
 	implements IDubboRegionService, IRegionService {
-
-	@DubboReference
-	private IDubboOrderService dubboOrderService;
 
 	@Override
 	public List<RegionParentVO> queryRegionByParentId(Long parentId) {
