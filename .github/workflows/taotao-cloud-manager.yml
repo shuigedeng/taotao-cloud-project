@@ -2,7 +2,7 @@ name: assemble manager
 
 on:
   push:
-    branches: [ v2 ]
+    branches: [ master ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]
