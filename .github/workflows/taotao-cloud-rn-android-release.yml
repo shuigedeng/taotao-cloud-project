@@ -1,5 +1,5 @@
 # 工作流名称
-name: TaoTao Cloud Rn Android Release
+name: assemble rn android release
 
 # 触发工作流程的事件
 on:
@@ -47,21 +47,21 @@ jobs:
   assemble:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Project
+      - name: checkout project
         uses: actions/checkout@v2
 
-      - name: Cache node_modules Folder
+      - name: cache node_modules folder
         uses: actions/cache@v2
         with:
           path: ${{ github.workspace }}/node_modules
           key: ${{ runner.os }}-node_modules
           restore-keys: ${{ runner.os }}-node_modules
 
-      - name: Get Yarn Cache Directory Path
+      - name: get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache Yarn
+      - name: cache yarn
         uses: actions/cache@v2
         env:
           cache-name: yarn-cache
@@ -71,22 +71,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies
+      - name: install dependencies
         run: |
           yarn
-          yarn add expo-image-picker --latest
 
-      - name: Build Taro React Native Bundle
+      - name: build taro react native bundle
         run: |
           yarn build:rn --platform android
 
-      - name: Upload Taro React Native Bundle
+      - name: upload taro react native bundle
         uses: actions/upload-artifact@v2
         with:
           name: taro-android-bundle
           path: ./android/app/src/main/assets/index.android.bundle
 
-      - name: Cache Gradle
+      - name: cache gradle
         uses: actions/cache@v2
         env:
           cache-name: gradle-cache
@@ -96,7 +95,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
 
-      - name: Assemble Android ${{ env.BUILD_TYPE }}
+      - name: assemble android ${{ env.BUILD_TYPE }}
         run: |
           cd ./android && \
           ./gradlew assemble${{ env.BUILD_TYPE }} \
@@ -112,7 +111,7 @@ jobs:
             -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
             -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
 
-      - name: Upload Android Products
+      - name: upload android products
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ env.BUILD_TYPE }}

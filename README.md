@@ -28,7 +28,7 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **滔滔商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署，支持Docker，各个API独立、管理前端使用VUE3开发、移动端使用taro开发，**系统全端全部代码开源**
+- **滔滔商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署 CI CD持续集成,，支持Docker kubernetes，各个API独立、管理前端使用vue3 ant-design-vue开发、移动端使用taro taro-ui开发，**系统全端全部代码开源**
   
 
 - **前端模块** 主要使用**react antd**进行前后端分离开发、集成以**taro, taro-ui, react native**为主的多端合一框架。
@@ -119,9 +119,9 @@ Guava | 29.0-jre
 * 开放平台地址(开发进度15%): [https://open.taotaocloud.top](https://open.taotaocloud.top) (taotao/123456) 源码地址: [taotao-cloud-open](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-open)
 * 移动端在线预览(开发进度5%) 源码地址: [taotao-cloud-mall](https://github.com/shuigedeng/taotao-cloud-project/tree/master/taotao-cloud-web/taotao-cloud-mall)
 
-| <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                | <center>小程序</center>     | <center>H5</center>                                       |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------------------------|
-| 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip) | ![](snapshot/qrcode.png) | ![](snapshot/h5.png)<br>https://m.taotaocloud.top |
+| <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                                       |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------------------------|
+| 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip)(目前暂不可用) | ![](snapshot/qrcode.png) | ![](snapshot/h5.png)<br>https://m.taotaocloud.top |
 
 
 ## 7. 功能特点

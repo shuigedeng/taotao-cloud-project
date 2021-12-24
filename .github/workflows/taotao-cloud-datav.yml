@@ -1,4 +1,4 @@
-name: Assemble Datav
+name: assemble datav
 
 on:
   push:
