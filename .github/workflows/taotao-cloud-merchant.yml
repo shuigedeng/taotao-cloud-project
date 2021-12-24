@@ -2,7 +2,7 @@ name: assemble merchant
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]
