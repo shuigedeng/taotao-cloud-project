@@ -2,7 +2,7 @@ name: assemble mall h5
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]
