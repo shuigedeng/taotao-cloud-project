@@ -2,7 +2,7 @@ name: assemble open
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v1 ]
   pull_request:
     branches: [ master ]
 
