@@ -2,7 +2,7 @@ name: assemble mall h5
 
 on:
   push:
-    branches: [ v1 ]
+    branches: [ master ]
     tags: [ v* ]
   pull_request:
     branches: [ master ]
@@ -56,7 +56,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
+          SOURCE: "/taotao-cloud-web/taotao-cloud-mall/dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_MALL_TARGET }}
