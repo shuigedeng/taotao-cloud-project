@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysUserMapper">
+
+    <select id="queryPage" parameterType="Map"
+            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+        SELECT
+        u.*,a.email,a.mobile
+        FROM
+        sys_user u
+        inner JOIN sys_account a ON u.account_id = a.id
+        <where>
+            AND u.del_flag='0' AND a.del_flag = '0'
+            <if test="params.userName != null and params.userName !=''">
+                AND u.user_name=#{params.userName}
+            </if>
+            <if test="params.userType != null and params.userType !=''">
+                AND u.user_type=#{params.userType}
+            </if>
+            <if test="params.email != null and params.email !=''">
+                AND a.email=#{params.email}
+            </if>
+            <if test="params.mobile != null and params.mobile !=''">
+                AND a.mobile=#{params.mobile}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUser" parameterType="Map"
+            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+        SELECT
+        u.*,t.tenant_code,t.tenant_name
+        FROM
+        sys_user u
+        inner JOIN sys_account a ON u.account_id = a.id
+        inner JOIN sys_tenant t ON u.tenant_id = t.id
+        <where>
+            AND u.del_flag='0' AND a.del_flag = '0' and t.del_flag = '0'
+            <if test="params.userId != null and params.userId !=''">
+                AND u.id=#{params.userId}
+            </if>
+            <if test="params.mobile != null and params.mobile !=''">
+                AND a.mobile=#{params.mobile}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserNoTenant" parameterType="Map"
+            resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysUserDO">
+        SELECT
+        u.*,t.tenant_code,t.tenant_name
+        FROM
+        sys_user u
+        inner JOIN sys_account a ON u.account_id = a.id
+        inner JOIN sys_tenant t ON u.tenant_id = t.id
+        <where>
+            AND u.del_flag='0' AND a.del_flag = '0' AND t.del_flag = '0' AND u.status = '0' AND t.status = '0'
+            <if test="params.accountId != null and params.accountId !=''">
+                AND a.id=#{params.accountId}
+            </if>
+            <if test="params.userId != null and params.userId !=''">
+                AND u.id=#{params.userId}
+            </if>
+            <if test="params.mobile != null and params.mobile !=''">
+                AND a.mobile=#{params.mobile}
+            </if>
+        </where>
+    </select>
+
+</mapper>

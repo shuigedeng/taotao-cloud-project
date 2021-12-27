@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtoon.cloud.sys.infrastructure.persistence.mapper.SysTenantMapper">
+
+    <select id="queryPage" parameterType="Map" resultType="com.xtoon.cloud.sys.infrastructure.persistence.entity.SysTenantDO">
+        SELECT
+        t.*
+        FROM
+        sys_tenant t
+        <where>
+            AND t.del_flag='0'
+            <if test="params.tenantCode != null and params.tenantCode !=''">
+                AND   t.tenant_code=#{params.tenantCode}
+            </if>
+            <if test="params.tenantName != null and params.tenantName !=''">
+                AND   t.tenant_name=#{params.tenantName}
+            </if>
+        </where>
+    </select>
+
+</mapper>
