@@ -9,8 +9,7 @@ import com.taotao.cloud.stock.biz.domain.log.model.entity.Log;
  * @author haoxin
  * @date 2021-02-02
  **/
-public interface
-LogRepository {
+public interface LogRepository {
 
     /**
      * 保存日志
