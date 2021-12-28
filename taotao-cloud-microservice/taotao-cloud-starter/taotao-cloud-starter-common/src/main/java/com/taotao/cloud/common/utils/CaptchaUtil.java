@@ -174,4 +174,10 @@ public class CaptchaUtil {
 		return sb.toString().replace("[", "").replace("\"", "").replace("]", "")
 			.replace("com.gofun.", "");
 	}
+
+	public static void main(String[] args) {
+		ArithmeticCaptcha arithmeticCaptcha = getArithmeticCaptcha();
+		String text = arithmeticCaptcha.text();
+		System.out.println(text);
+	}
 }

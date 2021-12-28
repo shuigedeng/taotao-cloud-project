@@ -33,7 +33,7 @@ public class CaptchaController {
 
 	@Operation(summary = "获取验证码", description = "获取验证码", method = CommonConstant.GET)
 	@RequestLogger(description = "获取验证码")
-	@PreAuthorize("hasAuthority('express:company:info:id')")
+	//@PreAuthorize("hasAuthority('express:company:info:id')")
 	@GetMapping("/captcha")
 	public Result<String> getCaptcha(HttpServletRequest request) {
 		ArithmeticCaptcha captcha = captchaService.getCaptcha(request);

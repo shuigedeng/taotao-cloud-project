@@ -102,6 +102,7 @@ public class SecurityConfiguration {
 		"/actuator/**",
 		"/index",
 		"/index.html",
+		"/oauth2/captcha",
 		"/doc.html",
 		"/*.js",
 		"/*.css",
@@ -241,7 +242,8 @@ public class SecurityConfiguration {
 			//			ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
 			//		});
 			//})
-			.anonymous().disable()
+			.anonymous()
+			.and()
 			.csrf().disable()
 			.logout()
 			.and()

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.oauth2.biz.service;
 
+import cn.hutool.captcha.CircleCaptcha;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.CaptchaUtil;

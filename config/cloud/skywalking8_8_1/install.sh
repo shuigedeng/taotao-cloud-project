@@ -104,7 +104,7 @@ java -javaagent:/Users/shuigedeng/software/skywalking/agent/skywalking-agent.jar
 -Dskywalking.logging.file_name=cloud-gateway.skywalking.log \
 -Dskywalking.logging.level=INFO \
 -Dskywalking.logging.dir=../logs/application/cloud-gateway \
--Dskywalking.collector.backend_service=103.218.242.48:11800 \
+-Dskywalking.collector.backend_service=xxx:11800 \
 -jar cloud-gateway-1.3.0.jar
 
 ##################### skywalking.sh #############################
