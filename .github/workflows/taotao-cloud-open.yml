@@ -2,6 +2,8 @@ name: assemble open
 
 on:
   push:
+    paths:
+      - 'taotao-cloud-web/taotao-cloud-open/**'
     branches: [ master ]
   pull_request:
     branches: [ master ]

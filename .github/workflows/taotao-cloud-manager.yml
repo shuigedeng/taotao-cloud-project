@@ -2,8 +2,9 @@ name: assemble manager
 
 on:
   push:
+    paths:
+      - 'taotao-cloud-web/taotao-cloud-manager/**'
     branches: [ master ]
-    tags: [ v* ]
   pull_request:
     branches: [ master ]
 
