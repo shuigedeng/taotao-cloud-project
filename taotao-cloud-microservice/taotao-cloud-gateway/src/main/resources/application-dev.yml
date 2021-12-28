@@ -403,7 +403,7 @@ spring:
           metadata:
             name: 认证中心模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/oauth2/**
           filters:
             - RewritePath=/oauth2/(?<path>.*), /oauth2/$\{path}
             - StripPrefix=2
@@ -692,6 +692,7 @@ taotao:
         ignore-url: >
           /uc/**,
           /order/**,
+          /oauth2/captcha,
           /health/**,
           /auth/code,
           /uc/index,

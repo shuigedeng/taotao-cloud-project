@@ -32,6 +32,7 @@ public class SecurityProperties {
 		"/swagger-resources/**",
 		"/webjars/**",
 		"/druid/**",
+		"/code",
 		"/*/*.html",
 		"/*/*.css",
 		"/*/*.js",
