@@ -9,6 +9,15 @@ server:
     key-store-type: JKS
     key-store-password: 1234
 
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: admin
+    password: 123456
+
+  production: true
+
 springdoc:
   api-docs:
     enabled: true
@@ -733,3 +742,4 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
+
