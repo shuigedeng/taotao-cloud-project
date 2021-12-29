@@ -14,7 +14,7 @@ enum Api {
   Logout = '/mate-uaa/auth/logout',
   GetUserInfo = '/mate-uaa/auth/get/user',
   GetPermCode = '/getPermCode',
-  GetCaptcha = '/code',
+  GetCaptcha = '/oauth2/qrcode/code',
 }
 
 /**
