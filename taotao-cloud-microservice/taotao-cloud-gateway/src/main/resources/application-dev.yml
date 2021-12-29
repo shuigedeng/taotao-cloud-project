@@ -413,12 +413,12 @@ spring:
             - name: RequestRateLimiter
               args:
                 key-resolver: '#{@remoteAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 3
             - name: CircuitBreaker
               args:
                 name: myCircuitBreaker
-                fallbackUri: forward:/myfallback
+                fallbackUri: forward:/fallback
         - id: taotao-cloud-sys-biz
           uri: lb://taotao-cloud-sys-biz
           metadata:
@@ -690,25 +690,10 @@ taotao:
       security:
         enabled: true
         ignore-url: >
-          /uc/**,
-          /order/**,
-          /oauth2/captcha,
+          /oauth2/captcha/code,
+          /oauth2/qrcode/code,
+          /oauth2/sms/phone,
           /health/**,
-          /auth/code,
-          /uc/index,
-          /uc/index.html,
-          /uc/*.js,
-          /uc/*.css,
-          /uc/*.json,
-          /uc/*.min.js,
-          /uc/*.min.css,
-          /order/index,
-          /order/index.html,
-          /order/*.js,
-          /order/*.css,
-          /order/*.json,
-          /order/*.min.js,
-          /order/*.min.css
       api:
         prefix: /api
         version: v${taotaoCloudVersion}

@@ -62,6 +62,6 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-MfxBSKWLk5YJT1HbP6mnBmEa2z13N2QL913jJRyBPuOD99CbRFsHXxRgCwUUvjd8XlRL8i8ElZjZMpBd_lFq5O5H-SqGwunkqv6T-Jq1LGVNXZ54m2qN3po36d1RGP
 
 ###
-GET http://localhost:33336/messages
+GET http://172.16.6.11:8080/
 Content-Type: application/json
 Authorization: bearer a7548a98-cab0-470c-9882-55a657dee03e

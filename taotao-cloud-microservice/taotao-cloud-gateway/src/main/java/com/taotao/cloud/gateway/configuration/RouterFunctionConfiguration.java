@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,7 +68,7 @@ public class RouterFunctionConfiguration {
 
 	@Bean
 	public RouterFunction<ServerResponse> routerFunction(
-		HystrixFallbackHandler hystrixFallbackHandler,
+		FallbackHandler fallbackHandler,
 		ImageCodeHandler imageCodeWebHandler,
 		FaviconHandler faviconHandler,
 		HealthReportHandler healthReportHandler,
@@ -77,7 +76,7 @@ public class RouterFunctionConfiguration {
 		ApiProperties apiProperties) {
 		return RouterFunctions
 			.route(RequestPredicates.path(FALLBACK)
-				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), hystrixFallbackHandler)
+				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), fallbackHandler)
 			.andRoute(RequestPredicates.GET(apiProperties.getBaseUri() + CODE)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), imageCodeWebHandler)
 			.andRoute(RequestPredicates.GET(FAVICON)
@@ -97,7 +96,7 @@ public class RouterFunctionConfiguration {
 	 * @since 2020/4/29 22:11
 	 */
 	@Component
-	public static class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
+	public static class FallbackHandler implements HandlerFunction<ServerResponse> {
 
 		private static final int DEFAULT_PORT = 9700;
 
@@ -108,7 +107,7 @@ public class RouterFunctionConfiguration {
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
 			originalUris.ifPresent(originalUri -> LogUtil
-				.error("网关执行请求:{}失败,请求主机: {},请求数据:{} hystrix服务降级处理",
+				.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
 					originalUri,
 					socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
 					buildMessage(serverRequest)));
@@ -135,7 +134,7 @@ public class RouterFunctionConfiguration {
 				.getAttribute(ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR);
 			if (Objects.nonNull(requestBody)) {
 				message.append(" 请求body: ");
-				message.append(requestBody.toString());
+				message.append(requestBody);
 			}
 			message.append("]");
 			return message.toString();

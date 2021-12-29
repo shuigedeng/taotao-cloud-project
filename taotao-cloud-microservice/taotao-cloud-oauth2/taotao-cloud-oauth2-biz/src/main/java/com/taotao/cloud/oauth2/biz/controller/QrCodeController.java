@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "二维码API", description = "二维码API")
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping("/oauth2/qrcode")
 public class QrCodeController {
 
 	@Autowired
@@ -32,8 +32,7 @@ public class QrCodeController {
 
 	@Operation(summary = "获取二维码", description = "获取二维码", method = CommonConstant.GET)
 	@RequestLogger(description = "获取二维码")
-	@PreAuthorize("hasAuthority('express:company:info:id')")
-	@GetMapping("/qrcode")
+	@GetMapping("/code")
 	public Result<String> qrcode() {
 		return Result.success(qrCodeService.qrcode());
 	}
