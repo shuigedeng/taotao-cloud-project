@@ -33,6 +33,8 @@ spring:
   cloud:
     loadbalancer:
       enabled: true
+    compatibility-verifier:
+      enabled: false
   sleuth:
     enabled: true
     web:
