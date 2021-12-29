@@ -36,7 +36,6 @@ public class SentinelConfiguration {
 
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
-	@ConditionalOnBean
 	public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler(
 		ObjectProvider<List<ViewResolver>> viewResolversProvider,
 		ServerCodecConfigurer serverCodecConfigurer) {
@@ -64,18 +63,21 @@ public class SentinelConfiguration {
 	private void initCustomizedApis() {
 		Set<ApiDefinition> definitions = new HashSet<>();
 		ApiDefinition api1 = new ApiDefinition("some_customized_api")
-			.setPredicateItems(new HashSet<ApiPredicateItem>() {{
+			.setPredicateItems(new HashSet<>() {{
 				add(new ApiPathPredicateItem().setPattern("/ahas"));
 				add(new ApiPathPredicateItem().setPattern("/product/**")
 					.setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
 			}});
+
 		ApiDefinition api2 = new ApiDefinition("another_customized_api")
-			.setPredicateItems(new HashSet<ApiPredicateItem>() {{
+			.setPredicateItems(new HashSet<>() {{
 				add(new ApiPathPredicateItem().setPattern("/**")
 					.setMatchStrategy(SentinelGatewayConstants.URL_MATCH_STRATEGY_PREFIX));
 			}});
+
 		definitions.add(api1);
 		definitions.add(api2);
+
 		GatewayApiDefinitionManager.loadApiDefinitions(definitions);
 	}
 
@@ -126,7 +128,7 @@ public class SentinelConfiguration {
 			)
 		);
 
-		rules.add(new GatewayFlowRule("taotao-cloud-sys")
+		rules.add(new GatewayFlowRule("taotao-cloud-oauth2-biz")
 			.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_ROUTE_ID)
 			.setCount(3)
 			.setGrade(RuleConstant.FLOW_GRADE_QPS)

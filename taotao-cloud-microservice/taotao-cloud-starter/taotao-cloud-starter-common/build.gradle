@@ -44,6 +44,9 @@ dependencies {
     api 'org.springframework:spring-aop'
     api 'org.springframework:spring-aspects'
 
+    // jdk11删除了NashornScriptEngineFactory 引入此依赖支持其他框架以及jdk11以上版本
+    api group: 'org.openjdk.nashorn', name: 'nashorn-core', version: '15.3'
+
     api "io.github.openfeign:feign-okhttp"
     api "com.squareup.okhttp3:okhttp"
     api "org.springframework.cloud:spring-cloud-openfeign-core"

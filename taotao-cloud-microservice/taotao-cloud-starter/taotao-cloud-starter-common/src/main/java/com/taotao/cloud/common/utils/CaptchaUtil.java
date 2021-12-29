@@ -22,7 +22,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Random;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 /**
  * 生成验证码工具类
@@ -173,11 +177,5 @@ public class CaptchaUtil {
 		}
 		return sb.toString().replace("[", "").replace("\"", "").replace("]", "")
 			.replace("com.gofun.", "");
-	}
-
-	public static void main(String[] args) {
-		ArithmeticCaptcha arithmeticCaptcha = getArithmeticCaptcha();
-		String text = arithmeticCaptcha.text();
-		System.out.println(text);
 	}
 }

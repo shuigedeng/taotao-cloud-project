@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "短信API", description = "短信API")
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping("/oauth2/sms")
 public class SmsController {
 
 	@Autowired
@@ -32,10 +32,9 @@ public class SmsController {
 
 	@Operation(summary = "发送短信", description = "发送短信", method = CommonConstant.POST)
 	@RequestLogger(description = "发送短信")
-	@PreAuthorize("hasAuthority('express:company:info:id')")
-	@PostMapping("/sms")
-	public Result<Boolean> sendSms(String phoneNumber) {
-		boolean result = smsService.sendSms(phoneNumber);
+	@PostMapping("/phone")
+	public Result<Boolean> sendSms(String phone) {
+		boolean result = smsService.sendSms(phone);
 		return Result.success(result);
 	}
 
