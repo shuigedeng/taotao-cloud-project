@@ -15,6 +15,7 @@ enum Api {
   GetUserInfo = '/mate-uaa/auth/get/user',
   GetPermCode = '/getPermCode',
   GetCaptcha = '/oauth2/captcha/code',
+
 }
 
 /**
