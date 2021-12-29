@@ -76,7 +76,9 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
     && apk add curl \
     && apk add --update ttf-dejavu fontconfig  \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && fc-cache --force \
+    && fc-list
 
 VOLUME /root/logs
 
