@@ -50,12 +50,16 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -Xlog:async \
                   -XX:AsyncLogBufferSize=409600 \
                   -XX:ParallelGCThreads=4 \
+                  -Djava.awt.headless=true \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
                   --add-opens java.base/java.lang=ALL-UNNAMED \
                   --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
                   --add-opens java.base/java.util=ALL-UNNAMED \
                   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED  \
+                  --add-opens java.desktop/sun.awt=ALL-UNNAMED \
+                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${PRROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
