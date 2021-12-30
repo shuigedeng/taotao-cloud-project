@@ -174,12 +174,12 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-graphql  -- graphql模块
 │  │  ├─taotao-cloud-member  -- 会员模块
 │  │  ├─taotao-cloud-message  -- 消息模块
-│  │  ├─taotao-cloud-oauth2  -- oauth2认证模块
+│  │  ├─taotao-cloud-auth  -- oauth2认证模块
 │  │  ├─taotao-cloud-opencv  -- opencv模块
 │  │  ├─taotao-cloud-operation  -- 运营模块
 │  │  ├─taotao-cloud-order  -- 订单模块
 │  │  ├─taotao-cloud-payment -- 支付模块
-│  │  ├─taotao-cloud-product  -- 商品模块
+│  │  ├─taotao-cloud-goods  -- 商品模块
 │  │  ├─taotao-cloud-promotion  -- 促销模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-report  -- 报表模块

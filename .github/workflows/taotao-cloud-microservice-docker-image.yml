@@ -64,14 +64,14 @@ jobs:
         docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}} .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: build docker image taotao-cloud-oauth2-biz
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-oauth2/taotao-cloud-oauth2-biz
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-oauth2-biz') }}
+    - name: build docker image taotao-cloud-auth
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}}
 
     - name: build docker image taotao-cloud-xxl-job-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-xxl-job-admin
@@ -82,20 +82,20 @@ jobs:
         docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:${{env.TAOTAO_CLOUD_VERSION}} .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: build docker image taotao-cloud-order-biz
+    - name: build docker image taotao-cloud-order
       working-directory: ./taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order-biz') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: build docker image taotao-cloud-sys-biz
+    - name: build docker image taotao-cloud-sys
       working-directory: ./taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys-biz') }}
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}}

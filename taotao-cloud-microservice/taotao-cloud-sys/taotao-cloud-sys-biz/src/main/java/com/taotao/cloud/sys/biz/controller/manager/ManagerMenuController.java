@@ -23,6 +23,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.dto.menu.MenuSaveDTO;
 import com.taotao.cloud.sys.api.dto.menu.MenuUpdateDTO;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -226,15 +228,24 @@ public class ManagerMenuController extends
 		return success(trees);
 	}
 
-	//@Operation(summary = "测试分布式事务", description = "测试分布式事务")
-	//@RequestLogger(description = "测试分布式事务")
-	//@GetMapping("/test/se")
-	//@SentinelResource(value = "se")
-	//public Result<Boolean> testSe(@RequestParam(value = "id") Long id) {
-	//	Boolean result = service().testSeata();
-	//	return Result.success(result);
-	//}
-	//
+	@NotAuth
+	@Operation(summary = "testNotAuth", description = "testNotAuth")
+	@RequestLogger(description = "testNotAuth")
+	@GetMapping("/test/se")
+	public Result<Boolean> testNotAuth() {
+		return Result.success(true);
+	}
+
+	@Operation(summary = "测试分布式事务", description = "测试分布式事务")
+	@RequestLogger(description = "测试分布式事务")
+	@GetMapping("/test/pe")
+	@PreAuthorize("@permissionVerifier.hasPermission(#request, authentication, 'export')")
+	//@PreAuthorize("hasPermission(#request, 'batch')")
+	public Result<Boolean> testPermissionVerifier(HttpServletRequest request) {
+		return Result.success(true);
+	}
+
+
 	//@Operation(summary = "测试异步", description = "测试异步")
 	//@RequestLogger(description = "测试异步")
 	//@GetMapping("/test/async")

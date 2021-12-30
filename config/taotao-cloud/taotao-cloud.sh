@@ -4,16 +4,16 @@ function start_taotao_cloud() {
   /opt/taotao-cloud/script/taotao-cloud-admin.sh start
   /opt/taotao-cloud/script/taotao-cloud-xxl-job-admin.sh start
 
-  /opt/taotao-cloud/script/taotao-cloud-oauth2-biz.sh start
+  /opt/taotao-cloud/script/taotao-cloud-auth.sh start
   /opt/taotao-cloud/script/taotao-cloud-gateway.sh start
   /opt/taotao-cloud/script/taotao-cloud-sys.sh start
   /opt/taotao-cloud/script/taotao-cloud-order.sh start
-  /opt/taotao-cloud/script/taotao-cloud-product.sh start
+  /opt/taotao-cloud/script/taotao-cloud-goods.sh start
 }
 
 function stop_taotao_cloud() {
   /opt/taotao-cloud/script/taotao-cloud-admin.sh stop
-  /opt/taotao-cloud/script/taotao-cloud-oauth2-biz.sh stop
+  /opt/taotao-cloud/script/taotao-cloud-auth.sh stop
   /opt/taotao-cloud/script/taotao-cloud-xxl-job.sh stop
 }
 

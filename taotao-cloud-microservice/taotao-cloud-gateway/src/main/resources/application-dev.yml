@@ -54,7 +54,7 @@ spring:
       resourceserver:
         jwt:
           #配置RSA的公钥访问地址
-          #          jwk-set-uri: http://taotao-cloud-oauth2-biz/oauth2/jwks
+          #          jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
           jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
   sleuth:
     enabled: true
@@ -398,8 +398,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-oauth2-biz
-          uri: lb://taotao-cloud-oauth2-biz
+        - id: taotao-cloud-auth
+          uri: lb://taotao-cloud-auth
           metadata:
             name: 认证中心模块
           predicates:
@@ -419,8 +419,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/fallback
-        - id: taotao-cloud-sys-biz
-          uri: lb://taotao-cloud-sys-biz
+        - id: taotao-cloud-sys
+          uri: lb://taotao-cloud-sys
           metadata:
             name: 系统管理模块
           predicates:
@@ -440,8 +440,8 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: taotao-cloud-order-biz
-          uri: lb://taotao-cloud-order-biz
+        - id: taotao-cloud-order
+          uri: lb://taotao-cloud-order
           metadata:
             name: 订单管理模块
           predicates:
@@ -467,7 +467,7 @@ spring:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
             - SwaggerHeader
       #        - id: auth-user-password-token
-      #          uri: lb://taotao-cloud-oauth2
+      #          uri: lb://taotao-cloud-auth
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/auth/oauth/token/user
       #          filters:
@@ -494,7 +494,7 @@ spring:
       #            - PreserveHostHeader
       #        # 数据重复校验要做接口限制
       #        - id: uc-repeact-check
-      #          uri: lb://taotao-cloud-sys-biz
+      #          uri: lb://taotao-cloud-sys
       #          predicates:
       #            - Path=http://${taotao.cloud.gateway.base-uri}/uc/repeat/check
       #          filters:
@@ -507,8 +507,8 @@ spring:
       #            - Path=/v3/api-docs/**
       #          filters:
       #            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-      #        - id: taotao-cloud-sys-biz-service
-      #          uri: lb://taotao-cloud-sys-biz-service
+      #        - id: taotao-cloud-sys-service
+      #          uri: lb://taotao-cloud-sys-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/user/**
       #          filters:
@@ -532,8 +532,8 @@ spring:
       #                key-resolver: '#{@remoteAddrKeyResolver}'
       #                redis-rate-limiter.replenishRate: 10
       #                redis-rate-limiter.burstCapacity: 20
-      #        - id: taotao-cloud-order-biz-service
-      #          uri: lb://taotao-cloud-order-biz-service
+      #        - id: taotao-cloud-order-service
+      #          uri: lb://taotao-cloud-order-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/order/**
       #          filters:
@@ -642,8 +642,8 @@ spring:
       #                key-resolver: "#{@remoteAddrKeyResolver}"
       #                redis-rate-limiter.replenishRate: 1
       #                redis-rate-limiter.burstCapacity: 5
-      #        - id: taotao-cloud-product-service
-      #          uri: lb://taotao-cloud-product-service
+      #        - id: taotao-cloud-goods-service
+      #          uri: lb://taotao-cloud-goods-service
       #          predicates:
       #            - Path=${taotao.cloud.gateway.base-uri}/product/**
       #          filters:

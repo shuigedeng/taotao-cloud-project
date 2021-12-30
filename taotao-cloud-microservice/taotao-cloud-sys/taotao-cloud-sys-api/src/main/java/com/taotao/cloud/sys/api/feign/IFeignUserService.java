@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_SYS_CENTER, fallbackFactory = FeignUserFallbackImpl.class)
+@FeignClient(contextId = "remoteUserService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallbackImpl.class)
 public interface IFeignUserService {
 
     /**

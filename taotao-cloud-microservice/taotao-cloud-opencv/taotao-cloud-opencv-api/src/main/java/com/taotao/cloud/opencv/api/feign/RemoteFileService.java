@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "remoteChatbotService", value = ServiceName.TAOTAO_CLOUD_FILE_CENTER, fallbackFactory = RemoteFileFallbackImpl.class)
+@FeignClient(contextId = "remoteChatbotService", value = ServiceName.TAOTAO_CLOUD_FILE, fallbackFactory = RemoteFileFallbackImpl.class)
 public interface RemoteFileService {
 
 	/**

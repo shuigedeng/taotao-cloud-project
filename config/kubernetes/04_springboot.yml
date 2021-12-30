@@ -196,15 +196,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-oauth2-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:2021.12
+        - name: taotao-cloud-auth
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-oauth2-biz-port
+            - name: taotao-cloud-auth-port
               containerPort: 33336
           env:
             - name: applicationName
-              value: taotao-cloud-oauth2-biz
+              value: taotao-cloud-auth
           resources:
             requests:
               cpu: 1
@@ -244,15 +244,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-sys-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:2021.12
+        - name: taotao-cloud-sys
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-sys-biz-port
+            - name: taotao-cloud-sys-port
               containerPort: 33337
           env:
             - name: applicationName
-              value: taotao-cloud-sys-biz
+              value: taotao-cloud-sys
           resources:
             requests:
               cpu: 1
@@ -292,15 +292,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-order-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.12
+        - name: taotao-cloud-order
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-order-biz-port
+            - name: taotao-cloud-order-port
               containerPort: 33338
           env:
             - name: applicationName
-              value: taotao-cloud-order-biz
+              value: taotao-cloud-order
           resources:
             requests:
               cpu: 1
@@ -529,15 +529,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-oauth2-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-oauth2-biz:2021.12
+        - name: taotao-cloud-auth
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-oauth2-biz-port
+            - name: taotao-cloud-auth-port
               containerPort: 33336
           env:
             - name: applicationName
-              value: taotao-cloud-oauth2-biz
+              value: taotao-cloud-auth
           resources:
             requests:
               cpu: 1
@@ -577,15 +577,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-sys-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys-biz:2021.12
+        - name: taotao-cloud-sys
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-sys-biz-port
+            - name: taotao-cloud-sys-port
               containerPort: 33337
           env:
             - name: applicationName
-              value: taotao-cloud-sys-biz
+              value: taotao-cloud-sys
           resources:
             requests:
               cpu: 1
@@ -625,15 +625,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-order-biz
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.12
+        - name: taotao-cloud-order
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-order-biz-port
+            - name: taotao-cloud-order-port
               containerPort: 33338
           env:
             - name: applicationName
-              value: taotao-cloud-order-biz
+              value: taotao-cloud-order
           resources:
             requests:
               cpu: 1
@@ -705,17 +705,17 @@ spec:
       port: 33335
       targetPort: 33335
       nodePort: 33335
-    - name: taotao-cloud-oauth2-biz-port
+    - name: taotao-cloud-auth-port
       protocol: TCP
       port: 33336
       targetPort: 33336
       nodePort: 33336
-    - name: taotao-cloud-sys-biz-port
+    - name: taotao-cloud-sys-port
       protocol: TCP
       port: 33337
       targetPort: 33337
       nodePort: 33337
-    - name: taotao-cloud-order-biz-port
+    - name: taotao-cloud-order-port
       protocol: TCP
       port: 33338
       targetPort: 33338
