@@ -30,6 +30,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * --add-opens java.base/java.util=ALL-UNNAMED
  * --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
  * --add-opens java.base/java.math=ALL-UNNAMED
+ * --add-opens java.desktop/sun.awt=ALL-UNNAMED
+ * --add-exports java.desktop/sun.awt=ALL-UNNAMED
  * @author shuigedeng
  * @version 1.0.0
  * @since 2020/4/29 15:13
