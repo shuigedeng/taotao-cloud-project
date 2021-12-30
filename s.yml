@@ -1,0 +1,136 @@
+edition: 2021.12
+name: taotao-cloud-mall
+access: default
+vars:
+  region: cn-hangzhou
+
+# Define the Serverless-Devs services. Each service is a FC function.
+services:
+  mall-admin:
+    component: devsapp/fc
+    props:
+      region: ${vars.region}
+      # Define the AlibabaCloud FunctionCompute Service.
+      service:
+        name: mall-admin
+        internetAccess: true
+        # Let the serverless-devs create a shared logstore automatically.
+        # All FC services share the same logstore.
+        logConfig: auto
+      # Define the AlibabaCloud FunctionCompute Function.
+      function:
+        name: mall-admin
+        description: The mall project based on SpringBoot+MyBatis.
+        caPort: 8080
+        memorySize: 3072
+        handler: not-used
+        timeout: 60
+        runtime: custom-container
+        customContainerConfig:
+          image: registry.${vars.region}.aliyuncs.com/quanxi-hryang/mall-admin:1.0-SNAPSHOT
+          # Enable the image acceleration.
+          accelerationType: Default
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+              serviceName: mall-admin
+              functionName: mall-admin
+              methods:
+                - GET
+                - POST
+  mall-portal:
+    component: devsapp/fc
+    props:
+      region: ${vars.region}
+      # Define the AlibabaCloud FunctionCompute Service.
+      service:
+        name: mall-portal
+        internetAccess: true
+        # Let the serverless-devs create a shared logstore automatically.
+        # All FC services share the same logstore.
+        logConfig: auto
+      # Define the AlibabaCloud FunctionCompute Function.
+      function:
+        name: mall-portal
+        description: The mall project based on SpringBoot+MyBatis
+        caPort: 8085
+        memorySize: 3072
+        handler: not-used
+        timeout: 60
+        runtime: custom-container
+        customContainerConfig:
+          image: registry.${vars.region}.aliyuncs.com/quanxi-hryang/mall-portal:1.0-SNAPSHOT
+          # Enable the image acceleration.
+          accelerationType: Default
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+              serviceName: mall-portal
+              functionName: mall-portal
+              methods:
+                - GET
+                - POST
+  mall-search:
+    component: devsapp/fc
+    props:
+      region: ${vars.region}
+      # Define the AlibabaCloud FunctionCompute Service.
+      service:
+        name: mall-search
+        internetAccess: true
+        # Let the serverless-devs create a shared logstore automatically.
+        # All FC services share the same logstore.
+        logConfig: auto
+      # Define the AlibabaCloud FunctionCompute Function.
+      function:
+        name: mall-search
+        description: The mall project based on SpringBoot+MyBati
+        caPort: 8081
+        memorySize: 3072
+        handler: not-used
+        timeout: 60
+        runtime: custom-container
+        customContainerConfig:
+          image: registry.${vars.region}.aliyuncs.com/quanxi-hryang/mall-search:1.0-SNAPSHOT
+          # Enable the image acceleration.
+          accelerationType: Default
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+              serviceName: mall-search
+              functionName: mall-search
+              methods:
+                - GET
+                - POST
+
+# https://github.com/devsapp/fc
