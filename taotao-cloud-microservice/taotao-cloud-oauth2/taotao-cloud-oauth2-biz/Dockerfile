@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-oauth2-biz-2021.12.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
+FROM sunrdocker/jdk17-jre-font-openssl-alpine:latest
 
 ARG BACKEND_SERVICE=172.16.6.151:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -60,14 +60,15 @@ ENV JAVA_OPTIONS="-Xms512m \
                   --add-opens java.base/java.math=ALL-UNNAMED  \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${PRROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
-                  -Dskywalking.logging.file_name=skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} "
+                  -Djava.awt.headless=true \
+                  -Dspring.profiles.active=${PRROFILES} "
+#                  -javaagent:/skywalking/agent/skywalking-agent.jar \
+#                  -Dskywalking.agent.service_name=${APP_NAME} \
+#                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+#                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} \
+#                  -Dskywalking.logging.file_name=skywalking.log \
+#                  -Dskywalking.logging.level=INFO \
+#                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} "
 
 USER root
 
@@ -78,11 +79,11 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && mkdir -p /root/logs/${APP_NAME} \
 	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-    && apk add curl \
-    && apk add --update ttf-dejavu fontconfig  \
-    && rm -rf /var/cache/apk/* \
-    && fc-cache --force \
-    && fc-list
+    && apk add curl
+#    && apk add --update ttf-dejavu fontconfig  \
+#    && rm -rf /var/cache/apk/* \
+#    && fc-cache --force \
+#    && fc-list
 
 VOLUME /root/logs
 
