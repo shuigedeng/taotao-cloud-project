@@ -16,9 +16,12 @@
 package com.taotao.cloud.security.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -26,6 +29,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.Authentication;
@@ -63,6 +67,12 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 	}
 
 	public static class PermissionVerifier{
+		//@PreAuthorize("@permissionVerifier.hasPermission(#request, authentication, 'export')")
+		public boolean hasPermission( HttpServletRequest req, Authentication authentication, String permission){
+			return false;
+		}
+
+		//@PreAuthorize("@permissionVerifier.hasPermission('export')")
 		public boolean hasPermission(String permission){
 			Collection<? extends GrantedAuthority> authorities = SecurityUtil.getAuthentication()
 				.getAuthorities();
@@ -82,9 +92,11 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 
 	public static class CustomPermissionEvaluator implements PermissionEvaluator {
 
+		//普通的targetDomainObject判断 @PreAuthorize("hasPermission(#batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
 			Object permission) {
+
 			if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 				return false;
 			}
@@ -92,9 +104,11 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 			return hasPrivilege(auth, targetType, permission.toString().toUpperCase());
 		}
 
+		//用于ACL的访问控制 @PreAuthorize("hasPermission(1, #batchDTO, 'batch')")
 		@Override
 		public boolean hasPermission(Authentication auth, Serializable targetId, String targetType,
 			Object permission) {
+
 			if ((auth == null) || (targetType == null) || !(permission instanceof String)) {
 				return false;
 			}

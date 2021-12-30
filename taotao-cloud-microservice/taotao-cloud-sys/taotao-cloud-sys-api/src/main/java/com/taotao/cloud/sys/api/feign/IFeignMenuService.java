@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(contextId = "IFeignResourceService", value = ServiceName.TAOTAO_CLOUD_SYS_CENTER, fallbackFactory = FeignUserFallbackImpl.class)
+@FeignClient(contextId = "IFeignResourceService", value = ServiceName.TAOTAO_CLOUD_SYS, fallbackFactory = FeignUserFallbackImpl.class)
 public interface IFeignMenuService {
     /**
      * 根据角色code列表获取角色列表

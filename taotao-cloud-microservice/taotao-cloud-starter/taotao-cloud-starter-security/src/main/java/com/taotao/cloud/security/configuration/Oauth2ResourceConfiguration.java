@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.util.pattern.PathPattern;
 
 /**
  * Oauth2ResourceSecurityConfigurer
@@ -67,9 +69,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Configuration
 public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 
-	private static final String TAO_TAO_CLOUD_XXL_JOB_ADMIN = "taotao-cloud-xxl-job-admin";
+	private static final String TAO_TAO_CLOUD_OAUTH2_BIZ = "taotao-cloud-auth";
 
-	@Value("${jwk.set.uri:http://172.16.6.151:9998/oauth2/jwks}")
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
 	private String jwkSetUri;
 
 	@Autowired(required = false)
@@ -79,7 +81,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 	public JwtDecoder jwtDecoder() {
 		if (Objects.nonNull(discoveryClient)) {
 			jwkSetUri = discoveryClient.getServices().stream()
-				.filter(s -> s.contains(TAO_TAO_CLOUD_XXL_JOB_ADMIN))
+				.filter(s -> s.contains(TAO_TAO_CLOUD_OAUTH2_BIZ))
 				.flatMap(s -> discoveryClient.getInstances(s).stream())
 				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(),
 					instance.getPort()))
@@ -139,14 +141,11 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			"/*.min.js",
 			"/*.min.css",
 			"/doc/**",
-			"/order/**",
-			"/uc/**",
 			"/health/**"));
 
 		RequestMappingHandlerMapping mapping = ac.getBean(RequestMappingHandlerMapping.class);
 		Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 
-		// 收集 NotAuth 注解的接口
 		map.keySet().forEach(info -> {
 			HandlerMethod handlerMethod = map.get(info);
 
@@ -154,8 +153,13 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), NotAuth.class));
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getMethod(), NotAuth.class));
 			set.forEach(annotation -> {
-				Optional.ofNullable(annotation).ifPresent(
-					inner -> permitAllUrls.addAll(info.getPatternsCondition().getPatterns()));
+				Optional.ofNullable(annotation)
+					.flatMap(inner -> Optional.ofNullable(info.getPathPatternsCondition()))
+					.ifPresent(pathPatternsRequestCondition -> {
+						permitAllUrls.addAll(pathPatternsRequestCondition.getPatterns()
+							.stream()
+							.map(PathPattern::getPatternString).toList());
+					});
 			});
 		});
 

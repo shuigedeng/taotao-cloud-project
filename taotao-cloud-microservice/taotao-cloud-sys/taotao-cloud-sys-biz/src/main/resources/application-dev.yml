@@ -153,7 +153,7 @@ spring:
     cloud-platform: kubernetes
     web-application-type: servlet
   application:
-    name: taotao-cloud-sys-biz
+    name: taotao-cloud-sys
     admin:
       enabled: true
   jackson:
@@ -312,7 +312,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
   #mail:
   #  host: smtp.qq.com
   #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}

@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: taotao-cloud-order-biz-configmap
+  name: taotao-cloud-order-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-order-biz
+  APPLICATION_NAME: taotao-cloud-order
   APPLICATION_VERSION: '2021.12'
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: taotao-cloud-order-biz-secret
+  name: taotao-cloud-order-secret
 type: Opaque
 data:
   ADMIN_USERNAME: YWRtaW4=
@@ -21,9 +21,9 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taotao-cloud-order-biz
+  name: taotao-cloud-order
   labels:
-    app: taotao-cloud-order-biz
+    app: taotao-cloud-order
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -31,7 +31,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: taotao-cloud-order-biz
+      app: taotao-cloud-order
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -42,7 +42,7 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
-        app: taotao-cloud-order-biz
+        app: taotao-cloud-order
     spec:
       terminationGracePeriodSeconds: 30
       schedulerName: default-scheduler
@@ -70,20 +70,20 @@ spec:
                       values:
                         - ops-nginx-api
       volumes:
-        - name: taotao-cloud-order-biz-hostpath
+        - name: taotao-cloud-order-hostpath
           hostPath:
-            path: /tmp/logs/taotao-cloud-order-biz
+            path: /tmp/logs/taotao-cloud-order
             type: Directory
-        - name: taotao-cloud-order-biz-secret
+        - name: taotao-cloud-order-secret
           secret:
-            secretName: taotao-cloud-order-biz-secret
+            secretName: taotao-cloud-order-secret
       initContainers:
-        - name: taotao-cloud-order-biz-init
+        - name: taotao-cloud-order-init
           image: yauritux/busybox-curl:latest
           imagePullPolicy: IfNotPresent
           command: [ "/bin/sh", "-c", "until curl taotao-cloud-xxl-job-admin.default:33335/actuator/health; do echo waiting for admin; sleep 10; done;" ]
       containers:
-        - name: taotao-cloud-order-biz
+        - name: taotao-cloud-order
           stdin: true
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -94,52 +94,52 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order-biz:2021.12
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2021.12
           imagePullPolicy: Always
           ports:
             - name: order-port
               containerPort: 33338
           volumeMounts:
-            - name: taotao-cloud-order-biz-hostpath
+            - name: taotao-cloud-order-hostpath
               mountPath: /root/logs
-            - name: taotao-cloud-order-biz-secret
+            - name: taotao-cloud-order-secret
               mountPath: /etc/secret
               readOnly: true
           env:
             - name: APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-order-biz-configmap
+                  name: taotao-cloud-order-configmap
                   key: APPLICATION_NAME
             - name: APPLICATION_VERSION
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-order-biz-configmap
+                  name: taotao-cloud-order-configmap
                   key: APPLICATION_VERSION
             - name: ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-order-biz-secret
+                  name: taotao-cloud-order-secret
                   key: ADMIN_USERNAME
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-order-biz-secret
+                  name: taotao-cloud-order-secret
                   key: ADMIN_PASSWORD
             - name: DINGDING_TOKEN_ID
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-order-biz-secret
+                  name: taotao-cloud-order-secret
                   key: DINGDING_TOKEN_ID
             - name: DINGDING_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-order-biz-secret
+                  name: taotao-cloud-order-secret
                   key: DINGDING_SECRET
             - name: TAOTAO_CLOUD_MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-order-biz-secret
+                  name: taotao-cloud-order-secret
                   key: TAOTAO_CLOUD_MAIL_PASSWORD
           resources:
             requests:
@@ -173,7 +173,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - mkdir -p /root/logs/taotao-cloud-order-biz && touch /root/logs/taotao-cloud-order-biz/jit.compile.log /root/logs/taotao-cloud-order-biz/gc.log
+                  - mkdir -p /root/logs/taotao-cloud-order && touch /root/logs/taotao-cloud-order/jit.compile.log /root/logs/taotao-cloud-order/gc.log
             preStop:
               exec:
                 command:
@@ -184,13 +184,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: taotao-cloud-order-biz
+  name: taotao-cloud-order
   labels:
-    app: taotao-cloud-order-biz
+    app: taotao-cloud-order
 spec:
   type: NodePort
   selector:
-    app: taotao-cloud-order-biz
+    app: taotao-cloud-order
   ports:
     - name: order-port
       protocol: TCP

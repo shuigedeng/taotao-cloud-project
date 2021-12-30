@@ -128,7 +128,7 @@ public class SentinelConfiguration {
 			)
 		);
 
-		rules.add(new GatewayFlowRule("taotao-cloud-oauth2-biz")
+		rules.add(new GatewayFlowRule("taotao-cloud-auth")
 			.setResourceMode(SentinelGatewayConstants.RESOURCE_MODE_ROUTE_ID)
 			.setCount(3)
 			.setGrade(RuleConstant.FLOW_GRADE_QPS)

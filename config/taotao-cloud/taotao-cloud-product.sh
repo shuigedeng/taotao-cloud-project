@@ -12,7 +12,7 @@
 # 根据实际情况来修改以下配置信息 ##################################
 
 VERSION=2021.8
-APP_NAME=taotao-cloud-product
+APP_NAME=taotao-cloud-goods
 
 # jar包存放路径
 JAR_PATH="/opt/taotao-cloud/${APP_NAME}"
