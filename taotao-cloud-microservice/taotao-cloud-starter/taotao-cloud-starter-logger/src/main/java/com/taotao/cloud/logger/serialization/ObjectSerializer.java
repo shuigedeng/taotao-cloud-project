@@ -23,31 +23,44 @@ import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
 /**
- *  String encoding defaults to UTF8 and can be customized by setting the property key.serializer.encoding,
- *  value.serializer.encoding or serializer.encoding. The first two take precedence over the last.
+ * String encoding defaults to UTF8 and can be customized by setting the property
+ * key.serializer.encoding, value.serializer.encoding or serializer.encoding. The first two take
+ * precedence over the last.
  */
 public class ObjectSerializer implements Serializer<Object> {
-    private String encoding = StandardCharsets.UTF_8.name();
 
-    @Override
-    public void configure(Map<String, ?> configs, boolean isKey) {
-        String propertyName = isKey ? "key.serializer.encoding" : "value.serializer.encoding";
-        Object encodingValue = configs.get(propertyName);
-        if (encodingValue == null)
-            encodingValue = configs.get("serializer.encoding");
-        if (encodingValue instanceof String)
-            encoding = (String) encodingValue;
-    }
+	private String encoding = StandardCharsets.UTF_8.name();
 
-    @Override
-    public byte[] serialize(String topic, Object data) {
-        try {
-            if (data == null)
-                return null;
-            else
-                return data.toString().getBytes(encoding);
-        } catch (UnsupportedEncodingException e) {
-            throw new SerializationException("Error when serializing string to byte[] due to unsupported encoding " + encoding);
-        }
-    }
+	@Override
+	public void configure(Map<String, ?> configs, boolean isKey) {
+		String propertyName = isKey ? "key.serializer.encoding" : "value.serializer.encoding";
+		Object encodingValue = configs.get(propertyName);
+		if (encodingValue == null) {
+			encodingValue = configs.get("serializer.encoding");
+		}
+		if (encodingValue instanceof String) {
+			encoding = (String) encodingValue;
+		}
+	}
+
+	@Override
+	public byte[] serialize(String topic, Object data) {
+		try {
+			if (data == null) {
+				return null;
+			} else {
+				if (data instanceof byte[]) {
+					String s = new String((byte[]) data);
+					return s.getBytes(StandardCharsets.UTF_8);
+				} else {
+					return data.toString().getBytes(encoding);
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			throw new SerializationException(
+				"Error when serializing string to byte[] due to unsupported encoding "
+					+ encoding);
+
+		}
+	}
 }
