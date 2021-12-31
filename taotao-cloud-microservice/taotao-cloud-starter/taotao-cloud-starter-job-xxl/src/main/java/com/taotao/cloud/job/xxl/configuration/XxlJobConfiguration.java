@@ -49,7 +49,7 @@ public class XxlJobConfiguration implements InitializingBean {
 	/**
 	 * 服务名称 包含 XXL_JOB_ADMIN 则说明是 Admin
 	 */
-	private static final String TAO_TAO_CLOUD_XXL_JOB_ADMIN = "taotao-cloud-xxl-job-admin";
+	private static final String TAO_TAO_CLOUD_XXL_JOB_ADMIN = "taotao-cloud-xxljob";
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -84,7 +84,7 @@ public class XxlJobConfiguration implements InitializingBean {
 		xxlJobSpringExecutor.setLogPath(executor.getLogPath());
 		xxlJobSpringExecutor.setLogRetentionDays(executor.getLogRetentionDays());
 
-		// 如果配置为空则获取注册中心的服务列表 "http://127.0.0.1:9080/taotao-cloud-xxl-job-admin"
+		// 如果配置为空则获取注册中心的服务列表 "http://127.0.0.1:9080/taotao-cloud-xxljob"
 		if (!StringUtils.hasText(xxlJobProperties.getAdmin().getAddresses())) {
 			String serverList = discoveryClient.getServices().stream()
 				.filter(s -> s.contains(TAO_TAO_CLOUD_XXL_JOB_ADMIN))

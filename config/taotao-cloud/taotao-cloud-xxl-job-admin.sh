@@ -12,7 +12,7 @@
 # 根据实际情况来修改以下配置信息 ##################################
 
 VERSION=2021.8
-APP_NAME=taotao-cloud-xxl-job-admin
+APP_NAME=taotao-cloud-xxljob
 
 # jar包存放路径
 JAR_PATH="/opt/taotao-cloud/${APP_NAME}"

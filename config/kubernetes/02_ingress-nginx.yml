@@ -745,6 +745,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: taotao-cloud-xxl-job-admin
+                name: taotao-cloud-xxljob
                 port:
                   number: 33335

@@ -190,7 +190,7 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-store  -- 店铺模块
 │  │  ├─taotao-cloud-sys  -- 系统模块
 │  │  ├─taotao-cloud-websocket  -- websocket模块
-│  │  ├─taotao-cloud-xxl-job-admin  -- xxl-job模块
+│  │  ├─taotao-cloud-xxljob  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
 │  ├─taotao-cloud-offline -- 离线数据分析模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 数据仓库模块

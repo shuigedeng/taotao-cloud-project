@@ -148,15 +148,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-xxl-job-admin
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:2021.12
+        - name: taotao-cloud-xxljob
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-xxl-job-admin-port
+            - name: taotao-cloud-xxljob-port
               containerPort: 33335
           env:
             - name: applicationName
-              value: taotao-cloud-xxl-job-admin
+              value: taotao-cloud-xxljob
           resources:
             requests:
               cpu: 1
@@ -481,15 +481,15 @@ spec:
                   - sh
                   - -c
                   - sleep 30
-        - name: taotao-cloud-xxl-job-admin
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:2021.12
+        - name: taotao-cloud-xxljob
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2021.12
           imagePullPolicy: IfNotPresent
           ports:
-            - name: taotao-cloud-xxl-job-admin-port
+            - name: taotao-cloud-xxljob-port
               containerPort: 33335
           env:
             - name: applicationName
-              value: taotao-cloud-xxl-job-admin
+              value: taotao-cloud-xxljob
           resources:
             requests:
               cpu: 1
@@ -700,7 +700,7 @@ spec:
       port: 33334
       targetPort: 33334
       nodePort: 33334
-    - name: taotao-cloud-xxl-job-admin-port
+    - name: taotao-cloud-xxljob-port
       protocol: TCP
       port: 33335
       targetPort: 33335
