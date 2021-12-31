@@ -30,11 +30,6 @@ spring:
     allow-circular-references: true
   application:
     name: taotao-cloud-auth
-  cloud:
-    loadbalancer:
-      enabled: true
-    compatibility-verifier:
-      enabled: false
   sleuth:
     enabled: true
     web:
@@ -92,20 +87,20 @@ spring:
   kafka:
     bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
-      retries: 0
+      retries: 1
       batch-size: 16384
       buffer-memory: 33554432
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: com.taotao.cloud.logger.serialization.ObjectSerializer
-      acks: 1
+      acks: 0
       properties:
-        linger.ms: 500
+        linger.ms: 100
     consumer:
       auto-commit-interval: 1S
       auto-offset-reset: earliest
       enable-auto-commit: false
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: com.taotao.cloud.logger.serialization.ObjectSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
       concurrency: 5
       ack-mode: manual_immediate
@@ -175,7 +170,65 @@ spring:
         #          client-secret: abc
         jwt:
           jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
-
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    loadbalancer:
+      enabled: true
+    stream:
+      bindings:
+        sms-output:
+          destination: sms-topic
+          binder: rabbit
+        sms-input:
+          destination: sms-topic
+          group: sms-group
+          binder: rabbit
+        email-output:
+          destination: email-topic
+          #content-type: application/json
+          binder: rocketmq
+        email-input:
+          destination: email-topic
+          group: email-group
+          binder: rocketmq
+        order-output:
+          destination: order-topic
+          #content-type: application/json
+          binder: kafka
+        order-input:
+          destination: order-topic
+          group: order-group
+          binder: kafka
+      rocketmq:
+        binder:
+          name-server: 172.16.6.151:9876
+      rabbit:
+        bindings:
+          sms-output:
+            producer:
+              #routing-key-expression: headers.routingKey   # 发送端路由key
+              delayed-exchange: false    # 开启延时队列
+          sms-input:
+            consumer:
+              #binding-routing-key: login.user.succeed   # 生产监听路由表达式
+              delayed-exchange: false    # 开启延时队列
+              #auto-bind-dlq: true   # 绑定死信队列
+              #republish-to-dlq: true  # 重投到死信队列并带有报错信息
+        binder:
+          admin-addresses: 172.16.6.151:5672
+      kafka:
+        binder:
+          brokers: 172.16.6.151:9092
+          auto-create-topics: true
+        bindings:
+          order-output:
+            producer:
+              sync: true
+              bufferSize: 16384
+          order-input:
+            consumer:
+              txCommitRecovered: true
 taotao:
   cloud:
     p6spy:
@@ -192,6 +245,8 @@ taotao:
         tenant:
           enabled: false
     logger:
+      enabled: true
+    kafka:
       enabled: true
     feign:
       enabled: true
