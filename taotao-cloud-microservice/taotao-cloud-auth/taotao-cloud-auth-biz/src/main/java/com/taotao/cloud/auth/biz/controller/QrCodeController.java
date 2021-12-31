@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "二维码API", description = "二维码API")
 @RestController
-@RequestMapping("/oauth2/qrcode")
+@RequestMapping("/auth/qrcode")
 public class QrCodeController {
 
 	@Autowired

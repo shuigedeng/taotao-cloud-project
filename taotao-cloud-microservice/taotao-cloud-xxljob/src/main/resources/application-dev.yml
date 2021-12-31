@@ -130,6 +130,9 @@ spring:
     servlet:
       load-on-startup: 0
     static-path-pattern: /static/**
+  cloud:
+    compatibility-verifier:
+      enabled: false
 
 mybatis:
   mapper-locations: classpath:/mybatis-mapper/*Mapper.xml

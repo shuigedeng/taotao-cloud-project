@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "Oauth2API", description = "Oauth2API")
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping("/auth")
 public class Oauth2Controller {
 
 	/**
