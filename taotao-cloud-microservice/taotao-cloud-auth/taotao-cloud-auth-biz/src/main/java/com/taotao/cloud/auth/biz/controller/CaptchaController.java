@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "验证码API", description = "验证码API")
 @RestController
-@RequestMapping("/oauth2/captcha")
+@RequestMapping("/auth/captcha")
 public class CaptchaController {
 
 	@Autowired

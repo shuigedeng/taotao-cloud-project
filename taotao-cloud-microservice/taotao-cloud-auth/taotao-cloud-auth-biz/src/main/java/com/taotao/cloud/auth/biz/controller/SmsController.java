@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "短信API", description = "短信API")
 @RestController
-@RequestMapping("/oauth2/sms")
+@RequestMapping("/auth/sms")
 public class SmsController {
 
 	@Autowired

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @Tag(name = "测试API", description = "测试API")
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping("/auth")
 public class MessagesController {
 
 	@Operation(summary = "测试消息", description = "测试消息", method = CommonConstant.GET)
