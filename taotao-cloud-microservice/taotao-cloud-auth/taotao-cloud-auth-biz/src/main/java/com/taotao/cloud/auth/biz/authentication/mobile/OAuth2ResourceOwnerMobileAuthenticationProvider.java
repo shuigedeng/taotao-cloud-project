@@ -184,6 +184,8 @@ public class OAuth2ResourceOwnerMobileAuthenticationProvider implements Authenti
 
 			authorizationService.save(authorization);
 
+			// 添加用户在线信息
+
 			Map<String, Object> tokenAdditionalParameters = new HashMap<>();
 			claims.getClaims().forEach((key, value) -> {
 				if (!key.equals(OAuth2ParameterNames.SCOPE) &&

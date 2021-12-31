@@ -180,6 +180,8 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
 			authorizationService.save(authorization);
 
+			// 添加用户登录日志、在线信息
+
 			Map<String, Object> tokenAdditionalParameters = new HashMap<>();
 			claims.getClaims().forEach((key, value) -> {
 				if (!key.equals(OAuth2ParameterNames.SCOPE) &&

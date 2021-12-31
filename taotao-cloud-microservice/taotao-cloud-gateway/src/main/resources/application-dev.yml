@@ -77,7 +77,7 @@ spring:
   redis:
     host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    database: 0
+    database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     lettuce:
       pool:
@@ -403,9 +403,9 @@ spring:
           metadata:
             name: 认证中心模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/oauth2/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/auth/**
           filters:
-            - RewritePath=/oauth2/(?<path>.*), /oauth2/$\{path}
+            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
             - StripPrefix=2
             - RequestTime=true
             - PreserveHostHeader
@@ -682,17 +682,20 @@ taotao:
           data-id:
           group-id:
       filter:
-        blacklist: true
+        blacklist: false
         gray: false
         log: true
-        sign: true
+        sign: false
         trace: true
       security:
         enabled: true
         ignore-url: >
-          /oauth2/captcha/code,
-          /oauth2/qrcode/code,
-          /oauth2/sms/phone,
+          /auth/captcha/code,
+          /auth/qrcode/code,
+          /auth/sms/phone,
+          /auth/oauth2/token,
+          /auth/oauth2/authorize,
+          /*/health/**,
           /health/**,
       api:
         prefix: /api

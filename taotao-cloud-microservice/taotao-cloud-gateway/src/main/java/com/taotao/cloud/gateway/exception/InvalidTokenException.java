@@ -13,33 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.constant;
+package com.taotao.cloud.gateway.exception;
+
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * RedisConstant
+ * InvalidTokenException
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 19:35:46
+ * @version 1.0.0
+ * @since 2021/12/31 16:09
  */
-public class RedisConstant {
-	/**
-	 * 用户退出时JWT标识KEY
-	 */
-	public static final String LOGOUT_JWT_KEY_PREFIX = "LOGOUT:JWT:KEY:";
+public class InvalidTokenException extends AuthenticationException {
 
-	/**
-	 * 图形验证码KEY
-	 */
-	public static final String CAPTCHA_KEY_PREFIX = "CAPTCHA:KEY:";
+	public InvalidTokenException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	/**
-	 * 短信验证码KEY
-	 */
-	public static final String SMS_KEY_PREFIX = "SMS:KEY:";
-
-	/**
-	 * 分布式锁key
-	 */
-	public static final String LOCK_KEY_PREFIX = "LOCK:KEY:";
+	public InvalidTokenException(String msg) {
+		super(msg);
+	}
 }

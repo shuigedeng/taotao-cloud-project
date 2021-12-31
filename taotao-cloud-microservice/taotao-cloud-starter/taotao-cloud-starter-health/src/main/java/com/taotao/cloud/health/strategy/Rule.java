@@ -147,7 +147,8 @@ public class Rule {
 					for (Map.Entry<String, Object> e : map.entrySet()) {
 						String key = e.getKey();
 
-						if (StringUtils.startsWithIgnoreCase(key, "taotao.cloud.health.strategy.")) {
+						if (StringUtils.startsWithIgnoreCase(key,
+							"taotao.cloud.health.strategy.")) {
 							key = key.replace("taotao.cloud.health.strategy.", "");
 							Object rule = rules.get(key);
 							if (rule != null) {
@@ -316,18 +317,20 @@ public class Rule {
 		public List<RuleInfo> parser(String text) {
 			List<RuleInfo> result = new ArrayList<>();
 			try {
-				if (text.startsWith("[") && text.endsWith("]")) {
-					text = text
-						.replace("[", "")
-						.replace("]", "");
+				if (StringUtil.isNotBlank(text)) {
+					if (text.startsWith("[") && text.endsWith("]")) {
+						text = text
+							.replace("[", "")
+							.replace("]", "");
 
-					String[] rules = text.split(";");
-					for (String r : rules) {
-						RuleType type = RuleType.getRuleType(r.charAt(0) + "");
-						String value = StringUtils.trimLeadingCharacter(r, r.charAt(0));
-						//val numvalue = ConvertUtils.tryConvert(value, Number.class);
-						if (type != null) {
-							result.add(new RuleInfo(type, value, null));
+						String[] rules = text.split(";");
+						for (String r : rules) {
+							RuleType type = RuleType.getRuleType(r.charAt(0) + "");
+							String value = StringUtils.trimLeadingCharacter(r, r.charAt(0));
+							//val numvalue = ConvertUtils.tryConvert(value, Number.class);
+							if (type != null) {
+								result.add(new RuleInfo(type, value, null));
+							}
 						}
 					}
 				}
