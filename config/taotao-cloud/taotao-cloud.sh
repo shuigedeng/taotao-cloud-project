@@ -2,7 +2,7 @@
 
 function start_taotao_cloud() {
   /opt/taotao-cloud/script/taotao-cloud-admin.sh start
-  /opt/taotao-cloud/script/taotao-cloud-xxl-job-admin.sh start
+  /opt/taotao-cloud/script/taotao-cloud-xxljob.sh start
 
   /opt/taotao-cloud/script/taotao-cloud-auth.sh start
   /opt/taotao-cloud/script/taotao-cloud-gateway.sh start

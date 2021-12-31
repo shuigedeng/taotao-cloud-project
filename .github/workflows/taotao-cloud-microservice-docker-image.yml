@@ -73,14 +73,14 @@ jobs:
         docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}} .
         docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}}
 
-    - name: build docker image taotao-cloud-xxl-job-admin
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-xxl-job-admin
-      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxl-job-admin') }}
+    - name: build docker image taotao-cloud-xxljob
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-xxljob
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
       run: |
         gradle --continue clean bootJar
         docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:${{env.TAOTAO_CLOUD_VERSION}} .
-        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxl-job-admin:${{env.TAOTAO_CLOUD_VERSION}}
+        docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:${{env.TAOTAO_CLOUD_VERSION}} .
+        docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:${{env.TAOTAO_CLOUD_VERSION}}
 
     - name: build docker image taotao-cloud-order
       working-directory: ./taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
