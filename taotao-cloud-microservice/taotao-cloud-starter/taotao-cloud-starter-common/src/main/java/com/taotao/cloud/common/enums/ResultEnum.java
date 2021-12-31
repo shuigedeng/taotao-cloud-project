@@ -46,7 +46,7 @@ public enum ResultEnum implements BaseEnum {
 	/**
 	 * 尚未登录 认证失败
 	 */
-	UNAUTHORIZED(401, "用户未认证"),
+	UNAUTHORIZED(401, "用户认证失败"),
 	/**
 	 * 权限不足
 	 */

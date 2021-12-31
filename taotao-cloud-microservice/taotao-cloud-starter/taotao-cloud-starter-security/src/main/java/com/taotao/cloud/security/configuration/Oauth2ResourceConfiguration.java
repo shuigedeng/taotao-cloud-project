@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.security.configuration;
 
+import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.ResponseUtil;
@@ -69,8 +70,6 @@ import org.springframework.web.util.pattern.PathPattern;
 @Configuration
 public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 
-	private static final String TAO_TAO_CLOUD_OAUTH2_BIZ = "taotao-cloud-auth";
-
 	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
 	private String jwkSetUri;
 
@@ -81,7 +80,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 	public JwtDecoder jwtDecoder() {
 		if (Objects.nonNull(discoveryClient)) {
 			jwkSetUri = discoveryClient.getServices().stream()
-				.filter(s -> s.contains(TAO_TAO_CLOUD_OAUTH2_BIZ))
+				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
 				.flatMap(s -> discoveryClient.getInstances(s).stream())
 				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(),
 					instance.getPort()))

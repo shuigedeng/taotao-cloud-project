@@ -95,7 +95,7 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:2021.12
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - name: uc-port
               containerPort: 33337

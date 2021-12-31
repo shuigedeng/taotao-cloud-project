@@ -4,13 +4,14 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI;
 import static org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.DEFAULT_FILTER_PROCESSES_URI;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ResponseUtil;
 import com.taotao.cloud.auth.biz.models.CustomJwtGrantedAuthoritiesConverter;
 import com.taotao.cloud.auth.biz.service.CloudOauth2UserService;
 import com.taotao.cloud.auth.biz.service.MemberUserDetailsService;
 import com.taotao.cloud.auth.biz.service.SysUserDetailsService;
+import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.ResponseUtil;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -23,15 +24,18 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -93,7 +97,7 @@ import org.springframework.web.client.RestTemplate;
 	proxyTargetClass = false
 )
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements EnvironmentAware {
 
 	public static final String[] permitAllUrls = new String[]{
 		"/swagger-ui.html",
@@ -104,9 +108,9 @@ public class SecurityConfiguration {
 		"/actuator/**",
 		"/index",
 		"/index.html",
-		"/oauth2/captcha/code",
-		//"/oauth2/qrcode/code",
-		"/oauth2/sms/phone",
+		"/auth/captcha/code",
+		"/auth/qrcode/code",
+		"/auth/sms/phone",
 		"/doc.html",
 		"/*.js",
 		"/*.css",
@@ -148,21 +152,25 @@ public class SecurityConfiguration {
 
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
-	private static final String TAO_TAO_CLOUD_OAUTH2_BIZ = "taotao-cloud-auth";
+
+	private Environment environment;
 
 	@Bean
 	public JwtDecoder jwtDecoder() {
-		if (Objects.nonNull(discoveryClient)) {
-			jwkSetUri = discoveryClient.getServices().stream()
-				.filter(s -> s.contains(TAO_TAO_CLOUD_OAUTH2_BIZ))
-				.flatMap(s -> discoveryClient.getInstances(s).stream())
-				.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(),
-					instance.getPort()))
-				.findFirst()
-				.orElse(jwkSetUri);
+		if (Stream.of(environment.getActiveProfiles()).toList().contains("dev")) {
+			if (Objects.nonNull(discoveryClient)) {
+				jwkSetUri = discoveryClient.getServices().stream()
+					.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
+					.flatMap(s -> discoveryClient.getInstances(s).stream())
+					.map(instance -> String.format("http://%s:%s" + "/oauth2/jwks",
+						instance.getHost(),
+						instance.getPort()))
+					.findFirst()
+					.orElse(jwkSetUri);
+			}
 		}
+
 		return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-		//return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
 	}
 
 	@Bean
@@ -190,7 +198,7 @@ public class SecurityConfiguration {
 						ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
 					})
 					.authenticationEntryPoint((request, response, authException) -> {
-						LogUtil.error("认证失败", authException);
+						LogUtil.error("用户认证失败", authException);
 						authException.printStackTrace();
 						ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
 					})
@@ -304,6 +312,11 @@ public class SecurityConfiguration {
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 		client.setRestOperations(restTemplate);
 		return client;
+	}
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
 	}
 
 	/**
