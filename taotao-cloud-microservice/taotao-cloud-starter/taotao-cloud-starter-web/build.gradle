@@ -69,14 +69,6 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-distZip{
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-distTar{
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
