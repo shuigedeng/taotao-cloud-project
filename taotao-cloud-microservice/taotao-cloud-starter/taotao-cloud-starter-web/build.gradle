@@ -73,6 +73,10 @@ distZip{
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+distTar{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
