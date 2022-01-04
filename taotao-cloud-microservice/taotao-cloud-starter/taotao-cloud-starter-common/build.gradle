@@ -22,17 +22,19 @@ dependencies {
     api 'com.baomidou:mybatis-plus-core:3.4.3.4'
     api 'com.baomidou:mybatis-plus-extension:3.4.3.4'
     api 'com.squareup.okhttp3:okhttp'
-    api "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    api "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
-    api 'org.apache.httpcomponents:httpclient'
+    api('org.apache.httpcomponents:httpclient') {
+        exclude group: 'junit', module: 'junit'
+    }
     api 'org.apache.httpcomponents:httpmime'
     
-    api "io.swagger.core.v3:swagger-models:2.1.11"
-    api 'io.swagger.core.v3:swagger-annotations:2.1.11'
+    api "io.swagger.core.v3:swagger-models:2.1.12"
+    api 'io.swagger.core.v3:swagger-annotations:2.1.12'
 
     api 'com.thoughtworks.xstream:xstream:1.4.18'
 
-    api  "org.jsoup:jsoup:1.14.3"
+    api "org.jsoup:jsoup:1.14.3"
     api "com.google.zxing:javase:3.4.1"
 
     api 'org.springframework:spring-core'
@@ -52,7 +54,9 @@ dependencies {
     api "org.springframework.cloud:spring-cloud-openfeign-core"
 
     api 'org.springframework.data:spring-data-commons'
-    api 'org.springframework.security:spring-security-core'
+    api('org.springframework.security:spring-security-core') {
+        exclude group: 'junit', module: 'junit'
+    }
     api 'org.springframework.security:spring-security-oauth2-core'
 
     api "org.springframework.boot:spring-boot-starter-validation"
