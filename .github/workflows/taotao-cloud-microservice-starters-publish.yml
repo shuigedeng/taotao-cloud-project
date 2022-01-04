@@ -53,7 +53,9 @@ jobs:
     - name: build publish dependencies with gradle
       run: |
         cd $PWD/taotao-cloud-dependencies
-        gradle publishToMavenLocal publishAllPublicationsToSonatypeRepository
+        gradle publishToMavenLocal 
+        gradle publishAllPublicationsToSonatypeRepository
+        gradle publishMavenJavaPublicationToGitHubRepository
    #publishMavenJavaPublicationToGitHubRepository
 
     - name: build publish starter with gradle
@@ -64,6 +66,7 @@ jobs:
           if [ -d $starter_dir"/"$starter ];then
             cd $starter_dir"/"$starter
             gradle --continue clean build -x test -x bootJar publishAllPublicationsToSonatypeRepository
+            gradle --continue clean build -x test -x bootJar publishMavenJavaPublicationToGitHubRepository
           fi
         done
       #publishMavenJavaPublicationToGitHubRepository
