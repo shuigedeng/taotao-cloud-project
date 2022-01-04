@@ -17,9 +17,9 @@ package com.taotao.cloud.dingtalk.xml;
 
 
 import com.taotao.cloud.dingtalk.annatations.PriorityColumn;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * ConfigurationTag

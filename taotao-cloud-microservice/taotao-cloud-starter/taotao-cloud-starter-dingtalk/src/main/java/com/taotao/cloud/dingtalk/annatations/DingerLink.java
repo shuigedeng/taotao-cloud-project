@@ -25,7 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * DingerLink(仅限DingTalk {@link com.github.jaemon.dinger.core.entity.enums.DingerType#DINGTALK})
+ * DingerLink(仅限DingTalk {@link DingerType#DINGTALK})
  *
  */
 @Retention(RetentionPolicy.RUNTIME)

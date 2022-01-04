@@ -17,11 +17,11 @@ package com.taotao.cloud.dingtalk.utils;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.NEW_LINE;
 
+import jakarta.xml.bind.JAXB;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
-import javax.xml.bind.JAXB;
 
 
 /**
