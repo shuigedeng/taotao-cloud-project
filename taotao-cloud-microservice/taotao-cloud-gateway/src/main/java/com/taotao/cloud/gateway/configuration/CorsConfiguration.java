@@ -26,6 +26,11 @@
 ///**
 // * 跨域配置
 // *
+// * 如果部署是nginx + springcloud gateway 那么在nginx部署跨域配置
+// * 如果部署是 springcloud gateway 那么需要打开此文件部署跨域配置
+// *
+// * 上面两者的各个微服务都不再需要配置跨域 如配置之后 会形成两层跨域甚至三层跨域
+// *
 // * @author shuigedeng
 // * @since 2020/4/29 22:11
 // * @version 1.0.0
