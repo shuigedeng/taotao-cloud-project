@@ -20,7 +20,7 @@ dependencies {
 
         api "commons-collections:commons-collections:${commonsCollectionsVersion}"
         api "commons-io:commons-io:${commonsIoVersion}"
-        api "commons-lang:commons-lang:${commonsIoVersion}"
+        api "commons-lang:commons-lang3:${commonsLang3Version}"
         api "commons-net:commons-net:${commonsNetVersion}"
 
         api "com.fasterxml.jackson.core:jackson-databind:${fasterxmlVersion}"

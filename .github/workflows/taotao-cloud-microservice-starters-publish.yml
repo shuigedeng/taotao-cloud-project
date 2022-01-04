@@ -4,8 +4,8 @@
 name: microservice starters publish
 
 on:
-#  push:
-#    branches: [ master ]
+  push:
+    branches: [ master ]
   release:
     types: [created]
 
