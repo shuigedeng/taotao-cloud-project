@@ -69,7 +69,9 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 configurations {
     all {

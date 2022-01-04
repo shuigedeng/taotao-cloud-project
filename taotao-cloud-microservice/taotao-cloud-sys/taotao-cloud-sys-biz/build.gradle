@@ -13,10 +13,9 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-bootJar{
-    duplicatesStrategy = 'EXCLUDE'
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-
 
 jib {
 //  https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
