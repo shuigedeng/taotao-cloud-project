@@ -4,8 +4,8 @@
 name: microservice starters publish
 
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   release:
     types: [created]
 
@@ -55,6 +55,7 @@ jobs:
         cd $PWD/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
+        gradle publishMavenJavaPublicationToGitHubRepository
    #publishMavenJavaPublicationToGitHubRepository
 
     - name: build publish starter with gradle

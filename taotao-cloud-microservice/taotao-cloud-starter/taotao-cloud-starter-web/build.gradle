@@ -74,6 +74,8 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
         resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 
+        duplicatesStrategy = 'EXCLUDE'
+
         //resolutionStrategy {
         //    force 'com.alibaba.csp:sentinel-core:1.8.1'
         //}
