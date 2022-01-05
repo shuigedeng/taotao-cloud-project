@@ -3,6 +3,8 @@ FROM node:alpine as builder
 
 WORKDIR /root
 
+RUN rm -rf node_modules
+
 COPY . /root
 
 #RUN npm install --registry=https://registry.npm.taobao.org --verbose
