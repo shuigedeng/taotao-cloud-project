@@ -1,0 +1,8 @@
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: admin
+    password: 123456
+
+  production: true

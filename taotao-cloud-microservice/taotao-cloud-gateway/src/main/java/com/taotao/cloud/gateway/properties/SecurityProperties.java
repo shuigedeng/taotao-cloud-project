@@ -72,14 +72,6 @@ public class SecurityProperties {
 		}
 	}
 
-	public SecurityProperties() {
-	}
-
-	public SecurityProperties(Boolean enabled, List<String> ignoreUrl) {
-		this.enabled = enabled;
-		this.ignoreUrl = ignoreUrl;
-	}
-
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -96,30 +88,4 @@ public class SecurityProperties {
 		this.ignoreUrl = ignoreUrl;
 	}
 
-	@Override
-	public String toString() {
-		return "SecurityProperties{" +
-			"enabled=" + enabled +
-			", ignoreUrl=" + ignoreUrl +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		SecurityProperties that = (SecurityProperties) o;
-		return Objects.equals(enabled, that.enabled) && Objects.equals(ignoreUrl,
-			that.ignoreUrl);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(enabled, ignoreUrl);
-	}
 }

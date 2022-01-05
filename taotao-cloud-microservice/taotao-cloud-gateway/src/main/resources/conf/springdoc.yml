@@ -1,0 +1,6 @@
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    config-url: /v3/api-docs/swagger-config

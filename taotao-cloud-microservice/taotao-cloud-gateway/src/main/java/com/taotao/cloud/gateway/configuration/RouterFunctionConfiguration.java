@@ -225,7 +225,7 @@ public class RouterFunctionConfiguration {
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest request) {
 			try {
-				ClassPathResource classPathResource = new ClassPathResource("favicon.ico");
+				ClassPathResource classPathResource = new ClassPathResource("favicon/favicon.ico");
 				InputStream inputStream = classPathResource.getInputStream();
 
 				byte[] bytes = IOUtils.toByteArray(inputStream);

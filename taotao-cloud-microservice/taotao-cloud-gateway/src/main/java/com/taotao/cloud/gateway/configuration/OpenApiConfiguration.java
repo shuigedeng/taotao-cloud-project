@@ -16,7 +16,6 @@
 package com.taotao.cloud.gateway.configuration;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
-import com.taotao.cloud.common.utils.LogUtil;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -31,6 +30,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.springdoc.core.AbstractSwaggerUiConfigProperties.SwaggerUrl;
 import org.springdoc.core.GroupedOpenApi;
@@ -39,7 +39,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
@@ -65,36 +64,38 @@ public class OpenApiConfiguration {
 		List<GroupedOpenApi> groups = new ArrayList<>();
 		List<RouteDefinition> definitions = locator.getRouteDefinitions().collectList().block();
 
-		assert definitions != null;
-
-		for (RouteDefinition definition : definitions) {
-			LogUtil.info("spring cloud gateway route definition : {}, uri: {}",
-				definition.getId(),
-				definition.getUri().toString());
-		}
+		//for (RouteDefinition definition : definitions) {
+		//	LogUtil.info("spring cloud gateway route definition : {}, uri: {}",
+		//		definition.getId(),
+		//		definition.getUri().toString());
+		//}
 
 		Set<SwaggerUrl> urls = new HashSet<>();
-		definitions
-			.stream()
-			.filter(routeDefinition -> routeDefinition.getId().startsWith("taotao-cloud"))
-			.filter(routeDefinition -> !routeDefinition.getId()
-				.startsWith("ReactiveCompositeDiscoveryClient_"))
-			.forEach(routeDefinition -> {
-				String id = routeDefinition.getId();
 
-				Map<String, Object> metadata = routeDefinition.getMetadata();
-				String name = (String) metadata.get("name");
+		Optional.ofNullable(definitions)
+			.ifPresent(definition -> {
+				definition
+					.stream()
+					.filter(routeDefinition -> routeDefinition.getId().startsWith("taotao-cloud"))
+					.filter(routeDefinition -> !routeDefinition.getId()
+						.startsWith("ReactiveCompositeDiscoveryClient_"))
+					.forEach(routeDefinition -> {
+						String id = routeDefinition.getId();
 
-				SwaggerUrl url = new SwaggerUrl();
-				url.setName(name);
-				url.setUrl("/v3/api-docs/" + id);
-				urls.add(url);
+						Map<String, Object> metadata = routeDefinition.getMetadata();
+						String name = (String) metadata.get("name");
 
-				GroupedOpenApi build = GroupedOpenApi.builder()
-					.pathsToMatch("/" + id + "/**")
-					.group(id)
-					.build();
-				groups.add(build);
+						SwaggerUrl url = new SwaggerUrl();
+						url.setName(name);
+						url.setUrl("/v3/api-docs/" + id);
+						urls.add(url);
+
+						GroupedOpenApi build = GroupedOpenApi.builder()
+							.pathsToMatch("/" + id + "/**")
+							.group(id)
+							.build();
+						groups.add(build);
+					});
 			});
 
 		swaggerUiConfigParameters.setConfigUrl("/v3/api-docs/swagger-config");

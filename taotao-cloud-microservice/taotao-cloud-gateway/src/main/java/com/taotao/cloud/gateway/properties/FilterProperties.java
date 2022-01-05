@@ -35,49 +35,6 @@ public class FilterProperties {
 	 */
 	private Boolean sign = true;
 
-	public FilterProperties() {
-	}
-
-	public FilterProperties(Boolean trace, Boolean log, Boolean gray, Boolean blacklist,
-		Boolean sign) {
-		this.trace = trace;
-		this.log = log;
-		this.gray = gray;
-		this.blacklist = blacklist;
-		this.sign = sign;
-	}
-
-	@Override
-	public String
-	toString() {
-		return "FilterProperties{" +
-			"trace=" + trace +
-			", log=" + log +
-			", gray=" + gray +
-			", blacklist=" + blacklist +
-			", sign=" + sign +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		FilterProperties that = (FilterProperties) o;
-		return Objects.equals(trace, that.trace) && Objects.equals(log, that.log)
-			&& Objects.equals(gray, that.gray) && Objects.equals(blacklist,
-			that.blacklist) && Objects.equals(sign, that.sign);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(trace, log, gray, blacklist, sign);
-	}
-
 	public Boolean getTrace() {
 		return trace;
 	}
