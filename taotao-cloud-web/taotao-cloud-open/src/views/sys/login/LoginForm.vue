@@ -151,9 +151,10 @@
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
   async function getCode() {
-    const codeModel = await getCaptcha();
-    codeUrl.value = codeModel.codeUrl;
-    formData.key = codeModel.key;
+    const url = await getCaptcha();
+    codeUrl.value = url;
+    // codeUrl.value = codeModel.codeUrl;
+    // formData.key = codeModel.key;
   }
 
   async function handleLogin() {

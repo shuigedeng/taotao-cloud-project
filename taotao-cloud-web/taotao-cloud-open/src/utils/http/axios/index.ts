@@ -64,8 +64,8 @@ const transform: AxiosTransform = {
         timeoutMsg = t('sys.api.timeoutMessage');
         break;
       default:
-        if (data.msg) {
-          timeoutMsg = data.msg;
+        if (data.errorMsg) {
+          timeoutMsg = data.errorMsg;
         }
     }
 
@@ -189,6 +189,7 @@ const transform: AxiosTransform = {
         return Promise.reject(err);
       }
     } catch (error) {
+      // @ts-ignore
       throw new Error(error);
     }
     checkStatus(error?.response?.status, msg, errorMessageMode);

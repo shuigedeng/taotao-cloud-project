@@ -57,5 +57,5 @@ export function doLogout() {
 }
 
 export function getCaptcha() {
-  return defHttp.get<GetCaptchaModel>({ url: Api.GetCaptcha });
+  return defHttp.get<String>({ url: Api.GetCaptcha });
 }
