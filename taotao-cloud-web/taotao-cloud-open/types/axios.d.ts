@@ -32,9 +32,11 @@ export interface Result<T = any> {
 
 export interface Data<T = any> {
   code: number;
-  msg: string;
-  time: string;
   data: T;
+  errorMsg: string;
+  requestId: string;
+  success: boolean;
+  timestamp: string;
 }
 
 // multipart/form-data: upload file
