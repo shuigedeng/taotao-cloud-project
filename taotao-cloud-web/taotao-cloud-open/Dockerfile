@@ -1,14 +1,12 @@
-# First stage: complete build environment
 FROM node:alpine as builder
 
 WORKDIR /root
 
 COPY . /root
 
-#RUN npm install --registry=https://registry.npm.taobao.org --verbose
-RUN npm install --verbose
+RUN yarn
 
-RUN npm run build
+RUN yarn build
 
 # Second stage: minimal runtime environment
 FROM openresty/openresty:alpine
