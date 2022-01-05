@@ -62,3 +62,9 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
+
+      - name: build docker image taotao-cloud-open
+        run: |
+          docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+          docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open:${{env.TAOTAO_CLOUD_VERSION}} .
+          docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-open:${{env.TAOTAO_CLOUD_VERSION}}
