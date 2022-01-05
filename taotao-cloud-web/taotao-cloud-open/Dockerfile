@@ -4,7 +4,7 @@ WORKDIR /root
 
 COPY . /root
 
-RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc gcc-c++ libtool \
+RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc libtool \
     && GLIBC_VER="2.28-r0" \
     && ALPINE_GLIBC_REPO="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" \
     && GCC_LIBS_URL="https://archive.archlinux.org/packages/g/gcc-libs/gcc-libs-8.2.1%2B20180831-1-x86_64.pkg.tar.xz" \
