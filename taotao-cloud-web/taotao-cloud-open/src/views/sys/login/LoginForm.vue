@@ -34,7 +34,7 @@
         </FormItem>
       </ACol>
       <ACol :span="8">
-        <img :src="codeUrl" @click="getCode" />
+        <img :src="codeUrl" @click="getCode"  alt=""/>
       </ACol>
     </ARow>
 

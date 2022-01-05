@@ -48,3 +48,32 @@ crontab /opt/openresty/script/taotao-cloud-access-log.cron
 
 crontab -l
 crontab -e
+
+
+################### 安装其他模块 ##################
+wget https://openresty.org/download/openresty-1.19.3.1.tar.gz
+tar -zxvf openresty-1.19.3.1.tar.gz
+cd openresty-1.19.3.1/
+
+# 检测是否支持
+./configure --help | grep http_gzip_static_module
+
+git clone https://github.com/google/ngx_brotli.git
+cd /soft/ngx_brotli && git submodule update --init && cd /soft/openresty-1.19.3.1/build/nginx-1.19.3
+
+yum -y install pcre pcre-devel
+yum -y install openssl openssl-devel
+yum -y install lua* --skip-broken
+
+## 编译 不要gmake install
+./configure  --add-module=/soft/ngx_brotli --with-http_gzip_static_module -j2
+gmake
+
+## 备份
+cd /usr/local/openresty/nginx/sbin && cp nginx nginx_back
+
+## 覆盖
+cp /soft/openresty-1.19.3.1/build/nginx-1.19.3/objs/nginx /usr/local/openresty/nginx/sbin/
+
+## 测试
+./nginx  -V
