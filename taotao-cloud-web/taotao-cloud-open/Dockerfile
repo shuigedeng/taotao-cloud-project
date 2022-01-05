@@ -6,7 +6,7 @@ COPY . /root
 
 RUN ls
 
-RUN apk add autoconf automake libtool zlib1g-dev
+RUN apk add autoconf automake libtool zlib-dev
 
 RUN yarn
 
