@@ -4,6 +4,10 @@ WORKDIR /root
 
 COPY . /root
 
+RUN ls
+
+RUN apk add autoconf automake libtool
+
 RUN yarn
 
 RUN yarn build
