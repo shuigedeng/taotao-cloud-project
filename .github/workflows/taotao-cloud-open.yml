@@ -14,6 +14,9 @@ defaults:
   run:
     working-directory: ./taotao-cloud-web/taotao-cloud-open
 
+env:
+  TAOTAO_CLOUD_VERSION: 2022.01
+
 jobs:
   assemble:
     runs-on: ubuntu-latest
