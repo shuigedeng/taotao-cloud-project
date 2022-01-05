@@ -1,3 +1,12 @@
 spring:
+  config:
+    import:
+      - conf/route.yml
+      - conf/taotao-cloud.yml
+      - conf/knife4j.yml
+      - conf/springdoc.yml
+      - conf/logging.yml
+      - conf/management.yml
+      - conf/arthas.yml
   profiles:
-    active: dev
+    active: test

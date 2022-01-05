@@ -47,42 +47,6 @@ public class ApiProperties {
 	 */
 	private String baseUri = prefix + version;
 
-	public ApiProperties() {
-	}
-
-	public ApiProperties(String prefix, String version, String baseUri) {
-		this.prefix = prefix;
-		this.version = version;
-		this.baseUri = baseUri;
-	}
-
-	@Override
-	public String toString() {
-		return "ApiProperties{" +
-			"prefix='" + prefix + '\'' +
-			", version='" + version + '\'' +
-			", baseUri='" + baseUri + '\'' +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		ApiProperties that = (ApiProperties) o;
-		return Objects.equals(prefix, that.prefix) && Objects.equals(version,
-			that.version) && Objects.equals(baseUri, that.baseUri);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(prefix, version, baseUri);
-	}
-
 	public String getPrefix() {
 		return prefix;
 	}

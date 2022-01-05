@@ -53,45 +53,6 @@ public class DynamicRouteProperties {
 
 	private String groupId = "";
 
-	public DynamicRouteProperties() {
-	}
-
-	public DynamicRouteProperties(Boolean enabled, String type, String dataId, String groupId) {
-		this.enabled = enabled;
-		this.type = type;
-		this.dataId = dataId;
-		this.groupId = groupId;
-	}
-
-	@Override
-	public String toString() {
-		return "DynamicRouteProperties{" +
-			"enabled=" + enabled +
-			", type='" + type + '\'' +
-			", dataId='" + dataId + '\'' +
-			", groupId='" + groupId + '\'' +
-			'}';
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		DynamicRouteProperties that = (DynamicRouteProperties) o;
-		return Objects.equals(enabled, that.enabled) && Objects.equals(type,
-			that.type) && Objects.equals(dataId, that.dataId) && Objects.equals(
-			groupId, that.groupId);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(enabled, type, dataId, groupId);
-	}
-
 	public Boolean getEnabled() {
 		return enabled;
 	}

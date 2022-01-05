@@ -1,0 +1,100 @@
+server:
+  port: 33333
+  shutdown: graceful
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
+    key-store-type: JKS
+    key-store-password: 1234
+
+redisson:
+  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+  single-server-config:
+    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+    banner-mode: off
+  application:
+    name: taotao-cloud-gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          #配置RSA的公钥访问地址
+          #jwk-set-uri: http://taotao-cloud-auth/oauth2/jwks
+          jwk-set-uri: http://172.16.6.151:9998/oauth2/jwks
+  sleuth:
+    enabled: true
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:172.16.6.151}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    discoveryClientEnabled: false
+    sender:
+      type: WEB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  redis:
+    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
+    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+    database: 1
+    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  kafka:
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:172.16.6.151}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 0
+      properties:
+        linger.ms: 500
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    loadbalancer:
+      enabled: true
+    sentinel:
+      app:
+        type: 1
+      enabled: true
+      eager: true
+      transport:
+        dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
+        port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
+      scg:
+        fallback:
+          mode: response
+          response-status: 200
+          response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
+    gateway:
+      loadbalancer:
+        use404: false
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+
+
