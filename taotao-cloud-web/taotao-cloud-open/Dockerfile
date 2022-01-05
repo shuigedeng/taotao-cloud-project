@@ -4,7 +4,15 @@ WORKDIR /root
 
 COPY . /root
 
-RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc zlib-dev libtool
+RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc zlib-dev libtool \
+    && ZLIB_URL="https://archive.archlinux.org/packages/z/zlib/zlib-1%3A1.2.9-1-x86_64.pkg.tar.xz" \
+    && ZLIB_SHA256=bb0959c08c1735de27abf01440a6f8a17c5c51e61c3b4c707e988c906d3b7f67 \
+    && curl -Ls ${ZLIB_URL} -o /tmp/libz.tar.xz \
+    && echo "${ZLIB_SHA256}  /tmp/libz.tar.xz" | sha256sum -c - \
+    && mkdir /tmp/libz \
+    && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
+    && mv /tmp/libz/usr/lib/libz.so* /usr/glibc-compat/lib \
+    && apk del binutils
 
 RUN yarn
 
