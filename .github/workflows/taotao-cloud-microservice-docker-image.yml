@@ -128,3 +128,4 @@ jobs:
     #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}} .
     #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}}
 #
+
