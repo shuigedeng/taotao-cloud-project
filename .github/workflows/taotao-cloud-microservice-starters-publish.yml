@@ -56,7 +56,6 @@ jobs:
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
         gradle publishMavenJavaPublicationToGitHubRepository
-   #publishMavenJavaPublicationToGitHubRepository
 
     - name: build publish starter with gradle
       run: |
@@ -69,5 +68,4 @@ jobs:
             gradle --continue clean build -x test -x bootJar publishMavenJavaPublicationToGitHubRepository
           fi
         done
-      #publishMavenJavaPublicationToGitHubRepository
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)
