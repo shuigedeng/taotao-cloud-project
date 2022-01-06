@@ -53,7 +53,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-admin
 
     - name: pulish docker image taotao-cloud-admin
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -65,7 +65,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-admin
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-admin
 
     - name: gradle bootJar taotao-cloud-gateway
       uses: gradle/gradle-build-action@v2
@@ -73,7 +73,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-gateway
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway
 
     - name: pulish docker image taotao-cloud-gateway
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -85,7 +85,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-gateway
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway
 
     - name: gradle bootJar taotao-cloud-auth
       uses: gradle/gradle-build-action@v2
@@ -93,7 +93,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-auth
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
 
     - name: pulish docker image taotao-cloud-auth
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -105,7 +105,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-auth
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth
 
     - name: gradle bootJar taotao-cloud-xxljob
       uses: gradle/gradle-build-action@v2
@@ -113,7 +113,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-xxljob
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
     - name: pulish docker image taotao-cloud-xxljob
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -125,7 +125,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-xxljob
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-xxljob
 
     - name: gradle bootJar taotao-cloud-order
       uses: gradle/gradle-build-action@v2
@@ -133,7 +133,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-order
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order
 
     - name: pulish docker image taotao-cloud-order
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -145,7 +145,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-order
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order
 
     - name: gradle bootJar taotao-cloud-sys
       uses: gradle/gradle-build-action@v2
@@ -153,7 +153,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-sys
+        build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys
 
     - name: pulish docker image taotao-cloud-sys
       uses: elgohr/Publish-Docker-Github-Action@master
@@ -165,7 +165,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-        workdir: ./taotao-cloud-microservice/taotao-cloud-sys
+        workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys
 
     #- name: login to registry
     #  uses: docker/login-action@v1

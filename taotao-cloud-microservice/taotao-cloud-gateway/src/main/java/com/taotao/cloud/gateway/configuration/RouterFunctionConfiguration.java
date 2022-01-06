@@ -36,6 +36,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
+import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -102,20 +103,30 @@ public class RouterFunctionConfiguration {
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-			Optional<Object> originalUris = serverRequest
-				.attribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
+			String originalUris = serverRequest.exchange().getAttribute
+				(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
-			originalUris.ifPresent(originalUri -> LogUtil
-				.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
-					originalUri,
+			Exception exception = serverRequest.exchange().getAttribute(ServerWebExchangeUtils.CIRCUITBREAKER_EXECUTION_EXCEPTION_ATTR);
+			if (exception instanceof TimeoutException) {
+				LogUtil.error("服务超时", exception);
+			}
+			else if (exception != null && exception.getMessage() != null) {
+				LogUtil.error("服务错误" + exception.getMessage(), exception);
+			}
+			else {
+				LogUtil.error("服务错误", exception);
+			}
+
+			LogUtil.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
+					originalUris,
 					socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
-					buildMessage(serverRequest)));
+					buildMessage(serverRequest));
 
 			return ServerResponse
 				.status(HttpStatus.HTTP_OK)
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
+				.body(BodyInserters.fromValue(Result.fail("访问频繁,请稍后重试")));
 		}
 
 		private String buildMessage(ServerRequest request) {

@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.admin.configuration;
 
+import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
@@ -24,6 +25,7 @@ import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +78,8 @@ public class NotifierConfiguration {
 			String serviceUrl = instance.getRegistration().getServiceUrl();
 
 			StringBuilder str = new StringBuilder();
-			str.append("taotao微服务监控 \n");
+			str.append("taotaocloud微服务监控 \n");
+			str.append("[时间戳]: ").append(DateUtil.format(LocalDateTime.now(), DateUtil.DEFAULT_DATE_TIME_FORMAT)).append("\n");
 			str.append("[服务名] : ").append(serviceName).append("\n");
 			str.append("[服务ip]: ").append(serviceUrl).append("\n");
 
@@ -101,14 +104,13 @@ public class NotifierConfiguration {
 						case "UNKNOWN" -> str.append("[服务状态]: ").append(status).append("(")
 							.append("服务未知异常").append(")").append("\n");
 
-						default -> {
-						}
-
+						default -> str.append("[服务状态]: ").append(status).append("(")
+							.append("服务未知异常").append(")").append("\n");
 					}
 
 					Map<String, Object> details = ((InstanceStatusChangedEvent) event).getStatusInfo()
 						.getDetails();
-					str.append("[详情]: ").append(JsonUtil.toJSONString(details));
+					str.append("[服务详情]: ").append(JsonUtil.toJSONString(details));
 
 					sender.send(
 						MessageSubType.TEXT,

@@ -85,11 +85,11 @@ spring:
       transport:
         dashboard: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_HOST:172.16.6.151}:${TAOTAO_CLOUD_SENTINEL_TRANSPORT_DASHBOARD_PORT:8849}
         port: ${TAOTAO_CLOUD_SENTINEL_TRANSPORT_PORT:8710}
-      scg:
-        fallback:
-          mode: response
-          response-status: 200
-          response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
+      #scg:
+      #  fallback:
+      #    mode: response
+      #    response-status: 200
+      #    response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
     gateway:
       loadbalancer:
         use404: false

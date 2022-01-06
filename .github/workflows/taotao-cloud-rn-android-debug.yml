@@ -40,7 +40,7 @@ env:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/taotao-cloud-rn
+    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-rn
 
 # 工作流作业
 jobs:

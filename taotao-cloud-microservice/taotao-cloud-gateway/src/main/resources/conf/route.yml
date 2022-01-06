@@ -17,7 +17,9 @@ spring:
             - name: RequestRateLimiter
               args:
                 key-resolver: '#{@remoteAddrKeyResolver}'
+                # 令牌桶每秒填充速率 允许每秒用户处理多少个请求
                 redis-rate-limiter.replenishRate: 10
+                # 令牌桶的容量 允许1s内完成的最大请求数量
                 redis-rate-limiter.burstCapacity: 20
             - name: CircuitBreaker
               args:
@@ -332,8 +334,14 @@ spring:
             - name: RequestRateLimiter
               args:
                 key-resolver: '#{@remoteAddrKeyResolver}'
+                rate-limiter: "#{#customRateLimiter}"
+                # key返回空的话 则不进行限流 @see RequestRateLimiterGatewayFilterFactory
+                deny-empty-key: true
+                empty-key-status-code: TOO_MANY_REQUESTS
                 redis-rate-limiter.replenishRate: 10
                 redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.requestedTokens: 1
+                custom-rate-limiter.requestedToken: 15
         - id: openapi
           uri: http://${spring.cloud.client.ip-address}:${server.port}
           metadata:

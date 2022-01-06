@@ -1,29 +1,36 @@
 package com.taotao.cloud.gateway.configuration;
 
+import static org.springframework.web.reactive.function.BodyInserters.fromValue;
+
+import com.alibaba.cloud.sentinel.gateway.scg.SentinelSCGAutoConfiguration;
 import com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiPathPredicateItem;
-import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiPredicateItem;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.GatewayApiDefinitionManager;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayParamFlowItem;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayRuleManager;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
+import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerCodecConfigurer;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
 /**
@@ -55,6 +62,7 @@ public class SentinelConfiguration {
 	public void doInit() {
 		initCustomizedApis();
 		initGatewayRules();
+		initFallback();
 	}
 
 	/**
@@ -136,6 +144,21 @@ public class SentinelConfiguration {
 		);
 
 		GatewayRuleManager.loadRules(rules);
+	}
+
+
+	/**
+	 * @author shuigedeng
+	 * @see SentinelSCGAutoConfiguration initFallback
+	 * @since 2022-01-06 16:04:09
+	 */
+	private void initFallback() {
+		GatewayCallbackManager.setBlockHandler((exchange, t) -> ServerResponse
+			.status(200)
+			.contentType(MediaType.valueOf(MediaType.APPLICATION_JSON.toString()))
+			.body(fromValue(Result.fail("访问频繁,请稍后重试"))));
+		LogUtil.info(
+			"[Sentinel SpringCloudGateway] using AnonymousBlockRequestHandler");
 	}
 
 }
