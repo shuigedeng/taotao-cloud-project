@@ -1,37 +1,17 @@
-FROM node:alpine as builder
-
-WORKDIR /root
-
-COPY . /root
-
-RUN apk search zlib
-
-RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc zlib-dev libtool \
-    && ZLIB_URL="https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz" \
-    && ZLIB_SHA256=bb0959c08c1735de27abf01440a6f8a17c5c51e61c3b4c707e988c906d3b7f67 \
-    && curl -Ls ${ZLIB_URL} -o /tmp/libz.tar.gz \
-    && mkdir /tmp/libz \
-    && tar -zxvf /tmp/libz.tar.gz -C /tmp/libz \
-    && cd /tmp/libz/zlib-1.2.11 \
-    && ./configure  \
-    && make  \
-    && make install  \
-    && apk del binutils
-
-RUN yarn
-
-RUN yarn build
-
 # Second stage: minimal runtime environment
 FROM openresty/openresty:alpine
 
 ENV GATEWAY_URL http://127.0.0.1:8080
 
 # copy dist from the first stage
-COPY --from=builder /root/dist /usr/share/nginx/html
+COPY dist /usr/share/nginx/html
 
 # copy nginx.conf
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 
+RUN ls /usr/share/nginx/html
+
+RUN openresty -t
+
 # expose port
-EXPOSE 80
+EXPOSE 80 443
