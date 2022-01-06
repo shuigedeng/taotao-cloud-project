@@ -51,21 +51,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      #- name: yarn install and build
-      #  run: |
-      #    yarn
-      #    yarn build
-#
-      #- name: deploy to server
-      #  uses: easingthemes/ssh-deploy@main
-      #  env:
-      #    SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #    ARGS: "-rltgoDzvO --delete"
-      #    SOURCE: "taotao-cloud-web/taotao-cloud-open/dist/"
-      #    REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #    REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #    TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
-#
+      - name: yarn install and build
+        run: |
+          yarn
+          yarn build
+
+      - name: deploy to server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "taotao-cloud-web/taotao-cloud-open/dist/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
+
       - name: build docker image taotao-cloud-open
         run: |
           docker login -u ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }} -p ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
