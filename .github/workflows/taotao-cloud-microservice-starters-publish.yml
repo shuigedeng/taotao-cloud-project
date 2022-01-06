@@ -4,8 +4,10 @@
 name: microservice starters publish
 
 on:
-#  push:
-#    branches: [ master ]
+  push:
+    paths:
+      - 'taotao-cloud-microservice/taotao-cloud-starter/**'
+    branches: [ master ]
   release:
     types: [created]
 
@@ -22,6 +24,7 @@ env:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-starter') }}
     permissions:
       contents: read
       packages: write
@@ -50,14 +53,14 @@ jobs:
         echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
         echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
-    - name: build publish dependencies with gradle
+    - name: build and publish dependencies
       run: |
         cd $PWD/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
         gradle publishMavenJavaPublicationToGitHubRepository
 
-    - name: build publish starter with gradle
+    - name: build and publish starter
       run: |
         starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
         for starter in `ls $starter_dir`
