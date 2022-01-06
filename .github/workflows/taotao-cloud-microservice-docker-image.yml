@@ -60,7 +60,7 @@ jobs:
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-        #build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+    #build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
 
     #- name: gradle build taotao-cloud-admin
     #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
