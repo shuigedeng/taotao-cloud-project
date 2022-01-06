@@ -11,6 +11,8 @@ RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autocon
     && mkdir /tmp/libz \
     && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
     && cd /tmp/libz \
+    && pwd \
+    && ls -l \
     && ./configure  \
     && make  \
     && make install  \
