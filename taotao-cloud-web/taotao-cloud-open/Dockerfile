@@ -5,14 +5,12 @@ WORKDIR /root
 COPY . /root
 
 RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc zlib-dev libtool \
-    && ZLIB_URL="https://archive.archlinux.org/packages/z/zlib/zlib-1%3A1.2.11-3-x86_64.pkg.tar.xz" \
+    && ZLIB_URL="https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz" \
     && ZLIB_SHA256=bb0959c08c1735de27abf01440a6f8a17c5c51e61c3b4c707e988c906d3b7f67 \
-    && curl -Ls ${ZLIB_URL} -o /tmp/libz.tar.xz \
+    && curl -Ls ${ZLIB_URL} -o /tmp/libz.tar.gz \
     && mkdir /tmp/libz \
-    && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
-    && cd /tmp/libz \
-    && pwd \
-    && ls -l \
+    && tar -zxvf /tmp/libz.tar.gz -C /tmp/libz \
+    && cd /tmp/libz/zlib-1.2.11 \
     && ./configure  \
     && make  \
     && make install  \
