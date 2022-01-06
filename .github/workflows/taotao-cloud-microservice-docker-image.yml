@@ -53,10 +53,15 @@ jobs:
    #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
    #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
 
-    - name: build docker image taotao-cloud-admin
+   - name: gradle build taotao-cloud-admin
+     working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
+     run: |
+       gradle --continue clean bootJar
+
+    - name: build and pulish docker image taotao-cloud-admin
       working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
-      run: gradle --continue clean bootJar
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin
