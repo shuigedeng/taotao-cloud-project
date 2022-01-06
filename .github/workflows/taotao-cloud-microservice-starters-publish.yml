@@ -55,14 +55,14 @@ jobs:
 
     - name: build and publish dependencies
       run: |
-        cd $PWD/taotao-cloud-dependencies
+        cd ${{ github.workspace }}/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
         gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
-        starter_dir=$PWD/taotao-cloud-microservice/taotao-cloud-starter
+        starter_dir=${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-starter
         for starter in `ls $starter_dir`
         do
           if [ -d $starter_dir"/"$starter ];then

@@ -26,9 +26,12 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.gateway.filter.factory.RequestRateLimiterGatewayFilterFactory;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
+import org.springframework.cloud.gateway.filter.ratelimit.RateLimiter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilterChain;
@@ -52,8 +55,19 @@ import reactor.core.publisher.Mono;
 })
 public class WebConfiguration {
 
+	@Bean(name = "userKeyResolver")
+	public KeyResolver userKeyResolver() {
+		return exchange -> Mono.just(exchange.getRequest().getQueryParams().getFirst("userId"));
+	}
+
+	@Primary
+	@Bean(name = "apiKeyResolver")
+	public KeyResolver apiKeyResolver() {
+		return exchange -> Mono.just(exchange.getRequest().getPath().value());
+	}
+
 	@Bean(name = "remoteAddrKeyResolver")
-	public KeyResolver keyResolver() {
+	public KeyResolver remoteAddrKeyResolver() {
 		return exchange -> Mono.just(
 			Objects.requireNonNull(exchange.getRequest().getRemoteAddress()).getAddress()
 				.getHostAddress());
@@ -74,5 +88,6 @@ public class WebConfiguration {
 		@Value("${spring.application.name}") String applicationName) {
 		return (registry) -> registry.config().commonTags("application", applicationName);
 	}
+
 }
 

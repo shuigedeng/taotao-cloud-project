@@ -66,7 +66,7 @@ public enum MessageSubType {
 				WeText.Text text = new WeText.Text(content);
 				WeText weText = new WeText(text);
 				if (atAll) {
-					text.setMentioned_mobile_list(Arrays.asList(WETALK_AT_ALL));
+					text.setMentioned_mobile_list(List.of(WETALK_AT_ALL));
 				} else if (phones != null && !phones.isEmpty()) {
 					text.setMentioned_mobile_list(phones);
 				}
