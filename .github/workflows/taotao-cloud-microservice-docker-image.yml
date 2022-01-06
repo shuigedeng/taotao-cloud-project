@@ -55,12 +55,11 @@ jobs:
 
     - name: gradle build taotao-cloud-admin xx
       uses: gradle/gradle-build-action@v2
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
         gradle-version: 7.3
         arguments: clean bootJar
-    #build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
 
     #- name: gradle build taotao-cloud-admin
     #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
@@ -70,7 +69,6 @@ jobs:
 
     - name: build and pulish docker image taotao-cloud-admin
       uses: elgohr/Publish-Docker-Github-Action@master
-      working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin
@@ -79,6 +77,7 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         buildoptions: "--compress --force-rm"
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-admin
 
     #- name: build docker image taotao-cloud-admin
     #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
