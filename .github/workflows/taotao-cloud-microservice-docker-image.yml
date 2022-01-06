@@ -22,6 +22,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
     - uses: actions/checkout@v2
 
@@ -46,14 +47,7 @@ jobs:
         MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
         MESSAGES: ${{ github.event.head_commit.message }}
 
-   #- name: login to registry
-   #  uses: docker/login-action@v1
-   #  with:
-   #    registry: registry.cn-hangzhou.aliyuncs.com
-   #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
-   #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
-
-    - name: gradle build taotao-cloud-admin xx
+    - name: gradle bootJar taotao-cloud-admin
       uses: gradle/gradle-build-action@v2
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
@@ -61,13 +55,7 @@ jobs:
         arguments: clean bootJar
         build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
 
-    #- name: gradle build taotao-cloud-admin
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-
-    - name: build and pulish docker image taotao-cloud-admin
+    - name: pulish docker image taotao-cloud-admin
       uses: elgohr/Publish-Docker-Github-Action@master
       if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
@@ -79,52 +67,109 @@ jobs:
         tags: "${{env.TAOTAO_CLOUD_VERSION}}"
         workdir: ./taotao-cloud-microservice/taotao-cloud-admin
 
-    #- name: build docker image taotao-cloud-admin
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin:${{env.TAOTAO_CLOUD_VERSION}}
-#
-    #- name: build docker image taotao-cloud-gateway
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-gateway
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:${{env.TAOTAO_CLOUD_VERSION}}
-#
-    #- name: build docker image taotao-cloud-auth
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:${{env.TAOTAO_CLOUD_VERSION}}
-#
-    #- name: build docker image taotao-cloud-xxljob
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-xxljob
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:${{env.TAOTAO_CLOUD_VERSION}}
-#
-    #- name: build docker image taotao-cloud-order
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:${{env.TAOTAO_CLOUD_VERSION}}
-#
-    #- name: build docker image taotao-cloud-sys
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
-    #  run: |
-    #    gradle --continue clean bootJar
-    #    docker build --tag registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}} .
-    #    docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys:${{env.TAOTAO_CLOUD_VERSION}}
-#
+    - name: gradle bootJar taotao-cloud-gateway
+      uses: gradle/gradle-build-action@v2
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-gateway
 
+    - name: pulish docker image taotao-cloud-gateway
+      uses: elgohr/Publish-Docker-Github-Action@master
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
+      with:
+        name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway
+        username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+        password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+        registry: registry.cn-hangzhou.aliyuncs.com
+        buildoptions: "--compress --force-rm"
+        tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-gateway
+
+    - name: gradle bootJar taotao-cloud-auth
+      uses: gradle/gradle-build-action@v2
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-auth
+
+    - name: pulish docker image taotao-cloud-auth
+      uses: elgohr/Publish-Docker-Github-Action@master
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-auth') }}
+      with:
+        name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth
+        username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+        password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+        registry: registry.cn-hangzhou.aliyuncs.com
+        buildoptions: "--compress --force-rm"
+        tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-auth
+
+    - name: gradle bootJar taotao-cloud-xxljob
+      uses: gradle/gradle-build-action@v2
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-xxljob
+
+    - name: pulish docker image taotao-cloud-xxljob
+      uses: elgohr/Publish-Docker-Github-Action@master
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-xxljob') }}
+      with:
+        name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob
+        username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+        password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+        registry: registry.cn-hangzhou.aliyuncs.com
+        buildoptions: "--compress --force-rm"
+        tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-xxljob
+
+    - name: gradle bootJar taotao-cloud-order
+      uses: gradle/gradle-build-action@v2
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-order
+
+    - name: pulish docker image taotao-cloud-order
+      uses: elgohr/Publish-Docker-Github-Action@master
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-order') }}
+      with:
+        name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order
+        username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+        password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+        registry: registry.cn-hangzhou.aliyuncs.com
+        buildoptions: "--compress --force-rm"
+        tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-order
+
+    - name: gradle bootJar taotao-cloud-sys
+      uses: gradle/gradle-build-action@v2
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
+        build-root-directory: ./taotao-cloud-microservice/taotao-cloud-sys
+
+    - name: pulish docker image taotao-cloud-sys
+      uses: elgohr/Publish-Docker-Github-Action@master
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-sys') }}
+      with:
+        name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sys
+        username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+        password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+        registry: registry.cn-hangzhou.aliyuncs.com
+        buildoptions: "--compress --force-rm"
+        tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+        workdir: ./taotao-cloud-microservice/taotao-cloud-sys
+
+    #- name: login to registry
+    #  uses: docker/login-action@v1
+    #  with:
+    #    registry: registry.cn-hangzhou.aliyuncs.com
+    #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+    #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
