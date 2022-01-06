@@ -112,6 +112,8 @@ public class NotifierConfiguration {
 						.getDetails();
 					str.append("[服务详情]: ").append(JsonUtil.toJSONString(details));
 
+
+
 					sender.send(
 						MessageSubType.TEXT,
 						DingerRequest.request(str.toString()));
