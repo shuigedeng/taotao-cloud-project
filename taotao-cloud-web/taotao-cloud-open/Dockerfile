@@ -4,6 +4,8 @@ WORKDIR /root
 
 COPY . /root
 
+RUN apk search zlib
+
 RUN apk --update add --no-cache ca-certificates curl openssl binutils xz autoconf automake gcc zlib-dev libtool \
     && ZLIB_URL="https://github.com/madler/zlib/archive/refs/tags/v1.2.11.tar.gz" \
     && ZLIB_SHA256=bb0959c08c1735de27abf01440a6f8a17c5c51e61c3b4c707e988c906d3b7f67 \
