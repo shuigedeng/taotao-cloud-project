@@ -53,13 +53,13 @@ jobs:
    #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
    #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
 
-    #- name: gradle build taotao-cloud-admin xx
-    #  working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
-    #  if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
-    #  uses: gradle/gradle-build-action@v2
-    #  with:
-    #    gradle-version: 7.3
-    #    arguments: clean bootJar
+    - name: gradle build taotao-cloud-admin xx
+      uses: gradle/gradle-build-action@v2
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
+      with:
+        gradle-version: 7.3
+        arguments: clean bootJar
     #build-root-directory: ./taotao-cloud-microservice/taotao-cloud-admin
 
     #- name: gradle build taotao-cloud-admin
@@ -70,6 +70,8 @@ jobs:
 
     - name: build and pulish docker image taotao-cloud-admin
       uses: elgohr/Publish-Docker-Github-Action@master
+      working-directory: ./taotao-cloud-microservice/taotao-cloud-admin
+      if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-admin') }}
       with:
         name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-admin
         username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
