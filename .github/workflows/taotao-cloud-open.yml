@@ -71,6 +71,16 @@ jobs:
           ls -l
           pwd
 
+      - name: show runner
+        run: echo "$RUNNER_CONTEXT"
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+
+      - name: show github
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+
       - name: pulish docker image taotao-cloud-open
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
