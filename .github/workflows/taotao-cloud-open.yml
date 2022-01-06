@@ -66,6 +66,11 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_OPEN_TARGET }}
 
+      - name: ls
+        run: |
+          ls -l
+          pwd
+
       - name: pulish docker image taotao-cloud-open
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
