@@ -8,9 +8,9 @@ on:
   pull_request:
     branches: [ master ]
 
-#defaults:
-#  run:
-#    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
+defaults:
+  run:
+    working-directory: ./taotao-cloud-web/taotao-cloud-open
 
 env:
   TAOTAO_CLOUD_VERSION: 2022.01
@@ -19,7 +19,6 @@ jobs:
   assemble:
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-open') }}
-    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
     steps:
       - name: checkout project
         uses: actions/checkout@master
