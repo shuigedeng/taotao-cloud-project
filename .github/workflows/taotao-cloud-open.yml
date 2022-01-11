@@ -8,9 +8,9 @@ on:
   pull_request:
     branches: [ master ]
 
-defaults:
-  run:
-    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
+#defaults:
+#  run:
+#    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
 
 env:
   TAOTAO_CLOUD_VERSION: 2022.01
@@ -19,6 +19,7 @@ jobs:
   assemble:
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-open') }}
+    working-directory: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
     steps:
       - name: checkout project
         uses: actions/checkout@master
@@ -85,7 +86,7 @@ jobs:
         uses: zcong1993/actions-ding@master
         with:
           dingToken: ${{ secrets.DING_TOKEN }}
-          secrets: ${{ secrets.DING_SECRET  }}
+          secret: ${{ secrets.DING_SECRET  }}
           body: |
             {
               "msgtype": "link",
@@ -102,7 +103,7 @@ jobs:
         uses: zcong1993/actions-ding@master
         with:
           dingToken: ${{ secrets.DING_TOKEN }}
-          secrets: ${{ secrets.DING_SECRET  }}
+          secret: ${{ secrets.DING_SECRET  }}
           body: |
             {
               "msgtype": "link",
