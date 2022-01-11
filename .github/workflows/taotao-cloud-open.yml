@@ -84,7 +84,7 @@ jobs:
             {
               "msgtype": "link",
               "link": {
-                  "text": "taotao-cloud-open 开放平台构建 ${{ success() }} ",
+                  "text": "taotao-cloud-open 开放平台构建 ${{ success() }}  ",
                   "title": "github action",
                   "picUrl": "",
                   "messageUrl": "https://github.com/shuigedeng/taotao-cloud-project/actions/runs/${{github.action_id}}"
