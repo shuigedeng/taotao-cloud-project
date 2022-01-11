@@ -39,6 +39,11 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
+      - name: show github
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+
       - name: cache yarn
         uses: actions/cache@v2
         env:
@@ -74,6 +79,40 @@ jobs:
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-web/taotao-cloud-open
+
+      - name: send failure dingding notify
+        if: failure()
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secrets: ${{ secrets.DING_SECRET  }}
+          body: |
+            {
+              "msgtype": "link",
+              "link": {
+                  "text": "taotao-cloud-open 开放平台构建失败",
+                  "title": "github action",
+                  "picUrl": "",
+                  "messageUrl": "https://github.com/shuigedeng/taotao-cloud-project/actions/runs/${{github.action_id}}"
+              }
+            }
+
+      - name: send success dingding notify
+        if: success()
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secrets: ${{ secrets.DING_SECRET  }}
+          body: |
+            {
+              "msgtype": "link",
+              "link": {
+                  "text": "taotao-cloud-open 开放平台构建成功",
+                  "title": "github action",
+                  "picUrl": "",
+                  "messageUrl": "https://github.com/shuigedeng/taotao-cloud-project/actions/runs/${{github.run_id}}"
+              }
+            }
 
 #      - name: show runner
 #        run: echo "$RUNNER_CONTEXT"

@@ -20,7 +20,8 @@
 
 **taotao cloud project** 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码** 主要包括如下几部分
 
-- **大数据模块** 集成基于**spark、hive的日志数据处理和分析、用户行为分析、推荐系统**、**flink、spark streaming离线/流式计算**、**hadoop hive tidb 离线数据仓库**、**apache hudi数据湖 presto计算框架**等大数据处理
+- **大数据模块** 集成基于**spark、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark streaming**离线/流式计算, 
+  **hadoop hive tidb**离线数据仓库, **apache hudi**数据湖 **presto**计算框架等大数据处理
   
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成, 
@@ -28,15 +29,16 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **滔滔商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统，支持商家入驻，支持分布式部署 CI CD持续集成,，支持Docker kubernetes，各个API独立、管理前端使用vue3 ant-design-vue开发、移动端使用taro taro-ui开发，**系统全端全部代码开源**
+- **滔滔商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署, 使用**github action CI/CD**持续集成, 前后端均使用**kubernetes**部署，
+  各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **系统全端全部代码开源**
   
 
-- **前端模块** 主要使用**react antd**进行前后端分离开发、集成以**taro, taro-ui, react native**为主的多端合一框架。
+- **前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**为主的多端合一框架。
   
 
-- **python模块** 主要是集成了**基于django**的web开发、**基于scrapy爬虫开发**、**homeassistant**家庭自动化框架原理的分析
+- **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**家庭自动化框架原理的分析
 
-总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink等大数据处理实践**。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
+总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink**等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
 ## 2. spring cloud 微服务架构图
 ![mark](./snapshot/springcloud微服务架构图.jpeg)
