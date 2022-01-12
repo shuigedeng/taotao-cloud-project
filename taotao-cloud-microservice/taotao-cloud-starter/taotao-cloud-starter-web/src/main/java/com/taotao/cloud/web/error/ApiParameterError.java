@@ -5,7 +5,7 @@ package com.taotao.cloud.web.error;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-01-12 09:05:51
+ * @since 2022-01-12 09:25:53
  */
 public class ApiParameterError {
 

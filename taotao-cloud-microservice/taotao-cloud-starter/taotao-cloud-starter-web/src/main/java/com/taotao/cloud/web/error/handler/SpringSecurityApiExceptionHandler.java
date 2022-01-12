@@ -28,7 +28,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-01-12 09:06:41
+ * @since 2022-01-12 09:25:53
  */
 public class SpringSecurityApiExceptionHandler extends AbstractApiExceptionHandler {
 

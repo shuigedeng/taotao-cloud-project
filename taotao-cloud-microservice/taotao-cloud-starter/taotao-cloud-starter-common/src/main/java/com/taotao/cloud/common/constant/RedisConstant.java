@@ -23,6 +23,7 @@ package com.taotao.cloud.common.constant;
  * @since 2021-09-02 19:35:46
  */
 public class RedisConstant {
+
 	/**
 	 * 用户退出时JWT标识KEY
 	 */
@@ -37,6 +38,11 @@ public class RedisConstant {
 	 * 短信验证码KEY
 	 */
 	public static final String SMS_KEY_PREFIX = "SMS:KEY:";
+
+	/**
+	 * 短信校验码KEY
+	 */
+	public static final String SMS_VERIFICATION_CODE_KEY_PREFIX = "SMS:VERIFICATION:CODE:KEY:";
 
 	/**
 	 * 分布式锁key
