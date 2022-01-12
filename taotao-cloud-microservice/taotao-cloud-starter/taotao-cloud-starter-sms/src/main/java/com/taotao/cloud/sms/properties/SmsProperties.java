@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.sms.properties;
 
-import com.taotao.cloud.sms.enums.SmsType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -34,7 +33,33 @@ public class SmsProperties {
 
 	private boolean enabled = false;
 
-	private SmsType type = SmsType.ALIYUN;
+	/**
+	 * 手机号码正则规则
+	 */
+	private String reg;
+
+	/**
+	 * 负载均衡类型
+	 * <p>
+	 * 可选值: Random、RoundRobin、WeightRandom、WeightRoundRobin， 默认: Random
+	 */
+	private String loadBalancerType = "Random";
+
+	public String getReg() {
+		return reg;
+	}
+
+	public void setReg(String reg) {
+		this.reg = reg;
+	}
+
+	public String getLoadBalancerType() {
+		return loadBalancerType;
+	}
+
+	public void setLoadBalancerType(String loadBalancerType) {
+		this.loadBalancerType = loadBalancerType;
+	}
 
 	public boolean getEnabled() {
 		return enabled;
@@ -44,11 +69,4 @@ public class SmsProperties {
 		this.enabled = enabled;
 	}
 
-	public SmsType getType() {
-		return type;
-	}
-
-	public void setType(SmsType type) {
-		this.type = type;
-	}
 }

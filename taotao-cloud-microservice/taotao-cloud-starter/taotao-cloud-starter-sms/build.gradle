@@ -2,7 +2,32 @@ dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-redis')
 
-    api 'com.aliyun:aliyun-java-sdk-core:4.5.30'
+    api 'com.aliyun:aliyun-java-sdk-core:[4.3.2, 5.0.0)'
+    api 'com.aliyun:aliyun-java-sdk-dysmsapi:[2.1.0, 2.2.0)'
+
+    api('com.baidubce:bce-java-sdk:[0.10.148, 0.11.0)') {
+        exclude group: 'org.apache.hbase', module: 'hbase-client'
+        exclude group: 'commons-io', module: 'commons-io'
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'org.glassfish.jersey.media', module: 'jersey-media-multipart'
+        exclude group: 'org.glassfish.jersey.connectors', module: 'jersey-apache-connector'
+        exclude group: 'org.glassfish.jersey.core', module: 'jersey-server'
+        exclude group: 'org.glassfish.jersey.core', module: 'jersey-common'
+        exclude group: 'org.glassfish.jersey.media', module: 'jersey-media-json-jackson'
+        exclude group: 'org.eclipse.paho', module: 'org.eclipse.paho.client.mqttv3'
+        exclude group: 'javax.validation', module: 'validation-api'
+        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
+    }
+
+    api 'com.jdcloud.sdk:sms:[1.3.0, 1.4.0)'
+
+    api 'com.github.qcloudsms:qcloudsms:[1.0.6, 1.1.0)'
+    api 'com.tencentcloudapi:tencentcloud-sdk-java-sms:[3.1.0, 3.2.0)'
+
+    api 'com.qiniu:qiniu-java-sdk:[7.4.0, 7.5.0)'
+
+    api 'com.yunpian.sdk:yunpian-java-sdk:[1.2.0, 1.3.0)'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
