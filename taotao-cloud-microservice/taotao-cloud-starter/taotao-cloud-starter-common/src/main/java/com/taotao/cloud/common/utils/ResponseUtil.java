@@ -207,4 +207,20 @@ public class ResponseUtil {
 		return response.writeWith(Mono.just(buffer))
 			.doOnSuccess((error) -> DataBufferUtils.release(buffer));
 	}
+
+	public static Mono<Void> writeResponseTextHtml(ServerWebExchange exchange,
+		HttpStatus httpStatus, String result) {
+		ServerHttpResponse response = exchange.getResponse();
+		response.getHeaders().setAccessControlAllowCredentials(true);
+		response.getHeaders().setAccessControlAllowOrigin("*");
+		response.setStatusCode(httpStatus);
+		response.getHeaders().setContentType(MediaType.TEXT_HTML);
+
+		DataBufferFactory dataBufferFactory = response.bufferFactory();
+		DataBuffer buffer = dataBufferFactory
+			.wrap(result.getBytes(Charset.defaultCharset()));
+
+		return response.writeWith(Mono.just(buffer))
+			.doOnSuccess((error) -> DataBufferUtils.release(buffer));
+	}
 }

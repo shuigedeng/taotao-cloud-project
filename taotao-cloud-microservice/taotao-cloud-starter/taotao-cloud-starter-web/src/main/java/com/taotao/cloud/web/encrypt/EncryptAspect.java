@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.jasypt;
+package com.taotao.cloud.web.encrypt;
 
-import static com.taotao.cloud.web.jasypt.EncryptConstant.DECRYPT;
-import static com.taotao.cloud.web.jasypt.EncryptConstant.ENCRYPT;
+import static com.taotao.cloud.web.encrypt.EncryptConstant.DECRYPT;
+import static com.taotao.cloud.web.encrypt.EncryptConstant.ENCRYPT;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
@@ -62,7 +62,7 @@ public class EncryptAspect {
 		this.stringEncryptor = stringEncryptor;
 	}
 
-	@Pointcut("@annotation(com.taotao.cloud.web.jasypt.EncryptMethod)")
+	@Pointcut("@annotation(com.taotao.cloud.web.encrypt.EncryptMethod)")
 	public void pointCut() {
 	}
 
