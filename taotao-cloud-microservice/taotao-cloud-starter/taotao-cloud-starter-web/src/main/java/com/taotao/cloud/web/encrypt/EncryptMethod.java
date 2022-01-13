@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.web.jasypt;
+package com.taotao.cloud.web.encrypt;
 
-import static com.taotao.cloud.web.jasypt.EncryptConstant.ENCRYPT;
+import static com.taotao.cloud.web.encrypt.EncryptConstant.ENCRYPT;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -17,7 +17,7 @@ package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.web.jasypt.EncryptAspect;
+import com.taotao.cloud.web.encrypt.EncryptAspect;
 import com.taotao.cloud.web.properties.EncryptProperties;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.InitializingBean;
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * JasyptConfiguration
+ * EncryptConfiguration
  *
  * @author shuigedeng
  * @version 2021.9
@@ -37,11 +37,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties({EncryptProperties.class})
 @ConditionalOnProperty(prefix = EncryptProperties.PREFIX, name = "enabled", havingValue = "true")
-public class JasyptConfiguration implements InitializingBean {
+public class EncryptConfiguration implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		LogUtil.started(JasyptConfiguration.class, StarterName.WEB_STARTER);
+		LogUtil.started(EncryptConfiguration.class, StarterName.WEB_STARTER);
 	}
 
 	@Bean

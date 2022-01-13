@@ -22,6 +22,9 @@ import com.taotao.cloud.common.utils.CaptchaUtil;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.gateway.anti_reptile.constant.AntiReptileConsts;
+import com.taotao.cloud.gateway.anti_reptile.handler.RefreshFormHandler;
+import com.taotao.cloud.gateway.anti_reptile.handler.ValidateFormHandler;
 import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.model.Report;
@@ -35,6 +38,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Bean;
@@ -67,6 +71,11 @@ public class RouterFunctionConfiguration {
 	private static final String FAVICON = "/favicon.ico";
 	private static final String HEALTH_REPORT = "/health/report";
 
+	@Autowired(required = false)
+	private RefreshFormHandler refreshFormHandler;
+	@Autowired(required = false)
+	ValidateFormHandler validateFormHandler;
+
 	@Bean
 	public RouterFunction<ServerResponse> routerFunction(
 		FallbackHandler fallbackHandler,
@@ -75,7 +84,7 @@ public class RouterFunctionConfiguration {
 		HealthReportHandler healthReportHandler,
 		K8sHandler k8sHandler,
 		ApiProperties apiProperties) {
-		return RouterFunctions
+		RouterFunction<ServerResponse> routerFunction = RouterFunctions
 			.route(RequestPredicates.path(FALLBACK)
 				.and(RequestPredicates.accept(MediaType.TEXT_PLAIN)), fallbackHandler)
 			.andRoute(RequestPredicates.GET(apiProperties.getBaseUri() + CODE)
@@ -86,6 +95,17 @@ public class RouterFunctionConfiguration {
 				.and(RequestPredicates.accept(MediaType.ALL)), healthReportHandler)
 			.andRoute(RequestPredicates.GET("/k8s")
 				.and(RequestPredicates.accept(MediaType.ALL)), k8sHandler);
+
+		if (Objects.nonNull(validateFormHandler)) {
+			routerFunction.andRoute(RequestPredicates.GET(AntiReptileConsts.VALIDATE_REQUEST_URI)
+				.and(RequestPredicates.accept(MediaType.ALL)), validateFormHandler);
+		}
+		if (Objects.nonNull(refreshFormHandler)) {
+			routerFunction.andRoute(RequestPredicates.GET(AntiReptileConsts.REFRESH_REQUEST_URI)
+				.and(RequestPredicates.accept(MediaType.ALL)), refreshFormHandler);
+		}
+
+		return routerFunction;
 	}
 
 
@@ -107,21 +127,20 @@ public class RouterFunctionConfiguration {
 				(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
-			Exception exception = serverRequest.exchange().getAttribute(ServerWebExchangeUtils.CIRCUITBREAKER_EXECUTION_EXCEPTION_ATTR);
+			Exception exception = serverRequest.exchange()
+				.getAttribute(ServerWebExchangeUtils.CIRCUITBREAKER_EXECUTION_EXCEPTION_ATTR);
 			if (exception instanceof TimeoutException) {
 				LogUtil.error("服务超时", exception);
-			}
-			else if (exception != null && exception.getMessage() != null) {
+			} else if (exception != null && exception.getMessage() != null) {
 				LogUtil.error("服务错误" + exception.getMessage(), exception);
-			}
-			else {
+			} else {
 				LogUtil.error("服务错误", exception);
 			}
 
 			LogUtil.error("网关执行请求:{}失败,请求主机: {},请求数据:{} 进行服务降级处理",
-					originalUris,
-					socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
-					buildMessage(serverRequest));
+				originalUris,
+				socketAddress.orElse(new InetSocketAddress(DEFAULT_PORT)).getHostString(),
+				buildMessage(serverRequest));
 
 			return ServerResponse
 				.status(HttpStatus.HTTP_OK)
