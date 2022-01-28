@@ -23,6 +23,7 @@ dependencies {
     api 'com.baomidou:mybatis-plus-extension:3.4.3.4'
     api 'com.squareup.okhttp3:okhttp'
     api "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    api "eu.bitwalker:UserAgentUtils"
 
     api('org.apache.httpcomponents:httpclient') {
         exclude group: 'junit', module: 'junit'

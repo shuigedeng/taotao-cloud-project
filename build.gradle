@@ -128,7 +128,7 @@ plugins {
     id "com.github.shalousun.smart-doc" version "2.2.8"
     //id "org.jetbrains.intellij" version "0.6.5"
     id "org.owasp.dependencycheck" version "6.5.1"
-    id "com.bmuschko.docker-spring-boot-application" version "7.2.0"
+//    id "com.bmuschko.docker-spring-boot-application" version "7.2.0"
 }
 
 allprojects {
@@ -192,7 +192,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     apply plugin: "com.taotao.cloud.plugin"
     apply plugin: "org.owasp.dependencycheck"
 
-    apply plugin: "com.bmuschko.docker-spring-boot-application"
+    //apply plugin: "com.bmuschko.docker-spring-boot-application"
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")

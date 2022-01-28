@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.sys.biz.service;
+package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -21,6 +21,7 @@ import com.taotao.cloud.sys.biz.entity.Logistics;
 import com.taotao.cloud.sys.biz.mapper.ILogisticsMapper;
 import com.taotao.cloud.sys.biz.repository.cls.LogisticsRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ILogisticsRepository;
+import com.taotao.cloud.sys.biz.service.ILogisticsService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.Optional;
 import org.springframework.stereotype.Service;

@@ -48,4 +48,9 @@ public class RedisConstant {
 	 * 分布式锁key
 	 */
 	public static final String LOCK_KEY_PREFIX = "LOCK:KEY:";
+
+	/**
+	 * 敏感词key
+	 */
+	public static final String SENSITIVE_WORDS_KEY = "SENSITIVE:WORDS:KEY";
 }

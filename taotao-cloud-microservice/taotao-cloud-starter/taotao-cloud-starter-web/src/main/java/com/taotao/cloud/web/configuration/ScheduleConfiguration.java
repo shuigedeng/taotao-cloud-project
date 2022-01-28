@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 
@@ -76,6 +77,13 @@ public class ScheduleConfiguration implements SchedulingConfigurer {
 					"定时任务实际启动数量[" + scheduleTaskCount + "]，时间：" + DateUtil.getCurrentDateTime());
 			}
 		}
+
+		ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+		taskScheduler.setPoolSize(10);
+		taskScheduler.setThreadNamePrefix("taotao-cloud-scheduling-executor");
+		taskScheduler.setErrorHandler(LogUtil::error);
+		taskScheduler.initialize();
+		taskRegistrar.setTaskScheduler(taskScheduler);
 	}
 
 	/**
