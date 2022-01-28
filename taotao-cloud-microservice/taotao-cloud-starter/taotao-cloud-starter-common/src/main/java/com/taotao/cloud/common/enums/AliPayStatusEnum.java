@@ -4,12 +4,10 @@
  * 注意：
  * 本软件为www.yixiang.co开发研制
  */
-package com.taotao.cloud.sys.biz.utils;
+package com.taotao.cloud.common.enums;
 
 /**
  * 支付状态
- * @author zhengjie
- * @date 2018/08/01 16:45:43
  */
 public enum AliPayStatusEnum {
 

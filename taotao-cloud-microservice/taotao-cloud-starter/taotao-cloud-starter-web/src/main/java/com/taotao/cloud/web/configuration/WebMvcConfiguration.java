@@ -37,6 +37,7 @@ import com.taotao.cloud.web.interceptor.PrometheusMetricsInterceptor;
 import com.taotao.cloud.web.properties.FilterProperties;
 import com.taotao.cloud.web.properties.InterceptorProperties;
 import com.taotao.cloud.web.properties.XssProperties;
+import com.taotao.cloud.web.sensitive.desensitize.DesensitizeProperties;
 import com.taotao.cloud.web.validation.converter.IntegerToEnumConverterFactory;
 import com.taotao.cloud.web.validation.converter.String2DateConverter;
 import com.taotao.cloud.web.validation.converter.String2LocalDateConverter;
@@ -107,6 +108,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @EnableConfigurationProperties({
 	FilterProperties.class,
 	InterceptorProperties.class,
+	DesensitizeProperties.class
 })
 public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 

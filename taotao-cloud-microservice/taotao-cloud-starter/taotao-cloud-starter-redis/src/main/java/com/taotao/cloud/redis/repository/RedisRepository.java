@@ -132,6 +132,17 @@ public class RedisRepository {
 		this.redisTemplate.opsForCluster().flushDb(node);
 	}
 
+
+	/**
+	 * 发送数据
+	 *
+	 * @author shuigedeng
+	 * @since 2021-09-07 20:59:30
+	 */
+	public void send(String channel, Object data) {
+		redisTemplate.convertAndSend(channel, data);
+	}
+
 	/**
 	 * 设置超时
 	 *
@@ -2741,15 +2752,19 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object get(final String key) {
-		Object resultStr = redisTemplate.execute((RedisCallback<Object>) connection -> {
-			RedisSerializer<String> serializer = getRedisSerializer();
-			byte[] keys = serializer.serialize(key);
-			assert keys != null;
-			byte[] values = connection.get(keys);
-			return OBJECT_SERIALIZER.deserialize(values);
-		});
-		LogUtil.info("[redisTemplate redis]取出 缓存  url:{} ", key);
-		return resultStr;
+		try {
+			Object resultStr = redisTemplate.execute((RedisCallback<Object>) connection -> {
+				RedisSerializer<String> serializer = getRedisSerializer();
+				byte[] keys = serializer.serialize(key);
+				assert keys != null;
+				byte[] values = connection.get(keys);
+				return OBJECT_SERIALIZER.deserialize(values);
+			});
+			LogUtil.info("[redisTemplate redis]取出 缓存  url:{} ", key);
+			return resultStr;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 
@@ -3121,12 +3136,11 @@ public class RedisRepository {
 	/**
 	 * setExpire
 	 *
-	 * @param key key
- * @param value value
- * @param time time
- * @param timeUnit timeUnit
- * @param valueSerializer valueSerializer
-
+	 * @param key             key
+	 * @param value           value
+	 * @param time            time
+	 * @param timeUnit        timeUnit
+	 * @param valueSerializer valueSerializer
 	 * @author shuigedeng
 	 * @since 2021-09-07 21:13:21
 	 */
@@ -3549,7 +3563,6 @@ public class RedisRepository {
 	 * @param key    键
 	 * @param values 值 可以是多个
 	 * @return 移除的个数
-	 *
 	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */

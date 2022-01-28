@@ -16,7 +16,6 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.taotao.cloud.sys.biz.entity.SensitiveWord;
-import com.taotao.cloud.sys.biz.entity.ServiceNotice;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 

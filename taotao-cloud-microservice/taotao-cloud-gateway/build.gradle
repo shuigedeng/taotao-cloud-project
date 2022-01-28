@@ -35,8 +35,6 @@ dependencies {
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
 
-    implementation "eu.bitwalker:UserAgentUtils"
-
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 

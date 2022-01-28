@@ -198,6 +198,7 @@ public class ManagerMenuController extends
 		if (CollUtil.isEmpty(roleCodes)) {
 			return Result.success(Collections.emptyList());
 		}
+
 		Result<List<MenuQueryVO>> result = findResourceByCodes(roleCodes);
 		List<MenuQueryVO> resourceVOList = result.data();
 		

@@ -25,8 +25,7 @@ import org.springframework.lang.Nullable;
 /**
  * 脱敏工具类
  *
- * @author Katrel（同事）
-  * @author shuigedeng
+ * @author shuigedeng
  * @version 2021.9
  * @since 2021-09-02 19:41:13
  */

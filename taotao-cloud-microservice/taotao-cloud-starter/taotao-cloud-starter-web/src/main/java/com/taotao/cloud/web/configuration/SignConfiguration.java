@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Import;
 	EncryptBodyProperties.class,
 	EncryptProperties.class,
 	SignProperties.class,})
-public class SignAutoConfiguration {
+public class SignConfiguration {
 
 
 }
