@@ -22,10 +22,90 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
+#redisson:
+#  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+#  single-server-config:
+#    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+
 redisson:
-  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-  single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+  # 单节点
+  single_server_config:
+    idle_connection_timeout: 10000
+    connect_timeout: 10000
+    timeout: 3000
+    retry_attempts: 3
+    retry_interval: 1500
+    password: null
+    subscriptions_per_connection: 5
+    client_name: null
+    address: "redis://127.0.0.1:6379"
+    subscription_connection_minimum_idle_size: 1
+    subscription_connection_pool_size: 50
+    connection_minimum_idle_size: 24
+    connection_pool_size: 64
+    database: 0
+    dns_monitoring_interval: 5000
+  # 集群模式
+  #cluster_servers_config:
+  #  idleConnectionTimeout: 10000
+  #  pingTimeout: 1000
+  #  connectTimeout: 10000
+  #  timeout: 3000
+  #  retryAttempts: 3
+  #  retryInterval: 1500
+  #  failedSlaveReconnectionInterval: 3000
+  #  failedSlaveCheckInterval: 3
+  #  password: 'password'
+  #  subscriptionsPerConnection: 5
+  #  clientName: "redisson-demo"
+  #  loadBalancer:
+  #    class: "org.redisson.connection.balancer.RoundRobinLoadBalancer"
+  #  slaveSubscriptionConnectionMinimumIdleSize: 1
+  #  slaveSubscriptionConnectionPoolSize: 50
+  #  slaveConnectionMinimumIdleSize: 32
+  #  slaveConnectionPoolSize: 64
+  #  masterConnectionMinimumIdleSize: 32
+  #  masterConnectionPoolSize: 64
+  #  readMode: "SLAVE"
+  #  nodeAddresses:
+  #    - "redis://127.0.0.1:7110"
+  #    - "redis://127.0.0.1:7111"
+  #    - "redis://127.0.0.1:7112"
+  #    - "redis://127.0.0.1:7113"
+  #  scanInterval: 1000
+
+  #集群(哨兵)
+  #sentinel_servers_config:
+  #  idle_connection_timeout: 10000
+  #  connect_timeout: 10000
+  #  timeout: 3000
+  #  retry_attempts: 3
+  #  retry_interval: 1500
+  #  failed_slave_reconnection_interval: 3000
+  #  failed_slave_check_interval: 60000
+  #  password: null
+  #  subscriptions_per_connection: 5
+  #  client_name: null
+  #  subscription_connection_minimum_idle_size: 1
+  #  subscription_connection_pool_size: 50
+  #  slave_connection_minimum_idle_size: 24
+  #  slave_connection_pool_size: 64
+  #  master_connection_minimum_idle_size: 24
+  #  master_connection_pool_size: 64
+  #  read_mode: "SLAVE"
+  #  subscription_mode: "SLAVE"
+  #  sentinel_addresses:
+  #    - "redis://192.168.2.170:26377"
+  #    - "redis://192.168.2.170:26378"
+  #    - "redis://192.168.2.170:26379"
+  #  master_name: "mymaster"
+  #  database: 0
+
+  threads: 16
+  netty_threads: 32
+  transport_mode: "NIO"
+  codec:
+    class: "org.redisson.codec.JsonJacksonCodec"
 
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
@@ -266,6 +346,11 @@ spring:
     database: 1
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
+    #cluster:
+    #  nodes:
+    #sentinel:
+    #  master:
+    #  nodes:
     client-type: lettuce
     lettuce:
       pool:
