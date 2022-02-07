@@ -1,0 +1,128 @@
+{
+  "name": "naive-ui-admin",
+  "version": "1.6.1",
+  "author": {
+    "name": "Ahjung",
+    "email": "735878602@qq.com",
+    "url": "https://github.com/jekip/naive-ui-admin"
+  },
+  "private": true,
+  "scripts": {
+    "bootstrap": "yarn install",
+    "serve": "npm run dev",
+    "dev": "vite",
+    "build": "vite build && esno ./build/script/postBuild.ts",
+    "build:no-cache": "yarn clean:cache && npm run build",
+    "report": "cross-env REPORT=true npm run build",
+    "preview": "vite preview",
+    "build typecheck": "vuedx-typecheck . && vite build",
+    "deploy": "gh-pages -d dist",
+    "lint:eslint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
+    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
+    "lint:pretty": "pretty-quick --staged",
+    "test prod gzip": "http-server dist --cors --gzip -c-1"
+  },
+  "dependencies": {
+    "@vicons/antd": "^0.10.0",
+    "@vicons/ionicons5": "^0.10.0",
+    "@vueup/vue-quill": "^1.0.0-beta.7",
+    "@vueuse/core": "^5.0.3",
+    "axios": "^0.21.1",
+    "blueimp-md5": "^2.18.0",
+    "date-fns": "^2.23.0",
+    "echarts": "^5.1.2",
+    "element-resize-detector": "^1.2.3",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "makeit-captcha": "^1.2.5",
+    "mitt": "^2.1.0",
+    "mockjs": "^1.1.0",
+    "naive-ui": "^2.23.2",
+    "pinia": "^2.0.0-rc.4",
+    "qs": "^6.10.1",
+    "vfonts": "^0.1.0",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11",
+    "vue-types": "^4.1.0",
+    "vuedraggable": "^4.0.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "@vitejs/plugin-vue": "^1.9.1",
+    "@vitejs/plugin-vue-jsx": "^1.1.8",
+    "@vue/compiler-sfc": "^3.2.16",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "^10.3.1",
+    "commitizen": "^4.2.4",
+    "core-js": "^3.14.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-define-config": "1.1.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.18.0",
+    "esno": "^0.7.3",
+    "gh-pages": "^3.2.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.6",
+    "less": "^4.1.1",
+    "less-loader": "^9.0.0",
+    "lint-staged": "^11.0.0",
+    "postcss": "^8.3.5",
+    "prettier": "^2.3.1",
+    "pretty-quick": "^3.1.0",
+    "rimraf": "^3.0.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.19.0",
+    "tailwindcss": "^2.2.7",
+    "typescript": "^4.4.3",
+    "unplugin-vue-components": "^0.17.2",
+    "vite": "^2.5.10",
+    "vite-plugin-compression": "^0.3.1",
+    "vite-plugin-html": "^2.0.7",
+    "vite-plugin-mock": "^2.9.3",
+    "vite-plugin-style-import": "^1.0.1",
+    "vue-eslint-parser": "^7.11.0"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts,tsx}": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
+  "keywords": [
+    "vue",
+    "naive-ui",
+    "naive-ui-admin",
+    "vue3",
+    "ts",
+    "tsx",
+    "admin",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jekip/naive-ui-admin.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jekip/naive-ui-admin/issues"
+  },
+  "homepage": "https://github.com/jekip/naive-ui-admin",
+  "engines": {
+    "node": "^12 || >=14"
+  }
+}

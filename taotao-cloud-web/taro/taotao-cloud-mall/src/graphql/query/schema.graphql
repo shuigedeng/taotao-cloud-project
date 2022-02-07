@@ -1,0 +1,148 @@
+type Query {
+  # 上传参数
+  uploadParams: UploadParams!
+
+  # 广告图片
+  banners(position: String!): [Banner]
+
+  # 当前用户信息
+  userInfo: UserInfo
+
+  # 商品列表
+  items(
+    pageSize: Int
+    currentPage: Int
+    itemClassId: ID
+    status: Status
+    projectId: ID
+    nameLike: String
+    # (传递 type=follow即为关注的商品列表)
+    type: String
+    stateless: Boolean
+  ): ItemPagination
+
+  # 商品分类
+  classify: [Classify]
+
+  # 店铺列表
+  stores(pageSize: Int, currentPage: Int, status: Status): StorePagination
+
+  # 我的店铺
+  myStore: Store
+
+  # 附近的商家
+  nearbyStore(input: NearbyStoreInput!): StorePagination
+
+  # 订单列表
+  orders(input: QueryOrderInput): OrderPagination
+
+  # 单个订单
+  order(id: ID!): Order
+
+  # 单个店铺
+  store(id: ID!): Store
+
+  # 单个商品
+  item(code: ID!): Item
+
+  # 控制台首页数据
+  consoleHome: ConsoleHome
+
+  # 财务统计
+  allFinancial: AllFinancial
+
+  # 店铺订单
+  merchantOrder(time: MerchantOrderType): MerchantOrder
+
+  # 地址解析
+  addressToLngAndLat(address: String!): AddressToLngAndLatPayload
+
+  # 优惠券(发放)
+  issueCoupon(type: CouponType): [IssueCoupon]
+
+  # 优惠券列表
+  coupons(input: fetchCouponInput): CouponPagination
+
+  # 系统配置
+  configs: [Config]
+
+  # 单个系统配置
+  config(primaryKey: String): Config
+
+  # 专题列表
+  projects: [Project]
+
+  # 单个专题
+  project: Project
+
+  # 账户
+  account: Account
+
+  # 距离计算
+  distanceCalculation(input: Calculation): CalculationPayload
+
+  # 积分记录
+  points(id: ID, userId: ID, pageSize: Int, currentPage: Int): PointPagination
+
+  # 提现列表
+  withdrawals(
+    # 用户 ID
+    userId: ID
+
+    # 提现状态
+    status: WithdrawalType
+
+    # 提现类型
+    type: WithType
+
+    pageSize: Int
+
+    currentPage: Int
+  ): WithdrawalPagination
+
+  # 金额变动
+  balance(currentPage: Int): BalancePagination
+
+  # 充值列表
+  topUpList: [TopUp]
+
+  # 单个充值
+  topUp: TopUp
+
+  # 用户列表
+  users(input: FetchUsersInput): UserPagination
+
+  # app首页数据
+  appHomeData: AppHomeDataPayload
+
+  # app 订单管理
+  orderManage: OrderManagePayload
+
+  # 财务管理
+  financial: FinancialPayload
+
+  # 根据取货码查订单
+  fetchOrderForCode(code: String!): Order
+}
+
+enum Status {
+  # 暂存
+  draft
+
+  # 发布
+  published
+}
+
+enum MerchantOrderType {
+  # 今天
+  today
+
+  # 一周内
+  week
+
+  # 一个月内
+  month
+
+  # 一年内
+  year
+}

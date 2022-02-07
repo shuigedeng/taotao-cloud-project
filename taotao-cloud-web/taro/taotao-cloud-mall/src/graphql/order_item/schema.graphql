@@ -1,0 +1,19 @@
+type OrderItem {
+  # id
+  id: ID
+
+  # 图片
+  imageUrl: String
+
+  # 名称
+  title: String
+
+  # 单价
+  price: Int
+
+  # 实际支付的价格
+  amount: Int
+
+  # 下单的数量
+  number: Int
+}

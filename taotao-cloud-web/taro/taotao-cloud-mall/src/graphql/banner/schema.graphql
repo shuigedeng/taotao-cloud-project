@@ -1,0 +1,30 @@
+# 广告图
+type Banner {
+  # id
+  id: ID!
+
+  # 标题
+  title: String
+
+  #位置
+  position: String
+
+  # 图片地址
+  imageUrl: String
+}
+
+input BannerInput {
+  # id(更新时传递)
+  id: ID
+
+  # 标题
+  title: String
+
+  #位置
+  position: String
+
+  # 图片地址
+  fileKey: String
+
+}
+

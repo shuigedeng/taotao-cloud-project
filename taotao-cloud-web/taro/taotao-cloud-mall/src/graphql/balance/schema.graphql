@@ -1,0 +1,39 @@
+# 广告图
+type Balance {
+  # id
+  id: ID!
+
+  # 余额
+  balance: Int
+
+  # 变动金额
+  price: Int
+
+  #增减
+  add: Boolean
+
+  # 备注
+  remark: String
+
+  # 创建时间
+  createdAt: String
+
+  # 更新时间
+  updatedAt: String
+
+  # 关联的店铺
+  balanceStoreInfo: Store
+
+  # 关联的用户
+  balanceUser: UserInfo
+
+  # 关联的订单
+  balanceOrder: Order
+
+  # 充值的订单
+  topUpOrder: TopUpOrder
+}
+type BalancePagination {
+  list: [Balance]!
+  pagination: PageInfo
+}

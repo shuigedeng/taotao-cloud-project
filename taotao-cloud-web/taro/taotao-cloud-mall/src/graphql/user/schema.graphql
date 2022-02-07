@@ -1,0 +1,153 @@
+# 通过用户名和密码登录负载
+type LoginWithPhoneAndSmsCodeByLoginPayload {
+  # 客户端变更 ID
+  clientMutationId: ID
+
+  # 访问令牌
+  accessToken: String!
+
+  # 角色类型
+  role: String!
+
+  # 当前用户
+  me: User
+}
+
+# 用户
+type User {
+  # ID
+  id: ID!
+
+  # 角色
+  role: String!
+
+  # 用户积分
+  point: Int
+
+  # 余额
+  balance: Int
+
+  # 会员到期日期
+  memberExpiredDate: String
+
+  # 号码
+  phone: Phone
+
+  # 微信信息
+  wechat: Wechat
+}
+
+type Wechat {
+  # 开放ID
+  openId: String
+
+  # 用户微信昵称
+  nickname: String
+
+  # 用户头像
+  avatarUrl: String
+}
+
+# 获取个人详细信息
+type UserInfo {
+  id: ID
+  imageUrl: String
+  nickname: String
+  recordBalance: Int
+  balance: Int
+  point: Int
+  role: String
+  memberExpiredDate: Int
+  phone: String
+  # 收藏的商品数量
+  follow: Int
+  # 粉丝数量
+  fans: Int
+  fanList: [FanInfo]
+}
+
+type FanInfo {
+  # 用户ID
+  id: ID
+  # 用户头像
+  imageUrl: String
+  # 用户姓名
+  nickname: String
+  # 用户积分
+  point: Int
+  # 用户权限
+  role: String
+}
+
+input WithdrawalInput {
+  # 备注信息
+  remark: String
+}
+
+type ConsoleHome {
+  # 总销售额
+  allSales: Int
+  # 新增销售额
+  newSales: Int
+  # 总用户
+  users: Int
+  # 新增用户
+  newUsers: Int
+  # 总订单
+  orders: Int
+  # 新增订单
+  newOrders: Int
+}
+
+type AllFinancial {
+  # 总销售额
+  totalSales: Int
+  # 月销售额
+  monthSales: Int
+  # 周销售额
+  weekSales: Int
+  # 日销售额
+  daySales: Int
+}
+
+input FetchUsersInput {
+  # 角色类型
+  role: Role
+
+  pageSize: Int
+
+  currentPage: Int
+}
+
+type UserPagination {
+  list: [User]!
+  pagination: PageInfo
+}
+
+enum Role {
+  # 财务
+  financial
+  # 商户
+  merchant
+  # 商户管理员
+  keep
+  # 广告管理员
+  advertising
+  # 商品管理员
+  commodity
+  # 会员(分销)
+  member
+  # 普通用户
+  user
+}
+
+# type StoreSales {
+#   # 总销售额
+#   totalSales: Int
+#   # 月销售额
+#   monthSales: Int
+#   # 周销售额
+#   weekSales: Int
+#   # 日销售额
+#   daySales: Int
+# }

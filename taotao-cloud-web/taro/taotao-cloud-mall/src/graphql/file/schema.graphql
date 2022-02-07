@@ -1,0 +1,20 @@
+# 上传参数
+type UploadParams {
+  # 文件名。
+  key: String!
+
+  # 用户请求的accessid。
+  accessid: String!
+
+  # 用户要往哪个域名发送上传请求。
+  host: String!
+
+  # 用户表单上传的策略（Policy），是经过base64编码过的字符串。详情请参见Post Policy（https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.34.604d554dL9pwwv#section-d5z-1ww-wdb）。
+  policy: String!
+
+  # 对变量policy签名后的字符串。
+  signature: String!
+
+  # 上传策略Policy失效时间，在服务端指定。失效时间之前都可以利用此Policy上传文件，无需每次上传都去服务端获取签名。
+  expire: Int!
+}

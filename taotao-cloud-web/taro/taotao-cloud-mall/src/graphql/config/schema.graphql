@@ -1,0 +1,14 @@
+type Config {
+    # 主键
+    key: String
+
+    # 名称
+    name: String
+
+    # 类型
+    type: String
+
+    # 值
+    value: String
+
+}

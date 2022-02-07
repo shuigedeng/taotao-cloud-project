@@ -1,0 +1,10 @@
+type Address {
+  # 收货人名称
+  receiverName: String
+
+  # 收货手机号
+  receiverPhone: String
+
+  # 收货地址
+  receiverAddress: String
+}

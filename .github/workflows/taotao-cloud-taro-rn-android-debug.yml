@@ -1,0 +1,129 @@
+# 工作流名称
+name: assemble taro rn android debug
+
+# 触发工作流程的事件
+on:
+  push:
+    paths:
+      - 'taotao-cloud-web/taro/taotao-cloud-mall/**'
+    branches: [ v1 ]
+    tags: [ v* ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+# 工作流环境变量
+env:
+  # 应用的application_id
+  APP_ID: com.taro.demo
+  # 应用名称
+  APP_NAME: Taro Demo
+  # 应用icon
+  APP_ICON: ic_launcher
+  # 应用圆角icon
+  APP_ROUND_ICON: ic_launcher_round
+  # 应用支持的CPU架构
+  APP_ABI_FILTERS: armeabi-v7a, arm64-v8a
+  # 打包类型
+  BUILD_TYPE: debug
+  # 版本名称
+  VERSION_NAME: 1.0.0
+  # 版本号
+  VERSION_CODE: 10
+  # 密钥库文件
+  KEYSTORE_FILE: debug.keystore
+  # 密钥库口令
+  KEYSTORE_PASSWORD: android
+  # 密钥库别名
+  KEYSTORE_KEY_ALIAS: androiddebugkey
+  # 密钥库别名口令
+  KEYSTORE_KEY_PASSWORD: android
+
+defaults:
+  run:
+    working-directory: ${{ github.workspace }}/taotao-cloud-web/taro/taotao-cloud-mall
+
+# 工作流作业
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout project
+        uses: actions/checkout@v2
+
+      - name: cache node_modules folder
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/node_modules
+          key: ${{ runner.os }}-node_modules
+          restore-keys: ${{ runner.os }}-node_modules
+
+      - name: get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: cache yarn
+        uses: actions/cache@v2
+        env:
+          cache-name: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: install Dependencies
+        run: |
+          yarn
+
+      - name: build taro react native bundle
+        run: |
+          yarn build:rn --platform android
+
+      - name: cache gradle
+        uses: actions/cache@v2
+        env:
+          cache-name: gradle-cache
+        with:
+          path: ~/.gradle
+          key: ${{ runner.os }}-gradle
+          restore-keys: |
+            ${{ runner.os }}-gradle
+
+      - name: assemble android ${{ env.BUILD_TYPE }}
+        run: |
+          cd ./android && \
+          ./gradlew assemble${{ env.BUILD_TYPE }} \
+            -Papp_id=${{ env.APP_ID }} \
+            -Papp_name='${{ env.APP_NAME }}' \
+            -Papp_icon=${{env.APP_ICON}} \
+            -Papp_round_icon=${{env.APP_ROUND_ICON}} \
+            -Pversion_code=${{ env.VERSION_CODE }} \
+            -Pversion_name=${{ env.VERSION_NAME }} \
+            -Pabi_filters='${{ env.APP_ABI_FILTERS }}' \
+            -Pkeystore_file='${{ env.KEYSTORE_FILE }}' \
+            -Pkeystore_password='${{ env.KEYSTORE_PASSWORD }}' \
+            -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
+            -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
+
+      - name: upload android products
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-${{ env.BUILD_TYPE }}
+          path: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+
+      - name: release taro react native bundle
+        uses: zhiqingchen/taro-react-native-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          appname: taotao-cloud
+          logo: https://pic3.58cdn.com.cn/nowater/fangfe/n_v25b1523466b894881b9bdeda7618a8af2.png
+
+      - name: release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: readme.md
+          files: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
+
