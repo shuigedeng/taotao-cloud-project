@@ -12,13 +12,13 @@
 <dependency>
   <groupId>io.github.shuigedeng</groupId>
   <artifactId>taotao-cloud-starter-zookeeper</artifactId>
-  <version>2022.01</version>
+  <version>2022.02</version>
 </dependency>
 ```
 
 ### gradle
 ```groovy
-compile("io.github.shuigedeng:taotao-cloud-starter-zookeeper:2022.01")
+compile("io.github.shuigedeng:taotao-cloud-starter-zookeeper:2022.02")
 ```
 
 ## 配置
