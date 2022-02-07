@@ -1,0 +1,31 @@
+const ZH_CN = {
+  'app.login.title': '滔滔cloud后台管理系统',
+  'app.login.desc': '滔滔cloud微服务前后端分离架构开发平台',
+  'app.login.loading': '登录中...',
+  'app.login.account.login': '账号登录',
+  'app.login.mobile.login': '手机登录',
+  'app.login.require.username': '请输入帐户名或邮箱地址',
+  'app.login.require.password': '请输入密码',
+  'app.login.require.mobile': '请输入手机号',
+  'app.login.require.imgCode': '请输入验证码',
+  'app.login.require.smsCode': '请输入短信验证码',
+  'app.login.get.smsCode': '获取验证码',
+  'app.login.resend.smsCode': ' s秒后重新发送',
+  'app.login.imgCode.error': '加载验证码失败',
+  'app.login.auto': '自动登录',
+  'app.login.forget.password': '忘记密码',
+  'app.login.submit': '确定',
+  'app.login.other.login': '其他登录方式',
+  'app.login.register': '注册账户',
+  'app.login.help': '帮助',
+  'app.login.privacy': '隐私',
+  'app.login.terms': '条款',
+  'app.login.copyright': 'Copyright &copy; 2020 滔滔cloud技术小组',
+  'App.datePicker.title': '日期选择',
+  'InjectExample.alert': '我是提醒',
+  'InjectExample.button': '弹窗',
+  'InjectExample.description': '我是描述',
+  'dashboard.graphics.display': '图形全屏展示'
+}
+
+export default ZH_CN

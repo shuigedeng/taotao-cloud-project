@@ -1,0 +1,10 @@
+type Trade {
+  # id
+  id: ID
+
+  # 支付金额
+  price: Int
+
+  # 状态
+  status: String
+}

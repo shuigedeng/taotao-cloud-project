@@ -1,0 +1,240 @@
+@import '../../app.less';
+
+.itemImage {
+  width: 150px;
+  height: 150px;
+}
+.orderInformation_top_status {
+  margin: 15Px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item_box {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #EDEDED;
+  padding-bottom: 10PX;
+}
+.item_title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+  font-size: 30px;
+  color: #585858;
+  margin-bottom: 10PX;
+}
+.item_right_box {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.item_number {
+  font-size: 34px;
+  color: #585858;
+  margin-right:10PX;
+}
+.item_price {
+  font-size: 32px;
+  color: #e60012;
+}
+.item_right_bottom_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.thickLine {
+  width: 100%;
+  height: 1Px;
+  background-color: #f8f8f8;
+}
+.thinLine {
+  width: 710px;
+  height: 1px;
+  background-color: #dddddd;
+  margin: 30px 20px;
+}
+.amount_information {
+  margin: 15Px;
+}
+.one_amount_information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5PX;
+}
+.amount_title {
+  font-size: 34px;
+  color: #3b3b3b;
+}
+.amount_text {
+  font-size: 34px;
+  color: #585858;
+}
+.item_total_price {
+  font-size: 40px;
+  color: #f74a33;
+}
+.total_price_box {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  align-items: center;
+}
+.item_total {
+  font-size: 36px;
+  color: #1e1e1e;
+}
+.delivery {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  // border-bottom: 1px solid #dddddd;
+}
+.deliveryInformation_box {
+  margin: 15Px;
+  margin-bottom: 40px;
+}
+.distribution_text {
+  font-size: 30px;
+}
+.distribution_text_box {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.delivery_title {
+  font-size: 30px;
+  width: 145px;
+  display: inline-block;
+  color: #b1b0b0;
+}
+.copy {
+  font-size: 30px;
+  color: #b1b0b0;
+  position: absolute;
+  right: 20px;
+  padding: 5px 10px;
+  border: 1px solid #b1b0b0;
+}
+.delivery_text {
+  font-size: 32px;
+  color: #2a2a2a;
+  font-weight: 500;
+}
+.delivery_text_number{
+  font-size: 36px;
+  color: #2a2a2a;
+  font-weight: 500;
+}
+.top_line{
+  margin:15PX;
+}
+.store_text{
+  font-size: 36px;
+  color:#2a2a2a;
+  font-weight: 500;
+}
+.store_line{
+  display: flex;
+  flex-direction: column;
+  border-top: 1PX solid #EDEDED;
+  border-bottom: 1PX solid #EDEDED;
+  padding: 25px 0;
+  margin-top: 10px;
+}
+.delivery_text_store{
+  font-size: 30px;
+  color:#222222;
+}
+.store_information{
+  margin:15PX;
+}
+.pickup_box{
+  margin: 15Px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #EDEDED;
+  padding-bottom: 15PX;
+}
+.pickup_text{
+  font-size: 15PX;
+  margin-right: 50Px;
+  margin-left: 5PX;
+}
+.information_code{
+  font-size: 26Px;
+
+}
+.items_view{
+  margin:15PX;
+}
+.item_big_box{
+  margin-top: 10PX;
+}
+.pcik_time{
+  padding: 2Px 5Px;
+  background-color: @mainColor;
+  color: #fff;
+  font-size: 12PX;
+}
+.pick{
+  font-size: 12Px;
+}
+.pick_box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.pick_view{
+  margin:15PX;
+  border-bottom: 1rpx solid #EDEDED;
+  padding-bottom: 10PX;
+}
+.buyingPatterns{
+  font-size: 12PX;
+  padding: 2PX 10PX;
+  background-color: @mainColor;
+  color: #fff;
+  border-radius: 10PX;
+}
+.consignee{
+  font-size: 30rpx;
+color: #222222;
+margin-right: 30PX;
+}
+.address_view{
+  margin:15PX;
+  border-bottom: 1px solid #EDEDED;
+  padding-bottom: 15PX;
+}
+.bottom_view{
+  margin:15PX;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom_view_text{
+  border-radius: 5Px;
+  border: 1PX solid #585858;
+  background-color: #fff;
+  font-size: 14PX;
+  color:#000;
+}
+// .button {
+//   font-size: 31px;
+//   color: #666;
+//   padding: 0;
+//   background-color: #fff;
+//   width: 600px;
+//   text-align: left !important;
+// }
+.bottom_view_text::after {
+  border: none;
+}

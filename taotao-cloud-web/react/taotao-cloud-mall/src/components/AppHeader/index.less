@@ -1,0 +1,64 @@
+@height: 60px;
+.app-header {
+  @height: 60px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  box-sizing: border-box;
+  padding: 15px 10px;
+  justify-content: center;
+  align-items: center;
+
+  &.scroll {
+    background-color: rgba(255, 255, 255, 0.81);
+    box-shadow: 0px 4px 14px #00000026;
+
+    .icon {
+      color: #000;
+    }
+  }
+
+  .icon {
+    display: block;
+    width: @height;
+    height: @height;
+    line-height: @height;
+    font-size: @height * 0.8;
+    color: #fff;
+  }
+
+  .input-container {
+    box-sizing: border-box;
+    height: @height;
+    line-height: @height;
+    display: flex;
+    flex: 1;
+    text-align: center;
+    border-radius: @height;
+    background: rgba(231, 231, 231, 0.7);
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    padding: 20px 0;
+    box-shadow: 0 0 6px #00000026;
+    border: 1px solid #b3b3b3;
+
+    .iconfont {
+      font-size: 35px;
+      margin-right: 20px;
+      color: rgb(96, 98, 102);
+    }
+
+    .input {
+      font-size: 32px;
+      border: none;
+      color: rgb(96, 98, 102);
+      outline: none;
+      background: transparent;
+    }
+  }
+}

@@ -1,0 +1,128 @@
+#userLayout.user-layout-wrapper {
+  height: 100%;
+  overflow: hidden;
+
+  .login-container {
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5 url(../../../src/assets/background.svg) no-repeat 50%;
+    background-size: 100%;
+    padding: 164px 0 185px;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-top {
+      text-align: center;
+      margin-top: -80px;
+
+      .login-header {
+        height: 45px;
+        line-height: 45px;
+
+        .login-logo {
+          height: 44px;
+          vertical-align: top;
+          margin-right: 28px;
+          border-style: none;
+        }
+
+        .login-title {
+          font-size: 33px;
+          color: rgba(0, 0, 0, .85);
+          font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+          font-weight: 600;
+          position: relative;
+          top: 2px;
+        }
+      }
+
+      .desc {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 12px;
+        margin-bottom: 40px;
+      }
+    }
+
+    .login-main {
+      min-width: 260px;
+      width: 368px;
+      margin: 0 auto;
+      height: 400px;
+    }
+
+    .login-footer {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      padding: 30px 16px;
+      margin: 48px 0 auto;
+      text-align: center;
+
+      .links {
+        margin-bottom: 8px;
+        font-size: 14px;
+
+        a {
+          color: rgba(0, 0, 0, 0.45);
+          transition: all 0.3s;
+
+          &:not(:last-child) {
+            margin-right: 40px;
+          }
+        }
+      }
+
+      .copyright {
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.user-layout-login {
+  .getCaptcha {
+    display: block;
+    width: 100%;
+    height: 40px;
+  }
+
+  .forge-password {
+    font-size: 14px;
+  }
+
+  .login-button {
+    padding: 0 15px;
+    font-size: 16px;
+    height: 40px;
+    width: 100%;
+  }
+
+  .user-login-other {
+    text-align: left;
+    margin-top: 24px;
+    line-height: 22px;
+
+    .item-icon {
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.2);
+      margin-left: 16px;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+
+    .register {
+      float: right;
+    }
+  }
+}

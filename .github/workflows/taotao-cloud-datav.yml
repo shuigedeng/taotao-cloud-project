@@ -3,7 +3,7 @@ name: assemble datav
 on:
   push:
     paths:
-      - 'taotao-cloud-web/taotao-cloud-datav/**'
+      - 'taotao-cloud-web/vue3/taotao-cloud-datav/**'
   pull_request:
     branches: [ master ]
 
@@ -11,7 +11,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/taotao-cloud-datav
+    working-directory: ./taotao-cloud-web/vue3/taotao-cloud-datav
 
 jobs:
   assemble:

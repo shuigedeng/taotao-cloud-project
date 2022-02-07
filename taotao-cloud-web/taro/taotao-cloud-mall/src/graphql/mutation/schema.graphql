@@ -1,0 +1,156 @@
+# 变更
+type Mutation {
+  # 通过微信code换取令牌
+  generateAccessTokenByLoginWithWeChatCode(
+    code: String!
+    imageUrl: String
+    nickname: String
+  ): String!
+
+  # 添加图片
+  addBanner(input: BannerInput): Banner
+
+  # 更新图片
+  updateBanner(input: BannerInput): Banner
+
+  # 删除图片
+  deleteBanner(id: ID): Boolean
+
+  # 添加商品分类
+  createClassify(input: CreateClassifyInput): Classify
+
+  # 更新商品分类
+  updateClassify(input: UpdateClassifyInput): Classify
+
+  # 删除商品分类
+  deleteClassify(id: ID): Boolean
+
+  # 发送短信验证码
+  sendSmsCode(phone: String!): String
+
+  # 通过短信验证码登录
+  loginWithPhoneAndSmsCodeByLogin(
+    phone: String!
+    code: String!
+  ): LoginWithPhoneAndSmsCodeByLoginPayload
+
+  # 绑定手机号
+  bindPhoneByUser(code: String!, encryptedData: String!, iv: String!): Phone
+
+  # 新建商品
+  createItem(input: CreateItemInput): Item
+
+  # 更新商品
+  updateItem(input: CreateItemInput): Item
+
+  # 删除商品
+  deleteItem(code: ID!): Boolean
+
+  # 创建店铺
+  createStore(input: StoreInput): Store
+
+  # 更新店铺
+  updateStore(input: StoreInput): Store
+
+  # 删除店铺
+  deleteStore(id: ID): Boolean
+
+  # 创建订单
+  createOrder(input: CreateOrderInput!): Payment
+
+  # 创建余额订单
+  createBalanceOrder(input: CreateOrderInput!): Boolean
+
+  # 店铺上架下架
+  updateStoreStatus(input: UpdateStoreStatusInput!): Boolean
+
+  # 商品上架下架
+  updateItemStatus(input: UpdateItemStatusInput!): Boolean
+
+  # 备货完成
+  updateOrderStatus(id: ID!, name: String, phone: String): Boolean
+
+  # 取货
+  drawItem(code: String!): Boolean
+
+  # 扫码邀请用户
+  invitedUsers(invitedId: ID!): Boolean
+
+  # 创建优惠券(发放)
+  createIssueCoupon(input: CreateIssueCouponInput): IssueCoupon
+
+  # 更新优惠券(发放)
+  updateIssueCoupon(input: CreateIssueCouponInput): IssueCoupon
+
+  # 删除优惠券(发放)
+  deleteIssueCoupon(id: ID!): Boolean
+
+  # 优惠券领取
+  drawCoupon(id: ID!): Coupon!
+
+  # 更新系统配置
+  updateConfig(primaryKey: String, value: String): Config
+
+  # 收藏商品
+  addCollection(itemCode: ID!, status: String): Boolean!
+
+  # 创建专题
+  createProject(input: ProjectInput): Project
+
+  # 创建专题
+  updateProject(input: ProjectInput): Project
+
+  # 删除专题
+  deleteProject(id: ID!): Boolean
+
+  # 更新商品专题
+  updateItemToProject(input: UpdateItemToProjectInput): Boolean
+
+  # 添加收款账户
+  addAccount(input: AccountInput!): Account
+
+  # 更新收款账户
+  updateAccount(input: AccountInput!): Account
+
+  # 申请提现
+  toApplyForCashWithdrawals(input: WithdrawalInput): Withdrawal
+
+  # 商户提现
+  merchantWithdrawals: Withdrawal
+
+  # 审核
+  passAudit(id: ID!, status: AuditType!): Boolean
+
+  # 审核（打款）
+  audit(id: ID!): Boolean
+
+  test: String
+
+  # 创建充值（非用户充值）
+  createTopUp(input: TopUpInput!): TopUp
+
+  # 更新充值
+  updateTopUp(input: TopUpInput!): TopUp
+
+  # 删除充值
+  deleteTopUp(id: ID!): Boolean
+
+  # 用户充值
+  userTopUp(id: ID!): Payment
+
+  # 批量修改商品状态
+  testCreate(status: String): Boolean
+
+  # 批量修改分类
+  testUpdate(itemClassifyId: ID): Boolean
+
+  # 领取卡片
+  drawCard(code: Int): Boolean
+
+  # 电视登录
+  tvLogin(phone: String!, code: String!): LoginWithPhoneAndSmsCodeByLoginPayload
+
+  # 更新用户权限
+  updateUserRole(id: ID!, role: Role): Boolean
+
+}

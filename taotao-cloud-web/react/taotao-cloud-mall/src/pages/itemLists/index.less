@@ -1,0 +1,84 @@
+@import '../../app.less';
+
+.arrow {
+  width: 45px;
+  height: 40px;
+}
+.price_stort {
+  display: flex;
+  align-items: center;
+}
+.sortingOptions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.ortherIcon {
+  width: 30px;
+  height: 30px;
+}
+.image {
+  width: 100%;
+  height: 260px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.sorted_text {
+  font-size: 32px;
+  color: #7e7e7e;
+  margin-right: 6px;
+}
+.item_box {
+  border-radius: 15px;
+  color: #f74c2f;
+  width: 46%;
+  min-height: auto;
+  border: 1px solid #f7f7f7;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.items_box {
+  display: flex;
+  padding: 20px;
+  margin-top: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /*这个数字是设置要显示省略号的行数*/
+  -webkit-box-orient: vertical;
+  font-size: 32px;
+  color: #6a6a6a;
+}
+.item_bottom_box {
+  background-color: #fff;
+  padding: 15px;
+  margin-top: -10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.price {
+  font-size: 34px;
+}
+.priceLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5PX;
+}
+.originalPrice{
+  text-decoration: line-through;
+  font-size: 30px;
+  margin-right: 25Px;
+  color:#7e7e7e;
+}
+.memberPrice {
+  background-color: @mainColor;
+  border-radius: 60px;
+  padding: 5px 10px;
+  font-size: 25px;
+  color:#fff;
+}

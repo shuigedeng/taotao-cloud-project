@@ -3,7 +3,7 @@ name: assemble front
 on:
   push:
     paths:
-      - 'taotao-cloud-web/taotao-cloud-front/**'
+      - 'taotao-cloud-web/vue3/taotao-cloud-front/**'
   pull_request:
     branches: [ master ]
 
@@ -11,7 +11,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./taotao-cloud-web/taotao-cloud-front
+    working-directory: ./taotao-cloud-web/vue3/taotao-cloud-front
 
 jobs:
   assemble:

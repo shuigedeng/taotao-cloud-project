@@ -1,0 +1,28 @@
+type Classify {
+  # id
+  id: ID
+
+  # 标题
+  title: String
+
+  # 图片路径
+  imageUrl: String
+}
+
+input CreateClassifyInput {
+  # 名称
+  title: String!
+  
+  # 图片Key值
+  imageKey: String!
+}
+
+input UpdateClassifyInput {
+  # id
+  id: ID!
+  # 名称
+  title: String
+  
+  # 图片Key值
+  imageKey: String
+}

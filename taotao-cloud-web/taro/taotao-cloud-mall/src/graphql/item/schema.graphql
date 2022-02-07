@@ -1,0 +1,152 @@
+type Item {
+  # id
+  code: ID
+
+  # 名称
+  name: String
+
+  # 主图
+  imageUrl: String
+
+  # 简介
+  content: String
+
+  # 原价
+  originalPrice: Int
+
+  # 佣金
+  commission: Int
+
+  # 价格
+  price: Int
+
+  # 会员价
+  memberPrice: Int
+
+  # 积分最大抵扣金额
+  pointDiscountPrice: Int
+
+  # 单位
+  unit: String
+
+  # 库存
+  stock: Int
+
+  # 类型
+  type: ItemType
+
+  # 专享/普通
+  kind: ItemType
+
+  # 状态
+  status: String
+
+  # 关注情况
+  followed: Boolean
+}
+
+type ItemPagination {
+  list: [Item]!
+  pagination: PageInfo
+}
+
+type PageInfo {
+  pageSize: Int
+  total: Int
+  current: Int
+}
+# 创建商品参数
+input CreateItemInput {
+  # 条形码
+  code: ID
+  # 主图
+  imageKey: String
+
+  # 商品名称
+  name: String
+
+  # 简介
+  content: String
+
+  # 最大积分抵扣金额
+  pointDiscountPrice: Int
+
+  # 原价
+  originalPrice: Int
+
+  # 价格
+  price: Int
+
+  # 会员价
+  memberPrice: Int
+
+  # 佣金
+  commission: Int
+
+  # 单位
+  unit: String
+
+  # 库存
+  stock: Int
+
+  # 类型
+  type: ItemType
+
+  # 专享/普通
+  kind: ItemType
+
+  # 商品分类的 ID
+  itemClassifyId: ID
+
+  # 商品详情图片
+  itemImages: [ItemImageInput]
+}
+
+input ItemImageInput {
+  # 图片key值
+  imageKey: String
+}
+
+# 商品上架下架参数
+input UpdateItemStatusInput {
+  # 商品的 ID
+  code: ID!
+
+  # 状态
+  status: ItemStatus
+}
+
+input UpdateItemToProjectInput {
+  # 商品 ID
+  itemCode: ID!
+
+  # 专题 ID
+  projectId: ID
+
+  # 类型
+  type: UpdateItemToProjectType
+}
+
+enum UpdateItemToProjectType {
+  # 添加
+  add
+
+  # 移除
+  remove
+}
+
+enum ItemStatus {
+  # 上架
+  published
+
+  # 下架
+  draft
+}
+
+enum ItemType {
+  # 可退款类型（普通）
+  ordinary
+
+  # 不可退款类型（专享）
+  special
+}
