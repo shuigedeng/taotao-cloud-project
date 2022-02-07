@@ -53,4 +53,22 @@ public class RedisConstant {
 	 * 敏感词key
 	 */
 	public static final String SENSITIVE_WORDS_KEY = "SENSITIVE:WORDS:KEY";
+
+
+	/**
+	 * regions patten key
+	 */
+	public static final String REGIONS_PATTERN = "REGIONS:";
+	/**
+	 * regions key
+	 */
+	public static final String REGIONS_KEY = "REGIONS:KEY";
+	/**
+	 * regions all city key
+	 */
+	public static final String REGIONS_ALL_CITY_KEY = "REGIONS:ALL:CITY:KEY";
+	/**
+	 * region parent id key
+	 */
+	public static final String REGIONS_PARENT_ID_KEY = "REGIONS:PARENT:ID:KEY:";
 }

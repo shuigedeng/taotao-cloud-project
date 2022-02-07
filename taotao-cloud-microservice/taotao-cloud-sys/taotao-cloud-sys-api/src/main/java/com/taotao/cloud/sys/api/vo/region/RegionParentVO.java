@@ -47,6 +47,4 @@ public record RegionParentVO(
 	 */
 	@Schema(description = "子数据")
 	List<RegionParentVO> children) {
-
-
 }

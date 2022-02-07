@@ -2676,7 +2676,7 @@ public class RedisRepository {
 	 * 添加到缓存
 	 *
 	 * @param key   the key
-	 * @param value the value¬
+	 * @param value the value
 	 * @author shuigedeng
 	 * @since 2021-09-07 21:04:53
 	 */

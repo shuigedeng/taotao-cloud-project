@@ -17,9 +17,11 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.api.vo.region.RegionVO;
 import com.taotao.cloud.sys.biz.entity.Region;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
+import java.util.Map;
 
 /**
  * SysRegionService
@@ -48,6 +50,9 @@ public interface IRegionService extends BaseSuperService<Region, Long> {
 	 * @since 2021-10-09 20:37:36
 	 */
 	List<RegionParentVO> tree();
-
+	List<RegionVO> getAllCity();
+	void synchronizationData(String url);
 	List<RegionTreeVO> treeOther();
+	List<Region> getItem(Long parentId);
+	Map<String, Object> getRegion(String cityCode, String townName);
 }

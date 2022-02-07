@@ -70,8 +70,8 @@ public class Region extends SuperEntity<Region,Long> {
 	 *  "district:区县" +
 	 *  "street:街道"
 	 */
-	@Column(name = "level", nullable = false, columnDefinition = "int not null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
-	private Integer level;
+	@Column(name = "level", nullable = false, columnDefinition = "varchar(255) null comment '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
+	private String level;
 
 	/**
 	 * 城市编码
@@ -88,7 +88,7 @@ public class Region extends SuperEntity<Region,Long> {
 	/**
 	 * 城市中心纬度
 	 */
-	@Column(name = "lat", columnDefinition = "varchar(255) null comment '城市中心经度'")
+	@Column(name = "lat", columnDefinition = "varchar(255) null comment '城市中心纬度'")
 	private String lat;
 
 	@Column(name = "path", columnDefinition = "varchar(255) null comment '行政地区路径，类似：1，2，3'")
@@ -123,11 +123,11 @@ public class Region extends SuperEntity<Region,Long> {
 		this.name = name;
 	}
 
-	public Integer getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(Integer level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
@@ -179,20 +179,19 @@ public class Region extends SuperEntity<Region,Long> {
 		this.lastModifiedTime = lastModifiedTime;
 	}
 
-	public Region() {
+	public String getPath() {
+		return path;
 	}
 
-	public Region(String code, String name, Integer level, String cityCode, String lng,
-		String lat, Long parentId, LocalDateTime createTime,
-		LocalDateTime lastModifiedTime) {
-		this.code = code;
-		this.name = name;
-		this.level = level;
-		this.cityCode = cityCode;
-		this.lng = lng;
-		this.lat = lat;
-		this.parentId = parentId;
-		this.createTime = createTime;
-		this.lastModifiedTime = lastModifiedTime;
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
 	}
 }
