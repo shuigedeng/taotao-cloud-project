@@ -1,3 +1,5 @@
+import org.gradle.plugins.ide.idea.model.Jdk
+
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
@@ -23,3 +25,6 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
+
+
+

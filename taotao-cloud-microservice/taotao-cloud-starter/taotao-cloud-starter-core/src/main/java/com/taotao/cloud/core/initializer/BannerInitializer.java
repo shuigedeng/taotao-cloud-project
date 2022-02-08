@@ -16,23 +16,31 @@
 package com.taotao.cloud.core.initializer;
 
 import static com.taotao.cloud.common.constant.CommonConstant.SPRING_BOOT_VERSION;
-import static com.taotao.cloud.common.constant.CommonConstant.SPRING_CLOUD_ALIBABA_VERSION;
-import static com.taotao.cloud.common.constant.CommonConstant.SPRING_CLOUD_VERSION;
-import static com.taotao.cloud.common.constant.CommonConstant.SPRING_VERSION;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BACKEND;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BACKEND_URL;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BLOG;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_BLOG_URL;
-import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAX;
-import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAX_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAV;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DATAV_URL;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_DEFAULT_RESOURCE_LOCATION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITEE;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITEE_URL;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_GITHUB_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_M;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_MANAGER;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_MANAGER_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_MERCHANT;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_MERCHANT_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_M_URL;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_OPEN;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_OPEN_URL;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_BANNER_URL;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_BOOT_VERSION;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION;
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_CLOUD_DEPENDENCIES_VERSION;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_CLOUD_VERSION;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_SPRING_VERSION;
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_VERSION;
@@ -45,10 +53,13 @@ import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.core.version.SpringCloudAlibabaVersion;
+import com.taotao.cloud.core.version.SpringCloudDependenciesVersion;
+import com.taotao.cloud.core.version.SpringCloudVersion;
+import com.taotao.cloud.core.version.TaoTaoCloudVersion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -90,30 +101,46 @@ public class BannerInitializer implements
 			int rightCellPadding = 1;
 
 			show(logoBanner,
-				new Description(TAOTAO_CLOUD_BANNER, TAOTAO_CLOUD_BANNER_URL,
+				new Description(TAOTAO_CLOUD_VERSION,
+					TaoTaoCloudVersion.getVersion() == null ? environment.getProperty(VERSION, "")
+						: TaoTaoCloudVersion.getVersion(),
 					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_BANNER_DATAX, TAOTAO_CLOUD_BANNER_DATAX_URL,
-					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_BANNER_BACKEND, TAOTAO_CLOUD_BANNER_BACKEND_URL,
-					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_BANNER_GITHUB, TAOTAO_CLOUD_BANNER_GITHUB_URL,
-					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_BANNER_BLOG, TAOTAO_CLOUD_BANNER_BLOG_URL,
-					leftCellPadding, rightCellPadding),
-
-				new Description(TAOTAO_CLOUD_VERSION, environment.getProperty(VERSION, ""),
-					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_SPRING_VERSION, environment.getProperty(SPRING_VERSION,
-					Objects.requireNonNull(SpringVersion.getVersion())),
+				new Description(TAOTAO_CLOUD_SPRING_VERSION, SpringVersion.getVersion(),
 					leftCellPadding, rightCellPadding),
 				new Description(TAOTAO_CLOUD_SPRING_BOOT_VERSION,
 					environment.getProperty(SPRING_BOOT_VERSION, SpringBootVersion.getVersion()),
 					leftCellPadding, rightCellPadding),
-				new Description(TAOTAO_CLOUD_SPRING_CLOUD_VERSION,
-					environment.getProperty(SPRING_CLOUD_VERSION, ""),
+				new Description(TAOTAO_CLOUD_SPRING_CLOUD_VERSION, SpringCloudVersion.getVersion(),
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_SPRING_CLOUD_DEPENDENCIES_VERSION,
+					SpringCloudDependenciesVersion.getVersion(),
 					leftCellPadding, rightCellPadding),
 				new Description(TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION,
-					environment.getProperty(SPRING_CLOUD_ALIBABA_VERSION, ""),
+					SpringCloudAlibabaVersion.getVersion(),
+					leftCellPadding, rightCellPadding),
+
+				new Description("", "",
+					leftCellPadding, rightCellPadding),
+
+				new Description(TAOTAO_CLOUD_BANNER, TAOTAO_CLOUD_BANNER_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_BLOG, TAOTAO_CLOUD_BANNER_BLOG_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_M, TAOTAO_CLOUD_BANNER_M_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_DATAV, TAOTAO_CLOUD_BANNER_DATAV_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_MANAGER, TAOTAO_CLOUD_BANNER_MANAGER_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_MERCHANT, TAOTAO_CLOUD_BANNER_MERCHANT_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_OPEN, TAOTAO_CLOUD_BANNER_OPEN_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_BACKEND, TAOTAO_CLOUD_BANNER_BACKEND_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_GITEE, TAOTAO_CLOUD_BANNER_GITEE_URL,
+					leftCellPadding, rightCellPadding),
+				new Description(TAOTAO_CLOUD_BANNER_GITHUB, TAOTAO_CLOUD_BANNER_GITHUB_URL,
 					leftCellPadding, rightCellPadding)
 			);
 		}
@@ -141,8 +168,7 @@ public class BannerInitializer implements
 			System.out.println(logoBanner.getPlainBanner());
 		}
 
-		List<Description> descriptions = new ArrayList<>();
-		descriptions.addAll(Arrays.asList(descriptionList));
+		List<Description> descriptions = new ArrayList<>(Arrays.asList(descriptionList));
 
 		DescriptionBanner descriptionBanner = new DescriptionBanner();
 		System.out.println(descriptionBanner.getBanner(descriptions));
