@@ -38,6 +38,7 @@ public class JavaMailTemplate implements MailTemplate {
 
 	private final MailProperties mailProperties;
 
+
 	public JavaMailTemplate(JavaMailSender mailSender,
 		MailProperties mailProperties) {
 		this.mailSender = mailSender;
