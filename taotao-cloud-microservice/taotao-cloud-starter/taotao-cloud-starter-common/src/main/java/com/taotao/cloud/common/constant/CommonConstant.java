@@ -41,9 +41,10 @@ public class CommonConstant {
 
 	public static final String TAOTAO = "taotao";
 	public static final String CLOUD = "cloud";
+	public static final String DEPENDENCIES = "depend";
 	public static final String SPRING = "spring";
 	public static final String BOOT = "boot";
-	public static final String ALIBABA = "alibaba";
+	public static final String ALIBABA = "ali";
 	public static final String COLON = ":";
 	public static final String UNDER = "_";
 
@@ -52,26 +53,31 @@ public class CommonConstant {
 	 */
 	public static final String VERSION = "version";
 	public static final String TAOTAO_CLOUD_VERSION =
-		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+		VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_VERSION = "springVersion";
 	public static final String TAOTAO_CLOUD_SPRING_VERSION =
-		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+		SPRING.toUpperCase() + UNDER
 			+ VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_BOOT_VERSION = "springBootVersion";
 	public static final String TAOTAO_CLOUD_SPRING_BOOT_VERSION =
-		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+		 SPRING.toUpperCase() + UNDER
 			+ BOOT.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_CLOUD_VERSION = "springCloudVersion";
 	public static final String TAOTAO_CLOUD_SPRING_CLOUD_VERSION =
-		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+		SPRING.toUpperCase() + UNDER
 			+ CLOUD.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
+
+	public static final String SPRING_CLOUD_DEPENDENCIES_VERSION = "springCloudDependenciesVersion";
+	public static final String TAOTAO_CLOUD_SPRING_CLOUD_DEPENDENCIES_VERSION =
+		SPRING.toUpperCase() + UNDER
+			+ CLOUD.toUpperCase() + UNDER + DEPENDENCIES.toUpperCase() + UNDER + VERSION.toUpperCase() + COLON;
 
 	public static final String SPRING_CLOUD_ALIBABA_VERSION = "springCloudAlibabaVersion";
 	public static final String TAOTAO_CLOUD_SPRING_CLOUD_ALIBABA_VERSION =
-		TAOTAO.toUpperCase() + UNDER + CLOUD.toUpperCase() + UNDER + SPRING.toUpperCase() + UNDER
+		SPRING.toUpperCase() + UNDER
 			+ CLOUD.toUpperCase() + UNDER + ALIBABA.toUpperCase() + UNDER + VERSION.toUpperCase()
 			+ COLON;
 
@@ -79,12 +85,22 @@ public class CommonConstant {
 	public static final String TAOTAO_CLOUD_BANNER_DEFAULT = "WELCOME TO TAOTAO CLOUD";
 	public static final String TAOTAO_CLOUD_BANNER_GITHUB = "TAOTAO_CLOUD_GITHUB:";
 	public static final String TAOTAO_CLOUD_BANNER_GITHUB_URL = "https://github.com/shuigedeng/taotao-cloud-project";
+	public static final String TAOTAO_CLOUD_BANNER_GITEE = "TAOTAO_CLOUD_GITEE:";
+	public static final String TAOTAO_CLOUD_BANNER_GITEE_URL = "https://gitee.com/dtbox/taotao-cloud-project";
 	public static final String TAOTAO_CLOUD_BANNER_BLOG = "TAOTAO_CLOUD_BLOG:";
 	public static final String TAOTAO_CLOUD_BANNER_BLOG_URL = "https://blog.taotaocloud.top/";
-	public static final String TAOTAO_CLOUD_BANNER_DATAX = "TAOTAO_CLOUD_DATAX:";
-	public static final String TAOTAO_CLOUD_BANNER_DATAX_URL = "https://datax.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_DATAV = "TAOTAO_CLOUD_DATAV:";
+	public static final String TAOTAO_CLOUD_BANNER_DATAV_URL = "https://datav.taotaocloud.top/";
 	public static final String TAOTAO_CLOUD_BANNER_BACKEND = "TAOTAO_CLOUD_BACKEND:";
 	public static final String TAOTAO_CLOUD_BANNER_BACKEND_URL = "https://backend.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_MANAGER = "TAOTAO_CLOUD_MANAGER:";
+	public static final String TAOTAO_CLOUD_BANNER_MANAGER_URL = "https://manager.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_MERCHANT = "TAOTAO_CLOUD_MERCHANT:";
+	public static final String TAOTAO_CLOUD_BANNER_MERCHANT_URL = "https://merchant.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_OPEN = "TAOTAO_CLOUD_OPEN:";
+	public static final String TAOTAO_CLOUD_BANNER_OPEN_URL = "https://open.taotaocloud.top/";
+	public static final String TAOTAO_CLOUD_BANNER_M = "TAOTAO_CLOUD_M:";
+	public static final String TAOTAO_CLOUD_BANNER_M_URL = "https://m.taotaocloud.top/";
 	public static final String TAOTAO_CLOUD_BANNER = "TAOTAO_CLOUD:";
 	public static final String TAOTAO_CLOUD_BANNER_URL = "https://taotaocloud.top/";
 
