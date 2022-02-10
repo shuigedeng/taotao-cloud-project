@@ -7,7 +7,7 @@ package com.taotao.cloud.sys.biz.runner;
 import com.taotao.cloud.sys.biz.entity.QuartzJob;
 import com.taotao.cloud.sys.biz.service.QuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
-import com.taotao.cloud.web.quartz.QuartzManage;
+import com.taotao.cloud.web.quartz.QuartzManager;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class QuartzJobInit implements ApplicationRunner {
 	@Autowired
 	private QuartzJobService quartzJobService;
 	@Autowired
-	private QuartzManage quartzManage;
+	private QuartzManager quartzManager;
 
 	/**
 	 * 项目启动时重新激活启用的定时任务
@@ -35,7 +35,7 @@ public class QuartzJobInit implements ApplicationRunner {
 		List<QuartzJobModel> quartzJobModels = new ArrayList<>();
 
 		cn.hutool.core.bean.BeanUtil.copyProperties(quartzJobs, quartzJobModels);
-		quartzJobModels.forEach(quartzManage::addJob);
+		quartzJobModels.forEach(quartzManager::addJob);
 
 		System.out.println("--------------------定时任务注入完成---------------------");
 	}

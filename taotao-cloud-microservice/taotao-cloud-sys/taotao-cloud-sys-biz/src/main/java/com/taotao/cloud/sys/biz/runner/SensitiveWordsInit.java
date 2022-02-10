@@ -14,8 +14,6 @@ public class SensitiveWordsInit implements ApplicationRunner {
 
 	/**
 	 * consumer 启动时，实时更新一下过滤词
-	 *
-	 * @param args 启动参数
 	 */
 	@Override
 	public void run(ApplicationArguments args) {

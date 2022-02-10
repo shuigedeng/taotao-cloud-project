@@ -5,7 +5,7 @@
 package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.web.quartz.QuartzJobListener;
-import com.taotao.cloud.web.quartz.QuartzManage;
+import com.taotao.cloud.web.quartz.QuartzManager;
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -63,7 +63,7 @@ public class QuartzConfiguration {
 	}
 
 	@Bean
-	public QuartzManage quartzManage() {
-		return new QuartzManage();
+	public QuartzManager quartzManage() {
+		return new QuartzManager();
 	}
 }

@@ -1,30 +1,36 @@
 /**
- * Copyright (C) 2018-2020
- * All rights reserved, Designed By www.yixiang.co
- * 注意：
+ * Copyright (C) 2018-2020 All rights reserved, Designed By www.yixiang.co 注意：
  * 本软件为www.yixiang.co开发研制
  */
 package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.system.api.dto.QuartzJobDto;
-import com.taotao.cloud.system.api.dto.QuartzJobQueryCriteria;
-import com.taotao.cloud.system.api.dto.QuartzLogDto;
-import com.taotao.cloud.system.api.dto.QuartzLogQueryCriteria;
-import com.taotao.cloud.system.biz.service.QuartzJobService;
-import com.taotao.cloud.system.biz.service.QuartzLogService;
+import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
+import com.taotao.cloud.sys.biz.entity.QuartzJob;
+import com.taotao.cloud.sys.biz.entity.QuartzLog;
+import com.taotao.cloud.sys.biz.service.QuartzJobService;
+import com.taotao.cloud.sys.biz.service.QuartzLogService;
+import com.taotao.cloud.web.idempotent.Idempotent;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
-import groovy.util.logging.Log;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,111 +42,129 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author hupeng
- * @date 2019-01-07
- */
-@Slf4j
+@Validated
 @RestController
-@Api(tags = "系统:定时任务管理")
-@RequestMapping("/api/jobs")
+@RequestMapping("/sys/tools/quart")
+@Tag(name = "平台管理端-quartz定时任务管理API", description = "平台管理端-quartz定时任务管理API")
 public class QuartzJobController {
 
-    private static final String ENTITY_NAME = "quartzJob";
+	private static final String ENTITY_NAME = "quartzJob";
 
-    private final QuartzJobService quartzJobService;
-    private final IGenerator generator;
-    private final QuartzLogService quartzLogService;
+	private final QuartzJobService quartzJobService;
+	private final QuartzLogService quartzLogService;
 
+	public QuartzJobController(QuartzJobService quartzJobService,
+		QuartzLogService quartzLogService) {
+		this.quartzJobService = quartzJobService;
+		this.quartzLogService = quartzLogService;
+	}
 
-    public QuartzJobController(QuartzJobService quartzJobService, IGenerator generator, QuartzLogService quartzLogService) {
-        this.quartzJobService = quartzJobService;
-        this.generator = generator;
-        this.quartzLogService = quartzLogService;
-    }
+	@Operation(summary = "查询定时任务", description = "查询定时任务", method = CommonConstant.GET)
+	@RequestLogger(description = "查询定时任务")
+	@GetMapping
+	@PreAuthorize("@el.check('admin','timing:list')")
+	public Result<Map<String, Object>> getJobs(QuartzJobQueryCriteria criteria, Pageable pageable) {
+		Map<String, Object> stringObjectMap = quartzJobService.queryAll(criteria, pageable);
+		return Result.success(stringObjectMap);
+	}
 
-    @Log("查询定时任务")
-    @ApiOperation("查询定时任务")
-    @GetMapping
-    @PreAuthorize("@el.check('admin','timing:list')")
-    public ResponseEntity<Object> getJobs(QuartzJobQueryCriteria criteria, Pageable pageable) {
-        return new ResponseEntity<>(quartzJobService.queryAll(criteria, pageable), HttpStatus.OK);
-    }
+	@Operation(summary = "导出任务数据", description = "导出任务数据", method = CommonConstant.GET)
+	@RequestLogger(description = "导出任务数据")
+	@GetMapping(value = "/download")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria)
+		throws IOException {
+		List<QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
+		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
+			.map(e -> BeanUtil.copyProperties(e, QuartzJobDto.class))
+			.collect(Collectors.toList());
 
-    @Log("导出任务数据")
-    @ApiOperation("导出任务数据")
-    @GetMapping(value = "/download")
-    @PreAuthorize("@el.check('admin','timing:list')")
-    public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria) throws IOException {
-        quartzJobService.download(generator.convert(quartzJobService.queryAll(criteria), QuartzJobDto.class), response);
-    }
+		quartzJobService.download(collect, response);
+	}
 
-    @Log("导出日志数据")
-    @ApiOperation("导出日志数据")
-    @GetMapping(value = "/logs/download")
-    @PreAuthorize("@el.check('admin','timing:list')")
-    public void downloadLog(HttpServletResponse response, QuartzLogQueryCriteria criteria) throws IOException {
-        quartzLogService.download(generator.convert(quartzLogService.queryAll(criteria), QuartzLogDto.class), response);
-    }
+	@Operation(summary = "导出日志数据", description = "导出日志数据", method = CommonConstant.GET)
+	@RequestLogger(description = "导出日志数据")
+	@GetMapping(value = "/logs/download")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	public void downloadLog(HttpServletResponse response, QuartzLogQueryCriteria criteria)
+		throws IOException {
+		List<QuartzLog> quartzLogs = quartzLogService.queryAll(criteria);
+		List<QuartzLogDto> collect = quartzLogs.stream().filter(Objects::nonNull)
+			.map(e -> BeanUtil.copyProperties(e, QuartzLogDto.class))
+			.collect(Collectors.toList());
 
-    @ApiOperation("查询任务执行日志")
-    @GetMapping(value = "/logs")
-    @PreAuthorize("@el.check('admin','timing:list')")
-    public ResponseEntity<Object> getJobLogs(QuartzLogQueryCriteria criteria, Pageable pageable) {
-        return new ResponseEntity<>(quartzLogService.queryAll(criteria, pageable), HttpStatus.OK);
-    }
+		quartzLogService.download(collect, response);
+	}
 
-    @ForbidSubmit
-    @Log("新增定时任务")
-    @ApiOperation("新增定时任务")
-    @PostMapping
-    @PreAuthorize("@el.check('admin','timing:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody QuartzJobModel resources) {
-        if (resources.getId() != null) {
-            throw new BadRequestException("A new " + ENTITY_NAME + " cannot already have an ID");
-        }
-        return new ResponseEntity<>(quartzJobService.save(resources), HttpStatus.CREATED);
-    }
+	@Operation(summary = "查询任务执行日志", description = "查询任务执行日志", method = CommonConstant.GET)
+	@RequestLogger(description = "查询任务执行日志")
+	@GetMapping(value = "/logs")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	public Result<Map<String, Object>> getJobLogs(QuartzLogQueryCriteria criteria,
+		Pageable pageable) {
+		Map<String, Object> stringObjectMap = quartzLogService.queryAll(criteria, pageable);
+		return Result.success(stringObjectMap);
+	}
 
-    @ForbidSubmit
-    @Log("修改定时任务")
-    @ApiOperation("修改定时任务")
-    @PutMapping
-    @PreAuthorize("@el.check('admin','timing:edit')")
-    public ResponseEntity<Object> update(@Validated @RequestBody QuartzJobModel resources) {
-        quartzJobService.updateById(resources);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+	@Operation(summary = "新增定时任务", description = "新增定时任务", method = CommonConstant.POST)
+	@RequestLogger(description = "新增定时任务")
+	@Idempotent(key = "create", perFix = "quartzJob")
+	@PostMapping
+	@PreAuthorize("@el.check('admin','timing:add')")
+	public Result<Boolean> create(@Validated @RequestBody QuartzJobModel jobModel) {
+		if (jobModel.getId() != null) {
+			throw new BusinessException("A new " + ENTITY_NAME + " cannot already have an ID");
+		}
 
-    @ForbidSubmit
-    @Log("更改定时任务状态")
-    @ApiOperation("更改定时任务状态")
-    @PutMapping(value = "/{id}")
-    @PreAuthorize("@el.check('admin','timing:edit')")
-    public ResponseEntity<Object> updateIsPause(@PathVariable Long id) {
-        quartzJobService.updateIsPause(quartzJobService.getOne(new LambdaQueryWrapper<QuartzJobModel>()
-                .eq(QuartzJobModel::getId, id)));
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+		QuartzJob job = new QuartzJob();
+		BeanUtil.copyProperties(jobModel, job);
 
-    @ForbidSubmit
-    @Log("执行定时任务")
-    @ApiOperation("执行定时任务")
-    @PutMapping(value = "/exec/{id}")
-    @PreAuthorize("@el.check('admin','timing:edit')")
-    public ResponseEntity<Object> execution(@PathVariable Long id) {
-        quartzJobService.execution(quartzJobService.getOne(new LambdaQueryWrapper<QuartzJobModel>().eq(
-	        QuartzJobModel::getId, id)));
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+		return Result.success(quartzJobService.save(job));
+	}
 
-    @ForbidSubmit
-    @Log("删除定时任务")
-    @ApiOperation("删除定时任务")
-    @DeleteMapping
-    @PreAuthorize("@el.check('admin','timing:del')")
-    public ResponseEntity<Object> delete(@RequestBody Integer[] ids) {
-        quartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+	@Operation(summary = "修改定时任务", description = "修改定时任务", method = CommonConstant.PUT)
+	@RequestLogger(description = "修改定时任务")
+	@Idempotent(key = "update", perFix = "quartzJob")
+	@PutMapping
+	@PreAuthorize("@el.check('admin','timing:edit')")
+	public Result<Boolean> update(@Validated @RequestBody QuartzJobModel jobModel) {
+		QuartzJob job = new QuartzJob();
+		BeanUtil.copyProperties(jobModel, job);
+
+		quartzJobService.updateById(job);
+		return Result.success(true);
+	}
+
+	@Operation(summary = "更改定时任务状态", description = "更改定时任务状态", method = CommonConstant.PUT)
+	@RequestLogger(description = "更改定时任务状态")
+	@Idempotent(key = "updateIsPause", perFix = "quartzJob")
+	@PutMapping(value = "/{id}")
+	@PreAuthorize("@el.check('admin','timing:edit')")
+	public Result<Boolean> updateIsPause(@PathVariable Long id) {
+		quartzJobService.updateIsPause(
+			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
+				.eq(QuartzJob::getId, id)));
+		return Result.success(true);
+	}
+
+	@Operation(summary = "执行定时任务", description = "执行定时任务", method = CommonConstant.PUT)
+	@RequestLogger(description = "执行定时任务")
+	@Idempotent(key = "execution", perFix = "quartzJob")
+	@PutMapping(value = "/exec/{id}")
+	@PreAuthorize("@el.check('admin','timing:edit')")
+	public Result<Boolean> execution(@PathVariable Long id) {
+		quartzJobService.execution(
+			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
+		return Result.success(true);
+	}
+
+	@Operation(summary = "删除定时任务", description = "删除定时任务", method = CommonConstant.DELETE)
+	@RequestLogger(description = "删除定时任务")
+	@Idempotent(key = "delete", perFix = "quartzJob")
+	@DeleteMapping
+	@PreAuthorize("@el.check('admin','timing:del')")
+	public Result<Boolean> delete(@RequestBody Integer[] ids) {
+		quartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
+		return Result.success(true);
+	}
 }

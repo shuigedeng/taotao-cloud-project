@@ -1,5 +1,6 @@
 package com.taotao.cloud.web.quartz;
 
+import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.common.utils.LogUtil;
@@ -20,11 +21,16 @@ import org.quartz.listeners.JobListenerSupport;
  */
 public class QuartzJobListener extends JobListenerSupport {
 
+	public static final QuartzLogModel LOG = new QuartzLogModel();
+
 	@Override
 	public String getName() {
 		return getClass().getName();
 	}
 
+	/**
+	 * Scheduler 在 JobDetail 将要被执行时调用这个方法
+	 */
 	@Override
 	public void jobToBeExecuted(JobExecutionContext context) {
 		String jobKey = context.getJobDetail().getKey().toString();
@@ -33,17 +39,26 @@ public class QuartzJobListener extends JobListenerSupport {
 		QuartzJobModel quartzJobModel = (QuartzJobModel) context.getMergedJobDataMap().get(
 			QuartzJobModel.JOB_KEY);
 
-		QuartzLogModel log = new QuartzLogModel();
-		log.setJobName(quartzJobModel.getJobName());
-		log.setBaenName(quartzJobModel.getBeanName());
-		log.setMethodName(quartzJobModel.getMethodName());
-		log.setParams(quartzJobModel.getParams());
-		log.setCronExpression(quartzJobModel.getCronExpression());
-		log.setStartTime(LocalDateTime.now());
-
-		QuartzLogHolder.setLog(log);
+		LOG.setJobName(quartzJobModel.getJobName());
+		LOG.setBaenName(quartzJobModel.getBeanName());
+		LOG.setMethodName(quartzJobModel.getMethodName());
+		LOG.setParams(quartzJobModel.getParams());
+		LOG.setCronExpression(quartzJobModel.getCronExpression());
+		LOG.setStartTime(LocalDateTime.now());
 	}
 
+	/**
+	 * Scheduler 在 JobDetail 即将被执行，但又被 TriggerListener否决了时调用这个方法
+	 */
+	@Override
+	public void jobExecutionVetoed(JobExecutionContext context) {
+		LogUtil.info("CustomJobListener 定时任务被否决执行");
+		super.jobExecutionVetoed(context);
+	}
+
+	/**
+	 * Scheduler 在 JobDetail 被执行之后调用这个方法
+	 */
 	@Override
 	public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
 		String jobKey = context.getJobDetail().getKey().toString();
@@ -54,32 +69,31 @@ public class QuartzJobListener extends JobListenerSupport {
 
 		RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
 
-		QuartzLogModel log = QuartzLogHolder.getLog();
 		if (Objects.isNull(jobException)) {
-			long times = DateUtil.getTimestamp() - Timestamp.valueOf(log.getStartTime()).getTime();
-			log.setTime(times);
-			log.setSuccess(true);
+			long times = DateUtil.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
+			LOG.setTime(times);
+			LOG.setSuccess(true);
 			LogUtil.info("任务执行完毕，任务名称：{} 总共耗时：{} 毫秒", quartzJobModel.getJobName(), times);
 		} else {
 			LogUtil.error("任务执行失败，任务名称：{}" + quartzJobModel.getJobName(), jobException);
-			long times = DateUtil.getTimestamp() - Timestamp.valueOf(log.getStartTime()).getTime();
-			log.setTime(times);
+			long times = DateUtil.getTimestamp() - Timestamp.valueOf(LOG.getStartTime()).getTime();
+			LOG.setTime(times);
 			// 任务状态 0：成功 1：失败
-			log.setSuccess(false);
-			log.setExceptionDetail(LogUtil.getStackTrace(jobException));
+			LOG.setSuccess(false);
+			LOG.setExceptionDetail(LogUtil.getStackTrace(jobException));
 			quartzJobModel.setPause(false);
 
-			//更新状态
+			// 发送数据到redis  sys模块更新状态
 			if (Objects.nonNull(redisRepository)) {
-				redisRepository.send("", "");
+				redisRepository.send(RedisConstant.QUARTZ_JOB_UPDATE_TOPIC, quartzJobModel);
 			}
 			//quartzJobService.updateIsPause(quartzJobModel);
 		}
 
 		if (Objects.nonNull(redisRepository)) {
-			redisRepository.send("", "");
+			redisRepository.send(RedisConstant.QUARTZ_JOB_LOG_ADD_TOPIC, LOG);
 		}
+
 		//quartzLogService.save(log);
-		QuartzLogHolder.clear();
 	}
 }

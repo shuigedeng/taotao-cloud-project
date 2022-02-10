@@ -18,12 +18,20 @@ package com.taotao.cloud.zookeeper.template;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.utils.LogUtil;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
+import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
+import org.apache.curator.framework.recipes.cache.TreeCache;
 import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.zookeeper.CreateMode;
 import org.springframework.util.Assert;
@@ -52,8 +60,147 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:39:47
 	 */
-	public String createNode(String path, String node) throws Exception {
+	public String createNode(String path, String node) {
 		return createNode(path, node, CreateMode.PERSISTENT);
+	}
+
+	public String createNode(String path, CreateMode mode) {
+		try {
+			return client
+				.create()
+				.withMode(mode)
+				.forPath(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	public void setNodeData(String path, String nodeData) {
+		try {
+			// 设置节点数据
+			client.setData().forPath(path, nodeData.getBytes(StandardCharsets.UTF_8));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createNodeAndData(CreateMode mode, String path, String nodeData) {
+		try {
+			// 创建节点，关联数据
+			client.create().creatingParentsIfNeeded().withMode(mode)
+				.forPath(path, nodeData.getBytes(StandardCharsets.UTF_8));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getNodeData(String path) {
+		try {
+			// 数据读取和转换
+			byte[] dataByte = client.getData().forPath(path);
+			String data = new String(dataByte, StandardCharsets.UTF_8);
+			if (StrUtil.isNotEmpty(data)) {
+				return data;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<String> getNodeChild(String path) {
+		List<String> nodeChildDataList = new ArrayList<>();
+		try {
+			// 节点下数据集
+			nodeChildDataList = client.getChildren().forPath(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nodeChildDataList;
+	}
+
+	public void deleteNode(String path, Boolean recursive) {
+		try {
+			if (recursive) {
+				// 递归删除节点
+				client.delete().guaranteed().deletingChildrenIfNeeded().forPath(path);
+			} else {
+				// 删除单个节点
+				client.delete().guaranteed().forPath(path);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 监听 给定节点的创建、更新（不包括删除） 以及 该节点下的子节点的创建、删除、更新动作。
+	 */
+	public void addWatcherWithTreeCache(String path) {
+		if (null == client) {
+			throw new RuntimeException("there is not connect to zkServer...");
+		}
+		TreeCache treeCache = new TreeCache(client, path);
+		TreeCacheListener listener = (client, event) -> {
+			LogUtil.info("节点路径 --{} ,节点事件类型: {} , 节点值为: {}",
+				Objects.nonNull(event.getData()) ? event.getData().getPath() : "无数据",
+				event.getType());
+		};
+		treeCache.getListenable().addListener(listener);
+		try {
+			treeCache.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 监听给定节点下的子节点的创建、删除、更新
+	 *
+	 * @author shuigedeng
+	 * @since 2022-02-09 16:21:47
+	 */
+	public void addWatcherWithChildCache(String path) {
+		if (null == client) {
+			throw new RuntimeException("there is not connect to zkServer...");
+		}
+		//cacheData if true, node contents are cached in addition to the stat
+		PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path, false);
+		PathChildrenCacheListener listener = (client, event) -> {
+			LogUtil.info("event path is --{} ,event type is {}", event.getData().getPath(),
+				event.getType());
+		};
+		pathChildrenCache.getListenable().addListener(listener);
+		// StartMode : NORMAL  BUILD_INITIAL_CACHE  POST_INITIALIZED_EVENT
+		try {
+			pathChildrenCache.start(PathChildrenCache.StartMode.NORMAL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 创建 给定节点的监听事件  监听一个节点的更新和创建事件(不包括删除)
+	 */
+	public void addWatcherWithNodeCache(String path) {
+		if (null == client) {
+			throw new RuntimeException("there is not connect to zkServer...");
+		}
+		// dataIsCompressed if true, data in the path is compressed
+		NodeCache nodeCache = new NodeCache(client, path, false);
+		NodeCacheListener listener = () -> {
+			ChildData currentData = nodeCache.getCurrentData();
+			LogUtil.info("{} Znode data is chagnge,new data is ---  {}", currentData.getPath(),
+				new String(currentData.getData()));
+		};
+		nodeCache.getListenable().addListener(listener);
+		try {
+			nodeCache.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -66,14 +213,19 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:39:57
 	 */
-	public String createNode(String path, String node, CreateMode createMode) throws Exception {
-		path = buildPath(path, node);
-		client.create()
-			.orSetData()
-			.creatingParentsIfNeeded()
-			.withMode(createMode)
-			.forPath(path);
-		return path;
+	public String createNode(String path, String node, CreateMode createMode) {
+		try {
+			path = buildPath(path, node);
+			client.create()
+				.orSetData()
+				.creatingParentsIfNeeded()
+				.withMode(createMode)
+				.forPath(path);
+			return path;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 
@@ -87,8 +239,13 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:07
 	 */
-	public String createNode(String path, String node, String value) throws Exception {
-		return createNode(path, node, value, CreateMode.PERSISTENT);
+	public String createNode(String path, String node, String value) {
+		try {
+			return createNode(path, node, value, CreateMode.PERSISTENT);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -102,17 +259,21 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:15
 	 */
-	public String createNode(String path, String node, String value, CreateMode createMode)
-		throws Exception {
+	public String createNode(String path, String node, String value, CreateMode createMode) {
 		Assert.isTrue(StrUtil.isNotEmpty(value), "zookeeper节点值不能为空!");
 
-		path = buildPath(path, node);
-		client.create()
-			.orSetData()
-			.creatingParentsIfNeeded()
-			.withMode(createMode)
-			.forPath(path, value.getBytes());
-		return path;
+		try {
+			path = buildPath(path, node);
+			client.create()
+				.orSetData()
+				.creatingParentsIfNeeded()
+				.withMode(createMode)
+				.forPath(path, value.getBytes());
+			return path;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -124,11 +285,15 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:25
 	 */
-	public String get(String path, String node) throws Exception {
-		path = buildPath(path, node);
-		byte[] bytes = client.getData().forPath(path);
-		if (bytes.length > 0) {
-			return new String(bytes);
+	public String get(String path, String node){
+		try {
+			path = buildPath(path, node);
+			byte[] bytes = client.getData().forPath(path);
+			if (bytes.length > 0) {
+				return new String(bytes);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -143,12 +308,17 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:33
 	 */
-	public String update(String path, String node, String value) throws Exception {
+	public String update(String path, String node, String value){
 		Assert.isTrue(StrUtil.isNotEmpty(value), "zookeeper节点值不能为空!");
 
-		path = buildPath(path, node);
-		client.setData().forPath(path, value.getBytes());
-		return path;
+		try {
+			path = buildPath(path, node);
+			client.setData().forPath(path, value.getBytes());
+			return path;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -159,9 +329,13 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:41
 	 */
-	public void delete(String path, String node) throws Exception {
+	public void delete(String path, String node)  {
 		path = buildPath(path, node);
-		client.delete().quietly().deletingChildrenIfNeeded().forPath(path);
+		try {
+			client.delete().quietly().deletingChildrenIfNeeded().forPath(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -172,7 +346,7 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:48
 	 */
-	public List<String> getChildren(String path) throws Exception {
+	public List<String> getChildren(String path) {
 		if (StrUtil.isEmpty(path)) {
 			return null;
 		}
@@ -180,7 +354,12 @@ public class ZookeeperTemplate {
 		if (!path.startsWith(CommonConstant.PATH_SPLIT)) {
 			path = CommonConstant.PATH_SPLIT + path;
 		}
-		return client.getChildren().forPath(path);
+		try {
+			return client.getChildren().forPath(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -192,7 +371,7 @@ public class ZookeeperTemplate {
 	 * @author shuigedeng
 	 * @since 2021-09-07 20:40:56
 	 */
-	public boolean exists(String path, String node) throws Exception {
+	public boolean exists(String path, String node) {
 		List<String> list = getChildren(path);
 		return CollUtil.isNotEmpty(list) && list.contains(node);
 	}
@@ -272,5 +451,14 @@ public class ZookeeperTemplate {
 		} else {
 			return path + CommonConstant.PATH_SPLIT + node;
 		}
+	}
+
+	public boolean exists(String path) {
+		try {
+			return client.checkExists().forPath(path) != null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

@@ -15,16 +15,17 @@
  */
 package com.taotao.cloud.sys.biz.config;
 
+import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
@@ -46,19 +47,12 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class RedisListenerConfig {
 
-	public static class QuartzJobTopicMessageDelegate {
-
-		public void handleMessage(String message) {
-			LogUtil.info(message);
-		}
-	}
-
-	public static class SensitiveWordTopicMessageDelegate {
-
-		public void handleMessage(String message) {
-			LogUtil.info(message);
-		}
-	}
+	@Autowired
+	private QuartzJobTopicMessageDelegate quartzJobTopicMessageDelegate;
+	@Autowired
+	private ScheduledJobTopicMessageDelegate scheduledJobTopicMessageDelegate;
+	@Autowired
+	private SensitiveWordsTopicMessageDelegate sensitiveWordsTopicMessageDelegate;
 
 	@Bean
 	public RedisMessageListenerContainer redisMessageListenerContainer(
@@ -77,22 +71,54 @@ public class RedisListenerConfig {
 		container.setTaskExecutor(executor);
 
 		Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();
-		List<ChannelTopic> quartzJobTopic = new ArrayList<>();
-		quartzJobTopic.add(new ChannelTopic("quartzJobTopic"));
-		listeners.put(
-			new MessageListenerAdapter(new QuartzJobTopicMessageDelegate(), "handleMessage"),
-			quartzJobTopic);
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "addJob"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_ADD_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "deleteJob"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_DELETE_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "resumeJob"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_RESUME_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "pauseJob"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_PAUSE_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "runJobNow"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_RUN_NOW_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "updateJobCron"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_UPDATE_CRON_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "updateJob"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_UPDATE_TOPIC)));
+		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "addJobLog"),
+			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_LOG_ADD_TOPIC)));
 
-		List<ChannelTopic> sensitiveWordTopics = new ArrayList<>();
-		sensitiveWordTopics.add(new ChannelTopic("sensitiveWordTopic"));
 		listeners.put(
-			new MessageListenerAdapter(new SensitiveWordTopicMessageDelegate(), "handleMessage"),
-			sensitiveWordTopics);
+			new MessageListenerAdapter(sensitiveWordsTopicMessageDelegate, "sensitiveWords"),
+			List.of(new ChannelTopic(RedisConstant.SENSITIVE_WORDS_TOPIC)));
+
+		listeners.put(
+			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "updateCronScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_CRON_TOPIC)));
+		listeners.put(new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addCronScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_CRON_TOPIC)));
+		listeners.put(
+			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "updateFixedDelayScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_FIXED_DELAY_TOPIC)));
+		listeners.put(
+			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addFixedDelayScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_FIXED_DELAY_TOPIC)));
+		listeners.put(
+			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "updateFixedRateScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_FIXED_RATE_TOPIC)));
+		listeners.put(
+			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addFixedRateScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_FIXED_RATE_TOPIC)));
+		listeners.put(new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "cancelScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_CANCEL_TOPIC)));
+		listeners.put(new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "runOnceScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_RUN_ONCE_TOPIC)));
+		listeners.put(new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "callOffScheduled"),
+			List.of(new ChannelTopic(RedisConstant.SCHEDULED_CALL_OFF_TOPIC)));
 
 		container.setMessageListeners(listeners);
 		return container;
 	}
-
 
 	@Component
 	public static class RedisKeyExpireListener extends KeyExpirationEventMessageListener {
