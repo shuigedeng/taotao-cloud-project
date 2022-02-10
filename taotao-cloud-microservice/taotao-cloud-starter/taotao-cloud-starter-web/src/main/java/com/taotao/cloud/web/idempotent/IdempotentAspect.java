@@ -18,10 +18,10 @@ package com.taotao.cloud.web.idempotent;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.utils.AspectUtil;
-import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.lock.DistributedLock;
 import com.taotao.cloud.common.lock.ZLock;
+import com.taotao.cloud.common.utils.AspectUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
@@ -89,7 +89,7 @@ public class IdempotentAspect {
 
 		if (enable && null != idempotent) {
 			ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-					.getRequestAttributes();
+				.getRequestAttributes();
 			if (null == attributes) {
 				throw new IdempotentException("请求数据为空");
 			}
@@ -97,23 +97,24 @@ public class IdempotentAspect {
 
 			//1.判断模式
 			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 				//2.1.通过rid模式判断是否属于重复提交
 				String rid = request.getHeader(HEADER_RID_KEY);
 
 				try {
 					if (StringUtils.isNotBlank(rid)) {
-						ZLock result = distributedLock.tryLock(REDIS_KEY_PREFIX + rid,
-								LOCK_WAIT_TIME,
-								TimeUnit.MILLISECONDS);
+						ZLock result = distributedLock.tryLock(
+							REDIS_KEY_PREFIX + rid,
+							LOCK_WAIT_TIME,
+							TimeUnit.MILLISECONDS);
 						if (Objects.isNull(result)) {
 							throw new IdempotentException("命中RID重复请求");
 						}
 						LogUtil.debug("msg1=当前请求已成功记录,且标记为0未处理,,{}={}", HEADER_RID_KEY, rid);
 					} else {
 						LogUtil.warn(
-								"msg1=header没有rid,防重复提交功能失效,,remoteHost={}"
-										+ request.getRemoteHost());
+							"msg1=header没有rid,防重复提交功能失效,,remoteHost={}"
+								+ request.getRemoteHost());
 					}
 				} catch (Exception e) {
 					LogUtil.error("获取redis锁发生异常", e);
@@ -122,14 +123,14 @@ public class IdempotentAspect {
 			}
 
 			if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
+				|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
 				//2.2.通过自定义key模式判断是否属于重复提交
 				String key = idempotent.key();
 				if (StringUtils.isNotBlank(key)) {
 					String val = "";
 					Object[] paramValues = joinPoint.getArgs();
 					String[] paramNames = ((CodeSignature) joinPoint.getSignature())
-							.getParameterNames();
+						.getParameterNames();
 					//获取自定义key的value
 					for (int i = 0; i < paramNames.length; i++) {
 						String params = JSON.toJSONString(paramValues[i]);
@@ -154,13 +155,13 @@ public class IdempotentAspect {
 
 						try {
 							ZLock result = distributedLock.tryLock(perFix, LOCK_WAIT_TIME,
-									TimeUnit.MILLISECONDS);
+								TimeUnit.MILLISECONDS);
 							if (!Objects.nonNull(result)) {
 								String targetName = joinPoint.getTarget().getClass().getName();
 								String methodName = joinPoint.getSignature().getName();
 								LogUtil.error(
-										"不允许重复执行,,key={},,targetName={},,methodName={}",
-										perFix, targetName, methodName);
+									"不允许重复执行,,key={},,targetName={},,methodName={}",
+									perFix, targetName, methodName);
 								throw new IdempotentException("不允许重复提交");
 							}
 							//存储在当前线程
@@ -185,9 +186,9 @@ public class IdempotentAspect {
 			if (enable && null != idempotent) {
 
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-						|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
+					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.RID) {
 					ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-							.getRequestAttributes();
+						.getRequestAttributes();
 					HttpServletRequest request = attributes.getRequest();
 					String rid = request.getHeader(HEADER_RID_KEY);
 					if (StringUtils.isNotBlank(rid)) {
@@ -202,7 +203,7 @@ public class IdempotentAspect {
 				}
 
 				if (idempotent.ideTypeEnum() == IdempotentTypeEnum.ALL
-						|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
+					|| idempotent.ideTypeEnum() == IdempotentTypeEnum.KEY) {
 					// 自定义key
 					String key = idempotent.key();
 					if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(PER_FIX_KEY.get())) {

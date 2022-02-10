@@ -6,8 +6,12 @@ package com.taotao.cloud.web.quartz;
 
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import com.taotao.cloud.common.constant.RedisConstant;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Date;
+import java.util.Objects;
 import javax.annotation.Resource;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -20,7 +24,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerKey;
 import org.quartz.impl.triggers.CronTriggerImpl;
 
-public class QuartzManage {
+public class QuartzManager {
 
 	private static final String JOB_NAME = "TASK_";
 
@@ -56,6 +60,12 @@ public class QuartzManage {
 			if (quartzJobModel.getPause()) {
 				pauseJob(quartzJobModel);
 			}
+
+			// 添加日志
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_ADD_TOPIC, quartzJobModel);
+			}
 		} catch (Exception e) {
 			LogUtil.error("创建定时任务失败", e);
 			throw new QuartzExecutionExecution("创建定时任务失败");
@@ -75,10 +85,12 @@ public class QuartzManage {
 				addJob(quartzJobModel);
 				trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 			}
+
 			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(
 				quartzJobModel.getCronExpression());
 			trigger = trigger.getTriggerBuilder().withIdentity(triggerKey)
 				.withSchedule(scheduleBuilder).build();
+
 			//重置启动时间
 			((CronTriggerImpl) trigger).setStartTime(new Date());
 			trigger.getJobDataMap().put(QuartzJobModel.JOB_KEY, quartzJobModel);
@@ -88,6 +100,11 @@ public class QuartzManage {
 			// 暂停任务
 			if (quartzJobModel.getPause()) {
 				pauseJob(quartzJobModel);
+			}
+
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_UPDATE_CRON_TOPIC, quartzJobModel);
 			}
 		} catch (Exception e) {
 			LogUtil.error("更新定时任务失败", e);
@@ -103,6 +120,11 @@ public class QuartzManage {
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.pauseJob(jobKey);
 			scheduler.deleteJob(jobKey);
+
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_DELETE_TOPIC, quartzJobModel);
+			}
 		} catch (Exception e) {
 			LogUtil.error("删除定时任务失败", e);
 			throw new QuartzExecutionExecution("删除定时任务失败");
@@ -122,6 +144,12 @@ public class QuartzManage {
 			}
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.resumeJob(jobKey);
+			quartzJobModel.setPause(!quartzJobModel.getPause());
+
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_RESUME_TOPIC, quartzJobModel);
+			}
 		} catch (Exception e) {
 			LogUtil.error("恢复定时任务失败", e);
 			throw new QuartzExecutionExecution("恢复定时任务失败");
@@ -143,6 +171,11 @@ public class QuartzManage {
 			dataMap.put(QuartzJobModel.JOB_KEY, quartzJobModel);
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.triggerJob(jobKey, dataMap);
+
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_RUN_NOW_TOPIC, quartzJobModel);
+			}
 		} catch (Exception e) {
 			LogUtil.error("定时任务执行失败", e);
 			throw new QuartzExecutionExecution("定时任务执行失败");
@@ -156,6 +189,11 @@ public class QuartzManage {
 		try {
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.pauseJob(jobKey);
+
+			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
+			if (Objects.nonNull(redisRepository)) {
+				redisRepository.send(RedisConstant.QUARTZ_JOB_PAUSE_TOPIC, quartzJobModel);
+			}
 		} catch (Exception e) {
 			LogUtil.error("定时任务暂停失败", e);
 			throw new QuartzExecutionExecution("定时任务暂停失败");

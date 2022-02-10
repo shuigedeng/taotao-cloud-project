@@ -71,4 +71,83 @@ public class RedisConstant {
 	 * region parent id key
 	 */
 	public static final String REGIONS_PARENT_ID_KEY = "REGIONS:PARENT:ID:KEY:";
+
+	// ============================ topic =======================================
+
+	/**
+	 * QUARTZ_JOB_ADD_TOPIC
+	 */
+	public static final String QUARTZ_JOB_ADD_TOPIC = "QUARTZ:JOB:ADD:TOPIC";
+	/**
+	 * QUARTZ_JOB_DELETE_TOPIC
+	 */
+	public static final String QUARTZ_JOB_DELETE_TOPIC = "QUARTZ:JOB:DELETE:TOPIC";
+	/**
+	 * QUARTZ_JOB_RESUME_TOPIC
+	 */
+	public static final String QUARTZ_JOB_RESUME_TOPIC = "QUARTZ:JOB:RESUME:TOPIC";
+	/**
+	 * QUARTZ_JOB_PAUSE_TOPIC
+	 */
+	public static final String QUARTZ_JOB_PAUSE_TOPIC = "QUARTZ:JOB:PAUSE:TOPIC";
+	/**
+	 * QUARTZ_JOB_RUN_NOW_TOPIC
+	 */
+	public static final String QUARTZ_JOB_RUN_NOW_TOPIC = "QUARTZ:JOB:RUN:NOW:TOPIC";
+	/**
+	 * QUARTZ_JOB_UPDATE_CRON_TOPIC
+	 */
+	public static final String QUARTZ_JOB_UPDATE_CRON_TOPIC = "QUARTZ:JOB:UPDATE:CR0N:TOPIC";
+	/**
+	 * QUARTZ_JOB_UPDATE_TOPIC
+	 */
+	public static final String QUARTZ_JOB_UPDATE_TOPIC = "QUARTZ:JOB:UPDATE:TOPIC";
+	/**
+	 * QUARTZ_JOB_LOG_ADD_TOPIC
+	 */
+	public static final String QUARTZ_JOB_LOG_ADD_TOPIC = "QUARTZ:JOB:LOG:ADD:TOPIC";
+	/**
+	 * SENSITIVE_WORDS_TOPIC
+	 */
+	public static final String SENSITIVE_WORDS_TOPIC = "SENSITIVE:WORDS:TOPIC";
+	/**
+	 * SCHEDULED_UPDATE_CRON_TOPIC
+	 */
+	public static final String SCHEDULED_UPDATE_CRON_TOPIC = "SCHEDULED:UPDATE:CRON:TOPIC";
+	/**
+	 * SCHEDULED_ADD_CRON_TOPIC
+	 */
+	public static final String SCHEDULED_ADD_CRON_TOPIC = "SCHEDULED:ADD:CRON:TOPIC";
+	/**
+	 * SCHEDULED_UPDATE_FIXED_DELAY_TOPIC
+	 */
+	public static final String SCHEDULED_UPDATE_FIXED_DELAY_TOPIC = "SCHEDULED:UPDATE:FIXED:DELAY:TOPIC";
+	/**
+	 * SCHEDULED_ADD_FIXED_DELAY_TOPIC
+	 */
+	public static final String SCHEDULED_ADD_FIXED_DELAY_TOPIC = "SCHEDULED:ADD:FIXED:DELAY:TOPIC";
+	/**
+	 * SCHEDULED_UPDATE_FIXED_RATE_TOPIC
+	 */
+	public static final String SCHEDULED_UPDATE_FIXED_RATE_TOPIC = "SCHEDULED:UPDATE:FIXED:RATE:TOPIC";
+	/**
+	 * SCHEDULED_ADD_FIXED_RATE_TOPIC
+	 */
+	public static final String SCHEDULED_ADD_FIXED_RATE_TOPIC = "SCHEDULED:ADD:FIXED:RATE:TOPIC";
+	/**
+	 * SCHEDULED_CANCEL_TOPIC
+	 */
+	public static final String SCHEDULED_CANCEL_TOPIC = "SCHEDULED:CANCEL:TOPIC";
+	/**
+	 * SCHEDULED_RUN_ONCE_TOPIC
+	 */
+	public static final String SCHEDULED_RUN_ONCE_TOPIC = "SCHEDULED:RUN:ONCE:TOPIC";
+	/**
+	 * SCHEDULED_CALL_OFF_TOPIC
+	 */
+	public static final String SCHEDULED_CALL_OFF_TOPIC = "SCHEDULED:CALL:OFF:TOPIC";
+	/**
+	 * SCHEDULED_JOB_LOG_ADD_TOPIC
+	 */
+	public static final String SCHEDULED_JOB_LOG_ADD_TOPIC = "SCHEDULED:JOB:LOG:ADD:TOPIC";
 }

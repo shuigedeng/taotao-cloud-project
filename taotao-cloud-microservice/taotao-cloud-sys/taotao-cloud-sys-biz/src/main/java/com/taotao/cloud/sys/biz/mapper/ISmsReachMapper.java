@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.sys.biz.entity.Dept;
-import com.taotao.cloud.sys.biz.entity.sms.SmsReach;
+import com.taotao.cloud.sys.biz.entity.SmsReach;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 

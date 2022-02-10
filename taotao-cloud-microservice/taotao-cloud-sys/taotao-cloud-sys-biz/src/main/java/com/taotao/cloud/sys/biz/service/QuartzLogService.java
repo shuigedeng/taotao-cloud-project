@@ -5,9 +5,9 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.QuartzLog;
-import com.taotao.cloud.web.quartz.model.QuartzLogDto;
-import com.taotao.cloud.web.quartz.model.QuartzLogQueryCriteria;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +18,7 @@ public interface QuartzLogService extends IService<QuartzLog> {
 
 	/**
 	 * 查询数据分页
+	 *
 	 * @param criteria 条件
 	 * @param pageable 分页参数
 	 * @return Map<String, Object>
@@ -26,6 +27,7 @@ public interface QuartzLogService extends IService<QuartzLog> {
 
 	/**
 	 * 查询所有数据不分页
+	 *
 	 * @param criteria 条件参数
 	 * @return List<QuartzLogDto>
 	 */
@@ -33,7 +35,8 @@ public interface QuartzLogService extends IService<QuartzLog> {
 
 	/**
 	 * 导出数据
-	 * @param all 待导出的数据
+	 *
+	 * @param all      待导出的数据
 	 * @param response /
 	 * @throws IOException /
 	 */

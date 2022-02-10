@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.entity.sms;
+package com.taotao.cloud.sys.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;

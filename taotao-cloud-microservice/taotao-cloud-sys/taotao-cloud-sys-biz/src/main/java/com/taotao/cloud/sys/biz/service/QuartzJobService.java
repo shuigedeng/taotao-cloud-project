@@ -5,9 +5,9 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
+import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.QuartzJob;
-import com.taotao.cloud.web.quartz.model.QuartzJobDto;
-import com.taotao.cloud.web.quartz.model.QuartzJobQueryCriteria;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +18,7 @@ public interface QuartzJobService extends IService<QuartzJob> {
 
 	/**
 	 * 查询数据分页
+	 *
 	 * @param criteria 条件
 	 * @param pageable 分页参数
 	 * @return Map<String, Object>
@@ -26,6 +27,7 @@ public interface QuartzJobService extends IService<QuartzJob> {
 
 	/**
 	 * 查询所有数据不分页
+	 *
 	 * @param criteria 条件参数
 	 * @return List<QuartzJobDto>
 	 */
@@ -33,27 +35,30 @@ public interface QuartzJobService extends IService<QuartzJob> {
 
 	/**
 	 * 导出数据
-	 * @param all 待导出的数据
+	 *
+	 * @param all      待导出的数据
 	 * @param response /
 	 * @throws IOException /
 	 */
 	void download(List<QuartzJobDto> all, HttpServletResponse response) throws IOException;
 
-
 	/**
 	 * 更改定时任务状态
+	 *
 	 * @param quartzJob /
 	 */
 	void updateIsPause(QuartzJob quartzJob);
 
 	/**
 	 * 立即执行定时任务
+	 *
 	 * @param quartzJob /
 	 */
 	void execution(QuartzJob quartzJob);
 
 	/**
 	 * 查询启用的任务
+	 *
 	 * @return List
 	 */
 	List<QuartzJob> findByIsPauseIsFalse();
