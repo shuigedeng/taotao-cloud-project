@@ -94,7 +94,7 @@ public class ScheduledAutoConfiguration {
 	@ConditionalOnProperty(prefix = ScheduledPluginProperties.PREFIX, name = "executionLog", havingValue = "true")
 	@ConditionalOnMissingBean
 	public LogStrengthen logStrengthen() {
-		return new LogStrengthen(scheduledPluginProperties.getLogPath());
+		return new LogStrengthen();
 	}
 
 	@Bean
