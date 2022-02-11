@@ -446,23 +446,28 @@ spring:
           destination: order-topic
           group: order-group
           binder: kafka
-
         # function kafka binding
         outputKafka-out-0:
           binder: kafka
-          destination: destination-test-kafka
+          destination: destination-test-kafka-topic
         inputKafka1-in-0:
           binder: kafka
-          destination: destination-test-kafka
+          destination: destination-test-kafka-topic
           group: group1
         inputKafka2-in-0:
           binder: kafka
-          destination: destination-test-kafka
+          destination: destination-test-kafka-topic
           group: group2
         # function rabbit binding
         outputRabbit-out-0:
           binder: rabbit
           destination: destination-test-rabbit
+          producer:
+            partitioned: true
+            partition-key-expression: headers['partitionKey']
+            partition-count: 2
+            required-groups:
+              - myGroup
         inputRabbit1-in-0:
           binder: rabbit
           destination: destination-test-rabbit
@@ -473,8 +478,10 @@ spring:
           group: group2
       rocketmq:
         binder:
-          name-server: 172.16.6.151:9876
+          name-server: 192.168.244.128:9876;192.168.244.129:9876;
       rabbit:
+        binder:
+          admin-addresses: 172.16.6.151:5672,172.16.6.151:5672,
         bindings:
           sms-output:
             producer:
@@ -486,12 +493,11 @@ spring:
               delayed-exchange: false    # 开启延时队列
               #auto-bind-dlq: true   # 绑定死信队列
               #republish-to-dlq: true  # 重投到死信队列并带有报错信息
-        binder:
-          admin-addresses: 172.16.6.151:5672
       kafka:
         binder:
           brokers: 172.16.6.151:9092
           auto-create-topics: true
+          autoAddPartitions: true
         bindings:
           order-output:
             producer:
@@ -635,7 +641,7 @@ mybatis-plus:
       logic-not-delete-value: 0
       insert-strategy: ignored
       update-strategy: ignored
-      select-strategy: ignored
+      where-strategy: ignored
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
