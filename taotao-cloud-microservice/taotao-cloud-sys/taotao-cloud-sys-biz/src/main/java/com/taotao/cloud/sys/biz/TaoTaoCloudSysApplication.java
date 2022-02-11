@@ -38,9 +38,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.sys.biz.repository.inf")
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
-	private StreamBridge streamBridge;
 	public static void main(String[] args) {
-		streamBridge.send()
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 

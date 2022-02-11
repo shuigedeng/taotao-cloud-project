@@ -13,7 +13,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzJobQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.QuartzJob;
-import com.taotao.cloud.sys.biz.mapper.QuartzJobMapper;
+import com.taotao.cloud.sys.biz.mapper.IQuartzJobMapper;
 import com.taotao.cloud.sys.biz.service.QuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
 import com.taotao.cloud.web.quartz.QuartzManager;
@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 //@CacheConfig(cacheNames = "quartzJob")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob> implements
+public class QuartzJobServiceImpl extends ServiceImpl<IQuartzJobMapper, QuartzJob> implements
 	QuartzJobService {
 
 	private final QuartzManager quartzManager;

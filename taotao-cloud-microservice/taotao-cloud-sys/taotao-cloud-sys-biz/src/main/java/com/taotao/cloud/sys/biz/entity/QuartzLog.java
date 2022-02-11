@@ -10,12 +10,13 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 @TableName("quartz_log")
-public class QuartzLog extends SuperEntity<QuartzLog, Long> implements Serializable {
+public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> implements Serializable {
 
 	/** 任务日志ID */
 	@TableId
@@ -136,9 +137,6 @@ public class QuartzLog extends SuperEntity<QuartzLog, Long> implements Serializa
 		this.time = time;
 	}
 
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
 
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;

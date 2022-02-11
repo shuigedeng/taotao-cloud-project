@@ -2,7 +2,6 @@ package com.taotao.cloud.sys.biz.controller.tools;
 
 
 import com.taotao.cloud.sys.biz.service.ScheduledJobService;
-import com.taotao.cloud.sys.biz.service.ScheduledLogService;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * ScheduledJobController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-11 15:56:29
+ */
 @RestController
-@RequestMapping("/scheduled")
+@RequestMapping("/sys/tools/scheduled")
 public class ScheduledJobController {
 
 	@Autowired(required = false)

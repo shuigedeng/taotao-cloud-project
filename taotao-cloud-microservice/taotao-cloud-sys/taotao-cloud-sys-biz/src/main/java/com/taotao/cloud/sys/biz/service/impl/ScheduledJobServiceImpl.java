@@ -6,7 +6,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.biz.entity.ScheduledJob;
-import com.taotao.cloud.sys.biz.mapper.ScheduledJobMapper;
+import com.taotao.cloud.sys.biz.mapper.IScheduledJobMapper;
 import com.taotao.cloud.sys.biz.service.ScheduledJobService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 //@CacheConfig(cacheNames = "quartzJob")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class ScheduledJobServiceImpl extends
-		ServiceImpl<ScheduledJobMapper, ScheduledJob> implements
+		ServiceImpl<IScheduledJobMapper, ScheduledJob> implements
 		ScheduledJobService {
 
 
