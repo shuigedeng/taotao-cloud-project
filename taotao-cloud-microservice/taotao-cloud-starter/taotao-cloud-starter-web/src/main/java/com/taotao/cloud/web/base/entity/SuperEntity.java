@@ -19,8 +19,9 @@ import javax.persistence.MappedSuperclass;
  * @since 2021-09-04 07:40:46
  */
 @MappedSuperclass
-public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable> extends
-	Model<T> implements Serializable {
+public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
+	//extends Model<T>
+	implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4603650115461757622L;

@@ -8,11 +8,12 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.io.Serializable;
 
 @TableName("alipay_config")
-public class AlipayConfig extends SuperEntity<AlipayConfig, Long> implements Serializable {
+public class AlipayConfig extends BaseSuperEntity<AlipayConfig, Long> implements Serializable {
 
 	/** 主键 */
 	@TableId

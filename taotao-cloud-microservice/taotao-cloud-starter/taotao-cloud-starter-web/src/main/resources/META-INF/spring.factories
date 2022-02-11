@@ -9,7 +9,7 @@ com.taotao.cloud.web.configuration.PrometheusConfiguration, \
 com.taotao.cloud.web.configuration.ResponseConfiguration, \
 com.taotao.cloud.web.configuration.QuartzConfiguration, \
 com.taotao.cloud.web.configuration.SensitiveQuartzConfiguration, \
-com.taotao.cloud.web.configuration.ScheduleConfiguration, \
+com.taotao.cloud.web.configuration.ScheduledAutoConfiguration, \
 com.taotao.cloud.web.configuration.ServletConfiguration, \
 com.taotao.cloud.web.configuration.StrategyConfiguration, \
 com.taotao.cloud.web.configuration.UndertowHttp2Configuration,\

@@ -12,6 +12,8 @@ import com.taotao.cloud.sys.biz.service.AlipayConfigService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import 	com.baomidou.mybatisplus.extension.activerecord.Model;
+
 // 默认不使用缓存
 //import org.springframework.cache.annotation.CacheConfig;
 //import org.springframework.cache.annotation.CacheEvict;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class AlipayConfigServiceImpl extends
 	ServiceImpl<AlipayConfigMapper, AlipayConfig> implements AlipayConfigService {
+
 
 	@Override
 	public String toPayAsPc(AlipayConfig alipay, TradeVo trade) throws Exception {

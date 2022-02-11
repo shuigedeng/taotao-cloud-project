@@ -1,46 +1,60 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
-import com.taotao.cloud.system.biz.service.VisitsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.sys.biz.service.VisitsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author Zheng Jie
- * @date 2018-12-13
+ * VisitsController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-11 16:26:45
  */
+@Validated
 @RestController
-@RequestMapping("/api/visits")
-@Api(tags = "系统:访问记录管理")
+@Tag(name = "平台管理端-访问记录管理API", description = "平台管理端-访问记录管理API")
+@RequestMapping("/sys/tools/visits")
 public class VisitsController {
 
-    private final VisitsService visitsService;
+	private final VisitsService visitsService;
 
-    public VisitsController(VisitsService visitsService) {
-        this.visitsService = visitsService;
-    }
+	public VisitsController(VisitsService visitsService) {
+		this.visitsService = visitsService;
+	}
 
-    @PostMapping
-    @ApiOperation("创建访问记录")
-    public ResponseEntity<Object> create() {
-        visitsService.count(RequestHolder.getHttpServletRequest());
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+	@Operation(summary = "创建访问记录", description = "创建访问记录", method = CommonConstant.POST)
+	@RequestLogger(description = "创建访问记录")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping
+	public Result<Boolean> create() {
+		visitsService.count(RequestUtil.getHttpServletRequest());
+		return Result.success(true);
+	}
 
-    @GetMapping
-    @ApiOperation("查询")
-    public ResponseEntity<Object> get() {
-        return new ResponseEntity<>(visitsService.get(), HttpStatus.OK);
-    }
+	@Operation(summary = "查询访问记录", description = "查询访问记录", method = CommonConstant.GET)
+	@RequestLogger(description = "查询访问记录")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping
+	public Result<Object> get() {
+		return Result.success(visitsService.get());
+	}
 
-    @GetMapping(value = "/chartData")
-    @ApiOperation("查询图表数据")
-    public ResponseEntity<Object> getChartData() {
-        return new ResponseEntity<>(visitsService.getChartData(), HttpStatus.OK);
-    }
+	@Operation(summary = "查询图表数据", description = "查询图表数据", method = CommonConstant.GET)
+	@RequestLogger(description = "查询图表数据")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/chartData")
+	public Result<Object> getChartData() {
+		return Result.success(visitsService.getChartData());
+	}
 }
