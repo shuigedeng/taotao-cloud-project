@@ -1,7 +1,11 @@
 dependencies {
     api project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-common')
 
-    implementation 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
+    api 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
+
+    api("org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.1") {
+        exclude group: 'com.alibaba', module: 'fastjson'
+    }
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
