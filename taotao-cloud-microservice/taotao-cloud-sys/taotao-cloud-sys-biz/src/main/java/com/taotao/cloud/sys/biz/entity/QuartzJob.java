@@ -4,89 +4,68 @@
  */
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@TableName("quartz_job")
-public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> implements Serializable {
+/**
+ * Quartz任务表
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-10-09 21:10:22
+ */
+@Entity
+@Table(name = QuartzJob.TABLE_NAME)
+@TableName(QuartzJob.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = QuartzJob.TABLE_NAME, comment = "Quartz任务表")
+public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 
-	public static final String JOB_KEY = "JOB_KEY";
-
-	/**
-	 * 定时任务ID
-	 */
-	@TableId
-	private Long id;
-
+	public static final String TABLE_NAME = "tt_sys_quartz_job";
 
 	/**
 	 * Spring Bean名称
 	 */
+	@Column(name = "bean_name", nullable = false, columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
 	private String beanName;
-
 
 	/**
 	 * cron 表达式
 	 */
+	@Column(name = "cron_expression", nullable = false, columnDefinition = "varchar(64) not null comment 'cron 表达式'")
 	private String cronExpression;
-
 
 	/**
 	 * 状态：1暂停、0启用
 	 */
+	@Column(name = "is_pause", nullable = false, columnDefinition = "boolean DEFAULT false comment '收件人'")
 	private Boolean isPause;
-
 
 	/**
 	 * 任务名称
 	 */
+	@Column(name = "job_name", nullable = false, columnDefinition = "varchar(64) not null comment '任务名称'")
 	private String jobName;
-
 
 	/**
 	 * 方法名称
 	 */
+	@Column(name = "method_name", nullable = false, columnDefinition = "varchar(64) not null comment '方法名称'")
 	private String methodName;
-
 
 	/**
 	 * 参数
 	 */
+	@Column(name = "params", nullable = false, columnDefinition = "varchar(64) not null comment '参数'")
 	private String params;
-
 
 	/**
 	 * 备注
 	 */
+	@Column(name = "remark", nullable = false, columnDefinition = "varchar(256) not null comment '备注'")
 	private String remark;
-
-	/**
-	 * 创建时间
-	 */
-	@TableField(fill = FieldFill.INSERT)
-	private Timestamp createTime;
-
-	public void copy(QuartzJob source) {
-		BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
-	}
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getBeanName() {
 		return beanName;
@@ -142,10 +121,5 @@ public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> implements Seria
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
 	}
 }

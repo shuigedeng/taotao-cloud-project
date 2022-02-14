@@ -1,6 +1,8 @@
 package com.taotao.cloud.sys.biz.config.runner;
 
+import com.taotao.cloud.sys.biz.service.IRegionService;
 import com.taotao.cloud.sys.biz.service.VisitsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,9 @@ public class VisitsInit implements ApplicationRunner {
 
 	private final VisitsService visitsService;
 
+	@Autowired
+	private IRegionService regionService;
+
 	public VisitsInit(VisitsService visitsService) {
 		this.visitsService = visitsService;
 	}
@@ -22,5 +27,7 @@ public class VisitsInit implements ApplicationRunner {
 		System.out.println("--------------- 初始化站点统计，如果存在今日统计则跳过 ---------------");
 		visitsService.save();
 		System.out.println("--------------- 初始化站点统计完成 ---------------");
+
+		regionService.synchronizationData("");
 	}
 }

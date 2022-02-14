@@ -46,7 +46,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties({CoreProperties.class})
-@ConditionalOnProperty(prefix = CoreProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = CoreProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class CoreAutoConfiguration implements InitializingBean {
 
 	@Override

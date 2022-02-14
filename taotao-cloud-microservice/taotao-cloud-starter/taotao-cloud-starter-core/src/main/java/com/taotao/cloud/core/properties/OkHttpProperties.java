@@ -45,7 +45,7 @@ public class OkHttpProperties {
 	 */
 	private int readTimeout = 20;
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
