@@ -380,9 +380,13 @@ public class RedisRepository {
 	 * @see <a href="https://redis.io/commands/type">Redis Documentation: TYPE</a>
 	 * @since 2021-09-07 21:01:46
 	 */
-	public String type(@NonNull String key) {
+	public String typeCode(@NonNull String key) {
 		DataType type = redisTemplate.type(key);
 		return type == null ? DataType.NONE.code() : type.code();
+	}
+
+	public DataType type(@NonNull String key) {
+		return redisTemplate.type(key);
 	}
 
 	/**

@@ -255,6 +255,39 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         archiveClassifier = 'javadoc'
     }
 
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+
+    /**
+     * 该过滤器会导致resource下文件编码错误
+     * 根据环境打包默认dev开发环境，命令：./gradlew -x test clean bootJar -Denv=dev
+     */
+    /*
+    def env = System.getProperty("env") ?: "dev"
+    processResources {
+        filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [env: env]
+    }
+    */
+
+    bootJar{
+        manifest {
+            attributes 'Implementation-Title': project.name,
+                    'Implementation-Version': project.version,
+                    'Implementation-Vendor': 'Apache Software Foundation',
+                    'Implementation-Vendor-Id': project.group,
+                    'Specification-Version': "2022",
+                    'Specification-Vendor': 'Apache Software Foundation',
+                    'Specification-Title': project.name,
+                    'Built-By': 'shuigedeng',
+                    'Automatic-Module-Name': project.name.replace("-", "."),
+                    'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
+                    'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
+        }
+    }
+
     jar {
         enabled = true
         classifier = null
@@ -263,10 +296,15 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
             attributes (
                     'Implementation-Title': project.name,
                     'Implementation-Version': project.version,
-                    'Implementation-Vendor': 'Pivotal Software, Inc.',
-                    'Automatic-Module-Name': project.name.replace("-", "."),
-                    'Build-Jdk-Spec': JavaVersion.VERSION_17.toString(),
+                    'Implementation-Vendor': 'Apache Software Foundation',
+                    'Implementation-Vendor-Id': project.group,
+                    'Specification-Version': "2022",
+                    'Specification-Vendor': 'Apache Software Foundation',
+                    'Specification-Title': project.name,
                     'Built-By': 'shuigedeng',
+                    'Automatic-Module-Name': project.name.replace("-", "."),
+                    'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
+                    'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
             )
         }
     }

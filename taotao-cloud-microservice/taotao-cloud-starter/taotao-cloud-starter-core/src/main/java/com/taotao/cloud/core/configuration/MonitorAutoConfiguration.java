@@ -55,7 +55,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  */
 @Configuration
 @EnableConfigurationProperties({MonitorThreadPoolProperties.class, MonitorProperties.class})
-@ConditionalOnProperty(prefix = MonitorProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = MonitorProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class MonitorAutoConfiguration implements InitializingBean {
 
 	@Override

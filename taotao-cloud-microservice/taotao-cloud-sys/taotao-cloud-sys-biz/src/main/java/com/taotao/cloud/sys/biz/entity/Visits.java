@@ -1,34 +1,37 @@
 package com.taotao.cloud.sys.biz.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * pv 与 ip 统计
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-10-09 21:10:22
  */
-@TableName("visits")
-public class Visits extends BaseSuperEntity<Visits, Long> implements Serializable {
+@Entity
+@Table(name = Visits.TABLE_NAME)
+@TableName(Visits.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Visits.TABLE_NAME, comment = "pv与ip统计")
+public class Visits extends BaseSuperEntity<Visits, Long> {
 
-	@TableId
-	private Long id;
+	public static final String TABLE_NAME = "tt_sys_visits";
 
+	@Column(name = "date", nullable = false, columnDefinition = "varchar(64) not null comment '日期'")
 	private String date;
 
+	@Column(name = "pv_counts", nullable = false, columnDefinition = "bigint not null default 0 comment 'pv'")
 	private Long pvCounts;
 
+	@Column(name = "ip_counts", nullable = false, columnDefinition = "bigint not null default 0 comment 'ip'")
 	private Long ipCounts;
 
-	@TableField(fill = FieldFill.INSERT)
-	private Timestamp createTime;
-
+	@Column(name = "week_day", nullable = false, columnDefinition = "varchar(64) not null comment '天'")
 	private String weekDay;
-
 
 	public String getDate() {
 		return date;
@@ -52,10 +55,6 @@ public class Visits extends BaseSuperEntity<Visits, Long> implements Serializabl
 
 	public void setIpCounts(Long ipCounts) {
 		this.ipCounts = ipCounts;
-	}
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
 	}
 
 	public String getWeekDay() {

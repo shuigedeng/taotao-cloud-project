@@ -4,81 +4,83 @@
  */
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@TableName("quartz_log")
-public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> implements Serializable {
+/**
+ * Quartz日志表
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-10-09 21:10:22
+ */
+@Entity
+@Table(name = QuartzLog.TABLE_NAME)
+@TableName(QuartzLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = QuartzLog.TABLE_NAME, comment = "Quartz日志表")
+public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> {
 
-	/** 任务日志ID */
-	@TableId
-	private Long id;
+	public static final String TABLE_NAME = "tt_sys_quartz_log";
 
 
-	/** 任务名称 */
-	private String baenName;
+	/**
+	 * Spring Bean名称
+	 */
+	@Column(name = "bean_name", nullable = false, columnDefinition = "varchar(64) not null comment ' Spring Bean名称'")
+	private String beanName;
 
-
-	/** cron表达式 */
+	/**
+	 * cron 表达式
+	 */
+	@Column(name = "cron_expression", nullable = false, columnDefinition = "varchar(64) not null comment 'cron 表达式'")
 	private String cronExpression;
 
 
-	/** 异常详细  */
+	/**
+	 * 异常详细
+	 */
+	@Column(name = "exception_detail", nullable = false, columnDefinition = "varchar(4096) not null comment 'cron 异常详细'")
 	private String exceptionDetail;
 
-
-	/** 状态 */
+	/**
+	 * 状态
+	 */
+	@Column(name = "is_success", nullable = false, columnDefinition = "boolean DEFAULT false comment '状态'")
 	private Boolean isSuccess;
 
-
-	/** 任务名称 */
+	/**
+	 * 任务名称
+	 */
+	@Column(name = "job_name", nullable = false, columnDefinition = "varchar(64) not null comment '任务名称'")
 	private String jobName;
 
-
-	/** 方法名称 */
+	/**
+	 * 方法名称
+	 */
+	@Column(name = "method_name", nullable = false, columnDefinition = "varchar(64) not null comment '方法名称'")
 	private String methodName;
 
-
-	/** 参数 */
+	/**
+	 * 参数
+	 */
+	@Column(name = "params", nullable = false, columnDefinition = "varchar(64) not null comment '参数'")
 	private String params;
 
-
-	/** 耗时（毫秒） */
+	/**
+	 * 耗时（毫秒）
+	 */
+	@Column(name = "time", nullable = false, columnDefinition = "bigint not null default 1 comment '耗时（毫秒）'")
 	private Long time;
 
-	/** 创建日期 */
-	@TableField(fill = FieldFill.INSERT)
-	private Timestamp createTime;
-
-
-	public void copy(QuartzLog source) {
-		BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
+	public String getBeanName() {
+		return beanName;
 	}
 
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getBaenName() {
-		return baenName;
-	}
-
-	public void setBaenName(String baenName) {
-		this.baenName = baenName;
+	public void setBeanName(String beanName) {
+		this.beanName = beanName;
 	}
 
 	public String getCronExpression() {
@@ -135,10 +137,5 @@ public class QuartzLog extends BaseSuperEntity<QuartzLog, Long> implements Seria
 
 	public void setTime(Long time) {
 		this.time = time;
-	}
-
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
 	}
 }

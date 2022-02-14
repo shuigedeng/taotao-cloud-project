@@ -39,7 +39,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties({EndpointProperties.class})
-@ConditionalOnProperty(prefix = EndpointProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = EndpointProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class EndPointAutoConfiguration implements InitializingBean {
 
 	@Override

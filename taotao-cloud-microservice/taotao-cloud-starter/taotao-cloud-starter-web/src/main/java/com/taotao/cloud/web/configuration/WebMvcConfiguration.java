@@ -388,7 +388,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 						.getProducibleMediaTypes();
 					for (MethodParameter params : method.getMethodParameters()) {
 						if (params.hasParameterAnnotation(RequestBody.class)) {
-							mediaTypeSet.add(MediaType.APPLICATION_JSON_UTF8);
+							mediaTypeSet.add(MediaType.APPLICATION_JSON);
 							break;
 						}
 					}

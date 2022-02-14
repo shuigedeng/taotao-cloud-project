@@ -55,7 +55,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties({OkHttpProperties.class})
-@ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 public class OkhttpAutoConfiguration implements InitializingBean {
 
 	@Override
@@ -65,9 +65,7 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 
 	@Bean
 	public OkHttpService okHttpService(OkHttpProperties okHttpProperties) {
-		OkHttpService okHttpService = OkHttpService.builder();
-		okHttpService.setOkHttpProperties(okHttpProperties);
-		return okHttpService;
+		return OkHttpService.builder(okHttpProperties);
 	}
 
 	/**
@@ -106,17 +104,13 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 
 		private OkHttpProperties okHttpProperties;
 
-		public void setOkHttpProperties(OkHttpProperties okHttpProperties) {
-			this.okHttpProperties = okHttpProperties;
-		}
-
 		/**
 		 * 初始化okHttpClient，并且允许https访问
 		 *
 		 * @author shuigedeng
 		 * @since 2021-09-02 16:26:25
 		 */
-		private OkHttpService() {
+		private OkHttpService(OkHttpProperties okHttpProperties) {
 			if (okHttpClient == null) {
 				synchronized (OkHttpService.class) {
 					if (okHttpClient == null) {
@@ -160,8 +154,8 @@ public class OkhttpAutoConfiguration implements InitializingBean {
 		 * @author shuigedeng
 		 * @since 2021-09-02 16:26:43
 		 */
-		public static OkHttpService builder() {
-			return new OkHttpService();
+		public static OkHttpService builder(OkHttpProperties okHttpProperties) {
+			return new OkHttpService(okHttpProperties);
 		}
 
 		/**

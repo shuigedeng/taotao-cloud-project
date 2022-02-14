@@ -20,7 +20,7 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
-	//extends Model<T>
+	extends Model<T>
 	implements Serializable {
 
 	@Serial

@@ -5,7 +5,6 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledInterceptorOrder;
-import com.taotao.cloud.web.schedule.common.utils.SerializableUtils;
 import com.taotao.cloud.web.schedule.common.utils.proxy.Point;
 import com.taotao.cloud.web.schedule.model.ScheduledLogModel;
 import com.taotao.cloud.web.schedule.model.ScheduledRunningContext;
@@ -31,7 +30,7 @@ public class LogStrengthen implements BaseStrengthen {
 		scheduledLogModel = new ScheduledLogModel();
 		scheduledLogModel.setScheduledSource(point.getScheduledSource());
 		scheduledLogModel.setStatrDate(new Date());
-		scheduledLogModel.setSuperScheduledName(point.getSuperScheduledName());
+		scheduledLogModel.setScheduledName(point.getSuperScheduledName());
 	}
 
 	/**

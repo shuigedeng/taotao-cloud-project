@@ -17,7 +17,7 @@ public class ScheduledLogModel implements Serializable {
 
 	private static final long serialVersionUID = 2525367910036678105L;
 
-	private String superScheduledName;
+	private String scheduledName;
 
 	private Date statrDate;
 
@@ -33,12 +33,12 @@ public class ScheduledLogModel implements Serializable {
 
 	private String fileName;
 
-	public String getSuperScheduledName() {
-		return superScheduledName;
+	public String getScheduledName() {
+		return scheduledName;
 	}
 
-	public void setSuperScheduledName(String superScheduledName) {
-		this.superScheduledName = superScheduledName;
+	public void setScheduledName(String scheduledName) {
+		this.scheduledName = scheduledName;
 	}
 
 	public Date getStatrDate() {
@@ -95,7 +95,7 @@ public class ScheduledLogModel implements Serializable {
 
 	public void generateFileName() {
 		this.fileName =
-			superScheduledName + DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now());
+			scheduledName + DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now());
 	}
 
 	public void computingTime() {

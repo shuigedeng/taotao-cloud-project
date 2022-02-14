@@ -1,16 +1,14 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
+import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.vo.redis.RedisVo;
 import com.taotao.cloud.sys.biz.service.RedisService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.connection.DataType;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,10 +22,10 @@ import org.springframework.stereotype.Service;
 public class RedisServiceImpl implements RedisService {
 
 	@Autowired
-	RedisTemplate redisTemplate;
+	private RedisRepository redisRepository;
 
-	@Value("${loginCode.expiration}")
-	private Long expiration;
+	//@Value("${loginCode.expiration}")
+	//private Long expiration;
 
 	@Override
 	public Page<RedisVo> findByKey(String key, Pageable pageable) {
@@ -35,7 +33,7 @@ public class RedisServiceImpl implements RedisService {
 		if (!"*".equals(key)) {
 			key = "*" + key + "*";
 		}
-		for (Object s : redisTemplate.keys(key)) {
+		for (Object s : redisRepository.keys(key)) {
 			// 过滤掉权限的缓存
 			if (s.toString().indexOf("role::loadPermissionByUser") != -1
 				|| s.toString().indexOf("user::loadUserByUsername") != -1
@@ -45,12 +43,12 @@ public class RedisServiceImpl implements RedisService {
 			) {
 				continue;
 			}
-			DataType dataType = redisTemplate.type(s.toString());
+			DataType dataType = redisRepository.type(s.toString());
 			if (!"string".equals(dataType.code())) {
 				continue;
 			}
 			RedisVo redisVo = new RedisVo(s.toString(),
-				redisTemplate.opsForValue().get(s.toString()).toString());
+				redisRepository.get(s.toString()).toString());
 			redisVos.add(redisVo);
 		}
 		//Page<RedisVo> page = new PageImpl<RedisVo>(
@@ -62,18 +60,18 @@ public class RedisServiceImpl implements RedisService {
 
 	@Override
 	public void delete(String key) {
-		redisTemplate.delete(key);
+		redisRepository.del(key);
 	}
 
 	@Override
 	public void flushdb() {
-		redisTemplate.getConnectionFactory().getConnection().flushDb();
+		redisRepository.getConnectionFactory().getConnection().flushDb();
 	}
 
 	@Override
 	public String getCodeVal(String key) {
 		try {
-			return redisTemplate.opsForValue().get(key).toString();
+			return redisRepository.get(key).toString();
 		} catch (Exception e) {
 			return "";
 		}
@@ -81,7 +79,7 @@ public class RedisServiceImpl implements RedisService {
 
 	@Override
 	public void saveCode(String key, Object val) {
-		redisTemplate.opsForValue().set(key, val);
-		redisTemplate.expire(key, expiration, TimeUnit.MINUTES);
+		redisRepository.set(key, val);
+		//redisTemplate.expire(key, expiration, TimeUnit.MINUTES);
 	}
 }

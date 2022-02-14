@@ -52,7 +52,7 @@ public class Region extends SuperEntity<Region,Long> {
 	/**
 	 * 地区编码
 	 */
-	@Column(name = "code", unique = true, nullable = false, columnDefinition = "varchar(255) not null comment '地区编码'")
+	@Column(name = "code", nullable = false, columnDefinition = "varchar(255) not null comment '地区编码'")
 	private String code;
 
 	/**

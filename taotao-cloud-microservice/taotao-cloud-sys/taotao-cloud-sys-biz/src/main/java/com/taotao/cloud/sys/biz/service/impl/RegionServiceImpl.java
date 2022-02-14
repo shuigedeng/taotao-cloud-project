@@ -255,11 +255,11 @@ public class RegionServiceImpl extends
 			//读取数据
 			String jsonString;
 			if (Objects.nonNull(okHttpService)) {
-				jsonString = okHttpService.url(StringUtils.isEmpty(url) ? syncUrl : url)
+				jsonString = okHttpService.url(StringUtils.isBlank(url) ? syncUrl : url)
 					.get()
 					.sync();
 			} else {
-				jsonString = HttpRequest.get(StringUtils.isEmpty(url) ? syncUrl : url)
+				jsonString = HttpRequest.get(StringUtils.isBlank(url) ? syncUrl : url)
 					.useConsoleLog()
 					.executeAsync()
 					.join()
@@ -268,9 +268,9 @@ public class RegionServiceImpl extends
 
 			if (StrUtil.isNotBlank(jsonString)) {
 				//清空数据
-				QueryWrapper<Region> queryWrapper = new QueryWrapper();
-				queryWrapper.ne("id", "-1");
-				this.remove(queryWrapper);
+				//QueryWrapper<Region> queryWrapper = new QueryWrapper();
+				//queryWrapper.ne("id", "-1");
+				//this.remove(queryWrapper);
 
 				//清空缓存的地区数据
 				redisRepository.del(redisRepository.keys(RedisConstant.REGIONS_PATTERN).toArray(new String[0]));
@@ -280,7 +280,7 @@ public class RegionServiceImpl extends
 				for (int i = 0; i < (regions.size() / 100 + (regions.size() % 100 == 0 ? 0 : 1));
 					i++) {
 					int endPoint = Math.min((100 + (i * 100)), regions.size());
-					this.saveBatch(regions.subList(i * 100, endPoint));
+					this.saveOrUpdateBatch(regions.subList(i * 100, endPoint));
 				}
 
 				//重新设置缓存

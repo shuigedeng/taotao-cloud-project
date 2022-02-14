@@ -4,141 +4,123 @@
  */
 package com.taotao.cloud.sys.biz.entity;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@TableName("scheduled_log")
-public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> implements Serializable {
+/**
+ * Scheduled日志表
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2021-10-09 21:10:22
+ */
+@Entity
+@Table(name = ScheduledLog.TABLE_NAME)
+@TableName(ScheduledLog.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = ScheduledLog.TABLE_NAME, comment = "Scheduled日志表")
+public class ScheduledLog extends BaseSuperEntity<ScheduledLog, Long> {
 
-	public static final String JOB_KEY = "JOB_KEY";
-
-	/**
-	 * 定时任务ID
-	 */
-	@TableId
-	private Long id;
-
-	/**
-	 * Spring Bean名称
-	 */
-	private String beanName;
-
-	/**
-	 * cron 表达式
-	 */
-	private String cronExpression;
+	public static final String TABLE_NAME = "tt_sys_scheduled_log";
 
 	/**
-	 * 状态：1暂停、0启用
+	 * 调度器名称
 	 */
-	private Boolean isPause;
+	@Column(name = "scheduled_name", nullable = false, columnDefinition = "varchar(64) not null comment '调度器名称'")
+	private String scheduledName;
 
 	/**
-	 * 任务名称
+	 * 开始时间
 	 */
-	private String jobName;
+	@Column(name = "statr_time", nullable = false, columnDefinition = "TIMESTAMP comment '开始时间'")
+	private LocalDateTime statrTime;
 
 	/**
-	 * 方法名称
+	 * 结束时间
 	 */
-	private String methodName;
+	@Column(name = "end_time", nullable = false, columnDefinition = "TIMESTAMP comment '结束时间'")
+	private LocalDateTime endTime;
 
 	/**
-	 * 参数
+	 * 异常信息
 	 */
-	private String params;
+	@Column(name = "exception", columnDefinition = "varchar(4096) comment '异常信息'")
+	private String exception;
 
 	/**
-	 * 备注
+	 * 执行时间
 	 */
-	private String remark;
+	@Column(name = "execution_time", nullable = false, columnDefinition = "bigint default 0  comment '执行时间'")
+	private Long executionTime;
 
 	/**
-	 * 创建时间
+	 * 是否成功
 	 */
-	@TableField(fill = FieldFill.INSERT)
-	private Timestamp createTime;
+	@Column(name = "is_success", nullable = false, columnDefinition = "boolean default false comment '是否成功'")
+	private Boolean isSuccess;
 
-	public void copy(ScheduledLog source) {
-		BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
+	/**
+	 * 调度器名称
+	 */
+	@Column(name = "scheduled_Job", nullable = false, columnDefinition = "varchar(4096) not null comment 'scheduledJob JSON对象'")
+	private String scheduledJob;
+
+	public String getScheduledName() {
+		return scheduledName;
 	}
 
-	@Override
-	public Long getId() {
-		return id;
+	public void setScheduledName(String scheduledName) {
+		this.scheduledName = scheduledName;
 	}
 
-	@Override
-	public void setId(Long id) {
-		this.id = id;
+	public LocalDateTime getStatrTime() {
+		return statrTime;
 	}
 
-	public String getBeanName() {
-		return beanName;
+	public void setStatrTime(LocalDateTime statrTime) {
+		this.statrTime = statrTime;
 	}
 
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
+	public LocalDateTime getEndTime() {
+		return endTime;
 	}
 
-	public String getCronExpression() {
-		return cronExpression;
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
 	}
 
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
+	public String getException() {
+		return exception;
 	}
 
-	public Boolean getPause() {
-		return isPause;
+	public void setException(String exception) {
+		this.exception = exception;
 	}
 
-	public void setPause(Boolean pause) {
-		isPause = pause;
+	public Long getExecutionTime() {
+		return executionTime;
 	}
 
-	public String getJobName() {
-		return jobName;
+	public void setExecutionTime(Long executionTime) {
+		this.executionTime = executionTime;
 	}
 
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
+	public Boolean getSuccess() {
+		return isSuccess;
 	}
 
-	public String getMethodName() {
-		return methodName;
+	public void setSuccess(Boolean success) {
+		isSuccess = success;
 	}
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
+	public String getScheduledJob() {
+		return scheduledJob;
 	}
 
-	public String getParams() {
-		return params;
-	}
-
-	public void setParams(String params) {
-		this.params = params;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-
-	public void setCreateTime(Timestamp createTime) {
-		this.createTime = createTime;
+	public void setScheduledJob(String scheduledJob) {
+		this.scheduledJob = scheduledJob;
 	}
 }
