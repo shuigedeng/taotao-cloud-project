@@ -238,19 +238,27 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     javadoc {
         failOnError false
 
+        options {
+            //encoding "UTF-8"
+            //charSet 'UTF-8'
+            author true
+            version true
+            title project.name
+        }
+
         options.addStringOption('Xdoclint:none', '-quiet')
         options.addStringOption('encoding', 'UTF-8')
         options.addStringOption('charSet', 'UTF-8')
     }
 
-    task sourcesJar(type: Jar) {
+    task sourcesJar(type: Jar, dependsOn: classes) {
         //from sourceSets.main.allJava
         from sourceSets.main.allSource
 
         archiveClassifier = 'sources'
     }
 
-    task javadocJar(type: Jar) {
+    task javadocJar(type: Jar, dependsOn: javadoc) {
         from javadoc
         archiveClassifier = 'javadoc'
     }
@@ -271,6 +279,14 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
         filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [env: env]
     }
     */
+
+    tasks.withType(Jar) {
+        from(project.rootDir) {
+            include 'LICENSE.txt'
+            include 'NOTICE.txt'
+            into 'META-INF'
+        }
+    }
 
     bootJar{
         manifest {
