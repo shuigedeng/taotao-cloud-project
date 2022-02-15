@@ -38,24 +38,24 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 	@CreatedBy
 	@Column(name = "create_by", columnDefinition = "bigint comment '创建人'")
 	@TableField(value = "create_by", fill = FieldFill.INSERT)
-	private I createdBy;
+	private Long createdBy;
 
 	@CreatedDate
-	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
-	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
-	private LocalDateTime lastModifiedTime;
+	@Column(name = "update_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
+	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+	private LocalDateTime updateTime;
 
 	@LastModifiedBy
-	@Column(name = "last_modified_by", columnDefinition = "bigint comment '最后修改人'")
-	@TableField(value = "last_modified_by", fill = FieldFill.INSERT_UPDATE)
-	private I lastModifiedBy;
+	@Column(name = "update_by", columnDefinition = "bigint comment '最后修改人'")
+	@TableField(value = "update_by", fill = FieldFill.INSERT_UPDATE)
+	private Long updateBy;
 
 	@Version
 	@com.baomidou.mybatisplus.annotation.Version
 	@Column(name = "version", nullable = false, columnDefinition = "int not null default 1 comment '版本号'")
 	private int version = 1;
 
-	@Column(name = "del_flag", nullable = false, columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否删除 0-正常 1-删除'")
+	@Column(name = "del_flag", nullable = false, columnDefinition = "boolean NOT NULL DEFAULT false comment '是否删除 0-正常 1-删除'")
 	private boolean delFlag;
 
 	/**
@@ -83,28 +83,28 @@ public class BaseSuperEntity<T extends SuperEntity<T, I>, I extends Serializable
 		this.createTime = createTime;
 	}
 
-	public I getCreatedBy() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(I createdBy) {
+	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
+	public LocalDateTime getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
+	public void setUpdateTime(LocalDateTime updateTime) {
+		this.updateTime = updateTime;
 	}
 
-	public I getLastModifiedBy() {
-		return lastModifiedBy;
+	public Long getUpdateBy() {
+		return updateBy;
 	}
 
-	public void setLastModifiedBy(I lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setUpdateBy(Long updateBy) {
+		this.updateBy = updateBy;
 	}
 
 	public int getVersion() {

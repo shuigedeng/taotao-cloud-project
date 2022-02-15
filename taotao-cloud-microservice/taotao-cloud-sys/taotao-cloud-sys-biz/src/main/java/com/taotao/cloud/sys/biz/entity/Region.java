@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ import org.springframework.data.annotation.CreatedDate;
 @Table(name = Region.TABLE_NAME)
 @TableName(Region.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = Region.TABLE_NAME, comment = "地区表")
-public class Region extends SuperEntity<Region,Long> {
+public class Region extends BaseSuperEntity<Region,Long> {
 
 	public static final String TABLE_NAME = "tt_sys_region";
 
@@ -94,18 +95,18 @@ public class Region extends SuperEntity<Region,Long> {
 	@Column(name = "path", columnDefinition = "varchar(255) null comment '行政地区路径，类似：1，2，3'")
 	private String path;
 
-	@Column(name = "order_num", columnDefinition = "int not null default 1 comment '排序'")
-	private Integer orderNum = 1;
+	@Column(name = "order_num", columnDefinition = "int not null default 0 comment '排序'")
+	private Integer orderNum;
 
-	@CreatedDate
-	@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private LocalDateTime createTime;
-
-	@CreatedDate
-	@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
-	@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
-	private LocalDateTime lastModifiedTime;
+	//@CreatedDate
+	//@Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP comment '创建时间'")
+	//@TableField(value = "create_time", fill = FieldFill.INSERT)
+	//private LocalDateTime createTime;
+	//
+	//@CreatedDate
+	//@Column(name = "last_modified_time", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间'")
+	//@TableField(value = "last_modified_time", fill = FieldFill.INSERT_UPDATE)
+	//private LocalDateTime lastModifiedTime;
 
 	public String getCode() {
 		return code;
@@ -161,22 +162,6 @@ public class Region extends SuperEntity<Region,Long> {
 
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
-	}
-
-	public LocalDateTime getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(LocalDateTime createTime) {
-		this.createTime = createTime;
-	}
-
-	public LocalDateTime getLastModifiedTime() {
-		return lastModifiedTime;
-	}
-
-	public void setLastModifiedTime(LocalDateTime lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
 	}
 
 	public String getPath() {
