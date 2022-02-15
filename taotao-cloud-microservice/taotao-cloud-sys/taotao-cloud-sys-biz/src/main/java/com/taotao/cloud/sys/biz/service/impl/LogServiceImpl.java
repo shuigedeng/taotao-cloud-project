@@ -139,9 +139,9 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements
 	public Object findByErrDetail(Long id) {
 		Log log = this.getById(id);
 		//ValidationUtil.isNull(log.getId(), "Log", "id", id);
-		byte[] details = log.getExceptionDetail();
+		String details = log.getExceptionDetail();
 		return Dict.create()
-			.set("exception", new String(ObjectUtil.isNotNull(details) ? details : "".getBytes()));
+			.set("exception", details);
 	}
 
 	@Override
@@ -155,9 +155,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements
 			map.put("描述", log.getDescription());
 			map.put("浏览器", log.getBrowser());
 			map.put("请求耗时/毫秒", log.getTime());
-			map.put("异常详情", new String(
-				ObjectUtil.isNotNull(log.getExceptionDetail()) ? log.getExceptionDetail()
-					: "".getBytes()));
+			map.put("异常详情", log.getExceptionDetail());
 			map.put("创建日期", log.getCreateTime());
 			list.add(map);
 		}
