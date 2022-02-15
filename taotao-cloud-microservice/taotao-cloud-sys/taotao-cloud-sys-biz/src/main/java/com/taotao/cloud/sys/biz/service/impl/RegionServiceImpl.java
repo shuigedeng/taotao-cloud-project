@@ -394,7 +394,7 @@ public class RegionServiceImpl extends
 		record.setOrderNum(order);
 		record.setId(IdGeneratorUtil.getId());
 
-		StringBuilder megName = new StringBuilder(",");
+		StringBuilder megName = new StringBuilder();
 		for (int i = 0; i < ids.length; i++) {
 			megName.append(ids[i]);
 			if (i < ids.length - 1) {

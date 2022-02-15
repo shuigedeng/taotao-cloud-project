@@ -157,7 +157,6 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 * 自动填充数据配置
 	 */
 	@Bean
-	@ConditionalOnMissingBean
 	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
 	public MetaObjectHandler metaObjectHandler() {
 		return new DateMetaObjectHandler(autoFillProperties);
@@ -237,6 +236,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 				if (oldId != null) {
 					return;
 				}
+
 				Object idVal = StrPool.STRING_TYPE_NAME.equals(
 					metaObject.getGetterType(autoFillProperties.getIdField()).getName())
 					? String.valueOf(id)
@@ -245,7 +245,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 				return;
 			}
 
-			// 2. 没有继承SuperEntity， 但主键的字段名为：  id
+			// 2. 没有继承SuperEntity， 但主键的字段名为：id
 			if (metaObject.hasGetter(autoFillProperties.getIdField())) {
 				Object oldId = metaObject.getValue(autoFillProperties.getIdField());
 				if (oldId != null) {
@@ -266,6 +266,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 			if (tableInfo == null) {
 				return;
 			}
+
 			// 主键类型
 			Class<?> keyType = tableInfo.getKeyType();
 			if (keyType == null) {
@@ -308,6 +309,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 						metaObject);
 				}
 			}
+
 			if (metaObject.hasGetter(autoFillProperties.getCreateTimeField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getCreateTimeField());
 				if (oldVal == null) {
