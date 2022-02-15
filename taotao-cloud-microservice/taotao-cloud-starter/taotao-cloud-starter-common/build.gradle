@@ -29,6 +29,7 @@ dependencies {
         exclude group: 'junit', module: 'junit'
     }
     api 'org.apache.httpcomponents:httpmime'
+    api 'commons-configuration:commons-configuration:1.10'
     
     api "io.swagger.core.v3:swagger-models:2.1.12"
     api 'io.swagger.core.v3:swagger-annotations:2.1.12'

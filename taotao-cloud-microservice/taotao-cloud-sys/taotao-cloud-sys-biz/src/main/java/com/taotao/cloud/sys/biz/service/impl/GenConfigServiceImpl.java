@@ -31,7 +31,9 @@ public class GenConfigServiceImpl extends ServiceImpl<GenConfigMapper, GenConfig
 		GenConfig genConfig = this.getOne(
 			new LambdaQueryWrapper<GenConfig>().eq(GenConfig::getTableName, tableName));
 		if (genConfig == null) {
-			return new GenConfig(tableName);
+			GenConfig config = new GenConfig();
+			config.setTableName(tableName);
+			return config;
 		}
 		return genConfig;
 	}
