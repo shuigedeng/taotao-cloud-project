@@ -15,7 +15,7 @@ import com.taotao.cloud.sys.biz.entity.GenConfig;
  * @version 2021.10
  * @since 2022-02-15 09:12:37
  */
-public interface GenConfigService extends IService<GenConfig> {
+public interface IGenConfigService extends IService<GenConfig> {
 
 	/**
 	 * 查询表配置

@@ -8,7 +8,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
-import com.taotao.cloud.sys.biz.service.GenConfigService;
+import com.taotao.cloud.sys.biz.service.IGenConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,10 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/generator/config")
 public class GenConfigController {
 
-	private final GenConfigService genConfigService;
+	private final IGenConfigService IGenConfigService;
 
-	public GenConfigController(GenConfigService genConfigService) {
-		this.genConfigService = genConfigService;
+	public GenConfigController(IGenConfigService IGenConfigService) {
+		this.IGenConfigService = IGenConfigService;
 	}
 
 	@Operation(summary = "查询", description = "查询", method = CommonConstant.GET)
@@ -44,7 +44,7 @@ public class GenConfigController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{tableName}")
 	public Result<GenConfig> get(@PathVariable String tableName) {
-		return Result.success(genConfigService.find(tableName));
+		return Result.success(IGenConfigService.find(tableName));
 	}
 
 	@Operation(summary = "修改", description = "修改", method = CommonConstant.PUT)
@@ -52,6 +52,6 @@ public class GenConfigController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
 	public Result<GenConfig> emailConfig(@Validated @RequestBody GenConfig genConfig) {
-		return Result.success(genConfigService.update(genConfig.getTableName(), genConfig));
+		return Result.success(IGenConfigService.update(genConfig.getTableName(), genConfig));
 	}
 }

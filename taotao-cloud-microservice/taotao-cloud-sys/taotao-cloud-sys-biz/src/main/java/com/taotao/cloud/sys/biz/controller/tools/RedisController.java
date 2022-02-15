@@ -4,15 +4,13 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.redis.RedisVo;
-import com.taotao.cloud.sys.biz.service.RedisService;
+import com.taotao.cloud.sys.biz.service.IRedisService;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,14 +33,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class RedisController {
 
 	@Autowired
-	private RedisService redisService;
+	private IRedisService IRedisService;
 
 	@Operation(summary = "查询Redis缓存", description = "查询Redis缓存", method = CommonConstant.GET)
 	@RequestLogger(description = "查询Redis缓存")
 	@GetMapping
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_SELECT')")
 	public Result<Page> getRedis(String key, Pageable pageable) {
-		Page byKey = redisService.findByKey(key, pageable);
+		Page byKey = IRedisService.findByKey(key, pageable);
 		return Result.success(byKey);
 	}
 
@@ -52,7 +50,7 @@ public class RedisController {
 	@DeleteMapping(value = "/redis")
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
 	public Result<Boolean> delete(@RequestBody RedisVo resources) {
-		redisService.delete(resources.getKey());
+		IRedisService.delete(resources.getKey());
 		return Result.success(true);
 	}
 
@@ -62,7 +60,7 @@ public class RedisController {
 	@DeleteMapping(value = "/redis/all")
 	@PreAuthorize("hasAnyRole('ADMIN','REDIS_ALL','REDIS_DELETE')")
 	public Result<Boolean> deleteAll() {
-		redisService.flushdb();
+		IRedisService.flushdb();
 		return Result.success(true);
 	}
 }

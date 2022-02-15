@@ -7,12 +7,11 @@ package com.taotao.cloud.sys.biz.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
 import com.taotao.cloud.sys.biz.entity.AlipayConfig;
-import com.taotao.cloud.sys.biz.mapper.AlipayConfigMapper;
-import com.taotao.cloud.sys.biz.service.AlipayConfigService;
+import com.taotao.cloud.sys.biz.mapper.IAlipayConfigMapper;
+import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import 	com.baomidou.mybatisplus.extension.activerecord.Model;
 
 // 默认不使用缓存
 //import org.springframework.cache.annotation.CacheConfig;
@@ -24,7 +23,7 @@ import 	com.baomidou.mybatisplus.extension.activerecord.Model;
 //@CacheConfig(cacheNames = "alipayConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class AlipayConfigServiceImpl extends
-	ServiceImpl<AlipayConfigMapper, AlipayConfig> implements AlipayConfigService {
+	ServiceImpl<IAlipayConfigMapper, AlipayConfig> implements IAlipayConfigService {
 
 
 	@Override

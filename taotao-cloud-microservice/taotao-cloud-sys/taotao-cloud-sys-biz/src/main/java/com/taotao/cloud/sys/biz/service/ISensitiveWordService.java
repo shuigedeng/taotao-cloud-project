@@ -9,7 +9,7 @@ import com.taotao.cloud.sys.biz.entity.SensitiveWord;
  * @author Bulbasaur
  * @since 2020/11/17 8:02 下午
  */
-public interface SensitiveWordService extends IService<SensitiveWord> {
+public interface ISensitiveWordService extends IService<SensitiveWord> {
 
 	/**
 	 * 重新写入缓存

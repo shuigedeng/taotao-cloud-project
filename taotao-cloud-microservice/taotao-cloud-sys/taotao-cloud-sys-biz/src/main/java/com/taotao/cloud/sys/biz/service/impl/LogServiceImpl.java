@@ -5,7 +5,6 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -14,8 +13,8 @@ import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.Log;
-import com.taotao.cloud.sys.biz.mapper.LogMapper;
-import com.taotao.cloud.sys.biz.service.LogService;
+import com.taotao.cloud.sys.biz.mapper.ILogMapper;
+import com.taotao.cloud.sys.biz.service.ILogService;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements
-	LogService {
+public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
+	ILogService {
 
 	@Override
 	public Object findAllByPageable(String nickname, Pageable pageable) {

@@ -7,12 +7,11 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.AlipayConfig;
+import com.taotao.cloud.sys.biz.entity.GenConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface AlipayConfigMapper extends BaseMapper<AlipayConfig> {
-
+public interface IGenConfigMapper extends BaseMapper<GenConfig> {
 }

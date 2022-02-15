@@ -14,7 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 
-public interface QuartzJobService extends IService<QuartzJob> {
+public interface IQuartzJobService extends IService<QuartzJob> {
 
 	/**
 	 * 查询数据分页

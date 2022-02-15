@@ -16,8 +16,8 @@ import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.sys.api.vo.generator.TableInfo;
 import com.taotao.cloud.sys.biz.entity.ColumnConfig;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
-import com.taotao.cloud.sys.biz.mapper.ColumnInfoMapper;
-import com.taotao.cloud.sys.biz.service.GeneratorService;
+import com.taotao.cloud.sys.biz.mapper.IColumnInfoMapper;
+import com.taotao.cloud.sys.biz.service.IGeneratorService;
 import com.taotao.cloud.sys.biz.utils.GenUtil;
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,8 +37,8 @@ import org.springframework.stereotype.Service;
  * @since 2022-02-15 09:04:29
  */
 @Service
-public class GeneratorServiceImpl extends ServiceImpl<ColumnInfoMapper, ColumnConfig> implements
-	GeneratorService {
+public class GeneratorServiceImpl extends ServiceImpl<IColumnInfoMapper, ColumnConfig> implements
+	IGeneratorService {
 
 	@Override
 	public Object getTables() {

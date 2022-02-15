@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.controller.manager;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.biz.entity.SensitiveWord;
-import com.taotao.cloud.sys.biz.service.SensitiveWordService;
+import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class SensitiveWordsController {
 
 	@Autowired
-	private SensitiveWordService sensitiveWordService;
+	private ISensitiveWordService ISensitiveWordService;
 
 	@Operation(summary = "通过id获取", description = "通过id获取")
 	@GetMapping(value = "/get/{id}")
 	public Result<SensitiveWord> get(
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
 		@PathVariable String id) {
-		return Result.success(sensitiveWordService.getById(id));
+		return Result.success(ISensitiveWordService.getById(id));
 	}
 
 	//@ApiOperation(value = "分页获取")
@@ -50,8 +50,8 @@ public class SensitiveWordsController {
 	@Operation(summary = "添加敏感词", description = "添加敏感词")
 	@PostMapping
 	public Result<SensitiveWord> add(@Valid SensitiveWord sensitiveWords) {
-		sensitiveWordService.save(sensitiveWords);
-		sensitiveWordService.resetCache();
+		ISensitiveWordService.save(sensitiveWords);
+		ISensitiveWordService.resetCache();
 
 		return Result.success(sensitiveWords);
 	}
@@ -62,8 +62,8 @@ public class SensitiveWordsController {
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
 		@PathVariable Long id, SensitiveWord sensitiveWords) {
 		sensitiveWords.setId(id);
-		sensitiveWordService.updateById(sensitiveWords);
-		sensitiveWordService.resetCache();
+		ISensitiveWordService.updateById(sensitiveWords);
+		ISensitiveWordService.resetCache();
 
 		return Result.success(sensitiveWords);
 	}
@@ -74,8 +74,8 @@ public class SensitiveWordsController {
 	public Result<Boolean> delAllByIds(
 		@Parameter(description = "敏感词ID", required = true) @NotEmpty(message = "敏感词ID不能为空")
 		@PathVariable List<String> ids) {
-		sensitiveWordService.removeByIds(ids);
-		sensitiveWordService.resetCache();
+		ISensitiveWordService.removeByIds(ids);
+		ISensitiveWordService.resetCache();
 
 		return Result.success(true);
 	}

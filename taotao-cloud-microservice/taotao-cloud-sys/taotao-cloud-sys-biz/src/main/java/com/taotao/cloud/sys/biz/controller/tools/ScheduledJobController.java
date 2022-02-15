@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
 
-import com.taotao.cloud.sys.biz.service.ScheduledJobService;
+import com.taotao.cloud.sys.biz.service.IScheduledJobService;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ScheduledJobController {
 	private ScheduledManager scheduledManager;
 
 	@Autowired
-	private ScheduledJobService scheduledJobService;
+	private IScheduledJobService IScheduledJobService;
 
 	/**
 	 * 手动执行一次任务

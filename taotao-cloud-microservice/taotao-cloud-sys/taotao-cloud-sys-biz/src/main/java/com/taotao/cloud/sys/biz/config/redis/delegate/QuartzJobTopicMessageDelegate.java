@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.taotao.cloud.sys.biz.entity.QuartzJob;
-import com.taotao.cloud.sys.biz.service.QuartzJobService;
+import com.taotao.cloud.sys.biz.service.IQuartzJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzJobTopicMessageDelegate {
 	@Autowired
-	private QuartzJobService quartzJobService;
+	private IQuartzJobService IQuartzJobService;
 
 	public void addJob(String message) {
 	}

@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.vo.redis.RedisVo;
-import com.taotao.cloud.sys.biz.service.RedisService;
+import com.taotao.cloud.sys.biz.service.IRedisService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-02-11 16:19:25
  */
 @Service
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements IRedisService {
 
 	@Autowired
 	private RedisRepository redisRepository;

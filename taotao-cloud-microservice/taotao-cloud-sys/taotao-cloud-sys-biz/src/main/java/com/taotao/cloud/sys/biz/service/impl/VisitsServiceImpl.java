@@ -6,7 +6,7 @@ import com.taotao.cloud.common.utils.DateUtil;
 import com.taotao.cloud.sys.biz.entity.Visits;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;
-import com.taotao.cloud.sys.biz.service.VisitsService;
+import com.taotao.cloud.sys.biz.service.IVisitsService;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements VisitsService {
+public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements
+	IVisitsService {
 
 	private final ILogMapper ILogMapper;
 

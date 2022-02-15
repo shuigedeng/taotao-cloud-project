@@ -4,7 +4,7 @@
  */
 package com.taotao.cloud.sys.biz.config.runner;
 
-import com.taotao.cloud.sys.biz.service.QuartzJobService;
+import com.taotao.cloud.sys.biz.service.IQuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ScheduledJobInit implements ApplicationRunner {
 
 	@Autowired
-	private QuartzJobService quartzJobService;
+	private IQuartzJobService IQuartzJobService;
 	@Autowired
 	private QuartzManager quartzManager;
 
