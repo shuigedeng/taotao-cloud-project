@@ -7,8 +7,8 @@ package com.taotao.cloud.sys.biz.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
 import com.taotao.cloud.sys.biz.entity.EmailConfig;
-import com.taotao.cloud.sys.biz.mapper.EmailConfigMapper;
-import com.taotao.cloud.sys.biz.service.EmailConfigService;
+import com.taotao.cloud.sys.biz.mapper.IEmailConfigMapper;
+import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 //@CacheConfig(cacheNames = "emailConfig")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class EmailConfigServiceImpl extends ServiceImpl<EmailConfigMapper, EmailConfig> implements
-	EmailConfigService {
+public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, EmailConfig> implements
+	IEmailConfigService {
 
 	//private final IGenerator generator;
 	//

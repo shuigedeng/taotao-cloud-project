@@ -13,7 +13,7 @@ import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.QuartzLog;
 import com.taotao.cloud.sys.biz.mapper.IQuartzLogMapper;
-import com.taotao.cloud.sys.biz.service.QuartzLogService;
+import com.taotao.cloud.sys.biz.service.IQuartzLogService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 //@CacheConfig(cacheNames = "quartzLog")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class QuartzLogServiceImpl extends ServiceImpl<IQuartzLogMapper, QuartzLog> implements
-	QuartzLogService {
+	IQuartzLogService {
 
 	@Override
 	//@Cacheable

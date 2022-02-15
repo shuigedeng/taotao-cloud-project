@@ -9,7 +9,6 @@ package com.taotao.cloud.sys.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.sys.api.vo.generator.ColumnInfo;
 import com.taotao.cloud.sys.api.vo.generator.TableInfo;
 import com.taotao.cloud.sys.biz.entity.ColumnConfig;
 import java.util.List;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface ColumnInfoMapper extends BaseMapper<ColumnConfig> {
+public interface IColumnInfoMapper extends BaseMapper<ColumnConfig> {
 
 	@Select("<script>select table_name ,create_time , engine, table_collation as coding, table_comment as remark from information_schema.tables " +
 		"where table_schema = (select database()) <if test=\"name!=null\"> and table_name like CONCAT('%',#{name},'%') </if> order by create_time desc</script>")

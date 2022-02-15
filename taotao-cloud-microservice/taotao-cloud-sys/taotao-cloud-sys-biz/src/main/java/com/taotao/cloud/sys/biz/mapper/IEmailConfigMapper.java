@@ -7,11 +7,12 @@
 package com.taotao.cloud.sys.biz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.sys.biz.entity.GenConfig;
+import com.taotao.cloud.sys.biz.entity.EmailConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface GenConfigMapper extends BaseMapper<GenConfig> {
+public interface IEmailConfigMapper extends BaseMapper<EmailConfig> {
+
 }

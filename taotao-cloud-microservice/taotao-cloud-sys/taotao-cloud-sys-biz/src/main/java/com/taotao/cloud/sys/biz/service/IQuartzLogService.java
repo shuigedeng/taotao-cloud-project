@@ -14,7 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 
-public interface QuartzLogService extends IService<QuartzLog> {
+public interface IQuartzLogService extends IService<QuartzLog> {
 
 	/**
 	 * 查询数据分页

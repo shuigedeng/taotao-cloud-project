@@ -4,7 +4,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.RequestUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import com.taotao.cloud.sys.biz.service.VisitsService;
+import com.taotao.cloud.sys.biz.service.IVisitsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/visits")
 public class VisitsController {
 
-	private final VisitsService visitsService;
+	private final IVisitsService IVisitsService;
 
-	public VisitsController(VisitsService visitsService) {
-		this.visitsService = visitsService;
+	public VisitsController(IVisitsService IVisitsService) {
+		this.IVisitsService = IVisitsService;
 	}
 
 	@Operation(summary = "创建访问记录", description = "创建访问记录", method = CommonConstant.POST)
@@ -38,7 +38,7 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
 	public Result<Boolean> create() {
-		visitsService.count(RequestUtil.getHttpServletRequest());
+		IVisitsService.count(RequestUtil.getHttpServletRequest());
 		return Result.success(true);
 	}
 
@@ -47,7 +47,7 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<Object> get() {
-		return Result.success(visitsService.get());
+		return Result.success(IVisitsService.get());
 	}
 
 	@Operation(summary = "查询图表数据", description = "查询图表数据", method = CommonConstant.GET)
@@ -55,6 +55,6 @@ public class VisitsController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/chartData")
 	public Result<Object> getChartData() {
-		return Result.success(visitsService.getChartData());
+		return Result.success(IVisitsService.getChartData());
 	}
 }

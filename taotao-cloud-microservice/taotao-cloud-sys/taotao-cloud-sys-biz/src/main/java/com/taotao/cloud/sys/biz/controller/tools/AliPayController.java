@@ -7,7 +7,7 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
 import com.taotao.cloud.sys.biz.entity.AlipayConfig;
-import com.taotao.cloud.sys.biz.service.AlipayConfigService;
+import com.taotao.cloud.sys.biz.service.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,9 +34,9 @@ public class AliPayController {
 
 	private final AlipayUtils alipayUtils;
 
-	private final AlipayConfigService alipayService;
+	private final IAlipayConfigService alipayService;
 
-	public AliPayController(AlipayUtils alipayUtils, AlipayConfigService alipayService) {
+	public AliPayController(AlipayUtils alipayUtils, IAlipayConfigService alipayService) {
 		this.alipayUtils = alipayUtils;
 		this.alipayService = alipayService;
 	}

@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.Async;
  * @version 2021.10
  * @since 2022-02-15 09:19:55
  */
-public interface LogService extends IService<Log> {
+public interface ILogService extends IService<Log> {
 
 
 	Object findAllByPageable(String nickname, Pageable pageable);

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.sys.api.vo.alipay.TradeVo;
 import com.taotao.cloud.sys.biz.entity.AlipayConfig;
 
-public interface AlipayConfigService extends IService<AlipayConfig> {
+public interface IAlipayConfigService extends IService<AlipayConfig> {
 
 	/**
 	 * 处理来自PC的交易请求

@@ -11,7 +11,7 @@ import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
 import com.taotao.cloud.sys.biz.entity.EmailConfig;
 import org.springframework.scheduling.annotation.Async;
 
-public interface EmailConfigService extends IService<EmailConfig> {
+public interface IEmailConfigService extends IService<EmailConfig> {
     /**
      * 更新邮件配置
      * @param emailConfig 邮件配置

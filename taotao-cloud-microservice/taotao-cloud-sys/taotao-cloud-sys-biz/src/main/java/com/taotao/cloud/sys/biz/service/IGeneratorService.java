@@ -5,17 +5,15 @@
 package com.taotao.cloud.sys.biz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.sys.api.vo.generator.ColumnInfo;
 import com.taotao.cloud.sys.biz.entity.ColumnConfig;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 
-public interface GeneratorService extends IService<ColumnConfig> {
+public interface IGeneratorService extends IService<ColumnConfig> {
 
 	/**
 	 * ColumnInfo 查询数据库元数据

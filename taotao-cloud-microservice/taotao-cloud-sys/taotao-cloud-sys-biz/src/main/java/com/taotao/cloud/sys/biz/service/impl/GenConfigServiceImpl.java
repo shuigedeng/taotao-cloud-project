@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
-import com.taotao.cloud.sys.biz.mapper.GenConfigMapper;
-import com.taotao.cloud.sys.biz.service.GenConfigService;
+import com.taotao.cloud.sys.biz.mapper.IGenConfigMapper;
+import com.taotao.cloud.sys.biz.service.IGenConfigService;
 import java.io.File;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 //@CacheConfig(cacheNames = "genConfig")
-public class GenConfigServiceImpl extends ServiceImpl<GenConfigMapper, GenConfig> implements
-	GenConfigService {
+public class GenConfigServiceImpl extends ServiceImpl<IGenConfigMapper, GenConfig> implements
+	IGenConfigService {
 
 	@Override
 //    @Cacheable(key = "#p0")

@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
  * @version 2021.10
  * @since 2022-02-11 16:19:39
  */
-public interface RedisService {
+public interface IRedisService {
 
 	/**
 	 * findById

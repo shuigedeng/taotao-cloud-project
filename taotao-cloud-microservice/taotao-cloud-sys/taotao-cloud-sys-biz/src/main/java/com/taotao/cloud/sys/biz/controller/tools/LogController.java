@@ -9,7 +9,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
-import com.taotao.cloud.sys.biz.service.LogService;
+import com.taotao.cloud.sys.biz.service.ILogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
@@ -36,10 +36,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/logs")
 public class LogController {
 
-	private final LogService logService;
+	private final ILogService ILogService;
 
-	public LogController(LogService logService) {
-		this.logService = logService;
+	public LogController(ILogService ILogService) {
+		this.ILogService = ILogService;
 	}
 
 	@Operation(summary = "导出数据", description = "导出数据", method = CommonConstant.GET)
@@ -49,7 +49,7 @@ public class LogController {
 	public void download(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("INFO");
-		logService.download(logService.queryAll(criteria), response);
+		ILogService.download(ILogService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "导出错误数据", description = "导出错误数据", method = CommonConstant.GET)
@@ -59,7 +59,7 @@ public class LogController {
 	public void errorDownload(HttpServletResponse response, LogQueryCriteria criteria)
 		throws IOException {
 		criteria.setLogType("ERROR");
-		logService.download(logService.queryAll(criteria), response);
+		ILogService.download(ILogService.queryAll(criteria), response);
 	}
 
 	@Operation(summary = "日志查询", description = "日志查询", method = CommonConstant.GET)
@@ -69,7 +69,7 @@ public class LogController {
 	public Result<Object> getLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setType(0);
-		return Result.success(logService.queryAll(criteria, pageable));
+		return Result.success(ILogService.queryAll(criteria, pageable));
 	}
 
 	@Operation(summary = "查询api日志", description = "查询api日志", method = CommonConstant.GET)
@@ -79,7 +79,7 @@ public class LogController {
 	public Result<Object> getApiLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setType(1);
-		return Result.success(logService.findAllByPageable(criteria.getBlurry(), pageable));
+		return Result.success(ILogService.findAllByPageable(criteria.getBlurry(), pageable));
 	}
 
 	@Operation(summary = "用户日志查询", description = "用户日志查询", method = CommonConstant.GET)
@@ -89,7 +89,7 @@ public class LogController {
 	public Result<Object> getUserLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("INFO");
 		criteria.setBlurry(SecurityUtil.getUsername());
-		return Result.success(logService.queryAllByUser(criteria, pageable));
+		return Result.success(ILogService.queryAllByUser(criteria, pageable));
 	}
 
 	@Operation(summary = "错误日志查询", description = "错误日志查询", method = CommonConstant.GET)
@@ -97,7 +97,7 @@ public class LogController {
 	@GetMapping(value = "/error")
 	public Result<Object> getErrorLogs(LogQueryCriteria criteria, Pageable pageable) {
 		criteria.setLogType("ERROR");
-		return Result.success(logService.queryAll(criteria, pageable));
+		return Result.success(ILogService.queryAll(criteria, pageable));
 	}
 
 	@Operation(summary = "日志异常详情查询", description = "日志异常详情查询", method = CommonConstant.GET)
@@ -105,7 +105,7 @@ public class LogController {
 	@GetMapping(value = "/error/{id}")
 	@PreAuthorize("@el.check('admin','logError:detail')")
 	public Result<Object> getErrorLogs(@PathVariable Long id) {
-		return Result.success(logService.findByErrDetail(id));
+		return Result.success(ILogService.findByErrDetail(id));
 	}
 
 	@Operation(summary = "删除所有ERROR日志", description = "删除所有ERROR日志", method = CommonConstant.DELETE)
@@ -113,7 +113,7 @@ public class LogController {
 	@DeleteMapping(value = "/del/error")
 	@PreAuthorize("@el.check('admin','logError:remove')")
 	public Result<Object> delAllByError() {
-		logService.delAllByError();
+		ILogService.delAllByError();
 		return Result.success(true);
 	}
 
@@ -122,7 +122,7 @@ public class LogController {
 	@DeleteMapping(value = "/del/info")
 	@PreAuthorize("@el.check('admin','logInfo:remove')")
 	public Result<Boolean> delAllByInfo() {
-		logService.delAllByInfo();
+		ILogService.delAllByInfo();
 		return Result.success(true);
 	}
 }

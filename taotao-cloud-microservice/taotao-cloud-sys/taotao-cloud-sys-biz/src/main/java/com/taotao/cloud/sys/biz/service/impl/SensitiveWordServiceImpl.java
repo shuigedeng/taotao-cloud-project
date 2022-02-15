@@ -6,7 +6,7 @@ import com.taotao.cloud.sys.biz.entity.SensitiveWord;
 import com.taotao.cloud.sys.biz.mapper.ISensitiveWordMapper;
 import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;
-import com.taotao.cloud.sys.biz.service.SensitiveWordService;
+import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SensitiveWordServiceImpl extends
 	BaseSuperServiceImpl<ISensitiveWordMapper, SensitiveWord, SensitiveWordRepository, ISensitiveWordRepository, Long> implements
-	SensitiveWordService {
+	ISensitiveWordService {
 
 	@Autowired
 	private RedisRepository redisRepository;

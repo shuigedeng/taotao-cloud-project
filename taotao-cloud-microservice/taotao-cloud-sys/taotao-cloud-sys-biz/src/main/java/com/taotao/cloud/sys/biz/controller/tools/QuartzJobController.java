@@ -16,8 +16,8 @@ import com.taotao.cloud.sys.api.dto.quartz.QuartzLogDto;
 import com.taotao.cloud.sys.api.dto.quartz.QuartzLogQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.QuartzJob;
 import com.taotao.cloud.sys.biz.entity.QuartzLog;
-import com.taotao.cloud.sys.biz.service.QuartzJobService;
-import com.taotao.cloud.sys.biz.service.QuartzLogService;
+import com.taotao.cloud.sys.biz.service.IQuartzJobService;
+import com.taotao.cloud.sys.biz.service.IQuartzLogService;
 import com.taotao.cloud.web.idempotent.Idempotent;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,13 +50,13 @@ public class QuartzJobController {
 
 	private static final String ENTITY_NAME = "quartzJob";
 
-	private final QuartzJobService quartzJobService;
-	private final QuartzLogService quartzLogService;
+	private final IQuartzJobService IQuartzJobService;
+	private final IQuartzLogService IQuartzLogService;
 
-	public QuartzJobController(QuartzJobService quartzJobService,
-		QuartzLogService quartzLogService) {
-		this.quartzJobService = quartzJobService;
-		this.quartzLogService = quartzLogService;
+	public QuartzJobController(IQuartzJobService IQuartzJobService,
+		IQuartzLogService IQuartzLogService) {
+		this.IQuartzJobService = IQuartzJobService;
+		this.IQuartzLogService = IQuartzLogService;
 	}
 
 	@Operation(summary = "查询定时任务", description = "查询定时任务", method = CommonConstant.GET)
@@ -64,7 +64,7 @@ public class QuartzJobController {
 	@GetMapping
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobs(QuartzJobQueryCriteria criteria, Pageable pageable) {
-		Map<String, Object> stringObjectMap = quartzJobService.queryAll(criteria, pageable);
+		Map<String, Object> stringObjectMap = IQuartzJobService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}
 
@@ -74,12 +74,12 @@ public class QuartzJobController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void download(HttpServletResponse response, QuartzJobQueryCriteria criteria)
 		throws IOException {
-		List<QuartzJob> quartzJobs = quartzJobService.queryAll(criteria);
+		List<QuartzJob> quartzJobs = IQuartzJobService.queryAll(criteria);
 		List<QuartzJobDto> collect = quartzJobs.stream().filter(Objects::nonNull)
 			.map(e -> BeanUtil.copyProperties(e, QuartzJobDto.class))
 			.collect(Collectors.toList());
 
-		quartzJobService.download(collect, response);
+		IQuartzJobService.download(collect, response);
 	}
 
 	@Operation(summary = "导出日志数据", description = "导出日志数据", method = CommonConstant.GET)
@@ -88,12 +88,12 @@ public class QuartzJobController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public void downloadLog(HttpServletResponse response, QuartzLogQueryCriteria criteria)
 		throws IOException {
-		List<QuartzLog> quartzLogs = quartzLogService.queryAll(criteria);
+		List<QuartzLog> quartzLogs = IQuartzLogService.queryAll(criteria);
 		List<QuartzLogDto> collect = quartzLogs.stream().filter(Objects::nonNull)
 			.map(e -> BeanUtil.copyProperties(e, QuartzLogDto.class))
 			.collect(Collectors.toList());
 
-		quartzLogService.download(collect, response);
+		IQuartzLogService.download(collect, response);
 	}
 
 	@Operation(summary = "查询任务执行日志", description = "查询任务执行日志", method = CommonConstant.GET)
@@ -102,7 +102,7 @@ public class QuartzJobController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<Map<String, Object>> getJobLogs(QuartzLogQueryCriteria criteria,
 		Pageable pageable) {
-		Map<String, Object> stringObjectMap = quartzLogService.queryAll(criteria, pageable);
+		Map<String, Object> stringObjectMap = IQuartzLogService.queryAll(criteria, pageable);
 		return Result.success(stringObjectMap);
 	}
 
@@ -119,7 +119,7 @@ public class QuartzJobController {
 		QuartzJob job = new QuartzJob();
 		BeanUtil.copyProperties(jobModel, job);
 
-		return Result.success(quartzJobService.save(job));
+		return Result.success(IQuartzJobService.save(job));
 	}
 
 	@Operation(summary = "修改定时任务", description = "修改定时任务", method = CommonConstant.PUT)
@@ -131,7 +131,7 @@ public class QuartzJobController {
 		QuartzJob job = new QuartzJob();
 		BeanUtil.copyProperties(jobModel, job);
 
-		quartzJobService.updateById(job);
+		IQuartzJobService.updateById(job);
 		return Result.success(true);
 	}
 
@@ -141,8 +141,8 @@ public class QuartzJobController {
 	@PutMapping(value = "/{id}")
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> updateIsPause(@PathVariable Long id) {
-		quartzJobService.updateIsPause(
-			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
+		IQuartzJobService.updateIsPause(
+			IQuartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>()
 				.eq(QuartzJob::getId, id)));
 		return Result.success(true);
 	}
@@ -153,8 +153,8 @@ public class QuartzJobController {
 	@PutMapping(value = "/exec/{id}")
 	@PreAuthorize("@el.check('admin','timing:edit')")
 	public Result<Boolean> execution(@PathVariable Long id) {
-		quartzJobService.execution(
-			quartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
+		IQuartzJobService.execution(
+			IQuartzJobService.getOne(new LambdaQueryWrapper<QuartzJob>().eq(QuartzJob::getId, id)));
 		return Result.success(true);
 	}
 
@@ -164,7 +164,7 @@ public class QuartzJobController {
 	@DeleteMapping
 	@PreAuthorize("@el.check('admin','timing:del')")
 	public Result<Boolean> delete(@RequestBody Integer[] ids) {
-		quartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
+		IQuartzJobService.removeByIds(new ArrayList<>(Arrays.asList(ids)));
 		return Result.success(true);
 	}
 }

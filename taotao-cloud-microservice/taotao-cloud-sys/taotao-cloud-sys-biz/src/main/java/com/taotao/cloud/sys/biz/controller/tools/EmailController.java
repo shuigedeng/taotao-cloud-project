@@ -5,7 +5,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
 import com.taotao.cloud.sys.biz.entity.EmailConfig;
-import com.taotao.cloud.sys.biz.service.EmailConfigService;
+import com.taotao.cloud.sys.biz.service.IEmailConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/tools/email")
 public class EmailController {
 
-	private final EmailConfigService emailService;
+	private final IEmailConfigService emailService;
 
-	public EmailController(EmailConfigService emailService) {
+	public EmailController(IEmailConfigService emailService) {
 		this.emailService = emailService;
 	}
 

@@ -16,7 +16,7 @@
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
 import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.sys.biz.service.SensitiveWordService;
+import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 public class SensitiveWordsTopicMessageDelegate {
 
 	@Autowired
-	private SensitiveWordService sensitiveWordService;
+	private ISensitiveWordService ISensitiveWordService;
 
 	public void sensitiveWords(String message) {
 		LogUtil.info(message);

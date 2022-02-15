@@ -5,7 +5,7 @@
 package com.taotao.cloud.sys.biz.config.runner;
 
 import com.taotao.cloud.sys.biz.entity.QuartzJob;
-import com.taotao.cloud.sys.biz.service.QuartzJobService;
+import com.taotao.cloud.sys.biz.service.IQuartzJobService;
 import com.taotao.cloud.web.quartz.QuartzJobModel;
 import com.taotao.cloud.web.quartz.QuartzManager;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class QuartzJobInit implements ApplicationRunner {
 
 	@Autowired
-	private QuartzJobService quartzJobService;
+	private IQuartzJobService IQuartzJobService;
 	@Autowired
 	private QuartzManager quartzManager;
 
@@ -31,7 +31,7 @@ public class QuartzJobInit implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments applicationArguments) {
 		System.out.println("--------------------注入定时任务---------------------");
-		List<QuartzJob> quartzJobs = quartzJobService.findByIsPauseIsFalse();
+		List<QuartzJob> quartzJobs = IQuartzJobService.findByIsPauseIsFalse();
 		List<QuartzJobModel> quartzJobModels = new ArrayList<>();
 
 		cn.hutool.core.bean.BeanUtil.copyProperties(quartzJobs, quartzJobModels);
