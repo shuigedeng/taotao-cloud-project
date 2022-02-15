@@ -1,99 +1,100 @@
 /**
- * Copyright (C) 2018-2020
- * All rights reserved, Designed By www.yixiang.co
- * 注意：
+ * Copyright (C) 2018-2020 All rights reserved, Designed By www.yixiang.co 注意：
  * 本软件为www.yixiang.co开发研制
  */
 package com.taotao.cloud.sys.biz.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.SuperEntity;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 /**
- * @author hupeng
- * @date 2018-11-24
+ * 日志表
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-15 09:25:26
  */
-@TableName("log")
-public class Log extends BaseSuperEntity<Log, Long> implements Serializable {
+@Entity
+@Table(name = Log.TABLE_NAME)
+@TableName(Log.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = Log.TABLE_NAME, comment = "日志表")
+public class Log extends BaseSuperEntity<Log, Long> {
 
-    @TableId
-    private Long id;
+	public static final String TABLE_NAME = "tt_sys_log";
 
-    /** 操作用户 */
-    private String username;
+	/**
+	 * 操作用户
+	 */
+	@Column(name = "username", nullable = false, columnDefinition = "varchar(64) not null comment '操作用户'")
+	private String username;
 
-    @TableField(exist = false)
-    private String nickname;
+	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(64) not null comment 'nickname'")
+	private String nickname;
 
-    /** 描述 */
-    private String description;
+	/**
+	 * 描述
+	 */
+	@Column(name = "description", nullable = false, columnDefinition = "varchar(1024) not null comment '描述'")
+	private String description;
 
-    /** 方法名 */
-    private String method;
+	/**
+	 * 方法名
+	 */
+	@Column(name = "method", nullable = false, columnDefinition = "varchar(64) not null comment '方法名'")
+	private String method;
 
-    private Long uid;
+	@Column(name = "uid", nullable = false, columnDefinition = "bigint not null default 0 comment 'uid'")
+	private Long uid;
 
-    private Integer type;
+	@Column(name = "type", nullable = false, columnDefinition = "int not null default 0 comment '类型'")
+	private Integer type;
 
-    /** 参数 */
-    private String params;
+	/**
+	 * 参数
+	 */
+	@Column(name = "params", nullable = false, columnDefinition = "varchar(1024) not null comment '参数'")
+	private String params;
 
-    /** 日志类型 */
-    private String logType;
+	/**
+	 * 日志类型
+	 */
+	@Column(name = "log_type", nullable = false, columnDefinition = "varchar(64) not null comment '日志类型'")
+	private String logType;
 
-    /** 请求ip */
-    private String requestIp;
+	/**
+	 * 请求ip
+	 */
+	@Column(name = "request_ip", nullable = false, columnDefinition = "varchar(64) not null comment '请求ip'")
+	private String requestIp;
 
-    /** 地址 */
-    private String address;
+	/**
+	 * 地址
+	 */
+	@Column(name = "address", nullable = false, columnDefinition = "varchar(256) not null comment '地址'")
+	private String address;
 
-    /** 浏览器  */
-    private String browser;
+	/**
+	 * 浏览器
+	 */
+	@Column(name = "browser", nullable = false, columnDefinition = "varchar(1024) not null comment '浏览器'")
+	private String browser;
 
-    /** 请求耗时 */
-    private Long time;
+	/**
+	 * 请求耗时
+	 */
+	@Column(name = "time", nullable = false, columnDefinition = "bigint not null default 0 comment '请求耗时'")
+	private Long time;
 
-    /** 异常详细  */
-    private byte[] exceptionDetail;
+	/**
+	 * 异常详细
+	 */
+	@Column(name = "exception_detail", nullable = false, columnDefinition = "varchar(4096) not null comment '异常详细'")
+	private String exceptionDetail;
 
-    public Log(String logType, Long time) {
-        this.logType = logType;
-        this.time = time;
-    }
-
-	public Log(Long id, String username, String nickname, String description, String method,
-		Long uid, Integer type, String params, String logType, String requestIp,
-		String address, String browser, Long time, byte[] exceptionDetail) {
-		this.id = id;
-		this.username = username;
-		this.nickname = nickname;
-		this.description = description;
-		this.method = method;
-		this.uid = uid;
-		this.type = type;
-		this.params = params;
-		this.logType = logType;
-		this.requestIp = requestIp;
-		this.address = address;
-		this.browser = browser;
-		this.time = time;
-		this.exceptionDetail = exceptionDetail;
-	}
-
-	@Override
-	public Long getId() {
-
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;
@@ -191,11 +192,11 @@ public class Log extends BaseSuperEntity<Log, Long> implements Serializable {
 		this.time = time;
 	}
 
-	public byte[] getExceptionDetail() {
+	public String getExceptionDetail() {
 		return exceptionDetail;
 	}
 
-	public void setExceptionDetail(byte[] exceptionDetail) {
+	public void setExceptionDetail(String exceptionDetail) {
 		this.exceptionDetail = exceptionDetail;
 	}
 }

@@ -129,13 +129,10 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 		if (this == anObject) {
 			return true;
 		}
-		if (anObject instanceof StringPointer) {
-			StringPointer that = (StringPointer) anObject;
+		if (anObject instanceof StringPointer that) {
 			if (length == that.length) {
-				char[] v1 = this.value;
-				char[] v2 = that.value;
 				for (int i = 0; i < this.length; i++) {
-					if (v1[this.offset + i] != v2[that.offset + i]) {
+					if (this.value[this.offset + i] != that.value[that.offset + i]) {
 						return false;
 					}
 				}
@@ -150,13 +147,11 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 		int len1 = this.length;
 		int len2 = that.length;
 		int lim = Math.min(len1, len2);
-		char[] v1 = this.value;
-		char[] v2 = that.value;
 
 		int k = 0;
 		while (k < lim) {
-			char c1 = v1[this.offset + k];
-			char c2 = v2[that.offset + k];
+			char c1 = this.value[this.offset + k];
+			char c2 = that.value[that.offset + k];
 			if (c1 != c2) {
 				return c1 - c2;
 			}

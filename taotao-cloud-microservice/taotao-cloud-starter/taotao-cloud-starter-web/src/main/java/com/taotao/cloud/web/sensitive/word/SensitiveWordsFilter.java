@@ -101,23 +101,21 @@ public class SensitiveWordsFilter implements Serializable {
 						 */
 						NavigableSet<StringPointer> desSet = node.words.headSet(sp.substring(i),
 							true);
-						if (desSet != null) {
-							for (StringPointer word : desSet.descendingSet()) {
-								/*
-								 * 仍然需要再判断一次，例如"色情信息哪里有？"，
-								 * 如果节点只包含"色情电影"一个词，
-								 * 仍然能够取到word为"色情电影"，但是不该匹配。
-								 */
-								if (sp.nextStartsWith(i, word)) {
-									//匹配成功，将匹配的部分，用replace制定的内容替代
-									sp.fill(i, i + word.length, replace);
-									//跳过已经替代的部分
-									step = word.length;
-									//标示有替换
-									replaced = true;
-									//跳出循环（然后是while循环的下一个位置）
-									break outer;
-								}
+						for (StringPointer word : desSet.descendingSet()) {
+							/*
+							 * 仍然需要再判断一次，例如"色情信息哪里有？"，
+							 * 如果节点只包含"色情电影"一个词，
+							 * 仍然能够取到word为"色情电影"，但是不该匹配。
+							 */
+							if (sp.nextStartsWith(i, word)) {
+								//匹配成功，将匹配的部分，用replace制定的内容替代
+								sp.fill(i, i + word.length, replace);
+								//跳过已经替代的部分
+								step = word.length;
+								//标示有替换
+								replaced = true;
+								//跳出循环（然后是while循环的下一个位置）
+								break outer;
 							}
 						}
 					}
@@ -184,7 +182,7 @@ public class SensitiveWordsFilter implements Serializable {
 			nodesUpdate[index] = node;
 		} else {
 			//如果已经有节点（1个或多个），找到正确的节点
-			for (; node != null; node = node.next) {
+			for (; true; node = node.next) {
 				//匹配节点
 				if (node.headTwoCharMix == mix) {
 					node.words.add(sp);

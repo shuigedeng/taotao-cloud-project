@@ -16,7 +16,7 @@ public class SensitiveWordsNode implements Serializable {
 	/**
 	 * 所有以这两个字符开头的词表
 	 */
-	protected final TreeSet<StringPointer> words = new TreeSet<StringPointer>();
+	protected final TreeSet<StringPointer> words = new TreeSet<>();
 
 	/**
 	 * 下一个节点
