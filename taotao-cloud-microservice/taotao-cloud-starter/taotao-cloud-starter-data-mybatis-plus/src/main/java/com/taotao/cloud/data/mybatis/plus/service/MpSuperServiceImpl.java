@@ -44,7 +44,7 @@ public class MpSuperServiceImpl<M extends MpSuperMapper<T, I>, T extends MpSuper
 
 	private Class<T> entityClass = null;
 
-	public MpSuperMapper getSuperMapper() {
+	public MpSuperMapper<T, I> getSuperMapper() {
 		if (baseMapper != null) {
 			return baseMapper;
 		}

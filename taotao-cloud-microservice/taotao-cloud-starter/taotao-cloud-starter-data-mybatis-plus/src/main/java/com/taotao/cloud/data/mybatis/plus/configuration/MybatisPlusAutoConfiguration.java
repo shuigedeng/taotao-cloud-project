@@ -157,7 +157,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 * 自动填充数据配置
 	 */
 	@Bean
-	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
+	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 	public MetaObjectHandler metaObjectHandler() {
 		return new DateMetaObjectHandler(autoFillProperties);
 	}
@@ -348,6 +348,7 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 						metaObject);
 				}
 			}
+
 			if (metaObject.hasGetter(autoFillProperties.getUpdateTimeField())) {
 				Object oldVal = metaObject.getValue(autoFillProperties.getUpdateTimeField());
 				if (oldVal == null) {
