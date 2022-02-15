@@ -60,7 +60,8 @@ public class ScheduledPostProcessor implements BeanPostProcessor, ApplicationCon
 					continue;
 				}
 
-				ScheduledJobModel scheduledJobModel = new ScheduledJobModel(annotation, method, bean);
+				ScheduledJobModel scheduledJobModel = new ScheduledJobModel(annotation, method,
+					bean);
 				if (!scheduledJobModel.check()) {
 					throw new ScheduledException(
 						"在" + beanName + "Bean中" + method.getName() + "方法的注解参数错误");

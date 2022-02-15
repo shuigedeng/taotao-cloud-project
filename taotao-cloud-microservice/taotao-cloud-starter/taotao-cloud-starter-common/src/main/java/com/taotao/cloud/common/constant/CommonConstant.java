@@ -262,5 +262,10 @@ public class CommonConstant {
 	public static final String ZIPKIN_TRACE_ID = "X-B3-TraceId";
 	public static final String ZIPKIN_SPANE_ID = "X-B3-SpanId";
 
+	//免费图床
+	public static final String SM_MS_URL = "https://sm.ms/api";
+
+	// IP归属地查询
+	public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp?ip=%s&json=true";
 
 }

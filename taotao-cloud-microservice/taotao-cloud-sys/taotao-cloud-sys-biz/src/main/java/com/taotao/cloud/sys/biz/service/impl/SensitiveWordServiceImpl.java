@@ -32,6 +32,7 @@ public class SensitiveWordServiceImpl extends
 		if (sensitiveWordsList == null || sensitiveWordsList.isEmpty()) {
 			return;
 		}
+
 		List<String> sensitiveWords = sensitiveWordsList.stream()
 			.map(SensitiveWord::getSensitiveWord).collect(Collectors.toList());
 

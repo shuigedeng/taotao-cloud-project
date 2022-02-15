@@ -1,6 +1,7 @@
 package com.taotao.cloud.web.schedule.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 /**
  * ScheduledProperties
@@ -9,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2021.10
  * @since 2022-02-09 16:51:07
  */
+@RefreshScope
 @ConfigurationProperties(prefix = ScheduledProperties.PREFIX)
 public class ScheduledProperties {
 

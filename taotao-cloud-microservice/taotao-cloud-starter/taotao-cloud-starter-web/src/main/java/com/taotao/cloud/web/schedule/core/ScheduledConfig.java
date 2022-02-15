@@ -8,7 +8,7 @@ import java.util.concurrent.ScheduledFuture;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
- * SuperScheduledConfig
+ * ScheduledConfig
  *
  * @author shuigedeng
  * @version 2021.10

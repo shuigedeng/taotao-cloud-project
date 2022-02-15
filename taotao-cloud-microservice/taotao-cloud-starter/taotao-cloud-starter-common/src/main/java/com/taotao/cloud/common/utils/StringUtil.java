@@ -17,18 +17,27 @@ package com.taotao.cloud.common.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.RandomType;
 import com.taotao.cloud.common.model.CharPool;
 import com.taotao.cloud.common.model.Holder;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.UserAgent;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.Charsets;
 import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
@@ -46,6 +55,10 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	private StringUtil() {
 	}
 
+	private static final char SEPARATOR = '_';
+
+	private static final String UNKNOWN = "unknown";
+
 
 	/**
 	 * 特殊字符正则，sql特殊字符和空白符
@@ -55,6 +68,118 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 * <p>The maximum size to which the padding constant(s) can expand.</p>
 	 */
 	private static final int PAD_LIMIT = 8192;
+
+	/**
+	 * 驼峰命名法工具
+	 *
+	 * @return toCamelCase(" hello_world ") == "helloWorld" toCapitalizeCamelCase("hello_world") ==
+	 * "HelloWorld" toUnderScoreCase("helloWorld") = "hello_world"
+	 */
+	public static String toCamelCase(String s) {
+		if (s == null) {
+			return null;
+		}
+
+		s = s.toLowerCase();
+
+		StringBuilder sb = new StringBuilder(s.length());
+		boolean upperCase = false;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+
+			if (c == SEPARATOR) {
+				upperCase = true;
+			} else if (upperCase) {
+				sb.append(Character.toUpperCase(c));
+				upperCase = false;
+			} else {
+				sb.append(c);
+			}
+		}
+
+		return sb.toString();
+	}
+
+	/**
+	 * 驼峰命名法工具
+	 *
+	 * @return toCamelCase(" hello_world ") == "helloWorld" toCapitalizeCamelCase("hello_world") ==
+	 * "HelloWorld" toUnderScoreCase("helloWorld") = "hello_world"
+	 */
+	public static String toCapitalizeCamelCase(String s) {
+		if (s == null) {
+			return null;
+		}
+		s = toCamelCase(s);
+		return s.substring(0, 1).toUpperCase() + s.substring(1);
+	}
+
+	/**
+	 * 驼峰命名法工具
+	 *
+	 * @return toCamelCase(" hello_world ") == "helloWorld" toCapitalizeCamelCase("hello_world") ==
+	 * "HelloWorld" toUnderScoreCase("helloWorld") = "hello_world"
+	 */
+	static String toUnderScoreCase(String s) {
+		if (s == null) {
+			return null;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		boolean upperCase = false;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+
+			boolean nextUpperCase = true;
+
+			if (i < (s.length() - 1)) {
+				nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
+			}
+
+			if ((i > 0) && Character.isUpperCase(c)) {
+				if (!upperCase || !nextUpperCase) {
+					sb.append(SEPARATOR);
+				}
+				upperCase = true;
+			} else {
+				upperCase = false;
+			}
+
+			sb.append(Character.toLowerCase(c));
+		}
+
+		return sb.toString();
+	}
+
+	/**
+	 * 根据ip获取详细地址
+	 */
+	public static String getCityInfo(String ip) {
+		String api = String.format(CommonConstant.IP_URL, ip);
+		JSONObject object = JSONUtil.parseObj(HttpUtil.get(api));
+		return object.get("addr", String.class);
+	}
+
+	public static String getBrowser(HttpServletRequest request) {
+		UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+		Browser browser = userAgent.getBrowser();
+		return browser.getName();
+	}
+
+	/**
+	 * 获得当天是周几
+	 */
+	public static String getWeekDay() {
+		String[] weekDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+
+		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		if (w < 0) {
+			w = 0;
+		}
+		return weekDays[w];
+	}
 
 	/**
 	 * 首字母变小写
@@ -548,8 +673,7 @@ public class StringUtil extends org.springframework.util.StringUtils {
 	 *
 	 * <p>Note: this method does not support padding with
 	 * <a href="http://www.unicode.org/glossary/#supplementary_character">Unicode Supplementary
-	 * Characters</a>
-	 * as they require a pair of {@code char}s to be represented.
+	 * Characters</a> as they require a pair of {@code char}s to be represented.
 	 * </p>
 	 *
 	 * @param ch     character to repeat

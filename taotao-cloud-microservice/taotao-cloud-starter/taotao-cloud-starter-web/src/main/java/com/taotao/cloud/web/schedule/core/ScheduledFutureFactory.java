@@ -27,7 +27,7 @@ public class ScheduledFutureFactory {
 	 * 策略启动定时任务
 	 *
 	 * @param threadPoolTaskScheduler 定时任务线程池
-	 * @param scheduledJobModel         定时任务源信息
+	 * @param scheduledJobModel       定时任务源信息
 	 * @param runnable                执行逻辑
 	 */
 	public static ScheduledFuture<?> create(ThreadPoolTaskScheduler threadPoolTaskScheduler,
