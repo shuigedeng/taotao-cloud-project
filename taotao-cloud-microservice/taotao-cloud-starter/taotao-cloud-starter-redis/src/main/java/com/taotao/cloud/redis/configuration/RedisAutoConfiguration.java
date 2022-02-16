@@ -98,6 +98,7 @@ public class RedisAutoConfiguration implements InitializingBean {
 		template.setKeySerializer(stringRedisSerializer);
 		// hash的key也采用String的序列化方式
 		template.setHashKeySerializer(stringRedisSerializer);
+
 		// value序列化方式采用jackson
 		template.setValueSerializer(jackson2JsonRedisSerializer);
 		// hash的value序列化方式采用jackson

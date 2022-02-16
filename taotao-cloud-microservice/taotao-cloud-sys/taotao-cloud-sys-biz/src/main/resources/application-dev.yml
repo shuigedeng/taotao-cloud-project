@@ -705,6 +705,7 @@ taotao:
         enabled: true
         types:
           - kafka
+          - redis
           - logger
     laytpl:
       enabled: false
@@ -749,7 +750,7 @@ taotao:
       mybatis-plus:
         enabled: true
         auto-fill:
-          enabled: false
+          enabled: true
         dynamic:
           datasource:
             enabled: false

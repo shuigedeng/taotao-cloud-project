@@ -113,10 +113,10 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 		//类型 0-后台 1-前台
 		//log.setType(aopLog.getType());
 		if (uid != null) {
-			log.setUid(uid);
+			//log.setIp(uid);
 		}
 		assert log != null;
-		log.setRequestIp(ip);
+		log.setIp(ip);
 
 		String loginPath = "login";
 		if (loginPath.equals(signature.getName())) {
@@ -127,10 +127,10 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 				e.printStackTrace();
 			}
 		}
-		log.setAddress(StringUtil.getCityInfo(log.getRequestIp()));
+		log.setLocation(StringUtil.getCityInfo(log.getIp()));
 		log.setMethod(methodName);
 		log.setUsername(username);
-		log.setParams(params.toString() + " }");
+		log.setParams(params + " }");
 		this.save(log);
 	}
 
@@ -138,7 +138,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 	public Object findByErrDetail(Long id) {
 		Log log = this.getById(id);
 		//ValidationUtil.isNull(log.getId(), "Log", "id", id);
-		String details = log.getExceptionDetail();
+		String details = log.getExDetail();
 		return Dict.create()
 			.set("exception", details);
 	}
@@ -149,12 +149,12 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements
 		for (Log log : logs) {
 			Map<String, Object> map = new LinkedHashMap<>();
 			map.put("用户名", log.getUsername());
-			map.put("IP", log.getRequestIp());
-			map.put("IP来源", log.getAddress());
+			map.put("IP", log.getIp());
+			map.put("IP来源", log.getLocation());
 			map.put("描述", log.getDescription());
 			map.put("浏览器", log.getBrowser());
-			map.put("请求耗时/毫秒", log.getTime());
-			map.put("异常详情", log.getExceptionDetail());
+			map.put("请求耗时/毫秒", log.getConsumingTime());
+			map.put("异常详情", log.getExDetail());
 			map.put("创建日期", log.getCreateTime());
 			list.add(map);
 		}

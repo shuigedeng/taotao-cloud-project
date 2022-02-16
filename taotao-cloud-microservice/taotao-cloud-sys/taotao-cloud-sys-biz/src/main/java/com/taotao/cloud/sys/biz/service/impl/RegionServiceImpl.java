@@ -268,9 +268,9 @@ public class RegionServiceImpl extends
 
 			if (StrUtil.isNotBlank(jsonString)) {
 				//清空数据
-				//QueryWrapper<Region> queryWrapper = new QueryWrapper();
-				//queryWrapper.ne("id", "-1");
-				//this.remove(queryWrapper);
+				QueryWrapper<Region> queryWrapper = new QueryWrapper();
+				queryWrapper.ne("id", "1");
+				this.remove(queryWrapper);
 
 				//清空缓存的地区数据
 				redisRepository.del(redisRepository.keys(RedisConstant.REGIONS_PATTERN).toArray(new String[0]));

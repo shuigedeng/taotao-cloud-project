@@ -96,6 +96,7 @@ public enum DataScopeTypeEnum implements BaseEnum {
 		return val;
 	}
 
+	@Override
 	public String getDesc() {
 		return desc;
 	}

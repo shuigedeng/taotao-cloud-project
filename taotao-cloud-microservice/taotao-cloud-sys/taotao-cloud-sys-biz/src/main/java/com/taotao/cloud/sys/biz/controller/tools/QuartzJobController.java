@@ -45,7 +45,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/tools/quart")
-@Tag(name = "平台管理端-quartz定时任务管理API", description = "平台管理端-quartz定时任务管理API")
+@Tag(name = "工具管理-quartz定时任务管理API", description = "工具管理-quartz定时任务管理API")
 public class QuartzJobController {
 
 	private static final String ENTITY_NAME = "quartzJob";

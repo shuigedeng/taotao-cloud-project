@@ -3,8 +3,10 @@ package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.taotao.cloud.sys.biz.service.IScheduledJobService;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2021.10
  * @since 2022-02-11 15:56:29
  */
+@Validated
 @RestController
+@Tag(name = "工具管理-scheduled定时任务管理API", description = "工具管理-scheduled管理API")
 @RequestMapping("/sys/tools/scheduled")
 public class ScheduledJobController {
 

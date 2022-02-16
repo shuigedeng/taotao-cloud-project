@@ -32,7 +32,7 @@ public class Ip2regionProperties {
 
 	public static final String PREFIX = "taotao.cloud.ip2region";
 
-	private boolean enabled = false;
+	private boolean enabled = true;
 
 	/**
 	 * ip2region.db 文件路径

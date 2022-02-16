@@ -157,8 +157,8 @@ public class MybatisPlusAutoConfiguration implements InitializingBean {
 	 * 自动填充数据配置
 	 */
 	@Bean
-	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-	public MetaObjectHandler metaObjectHandler() {
+	@ConditionalOnProperty(prefix = MybatisPlusAutoFillProperties.PREFIX, name = "enabled", havingValue = "true")
+	public DateMetaObjectHandler metaObjectHandler() {
 		return new DateMetaObjectHandler(autoFillProperties);
 	}
 

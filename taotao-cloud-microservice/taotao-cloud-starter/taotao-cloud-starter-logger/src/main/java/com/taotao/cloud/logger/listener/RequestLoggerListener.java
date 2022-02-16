@@ -15,12 +15,11 @@
  */
 package com.taotao.cloud.logger.listener;
 
-import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.model.RequestLogger;
-import com.taotao.cloud.logger.service.impl.KafkaRequestLoggerServiceImpl;
-import com.taotao.cloud.logger.service.impl.LoggerRequestLoggerServiceImpl;
-import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
+import com.taotao.cloud.logger.service.IRequestLoggerService;
+import java.util.List;
+import java.util.Objects;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 
@@ -33,28 +32,21 @@ import org.springframework.scheduling.annotation.Async;
  */
 public class RequestLoggerListener {
 
+	private List<IRequestLoggerService> requestLoggerService;
+
+	public RequestLoggerListener(List<IRequestLoggerService> requestLoggerServices) {
+		this.requestLoggerService = requestLoggerServices;
+	}
+
 	@Async
 	@EventListener(RequestLoggerEvent.class)
 	public void saveRequestLog(RequestLoggerEvent event) {
 		RequestLogger requestLogger = (RequestLogger) event.getSource();
-		KafkaRequestLoggerServiceImpl kafkaRequestLogService = ContextUtil
-			.getBean(KafkaRequestLoggerServiceImpl.class, true);
-		if (null != kafkaRequestLogService) {
-			kafkaRequestLogService.save(requestLogger);
-		}
 
-		LoggerRequestLoggerServiceImpl loggerRequestLogService = ContextUtil
-			.getBean(LoggerRequestLoggerServiceImpl.class, true);
-		if (null != loggerRequestLogService) {
-			loggerRequestLogService.save(requestLogger);
+		if (Objects.nonNull(requestLoggerService) && requestLoggerService.size() > 0) {
+			requestLoggerService.forEach(service -> {
+				service.save(requestLogger);
+			});
 		}
-
-		RedisRequestLoggerServiceImpl redisRequestLogService = ContextUtil
-			.getBean(RedisRequestLoggerServiceImpl.class, true);
-		if (null != redisRequestLogService) {
-			redisRequestLogService.save(requestLogger);
-		}
-
-		//sysLogService.save(requestLog);
 	}
 }

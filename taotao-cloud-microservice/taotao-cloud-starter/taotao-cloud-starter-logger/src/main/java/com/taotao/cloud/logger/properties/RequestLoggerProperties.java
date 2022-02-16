@@ -40,7 +40,7 @@ public class RequestLoggerProperties {
 	/**
 	 * 日志记录类型(logger/redis/kafka)
 	 */
-	private RequestLoggerTypeEnum[] types = new RequestLoggerTypeEnum[]{RequestLoggerTypeEnum.LOGGER};
+	private RequestLoggerTypeEnum[] types;
 
 	public RequestLoggerProperties() {
 	}
@@ -54,6 +54,9 @@ public class RequestLoggerProperties {
 	}
 
 	public RequestLoggerTypeEnum[] getTypes() {
+		if(types == null || types.length == 0){
+			return new RequestLoggerTypeEnum[]{RequestLoggerTypeEnum.LOGGER};
+		}
 		return types;
 	}
 
