@@ -74,22 +74,24 @@ configurations {
     }
 }
 
-//shadowJar {
-//    mergeServiceFiles()
-//    classifier = null
-//
-////    transform(Log4j2PluginsCacheFileTransformer)
-////    version = 1.0
-//    manifest {
-//        attributes(
-//                'Main-Class': "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
-//        )
+mainClassName = 'com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi'
+
+shadowJar {
+    mergeServiceFiles()
+    classifier = null
+
+//    transform(Log4j2PluginsCacheFileTransformer)
+//    version = 1.0
+    manifest {
+        attributes(
+                'Main-Class': "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+        )
+    }
+    zip64 true
+//    dependencies {
+//        exclude(dependency('xml-apis:xml-apis:.*'))
+//        exclude(dependency('xerces:xercesImpl:.*'))
+//        exclude(dependency('org.apache.avro:avro:1.7.*'))
+//        exclude(dependency{ it.moduleGroup == 'xml-apis' })
 //    }
-//    zip64 true
-////    dependencies {
-////        exclude(dependency('xml-apis:xml-apis:.*'))
-////        exclude(dependency('xerces:xercesImpl:.*'))
-////        exclude(dependency('org.apache.avro:avro:1.7.*'))
-////        exclude(dependency{ it.moduleGroup == 'xml-apis' })
-////    }
-//}
+}
