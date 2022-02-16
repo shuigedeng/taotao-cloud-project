@@ -125,7 +125,7 @@ object TaoTaoCloudLogHudi {
             .getString(0)
           topic = topic.replaceAll("-", "_");
 
-          val sysLogDF: DataFrame = sysLogDF
+          val sysLogDF: DataFrame = sysLogDS
             .selectExpr("cast (kafka_value as string) as json")
             .select(from_json($"json", schema = TaoTaoCloudUtil.sysLogSchema).as("sysLog"))
             .select("sysLog.*")
