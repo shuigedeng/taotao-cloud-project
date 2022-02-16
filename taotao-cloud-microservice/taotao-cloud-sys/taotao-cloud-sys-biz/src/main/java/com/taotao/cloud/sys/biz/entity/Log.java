@@ -5,6 +5,7 @@
 package com.taotao.cloud.sys.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,74 +28,193 @@ public class Log extends BaseSuperEntity<Log, Long> {
 	public static final String TABLE_NAME = "tt_sys_log";
 
 	/**
-	 * 操作用户
+	 * 请求日志id
 	 */
-	@Column(name = "username", nullable = false, columnDefinition = "varchar(64) not null comment '操作用户'")
-	private String username;
-
-	@Column(name = "nickname", nullable = false, columnDefinition = "varchar(64) not null comment 'nickname'")
-	private String nickname;
+	@Column(name = "trace_id", columnDefinition = "varchar(64) null comment '请求日志id'")
+	private String traceId;
 
 	/**
-	 * 描述
+	 * 服务名称
 	 */
-	@Column(name = "description", nullable = false, columnDefinition = "varchar(1024) not null comment '描述'")
+	@Column(name = "application_name", columnDefinition = "varchar(128) null comment '服务名称'")
+	private String applicationName;
+
+	/**
+	 * 操作人ID
+	 */
+	@Column(name = "username", columnDefinition = "varchar(64) null comment '操作人'")
+	private String username;
+
+	/**
+	 * 操作人ID
+	 */
+	@Column(name = "user_id", columnDefinition = "varchar(128) null comment '操作人ID'")
+	private String userId;
+
+	/**
+	 * 客户端ID
+	 */
+	@Column(name = "client_id", columnDefinition = "varchar(128) null comment '客户端ID'")
+	private String clientId;
+
+	/**
+	 * 操作描述
+	 */
+	@Column(name = "description", columnDefinition = "varchar(1024) null comment '操作描述'")
 	private String description;
 
 	/**
-	 * 方法名
+	 * 操作IP
 	 */
-	@Column(name = "method", nullable = false, columnDefinition = "varchar(64) not null comment '方法名'")
-	private String method;
-
-	@Column(name = "uid", nullable = false, columnDefinition = "bigint not null default 0 comment 'uid'")
-	private Long uid;
-
-	@Column(name = "type", nullable = false, columnDefinition = "int not null default 0 comment '类型'")
-	private Integer type;
+	@Column(name = "ip", columnDefinition = "varchar(128) null comment '操作IP'")
+	private String ip;
 
 	/**
-	 * 参数
+	 * 操作类型 1 操作记录 2异常记录
 	 */
-	@Column(name = "params", nullable = false, columnDefinition = "varchar(1024) not null comment '参数'")
+	@Column(name = "operate_type", columnDefinition = "int null comment '操作类型 1 操作记录 2异常记录'")
+	private Integer operateType;
+
+	/**
+	 * 请求类型（1查询/获取，2添加，3修改，4删除）
+	 */
+	@Column(name = "request_type", columnDefinition = "int null comment '请求类型（1查询/获取，2添加，3修改，4删除）'")
+	private Integer requestType;
+
+	/**
+	 * 请求方法名称
+	 */
+	@Column(name = "method_name", columnDefinition = "varchar(128) null comment '请求方法名称'")
+	private String methodName;
+
+	/**
+	 * 请求方式
+	 */
+	@Column(name = "method", columnDefinition = "varchar(128) null comment '请求方式'")
+	private String method;
+
+	/**
+	 * 请求url
+	 */
+	@Column(name = "url", columnDefinition = "varchar(256) null comment '请求url'")
+	private String url;
+
+	/**
+	 * 方法参数
+	 */
+	@Column(name = "args", columnDefinition = "varchar(1024) null comment '方法参数'")
+	private String args;
+
+	/**
+	 * 请求参数
+	 */
+	@Column(name = "params", columnDefinition = "varchar(1024) null comment '请求参数'")
 	private String params;
 
 	/**
-	 * 日志类型
+	 * 请求头
 	 */
-	@Column(name = "log_type", nullable = false, columnDefinition = "varchar(64) not null comment '日志类型'")
-	private String logType;
+	@Column(name = "headers", columnDefinition = "text null comment '请求头'")
+	private String headers;
 
 	/**
-	 * 请求ip
+	 * 类路径
 	 */
-	@Column(name = "request_ip", nullable = false, columnDefinition = "varchar(64) not null comment '请求ip'")
-	private String requestIp;
+	@Column(name = "classpath", columnDefinition = "text null comment '类路径'")
+	private String classpath;
 
 	/**
-	 * 地址
+	 * 开始时间
 	 */
-	@Column(name = "address", nullable = false, columnDefinition = "varchar(256) not null comment '地址'")
-	private String address;
+	@Column(name = "start_time", columnDefinition = "bigint null comment '开始时间'")
+	private Long startTime;
 
+	/**
+	 * 完成时间
+	 */
+	@Column(name = "end_time", columnDefinition = "bigint null comment '完成时间'")
+	private Long endTime;
+
+	/**
+	 * 消耗时间
+	 */
+	@Column(name = "consuming_time", columnDefinition = "bigint null comment '消耗时间'")
+	private Long consumingTime;
+
+	/**
+	 * 异常详情信息 堆栈信息
+	 */
+	@Column(name = "ex_detail", columnDefinition = "text null comment '异常详情信息 堆栈信息'")
+	private String exDetail;
+
+	/**
+	 * 异常描述 e.getMessage
+	 */
+	@Column(name = "ex_desc", columnDefinition = "text null comment ' 异常描述 e.getMessage'")
+	private String exDesc;
+
+	/**
+	 * 租户id
+	 */
+	@Column(name = "tenant_id", columnDefinition = "varchar(64) null comment '租户id'")
+	private String tenantId;
+
+	/**
+	 * 来源
+	 */
+	@Column(name = "source", columnDefinition = "varchar(256) null comment '来源'")
+	private String source;
+
+	/**
+	 * 记录时间
+	 */
+	@Column(name = "ctime", columnDefinition = "varchar(128) null comment '记录时间'")
+	private String ctime;
+
+	/**
+	 * 返回值
+	 */
+	@Column(name = "result", columnDefinition = "text null comment '返回值'")
+	private String result;
+
+	/**
+	 * 天
+	 */
+	@Column(name = "logday", columnDefinition = "varchar(64) null comment '天'")
+	private String logday;
+
+	/**
+	 * 操作地点
+	 */
+	@Column(name = "location", columnDefinition = "varchar(1024) null comment '操作地点'")
+	private String location;
+	/**
+	 * 操作系统
+	 */
+	@Column(name = "os", columnDefinition = "varchar(128) null comment '操作系统'")
+	private String os;
+	
 	/**
 	 * 浏览器
 	 */
-	@Column(name = "browser", nullable = false, columnDefinition = "varchar(1024) not null comment '浏览器'")
+	@Column(name = "browser", columnDefinition = "varchar(1024) null comment '浏览器'")
 	private String browser;
 
-	/**
-	 * 请求耗时
-	 */
-	@Column(name = "time", nullable = false, columnDefinition = "bigint not null default 0 comment '请求耗时'")
-	private Long time;
+	public String getTraceId() {
+		return traceId;
+	}
 
-	/**
-	 * 异常详细
-	 */
-	@Column(name = "exception_detail", nullable = false, columnDefinition = "varchar(4096) not null comment '异常详细'")
-	private String exceptionDetail;
+	public void setTraceId(String traceId) {
+		this.traceId = traceId;
+	}
 
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
 
 	public String getUsername() {
 		return username;
@@ -104,12 +224,20 @@ public class Log extends BaseSuperEntity<Log, Long> {
 		this.username = username;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getDescription() {
@@ -120,6 +248,38 @@ public class Log extends BaseSuperEntity<Log, Long> {
 		this.description = description;
 	}
 
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public Integer getOperateType() {
+		return operateType;
+	}
+
+	public void setOperateType(Integer operateType) {
+		this.operateType = operateType;
+	}
+
+	public Integer getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(Integer requestType) {
+		this.requestType = requestType;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
 	public String getMethod() {
 		return method;
 	}
@@ -128,20 +288,20 @@ public class Log extends BaseSuperEntity<Log, Long> {
 		this.method = method;
 	}
 
-	public Long getUid() {
-		return uid;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setUid(Long uid) {
-		this.uid = uid;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public Integer getType() {
-		return type;
+	public String getArgs() {
+		return args;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setArgs(String args) {
+		this.args = args;
 	}
 
 	public String getParams() {
@@ -152,28 +312,116 @@ public class Log extends BaseSuperEntity<Log, Long> {
 		this.params = params;
 	}
 
-	public String getLogType() {
-		return logType;
+	public String getHeaders() {
+		return headers;
 	}
 
-	public void setLogType(String logType) {
-		this.logType = logType;
+	public void setHeaders(String headers) {
+		this.headers = headers;
 	}
 
-	public String getRequestIp() {
-		return requestIp;
+	public String getClasspath() {
+		return classpath;
 	}
 
-	public void setRequestIp(String requestIp) {
-		this.requestIp = requestIp;
+	public void setClasspath(String classpath) {
+		this.classpath = classpath;
 	}
 
-	public String getAddress() {
-		return address;
+	public Long getStartTime() {
+		return startTime;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
+
+	public Long getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Long endTime) {
+		this.endTime = endTime;
+	}
+
+	public Long getConsumingTime() {
+		return consumingTime;
+	}
+
+	public void setConsumingTime(Long consumingTime) {
+		this.consumingTime = consumingTime;
+	}
+
+	public String getExDetail() {
+		return exDetail;
+	}
+
+	public void setExDetail(String exDetail) {
+		this.exDetail = exDetail;
+	}
+
+	public String getExDesc() {
+		return exDesc;
+	}
+
+	public void setExDesc(String exDesc) {
+		this.exDesc = exDesc;
+	}
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getLogday() {
+		return logday;
+	}
+
+	public void setLogday(String logday) {
+		this.logday = logday;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getOs() {
+		return os;
+	}
+
+	public void setOs(String os) {
+		this.os = os;
 	}
 
 	public String getBrowser() {
@@ -182,21 +430,5 @@ public class Log extends BaseSuperEntity<Log, Long> {
 
 	public void setBrowser(String browser) {
 		this.browser = browser;
-	}
-
-	public Long getTime() {
-		return time;
-	}
-
-	public void setTime(Long time) {
-		this.time = time;
-	}
-
-	public String getExceptionDetail() {
-		return exceptionDetail;
-	}
-
-	public void setExceptionDetail(String exceptionDetail) {
-		this.exceptionDetail = exceptionDetail;
 	}
 }

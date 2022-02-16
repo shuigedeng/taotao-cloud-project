@@ -3,6 +3,7 @@ package com.taotao.cloud.sys.biz.controller.tools;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
 import com.taotao.cloud.sys.biz.entity.EmailConfig;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
-@Tag(name = "平台管理端-邮件管理API", description = "平台管理端-邮件管理API")
+@Tag(name = "工具管理-邮件管理API", description = "工具管理-邮件管理API")
 @RequestMapping("/sys/tools/email")
 public class EmailController {
 
@@ -41,15 +42,24 @@ public class EmailController {
 	@RequestLogger(description = "配置邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
-	public Result<Boolean> emailConfig(@Validated @RequestBody EmailConfig emailConfig) {
+	public Result<Boolean> update(@Validated @RequestBody EmailConfig emailConfig) {
 		emailService.update(emailConfig, emailService.find());
+		return Result.success(true);
+	}
+
+	@Operation(summary = "添加配置邮件", description = "添加配置邮件", method = CommonConstant.POST)
+	@RequestLogger(description = "添加配置邮件")
+	@NotAuth
+	@PostMapping
+	public Result<Boolean> add(@Validated @RequestBody EmailConfig emailConfig) {
+		emailService.save(emailConfig);
 		return Result.success(true);
 	}
 
 	@Operation(summary = "发送邮件", description = "发送邮件", method = CommonConstant.POST)
 	@RequestLogger(description = "发送邮件")
 	@PreAuthorize("@el.check('admin','timing:list')")
-	@PostMapping
+	@PostMapping("/send")
 	public Result<Boolean> send(@Validated @RequestBody EmailVo emailVo) throws Exception {
 		emailService.send(emailVo, emailService.find());
 		return Result.success(true);

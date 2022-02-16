@@ -139,6 +139,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			"/*.json",
 			"/*.min.js",
 			"/*.min.css",
+			"/sys/**",
 			"/doc/**",
 			"/health/**"));
 

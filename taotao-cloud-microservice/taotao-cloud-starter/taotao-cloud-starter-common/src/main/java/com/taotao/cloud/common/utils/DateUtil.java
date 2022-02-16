@@ -123,7 +123,7 @@ public class DateUtil {
 
 	//--格式化日期start-----------------------------------------
 
-	protected static final Map<String, String> DATE_FORMAT = new LinkedHashMap(5);
+	protected static final Map<String, String> DATE_FORMAT = new LinkedHashMap<>(5);
 
 	static {
 		DATE_FORMAT.put(DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMAT_MATCHES);

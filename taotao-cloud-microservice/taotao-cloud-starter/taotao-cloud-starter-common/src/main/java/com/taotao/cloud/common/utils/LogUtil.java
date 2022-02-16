@@ -219,7 +219,7 @@ public class LogUtil {
 	 * @author shuigedeng
 	 * @since 2021-09-02 16:36:19
 	 */
-	public static int getOperateType(String methodName) {
+	public static int getRequestType(String methodName) {
 		if (methodName.startsWith("get")) {
 			return CommonConstant.OPERATE_TYPE_GET;
 		}

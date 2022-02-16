@@ -33,7 +33,7 @@ public class SensitiveWordsTopicMessageDelegate {
 	@Autowired
 	private ISensitiveWordService ISensitiveWordService;
 
-	public void sensitiveWords(String message) {
+	public void handleSensitiveWords(String message) {
 		LogUtil.info(message);
 	}
 }

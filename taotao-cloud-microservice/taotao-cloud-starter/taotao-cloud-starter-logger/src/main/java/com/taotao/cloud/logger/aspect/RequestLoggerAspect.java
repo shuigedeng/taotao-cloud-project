@@ -20,17 +20,21 @@ import cn.hutool.core.convert.ConvertException;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.StrPool;
 import com.taotao.cloud.common.context.TenantContextHolder;
 import com.taotao.cloud.common.enums.LogOperateTypeEnum;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.IPUtil;
 import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.logger.event.RequestLoggerEvent;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
@@ -90,7 +94,7 @@ public class RequestLoggerAspect {
 	@Autowired
 	private RequestLoggerProperties requestLoggerProperties;
 	@Autowired
-	private  ApplicationEventPublisher publisher;
+	private ApplicationEventPublisher publisher;
 
 	/**
 	 * 用于SpEL表达式解析.
@@ -105,7 +109,7 @@ public class RequestLoggerAspect {
 	/**
 	 * log实体类
 	 **/
-	private final TransmittableThreadLocal<com.taotao.cloud.logger.model.RequestLogger> SYS_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
+	private final TransmittableThreadLocal<com.taotao.cloud.logger.model.RequestLogger> REQUEST_LOG_THREAD_LOCAL = new TransmittableThreadLocal<>();
 
 	public RequestLoggerAspect() {
 	}
@@ -137,14 +141,11 @@ public class RequestLoggerAspect {
 					return;
 				}
 
-				com.taotao.cloud.logger.model.RequestLogger requestLogger = buildRequestLog(joinPoint,
+				com.taotao.cloud.logger.model.RequestLogger requestLogger = buildRequestLog(
+					joinPoint,
 					requestOperateLog);
-				SYS_LOG_THREAD_LOCAL.set(requestLogger);
+				REQUEST_LOG_THREAD_LOCAL.set(requestLogger);
 			});
-		}
-
-		if (requestLoggerProperties.getEnabled()) {
-
 		}
 	}
 
@@ -174,14 +175,14 @@ public class RequestLoggerAspect {
 				}
 			}
 			requestLogger.setTenantId(TenantContextHolder.getTenant());
-			requestLogger.setRequestEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+			requestLogger.setEndTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 			long endTime = Instant.now().toEpochMilli();
-			requestLogger.setRequestConsumingTime(endTime - requestLogger.getRequestStartTime());
+			requestLogger.setConsumingTime(endTime - requestLogger.getStartTime());
 			requestLogger.setResult(
 				getText(String.valueOf(ret == null ? StrPool.EMPTY : ret)));
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
-			SYS_LOG_THREAD_LOCAL.remove();
+			REQUEST_LOG_THREAD_LOCAL.remove();
 		});
 	}
 
@@ -201,16 +202,16 @@ public class RequestLoggerAspect {
 				.replace("\n", ""));
 
 			if (!requestOperateLog.request() && requestOperateLog.requestByError()
-				&& StrUtil.isEmpty(requestLogger.getRequestParams())) {
+				&& StrUtil.isEmpty(requestLogger.getParams())) {
 				Object[] args = joinPoint.getArgs();
 				HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(
 					RequestContextHolder.getRequestAttributes())).getRequest();
 				String strArgs = getArgs(args, request);
-				requestLogger.setRequestParams(getText(strArgs));
+				requestLogger.setParams(getText(strArgs));
 			}
 
 			publisher.publishEvent(new RequestLoggerEvent(requestLogger));
-			SYS_LOG_THREAD_LOCAL.remove();
+			REQUEST_LOG_THREAD_LOCAL.remove();
 		});
 	}
 
@@ -242,36 +243,44 @@ public class RequestLoggerAspect {
 			.requireNonNull(RequestContextHolder.getRequestAttributes());
 		RequestContextHolder.setRequestAttributes(attributes, true);
 		HttpServletRequest request = attributes.getRequest();
-		requestLogger.setApplicationName(applicationName);
-		requestLogger.setRequestStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
 		requestLogger.setTraceId(MDC.get(CommonConstant.TAOTAO_CLOUD_TRACE_ID));
-		requestLogger.setRequestIp(RequestUtil.getRemoteAddr(request));
-		requestLogger.setClientId(SecurityUtil.getClientId());
-		requestLogger.setUserId(SecurityUtil.getUserId());
+		requestLogger.setApplicationName(applicationName);
 		requestLogger.setUsername(SecurityUtil.getUsername());
-		requestLogger.setRequestUrl(URLUtil.getPath(request.getRequestURI()));
-		requestLogger.setRequestMethod(request.getMethod());
+		requestLogger.setUserId(String.valueOf(SecurityUtil.getUserId()));
+		requestLogger.setClientId(SecurityUtil.getClientId());
+		String ip = RequestUtil.getRemoteAddr(request);
+		requestLogger.setIp(ip);
+		requestLogger.setStartTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+		requestLogger.setUrl(URLUtil.getPath(request.getRequestURI()));
+		requestLogger.setMethod(request.getMethod());
 		Object[] args = joinPoint.getArgs();
-		requestLogger.setRequestArgs(Arrays.toString(args).replaceAll("\"", "'")
+		requestLogger.setArgs(Arrays.toString(args).replaceAll("\"", "'")
 			.replace("\n", ""));
-		requestLogger.setRequestUa(request.getHeader("user-agent").replaceAll("\"", "'")
+		requestLogger.setBrowser(request.getHeader("user-agent").replaceAll("\"", "'")
 			.replace("\n", ""));
 		requestLogger.setClasspath(joinPoint.getTarget().getClass().getName().replaceAll("\"", "'")
 			.replace("\n", ""));
 		String name = joinPoint.getSignature().getName();
-		requestLogger.setRequestMethodName(name);
-		requestLogger
-			.setRequestParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request))
-				.replaceAll("\"", "'")
-				.replace("\n", ""));
-		requestLogger
-			.setRequestHeaders(
-				JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
-		requestLogger.setRequestType(LogUtil.getOperateType(name));
+		requestLogger.setMethodName(name);
+		requestLogger.setParams(JsonUtil.toJSONString(RequestUtil.getAllRequestParam(request))
+			.replaceAll("\"", "'")
+			.replace("\n", ""));
+		requestLogger.setHeaders(JsonUtil.toJSONString(RequestUtil.getAllRequestHeaders(request)));
+		requestLogger.setRequestType(LogUtil.getRequestType(name));
 		requestLogger.setSource(DEFAULT_SOURCE);
 		requestLogger.setCtime(
 			String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli()));
 		requestLogger.setLogday(DateUtil.getCurrentDate());
+
+		Ip2regionSearcher ip2regionSearcher = ContextUtil.getBean(Ip2regionSearcher.class, true);
+		if (ip2regionSearcher != null) {
+			requestLogger.setLocation(ip2regionSearcher.getAddressAndIsp(ip));
+		} else {
+			requestLogger.setLocation(IPUtil.getCityInfo(ip));
+		}
+
+		String uaStr = request.getHeader("user-agent");
+		requestLogger.setOs(UserAgentUtil.parse(uaStr).getOs().toString());
 
 		setDescription(joinPoint, requestOperateLog, requestLogger);
 		return requestLogger;
@@ -280,7 +289,7 @@ public class RequestLoggerAspect {
 	/**
 	 * 监测是否需要记录日志
 	 *
-	 * @param joinPoint  端点
+	 * @param joinPoint     端点
 	 * @param requestLogger 操作日志
 	 * @return true 表示需要记录日志
 	 */
@@ -301,7 +310,7 @@ public class RequestLoggerAspect {
 			consumer.accept("");
 		} catch (Exception e) {
 			LogUtil.error("记录操作日志异常", e);
-			SYS_LOG_THREAD_LOCAL.remove();
+			REQUEST_LOG_THREAD_LOCAL.remove();
 		}
 	}
 
@@ -327,7 +336,7 @@ public class RequestLoggerAspect {
 	}
 
 	private com.taotao.cloud.logger.model.RequestLogger get() {
-		com.taotao.cloud.logger.model.RequestLogger requestLogger = SYS_LOG_THREAD_LOCAL.get();
+		com.taotao.cloud.logger.model.RequestLogger requestLogger = REQUEST_LOG_THREAD_LOCAL.get();
 		if (requestLogger == null) {
 			return new com.taotao.cloud.logger.model.RequestLogger();
 		}

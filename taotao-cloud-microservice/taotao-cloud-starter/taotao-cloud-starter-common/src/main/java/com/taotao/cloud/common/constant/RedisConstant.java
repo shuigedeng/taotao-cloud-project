@@ -54,7 +54,6 @@ public class RedisConstant {
 	 */
 	public static final String SENSITIVE_WORDS_KEY = "SENSITIVE:WORDS:KEY";
 
-
 	/**
 	 * regions patten key
 	 */
@@ -150,4 +149,13 @@ public class RedisConstant {
 	 * SCHEDULED_JOB_LOG_ADD_TOPIC
 	 */
 	public static final String SCHEDULED_JOB_LOG_ADD_TOPIC = "SCHEDULED:JOB:LOG:ADD:TOPIC";
+	/**
+	 * REQUEST_LOG_TOPIC
+	 */
+	public static final String REQUEST_LOG_TOPIC = "REQUEST:LOG:TOPIC";
+	/**
+	 * REQUEST_LOG
+	 */
+	public static final String REQUEST_LOG = "REQUEST:LOG:";
+
 }

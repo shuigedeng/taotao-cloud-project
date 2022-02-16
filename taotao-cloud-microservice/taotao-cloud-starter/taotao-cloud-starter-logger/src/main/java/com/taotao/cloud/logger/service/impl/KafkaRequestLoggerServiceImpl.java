@@ -19,6 +19,7 @@ import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -37,7 +38,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 	public static final String REQUEST_LOG_TOPIC = "request-log-";
 
 	@Value("${spring.application.name}")
-	private  String appName;
+	private String appName;
 
 	private final KafkaTemplate<String, String> kafkaTemplate;
 
@@ -47,22 +48,24 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 
 	@Override
 	public void save(RequestLogger requestLogger) {
-		String request = JsonUtil.toJSONString(requestLogger);
+		if (Objects.isNull(kafkaTemplate)) {
+			String request = JsonUtil.toJSONString(requestLogger);
 
-		ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-			.send(REQUEST_LOG_TOPIC + appName, request);
+			ListenableFuture<SendResult<String, String>> future = kafkaTemplate
+				.send(REQUEST_LOG_TOPIC + appName, request);
 
-		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
-			@Override
-			public void onFailure(Throwable throwable) {
-				LogUtil.error("远程日志记录失败：{}", throwable);
-			}
+			future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+				@Override
+				public void onFailure(Throwable throwable) {
+					LogUtil.error("远程日志记录失败：{}", throwable);
+				}
 
-			@Override
-			public void onSuccess(SendResult<String, String> stringObjectSendResult) {
-				//log.info("远程日志记录成功：{}", requestLog);
-			}
-		});
+				@Override
+				public void onSuccess(SendResult<String, String> stringObjectSendResult) {
+					//log.info("远程日志记录成功：{}", requestLog);
+				}
+			});
+		}
 	}
 }
 

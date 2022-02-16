@@ -54,7 +54,7 @@ public class RequestLogger implements Serializable {
 	 * 操作人ID
 	 */
 	@JsonProperty(value = "user_id")
-	private Long userId;
+	private String userId;
 
 	/**
 	 * 客户端ID
@@ -71,8 +71,8 @@ public class RequestLogger implements Serializable {
 	/**
 	 * 操作IP
 	 */
-	@JsonProperty(value = "request_ip")
-	private String requestIp;
+	@JsonProperty(value = "ip")
+	private String ip;
 
 	/**
 	 * 操作类型 1 操作记录 2异常记录
@@ -89,44 +89,38 @@ public class RequestLogger implements Serializable {
 	/**
 	 * 请求方法名称
 	 */
-	@JsonProperty(value = "request_method_name")
-	private String requestMethodName;
+	@JsonProperty(value = "method_name")
+	private String methodName;
 
 	/**
 	 * 请求方式
 	 */
-	@JsonProperty(value = "request_method")
-	private String requestMethod;
+	@JsonProperty(value = "method")
+	private String method;
 
 	/**
 	 * 请求url
 	 */
-	@JsonProperty(value = "request_url")
-	private String requestUrl;
+	@JsonProperty(value = "url")
+	private String url;
 
 	/**
 	 * 方法参数
 	 */
-	@JsonProperty(value = "request_args")
-	private String requestArgs;
+	@JsonProperty(value = "args")
+	private String args;
 
 	/**
 	 * 请求参数
 	 */
-	@JsonProperty(value = "request_params")
-	private String requestParams;
+	@JsonProperty(value = "params")
+	private String params;
 
 	/**
 	 * 请求头
 	 */
-	@JsonProperty(value = "request_headers")
-	private String requestHeaders;
-
-	/**
-	 * 浏览器
-	 */
-	@JsonProperty(value = "request_ua")
-	private String requestUa;
+	@JsonProperty(value = "headers")
+	private String headers;
 
 	/**
 	 * 类路径
@@ -137,20 +131,20 @@ public class RequestLogger implements Serializable {
 	/**
 	 * 开始时间
 	 */
-	@JsonProperty(value = "request_start_time")
-	private Long requestStartTime;
+	@JsonProperty(value = "start_time")
+	private Long startTime;
 
 	/**
 	 * 完成时间
 	 */
-	@JsonProperty(value = "request_end_time")
-	private Long requestEndTime;
+	@JsonProperty(value = "end_time")
+	private Long endTime;
 
 	/**
 	 * 消耗时间
 	 */
-	@JsonProperty(value = "request_consuming_time")
-	private Long requestConsumingTime;
+	@JsonProperty(value = "consuming_time")
+	private Long consumingTime;
 
 	/**
 	 * 异常详情信息 堆栈信息
@@ -194,16 +188,21 @@ public class RequestLogger implements Serializable {
 	@JsonProperty(value = "logday")
 	private String logday;
 
-	public RequestLogger(){}
-
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
+	/**
+	 * 操作地点
+	 */
+	@JsonProperty(value = "location")
+	private String location;
+	/**
+	 * 操作系统
+	 */
+	@JsonProperty(value = "os")
+	private String os;
+	/**
+	 * 浏览器
+	 */
+	@JsonProperty(value = "browser")
+	private String browser;
 
 	public String getTraceId() {
 		return traceId;
@@ -229,11 +228,11 @@ public class RequestLogger implements Serializable {
 		this.username = username;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -253,12 +252,12 @@ public class RequestLogger implements Serializable {
 		this.description = description;
 	}
 
-	public String getRequestIp() {
-		return requestIp;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setRequestIp(String requestIp) {
-		this.requestIp = requestIp;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public Integer getOperateType() {
@@ -277,60 +276,52 @@ public class RequestLogger implements Serializable {
 		this.requestType = requestType;
 	}
 
-	public String getRequestMethodName() {
-		return requestMethodName;
+	public String getMethodName() {
+		return methodName;
 	}
 
-	public void setRequestMethodName(String requestMethodName) {
-		this.requestMethodName = requestMethodName;
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
 	}
 
-	public String getRequestMethod() {
-		return requestMethod;
+	public String getMethod() {
+		return method;
 	}
 
-	public void setRequestMethod(String requestMethod) {
-		this.requestMethod = requestMethod;
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
-	public String getRequestUrl() {
-		return requestUrl;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setRequestUrl(String requestUrl) {
-		this.requestUrl = requestUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public String getRequestArgs() {
-		return requestArgs;
+	public String getArgs() {
+		return args;
 	}
 
-	public void setRequestArgs(String requestArgs) {
-		this.requestArgs = requestArgs;
+	public void setArgs(String args) {
+		this.args = args;
 	}
 
-	public String getRequestParams() {
-		return requestParams;
+	public String getParams() {
+		return params;
 	}
 
-	public void setRequestParams(String requestParams) {
-		this.requestParams = requestParams;
+	public void setParams(String params) {
+		this.params = params;
 	}
 
-	public String getRequestHeaders() {
-		return requestHeaders;
+	public String getHeaders() {
+		return headers;
 	}
 
-	public void setRequestHeaders(String requestHeaders) {
-		this.requestHeaders = requestHeaders;
-	}
-
-	public String getRequestUa() {
-		return requestUa;
-	}
-
-	public void setRequestUa(String requestUa) {
-		this.requestUa = requestUa;
+	public void setHeaders(String headers) {
+		this.headers = headers;
 	}
 
 	public String getClasspath() {
@@ -341,28 +332,28 @@ public class RequestLogger implements Serializable {
 		this.classpath = classpath;
 	}
 
-	public Long getRequestStartTime() {
-		return requestStartTime;
+	public Long getStartTime() {
+		return startTime;
 	}
 
-	public void setRequestStartTime(Long requestStartTime) {
-		this.requestStartTime = requestStartTime;
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
 	}
 
-	public Long getRequestEndTime() {
-		return requestEndTime;
+	public Long getEndTime() {
+		return endTime;
 	}
 
-	public void setRequestEndTime(Long requestEndTime) {
-		this.requestEndTime = requestEndTime;
+	public void setEndTime(Long endTime) {
+		this.endTime = endTime;
 	}
 
-	public Long getRequestConsumingTime() {
-		return requestConsumingTime;
+	public Long getConsumingTime() {
+		return consumingTime;
 	}
 
-	public void setRequestConsumingTime(Long requestConsumingTime) {
-		this.requestConsumingTime = requestConsumingTime;
+	public void setConsumingTime(Long consumingTime) {
+		this.consumingTime = consumingTime;
 	}
 
 	public String getExDetail() {
@@ -405,6 +396,14 @@ public class RequestLogger implements Serializable {
 		this.ctime = ctime;
 	}
 
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String getLogday() {
 		return logday;
 	}
@@ -413,4 +412,27 @@ public class RequestLogger implements Serializable {
 		this.logday = logday;
 	}
 
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getOs() {
+		return os;
+	}
+
+	public void setOs(String os) {
+		this.os = os;
+	}
+
+	public String getBrowser() {
+		return browser;
+	}
+
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
 }

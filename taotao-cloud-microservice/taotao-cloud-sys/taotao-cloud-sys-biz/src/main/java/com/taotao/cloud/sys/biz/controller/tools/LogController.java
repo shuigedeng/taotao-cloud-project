@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "监控-日志管理API", description = "监控-日志管理API")
+@Tag(name = "工具管理-日志管理API", description = "工具管理-日志管理API")
 @RequestMapping("/sys/tools/logs")
 public class LogController {
 

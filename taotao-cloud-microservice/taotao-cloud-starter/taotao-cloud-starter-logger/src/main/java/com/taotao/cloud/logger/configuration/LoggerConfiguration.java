@@ -22,11 +22,14 @@ import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import com.taotao.cloud.logger.listener.RequestLoggerListener;
 import com.taotao.cloud.logger.properties.LoggerProperties;
 import com.taotao.cloud.logger.properties.RequestLoggerProperties;
+import com.taotao.cloud.logger.service.IRequestLoggerService;
 import com.taotao.cloud.logger.service.impl.KafkaRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.LoggerRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -72,9 +75,15 @@ public class LoggerConfiguration implements InitializingBean {
 		@Autowired
 		private RequestLoggerProperties properties;
 
+		@Autowired(required = false)
+		private KafkaTemplate<String, String> kafkaTemplate;
+
+		@Autowired(required = false)
+		private RedisRepository redisRepository;
+
 		@Bean
-		public RequestLoggerListener requestLogListener() {
-			return new RequestLoggerListener();
+		public RequestLoggerListener requestLogListener(List<IRequestLoggerService> requestLoggerServices) {
+			return new RequestLoggerListener(requestLoggerServices);
 		}
 
 		@Bean
@@ -83,39 +92,58 @@ public class LoggerConfiguration implements InitializingBean {
 		}
 
 		@Bean
-		public LoggerRequestLoggerServiceImpl loggerRequestLogService() {
-			if (determineLogType(RequestLoggerTypeEnum.LOGGER)) {
-				return new LoggerRequestLoggerServiceImpl();
-			}
-			return null;
-		}
-
-		@Bean
-		@ConditionalOnBean
-		public RedisRequestLoggerServiceImpl redisRequestLogService(
-			RedisRepository redisRepository) {
-			if (determineLogType(RequestLoggerTypeEnum.REDIS)) {
-				return new RedisRequestLoggerServiceImpl(redisRepository);
-			}
-			return null;
-		}
-
-		@Bean
-		@ConditionalOnBean
-		public KafkaRequestLoggerServiceImpl kafkaRequestLogService(
-			KafkaTemplate<String, String> kafkaTemplate) {
-			if (determineLogType(RequestLoggerTypeEnum.KAFKA)) {
-				return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
-			}
-			return null;
-		}
-
-		private boolean determineLogType(RequestLoggerTypeEnum requestLoggerTypeEnum) {
+		public List<IRequestLoggerService> requestLoggerServices(){
+			List<IRequestLoggerService> requestLoggerServices = new ArrayList<>();
 			RequestLoggerTypeEnum[] types = properties.getTypes();
-			assert types != null;
-			return Arrays.stream(types)
-				.anyMatch(type -> type.getCode() == requestLoggerTypeEnum.getCode());
+			for (RequestLoggerTypeEnum type : types) {
+				if(RequestLoggerTypeEnum.LOGGER.equals(type)){
+					requestLoggerServices.add(new LoggerRequestLoggerServiceImpl());
+				}
+				if(RequestLoggerTypeEnum.REDIS.equals(type)){
+					requestLoggerServices.add(new RedisRequestLoggerServiceImpl(redisRepository));
+				}
+				if(RequestLoggerTypeEnum.KAFKA.equals(type)){
+					requestLoggerServices.add(new KafkaRequestLoggerServiceImpl(kafkaTemplate));
+				}
+			}
+
+			return requestLoggerServices;
 		}
+
+		//@Bean
+		//public LoggerRequestLoggerServiceImpl loggerRequestLogService() {
+		//	if (determineLogType(RequestLoggerTypeEnum.LOGGER)) {
+		//		return new LoggerRequestLoggerServiceImpl();
+		//	}
+		//	return null;
+		//}
+
+		//@Bean
+		//@ConditionalOnBean
+		//public RedisRequestLoggerServiceImpl redisRequestLogService(
+		//	RedisRepository redisRepository) {
+		//	if (determineLogType(RequestLoggerTypeEnum.REDIS)) {
+		//		return new RedisRequestLoggerServiceImpl(redisRepository);
+		//	}
+		//	return null;
+		//}
+		//
+		//@Bean
+		//@ConditionalOnBean
+		//public KafkaRequestLoggerServiceImpl kafkaRequestLogService(
+		//	KafkaTemplate<String, String> kafkaTemplate) {
+		//	if (determineLogType(RequestLoggerTypeEnum.KAFKA)) {
+		//		return new KafkaRequestLoggerServiceImpl(kafkaTemplate);
+		//	}
+		//	return null;
+		//}
+		//
+		//private boolean determineLogType(RequestLoggerTypeEnum requestLoggerTypeEnum) {
+		//	RequestLoggerTypeEnum[] types = properties.getTypes();
+		//	assert types != null;
+		//	return Arrays.stream(types)
+		//		.anyMatch(type -> type.getCode() == requestLoggerTypeEnum.getCode());
+		//}
 	}
 }
 

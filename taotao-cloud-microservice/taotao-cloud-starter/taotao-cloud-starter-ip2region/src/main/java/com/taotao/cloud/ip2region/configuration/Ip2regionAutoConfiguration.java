@@ -36,7 +36,7 @@ import org.springframework.core.io.ResourceLoader;
  */
 @Configuration
 @EnableConfigurationProperties({Ip2regionProperties.class})
-@ConditionalOnProperty(prefix = Ip2regionProperties.PREFIX, name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = Ip2regionProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 //@NativeHint(resources = @ResourceHint(patterns = "^ip2region/ip2region.db"))
 public class Ip2regionAutoConfiguration {
 

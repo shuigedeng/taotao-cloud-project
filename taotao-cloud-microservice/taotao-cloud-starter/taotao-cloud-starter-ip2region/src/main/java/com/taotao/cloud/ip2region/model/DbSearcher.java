@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * ip db searcher class (Not thread safe)
- *
  */
 public class DbSearcher {
 
@@ -42,7 +41,6 @@ public class DbSearcher {
 	 * for memory mode the original db binary string
 	 */
 	private byte[] dbBinStr = null;
-
 
 
 	/**
