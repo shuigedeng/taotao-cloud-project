@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 订单超时未评价处理类
- * Created by LPB on 2021/04/20.
  */
 @Component
 public class OrderTimeoutNotEvaluated implements RedisDelayQueueHandle<Map> {

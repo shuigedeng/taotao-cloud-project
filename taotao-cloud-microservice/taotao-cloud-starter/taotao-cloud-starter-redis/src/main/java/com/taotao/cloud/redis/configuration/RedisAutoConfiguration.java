@@ -31,6 +31,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.Cache;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -61,11 +64,36 @@ import org.springframework.scripting.support.ResourceScriptSource;
 @Configuration
 @ConditionalOnBean(RedissonClient.class)
 @EnableConfigurationProperties({RedisProperties.class})
-public class RedisAutoConfiguration implements InitializingBean {
+public class RedisAutoConfiguration extends CachingConfigurerSupport implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		LogUtil.started(RedisAutoConfiguration.class, StarterName.REDIS_STARTER);
+	}
+	/**
+	 * 自定义缓存异常处理
+	 * 当缓存读写异常时，忽略异常
+	 */
+	@Override
+	public CacheErrorHandler errorHandler() {
+		return new CacheErrorHandler() {
+			@Override
+			public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {
+				LogUtil.error(e.getMessage(), e);
+			}
+			@Override
+			public void handleCachePutError(RuntimeException e, Cache cache, Object o, Object o1) {
+				LogUtil.error(e.getMessage(), e);
+			}
+			@Override
+			public void handleCacheEvictError(RuntimeException e, Cache cache, Object o) {
+				LogUtil.error(e.getMessage(), e);
+			}
+			@Override
+			public void handleCacheClearError(RuntimeException e, Cache cache) {
+				LogUtil.error(e.getMessage(), e);
+			}
+		};
 	}
 
 	@Bean

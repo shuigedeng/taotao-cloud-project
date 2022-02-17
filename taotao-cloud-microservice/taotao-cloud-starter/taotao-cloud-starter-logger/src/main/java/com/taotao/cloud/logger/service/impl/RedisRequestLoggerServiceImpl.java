@@ -47,7 +47,7 @@ public class RedisRequestLoggerServiceImpl implements IRequestLoggerService {
 			.format(Instant.now());
 
 		if (Objects.nonNull(redisRepository)) {
-			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, JsonUtil.toJSONString(requestLogger));
+			redisRepository.send(RedisConstant.REQUEST_LOG_TOPIC, requestLogger);
 
 			Long index = redisRepository.leftPush(RedisConstant.REQUEST_LOG + date,
 				JsonUtil.toJSONString(requestLogger));

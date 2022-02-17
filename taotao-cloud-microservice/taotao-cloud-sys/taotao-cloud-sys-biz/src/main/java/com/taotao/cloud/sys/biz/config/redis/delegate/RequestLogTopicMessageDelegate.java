@@ -15,7 +15,9 @@
  */
 package com.taotao.cloud.sys.biz.config.redis.delegate;
 
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.taotao.cloud.sys.biz.entity.Log;
 import com.taotao.cloud.sys.biz.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,14 @@ public class RequestLogTopicMessageDelegate {
 	private ILogService logService;
 
 	public void handleRequestLog(String message, String channel) {
-		Log log = JsonUtil.toObject(message, Log.class);
-		logService.save(log);
+		ObjectMapper mapper = new ObjectMapper();
+		// 使用Jackson转换带下划线的属性为驼峰属性
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+		try {
+			Log log = mapper.readValue(message, Log.class);
+			logService.save(log);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 }

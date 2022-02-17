@@ -54,7 +54,7 @@ public class KafkaRequestLoggerServiceImpl implements IRequestLoggerService {
 			ListenableFuture<SendResult<String, String>> future = kafkaTemplate
 				.send(REQUEST_LOG_TOPIC + appName, request);
 
-			future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+			future.addCallback(new ListenableFutureCallback<>() {
 				@Override
 				public void onFailure(Throwable throwable) {
 					LogUtil.error("远程日志记录失败：{}", throwable);

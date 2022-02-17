@@ -2,6 +2,7 @@ package com.taotao.cloud.redis.redisson;
 
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import cn.hutool.core.thread.ThreadUtil;
 import com.taotao.cloud.common.utils.ContextUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.redisson.handle.RedisDelayQueueHandle;
@@ -27,8 +28,9 @@ public class RedisDelayQueueRunner implements CommandLineRunner {
 
 		// 最佳的线程数 = CPU可用核心数 / (1 - 阻塞系数)
 		int blockingCoefficient = 0;
-		int poolSize = (int) (Runtime.getRuntime().availableProcessors() / (1
-			- blockingCoefficient));
+		int poolSize = Runtime.getRuntime().availableProcessors() / (1
+			- blockingCoefficient);
+
 		executor = ExecutorBuilder.create()
 			.setCorePoolSize(poolSize)
 			.setMaxPoolSize(poolSize)
@@ -40,7 +42,8 @@ public class RedisDelayQueueRunner implements CommandLineRunner {
 				.build()
 				.newThread(r)
 			)
-			.useSynchronousQueue().build();
+			.useSynchronousQueue()
+			.build();
 	}
 
 	private final RedisDelayQueue redisDelayQueue;
@@ -72,7 +75,8 @@ public class RedisDelayQueueRunner implements CommandLineRunner {
 							true);
 
 						if (Objects.nonNull(redisDelayQueueHandle)) {
-							redisDelayQueueHandle.execute(value);
+							ThreadUtil.execute(() -> redisDelayQueueHandle.execute(value));
+							//redisDelayQueueHandle.execute(value);
 							LogUtil.info("RedisDelayQueueRunner run success");
 						}
 					}

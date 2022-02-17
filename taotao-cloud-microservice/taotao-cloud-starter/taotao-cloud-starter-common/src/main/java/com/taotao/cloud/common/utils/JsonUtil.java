@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -98,7 +99,7 @@ public class JsonUtil {
 		// 包含null
 		MAPPER.setSerializationInclusion(Include.ALWAYS);
 		// 使用驼峰式
-		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
 		// 使用bean名称
 		MAPPER.enable(MapperFeature.USE_STD_BEAN_NAMING);
 		// 所有日期格式都统一为固定格式

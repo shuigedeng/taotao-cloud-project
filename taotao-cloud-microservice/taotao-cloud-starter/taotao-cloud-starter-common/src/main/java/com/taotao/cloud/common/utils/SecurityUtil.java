@@ -117,7 +117,7 @@ public class SecurityUtil {
 	 */
 	public static String getUsername() {
 		SecurityUser user = getUser();
-		return Objects.isNull(user) ? "" : user.getUsername();
+		return Objects.isNull(user) ? null : user.getUsername();
 	}
 
 	/**
