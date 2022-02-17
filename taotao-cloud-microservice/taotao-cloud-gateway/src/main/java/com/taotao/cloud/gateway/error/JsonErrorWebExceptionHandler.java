@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.gateway.error;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -111,10 +111,19 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
 	 */
 	public static Map<String, Object> responseError(String errorMessage) {
 		Result<Object> result = Result.fail(errorMessage);
-		Map<String, Object> map = BeanUtil.beanToMap(result, false, false);
-		LocalDateTime timestamp = (LocalDateTime) map
-			.getOrDefault("timestamp", LocalDateTime.now());
-		map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-		return map;
+		Map<String, Object> res = new HashMap<>();
+		res.put("errorMsg", result.errorMsg());
+		res.put("code", result.code());
+		res.put("success", result.success());
+		res.put("requestId", result.requestId());
+		LocalDateTime timestamp = result.timestamp();
+		timestamp = timestamp == null ? LocalDateTime.now() : timestamp;
+		res.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+		//Map<String, Object> map = BeanUtil.beanToMap(result, false, false);
+		//LocalDateTime timestamp = (LocalDateTime) map
+		//	.getOrDefault("timestamp", LocalDateTime.now());
+		//map.put("timestamp", timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		return res;
 	}
 }

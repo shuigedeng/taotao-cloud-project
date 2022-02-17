@@ -38,6 +38,7 @@ taotao:
           /auth/oauth2/authorize,
           /*/health/**,
           /health/**,
+          /sys/**,
       api:
         prefix: /api
         version: v${taotaoCloudVersion}

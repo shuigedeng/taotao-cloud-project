@@ -125,6 +125,7 @@ public class ResourceServerConfiguration {
 
 	@Autowired(required = false)
 	private DiscoveryClient discoveryClient;
+
 	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
 	private String jwkSetUri;
 

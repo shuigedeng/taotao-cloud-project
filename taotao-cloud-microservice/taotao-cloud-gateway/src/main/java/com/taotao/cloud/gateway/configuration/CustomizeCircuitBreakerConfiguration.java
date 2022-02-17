@@ -48,7 +48,7 @@ public class CustomizeCircuitBreakerConfiguration {
 			// 允许断路器自动由打开状态转换为半开状态
 			.enableAutomaticTransitionFromOpenToHalfOpen()
 			// 在半开状态下允许进行正常调用的次数
-			.permittedNumberOfCallsInHalfOpenState(5)
+			.permittedNumberOfCallsInHalfOpenState(10)
 			// 断路器打开状态转换为半开状态需要等待60秒
 			.waitDurationInOpenState(Duration.ofSeconds(60))
 			// 所有异常都当作失败来处理
@@ -57,8 +57,11 @@ public class CustomizeCircuitBreakerConfiguration {
 
 		ReactiveResilience4JCircuitBreakerFactory factory = new ReactiveResilience4JCircuitBreakerFactory();
 		factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-			.timeLimiterConfig(
-				TimeLimiterConfig.custom().timeoutDuration(Duration.ofMillis(500)).build())
+			.timeLimiterConfig(TimeLimiterConfig
+				.custom()
+				.timeoutDuration(Duration.ofMillis(500))
+				.build()
+			)
 			.circuitBreakerConfig(circuitBreakerConfig).build());
 
 		return factory;

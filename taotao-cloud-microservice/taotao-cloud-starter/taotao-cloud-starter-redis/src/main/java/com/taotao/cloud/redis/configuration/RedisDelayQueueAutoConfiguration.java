@@ -19,6 +19,7 @@ import com.taotao.cloud.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.redis.redisson.RedisDelayQueueRunner;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  * @since 2022/01/29 15:57
  */
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @Configuration
 @ConditionalOnBean(RedissonClient.class)
 public class RedisDelayQueueAutoConfiguration {
