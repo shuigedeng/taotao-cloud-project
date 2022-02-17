@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单支付超时处理类 Created by LPB on 2021/04/20.
+ * 订单支付超时处理类
  */
 @Component
 public class OrderPaymentTimeout implements RedisDelayQueueHandle<Map> {

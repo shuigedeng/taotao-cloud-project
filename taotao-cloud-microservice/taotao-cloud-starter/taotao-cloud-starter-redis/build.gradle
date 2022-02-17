@@ -12,6 +12,7 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-starter-data-redis'
     api 'org.springframework.boot:spring-boot-starter-cache'
+    api "org.springframework:spring-messaging"
 
     api 'net.sf.ehcache:ehcache:2.10.9.2'
     api('com.github.ben-manes.caffeine:caffeine:3.0.5') {

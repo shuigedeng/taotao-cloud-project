@@ -53,10 +53,8 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationUtils;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -78,12 +76,12 @@ public class RedisRepository {
 	/**
 	 * key序列化
 	 */
-	private static final StringRedisSerializer STRING_SERIALIZER = new StringRedisSerializer();
+	//private static final StringRedisSerializer STRING_SERIALIZER = new StringRedisSerializer();
 
 	/**
 	 * value 序列化
 	 */
-	private static final JdkSerializationRedisSerializer OBJECT_SERIALIZER = new JdkSerializationRedisSerializer();
+	//private static final JdkSerializationRedisSerializer OBJECT_SERIALIZER = new JdkSerializationRedisSerializer();
 
 	/**
 	 * KEY_LOCKS
@@ -102,8 +100,8 @@ public class RedisRepository {
 
 	public RedisRepository(RedisTemplate<String, Object> redisTemplate, boolean cacheNullVal) {
 		this.redisTemplate = redisTemplate;
-		this.redisTemplate.setKeySerializer(STRING_SERIALIZER);
-		this.redisTemplate.setValueSerializer(OBJECT_SERIALIZER);
+		//this.redisTemplate.setKeySerializer(STRING_SERIALIZER);
+		//this.redisTemplate.setValueSerializer(OBJECT_SERIALIZER);
 		this.defaultCacheNullVal = cacheNullVal;
 	}
 
@@ -589,13 +587,14 @@ public class RedisRepository {
 	 * @author shuigedeng
 	 * @since 2021-09-07 21:01:46
 	 */
-	public boolean setExpire(final String key, final Object value, final long time) {
-		return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
-			RedisSerializer<String> serializer = getRedisSerializer();
-			byte[] keys = serializer.serialize(key);
-			byte[] values = OBJECT_SERIALIZER.serialize(value);
-			return connection.setEx(keys, time, values);
-		});
+	public void setExpire(final String key, final Object value, final long time) {
+		redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+		//return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
+		//	RedisSerializer<String> serializer = getRedisSerializer();
+		//	byte[] keys = serializer.serialize(key);
+		//	byte[] values = OBJECT_SERIALIZER.serialize(value);
+		//	return connection.setEx(keys, time, values);
+		//});
 	}
 
 	/**
@@ -1565,15 +1564,18 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void setExpire(final String[] keys, final Object[] values, final long time) {
-		redisTemplate.execute((RedisCallback<Long>) connection -> {
-			RedisSerializer<String> serializer = getRedisSerializer();
-			for (int i = 0; i < keys.length; i++) {
-				byte[] bKeys = serializer.serialize(keys[i]);
-				byte[] bValues = OBJECT_SERIALIZER.serialize(values[i]);
-				connection.setEx(bKeys, time, bValues);
-			}
-			return 1L;
-		});
+		for (int i = 0; i < keys.length; i++) {
+			redisTemplate.opsForValue().set(keys[i], values[i], time, TimeUnit.SECONDS);
+		}
+		//redisTemplate.execute((RedisCallback<Long>) connection -> {
+		//	RedisSerializer<String> serializer = getRedisSerializer();
+		//	for (int i = 0; i < keys.length; i++) {
+		//		byte[] bKeys = serializer.serialize(keys[i]);
+		//		byte[] bValues = OBJECT_SERIALIZER.serialize(values[i]);
+		//		connection.setEx(bKeys, time, bValues);
+		//	}
+		//	return 1L;
+		//});
 	}
 
 	/**
@@ -2286,6 +2288,7 @@ public class RedisRepository {
 		if (value != null) {
 			return returnVal(value);
 		}
+
 		// 加锁解决缓存击穿
 		synchronized (KEY_LOCKS.computeIfAbsent(key, v -> new Object())) {
 			value = (T) redisTemplate.opsForValue().get(key);
@@ -2667,9 +2670,10 @@ public class RedisRepository {
 		redisTemplate.execute((RedisCallback<Long>) connection -> {
 			RedisSerializer<String> serializer = getRedisSerializer();
 			for (int i = 0; i < keys.length; i++) {
-				byte[] bKeys = serializer.serialize(keys[i]);
-				byte[] bValues = OBJECT_SERIALIZER.serialize(values[i]);
-				connection.set(bKeys, bValues);
+				set(keys[i], values[i]);
+				//byte[] bKeys = serializer.serialize(keys[i]);
+				//byte[] bValues = OBJECT_SERIALIZER.serialize(values[i]);
+				//connection.set(bKeys, bValues);
 			}
 			return 1L;
 		});
@@ -2685,14 +2689,16 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public void set(final String key, final Object value) {
-		redisTemplate.execute((RedisCallback<Long>) connection -> {
-			RedisSerializer<String> serializer = getRedisSerializer();
-			byte[] keys = serializer.serialize(key);
-			byte[] values = OBJECT_SERIALIZER.serialize(value);
-			connection.set(keys, values);
-			LogUtil.info("[redisTemplate redis]放入 缓存  url:{}", key);
-			return 1L;
-		});
+		redisTemplate.opsForValue().set(key, value);
+
+		//redisTemplate.execute((RedisCallback<Long>) connection -> {
+		//	RedisSerializer<String> serializer = getRedisSerializer();
+		//	byte[] keys = serializer.serialize(key);
+		//	byte[] values = OBJECT_SERIALIZER.serialize(value);
+		//	connection.set(keys, values);
+		//	LogUtil.info("[redisTemplate redis]放入 缓存  url:{}", key);
+		//	return 1L;
+		//});
 	}
 
 	/**
@@ -2708,6 +2714,7 @@ public class RedisRepository {
 		final List<String> keysList = new ArrayList<>();
 		redisTemplate.execute((RedisCallback<List<String>>) connection -> {
 			Set<String> keys = redisTemplate.keys(key + "*");
+			assert keys != null;
 			for (String key1 : keys) {
 				Long ttl = connection.ttl(key1.getBytes(DEFAULT_CHARSET));
 				if (0 <= ttl && ttl <= 2 * time) {
@@ -2756,19 +2763,21 @@ public class RedisRepository {
 	 * @since 2021-09-07 21:04:53
 	 */
 	public Object get(final String key) {
-		try {
-			Object resultStr = redisTemplate.execute((RedisCallback<Object>) connection -> {
-				RedisSerializer<String> serializer = getRedisSerializer();
-				byte[] keys = serializer.serialize(key);
-				assert keys != null;
-				byte[] values = connection.get(keys);
-				return OBJECT_SERIALIZER.deserialize(values);
-			});
-			LogUtil.info("[redisTemplate redis]取出 缓存  url:{} ", key);
-			return resultStr;
-		} catch (Exception e) {
-			return null;
-		}
+		return redisTemplate.opsForValue().get(key);
+
+		//try {
+		//	Object resultStr = redisTemplate.execute((RedisCallback<Object>) connection -> {
+		//		RedisSerializer<String> serializer = getRedisSerializer();
+		//		byte[] keys = serializer.serialize(key);
+		//		assert keys != null;
+		//		byte[] values = connection.get(keys);
+		//		return OBJECT_SERIALIZER.deserialize(values);
+		//	});
+		//	LogUtil.info("[redisTemplate redis]取出 缓存  url:{} ", key);
+		//	return resultStr;
+		//} catch (Exception e) {
+		//	return null;
+		//}
 	}
 
 
@@ -2788,10 +2797,10 @@ public class RedisRepository {
 			Set<String> keys = redisTemplate.keys(keyPatten + "*");
 			if (CollectionUtils.isNotEmpty(keys)) {
 				for (String key : keys) {
-					byte[] bKeys = serializer.serialize(key);
-					byte[] bValues = connection.get(bKeys);
-					Object value = OBJECT_SERIALIZER.deserialize(bValues);
-					maps.put(key, value);
+					//byte[] bKeys = serializer.serialize(key);
+					//byte[] bValues = connection.get(bKeys);
+					//Object value = OBJECT_SERIALIZER.deserialize(bValues);
+					maps.put(key, get(key));
 				}
 			}
 			return maps;

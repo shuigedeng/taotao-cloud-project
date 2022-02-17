@@ -44,7 +44,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import javax.servlet.ServletRequest;
@@ -254,7 +256,13 @@ public class RequestLoggerAspect {
 		requestLogger.setUrl(URLUtil.getPath(request.getRequestURI()));
 		requestLogger.setMethod(request.getMethod());
 		Object[] args = joinPoint.getArgs();
-		requestLogger.setArgs(Arrays.toString(args).replaceAll("\"", "'")
+		List<String> argsList = new ArrayList<>();
+		if(ArrayUtil.isNotEmpty(args)) {
+			for (Object arg : args) {
+				argsList.add(JsonUtil.toJSONString(arg));
+			}
+		}
+		requestLogger.setArgs(argsList.toString().replaceAll("\"", "'")
 			.replace("\n", ""));
 		requestLogger.setBrowser(request.getHeader("user-agent").replaceAll("\"", "'")
 			.replace("\n", ""));
@@ -366,7 +374,7 @@ public class RequestLoggerAspect {
 
 		String controllerMethodDescription = getDescribe(sysLog);
 
-		if (StrUtil.isNotEmpty(controllerMethodDescription) && StrUtil.contains(
+		if (StrUtil.isNotBlank(controllerMethodDescription) && StrUtil.contains(
 			controllerMethodDescription, StrPool.HASH)) {
 			//获取方法参数值
 			Object[] args = joinPoint.getArgs();
@@ -376,7 +384,7 @@ public class RequestLoggerAspect {
 				args);
 		}
 
-		if (StrUtil.isEmpty(controllerDescription)) {
+		if (StrUtil.isNotBlank(controllerDescription)) {
 			requestLogger.setDescription(controllerMethodDescription);
 		} else {
 			if (sysLog.controllerApiValue()) {
