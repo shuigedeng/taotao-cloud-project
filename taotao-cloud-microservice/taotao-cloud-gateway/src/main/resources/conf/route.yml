@@ -7,7 +7,7 @@ spring:
           metadata:
             name: 库存管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/stock/**
           filters:
             - RewritePath=/stock/(?<path>.*), /stock/$\{path}
             - StripPrefix=2
@@ -30,7 +30,7 @@ spring:
           metadata:
             name: 售后管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/settlement/**
           filters:
             - RewritePath=/settlement/(?<path>.*), /settlement/$\{path}
             - StripPrefix=2
@@ -51,7 +51,7 @@ spring:
           metadata:
             name: 搜索管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/search/**
           filters:
             - RewritePath=/search/(?<path>.*), /search/$\{path}
             - StripPrefix=2
@@ -72,7 +72,7 @@ spring:
           metadata:
             name: 报表管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/report/**
           filters:
             - RewritePath=/report/(?<path>.*), /report/$\{path}
             - StripPrefix=2
@@ -93,7 +93,7 @@ spring:
           metadata:
             name: 推荐管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/recommend/**
           filters:
             - RewritePath=/recommend/(?<path>.*), /recommend/$\{path}
             - StripPrefix=2
@@ -114,7 +114,7 @@ spring:
           metadata:
             name: 促销管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/promotion/**
           filters:
             - RewritePath=/promotion/(?<path>.*), /promotion/$\{path}
             - StripPrefix=2
@@ -135,7 +135,7 @@ spring:
           metadata:
             name: 支付管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/payment/**
           filters:
             - RewritePath=/payment/(?<path>.*), /payment/$\{path}
             - StripPrefix=2
@@ -156,7 +156,7 @@ spring:
           metadata:
             name: 运营管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/operation/**
           filters:
             - RewritePath=/operation/(?<path>.*), /operation/$\{path}
             - StripPrefix=2
@@ -177,7 +177,7 @@ spring:
           metadata:
             name: 消息管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/message/**
           filters:
             - RewritePath=/message/(?<path>.*), /message/$\{path}
             - StripPrefix=2
@@ -198,7 +198,7 @@ spring:
           metadata:
             name: 会员管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/member/**
           filters:
             - RewritePath=/member/(?<path>.*), /member/$\{path}
             - StripPrefix=2
@@ -219,7 +219,7 @@ spring:
           metadata:
             name: 营销管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/distribution/**
           filters:
             - RewritePath=/distribution/(?<path>.*), /distribution/$\{path}
             - StripPrefix=2
@@ -240,7 +240,7 @@ spring:
           metadata:
             name: 客服管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/customer/**
           filters:
             - RewritePath=/customer/(?<path>.*), /customer/$\{path}
             - StripPrefix=2
@@ -261,7 +261,7 @@ spring:
           metadata:
             name: 公告管理模块
           predicates:
-            - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
+            - Path=${taotao.cloud.gateway.api.base-uri}/bulletin/**
           filters:
             - RewritePath=/bulletin/(?<path>.*), /bulletin/$\{path}
             - StripPrefix=2

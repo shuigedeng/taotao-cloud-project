@@ -43,7 +43,7 @@ redisson:
     subscription_connection_pool_size: 50
     connection_minimum_idle_size: 24
     connection_pool_size: 64
-    database: 0
+    database: 3
     dns_monitoring_interval: 5000
   # 集群模式
   #cluster_servers_config:
@@ -341,13 +341,14 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
-    port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
-    database: 1
-    password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    #host: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}
+    #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
+    #database: 1
+    #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
-    #cluster:
-    #  nodes:
+    cluster:
+      nodes: 172.16.6.151:7100,172.16.6.151:7101,172.16.6.151:7102,172.16.6.151:7103,172.16.6.151:7104,172.16.6.151:7105
+      max-redirects: 3
     #sentinel:
     #  master:
     #  nodes:
@@ -358,6 +359,45 @@ spring:
         max-wait: 5000
         max-idle: 500
         min-idle: 100
+    redisson:
+      config: |
+        clusterServersConfig:
+          idleConnectionTimeout: 10000
+          connectTimeout: 10000
+          timeout: 3000
+          retryAttempts: 3
+          retryInterval: 1500
+          failedSlaveReconnectionInterval: 3000
+          failedSlaveCheckInterval: 60000
+          password: null
+          subscriptionsPerConnection: 5
+          clientName: null
+          loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+          subscriptionConnectionMinimumIdleSize: 1
+          subscriptionConnectionPoolSize: 50
+          slaveConnectionMinimumIdleSize: 24
+          slaveConnectionPoolSize: 64
+          masterConnectionMinimumIdleSize: 24
+          masterConnectionPoolSize: 64
+          readMode: "SLAVE"
+          subscriptionMode: "SLAVE"
+          nodeAddresses:
+          - "redis://172.16.6.151:7100"
+          - "redis://172.16.6.151:7101"
+          - "redis://172.16.6.151:7102"
+          - "redis://172.16.6.151:7103"
+          - "redis://172.16.6.151:7104"
+          - "redis://172.16.6.151:7105"
+          scanInterval: 1000
+          pingConnectionInterval: 0
+          keepAlive: false
+          tcpNoDelay: false
+        threads: 16
+        nettyThreads: 32
+        codec: !<org.redisson.codec.MarshallingCodec> {}
+        transportMode: "NIO"
+
+
   elasticsearch:
     uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
     password:
