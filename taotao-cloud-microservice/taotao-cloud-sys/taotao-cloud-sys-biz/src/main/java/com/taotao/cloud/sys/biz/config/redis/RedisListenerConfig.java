@@ -50,8 +50,6 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class RedisListenerConfig {
 
-
-
 	@Bean
 	public RedisMessageListenerContainer redisMessageListenerContainer(
 		RedisConnectionFactory redisConnectionFactory,
@@ -78,55 +76,106 @@ public class RedisListenerConfig {
 			"addJob");
 		addJob.afterPropertiesSet();
 		listeners.put(addJob, List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_ADD_TOPIC)));
+
 		MessageListenerAdapter deleteJob = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
 			"deleteJob");
 		deleteJob.afterPropertiesSet();
 		listeners.put(deleteJob, List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_DELETE_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "resumeJob"),
+
+		MessageListenerAdapter resumeJob = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
+			"resumeJob");
+		resumeJob.afterPropertiesSet();
+		listeners.put(resumeJob,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_RESUME_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "pauseJob"),
+
+		MessageListenerAdapter pauseJob = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
+			"pauseJob");
+		pauseJob.afterPropertiesSet();
+		listeners.put(pauseJob,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_PAUSE_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "runJobNow"),
+
+		MessageListenerAdapter runJobNow = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
+			"runJobNow");
+		runJobNow.afterPropertiesSet();
+		listeners.put(runJobNow,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_RUN_NOW_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "updateJobCron"),
+
+		MessageListenerAdapter updateJobCron = new MessageListenerAdapter(
+			quartzJobTopicMessageDelegate, "updateJobCron");
+		updateJobCron.afterPropertiesSet();
+		listeners.put(updateJobCron,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_UPDATE_CRON_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "updateJob"),
+
+		MessageListenerAdapter updateJob = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
+			"updateJob");
+		updateJob.afterPropertiesSet();
+		listeners.put(updateJob,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_UPDATE_TOPIC)));
-		listeners.put(new MessageListenerAdapter(quartzJobTopicMessageDelegate, "addJobLog"),
+
+		MessageListenerAdapter addJobLog = new MessageListenerAdapter(quartzJobTopicMessageDelegate,
+			"addJobLog");
+		addJobLog.afterPropertiesSet();
+		listeners.put(addJobLog,
 			List.of(new ChannelTopic(RedisConstant.QUARTZ_JOB_LOG_ADD_TOPIC)));
 
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "updateCronScheduled"),
+		MessageListenerAdapter updateCronScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "updateCronScheduled");
+		updateCronScheduled.afterPropertiesSet();
+		listeners.put(updateCronScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_CRON_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addCronScheduled"),
+
+		MessageListenerAdapter addCronScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "addCronScheduled");
+		addCronScheduled.afterPropertiesSet();
+		listeners.put(addCronScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_CRON_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate,
-				"updateFixedDelayScheduled"),
+
+		MessageListenerAdapter updateFixedDelayScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "updateFixedDelayScheduled");
+		updateFixedDelayScheduled.afterPropertiesSet();
+		listeners.put(updateFixedDelayScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_FIXED_DELAY_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addFixedDelayScheduled"),
+
+		MessageListenerAdapter addFixedDelayScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "addFixedDelayScheduled");
+		addFixedDelayScheduled.afterPropertiesSet();
+		listeners.put(addFixedDelayScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_FIXED_DELAY_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate,
-				"updateFixedRateScheduled"),
+
+		MessageListenerAdapter updateFixedRateScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "updateFixedRateScheduled");
+		updateFixedRateScheduled.afterPropertiesSet();
+		listeners.put(updateFixedRateScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_UPDATE_FIXED_RATE_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "addFixedRateScheduled"),
+
+		MessageListenerAdapter addFixedRateScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "addFixedRateScheduled");
+		addFixedRateScheduled.afterPropertiesSet();
+		listeners.put(addFixedRateScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_ADD_FIXED_RATE_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "cancelScheduled"),
+
+		MessageListenerAdapter cancelScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "cancelScheduled");
+		cancelScheduled.afterPropertiesSet();
+		listeners.put(cancelScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_CANCEL_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "runOnceScheduled"),
+
+		MessageListenerAdapter runOnceScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "runOnceScheduled");
+		runOnceScheduled.afterPropertiesSet();
+		listeners.put(runOnceScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_RUN_ONCE_TOPIC)));
-		listeners.put(
-			new MessageListenerAdapter(scheduledJobTopicMessageDelegate, "callOffScheduled"),
+
+		MessageListenerAdapter callOffScheduled = new MessageListenerAdapter(
+			scheduledJobTopicMessageDelegate, "callOffScheduled");
+		callOffScheduled.afterPropertiesSet();
+		listeners.put(callOffScheduled,
 			List.of(new ChannelTopic(RedisConstant.SCHEDULED_CALL_OFF_TOPIC)));
 
-		listeners.put(
-			new MessageListenerAdapter(sensitiveWordsTopicMessageDelegate, "handleSensitiveWords"),
+		MessageListenerAdapter handleSensitiveWords = new MessageListenerAdapter(
+			sensitiveWordsTopicMessageDelegate, "handleSensitiveWords");
+		handleSensitiveWords.afterPropertiesSet();
+		listeners.put(handleSensitiveWords,
 			List.of(new ChannelTopic(RedisConstant.SENSITIVE_WORDS_TOPIC)));
 
 		MessageListenerAdapter handleRequestLog = new MessageListenerAdapter(

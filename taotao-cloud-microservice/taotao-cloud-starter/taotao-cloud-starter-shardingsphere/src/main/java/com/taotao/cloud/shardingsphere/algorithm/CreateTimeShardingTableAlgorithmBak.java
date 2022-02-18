@@ -10,8 +10,6 @@ import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
 
 /**
  * 按创建时间月份分表
- *
- * @author Chopper
  */
 public class CreateTimeShardingTableAlgorithmBak implements PreciseShardingAlgorithm<Long>,
 	RangeShardingAlgorithm {
