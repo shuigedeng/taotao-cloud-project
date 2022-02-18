@@ -8,7 +8,13 @@ import org.springframework.util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * ConcurrentRedissonListenerContainer 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class ConcurrentRedissonListenerContainer extends AbstractRedissonListenerContainer {
 
     private final int concurrency;

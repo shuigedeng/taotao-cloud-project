@@ -4,7 +4,13 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.util.StringUtils;
 
-
+/**
+ * ThreadFactoryCreator
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:28:58
+ */
 public final class ThreadFactoryCreator {
 
 	public static ThreadFactory create(String threadName) {

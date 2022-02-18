@@ -7,6 +7,13 @@ import javax.annotation.PreDestroy;
 import org.springframework.context.Lifecycle;
 import org.springframework.context.SmartLifecycle;
 
+/**
+ * RedissonListenerRegistry
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:24:16
+ */
 public class RedissonListenerRegistry implements SmartLifecycle {
 
 	private List<RedissonListenerContainer> listenerContainers = new ArrayList<>(8);

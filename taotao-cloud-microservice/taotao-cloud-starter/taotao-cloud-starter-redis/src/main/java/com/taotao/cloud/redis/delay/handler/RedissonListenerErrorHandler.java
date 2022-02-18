@@ -3,7 +3,13 @@ package com.taotao.cloud.redis.delay.handler;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
 import org.springframework.messaging.Message;
 
-
+/**
+ * RedissonListenerErrorHandler 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 @FunctionalInterface
 public interface RedissonListenerErrorHandler {
 

@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.listener;
 
 
-import com.taotao.cloud.redis.delay.exception.MessageConversionException;
+import com.taotao.cloud.redis.delay.MessageConversionException;
 import com.taotao.cloud.redis.delay.handler.RedissonListenerErrorHandler;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 import com.taotao.cloud.redis.delay.message.QueueMessage;
@@ -16,7 +16,13 @@ import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.Assert;
 
-
+/**
+ * BatchRedissonMessageListenerAdapter 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class BatchRedissonMessageListenerAdapter extends
 	AbstractRedissonMessageListenerAdapter<List<RedissonMessage>> {
 

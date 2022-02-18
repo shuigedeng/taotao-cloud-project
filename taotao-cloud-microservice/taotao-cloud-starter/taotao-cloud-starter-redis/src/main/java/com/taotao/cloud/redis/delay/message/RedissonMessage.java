@@ -4,14 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.util.Assert;
 
-
+/**
+ * RedissonMessage 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class RedissonMessage {
 
-	private final byte[] payload;
+	private final String payload;
 
 	private final Map<String, Object> headers;
 
-	public RedissonMessage(byte[] payload, Map<String, Object> headers) {
+	public RedissonMessage(String payload, Map<String, Object> headers) {
 		Assert.notNull(payload, "payload must not be null");
 		this.payload = payload;
 		if (headers == null) {
@@ -20,7 +26,7 @@ public class RedissonMessage {
 		this.headers = headers;
 	}
 
-	public byte[] getPayload() {
+	public String getPayload() {
 		return this.payload;
 	}
 

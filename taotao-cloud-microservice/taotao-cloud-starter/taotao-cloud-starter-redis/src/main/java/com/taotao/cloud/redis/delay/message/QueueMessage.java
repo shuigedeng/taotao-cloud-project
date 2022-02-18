@@ -3,7 +3,13 @@ package com.taotao.cloud.redis.delay.message;
 import java.util.Map;
 import org.springframework.util.Assert;
 
-
+/**
+ * QueueMessage 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class QueueMessage<T> {
 
 	private final T payload;

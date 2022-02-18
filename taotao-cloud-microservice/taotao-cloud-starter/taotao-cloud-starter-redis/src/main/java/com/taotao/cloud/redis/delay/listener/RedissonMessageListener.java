@@ -1,7 +1,13 @@
 package com.taotao.cloud.redis.delay.listener;
 
 
-
+/**
+ * RedissonMessageListener 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:42
+ */
 public interface RedissonMessageListener<T> {
 
     /**

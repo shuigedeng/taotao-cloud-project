@@ -1,6 +1,12 @@
 package com.taotao.cloud.redis.delay.message;
 
-
+/**
+ * RedissonHeaders 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class RedissonHeaders {
 
 	public static final String MESSAGE_ID = "message_id";

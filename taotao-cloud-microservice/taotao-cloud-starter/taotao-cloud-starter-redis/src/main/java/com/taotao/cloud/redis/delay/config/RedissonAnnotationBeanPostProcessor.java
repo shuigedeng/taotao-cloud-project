@@ -31,7 +31,13 @@ import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
-
+/**
+ * RedissonAnnotationBeanPostProcessor
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:23:57
+ */
 public class RedissonAnnotationBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware,
 	SmartInitializingSingleton {
 

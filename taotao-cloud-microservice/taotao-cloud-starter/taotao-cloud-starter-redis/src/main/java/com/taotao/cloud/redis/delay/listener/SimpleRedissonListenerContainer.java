@@ -1,9 +1,13 @@
 package com.taotao.cloud.redis.delay.listener;
 
+import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.delay.message.FastJsonCodec;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
-import java.util.Objects;
+import java.io.IOException;
+import java.util.Map;
 import org.redisson.Redisson;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RFuture;
@@ -12,7 +16,13 @@ import org.redisson.client.protocol.RedisCommand;
 import org.redisson.client.protocol.decoder.ListObjectDecoder;
 import org.redisson.command.CommandAsyncExecutor;
 
-
+/**
+ * SimpleRedissonListenerContainer
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:42
+ */
 public class SimpleRedissonListenerContainer extends AbstractRedissonListenerContainer {
 
 	private RedisCommand<Object> LPOP_VALUE = new RedisCommand<>("LPOP",
@@ -65,15 +75,26 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 			long emptyFetchTimes = 0;
 			for (; ; ) {
 				try {
-					RFuture<RedissonMessage> asyncResult = commandExecutor.writeAsync(
+					RFuture<String> asyncResult = commandExecutor.writeAsync(
 						blockingQueue.getName(), blockingQueue.getCodec(), LPOP_VALUE,
 						blockingQueue.getName());
-					RedissonMessage redissonMessage = commandExecutor.get(asyncResult);
-					if (Objects.isNull(redissonMessage)) {
+					String message = commandExecutor.get(asyncResult);
+
+
+					if (StrUtil.isBlank(message)) {
 						Thread.sleep(Math.min(++emptyFetchTimes * 5, maxWaitMillis));
 					} else {
 						//reset counting
+						System.out.println("message:" + message);
 						emptyFetchTimes = 0;
+
+						JsonNode jsonNode = JsonUtil.parse(message);
+						String payload = jsonNode.get("payload").toString();
+						Map<String, Object> headers = JsonUtil.readMap(jsonNode.get("headers").toString());
+
+						//RedissonMessage redissonMessage = JsonUtil.(message, RedissonMessage.class);
+
+						RedissonMessage redissonMessage = new RedissonMessage(payload, headers);
 						SimpleRedissonMessageListenerAdapter redissonListener = (SimpleRedissonMessageListenerAdapter) SimpleRedissonListenerContainer.this.getRedissonListener();
 						redissonListener.onMessage(redissonMessage);
 					}
@@ -98,5 +119,6 @@ public class SimpleRedissonListenerContainer extends AbstractRedissonListenerCon
 			}
 		}
 	}
+
 
 }

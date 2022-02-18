@@ -11,7 +11,13 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionValidationException;
 
-
+/**
+ * RedissonQueueBeanPostProcessor
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:24:26
+ */
 public class RedissonQueueBeanPostProcessor implements BeanFactoryAware, BeanPostProcessor {
 
 	private BeanFactory beanFactory;

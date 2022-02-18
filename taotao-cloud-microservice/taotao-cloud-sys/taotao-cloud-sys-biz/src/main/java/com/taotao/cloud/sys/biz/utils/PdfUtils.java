@@ -20,9 +20,9 @@ import java.util.List;
 @Component
 public class PdfUtils {
 
-	@Value("${castle.upload.fileServerPath}")
+	@Value("${castle.upload.fileServerPath:upload/file/}")
 	private String originalFilePath;
-	@Value("${castle.upload.fileDomain}")
+	@Value("${castle.upload.fileDomain:http://up.hcses.cn/pdftools}")
 	private String fileDomain;
 
 	/**
