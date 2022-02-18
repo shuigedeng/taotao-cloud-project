@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.listener;
 
 
-import com.taotao.cloud.redis.delay.exception.MessageConversionException;
+import com.taotao.cloud.redis.delay.MessageConversionException;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 import com.taotao.cloud.redis.delay.message.QueueMessage;
 import com.taotao.cloud.redis.delay.message.RedissonMessage;
@@ -10,7 +10,13 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.messaging.Message;
 
-
+/**
+ * BatchMessageConverter 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public interface BatchMessageConverter extends MessageConverter {
 
     @Override

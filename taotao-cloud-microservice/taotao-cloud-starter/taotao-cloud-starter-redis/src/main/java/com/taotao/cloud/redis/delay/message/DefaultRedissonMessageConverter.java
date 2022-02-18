@@ -1,11 +1,17 @@
 package com.taotao.cloud.redis.delay.message;
 
 
-import com.taotao.cloud.redis.delay.exception.MessageConversionException;
+import com.taotao.cloud.redis.delay.MessageConversionException;
 import java.util.Map;
 import java.util.UUID;
 
-
+/**
+ * DefaultRedissonMessageConverter 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class DefaultRedissonMessageConverter implements MessageConverter {
 
 	@Override

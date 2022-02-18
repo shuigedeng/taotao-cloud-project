@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.util.Assert;
 
-
+/**
+ * QueueMessageBuilder 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class QueueMessageBuilder<T> {
 
 	private T payload;

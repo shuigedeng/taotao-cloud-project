@@ -5,7 +5,13 @@ import com.taotao.cloud.redis.delay.message.MessageConverter;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
 
-
+/**
+ * QueueRegistryInfo 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:41
+ */
 public class QueueRegistryInfo {
 
     private String queueName;

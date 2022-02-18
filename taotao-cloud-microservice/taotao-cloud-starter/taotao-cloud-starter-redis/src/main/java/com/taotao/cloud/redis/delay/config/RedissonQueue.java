@@ -6,6 +6,13 @@ import java.util.Objects;
 import org.springframework.util.Assert;
 
 
+/**
+ * RedissonQueue 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:42
+ */
 public class RedissonQueue {
 
 	private final String queue;

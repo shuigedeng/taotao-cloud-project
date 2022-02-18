@@ -5,7 +5,13 @@ import com.taotao.cloud.common.utils.LogUtil;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-
+/**
+ * DefaultIsolationStrategy
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:25:25
+ */
 public class DefaultIsolationStrategy implements IsolationStrategy {
 
     @Override

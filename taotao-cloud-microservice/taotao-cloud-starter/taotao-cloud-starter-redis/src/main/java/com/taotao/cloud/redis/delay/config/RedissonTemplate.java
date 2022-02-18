@@ -1,5 +1,6 @@
 package com.taotao.cloud.redis.delay.config;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.delay.message.DefaultRedissonMessageConverter;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 import com.taotao.cloud.redis.delay.message.QueueMessage;
@@ -15,7 +16,13 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.util.Assert;
 
-
+/**
+ * RedissonTemplate
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:24:41
+ */
 public class RedissonTemplate implements BeanFactoryAware, SmartInitializingSingleton {
 
 	private BeanFactory beanFactory;
@@ -37,15 +44,22 @@ public class RedissonTemplate implements BeanFactoryAware, SmartInitializingSing
 	}
 
 	public void send(final String queueName, final Object payload, Map<String, Object> headers) {
-		this.checkQueueAndPayload(queueName, payload);
+		try {
+			this.checkQueueAndPayload(queueName, payload);
 
-		final QueueRegistryInfo registryInfo = this.checkAndGetRegistryInfo(queueName);
-		final RBlockingQueue<Object> blockingQueue = registryInfo.getBlockingQueue();
-		final MessageConverter messageConverter = this.getRequiredMessageConverter(queueName);
+			final QueueRegistryInfo registryInfo = this.checkAndGetRegistryInfo(queueName);
+			final RBlockingQueue<Object> blockingQueue = registryInfo.getBlockingQueue();
+			final MessageConverter messageConverter = this.getRequiredMessageConverter(queueName);
 
-		this.fillInfrastructureHeaders(queueName, headers);
-		QueueMessage<?> message = messageConverter.toMessage(payload, headers);
-		blockingQueue.offer(message);
+			this.fillInfrastructureHeaders(queueName, headers);
+			QueueMessage<?> message = messageConverter.toMessage(payload, headers);
+			blockingQueue.offer(message);
+
+			LogUtil.info("添加队列成功，队列键：{}，队列值：{}", queueName, payload);
+		} catch (Exception e) {
+			LogUtil.error("添加队列失败：{}", e.getMessage());
+			throw new RuntimeException("添加队列失败");
+		}
 	}
 
 
@@ -55,18 +69,26 @@ public class RedissonTemplate implements BeanFactoryAware, SmartInitializingSing
 
 	public void sendWithDelay(final String queueName, final Object payload,
 		Map<String, Object> headers, final long delay) {
-		this.checkQueueAndPayload(queueName, payload);
-		Assert.isTrue(delay > 0, "delay millis must be positive");
+		try {
+			this.checkQueueAndPayload(queueName, payload);
+			Assert.isTrue(delay > 0, "delay millis must be positive");
 
-		final QueueRegistryInfo registryInfo = this.checkAndGetRegistryInfo(queueName);
-		final RDelayedQueue<Object> delayedQueue = registryInfo.getDelayedQueue();
-		Assert.notNull(delayedQueue, "the delay queue doesn't define");
-		final MessageConverter messageConverter = this.getRequiredMessageConverter(queueName);
+			final QueueRegistryInfo registryInfo = this.checkAndGetRegistryInfo(queueName);
+			final RDelayedQueue<Object> delayedQueue = registryInfo.getDelayedQueue();
+			Assert.notNull(delayedQueue, "the delay queue doesn't define");
+			final MessageConverter messageConverter = this.getRequiredMessageConverter(queueName);
 
-		this.fillInfrastructureHeaders(queueName, headers);
-		headers.put(RedissonHeaders.EXPECTED_DELAY_MILLIS, delay);
-		QueueMessage<?> message = messageConverter.toMessage(payload, headers);
-		delayedQueue.offer(message, delay, TimeUnit.MILLISECONDS);
+			this.fillInfrastructureHeaders(queueName, headers);
+			headers.put(RedissonHeaders.EXPECTED_DELAY_MILLIS, delay);
+			QueueMessage<?> message = messageConverter.toMessage(payload, headers);
+			delayedQueue.offer(message, delay, TimeUnit.MILLISECONDS);
+
+			LogUtil.info("添加延时队列成功，队列键：{}，队列值：{}，延迟时间：{}", queueName, payload,
+				TimeUnit.MILLISECONDS.toSeconds(delay) + "秒");
+		} catch (Exception e) {
+			LogUtil.error("添加延时队列失败：{}", e.getMessage());
+			throw new RuntimeException("添加延时队列失败");
+		}
 	}
 
 	private void checkQueueAndPayload(String queueName, Object payload) {

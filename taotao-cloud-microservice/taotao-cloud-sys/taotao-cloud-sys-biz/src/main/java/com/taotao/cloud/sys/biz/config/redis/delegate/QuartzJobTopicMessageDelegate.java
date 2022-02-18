@@ -51,4 +51,7 @@ public class QuartzJobTopicMessageDelegate {
 
 	public void addJobLog(String message) {
 	}
+
+	public void updateJobCron(String message) {
+	}
 }

@@ -23,6 +23,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
@@ -33,7 +34,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  * @since 2022-02-09 17:07:00
  */
 @Configuration
-@ConditionalOnProperty(prefix = ScheduledProperties.PREFIX, name = "enabled", havingValue = "true")
+@EnableScheduling
+@ConditionalOnProperty(prefix = ScheduledProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(value = {ThreadPoolTaskSchedulerProperties.class,
 	ScheduledPluginProperties.class, ScheduledProperties.class})
 public class ScheduledAutoConfiguration {

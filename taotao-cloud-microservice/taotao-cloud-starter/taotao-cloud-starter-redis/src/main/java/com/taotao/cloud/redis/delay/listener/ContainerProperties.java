@@ -6,6 +6,13 @@ import com.taotao.cloud.redis.delay.handler.IsolationStrategy;
 import com.taotao.cloud.redis.delay.handler.RedissonListenerErrorHandler;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 
+/**
+ * ContainerProperties 
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:36:42
+ */
 public class ContainerProperties {
 
     private String queue;

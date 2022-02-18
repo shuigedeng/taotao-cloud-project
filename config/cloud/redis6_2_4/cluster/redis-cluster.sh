@@ -61,8 +61,3 @@ case $1 in
     echo 'Usage: '$(basename $0)' start|stop|restart'
     ;;
 esac
-
-https://wushan-file-obs.obs.cn-north-4.myhuaweicloud.com/wushan-data-share-test/2022/1/17/0gsk2iuo/住宿点（导入模板）.xlsx
-https://wushan-file-obs.obs.cn-north-4.myhuaweicloud.com/wushan-data-share-test/2022/1/17/o4gt4oix/购物点（导入模板）.xlsx
-https://wushan-file-obs.obs.cn-north-4.myhuaweicloud.com/wushan-data-share-test/2022/1/17/cos2v2vb/餐饮点（导入模板）.xlsx
-https://wushan-file-obs.obs.cn-north-4.myhuaweicloud.com/wushan-data-share-test/2022/1/17/sefu7bmf/旅游景点（导入模板）.xlsx

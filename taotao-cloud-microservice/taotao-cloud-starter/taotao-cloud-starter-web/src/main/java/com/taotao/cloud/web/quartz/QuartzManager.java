@@ -66,6 +66,8 @@ public class QuartzManager {
 			if (Objects.nonNull(redisRepository)) {
 				redisRepository.send(RedisConstant.QUARTZ_JOB_ADD_TOPIC, quartzJobModel);
 			}
+
+			LogUtil.info("添加Quartz定时任务成功");
 		} catch (Exception e) {
 			LogUtil.error("创建定时任务失败", e);
 			throw new QuartzExecutionExecution("创建定时任务失败");

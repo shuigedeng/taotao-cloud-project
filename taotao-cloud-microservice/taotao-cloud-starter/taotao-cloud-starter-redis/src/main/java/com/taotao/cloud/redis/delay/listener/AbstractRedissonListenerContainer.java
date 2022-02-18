@@ -9,12 +9,18 @@ import org.springframework.util.Assert;
 
 import java.util.concurrent.Executor;
 
-
+/**
+ * AbstractRedissonListenerContainer
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-18 10:26:01
+ */
 public abstract class AbstractRedissonListenerContainer implements RedissonListenerContainer {
 
     private final Object lifecycleMonitor = new Object();
 
-    private Executor taskExecutor = new SimpleAsyncTaskExecutor(ThreadFactoryCreator.create("RedissonConsumeThread"));
+    private Executor taskExecutor = new SimpleAsyncTaskExecutor(ThreadFactoryCreator.create("taotao-cloud-redisson-simple-consume-thread"));
 
 	public Executor getTaskExecutor() {
 		return taskExecutor;

@@ -1009,4 +1009,14 @@ public class JsonUtil {
 			return new JacksonObjectMapper(this);
 		}
 	}
+
+	//public static void main(String[] args) throws IOException {
+	//	String message = "{\"payload\":{\"cid\":\"1\",\"businessType\":\"0\",\"city\":\"北京市\",\"cityId\":\"265\",\"name\":\"fsfds\",\"carNum\":\"156156\"},\"headers\":{\"delivery_queue_name\":\"riven\",\"message_id\":\"de6b5e53-0442-40ba-b66f-ae0c13c09801\",\"expected_delay_millis\":8000,\"send_timestamp\":1645168609854}}";
+	//	JsonNode jsonNode = JsonUtil.parse(message);
+	//	String payload = jsonNode.get("payload").toString();
+	//
+	//	Map<String, Object> headers = JsonUtil.readMap(jsonNode.get("headers").toString());
+	//	System.out.println("sdfasdf");
+	//
+	//}
 }
