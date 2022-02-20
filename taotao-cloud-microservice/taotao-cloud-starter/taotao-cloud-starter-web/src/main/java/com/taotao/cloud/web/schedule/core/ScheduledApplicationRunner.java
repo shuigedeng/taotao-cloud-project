@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
@@ -49,6 +50,7 @@ public class ScheduledApplicationRunner implements ApplicationRunner, Applicatio
 	 * 定时任务执行线程
 	 */
 	@Autowired
+	@Qualifier("scheduledThreadPoolTaskScheduler")
 	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
 	@Override

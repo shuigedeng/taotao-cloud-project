@@ -28,7 +28,8 @@ import org.springframework.stereotype.Component;
 public class QuartzJobTest {
 
 	public void test(String str) {
-		System.out.println("QuartzJobTest.test");
+
+		System.out.println(Thread.currentThread().getName() + "------------" + str);
 	}
 
 }

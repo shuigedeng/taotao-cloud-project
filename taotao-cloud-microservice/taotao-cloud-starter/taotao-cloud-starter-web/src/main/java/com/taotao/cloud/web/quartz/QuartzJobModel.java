@@ -28,7 +28,7 @@ public class QuartzJobModel {
 	/**
 	 * 状态：1暂停、0启用
 	 */
-	private Boolean isPause;
+	private boolean isPause;
 
 	/**
 	 * 任务名称
@@ -67,6 +67,14 @@ public class QuartzJobModel {
 		return beanName;
 	}
 
+	public boolean isPause() {
+		return isPause;
+	}
+
+	public void setPause(boolean pause) {
+		isPause = pause;
+	}
+
 	public void setBeanName(String beanName) {
 		this.beanName = beanName;
 	}
@@ -79,13 +87,6 @@ public class QuartzJobModel {
 		this.cronExpression = cronExpression;
 	}
 
-	public Boolean getPause() {
-		return isPause;
-	}
-
-	public void setPause(Boolean pause) {
-		isPause = pause;
-	}
 
 	public String getJobName() {
 		return jobName;

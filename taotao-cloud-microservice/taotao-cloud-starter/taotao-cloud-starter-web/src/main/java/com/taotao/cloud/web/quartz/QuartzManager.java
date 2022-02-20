@@ -57,7 +57,7 @@ public class QuartzManager {
 			scheduler.scheduleJob(jobDetail, cronTrigger);
 
 			// 暂停任务
-			if (quartzJobModel.getPause()) {
+			if (quartzJobModel.isPause()) {
 				pauseJob(quartzJobModel);
 			}
 
@@ -100,7 +100,7 @@ public class QuartzManager {
 			scheduler.rescheduleJob(triggerKey, trigger);
 
 			// 暂停任务
-			if (quartzJobModel.getPause()) {
+			if (quartzJobModel.isPause()) {
 				pauseJob(quartzJobModel);
 			}
 
@@ -146,7 +146,7 @@ public class QuartzManager {
 			}
 			JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJobModel.getId());
 			scheduler.resumeJob(jobKey);
-			quartzJobModel.setPause(!quartzJobModel.getPause());
+			quartzJobModel.setPause(!quartzJobModel.isPause());
 
 			RedisRepository redisRepository = ContextUtil.getBean(RedisRepository.class, true);
 			if (Objects.nonNull(redisRepository)) {
