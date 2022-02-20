@@ -32,6 +32,7 @@ public class QuartzJobTopicMessageDelegate {
 	private IQuartzJobService IQuartzJobService;
 
 	public void addJob(String message) {
+		System.out.println("addJob=====================" + message);
 	}
 
 	public void deleteJob(String message) {

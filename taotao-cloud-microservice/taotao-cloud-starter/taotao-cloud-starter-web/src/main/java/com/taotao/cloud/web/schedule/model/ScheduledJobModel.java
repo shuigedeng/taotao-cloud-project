@@ -1,6 +1,7 @@
 package com.taotao.cloud.web.schedule.model;
 
 import com.taotao.cloud.web.schedule.ScheduledException;
+import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.web.schedule.enums.ScheduledType;
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -82,6 +83,22 @@ public class ScheduledJobModel implements Serializable {
 	}
 
 	public ScheduledJobModel(Scheduled annotation, Method method, Object bean) {
+		this.cron = StringUtils.isEmpty(annotation.cron()) ? null : annotation.cron();
+		this.fixedDelay = annotation.fixedDelay() < 0 ? null : annotation.fixedDelay();
+		this.fixedDelayString = StringUtils.isEmpty(annotation.fixedDelayString()) ? null
+			: annotation.fixedDelayString();
+		this.fixedRate = annotation.fixedRate() < 0 ? null : annotation.fixedRate();
+		this.fixedRateString =
+			StringUtils.isEmpty(annotation.fixedRateString()) ? null : annotation.fixedRateString();
+		this.initialDelay = annotation.initialDelay() < 0 ? null : annotation.initialDelay();
+		this.initialDelayString = StringUtils.isEmpty(annotation.initialDelayString()) ? null
+			: annotation.initialDelayString();
+		this.type = confirmType();
+		this.bean = bean;
+		this.method = method;
+	}
+
+	public ScheduledJobModel(ScheduledBean annotation, Method method, Object bean) {
 		this.cron = StringUtils.isEmpty(annotation.cron()) ? null : annotation.cron();
 		this.fixedDelay = annotation.fixedDelay() < 0 ? null : annotation.fixedDelay();
 		this.fixedDelayString = StringUtils.isEmpty(annotation.fixedDelayString()) ? null

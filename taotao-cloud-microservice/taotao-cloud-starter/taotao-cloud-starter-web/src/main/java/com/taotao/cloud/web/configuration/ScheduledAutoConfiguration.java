@@ -1,5 +1,6 @@
 package com.taotao.cloud.web.configuration;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.schedule.core.ScheduledApplicationRunner;
 import com.taotao.cloud.web.schedule.core.ScheduledConfig;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
@@ -24,7 +25,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 /**
  * ScheduledAutoConfiguration
@@ -38,7 +41,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @ConditionalOnProperty(prefix = ScheduledProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(value = {ThreadPoolTaskSchedulerProperties.class,
 	ScheduledPluginProperties.class, ScheduledProperties.class})
-public class ScheduledAutoConfiguration {
+public class ScheduledAutoConfiguration implements SchedulingConfigurer {
 
 	public static String ROOT_PATH = "/taotao-cloud-scheduled";
 	public static String COLONY_STRENGTHEN = "/ColonyStrengthen";
@@ -48,8 +51,22 @@ public class ScheduledAutoConfiguration {
 	@Autowired
 	private ScheduledPluginProperties scheduledPluginProperties;
 
-	@Bean("threadPoolTaskScheduler")
-	@ConditionalOnMissingBean
+	@Override
+	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+		ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+		taskScheduler.setPoolSize(threadPoolTaskSchedulerProperties.getPoolSize());
+		taskScheduler.setRemoveOnCancelPolicy(true);
+		taskScheduler.setThreadNamePrefix(threadPoolTaskSchedulerProperties.getThreadNamePrefix());
+		taskScheduler.setErrorHandler(LogUtil::error);
+		taskScheduler.setWaitForTasksToCompleteOnShutdown(
+			threadPoolTaskSchedulerProperties.getWaitForTasksToCompleteOnShutdown());
+		taskScheduler.setAwaitTerminationSeconds(
+			threadPoolTaskSchedulerProperties.getAwaitTerminationSeconds());
+		taskScheduler.initialize();
+		taskRegistrar.setTaskScheduler(taskScheduler);
+	}
+
+	@Bean("scheduledThreadPoolTaskScheduler")
 	public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
 		ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
 		taskScheduler.setPoolSize(threadPoolTaskSchedulerProperties.getPoolSize());
@@ -74,13 +91,13 @@ public class ScheduledAutoConfiguration {
 	}
 
 	@Bean
-	@DependsOn({"scheduledConfig"})
+	@DependsOn("scheduledConfig")
 	public ScheduledPostProcessor superScheduledPostProcessor() {
 		return new ScheduledPostProcessor();
 	}
 
 	@Bean
-	@DependsOn("threadPoolTaskScheduler")
+	@DependsOn("scheduledThreadPoolTaskScheduler")
 	public ScheduledApplicationRunner superScheduledApplicationRunner() {
 		return new ScheduledApplicationRunner();
 	}

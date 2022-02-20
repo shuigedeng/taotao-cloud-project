@@ -97,7 +97,7 @@ public class EmailController {
 
 		QuartzJobModel jobModel = new QuartzJobModel();
 		jobModel.setId(123L);
-		jobModel.setBeanName("com.taotao.cloud.sys.biz.job.QuartzJobTest");
+		jobModel.setBeanName("quartzJobTest");
 		jobModel.setCronExpression("0/30 * * * * ?");
 		jobModel.setJobName("test");
 		jobModel.setMethodName("test");
