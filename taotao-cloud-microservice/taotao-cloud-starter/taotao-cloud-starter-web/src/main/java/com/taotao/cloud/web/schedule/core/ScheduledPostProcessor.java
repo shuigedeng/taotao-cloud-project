@@ -9,6 +9,7 @@ import com.taotao.cloud.web.schedule.model.ScheduledJobModel;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
@@ -88,7 +89,7 @@ public class ScheduledPostProcessor implements BeanPostProcessor, ApplicationCon
 					scheduledJobModel = new ScheduledJobModel(scheduledBean, method, bean);
 				}
 
-				if(null == scheduledJobModel) {
+				if (null == scheduledJobModel) {
 					continue;
 				}
 
@@ -104,8 +105,14 @@ public class ScheduledPostProcessor implements BeanPostProcessor, ApplicationCon
 				String name = beanName + "." + method.getName();
 				scheduledConfig.addScheduledSource(name, scheduledJobModel);
 				try {
-					clearOriginalScheduled(scheduled);
+					if (Objects.nonNull(scheduled)) {
+						clearOriginalScheduled(scheduled);
+					}
+					if (Objects.nonNull(scheduledBean)) {
+						clearOriginalScheduledBean(scheduledBean);
+					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					throw new ScheduledException("在关闭原始方法" + beanName + method.getName() + "时出现错误");
 				}
 			}
@@ -120,6 +127,16 @@ public class ScheduledPostProcessor implements BeanPostProcessor, ApplicationCon
 	 */
 	private void clearOriginalScheduled(Scheduled annotation) throws Exception {
 		changeAnnotationValue(annotation, "cron", Scheduled.CRON_DISABLED);
+		changeAnnotationValue(annotation, "fixedDelay", -1L);
+		changeAnnotationValue(annotation, "fixedDelayString", "");
+		changeAnnotationValue(annotation, "fixedRate", -1L);
+		changeAnnotationValue(annotation, "fixedRateString", "");
+		changeAnnotationValue(annotation, "initialDelay", -1L);
+		changeAnnotationValue(annotation, "initialDelayString", "");
+	}
+
+	private void clearOriginalScheduledBean(ScheduledBean annotation) throws Exception {
+		changeAnnotationValue(annotation, "cron", ScheduledBean.CRON_DISABLED);
 		changeAnnotationValue(annotation, "fixedDelay", -1L);
 		changeAnnotationValue(annotation, "fixedDelayString", "");
 		changeAnnotationValue(annotation, "fixedRate", -1L);

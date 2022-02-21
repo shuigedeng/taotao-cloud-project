@@ -95,15 +95,15 @@ public class EmailController {
 		//carLbsDto.setCarNum("156156");
 		//redissonTemplate.sendWithDelay("riven", carLbsDto, 8000);
 
-		QuartzJobModel jobModel = new QuartzJobModel();
-		jobModel.setId(123L);
-		jobModel.setBeanName("quartzJobTest");
-		jobModel.setCronExpression("0/30 * * * * ?");
-		jobModel.setJobName("test");
-		jobModel.setMethodName("test");
-		jobModel.setParams("sdfsdf");
-		jobModel.setCreateTime(LocalDateTime.now());
-		quartzManager.addJob(jobModel);
+		//QuartzJobModel jobModel = new QuartzJobModel();
+		//jobModel.setId(123L);
+		//jobModel.setBeanName("quartzJobTest");
+		//jobModel.setCronExpression("0/30 * * * * ?");
+		//jobModel.setJobName("test");
+		//jobModel.setMethodName("test");
+		//jobModel.setParams("sdfsdf");
+		//jobModel.setCreateTime(LocalDateTime.now());
+		//quartzManager.addJob(jobModel);
 
 		List<String> runScheduledName = scheduledManager.getRunScheduledName();
 		System.out.println(runScheduledName);
