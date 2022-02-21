@@ -1,11 +1,11 @@
 package com.taotao.cloud.sys.biz.job;
 
+import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,7 +16,7 @@ public class TestTask {
 	@Autowired
 	private ScheduledManager scheduledManager;
 
-	@Scheduled(cron = "0 */1 * * * ?")
+	@ScheduledBean(cron = "0 */1 * * * ?")
 	public void robReceiveExpireTask() {
 		System.out.println(Thread.currentThread().getName() + "------------测试测试");
 		System.out.println(df.format(LocalDateTime.now()) + "测试测试");
