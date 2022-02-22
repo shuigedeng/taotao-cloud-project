@@ -94,9 +94,9 @@ Maven:
 ## 5. 核心依赖 
 依赖 | 版本
 ---|---
-Spring |  5.3.4 
-Spring Boot |  2.6.0
-Spring Cloud | 2020.0.3
+Spring |  5.3.15 
+Spring Boot |  2.6.3
+Spring Cloud | 2021.0.1
 Spring Cloud alibaba | 2021.1  
 Spring Security OAuth2 | 5.4.5
 Mybatis Plus | 3.4.2

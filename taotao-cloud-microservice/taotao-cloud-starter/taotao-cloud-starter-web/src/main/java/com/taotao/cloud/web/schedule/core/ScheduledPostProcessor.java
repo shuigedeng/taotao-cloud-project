@@ -66,10 +66,6 @@ public class ScheduledPostProcessor implements BeanPostProcessor, ApplicationCon
 		//methods.addAll(methods2);
 		//
 
-		if (beanName.equals("testTask")) {
-			System.out.println("sdfasdf");
-		}
-
 		//Method[] methods = ClassUtils.getUserClass(bean.getClass()).getDeclaredMethods();
 
 		List<Method> methods = findAllMethod(bean.getClass());
