@@ -46,7 +46,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -269,11 +268,12 @@ public class RegionServiceImpl extends
 			if (StrUtil.isNotBlank(jsonString)) {
 				//清空数据
 				QueryWrapper<Region> queryWrapper = new QueryWrapper();
-				queryWrapper.ne("id", "1");
+				queryWrapper.eq("version", "1");
 				this.remove(queryWrapper);
 
 				//清空缓存的地区数据
-				redisRepository.del(redisRepository.keys(RedisConstant.REGIONS_PATTERN).toArray(new String[0]));
+				redisRepository.del(
+					redisRepository.keys(RedisConstant.REGIONS_PATTERN).toArray(new String[0]));
 
 				// 构造存储数据库的对象集合
 				List<Region> regions = this.initData(jsonString);
@@ -304,8 +304,16 @@ public class RegionServiceImpl extends
 		JSONArray countryAll = jsonObject.getJSONArray("districts");
 		for (int i = 0; i < countryAll.size(); i++) {
 			JSONObject contry = countryAll.getJSONObject(i);
-			Long id1 = 0L;
+			String contryCode = contry.getString("citycode");
+			String contryAdCode = contry.getString("adcode");
+			String contryName = contry.getString("name");
+			String contryCenter = contry.getString("center");
+			String contryLevel = contry.getString("level");
+			//1.插入国家
+			Long id1 = insert(regions, null, contryCode, contryAdCode, contryName, contryCenter,
+				contryLevel, i);
 			JSONArray provinceAll = contry.getJSONArray("districts");
+
 			for (int j = 0; j < provinceAll.size(); j++) {
 				JSONObject province = provinceAll.getJSONObject(j);
 				String citycode1 = province.getString("citycode");
@@ -392,7 +400,11 @@ public class RegionServiceImpl extends
 		record.setName(name);
 		record.setParentId(parentId);
 		record.setOrderNum(order);
-		record.setId(IdGeneratorUtil.getId());
+		if ("100000".equals(code) && "country".equals(level)) {
+			record.setId(1L);
+		} else {
+			record.setId(IdGeneratorUtil.getId());
+		}
 
 		StringBuilder megName = new StringBuilder();
 		for (int i = 0; i < ids.length; i++) {

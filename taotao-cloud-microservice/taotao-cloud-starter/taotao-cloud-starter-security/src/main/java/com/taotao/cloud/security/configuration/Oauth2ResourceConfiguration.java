@@ -139,7 +139,6 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			"/*.json",
 			"/*.min.js",
 			"/*.min.css",
-			"/sys/**",
 			"/doc/**",
 			"/health/**"));
 
@@ -152,15 +151,13 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 			Set<NotAuth> set = new HashSet<>();
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), NotAuth.class));
 			set.add(AnnotationUtils.findAnnotation(handlerMethod.getMethod(), NotAuth.class));
-			set.forEach(annotation -> {
-				Optional.ofNullable(annotation)
-					.flatMap(inner -> Optional.ofNullable(info.getPathPatternsCondition()))
-					.ifPresent(pathPatternsRequestCondition -> {
-						permitAllUrls.addAll(pathPatternsRequestCondition.getPatterns()
-							.stream()
-							.map(PathPattern::getPatternString).toList());
-					});
-			});
+			set.forEach(annotation -> Optional.ofNullable(annotation)
+				.flatMap(inner -> Optional.ofNullable(info.getPathPatternsCondition()))
+				.ifPresent(pathPatternsRequestCondition -> {
+					permitAllUrls.addAll(pathPatternsRequestCondition.getPatterns()
+						.stream()
+						.map(PathPattern::getPatternString).toList());
+				}));
 		});
 
 		permitAllUrls.forEach(url -> registry.antMatchers(url).permitAll());

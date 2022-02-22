@@ -19,6 +19,7 @@ import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.tree.ForestNodeMerger;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.dto.region.RegionSaveDTO;
 import com.taotao.cloud.sys.api.dto.region.RegionUpdateDTO;
 import com.taotao.cloud.sys.api.vo.region.RegionParentVO;
@@ -64,7 +65,8 @@ public class ManagerRegionController extends
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
-	@PreAuthorize("hasAuthority('sys:region:info:parentId')")
+	@NotAuth
+	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<RegionParentVO>> queryRegionByParentId(
 		@Parameter(description = "父id") @NotNull(message = "父id不能为空")
 		@PathVariable(name = "parentId") Long parentId) {
@@ -83,7 +85,8 @@ public class ManagerRegionController extends
 	@Operation(summary = "树形结构查询", description = "树形结构查询")
 	@RequestLogger(description = "树形结构查询")
 	@GetMapping(value = "/tree")
-	@PreAuthorize("hasAuthority('sys:region:info:true')")
+	@NotAuth
+	//@PreAuthorize("hasAuthority('sys:region:info:true')")
 	public Result<List<RegionParentVO>> tree() {
 		List<RegionParentVO> result = service().tree();
 		return Result.success(result);
