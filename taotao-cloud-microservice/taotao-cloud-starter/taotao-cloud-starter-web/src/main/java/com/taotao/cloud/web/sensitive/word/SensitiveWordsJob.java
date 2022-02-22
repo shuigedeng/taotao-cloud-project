@@ -26,7 +26,7 @@ public class SensitiveWordsJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext jobExecutionContext) {
 		Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);
 		if (Objects.nonNull(words)) {
-			LogUtil.info("敏感词定时更新");
+			LogUtil.info("==========================敏感词定时更新");
 
 			List<String> sensitives = (List<String>) words;
 			if (sensitives.isEmpty()) {
