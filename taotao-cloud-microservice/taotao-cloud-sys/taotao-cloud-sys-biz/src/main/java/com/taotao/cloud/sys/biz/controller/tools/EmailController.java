@@ -27,6 +27,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * EmailController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-21 17:11:55
+ */
 @Validated
 @RestController
 @Tag(name = "工具管理-邮件管理API", description = "工具管理-邮件管理API")

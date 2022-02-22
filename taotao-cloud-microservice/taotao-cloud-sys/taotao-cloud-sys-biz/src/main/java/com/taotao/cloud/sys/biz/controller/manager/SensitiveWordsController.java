@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.controller.manager;
 
+import cn.hutool.core.io.FileUtil;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.biz.entity.SensitiveWord;
 import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,9 +51,10 @@ public class SensitiveWordsController {
 
 	@Operation(summary = "添加敏感词", description = "添加敏感词")
 	@PostMapping
-	public Result<SensitiveWord> add(@Valid SensitiveWord sensitiveWords) {
+	public Result<SensitiveWord> add(@Valid @RequestBody SensitiveWord sensitiveWords) {
 		ISensitiveWordService.save(sensitiveWords);
 		ISensitiveWordService.resetCache();
+
 
 		return Result.success(sensitiveWords);
 	}
@@ -60,7 +63,7 @@ public class SensitiveWordsController {
 	@PutMapping("/{id}")
 	public Result<SensitiveWord> edit(
 		@Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空")
-		@PathVariable Long id, SensitiveWord sensitiveWords) {
+		@PathVariable Long id, @RequestBody SensitiveWord sensitiveWords) {
 		sensitiveWords.setId(id);
 		ISensitiveWordService.updateById(sensitiveWords);
 		ISensitiveWordService.resetCache();
