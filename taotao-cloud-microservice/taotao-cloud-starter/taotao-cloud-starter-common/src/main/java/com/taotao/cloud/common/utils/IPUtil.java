@@ -15,7 +15,11 @@
  */
 package com.taotao.cloud.common.utils;
 
+import cn.hutool.db.DbUtil;
+import cn.hutool.db.ds.DSFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.taotao.cloud.common.db.DbConn;
+import com.taotao.cloud.common.db.DbHelper;
 import java.util.Objects;
 
 /**
@@ -71,7 +75,6 @@ public class IPUtil {
 		return null;
 	}
 
-	//public static void main(String[] args) {
-	//	System.err.println(getCityInfo("220.248.12.158"));
-	//}
+	public static void main(String[] args) {
+	}
 }
