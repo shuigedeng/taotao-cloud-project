@@ -16,11 +16,11 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-sleuth'
     api 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
 
-    api 'com.taobao.arthas:arthas-spring-boot-starter:3.5.4'
+    api 'com.taobao.arthas:arthas-spring-boot-starter:3.5.5'
     //api 'org.springframework.cloud:spring-cloud-starter-kubernetes'
 
     api "io.micrometer:micrometer-registry-prometheus"
-    api "de.codecentric:spring-boot-admin-starter-client:2.5.4"
+    api "de.codecentric:spring-boot-admin-starter-client:2.6.2"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
