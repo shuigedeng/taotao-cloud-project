@@ -181,64 +181,64 @@ public class TreeUtil {
 		return trees;
 	}
 
-	public static void main(String[] args) {
-		Connection conn = null;
-		Statement stmt = null;
-		try {
-			//1、注册驱动的第二种方法，告诉java我要连接mysql
-			Driver driver = new com.mysql.cj.jdbc.Driver();
-			DriverManager.registerDriver(driver);
-			//2、获取连接，告诉java我要连接哪台机器的mysql，并写入用户和密码
-			//127.0.0.1和localhost都是本地ip地址
-			String url = "jdbc:mysql://172.16.6.151:3306/taotao-cloud-sys?useSSL=false";
-			String user = "root";
-			String password = "123456";
-			conn = DriverManager.getConnection(url, user, password);
-			System.out.println(conn);
-
-			//3、获取数据库操作对象（statement专门执行sql语句）
-			stmt = conn.createStatement();
-
-			String str = FileUtil.readString("/Users/dengtao/sensitive_words/words.json",
-				StandardCharsets.UTF_8);
-			List<String> strings = JsonUtil.readList(str, String.class);
-
-			String sql = "insert into tt_sys_sensitive_words(sensitive_word)values(?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			final String UTFI_BOM="\uFEFF";
-			for (String str1 : strings) {
-				//4、执行sql
-				//专门执行DML语句（insert、delete、update）
-				//返回值是“影响数据库中的记录条数”
-				if (str1.startsWith(UTFI_BOM)) {
-					str1 = str1.substring(1);
-				}
-				ps.setObject(1, str1.replace("\"", "").trim());
-				ps.execute();
-			}
-			//5、处理查询结果集
-			//插入语句，暂时不需要查询
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			//6、释放资源
-			//为了保证资源一定释放，在finally语句块中关闭资源
-			//分别要遵循从小到大依次关闭
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException throwables) {
-					throwables.printStackTrace();
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException throwables) {
-					throwables.printStackTrace();
-				}
-			}
-		}
-	}
+	//public static void main(String[] args) {
+	//	Connection conn = null;
+	//	Statement stmt = null;
+	//	try {
+	//		//1、注册驱动的第二种方法，告诉java我要连接mysql
+	//		Driver driver = new com.mysql.cj.jdbc.Driver();
+	//		DriverManager.registerDriver(driver);
+	//		//2、获取连接，告诉java我要连接哪台机器的mysql，并写入用户和密码
+	//		//127.0.0.1和localhost都是本地ip地址
+	//		String url = "jdbc:mysql://172.16.6.151:3306/taotao-cloud-sys?useSSL=false";
+	//		String user = "root";
+	//		String password = "123456";
+	//		conn = DriverManager.getConnection(url, user, password);
+	//		System.out.println(conn);
+	//
+	//		//3、获取数据库操作对象（statement专门执行sql语句）
+	//		stmt = conn.createStatement();
+	//
+	//		String str = FileUtil.readString("/Users/dengtao/sensitive_words/words.json",
+	//			StandardCharsets.UTF_8);
+	//		List<String> strings = JsonUtil.readList(str, String.class);
+	//
+	//		String sql = "insert into tt_sys_sensitive_words(sensitive_word)values(?)";
+	//		PreparedStatement ps = conn.prepareStatement(sql);
+	//		final String UTFI_BOM="\uFEFF";
+	//		for (String str1 : strings) {
+	//			//4、执行sql
+	//			//专门执行DML语句（insert、delete、update）
+	//			//返回值是“影响数据库中的记录条数”
+	//			if (str1.startsWith(UTFI_BOM)) {
+	//				str1 = str1.substring(1);
+	//			}
+	//			ps.setObject(1, str1.replace("\"", "").trim());
+	//			ps.execute();
+	//		}
+	//		//5、处理查询结果集
+	//		//插入语句，暂时不需要查询
+	//	} catch (SQLException e) {
+	//		e.printStackTrace();
+	//	} finally {
+	//		//6、释放资源
+	//		//为了保证资源一定释放，在finally语句块中关闭资源
+	//		//分别要遵循从小到大依次关闭
+	//		if (stmt != null) {
+	//			try {
+	//				stmt.close();
+	//			} catch (SQLException throwables) {
+	//				throwables.printStackTrace();
+	//			}
+	//		}
+	//		if (conn != null) {
+	//			try {
+	//				conn.close();
+	//			} catch (SQLException throwables) {
+	//				throwables.printStackTrace();
+	//			}
+	//		}
+	//	}
+	//}
 }
 
