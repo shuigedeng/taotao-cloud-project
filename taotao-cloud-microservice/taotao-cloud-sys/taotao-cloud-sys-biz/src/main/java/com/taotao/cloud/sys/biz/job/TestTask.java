@@ -17,7 +17,7 @@ public class TestTask {
 	@Autowired
 	private ScheduledManager scheduledManager;
 
-	@ScheduledBean(cron = "0 */1 * * * ?")
+	@ScheduledBean(cron = "0 0/30 * * * ?")
 	public void robReceiveExpireTask() {
 		LogUtil.info(Thread.currentThread().getName() + "------------测试测试");
 		LogUtil.info(df.format(LocalDateTime.now()) + "测试测试");
