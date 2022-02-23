@@ -20,7 +20,7 @@ public class SensitiveWordsJob extends QuartzJobBean {
 
 	@Autowired
 	private RedisRepository redisRepository;
-	private volatile int code = 0;
+	private static volatile Integer code = 0;
 
 	@Override
 	protected void executeInternal(JobExecutionContext jobExecutionContext) {
@@ -33,8 +33,8 @@ public class SensitiveWordsJob extends QuartzJobBean {
 				}
 				int code = words.hashCode();
 				LogUtil.info("敏感词更新，code={}", code);
-				LogUtil.info("敏感词更新，this.code={}", this.code);
-				if (this.code != code) {
+				LogUtil.info("敏感词更新，this.code={}", SensitiveWordsJob.code);
+				if (SensitiveWordsJob.code != code) {
 					SensitiveWordsFilter.init(sensitives);
 					return code;
 				}
@@ -46,7 +46,7 @@ public class SensitiveWordsJob extends QuartzJobBean {
 		try {
 			Integer integer = submit.get();
 			if (integer != -1) {
-				this.code = integer;
+				SensitiveWordsJob.code = integer;
 			}
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
