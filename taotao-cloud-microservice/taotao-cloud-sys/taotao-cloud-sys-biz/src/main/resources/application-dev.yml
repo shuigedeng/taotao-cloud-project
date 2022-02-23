@@ -228,7 +228,11 @@ spring:
     properties:
       org.quartz.scheduler.instanceName : quartzScheduler
       org.quartz.scheduler.instanceId : AUTO
+      org.quartz.scheduler.rmi.export: false
+      org.quartz.scheduler.rmi.proxy: false
+      org.quartz.scheduler.wrapJobExecutionInUserTransaction: false
       org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
+      org.quartz.jobStore.misfireThreshold: 60000
       org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
       org.quartz.threadPool.threadCount : 10
       org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
