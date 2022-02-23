@@ -216,6 +216,47 @@ seata:
     exception-rate: 100
 
 spring:
+  quartz:
+    scheduler-name: taotao-cloud-quartz-scheduler
+    # 将任务等保存化到数据库
+    job-store-type: memory
+    # 程序结束时会等待quartz相关的内容结束
+    wait-for-jobs-to-complete-on-shutdown: true
+    # QuartzScheduler启动时更新己存在的Job,这样就不用每次修改targetObject后删除qrtz_job_details表对应记录
+    overwrite-existing-jobs: true
+    # 这里居然是个map，搞得智能提示都没有，佛了
+    properties:
+      org.quartz.scheduler.instanceName : quartzScheduler
+      org.quartz.scheduler.instanceId : AUTO
+      org.quartz.jobStore.class : org.quartz.simpl.RAMJobStore
+      org.quartz.threadPool.class : org.quartz.simpl.SimpleThreadPool
+      org.quartz.threadPool.threadCount : 10
+      org.quartz.threadPool.threadNamePrefix : taotao-cloud-quartz-thread
+      org.quartz.threadPool.threadPriority : 5
+      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread : true
+    #org:
+    #  quartz:
+    #  # scheduler相关
+    #  scheduler:
+    #    # scheduler的实例名
+    #    instanceName: scheduler
+    #    instanceId: AUTO
+    #  # 持久化相关
+    #  jobStore:
+    #    class: org.quartz.impl.jdbcjobstore.JobStoreTX
+    #    driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+    #    # 表示数据库中相关表是QRTZ_开头的
+    #    tablePrefix: QRTZ_
+    #    useProperties: false
+    #  # 线程池相关
+    #  threadPool:
+    #    class: org.quartz.simpl.SimpleThreadPool
+    #    # 线程数
+    #    threadCount: 10
+    #    # 线程优先级
+    #    threadPriority: 5
+    #    threadsInheritContextClassLoaderOfInitializingThread: true
+
   lifecycle:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
