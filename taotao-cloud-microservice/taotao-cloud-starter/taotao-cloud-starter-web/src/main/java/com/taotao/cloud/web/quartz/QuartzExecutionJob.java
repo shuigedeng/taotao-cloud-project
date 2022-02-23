@@ -4,6 +4,8 @@
  */
 package com.taotao.cloud.web.quartz;
 
+import static com.taotao.cloud.web.configuration.QuartzConfiguration.EXECUTOR;
+
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
@@ -21,23 +23,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 @Async
 public class QuartzExecutionJob extends QuartzJobBean {
 
-	/**
-	 * 该处仅供参考
-	 */
-	private final static ThreadPoolExecutor EXECUTOR;
 
-	static {
-		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
-			10,
-			50,
-			60,
-			TimeUnit.SECONDS,
-			new SynchronousQueue<>(),
-			new MonitorThreadPoolFactory("taotao-cloud-quartz-executor"));
-
-		executor.setNamePrefix("taotao-cloud-quartz-executor");
-		EXECUTOR = executor;
-	}
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) {

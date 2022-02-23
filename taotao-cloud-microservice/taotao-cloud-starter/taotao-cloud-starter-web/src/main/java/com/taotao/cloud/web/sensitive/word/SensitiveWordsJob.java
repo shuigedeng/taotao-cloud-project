@@ -1,5 +1,7 @@
 package com.taotao.cloud.web.sensitive.word;
 
+import static com.taotao.cloud.web.configuration.QuartzConfiguration.EXECUTOR;
+
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
@@ -16,23 +18,28 @@ public class SensitiveWordsJob extends QuartzJobBean {
 
 	@Autowired
 	private RedisRepository redisRepository;
+	private int code = 0;
 
 	/**
 	 * 定时更新敏感词信息
-	 *
-	 * @param jobExecutionContext
 	 */
 	@Override
 	protected void executeInternal(JobExecutionContext jobExecutionContext) {
-		Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);
-		if (Objects.nonNull(words)) {
-			LogUtil.info("==========================敏感词定时更新");
-
-			List<String> sensitives = (List<String>) words;
-			if (sensitives.isEmpty()) {
-				return;
+		EXECUTOR.execute(() -> {
+			Object words = redisRepository.get(RedisConstant.SENSITIVE_WORDS_KEY);
+			if (Objects.nonNull(words)) {
+				List<String> sensitives = (List<String>) words;
+				if (sensitives.isEmpty()) {
+					return;
+				}
+				int code = words.hashCode();
+				LogUtil.info("敏感词更新，code={}", code);
+				LogUtil.info("敏感词更新，this.code={}", this.code);
+				if (this.code != code) {
+					SensitiveWordsFilter.init(sensitives);
+					this.code = code;
+				}
 			}
-			SensitiveWordsFilter.init(sensitives);
-		}
+		});
 	}
 }
