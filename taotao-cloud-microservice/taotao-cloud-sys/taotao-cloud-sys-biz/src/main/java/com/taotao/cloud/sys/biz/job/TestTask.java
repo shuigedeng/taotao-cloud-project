@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.job;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import java.time.LocalDateTime;
@@ -18,13 +19,13 @@ public class TestTask {
 
 	@ScheduledBean(cron = "0 */1 * * * ?")
 	public void robReceiveExpireTask() {
-		System.out.println(Thread.currentThread().getName() + "------------测试测试");
-		System.out.println(df.format(LocalDateTime.now()) + "测试测试");
+		LogUtil.info(Thread.currentThread().getName() + "------------测试测试");
+		LogUtil.info(df.format(LocalDateTime.now()) + "测试测试");
 
 		List<String> runScheduledName = scheduledManager.getRunScheduledName();
-		System.out.println(runScheduledName);
+		LogUtil.info(runScheduledName.toString());
 
 		List<String> allSuperScheduledName = scheduledManager.getAllSuperScheduledName();
-		System.out.println(allSuperScheduledName);
+		LogUtil.info(allSuperScheduledName.toString());
 	}
 }
