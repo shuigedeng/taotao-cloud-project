@@ -2,6 +2,7 @@ package com.taotao.cloud.sys.biz.controller.tools;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.redis.redisson.RedisDelayQueue;
@@ -9,13 +10,10 @@ import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.vo.alipay.EmailVo;
 import com.taotao.cloud.sys.biz.entity.EmailConfig;
 import com.taotao.cloud.sys.biz.service.IEmailConfigService;
-import com.taotao.cloud.web.quartz.QuartzJobModel;
 import com.taotao.cloud.web.quartz.QuartzManager;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
-import com.taotao.cloud.web.schedule.model.ScheduledJobModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -80,7 +78,7 @@ public class EmailController {
 	@NotAuth
 	@PostMapping
 	public Result<Boolean> add(@Validated @RequestBody EmailConfig emailConfig) {
-		//emailService.save(emailConfig);
+		emailService.save(emailConfig);
 
 		//for (int i = 0; i < 10; i++) {
 		//	Integer random = new Random().nextInt(300) + 1;
@@ -113,7 +111,7 @@ public class EmailController {
 		//quartzManager.addJob(jobModel);
 
 		List<String> runScheduledName = scheduledManager.getRunScheduledName();
-		System.out.println(runScheduledName);
+		LogUtil.info("===============: ", runScheduledName);
 
 		return Result.success(true);
 	}
