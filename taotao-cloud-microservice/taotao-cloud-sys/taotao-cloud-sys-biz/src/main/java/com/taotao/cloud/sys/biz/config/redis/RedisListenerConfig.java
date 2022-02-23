@@ -61,9 +61,11 @@ public class RedisListenerConfig {
 		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 		container.setConnectionFactory(redisConnectionFactory);
 
+		//Runtime.getRuntime().availableProcessors()
+		//Runtime.getRuntime().availableProcessors() * 2
 		MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
-			Runtime.getRuntime().availableProcessors(),
-			Runtime.getRuntime().availableProcessors() * 2,
+			100,
+			1500,
 			60,
 			TimeUnit.SECONDS,
 			new SynchronousQueue<>(),
