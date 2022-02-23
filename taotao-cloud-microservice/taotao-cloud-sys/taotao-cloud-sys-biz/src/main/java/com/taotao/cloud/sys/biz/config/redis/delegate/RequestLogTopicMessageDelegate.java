@@ -35,13 +35,16 @@ public class RequestLogTopicMessageDelegate {
 
 	@Autowired
 	private ILogService logService;
+	public static final ObjectMapper MAPPER = new ObjectMapper();
+
+	static {
+		// 使用Jackson转换带下划线的属性为驼峰属性
+		MAPPER.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+	}
 
 	public void handleRequestLog(String message, String channel) {
-		ObjectMapper mapper = new ObjectMapper();
-		// 使用Jackson转换带下划线的属性为驼峰属性
-		mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 		try {
-			Log log = mapper.readValue(message, Log.class);
+			Log log = MAPPER.readValue(message, Log.class);
 			logService.save(log);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
