@@ -118,7 +118,7 @@ function start_skywalking() {
 }
 
 function stop_skywalking() {
-     ps -ef | grep skywalking|grep -v grep|awk '{print $2}' |xargs kill -9
+     ps -ef | grep apache-skywalking-apm-bin-es7|grep -v grep|awk '{print $2}' |xargs kill -9
      sleep 10
      echo "skywalking stoped"
 }
