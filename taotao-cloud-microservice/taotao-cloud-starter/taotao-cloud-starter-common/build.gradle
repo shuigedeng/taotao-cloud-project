@@ -18,9 +18,9 @@ dependencies {
     api 'io.projectreactor:reactor-core'
     api 'cn.afterturn:easypoi-base:4.4.0'
     api 'com.nepxion:banner'
-    api 'com.github.xkzhangsan:xk-time:3.2.2'
-    api 'com.baomidou:mybatis-plus-core:3.4.3.4'
-    api 'com.baomidou:mybatis-plus-extension:3.4.3.4'
+    api 'com.github.xkzhangsan:xk-time:3.2.3'
+    api 'com.baomidou:mybatis-plus-core:3.5.1'
+    api 'com.baomidou:mybatis-plus-extension:3.5.1'
     api 'com.squareup.okhttp3:okhttp'
     api "com.squareup.okhttp3:logging-interceptor:4.9.3"
     api "eu.bitwalker:UserAgentUtils"
