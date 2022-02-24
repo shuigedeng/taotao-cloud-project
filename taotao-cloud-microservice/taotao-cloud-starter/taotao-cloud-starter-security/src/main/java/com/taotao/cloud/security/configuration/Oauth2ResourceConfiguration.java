@@ -113,7 +113,7 @@ public class Oauth2ResourceConfiguration extends WebSecurityConfigurerAdapter {
 					ResponseUtil.fail(response, ResultEnum.FORBIDDEN);
 				})
 				.authenticationEntryPoint((request, response, authException) -> {
-					LogUtil.error("认证失败", authException);
+					LogUtil.error("用户未登录认证失败", authException);
 					ResponseUtil.fail(response, ResultEnum.UNAUTHORIZED);
 				})
 				.bearerTokenResolver(bearerTokenResolver())

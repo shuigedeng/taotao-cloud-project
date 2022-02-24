@@ -289,17 +289,6 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
     bootJar{
         manifest {
             attributes project.tasks.jar.manifest.attributes
-//            attributes 'Implementation-Title': project.name,
-//                    'Implementation-Version': project.version,
-//                    'Implementation-Vendor': 'Apache Software Foundation',
-//                    'Implementation-Vendor-Id': project.group,
-//                    'Specification-Version': "2022",
-//                    'Specification-Vendor': 'Apache Software Foundation',
-//                    'Specification-Title': project.name,
-//                    'Built-By': 'shuigedeng',
-//                    'Automatic-Module-Name': project.name.replace("-", "."),
-//                    'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-//                    'Build-Jdk-Spec': JavaVersion.VERSION_17.toString()
         }
     }
 

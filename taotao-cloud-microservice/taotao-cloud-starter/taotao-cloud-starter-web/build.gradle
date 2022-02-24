@@ -70,13 +70,16 @@ dependencies {
         exclude group: 'org.apache.xmlgraphics', module: 'batik-all'
     }
     api 'org.glassfish:javax.el:3.0.1-b08'
-    api 'com.itextpdf:itextpdf:5.5.13'
+    api 'com.itextpdf:itextpdf:5.5.13.2'
     api 'com.itextpdf:itext-asian:5.2.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
+
+    testImplementation 'junit:junit:4.13.2'
 }
 
 //configurations {
