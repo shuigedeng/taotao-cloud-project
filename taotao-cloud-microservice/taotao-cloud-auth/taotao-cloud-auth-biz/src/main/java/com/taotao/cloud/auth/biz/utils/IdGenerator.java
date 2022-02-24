@@ -10,8 +10,9 @@ public class IdGenerator {
         String currentTime = DateTimeFormatter.ofPattern("yyyyMMddhhmmssSSS").format(LocalDateTime.now());
         return id + currentTime;
     }
-	public static void main(String[] args) {
-		System.out.println(new BCryptPasswordEncoder().encode("123456"));
-	}
+
+	//public static void main(String[] args) {
+	//	System.out.println(new BCryptPasswordEncoder().encode("123456"));
+	//}
 
 }

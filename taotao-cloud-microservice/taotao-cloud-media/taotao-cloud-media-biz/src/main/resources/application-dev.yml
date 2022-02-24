@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./emdata/camera
+    username: sa
+    password: 123456
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+#      ddl-auto:create----每次运行该程序，没有表格会新建表格，表内有数据会清空
+#      ddl-auto:create-drop----每次程序结束的时候会清空表
+#      ddl-auto:update----每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
+#      ddl-auto:validate----运行程序会校验数据与数据库的字段类型是否相同，不同会报错
+
+  h2:
+    console: 
+      path: /h2-console
+      enabled: true
+      settings: 
+        web-allow-others: true
+  web:
+    resources:
+      static-locations: classpath:/templates/,classpath:/static/
+#        trace: true 

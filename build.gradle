@@ -263,7 +263,7 @@ configure(subprojects.findAll { (it.name != "taotao-cloud-dependencies") }) { pr
 
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "--add-exports=java.desktop/sun.font=ALL-UNNAMED"
         }
     }
 

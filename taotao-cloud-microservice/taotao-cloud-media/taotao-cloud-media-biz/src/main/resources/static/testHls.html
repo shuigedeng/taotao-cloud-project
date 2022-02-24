@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+    <title>xgplayer</title>
+    <style type="text/css">
+      html, body {width:100%;height:100%;margin:auto;overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id="mse"></div>
+    <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
+      <script src="//cdn.jsdelivr.net/npm/xgplayer-hls.js/browser/index.js" charset="utf-8"></script><script>
+      let player = new HlsJsPlayer({
+		"id": "mse",
+		// "url": "http://localhost:8889/playback?cameraId=22&beginTime=2021-04-02 17:25:43&endTime=2021-04-02 17:26:08",
+		// "url": "http://localhost:8889/playback",
+		"url":"http://localhost:8888/hls?url=rtsp://admin:VZCDOY@192.168.2.120:554/Streaming/Channels/101",
+		"playsinline": true,
+		"whitelist": [
+				""
+		]
+      });
+	  
+	  console.log(player)
+      
+          </script>
+  </body>
+</html>

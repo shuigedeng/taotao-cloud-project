@@ -6,7 +6,7 @@ package com.taotao.cloud.common.image.combiner.enums;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:15:46
+ * @since 2022-02-24 09:41:35
  */
 public enum GradientDirection {
     /**

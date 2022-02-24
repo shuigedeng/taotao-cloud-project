@@ -90,7 +90,7 @@ public class NotifierConfiguration {
 					switch (status) {
 						// 健康检查没通过
 						case "DOWN" -> str.append("[服务状态]: ").append(status).append("(")
-							.append("健康检查没通过").append(")").append("\n");
+							.append("健康检未通过").append(")").append("\n");
 
 						// 服务离线
 						case "OFFLINE" -> str.append("[服务状态]: ").append(status).append("(")
