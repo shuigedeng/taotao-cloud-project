@@ -5,7 +5,7 @@ package com.taotao.cloud.common.image.combiner.enums;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:15:41
+ * @since 2022-02-24 09:38:08
  */
 public enum Direction {
     /**

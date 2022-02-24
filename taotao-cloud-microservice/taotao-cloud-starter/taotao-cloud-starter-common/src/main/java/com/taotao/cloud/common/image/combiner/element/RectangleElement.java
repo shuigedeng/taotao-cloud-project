@@ -9,7 +9,7 @@ import java.awt.*;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:16:25
+ * @since 2022-02-24 09:37:57
  */
 public class RectangleElement extends CombineElement<RectangleElement> {
     private Integer width;                  //绘制宽度

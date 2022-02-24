@@ -11,7 +11,7 @@ import java.net.URL;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:16:19
+ * @since 2022-02-24 09:37:46
  */
 public class ImageElement extends CombineElement<ImageElement> {
 
