@@ -11,7 +11,7 @@ import java.awt.*;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:15:25
+ * @since 2022-02-24 09:47:43
  */
 public class RectanglePainter implements IPainter {
 

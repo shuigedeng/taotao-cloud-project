@@ -143,7 +143,7 @@ public abstract class MpSuperCacheServiceImpl<M extends MpSuperMapper<T, I>, T e
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean removeByIds(Collection<? extends Serializable> idList) {
+	public boolean removeByIds(Collection<?> idList) {
 		if (CollUtil.isEmpty(idList)) {
 			return true;
 		}
@@ -258,7 +258,7 @@ public abstract class MpSuperCacheServiceImpl<M extends MpSuperMapper<T, I>, T e
 		delCache(Arrays.asList(ids));
 	}
 
-	protected void delCache(Collection<? extends Serializable> idList) {
+	protected void delCache(Collection<?> idList) {
 		CacheKey[] keys = idList.stream().map(id -> cacheKeyBuilder().key(id))
 			.toArray(CacheKey[]::new);
 		redisRepository.del(keys);

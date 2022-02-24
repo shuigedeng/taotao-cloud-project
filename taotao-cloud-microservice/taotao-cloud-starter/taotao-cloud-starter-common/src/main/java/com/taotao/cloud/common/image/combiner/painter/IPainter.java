@@ -10,7 +10,7 @@ import java.io.IOException;
  *
  * @author shuigedeng
  * @version 2021.10
- * @since 2022-02-24 09:15:08
+ * @since 2022-02-24 09:48:03
  */
 public interface IPainter {
     void draw(Graphics2D g, CombineElement element, int canvasWidth) throws IOException, Exception;

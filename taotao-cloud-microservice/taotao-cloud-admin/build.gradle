@@ -19,6 +19,7 @@ dependencies {
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+
 }
 
 bootBuildImage {

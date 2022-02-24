@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+    <title>xgplayer</title>
+    <style type="text/css">
+      html, body {width:100%;height:100%;margin:auto;overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <div id="mse"></div>
+    <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
+      <script src="//cdn.jsdelivr.net/npm/xgplayer-flv.js/browser/index.js" charset="utf-8"></script><script>
+      let player = new FlvJsPlayer({
+		"id": "mse",
+		"playsinline": true,
+		"whitelist": [
+				""
+		],
+		"url": "ws://localhost:8866/live?url=rtsp://admin:VZCDOY@192.168.2.120:554/Streaming/Channels/101"
+      });
+      
+          </script>
+  </body>
+</html>

@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class QuartzJobTopicMessageDelegate {
+
 	@Autowired
 	private IQuartzJobService IQuartzJobService;
 

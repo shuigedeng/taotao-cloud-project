@@ -10,6 +10,13 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
+/**
+ * ZkIdGenerator
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-24 11:41:13
+ */
 public class ZkIdGenerator {
 
 	private static final String path = "/zk-id";

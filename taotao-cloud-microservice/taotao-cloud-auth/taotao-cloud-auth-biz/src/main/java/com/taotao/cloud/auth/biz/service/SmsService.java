@@ -18,6 +18,8 @@ package com.taotao.cloud.auth.biz.service;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
+import com.taotao.cloud.sms.service.NoticeService;
+import com.taotao.cloud.sms.service.VerificationCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,21 +33,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsService {
 
-	@Autowired
-	private com.taotao.cloud.sms.service.SmsService smsService;
+	@Autowired(required = false)
+	private NoticeService noticeService;
+	@Autowired(required = false)
+	private VerificationCodeService verificationCodeService;
 	@Autowired
 	private RedisRepository redisRepository;
 
 	public boolean sendSms(String phoneNumber) {
-		String code = smsService.sendSms(
-			"",
-			"",
-			smsService.sendRandCode(6),
+		String code = verificationCodeService.find(phoneNumber, "");
+
+		boolean result = noticeService.send(
+			null,
 			""
 		);
 
 		// 添加发送日志
-
 		redisRepository
 			.setExpire(RedisConstant.SMS_KEY_PREFIX + phoneNumber, code.toLowerCase(), 120);
 

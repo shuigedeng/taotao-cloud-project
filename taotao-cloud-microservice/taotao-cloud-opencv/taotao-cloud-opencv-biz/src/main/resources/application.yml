@@ -1,8 +1,0 @@
-server:
-  port: 9400
-
-spring:
-  main:
-    allow-bean-definition-overriding: true
-  application:
-    name: taotao-cloud-dfs-service

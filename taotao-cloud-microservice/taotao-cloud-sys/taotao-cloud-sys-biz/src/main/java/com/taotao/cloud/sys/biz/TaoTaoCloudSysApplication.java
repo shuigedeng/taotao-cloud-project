@@ -31,6 +31,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * --add-opens java.base/java.math=ALL-UNNAMED
  * --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
+ * --add-exports java.desktop/sun.font=ALL-UNNAMED
  * --add-opens java.desktop/sun.awt=ALL-UNNAMED
  * --add-opens java.desktop/sun.font=ALL-UNNAMED
  *

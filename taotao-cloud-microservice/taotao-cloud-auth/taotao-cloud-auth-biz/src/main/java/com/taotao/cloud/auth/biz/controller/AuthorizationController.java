@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @since 0.0.1
+ * AuthorizationController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-02-24 11:19:52
  */
 @Controller
 public class AuthorizationController {
