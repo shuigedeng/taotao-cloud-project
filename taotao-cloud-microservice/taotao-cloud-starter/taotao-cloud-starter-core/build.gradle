@@ -21,6 +21,8 @@ dependencies {
     api "de.codecentric:spring-boot-admin-starter-client:2.6.2"
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
+    api 'io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:1.0.1'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'
