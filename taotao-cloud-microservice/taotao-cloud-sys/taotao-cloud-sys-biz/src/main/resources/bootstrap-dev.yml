@@ -29,7 +29,7 @@ spring:
         username: nacos
         password: nacos
       config:
-        enabled: false
+        enabled: true
         server-addr: ${TAOTAO_CLOUD_NACOS_CONFIG_HOST:172.16.6.151}:${TAOTAO_CLOUD_NACOS_CONFIG_PORT:8848}
         namespace:
         file-extension: yml

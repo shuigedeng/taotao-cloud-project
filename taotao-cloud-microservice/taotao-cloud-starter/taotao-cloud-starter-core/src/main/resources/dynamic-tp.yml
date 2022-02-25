@@ -3,7 +3,7 @@ spring:
     tp:
       enabled: true
       enabledBanner: false        # 是否开启banner打印，默认true
-      enabledCollect: false      # 是否开启监控指标采集，默认false
+      enabledCollect: true      # 是否开启监控指标采集，默认false
       collectorType: logging     # 监控数据采集器类型（JsonLog | MicroMeter），默认logging
       #logPath: /home/logs        # 监控日志数据路径，默认${user.home}/logs
       #monitorInterval: 5         # 监控时间间隔（报警判断、指标采集），默认5s
