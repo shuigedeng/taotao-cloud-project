@@ -12,6 +12,7 @@ com.taotao.cloud.web.configuration.SensitiveQuartzConfiguration, \
 com.taotao.cloud.web.configuration.ScheduledAutoConfiguration, \
 com.taotao.cloud.web.configuration.ServletConfiguration, \
 com.taotao.cloud.web.configuration.StrategyConfiguration, \
+com.taotao.cloud.web.configuration.TimeTaskConfiguration, \
 com.taotao.cloud.web.configuration.UndertowHttp2Configuration,\
 com.taotao.cloud.web.configuration.WebMvcConfiguration, \
 com.taotao.cloud.web.configuration.SignConfiguration, \
