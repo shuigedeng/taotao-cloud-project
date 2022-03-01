@@ -1,8 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jwt;
 
-import com.sanri.tools.modules.core.exception.SystemMessage;
-import com.sanri.tools.modules.security.configs.jsonlogin.ResponseHandler;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -18,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@Slf4j
 public class LogoutTokenClean implements LogoutSuccessHandler {
     @Autowired
     private ResponseHandler responseHandler;

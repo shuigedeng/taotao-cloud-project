@@ -60,8 +60,6 @@ public class RegexValidate {
 	
 	/**
 	 * 
-	 * 作者:sanri</br>
-	 * 时间:2016-9-26下午1:34:26</br>
 	 * 功能:正则验证</br>
 	 */
 	public static boolean validate(String value, Pattern pattern) {
@@ -76,8 +74,6 @@ public class RegexValidate {
 	}
 	/**
 	 * 
-	 * 作者:sanri</br>
-	 * 时间:2016-9-26下午1:34:40</br>
 	 * 功能:正则提取字符串</br>
 	 */
 	public static List<String> match(String value, Pattern pattern) {
@@ -124,8 +120,6 @@ public class RegexValidate {
 	/**
 	 * 
 	 * 功能:<br/>
-	 * 创建时间:2016-9-24下午3:58:40<br/>
-	 * 作者：sanri<br/>
 	 * see StringUtil.isBlank()
 	 */
 	@Deprecated

@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.whitespace;
 
-import com.sanri.tools.modules.security.configs.jwt.JwtAuthenticationToken;
-import com.sanri.tools.modules.security.configs.jwt.TokenService;
-import com.sanri.tools.modules.security.configs.UrlSecurityPermsLoad;
+import com.taotao.cloud.sys.biz.tools.security.configs.UrlSecurityPermsLoad;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.JwtAuthenticationToken;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.TokenService;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

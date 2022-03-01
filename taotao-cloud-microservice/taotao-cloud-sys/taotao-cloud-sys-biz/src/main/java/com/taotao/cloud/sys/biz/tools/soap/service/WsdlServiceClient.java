@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.soap.service;
 
+import com.taotao.cloud.common.utils.LogUtil;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -12,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class WsdlServiceClient {
     private Map<String,WsdlService> wsdlServiceMap = new ConcurrentHashMap<>();
 
@@ -47,7 +45,7 @@ public class WsdlServiceClient {
      * 功能:修正为 wsdl 正确地址<br/>
      * 创建时间:2017-6-7下午9:02:54<br/>
      * 作者：sanri<br/>
-     * @param url 传入的 url 要么不带一个参数,要么带 ?wsdl ,其它情况不支持,暂时不会报错,以后将要修改方法使其抛出异常
+     * @param webserviceUrl 传入的 url 要么不带一个参数,要么带 ?wsdl ,其它情况不支持,暂时不会报错,以后将要修改方法使其抛出异常
      * @return<br/>
      */
     private static URL fixedDeployDocumentURL(String webserviceUrl){
@@ -56,14 +54,14 @@ public class WsdlServiceClient {
         }
         if(!webserviceUrl.endsWith("?wsdl")){
             webserviceUrl = webserviceUrl + "?wsdl";
-            log.warn("修正 wsdl 地址为:"+webserviceUrl);
+	        LogUtil.warn("修正 wsdl 地址为:"+webserviceUrl);
         }
         URL url = null;
         try {
             url = new URL(webserviceUrl);
             return url;
         } catch (MalformedURLException e) {
-            log.error("传入路径不合法:{},请使用 wsdl 文档地址",webserviceUrl,e);
+	        LogUtil.error("传入路径不合法:{},请使用 wsdl 文档地址",webserviceUrl,e);
         }
         return null;
     }

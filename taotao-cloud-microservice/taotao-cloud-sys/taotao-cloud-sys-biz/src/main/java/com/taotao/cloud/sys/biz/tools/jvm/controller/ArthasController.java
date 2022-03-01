@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.jvm.controller;
 
-import com.sanri.tools.modules.jvm.service.ArthasService;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.jvm.service.ArthasService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@Slf4j
 @RequestMapping("/arthas")
 public class ArthasController {
 

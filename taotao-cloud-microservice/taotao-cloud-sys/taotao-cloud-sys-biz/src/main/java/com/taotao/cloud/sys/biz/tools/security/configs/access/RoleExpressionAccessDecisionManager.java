@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.access;
 
-import com.sanri.tools.modules.security.service.repository.RoleRepository;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.security.service.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
@@ -20,7 +19,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
 public class RoleExpressionAccessDecisionManager implements AccessDecisionManager {
     private ScriptEngineManager manager = new ScriptEngineManager();
     private ScriptEngine engine = manager.getEngineByName("js");

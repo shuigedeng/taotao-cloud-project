@@ -1,17 +1,14 @@
 package com.taotao.cloud.sys.biz.tools.security.configs;
 
+import com.taotao.cloud.sys.biz.tools.security.configs.access.RoleBasedVoter;
+import com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin.JsonLoginConfiguration;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.JwtTokenValidationConfigurer;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.LogoutTokenClean;
+import com.taotao.cloud.sys.biz.tools.security.configs.whitespace.WhiteSpaceFilter;
+import com.taotao.cloud.sys.biz.tools.security.service.FileUserDetailServiceImpl;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sanri.tools.modules.security.configs.access.RoleBasedVoter;
-import com.sanri.tools.modules.security.configs.jsonlogin.JsonLoginConfiguration;
-import com.sanri.tools.modules.security.configs.jsonlogin.ResponseHandler;
-import com.sanri.tools.modules.security.configs.jwt.JwtAuthenticationProvider;
-import com.sanri.tools.modules.security.configs.jwt.JwtTokenValidationConfigurer;
-import com.sanri.tools.modules.security.configs.jwt.LogoutTokenClean;
-import com.sanri.tools.modules.security.configs.jwt.TokenService;
-import com.sanri.tools.modules.security.configs.whitespace.WhiteSpaceFilter;
-import com.sanri.tools.modules.security.service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
@@ -35,7 +32,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.sanri.tools.modules.security.service.FileUserDetailServiceImpl;
 import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity

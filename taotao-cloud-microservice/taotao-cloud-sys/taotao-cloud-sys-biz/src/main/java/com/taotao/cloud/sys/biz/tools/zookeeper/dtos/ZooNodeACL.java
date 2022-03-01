@@ -23,8 +23,6 @@ public class ZooNodeACL {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-7-24下午6:31:04<br/>
 	 * 功能:对权限进行解析  <br/>
 	 */
 	private void parserPerms() {

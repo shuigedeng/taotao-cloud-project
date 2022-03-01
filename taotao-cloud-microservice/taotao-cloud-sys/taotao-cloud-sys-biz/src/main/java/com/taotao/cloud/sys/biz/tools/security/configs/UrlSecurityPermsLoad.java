@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.tools.security.configs;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -22,7 +21,6 @@ import java.util.*;
  * /connect/**=(a||b)&&c    有 c 角色并且有 a 角色或者 b 角色时可访问连接管理
  */
 @Component
-@Slf4j
 public class UrlSecurityPermsLoad implements InitializingBean {
 
     private static final Map<String,String> urlPerms = new LinkedHashMap<>();

@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jwt;
 
-import com.sanri.tools.modules.security.configs.jsonlogin.ResponseHandler;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Configuration
-@Slf4j
 public class JwtTokenValidationConfigurer<T extends JwtTokenValidationConfigurer<T, B>, B extends HttpSecurityBuilder<B>> extends AbstractHttpConfigurer<T, B> {
     @Autowired
 	private SuccessRefreshTokenHandler successRefreshTokenHandler;

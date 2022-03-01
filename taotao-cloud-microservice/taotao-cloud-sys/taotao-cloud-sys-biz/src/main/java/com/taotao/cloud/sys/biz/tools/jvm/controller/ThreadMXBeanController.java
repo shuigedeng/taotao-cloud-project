@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.tools.jvm.controller;
 
-import com.sanri.tools.modules.jvm.service.ThreadMXBeanService;
-import com.sanri.tools.modules.jvm.service.dtos.ThreadPoolInfo;
+import com.taotao.cloud.sys.biz.tools.jvm.service.ThreadMXBeanService;
+import com.taotao.cloud.sys.biz.tools.jvm.service.dtos.ThreadPoolInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

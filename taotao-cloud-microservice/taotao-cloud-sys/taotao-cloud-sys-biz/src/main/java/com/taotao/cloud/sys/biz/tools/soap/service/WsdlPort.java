@@ -10,7 +10,7 @@ import com.ibm.wsdl.extensions.soap.SOAPOperationImpl;
 import com.ibm.wsdl.extensions.soap12.SOAP12BindingImpl;
 import com.ibm.wsdl.extensions.soap12.SOAP12BodyImpl;
 import com.ibm.wsdl.extensions.soap12.SOAP12OperationImpl;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.LogUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 public class WsdlPort {
 	private Port port;
 	private WsdlContext wsdlContext;
@@ -29,8 +28,6 @@ public class WsdlPort {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午6:51:44<br/>
 	 * 功能:soap 类型 <br/>
 	 */
 	public enum SOAPType{
@@ -55,14 +52,12 @@ public class WsdlPort {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:56:26<br/>
 	 * 功能:解析 port 绑定所有方法 <br/>
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	void parserBindingOperations() {
 		String name = port.getName();
-		log.debug("正在解析 port:"+name);
+		LogUtil.debug("正在解析 port:"+name);
 		Binding binding = port.getBinding();
 		//也有可能　style 就是放在　binding 中的，优先取　BindingOperation 中的，没有再取　binding 中的
 		List bindingImpls = binding.getExtensibilityElements();
@@ -118,7 +113,7 @@ public class WsdlPort {
 						HTTPOperationImpl httpOperationImpl = (HTTPOperationImpl) operationImpl;
 //						System.out.println(httpOperationImpl);
 					}else{
-						log.info("其它类型");
+						LogUtil.info("其它类型");
 					}
 				}
 				BindingInput bindingInput = bindingOperation.getBindingInput();

@@ -61,8 +61,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:22:31<br/>
 	 * 功能:获取简单属性,这里使用 apache.commons 的 <br/>
 	 * @param clazz
 	 * @param name
@@ -79,9 +77,7 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:47:36<br/>
-	 * 功能:获取重叠结构的属性数据 eg: 对象是由对象聚合而成,则有聚合属性 a.b ;  使用 apache.commons<br/> 
+	 * 功能:获取重叠结构的属性数据 eg: 对象是由对象聚合而成,则有聚合属性 a.b ;  使用 apache.commons<br/>
 	 * @param source 
 	 * @param name
 	 * @return
@@ -97,8 +93,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:22:41<br/>
 	 * 功能:获取指定类型的简单属性 <br/>
 	 * @param clazz
 	 * @param name
@@ -120,8 +114,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:23:48<br/>
 	 * 功能:获取字符串属性(常用) <br/>
 	 * @param clazz
 	 * @param name
@@ -133,8 +125,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午5:10:22<br/>
 	 * 功能:获取所有属性名 <br/>
 	 * @param source
 	 * @return
@@ -154,8 +144,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:27:33<br/>
 	 * 功能:描述一个bean,排除部分字段 <br/>
 	 * @param source
 	 * @param excludes
@@ -188,8 +176,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:28:33<br/>
 	 * 功能:描述一个 bean ,指定字段 <br/>
 	 * @param source
 	 * @param includes
@@ -209,8 +195,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:29:19<br/>
 	 * 功能:复制字段到目标类字段; 类型不区分,缺失字段忽略; 不管是否为空直接复制   <br/>
 	 * @param dest
 	 * @param source
@@ -253,8 +237,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:30:28<br/>
 	 * 功能:复制指定字段到目标<br/>
 	 * @param dest
 	 * @param source
@@ -274,8 +256,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:38:57<br/>
 	 * 功能:复制不为空的字段到目标 <br/>
 	 * @param dest
 	 * @param source
@@ -325,8 +305,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:38:32<br/>
 	 * 功能:复制不为空的字段到目标,使用默认原始类型处理 <br/>
 	 * @param dest
 	 * @param source
@@ -338,8 +316,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:44:40<br/>
 	 * 功能:bean 填入 map 数据 <br/>
 	 */
 	public static void populateMapData(Object dest,Map data,String ...excludes){
@@ -374,8 +350,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午5:13:33<br/>
 	 * 功能:获取 map 结构的属性描述器 <br/>
 	 * @param source
 	 * @return
@@ -397,8 +371,6 @@ public final class PropertyEditUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2018-8-26下午4:34:54<br/>
 	 * 功能:用于复制非空数据时,原始型数据处理<br/>
 	 */
 	public interface PrimitiveHandler{

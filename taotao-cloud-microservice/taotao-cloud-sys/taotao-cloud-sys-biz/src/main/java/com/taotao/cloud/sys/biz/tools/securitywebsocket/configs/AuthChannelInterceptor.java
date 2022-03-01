@@ -1,6 +1,7 @@
 package com.taotao.cloud.sys.biz.tools.securitywebsocket.configs;
 
 import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.JwtAuthenticationToken;
 import com.taotao.cloud.sys.biz.tools.security.configs.jwt.TokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

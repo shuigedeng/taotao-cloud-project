@@ -1,7 +1,5 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jwt;
 
-import com.sanri.tools.modules.core.exception.SystemMessage;
-import com.sanri.tools.modules.security.configs.jsonlogin.ResponseHandler;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

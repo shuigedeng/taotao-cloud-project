@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.soap.service;
 
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.LogUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,11 +20,8 @@ import java.util.Map.Entry;
 
 /**
  * 
- * 作者:sanri <br/>
- * 时间:2017-6-21上午11:17:34<br/>
  * 功能:加载 webservice 主类 <br/>
  */
-@Slf4j
 public class WsdlServiceLoader {
 	
 	private static WSDLFactory wsdlFactory = null;
@@ -32,14 +29,12 @@ public class WsdlServiceLoader {
 		try {
 			wsdlFactory = WSDLFactory.newInstance();
 		} catch (WSDLException e) {
-			log.error("WsdlServiceLoader init error: {}",e.getMessage(),e);
+			LogUtil.error("WsdlServiceLoader init error: {}",e.getMessage(),e);
 		}
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:18:07<br/>
 	 * 功能:从网络路径加载 webservice<br/>
 	 * @param url
 	 * @return
@@ -63,8 +58,6 @@ public class WsdlServiceLoader {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:47:32<br/>
 	 * 功能: 只会解析第一个服务,有多个服务类以后再说 TODO  <br/>
 	 * @param wsdlContext
 	 * @return
@@ -84,8 +77,6 @@ public class WsdlServiceLoader {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:30:12<br/>
 	 * 功能:从文件系统加载 webservice <br/>
 	 * @param file
 	 * @return
@@ -99,15 +90,13 @@ public class WsdlServiceLoader {
 			URL fileURL = fileURI.toURL();
 			return loadService(fileURL);
 		} catch (MalformedURLException e) {
-			log.error("WsdlServiceLoader loadService error : {}",e.getMessage(),e);
+			LogUtil.error("WsdlServiceLoader loadService error : {}",e.getMessage(),e);
 		}
 		return null;
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:25:45<br/>
 	 * 功能:解析 webservice 上下文方法 <br/>
 	 * @param url
 	 */
@@ -116,7 +105,7 @@ public class WsdlServiceLoader {
 		wsdlReader.setFeature("javax.wsdl.verbose", true);
 		wsdlReader.setFeature("javax.wsdl.importDocuments", true);
 		try {
-			log.info("读取 wsdl 文件:"+url);
+			LogUtil.info("读取 wsdl 文件:"+url);
 			Definition definition = wsdlReader.readWSDL(url.toString());
 			WsdlContext wsdlContext = new WsdlContext();
 			wsdlContext.setDefinition(definition);
@@ -126,7 +115,7 @@ public class WsdlServiceLoader {
 			wsdlContext.processTypes();
 			return wsdlContext;
 		} catch (WSDLException e) {
-			log.error("WsdlServiceLoader parserWsdlContext error : {}",e.getMessage(),e);
+			LogUtil.error("WsdlServiceLoader parserWsdlContext error : {}",e.getMessage(),e);
 		}
 		return null;
 	}

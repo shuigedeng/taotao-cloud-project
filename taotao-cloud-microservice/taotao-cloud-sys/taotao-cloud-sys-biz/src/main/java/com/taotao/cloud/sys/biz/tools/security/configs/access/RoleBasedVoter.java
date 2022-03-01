@@ -1,8 +1,7 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.access;
 
-import com.sanri.tools.modules.security.configs.UrlSecurityPermsLoad;
-import com.sanri.tools.modules.security.service.repository.RoleRepository;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.security.configs.UrlSecurityPermsLoad;
+import com.taotao.cloud.sys.biz.tools.security.service.repository.RoleRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -23,7 +22,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
 public class RoleBasedVoter implements AccessDecisionVoter<Object> {
     @Autowired
     private UrlSecurityPermsLoad urlPermsLoad;

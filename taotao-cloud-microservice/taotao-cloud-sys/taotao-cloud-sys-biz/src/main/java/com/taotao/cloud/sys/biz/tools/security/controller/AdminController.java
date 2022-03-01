@@ -1,26 +1,25 @@
 package com.taotao.cloud.sys.biz.tools.security.controller;
 
+import com.taotao.cloud.sys.biz.tools.codepatch.controller.dtos.GroupRepository;
+import com.taotao.cloud.sys.biz.tools.core.security.dtos.GroupTree;
+import com.taotao.cloud.sys.biz.tools.core.security.entitys.ToolResource;
+import com.taotao.cloud.sys.biz.tools.core.security.entitys.ToolUser;
+import com.taotao.cloud.sys.biz.tools.security.service.GroupService;
+import com.taotao.cloud.sys.biz.tools.security.service.dtos.SecurityUser;
+import com.taotao.cloud.sys.biz.tools.security.service.repository.ResourceRepository;
+import com.taotao.cloud.sys.biz.tools.security.service.repository.RoleRepository;
+import com.taotao.cloud.sys.biz.tools.security.service.repository.UserRepository;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.sanri.tools.modules.security.service.repository.GroupRepository;
-import com.sanri.tools.modules.security.service.repository.ResourceRepository;
-import com.sanri.tools.modules.security.service.repository.RoleRepository;
-import com.sanri.tools.modules.security.service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sanri.tools.modules.core.security.dtos.GroupTree;
-import com.sanri.tools.modules.core.security.dtos.ResourceInfo;
-import com.sanri.tools.modules.core.security.entitys.ToolResource;
-import com.sanri.tools.modules.core.security.entitys.ToolUser;
-import com.sanri.tools.modules.security.service.GroupService;
-import com.sanri.tools.modules.security.service.dtos.SecurityUser;
 
 /**
  * 这个类里的方法, 只允许管理员调用

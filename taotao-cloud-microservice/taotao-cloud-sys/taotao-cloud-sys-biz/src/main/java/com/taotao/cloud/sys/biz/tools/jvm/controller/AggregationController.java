@@ -1,14 +1,13 @@
 package com.taotao.cloud.sys.biz.tools.jvm.controller;
 
-import com.sanri.tools.modules.jvm.controller.dtos.AggregationVMInfo;
-import com.sanri.tools.modules.jvm.service.DiagnosticCommandService;
-import com.sanri.tools.modules.jvm.service.MBeanMonitorService;
-import com.sanri.tools.modules.jvm.service.dtos.VMParam;
 import com.sun.management.GarbageCollectorMXBean;
 import com.sun.management.GcInfo;
 import com.sun.management.OperatingSystemMXBean;
 import com.sun.management.ThreadMXBean;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.sys.biz.tools.jvm.controller.dtos.AggregationVMInfo;
+import com.taotao.cloud.sys.biz.tools.jvm.service.DiagnosticCommandService;
+import com.taotao.cloud.sys.biz.tools.jvm.service.MBeanMonitorService;
+import com.taotao.cloud.sys.biz.tools.jvm.service.dtos.VMParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/jvm")
 @Validated
-@Slf4j
 public class AggregationController {
 
     @Autowired
