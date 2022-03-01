@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.security.configs;
 
-import com.sanri.tools.modules.security.configs.jsonlogin.ResponseHandler;
+import com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin.ResponseHandler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.LogoutHandler;

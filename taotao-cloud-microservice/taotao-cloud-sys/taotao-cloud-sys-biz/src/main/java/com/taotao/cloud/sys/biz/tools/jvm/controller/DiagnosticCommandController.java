@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.tools.jvm.controller;
 
-import com.sanri.tools.modules.jvm.service.DiagnosticCommandService;
-import com.sanri.tools.modules.jvm.service.dtos.HeapHistogramImpl;
-import com.sanri.tools.modules.jvm.service.dtos.VMParam;
+import com.taotao.cloud.sys.biz.tools.jvm.service.DiagnosticCommandService;
+import com.taotao.cloud.sys.biz.tools.jvm.service.dtos.HeapHistogramImpl;
+import com.taotao.cloud.sys.biz.tools.jvm.service.dtos.VMParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

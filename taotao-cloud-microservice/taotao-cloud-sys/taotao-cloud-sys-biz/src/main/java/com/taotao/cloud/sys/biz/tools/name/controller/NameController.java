@@ -2,6 +2,8 @@ package com.taotao.cloud.sys.biz.tools.name.controller;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Converter;
+import com.taotao.cloud.sys.biz.tools.name.service.BizTranslate;
+import com.taotao.cloud.sys.biz.tools.name.service.NameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

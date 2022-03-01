@@ -1,9 +1,22 @@
 package com.taotao.cloud.sys.biz.tools.kafka.controller;
 
-import com.sanri.tools.modules.kafka.dtos.*;
-import com.sanri.tools.modules.kafka.service.KafkaDataService;
-import com.sanri.tools.modules.kafka.service.KafkaService;
-import com.sanri.tools.modules.core.dtos.param.KafkaConnectParam;
+import com.taotao.cloud.sys.biz.tools.core.dtos.param.KafkaConnectParam;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.BrokerInfo;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.BrokerTopicMetrics;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.ConsumerGroupInfo;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.DataConsumerParam;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.KafkaData;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.MBeanMonitorInfo;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.NearbyDataConsumerParam;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.OffsetShow;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.PartitionKafkaData;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.SendJsonDataParam;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.SendObjectDataParam;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.TopicInfo;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.TopicLogSize;
+import com.taotao.cloud.sys.biz.tools.kafka.dtos.TopicOffset;
+import com.taotao.cloud.sys.biz.tools.kafka.service.KafkaDataService;
+import com.taotao.cloud.sys.biz.tools.kafka.service.KafkaService;
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -40,7 +53,6 @@ public class KafkaController {
 
     /**
      * kafka 连接的创建需要依赖于 zookeeper
-     * @param kafkaConnectParam
      */
     @PostMapping(value = "/connect/create",consumes = "application/yaml")
     public void createConnect(@RequestBody String yamlConfig) throws IOException {
@@ -124,7 +136,8 @@ public class KafkaController {
     }
 
     @GetMapping("/group/topic/data/nearby")
-    public List<PartitionKafkaData> groupTopicNearbyData(NearbyDataConsumerParam nearbyDataConsumerParam) throws IOException, ClassNotFoundException {
+    public List<PartitionKafkaData> groupTopicNearbyData(
+	    NearbyDataConsumerParam nearbyDataConsumerParam) throws IOException, ClassNotFoundException {
         return kafkaDataService.nearbyDatas(nearbyDataConsumerParam);
     }
 

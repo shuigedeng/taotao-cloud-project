@@ -2,13 +2,11 @@ package com.taotao.cloud.sys.biz.tools.soap.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sanri.tools.modules.core.utils.MybatisXNode;
-import com.sanri.tools.modules.core.utils.MybatisXPathParser;
-import com.sanri.tools.modules.soap.dtos.WsdlParam;
-import com.sanri.tools.modules.soap.dtos.WsdlType;
-import com.sanri.tools.modules.soap.exception.WsdlCallException;
-import com.sanri.tools.modules.soap.utils.DOMUtil;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.sys.biz.tools.soap.dtos.WsdlParam;
+import com.taotao.cloud.sys.biz.tools.soap.dtos.WsdlType;
+import com.taotao.cloud.sys.biz.tools.soap.exception.WsdlCallException;
+import com.taotao.cloud.sys.biz.tools.soap.utils.DOMUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -38,11 +36,8 @@ import java.util.Map;
 
 /**
  * 
- * 作者:sanri <br/>
- * 时间:2017-6-21上午11:25:05<br/>
- * 功能: webservice 方法 <br/> 
+ * 功能: webservice 方法 <br/>
  */
-@Slf4j
 public class WsdlOperation {
 	private String name;				//方法名称
 	private String style;				//document/rpc
@@ -58,8 +53,6 @@ public class WsdlOperation {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-22下午3:44:47<br/>
 	 * 功能:调用方法 <br/>
 	 * @param jsonObject 传入对应参数类型的结构,去掉一层复杂类型;例如:
 	 * <xs:complexType name="getWeatherbyCityName">
@@ -70,7 +63,7 @@ public class WsdlOperation {
 	 * 此时只需要传入 jsonObject = new JSONObject();jsonObject.put("theCityName","深圳") 就好
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject invoke(JSONObject jsonObject) throws WsdlCallException{
+	public JSONObject invoke(JSONObject jsonObject) throws WsdlCallException {
 		Document buildRequest = buildRequest(jsonObject);
 		String message = DOMUtil.toStringFromDoc(buildRequest);
 		try {
@@ -107,7 +100,7 @@ public class WsdlOperation {
 			buildReturnObject(parentElement,outputObject,this.output);
 			return outputObject;
 		} catch (IOException | DocumentException e ) {
-			log.error("WsdlOperation invoke error : {}",e.getMessage(),e);
+			LogUtil.error("WsdlOperation invoke error : {}",e.getMessage(),e);
 		}
 		return null;
 	}
@@ -116,8 +109,6 @@ public class WsdlOperation {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-22下午9:01:15<br/>
 	 * 功能:发送 soap 消息串,得到响应结果 <br/>
 	 * @param soapMessage xml字符串 soap 格式
 	 * @return xml 字符串,soap 格式
@@ -140,33 +131,29 @@ public class WsdlOperation {
 			default:
 		}
 		if (httpEntity == null){
-			log.error("不支持的 soap 请求 {}",soapType);
+			LogUtil.error("不支持的 soap 请求 {}",soapType);
 			return  null;
 		}
 
 		httpPost.setEntity(httpEntity);
-		log.info("调用 {} 的: {} 方法时发送的　soap 消息为:\n{}",postMessageUrl,this.getOperation().getName(),soapMessage);
+		LogUtil.info("调用 {} 的: {} 方法时发送的　soap 消息为:\n{}",postMessageUrl,this.getOperation().getName(),soapMessage);
 		String postSoapMessage = httpClient.execute(httpPost, new BasicResponseHandler());
-		log.info("调用 {} 的: {} 方法响应的　soap 消息为:\n{}",postMessageUrl,this.getOperation().getName(),postSoapMessage);
+		LogUtil.info("调用 {} 的: {} 方法响应的　soap 消息为:\n{}",postMessageUrl,this.getOperation().getName(),postSoapMessage);
 		return postSoapMessage;
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-22下午7:25:35<br/>
 	 * 功能:构建异常消息 <br/>
 	 * @param nextElement
 	 */
 	private JSONObject buildExceptionJsonObject(org.dom4j.Element nextElement) {
-		log.error("暂时未实现异常调用构建 ");
+		LogUtil.error("暂时未实现异常调用构建 ");
 		return new JSONObject();
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-22下午5:34:24<br/>
 	 * 功能:构建返回值信息 <br/>
 	 * @param parentElement 父级元素
 	 * @param outputObject 输出对象
@@ -228,8 +215,6 @@ public class WsdlOperation {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21上午11:22:35<br/>
 	 * 功能:构建消息模板 <br/>
 	 * @return
 	 */
@@ -240,8 +225,6 @@ public class WsdlOperation {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21上午11:24:24<br/>
 	 * 功能:内部使用,构建消息模板 <br/>
 	 * 暂时只实现了 soap11 
 	 * @return
@@ -285,7 +268,7 @@ public class WsdlOperation {
 				}
 				return buildDocument;
 			} catch (SAXException | IOException e) {
-				log.error("WsdlOperation buildRequest error : {}",e.getMessage(),e);
+				LogUtil.error("WsdlOperation buildRequest error : {}",e.getMessage(),e);
 			}
 			break;
 		case SOAP12:
@@ -302,8 +285,6 @@ public class WsdlOperation {
 
 //	/**
 //	 * 
-//	 * 作者:sanri <br/>
-//	 * 时间:2017-6-23上午11:44:41<br/>
 //	 * 功能: 递归构建 soap 消息,使用 wsdlType 来构建 <br/>
 //	 * @param parentElement 父级元素
 //	 * @param paramType 当前类型
@@ -323,8 +304,6 @@ public class WsdlOperation {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午7:47:20<br/>
 	 * 功能:递归构建 soap 消息 <br/>
 	 * @param inputValue  输入值
 	 * @param parentElement　 父级元素
@@ -358,8 +337,6 @@ public class WsdlOperation {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午7:49:36<br/>
 	 * 功能:递归构建 Encoded 格式的 soap 消息  <br/>
 	 * @param inputValue  输入值
 	 * @param parentElement　 父级元素
@@ -423,48 +400,42 @@ public class WsdlOperation {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午3:04:57<br/>
 	 * 功能:解析出参 <br/> TODO 对于 http get 和 post 还没有做处理
 	 */
 	void parserOutput() {
-		log.debug("解析方法:"+bindingOperation.getName()+" 出参");
+		LogUtil.debug("解析方法:"+bindingOperation.getName()+" 出参");
 		if(soapType == WsdlPort.SOAPType.SOAP11 || soapType == WsdlPort.SOAPType.SOAP12){
 			Output output = operation.getOutput();
 			Message message = output.getMessage();
 			this.output = findWsdlParam(message);
-			log.info(this.name+" 得到出参为:"+this.output);
+			LogUtil.info(this.name+" 得到出参为:"+this.output);
 		}else if(soapType == WsdlPort.SOAPType.HTTP_GET){
-			log.warn("暂时未实现 get 请求参数解析");
+			LogUtil.warn("暂时未实现 get 请求参数解析");
 		}else if(soapType == WsdlPort.SOAPType.HTTP_POST){
-			log.warn("暂时未实现 post 请求参数解析");
+			LogUtil.warn("暂时未实现 post 请求参数解析");
 		}
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午3:05:10<br/>
 	 * 功能:解析入参 <br/>
 	 */
 	void parserInput() {
-		log.debug("解析方法:"+bindingOperation.getName()+" 入参");
+		LogUtil.debug("解析方法:"+bindingOperation.getName()+" 入参");
 		if(soapType == WsdlPort.SOAPType.SOAP11 || soapType == WsdlPort.SOAPType.SOAP12){
 			Input input = operation.getInput();
 			Message message = input.getMessage();
 			this.input = findWsdlParam(message);
-			log.info(this.name+" 得到入参为:"+this.input);
+			LogUtil.info(this.name+" 得到入参为:"+this.input);
 		}else if(soapType == WsdlPort.SOAPType.HTTP_GET){
-			log.warn("暂时未实现 get 请求参数解析");
+			LogUtil.warn("暂时未实现 get 请求参数解析");
 		}else if(soapType == WsdlPort.SOAPType.HTTP_POST){
-			log.warn("暂时未实现 post 请求参数解析");
+			LogUtil.warn("暂时未实现 post 请求参数解析");
 		}
 	}
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午7:03:54<br/>
 	 * 功能:获取参数,一般消息都只有一个部分 part,如以后有多个 part 需更改这里 TODO  <br/>
 	 * @param message
 	 * @return

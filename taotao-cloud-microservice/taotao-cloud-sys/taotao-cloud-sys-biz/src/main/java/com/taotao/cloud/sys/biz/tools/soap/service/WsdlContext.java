@@ -1,14 +1,16 @@
 package com.taotao.cloud.sys.biz.tools.soap.service;
 
 import com.ibm.wsdl.extensions.schema.SchemaImpl;
+import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.sys.biz.tools.soap.dtos.WsdlParam;
 import com.taotao.cloud.sys.biz.tools.soap.dtos.WsdlType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ws.commons.schema.*;
 import org.w3c.dom.Element;
+import org.apache.ws.commons.schema.XmlSchemaType;
 
 import javax.wsdl.Definition;
 import javax.wsdl.Types;
@@ -50,7 +52,7 @@ public class WsdlContext {
 			BASE_SOAP11_DOCUMENT = IOUtils.toString(soap11Stream, StandardCharsets.UTF_8);
 			BASE_SOAP12_DOCUMENT = IOUtils.toString(soap12Stream, StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			log.info("init load soap xml error : {}",e.getMessage(),e);
+			LogUtil.info("init load soap xml error : {}",e.getMessage(),e);
 		}
 	}
 	/**
@@ -232,13 +234,13 @@ public class WsdlContext {
 						parserXmlSchemaType(childSchemaType, childWsdlType);		//递归解析子类型
 					}else if(nextChildElement instanceof XmlSchemaAny) {
 						XmlSchemaAny xmlSchemaAny = (XmlSchemaAny) nextChildElement;
-						log.debug("any 元素:"+xmlSchemaAny);
+						LogUtil.debug("any 元素:"+xmlSchemaAny);
 					}else{
-						log.debug("其它元素");
+						LogUtil.debug("其它元素");
 					}
 				}
 			}else{
-				log.debug("其它类型,对于空的复杂类型也会进这里");
+				LogUtil.debug("其它类型,对于空的复杂类型也会进这里");
 			}
 		}else if(xmlSchemaType instanceof XmlSchemaSimpleType){
 			XmlSchemaSimpleType xmlSchemaSimpleType = (XmlSchemaSimpleType) xmlSchemaType;

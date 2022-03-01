@@ -21,8 +21,6 @@ public class ZipUtil {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-4-24下午4:11:31<br/>
 	 * 功能: 压缩文件 <br/>
 	 * @param dirOrFile 需要压缩的文件或目录
 	 * @param zipFile 压缩文件路径和名称
@@ -61,8 +59,6 @@ public class ZipUtil {
 	
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-7-22下午3:13:08<br/>
 	 * 功能:对 zip 方法的优化,直接在当前目录创建压缩文件  <br/>
 	 * @param dirOrFile 需要压缩的文件或目录
 	 * @return 
@@ -75,8 +71,6 @@ public class ZipUtil {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-4-24下午4:34:31<br/>
 	 * 功能:递归目录下所有文件 <br/>
 	 * 入参: <br/>
 	 */
@@ -94,8 +88,6 @@ public class ZipUtil {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-4-24下午5:10:32<br/>
 	 * 功能: zip 解压缩<br/>
 	 * 入参: <br/>
 	 */

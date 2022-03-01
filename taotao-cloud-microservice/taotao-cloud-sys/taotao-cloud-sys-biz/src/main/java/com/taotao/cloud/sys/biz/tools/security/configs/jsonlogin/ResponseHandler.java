@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin;
 
-import com.sanri.tools.modules.core.dtos.ResponseDto;
-import com.sanri.tools.modules.core.exception.SystemMessage;
+import com.taotao.cloud.sys.biz.tools.core.dtos.ResponseDto;
+import com.taotao.cloud.sys.biz.tools.core.exception.SystemMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -10,12 +10,10 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Slf4j
 @Component
 public class ResponseHandler  {
 	@Autowired

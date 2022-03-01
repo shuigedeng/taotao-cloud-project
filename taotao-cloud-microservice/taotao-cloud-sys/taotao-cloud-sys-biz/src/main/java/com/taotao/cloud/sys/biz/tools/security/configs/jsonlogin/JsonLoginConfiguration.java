@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jsonlogin;
 
-import com.sanri.tools.modules.security.configs.jwt.TokenService;
-import com.sanri.tools.modules.security.service.dtos.SecurityUser;
+import com.taotao.cloud.sys.biz.tools.security.configs.jwt.TokenService;
+import com.taotao.cloud.sys.biz.tools.security.service.dtos.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

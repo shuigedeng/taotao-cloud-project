@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jwt;
 
-import com.sanri.tools.modules.core.exception.ToolException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.apache.commons.lang3.StringUtils;

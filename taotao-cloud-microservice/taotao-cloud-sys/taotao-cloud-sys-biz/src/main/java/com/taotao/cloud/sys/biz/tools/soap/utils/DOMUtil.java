@@ -402,8 +402,6 @@ public class DOMUtil {
     
     /**
      * 
-     * 作者:sanri <br/>
-     * 时间:2017-6-22下午4:15:28<br/>
      * 功能:把dom文件转换为xml字符串   <br/>
      * @param document w3c document
      * @return
@@ -439,8 +437,6 @@ public class DOMUtil {
 
     /**
      *
-     * 作者:sanri <br/>
-     * 时间:2017-6-22下午4:16:31<br/>
      * 功能:将 w3c document 转换为 dom4j document  <br/>
      * @param document
      * @return

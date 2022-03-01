@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.tools.security.configs.jwt;
 
-import com.sanri.tools.modules.core.exception.SystemMessage;
-import com.sanri.tools.modules.core.exception.ToolException;
+import com.taotao.cloud.sys.biz.tools.core.exception.SystemMessage;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import org.apache.commons.lang3.StringUtils;

@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.biz.tools.soap.service;
 import com.ibm.wsdl.extensions.http.HTTPAddressImpl;
 import com.ibm.wsdl.extensions.soap.SOAPAddressImpl;
 import com.ibm.wsdl.extensions.soap12.SOAP12AddressImpl;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.LogUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -18,11 +18,8 @@ import java.util.Map.Entry;
 
 /**
  * 
- * 作者:sanri <br/>
- * 时间:2017-6-21下午2:51:46<br/>
  * 功能:webservice 服务 <br/>
  */
-@Slf4j
 public class WsdlService {
 	private WsdlContext wsdlContext;
 	private Service service;
@@ -38,15 +35,13 @@ public class WsdlService {
 
 	/**
 	 * 
-	 * 作者:sanri <br/>
-	 * 时间:2017-6-21下午2:49:24<br/>
 	 * 功能:解析当前服务所有 port <br/>
 	 * @param findAllService
 	 */
 	@SuppressWarnings("unchecked")
 	void parserPorts() {
 		QName qName = service.getQName();
-		log.debug("正在解析服务:"+qName.getLocalPart());
+		LogUtil.debug("正在解析服务:"+qName.getLocalPart());
 		Map<String,Port> ports = service.getPorts();
 		Iterator<Entry<String, Port>> iterator = ports.entrySet().iterator();
 		while(iterator.hasNext()){

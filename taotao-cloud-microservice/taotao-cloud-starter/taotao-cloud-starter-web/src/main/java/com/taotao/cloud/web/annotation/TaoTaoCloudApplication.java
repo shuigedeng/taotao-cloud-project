@@ -38,6 +38,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
+@ServletComponentScan
 @EnableTaoTaoCloudOauth2Resource
 @EnableEncryptableProperties
 @EnableDiscoveryClient
