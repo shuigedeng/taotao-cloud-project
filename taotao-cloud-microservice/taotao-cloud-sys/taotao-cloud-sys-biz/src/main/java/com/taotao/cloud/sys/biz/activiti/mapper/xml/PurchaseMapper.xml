@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.spring.mapper.PurchaseApplyMapper">
+	<resultMap id="BaseResultMap" type="boot.spring.po.PurchaseApply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="total" jdbcType="VARCHAR" property="total" />
+    <result column="applytime" property="applytime" />
+    <result column="applyer" jdbcType="VARCHAR" property="applyer" />
+    <result column="itemlist" property="itemlist" />
+    <result column="processinstanceid" jdbcType="VARCHAR" property="processinstanceid" />
+  </resultMap>
+
+
+	<select id="getPurchaseApply" resultType="boot.spring.po.PurchaseApply" parameterType="int">
+		select * from purchase where id=#{id} 
+	</select>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="boot.spring.po.PurchaseApply">
+	  insert into purchase (itemlist,total,applytime,applyer,processinstanceid)
+	  values (#{itemlist},#{total},#{applytime},#{applyer},#{processinstanceid})
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="boot.spring.po.PurchaseApply">
+		update purchase
+		    <set>
+		      <if test="total != null">
+		        total = #{total,jdbcType=DECIMAL},
+		      </if>
+		      <if test="applytime != null">
+		        applytime = #{applytime,jdbcType=VARCHAR},
+		      </if>
+		      <if test="applyer != null">
+		        applyer = #{applyer,jdbcType=VARCHAR},
+		      </if>
+		      <if test="itemlist != null">
+		        itemlist = #{itemlist,jdbcType=LONGVARCHAR},
+		      </if>
+		      <if test="processinstanceid != null">
+		        processinstanceid = #{processinstanceid,jdbcType=VARCHAR},
+		      </if>
+		    </set>
+		    where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="listPurchaseApplyByApplyer" resultMap="BaseResultMap">
+		select * from purchase
+		where applyer=#{0}
+	</select>
+</mapper>

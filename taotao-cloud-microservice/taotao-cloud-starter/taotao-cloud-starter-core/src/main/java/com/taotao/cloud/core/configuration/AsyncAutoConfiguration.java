@@ -22,12 +22,14 @@ import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.properties.AsyncProperties;
 import com.taotao.cloud.core.properties.AsyncThreadPoolProperties;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.MDC;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +37,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskDecorator;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 /**
  * 异步任务配置
@@ -72,6 +77,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	}
 
 	@Override
+	@Bean
 	public AsyncThreadPoolTaskExecutor getAsyncExecutor() {
 		//AsyncThreadPoolTaskExecutor taskExecutor = ContextUtil.getBean(
 		//	AsyncThreadPoolTaskExecutor.class, true);
@@ -89,6 +95,7 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
 
 		executor.setThreadFactory(new AsyncThreadPoolFactory(asyncThreadPoolProperties, executor));
+		executor.setTaskDecorator(new AsyncTaskDecorator());
 
 		/*
 		 rejection-policy：当pool已经达到max size的时候，如何处理新任务
@@ -100,27 +107,33 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 		return executor;
 	}
 
-	//@Bean
-	//public AsyncThreadPoolTaskExecutor threadPoolTaskExecutor() {
-	//
-	//	AsyncThreadPoolTaskExecutor executor = new AsyncThreadPoolTaskExecutor();
-	//	executor.setCorePoolSize(asyncThreadPoolProperties.getCorePoolSize());
-	//	executor.setMaxPoolSize(asyncThreadPoolProperties.getMaxPoolSiz());
-	//	executor.setQueueCapacity(asyncThreadPoolProperties.getQueueCapacity());
-	//	executor.setKeepAliveSeconds(asyncThreadPoolProperties.getKeepAliveSeconds());
-	//	executor.setThreadNamePrefix(asyncThreadPoolProperties.getThreadNamePrefix());
-	//
-	//	executor.setThreadFactory(new AsyncThreadPoolFactory(asyncThreadPoolProperties, executor));
-	//
-	//	/*
-	//	 rejection-policy：当pool已经达到max size的时候，如何处理新任务
-	//	 CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
-	//	 */
-	//	executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-	//	executor.initialize();
-	//
-	//	return executor;
-	//}
+	/**
+	 * 对于异步任务时, 同样也能获取到 TraceId
+	 * spring 的异步任务 @Async
+	 */
+	public static class AsyncTaskDecorator implements TaskDecorator {
+		@Override
+		public Runnable decorate(Runnable runnable) {
+			try {
+				RequestAttributes context = RequestContextHolder.currentRequestAttributes();
+				Map<String,String> previous = MDC.getCopyOfContextMap();
+				return () -> {
+					try {
+						RequestContextHolder.setRequestAttributes(context);
+
+						MDC.setContextMap(previous);
+
+						runnable.run();
+					} finally {
+						RequestContextHolder.resetRequestAttributes();
+						MDC.clear();
+					}
+				};
+			} catch (IllegalStateException e) {
+				return runnable;
+			}
+		}
+	}
 
 	public static class AsyncThreadPoolFactory implements ThreadFactory {
 

@@ -18,8 +18,13 @@ package com.taotao.cloud.sys.biz;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * TaoTaoCloudUcApplication
@@ -39,6 +44,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 1.0.0
  * @since 2020/11/30 下午3:33
  */
+//@SpringBootApplication(exclude = MongoAutoConfiguration.class)
+//@EnableScheduling
+//@ForestScan(basePackages = "com.sanri.tools.modules.*.remote.apis")
+//@ServletComponentScan
+//@EnableAspectJAutoProxy(exposeProxy = true)
 @MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.sys.biz.repository.inf")
 @TaoTaoCloudApplication

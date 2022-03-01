@@ -17,9 +17,11 @@ package com.taotao.cloud.core.nacos;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;
+import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
 import com.alibaba.nacos.api.naming.listener.Event;
 import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.LogUtil;
 import java.util.Arrays;
@@ -53,7 +55,7 @@ public class ServiceListener implements InitializingBean {
 		@Autowired
 		private NacosDiscoveryProperties properties;
 		@Autowired
-		private DiscoveryClient discoveryClient;
+		private NacosDiscoveryClient discoveryClient;
 
 		@Override
 		public void afterPropertiesSet() throws Exception {
@@ -62,7 +64,7 @@ public class ServiceListener implements InitializingBean {
 					@Override
 					public void onEvent(Event event) {
 						if (event instanceof NamingEvent) {
-							List instances = ((NamingEvent) event).getInstances();
+							List<Instance> instances = ((NamingEvent) event).getInstances();
 
 							LogUtil.info("");
 
@@ -81,7 +83,7 @@ public class ServiceListener implements InitializingBean {
 				for (String service : services) {
 					nacosServiceManager.getNamingService(new Properties())
 						.subscribe(service, this.properties.getGroup(),
-							Arrays.asList(this.properties.getClusterName()),
+							List.of(this.properties.getClusterName()),
 							new EventListener() {
 								@Override
 								public void onEvent(Event event) {
