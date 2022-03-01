@@ -1,0 +1,6 @@
+com.taotao.cloud.core.compress.impl.GzipCompress
+com.taotao.cloud.core.compress.impl.DeflaterCompress
+com.taotao.cloud.core.compress.impl.Bzip2Compress
+com.taotao.cloud.core.compress.impl.Lz4Compress
+com.taotao.cloud.core.compress.impl.LzoCompress
+com.taotao.cloud.core.compress.impl.SnappyCompress

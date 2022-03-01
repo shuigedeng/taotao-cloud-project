@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * DtpConfig related
- *
- * @author yanhom
  */
 @Configuration
 public class DtpConfig {

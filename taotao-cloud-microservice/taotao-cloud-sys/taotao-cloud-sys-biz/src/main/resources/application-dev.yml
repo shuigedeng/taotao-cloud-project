@@ -216,6 +216,11 @@ seata:
     exception-rate: 100
 
 spring:
+  #activiti:
+  #  database-schema-update: true
+  #  check-process-definitions: true
+  #  process-definition-location-prefix: classpath:/processes/
+  #  history-level: full
   quartz:
     scheduler-name: taotao-cloud-quartz-scheduler
     # 将任务等保存化到数据库
