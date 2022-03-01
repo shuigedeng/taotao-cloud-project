@@ -13,6 +13,7 @@ target/
 .factorypath
 .project
 .settings
+.gradle
 .springBeans
 *.log
 

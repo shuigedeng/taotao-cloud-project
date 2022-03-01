@@ -23,7 +23,6 @@ public class PromotionDelayQueueListen extends AbstractDelayQueueListen {
         timeTrigger.execute(JSONUtil.toBean(jobId, TimeTriggerMsg.class));
     }
 
-
     @Override
     public String setDelayQueueName() {
         return DelayQueueEnums.PROMOTION.name();

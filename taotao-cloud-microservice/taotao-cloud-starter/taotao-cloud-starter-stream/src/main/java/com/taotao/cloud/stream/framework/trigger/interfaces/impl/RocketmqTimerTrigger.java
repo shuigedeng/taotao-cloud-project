@@ -2,12 +2,14 @@ package com.taotao.cloud.stream.framework.trigger.interfaces.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.common.utils.StringUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.trigger.delay.queue.PromotionDelayQueue;
 import com.taotao.cloud.stream.framework.trigger.interfaces.TimeTrigger;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
+import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -32,18 +34,18 @@ public class RocketmqTimerTrigger implements TimeTrigger {
         //执行器唯一key
         String uniqueKey = timeTriggerMsg.getUniqueKey();
         if (StringUtil.isEmpty(uniqueKey)) {
-            uniqueKey = StringUtil.getRandStr(10);
+            uniqueKey = StringUtil.random(10);
         }
 
         //执行任务key
-        String generateKey = cn.lili.trigger.util.DelayQueueTools.generateKey(timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getTriggerTime(), uniqueKey);
-        this.cache.put(generateKey, 1);
+        String generateKey = DelayQueueTools.generateKey(timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getTriggerTime(), uniqueKey);
+	    redisRepository.set(generateKey, 1);
         //设置延时任务
         if (Boolean.TRUE.equals(promotionDelayQueue.addJob(JSONUtil.toJsonStr(timeTriggerMsg), timeTriggerMsg.getTriggerTime()))) {
-            log.info("延时任务标识： {}", generateKey);
-            log.info("定时执行在【" + DateUtil.toString(timeTriggerMsg.getTriggerTime(), "yyyy-MM-dd HH:mm:ss") + "】，消费【" + timeTriggerMsg.getParam().toString() + "】");
+            LogUtil.info("延时任务标识： {}", generateKey);
+	        LogUtil.info("定时执行在【" + DateUtil.toString(timeTriggerMsg.getTriggerTime(), "yyyy-MM-dd HH:mm:ss") + "】，消费【" + timeTriggerMsg.getParam().toString() + "】");
         } else {
-            log.error("延时任务添加失败:{}", timeTriggerMsg);
+	        LogUtil.error("延时任务添加失败:{}", timeTriggerMsg);
         }
     }
 
@@ -75,7 +77,7 @@ public class RocketmqTimerTrigger implements TimeTrigger {
 
         TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(executorName, triggerTime, param, uniqueKey, topic);
         Message<TimeTriggerMsg> message = MessageBuilder.withPayload(timeTriggerMsg).build();
-        log.info("延时任务发送信息：{}", message);
+	    LogUtil.info("延时任务发送信息：{}", message);
         this.rocketMQTemplate.asyncSend(topic, message, RocketmqSendCallbackBuilder.commonCallback());
     }
 
@@ -87,8 +89,8 @@ public class RocketmqTimerTrigger implements TimeTrigger {
 
     @Override
     public void delete(String executorName, Long triggerTime, String uniqueKey, String topic) {
-        String generateKey = cn.lili.trigger.util.DelayQueueTools.generateKey(executorName, triggerTime, uniqueKey);
-        log.info("删除延时任务{}", generateKey);
-        this.cache.remove(generateKey);
+        String generateKey = DelayQueueTools.generateKey(executorName, triggerTime, uniqueKey);
+	    LogUtil.info("删除延时任务{}", generateKey);
+        redisRepository.del(generateKey);
     }
 }
