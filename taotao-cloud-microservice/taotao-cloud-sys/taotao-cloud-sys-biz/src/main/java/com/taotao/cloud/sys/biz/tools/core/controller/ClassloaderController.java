@@ -5,6 +5,7 @@ import com.taotao.cloud.sys.biz.tools.core.controller.dtos.UploadClassInfo;
 import com.taotao.cloud.sys.biz.tools.core.service.classloader.ClassloaderService;
 import com.taotao.cloud.sys.biz.tools.core.service.classloader.DeCompileService;
 import com.taotao.cloud.sys.biz.tools.core.service.classloader.dtos.LoadClassResponse;
+import com.taotao.cloud.sys.biz.tools.core.service.classloader.dtos.LoadedClass;
 import com.taotao.cloud.sys.biz.tools.core.service.data.RandomDataService;
 import com.taotao.cloud.sys.biz.tools.core.service.file.FileManager;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +32,6 @@ import java.util.stream.Collectors;
 
 /**
  * @resourceName 类加载器
- * @parentMenu menu_level_1_basedata
  */
 @RestController
 @RequestMapping("/classloader")

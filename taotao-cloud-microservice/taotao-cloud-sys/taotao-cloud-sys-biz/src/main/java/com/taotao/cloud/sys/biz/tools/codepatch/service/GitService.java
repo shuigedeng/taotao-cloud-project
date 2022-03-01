@@ -59,6 +59,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.ReflectionUtils;
+import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.Module;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -307,9 +308,6 @@ public class GitService {
 
     /**
      * 编译文件
-     * @param group
-     * @param repository
-     * @param pomRelativePath
      * @return 执行编译 mvn 退出码
      */
     public void execMavenCommand(String ip, CompileMessage compileMessage) throws IOException, InterruptedException {
@@ -329,7 +327,7 @@ public class GitService {
         final String cmd = System.getProperty("os.name").contains("Linux") ? mavenHome+"/bin/mvn" : mavenHome+"/bin/mvn.cmd";
         final String [] commandCommands = new String[]{cmd,"-f",pomFile.getAbsolutePath(),"-s",mavenConfigFilePath,"-Dmaven.test.skip=true"};
         final String [] cmdarray = ArrayUtils.addAll(commandCommands,StringUtils.split(command));
-        log.info("执行的命令为:{}", StringUtils.join(cmdarray," "));
+	    LogUtil.info("执行的命令为:{}", StringUtils.join(cmdarray," "));
 
 //        webSocketService.sendMessage(websocketId,StringUtils.join(cmdarray," "));
         String destination = "/topic/"+group+"/"+repository+"/"+websocketId;
@@ -342,7 +340,7 @@ public class GitService {
             simpMessagingTemplate.convertAndSend(destination,line);
         }
         final int waitFor = cleanCompile.waitFor();
-        log.info("{} 执行结果为: {}",destination,waitFor);
+        LogUtil.info("{} 执行结果为: {}",destination,waitFor);
         if (waitFor == 0){
             // 记录上次编译成功时间
             final String pathMd5 = DigestUtils.md5DigestAsHex(pomRelativePath.getBytes());
@@ -463,7 +461,6 @@ public class GitService {
 
     /**
      * 编译模块猜测
-     * @param changeFiles
      * @param group
      * @param repository
      * @param commitIds
@@ -520,7 +517,6 @@ public class GitService {
     /**
      * 选中多个 commitId 时, 创建补丁包
      * 从后往前, 找相临 commit 做文件差异, 然后后面的差异覆盖前面的差异
-     * @param repository
      * @param group
      * @param commitIds
      * @return
@@ -697,7 +693,6 @@ public class GitService {
 
     /**
      * 从变更记录中找到所有编译后的文件
-     * @param diffEntries
      * @param group
      * @param repositoryName
      * @param title

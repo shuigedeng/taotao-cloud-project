@@ -6,6 +6,7 @@ import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.BatchCommitIdPatch;
 import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.Branchs;
 import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.ChangeFiles;
 import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.Commit;
+import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.Module;
 import com.taotao.cloud.sys.biz.tools.codepatch.service.dtos.PomFile;
 import com.taotao.cloud.sys.biz.tools.core.service.file.FileManager;
 import java.io.File;

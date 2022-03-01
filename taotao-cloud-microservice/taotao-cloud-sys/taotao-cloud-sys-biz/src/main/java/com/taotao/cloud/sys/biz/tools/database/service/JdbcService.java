@@ -1,5 +1,11 @@
 package com.taotao.cloud.sys.biz.tools.database.service;
 
+import static com.taotao.cloud.sys.biz.tools.database.service.meta.DatabaseMetaDataLoad.columnListProcessor;
+import static com.taotao.cloud.sys.biz.tools.database.service.meta.DatabaseMetaDataLoad.indexListProcessor;
+import static com.taotao.cloud.sys.biz.tools.database.service.meta.DatabaseMetaDataLoad.primaryKeyListProcessor;
+import static com.taotao.cloud.sys.biz.tools.database.service.meta.DatabaseMetaDataLoad.schemaListProcessor;
+import static com.taotao.cloud.sys.biz.tools.database.service.meta.DatabaseMetaDataLoad.tableListProcessor;
+
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.sys.biz.tools.core.dtos.UpdateConnectEvent;
 import com.taotao.cloud.sys.biz.tools.core.dtos.param.AuthParam;
@@ -101,7 +107,6 @@ public class JdbcService implements ApplicationListener<UpdateConnectEvent> , In
      * 过滤出指定 schema 的表
      * @param connName
      * @param catalog
-     * @param schema
      * @return
      * @throws IOException
      * @throws SQLException
@@ -139,8 +144,6 @@ public class JdbcService implements ApplicationListener<UpdateConnectEvent> , In
      * 过滤出需要的表格元数据
      * @param connName
      * @param catalog
-     * @param schema
-     * @param tableNames
      * @return
      * @throws IOException
      * @throws SQLException
@@ -343,7 +346,6 @@ public class JdbcService implements ApplicationListener<UpdateConnectEvent> , In
      *   column:column1,column2
      * @param connName
      * @param catalog
-     * @param schema
      * @param keyword
      * @return
      */
@@ -422,7 +424,6 @@ public class JdbcService implements ApplicationListener<UpdateConnectEvent> , In
     /**
      * 执行 sql ,在某个连接上
      * @param connName
-     * @param sql
      * @return
      */
     public List<Integer> executeUpdate(String connName, List<String> sqls) throws SQLException, IOException {

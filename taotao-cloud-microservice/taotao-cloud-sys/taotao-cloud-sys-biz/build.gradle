@@ -14,6 +14,7 @@ dependencies {
     implementation 'commons-codec:commons-codec'
 
     // core
+    implementation 'org.apache.commons:commons-text:1.5'
     implementation 'org.benf:cfr:0.151'
     implementation 'com.dtflys.forest:spring-boot-starter-forest:1.5.0-RC2'
     implementation 'org.codehaus.plexus:plexus-utils:2.0.6'
@@ -29,7 +30,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     //patchcode
-    implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r'
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:6.0.0.202111291000-r'
+    implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.0.0.202111291000-r'
 
     //dubbo
     implementation 'commons-net:commons-net:3.6'
