@@ -58,6 +58,7 @@ jobs:
         cd ${{ github.workspace }}/taotao-cloud-dependencies
         gradle publishToMavenLocal 
         gradle publishAllPublicationsToSonatypeRepository
+        gradle publishMavenJavaPublicationToGitHubRepository
 
     - name: build and publish starter
       run: |
@@ -68,6 +69,7 @@ jobs:
             cd $starter_dir"/"$starter
             gradle --continue clean build -x test -x bootJar
             gradle publishAllPublicationsToSonatypeRepository
+            gradle publishMavenJavaPublicationToGitHubRepository
           fi
         done
       #gradle publishAllPublicationsToSonatypeRepository -Psigning.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}} -Psigning.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/secring.gpg)

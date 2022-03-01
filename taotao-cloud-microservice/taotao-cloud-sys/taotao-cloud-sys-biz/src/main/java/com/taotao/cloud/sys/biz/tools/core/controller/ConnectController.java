@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * @resourceName 连接管理
- * @parentMenu menu_level_1_basedata
  */
 @RestController
 @RequestMapping("/connect")
