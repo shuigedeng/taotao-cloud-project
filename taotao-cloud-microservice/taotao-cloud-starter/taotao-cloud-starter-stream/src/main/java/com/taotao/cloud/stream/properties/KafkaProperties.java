@@ -29,6 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = KafkaProperties.PREFIX)
 public class KafkaProperties {
 
+
 	public static final String PREFIX = "taotao.cloud.kafka";
 
 	private boolean enabled = false;
