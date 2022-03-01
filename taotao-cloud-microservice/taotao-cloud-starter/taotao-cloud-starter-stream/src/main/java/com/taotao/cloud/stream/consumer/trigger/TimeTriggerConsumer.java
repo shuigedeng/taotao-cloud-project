@@ -1,6 +1,8 @@
 package com.taotao.cloud.stream.consumer.trigger;
 
 import cn.hutool.json.JSONUtil;
+import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.stream.consumer.trigger.TimeTriggerExecutor;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
@@ -24,20 +26,20 @@ public class TimeTriggerConsumer implements RocketMQListener<TimeTriggerMsg> {
         try {
             String key = DelayQueueTools.generateKey(timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getTriggerTime(), timeTriggerMsg.getUniqueKey());
 
-            if (cache.get(key) == null) {
-                log.info("执行器执行被取消：{} | 任务标识：{}", timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getUniqueKey());
+            if (redisRepository.get(key) == null) {
+                LogUtil.info("执行器执行被取消：{} | 任务标识：{}", timeTriggerMsg.getTriggerExecutor(), timeTriggerMsg.getUniqueKey());
                 return;
             }
 
-            log.info("执行器执行：" + timeTriggerMsg.getTriggerExecutor());
-            log.info("执行器参数：" + JSONUtil.toJsonStr(timeTriggerMsg.getParam()));
+	        LogUtil.info("执行器执行：" + timeTriggerMsg.getTriggerExecutor());
+	        LogUtil.info("执行器参数：" + JSONUtil.toJsonStr(timeTriggerMsg.getParam()));
 
-            cache.remove(key);
+	        redisRepository.del(key);
 
-            TimeTriggerExecutor executor = (TimeTriggerExecutor) SpringContextUtil.getBean(timeTriggerMsg.getTriggerExecutor());
+            TimeTriggerExecutor executor = (TimeTriggerExecutor) ContextUtil.getBean(timeTriggerMsg.getTriggerExecutor(), true);
             executor.execute(timeTriggerMsg.getParam());
         } catch (Exception e) {
-            log.error("mq延时任务异常", e);
+	        LogUtil.error("mq延时任务异常", e);
         }
 
     }
