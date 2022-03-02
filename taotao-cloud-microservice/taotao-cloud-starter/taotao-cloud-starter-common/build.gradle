@@ -66,6 +66,12 @@ dependencies {
 
     api "org.springframework.cloud:spring-cloud-context"
 
+    // serializable
+    api 'com.esotericsoftware:kryo:4.0.0'
+    api 'com.caucho:hessian:4.0.38'
+    api 'commons-codec:commons-codec'
+    api 'com.alibaba:fastjson:1.2.79'
+
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
     testImplementation 'junit:junit:4.13.2'

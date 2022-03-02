@@ -1,0 +1,7 @@
+com.taotao.cloud.common.serializer.impl.FastJsonSerializer
+com.taotao.cloud.common.serializer.impl.HessianSerializer
+com.taotao.cloud.common.serializer.impl.HexSerializer
+com.taotao.cloud.common.serializer.impl.JdkSerializationRedisSerializer
+com.taotao.cloud.common.serializer.impl.JdkSerializer
+com.taotao.cloud.common.serializer.impl.KryoSerializer
+com.taotao.cloud.common.serializer.impl.StringSerializer

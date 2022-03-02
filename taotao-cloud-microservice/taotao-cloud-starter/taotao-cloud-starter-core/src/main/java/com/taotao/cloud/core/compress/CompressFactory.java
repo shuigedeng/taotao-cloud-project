@@ -13,7 +13,7 @@ public enum CompressFactory {
 
 	CF;
 
-	Map<String, Compress> compressMap = new HashMap<String, Compress>();
+	Map<String, Compress> compressMap = new HashMap<>();
 
 	CompressFactory() {
 		ServiceLoader<Compress> compresses = ServiceLoader.load(Compress.class);
