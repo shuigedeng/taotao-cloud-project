@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.tools.jvm.service;
 
 
-import com.taotao.cloud.sys.biz.controller.tools.jvm.service.dtos.CommandResultContext;
+import com.taotao.cloud.sys.api.dto.jvm.CommandResultContext;
 
 public interface ArthasCommandHandler {
 

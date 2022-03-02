@@ -4,9 +4,11 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.biz.utils.FileUploaderUtils;
 import com.taotao.cloud.sys.biz.utils.PdfUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
  * > 【必须】程序运行所在环境安装 LibreOffice，PDF 转换基于 LibreOffice 完成(OpenOffice 也一样可用) >
  * 安装参考教程：http://wiki.nooss.cn/archives/420.html > Linux 安装字体(不安装会出现乱码问题)：http://wiki.nooss.cn/archives/406.html
  */
+@Validated
 @RestController
-@RequestMapping("/sys/tools/docpreview")
+@Tag(name = "工具管理-pdf管理API", description = "工具管理-pdf管理API")
+@RequestMapping("/sys/tools/pdf")
 public class PdfToolsController {
 
 	@Autowired

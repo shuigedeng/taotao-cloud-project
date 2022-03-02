@@ -1,10 +1,9 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
-import com.taotao.cloud.sys.biz.tools.core.dtos.PageResponseDto;
-import com.taotao.cloud.sys.biz.tools.core.dtos.param.PageParam;
 import com.taotao.cloud.sys.api.dto.mongo.CollectionDto;
 import com.taotao.cloud.sys.api.dto.mongo.MongoQueryParam;
 import com.taotao.cloud.sys.biz.service.MongoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,18 +16,24 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/mongo")
+/**
+ * MongoController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 15:53:37
+ */
 @Validated
+@RestController
+@Tag(name = "工具管理-mongo管理API", description = "工具管理-mongo管理API")
+@RequestMapping("/sys/tools/mongo")
 public class MongoController {
+
     @Autowired
     private MongoService mongoService;
 
     /**
      * 查询所有的库
-     * @param connName 连接名称
-     * @return
-     * @throws IOException
      */
     @GetMapping("/databaseNames")
     public List<String> databaseNames(@NotNull String connName) throws IOException {
@@ -37,10 +42,6 @@ public class MongoController {
 
     /**
      * 查询某个库里的所有集合
-     * @param connName 连接名称
-     * @param databaseName 数据库名称
-     * @return
-     * @throws IOException
      */
     @GetMapping("/collectionNames/{databaseName}")
     public List<CollectionDto> collectionNames(@NotNull String connName, @PathVariable("databaseName") String databaseName) throws IOException {
@@ -51,9 +52,6 @@ public class MongoController {
      * mongo 分页数据查询
      * @param mongoQueryParam mongo 查询参数
      * @param pageParam 分页参数
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     @GetMapping("/queryPage")
     public PageResponseDto<List<String>> queryPage(@Valid MongoQueryParam mongoQueryParam,

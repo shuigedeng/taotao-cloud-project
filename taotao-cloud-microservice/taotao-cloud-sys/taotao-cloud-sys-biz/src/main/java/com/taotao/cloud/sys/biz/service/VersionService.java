@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.biz.service;
 
+import com.taotao.cloud.common.model.Version;
 import com.taotao.cloud.sys.biz.tools.core.utils.Version;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
