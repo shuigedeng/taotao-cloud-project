@@ -1,13 +1,17 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.biz.utils.FileUploaderUtils;
 import com.taotao.cloud.sys.biz.utils.PdfUtils;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +37,10 @@ public class PdfController {
 	@Autowired
 	private PdfUtils pdfUtils;
 
-	/**
-	 * 文件上传
-	 */
-	@PostMapping("upload")
+	@Operation(summary = "文件上传", description = "文件上传", method = CommonConstant.POST)
+	@RequestLogger(description = "文件上传")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping("/upload")
 	public Result<Map<String, Object>> upload(@RequestParam("file") MultipartFile file)
 		throws Exception {
 		if (file.isEmpty()) {
@@ -51,11 +55,10 @@ public class PdfController {
 		return Result.success(data);
 	}
 
-
-	/**
-	 * 文件上传并转为PDF
-	 */
-	@PostMapping("topdf")
+	@Operation(summary = "文件上传并转为PDF", description = "文件上传并转为PDF", method = CommonConstant.POST)
+	@RequestLogger(description = "文件上传并转为PDF")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping("/topdf")
 	public Result<Map<String, Object>> toPdf(@RequestParam("file") MultipartFile file)
 		throws Exception {
 		if (file.isEmpty()) {
@@ -72,10 +75,10 @@ public class PdfController {
 		return Result.success(data);
 	}
 
-	/**
-	 * 文件上传并转为图片PNG格式
-	 */
-	@PostMapping("topng")
+	@Operation(summary = "文件上传并转为图片PNG格式", description = "文件上传并转为图片PNG格式", method = CommonConstant.POST)
+	@RequestLogger(description = "文件上传并转为图片PNG格式")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping("/topng")
 	public Result<Map<String, Object>> toPng(@RequestParam("file") MultipartFile file)
 		throws Exception {
 		if (file.isEmpty()) {

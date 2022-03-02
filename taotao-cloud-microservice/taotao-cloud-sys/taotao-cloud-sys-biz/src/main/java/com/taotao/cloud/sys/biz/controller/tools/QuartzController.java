@@ -42,6 +42,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * QuartzController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 16:38:25
+ */
 @Validated
 @RestController
 @RequestMapping("/sys/tools/quart")

@@ -15,17 +15,24 @@
  */
 package com.taotao.cloud.sys.biz.service;
 
+import com.taotao.cloud.common.model.PageModel;
+import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.sys.api.dto.mongo.CollectionDto;
+import com.taotao.cloud.sys.api.dto.mongo.MongoQueryParam;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 /**
- * ICronService
+ * IMongoService
  *
  * @author shuigedeng
- * @version 1.0.0
- * @since 2022/03/02 15:43
+ * @version v1.0
+ * @since 2022/03/02 17:04
  */
-public interface ICronService {
+public interface IMongoService {
 
-	List<String> cronNextExecutionTime(@NotNull String expression);
+	public List<String> databaseNames();
+
+	public List<CollectionDto> collectionNames(String databaseName);
+
+	public PageModel<String> queryDataPage(MongoQueryParam mongoQueryParam, PageQuery pageQuery);
 }
