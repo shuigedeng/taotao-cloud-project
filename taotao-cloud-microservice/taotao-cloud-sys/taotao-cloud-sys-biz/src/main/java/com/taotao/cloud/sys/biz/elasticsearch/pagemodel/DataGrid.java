@@ -2,7 +2,6 @@ package com.taotao.cloud.sys.biz.elasticsearch.pagemodel;
 
 import java.util.List;
 
-import boot.spring.po.Actor;
 
 
 public class DataGrid<T> {

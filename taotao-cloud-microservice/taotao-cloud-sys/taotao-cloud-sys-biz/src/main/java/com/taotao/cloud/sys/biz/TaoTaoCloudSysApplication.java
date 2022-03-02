@@ -15,6 +15,7 @@
  */
 package com.taotao.cloud.sys.biz;
 
+import com.dtflys.forest.springboot.annotation.ForestScan;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -44,11 +45,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @version 1.0.0
  * @since 2020/11/30 下午3:33
  */
-//@SpringBootApplication(exclude = MongoAutoConfiguration.class)
-//@EnableScheduling
-//@ForestScan(basePackages = "com.sanri.tools.modules.*.remote.apis")
-//@ServletComponentScan
-//@EnableAspectJAutoProxy(exposeProxy = true)
+@ForestScan(basePackages = "com.taotao.cloud.sys.biz.forest")
 @MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.sys.biz.repository.inf")
 @TaoTaoCloudApplication

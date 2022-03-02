@@ -107,6 +107,25 @@ redisson:
   codec:
     class: "org.redisson.codec.JsonJacksonCodec"
 
+forest:
+  bean-id: config0 # 在spring上下文中bean的id（默认为 forestConfiguration）
+  backend: okhttp3 # 后端HTTP框架（默认为 okhttp3）
+  max-connections: 1000 # 连接池最大连接数（默认为 500）
+  max-route-connections: 500 # 每个路由的最大连接数（默认为 500）
+  timeout: 3000 # 请求超时时间，单位为毫秒（默认为 3000）
+  connect-timeout: 3000 # 连接超时时间，单位为毫秒（默认为 timeout）
+  read-timeout: 3000 # 数据读取超时时间，单位为毫秒（默认为 timeout）
+  max-retry-count: 0 # 请求失败后重试次数（默认为 0 次不重试）
+  ssl-protocol: SSLv3 # 单向验证的HTTPS的默认SSL协议（默认为 SSLv3）
+  logEnabled: true # 打开或关闭日志（默认为 true）
+  log-request: true # 打开/关闭Forest请求日志（默认为 true）
+  log-response-status: true # 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-content: true # 打开/关闭Forest响应内容日志（默认为 false）
+
+  variables:
+    username: foo
+    userpwd: bar
+
 arthas:
   # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
   # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。

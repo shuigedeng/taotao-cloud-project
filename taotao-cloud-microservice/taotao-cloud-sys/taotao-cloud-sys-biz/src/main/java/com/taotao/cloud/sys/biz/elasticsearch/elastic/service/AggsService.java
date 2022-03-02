@@ -1,8 +1,9 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service;
 
-import boot.spring.pagemodel.QueryCommand;
-import boot.spring.pagemodel.RangeQuery;
-import boot.spring.pagemodel.ResultData;
+
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.QueryCommand;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.RangeQuery;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.ResultData;
 
 public interface AggsService {
 	// 词条聚集

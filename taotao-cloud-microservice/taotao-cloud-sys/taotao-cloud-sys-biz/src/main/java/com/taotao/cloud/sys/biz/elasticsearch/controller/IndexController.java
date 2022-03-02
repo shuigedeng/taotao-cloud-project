@@ -1,6 +1,10 @@
 package com.taotao.cloud.sys.biz.elasticsearch.controller;
 
 
+import com.taotao.cloud.sys.biz.elasticsearch.elastic.service.IndexService;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.MSG;
+import com.taotao.cloud.sys.biz.elasticsearch.po.Country;
+import com.taotao.cloud.sys.biz.elasticsearch.po.Sougoulog;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -34,10 +38,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
-import boot.spring.elastic.service.IndexService;
-import boot.spring.pagemodel.MSG;
-import boot.spring.po.Country;
-import boot.spring.po.Sougoulog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
