@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.bigdata.zookeeper.api.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -26,7 +25,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
  * @since 2017/11/17
  * @version 1.0.0
  */
-@Data
 @RefreshScope
 @ConfigurationProperties(prefix = "taotao.cloud.zookeeper")
 public class ZkProperties {
@@ -40,4 +38,21 @@ public class ZkProperties {
 	 * 超时时长 500
 	 */
 	private int timeout;
+
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
 }
