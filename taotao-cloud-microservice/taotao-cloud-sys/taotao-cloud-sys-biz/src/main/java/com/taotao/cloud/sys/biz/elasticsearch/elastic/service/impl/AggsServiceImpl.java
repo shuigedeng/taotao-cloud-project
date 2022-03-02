@@ -1,6 +1,11 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service.impl;
 
 
+import com.taotao.cloud.sys.biz.elasticsearch.elastic.service.AggsService;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.BucketResult;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.QueryCommand;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.RangeQuery;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.ResultData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,11 +36,6 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import boot.spring.elastic.service.AggsService;
-import boot.spring.pagemodel.BucketResult;
-import boot.spring.pagemodel.QueryCommand;
-import boot.spring.pagemodel.RangeQuery;
-import boot.spring.pagemodel.ResultData;
 
 
 @Service

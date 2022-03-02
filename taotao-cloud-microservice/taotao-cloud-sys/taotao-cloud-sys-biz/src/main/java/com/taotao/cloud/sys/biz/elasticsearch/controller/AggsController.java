@@ -1,5 +1,9 @@
 package com.taotao.cloud.sys.biz.elasticsearch.controller;
 
+import com.taotao.cloud.sys.biz.elasticsearch.elastic.service.AggsService;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.QueryCommand;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.RangeQuery;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import boot.spring.elastic.service.AggsService;
-import boot.spring.pagemodel.QueryCommand;
-import boot.spring.pagemodel.RangeQuery;
-import boot.spring.pagemodel.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

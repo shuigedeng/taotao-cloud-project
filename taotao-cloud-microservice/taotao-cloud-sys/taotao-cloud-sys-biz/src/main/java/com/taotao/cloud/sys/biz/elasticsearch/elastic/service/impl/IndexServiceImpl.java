@@ -1,5 +1,7 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service.impl;
 
+import com.taotao.cloud.sys.biz.elasticsearch.elastic.service.IndexService;
+import com.taotao.cloud.sys.biz.elasticsearch.po.Sougoulog;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +33,6 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
-import boot.spring.elastic.service.IndexService;
-import boot.spring.po.Sougoulog;
 
 
 @Service

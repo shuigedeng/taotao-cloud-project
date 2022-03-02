@@ -1,11 +1,11 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service;
 
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.ElasticSearchRequest;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.GeoDistance;
 import java.util.HashMap;
 
 import org.elasticsearch.action.search.SearchResponse;
 
-import boot.spring.pagemodel.ElasticSearchRequest;
-import boot.spring.pagemodel.GeoDistance;
 
 public interface SearchService {
 	/**

@@ -1,11 +1,11 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service;
 
+import com.taotao.cloud.sys.biz.elasticsearch.po.Sougoulog;
 import java.util.List;
 import java.util.Map;
 
 import org.elasticsearch.common.xcontent.XContentBuilder;
 
-import boot.spring.po.Sougoulog;
 
 public interface IndexService {
 	/**

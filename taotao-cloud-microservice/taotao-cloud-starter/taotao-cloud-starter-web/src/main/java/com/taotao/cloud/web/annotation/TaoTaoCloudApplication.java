@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.annotation;
 
-import com.taotao.cloud.pay.annotation.EnableTaoTaoCloudPay;
 import com.taotao.cloud.security.annotation.EnableTaoTaoCloudOauth2Resource;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import java.lang.annotation.Documented;
@@ -24,6 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 

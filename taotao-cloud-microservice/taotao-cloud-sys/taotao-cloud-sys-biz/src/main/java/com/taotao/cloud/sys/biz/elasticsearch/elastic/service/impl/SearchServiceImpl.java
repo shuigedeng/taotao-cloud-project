@@ -1,6 +1,11 @@
 package com.taotao.cloud.sys.biz.elasticsearch.elastic.service.impl;
 
 
+import com.taotao.cloud.sys.biz.elasticsearch.elastic.service.SearchService;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.ElasticSearchRequest;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.FilterCommand;
+import com.taotao.cloud.sys.biz.elasticsearch.pagemodel.GeoDistance;
+import com.taotao.cloud.sys.biz.elasticsearch.util.ToolUtils;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,7 +22,7 @@ import org.elasticsearch.action.search.SearchScrollRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.DistanceUnit;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.Operator;
@@ -44,11 +49,6 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import boot.spring.elastic.service.SearchService;
-import boot.spring.pagemodel.ElasticSearchRequest;
-import boot.spring.pagemodel.FilterCommand;
-import boot.spring.pagemodel.GeoDistance;
-import boot.spring.util.ToolUtils;
 
 
 @Service
