@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.controller.tools;
+package com.taotao.cloud.sys.biz.service;
 
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.sys.api.dto.jvm.InvokeParam;

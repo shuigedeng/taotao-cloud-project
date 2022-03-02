@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-cron管理API", description = "工具管理-cron管理API")
+@Tag(name = "工具管理端-cron管理API", description = "工具管理端-cron管理API")
 @RequestMapping("/sys/tools/cron")
 public class CronController {
 

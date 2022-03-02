@@ -24,9 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-pdf管理API", description = "工具管理-pdf管理API")
+@Tag(name = "工具管理端-pdf管理API", description = "工具管理端-pdf管理API")
 @RequestMapping("/sys/tools/pdf")
-public class PdfToolsController {
+public class PdfController {
 
 	@Autowired
 	private FileUploaderUtils fileUploaderUtils;

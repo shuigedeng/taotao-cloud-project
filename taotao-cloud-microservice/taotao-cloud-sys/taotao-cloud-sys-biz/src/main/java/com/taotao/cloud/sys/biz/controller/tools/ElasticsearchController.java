@@ -16,9 +16,8 @@ import com.taotao.cloud.sys.api.dto.elasticsearch.pagemodel.RangeQuery;
 import com.taotao.cloud.sys.api.dto.elasticsearch.pagemodel.ResultData;
 import com.taotao.cloud.sys.api.dto.elasticsearch.po.Country;
 import com.taotao.cloud.sys.api.dto.elasticsearch.po.Sougoulog;
-import com.taotao.cloud.sys.biz.tools.core.dtos.param.SimpleConnectParam;
-import com.taotao.cloud.sys.biz.tools.core.service.connect.ConnectService;
 import com.taotao.cloud.sys.biz.forest.ClusterApis;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -60,12 +59,22 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.util.ResourceUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * ElasticsearchController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 16:31:03
+ */
+@Validated
 @RestController
-@RequestMapping("/elasticsearch")
+@Tag(name = "工具管理端-elasticsearch管理API", description = "工具管理端-elasticsearch管理API")
+@RequestMapping("/sys/tools/elasticsearch")
 public class ElasticsearchController {
 
     @Autowired

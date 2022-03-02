@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-代码生成管理API", description = "工具管理-代码生成管理API")
+@Tag(name = "工具管理端-代码生成管理API", description = "工具管理端-代码生成管理API")
 @RequestMapping("/sys/tools/generator")
 public class GeneratorController {
 

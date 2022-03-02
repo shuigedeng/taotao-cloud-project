@@ -9,6 +9,8 @@ import com.taotao.cloud.sys.api.dto.jvm.InvokeParam;
 import com.taotao.cloud.sys.api.dto.jvm.NameInfo;
 import com.taotao.cloud.sys.api.dto.jvm.ThreadPoolInfo;
 import com.taotao.cloud.sys.api.dto.jvm.VMParam;
+import com.taotao.cloud.sys.biz.service.DiagnosticCommandService;
+import com.taotao.cloud.sys.biz.service.MBeanMonitorService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.lang.management.ClassLoadingMXBean;
@@ -47,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-jvm管理API", description = "工具管理-jvm管理API")
+@Tag(name = "工具管理端-jvm管理API", description = "工具管理端-jvm管理API")
 @RequestMapping("/sys/tools/jvm")
 public class JvmController {
 

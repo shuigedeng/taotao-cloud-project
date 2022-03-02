@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-scheduled定时任务管理API", description = "工具管理-scheduled管理API")
+@Tag(name = "工具管理端-scheduled定时任务管理API", description = "工具管理端-scheduled管理API")
 @RequestMapping("/sys/tools/scheduled")
-public class ScheduledJobController {
+public class ScheduledController {
 
 	@Autowired(required = false)
 	private ScheduledManager scheduledManager;

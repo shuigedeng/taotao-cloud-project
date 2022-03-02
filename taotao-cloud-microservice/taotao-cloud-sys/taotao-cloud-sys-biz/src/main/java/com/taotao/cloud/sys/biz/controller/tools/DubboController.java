@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-dubbo管理API", description = "工具管理-dubbo管理API")
+@Tag(name = "工具管理端-dubbo管理API", description = "工具管理端-dubbo管理API")
 @RequestMapping("/sys/tools/dubbo")
 public class DubboController {
 

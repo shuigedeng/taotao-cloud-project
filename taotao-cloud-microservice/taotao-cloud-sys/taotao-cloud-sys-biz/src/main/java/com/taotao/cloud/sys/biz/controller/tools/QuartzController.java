@@ -45,15 +45,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/tools/quart")
-@Tag(name = "工具管理-quartz定时任务管理API", description = "工具管理-quartz定时任务管理API")
-public class QuartzJobController {
+@Tag(name = "工具管理端-quartz定时任务管理API", description = "工具管理端-quartz定时任务管理API")
+public class QuartzController {
 
 	private static final String ENTITY_NAME = "quartzJob";
 
 	private final IQuartzJobService IQuartzJobService;
 	private final IQuartzLogService IQuartzLogService;
 
-	public QuartzJobController(IQuartzJobService IQuartzJobService,
+	public QuartzController(IQuartzJobService IQuartzJobService,
 		IQuartzLogService IQuartzLogService) {
 		this.IQuartzJobService = IQuartzJobService;
 		this.IQuartzLogService = IQuartzLogService;

@@ -25,10 +25,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * AliPayController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 16:19:02
+ */
 @Validated
 @RestController
-@Tag(name = "工具管理-支付宝管理API", description = "工具管理-支付宝管理API")
+@Tag(name = "工具管理端-支付宝管理API", description = "工具管理端-支付宝管理API")
 @RequestMapping("/sys/tools/aliPay")
 public class AliPayController {
 

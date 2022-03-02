@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-kafka管理API", description = "工具管理-kafka管理API")
+@Tag(name = "工具管理端-kafka管理API", description = "工具管理端-kafka管理API")
 @RequestMapping("/sys/tools/kafka")
 public class KafkaController {
 

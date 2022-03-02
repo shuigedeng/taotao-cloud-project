@@ -27,7 +27,7 @@ import java.util.Set;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-zookeeper管理API", description = "工具管理-zookeeper管理API")
+@Tag(name = "工具管理端-zookeeper管理API", description = "工具管理端-zookeeper管理API")
 @RequestMapping("/sys/tools/zookeeper")
 public class ZookeeperController {
 

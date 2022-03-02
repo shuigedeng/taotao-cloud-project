@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-访问记录管理API", description = "工具管理-访问记录管理API")
+@Tag(name = "工具管理端-访问记录管理API", description = "工具管理端-访问记录管理API")
 @RequestMapping("/sys/tools/visits")
 public class VisitsController {
 
