@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.controller.tools;
 
-import com.taotao.cloud.sys.biz.tools.core.dtos.param.KafkaConnectParam;
 import com.taotao.cloud.sys.api.dto.kafka.BrokerInfo;
 import com.taotao.cloud.sys.api.dto.kafka.BrokerTopicMetrics;
 import com.taotao.cloud.sys.api.dto.kafka.ConsumerGroupInfo;
@@ -17,6 +16,7 @@ import com.taotao.cloud.sys.api.dto.kafka.TopicLogSize;
 import com.taotao.cloud.sys.api.dto.kafka.TopicOffset;
 import com.taotao.cloud.sys.biz.service.KafkaDataService;
 import com.taotao.cloud.sys.biz.service.KafkaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -39,30 +39,25 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/kafka")
+/**
+ * KafkaController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 15:52:39
+ */
 @Validated
+@RestController
+@Tag(name = "工具管理-kafka管理API", description = "工具管理-kafka管理API")
+@RequestMapping("/sys/tools/kafka")
 public class KafkaController {
+
     @Autowired
     private KafkaService kafkaService;
     @Autowired
     private KafkaDataService kafkaDataService;
 
     YamlPropertySourceLoader yamlPropertySourceLoader = new YamlPropertySourceLoader();
-
-    /**
-     * kafka 连接的创建需要依赖于 zookeeper
-     */
-    @PostMapping(value = "/connect/create",consumes = "application/yaml")
-    public void createConnect(@RequestBody String yamlConfig) throws IOException {
-        ByteArrayResource byteArrayResource = new ByteArrayResource(yamlConfig.getBytes());
-        List<PropertySource<?>> load = yamlPropertySourceLoader.load("a",byteArrayResource);
-        Iterable<ConfigurationPropertySource> from = ConfigurationPropertySources.from(load);
-        Binder binder = new Binder(from);
-        BindResult<KafkaConnectParam> bind = binder.bind("", KafkaConnectParam.class);
-        KafkaConnectParam kafkaConnectParam = bind.get();
-        kafkaService.createConnect(kafkaConnectParam);
-    }
 
     @PostMapping("/topic/create")
     public void createTopic(@NotNull String clusterName, @NotNull String topic, @Positive int partitions,@Positive int replication) throws InterruptedException, ExecutionException, IOException {

@@ -4,6 +4,7 @@ import com.taotao.cloud.sys.api.dto.zookeeper.PathFavorite;
 import com.taotao.cloud.sys.api.dto.zookeeper.ZooNodeACL;
 import com.taotao.cloud.sys.biz.service.ZookeeperExtendService;
 import com.taotao.cloud.sys.biz.service.ZookeeperService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,9 +18,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-@RestController
-@RequestMapping("/zookeeper")
+/**
+ * ZookeeperController
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-02 15:56:19
+ */
 @Validated
+@RestController
+@Tag(name = "工具管理-zookeeper管理API", description = "工具管理-zookeeper管理API")
+@RequestMapping("/sys/tools/zookeeper")
 public class ZookeeperController {
 
     @Autowired
