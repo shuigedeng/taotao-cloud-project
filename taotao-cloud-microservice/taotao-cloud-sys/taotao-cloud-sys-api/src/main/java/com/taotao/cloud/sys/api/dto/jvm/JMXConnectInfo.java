@@ -1,18 +1,19 @@
 package com.taotao.cloud.sys.api.dto.jvm;
 
 public class JMXConnectInfo {
-    /**
-     * 开启了JMX的主机:端口
-     */
-    private String jmxHostAndPort;
-    /**
-     * 用户名
-     */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
+
+	/**
+	 * 开启了JMX的主机:端口
+	 */
+	private String jmxHostAndPort;
+	/**
+	 * 用户名
+	 */
+	private String username;
+	/**
+	 * 密码
+	 */
+	private String password;
 
 	public String getJmxHostAndPort() {
 		return jmxHostAndPort;

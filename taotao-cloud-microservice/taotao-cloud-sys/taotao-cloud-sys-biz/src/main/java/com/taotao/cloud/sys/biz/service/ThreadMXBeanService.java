@@ -1,9 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.tools;
+package com.taotao.cloud.sys.biz.service;
 
 import com.sun.management.ThreadMXBean;
 import com.taotao.cloud.sys.api.dto.jvm.InvokeParam;
 import com.taotao.cloud.sys.api.dto.jvm.ThreadPoolInfo;
-import com.taotao.cloud.sys.biz.controller.tools.MBeanMonitorService;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;

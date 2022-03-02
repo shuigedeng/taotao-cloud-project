@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-mongo管理API", description = "工具管理-mongo管理API")
+@Tag(name = "工具管理端-mongo管理API", description = "工具管理端-mongo管理API")
 @RequestMapping("/sys/tools/mongo")
 public class MongoController {
 

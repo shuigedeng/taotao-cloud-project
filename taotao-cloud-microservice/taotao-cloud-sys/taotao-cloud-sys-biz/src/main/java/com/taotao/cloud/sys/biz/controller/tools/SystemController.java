@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-system管理API", description = "工具管理-system管理API")
+@Tag(name = "工具管理端-system管理API", description = "工具管理端-system管理API")
 @RequestMapping("/sys/tools/system")
 public class SystemController {
 

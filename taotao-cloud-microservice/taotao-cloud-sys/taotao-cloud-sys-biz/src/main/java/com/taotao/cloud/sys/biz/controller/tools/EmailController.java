@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Validated
 @RestController
-@Tag(name = "工具管理-邮件管理API", description = "工具管理-邮件管理API")
+@Tag(name = "工具管理端-邮件管理API", description = "工具管理端-邮件管理API")
 @RequestMapping("/sys/tools/email")
 public class EmailController {
 
