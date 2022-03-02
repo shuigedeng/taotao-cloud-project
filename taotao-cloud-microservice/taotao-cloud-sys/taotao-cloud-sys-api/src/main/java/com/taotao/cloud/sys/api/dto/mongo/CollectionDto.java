@@ -1,16 +1,13 @@
 
 package com.taotao.cloud.sys.api.dto.mongo;
 
-import com.mongodb.CommandResult;
-import lombok.Data;
 
 /**
  * 集合信息展示
  */
-@Data
 public class CollectionDto {
     private String collectionName;
-    private CommandResult stats;
+//    private CommandResult stats;
 //    private int documents;
 //    private int views;
 //    private int objects;
@@ -27,8 +24,15 @@ public class CollectionDto {
     public CollectionDto() {
     }
 
-    public CollectionDto(String collectionName, CommandResult stats) {
-        this.collectionName = collectionName;
-        this.stats = stats;
-    }
+	public CollectionDto(String collectionName) {
+		this.collectionName = collectionName;
+	}
+
+	public String getCollectionName() {
+		return collectionName;
+	}
+
+	public void setCollectionName(String collectionName) {
+		this.collectionName = collectionName;
+	}
 }
