@@ -25,7 +25,9 @@ dependencies {
     api 'com.github.qcloudsms:qcloudsms:1.0.6'
     api 'com.tencentcloudapi:tencentcloud-sdk-java-sms:3.1.458'
 
-    api 'com.qiniu:qiniu-java-sdk:7.9.3'
+    api('com.qiniu:qiniu-java-sdk:7.9.3') {
+        exclude group: 'org.projectlombok', module: 'lombok'
+    }
 
     api 'com.yunpian.sdk:yunpian-java-sdk:1.2.7'
 
