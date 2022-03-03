@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.web.validation.validator.EnumValueValidator;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;

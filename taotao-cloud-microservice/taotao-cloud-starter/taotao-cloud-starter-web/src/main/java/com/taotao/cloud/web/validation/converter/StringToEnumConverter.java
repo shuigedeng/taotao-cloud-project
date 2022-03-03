@@ -54,7 +54,7 @@ public class StringToEnumConverter<T extends BaseEnum> implements Converter<Stri
 	public T convert(String source) {
 		T t = enumMap.get(source);
 		if (ObjectUtil.isNull(t)) {
-			throw new IllegalArgumentException("无法匹配对应的枚举类型");
+			throw new IllegalArgumentException("无法匹配对应的类型");
 		}
 		return t;
 	}

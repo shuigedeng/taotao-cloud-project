@@ -24,9 +24,6 @@ public class RedisServiceImpl implements IRedisService {
 	@Autowired
 	private RedisRepository redisRepository;
 
-	//@Value("${loginCode.expiration}")
-	//private Long expiration;
-
 	@Override
 	public Page<RedisVo> findByKey(String key, Pageable pageable) {
 		List<RedisVo> redisVos = new ArrayList<>();
@@ -35,10 +32,10 @@ public class RedisServiceImpl implements IRedisService {
 		}
 		for (Object s : redisRepository.keys(key)) {
 			// 过滤掉权限的缓存
-			if (s.toString().indexOf("role::loadPermissionByUser") != -1
-				|| s.toString().indexOf("user::loadUserByUsername") != -1
-				|| s.toString().indexOf("wechat") != -1
-				|| s.toString().indexOf("wxpay") != -1
+			if (s.toString().contains("role::loadPermissionByUser")
+				|| s.toString().contains("user::loadUserByUsername")
+				|| s.toString().contains("wechat")
+				|| s.toString().contains("wxpay")
 				//|| s.toString().indexOf(ShopKeyUtils.getSiteUrl()) != -1
 			) {
 				continue;

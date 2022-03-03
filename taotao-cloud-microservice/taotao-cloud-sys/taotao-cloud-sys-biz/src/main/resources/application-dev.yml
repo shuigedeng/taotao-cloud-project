@@ -40,11 +40,6 @@ easy-es:
       id-type: auto # id生成策略 默认为auto
       field-strategy: not_empty # 字段更新策略 默认为not_null
 
-#redisson:
-#  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
-#  single-server-config:
-#    address: ${TAOTAO_CLOUD_REDIS_HOST:172.16.6.151}:${TAOTAO_CLOUD_REDIS_PORT:6379}
-
 redisson:
   # 单节点
   single_server_config:

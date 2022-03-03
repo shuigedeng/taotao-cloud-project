@@ -17,7 +17,6 @@ package com.taotao.cloud.web.validation.constraints;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.taotao.cloud.web.validation.validator.StatusValueValidator;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
