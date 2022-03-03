@@ -15,7 +15,6 @@
  */
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.web.validation.validator.JoinLengthValidator;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -45,7 +44,7 @@ public @interface JoinLength {
 
 	String symbol() default ",";
 
-	int limitSize();
+	int limitSize() default 5;
 
 	//分组
 	Class<?>[] groups() default {};

@@ -15,16 +15,23 @@
  */
 package com.taotao.cloud.web.validation.constraints;
 
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.taotao.cloud.web.validation.validator.DateValueValidator;
+import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.web.validation.constraints.DateValue.List;
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 日期格式的校验，根据format参数的格式校验
@@ -41,11 +48,12 @@ import javax.validation.Payload;
  */
 @Documented
 @Constraint(validatedBy = DateValueValidator.class)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@Retention(RetentionPolicy.RUNTIME)
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
+@Retention(RUNTIME)
+@Repeatable(List.class)
 public @interface DateValue {
 
-	String message() default "日期格式不正确，正确格式应为yyyy-MM-dd";
+	String message() default "日期格式不正确,格式应该为{format}";
 
 	Class[] groups() default {};
 
@@ -54,16 +62,9 @@ public @interface DateValue {
 	/**
 	 * 日期校验的格式，默认 yyyy-MM-dd
 	 */
-	String format() default "yyyy-MM-dd";
+	String format() default DateUtil.PATTERN_DATE;
 
-	/**
-	 * 是否必填
-	 * <p>
-	 * 如果必填，在校验的时候本字段没值就会报错
-	 */
-	boolean required() default true;
-
-	@Target({ElementType.FIELD, ElementType.PARAMETER})
+	@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {

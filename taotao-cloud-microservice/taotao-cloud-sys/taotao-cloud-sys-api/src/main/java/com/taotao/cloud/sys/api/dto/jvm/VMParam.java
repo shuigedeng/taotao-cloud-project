@@ -1,8 +1,6 @@
 package com.taotao.cloud.sys.api.dto.jvm;
 
-import lombok.Data;
 
-@Data
 public class VMParam {
     private String key;
     private String value;

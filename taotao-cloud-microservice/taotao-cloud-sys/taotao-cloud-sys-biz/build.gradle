@@ -8,6 +8,8 @@ dependencies {
 
     implementation 'com.google.protobuf:protobuf-java:3.18.1'
 
+    implementation "com.belerweb:pinyin4j:2.5.0"
+
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
     annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"

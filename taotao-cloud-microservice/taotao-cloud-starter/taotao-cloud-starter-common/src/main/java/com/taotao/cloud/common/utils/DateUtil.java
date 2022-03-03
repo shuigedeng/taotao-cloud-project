@@ -985,7 +985,6 @@ public class DateUtil {
 		dateFormat.setLenient(false);
 		try {
 			date = dateFormat.parse(dateStr);
-
 		} catch (Exception e) {
 			LogUtil.error("DateUtil error", e);
 		}

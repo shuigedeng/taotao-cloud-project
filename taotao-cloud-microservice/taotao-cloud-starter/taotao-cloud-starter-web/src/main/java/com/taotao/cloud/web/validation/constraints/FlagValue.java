@@ -17,7 +17,6 @@ package com.taotao.cloud.web.validation.constraints;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.taotao.cloud.web.validation.validator.FlagValueValidator;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -45,9 +44,6 @@ public @interface FlagValue {
 
 	Class<? extends Payload>[] payload() default {};
 
-	/**
-	 * 是否必填 如果必填，在校验的时候本字段没值就会报错
-	 */
 	boolean required() default true;
 
 	@Target({ElementType.FIELD, ElementType.PARAMETER})

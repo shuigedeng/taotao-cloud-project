@@ -55,7 +55,7 @@ public class String2DateConverter extends BaseDateConverter<Date> implements
 	/**
 	 * FORMAT
 	 */
-	protected static final Map<String, String> FORMAT = new LinkedHashMap(15);
+	protected static final Map<String, String> FORMAT = new LinkedHashMap<>(15);
 
 	static {
 		FORMAT.put(DEFAULT_YEAR_FORMAT, "^\\d{4}");
