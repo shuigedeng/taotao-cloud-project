@@ -22,6 +22,24 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
+easy-es:
+  enable: true # 是否开启EE自动配置
+  address : 127.0.0.1:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
+  schema: http # 默认为http
+  username: elastic #如果无账号密码则可不配置此行
+  password: WG7WVmuNMtM4GwNYkyWH #如果无账号密码则可不配置此行
+  connectTimeout: 5000 # 连接超时时间 单位:ms
+  socketTimeout: 5000 # 通信超时时间 单位:ms
+  requestTimeout: 5000 # 请求超时时间 单位:ms
+  connectionRequestTimeout: 5000 # 连接请求超时时间 单位:ms
+  maxConnTotal: 100 # 最大连接数 单位:个
+  maxConnPerRoute: 100 # 最大连接路由数 单位:个
+  global-config:
+    db-config:
+      table-prefix: daily_ # 索引前缀,可用于区分环境  默认为空
+      id-type: auto # id生成策略 默认为auto
+      field-strategy: not_empty # 字段更新策略 默认为not_null
+
 #redisson:
 #  password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
 #  single-server-config:
