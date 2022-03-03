@@ -27,7 +27,7 @@ buildscript {
         springDataCommonsVersion = '2.4.5'
         springKafkaVersion = '2.6.5'
 
-        fasterxmlVersion = '2.11.3'
+        fasterxmlVersion = '2.13.1'
         transmittableVersion = '2.12.1'
         slf4jVersion = '1.7.30'
         easypoiVersion = '4.3.0'
