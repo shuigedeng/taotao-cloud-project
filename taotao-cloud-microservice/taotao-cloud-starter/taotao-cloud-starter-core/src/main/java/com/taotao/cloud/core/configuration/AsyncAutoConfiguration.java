@@ -77,7 +77,6 @@ public class AsyncAutoConfiguration implements AsyncConfigurer, InitializingBean
 	}
 
 	@Override
-	@Bean
 	public AsyncThreadPoolTaskExecutor getAsyncExecutor() {
 		//AsyncThreadPoolTaskExecutor taskExecutor = ContextUtil.getBean(
 		//	AsyncThreadPoolTaskExecutor.class, true);
