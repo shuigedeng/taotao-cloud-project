@@ -23,7 +23,7 @@ jasypt:
       suffix: "]"
 
 easy-es:
-  enable: false # 是否开启EE自动配置
+  enable: true # 是否开启EE自动配置
   address: 172.16.6.151:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   schema: http # 默认为http
   #如果无账号密码则可不配置此行
@@ -973,6 +973,7 @@ logging:
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
     org.springframework.cloud.openfeign: off
+    org.elasticsearch.client: debug
 
 springdoc:
   packages-to-exclude:

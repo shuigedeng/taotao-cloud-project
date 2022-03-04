@@ -71,7 +71,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
+	@ConditionalOnBean(RestHighLevelClient.class)
 	public ElasticsearchRestTemplate elasticsearchRestTemplate(RestHighLevelClient restHighLevelClient) {
 		return new ElasticsearchRestTemplate(restHighLevelClient);
 	}
@@ -82,7 +82,7 @@ public class ElasticsearchAutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	@ConditionalOnBean
+	@ConditionalOnBean(ElasticsearchRestTemplate.class)
 	public ISearchService searchService(ElasticsearchRestTemplate elasticsearchRestTemplate) {
 		return new SearchServiceImpl(elasticsearchRestTemplate);
 	}
