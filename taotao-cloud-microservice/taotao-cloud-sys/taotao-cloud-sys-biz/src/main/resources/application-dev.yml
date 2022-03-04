@@ -23,11 +23,13 @@ jasypt:
       suffix: "]"
 
 easy-es:
-  enable: true # 是否开启EE自动配置
-  address : 127.0.0.1:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
+  enable: false # 是否开启EE自动配置
+  address: 172.16.6.151:9200 # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
   schema: http # 默认为http
-  username: elastic #如果无账号密码则可不配置此行
-  password: WG7WVmuNMtM4GwNYkyWH #如果无账号密码则可不配置此行
+  #如果无账号密码则可不配置此行
+  username:
+  #如果无账号密码则可不配置此行
+  password:
   connectTimeout: 5000 # 连接超时时间 单位:ms
   socketTimeout: 5000 # 通信超时时间 单位:ms
   requestTimeout: 5000 # 请求超时时间 单位:ms
@@ -484,9 +486,8 @@ spring:
         codec: !<org.redisson.codec.MarshallingCodec> {}
         transportMode: "NIO"
 
-
   elasticsearch:
-    uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+    uris: ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:http://172.16.6.151}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
     password:
     username:
   data:
