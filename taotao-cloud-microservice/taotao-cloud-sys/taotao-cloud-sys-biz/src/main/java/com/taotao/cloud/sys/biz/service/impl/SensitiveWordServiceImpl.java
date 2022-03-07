@@ -10,6 +10,7 @@ import com.taotao.cloud.sys.biz.service.ISensitiveWordService;
 import com.taotao.cloud.web.base.service.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

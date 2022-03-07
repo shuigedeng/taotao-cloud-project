@@ -24,7 +24,6 @@ dependencies {
     api('io.github.lyh200:dynamic-tp-spring-cloud-starter-nacos:1.0.1') {
         exclude group: 'org.projectlombok', module: 'lombok'
     }
-    api 'com.dtflys.forest:forest-spring-boot-starter:1.5.19'
     api 'joda-time:joda-time:2.10.13'
 
     api 'org.anarres.lzo:lzo-core:1.0.6'

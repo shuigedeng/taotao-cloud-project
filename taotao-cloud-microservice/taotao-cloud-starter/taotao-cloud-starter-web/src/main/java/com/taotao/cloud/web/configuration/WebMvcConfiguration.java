@@ -59,6 +59,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import okhttp3.OkHttpClient;
 import org.hibernate.validator.HibernateValidator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.InitializingBean;
@@ -67,6 +68,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -222,6 +224,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer, InitializingBean {
 	@Override
 	public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
 
+	}
+
+	@Bean
+	@LoadBalanced
+	public OkHttpClient.Builder builder() {
+		return new OkHttpClient.Builder();
 	}
 
 //	@Bean
