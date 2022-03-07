@@ -7,8 +7,19 @@ dependencies {
     implementation 'io.soabase.record-builder:record-builder-core:29'
 
     implementation 'com.google.protobuf:protobuf-java:3.18.1'
+    implementation 'com.google.protobuf:protobuf-java-util:3.11.0'
+    implementation 'com.googlecode.protobuf-java-format:protobuf-java-format:1.2'
+
+    implementation 'io.protostuff:protostuff-core:1.4.0'
+    implementation 'io.protostuff:protostuff-runtime:1.4.0'
 
     implementation "com.belerweb:pinyin4j:2.5.0"
+
+    implementation 'com.dtflys.forest:forest-spring-boot-starter:1.5.19'
+    implementation 'com.github.lianjiatech:retrofit-spring-boot-starter:2.2.21'
+
+    implementation 'org.springframework.cloud:spring-cloud-square-retrofit:0.4.1'
+    implementation 'org.springframework.cloud:spring-cloud-square-okhttp:0.4.1'
 
     annotationProcessor 'io.soabase.record-builder:record-builder-processor:29'
     annotationProcessor 'com.querydsl:querydsl-apt:4.3.1:jpa'
