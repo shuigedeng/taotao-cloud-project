@@ -11,12 +11,6 @@ import java.util.Arrays;
 
 /**
  * <p> 自定义参数化类型实现 </p>
- *
- * <pre> Created: 2019/9/9 8:19 PM  </pre>
- * <pre> Project: heaven  </pre>
- *
- * @author houbinbin
- * @since 0.1.26
  */
 public class ParameterizedTypeImpl implements ParameterizedType {
 

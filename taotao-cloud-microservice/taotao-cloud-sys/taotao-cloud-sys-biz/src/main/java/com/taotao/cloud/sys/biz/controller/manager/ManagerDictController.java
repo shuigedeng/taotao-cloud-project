@@ -25,7 +25,6 @@ import com.taotao.cloud.sys.biz.entity.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import com.taotao.cloud.web.utils.CollectionUtil;
-import groovy.util.logging.Log;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collection;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiImplicitParam;

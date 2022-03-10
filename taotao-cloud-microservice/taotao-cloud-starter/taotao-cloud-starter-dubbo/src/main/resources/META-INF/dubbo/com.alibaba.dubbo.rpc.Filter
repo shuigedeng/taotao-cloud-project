@@ -1,1 +1,2 @@
-logTrace=com.taotao.cloud.dubbo.filter.DubboTraceFilter
+dubboTraceFilter=com.taotao.cloud.dubbo.filter.DubboTraceFilter
+dubboValidationFilter=com.taotao.cloud.dubbo.filter.DubboValidationFilter

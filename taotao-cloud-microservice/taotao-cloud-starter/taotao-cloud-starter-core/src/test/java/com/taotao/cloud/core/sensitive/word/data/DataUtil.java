@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import com.github.houbb.heaven.util.io.FileUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.core.heaven.util.io.FileUtil;
+import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 

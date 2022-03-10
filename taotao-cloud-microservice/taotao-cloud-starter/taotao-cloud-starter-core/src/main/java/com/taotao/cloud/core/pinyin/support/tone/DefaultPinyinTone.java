@@ -142,7 +142,8 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                 final long startTime = System.currentTimeMillis();
                 List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
                 // 处理自定义字典
-                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_DEFINE);
+                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.
+	                PINYIN_DICT_PHRASE_DEFINE);
                 lines.addAll(defineLines);
                 phraseMap = Guavas.newHashMap(lines.size());
 

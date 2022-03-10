@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.pinyin.util;
 
-import com.github.houbb.heaven.util.lang.StringUtil;
+import com.taotao.cloud.core.heaven.util.lang.StringUtil;
 import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;

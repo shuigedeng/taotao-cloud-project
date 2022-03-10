@@ -4,17 +4,14 @@ import com.google.common.collect.Range;
 import com.taotao.cloud.common.utils.DateUtil;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
-import org.apache.shardingsphere.api.sharding.standard.RangeShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
 
 /**
  * 按创建时间年份分库
  */
-public class CreateTimeShardingDatabaseAlgorithm implements PreciseShardingAlgorithm<Long>,
-	RangeShardingAlgorithm {
-
+public class CreateTimeShardingDatabaseAlgorithm implements StandardShardingAlgorithm<Long> {
 
 	@Override
 	public String doSharding(Collection<String> collection,
@@ -39,6 +36,16 @@ public class CreateTimeShardingDatabaseAlgorithm implements PreciseShardingAlgor
 			collect.add("data" + i);
 		}
 		return collect;
+	}
+
+	@Override
+	public void init() {
+
+	}
+
+	@Override
+	public String getType() {
+		return null;
 	}
 }
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.sensitive.bs;
 
-import com.github.houbb.deep.copy.fastjson.FastJsonDeepCopy;
+import com.taotao.cloud.core.heaven.deepcopy.FastJsonDeepCopy;
 import com.taotao.cloud.core.sensitive.sensitive.core.DataPrepareTest;
 import com.taotao.cloud.core.sensitive.sensitive.core.bs.SensitiveBs;
 import com.taotao.cloud.core.sensitive.sensitive.model.sensitive.User;

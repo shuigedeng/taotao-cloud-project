@@ -30,13 +30,13 @@ public class QuartzJobInit implements ApplicationRunner {
 	 */
 	@Override
 	public void run(ApplicationArguments applicationArguments) {
-		System.out.println("--------------------注入定时任务---------------------");
-		List<QuartzJob> quartzJobs = IQuartzJobService.findByIsPauseIsFalse();
-		List<QuartzJobModel> quartzJobModels = new ArrayList<>();
-
-		cn.hutool.core.bean.BeanUtil.copyProperties(quartzJobs, quartzJobModels);
-		quartzJobModels.forEach(quartzManager::addJob);
-
-		System.out.println("--------------------定时任务注入完成---------------------");
+		//System.out.println("--------------------注入定时任务---------------------");
+		//List<QuartzJob> quartzJobs = IQuartzJobService.findByIsPauseIsFalse();
+		//List<QuartzJobModel> quartzJobModels = new ArrayList<>();
+		//
+		//cn.hutool.core.bean.BeanUtil.copyProperties(quartzJobs, quartzJobModels);
+		//quartzJobModels.forEach(quartzManager::addJob);
+		//
+		//System.out.println("--------------------定时任务注入完成---------------------");
 	}
 }

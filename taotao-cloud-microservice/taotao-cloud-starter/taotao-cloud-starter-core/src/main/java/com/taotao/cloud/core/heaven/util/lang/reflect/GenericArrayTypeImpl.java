@@ -10,12 +10,6 @@ import java.lang.reflect.Type;
 
 /**
  * <p> 泛型数组类型 </p>
- *
- * <pre> Created: 2019/9/9 8:20 PM  </pre>
- * <pre> Project: heaven  </pre>
- *
- * @author houbinbin
- * @since 0.1.26
  */
 public class GenericArrayTypeImpl implements GenericArrayType {
 

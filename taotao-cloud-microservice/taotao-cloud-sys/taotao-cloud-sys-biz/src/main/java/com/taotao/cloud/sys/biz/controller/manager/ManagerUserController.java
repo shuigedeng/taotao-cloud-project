@@ -15,12 +15,16 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
+import cn.hutool.core.util.ReflectUtil;
+import com.taotao.cloud.common.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.utils.ReflectionUtil;
 import com.taotao.cloud.common.utils.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
+import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.api.dto.user.UserSaveDTO;
 import com.taotao.cloud.sys.api.dto.user.UserUpdateDTO;
@@ -32,11 +36,13 @@ import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -140,14 +146,6 @@ public class ManagerUserController extends
 	}
 
 
-	/**
-	 * 根据用户id更新角色信息(用户分配角色)
-	 *
-	 * @param roleIds 角色id列表
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 16:41:06
-	 */
 	@Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "根据用户id更新角色信息(用户分配角色)")
 	@RequestLogger(description = "根据用户id更新角色信息(用户分配角色)")
 	@PreAuthorize("hasAuthority('sys:user:role')")
@@ -160,5 +158,35 @@ public class ManagerUserController extends
 		return success(service().updateUserRoles(userId, roleIds));
 	}
 
+	@PostMapping("/user/test/save")
+	@NotAuth
+	public Result<Boolean> testSave(
+		@Parameter(description = "新增DTO", required = true)
+		@RequestBody @Validated UserSaveDTO saveDTO) {
+		User user = new User();
+		BeanUtil.copy(saveDTO, user);
+		user.setAccount("sdfasfd");
+		user.setNickname("sdfasfd");
+		user.setUsername("sdfasfd");
+		user.setPassword("xxx");
+		user.setMobile("123455");
+		user.setPhone("123455");
+		user.setSex(0);
+		user.setEmail("sdfasdf");
+		user.setBirthday("sdfasdf");
+		user.setDeptId(1L);
+		user.setJobId(2L);
+		user.setStatus(1);
+		user.setTenantId("sdfasdf");
+		service().im().insert(user);
+		return Result.success(true);
+	}
+
+	@GetMapping("/user/test/get")
+	@NotAuth
+	public Result<List<User>> testGet() {
+		List<User> all = service().ir().findAll();
+		return Result.success(all);
+	}
 }
 

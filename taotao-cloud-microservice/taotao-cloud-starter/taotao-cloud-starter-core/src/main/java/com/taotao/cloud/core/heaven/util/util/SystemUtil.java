@@ -10,12 +10,6 @@ import com.taotao.cloud.core.heaven.constant.SystemConst;
 
 /**
  * <p> 系统工具类 </p>
- *
- * <pre> Created: 2019/9/2 8:44 PM  </pre>
- * <pre> Project: heaven  </pre>
- *
- * @author houbinbin
- * @since 0.1.23
  */
 public final class SystemUtil {
 

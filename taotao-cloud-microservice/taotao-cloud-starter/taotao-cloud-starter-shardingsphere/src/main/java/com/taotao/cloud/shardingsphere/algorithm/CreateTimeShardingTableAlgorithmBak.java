@@ -3,16 +3,14 @@ package com.taotao.cloud.shardingsphere.algorithm;
 import com.taotao.cloud.common.utils.DateUtil;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
-import org.apache.shardingsphere.api.sharding.standard.RangeShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
 
 /**
  * 按创建时间月份分表
  */
-public class CreateTimeShardingTableAlgorithmBak implements PreciseShardingAlgorithm<Long>,
-	RangeShardingAlgorithm {
+public class CreateTimeShardingTableAlgorithmBak implements StandardShardingAlgorithm<Long> {
 
 
 	@Override
@@ -37,6 +35,16 @@ public class CreateTimeShardingTableAlgorithmBak implements PreciseShardingAlgor
 			collect.add("t_order_" + i);
 		}
 		return collect;
+	}
+
+	@Override
+	public void init() {
+
+	}
+
+	@Override
+	public String getType() {
+		return null;
 	}
 }
 
