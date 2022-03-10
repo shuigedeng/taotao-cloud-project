@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.tuple;
+package com.taotao.cloud.common.support.tuple.tuple;
 
 /**
  * 表示有0个元素的元组类型

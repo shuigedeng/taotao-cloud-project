@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.utils.base64;
+package com.taotao.cloud.common.utils.secure;
 
 import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.web.multipart.MultipartFile;
