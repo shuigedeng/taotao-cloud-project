@@ -1,4 +1,4 @@
-package com.taotao.cloud.core.tuple;
+package com.taotao.cloud.common.support.tuple.tuple;
 
 import java.util.Arrays;
 import java.util.Comparator;

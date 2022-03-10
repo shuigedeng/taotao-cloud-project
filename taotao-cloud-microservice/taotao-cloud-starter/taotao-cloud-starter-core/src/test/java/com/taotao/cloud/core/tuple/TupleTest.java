@@ -1,5 +1,10 @@
 package com.taotao.cloud.core.tuple;
 
+import com.taotao.cloud.common.support.tuple.tuple.Tuple0;
+import com.taotao.cloud.common.support.tuple.tuple.Tuple1;
+import com.taotao.cloud.common.support.tuple.tuple.Tuple2;
+import com.taotao.cloud.common.support.tuple.tuple.Tuple3;
+import com.taotao.cloud.common.support.tuple.tuple.TupleN;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

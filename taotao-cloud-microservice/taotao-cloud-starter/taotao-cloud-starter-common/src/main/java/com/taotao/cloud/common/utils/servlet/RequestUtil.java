@@ -259,7 +259,7 @@ public class RequestUtil {
 	 * @since 2021-09-02 20:55:03
 	 */
 	public static String getBodyString(ServerHttpRequest serverHttpRequest) {
-		HttpMessageReader<byte[]> httpMessageReader = new DecoderHttpMessageReader(
+		HttpMessageReader<byte[]> httpMessageReader = new DecoderHttpMessageReader<>(
 			new ByteArrayDecoder());
 		ResolvableType resolvableType = ResolvableType.forClass(byte[].class);
 		Mono<byte[]> mono = httpMessageReader

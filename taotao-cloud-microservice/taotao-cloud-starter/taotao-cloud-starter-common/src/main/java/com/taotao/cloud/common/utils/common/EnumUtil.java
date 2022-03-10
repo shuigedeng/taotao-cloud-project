@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.common.utils.enums;
+package com.taotao.cloud.common.utils.common;
 
 /**
  * EnumUtil

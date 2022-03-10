@@ -1,4 +1,4 @@
-package com.taotao.cloud.common.utils.base64;
+package com.taotao.cloud.common.utils.secure;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
