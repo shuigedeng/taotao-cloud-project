@@ -20,7 +20,7 @@ import com.taotao.cloud.canal.model.SimpleCanalClient;
 import com.taotao.cloud.canal.properties.CanalProperties;
 import com.taotao.cloud.canal.runner.CanalApplicationRunner;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

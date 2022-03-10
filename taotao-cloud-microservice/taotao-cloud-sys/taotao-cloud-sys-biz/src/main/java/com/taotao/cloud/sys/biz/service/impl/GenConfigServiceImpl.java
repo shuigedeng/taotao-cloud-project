@@ -6,7 +6,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
 import com.taotao.cloud.sys.biz.mapper.IGenConfigMapper;
 import com.taotao.cloud.sys.biz.service.IGenConfigService;

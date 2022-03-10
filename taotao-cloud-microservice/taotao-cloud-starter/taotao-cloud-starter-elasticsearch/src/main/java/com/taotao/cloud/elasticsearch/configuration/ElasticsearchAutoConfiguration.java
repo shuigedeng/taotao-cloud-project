@@ -16,7 +16,7 @@
 package com.taotao.cloud.elasticsearch.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.elasticsearch.properties.ElasticsearchProperties;
 import com.taotao.cloud.elasticsearch.properties.RestClientPoolProperties;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
@@ -31,7 +31,6 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientProperties;
 import org.springframework.boot.autoconfigure.elasticsearch.RestClientBuilderCustomizer;

@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.dingtalk.properties;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.InvalidPropertiesFormatException;
 import com.taotao.cloud.dingtalk.utils.ConfigTools;

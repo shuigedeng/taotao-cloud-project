@@ -6,13 +6,8 @@ package com.taotao.cloud.web.quartz;
 
 import static com.taotao.cloud.web.configuration.QuartzConfiguration.EXECUTOR;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Objects;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;

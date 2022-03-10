@@ -1,7 +1,7 @@
 package com.taotao.cloud.store.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.product.api.dto.ProductDTO;
 import com.taotao.cloud.product.api.vo.ProductVO;
 import com.taotao.cloud.store.api.feign.RemoteProductService;

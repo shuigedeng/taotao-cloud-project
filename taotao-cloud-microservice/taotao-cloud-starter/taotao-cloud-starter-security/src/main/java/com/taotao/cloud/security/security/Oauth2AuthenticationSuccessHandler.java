@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.security.security;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

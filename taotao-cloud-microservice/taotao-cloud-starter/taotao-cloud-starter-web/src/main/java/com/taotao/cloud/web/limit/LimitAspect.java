@@ -18,7 +18,7 @@ package com.taotao.cloud.web.limit;
 import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.common.utils.StringUtils;
 import com.google.common.collect.ImmutableList;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;

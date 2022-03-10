@@ -1,6 +1,6 @@
 package com.taotao.cloud.media.biz.media.thread;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.media.biz.media.common.ClientType;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.service.MediaService;

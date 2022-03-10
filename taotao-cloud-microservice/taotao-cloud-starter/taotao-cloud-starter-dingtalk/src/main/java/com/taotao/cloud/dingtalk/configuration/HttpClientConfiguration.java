@@ -16,18 +16,14 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
-import com.taotao.cloud.dingtalk.properties.DingerProperties;
 import com.taotao.cloud.dingtalk.properties.HttpClientProperties;
-import com.taotao.cloud.dingtalk.properties.ThreadPoolProperties;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.DingerHttpTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

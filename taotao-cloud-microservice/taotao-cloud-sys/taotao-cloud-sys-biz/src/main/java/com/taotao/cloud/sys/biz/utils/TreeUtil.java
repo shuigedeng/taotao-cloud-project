@@ -16,9 +16,8 @@
 package com.taotao.cloud.sys.biz.utils;
 
 import cn.hutool.core.io.FileUtil;
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.tree.TreeNode;
-import com.taotao.cloud.common.utils.JsonUtil;
 import com.taotao.cloud.sys.api.bo.menu.MenuBO;
 import com.taotao.cloud.sys.api.enums.MenuTypeEnum;
 import com.taotao.cloud.sys.api.vo.menu.MenuMetaVO;

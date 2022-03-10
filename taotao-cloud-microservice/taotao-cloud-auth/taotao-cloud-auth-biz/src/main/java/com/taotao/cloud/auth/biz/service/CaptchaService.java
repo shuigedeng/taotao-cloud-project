@@ -17,8 +17,8 @@ package com.taotao.cloud.auth.biz.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.CaptchaUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.common.CaptchaUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.wf.captcha.ArithmeticCaptcha;

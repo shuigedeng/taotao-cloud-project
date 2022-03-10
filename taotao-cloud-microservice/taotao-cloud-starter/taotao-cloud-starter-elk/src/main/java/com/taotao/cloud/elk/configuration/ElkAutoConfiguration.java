@@ -21,7 +21,7 @@ import ch.qos.logback.core.encoder.Encoder;
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.elk.filter.LogStatisticsFilter;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import com.taotao.cloud.elk.properties.ElkProperties;

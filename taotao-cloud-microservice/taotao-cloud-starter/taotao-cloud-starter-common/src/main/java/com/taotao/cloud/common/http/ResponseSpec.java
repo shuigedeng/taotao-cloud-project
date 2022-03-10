@@ -19,7 +19,7 @@ package com.taotao.cloud.common.http;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.type.CollectionLikeType;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import okhttp3.*;
 
 import javax.annotation.Nullable;

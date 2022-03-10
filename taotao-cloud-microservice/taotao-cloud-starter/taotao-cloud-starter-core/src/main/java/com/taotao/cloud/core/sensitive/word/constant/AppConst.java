@@ -1,12 +1,5 @@
 package com.taotao.cloud.core.sensitive.word.constant;
 
-/**
- * <p> project: sensitive-word-AppConst </p>
- * <p> create on 2020/1/7 23:39 </p>
- *
- * @author Administrator
- * @since 0.0.1
- */
 public final class AppConst {
 
     private AppConst(){}

@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import java.io.Closeable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

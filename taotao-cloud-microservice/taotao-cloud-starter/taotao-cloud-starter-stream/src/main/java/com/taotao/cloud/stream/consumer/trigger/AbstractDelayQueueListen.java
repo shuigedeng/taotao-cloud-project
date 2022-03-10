@@ -1,15 +1,11 @@
 package com.taotao.cloud.stream.consumer.trigger;
 
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.data.redis.core.DefaultTypedTuple;
-import org.springframework.util.CollectionUtils;
 
 /**
  * 延时队列工厂

@@ -1,17 +1,10 @@
 package com.taotao.cloud.core.sensitive.word.utils;
 
 
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
-import com.taotao.cloud.core.heaven.util.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.guava.Guavas;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import java.util.Map;
 
-/**
- * <p> project: sensitive-word-NumUtils </p>
- * <p> create on 2020/1/8 22:18 </p>
- *
- * @author Administrator
- * @since 0.0.4
- */
 public final class CharUtils {
 
     private CharUtils() {

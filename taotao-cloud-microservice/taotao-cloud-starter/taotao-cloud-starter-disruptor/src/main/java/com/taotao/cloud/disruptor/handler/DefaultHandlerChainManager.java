@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.util.StringUtils;
 import java.util.Collections;

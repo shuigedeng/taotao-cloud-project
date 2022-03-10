@@ -17,7 +17,7 @@ package com.taotao.cloud.dingtalk.model;
 
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGERDEFINITION_ERROR;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import java.util.HashMap;
 import java.util.Map;

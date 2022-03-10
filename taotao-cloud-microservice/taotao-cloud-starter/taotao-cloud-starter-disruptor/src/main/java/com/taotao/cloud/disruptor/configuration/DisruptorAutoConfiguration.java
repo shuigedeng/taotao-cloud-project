@@ -24,7 +24,7 @@ import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.annotation.EventRule;
 import com.taotao.cloud.disruptor.context.DisruptorEventAwareProcessor;
 import com.taotao.cloud.disruptor.context.DisruptorTemplate;

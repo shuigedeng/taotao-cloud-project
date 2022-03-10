@@ -2,7 +2,7 @@ package com.taotao.cloud.web.sign.advice;
 
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.sign.annotation.DecryptBody;
 import com.taotao.cloud.web.sign.bean.DecryptAnnotationInfoBean;
 import com.taotao.cloud.web.sign.bean.DecryptHttpInputMessage;

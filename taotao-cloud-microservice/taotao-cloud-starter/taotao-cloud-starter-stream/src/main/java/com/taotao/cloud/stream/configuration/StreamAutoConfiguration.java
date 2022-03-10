@@ -1,6 +1,6 @@
 package com.taotao.cloud.stream.configuration;
 
-import com.taotao.cloud.common.factory.YamlPropertySourceFactory;
+import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 

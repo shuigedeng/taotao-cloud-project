@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.Exceptions;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class ExceptionsTest {
 
 	@Test(expected = IOException.class)
 	public void testIOException() {
-		throw Exceptions.unchecked(new IOException());
+		throw ExceptionUtil.unchecked(new IOException());
 	}
 
 	@Test(expected = IOException.class)

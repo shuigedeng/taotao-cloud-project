@@ -16,8 +16,8 @@
 package com.taotao.cloud.health.dump;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.health.exception.HealthException;
 import com.taotao.cloud.health.utils.ProcessUtils;
 import java.io.BufferedInputStream;

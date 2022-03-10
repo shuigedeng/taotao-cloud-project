@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.web.validation.converter;
 
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_EN;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_FORMAT_MATCHES;
 
 import org.springframework.core.convert.converter.Converter;
 

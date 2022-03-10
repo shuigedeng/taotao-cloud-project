@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.laytpl.properties;
 
-import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 

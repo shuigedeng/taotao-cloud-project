@@ -16,8 +16,8 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.TraceUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

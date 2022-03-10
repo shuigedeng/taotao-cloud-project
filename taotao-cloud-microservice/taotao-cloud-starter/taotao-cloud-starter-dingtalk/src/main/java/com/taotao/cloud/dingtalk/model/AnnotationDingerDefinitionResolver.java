@@ -21,7 +21,7 @@ import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.LINK_METHOD_PARAM_EX
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsGenericType;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.methodParamsType;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.annatations.DingerImageText;
 import com.taotao.cloud.dingtalk.annatations.DingerLink;
 import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;

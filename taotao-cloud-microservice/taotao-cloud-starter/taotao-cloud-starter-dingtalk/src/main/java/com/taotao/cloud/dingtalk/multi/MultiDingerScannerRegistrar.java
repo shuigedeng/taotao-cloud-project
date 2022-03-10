@@ -20,7 +20,7 @@ import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.MULTIDINGER_ALGORITH
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.MULTIDINGER_ANNOTATTION_EXCEPTION;
 import static com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer.GLOABL_KEY;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.enums.DingerType;

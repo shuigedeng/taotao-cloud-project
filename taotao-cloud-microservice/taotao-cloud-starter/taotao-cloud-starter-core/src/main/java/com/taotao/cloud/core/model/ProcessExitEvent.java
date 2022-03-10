@@ -17,10 +17,10 @@ package com.taotao.cloud.core.model;
 
 
 import com.taotao.cloud.common.model.Callable;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.common.model.Callable.Action0;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.common.utils.PropertyUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 

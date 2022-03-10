@@ -1,11 +1,9 @@
 package com.taotao.cloud.core.pinyin.util;
 
-import com.taotao.cloud.core.heaven.util.lang.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.core.pinyin.constant.enums.PinyinStyleEnum;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 /**
  * @author binbin.hou

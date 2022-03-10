@@ -1,7 +1,7 @@
 
 package com.taotao.cloud.redis.redisson;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.redisson.api.RBlockingDeque;

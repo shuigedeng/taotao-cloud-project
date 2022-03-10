@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.delay.config;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.delay.message.DefaultRedissonMessageConverter;
 import com.taotao.cloud.redis.delay.message.MessageConverter;
 import com.taotao.cloud.redis.delay.message.QueueMessage;

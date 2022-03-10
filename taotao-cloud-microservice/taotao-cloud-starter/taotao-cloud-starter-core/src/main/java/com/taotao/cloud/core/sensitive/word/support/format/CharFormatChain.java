@@ -1,9 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.format;
 
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 /**
  * 格式化责任链
  */
-@ThreadSafe
 public class CharFormatChain implements ICharFormat {
 
     @Override

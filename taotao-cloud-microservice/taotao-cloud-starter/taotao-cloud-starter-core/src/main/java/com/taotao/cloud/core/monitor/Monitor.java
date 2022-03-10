@@ -18,7 +18,7 @@ package com.taotao.cloud.core.monitor;
 
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Callable.Action1;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.model.Collector;

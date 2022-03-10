@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sys.api.feign.IFeignRoleService;
 import com.taotao.cloud.sys.api.vo.role.RoleQueryVO;
 import java.util.List;

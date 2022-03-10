@@ -15,11 +15,11 @@
  */
 package com.taotao.cloud.health.warn;
 
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.health.model.Message;
 import com.taotao.cloud.health.properties.WarnProperties;
 import java.util.ArrayList;

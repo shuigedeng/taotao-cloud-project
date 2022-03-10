@@ -16,8 +16,8 @@
 package com.taotao.cloud.health.utils;
 
 
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.ReflectionUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 
 /**
  * WarnUtils

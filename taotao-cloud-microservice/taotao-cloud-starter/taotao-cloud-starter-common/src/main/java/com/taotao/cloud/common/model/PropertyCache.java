@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.common.model;
 
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.enums.EventEnum;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.boot.CommandLineRunner;

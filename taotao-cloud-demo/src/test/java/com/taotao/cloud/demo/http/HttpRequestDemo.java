@@ -21,7 +21,7 @@ import com.taotao.cloud.common.http.HttpLogger;
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.http.LogLevel;
 import com.taotao.cloud.common.http.ResponseSpec;
-import com.taotao.cloud.common.secure.Base64Util;
+import com.taotao.cloud.common.utils.secure.Base64Util;
 import okhttp3.Cookie;
 
 import java.net.URI;

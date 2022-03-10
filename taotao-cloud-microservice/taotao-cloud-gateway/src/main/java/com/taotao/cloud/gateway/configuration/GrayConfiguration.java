@@ -2,7 +2,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.net.URI;
 import java.util.Arrays;

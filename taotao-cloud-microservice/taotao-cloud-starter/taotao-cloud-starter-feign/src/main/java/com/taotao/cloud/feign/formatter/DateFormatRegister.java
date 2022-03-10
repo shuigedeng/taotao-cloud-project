@@ -1,8 +1,8 @@
 package com.taotao.cloud.feign.formatter;
 
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_TIME_FORMAT;
 
 import org.springframework.cloud.openfeign.FeignFormatterRegistrar;
 import org.springframework.core.convert.converter.Converter;

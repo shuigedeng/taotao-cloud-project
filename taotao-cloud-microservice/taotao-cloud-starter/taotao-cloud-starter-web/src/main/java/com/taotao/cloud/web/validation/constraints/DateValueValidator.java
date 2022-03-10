@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.web.validation.constraints;
 
-import com.taotao.cloud.common.utils.DateUtil;
-import com.taotao.cloud.web.validation.constraints.DateValue;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

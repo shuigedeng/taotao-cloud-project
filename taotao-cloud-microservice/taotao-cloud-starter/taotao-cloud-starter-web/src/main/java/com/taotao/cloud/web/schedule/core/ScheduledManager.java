@@ -1,7 +1,7 @@
 package com.taotao.cloud.web.schedule.core;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.schedule.ScheduledException;
 import com.taotao.cloud.web.schedule.core.interceptor.ScheduledRunnable;

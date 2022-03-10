@@ -15,14 +15,12 @@
  */
 package com.taotao.cloud.sys.biz.controller.manager;
 
-import cn.hutool.core.util.ReflectUtil;
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.security.annotation.NotAuth;
 import com.taotao.cloud.sys.api.dto.user.RestPasswordUserDTO;
@@ -42,7 +40,6 @@ import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

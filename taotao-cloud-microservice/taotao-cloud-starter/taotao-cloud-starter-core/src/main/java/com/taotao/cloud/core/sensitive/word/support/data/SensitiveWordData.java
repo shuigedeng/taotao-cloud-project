@@ -1,10 +1,9 @@
 package com.taotao.cloud.core.sensitive.word.support.data;
 
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
-import com.taotao.cloud.core.heaven.util.io.StreamUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.guava.Guavas;
+import com.taotao.cloud.common.utils.io.StreamUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordData;
 import com.taotao.cloud.core.sensitive.word.constant.AppConst;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
  * 数据加载使用单例的模式，只需要加载一次即可。
  *
  */
-@ThreadSafe
 public class SensitiveWordData implements IWordData {
 
     /**

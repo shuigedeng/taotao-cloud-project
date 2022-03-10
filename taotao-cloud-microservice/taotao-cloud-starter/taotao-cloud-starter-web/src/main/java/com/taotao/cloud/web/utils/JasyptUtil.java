@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.web.utils;
 
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;

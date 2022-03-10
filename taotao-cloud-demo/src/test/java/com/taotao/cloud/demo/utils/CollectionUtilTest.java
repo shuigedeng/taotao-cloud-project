@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
 import org.junit.Test;
 
 import java.util.Map;

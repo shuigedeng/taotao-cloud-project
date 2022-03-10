@@ -26,7 +26,7 @@ import com.aliyun.oss.model.PartETag;
 import com.aliyun.oss.model.SetBucketAclRequest;
 import com.aliyun.oss.model.UploadPartRequest;
 import com.aliyun.oss.model.UploadPartResult;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.model.UploadFileInfo;
 import com.taotao.cloud.oss.propeties.AliyunOssProperties;

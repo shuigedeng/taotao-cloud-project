@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.demo.disruptor;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.annotation.EventRule;
 import com.taotao.cloud.disruptor.event.DisruptorBindEvent;
 import com.taotao.cloud.disruptor.handler.DisruptorHandler;

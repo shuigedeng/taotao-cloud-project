@@ -4,7 +4,7 @@ package com.taotao.cloud.auth.biz.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;

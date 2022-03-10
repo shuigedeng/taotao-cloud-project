@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.health.collect.IOCollectTask;
 import com.taotao.cloud.health.model.Report;
 import java.util.ArrayList;

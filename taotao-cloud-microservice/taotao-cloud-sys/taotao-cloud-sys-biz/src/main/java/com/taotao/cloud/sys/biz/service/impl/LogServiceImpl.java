@@ -9,7 +9,7 @@ import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.sys.api.dto.log.LogQueryCriteria;
 import com.taotao.cloud.sys.biz.entity.Log;

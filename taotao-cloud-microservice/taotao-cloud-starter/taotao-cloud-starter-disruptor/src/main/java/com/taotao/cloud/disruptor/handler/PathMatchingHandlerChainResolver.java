@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.disruptor.handler;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;

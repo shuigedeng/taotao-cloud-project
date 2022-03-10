@@ -17,7 +17,7 @@ package com.taotao.cloud.openapi.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.openapi.properties.OpenApiProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;

@@ -16,25 +16,15 @@
 package com.taotao.cloud.health.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.configuration.CoreAutoConfiguration;
-import com.taotao.cloud.core.http.DefaultHttpClient;
-import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
 import com.taotao.cloud.health.collect.HealthReportFilter;
-import com.taotao.cloud.health.dump.DumpProvider;
-import com.taotao.cloud.health.export.ExportProvider;
 import com.taotao.cloud.health.properties.CollectTaskProperties;
-import com.taotao.cloud.health.properties.ExportProperties;
 import com.taotao.cloud.health.properties.HealthProperties;
-import com.taotao.cloud.health.properties.WarnProperties;
-import com.taotao.cloud.health.strategy.DefaultWarnStrategy;
-import com.taotao.cloud.health.strategy.Rule;
 import com.taotao.cloud.health.strategy.WarnStrategy;
-import com.taotao.cloud.health.strategy.WarnTemplate;
-import com.taotao.cloud.health.warn.WarnProvider;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

@@ -1,9 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.allow;
 
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.pipeline.Pipeline;
-import com.taotao.cloud.core.heaven.support.pipeline.impl.DefaultPipeline;
+import com.taotao.cloud.common.support.pipeline.Pipeline;
+import com.taotao.cloud.common.support.pipeline.impl.DefaultPipeline;
 import com.taotao.cloud.core.sensitive.word.api.IWordAllow;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
  * 初始化类
  *
  */
-@ThreadSafe
 public abstract class WordAllowInit implements IWordAllow {
 
     /**

@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.constant.ContextConstant;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.context.TenantContextHolder;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.feign.properties.FeignInterceptorProperties;
 import feign.RequestInterceptor;
 import java.util.ArrayList;

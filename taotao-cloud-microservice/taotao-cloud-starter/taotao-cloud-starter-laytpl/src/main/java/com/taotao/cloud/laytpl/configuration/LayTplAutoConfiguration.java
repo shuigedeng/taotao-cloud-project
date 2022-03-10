@@ -16,9 +16,8 @@
 
 package com.taotao.cloud.laytpl.configuration;
 
-import cn.hutool.script.JavaScriptEngine;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.laytpl.model.FmtFunc;
 import com.taotao.cloud.laytpl.model.LayTplTemplate;
 import com.taotao.cloud.laytpl.properties.LayTplProperties;

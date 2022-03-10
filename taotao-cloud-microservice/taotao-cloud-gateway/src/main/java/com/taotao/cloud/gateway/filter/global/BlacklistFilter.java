@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

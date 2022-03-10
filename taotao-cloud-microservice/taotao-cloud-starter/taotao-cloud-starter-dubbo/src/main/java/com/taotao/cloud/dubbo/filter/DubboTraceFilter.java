@@ -2,8 +2,8 @@ package com.taotao.cloud.dubbo.filter;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.context.TraceContextHolder;
-import com.taotao.cloud.common.utils.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.TraceUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.Filter;

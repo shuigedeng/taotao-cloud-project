@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.api;
 
 
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.core.sensitive.sensitive.core.bs.SensitiveBs;
 import java.util.Collection;
 import java.util.List;

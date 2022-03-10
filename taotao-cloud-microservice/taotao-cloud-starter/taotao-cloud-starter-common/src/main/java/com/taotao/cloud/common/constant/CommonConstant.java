@@ -30,6 +30,60 @@ public class CommonConstant {
 	}
 
 	/**
+	 * utf-8
+	 */
+	public static final String UTF8 = "UTF-8";
+
+	/**
+	 * utf-16
+	 */
+	public static final String UTF16 = "UTF-16";
+
+	/**
+	 * gbk
+	 */
+	public static final String GBK = "GBK";
+
+	/**
+	 * 逗号
+	 */
+	public static final char COMMA = ',';
+
+	/**
+	 * 冒号
+	 */
+	public static final char COLON = ':';
+
+	/**
+	 * char 小数点
+	 */
+	public static final char DOT = '.';
+
+	/**
+	 * char 双引号
+	 * @since 0.1.25
+	 */
+	public static final char DOUBLE_QUOTES = '"';
+
+	/**
+	 * char 反斜杠
+	 * @since 0.1.25
+	 */
+	public static final char BACK_SLASH = '\\';
+
+	/**
+	 * char 空格
+	 * @since 0.1.25
+	 */
+	public static final char BLANK = ' ';
+
+	/**
+	 * 星星
+	 * @since 0.1.67
+	 */
+	public static final char STAR = '*';
+
+	/**
 	 * 文件分隔符
 	 */
 	public static final String PATH_SPLIT = "/";
@@ -45,7 +99,6 @@ public class CommonConstant {
 	public static final String SPRING = "spring";
 	public static final String BOOT = "boot";
 	public static final String ALIBABA = "ali";
-	public static final String COLON = ":";
 	public static final String UNDER = "_";
 
 	/**

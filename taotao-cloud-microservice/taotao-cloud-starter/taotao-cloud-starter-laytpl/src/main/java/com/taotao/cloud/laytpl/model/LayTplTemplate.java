@@ -18,9 +18,9 @@ package com.taotao.cloud.laytpl.model;
 
 import cn.hutool.script.JavaScriptEngine;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.taotao.cloud.common.utils.CollectionUtil;
-import com.taotao.cloud.common.utils.IoUtil;
-import com.taotao.cloud.common.utils.Unchecked;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.io.IoUtil;
+import com.taotao.cloud.common.support.function.Unchecked;
 import com.taotao.cloud.laytpl.exception.LayTplException;
 import com.taotao.cloud.laytpl.js.JsConsole;
 import com.taotao.cloud.laytpl.js.JsContext;

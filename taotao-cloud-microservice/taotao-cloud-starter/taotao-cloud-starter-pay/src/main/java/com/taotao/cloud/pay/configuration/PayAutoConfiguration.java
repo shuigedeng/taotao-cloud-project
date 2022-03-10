@@ -1,7 +1,7 @@
 package com.taotao.cloud.pay.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.pay.configurers.DefalutPayMessageConfigurer;
 import com.taotao.cloud.pay.configurers.MerchantDetailsServiceConfigurer;
 import com.taotao.cloud.pay.configurers.PayMessageConfigurer;

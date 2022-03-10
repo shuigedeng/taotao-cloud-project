@@ -1,14 +1,13 @@
 package com.taotao.cloud.core.sensitive.word.utils;
 
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.util.lang.StringUtil;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.support.format.CharFormatChain;
 
 /**
  * 内部格式化工具类
- * @since 0.1.1
  */
 public final class InnerFormatUtils {
 

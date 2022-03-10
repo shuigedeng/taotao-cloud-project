@@ -18,7 +18,7 @@ package com.taotao.cloud.metrics.configuration;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.metrics.druid.DruidDataSourcePoolMetadata;
 import com.taotao.cloud.metrics.druid.DruidMetrics;
 import com.taotao.cloud.metrics.properties.DruidMetricsProperties;

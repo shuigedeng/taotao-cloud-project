@@ -2,7 +2,7 @@ package com.taotao.cloud.web.schedule.core.interceptor;
 
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledInterceptorOrder;
 import com.taotao.cloud.web.schedule.common.utils.proxy.Point;

@@ -16,9 +16,9 @@
 package com.taotao.cloud.health.collect;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.health.model.Report;
 import com.taotao.cloud.health.properties.DumpProperties;
 import java.io.IOException;

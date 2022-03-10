@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.anti_reptile.rule;
 
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

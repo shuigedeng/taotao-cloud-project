@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.utils;
 
 
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.common.StringUtil;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 

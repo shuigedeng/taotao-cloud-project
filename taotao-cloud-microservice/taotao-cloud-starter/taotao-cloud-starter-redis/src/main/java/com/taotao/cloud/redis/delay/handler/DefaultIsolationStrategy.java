@@ -1,7 +1,7 @@
 package com.taotao.cloud.redis.delay.handler;
 
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 

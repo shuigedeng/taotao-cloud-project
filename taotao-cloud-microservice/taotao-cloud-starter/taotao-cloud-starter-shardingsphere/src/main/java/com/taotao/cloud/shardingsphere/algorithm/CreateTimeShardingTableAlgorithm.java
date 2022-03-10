@@ -2,7 +2,7 @@ package com.taotao.cloud.shardingsphere.algorithm;
 
 import cn.hutool.core.convert.Convert;
 import com.google.common.collect.Range;
-import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.web.configuration.bigdata;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 
 public class BigDataSource {
 

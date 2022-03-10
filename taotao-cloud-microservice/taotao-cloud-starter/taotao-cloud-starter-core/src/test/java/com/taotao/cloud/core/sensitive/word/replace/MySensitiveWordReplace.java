@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.replace;
 
-import com.taotao.cloud.core.heaven.util.lang.CharUtil;
+import com.taotao.cloud.common.utils.lang.CharUtil;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 

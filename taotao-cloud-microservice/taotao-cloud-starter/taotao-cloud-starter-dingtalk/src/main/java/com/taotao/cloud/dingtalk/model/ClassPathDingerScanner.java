@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.model;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.spring.DingerFactoryBean;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;

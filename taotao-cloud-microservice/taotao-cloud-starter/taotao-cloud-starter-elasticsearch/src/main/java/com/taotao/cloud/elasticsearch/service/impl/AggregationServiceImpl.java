@@ -17,7 +17,7 @@ package com.taotao.cloud.elasticsearch.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.elasticsearch.model.AggItemVo;
 import com.taotao.cloud.elasticsearch.service.IAggregationService;
 import java.io.IOException;

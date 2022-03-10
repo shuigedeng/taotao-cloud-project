@@ -1,10 +1,10 @@
 package com.taotao.cloud.core.sensitive.word.bs;
 
 
-import com.taotao.cloud.core.heaven.constant.CharConst;
-import com.taotao.cloud.core.heaven.support.handler.IHandler;
-import com.taotao.cloud.core.heaven.util.common.ArgUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.support.handler.IHandler;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.common.ArgUtil;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.IWordAllow;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -426,7 +426,7 @@ public class SensitiveWordBs {
      * @since 0.0.2
      */
     public String replace(final String target) {
-        return this.replace(target, CharConst.STAR);
+        return this.replace(target, CommonConstant.STAR);
     }
 
 

@@ -16,11 +16,9 @@
 package com.taotao.cloud.security.configuration;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
-import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +27,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.Authentication;

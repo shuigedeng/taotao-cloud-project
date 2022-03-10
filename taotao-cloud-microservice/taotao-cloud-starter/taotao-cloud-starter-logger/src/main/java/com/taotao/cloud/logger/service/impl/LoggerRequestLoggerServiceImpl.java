@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.logger.service.impl;
 
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.model.RequestLogger;
 import com.taotao.cloud.logger.service.IRequestLoggerService;
 

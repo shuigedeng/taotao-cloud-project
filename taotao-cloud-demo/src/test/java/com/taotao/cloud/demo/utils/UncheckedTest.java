@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.Unchecked;
+import com.taotao.cloud.common.support.function.Unchecked;
 import org.junit.Test;
 
 import java.util.function.Consumer;

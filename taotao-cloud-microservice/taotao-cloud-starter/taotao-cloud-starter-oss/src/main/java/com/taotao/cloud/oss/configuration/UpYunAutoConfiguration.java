@@ -17,7 +17,7 @@ package com.taotao.cloud.oss.configuration;
 
 import com.UpYun;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.UpYunProperties;
 import com.taotao.cloud.oss.service.UploadFileService;

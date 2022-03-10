@@ -18,7 +18,7 @@ package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.spy.P6SpyOptions;
 import com.p6spy.engine.spy.appender.FileLogger;
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

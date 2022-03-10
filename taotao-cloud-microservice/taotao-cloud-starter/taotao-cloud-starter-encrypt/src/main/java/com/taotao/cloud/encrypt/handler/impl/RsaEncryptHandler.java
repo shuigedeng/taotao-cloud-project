@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.handler.impl;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.encrypt.entity.RsaKey;
 import com.taotao.cloud.encrypt.exception.EncryptException;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;

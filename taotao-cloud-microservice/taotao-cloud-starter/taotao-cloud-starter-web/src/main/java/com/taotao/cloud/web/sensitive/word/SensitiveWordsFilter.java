@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.sensitive.word;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.NavigableSet;

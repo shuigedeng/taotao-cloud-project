@@ -20,8 +20,8 @@ import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationN
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.model.PropertyCache;
 import com.taotao.cloud.common.model.Pubsub;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.launch.StartedEventListener;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.core.properties.CoreProperties;

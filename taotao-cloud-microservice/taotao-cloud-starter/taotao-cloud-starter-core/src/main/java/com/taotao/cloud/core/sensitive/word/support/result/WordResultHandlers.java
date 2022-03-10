@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.support.result;
 
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
+import com.taotao.cloud.common.support.instance.impl.Instances;
 import com.taotao.cloud.core.sensitive.word.api.IWordResult;
 import com.taotao.cloud.core.sensitive.word.api.IWordResultHandler;
 

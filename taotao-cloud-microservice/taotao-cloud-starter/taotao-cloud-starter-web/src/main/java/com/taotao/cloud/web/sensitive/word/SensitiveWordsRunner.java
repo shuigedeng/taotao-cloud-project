@@ -1,7 +1,7 @@
 package com.taotao.cloud.web.sensitive.word;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.List;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.configuration;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.schedule.core.ScheduledApplicationRunner;
 import com.taotao.cloud.web.schedule.core.ScheduledConfig;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;

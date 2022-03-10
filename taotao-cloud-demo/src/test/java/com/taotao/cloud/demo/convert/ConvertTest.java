@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.convert;
 
-import com.taotao.cloud.common.convert.ConversionService;
+import com.taotao.cloud.common.utils.convert.ConversionService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

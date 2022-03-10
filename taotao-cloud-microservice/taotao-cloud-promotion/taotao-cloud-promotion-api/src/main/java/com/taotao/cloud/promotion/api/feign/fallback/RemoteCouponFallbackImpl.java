@@ -18,7 +18,7 @@ package com.taotao.cloud.coupon.api.feign.fallback;
 import com.taotao.cloud.coupon.api.feign.RemoteCouponService;
 import com.taotao.cloud.coupon.api.vo.CouponVO;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

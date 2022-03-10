@@ -1,13 +1,12 @@
 package com.taotao.cloud.core.sensitive.word.support.map;
 
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
-import com.taotao.cloud.core.heaven.util.io.FileUtil;
-import com.taotao.cloud.core.heaven.util.lang.ObjectUtil;
-import com.taotao.cloud.core.heaven.util.lang.StringUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.guava.Guavas;
+import com.taotao.cloud.common.utils.io.FileUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplace;
 import com.taotao.cloud.core.sensitive.word.api.ISensitiveWordReplaceContext;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
@@ -29,7 +28,6 @@ import java.util.Map;
  * 敏感词 map
  *
  */
-@ThreadSafe
 public class SensitiveWordMap implements IWordMap {
 
     /**

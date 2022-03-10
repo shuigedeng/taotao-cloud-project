@@ -2,7 +2,7 @@ package com.taotao.cloud.store.api.vo;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.store.api.enums.StoreStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;

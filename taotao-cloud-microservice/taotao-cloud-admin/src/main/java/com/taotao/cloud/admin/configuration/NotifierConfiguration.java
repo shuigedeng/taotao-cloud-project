@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.admin.configuration;
 
-import com.taotao.cloud.common.utils.DateUtil;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;

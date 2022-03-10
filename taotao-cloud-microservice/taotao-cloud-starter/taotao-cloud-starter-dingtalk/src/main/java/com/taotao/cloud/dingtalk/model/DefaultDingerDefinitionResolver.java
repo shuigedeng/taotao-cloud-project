@@ -20,7 +20,7 @@ import static com.taotao.cloud.dingtalk.constant.DingerConstant.DINGER_PROPERTIE
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.RESOURCE_CONFIG_EXCEPTION;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.enums.DingerType;
 import com.taotao.cloud.dingtalk.exception.DingerException;
 import com.taotao.cloud.dingtalk.listeners.DingerListenersProperty;

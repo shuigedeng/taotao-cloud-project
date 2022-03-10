@@ -18,7 +18,7 @@ package com.taotao.cloud.bulletin.api.feign.fallback;
 import com.taotao.cloud.bulletin.api.feign.RemoteBulletinService;
 import com.taotao.cloud.bulletin.api.vo.BulletinVO;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

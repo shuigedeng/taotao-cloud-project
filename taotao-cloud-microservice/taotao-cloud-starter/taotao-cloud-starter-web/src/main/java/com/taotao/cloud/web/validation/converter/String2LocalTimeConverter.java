@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.validation.converter;
 
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_TIME_FORMAT;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

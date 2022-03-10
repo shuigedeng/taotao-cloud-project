@@ -1,6 +1,6 @@
 package com.taotao.cloud.dubbo.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.dubbo.api.feign.RemotePayFlowService;
 import com.taotao.cloud.dubbo.api.vo.PayFlowVO;

@@ -25,8 +25,8 @@ import com.dangdang.ddframe.job.executor.handler.JobProperties.JobPropertiesEnum
 import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.List;
 import java.util.Objects;
 import org.apache.curator.framework.CuratorFramework;

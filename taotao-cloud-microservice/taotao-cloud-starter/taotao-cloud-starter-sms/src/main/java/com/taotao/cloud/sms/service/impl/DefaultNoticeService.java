@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.service.impl;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.exception.NotFindSendHandlerException;
 import com.taotao.cloud.sms.exception.SmsException;
 import com.taotao.cloud.sms.executor.SendAsyncThreadPoolExecutor;

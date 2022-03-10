@@ -19,7 +19,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.GetResponse;
 import com.rabbitmq.client.ShutdownSignalException;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageProcess;

@@ -18,8 +18,8 @@ package com.taotao.cloud.common.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.Exceptions;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import okhttp3.*;
 import okhttp3.internal.Util;
 
@@ -142,7 +142,7 @@ public class BytesResponse implements ResponseSpec, Closeable {
 		try {
 			return Files.write(path, body);
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -185,7 +185,7 @@ public class BytesResponse implements ResponseSpec, Closeable {
 		try {
 			return body.bytes();
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 

@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.sys.api.vo.generator.TableInfo;
 import com.taotao.cloud.sys.biz.entity.ColumnConfig;
 import com.taotao.cloud.sys.biz.entity.GenConfig;

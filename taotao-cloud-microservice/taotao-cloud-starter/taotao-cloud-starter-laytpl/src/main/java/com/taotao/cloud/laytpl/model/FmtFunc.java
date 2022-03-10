@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.laytpl.model;
 
-import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.laytpl.exception.LayTplException;
 import com.taotao.cloud.laytpl.properties.LayTplProperties;
 import java.text.DecimalFormat;

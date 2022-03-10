@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import com.taotao.cloud.core.heaven.util.io.FileUtil;
+import com.taotao.cloud.common.utils.io.FileUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 

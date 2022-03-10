@@ -22,7 +22,7 @@ import com.github.benmanes.caffeine.cache.CaffeineSpec;
 import com.google.common.collect.Maps;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.properties.CacheProperties;
 import com.taotao.cloud.redis.serializer.RedisObjectSerializer;
 import java.lang.reflect.Field;

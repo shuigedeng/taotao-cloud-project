@@ -17,7 +17,7 @@ package com.taotao.cloud.web.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.querydsl.core.types.Predicate;
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.web.base.repository.BaseSuperRepository;

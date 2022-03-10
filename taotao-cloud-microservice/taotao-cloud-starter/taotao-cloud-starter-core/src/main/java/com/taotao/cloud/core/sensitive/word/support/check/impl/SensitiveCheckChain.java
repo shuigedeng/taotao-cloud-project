@@ -1,9 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.util.guava.Guavas;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.utils.guava.Guavas;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -20,7 +19,6 @@ import java.util.List;
  * 【DFA 算法】各种论文。
  *
  */
-@ThreadSafe
 public class SensitiveCheckChain implements ISensitiveCheck {
 
     @Override

@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.data.mybatis.plus.interceptor;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import java.util.Properties;
 import org.apache.ibatis.cache.CacheKey;

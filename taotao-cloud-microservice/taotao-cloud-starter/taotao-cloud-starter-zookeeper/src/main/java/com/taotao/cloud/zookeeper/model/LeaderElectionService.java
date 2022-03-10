@@ -1,7 +1,7 @@
 package com.taotao.cloud.zookeeper.model;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.concurrent.Executors;

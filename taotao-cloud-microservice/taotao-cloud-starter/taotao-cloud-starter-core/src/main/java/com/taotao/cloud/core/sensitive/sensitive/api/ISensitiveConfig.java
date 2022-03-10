@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.sensitive.api;
 
 
-import com.taotao.cloud.core.heaven.deepcopy.IDeepCopy;
+import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
 
 /**
  * 脱敏配置接口

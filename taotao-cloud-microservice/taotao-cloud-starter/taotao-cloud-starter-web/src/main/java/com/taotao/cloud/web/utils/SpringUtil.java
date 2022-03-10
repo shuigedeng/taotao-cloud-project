@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.utils;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.BeansException;

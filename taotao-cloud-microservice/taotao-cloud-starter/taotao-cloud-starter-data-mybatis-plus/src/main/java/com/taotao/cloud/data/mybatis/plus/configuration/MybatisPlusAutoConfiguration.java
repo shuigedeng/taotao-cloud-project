@@ -30,9 +30,9 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.constant.StrPool;
-import com.taotao.cloud.common.utils.IdGeneratorUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.data.mybatis.plus.datascope.DataScopeInterceptor;
 import com.taotao.cloud.data.mybatis.plus.entity.MpSuperEntity;
@@ -45,22 +45,16 @@ import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.sql.DataSource;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * MybatisPlusAutoConfiguration

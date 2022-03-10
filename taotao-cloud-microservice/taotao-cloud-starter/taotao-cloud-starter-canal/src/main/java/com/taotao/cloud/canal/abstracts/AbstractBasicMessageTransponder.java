@@ -24,7 +24,7 @@ import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.model.CanalMsg;
 import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;

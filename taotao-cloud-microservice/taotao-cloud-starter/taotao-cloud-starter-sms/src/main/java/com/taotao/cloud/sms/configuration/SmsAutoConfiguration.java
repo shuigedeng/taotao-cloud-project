@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.executor.DefaultSendAsyncThreadPoolExecutor;
 import com.taotao.cloud.sms.executor.SendAsyncThreadPoolExecutor;
 import com.taotao.cloud.sms.handler.SendHandler;

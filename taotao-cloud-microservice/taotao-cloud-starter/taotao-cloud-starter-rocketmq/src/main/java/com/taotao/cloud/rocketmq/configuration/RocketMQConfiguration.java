@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.rocketmq.configuration;
 
-import com.taotao.cloud.common.factory.YamlPropertySourceFactory;
+import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import com.taotao.cloud.rocketmq.properties.RocketmqProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

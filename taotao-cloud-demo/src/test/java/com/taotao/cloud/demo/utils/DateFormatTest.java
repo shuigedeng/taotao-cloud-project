@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.DateUtil;
-import com.taotao.cloud.common.utils.Unchecked;
+import com.taotao.cloud.common.utils.date.DateUtil;
+import com.taotao.cloud.common.support.function.Unchecked;
 import org.junit.Assert;
 import org.junit.Test;
 

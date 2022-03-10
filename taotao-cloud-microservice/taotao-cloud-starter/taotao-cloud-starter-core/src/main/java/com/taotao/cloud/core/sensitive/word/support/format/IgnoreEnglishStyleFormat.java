@@ -1,5 +1,4 @@
 package com.taotao.cloud.core.sensitive.word.support.format;
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.utils.CharUtils;
@@ -7,7 +6,6 @@ import com.taotao.cloud.core.sensitive.word.utils.CharUtils;
 /**
  * 忽略英文的各种格式
  */
-@ThreadSafe
 public class IgnoreEnglishStyleFormat implements ICharFormat {
 
     @Override

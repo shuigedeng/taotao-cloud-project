@@ -14,7 +14,7 @@ package com.taotao.cloud.sms.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.model.VerificationCode;
 import com.taotao.cloud.sms.utils.StringUtils;

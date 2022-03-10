@@ -19,7 +19,7 @@ package com.taotao.cloud.dingtalk.model;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.DINGER_REPEATED_EXCEPTION;
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.METHOD_DEFINITION_EXCEPTION;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.annatations.AsyncExecute;
 import com.taotao.cloud.dingtalk.annatations.DingerConfiguration;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;

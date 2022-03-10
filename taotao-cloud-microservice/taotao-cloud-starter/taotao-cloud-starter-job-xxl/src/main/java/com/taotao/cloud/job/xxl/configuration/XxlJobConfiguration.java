@@ -17,10 +17,10 @@ package com.taotao.cloud.job.xxl.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.job.xxl.properties.XxlExecutorProperties;
 import com.taotao.cloud.job.xxl.properties.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;

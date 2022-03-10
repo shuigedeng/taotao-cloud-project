@@ -17,13 +17,11 @@
 package com.taotao.cloud.common.http;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.taotao.cloud.common.retry.IRetry;
-import com.taotao.cloud.common.retry.SimpleRetry;
-import com.taotao.cloud.common.ssl.DisableValidationTrustManager;
-import com.taotao.cloud.common.ssl.TrustAllHostNames;
-import com.taotao.cloud.common.utils.Exceptions;
+import com.taotao.cloud.common.http.retry.IRetry;
+import com.taotao.cloud.common.http.retry.SimpleRetry;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.common.model.Holder;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import okhttp3.*;
 import okhttp3.internal.Util;
 import okhttp3.internal.http.HttpMethod;
@@ -576,7 +574,7 @@ public class HttpRequest {
 			builder.sslSocketFactory(disabledSslSocketFactory, disabledTrustManager);
 			builder.hostnameVerifier(TrustAllHostNames.INSTANCE);
 		} catch (NoSuchAlgorithmException | KeyManagementException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.mongodb.service;
 
 import com.taotao.cloud.common.model.PageModel;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.mongodb.annotation.QueryField;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

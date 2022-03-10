@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.anti_reptile.filter;
 
-import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
 import com.taotao.cloud.gateway.anti_reptile.rule.RuleActuator;
