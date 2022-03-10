@@ -14,7 +14,14 @@ import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.RpcException;
 import org.springframework.util.StringUtils;
 
-@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER})
+/**
+ * DubboTraceFilter
+ *
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-10 13:51:37
+ */
+@Activate(group = {CommonConstants.PROVIDER, CommonConstants.CONSUMER}, value = "dubboTraceFilter", order = 10001)
 public class DubboTraceFilter implements Filter {
 
 	/**

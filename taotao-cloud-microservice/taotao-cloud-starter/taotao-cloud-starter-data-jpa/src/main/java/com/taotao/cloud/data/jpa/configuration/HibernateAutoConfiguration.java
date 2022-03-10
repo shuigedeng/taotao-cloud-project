@@ -17,6 +17,7 @@ package com.taotao.cloud.data.jpa.configuration;
 
 import static org.hibernate.cfg.AvailableSettings.DIALECT;
 import static org.hibernate.cfg.AvailableSettings.FORMAT_SQL;
+import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;
 import static org.hibernate.cfg.AvailableSettings.HIGHLIGHT_SQL;
 import static org.hibernate.cfg.AvailableSettings.IMPLICIT_NAMING_STRATEGY;
 import static org.hibernate.cfg.AvailableSettings.INTERCEPTOR;
@@ -143,6 +144,8 @@ public class HibernateAutoConfiguration implements InitializingBean {
 
 		newJpaProperties.put(STATEMENT_INSPECTOR, hibernateProperties.getStatementInspector());
 		newJpaProperties.put(INTERCEPTOR, hibernateProperties.getInterceptor());
+
+		newJpaProperties.put(HBM2DDL_AUTO, "update");
 
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
 			new LocalContainerEntityManagerFactoryBean();

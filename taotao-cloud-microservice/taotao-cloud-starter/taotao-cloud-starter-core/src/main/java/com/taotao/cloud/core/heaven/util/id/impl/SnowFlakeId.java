@@ -16,13 +16,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * <p> 雪花算法  19 位 </p>
- *
- * <pre> Created: 2018/6/15 上午11:41  </pre>
- * <pre> Project: heaven  </pre>
- * [理解分布式id生成算法SnowFlake](https://segmentfault.com/a/1190000011282426?utm_source=tag-newest)
- *
- * @author houbinbin
- * @since 0.1.12
  */
 @Deprecated
 public class SnowFlakeId implements Id {

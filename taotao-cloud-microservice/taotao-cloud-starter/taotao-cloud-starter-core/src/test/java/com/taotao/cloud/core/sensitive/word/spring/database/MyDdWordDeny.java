@@ -9,7 +9,7 @@ import java.util.List;
  * @author binbin.hou
  * @since 1.0.0
  */
-@Component
+//@Component
 public class MyDdWordDeny implements IWordDeny {
 
     @Override

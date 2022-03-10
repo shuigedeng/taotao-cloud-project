@@ -22,7 +22,6 @@ import com.taotao.cloud.sys.api.vo.dict_item.DictItemQueryVO;
 import com.taotao.cloud.sys.biz.entity.DictItem;
 import com.taotao.cloud.sys.biz.service.IDictItemService;
 import com.taotao.cloud.web.base.controller.SuperController;
-import groovy.util.logging.Log;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;

@@ -4,8 +4,12 @@
  */
 package com.taotao.cloud.sys.biz.config.runner;
 
+import com.taotao.cloud.sys.biz.entity.QuartzJob;
 import com.taotao.cloud.sys.biz.service.IQuartzJobService;
+import com.taotao.cloud.web.quartz.QuartzJobModel;
 import com.taotao.cloud.web.quartz.QuartzManager;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

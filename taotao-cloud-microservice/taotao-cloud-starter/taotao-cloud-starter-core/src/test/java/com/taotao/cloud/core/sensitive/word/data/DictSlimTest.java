@@ -1,14 +1,11 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
-import com.github.houbb.heaven.support.filter.IFilter;
-import com.github.houbb.heaven.support.handler.IHandler;
-import com.github.houbb.heaven.util.io.FileUtil;
-import com.github.houbb.heaven.util.lang.NumUtil;
-import com.github.houbb.heaven.util.lang.StringUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.opencc4j.core.impl.ZhConvertBootstrap;
-import com.github.houbb.opencc4j.support.segment.impl.CharSegment;
-import com.github.houbb.sensitive.word.utils.NumUtils;
+import com.taotao.cloud.core.heaven.support.filter.IFilter;
+import com.taotao.cloud.core.heaven.support.handler.IHandler;
+import com.taotao.cloud.core.heaven.util.io.FileUtil;
+import com.taotao.cloud.core.heaven.util.lang.StringUtil;
+import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.core.sensitive.word.utils.NumUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -46,7 +43,8 @@ public class DictSlimTest {
                 String half = StringUtil.toHalfWidth(lower);
                 String trim = StringUtil.trimAnyBlank(half);
                 String punc = StringUtil.trimAnyPunctionAndSymbol(trim);
-                return ZhConvertBootstrap.newInstance(new CharSegment()).toSimple(punc);
+                //return ZhConvertBootstrap.newInstance(new CharSegment()).toSimple(punc);
+	            return "";
             }
         });
 

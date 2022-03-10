@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * SuperEntity
@@ -27,7 +28,7 @@ public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
 	private static final long serialVersionUID = -4603650115461757622L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false, columnDefinition = "bigint comment 'id'")
 	@TableId(value = "id", type = IdType.INPUT)
 	private I id;
@@ -36,6 +37,8 @@ public class SuperEntity<T extends SuperEntity<T, I>, I extends Serializable>
 		return id;
 	}
 
+	@GenericGenerator(name="snowFlakeIdGenerator", strategy="com.taotao.cloud.data.jpa.bean.SnowFlakeIdGenerator")
+	@GeneratedValue(generator="snowFlakeIdGenerator")
 	public void setId(I id) {
 		this.id = id;
 	}

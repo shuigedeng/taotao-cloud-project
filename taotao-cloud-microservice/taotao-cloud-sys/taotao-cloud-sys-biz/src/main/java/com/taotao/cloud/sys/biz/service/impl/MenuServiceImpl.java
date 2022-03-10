@@ -44,6 +44,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class MenuServiceImpl extends
 	//private final IFeignOrderItemService IFeignOrderItemService;
 	//private final IFeignOrderService IFeignOrderService;
 	//
-	//@DubboReference
+	//@DubboReference(validation = "true")
 	//private IDubboOrderService dubboOrderService;
 	//
 	//public MenuServiceImpl(IRoleService sysRoleService,

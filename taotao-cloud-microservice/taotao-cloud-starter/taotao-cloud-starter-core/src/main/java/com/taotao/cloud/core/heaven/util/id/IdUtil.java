@@ -10,12 +10,6 @@ import com.taotao.cloud.core.heaven.util.id.support.Sequence;
 
 /**
  * <p> 分布式 id 生成 </p>
- *
- * <pre> Created: 2018/6/15 下午3:41  </pre>
- * <pre> Project: lombok-ex  </pre>
- *
- * @author houbinbin
- * @since 0.0.1
  */
 @Deprecated
 public final class IdUtil {

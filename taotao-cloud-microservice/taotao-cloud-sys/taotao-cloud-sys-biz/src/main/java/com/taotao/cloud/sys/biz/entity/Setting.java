@@ -4,13 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 
 /**
- * 设置
+ * 配置表
  */
-
 @Entity
 @Table(name = Setting.TABLE_NAME)
 @TableName(Setting.TABLE_NAME)
@@ -21,6 +22,12 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
 
 	@Column(name = "setting_value", nullable = false, columnDefinition = "varchar(3660) not null comment '值'")
 	private String settingValue;
+
+	@Override
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public void setId(Long id) {
+		super.setId(id);
+	}
 
 	public String getSettingValue() {
 		return settingValue;

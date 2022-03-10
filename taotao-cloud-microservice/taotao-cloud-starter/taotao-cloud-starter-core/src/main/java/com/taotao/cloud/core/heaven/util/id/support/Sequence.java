@@ -15,12 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * <p> 序列号 </p>
- *
- * <pre> Created: 2018/6/15 上午11:41  </pre>
- * <pre> Project: heaven  </pre>
- *
- * @author houbinbin
- * @since 0.0.1
  */
 @Deprecated
 public class Sequence {

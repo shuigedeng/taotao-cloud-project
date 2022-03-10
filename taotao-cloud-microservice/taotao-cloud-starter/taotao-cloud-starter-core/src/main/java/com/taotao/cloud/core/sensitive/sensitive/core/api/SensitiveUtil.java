@@ -25,7 +25,6 @@ public final class SensitiveUtil {
 	 * @return 脱敏后的对象
 	 * @since 0.0.4 以前用的是单例。建议使用 spring 等容器管理 ISensitive 实现。
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static <T> T desCopy(T object) {
 		return SensitiveBs.newInstance().desCopy(object);
 	}
@@ -37,7 +36,6 @@ public final class SensitiveUtil {
 	 * @return 结果 json
 	 * @since 0.0.6
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static String desJson(Object object) {
 		return SensitiveBs.newInstance().desJson(object);
 	}

@@ -107,6 +107,9 @@ mysql -uroot -p
 
 -- exit // 退出
 
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+
 ##################### mysql.sh #############################
 #!/bin/bash
 

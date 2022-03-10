@@ -45,6 +45,7 @@ import com.taotao.cloud.data.mybatis.plus.properties.TenantProperties;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.sql.DataSource;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.type.EnumTypeHandler;
 import org.springframework.beans.factory.InitializingBean;
@@ -56,6 +57,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * MybatisPlusAutoConfiguration
