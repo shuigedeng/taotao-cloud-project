@@ -17,8 +17,8 @@ package com.taotao.cloud.elk.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.SecurityConstant;
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.elk.properties.ElkHealthLogStatisticProperties;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

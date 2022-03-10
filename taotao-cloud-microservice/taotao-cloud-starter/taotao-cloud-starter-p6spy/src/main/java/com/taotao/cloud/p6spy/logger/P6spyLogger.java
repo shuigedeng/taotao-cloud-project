@@ -17,7 +17,7 @@ package com.taotao.cloud.p6spy.logger;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.FormattedLogger;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.util.StringUtils;
 /**
  * P6spy日志实现

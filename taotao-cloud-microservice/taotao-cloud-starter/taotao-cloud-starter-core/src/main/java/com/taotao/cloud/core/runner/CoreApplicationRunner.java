@@ -17,8 +17,8 @@ package com.taotao.cloud.core.runner;
 
 import static com.taotao.cloud.core.properties.CoreProperties.SpringApplicationName;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 

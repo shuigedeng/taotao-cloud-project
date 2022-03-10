@@ -17,7 +17,7 @@ package com.taotao.cloud.web.filter;
 
 
 import com.taotao.cloud.common.context.TraceContextHolder;
-import com.taotao.cloud.common.utils.TraceUtil;
+import com.taotao.cloud.common.utils.servlet.TraceUtil;
 import com.taotao.cloud.web.properties.FilterProperties;
 import java.io.IOException;
 import javax.servlet.FilterChain;

@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.health.strategy;
 
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.common.model.PropertyCache;
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.model.Report;
 import java.io.Serializable;
 import java.util.ArrayList;

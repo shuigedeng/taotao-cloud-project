@@ -18,7 +18,7 @@ package com.taotao.cloud.demo.http;
 
 import com.taotao.cloud.common.http.HttpRequest;
 import com.taotao.cloud.common.http.LogLevel;
-import com.taotao.cloud.common.ssl.TrustAllHostNames;
+import com.taotao.cloud.common.http.TrustAllHostNames;
 import okhttp3.OkHttpClient;
 
 import javax.net.ssl.*;

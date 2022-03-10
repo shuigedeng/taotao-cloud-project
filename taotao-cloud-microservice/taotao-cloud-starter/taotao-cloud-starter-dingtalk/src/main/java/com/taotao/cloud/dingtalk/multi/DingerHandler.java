@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.dingtalk.multi;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

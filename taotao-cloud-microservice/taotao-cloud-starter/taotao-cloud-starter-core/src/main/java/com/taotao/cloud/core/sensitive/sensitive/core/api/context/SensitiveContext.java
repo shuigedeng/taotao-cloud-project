@@ -1,7 +1,6 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.api.context;
 
 
-import com.taotao.cloud.core.heaven.annotation.NotThreadSafe;
 import com.taotao.cloud.core.sensitive.sensitive.api.IContext;
 import com.taotao.cloud.core.sensitive.sensitive.core.exception.SensitiveRuntimeException;
 import java.lang.reflect.Field;
@@ -12,7 +11,6 @@ import java.util.List;
  * 脱敏上下文
  *
  */
-@NotThreadSafe
 public class SensitiveContext implements IContext {
 
     /**

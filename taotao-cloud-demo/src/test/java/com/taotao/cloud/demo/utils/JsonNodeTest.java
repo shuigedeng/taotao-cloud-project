@@ -3,7 +3,7 @@ package com.taotao.cloud.demo.utils;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

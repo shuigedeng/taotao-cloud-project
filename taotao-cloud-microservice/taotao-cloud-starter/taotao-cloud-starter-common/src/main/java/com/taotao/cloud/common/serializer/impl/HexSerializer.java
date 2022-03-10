@@ -2,10 +2,9 @@ package com.taotao.cloud.common.serializer.impl;
 
 import com.taotao.cloud.common.serializer.Serializer;
 import com.taotao.cloud.common.serializer.SerializerConstants;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
-import org.springframework.stereotype.Component;
 
 public class HexSerializer implements Serializer {
     @Override

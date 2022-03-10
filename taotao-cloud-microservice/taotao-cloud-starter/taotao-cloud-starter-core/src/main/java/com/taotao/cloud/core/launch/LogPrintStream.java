@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.core.launch;
 
-import com.taotao.cloud.common.utils.Exceptions;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
@@ -39,7 +39,7 @@ public class LogPrintStream extends PrintStream {
 		try {
 			return new LogPrintStream(isError);
 		} catch (UnsupportedEncodingException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 

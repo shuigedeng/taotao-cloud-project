@@ -16,7 +16,7 @@
 package com.taotao.cloud.core.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.endpoint.CustomEndPoint;
 import com.taotao.cloud.core.endpoint.CustomHealthIndicator;
 import com.taotao.cloud.core.endpoint.CustomMbeanRegistrar;

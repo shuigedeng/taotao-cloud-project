@@ -19,7 +19,7 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

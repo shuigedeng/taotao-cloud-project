@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.common.http;
 
-import com.taotao.cloud.common.retry.IRetry;
+import com.taotao.cloud.common.http.retry.IRetry;
 import java.io.IOException;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;

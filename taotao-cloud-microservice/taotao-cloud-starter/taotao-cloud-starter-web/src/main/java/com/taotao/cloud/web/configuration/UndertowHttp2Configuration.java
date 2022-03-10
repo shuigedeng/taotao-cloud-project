@@ -18,7 +18,7 @@ package com.taotao.cloud.web.configuration;
 import static io.undertow.UndertowOptions.ENABLE_HTTP2;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import io.undertow.Undertow;
 import io.undertow.connector.ByteBufferPool;
 import io.undertow.server.DefaultByteBufferPool;

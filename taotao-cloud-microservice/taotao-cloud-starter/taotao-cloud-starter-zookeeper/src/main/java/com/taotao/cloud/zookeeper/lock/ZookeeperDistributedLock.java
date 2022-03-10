@@ -17,8 +17,8 @@ package com.taotao.cloud.zookeeper.lock;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.common.lock.DistributedLock;
-import com.taotao.cloud.common.lock.ZLock;
+import com.taotao.cloud.common.support.lock.DistributedLock;
+import com.taotao.cloud.common.support.lock.ZLock;
 import java.util.concurrent.TimeUnit;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;

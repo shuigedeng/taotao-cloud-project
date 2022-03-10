@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.common.http;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.annotation.Nonnull;

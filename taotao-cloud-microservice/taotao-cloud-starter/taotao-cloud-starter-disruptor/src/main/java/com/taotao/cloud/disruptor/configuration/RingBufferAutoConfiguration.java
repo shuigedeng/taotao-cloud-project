@@ -22,7 +22,7 @@ import com.lmax.disruptor.SequenceBarrier;
 import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.disruptor.event.DisruptorEvent;
 import com.taotao.cloud.disruptor.handler.DisruptorEventDispatcher;
 import com.taotao.cloud.disruptor.properties.DisruptorProperties;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.secure.HexUtil;
+import com.taotao.cloud.common.utils.secure.HexUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

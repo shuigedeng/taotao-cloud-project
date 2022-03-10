@@ -20,7 +20,7 @@ import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.propeties.OssProperties;
 import com.taotao.cloud.oss.propeties.QiniuProperties;
 import com.taotao.cloud.oss.service.UploadFileService;

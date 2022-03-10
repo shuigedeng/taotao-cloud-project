@@ -5,7 +5,7 @@ import static org.apache.dubbo.spring.boot.util.DubboUtils.BASE_PACKAGES_PROPERT
 import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_SCAN_PREFIX;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dubbo.properties.DubboProperties;
 import feign.Feign;
 import java.util.Set;

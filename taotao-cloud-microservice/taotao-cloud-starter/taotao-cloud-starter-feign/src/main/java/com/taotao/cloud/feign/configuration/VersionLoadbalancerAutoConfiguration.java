@@ -20,7 +20,7 @@
  import com.taotao.cloud.common.constant.CommonConstant;
  import com.taotao.cloud.common.constant.StarterName;
  import com.taotao.cloud.common.context.VersionContextHolder;
- import com.taotao.cloud.common.utils.LogUtil;
+ import com.taotao.cloud.common.utils.log.LogUtil;
  import com.taotao.cloud.feign.properties.LbIsolationProperties;
  import java.util.List;
  import java.util.Random;

@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.bean;
 
 
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import java.util.ArrayList;
 import java.util.List;
 

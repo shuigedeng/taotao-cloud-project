@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.health.model;
 
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.NumberUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.common.utils.number.NumberUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.strategy.Rule;
 import java.io.Serializable;

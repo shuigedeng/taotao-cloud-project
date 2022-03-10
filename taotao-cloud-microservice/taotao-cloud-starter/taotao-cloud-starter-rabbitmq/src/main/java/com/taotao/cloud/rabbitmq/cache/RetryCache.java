@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.rabbitmq.cache;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;
 import com.taotao.cloud.rabbitmq.common.FastOcpRabbitMqConstants;
 import com.taotao.cloud.rabbitmq.producer.MessageSender;

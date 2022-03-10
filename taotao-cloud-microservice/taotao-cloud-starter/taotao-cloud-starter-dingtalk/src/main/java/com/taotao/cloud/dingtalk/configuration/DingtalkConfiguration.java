@@ -16,7 +16,7 @@
 package com.taotao.cloud.dingtalk.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.constant.DingerConstant;
 import com.taotao.cloud.dingtalk.exception.ConfigurationException;
 import com.taotao.cloud.dingtalk.model.DingerConfigurerAdapter;
@@ -32,13 +32,11 @@ import com.taotao.cloud.dingtalk.support.DingerAsyncCallback;
 import com.taotao.cloud.dingtalk.support.DingerExceptionCallback;
 import com.taotao.cloud.dingtalk.support.DingerHttpClient;
 import com.taotao.cloud.dingtalk.support.DingerIdGenerator;
-import com.taotao.cloud.dingtalk.support.DingerSignAlgorithm;
 import java.util.concurrent.Executor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

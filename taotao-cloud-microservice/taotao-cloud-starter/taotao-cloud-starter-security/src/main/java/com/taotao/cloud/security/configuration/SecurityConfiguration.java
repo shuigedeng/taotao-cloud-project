@@ -16,8 +16,8 @@
 package com.taotao.cloud.security.configuration;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;

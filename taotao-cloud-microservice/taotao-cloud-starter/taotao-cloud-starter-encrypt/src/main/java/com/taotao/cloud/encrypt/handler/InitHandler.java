@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.handler;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.encrypt.annotation.SeparateEncrypt;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.core.annotation.AnnotationUtils;

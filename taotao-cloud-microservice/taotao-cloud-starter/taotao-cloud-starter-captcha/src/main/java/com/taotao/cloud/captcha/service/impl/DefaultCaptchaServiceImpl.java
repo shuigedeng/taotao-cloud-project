@@ -21,7 +21,7 @@ import com.taotao.cloud.captcha.model.Captcha;
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.model.CaptchaCodeEnum;
 import com.taotao.cloud.captcha.service.CaptchaService;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.Properties;
 
 /**

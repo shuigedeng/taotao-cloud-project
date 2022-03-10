@@ -17,7 +17,7 @@ package com.taotao.cloud.web.base.controller;
 
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.data.mybatis.plus.conditions.query.QueryWrap;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.web.base.entity.SuperEntity;

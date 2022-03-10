@@ -16,7 +16,7 @@
 package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.InitializingBean;

@@ -17,8 +17,8 @@ package com.taotao.cloud.health.collect;
 
 import static com.taotao.cloud.health.utils.ProcessUtils.getProcessID;
 
-import com.taotao.cloud.common.bean.BeanUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.CollectInfo;

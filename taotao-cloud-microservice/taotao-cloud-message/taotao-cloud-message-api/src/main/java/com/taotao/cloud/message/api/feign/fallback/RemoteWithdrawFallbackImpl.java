@@ -16,7 +16,7 @@
 package com.taotao.cloud.message.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.message.api.feign.RemoteWithdrawService;
 import com.taotao.cloud.message.api.vo.WithdrawVO;
 import org.springframework.cloud.openfeign.FallbackFactory;

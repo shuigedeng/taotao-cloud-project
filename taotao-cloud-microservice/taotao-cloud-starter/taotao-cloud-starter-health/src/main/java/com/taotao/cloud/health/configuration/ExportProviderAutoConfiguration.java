@@ -16,23 +16,17 @@
 package com.taotao.cloud.health.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.health.collect.HealthCheckProvider;
-import com.taotao.cloud.health.dump.DumpFilter;
-import com.taotao.cloud.health.dump.DumpProvider;
 import com.taotao.cloud.health.export.ExportProvider;
-import com.taotao.cloud.health.properties.DumpProperties;
 import com.taotao.cloud.health.properties.ExportProperties;
-import com.taotao.cloud.health.properties.HealthProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 
 /**
  * HealthConfiguration

@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.DateUtil;
+import com.taotao.cloud.common.utils.date.DateUtil;
 import com.taotao.cloud.sys.biz.entity.Visits;
 import com.taotao.cloud.sys.biz.mapper.ILogMapper;
 import com.taotao.cloud.sys.biz.mapper.IVisitsMapper;

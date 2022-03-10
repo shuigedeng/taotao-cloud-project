@@ -16,10 +16,9 @@
 package com.taotao.cloud.web.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.web.limit.LimitAspect;
-import com.taotao.cloud.web.properties.EncryptProperties;
 import com.taotao.cloud.web.properties.LimitProperties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

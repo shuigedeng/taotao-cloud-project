@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.config.redisson;
 
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.redis.delay.MessageConversionException;
 import com.taotao.cloud.redis.delay.annotation.RedissonListener;
 import com.taotao.cloud.redis.delay.config.RedissonQueue;

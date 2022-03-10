@@ -15,13 +15,12 @@
  */
 package com.taotao.cloud.dingtalk.utils;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.spring.ApplicationHome;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;

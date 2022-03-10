@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.model;
 
 import static com.taotao.cloud.dingtalk.constant.DingerConstant.SPOT_SEPERATOR;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.annatations.Dinger;
 import com.taotao.cloud.dingtalk.entity.DingerResponse;
 import com.taotao.cloud.dingtalk.entity.MsgType;

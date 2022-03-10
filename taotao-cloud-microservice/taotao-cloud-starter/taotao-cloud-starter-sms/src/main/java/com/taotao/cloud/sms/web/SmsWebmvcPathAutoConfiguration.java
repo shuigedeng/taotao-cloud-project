@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.web;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.model.NoticeInfo;
 import com.taotao.cloud.sms.model.VerifyInfo;
 import com.taotao.cloud.sms.utils.StringUtils;

@@ -18,7 +18,7 @@ package com.taotao.cloud.dingtalk.multi;
 
 import static com.taotao.cloud.dingtalk.enums.ExceptionEnum.ALGORITHM_FIELD_INJECT_FAILED;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.dingtalk.model.DingerConfig;
 import com.taotao.cloud.dingtalk.enums.ExceptionEnum;
 import com.taotao.cloud.dingtalk.enums.MultiDingerConfigContainer;

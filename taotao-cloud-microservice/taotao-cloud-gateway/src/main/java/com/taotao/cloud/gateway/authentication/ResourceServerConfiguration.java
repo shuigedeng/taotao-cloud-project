@@ -17,8 +17,8 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ResponseUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.servlet.ResponseUtil;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import java.util.List;

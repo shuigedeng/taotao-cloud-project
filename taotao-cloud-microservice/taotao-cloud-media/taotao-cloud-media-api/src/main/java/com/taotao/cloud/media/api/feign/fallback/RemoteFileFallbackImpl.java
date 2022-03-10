@@ -1,7 +1,7 @@
 package com.taotao.cloud.media.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.media.api.feign.RemoteFileService;
 import com.taotao.cloud.media.api.vo.FileVO;
 import org.springframework.cloud.openfeign.FallbackFactory;

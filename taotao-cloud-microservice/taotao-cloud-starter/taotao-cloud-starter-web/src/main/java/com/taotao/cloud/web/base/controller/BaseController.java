@@ -18,14 +18,10 @@ package com.taotao.cloud.web.base.controller;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.common.utils.SecurityUtil;
+import com.taotao.cloud.common.utils.common.SecurityUtil;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.RecordComponent;
-import java.util.Objects;
 
 /**
  * BaseController

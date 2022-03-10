@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.demo.zookeeper;
 
-import com.taotao.cloud.common.lock.DistributedLock;
-import com.taotao.cloud.common.lock.ZLock;
+import com.taotao.cloud.common.support.lock.DistributedLock;
+import com.taotao.cloud.common.support.lock.ZLock;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.zookeeper.model.ZkIdGenerator;
 import com.taotao.cloud.zookeeper.template.ZookeeperTemplate;

@@ -16,7 +16,7 @@
 package com.taotao.cloud.common.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.utils.ReflectionUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

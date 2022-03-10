@@ -12,7 +12,7 @@
  */
 package com.taotao.cloud.sms.repository;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.model.VerificationCode;
 import com.taotao.cloud.sms.properties.VerificationCodeMemoryRepositoryProperties;
 import com.taotao.cloud.sms.utils.StringUtils;

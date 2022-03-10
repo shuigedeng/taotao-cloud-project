@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.web.xss;
 
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.properties.XssProperties.Mode;
 import com.taotao.cloud.web.utils.XssUtil;

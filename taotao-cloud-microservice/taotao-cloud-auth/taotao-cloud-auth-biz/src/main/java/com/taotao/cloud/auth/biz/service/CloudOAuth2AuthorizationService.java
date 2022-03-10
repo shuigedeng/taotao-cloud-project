@@ -4,7 +4,7 @@ import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.COLON
 import static com.taotao.cloud.auth.biz.models.AuthorizationServerConstant.PREFIX_AUTHORIZATION;
 import static org.springframework.security.oauth2.jwt.JwtClaimNames.EXP;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.time.Instant;
 import java.util.Objects;

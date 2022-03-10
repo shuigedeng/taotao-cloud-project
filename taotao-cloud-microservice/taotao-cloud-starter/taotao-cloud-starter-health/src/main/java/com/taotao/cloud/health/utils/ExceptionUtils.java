@@ -15,14 +15,14 @@
  */
 package com.taotao.cloud.health.utils;
 
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.common.PropertyUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.core.enums.ExceptionTypeEnum;
 import com.taotao.cloud.core.http.DefaultHttpClient;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.monitor.Monitor;
 import com.taotao.cloud.core.properties.CoreProperties;
-import com.taotao.cloud.common.utils.PropertyUtil;
-import com.taotao.cloud.common.utils.RequestUtil;
+import com.taotao.cloud.common.utils.servlet.RequestUtil;
 import com.taotao.cloud.health.enums.WarnLevelEnum;
 import com.taotao.cloud.health.enums.WarnTypeEnum;
 import com.taotao.cloud.health.model.Message;

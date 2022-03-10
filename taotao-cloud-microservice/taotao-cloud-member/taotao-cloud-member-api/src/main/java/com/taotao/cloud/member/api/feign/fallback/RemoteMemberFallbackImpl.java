@@ -2,7 +2,7 @@ package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.member.api.feign.IFeignMemberService;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import org.springframework.cloud.openfeign.FallbackFactory;

@@ -52,7 +52,7 @@ import com.nepxion.banner.DescriptionBanner;
 import com.nepxion.banner.LogoBanner;
 import com.taobao.text.Color;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.version.SpringCloudAlibabaVersion;
 import com.taotao.cloud.core.version.SpringCloudDependenciesVersion;
 import com.taotao.cloud.core.version.SpringCloudVersion;

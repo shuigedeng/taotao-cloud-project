@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.web.validation.converter;
 
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtil.DEFAULT_DATE_TIME_FORMAT_MATCHES;
-import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT;
-import static com.taotao.cloud.common.utils.DateUtil.SLASH_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_EN_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.DEFAULT_DATE_TIME_FORMAT_MATCHES;
+import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_TIME_FORMAT;
+import static com.taotao.cloud.common.utils.date.DateUtil.SLASH_DATE_TIME_FORMAT_MATCHES;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

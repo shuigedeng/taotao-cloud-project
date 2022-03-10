@@ -15,8 +15,8 @@
  */
 package com.taotao.cloud.health.warn;
 
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.model.Message;
 
 /**

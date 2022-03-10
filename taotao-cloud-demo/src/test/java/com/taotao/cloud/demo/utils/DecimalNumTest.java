@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.utils;
 
 
-import com.taotao.cloud.common.utils.DecimalNum;
+import com.taotao.cloud.common.utils.number.DecimalNum;
 import java.math.BigDecimal;
 
 public class DecimalNumTest {

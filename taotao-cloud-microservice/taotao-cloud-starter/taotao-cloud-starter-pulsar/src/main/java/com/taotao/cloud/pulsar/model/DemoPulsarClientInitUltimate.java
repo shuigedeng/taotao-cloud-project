@@ -1,6 +1,6 @@
 package com.taotao.cloud.pulsar.model;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

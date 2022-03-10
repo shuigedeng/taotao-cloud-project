@@ -22,7 +22,7 @@ import com.taotao.cloud.canal.interfaces.CanalEventListener;
 import com.taotao.cloud.canal.interfaces.MessageTransponder;
 import com.taotao.cloud.canal.model.ListenerPoint;
 import com.taotao.cloud.canal.properties.CanalProperties;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

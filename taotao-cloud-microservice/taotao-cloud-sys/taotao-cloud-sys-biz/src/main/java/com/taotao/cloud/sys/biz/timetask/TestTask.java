@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.timetask;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.schedule.common.annotation.ScheduledBean;
 import com.taotao.cloud.web.schedule.core.ScheduledManager;
 import java.time.LocalDateTime;

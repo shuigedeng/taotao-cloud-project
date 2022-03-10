@@ -4,7 +4,7 @@ package com.taotao.cloud.web.sign.advice;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.sign.annotation.EncryptBody;
 import com.taotao.cloud.web.sign.bean.EncryptAnnotationInfoBean;
 import com.taotao.cloud.web.sign.enums.EncryptBodyMethod;

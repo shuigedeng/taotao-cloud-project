@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import com.taotao.cloud.common.utils.NumberUtil;
+import com.taotao.cloud.common.utils.number.NumberUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

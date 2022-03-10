@@ -16,7 +16,7 @@
 package com.taotao.cloud.backend.graphql.resolver;
 
 import com.taotao.cloud.backend.graphql.entity.User;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.backend.graphql.entity.Article;
 import com.taotao.cloud.order.api.feign.IFeignOrderService;
 import com.taotao.cloud.goods.api.feign.RemoteProductService;

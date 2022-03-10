@@ -1,7 +1,7 @@
 package com.taotao.cloud.pulsar.model;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.apache.pulsar.client.api.Consumer;
 
 import java.util.concurrent.Executors;

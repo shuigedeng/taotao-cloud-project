@@ -17,7 +17,7 @@
 package com.taotao.cloud.mongodb.converter;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import org.bson.BasicBSONObject;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;

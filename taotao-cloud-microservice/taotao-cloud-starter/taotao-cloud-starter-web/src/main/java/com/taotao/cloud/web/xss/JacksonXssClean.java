@@ -19,7 +19,7 @@ package com.taotao.cloud.web.xss;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.properties.XssProperties;
 import com.taotao.cloud.web.utils.XssUtil;
 import java.io.IOException;

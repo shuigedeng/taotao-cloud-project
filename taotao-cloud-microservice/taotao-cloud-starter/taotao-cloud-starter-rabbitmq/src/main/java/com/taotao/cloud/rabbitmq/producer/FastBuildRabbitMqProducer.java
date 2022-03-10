@@ -16,7 +16,7 @@
 package com.taotao.cloud.rabbitmq.producer;
 
 import com.rabbitmq.client.Channel;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.rabbitmq.cache.RetryCache;
 import com.taotao.cloud.rabbitmq.common.Constants;
 import com.taotao.cloud.rabbitmq.common.DetailResponse;

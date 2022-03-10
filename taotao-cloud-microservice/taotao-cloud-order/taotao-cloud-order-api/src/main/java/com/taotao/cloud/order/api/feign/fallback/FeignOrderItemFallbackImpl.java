@@ -2,7 +2,7 @@ package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
 import com.taotao.cloud.order.api.feign.IFeignOrderItemService;
 import org.springframework.cloud.openfeign.FallbackFactory;

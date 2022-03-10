@@ -1,9 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.util.lang.CharUtil;
-import com.taotao.cloud.core.heaven.util.util.regex.RegexUtil;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.utils.lang.CharUtil;
+import com.taotao.cloud.common.utils.regex.RegexUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -23,7 +22,6 @@ import com.taotao.cloud.core.sensitive.word.support.format.CharFormatChain;
  *
  * 也可以严格的保留下来。
  */
-@ThreadSafe
 public class SensitiveCheckEmail implements ISensitiveCheck {
 
     @Override

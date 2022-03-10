@@ -1,7 +1,6 @@
 package com.taotao.cloud.core.sensitive.word.support.check.impl;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
+import com.taotao.cloud.common.support.instance.impl.Instances;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.constant.enums.ValidModeEnum;
 import com.taotao.cloud.core.sensitive.word.support.check.ISensitiveCheck;
@@ -13,7 +12,6 @@ import com.taotao.cloud.core.sensitive.word.support.format.CharFormatChain;
  *
  * 这里可以提供一个公共的父类。
  */
-@ThreadSafe
 public class SensitiveCheckNum implements ISensitiveCheck {
 
     @Override

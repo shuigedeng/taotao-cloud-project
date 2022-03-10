@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.word.support.allow;
 
-import com.taotao.cloud.core.heaven.support.instance.impl.Instances;
-import com.taotao.cloud.core.heaven.support.pipeline.Pipeline;
-import com.taotao.cloud.core.heaven.util.util.ArrayUtil;
+import com.taotao.cloud.common.support.instance.impl.Instances;
+import com.taotao.cloud.common.support.pipeline.Pipeline;
+import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.core.sensitive.word.api.IWordAllow;
 
 /**

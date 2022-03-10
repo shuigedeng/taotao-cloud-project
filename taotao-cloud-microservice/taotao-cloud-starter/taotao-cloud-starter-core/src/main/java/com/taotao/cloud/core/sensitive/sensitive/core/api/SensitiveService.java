@@ -3,14 +3,13 @@ package com.taotao.cloud.core.sensitive.sensitive.core.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ContextValueFilter;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.deepcopy.IDeepCopy;
-import com.taotao.cloud.core.heaven.support.cache.impl.ClassFieldListCache;
-import com.taotao.cloud.core.heaven.util.lang.ObjectUtil;
-import com.taotao.cloud.core.heaven.util.lang.reflect.ClassTypeUtil;
-import com.taotao.cloud.core.heaven.util.lang.reflect.ClassUtil;
-import com.taotao.cloud.core.heaven.util.util.ArrayUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
+import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
+import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.reflect.ClassTypeUtil;
+import com.taotao.cloud.common.utils.reflect.ClassUtil;
+import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.Sensitive;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveCondition;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.metadata.SensitiveStrategy;
@@ -37,7 +36,6 @@ import java.util.List;
  * [反射处理数组](https://blog.csdn.net/snakemoving/article/details/54287681)
  *
  */
-@ThreadSafe
 public class SensitiveService<T> implements ISensitive<T> {
 
     @Override

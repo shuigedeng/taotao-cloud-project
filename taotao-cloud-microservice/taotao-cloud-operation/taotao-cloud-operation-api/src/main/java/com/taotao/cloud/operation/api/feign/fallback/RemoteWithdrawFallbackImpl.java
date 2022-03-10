@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.operation.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.core.model.Result;
 import com.taotao.cloud.operation.api.feign.RemoteWithdrawService;
 import com.taotao.cloud.operation.api.vo.WithdrawVO;

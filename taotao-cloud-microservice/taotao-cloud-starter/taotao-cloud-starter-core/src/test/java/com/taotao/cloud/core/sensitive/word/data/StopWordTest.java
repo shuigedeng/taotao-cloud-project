@@ -1,13 +1,12 @@
 package com.taotao.cloud.core.sensitive.word.data;
 
 import com.taotao.cloud.core.heaven.support.condition.ICondition;
-import com.taotao.cloud.core.heaven.util.io.FileUtil;
-import com.taotao.cloud.core.heaven.util.util.CharsetUtil;
+import com.taotao.cloud.common.utils.io.FileUtil;
+import com.taotao.cloud.common.utils.common.CharsetUtil;
 import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

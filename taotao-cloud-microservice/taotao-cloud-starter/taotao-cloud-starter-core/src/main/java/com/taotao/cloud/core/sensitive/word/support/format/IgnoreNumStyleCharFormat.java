@@ -1,6 +1,5 @@
 package com.taotao.cloud.core.sensitive.word.support.format;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
 import com.taotao.cloud.core.sensitive.word.api.ICharFormat;
 import com.taotao.cloud.core.sensitive.word.api.IWordContext;
 import com.taotao.cloud.core.sensitive.word.utils.NumUtils;
@@ -8,7 +7,6 @@ import com.taotao.cloud.core.sensitive.word.utils.NumUtils;
 /**
  * 忽略数字的样式
  */
-@ThreadSafe
 public class IgnoreNumStyleCharFormat implements ICharFormat {
 
     @Override

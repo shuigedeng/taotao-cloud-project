@@ -11,7 +11,7 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateException;
 import cn.hutool.extra.template.TemplateUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.sys.biz.entity.ColumnConfig;
 import com.taotao.cloud.sys.biz.entity.GenConfig;
 import java.io.File;

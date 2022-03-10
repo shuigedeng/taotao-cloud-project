@@ -17,7 +17,7 @@ package com.taotao.cloud.health.utils;
 
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;

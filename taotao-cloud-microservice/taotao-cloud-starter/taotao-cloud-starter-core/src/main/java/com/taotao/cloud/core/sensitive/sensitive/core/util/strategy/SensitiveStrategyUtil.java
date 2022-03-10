@@ -1,8 +1,8 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.util.strategy;
 
 
-import com.taotao.cloud.core.heaven.constant.PunctuationConst;
-import com.taotao.cloud.core.heaven.util.lang.StringUtil;
+import com.taotao.cloud.common.constant.PunctuationConst;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 
 /**
  * 脱敏策略工具类

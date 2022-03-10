@@ -16,8 +16,8 @@
 package com.taotao.cloud.redis.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.lock.DistributedLock;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.support.lock.DistributedLock;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.lock.RedissonDistributedLock;
 import com.taotao.cloud.redis.properties.RedisLockProperties;
 import org.redisson.api.RedissonClient;

@@ -3,7 +3,7 @@
 package com.taotao.cloud.web.sign.util.security;
 
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.sign.properties.EncryptBodyProperties;
 import com.taotao.cloud.web.sign.enums.SHAEncryptType;
 import com.taotao.cloud.web.sign.exception.EncryptDtguaiException;

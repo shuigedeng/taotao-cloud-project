@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.compiler;
 
-import com.taotao.cloud.common.compiler.ByteCodeLoader;
+import com.taotao.cloud.common.utils.compiler.ByteCodeLoader;
 import org.junit.Assert;
 import org.junit.Test;
 

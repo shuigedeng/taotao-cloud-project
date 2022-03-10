@@ -1,7 +1,7 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.util.entry;
 
 
-import com.taotao.cloud.core.heaven.util.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.SensitiveEntry;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

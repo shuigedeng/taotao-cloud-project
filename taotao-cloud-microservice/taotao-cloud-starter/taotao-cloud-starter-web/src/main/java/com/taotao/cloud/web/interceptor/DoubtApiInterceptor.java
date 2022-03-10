@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.web.interceptor;
 
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import com.taotao.cloud.core.model.Collector;
 import com.taotao.cloud.web.properties.InterceptorProperties;
 import java.util.Map;

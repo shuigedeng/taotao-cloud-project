@@ -1,7 +1,7 @@
 package com.taotao.cloud.demo.bean;
 
 
-import com.taotao.cloud.common.utils.ClassUtil;
+import com.taotao.cloud.common.utils.clazz.ClassUtil;
 import java.util.Arrays;
 import java.util.stream.Stream;
 

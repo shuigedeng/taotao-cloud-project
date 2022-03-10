@@ -16,7 +16,7 @@
 package com.taotao.cloud.logger.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.logger.aspect.RequestLoggerAspect;
 import com.taotao.cloud.logger.enums.RequestLoggerTypeEnum;
 import com.taotao.cloud.logger.listener.RequestLoggerListener;
@@ -28,11 +28,9 @@ import com.taotao.cloud.logger.service.impl.LoggerRequestLoggerServiceImpl;
 import com.taotao.cloud.logger.service.impl.RedisRequestLoggerServiceImpl;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

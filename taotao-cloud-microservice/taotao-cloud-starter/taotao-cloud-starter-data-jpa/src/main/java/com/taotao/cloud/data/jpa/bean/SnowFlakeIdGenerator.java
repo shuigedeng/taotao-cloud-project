@@ -1,6 +1,6 @@
 package com.taotao.cloud.data.jpa.bean;
 
-import com.taotao.cloud.common.utils.IdGeneratorUtil;
+import com.taotao.cloud.common.utils.common.IdGeneratorUtil;
 import java.io.Serializable;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

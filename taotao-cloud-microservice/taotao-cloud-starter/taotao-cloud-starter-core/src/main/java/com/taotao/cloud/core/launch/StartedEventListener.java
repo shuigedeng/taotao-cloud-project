@@ -15,8 +15,7 @@
  */
 package com.taotao.cloud.core.launch;
 
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.SystemUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 /**

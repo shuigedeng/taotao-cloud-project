@@ -3,13 +3,11 @@ package com.taotao.cloud.core.sensitive.sensitive.core.support.filter;
 import com.alibaba.fastjson.serializer.BeanContext;
 import com.alibaba.fastjson.serializer.ContextValueFilter;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
-import com.taotao.cloud.core.heaven.support.cache.impl.ClassFieldListCache;
-import com.taotao.cloud.core.heaven.util.lang.ObjectUtil;
-import com.taotao.cloud.core.heaven.util.lang.reflect.ClassTypeUtil;
-import com.taotao.cloud.core.heaven.util.util.ArrayUtil;
-import com.taotao.cloud.core.heaven.util.util.CollectionUtil;
-import com.taotao.cloud.core.heaven.util.util.Optional;
+import com.taotao.cloud.common.support.cache.impl.ClassFieldListCache;
+import com.taotao.cloud.common.utils.collection.CollectionUtil;
+import com.taotao.cloud.common.utils.lang.ObjectUtil;
+import com.taotao.cloud.common.utils.reflect.ClassTypeUtil;
+import com.taotao.cloud.common.utils.collection.ArrayUtil;
 import com.taotao.cloud.core.sensitive.sensitive.annotation.Sensitive;
 import com.taotao.cloud.core.sensitive.sensitive.api.ICondition;
 import com.taotao.cloud.core.sensitive.sensitive.api.IStrategy;
@@ -24,6 +22,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 默认的上下文过滤器
@@ -36,7 +35,6 @@ import java.util.List;
  * 和 {@link com.github.houbb.sensitive.core.api.SensitiveUtil#desCopy(Object)} 的区别
  * 因为 FastJSON 本身的转换问题，如果对象中存储的是集合对象列表，会导致显示不是信息本身。
  */
-@ThreadSafe
 public class DefaultContextValueFilter implements ContextValueFilter {
 
     /**
@@ -157,7 +155,7 @@ public class DefaultContextValueFilter implements ContextValueFilter {
             Annotation[] annotations = field.getAnnotations();
             if (ArrayUtil.isNotEmpty(annotations)) {
                 Optional<ICondition> conditionOptional = SensitiveConditions.getConditionOpt(annotations);
-                if (conditionOptional.isNotPresent()
+                if (conditionOptional.isPresent()
                         || conditionOptional.get().valid(context)) {
                     final Optional<IStrategy> strategyOptional = SensitiveStrategyBuiltInUtil.getStrategyOpt(annotations);
                     if (strategyOptional.isPresent()) {

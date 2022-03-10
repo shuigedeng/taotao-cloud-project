@@ -1,6 +1,5 @@
 package com.taotao.cloud.core.sensitive.word.support.result;
 
-import com.taotao.cloud.core.heaven.annotation.ThreadSafe;
 import com.taotao.cloud.core.sensitive.word.api.IWordResult;
 import com.taotao.cloud.core.sensitive.word.api.IWordResultHandler;
 
@@ -8,7 +7,6 @@ import com.taotao.cloud.core.sensitive.word.api.IWordResultHandler;
  * 只保留单词
  *
  */
-@ThreadSafe
 public class WordResultHandlerWord implements IWordResultHandler<String> {
 
     @Override

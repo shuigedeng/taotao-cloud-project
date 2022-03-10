@@ -20,7 +20,7 @@ import com.taotao.cloud.admin.api.PrometheusApi;
 import com.taotao.cloud.admin.api.ReactivePrometheusApi;
 import com.taotao.cloud.admin.model.AlertMessage;
 import com.taotao.cloud.admin.properties.PrometheusProperties;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

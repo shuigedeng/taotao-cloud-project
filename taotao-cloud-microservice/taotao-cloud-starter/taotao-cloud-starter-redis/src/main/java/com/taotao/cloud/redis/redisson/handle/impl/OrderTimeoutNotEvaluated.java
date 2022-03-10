@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.redisson.handle.impl;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.redisson.handle.RedisDelayQueueHandle;
 import java.util.Map;
 import org.springframework.stereotype.Component;

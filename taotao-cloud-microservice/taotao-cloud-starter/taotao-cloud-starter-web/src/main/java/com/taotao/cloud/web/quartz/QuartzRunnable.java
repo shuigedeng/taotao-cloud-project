@@ -4,7 +4,7 @@
  */
 package com.taotao.cloud.web.quartz;
 
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 import org.apache.commons.lang3.StringUtils;

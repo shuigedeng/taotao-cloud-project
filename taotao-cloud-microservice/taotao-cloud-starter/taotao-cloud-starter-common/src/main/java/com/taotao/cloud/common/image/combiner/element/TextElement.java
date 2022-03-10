@@ -1,11 +1,11 @@
 package com.taotao.cloud.common.image.combiner.element;
 
 import com.taotao.cloud.common.image.combiner.enums.LineAlign;
-import sun.font.FontDesignMetrics;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import sun.font.FontDesignMetrics;
 
 /**
  * TextElement

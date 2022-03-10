@@ -14,7 +14,7 @@ package com.taotao.cloud.sms.channel.qcloud;
 
 import com.github.qcloudsms.SmsMultiSender;
 import com.github.qcloudsms.SmsMultiSenderResult;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.sms.model.NoticeData;
 import com.taotao.cloud.sms.exception.SendFailedException;
 import com.taotao.cloud.sms.utils.StringUtils;

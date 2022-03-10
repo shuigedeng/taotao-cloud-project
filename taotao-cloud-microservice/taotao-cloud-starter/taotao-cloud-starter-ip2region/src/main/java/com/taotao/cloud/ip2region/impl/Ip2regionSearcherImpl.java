@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.ip2region.impl;
 
-import com.taotao.cloud.common.utils.Exceptions;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
 import com.taotao.cloud.ip2region.model.DbConfig;
 import com.taotao.cloud.ip2region.model.DbSearcher;
 import com.taotao.cloud.ip2region.model.Ip2regionSearcher;
@@ -62,7 +62,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.memorySearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.memorySearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.getByIndexPtr(ptr));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.btreeSearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.btreeSearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.binarySearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class Ip2regionSearcherImpl implements InitializingBean, Ip2regionSearche
 		try {
 			return IpInfoUtil.toIpInfo(searcher.binarySearch(ip));
 		} catch (IOException e) {
-			throw Exceptions.unchecked(e);
+			throw ExceptionUtil.unchecked(e);
 		}
 	}
 

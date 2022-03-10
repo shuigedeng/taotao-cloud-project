@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.service.impl;
 
-import com.taotao.cloud.common.utils.JsonUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
 import com.taotao.cloud.gateway.rule.BlackList;
 import com.taotao.cloud.gateway.rule.RuleConstant;
 import com.taotao.cloud.gateway.service.IRuleCacheService;

@@ -13,7 +13,7 @@
 package com.taotao.cloud.sms.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import com.taotao.cloud.sms.model.VerificationCodeTypeGenerate;
 import com.taotao.cloud.sms.repository.VerificationCodeMemoryRepository;

@@ -7,8 +7,8 @@ package com.taotao.cloud.web.quartz;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Date;
 import java.util.Objects;

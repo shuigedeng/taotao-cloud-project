@@ -16,14 +16,13 @@
 package com.taotao.cloud.data.jpa.listener;
 
 import cn.hutool.db.sql.SqlFormatter;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.io.Serializable;
 import java.util.Iterator;
 import org.hibernate.CallbackException;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.EntityMode;
 import org.hibernate.Transaction;
-import org.hibernate.resource.jdbc.spi.StatementInspector;
 import org.hibernate.type.Type;
 
 /**

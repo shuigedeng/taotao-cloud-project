@@ -16,8 +16,8 @@
 package com.taotao.cloud.health.collect;
 
 
-import com.taotao.cloud.common.utils.ExceptionUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.exception.ExceptionUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.health.annotation.FieldReport;
 import com.taotao.cloud.health.model.CollectInfo;
 import com.taotao.cloud.health.properties.CollectTaskProperties;

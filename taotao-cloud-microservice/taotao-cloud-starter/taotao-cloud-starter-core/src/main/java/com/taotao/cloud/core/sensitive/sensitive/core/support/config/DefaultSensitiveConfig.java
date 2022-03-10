@@ -1,6 +1,6 @@
 package com.taotao.cloud.core.sensitive.sensitive.core.support.config;
 
-import com.taotao.cloud.core.heaven.deepcopy.IDeepCopy;
+import com.taotao.cloud.common.support.deepcopy.IDeepCopy;
 import com.taotao.cloud.core.sensitive.sensitive.api.ISensitiveConfig;
 
 /**

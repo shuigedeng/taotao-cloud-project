@@ -1,6 +1,6 @@
 package com.taotao.cloud.redis.delay.config;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.redis.delay.annotation.RedissonListener;
 import com.taotao.cloud.redis.delay.consts.ListenerType;
 import com.taotao.cloud.redis.delay.handler.IsolationStrategy;

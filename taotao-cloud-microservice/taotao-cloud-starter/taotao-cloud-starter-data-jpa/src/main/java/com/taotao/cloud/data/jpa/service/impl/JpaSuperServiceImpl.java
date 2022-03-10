@@ -18,7 +18,7 @@ package com.taotao.cloud.data.jpa.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.querydsl.core.types.Predicate;
 import com.taotao.cloud.common.exception.LockException;
-import com.taotao.cloud.common.lock.DistributedLock;
+import com.taotao.cloud.common.support.lock.DistributedLock;
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
 import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
 import com.taotao.cloud.data.jpa.service.JpaSuperService;

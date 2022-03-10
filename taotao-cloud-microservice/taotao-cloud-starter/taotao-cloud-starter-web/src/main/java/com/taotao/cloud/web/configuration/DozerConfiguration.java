@@ -18,7 +18,7 @@ package com.taotao.cloud.web.configuration;
 import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.properties.DozerProperties;
 import java.io.IOException;
 import java.util.Collection;

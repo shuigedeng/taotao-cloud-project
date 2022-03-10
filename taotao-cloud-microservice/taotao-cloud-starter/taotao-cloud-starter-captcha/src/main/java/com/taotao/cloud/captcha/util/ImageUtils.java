@@ -17,9 +17,9 @@ package com.taotao.cloud.captcha.util;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.captcha.model.CaptchaBaseEnum;
-import com.taotao.cloud.common.utils.JsonUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.RandomUtil;
+import com.taotao.cloud.common.utils.common.JsonUtil;
+import com.taotao.cloud.common.utils.common.RandomUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

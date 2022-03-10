@@ -1,15 +1,6 @@
 package com.taotao.cloud.core.configuration;
 
-import com.alibaba.cloud.nacos.NacosConfigManager;
-import com.dtp.common.em.QueueTypeEnum;
-import com.dtp.common.em.RejectedTypeEnum;
-import com.dtp.core.DtpRegistry;
-import com.dtp.core.thread.DtpExecutor;
-import com.dtp.core.thread.ThreadPoolBuilder;
-import com.taotao.cloud.common.factory.YamlPropertySourceFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.context.annotation.Bean;
+import com.taotao.cloud.common.support.factory.YamlPropertySourceFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 

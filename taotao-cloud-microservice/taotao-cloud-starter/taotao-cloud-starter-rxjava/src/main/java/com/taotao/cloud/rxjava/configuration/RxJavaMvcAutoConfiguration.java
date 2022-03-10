@@ -16,7 +16,7 @@
 package com.taotao.cloud.rxjava.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.rxjava.annotation.RxJava;
 import com.taotao.cloud.rxjava.mvc.ObservableReturnValueHandler;
 import com.taotao.cloud.rxjava.mvc.SingleReturnValueHandler;

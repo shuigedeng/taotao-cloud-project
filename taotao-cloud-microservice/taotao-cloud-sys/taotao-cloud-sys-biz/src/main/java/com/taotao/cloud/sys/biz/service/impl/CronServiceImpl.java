@@ -15,12 +15,12 @@
  */
 package com.taotao.cloud.sys.biz.service.impl;
 
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.sys.biz.service.ICronService;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.springframework.scheduling.support.CronSequenceGenerator;
+import org.springframework.scheduling.support.CronExpression;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,11 +36,11 @@ public class CronServiceImpl implements ICronService {
 	@Override
 	public List<String> cronNextExecutionTime(String expression) {
 		List<String> nextTimes = new ArrayList<>();
-		CronSequenceGenerator cronSequenceGenerator = new CronSequenceGenerator(expression);
-		Date current = new Date();
+		CronExpression cronSequenceGenerator = CronExpression.parse(expression);
+		LocalDateTime current = LocalDateTime.now();
 		for (int i = 0; i < 10; i++) {
 			current = cronSequenceGenerator.next(current);
-			nextTimes.add(DateFormatUtils.format(current,"yyyy-MM-dd HH:mm:ss"));
+			nextTimes.add(current.format(CommonConstant.DATETIME_FORMATTER));
 		}
 
 		return nextTimes;

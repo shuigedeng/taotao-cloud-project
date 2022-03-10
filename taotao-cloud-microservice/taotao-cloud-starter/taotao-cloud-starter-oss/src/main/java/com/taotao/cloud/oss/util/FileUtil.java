@@ -21,7 +21,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.oss.exception.UploadFileException;
 import com.taotao.cloud.oss.exception.UploadFileTypeException;
 import com.taotao.cloud.oss.model.UploadFileInfo;

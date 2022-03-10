@@ -1,6 +1,6 @@
 package com.taotao.cloud.gateway.properties;
 
-import com.taotao.cloud.common.utils.ContextUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

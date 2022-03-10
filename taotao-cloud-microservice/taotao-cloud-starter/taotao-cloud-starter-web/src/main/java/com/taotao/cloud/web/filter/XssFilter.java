@@ -18,7 +18,7 @@ package com.taotao.cloud.web.filter;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.xss.XssRequestWrapper;
 import java.io.IOException;
 import java.util.List;

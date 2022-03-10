@@ -8,7 +8,7 @@ package com.taotao.cloud.goods.biz.service.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.bean.BeanUtil;
+import com.taotao.cloud.common.utils.bean.BeanUtil;
 import com.taotao.cloud.goods.api.dto.ProductDTO;
 import com.taotao.cloud.goods.biz.entity.Product;
 import com.taotao.cloud.goods.biz.repository.ProductSuperRepository;

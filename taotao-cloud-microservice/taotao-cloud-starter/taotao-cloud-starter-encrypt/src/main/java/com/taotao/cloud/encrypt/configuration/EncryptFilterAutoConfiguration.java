@@ -1,7 +1,7 @@
 package com.taotao.cloud.encrypt.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.encrypt.filter.EncryptFilter;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;
 import com.taotao.cloud.encrypt.properties.EncryptFilterProperties;

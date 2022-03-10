@@ -1,7 +1,7 @@
 package com.taotao.cloud.netty.configuration;
 
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.netty.properties.NettyWebsocketProperties;
 import com.taotao.cloud.netty.standard.ServerEndpointExporter;
 import org.springframework.beans.factory.InitializingBean;

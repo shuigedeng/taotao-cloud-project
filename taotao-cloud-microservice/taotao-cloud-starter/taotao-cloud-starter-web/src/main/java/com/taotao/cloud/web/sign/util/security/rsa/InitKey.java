@@ -1,6 +1,6 @@
 package com.taotao.cloud.web.sign.util.security.rsa;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.web.sign.exception.EncryptDtguaiException;
 import java.security.Key;
 import java.security.KeyPair;

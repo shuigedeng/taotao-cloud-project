@@ -17,12 +17,11 @@ package com.taotao.cloud.seata.configuration;
 
 import cn.hutool.core.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.seata.properties.SeataProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import io.seata.core.context.RootContext;
-import io.seata.rm.datasource.DataSourceProxy;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -38,7 +37,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**

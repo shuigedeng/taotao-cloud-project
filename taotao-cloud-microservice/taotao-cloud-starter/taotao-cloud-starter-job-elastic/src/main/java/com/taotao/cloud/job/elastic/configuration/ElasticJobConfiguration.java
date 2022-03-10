@@ -18,7 +18,7 @@ package com.taotao.cloud.job.elastic.configuration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import com.taotao.cloud.common.constant.StarterName;
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.job.elastic.model.JobController;
 import com.taotao.cloud.job.elastic.model.JobService;
 import com.taotao.cloud.job.elastic.parser.JobConfParser;

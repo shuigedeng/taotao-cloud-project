@@ -15,10 +15,9 @@
  */
 package com.taotao.cloud.health.collect;
 
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.LogUtil;
-import com.taotao.cloud.common.utils.ReflectionUtil;
-import com.taotao.cloud.core.http.DefaultHttpClient;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
+import com.taotao.cloud.common.utils.reflect.ReflectionUtil;
 import com.taotao.cloud.core.http.HttpClient;
 import com.taotao.cloud.core.http.HttpClientManager;
 import com.taotao.cloud.health.annotation.FieldReport;

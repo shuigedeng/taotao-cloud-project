@@ -1,12 +1,5 @@
 package com.taotao.cloud.core.sensitive.word.constant.enums;
 
-/**
- * <p> project: sensitive-word-ValidModeEnum </p>
- * <p> create on 2020/1/7 22:46 </p>
- *
- * @author Administrator
- * @since 0.0.1
- */
 public enum ValidModeEnum {
 
     /**

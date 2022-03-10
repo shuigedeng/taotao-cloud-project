@@ -18,7 +18,6 @@ package com.taotao.cloud.dingtalk.utils;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.base64ToByteArray;
 import static com.taotao.cloud.dingtalk.utils.DingerUtils.byteArrayToBase64;
 
-import com.taotao.cloud.common.utils.LogUtil;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyFactory;

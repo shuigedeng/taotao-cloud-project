@@ -1,6 +1,6 @@
 package com.taotao.cloud.encrypt.filter;
 
-import com.taotao.cloud.common.utils.LogUtil;
+import com.taotao.cloud.common.utils.log.LogUtil;
 import com.taotao.cloud.encrypt.wrapper.EncryptRequestWrapper;
 import com.taotao.cloud.encrypt.wrapper.EncryptResponseWrapper;
 import com.taotao.cloud.encrypt.handler.EncryptHandler;

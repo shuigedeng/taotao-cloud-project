@@ -17,8 +17,8 @@ package com.taotao.cloud.captcha.service.impl;
 
 import com.taotao.cloud.captcha.model.CaptchaException;
 import com.taotao.cloud.captcha.service.CaptchaCacheService;
-import com.taotao.cloud.common.utils.ContextUtil;
-import com.taotao.cloud.common.utils.StringUtil;
+import com.taotao.cloud.common.utils.context.ContextUtil;
+import com.taotao.cloud.common.utils.lang.StringUtil;
 import com.taotao.cloud.redis.repository.RedisRepository;
 import java.util.Objects;
 
