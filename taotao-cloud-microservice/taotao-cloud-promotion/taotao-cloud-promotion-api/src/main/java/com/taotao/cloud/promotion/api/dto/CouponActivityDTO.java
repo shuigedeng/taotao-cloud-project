@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 优惠券活动DTO
  *
- * 
+ * @author Bulbasaur
  * @since 2021/5/21 7:16 下午
  */
 @EqualsAndHashCode(callSuper = true)
