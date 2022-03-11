@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -30,24 +31,29 @@ public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 	public static final String TABLE_NAME = "li_store_goods_label";
 
     @ApiModelProperty("店铺ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeId;
 
     @NotEmpty(message = "店铺商品分类名称不能为空")
     @Length(max = 20,message = "店铺商品分类名称太长")
     @ApiModelProperty("店铺商品分类名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String labelName;
 
 
     @NotNull(message = "店铺商品分类排序不能为空")
     @Max(value = 99999,message = "排序值太大")
     @ApiModelProperty("店铺商品分类排序")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private BigDecimal sortOrder;
 
     @NotEmpty(message = "父节点不能为空，需设定根节点或者某节点的子节点")
     @ApiModelProperty(value = "父id, 根节点为0")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String parentId;
 
     @ApiModelProperty(value = "层级, 从0开始")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer level;
 
 

@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 会员收货地址
+ * 会员收货地址表
  *
- * @since 2020-02-25 14:10:16
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-11 14:55:28
  */
 @Entity
 @Table(name = MemberAddress.TABLE_NAME)
@@ -17,68 +19,115 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = MemberAddress.TABLE_NAME, comment = "会员收货地址表")
 public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 
-	public static final String TABLE_NAME = "li_member_address";
+	public static final String TABLE_NAME = "tt_member_address";
 
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员ID'")
+	/**
+	 * 会员ID
+	 */
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String memberId;
 
-	@Column(name = "name", nullable = false, columnDefinition = "varchar(32) not null comment '收货人姓名'")
+	/**
+	 * 收货人姓名
+	 */
+	@Column(name = "name", nullable = false, columnDefinition = "varchar(64) not null comment '收货人姓名'")
 	private String name;
 
-	//@Phone
-	//@Sensitive(strategy = SensitiveStrategy.PHONE)
-	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(32) not null comment '手机号码'")
+	/**
+	 * 手机号码
+	 */
+	@Column(name = "mobile", nullable = false, columnDefinition = "varchar(64) not null comment '手机号码'")
 	private String mobile;
 
-	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址名称， 逗号分割'")
+	/**
+	 * 地址名称，逗号分割
+	 */
+	@Column(name = "consignee_address_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址名称，逗号分割'")
 	private String consigneeAddressPath;
 
-	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址id， 逗号分割'")
+	/**
+	 * 地址id,逗号分割
+	 */
+	@Column(name = "consignee_address_id_path", nullable = false, columnDefinition = "varchar(32) not null comment '地址id,逗号分割'")
 	private String consigneeAddressIdPath;
 
-	@Column(name = "detail", nullable = false, columnDefinition = "varchar(32) not null comment '详细地址'")
-	private String detail;
+	/**
+	 * 省
+	 */
+	@Column(name = "province", nullable = false, columnDefinition = "varchar(64) not null COMMENT '省'")
+	private String province;
 
-	@Column(name = "city", nullable = false, columnDefinition = "varchar(32) not null COMMENT '市'")
+	/**
+	 * 市
+	 */
+	@Column(name = "city", nullable = false, columnDefinition = "varchar(64) not null COMMENT '市'")
 	private String city;
 
-	@Column(name = "area", nullable = false, columnDefinition = "varchar(32) not null COMMENT '区县'")
+	/**
+	 * 区县
+	 */
+	@Column(name = "area", nullable = false, columnDefinition = "varchar(64) not null COMMENT '区县'")
 	private String area;
 
-	@Column(name = "province_code", nullable = false, columnDefinition = "varchar(32) not null COMMENT '省code'")
+	/**
+	 * 省code
+	 */
+	@Column(name = "province_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '省code'")
 	private String provinceCode;
 
-	@Column(name = "city_code", nullable = false, columnDefinition = "varchar(32) not null COMMENT '市code'")
+	/**
+	 * 市code
+	 */
+	@Column(name = "city_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '市code'")
 	private String cityCode;
 
-	@Column(name = "area_code", nullable = false, columnDefinition = "varchar(32) not null COMMENT '区、县code'")
+	/**
+	 * 区县code
+	 */
+	@Column(name = "area_code", nullable = false, columnDefinition = "varchar(64) not null COMMENT '区县code'")
 	private String areaCode;
 
+	/**
+	 * 街道地址
+	 */
 	@Column(name = "address", nullable = false, columnDefinition = "varchar(255) not null COMMENT '街道地址'")
 	private String address;
 
-	@Column(name = "is_default", nullable = false, columnDefinition = "boolean not null default false comment '是否为默认收货地址'")
-	private Boolean isDefault;
+	/**
+	 * 详细地址
+	 */
+	@Column(name = "detail", nullable = false, columnDefinition = "varchar(255) not null comment '详细地址'")
+	private String detail;
 
-	@Column(name = "alias", nullable = false, columnDefinition = "varchar(32) not null comment '地址别名'")
+	/**
+	 * 是否为默认收货地址
+	 */
+	@Column(name = "defaulted", nullable = false, columnDefinition = "boolean not null default true comment '是否为默认收货地址'")
+	private Boolean defaulted;
+
+	/**
+	 * 地址别名
+	 */
+	@Column(name = "alias", columnDefinition = "varchar(64) comment '地址别名'")
 	private String alias;
 
-	@Column(name = "lon", nullable = false, columnDefinition = "varchar(32) not null comment '经度'")
+	/**
+	 * 经度
+	 */
+	@Column(name = "lon", columnDefinition = "varchar(32) comment '经度'")
 	private String lon;
 
-	@Column(name = "lat", nullable = false, columnDefinition = "varchar(32) not null comment '纬度'")
+	/**
+	 * 纬度
+	 */
+	@Column(name = "lat", columnDefinition = "varchar(32) comment '纬度'")
 	private String lat;
 
-	@Column(name = "postal_code", columnDefinition = "int(11) comment '邮政编码'")
-	private Long postalCode;
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
+	/**
+	 * 邮政编码
+	 */
+	@Column(name = "postal_code", columnDefinition = "varchar(64) comment '邮政编码'")
+	private String postalCode;
 
 	public String getName() {
 		return name;
@@ -168,14 +217,6 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 		this.address = address;
 	}
 
-	public Boolean getDefault() {
-		return isDefault;
-	}
-
-	public void setDefault(Boolean aDefault) {
-		isDefault = aDefault;
-	}
-
 	public String getAlias() {
 		return alias;
 	}
@@ -200,11 +241,35 @@ public class MemberAddress extends BaseSuperEntity<MemberAddress, Long> {
 		this.lat = lat;
 	}
 
-	public Long getPostalCode() {
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public Boolean getDefaulted() {
+		return defaulted;
+	}
+
+	public void setDefaulted(Boolean defaulted) {
+		this.defaulted = defaulted;
+	}
+
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(Long postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 }

@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 会员等级
+ * 会员等级表
  *
- * @since 2021/5/14 5:43 下午
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-11 15:16:55
  */
 @Entity
 @Table(name = MemberGrade.TABLE_NAME)
@@ -17,22 +19,31 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = MemberGrade.TABLE_NAME, comment = "会员等级表")
 public class MemberGrade extends BaseSuperEntity<MemberGrade, Long> {
 
-	public static final String TABLE_NAME = "li_member_grade";
+	public static final String TABLE_NAME = "tt_member_grade";
 
-
-	@Column(name = "grade_name", nullable = false, columnDefinition = "varchar(32) not null comment '等级名称'")
+	/**
+	 * 等级名称
+	 */
+	@Column(name = "grade_name", nullable = false, columnDefinition = "varchar(64) not null comment '等级名称'")
 	private String gradeName;
 
-
-	@Column(name = "grade_image", nullable = false, columnDefinition = "varchar(32) not null comment '等级图片'")
+	/**
+	 * 等级图片
+	 */
+	@Column(name = "grade_image", nullable = false, columnDefinition = "varchar(1024) not null comment '等级图片'")
 	private String gradeImage;
 
-
+	/**
+	 * 所需经验值
+	 */
 	@Column(name = "experience_value", nullable = false, columnDefinition = "int not null default 0 comment '所需经验值'")
 	private Integer experienceValue;
 
-	@Column(name = "is_default", nullable = false, columnDefinition = "boolean not null default false comment '是否为默认等级'")
-	private Boolean isDefault;
+	/**
+	 * 是否为默认等级
+	 */
+	@Column(name = "defaulted", nullable = false, columnDefinition = "boolean not null default false comment '是否为默认等级'")
+	private Boolean defaulted;
 
 	public String getGradeName() {
 		return gradeName;
@@ -58,11 +69,11 @@ public class MemberGrade extends BaseSuperEntity<MemberGrade, Long> {
 		this.experienceValue = experienceValue;
 	}
 
-	public Boolean getDefault() {
-		return isDefault;
+	public Boolean getDefaulted() {
+		return defaulted;
 	}
 
-	public void setDefault(Boolean aDefault) {
-		isDefault = aDefault;
+	public void setDefaulted(Boolean defaulted) {
+		this.defaulted = defaulted;
 	}
 }

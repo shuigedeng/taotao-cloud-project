@@ -4,9 +4,9 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.member.biz.entity.FootPrint;
+import com.taotao.cloud.member.biz.entity.MemberBrowse;
 import com.taotao.cloud.member.biz.mapper.FootprintMapper;
-import com.taotao.cloud.member.biz.service.FootprintService;
+import com.taotao.cloud.member.biz.service.IMemberBrowseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +24,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint> implements
-	FootprintService {
+public class IMemberBrowseServiceImpl extends ServiceImpl<FootprintMapper, MemberBrowse> implements
+	IMemberBrowseService {
 
     /**
      * es商品业务层
@@ -34,39 +34,39 @@ public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint
     private EsGoodsSearchService esGoodsSearchService;
 
     @Override
-    public FootPrint saveFootprint(FootPrint footPrint) {
-        LambdaQueryWrapper<FootPrint> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(FootPrint::getMemberId, footPrint.getMemberId());
-        queryWrapper.eq(FootPrint::getGoodsId, footPrint.getGoodsId());
+    public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {
+        LambdaQueryWrapper<MemberBrowse> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(MemberBrowse::getMemberId, memberBrowse.getMemberId());
+        queryWrapper.eq(MemberBrowse::getGoodsId, memberBrowse.getGoodsId());
         //如果已存在某商品记录，则更新其修改时间
         //如果不存在则添加记录
-        List<FootPrint> oldPrints = list(queryWrapper);
+        List<MemberBrowse> oldPrints = list(queryWrapper);
         if (oldPrints != null && !oldPrints.isEmpty()) {
-            FootPrint oldPrint = oldPrints.get(0);
-            oldPrint.setSkuId(footPrint.getSkuId());
+            MemberBrowse oldPrint = oldPrints.get(0);
+            oldPrint.setSkuId(memberBrowse.getSkuId());
             this.updateById(oldPrint);
             return oldPrint;
         } else {
-            footPrint.setCreateTime(new Date());
-            this.save(footPrint);
+            memberBrowse.setCreateTime(new Date());
+            this.save(memberBrowse);
             //删除超过100条后的记录
-            this.baseMapper.deleteLastFootPrint(footPrint.getMemberId());
-            return footPrint;
+            this.baseMapper.deleteLastFootPrint(memberBrowse.getMemberId());
+            return memberBrowse;
         }
     }
 
     @Override
     public boolean clean() {
-        LambdaQueryWrapper<FootPrint> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(FootPrint::getMemberId, UserContext.getCurrentUser().getId());
+        LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(MemberBrowse::getMemberId, UserContext.getCurrentUser().getId());
         return this.remove(lambdaQueryWrapper);
     }
 
     @Override
     public boolean deleteByIds(List<String> ids) {
-        LambdaQueryWrapper<FootPrint> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(FootPrint::getMemberId, UserContext.getCurrentUser().getId());
-        lambdaQueryWrapper.in(FootPrint::getGoodsId, ids);
+        LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(MemberBrowse::getMemberId, UserContext.getCurrentUser().getId());
+        lambdaQueryWrapper.in(MemberBrowse::getGoodsId, ids);
         this.remove(lambdaQueryWrapper);
         return true;
     }
@@ -74,10 +74,10 @@ public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint
     @Override
     public List<EsGoodsIndex> footPrintPage(PageVO pageVO) {
 
-        LambdaQueryWrapper<FootPrint> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(FootPrint::getMemberId, UserContext.getCurrentUser().getId());
-        lambdaQueryWrapper.eq(FootPrint::getDeleteFlag, false);
-        lambdaQueryWrapper.orderByDesc(FootPrint::getUpdateTime);
+        LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(MemberBrowse::getMemberId, UserContext.getCurrentUser().getId());
+        lambdaQueryWrapper.eq(MemberBrowse::getDeleteFlag, false);
+        lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
         List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageUtil.initPage(pageVO), lambdaQueryWrapper);
         if (!skuIdList.isEmpty()) {
             List<EsGoodsIndex> list = esGoodsSearchService.getEsGoodsBySkuIds(skuIdList);
@@ -90,9 +90,10 @@ public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, FootPrint
 
     @Override
     public long getFootprintNum() {
-        LambdaQueryWrapper<FootPrint> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(FootPrint::getMemberId, Objects.requireNonNull(UserContext.getCurrentUser()).getId());
-        lambdaQueryWrapper.eq(FootPrint::getDeleteFlag, false);
+        LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(
+	        MemberBrowse::getMemberId, Objects.requireNonNull(UserContext.getCurrentUser()).getId());
+        lambdaQueryWrapper.eq(MemberBrowse::getDeleteFlag, false);
         return this.count(lambdaQueryWrapper);
     }
 }

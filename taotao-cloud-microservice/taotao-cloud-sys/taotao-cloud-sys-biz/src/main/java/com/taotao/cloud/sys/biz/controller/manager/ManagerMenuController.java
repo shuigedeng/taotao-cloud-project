@@ -66,14 +66,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerMenuController extends
 	SuperController<IMenuService, Menu, Long, BaseQuery, MenuSaveDTO, MenuUpdateDTO, MenuQueryVO> {
 
-	/**
-	 * 根据角色id获取菜单列表
-	 *
-	 * @param roleId 角色id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:45
-	 */
 	@Operation(summary = "根据角色id获取菜单列表", description = "根据角色id获取菜单列表")
 	@RequestLogger(description = "根据角色id获取菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -87,14 +79,6 @@ public class ManagerMenuController extends
 		return success(result);
 	}
 
-	/**
-	 * 根据角色id列表获取角色列表
-	 *
-	 * @param roleIds 用户id列表
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:52
-	 */
 	@Operation(summary = "根据角色id列表获取角色列表", description = "根据角色id列表获取角色列表")
 	@RequestLogger(description = "根据角色id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
@@ -107,14 +91,6 @@ public class ManagerMenuController extends
 		return Result.success(result);
 	}
 
-	/**
-	 * 根据角色code获取菜单列表
-	 *
-	 * @param code 角色code
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:04:59
-	 */
 	@Operation(summary = "根据角色code获取菜单列表", description = "根据角色code获取菜单列表")
 	@RequestLogger(description = "根据角色code获取菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:code')")
@@ -127,14 +103,6 @@ public class ManagerMenuController extends
 		return Result.success(result);
 	}
 
-	/**
-	 * 根据角色code列表获取角色列表
-	 *
-	 * @param codes 角色cde列表
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:06
-	 */
 	@Operation(summary = "根据角色code列表获取角色列表", description = "根据角色code列表获取角色列表")
 	@RequestLogger(description = "根据角色cde列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:resource:info:codes')")
@@ -161,13 +129,6 @@ public class ManagerMenuController extends
 	//	return Result.succeed(collect);
 	//}
 
-	/**
-	 * 获取当前用户菜单列表
-	 *
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:16
-	 */
 	@Operation(summary = "获取当前用户菜单列表", description = "获取当前用户菜单列表")
 	@RequestLogger(description = "获取当前用户菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user')")
@@ -180,14 +141,6 @@ public class ManagerMenuController extends
 		return findResourceByCodes(roleCodes);
 	}
 
-	/**
-	 * 获取当前用户树形菜单列表
-	 *
-	 * @param parentId 父id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceTree&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:20
-	 */
 	@Operation(summary = "获取当前用户树形菜单列表", description = "获取当前用户树形菜单列表")
 	@RequestLogger(description = "获取当前用户树形菜单列表")
 	@PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
@@ -207,15 +160,6 @@ public class ManagerMenuController extends
 		return Result.success(trees);
 	}
 
-	/**
-	 * 获取树形菜单集合 1.false-非懒加载，查询全部 2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0
-	 *
-	 * @param lazy     是否是延迟查询
-	 * @param parentId 父id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.resource.ResourceTree&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:05:42
-	 */
 	@Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " +
 		"2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
 	@RequestLogger(description = "获取树形菜单集合")

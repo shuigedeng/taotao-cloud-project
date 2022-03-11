@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -29,11 +30,13 @@ public class Brand extends BaseSuperEntity<Brand, Long> {
     @NotEmpty(message = "品牌名称不能为空")
     @Length(max = 20, message = "品牌名称应该小于20长度字符")
     @ApiModelProperty(value = "品牌名称", required = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String name;
 
     @NotEmpty(message = "品牌图标不能为空")
     @Length(max = 255, message = "品牌图标地址长度超过255字符")
     @ApiModelProperty(value = "品牌图标", required = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String logo;
 
 }

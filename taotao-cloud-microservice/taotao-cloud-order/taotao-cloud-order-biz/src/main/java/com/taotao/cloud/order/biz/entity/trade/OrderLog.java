@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
@@ -31,34 +32,35 @@ public class OrderLog extends BaseIdEntity {
 
     private static final long serialVersionUID = -1599270944927160096L;
 
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者", hidden = true)
     private String createBy;
 
-    @CreatedDate
+    @CreatedDate@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", hidden = true)
     private Date createTime;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "订单编号")
     private String orderSn;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "操作者id(可以是卖家)")
     private String operatorId;
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see UserEnums
      */
     @ApiModelProperty(value = "操作者类型")
     private String operatorType;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 
     @ApiModelProperty(value = "操作者名称")
     private String operatorName;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "日志信息")
     private String message;
 

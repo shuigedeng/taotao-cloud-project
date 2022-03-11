@@ -64,14 +64,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerUserController extends
 	SuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
-	/**
-	 * 根据手机号码查询用户是否存在
-	 *
-	 * @param phone 手机号码
-	 * @return {@link Result&lt;java.lang.Boolean&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:14:58
-	 */
 	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
 	@RequestLogger(description = "根据手机号码查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
@@ -82,14 +74,6 @@ public class ManagerUserController extends
 		return success(service().existsByPhone(phone));
 	}
 
-	/**
-	 * 根据用户id查询用户是否存在
-	 *
-	 * @param userId 用户id
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:15:05
-	 */
 	@Operation(summary = "根据用户id查询用户是否存在", description = "根据用户id查询用户是否存在")
 	@RequestLogger(description = "根据用户id查询用户是否存在")
 	@PreAuthorize("hasAuthority('sys:user:exists:id')")
@@ -100,15 +84,6 @@ public class ManagerUserController extends
 		return success(service().existsById(userId));
 	}
 
-	/**
-	 * 重置密码
-	 *
-	 * @param userId          用户id
-	 * @param restPasswordDTO 重置密码DTO
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:15:57
-	 */
 	@Operation(summary = "重置密码", description = "重置密码")
 	@RequestLogger(description = "重置密码")
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
@@ -121,13 +96,6 @@ public class ManagerUserController extends
 		return success(service().restPass(userId, restPasswordDTO));
 	}
 
-	/**
-	 * 获取当前登录人信息
-	 *
-	 * @return {@link Result&lt;com.taotao.cloud.sys.api.vo.user.UserVO&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:16:08
-	 */
 	@Operation(summary = "获取当前登录人信息", description = "获取当前登录人信息")
 	@RequestLogger(description = "获取当前登录人信息")
 	@PreAuthorize("hasAuthority('sys:user:info:current')")

@@ -57,14 +57,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerRoleController extends
 	SuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
-	/**
-	 * 根据用户id获取角色列表
-	 *
-	 * @param userId 用户id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.role.RoleVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:12:23
-	 */
 	@Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
 	@RequestLogger(description = "根据用户id获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userId')")
@@ -77,14 +69,6 @@ public class ManagerRoleController extends
 		return success(result);
 	}
 
-	/**
-	 * 根据用户id列表获取角色列表
-	 *
-	 * @param userIds 用户id列表
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.role.RoleVO&gt;&gt;}
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:12:32
-	 */
 	@Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表")
 	@RequestLogger(description = "根据用户id列表获取角色列表")
 	@PreAuthorize("hasAuthority('sys:role:info:userIds')")
@@ -97,15 +81,6 @@ public class ManagerRoleController extends
 		return success(result);
 	}
 
-	/**
-	 * 根据角色id更新菜单信息(角色分配菜单)
-	 *
-	 * @param roleId      角色id
-	 * @param menuIds 菜单id列表
-	 * @return {@link Result&lt;java.lang.Boolean&gt; }
-	 * @author shuigedeng
-	 * @since 2021-10-09 15:12:46
-	 */
 	@Operation(summary = "根据角色id更新菜单信息(角色分配菜单)", description = "根据角色id更新菜单信息(角色分配菜单)")
 	@RequestLogger(description = "根据角色id更新菜单信息(角色分配菜单)")
 	@PreAuthorize("hasAuthority('sys:role:menu')")

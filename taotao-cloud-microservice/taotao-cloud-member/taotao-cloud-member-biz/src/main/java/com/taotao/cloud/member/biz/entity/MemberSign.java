@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 会员签到
+ * 会员签到表
  *
- * @since 2020-02-25 14:10:16
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-11 15:31:33
  */
 @Entity
 @Table(name = MemberSign.TABLE_NAME)
@@ -17,14 +19,22 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = MemberSign.TABLE_NAME, comment = "会员签到表")
 public class MemberSign extends BaseSuperEntity<MemberSign, Long> {
 
-	public static final String TABLE_NAME = "li_member_sign";
-
+	public static final String TABLE_NAME = "tt_member_sign";
+	/**
+	 * 会员用户名
+	 */
 	@Column(name = "member_ame", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户名'")
 	private String memberName;
 
+	/**
+	 * 会员用户ID
+	 */
 	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员用户ID'")
 	private String memberId;
 
+	/**
+	 * 连续签到天数
+	 */
 	@Column(name = "sign_day", nullable = false, columnDefinition = "int not null default 0 comment '连续签到天数'")
 	private Integer signDay;
 

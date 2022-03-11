@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.member.biz.entity.MemberAddress;
 import com.taotao.cloud.member.biz.mapper.MemberAddressMapper;
-import com.taotao.cloud.member.biz.service.MemberAddressService;
+import com.taotao.cloud.member.biz.service.IMemberAddressService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +22,8 @@ import java.util.Objects;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberAddressServiceImpl extends ServiceImpl<MemberAddressMapper, MemberAddress> implements
-	MemberAddressService {
+public class IMemberAddressServiceImpl extends ServiceImpl<MemberAddressMapper, MemberAddress> implements
+	IMemberAddressService {
 
     @Override
     public IPage<MemberAddress> getAddressByMember(PageVO page, String memberId) {

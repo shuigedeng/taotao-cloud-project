@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.biz.controller;
+package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
@@ -7,6 +7,7 @@ import com.taotao.cloud.member.api.query.MemberQuery;
 import com.taotao.cloud.member.api.vo.MemberVO;
 import com.taotao.cloud.member.biz.entity.MemberBack;
 import com.taotao.cloud.member.biz.mapper.MemberMapper;
+import com.taotao.cloud.member.biz.service.IMemberService;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

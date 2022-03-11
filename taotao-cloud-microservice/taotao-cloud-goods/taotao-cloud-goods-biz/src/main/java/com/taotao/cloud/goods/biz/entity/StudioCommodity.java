@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -26,9 +27,11 @@ public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 	public static final String TABLE_NAME = "li_studio_commodity";
 
     @ApiModelProperty(value = "房间ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer roomId;
 
     @ApiModelProperty(value = "商品ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer goodsId;
 
     public StudioCommodity(Integer roomId, Integer goodsId) {

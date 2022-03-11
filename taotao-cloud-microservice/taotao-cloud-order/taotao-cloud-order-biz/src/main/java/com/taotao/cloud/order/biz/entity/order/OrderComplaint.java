@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,86 +28,112 @@ public class OrderComplaint extends BaseEntity {
 
 
     @ApiModelProperty(value = "投诉主题")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String complainTopic;
 
     @ApiModelProperty(value = "投诉内容")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String content;
 
     @ApiModelProperty(value = "投诉凭证图片")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String images;
 
     /**
      * @see ComplaintStatusEnum
      */
     @ApiModelProperty(value = "交易投诉状态")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String complainStatus;
 
     @ApiModelProperty(value = "申诉商家内容")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String appealContent;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "申诉商家时间")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date appealTime;
 
     @ApiModelProperty(value = "申诉商家上传的图片")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String appealImages;
 
     @ApiModelProperty(value = "订单号")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String orderSn;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "下单时间")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date orderTime;
 
     @ApiModelProperty(value = "商品名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsName;
 
     @ApiModelProperty(value = "商品id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsId;
 
     @ApiModelProperty(value = "sku主键")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String skuId;
 
     @ApiModelProperty(value = "商品价格")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double goodsPrice;
 
     @ApiModelProperty(value = "商品图片")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsImage;
 
     @ApiModelProperty(value = "购买的商品数量")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer num;
 
     @ApiModelProperty(value = "运费")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double freightPrice;
 
     @ApiModelProperty(value = "订单金额")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double orderPrice;
 
     @ApiModelProperty(value = "物流单号")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String logisticsNo;
 
     @ApiModelProperty(value = "商家id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeId;
 
     @ApiModelProperty(value = "商家名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeName;
 
     @ApiModelProperty(value = "会员id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String memberId;
 
     @ApiModelProperty(value = "会员名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String memberName;
 
     @ApiModelProperty(value = "收货人")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeName;
 
     @ApiModelProperty(value = "收货地址")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeAddressPath;
 
     @ApiModelProperty(value = "收货人手机")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String consigneeMobile;
 
     @ApiModelProperty(value = "仲裁结果")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String arbitrationResult;
 
 

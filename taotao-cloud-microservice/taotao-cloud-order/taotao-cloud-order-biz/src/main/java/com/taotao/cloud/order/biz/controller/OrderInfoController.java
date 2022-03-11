@@ -21,9 +21,9 @@ import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.bo.order_info.OrderBO;
 import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
-import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.order.api.vo.order_info.OrderVO;
 import com.taotao.cloud.order.biz.entity.order.OrderInfo;
+import com.taotao.cloud.order.biz.service.IOrderInfoService;
 import com.taotao.cloud.web.base.controller.SuperController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -47,24 +47,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order")
 @Tag(name = "订单管理API", description = "订单管理API")
-public class OrderInfoController
-	extends
+public class OrderInfoController extends
 	SuperController<IOrderInfoService, OrderInfo, Long, BaseQuery, OrderSaveDTO, OrderUpdateDTO, OrderVO> {
-	/**
-	 * 根据父id查询地区数据
-	 *
-	 * @param parentId 父id
-	 * @return {@link Result &lt;java.util.List&lt;com.taotao.cloud.uc.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
-	 * }
-	 * @author shuigedeng
-	 * @since 2021-10-14 11:30:36
-	 */
+
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
 	//@PreAuthorize("hasAuthority('sys:region:info:parentId')")
 	public Result<List<OrderBO>> queryRegionByParentId(
-		@Parameter(description = "父id") @NotNull(message ="父id不能为空")
+		@Parameter(description = "父id") @NotNull(message = "父id不能为空")
 		@PathVariable(name = "parentId") Long parentId) {
 		List<OrderBO> result = service().queryRegionByParentId(parentId);
 		return Result.success(result);

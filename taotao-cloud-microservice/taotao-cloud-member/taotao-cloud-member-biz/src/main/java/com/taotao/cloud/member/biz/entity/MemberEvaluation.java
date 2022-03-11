@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 会员商品评价
+ * 会员商品评价表
  *
- * @since 2020-02-25 14:10:16
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-11 15:07:11
  */
 @Entity
 @Table(name = MemberEvaluation.TABLE_NAME)
@@ -17,81 +19,138 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = MemberEvaluation.TABLE_NAME, comment = "会员商品评价表")
 public class MemberEvaluation extends BaseSuperEntity<MemberEvaluation, Long> {
 
-	public static final String TABLE_NAME = "li_member_evaluation";
+	public static final String TABLE_NAME = "tt_member_evaluation";
 
-	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(32) not null comment '会员ID'")
+	/**
+	 * 会员ID
+	 */
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
 	private String memberId;
 
-
-	@Column(name = "store_id", nullable = false, columnDefinition = "varchar(32) not null comment '店铺ID'")
-	private String storeId;
-
-
-	@Column(name = "store_name", nullable = false, columnDefinition = "varchar(32) not null comment '店铺名称'")
-	private String storeName;
-
-
-	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(32) not null comment '商品ID'")
-	private String goodsId;
-
-
-	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(32) not null comment 'SKU ID'")
-	private String skuId;
-
-
-	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(32) not null comment '会员名称'")
+	/**
+	 * 会员名称
+	 */
+	@Column(name = "member_name", nullable = false, columnDefinition = "varchar(256) not null comment '会员名称'")
 	private String memberName;
 
-
-	@Column(name = "member_profile", nullable = false, columnDefinition = "varchar(32) not null comment '会员头像'")
+	/**
+	 * 会员头像
+	 */
+	@Column(name = "member_profile", columnDefinition = "varchar(1024) comment '会员头像'")
 	private String memberProfile;
 
+	/**
+	 * 店铺ID
+	 */
+	@Column(name = "store_id", columnDefinition = "varchar(64) comment '店铺ID'")
+	private String storeId;
 
+	/**
+	 * 店铺名称
+	 */
+	@Column(name = "store_name", columnDefinition = "varchar(256) comment '店铺名称'")
+	private String storeName;
+
+	/**
+	 * 商品ID
+	 */
+	@Column(name = "goods_id", nullable = false, columnDefinition = "varchar(64) not null comment '商品ID'")
+	private String goodsId;
+
+	/**
+	 * SKU_ID
+	 */
+	@Column(name = "sku_id", nullable = false, columnDefinition = "varchar(64) not null comment 'SKU_ID'")
+	private String skuId;
+
+	/**
+	 * 会员ID
+	 */
 	@Column(name = "goods_name", nullable = false, columnDefinition = "varchar(32) not null comment '商品名称'")
 	private String goodsName;
 
-	@Column(name = "goods_image", nullable = false, columnDefinition = "varchar(32) not null comment '商品图片'")
+	/**
+	 * 商品图片
+	 */
+	@Column(name = "goods_image", nullable = false, columnDefinition = "varchar(1024) not null comment '商品图片'")
 	private String goodsImage;
 
-
-	@Column(name = "order_no", nullable = false, columnDefinition = "varchar(32) not null comment '订单号'")
+	/**
+	 * 订单号
+	 */
+	@Column(name = "order_no", nullable = false, columnDefinition = "varchar(64) not null comment '订单号'")
 	private String orderNo;
 
-	@Column(name = "grade", nullable = false, columnDefinition = "varchar(32) not null comment '好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评'")
+	/**
+	 * 好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评
+	 */
+	@Column(name = "grade", nullable = false, columnDefinition = "varchar(32) not null default 'GOOD' comment '好中差评 , GOOD：好评，MODERATE：中评，WORSE：差评'")
 	private String grade;
 
-	@Column(name = "content", nullable = false, columnDefinition = "varchar(32) not null comment '评价内容'")
+	/**
+	 * 评价内容
+	 */
+	@Column(name = "content", columnDefinition = "text comment '评价内容'")
 	private String content;
 
-	@Column(name = "images", nullable = false, columnDefinition = "varchar(32) not null comment '评价图片'")
+	/**
+	 * 评价图片 逗号分割
+	 */
+	@Column(name = "images", columnDefinition = "text comment '评价图片 逗号分割'")
 	private String images;
 
-
-	@Column(name = "status", nullable = false, columnDefinition = "varchar(32) not null comment '状态  OPEN 正常 ,CLOSE 关闭'")
+	/**
+	 * 状态  OPEN 正常 ,CLOSE 关闭
+	 */
+	@Column(name = "status", columnDefinition = "varchar(32) default 'OPEN' comment '状态  OPEN 正常 ,CLOSE 关闭'")
 	private String status;
 
-	@Column(name = "reply", nullable = false, columnDefinition = "varchar(32) not null comment '评价回复'")
+	/**
+	 * 评价回复
+	 */
+	@Column(name = "reply", columnDefinition = "text comment '评价回复'")
 	private String reply;
 
-	@Column(name = "reply_image", nullable = false, columnDefinition = "varchar(32) not null comment '评价回复图片'")
+	/**
+	 * 评价回复图片
+	 */
+	@Column(name = "reply_image", columnDefinition = "text comment '评价回复图片'")
 	private String replyImage;
 
-	@Column(name = "have_image", nullable = false, columnDefinition = "varchar(32) not null comment '评论是否有图片 true 有 ,false 没有'")
+	/**
+	 * 评论是否有图片 true 有 ,false 没有
+	 */
+	@Column(name = "have_image", columnDefinition = "boolean default false comment '评论是否有图片 true 有 ,false 没有'")
 	private Boolean haveImage;
 
-	@Column(name = "have_reply_image", nullable = false, columnDefinition = "varchar(32) not null comment '回复是否有图片 true 有 ,false 没有'")
+	/**
+	 * 回复是否有图片 true 有 ,false 没有
+	 */
+	@Column(name = "have_reply_image", columnDefinition = "boolean default false comment '回复是否有图片 true 有 ,false 没有'")
 	private Boolean haveReplyImage;
 
-	@Column(name = "reply_status", nullable = false, columnDefinition = "boolean not null default false comment '回复状态'")
+	/**
+	 * 回复状态
+	 */
+	@Column(name = "reply_status", columnDefinition = "boolean default false comment '回复状态'")
 	private Boolean replyStatus;
 
-	@Column(name = "delivery_score", nullable = false, columnDefinition = "int not null default 0 comment '物流评分'")
+	/**
+	 * 物流评分
+	 */
+	@Column(name = "delivery_score", columnDefinition = "int default 0 comment '物流评分'")
 	private Integer deliveryScore;
 
-	@Column(name = "service_score", nullable = false, columnDefinition = "int not null default 0 comment '服务评分'")
+	/**
+	 * 服务评分
+	 */
+	@Column(name = "service_score", columnDefinition = "int default 0 comment '服务评分'")
 	private Integer serviceScore;
 
-	@Column(name = "description_score", nullable = false, columnDefinition = "int not null default 0 comment '描述评分'")
+	/**
+	 * 描述评分
+	 */
+	@Column(name = "description_score", columnDefinition = "int default 0 comment '描述评分'")
 	private Integer descriptionScore;
 
 	//public MemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, GoodsSku goodsSku, Member member,Order order){

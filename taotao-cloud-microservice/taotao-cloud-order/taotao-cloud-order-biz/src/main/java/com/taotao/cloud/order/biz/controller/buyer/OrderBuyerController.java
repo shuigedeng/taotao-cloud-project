@@ -28,18 +28,13 @@ import java.util.Objects;
 
 /**
  * 买家端,订单接口
- *
- *
- * @since 2020/11/16 10:08 下午
  */
 @RestController
 @Api(tags = "买家端,订单接口")
 @RequestMapping("/buyer/orders")
 public class OrderBuyerController {
 
-    /**
-     * 订单
-     */
+
     @Autowired
     private OrderService orderService;
 

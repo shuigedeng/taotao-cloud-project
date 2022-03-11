@@ -1,76 +1,96 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.api.dto.EvaluationQueryParams;
 import com.taotao.cloud.member.api.dto.MemberEvaluationDTO;
 import com.taotao.cloud.member.api.vo.EvaluationNumberVO;
 import com.taotao.cloud.member.api.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.entity.MemberEvaluation;
 import com.taotao.cloud.member.biz.service.MemberEvaluationService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.apache.maven.model.building.Result;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 买家端,会员商品评价接口
+ * 买家端-会员商品评价接口
  *
- * 
- * @since 2020/11/16 10:08 下午
+ * @author shuigedeng
+ * @version 2021.10
+ * @since 2022-03-11 15:57:55
  */
+@Validated
 @RestController
-@Api(tags = "买家端,会员商品评价接口")
-@RequestMapping("/buyer/memberEvaluation")
+@RequestMapping("/member/buyer/member-evaluation")
+@Tag(name = "买家端-会员商品评价API", description = "买家端-会员商品评价API")
 public class MemberEvaluationBuyerController {
 
-    /**
-     * 会员商品评价
-     */
-    @Autowired
-    private MemberEvaluationService memberEvaluationService;
+	/**
+	 * 会员商品评价
+	 */
+	@Autowired
+	private MemberEvaluationService memberEvaluationService;
 
-    @ApiOperation(value = "添加会员评价")
-    @PostMapping
-    public ResultMessage<MemberEvaluationDTO> save(@Valid MemberEvaluationDTO memberEvaluationDTO) {
-        return ResultUtil.data(memberEvaluationService.addMemberEvaluation(memberEvaluationDTO));
-    }
+	@Operation(summary = "添加会员评价", description = "添加会员评价", method = CommonConstant.POST)
+	@RequestLogger(description = "添加会员评价")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping
+	public Result<MemberEvaluationDTO> save(@Valid MemberEvaluationDTO memberEvaluationDTO) {
+		return Result.success(memberEvaluationService.addMemberEvaluation(memberEvaluationDTO));
+	}
 
-    @ApiOperation(value = "查看会员评价详情")
-    @ApiImplicitParam(name = "id", value = "评价ID", required = true, paramType = "path")
-    @GetMapping(value = "/get/{id}")
-    public ResultMessage<MemberEvaluationVO> save(@NotNull(message = "评价ID不能为空") @PathVariable("id") String id) {
-        return ResultUtil.data(memberEvaluationService.queryById(id));
+	@Operation(summary = "查看会员评价详情", description = "查看会员评价详情", method = CommonConstant.GET)
+	@RequestLogger(description = "查看会员评价详情")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/{id}")
+	public Result<MemberEvaluationVO> save(
+		@NotNull(message = "评价ID不能为空") @PathVariable("id") String id) {
+		return Result.success(memberEvaluationService.queryById(id));
+	}
 
-    }
+	@Operation(summary = "查看当前会员评价列表", description = "查看当前会员评价列表", method = CommonConstant.GET)
+	@RequestLogger(description = "查看当前会员评价列表")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping
+	public Result<IPage<MemberEvaluation>> queryMineEvaluation(
+		EvaluationQueryParams evaluationQueryParams) {
+		//设置当前登录会员
+		evaluationQueryParams.setMemberId(UserContext.getCurrentUser().getId());
+		return Result.success(memberEvaluationService.managerQuery(evaluationQueryParams));
+	}
 
-    @ApiOperation(value = "查看当前会员评价列表")
-    @GetMapping
-    public ResultMessage<IPage<MemberEvaluation>> queryMineEvaluation(
-	    EvaluationQueryParams evaluationQueryParams) {
-        //设置当前登录会员
-        evaluationQueryParams.setMemberId(UserContext.getCurrentUser().getId());
-        return ResultUtil.data(memberEvaluationService.managerQuery(evaluationQueryParams));
-    }
+	@Operation(summary = "查看某一个商品的评价列表", description = "查看某一个商品的评价列表", method = CommonConstant.GET)
+	@RequestLogger(description = "查看某一个商品的评价列表")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/goods-evaluation/{goodsId}")
+	public Result<IPage<MemberEvaluation>> queryGoodsEvaluation(
+		EvaluationQueryParams evaluationQueryParams,
+		@Parameter(description = "商品ID", required = true) @NotNull @PathVariable("goodsId") String goodsId) {
+		//设置查询查询商品
+		evaluationQueryParams.setGoodsId(goodsId);
+		evaluationQueryParams.setStatus(SwitchEnum.OPEN.name());
+		return Result.success(memberEvaluationService.managerQuery(evaluationQueryParams));
+	}
 
-    @ApiOperation(value = "查看某一个商品的评价列表")
-    @ApiImplicitParam(name = "goodsId", value = "商品ID", required = true, dataType = "Long", paramType = "path")
-    @GetMapping(value = "/{goodsId}/goodsEvaluation")
-    public ResultMessage<IPage<MemberEvaluation>> queryGoodsEvaluation(EvaluationQueryParams evaluationQueryParams,
-                                                                       @NotNull @PathVariable("goodsId") String goodsId) {
-        //设置查询查询商品
-        evaluationQueryParams.setGoodsId(goodsId);
-        evaluationQueryParams.setStatus(SwitchEnum.OPEN.name());
-        return ResultUtil.data(memberEvaluationService.managerQuery(evaluationQueryParams));
-    }
-
-    @ApiOperation(value = "查看某一个商品的评价数量")
-    @ApiImplicitParam(name = "goodsId", value = "商品ID", required = true, dataType = "Long", paramType = "path")
-    @GetMapping(value = "/{goodsId}/evaluationNumber")
-    public ResultMessage<EvaluationNumberVO> queryEvaluationNumber(@NotNull @PathVariable("goodsId") String goodsId) {
-        return ResultUtil.data(memberEvaluationService.getEvaluationNumber(goodsId));
-    }
+	@Operation(summary = "查看某一个商品的评价数量", description = "查看某一个商品的评价数量", method = CommonConstant.GET)
+	@RequestLogger(description = "查看某一个商品的评价数量")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/goods-evaluation/number/{goodsId}")
+	public Result<EvaluationNumberVO> queryEvaluationNumber(
+		@Parameter(description = "商品ID", required = true) @NotNull @PathVariable("goodsId") String goodsId) {
+		return Result.success(memberEvaluationService.getEvaluationNumber(goodsId));
+	}
 }

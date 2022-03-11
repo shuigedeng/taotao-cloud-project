@@ -27,12 +27,9 @@ import java.util.Objects;
 
 /**
  * 买家端,交易投诉接口
- *
- * 
- * @since 2020/12/7
  **/
 @RestController
-@Api(tags = "买家端,交易投诉接口")
+@Api(tags = "买家端-交易投诉接口")
 @RequestMapping("/buyer/complain")
 public class OrderComplaintBuyerController {
 

@@ -1,93 +1,104 @@
 package com.taotao.cloud.member.biz.controller.buyer;
 
+import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.member.biz.service.GoodsCollectionService;
 import com.taotao.cloud.member.biz.service.StoreCollectionService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 买家端,会员收藏接口
  *
- * 
  * @since 2020/11/17 2:32 下午
  */
+@Validated
 @RestController
-@Api(tags = "买家端,会员收藏接口")
-@RequestMapping("/buyer/member/collection")
+@RequestMapping("/member/buyer/member-collection")
+@Tag(name = "买家端-会员收藏API", description = "买家端-会员收藏API")
 public class MemberCollectionController {
 
-    /**
-     * 会员商品收藏
-     */
-    @Autowired
-    private GoodsCollectionService goodsCollectionService;
-    /**
-     * 会员店铺
-     */
-    @Autowired
-    private StoreCollectionService storeCollectionService;
+	/**
+	 * 会员商品收藏
+	 */
+	@Autowired
+	private GoodsCollectionService goodsCollectionService;
 
-    /**
-     * 商品收藏关键字
-     */
-    private String goods="GOODS";
+	/**
+	 * 会员店铺
+	 */
+	@Autowired
+	private StoreCollectionService storeCollectionService;
 
-    @ApiOperation(value = "查询会员收藏列表")
-    @ApiImplicitParam(name = "type", value = "类型", dataType = "String", paramType = "path", example = "GOODS:商品,STORE:店铺")
-    @GetMapping("/{type}")
-    public ResultMessage<Object> goodsList(@PathVariable String type, PageVO page) {
-        if (goods.equals(type)) {
-            return ResultUtil.data(goodsCollectionService.goodsCollection(page));
-        }
-        return ResultUtil.data(storeCollectionService.storeCollection(page));
-    }
+	/**
+	 * 商品收藏关键字
+	 */
+	private String goods = "GOODS";
 
-    @ApiOperation(value = "添加会员收藏")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型", dataType = "String", paramType = "path", example = "GOODS:商品,STORE:店铺"),
-            @ApiImplicitParam(name = "num", value = "值", dataType = "Long", paramType = "path")
-    })
-    @PostMapping("/add/{type}/{id}")
-    public ResultMessage<Object> addGoodsCollection(@PathVariable String type,
-                                                    @NotNull(message = "值不能为空") @PathVariable String id) {
-        if (goods.equals(type)) {
-            return ResultUtil.data(goodsCollectionService.addGoodsCollection(id));
-        }
-        return ResultUtil.data(storeCollectionService.addStoreCollection(id));
+	@Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表", method = CommonConstant.GET)
+	@RequestLogger(description = "查询会员收藏列表")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping("/{type}")
+	public Result<Object> goodsList(
+		@Parameter(description = "类型", required = true) @PathVariable String type,
+		PageVO page) {
+		if (goods.equals(type)) {
+			return Result.success(goodsCollectionService.goodsCollection(page));
+		}
+		return Result.success(storeCollectionService.storeCollection(page));
+	}
 
-    }
+	@Operation(summary = "添加会员收藏", description = "添加会员收藏", method = CommonConstant.POST)
+	@RequestLogger(description = "添加会员收藏")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@PostMapping("/{type}/{id}")
+	public Result<Object> addGoodsCollection(
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable String id) {
+		if (goods.equals(type)) {
+			return Result.success(goodsCollectionService.addGoodsCollection(id));
+		}
+		return Result.success(storeCollectionService.addStoreCollection(id));
 
-    @ApiOperation(value = "删除会员收藏")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型", dataType = "String", paramType = "path", example = "GOODS:商品,STORE:店铺"),
-            @ApiImplicitParam(name = "num", value = "值", dataType = "Long", paramType = "path")
-    })
-    @DeleteMapping(value = "/delete/{type}/{id}")
-    public ResultMessage<Object> deleteGoodsCollection(@PathVariable String type,
-                                                       @NotNull(message = "值不能为空") @PathVariable String id) {
-        if (goods.equals(type)) {
-            return ResultUtil.data(goodsCollectionService.deleteGoodsCollection(id));
-        }
-        return ResultUtil.data(storeCollectionService.deleteStoreCollection(id));
-    }
+	}
 
-    @ApiOperation(value = "查询会员是否收藏")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "类型", dataType = "String", paramType = "path", example = "GOODS:商品,STORE:店铺"),
-            @ApiImplicitParam(name = "id", value = "值", dataType = "String", paramType = "path")
-    })
-    @GetMapping(value = "/isCollection/{type}/{id}")
-    public ResultMessage<Boolean> isCollection(@PathVariable String type,
-                                               @NotNull(message = "值不能为空") @PathVariable String id) {
-        if (goods.equals(type)) {
-            return ResultUtil.data(this.goodsCollectionService.isCollection(id));
-        }
-        return ResultUtil.data(this.storeCollectionService.isCollection(id));
-    }
+	@Operation(summary = "删除会员收藏", description = "删除会员收藏", method = CommonConstant.DELETE)
+	@RequestLogger(description = "删除会员收藏")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping
+	@DeleteMapping(value = "/{type}/{id}")
+	public Result<Object> deleteGoodsCollection(
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable String id) {
+		if (goods.equals(type)) {
+			return Result.success(goodsCollectionService.deleteGoodsCollection(id));
+		}
+		return Result.success(storeCollectionService.deleteStoreCollection(id));
+	}
+
+	@Operation(summary = "查询会员是否收藏", description = "查询会员是否收藏", method = CommonConstant.GET)
+	@RequestLogger(description = "查询会员是否收藏")
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/{type}/{id}/collection")
+	public Result<Boolean> isCollection(
+		@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
+		@Parameter(description = "id", required = true) @NotBlank(message = "值不能为空") @PathVariable String id) {
+		if (goods.equals(type)) {
+			return Result.data(this.goodsCollectionService.isCollection(id));
+		}
+		return Result.data(this.storeCollectionService.isCollection(id));
+	}
 }

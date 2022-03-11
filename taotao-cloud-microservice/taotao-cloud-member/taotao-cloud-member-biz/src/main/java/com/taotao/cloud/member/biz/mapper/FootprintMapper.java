@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.biz.entity.FootPrint;
+import com.taotao.cloud.member.biz.entity.MemberBrowse;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -17,7 +17,7 @@ import java.util.List;
  * 
  * @since 2020-02-25 14:10:16
  */
-public interface FootprintMapper extends BaseMapper<FootPrint> {
+public interface FootprintMapper extends BaseMapper<MemberBrowse> {
 
     /**
      * 获取用户足迹的SkuId分页
@@ -27,7 +27,7 @@ public interface FootprintMapper extends BaseMapper<FootPrint> {
      * @return 用户足迹的SkuId分页
      */
     @Select("select sku_id from li_foot_print  ${ew.customSqlSegment} ")
-    List<String> footprintSkuIdList(IPage<String> page, @Param(Constants.WRAPPER) Wrapper<FootPrint> queryWrapper);
+    List<String> footprintSkuIdList(IPage<String> page, @Param(Constants.WRAPPER) Wrapper<MemberBrowse> queryWrapper);
 
     /**
      * 删除超过100条后的记录
