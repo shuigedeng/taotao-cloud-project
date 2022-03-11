@@ -25,7 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/manager/afterSaleReason")
 @Api(tags = "管理端,售后原因接口")
-public class AfterSaleReasonManagerController {
+public class AfterSaleReasonController {
 
     /**
      * 售后原因

@@ -31,7 +31,7 @@ import java.util.Objects;
 @RestController
 @Api(tags = "买家端-交易投诉接口")
 @RequestMapping("/buyer/complain")
-public class OrderComplaintBuyerController {
+public class OrderComplaintController {
 
     /**
      * 交易投诉

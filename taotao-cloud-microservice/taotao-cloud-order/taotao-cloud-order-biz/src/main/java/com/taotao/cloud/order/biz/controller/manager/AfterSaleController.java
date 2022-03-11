@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/manager/afterSale")
 @Api(tags = "管理端,售后接口")
-public class AfterSaleManagerController {
+public class AfterSaleController {
 
     /**
      * 售后
