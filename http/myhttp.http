@@ -1,0 +1,68 @@
+@hostname = api.example.com
+
+
+### my blog
+GET http://dtbox.top HTTP/1.2
+Accept: */*
+Accept-Charset: utf-8
+Accept-Encoding: gzip
+Accept-Language: en,zh
+Authorization: Basic xxxxxx
+Cache-Control: no-cache
+
+<> 2019-09-17T024118.200.html
+<> 2019-09-16T092643.200.html
+
+###
+GET http://localhost:80/api/item
+Cookie:
+Authorization:
+Accept: application/json
+
+###
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+POST http://localhost:80/api/item
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:80/api/item
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+###
+GET http://{{hostname}}
+
+###
+GET http://localhost:3000/user/list
+
+<> 2020-12-25T120738.404.html
+###
+POST https://tcop-api-gateway.cqlyy.com/api/getToken
+Content-Type: application/json
+
+{
+  "key": "e21e580b1f2a43cf3b61ee93f64a592c",
+  "secret": "970caa7154bb47ffac766caa46321b8a"
+}
+
+###
+POST http://139.186.173.122:10098/api/scenic_control/api/v5/quick-entry/ws
+Content-Type: application/json
+
+{
+  "id": "1"
+}
+
+<> 2022-02-25T170411.200.json
+<> 2022-02-25T170022.200.json
+<> 2022-02-25T170002.200.json
+<> 2022-02-25T165949.200.json
+<> 2022-02-25T165920.200.json
+<> 2022-02-25T161856.200.json
+<> 2022-02-25T151649.200.json

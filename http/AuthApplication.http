@@ -1,0 +1,23 @@
+POST http://localhost:9900/api-auth/token/oauth/user/token
+Content-Type: application/json
+Authorization: Basic d2ViQXBwOndlYkFwcA==
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+###
+
+POST http://localhost:9900/api-auth/token/oauth/user/token
+Content-Type: application/json
+Authorization: Basic d2ViQXBwOndlYkFwcA==
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+###
+GET http://127.0.0.1:9800/oauth/check_token?token=9eab71d3-4e6b-43f1-b30c-d843e6087745
+
+###
+

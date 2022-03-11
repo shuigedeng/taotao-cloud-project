@@ -123,7 +123,7 @@ elasticjob:
     taotao-cloud-simple-job:
       elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoSimpleJob
       jobBootstrapBeanName: taoTaoSimpleBootstrapJob
-      cron: 0/5 * * * * ?
+      cron: 0 0/30 * * * ?
       timeZone: GMT+08:00
       shardingTotalCount: 3
       shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
@@ -137,33 +137,33 @@ elasticjob:
       props:
         dingtalk:
           webhook: you_webhook
-          keyword: you_keyword
+          keyword: taotao-cloud
           secret: you_secret
           connectTimeout: 3000
           readTimeout: 5000
         email:
-          host: host
+          host: smtp.qq.com
           port: 465
-          username: username
-          password: password
+          username: 981376577@qq.com
+          password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
           useSsl: true
-          subject: ElasticJob error message
-          from: from@xxx.xx
-          to: to1@xxx.xx,to2@xxx.xx
-          cc: cc@xxx.xx
-          bcc: bcc@xxx.xx
+          subject:
+          from: 981376577@qq.com
+          to: 981376577@qq.com
+          cc:
+          bcc:
           debug: false
     taotao-cloud-data-flow-job:
       elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoDataflowJob
       jobBootstrapBeanName: taoTaoDataflowBootstrapJob
-      cron: 0/5 * * * * ?
+      cron: 0 0/30 * * * ?
       timeZone: GMT+08:00
       shardingTotalCount: 3
       shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
     taotao-cloud-script-job:
       elasticJobType: SCRIPT
       jobBootstrapBeanName: taoTaoScriptBootstrapJob
-      cron: 0/10 * * * * ?
+      cron: 0 0/30 * * * ?
       shardingTotalCount: 3
       props:
         script.command.line: "echo SCRIPT Job: "
@@ -305,9 +305,7 @@ spring:
     scheduler-name: taotao-cloud-quartz-scheduler
     # 将任务等保存化到数据库
     job-store-type: memory
-    # 程序结束时会等待quartz相关的内容结束
     wait-for-jobs-to-complete-on-shutdown: true
-    # QuartzScheduler启动时更新己存在的Job,这样就不用每次修改targetObject后删除qrtz_job_details表对应记录
     overwrite-existing-jobs: true
     properties:
       org.quartz.scheduler.instanceName : quartzScheduler
@@ -459,13 +457,13 @@ spring:
     #port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     #database: 1
     #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
+    #sentinel:
+    #  master:
+    #  nodes:
     connect-timeout: 60000
     cluster:
       nodes: 172.16.6.151:7100,172.16.6.151:7101,172.16.6.151:7102,172.16.6.151:7103,172.16.6.151:7104,172.16.6.151:7105
       max-redirects: 3
-    #sentinel:
-    #  master:
-    #  nodes:
     client-type: lettuce
     lettuce:
       pool:
@@ -567,7 +565,7 @@ spring:
   shardingsphere:
     enabled: true
     schema:
-      name: taotao-cloud
+      name: taotao-cloud-shardingsphere
     props:
       sql-show: true
       check-table-metadata-enabled: true
@@ -578,7 +576,7 @@ spring:
       repository:
         type: ZooKeeper
         props:
-          namespace: taotao-cloud
+          namespace: taotao-cloud-shardingsphere
           server-lists: 172.16.6.151:2181
           retryIntervalMilliseconds: 500
           maxRetries: 3

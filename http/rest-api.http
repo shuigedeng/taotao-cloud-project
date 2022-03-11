@@ -1,0 +1,222 @@
+# curl http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJkaXN0aW5jdF9pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJsaWIiOnsiJGxpYiI6ImpzIiwiJGxpYl9tZXRob2QiOiJjb2RlIiwiJGxpYl92ZXJzaW9uIjoiMS4xNS4xNiJ9LCJwcm9wZXJ0aWVzIjp7IiR0aW1lem9uZV9vZmZzZXQiOi00ODAsIiRzY3JlZW5faGVpZ2h0Ijo5MDAsIiRzY3JlZW5fd2lkdGgiOjE0NDAsIiRsaWIiOiJqcyIsIiRsaWJfdmVyc2lvbiI6IjEuMTUuMTYiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino%2BaekOWksei0pSIsIiRyZWZlcnJlciI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkaXNfZmlyc3RfdGltZSI6ZmFsc2UsIiRyZWZlcnJlcl9ob3N0IjoiIn0sImFub255bW91c19pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRwYWdldmlldyIsIl90cmFja19pZCI6MTU0NzQ1MTY2fQ%3D%3D&ext=crc%3D568315008
+GET http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJkaXN0aW5jdF9pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJsaWIiOnsiJGxpYiI6ImpzIiwiJGxpYl9tZXRob2QiOiJjb2RlIiwiJGxpYl92ZXJzaW9uIjoiMS4xNS4xNiJ9LCJwcm9wZXJ0aWVzIjp7IiR0aW1lem9uZV9vZmZzZXQiOi00ODAsIiRzY3JlZW5faGVpZ2h0Ijo5MDAsIiRzY3JlZW5fd2lkdGgiOjE0NDAsIiRsaWIiOiJqcyIsIiRsaWJfdmVyc2lvbiI6IjEuMTUuMTYiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino%2BaekOWksei0pSIsIiRyZWZlcnJlciI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkaXNfZmlyc3RfdGltZSI6ZmFsc2UsIiRyZWZlcnJlcl9ob3N0IjoiIn0sImFub255bW91c19pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRwYWdldmlldyIsIl90cmFja19pZCI6MTU0NzQ1MTY2fQ%3D%3D&ext=crc%3D568315008
+
+###
+
+GET http://localhost:9900/api/1.0/auth/oauth/token?username=admin&password=admin&grant_type=password&scope=app&client_id=webApp&client_secret=webApp
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-09-16T092532.200.html
+
+###
+GET http://localhost:9900/api/1.0/auth/oauth/token/user?code=10&t=1589966331703&username=admin&password=admin
+Content-Type: application/json
+BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+###
+GET http://localhost:9900/api/1.0/auth/oauth/token/list?page=1&limit=10
+Content-Type: application/json
+BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+###
+GET http://localhost:9800/oauth/token/user?username=admin&password=admin
+Content-Type: application/json
+BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+
+
+<> 2019-09-16T092532.200.html
+
+###
+
+GET http://localhost:9900/api/1.0/auth/oauth/token/mobile?mobile=15730445330&smsCode=820724
+Content-Type: application/json
+BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+###
+
+GET http://localhost:9900/api/1.0/auth/sms/code?mobile=15730445339
+Content-Type: application/json
+#BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+###
+GET http://localhost:9700/user/info/15730445330
+Content-Type: application/json
+#BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
+
+###access:
+GET http://localhost:9100/oath2/client
+Authorization: bearer eyJraWQiOiIwNzUyNDhlMC05NGEwLTRhZTktYjAxOS05YjM2YjM1ZTEwYzkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTYxNzE3MjkxMiwic2NvcGUiOlsibWVzc2FnZS5yZWFkIl0sImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo5MDAwIiwiZXhwIjoxNjE3MjMyOTEyLCJpYXQiOjE2MTcxNzI5MTIsImp0aSI6IjE5YTk1OTUwLWU3ODItNGY2MC1iZjRkLWExZDhiZGU1N2U3NSJ9.Y6izfSvOHhv-KM_aLpE7cLwZgquJBdkswuQWq8YstwOw6E79Is1A6Ykn7Ajxfe8lBdc-hsRdyyfDptvCj4fmplzW3Hs7Z4icU16fsJjYYQ9S5oVrQMcVCgKBV9rNBXpTtsS8gpsPzCgN7wp4_JyB9PpyEBghJsi9DxWg3Eavu7MkO0ZoI1P5nMmlcw4k7PBoF7owpDQ08293epSowQ1He0BhFtTGZGRJiUnOa-KVrPfIlpepCJqN_O27G_j0AZhaJyy45D-tFp-BU5srgO4ckevrwJlj6uylb7yj11LyGImby5WABUIE-uLTJ0CPVzZ-nfVhQ-N7zbYRj4v3tiFHYw
+#Authorization: bearer eyJraWQiOiJkMDY0MDc4My0wNzhlLTRmYzEtOTBkZS00OGM5NWNmOGU0YTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9eyJraWQiOiJkMDY0MDc4My0wNzhlLTRmYzEtOTBkZS00OGM5NWNmOGU0YTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTYxNzE2MTY1OCwic2NvcGUiOlsibWVzc2FnZS5yZWFkIl0sImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo5MDAwIiwiZXhwIjoxNjE3MTYxOTU4LCJpYXQiOjE2MTcxNjE2NTgsImp0aSI6IjA2ODRmMjM3LTFjMzctNDU1OS04ZWViLTNmYjNjYzFkYTRiZSJ9.XDtdoyj4wy-XJ56E7JXZd6qUeHTkfa4Pt5pb5kkl_Am4ZKZvCDiVi-FwxvHKcJw1_AoXltmDfWQnegsoNuMT-T_KhsD8HJFBGxwQZw2jg0ZYSgkys5HfF6s2ZjcKysRWYcQl_GLSUuBAWKph0hOxLLIvK6J-T0gRlbQ1Dec_3z_k6f5NnjPuvsjmU7CZIVEQ37DtSakSuaeHNPar02ZZEYIf2WBGrsZuSqjyN5Exsan8HKewNjHFUjPWs1itVl-N1sEgnVVDWsBE2-m0b6OV3S4hKmWdv_WXWLh0L7Oec6QxoWChUcFA1wD89FCsiFQHb3iKJoapI_-VBFiGW2vMiA
+
+<> 2021-03-31T145559.500.json
+<> 2021-03-31T145550.500.json
+<> 2021-03-31T145539.500.json
+<> 2021-03-31T145456.404.json
+<> 2021-03-31T145437.200.json
+<> 2021-03-31T145328.200.json
+<> 2021-03-31T145317.200.json
+<> 2021-03-31T144903.200.json
+<> 2021-03-31T144505.200.json
+<> 2021-03-31T144453.200.json
+<> 2021-03-31T144431.200.json
+<> 2021-03-31T144321.200.json
+<> 2021-03-31T144231.200.json
+<> 2021-03-31T143245.200.json
+<> 2021-03-31T143127.200.json
+<> 2021-03-31T143021.200.json
+<> 2021-03-31T113551.200.json
+<> 2021-03-31T113519.200.json
+<> 2021-03-31T113503.404.json
+
+
+
+###
+
+GET http://localhost:9900/oauth/token?grant_type=refresh_token&refresh_token=62c11745-af01-4dbd-bc07-04d0152e8e6b&client_id=webApp&client_secret=webApp
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-09-16T092532.200.html
+
+###
+
+GET http://localhost:9900/oauth/token?grant_type=client_credentials&scope=app&client_id=webApp&client_secret=webApp
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-09-16T092532.200.html
+
+###
+
+GET  http://localhost:9900/api-uc/job?page=1&pageSize=5
+Authorization: bearer a7548a98-cab0-470c-9882-55a657dee03e
+
+###
+GET  http://localhost:9900/code
+#Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
+
+###
+GET  http://localhost:9900/api-auth/social/auth?loginType=gitee
+#Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
+
+###
+GET  http://localhost:9900/fallback
+#Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
+
+###
+GET  http://localhost:9900/api/1.0/uc/api-docs
+
+###
+GET  http://127.0.0.1:9900/api/1.0/auth/oauth/token/third?code=36a2bf693a3704625014c98bc90235ae7d94c48019085282bb074d58bdf17935&state=gitee
+
+###
+POST http://127.0.0.1:9900/api/v1.0/uc/user/list
+Content-Type: application/json
+Authorization: Bearer ec7561c2-e2a5-4a22-9f8f-061b6a66975c
+
+{
+  "current": 1,
+  "size": 10
+}
+
+###
+GET http://localhost:9900/oauth/token
+
+###
+GET http://127.0.0.1:9900/api/v1.0/uc/role?roleName=管理员
+Authorization: Bearer 9eab71d3-4e6b-43f1-b30c-d843e6087745
+
+###
+GET http://127.0.0.1:9900/api/v1.0/auth/oauth/token?username=admin&password=admin&grant_type=password&scope=app&client_id=webApp&client_secret=webApp
+
+<> 2020-08-27T052108.401.xml
+
+###
+#GET http://localhost:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&redirect_uri=http://www.baidu.com&state=state&scope=all
+    http://localhost:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&client_secret=third_client_1&redirect_uri=http://www.baidu.com
+
+###
+POST http://127.0.0.1:9900/api/v1.0/uc/backend/user/list
+Content-Type: application/json
+Authorization: Bearer f745b0a4-3d25-4d23-95d2-4b6190ef7799
+
+{
+  "current": 1,
+  "size": 10
+}
+
+
+###
+POST https://music.lsqy.tech/api/login/cellphone
+Content-Type: application/json
+
+{
+  "phone": 15730445330,
+  "password": "n3nbhbn3ymb"
+}
+
+###
+POST http://localhost:9700/role
+Content-Type: application/json
+
+{
+  "name": "测试角色",
+  "code111": "abcd"
+}
+
+<> 2020-12-01T114642.200.json
+<> 2020-12-01T114202.200.json
+<> 2020-12-01T114057.400.json
+<> 2020-12-01T113926.400.json
+<> 2020-12-01T113715.200.json
+
+###
+POST http://127.0.0.1:9100/oauth2/token?grant_type=authorization_code&code=BLaEcKJDFUmXTXlFLuyJBwA2m5zd_vDeluNjc34BOMo=&redirect_uri=http://baidu.com/
+
+
+###
+GET http://127.0.0.1:8080/user/1
+
+<> 2020-09-10T023602.200.json
+<> 2020-09-10T023333.200.json
+<> 2020-09-10T022841.500.json
+###
+POST http://127.0.0.1:8080/user
+Content-Type: application/json
+
+{
+  "id": "1",
+  "nickname": "niksldfjla",
+  "phoneNumber": "123456",
+  "gender": "2"
+}
+
+###
+# curl http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJkaXN0aW5jdF9pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJsaWIiOnsiJGxpYiI6ImpzIiwiJGxpYl9tZXRob2QiOiJjb2RlIiwiJGxpYl92ZXJzaW9uIjoiMS4xNS4xNiJ9LCJwcm9wZXJ0aWVzIjp7IiR0aW1lem9uZV9vZmZzZXQiOi00ODAsIiRzY3JlZW5faGVpZ2h0Ijo5MDAsIiRzY3JlZW5fd2lkdGgiOjE0NDAsIiRsaWIiOiJqcyIsIiRsaWJfdmVyc2lvbiI6IjEuMTUuMTYiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino%2BaekOWksei0pSIsIiRyZWZlcnJlciI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkaXNfZmlyc3RfdGltZSI6ZmFsc2UsIiRyZWZlcnJlcl9ob3N0IjoiIn0sImFub255bW91c19pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRwYWdldmlldyIsIl90cmFja19pZCI6MTU0NzQ1MTY2fQ%3D%3D&ext=crc%3D568315008
+GET http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJkaXN0aW5jdF9pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJsaWIiOnsiJGxpYiI6ImpzIiwiJGxpYl9tZXRob2QiOiJjb2RlIiwiJGxpYl92ZXJzaW9uIjoiMS4xNS4xNiJ9LCJwcm9wZXJ0aWVzIjp7IiR0aW1lem9uZV9vZmZzZXQiOi00ODAsIiRzY3JlZW5faGVpZ2h0Ijo5MDAsIiRzY3JlZW5fd2lkdGgiOjE0NDAsIiRsaWIiOiJqcyIsIiRsaWJfdmVyc2lvbiI6IjEuMTUuMTYiLCIkbGF0ZXN0X3RyYWZmaWNfc291cmNlX3R5cGUiOiJ1cmznmoRkb21haW7op6PmnpDlpLHotKUiLCIkbGF0ZXN0X3NlYXJjaF9rZXl3b3JkIjoidXJs55qEZG9tYWlu6Kej5p6Q5aSx6LSlIiwiJGxhdGVzdF9yZWZlcnJlciI6InVybOeahGRvbWFpbuino%2BaekOWksei0pSIsIiRyZWZlcnJlciI6IiIsIiR1cmwiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvbG9naW4iLCIkdXJsX3BhdGgiOiIvbG9naW4iLCIkdGl0bGUiOiJSZWFjdCBJbmRleCIsIiRpc19maXJzdF9kYXkiOmZhbHNlLCIkaXNfZmlyc3RfdGltZSI6ZmFsc2UsIiRyZWZlcnJlcl9ob3N0IjoiIn0sImFub255bW91c19pZCI6IjE3NDQ4OWUwNjNkOTYxLTA5MDM2NzBkYmIwYTI1LTE1MzA2MjUxLTEyOTYwMDAtMTc0NDg5ZTA2M2VkNDIiLCJ0eXBlIjoidHJhY2siLCJldmVudCI6IiRwYWdldmlldyIsIl90cmFja19pZCI6MTU0NzQ1MTY2fQ%3D%3D&ext=crc%3D568315008
+
+
+###
+GET http://localhost:9900/api/v1.0/uc/role/exist/code/3
+
+<> 2020-12-04T040356.200.json
+<> 2020-12-04T040138.200.json
+<> 2020-12-04T035614.200.json
+
+###
+GET http://localhost:9900/api/v1.0/order/order/info/3
+
+
+###
+GET  http://mt-by.5941.fun:9191/bayu/getActivityPrizesDataById?userPrizesId=1336228067680497665
+token: a9f52683-437b-4a94-90fb-1e67ce7ac15e
+
+<> 2020-12-08T044051.200.json
+<> 2020-12-08T044036.200.json
+
+###
+GET http://127.0.0.1:9900/api/v1.0/code?t=111111111
+
+<> 2020-12-17T103743.200.json

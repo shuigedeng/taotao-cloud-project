@@ -1,0 +1,11 @@
+POST http://127.0.0.1:9995/captcha/get
+Content-Type: application/json
+
+{
+  "captchaType": "blockPuzzle",
+  "clientUid": ""
+}
+
+###
+GET http://localhost:33336/messages
+

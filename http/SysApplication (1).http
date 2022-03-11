@@ -1,0 +1,10 @@
+GET http://127.0.0.1:1100/sys/swagger-resources
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:1100/sys/v3/api-docs
+Accept: application/json
+
+###
+
