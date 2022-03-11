@@ -111,6 +111,69 @@ redisson:
   codec:
     class: "org.redisson.codec.JsonJacksonCodec"
 
+elasticjob:
+  #dump:
+  #  port: 9888
+  #tracing:
+  #  type: RDB
+  reg-center:
+    server-lists: 172.16.6.151:2181
+    namespace: taotao-cloud-elasticjob
+  jobs:
+    taotao-cloud-simple-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoSimpleJob
+      jobBootstrapBeanName: taoTaoSimpleBootstrapJob
+      cron: 0/5 * * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+      description: MySimpleJob
+      overwrite: false
+      job-parameter: hello javaboy!
+      jobExecutorServiceHandlerType: myJobExecutorServiceHandler
+      jobListenerTypes:
+        - myJobListener
+      jobErrorHandlerType: EMAIL
+      props:
+        dingtalk:
+          webhook: you_webhook
+          keyword: you_keyword
+          secret: you_secret
+          connectTimeout: 3000
+          readTimeout: 5000
+        email:
+          host: host
+          port: 465
+          username: username
+          password: password
+          useSsl: true
+          subject: ElasticJob error message
+          from: from@xxx.xx
+          to: to1@xxx.xx,to2@xxx.xx
+          cc: cc@xxx.xx
+          bcc: bcc@xxx.xx
+          debug: false
+    taotao-cloud-data-flow-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.timetask.elastic.TaoTaoDataflowJob
+      jobBootstrapBeanName: taoTaoDataflowBootstrapJob
+      cron: 0/5 * * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+    taotao-cloud-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoScriptBootstrapJob
+      cron: 0/10 * * * * ?
+      shardingTotalCount: 3
+      props:
+        script.command.line: "echo SCRIPT Job: "
+    taotao-cloud-manual-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoManualScriptBootstrapJob
+      shardingTotalCount: 9
+      props:
+        script.command.line: "echo Manual SCRIPT Job: "
+
 forest:
   bean-id: config0 # 在spring上下文中bean的id（默认为 forestConfiguration）
   backend: okhttp3 # 后端HTTP框架（默认为 okhttp3）

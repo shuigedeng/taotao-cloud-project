@@ -15,20 +15,12 @@
  */
 package com.taotao.cloud.job.elastic.configuration;
 
-import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
-import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.log.LogUtil;
-import com.taotao.cloud.job.elastic.model.JobController;
-import com.taotao.cloud.job.elastic.model.JobService;
-import com.taotao.cloud.job.elastic.parser.JobConfParser;
 import com.taotao.cloud.job.elastic.properties.ElasticJobProperties;
-import com.taotao.cloud.job.elastic.properties.ZookeeperProperties;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -39,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021/8/30 20:41
  */
 @Configuration
-@EnableConfigurationProperties({ZookeeperProperties.class, ElasticJobProperties.class})
+@EnableConfigurationProperties({ElasticJobProperties.class})
 @ConditionalOnProperty(prefix = ElasticJobProperties.PREFIX, name = "enabled", havingValue = "true")
 public class ElasticJobConfiguration implements InitializingBean {
 
@@ -48,40 +40,5 @@ public class ElasticJobConfiguration implements InitializingBean {
 		LogUtil.started(ElasticJobConfiguration.class, StarterName.JOB_ELASTIC_STARTER);
 	}
 
-	@Bean(initMethod = "init")
-	@ConditionalOnProperty(prefix = ZookeeperProperties.PREFIX, name = "serverList")
-	public ZookeeperRegistryCenter registryCenter(ZookeeperProperties properties) {
-
-		ZookeeperConfiguration zkConfig = new ZookeeperConfiguration(
-			properties.getServerList(),
-			properties.getNamespace()
-		);
-
-		zkConfig.setBaseSleepTimeMilliseconds(properties.getBaseSleepTimeMilliseconds());
-		zkConfig.setConnectionTimeoutMilliseconds(
-			properties.getConnectionTimeoutMilliseconds());
-		zkConfig.setDigest(properties.getDigest());
-		zkConfig.setMaxRetries(properties.getMaxRetries());
-		zkConfig.setMaxSleepTimeMilliseconds(properties.getMaxSleepTimeMilliseconds());
-		zkConfig.setSessionTimeoutMilliseconds(properties.getSessionTimeoutMilliseconds());
-		return new ZookeeperRegistryCenter(zkConfig);
-	}
-
-	@Bean
-	public JobService jobService(ZookeeperRegistryCenter zookeeperRegistryCenter) {
-		return new JobService(zookeeperRegistryCenter);
-	}
-
-	@Bean
-	public JobController jobController(JobService jobService) {
-		return new JobController(jobService);
-	}
-
-	@Bean
-	@ConditionalOnBean(JobService.class)
-	public JobConfParser jobConfParser(ZookeeperRegistryCenter zookeeperRegistryCenter,
-		JobService jobService) {
-		return new JobConfParser(zookeeperRegistryCenter, jobService);
-	}
 
 }
