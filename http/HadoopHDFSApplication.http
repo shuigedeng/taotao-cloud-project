@@ -1,0 +1,13 @@
+POST http://127.0.0.1:9100/hadoop/hdfs/listFile?path=/user
+
+
+###
+
+POST http://127.0.0.1:9100/hadoop/hdfs/mkdir?path=/taotao
+
+<> 2020-10-30T040405.200.json
+<> 2020-10-30T040252.500.json
+<> 2020-10-30T035850.500.json
+
+###
+
