@@ -26,7 +26,7 @@ import java.util.List;
 @RestController
 @Api(tags = "店铺端,订单日志接口")
 @RequestMapping("/store/orderLog")
-public class OrderLogStoreController {
+public class OrderLogController {
 
     @Autowired
     private OrderLogService orderLogService;

@@ -42,7 +42,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/store/orders")
 @Api(tags = "店铺端,订单接口")
-public class OrderStoreController {
+public class OrderController {
 
     /**
      * 订单

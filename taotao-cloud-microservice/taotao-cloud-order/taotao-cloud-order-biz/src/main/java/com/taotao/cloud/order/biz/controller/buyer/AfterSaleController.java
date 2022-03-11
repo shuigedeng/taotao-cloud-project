@@ -33,7 +33,7 @@ import java.util.List;
 @RestController
 @Api(tags = "买家端,售后管理接口")
 @RequestMapping("/buyer/afterSale")
-public class AfterSaleBuyerController {
+public class AfterSaleController {
     /**
      * 售后
      */
