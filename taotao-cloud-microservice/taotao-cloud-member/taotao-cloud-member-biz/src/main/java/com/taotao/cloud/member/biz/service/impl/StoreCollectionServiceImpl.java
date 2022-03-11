@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.member.api.dto.CollectionDTO;
 import com.taotao.cloud.member.api.vo.StoreCollectionVO;
-import com.taotao.cloud.member.biz.entity.StoreCollection;
+import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 import com.taotao.cloud.member.biz.mapper.StoreCollectionMapper;
 import com.taotao.cloud.member.biz.service.StoreCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Optional;
  * @since 2020/11/18 2:52 下午
  */
 @Service
-public class StoreCollectionServiceImpl extends ServiceImpl<StoreCollectionMapper, StoreCollection> implements
+public class StoreCollectionServiceImpl extends ServiceImpl<StoreCollectionMapper, MemberStoreCollection> implements
 	StoreCollectionService {
 
 
@@ -39,28 +39,28 @@ public class StoreCollectionServiceImpl extends ServiceImpl<StoreCollectionMappe
 
     @Override
     public boolean isCollection(String storeId) {
-        QueryWrapper<StoreCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberStoreCollection> queryWrapper = new QueryWrapper();
         queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
         queryWrapper.eq("store_id", storeId);
         return Optional.ofNullable(this.getOne(queryWrapper)).isPresent();
     }
 
     @Override
-    public StoreCollection addStoreCollection(String storeId) {
-        if (this.getOne(new LambdaUpdateWrapper<StoreCollection>()
-                .eq(StoreCollection::getMemberId, UserContext.getCurrentUser().getId())
-                .eq(StoreCollection::getStoreId, storeId)) == null) {
-            StoreCollection storeCollection = new StoreCollection(UserContext.getCurrentUser().getId(), storeId);
-            this.save(storeCollection);
+    public MemberStoreCollection addStoreCollection(String storeId) {
+        if (this.getOne(new LambdaUpdateWrapper<MemberStoreCollection>()
+                .eq(MemberStoreCollection::getMemberId, UserContext.getCurrentUser().getId())
+                .eq(MemberStoreCollection::getStoreId, storeId)) == null) {
+            MemberStoreCollection memberStoreCollection = new MemberStoreCollection(UserContext.getCurrentUser().getId(), storeId);
+            this.save(memberStoreCollection);
             storeService.updateStoreCollectionNum(new CollectionDTO(storeId, 1));
-            return storeCollection;
+            return memberStoreCollection;
         }
         throw new ServiceException(ResultCode.USER_COLLECTION_EXIST);
     }
 
     @Override
     public boolean deleteStoreCollection(String storeId) {
-        QueryWrapper<StoreCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberStoreCollection> queryWrapper = new QueryWrapper();
         queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
         queryWrapper.eq("store_id", storeId);
         storeService.updateStoreCollectionNum(new CollectionDTO(storeId, -1));

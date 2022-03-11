@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.biz.controller;
+package com.taotao.cloud.member.biz.controller.buyer;
 
 import com.taotao.cloud.member.biz.service.IMemberPlatformService;
 import io.swagger.v3.oas.annotations.tags.Tag;

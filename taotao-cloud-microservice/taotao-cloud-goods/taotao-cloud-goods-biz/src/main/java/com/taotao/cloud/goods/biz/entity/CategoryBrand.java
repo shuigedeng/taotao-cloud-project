@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class CategoryBrand extends BaseSuperEntity<CategoryBrand, Long> {
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String createBy;
 
     @CreatedDate
@@ -43,6 +45,7 @@ public class CategoryBrand extends BaseSuperEntity<CategoryBrand, Long> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date createTime;
 
     /**
@@ -50,12 +53,14 @@ public class CategoryBrand extends BaseSuperEntity<CategoryBrand, Long> {
      */
     @TableField(value = "category_id")
     @ApiModelProperty(value = "分类id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String categoryId;
     /**
      * 品牌id
      */
     @TableField(value = "brand_id")
     @ApiModelProperty(value = "品牌id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String brandId;
 
     public CategoryBrand(String categoryId, String brandId) {

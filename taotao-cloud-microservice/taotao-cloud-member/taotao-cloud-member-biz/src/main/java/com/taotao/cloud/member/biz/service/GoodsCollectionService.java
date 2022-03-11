@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
-import com.taotao.cloud.member.biz.entity.GoodsCollection;
+import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @since 2020/11/18 2:25 下午
  */
-public interface GoodsCollectionService extends IService<GoodsCollection> {
+public interface GoodsCollectionService extends IService<MemberGoodsCollection> {
 
     /**
      * 获取商品搜索分页
@@ -37,7 +37,7 @@ public interface GoodsCollectionService extends IService<GoodsCollection> {
      * @param skuId 规格ID
      * @return 操作状态
      */
-    GoodsCollection addGoodsCollection(String skuId);
+    MemberGoodsCollection addGoodsCollection(String skuId);
 
     /**
      * 商品收藏

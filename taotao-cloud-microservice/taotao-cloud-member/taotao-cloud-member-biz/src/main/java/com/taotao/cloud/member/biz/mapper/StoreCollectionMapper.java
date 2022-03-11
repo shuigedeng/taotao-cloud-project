@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.api.vo.StoreCollectionVO;
-import com.taotao.cloud.member.biz.entity.StoreCollection;
+import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Select;
  * 
  * @since 2020-02-25 14:10:16
  */
-public interface StoreCollectionMapper extends BaseMapper<StoreCollection> {
+public interface StoreCollectionMapper extends BaseMapper<MemberStoreCollection> {
 
     /**
      * 会员店铺收藏分页

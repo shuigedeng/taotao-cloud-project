@@ -2,6 +2,7 @@ package com.taotao.cloud.goods.biz.entity;
 
 
 import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +16,10 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Table(appliesTo = "tt_product_area", comment = "商品销售范围表")
 public class GoodsArea extends JpaSuperEntity {
 
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String regionJson;
 
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private int type;
 
 }

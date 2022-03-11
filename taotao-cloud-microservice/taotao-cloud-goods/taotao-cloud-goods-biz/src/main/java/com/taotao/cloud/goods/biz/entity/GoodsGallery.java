@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -30,42 +31,50 @@ public class GoodsGallery extends BaseSuperEntity<GoodsGallery, Long> {
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String createBy;
 
     /**
      * 商品主键
      */
+
     @ApiModelProperty(value = "商品id")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsId;
 
     /**
      * 缩略图路径
      */
     @ApiModelProperty(value = "缩略图路径")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String thumbnail;
 
     /**
      * 小图路径
      */
     @ApiModelProperty(value = "小图路径")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String small;
 
     /**
      * 原图路径
      */
     @ApiModelProperty(value = "原图路径", required = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String original;
 
     /**
      * 是否是默认图片1   0没有默认
      */
     @ApiModelProperty(value = "是否是默认图片1   0没有默认")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer isDefault;
 
     /**
      * 排序
      */
     @ApiModelProperty(value = "排序", required = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer sort;
 
 }

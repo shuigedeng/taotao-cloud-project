@@ -3,7 +3,7 @@ package com.taotao.cloud.member.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.api.vo.StoreCollectionVO;
-import com.taotao.cloud.member.biz.entity.StoreCollection;
+import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 
 /**
  * 店铺收藏业务层
@@ -11,7 +11,7 @@ import com.taotao.cloud.member.biz.entity.StoreCollection;
  * 
  * @since 2020/11/18 2:52 下午
  */
-public interface StoreCollectionService extends IService<StoreCollection> {
+public interface StoreCollectionService extends IService<MemberStoreCollection> {
 
     /**
      * 店铺收藏分页
@@ -34,7 +34,7 @@ public interface StoreCollectionService extends IService<StoreCollection> {
      * @param storeId 店铺ID
      * @return 操作状态
      */
-    StoreCollection addStoreCollection(String storeId);
+    MemberStoreCollection addStoreCollection(String storeId);
 
     /**
      * 店铺收藏

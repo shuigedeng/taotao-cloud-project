@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
     @NotEmpty(message = "规格名称不能为空")
     @Size(max = 20, message = "规格名称不能超过20个字符")
     @ApiModelProperty(value = "规格名称", required = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String specName;
 
     /**
@@ -43,6 +45,7 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
      * 后续推出新配置方式
      */
     @ApiModelProperty(hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeId;
 
     /**
@@ -51,6 +54,7 @@ public class Specification extends BaseSuperEntity<Specification, Long> {
     @TableField(value = "spec_value")
     @ApiModelProperty(value = "规格值名字, 《,》分割")
     @Length(max = 255, message = "长度超出限制")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String specValue;
 
 

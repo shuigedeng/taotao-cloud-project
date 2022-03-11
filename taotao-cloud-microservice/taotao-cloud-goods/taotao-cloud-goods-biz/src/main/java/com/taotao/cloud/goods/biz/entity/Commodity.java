@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -25,9 +26,11 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
 	public static final String TABLE_NAME = "li_commodity";
 
     @ApiModelProperty(value = "图片")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsImage;
 
     @ApiModelProperty(value = "商品名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String name;
 
     /**
@@ -36,33 +39,43 @@ public class Commodity extends BaseSuperEntity<Commodity, Long> {
      * 3：显示折扣价（price字段为原价，price2字段为现价， price和price2必传
      */
     @ApiModelProperty(value = "价格类型")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer priceType;
 
     @ApiModelProperty(value = "价格")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double price;
 
     @ApiModelProperty(value = "价格2")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double price2;
 
     @ApiModelProperty(value = "商品详情页的小程序路径")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String url;
 
     @ApiModelProperty(value = "微信程序直播商品ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer liveGoodsId;
 
     @ApiModelProperty(value = "审核单ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String auditId;
 
     @ApiModelProperty(value = "审核状态")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String auditStatus;
 
     @ApiModelProperty(value = "店铺ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String storeId;
 
     @ApiModelProperty(value = "商品ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String goodsId;
 
     @ApiModelProperty(value = "规格ID")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String skuId;
 
 }

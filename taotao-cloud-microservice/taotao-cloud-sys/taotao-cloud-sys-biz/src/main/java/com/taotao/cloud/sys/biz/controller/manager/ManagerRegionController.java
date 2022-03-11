@@ -53,15 +53,6 @@ public class ManagerRegionController extends
 	SuperController<IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
 
-	/**
-	 * 根据父id查询地区数据
-	 *
-	 * @param parentId 父id
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
-	 * }
-	 * @author shuigedeng
-	 * @since 2021-10-14 11:30:36
-	 */
 	@Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
 	@RequestLogger(description = "根据父id查询")
 	@GetMapping("/parentId/{parentId}")
@@ -74,14 +65,6 @@ public class ManagerRegionController extends
 		return Result.success(result);
 	}
 
-	/**
-	 * 树形结构查询
-	 *
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
-	 * }
-	 * @author shuigedeng
-	 * @since 2021-10-14 11:32:28
-	 */
 	@Operation(summary = "树形结构查询", description = "树形结构查询")
 	@RequestLogger(description = "树形结构查询")
 	@GetMapping(value = "/tree")
@@ -92,14 +75,6 @@ public class ManagerRegionController extends
 		return Result.success(result);
 	}
 
-	/**
-	 * 树形结构查询
-	 *
-	 * @return {@link Result&lt;java.util.List&lt;com.taotao.cloud.sys.api.vo.region.QueryRegionByParentIdVO&gt;&gt;
-	 * }
-	 * @author shuigedeng
-	 * @since 2021-10-14 11:32:28
-	 */
 	@Operation(summary = "另一种树形结构查询", description = "另一种树形结构查询")
 	@RequestLogger(description = "另一种树形结构查询")
 	@GetMapping(value = "/other/tree")

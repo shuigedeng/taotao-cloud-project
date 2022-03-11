@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -34,17 +35,20 @@ public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGro
     @ApiModelProperty(value = "参数组名称", required = true)
     @NotEmpty(message = "参数组名称不能为空")
     @Length(max = 20, message = "参数组名称不能超过20字")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String groupName;
     /**
      * 关联分类id
      */
     @ApiModelProperty(value = "关联分类id", required = true)
     @NotNull(message = "关联的分类不能为空")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String categoryId;
     /**
      * 排序
      */
     @ApiModelProperty(value = "排序", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer sort;
 
 }

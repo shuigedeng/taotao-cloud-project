@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -30,30 +31,35 @@ public class GoodsWords extends BaseSuperEntity<GoodsWords, Long> {
      * 商品关键字
      */
     @ApiModelProperty(value = "商品关键字")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String words;
 
     /**
      * 全拼音
      */
     @ApiModelProperty(value = "全拼音")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String wholeSpell;
 
     /**
      * 缩写
      */
     @ApiModelProperty(value = "缩写")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String abbreviate;
 
     /**
      * 类型
      */
     @ApiModelProperty(value = "类型")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String type;
 
     /**
      * 排序
      */
     @ApiModelProperty(value = "排序")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Integer sort;
 
 

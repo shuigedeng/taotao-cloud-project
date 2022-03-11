@@ -17,9 +17,6 @@ import javax.validation.Valid;
 
 /**
  * 买家端,发票接口
- *
- * 
- * @since 2021/1/12
  **/
 @RestController
 @Api(tags = "买家端,发票接口")

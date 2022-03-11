@@ -33,9 +33,9 @@ import javax.validation.constraints.Pattern;
 @TableName(MemberCompany.TABLE_NAME)
 @Table(name = MemberCompany.TABLE_NAME)
 @org.hibernate.annotations.Table(appliesTo = MemberCompany.TABLE_NAME, comment = "会员公司表")
-public class MemberCompany extends BaseSuperEntity<MemberCompany,Long> {
+public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
 
-	public static final String TABLE_NAME = "uc_sys_company";
+	public static final String TABLE_NAME = "tt_member_company";
 
 	/**
 	 * 租户id

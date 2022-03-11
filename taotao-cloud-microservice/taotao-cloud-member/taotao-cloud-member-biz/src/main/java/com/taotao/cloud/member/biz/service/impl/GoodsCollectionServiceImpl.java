@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.member.api.vo.GoodsCollectionVO;
-import com.taotao.cloud.member.biz.entity.GoodsCollection;
+import com.taotao.cloud.member.biz.entity.MemberGoodsCollection;
 import com.taotao.cloud.member.biz.mapper.GoodsCollectionMapper;
 import com.taotao.cloud.member.biz.service.GoodsCollectionService;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMapper, GoodsCollection> implements
+public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMapper, MemberGoodsCollection> implements
 	GoodsCollectionService {
 
 
@@ -38,29 +38,29 @@ public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMappe
 
     @Override
     public boolean isCollection(String skuId) {
-        QueryWrapper<GoodsCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberGoodsCollection> queryWrapper = new QueryWrapper();
         queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
         queryWrapper.eq(skuId != null, "sku_id", skuId);
         return Optional.ofNullable(this.getOne(queryWrapper)).isPresent();
     }
 
     @Override
-    public GoodsCollection addGoodsCollection(String skuId) {
-        GoodsCollection goodsCollection = this.getOne(new LambdaUpdateWrapper<GoodsCollection>()
-                .eq(GoodsCollection::getMemberId, UserContext.getCurrentUser().getId())
-                .eq(GoodsCollection::getSkuId, skuId));
-        if (goodsCollection == null) {
-            goodsCollection = new GoodsCollection(UserContext.getCurrentUser().getId(), skuId);
+    public MemberGoodsCollection addGoodsCollection(String skuId) {
+        MemberGoodsCollection memberGoodsCollection = this.getOne(new LambdaUpdateWrapper<MemberGoodsCollection>()
+                .eq(MemberGoodsCollection::getMemberId, UserContext.getCurrentUser().getId())
+                .eq(MemberGoodsCollection::getSkuId, skuId));
+        if (memberGoodsCollection == null) {
+            memberGoodsCollection = new MemberGoodsCollection(UserContext.getCurrentUser().getId(), skuId);
 
-            this.save(goodsCollection);
-            return goodsCollection;
+            this.save(memberGoodsCollection);
+            return memberGoodsCollection;
         }
         throw new ServiceException(ResultCode.USER_COLLECTION_EXIST);
     }
 
     @Override
     public boolean deleteGoodsCollection(String skuId) {
-        QueryWrapper<GoodsCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberGoodsCollection> queryWrapper = new QueryWrapper();
         queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
         queryWrapper.eq(skuId != null, "sku_id", skuId);
         return this.remove(queryWrapper);
@@ -68,14 +68,14 @@ public class GoodsCollectionServiceImpl extends ServiceImpl<GoodsCollectionMappe
 
     @Override
     public boolean deleteGoodsCollection(List<String> goodsIds) {
-        QueryWrapper<GoodsCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberGoodsCollection> queryWrapper = new QueryWrapper();
         queryWrapper.in("sku_id", goodsIds);
         return this.remove(queryWrapper);
     }
 
     @Override
     public boolean deleteSkuCollection(List<String> skuIds) {
-        QueryWrapper<GoodsCollection> queryWrapper = new QueryWrapper();
+        QueryWrapper<MemberGoodsCollection> queryWrapper = new QueryWrapper();
         queryWrapper.in("sku_id", skuIds);
         return this.remove(queryWrapper);
     }

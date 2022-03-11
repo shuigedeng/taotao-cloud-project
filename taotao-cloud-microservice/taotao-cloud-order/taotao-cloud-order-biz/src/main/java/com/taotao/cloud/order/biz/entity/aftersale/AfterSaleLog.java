@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
     @CreatedBy
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String createBy;
 
     @CreatedDate
@@ -43,25 +45,31 @@ public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", hidden = true)
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Date createTime;
 
     @ApiModelProperty(value = "售后服务单号")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String sn;
 
     @ApiModelProperty(value = "操作者id(可以是卖家)")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String operatorId;
 
     /**
      * @see UserEnums
      */
     @ApiModelProperty(value = "操作者类型")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String operatorType;
 
 
     @ApiModelProperty(value = "操作者名称")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String operatorName;
 
     @ApiModelProperty(value = "日志信息")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String message;
 
     public AfterSaleLog(String sn, String operatorId, String operatorType, String operatorName, String message) {

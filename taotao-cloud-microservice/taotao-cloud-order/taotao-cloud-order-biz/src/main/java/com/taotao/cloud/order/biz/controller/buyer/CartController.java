@@ -23,9 +23,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 买家端，购物车接口
- *
- * 
- * @since 2020/11/16 10:04 下午
  */
 @Slf4j
 @RestController
@@ -38,7 +35,6 @@ public class CartController {
      */
     @Autowired
     private CartService cartService;
-
 
     @ApiOperation(value = "向购物车中添加一个产品")
     @PostMapping

@@ -2,13 +2,9 @@ package com.taotao.cloud.member.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiModelProperty;
 
 /**
  * 联合登陆表
@@ -30,9 +26,6 @@ public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 	@Column(name = "union_id", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录id'")
 	private String unionId;
 
-	/**
-	 * @see cn.lili.modules.connect.entity.enums.ConnectEnum
-	 */
 	@Column(name = "union_type", nullable = false, columnDefinition = "varchar(32) not null comment '联合登录类型'")
 	private String unionType;
 

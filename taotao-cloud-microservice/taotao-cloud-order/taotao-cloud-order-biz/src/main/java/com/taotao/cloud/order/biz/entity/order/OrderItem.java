@@ -16,6 +16,7 @@ import cn.lili.mybatis.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,80 +39,84 @@ public class OrderItem extends BaseEntity {
     private static final long serialVersionUID = 2108971190191410182L;
 
     @ApiModelProperty(value = "订单编号")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String orderSn;
 
     @ApiModelProperty(value = "子订单编号")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private String sn;
 
     @ApiModelProperty(value = "单价")
+    @Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     private Double unitPrice;
 
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "小记")
     private Double subTotal;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "商品ID")
     private String goodsId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "货品ID")
     private String skuId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "销售量")
     private Integer num;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "交易编号")
     private String tradeSn;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "图片")
     private String image;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "分类ID")
     private String categoryId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "快照id")
     private String snapshotId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "规格json")
     private String specs;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "促销类型")
     private String promotionType;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "促销id")
     private String promotionId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "销售金额")
     private Double goodsPrice;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "实际金额")
     private Double flowPrice;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see CommentStatusEnum
      */
     @ApiModelProperty(value = "评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，")
     private String commentStatus;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see OrderItemAfterSaleStatusEnum
      */
     @ApiModelProperty(value = "售后状态")
     private String afterSaleStatus;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "价格详情")
     private String priceDetail;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     /**
      * @see OrderComplaintStatusEnum
      */
     @ApiModelProperty(value = "投诉状态")
     private String complainStatus;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "交易投诉id")
     private String complainId;
-
+	@Column(name = "member_id", nullable = false, columnDefinition = "varchar(64) not null comment '会员ID'")
     @ApiModelProperty(value = "退货商品数量")
     private Integer returnGoodsNumber;
 
