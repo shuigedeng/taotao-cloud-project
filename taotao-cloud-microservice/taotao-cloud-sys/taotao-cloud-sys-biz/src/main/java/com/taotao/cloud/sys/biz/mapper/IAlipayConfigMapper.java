@@ -11,7 +11,6 @@ import com.taotao.cloud.sys.biz.entity.AlipayConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
 @Mapper
 public interface IAlipayConfigMapper extends BaseMapper<AlipayConfig> {
 

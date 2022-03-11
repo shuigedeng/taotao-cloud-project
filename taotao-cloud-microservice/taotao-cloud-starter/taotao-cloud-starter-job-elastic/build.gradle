@@ -1,8 +1,10 @@
 dependencies {
     implementation project(':taotao-cloud-microservice:taotao-cloud-starter:taotao-cloud-starter-core')
 
-    api "com.dangdang:elastic-job-lite-core:2.1.5"
-    api "com.dangdang:elastic-job-lite-spring:2.1.5"
+    api "org.apache.shardingsphere.elasticjob:elasticjob-lite-spring-boot-starter:3.0.1"
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-dingtalk:3.0.1"
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-wechat:3.0.1"
+    api "org.apache.shardingsphere.elasticjob:elasticjob-error-handler-email:3.0.1"
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
