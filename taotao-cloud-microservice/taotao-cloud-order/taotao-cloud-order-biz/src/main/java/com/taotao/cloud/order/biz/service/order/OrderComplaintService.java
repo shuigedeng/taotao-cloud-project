@@ -1,20 +1,17 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.OrderComplaint;
-import cn.lili.modules.order.order.entity.dto.OrderComplaintDTO;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintOperationParams;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintSearchParams;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintVO;
-import cn.lili.modules.order.order.entity.vo.StoreAppealVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.dto.order.OrderComplaintDTO;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintOperationParams;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintSearchParams;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintVO;
+import com.taotao.cloud.order.api.vo.order.StoreAppealVO;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaint;
 
 /**
  * 交易投诉业务层
  *
- * 
- * @since 2020/12/4
  **/
 public interface OrderComplaintService extends IService<OrderComplaint> {
 

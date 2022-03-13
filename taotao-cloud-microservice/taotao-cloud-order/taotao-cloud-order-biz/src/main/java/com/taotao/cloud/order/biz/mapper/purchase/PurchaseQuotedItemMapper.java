@@ -1,14 +1,11 @@
 package com.taotao.cloud.order.biz.mapper.purchase;
 
 
-import cn.lili.modules.purchase.entity.dos.PurchaseQuotedItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuotedItem;
 
 /**
  * 采购单子内容数据处理层
- *
- * @author Bulbasaur
- * @since 2020/11/26 16:11
  */
 public interface PurchaseQuotedItemMapper extends BaseMapper<PurchaseQuotedItem> {
 

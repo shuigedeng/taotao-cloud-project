@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.kit;
 
 import cn.lili.common.enums.ResultCode;
 import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.payment.entity.RefundLog;
 import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
 import cn.lili.modules.payment.kit.dto.PayParam;
@@ -25,7 +25,7 @@ public interface Payment {
      * @param payParam api参数
      * @return 移动支付所需参数
      */
-    default ResultMessage<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
+    default Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_ERROR);
     }
 
@@ -36,7 +36,7 @@ public interface Payment {
      * @param payParam api参数
      * @return 公众号内部支付参数
      */
-    default ResultMessage<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
+    default Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_ERROR);
     }
 
@@ -47,7 +47,7 @@ public interface Payment {
      * @param payParam 支付参数
      * @return app支付所需参数
      */
-    default ResultMessage<Object> appPay(HttpServletRequest request, PayParam payParam) {
+    default Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_ERROR);
     }
 
@@ -58,7 +58,7 @@ public interface Payment {
      * @param payParam 支付参数
      * @return 二维码内容
      */
-    default ResultMessage<Object> nativePay(HttpServletRequest request, PayParam payParam) {
+    default Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_ERROR);
     }
 
@@ -69,7 +69,7 @@ public interface Payment {
      * @param payParam 支付参数
      * @return 二维码内容
      */
-    default ResultMessage<Object> mpPay(HttpServletRequest request, PayParam payParam) {
+    default Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
         throw new ServiceException(ResultCode.PAY_ERROR);
     }
 

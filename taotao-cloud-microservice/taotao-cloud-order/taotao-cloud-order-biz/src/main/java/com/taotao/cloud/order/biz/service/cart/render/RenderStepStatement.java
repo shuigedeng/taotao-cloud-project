@@ -1,13 +1,11 @@
 package com.taotao.cloud.order.biz.service.cart.render;
 
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
+
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
 
 /**
  * 价格渲染 步骤声明
  *
- * 
- * @version v1.0
- * 2021-08-13 16:15
  */
 public class RenderStepStatement {
 

@@ -1,12 +1,11 @@
 package com.taotao.cloud.order.biz.service.cart.render;
 
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.service.CartService;
-import cn.lili.modules.order.order.entity.dos.Trade;
-import cn.lili.modules.order.order.service.TradeService;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.biz.entity.order.Trade;
+import com.taotao.cloud.order.biz.service.cart.CartService;
+import com.taotao.cloud.order.biz.service.order.TradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,8 @@ import java.util.List;
 /**
  * 交易构造&&创建
  *
- *
- * @since2020-04-01 9:47 下午
  */
 @Service
-@Slf4j
 public class TradeBuilder {
 
     /**

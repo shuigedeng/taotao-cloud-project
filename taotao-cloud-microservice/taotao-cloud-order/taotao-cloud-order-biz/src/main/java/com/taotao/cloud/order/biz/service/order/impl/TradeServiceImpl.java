@@ -1,33 +1,17 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.properties.RocketmqCustomProperties;
-import cn.lili.modules.member.entity.dos.MemberAddress;
-import cn.lili.modules.member.entity.enums.PointTypeEnum;
-import cn.lili.modules.member.service.MemberService;
-import cn.lili.modules.order.cart.entity.dto.MemberCouponDTO;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.CartTypeEnum;
-import cn.lili.modules.order.cart.entity.vo.CartVO;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.Trade;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.mapper.TradeMapper;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.order.order.service.TradeService;
-import cn.lili.modules.promotion.entity.dos.KanjiaActivity;
-import cn.lili.modules.promotion.entity.enums.KanJiaStatusEnum;
-import cn.lili.modules.promotion.service.CouponService;
-import cn.lili.modules.promotion.service.KanjiaActivityService;
-import cn.lili.modules.promotion.service.MemberCouponService;
-import cn.lili.rocketmq.RocketmqSendCallbackBuilder;
-import cn.lili.rocketmq.tags.OrderTagsEnum;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.biz.entity.order.Trade;
+import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
+import com.taotao.cloud.order.biz.service.order.OrderService;
+import com.taotao.cloud.order.biz.service.order.TradeService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +25,6 @@ import java.util.stream.Collectors;
 /**
  * 交易业务层实现
  *
- * 
- * @date 2020/11/17 7:39 下午
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

@@ -1,17 +1,13 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.OrderComplaintCommunication;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintCommunicationSearchParams;
-import cn.lili.modules.order.order.entity.vo.OrderComplaintCommunicationVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationSearchParams;
+import com.taotao.cloud.order.api.vo.order.OrderComplaintCommunicationVO;
+import com.taotao.cloud.order.biz.entity.order.OrderComplaintCommunication;
 
 /**
  * 订单投诉通信业务层
- *
- * 
- * @since 2020/12/5
  **/
 public interface OrderComplaintCommunicationService extends IService<OrderComplaintCommunication> {
 
@@ -30,7 +26,8 @@ public interface OrderComplaintCommunicationService extends IService<OrderCompla
      * @param pageVO       分页
      * @return
      */
-    IPage<OrderComplaintCommunication> getCommunication(OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO);
+    IPage<OrderComplaintCommunication> getCommunication(
+	    OrderComplaintCommunicationSearchParams searchParams, PageVO pageVO);
 
 
 }

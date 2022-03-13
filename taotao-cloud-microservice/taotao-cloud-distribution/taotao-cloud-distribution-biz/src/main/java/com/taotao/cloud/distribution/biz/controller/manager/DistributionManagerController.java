@@ -5,7 +5,7 @@ import cn.lili.common.enums.ResultCode;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.exception.ServiceException;
 import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.Distribution;
 import cn.lili.modules.distribution.entity.dto.DistributionSearchParams;
 import cn.lili.modules.distribution.service.DistributionService;
@@ -35,8 +35,8 @@ public class DistributionManagerController {
 
     @ApiOperation(value = "分页获取")
     @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<Distribution>> getByPage(DistributionSearchParams distributionSearchParams, PageVO page) {
-        return ResultUtil.data(distributionService.distributionPage(distributionSearchParams, page));
+    public Result<IPage<Distribution>> getByPage(DistributionSearchParams distributionSearchParams, PageVO page) {
+        return Result.success(distributionService.distributionPage(distributionSearchParams, page));
     }
 
 
@@ -46,7 +46,7 @@ public class DistributionManagerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "分销商id", required = true, paramType = "path", dataType = "String")
     })
-    public ResultMessage<Object> retreat(@PathVariable String id) {
+    public Result<Object> retreat(@PathVariable String id) {
         if (distributionService.retreat(id)) {
             return ResultUtil.success();
         } else {
@@ -61,7 +61,7 @@ public class DistributionManagerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "分销商id", required = true, paramType = "path", dataType = "String")
     })
-    public ResultMessage<Object> resume(@PathVariable String id) {
+    public Result<Object> resume(@PathVariable String id) {
         if (distributionService.resume(id)) {
             return ResultUtil.success();
         } else {
@@ -77,7 +77,7 @@ public class DistributionManagerController {
             @ApiImplicitParam(name = "id", value = "分销商id", required = true, paramType = "path", dataType = "String"),
             @ApiImplicitParam(name = "status", value = "审核结果，PASS 通过  REFUSE 拒绝", required = true, paramType = "query", dataType = "String")
     })
-    public ResultMessage<Object> audit(@NotNull @PathVariable String id, @NotNull String status) {
+    public Result<Object> audit(@NotNull @PathVariable String id, @NotNull String status) {
         if (distributionService.audit(id, status)) {
             return ResultUtil.success();
         } else {

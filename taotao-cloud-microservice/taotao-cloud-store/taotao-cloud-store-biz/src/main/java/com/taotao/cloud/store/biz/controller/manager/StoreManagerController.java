@@ -3,7 +3,7 @@ package com.taotao.cloud.store.biz.controller.manager;
 import cn.lili.common.aop.annotation.DemoSite;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.store.entity.dos.Store;
 import cn.lili.modules.store.entity.dto.AdminStoreApplyDTO;
 import cn.lili.modules.store.entity.dto.StoreEditDTO;
@@ -49,35 +49,35 @@ public class StoreManagerController {
 
     @ApiOperation(value = "获取店铺分页列表")
     @GetMapping("/all")
-    public ResultMessage<List<Store>> getAll() {
-        return ResultUtil.data(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
+    public Result<List<Store>> getAll() {
+        return Result.success(storeService.list(new QueryWrapper<Store>().eq("store_disable", "OPEN")));
     }
 
     @ApiOperation(value = "获取店铺分页列表")
     @GetMapping
-    public ResultMessage<IPage<StoreVO>> getByPage(StoreSearchParams entity, PageVO page) {
-        return ResultUtil.data(storeService.findByConditionPage(entity, page));
+    public Result<IPage<StoreVO>> getByPage(StoreSearchParams entity, PageVO page) {
+        return Result.success(storeService.findByConditionPage(entity, page));
     }
 
     @ApiOperation(value = "获取店铺详情")
     @ApiImplicitParam(name = "storeId", value = "店铺ID", required = true, paramType = "path", dataType = "String")
     @GetMapping(value = "/get/detail/{storeId}")
-    public ResultMessage<StoreDetailVO> detail(@PathVariable String storeId) {
-        return ResultUtil.data(storeDetailService.getStoreDetailVO(storeId));
+    public Result<StoreDetailVO> detail(@PathVariable String storeId) {
+        return Result.success(storeDetailService.getStoreDetailVO(storeId));
     }
 
     @ApiOperation(value = "添加店铺")
     @PostMapping(value = "/add")
-    public ResultMessage<Store> add(@Valid AdminStoreApplyDTO adminStoreApplyDTO) {
-        return ResultUtil.data(storeService.add(adminStoreApplyDTO));
+    public Result<Store> add(@Valid AdminStoreApplyDTO adminStoreApplyDTO) {
+        return Result.success(storeService.add(adminStoreApplyDTO));
     }
 
     @ApiOperation(value = "编辑店铺")
     @ApiImplicitParam(name = "storeId", value = "店铺ID", required = true, paramType = "path", dataType = "String")
     @PutMapping(value = "/edit/{id}")
-    public ResultMessage<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
+    public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
         storeEditDTO.setStoreId(id);
-        return ResultUtil.data(storeService.edit(storeEditDTO));
+        return Result.success(storeService.edit(storeEditDTO));
     }
 
     @ApiOperation(value = "审核店铺申请")
@@ -86,7 +86,7 @@ public class StoreManagerController {
             @ApiImplicitParam(name = "id", value = "店铺id", required = true, paramType = "path", dataType = "String")
     })
     @PutMapping(value = "/audit/{id}/{passed}")
-    public ResultMessage<Object> audit(@PathVariable String id, @PathVariable Integer passed) {
+    public Result<Object> audit(@PathVariable String id, @PathVariable Integer passed) {
         storeService.audit(id, passed);
         return ResultUtil.success();
     }
@@ -96,7 +96,7 @@ public class StoreManagerController {
     @ApiOperation(value = "关闭店铺")
     @ApiImplicitParam(name = "id", value = "店铺id", required = true, dataType = "String", paramType = "path")
     @PutMapping(value = "/disable/{id}")
-    public ResultMessage<Store> disable(@PathVariable String id) {
+    public Result<Store> disable(@PathVariable String id) {
         storeService.disable(id);
         return ResultUtil.success();
     }
@@ -104,7 +104,7 @@ public class StoreManagerController {
     @ApiOperation(value = "开启店铺")
     @ApiImplicitParam(name = "id", value = "店铺id", required = true, dataType = "String", paramType = "path")
     @PutMapping(value = "/enable/{id}")
-    public ResultMessage<Store> enable(@PathVariable String id) {
+    public Result<Store> enable(@PathVariable String id) {
         storeService.enable(id);
         return ResultUtil.success();
     }
@@ -112,18 +112,18 @@ public class StoreManagerController {
     @ApiOperation(value = "查询一级分类列表")
     @ApiImplicitParam(name = "storeId", value = "店铺id", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/managementCategory/{storeId}")
-    public ResultMessage<List<StoreManagementCategoryVO>> firstCategory(@PathVariable String storeId) {
-        return ResultUtil.data(this.storeDetailService.goodsManagementCategory(storeId));
+    public Result<List<StoreManagementCategoryVO>> firstCategory(@PathVariable String storeId) {
+        return Result.success(this.storeDetailService.goodsManagementCategory(storeId));
     }
 
 
     @ApiOperation(value = "根据会员id查询店铺信息")
     @GetMapping("/{memberId}/member")
-    public ResultMessage<Store> getByMemberId(@Valid @PathVariable String memberId) {
+    public Result<Store> getByMemberId(@Valid @PathVariable String memberId) {
         List<Store> list = storeService.list(new QueryWrapper<Store>().eq("member_id", memberId));
         if (list.size() > 0) {
-            return ResultUtil.data(list.get(0));
+            return Result.success(list.get(0));
         }
-        return ResultUtil.data(null);
+        return Result.success(null);
     }
 }

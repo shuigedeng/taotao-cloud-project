@@ -1,18 +1,14 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import cn.lili.common.utils.SnowFlake;
-import cn.lili.modules.order.cart.entity.dto.StoreRemarkDTO;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.render.CartRenderStep;
+import com.taotao.cloud.order.api.dto.cart.StoreRemarkDTO;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 /**
  * sn 生成
- *
- *
- * @since 2020-07-02 14:47
  */
 @Service
 public class CartSnRender implements CartRenderStep {

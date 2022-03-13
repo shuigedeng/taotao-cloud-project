@@ -2,9 +2,12 @@ package com.taotao.cloud.order.api.vo.aftersale;
 
 import cn.lili.common.security.context.UserContext;
 import cn.lili.common.security.enums.UserEnums;
-import cn.lili.common.utils.StringUtils;
+import cn.lili.common.utils.StringUtil;
 import cn.lili.common.vo.PageVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.common.utils.lang.StringUtil;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
+import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import lombok.Data;
@@ -42,13 +45,13 @@ public class AfterSaleSearchParams extends PageVO {
 	private String actualRefundPrice;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleTypeEnum
+	 * @see AfterSaleTypeEnum
 	 */
 	@Schema(description = "售后类型", allowableValues = "CANCEL,RETURN_GOODS,EXCHANGE_GOODS,REISSUE_GOODS")
 	private String serviceType;
 
 	/**
-	 * @see cn.lili.modules.order.trade.entity.enums.AfterSaleStatusEnum
+	 * @see AfterSaleStatusEnum
 	 */
 	@Schema(description = "售后单状态", allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
 	private String serviceStatus;
@@ -63,36 +66,37 @@ public class AfterSaleSearchParams extends PageVO {
 
 	public <T> QueryWrapper<T> queryWrapper() {
 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-		if (StringUtils.isNotEmpty(sn)) {
+		if (StringUtil.isNotEmpty(sn)) {
 			queryWrapper.like("sn", sn);
 		}
-		if (StringUtils.isNotEmpty(orderSn)) {
+		if (StringUtil.isNotEmpty(orderSn)) {
 			queryWrapper.like("order_sn", orderSn);
 		}
+
 		//按买家查询
-		if (StringUtils.equals(UserContext.getCurrentUser().getRole().name(),
+		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
 			UserEnums.MEMBER.name())) {
 			queryWrapper.eq("member_id", UserContext.getCurrentUser().getId());
 		}
 		//按卖家查询
-		if (StringUtils.equals(UserContext.getCurrentUser().getRole().name(),
+		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
 			UserEnums.STORE.name())) {
 			queryWrapper.eq("store_id", UserContext.getCurrentUser().getStoreId());
 		}
 
-		if (StringUtils.equals(UserContext.getCurrentUser().getRole().name(),
+		if (StringUtil.equals(UserContext.getCurrentUser().getRole().name(),
 			UserEnums.MANAGER.name())
-			&& StringUtils.isNotEmpty(storeId)
+			&& StringUtil.isNotEmpty(storeId)
 		) {
 			queryWrapper.eq("store_id", storeId);
 		}
-		if (StringUtils.isNotEmpty(memberName)) {
+		if (StringUtil.isNotEmpty(memberName)) {
 			queryWrapper.like("member_name", memberName);
 		}
-		if (StringUtils.isNotEmpty(storeName)) {
+		if (StringUtil.isNotEmpty(storeName)) {
 			queryWrapper.like("store_name", storeName);
 		}
-		if (StringUtils.isNotEmpty(goodsName)) {
+		if (StringUtil.isNotEmpty(goodsName)) {
 			queryWrapper.like("goods_name", goodsName);
 		}
 		//按时间查询
@@ -102,10 +106,10 @@ public class AfterSaleSearchParams extends PageVO {
 		if (endDate != null) {
 			queryWrapper.le("create_time", endDate);
 		}
-		if (StringUtils.isNotEmpty(serviceStatus)) {
+		if (StringUtil.isNotEmpty(serviceStatus)) {
 			queryWrapper.eq("service_status", serviceStatus);
 		}
-		if (StringUtils.isNotEmpty(serviceType)) {
+		if (StringUtil.isNotEmpty(serviceType)) {
 			queryWrapper.eq("service_type", serviceType);
 		}
 		this.betweenWrapper(queryWrapper);
@@ -114,7 +118,7 @@ public class AfterSaleSearchParams extends PageVO {
 	}
 
 	private <T> void betweenWrapper(QueryWrapper<T> queryWrapper) {
-		if (StringUtils.isNotEmpty(applyRefundPrice)) {
+		if (StringUtil.isNotEmpty(applyRefundPrice)) {
 			String[] s = applyRefundPrice.split("_");
 			if (s.length > 1) {
 				queryWrapper.ge("apply_refund_price", s[1]);
@@ -122,7 +126,7 @@ public class AfterSaleSearchParams extends PageVO {
 				queryWrapper.le("apply_refund_price", s[0]);
 			}
 		}
-		if (StringUtils.isNotEmpty(actualRefundPrice)) {
+		if (StringUtil.isNotEmpty(actualRefundPrice)) {
 			String[] s = actualRefundPrice.split("_");
 			if (s.length > 1) {
 				queryWrapper.ge("actual_refund_price", s[1]);

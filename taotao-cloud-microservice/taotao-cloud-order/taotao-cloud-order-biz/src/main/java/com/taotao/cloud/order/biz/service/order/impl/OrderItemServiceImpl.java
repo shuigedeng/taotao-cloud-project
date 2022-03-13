@@ -1,17 +1,15 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.enums.CommentStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderComplaintStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderItemAfterSaleStatusEnum;
-import cn.lili.modules.order.order.mapper.OrderItemMapper;
-import cn.lili.modules.order.order.service.OrderItemService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
+import com.taotao.cloud.order.biz.mapper.order.OrderItemMapper;
+import com.taotao.cloud.order.biz.service.order.OrderItemService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +17,11 @@ import java.util.List;
 
 /**
  * 子订单业务层实现
- *
- *
- * @since 2020/11/17 7:38 下午
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem> implements OrderItemService {
+public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem> implements
+	OrderItemService {
 
     @Override
     public void updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum) {

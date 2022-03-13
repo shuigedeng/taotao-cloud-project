@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.controller.buyer;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.Article;
 import cn.lili.modules.page.entity.dto.ArticleSearchParams;
 import cn.lili.modules.page.entity.vos.ArticleCategoryVO;
@@ -46,27 +46,27 @@ public class ArticleBuyerController {
 
     @ApiOperation(value = "获取文章分类列表")
     @GetMapping(value = "/articleCategory/list")
-    public ResultMessage<List<ArticleCategoryVO>> getArticleCategoryList() {
-        return ResultUtil.data(articleCategoryService.allChildren());
+    public Result<List<ArticleCategoryVO>> getArticleCategoryList() {
+        return Result.success(articleCategoryService.allChildren());
     }
 
     @ApiOperation(value = "分页获取")
     @GetMapping
-    public ResultMessage<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
-        return ResultUtil.data(articleService.articlePage(articleSearchParams));
+    public Result<IPage<ArticleVO>> getByPage(ArticleSearchParams articleSearchParams) {
+        return Result.success(articleService.articlePage(articleSearchParams));
     }
 
     @ApiOperation(value = "通过id获取文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
     @GetMapping(value = "/get/{id}")
-    public ResultMessage<Article> get(@NotNull(message = "文章ID") @PathVariable("id") String id) {
-        return ResultUtil.data(articleService.customGet(id));
+    public Result<Article> get(@NotNull(message = "文章ID") @PathVariable("id") String id) {
+        return Result.success(articleService.customGet(id));
     }
 
     @ApiOperation(value = "通过类型获取文章")
     @ApiImplicitParam(name = "type", value = "文章类型", required = true, paramType = "path")
     @GetMapping(value = "/type/{type}")
-    public ResultMessage<Article> getByType(@NotNull(message = "文章类型") @PathVariable("type") String type) {
-        return ResultUtil.data(articleService.customGetByType(type));
+    public Result<Article> getByType(@NotNull(message = "文章类型") @PathVariable("type") String type) {
+        return Result.success(articleService.customGetByType(type));
     }
 }

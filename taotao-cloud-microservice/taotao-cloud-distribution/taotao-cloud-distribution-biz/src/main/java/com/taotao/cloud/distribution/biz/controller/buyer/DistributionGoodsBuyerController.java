@@ -4,7 +4,7 @@ import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
 import cn.lili.common.enums.ResultCode;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dto.DistributionGoodsSearchParams;
 import cn.lili.modules.distribution.entity.vos.DistributionGoodsVO;
 import cn.lili.modules.distribution.service.DistributionGoodsService;
@@ -47,8 +47,8 @@ public class DistributionGoodsBuyerController {
 
     @ApiOperation(value = "获取分销商商品列表")
     @GetMapping
-    public ResultMessage<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
-        return ResultUtil.data(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
+    public Result<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsSearchParams distributionGoodsSearchParams) {
+        return Result.success(distributionGoodsService.goodsPage(distributionGoodsSearchParams));
     }
 
     @PreventDuplicateSubmissions
@@ -58,7 +58,7 @@ public class DistributionGoodsBuyerController {
             @ApiImplicitParam(name = "checked", value = "是否选择", required = true, dataType = "boolean", paramType = "query")
     })
     @GetMapping(value = "/checked/{distributionGoodsId}")
-    public ResultMessage<Object> distributionCheckGoods(
+    public Result<Object> distributionCheckGoods(
             @NotNull(message = "分销商品不能为空") @PathVariable("distributionGoodsId") String distributionGoodsId,Boolean checked) {
         Boolean result=false;
         if(checked){

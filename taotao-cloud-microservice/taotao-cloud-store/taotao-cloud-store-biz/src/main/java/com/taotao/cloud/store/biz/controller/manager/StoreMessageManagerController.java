@@ -2,7 +2,7 @@ package com.taotao.cloud.store.biz.controller.manager;
 
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.vo.PageVO;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.message.entity.dos.StoreMessage;
 import cn.lili.modules.message.entity.vos.StoreMessageQueryVO;
 import cn.lili.modules.message.service.StoreMessageService;
@@ -33,10 +33,10 @@ public class StoreMessageManagerController {
 
     @GetMapping
     @ApiOperation(value = "多条件分页获取")
-    public ResultMessage<IPage<StoreMessage>> getByCondition(StoreMessageQueryVO storeMessageQueryVO,
+    public Result<IPage<StoreMessage>> getByCondition(StoreMessageQueryVO storeMessageQueryVO,
                                                              PageVO pageVo) {
         IPage<StoreMessage> page = storeMessageService.getPage(storeMessageQueryVO, pageVo);
-        return ResultUtil.data(page);
+        return Result.success(page);
     }
 
 }

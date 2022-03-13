@@ -24,35 +24,35 @@ public class PointsGoodsCategoryManagerController {
 
     @PostMapping
     @ApiOperation(value = "添加积分商品分类")
-    public ResultMessage<Object> add(PointsGoodsCategoryVO pointsGoodsCategory) {
+    public Result<Object> add(PointsGoodsCategoryVO pointsGoodsCategory) {
         pointsGoodsCategoryService.addCategory(pointsGoodsCategory);
         return ResultUtil.success();
     }
 
     @PutMapping
     @ApiOperation(value = "修改积分商品分类")
-    public ResultMessage<Object> update(PointsGoodsCategoryVO pointsGoodsCategory) {
+    public Result<Object> update(PointsGoodsCategoryVO pointsGoodsCategory) {
         pointsGoodsCategoryService.updateCategory(pointsGoodsCategory);
         return ResultUtil.success();
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除积分商品分类")
-    public ResultMessage<Object> delete(@PathVariable String id) {
+    public Result<Object> delete(@PathVariable String id) {
         pointsGoodsCategoryService.deleteCategory(id);
         return ResultUtil.success();
     }
 
     @GetMapping
     @ApiOperation(value = "获取积分商品分类分页")
-    public ResultMessage<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
-        return ResultUtil.data(pointsGoodsCategoryService.getCategoryByPage(name, page));
+    public Result<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
+        return Result.success(pointsGoodsCategoryService.getCategoryByPage(name, page));
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "修改积分商品分类")
-    public ResultMessage<Object> getById(@PathVariable String id) {
-        return ResultUtil.data(pointsGoodsCategoryService.getCategoryDetail(id));
+    public Result<Object> getById(@PathVariable String id) {
+        return Result.success(pointsGoodsCategoryService.getCategoryDetail(id));
     }
 
 }

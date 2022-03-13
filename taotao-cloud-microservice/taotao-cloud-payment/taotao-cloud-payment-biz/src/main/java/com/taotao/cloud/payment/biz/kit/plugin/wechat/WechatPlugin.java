@@ -15,7 +15,7 @@ import cn.lili.common.security.context.UserContext;
 import cn.lili.common.utils.CurrencyUtil;
 import cn.lili.common.utils.SnowFlake;
 import cn.lili.common.utils.StringUtils;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.connect.entity.Connect;
 import cn.lili.modules.connect.entity.enums.ConnectEnum;
 import cn.lili.modules.connect.service.ConnectService;
@@ -108,7 +108,7 @@ public class WechatPlugin implements Payment {
 
 
     @Override
-    public ResultMessage<Object> h5pay(HttpServletRequest request, HttpServletResponse response1, PayParam payParam) {
+    public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response1, PayParam payParam) {
 
         try {
             CashierParam cashierParam = cashierSupport.cashierParam(payParam);
@@ -158,7 +158,7 @@ public class WechatPlugin implements Payment {
                     JSONUtil.toJsonStr(unifiedOrderModel)
             );
 
-            return ResultUtil.data(JSONUtil.toJsonStr(response.getBody()));
+            return Result.success(JSONUtil.toJsonStr(response.getBody()));
         } catch (Exception e) {
             log.error("微信H5支付错误", e);
             throw new ServiceException(ResultCode.PAY_ERROR);
@@ -166,7 +166,7 @@ public class WechatPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> jsApiPay(HttpServletRequest request, PayParam payParam) {
 
         try {
             Connect connect = connectService.queryConnect(
@@ -229,7 +229,7 @@ public class WechatPlugin implements Payment {
                 Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
                 log.info("唤起支付参数:{}", map);
 
-                return ResultUtil.data(map);
+                return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
             throw new ServiceException(ResultCode.PAY_ERROR);
@@ -240,7 +240,7 @@ public class WechatPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> appPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> appPay(HttpServletRequest request, PayParam payParam) {
 
         try {
 
@@ -296,7 +296,7 @@ public class WechatPlugin implements Payment {
                         setting.getApiclient_key(), SignType.HMACSHA256);
                 log.info("唤起支付参数:{}", map);
 
-                return ResultUtil.data(map);
+                return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
             throw new ServiceException(ResultCode.PAY_ERROR);
@@ -307,7 +307,7 @@ public class WechatPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> nativePay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> nativePay(HttpServletRequest request, PayParam payParam) {
 
         try {
 
@@ -356,7 +356,7 @@ public class WechatPlugin implements Payment {
             log.info("verifySignature: {}", verifySignature);
 
             if (verifySignature) {
-                return ResultUtil.data(new JSONObject(response.getBody()).getStr("code_url"));
+                return Result.success(new JSONObject(response.getBody()).getStr("code_url"));
             } else {
                 log.error("微信支付参数验证错误，请及时处理");
                 throw new ServiceException(ResultCode.PAY_ERROR);
@@ -371,7 +371,7 @@ public class WechatPlugin implements Payment {
     }
 
     @Override
-    public ResultMessage<Object> mpPay(HttpServletRequest request, PayParam payParam) {
+    public Result<Object> mpPay(HttpServletRequest request, PayParam payParam) {
 
         try {
             Connect connect = connectService.queryConnect(
@@ -436,7 +436,7 @@ public class WechatPlugin implements Payment {
                 Map<String, String> map = WxPayKit.jsApiCreateSign(appid, prepayId, setting.getApiclient_key());
                 log.info("唤起支付参数:{}", map);
 
-                return ResultUtil.data(map);
+                return Result.success(map);
             }
             log.error("微信支付参数验证错误，请及时处理");
             throw new ServiceException(ResultCode.PAY_ERROR);

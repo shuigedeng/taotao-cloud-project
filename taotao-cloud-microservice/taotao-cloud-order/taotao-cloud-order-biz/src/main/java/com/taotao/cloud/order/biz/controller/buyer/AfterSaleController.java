@@ -2,6 +2,7 @@ package com.taotao.cloud.order.biz.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.logger.annotation.RequestLogger;
 import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
@@ -13,7 +14,6 @@ import com.taotao.cloud.order.biz.entity.aftersale.AfterSaleReason;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleLogService;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleReasonService;
 import com.taotao.cloud.order.biz.service.aftersale.AfterSaleService;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Date;
@@ -58,36 +58,35 @@ public class AfterSaleController {
 	@Operation(summary = "查看售后服务详情", description = "查看售后服务详情", method = CommonConstant.GET)
 	@RequestLogger(description = "查看售后服务详情")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@ApiImplicitParam(name = "sn", value = "售后单号", required = true, paramType = "path")
 	@GetMapping(value = "/{sn}")
-	public ResultMessage<AfterSaleVO> get(
+	public Result<AfterSaleVO> get(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
 		AfterSaleVO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSale(sn));
-		return ResultUtil.data(afterSale);
+		return Result.success(afterSale);
 	}
 
 	@Operation(summary = "分页获取售后服务", description = "分页获取售后服务", method = CommonConstant.GET)
 	@RequestLogger(description = "分页获取售后服务")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public ResultMessage<IPage<AfterSaleVO>> getByPage(AfterSaleSearchParams searchParams) {
-		return ResultUtil.data(afterSaleService.getAfterSalePages(searchParams));
+	public Result<IPage<AfterSaleVO>> getByPage(AfterSaleSearchParams searchParams) {
+		return Result.success(afterSaleService.getAfterSalePages(searchParams));
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息", method = CommonConstant.GET)
 	@RequestLogger(description = "获取申请售后页面信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
-	public ResultMessage<AfterSaleApplyVO> applyAfterSaleInfo(@PathVariable String sn) {
-		return ResultUtil.data(afterSaleService.getAfterSaleVO(sn));
+	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@PathVariable String sn) {
+		return Result.success(afterSaleService.getAfterSaleVO(sn));
 	}
 
 	@Operation(summary = "申请售后", description = "申请售后", method = CommonConstant.POST)
 	@RequestLogger(description = "申请售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/save/{orderItemSn}")
-	public ResultMessage<AfterSale> save(AfterSaleDTO afterSaleDTO) {
-		return ResultUtil.data(afterSaleService.saveAfterSale(afterSaleDTO));
+	public Result<AfterSale> save(AfterSaleDTO afterSaleDTO) {
+		return Result.success(afterSaleService.saveAfterSale(afterSaleDTO));
 
 	}
 
@@ -95,12 +94,12 @@ public class AfterSaleController {
 	@RequestLogger(description = "买家 退回 物流信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/delivery/{afterSaleSn}")
-	public ResultMessage<AfterSale> delivery(
+	public Result<AfterSale> delivery(
 		@NotNull(message = "售后编号不能为空") @PathVariable("afterSaleSn") String afterSaleSn,
 		@NotNull(message = "发货单号不能为空") @RequestParam String logisticsNo,
 		@NotNull(message = "请选择物流公司") @RequestParam String logisticsId,
 		@NotNull(message = "请选择发货时间") @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date mDeliverTime) {
-		return ResultUtil.data(
+		return Result.success(
 			afterSaleService.buyerDelivery(afterSaleSn, logisticsNo, logisticsId, mDeliverTime));
 	}
 
@@ -108,35 +107,35 @@ public class AfterSaleController {
 	@RequestLogger(description = "售后，取消售后")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/cancel/{afterSaleSn}")
-	public ResultMessage<AfterSale> cancel(
+	public Result<AfterSale> cancel(
 		@NotNull(message = "参数非法") @PathVariable("afterSaleSn") String afterSaleSn) {
-		return ResultUtil.data(afterSaleService.cancel(afterSaleSn));
+		return Result.success(afterSaleService.cancel(afterSaleSn));
 	}
 
 	@Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址", method = CommonConstant.GET)
 	@RequestLogger(description = "获取商家售后收件地址")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/getStoreAfterSaleAddress/{sn}")
-	public ResultMessage<StoreAfterSaleAddressDTO> getStoreAfterSaleAddress(
+	public Result<StoreAfterSaleAddressDTO> getStoreAfterSaleAddress(
 		@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		return ResultUtil.data(afterSaleService.getStoreAfterSaleAddressDTO(sn));
+		return Result.success(afterSaleService.getStoreAfterSaleAddressDTO(sn));
 	}
 
 	@Operation(summary = "获取售后原因", description = "获取售后原因", method = CommonConstant.GET)
 	@RequestLogger(description = "获取售后原因")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
-	public ResultMessage<List<AfterSaleReason>> getAfterSaleReason(
+	public Result<List<AfterSaleReason>> getAfterSaleReason(
 		@PathVariable String serviceType) {
-		return ResultUtil.data(afterSaleReasonService.afterSaleReasonList(serviceType));
+		return Result.success(afterSaleReasonService.afterSaleReasonList(serviceType));
 	}
 
 	@Operation(summary = "获取售后日志", description = "获取售后日志", method = CommonConstant.GET)
 	@RequestLogger(description = "获取售后日志")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/get/getAfterSaleLog/{sn}")
-	public ResultMessage<List<AfterSaleLog>> getAfterSaleLog(@PathVariable String sn) {
-		return ResultUtil.data(afterSaleLogService.getAfterSaleLog(sn));
+	public Result<List<AfterSaleLog>> getAfterSaleLog(@PathVariable String sn) {
+		return Result.success(afterSaleLogService.getAfterSaleLog(sn));
 	}
 
 }

@@ -33,22 +33,22 @@ public class PointsGoodsBuyerController {
 
     @GetMapping
     @ApiOperation(value = "分页获取积分商品")
-    public ResultMessage<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsSearchParams searchParams, PageVO page) {
+    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsSearchParams searchParams, PageVO page) {
         IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
-        return ResultUtil.data(pointsGoodsByPage);
+        return Result.success(pointsGoodsByPage);
     }
 
     @GetMapping("/category")
     @ApiOperation(value = "获取积分商品分类分页")
-    public ResultMessage<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
-        return ResultUtil.data(pointsGoodsCategoryService.getCategoryByPage(name, page));
+    public Result<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
+        return Result.success(pointsGoodsCategoryService.getCategoryByPage(name, page));
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "获取积分活动商品")
     @ApiImplicitParam(name = "id", value = "积分商品ID", required = true, paramType = "path")
-    public ResultMessage<PointsGoodsVO> getPointsGoodsPage(@PathVariable String id) {
-        return ResultUtil.data(pointsGoodsService.getPointsGoodsDetail(id));
+    public Result<PointsGoodsVO> getPointsGoodsPage(@PathVariable String id) {
+        return Result.success(pointsGoodsService.getPointsGoodsDetail(id));
     }
 
 }

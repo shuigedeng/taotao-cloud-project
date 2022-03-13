@@ -33,20 +33,20 @@ public class PromotionManagerController {
 
     @GetMapping("/current")
     @ApiOperation(value = "获取当前进行中的促销活动")
-    public ResultMessage<Map<String, Object>> getCurrentPromotion() {
+    public Result<Map<String, Object>> getCurrentPromotion() {
         Map<String, Object> currentPromotion = promotionService.getCurrentPromotion();
-        return ResultUtil.data(currentPromotion);
+        return Result.success(currentPromotion);
     }
 
     @GetMapping("/{promotionId}/goods")
     @ApiOperation(value = "获取当前进行中的促销活动商品")
-    public ResultMessage<IPage<PromotionGoods>> getPromotionGoods(@PathVariable String promotionId, String promotionType, PageVO pageVO) {
+    public Result<IPage<PromotionGoods>> getPromotionGoods(@PathVariable String promotionId, String promotionType, PageVO pageVO) {
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
         searchParams.setPromotionId(promotionId);
         searchParams.setPromotionType(promotionType);
         searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
         IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams, pageVO);
-        return ResultUtil.data(promotionGoods);
+        return Result.success(promotionGoods);
     }
 
 

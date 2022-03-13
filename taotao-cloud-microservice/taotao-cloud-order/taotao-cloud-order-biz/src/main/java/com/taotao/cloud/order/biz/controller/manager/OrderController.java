@@ -1,153 +1,118 @@
 package com.taotao.cloud.order.biz.controller.manager;
 
-import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
-import cn.lili.modules.member.entity.dto.MemberAddressDTO;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dto.OrderExportDTO;
-import cn.lili.modules.order.order.entity.dto.OrderSearchParams;
-import cn.lili.modules.order.order.entity.vo.OrderDetailVO;
-import cn.lili.modules.order.order.entity.vo.OrderSimpleVO;
-import cn.lili.modules.order.order.service.OrderPriceService;
-import cn.lili.modules.order.order.service.OrderService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.logger.annotation.RequestLogger;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.taotao.cloud.order.api.dto.order.OrderExportDTO;
+import com.taotao.cloud.order.api.dto.order.OrderSearchParams;
+import com.taotao.cloud.order.api.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
+import com.taotao.cloud.order.biz.entity.order.Order;
+import com.taotao.cloud.order.biz.service.order.OrderPriceService;
+import com.taotao.cloud.order.biz.service.order.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
-
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 管理端,订单API
- *
- *
- * @since 2020/11/17 4:34 下午
  */
 @Validated
 @RestController
-@RequestMapping("/sys/manager/dept")
-@Tag(name = "平台管理端-部门管理API", description = "平台管理端-部门管理API")
-
-@RestController
+@Tag(name = "平台管理端-订单管理API", description = "平台管理端-订单管理API")
 @RequestMapping("/order/manager/orders")
-@Api(tags = "管理端,订单API")
 public class OrderController {
 
-    /**
-     * 订单
-     */
-    @Autowired
-    private OrderService orderService;
-    /**
-     * 订单价格
-     */
-    @Autowired
-    private OrderPriceService orderPriceService;
+	/**
+	 * 订单
+	 */
+	@Autowired
+	private OrderService orderService;
+	/**
+	 * 订单价格
+	 */
+	@Autowired
+	private OrderPriceService orderPriceService;
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@Operation(summary = "查询订单列表分页", description = "查询订单列表分页", method = CommonConstant.GET)
+	@RequestLogger(description = "查询订单列表分页")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-    @ApiOperation(value = "查询订单列表分页")
-    @GetMapping
-    public ResultMessage<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
-        return ResultUtil.data(orderService.queryByParams(orderSearchParams));
-    }
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "查询订单导出列表")
-    @GetMapping("/queryExportOrder")
-    public ResultMessage<List<OrderExportDTO>> queryExportOrder(OrderSearchParams orderSearchParams) {
-        return ResultUtil.data(orderService.queryExportOrder(orderSearchParams));
-    }
+	public Result<IPage<OrderSimpleVO>> queryMineOrder(OrderSearchParams orderSearchParams) {
+		return Result.success(orderService.queryByParams(orderSearchParams));
+	}
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@Operation(summary = "查询订单导出列表", description = "查询订单导出列表", method = CommonConstant.GET)
+	@RequestLogger(description = "查询订单导出列表")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "订单明细")
-    @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")
-    @GetMapping(value = "/{orderSn}")
-    public ResultMessage<OrderDetailVO> detail(@PathVariable String orderSn) {
-        return ResultUtil.data(orderService.queryDetail(orderSn));
-    }
+	@GetMapping("/queryExportOrder")
+	public Result<List<OrderExportDTO>> queryExportOrder(
+		OrderSearchParams orderSearchParams) {
+		return Result.success(orderService.queryExportOrder(orderSearchParams));
+	}
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@Operation(summary = "订单明细", description = "订单明细", method = CommonConstant.GET)
+	@RequestLogger(description = "订单明细")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "确认收款")
-    @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")
-    @PostMapping(value = "/{orderSn}/pay")
-    public ResultMessage<Object> payOrder(@PathVariable String orderSn) {
-        orderPriceService.adminPayOrder(orderSn);
-        return ResultUtil.success();
-    }
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "修改收货人信息")
-    @ApiImplicitParam(name = "orderSn", value = "订单sn", required = true, dataType = "String", paramType = "path")
-    @PostMapping(value = "/update/{orderSn}/consignee")
-    public ResultMessage<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
-                                          @Valid MemberAddressDTO memberAddressDTO) {
-        return ResultUtil.data(orderService.updateConsignee(orderSn, memberAddressDTO));
-    }
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
-	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "修改订单价格")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderSn", value = "订单sn", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "price", value = "订单价格", required = true, dataType = "Double", paramType = "query"),
-    })
-    @PutMapping(value = "/update/{orderSn}/price")
-    public ResultMessage<Order> updateOrderPrice(@PathVariable String orderSn,
-                                                 @NotNull(message = "订单价格不能为空") @RequestParam Double price) {
-        return ResultUtil.data(orderPriceService.updatePrice(orderSn, price));
-    }
+	@GetMapping(value = "/{orderSn}")
+	public Result<OrderDetailVO> detail(@PathVariable String orderSn) {
+		return Result.success(orderService.queryDetail(orderSn));
+	}
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@Operation(summary = "确认收款", description = "确认收款", method = CommonConstant.POST)
+	@RequestLogger(description = "确认收款")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "取消订单")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "reason", value = "取消原因", required = true, dataType = "String", paramType = "query")
-    })
-    @PostMapping(value = "/{orderSn}/cancel")
-    public ResultMessage<Order> cancel(@ApiIgnore @PathVariable String orderSn, @RequestParam String reason) {
-        return ResultUtil.data(orderService.cancel(orderSn, reason));
-    }
+	@PostMapping(value = "/{orderSn}/pay")
+	public Result<Object> payOrder(@PathVariable String orderSn) {
+		orderPriceService.adminPayOrder(orderSn);
+		return ResultUtil.success();
+	}
 
-	@Operation(summary = "获取部门树", description = "获取部门树", method = CommonConstant.GET)
-	@RequestLogger(description = "根据id查询物流公司信息")
+	@Operation(summary = "修改收货人信息", description = "修改收货人信息", method = CommonConstant.PUT)
+	@RequestLogger(description = "修改收货人信息")
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping("/tree")
-    @ApiOperation(value = "查询物流踪迹")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderSn", value = "订单编号", required = true, dataType = "String", paramType = "path")
-    })
-    @PostMapping(value = "/getTraces/{orderSn}")
-    public ResultMessage<Object> getTraces(@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
-        return ResultUtil.data(orderService.getTraces(orderSn));
-    }
+	@PutMapping(value = "/{orderSn}/consignee")
+	public Result<Order> consignee(@NotNull(message = "参数非法") @PathVariable String orderSn,
+		@Valid MemberAddressDTO memberAddressDTO) {
+		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
+	}
+
+	@Operation(summary = "修改订单价格", description = "修改订单价格", method = CommonConstant.PUT)
+	@RequestLogger(description = "根据id查询物流公司信息")
+	@PutMapping(value = "/{orderSn}/price")
+	public Result<Order> updateOrderPrice(@PathVariable String orderSn,
+		@NotNull(message = "订单价格不能为空") @RequestParam Double price) {
+		return Result.success(orderPriceService.updatePrice(orderSn, price));
+	}
+
+	@Operation(summary = "取消订单", description = "取消订单", method = CommonConstant.POST)
+	@RequestLogger(description = "取消订单")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PostMapping(value = "/{orderSn}/cancel")
+	public Result<Order> cancel(@PathVariable String orderSn,
+		@RequestParam String reason) {
+		return Result.success(orderService.cancel(orderSn, reason));
+	}
+
+	@Operation(summary = "查询物流踪迹", description = "查询物流踪迹", method = CommonConstant.GET)
+	@RequestLogger(description = "查询物流踪迹")
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@PostMapping(value = "/traces/{orderSn}")
+	public Result<Object> getTraces(
+		@NotBlank(message = "订单编号不能为空") @PathVariable String orderSn) {
+		return Result.success(orderService.getTraces(orderSn));
+	}
 }

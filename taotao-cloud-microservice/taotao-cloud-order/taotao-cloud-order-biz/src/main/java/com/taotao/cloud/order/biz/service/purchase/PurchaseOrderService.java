@@ -1,17 +1,12 @@
 package com.taotao.cloud.order.biz.service.purchase;
 
 
-import cn.lili.modules.purchase.entity.dos.PurchaseOrder;
-import cn.lili.modules.purchase.entity.vos.PurchaseOrderVO;
-import cn.lili.modules.purchase.entity.params.PurchaseOrderSearchParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.biz.entity.purchase.PurchaseOrder;
 
 /**
  * 采购单业务层
- *
- * @author Bulbasaur
- * @since 2020/11/26 16:12
  */
 public interface PurchaseOrderService extends IService<PurchaseOrder> {
 

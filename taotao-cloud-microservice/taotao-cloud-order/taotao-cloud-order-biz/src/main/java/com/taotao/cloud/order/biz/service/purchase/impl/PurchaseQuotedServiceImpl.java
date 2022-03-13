@@ -1,14 +1,12 @@
 package com.taotao.cloud.order.biz.service.purchase.impl;
 
-import cn.lili.common.utils.BeanUtil;
-import cn.lili.modules.purchase.entity.dos.PurchaseQuoted;
-import cn.lili.modules.purchase.entity.vos.PurchaseQuotedVO;
-import cn.lili.modules.purchase.mapper.PurchaseQuotedMapper;
-import cn.lili.modules.purchase.service.PurchaseQuotedItemService;
-import cn.lili.modules.purchase.service.PurchaseQuotedService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.order.biz.entity.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.biz.mapper.purchase.PurchaseQuotedMapper;
+import com.taotao.cloud.order.biz.service.purchase.PurchaseQuotedItemService;
+import com.taotao.cloud.order.biz.service.purchase.PurchaseQuotedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +17,10 @@ import java.util.List;
 /**
  * 采购单报价业务层实现
  *
- * @author Bulbasaur
- * @since 2020/11/26 16:13
  */
 @Service
-public class PurchaseQuotedServiceImpl extends ServiceImpl<PurchaseQuotedMapper, PurchaseQuoted> implements PurchaseQuotedService {
+public class PurchaseQuotedServiceImpl extends ServiceImpl<PurchaseQuotedMapper, PurchaseQuoted> implements
+	PurchaseQuotedService {
     @Autowired
     private PurchaseQuotedItemService purchaseQuotedItemService;
     @Override

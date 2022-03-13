@@ -31,7 +31,7 @@ public class KanJiaActivityGoodsManagerController {
 
     @PostMapping
     @ApiOperation(value = "添加砍价活动")
-    public ResultMessage<Object> add(@RequestBody KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
+    public Result<Object> add(@RequestBody KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
         kanJiaActivityGoodsService.add(kanJiaActivityGoodsOperationDTO);
         return ResultUtil.success();
     }
@@ -39,23 +39,23 @@ public class KanJiaActivityGoodsManagerController {
 
     @ApiOperation(value = "获取砍价活动分页")
     @GetMapping
-    public ResultMessage<IPage<KanjiaActivityGoods>> getKanJiaActivityPage(
+    public Result<IPage<KanjiaActivityGoods>> getKanJiaActivityPage(
 	    KanjiaActivityGoodsParams KanJiaActivityParams, PageVO page) {
-        return ResultUtil.data(kanJiaActivityGoodsService.getForPage(KanJiaActivityParams, page));
+        return Result.success(kanJiaActivityGoodsService.getForPage(KanJiaActivityParams, page));
     }
 
 
     @GetMapping("/{id}")
     @ApiOperation(value = "获取积分商品详情")
-    public ResultMessage<Object> getPointsGoodsDetail(@PathVariable("id") String goodsId) {
+    public Result<Object> getPointsGoodsDetail(@PathVariable("id") String goodsId) {
         KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO = kanJiaActivityGoodsService.getKanjiaGoodsDetail(goodsId);
-        return ResultUtil.data(kanJiaActivityGoodsDTO);
+        return Result.success(kanJiaActivityGoodsDTO);
     }
 
 
     @PutMapping
     @ApiOperation(value = "修改砍价商品")
-    public ResultMessage<Object> updatePointsGoods(@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
+    public Result<Object> updatePointsGoods(@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
         kanJiaActivityGoodsService.updateKanjiaActivityGoods(kanJiaActivityGoodsDTO);
         return ResultUtil.success();
     }
@@ -63,7 +63,7 @@ public class KanJiaActivityGoodsManagerController {
 
     @DeleteMapping("/{ids}")
     @ApiOperation(value = "删除砍价商品")
-    public ResultMessage<Object> delete(@PathVariable String ids) {
+    public Result<Object> delete(@PathVariable String ids) {
         if (kanJiaActivityGoodsService.deleteKanJiaGoods(Arrays.asList(ids.split(",")))) {
             return ResultUtil.success();
         }

@@ -1,10 +1,10 @@
 package com.taotao.cloud.order.biz.mapper.order;
 
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.vo.OrderSimpleVO;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.order.api.vo.order.OrderSimpleVO;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -12,9 +12,6 @@ import java.util.List;
 
 /**
  * 子订单数据处理层
- *
- * @author Chopper
- * @since 2020/11/17 7:34 下午
  */
 public interface OrderItemMapper extends BaseMapper<OrderItem> {
 

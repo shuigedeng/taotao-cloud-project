@@ -1,17 +1,14 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.common.vo.PageVO;
-import cn.lili.modules.order.order.entity.dos.Receipt;
-import cn.lili.modules.order.order.entity.dto.OrderReceiptDTO;
-import cn.lili.modules.order.order.entity.dto.ReceiptSearchParams;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.order.api.dto.order.OrderReceiptDTO;
+import com.taotao.cloud.order.api.dto.order.ReceiptSearchParams;
+import com.taotao.cloud.order.biz.entity.order.Receipt;
 
 /**
  * 发票业务层
  *
- * 
- * @since 2020/11/17 7:37 下午
  */
 public interface ReceiptService extends IService<Receipt> {
 

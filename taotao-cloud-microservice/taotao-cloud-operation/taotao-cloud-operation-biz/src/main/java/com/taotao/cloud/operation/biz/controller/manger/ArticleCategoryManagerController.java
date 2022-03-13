@@ -1,7 +1,7 @@
 package com.taotao.cloud.operation.biz.controller.manger;
 
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.ArticleCategory;
 import cn.lili.modules.page.entity.vos.ArticleCategoryVO;
 import cn.lili.modules.page.service.ArticleCategoryService;
@@ -35,9 +35,9 @@ public class ArticleCategoryManagerController {
 
     @ApiOperation(value = "查询分类列表")
     @GetMapping(value = "/all-children")
-    public ResultMessage<List<ArticleCategoryVO>> allChildren() {
+    public Result<List<ArticleCategoryVO>> allChildren() {
         try {
-            return ResultUtil.data(this.articleCategoryService.allChildren());
+            return Result.success(this.articleCategoryService.allChildren());
         } catch (Exception e) {
             log.error("查询分类列表错误", e);
         }
@@ -47,13 +47,13 @@ public class ArticleCategoryManagerController {
     @ApiOperation(value = "查看文章分类")
     @ApiImplicitParam(name = "id", value = "文章分类ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/{id}")
-    public ResultMessage<ArticleCategory> getArticleCategory(@PathVariable String id) {
-        return ResultUtil.data(this.articleCategoryService.getById(id));
+    public Result<ArticleCategory> getArticleCategory(@PathVariable String id) {
+        return Result.success(this.articleCategoryService.getById(id));
     }
 
     @ApiOperation(value = "保存文章分类")
     @PostMapping
-    public ResultMessage<ArticleCategory> save(@Valid ArticleCategory articleCategory) {
+    public Result<ArticleCategory> save(@Valid ArticleCategory articleCategory) {
         if (articleCategory.getLevel() == null) {
             articleCategory.setLevel(0);
         }
@@ -61,13 +61,13 @@ public class ArticleCategoryManagerController {
             articleCategory.setSort(0);
         }
 
-        return ResultUtil.data(articleCategoryService.saveArticleCategory(articleCategory));
+        return Result.success(articleCategoryService.saveArticleCategory(articleCategory));
     }
 
     @ApiOperation(value = "修改文章分类")
     @ApiImplicitParam(name = "id", value = "文章分类ID", required = true, dataType = "String", paramType = "path")
     @PutMapping("/update/{id}")
-    public ResultMessage<ArticleCategory> update(@Valid ArticleCategory articleCategory, @PathVariable("id") String id) {
+    public Result<ArticleCategory> update(@Valid ArticleCategory articleCategory, @PathVariable("id") String id) {
 
         if (articleCategory.getLevel() == null) {
             articleCategory.setLevel(0);
@@ -77,13 +77,13 @@ public class ArticleCategoryManagerController {
         }
 
         articleCategory.setId(id);
-        return ResultUtil.data(articleCategoryService.updateArticleCategory(articleCategory));
+        return Result.success(articleCategoryService.updateArticleCategory(articleCategory));
     }
 
     @ApiOperation(value = "删除文章分类")
     @ApiImplicitParam(name = "id", value = "文章分类ID", required = true, dataType = "String", paramType = "path")
     @DeleteMapping("/{id}")
-    public ResultMessage<ArticleCategory> deleteById(@PathVariable String id) {
+    public Result<ArticleCategory> deleteById(@PathVariable String id) {
         articleCategoryService.deleteById(id);
         return ResultUtil.success();
     }

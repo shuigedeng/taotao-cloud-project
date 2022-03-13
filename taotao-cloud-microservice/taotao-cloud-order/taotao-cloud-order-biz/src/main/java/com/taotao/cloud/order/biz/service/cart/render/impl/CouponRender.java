@@ -1,21 +1,14 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.common.utils.StringUtils;
-import cn.lili.modules.order.cart.entity.dto.MemberCouponDTO;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.order.cart.render.util.PromotionPriceUtil;
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import cn.lili.modules.promotion.entity.dos.MemberCoupon;
-import cn.lili.modules.promotion.entity.enums.CouponTypeEnum;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
-import cn.lili.modules.promotion.entity.vos.MemberCouponVO;
-import cn.lili.modules.promotion.service.MemberCouponService;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.cart.MemberCouponDTO;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.util.PromotionPriceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +20,6 @@ import java.util.stream.Collectors;
 
 /**
  * 购物促销信息渲染实现
- *
- * 
- * @since 2020-07-02 14:47
  */
 @Service
 public class CouponRender implements CartRenderStep {
@@ -121,7 +111,8 @@ public class CouponRender implements CartRenderStep {
         } else {
             tradeDTO.getCantUseCoupons().add(new MemberCouponVO(memberCoupon,
                     "优惠券使用门槛不足，还差" +
-                            StringUtils.toFen(CurrencyUtil.sub(memberCoupon.getConsumeThreshold(), totalPrice.getGoodsPrice())) +
+                            StringUtils.toFen(
+	                            CurrencyUtil.sub(memberCoupon.getConsumeThreshold(), totalPrice.getGoodsPrice())) +
                             "元"));
         }
 

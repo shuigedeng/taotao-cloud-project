@@ -1,15 +1,12 @@
 package com.taotao.cloud.order.biz.service.trade;
 
-import cn.lili.modules.order.trade.entity.dos.OrderLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 import java.util.List;
 
 /**
  * 订单日志业务层
- *
- * 
- * @since 2020-02-25 14:10:16
  */
 public interface OrderLogService extends IService<OrderLog> {
 

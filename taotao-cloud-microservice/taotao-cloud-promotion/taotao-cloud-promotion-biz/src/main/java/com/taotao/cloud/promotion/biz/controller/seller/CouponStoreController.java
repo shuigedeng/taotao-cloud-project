@@ -32,49 +32,49 @@ public class CouponStoreController {
 
     @GetMapping
     @ApiOperation(value = "获取优惠券列表")
-    public ResultMessage<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
+    public Result<IPage<CouponVO>> getCouponList(CouponSearchParams queryParam, PageVO page) {
         page.setNotConvert(true);
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         queryParam.setStoreId(storeId);
         IPage<CouponVO> coupons = couponService.pageVOFindAll(queryParam, page);
-        return ResultUtil.data(coupons);
+        return Result.success(coupons);
     }
 
     @ApiOperation(value = "获取优惠券详情")
     @GetMapping("/{couponId}")
-    public ResultMessage<Coupon> getCouponList(@PathVariable String couponId) {
+    public Result<Coupon> getCouponList(@PathVariable String couponId) {
         CouponVO coupon = OperationalJudgment.judgment(couponService.getDetail(couponId));
-        return ResultUtil.data(coupon);
+        return Result.success(coupon);
     }
 
     @ApiOperation(value = "添加优惠券")
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResultMessage<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
+    public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         couponVO.setStoreId(currentUser.getStoreId());
         couponVO.setStoreName(currentUser.getStoreName());
         if (couponService.savePromotions(couponVO)) {
-            return ResultUtil.data(couponVO);
+            return Result.success(couponVO);
         }
         return ResultUtil.error(ResultCode.COUPON_SAVE_ERROR);
     }
 
     @PutMapping(consumes = "application/json", produces = "application/json")
     @ApiOperation(value = "修改优惠券")
-    public ResultMessage<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
+    public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
         OperationalJudgment.judgment(couponService.getById(couponVO.getId()));
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         couponVO.setStoreId(currentUser.getStoreId());
         couponVO.setStoreName(currentUser.getStoreName());
         if (couponService.updatePromotions(couponVO)) {
-            return ResultUtil.data(couponVO);
+            return Result.success(couponVO);
         }
         return ResultUtil.error(ResultCode.COUPON_SAVE_ERROR);
     }
 
     @DeleteMapping(value = "/{ids}")
     @ApiOperation(value = "批量删除")
-    public ResultMessage<Object> delAllByIds(@PathVariable List<String> ids) {
+    public Result<Object> delAllByIds(@PathVariable List<String> ids) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         LambdaQueryWrapper<Coupon> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(Coupon::getId, ids);
@@ -86,7 +86,7 @@ public class CouponStoreController {
 
     @ApiOperation(value = "修改优惠券状态")
     @PutMapping("/status")
-    public ResultMessage<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
+    public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         String[] split = couponIds.split(",");
         List<String> couponIdList = couponService.list(new LambdaQueryWrapper<Coupon>().in(Coupon::getId, Arrays.asList(split)).eq(Coupon::getStoreId, currentUser.getStoreId())).stream().map(Coupon::getId).collect(Collectors.toList());

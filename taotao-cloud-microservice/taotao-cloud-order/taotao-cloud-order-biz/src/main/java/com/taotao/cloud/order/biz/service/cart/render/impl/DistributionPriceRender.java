@@ -1,15 +1,10 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import cn.lili.cache.Cache;
-import cn.lili.cache.CachePrefix;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.distribution.entity.dos.DistributionGoods;
-import cn.lili.modules.distribution.service.DistributionGoodsService;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import com.xkcoding.http.util.StringUtil;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +14,6 @@ import java.util.stream.Collectors;
 /**
  * 分销佣金计算
  *
- * 
- * @since 2020-07-02 14:47
  */
 @Service
 public class DistributionPriceRender implements CartRenderStep {
@@ -75,7 +68,8 @@ public class DistributionPriceRender implements CartRenderStep {
 
         for (CartSkuVO cartSkuVO : tradeDTO.getCheckedSkuList()) {
             if (cartSkuVO.getDistributionGoods() != null) {
-                cartSkuVO.getPriceDetailDTO().setDistributionCommission(CurrencyUtil.mul(cartSkuVO.getNum(), cartSkuVO.getDistributionGoods().getCommission()));
+                cartSkuVO.getPriceDetailDTO().setDistributionCommission(
+	                CurrencyUtil.mul(cartSkuVO.getNum(), cartSkuVO.getDistributionGoods().getCommission()));
             }
         }
 

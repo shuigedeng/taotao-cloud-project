@@ -1,21 +1,16 @@
 package com.taotao.cloud.order.biz.service.order.impl;
 
 import cn.hutool.json.JSONUtil;
-import cn.lili.common.enums.ResultCode;
-import cn.lili.common.exception.ServiceException;
-import cn.lili.common.security.OperationalJudgment;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.order.order.aop.OrderLogPoint;
-import cn.lili.modules.order.order.entity.dos.Order;
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import cn.lili.modules.order.order.entity.enums.PayStatusEnum;
-import cn.lili.modules.order.order.mapper.TradeMapper;
-import cn.lili.modules.order.order.service.OrderItemService;
-import cn.lili.modules.order.order.service.OrderPriceService;
-import cn.lili.modules.order.order.service.OrderService;
-import cn.lili.modules.payment.kit.plugin.bank.BankTransferPlugin;
-import cn.lili.modules.system.aspect.annotation.SystemLogPoint;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
+import com.taotao.cloud.order.biz.aop.OrderLogPoint;
+import com.taotao.cloud.order.biz.entity.order.Order;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
+import com.taotao.cloud.order.biz.mapper.order.TradeMapper;
+import com.taotao.cloud.order.biz.service.order.OrderItemService;
+import com.taotao.cloud.order.biz.service.order.OrderPriceService;
+import com.taotao.cloud.order.biz.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +21,6 @@ import java.util.List;
 /**
  * 订单价格业务层实现
  *
- *
- * @since 2020/11/17 7:36 下午
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -144,7 +137,8 @@ public class OrderPriceServiceImpl implements OrderPriceService {
             //如果是最后一个
             if (index == 0) {
                 //记录修改金额
-                priceDetailDTO.setUpdatePrice(CurrencyUtil.sub(order.getUpdatePrice(), countUpdatePrice));
+                priceDetailDTO.setUpdatePrice(
+	                CurrencyUtil.sub(order.getUpdatePrice(), countUpdatePrice));
                 //修改订单货物金额
                 orderItem.setFlowPrice(priceDetailDTO.getFlowPrice());
                 orderItem.setUnitPrice(CurrencyUtil.div(priceDetailDTO.getFlowPrice(), orderItem.getNum()));

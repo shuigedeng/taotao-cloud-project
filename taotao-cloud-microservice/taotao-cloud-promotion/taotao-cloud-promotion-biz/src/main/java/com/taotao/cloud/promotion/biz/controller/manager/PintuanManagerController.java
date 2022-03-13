@@ -32,30 +32,30 @@ public class PintuanManagerController {
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "通过id获取")
-    public ResultMessage<PintuanVO> get(@PathVariable String id) {
+    public Result<PintuanVO> get(@PathVariable String id) {
         PintuanVO pintuan = pintuanService.getPintuanVO(id);
-        return ResultUtil.data(pintuan);
+        return Result.success(pintuan);
     }
 
     @GetMapping
     @ApiOperation(value = "根据条件分页查询拼团活动列表")
-    public ResultMessage<IPage<Pintuan>> getPintuanByPage(PintuanSearchParams queryParam, PageVO pageVo) {
+    public Result<IPage<Pintuan>> getPintuanByPage(PintuanSearchParams queryParam, PageVO pageVo) {
         IPage<Pintuan> pintuanIPage = pintuanService.pageFindAll(queryParam, pageVo);
-        return ResultUtil.data(pintuanIPage);
+        return Result.success(pintuanIPage);
     }
 
     @GetMapping("/goods/{pintuanId}")
     @ApiOperation(value = "根据条件分页查询拼团活动商品列表")
-    public ResultMessage<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
         searchParams.setPromotionId(pintuanId);
         searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());
-        return ResultUtil.data(promotionGoodsService.pageFindAll(searchParams, pageVo));
+        return Result.success(promotionGoodsService.pageFindAll(searchParams, pageVo));
     }
 
     @PutMapping("/status/{pintuanIds}")
     @ApiOperation(value = "操作拼团活动状态")
-    public ResultMessage<String> openPintuan(@PathVariable String pintuanIds, Long startTime, Long endTime) {
+    public Result<String> openPintuan(@PathVariable String pintuanIds, Long startTime, Long endTime) {
         if (pintuanService.updateStatus(Arrays.asList(pintuanIds.split(",")), startTime, endTime)) {
             return ResultUtil.success(ResultCode.PINTUAN_MANUAL_OPEN_SUCCESS);
         }

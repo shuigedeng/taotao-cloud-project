@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.manager;
 
 import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
 import cn.lili.common.enums.ResultUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.DistributionCash;
 import cn.lili.modules.distribution.entity.vos.DistributionCashSearchParams;
 import cn.lili.modules.distribution.service.DistributionCashService;
@@ -32,15 +32,15 @@ public class DistributionCashManagerController {
 
     @ApiOperation(value = "通过id获取分销佣金详情")
     @GetMapping(value = "/get/{id}")
-    public ResultMessage<DistributionCash> get(@PathVariable String id) {
-        return ResultUtil.data(distributorCashService.getById(id));
+    public Result<DistributionCash> get(@PathVariable String id) {
+        return Result.success(distributorCashService.getById(id));
     }
 
     @ApiOperation(value = "分页获取")
     @GetMapping(value = "/getByPage")
-    public ResultMessage<IPage<DistributionCash>> getByPage(DistributionCashSearchParams distributionCashSearchParams) {
+    public Result<IPage<DistributionCash>> getByPage(DistributionCashSearchParams distributionCashSearchParams) {
 
-        return ResultUtil.data(distributorCashService.getDistributionCash(distributionCashSearchParams));
+        return Result.success(distributorCashService.getDistributionCash(distributionCashSearchParams));
     }
 
 
@@ -51,8 +51,8 @@ public class DistributionCashManagerController {
             @ApiImplicitParam(name = "result", value = "处理结果", required = true, paramType = "query", dataType = "String")
     })
     @PostMapping(value = "/audit/{id}")
-    public ResultMessage<DistributionCash> audit(@PathVariable String id, @NotNull String result) {
-        return ResultUtil.data(distributorCashService.audit(id, result));
+    public Result<DistributionCash> audit(@PathVariable String id, @NotNull String result) {
+        return Result.success(distributorCashService.audit(id, result));
     }
 }
 

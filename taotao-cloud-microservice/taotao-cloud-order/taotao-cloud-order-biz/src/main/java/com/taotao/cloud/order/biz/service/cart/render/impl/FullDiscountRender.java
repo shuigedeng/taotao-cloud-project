@@ -1,20 +1,14 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.goods.entity.dos.GoodsSku;
-import cn.lili.modules.goods.service.GoodsSkuService;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.entity.vo.CartVO;
-import cn.lili.modules.order.cart.entity.vo.FullDiscountVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.order.cart.render.util.PromotionPriceUtil;
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import cn.lili.modules.promotion.entity.enums.PromotionsScopeTypeEnum;
-import cn.lili.modules.promotion.service.FullDiscountService;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.api.vo.cart.FullDiscountVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import com.taotao.cloud.order.biz.service.cart.render.util.PromotionPriceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +17,6 @@ import java.util.stream.Collectors;
 
 /**
  * FullDiscountRender
- *
- *
- * @since 2020-04-01 10:27 上午
  */
 @Service
 public class FullDiscountRender implements CartRenderStep {

@@ -1,18 +1,15 @@
 package com.taotao.cloud.order.biz.service.order;
 
-import cn.lili.modules.order.order.entity.dos.OrderItem;
-import cn.lili.modules.order.order.entity.enums.CommentStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderComplaintStatusEnum;
-import cn.lili.modules.order.order.entity.enums.OrderItemAfterSaleStatusEnum;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
+import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
+import com.taotao.cloud.order.biz.entity.order.OrderItem;
 import java.util.List;
 
 /**
  * 子订单业务层
- *
- * 
- * @since 2020/11/17 7:36 下午
  */
 public interface OrderItemService extends IService<OrderItem> {
 

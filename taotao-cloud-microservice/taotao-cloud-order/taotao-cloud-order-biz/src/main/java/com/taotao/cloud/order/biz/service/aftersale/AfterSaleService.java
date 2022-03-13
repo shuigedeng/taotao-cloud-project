@@ -1,24 +1,20 @@
 package com.taotao.cloud.order.biz.service.aftersale;
 
 
-import cn.lili.modules.order.aftersale.entity.dos.AfterSale;
-import cn.lili.modules.order.aftersale.entity.dto.AfterSaleDTO;
-import cn.lili.modules.order.aftersale.entity.vo.AfterSaleApplyVO;
-import cn.lili.modules.order.aftersale.entity.vo.AfterSaleSearchParams;
-import cn.lili.modules.order.aftersale.entity.vo.AfterSaleVO;
-import cn.lili.modules.store.entity.dto.StoreAfterSaleAddressDTO;
-import cn.lili.modules.system.entity.vo.Traces;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleApplyVO;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleSearchParams;
+import com.taotao.cloud.order.api.vo.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.biz.entity.aftersale.AfterSale;
 import java.util.Date;
 import java.util.List;
+import zipkin2.storage.Traces;
 
 /**
  * 售后业务层
- *
- *
- * @since 2020/11/17 7:36 下午
  */
 public interface AfterSaleService extends IService<AfterSale> {
 

@@ -6,7 +6,7 @@ import cn.lili.common.enums.ResultCode;
 import cn.lili.common.exception.ServiceException;
 import cn.lili.common.security.context.UserContext;
 import cn.lili.common.utils.SpringContextUtil;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.payment.entity.enums.PaymentClientEnum;
 import cn.lili.modules.payment.entity.enums.PaymentMethodEnum;
 import cn.lili.modules.payment.kit.dto.PayParam;
@@ -59,7 +59,7 @@ public class CashierSupport {
      * @param paymentClientEnum 支付方式枚举
      * @return 支付消息
      */
-    public ResultMessage<Object> payment(PaymentMethodEnum paymentMethodEnum, PaymentClientEnum paymentClientEnum,
+    public Result<Object> payment(PaymentMethodEnum paymentMethodEnum, PaymentClientEnum paymentClientEnum,
                                          HttpServletRequest request, HttpServletResponse response,
                                          PayParam payParam) {
         if (paymentClientEnum == null || paymentMethodEnum == null) {

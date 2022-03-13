@@ -2,7 +2,7 @@ package com.taotao.cloud.distribution.biz.controller.seller;
 
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.distribution.entity.dos.DistributionOrder;
 import cn.lili.modules.distribution.entity.vos.DistributionOrderSearchParams;
 import cn.lili.modules.distribution.service.DistributionOrderService;
@@ -35,13 +35,13 @@ public class DistributionOrderStoreController {
 
     @ApiOperation(value = "获取分销订单列表")
     @GetMapping
-    public ResultMessage<IPage<DistributionOrder>> distributionOrder(DistributionOrderSearchParams distributionOrderSearchParams) {
+    public Result<IPage<DistributionOrder>> distributionOrder(DistributionOrderSearchParams distributionOrderSearchParams) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         //获取当前登录商家账号-查询当前店铺的分销订单
         distributionOrderSearchParams.setStoreId(storeId);
         //查询分销订单列表
         IPage<DistributionOrder> distributionOrderPage = distributionOrderService.getDistributionOrderPage(distributionOrderSearchParams);
-        return ResultUtil.data(distributionOrderPage);
+        return Result.success(distributionOrderPage);
     }
 
 }

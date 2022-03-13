@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.controller.buyer;
 import cn.lili.common.enums.ResultCode;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.exception.ServiceException;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.payment.kit.CashierSupport;
 import cn.lili.modules.payment.kit.dto.PayParam;
 import cn.lili.modules.payment.entity.enums.PaymentClientEnum;
@@ -42,9 +42,9 @@ public class CashierController {
     })
     @GetMapping(value = "/tradeDetail")
     @ApiOperation(value = "获取支付详情")
-    public ResultMessage paymentParams(@Validated PayParam payParam) {
+    public Result paymentParams(@Validated PayParam payParam) {
         CashierParam cashierParam = cashierSupport.cashierParam(payParam);
-        return ResultUtil.data(cashierParam);
+        return Result.success(cashierParam);
     }
 
 
@@ -54,7 +54,7 @@ public class CashierController {
     })
     @GetMapping(value = "/pay/{paymentMethod}/{paymentClient}")
     @ApiOperation(value = "支付")
-    public ResultMessage payment(
+    public Result payment(
             HttpServletRequest request,
             HttpServletResponse response,
             @PathVariable String paymentMethod,
@@ -78,7 +78,7 @@ public class CashierController {
 
     @ApiOperation(value = "支付回调")
     @RequestMapping(value = "/callback/{paymentMethod}", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResultMessage<Object> callback(HttpServletRequest request, @PathVariable String paymentMethod) {
+    public Result<Object> callback(HttpServletRequest request, @PathVariable String paymentMethod) {
 
         PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.valueOf(paymentMethod);
 
@@ -99,7 +99,7 @@ public class CashierController {
 
     @ApiOperation(value = "查询支付结果")
     @GetMapping(value = "/result")
-    public ResultMessage<Boolean> paymentResult(PayParam payParam) {
-        return ResultUtil.data(cashierSupport.paymentResult(payParam));
+    public Result<Boolean> paymentResult(PayParam payParam) {
+        return Result.success(cashierSupport.paymentResult(payParam));
     }
 }

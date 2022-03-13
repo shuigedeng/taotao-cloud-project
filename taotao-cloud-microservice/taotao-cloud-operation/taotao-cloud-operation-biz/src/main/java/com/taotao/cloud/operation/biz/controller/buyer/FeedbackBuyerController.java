@@ -3,7 +3,7 @@ package com.taotao.cloud.operation.biz.controller.buyer;
 import cn.lili.common.aop.annotation.PreventDuplicateSubmissions;
 import cn.lili.common.enums.ResultUtil;
 import cn.lili.common.security.context.UserContext;
-import cn.lili.common.vo.ResultMessage;
+import cn.lili.common.vo.Result;
 import cn.lili.modules.page.entity.dos.Feedback;
 import cn.lili.modules.page.service.FeedbackService;
 import io.swagger.annotations.Api;
@@ -35,7 +35,7 @@ public class FeedbackBuyerController {
     @PreventDuplicateSubmissions
     @ApiOperation(value = "添加意见反馈")
     @PostMapping()
-    public ResultMessage<Object> save(@Valid Feedback feedback) {
+    public Result<Object> save(@Valid Feedback feedback) {
         feedback.setUserName(UserContext.getCurrentUser().getNickName());
         feedbackService.save(feedback);
         return ResultUtil.success();

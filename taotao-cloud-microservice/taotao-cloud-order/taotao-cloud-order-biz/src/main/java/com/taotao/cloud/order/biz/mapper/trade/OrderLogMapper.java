@@ -1,13 +1,10 @@
 package com.taotao.cloud.order.biz.mapper.trade;
 
-import cn.lili.modules.order.trade.entity.dos.OrderLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.order.biz.entity.trade.OrderLog;
 
 /**
  * 订单日志数据处理层
- *
- * @author Chopper
- * @since 2020-02-25 14:10:16
  */
 public interface OrderLogMapper extends BaseMapper<OrderLog> {
 

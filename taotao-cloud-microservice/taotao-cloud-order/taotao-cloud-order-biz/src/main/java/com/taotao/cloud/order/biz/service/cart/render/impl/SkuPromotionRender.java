@@ -1,29 +1,19 @@
 package com.taotao.cloud.order.biz.service.cart.render.impl;
 
-import cn.lili.common.enums.PromotionTypeEnum;
-import cn.lili.common.security.context.UserContext;
-import cn.lili.common.utils.CurrencyUtil;
-import cn.lili.modules.order.cart.entity.dto.TradeDTO;
-import cn.lili.modules.order.cart.entity.enums.RenderStepEnums;
-import cn.lili.modules.order.cart.entity.vo.CartSkuVO;
-import cn.lili.modules.order.cart.entity.vo.CartVO;
-import cn.lili.modules.order.cart.render.CartRenderStep;
-import cn.lili.modules.order.order.entity.dto.PriceDetailDTO;
-import cn.lili.modules.promotion.entity.dos.PromotionGoods;
-import cn.lili.modules.promotion.entity.enums.KanJiaStatusEnum;
-import cn.lili.modules.promotion.entity.vos.PromotionSkuVO;
-import cn.lili.modules.promotion.entity.vos.kanjia.KanjiaActivitySearchParams;
-import cn.lili.modules.promotion.entity.vos.kanjia.KanjiaActivityVO;
-import cn.lili.modules.promotion.service.KanjiaActivityService;
-import cn.lili.modules.promotion.service.PromotionGoodsService;
+import com.taotao.cloud.common.utils.number.CurrencyUtil;
+import com.taotao.cloud.order.api.dto.cart.TradeDTO;
+import com.taotao.cloud.order.api.dto.order.PriceDetailDTO;
+import com.taotao.cloud.order.api.enums.cart.RenderStepEnums;
+import com.taotao.cloud.order.api.vo.cart.CartSkuVO;
+import com.taotao.cloud.order.api.vo.cart.CartVO;
+import com.taotao.cloud.order.biz.service.cart.render.CartRenderStep;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * 购物促销信息渲染实现
  *
- * 
- * @since 2020-07-02 14:47
  */
 @Service
 public class SkuPromotionRender implements CartRenderStep {
@@ -62,7 +52,8 @@ public class SkuPromotionRender implements CartRenderStep {
                 cartVO -> cartVO.getCheckedSkuList().forEach(cartSkuVO -> {
                     PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
                     priceDetailDTO.setGoodsPrice(cartSkuVO.getSubTotal());
-                    priceDetailDTO.setDiscountPrice(CurrencyUtil.sub(priceDetailDTO.getOriginalPrice(), cartSkuVO.getSubTotal()));
+                    priceDetailDTO.setDiscountPrice(
+	                    CurrencyUtil.sub(priceDetailDTO.getOriginalPrice(), cartSkuVO.getSubTotal()));
                 })
         );
     }
